@@ -218,7 +218,7 @@ class Locales(unittest.TestCase):
             tr = data.translations[loc]
             self.assertIsNotNone(tr, loc)
             n = len(tr)
-            self.assertLessEqual(n, n_english, loc)
+            self.assertEqual(n, n_english, "%s is missing %d translations" % (loc, n_english - n))
             for i in range(1, n + 1):
                 self.assertEqual(ph.findall(tr[i]), ph.findall(english[i - 1]), "%s #%d %s" % (loc, i, english[i - 1]))
                 self.assertTrue(tr[i].strip(), "%s #%d is empty" % (loc, i))
@@ -229,8 +229,10 @@ class Locales(unittest.TestCase):
             self.assertNotEqual(env.ns.L["In combat"], "In combat", loc)
             self.assertEqual(env.ns.L["something with no translation"], "something with no translation")
         self.assertEqual(Env(locale="enUS").ns.L["In combat"], "In combat")
-        # long descriptions are English for now: they must still come back as text
-        self.assertTrue(Env(locale="deDE").ns.ProfileDescription("action"))
+        # profile descriptions are translated too
+        for loc in LOCALES:
+            env = Env(locale=loc)
+            self.assertNotEqual(env.ns.ProfileDescription("action"), Env(locale="enUS").ns.ProfileDescription("action"), loc)
 
 
 class Schema(unittest.TestCase):

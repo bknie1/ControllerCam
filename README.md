@@ -118,7 +118,7 @@ Profile names can be typed in part (`/ccam use cla`) or quoted (`/ccam use "Town
 ## What is not verified
 
 - Everything was checked against the names and descriptions inside the Forever client and against a mocked game API, **not in the live game**. In particular: whether a positive shoulder offset is the right shoulder, whether the head-tracking ranges (0 to 1, 0 to 2 and 1 to 10) match what the game accepts, and how the Gamepad UI treats the temporary override.
-- Translations cover the interface (labels, situations, profile names, buttons and messages). The long profile descriptions and the `/ccam help` text are English for now. The translations are machine-quality; corrections are welcome.
+- Everything is translated into German, Spanish (Spain and Mexico), French, Italian, Korean, Brazilian Portuguese, Russian, Simplified Chinese and Traditional Chinese: the interface, the profile descriptions, the tooltips and the `/ccam help` text. The translations are machine-quality; corrections are welcome. Anything missing falls back to English.
 
 ## Testing
 
