@@ -8,9 +8,16 @@
 local ADDON, ns = ...
 local L = ns.L
 
--- Over-the-shoulder offset by camera distance: a little more (+2.5) when fully zoomed in, +2 up to 8 yards,
--- fading to 0 as you zoom out.
-local ACTION_CURVE = { { 0, 2.5 }, { 3, 2.5 }, { 4, 2 }, { 8, 2 }, { 20, 0 } }
+-- Over-the-shoulder offset by camera distance. A sideways offset in yards covers more of the screen the closer
+-- the camera is, so a fixed offset throws the character out of view when you zoom in. The offset therefore grows
+-- in proportion to the distance (the character stays in about the same place on screen) up to its full value at `ramp` yards, stays there until
+-- `hold`, and fades to 0 at `fade`.
+local function ShoulderCurve(offset, ramp, hold, fade)
+    local points = { { 0, 0 }, { ramp, offset } }
+    if hold > ramp then points[#points + 1] = { hold, offset } end
+    points[#points + 1] = { fade, 0 }
+    return points
+end
 
 -- id, English name, English description, values. Listed in the order shown in menus.
 local BUILTIN = {
@@ -24,7 +31,7 @@ local BUILTIN = {
             followOnStick = 1, followYawSpeed = "x1.2", followDelay = "x0.8",
             faceAngle = 0, faceAngleCombat = 180, turnWithCamera = 1,
             faceMount = 1, faceSwim = 1, faceFly = 1,
-            shoulderCurve = ACTION_CURVE,
+            shoulderCurve = ShoulderCurve(2, 6, 8, 20),
             dynamicPitch = 1,
             headStrength = 1, headStanding = 0.3, headMoving = 0.5, headRange = 5,
             focusInteract = 1, focusInteractYaw = 1, focusInteractPitch = 0.75,
@@ -40,7 +47,7 @@ local BUILTIN = {
             followOnStick = 1,
             faceAngle = 115, faceAngleCombat = 180, turnWithCamera = 1,
             faceMount = 1, faceSwim = 1, faceFly = 1,
-            shoulderCurve = { { 0, 1 }, { 10, 1 }, { 22, 0 } },
+            shoulderCurve = ShoulderCurve(1, 4, 10, 22),
             headStrength = 0.5, headStanding = 0.3, headMoving = 0.5,
             focusInteract = 1, focusInteractYaw = 1, focusInteractPitch = 0.75,
         },
@@ -61,7 +68,7 @@ local BUILTIN = {
             followOnStick = 0,
             faceAngle = 0, faceAngleCombat = 180, turnWithCamera = 1,
             faceMount = 1, faceSwim = 1, faceFly = 1,
-            shoulderCurve = { { 0, 2 }, { 8, 2 }, { 14, 0.5 } },
+            shoulderCurve = ShoulderCurve(2, 5, 8, 16),
             headStrength = 0.6, headStanding = 0.2, headMoving = 0.4,
             focusInteract = 1, focusInteractYaw = 1, focusInteractPitch = 0.75,
         },
@@ -76,7 +83,7 @@ local BUILTIN = {
             followOnStick = 0,
             faceAngle = 90, faceAngleCombat = 180, turnWithCamera = 2,
             faceMount = 1, faceSwim = 1, faceFly = 1,
-            shoulderCurve = { { 0, 2.5 }, { 6, 2.5 }, { 12, 0.5 } },
+            shoulderCurve = ShoulderCurve(1.5, 3.5, 6, 12),
             headStrength = 0.4, headStanding = 0.2, headMoving = 0.3,
         },
     },
@@ -90,7 +97,7 @@ local BUILTIN = {
             followOnStick = 1, followYawSpeed = "x0.7", followPitchSpeed = "x0.7",
             faceAngle = 0, faceAngleCombat = 115, turnWithCamera = 1,
             faceMount = 1, faceSwim = 1, faceFly = 1,
-            shoulderCurve = { { 0, 1.5 }, { 12, 1.5 }, { 25, 0 } },
+            shoulderCurve = ShoulderCurve(1.5, 6, 12, 25),
             dynamicPitch = 1,
             headStrength = 1, headStanding = 0.5, headMoving = 0.7, headRange = 6,
             focusInteract = 1, focusInteractYaw = 1, focusInteractPitch = 0.75,
@@ -106,7 +113,7 @@ local BUILTIN = {
             followOnStick = 1,
             faceAngle = 115, faceAngleCombat = 180, turnWithCamera = 3,
             faceMount = 1, faceSwim = 1, faceFly = 1,
-            shoulderCurve = { { 0, 1 }, { 12, 0 } },
+            shoulderCurve = ShoulderCurve(1, 4, 6, 12),
             headStrength = 0.4,
             focusEnemy = 1, focusEnemyYaw = 0.5, focusEnemyPitch = 0.4,
             focusInteract = 1, focusInteractYaw = 1, focusInteractPitch = 0.75,
@@ -154,7 +161,7 @@ local BUILTIN = {
             followOnStick = 1,
             faceAngle = 0, faceAngleCombat = 115, turnWithCamera = 1,
             faceMount = 1, faceSwim = 1, faceFly = 1,
-            shoulderCurve = { { 0, 1 }, { 12, 0 } },
+            shoulderCurve = ShoulderCurve(1, 4, 6, 12),
             dynamicPitch = 1,
             headStrength = 0.7, headStanding = 0.4, headMoving = 0.5,
             focusInteract = 1, focusInteractYaw = 1, focusInteractPitch = 0.75,

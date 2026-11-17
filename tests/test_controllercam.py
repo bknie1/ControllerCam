@@ -471,10 +471,23 @@ class Applying(unittest.TestCase):
     def test_shoulder_offset_follows_the_zoom_curve(self):
         env = Env()
         frame = env.ns.frame
-        for zoom, expect in [(7, "2"), (8, "2"), (14, "1"), (20, "0"), (30, "0"), (3.5, "2.25"), (3, "2.5"), (0, "2.5")]:
+        for zoom, expect in [(7, "2"), (8, "2"), (14, "1"), (20, "0"), (30, "0"), (3, "1"), (0, "0")]:
             env.state(zoom=zoom)
             frame.scripts.OnUpdate(frame, 0.2)
             self.assertEqual(env.cv("test_cameraOverShoulder"), expect, zoom)
+
+    def test_close_zoom_keeps_the_character_on_screen(self):
+        """A sideways offset in yards covers more screen the closer the camera is: keep it a fraction of the view."""
+        env = Env()
+        ns = env.ns
+        for i in range(1, len(ns.BUILTIN_LIST) + 1):
+            prof = ns.BUILTIN_LIST[i]
+            curve = prof["values"]["shoulderCurve"]
+            if curve is None:
+                continue
+            for zoom in [x / 2 for x in range(1, 41)]:
+                offset = env.run("return NS.EvalCurve(NS.BUILTIN['%s'].values.shoulderCurve, %s)" % (prof.id, zoom))
+                self.assertLessEqual(abs(offset) / (1.78 * zoom), 0.25, "%s at zoom %s: offset %s" % (prof.id, zoom, offset))
 
     def test_curve_only_writes_when_the_value_changes(self):
         env = Env()

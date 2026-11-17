@@ -24,7 +24,7 @@ Options: **Options > AddOns > ControllerCam** (a page with the situations, and a
 
 | Profile | Feel |
 | --- | --- |
-| **Action** | Close camera over the right shoulder (offset +2.5 when fully zoomed in, +2 up to 8 yards, fading to 0 as you zoom out), head tracking on, dynamic pitch, camera follows your movement. You run facing your movement out of combat and strafe in combat. |
+| **Action** | Close camera over the right shoulder (offset +2 at normal distances, smaller as you zoom in so your character stays on screen, fading to 0 as you zoom out), head tracking on, dynamic pitch, camera follows your movement. You run facing your movement out of combat and strafe in combat. |
 | **Hybrid** | Medium distance, light shoulder offset, gentle head tracking. |
 | **Classic** | Every setting ControllerCam manages goes back to the game's default. |
 | **Shooter** | Tight camera, strong shoulder offset, fast stick aim, strafing in combat. |
@@ -62,7 +62,7 @@ A situation is kept for a moment after it ends (1.5 seconds by default, `/ccam d
 
 ## Shoulder offset by zoom
 
-The over-the-shoulder offset can follow your camera distance, for example +2 when the camera is close and fading to 0 when you zoom out. Action uses `0:2.5 3:2.5 4:2 8:2 20:0` (zoom in yards : offset). Edit it for a custom profile in the Profiles page, or with
+The over-the-shoulder offset can follow your camera distance, for example +2 when the camera is close and fading to 0 when you zoom out. Action uses `0:0 6:2 8:2 20:0` (zoom in yards : offset). The offset has to shrink as you zoom in: a sideways offset in yards takes up more of the screen the closer the camera is, and a fixed +2 would push the character out of view. Edit it for a custom profile in the Profiles page, or with
 
 ```
 /ccam curve "My Action" 0:2 8:2 20:0
