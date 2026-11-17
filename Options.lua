@@ -304,6 +304,7 @@ local function SetEditable(widget, on)
 end
 
 local function DisplayValue(s, v)
+    if v == nil and s.keepUser then return L["your setting"] end
     if v == nil or v == "d" then return L["game default"] end
     if s.kind == "bool" then return (v == 1) and L["on"] or L["off"] end
     if s.kind == "enum" then return L[s.values[v - s.min + 1]] or tostring(v) end

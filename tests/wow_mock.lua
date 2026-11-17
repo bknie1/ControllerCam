@@ -35,7 +35,7 @@ local DEFAULTS = {
     test_cameraTargetFocusEnemyEnable = "0", test_cameraTargetFocusEnemyStrengthYaw = "0.5",
     test_cameraTargetFocusEnemyStrengthPitch = "0.4", test_cameraTargetFocusInteractEnable = "0",
     test_cameraTargetFocusInteractStrengthYaw = "1", test_cameraTargetFocusInteractStrengthPitch = "0.75",
-    cameraSmoothStyle = "0",
+    cameraSmoothStyle = "0", cameraTerrainTilt = "1",
     CameraKeepCharacterCentered = "1", CameraReduceUnexpectedMovement = "1",
     InputDeviceInterfaceStyle = "0",
 }

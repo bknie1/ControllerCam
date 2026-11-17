@@ -18,6 +18,7 @@ GamePadTurnWithCamera
 GamepadCameraFollowOnStick
 cameraDistanceMaxZoomFactor
 cameraSmoothStyle
+cameraTerrainTilt
 test_cameraDynamicPitch
 test_cameraHeadMovementMovingStrength
 test_cameraHeadMovementRangeScale

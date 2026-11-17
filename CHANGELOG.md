@@ -8,6 +8,7 @@
 - A profile for each situation: vehicle, flying, swimming, mounted, combat, raid, dungeon, city or inn, and everywhere else. A fresh install uses a recommended mix (`/ccam starter`).
 - Shoulder offset that follows the camera zoom (Action: +2 at normal distances, smaller when zoomed in so the character stays on screen, fading to 0 when zoomed out), mirror option for the other shoulder. `/ccam info` shows what the camera is doing.
 - Custom profiles: save your current camera, copy and edit built-in ones, share with versioned, validated import/export strings.
+- The camera's terrain following is off in the built-in profiles (except Classic); a profile that does not mention it leaves your own setting alone.
 - Options panel under Options > AddOns > ControllerCam, with a Profiles page that edits every setting.
 - Settings that survive the UI reload the Gamepad UI switch causes (your original camera values and the motion-sickness settings are saved), and CVars the game refuses in combat are applied when combat ends.
 - Localization: German, Spanish (Spain and Mexico), French, Italian, Korean, Brazilian Portuguese, Russian, Simplified Chinese and Traditional Chinese for the interface. Long profile descriptions and the help text are English for now.

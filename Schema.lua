@@ -10,7 +10,8 @@
 --   any CVar setting    : "d" = the game's default value
 --   zoom                : a number of yards (not a CVar; applied with the camera zoom functions)
 --   curve               : a list of {zoom, value} points, the value is interpolated from the current camera zoom
--- A setting a profile does not mention is reset to the game default (zoom and curves: left alone / off).
+-- A setting a profile does not mention is reset to the game default (zoom and curves: left alone / off;
+-- settings marked keepUser: left to you).
 
 local ADDON, ns = ...
 
@@ -53,6 +54,9 @@ local SETTINGS = {
 
     { key = "smoothStyle",     label = "Camera auto-follow (mouse and keyboard)", kind = "enum", cvars = { "cameraSmoothStyle" }, min = 0, max = 2, group = "Smoothing",
       values = { "never", "only when moving", "always" } },
+    -- keepUser: a profile that does not mention it leaves your own setting alone (and puts it back if a
+    -- profile changed it), instead of resetting it to the game default.
+    { key = "followTerrain",   label = "Camera follows terrain",            kind = "bool",  cvars = { "cameraTerrainTilt" }, group = "Smoothing", keepUser = true },
 }
 
 local BY_KEY = {}

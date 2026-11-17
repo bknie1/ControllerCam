@@ -519,6 +519,36 @@ class Applying(unittest.TestCase):
             self.assertEqual(env.cv(name), default, name)
         self.assertEqual(env.mock.state.zoom, 7)                              # classic leaves the camera distance alone
 
+    def test_terrain_following_is_off_in_builtins_and_otherwise_yours(self):
+        env = Env()
+        self.assertEqual(env.cv("cameraTerrainTilt"), "0")                    # Action switches it off
+        self.assertEqual(env.db()["originals"]["cameraTerrainTilt"], "1")     # and remembers the user's own value
+        env.ns.UseEverywhere("classic")
+        self.assertEqual(env.cv("cameraTerrainTilt"), "1")                    # Classic gives it back
+        env.ns.UseEverywhere("raid")
+        self.assertEqual(env.cv("cameraTerrainTilt"), "0")
+        env.run("""NS.GetDB().profiles.u_plain = { name = "Plain", values = { zoom = 8 } }""")
+        env.ns.UseEverywhere("u_plain")                                       # a profile that does not mention it
+        self.assertEqual(env.cv("cameraTerrainTilt"), "1")
+        env.ns.SetValue("u_plain", "followTerrain", 1)
+        self.assertEqual(env.cv("cameraTerrainTilt"), "1")
+        self.assertEqual(env.ns.ProfileName("u_plain"), "Plain")
+
+    def test_a_user_who_already_has_it_off_is_left_alone(self):
+        env = Env(cvars={"cameraTerrainTilt": "0"})
+        self.assertEqual(env.cv("cameraTerrainTilt"), "0")
+        env.ns.UseEverywhere("classic")
+        self.assertEqual(env.cv("cameraTerrainTilt"), "0")
+        self.assertNotIn("cameraTerrainTilt", env.setlog_names())
+
+    def test_every_builtin_but_classic_switches_terrain_following_off(self):
+        env = Env(login=False)
+        ns = env.ns
+        for i in range(1, len(ns.BUILTIN_LIST) + 1):
+            prof = ns.BUILTIN_LIST[i]
+            expected = None if prof.id == "classic" else 0
+            self.assertEqual(prof["values"]["followTerrain"], expected, prof.id)
+
     def test_switching_profiles_leaves_nothing_behind(self):
         env = Env()
         env.ns.UseEverywhere("targetlock")

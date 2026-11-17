@@ -38,6 +38,8 @@ Options: **Options > AddOns > ControllerCam** (a page with the situations, and a
 
 Built-in profiles are read-only. Make a copy (`/ccam copy action "My Action"` or the *Make a copy* button) and change that.
 
+The camera following the terrain (`cameraTerrainTilt`) is off in every built-in profile except Classic. A profile that does not mention it leaves **your own setting** alone and puts it back if another profile changed it; set it per profile in the Profiles page or with `/ccam edit <profile> followTerrain on|off|default` (for this setting, `default` means your own).
+
 A profile lists only what it wants different. **Everything it does not mention goes back to the game's default**, so switching profiles never leaves settings behind. (Camera distance is the exception: a profile without a distance leaves your zoom alone.)
 
 ## Situations
@@ -106,7 +108,7 @@ Profile names can be typed in part (`/ccam use cla`) or quoted (`/ccam use "Town
 - **UI reloads.** Switching the Gamepad UI on or off reloads the interface. Anything kept only in memory is lost, so ControllerCam saves what matters: your profiles, the profile of each situation, the camera settings you had before it touched them (restored by `/ccam off`), and the motion-sickness settings it had to switch off. Your camera distance is not reset by a reload.
 - **Combat.** The game refuses to change some CVars during combat. A refused setting is retried when combat ends; the rest are applied right away.
 - **Motion-sickness settings.** The shoulder offset, dynamic pitch, target focus and head tracking only work while the game's *Keep Character Centered* and *Reduce Unexpected Movement* settings are off. While a profile uses any of those features, ControllerCam switches them off and puts them back afterwards. In the Gamepad UI the game forces its own temporary values for them, so there the temporary value is overridden instead of your stored one.
-- **Camera settings used** (all names were found in the Forever client): `cameraDistanceMaxZoomFactor`, `GamePadCameraYawSpeed`, `GamePadCameraPitchSpeed`, `GamepadCameraFollowOnStick`, `CameraFollowOnStick`, `CameraFollowYawSpeed`, `CameraFollowPitchSpeed`, `CameraFollowGamepadAdjustDelay`, `GamePadFaceMovementMaxAngle`, `GamePadFaceMovementMaxAngleCombat`, `GamePadTurnWithCamera`, `GamePadFaceMovementMount`, `GamePadFaceMovementSwimming`, `GamePadFaceMovementFreeFlying`, `test_cameraOverShoulder`, `test_cameraDynamicPitch`, `test_cameraHeadMovement*`, `test_cameraTargetFocus*`, `cameraSmoothStyle`, plus the two motion-sickness settings above. Speeds are stored as multiples of the game's own default (`x1.25`), so the profiles do not depend on a guessed default value.
+- **Camera settings used** (all names were found in the Forever client): `cameraDistanceMaxZoomFactor`, `GamePadCameraYawSpeed`, `GamePadCameraPitchSpeed`, `GamepadCameraFollowOnStick`, `CameraFollowOnStick`, `CameraFollowYawSpeed`, `CameraFollowPitchSpeed`, `CameraFollowGamepadAdjustDelay`, `GamePadFaceMovementMaxAngle`, `GamePadFaceMovementMaxAngleCombat`, `GamePadTurnWithCamera`, `GamePadFaceMovementMount`, `GamePadFaceMovementSwimming`, `GamePadFaceMovementFreeFlying`, `test_cameraOverShoulder`, `test_cameraDynamicPitch`, `test_cameraHeadMovement*`, `test_cameraTargetFocus*`, `cameraSmoothStyle`, `cameraTerrainTilt`, plus the two motion-sickness settings above. Speeds are stored as multiples of the game's own default (`x1.25`), so the profiles do not depend on a guessed default value.
 
 ## What is not verified
 

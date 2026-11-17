@@ -26,6 +26,7 @@ local BUILTIN = {
         name = "Action",
         desc = "The out-of-the-box feel: close third-person camera over your shoulder, head tracking, the camera follows where you run and you face where you move. Out of combat you run free, in combat you strafe.",
         values = {
+            followTerrain = 0,
             zoom = 7, zoomMax = 2.2,
             yawSpeed = "x1.25", pitchSpeed = "x1.15",
             followOnStick = 1, followYawSpeed = "x1.2", followDelay = "x0.8",
@@ -42,6 +43,7 @@ local BUILTIN = {
         name = "Hybrid",
         desc = "Between Classic and Action: a medium distance, a light over-the-shoulder offset and gentle head tracking. The camera follows your movement, but you still get a wide view.",
         values = {
+            followTerrain = 0,
             zoom = 11,
             yawSpeed = "x1.1", pitchSpeed = "x1.1",
             followOnStick = 1,
@@ -55,7 +57,7 @@ local BUILTIN = {
     {
         id = "classic",
         name = "Classic",
-        desc = "The game's own camera: every setting ControllerCam manages goes back to its default. Your camera distance is left as it is.",
+        desc = "The game's own camera: every setting ControllerCam manages goes back to its default. Your camera distance and your terrain-following setting are left as they are.",
         values = {},
     },
     {
@@ -63,6 +65,7 @@ local BUILTIN = {
         name = "Shooter",
         desc = "A third-person shooter feel: tight camera, a strong shoulder offset, fast stick aim. You run facing your movement outside combat and strafe facing the camera in combat.",
         values = {
+            followTerrain = 0,
             zoom = 5, zoomMax = 1.6,
             yawSpeed = "x1.4", pitchSpeed = "x1.3",
             followOnStick = 0,
@@ -78,6 +81,7 @@ local BUILTIN = {
         name = "Tactical",
         desc = "Even closer and steadier, for cover-shooter play: your character always turns with the camera, the shoulder offset is large and the camera does not drift on its own.",
         values = {
+            followTerrain = 0,
             zoom = 3.5, zoomMax = 1.4,
             yawSpeed = "x1.6", pitchSpeed = "x1.4",
             followOnStick = 0,
@@ -92,6 +96,7 @@ local BUILTIN = {
         name = "Cinematic",
         desc = "Slow, wide and moody, for questing and screenshots: dynamic pitch, strong head tracking and a camera that turns toward whoever you talk to.",
         values = {
+            followTerrain = 0,
             zoom = 12,
             yawSpeed = "x0.75", pitchSpeed = "x0.75",
             followOnStick = 1, followYawSpeed = "x0.7", followPitchSpeed = "x0.7",
@@ -109,6 +114,7 @@ local BUILTIN = {
         name = "Target focus",
         desc = "The camera leans toward your current target and the NPCs you talk to. Good for single-target fights.",
         values = {
+            followTerrain = 0,
             zoom = 10,
             followOnStick = 1,
             faceAngle = 115, faceAngleCombat = 180, turnWithCamera = 3,
@@ -124,6 +130,7 @@ local BUILTIN = {
         name = "Raid view",
         desc = "A far, steady camera for dungeons and raids: no offset, no head tracking, no camera drift and fast stick turning so you can see the whole fight.",
         values = {
+            followTerrain = 0,
             zoom = 18,
             yawSpeed = "x1.2", pitchSpeed = "x1.2",
             followOnStick = 0,
@@ -135,6 +142,7 @@ local BUILTIN = {
         name = "Mounted cruise",
         desc = "For riding: a far camera that swings behind you as you steer. The offset is off, because mounts of different sizes make it unreliable.",
         values = {
+            followTerrain = 0,
             zoom = 16,
             followOnStick = 1, followYawSpeed = "x1.3",
             faceAngle = 0, faceMount = 1, faceSwim = 1, faceFly = 1,
@@ -146,6 +154,7 @@ local BUILTIN = {
         name = "Flying",
         desc = "For flying: a far camera that follows your climb and dive.",
         values = {
+            followTerrain = 0,
             zoom = 20,
             followOnStick = 1, followPitchSpeed = "x1.5",
             faceAngle = 0, faceMount = 1, faceSwim = 1, faceFly = 1,
@@ -156,6 +165,7 @@ local BUILTIN = {
         name = "Town stroll",
         desc = "A relaxed, slower camera for cities: closer, calm and with head tracking.",
         values = {
+            followTerrain = 0,
             zoom = 7,
             yawSpeed = "x0.85", pitchSpeed = "x0.85",
             followOnStick = 1,

@@ -335,7 +335,12 @@ local function Resolve(profile, withZoom)
             end
         elseif not (s.key == "shoulder" and theCurve) then
             for _, cvar in ipairs(s.cvars) do
-                local v = ns.ResolveCVar(s, values[s.key], cvar, flip)
+                local v
+                if s.keepUser and values[s.key] == nil then
+                    v = db.originals[cvar]          -- your own value (only known once a profile has changed it)
+                else
+                    v = ns.ResolveCVar(s, values[s.key], cvar, flip)
+                end
                 if v ~= nil then
                     desired[cvar] = v
                     if s.actionCam then
