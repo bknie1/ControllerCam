@@ -37,6 +37,7 @@ jobs:
         run: |
           mkdir -p dist/ControllerCam
           cp ControllerCam.toc Locales.lua Schema.lua Presets.lua Share.lua Core.lua Slash.lua Options.lua LICENSE README.md CHANGELOG.md dist/ControllerCam/
+          cp -r Media dist/ControllerCam/Media
           (cd dist && zip -r "ControllerCam-${GITHUB_REF_NAME}.zip" ControllerCam)
 
       - name: Create GitHub release

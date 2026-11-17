@@ -143,6 +143,18 @@ class TocAndFiles(unittest.TestCase):
             self.assertIn(f, wf, "release.yml does not copy " + f)
         self.assertIn("package-as: ControllerCam", open(os.path.join(ROOT, ".pkgmeta"), encoding="utf-8").read())
 
+    def test_icon_exists_and_ships(self):
+        text = open(TOC, encoding="utf-8").read()
+        path = re.search(r"^## IconTexture: (.+)$", text, re.M).group(1).strip()
+        self.assertTrue(path.startswith("Interface\AddOns\ControllerCam\\"), path)
+        icon = os.path.join(ROOT, path.split("\\", 3)[3].replace("\\", os.sep) + ".tga")
+        data = open(icon, "rb").read()
+        self.assertIn(len(data), (18 + 64 * 64 * 4, 18 + 64 * 64 * 4 + 26))        # 64x64, 32 bits, uncompressed (+ optional TGA footer)
+        self.assertEqual(list(data[:3]), [0, 0, 2])
+        self.assertEqual((data[12] + data[13] * 256, data[14] + data[15] * 256, data[16]), (64, 64, 32))
+        wf = open(os.path.join(ROOT, ".github", "workflows", "release.yml"), encoding="utf-8").read()
+        self.assertIn("cp -r Media dist/ControllerCam/Media", wf)
+
     def test_no_forbidden_words_anywhere(self):
         bad = re.compile("claude|anthropic|co-authored|generated with", re.I)
         for base, dirs, files in os.walk(ROOT):

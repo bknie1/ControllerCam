@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.1
+
+- A project icon, shown in the AddOns list.
+
 ## 1.1.0
 
 - Localization is complete: the profile descriptions, tooltips, messages and the `/ccam help` text are translated in all ten game languages (they were English before).
