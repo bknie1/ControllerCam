@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.1.0
+
+- Descriptions where you pick a camera: hover any profile button in the options to see what it feels like and every setting it changes, and `/ccam describe <profile>` prints the same. The options show the description of the profile in use.
+- Advanced editing: tick "Advanced: edit built-in profiles" on the Profiles page (or `/ccam advanced on`) to change any setting of a built-in profile. Your changes are kept, an edited profile is marked "(edited)", and "Reset to original" (`/ccam reset <profile>`) brings the original back. Without Advanced the built-in profiles stay locked, and copies of them can always be edited.
+
 ## 1.0.0
 
 - First release.

@@ -196,6 +196,22 @@ function ns.ValidateProfile(p)
     return { name = name, values = values }
 end
 
+-- A value as text for the options panel and /ccam describe.
+function ns.FormatSettingValue(s, v)
+    local L = ns.L
+    if v == nil then return s.keepUser and L["your setting"] or L["game default"] end
+    if v == "d" then return L["game default"] end
+    if s.kind == "bool" then return (v == 1) and L["on"] or L["off"] end
+    if s.kind == "enum" then return L[s.values[v - s.min + 1]] or tostring(v) end
+    if s.kind == "mul" then return "x" .. v:sub(2) end
+    if s.kind == "curve" then
+        local parts = {}
+        for _, p in ipairs(v) do parts[#parts + 1] = ns.FormatNumber(p[1]) .. ":" .. ns.FormatNumber(p[2]) end
+        return table.concat(parts, " ")
+    end
+    return ns.FormatNumber(v)
+end
+
 -- The CVar string a setting value resolves to for one CVar. Returns nil if the game has no default to use.
 -- flip: negate the shoulder offset (for players who want the other shoulder).
 function ns.ResolveCVar(s, v, cvar, flip)

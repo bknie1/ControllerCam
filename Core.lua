@@ -61,12 +61,23 @@ ns.Copy = copy
 ---------------------------------------------------------------------------
 -- Profiles
 ---------------------------------------------------------------------------
+-- A built-in profile you edited (advanced editing) comes back with your values; the originals in ns.BUILTIN
+-- are never changed, so "reset to original" always has something to go back to.
 function ns.GetProfile(id)
     if type(id) ~= "string" then return nil end
-    return (db and db.profiles[id]) or ns.BUILTIN[id]
+    local custom = db and db.profiles[id]
+    if custom then return custom end
+    local b = ns.BUILTIN[id]
+    if b and db and db.overrides[id] then
+        return { id = b.id, name = b.name, desc = b.desc, values = db.overrides[id] }
+    end
+    return b
 end
 
 function ns.IsBuiltin(id) return ns.BUILTIN[id] ~= nil end
+function ns.IsEdited(id) return db ~= nil and db.overrides[id] ~= nil end
+-- Custom profiles can always be edited; built-in ones only while advanced editing is on.
+function ns.IsEditable(id) return db ~= nil and (db.profiles[id] ~= nil or (ns.BUILTIN[id] ~= nil and db.advanced)) end
 
 function ns.ProfileName(id)
     local b = ns.BUILTIN[id]
@@ -79,6 +90,18 @@ function ns.ProfileDescription(id)
     local b = ns.BUILTIN[id]
     if b then return L[b.desc] end
     return L["Custom profile. Duplicate or edit it in the profile editor."]
+end
+
+-- What a profile is and what it changes: name, description and one { label, value } row per setting it lists.
+function ns.DescribeProfile(id)
+    local p = ns.GetProfile(id)
+    if not p then return nil end
+    local rows = {}
+    for _, s in ipairs(ns.SETTINGS) do
+        local v = p.values[s.key]
+        if v ~= nil then rows[#rows + 1] = { L[s.label], ns.FormatSettingValue(s, v) } end
+    end
+    return ns.ProfileName(id), ns.ProfileDescription(id), rows
 end
 
 -- All profile ids: built-in ones in their menu order, then custom ones by name.
@@ -170,21 +193,47 @@ function ns.DeleteProfile(id)
     return true
 end
 
--- Set (or with nil, remove = back to the game default) one value of a custom profile.
+-- The values table to edit for a profile: a custom profile's own, or (advanced editing) a copy of a built-in
+-- one that is made the first time it is edited. Returns nil and a reason when it cannot be edited.
+local function EditableValues(id)
+    if db.profiles[id] then return db.profiles[id].values end
+    if ns.BUILTIN[id] then
+        if not db.advanced then return nil, "builtin" end
+        if not db.overrides[id] then db.overrides[id] = copy(ns.BUILTIN[id].values) end
+        return db.overrides[id]
+    end
+    return nil, "unknown"
+end
+
+-- Set (or with nil, remove = back to the game default) one value of an editable profile.
 function ns.SetValue(id, key, value)
-    local p = db.profiles[id]
-    if not p then return false, "builtin" end
     local s = ns.SETTING_BY_KEY[key]
     if not s then return false, "unknown" end
-    if value == nil then
-        p.values[key] = nil
-    else
-        local clean, why = ns.ValidateValue(s, value)
+    local clean
+    if value ~= nil then
+        local why
+        clean, why = ns.ValidateValue(s, value)
         if clean == nil then return false, why end
-        p.values[key] = clean
-        if key == "shoulder" then p.values.shoulderCurve = nil end       -- a fixed offset replaces the curve
-        if key == "shoulderCurve" then p.values.shoulder = nil end
     end
+    local values, why = EditableValues(id)
+    if not values then return false, why end
+    values[key] = clean
+    if clean ~= nil then
+        if key == "shoulder" then values.shoulderCurve = nil end         -- a fixed offset replaces the curve
+        if key == "shoulderCurve" then values.shoulder = nil end
+    end
+    if active.id == id then ns.Evaluate(true) end
+    return true
+end
+
+function ns.SetAdvanced(v)
+    db.advanced = v and true or false
+end
+
+-- Back to the original of a built-in profile you edited.
+function ns.ResetBuiltin(id)
+    if not (ns.BUILTIN[id] and db.overrides[id]) then return false end
+    db.overrides[id] = nil
     if active.id == id then ns.Evaluate(true) end
     return true
 end
@@ -539,7 +588,8 @@ local function InitDB()
         exitDelay = math.min(math.max(tonumber(old.exitDelay) or DEFAULT_EXIT_DELAY, 0), 10),
         flipShoulder = old.flipShoulder == true,
         welcomed = old.welcomed == true,
-        profiles = {}, assign = {}, originals = {}, motion = {},
+        advanced = old.advanced == true,
+        profiles = {}, overrides = {}, assign = {}, originals = {}, motion = {},
     }
     -- Anything in the saved file is checked the same way as an imported string.
     if type(old.profiles) == "table" then
@@ -547,6 +597,15 @@ local function InitDB()
             if type(id) == "string" and not ns.BUILTIN[id] then
                 local clean = ns.ValidateProfile(p)
                 if clean then d.profiles[id] = clean end
+            end
+        end
+    end
+    if type(old.overrides) == "table" then                       -- edited built-in profiles
+        for id, values in pairs(old.overrides) do
+            local b = type(id) == "string" and ns.BUILTIN[id]
+            if b and type(values) == "table" then
+                local clean = ns.ValidateProfile({ name = b.name, values = values })
+                if clean then d.overrides[id] = clean.values end
             end
         end
     end

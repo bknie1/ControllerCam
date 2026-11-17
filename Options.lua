@@ -15,6 +15,27 @@ local function Tooltip(frame, text)
     frame:SetScript("OnLeave", function() GameTooltip:Hide() end)
 end
 
+-- A tooltip with a profile's name, what it feels like and what it changes. getId: a function (the profile can
+-- change while the button stays).
+local function ProfileTooltip(frame, getId)
+    frame:SetScript("OnEnter", function(self)
+        local id = getId()
+        GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
+        if not id then
+            GameTooltip:SetText(L["(no change)"], 1, 1, 1)
+            GameTooltip:AddLine(L["Left-click: next profile. Right-click: previous profile. The first entry, no change, leaves the camera alone."], 0.8, 0.8, 0.8, true)
+        else
+            local name, desc, rows = ns.DescribeProfile(id)
+            GameTooltip:SetText(name .. (ns.IsEdited(id) and (" " .. L["(edited)"]) or ""), 1, 0.82, 0)
+            GameTooltip:AddLine(desc, 1, 1, 1, true)
+            for _, row in ipairs(rows) do GameTooltip:AddDoubleLine(row[1], row[2], 0.7, 0.7, 0.7, 1, 1, 1) end
+            GameTooltip:AddLine(L["Left-click: next profile. Right-click: previous profile."], 0.5, 0.5, 0.5, true)
+        end
+        GameTooltip:Show()
+    end)
+    frame:SetScript("OnLeave", function() GameTooltip:Hide() end)
+end
+
 local function RefreshAll()
     if not ns.db then return end
     refreshing = true
@@ -137,14 +158,17 @@ local quickLabel = panel:CreateFontString(nil, "ARTWORK", "GameFontNormal")
 quickLabel:SetPoint("TOPLEFT", enabled, "BOTTOMLEFT", 2, -10)
 quickLabel:SetText(L["Quick pick (use one profile everywhere):"])
 
-local qa = MakeButton(panel, L["Action"], L["Close third-person camera over your shoulder, head tracking. The default."], 110,
+local qa = MakeButton(panel, L["Action"], nil, 110,
     function() ns.UseEverywhere("action"); RefreshAll() end)
+ProfileTooltip(qa, function() return "action" end)
 qa:SetPoint("TOPLEFT", quickLabel, "BOTTOMLEFT", 0, -6)
-local qh = MakeButton(panel, L["Hybrid"], L["Between Classic and Action."], 110,
+local qh = MakeButton(panel, L["Hybrid"], nil, 110,
     function() ns.UseEverywhere("hybrid"); RefreshAll() end)
+ProfileTooltip(qh, function() return "hybrid" end)
 qh:SetPoint("LEFT", qa, "RIGHT", 6, 0)
-local qc = MakeButton(panel, L["Classic"], L["The game's own camera."], 110,
+local qc = MakeButton(panel, L["Classic"], nil, 110,
     function() ns.UseEverywhere("classic"); RefreshAll() end)
+ProfileTooltip(qc, function() return "classic" end)
 qc:SetPoint("LEFT", qh, "RIGHT", 6, 0)
 local qs = MakeButton(panel, L["Recommended setup"], L["Action camera with calmer profiles for cities, mounts, flying and raids."], 150,
     function() ns.ApplyStarter(); RefreshAll() end)
@@ -178,7 +202,7 @@ for _, sit in ipairs(ns.SITUATIONS) do
     btn:SetPoint("LEFT", label, "RIGHT", 8, 0)
     btn:RegisterForClicks("LeftButtonUp", "RightButtonUp")
     btn:SetScript("OnClick", function(_, mouse) Cycle(sit, mouse == "RightButton" and -1 or 1) end)
-    Tooltip(btn, L["Left-click: next profile. Right-click: previous profile. The first entry, no change, leaves the camera alone."])
+    ProfileTooltip(btn, function() return ns.db.assign[sit] end)
     refreshers[#refreshers + 1] = function()
         local id = ns.db.assign[sit]
         btn:SetText(id and ns.ProfileName(id) or L["(no change)"])
@@ -208,13 +232,19 @@ local flip = MakeCheckbox(panel, "ControllerCamOptFlip", L["Mirror the shoulder 
     function() return ns.db.flipShoulder end, function(v) ns.SetFlipShoulder(v) end)
 flip:SetPoint("TOPLEFT", delay, "BOTTOMLEFT", -8, -16)
 
+local nowDesc = panel:CreateFontString(nil, "ARTWORK", "GameFontHighlightSmall")
+nowDesc:SetPoint("TOPLEFT", flip, "BOTTOMLEFT", 2, -10)
+nowDesc:SetWidth(560)
+nowDesc:SetJustifyH("LEFT")
+
 local helpText = panel:CreateFontString(nil, "ARTWORK", "GameFontDisableSmall")
-helpText:SetPoint("TOPLEFT", flip, "BOTTOMLEFT", 2, -10)
+helpText:SetPoint("TOPLEFT", nowDesc, "BOTTOMLEFT", 0, -10)
 helpText:SetJustifyH("LEFT")
 helpText:SetText(L["Slash commands: /ccam help"])
 
 refreshers[#refreshers + 1] = function()
     local st = ns.Status()
+    nowDesc:SetText(st.id and (st.profile .. ": " .. ns.ProfileDescription(st.id)) or "")
     if st.profile then
         status:SetText((L["Now: %s (%s)"]):format(st.profile, st.sit == "force" and L["forced"] or ns.SITUATION_LABEL[st.sit]))
     else
@@ -283,6 +313,14 @@ bImport:SetPoint("LEFT", bExport, "RIGHT", 6, 0)
 local bDelete = MakeButton(pp, L["Delete"], L["Deletes this custom profile."], 90,
     Act(function() local id = Selected(); if not ns.IsBuiltin(id) then ns.DeleteProfile(id); selected = nil end end))
 bDelete:SetPoint("LEFT", bImport, "RIGHT", 6, 0)
+local bReset = MakeButton(pp, L["Reset to original"], L["Puts this built-in profile back to its original settings."], 140,
+    Act(function() ns.ResetBuiltin(Selected()) end))
+bReset:SetPoint("LEFT", bDelete, "RIGHT", 6, 0)
+
+local advanced = MakeCheckbox(pp, "ControllerCamOptAdvanced", L["Advanced: edit built-in profiles"],
+    L["Lets you change the built-in profiles too. Your changes are kept, and Reset to original brings the original back."],
+    function() return ns.db.advanced end, function(v) ns.SetAdvanced(v) end)
+advanced:SetPoint("TOPLEFT", ptitle, "TOPRIGHT", 40, 8)
 
 local readonly = pp:CreateFontString(nil, "ARTWORK", "GameFontNormalSmall")
 readonly:SetPoint("TOPLEFT", bExport, "BOTTOMLEFT", 0, -10)
@@ -304,18 +342,11 @@ local function SetEditable(widget, on)
 end
 
 local function DisplayValue(s, v)
-    if v == nil and s.keepUser then return L["your setting"] end
-    if v == nil or v == "d" then return L["game default"] end
-    if s.kind == "bool" then return (v == 1) and L["on"] or L["off"] end
-    if s.kind == "enum" then return L[s.values[v - s.min + 1]] or tostring(v) end
-    if s.kind == "mul" then return "x" .. v:sub(2) end
-    return ns.FormatNumber(v)
+    return ns.FormatSettingValue(s, v)
 end
 
 local function CurveToText(c)
-    local t = {}
-    for _, p in ipairs(c or {}) do t[#t + 1] = ns.FormatNumber(p[1]) .. ":" .. ns.FormatNumber(p[2]) end
-    return table.concat(t, " ")
+    return c and ns.FormatSettingValue(ns.SETTING_BY_KEY.shoulderCurve, c) or ""
 end
 
 local y, lastGroup = -4, nil
@@ -426,10 +457,17 @@ refreshers[#refreshers + 1] = function()
     local p = ns.GetProfile(id)
     selBtn:SetText(ns.ProfileName(id))
     descText:SetText(ns.ProfileDescription(id))
-    local editable = not ns.IsBuiltin(id)
-    SetEditable(bDelete, editable)
-    readonly:SetText(editable and L["Settings not listed use the game default. Click a value to change it; the curve box takes zoom:offset pairs."]
-                              or L["Built-in profiles cannot be edited. Make a copy first."])
+    local editable = ns.IsEditable(id)
+    SetEditable(bDelete, not ns.IsBuiltin(id))
+    SetEditable(bReset, ns.IsEdited(id))
+    selBtn:SetText(ns.ProfileName(id) .. (ns.IsEdited(id) and (" " .. L["(edited)"]) or ""))
+    if editable and ns.IsBuiltin(id) then
+        readonly:SetText(L["Advanced editing is on. Changes to a built-in profile are kept; Reset to original brings it back."])
+    elseif editable then
+        readonly:SetText(L["Settings not listed use the game default. Click a value to change it; the curve box takes zoom:offset pairs."])
+    else
+        readonly:SetText(L["Built-in profiles are locked. Make a copy, or tick Advanced to edit them."])
+    end
     local shownValues = p.values
     for _, row in ipairs(editors) do
         row.refresh({ values = shownValues }, editable)

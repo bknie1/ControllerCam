@@ -824,6 +824,23 @@ class SlashCommands(unittest.TestCase):
         self.assertIn("test_cameraOverShoulder = 2", text)
         self.assertIn("CameraKeepCharacterCentered = 0", text)
 
+    def test_describe_command_and_descriptions(self):
+        plain = lambda t: re.sub(r"\|c[0-9a-fA-F]{8}|\|r", "", t)
+        text = plain(self.said("describe action"))
+        self.assertIn("Action", text)
+        self.assertIn("out-of-the-box", text)                                 # the description
+        self.assertIn("Camera distance (yards): 7", text)
+        self.assertIn("Head tracking strength: 1", text)
+        self.assertIn("0:0 6:2 8:2 20:0", text)                              # the shoulder curve
+        self.assertIn("game default", text)
+        classic = plain(self.said("describe classic"))
+        self.assertIn("game's own camera", classic)
+        self.assertNotIn("Camera distance", classic)                          # Classic changes nothing itself
+        self.assertIn("No profile", self.said("describe nonsense"))
+        for i in range(1, len(self.env.ns.BUILTIN_LIST) + 1):                 # every built-in has a real description
+            pid = self.env.ns.BUILTIN_LIST[i].id
+            self.assertGreater(len(self.env.ns.ProfileDescription(pid)), 40, pid)
+
     def test_other_commands(self):
         self.said("flip"); self.assertTrue(self.env.db().flipShoulder)
         self.said("flip"); self.assertFalse(self.env.db().flipShoulder)
@@ -856,6 +873,11 @@ class OptionsPanel(unittest.TestCase):
                 env.ns.RefreshOptions()
         self.assertGreater(clicks, 30)
         env.ns.Evaluate(True)
+        for i in range(1, len(env.mock.frames) + 1):                          # hover every control: tooltips build
+            f = env.mock.frames[i]
+            if f.scripts.OnEnter:
+                f.scripts.OnEnter(f)
+                f.scripts.OnLeave(f)
         # sliders and the curve box
         for i in range(1, len(env.mock.frames) + 1):
             f = env.mock.frames[i]
@@ -883,6 +905,112 @@ class OptionsPanel(unittest.TestCase):
         for f in sliders:
             f.scripts.OnValueChanged(f, 2)
         self.assertEqual(env.ns.BUILTIN.action["values"]["yawSpeed"], "x1.25")   # built-in profiles stay read-only
+
+
+class AdvancedEditing(unittest.TestCase):
+    def setUp(self):
+        self.env = Env()
+
+    def said(self, text):
+        return " ".join(self.env.cmd(text))
+
+    def yaw(self, pid="action"):
+        return self.env.ns.GetProfile(pid)["values"]["yawSpeed"]
+
+    def test_built_in_profiles_are_locked_by_default(self):
+        self.assertFalse(self.env.ns.IsEditable("action"))
+        self.assertIn("locked", self.said("edit action yawSpeed 2"))
+        self.assertEqual(self.yaw(), "x1.25")
+        self.assertIsNone(self.env.db()["overrides"]["action"])
+        r = self.env.run("local ok, why = NS.SetValue('action', 'yawSpeed', 'x2'); return { ok = ok, why = why }")
+        self.assertFalse(r["ok"]); self.assertEqual(r["why"], "builtin")
+
+    def test_advanced_unlocks_edits_and_the_original_stays_intact(self):
+        self.said("advanced on")
+        self.assertTrue(self.env.ns.IsEditable("action"))
+        self.assertIn("Done", self.said("edit action yawSpeed 2"))
+        self.assertEqual(self.yaw(), "x2")
+        self.assertEqual(self.env.ns.BUILTIN.action["values"]["yawSpeed"], "x1.25")   # original untouched
+        self.assertEqual(self.env.cv("GamePadCameraYawSpeed"), "2")                  # and it is in use right away
+        self.assertTrue(self.env.ns.IsEdited("action"))
+        self.assertEqual(self.env.ns.ProfileName("action"), "Action")
+        self.assertIn("(edited)", self.said("list"))
+        self.assertIn("(edited)", self.said("describe action"))
+        self.assertIn("Stick turn speed (left/right): x2", re.sub(r"\|c[0-9a-fA-F]{8}|\|r", "", self.said("describe action")))
+
+    def test_bad_edits_do_not_create_an_override(self):
+        self.said("advanced on")
+        self.said("edit action yawSpeed 99")
+        self.said("edit action nonsense 1")
+        self.assertIsNone(self.env.db()["overrides"]["action"])
+        self.assertFalse(self.env.ns.IsEdited("action"))
+
+    def test_curve_edit_on_a_built_in(self):
+        self.said("advanced on")
+        self.said("curve action 0:0 5:1.5 20:0")
+        v = self.env.ns.GetProfile("action")["values"]
+        self.assertEqual(v["shoulderCurve"][2][2], 1.5)
+        self.assertEqual(self.env.ns.BUILTIN.action["values"]["shoulderCurve"][2][2], 2)
+
+    def test_reset_brings_the_original_back(self):
+        self.said("advanced on")
+        self.said("edit action yawSpeed 2")
+        self.assertIn("original", self.said("reset action"))
+        self.assertEqual(self.yaw(), "x1.25")
+        self.assertEqual(self.env.cv("GamePadCameraYawSpeed"), "1.25")
+        self.assertFalse(self.env.ns.IsEdited("action"))
+        self.assertIn("Nothing to reset", self.said("reset action"))
+        self.assertNotIn("(edited)", self.said("list"))
+
+    def test_edits_survive_a_reload_and_advanced_off_only_locks(self):
+        self.said("advanced on")
+        self.said("edit hybrid zoom 12")
+        env2 = reload_env(self.env)
+        self.assertTrue(env2.db()["advanced"])
+        self.assertEqual(env2.ns.GetProfile("hybrid")["values"]["zoom"], 12)
+        env2.cmd("advanced off")
+        self.assertFalse(env2.ns.IsEditable("hybrid"))
+        self.assertEqual(env2.ns.GetProfile("hybrid")["values"]["zoom"], 12)        # kept, just locked
+        self.assertIn("locked", " ".join(env2.cmd("edit hybrid zoom 5")))
+
+    def test_edited_profiles_export_and_copy_with_their_new_values(self):
+        self.said("advanced on")
+        self.said("edit action yawSpeed 2")
+        parsed, err = self.env.parse(self.env.ns.ExportById("action"))
+        self.assertEqual(parsed["values"]["yawSpeed"], "x2")
+        self.said('copy action "Mine"')
+        self.assertEqual(self.env.values(self.env.ns.FindProfile("Mine"))["yawSpeed"], "x2")
+
+    def test_built_in_profiles_still_cannot_be_deleted(self):
+        self.said("advanced on")
+        self.assertIn("cannot be deleted", self.said("delete action"))
+
+    def test_bad_saved_overrides_are_cleaned(self):
+        bad = "{ v = 1, overrides = { action = { yawSpeed = 'x2', shoulder = 500 }, ghost = { yawSpeed = 'x2' }, hybrid = { zoom = 9, evil = 1 }, raid = { zoom = 20 } } }"
+        env = Env(db=bad)
+        o = env.db()["overrides"]
+        self.assertIsNone(o["action"]); self.assertIsNone(o["ghost"]); self.assertIsNone(o["hybrid"])
+        self.assertEqual(o["raid"]["zoom"], 20)
+
+    def test_options_panel_follows_the_advanced_switch(self):
+        env = self.env
+        env.ns.SelectProfile("action"); env.ns.RefreshOptions()
+        sliders = [f for f in (env.mock.frames[i] for i in range(1, len(env.mock.frames) + 1)) if f.template == "OptionsSliderTemplate" and f.scripts.OnValueChanged]
+        for f in sliders:
+            f.scripts.OnValueChanged(f, 2)
+        self.assertEqual(self.yaw(), "x1.25")                                   # locked: nothing changed
+        env.ns.SetAdvanced(True); env.ns.RefreshOptions()
+        for f in sliders:
+            f.scripts.OnValueChanged(f, 2)
+        self.assertTrue(env.ns.IsEdited("action"))
+        self.assertEqual(self.yaw(), "x2")
+        # unticking every checkbox (the Advanced one among them) turns advanced editing off again
+        for i in range(1, len(env.mock.frames) + 1):
+            f = env.mock.frames[i]
+            if f.template == "UICheckButtonTemplate" and f.scripts.OnClick:
+                f.checked = False
+                f.scripts.OnClick(f, "LeftButton")
+        self.assertFalse(env.db()["advanced"])
 
 
 class Loading(unittest.TestCase):

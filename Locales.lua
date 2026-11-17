@@ -120,80 +120,92 @@ local ENGLISH = {
     "%s is also loaded. Both change the camera and will fight each other. Disable one of them.",  -- 109
     "Camera follows terrain",  -- 110
     "your setting",  -- 111
-    "The out-of-the-box feel: close third-person camera over your shoulder, head tracking, the camera follows where you run and you face where you move. Out of combat you run free, in combat you strafe.",  -- 112
-    "Between Classic and Action: a medium distance, a light over-the-shoulder offset and gentle head tracking. The camera follows your movement, but you still get a wide view.",  -- 113
-    "The game's own camera: every setting ControllerCam manages goes back to its default. Your camera distance and your terrain-following setting are left as they are.",  -- 114
-    "A third-person shooter feel: tight camera, a strong shoulder offset, fast stick aim. You run facing your movement outside combat and strafe facing the camera in combat.",  -- 115
-    "Even closer and steadier, for cover-shooter play: your character always turns with the camera, the shoulder offset is large and the camera does not drift on its own.",  -- 116
-    "Slow, wide and moody, for questing and screenshots: dynamic pitch, strong head tracking and a camera that turns toward whoever you talk to.",  -- 117
-    "The camera leans toward your current target and the NPCs you talk to. Good for single-target fights.",  -- 118
-    "A far, steady camera for dungeons and raids: no offset, no head tracking, no camera drift and fast stick turning so you can see the whole fight.",  -- 119
-    "For riding: a far camera that swings behind you as you steer. The offset is off, because mounts of different sizes make it unreliable.",  -- 120
-    "For flying: a far camera that follows your climb and dive.",  -- 121
-    "A relaxed, slower camera for cities: closer, calm and with head tracking.",  -- 122
-    "Custom profile. Duplicate or edit it in the profile editor.",  -- 123
-    "show status",  -- 124
-    "list the profiles",  -- 125
-    "use one profile everywhere (try: action, hybrid, classic)",  -- 126
-    "the recommended setup: Action camera with calmer profiles for cities, mounts, flying, raids",  -- 127
-    "choose the profile for one situation (vehicle, flying, swimming, mounted, combat, raid, dungeon, city, default)",  -- 128
-    "use a profile now, whatever the situation",  -- 129
-    "stop forcing a profile",  -- 130
-    "save your current camera settings as a new profile",  -- 131
-    "make an editable copy of a profile",  -- 132
-    "change a setting of a custom profile (/ccam settings lists them)",  -- 133
-    "shoulder offset by camera distance, e.g. /ccam curve mine 0:2 8:2 20:0",  -- 134
-    "delete a custom profile",  -- 135
-    "show a string you can share",  -- 136
-    "add a profile from a shared string",  -- 137
-    "switch the shoulder offset to the other shoulder",  -- 138
-    "how long a situation is kept after it ends (default 1.5)",  -- 139
-    "turn on, or turn off and restore your original camera settings",  -- 140
-    "show the zoom, shoulder offset and motion settings right now (for troubleshooting)",  -- 141
-    "open the options panel (Options > AddOns > ControllerCam)",  -- 142
-    "show this list",  -- 143
-    "'%s' matches more than one profile. Type more of the name.",  -- 144
-    "No profile called '%s'. /ccam list shows them.",  -- 145
-    "Camera profiles for controller play. Out of the box you get an Action camera; Hybrid and Classic are one command away.",  -- 146
-    "Built-in profiles cannot be edited. Make a copy first: /ccam copy <profile>",  -- 147
-    "Unknown setting. /ccam settings lists them.",  -- 148
-    "That value is outside the allowed range.",  -- 149
-    "That value is not valid.",  -- 150
-    "Unknown situation. Use: vehicle, flying, swimming, mounted, combat, raid, dungeon, city or default.",  -- 151
-    "usage: /ccam set <situation> <profile|none>",  -- 152
-    "%s: no change",  -- 153
-    "Forcing '%s'. /ccam auto goes back to the situations.",  -- 154
-    "The camera follows your situations again.",  -- 155
-    "usage: /ccam edit <profile> <setting> <value|default>",  -- 156
-    "Use /ccam curve for the offset by zoom.",  -- 157
-    "Shoulder offset mirrored.",  -- 158
-    "Shoulder offset back to normal.",  -- 159
-    "Situations are kept for %.1f seconds after they end.",  -- 160
-    "usage: /ccam delay <seconds>",  -- 161
-    "options panel is not available in this client",  -- 162
-    "unknown command '%s'. Type /ccam help",  -- 163
-    "Press Ctrl+C to copy, then Esc.",  -- 164
-    "Paste a ControllerCam string here (Ctrl+V), then press Import.",  -- 165
-    "Camera profiles for controller play. Pick what the camera feels like in each situation. Left-click a profile to go to the next one, right-click for the previous one.",  -- 166
-    "Turn the camera control on or off. When off, your original camera settings are put back.",  -- 167
-    "Close third-person camera over your shoulder, head tracking. The default.",  -- 168
-    "Between Classic and Action.",  -- 169
-    "The game's own camera.",  -- 170
-    "Action camera with calmer profiles for cities, mounts, flying and raids.",  -- 171
-    "Left-click: next profile. Right-click: previous profile. The first entry, no change, leaves the camera alone.",  -- 172
-    "Stops the camera from flickering between profiles when a situation switches on and off quickly.",  -- 173
-    "Swaps which shoulder the camera looks over.",  -- 174
-    "Left-click: next profile. Right-click: previous profile.",  -- 175
-    "Use this profile in every situation.",  -- 176
-    "Makes an editable copy of this profile.",  -- 177
-    "Saves the camera settings you have right now as a new profile.",  -- 178
-    "Shows a string you can share.",  -- 179
-    "Add a profile from a shared string.",  -- 180
-    "Deletes this custom profile.",  -- 181
-    "Zoom distance and offset pairs, for example 0:2 8:2 20:0. Empty = no curve. Press Enter to apply.",  -- 182
-    "Use the game's default for this setting.",  -- 183
-    "Settings not listed use the game default. Click a value to change it; the curve box takes zoom:offset pairs.",  -- 184
-    "Built-in profiles cannot be edited. Make a copy first.",  -- 185
+    "Advanced: edit built-in profiles",  -- 112
+    "Reset to original",  -- 113
+    "(edited)",  -- 114
+    "Everything not listed uses the game default.",  -- 115
+    "The out-of-the-box feel: close third-person camera over your shoulder, head tracking, the camera follows where you run and you face where you move. Out of combat you run free, in combat you strafe.",  -- 116
+    "Between Classic and Action: a medium distance, a light over-the-shoulder offset and gentle head tracking. The camera follows your movement, but you still get a wide view.",  -- 117
+    "The game's own camera: every setting ControllerCam manages goes back to its default. Your camera distance and your terrain-following setting are left as they are.",  -- 118
+    "A third-person shooter feel: tight camera, a strong shoulder offset, fast stick aim. You run facing your movement outside combat and strafe facing the camera in combat.",  -- 119
+    "Even closer and steadier, for cover-shooter play: your character always turns with the camera, the shoulder offset is large and the camera does not drift on its own.",  -- 120
+    "Slow, wide and moody, for questing and screenshots: dynamic pitch, strong head tracking and a camera that turns toward whoever you talk to.",  -- 121
+    "The camera leans toward your current target and the NPCs you talk to. Good for single-target fights.",  -- 122
+    "A far, steady camera for dungeons and raids: no offset, no head tracking, no camera drift and fast stick turning so you can see the whole fight.",  -- 123
+    "For riding: a far camera that swings behind you as you steer. The offset is off, because mounts of different sizes make it unreliable.",  -- 124
+    "For flying: a far camera that follows your climb and dive.",  -- 125
+    "A relaxed, slower camera for cities: closer, calm and with head tracking.",  -- 126
+    "Custom profile. Duplicate or edit it in the profile editor.",  -- 127
+    "show status",  -- 128
+    "list the profiles",  -- 129
+    "what a profile feels like and every setting it changes",  -- 130
+    "use one profile everywhere (try: action, hybrid, classic)",  -- 131
+    "the recommended setup: Action camera with calmer profiles for cities, mounts, flying, raids",  -- 132
+    "choose the profile for one situation (vehicle, flying, swimming, mounted, combat, raid, dungeon, city, default)",  -- 133
+    "use a profile now, whatever the situation",  -- 134
+    "stop forcing a profile",  -- 135
+    "save your current camera settings as a new profile",  -- 136
+    "make an editable copy of a profile",  -- 137
+    "change a setting of a custom profile (/ccam settings lists them)",  -- 138
+    "shoulder offset by camera distance, e.g. /ccam curve mine 0:2 8:2 20:0",  -- 139
+    "allow editing the built-in profiles too (/ccam reset <profile> brings the original back)",  -- 140
+    "put an edited built-in profile back to its original settings",  -- 141
+    "delete a custom profile",  -- 142
+    "show a string you can share",  -- 143
+    "add a profile from a shared string",  -- 144
+    "switch the shoulder offset to the other shoulder",  -- 145
+    "how long a situation is kept after it ends (default 1.5)",  -- 146
+    "turn on, or turn off and restore your original camera settings",  -- 147
+    "show the zoom, shoulder offset and motion settings right now (for troubleshooting)",  -- 148
+    "open the options panel (Options > AddOns > ControllerCam)",  -- 149
+    "show this list",  -- 150
+    "'%s' matches more than one profile. Type more of the name.",  -- 151
+    "No profile called '%s'. /ccam list shows them.",  -- 152
+    "Camera profiles for controller play. Out of the box you get an Action camera; Hybrid and Classic are one command away.",  -- 153
+    "Built-in profiles are locked. Turn on advanced editing (/ccam advanced on) or make a copy: /ccam copy <profile>",  -- 154
+    "Unknown setting. /ccam settings lists them.",  -- 155
+    "That value is outside the allowed range.",  -- 156
+    "That value is not valid.",  -- 157
+    "Unknown situation. Use: vehicle, flying, swimming, mounted, combat, raid, dungeon, city or default.",  -- 158
+    "usage: /ccam set <situation> <profile|none>",  -- 159
+    "%s: no change",  -- 160
+    "Forcing '%s'. /ccam auto goes back to the situations.",  -- 161
+    "The camera follows your situations again.",  -- 162
+    "usage: /ccam edit <profile> <setting> <value|default>",  -- 163
+    "Use /ccam curve for the offset by zoom.",  -- 164
+    "usage: /ccam advanced [on|off]",  -- 165
+    "Advanced editing is %s.",  -- 166
+    "'%s' is back to its original settings.",  -- 167
+    "Nothing to reset: '%s' has not been edited.",  -- 168
+    "Built-in profiles cannot be deleted.",  -- 169
+    "Shoulder offset mirrored.",  -- 170
+    "Shoulder offset back to normal.",  -- 171
+    "Situations are kept for %.1f seconds after they end.",  -- 172
+    "usage: /ccam delay <seconds>",  -- 173
+    "options panel is not available in this client",  -- 174
+    "unknown command '%s'. Type /ccam help",  -- 175
+    "Left-click: next profile. Right-click: previous profile. The first entry, no change, leaves the camera alone.",  -- 176
+    "Left-click: next profile. Right-click: previous profile.",  -- 177
+    "Press Ctrl+C to copy, then Esc.",  -- 178
+    "Paste a ControllerCam string here (Ctrl+V), then press Import.",  -- 179
+    "Camera profiles for controller play. Pick what the camera feels like in each situation. Left-click a profile to go to the next one, right-click for the previous one.",  -- 180
+    "Turn the camera control on or off. When off, your original camera settings are put back.",  -- 181
+    "Action camera with calmer profiles for cities, mounts, flying and raids.",  -- 182
+    "Stops the camera from flickering between profiles when a situation switches on and off quickly.",  -- 183
+    "Swaps which shoulder the camera looks over.",  -- 184
+    "Use this profile in every situation.",  -- 185
+    "Makes an editable copy of this profile.",  -- 186
+    "Saves the camera settings you have right now as a new profile.",  -- 187
+    "Shows a string you can share.",  -- 188
+    "Add a profile from a shared string.",  -- 189
+    "Deletes this custom profile.",  -- 190
+    "Puts this built-in profile back to its original settings.",  -- 191
+    "Lets you change the built-in profiles too. Your changes are kept, and Reset to original brings the original back.",  -- 192
+    "Zoom distance and offset pairs, for example 0:2 8:2 20:0. Empty = no curve. Press Enter to apply.",  -- 193
+    "Use the game's default for this setting.",  -- 194
+    "Advanced editing is on. Changes to a built-in profile are kept; Reset to original brings it back.",  -- 195
+    "Settings not listed use the game default. Click a value to change it; the curve box takes zoom:offset pairs.",  -- 196
+    "Built-in profiles are locked. Make a copy, or tick Advanced to edit them.",  -- 197
 }
 
 local TRANSLATIONS = {
@@ -309,6 +321,10 @@ local TRANSLATIONS = {
         "%s ist ebenfalls geladen. Beide ändern die Kamera und stören sich gegenseitig. Deaktiviere eines davon.",  -- 109
         "Kamera folgt dem Gelände",  -- 110
         "deine Einstellung",  -- 111
+        "Erweitert: integrierte Profile bearbeiten",  -- 112
+        "Auf Original zurücksetzen",  -- 113
+        "(bearbeitet)",  -- 114
+        "Alles, was nicht aufgeführt ist, verwendet den Spielstandard.",  -- 115
     },
     esES = {
         "En un vehículo",  -- 1
@@ -422,6 +438,10 @@ local TRANSLATIONS = {
         "%s también está cargado. Ambos cambian la cámara y chocarán. Desactiva uno de ellos.",  -- 109
         "La cámara sigue el terreno",  -- 110
         "tu ajuste",  -- 111
+        "Avanzado: editar los perfiles integrados",  -- 112
+        "Restablecer el original",  -- 113
+        "(editado)",  -- 114
+        "Todo lo que no aparece usa el valor predeterminado del juego.",  -- 115
     },
     frFR = {
         "Dans un véhicule",  -- 1
@@ -535,6 +555,10 @@ local TRANSLATIONS = {
         "%s est également chargé. Les deux modifient la caméra et se gênent. Désactivez-en un.",  -- 109
         "La caméra suit le terrain",  -- 110
         "votre réglage",  -- 111
+        "Avancé : modifier les profils intégrés",  -- 112
+        "Rétablir l'original",  -- 113
+        "(modifié)",  -- 114
+        "Tout ce qui n'est pas listé utilise la valeur par défaut du jeu.",  -- 115
     },
     itIT = {
         "In un veicolo",  -- 1
@@ -648,6 +672,10 @@ local TRANSLATIONS = {
         "Anche %s è caricato. Entrambi modificano la telecamera e interferiranno. Disattiva uno dei due.",  -- 109
         "La telecamera segue il terreno",  -- 110
         "la tua impostazione",  -- 111
+        "Avanzate: modifica i profili integrati",  -- 112
+        "Ripristina l'originale",  -- 113
+        "(modificato)",  -- 114
+        "Tutto ciò che non è elencato usa il valore predefinito del gioco.",  -- 115
     },
     koKR = {
         "탈것 이용 중",  -- 1
@@ -761,6 +789,10 @@ local TRANSLATIONS = {
         "%s도 로드되어 있습니다. 둘 다 카메라를 바꾸므로 서로 충돌합니다. 하나를 비활성화하세요.",  -- 109
         "카메라가 지형을 따라감",  -- 110
         "내 설정",  -- 111
+        "고급: 기본 제공 프로필 편집",  -- 112
+        "원래대로 되돌리기",  -- 113
+        "(편집됨)",  -- 114
+        "나열되지 않은 모든 항목은 게임 기본값을 사용합니다.",  -- 115
     },
     ptBR = {
         "Em um veículo",  -- 1
@@ -874,6 +906,10 @@ local TRANSLATIONS = {
         "%s também está carregado. Os dois alteram a câmera e vão conflitar. Desative um deles.",  -- 109
         "A câmera segue o terreno",  -- 110
         "sua configuração",  -- 111
+        "Avançado: editar os perfis integrados",  -- 112
+        "Restaurar o original",  -- 113
+        "(editado)",  -- 114
+        "Tudo que não está listado usa o padrão do jogo.",  -- 115
     },
     ruRU = {
         "В транспорте",  -- 1
@@ -987,6 +1023,10 @@ local TRANSLATIONS = {
         "%s тоже загружен. Оба меняют камеру и будут мешать друг другу. Отключите один из них.",  -- 109
         "Камера следует за рельефом",  -- 110
         "ваша настройка",  -- 111
+        "Дополнительно: изменять встроенные профили",  -- 112
+        "Вернуть исходный",  -- 113
+        "(изменён)",  -- 114
+        "Все, что не указано, использует значения игры по умолчанию.",  -- 115
     },
     zhCN = {
         "载具中",  -- 1
@@ -1100,6 +1140,10 @@ local TRANSLATIONS = {
         "%s 也已加载。两者都会修改镜头，会互相冲突。请禁用其中一个。",  -- 109
         "镜头跟随地形",  -- 110
         "你的设置",  -- 111
+        "高级：编辑内置配置",  -- 112
+        "恢复原始设置",  -- 113
+        "（已编辑）",  -- 114
+        "未列出的所有设置均使用游戏默认值。",  -- 115
     },
     zhTW = {
         "載具中",  -- 1
@@ -1213,6 +1257,10 @@ local TRANSLATIONS = {
         "%s 也已載入。兩者都會修改鏡頭，會互相衝突。請停用其中一個。",  -- 109
         "鏡頭跟隨地形",  -- 110
         "你的設定",  -- 111
+        "進階：編輯內建設定檔",  -- 112
+        "還原為原始設定",  -- 113
+        "（已編輯）",  -- 114
+        "未列出的所有設定皆使用遊戲預設值。",  -- 115
     },
 }
 TRANSLATIONS.esMX = TRANSLATIONS.esES      -- Latin American Spanish uses the same text

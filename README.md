@@ -36,11 +36,13 @@ Options: **Options > AddOns > ControllerCam** (a page with the situations, and a
 | **Flying** | Far camera that follows your climb and dive. |
 | **Town stroll** | Relaxed, slower camera for cities. |
 
-Built-in profiles are read-only. Make a copy (`/ccam copy action "My Action"` or the *Make a copy* button) and change that.
+Built-in profiles are locked by default. Make a copy (`/ccam copy action "My Action"` or the *Make a copy* button) and change that, or tick **Advanced: edit built-in profiles** on the Profiles page (`/ccam advanced on`) to change the built-in ones directly. An edited built-in profile is marked *(edited)*, and *Reset to original* (`/ccam reset <profile>`) brings the original back.
 
 The camera following the terrain (`cameraTerrainTilt`) is off in every built-in profile except Classic. A profile that does not mention it leaves **your own setting** alone and puts it back if another profile changed it; set it per profile in the Profiles page or with `/ccam edit <profile> followTerrain on|off|default` (for this setting, `default` means your own).
 
 A profile lists only what it wants different. **Everything it does not mention goes back to the game's default**, so switching profiles never leaves settings behind. (Camera distance is the exception: a profile without a distance leaves your zoom alone.)
+
+Every profile has a description: hover a profile button in the options (it also lists every setting the profile changes), or type `/ccam describe <profile>`.
 
 ## Situations
 
@@ -84,7 +86,8 @@ Head tracking (the camera moves a little with your character's head and body) is
 
 ```
 /ccam                                  status
-/ccam list                             the profiles
+/ccam list                             the profiles, with descriptions
+/ccam describe <profile>               what a profile feels like and every setting it changes
 /ccam use <profile>                    one profile everywhere
 /ccam starter                          the recommended setup
 /ccam set <situation> <profile|none>   vehicle, flying, swimming, mounted, combat, raid, dungeon, city, default
@@ -93,6 +96,8 @@ Head tracking (the camera moves a little with your character's head and body) is
 /ccam copy <profile> [new name]
 /ccam edit <profile> <setting> <value|default>     /ccam settings lists the settings
 /ccam curve <profile> <zoom:offset ...>
+/ccam advanced [on|off]               allow editing the built-in profiles
+/ccam reset <profile>                  put an edited built-in profile back to its original
 /ccam delete <profile>
 /ccam export <profile> | import <string>
 /ccam flip | delay <s>

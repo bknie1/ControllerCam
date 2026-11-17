@@ -73,7 +73,9 @@ end
 local function List()
     local db = ns.GetDB()
     for _, id in ipairs(ns.ProfileIds()) do
-        local tag = ns.IsBuiltin(id) and "" or (" |cff999999(" .. L["custom"] .. ")|r")
+        local tag = ""
+        if not ns.IsBuiltin(id) then tag = " |cff999999(" .. L["custom"] .. ")|r"
+        elseif ns.IsEdited(id) then tag = " |cff999999" .. L["(edited)"] .. "|r" end
         print(("  |cffffd100%s|r%s - %s"):format(ns.ProfileName(id), tag, ns.ProfileDescription(id)))
     end
 end
@@ -87,6 +89,7 @@ end
 local HELP = {
     { "/ccam",                              "show status" },
     { "/ccam list",                         "list the profiles" },
+    { "/ccam describe <profile>",           "what a profile feels like and every setting it changes" },
     { "/ccam use <profile>",                "use one profile everywhere (try: action, hybrid, classic)" },
     { "/ccam starter",                      "the recommended setup: Action camera with calmer profiles for cities, mounts, flying, raids" },
     { "/ccam set <situation> <profile|none>", "choose the profile for one situation (vehicle, flying, swimming, mounted, combat, raid, dungeon, city, default)" },
@@ -96,6 +99,8 @@ local HELP = {
     { "/ccam copy <profile> [new name]",    "make an editable copy of a profile" },
     { "/ccam edit <profile> <setting> <value|default>", "change a setting of a custom profile (/ccam settings lists them)" },
     { "/ccam curve <profile> <zoom:offset ...>", "shoulder offset by camera distance, e.g. /ccam curve mine 0:2 8:2 20:0" },
+    { "/ccam advanced [on|off]",            "allow editing the built-in profiles too (/ccam reset <profile> brings the original back)" },
+    { "/ccam reset <profile>",              "put an edited built-in profile back to its original settings" },
     { "/ccam delete <profile>",              "delete a custom profile" },
     { "/ccam export <profile>",             "show a string you can share" },
     { "/ccam import <string>",              "add a profile from a shared string" },
@@ -120,7 +125,7 @@ local function ShowText(title, text)
 end
 
 local function reason(why)
-    if why == "builtin" then return L["Built-in profiles cannot be edited. Make a copy first: /ccam copy <profile>"] end
+    if why == "builtin" then return L["Built-in profiles are locked. Turn on advanced editing (/ccam advanced on) or make a copy: /ccam copy <profile>"] end
     if why == "unknown" then return L["Unknown setting. /ccam settings lists them."] end
     if why == "range" then return L["That value is outside the allowed range."] end
     return L["That value is not valid."]
@@ -148,6 +153,15 @@ local function Command(msg)
     elseif cmd == "help" or cmd == "?" then Help()
     elseif cmd == "list" then List()
     elseif cmd == "settings" then Settings_()
+    elseif cmd == "describe" or cmd == "show" then
+        local id = profileOrSay(rest)
+        if id then
+            local name, desc, rows = ns.DescribeProfile(id)
+            print(("|cffffd100%s|r%s"):format(name, ns.IsEdited(id) and (" " .. L["(edited)"]) or ""))
+            print("  " .. desc)
+            for _, row in ipairs(rows) do print(("  %s: |cffffffff%s|r"):format(row[1], row[2])) end
+            print("  |cff999999" .. L["Everything not listed uses the game default."] .. "|r")
+        end
     elseif cmd == "on" then ns.SetEnabled(true); say(L["enabled"])
     elseif cmd == "off" then ns.SetEnabled(false); say(L["disabled. Your original camera settings were restored."])
     elseif cmd == "use" then
@@ -208,10 +222,21 @@ local function Command(msg)
         end
         local ok, why = ns.SetValue(id, "shoulderCurve", points)
         say(ok and L["Done."] or reason(why == "curve" and "type" or why))
+    elseif cmd == "advanced" then
+        local arg = (args[1] or ""):lower()
+        if arg == "on" then ns.SetAdvanced(true) elseif arg == "off" then ns.SetAdvanced(false)
+        elseif arg == "" then ns.SetAdvanced(not db.advanced) else say(L["usage: /ccam advanced [on|off]"]); return end
+        say((L["Advanced editing is %s."]):format(onoff(db.advanced)))
+    elseif cmd == "reset" then
+        local id = profileOrSay(rest)
+        if id then
+            if ns.ResetBuiltin(id) then say((L["'%s' is back to its original settings."]):format(ns.ProfileName(id)))
+            else say((L["Nothing to reset: '%s' has not been edited."]):format(ns.ProfileName(id))) end
+        end
     elseif cmd == "delete" then
         local id = profileOrSay(rest)
         if id then
-            if ns.IsBuiltin(id) then say(reason("builtin")) else
+            if ns.IsBuiltin(id) then say(L["Built-in profiles cannot be deleted."]) else
                 local name = ns.ProfileName(id)
                 ns.DeleteProfile(id); say((L["Deleted '%s'."]):format(name))
             end
