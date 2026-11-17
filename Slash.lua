@@ -102,6 +102,7 @@ local HELP = {
     { "/ccam flip",                         "switch the shoulder offset to the other shoulder" },
     { "/ccam delay <seconds>",              "how long a situation is kept after it ends (default 1.5)" },
     { "/ccam on | off",                     "turn on, or turn off and restore your original camera settings" },
+    { "/ccam info",                         "show the zoom, shoulder offset and motion settings right now (for troubleshooting)" },
     { "/ccam config",                       "open the options panel (Options > AddOns > ControllerCam)" },
     { "/ccam help",                         "show this list" },
 }
@@ -229,6 +230,18 @@ local function Command(msg)
         else say(L["usage: /ccam delay <seconds>"]) end
     elseif cmd == "config" or cmd == "options" then
         if ns.OpenOptions then ns.OpenOptions() else say(L["options panel is not available in this client"]) end
+    elseif cmd == "info" then
+        local st = ns.Status()
+        local zoom = tonumber(GetCameraZoom and GetCameraZoom())
+        local p = st.id and ns.GetProfile(st.id)
+        local curveValue
+        if p and p.values.shoulderCurve and zoom then curveValue = ns.EvalCurve(p.values.shoulderCurve, zoom) end
+        say(("profile %s  |  situation %s  |  Gamepad UI %s"):format(tostring(st.profile), tostring(st.sit), tostring(ns.IsGamepadUI())))
+        say(("zoom %s  |  curve says %s  |  test_cameraOverShoulder = %s"):format(
+            zoom and ns.FormatNumber(zoom) or "?", curveValue and ns.FormatNumber(curveValue) or "-", tostring(GetCVar("test_cameraOverShoulder"))))
+        say(("CameraKeepCharacterCentered = %s  |  CameraReduceUnexpectedMovement = %s  |  head tracking strength = %s"):format(
+            tostring(GetCVar("CameraKeepCharacterCentered")), tostring(GetCVar("CameraReduceUnexpectedMovement")),
+            tostring(GetCVar("test_cameraHeadMovementStrength"))))
     elseif cmd == "debug" then
         ns.SetDebug(not ns.IsDebug()); say("debug " .. onoff(ns.IsDebug()))
     else

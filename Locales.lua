@@ -147,50 +147,51 @@ local ENGLISH = {
     "switch the shoulder offset to the other shoulder",  -- 136
     "how long a situation is kept after it ends (default 1.5)",  -- 137
     "turn on, or turn off and restore your original camera settings",  -- 138
-    "open the options panel (Options > AddOns > ControllerCam)",  -- 139
-    "show this list",  -- 140
-    "'%s' matches more than one profile. Type more of the name.",  -- 141
-    "No profile called '%s'. /ccam list shows them.",  -- 142
-    "Camera profiles for controller play. Out of the box you get an Action camera; Hybrid and Classic are one command away.",  -- 143
-    "Built-in profiles cannot be edited. Make a copy first: /ccam copy <profile>",  -- 144
-    "Unknown setting. /ccam settings lists them.",  -- 145
-    "That value is outside the allowed range.",  -- 146
-    "That value is not valid.",  -- 147
-    "Unknown situation. Use: vehicle, flying, swimming, mounted, combat, raid, dungeon, city or default.",  -- 148
-    "usage: /ccam set <situation> <profile|none>",  -- 149
-    "%s: no change",  -- 150
-    "Forcing '%s'. /ccam auto goes back to the situations.",  -- 151
-    "The camera follows your situations again.",  -- 152
-    "usage: /ccam edit <profile> <setting> <value|default>",  -- 153
-    "Use /ccam curve for the offset by zoom.",  -- 154
-    "Shoulder offset mirrored.",  -- 155
-    "Shoulder offset back to normal.",  -- 156
-    "Situations are kept for %.1f seconds after they end.",  -- 157
-    "usage: /ccam delay <seconds>",  -- 158
-    "options panel is not available in this client",  -- 159
-    "unknown command '%s'. Type /ccam help",  -- 160
-    "Press Ctrl+C to copy, then Esc.",  -- 161
-    "Paste a ControllerCam string here (Ctrl+V), then press Import.",  -- 162
-    "Camera profiles for controller play. Pick what the camera feels like in each situation. Left-click a profile to go to the next one, right-click for the previous one.",  -- 163
-    "Turn the camera control on or off. When off, your original camera settings are put back.",  -- 164
-    "Close third-person camera over your shoulder, head tracking. The default.",  -- 165
-    "Between Classic and Action.",  -- 166
-    "The game's own camera.",  -- 167
-    "Action camera with calmer profiles for cities, mounts, flying and raids.",  -- 168
-    "Left-click: next profile. Right-click: previous profile. The first entry, no change, leaves the camera alone.",  -- 169
-    "Stops the camera from flickering between profiles when a situation switches on and off quickly.",  -- 170
-    "Swaps which shoulder the camera looks over.",  -- 171
-    "Left-click: next profile. Right-click: previous profile.",  -- 172
-    "Use this profile in every situation.",  -- 173
-    "Makes an editable copy of this profile.",  -- 174
-    "Saves the camera settings you have right now as a new profile.",  -- 175
-    "Shows a string you can share.",  -- 176
-    "Add a profile from a shared string.",  -- 177
-    "Deletes this custom profile.",  -- 178
-    "Zoom distance and offset pairs, for example 0:2 8:2 20:0. Empty = no curve. Press Enter to apply.",  -- 179
-    "Use the game's default for this setting.",  -- 180
-    "Settings not listed use the game default. Click a value to change it; the curve box takes zoom:offset pairs.",  -- 181
-    "Built-in profiles cannot be edited. Make a copy first.",  -- 182
+    "show the zoom, shoulder offset and motion settings right now (for troubleshooting)",  -- 139
+    "open the options panel (Options > AddOns > ControllerCam)",  -- 140
+    "show this list",  -- 141
+    "'%s' matches more than one profile. Type more of the name.",  -- 142
+    "No profile called '%s'. /ccam list shows them.",  -- 143
+    "Camera profiles for controller play. Out of the box you get an Action camera; Hybrid and Classic are one command away.",  -- 144
+    "Built-in profiles cannot be edited. Make a copy first: /ccam copy <profile>",  -- 145
+    "Unknown setting. /ccam settings lists them.",  -- 146
+    "That value is outside the allowed range.",  -- 147
+    "That value is not valid.",  -- 148
+    "Unknown situation. Use: vehicle, flying, swimming, mounted, combat, raid, dungeon, city or default.",  -- 149
+    "usage: /ccam set <situation> <profile|none>",  -- 150
+    "%s: no change",  -- 151
+    "Forcing '%s'. /ccam auto goes back to the situations.",  -- 152
+    "The camera follows your situations again.",  -- 153
+    "usage: /ccam edit <profile> <setting> <value|default>",  -- 154
+    "Use /ccam curve for the offset by zoom.",  -- 155
+    "Shoulder offset mirrored.",  -- 156
+    "Shoulder offset back to normal.",  -- 157
+    "Situations are kept for %.1f seconds after they end.",  -- 158
+    "usage: /ccam delay <seconds>",  -- 159
+    "options panel is not available in this client",  -- 160
+    "unknown command '%s'. Type /ccam help",  -- 161
+    "Press Ctrl+C to copy, then Esc.",  -- 162
+    "Paste a ControllerCam string here (Ctrl+V), then press Import.",  -- 163
+    "Camera profiles for controller play. Pick what the camera feels like in each situation. Left-click a profile to go to the next one, right-click for the previous one.",  -- 164
+    "Turn the camera control on or off. When off, your original camera settings are put back.",  -- 165
+    "Close third-person camera over your shoulder, head tracking. The default.",  -- 166
+    "Between Classic and Action.",  -- 167
+    "The game's own camera.",  -- 168
+    "Action camera with calmer profiles for cities, mounts, flying and raids.",  -- 169
+    "Left-click: next profile. Right-click: previous profile. The first entry, no change, leaves the camera alone.",  -- 170
+    "Stops the camera from flickering between profiles when a situation switches on and off quickly.",  -- 171
+    "Swaps which shoulder the camera looks over.",  -- 172
+    "Left-click: next profile. Right-click: previous profile.",  -- 173
+    "Use this profile in every situation.",  -- 174
+    "Makes an editable copy of this profile.",  -- 175
+    "Saves the camera settings you have right now as a new profile.",  -- 176
+    "Shows a string you can share.",  -- 177
+    "Add a profile from a shared string.",  -- 178
+    "Deletes this custom profile.",  -- 179
+    "Zoom distance and offset pairs, for example 0:2 8:2 20:0. Empty = no curve. Press Enter to apply.",  -- 180
+    "Use the game's default for this setting.",  -- 181
+    "Settings not listed use the game default. Click a value to change it; the curve box takes zoom:offset pairs.",  -- 182
+    "Built-in profiles cannot be edited. Make a copy first.",  -- 183
 }
 
 local TRANSLATIONS = {

@@ -8,8 +8,9 @@
 local ADDON, ns = ...
 local L = ns.L
 
--- Over-the-shoulder offset by camera distance: +2 up close, fading to 0 as you zoom out.
-local ACTION_CURVE = { { 0, 2 }, { 8, 2 }, { 20, 0 } }
+-- Over-the-shoulder offset by camera distance: a little more (+2.5) when fully zoomed in, +2 up to 8 yards,
+-- fading to 0 as you zoom out.
+local ACTION_CURVE = { { 0, 2.5 }, { 3, 2.5 }, { 4, 2 }, { 8, 2 }, { 20, 0 } }
 
 -- id, English name, English description, values. Listed in the order shown in menus.
 local BUILTIN = {

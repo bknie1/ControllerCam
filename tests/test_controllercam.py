@@ -471,7 +471,7 @@ class Applying(unittest.TestCase):
     def test_shoulder_offset_follows_the_zoom_curve(self):
         env = Env()
         frame = env.ns.frame
-        for zoom, expect in [(7, "2"), (8, "2"), (14, "1"), (20, "0"), (30, "0"), (3, "2")]:
+        for zoom, expect in [(7, "2"), (8, "2"), (14, "1"), (20, "0"), (30, "0"), (3.5, "2.25"), (3, "2.5"), (0, "2.5")]:
             env.state(zoom=zoom)
             frame.scripts.OnUpdate(frame, 0.2)
             self.assertEqual(env.cv("test_cameraOverShoulder"), expect, zoom)
@@ -774,6 +774,12 @@ class SlashCommands(unittest.TestCase):
         self.assertIsNotNone(self.env.ns.FindProfile("Hybrid (2)"))
         self.assertIn("checksum", self.said("import " + s[:-3]))
         self.assertIn("Nothing to import", self.said("import"))
+
+    def test_info_command(self):
+        text = self.said("info")
+        self.assertIn("zoom 7", text)
+        self.assertIn("test_cameraOverShoulder = 2", text)
+        self.assertIn("CameraKeepCharacterCentered = 0", text)
 
     def test_other_commands(self):
         self.said("flip"); self.assertTrue(self.env.db().flipShoulder)
