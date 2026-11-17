@@ -1,0 +1,12 @@
+package-as: ControllerCam
+
+manual-changelog:
+  filename: CHANGELOG.md
+  markup-type: markdown
+
+ignore:
+  - .github
+  - .gitignore
+  - .gitattributes
+  - tests
+  - "*.zip"

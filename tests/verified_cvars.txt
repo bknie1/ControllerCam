@@ -1,0 +1,32 @@
+# CVars ControllerCam reads or writes. Each name was found in the strings of the Forever client (Wow.exe, 2026-11-17).
+# tests/test_controllercam.py checks the schema only uses names from this list, and, when the client is installed,
+# that every name is really in the client.
+CameraFollowGamepadAdjustDelay
+CameraFollowOnStick
+CameraFollowPitchSpeed
+CameraFollowYawSpeed
+CameraKeepCharacterCentered
+CameraReduceUnexpectedMovement
+GamePadCameraPitchSpeed
+GamePadCameraYawSpeed
+GamePadFaceMovementFreeFlying
+GamePadFaceMovementMaxAngle
+GamePadFaceMovementMaxAngleCombat
+GamePadFaceMovementMount
+GamePadFaceMovementSwimming
+GamePadTurnWithCamera
+GamepadCameraFollowOnStick
+cameraDistanceMaxZoomFactor
+cameraSmoothStyle
+test_cameraDynamicPitch
+test_cameraHeadMovementMovingStrength
+test_cameraHeadMovementRangeScale
+test_cameraHeadMovementStandingStrength
+test_cameraHeadMovementStrength
+test_cameraOverShoulder
+test_cameraTargetFocusEnemyEnable
+test_cameraTargetFocusEnemyStrengthPitch
+test_cameraTargetFocusEnemyStrengthYaw
+test_cameraTargetFocusInteractEnable
+test_cameraTargetFocusInteractStrengthPitch
+test_cameraTargetFocusInteractStrengthYaw

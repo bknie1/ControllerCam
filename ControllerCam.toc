@@ -1,0 +1,27 @@
+## Interface: 16001
+## Title: ControllerCam
+## Notes: Camera profiles for controller play. An Action camera out of the box, with Hybrid, Classic and more, chosen per situation (mounted, combat, raid, city and so on). Share profiles with import/export.
+## Notes-deDE: Kameraprofile für das Spielen mit Controller. Out of the Box eine Action-Kamera, dazu Hybrid, Klassisch und mehr – pro Situation wählbar (Reittier, Kampf, Schlachtzug, Stadt usw.). Profile per Import/Export teilen.
+## Notes-esES: Perfiles de cámara para jugar con mando. Una cámara de Acción lista para usar, con Híbrido, Clásico y más, elegibles por situación (montado, combate, banda, ciudad, etc.). Comparte perfiles con importar/exportar.
+## Notes-esMX: Perfiles de cámara para jugar con mando. Una cámara de Acción lista para usar, con Híbrido, Clásico y más, elegibles por situación (montado, combate, banda, ciudad, etc.). Comparte perfiles con importar/exportar.
+## Notes-frFR: Profils de caméra pour jouer à la manette. Une caméra Action prête à l'emploi, avec Hybride, Classique et d'autres, au choix selon la situation (monture, combat, raid, ville, etc.). Partagez vos profils par import/export.
+## Notes-itIT: Profili della telecamera per giocare con il controller. Una telecamera Azione pronta all'uso, con Ibrido, Classico e altri, scelti per situazione (in sella, combattimento, raid, città, ecc.). Condividi i profili con importa/esporta.
+## Notes-koKR: 컨트롤러 플레이를 위한 카메라 프로필. 설치 즉시 액션 카메라를 사용하며, 하이브리드, 클래식 등을 상황(탈것, 전투, 공격대, 도시 등)별로 선택할 수 있습니다. 가져오기/내보내기로 프로필을 공유하세요.
+## Notes-ptBR: Perfis de câmera para jogar com controle. Uma câmera de Ação pronta para usar, com Híbrido, Clássico e mais, escolhidos por situação (montado, combate, raide, cidade etc.). Compartilhe perfis com importar/exportar.
+## Notes-ruRU: Профили камеры для игры с геймпадом. Сразу после установки — камера «Экшен», а также «Гибрид», «Классика» и другие профили на выбор для каждой ситуации (верхом, бой, рейд, город и т. д.). Делитесь профилями через импорт и экспорт.
+## Notes-zhCN: 手柄玩家的镜头配置。开箱即用的动作镜头，另有混合、经典等配置，可按情境（骑乘、战斗、团队副本、城市等）选择。支持导入/导出分享配置。
+## Notes-zhTW: 手把玩家的鏡頭設定檔。開箱即用的動作鏡頭，另有混合、經典等設定檔，可依情境（騎乘、戰鬥、團隊副本、城市等）選擇。支援匯入/匯出分享設定檔。
+## Author: bknie1
+## Version: 1.0.0
+## IconTexture: Interface\Icons\inv_misc_spyglass_03
+## X-Website: https://github.com/bknie1/ControllerCam
+## X-License: MIT
+## SavedVariables: ControllerCamDB
+
+Locales.lua
+Schema.lua
+Presets.lua
+Share.lua
+Core.lua
+Slash.lua
+Options.lua
