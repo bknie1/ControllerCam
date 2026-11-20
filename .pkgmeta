@@ -1,5 +1,8 @@
 package-as: ControllerCam
 
+move-folders:
+  ControllerCam/ControllerCam_HUD: ControllerCam_HUD
+
 manual-changelog:
   filename: CHANGELOG.md
   markup-type: markdown
@@ -10,4 +13,5 @@ ignore:
   - .gitattributes
   - tests
   - docs
+  - ControllerCam_Gather
   - "*.zip"

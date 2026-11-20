@@ -9,7 +9,8 @@
 local ADDON, ns = ...
 local L = ns.L
 
-local SITUATIONS = { "vehicle", "flying", "swimming", "mounted", "combat", "raid", "dungeon", "city", "default" }
+local SITUATIONS = { "vehicle", "flying", "swimming", "mounted", "combat", "fishing", "raid", "dungeon", "indoors",
+                     "city", "default" }
 ns.SITUATIONS = SITUATIONS    -- highest priority first
 
 ns.SITUATION_LABEL = {
@@ -18,8 +19,10 @@ ns.SITUATION_LABEL = {
     swimming = L["Swimming"],
     mounted  = L["Mounted"],
     combat   = L["In combat"],
+    fishing  = L["Fishing"],
     raid     = L["In a raid"],
     dungeon  = L["In a dungeon"],
+    indoors  = L["Indoors"],
     city     = L["In a city or inn"],
     default  = L["Everywhere else (default)"],
 }
@@ -251,6 +254,62 @@ function ns.ExportById(id)
     return ns.ExportProfile({ name = ns.ProfileName(id), values = p.values })
 end
 
+-- The whole setup as one string (the format is in Share.lua), and back. Importing replaces which profile each
+-- situation uses; an own profile whose name you already have is replaced, the others are added.
+function ns.ExportSetup()
+    local setup = { assign = {}, exitDelay = db.exitDelay, flipShoulder = db.flipShoulder, advanced = db.advanced,
+                    formOffset = db.formOffset, profiles = {}, overrides = db.overrides }
+    local ids, index = {}, {}
+    for id in pairs(db.profiles) do ids[#ids + 1] = id end
+    table.sort(ids)
+    for i, id in ipairs(ids) do
+        setup.profiles[i] = db.profiles[id]
+        index[id] = i
+    end
+    local function ref(id) return id and (index[id] or (ns.BUILTIN[id] and id)) or nil end
+    for sit, id in pairs(db.assign) do setup.assign[sit] = ref(id) end
+    setup.force = ref(db.force)
+    return ns.FormatSetup(setup)
+end
+
+function ns.ImportSetup(str)
+    local setup, err = ns.ParseSetup(str)
+    if not setup then return nil, err end
+    local ids = {}
+    for i, p in ipairs(setup.profiles) do
+        local low, found = p.name:lower(), nil
+        for id, mine in pairs(db.profiles) do
+            if mine.name:lower() == low then found = id end
+        end
+        if found then
+            local clean = ns.ValidateProfile({ name = db.profiles[found].name, values = copy(p.values) })
+            if clean then db.profiles[found] = clean end
+        else
+            found = ns.CreateProfile(p.name, p.values)
+        end
+        ids[i] = found
+    end
+    local function id(r)
+        if type(r) == "number" then return ids[r] end
+        return r
+    end
+    db.assign = {}
+    for sit, r in pairs(setup.assign) do db.assign[sit] = id(r) end
+    db.force = id(setup.force)
+    if setup.exitDelay then db.exitDelay = setup.exitDelay end
+    if setup.flipShoulder ~= nil then db.flipShoulder = setup.flipShoulder end
+    if setup.advanced ~= nil then db.advanced = setup.advanced end
+    db.formOffset = copy(setup.formOffset)
+    db.overrides = copy(setup.overrides)
+    ns.Evaluate(true)
+    return true
+end
+
+-- For the HUD (a second, optional addon), whose one line of settings carries the camera's setup too
+ControllerCam = ControllerCam or {}
+function ControllerCam.ExportSetup() return ns.ExportSetup() end
+function ControllerCam.ImportSetup(str) return ns.ImportSetup(str) end
+
 -- Make a custom profile from the camera settings you have right now.
 function ns.CaptureCurrent(name)
     local values = {}
@@ -285,14 +344,46 @@ local function InstanceType()
     if inInstance then return t end
 end
 
+-- Fishing: your line is out, and the moments between casts while the pole stays in your hands, so the view
+-- holds through a spell of fishing instead of swinging back after every catch. Only carrying a pole changes
+-- nothing; putting it away ends it.
+local FISHING_LINGER = 12
+local fishedAt
+local FISHING_SPELLS = { [7620] = true, [7731] = true, [7732] = true, [18248] = true, [33095] = true, [51294] = true,
+                         [88868] = true, [110410] = true, [131474] = true, [158743] = true }
+
+local function HasPole()
+    local id = G("GetInventoryItemID", "player", 16)
+    local instant = (C_Item and C_Item.GetItemInfoInstant) or GetItemInfoInstant
+    if id and instant then
+        local _, _, _, _, _, classID, subClassID = instant(id)
+        if classID == 2 and subClassID == 20 then return true end
+    end
+    return false
+end
+
+local function IsFishing()
+    local _, _, _, _, _, _, _, spellID = G("UnitChannelInfo", "player")
+    local now = GetTime()
+    if type(spellID) == "number" and FISHING_SPELLS[spellID] then
+        fishedAt = now
+        return true
+    end
+    if fishedAt and now - fishedAt < FISHING_LINGER and HasPole() then return true end
+    fishedAt = nil
+    return false
+end
+
 local MATCH = {
     vehicle  = function() return G("UnitInVehicle", "player") or G("UnitHasVehicleUI", "player") end,
     flying   = function() return G("IsFlying") end,
     swimming = function() return G("IsSwimming") end,
     mounted  = function() return G("IsMounted") end,
     combat   = function() return G("UnitAffectingCombat", "player") or G("InCombatLockdown") end,
+    fishing  = IsFishing,
     raid     = function() return InstanceType() == "raid" end,
     dungeon  = function() local t = InstanceType(); return t == "party" or t == "scenario" end,
+    indoors  = function() return G("IsIndoors") end,
     city     = function() return G("IsResting") and not InstanceType() end,
     default  = function() return true end,
 }
@@ -363,6 +454,25 @@ local function SetZoom(target, desired)
     if diff > 0 then G("CameraZoomOut", diff) else G("CameraZoomIn", -diff) end
 end
 
+-- Shapeshift forms: the game scales the shoulder offset with the size of the model you are in, so a form
+-- (cat, bear, ghost wolf...) moves the camera further to the side. In a form the offset is scaled back by a
+-- share; /ccam formoffset sets it for the form you are in. (Starting values, by the game's form id.)
+local FORM_SCALE = { [1] = 0.6, [2] = 0.5, [3] = 0.6, [4] = 0.6, [5] = 0.5, [8] = 0.5, [16] = 0.7, [27] = 0.6,
+                     [29] = 0.6, [31] = 0.5 }
+ns.FORM_SCALE = FORM_SCALE
+
+function ns.CurrentForm()
+    local id = G("GetShapeshiftFormID")
+    if type(id) ~= "number" or id == 0 then return nil end
+    return id
+end
+
+function ns.ShoulderScale()
+    local id = ns.CurrentForm()
+    if not id then return 1 end
+    return (db and db.formOffset[id]) or FORM_SCALE[id] or 1
+end
+
 -- Compute what a profile wants: { cvar = "value" }, zoom, curve, whether it uses ActionCam features.
 local function Resolve(profile, withZoom)
     local values = profile.values
@@ -378,7 +488,7 @@ local function Resolve(profile, withZoom)
         elseif s.kind == "curve" then
             if theCurve then
                 local z = (withZoom and zoom) or tonumber(G("GetCameraZoom")) or zoom or 0
-                local n = ns.EvalCurve(theCurve, z)
+                local n = ns.EvalCurve(theCurve, z) * ns.ShoulderScale()
                 desired.test_cameraOverShoulder = ns.FormatNumber(flip and -n or n)
                 for _, p in ipairs(theCurve) do if p[2] ~= 0 then needsMotion = true end end
             end
@@ -389,6 +499,9 @@ local function Resolve(profile, withZoom)
                     v = db.originals[cvar]          -- your own value (only known once a profile has changed it)
                 else
                     v = ns.ResolveCVar(s, values[s.key], cvar, flip)
+                    if cvar == "test_cameraOverShoulder" and tonumber(v) then
+                        v = ns.FormatNumber(tonumber(v) * ns.ShoulderScale())
+                    end
                 end
                 if v ~= nil then
                     desired[cvar] = v
@@ -490,7 +603,7 @@ function ns.CurveTick()
     if not (db and db.enabled and curve) then return end
     local z = tonumber(G("GetCameraZoom"))
     if not z then return end
-    local v = ns.EvalCurve(curve, z)
+    local v = ns.EvalCurve(curve, z) * ns.ShoulderScale()
     if curveFlip then v = -v end
     if lastCurveValue and math.abs(v - lastCurveValue) < 0.02 then return end
     local ok, res = pcall(SetCVar, "test_cameraOverShoulder", ns.FormatNumber(v))
@@ -500,6 +613,16 @@ end
 ---------------------------------------------------------------------------
 -- Settings changes made by the options panel and the slash commands
 ---------------------------------------------------------------------------
+-- Your share of the shoulder offset for the form you are in (nil puts the starting value back)
+function ns.SetFormOffset(share)
+    local id = ns.CurrentForm()
+    if not id then return nil end
+    db.formOffset[id] = share
+    lastCurveValue = nil
+    ns.Evaluate(true)
+    return id
+end
+
 function ns.Assign(sit, id)
     if not ns.SITUATION_LABEL[sit] then return false end
     if id ~= nil and not ns.GetProfile(id) then return false end
@@ -516,11 +639,18 @@ function ns.Force(id)
 end
 
 -- Use one profile everywhere (clears the per-situation choices).
+-- The HUD (a second, optional addon) may follow: a preset chosen here picks its matching HUD preset
+local function TellHUD(id)
+    local hud = _G.ControllerCamHUD
+    if type(hud) == "table" and type(hud.CameraPreset) == "function" then pcall(hud.CameraPreset, id) end
+end
+
 function ns.UseEverywhere(id)
     if not ns.GetProfile(id) then return false end
     db.assign = { default = id }
     db.force = nil
     ns.Evaluate(true)
+    TellHUD(id)
     return true
 end
 
@@ -528,6 +658,7 @@ function ns.ApplyStarter()
     db.assign = copy(ns.STARTER)
     db.force = nil
     ns.Evaluate(true)
+    TellHUD("action")
 end
 
 function ns.SetEnabled(v)
@@ -583,14 +714,21 @@ local function InitDB()
     if type(old) ~= "table" then old = {} end
 
     local d = {
-        v = 1,
+        v = 2,
         enabled = old.enabled ~= false,
         exitDelay = math.min(math.max(tonumber(old.exitDelay) or DEFAULT_EXIT_DELAY, 0), 10),
         flipShoulder = old.flipShoulder == true,
         welcomed = old.welcomed == true,
         advanced = old.advanced == true,
-        profiles = {}, overrides = {}, assign = {}, originals = {}, motion = {},
+        profiles = {}, overrides = {}, assign = {}, originals = {}, motion = {}, formOffset = {},
     }
+    if type(old.formOffset) == "table" then                      -- your own share per shapeshift form
+        for id, share in pairs(old.formOffset) do
+            if type(id) == "number" and type(share) == "number" and share >= 0 and share <= 2 then
+                d.formOffset[id] = share
+            end
+        end
+    end
     -- Anything in the saved file is checked the same way as an imported string.
     if type(old.profiles) == "table" then
         for id, p in pairs(old.profiles) do
@@ -618,6 +756,9 @@ local function InitDB()
             if id and ns.GetProfile(id) then d.assign[sit] = id end
         end
     end
+    -- before version 2 fishing had no camera of its own until you picked one: it takes the starter's once
+    -- (/ccam set fishing none puts it back to nothing)
+    if not fresh and (tonumber(old.v) or 0) < 2 and d.assign.fishing == nil then d.assign.fishing = ns.STARTER.fishing end
     if type(old.force) == "string" and ns.GetProfile(old.force) then d.force = old.force end
     local known = KnownCVars()
     if type(old.originals) == "table" then
@@ -646,6 +787,7 @@ local EVENTS = {
     "PLAYER_REGEN_DISABLED", "PLAYER_REGEN_ENABLED",
     "PLAYER_MOUNT_DISPLAY_CHANGED", "PLAYER_UPDATE_RESTING", "ZONE_CHANGED_NEW_AREA",
     "UNIT_ENTERED_VEHICLE", "UNIT_EXITED_VEHICLE", "UPDATE_SHAPESHIFT_FORM",
+    "ZONE_CHANGED", "ZONE_CHANGED_INDOORS", "PLAYER_EQUIPMENT_CHANGED",
 }
 for _, e in ipairs(EVENTS) do pcall(f.RegisterEvent, f, e) end    -- a missing event must not break the addon
 
@@ -690,6 +832,9 @@ f:SetScript("OnEvent", function(_, event, arg1)
         ns.Evaluate(retryAfterCombat)
     elseif event == "UNIT_ENTERED_VEHICLE" or event == "UNIT_EXITED_VEHICLE" then
         if arg1 == "player" then ns.Evaluate() end
+    elseif event == "UPDATE_SHAPESHIFT_FORM" then
+        lastCurveValue = nil                     -- the shoulder offset follows the new form at once
+        ns.Evaluate(true)
     else
         ns.Evaluate()
     end

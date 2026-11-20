@@ -16,6 +16,8 @@ local mock = {
     state = {                    -- the player
         mounted = false, flying = false, swimming = false, combat = false, vehicle = false,
         resting = false, instance = nil, zoom = 10, gamepadUI = false,
+        indoors = false, mainHand = nil, channel = nil,     -- mainHand: item id held; channel: spell id being channelled
+        form = 0,                                           -- GetShapeshiftFormID (0: no form)
     },
     opened = nil,                -- the settings category that was opened
     badEvents = {},              -- event names this "client" refuses to register
@@ -178,6 +180,14 @@ function InCombatLockdown() return mock.state.combat end
 function UnitInVehicle() return mock.state.vehicle end
 function UnitHasVehicleUI() return mock.state.vehicle end
 function IsResting() return mock.state.resting end
+function IsIndoors() return mock.state.indoors end
+function GetShapeshiftFormID() return mock.state.form ~= 0 and mock.state.form or nil end
+function GetInventoryItemID(unit, slot) if slot == 16 then return mock.state.mainHand end end
+-- item 6256 is a fishing pole (weapon, sub-class 20); anything else is a sword
+function GetItemInfoInstant(id) return id, "Weapon", "", "", 1, 2, (id == 6256) and 20 or 7 end
+function UnitChannelInfo()
+    if mock.state.channel then return "Channel", "Channel", 1, 0, 1, false, false, mock.state.channel end
+end
 function IsInInstance()
     if mock.state.instance then return true, mock.state.instance end
     return false, "none"
@@ -211,7 +221,9 @@ Settings = {
         return c
     end,
     RegisterCanvasLayoutSubcategory = function(cat, panel, name)
-        mock.subcategory = { panel = panel, name = name }
+        mock.subcategory = { panel = panel, name = name, parent = cat, GetID = function() return 43 end }
+        mock.subcategories = mock.subcategories or {}
+        mock.subcategories[#mock.subcategories + 1] = mock.subcategory
         return mock.subcategory
     end,
     RegisterAddOnCategory = function() end,

@@ -1,0 +1,738 @@
+Fehler:
+an
+aus
+Verwendung:
+Änderungen werden nach dem Kampf übernommen.
+Feuerball
+Befreundeter Magier
+Heilung
+Haustier
+Trainingspuppe
+Befreundeter Heiler
+Spieler
+Vertikale Balken folgen der Kamera
+die vertikalen Balken behalten ihren Platz neben deinem Charakter, während die Kamera ein- und auszoomt (platziere sie im Bearbeitungsmodus in einem Abstand, der dir gefällt)
+Nachnamen
+der volle Name eines Spielers auf den Einheitenfenstern und Namensplaketten, mit Nachnamen: Faith Ashborne
+Gesundheit auf der Zielleiste
+die verbleibende Gesundheit (12.3k) und der Prozentwert auf Ziel- und Fokusleiste; ein kompaktes Ziel zeigt nur den Prozentwert
+Ziel
+Ziel des Ziels
+Fokus
+Vertikale Balken
+%d Gegenstände eingezahlt
+%d Gegenstände für %s verkauft (/cchud sold listet sie auf)
+Nichts zu verkaufen.
+Öffne zuerst die Bank.
+Nichts einzulagern: deine Bank hat nichts von dem, was du trägst, und nichts ist für sie markiert.
+Nichts ist für die Bank markiert. Zeige auf einen Gegenstand und nutze Gegenstand markieren.
+Öffne zuerst einen Händler.
+Plunder verkaufen: %d Gegenstände für %s.\n\nOder Waffen und Rüstung nach Qualität verkaufen.
+Plunder verkaufen
+Nach Qualität
+Waffen und Rüstung bis zu welcher Qualität verkaufen?\n\nGewöhnlich (weiß): %s\nUngewöhnlich (grün): %s
+Gewöhnlich
+Ungewöhnlich
+%d Gegenstände verkaufen?\n\n%s
+Verkaufen
+Schnelles Verschieben funktioniert bei einem Händler (verkaufen), einem Bankier (einzahlen, abheben), im Handel oder am Briefkasten.
+Zeige zuerst auf einen Gegenstand.
+%s: behalten, nie verkauft
+%s: Bank, wird auf Wunsch eingezahlt (nie verkauft)
+%s: keine Markierung
+%s: Plunder, wird mit dem Rest verkauft
+Schnelles Verschieben: Gegenstand, auf den du zeigst, verkaufen, einzahlen, handeln oder verschicken
+Gegenstand markieren: Plunder / behalten / Bank / keine Markierung
+Einlagern: in die Bank, was sie schon hat, und was du für sie markiert hast
+In dieser Sitzung wurde noch nichts verkauft.
+Über den Rückkauf-Reiter eines Händlers kannst du sie bis zum Ausloggen zurückkaufen.
+Für %s aus der Gildenbank repariert
+Nicht genug Gold, um alles zu reparieren (%s).
+Für %s repariert
+Einlagern räumt auch weg, was die Bank schon hat
+Einlagern bringt jeden Gegenstand, von dem deine Bank schon welche hat (Materialien, Tränke...), zusätzlich zu den für die Bank markierten; nie graue Gegenstände, Werkzeuge oder als Schrott oder behalten markierte
+Bei Händlern reparieren
+repariert alles, sobald sich ein Händler mit Reparaturservice öffnet
+Aus der Gildenbank reparieren
+bezahlt Reparaturen aus der Gildenbank, wenn deine Gilde es erlaubt, sonst mit deinem eigenen Gold
+listet auf, was in dieser Sitzung für dich verkauft wurde, um etwas zurückzukaufen
+Tasche
+Bank
+Du
+Die Bank dieses Clients lässt sich von hier nicht sortieren.
+Dieser Client hat keine Taschensortierung.
+Bank sortiert.
+Bank sortiert. Erneut drücken, um deine Taschen zu sortieren.
+Taschen sortiert.
+Taschen sortieren (und die Bank, solange sie offen ist)
+Gold auf diesem Account: %s
+Gegenstandsanzahl in Tooltips
+der Tooltip eines Gegenstands zeigt, wie viele du in Taschen und Bank hast und wie viele deine anderen Charaktere besitzen
+R3 sortiert, solange deine Taschen offen sind
+solange deine Taschen oder die Bank offen sind, sortiert der rechte Stick-Knopf sie (sonst erfüllt er seine übliche Aufgabe)
+R3 verschiebt den Gegenstand, auf den du zeigst (Bank, Händler, Handel, Briefkasten)
+solange eines davon offen ist, verschiebt der rechte Stick-Knopf den Gegenstand, auf den du zeigst: in die Bank oder heraus, verkauft, in den Handel oder in den Brief. Zeigst du auf nichts, sortiert er
+sortiert deine Taschen und die Bank, solange sie offen ist
+listet das Gold jedes deiner Charaktere und die Summe auf
+gerade eben
+vor %d Stunden
+vor %d Tagen
+Händler
+Am besten
+Auktion
+Auktionshaus
+Behalten
+5% unter dem niedrigsten Preis, für einen schnellen Verkauf
+der Markt ist heute ungewöhnlich niedrig: nahe am üblichen Preis angesetzt, um auf Käufer zu warten
+knapp unter dem niedrigsten Preis: wenige im Angebot, sollte sich verkaufen
+etwas unter dem niedrigsten Preis: viele im Angebot
+keine frischen Preise: vom üblichen Preis aus (lies das Auktionshaus für die heutigen)
+über dem gehalten, was ein Händler zahlt
+Auktionshaus gelesen: %d Preise notiert.
+Das Auktionshaus kann in %d Minuten wieder gelesen werden.
+Das Auktionshaus kann gerade nicht auf einmal gelesen werden.
+Dieser Client kann nicht das ganze Auktionshaus lesen.
+Lese das Auktionshaus...
+Händlerpreise in Tooltips
+was ein Gegenstand beim Händler einbringt, einzeln und für einen vollen Stapel
+Auktionspreise in Tooltips
+das niedrigste Sofortkaufangebot, das du für einen Gegenstand im Auktionshaus gesehen hast, und wie lange das her ist
+Auktionshaus beim Besuch lesen
+der erste Besuch nach einer Weile liest alle Preise auf einmal (das Spiel erlaubt es alle 15 Minuten); /cchud scan fragt danach
+Beste Verwendung eines Gegenstands
+der Tooltip eines Gegenstands sagt, was damit zu tun ist: im Auktionshaus verkaufen (und wie viel mehr das bringt), beim Händler verkaufen oder behalten
+Schnellverkäufe im Auktionshaus
+Preis 5% unter dem niedrigsten für einen Verkauf jetzt; aus: geduldige Preise, knapp unter dem niedrigsten, die sich verkaufen, wenn Käufer kommen
+liest alle Preise im Auktionshaus auf einmal (vorher öffnen; alle 15 Minuten)
+AK
+Distanz-AK
+krit.
+Ausweichen
+Gesundheit
+Mana
+Zauberkrit.
+Was Werte dir bringen
+jede Wertezeile im Tooltip eines Gegenstands bekommt ihren Wert für deinen Charakter: Angriffskraft, Distanzangriffskraft, kritische Trefferchance, Ausweichen, Gesundheit, Mana
+Gegenstandsstufe
+Benötigte Stufe
+Stapelt bis
+Gegenstands-ID
+noch nicht gesehen
+keine
+Plunder
+behalten
+Bank
+Deine Markierung
+Gegenstandsdetails: alles über den Gegenstand, auf den du zeigst
+zeigt alles über den Gegenstand, auf den du zeigst (oder den angegebenen): Preise, wer ihn besitzt, deine Markierung
++%s gegenüber einem Händler
+noch kein Preis bekannt
+ein Händler zahlt genauso viel
+Markt
+Einstellen
+Geduldig
+Alle Preise lesen
+In deinen Taschen lässt sich hier nichts verkaufen.
+Noch keine Preisgeschichte: lies das Auktionshaus an ein paar Tagen.
+Niedrigster
+Üblich
+Im Angebot
+Kein Preis bekannt: lies zuerst das Auktionshaus.
+%d lohnen sich hier, %d weitere möglich
+%d Preise bekannt, alle gelesen %s
+nie
+keine Daten
+Schnellverkauf
+Zurück
+%d für %s einstellen
+In das Auktionshaus dieses Clients kann von hier aus nicht eingestellt werden.
+%d für %s eingestellt.
+Markt im Auktionshaus: öffnen / schließen
+Markt-Reiter im Auktionshaus
+ein Markt-Reiter im Auktionshaus: was sich aus deinen Taschen dort zu verkaufen lohnt und warum, daneben ein Preisverlauf, und Einstellen mit einem Druck
+den Markt öffnen oder schließen (ein Reiter des Auktionshauses)
+welches Auktionshaus dieser Client hat (zur Fehlersuche)
+Offline
+Tot
+Gruppen- und Schlachtzugsrahmen
+zeichne unser Aussehen über die Gruppen- und Schlachtzugsrahmen des Spiels (deren Zielauswahl und Optionen funktionieren weiter)
+Zauberleisten-Animationen
+eine Zauberleiste zeigt, was gewirkt wird: Spitzhacken schlagen beim Bergbau darauf ein, Blitze laufen bei Natur daran entlang, eine Ranke blüht bei einer Heilung, Runen nehmen bei Arkan Gestalt an, Flammen, Eis und Schatten bei Feuer, Frost und Schatten
+jede Zauberleisten-Animation einmal auf deiner Zauberleiste zeigen
+Unterbrochen
+Wahrscheinlich:
+Zauber-Aufladung
+deine Zauberleiste leuchtet heller, je voller der Zauber wird, und entlädt sich beim Wirken
+Angelschwimmer
+beim Angeln wippt ein Schwimmer auf deiner Zauberleiste und zeigt, was hier wahrscheinlich anbeißt
+Zauberleiste
+unsere Zauberleiste anstelle der des Spiels (sie bleibt dort, wo der Bearbeitungsmodus die des Spiels platziert)
+Größe der Zauberleiste
+wie groß deine Zauberleiste gezeichnet wird, mit dem Schwimmer beim Angeln und allem anderen, was darauf spielt
+Angeln im Mittelpunkt
+solange du angelst, rückt die Zauberleiste in die Bildschirmmitte und wird größer gezeichnet: Schnur, Schwimmer und was hier beißt sind die Hauptsache
+Wähle zuerst ein Ziel.
+%d Effekte aufgelistet und gespeichert. Tippe /reload, damit das Spiel sie speichert.
+Deine Effekte auf dem Ziel
+eine Reihe deiner eigenen Schwächungs- oder Stärkungszauber unter der Zielleiste
+Gegnerische Buffs am Ziel
+die Stärkungen eines feindlichen Ziels, rechts unter seiner Leiste: die wichtigen, oder alle, wenn Nur die Effekte, die zählen aus ist
+Nur die Effekte, die zählen
+am Ziel und an Namensplaketten: Stärkungen eines Feindes nur, wenn das Spiel sie als wichtig markiert, er wütend ist oder du sie bannen oder stehlen kannst; bei einem Freund die Schwächungen, die du bannen kannst, und die gefährlichen. Aus: jede Stärkung
+Schwächungen an einem freundlichen Ziel
+rechts unter der Leiste eines Freundes: die Schwächungen, die du bannen kannst (in der Farbe ihrer Art umrandet), Bossmechaniken und Kontrolleffekte
+Combopunkte
+Combopunkte als Punkte über dem Namen des Ziels
+listet, was das Spiel über die Effekte deines Ziels sagt (zur Fehlersuche)
+Bedrohung in Prozent
+dein Anteil an der Bedrohung als Zahl neben dem Bedrohungssymbol, am Zielrahmen und an Namensplaketten
+Gesundheitszahl
+die verbleibende Gesundheit, gekürzt (12.3k), auf der Leiste (nicht auf kompakten Plaketten: dort reicht der Prozentwert)
+Deine Debuffs
+deine Debuffs auf der Einheit, über ihrem Namen, mit ihrer Zeit
+Debuffs von allen
+die Debuffs, die das Spiel für Namensplaketten von allen markiert, nicht nur von dir
+Gegnerische Buffs
+die Stärkungen eines Feindes neben seinen Schwächungen: die wichtigen (wichtig, wütend oder von dir bannbar oder stehlbar), oder alle, wenn Nur die Effekte, die zählen aus ist
+Massenkontroll-Symbol
+ein großes Symbol mit Restzeit, wenn die Einheit betäubt, bewegungsunfähig, in Furcht versetzt ist...
+Aggro-Leuchten
+ein Schildsymbol und ein Leuchten hinter dem Namen: rot, solange es dich angreift, rot und gelb, wenn du es gleich ziehst, gelb und blau, wenn du es verlierst, blau, wenn es nicht auf dir ist
+Questmarkierung
+eine goldene Markierung an Einheiten, die deine Quests noch brauchen
+Namensplaketten-Animationen
+Plaketten blenden ein, niedrige Gesundheit atmet, Massenkontrolle schimmert
+Namensplaketten
+unser Aussehen auf den Namensplaketten des Spiels (deren Optionen gelten weiter)
+Spielertitel
+zeigt den Titel eines Spielers neben seinem Namen an
+Gilden und NSC-Berufe
+eine Zeile unter dem Namen: die Gilde des Spielers oder die Tätigkeit des NSC
+Leisten für Freunde im Kampf
+freundliche Namensplaketten zeigen Gesundheit, Ressource und Zauber, solange sich die Einheit im Kampf befindet
+Die eigenen freundlichen Namensplaketten des Spiels
+freundliche Plaketten (deine Gruppe, andere Spieler, freundliche NPCs) im Aussehen des Spiels lassen; unsere nur bei Feinden
+Ressourcenleisten
+eine schmale Mana-, Wut- oder Energieleiste unter der Gesundheitsleiste
+Zauberziel
+wer das Ziel eines Zaubers ist, neben dem Namen des Zaubers
+Gesundheit in Prozent
+der Gesundheitswert in Prozent auf der Leiste
+Name auf der Plakette deines Ziels
+aus: die Plakette deines Ziels zeigt weder Namen noch Stufe (der Zielrahmen zeigt sie)
+Stufen auf Namensplaketten
+die Stufe vor dem Namen eines Gegners, nach Schwierigkeit gefärbt
+Kompakte Namensplaketten
+Namensplaketten etwa halb so breit
+Auffällige Gegnerzauber
+der Zauber eines Gegners blinkt, schwillt an und pulsiert immer schneller, bis er gewirkt wird, damit er rechtzeitig unterbrochen werden kann
+Klassensymbole auf Namensplaketten
+das Klassensymbol eines Spielers vor seinem Namen, ob Freund oder Feind
+Was NPCs tun, als Symbole
+ein Symbol über freundlichen NPCs, die etwas anbieten: eine Tasche über Händlern, ein Amboss über Schmieden, die reparieren, ein Buch über Lehrern... (die eigenen Symbole des Spiels; sie erscheinen auch, solange die Plakette darauf wartet, dass du auf sie zeigst)
+Freundliche NPCs nur beim Zeigen
+die Plaketten freundlicher NPCs (Händler, Questgeber, Stadtbewohner) erscheinen nur, solange du auf sie zeigst, wie ihr Tooltip
+Namen über Dingen, mit denen du interagieren kannst
+ein Name über Erz, Truhen, Tafeln und dergleichen, solange du ihnen zugewandt bist (aus: sie bleiben ohne Namen, die Anzeige des Spiels sagt bereits, was sie sind)
+Mini-Namensplaketten
+Diener, Kleintiere und graue Feinde, die keine Erfahrung geben, bekommen eine kleine Plakette: eine schmale Leiste und den Namen, mehr nicht (ob sie überhaupt Plaketten haben, entscheidet die Spieloption)
+Gruppen-Namensplaketten in Dungeons: nur Namen
+in einem Dungeon oder Schlachtzug zeichnet das Spiel die Namensplaketten freundlicher Spieler selbst, und Addons dürfen sie nicht ändern: dort werden die eigenen Optionen des Spiels so gesetzt, dass sie als klassenfarbige Namen ohne Leisten erscheinen, wie unsere, und im Kampf kommen die Leisten des Spiels zurück (wenn Leisten für Freunde im Kampf an sind); beim Verlassen wird alles zurückgestellt
+Gruppen-Namensplaketten in Dungeons: ausgeblendet
+in einem Dungeon oder Schlachtzug die Namensplaketten des Spiels für freundliche Spieler ganz ausschalten (und beim Verlassen wieder so, wie du sie hattest)
+zeigt, was das Spiel für den Namen deines Ziels liefert (zur Fehlersuche)
+die Namensplaketten auf dem Bildschirm auflisten und ob sie unser Aussehen tragen (zur Fehlersuche)
+Zeige jede Schadensart einmal (die letzte als kritischer Treffer).
+Trefferpartikel
+Heiliges blitzt auf, Feuer steigt empor, Frostkristalle verweilen, Schatten qualmt, arkane Runen funkeln auf dem getroffenen Balken
+Deine Leisten wackeln bei Treffern
+dein Spielerrahmen und deine senkrechten Leisten wackeln leicht, in der Schule des Treffers, wenn du Schaden nimmst
+Treffereffekte nach Schadensart
+deine Treffer lassen die getroffene Leiste aufblitzen und wackeln: Feuer, Frost, Schatten und die übrigen sehen jeweils anders aus
+zeigt den Treffereffekt jeder Schadensart einmal auf deinem Ziel und den Namensplaketten
+Eingehende Heilung in den Farben ihrer Schule
+die Heilung auf dem Weg zu einer Einheit zeigt die Farbe der Heilung, die auf sie gewirkt wird: Heilig golden, Natur grün
+Heilung über Zeit wächst auf der Leiste
+Wurzeln und Zweige (Natur) oder goldene Fäden (Heilig) wachsen über die Leiste deines Ziels, Fokus oder dir, solange eine Heilung über Zeit wirkt, und welken, wenn sie endet
+Schilde als Schutzzeichen zeigen
+ein Schild auf deinem Ziel, deinem Fokus oder dir (Machtwort: Schild, Gottesschild, Eisbarriere...) flammt in der Farbe seiner Schule um die Gesundheitsleiste auf, leuchtet, solange der Schild hält, und verblasst, wenn er bricht
+Stilisierte Zahlen auf dir
+erlittener Schaden und erhaltene Heilung springen auf wie deine eigenen Treffer, statt des scrollenden Texts des Spiels (folgt der Spieloption für Kampftext auf dir)
+Die Vibration des Spiels ist aus (oder dieser Controller kann nicht vibrieren).
+Jedes Vibrationsmuster wird einmal abgespielt.
+Vibrationsstärke
+wie stark unsere Muster sind, zusätzlich zur Vibrationseinstellung des Spiels
+Controller-Vibration
+der Controller vibriert in den Momenten, die sich zu spüren lohnen (die Vibrationsstärke des Spiels geht vor)
+Vibration: erlittene Treffer
+ein Schlag, wenn du getroffen wirst, kräftiger bei einem großen oder kritischen Treffer
+Vibration: deine kritischen Treffer
+ein scharfes Ticken im rechten Auslöser, wenn du einen kritischen Treffer landest
+Vibration: Unterbrechungen
+ein doppeltes Klopfen, wenn der Zauber deines Ziels unterbrochen wird
+Vibration: wenig Gesundheit
+ein Herzschlag, solange du im Kampf wenig Gesundheit hast
+Vibration: Aggro
+ein Puls, wenn sich dein Ziel gegen dich wendet
+Vibration: Warnungen
+eine Bereitschaftsprüfung, eine Dungeon-Einladung oder ein Flüstern
+Vibration: Siegel laden auf
+ein schnell ansteigendes Rumpeln, das im rechten Auslöser einrastet, wenn du ein Siegel anlegst
+Vibration: Zauber bauen sich auf
+während du einen Zauber mit Zauberzeit wirkst, wächst das Rumpeln mit der Zauberleiste und rastet ein, wenn er trifft
+Vibration: Stufenaufstieg und Tod
+ein Anschwellen beim Stufenaufstieg, ein langes tiefes Grollen, wenn du stirbst
+Lichtleiste zeigt deine Gesundheit
+ein Controller mit Lichtleiste (DualSense) zeigt darin deine Gesundheit: von Grün zu Rot, pulsierend bei wenig Gesundheit im Kampf
+jedes Vibrationsmuster einmal abspielen
+Richturteil
+Vibration: deine Schlüsselfähigkeiten
+die Schlüsselfähigkeiten jeder Klasse fühlen sich am Controller eigen an (ein Richturteil spritzt, ein Heiliger Stoß schnappt zu, Windzorn klopft dreimal)
+Große Momente
+selten wird ein wirklich besonderer Treffer groß und golden in der Bildschirmmitte angeheftet: kritische Treffer deiner Schlüsselfähigkeiten kurz nacheinander, ein kritischer Windzorn oder ein kritischer Treffer weit über dem Üblichen des Kampfes (höchstens zweimal pro Kampf)
+zeigt, wie ein großer Moment aussieht und sich anfühlt
+bereit zur Abgabe
+über deiner Stufe
+braucht eine Gruppe
+niedrige Stufe
+Dein Questlog ist leer.
+Als Nächstes empfohlen:
+%d m
+Questliste: nur aktuelles Gebiet
+verfolge nur die Quests des Gebiets, in dem du dich befindest (deine eigene Verfolgung kehrt zurück, wenn dies aus ist)
+Questliste: keine Gruppenquests, wenn allein
+solange du allein unterwegs bist, bleiben Quests für eine Gruppe (Elite, Dungeon, Schlachtzug) aus der Liste; in einer Gruppe sind sie wieder da
+Questliste: nur die nächsten
+höchstens so viele Quests auflisten, die nächstgelegenen (0 listet alle)
+Questliste: nächste zuerst
+die Questliste nach Entfernung ordnen, die nächste Quest ganz oben
+Questliste: empfohlene Reihenfolge
+die Questliste in einer empfohlenen Reihenfolge halten: zuerst, was abgegeben werden kann, dann was du allein schaffst, das Nächste zuerst, dann Quests über deiner Stufe, Gruppenquests, solange du allein bist, und graue Quests zuletzt
+eine empfohlene Reihenfolge für deine Quests nennen: abgeben, was fertig ist, dann das Nächste, das du allein schaffst, dann der Rest
+Nicht im Kampf.
+Dieser Client hat keine Gamepad-Leisten.
+Dieser Client erlaubt Addons keine Änderung; benutze den Bearbeitungsmodus.
+Gamepad-Leisten: %s
+kompakt
+voll
+Schlanke Gamepad-Leisten
+blende die wuchtige Grafik hinter den Gamepad-Aktionsleisten aus und zeichne sie kleiner
+Größe der Gamepad-Leisten
+Größe der Gamepad-Leisten bei aktiven schlanken Leisten, in Prozent
+die Gamepad-Leisten des Spiels im kompakten oder vollen Modus (wie die Einstellung im Bearbeitungsmodus)
+Ausblenden außerhalb des Kampfes
+Gamepad-Leisten, Minikarte, Questliste, Schadensmesser und Erfahrungsleiste ruhen außerhalb des Kampfes gemeinsam und kommen für einen Kampf, einen gezogenen Trigger oder ein feindliches Ziel zurück
+Der Bildschirm in Ruhe
+wie sichtbar die ruhenden Teile des Bildschirms außerhalb des Kampfes bleiben (0 blendet sie aus)
+Ruht: Gamepad-Leisten
+Ruht: Minikarte
+Ruht: Questliste
+Ruht: Schadensmesser
+Ruht: Erfahrungsleiste
+Ruht: Stärkungszauber
+Ruht: Abklingzeit-Reihen
+ob dieser Teil des Bildschirms beim Ausblenden außerhalb des Kampfes mitmacht
+Gespeichert: gib /reload ein, damit das Spiel es auf die Festplatte schreibt.
+Haltungs- und Begleiterknöpfe über den Leisten
+die Knöpfe für Haltungen und Begleiterbefehle sitzen dort, wo die grünen und roten Zielsymbole waren, damit sich ihr Rad ganz im Bild öffnet; diese Symbole werden ausgeblendet
+auflisten, wo die Teile der Gamepad-Leisten sitzen und was ruht (zur Fehlersuche)
+Auto
+Allgemein
+die des Spiels
+Tastensymbole: %s.
+Gerade ist kein Controller in Gebrauch, oder das Spiel kennt keine Symbolstile: es wird gesetzt, sobald einer da ist.
+Das Spiel hat die Tastensymbole nicht übernommen.
+Der Controller sagt nicht, was er ist: die Symbole bleiben, wie das Spiel sie hat.
+die Symbole, die das Spiel für die Tasten deines Controllers zeigt: auto (nach dem Controller in Gebrauch), xbox, playstation, switch, steam, generic (Zahlen) oder game, um sie zu lassen, wie das Spiel sie hat
+Abklingzeit-Reihen neben den Gamepad-Leisten
+die Abklingzeit-Reihen des Spiels sitzen unter dem Ziel statt auf den Gamepad-Tasten und sind etwas kleiner (nur bei den eingebauten Layouts des Spiels: bei einem eigenen Layout bleiben sie, wo du sie hingesetzt hast)
+Angeln: %s wirft aus
+Angelmodus: %s wirft deine Leine aus und hakt den Fisch, wenn der Schwimmer zuckt.
+Angelmodus: aus.
+Der Angelmodus braucht eine Angelrute in deinen Händen.
+Du beherrschst Angeln nicht.
+Angelmodus: eine Taste wirft aus und hakt
+Angeltaste: %s
+Angeln mit einer Taste
+mit einer Angel in der Hand wirft deine Interaktionstaste die Angel aus, wann immer es nichts zum Interagieren gibt, und holt den Fisch ein, wenn der Schwimmer wippt; der Fang wird für dich aufgenommen
+Köder mit Doppeldruck
+drücke deine Angeltaste zweimal schnell: der zweite Druck bringt den besten Köder aus deinen Taschen an die Angel, wenn sie keinen hat
+Ein-Tasten-Angeln vorerst aus oder wieder an (mit einer Angel in der Hand ist es von selbst an)
+die Taste, die angelt: anfangs deine Interaktionstaste (Quadrat oder X) oder jede andere, zum Beispiel ein Trigger (rt)
+Durotars Küste ist roter Fels und warmes Flachwasser. Die Trolle der Echoinseln sagen, die Makrelen ziehen am dichtesten, wenn die Flut den Duft der Kochfeuer von den Inseln herüberträgt.
+Die Seen von Mulgore sind klein, klar und geduldig. Die Tauren angeln dort so, wie sie alles andere tun: langsam und mit Dank.
+Jede Oase im Brachland ist ein Treffpunkt. Was auch immer dort bei Tag trinkt, bei Nacht schwimmt etwas darunter.
+Die Teiche von Teldrassil liegen im Schatten eines einzigen Baumes. Nachtelfische Angler schwören, die Fische dort hätten nie die Sonne gesehen und vermissten sie auch nicht.
+Das Wasser der Dunkelküste ist grau, kalt und voller Wracks. Die Hälfte dessen, was vor Auberdine anbeißt, hat sich in irgendjemandes verlorener Fracht häuslich eingerichtet.
+Die Flüsse des Eschentals fließen unter Blättern, die älter sind als die meisten Königreiche. Die Fische sind flink, und die Schildwachen fragen noch flinker, was du dort zu suchen hast.
+Unten zwischen den Tausend Nadeln ist Wasser knapp und wird eifersüchtig gehütet. Ein Fisch von hier hat sich seinen Platz verdient.
+Die Seen des Steinkrallengebirges liegen hoch und kalt zwischen den Gipfeln. Die Goblins hätten sie längst trockengelegt, wäre das Angeln nicht so gut.
+Die Küste von Desolace besteht aus Knochen und grauer Brandung. Irgendetwas dort unten hat an beidem Geschmack gefunden.
+Feralas ist grün bis hinunter an die Wasserlinie. Seine Flüsse sind tief, warm und überaus lebendig.
+Niemand weiß genau, wo in den Düstermarschen das Land aufhört und das Wasser anfängt. Angle vom Ufer aus und zähl danach deine Zehen.
+Der Dampfdruckpier hat das einzige Wasser in Tanaris, das den Namen verdient. Die Goblins verkaufen dir das Recht, dort zu angeln, und zwar zweimal, wenn du sie lässt.
+Unter Azsharas heller Bucht liegt eine versunkene Stadt. Alte Angler sagen, die ganz Großen leben dort, wo einst ihre Gärten waren.
+Die Tümpel des Teufelswalds leuchten, und zwar nicht auf die gute Art. Was noch darin schwimmt, ist stur über jede Vernunft hinaus.
+Die heißen Quellen und teergesäumten Seen von Un'Goro haben Dinge bewahrt, die der Rest der Welt vergessen hat. Manche davon beißen.
+Der See Elune'ara auf der Mondlichtung ist so still wie ein angehaltener Atem. Die Druiden bitten nur darum, dass du nicht mehr nimmst, als du essen wirst.
+Silithus ist Sand, Wind und das Geräusch von Flügeln. Wenn du hier Wasser zum Angeln gefunden hast, sag es niemandem.
+Die Seen von Winterquell frieren an den Rändern zu und dampfen in der Mitte. Die Fische dort sind fett gegen die Kälte und den Fußmarsch wert.
+In den Teichen von Orgrimmar angeln Peons, die nichts Besseres zu tun haben, und alte Grunzer, die dasselbe behaupten. Beide erzählen dir, der Große sei ihnen entwischt.
+Ein Fisch aus den Teichen von Donnerfels hat sein ganzes Leben hoch über den Ebenen verbracht. Er scheint das gelassen zu nehmen.
+Darnassus hütet seine Gewässer so sorgsam wie seine Tempel. Die Fische haben sich daran gewöhnt, bewundert zu werden.
+Die Seen des Alteracgebirges sind Schmelzwasser, und die Oger und das Syndikat angeln dort, wenn niemand hinsieht.
+Arathis Ufer haben mehr Armeen gesehen als Angler. Den Fischen ist längst gleich, wessen Banner über dem Wasser weht.
+Das Ödland ist Staub von einem Ende zum anderen. Ein Biss ist hier ein kleines Wunder, also behandle ihn auch so.
+Die Küste der Verwüsteten Lande ist rot, kahl gescheuert und still. Was in dieser Brandung lebt, hat gelernt, mit einer ganzen Menge zu leben.
+Die Seen von Tirisfal liegen reglos unter einem kränklichen Himmel. Die Verlassenen angeln dort aus Gewohnheit. Die Toten essen nicht viel, aber sie erinnern sich, dass es ihnen einmal geschmeckt hat.
+Die lange Küste des Silberwalds besteht ganz aus Nebel und Kiefernschatten. Das Angeln ist gut, und das ist das einzig Fröhliche, was je einer über die Gegend sagt.
+Die Flüsse der Westlichen Pestländer fließen noch, wenn auch nicht sauber. Was du herausziehst, sieh dir zweimal an.
+Nur wenige angeln in den Östlichen Pestländern, und noch weniger geben es zu. Das Wasser behält, was die Seuche von ihm übrig gelassen hat.
+Der Fluss im Vorgebirge des Hügellands und sein langes Südufer haben in jedem Streit, der um sie geführt wurde, beide Seiten ernährt.
+Das Hinterland hält seine Seen hoch oben zwischen den Bäumen, wo die Wildhammerzwerge vom Greifenrücken aus angeln, wenn sie glauben, dass niemand zusieht.
+Die Seen von Dun Morogh sind die meiste Zeit des Jahres von Eis umringt. Ein Zwerg schlägt ein Loch, setzt sich mit einem Humpen hin und nennt es einen guten Tag, ganz gleich, was anbeißt.
+Die Sengende Schlucht hat Lava, wo andere Länder Flüsse haben. Bring statt der Angel lieber etwas zu trinken mit.
+Die Brennende Steppe ist Asche und Glut. Wenn dir das Wasser hier überhaupt etwas gibt, dann ist es heiß.
+Jedes Kind in Elwynn lernt am Kristallsee oder am Steinhügelsee das Angeln. Die kleinen Fische dort tricksen sie seit Generationen aus.
+Der Gebirgspass der Totenwinde hat wenig Wasser und noch weniger Gastfreundschaft. Was in den Tümpeln unterhalb von Karazhan ist, bleibt am besten dort.
+Der Fluss am Rand des Dämmerwalds ist zu jeder Stunde schwarz. Die Fische scheint die Dunkelheit nicht zu stören, die Angler schon.
+Der Loch ist der Stolz von Loch Modan, aufgestaut vom großen Steinwerkdamm. Zwerge messen jedes Anglerlatein an ihm, und meistens gewinnt der Loch.
+Der Immerruhsee im Rotkammgebirge ist schön wie ein Gemälde, und geangelt wird dort von jedem Steg in Seenhain. Die Leute im Ort kennen jede gute Stelle und verraten dir keine einzige.
+Von seinen Dschungelflüssen bis zum wilden Südkap hat das Schlingendorntal die reichsten Gewässer des Kontinents. Die Angler von Beutebucht tragen darum ein Turnier aus, und fast alle schummeln.
+Die Sümpfe des Elends sind grünes Wasser unter grünen Bäumen. Die Fische schmecken nach Schlamm, und die Einheimischen mögen sie genau so.
+Westfalls Felder haben versagt, seine Küste nicht. Wer geblieben ist, lebt vom langen grauen Strand.
+Das Sumpfland trägt seinen Namen zu Recht. Die Docks im Hafen von Menethil sind der trockenste Platz, um dort zu angeln, und die Krokilisken wissen das.
+In den Kanälen von Sturmwind angeln Kinder, Rentner und mindestens ein verkleidetes Mitglied des Adels. Niemand fragt, was sonst noch in den Kanälen ist.
+Die Düstere Höhle birgt den einzigen stillen Teich von Eisenschmiede. Alte Zwerge angeln dort stundenlang und sagen kein Wort.
+Die Kanäle von Unterstadt führen ein Grün, das nichts mit Algen zu tun hat. Die Verlassenen, die dort angeln, tun es nicht fürs Abendessen.
+Der erste Fisch, den die meisten Angler je an Land ziehen, und so leuchtend, dass sie ihn nicht vergessen.
+Glatt, flink und an jeder warmen Küste zu Hause. Gegrillt schmeckt das besser, als der Name vermuten lässt.
+Ganz Maul, und am glücklichsten in Wasser, das du nicht trinken würdest.
+Klein, bissig und furchtlos. Ein Schwarm davon soll einmal einen Bären aus dem Loch gejagt haben.
+Ein Farbblitz unter der Brandung. Hängt so ein Fisch an der Leine, gilt das unter Seeleuten als Glück für die Reise.
+Ein geduldiger Grundfisch mit Barthaaren wie ein Zwergenältester.
+Zweimal isst das niemand. Alchemisten kaufen jedes Exemplar, das sie kriegen können.
+Die Flossen glimmen wie Glut unter der Asche, und das ausgepresste Öl brennt fast genauso gut.
+Gepanzert wie ein kleiner Schild. Das Fleisch darin ist die Mühe wert.
+Irgendetwas im Wasser nahe den Höhlen des Wehklagens hat ihn verändert. Wer einen isst, den verändert es womöglich auch, für eine Weile.
+Das Flussvolk sagt, eine Mahlzeit davon kläre den Geist. Weise macht ihn das Schwimmen gegen den Strom.
+Älter, größer und weiser als sein Vetter, was ihn nicht von deinem Haken ferngehalten hat.
+Ein zäher Kämpfer aus warmen südlichen Meeren und ein Liebling auf jeder Tavernentafel von Beutebucht bis Gadgetzan.
+Die Stirn glänzt wie echtes Mithril. Mehr als ein Bergmann hat schon versucht, ein Exemplar einzuschmelzen.
+Die Schuppen lassen sich zu einem Öl einkochen, das die Haut hart wie Fels macht. Am liebsten ist ihm die Nacht.
+Poliert wie ein Paradeharnisch und beinahe genauso schwer.
+Er kommt nur in den kalten Monaten in Küstennähe, und die Köche, die ihn kennen, warten das ganze Jahr darauf.
+Er zieht, wenn die Tage lang sind. Die Küstenbewohner lesen an ihm die Jahreszeit ab.
+Fass ihn in der Mitte an, und nur ein einziges Mal.
+Ein Flussfisch aus wildem Land, an den Kiemen so rot wie die Kriegsbemalung eines Trolls.
+Er frisst nach Einbruch der Dunkelheit. Eine Suppe aus ihm beruhigt die Nerven eines Zauberwirkers.
+Er frisst am Tag, in fast allem das Gegenteil des Nachtflossenschnappers, und teilt sich trotzdem das Wasser mit ihm.
+Streng genommen kein Fisch. Er hält nichts davon, gefangen zu werden, und lässt dich das spüren.
+Bleich wie Flusseis, aus den kalten, klaren Seen des Nordens.
+Du wirst beide Hände brauchen, und vielleicht einen Freund.
+%.1f Pfd.
+Neu in deinem Angeltagebuch: %s, %s.
+Neu in deinem Angeltagebuch: %s.
+Dein bisher schwerster Fang – %s: %s (vorher %s).
+Angeltagebuch
+jeder Fang wird in dein Angeltagebuch geschrieben: wie viele von jeder Art, wo du sie zuerst gefangen hast, und ein zum Spaß erfundenes Gewicht mit deinem besten von jeder Art (/cchud journal öffnet es)
+Köder %s
+Kein Köder: drücke %s zweimal für %s
+Kein Köder
+Gefangen %d
+Entkommen %d
+neu!
+Rekord!
+Angelanzeige
+mit einer Angelrute in den Händen: die Fische des Gewässers, an dem du stehst (die hier noch nicht gefangenen bleiben verborgen), deine Angelfertigkeit und was dein Köder dazugibt, wie viele du gefangen hast und wie viele entkommen sind, wie lange dein Köder hält, und deine letzten Fänge
+Ein Neugieriger: +%d%%
+%s halten: der Köder sinkt
+%d in Folge
+Ein Spiel, während der Schwimmer draußen ist
+ein kleines Stück Wasser neben der Angelanzeige: halte einen Trigger, um deinen Köder sinken zu lassen, und lass los, damit er steigt, und halte ihn neben dem Schatten des Fisches. Je besser du bist, desto schwerer das erfundene Gewicht deines nächsten Fangs. Es nimmt keine Taste und berührt nie deinen Wurf oder deinen Fang
+%d gefangen, %d Arten, %d entkommen
+Schwerster: %s, %s
+Fische
+Gewässer
+Noch nichts gefangen. Nimm eine Angel mit ans Wasser.
+Gefangen: %d
+Schwerster: %s, in %s
+Zuerst gefangen: %s
+Hier gefangen: %d
+Hier gefundene Arten: %d
+Wählen
+Schließen
+dein Angeltagebuch öffnen oder schließen: jede Art, die du gefangen hast, dein schwerster Fang von jeder, und die Gewässer, in denen du geangelt hast
+Chat blendet aus, wenn es ruhig ist
+Chattext blendet nach einigen Sekunden ohne neue Nachrichten aus
+Sekunden bis der Chat ausblendet
+wie lange Chattext bleibt, bevor er ausblendet
+Koordinaten auf der Karte
+deine Koordinaten unter der Weltkarte
+%d Nachrichten seit deiner Anmeldung als Spam ausgeblendet.
+Klassensymbol und Stufe im Chat
+Klassensymbol und Stufe eines Spielers in Klammern vor seinem Namen, wenn das Spiel sie uns wissen lässt
+Größe des Chattexts
+die Größe des Texts in den Chatfenstern als Anteil der spieleigenen Größe (die Einstellung des Spiels bleibt, wie sie ist)
+Goldverkäufer und wiederholte Werbung ausblenden
+Nachrichten, die Gold oder Dienste mit einer Webadresse anbieten, und dieselbe Nachricht, die ein Spieler wiederholt, werden ausgeblendet (nie von deiner Gruppe, Gilde oder deinen Freunden)
+listet die zuletzt als Spam ausgeblendeten Chatnachrichten auf
+Tooltips folgen dem Cursor.
+Tooltips bleiben in ihrer Ecke.
+Tooltips am Cursor: an / aus
+Tooltip-Hintergrund
+wie deckend Hintergrund und Rand von Tooltips sind: 100% ist das volle dunkle Glas, bei 0% bleibt nur der Text
+Tooltips folgen dem Cursor
+Tooltips öffnen sich am Cursor statt in der Bildschirmecke (im Kampf bleiben sie in der Ecke)
+Eigene Rahmen des Spiels umgestalten
+Tooltips, Buffs, Questverfolgung, Minikarte, Erfahrungsleiste, Chat-Reiter und Gamepad-Leisten im Aussehen des HUDs (die Maus-Oberfläche behält die des Spiels)
+Größe der Erfahrungsleiste
+die Größe der Erfahrungs- und Rufleisten, solange sie neu gestaltet sind, in Prozent
+Tooltips
+Tooltips in dunklem Glas, umrandet in der Farbe der Klasse eines Spielers oder der Qualität eines Gegenstands
+Gamepad-Leisten
+die Gamepad-Tasten mit einem schlanken Ring auf dunklem Untergrund statt der wuchtigen Grafik
+Buffs
+deine Buff- und Debuff-Symbole zugeschnitten und umrandet, ihre Zeiten mit Kontur
+Questverfolgung
+die Kopfzeilen der Questverfolgung in dunklem Glas, ihre Zeilen mit Kontur
+Minikarte
+ein schlanker Ring und ein weicher Schein um die Minikarte statt des goldenen Rands
+Erfahrungsleiste
+die Erfahrungs- und Rufleisten etwas kleiner, in eigenen Farben
+Chat
+Chat-Reiter mit Kontur und das Eingabefeld als dunkles Glas
+Die Hinweise des Spiels werden erneut abgefragt.
+Hinweis zu experimentellen Funktionen bestätigen
+nachdem du den Hinweis des Spiels zu experimentellen Funktionen einmal akzeptiert hast, wird er bei späteren Anmeldungen für dich akzeptiert
+vergiss die akzeptierten Hinweise, damit das Spiel erneut fragt
+Prüfung: %d von %d bestanden
+Debug-Berichte
+die Berichte zur Fehlersuche von selbst sammeln: beim Einloggen und erneut beim Neuladen oder Ausloggen (sie bleiben in den gespeicherten Einstellungen)
+HUD-Voreinstellung: %s, passend zur Kamera
+Preset: %s
+Ein Layout namens '%s' wurde dem Bearbeitungsmodus des Spiels hinzugefügt. Wähle es dort aus, um es zu benutzen (Spielmenü > Bearbeitungsmodus > Layout).
+unbekanntes Preset '%s'
+Für einen Fernseher: größerer Text im HUD und im Chat.
+Für einen Monitor: Text in seiner normalen Größe.
+Unsere Fenster sind wieder an ihrem Ausgangsplatz. Wähle im Bearbeitungsmodus das Layout %s des Spiels (Spielmenü > Bearbeitungsmodus > Layout).
+Voreinstellungen setzen den Kameraabstand
+eine Voreinstellung bringt die Kamera auch einmal auf den Abstand, für den ihr Layout gemacht wurde (danach frei zoomen)
+Aktion
+eine Ansicht aus der dritten Person: schmale vertikale Leisten neben deinem Charakter, alle Effekte an; außerhalb des Kampfes blendet alles aus
+Klassisch
+unsere Rahmen dort, wo WoW sie immer hatte, ruhigere Effekte, die Gamepad-Leisten des Spiels unverändert
+Minimal
+nur das Nötige: freundliche NPCs zeigen ihre Plakette (mit ihrer Tätigkeit) nur, solange du auf sie zeigst, sie anvisierst oder als Ziel hast; Namen ohne Titel; außerhalb des Kampfes ruhen deine Leisten als leiser Hinweis (wenig Gesundheit zeigt sich immer)
+Offene Welt
+ein klarer Bildschirm zum Erkunden: schmale Leisten neben dir, die verblasst ruhen, Plaketten ohne Kraftleisten, Chat, der ausblendet
+Abenteuer
+nach Konsolen-Abenteuern in offener Welt: Vitalwerte neben dir, ein kleines Ziel hoch in der Mitte, Stadtbewohner nur, wenn du auf sie zeigst, Chat, der schnell ausblendet
+Soulslike
+deine Leisten oben links, eine große Zielleiste tief in der Mitte wie eine Bossleiste, jeder Treffer spürbar
+Shooter
+aufrechte Leisten knapp rechts der Mitte, nah an deinem Ziel, das Ziel hoch oben, starke Trefferrückmeldung
+Crossbar
+nach MMOs mit Controller: Ziel und Fokus hoch in der Mitte, deine Leisten direkt über den Gamepad-Leisten, Gruppe links, volle Plaketten
+ARPG
+nach Action-Rollenspielen: die Kamera weit hinten, deine Vitalwerte unten links, das Ziel hoch in der Mitte, kleine Gegner klein, jeder Treffer laut
+Kompass
+nach Ego-Rollenspielen: die Kamera nah, deine Leisten unten in der Mitte, das Ziel unter dem oberen Rand, Stadtbewohner nur, wenn du auf sie zeigst
+Schlachtzug
+die Anordnung von WoW mit allem, was eine Gruppe braucht: Gruppen- und Schlachtzugsrahmen, Gesundheitsprozent und Stufen auf Plaketten
+ControllerCams Voreinstellungen folgen
+eine Kamera-Voreinstellung in ControllerCam für überall wählt auch die passende HUD-Voreinstellung (die Kamera behält ihre eigene Entfernung)
+Modern
+stelle das ganze HUD auf eine Voreinstellung: action, classic, minimal, openworld, adventure, soulslike, shooter, crossbar, arpg, compass, raid
+Zielrahmen und Namensplaketten kompakt oder voll, beide auf einmal
+der Zielrahmen kompakt oder voll
+den Text für einen Fernseher am anderen Ende des Zimmers oder für einen Monitor in Armlänge bemessen
+unsere Fenster an ihren Ausgangsplatz zurücksetzen, passend zum spieleigenen Layout Modern oder Klassisch
+Deine gesamte Einrichtung (HUD, Kamera und das Layout des Spiels): Kopiere diese Zeile (Strg+C), um sie aufzubewahren oder zu teilen.
+Füge eine Zeile mit HUD-Einstellungen ein (Ctrl+V) und bestätige.
+Diese Zeile ist beschädigt: Kopiere sie noch einmal, vollständig.
+Diese Zeile stammt von einer neueren Version: Aktualisiere das Addon.
+Das ist keine Zeile mit HUD-Einstellungen.
+Einstellungen importiert: %d übernommen, %d ausgelassen.
+Die Kameraeinrichtung wurde mit übernommen.
+Die Kameraeinrichtung wurde nicht verändert.
+Das Layout des Spiels ist jetzt '%s'.
+Das Layout des Spiels wurde nicht verändert.
+deine Einstellungen als eine Textzeile, zum Behalten oder Teilen
+übernimmt Einstellungen aus einer Textzeile, die mit /cchud export erstellt wurde
+Das HUD ist an, solange die Gamepad-Oberfläche benutzt wird. Seine Optionen: Optionen > AddOns > ControllerCam > HUD oder /cchud.
+Nur Kamera: Das HUD ruht und die Oberfläche des Spiels ist wie zuvor. /cchud on schaltet es ein.
+Auch den Bildschirm für den Controller einrichten? Das fügt dem Bearbeitungsmodus des Spiels ein Layout namens CCHUD hinzu, das du dort auswählen kannst: Es setzt die Abklingzeit-Reihen unter das Ziel, weg von den Gamepad-Tasten. Deine eigenen Layouts bleiben erhalten (/cchud setup bietet das erneut an).
+Einrichten
+Jetzt nicht
+ControllerCam bringt eine Controller-Oberfläche mit, das HUD: eigene Einheitenfenster, Namensplaketten, Zauberleiste und mehr, solange die Gamepad-Oberfläche benutzt wird. Möchtest du es oder nur die Kamera?
+Kamera + HUD
+Nur Kamera
+Dieser Client erlaubt Addons nicht, das Layout zu ändern.
+noch einmal fragen: die Kamera mit dem HUD oder nur die Kamera
+das für das HUD gemachte Bildschirmlayout erneut anbieten (Bearbeitungsmodus des Spiels)
+Wird angezeigt, solange die Gamepad-Oberfläche verwendet wird. Ziehe unsere Rahmen im Bearbeitungsmodus des Spiels.
+Presets
+Bemessen für
+Fernseher
+Monitor
+Tastensymbole
+die Symbole, die das Spiel für die Tasten deines Controllers zeigt: von selbst gefunden für den Controller in Gebrauch, oder die Art, die du wählst
+Layout des Spiels zurücksetzen
+Ausprobieren
+Demo abspielen
+Jeden Treffereffekt anzeigen
+Selbstprüfung ausführen
+Gamepad-Leisten: kompakt / voll
+Einstellungen exportieren
+Einstellungen importieren
+Hake „Erweiterte Optionen anzeigen“ auf der Hauptseite an, um alle Einstellungen zu sehen.
+Module
+Schnellschalter
+Allgemein
+HUD
+Das Optionsfenster ist in diesem Client nicht verfügbar.
+Aktiviert
+das gesamte HUD; aus bringt die eigenen Rahmen des Spiels zurück
+Auch in der Maus-und-Tastatur-Oberfläche
+normalerweise läuft das HUD nur, solange die Gamepad-Oberfläche verwendet wird
+Rahmen des Spiels beiseitelegen
+blende die Spieler-, Ziel- und Fokusrahmen des Spiels aus, solange unsere angezeigt werden
+Chatfenster oben links
+verschiebe das Chatfenster nach oben links, solange das HUD läuft
+Vertikale Balken im Ruhezustand
+wie sichtbar die vertikalen Balken bei voller Gesundheit außerhalb des Kampfes bleiben (0 blendet sie aus)
+Klassenfarben
+färbe deine Leiste und die Leisten anderer Spieler nach Klasse
+Klassensymbole
+ein Klassensymbol vor dem Namen eines Spielers beim Ziel und beim Ziel des Ziels
+Bedrohung am Zielfenster
+ein Schildsymbol und ein Leuchten am Zielrahmen: rot, solange es dich angreift, rot und gelb, wenn du es gleich ziehst, gelb und blau, wenn du es verlierst, blau, wenn es nicht auf dir ist
+Überall kompakte Leisten
+Zielrahmen und Namensplaketten im kompakten Stil, gut halb so breit (jedes lässt sich weiter einzeln einstellen; Voreinstellungen ändern es nie)
+Kompaktes Zielfenster
+das Zielfenster etwas mehr als halb so breit
+Gesundheitsfarben im Kampf
+im Kampf wechseln die Gesundheitsbalken von Grün über Gelb zu Rot, wenn die Gesundheit sinkt
+Schatten hinter Text
+ein weiches dunkles Band hinter dem Text des Ziels, damit er lesbar bleibt
+Textgröße
+Größe des Texts auf unseren Rahmen
+Rahmengröße
+Größe unserer Einheitenrahmen
+Deine Leisten im Kampf
+wie sichtbar deine Leisten, Begleiter und Fokus im Kampf sind, bis etwas Aufmerksamkeit verlangt
+Voll bei Gesundheit unter
+deine Leisten kehren vollständig zurück, wenn deine Gesundheit unter diesen Wert fällt
+Voll bei Mana unter
+deine Leisten kehren vollständig zurück, wenn dein Mana unter diesen Wert fällt
+Spielerleiste im Leerlauf
+wie sichtbar die Spielerleiste bei voller Gesundheit oder außerhalb des Kampfes bleibt (0 blendet sie aus)
+Händler- und Bankhilfe
+die Schaltfläche Plunder verkaufen beim Händler fragt nach, was verkauft werden soll; schnelles Verschieben bei Händler und Bank
+Erweiterte Optionen anzeigen
+alle Einstellungen, nicht nur die Hauptschalter
+Spielerrahmen
+unsere Spielerleiste, oben links
+Zielrahmen
+unsere Zielleiste, oben mittig
+Haustierleiste
+eine kleine Haustierleiste unter der Spielerleiste
+Fokusrahmen
+unser Fokusrahmen
+schmale aufrechte Gesundheits- und Energieleisten neben deinem Charakter, für eine Third-Person-Ansicht (statt der Spielerleiste)
+Plunder verkaufen, wenn ein Händler geöffnet wird
+verkaufe Plunder nach deinen Regeln, sobald ein Händler geöffnet wird
+Weiße Waffen und Rüstung sind Plunder
+weiße Waffen und Rüstungen als Plunder zählen (nie Werkzeuge, Angelruten, Ausrüstung mit Benutzen-Effekt oder mögliche Verbesserungen; es wird immer zuerst gefragt)
+Einlagern, wenn die Bank öffnet
+für die Bank markierte Gegenstände und, wenn eingeschaltet, was die Bank schon hat, kommen von selbst hinein
+die Option des Spiels; unser kleiner Rahmen folgt ihr
+Abklingzeitmanager
+der Abklingzeitmanager des Spiels
+Persönliche Ressourcenanzeige
+deine Gesundheit und Ressource unter deinem Charakter
+Bank nimmt Reagenzien automatisch auf
+die Option des Spiels für die Bank
+Tooltip bei Beginn eines Buffs
+die Option des Spiels: der Tooltip eines Buffs erscheint kurz, wenn er angewendet wird (Gamepad-UI)
+Klassenfarben für Namen im Chat
+die Chat-Einstellung des Spiels für alle Chatarten gleichzeitig: der Name eines Spielers in seiner Klassenfarbe
+öffne das Optionsfenster (Optionen > AddOns > ControllerCam HUD)
+Rahmen
+Effekte
+Aussehen
+Quests, Chat und Karte
+Taschen, Bank und Händler
+Angeln
+Native Optionen
+%s  |  Gamepad-Oberfläche: %s  |  läuft: %s
+Spieler %s, Ziel %s, Haustier %s, Fokus %s  |  Spielrahmen beiseitegelegt: %s  |  Chat verschoben: %s
+native Optionen: Ziel des Ziels %s, Abklingzeitmanager %s, persönliche Ressourcen %s
+Textgröße %d%%  |  Textschatten: %s
+Händler- und Bankhilfe: %s  |  Autoverkauf: %s  |  weiße Ausrüstung ist Plunder: %s
+Leerlaufsichtbarkeit %d%%  |  Skalierung %d%%  |  Klassenfarben: %s
+Ein minimalistisches Action-Spiel-HUD für die Gamepad-Oberfläche.
+aktiviert
+deaktiviert: die eigenen Rahmen des Spiels sind zurück
+auch in der Maus-und-Tastatur-Oberfläche nutzen: %s
+Spielrahmen beiseitegelegt: %s
+Chat nach oben links verschoben: %s
+Klassenfarben: %s
+Dieser Client hat diese Option nicht.
+%s: %s (die eigene Option des Spiels)
+Das Spiel hat das gerade nicht akzeptiert.
+Händler- und Bankhilfe: %s
+Autoverkauf: %s
+weiße Ausrüstung ist Plunder: %s
+Händlerhilfe ist aus.
+Verwendung: /cchud sell [junk | white | green | blue]
+markierte Gegenstände einzahlen, wenn die Bank geöffnet wird: %s
+Verwendung: /cchud junk <item> (Shift-Klick auf den Gegenstand fügt ihn in die Chatzeile ein)
+Gegenstand %d: Plunder, wird mit dem Rest verkauft
+Gegenstand %d: behalten, nie verkauft
+Gegenstand %d: für die Bank
+Textschatten: %s
+Verwendung: /cchud text <80-250>
+Textgröße %d%%
+Demo beendet
+Das HUD läuft nicht.
+Demo läuft: ein erfundener Kampf in Dauerschleife. Gib /cchud demo erneut ein, um sie zu beenden.
+Verwendung: /cchud idle <0-100>
+Leerlaufsichtbarkeit %d%%
+Verwendung: /cchud scale <50-200>
+Skalierung %d%%
+Ziehe die Rahmen und gib dann /cchud lock ein.
+Rahmen gesperrt
+Alles ist wieder wie am Anfang: Einstellungen, Fenster und das Bildschirmlayout (deine Händlermarkierungen und der Preisverlauf bleiben erhalten).
+Rahmen sind wieder an ihrer Ausgangsposition
+unbekannter Befehl '%s'. Gib /cchud help ein
+Fehlerliste geleert.
+Keine Fehler aufgezeichnet.
+%d Fehler aufgezeichnet (neueste zuletzt). /cchud errors clear leert die Liste.
+Status anzeigen
+das HUD ein- oder ausschalten (aus bringt die eigenen Rahmen des Spiels zurück)
+das HUD auch in der Maus-und-Tastatur-Oberfläche verwenden
+unseren Rahmen dafür verwenden oder den des Spiels
+schmale, aufrechte Gesundheits- und Kraftbalken neben deinem Charakter
+Ziel des Ziels (die eigene Option des Spiels, auch in dessen Menüs)
+der Abklingzeitmanager des Spiels (die eigene Option des Spiels)
+deine Gesundheit und Ressource unter deinem Charakter (die eigene Option des Spiels)
+der Tooltip, der erscheint, wenn ein Buff beginnt (die eigene Option des Spiels)
+die Spieler- und Zielrahmen des Spiels sichtbar lassen (an) oder beiseitelegen (aus)
+beim Händler: wählen, was verkauft wird (auch: sell junk, sell white | green | blue)
+zähle weiße Waffen und Rüstung als Plunder
+einen Gegenstand markieren: immer verkauft, nie verkauft oder für die Bank (Shift-Klick fügt ihn in die Chatzeile ein)
+an der Bank: einlagern, was die Bank schon hat, und alles für sie Markierte
+einlagern, sobald die Bank öffnet
+die Bank nimmt Reagenzien automatisch auf (die eigene Option des Spiels)
+Textgröße in Prozent (150 passt gut auf einem Fernseher)
+wie sichtbar die Spielerleiste bleibt, wenn nichts passiert (0 blendet sie aus)
+Größe der Rahmen in Prozent
+ziehe die Rahmen an die gewünschte Stelle (der Bearbeitungsmodus des Spiels kann das auch)
+die Rahmen an ihre Ausgangsposition zurücksetzen
+einen kurzen erfundenen Kampf abspielen, um zu sehen, wie die Rahmen reagieren (erneut zum Beenden)
+gleiche das Angezeigte mit den Einstellungen ab (check listet jede Zeile auf)
+eine Beschreibung der Gamepad-Oberfläche dieses Clients speichern (zur Fehlersuche)
+diese Liste anzeigen
+die letzten Fehler des HUD, auch nach einem Neuladen (um sie zu melden)

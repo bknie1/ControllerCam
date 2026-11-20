@@ -1,0 +1,63 @@
+## Interface: 16001
+## Title: ControllerCam: HUD
+## Notes: The controller interface for the Gamepad UI: slim unit frames, party, raid and nameplate looks, cast bar, vendor and bank help.
+## Author: bknie1
+## Version: 1.3.0
+## X-License: MIT
+## IconTexture: Interface\AddOns\ControllerCam\Media\icon
+## OptionalDeps: ControllerCam
+## Group: ControllerCam
+## SavedVariables: ControllerCamHUDDB
+
+Locales.lua
+Core.lua
+Theme.lua
+UnitFrames.lua
+Layout.lua
+Cooldowns.lua
+Vendor.lua
+Inventory.lua
+Market.lua
+Stats.lua
+ItemInfo.lua
+AuctionPanel.lua
+Group.lua
+CastLook.lua
+CastArt.lua
+CastBar.lua
+AuraWidgets.lua
+Auras.lua
+PlateStates.lua
+Nameplates.lua
+Impact.lua
+Bloom.lua
+Ward.lua
+Numbers.lua
+Rumble.lua
+Moments.lua
+Quests.lua
+Bars.lua
+Rest.lua
+PadButtons.lua
+PadIcons.lua
+Sizes.lua
+Fishing.lua
+FishLore.lua
+FishLog.lua
+FishPanel.lua
+FishGame.lua
+FishJournal.lua
+World.lua
+Chat.lua
+Tooltip.lua
+Skin.lua
+SkinAreas.lua
+Notices.lua
+Probe.lua
+Check.lua
+Debug.lua
+Presets.lua
+Share.lua
+Welcome.lua
+Options.lua
+Slash.lua

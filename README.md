@@ -53,12 +53,14 @@ A profile can be chosen for each situation. The first one that applies, from the
 3. Swimming
 4. Mounted
 5. In combat
-6. In a raid
-7. In a dungeon
-8. In a city or inn
-9. Everywhere else (default)
+6. Fishing (from the moment you cast your line, and between casts while the pole stays in your hands)
+7. In a raid
+8. In a dungeon
+9. Indoors
+10. In a city or inn
+11. Everywhere else (default)
 
-A situation with no profile is skipped, so the next one down applies. The recommended setup leaves *In combat* empty on purpose: you keep the camera of the place you are in. Assign one with `/ccam set combat shooter` (use `none` to clear it).
+A situation with no profile is skipped, so the next one down applies. The recommended setup leaves *In combat* and *Indoors* empty on purpose: you keep the camera of the place you are in. *Fishing* starts on the Shooter profile, a close view over your shoulder at the float (`/ccam set fishing none` clears it). Assign one with `/ccam set combat shooter`, or `/ccam set indoors shooter` for a closer view inside buildings (use `none` to clear it).
 
 A situation is kept for a moment after it ends (1.5 seconds by default, `/ccam delay <s>`) so the camera does not flicker when you hop on and off a mount.
 
@@ -115,6 +117,32 @@ Profile names can be typed in part (`/ccam use cla`) or quoted (`/ccam use "Town
 - **Motion-sickness settings.** The shoulder offset, dynamic pitch, target focus and head tracking only work while the game's *Keep Character Centered* and *Reduce Unexpected Movement* settings are off. While a profile uses any of those features, ControllerCam switches them off and puts them back afterwards. In the Gamepad UI the game forces its own temporary values for them, so there the temporary value is overridden instead of your stored one.
 - **Camera settings used** (all names were found in the Forever client): `cameraDistanceMaxZoomFactor`, `GamePadCameraYawSpeed`, `GamePadCameraPitchSpeed`, `GamepadCameraFollowOnStick`, `CameraFollowOnStick`, `CameraFollowYawSpeed`, `CameraFollowPitchSpeed`, `CameraFollowGamepadAdjustDelay`, `GamePadFaceMovementMaxAngle`, `GamePadFaceMovementMaxAngleCombat`, `GamePadTurnWithCamera`, `GamePadFaceMovementMount`, `GamePadFaceMovementSwimming`, `GamePadFaceMovementFreeFlying`, `test_cameraOverShoulder`, `test_cameraDynamicPitch`, `test_cameraHeadMovement*`, `test_cameraTargetFocus*`, `cameraSmoothStyle`, `cameraTerrainTilt`, plus the two motion-sickness settings above. Speeds are stored as multiples of the game's own default (`x1.25`), so the profiles do not depend on a guessed default value.
 
+## ControllerCam: HUD
+
+The download has a second, optional addon: **ControllerCam: HUD**, a controller interface for the Gamepad UI. The first time it loads it asks whether you want it (**Camera + HUD**) or the camera alone (**Camera only**), and does nothing until you answer; `/cchud on` and `/cchud off` change your mind later. Once on, it runs while the Gamepad UI is in use (the setting [InputSwap](https://github.com/bknie1/InputSwap) switches) and steps aside in the mouse and keyboard UI. Turning it off, or removing it, leaves the game as it was. The design rules are in [docs/DESIGN.md](docs/DESIGN.md).
+
+| Part | What it does |
+| --- | --- |
+| Unit frames | Slim player, pet, target, target-of-target and focus frames: class colours, a damage trail, hit flashes, low-health pulse, combat glow. Drag them in the game's Edit Mode. |
+| Party and raid | Our look drawn over the game's own party and raid frames. The game's frames keep doing the targeting (also the D-pad group targeting) and keep their options and position. |
+| Nameplates | Our look on the game's nameplates: name with the player's title, guild or NPC job, level, health and power bars, cast bar with the cast's target, a clear mark on your target. Friends show only their name until they fight. Each part can be switched off. Stands down when another nameplate addon is loaded. Inside dungeons and raids, where the game keeps friendly nameplates to itself, its own options show your party as class-coloured names without bars, like ours, with the game's bars back for a fight (a switch; another hides them). |
+| Hit effects | Your hits make the bar they land on flash in the damage school's colour and shake in that school's way; crits hit harder. |
+| Cast bar | Yours, drawn where the game's own cast bar sits, with an animation for the kind of cast (`/cchud casttest` plays them all). |
+| Shields | A shield flares as a ward round the health bar of whoever has it (your target, your focus, you), in its school's colour, and fades when it breaks. |
+| Fishing | With a pole in your hands your interact button casts and hooks (`/cchud fishkey rt` names another button). The cast bar moves to the middle of the screen with a line and a float. Under it: the fish of the water you stand at ("?" until landed there), your skill and bait, catches and the ones that got away. A double press puts your best bait on. `/cchud journal` opens the fish journal: every catch, a made-up weight, your heaviest of each, and lore. Optional: a small game while the float is out (`/cchud fishgame on`). |
+| Button icons | The game's own icon style for the controller in use: found by itself, or `/cchud padicons xbox`, `playstation`, `switch`, `steam`, `generic`. |
+| Target extras | Your effects on the target, and combo points. |
+| Vendor and bank | The vendor's Sell junk button asks what to sell: junk by your rules, or weapons and armor up to a quality (listed and confirmed first). Optional auto-sell. Repairs as soon as a repairing vendor opens (optionally from the guild bank). Items marked for the bank are deposited with `/cchud deposit`. |
+| Bags | Sort your bags (and the bank while it is open) with one action, using the game's own sorting. Item tooltips count what you hold in bags and bank and on your other characters; `/cchud gold` totals your gold. |
+| Controller actions | While a bank, vendor, trade or mailbox is open, R3 moves the item you point at and sorts when you point at nothing; L3 is never taken (it stays your auto-run). *Quick move* sells, deposits or withdraws the item you point at. *Mark item* tags it junk, kept or bank. *Sort* tidies your bags. Bind them under Keybindings > AddOns > ControllerCam. |
+| Quest list | Optional, each a switch: only the quests of the zone you are in; no group quests while alone; only the nearest few; nearest first; a recommended order. `/cchud questplan` says a recommended order in chat. Your own tracking comes back when they are off. |
+| Gamepad bars | Optional: hide the heavy art behind the gamepad action bars and draw them smaller. |
+| Chat and map | Chat text fades after a few quiet seconds; a player's class icon and level in front of what they say; gold sellers and repeated adverts hidden (`/cchud spam` shows what was); your coordinates under the world map. |
+| Look | The game's own frames dressed like the HUD while the Gamepad UI is in use: gamepad buttons, tooltips, buffs, quest tracker, minimap, chat, and a smaller experience bar. Each part has its own switch, and everything goes back as it was when switched off. |
+| Native Options | Target of target, the Cooldown Manager and the personal resource display are the game's settings: a switch here flips the game's setting, and the HUD never forces one on. |
+
+Options are under Options > AddOns > ControllerCam > HUD (its main page starts with a Modules list: take only the parts you want). `/cchud help` (or `/chud help`) lists the commands, `/cchud demo` plays a made-up fight to show how the frames react, and `/cchud check` compares what is on screen with the settings.
+
 ## What is not verified
 
 - Everything was checked against the names and descriptions inside the Forever client and against a mocked game API, **not in the live game**. In particular: whether a positive shoulder offset is the right shoulder, whether the head-tracking ranges (0 to 1, 0 to 2 and 1 to 10) match what the game accepts, and how the Gamepad UI treats the temporary override.
@@ -125,7 +153,10 @@ Profile names can be typed in part (`/ccam use cla`) or quoted (`/ccam use "Town
 ```
 pip install lupa
 python tests/test_controllercam.py
+python tests/test_controllercam_hud.py
 ```
+
+The HUD has its own tests, including a grid that runs every combination of its main switches in both interface styles and checks that turning it off leaves the game untouched.
 
 The tests run the real addon files in a Lua 5.1 interpreter against a mocked WoW API (`tests/wow_mock.lua`). They cover the schema and built-in profiles, import/export validation, situations and priorities, applying and restoring CVars, combat retries, UI-reload persistence, the motion-sickness handling, slash commands, the options panel and localization.
 
@@ -133,4 +164,4 @@ The tests run the real addon files in a Lua 5.1 interpreter against a mocked WoW
 
 MIT, see [LICENSE](LICENSE). Copyright (c) 2026 bknie1.
 
-ControllerCam is an independent implementation. It was inspired by [DynamicCam](https://github.com/mpstark/DynamicCam) (MIT, mpstark and LudiusMaximus), which pioneered per-situation camera settings for WoW. No DynamicCam code or presets are included.
+ControllerCam is an independent implementation. It was inspired by [DynamicCam](https://github.com/mpstark/DynamicCam) (MIT, mpstark and LudiusMaximus), which pioneered per-situation camera settings for WoW, and the HUD by [Improved Forever](https://github.com/markgravity/ImprovedForever) (MIT, markg). No code or presets from either are included.

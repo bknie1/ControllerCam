@@ -1,0 +1,738 @@
+error:
+on
+off
+usage:
+Changes are applied when combat ends.
+Fireball
+Friendly mage
+Healing
+Pet
+Training dummy
+Friendly healer
+Player
+Vertical bars follow the camera
+the vertical bars keep their place beside your character as the camera zooms in and out (place them in Edit Mode at a distance you like)
+Last names
+a player's full name on the unit frames and nameplates, last name included: Faith Ashborne
+Health on the target bar
+the health left (12.3k) and the percent on the target and focus bars; a compact target shows the percent alone
+Target
+Target of target
+Focus
+Vertical bars
+deposited %d items
+sold %d items for %s (/cchud sold lists them)
+Nothing to sell.
+Open the bank first.
+Nothing to deposit: your bank holds none of what you carry, and nothing is marked for it.
+Nothing is marked for the bank. Point at an item and use Mark item.
+Open a vendor first.
+Sell junk: %d items for %s.\n\nOr sell weapons and armor by quality.
+Sell junk
+By quality
+Sell weapons and armor up to which quality?\n\nCommon (white): %s\nUncommon (green): %s
+Common
+Uncommon
+Sell %d items?\n\n%s
+Sell
+Quick move works at a vendor (sell), a banker (deposit, withdraw), in a trade or at the mailbox.
+Point at an item first.
+%s: kept, never sold
+%s: bank, deposited when you ask (never sold)
+%s: no mark
+%s: junk, sold with the rest
+Quick move: sell, bank, trade or mail the item you point at
+Mark the item: junk / kept / bank / no mark
+Deposit: put in the bank what it already holds, and what you marked for it
+Nothing sold yet this session.
+A vendor's Buyback tab buys these back until you log out.
+Repaired for %s from the guild bank
+Not enough gold to repair everything (%s).
+Repaired for %s
+Deposit also puts away what the bank already holds
+a deposit moves every item your bank already has some of (materials, potions...), on top of the items you marked for the bank; never grey items, tools or items you marked as junk or kept
+Repair at vendors
+repair everything as soon as a vendor who repairs opens
+Repair from the guild bank
+pay for repairs from the guild bank when your guild allows it, your own gold otherwise
+list what was sold for you this session, to buy something back
+Bag
+Bank
+You
+This client's bank cannot be sorted from here.
+This client has no bag sorting.
+Bank sorted.
+Bank sorted. Press again to sort your bags.
+Bags sorted.
+Sort your bags (and the bank while it is open)
+Gold on this account: %s
+Item counts in tooltips
+an item's tooltip says how many you have in your bags and bank, and how many your other characters hold
+R3 sorts while your bags are open
+while your bags or the bank are open, the right stick button sorts them (it does its usual job otherwise)
+R3 moves the item you point at (bank, vendor, trade, mailbox)
+while one of those is open, the right stick button moves the item you point at: into or out of the bank, sold, into the trade, or onto the letter. Pointing at nothing, it sorts
+sort your bags, and the bank while it is open
+list the gold on each of your characters, and the total
+just now
+%d hours ago
+%d days ago
+Vendor
+Best
+Auction
+Auction house
+Keep
+5% under the lowest, for a quick sale
+the market is unusually low today: priced near its usual, to wait for buyers
+just under the lowest: few are up, it should sell
+a touch under the lowest: many are up
+no fresh prices: from the usual price (read the house for today's)
+held above what a vendor pays
+Auction house read: %d prices noted.
+The auction house can be read again in %d minutes.
+The auction house cannot be read all at once right now.
+This client cannot read the whole auction house.
+Reading the auction house...
+Vendor prices in tooltips
+what an item sells for at a vendor, each and for a full stack
+Auction prices in tooltips
+the lowest buyout you have seen for an item at the auction house, and how long ago
+Read the auction house when you visit
+the first visit in a while reads every price at once (the game allows it every 15 minutes); /cchud scan asks for it
+Best use of an item
+an item's tooltip says what to do with it: sell it at the auction house (and how much more that brings), sell it to a vendor, or keep it
+Quick sales at the auction house
+price 5% under the lowest for a sale now; off: patient prices, just under the lowest, that sell when buyers come
+read every price at the auction house at once (open it first; every 15 minutes)
+AP
+RAP
+crit
+dodge
+health
+mana
+spell crit
+What stats are worth to you
+each stat line in an item's tooltip gets its value for your character: attack power, ranged attack power, crit, dodge, health, mana
+Item level
+Requires level
+Stacks to
+Item ID
+not seen yet
+none
+junk
+kept
+bank
+Your mark
+Item details: everything about the item you point at
+show everything about the item you point at (or the one given): prices, who holds it, your mark
++%s over a vendor
+no price known yet
+a vendor pays as much
+Market
+Post
+Patient
+Read all prices
+Nothing in your bags can be sold here.
+No price history yet: read the auction house on a few days.
+Lowest
+Usual
+Up
+No price known: read the auction house first.
+%d worth selling here, %d more you could
+%d prices known, all read %s
+never
+no data
+Quick sale
+Back
+Post %d for %s
+This client's auction house cannot be posted to from here.
+Posted %d for %s.
+Market at the auction house: open / close
+Market tab at the auction house
+a Market tab on the auction house: what in your bags is worth selling there and why, a price chart beside it, and posting in one press
+open or close the Market (a tab of the auction house)
+which auction house this client has (for troubleshooting)
+Offline
+Dead
+Party and raid frames
+draw our look over the game's party and raid frames (their targeting and options keep working)
+Cast bar animations
+a cast bar shows what is being cast: picks chip at it while mining, lightning runs along it for nature, a vine flowers for a heal, runes take shape for arcane, flames, ice and shades for fire, frost and shadow
+show every cast bar animation once, on your cast bar
+Interrupted
+Likely:
+Cast wind-up
+your cast bar glows brighter as the cast fills and bursts when it lands
+Fishing float
+while fishing, a float bobs on your cast bar and it shows what is likely to bite here
+Cast bar
+our cast bar in place of the game's (it stays where Edit Mode puts the game's)
+Cast bar size
+how large your cast bar is drawn, with the fishing float and everything else that plays on it
+Fishing front and centre
+while you fish, the cast bar moves to the middle of the screen and is drawn larger: the line, the float and what bites are the main event
+Target something first.
+%d effects listed and saved. Type /reload so the game writes them to disk.
+Your effects on the target
+a row of your own debuffs or buffs under the target bar
+Enemy buffs on the target
+an enemy target's buffs, on the right under its bar: the ones that matter, or all of them when Only the effects that matter is off
+Only the effects that matter
+on the target and nameplates: an enemy's buffs only when the game marks them important, it is enraged, or you can dispel or steal them; on a friend, the debuffs you can dispel and the dangerous ones. Off: every buff
+Debuffs on a friendly target
+on the right under a friend's bar: the debuffs you can dispel (edged in their kind's colour), boss mechanics and crowd control
+Combo points
+combo points as pips above the target's name
+list what the game says about your target's effects (for troubleshooting)
+Threat percent
+your share of the threat as a number beside the threat icon, on the target frame and nameplates
+Health number
+the health left, shortened (12.3k), on the bar (not on compact plates: the percent says enough there)
+Your debuffs
+your debuffs on the unit, above its name, with their time
+Everyone's debuffs
+the debuffs the game marks for nameplates from everyone, not only yours
+Enemy buffs
+an enemy's buffs beside its debuffs: the ones that matter (important, enraged, or ones you can dispel or steal), or all of them when Only the effects that matter is off
+Crowd control icon
+a large icon with its time when the unit is stunned, rooted, feared...
+Aggro glow
+a shield icon and a glow behind the name: red while it attacks you, red and yellow when you are about to pull it, yellow and blue when you are losing it, blue when it is not on you
+Quest marker
+a gold marker on units your quests still need
+Nameplate animations
+plates fade in, low health breathes, crowd control shimmers
+Nameplates
+our look on the game's nameplates (its nameplate options still apply)
+Player titles
+show a player's title with their name
+Guilds and NPC jobs
+a line under the name: the player's guild, or what the NPC does
+Bars for friends in a fight
+friendly plates show health, power and casts while that unit is in combat
+The game's own friendly nameplates
+leave friendly plates (your party, other players, friendly NPCs) to the game's own look; ours only on enemies
+Power bars
+a thin mana, rage or energy bar under the health bar
+Cast target
+who a cast is aimed at, next to the spell's name
+Health percent
+the health percent on the bar
+Name on your target's plate
+off: your target's plate drops its name and level (the target frame shows them)
+Levels on nameplates
+the level in front of an enemy's name, coloured by difficulty
+Compact nameplates
+nameplates about half as wide
+Loud enemy casts
+an enemy's cast flashes, swells and pulses ever faster until it lands, so it can be interrupted in time
+Class icons on nameplates
+a player's class icon in front of their name, friend or enemy
+What NPCs do, as icons
+an icon over friendly NPCs that offer something: a bag over vendors, an anvil over smiths who repair, a book over trainers... (the game's own icons; they show even while the plate itself waits to be pointed at)
+Friendly NPCs only when pointed at
+the plates of friendly NPCs (vendors, quest givers, townsfolk) show only while you point at them, like their tooltip
+Names on things you can interact with
+a name over ore, chests, plaques and the like while you face them (off: they stay bare, as the game's own prompt already says what they are)
+Mini plates
+minions, critters and grey enemies that give no experience get a small plate: a slim bar and the name, nothing more (the game's own option decides whether they have plates at all)
+Party nameplates in dungeons: names only
+inside a dungeon or raid the game draws friendly players' nameplates itself and addons may not change them: in there the game's own options are set to show them as class-coloured names without bars, like ours, with the game's bars back while you fight (when bars for friends in a fight are on); all put back when you leave
+Party nameplates in dungeons: hidden
+inside a dungeon or raid, switch the game's nameplates for friendly players off altogether (and back the way you had them when you leave)
+show what the game gives for your target's name (for troubleshooting)
+list the nameplates on screen and whether they wear our look (for troubleshooting)
+Showing every damage school once (the last one as a crit).
+Hit particles
+holy flashes, fire rises, frost crystals linger, shadow smokes, arcane runes twinkle on the bar you hit
+Your bars shake when you are hit
+your player frame and vertical bars give a small shake, in the hit's school, when you take damage
+Hit effects by damage school
+your hits make the bar they land on flash and shake: fire, frost, shadow and the rest each look different
+show every damage school's hit effect once on your target and the nameplates
+Incoming heals in their school's colour
+the heal on its way to a unit shows the colour of the heal being cast at it: holy gold, nature green
+Heals over time grow on the bar
+roots and branches (nature) or golden threads (holy) grow over the bar of your target, focus or you while a heal over time lasts, and wither when it ends
+Shields show as a ward
+a shield on your target, your focus or you (Power Word: Shield, Divine Shield, Ice Barrier...) flares round the health bar in its school's colour, glows while the shield holds, and fades when it breaks
+Stylized numbers on you
+the damage and healing you take pop like your own hits, instead of the game's scrolling text (follows the game's option for combat text on you)
+The game's vibration is off (or this controller cannot rumble).
+Playing every vibration pattern once.
+Vibration strength
+how strong our patterns are, on top of the game's own vibration setting
+Controller vibration
+the controller rumbles for the moments worth feeling (the game's own vibration strength comes first)
+Rumble: hits you take
+a thud when you are hit, heavier for a big hit or a crit
+Rumble: your crits
+a sharp tick in the right trigger when you land a crit
+Rumble: interrupts
+a double knock when your target's cast is cut off
+Rumble: low health
+a heartbeat while you are low on health in a fight
+Rumble: aggro
+a pulse when your target turns on you
+Rumble: alerts
+a ready check, a dungeon invitation or a whisper
+Rumble: seals charge up
+a quick rising rumble that snaps in the right trigger when you put on a seal
+Rumble: casts build up
+while you cast a spell with a cast time, the rumble builds with the cast bar and snaps when it lands
+Rumble: level up and death
+a swell when you level up, a long low rumble when you die
+Light bar shows your health
+a controller with a light bar (DualSense) shows your health in it: green to red, pulsing when low in a fight
+play every vibration pattern once
+Judgement
+Rumble: your key abilities
+each class's key abilities have a feel of their own on the controller (a Judgement splashes, a Holy Strike snaps, Windfury knocks three times)
+Big moments
+rarely, a really special hit is pinned big and golden in the middle of the screen: back-to-back crits of your key abilities, a Windfury crit, or a crit far above the fight's usual (at most twice a fight)
+show what a big moment looks and feels like
+ready to hand in
+above your level
+wants a group
+low level
+Your quest log is empty.
+Recommended next:
+%d yd
+Quest list: current zone only
+track only the quests of the zone you are in (your own tracking comes back when this is off)
+Quest list: no group quests while alone
+while you are on your own, quests meant for a group (elite, dungeon, raid) are left out of the list; in a group they are back
+Quest list: only the nearest
+list no more than this many quests, the nearest ones (0 lists them all)
+Quest list: nearest first
+keep the quest list in order of distance, the nearest quest at the top
+Quest list: recommended order
+keep the quest list in a recommended order: ready to hand in first, then what you can do on your own nearest first, then quests above your level, group quests while you are alone, and grey quests last
+say a recommended order for your quests: hand in what is ready, then the nearest you can do alone, then the rest
+Not in combat.
+This client has no gamepad bars.
+This client does not let addons change it; use Edit Mode.
+gamepad bars: %s
+compact
+full
+Slim gamepad bars
+hide the heavy art behind the gamepad action bars and draw them smaller
+Gamepad bar size
+size of the gamepad bars while slim bars are on, in percent
+the game's gamepad bars in compact or full mode (the same as its Edit Mode setting)
+Fade out of combat
+the gamepad bars, minimap, quest list, damage meter and experience bar rest together out of combat, and come back for a fight, a pulled trigger or an enemy target
+The screen at rest
+how visible the resting parts of the screen stay out of combat (0 hides them)
+Rests: gamepad bars
+Rests: minimap
+Rests: quest list
+Rests: damage meter
+Rests: experience bar
+Rests: buffs
+Rests: cooldown rows
+whether this part of the screen takes part in the fade out of combat
+Saved: type /reload so the game writes it to disk.
+Stance and pet buttons above the bars
+the stance and pet command buttons sit where the green and red targeting icons were, so their wheel opens fully on screen; those icons are hidden
+list where the gamepad bars' parts sit and what rests (for troubleshooting)
+Auto
+Generic
+the game's own
+Button icons: %s.
+No controller is in use right now, or the game has no icon styles: it is set when one is.
+The game did not take the button icons.
+The controller does not say what it is: the icons stay as the game has them.
+the icons the game shows for your controller's buttons: auto (by the controller in use), xbox, playstation, switch, steam, generic (numbers), or game to leave them as the game has them
+Cooldown rows clear of the gamepad bars
+the game's cooldown rows sit under the target instead of on top of the gamepad buttons, a little smaller (only on the game's built-in layouts: on a layout of your own they stay where you put them)
+Fishing: %s casts
+Fishing mode: %s casts your line, and hooks the fish when the float bobs.
+Fishing mode: off.
+Fishing mode needs a fishing pole in your hands.
+You do not know Fishing.
+Fishing mode: one button casts and hooks
+Fishing button: %s
+One-button fishing
+with a fishing pole in your hands, your interact button casts your line whenever there is nothing to interact with, and hooks the fish when the float bobs; the catch is taken for you
+Bait on a double press
+press your fishing button twice quickly: the second press puts the best bait in your bags on your pole, when the pole has none
+one-button fishing off for now, or on again (with a pole in your hands it is on by itself)
+the button that fishes: your interact button to begin with (Square or X), or any other, a trigger for one (rt)
+Durotar's coast is red rock and warm shallows. Trolls of the Echo Isles say the mackerel run thickest when the tide carries the smell of the islands' cooking fires.
+The lakes of Mulgore are small, clear and patient. The tauren fish them the way they do everything else: slowly, and with thanks.
+Every oasis in the Barrens is a meeting place. Whatever drinks there by day, something swims under it by night.
+The pools of Teldrassil lie in the shade of one tree. Night elf anglers swear the fish there have never seen the sun and do not miss it.
+Darkshore's water is grey, cold and full of wrecks. Half of what bites off Auberdine has made a home in somebody's lost cargo.
+The rivers of Ashenvale run under leaves older than most kingdoms. The fish are quick, and the sentinels are quicker to ask what you are doing there.
+Down among the Thousand Needles the water is scarce and jealously kept. A fish from here has earned its place.
+Stonetalon's lakes sit high and cold between the peaks. The goblins would have drained them by now if the fishing were not so good.
+The coast of Desolace is bones and grey surf. Something down there has a taste for both.
+Feralas is green all the way down to the waterline. Its rivers are deep, warm and very much alive.
+Nobody is sure where Dustwallow's land stops and its water begins. Fish from the shore, and count your toes afterwards.
+Steamwheedle Port has the only water worth the name in Tanaris. The goblins will sell you the right to fish it, twice if you let them.
+Under Azshara's bright bay lies a drowned city. Old anglers say the big ones live in what used to be its gardens.
+The pools of Felwood glow, and not in a good way. What still swims in them is stubborn beyond reason.
+The hot springs and tar-rimmed lakes of Un'Goro have kept things the rest of the world forgot. Some of them bite.
+Lake Elune'ara in Moonglade is as calm as a held breath. The druids ask only that you take no more than you will eat.
+Silithus is sand, wind and the sound of wings. If you have found water to fish here, tell no one.
+The lakes of Winterspring freeze at the edges and steam in the middle. The fish there are fat for the cold and worth the walk.
+The pools of Orgrimmar are fished by peons with nothing better to do and by old grunts who say the same. Both tell you the big one got away.
+A fish from the ponds of Thunder Bluff has lived its whole life a long way above the plains. It seems calm about it.
+Darnassus keeps its waters as carefully as its temples. The fish have grown used to being admired.
+The lakes of the Alterac Mountains are snowmelt, and the ogres and the Syndicate fish them when no one is looking.
+Arathi's shores have seen more armies than anglers. The fish have long since stopped caring whose banner flies above the water.
+The Badlands are dust from one end to the other. A bite here is a small miracle; treat it as one.
+The coast of the Blasted Lands is red, scoured and quiet. Whatever lives in that surf has learned to live with a great deal.
+The lakes of Tirisfal lie still under a sickly sky. The Forsaken fish them out of habit; the dead do not eat much, but they remember liking it.
+Silverpine's long coast is all mist and pine shadow. The fishing is good, which is the one cheerful thing anyone says about the place.
+The rivers of the Western Plaguelands still run, though not clean. What you pull from them, look at twice.
+Few people fish the Eastern Plaguelands, and fewer say so. The water keeps what the plague left of it.
+Hillsbrad's river and its long southern shore have fed both sides of every quarrel fought over them.
+The Hinterlands keep their lakes high among the trees, where the Wildhammer dwarves fish from gryphon-back when they think no one can see.
+The lakes of Dun Morogh are ringed with ice most of the year. A dwarf will cut a hole, sit down with a pint and call it a good day whatever bites.
+The Searing Gorge has lava where other lands have rivers. Bring something to drink instead.
+The Burning Steppes are ash and embers. If the water here gives you anything at all, it will be hot.
+Every child in Elwynn learns to fish at Crystal Lake or Stone Cairn. The smallfish there have been outwitting them for generations.
+Deadwind Pass has little water and less welcome. What is in the pools below Karazhan is best left there.
+The river along Duskwood's edge is black at any hour. The fish do not seem to mind the dark; the anglers do.
+The Loch is the pride of Loch Modan, held back by the great Stonewrought Dam. Dwarves measure a fishing story against it, and the Loch usually wins.
+Lake Everstill in Redridge is as pretty as a painting and fished from every dock in Lakeshire. The townsfolk know each good spot and will not tell you one.
+From its jungle rivers to the wild southern cape, Stranglethorn has the richest water on the continent. Booty Bay's anglers hold a tournament over it, and nearly all of them cheat.
+The Swamp of Sorrows is green water under green trees. The fish taste of mud, and the locals like them that way.
+Westfall's fields failed, but its coast did not. The folk who stayed live off the long grey shore.
+The Wetlands are well named. Menethil Harbor's docks are the driest place to fish them, and the crocolisks know it.
+The canals of Stormwind are fished by children, pensioners and at least one member of the nobility in disguise. Nobody asks what else is in the canals.
+The Forlorn Cavern holds Ironforge's one quiet pool. Old dwarves fish it for hours and never say a word.
+The canals of the Undercity run a green that has nothing to do with algae. The Forsaken who fish them are not doing it for supper.
+The first fish most anglers ever land, and bright enough that they remember it.
+Slick, quick and common along every warm coast. It is better grilled than its name suggests.
+All mouth, and happiest in water you would not drink.
+Small, toothy and fearless. A shoal of them is said to have chased a bear out of the Loch.
+A flash of colour under the surf. Sailors count one on the line as luck for the voyage.
+A patient bottom-feeder with whiskers like a dwarven elder.
+No one eats it twice. Alchemists buy every one they can get.
+Its fins glow like banked coals, and the oil pressed from it burns nearly as well.
+Armoured like a small shield. The meat inside is worth the trouble.
+Something in the water near the Wailing Caverns changed it. Eating one may change you as well, for a while.
+River folk say a meal of it clears the mind. It is the swimming upstream that makes it wise.
+Older, larger and wiser than its cousin, which did not keep it off your hook.
+A hard fighter from warm southern seas, and a favourite on every tavern board from Booty Bay to Gadgetzan.
+Its brow shines like true mithril. More than one miner has tried to smelt one.
+Its scales boil down into an oil that makes the skin as hard as rock. It prefers the night.
+Polished like a parade breastplate, and nearly as heavy.
+It comes inshore only in the cold months, and the cooks who know it wait all year.
+It runs when the days are long. Coastal folk mark the season by it.
+Hold it by the middle, and only once.
+A river fish from wild country, as red at the gills as a troll's warpaint.
+It feeds after dark. A soup of it steadies a spellcaster's nerves.
+It feeds by day, the nightfin's opposite in nearly everything, and shares its water all the same.
+Not strictly a fish. It disagrees with being caught and will make that known.
+Pale as river ice, from the cold clear lakes of the north.
+You will want both hands, and perhaps a friend.
+%.1f lb
+New in your fish journal: %s, %s.
+New in your fish journal: %s.
+Your heaviest %s yet: %s (it was %s).
+Fish journal
+every catch is written into your fish journal: how many of each kind, where you first landed it, and a weight made up for fun with your best of each (/cchud journal opens it)
+Bait %s
+No bait: press %s twice for %s
+No bait
+Caught %d
+Got away %d
+new!
+best!
+Fishing interface
+with a fishing pole in your hands: the fish of the water you stand at (the ones you have not landed here stay hidden), your Fishing skill and what your bait adds, how many you caught and how many got away, how long your bait lasts, and your latest catches
+A curious one: +%d%%
+Hold %s: the lure sinks
+%d in a row
+A game while the float is out
+a small stretch of water beside the fishing interface: hold a trigger to sink your lure and let go to let it rise, and keep it beside the shadow of the fish. The better you do, the heavier the made-up weight of your next catch. It takes no button and never touches your cast or your catch
+%d landed, %d kinds, %d got away
+Heaviest: %s, %s
+Fish
+Waters
+Nothing landed yet. Take a pole to the water.
+Landed: %d
+Heaviest: %s, at %s
+First landed: %s
+Landed here: %d
+Kinds found here: %d
+Choose
+Close
+open or close your fish journal: every kind you have landed, your heaviest of each, and the waters you have fished
+Chat fades when quiet
+chat text fades out after a few seconds without new messages
+Seconds before chat fades
+how long chat text stays before it fades
+Coordinates on the map
+your coordinates under the world map
+%d messages hidden as spam since you logged in.
+Class icon and level in chat
+a player's class icon and level in brackets in front of their name, when the game lets us know them
+Chat text size
+the size of the text in the chat windows, as a share of the game's own size (the game's own setting is left as it is)
+Hide gold sellers and repeated adverts
+messages selling gold or services with a web address, and the same message repeated by one player, are hidden (never from your group, guild or friends)
+list the chat messages hidden as spam lately
+Tooltips follow the cursor.
+Tooltips stay in their corner.
+Tooltips at the cursor: on / off
+Tooltip background
+how solid the background and border of tooltips are: 100% is the full dark glass, 0% leaves only the text
+Tooltips follow the cursor
+tooltips open at your cursor instead of the corner of the screen (in a fight they stay in the corner)
+Restyle the game's own frames
+tooltips, buffs, the quest tracker, the minimap, the experience bar, chat tabs and the gamepad bars in the HUD's look (the mouse UI keeps the game's)
+Experience bar size
+the size of the experience and reputation bars while they are restyled, in percent
+Tooltips
+tooltips in dark glass, edged in the colour of a player's class or an item's quality
+Gamepad bars
+the gamepad buttons with a slim ring on a dark backing instead of the heavy art
+Buffs
+your buff and debuff icons cropped and edged, their times outlined
+Quest tracker
+the quest tracker's headers in dark glass, its lines outlined
+Minimap
+a slim ring and a soft halo around the minimap instead of the gold rim
+Experience bar
+the experience and reputation bars a little smaller, in their own colours
+Chat
+chat tab names outlined and the box you type in as dark glass
+The game's notices will be asked again.
+Confirm the experimental features notice
+after you have accepted the game's experimental features notice once, it is accepted for you at later logins
+forget the notices you have accepted, so the game asks again
+check: %d of %d passed
+Debug reports
+gather the troubleshooting reports by themselves: when you log in, and again when you reload or log out (they are kept in the saved settings)
+HUD preset: %s, to match the camera
+preset: %s
+A layout named '%s' was added to the game's Edit Mode. Choose it there to use it (Game Menu > Edit Mode > Layout).
+unknown preset '%s'
+Sized for a TV: bigger text on the HUD and in chat.
+Sized for a monitor: text at its plain size.
+Our frames are back where they start. Choose the game's %s layout in Edit Mode (Game Menu > Edit Mode > Layout).
+Presets set the camera distance
+a preset also brings the camera to the distance its layout was made for, once (zoom freely afterwards)
+Action
+a third-person view: slim vertical bars beside your character, every effect on; out of combat things fade
+Classic
+our frames where WoW has always had them, calmer effects, the game's gamepad bars as they are
+Minimal
+only what you need: friendly NPCs show their plate (with what they do) only while you point at them, aim at them or target them; names without titles; out of combat your bars rest as a faint hint (low health always shows)
+Open world
+a clean screen for exploring: slim bars beside you that rest faded, plates without power bars, chat that fades
+Adventure
+after console open-world adventures: vitals beside you, a small target high in the middle, townsfolk only when you point at them, chat that fades fast
+Soulslike
+your bars top left, a big target bar low in the middle like a boss bar, every hit felt
+Shooter
+upright bars just right of centre, close to where you aim, the target high above, strong hit feedback
+Crossbar
+after MMOs played on a controller: the target and focus high in the middle, your bars just above the gamepad bars, party on the left, full plates
+ARPG
+after action RPGs: the camera far back, your vitals low on the left, the target high in the middle, minor enemies small, every hit loud
+Compass
+after first-person RPGs: the camera close, your bars low in the middle, the target under the top edge, townsfolk only when you point at them
+Raid
+WoW's own placement with everything a group needs: party and raid frames, health percents and levels on plates
+Follow ControllerCam's presets
+choosing a camera preset in ControllerCam for everywhere also chooses the matching HUD preset (the camera keeps its own distance)
+Modern
+set the whole HUD to a preset: action, classic, minimal, openworld, adventure, soulslike, shooter, crossbar, arpg, compass, raid
+the target frame and nameplates compact or full, both at once
+the target frame compact or full
+size the text for a TV across the room, or for a monitor at arm's length
+put our frames back where they start, for the game's own Modern or Classic layout
+Your whole setup (HUD, camera and the game's layout): copy this line (Ctrl+C) to keep or share it.
+Paste a line of HUD settings (Ctrl+V) and accept.
+That line is damaged: copy it again, completely.
+That line was made by a newer version: update the addon.
+That is not a line of HUD settings.
+Settings imported: %d taken, %d left out.
+The camera setup came along.
+The camera setup was left as it is.
+The game's layout is now '%s'.
+The game's layout was left as it is.
+your settings as one line of text, to keep or share
+take settings from a line of text made by /cchud export
+The HUD is on while the Gamepad UI is in use. Its options: Options > AddOns > ControllerCam > HUD, or /cchud.
+Camera only: the HUD rests and the game's interface is as it was. /cchud on switches it on.
+Set up the screen for the controller too? This adds a layout named CCHUD to the game's Edit Mode, for you to choose there: it puts the cooldown rows under the target, clear of the gamepad buttons. Your own layouts are kept (/cchud setup offers this again).
+Set it up
+Not now
+ControllerCam comes with a controller interface, the HUD: its own unit frames, nameplates, cast bar and more while the Gamepad UI is in use. Do you want it, or the camera alone?
+Camera + HUD
+Camera only
+This client does not let addons change the layout.
+ask again: the camera with the HUD, or the camera alone
+offer the screen layout made for the HUD again (the game's Edit Mode)
+Shown while the Gamepad UI is in use. Drag our frames in the game's Edit Mode.
+Presets
+Sized for
+TV
+Monitor
+Button icons
+the icons the game shows for your controller's buttons: found by itself for the controller in use, or the kind you choose
+Reset the game's layout
+Try it out
+Play the demo
+Show every hit effect
+Run the self-check
+Gamepad bars: compact / full
+Export settings
+Import settings
+Tick “Show advanced options” on the main page for every setting.
+Modules
+Quick switches
+General
+HUD
+The options panel is not available in this client.
+Enabled
+the whole HUD; off brings the game's own frames back
+Also in the mouse & keyboard UI
+normally the HUD only runs while the Gamepad UI is in use
+Put the game's frames aside
+hide the game's player, target and focus frames while ours are shown
+Chat window at the top left
+move the chat window to the top left while the HUD runs
+Vertical bars when idle
+how visible the vertical bars stay at full health out of combat (0 hides them)
+Class colours
+colour your bar, and other players' bars, by class
+Class icons
+a class icon in front of a player's name on the target and target of target
+Threat on the target frame
+a shield icon and a glow on the target frame: red while it attacks you, red and yellow when you are about to pull it, yellow and blue when you are losing it, blue when it is not on you
+Compact bars everywhere
+the target frame and nameplates in their compact style, a little over half as wide (each one can still be set on its own; presets never change it)
+Compact target frame
+the target frame a little over half as wide
+Health colours in a fight
+in a fight, health bars turn from green through yellow to red as health drops
+Shade behind text
+a soft dark band behind the target's text, to keep it readable
+Text size
+size of the text on our frames
+Frame size
+size of our unit frames
+Your bars in a fight
+how visible your bars, pet and focus are in a fight until something calls for attention
+Full when health is below
+your bars come back in full when your health drops below this
+Full when mana is below
+your bars come back in full when your mana drops below this
+Player bar when idle
+how visible the player bar stays at full health or out of combat (0 hides it)
+Vendor and bank help
+the vendor's Sell junk button asks what to sell; quick move at vendor and bank
+Show advanced options
+every setting, not only the main switches
+Player frame
+our player bar, top left
+Target frame
+our target bar, top centre
+Pet bar
+a small pet bar under the player bar
+Focus frame
+our focus frame
+slim upright health and power bars beside your character, for a third-person view (in place of the player bar)
+Sell junk when a vendor opens
+sell junk by your rules as soon as a vendor opens
+White weapons and armor are junk
+count white weapons and armor as junk (never tools, fishing poles, gear with a use, or anything that could be an upgrade; always asked first)
+Deposit when the bank opens
+items marked for the bank, and what the bank already holds (when that is on), go in by themselves
+the game's option; our small frame follows it
+Cooldown Manager
+the game's Cooldown Manager
+Personal Resource Display
+your health and power under your character
+Bank takes reagents by itself
+the game's option for the bank
+Tooltip when a buff starts
+the game's option: a buff's tooltip pops up for a moment when it is applied (Gamepad UI)
+Class colours for names in chat
+the game's chat setting for every kind of chat at once: a player's name in their class colour
+open the options panel (Options > AddOns > ControllerCam HUD)
+Frames
+Effects
+Look
+Quests, chat and map
+Bags, bank and vendor
+Fishing
+Native Options
+%s  |  Gamepad UI: %s  |  running: %s
+player %s, target %s, pet %s, focus %s  |  game frames put aside: %s  |  chat moved: %s
+native options: target of target %s, Cooldown Manager %s, personal resource %s
+text size %d%%  |  text shade: %s
+vendor and bank help: %s  |  auto-sell: %s  |  white gear is junk: %s
+idle visibility %d%%  |  scale %d%%  |  class colours: %s
+A minimal action-game HUD for the Gamepad UI.
+enabled
+disabled: the game's own frames are back
+use in the mouse & keyboard UI too: %s
+game frames put aside: %s
+chat moved to the top left: %s
+class colours: %s
+This client does not have that option.
+%s: %s (the game's own option)
+The game did not accept that right now.
+vendor and bank help: %s
+auto-sell: %s
+white gear is junk: %s
+Vendor help is off.
+usage: /cchud sell [junk | white | green | blue]
+deposit marked items when the bank opens: %s
+usage: /cchud junk <item> (shift-click the item into the chat line)
+item %d: junk, sold with the rest
+item %d: kept, never sold
+item %d: for the bank
+text shade: %s
+usage: /cchud text <80-250>
+text size %d%%
+demo stopped
+The HUD is not running.
+Demo running: a made-up fight on a loop. Type /cchud demo again to stop.
+usage: /cchud idle <0-100>
+idle visibility %d%%
+usage: /cchud scale <50-200>
+scale %d%%
+Drag the frames, then type /cchud lock.
+frames locked
+Everything is back to how it started: settings, frames and the screen layout (your vendor marks and price history are kept).
+frames are back where they started
+unknown command '%s'. Type /cchud help
+Error list cleared.
+No errors recorded.
+%d errors recorded (newest last). /cchud errors clear empties the list.
+show status
+turn the HUD on or off (off brings the game's own frames back)
+also use the HUD in the mouse & keyboard UI
+use our frame for it, or the game's own
+slim upright health and power bars beside your character
+target of target (the game's own option, also in its menus)
+the game's Cooldown Manager (the game's own option)
+your health and power under your character (the game's own option)
+the tooltip that pops up when a buff starts (the game's own option)
+keep the game's own player and target frames visible (on) or put them aside (off)
+at a vendor: choose what to sell (also: sell junk, sell white | green | blue)
+count white weapons and armor as junk
+mark an item: always sold, never sold, or for the bank (shift-click it into the chat line)
+at the bank: deposit what the bank already holds, and every item marked for it
+deposit as soon as the bank opens
+the bank takes reagents by itself (the game's own option)
+text size, in percent (150 reads well on a TV)
+how visible the player bar stays when nothing is happening (0 hides it)
+size of the frames, in percent
+drag the frames to where you want them (the game's Edit Mode does this too)
+put the frames back where they started
+play a short made-up fight, to see how the frames react (again to stop)
+compare what is on screen with the settings (check all lists every row)
+save a description of this client's Gamepad UI (for troubleshooting)
+show this list
+the last errors the HUD met, also after a reload (to report them)

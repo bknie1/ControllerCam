@@ -388,6 +388,67 @@ class Sharing(unittest.TestCase):
             self.assertIsNone(id_)
         self.assertEqual(self.env.saved(), before)
 
+    def setup_string(self, body):
+        return self.env.run('return "CCS1:" .. NS.ShareChecksum(%r) .. ":" .. %r' % (body, body))
+
+    def import_setup(self, env, text):
+        env.lua.globals().NS = env.ns
+        r = env.lua.eval("function(s) local ok, e = NS.ImportSetup(s); return { ok = ok, e = e } end")(text)
+        return r["ok"], r["e"]
+
+    def test_the_whole_setup_goes_out_and_comes_back(self):
+        e, ns = self.env, self.env.ns
+        mine, _ = e.importing(ns.ExportById("hybrid"))                  # a profile of your own
+        self.assertTrue(ns.Assign("mounted", mine))
+        self.assertTrue(ns.Assign("combat", "shooter"))
+        ns.SetExitDelay(3)
+        ns.SetFlipShoulder(True)
+        ns.SetAdvanced(True)
+        self.assertTrue(ns.SetValue("action", "shoulder", 1.5))         # and a built-in one you edited
+        text = ns.ExportSetup()
+        self.assertTrue(text.startswith("CCS1:"))
+        self.assertNotRegex(text, r"\s")
+        self.assertEqual(e.lua.globals().ControllerCam.ExportSetup(), text)     # what the HUD asks for
+
+        other = Env()
+        ok, err = self.import_setup(other, text[:30] + "\n " + text[30:])
+        self.assertTrue(ok, err)
+        self.assertEqual(other.ns.ExportSetup(), text)                  # the same setup, to the letter
+        db = other.db()
+        self.assertEqual(db["assign"]["combat"], "shooter")
+        self.assertEqual(db["exitDelay"], 3)
+        self.assertTrue(db["flipShoulder"])
+        self.assertEqual(db["overrides"]["action"]["shoulder"], 1.5)
+        theirs = db["assign"]["mounted"]
+        self.assertFalse(other.ns.IsBuiltin(theirs))
+        self.assertEqual(other.ns.ExportById(theirs), ns.ExportById(mine))
+        self.assertTrue(other.lua.globals().ControllerCam.ImportSetup(text))    # again: nothing is doubled
+        self.assertEqual(len(list(db["profiles"].keys())), 1)
+        self.assertEqual(other.ns.ExportSetup(), text)
+
+    def test_a_bad_setup_changes_nothing(self):
+        e = self.env
+        e.importing(e.ns.ExportById("hybrid"))
+        text = e.ns.ExportSetup()
+        before = e.saved()
+        bad = ["junk", "", text[:-4], text.replace("CCS1", "CCS2", 1), "CCS1:" + "0" * 8 + ":" + "a" * 40000,
+               self.setup_string("a=default>nosuch"),                   # a profile that does not exist
+               self.setup_string("a=default>#2&p=" + e.ns.ExportById("hybrid")),    # ... or did not come along
+               self.setup_string("a=nowhere>action"),                   # a situation that does not exist
+               self.setup_string("a=default>action&d=99"),
+               self.setup_string("a=default>action&f=2"),
+               self.setup_string("a=default>action&s=1>9"),
+               self.setup_string("a=default>action&x=1"),
+               self.setup_string("a=default>action&o=nosuch>" + e.ns.ExportById("hybrid")),
+               self.setup_string("a=default>action&p=CC1:00000000:n=Evil;shoulder=1")]
+        for s in bad:
+            ok, err = self.import_setup(e, s)
+            self.assertIsNone(ok, s[:60])
+            self.assertTrue(err, s[:60])
+        self.assertEqual(e.saved(), before)
+        self.assertIn("newer", self.import_setup(e, text.replace("CCS1", "CCS2", 1))[1])
+        self.assertIn("checksum", self.import_setup(e, text[:-4])[1])
+
     def test_import_creates_unique_custom_profile(self):
         ns = self.env.ns
         s = ns.ExportById("hybrid")
@@ -611,6 +672,92 @@ class Situations(unittest.TestCase):
         env.state(vehicle=False, instance="raid"); env.tick(2); self.assertEqual(name(), "Raid view")
         env.state(instance="party"); env.tick(2); self.assertEqual(name(), "Action")
         env.state(instance=None); env.tick(2); self.assertEqual(name(), "Action")
+
+    def test_indoors_does_nothing_until_assigned_and_a_pole_alone_changes_nothing(self):
+        env = Env()
+        name = lambda: env.ns.Status().profile
+        env.state(indoors=True, mainHand=6256); env.tick(2)
+        self.assertEqual(name(), "Action")
+        self.assertIsNone(env.ns.db.assign.indoors)
+        self.assertEqual(env.ns.db.assign.fishing, "shooter")       # fishing has its view from the start
+
+    def test_indoors(self):
+        env = Env()
+        name = lambda: env.ns.Status().profile
+        self.assertIn("Indoors", " ".join(env.cmd("set indoors shooter")))
+        env.state(indoors=True); env.tick(); self.assertEqual(name(), "Shooter")
+        env.state(resting=True); env.tick(); self.assertEqual(name(), "Shooter")        # an inn: indoors wins over city
+        env.state(instance="party"); env.tick(2); self.assertEqual(name(), "Action")    # a dungeon keeps its own camera
+        env.state(instance=None, resting=False, mounted=True); env.tick(2); self.assertEqual(name(), "Mounted cruise")
+        env.state(mounted=False, indoors=False); env.tick(2); self.assertEqual(name(), "Action")
+
+    def test_fishing(self):
+        env = Env()
+        name = lambda: env.ns.Status().profile
+        env.state(mainHand=6256); env.tick(2); self.assertEqual(name(), "Action")       # a pole in hand: nothing yet
+        env.state(channel=131474); env.tick(); self.assertEqual(name(), "Shooter")      # you cast: over the shoulder
+        env.state(channel=None); env.tick(5); self.assertEqual(name(), "Shooter")       # between casts the view holds
+        env.state(channel=131474); env.tick(); env.state(channel=None); env.tick(5)
+        self.assertEqual(name(), "Shooter")
+        env.tick(14); self.assertEqual(name(), "Action")                                # until you have stopped a while
+        env.state(channel=131474); env.tick()
+        env.state(channel=None, mainHand=25); env.tick(3); self.assertEqual(name(), "Action")    # the pole put away
+        env.state(channel=1234); env.tick(2); self.assertEqual(name(), "Action")        # another channel is not fishing
+        env.cmd("set fishing cinematic")
+        env.state(channel=131474); env.tick(); self.assertEqual(name(), "Cinematic")    # the cast itself, no pole
+        env.cmd("set combat tactical")
+        env.state(combat=True); env.tick(); self.assertEqual(name(), "Tactical")        # a fight comes first
+        env.state(combat=False); env.cmd("set fishing none"); env.tick(3)
+        self.assertEqual(name(), "Action")                                              # and it can be left empty
+
+    def test_an_install_from_before_gets_the_fishing_view_once(self):
+        old = Env(db="{ v = 1, assign = { default = 'hybrid' } }")
+        self.assertEqual(old.ns.db.assign.fishing, "shooter")
+        self.assertEqual(old.ns.db.assign.default, "hybrid")
+        own = Env(db="{ v = 1, assign = { default = 'hybrid', fishing = 'cinematic' } }")
+        self.assertEqual(own.ns.db.assign.fishing, "cinematic")                         # yours is kept
+        later = Env(db="{ v = 2, assign = { default = 'hybrid' } }")
+        self.assertIsNone(later.ns.db.assign.fishing)                                   # emptied since: stays empty
+
+    def test_a_preset_for_everywhere_tells_the_hud(self):
+        env = Env()
+        env.lua.execute("HUDHEARD = {}; ControllerCamHUD = { CameraPreset = function(id) table.insert(HUDHEARD, id) end }")
+        env.cmd("use shooter")
+        env.cmd("set combat classic")                         # one situation only: the HUD is not told
+        env.cmd("starter")
+        heard = list(env.lua.globals().HUDHEARD.values())
+        self.assertEqual(heard, ["shooter", "action"])
+        env.lua.execute("ControllerCamHUD = nil")
+        env.cmd("use hybrid")                                 # without the HUD: nothing to tell, nothing breaks
+
+    def test_shapeshift_forms_scale_the_shoulder_offset(self):
+        env = Env()
+        env.cmd("use shooter")
+        env.mock.state.zoom = 8
+        env.tick(1)
+        normal = float(env.cv("test_cameraOverShoulder"))
+        self.assertGreater(normal, 0)
+        env.state(form=1)                                     # cat form
+        env.mock.fire("UPDATE_SHAPESHIFT_FORM")
+        env.tick(0.2)
+        self.assertAlmostEqual(float(env.cv("test_cameraOverShoulder")), normal * 0.6, places=2)
+        self.assertIn("60%", " ".join(env.cmd("formoffset")))
+        env.cmd("formoffset 40")
+        self.assertAlmostEqual(float(env.cv("test_cameraOverShoulder")), normal * 0.4, places=2)
+        env.state(form=0)
+        env.mock.fire("UPDATE_SHAPESHIFT_FORM")
+        env.tick(0.2)
+        self.assertAlmostEqual(float(env.cv("test_cameraOverShoulder")), normal, places=2)
+        self.assertIn("not in a form", " ".join(env.cmd("formoffset")))
+        saved = env.mock.serialize(env.lua.globals().ControllerCamDB)
+        env2 = Env(db=saved)
+        self.assertAlmostEqual(env2.ns.db.formOffset[1], 0.4)
+
+    def test_unknown_situation_lists_them_all(self):
+        env = Env()
+        out = " ".join(env.cmd("set nowhere action"))
+        for word in ("vehicle", "fishing", "indoors", "default"):
+            self.assertIn(word, out)
 
     def test_combat_only_applies_when_assigned(self):
         env = Env()

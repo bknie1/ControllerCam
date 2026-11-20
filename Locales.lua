@@ -140,71 +140,77 @@ local ENGLISH = {
     "what a profile feels like and every setting it changes",  -- 130
     "use one profile everywhere (try: action, hybrid, classic)",  -- 131
     "the recommended setup: Action camera with calmer profiles for cities, mounts, flying, raids",  -- 132
-    "choose the profile for one situation (vehicle, flying, swimming, mounted, combat, raid, dungeon, city, default)",  -- 133
-    "use a profile now, whatever the situation",  -- 134
-    "stop forcing a profile",  -- 135
-    "save your current camera settings as a new profile",  -- 136
-    "make an editable copy of a profile",  -- 137
-    "change a setting of a custom profile (/ccam settings lists them)",  -- 138
-    "shoulder offset by camera distance, e.g. /ccam curve mine 0:2 8:2 20:0",  -- 139
-    "allow editing the built-in profiles too (/ccam reset <profile> brings the original back)",  -- 140
-    "put an edited built-in profile back to its original settings",  -- 141
-    "delete a custom profile",  -- 142
-    "show a string you can share",  -- 143
-    "add a profile from a shared string",  -- 144
-    "switch the shoulder offset to the other shoulder",  -- 145
-    "how long a situation is kept after it ends (default 1.5)",  -- 146
-    "turn on, or turn off and restore your original camera settings",  -- 147
-    "show the zoom, shoulder offset and motion settings right now (for troubleshooting)",  -- 148
-    "open the options panel (Options > AddOns > ControllerCam)",  -- 149
-    "show this list",  -- 150
-    "'%s' matches more than one profile. Type more of the name.",  -- 151
-    "No profile called '%s'. /ccam list shows them.",  -- 152
-    "Camera profiles for controller play. Out of the box you get an Action camera; Hybrid and Classic are one command away.",  -- 153
-    "Built-in profiles are locked. Turn on advanced editing (/ccam advanced on) or make a copy: /ccam copy <profile>",  -- 154
-    "Unknown setting. /ccam settings lists them.",  -- 155
-    "That value is outside the allowed range.",  -- 156
-    "That value is not valid.",  -- 157
-    "Unknown situation. Use: vehicle, flying, swimming, mounted, combat, raid, dungeon, city or default.",  -- 158
-    "usage: /ccam set <situation> <profile|none>",  -- 159
-    "%s: no change",  -- 160
-    "Forcing '%s'. /ccam auto goes back to the situations.",  -- 161
-    "The camera follows your situations again.",  -- 162
-    "usage: /ccam edit <profile> <setting> <value|default>",  -- 163
-    "Use /ccam curve for the offset by zoom.",  -- 164
-    "usage: /ccam advanced [on|off]",  -- 165
-    "Advanced editing is %s.",  -- 166
-    "'%s' is back to its original settings.",  -- 167
-    "Nothing to reset: '%s' has not been edited.",  -- 168
-    "Built-in profiles cannot be deleted.",  -- 169
-    "Shoulder offset mirrored.",  -- 170
-    "Shoulder offset back to normal.",  -- 171
-    "Situations are kept for %.1f seconds after they end.",  -- 172
-    "usage: /ccam delay <seconds>",  -- 173
-    "options panel is not available in this client",  -- 174
-    "unknown command '%s'. Type /ccam help",  -- 175
-    "Left-click: next profile. Right-click: previous profile. The first entry, no change, leaves the camera alone.",  -- 176
-    "Left-click: next profile. Right-click: previous profile.",  -- 177
-    "Press Ctrl+C to copy, then Esc.",  -- 178
-    "Paste a ControllerCam string here (Ctrl+V), then press Import.",  -- 179
-    "Camera profiles for controller play. Pick what the camera feels like in each situation. Left-click a profile to go to the next one, right-click for the previous one.",  -- 180
-    "Turn the camera control on or off. When off, your original camera settings are put back.",  -- 181
-    "Action camera with calmer profiles for cities, mounts, flying and raids.",  -- 182
-    "Stops the camera from flickering between profiles when a situation switches on and off quickly.",  -- 183
-    "Swaps which shoulder the camera looks over.",  -- 184
-    "Use this profile in every situation.",  -- 185
-    "Makes an editable copy of this profile.",  -- 186
-    "Saves the camera settings you have right now as a new profile.",  -- 187
-    "Shows a string you can share.",  -- 188
-    "Add a profile from a shared string.",  -- 189
-    "Deletes this custom profile.",  -- 190
-    "Puts this built-in profile back to its original settings.",  -- 191
-    "Lets you change the built-in profiles too. Your changes are kept, and Reset to original brings the original back.",  -- 192
-    "Zoom distance and offset pairs, for example 0:2 8:2 20:0. Empty = no curve. Press Enter to apply.",  -- 193
-    "Use the game's default for this setting.",  -- 194
-    "Advanced editing is on. Changes to a built-in profile are kept; Reset to original brings it back.",  -- 195
-    "Settings not listed use the game default. Click a value to change it; the curve box takes zoom:offset pairs.",  -- 196
-    "Built-in profiles are locked. Make a copy, or tick Advanced to edit them.",  -- 197
+    "use a profile now, whatever the situation",  -- 133
+    "stop forcing a profile",  -- 134
+    "save your current camera settings as a new profile",  -- 135
+    "make an editable copy of a profile",  -- 136
+    "change a setting of a custom profile (/ccam settings lists them)",  -- 137
+    "shoulder offset by camera distance, e.g. /ccam curve mine 0:2 8:2 20:0",  -- 138
+    "allow editing the built-in profiles too (/ccam reset <profile> brings the original back)",  -- 139
+    "put an edited built-in profile back to its original settings",  -- 140
+    "delete a custom profile",  -- 141
+    "show a string you can share",  -- 142
+    "add a profile from a shared string",  -- 143
+    "switch the shoulder offset to the other shoulder",  -- 144
+    "how long a situation is kept after it ends (default 1.5)",  -- 145
+    "turn on, or turn off and restore your original camera settings",  -- 146
+    "show the zoom, shoulder offset and motion settings right now (for troubleshooting)",  -- 147
+    "open the options panel (Options > AddOns > ControllerCam)",  -- 148
+    "show this list",  -- 149
+    "'%s' matches more than one profile. Type more of the name.",  -- 150
+    "No profile called '%s'. /ccam list shows them.",  -- 151
+    "Camera profiles for controller play. Out of the box you get an Action camera; Hybrid and Classic are one command away.",  -- 152
+    "Built-in profiles are locked. Turn on advanced editing (/ccam advanced on) or make a copy: /ccam copy <profile>",  -- 153
+    "Unknown setting. /ccam settings lists them.",  -- 154
+    "That value is outside the allowed range.",  -- 155
+    "That value is not valid.",  -- 156
+    "usage: /ccam set <situation> <profile|none>",  -- 157
+    "%s: no change",  -- 158
+    "Forcing '%s'. /ccam auto goes back to the situations.",  -- 159
+    "The camera follows your situations again.",  -- 160
+    "usage: /ccam edit <profile> <setting> <value|default>",  -- 161
+    "Use /ccam curve for the offset by zoom.",  -- 162
+    "usage: /ccam advanced [on|off]",  -- 163
+    "Advanced editing is %s.",  -- 164
+    "'%s' is back to its original settings.",  -- 165
+    "Nothing to reset: '%s' has not been edited.",  -- 166
+    "Built-in profiles cannot be deleted.",  -- 167
+    "Shoulder offset mirrored.",  -- 168
+    "Shoulder offset back to normal.",  -- 169
+    "Situations are kept for %.1f seconds after they end.",  -- 170
+    "usage: /ccam delay <seconds>",  -- 171
+    "options panel is not available in this client",  -- 172
+    "unknown command '%s'. Type /ccam help",  -- 173
+    "Left-click: next profile. Right-click: previous profile. The first entry, no change, leaves the camera alone.",  -- 174
+    "Left-click: next profile. Right-click: previous profile.",  -- 175
+    "Press Ctrl+C to copy, then Esc.",  -- 176
+    "Paste a ControllerCam string here (Ctrl+V), then press Import.",  -- 177
+    "Camera profiles for controller play. Pick what the camera feels like in each situation. Left-click a profile to go to the next one, right-click for the previous one.",  -- 178
+    "Turn the camera control on or off. When off, your original camera settings are put back.",  -- 179
+    "Action camera with calmer profiles for cities, mounts, flying and raids.",  -- 180
+    "Stops the camera from flickering between profiles when a situation switches on and off quickly.",  -- 181
+    "Swaps which shoulder the camera looks over.",  -- 182
+    "Use this profile in every situation.",  -- 183
+    "Makes an editable copy of this profile.",  -- 184
+    "Saves the camera settings you have right now as a new profile.",  -- 185
+    "Shows a string you can share.",  -- 186
+    "Add a profile from a shared string.",  -- 187
+    "Deletes this custom profile.",  -- 188
+    "Puts this built-in profile back to its original settings.",  -- 189
+    "Lets you change the built-in profiles too. Your changes are kept, and Reset to original brings the original back.",  -- 190
+    "Zoom distance and offset pairs, for example 0:2 8:2 20:0. Empty = no curve. Press Enter to apply.",  -- 191
+    "Use the game's default for this setting.",  -- 192
+    "Advanced editing is on. Changes to a built-in profile are kept; Reset to original brings it back.",  -- 193
+    "Settings not listed use the game default. Click a value to change it; the curve box takes zoom:offset pairs.",  -- 194
+    "Built-in profiles are locked. Make a copy, or tick Advanced to edit them.",  -- 195
+    "Fishing",  -- 196
+    "Indoors",  -- 197
+    "Unknown situation. Use one of:",  -- 198
+    "choose the profile for one situation (/ccam shows the list)",  -- 199
+    "the shoulder offset in the form you are in (druid forms, ghost wolf), in percent of normal",  -- 200
+    "You are not in a form.",  -- 201
+    "Shoulder offset in this form: %d%%",  -- 202
+    "usage: /ccam formoffset <percent> (or reset)",  -- 203
 }
 
 local TRANSLATIONS = {
@@ -341,71 +347,77 @@ local TRANSLATIONS = {
         "wie sich ein Profil anfühlt und jede Einstellung, die es ändert",  -- 130
         "ein Profil überall verwenden (z. B. action, hybrid, classic)",  -- 131
         "die empfohlene Einrichtung: Action-Kamera mit ruhigeren Profilen für Städte, Reittiere, Fliegen und Schlachtzüge",  -- 132
-        "das Profil für eine Situation wählen (vehicle, flying, swimming, mounted, combat, raid, dungeon, city, default)",  -- 133
-        "ein Profil jetzt verwenden, egal in welcher Situation",  -- 134
-        "Erzwingen eines Profils beenden",  -- 135
-        "deine aktuellen Kameraeinstellungen als neues Profil speichern",  -- 136
-        "eine bearbeitbare Kopie eines Profils erstellen",  -- 137
-        "eine Einstellung eines eigenen Profils ändern (/ccam settings listet sie auf)",  -- 138
-        "Schulterversatz nach Kameraabstand, z. B. /ccam curve mine 0:2 8:2 20:0",  -- 139
-        "auch die integrierten Profile bearbeitbar machen (/ccam reset <profile> stellt das Original wieder her)",  -- 140
-        "ein bearbeitetes integriertes Profil auf seine Originaleinstellungen zurücksetzen",  -- 141
-        "ein eigenes Profil löschen",  -- 142
-        "eine Zeichenfolge zum Teilen anzeigen",  -- 143
-        "ein Profil aus einer geteilten Zeichenfolge hinzufügen",  -- 144
-        "den Schulterversatz auf die andere Schulter wechseln",  -- 145
-        "wie lange eine Situation nach ihrem Ende gehalten wird (Standard 1,5)",  -- 146
-        "einschalten, oder ausschalten und deine ursprünglichen Kameraeinstellungen wiederherstellen",  -- 147
-        "Zoom, Schulterversatz und Bewegungseinstellungen jetzt anzeigen (zur Fehlersuche)",  -- 148
-        "das Optionsfenster öffnen (Optionen > AddOns > ControllerCam)",  -- 149
-        "diese Liste anzeigen",  -- 150
-        "'%s' passt auf mehr als ein Profil. Gib mehr vom Namen ein.",  -- 151
-        "Kein Profil namens '%s'. /ccam list zeigt sie an.",  -- 152
-        "Kameraprofile für das Spielen mit Controller. Sofort gibt es eine Action-Kamera; Hybrid und Klassisch sind einen Befehl entfernt.",  -- 153
-        "Integrierte Profile sind gesperrt. Aktiviere die erweiterte Bearbeitung (/ccam advanced on) oder erstelle eine Kopie: /ccam copy <profile>",  -- 154
-        "Unbekannte Einstellung. /ccam settings listet sie auf.",  -- 155
-        "Dieser Wert liegt außerhalb des erlaubten Bereichs.",  -- 156
-        "Dieser Wert ist ungültig.",  -- 157
-        "Unbekannte Situation. Verwende: vehicle, flying, swimming, mounted, combat, raid, dungeon, city oder default.",  -- 158
-        "Verwendung: /ccam set <situation> <profile|none>",  -- 159
-        "%s: keine Änderung",  -- 160
-        "'%s' wird erzwungen. /ccam auto kehrt zu den Situationen zurück.",  -- 161
-        "Die Kamera folgt wieder deinen Situationen.",  -- 162
-        "Verwendung: /ccam edit <profile> <setting> <value|default>",  -- 163
-        "Verwende /ccam curve für den Versatz nach Zoom.",  -- 164
-        "Verwendung: /ccam advanced [on|off]",  -- 165
-        "Erweiterte Bearbeitung ist %s.",  -- 166
-        "'%s' hat wieder seine Originaleinstellungen.",  -- 167
-        "Nichts zurückzusetzen: '%s' wurde nicht bearbeitet.",  -- 168
-        "Integrierte Profile können nicht gelöscht werden.",  -- 169
-        "Schulterversatz gespiegelt.",  -- 170
-        "Schulterversatz wieder normal.",  -- 171
-        "Situationen werden nach ihrem Ende noch %.1f Sekunden gehalten.",  -- 172
-        "Verwendung: /ccam delay <seconds>",  -- 173
-        "Das Optionsfenster ist in diesem Client nicht verfügbar",  -- 174
-        "unbekannter Befehl '%s'. Gib /ccam help ein",  -- 175
-        "Linksklick: nächstes Profil. Rechtsklick: vorheriges Profil. Der erste Eintrag, keine Änderung, lässt die Kamera unberührt.",  -- 176
-        "Linksklick: nächstes Profil. Rechtsklick: vorheriges Profil.",  -- 177
-        "Strg+C zum Kopieren drücken, dann Esc.",  -- 178
-        "Füge hier eine ControllerCam-Zeichenfolge ein (Strg+V) und drücke dann auf Importieren.",  -- 179
-        "Kameraprofile für das Spielen mit Controller. Wähle, wie sich die Kamera in jeder Situation anfühlt. Linksklick auf ein Profil wechselt zum nächsten, Rechtsklick zum vorherigen.",  -- 180
-        "Kamerasteuerung ein- oder ausschalten. Im ausgeschalteten Zustand werden deine ursprünglichen Kameraeinstellungen wiederhergestellt.",  -- 181
-        "Action-Kamera mit ruhigeren Profilen für Städte, Reittiere, Fliegen und Schlachtzüge.",  -- 182
-        "Verhindert, dass die Kamera zwischen Profilen flackert, wenn eine Situation schnell an- und ausgeht.",  -- 183
-        "Wechselt, über welche Schulter die Kamera blickt.",  -- 184
-        "Dieses Profil in jeder Situation verwenden.",  -- 185
-        "Erstellt eine bearbeitbare Kopie dieses Profils.",  -- 186
-        "Speichert deine aktuellen Kameraeinstellungen als neues Profil.",  -- 187
-        "Zeigt eine Zeichenfolge zum Teilen an.",  -- 188
-        "Fügt ein Profil aus einer geteilten Zeichenfolge hinzu.",  -- 189
-        "Löscht dieses eigene Profil.",  -- 190
-        "Setzt dieses integrierte Profil auf seine Originaleinstellungen zurück.",  -- 191
-        "Erlaubt es, auch die integrierten Profile zu ändern. Deine Änderungen bleiben erhalten, und „Auf Original zurücksetzen“ stellt das Original wieder her.",  -- 192
-        "Paare aus Zoomabstand und Versatz, zum Beispiel 0:2 8:2 20:0. Leer = keine Kurve. Zum Anwenden Enter drücken.",  -- 193
-        "Den Spielstandard für diese Einstellung verwenden.",  -- 194
-        "Erweiterte Bearbeitung ist aktiv. Änderungen an einem integrierten Profil bleiben erhalten; „Auf Original zurücksetzen“ stellt es wieder her.",  -- 195
-        "Nicht aufgeführte Einstellungen verwenden den Spielstandard. Klicke auf einen Wert, um ihn zu ändern; das Kurvenfeld nimmt Zoom:Versatz-Paare an.",  -- 196
-        "Integrierte Profile sind gesperrt. Erstelle eine Kopie oder aktiviere „Erweitert“, um sie zu bearbeiten.",  -- 197
+        "ein Profil jetzt verwenden, egal in welcher Situation",  -- 133
+        "Erzwingen eines Profils beenden",  -- 134
+        "deine aktuellen Kameraeinstellungen als neues Profil speichern",  -- 135
+        "eine bearbeitbare Kopie eines Profils erstellen",  -- 136
+        "eine Einstellung eines eigenen Profils ändern (/ccam settings listet sie auf)",  -- 137
+        "Schulterversatz nach Kameraabstand, z. B. /ccam curve mine 0:2 8:2 20:0",  -- 138
+        "auch die integrierten Profile bearbeitbar machen (/ccam reset <profile> stellt das Original wieder her)",  -- 139
+        "ein bearbeitetes integriertes Profil auf seine Originaleinstellungen zurücksetzen",  -- 140
+        "ein eigenes Profil löschen",  -- 141
+        "eine Zeichenfolge zum Teilen anzeigen",  -- 142
+        "ein Profil aus einer geteilten Zeichenfolge hinzufügen",  -- 143
+        "den Schulterversatz auf die andere Schulter wechseln",  -- 144
+        "wie lange eine Situation nach ihrem Ende gehalten wird (Standard 1,5)",  -- 145
+        "einschalten, oder ausschalten und deine ursprünglichen Kameraeinstellungen wiederherstellen",  -- 146
+        "Zoom, Schulterversatz und Bewegungseinstellungen jetzt anzeigen (zur Fehlersuche)",  -- 147
+        "das Optionsfenster öffnen (Optionen > AddOns > ControllerCam)",  -- 148
+        "diese Liste anzeigen",  -- 149
+        "'%s' passt auf mehr als ein Profil. Gib mehr vom Namen ein.",  -- 150
+        "Kein Profil namens '%s'. /ccam list zeigt sie an.",  -- 151
+        "Kameraprofile für das Spielen mit Controller. Sofort gibt es eine Action-Kamera; Hybrid und Klassisch sind einen Befehl entfernt.",  -- 152
+        "Integrierte Profile sind gesperrt. Aktiviere die erweiterte Bearbeitung (/ccam advanced on) oder erstelle eine Kopie: /ccam copy <profile>",  -- 153
+        "Unbekannte Einstellung. /ccam settings listet sie auf.",  -- 154
+        "Dieser Wert liegt außerhalb des erlaubten Bereichs.",  -- 155
+        "Dieser Wert ist ungültig.",  -- 156
+        "Verwendung: /ccam set <situation> <profile|none>",  -- 157
+        "%s: keine Änderung",  -- 158
+        "'%s' wird erzwungen. /ccam auto kehrt zu den Situationen zurück.",  -- 159
+        "Die Kamera folgt wieder deinen Situationen.",  -- 160
+        "Verwendung: /ccam edit <profile> <setting> <value|default>",  -- 161
+        "Verwende /ccam curve für den Versatz nach Zoom.",  -- 162
+        "Verwendung: /ccam advanced [on|off]",  -- 163
+        "Erweiterte Bearbeitung ist %s.",  -- 164
+        "'%s' hat wieder seine Originaleinstellungen.",  -- 165
+        "Nichts zurückzusetzen: '%s' wurde nicht bearbeitet.",  -- 166
+        "Integrierte Profile können nicht gelöscht werden.",  -- 167
+        "Schulterversatz gespiegelt.",  -- 168
+        "Schulterversatz wieder normal.",  -- 169
+        "Situationen werden nach ihrem Ende noch %.1f Sekunden gehalten.",  -- 170
+        "Verwendung: /ccam delay <seconds>",  -- 171
+        "Das Optionsfenster ist in diesem Client nicht verfügbar",  -- 172
+        "unbekannter Befehl '%s'. Gib /ccam help ein",  -- 173
+        "Linksklick: nächstes Profil. Rechtsklick: vorheriges Profil. Der erste Eintrag, keine Änderung, lässt die Kamera unberührt.",  -- 174
+        "Linksklick: nächstes Profil. Rechtsklick: vorheriges Profil.",  -- 175
+        "Strg+C zum Kopieren drücken, dann Esc.",  -- 176
+        "Füge hier eine ControllerCam-Zeichenfolge ein (Strg+V) und drücke dann auf Importieren.",  -- 177
+        "Kameraprofile für das Spielen mit Controller. Wähle, wie sich die Kamera in jeder Situation anfühlt. Linksklick auf ein Profil wechselt zum nächsten, Rechtsklick zum vorherigen.",  -- 178
+        "Kamerasteuerung ein- oder ausschalten. Im ausgeschalteten Zustand werden deine ursprünglichen Kameraeinstellungen wiederhergestellt.",  -- 179
+        "Action-Kamera mit ruhigeren Profilen für Städte, Reittiere, Fliegen und Schlachtzüge.",  -- 180
+        "Verhindert, dass die Kamera zwischen Profilen flackert, wenn eine Situation schnell an- und ausgeht.",  -- 181
+        "Wechselt, über welche Schulter die Kamera blickt.",  -- 182
+        "Dieses Profil in jeder Situation verwenden.",  -- 183
+        "Erstellt eine bearbeitbare Kopie dieses Profils.",  -- 184
+        "Speichert deine aktuellen Kameraeinstellungen als neues Profil.",  -- 185
+        "Zeigt eine Zeichenfolge zum Teilen an.",  -- 186
+        "Fügt ein Profil aus einer geteilten Zeichenfolge hinzu.",  -- 187
+        "Löscht dieses eigene Profil.",  -- 188
+        "Setzt dieses integrierte Profil auf seine Originaleinstellungen zurück.",  -- 189
+        "Erlaubt es, auch die integrierten Profile zu ändern. Deine Änderungen bleiben erhalten, und „Auf Original zurücksetzen“ stellt das Original wieder her.",  -- 190
+        "Paare aus Zoomabstand und Versatz, zum Beispiel 0:2 8:2 20:0. Leer = keine Kurve. Zum Anwenden Enter drücken.",  -- 191
+        "Den Spielstandard für diese Einstellung verwenden.",  -- 192
+        "Erweiterte Bearbeitung ist aktiv. Änderungen an einem integrierten Profil bleiben erhalten; „Auf Original zurücksetzen“ stellt es wieder her.",  -- 193
+        "Nicht aufgeführte Einstellungen verwenden den Spielstandard. Klicke auf einen Wert, um ihn zu ändern; das Kurvenfeld nimmt Zoom:Versatz-Paare an.",  -- 194
+        "Integrierte Profile sind gesperrt. Erstelle eine Kopie oder aktiviere „Erweitert“, um sie zu bearbeiten.",  -- 195
+        "Angeln",  -- 196
+        "In Innenräumen",  -- 197
+        "Unbekannte Situation. Möglich sind:",  -- 198
+        "das Profil für eine Situation wählen (/ccam zeigt die Liste)",  -- 199
+        "der Schulterversatz in deiner aktuellen Gestalt (Druidengestalten, Geisterwolf), in Prozent des normalen",  -- 200
+        "Du bist in keiner Gestalt.",  -- 201
+        "Schulterversatz in dieser Gestalt: %d%%",  -- 202
+        "Verwendung: /ccam formoffset <Prozent> (oder reset)",  -- 203
     },
     esES = {
         "En un vehículo",  -- 1
@@ -540,71 +552,77 @@ local TRANSLATIONS = {
         "cómo se siente un perfil y todos los ajustes que cambia",  -- 130
         "usar un perfil en todas partes (prueba: action, hybrid, classic)",  -- 131
         "la configuración recomendada: cámara de Acción con perfiles más calmados para ciudades, monturas, vuelo y bandas",  -- 132
-        "elegir el perfil de una situación (vehicle, flying, swimming, mounted, combat, raid, dungeon, city, default)",  -- 133
-        "usar un perfil ahora, sea cual sea la situación",  -- 134
-        "dejar de forzar un perfil",  -- 135
-        "guardar tus ajustes de cámara actuales como un perfil nuevo",  -- 136
-        "hacer una copia editable de un perfil",  -- 137
-        "cambiar un ajuste de un perfil personalizado (/ccam settings los lista)",  -- 138
-        "desplazamiento sobre el hombro según la distancia de la cámara, p. ej. /ccam curve mine 0:2 8:2 20:0",  -- 139
-        "permitir editar también los perfiles integrados (/ccam reset <profile> restaura el original)",  -- 140
-        "devolver un perfil integrado editado a sus ajustes originales",  -- 141
-        "eliminar un perfil personalizado",  -- 142
-        "mostrar una cadena que puedes compartir",  -- 143
-        "añadir un perfil desde una cadena compartida",  -- 144
-        "cambiar el desplazamiento al otro hombro",  -- 145
-        "cuánto se mantiene una situación tras terminar (predeterminado 1,5)",  -- 146
-        "activar, o desactivar y restaurar tus ajustes de cámara originales",  -- 147
-        "mostrar ahora el zoom, el desplazamiento y los ajustes de movimiento (para diagnosticar)",  -- 148
-        "abrir el panel de opciones (Opciones > AddOns > ControllerCam)",  -- 149
-        "mostrar esta lista",  -- 150
-        "'%s' coincide con más de un perfil. Escribe más del nombre.",  -- 151
-        "No hay ningún perfil llamado '%s'. /ccam list los muestra.",  -- 152
-        "Perfiles de cámara para jugar con mando. Nada más instalar tienes una cámara de Acción; Híbrido y Clásico están a un comando.",  -- 153
-        "Los perfiles integrados están bloqueados. Activa la edición avanzada (/ccam advanced on) o haz una copia: /ccam copy <profile>",  -- 154
-        "Ajuste desconocido. /ccam settings los lista.",  -- 155
-        "Ese valor está fuera del rango permitido.",  -- 156
-        "Ese valor no es válido.",  -- 157
-        "Situación desconocida. Usa: vehicle, flying, swimming, mounted, combat, raid, dungeon, city o default.",  -- 158
-        "uso: /ccam set <situation> <profile|none>",  -- 159
-        "%s: sin cambios",  -- 160
-        "Forzando '%s'. /ccam auto vuelve a las situaciones.",  -- 161
-        "La cámara vuelve a seguir tus situaciones.",  -- 162
-        "uso: /ccam edit <profile> <setting> <value|default>",  -- 163
-        "Usa /ccam curve para el desplazamiento según el zoom.",  -- 164
-        "uso: /ccam advanced [on|off]",  -- 165
-        "La edición avanzada está %s.",  -- 166
-        "'%s' vuelve a sus ajustes originales.",  -- 167
-        "Nada que restablecer: '%s' no se ha editado.",  -- 168
-        "Los perfiles integrados no se pueden eliminar.",  -- 169
-        "Desplazamiento sobre el hombro reflejado.",  -- 170
-        "Desplazamiento sobre el hombro de nuevo normal.",  -- 171
-        "Las situaciones se mantienen %.1f segundos tras terminar.",  -- 172
-        "uso: /ccam delay <seconds>",  -- 173
-        "el panel de opciones no está disponible en este cliente",  -- 174
-        "comando desconocido '%s'. Escribe /ccam help",  -- 175
-        "Clic izquierdo: siguiente perfil. Clic derecho: perfil anterior. La primera entrada, sin cambios, deja la cámara como está.",  -- 176
-        "Clic izquierdo: siguiente perfil. Clic derecho: perfil anterior.",  -- 177
-        "Pulsa Ctrl+C para copiar y luego Esc.",  -- 178
-        "Pega aquí una cadena de ControllerCam (Ctrl+V) y pulsa Importar.",  -- 179
-        "Perfiles de cámara para jugar con mando. Elige cómo se siente la cámara en cada situación. Clic izquierdo en un perfil pasa al siguiente; clic derecho, al anterior.",  -- 180
-        "Activa o desactiva el control de la cámara. Al desactivarlo se restauran tus ajustes de cámara originales.",  -- 181
-        "Cámara de Acción con perfiles más calmados para ciudades, monturas, vuelo y bandas.",  -- 182
-        "Evita que la cámara parpadee entre perfiles cuando una situación se activa y desactiva rápidamente.",  -- 183
-        "Cambia el hombro sobre el que mira la cámara.",  -- 184
-        "Usa este perfil en todas las situaciones.",  -- 185
-        "Crea una copia editable de este perfil.",  -- 186
-        "Guarda los ajustes de cámara actuales como un perfil nuevo.",  -- 187
-        "Muestra una cadena que puedes compartir.",  -- 188
-        "Añade un perfil desde una cadena compartida.",  -- 189
-        "Elimina este perfil personalizado.",  -- 190
-        "Devuelve este perfil integrado a sus ajustes originales.",  -- 191
-        "Permite cambiar también los perfiles integrados. Tus cambios se conservan y «Restablecer el original» recupera el original.",  -- 192
-        "Pares de distancia de zoom y desplazamiento, por ejemplo 0:2 8:2 20:0. Vacío = sin curva. Pulsa Intro para aplicar.",  -- 193
-        "Usar el valor predeterminado del juego para este ajuste.",  -- 194
-        "La edición avanzada está activada. Los cambios en un perfil integrado se conservan; «Restablecer el original» lo recupera.",  -- 195
-        "Los ajustes que no aparecen usan el valor predeterminado del juego. Haz clic en un valor para cambiarlo; el cuadro de curva acepta pares zoom:desplazamiento.",  -- 196
-        "Los perfiles integrados están bloqueados. Haz una copia o marca Avanzado para editarlos.",  -- 197
+        "usar un perfil ahora, sea cual sea la situación",  -- 133
+        "dejar de forzar un perfil",  -- 134
+        "guardar tus ajustes de cámara actuales como un perfil nuevo",  -- 135
+        "hacer una copia editable de un perfil",  -- 136
+        "cambiar un ajuste de un perfil personalizado (/ccam settings los lista)",  -- 137
+        "desplazamiento sobre el hombro según la distancia de la cámara, p. ej. /ccam curve mine 0:2 8:2 20:0",  -- 138
+        "permitir editar también los perfiles integrados (/ccam reset <profile> restaura el original)",  -- 139
+        "devolver un perfil integrado editado a sus ajustes originales",  -- 140
+        "eliminar un perfil personalizado",  -- 141
+        "mostrar una cadena que puedes compartir",  -- 142
+        "añadir un perfil desde una cadena compartida",  -- 143
+        "cambiar el desplazamiento al otro hombro",  -- 144
+        "cuánto se mantiene una situación tras terminar (predeterminado 1,5)",  -- 145
+        "activar, o desactivar y restaurar tus ajustes de cámara originales",  -- 146
+        "mostrar ahora el zoom, el desplazamiento y los ajustes de movimiento (para diagnosticar)",  -- 147
+        "abrir el panel de opciones (Opciones > AddOns > ControllerCam)",  -- 148
+        "mostrar esta lista",  -- 149
+        "'%s' coincide con más de un perfil. Escribe más del nombre.",  -- 150
+        "No hay ningún perfil llamado '%s'. /ccam list los muestra.",  -- 151
+        "Perfiles de cámara para jugar con mando. Nada más instalar tienes una cámara de Acción; Híbrido y Clásico están a un comando.",  -- 152
+        "Los perfiles integrados están bloqueados. Activa la edición avanzada (/ccam advanced on) o haz una copia: /ccam copy <profile>",  -- 153
+        "Ajuste desconocido. /ccam settings los lista.",  -- 154
+        "Ese valor está fuera del rango permitido.",  -- 155
+        "Ese valor no es válido.",  -- 156
+        "uso: /ccam set <situation> <profile|none>",  -- 157
+        "%s: sin cambios",  -- 158
+        "Forzando '%s'. /ccam auto vuelve a las situaciones.",  -- 159
+        "La cámara vuelve a seguir tus situaciones.",  -- 160
+        "uso: /ccam edit <profile> <setting> <value|default>",  -- 161
+        "Usa /ccam curve para el desplazamiento según el zoom.",  -- 162
+        "uso: /ccam advanced [on|off]",  -- 163
+        "La edición avanzada está %s.",  -- 164
+        "'%s' vuelve a sus ajustes originales.",  -- 165
+        "Nada que restablecer: '%s' no se ha editado.",  -- 166
+        "Los perfiles integrados no se pueden eliminar.",  -- 167
+        "Desplazamiento sobre el hombro reflejado.",  -- 168
+        "Desplazamiento sobre el hombro de nuevo normal.",  -- 169
+        "Las situaciones se mantienen %.1f segundos tras terminar.",  -- 170
+        "uso: /ccam delay <seconds>",  -- 171
+        "el panel de opciones no está disponible en este cliente",  -- 172
+        "comando desconocido '%s'. Escribe /ccam help",  -- 173
+        "Clic izquierdo: siguiente perfil. Clic derecho: perfil anterior. La primera entrada, sin cambios, deja la cámara como está.",  -- 174
+        "Clic izquierdo: siguiente perfil. Clic derecho: perfil anterior.",  -- 175
+        "Pulsa Ctrl+C para copiar y luego Esc.",  -- 176
+        "Pega aquí una cadena de ControllerCam (Ctrl+V) y pulsa Importar.",  -- 177
+        "Perfiles de cámara para jugar con mando. Elige cómo se siente la cámara en cada situación. Clic izquierdo en un perfil pasa al siguiente; clic derecho, al anterior.",  -- 178
+        "Activa o desactiva el control de la cámara. Al desactivarlo se restauran tus ajustes de cámara originales.",  -- 179
+        "Cámara de Acción con perfiles más calmados para ciudades, monturas, vuelo y bandas.",  -- 180
+        "Evita que la cámara parpadee entre perfiles cuando una situación se activa y desactiva rápidamente.",  -- 181
+        "Cambia el hombro sobre el que mira la cámara.",  -- 182
+        "Usa este perfil en todas las situaciones.",  -- 183
+        "Crea una copia editable de este perfil.",  -- 184
+        "Guarda los ajustes de cámara actuales como un perfil nuevo.",  -- 185
+        "Muestra una cadena que puedes compartir.",  -- 186
+        "Añade un perfil desde una cadena compartida.",  -- 187
+        "Elimina este perfil personalizado.",  -- 188
+        "Devuelve este perfil integrado a sus ajustes originales.",  -- 189
+        "Permite cambiar también los perfiles integrados. Tus cambios se conservan y «Restablecer el original» recupera el original.",  -- 190
+        "Pares de distancia de zoom y desplazamiento, por ejemplo 0:2 8:2 20:0. Vacío = sin curva. Pulsa Intro para aplicar.",  -- 191
+        "Usar el valor predeterminado del juego para este ajuste.",  -- 192
+        "La edición avanzada está activada. Los cambios en un perfil integrado se conservan; «Restablecer el original» lo recupera.",  -- 193
+        "Los ajustes que no aparecen usan el valor predeterminado del juego. Haz clic en un valor para cambiarlo; el cuadro de curva acepta pares zoom:desplazamiento.",  -- 194
+        "Los perfiles integrados están bloqueados. Haz una copia o marca Avanzado para editarlos.",  -- 195
+        "Pescando",  -- 196
+        "En interiores",  -- 197
+        "Situación desconocida. Usa una de:",  -- 198
+        "elegir el perfil para una situación (/ccam muestra la lista)",  -- 199
+        "el desplazamiento de hombro en la forma en la que estás (formas de druida, lobo fantasmal), en porcentaje del normal",  -- 200
+        "No estás en ninguna forma.",  -- 201
+        "Desplazamiento de hombro en esta forma: %d%%",  -- 202
+        "uso: /ccam formoffset <porcentaje> (o reset)",  -- 203
     },
     frFR = {
         "Dans un véhicule",  -- 1
@@ -739,71 +757,77 @@ local TRANSLATIONS = {
         "le ressenti d'un profil et tous les réglages qu'il modifie",  -- 130
         "utiliser un profil partout (essayez : action, hybrid, classic)",  -- 131
         "la configuration recommandée : caméra Action avec des profils plus calmes pour les villes, montures, le vol et les raids",  -- 132
-        "choisir le profil d'une situation (vehicle, flying, swimming, mounted, combat, raid, dungeon, city, default)",  -- 133
-        "utiliser un profil maintenant, quelle que soit la situation",  -- 134
-        "arrêter de forcer un profil",  -- 135
-        "enregistrer vos réglages de caméra actuels comme nouveau profil",  -- 136
-        "faire une copie modifiable d'un profil",  -- 137
-        "modifier un réglage d'un profil personnalisé (/ccam settings les liste)",  -- 138
-        "décalage par-dessus l'épaule selon la distance de la caméra, p. ex. /ccam curve mine 0:2 8:2 20:0",  -- 139
-        "autoriser aussi la modification des profils intégrés (/ccam reset <profile> rétablit l'original)",  -- 140
-        "remettre un profil intégré modifié à ses réglages d'origine",  -- 141
-        "supprimer un profil personnalisé",  -- 142
-        "afficher une chaîne à partager",  -- 143
-        "ajouter un profil depuis une chaîne partagée",  -- 144
-        "passer le décalage sur l'autre épaule",  -- 145
-        "combien de temps une situation est conservée après sa fin (par défaut 1,5)",  -- 146
-        "activer, ou désactiver et restaurer vos réglages de caméra d'origine",  -- 147
-        "afficher maintenant le zoom, le décalage et les réglages de mouvement (pour le dépannage)",  -- 148
-        "ouvrir le panneau d'options (Options > AddOns > ControllerCam)",  -- 149
-        "afficher cette liste",  -- 150
-        "'%s' correspond à plusieurs profils. Tapez davantage du nom.",  -- 151
-        "Aucun profil nommé '%s'. /ccam list les affiche.",  -- 152
-        "Profils de caméra pour jouer à la manette. Vous avez d'emblée une caméra Action ; Hybride et Classique sont à une commande.",  -- 153
-        "Les profils intégrés sont verrouillés. Activez la modification avancée (/ccam advanced on) ou faites une copie : /ccam copy <profile>",  -- 154
-        "Réglage inconnu. /ccam settings les liste.",  -- 155
-        "Cette valeur est hors de la plage autorisée.",  -- 156
-        "Cette valeur n'est pas valide.",  -- 157
-        "Situation inconnue. Utilisez : vehicle, flying, swimming, mounted, combat, raid, dungeon, city ou default.",  -- 158
-        "utilisation : /ccam set <situation> <profile|none>",  -- 159
-        "%s : aucun changement",  -- 160
-        "'%s' est forcé. /ccam auto revient aux situations.",  -- 161
-        "La caméra suit de nouveau vos situations.",  -- 162
-        "utilisation : /ccam edit <profile> <setting> <value|default>",  -- 163
-        "Utilisez /ccam curve pour le décalage selon le zoom.",  -- 164
-        "utilisation : /ccam advanced [on|off]",  -- 165
-        "La modification avancée est %s.",  -- 166
-        "'%s' est revenu à ses réglages d'origine.",  -- 167
-        "Rien à rétablir : '%s' n'a pas été modifié.",  -- 168
-        "Les profils intégrés ne peuvent pas être supprimés.",  -- 169
-        "Décalage par-dessus l'épaule inversé.",  -- 170
-        "Décalage par-dessus l'épaule revenu à la normale.",  -- 171
-        "Les situations sont conservées %.1f secondes après leur fin.",  -- 172
-        "utilisation : /ccam delay <seconds>",  -- 173
-        "le panneau d'options n'est pas disponible dans ce client",  -- 174
-        "commande inconnue '%s'. Tapez /ccam help",  -- 175
-        "Clic gauche : profil suivant. Clic droit : profil précédent. La première entrée, aucun changement, laisse la caméra telle quelle.",  -- 176
-        "Clic gauche : profil suivant. Clic droit : profil précédent.",  -- 177
-        "Appuyez sur Ctrl+C pour copier, puis sur Échap.",  -- 178
-        "Collez ici une chaîne ControllerCam (Ctrl+V), puis appuyez sur Importer.",  -- 179
-        "Profils de caméra pour jouer à la manette. Choisissez le ressenti de la caméra dans chaque situation. Clic gauche sur un profil pour passer au suivant, clic droit pour le précédent.",  -- 180
-        "Active ou désactive le contrôle de la caméra. Une fois désactivé, vos réglages de caméra d'origine sont rétablis.",  -- 181
-        "Caméra Action avec des profils plus calmes pour les villes, montures, le vol et les raids.",  -- 182
-        "Empêche la caméra de basculer entre les profils lorsqu'une situation s'active et se désactive rapidement.",  -- 183
-        "Change l'épaule par-dessus laquelle la caméra regarde.",  -- 184
-        "Utiliser ce profil dans toutes les situations.",  -- 185
-        "Crée une copie modifiable de ce profil.",  -- 186
-        "Enregistre vos réglages de caméra actuels comme nouveau profil.",  -- 187
-        "Affiche une chaîne à partager.",  -- 188
-        "Ajoute un profil depuis une chaîne partagée.",  -- 189
-        "Supprime ce profil personnalisé.",  -- 190
-        "Remet ce profil intégré à ses réglages d'origine.",  -- 191
-        "Permet de modifier aussi les profils intégrés. Vos modifications sont conservées et « Rétablir l'original » rétablit l'original.",  -- 192
-        "Paires distance de zoom et décalage, par exemple 0:2 8:2 20:0. Vide = pas de courbe. Appuyez sur Entrée pour appliquer.",  -- 193
-        "Utiliser la valeur par défaut du jeu pour ce réglage.",  -- 194
-        "La modification avancée est activée. Les modifications d'un profil intégré sont conservées ; « Rétablir l'original » le restaure.",  -- 195
-        "Les réglages non listés utilisent la valeur par défaut du jeu. Cliquez sur une valeur pour la modifier ; le champ de courbe accepte des paires zoom:décalage.",  -- 196
-        "Les profils intégrés sont verrouillés. Faites une copie ou cochez Avancé pour les modifier.",  -- 197
+        "utiliser un profil maintenant, quelle que soit la situation",  -- 133
+        "arrêter de forcer un profil",  -- 134
+        "enregistrer vos réglages de caméra actuels comme nouveau profil",  -- 135
+        "faire une copie modifiable d'un profil",  -- 136
+        "modifier un réglage d'un profil personnalisé (/ccam settings les liste)",  -- 137
+        "décalage par-dessus l'épaule selon la distance de la caméra, p. ex. /ccam curve mine 0:2 8:2 20:0",  -- 138
+        "autoriser aussi la modification des profils intégrés (/ccam reset <profile> rétablit l'original)",  -- 139
+        "remettre un profil intégré modifié à ses réglages d'origine",  -- 140
+        "supprimer un profil personnalisé",  -- 141
+        "afficher une chaîne à partager",  -- 142
+        "ajouter un profil depuis une chaîne partagée",  -- 143
+        "passer le décalage sur l'autre épaule",  -- 144
+        "combien de temps une situation est conservée après sa fin (par défaut 1,5)",  -- 145
+        "activer, ou désactiver et restaurer vos réglages de caméra d'origine",  -- 146
+        "afficher maintenant le zoom, le décalage et les réglages de mouvement (pour le dépannage)",  -- 147
+        "ouvrir le panneau d'options (Options > AddOns > ControllerCam)",  -- 148
+        "afficher cette liste",  -- 149
+        "'%s' correspond à plusieurs profils. Tapez davantage du nom.",  -- 150
+        "Aucun profil nommé '%s'. /ccam list les affiche.",  -- 151
+        "Profils de caméra pour jouer à la manette. Vous avez d'emblée une caméra Action ; Hybride et Classique sont à une commande.",  -- 152
+        "Les profils intégrés sont verrouillés. Activez la modification avancée (/ccam advanced on) ou faites une copie : /ccam copy <profile>",  -- 153
+        "Réglage inconnu. /ccam settings les liste.",  -- 154
+        "Cette valeur est hors de la plage autorisée.",  -- 155
+        "Cette valeur n'est pas valide.",  -- 156
+        "utilisation : /ccam set <situation> <profile|none>",  -- 157
+        "%s : aucun changement",  -- 158
+        "'%s' est forcé. /ccam auto revient aux situations.",  -- 159
+        "La caméra suit de nouveau vos situations.",  -- 160
+        "utilisation : /ccam edit <profile> <setting> <value|default>",  -- 161
+        "Utilisez /ccam curve pour le décalage selon le zoom.",  -- 162
+        "utilisation : /ccam advanced [on|off]",  -- 163
+        "La modification avancée est %s.",  -- 164
+        "'%s' est revenu à ses réglages d'origine.",  -- 165
+        "Rien à rétablir : '%s' n'a pas été modifié.",  -- 166
+        "Les profils intégrés ne peuvent pas être supprimés.",  -- 167
+        "Décalage par-dessus l'épaule inversé.",  -- 168
+        "Décalage par-dessus l'épaule revenu à la normale.",  -- 169
+        "Les situations sont conservées %.1f secondes après leur fin.",  -- 170
+        "utilisation : /ccam delay <seconds>",  -- 171
+        "le panneau d'options n'est pas disponible dans ce client",  -- 172
+        "commande inconnue '%s'. Tapez /ccam help",  -- 173
+        "Clic gauche : profil suivant. Clic droit : profil précédent. La première entrée, aucun changement, laisse la caméra telle quelle.",  -- 174
+        "Clic gauche : profil suivant. Clic droit : profil précédent.",  -- 175
+        "Appuyez sur Ctrl+C pour copier, puis sur Échap.",  -- 176
+        "Collez ici une chaîne ControllerCam (Ctrl+V), puis appuyez sur Importer.",  -- 177
+        "Profils de caméra pour jouer à la manette. Choisissez le ressenti de la caméra dans chaque situation. Clic gauche sur un profil pour passer au suivant, clic droit pour le précédent.",  -- 178
+        "Active ou désactive le contrôle de la caméra. Une fois désactivé, vos réglages de caméra d'origine sont rétablis.",  -- 179
+        "Caméra Action avec des profils plus calmes pour les villes, montures, le vol et les raids.",  -- 180
+        "Empêche la caméra de basculer entre les profils lorsqu'une situation s'active et se désactive rapidement.",  -- 181
+        "Change l'épaule par-dessus laquelle la caméra regarde.",  -- 182
+        "Utiliser ce profil dans toutes les situations.",  -- 183
+        "Crée une copie modifiable de ce profil.",  -- 184
+        "Enregistre vos réglages de caméra actuels comme nouveau profil.",  -- 185
+        "Affiche une chaîne à partager.",  -- 186
+        "Ajoute un profil depuis une chaîne partagée.",  -- 187
+        "Supprime ce profil personnalisé.",  -- 188
+        "Remet ce profil intégré à ses réglages d'origine.",  -- 189
+        "Permet de modifier aussi les profils intégrés. Vos modifications sont conservées et « Rétablir l'original » rétablit l'original.",  -- 190
+        "Paires distance de zoom et décalage, par exemple 0:2 8:2 20:0. Vide = pas de courbe. Appuyez sur Entrée pour appliquer.",  -- 191
+        "Utiliser la valeur par défaut du jeu pour ce réglage.",  -- 192
+        "La modification avancée est activée. Les modifications d'un profil intégré sont conservées ; « Rétablir l'original » le restaure.",  -- 193
+        "Les réglages non listés utilisent la valeur par défaut du jeu. Cliquez sur une valeur pour la modifier ; le champ de courbe accepte des paires zoom:décalage.",  -- 194
+        "Les profils intégrés sont verrouillés. Faites une copie ou cochez Avancé pour les modifier.",  -- 195
+        "À la pêche",  -- 196
+        "En intérieur",  -- 197
+        "Situation inconnue. Utilisez l'une de :",  -- 198
+        "choisir le profil pour une situation (/ccam affiche la liste)",  -- 199
+        "le décalage d'épaule dans votre forme actuelle (formes de druide, loup fantôme), en pourcentage de la normale",  -- 200
+        "Vous n'êtes sous aucune forme.",  -- 201
+        "Décalage d'épaule dans cette forme : %d%%",  -- 202
+        "utilisation : /ccam formoffset <pourcentage> (ou reset)",  -- 203
     },
     itIT = {
         "In un veicolo",  -- 1
@@ -938,71 +962,77 @@ local TRANSLATIONS = {
         "come si comporta un profilo e ogni impostazione che modifica",  -- 130
         "usa un profilo ovunque (prova: action, hybrid, classic)",  -- 131
         "la configurazione consigliata: telecamera Azione con profili più calmi per città, cavalcature, volo e raid",  -- 132
-        "scegli il profilo per una situazione (vehicle, flying, swimming, mounted, combat, raid, dungeon, city, default)",  -- 133
-        "usa un profilo adesso, qualunque sia la situazione",  -- 134
-        "smetti di forzare un profilo",  -- 135
-        "salva le impostazioni attuali della telecamera come nuovo profilo",  -- 136
-        "crea una copia modificabile di un profilo",  -- 137
-        "cambia un'impostazione di un profilo personalizzato (/ccam settings le elenca)",  -- 138
-        "scostamento sopra la spalla in base alla distanza della telecamera, es. /ccam curve mine 0:2 8:2 20:0",  -- 139
-        "consenti di modificare anche i profili integrati (/ccam reset <profile> ripristina l'originale)",  -- 140
-        "riporta un profilo integrato modificato alle impostazioni originali",  -- 141
-        "elimina un profilo personalizzato",  -- 142
-        "mostra una stringa da condividere",  -- 143
-        "aggiungi un profilo da una stringa condivisa",  -- 144
-        "sposta lo scostamento sull'altra spalla",  -- 145
-        "per quanto una situazione viene mantenuta dopo la fine (predefinito 1,5)",  -- 146
-        "attiva, oppure disattiva e ripristina le impostazioni originali della telecamera",  -- 147
-        "mostra ora zoom, scostamento e impostazioni di movimento (per la diagnosi)",  -- 148
-        "apri il pannello delle opzioni (Opzioni > AddOn > ControllerCam)",  -- 149
-        "mostra questo elenco",  -- 150
-        "'%s' corrisponde a più profili. Scrivi più parte del nome.",  -- 151
-        "Nessun profilo chiamato '%s'. /ccam list li mostra.",  -- 152
-        "Profili della telecamera per giocare con il controller. Subito hai una telecamera Azione; Ibrido e Classico sono a un comando di distanza.",  -- 153
-        "I profili integrati sono bloccati. Attiva la modifica avanzata (/ccam advanced on) o crea una copia: /ccam copy <profile>",  -- 154
-        "Impostazione sconosciuta. /ccam settings le elenca.",  -- 155
-        "Quel valore è fuori dall'intervallo consentito.",  -- 156
-        "Quel valore non è valido.",  -- 157
-        "Situazione sconosciuta. Usa: vehicle, flying, swimming, mounted, combat, raid, dungeon, city o default.",  -- 158
-        "uso: /ccam set <situation> <profile|none>",  -- 159
-        "%s: nessuna modifica",  -- 160
-        "'%s' forzato. /ccam auto torna alle situazioni.",  -- 161
-        "La telecamera segue di nuovo le tue situazioni.",  -- 162
-        "uso: /ccam edit <profile> <setting> <value|default>",  -- 163
-        "Usa /ccam curve per lo scostamento in base allo zoom.",  -- 164
-        "uso: /ccam advanced [on|off]",  -- 165
-        "La modifica avanzata è %s.",  -- 166
-        "'%s' è tornato alle impostazioni originali.",  -- 167
-        "Niente da ripristinare: '%s' non è stato modificato.",  -- 168
-        "I profili integrati non possono essere eliminati.",  -- 169
-        "Scostamento sopra la spalla specchiato.",  -- 170
-        "Scostamento sopra la spalla tornato normale.",  -- 171
-        "Le situazioni vengono mantenute per %.1f secondi dopo la fine.",  -- 172
-        "uso: /ccam delay <seconds>",  -- 173
-        "il pannello delle opzioni non è disponibile in questo client",  -- 174
-        "comando sconosciuto '%s'. Digita /ccam help",  -- 175
-        "Clic sinistro: profilo successivo. Clic destro: profilo precedente. La prima voce, nessuna modifica, lascia la telecamera com'è.",  -- 176
-        "Clic sinistro: profilo successivo. Clic destro: profilo precedente.",  -- 177
-        "Premi Ctrl+C per copiare, poi Esc.",  -- 178
-        "Incolla qui una stringa ControllerCam (Ctrl+V), poi premi Importa.",  -- 179
-        "Profili della telecamera per giocare con il controller. Scegli come si comporta la telecamera in ogni situazione. Clic sinistro su un profilo per il successivo, clic destro per il precedente.",  -- 180
-        "Attiva o disattiva il controllo della telecamera. Quando è disattivato, le impostazioni originali della telecamera vengono ripristinate.",  -- 181
-        "Telecamera Azione con profili più calmi per città, cavalcature, volo e raid.",  -- 182
-        "Evita che la telecamera sfarfalli tra i profili quando una situazione si attiva e disattiva rapidamente.",  -- 183
-        "Cambia la spalla sopra la quale guarda la telecamera.",  -- 184
-        "Usa questo profilo in ogni situazione.",  -- 185
-        "Crea una copia modificabile di questo profilo.",  -- 186
-        "Salva le impostazioni attuali della telecamera come nuovo profilo.",  -- 187
-        "Mostra una stringa da condividere.",  -- 188
-        "Aggiunge un profilo da una stringa condivisa.",  -- 189
-        "Elimina questo profilo personalizzato.",  -- 190
-        "Riporta questo profilo integrato alle impostazioni originali.",  -- 191
-        "Permette di modificare anche i profili integrati. Le modifiche vengono conservate e «Ripristina l'originale» riporta l'originale.",  -- 192
-        "Coppie di distanza di zoom e scostamento, per esempio 0:2 8:2 20:0. Vuoto = nessuna curva. Premi Invio per applicare.",  -- 193
-        "Usa il valore predefinito del gioco per questa impostazione.",  -- 194
-        "La modifica avanzata è attiva. Le modifiche a un profilo integrato vengono conservate; «Ripristina l'originale» lo riporta com'era.",  -- 195
-        "Le impostazioni non elencate usano il valore predefinito del gioco. Fai clic su un valore per cambiarlo; il campo della curva accetta coppie zoom:scostamento.",  -- 196
-        "I profili integrati sono bloccati. Crea una copia o seleziona Avanzate per modificarli.",  -- 197
+        "usa un profilo adesso, qualunque sia la situazione",  -- 133
+        "smetti di forzare un profilo",  -- 134
+        "salva le impostazioni attuali della telecamera come nuovo profilo",  -- 135
+        "crea una copia modificabile di un profilo",  -- 136
+        "cambia un'impostazione di un profilo personalizzato (/ccam settings le elenca)",  -- 137
+        "scostamento sopra la spalla in base alla distanza della telecamera, es. /ccam curve mine 0:2 8:2 20:0",  -- 138
+        "consenti di modificare anche i profili integrati (/ccam reset <profile> ripristina l'originale)",  -- 139
+        "riporta un profilo integrato modificato alle impostazioni originali",  -- 140
+        "elimina un profilo personalizzato",  -- 141
+        "mostra una stringa da condividere",  -- 142
+        "aggiungi un profilo da una stringa condivisa",  -- 143
+        "sposta lo scostamento sull'altra spalla",  -- 144
+        "per quanto una situazione viene mantenuta dopo la fine (predefinito 1,5)",  -- 145
+        "attiva, oppure disattiva e ripristina le impostazioni originali della telecamera",  -- 146
+        "mostra ora zoom, scostamento e impostazioni di movimento (per la diagnosi)",  -- 147
+        "apri il pannello delle opzioni (Opzioni > AddOn > ControllerCam)",  -- 148
+        "mostra questo elenco",  -- 149
+        "'%s' corrisponde a più profili. Scrivi più parte del nome.",  -- 150
+        "Nessun profilo chiamato '%s'. /ccam list li mostra.",  -- 151
+        "Profili della telecamera per giocare con il controller. Subito hai una telecamera Azione; Ibrido e Classico sono a un comando di distanza.",  -- 152
+        "I profili integrati sono bloccati. Attiva la modifica avanzata (/ccam advanced on) o crea una copia: /ccam copy <profile>",  -- 153
+        "Impostazione sconosciuta. /ccam settings le elenca.",  -- 154
+        "Quel valore è fuori dall'intervallo consentito.",  -- 155
+        "Quel valore non è valido.",  -- 156
+        "uso: /ccam set <situation> <profile|none>",  -- 157
+        "%s: nessuna modifica",  -- 158
+        "'%s' forzato. /ccam auto torna alle situazioni.",  -- 159
+        "La telecamera segue di nuovo le tue situazioni.",  -- 160
+        "uso: /ccam edit <profile> <setting> <value|default>",  -- 161
+        "Usa /ccam curve per lo scostamento in base allo zoom.",  -- 162
+        "uso: /ccam advanced [on|off]",  -- 163
+        "La modifica avanzata è %s.",  -- 164
+        "'%s' è tornato alle impostazioni originali.",  -- 165
+        "Niente da ripristinare: '%s' non è stato modificato.",  -- 166
+        "I profili integrati non possono essere eliminati.",  -- 167
+        "Scostamento sopra la spalla specchiato.",  -- 168
+        "Scostamento sopra la spalla tornato normale.",  -- 169
+        "Le situazioni vengono mantenute per %.1f secondi dopo la fine.",  -- 170
+        "uso: /ccam delay <seconds>",  -- 171
+        "il pannello delle opzioni non è disponibile in questo client",  -- 172
+        "comando sconosciuto '%s'. Digita /ccam help",  -- 173
+        "Clic sinistro: profilo successivo. Clic destro: profilo precedente. La prima voce, nessuna modifica, lascia la telecamera com'è.",  -- 174
+        "Clic sinistro: profilo successivo. Clic destro: profilo precedente.",  -- 175
+        "Premi Ctrl+C per copiare, poi Esc.",  -- 176
+        "Incolla qui una stringa ControllerCam (Ctrl+V), poi premi Importa.",  -- 177
+        "Profili della telecamera per giocare con il controller. Scegli come si comporta la telecamera in ogni situazione. Clic sinistro su un profilo per il successivo, clic destro per il precedente.",  -- 178
+        "Attiva o disattiva il controllo della telecamera. Quando è disattivato, le impostazioni originali della telecamera vengono ripristinate.",  -- 179
+        "Telecamera Azione con profili più calmi per città, cavalcature, volo e raid.",  -- 180
+        "Evita che la telecamera sfarfalli tra i profili quando una situazione si attiva e disattiva rapidamente.",  -- 181
+        "Cambia la spalla sopra la quale guarda la telecamera.",  -- 182
+        "Usa questo profilo in ogni situazione.",  -- 183
+        "Crea una copia modificabile di questo profilo.",  -- 184
+        "Salva le impostazioni attuali della telecamera come nuovo profilo.",  -- 185
+        "Mostra una stringa da condividere.",  -- 186
+        "Aggiunge un profilo da una stringa condivisa.",  -- 187
+        "Elimina questo profilo personalizzato.",  -- 188
+        "Riporta questo profilo integrato alle impostazioni originali.",  -- 189
+        "Permette di modificare anche i profili integrati. Le modifiche vengono conservate e «Ripristina l'originale» riporta l'originale.",  -- 190
+        "Coppie di distanza di zoom e scostamento, per esempio 0:2 8:2 20:0. Vuoto = nessuna curva. Premi Invio per applicare.",  -- 191
+        "Usa il valore predefinito del gioco per questa impostazione.",  -- 192
+        "La modifica avanzata è attiva. Le modifiche a un profilo integrato vengono conservate; «Ripristina l'originale» lo riporta com'era.",  -- 193
+        "Le impostazioni non elencate usano il valore predefinito del gioco. Fai clic su un valore per cambiarlo; il campo della curva accetta coppie zoom:scostamento.",  -- 194
+        "I profili integrati sono bloccati. Crea una copia o seleziona Avanzate per modificarli.",  -- 195
+        "A pesca",  -- 196
+        "Al chiuso",  -- 197
+        "Situazione sconosciuta. Usa una di:",  -- 198
+        "scegliere il profilo per una situazione (/ccam mostra l'elenco)",  -- 199
+        "lo spostamento sulla spalla nella forma attuale (forme del druido, lupo spettrale), in percentuale del normale",  -- 200
+        "Non sei in nessuna forma.",  -- 201
+        "Spostamento sulla spalla in questa forma: %d%%",  -- 202
+        "uso: /ccam formoffset <percentuale> (o reset)",  -- 203
     },
     koKR = {
         "탈것 이용 중",  -- 1
@@ -1137,71 +1167,77 @@ local TRANSLATIONS = {
         "프로필의 느낌과 바꾸는 모든 설정",  -- 130
         "모든 곳에 프로필 하나 사용 (예: action, hybrid, classic)",  -- 131
         "권장 설정: 도시, 탈것, 비행, 공격대에는 더 차분한 프로필을 쓰는 액션 카메라",  -- 132
-        "한 상황의 프로필 선택 (vehicle, flying, swimming, mounted, combat, raid, dungeon, city, default)",  -- 133
-        "상황과 관계없이 지금 프로필 사용",  -- 134
-        "프로필 강제 사용 해제",  -- 135
-        "현재 카메라 설정을 새 프로필로 저장",  -- 136
-        "프로필의 편집 가능한 복사본 만들기",  -- 137
-        "사용자 지정 프로필의 설정 변경 (/ccam settings 로 목록 확인)",  -- 138
-        "카메라 거리에 따른 어깨 너머 오프셋, 예: /ccam curve mine 0:2 8:2 20:0",  -- 139
-        "기본 제공 프로필도 편집 허용 (/ccam reset <profile> 로 원래대로 복원)",  -- 140
-        "편집한 기본 제공 프로필을 원래 설정으로 되돌리기",  -- 141
-        "사용자 지정 프로필 삭제",  -- 142
-        "공유할 수 있는 문자열 표시",  -- 143
-        "공유된 문자열에서 프로필 추가",  -- 144
-        "어깨 오프셋을 반대쪽 어깨로 전환",  -- 145
-        "상황이 끝난 뒤 유지되는 시간 (기본 1.5)",  -- 146
-        "켜기, 또는 끄고 원래 카메라 설정 복원",  -- 147
-        "현재 줌, 어깨 오프셋, 모션 설정 표시 (문제 해결용)",  -- 148
-        "설정 창 열기 (설정 > 애드온 > ControllerCam)",  -- 149
-        "이 목록 표시",  -- 150
-        "'%s'은(는) 여러 프로필과 일치합니다. 이름을 더 입력하세요.",  -- 151
-        "'%s'(이)라는 프로필이 없습니다. /ccam list 로 확인하세요.",  -- 152
-        "컨트롤러 플레이를 위한 카메라 프로필. 설치하면 바로 액션 카메라를 쓰고, 하이브리드와 클래식은 명령어 한 번이면 됩니다.",  -- 153
-        "기본 제공 프로필은 잠겨 있습니다. 고급 편집을 켜거나(/ccam advanced on) 복사본을 만드세요: /ccam copy <profile>",  -- 154
-        "알 수 없는 설정입니다. /ccam settings 로 목록을 확인하세요.",  -- 155
-        "그 값은 허용 범위를 벗어났습니다.",  -- 156
-        "그 값이 올바르지 않습니다.",  -- 157
-        "알 수 없는 상황입니다. vehicle, flying, swimming, mounted, combat, raid, dungeon, city, default 중 하나를 사용하세요.",  -- 158
-        "사용법: /ccam set <situation> <profile|none>",  -- 159
-        "%s: 변경 없음",  -- 160
-        "'%s'을(를) 강제 사용합니다. /ccam auto 로 상황별 설정으로 돌아갑니다.",  -- 161
-        "카메라가 다시 상황에 따라 바뀝니다.",  -- 162
-        "사용법: /ccam edit <profile> <setting> <value|default>",  -- 163
-        "줌에 따른 오프셋은 /ccam curve 를 사용하세요.",  -- 164
-        "사용법: /ccam advanced [on|off]",  -- 165
-        "고급 편집: %s.",  -- 166
-        "'%s'이(가) 원래 설정으로 돌아갔습니다.",  -- 167
-        "되돌릴 내용 없음: '%s'은(는) 편집되지 않았습니다.",  -- 168
-        "기본 제공 프로필은 삭제할 수 없습니다.",  -- 169
-        "어깨 오프셋이 반전되었습니다.",  -- 170
-        "어깨 오프셋이 원래대로 돌아왔습니다.",  -- 171
-        "상황은 종료 후 %.1f초 동안 유지됩니다.",  -- 172
-        "사용법: /ccam delay <seconds>",  -- 173
-        "이 클라이언트에서는 설정 창을 사용할 수 없습니다",  -- 174
-        "알 수 없는 명령어 '%s'. /ccam help 를 입력하세요",  -- 175
-        "좌클릭: 다음 프로필. 우클릭: 이전 프로필. 첫 항목인 변경 없음은 카메라를 그대로 둡니다.",  -- 176
-        "좌클릭: 다음 프로필. 우클릭: 이전 프로필.",  -- 177
-        "Ctrl+C로 복사한 뒤 Esc를 누르세요.",  -- 178
-        "여기에 ControllerCam 문자열을 붙여넣고(Ctrl+V) 가져오기를 누르세요.",  -- 179
-        "컨트롤러 플레이를 위한 카메라 프로필. 각 상황에서 카메라가 어떤 느낌일지 고르세요. 프로필을 좌클릭하면 다음, 우클릭하면 이전 프로필로 바뀝니다.",  -- 180
-        "카메라 제어를 켜거나 끕니다. 끄면 원래 카메라 설정이 복원됩니다.",  -- 181
-        "도시, 탈것, 비행, 공격대에는 더 차분한 프로필을 쓰는 액션 카메라.",  -- 182
-        "상황이 빠르게 켜지고 꺼질 때 카메라가 프로필 사이를 깜빡이며 오가는 것을 막습니다.",  -- 183
-        "카메라가 넘겨다보는 어깨를 바꿉니다.",  -- 184
-        "모든 상황에서 이 프로필을 사용합니다.",  -- 185
-        "이 프로필의 편집 가능한 복사본을 만듭니다.",  -- 186
-        "현재 카메라 설정을 새 프로필로 저장합니다.",  -- 187
-        "공유할 수 있는 문자열을 표시합니다.",  -- 188
-        "공유된 문자열에서 프로필을 추가합니다.",  -- 189
-        "이 사용자 지정 프로필을 삭제합니다.",  -- 190
-        "이 기본 제공 프로필을 원래 설정으로 되돌립니다.",  -- 191
-        "기본 제공 프로필도 변경할 수 있게 합니다. 변경 사항은 유지되며 \"원래대로 되돌리기\"로 원본을 복원할 수 있습니다.",  -- 192
-        "줌 거리와 오프셋 쌍, 예: 0:2 8:2 20:0. 비워 두면 곡선 없음. Enter를 눌러 적용하세요.",  -- 193
-        "이 설정에 게임 기본값을 사용합니다.",  -- 194
-        "고급 편집이 켜져 있습니다. 기본 제공 프로필의 변경 사항은 유지되며 \"원래대로 되돌리기\"로 복원할 수 있습니다.",  -- 195
-        "나열되지 않은 설정은 게임 기본값을 사용합니다. 값을 클릭해 변경하세요. 곡선 입력란은 줌:오프셋 쌍을 받습니다.",  -- 196
-        "기본 제공 프로필은 잠겨 있습니다. 복사본을 만들거나 고급을 체크해 편집하세요.",  -- 197
+        "상황과 관계없이 지금 프로필 사용",  -- 133
+        "프로필 강제 사용 해제",  -- 134
+        "현재 카메라 설정을 새 프로필로 저장",  -- 135
+        "프로필의 편집 가능한 복사본 만들기",  -- 136
+        "사용자 지정 프로필의 설정 변경 (/ccam settings 로 목록 확인)",  -- 137
+        "카메라 거리에 따른 어깨 너머 오프셋, 예: /ccam curve mine 0:2 8:2 20:0",  -- 138
+        "기본 제공 프로필도 편집 허용 (/ccam reset <profile> 로 원래대로 복원)",  -- 139
+        "편집한 기본 제공 프로필을 원래 설정으로 되돌리기",  -- 140
+        "사용자 지정 프로필 삭제",  -- 141
+        "공유할 수 있는 문자열 표시",  -- 142
+        "공유된 문자열에서 프로필 추가",  -- 143
+        "어깨 오프셋을 반대쪽 어깨로 전환",  -- 144
+        "상황이 끝난 뒤 유지되는 시간 (기본 1.5)",  -- 145
+        "켜기, 또는 끄고 원래 카메라 설정 복원",  -- 146
+        "현재 줌, 어깨 오프셋, 모션 설정 표시 (문제 해결용)",  -- 147
+        "설정 창 열기 (설정 > 애드온 > ControllerCam)",  -- 148
+        "이 목록 표시",  -- 149
+        "'%s'은(는) 여러 프로필과 일치합니다. 이름을 더 입력하세요.",  -- 150
+        "'%s'(이)라는 프로필이 없습니다. /ccam list 로 확인하세요.",  -- 151
+        "컨트롤러 플레이를 위한 카메라 프로필. 설치하면 바로 액션 카메라를 쓰고, 하이브리드와 클래식은 명령어 한 번이면 됩니다.",  -- 152
+        "기본 제공 프로필은 잠겨 있습니다. 고급 편집을 켜거나(/ccam advanced on) 복사본을 만드세요: /ccam copy <profile>",  -- 153
+        "알 수 없는 설정입니다. /ccam settings 로 목록을 확인하세요.",  -- 154
+        "그 값은 허용 범위를 벗어났습니다.",  -- 155
+        "그 값이 올바르지 않습니다.",  -- 156
+        "사용법: /ccam set <situation> <profile|none>",  -- 157
+        "%s: 변경 없음",  -- 158
+        "'%s'을(를) 강제 사용합니다. /ccam auto 로 상황별 설정으로 돌아갑니다.",  -- 159
+        "카메라가 다시 상황에 따라 바뀝니다.",  -- 160
+        "사용법: /ccam edit <profile> <setting> <value|default>",  -- 161
+        "줌에 따른 오프셋은 /ccam curve 를 사용하세요.",  -- 162
+        "사용법: /ccam advanced [on|off]",  -- 163
+        "고급 편집: %s.",  -- 164
+        "'%s'이(가) 원래 설정으로 돌아갔습니다.",  -- 165
+        "되돌릴 내용 없음: '%s'은(는) 편집되지 않았습니다.",  -- 166
+        "기본 제공 프로필은 삭제할 수 없습니다.",  -- 167
+        "어깨 오프셋이 반전되었습니다.",  -- 168
+        "어깨 오프셋이 원래대로 돌아왔습니다.",  -- 169
+        "상황은 종료 후 %.1f초 동안 유지됩니다.",  -- 170
+        "사용법: /ccam delay <seconds>",  -- 171
+        "이 클라이언트에서는 설정 창을 사용할 수 없습니다",  -- 172
+        "알 수 없는 명령어 '%s'. /ccam help 를 입력하세요",  -- 173
+        "좌클릭: 다음 프로필. 우클릭: 이전 프로필. 첫 항목인 변경 없음은 카메라를 그대로 둡니다.",  -- 174
+        "좌클릭: 다음 프로필. 우클릭: 이전 프로필.",  -- 175
+        "Ctrl+C로 복사한 뒤 Esc를 누르세요.",  -- 176
+        "여기에 ControllerCam 문자열을 붙여넣고(Ctrl+V) 가져오기를 누르세요.",  -- 177
+        "컨트롤러 플레이를 위한 카메라 프로필. 각 상황에서 카메라가 어떤 느낌일지 고르세요. 프로필을 좌클릭하면 다음, 우클릭하면 이전 프로필로 바뀝니다.",  -- 178
+        "카메라 제어를 켜거나 끕니다. 끄면 원래 카메라 설정이 복원됩니다.",  -- 179
+        "도시, 탈것, 비행, 공격대에는 더 차분한 프로필을 쓰는 액션 카메라.",  -- 180
+        "상황이 빠르게 켜지고 꺼질 때 카메라가 프로필 사이를 깜빡이며 오가는 것을 막습니다.",  -- 181
+        "카메라가 넘겨다보는 어깨를 바꿉니다.",  -- 182
+        "모든 상황에서 이 프로필을 사용합니다.",  -- 183
+        "이 프로필의 편집 가능한 복사본을 만듭니다.",  -- 184
+        "현재 카메라 설정을 새 프로필로 저장합니다.",  -- 185
+        "공유할 수 있는 문자열을 표시합니다.",  -- 186
+        "공유된 문자열에서 프로필을 추가합니다.",  -- 187
+        "이 사용자 지정 프로필을 삭제합니다.",  -- 188
+        "이 기본 제공 프로필을 원래 설정으로 되돌립니다.",  -- 189
+        "기본 제공 프로필도 변경할 수 있게 합니다. 변경 사항은 유지되며 \"원래대로 되돌리기\"로 원본을 복원할 수 있습니다.",  -- 190
+        "줌 거리와 오프셋 쌍, 예: 0:2 8:2 20:0. 비워 두면 곡선 없음. Enter를 눌러 적용하세요.",  -- 191
+        "이 설정에 게임 기본값을 사용합니다.",  -- 192
+        "고급 편집이 켜져 있습니다. 기본 제공 프로필의 변경 사항은 유지되며 \"원래대로 되돌리기\"로 복원할 수 있습니다.",  -- 193
+        "나열되지 않은 설정은 게임 기본값을 사용합니다. 값을 클릭해 변경하세요. 곡선 입력란은 줌:오프셋 쌍을 받습니다.",  -- 194
+        "기본 제공 프로필은 잠겨 있습니다. 복사본을 만들거나 고급을 체크해 편집하세요.",  -- 195
+        "낚시 중",  -- 196
+        "실내",  -- 197
+        "알 수 없는 상황입니다. 다음 중 하나를 사용하세요:",  -- 198
+        "한 상황에 사용할 프로필 선택 (/ccam 으로 목록 표시)",  -- 199
+        "현재 변신 상태(드루이드 변신, 늑대 정령)의 어깨 시점 이동, 기본값 대비 퍼센트",  -- 200
+        "변신 상태가 아닙니다.",  -- 201
+        "이 변신 상태의 어깨 시점 이동: %d%%",  -- 202
+        "사용법: /ccam formoffset <퍼센트> (또는 reset)",  -- 203
     },
     ptBR = {
         "Em um veículo",  -- 1
@@ -1336,71 +1372,77 @@ local TRANSLATIONS = {
         "como um perfil se comporta e todas as configurações que ele altera",  -- 130
         "usar um perfil em todo lugar (experimente: action, hybrid, classic)",  -- 131
         "a configuração recomendada: câmera de Ação com perfis mais calmos para cidades, montarias, voo e raides",  -- 132
-        "escolher o perfil de uma situação (vehicle, flying, swimming, mounted, combat, raid, dungeon, city, default)",  -- 133
-        "usar um perfil agora, qualquer que seja a situação",  -- 134
-        "parar de forçar um perfil",  -- 135
-        "salvar suas configurações atuais de câmera como um novo perfil",  -- 136
-        "fazer uma cópia editável de um perfil",  -- 137
-        "alterar uma configuração de um perfil personalizado (/ccam settings lista todas)",  -- 138
-        "deslocamento sobre o ombro por distância da câmera, ex.: /ccam curve mine 0:2 8:2 20:0",  -- 139
-        "permitir editar também os perfis integrados (/ccam reset <profile> restaura o original)",  -- 140
-        "devolver um perfil integrado editado às configurações originais",  -- 141
-        "excluir um perfil personalizado",  -- 142
-        "mostrar uma sequência que você pode compartilhar",  -- 143
-        "adicionar um perfil a partir de uma sequência compartilhada",  -- 144
-        "trocar o deslocamento para o outro ombro",  -- 145
-        "por quanto tempo uma situação é mantida após o fim (padrão 1,5)",  -- 146
-        "ligar, ou desligar e restaurar suas configurações originais de câmera",  -- 147
-        "mostrar agora o zoom, o deslocamento e as configurações de movimento (para diagnóstico)",  -- 148
-        "abrir o painel de opções (Opções > AddOns > ControllerCam)",  -- 149
-        "mostrar esta lista",  -- 150
-        "'%s' corresponde a mais de um perfil. Digite mais do nome.",  -- 151
-        "Não há perfil chamado '%s'. /ccam list mostra todos.",  -- 152
-        "Perfis de câmera para jogar com controle. Logo de início você tem uma câmera de Ação; Híbrido e Clássico estão a um comando.",  -- 153
-        "Os perfis integrados estão bloqueados. Ative a edição avançada (/ccam advanced on) ou faça uma cópia: /ccam copy <profile>",  -- 154
-        "Configuração desconhecida. /ccam settings lista todas.",  -- 155
-        "Esse valor está fora do intervalo permitido.",  -- 156
-        "Esse valor não é válido.",  -- 157
-        "Situação desconhecida. Use: vehicle, flying, swimming, mounted, combat, raid, dungeon, city ou default.",  -- 158
-        "uso: /ccam set <situation> <profile|none>",  -- 159
-        "%s: sem alteração",  -- 160
-        "Forçando '%s'. /ccam auto volta às situações.",  -- 161
-        "A câmera volta a seguir suas situações.",  -- 162
-        "uso: /ccam edit <profile> <setting> <value|default>",  -- 163
-        "Use /ccam curve para o deslocamento por zoom.",  -- 164
-        "uso: /ccam advanced [on|off]",  -- 165
-        "A edição avançada está %s.",  -- 166
-        "'%s' voltou às configurações originais.",  -- 167
-        "Nada para restaurar: '%s' não foi editado.",  -- 168
-        "Os perfis integrados não podem ser excluídos.",  -- 169
-        "Deslocamento sobre o ombro espelhado.",  -- 170
-        "Deslocamento sobre o ombro de volta ao normal.",  -- 171
-        "As situações são mantidas por %.1f segundos após o fim.",  -- 172
-        "uso: /ccam delay <seconds>",  -- 173
-        "o painel de opções não está disponível neste cliente",  -- 174
-        "comando desconhecido '%s'. Digite /ccam help",  -- 175
-        "Clique esquerdo: próximo perfil. Clique direito: perfil anterior. A primeira entrada, sem alteração, deixa a câmera como está.",  -- 176
-        "Clique esquerdo: próximo perfil. Clique direito: perfil anterior.",  -- 177
-        "Pressione Ctrl+C para copiar e depois Esc.",  -- 178
-        "Cole aqui uma sequência do ControllerCam (Ctrl+V) e pressione Importar.",  -- 179
-        "Perfis de câmera para jogar com controle. Escolha como a câmera se comporta em cada situação. Clique esquerdo em um perfil vai para o próximo; clique direito, para o anterior.",  -- 180
-        "Liga ou desliga o controle da câmera. Desligado, suas configurações originais de câmera são restauradas.",  -- 181
-        "Câmera de Ação com perfis mais calmos para cidades, montarias, voo e raides.",  -- 182
-        "Evita que a câmera fique alternando entre perfis quando uma situação liga e desliga rapidamente.",  -- 183
-        "Troca o ombro sobre o qual a câmera olha.",  -- 184
-        "Usa este perfil em todas as situações.",  -- 185
-        "Cria uma cópia editável deste perfil.",  -- 186
-        "Salva as configurações atuais de câmera como um novo perfil.",  -- 187
-        "Mostra uma sequência que você pode compartilhar.",  -- 188
-        "Adiciona um perfil a partir de uma sequência compartilhada.",  -- 189
-        "Exclui este perfil personalizado.",  -- 190
-        "Devolve este perfil integrado às configurações originais.",  -- 191
-        "Permite alterar também os perfis integrados. Suas alterações são mantidas e «Restaurar o original» traz o original de volta.",  -- 192
-        "Pares de distância de zoom e deslocamento, por exemplo 0:2 8:2 20:0. Vazio = sem curva. Pressione Enter para aplicar.",  -- 193
-        "Usar o padrão do jogo para esta configuração.",  -- 194
-        "A edição avançada está ativada. As alterações em um perfil integrado são mantidas; «Restaurar o original» o recupera.",  -- 195
-        "As configurações não listadas usam o padrão do jogo. Clique em um valor para alterá-lo; a caixa de curva aceita pares zoom:deslocamento.",  -- 196
-        "Os perfis integrados estão bloqueados. Faça uma cópia ou marque Avançado para editá-los.",  -- 197
+        "usar um perfil agora, qualquer que seja a situação",  -- 133
+        "parar de forçar um perfil",  -- 134
+        "salvar suas configurações atuais de câmera como um novo perfil",  -- 135
+        "fazer uma cópia editável de um perfil",  -- 136
+        "alterar uma configuração de um perfil personalizado (/ccam settings lista todas)",  -- 137
+        "deslocamento sobre o ombro por distância da câmera, ex.: /ccam curve mine 0:2 8:2 20:0",  -- 138
+        "permitir editar também os perfis integrados (/ccam reset <profile> restaura o original)",  -- 139
+        "devolver um perfil integrado editado às configurações originais",  -- 140
+        "excluir um perfil personalizado",  -- 141
+        "mostrar uma sequência que você pode compartilhar",  -- 142
+        "adicionar um perfil a partir de uma sequência compartilhada",  -- 143
+        "trocar o deslocamento para o outro ombro",  -- 144
+        "por quanto tempo uma situação é mantida após o fim (padrão 1,5)",  -- 145
+        "ligar, ou desligar e restaurar suas configurações originais de câmera",  -- 146
+        "mostrar agora o zoom, o deslocamento e as configurações de movimento (para diagnóstico)",  -- 147
+        "abrir o painel de opções (Opções > AddOns > ControllerCam)",  -- 148
+        "mostrar esta lista",  -- 149
+        "'%s' corresponde a mais de um perfil. Digite mais do nome.",  -- 150
+        "Não há perfil chamado '%s'. /ccam list mostra todos.",  -- 151
+        "Perfis de câmera para jogar com controle. Logo de início você tem uma câmera de Ação; Híbrido e Clássico estão a um comando.",  -- 152
+        "Os perfis integrados estão bloqueados. Ative a edição avançada (/ccam advanced on) ou faça uma cópia: /ccam copy <profile>",  -- 153
+        "Configuração desconhecida. /ccam settings lista todas.",  -- 154
+        "Esse valor está fora do intervalo permitido.",  -- 155
+        "Esse valor não é válido.",  -- 156
+        "uso: /ccam set <situation> <profile|none>",  -- 157
+        "%s: sem alteração",  -- 158
+        "Forçando '%s'. /ccam auto volta às situações.",  -- 159
+        "A câmera volta a seguir suas situações.",  -- 160
+        "uso: /ccam edit <profile> <setting> <value|default>",  -- 161
+        "Use /ccam curve para o deslocamento por zoom.",  -- 162
+        "uso: /ccam advanced [on|off]",  -- 163
+        "A edição avançada está %s.",  -- 164
+        "'%s' voltou às configurações originais.",  -- 165
+        "Nada para restaurar: '%s' não foi editado.",  -- 166
+        "Os perfis integrados não podem ser excluídos.",  -- 167
+        "Deslocamento sobre o ombro espelhado.",  -- 168
+        "Deslocamento sobre o ombro de volta ao normal.",  -- 169
+        "As situações são mantidas por %.1f segundos após o fim.",  -- 170
+        "uso: /ccam delay <seconds>",  -- 171
+        "o painel de opções não está disponível neste cliente",  -- 172
+        "comando desconhecido '%s'. Digite /ccam help",  -- 173
+        "Clique esquerdo: próximo perfil. Clique direito: perfil anterior. A primeira entrada, sem alteração, deixa a câmera como está.",  -- 174
+        "Clique esquerdo: próximo perfil. Clique direito: perfil anterior.",  -- 175
+        "Pressione Ctrl+C para copiar e depois Esc.",  -- 176
+        "Cole aqui uma sequência do ControllerCam (Ctrl+V) e pressione Importar.",  -- 177
+        "Perfis de câmera para jogar com controle. Escolha como a câmera se comporta em cada situação. Clique esquerdo em um perfil vai para o próximo; clique direito, para o anterior.",  -- 178
+        "Liga ou desliga o controle da câmera. Desligado, suas configurações originais de câmera são restauradas.",  -- 179
+        "Câmera de Ação com perfis mais calmos para cidades, montarias, voo e raides.",  -- 180
+        "Evita que a câmera fique alternando entre perfis quando uma situação liga e desliga rapidamente.",  -- 181
+        "Troca o ombro sobre o qual a câmera olha.",  -- 182
+        "Usa este perfil em todas as situações.",  -- 183
+        "Cria uma cópia editável deste perfil.",  -- 184
+        "Salva as configurações atuais de câmera como um novo perfil.",  -- 185
+        "Mostra uma sequência que você pode compartilhar.",  -- 186
+        "Adiciona um perfil a partir de uma sequência compartilhada.",  -- 187
+        "Exclui este perfil personalizado.",  -- 188
+        "Devolve este perfil integrado às configurações originais.",  -- 189
+        "Permite alterar também os perfis integrados. Suas alterações são mantidas e «Restaurar o original» traz o original de volta.",  -- 190
+        "Pares de distância de zoom e deslocamento, por exemplo 0:2 8:2 20:0. Vazio = sem curva. Pressione Enter para aplicar.",  -- 191
+        "Usar o padrão do jogo para esta configuração.",  -- 192
+        "A edição avançada está ativada. As alterações em um perfil integrado são mantidas; «Restaurar o original» o recupera.",  -- 193
+        "As configurações não listadas usam o padrão do jogo. Clique em um valor para alterá-lo; a caixa de curva aceita pares zoom:deslocamento.",  -- 194
+        "Os perfis integrados estão bloqueados. Faça uma cópia ou marque Avançado para editá-los.",  -- 195
+        "Pescando",  -- 196
+        "Em ambientes internos",  -- 197
+        "Situação desconhecida. Use uma destas:",  -- 198
+        "escolher o perfil para uma situação (/ccam mostra a lista)",  -- 199
+        "o deslocamento de ombro na forma em que você está (formas de druida, lobo fantasma), em porcentagem do normal",  -- 200
+        "Você não está em nenhuma forma.",  -- 201
+        "Deslocamento de ombro nesta forma: %d%%",  -- 202
+        "uso: /ccam formoffset <porcentagem> (ou reset)",  -- 203
     },
     ruRU = {
         "В транспорте",  -- 1
@@ -1535,71 +1577,77 @@ local TRANSLATIONS = {
         "как ощущается профиль и все настройки, которые он меняет",  -- 130
         "один профиль везде (например: action, hybrid, classic)",  -- 131
         "рекомендуемая настройка: камера «Экшен» со спокойными профилями для городов, езды верхом, полёта и рейдов",  -- 132
-        "выбрать профиль для ситуации (vehicle, flying, swimming, mounted, combat, raid, dungeon, city, default)",  -- 133
-        "использовать профиль сейчас, независимо от ситуации",  -- 134
-        "прекратить принудительное использование профиля",  -- 135
-        "сохранить текущие настройки камеры как новый профиль",  -- 136
-        "создать редактируемую копию профиля",  -- 137
-        "изменить настройку пользовательского профиля (/ccam settings покажет список)",  -- 138
-        "смещение за плечо в зависимости от дистанции камеры, например /ccam curve mine 0:2 8:2 20:0",  -- 139
-        "разрешить изменять и встроенные профили (/ccam reset <profile> вернёт исходный)",  -- 140
-        "вернуть изменённый встроенный профиль к исходным настройкам",  -- 141
-        "удалить пользовательский профиль",  -- 142
-        "показать строку для обмена",  -- 143
-        "добавить профиль из полученной строки",  -- 144
-        "переключить смещение на другое плечо",  -- 145
-        "как долго ситуация сохраняется после окончания (по умолчанию 1,5)",  -- 146
-        "включить, либо выключить и восстановить исходные настройки камеры",  -- 147
-        "показать текущий масштаб, смещение и настройки движения (для диагностики)",  -- 148
-        "открыть окно настроек (Настройки > Модификации > ControllerCam)",  -- 149
-        "показать этот список",  -- 150
-        "'%s' подходит к нескольким профилям. Введите больше букв названия.",  -- 151
-        "Профиль «%s» не найден. /ccam list покажет все профили.",  -- 152
-        "Профили камеры для игры с геймпадом. Сразу доступна камера «Экшен»; «Гибрид» и «Классика» включаются одной командой.",  -- 153
-        "Встроенные профили заблокированы. Включите расширенное редактирование (/ccam advanced on) или сделайте копию: /ccam copy <profile>",  -- 154
-        "Неизвестная настройка. /ccam settings покажет список.",  -- 155
-        "Значение вне допустимого диапазона.",  -- 156
-        "Недопустимое значение.",  -- 157
-        "Неизвестная ситуация. Используйте: vehicle, flying, swimming, mounted, combat, raid, dungeon, city или default.",  -- 158
-        "использование: /ccam set <situation> <profile|none>",  -- 159
-        "%s: без изменений",  -- 160
-        "Принудительно используется «%s». /ccam auto возвращает ситуации.",  -- 161
-        "Камера снова следует вашим ситуациям.",  -- 162
-        "использование: /ccam edit <profile> <setting> <value|default>",  -- 163
-        "Для смещения по масштабу используйте /ccam curve.",  -- 164
-        "использование: /ccam advanced [on|off]",  -- 165
-        "Расширенное редактирование: %s.",  -- 166
-        "«%s» возвращён к исходным настройкам.",  -- 167
-        "Нечего возвращать: «%s» не изменялся.",  -- 168
-        "Встроенные профили нельзя удалить.",  -- 169
-        "Смещение за плечо отражено.",  -- 170
-        "Смещение за плечо снова обычное.",  -- 171
-        "Ситуации сохраняются %.1f с после окончания.",  -- 172
-        "использование: /ccam delay <seconds>",  -- 173
-        "окно настроек недоступно в этом клиенте",  -- 174
-        "неизвестная команда «%s». Введите /ccam help",  -- 175
-        "ЛКМ: следующий профиль. ПКМ: предыдущий профиль. Первый пункт, без изменений, оставляет камеру как есть.",  -- 176
-        "ЛКМ: следующий профиль. ПКМ: предыдущий профиль.",  -- 177
-        "Нажмите Ctrl+C, чтобы скопировать, затем Esc.",  -- 178
-        "Вставьте сюда строку ControllerCam (Ctrl+V) и нажмите «Импорт».",  -- 179
-        "Профили камеры для игры с геймпадом. Выберите, как должна ощущаться камера в каждой ситуации. ЛКМ по профилю — следующий, ПКМ — предыдущий.",  -- 180
-        "Включает и выключает управление камерой. При выключении исходные настройки камеры восстанавливаются.",  -- 181
-        "Камера «Экшен» со спокойными профилями для городов, езды верхом, полёта и рейдов.",  -- 182
-        "Не даёт камере метаться между профилями, когда ситуация быстро включается и выключается.",  -- 183
-        "Меняет плечо, через которое смотрит камера.",  -- 184
-        "Использовать этот профиль во всех ситуациях.",  -- 185
-        "Создаёт редактируемую копию этого профиля.",  -- 186
-        "Сохраняет текущие настройки камеры как новый профиль.",  -- 187
-        "Показывает строку, которой можно поделиться.",  -- 188
-        "Добавляет профиль из полученной строки.",  -- 189
-        "Удаляет этот пользовательский профиль.",  -- 190
-        "Возвращает этот встроенный профиль к исходным настройкам.",  -- 191
-        "Позволяет изменять и встроенные профили. Ваши изменения сохраняются, а «Вернуть исходный» восстанавливает оригинал.",  -- 192
-        "Пары «дистанция масштаба : смещение», например 0:2 8:2 20:0. Пусто — без кривой. Нажмите Enter, чтобы применить.",  -- 193
-        "Использовать значение игры по умолчанию для этой настройки.",  -- 194
-        "Расширенное редактирование включено. Изменения встроенного профиля сохраняются; «Вернуть исходный» восстанавливает оригинал.",  -- 195
-        "Не указанные настройки используют значения игры по умолчанию. Щёлкните значение, чтобы изменить его; в поле кривой вводятся пары «масштаб:смещение».",  -- 196
-        "Встроенные профили заблокированы. Сделайте копию или отметьте «Дополнительно», чтобы изменять их.",  -- 197
+        "использовать профиль сейчас, независимо от ситуации",  -- 133
+        "прекратить принудительное использование профиля",  -- 134
+        "сохранить текущие настройки камеры как новый профиль",  -- 135
+        "создать редактируемую копию профиля",  -- 136
+        "изменить настройку пользовательского профиля (/ccam settings покажет список)",  -- 137
+        "смещение за плечо в зависимости от дистанции камеры, например /ccam curve mine 0:2 8:2 20:0",  -- 138
+        "разрешить изменять и встроенные профили (/ccam reset <profile> вернёт исходный)",  -- 139
+        "вернуть изменённый встроенный профиль к исходным настройкам",  -- 140
+        "удалить пользовательский профиль",  -- 141
+        "показать строку для обмена",  -- 142
+        "добавить профиль из полученной строки",  -- 143
+        "переключить смещение на другое плечо",  -- 144
+        "как долго ситуация сохраняется после окончания (по умолчанию 1,5)",  -- 145
+        "включить, либо выключить и восстановить исходные настройки камеры",  -- 146
+        "показать текущий масштаб, смещение и настройки движения (для диагностики)",  -- 147
+        "открыть окно настроек (Настройки > Модификации > ControllerCam)",  -- 148
+        "показать этот список",  -- 149
+        "'%s' подходит к нескольким профилям. Введите больше букв названия.",  -- 150
+        "Профиль «%s» не найден. /ccam list покажет все профили.",  -- 151
+        "Профили камеры для игры с геймпадом. Сразу доступна камера «Экшен»; «Гибрид» и «Классика» включаются одной командой.",  -- 152
+        "Встроенные профили заблокированы. Включите расширенное редактирование (/ccam advanced on) или сделайте копию: /ccam copy <profile>",  -- 153
+        "Неизвестная настройка. /ccam settings покажет список.",  -- 154
+        "Значение вне допустимого диапазона.",  -- 155
+        "Недопустимое значение.",  -- 156
+        "использование: /ccam set <situation> <profile|none>",  -- 157
+        "%s: без изменений",  -- 158
+        "Принудительно используется «%s». /ccam auto возвращает ситуации.",  -- 159
+        "Камера снова следует вашим ситуациям.",  -- 160
+        "использование: /ccam edit <profile> <setting> <value|default>",  -- 161
+        "Для смещения по масштабу используйте /ccam curve.",  -- 162
+        "использование: /ccam advanced [on|off]",  -- 163
+        "Расширенное редактирование: %s.",  -- 164
+        "«%s» возвращён к исходным настройкам.",  -- 165
+        "Нечего возвращать: «%s» не изменялся.",  -- 166
+        "Встроенные профили нельзя удалить.",  -- 167
+        "Смещение за плечо отражено.",  -- 168
+        "Смещение за плечо снова обычное.",  -- 169
+        "Ситуации сохраняются %.1f с после окончания.",  -- 170
+        "использование: /ccam delay <seconds>",  -- 171
+        "окно настроек недоступно в этом клиенте",  -- 172
+        "неизвестная команда «%s». Введите /ccam help",  -- 173
+        "ЛКМ: следующий профиль. ПКМ: предыдущий профиль. Первый пункт, без изменений, оставляет камеру как есть.",  -- 174
+        "ЛКМ: следующий профиль. ПКМ: предыдущий профиль.",  -- 175
+        "Нажмите Ctrl+C, чтобы скопировать, затем Esc.",  -- 176
+        "Вставьте сюда строку ControllerCam (Ctrl+V) и нажмите «Импорт».",  -- 177
+        "Профили камеры для игры с геймпадом. Выберите, как должна ощущаться камера в каждой ситуации. ЛКМ по профилю — следующий, ПКМ — предыдущий.",  -- 178
+        "Включает и выключает управление камерой. При выключении исходные настройки камеры восстанавливаются.",  -- 179
+        "Камера «Экшен» со спокойными профилями для городов, езды верхом, полёта и рейдов.",  -- 180
+        "Не даёт камере метаться между профилями, когда ситуация быстро включается и выключается.",  -- 181
+        "Меняет плечо, через которое смотрит камера.",  -- 182
+        "Использовать этот профиль во всех ситуациях.",  -- 183
+        "Создаёт редактируемую копию этого профиля.",  -- 184
+        "Сохраняет текущие настройки камеры как новый профиль.",  -- 185
+        "Показывает строку, которой можно поделиться.",  -- 186
+        "Добавляет профиль из полученной строки.",  -- 187
+        "Удаляет этот пользовательский профиль.",  -- 188
+        "Возвращает этот встроенный профиль к исходным настройкам.",  -- 189
+        "Позволяет изменять и встроенные профили. Ваши изменения сохраняются, а «Вернуть исходный» восстанавливает оригинал.",  -- 190
+        "Пары «дистанция масштаба : смещение», например 0:2 8:2 20:0. Пусто — без кривой. Нажмите Enter, чтобы применить.",  -- 191
+        "Использовать значение игры по умолчанию для этой настройки.",  -- 192
+        "Расширенное редактирование включено. Изменения встроенного профиля сохраняются; «Вернуть исходный» восстанавливает оригинал.",  -- 193
+        "Не указанные настройки используют значения игры по умолчанию. Щёлкните значение, чтобы изменить его; в поле кривой вводятся пары «масштаб:смещение».",  -- 194
+        "Встроенные профили заблокированы. Сделайте копию или отметьте «Дополнительно», чтобы изменять их.",  -- 195
+        "Рыбалка",  -- 196
+        "В помещении",  -- 197
+        "Неизвестная ситуация. Используйте одну из:",  -- 198
+        "выбрать профиль для одной ситуации (/ccam показывает список)",  -- 199
+        "смещение камеры к плечу в текущем облике (облики друида, призрачный волк), в процентах от обычного",  -- 200
+        "Вы не в облике.",  -- 201
+        "Смещение к плечу в этом облике: %d%%",  -- 202
+        "использование: /ccam formoffset <процент> (или reset)",  -- 203
     },
     zhCN = {
         "载具中",  -- 1
@@ -1734,71 +1782,77 @@ local TRANSLATIONS = {
         "配置的手感及其更改的所有设置",  -- 130
         "所有情境使用同一配置（例如：action、hybrid、classic）",  -- 131
         "推荐设置：动作镜头，城市、骑乘、飞行和团队副本使用更平稳的配置",  -- 132
-        "为某个情境选择配置（vehicle、flying、swimming、mounted、combat、raid、dungeon、city、default）",  -- 133
-        "立即使用某个配置，不论情境",  -- 134
-        "停止强制使用配置",  -- 135
-        "将当前镜头设置保存为新配置",  -- 136
-        "创建配置的可编辑副本",  -- 137
-        "更改自定义配置的某项设置（/ccam settings 列出所有设置）",  -- 138
-        "按镜头距离设置越肩偏移，例如 /ccam curve mine 0:2 8:2 20:0",  -- 139
-        "同时允许编辑内置配置（/ccam reset <profile> 可恢复原始设置）",  -- 140
-        "将已编辑的内置配置恢复为原始设置",  -- 141
-        "删除自定义配置",  -- 142
-        "显示可分享的字符串",  -- 143
-        "从分享的字符串添加配置",  -- 144
-        "将越肩偏移切换到另一侧肩膀",  -- 145
-        "情境结束后保持多久（默认 1.5）",  -- 146
-        "开启，或关闭并还原原来的镜头设置",  -- 147
-        "显示当前缩放、越肩偏移和动态设置（用于排查问题）",  -- 148
-        "打开选项面板（选项 > 插件 > ControllerCam）",  -- 149
-        "显示此列表",  -- 150
-        "“%s”匹配多个配置。请输入更多名称。",  -- 151
-        "没有名为“%s”的配置。/ccam list 可查看所有配置。",  -- 152
-        "手柄玩家的镜头配置。开箱即用动作镜头；混合和经典只需一条命令。",  -- 153
-        "内置配置已锁定。请开启高级编辑（/ccam advanced on）或创建副本：/ccam copy <profile>",  -- 154
-        "未知设置。/ccam settings 可列出所有设置。",  -- 155
-        "该数值超出允许范围。",  -- 156
-        "该数值无效。",  -- 157
-        "未知情境。请使用：vehicle、flying、swimming、mounted、combat、raid、dungeon、city 或 default。",  -- 158
-        "用法：/ccam set <situation> <profile|none>",  -- 159
-        "%s：不更改",  -- 160
-        "正在强制使用“%s”。/ccam auto 可返回按情境切换。",  -- 161
-        "镜头恢复按情境切换。",  -- 162
-        "用法：/ccam edit <profile> <setting> <value|default>",  -- 163
-        "按缩放的偏移请使用 /ccam curve。",  -- 164
-        "用法：/ccam advanced [on|off]",  -- 165
-        "高级编辑：%s。",  -- 166
-        "“%s”已恢复为原始设置。",  -- 167
-        "无需还原：“%s”尚未被编辑。",  -- 168
-        "内置配置无法删除。",  -- 169
-        "越肩偏移已镜像。",  -- 170
-        "越肩偏移已恢复正常。",  -- 171
-        "情境结束后会保持 %.1f 秒。",  -- 172
-        "用法：/ccam delay <seconds>",  -- 173
-        "此客户端不支持选项面板",  -- 174
-        "未知命令“%s”。请输入 /ccam help",  -- 175
-        "左键：下一个配置。右键：上一个配置。第一项“不更改”会保持镜头不变。",  -- 176
-        "左键：下一个配置。右键：上一个配置。",  -- 177
-        "按 Ctrl+C 复制，然后按 Esc。",  -- 178
-        "在此粘贴 ControllerCam 字符串（Ctrl+V），然后点击导入。",  -- 179
-        "手柄玩家的镜头配置。为每种情境选择镜头的手感。左键点击配置切换到下一个，右键切换到上一个。",  -- 180
-        "开启或关闭镜头控制。关闭后会还原你原来的镜头设置。",  -- 181
-        "动作镜头，城市、骑乘、飞行和团队副本使用更平稳的配置。",  -- 182
-        "防止情境快速开关时镜头在配置之间来回闪烁。",  -- 183
-        "切换镜头越过的肩膀。",  -- 184
-        "在所有情境中使用此配置。",  -- 185
-        "创建此配置的可编辑副本。",  -- 186
-        "将当前镜头设置保存为新配置。",  -- 187
-        "显示可分享的字符串。",  -- 188
-        "从分享的字符串添加配置。",  -- 189
-        "删除此自定义配置。",  -- 190
-        "将此内置配置恢复为原始设置。",  -- 191
-        "允许同时修改内置配置。你的更改会被保留，“恢复原始设置”可还原原始版本。",  -- 192
-        "缩放距离与偏移的数值对，例如 0:2 8:2 20:0。留空表示无曲线。按 Enter 应用。",  -- 193
-        "此设置使用游戏默认值。",  -- 194
-        "高级编辑已开启。对内置配置的更改会被保留；“恢复原始设置”可还原。",  -- 195
-        "未列出的设置使用游戏默认值。点击数值即可更改；曲线输入框接受“缩放:偏移”数值对。",  -- 196
-        "内置配置已锁定。请创建副本，或勾选“高级”来编辑它们。",  -- 197
+        "立即使用某个配置，不论情境",  -- 133
+        "停止强制使用配置",  -- 134
+        "将当前镜头设置保存为新配置",  -- 135
+        "创建配置的可编辑副本",  -- 136
+        "更改自定义配置的某项设置（/ccam settings 列出所有设置）",  -- 137
+        "按镜头距离设置越肩偏移，例如 /ccam curve mine 0:2 8:2 20:0",  -- 138
+        "同时允许编辑内置配置（/ccam reset <profile> 可恢复原始设置）",  -- 139
+        "将已编辑的内置配置恢复为原始设置",  -- 140
+        "删除自定义配置",  -- 141
+        "显示可分享的字符串",  -- 142
+        "从分享的字符串添加配置",  -- 143
+        "将越肩偏移切换到另一侧肩膀",  -- 144
+        "情境结束后保持多久（默认 1.5）",  -- 145
+        "开启，或关闭并还原原来的镜头设置",  -- 146
+        "显示当前缩放、越肩偏移和动态设置（用于排查问题）",  -- 147
+        "打开选项面板（选项 > 插件 > ControllerCam）",  -- 148
+        "显示此列表",  -- 149
+        "“%s”匹配多个配置。请输入更多名称。",  -- 150
+        "没有名为“%s”的配置。/ccam list 可查看所有配置。",  -- 151
+        "手柄玩家的镜头配置。开箱即用动作镜头；混合和经典只需一条命令。",  -- 152
+        "内置配置已锁定。请开启高级编辑（/ccam advanced on）或创建副本：/ccam copy <profile>",  -- 153
+        "未知设置。/ccam settings 可列出所有设置。",  -- 154
+        "该数值超出允许范围。",  -- 155
+        "该数值无效。",  -- 156
+        "用法：/ccam set <situation> <profile|none>",  -- 157
+        "%s：不更改",  -- 158
+        "正在强制使用“%s”。/ccam auto 可返回按情境切换。",  -- 159
+        "镜头恢复按情境切换。",  -- 160
+        "用法：/ccam edit <profile> <setting> <value|default>",  -- 161
+        "按缩放的偏移请使用 /ccam curve。",  -- 162
+        "用法：/ccam advanced [on|off]",  -- 163
+        "高级编辑：%s。",  -- 164
+        "“%s”已恢复为原始设置。",  -- 165
+        "无需还原：“%s”尚未被编辑。",  -- 166
+        "内置配置无法删除。",  -- 167
+        "越肩偏移已镜像。",  -- 168
+        "越肩偏移已恢复正常。",  -- 169
+        "情境结束后会保持 %.1f 秒。",  -- 170
+        "用法：/ccam delay <seconds>",  -- 171
+        "此客户端不支持选项面板",  -- 172
+        "未知命令“%s”。请输入 /ccam help",  -- 173
+        "左键：下一个配置。右键：上一个配置。第一项“不更改”会保持镜头不变。",  -- 174
+        "左键：下一个配置。右键：上一个配置。",  -- 175
+        "按 Ctrl+C 复制，然后按 Esc。",  -- 176
+        "在此粘贴 ControllerCam 字符串（Ctrl+V），然后点击导入。",  -- 177
+        "手柄玩家的镜头配置。为每种情境选择镜头的手感。左键点击配置切换到下一个，右键切换到上一个。",  -- 178
+        "开启或关闭镜头控制。关闭后会还原你原来的镜头设置。",  -- 179
+        "动作镜头，城市、骑乘、飞行和团队副本使用更平稳的配置。",  -- 180
+        "防止情境快速开关时镜头在配置之间来回闪烁。",  -- 181
+        "切换镜头越过的肩膀。",  -- 182
+        "在所有情境中使用此配置。",  -- 183
+        "创建此配置的可编辑副本。",  -- 184
+        "将当前镜头设置保存为新配置。",  -- 185
+        "显示可分享的字符串。",  -- 186
+        "从分享的字符串添加配置。",  -- 187
+        "删除此自定义配置。",  -- 188
+        "将此内置配置恢复为原始设置。",  -- 189
+        "允许同时修改内置配置。你的更改会被保留，“恢复原始设置”可还原原始版本。",  -- 190
+        "缩放距离与偏移的数值对，例如 0:2 8:2 20:0。留空表示无曲线。按 Enter 应用。",  -- 191
+        "此设置使用游戏默认值。",  -- 192
+        "高级编辑已开启。对内置配置的更改会被保留；“恢复原始设置”可还原。",  -- 193
+        "未列出的设置使用游戏默认值。点击数值即可更改；曲线输入框接受“缩放:偏移”数值对。",  -- 194
+        "内置配置已锁定。请创建副本，或勾选“高级”来编辑它们。",  -- 195
+        "钓鱼中",  -- 196
+        "室内",  -- 197
+        "未知的情境。请使用以下之一：",  -- 198
+        "为一种情境选择配置（/ccam 显示列表）",  -- 199
+        "当前形态下的越肩偏移（德鲁伊形态、幽魂之狼），为正常值的百分比",  -- 200
+        "你当前不在任何形态中。",  -- 201
+        "此形态下的越肩偏移：%d%%",  -- 202
+        "用法：/ccam formoffset <百分比>（或 reset）",  -- 203
     },
     zhTW = {
         "載具中",  -- 1
@@ -1933,71 +1987,77 @@ local TRANSLATIONS = {
         "設定檔的手感及其更改的所有設定",  -- 130
         "所有情境使用同一設定檔（例如：action、hybrid、classic）",  -- 131
         "建議設定：動作鏡頭，城市、騎乘、飛行和團隊副本使用更平穩的設定檔",  -- 132
-        "為某個情境選擇設定檔（vehicle、flying、swimming、mounted、combat、raid、dungeon、city、default）",  -- 133
-        "立即使用某個設定檔，不論情境",  -- 134
-        "停止強制使用設定檔",  -- 135
-        "將目前鏡頭設定儲存為新設定檔",  -- 136
-        "建立設定檔的可編輯副本",  -- 137
-        "更改自訂設定檔的某項設定（/ccam settings 列出所有設定）",  -- 138
-        "依鏡頭距離設定越肩偏移，例如 /ccam curve mine 0:2 8:2 20:0",  -- 139
-        "同時允許編輯內建設定檔（/ccam reset <profile> 可還原為原始設定）",  -- 140
-        "將已編輯的內建設定檔還原為原始設定",  -- 141
-        "刪除自訂設定檔",  -- 142
-        "顯示可分享的字串",  -- 143
-        "從分享的字串新增設定檔",  -- 144
-        "將越肩偏移切換到另一側肩膀",  -- 145
-        "情境結束後保持多久（預設 1.5）",  -- 146
-        "開啟，或關閉並還原原本的鏡頭設定",  -- 147
-        "顯示目前縮放、越肩偏移和動態設定（用於排查問題）",  -- 148
-        "開啟選項面板（選項 > 插件 > ControllerCam）",  -- 149
-        "顯示此列表",  -- 150
-        "「%s」符合多個設定檔。請輸入更多名稱。",  -- 151
-        "沒有名為「%s」的設定檔。/ccam list 可查看所有設定檔。",  -- 152
-        "手把玩家的鏡頭設定檔。開箱即用動作鏡頭；混合和經典只需一條指令。",  -- 153
-        "內建設定檔已鎖定。請開啟進階編輯（/ccam advanced on）或建立副本：/ccam copy <profile>",  -- 154
-        "未知設定。/ccam settings 可列出所有設定。",  -- 155
-        "該數值超出允許範圍。",  -- 156
-        "該數值無效。",  -- 157
-        "未知情境。請使用：vehicle、flying、swimming、mounted、combat、raid、dungeon、city 或 default。",  -- 158
-        "用法：/ccam set <situation> <profile|none>",  -- 159
-        "%s：不變更",  -- 160
-        "正在強制使用「%s」。/ccam auto 可返回依情境切換。",  -- 161
-        "鏡頭恢復依情境切換。",  -- 162
-        "用法：/ccam edit <profile> <setting> <value|default>",  -- 163
-        "依縮放的偏移請使用 /ccam curve。",  -- 164
-        "用法：/ccam advanced [on|off]",  -- 165
-        "進階編輯：%s。",  -- 166
-        "「%s」已還原為原始設定。",  -- 167
-        "無需還原：「%s」尚未被編輯。",  -- 168
-        "內建設定檔無法刪除。",  -- 169
-        "越肩偏移已鏡像。",  -- 170
-        "越肩偏移已恢復正常。",  -- 171
-        "情境結束後會保持 %.1f 秒。",  -- 172
-        "用法：/ccam delay <seconds>",  -- 173
-        "此用戶端不支援選項面板",  -- 174
-        "未知指令「%s」。請輸入 /ccam help",  -- 175
-        "左鍵：下一個設定檔。右鍵：上一個設定檔。第一項「不變更」會保持鏡頭不變。",  -- 176
-        "左鍵：下一個設定檔。右鍵：上一個設定檔。",  -- 177
-        "按 Ctrl+C 複製，然後按 Esc。",  -- 178
-        "在此貼上 ControllerCam 字串（Ctrl+V），然後點擊匯入。",  -- 179
-        "手把玩家的鏡頭設定檔。為每種情境選擇鏡頭的手感。左鍵點擊設定檔切換到下一個，右鍵切換到上一個。",  -- 180
-        "開啟或關閉鏡頭控制。關閉後會還原你原本的鏡頭設定。",  -- 181
-        "動作鏡頭，城市、騎乘、飛行和團隊副本使用更平穩的設定檔。",  -- 182
-        "防止情境快速開關時鏡頭在設定檔之間來回閃爍。",  -- 183
-        "切換鏡頭越過的肩膀。",  -- 184
-        "在所有情境中使用此設定檔。",  -- 185
-        "建立此設定檔的可編輯副本。",  -- 186
-        "將目前鏡頭設定儲存為新設定檔。",  -- 187
-        "顯示可分享的字串。",  -- 188
-        "從分享的字串新增設定檔。",  -- 189
-        "刪除此自訂設定檔。",  -- 190
-        "將此內建設定檔還原為原始設定。",  -- 191
-        "允許同時修改內建設定檔。你的變更會被保留，「還原為原始設定」可還原原始版本。",  -- 192
-        "縮放距離與偏移的數值對，例如 0:2 8:2 20:0。留空表示無曲線。按 Enter 套用。",  -- 193
-        "此設定使用遊戲預設值。",  -- 194
-        "進階編輯已開啟。對內建設定檔的變更會被保留；「還原為原始設定」可還原。",  -- 195
-        "未列出的設定使用遊戲預設值。點擊數值即可變更；曲線輸入框接受「縮放:偏移」數值對。",  -- 196
-        "內建設定檔已鎖定。請建立副本，或勾選「進階」來編輯它們。",  -- 197
+        "立即使用某個設定檔，不論情境",  -- 133
+        "停止強制使用設定檔",  -- 134
+        "將目前鏡頭設定儲存為新設定檔",  -- 135
+        "建立設定檔的可編輯副本",  -- 136
+        "更改自訂設定檔的某項設定（/ccam settings 列出所有設定）",  -- 137
+        "依鏡頭距離設定越肩偏移，例如 /ccam curve mine 0:2 8:2 20:0",  -- 138
+        "同時允許編輯內建設定檔（/ccam reset <profile> 可還原為原始設定）",  -- 139
+        "將已編輯的內建設定檔還原為原始設定",  -- 140
+        "刪除自訂設定檔",  -- 141
+        "顯示可分享的字串",  -- 142
+        "從分享的字串新增設定檔",  -- 143
+        "將越肩偏移切換到另一側肩膀",  -- 144
+        "情境結束後保持多久（預設 1.5）",  -- 145
+        "開啟，或關閉並還原原本的鏡頭設定",  -- 146
+        "顯示目前縮放、越肩偏移和動態設定（用於排查問題）",  -- 147
+        "開啟選項面板（選項 > 插件 > ControllerCam）",  -- 148
+        "顯示此列表",  -- 149
+        "「%s」符合多個設定檔。請輸入更多名稱。",  -- 150
+        "沒有名為「%s」的設定檔。/ccam list 可查看所有設定檔。",  -- 151
+        "手把玩家的鏡頭設定檔。開箱即用動作鏡頭；混合和經典只需一條指令。",  -- 152
+        "內建設定檔已鎖定。請開啟進階編輯（/ccam advanced on）或建立副本：/ccam copy <profile>",  -- 153
+        "未知設定。/ccam settings 可列出所有設定。",  -- 154
+        "該數值超出允許範圍。",  -- 155
+        "該數值無效。",  -- 156
+        "用法：/ccam set <situation> <profile|none>",  -- 157
+        "%s：不變更",  -- 158
+        "正在強制使用「%s」。/ccam auto 可返回依情境切換。",  -- 159
+        "鏡頭恢復依情境切換。",  -- 160
+        "用法：/ccam edit <profile> <setting> <value|default>",  -- 161
+        "依縮放的偏移請使用 /ccam curve。",  -- 162
+        "用法：/ccam advanced [on|off]",  -- 163
+        "進階編輯：%s。",  -- 164
+        "「%s」已還原為原始設定。",  -- 165
+        "無需還原：「%s」尚未被編輯。",  -- 166
+        "內建設定檔無法刪除。",  -- 167
+        "越肩偏移已鏡像。",  -- 168
+        "越肩偏移已恢復正常。",  -- 169
+        "情境結束後會保持 %.1f 秒。",  -- 170
+        "用法：/ccam delay <seconds>",  -- 171
+        "此用戶端不支援選項面板",  -- 172
+        "未知指令「%s」。請輸入 /ccam help",  -- 173
+        "左鍵：下一個設定檔。右鍵：上一個設定檔。第一項「不變更」會保持鏡頭不變。",  -- 174
+        "左鍵：下一個設定檔。右鍵：上一個設定檔。",  -- 175
+        "按 Ctrl+C 複製，然後按 Esc。",  -- 176
+        "在此貼上 ControllerCam 字串（Ctrl+V），然後點擊匯入。",  -- 177
+        "手把玩家的鏡頭設定檔。為每種情境選擇鏡頭的手感。左鍵點擊設定檔切換到下一個，右鍵切換到上一個。",  -- 178
+        "開啟或關閉鏡頭控制。關閉後會還原你原本的鏡頭設定。",  -- 179
+        "動作鏡頭，城市、騎乘、飛行和團隊副本使用更平穩的設定檔。",  -- 180
+        "防止情境快速開關時鏡頭在設定檔之間來回閃爍。",  -- 181
+        "切換鏡頭越過的肩膀。",  -- 182
+        "在所有情境中使用此設定檔。",  -- 183
+        "建立此設定檔的可編輯副本。",  -- 184
+        "將目前鏡頭設定儲存為新設定檔。",  -- 185
+        "顯示可分享的字串。",  -- 186
+        "從分享的字串新增設定檔。",  -- 187
+        "刪除此自訂設定檔。",  -- 188
+        "將此內建設定檔還原為原始設定。",  -- 189
+        "允許同時修改內建設定檔。你的變更會被保留，「還原為原始設定」可還原原始版本。",  -- 190
+        "縮放距離與偏移的數值對，例如 0:2 8:2 20:0。留空表示無曲線。按 Enter 套用。",  -- 191
+        "此設定使用遊戲預設值。",  -- 192
+        "進階編輯已開啟。對內建設定檔的變更會被保留；「還原為原始設定」可還原。",  -- 193
+        "未列出的設定使用遊戲預設值。點擊數值即可變更；曲線輸入框接受「縮放:偏移」數值對。",  -- 194
+        "內建設定檔已鎖定。請建立副本，或勾選「進階」來編輯它們。",  -- 195
+        "釣魚中",  -- 196
+        "室內",  -- 197
+        "未知的情境。請使用以下之一：",  -- 198
+        "為一種情境選擇設定檔（/ccam 顯示列表）",  -- 199
+        "目前形態下的越肩偏移（德魯伊形態、鬼魂之狼），為正常值的百分比",  -- 200
+        "你目前不在任何形態中。",  -- 201
+        "此形態下的越肩偏移：%d%%",  -- 202
+        "用法：/ccam formoffset <百分比>（或 reset）",  -- 203
     },
 }
 TRANSLATIONS.esMX = TRANSLATIONS.esES      -- Latin American Spanish uses the same text

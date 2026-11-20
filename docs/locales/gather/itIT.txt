@@ -1,0 +1,71 @@
+errore:
+attivo
+disattivo
+uso:
+Attivo
+l'intero addon; disattivato rimuove tutti i segnalini e smette di registrare
+Erbe
+Minerali
+Banchi di pesci
+Tesori
+Altro
+Registra i nodi mentre raccogli
+un'erba, un filone o un forziere da cui raccogli viene aggiunto alla mappa
+Registra tutto ciò che apri
+i forzieri il cui nome è già noto vengono sempre registrati; con questa opzione tutto ciò che apri viene registrato come tesoro, anche gli oggetti delle missioni
+Nodi sulla mappa del mondo
+nodi conosciuti della zona mostrata dalla mappa del mondo
+Nodi sulla minimappa
+nodi conosciuti intorno a te sulla minimappa
+mostra le erbe
+mostra i filoni di minerale
+mostra i banchi di pesci
+mostra forzieri e altri tesori
+mostra ogni altro tipo di nodo
+Dimensione dei segnalini sulla mappa del mondo
+quanto sono grandi i segnalini sulla mappa del mondo
+Dimensione dei segnalini sulla minimappa
+quanto sono grandi i segnalini sulla minimappa
+Opacità dei segnalini
+quanto sono opachi i segnalini
+GatherMate2 non è caricato o non ha nodi. Attivalo per un accesso, poi scrivi /ccgather import.
+%d nodi letti da GatherMate2, %d dei quali nuovi.
+GatherMate2 ha dei nodi salvati. Scrivi /ccgather import per acquisirli.
+acquisisce i nodi salvati da GatherMate2 (GatherMate2 deve essere attivo per quell'accesso)
+Condividi i nodi con gruppo e gilda
+comunica a gruppo, incursione e gilda ogni nodo che registri e acquisisce i loro (un nodo condiviso rivela dove ti trovi)
+Autoverifica: tutti i %d controlli superati.
+Autoverifica: %d controlli su %d falliti.
+confronta ciò che è sullo schermo con le impostazioni (check all elenca ogni riga)
+Rapporti di debug
+raccoglie da solo un rapporto diagnostico: all'accesso e di nuovo quando ricarichi o esci (conservato nelle impostazioni salvate)
+%d nodi conosciuti
+Erbe, minerali e altri nodi sulla mappa del mondo e sulla minimappa, registrati mentre raccogli.
+Importa da GatherMate2
+Avvia la demo
+un anello di nodi inventati intorno a te, per vedere i segnalini (di nuovo per fermarla)
+Esegui l'autoverifica
+Raccolta
+Il pannello delle opzioni non è disponibile in questo client.
+apre il pannello delle opzioni
+%s  |  mappa del mondo: %s  |  minimappa: %s  |  registrazione: %s  |  condivisione: %s
+attivato
+disattivato: tutti i segnalini sono spariti e non viene registrato nulla
+comando sconosciuto '%s'. Scrivi /ccgather help
+demo fermata
+L'addon è disattivato.
+Demo in corso: nodi inventati intorno a te, sulla minimappa e sulla mappa del mondo. Scrivi di nuovo /ccgather demo per fermarla.
+Qui il gioco non indica dove ti trovi.
+Nessun nodo conosciuto entro 40 metri.
+Dimenticato: %s
+Questo dimentica tutti i nodi (%d). Scrivi /ccgather clear yes per farlo.
+%d nodi dimenticati.
+Elenco degli errori svuotato.
+Nessun errore registrato.
+%d errori registrati (il più recente per ultimo). /ccgather errors clear svuota l'elenco.
+mostra lo stato
+attiva o disattiva l'addon (disattivato rimuove tutti i segnalini e smette di registrare)
+mostra questo elenco
+dimentica il nodo conosciuto più vicino a te (entro 40 metri)
+dimentica tutti i nodi (chiede prima)
+gli ultimi errori dell'addon, anche dopo un ricaricamento (per segnalarli)

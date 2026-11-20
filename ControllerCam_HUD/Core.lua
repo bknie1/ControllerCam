@@ -1,0 +1,454 @@
+-- ControllerCam HUD
+-- A minimal action-game HUD that takes over while the Gamepad UI is in use.
+--
+-- Self-contained by design: nothing here writes to the game's saved interface settings. Blizzard's frames are
+-- only put aside while the HUD runs, so turning the HUD off (or removing the addon) brings everything back.
+
+local ADDON, ns = ...
+
+-- English text is the key; translations can be added later without touching the code.
+ns.L = ns.L or setmetatable({}, { __index = function(_, key) return key end })      -- Locales.lua fills it
+local L = ns.L
+
+ns.STYLE_CVAR = "InputDeviceInterfaceStyle"     -- "1" while the Gamepad UI is in use (what InputSwap switches)
+
+local MOVABLE = { player = true, target = true, tot = true, focus = true, vertical = true }
+
+local DEFAULTS = {
+    enabled = true,
+    always = false,          -- also run in the mouse & keyboard UI
+    hideBlizzard = true,     -- put the game's own player / target frames aside
+    chat = false,            -- move the chat window to the top left (off: everything stays where WoW puts it)
+    classColors = true,      -- colour your own bar, and other players' bars, by class
+    vendor = true,           -- the vendor's "Sell junk" asks what to sell; quick move at vendor and bank
+    textShade = true,
+    combatColors = true,     -- in a fight, health is coloured by how much is left
+    classIcons = true,       -- a class icon in front of a player's name on the target and target of target
+    targetCompact = false,   -- the target frame a little over half as wide
+    targetThreat = true,     -- the target frame says how your threat stands (Aggro, Pulling, Losing, your share)
+    combatAlpha = 0.7,       -- your bars (and pet, focus) in a fight, until a call to action
+    alertHealth = 0.5,       -- a call to action: your health below this share ...
+    alertPower = 0.3,        -- ... or your mana below this one        -- a soft dark band behind the target's text
+    textScale = 1.5,         -- text size (1 = the small desktop size; 1.5 reads well on a TV)
+    idle = 0.3,              -- player bar opacity when nothing is happening (0 hides it)
+    scale = 1,
+    units = { player = true, target = true, pet = true, focus = true, vertical = false },
+    verticalIdle = 0.3,      -- the vertical bars at full health or out of combat (0: gone until needed)
+    pos = {},
+}
+ns.DEFAULTS = DEFAULTS
+
+local PREFIX = "|cff66ccffControllerCam HUD:|r "
+function ns.Say(msg) print(PREFIX .. msg) end
+
+-- Lua errors are hidden by default, so ours are caught and shown once each.
+local seen = {}
+ns.errors = {}
+function ns.Error(err)
+    err = tostring(err)
+    if seen[err] then return end
+    seen[err] = true
+    ns.errors[#ns.errors + 1] = err
+    ns.Say("|cffff5555" .. L["error:"] .. "|r " .. err)
+    if ns.db then                         -- kept (the last few) so they can be read again: /cchud errors
+        ns.db.errorLog = ns.db.errorLog or {}
+        table.insert(ns.db.errorLog, 1, { when = date and date("%Y-%m-%d %H:%M") or "", text = err })
+        while #ns.db.errorLog > 15 do table.remove(ns.db.errorLog) end
+    end
+end
+
+-- A short note of something a module did, for the debug reports (Debug.lua): the last 120 are kept, each
+-- with the time it was left. Costs nothing while debug reports are off.
+ns.notes = {}
+function ns.Note(fmt, ...)
+    if not (ns.db and ns.db.debug) then return end
+    local ok, text = pcall(string.format, fmt, ...)
+    if not ok then text = tostring(fmt) end
+    local notes = ns.notes
+    notes[#notes + 1] = ("%.1f %s"):format(GetTime and GetTime() or 0, text)
+    if #notes > 120 then table.remove(notes, 1) end
+end
+
+function ns.Protect(fn)
+    return function(...)
+        local ok, err = pcall(fn, ...)
+        if not ok then ns.Error(err) end
+    end
+end
+
+function ns.IsSecret(v)
+    return type(issecretvalue) == "function" and issecretvalue(v) or false
+end
+
+-- What the game says, or nil when it keeps it secret (a secret cannot be tested, compared or used as a key)
+function ns.Plain(v)
+    if ns.IsSecret(v) then return nil end
+    return v
+end
+-- A yes or no the game gives: false when it keeps it secret
+function ns.Yes(v)
+    if ns.IsSecret(v) then return false end
+    return v and true or false
+end
+
+-- Is this unit your target? Asked of the game; when it keeps the answer secret (in a dungeon), by whether
+-- its nameplate is your target's.
+function ns.IsTarget(unit)
+    if not unit then return false end
+    local ok, same = pcall(UnitIsUnit, unit, "target")
+    if ok and not ns.IsSecret(same) then return same and true or false end
+    local get = C_NamePlate and C_NamePlate.GetNamePlateForUnit
+    if not get then return false end
+    local okA, a = pcall(get, unit)
+    local okB, b = pcall(get, "target")
+    return okA and okB and a ~= nil and a == b or false
+end
+
+-- A unit's GUID, or nil when the game keeps it secret (in dungeons, for one) or there is none. Never use
+-- UnitGUID directly: a secret GUID cannot be a table key or be compared.
+function ns.GUID(unit)
+    if not unit or not UnitGUID then return nil end
+    local ok, guid = pcall(UnitGUID, unit)
+    if not ok or guid == nil or ns.IsSecret(guid) then return nil end
+    return guid
+end
+
+function ns.Clamp(v, lo, hi)
+    if v < lo then return lo elseif v > hi then return hi end
+    return v
+end
+
+function ns.OnOff(b)
+    return b and ("|cff33ff33" .. L["on"] .. "|r") or ("|cffff5555" .. L["off"] .. "|r")
+end
+
+-- "on"/"off" -> true/false; anything else (including nothing) flips the current value
+function ns.Toggle(arg, current)
+    if arg == "on" then return true elseif arg == "off" then return false end
+    return not current
+end
+
+---------------------------------------------------------------------------
+-- What modules plug into: settings, commands, self-check rows
+---------------------------------------------------------------------------
+-- A setting: { key = "name in the saved settings", kind = "boolean" | "number", default =, min =, max =,
+--              label = (text shown in options and chat), tip = (one line of explanation), section = (options heading),
+--              command = "/cchud word", percent = true (numbers typed and shown as percent),
+--              get =, set = (instead of key, for values that live elsewhere), onChange = (instead of a re-apply) }
+ns.settings, ns.commands, ns.helpRows, ns.checks = {}, {}, {}, {}
+
+function ns.Get(def)
+    if def.get then return def.get() end
+    return ns.db[def.key]
+end
+
+function ns.Set(def, value)
+    if def.kind == "number" then value = ns.Clamp(value, def.min, def.max) end
+    if def.set then def.set(value) else ns.db[def.key] = value end
+    if def.onChange then def.onChange(value) else ns.Apply() end
+end
+
+function ns.RegisterCommand(name, fn, usage, text)
+    ns.commands[name] = fn
+    if usage then ns.helpRows[#ns.helpRows + 1] = { usage, text } end
+end
+
+function ns.RegisterCheck(fn) ns.checks[#ns.checks + 1] = fn end
+
+-- Saved data of another shape (a list, say): fn gets what was saved and returns the cleaned value.
+ns.saved = {}
+function ns.RegisterSaved(key, fn) ns.saved[key] = fn end
+
+function ns.RegisterSetting(def)
+    ns.settings[#ns.settings + 1] = def
+    if def.command then
+        local usage = "/cchud " .. def.command .. (def.kind == "boolean" and " on | off"
+            or (" <%d-%d>"):format(def.min * (def.percent and 100 or 1), def.max * (def.percent and 100 or 1)))
+        ns.RegisterCommand(def.command, function(arg)
+            if def.kind == "boolean" then
+                ns.Set(def, ns.Toggle(arg, ns.Get(def)))
+                ns.Say(("%s: %s"):format(L[def.label], ns.OnOff(ns.Get(def))))
+            else
+                local n = tonumber(arg)
+                if not n then ns.Say(L["usage:"] .. " " .. usage); return end
+                ns.Set(def, def.percent and n / 100 or n)
+                local v = ns.Get(def)
+                ns.Say(("%s: %s"):format(L[def.label], def.percent and ("%d%%"):format(v * 100 + 0.5) or tostring(v)))
+            end
+            if ns.IsPending() then ns.Say(L["Changes are applied when combat ends."]) end
+        end, usage, def.tip or def.label)
+    end
+    return def
+end
+
+---------------------------------------------------------------------------
+-- Saved settings
+---------------------------------------------------------------------------
+local function InitDB()
+    local had = type(ControllerCamHUDDB) == "table"
+    local old = had and ControllerCamHUDDB or {}
+    if (tonumber(old.v) or 0) < 2 then old.chat = nil end      -- before version 2 the chat window moved by default
+    -- before version 5 a plate on you showed its name even with "Name on your target's plate" off, which made
+    -- names come and go in a fight; the option now means what it says, so it starts on again
+    if (tonumber(old.v) or 0) < 5 then old.plateTargetName = nil end
+    -- before version 6 the vertical bars sat closer in (on your character with the shoulder view): bars left at
+    -- one of the old spots of a preset or the default take the new one; bars you placed elsewhere stay
+    if (tonumber(old.v) or 0) < 6 and type(old.pos) == "table" and type(old.pos.vertical) == "table" then
+        local x = tonumber(old.pos.vertical.x)
+        if x == -240 or x == -260 or x == -280 or x == -300 then old.pos.vertical = nil end
+    end
+    -- before version 10 the vertical bars started further out, a long way from your character: bars still at
+    -- one of those spots come in to the new one; bars you placed elsewhere stay
+    if (tonumber(old.v) or 0) < 10 and type(old.pos) == "table" and type(old.pos.vertical) == "table" then
+        local x = tonumber(old.pos.vertical.x)
+        if x == -460 or x == -380 then old.pos.vertical.x = -320 end
+    end
+    -- and before version 11 a little further left than now: the same again
+    if (tonumber(old.v) or 0) < 11 and type(old.pos) == "table" and type(old.pos.vertical) == "table" then
+        if tonumber(old.pos.vertical.x) == -320 then old.pos.vertical.x = -280 end
+    end
+    -- before version 7 some presets switched class icons off: they are on again once (yours from now on)
+    if (tonumber(old.v) or 0) < 7 then old.classIcons = nil end
+    -- before version 8 the bar style could be left compact by a preset: full size again once (yours from now on)
+    if (tonumber(old.v) or 0) < 8 then old.targetCompact, old.plateCompact = nil, nil end
+    -- the gamepad bars' own fade became the fade of the whole screen: what you chose for it carries over
+    if old.hudFade == nil and type(old.barsFade) == "boolean" then old.hudFade = old.barsFade end
+    if old.hudIdle == nil and tonumber(old.barsIdle) then old.hudIdle = tonumber(old.barsIdle) end
+    local db = { v = 11, units = {}, pos = {}, saved = {} }
+    -- game settings we changed, with the value they had (put back when the HUD stops)
+    if type(old.saved) == "table" then
+        for name, value in pairs(old.saved) do
+            if type(name) == "string" and type(value) == "string" then db.saved[name] = value end
+        end
+    end
+    for _, key in ipairs({ "probe", "check", "auraReport", "plateReport", "padReport" }) do
+        if type(old[key]) == "table" then db[key] = old[key] end
+    end
+    for _, key in ipairs({ "enabled", "always", "hideBlizzard", "chat", "classColors", "textShade", "vendor", "combatColors", "classIcons", "targetCompact", "targetThreat" }) do
+        if type(old[key]) == "boolean" then db[key] = old[key] else db[key] = DEFAULTS[key] end
+    end
+    db.idle = ns.Clamp(tonumber(old.idle) or DEFAULTS.idle, 0, 1)
+    db.verticalIdle = ns.Clamp(tonumber(old.verticalIdle) or DEFAULTS.verticalIdle, 0, 1)
+    for _, key in ipairs({ "combatAlpha", "alertHealth", "alertPower" }) do
+        db[key] = ns.Clamp(tonumber(old[key]) or DEFAULTS[key], 0, 1)
+    end
+    db.scale = ns.Clamp(tonumber(old.scale) or DEFAULTS.scale, 0.5, 2)
+    if (tonumber(old.v) or 0) < 4 then old.textScale = nil end   -- the default text size changed in versions 3 and 4
+    db.textScale = ns.Clamp(tonumber(old.textScale) or DEFAULTS.textScale, 0.8, 2.5)
+    for key, default in pairs(DEFAULTS.units) do
+        local v
+        if type(old.units) == "table" then v = old.units[key] end
+        if type(v) == "boolean" then db.units[key] = v else db.units[key] = default end
+    end
+    if type(old.pos) == "table" then
+        for key, p in pairs(old.pos) do
+            if MOVABLE[key] and type(p) == "table" and tonumber(p.x) and tonumber(p.y) then
+                db.pos[key] = { x = tonumber(p.x), y = tonumber(p.y) }
+            end
+        end
+    end
+    -- selling: auto (sell as soon as a vendor opens), gear (white weapons and armor count as junk),
+    -- deposit (bank the marked items as soon as the bank opens), junk / keep / bank (items marked by hand)
+    local sell = type(old.sell) == "table" and old.sell or {}
+    db.sell = { auto = sell.auto == true, gear = sell.gear == true, deposit = sell.deposit == true,
+                junk = {}, keep = {}, bank = {} }
+    for _, list in ipairs({ "junk", "keep", "bank" }) do
+        if type(sell[list]) == "table" then
+            for id, on in pairs(sell[list]) do
+                if type(id) == "number" and on == true then db.sell[list][id] = true end
+            end
+        end
+    end
+    for key, clean in pairs(ns.saved) do db[key] = clean(old[key]) end
+    for _, def in ipairs(ns.settings) do
+        if def.key then
+            local v = old[def.key]
+            if def.kind == "boolean" then
+                if type(v) == "boolean" then db[def.key] = v else db[def.key] = def.default end
+            else
+                db[def.key] = ns.Clamp(tonumber(v) or def.default, def.min, def.max)
+            end
+        end
+    end
+    -- a first run rests, switched off, until it is known whether the HUD is wanted at all (Welcome.lua);
+    -- settings from before mean it was
+    if type(old.asked) == "boolean" then db.asked = old.asked else db.asked = had end
+    if not had then db.enabled = false end
+    db.screenAsked = old.screenAsked == true           -- the screen layout was offered (Welcome.lua)
+    db.sizedFor = (old.sizedFor == "tv" or old.sizedFor == "monitor") and old.sizedFor or nil
+    ControllerCamHUDDB = db
+    ns.db = db
+end
+
+---------------------------------------------------------------------------
+-- When the HUD runs
+---------------------------------------------------------------------------
+function ns.IsGamepadUI()
+    return GetCVar(ns.STYLE_CVAR) == "1"
+end
+
+function ns.ShouldRun()
+    return ns.db ~= nil and ns.db.enabled and (ns.db.always or ns.IsGamepadUI())
+end
+
+-- Blizzard frames are put under a hidden parent while we replace them, and given back afterwards.
+local hiddenParent = CreateFrame("Frame", "ControllerCamHUDHidden", UIParent)
+hiddenParent:Hide()
+local putAside = {}
+
+function ns.SetBlizzardHidden(name, hide)
+    local frame = _G[name]
+    if not frame then return end
+    if hide and not putAside[name] then
+        putAside[name] = frame:GetParent() or UIParent
+        frame:SetParent(hiddenParent)
+    elseif not hide and putAside[name] then
+        frame:SetParent(putAside[name])
+        putAside[name] = nil
+    end
+end
+
+function ns.IsBlizzardHidden(name) return putAside[name] ~= nil end
+
+-- Keeping a frame of the game at an alpha of ours. The game sets the alpha of some of its frames itself (range,
+-- fading); we never hook those calls (code of ours running inside the game's own would taint it, and an
+-- action button pressed after it could be refused). Instead our own timer looks a few times a second and puts
+-- our alpha back.
+local kept = {}                  -- frame -> alpha we want it at
+local keeper = CreateFrame("Frame")
+local since = 0
+local function Keep()
+    for frame, a in pairs(kept) do
+        if frame:GetAlpha() ~= a then frame:SetAlpha(a) end
+    end
+end
+keeper:SetScript("OnUpdate", function(_, dt)
+    since = since + dt
+    if since < 0.1 then return end
+    since = 0
+    local ok, err = pcall(Keep)
+    if not ok then ns.Error(err) end
+end)
+ns.KeepAlpha = function(frame, a)
+    if a == nil then kept[frame] = nil; return end
+    kept[frame] = a
+    if frame:GetAlpha() ~= a then frame:SetAlpha(a) end
+end
+
+-- Or only made invisible: the frame stays in place and keeps working (targeting, the controller's unit menu,
+-- Edit Mode), under our look.
+local faded = {}
+
+function ns.SetBlizzardFaded(name, fade)
+    local frame = _G[name]
+    if not frame or not frame.SetAlpha then return end
+    if fade then
+        if not faded[name] then faded[name] = frame:GetAlpha() or 1 end
+        ns.KeepAlpha(frame, 0)
+    elseif faded[name] then
+        local was = faded[name]
+        faded[name] = nil
+        ns.KeepAlpha(frame, nil)
+        frame:SetAlpha(was)
+    end
+end
+
+function ns.IsBlizzardFaded(name) return faded[name] ~= nil end
+
+-- A window of ours that works with the controller takes its buttons by key bindings of its own: set while the
+-- window is open, cleared when it closes, each button bound to a plain button of ours that tells the window.
+-- Never by catching the controller's presses and passing the rest on to the game: the game's own handling of
+-- such a press (interact, an action, cancel) then runs after code of ours, and the game may refuse it and
+-- what follows. Buttons the window has no use for are not touched at all: they stay the game's.
+-- Bindings change out of combat only: a fight clears them at once (onLost is told, to close the window), and a
+-- change asked for in a fight is made when it ends.
+function ns.PadKeys(tag, keys, handler, onLost)
+    local K = { on = false, want = false, buttons = {} }
+    local owner = CreateFrame("Frame")
+    for _, key in ipairs(keys) do
+        local b = CreateFrame("Button", "ControllerCamHUD_Key_" .. tag .. "_" .. key, UIParent)
+        b:SetScript("OnClick", ns.Protect(function() handler(key) end))
+        K.buttons[key] = b
+    end
+    local function Put()
+        if K.want == K.on or InCombatLockdown() then return end
+        ClearOverrideBindings(owner)
+        if K.want and SetOverrideBindingClick then
+            for _, key in ipairs(keys) do
+                SetOverrideBindingClick(owner, true, key, "ControllerCamHUD_Key_" .. tag .. "_" .. key, "LeftButton")
+            end
+        end
+        K.on = K.want
+    end
+    function K:Set(on)
+        self.want = on and true or false
+        Put()
+    end
+    pcall(owner.RegisterEvent, owner, "PLAYER_REGEN_DISABLED")
+    pcall(owner.RegisterEvent, owner, "PLAYER_REGEN_ENABLED")
+    owner:SetScript("OnEvent", ns.Protect(function(_, event)
+        if event == "PLAYER_REGEN_DISABLED" then
+            if K.on then                                  -- (bindings can still be cleared at this moment)
+                ClearOverrideBindings(owner)
+                K.on, K.want = false, false
+                if onLost then onLost() end
+            end
+        else
+            Put()
+        end
+    end))
+    return K
+end
+
+-- While the game's Edit Mode is open the screen is being arranged: frames of the game that we draw over are
+-- given back, so they can be seen and dragged, and our versions step aside until it closes.
+ns.arranging = false
+local function HookArranging()
+    local manager = _G.EditModeManagerFrame
+    if ns.arrangeHooked or type(manager) ~= "table" or not manager.HookScript then return end
+    ns.arrangeHooked = true
+    manager:HookScript("OnShow", ns.Protect(function() ns.arranging = true; ns.Apply() end))
+    manager:HookScript("OnHide", ns.Protect(function() ns.arranging = false; ns.Apply() end))
+end
+
+-- Modules: { Apply = function(self, run) end }. Apply is only called out of combat.
+ns.modules = {}
+function ns.RegisterModule(name, module)
+    module.name = name
+    ns.modules[#ns.modules + 1] = module
+end
+
+local pending = false
+function ns.Apply()
+    if not ns.db then return end
+    if InCombatLockdown() then pending = true; return false end
+    pending = false
+    local run = ns.ShouldRun()
+    for _, module in ipairs(ns.modules) do
+        local ok, err = pcall(module.Apply, module, run)
+        if not ok then ns.Error(module.name .. ": " .. tostring(err)) end
+    end
+    return true
+end
+
+function ns.IsPending() return pending end
+
+local f = CreateFrame("Frame", "ControllerCamHUDFrame", UIParent)
+f:RegisterEvent("ADDON_LOADED")
+f:RegisterEvent("PLAYER_LOGIN")
+f:RegisterEvent("PLAYER_REGEN_ENABLED")
+pcall(f.RegisterEvent, f, "CVAR_UPDATE")        -- a game option changed in its own menus
+f:SetScript("OnEvent", function(_, event, arg1)
+    if event == "ADDON_LOADED" and arg1 == ADDON then
+        InitDB()
+    elseif event == "PLAYER_LOGIN" then
+        if not ns.db then InitDB() end
+        if ns.Welcome then ns.Welcome.Login() end
+        HookArranging()
+        ns.Apply()
+    elseif event == "PLAYER_REGEN_ENABLED" then
+        if pending then ns.Apply() end
+    elseif event == "CVAR_UPDATE" then
+        if ns.db and arg1 == ns.NATIVE.tot then ns.Apply() end
+    end
+end)

@@ -1,0 +1,29 @@
+<Bindings>
+	<Binding name="CCHUD_QUICKMOVE" header="CCHUD" category="ADDONS">
+		ControllerCamHUD_QuickMove()
+	</Binding>
+	<Binding name="CCHUD_MARKITEM" category="ADDONS">
+		ControllerCamHUD_MarkItem()
+	</Binding>
+	<Binding name="CCHUD_SORT" category="ADDONS">
+		ControllerCamHUD_Sort()
+	</Binding>
+	<Binding name="CCHUD_DEPOSIT" category="ADDONS">
+		ControllerCamHUD_Deposit()
+	</Binding>
+	<Binding name="CCHUD_ITEMINFO" category="ADDONS">
+		ControllerCamHUD_ItemInfo()
+	</Binding>
+	<Binding name="CCHUD_TOOLTIPCURSOR" category="ADDONS">
+		ControllerCamHUD_ToggleTooltipCursor()
+	</Binding>
+	<Binding name="CCHUD_FISHING" category="ADDONS">
+		ControllerCamHUD_Fishing()
+	</Binding>
+	<Binding name="CCHUD_FISHJOURNAL" category="ADDONS">
+		ControllerCamHUD_FishJournal()
+	</Binding>
+	<Binding name="CCHUD_MARKET" category="ADDONS">
+		ControllerCamHUD_Market()
+	</Binding>
+</Bindings>

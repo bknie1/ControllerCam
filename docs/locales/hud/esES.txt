@@ -1,0 +1,738 @@
+error:
+activado
+desactivado
+uso:
+Los cambios se aplican al terminar el combate.
+Bola de fuego
+Mago aliado
+Sanación
+Mascota
+Muñeco de entrenamiento
+Sanador aliado
+Jugador
+Las barras verticales siguen a la cámara
+las barras verticales mantienen su sitio junto a tu personaje cuando la cámara acerca y aleja (colócalas en el Modo Edición a la distancia que prefieras)
+Apellidos
+el nombre completo de un jugador en los marcos de unidad y las placas de nombre, con apellido: Faith Ashborne
+Salud en la barra del objetivo
+la salud restante (12.3k) y el porcentaje en las barras del objetivo y el foco; un objetivo compacto muestra solo el porcentaje
+Objetivo
+Objetivo del objetivo
+Foco
+Barras verticales
+%d objetos depositados
+%d objetos vendidos por %s (/cchud sold los muestra)
+No hay nada que vender.
+Abre primero el banco.
+Nada que depositar: tu banco no tiene nada de lo que llevas y no hay nada marcado para él.
+No hay nada marcado para el banco. Apunta a un objeto y usa Marcar objeto.
+Abre primero un vendedor.
+Vender basura: %d objetos por %s.\n\nO vende armas y armaduras por calidad.
+Vender basura
+Por calidad
+¿Vender armas y armaduras hasta qué calidad?\n\nComún (blanco): %s\nPoco común (verde): %s
+Común
+Poco común
+¿Vender %d objetos?\n\n%s
+Vender
+El movimiento rápido funciona con un vendedor (vender), un banquero (depositar, retirar), en un intercambio o en el buzón.
+Apunta primero a un objeto.
+%s: conservado, nunca se vende
+%s: banco, se deposita cuando lo pidas (nunca se vende)
+%s: sin marca
+%s: basura, se vende con el resto
+Movimiento rápido: vender, depositar, intercambiar o enviar por correo el objeto al que apuntas
+Marcar el objeto: basura / conservado / banco / sin marca
+Depositar: guardar en el banco lo que ya tiene y lo que marcaste para él
+Aún no se ha vendido nada en esta sesión.
+La pestaña de recompra de un vendedor los recupera hasta que cierres sesión.
+Reparado por %s desde el banco de hermandad
+No hay oro suficiente para repararlo todo (%s).
+Reparado por %s
+Depositar también guarda lo que el banco ya tiene
+al depositar se mueve cada objeto del que tu banco ya tiene alguno (materiales, pociones...), además de los marcados para el banco; nunca objetos grises, herramientas ni objetos marcados como basura o conservados
+Reparar con los vendedores
+repara todo en cuanto se abre un vendedor que repara
+Reparar desde el banco de hermandad
+paga las reparaciones con el banco de hermandad si tu hermandad lo permite, y con tu propio oro si no
+muestra lo que se vendió por ti en esta sesión, para recomprar algo
+Bolsa
+Banco
+Tú
+El banco de este cliente no se puede ordenar desde aquí.
+Este cliente no tiene ordenación de bolsas.
+Banco ordenado.
+Banco ordenado. Pulsa de nuevo para ordenar tus bolsas.
+Bolsas ordenadas.
+Ordena tus bolsas (y el banco mientras esté abierto)
+Oro en esta cuenta: %s
+Cantidad de objetos en las descripciones
+la descripción de un objeto indica cuántos tienes en las bolsas y el banco, y cuántos tienen tus otros personajes
+R3 ordena mientras tus bolsas están abiertas
+mientras tus bolsas o el banco están abiertos, el botón del stick derecho los ordena (si no, hace su función habitual)
+R3 mueve el objeto al que apuntas (banco, vendedor, intercambio, buzón)
+mientras uno de ellos está abierto, el botón del stick derecho mueve el objeto al que apuntas: al banco o fuera de él, vendido, al intercambio o a la carta. Si no apuntas a nada, ordena
+ordena tus bolsas, y el banco mientras esté abierto
+lista el oro de cada uno de tus personajes y el total
+justo ahora
+hace %d horas
+hace %d días
+Vendedor
+Mejor
+Subasta
+Casa de subastas
+Guardar
+5% por debajo del más bajo, para una venta rápida
+el mercado está hoy inusualmente bajo: precio cercano al habitual, para esperar compradores
+justo por debajo del más bajo: hay pocos a la venta, debería venderse
+un poco por debajo del más bajo: hay muchos a la venta
+sin precios recientes: a partir del precio habitual (lee la casa de subastas para ver los de hoy)
+se mantiene por encima de lo que paga un vendedor
+Casa de subastas leída: %d precios anotados.
+La casa de subastas podrá leerse de nuevo en %d minutos.
+Ahora no se puede leer la casa de subastas de una vez.
+Este cliente no puede leer toda la casa de subastas.
+Leyendo la casa de subastas...
+Precios de vendedor en las descripciones
+lo que un objeto da al venderlo a un vendedor, cada uno y por una pila completa
+Precios de subasta en las descripciones
+la compra directa más baja que has visto para un objeto en la casa de subastas, y hace cuánto
+Leer la casa de subastas al visitarla
+la primera visita en un rato lee todos los precios de una vez (el juego lo permite cada 15 minutos); /cchud scan lo pide
+Mejor uso de un objeto
+la descripción de un objeto dice qué hacer con él: venderlo en la casa de subastas (y cuánto más da), venderlo a un vendedor o guardarlo
+Ventas rápidas en la casa de subastas
+precio 5% por debajo del más bajo para vender ya; desactivado: precios pacientes, justo por debajo del más bajo, que se venden cuando llegan compradores
+lee todos los precios de la casa de subastas de una vez (ábrela antes; cada 15 minutos)
+PA
+PA a dist.
+crít.
+esquiva
+salud
+maná
+crít. de hechizo
+Lo que valen los atributos para ti
+cada línea de atributo en la descripción de un objeto recibe su valor para tu personaje: poder de ataque, poder de ataque a distancia, crítico, esquiva, salud, maná
+Nivel de objeto
+Requiere nivel
+Se apila hasta
+ID de objeto
+aún no visto
+ninguno
+basura
+conservado
+banco
+Tu marca
+Detalles del objeto: todo sobre el objeto al que apuntas
+muestra todo sobre el objeto al que apuntas (o el indicado): precios, quién lo tiene, tu marca
++%s más que un vendedor
+aún no se conoce el precio
+un vendedor paga lo mismo
+Mercado
+Publicar
+Paciente
+Leer todos los precios
+No hay nada en tus bolsas que se pueda vender aquí.
+Aún no hay historial de precios: lee la casa de subastas durante unos días.
+Más bajo
+Habitual
+A la venta
+No se conoce ningún precio: lee primero la casa de subastas.
+%d merecen venderse aquí, %d más podrías
+%d precios conocidos, todos leídos %s
+nunca
+sin datos
+Venta rápida
+Atrás
+Publicar %d por %s
+Este cliente no permite publicar en la casa de subastas desde aquí.
+Publicado %d por %s.
+Mercado en la casa de subastas: abrir / cerrar
+Pestaña Mercado en la casa de subastas
+una pestaña Mercado en la casa de subastas: qué de tus bolsas merece venderse allí y por qué, un gráfico de precios al lado, y publicar con una pulsación
+abrir o cerrar el Mercado (una pestaña de la casa de subastas)
+qué casa de subastas tiene este cliente (para solucionar problemas)
+Desconectado
+Muerto
+Marcos de grupo y banda
+dibuja nuestro aspecto sobre los marcos de grupo y banda del juego (su selección de objetivo y sus opciones siguen funcionando)
+Animaciones de la barra de lanzamiento
+una barra de lanzamiento muestra lo que se lanza: picos la golpean al minar, rayos la recorren con naturaleza, una enredadera florece con una sanación, runas toman forma con arcano, llamas, hielo y sombras con fuego, escarcha y sombras
+mostrar cada animación de la barra de lanzamiento una vez, en tu barra
+Interrumpido
+Probable:
+Carga de lanzamiento
+tu barra de lanzamiento brilla más a medida que se llena el lanzamiento y estalla al completarse
+Flotador de pesca
+al pescar, un flotador se mece en tu barra de lanzamiento y muestra qué es probable que pique aquí
+Barra de lanzamiento
+nuestra barra de lanzamiento en lugar de la del juego (se queda donde el Modo Edición coloca la del juego)
+Tamaño de la barra de lanzamiento
+el tamaño con que se dibuja tu barra de lanzamiento, con el flotador de pesca y todo lo demás que ocurre en ella
+La pesca en primer plano
+mientras pescas, la barra de lanzamiento pasa al centro de la pantalla y se dibuja más grande: el sedal, el flotador y lo que pica son lo principal
+Selecciona primero un objetivo.
+%d efectos listados y guardados. Escribe /reload para que el juego los guarde en disco.
+Tus efectos en el objetivo
+una fila con tus propios perjuicios o beneficios bajo la barra del objetivo
+Beneficios del enemigo en el objetivo
+los beneficios de un objetivo enemigo, a la derecha bajo su barra: los que importan, o todos si Solo los efectos que importan está desactivado
+Solo los efectos que importan
+en el objetivo y las placas de nombre: los beneficios de un enemigo solo cuando el juego los marca como importantes, está enfurecido o puedes disiparlos o robarlos; en un aliado, los perjuicios que puedes disipar y los peligrosos. Desactivado: todos los beneficios
+Perjuicios en un objetivo amistoso
+a la derecha bajo la barra de un aliado: los perjuicios que puedes disipar (con borde del color de su tipo), mecánicas de jefe y control de masas
+Puntos de combo
+puntos de combo como indicadores sobre el nombre del objetivo
+muestra lo que el juego dice de los efectos de tu objetivo (para resolver problemas)
+Porcentaje de amenaza
+tu parte de la amenaza como número junto al icono de amenaza, en el marco del objetivo y en las placas de nombre
+Número de salud
+la salud restante, abreviada (12.3k), en la barra (no en las placas compactas: allí basta el porcentaje)
+Tus perjuicios
+tus perjuicios sobre la unidad, sobre su nombre, con su tiempo
+Perjuicios de todos
+los perjuicios que el juego marca para las placas de nombre de todos, no solo los tuyos
+Beneficios del enemigo
+los beneficios de un enemigo junto a sus perjuicios: los que importan (importantes, enfurecido o que puedes disipar o robar), o todos si Solo los efectos que importan está desactivado
+Icono de control de masas
+un icono grande con su tiempo cuando la unidad está aturdida, inmovilizada, aterrorizada...
+Resplandor de amenaza
+un icono de escudo y un brillo tras el nombre: rojo mientras te ataca, rojo y amarillo cuando estás a punto de atraerlo, amarillo y azul cuando lo estás perdiendo, azul cuando no está sobre ti
+Marcador de misión
+una marca dorada en las unidades que tus misiones aún necesitan
+Animaciones de placas de nombre
+las placas aparecen con fundido, la salud baja respira, el control de masas brilla
+Placas de nombre
+nuestro aspecto en las placas de nombre del juego (sus opciones de placas se siguen aplicando)
+Títulos de jugador
+muestra el título de un jugador junto a su nombre
+Hermandades y oficios de PNJ
+una línea bajo el nombre: la hermandad del jugador o a qué se dedica el PNJ
+Barras de amigos en combate
+las placas de nombre amistosas muestran salud, poder y lanzamientos mientras esa unidad está en combate
+Placas de nombre amistosas del propio juego
+deja las placas amistosas (tu grupo, otros jugadores, PNJ amistosos) con el aspecto del juego; las nuestras solo en enemigos
+Barras de poder
+una barra fina de maná, ira o energía bajo la barra de salud
+Objetivo del lanzamiento
+a quién va dirigido un lanzamiento, junto al nombre del hechizo
+Porcentaje de salud
+el porcentaje de salud en la barra
+Nombre en la placa de tu objetivo
+desactivado: la placa de tu objetivo no muestra su nombre ni su nivel (los muestra el marco del objetivo)
+Niveles en las placas de nombre
+el nivel delante del nombre de un enemigo, coloreado según la dificultad
+Placas de nombre compactas
+placas de nombre de aproximadamente la mitad de ancho
+Lanzamientos enemigos llamativos
+el lanzamiento de un enemigo parpadea, se hincha y pulsa cada vez más rápido hasta completarse, para que puedas interrumpirlo a tiempo
+Iconos de clase en las placas
+el icono de clase de un jugador delante de su nombre, amigo o enemigo
+Lo que hacen los PNJ, como iconos
+un icono sobre los PNJ amistosos que ofrecen algo: una bolsa sobre los vendedores, un yunque sobre los herreros que reparan, un libro sobre los instructores... (los iconos del propio juego; se ven aunque la placa espere a que la señales)
+PNJ amistosos solo al apuntarlos
+las placas de los PNJ amistosos (vendedores, dadores de misiones, habitantes) solo se muestran mientras los apuntas, como su descripción
+Nombres sobre las cosas con las que puedes interactuar
+un nombre sobre minerales, cofres, placas y similares mientras los miras (desactivado: quedan sin nombre, el aviso del propio juego ya dice qué son)
+Minipanel de nombre
+los esbirros, las alimañas y los enemigos grises que no dan experiencia tienen una placa pequeña: una barra fina y el nombre, nada más (la opción del juego decide si tienen placa)
+Placas de nombre del grupo en mazmorras: solo nombres
+dentro de una mazmorra o banda el juego dibuja él mismo las placas de nombre de los jugadores amistosos y los addons no pueden cambiarlas: allí se ajustan las opciones propias del juego para mostrarlas como nombres con el color de clase y sin barras, como las nuestras, y las barras del juego vuelven mientras luchas (si las barras de amigos en combate están activadas); todo se restaura al salir
+Placas de nombre del grupo en mazmorras: ocultas
+dentro de una mazmorra o banda, apagar del todo las placas de nombre del juego para los jugadores amistosos (y dejarlas como las tenías al salir)
+muestra lo que da el juego para el nombre de tu objetivo (para solucionar problemas)
+lista las placas de nombre en pantalla y si llevan nuestro aspecto (para solucionar problemas)
+Mostrando cada escuela de daño una vez (la última como crítico).
+Partículas de impacto
+destellos sagrados, el fuego asciende, los cristales de escarcha perduran, la sombra humea, las runas arcanas centellean en la barra que golpeas
+Tus barras tiemblan al recibir golpes
+tu marco de jugador y tus barras verticales tiemblan un poco, según la escuela del golpe, cuando recibes daño
+Efectos de golpe por escuela de daño
+tus golpes hacen que la barra alcanzada destelle y tiemble: fuego, escarcha, sombra y el resto se ven distintos
+muestra el efecto de impacto de cada escuela de daño una vez en tu objetivo y en las placas de nombre
+Sanación entrante con el color de su escuela
+la sanación en camino a una unidad muestra el color de la sanación que se le lanza: Sagrado dorado, Naturaleza verde
+Las sanaciones en el tiempo crecen en la barra
+raíces y ramas (Naturaleza) o hilos dorados (Sagrado) crecen sobre la barra de tu objetivo, foco o la tuya mientras dura una sanación en el tiempo, y se marchitan al terminar
+Los escudos se muestran como una protección
+un escudo sobre tu objetivo, tu foco o tú (Palabra de poder: escudo, Escudo divino, Barrera de hielo...) destella alrededor de la barra de salud con el color de su escuela, brilla mientras el escudo aguanta y se desvanece cuando se rompe
+Números estilizados sobre ti
+el daño y la sanación que recibes aparecen como tus propios golpes, en lugar del texto desplazable del juego (sigue la opción del juego de texto de combate sobre ti)
+La vibración del juego está desactivada (o este mando no puede vibrar).
+Reproduciendo cada patrón de vibración una vez.
+Intensidad de vibración
+la fuerza de nuestros patrones, además del ajuste de vibración del propio juego
+Vibración del mando
+el mando vibra en los momentos que merece la pena sentir (primero cuenta la intensidad de vibración del propio juego)
+Vibración: golpes recibidos
+un golpe sordo cuando te alcanzan, más fuerte con un golpe grande o un crítico
+Vibración: tus críticos
+un chasquido seco en el gatillo derecho cuando asestas un crítico
+Vibración: interrupciones
+un doble golpeteo cuando se corta el lanzamiento de tu objetivo
+Vibración: salud baja
+un latido mientras tienes la salud baja en un combate
+Vibración: amenaza
+un pulso cuando tu objetivo se vuelve contra ti
+Vibración: avisos
+una comprobación de grupo, una invitación a mazmorra o un susurro
+Vibración: los sellos se cargan
+una vibración que sube rápido y estalla en el gatillo derecho al ponerte un sello
+Vibración: los hechizos se acumulan
+mientras lanzas un hechizo con tiempo de lanzamiento, la vibración crece con la barra y estalla al completarse
+Vibración: subir de nivel y morir
+una oleada al subir de nivel, un retumbar largo y grave al morir
+La barra de luz muestra tu salud
+un mando con barra de luz (DualSense) muestra en ella tu salud: de verde a rojo, con pulsos si es baja en un combate
+reproduce cada patrón de vibración una vez
+Sentencia
+Vibración: tus habilidades clave
+las habilidades clave de cada clase se sienten distintas en el mando (una Sentencia salpica, un Golpe sagrado chasquea, Viento furioso golpea tres veces)
+Grandes momentos
+rara vez, un golpe realmente especial se fija grande y dorado en el centro de la pantalla: críticos seguidos de tus habilidades clave, un crítico de Viento furioso o un crítico muy por encima de lo habitual del combate (como mucho dos veces por combate)
+muestra cómo se ve y se siente un gran momento
+lista para entregar
+por encima de tu nivel
+pide un grupo
+nivel bajo
+Tu registro de misiones está vacío.
+Recomendado a continuación:
+%d m
+Lista de misiones: solo la zona actual
+sigue solo las misiones de la zona en la que estás (tu propio seguimiento vuelve al desactivar esto)
+Lista de misiones: sin misiones de grupo si vas solo
+mientras vas por tu cuenta, las misiones pensadas para un grupo (élite, mazmorra, banda) quedan fuera de la lista; en grupo vuelven
+Lista de misiones: solo las más cercanas
+no listar más de esta cantidad de misiones, las más cercanas (0 las lista todas)
+Lista de misiones: la más cercana primero
+mantener la lista de misiones ordenada por distancia, con la más cercana arriba
+Lista de misiones: orden recomendado
+mantener la lista de misiones en un orden recomendado: primero las listas para entregar, luego lo que puedes hacer por tu cuenta empezando por lo más cercano, luego las misiones por encima de tu nivel, las de grupo mientras vas solo, y las grises al final
+decir un orden recomendado para tus misiones: entrega lo que está listo, luego lo más cercano que puedes hacer solo, luego el resto
+No estás en combate.
+Este cliente no tiene barras de mando.
+Este cliente no permite que los addons lo cambien; usa el Modo de edición.
+barras de mando: %s
+compactas
+completas
+Barras de mando delgadas
+oculta el arte pesado tras las barras de acción del mando y las dibuja más pequeñas
+Tamaño de las barras de mando
+tamaño de las barras de mando mientras las barras delgadas están activadas, en porcentaje
+las barras de mando del juego en modo compacto o completo (igual que su ajuste del Modo de edición)
+Desvanecer fuera de combate
+las barras del mando, el minimapa, la lista de misiones, el medidor de daño y la barra de experiencia descansan juntos fuera de combate, y vuelven para un combate, un gatillo apretado o un objetivo enemigo
+La pantalla en reposo
+cuánto se ven las partes de la pantalla que descansan fuera de combate (0 las oculta)
+Descansa: barras del mando
+Descansa: minimapa
+Descansa: lista de misiones
+Descansa: medidor de daño
+Descansa: barra de experiencia
+Descansa: beneficios
+Descansa: filas de reutilización
+si esta parte de la pantalla participa en el desvanecimiento fuera de combate
+Guardado: escribe /reload para que el juego lo escriba en el disco.
+Botones de actitud y de mascota sobre las barras
+los botones de actitudes y de órdenes de mascota se colocan donde estaban los iconos verde y rojo de selección, para que su rueda se abra entera en pantalla; esos iconos se ocultan
+listar dónde están las partes de las barras del mando y qué descansa (para diagnosticar)
+Auto
+Genérico
+los del juego
+Iconos de los botones: %s.
+Ahora mismo no hay ningún mando en uso, o el juego no tiene estilos de iconos: se aplicará cuando haya uno.
+El juego no aceptó los iconos de los botones.
+El mando no dice qué es: los iconos se quedan como los tiene el juego.
+los iconos que el juego muestra para los botones de tu mando: auto (según el mando en uso), xbox, playstation, switch, steam, generic (números), o game para dejarlos como los tiene el juego
+Filas de reutilización apartadas de las barras del mando
+las filas de reutilización del juego se colocan bajo el objetivo en lugar de encima de los botones del mando, algo más pequeñas (solo con los diseños integrados del juego: con un diseño propio se quedan donde las pusiste)
+Pesca: %s lanza
+Modo de pesca: %s lanza tu sedal y engancha el pez cuando el flotador se mueve.
+Modo de pesca: desactivado.
+El modo de pesca necesita una caña de pescar en tus manos.
+No conoces Pesca.
+Modo de pesca: un botón lanza y engancha
+Botón de pesca: %s
+Pesca con un botón
+con una caña de pescar en las manos, tu botón de interactuar lanza el sedal siempre que no haya nada con lo que interactuar, y engancha el pez cuando el flotador se mueve; la captura se recoge por ti
+Cebo con doble pulsación
+pulsa tu botón de pesca dos veces rápido: la segunda pulsación pone el mejor cebo de tus bolsas en la caña, cuando la caña no tiene ninguno
+pesca con un botón desactivada por ahora, o activada de nuevo (con una caña en las manos se activa sola)
+el botón que pesca: al principio tu botón de interactuar (Cuadrado o X), o cualquier otro, por ejemplo un gatillo (rt)
+La costa de Durotar es roca roja y aguas cálidas y poco profundas. Los trols de las Islas del Eco dicen que la caballa pasa más apretada cuando la marea arrastra el olor de los fuegos de cocina de las islas.
+Los lagos de Mulgore son pequeños, claros y pacientes. Los tauren pescan en ellos como lo hacen todo: despacio y dando las gracias.
+Cada oasis de Los Baldíos es un lugar de encuentro. Beba allí lo que beba de día, algo nada por debajo de noche.
+Las pozas de Teldrassil están a la sombra de un único árbol. Los pescadores elfos de la noche juran que los peces de allí no han visto nunca el sol y que no lo echan de menos.
+El agua de Costa Oscura es gris, fría y llena de pecios. La mitad de lo que pica frente a Auberdine se ha instalado en el cargamento perdido de alguien.
+Los ríos de Vallefresno corren bajo hojas más viejas que la mayoría de los reinos. Los peces son rápidos, y las centinelas lo son más para preguntarte qué haces allí.
+Allá abajo, entre Las Mil Agujas, el agua escasea y se guarda con celo. Un pez de aquí se ha ganado su sitio.
+Los lagos de Sierra Espolón están altos y fríos entre los picos. Los goblins ya los habrían desecado si no se pescara tan bien.
+La costa de Desolace es huesos y oleaje gris. Algo ahí abajo le ha cogido el gusto a las dos cosas.
+Feralas es verde hasta la misma orilla. Sus ríos son profundos, cálidos y están muy, pero que muy vivos.
+Nadie sabe bien dónde acaba la tierra y empieza el agua en el Marjal Revolcafango. Pesca desde la orilla y cuéntate los dedos de los pies después.
+Puerto Bonvapor tiene la única agua digna de ese nombre en Tanaris. Los goblins te venderán el derecho a pescar en ella, dos veces si te dejas.
+Bajo la luminosa bahía de Azshara yace una ciudad sumergida. Los viejos pescadores dicen que los grandes viven en lo que fueron sus jardines.
+Las pozas de Frondavil brillan, y no en el buen sentido. Lo que aún nada en ellas es terco más allá de toda razón.
+Las aguas termales y los lagos bordeados de brea de Un'Goro han conservado cosas que el resto del mundo olvidó. Algunas muerden.
+El Lago Elune'ara, en Claro de la Luna, está tan quieto como un aliento contenido. Los druidas solo piden que no te lleves más de lo que vayas a comer.
+Silithus es arena, viento y rumor de alas. Si has encontrado agua donde pescar aquí, no se lo digas a nadie.
+Los lagos de Cuna del Invierno se hielan por los bordes y humean por el centro. Los peces de allí están gordos por el frío y bien valen la caminata.
+En los estanques de Orgrimmar pescan peones que no tienen nada mejor que hacer y viejos brutos que dicen lo mismo. Unos y otros te cuentan que el grande se les escapó.
+Un pez de los estanques de Cima del Trueno ha pasado toda su vida muy por encima de las llanuras. Parece llevarlo con calma.
+Darnassus cuida sus aguas con tanto esmero como sus templos. Los peces se han acostumbrado a que los admiren.
+Los lagos de las Montañas de Alterac son agua de deshielo, y los ogros y la Hermandad pescan en ellos cuando nadie mira.
+Las costas de Arathi han visto más ejércitos que pescadores. A los peces hace mucho que les da igual qué estandarte ondea sobre el agua.
+Las Tierras Inhóspitas son polvo de punta a punta. Aquí una picada es un pequeño milagro, así que trátala como tal.
+La costa de Las Tierras Devastadas es roja, arrasada y silenciosa. Lo que viva en ese oleaje ha aprendido a convivir con muchas cosas.
+Los lagos de Tirisfal yacen inmóviles bajo un cielo enfermizo. Los Renegados pescan en ellos por costumbre. Los muertos no comen gran cosa, pero recuerdan que les gustaba.
+La larga costa del Bosque de Argénteos es todo niebla y sombra de pinos. Se pesca bien, y es lo único alegre que alguien dice del lugar.
+Los ríos de las Tierras de la Peste del Oeste aún corren, aunque no limpios. Lo que saques de ellos, míralo dos veces.
+Poca gente pesca en las Tierras de la Peste del Este, y menos aún lo reconoce. El agua conserva lo que la peste dejó de ella.
+El río de Trabalomas y su larga costa sur han dado de comer a los dos bandos de cada disputa librada por ellos.
+Las Tierras del Interior guardan sus lagos en lo alto, entre los árboles, donde los enanos Martillo Salvaje pescan a lomos de grifo cuando creen que nadie los ve.
+Los lagos de Dun Morogh pasan casi todo el año cercados de hielo. Un enano abre un agujero, se sienta con una pinta y lo llama un buen día, pique lo que pique.
+La Garganta de Fuego tiene lava donde otras tierras tienen ríos. Mejor tráete algo de beber.
+Las Estepas Ardientes son ceniza y rescoldos. Si el agua de aquí te da algo, estará caliente.
+Todos los niños de Elwynn aprenden a pescar en el Lago de Cristal o en el Lago del Hito. Los pececillos de allí llevan generaciones siendo más listos que ellos.
+El Paso de la Muerte tiene poca agua y menos hospitalidad. Lo que haya en las pozas bajo Karazhan, mejor que se quede allí.
+El río que bordea el Bosque del Ocaso es negro a cualquier hora. A los peces no parece importarles la oscuridad, a los pescadores sí.
+El Loch es el orgullo de Loch Modan, contenido por la gran Presa de las Tres Cabezas. Los enanos miden contra él cualquier historia de pesca, y casi siempre gana el Loch.
+El Lago Sempiterno, en Crestagrana, es bonito como un cuadro y se pesca desde todos los muelles de Villa del Lago. Los vecinos conocen cada buen sitio y no te dirán ni uno.
+De sus ríos selváticos al salvaje cabo del sur, Tuercespina tiene las aguas más ricas del continente. Los pescadores de Bahía del Botín celebran un torneo en ellas, y casi todos hacen trampa.
+El Pantano de las Penas es agua verde bajo árboles verdes. Los peces saben a barro, y a los lugareños les gustan así.
+Los campos de los Páramos de Poniente se malograron, pero su costa no. Los que se quedaron viven de esa larga orilla gris.
+Los Humedales hacen honor a su nombre. Los muelles del Puerto de Menethil son el sitio más seco para pescar en ellos, y los crocoliscos lo saben.
+En los canales de Ventormenta pescan niños, jubilados y al menos un miembro de la nobleza disfrazado. Nadie pregunta qué más hay en los canales.
+La Caverna Abandonada guarda la única poza tranquila de Forjaz. Los enanos viejos pescan en ella durante horas sin decir palabra.
+Los canales de Entrañas corren de un verde que nada tiene que ver con las algas. Los Renegados que pescan en ellos no lo hacen por la cena.
+El primer pez que casi todo pescador saca del agua, y tan brillante que no se le olvida.
+Piel resbaladiza, mucha prisa y presencia en todas las costas cálidas. A la parrilla sabe mejor de lo que su nombre da a entender.
+Todo boca, y nunca tan a gusto como en un agua que tú no beberías.
+Poco tamaño, muchos dientes y ningún miedo. Dicen que un banco entero echó una vez a un oso del Loch.
+Un destello de color bajo las olas. Si pica en el sedal, los marineros lo toman por buena suerte para la travesía.
+Un paciente habitante del fondo, con unos bigotes dignos de un anciano enano.
+Nadie repite. Los alquimistas compran cuantos ejemplares encuentran.
+Sus aletas brillan como brasas bajo la ceniza, y el aceite que se le extrae arde casi igual de bien.
+Una coraza como un escudo pequeño. La carne de dentro merece el esfuerzo.
+Algo en el agua cerca de las Cuevas de los Lamentos lo cambió. Comerte uno puede cambiarte a ti también, durante un rato.
+La gente del río dice que comerlo despeja la mente. Lo que lo hace sabio es nadar río arriba.
+Más viejo, más grande y más sabio que su primo, lo cual no lo libró de tu anzuelo.
+Un duro rival de los cálidos mares del sur, y un clásico en la pizarra de toda taberna, de Bahía del Botín a Gadgetzan.
+Su frente brilla como el mithril auténtico. Más de un minero ha intentado llevarse un ejemplar a la fundición.
+Sus escamas, hervidas, dan un aceite que vuelve la piel dura como la roca. Prefiere la noche.
+Un pulido de coraza de desfile, y casi el mismo peso.
+Solo se acerca a la costa en los meses fríos, y los cocineros que lo conocen lo esperan todo el año.
+Llega cuando los días son largos. La gente de la costa cuenta las estaciones por su paso.
+Se agarra por el centro, y solo una vez.
+Un pez de río de tierras salvajes, con las agallas tan rojas como la pintura de guerra de un trol.
+Se alimenta cuando oscurece. Una sopa hecha con él templa los nervios de cualquier hechicero.
+Se alimenta de día, lo contrario del pargo nocturno en casi todo, y aun así comparten las mismas aguas.
+No es exactamente un pez. No está de acuerdo con acabar en tu anzuelo, y te lo hará saber.
+Pálido como el hielo de río, de los lagos fríos y claros del norte.
+Vas a necesitar las dos manos, y quizá un amigo.
+%.1f lb
+Nuevo en tu diario de pesca: %s, %s.
+Nuevo en tu diario de pesca: %s.
+Tu %s más pesado hasta ahora: %s (antes %s).
+Diario de pesca
+cada captura se anota en tu diario de pesca: cuántas de cada tipo, dónde la sacaste por primera vez, y un peso inventado por diversión con tu mejor marca de cada una (/cchud journal lo abre)
+Cebo %s
+Sin cebo: pulsa %s dos veces para %s
+Sin cebo
+Capturados %d
+Escapados %d
+¡nuevo!
+¡récord!
+Interfaz de pesca
+con una caña de pescar en las manos: los peces del agua en la que estás (los que aún no has sacado aquí permanecen ocultos), tu habilidad de pesca y lo que añade tu cebo, cuántos has capturado y cuántos se escaparon, cuánto dura tu cebo, y tus últimas capturas
+Uno curioso: +%d%%
+Mantén %s: el señuelo se hunde
+%d seguidos
+Un juego mientras el flotador está fuera
+un pequeño tramo de agua junto a la interfaz de pesca: mantén un gatillo para hundir tu señuelo y suéltalo para que suba, y mantenlo junto a la sombra del pez. Cuanto mejor lo hagas, más pesará (de mentira) tu próxima captura. No ocupa ningún botón y nunca toca tu lanzamiento ni tu captura
+%d capturados, %d tipos, %d escapados
+El más pesado: %s, %s
+Peces
+Aguas
+Aún no has sacado nada. Lleva una caña al agua.
+Capturados: %d
+El más pesado: %s, en %s
+Primera captura: %s
+Capturados aquí: %d
+Tipos encontrados aquí: %d
+Elegir
+Cerrar
+abrir o cerrar tu diario de pesca: cada tipo que has sacado, el más pesado de cada uno, y las aguas en las que has pescado
+El chat se desvanece en calma
+el texto del chat se desvanece tras unos segundos sin mensajes nuevos
+Segundos antes de que el chat se desvanezca
+cuánto tiempo permanece el texto del chat antes de desvanecerse
+Coordenadas en el mapa
+tus coordenadas bajo el mapa del mundo
+%d mensajes ocultados como spam desde que iniciaste sesión.
+Icono de clase y nivel en el chat
+el icono de clase y el nivel de un jugador entre corchetes delante de su nombre, cuando el juego nos deja conocerlos
+Tamaño del texto del chat
+el tamaño del texto en las ventanas de chat, como proporción del tamaño propio del juego (el ajuste del juego se deja como está)
+Ocultar vendedores de oro y anuncios repetidos
+se ocultan los mensajes que venden oro o servicios con una dirección web, y el mismo mensaje repetido por un jugador (nunca de tu grupo, hermandad o amigos)
+lista los mensajes de chat ocultados como spam recientemente
+Las descripciones siguen al cursor.
+Las descripciones se quedan en su esquina.
+Descripciones en el cursor: sí / no
+Fondo de las descripciones
+cuán sólidos son el fondo y el borde de las descripciones emergentes: 100% es el cristal oscuro completo, 0% deja solo el texto
+Las descripciones siguen al cursor
+las descripciones se abren junto al cursor en lugar de en la esquina de la pantalla (en combate se quedan en la esquina)
+Rediseñar los marcos propios del juego
+descripciones, beneficios, el seguimiento de misiones, el minimapa, la barra de experiencia, las pestañas del chat y las barras del mando con el aspecto del HUD (la interfaz del ratón conserva la del juego)
+Tamaño de la barra de experiencia
+el tamaño de las barras de experiencia y reputación mientras están rediseñadas, en porcentaje
+Descripciones
+descripciones en cristal oscuro, con borde del color de la clase de un jugador o de la calidad de un objeto
+Barras de mando
+los botones del mando con un anillo delgado sobre un fondo oscuro en lugar del arte pesado
+Beneficios
+tus iconos de beneficios y perjuicios recortados y con borde, sus tiempos con contorno
+Seguimiento de misiones
+los encabezados del seguimiento de misiones en cristal oscuro, sus líneas con contorno
+Minimapa
+un anillo delgado y un halo suave alrededor del minimapa en lugar del borde dorado
+Barra de experiencia
+las barras de experiencia y reputación un poco más pequeñas, con sus propios colores
+Chat
+nombres de las pestañas del chat con contorno y el cuadro donde escribes en cristal oscuro
+Se volverá a preguntar por los avisos del juego.
+Confirmar el aviso de funciones experimentales
+tras aceptar una vez el aviso de funciones experimentales del juego, se acepta por ti en los siguientes inicios de sesión
+olvidar los avisos que has aceptado, para que el juego vuelva a preguntar
+comprobación: %d de %d superadas
+Informes de depuración
+reunir los informes de diagnóstico por sí solos: al iniciar sesión y de nuevo al recargar o salir (se guardan en los ajustes guardados)
+Ajuste del HUD: %s, a juego con la cámara
+preajuste: %s
+Se ha añadido un diseño llamado '%s' al modo edición del juego. Elígelo allí para usarlo (Menú del juego > Modo edición > Diseño).
+preajuste desconocido '%s'
+Para un televisor: texto más grande en el HUD y en el chat.
+Para un monitor: texto a su tamaño normal.
+Nuestros marcos han vuelto a su sitio inicial. Elige el diseño %s del juego en el modo edición (Menú del juego > Modo edición > Diseño).
+Los ajustes preestablecidos fijan la distancia de cámara
+un ajuste preestablecido también lleva la cámara a la distancia para la que se hizo su diseño, una sola vez (después haz zoom libremente)
+Acción
+una vista en tercera persona: barras verticales finas junto a tu personaje, todos los efectos activados; fuera de combate todo se desvanece
+Clásico
+nuestros marcos donde WoW siempre los ha tenido, efectos más discretos, las barras de mando del juego tal cual
+Mínimo
+solo lo que necesitas: los PNJ amistosos muestran su placa (con lo que hacen) solo mientras los señalas, apuntas o los tienes como objetivo; nombres sin títulos; fuera de combate tus barras quedan como un leve indicio (la salud baja siempre se muestra)
+Mundo abierto
+una pantalla limpia para explorar: barras finas a tu lado que descansan atenuadas, placas sin barras de poder, chat que se desvanece
+Aventura
+tras las aventuras de mundo abierto en consola: constantes vitales a tu lado, un objetivo pequeño arriba en el centro, aldeanos solo cuando los señalas, chat que se desvanece rápido
+Soulslike
+tus barras arriba a la izquierda, una gran barra del objetivo abajo en el centro como la de un jefe, cada golpe se siente
+Shooter
+barras verticales justo a la derecha del centro, cerca de donde apuntas, el objetivo bien arriba, respuesta fuerte a los golpes
+Crossbar
+tras los MMO jugados con mando: objetivo y foco arriba en el centro, tus barras justo encima de las barras de mando, grupo a la izquierda, placas completas
+ARPG
+tras los RPG de acción: la cámara lejos, tus constantes vitales abajo a la izquierda, el objetivo arriba en el centro, enemigos menores pequeños, cada golpe suena fuerte
+Brújula
+tras los RPG en primera persona: la cámara cerca, tus barras abajo en el centro, el objetivo bajo el borde superior, aldeanos solo cuando los señalas
+Banda
+la colocación de WoW con todo lo que necesita un grupo: marcos de grupo y banda, porcentajes de salud y niveles en las placas
+Seguir los ajustes de ControllerCam
+elegir un ajuste de cámara en ControllerCam para todas partes también elige el ajuste del HUD a juego (la cámara mantiene su propia distancia)
+Moderno
+pon todo el HUD en un ajuste preestablecido: action, classic, minimal, openworld, adventure, soulslike, shooter, crossbar, arpg, compass, raid
+el marco del objetivo y las placas compactos o completos, ambos a la vez
+el marco del objetivo compacto o completo
+ajustar el texto para un televisor al otro lado de la sala o para un monitor a un brazo de distancia
+devolver nuestros marcos a su sitio inicial, para el diseño Moderno o Clásico del propio juego
+Toda tu configuración (HUD, cámara y el diseño del juego): copia esta línea (Ctrl+C) para guardarla o compartirla.
+Pega una línea de ajustes del HUD (Ctrl+V) y acepta.
+Esa línea está dañada: cópiala de nuevo, completa.
+Esa línea se hizo con una versión más reciente: actualiza el addon.
+Eso no es una línea de ajustes del HUD.
+Ajustes importados: %d tomados, %d omitidos.
+La configuración de la cámara también se ha importado.
+La configuración de la cámara se ha dejado como estaba.
+El diseño del juego es ahora '%s'.
+El diseño del juego se ha dejado como estaba.
+tus ajustes como una línea de texto, para guardar o compartir
+toma ajustes de una línea de texto creada con /cchud export
+El HUD está activo mientras se usa la interfaz de mando. Sus opciones: Opciones > AddOns > ControllerCam > HUD, o /cchud.
+Solo cámara: el HUD descansa y la interfaz del juego queda como estaba. /cchud on lo activa.
+¿Configurar también la pantalla para el mando? Esto añade un diseño llamado CCHUD al modo edición del juego, para que lo elijas allí: coloca las filas de reutilización bajo el objetivo, lejos de los botones del mando. Tus propios diseños se conservan (/cchud setup lo ofrece de nuevo).
+Configurar
+Ahora no
+ControllerCam incluye una interfaz para mando, el HUD: sus propios marcos de unidad, placas de nombre, barra de lanzamiento y más mientras se usa la interfaz de mando. ¿La quieres, o solo la cámara?
+Cámara + HUD
+Solo cámara
+Este cliente no permite que los addons cambien la disposición.
+preguntar de nuevo: la cámara con el HUD, o solo la cámara
+ofrecer de nuevo el diseño de pantalla hecho para el HUD (modo edición del juego)
+Se muestra mientras se usa la interfaz de mando. Arrastra nuestros marcos en el Modo Edición del juego.
+Preajustes
+Ajustado para
+Televisor
+Monitor
+Iconos de los botones
+los iconos que el juego muestra para los botones de tu mando: detectados automáticamente para el mando en uso, o el tipo que elijas
+Restablecer la disposición del juego
+Pruébalo
+Reproducir la demo
+Mostrar todos los efectos de golpe
+Ejecutar la autocomprobación
+Barras de mando: compactas / completas
+Exportar ajustes
+Importar ajustes
+Marca «Mostrar opciones avanzadas» en la página principal para ver todos los ajustes.
+Módulos
+Interruptores rápidos
+General
+HUD
+El panel de opciones no está disponible en este cliente.
+Activado
+todo el HUD; si se desactiva, vuelven los marcos propios del juego
+También en la interfaz de ratón y teclado
+normalmente el HUD solo funciona mientras se usa la interfaz de mando
+Apartar los marcos del juego
+oculta los marcos de jugador, objetivo y foco del juego mientras se muestran los nuestros
+Ventana de chat arriba a la izquierda
+mueve la ventana de chat arriba a la izquierda mientras funciona el HUD
+Barras verticales en reposo
+cuán visibles se mantienen las barras verticales con salud completa fuera de combate (0 las oculta)
+Colores de clase
+colorea tu barra y las de otros jugadores según la clase
+Iconos de clase
+un icono de clase delante del nombre de un jugador en el objetivo y en el objetivo del objetivo
+Amenaza en el marco del objetivo
+un icono de escudo y un brillo en el marco del objetivo: rojo mientras te ataca, rojo y amarillo cuando estás a punto de atraerlo, amarillo y azul cuando lo estás perdiendo, azul cuando no está sobre ti
+Barras compactas en todas partes
+el marco del objetivo y las placas en su estilo compacto, algo más de la mitad de ancho (cada uno se puede ajustar por separado; los ajustes preestablecidos nunca lo cambian)
+Marco de objetivo compacto
+el marco de objetivo algo más de la mitad de ancho
+Colores de salud en combate
+en combate, las barras de salud pasan de verde a amarillo y a rojo a medida que baja la salud
+Sombreado tras el texto
+una banda oscura suave tras el texto del objetivo, para que se lea bien
+Tamaño del texto
+tamaño del texto de nuestros marcos
+Tamaño de los marcos
+tamaño de nuestros marcos de unidad
+Tus barras en combate
+qué tan visibles están tus barras, mascota y foco en combate hasta que algo requiera atención
+Completas con salud inferior a
+tus barras vuelven completas cuando tu salud baja de este valor
+Completas con maná inferior a
+tus barras vuelven completas cuando tu maná baja de este valor
+Barra del jugador en reposo
+qué tan visible queda la barra del jugador con la salud completa o fuera de combate (0 la oculta)
+Ayuda de vendedor y banco
+el botón Vender basura del vendedor pregunta qué vender; movimiento rápido en vendedor y banco
+Mostrar opciones avanzadas
+todos los ajustes, no solo los interruptores principales
+Marco del jugador
+nuestra barra del jugador, arriba a la izquierda
+Marco del objetivo
+nuestra barra del objetivo, arriba en el centro
+Barra de mascota
+una barra de mascota pequeña bajo la barra del jugador
+Marco del foco
+nuestro marco del foco
+barras verticales finas de salud y poder junto a tu personaje, para una vista en tercera persona (en lugar de la barra del jugador)
+Vender basura al abrir un vendedor
+vende la basura según tus reglas en cuanto se abre un vendedor
+Las armas y armaduras blancas son basura
+cuenta las armas y armaduras blancas como basura (nunca herramientas, cañas de pescar, equipo con uso ni algo que pueda ser una mejora; siempre se pregunta antes)
+Depositar al abrir el banco
+los objetos marcados para el banco y, si está activado, lo que el banco ya tiene, entran solos
+la opción del juego; nuestro marco pequeño la sigue
+Gestor de reutilización
+el Gestor de reutilización del juego
+Visualización de recursos personales
+tu salud y recurso bajo tu personaje
+El banco toma componentes automáticamente
+la opción del juego para el banco
+Descripción emergente al empezar un beneficio
+la opción del juego: la descripción emergente de un beneficio aparece un momento al aplicarse (IU de mando)
+Colores de clase en los nombres del chat
+el ajuste del chat del juego para todos los tipos de chat a la vez: el nombre de un jugador con el color de su clase
+abre el panel de opciones (Opciones > AddOns > ControllerCam HUD)
+Marcos
+Efectos
+Aspecto
+Misiones, chat y mapa
+Bolsas, banco y vendedor
+Pesca
+Opciones nativas
+%s  |  Interfaz de mando: %s  |  en marcha: %s
+jugador %s, objetivo %s, mascota %s, foco %s  |  marcos del juego apartados: %s  |  chat movido: %s
+opciones nativas: objetivo del objetivo %s, Gestor de reutilización %s, recursos personales %s
+tamaño del texto %d%%  |  sombreado del texto: %s
+ayuda de vendedor y banco: %s  |  venta automática: %s  |  el equipo blanco es basura: %s
+visibilidad en reposo %d%%  |  escala %d%%  |  colores de clase: %s
+Un HUD de acción minimalista para la interfaz de mando.
+activado
+desactivado: vuelven los marcos propios del juego
+usar también en la interfaz de ratón y teclado: %s
+marcos del juego apartados: %s
+chat movido arriba a la izquierda: %s
+colores de clase: %s
+Este cliente no tiene esa opción.
+%s: %s (opción propia del juego)
+El juego no lo aceptó en este momento.
+ayuda de vendedor y banco: %s
+venta automática: %s
+el equipo blanco es basura: %s
+La ayuda de vendedor está desactivada.
+uso: /cchud sell [junk | white | green | blue]
+depositar los objetos marcados al abrir el banco: %s
+uso: /cchud junk <item> (Mayús + clic en el objeto para ponerlo en la línea de chat)
+objeto %d: basura, se vende con el resto
+objeto %d: conservado, nunca se vende
+objeto %d: para el banco
+sombreado del texto: %s
+uso: /cchud text <80-250>
+tamaño del texto %d%%
+demo detenida
+El HUD no está en marcha.
+Demo en marcha: un combate inventado en bucle. Escribe /cchud demo otra vez para detenerla.
+uso: /cchud idle <0-100>
+visibilidad en reposo %d%%
+uso: /cchud scale <50-200>
+escala %d%%
+Arrastra los marcos y luego escribe /cchud lock.
+marcos bloqueados
+Todo ha vuelto a como empezó: ajustes, marcos y el diseño de pantalla (tus marcas de vendedor y el historial de precios se conservan).
+los marcos han vuelto a su posición inicial
+comando desconocido '%s'. Escribe /cchud help
+Lista de errores vaciada.
+No hay errores registrados.
+%d errores registrados (el más reciente al final). /cchud errors clear vacía la lista.
+mostrar el estado
+activa o desactiva el HUD (desactivado devuelve los marcos propios del juego)
+usar también el HUD en la interfaz de ratón y teclado
+usar nuestro marco para ello, o el del propio juego
+barras verticales delgadas de salud y poder junto a tu personaje
+objetivo del objetivo (opción propia del juego, también en sus menús)
+el Gestor de reutilización del juego (opción propia del juego)
+tu salud y recurso bajo tu personaje (opción propia del juego)
+la descripción emergente que aparece cuando empieza un beneficio (la opción propia del juego)
+mantener visibles los marcos de jugador y objetivo del juego (on) o apartarlos (off)
+en un vendedor: elige qué vender (también: sell junk, sell white | green | blue)
+cuenta las armas y armaduras blancas como basura
+marcar un objeto: siempre se vende, nunca se vende, o para el banco (Mayús + clic para ponerlo en la línea de chat)
+en el banco: deposita lo que el banco ya tiene y todo lo marcado para él
+depositar en cuanto se abre el banco
+el banco toma componentes automáticamente (opción propia del juego)
+tamaño del texto, en porcentaje (150 se lee bien en un televisor)
+cuán visible queda la barra del jugador cuando no pasa nada (0 la oculta)
+tamaño de los marcos, en porcentaje
+arrastra los marcos adonde quieras (el Modo Edición del juego también lo permite)
+devolver los marcos a su posición inicial
+reproduce un combate inventado y breve, para ver cómo reaccionan los marcos (otra vez para detenerlo)
+compara lo que hay en pantalla con los ajustes (check all enumera cada fila)
+guarda una descripción de la interfaz de mando de este cliente (para solucionar problemas)
+mostrar esta lista
+los últimos errores del HUD, también tras recargar (para informar de ellos)

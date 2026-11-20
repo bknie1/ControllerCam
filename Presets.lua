@@ -194,4 +194,5 @@ ns.STARTER = {
     flying   = "skies",
     swimming = "hybrid",
     vehicle  = "hybrid",
+    fishing  = "shooter",       -- when you cast your line: close over the shoulder, looking out at the float
 }

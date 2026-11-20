@@ -92,7 +92,7 @@ local HELP = {
     { "/ccam describe <profile>",           "what a profile feels like and every setting it changes" },
     { "/ccam use <profile>",                "use one profile everywhere (try: action, hybrid, classic)" },
     { "/ccam starter",                      "the recommended setup: Action camera with calmer profiles for cities, mounts, flying, raids" },
-    { "/ccam set <situation> <profile|none>", "choose the profile for one situation (vehicle, flying, swimming, mounted, combat, raid, dungeon, city, default)" },
+    { "/ccam set <situation> <profile|none>", "choose the profile for one situation (/ccam shows the list)" },
     { "/ccam force <profile>",              "use a profile now, whatever the situation" },
     { "/ccam auto",                         "stop forcing a profile" },
     { "/ccam save <name>",                  "save your current camera settings as a new profile" },
@@ -105,6 +105,7 @@ local HELP = {
     { "/ccam export <profile>",             "show a string you can share" },
     { "/ccam import <string>",              "add a profile from a shared string" },
     { "/ccam flip",                         "switch the shoulder offset to the other shoulder" },
+    { "/ccam formoffset <percent | reset>", "the shoulder offset in the form you are in (druid forms, ghost wolf), in percent of normal" },
     { "/ccam delay <seconds>",              "how long a situation is kept after it ends (default 1.5)" },
     { "/ccam on | off",                     "turn on, or turn off and restore your original camera settings" },
     { "/ccam info",                         "show the zoom, shoulder offset and motion settings right now (for troubleshooting)" },
@@ -171,7 +172,7 @@ local function Command(msg)
         ns.ApplyStarter(); say(L["Recommended setup applied."])
     elseif cmd == "set" then
         local sit = situationFor(args[1])
-        if not sit then say(L["Unknown situation. Use: vehicle, flying, swimming, mounted, combat, raid, dungeon, city or default."]); return end
+        if not sit then say(L["Unknown situation. Use one of:"] .. " " .. table.concat(ns.SITUATIONS, ", ")); return end
         local name = table.concat(args, " ", 2)
         if name == "" then say(L["usage: /ccam set <situation> <profile|none>"]); return end
         if name:lower() == "none" then
@@ -249,6 +250,21 @@ local function Command(msg)
         if id then say((L["Imported '%s'. /ccam use \"%s\" to try it."]):format(ns.ProfileName(id), ns.ProfileName(id))) else say(err) end
     elseif cmd == "flip" then
         ns.SetFlipShoulder(not db.flipShoulder); say(db.flipShoulder and L["Shoulder offset mirrored."] or L["Shoulder offset back to normal."])
+    elseif cmd == "formoffset" then
+        local arg = (args[1] or ""):lower()
+        if not ns.CurrentForm() then say(L["You are not in a form."]); return end
+        local n = tonumber(arg)
+        if arg == "" then
+            say((L["Shoulder offset in this form: %d%%"]):format(ns.ShoulderScale() * 100 + 0.5))
+        elseif arg == "reset" then
+            ns.SetFormOffset(nil)
+            say((L["Shoulder offset in this form: %d%%"]):format(ns.ShoulderScale() * 100 + 0.5))
+        elseif n and n >= 0 and n <= 200 then
+            ns.SetFormOffset(n / 100)
+            say((L["Shoulder offset in this form: %d%%"]):format(n + 0.5))
+        else
+            say(L["usage: /ccam formoffset <percent> (or reset)"])
+        end
     elseif cmd == "delay" then
         local n = tonumber(args[1])
         if n and n >= 0 then ns.SetExitDelay(n); say((L["Situations are kept for %.1f seconds after they end."]):format(db.exitDelay))

@@ -1,7 +1,7 @@
 name: Release
 
 # Push a tag like v1.0.0 to build ControllerCam-v1.0.0.zip and attach it to a GitHub release.
-# WoWUp's GitHub source installs from that zip (top-level folder: ControllerCam/).
+# WoWUp's GitHub source installs from that zip (top-level folders: ControllerCam/ and ControllerCam_HUD/).
 on:
   push:
     tags:
@@ -23,6 +23,11 @@ jobs:
             echo "Tag ${GITHUB_REF_NAME} does not match TOC version v${toc_version}" >&2
             exit 1
           fi
+          hud_version=$(grep -m1 '^## Version:' ControllerCam_HUD/ControllerCam_HUD.toc | sed 's/^## Version: *//' | tr -d '\r')
+          if [ "${hud_version}" != "${toc_version}" ]; then
+            echo "ControllerCam_HUD is version ${hud_version}, ControllerCam is ${toc_version}" >&2
+            exit 1
+          fi
 
       - uses: actions/setup-python@v5
         with:
@@ -32,13 +37,17 @@ jobs:
         run: |
           pip install lupa
           python tests/test_controllercam.py
+          python tests/test_controllercam_hud.py
 
       - name: Build zip
         run: |
           mkdir -p dist/ControllerCam
           cp ControllerCam.toc Locales.lua Schema.lua Presets.lua Share.lua Core.lua Slash.lua Options.lua LICENSE README.md CHANGELOG.md dist/ControllerCam/
           cp -r Media dist/ControllerCam/Media
-          (cd dist && zip -r "ControllerCam-${GITHUB_REF_NAME}.zip" ControllerCam)
+          mkdir -p dist/ControllerCam_HUD
+          cp ControllerCam_HUD/ControllerCam_HUD.toc ControllerCam_HUD/*.lua ControllerCam_HUD/Bindings.xml LICENSE dist/ControllerCam_HUD/
+          cp -r ControllerCam_HUD/Media dist/ControllerCam_HUD/Media
+          (cd dist && zip -r "ControllerCam-${GITHUB_REF_NAME}.zip" ControllerCam ControllerCam_HUD)
 
       - name: Create GitHub release
         env:

@@ -192,13 +192,13 @@ end
 local prev = rowsHeader
 for _, sit in ipairs(ns.SITUATIONS) do
     local label = panel:CreateFontString(nil, "ARTWORK", "GameFontHighlight")
-    label:SetPoint("TOPLEFT", prev, "BOTTOMLEFT", 0, (prev == rowsHeader) and -8 or -14)
+    label:SetPoint("TOPLEFT", prev, "BOTTOMLEFT", 0, (prev == rowsHeader) and -8 or -9)
     label:SetWidth(200)
     label:SetJustifyH("LEFT")
     label:SetText(ns.SITUATION_LABEL[sit])
 
     local btn = CreateFrame("Button", nil, panel, "UIPanelButtonTemplate")
-    btn:SetSize(220, 22)
+    btn:SetSize(220, 20)
     btn:SetPoint("LEFT", label, "RIGHT", 8, 0)
     btn:RegisterForClicks("LeftButtonUp", "RightButtonUp")
     btn:SetScript("OnClick", function(_, mouse) Cycle(sit, mouse == "RightButton" and -1 or 1) end)
@@ -489,6 +489,7 @@ if Settings and Settings.RegisterCanvasLayoutCategory then
         Settings.RegisterCanvasLayoutSubcategory(category, pp, pp.name)
     end
     Settings.RegisterAddOnCategory(category)
+    ControllerCamSettings = { category = category }      -- the HUD (a second addon) puts its pages under ours
     ns.OpenOptions = function()
         local id = category.GetID and category:GetID() or category.ID
         Settings.OpenToCategory(id)

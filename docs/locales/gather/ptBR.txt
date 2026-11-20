@@ -1,0 +1,71 @@
+erro:
+ligado
+desligado
+uso:
+Ativado
+o addon inteiro; desligado, remove todos os marcadores e para de registrar
+Ervas
+Minério
+Cardumes
+Tesouros
+Outros
+Registrar pontos ao coletar
+uma erva, um veio ou um baú que você coleta é adicionado ao mapa
+Registrar tudo o que você abre
+baús cujo nome já é conhecido são sempre registrados; com isto ligado, tudo o que você abre é registrado como tesouro, inclusive objetos de missão
+Pontos no mapa-múndi
+pontos conhecidos da zona que o mapa-múndi mostra
+Pontos no minimapa
+pontos conhecidos ao seu redor no minimapa
+mostrar ervas
+mostrar veios de minério
+mostrar cardumes
+mostrar baús e outros tesouros
+mostrar todos os outros tipos de ponto
+Tamanho dos marcadores no mapa-múndi
+o quanto os marcadores são grandes no mapa-múndi
+Tamanho dos marcadores no minimapa
+o quanto os marcadores são grandes no minimapa
+Opacidade dos marcadores
+o quanto os marcadores são opacos
+O GatherMate2 não está carregado ou não tem pontos. Ative-o por uma sessão e depois digite /ccgather import.
+%d pontos lidos do GatherMate2, %d deles novos.
+O GatherMate2 tem pontos salvos. Digite /ccgather import para trazê-los.
+trazer os pontos que o GatherMate2 salvou (o GatherMate2 precisa estar ativado nessa sessão)
+Compartilhar pontos com seu grupo e sua guilda
+avisa seu grupo, sua raide e sua guilda de cada ponto que você registra e recebe os deles (um ponto compartilhado revela onde você está)
+Autoverificação: todas as %d verificações passaram.
+Autoverificação: %d de %d verificações falharam.
+compara o que está na tela com as configurações (check all lista todas as linhas)
+Relatórios de depuração
+reúne sozinho um relatório de diagnóstico: ao entrar e de novo ao recarregar ou sair (fica nas configurações salvas)
+%d pontos conhecidos
+Ervas, minério e outros pontos no mapa-múndi e no minimapa, registrados enquanto você coleta.
+Importar do GatherMate2
+Rodar a demonstração
+um anel de pontos inventados ao seu redor, para ver os marcadores (de novo para parar)
+Rodar a autoverificação
+Coleta
+O painel de opções não está disponível neste cliente.
+abrir o painel de opções
+%s  |  mapa-múndi: %s  |  minimapa: %s  |  registro: %s  |  compartilhamento: %s
+ativado
+desativado: todos os marcadores sumiram e nada é registrado
+comando desconhecido '%s'. Digite /ccgather help
+demonstração parada
+O addon está desligado.
+Demonstração rodando: pontos inventados ao seu redor, no minimapa e no mapa-múndi. Digite /ccgather demo de novo para parar.
+Aqui o jogo não informa onde você está.
+Nenhum ponto conhecido a menos de 40 metros.
+Esquecido: %s
+Isto esquece todos os pontos (%d). Digite /ccgather clear yes para fazer isso.
+%d pontos esquecidos.
+Lista de erros esvaziada.
+Nenhum erro registrado.
+%d erros registrados (o mais recente por último). /ccgather errors clear esvazia a lista.
+mostrar o status
+ligar ou desligar o addon (desligado, remove todos os marcadores e para de registrar)
+mostrar esta lista
+esquecer o ponto conhecido mais próximo de você (a menos de 40 metros)
+esquecer todos os pontos (pergunta antes)
+os últimos erros do addon, também depois de recarregar (para relatá-los)

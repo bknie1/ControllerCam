@@ -1,0 +1,738 @@
+erreur:
+activé
+désactivé
+utilisation:
+Les changements s'appliquent à la fin du combat.
+Boule de feu
+Mage allié
+Soins
+Familier
+Mannequin d'entraînement
+Soigneur allié
+Joueur
+Les barres verticales suivent la caméra
+les barres verticales gardent leur place à côté de votre personnage quand la caméra zoome et dézoome (placez-les en mode Édition à la distance qui vous convient)
+Noms de famille
+le nom complet d'un joueur sur les cadres d'unité et les barres de nom, nom de famille compris : Faith Ashborne
+Santé sur la barre de la cible
+la santé restante (12.3k) et le pourcentage sur les barres de la cible et de la focalisation ; une cible compacte n'affiche que le pourcentage
+Cible
+Cible de la cible
+Focalisation
+Barres verticales
+%d objets déposés
+%d objets vendus pour %s (/cchud sold les liste)
+Rien à vendre.
+Ouvrez d'abord la banque.
+Rien à déposer : votre banque ne contient rien de ce que vous portez, et rien n'est marqué pour elle.
+Rien n'est marqué pour la banque. Pointez un objet et utilisez Marquer l'objet.
+Ouvrez d'abord un marchand.
+Vendre la camelote: %d objets pour %s.\n\nOu vendre les armes et armures selon leur qualité.
+Vendre la camelote
+Par qualité
+Vendre les armes et armures jusqu'à quelle qualité ?\n\nCommun (blanc): %s\nPeu commun (vert): %s
+Commun
+Peu commun
+Vendre %d objets ?\n\n%s
+Vendre
+Le déplacement rapide fonctionne chez un marchand (vente), un banquier (dépôt, retrait), lors d'un échange ou à la boîte aux lettres.
+Pointez d'abord un objet.
+%s: conservé, jamais vendu
+%s: banque, déposé sur demande (jamais vendu)
+%s: sans marque
+%s: camelote, vendu avec le reste
+Déplacement rapide: vendre, déposer, échanger ou envoyer par courrier l'objet que vous visez
+Marquer l'objet: camelote / conservé / banque / sans marque
+Déposer : mettre en banque ce qu'elle contient déjà, et ce que vous avez marqué pour elle
+Rien n'a encore été vendu pendant cette session.
+L'onglet Rachat d'un marchand vous les rend jusqu'à votre déconnexion.
+Réparé pour %s depuis la banque de guilde
+Pas assez d'or pour tout réparer (%s).
+Réparé pour %s
+Le dépôt range aussi ce que la banque contient déjà
+un dépôt déplace chaque objet dont votre banque a déjà un exemplaire (composants, potions...), en plus des objets marqués pour la banque ; jamais les objets gris, les outils ni les objets marqués comme camelote ou gardés
+Réparer chez les marchands
+répare tout dès que s'ouvre un marchand qui répare
+Réparer depuis la banque de guilde
+paie les réparations avec la banque de guilde si votre guilde l'autorise, avec votre propre or sinon
+liste ce qui a été vendu pour vous pendant cette session, pour racheter quelque chose
+Sac
+Banque
+Vous
+La banque de ce client ne peut pas être triée d'ici.
+Ce client n'a pas de tri des sacs.
+Banque triée.
+Banque triée. Appuyez à nouveau pour trier vos sacs.
+Sacs triés.
+Trier vos sacs (et la banque tant qu'elle est ouverte)
+Or sur ce compte : %s
+Nombre d'objets dans les infobulles
+l'infobulle d'un objet indique combien vous en avez dans vos sacs et en banque, et combien en ont vos autres personnages
+R3 trie tant que vos sacs sont ouverts
+tant que vos sacs ou la banque sont ouverts, le bouton du stick droit les trie (sinon il fait son travail habituel)
+R3 déplace l'objet que vous visez (banque, marchand, échange, boîte aux lettres)
+tant que l'un d'eux est ouvert, le bouton du stick droit déplace l'objet que vous visez: vers la banque ou hors de celle-ci, vendu, dans l'échange ou sur la lettre. Si vous ne visez rien, il trie
+trie vos sacs, et la banque tant qu'elle est ouverte
+liste l'or de chacun de vos personnages, et le total
+à l'instant
+il y a %d heures
+il y a %d jours
+Marchand
+Idéal
+Vente
+Hôtel des ventes
+Garder
+5% en dessous du plus bas, pour une vente rapide
+le marché est exceptionnellement bas aujourd'hui : prix proche de l'habituel, pour attendre les acheteurs
+juste en dessous du plus bas : peu sont en vente, cela devrait se vendre
+un peu en dessous du plus bas : beaucoup sont en vente
+pas de prix récents : à partir du prix habituel (lisez l'hôtel des ventes pour ceux du jour)
+maintenu au-dessus de ce que paie un marchand
+Hôtel des ventes lu : %d prix notés.
+L'hôtel des ventes pourra être relu dans %d minutes.
+L'hôtel des ventes ne peut pas être lu d'un coup pour le moment.
+Ce client ne peut pas lire tout l'hôtel des ventes.
+Lecture de l'hôtel des ventes...
+Prix marchand dans les infobulles
+ce qu'un objet rapporte chez un marchand, à l'unité et pour une pile complète
+Prix de l'hôtel des ventes dans les infobulles
+le prix d'achat immédiat le plus bas que vous avez vu pour un objet à l'hôtel des ventes, et il y a combien de temps
+Lire l'hôtel des ventes à la visite
+la première visite depuis un moment lit tous les prix d'un coup (le jeu le permet toutes les 15 minutes) ; /cchud scan le demande
+Meilleur usage d'un objet
+l'infobulle d'un objet dit quoi en faire : le vendre à l'hôtel des ventes (et combien de plus cela rapporte), le vendre à un marchand ou le garder
+Ventes rapides à l'hôtel des ventes
+prix 5% en dessous du plus bas pour vendre tout de suite ; désactivé : prix patients, juste en dessous du plus bas, qui se vendent quand les acheteurs viennent
+lit tous les prix de l'hôtel des ventes d'un coup (ouvrez-le d'abord ; toutes les 15 minutes)
+PA
+PA dist.
+crit.
+esquive
+vie
+mana
+crit. sorts
+Ce que valent les caractéristiques
+chaque ligne de caractéristique d'une infobulle d'objet reçoit sa valeur pour votre personnage : puissance d'attaque, puissance d'attaque à distance, critique, esquive, vie, mana
+Niveau d'objet
+Niveau requis
+Pile jusqu'à
+ID de l'objet
+pas encore vu
+aucune
+camelote
+conservé
+banque
+Votre marque
+Détails de l'objet: tout sur l'objet que vous visez
+affiche tout sur l'objet que vous visez (ou celui indiqué): prix, qui le possède, votre marque
++%s de plus qu'un marchand
+pas encore de prix connu
+un marchand paie autant
+Marché
+Poster
+Patient
+Lire tous les prix
+Rien dans vos sacs ne peut être vendu ici.
+Pas encore d'historique des prix : lisez l'hôtel des ventes quelques jours.
+Plus bas
+Habituel
+En vente
+Aucun prix connu : lisez d'abord l'hôtel des ventes.
+%d valent la vente ici, %d autres possibles
+%d prix connus, tous lus %s
+jamais
+aucune donnée
+Vente rapide
+Retour
+Poster %d pour %s
+Ce client ne permet pas de poster à l'hôtel des ventes depuis ici.
+%d posté pour %s.
+Marché à l'hôtel des ventes : ouvrir / fermer
+Onglet Marché à l'hôtel des ventes
+un onglet Marché à l'hôtel des ventes : ce qui, dans vos sacs, vaut d'y être vendu et pourquoi, une courbe des prix à côté, et la mise en vente d'une pression
+ouvrir ou fermer le Marché (un onglet de l'hôtel des ventes)
+quel hôtel des ventes a ce client (pour le dépannage)
+Hors ligne
+Mort
+Cadres de groupe et de raid
+dessiner notre style sur les cadres de groupe et de raid du jeu (leur ciblage et leurs options continuent de fonctionner)
+Animations de la barre d'incantation
+une barre d'incantation montre ce qui est lancé : des pioches la frappent pendant le minage, des éclairs la parcourent pour la nature, une liane fleurit pour un soin, des runes prennent forme pour les arcanes, flammes, glace et ombres pour le feu, le givre et l'ombre
+montrer chaque animation de barre d'incantation une fois, sur votre barre
+Interrompu
+Probable :
+Montée du lancement
+votre barre de lancement brille plus fort à mesure que le sort se charge et éclate à l'impact
+Flotteur de pêche
+pendant la pêche, un flotteur ondule sur votre barre de lancement et indique ce qui risque de mordre ici
+Barre d'incantation
+notre barre d'incantation à la place de celle du jeu (elle reste là où le mode Édition place celle du jeu)
+Taille de la barre d'incantation
+la taille à laquelle votre barre d'incantation est dessinée, avec le bouchon de pêche et tout ce qui s'y joue
+La pêche au premier plan
+tant que vous pêchez, la barre d'incantation passe au milieu de l'écran et est dessinée plus grande : la ligne, le bouchon et ce qui mord sont l'essentiel
+Ciblez d'abord quelque chose.
+%d effets listés et enregistrés. Tapez /reload pour que le jeu les écrive sur le disque.
+Vos effets sur la cible
+une rangée de vos propres affaiblissements ou bonus sous la barre de la cible
+Bonus de l'ennemi sur la cible
+les améliorations d'une cible ennemie, à droite sous sa barre : celles qui comptent, ou toutes si Seulement les effets qui comptent est désactivé
+Seulement les effets qui comptent
+sur la cible et les barres d'info : les améliorations d'un ennemi seulement quand le jeu les marque comme importantes, qu'il est enragé, ou que vous pouvez les dissiper ou les voler ; sur un allié, les affaiblissements que vous pouvez dissiper et les dangereux. Désactivé : toutes les améliorations
+Affaiblissements sur une cible amicale
+à droite sous la barre d'un allié : les affaiblissements que vous pouvez dissiper (bordés de la couleur de leur type), les mécaniques de boss et le contrôle
+Points de combo
+points de combo sous forme de pastilles au-dessus du nom de la cible
+liste ce que le jeu dit des effets de votre cible (pour le dépannage)
+Pourcentage de menace
+votre part de la menace en chiffre à côté de l'icône de menace, sur le cadre de la cible et les barres de nom
+Nombre de santé
+la santé restante, abrégée (12.3k), sur la barre (pas sur les barres de nom compactes : le pourcentage y suffit)
+Vos affaiblissements
+vos affaiblissements sur l'unité, au-dessus de son nom, avec leur durée
+Affaiblissements de tous
+les affaiblissements que le jeu signale pour les barres de nom de tous, pas seulement les vôtres
+Bonus de l'ennemi
+les améliorations d'un ennemi à côté de ses affaiblissements : celles qui comptent (importantes, enragé, ou que vous pouvez dissiper ou voler), ou toutes si Seulement les effets qui comptent est désactivé
+Icône de contrôle des foules
+une grande icône avec sa durée quand l'unité est étourdie, immobilisée, effrayée...
+Lueur d'aggro
+une icône de bouclier et une lueur derrière le nom : rouge tant qu'il vous attaque, rouge et jaune quand vous êtes sur le point de l'attirer, jaune et bleu quand vous le perdez, bleu quand il n'est pas sur vous
+Marqueur de quête
+un repère doré sur les unités dont vos quêtes ont encore besoin
+Animations des barres de nom
+les barres apparaissent en fondu, la santé basse respire, le contrôle des foules scintille
+Barres de noms
+notre style sur les barres de noms du jeu (ses options de barres de noms continuent de s'appliquer)
+Titres des joueurs
+affiche le titre d'un joueur avec son nom
+Guildes et métiers des PNJ
+une ligne sous le nom : la guilde du joueur, ou ce que fait le PNJ
+Barres des amis en combat
+les plaques de nom amicales affichent santé, ressource et incantations tant que l'unité est en combat
+Barres d'info amicales du jeu
+laisser les barres amicales (votre groupe, les autres joueurs, les PNJ amicaux) à l'apparence du jeu ; les nôtres seulement sur les ennemis
+Barres de ressource
+une fine barre de mana, de rage ou d'énergie sous la barre de santé
+Cible de l'incantation
+qui est visé par une incantation, à côté du nom du sort
+Pourcentage de santé
+le pourcentage de santé sur la barre
+Nom sur la barre de votre cible
+désactivé : la barre de votre cible n'affiche ni nom ni niveau (le cadre de la cible les montre)
+Niveaux sur les barres d'info
+le niveau devant le nom d'un ennemi, coloré selon la difficulté
+Barres de nom compactes
+barres de nom environ moitié moins larges
+Incantations ennemies marquées
+l'incantation d'un ennemi clignote, gonfle et pulse de plus en plus vite jusqu'à son terme, pour pouvoir être interrompue à temps
+Icônes de classe sur les barres de nom
+l'icône de classe d'un joueur devant son nom, ami ou ennemi
+Ce que font les PNJ, en icônes
+une icône au-dessus des PNJ amicaux qui proposent quelque chose : un sac pour les marchands, une enclume pour les forgerons qui réparent, un livre pour les maîtres... (les icônes du jeu ; elles restent visibles même quand la barre attend d'être pointée)
+PNJ amicaux seulement quand pointés
+les barres des PNJ amicaux (marchands, donneurs de quêtes, habitants) ne s'affichent que lorsque vous les pointez, comme leur infobulle
+Noms sur les objets avec lesquels vous pouvez interagir
+un nom au-dessus des minerais, coffres, plaques et autres tant que vous leur faites face (désactivé : ils restent sans nom, l'invite du jeu dit déjà ce qu'ils sont)
+Mini-plaques
+les serviteurs, les bestioles et les ennemis gris qui ne donnent pas d'expérience ont une petite barre : une barre fine et le nom, rien de plus (l'option du jeu décide s'ils ont une barre)
+Barres de nom du groupe en donjon: noms seuls
+dans un donjon ou un raid, le jeu dessine lui-même les barres de nom des joueurs alliés et les addons ne peuvent pas les modifier: les options propres au jeu y sont réglées pour les afficher comme des noms à la couleur de la classe, sans barres, comme les nôtres, et les barres du jeu reviennent pendant un combat (si les barres des alliés en combat sont activées); tout est remis en place à la sortie
+Barres de nom du groupe en donjon: masquées
+dans un donjon ou un raid, désactiver complètement les barres de nom du jeu pour les joueurs alliés (et les remettre comme vous les aviez à la sortie)
+affiche ce que le jeu donne pour le nom de votre cible (pour le dépannage)
+lister les barres d'info à l'écran et si elles portent notre apparence (pour le dépannage)
+Affichage de chaque école de dégâts une fois (la dernière en coup critique).
+Particules d'impact
+des éclairs sacrés, le feu s'élève, des cristaux de givre persistent, l'ombre fume, des runes des arcanes scintillent sur la barre touchée
+Vos barres tremblent quand vous êtes touché
+votre cadre de joueur et vos barres verticales tremblent un peu, selon l'école du coup, quand vous subissez des dégâts
+Effets de coup par école de dégâts
+vos coups font clignoter et trembler la barre touchée : feu, givre, ombre et les autres ont chacun un aspect différent
+affiche l'effet d'impact de chaque école de dégâts une fois sur votre cible et les barres de nom
+Soins entrants aux couleurs de leur école
+le soin en route vers une unité prend la couleur du soin lancé sur elle : Sacré doré, Nature vert
+Les soins sur la durée poussent sur la barre
+des racines et des branches (Nature) ou des fils dorés (Sacré) poussent sur la barre de votre cible, focalisation ou la vôtre tant qu'un soin sur la durée agit, et se fanent à la fin
+Les boucliers s'affichent comme une protection
+un bouclier sur votre cible, votre focalisation ou vous (Mot de pouvoir : Bouclier, Bouclier divin, Barrière de glace...) jaillit autour de la barre de vie dans la couleur de son école, luit tant que le bouclier tient et s'estompe quand il se brise
+Chiffres stylisés sur vous
+les dégâts et les soins que vous recevez surgissent comme vos propres coups, au lieu du texte défilant du jeu (suit l'option du jeu de texte de combat sur vous)
+La vibration du jeu est désactivée (ou cette manette ne peut pas vibrer).
+Lecture de chaque motif de vibration une fois.
+Intensité des vibrations
+la force de nos motifs, en plus du réglage de vibration du jeu
+Vibration de la manette
+la manette vibre pour les moments qui valent la peine d'être ressentis (l'intensité de vibration du jeu passe en premier)
+Vibration : coups reçus
+un choc sourd quand vous êtes touché, plus lourd pour un gros coup ou un critique
+Vibration : vos critiques
+un claquement sec dans la gâchette droite quand vous infligez un critique
+Vibration : interruptions
+un double coup quand l'incantation de votre cible est interrompue
+Vibration : santé faible
+un battement de cœur quand votre santé est faible en combat
+Vibration : aggro
+une pulsation quand votre cible se retourne contre vous
+Vibration : alertes
+un appel de préparation, une invitation de donjon ou un chuchotement
+Vibration : les sceaux se chargent
+une vibration qui monte vite et claque dans la gâchette droite quand vous posez un sceau
+Vibration : les sorts montent en puissance
+pendant que vous incantez un sort avec temps d'incantation, la vibration monte avec la barre et claque quand il part
+Vibration : niveau gagné et mort
+une onde quand vous gagnez un niveau, une longue vibration grave quand vous mourez
+La barre lumineuse affiche votre santé
+une manette à barre lumineuse (DualSense) y affiche votre santé : du vert au rouge, pulsant quand elle est faible en combat
+jouer chaque motif de vibration une fois
+Jugement
+Vibration : vos techniques clés
+les techniques clés de chaque classe ont leur propre sensation à la manette (un Jugement éclabousse, une Frappe sacrée claque, Furie-des-vents frappe trois fois)
+Grands moments
+rarement, un coup vraiment spécial s'affiche en grand et doré au centre de l'écran : des critiques de vos techniques clés coup sur coup, un critique de Furie-des-vents ou un critique bien au-dessus de l'habitude du combat (au plus deux fois par combat)
+montre l'aspect et la sensation d'un grand moment
+prête à être rendue
+au-dessus de votre niveau
+demande un groupe
+bas niveau
+Votre journal de quêtes est vide.
+Recommandé ensuite :
+%d m
+Liste de quêtes: zone actuelle uniquement
+suivre uniquement les quêtes de la zone où vous êtes (votre propre suivi revient quand c'est désactivé)
+Liste de quêtes: pas de quêtes de groupe en solo
+tant que vous êtes seul, les quêtes prévues pour un groupe (élite, donjon, raid) sont retirées de la liste; en groupe elles reviennent
+Liste de quêtes: seulement les plus proches
+ne pas lister plus que ce nombre de quêtes, les plus proches (0 les liste toutes)
+Liste de quêtes: la plus proche d'abord
+garder la liste de quêtes dans l'ordre des distances, la quête la plus proche en haut
+Liste de quêtes: ordre recommandé
+garder la liste de quêtes dans un ordre recommandé: d'abord celles prêtes à être rendues, puis ce que vous pouvez faire seul en commençant par le plus proche, puis les quêtes au-dessus de votre niveau, les quêtes de groupe tant que vous êtes seul, et les quêtes grises en dernier
+dire un ordre recommandé pour vos quêtes: rendre ce qui est prêt, puis la plus proche faisable seul, puis le reste
+Pas en combat.
+Ce client n'a pas de barres de manette.
+Ce client ne permet pas aux addons de le modifier ; utilisez le mode Édition.
+barres de manette : %s
+compactes
+complètes
+Barres manette fines
+masquer l'habillage lourd derrière les barres d'action de la manette et les dessiner plus petites
+Taille des barres manette
+taille des barres manette quand les barres fines sont activées, en pourcentage
+les barres de manette du jeu en mode compact ou complet (comme son réglage du mode Édition)
+Estomper hors combat
+les barres de manette, la minicarte, la liste des quêtes, le compteur de dégâts et la barre d'expérience se reposent ensemble hors combat, et reviennent pour un combat, une gâchette pressée ou une cible ennemie
+L'écran au repos
+à quel point les parties de l'écran au repos restent visibles hors combat (0 les masque)
+Au repos : barres de manette
+Au repos : minicarte
+Au repos : liste des quêtes
+Au repos : compteur de dégâts
+Au repos : barre d'expérience
+Au repos : améliorations
+Au repos : rangées de temps de recharge
+si cette partie de l'écran participe au fondu hors combat
+Enregistré : tapez /reload pour que le jeu l'écrive sur le disque.
+Boutons de posture et de familier au-dessus des barres
+les boutons de postures et d'ordres du familier se placent là où étaient les icônes de ciblage verte et rouge, pour que leur roue s'ouvre entièrement à l'écran ; ces icônes sont masquées
+lister où se trouvent les parties des barres de manette et ce qui se repose (pour le dépannage)
+Auto
+Générique
+ceux du jeu
+Icônes des boutons : %s.
+Aucune manette n'est utilisée pour le moment, ou le jeu n'a pas de styles d'icônes: ce sera appliqué dès qu'il y en aura une.
+Le jeu n'a pas accepté les icônes des boutons.
+La manette ne dit pas ce qu'elle est: les icônes restent comme le jeu les a.
+les icônes que le jeu affiche pour les boutons de votre manette: auto (selon la manette utilisée), xbox, playstation, switch, steam, generic (chiffres), ou game pour les laisser comme le jeu les a
+Rangées de temps de recharge à l'écart des barres de manette
+les rangées de temps de recharge du jeu se placent sous la cible au lieu d'être sur les boutons de la manette, un peu plus petites (seulement avec les dispositions intégrées du jeu : avec une disposition à vous, elles restent où vous les avez mises)
+Pêche : %s lance
+Mode pêche : %s lance votre ligne et ferre le poisson quand le bouchon bouge.
+Mode pêche : désactivé.
+Le mode pêche demande une canne à pêche dans vos mains.
+Vous ne connaissez pas la Pêche.
+Mode pêche : un bouton lance et ferre
+Bouton de pêche : %s
+Pêche à un bouton
+avec une canne à pêche en main, votre bouton d'interaction lance la ligne dès qu'il n'y a rien avec quoi interagir, et ferre le poisson quand le bouchon bouge ; la prise est ramassée pour vous
+Appât sur double appui
+appuyez deux fois rapidement sur votre bouton de pêche: le second appui met le meilleur appât de vos sacs sur votre canne, quand elle n'en a pas
+pêche à un bouton désactivée pour l'instant, ou réactivée (avec une canne en main elle s'active toute seule)
+le bouton qui pêche : votre bouton d'interaction au départ (Carré ou X), ou n'importe quel autre, une gâchette par exemple (rt)
+La côte de Durotar, c'est de la roche rouge et des hauts-fonds tièdes. Les trolls des îles de l'Écho disent que les maquereaux passent en bancs plus serrés quand la marée porte l'odeur des feux de cuisine des îles.
+Les lacs de Mulgore sont petits, clairs et patients. Les taurens y pêchent comme ils font tout le reste, lentement et en disant merci.
+Chaque oasis des Tarides est un lieu de rendez-vous. Peu importe ce qui s'y abreuve le jour, quelque chose nage dessous la nuit.
+Les bassins de Teldrassil reposent à l'ombre d'un seul arbre. Les pêcheurs elfes de la nuit jurent que les poissons n'y ont jamais vu le soleil et qu'il ne leur manque pas.
+L'eau de Sombrivage est grise, froide et pleine d'épaves. La moitié de ce qui mord au large d'Auberdine a élu domicile dans la cargaison perdue de quelqu'un.
+Les rivières d'Orneval coulent sous des feuillages plus vieux que la plupart des royaumes. Les poissons sont vifs, et les sentinelles plus vives encore à vous demander ce que vous faites là.
+Au fond des Mille pointes, l'eau est rare et jalousement gardée. Un poisson d'ici a mérité sa place.
+Les lacs des Serres-Rocheuses dorment haut et froid entre les pics. Les gobelins les auraient déjà asséchés si la pêche n'y était pas si bonne.
+La côte de Désolace n'est qu'ossements et ressac gris. Quelque chose, là-dessous, a pris goût aux deux.
+À Féralas, tout est vert jusqu'au ras de l'eau. Les rivières y sont profondes, chaudes et bien vivantes.
+Nul ne sait au juste où finit la terre et où commence l'eau dans le marécage d'Âprefange. Pêchez depuis la rive, et recomptez vos orteils ensuite.
+Port Gentepression possède la seule eau digne de ce nom de tout Tanaris. Les gobelins vous vendront le droit d'y pêcher, deux fois si vous les laissez faire.
+Sous la baie lumineuse d'Azshara repose une cité engloutie. Les vieux pêcheurs disent que les plus gros vivent dans ce qui fut ses jardins.
+Les mares de Gangrebois luisent, et pas dans le bon sens. Ce qui y nage encore est têtu au-delà du raisonnable.
+Les sources chaudes et les lacs bordés de goudron d'Un'Goro ont gardé des choses que le reste du monde a oubliées. Certaines mordent.
+Le lac Elune'ara, à Reflet-de-Lune, est calme comme un souffle retenu. Les druides demandent seulement que vous ne preniez pas plus que vous ne mangerez.
+Silithus, c'est du sable, du vent et un bruit d'ailes. Si vous y avez trouvé de l'eau où pêcher, ne le dites à personne.
+Les lacs de Berceau-de-l'Hiver gèlent sur les bords et fument au milieu. Les poissons y sont gras contre le froid, et valent bien la marche.
+Dans les bassins d'Orgrimmar pêchent des péons qui n'ont rien de mieux à faire et de vieux grunts qui disent la même chose. Les uns comme les autres vous raconteront que le gros leur a échappé.
+Un poisson des étangs des Pitons-du-Tonnerre a passé toute sa vie très haut au-dessus des plaines. Il a l'air de bien le prendre.
+Darnassus veille sur ses eaux avec autant de soin que sur ses temples. Les poissons ont pris l'habitude d'être admirés.
+Les lacs des montagnes d'Alterac sont de la neige fondue, et les ogres comme le Syndicat y pêchent quand personne ne regarde.
+Les rivages d'Arathi ont vu passer plus d'armées que de pêcheurs. Les poissons ont depuis longtemps cessé de se soucier de la bannière qui flotte au-dessus de l'eau.
+Les Terres ingrates ne sont que poussière d'un bout à l'autre. Ici, une touche est un petit miracle, alors traitez-la comme tel.
+La côte des Terres foudroyées est rouge, décapée et silencieuse. Ce qui vit dans ce ressac a appris à s'accommoder de bien des choses.
+Les lacs de Tirisfal reposent, immobiles, sous un ciel maladif. Les Réprouvés y pêchent par habitude. Les morts ne mangent pas beaucoup, mais ils se souviennent d'avoir aimé ça.
+La longue côte de la forêt des Pins-Argentés n'est que brume et ombre de pins. La pêche y est bonne, et c'est bien la seule chose gaie qu'on dise de l'endroit.
+Les rivières des Maleterres de l'Ouest coulent encore, mais pas propres. Ce que vous en tirez, regardez-le à deux fois.
+Peu de gens pêchent dans les Maleterres de l'Est, et moins encore l'avouent. L'eau garde ce que la peste a laissé d'elle.
+La rivière de Hautebrande et son long rivage sud ont nourri les deux camps de chaque querelle livrée pour eux.
+Les Hinterlands gardent leurs lacs en hauteur, parmi les arbres, là où les nains Marteaux-hardis pêchent à dos de griffon quand ils pensent que personne ne les voit.
+Les lacs de Dun Morogh sont cerclés de glace presque toute l'année. Un nain y perce un trou, s'assied avec une pinte et appelle ça une bonne journée, peu importe ce qui mord.
+La gorge des Vents brûlants a de la lave là où d'autres terres ont des rivières. Apportez plutôt de quoi boire.
+Les Steppes ardentes ne sont que cendres et braises. Si l'eau d'ici vous donne quoi que ce soit, ce sera chaud.
+Tous les enfants d'Elwynn apprennent à pêcher au lac de Cristal ou au lac du Cairn. Le menu fretin s'y joue d'eux depuis des générations.
+Le défilé de Deuillevent a peu d'eau et encore moins d'hospitalité. Ce qui se trouve dans les mares sous Karazhan, mieux vaut l'y laisser.
+La rivière qui borde le bois de la Pénombre est noire à toute heure. L'obscurité ne semble pas gêner les poissons. Les pêcheurs, si.
+Le Loch est la fierté du Loch Modan, retenu par le grand barrage de Formepierre. Les nains mesurent toute histoire de pêche à son aune, et c'est en général le Loch qui gagne.
+Le lac Placide, dans les Carmines, est joli comme un tableau, et l'on y pêche depuis chaque ponton de Comté-du-Lac. Les habitants connaissent tous les bons coins et ne vous en indiqueront aucun.
+De ses rivières de jungle à son cap sauvage au sud, Strangleronce possède les eaux les plus riches du continent. Les pêcheurs de Baie-du-Butin en font un tournoi, et presque tous trichent.
+Le marais des Chagrins, c'est de l'eau verte sous des arbres verts. Les poissons ont un goût de vase, et les gens du coin les aiment ainsi.
+Les champs de la marche de l'Ouest ont dépéri, mais pas sa côte. Ceux qui sont restés vivent de ce long rivage gris.
+Les Paluns portent bien leur nom. Les quais de Port-Menethil sont l'endroit le plus sec pour y pêcher, et les crocilisques le savent.
+Dans les canaux de Hurlevent pêchent des enfants, des retraités et au moins un membre de la noblesse déguisé. Personne ne demande ce qu'il y a d'autre dans les canaux.
+La Caverne lugubre abrite le seul bassin tranquille de Forgefer. De vieux nains y pêchent des heures durant sans jamais dire un mot.
+Les canaux de Fossoyeuse charrient un vert qui ne doit rien aux algues. Les Réprouvés qui y pêchent ne le font pas pour le dîner.
+Le premier poisson que la plupart des pêcheurs remontent, et assez éclatant pour qu'ils s'en souviennent.
+Luisant, vif et commun le long de toutes les côtes chaudes. Grillé, il vaut mieux que son nom ne le laisse croire.
+Tout en gueule, et jamais plus heureux que dans une eau que vous ne boiriez pas.
+Petit, plein de dents et sans peur. On raconte qu'un banc entier a un jour chassé un ours hors du Loch.
+Un éclair de couleur sous le ressac. Quand il mord à la ligne, les marins y voient un gage de chance pour la traversée.
+Un patient fouilleur de fond, aux moustaches dignes d'un ancien chez les nains.
+Personne n'en mange deux fois. Les alchimistes achètent tout ce qu'ils peuvent en trouver.
+Ses nageoires rougeoient comme des braises sous la cendre, et l'huile qu'on en tire brûle presque aussi bien.
+Une armure digne d'un petit bouclier. La chair qu'elle protège vaut la peine qu'on se donne.
+Quelque chose dans l'eau, près des cavernes des Lamentations, l'a changé. En manger pourrait bien vous changer aussi, pour un temps.
+Les gens du fleuve disent qu'en faire un repas éclaircit l'esprit. C'est de remonter le courant que lui vient sa sagesse.
+Plus d'âge, de taille et de sagesse que dans le reste de la famille, ce qui ne lui a pas évité votre hameçon.
+Un rude adversaire venu des mers chaudes du sud, et un classique de toutes les ardoises de taverne, de Baie-du-Butin à Gadgetzan.
+Son front brille comme du vrai mithril. Plus d'un mineur a voulu passer la bête à la fonderie.
+Ses écailles, bouillies, donnent une huile qui rend la peau dure comme le roc. Sa préférence va à la nuit.
+Un poli de cuirasse de parade, et presque le même poids.
+Il ne s'approche des côtes qu'aux mois froids, et les cuisiniers qui le connaissent l'attendent toute l'année.
+Sa saison, ce sont les jours longs. Sur la côte, on règle le calendrier sur son passage.
+À tenir par le milieu, et une seule fois.
+Un poisson de rivière des contrées sauvages, aux ouïes aussi rouges que les peintures de guerre d'un troll.
+Il se nourrit une fois la nuit tombée. En soupe, il calme les nerfs des lanceurs de sorts.
+Il se nourrit de jour, tout le contraire du lutjan nocturne ou presque, et partage pourtant les mêmes eaux.
+Pas un poisson à proprement parler. Il n'est pas d'accord pour se faire prendre et vous le fera savoir.
+Pâle comme la glace des rivières, venu des lacs froids et limpides du nord.
+Il vous faudra les deux mains, et peut-être un ami.
+%.1f lb
+Nouveau dans votre journal de pêche : %s, %s.
+Nouveau dans votre journal de pêche : %s.
+Votre plus gros %s à ce jour : %s (avant : %s).
+Journal de pêche
+chaque prise est notée dans votre journal de pêche: combien de chaque espèce, où vous l'avez sortie la première fois, et un poids inventé pour le plaisir avec votre record pour chacune (/cchud journal l'ouvre)
+Appât %s
+Pas d'appât : appuyez deux fois sur %s pour %s
+Pas d'appât
+Pris %d
+Échappés %d
+nouveau !
+record !
+Interface de pêche
+avec une canne à pêche en main: les poissons de l'eau où vous vous tenez (ceux que vous n'avez pas encore sortis ici restent cachés), votre compétence de pêche et ce qu'ajoute votre appât, combien vous en avez pris et combien se sont échappés, combien de temps dure votre appât, et vos dernières prises
+Un curieux : +%d%%
+Maintenez %s : le leurre coule
+%d d'affilée
+Un jeu pendant que le bouchon est à l'eau
+un petit bout d'eau à côté de l'interface de pêche: maintenez une gâchette pour faire couler votre leurre et relâchez pour qu'il remonte, et gardez-le près de l'ombre du poisson. Mieux vous jouez, plus le poids inventé de votre prochaine prise est élevé. Il ne prend aucun bouton et ne touche jamais à votre lancer ni à votre prise
+%d pris, %d espèces, %d échappés
+Le plus lourd : %s, %s
+Poissons
+Eaux
+Rien de pris pour l'instant. Emportez une canne au bord de l'eau.
+Pris : %d
+Le plus lourd : %s, à %s
+Première prise : %s
+Pris ici : %d
+Espèces trouvées ici : %d
+Choisir
+Fermer
+ouvrir ou fermer votre journal de pêche: chaque espèce que vous avez prise, la plus lourde de chacune, et les eaux où vous avez pêché
+Le chat s'estompe au calme
+le texte du chat s'estompe après quelques secondes sans nouveau message
+Secondes avant que le chat s'estompe
+durée d'affichage du texte du chat avant qu'il s'estompe
+Coordonnées sur la carte
+vos coordonnées sous la carte du monde
+%d messages masqués comme spam depuis votre connexion.
+Icône de classe et niveau dans le chat
+l'icône de classe et le niveau d'un joueur entre crochets devant son nom, quand le jeu nous les fait connaître
+Taille du texte du chat
+la taille du texte dans les fenêtres de discussion, en proportion de la taille propre au jeu (le réglage du jeu reste tel quel)
+Masquer les vendeurs d'or et les annonces répétées
+les messages qui vendent de l'or ou des services avec une adresse web, et le même message répété par un joueur, sont masqués (jamais ceux de votre groupe, guilde ou amis)
+liste les messages du chat récemment masqués comme spam
+Les infobulles suivent le curseur.
+Les infobulles restent dans leur coin.
+Infobulles au curseur : oui / non
+Fond des infobulles
+à quel point le fond et la bordure des infobulles sont opaques: 100% est le verre sombre complet, 0% ne laisse que le texte
+Les infobulles suivent le curseur
+les infobulles s'ouvrent au curseur au lieu du coin de l'écran (en combat, elles restent dans le coin)
+Restyler les cadres du jeu
+infobulles, bonus, suivi de quêtes, minicarte, barre d'expérience, onglets du chat et barres de manette dans le style du HUD (l'interface à la souris garde celle du jeu)
+Taille de la barre d'expérience
+la taille des barres d'expérience et de réputation lorsqu'elles sont restylées, en pourcentage
+Infobulles
+infobulles en verre sombre, bordées de la couleur de la classe d'un joueur ou de la qualité d'un objet
+Barres manette
+les boutons de la manette avec un anneau fin sur un fond sombre à la place de l'habillage lourd
+Bonus
+vos icônes de bonus et d'affaiblissements rognées et bordées, leurs durées cerclées
+Suivi de quêtes
+les en-têtes du suivi de quêtes en verre sombre, ses lignes cerclées
+Minicarte
+un anneau fin et un halo doux autour de la minicarte à la place du bord doré
+Barre d'expérience
+les barres d'expérience et de réputation un peu plus petites, avec leurs propres couleurs
+Chat
+noms des onglets du chat cerclés et zone de saisie en verre sombre
+Les avis du jeu seront demandés de nouveau.
+Confirmer l'avis des fonctions expérimentales
+une fois l'avis des fonctions expérimentales du jeu accepté, il est accepté pour vous aux connexions suivantes
+oublier les avis acceptés, pour que le jeu les demande de nouveau
+vérification: %d sur %d réussies
+Rapports de débogage
+rassembler les rapports de dépannage tout seuls : à la connexion, et de nouveau au rechargement ou à la déconnexion (ils sont gardés dans les réglages enregistrés)
+Préréglage du HUD : %s, assorti à la caméra
+préréglage : %s
+Une disposition nommée '%s' a été ajoutée au mode Édition du jeu. Choisissez-la là pour l'utiliser (Menu du jeu > Mode Édition > Disposition).
+préréglage inconnu '%s'
+Pour une télé : texte plus grand sur le HUD et dans la discussion.
+Pour un moniteur : texte à sa taille normale.
+Nos cadres sont revenus à leur place de départ. Choisissez la disposition %s du jeu dans le mode Édition (Menu du jeu > Mode Édition > Disposition).
+Les préréglages fixent la distance de la caméra
+un préréglage amène aussi la caméra à la distance pour laquelle sa disposition a été conçue, une seule fois (zoomez librement ensuite)
+Action
+une vue à la troisième personne : fines barres verticales à côté de votre personnage, tous les effets activés ; hors combat, tout s'estompe
+Classique
+nos cadres là où WoW les a toujours placés, effets plus discrets, les barres de manette du jeu telles quelles
+Minimal
+seulement l'essentiel : les PNJ amicaux n'affichent leur barre (avec leur fonction) que lorsque vous les pointez, les visez ou les ciblez ; noms sans titres ; hors combat, vos barres restent en retrait (une santé basse s'affiche toujours)
+Monde ouvert
+un écran épuré pour explorer : des barres fines à côté de vous qui s'estompent au repos, des barres de nom sans barre de ressource, une discussion qui s'efface
+Aventure
+après les aventures en monde ouvert sur console : constantes vitales à côté de vous, une petite cible en haut au centre, villageois seulement quand vous les pointez, chat qui s'estompe vite
+Soulslike
+vos barres en haut à gauche, une grande barre de cible en bas au centre comme une barre de boss, chaque coup ressenti
+Tir
+barres verticales juste à droite du centre, près de votre visée, la cible tout en haut, retour de coup marqué
+Crossbar
+après les MMO joués à la manette : la cible et la focalisation en haut au centre, vos barres juste au-dessus des barres de manette, groupe à gauche, barres de nom complètes
+ARPG
+après les RPG d'action : la caméra loin, vos constantes vitales en bas à gauche, la cible en haut au centre, ennemis mineurs petits, chaque coup résonne
+Boussole
+après les RPG à la première personne : la caméra proche, vos barres en bas au centre, la cible sous le bord supérieur, villageois seulement quand vous les pointez
+Raid
+la disposition de WoW avec tout ce qu'il faut à un groupe : cadres de groupe et de raid, pourcentages de vie et niveaux sur les barres
+Suivre les préréglages de ControllerCam
+choisir un préréglage de caméra dans ControllerCam pour partout choisit aussi le préréglage du HUD assorti (la caméra garde sa propre distance)
+Moderne
+régler tout le HUD sur un préréglage : action, classic, minimal, openworld, adventure, soulslike, shooter, crossbar, arpg, compass, raid
+le cadre de la cible et les barres de nom compacts ou complets, les deux à la fois
+le cadre de la cible compact ou complet
+dimensionner le texte pour une télé à l'autre bout de la pièce ou pour un moniteur à portée de bras
+remettre nos cadres à leur place de départ, pour la disposition Moderne ou Classique du jeu
+Toute votre configuration (HUD, caméra et disposition du jeu) : copiez cette ligne (Ctrl+C) pour la garder ou la partager.
+Collez une ligne de réglages du HUD (Ctrl+V) et validez.
+Cette ligne est abîmée : copiez-la de nouveau, en entier.
+Cette ligne vient d'une version plus récente : mettez l'addon à jour.
+Ce n'est pas une ligne de réglages du HUD.
+Réglages importés: %d repris, %d ignorés.
+La configuration de la caméra a été reprise aussi.
+La configuration de la caméra est restée telle quelle.
+La disposition du jeu est maintenant '%s'.
+La disposition du jeu est restée telle quelle.
+vos réglages sous forme d'une ligne de texte, à garder ou partager
+reprend les réglages d'une ligne de texte créée par /cchud export
+Le HUD est actif tant que l'interface manette est utilisée. Ses options : Options > AddOns > ControllerCam > HUD, ou /cchud.
+Caméra seule : le HUD reste au repos et l'interface du jeu est comme avant. /cchud on l'active.
+Préparer aussi l'écran pour la manette ? Cela ajoute une disposition nommée CCHUD au mode Édition du jeu, à choisir là-bas : elle place les rangées de temps de recharge sous la cible, à l'écart des boutons de la manette. Vos propres dispositions sont conservées (/cchud setup le propose de nouveau).
+Préparer
+Pas maintenant
+ControllerCam est fourni avec une interface pour manette, le HUD : ses propres cadres d'unité, barres de nom, barre d'incantation et plus encore tant que l'interface manette est utilisée. La voulez-vous, ou la caméra seule ?
+Caméra + HUD
+Caméra seule
+Ce client ne permet pas aux addons de modifier la disposition.
+redemander : la caméra avec le HUD, ou la caméra seule
+proposer de nouveau la disposition d'écran faite pour le HUD (mode Édition du jeu)
+Affiché tant que l'interface manette est utilisée. Faites glisser nos cadres dans le mode Édition du jeu.
+Préréglages
+Dimensionné pour
+Télé
+Moniteur
+Icônes des boutons
+les icônes que le jeu affiche pour les boutons de votre manette: trouvées automatiquement pour la manette utilisée, ou le type que vous choisissez
+Réinitialiser la disposition du jeu
+Essayer
+Lancer la démo
+Afficher chaque effet de coup
+Lancer l'autotest
+Barres de manette : compactes / complètes
+Exporter les réglages
+Importer les réglages
+Cochez « Afficher les options avancées » sur la page principale pour accéder à tous les réglages.
+Modules
+Bascules rapides
+Général
+HUD
+Le panneau d'options n'est pas disponible dans ce client.
+Activé
+tout le HUD; désactivé rend ses propres cadres au jeu
+Aussi dans l'interface souris et clavier
+normalement, le HUD ne fonctionne que lorsque l'interface manette est utilisée
+Mettre de côté les cadres du jeu
+masquer les cadres du joueur, de la cible et de la focalisation du jeu tant que les nôtres sont affichés
+Fenêtre de discussion en haut à gauche
+déplacer la fenêtre de discussion en haut à gauche tant que le HUD fonctionne
+Barres verticales au repos
+la visibilité des barres verticales à pleine santé hors combat (0 les masque)
+Couleurs de classe
+colorer votre barre et celles des autres joueurs selon la classe
+Icônes de classe
+une icône de classe devant le nom d'un joueur sur la cible et la cible de la cible
+Menace sur le cadre de cible
+une icône de bouclier et une lueur sur le cadre de la cible : rouge tant qu'il vous attaque, rouge et jaune quand vous êtes sur le point de l'attirer, jaune et bleu quand vous le perdez, bleu quand il n'est pas sur vous
+Barres compactes partout
+le cadre de la cible et les barres de nom en style compact, un peu plus de la moitié de la largeur (chacun reste réglable à part ; les préréglages n'y touchent jamais)
+Cadre de cible compact
+le cadre de cible un peu plus de moitié moins large
+Couleurs de santé en combat
+en combat, les barres de santé passent du vert au jaune puis au rouge à mesure que la santé baisse
+Ombre derrière le texte
+une bande sombre et douce derrière le texte de la cible, pour qu'il reste lisible
+Taille du texte
+taille du texte sur nos cadres
+Taille des cadres
+taille de nos cadres d'unité
+Vos barres en combat
+la visibilité de vos barres, familier et focalisation en combat jusqu'à ce que quelque chose demande de l'attention
+Complètes sous la santé de
+vos barres reviennent complètes quand votre santé passe sous cette valeur
+Complètes sous le mana de
+vos barres reviennent complètes quand votre mana passe sous cette valeur
+Barre du joueur au repos
+visibilité de la barre du joueur avec la vie au maximum ou hors combat (0 la masque)
+Aide marchand et banque
+le bouton Vendre la camelote du marchand demande quoi vendre; déplacement rapide chez le marchand et à la banque
+Afficher les options avancées
+tous les réglages, pas seulement les principaux
+Cadre du joueur
+notre barre de joueur, en haut à gauche
+Cadre de la cible
+notre barre de cible, en haut au centre
+Barre du familier
+une petite barre de familier sous la barre du joueur
+Cadre de focalisation
+notre cadre de focalisation
+fines barres verticales de vie et de puissance à côté de votre personnage, pour une vue à la troisième personne (à la place de la barre du joueur)
+Vendre la camelote à l'ouverture d'un marchand
+vendre la camelote selon vos règles dès l'ouverture d'un marchand
+Les armes et armures blanches sont de la camelote
+compter les armes et armures blanches comme camelote (jamais les outils, cannes à pêche, équipements avec un effet Utiliser ou ce qui pourrait être une amélioration ; toujours demandé d'abord)
+Déposer à l'ouverture de la banque
+les objets marqués pour la banque et, si activé, ce que la banque contient déjà, y vont d'eux-mêmes
+l'option du jeu; notre petit cadre la suit
+Gestionnaire de temps de recharge
+le Gestionnaire de temps de recharge du jeu
+Affichage des ressources personnelles
+votre santé et votre ressource sous votre personnage
+La banque prend les composants toute seule
+l'option du jeu pour la banque
+Infobulle au début d'un buff
+l'option du jeu : l'infobulle d'un buff s'affiche un instant quand il est appliqué (interface manette)
+Couleurs de classe pour les noms dans le chat
+le réglage du chat du jeu pour tous les types de chat à la fois : le nom d'un joueur dans la couleur de sa classe
+ouvrir le panneau d'options (Options > AddOns > ControllerCam HUD)
+Cadres
+Effets
+Style
+Quêtes, discussion et carte
+Sacs, banque et marchand
+Pêche
+Options natives
+%s  |  Interface manette: %s  |  en cours: %s
+joueur %s, cible %s, familier %s, focalisation %s  |  cadres du jeu mis de côté: %s  |  discussion déplacée: %s
+options natives: cible de la cible %s, Gestionnaire de temps de recharge %s, ressources personnelles %s
+taille du texte %d%%  |  ombre du texte: %s
+aide marchand et banque: %s  |  vente auto: %s  |  équipement blanc = camelote: %s
+visibilité au repos %d%%  |  échelle %d%%  |  couleurs de classe: %s
+Un HUD minimaliste de jeu d'action pour l'interface manette.
+activé
+désactivé: les cadres du jeu sont de retour
+utiliser aussi dans l'interface souris et clavier: %s
+cadres du jeu mis de côté: %s
+discussion déplacée en haut à gauche: %s
+couleurs de classe: %s
+Ce client n'a pas cette option.
+%s: %s (l'option propre au jeu)
+Le jeu n'a pas accepté cela pour l'instant.
+aide marchand et banque: %s
+vente auto: %s
+équipement blanc = camelote: %s
+L'aide marchand est désactivée.
+utilisation: /cchud sell [junk | white | green | blue]
+déposer les objets marqués à l'ouverture de la banque: %s
+utilisation: /cchud junk <item> (Maj-clic sur l'objet pour l'insérer dans la ligne de discussion)
+objet %d: camelote, vendu avec le reste
+objet %d: conservé, jamais vendu
+objet %d: pour la banque
+ombre du texte: %s
+utilisation : /cchud text <80-250>
+taille du texte %d%%
+démo arrêtée
+Le HUD ne fonctionne pas.
+Démo en cours: un combat fictif en boucle. Tapez /cchud demo à nouveau pour l'arrêter.
+utilisation: /cchud idle <0-100>
+visibilité au repos %d%%
+utilisation: /cchud scale <50-200>
+échelle %d%%
+Faites glisser les cadres, puis tapez /cchud lock.
+cadres verrouillés
+Tout est revenu comme au départ : réglages, cadres et disposition d'écran (vos marques de vendeur et l'historique des prix sont conservés).
+les cadres sont revenus à leur position initiale
+commande inconnue '%s'. Tapez /cchud help
+Liste des erreurs vidée.
+Aucune erreur enregistrée.
+%d erreurs enregistrées (la plus récente en dernier). /cchud errors clear vide la liste.
+afficher l'état
+activer ou désactiver le HUD (désactivé rend ses propres cadres au jeu)
+utiliser aussi le HUD dans l'interface souris et clavier
+utiliser notre cadre pour cela, ou celui du jeu
+fines barres verticales de santé et d'énergie à côté de votre personnage
+cible de la cible (l'option propre au jeu, aussi dans ses menus)
+le Gestionnaire de temps de recharge du jeu (l'option propre au jeu)
+votre santé et votre ressource sous votre personnage (l'option propre au jeu)
+l'infobulle qui s'affiche quand un buff commence (l'option propre au jeu)
+garder visibles les cadres du joueur et de la cible du jeu (activé) ou les mettre de côté (désactivé)
+chez un marchand: choisir quoi vendre (aussi: sell junk, sell white | green | blue)
+compter les armes et armures blanches comme camelote
+marquer un objet: toujours vendu, jamais vendu, ou pour la banque (Maj-clic pour l'insérer dans la ligne de discussion)
+à la banque : déposer ce que la banque contient déjà, et tout ce qui est marqué pour elle
+déposer dès l'ouverture de la banque
+la banque prend les composants toute seule (l'option propre au jeu)
+taille du texte, en pourcentage (150 se lit bien sur une télévision)
+visibilité de la barre du joueur quand rien ne se passe (0 la masque)
+taille des cadres, en pourcentage
+faites glisser les cadres où vous voulez (le mode Édition du jeu le permet aussi)
+remettre les cadres à leur position initiale
+lancer un court combat fictif pour voir comment réagissent les cadres (encore pour arrêter)
+comparer ce qui est à l'écran avec les réglages (check liste chaque ligne)
+enregistrer une description de l'interface manette de ce client (pour le dépannage)
+afficher cette liste
+les dernières erreurs du HUD, même après un rechargement (pour les signaler)
