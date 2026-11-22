@@ -596,7 +596,7 @@ ns.RegisterSetting({
 ns.RegisterSetting({
     key = "questParty", kind = "boolean", default = true, command = "questparty", section = "Quests",
     label = "Quest progress to your party",
-    tip = "in a party (not a raid) the same lines go to party chat, for the others to see, a moment apart; you see them there too",
+    tip = "in a party (not a raid) a quest ready to hand in goes to party chat, marked CCHUD, and Finishing up when the others are done before you; the steps stay in your own chat",
 })
 
 Q.progress, Q.told = {}, 0
@@ -662,10 +662,11 @@ local function Progress()
     return now, order
 end
 
--- What changed since the last look, as lines for chat
+-- What changed since the last look, as lines for chat (Q.doneLines: which of them finish a quest, and its id)
 function Q.Changes()
     local now, order = Progress()
     local lines = {}
+    Q.doneLines = {}
     for _, id in ipairs(order) do
         local cur, old = now[id], Q.progress[id]
         if old then
@@ -682,6 +683,7 @@ function Q.Changes()
             end
             if cur.done and not old.done and cur.title then
                 lines[#lines + 1] = "|cffffd24a" .. L["%s: ready to hand in"]:format(cur.title) .. "|r"
+                Q.doneLines[lines[#lines]] = id                   -- (what goes to the party by default)
             end
         end
     end
@@ -691,22 +693,67 @@ end
 
 local progressEvents = CreateFrame("Frame")
 local progressDirty = false
+---------------------------------------------------------------------------
+-- To the party: by default only a quest finished ("CCHUD: Bloody Bone Necklaces: ready to hand in"), every
+-- step only with Q's "every step" option; each line marked as ours. The steps stay in your own chat. And when
+-- someone in the party has finished a quest you are still on (their HUD tells yours, quietly, by an addon
+-- message), you say so once: "CCHUD: Finishing up [Bloody Bone Necklaces]."
+---------------------------------------------------------------------------
+ns.RegisterSetting({
+    key = "questPartyAll", kind = "boolean", default = false, command = "questpartyall", section = "Quests",
+    label = "Party: every step, not only the finished quest",
+    tip = "every step of your quests goes to party chat (Bloody Bone Necklaces: 4/25), not only a quest ready to hand in",
+})
+Q.PREFIX = "CCHUD"                       -- the addon's short name: before every party line, and its addon messages
+Q.doneLines, Q.finishing = {}, {}
+function Q.PartyLine(text) return Q.PREFIX .. ": " .. text end
+
+-- A quest of yours is finished: the party's HUDs are told (nothing shows in chat for that)
+function Q.TellDone(id)
+    local send = C_ChatInfo and C_ChatInfo.SendAddonMessage
+    if send and Q.InParty() then pcall(send, Q.PREFIX, "done:" .. tostring(id), "PARTY") end
+end
+
+-- Someone in the party finished a quest: if you are still on it, "Finishing up" (once a quest)
+function Q.TheyFinished(id, sender)
+    id = tonumber(id)
+    if not (id and ns.db.questParty and Q.InParty()) or Q.finishing[id] then return false end
+    local mine = Q.progress[id]
+    if not mine or mine.done or not mine.title then return false end
+    Q.finishing[id] = true
+    Q.ToParty(Q.PartyLine(L["Finishing up [%s]."]:format(mine.title)))
+    ns.Note("quests: %s finished %d before you: finishing up", tostring(sender), id)
+    return true
+end
+
 local function Tell()
     progressDirty = false
     if not Q.chatOn then return end
     local party = ns.db.questParty and Q.InParty()
     for _, line in ipairs(Q.Changes()) do
         Q.told = Q.told + 1
-        if party then
-            Q.ToParty(line)
+        local done = Q.doneLines[line]
+        if done then Q.TellDone(done) end
+        if party and (done or ns.db.questPartyAll) then
+            Q.ToParty(Q.PartyLine(line))
         elseif ns.db.questProgress then
             if not (ns.Chat and ns.Chat.Line and ns.Chat.Line("quest", line)) then ns.Say(line) end
         end
     end
 end
 Tell = ns.Protect(Tell)
-progressEvents:SetScript("OnEvent", ns.Protect(function(_, event, a)
+progressEvents:SetScript("OnEvent", ns.Protect(function(_, event, a, b, c, d)
+    if event == "CHAT_MSG_ADDON" then
+        if a ~= Q.PREFIX or c ~= "PARTY" or ns.IsSecret(b) or type(b) ~= "string" then return end
+        local me = UnitName and UnitName("player")
+        local who = type(d) == "string" and not ns.IsSecret(d) and d:match("^[^%-]+") or nil
+        if who and who == me then return end                       -- (our own message comes back too)
+        local id = b:match("^done:(%d+)$")
+        if id then Q.TheyFinished(id, who) end
+        return
+    end
     if event == "QUEST_REMOVED" or event == "QUEST_TURNED_IN" then
+        if type(a) == "number" then Q.finishing[a] = nil end
         if type(a) == "number" then Q.progress[a] = nil end
         return
     end
@@ -722,8 +769,11 @@ function Q:ProgressOn(on)
         self.progress = {}
         self.Changes()                      -- the log as it is now is the start: nothing of it is news
         for _, e in ipairs({ "QUEST_LOG_UPDATE", "QUEST_WATCH_UPDATE", "UNIT_QUEST_LOG_CHANGED", "QUEST_REMOVED",
-                             "QUEST_TURNED_IN" }) do
+                             "QUEST_TURNED_IN", "CHAT_MSG_ADDON" }) do
             pcall(progressEvents.RegisterEvent, progressEvents, e)
+        end
+        if C_ChatInfo and C_ChatInfo.RegisterAddonMessagePrefix then
+            pcall(C_ChatInfo.RegisterAddonMessagePrefix, Q.PREFIX)
         end
     else
         progressEvents:UnregisterAllEvents()

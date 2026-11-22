@@ -526,6 +526,7 @@ quédate quieto unos segundos en un campamento y la pantalla se vuelve película
 reproducir ahora la escena de la hoguera
 hecho
 %s: lista para entregar
+Terminando [%s].
 inicia una misión
 una de tus misiones
 lista para entregar
@@ -552,7 +553,9 @@ los objetivos de la lista de misiones dicen solo lo necesario, con un icono del 
 Progreso de misiones en el chat
 una línea breve en el chat cuando una misión avanza: Collares de hueso sangriento: 4/25, un objetivo cumplido, una misión lista para entregar
 Progreso de misiones a tu grupo
-en un grupo (no en una banda) las mismas líneas van al chat de grupo para que las vean los demás, con un momento entre ellas; tú también las ves allí
+en grupo (no en banda), una misión lista para entregar va al chat de grupo, marcada CCHUD, y «Terminando» cuando los demás acaban antes que tú; los pasos quedan en tu propio chat
+Grupo: cada paso, no solo la misión terminada
+cada paso de tus misiones va al chat de grupo (Collares de hueso sangriento: 4/25), no solo una misión lista para entregar
 Conservar lo que necesitan tus misiones
 un objeto que una misión de tu registro aún pide, o uno que inicia una misión que todavía puedes hacer, se marca como Misión: nunca se vende ni se subasta por ti
 decir un orden recomendado para tus misiones: entrega lo que está listo, luego lo más cercano que puedes hacer solo, luego el resto

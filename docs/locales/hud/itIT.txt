@@ -526,6 +526,7 @@ resta fermo qualche secondo in un accampamento e lo schermo diventa un film per 
 riproduci ora la scena del falò
 fatto
 %s: pronta da consegnare
+Sto finendo [%s].
 avvia una missione
 una tua missione
 pronta da consegnare
@@ -552,7 +553,9 @@ gli obiettivi nell'elenco delle missioni dicono solo il necessario, con un'icona
 Progressi delle missioni in chat
 una breve riga in chat quando una missione avanza: Collane d'osso insanguinate: 4/25, un obiettivo completato, una missione pronta da consegnare
 Progressi delle missioni al tuo gruppo
-in un gruppo (non in un'incursione) le stesse righe vanno nella chat di gruppo perché gli altri le vedano, a un attimo l'una dall'altra; le vedi lì anche tu
+in gruppo (non in incursione) una missione pronta da consegnare va nella chat di gruppo, segnata CCHUD, e «Sto finendo» quando gli altri finiscono prima di te; i passi restano nella tua chat
+Gruppo: ogni passo, non solo la missione finita
+ogni passo delle tue missioni va nella chat di gruppo (Collane d'osso insanguinate: 4/25), non solo una missione pronta da consegnare
 Tieni ciò che serve alle tue missioni
 un oggetto che una missione del tuo registro chiede ancora, o uno che avvia una missione che puoi ancora fare, è segnato come Missione: mai venduto né messo all'asta per te
 indica un ordine consigliato per le tue missioni: consegna ciò che è pronto, poi la più vicina che puoi fare da solo, poi il resto

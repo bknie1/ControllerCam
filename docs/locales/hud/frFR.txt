@@ -526,6 +526,7 @@ reste immobile quelques secondes dans un campement et l'écran devient un film p
 jouer la scène du feu de camp maintenant
 fait
 %s : prête à être rendue
+Je termine [%s].
 lance une quête
 une de vos quêtes
 prête à être rendue
@@ -552,7 +553,9 @@ les objectifs de la liste de quêtes ne disent que le nécessaire, avec une icô
 Progression des quêtes dans le chat
 une courte ligne dans le chat quand une quête avance : Colliers d'os sanglants : 4/25, un objectif rempli, une quête prête à être rendue
 Progression des quêtes à votre groupe
-en groupe (pas en raid), les mêmes lignes vont dans la discussion de groupe pour que les autres les voient, à un moment d'intervalle ; vous les y voyez aussi
+en groupe (pas en raid), une quête prête à rendre va dans le canal de groupe, marquée CCHUD, et « Je termine » quand les autres ont fini avant vous ; les étapes restent dans votre propre discussion
+Groupe : chaque étape, pas seulement la quête terminée
+chaque étape de vos quêtes va dans le canal de groupe (Colliers d'os sanglants : 4/25), pas seulement une quête prête à rendre
 Garder ce dont vos quêtes ont besoin
 un objet qu'une quête de votre journal demande encore, ou qui lance une quête que vous pouvez encore faire, est marqué Quête : jamais vendu ni mis aux enchères pour vous
 dire un ordre recommandé pour vos quêtes: rendre ce qui est prêt, puis la plus proche faisable seul, puis le reste

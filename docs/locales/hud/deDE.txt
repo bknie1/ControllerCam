@@ -526,6 +526,7 @@ sitz ein paar Sekunden still in einem Lager, und der Bildschirm wird für eine M
 die Lagerfeuerszene jetzt abspielen
 erledigt
 %s: bereit zur Abgabe
+Schließe noch [%s] ab.
 startet eine Quest
 eine deiner Quests
 bereit zur Abgabe
@@ -552,7 +553,9 @@ Ziele in der Questliste sagen nur das Nötige, mit einem Symbol für die Art dav
 Questfortschritt im Chat
 eine kurze Zeile im Chat, sobald eine Quest vorankommt: Blutige Knochenketten: 4/25, ein Ziel erledigt, eine Quest bereit zur Abgabe
 Questfortschritt an deine Gruppe
-in einer Gruppe (nicht im Schlachtzug) gehen dieselben Zeilen in den Gruppenchat, damit die anderen sie sehen, jeweils kurz nacheinander; du siehst sie dort auch
+in einer Gruppe (nicht im Schlachtzug) geht eine abgabebereite Quest in den Gruppenchat, mit CCHUD markiert, und „Schließe noch … ab“, wenn die anderen vor dir fertig sind; die einzelnen Schritte bleiben in deinem eigenen Chat
+Gruppe: jeder Schritt, nicht nur die fertige Quest
+jeder Schritt deiner Quests geht in den Gruppenchat (Blutige Knochenketten: 4/25), nicht nur eine abgabebereite Quest
 Behalten, was deine Quests brauchen
 ein Gegenstand, den eine Quest in deinem Log noch verlangt, oder einer, der eine Quest startet, die du noch machen kannst, wird als Quest markiert: nie für dich verkauft oder versteigert
 eine empfohlene Reihenfolge für deine Quests nennen: abgeben, was fertig ist, dann das Nächste, das du allein schaffst, dann der Rest

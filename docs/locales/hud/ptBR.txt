@@ -526,6 +526,7 @@ fique parado alguns segundos num acampamento e a tela vira filme por um minuto: 
 reproduzir a cena da fogueira agora
 feito
 %s: pronta para entregar
+Terminando [%s].
 inicia uma missão
 uma missão sua
 pronta para entregar
@@ -552,7 +553,9 @@ os objetivos na lista de missões dizem só o necessário, com um ícone do tipo
 Progresso das missões no chat
 uma linha curta no chat quando uma missão avança: Colares de Osso Sangrento: 4/25, um objetivo cumprido, uma missão pronta para entregar
 Progresso das missões para o seu grupo
-em um grupo (não em uma raide) as mesmas linhas vão para o bate-papo do grupo para os outros verem, com um instante entre elas; você também as vê lá
+em grupo (não em raide), uma missão pronta para entregar vai para o chat do grupo, marcada CCHUD, e "Terminando" quando os outros acabam antes de você; os passos ficam no seu próprio chat
+Grupo: cada passo, não só a missão concluída
+cada passo das suas missões vai para o chat do grupo (Colares de Osso Sangrento: 4/25), não só uma missão pronta para entregar
 Guardar o que suas missões precisam
 um item que uma missão do seu registro ainda pede, ou um que inicia uma missão que você ainda pode fazer, é marcado como Missão: nunca vendido nem leiloado por você
 dizer uma ordem recomendada para suas missões: entregue o que está pronto, depois a mais próxima que dá para fazer sozinho, depois o resto

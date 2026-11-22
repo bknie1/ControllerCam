@@ -11649,23 +11649,49 @@ class QuestProgress(unittest.TestCase):
         e.mock.units.party1 = e.lua.table(name="Remy", health=500, healthMax=500, level=25)
         return e
 
-    def test_in_a_party_the_lines_go_to_party_chat(self):
+    def test_in_a_party_only_a_finished_quest_goes_to_party_chat(self):
         e = self.party(self.make())
-        self.assertEqual(self.step(e, 1, 1, numFulfilled=4, text="Bloody Bone Necklace: 4/25"), [])   # not in yours
-        self.assertEqual(list(e.mock.partySaid.values()), ["PARTY: Bloody Bone Necklace: 4/25"])
-        e.mock.advance(1.5)
-        # several at once: without the colours, one each second
+        self.assertEqual(self.step(e, 1, 1, numFulfilled=4, text="Bloody Bone Necklace: 4/25"),
+                         ["[Q] Bloody Bone Necklace: 4/25"])                 # the steps stay yours
+        self.assertEqual(list(e.mock.partySaid.values()), [])
         e.mock.objectives[1][1].numFulfilled = 25
         e.mock.objectives[1][1].text = "Bloody Bone Necklace: 25/25"
         e.mock.objectives[1][1].finished = True
         e.mock.ready[1] = True
         e.mock.fire("QUEST_LOG_UPDATE")
         e.mock.advance(0.3)
-        self.assertEqual(list(e.mock.partySaid.values())[1:], ["PARTY: Bloody Bone Necklace: 25/25 done"])
-        e.mock.advance(1.1)
-        self.assertEqual(list(e.mock.partySaid.values())[2:], ["PARTY: Bloody Bones: ready to hand in"])
+        self.assertEqual(list(e.mock.partySaid.values()), ["PARTY: CCHUD: Bloody Bones: ready to hand in"])
         self.assertTrue(all("|" not in t for t in e.mock.partySaid.values()))
-        self.assertIn("to party true (3 sent, in a party now true)", e.ns.Quests.Describe())
+        self.assertIn("to party true (1 sent, in a party now true)", e.ns.Quests.Describe())
+        e.mock.advance(1.5)
+        e.cmd("questpartyall on")                                    # every step, when wanted
+        self.assertEqual(self.step(e, 2, 1, finished=True), [])
+        self.assertEqual(list(e.mock.partySaid.values())[1:], ["PARTY: CCHUD: Find the lost camp: done"])
+        self.assertEqual(e.errors(), [])
+
+    def test_finishing_up_when_the_party_is_done_before_you(self):
+        e = self.party(self.make())
+        e.lua.eval("""function(mock)
+            mock.addonSent = {}
+            C_ChatInfo = C_ChatInfo or {}
+            C_ChatInfo.RegisterAddonMessagePrefix = function() return true end
+            C_ChatInfo.SendAddonMessage = function(prefix, text, kind) mock.addonSent[#mock.addonSent + 1] = prefix .. " " .. text .. " " .. kind end
+        end""")(e.mock)
+        e.mock.fire("CHAT_MSG_ADDON", "CCHUD", "done:1", "PARTY", "Remy-Forever")    # Remy has finished it
+        e.mock.advance(0.2)
+        self.assertEqual(list(e.mock.partySaid.values()), ["PARTY: CCHUD: Finishing up [Bloody Bones]."])
+        e.mock.fire("CHAT_MSG_ADDON", "CCHUD", "done:1", "PARTY", "Kel-Forever")     # said once only
+        e.mock.advance(1.5)
+        self.assertEqual(len(list(e.mock.partySaid.values())), 1)
+        e.mock.fire("CHAT_MSG_ADDON", "CCHUD", "done:99", "PARTY", "Remy-Forever")   # one you do not have: nothing
+        e.mock.advance(1.5)
+        self.assertEqual(len(list(e.mock.partySaid.values())), 1)
+        e.mock.objectives[1][1].numFulfilled = 25
+        e.mock.objectives[1][1].finished = True
+        e.mock.ready[1] = True
+        e.mock.fire("QUEST_LOG_UPDATE")
+        e.mock.advance(0.3)
+        self.assertIn("CCHUD done:1 PARTY", list(e.mock.addonSent.values()))         # yours finished: theirs are told
         self.assertEqual(e.errors(), [])
 
     def test_alone_in_a_raid_or_switched_off_it_stays_yours(self):
@@ -11678,12 +11704,9 @@ class QuestProgress(unittest.TestCase):
         self.assertEqual(self.step(e, 1, 1, numFulfilled=5, text="Bloody Bone Necklace: 5/25"),
                          ["[Q] Bloody Bone Necklace: 5/25"])
         e.mock.units.raid1 = None
-        e.cmd("questchat off")                                     # your own lines off: the party still hears
+        e.cmd("questchat off")                                     # your own lines off: a step says nothing
         self.assertEqual(self.step(e, 1, 1, numFulfilled=6, text="Bloody Bone Necklace: 6/25"), [])
-        self.assertEqual(list(e.mock.partySaid.values()), ["PARTY: Bloody Bone Necklace: 6/25"])
-        e.mock.units.party1 = None                                 # alone again, and your lines are off: nothing
-        self.assertEqual(self.step(e, 1, 1, numFulfilled=7, text="Bloody Bone Necklace: 7/25"), [])
-        self.assertEqual(len(list(e.mock.partySaid.values())), 1)
+        self.assertEqual(list(e.mock.partySaid.values()), [])
         self.assertEqual(e.errors(), [])
 
 class LongFrames(unittest.TestCase):

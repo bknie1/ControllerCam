@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.4.2
+
+ControllerCam: HUD
+- Quest progress to your party: by default only a quest ready to hand in goes to party chat, each line marked as the HUD's (`CCHUD: Bloody Bones: ready to hand in`); the steps stay in your own chat. Every step goes to the party only with **Party: every step, not only the finished quest** (`/cchud questpartyall`).
+- Finishing up: when someone in your party has finished a quest you are still on (their HUD tells yours by a quiet addon message, nothing in chat), you say so once: `CCHUD: Finishing up [Bloody Bones].`
+
 ## 1.4.1
 
 The CCHUD stack

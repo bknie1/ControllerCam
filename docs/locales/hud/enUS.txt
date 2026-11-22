@@ -526,6 +526,7 @@ sit still at a camp for a few seconds and the screen turns to film for a minute:
 play the campfire scene now
 done
 %s: ready to hand in
+Finishing up [%s].
 starts a quest
 a quest of yours
 ready to hand in
@@ -552,7 +553,9 @@ objectives in the quest list say only what is needed, with an icon for the kind 
 Quest progress in chat
 a short line in chat as a quest moves on: Bloody Bone Necklaces: 4/25, an objective done, a quest ready to hand in
 Quest progress to your party
-in a party (not a raid) the same lines go to party chat, for the others to see, a moment apart; you see them there too
+in a party (not a raid) a quest ready to hand in goes to party chat, marked CCHUD, and Finishing up when the others are done before you; the steps stay in your own chat
+Party: every step, not only the finished quest
+every step of your quests goes to party chat (Bloody Bone Necklaces: 4/25), not only a quest ready to hand in
 Keep what your quests need
 an item a quest in your log still asks for, or one that starts a quest you can still do, is marked Quest: never sold or put up for auction for you
 say a recommended order for your quests: hand in what is ready, then the nearest you can do alone, then the rest
