@@ -541,6 +541,8 @@ Quest list: nearest first
 keep the quest list in order of distance, the nearest quest at the top
 Quest list: recommended order
 keep the quest list in a recommended order: ready to hand in first, then what you can do on your own nearest first, then quests above your level, group quests while you are alone, and grey quests last
+Focus the nearest quest
+the quest the game points you to is always the nearest one in your list, as you travel; one you focus yourself is left alone for ten minutes
 Quest list: short objectives
 objectives in the quest list say only what is needed, with an icon for the kind in front: a skull and 0/1 Captain Dreadrise, not 0/1 Captain Dreadrise slain
 Quest progress in chat
@@ -771,6 +773,21 @@ on a flight, where to and how long is said in chat, and a bar at the top of the 
 Flights: your mount along the bar
 a gryphon, a wind rider or a bat (whichever the flight master gave you) glides along the flight bar towards where you land
 list the flight routes whose times are known
+Grounded! +%d
+Into the clouds: the run ends
+%d flight gold
+%s flap
+%s net
+%s high altitude
+%s: back to the game (%d flight gold)
+%s: a game on the way
+The flight game is off: /cchud flightgame on
+The flight game is played on a flight.
+Not in a fight.
+Flight game: play / high altitude
+Flights: a game on the way
+on a flight a small game is offered under the flight bar, and one button starts it (only that button is taken until you do): flap your mount up through the clouds and net the riders coming the other way, grounding them for flight gold. The same button again is high altitude: the game is put away and the buttons are the game's again. Never in a fight, gone on landing
+on a flight: start the flight game, or take it to high altitude and back
 A flight is a good moment for it.
 You have played for %s.
 Time for a sip of water

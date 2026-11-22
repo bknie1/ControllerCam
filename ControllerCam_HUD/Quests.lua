@@ -365,11 +365,78 @@ function Q:Order(quests)
     return true
 end
 
+---------------------------------------------------------------------------
+-- The focused quest (the one the game points you to). Tracking a quest again drops the game's focus, so it is
+-- put back after every change we make to the list: yours stays yours. With "Focus the nearest quest", the
+-- nearest one in the list is focused as you travel; but a quest you focus yourself is left alone for a while
+-- (Q.FOCUS_HOLD), and only then does the nearest take over again.
+---------------------------------------------------------------------------
+ns.RegisterSetting({
+    key = "questFocusNear", kind = "boolean", default = false, command = "questfocus", section = "Quests",
+    label = "Focus the nearest quest",
+    tip = "the quest the game points you to is always the nearest one in your list, as you travel; one you focus yourself is left alone for ten minutes",
+})
+Q.FOCUS_HOLD = 600
+
+function Q.Focused()
+    local id
+    if C_SuperTrack and C_SuperTrack.GetSuperTrackedQuestID then
+        local ok, v = pcall(C_SuperTrack.GetSuperTrackedQuestID)
+        id = ok and v or nil
+    elseif GetSuperTrackedQuestID then
+        local ok, v = pcall(GetSuperTrackedQuestID)
+        id = ok and v or nil
+    end
+    if ns.IsSecret(id) or type(id) ~= "number" or id <= 0 then return nil end
+    return id
+end
+
+function Q.SetFocus(id)
+    if not id then return false end
+    local set = (C_SuperTrack and C_SuperTrack.SetSuperTrackedQuestID) or SetSuperTrackedQuestID
+    if not set then return false end
+    Q.focusMine = id
+    return pcall(set, id) and true or false
+end
+
+-- Runs fn (a change to what is tracked) and puts the focused quest back if the change dropped it
+local function KeepFocus(fn, ...)
+    local had = Q.Focused()
+    fn(...)
+    if had and Q.Focused() ~= had then
+        Q.SetFocus(had)
+        Q.focusKept = (Q.focusKept or 0) + 1
+    end
+end
+
+-- The nearest quest of the list, focused (unless you chose one yourself a little while ago)
+function Q:FocusNearest(quests)
+    local now, cur = GetTime(), Q.Focused()
+    if cur and cur ~= Q.focusMine then                 -- you focused this one yourself: yours for a while
+        Q.userFocusUntil = now + Q.FOCUS_HOLD
+        Q.focusMine = cur
+        ns.Note("quests: you focused %d yourself; left alone for %d s", cur, Q.FOCUS_HOLD)
+    end
+    if Q.userFocusUntil and now < Q.userFocusUntil then return false end
+    local best
+    for _, q in ipairs(quests) do
+        if Watched(q.id) then
+            Q.Look(q)
+            if q.far and (not best or q.far < best.far) then best = q end
+        end
+    end
+    if not best or best.id == cur then return false end
+    Q.SetFocus(best.id)
+    Q.focusedNear = (Q.focusedNear or 0) + 1
+    return true
+end
+
 function Q:Sync()
     local quests = Log()
     if #quests == 0 then return false end              -- the log is not loaded yet
-    if self.active then TrackOnly(quests, self:Choose(quests)) end
-    if self.ordering then self:Order(quests) end
+    if self.active then KeepFocus(TrackOnly, quests, self:Choose(quests)) end
+    if self.ordering then KeepFocus(self.Order, self, quests) end
+    if self.focusing then self:FocusNearest(quests) end
     return true
 end
 
@@ -887,7 +954,7 @@ local function Work()
         return
     end
     Q.held = nil
-    if Q.active or Q.ordering then
+    if Q.active or Q.ordering or Q.focusing then
         Q:Sync()
     elseif ns.db.questSaved then
         if Q:Restore() then events:UnregisterAllEvents() end
@@ -918,7 +985,7 @@ end))
 local since = 0
 events:SetScript("OnUpdate", ns.Protect(function(_, dt)
     if Q.held and not Q.Busy() then Later() end                  -- (held while the map was open)
-    if not (Q.ordering or (Q.active and (ns.db.questNear or 0) > 0)) then return end
+    if not (Q.ordering or Q.focusing or (Q.active and (ns.db.questNear or 0) > 0)) then return end
     since = since + dt
     if since < (Q.slowPut and Q.EVERY_SLOW or Q.EVERY) then return end
     since = 0
@@ -940,7 +1007,9 @@ function Q:Apply(run)
     if self.shortOn and not short then self:Lengthen() end
     self.shortOn = short
     local manage, order = can and Managing(db), can and Ordering(db)
-    if manage or order then
+    local focus = can and db.questFocusNear and true or false
+    self.focusing = focus
+    if manage or order or focus then
         if not self.listening then
             self.listening = true
             for _, e in ipairs(EVENTS) do pcall(events.RegisterEvent, events, e) end
@@ -960,7 +1029,7 @@ function Q:Apply(run)
         end
     end
     self.active, self.ordering = false, order
-    if not order and self.listening then
+    if not (order or focus) and self.listening then
         self.listening = false
         events:UnregisterAllEvents()
     end
@@ -969,7 +1038,7 @@ function Q:Apply(run)
         pcall(events.RegisterEvent, events, "QUEST_LOG_UPDATE")
         pcall(events.RegisterEvent, events, "PLAYER_ENTERING_WORLD")
     end
-    if order then self:Sync() end
+    if order or focus then self:Sync() end
 end
 
 function Q.Describe()

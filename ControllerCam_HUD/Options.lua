@@ -124,7 +124,7 @@ for _, label in ipairs({
     "A game while the float is out", "Party nameplates in dungeons: names only", "Party nameplates in dungeons: hidden",
     "Seconds before chat fades", "Quest list: short objectives", "Gamepad bars put away while fishing",
     "Reduce animations", "Catches and camp buffs across the screen",
-    "Quest progress in chat", "Flights: time and countdown", "Reminder to drink water", "Water reminder every (minutes)",
+    "Quest progress in chat", "Flights: time and countdown", "Flights: a game on the way", "Reminder to drink water", "Water reminder every (minutes)",
     "Hide repeated guild recruitment",
     "Keep what your quests need",
     "Quest progress to your party",

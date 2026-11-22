@@ -541,6 +541,8 @@ Elenco missioni: prima la più vicina
 mantieni l'elenco delle missioni in ordine di distanza, con la più vicina in cima
 Elenco missioni: ordine consigliato
 mantieni l'elenco delle missioni in un ordine consigliato: prima quelle pronte da consegnare, poi ciò che puoi fare da solo partendo dalla più vicina, poi le missioni sopra il tuo livello, quelle di gruppo finché sei da solo, e le grigie per ultime
+Segui la missione più vicina
+la missione che il gioco ti indica è sempre la più vicina della tua lista mentre viaggi; una che segui tu resta com'è per dieci minuti
 Elenco missioni: obiettivi brevi
 gli obiettivi nell'elenco delle missioni dicono solo il necessario, con un'icona del tipo davanti: un teschio e 0/1 Capitano Terrorsorto, non 0/1 Capitano Terrorsorto ucciso
 Progressi delle missioni in chat
@@ -771,6 +773,21 @@ in volo, la destinazione e la durata vengono dette in chat, e una barra in cima 
 Voli: la tua cavalcatura lungo la barra
 un grifone, un cavaliere del vento o un pipistrello (quello che ti ha dato il maestro di volo) plana lungo la barra del volo verso dove atterri
 elenca le rotte di volo di cui si conosce la durata
+A terra! +%d
+Tra le nuvole: la serie finisce
+%d oro di volo
+%s battere le ali
+%s rete
+%s alta quota
+%s: torna al gioco (%d oro di volo)
+%s: un gioco durante il viaggio
+Il gioco di volo è disattivato: /cchud flightgame on
+Il gioco di volo si gioca durante un volo.
+Non in combattimento.
+Gioco di volo: gioca / alta quota
+Voli: un gioco durante il viaggio
+in volo viene proposto un piccolo gioco sotto la barra di volo, e un pulsante lo avvia (solo quel pulsante è occupato finché non lo premi): fai battere le ali alla tua cavalcatura tra le nuvole e cattura con la rete i cavalieri che arrivano di fronte, facendoli atterrare in cambio di oro di volo. Lo stesso pulsante di nuovo è alta quota: il gioco viene messo via e i pulsanti tornano al gioco. Mai in combattimento, sparisce all'atterraggio
+in volo: avvia il gioco di volo, o portalo in alta quota e ritorno
 Un volo è un buon momento per farlo.
 Stai giocando da %s.
 È ora di un sorso d'acqua

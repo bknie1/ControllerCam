@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.4.0
+
+ControllerCam: HUD
+- Big moments leave small crits out: a crit for well under what your crits usually do (a seal's proc beside a Holy Strike, a dot ticking) neither starts a burst nor joins one. Your usual crit is learned as you fight (hits and heals each their own); a crit whose amount the game keeps to itself still counts.
+- Fixed: your focused quest (the one the game points you to) was dropped whenever the quest list was put in order, which happened right after the map closed. It is now put back after every change to the list: yours stays yours.
+- Focus the nearest quest (switch: **Focus the nearest quest**, `/cchud questfocus`, off by default): the quest the game points you to is always the nearest one in your list, as you travel. A quest you focus yourself is left alone for ten minutes before the nearest takes over again.
+- A game on the way (new; needs a full restart of the game, not /reload): on a flight, a line under the flight bar offers a small game, and only Y is taken until you start it. Your mount flies through a lane of clouds: A flaps it up and it sinks again on its own, with wide gaps and slow clouds. X fires a net at the riders coming the other way (the other side's peoples on their mounts, with the game's own race portraits); a rider it catches is grounded, never slain, and floats down under a parachute. Each catch is worth flight gold, more for a run without bumping into a cloud; a cloud only fogs the net gun for a moment. Y again is high altitude: the game is put away, the flight bar stays, and A and X are the game's again. A fight or the landing gives every button back at once. Off with `/cchud flightgame off`; `/cchud flightplay` or a key binding of its own starts it and puts it away. With Reduce animations nothing wobbles, tilts or spins.
+
 ## 1.3.1
 
 ControllerCam: HUD

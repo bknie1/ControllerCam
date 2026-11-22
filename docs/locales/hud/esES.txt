@@ -541,6 +541,8 @@ Lista de misiones: la más cercana primero
 mantener la lista de misiones ordenada por distancia, con la más cercana arriba
 Lista de misiones: orden recomendado
 mantener la lista de misiones en un orden recomendado: primero las listas para entregar, luego lo que puedes hacer por tu cuenta empezando por lo más cercano, luego las misiones por encima de tu nivel, las de grupo mientras vas solo, y las grises al final
+Enfocar la misión más cercana
+la misión a la que te guía el juego es siempre la más cercana de tu lista mientras viajas; una que enfoques tú se respeta durante diez minutos
 Lista de misiones: objetivos cortos
 los objetivos de la lista de misiones dicen solo lo necesario, con un icono del tipo delante: una calavera y 0/1 Capitán Pavoralzado, no 0/1 Capitán Pavoralzado muerto
 Progreso de misiones en el chat
@@ -771,6 +773,21 @@ en un vuelo se dice en el chat adónde y cuánto dura, y una barra en lo alto de
 Vuelos: tu montura sobre la barra
 un grifo, un jinete del viento o un murciélago (el que te dio el maestro de vuelo) planea por la barra de vuelo hacia donde aterrizas
 listar las rutas de vuelo cuyo tiempo se conoce
+¡A tierra! +%d
+Entre las nubes: se acaba la racha
+%d de oro de vuelo
+%s aletear
+%s red
+%s gran altitud
+%s: volver al juego (%d de oro de vuelo)
+%s: un juego por el camino
+El juego de vuelo está desactivado: /cchud flightgame on
+El juego de vuelo se juega durante un vuelo.
+No en combate.
+Juego de vuelo: jugar / gran altitud
+Vuelos: un juego por el camino
+en un vuelo se ofrece un pequeño juego bajo la barra de vuelo, y un botón lo inicia (solo ese botón se ocupa hasta que lo pulses): haz que tu montura aletee entre las nubes y atrapa con la red a los jinetes que vienen de frente, bajándolos a tierra a cambio de oro de vuelo. El mismo botón otra vez es gran altitud: el juego se guarda y los botones vuelven a ser del juego. Nunca en combate, desaparece al aterrizar
+en un vuelo: iniciar el juego de vuelo, o llevarlo a gran altitud y de vuelta
 Un vuelo es un buen momento para ello.
 Llevas jugando %s.
 Hora de un sorbo de agua

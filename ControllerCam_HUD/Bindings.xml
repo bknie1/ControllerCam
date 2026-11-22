@@ -41,4 +41,7 @@
 	<Binding name="CCHUD_FARMADD" category="ADDONS">
 		ControllerCamHUD_FarmAdd()
 	</Binding>
+	<Binding name="CCHUD_FLIGHTGAME" category="ADDONS">
+		ControllerCamHUD_FlightGame()
+	</Binding>
 </Bindings>

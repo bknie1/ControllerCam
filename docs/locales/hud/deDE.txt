@@ -541,6 +541,8 @@ Questliste: nächste zuerst
 die Questliste nach Entfernung ordnen, die nächste Quest ganz oben
 Questliste: empfohlene Reihenfolge
 die Questliste in einer empfohlenen Reihenfolge halten: zuerst, was abgegeben werden kann, dann was du allein schaffst, das Nächste zuerst, dann Quests über deiner Stufe, Gruppenquests, solange du allein bist, und graue Quests zuletzt
+Nächste Quest fokussieren
+die Quest, auf die das Spiel dich hinweist, ist unterwegs immer die nächste deiner Liste; eine, die du selbst fokussierst, bleibt zehn Minuten unangetastet
 Questliste: kurze Ziele
 Ziele in der Questliste sagen nur das Nötige, mit einem Symbol für die Art davor: ein Schädel und 0/1 Kapitän Schreckhub, nicht 0/1 Kapitän Schreckhub getötet
 Questfortschritt im Chat
@@ -771,6 +773,21 @@ auf einem Flug werden Ziel und Dauer im Chat genannt, und ein Balken oben am Bil
 Flüge: dein Reittier entlang der Leiste
 ein Greif, ein Windreiter oder eine Fledermaus (was der Flugmeister dir gab) gleitet die Flugleiste entlang zu deinem Landeplatz
 die Flugstrecken mit bekannter Zeit auflisten
+Gelandet! +%d
+In die Wolken: die Serie endet
+%d Fluggold
+%s flattern
+%s Netz
+%s große Höhe
+%s: zurück zum Spiel (%d Fluggold)
+%s: ein Spiel für unterwegs
+Das Flugspiel ist aus: /cchud flightgame on
+Das Flugspiel wird auf einem Flug gespielt.
+Nicht im Kampf.
+Flugspiel: spielen / große Höhe
+Flüge: ein Spiel für unterwegs
+auf einem Flug wird unter der Flugleiste ein kleines Spiel angeboten, und eine Taste startet es (nur diese Taste wird belegt, bis du sie drückst): Lass dein Reittier durch die Wolken flattern und fang die entgegenkommenden Reiter mit dem Netz, damit sie für Fluggold zu Boden gehen. Dieselbe Taste noch einmal ist große Höhe: Das Spiel wird weggelegt und die Tasten gehören wieder dem Spiel. Nie im Kampf, weg bei der Landung
+auf einem Flug: das Flugspiel starten, oder es in große Höhe bringen und zurück
 Ein Flug ist ein guter Moment dafür.
 Du spielst seit %s.
 Zeit für einen Schluck Wasser

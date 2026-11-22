@@ -541,6 +541,8 @@ Lista de missões: a mais próxima primeiro
 manter a lista de missões em ordem de distância, com a mais próxima no topo
 Lista de missões: ordem recomendada
 manter a lista de missões em uma ordem recomendada: primeiro as prontas para entregar, depois o que você consegue fazer sozinho começando pela mais próxima, depois as missões acima do seu nível, as de grupo enquanto você está sozinho, e as cinzas por último
+Focar a missão mais próxima
+a missão para a qual o jogo aponta é sempre a mais próxima da sua lista enquanto você viaja; uma que você mesmo focar fica intocada por dez minutos
 Lista de missões: objetivos curtos
 os objetivos na lista de missões dizem só o necessário, com um ícone do tipo na frente: uma caveira e 0/1 Capitão Pavorerguido, não 0/1 Capitão Pavorerguido morto
 Progresso das missões no chat
@@ -771,6 +773,21 @@ num voo, o destino e a duração são ditos no chat, e uma barra no alto da tela
 Voos: sua montaria ao longo da barra
 um grifo, uma mantícora ou um morcego (o que o mestre de voo lhe deu) plana pela barra do voo até onde você pousa
 listar as rotas de voo cujo tempo é conhecido
+Ao chão! +%d
+Nas nuvens: a sequência acaba
+%d de ouro de voo
+%s bater as asas
+%s rede
+%s grande altitude
+%s: voltar ao jogo (%d de ouro de voo)
+%s: um jogo no caminho
+O jogo de voo está desligado: /cchud flightgame on
+O jogo de voo é jogado durante um voo.
+Não em combate.
+Jogo de voo: jogar / grande altitude
+Voos: um jogo no caminho
+num voo, um pequeno jogo é oferecido sob a barra de voo, e um botão o inicia (só esse botão é ocupado até você apertá-lo): faça sua montaria bater as asas entre as nuvens e pegue com a rede os cavaleiros que vêm no sentido contrário, levando-os ao chão em troca de ouro de voo. O mesmo botão de novo é grande altitude: o jogo é guardado e os botões voltam a ser do jogo. Nunca em combate, some ao pousar
+num voo: iniciar o jogo de voo, ou levá-lo à grande altitude e de volta
 Um voo é um bom momento para isso.
 Você está jogando há %s.
 Hora de um gole de água

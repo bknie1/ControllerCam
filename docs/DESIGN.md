@@ -60,6 +60,7 @@ of the game's own Gamepad UI and can be added or removed without leaving a trace
 | Chat: class icon and level, spam filter | built, mock-tested only |
 | Items your quests need: a Quest verdict beside auction, vendor and keep (Quests.lua decides, Market.lua says it, Vendor.lua and the Market keep it) | built, mock-tested only |
 | Quest progress in chat; flights: destination, learned times and a countdown bar; a reminder to drink water; repeated guild recruitment hidden | built, mock-tested only: how the flight map says the chosen place under the Gamepad UI has not been seen in the game |
+| A game on the way under the flight bar (`FlightGame.lua`): its buttons bound only on a flight, A, X and Y only while it is played | built, mock-tested only |
 | The screen rests out of combat: bars, minimap, quest list, damage meter and XP bar fade together | built, mock-tested only |
 | Stance and pet buttons moved above the bars (in place of the targeting icons) | built, mock-tested only: the icons' names are a guess (`/cchud padinfo` shows what is there) |
 | Cast bar animations by kind of cast (your bar, and a lighter show on nameplates) | built, mock-tested only (`/cchud casttest`) |

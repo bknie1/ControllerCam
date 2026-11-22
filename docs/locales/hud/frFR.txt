@@ -541,6 +541,8 @@ Liste de quêtes: la plus proche d'abord
 garder la liste de quêtes dans l'ordre des distances, la quête la plus proche en haut
 Liste de quêtes: ordre recommandé
 garder la liste de quêtes dans un ordre recommandé: d'abord celles prêtes à être rendues, puis ce que vous pouvez faire seul en commençant par le plus proche, puis les quêtes au-dessus de votre niveau, les quêtes de groupe tant que vous êtes seul, et les quêtes grises en dernier
+Suivre la quête la plus proche
+la quête que le jeu vous indique est toujours la plus proche de votre liste en chemin ; une quête que vous suivez vous-même est laissée tranquille dix minutes
 Liste de quêtes: objectifs courts
 les objectifs de la liste de quêtes ne disent que le nécessaire, avec une icône du type devant: un crâne et 0/1 Capitaine Levépouvante, et non 0/1 Capitaine Levépouvante tué
 Progression des quêtes dans le chat
@@ -771,6 +773,21 @@ en vol, la destination et la durée sont indiquées dans le chat, et une barre e
 Vols : votre monture le long de la barre
 un griffon, un coursier du vent ou une chauve-souris (celui que le maître de vol vous a donné) plane le long de la barre de vol vers votre point d’arrivée
 lister les trajets aériens dont la durée est connue
+À terre ! +%d
+Dans les nuages : la série s'arrête
+%d d'or de vol
+%s battre des ailes
+%s filet
+%s haute altitude
+%s : retour au jeu (%d d'or de vol)
+%s : un jeu en chemin
+Le jeu de vol est désactivé : /cchud flightgame on
+Le jeu de vol se joue pendant un vol.
+Pas en combat.
+Jeu de vol : jouer / haute altitude
+Vols : un jeu en chemin
+pendant un vol, un petit jeu est proposé sous la barre de vol, et un bouton le lance (seul ce bouton est pris tant que vous ne l'avez pas pressé) : faites battre des ailes votre monture à travers les nuages et prenez au filet les cavaliers qui arrivent en face, pour les faire atterrir contre de l'or de vol. Le même bouton à nouveau, c'est la haute altitude : le jeu est rangé et les boutons sont de nouveau ceux du jeu. Jamais en combat, disparaît à l'atterrissage
+pendant un vol : lancer le jeu de vol, ou le mettre en haute altitude et l'en ramener
 Un vol est un bon moment pour ça.
 Vous jouez depuis %s.
 C'est l'heure d'une gorgée d'eau

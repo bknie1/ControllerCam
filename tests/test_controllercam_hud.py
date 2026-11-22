@@ -177,7 +177,7 @@ class Packaging(unittest.TestCase):
         xml = open(os.path.join(HUD, "Bindings.xml"), encoding="utf-8").read()
         e = Env()
         names = re.findall(r'name="(\w+)"', xml)
-        self.assertEqual(len(names), 14)
+        self.assertEqual(len(names), 15)
         for name in names:
             self.assertIsNotNone(e.g["BINDING_NAME_" + name], name)
         for fn in re.findall(r"(\w+)\(\)", xml):
@@ -5460,6 +5460,44 @@ class QuestOrder(unittest.TestCase):
         self.assertEqual(e.mock.listed(), "2,3,5,6,1")
         self.assertEqual(e.errors(), [])
 
+    FOCUS = """function(mock)
+        mock.focus = nil
+        C_SuperTrack = { GetSuperTrackedQuestID = function() return mock.focus or 0 end,
+                         SetSuperTrackedQuestID = function(id) mock.focus = id end }
+        local remove = C_QuestLog.RemoveQuestWatch
+        C_QuestLog.RemoveQuestWatch = function(id)                -- (the game drops the focus of an untracked quest)
+            if mock.focus == id then mock.focus = nil end
+            remove(id)
+        end
+    end"""
+
+    def test_your_focused_quest_survives_the_sorting(self):
+        e = self.make(dist={1: 500, 2: 100, 3: 300})
+        e.lua.eval(self.FOCUS)(e.mock)
+        e.mock.focus = 1
+        e.cmd("questnearest on")
+        self.assertEqual(e.mock.listed(), "2,3,1")
+        self.assertEqual(e.mock.focus, 1)                            # still yours
+        self.assertEqual(e.errors(), [])
+
+    def test_the_nearest_quest_is_focused_unless_you_chose_one(self):
+        e = self.make(dist={1: 500, 2: 100, 3: 300})
+        e.lua.eval(self.FOCUS)(e.mock)
+        e.cmd("questfocus on")
+        self.settle(e)
+        self.assertEqual(e.mock.focus, 2)                            # the nearest
+        e.mock.dist[3] = 50
+        self.settle(e)
+        self.assertEqual(e.mock.focus, 3)                            # follows you
+        e.mock.focus = 1                                             # you pick one yourself
+        e.mock.dist[2] = 10
+        self.settle(e)
+        self.assertEqual(e.mock.focus, 1)                            # left alone for a while
+        e.update(e.ns.Quests.FOCUS_HOLD + 5, 1)
+        e.mock.advance(0.5)
+        self.assertEqual(e.mock.focus, 2)                            # then the nearest again
+        self.assertEqual(e.errors(), [])
+
     def test_not_while_you_fight(self):
         e = self.make(dist={1: 500, 2: 100, 3: 300})
         e.cmd("questnearest on")
@@ -8359,6 +8397,21 @@ class Moments(unittest.TestCase):
         self.assertEqual(M.frame.label.text, "+ Holy Strike\n+ Melee")   # not Holy Strike twice
         self.assertEqual(e.errors(), [])
 
+    def test_small_crits_are_no_moment(self):
+        e = self.env()
+        M = e.ns.Moments
+        for _ in range(6):                                          # your crits usually do about 500
+            e.update(2)
+            self.land(e, 20271, 500, True)
+        e.update(2)
+        self.land(e, 20271, 500, True)
+        M.FromLog(20424, "Seal of Command", 90, True, 2)            # a small crit right behind: not part of it
+        self.assertEqual(M.fight.chain.n, 1)
+        self.assertGreater(M.smallSkipped, 0)
+        M.FromLog(679, "Holy Strike", 450, True, 1)                 # a real one is
+        self.assertEqual(M.fight.chain.n, 2)
+        self.assertEqual(e.errors(), [])
+
     def test_crits_within_half_a_second_are_a_burst_rarely(self):
         e = self.env()
         M = e.ns.Moments
@@ -8398,7 +8451,7 @@ class Moments(unittest.TestCase):
         e.update(9)
         e.mock.fire("PLAYER_REGEN_DISABLED")
         self.land(e, 20271, 500, True)
-        M.FromLog(26573, "Consecration", 120, True, 2)
+        M.FromLog(26573, "Consecration", 300, True, 2)
         self.assertEqual(M.fight.chain.n, 2)
         e.update(0.6)
         self.assertEqual(M.frame.label.text, "+ Judgement\n+ Consecration")
@@ -12002,6 +12055,268 @@ class Recruitment(unittest.TestCase):
         self.assertIn("off", e.cmd("chatrecruit off"))
         self.assertIsNotNone(e.mock.chat("CHAT_MSG_CHANNEL", self.AD, "Anna", "Player-1-1"))
         self.assertEqual(e.errors(), [])
+
+
+class FlightGame(unittest.TestCase):
+    """A game on the way, under the flight bar: offered, played with its own buttons, put away at high altitude."""
+
+    NODES = ["Stormwind, Elwynn", "Booty Bay, Stranglethorn", "Ironforge, Dun Morogh"]
+
+    def env(self, db=None, faction=None):
+        e = Env(db=db)
+        if faction:
+            e.lua.execute('UnitFactionGroup = function() return "%s", "%s" end' % (faction, faction))
+        e.ns.FlightGame.random = lambda: 0.5
+        return e
+
+    def fly(self, e):
+        e.mock.takeFlight(e.lua.table_from(self.NODES), 1, 2)
+        e.mock.advance(0.6)
+        e.update(0.1)
+
+    def press(self, e, key, tag="FlightGame"):
+        e.g["ControllerCamHUD_Key_%s_%s" % (tag, key)].scripts.OnClick()
+
+    def test_offered_on_a_flight_one_button_until_you_start(self):
+        e = self.env()
+        G, ov = e.ns.FlightGame, e.mock.overrides
+        self.assertTrue(e.db.flightGame)                                     # offered by default
+        e.update(1)
+        self.assertEqual(G.state, "off")                                     # on the ground: nothing at all
+        self.assertIsNone(ov.PAD4)
+        self.fly(e)
+        self.assertEqual(G.state, "offered")
+        self.assertEqual(ov.PAD4, "CLICK ControllerCamHUD_Key_FlightStart_PAD4:LeftButton")   # Y, only
+        self.assertIsNone(ov.PAD1)
+        self.assertIsNone(ov.PAD3)
+        self.assertTrue(G.hint.shown)
+        self.assertIn("a game on the way", plain(G.hint.text.text))
+        self.assertFalse(G.frame.shown)                                      # not started: no lane
+        self.press(e, "PAD4", "FlightStart")                                 # Y: play
+        self.assertEqual(G.state, "playing")
+        self.assertTrue(G.frame.shown)
+        self.assertFalse(G.hint.shown)
+        self.assertEqual(ov.PAD1, "CLICK ControllerCamHUD_Key_FlightGame_PAD1:LeftButton")    # A flaps
+        self.assertEqual(ov.PAD3, "CLICK ControllerCamHUD_Key_FlightGame_PAD3:LeftButton")    # X nets
+        self.assertEqual(ov.PAD4, "CLICK ControllerCamHUD_Key_FlightGame_PAD4:LeftButton")    # Y high altitude
+        self.assertIsNone(ov.PAD2)                                           # B stays the game's
+        self.assertTrue(e.g.ControllerCamHUD_Flight.shown)                   # under the flight bar
+        self.assertIn("flap", plain(G.frame.help.text))
+        self.assertEqual(e.errors(), [])
+
+    def test_high_altitude_puts_it_away_and_brings_it_back(self):
+        e = self.env()
+        G, ov = e.ns.FlightGame, e.mock.overrides
+        self.fly(e)
+        self.press(e, "PAD4", "FlightStart")
+        e.update(3)
+        G.gold = 7
+        clock = G.clock
+        self.press(e, "PAD4")                                                # Y: high altitude
+        self.assertEqual(G.state, "paused")
+        self.assertFalse(G.frame.shown)                                      # the game is away,
+        self.assertTrue(e.g.ControllerCamHUD_Flight.shown)                   # the flight bar stays
+        self.assertIsNone(ov.PAD1)                                           # and A and X are the game's again
+        self.assertIsNone(ov.PAD3)
+        self.assertEqual(ov.PAD4, "CLICK ControllerCamHUD_Key_FlightStart_PAD4:LeftButton")
+        self.assertIn("7 flight gold", plain(G.hint.text.text))
+        e.update(5)
+        self.assertEqual(G.clock, clock)                                     # nothing moves while away
+        self.press(e, "PAD4", "FlightStart")                                 # Y again: back where it was
+        self.assertEqual(G.state, "playing")
+        self.assertEqual(G.gold, 7)
+        self.assertEqual(ov.PAD1, "CLICK ControllerCamHUD_Key_FlightGame_PAD1:LeftButton")
+        e.cmd("flightplay")
+        self.assertEqual(G.state, "paused")                                  # the command does the same
+        self.assertEqual(e.errors(), [])
+
+    def test_flap_up_and_sink_back_held_in_by_the_lane(self):
+        e = self.env()
+        G = e.ns.FlightGame
+        self.fly(e)
+        self.press(e, "PAD4", "FlightStart")
+        y = G.y
+        e.update(0.5)
+        self.assertLess(G.y, y)                                              # it sinks on its own
+        e.update(3)
+        self.assertEqual(G.y, G.EDGE)                                        # down to the lane's bottom, no further
+        self.press(e, "PAD1")                                                # A: a flap
+        e.update(0.2)
+        self.assertGreater(G.y, G.EDGE + 10)
+        for _ in range(30):
+            self.press(e, "PAD1")
+            e.update(0.1)
+        self.assertLessEqual(G.y, G.H - G.EDGE)                              # and the top holds it in
+        self.assertEqual(e.errors(), [])
+
+    def test_a_net_grounds_a_rider_for_flight_gold(self):
+        e = self.env(faction="Horde")
+        G = e.ns.FlightGame
+        self.fly(e)
+        self.press(e, "PAD4", "FlightStart")
+        G.clouds = e.lua.table()
+        G.nextCloud = 999
+        G.y, G.vy = 42, 0
+        r = e.lua.table(x=G.X + 60, y=42, base=42, speed=0, race="Human", female=False, mount="gryphon", phase=0)
+        G.riders = e.lua.table_from([r])
+        G.nextRider = 999
+        self.press(e, "PAD3")                                                # X: a net
+        self.assertEqual(G.fired, 1)
+        self.press(e, "PAD3")
+        self.assertEqual(G.fired, 1)                                         # (one at a time)
+        for _ in range(10):
+            G.y, G.vy = 42, 0
+            e.update(0.05)
+        self.assertTrue(r.down)                                              # grounded, not slain
+        self.assertEqual(G.grounded, 1)
+        self.assertEqual(G.gold, 1)
+        self.assertEqual(e.db.flightGold, 1)                                 # kept, for later
+        self.assertEqual(e.db.flightGameBest, 1)
+        self.assertIn("1 flight gold", plain(G.frame.score.text))
+        self.assertIn("Grounded", plain(G.frame.word.text))
+        rt = G.riderTex[1]
+        self.assertTrue(rt.chute.shown)                                      # down under a parachute
+        self.assertTrue(rt.net.shown)
+        self.assertEqual(rt.mount.texture, e.ns.Flights.MOUNTS.gryphon)      # the other side's mount
+        y = r.y
+        e.update(0.5)
+        self.assertLess(r.y, y)                                              # floating down
+        e.update(5)
+        self.assertEqual(len(G.riders), 0)                                   # and gone below
+        self.assertEqual(e.errors(), [])
+
+    def test_a_run_of_catches_is_worth_more_and_a_cloud_ends_it(self):
+        e = self.env()
+        G = e.ns.FlightGame
+        self.fly(e)
+        self.press(e, "PAD4", "FlightStart")
+        for _ in range(3):
+            G.Ground(G, e.lua.table(x=100, y=40))
+        self.assertEqual(G.gold, 1 + 2 + 3)
+        G.y = 10
+        G.clouds = e.lua.table_from([e.lua.table(x=G.X, gap=60)])           # flown into the cloud below the gap
+        G.Step(G, 0.01)
+        self.assertEqual(G.streak, 0)
+        self.assertGreater(G.dazed, 0)
+        self.assertFalse(G.Fire(G))                                          # the net gun fogged a moment
+        e.update(G.DAZED + 0.1)
+        G.cool = 0
+        self.assertTrue(G.Fire(G))
+        self.assertEqual(G.gold, 6)                                          # nothing taken away
+        self.assertEqual(e.errors(), [])
+
+    def test_a_fight_and_the_landing_give_every_button_back(self):
+        e = self.env()
+        G, ov = e.ns.FlightGame, e.mock.overrides
+        self.fly(e)
+        self.press(e, "PAD4", "FlightStart")
+        e.mock.state.combat = True
+        e.mock.fire("PLAYER_REGEN_DISABLED")
+        self.assertIsNone(ov.PAD1)                                           # yours at once in a fight
+        self.assertIsNone(ov.PAD3)
+        self.assertIsNone(ov.PAD4)
+        self.assertEqual(G.state, "paused")
+        e.update(1)
+        self.assertIsNone(ov.PAD4)
+        self.assertFalse(G.frame.shown)
+        self.assertFalse(G.hint.shown)
+        self.assertFalse(G.Play(G))                                          # and it does not start in one
+        e.mock.state.combat = False
+        e.mock.fire("PLAYER_REGEN_ENABLED")
+        e.update(0.1)
+        self.assertEqual(ov.PAD4, "CLICK ControllerCamHUD_Key_FlightStart_PAD4:LeftButton")   # offered again
+        self.assertIsNone(ov.PAD1)                                           # (not started again by itself)
+        self.press(e, "PAD4", "FlightStart")
+        self.assertEqual(ov.PAD1, "CLICK ControllerCamHUD_Key_FlightGame_PAD1:LeftButton")
+        e.mock.landFlight("Booty Bay")
+        for key in ("PAD1", "PAD3", "PAD4"):
+            self.assertIsNone(ov[key], key)                                  # landed: all of them back at once
+        self.assertEqual(G.state, "off")
+        self.assertFalse(G.frame.shown)
+        self.assertFalse(G.hint.shown)
+        e.update(1)
+        self.assertIsNone(ov.PAD4)
+        self.assertIn("played on a flight", e.cmd("flightplay"))
+        self.fly(e)                                                          # the next flight: offered afresh
+        self.assertEqual(G.state, "offered")
+        self.assertTrue(G.hint.shown)
+        self.assertEqual(ov.PAD4, "CLICK ControllerCamHUD_Key_FlightStart_PAD4:LeftButton")
+        e.mock.landFlight("Booty Bay")                                       # landed without playing,
+        self.assertFalse(G.hint.shown)
+        self.fly(e)                                                          # and up again: the line is back
+        self.assertTrue(G.hint.shown)
+        self.press(e, "PAD4", "FlightStart")
+        self.assertEqual(G.gold, 0)                                          # a new round
+        self.assertEqual(e.errors(), [])
+
+    def test_switched_off_it_takes_nothing(self):
+        e = self.env()
+        G, ov = e.ns.FlightGame, e.mock.overrides
+        e.cmd("flightgame off")
+        self.assertFalse(e.db.flightGame)
+        self.fly(e)
+        e.update(1)
+        self.assertEqual(G.state, "off")
+        self.assertIsNone(ov.PAD4)
+        self.assertIsNone(G.frame)
+        self.assertIn("off", e.cmd("flightplay"))
+        e.g.ControllerCamHUD_FlightGame()                                    # the key binding: nothing either
+        self.assertIsNone(ov.PAD1)
+        e.cmd("flightgame on")                                               # switched on in the air: offered
+        e.update(0.1)
+        self.assertEqual(ov.PAD4, "CLICK ControllerCamHUD_Key_FlightStart_PAD4:LeftButton")
+        e.g.ControllerCamHUD_FlightGame()                                    # and the key binding starts it
+        self.assertEqual(G.state, "playing")
+        e.cmd("flightgame off")                                              # off while playing: all given back
+        for key in ("PAD1", "PAD3", "PAD4"):
+            self.assertIsNone(ov[key], key)
+        self.assertFalse(G.frame.shown)
+        self.assertIsNotNone(e.g.BINDING_NAME_CCHUD_FLIGHTGAME)
+        self.assertEqual(e.errors(), [])
+
+    def test_riders_wear_the_games_own_faces(self):
+        e = self.env(faction="Alliance")
+        G = e.ns.FlightGame
+        self.assertEqual(G.Others().mount, "windrider")                      # the Alliance meets the Horde
+        tex = e.lua.eval('CreateFrame("Frame"):CreateTexture()')
+        e.lua.execute("C_Texture = { GetAtlasInfo = function(a) if a == 'raceicon-undead-female' then return {} end end }")
+        self.assertTrue(G.Face(tex, "Scourge", True))                        # the game's atlas, where it has one
+        self.assertEqual(tex.atlas, "raceicon-undead-female")
+        e.lua.execute("C_Texture = nil; RACE_ICON_TCOORDS = { ORC_MALE = { 0.25, 0.375, 0.25, 0.5 } }")
+        self.assertTrue(G.Face(tex, "Orc", False))                           # else its sheet of race icons
+        self.assertEqual(tex.texture, G.RACE_SHEET)
+        self.assertEqual(list(tex.texCoord.values()), [0.25, 0.375, 0.25, 0.5])
+        self.assertFalse(G.Face(tex, "Tauren", False))                       # else no face: the mount alone
+        self.fly(e)
+        self.press(e, "PAD4", "FlightStart")
+        e.update(6)
+        self.assertGreater(len(G.riders), 0)                                 # riders came along
+        self.assertEqual(G.riders[1].mount, "windrider")
+        self.assertEqual(e.errors(), [])
+
+    def test_fewer_animations_keep_it_still(self):
+        e = self.env()
+        G = e.ns.FlightGame
+        e.cmd("reducemotion on")
+        self.fly(e)
+        self.press(e, "PAD4", "FlightStart")
+        G.nextRider = 0
+        e.update(0.1)
+        r = G.riders[1]
+        e.update(1)
+        self.assertEqual(r.y, r.base)                                        # riders fly straight
+        self.assertEqual(e.errors(), [])
+
+    def test_a_reload_in_the_air_offers_it_again_and_the_report_says_how_it_stands(self):
+        e = self.env(db="{ flightGold = 12, flightGameBest = 5 }")
+        G = e.ns.FlightGame
+        self.assertEqual(e.db.flightGold, 12)
+        self.assertEqual(e.db.flightGameBest, 5)
+        self.fly(e)
+        self.assertIn("offered", G.Describe())
+        self.assertIn("all 12", G.Describe())
+        self.assertEqual(e.errors(), [])
+
 
 
 if __name__ == "__main__":

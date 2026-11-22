@@ -275,8 +275,26 @@ function M:Pin(number, label, school, heal, count)
     end))
 end
 
+-- Small crits are no moment: a crit for well under what your crits usually do (a seal's proc beside a Holy
+-- Strike, a dot ticking) neither starts a burst nor joins one. "Usually" is a running average of your crits
+-- (hits and heals each their own), taken once a few have been seen; an amount the game keeps to itself counts.
+M.SMALL = 0.4                   -- a crit under this share of your usual crit is small
+M.SMALL_AFTER = 5               -- the average is trusted after this many crits
+M.usual = { chain = { avg = nil, n = 0 }, healChain = { avg = nil, n = 0 } }
+function M.Small(amount, key)
+    local plain = (not ns.IsSecret(amount)) and type(amount) == "number" and amount or nil
+    if not plain then return false end
+    local u = M.usual[key or "chain"]
+    local small = u.n >= M.SMALL_AFTER and u.avg and plain < u.avg * M.SMALL or false
+    u.n = u.n + 1
+    u.avg = u.avg and (u.avg + (plain - u.avg) / math.min(u.n, 20)) or plain
+    if small then M.smallSkipped = (M.smallSkipped or 0) + 1 end
+    return small
+end
+
 function M:Consider(amount, crit, ability, name, school)
     if not crit then return false end                              -- (a plain hit leaves the burst alone)
+    if M.Small(amount, "chain") then return false end              -- (a small crit too)
     local now = GetTime()
     local run = Join(amount, name, now)
     if run.n < 2 or not ns.db.bigMoments then return false end     -- a crit on its own: no burst yet
@@ -297,6 +315,7 @@ function M:Healed(spellID, name, amount, crit, school)
     if not ns.db.bigMoments then return false end
     name = name or SpellName(spellID)
     if not crit then return false end
+    if M.Small(amount, "healChain") then return false end
     local now = GetTime()
     local run = Join(amount, name, now, "healChain")
     if run.n < 2 then return false end

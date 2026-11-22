@@ -550,504 +550,521 @@ local ENGLISH = {
     "keep the quest list in order of distance, the nearest quest at the top",  -- 541
     "Quest list: recommended order",  -- 542
     "keep the quest list in a recommended order: ready to hand in first, then what you can do on your own nearest first, then quests above your level, group quests while you are alone, and grey quests last",  -- 543
-    "Quest list: short objectives",  -- 544
-    "objectives in the quest list say only what is needed, with an icon for the kind in front: a skull and 0/1 Captain Dreadrise, not 0/1 Captain Dreadrise slain",  -- 545
-    "Quest progress in chat",  -- 546
-    "a short line in chat as a quest moves on: Bloody Bone Necklaces: 4/25, an objective done, a quest ready to hand in",  -- 547
-    "Quest progress to your party",  -- 548
-    "in a party (not a raid) the same lines go to party chat, for the others to see, a moment apart; you see them there too",  -- 549
-    "Keep what your quests need",  -- 550
-    "an item a quest in your log still asks for, or one that starts a quest you can still do, is marked Quest: never sold or put up for auction for you",  -- 551
-    "say a recommended order for your quests: hand in what is ready, then the nearest you can do alone, then the rest",  -- 552
-    "Left of the quests",  -- 553
-    "Right of the quests",  -- 554
-    "Under the quests",  -- 555
-    "The farm list is full.",  -- 556
-    "Farm list: %s, %d wanted.",  -- 557
-    "Farm",  -- 558
-    "%d more",  -- 559
-    "Nothing to farm yet.",  -- 560
-    "A stack more",  -- 561
-    "Take off",  -- 562
-    "Clear",  -- 563
-    "Done",  -- 564
-    "Take everything off the farm list?",  -- 565
-    "Farm list: choose / done",  -- 566
-    "Farm list: add the item you point at",  -- 567
-    "That is not on the farm list.",  -- 568
-    "The farm list is empty.",  -- 569
-    "Farm list: where it sits",  -- 570
-    "Farm list beside the quest list",  -- 571
-    "things you mean to gather, with how many you have and how many you want: your bags and bank and your other characters' on this realm. Add the reagents of a levelling plan with one button, or any item",  -- 572
-    "the farm list to the left of the quest list, to its right, or under its quests",  -- 573
-    "the farm list beside the quest list: choose with the controller; add <item> [how many], remove <item>, clear, or left / right / bottom for where it sits",  -- 574
-    "Not in combat.",  -- 575
-    "This client has no gamepad bars.",  -- 576
-    "This client does not let addons change it; use Edit Mode.",  -- 577
-    "gamepad bars: %s",  -- 578
-    "compact",  -- 579
-    "full",  -- 580
-    "Slim gamepad bars",  -- 581
-    "hide the heavy art behind the gamepad action bars and draw them smaller",  -- 582
-    "Gamepad bar size",  -- 583
-    "size of the gamepad bars while slim bars are on, in percent",  -- 584
-    "the game's gamepad bars in compact or full mode (the same as its Edit Mode setting)",  -- 585
-    "Fade out of combat",  -- 586
-    "/cchud fade <part> on | off sets one; all for the whole fade.",  -- 587
-    "the gamepad bars, minimap, quest list, damage meter and experience bar rest together out of combat, and come back for a fight, a pulled trigger or an enemy target",  -- 588
-    "The screen at rest",  -- 589
-    "how visible the resting parts of the screen stay out of combat (0 hides them)",  -- 590
-    "Fades: gamepad bars",  -- 591
-    "Fades: minimap",  -- 592
-    "Fades: quest list",  -- 593
-    "Fades: damage meter",  -- 594
-    "Fades: experience bar",  -- 595
-    "Fades: buffs",  -- 596
-    "Fades: cooldown rows",  -- 597
-    "whether this part of the screen fades with the rest out of combat (off: it always stays as it is)",  -- 598
-    "the screen's fade out of combat: what fades (minimap, quest list and the rest), each on or off",  -- 599
-    "Saved: type /reload so the game writes it to disk.",  -- 600
-    "Stance and pet buttons above the bars",  -- 601
-    "the stance and pet command buttons sit where the green and red targeting icons were, so their wheel opens fully on screen; those icons are hidden",  -- 602
-    "list where the gamepad bars' parts sit and what rests (for troubleshooting)",  -- 603
-    "Auto",  -- 604
-    "Generic",  -- 605
-    "the game's own",  -- 606
-    "Button icons: %s.",  -- 607
-    "No controller is in use right now, or the game has no icon styles: it is set when one is.",  -- 608
-    "The game did not take the button icons.",  -- 609
-    "The controller does not say what it is: the icons stay as the game has them.",  -- 610
-    "the icons the game shows for your controller's buttons: auto (by the controller in use), xbox, playstation, switch, steam, generic (numbers), or game to leave them as the game has them",  -- 611
-    "Cooldown rows clear of the gamepad bars",  -- 612
-    "the game's cooldown rows sit under the target instead of on top of the gamepad buttons, a little smaller (only on the game's built-in layouts: on a layout of your own they stay where you put them)",  -- 613
-    "Fishing mode: off.",  -- 614
-    "Fishing: %s to cast",  -- 615
-    "No bait: %s twice to use %s",  -- 616
-    "%s to put the pole away",  -- 617
-    "Fishing mode: %s to cast your line, and again to hook the fish when the float bobs.",  -- 618
-    "%s to hook, %s to cast again",  -- 619
-    "Fishing mode needs a fishing pole in your hands.",  -- 620
-    "You do not know Fishing.",  -- 621
-    "Fishing mode: one button casts and hooks",  -- 622
-    "Fishing button: %s",  -- 623
-    "One-button fishing",  -- 624
-    "with a fishing pole in your hands: your interact button to cast your line whenever there is nothing to interact with, and again to hook the fish when the float bobs; the catch is taken for you. B to put the pole away and take your weapons back",  -- 625
-    "One press to cast again",  -- 626
-    "while the float is out, your fishing button casts a fresh line in one press, and A hooks the fish (the game gives no sign of a bite to wait for, so one button cannot do both); off: the fishing button hooks, as the game's interact",  -- 627
-    "Bait on a double press",  -- 628
-    "press your fishing button twice quickly: the second press puts the best bait in your bags on your pole, when the pole has none",  -- 629
-    "Gamepad bars put away while fishing",  -- 630
-    "with a fishing pole in your hands the gamepad bars are hidden, so the water is clear to look at; the fishing prompt shows the button to cast. They are back the moment a fight starts or the pole is put away",  -- 631
-    "one-button fishing off for now, or on again (with a pole in your hands it is on by itself)",  -- 632
-    "the button that fishes: your interact button to begin with (Square or X), or any other, a trigger for one (rt)",  -- 633
-    "Durotar's coast is red rock and warm shallows. Trolls of the Echo Isles say the mackerel run thickest when the tide carries the smell of the islands' cooking fires.",  -- 634
-    "The lakes of Mulgore are small, clear and patient. The tauren fish them the way they do everything else: slowly, and with thanks.",  -- 635
-    "Every oasis in the Barrens is a meeting place. Whatever drinks there by day, something swims under it by night.",  -- 636
-    "The pools of Teldrassil lie in the shade of one tree. Night elf anglers swear the fish there have never seen the sun and do not miss it.",  -- 637
-    "Darkshore's water is grey, cold and full of wrecks. Half of what bites off Auberdine has made a home in somebody's lost cargo.",  -- 638
-    "The rivers of Ashenvale run under leaves older than most kingdoms. The fish are quick, and the sentinels are quicker to ask what you are doing there.",  -- 639
-    "Down among the Thousand Needles the water is scarce and jealously kept. A fish from here has earned its place.",  -- 640
-    "Stonetalon's lakes sit high and cold between the peaks. The goblins would have drained them by now if the fishing were not so good.",  -- 641
-    "The coast of Desolace is bones and grey surf. Something down there has a taste for both.",  -- 642
-    "Feralas is green all the way down to the waterline. Its rivers are deep, warm and very much alive.",  -- 643
-    "Nobody is sure where Dustwallow's land stops and its water begins. Fish from the shore, and count your toes afterwards.",  -- 644
-    "Steamwheedle Port has the only water worth the name in Tanaris. The goblins will sell you the right to fish it, twice if you let them.",  -- 645
-    "Under Azshara's bright bay lies a drowned city. Old anglers say the big ones live in what used to be its gardens.",  -- 646
-    "The pools of Felwood glow, and not in a good way. What still swims in them is stubborn beyond reason.",  -- 647
-    "The hot springs and tar-rimmed lakes of Un'Goro have kept things the rest of the world forgot. Some of them bite.",  -- 648
-    "Lake Elune'ara in Moonglade is as calm as a held breath. The druids ask only that you take no more than you will eat.",  -- 649
-    "Silithus is sand, wind and the sound of wings. If you have found water to fish here, tell no one.",  -- 650
-    "The lakes of Winterspring freeze at the edges and steam in the middle. The fish there are fat for the cold and worth the walk.",  -- 651
-    "The pools of Orgrimmar are fished by peons with nothing better to do and by old grunts who say the same. Both tell you the big one got away.",  -- 652
-    "A fish from the ponds of Thunder Bluff has lived its whole life a long way above the plains. It seems calm about it.",  -- 653
-    "Darnassus keeps its waters as carefully as its temples. The fish have grown used to being admired.",  -- 654
-    "The lakes of the Alterac Mountains are snowmelt, and the ogres and the Syndicate fish them when no one is looking.",  -- 655
-    "Arathi's shores have seen more armies than anglers. The fish have long since stopped caring whose banner flies above the water.",  -- 656
-    "The Badlands are dust from one end to the other. A bite here is a small miracle; treat it as one.",  -- 657
-    "The coast of the Blasted Lands is red, scoured and quiet. Whatever lives in that surf has learned to live with a great deal.",  -- 658
-    "The lakes of Tirisfal lie still under a sickly sky. The Forsaken fish them out of habit; the dead do not eat much, but they remember liking it.",  -- 659
-    "Silverpine's long coast is all mist and pine shadow. The fishing is good, which is the one cheerful thing anyone says about the place.",  -- 660
-    "The rivers of the Western Plaguelands still run, though not clean. What you pull from them, look at twice.",  -- 661
-    "Few people fish the Eastern Plaguelands, and fewer say so. The water keeps what the plague left of it.",  -- 662
-    "Hillsbrad's river and its long southern shore have fed both sides of every quarrel fought over them.",  -- 663
-    "The Hinterlands keep their lakes high among the trees, where the Wildhammer dwarves fish from gryphon-back when they think no one can see.",  -- 664
-    "The lakes of Dun Morogh are ringed with ice most of the year. A dwarf will cut a hole, sit down with a pint and call it a good day whatever bites.",  -- 665
-    "The Searing Gorge has lava where other lands have rivers. Bring something to drink instead.",  -- 666
-    "The Burning Steppes are ash and embers. If the water here gives you anything at all, it will be hot.",  -- 667
-    "Every child in Elwynn learns to fish at Crystal Lake or Stone Cairn. The smallfish there have been outwitting them for generations.",  -- 668
-    "Deadwind Pass has little water and less welcome. What is in the pools below Karazhan is best left there.",  -- 669
-    "The river along Duskwood's edge is black at any hour. The fish do not seem to mind the dark; the anglers do.",  -- 670
-    "The Loch is the pride of Loch Modan, held back by the great Stonewrought Dam. Dwarves measure a fishing story against it, and the Loch usually wins.",  -- 671
-    "Lake Everstill in Redridge is as pretty as a painting and fished from every dock in Lakeshire. The townsfolk know each good spot and will not tell you one.",  -- 672
-    "From its jungle rivers to the wild southern cape, Stranglethorn has the richest water on the continent. Booty Bay's anglers hold a tournament over it, and nearly all of them cheat.",  -- 673
-    "The Swamp of Sorrows is green water under green trees. The fish taste of mud, and the locals like them that way.",  -- 674
-    "Westfall's fields failed, but its coast did not. The folk who stayed live off the long grey shore.",  -- 675
-    "The Wetlands are well named. Menethil Harbor's docks are the driest place to fish them, and the crocolisks know it.",  -- 676
-    "The canals of Stormwind are fished by children, pensioners and at least one member of the nobility in disguise. Nobody asks what else is in the canals.",  -- 677
-    "The Forlorn Cavern holds Ironforge's one quiet pool. Old dwarves fish it for hours and never say a word.",  -- 678
-    "The canals of the Undercity run a green that has nothing to do with algae. The Forsaken who fish them are not doing it for supper.",  -- 679
-    "The first fish most anglers ever land, and bright enough that they remember it.",  -- 680
-    "Slick, quick and common along every warm coast. It is better grilled than its name suggests.",  -- 681
-    "All mouth, and happiest in water you would not drink.",  -- 682
-    "Small, toothy and fearless. A shoal of them is said to have chased a bear out of the Loch.",  -- 683
-    "A flash of colour under the surf. Sailors count one on the line as luck for the voyage.",  -- 684
-    "A patient bottom-feeder with whiskers like a dwarven elder.",  -- 685
-    "No one eats it twice. Alchemists buy every one they can get.",  -- 686
-    "Its fins glow like banked coals, and the oil pressed from it burns nearly as well.",  -- 687
-    "Armoured like a small shield. The meat inside is worth the trouble.",  -- 688
-    "Something in the water near the Wailing Caverns changed it. Eating one may change you as well, for a while.",  -- 689
-    "River folk say a meal of it clears the mind. It is the swimming upstream that makes it wise.",  -- 690
-    "Older, larger and wiser than its cousin, which did not keep it off your hook.",  -- 691
-    "A hard fighter from warm southern seas, and a favourite on every tavern board from Booty Bay to Gadgetzan.",  -- 692
-    "Its brow shines like true mithril. More than one miner has tried to smelt one.",  -- 693
-    "Its scales boil down into an oil that makes the skin as hard as rock. It prefers the night.",  -- 694
-    "Polished like a parade breastplate, and nearly as heavy.",  -- 695
-    "It comes inshore only in the cold months, and the cooks who know it wait all year.",  -- 696
-    "It runs when the days are long. Coastal folk mark the season by it.",  -- 697
-    "Hold it by the middle, and only once.",  -- 698
-    "A river fish from wild country, as red at the gills as a troll's warpaint.",  -- 699
-    "It feeds after dark. A soup of it steadies a spellcaster's nerves.",  -- 700
-    "It feeds by day, the nightfin's opposite in nearly everything, and shares its water all the same.",  -- 701
-    "Not strictly a fish. It disagrees with being caught and will make that known.",  -- 702
-    "Pale as river ice, from the cold clear lakes of the north.",  -- 703
-    "You will want both hands, and perhaps a friend.",  -- 704
-    "%.1f lb",  -- 705
-    "New in your fish journal: %s, %s.",  -- 706
-    "New in your fish journal: %s.",  -- 707
-    "Your heaviest %s yet: %s (it was %s).",  -- 708
-    "Fish journal",  -- 709
-    "every catch is written into your fish journal: how many of each kind, where you first landed it, and a weight made up for fun with your best of each (/cchud journal opens it)",  -- 710
-    "Bait %s",  -- 711
-    "No bait",  -- 712
-    "Caught %d",  -- 713
-    "Got away %d",  -- 714
-    "Fishing interface",  -- 715
-    "with a fishing pole in your hands: the fish of the water you stand at (the ones you have not landed here stay hidden), your Fishing skill and what your bait adds, how many you caught and how many got away, how long your bait lasts, and your latest catches",  -- 716
-    "A curious one: +%d%%",  -- 717
-    "Keep your lure beside the fish",  -- 718
-    "Next catch +%d%%",  -- 719
-    "Hold %s: the lure runs along the line",  -- 720
-    "%d in a row",  -- 721
-    "A game while the float is out",  -- 722
-    "played on the cast bar while your line is out: hold a trigger and your lure runs along the line, let go and it drifts back; keep it beside the shadow of the fish. The better you do, the heavier the made-up weight of your next catch. It takes no button and never touches your cast or your catch",  -- 723
-    "%d landed, %d kinds, %d got away",  -- 724
-    "Heaviest: %s, %s",  -- 725
-    "Fish",  -- 726
-    "Waters",  -- 727
-    "Nothing landed yet. Take a pole to the water.",  -- 728
-    "Landed: %d",  -- 729
-    "Heaviest: %s, at %s",  -- 730
-    "First landed: %s",  -- 731
-    "Landed here: %d",  -- 732
-    "Kinds found here: %d",  -- 733
-    "Choose",  -- 734
-    "Close",  -- 735
-    "open or close your fish journal: every kind you have landed, your heaviest of each, and the waters you have fished",  -- 736
-    "Chat fades when quiet",  -- 737
-    "chat text fades out after a few seconds without new messages",  -- 738
-    "Seconds before chat fades",  -- 739
-    "how long chat text stays before it fades",  -- 740
-    "Coordinates on the map",  -- 741
-    "your coordinates under the world map",  -- 742
-    "%d messages hidden as spam since you logged in.",  -- 743
-    "%d of them were repeated guild recruitment.",  -- 744
-    "Class icon and level in chat",  -- 745
-    "a player's class icon and level in brackets in front of their name, when the game lets us know them",  -- 746
-    "Short channel names in chat",  -- 747
-    "the channel in front of a line, shortened: [P] party, [PL] party leader, [G] guild, [O] officer, [R] raid, [RL] raid leader, [I] instance, and a numbered channel by its number, [1]",  -- 748
-    "First names only in chat",  -- 749
-    "a name with a surname shows as the first name alone (Jory Spleeneater says it as Jory); a whisper or a right-click on it still reaches the whole name",  -- 750
-    "Chat text size",  -- 751
-    "the size of the text in the chat windows, as a share of the game's own size (the game's own setting is left as it is)",  -- 752
-    "Hide gold sellers and repeated adverts",  -- 753
-    "messages selling gold or services with a web address, and the same message repeated by one player, are hidden (never from your group, guild or friends)",  -- 754
-    "Hide repeated guild recruitment",  -- 755
-    "in public channels a guild's recruiting message is shown once; the same player's again, or one nearly the same, within 15 minutes is hidden (never from your group, guild or friends)",  -- 756
-    "list the chat messages hidden as spam lately",  -- 757
-    "Flight",  -- 758
-    "destination unknown",  -- 759
-    "a guess from the distance",  -- 760
-    "first flight on this route: learning its time",  -- 761
-    "landing",  -- 762
-    "%s: about %s, a guess from the distance",  -- 763
-    "%s: about %s",  -- 764
-    "%s: first flight on this route, time unknown",  -- 765
-    "On a flight, destination unknown",  -- 766
-    "%s: flight time learned, %s",  -- 767
-    "%d flight routes known.",  -- 768
-    "Flights: time and countdown",  -- 769
-    "on a flight, where to and how long is said in chat, and a bar at the top of the screen counts down to the landing; each route's time is learned from your flights",  -- 770
-    "Flights: your mount along the bar",  -- 771
-    "a gryphon, a wind rider or a bat (whichever the flight master gave you) glides along the flight bar towards where you land",  -- 772
-    "list the flight routes whose times are known",  -- 773
-    "A flight is a good moment for it.",  -- 774
-    "You have played for %s.",  -- 775
-    "Time for a sip of water",  -- 776
-    "Reminder to drink water",  -- 777
-    "now and then while you play, a gentle reminder to have a sip of water (never in a fight)",  -- 778
-    "Water reminder every (minutes)",  -- 779
-    "how many minutes of play between reminders to drink water",  -- 780
-    "Water reminder as a flight begins",  -- 781
-    "a flight is a natural break: the reminder to drink water comes as one begins, unless the last was not long ago",  -- 782
-    "show the reminder to drink water",  -- 783
-    "Restyle the game's own frames",  -- 784
-    "tooltips, buffs, the quest tracker, the minimap, the experience bar, chat tabs and the gamepad bars in the HUD's look (the mouse UI keeps the game's)",  -- 785
-    "Experience bar size",  -- 786
-    "the size of the experience and reputation bars while they are restyled, in percent",  -- 787
-    "Tooltips",  -- 788
-    "tooltips in dark glass, edged in the colour of a player's class or an item's quality",  -- 789
-    "Gamepad bars",  -- 790
-    "the gamepad buttons with a slim ring on a dark backing instead of the heavy art",  -- 791
-    "Buffs",  -- 792
-    "your buff and debuff icons cropped and edged, their times outlined",  -- 793
-    "Quest tracker",  -- 794
-    "the quest tracker's headers in dark glass, its lines outlined",  -- 795
-    "Minimap",  -- 796
-    "a slim ring and a soft halo around the minimap instead of the gold rim",  -- 797
-    "Experience bar",  -- 798
-    "the experience and reputation bars a little smaller, in their own colours",  -- 799
-    "Chat",  -- 800
-    "chat tab names outlined and the box you type in as dark glass",  -- 801
-    "Damage meter",  -- 802
-    "the game's damage meter in the HUD's look: its bars, slanted on a dark back, and outlined text; it keeps all it does",  -- 803
-    "check: %d of %d passed",  -- 804
-    "The game has not stood still since you logged in.",  -- 805
-    "Moments the game stood still, and the HUD's part in each:",  -- 806
-    "The HUD's slowest moments:",  -- 807
-    "Debug reports",  -- 808
-    "gather the troubleshooting reports by themselves: when you log in, and again when you reload or log out (they are kept in the saved settings)",  -- 809
-    "the moments the game stood still since you logged in, and how much of each was the HUD's own work",  -- 810
-    "HUD preset: %s, to match the camera",  -- 811
-    "preset: %s",  -- 812
-    "A layout named '%s' was added to the game's Edit Mode. Choose it there to use it (Game Menu > Edit Mode > Layout).",  -- 813
-    "unknown preset '%s'",  -- 814
-    "Sized for a TV: bigger text on the HUD and in chat.",  -- 815
-    "Sized for a monitor: text at its plain size.",  -- 816
-    "Our frames are back where they start. Choose the game's %s layout in Edit Mode (Game Menu > Edit Mode > Layout).",  -- 817
-    "Presets set the camera distance",  -- 818
-    "a preset also brings the camera to the distance its layout was made for, once (zoom freely afterwards)",  -- 819
-    "Action",  -- 820
-    "a third-person view: slim vertical bars beside your character, every effect on; out of combat things fade",  -- 821
-    "Classic",  -- 822
-    "our frames where WoW has always had them, calmer effects, the game's gamepad bars as they are",  -- 823
-    "Minimal",  -- 824
-    "only what you need: friendly NPCs show their plate (with what they do) only while you point at them, aim at them or target them; names without titles; out of combat your bars rest as a faint hint (low health always shows)",  -- 825
-    "Open world",  -- 826
-    "a clean screen for exploring: slim bars beside you that rest faded, plates without power bars, chat that fades",  -- 827
-    "Adventure",  -- 828
-    "after console open-world adventures: vitals beside you, a small target high in the middle, townsfolk only when you point at them, chat that fades fast",  -- 829
-    "Soulslike",  -- 830
-    "your bars top left, a big target bar low in the middle like a boss bar, every hit felt",  -- 831
-    "Shooter",  -- 832
-    "upright bars just right of centre, close to where you aim, the target high above, strong hit feedback",  -- 833
-    "Crossbar",  -- 834
-    "after MMOs played on a controller: the target and focus high in the middle, your bars just above the gamepad bars, party on the left, full plates",  -- 835
-    "ARPG",  -- 836
-    "after action RPGs: the camera far back, your vitals low on the left, the target high in the middle, minor enemies small, every hit loud",  -- 837
-    "Compass",  -- 838
-    "after first-person RPGs: the camera close, your bars low in the middle, the target under the top edge, townsfolk only when you point at them",  -- 839
-    "Raid",  -- 840
-    "WoW's own placement with everything a group needs: party and raid frames, health percents and levels on plates",  -- 841
-    "Follow ControllerCam's presets",  -- 842
-    "choosing a camera preset in ControllerCam for everywhere also chooses the matching HUD preset (the camera keeps its own distance)",  -- 843
-    "Modern",  -- 844
-    "set the whole HUD to a preset: action, classic, minimal, openworld, adventure, soulslike, shooter, crossbar, arpg, compass, raid",  -- 845
-    "the target frame and nameplates compact or full, both at once",  -- 846
-    "the target frame compact or full",  -- 847
-    "size the text for a TV across the room, or for a monitor at arm's length",  -- 848
-    "put our frames back where they start, for the game's own Modern or Classic layout",  -- 849
-    "Your whole setup (HUD, camera and the game's layout): copy this line (Ctrl+C) to keep or share it.",  -- 850
-    "Paste a line of HUD settings (Ctrl+V) and accept.",  -- 851
-    "That line is damaged: copy it again, completely.",  -- 852
-    "That line was made by a newer version: update the addon.",  -- 853
-    "That is not a line of HUD settings.",  -- 854
-    "Settings imported: %d taken, %d left out.",  -- 855
-    "The camera setup came along.",  -- 856
-    "The camera setup was left as it is.",  -- 857
-    "The game's layout is now '%s'.",  -- 858
-    "The game's layout was left as it is.",  -- 859
-    "your settings as one line of text, to keep or share",  -- 860
-    "take settings from a line of text made by /cchud export",  -- 861
-    "The HUD is on while the Gamepad UI is in use. Its options: Options > AddOns > ControllerCam > HUD, or /cchud.",  -- 862
-    "Camera only: the HUD rests and the game's interface is as it was. /cchud on switches it on.",  -- 863
-    "Set up the screen for the controller too? This adds a layout named CCHUD to the game's Edit Mode, for you to choose there: it puts the cooldown rows under the target, clear of the gamepad buttons. Your own layouts are kept (/cchud setup offers this again).",  -- 864
-    "Set it up",  -- 865
-    "Not now",  -- 866
-    "ControllerCam comes with a controller interface, the HUD: its own unit frames, nameplates, cast bar and more while the Gamepad UI is in use. Do you want it, or the camera alone?",  -- 867
-    "Camera + HUD",  -- 868
-    "Camera only",  -- 869
-    "This client does not let addons change the layout.",  -- 870
-    "ask again: the camera with the HUD, or the camera alone",  -- 871
-    "offer the screen layout made for the HUD again (the game's Edit Mode)",  -- 872
-    "Shown while the Gamepad UI is in use. Drag our frames in the game's Edit Mode.",  -- 873
-    "Presets",  -- 874
-    "Sized for",  -- 875
-    "TV",  -- 876
-    "Monitor",  -- 877
-    "Button icons",  -- 878
-    "the icons the game shows for your controller's buttons: found by itself for the controller in use, or the kind you choose",  -- 879
-    "Font",  -- 880
-    "Reset the game's layout",  -- 881
-    "Try it out",  -- 882
-    "Play the demo",  -- 883
-    "Show every hit effect",  -- 884
-    "Run the self-check",  -- 885
-    "Gamepad bars: compact / full",  -- 886
-    "Export settings",  -- 887
-    "Import settings",  -- 888
-    "Tick “Show advanced options” on the main page for every setting.",  -- 889
-    "Modules",  -- 890
-    "Quick switches",  -- 891
-    "General",  -- 892
-    "HUD",  -- 893
-    "The options panel is not available in this client.",  -- 894
-    "Enabled",  -- 895
-    "the whole HUD; off brings the game's own frames back",  -- 896
-    "Also in the mouse & keyboard UI",  -- 897
-    "normally the HUD only runs while the Gamepad UI is in use",  -- 898
-    "Put the game's frames aside",  -- 899
-    "hide the game's player, target and focus frames while ours are shown",  -- 900
-    "Chat window at the top left",  -- 901
-    "move the chat window to the top left while the HUD runs",  -- 902
-    "Vertical bars when idle",  -- 903
-    "how visible the vertical bars stay at full health out of combat (0 hides them)",  -- 904
-    "Class colours",  -- 905
-    "colour your bar, and other players' bars, by class",  -- 906
-    "Class icons",  -- 907
-    "a class icon in front of a player's name on the target and target of target",  -- 908
-    "Threat on the target frame",  -- 909
-    "a shield icon and a glow on the target frame: red while it attacks you, red and yellow when you are about to pull it, yellow and blue when you are losing it, blue when it is not on you",  -- 910
-    "Compact bars everywhere",  -- 911
-    "the target frame and nameplates in their compact style, a little over half as wide (each one can still be set on its own; presets never change it)",  -- 912
-    "Compact target frame",  -- 913
-    "the target frame a little over half as wide",  -- 914
-    "Health colours in a fight",  -- 915
-    "in a fight, health bars turn from green through yellow to red as health drops",  -- 916
-    "Shade behind text",  -- 917
-    "a soft dark band behind the target's text, to keep it readable",  -- 918
-    "Text size",  -- 919
-    "size of the text on our frames",  -- 920
-    "Frame size",  -- 921
-    "size of our unit frames",  -- 922
-    "Your bars in a fight",  -- 923
-    "how visible your bars, pet and focus are in a fight until something calls for attention",  -- 924
-    "Full when health is below",  -- 925
-    "your bars come back in full when your health drops below this",  -- 926
-    "Full when mana is below",  -- 927
-    "your bars come back in full when your mana drops below this",  -- 928
-    "Player bar when idle",  -- 929
-    "how visible the player bar stays at full health or out of combat (0 hides it)",  -- 930
-    "Vendor and bank help",  -- 931
-    "the vendor's Sell junk button asks what to sell; quick move at vendor and bank",  -- 932
-    "Show advanced options",  -- 933
-    "every setting, not only the main switches",  -- 934
-    "Player frame",  -- 935
-    "our player bar, top left",  -- 936
-    "Target frame",  -- 937
-    "our target bar, top centre",  -- 938
-    "Pet bar",  -- 939
-    "a small pet bar under the player bar, or beside the vertical bars",  -- 940
-    "Focus frame",  -- 941
-    "our focus frame",  -- 942
-    "slim upright health and power bars beside your character, for a third-person view (in place of the player bar)",  -- 943
-    "Sell junk when a vendor opens",  -- 944
-    "sell junk by your rules as soon as a vendor opens",  -- 945
-    "White weapons and armor are junk",  -- 946
-    "count white weapons and armor as junk (never tools, fishing poles, gear with a use, or anything that could be an upgrade; always asked first)",  -- 947
-    "Deposit when the bank opens",  -- 948
-    "items marked for the bank, and what the bank already holds (when that is on), go in by themselves",  -- 949
-    "the game's option; our small frame follows it",  -- 950
-    "Cooldown Manager",  -- 951
-    "the game's Cooldown Manager",  -- 952
-    "Personal Resource Display",  -- 953
-    "your health and power under your character",  -- 954
-    "Bank takes reagents by itself",  -- 955
-    "the game's option for the bank",  -- 956
-    "Tooltip when a buff starts",  -- 957
-    "the game's option: a buff's tooltip pops up for a moment when it is applied (Gamepad UI)",  -- 958
-    "Class colours for names in chat",  -- 959
-    "the game's chat setting for every kind of chat at once: a player's name in their class colour",  -- 960
-    "open the options panel (Options > AddOns > ControllerCam HUD)",  -- 961
-    "Frames",  -- 962
-    "Screen fade",  -- 963
-    "Effects",  -- 964
-    "Look",  -- 965
-    "Quests, chat and map",  -- 966
-    "Bags, bank and vendor",  -- 967
-    "Fishing",  -- 968
-    "Accessibility",  -- 969
-    "Native Options",  -- 970
-    "%s  |  Gamepad UI: %s  |  running: %s",  -- 971
-    "player %s, target %s, pet %s, focus %s  |  game frames put aside: %s  |  chat moved: %s",  -- 972
-    "native options: target of target %s, Cooldown Manager %s, personal resource %s",  -- 973
-    "text size %d%%  |  text shade: %s",  -- 974
-    "vendor and bank help: %s  |  auto-sell: %s  |  white gear is junk: %s",  -- 975
-    "idle visibility %d%%  |  scale %d%%  |  class colours: %s",  -- 976
-    "A minimal action-game HUD for the Gamepad UI.",  -- 977
-    "enabled",  -- 978
-    "disabled: the game's own frames are back",  -- 979
-    "use in the mouse & keyboard UI too: %s",  -- 980
-    "game frames put aside: %s",  -- 981
-    "chat moved to the top left: %s",  -- 982
-    "class colours: %s",  -- 983
-    "This client does not have that option.",  -- 984
-    "%s: %s (the game's own option)",  -- 985
-    "The game did not accept that right now.",  -- 986
-    "vendor and bank help: %s",  -- 987
-    "auto-sell: %s",  -- 988
-    "white gear is junk: %s",  -- 989
-    "Vendor help is off.",  -- 990
-    "usage: /cchud sell [junk | recommended | white | green | blue]",  -- 991
-    "deposit marked items when the bank opens: %s",  -- 992
-    "usage: /cchud junk <item> (shift-click the item into the chat line)",  -- 993
-    "item %d: junk, sold with the rest",  -- 994
-    "item %d: kept, never sold",  -- 995
-    "item %d: for the bank",  -- 996
-    "text shade: %s",  -- 997
-    "usage: /cchud text <80-250>",  -- 998
-    "text size %d%%",  -- 999
-    "demo stopped",  -- 1000
-    "The HUD is not running.",  -- 1001
-    "Demo running: a made-up fight on a loop. Type /cchud demo again to stop.",  -- 1002
-    "usage: /cchud idle <0-100>",  -- 1003
-    "idle visibility %d%%",  -- 1004
-    "usage: /cchud scale <50-200>",  -- 1005
-    "scale %d%%",  -- 1006
-    "Drag the frames, then type /cchud lock.",  -- 1007
-    "frames locked",  -- 1008
-    "Everything is back to how it started: settings, frames and the screen layout (your vendor marks and price history are kept).",  -- 1009
-    "frames are back where they started",  -- 1010
-    "unknown command '%s'. Type /cchud help",  -- 1011
-    "Error list cleared.",  -- 1012
-    "No errors recorded.",  -- 1013
-    "%d errors recorded (newest last). /cchud errors clear empties the list.",  -- 1014
-    "show status",  -- 1015
-    "turn the HUD on or off (off brings the game's own frames back)",  -- 1016
-    "also use the HUD in the mouse & keyboard UI",  -- 1017
-    "use our frame for it, or the game's own",  -- 1018
-    "slim upright health and power bars beside your character",  -- 1019
-    "target of target (the game's own option, also in its menus)",  -- 1020
-    "the game's Cooldown Manager (the game's own option)",  -- 1021
-    "your health and power under your character (the game's own option)",  -- 1022
-    "the tooltip that pops up when a buff starts (the game's own option)",  -- 1023
-    "keep the game's own player and target frames visible (on) or put them aside (off)",  -- 1024
-    "at a vendor: choose what to sell (also: sell junk, sell recommended, sell white | green | blue)",  -- 1025
-    "count white weapons and armor as junk",  -- 1026
-    "mark an item: always sold, never sold, or for the bank (shift-click it into the chat line)",  -- 1027
-    "at the bank: deposit what the bank already holds, and every item marked for it",  -- 1028
-    "at the bank: take out what you already carry some of",  -- 1029
-    "deposit as soon as the bank opens",  -- 1030
-    "the bank takes reagents by itself (the game's own option)",  -- 1031
-    "text size, in percent (150 reads well on a TV)",  -- 1032
-    "how visible the player bar stays when nothing is happening (0 hides it)",  -- 1033
-    "size of the frames, in percent",  -- 1034
-    "drag the frames to where you want them (the game's Edit Mode does this too)",  -- 1035
-    "put the frames back where they started",  -- 1036
-    "play a short made-up fight, to see how the frames react (again to stop)",  -- 1037
-    "compare what is on screen with the settings (check all lists every row)",  -- 1038
-    "save a description of this client's Gamepad UI (for troubleshooting)",  -- 1039
-    "show this list",  -- 1040
-    "the last errors the HUD met, also after a reload (to report them)",  -- 1041
+    "Focus the nearest quest",  -- 544
+    "the quest the game points you to is always the nearest one in your list, as you travel; one you focus yourself is left alone for ten minutes",  -- 545
+    "Quest list: short objectives",  -- 546
+    "objectives in the quest list say only what is needed, with an icon for the kind in front: a skull and 0/1 Captain Dreadrise, not 0/1 Captain Dreadrise slain",  -- 547
+    "Quest progress in chat",  -- 548
+    "a short line in chat as a quest moves on: Bloody Bone Necklaces: 4/25, an objective done, a quest ready to hand in",  -- 549
+    "Quest progress to your party",  -- 550
+    "in a party (not a raid) the same lines go to party chat, for the others to see, a moment apart; you see them there too",  -- 551
+    "Keep what your quests need",  -- 552
+    "an item a quest in your log still asks for, or one that starts a quest you can still do, is marked Quest: never sold or put up for auction for you",  -- 553
+    "say a recommended order for your quests: hand in what is ready, then the nearest you can do alone, then the rest",  -- 554
+    "Left of the quests",  -- 555
+    "Right of the quests",  -- 556
+    "Under the quests",  -- 557
+    "The farm list is full.",  -- 558
+    "Farm list: %s, %d wanted.",  -- 559
+    "Farm",  -- 560
+    "%d more",  -- 561
+    "Nothing to farm yet.",  -- 562
+    "A stack more",  -- 563
+    "Take off",  -- 564
+    "Clear",  -- 565
+    "Done",  -- 566
+    "Take everything off the farm list?",  -- 567
+    "Farm list: choose / done",  -- 568
+    "Farm list: add the item you point at",  -- 569
+    "That is not on the farm list.",  -- 570
+    "The farm list is empty.",  -- 571
+    "Farm list: where it sits",  -- 572
+    "Farm list beside the quest list",  -- 573
+    "things you mean to gather, with how many you have and how many you want: your bags and bank and your other characters' on this realm. Add the reagents of a levelling plan with one button, or any item",  -- 574
+    "the farm list to the left of the quest list, to its right, or under its quests",  -- 575
+    "the farm list beside the quest list: choose with the controller; add <item> [how many], remove <item>, clear, or left / right / bottom for where it sits",  -- 576
+    "Not in combat.",  -- 577
+    "This client has no gamepad bars.",  -- 578
+    "This client does not let addons change it; use Edit Mode.",  -- 579
+    "gamepad bars: %s",  -- 580
+    "compact",  -- 581
+    "full",  -- 582
+    "Slim gamepad bars",  -- 583
+    "hide the heavy art behind the gamepad action bars and draw them smaller",  -- 584
+    "Gamepad bar size",  -- 585
+    "size of the gamepad bars while slim bars are on, in percent",  -- 586
+    "the game's gamepad bars in compact or full mode (the same as its Edit Mode setting)",  -- 587
+    "Fade out of combat",  -- 588
+    "/cchud fade <part> on | off sets one; all for the whole fade.",  -- 589
+    "the gamepad bars, minimap, quest list, damage meter and experience bar rest together out of combat, and come back for a fight, a pulled trigger or an enemy target",  -- 590
+    "The screen at rest",  -- 591
+    "how visible the resting parts of the screen stay out of combat (0 hides them)",  -- 592
+    "Fades: gamepad bars",  -- 593
+    "Fades: minimap",  -- 594
+    "Fades: quest list",  -- 595
+    "Fades: damage meter",  -- 596
+    "Fades: experience bar",  -- 597
+    "Fades: buffs",  -- 598
+    "Fades: cooldown rows",  -- 599
+    "whether this part of the screen fades with the rest out of combat (off: it always stays as it is)",  -- 600
+    "the screen's fade out of combat: what fades (minimap, quest list and the rest), each on or off",  -- 601
+    "Saved: type /reload so the game writes it to disk.",  -- 602
+    "Stance and pet buttons above the bars",  -- 603
+    "the stance and pet command buttons sit where the green and red targeting icons were, so their wheel opens fully on screen; those icons are hidden",  -- 604
+    "list where the gamepad bars' parts sit and what rests (for troubleshooting)",  -- 605
+    "Auto",  -- 606
+    "Generic",  -- 607
+    "the game's own",  -- 608
+    "Button icons: %s.",  -- 609
+    "No controller is in use right now, or the game has no icon styles: it is set when one is.",  -- 610
+    "The game did not take the button icons.",  -- 611
+    "The controller does not say what it is: the icons stay as the game has them.",  -- 612
+    "the icons the game shows for your controller's buttons: auto (by the controller in use), xbox, playstation, switch, steam, generic (numbers), or game to leave them as the game has them",  -- 613
+    "Cooldown rows clear of the gamepad bars",  -- 614
+    "the game's cooldown rows sit under the target instead of on top of the gamepad buttons, a little smaller (only on the game's built-in layouts: on a layout of your own they stay where you put them)",  -- 615
+    "Fishing mode: off.",  -- 616
+    "Fishing: %s to cast",  -- 617
+    "No bait: %s twice to use %s",  -- 618
+    "%s to put the pole away",  -- 619
+    "Fishing mode: %s to cast your line, and again to hook the fish when the float bobs.",  -- 620
+    "%s to hook, %s to cast again",  -- 621
+    "Fishing mode needs a fishing pole in your hands.",  -- 622
+    "You do not know Fishing.",  -- 623
+    "Fishing mode: one button casts and hooks",  -- 624
+    "Fishing button: %s",  -- 625
+    "One-button fishing",  -- 626
+    "with a fishing pole in your hands: your interact button to cast your line whenever there is nothing to interact with, and again to hook the fish when the float bobs; the catch is taken for you. B to put the pole away and take your weapons back",  -- 627
+    "One press to cast again",  -- 628
+    "while the float is out, your fishing button casts a fresh line in one press, and A hooks the fish (the game gives no sign of a bite to wait for, so one button cannot do both); off: the fishing button hooks, as the game's interact",  -- 629
+    "Bait on a double press",  -- 630
+    "press your fishing button twice quickly: the second press puts the best bait in your bags on your pole, when the pole has none",  -- 631
+    "Gamepad bars put away while fishing",  -- 632
+    "with a fishing pole in your hands the gamepad bars are hidden, so the water is clear to look at; the fishing prompt shows the button to cast. They are back the moment a fight starts or the pole is put away",  -- 633
+    "one-button fishing off for now, or on again (with a pole in your hands it is on by itself)",  -- 634
+    "the button that fishes: your interact button to begin with (Square or X), or any other, a trigger for one (rt)",  -- 635
+    "Durotar's coast is red rock and warm shallows. Trolls of the Echo Isles say the mackerel run thickest when the tide carries the smell of the islands' cooking fires.",  -- 636
+    "The lakes of Mulgore are small, clear and patient. The tauren fish them the way they do everything else: slowly, and with thanks.",  -- 637
+    "Every oasis in the Barrens is a meeting place. Whatever drinks there by day, something swims under it by night.",  -- 638
+    "The pools of Teldrassil lie in the shade of one tree. Night elf anglers swear the fish there have never seen the sun and do not miss it.",  -- 639
+    "Darkshore's water is grey, cold and full of wrecks. Half of what bites off Auberdine has made a home in somebody's lost cargo.",  -- 640
+    "The rivers of Ashenvale run under leaves older than most kingdoms. The fish are quick, and the sentinels are quicker to ask what you are doing there.",  -- 641
+    "Down among the Thousand Needles the water is scarce and jealously kept. A fish from here has earned its place.",  -- 642
+    "Stonetalon's lakes sit high and cold between the peaks. The goblins would have drained them by now if the fishing were not so good.",  -- 643
+    "The coast of Desolace is bones and grey surf. Something down there has a taste for both.",  -- 644
+    "Feralas is green all the way down to the waterline. Its rivers are deep, warm and very much alive.",  -- 645
+    "Nobody is sure where Dustwallow's land stops and its water begins. Fish from the shore, and count your toes afterwards.",  -- 646
+    "Steamwheedle Port has the only water worth the name in Tanaris. The goblins will sell you the right to fish it, twice if you let them.",  -- 647
+    "Under Azshara's bright bay lies a drowned city. Old anglers say the big ones live in what used to be its gardens.",  -- 648
+    "The pools of Felwood glow, and not in a good way. What still swims in them is stubborn beyond reason.",  -- 649
+    "The hot springs and tar-rimmed lakes of Un'Goro have kept things the rest of the world forgot. Some of them bite.",  -- 650
+    "Lake Elune'ara in Moonglade is as calm as a held breath. The druids ask only that you take no more than you will eat.",  -- 651
+    "Silithus is sand, wind and the sound of wings. If you have found water to fish here, tell no one.",  -- 652
+    "The lakes of Winterspring freeze at the edges and steam in the middle. The fish there are fat for the cold and worth the walk.",  -- 653
+    "The pools of Orgrimmar are fished by peons with nothing better to do and by old grunts who say the same. Both tell you the big one got away.",  -- 654
+    "A fish from the ponds of Thunder Bluff has lived its whole life a long way above the plains. It seems calm about it.",  -- 655
+    "Darnassus keeps its waters as carefully as its temples. The fish have grown used to being admired.",  -- 656
+    "The lakes of the Alterac Mountains are snowmelt, and the ogres and the Syndicate fish them when no one is looking.",  -- 657
+    "Arathi's shores have seen more armies than anglers. The fish have long since stopped caring whose banner flies above the water.",  -- 658
+    "The Badlands are dust from one end to the other. A bite here is a small miracle; treat it as one.",  -- 659
+    "The coast of the Blasted Lands is red, scoured and quiet. Whatever lives in that surf has learned to live with a great deal.",  -- 660
+    "The lakes of Tirisfal lie still under a sickly sky. The Forsaken fish them out of habit; the dead do not eat much, but they remember liking it.",  -- 661
+    "Silverpine's long coast is all mist and pine shadow. The fishing is good, which is the one cheerful thing anyone says about the place.",  -- 662
+    "The rivers of the Western Plaguelands still run, though not clean. What you pull from them, look at twice.",  -- 663
+    "Few people fish the Eastern Plaguelands, and fewer say so. The water keeps what the plague left of it.",  -- 664
+    "Hillsbrad's river and its long southern shore have fed both sides of every quarrel fought over them.",  -- 665
+    "The Hinterlands keep their lakes high among the trees, where the Wildhammer dwarves fish from gryphon-back when they think no one can see.",  -- 666
+    "The lakes of Dun Morogh are ringed with ice most of the year. A dwarf will cut a hole, sit down with a pint and call it a good day whatever bites.",  -- 667
+    "The Searing Gorge has lava where other lands have rivers. Bring something to drink instead.",  -- 668
+    "The Burning Steppes are ash and embers. If the water here gives you anything at all, it will be hot.",  -- 669
+    "Every child in Elwynn learns to fish at Crystal Lake or Stone Cairn. The smallfish there have been outwitting them for generations.",  -- 670
+    "Deadwind Pass has little water and less welcome. What is in the pools below Karazhan is best left there.",  -- 671
+    "The river along Duskwood's edge is black at any hour. The fish do not seem to mind the dark; the anglers do.",  -- 672
+    "The Loch is the pride of Loch Modan, held back by the great Stonewrought Dam. Dwarves measure a fishing story against it, and the Loch usually wins.",  -- 673
+    "Lake Everstill in Redridge is as pretty as a painting and fished from every dock in Lakeshire. The townsfolk know each good spot and will not tell you one.",  -- 674
+    "From its jungle rivers to the wild southern cape, Stranglethorn has the richest water on the continent. Booty Bay's anglers hold a tournament over it, and nearly all of them cheat.",  -- 675
+    "The Swamp of Sorrows is green water under green trees. The fish taste of mud, and the locals like them that way.",  -- 676
+    "Westfall's fields failed, but its coast did not. The folk who stayed live off the long grey shore.",  -- 677
+    "The Wetlands are well named. Menethil Harbor's docks are the driest place to fish them, and the crocolisks know it.",  -- 678
+    "The canals of Stormwind are fished by children, pensioners and at least one member of the nobility in disguise. Nobody asks what else is in the canals.",  -- 679
+    "The Forlorn Cavern holds Ironforge's one quiet pool. Old dwarves fish it for hours and never say a word.",  -- 680
+    "The canals of the Undercity run a green that has nothing to do with algae. The Forsaken who fish them are not doing it for supper.",  -- 681
+    "The first fish most anglers ever land, and bright enough that they remember it.",  -- 682
+    "Slick, quick and common along every warm coast. It is better grilled than its name suggests.",  -- 683
+    "All mouth, and happiest in water you would not drink.",  -- 684
+    "Small, toothy and fearless. A shoal of them is said to have chased a bear out of the Loch.",  -- 685
+    "A flash of colour under the surf. Sailors count one on the line as luck for the voyage.",  -- 686
+    "A patient bottom-feeder with whiskers like a dwarven elder.",  -- 687
+    "No one eats it twice. Alchemists buy every one they can get.",  -- 688
+    "Its fins glow like banked coals, and the oil pressed from it burns nearly as well.",  -- 689
+    "Armoured like a small shield. The meat inside is worth the trouble.",  -- 690
+    "Something in the water near the Wailing Caverns changed it. Eating one may change you as well, for a while.",  -- 691
+    "River folk say a meal of it clears the mind. It is the swimming upstream that makes it wise.",  -- 692
+    "Older, larger and wiser than its cousin, which did not keep it off your hook.",  -- 693
+    "A hard fighter from warm southern seas, and a favourite on every tavern board from Booty Bay to Gadgetzan.",  -- 694
+    "Its brow shines like true mithril. More than one miner has tried to smelt one.",  -- 695
+    "Its scales boil down into an oil that makes the skin as hard as rock. It prefers the night.",  -- 696
+    "Polished like a parade breastplate, and nearly as heavy.",  -- 697
+    "It comes inshore only in the cold months, and the cooks who know it wait all year.",  -- 698
+    "It runs when the days are long. Coastal folk mark the season by it.",  -- 699
+    "Hold it by the middle, and only once.",  -- 700
+    "A river fish from wild country, as red at the gills as a troll's warpaint.",  -- 701
+    "It feeds after dark. A soup of it steadies a spellcaster's nerves.",  -- 702
+    "It feeds by day, the nightfin's opposite in nearly everything, and shares its water all the same.",  -- 703
+    "Not strictly a fish. It disagrees with being caught and will make that known.",  -- 704
+    "Pale as river ice, from the cold clear lakes of the north.",  -- 705
+    "You will want both hands, and perhaps a friend.",  -- 706
+    "%.1f lb",  -- 707
+    "New in your fish journal: %s, %s.",  -- 708
+    "New in your fish journal: %s.",  -- 709
+    "Your heaviest %s yet: %s (it was %s).",  -- 710
+    "Fish journal",  -- 711
+    "every catch is written into your fish journal: how many of each kind, where you first landed it, and a weight made up for fun with your best of each (/cchud journal opens it)",  -- 712
+    "Bait %s",  -- 713
+    "No bait",  -- 714
+    "Caught %d",  -- 715
+    "Got away %d",  -- 716
+    "Fishing interface",  -- 717
+    "with a fishing pole in your hands: the fish of the water you stand at (the ones you have not landed here stay hidden), your Fishing skill and what your bait adds, how many you caught and how many got away, how long your bait lasts, and your latest catches",  -- 718
+    "A curious one: +%d%%",  -- 719
+    "Keep your lure beside the fish",  -- 720
+    "Next catch +%d%%",  -- 721
+    "Hold %s: the lure runs along the line",  -- 722
+    "%d in a row",  -- 723
+    "A game while the float is out",  -- 724
+    "played on the cast bar while your line is out: hold a trigger and your lure runs along the line, let go and it drifts back; keep it beside the shadow of the fish. The better you do, the heavier the made-up weight of your next catch. It takes no button and never touches your cast or your catch",  -- 725
+    "%d landed, %d kinds, %d got away",  -- 726
+    "Heaviest: %s, %s",  -- 727
+    "Fish",  -- 728
+    "Waters",  -- 729
+    "Nothing landed yet. Take a pole to the water.",  -- 730
+    "Landed: %d",  -- 731
+    "Heaviest: %s, at %s",  -- 732
+    "First landed: %s",  -- 733
+    "Landed here: %d",  -- 734
+    "Kinds found here: %d",  -- 735
+    "Choose",  -- 736
+    "Close",  -- 737
+    "open or close your fish journal: every kind you have landed, your heaviest of each, and the waters you have fished",  -- 738
+    "Chat fades when quiet",  -- 739
+    "chat text fades out after a few seconds without new messages",  -- 740
+    "Seconds before chat fades",  -- 741
+    "how long chat text stays before it fades",  -- 742
+    "Coordinates on the map",  -- 743
+    "your coordinates under the world map",  -- 744
+    "%d messages hidden as spam since you logged in.",  -- 745
+    "%d of them were repeated guild recruitment.",  -- 746
+    "Class icon and level in chat",  -- 747
+    "a player's class icon and level in brackets in front of their name, when the game lets us know them",  -- 748
+    "Short channel names in chat",  -- 749
+    "the channel in front of a line, shortened: [P] party, [PL] party leader, [G] guild, [O] officer, [R] raid, [RL] raid leader, [I] instance, and a numbered channel by its number, [1]",  -- 750
+    "First names only in chat",  -- 751
+    "a name with a surname shows as the first name alone (Jory Spleeneater says it as Jory); a whisper or a right-click on it still reaches the whole name",  -- 752
+    "Chat text size",  -- 753
+    "the size of the text in the chat windows, as a share of the game's own size (the game's own setting is left as it is)",  -- 754
+    "Hide gold sellers and repeated adverts",  -- 755
+    "messages selling gold or services with a web address, and the same message repeated by one player, are hidden (never from your group, guild or friends)",  -- 756
+    "Hide repeated guild recruitment",  -- 757
+    "in public channels a guild's recruiting message is shown once; the same player's again, or one nearly the same, within 15 minutes is hidden (never from your group, guild or friends)",  -- 758
+    "list the chat messages hidden as spam lately",  -- 759
+    "Flight",  -- 760
+    "destination unknown",  -- 761
+    "a guess from the distance",  -- 762
+    "first flight on this route: learning its time",  -- 763
+    "landing",  -- 764
+    "%s: about %s, a guess from the distance",  -- 765
+    "%s: about %s",  -- 766
+    "%s: first flight on this route, time unknown",  -- 767
+    "On a flight, destination unknown",  -- 768
+    "%s: flight time learned, %s",  -- 769
+    "%d flight routes known.",  -- 770
+    "Flights: time and countdown",  -- 771
+    "on a flight, where to and how long is said in chat, and a bar at the top of the screen counts down to the landing; each route's time is learned from your flights",  -- 772
+    "Flights: your mount along the bar",  -- 773
+    "a gryphon, a wind rider or a bat (whichever the flight master gave you) glides along the flight bar towards where you land",  -- 774
+    "list the flight routes whose times are known",  -- 775
+    "Grounded! +%d",  -- 776
+    "Into the clouds: the run ends",  -- 777
+    "%d flight gold",  -- 778
+    "%s flap",  -- 779
+    "%s net",  -- 780
+    "%s high altitude",  -- 781
+    "%s: back to the game (%d flight gold)",  -- 782
+    "%s: a game on the way",  -- 783
+    "The flight game is off: /cchud flightgame on",  -- 784
+    "The flight game is played on a flight.",  -- 785
+    "Not in a fight.",  -- 786
+    "Flight game: play / high altitude",  -- 787
+    "Flights: a game on the way",  -- 788
+    "on a flight a small game is offered under the flight bar, and one button starts it (only that button is taken until you do): flap your mount up through the clouds and net the riders coming the other way, grounding them for flight gold. The same button again is high altitude: the game is put away and the buttons are the game's again. Never in a fight, gone on landing",  -- 789
+    "on a flight: start the flight game, or take it to high altitude and back",  -- 790
+    "A flight is a good moment for it.",  -- 791
+    "You have played for %s.",  -- 792
+    "Time for a sip of water",  -- 793
+    "Reminder to drink water",  -- 794
+    "now and then while you play, a gentle reminder to have a sip of water (never in a fight)",  -- 795
+    "Water reminder every (minutes)",  -- 796
+    "how many minutes of play between reminders to drink water",  -- 797
+    "Water reminder as a flight begins",  -- 798
+    "a flight is a natural break: the reminder to drink water comes as one begins, unless the last was not long ago",  -- 799
+    "show the reminder to drink water",  -- 800
+    "Restyle the game's own frames",  -- 801
+    "tooltips, buffs, the quest tracker, the minimap, the experience bar, chat tabs and the gamepad bars in the HUD's look (the mouse UI keeps the game's)",  -- 802
+    "Experience bar size",  -- 803
+    "the size of the experience and reputation bars while they are restyled, in percent",  -- 804
+    "Tooltips",  -- 805
+    "tooltips in dark glass, edged in the colour of a player's class or an item's quality",  -- 806
+    "Gamepad bars",  -- 807
+    "the gamepad buttons with a slim ring on a dark backing instead of the heavy art",  -- 808
+    "Buffs",  -- 809
+    "your buff and debuff icons cropped and edged, their times outlined",  -- 810
+    "Quest tracker",  -- 811
+    "the quest tracker's headers in dark glass, its lines outlined",  -- 812
+    "Minimap",  -- 813
+    "a slim ring and a soft halo around the minimap instead of the gold rim",  -- 814
+    "Experience bar",  -- 815
+    "the experience and reputation bars a little smaller, in their own colours",  -- 816
+    "Chat",  -- 817
+    "chat tab names outlined and the box you type in as dark glass",  -- 818
+    "Damage meter",  -- 819
+    "the game's damage meter in the HUD's look: its bars, slanted on a dark back, and outlined text; it keeps all it does",  -- 820
+    "check: %d of %d passed",  -- 821
+    "The game has not stood still since you logged in.",  -- 822
+    "Moments the game stood still, and the HUD's part in each:",  -- 823
+    "The HUD's slowest moments:",  -- 824
+    "Debug reports",  -- 825
+    "gather the troubleshooting reports by themselves: when you log in, and again when you reload or log out (they are kept in the saved settings)",  -- 826
+    "the moments the game stood still since you logged in, and how much of each was the HUD's own work",  -- 827
+    "HUD preset: %s, to match the camera",  -- 828
+    "preset: %s",  -- 829
+    "A layout named '%s' was added to the game's Edit Mode. Choose it there to use it (Game Menu > Edit Mode > Layout).",  -- 830
+    "unknown preset '%s'",  -- 831
+    "Sized for a TV: bigger text on the HUD and in chat.",  -- 832
+    "Sized for a monitor: text at its plain size.",  -- 833
+    "Our frames are back where they start. Choose the game's %s layout in Edit Mode (Game Menu > Edit Mode > Layout).",  -- 834
+    "Presets set the camera distance",  -- 835
+    "a preset also brings the camera to the distance its layout was made for, once (zoom freely afterwards)",  -- 836
+    "Action",  -- 837
+    "a third-person view: slim vertical bars beside your character, every effect on; out of combat things fade",  -- 838
+    "Classic",  -- 839
+    "our frames where WoW has always had them, calmer effects, the game's gamepad bars as they are",  -- 840
+    "Minimal",  -- 841
+    "only what you need: friendly NPCs show their plate (with what they do) only while you point at them, aim at them or target them; names without titles; out of combat your bars rest as a faint hint (low health always shows)",  -- 842
+    "Open world",  -- 843
+    "a clean screen for exploring: slim bars beside you that rest faded, plates without power bars, chat that fades",  -- 844
+    "Adventure",  -- 845
+    "after console open-world adventures: vitals beside you, a small target high in the middle, townsfolk only when you point at them, chat that fades fast",  -- 846
+    "Soulslike",  -- 847
+    "your bars top left, a big target bar low in the middle like a boss bar, every hit felt",  -- 848
+    "Shooter",  -- 849
+    "upright bars just right of centre, close to where you aim, the target high above, strong hit feedback",  -- 850
+    "Crossbar",  -- 851
+    "after MMOs played on a controller: the target and focus high in the middle, your bars just above the gamepad bars, party on the left, full plates",  -- 852
+    "ARPG",  -- 853
+    "after action RPGs: the camera far back, your vitals low on the left, the target high in the middle, minor enemies small, every hit loud",  -- 854
+    "Compass",  -- 855
+    "after first-person RPGs: the camera close, your bars low in the middle, the target under the top edge, townsfolk only when you point at them",  -- 856
+    "Raid",  -- 857
+    "WoW's own placement with everything a group needs: party and raid frames, health percents and levels on plates",  -- 858
+    "Follow ControllerCam's presets",  -- 859
+    "choosing a camera preset in ControllerCam for everywhere also chooses the matching HUD preset (the camera keeps its own distance)",  -- 860
+    "Modern",  -- 861
+    "set the whole HUD to a preset: action, classic, minimal, openworld, adventure, soulslike, shooter, crossbar, arpg, compass, raid",  -- 862
+    "the target frame and nameplates compact or full, both at once",  -- 863
+    "the target frame compact or full",  -- 864
+    "size the text for a TV across the room, or for a monitor at arm's length",  -- 865
+    "put our frames back where they start, for the game's own Modern or Classic layout",  -- 866
+    "Your whole setup (HUD, camera and the game's layout): copy this line (Ctrl+C) to keep or share it.",  -- 867
+    "Paste a line of HUD settings (Ctrl+V) and accept.",  -- 868
+    "That line is damaged: copy it again, completely.",  -- 869
+    "That line was made by a newer version: update the addon.",  -- 870
+    "That is not a line of HUD settings.",  -- 871
+    "Settings imported: %d taken, %d left out.",  -- 872
+    "The camera setup came along.",  -- 873
+    "The camera setup was left as it is.",  -- 874
+    "The game's layout is now '%s'.",  -- 875
+    "The game's layout was left as it is.",  -- 876
+    "your settings as one line of text, to keep or share",  -- 877
+    "take settings from a line of text made by /cchud export",  -- 878
+    "The HUD is on while the Gamepad UI is in use. Its options: Options > AddOns > ControllerCam > HUD, or /cchud.",  -- 879
+    "Camera only: the HUD rests and the game's interface is as it was. /cchud on switches it on.",  -- 880
+    "Set up the screen for the controller too? This adds a layout named CCHUD to the game's Edit Mode, for you to choose there: it puts the cooldown rows under the target, clear of the gamepad buttons. Your own layouts are kept (/cchud setup offers this again).",  -- 881
+    "Set it up",  -- 882
+    "Not now",  -- 883
+    "ControllerCam comes with a controller interface, the HUD: its own unit frames, nameplates, cast bar and more while the Gamepad UI is in use. Do you want it, or the camera alone?",  -- 884
+    "Camera + HUD",  -- 885
+    "Camera only",  -- 886
+    "This client does not let addons change the layout.",  -- 887
+    "ask again: the camera with the HUD, or the camera alone",  -- 888
+    "offer the screen layout made for the HUD again (the game's Edit Mode)",  -- 889
+    "Shown while the Gamepad UI is in use. Drag our frames in the game's Edit Mode.",  -- 890
+    "Presets",  -- 891
+    "Sized for",  -- 892
+    "TV",  -- 893
+    "Monitor",  -- 894
+    "Button icons",  -- 895
+    "the icons the game shows for your controller's buttons: found by itself for the controller in use, or the kind you choose",  -- 896
+    "Font",  -- 897
+    "Reset the game's layout",  -- 898
+    "Try it out",  -- 899
+    "Play the demo",  -- 900
+    "Show every hit effect",  -- 901
+    "Run the self-check",  -- 902
+    "Gamepad bars: compact / full",  -- 903
+    "Export settings",  -- 904
+    "Import settings",  -- 905
+    "Tick “Show advanced options” on the main page for every setting.",  -- 906
+    "Modules",  -- 907
+    "Quick switches",  -- 908
+    "General",  -- 909
+    "HUD",  -- 910
+    "The options panel is not available in this client.",  -- 911
+    "Enabled",  -- 912
+    "the whole HUD; off brings the game's own frames back",  -- 913
+    "Also in the mouse & keyboard UI",  -- 914
+    "normally the HUD only runs while the Gamepad UI is in use",  -- 915
+    "Put the game's frames aside",  -- 916
+    "hide the game's player, target and focus frames while ours are shown",  -- 917
+    "Chat window at the top left",  -- 918
+    "move the chat window to the top left while the HUD runs",  -- 919
+    "Vertical bars when idle",  -- 920
+    "how visible the vertical bars stay at full health out of combat (0 hides them)",  -- 921
+    "Class colours",  -- 922
+    "colour your bar, and other players' bars, by class",  -- 923
+    "Class icons",  -- 924
+    "a class icon in front of a player's name on the target and target of target",  -- 925
+    "Threat on the target frame",  -- 926
+    "a shield icon and a glow on the target frame: red while it attacks you, red and yellow when you are about to pull it, yellow and blue when you are losing it, blue when it is not on you",  -- 927
+    "Compact bars everywhere",  -- 928
+    "the target frame and nameplates in their compact style, a little over half as wide (each one can still be set on its own; presets never change it)",  -- 929
+    "Compact target frame",  -- 930
+    "the target frame a little over half as wide",  -- 931
+    "Health colours in a fight",  -- 932
+    "in a fight, health bars turn from green through yellow to red as health drops",  -- 933
+    "Shade behind text",  -- 934
+    "a soft dark band behind the target's text, to keep it readable",  -- 935
+    "Text size",  -- 936
+    "size of the text on our frames",  -- 937
+    "Frame size",  -- 938
+    "size of our unit frames",  -- 939
+    "Your bars in a fight",  -- 940
+    "how visible your bars, pet and focus are in a fight until something calls for attention",  -- 941
+    "Full when health is below",  -- 942
+    "your bars come back in full when your health drops below this",  -- 943
+    "Full when mana is below",  -- 944
+    "your bars come back in full when your mana drops below this",  -- 945
+    "Player bar when idle",  -- 946
+    "how visible the player bar stays at full health or out of combat (0 hides it)",  -- 947
+    "Vendor and bank help",  -- 948
+    "the vendor's Sell junk button asks what to sell; quick move at vendor and bank",  -- 949
+    "Show advanced options",  -- 950
+    "every setting, not only the main switches",  -- 951
+    "Player frame",  -- 952
+    "our player bar, top left",  -- 953
+    "Target frame",  -- 954
+    "our target bar, top centre",  -- 955
+    "Pet bar",  -- 956
+    "a small pet bar under the player bar, or beside the vertical bars",  -- 957
+    "Focus frame",  -- 958
+    "our focus frame",  -- 959
+    "slim upright health and power bars beside your character, for a third-person view (in place of the player bar)",  -- 960
+    "Sell junk when a vendor opens",  -- 961
+    "sell junk by your rules as soon as a vendor opens",  -- 962
+    "White weapons and armor are junk",  -- 963
+    "count white weapons and armor as junk (never tools, fishing poles, gear with a use, or anything that could be an upgrade; always asked first)",  -- 964
+    "Deposit when the bank opens",  -- 965
+    "items marked for the bank, and what the bank already holds (when that is on), go in by themselves",  -- 966
+    "the game's option; our small frame follows it",  -- 967
+    "Cooldown Manager",  -- 968
+    "the game's Cooldown Manager",  -- 969
+    "Personal Resource Display",  -- 970
+    "your health and power under your character",  -- 971
+    "Bank takes reagents by itself",  -- 972
+    "the game's option for the bank",  -- 973
+    "Tooltip when a buff starts",  -- 974
+    "the game's option: a buff's tooltip pops up for a moment when it is applied (Gamepad UI)",  -- 975
+    "Class colours for names in chat",  -- 976
+    "the game's chat setting for every kind of chat at once: a player's name in their class colour",  -- 977
+    "open the options panel (Options > AddOns > ControllerCam HUD)",  -- 978
+    "Frames",  -- 979
+    "Screen fade",  -- 980
+    "Effects",  -- 981
+    "Look",  -- 982
+    "Quests, chat and map",  -- 983
+    "Bags, bank and vendor",  -- 984
+    "Fishing",  -- 985
+    "Accessibility",  -- 986
+    "Native Options",  -- 987
+    "%s  |  Gamepad UI: %s  |  running: %s",  -- 988
+    "player %s, target %s, pet %s, focus %s  |  game frames put aside: %s  |  chat moved: %s",  -- 989
+    "native options: target of target %s, Cooldown Manager %s, personal resource %s",  -- 990
+    "text size %d%%  |  text shade: %s",  -- 991
+    "vendor and bank help: %s  |  auto-sell: %s  |  white gear is junk: %s",  -- 992
+    "idle visibility %d%%  |  scale %d%%  |  class colours: %s",  -- 993
+    "A minimal action-game HUD for the Gamepad UI.",  -- 994
+    "enabled",  -- 995
+    "disabled: the game's own frames are back",  -- 996
+    "use in the mouse & keyboard UI too: %s",  -- 997
+    "game frames put aside: %s",  -- 998
+    "chat moved to the top left: %s",  -- 999
+    "class colours: %s",  -- 1000
+    "This client does not have that option.",  -- 1001
+    "%s: %s (the game's own option)",  -- 1002
+    "The game did not accept that right now.",  -- 1003
+    "vendor and bank help: %s",  -- 1004
+    "auto-sell: %s",  -- 1005
+    "white gear is junk: %s",  -- 1006
+    "Vendor help is off.",  -- 1007
+    "usage: /cchud sell [junk | recommended | white | green | blue]",  -- 1008
+    "deposit marked items when the bank opens: %s",  -- 1009
+    "usage: /cchud junk <item> (shift-click the item into the chat line)",  -- 1010
+    "item %d: junk, sold with the rest",  -- 1011
+    "item %d: kept, never sold",  -- 1012
+    "item %d: for the bank",  -- 1013
+    "text shade: %s",  -- 1014
+    "usage: /cchud text <80-250>",  -- 1015
+    "text size %d%%",  -- 1016
+    "demo stopped",  -- 1017
+    "The HUD is not running.",  -- 1018
+    "Demo running: a made-up fight on a loop. Type /cchud demo again to stop.",  -- 1019
+    "usage: /cchud idle <0-100>",  -- 1020
+    "idle visibility %d%%",  -- 1021
+    "usage: /cchud scale <50-200>",  -- 1022
+    "scale %d%%",  -- 1023
+    "Drag the frames, then type /cchud lock.",  -- 1024
+    "frames locked",  -- 1025
+    "Everything is back to how it started: settings, frames and the screen layout (your vendor marks and price history are kept).",  -- 1026
+    "frames are back where they started",  -- 1027
+    "unknown command '%s'. Type /cchud help",  -- 1028
+    "Error list cleared.",  -- 1029
+    "No errors recorded.",  -- 1030
+    "%d errors recorded (newest last). /cchud errors clear empties the list.",  -- 1031
+    "show status",  -- 1032
+    "turn the HUD on or off (off brings the game's own frames back)",  -- 1033
+    "also use the HUD in the mouse & keyboard UI",  -- 1034
+    "use our frame for it, or the game's own",  -- 1035
+    "slim upright health and power bars beside your character",  -- 1036
+    "target of target (the game's own option, also in its menus)",  -- 1037
+    "the game's Cooldown Manager (the game's own option)",  -- 1038
+    "your health and power under your character (the game's own option)",  -- 1039
+    "the tooltip that pops up when a buff starts (the game's own option)",  -- 1040
+    "keep the game's own player and target frames visible (on) or put them aside (off)",  -- 1041
+    "at a vendor: choose what to sell (also: sell junk, sell recommended, sell white | green | blue)",  -- 1042
+    "count white weapons and armor as junk",  -- 1043
+    "mark an item: always sold, never sold, or for the bank (shift-click it into the chat line)",  -- 1044
+    "at the bank: deposit what the bank already holds, and every item marked for it",  -- 1045
+    "at the bank: take out what you already carry some of",  -- 1046
+    "deposit as soon as the bank opens",  -- 1047
+    "the bank takes reagents by itself (the game's own option)",  -- 1048
+    "text size, in percent (150 reads well on a TV)",  -- 1049
+    "how visible the player bar stays when nothing is happening (0 hides it)",  -- 1050
+    "size of the frames, in percent",  -- 1051
+    "drag the frames to where you want them (the game's Edit Mode does this too)",  -- 1052
+    "put the frames back where they started",  -- 1053
+    "play a short made-up fight, to see how the frames react (again to stop)",  -- 1054
+    "compare what is on screen with the settings (check all lists every row)",  -- 1055
+    "save a description of this client's Gamepad UI (for troubleshooting)",  -- 1056
+    "show this list",  -- 1057
+    "the last errors the HUD met, also after a reload (to report them)",  -- 1058
 }
 
 local TRANSLATIONS = {
@@ -1595,504 +1612,521 @@ local TRANSLATIONS = {
         "die Questliste nach Entfernung ordnen, die nächste Quest ganz oben",  -- 541
         "Questliste: empfohlene Reihenfolge",  -- 542
         "die Questliste in einer empfohlenen Reihenfolge halten: zuerst, was abgegeben werden kann, dann was du allein schaffst, das Nächste zuerst, dann Quests über deiner Stufe, Gruppenquests, solange du allein bist, und graue Quests zuletzt",  -- 543
-        "Questliste: kurze Ziele",  -- 544
-        "Ziele in der Questliste sagen nur das Nötige, mit einem Symbol für die Art davor: ein Schädel und 0/1 Kapitän Schreckhub, nicht 0/1 Kapitän Schreckhub getötet",  -- 545
-        "Questfortschritt im Chat",  -- 546
-        "eine kurze Zeile im Chat, sobald eine Quest vorankommt: Blutige Knochenketten: 4/25, ein Ziel erledigt, eine Quest bereit zur Abgabe",  -- 547
-        "Questfortschritt an deine Gruppe",  -- 548
-        "in einer Gruppe (nicht im Schlachtzug) gehen dieselben Zeilen in den Gruppenchat, damit die anderen sie sehen, jeweils kurz nacheinander; du siehst sie dort auch",  -- 549
-        "Behalten, was deine Quests brauchen",  -- 550
-        "ein Gegenstand, den eine Quest in deinem Log noch verlangt, oder einer, der eine Quest startet, die du noch machen kannst, wird als Quest markiert: nie für dich verkauft oder versteigert",  -- 551
-        "eine empfohlene Reihenfolge für deine Quests nennen: abgeben, was fertig ist, dann das Nächste, das du allein schaffst, dann der Rest",  -- 552
-        "Links der Quests",  -- 553
-        "Rechts der Quests",  -- 554
-        "Unter den Quests",  -- 555
-        "Die Farmliste ist voll.",  -- 556
-        "Farmliste: %s, %d gewünscht.",  -- 557
-        "Farmen",  -- 558
-        "%d weitere",  -- 559
-        "Noch nichts zu farmen.",  -- 560
-        "Einen Stapel mehr",  -- 561
-        "Entfernen",  -- 562
-        "Leeren",  -- 563
-        "Fertig",  -- 564
-        "Alles von der Farmliste nehmen?",  -- 565
-        "Farmliste: wählen / fertig",  -- 566
-        "Farmliste: den Gegenstand hinzufügen, auf den du zeigst",  -- 567
-        "Das steht nicht auf der Farmliste.",  -- 568
-        "Die Farmliste ist leer.",  -- 569
-        "Farmliste: wo sie sitzt",  -- 570
-        "Farmliste neben der Questliste",  -- 571
-        "Dinge, die du sammeln willst, mit wie vielen du hast und wie viele du willst: deine Taschen und Bank und die deiner anderen Charaktere auf diesem Realm. Füge die Reagenzien eines Levelplans mit einer Taste hinzu, oder jeden Gegenstand",  -- 572
-        "die Farmliste links der Questliste, rechts davon oder unter ihren Quests",  -- 573
-        "die Farmliste neben der Questliste: mit dem Controller wählen; add <Gegenstand> [wie viele], remove <Gegenstand>, clear, oder left / right / bottom für ihren Platz",  -- 574
-        "Nicht im Kampf.",  -- 575
-        "Dieser Client hat keine Gamepad-Leisten.",  -- 576
-        "Dieser Client erlaubt Addons keine Änderung; benutze den Bearbeitungsmodus.",  -- 577
-        "Gamepad-Leisten: %s",  -- 578
-        "kompakt",  -- 579
-        "voll",  -- 580
-        "Schlanke Gamepad-Leisten",  -- 581
-        "blende die wuchtige Grafik hinter den Gamepad-Aktionsleisten aus und zeichne sie kleiner",  -- 582
-        "Größe der Gamepad-Leisten",  -- 583
-        "Größe der Gamepad-Leisten bei aktiven schlanken Leisten, in Prozent",  -- 584
-        "die Gamepad-Leisten des Spiels im kompakten oder vollen Modus (wie die Einstellung im Bearbeitungsmodus)",  -- 585
-        "Ausblenden außerhalb des Kampfes",  -- 586
-        "/cchud fade <Teil> on | off stellt einen ein; all für das ganze Ausblenden.",  -- 587
-        "Gamepad-Leisten, Minikarte, Questliste, Schadensmesser und Erfahrungsleiste ruhen außerhalb des Kampfes gemeinsam und kommen für einen Kampf, einen gezogenen Trigger oder ein feindliches Ziel zurück",  -- 588
-        "Der Bildschirm in Ruhe",  -- 589
-        "wie sichtbar die ruhenden Teile des Bildschirms außerhalb des Kampfes bleiben (0 blendet sie aus)",  -- 590
-        "Blendet aus: Gamepad-Leisten",  -- 591
-        "Blendet aus: Minikarte",  -- 592
-        "Blendet aus: Questliste",  -- 593
-        "Blendet aus: Schadensmesser",  -- 594
-        "Blendet aus: Erfahrungsleiste",  -- 595
-        "Blendet aus: Stärkungszauber",  -- 596
-        "Blendet aus: Abklingzeit-Reihen",  -- 597
-        "ob dieser Teil des Bildschirms außerhalb des Kampfes mit dem Rest ausblendet (aus: er bleibt immer, wie er ist)",  -- 598
-        "das Ausblenden des Bildschirms außerhalb des Kampfes: was ausblendet (Minikarte, Questliste und der Rest), jedes an oder aus",  -- 599
-        "Gespeichert: gib /reload ein, damit das Spiel es auf die Festplatte schreibt.",  -- 600
-        "Haltungs- und Begleiterknöpfe über den Leisten",  -- 601
-        "die Knöpfe für Haltungen und Begleiterbefehle sitzen dort, wo die grünen und roten Zielsymbole waren, damit sich ihr Rad ganz im Bild öffnet; diese Symbole werden ausgeblendet",  -- 602
-        "auflisten, wo die Teile der Gamepad-Leisten sitzen und was ruht (zur Fehlersuche)",  -- 603
-        "Auto",  -- 604
-        "Allgemein",  -- 605
-        "die des Spiels",  -- 606
-        "Tastensymbole: %s.",  -- 607
-        "Gerade ist kein Controller in Gebrauch, oder das Spiel kennt keine Symbolstile: es wird gesetzt, sobald einer da ist.",  -- 608
-        "Das Spiel hat die Tastensymbole nicht übernommen.",  -- 609
-        "Der Controller sagt nicht, was er ist: die Symbole bleiben, wie das Spiel sie hat.",  -- 610
-        "die Symbole, die das Spiel für die Tasten deines Controllers zeigt: auto (nach dem Controller in Gebrauch), xbox, playstation, switch, steam, generic (Zahlen) oder game, um sie zu lassen, wie das Spiel sie hat",  -- 611
-        "Abklingzeit-Reihen neben den Gamepad-Leisten",  -- 612
-        "die Abklingzeit-Reihen des Spiels sitzen unter dem Ziel statt auf den Gamepad-Tasten und sind etwas kleiner (nur bei den eingebauten Layouts des Spiels: bei einem eigenen Layout bleiben sie, wo du sie hingesetzt hast)",  -- 613
-        "Angelmodus: aus.",  -- 614
-        "Angeln: %s zum Auswerfen",  -- 615
-        "Kein Köder: %s zweimal für %s",  -- 616
-        "%s, um die Angel wegzustecken",  -- 617
-        "Angelmodus: %s zum Auswerfen, und noch einmal zum Anschlagen, wenn der Schwimmer zuckt.",  -- 618
-        "%s zum Anhauen, %s zum erneuten Auswerfen",  -- 619
-        "Der Angelmodus braucht eine Angelrute in deinen Händen.",  -- 620
-        "Du beherrschst Angeln nicht.",  -- 621
-        "Angelmodus: eine Taste wirft aus und hakt",  -- 622
-        "Angeltaste: %s",  -- 623
-        "Angeln mit einer Taste",  -- 624
-        "mit einer Angel in der Hand: deine Interaktionstaste zum Auswerfen, wann immer es nichts zum Interagieren gibt, und noch einmal zum Anschlagen, wenn der Schwimmer zuckt; der Fang wird für dich genommen. B steckt die Angel weg und gibt dir deine Waffen zurück",  -- 625
-        "Mit einem Druck neu auswerfen",  -- 626
-        "solange der Schwimmer draußen ist, wirft deine Angeltaste mit einem Druck neu aus, und A haut den Fisch an (das Spiel gibt kein Zeichen für einen Biss, auf das man warten könnte, also kann eine Taste nicht beides); aus: die Angeltaste haut an, wie die Interaktion des Spiels",  -- 627
-        "Köder mit Doppeldruck",  -- 628
-        "drücke deine Angeltaste zweimal schnell: der zweite Druck bringt den besten Köder aus deinen Taschen an die Angel, wenn sie keinen hat",  -- 629
-        "Gamepad-Leisten beim Angeln ausblenden",  -- 630
-        "mit einer Angel in der Hand sind die Gamepad-Leisten ausgeblendet, damit das Wasser frei zu sehen ist; die Angelanzeige zeigt die Taste zum Auswerfen. Sie sind zurück, sobald ein Kampf beginnt oder die Angel weggesteckt wird",  -- 631
-        "Ein-Tasten-Angeln vorerst aus oder wieder an (mit einer Angel in der Hand ist es von selbst an)",  -- 632
-        "die Taste, die angelt: anfangs deine Interaktionstaste (Quadrat oder X) oder jede andere, zum Beispiel ein Trigger (rt)",  -- 633
-        "Durotars Küste ist roter Fels und warmes Flachwasser. Die Trolle der Echoinseln sagen, die Makrelen ziehen am dichtesten, wenn die Flut den Duft der Kochfeuer von den Inseln herüberträgt.",  -- 634
-        "Die Seen von Mulgore sind klein, klar und geduldig. Die Tauren angeln dort so, wie sie alles andere tun: langsam und mit Dank.",  -- 635
-        "Jede Oase im Brachland ist ein Treffpunkt. Was auch immer dort bei Tag trinkt, bei Nacht schwimmt etwas darunter.",  -- 636
-        "Die Teiche von Teldrassil liegen im Schatten eines einzigen Baumes. Nachtelfische Angler schwören, die Fische dort hätten nie die Sonne gesehen und vermissten sie auch nicht.",  -- 637
-        "Das Wasser der Dunkelküste ist grau, kalt und voller Wracks. Die Hälfte dessen, was vor Auberdine anbeißt, hat sich in irgendjemandes verlorener Fracht häuslich eingerichtet.",  -- 638
-        "Die Flüsse des Eschentals fließen unter Blättern, die älter sind als die meisten Königreiche. Die Fische sind flink, und die Schildwachen fragen noch flinker, was du dort zu suchen hast.",  -- 639
-        "Unten zwischen den Tausend Nadeln ist Wasser knapp und wird eifersüchtig gehütet. Ein Fisch von hier hat sich seinen Platz verdient.",  -- 640
-        "Die Seen des Steinkrallengebirges liegen hoch und kalt zwischen den Gipfeln. Die Goblins hätten sie längst trockengelegt, wäre das Angeln nicht so gut.",  -- 641
-        "Die Küste von Desolace besteht aus Knochen und grauer Brandung. Irgendetwas dort unten hat an beidem Geschmack gefunden.",  -- 642
-        "Feralas ist grün bis hinunter an die Wasserlinie. Seine Flüsse sind tief, warm und überaus lebendig.",  -- 643
-        "Niemand weiß genau, wo in den Düstermarschen das Land aufhört und das Wasser anfängt. Angle vom Ufer aus und zähl danach deine Zehen.",  -- 644
-        "Der Dampfdruckpier hat das einzige Wasser in Tanaris, das den Namen verdient. Die Goblins verkaufen dir das Recht, dort zu angeln, und zwar zweimal, wenn du sie lässt.",  -- 645
-        "Unter Azsharas heller Bucht liegt eine versunkene Stadt. Alte Angler sagen, die ganz Großen leben dort, wo einst ihre Gärten waren.",  -- 646
-        "Die Tümpel des Teufelswalds leuchten, und zwar nicht auf die gute Art. Was noch darin schwimmt, ist stur über jede Vernunft hinaus.",  -- 647
-        "Die heißen Quellen und teergesäumten Seen von Un'Goro haben Dinge bewahrt, die der Rest der Welt vergessen hat. Manche davon beißen.",  -- 648
-        "Der See Elune'ara auf der Mondlichtung ist so still wie ein angehaltener Atem. Die Druiden bitten nur darum, dass du nicht mehr nimmst, als du essen wirst.",  -- 649
-        "Silithus ist Sand, Wind und das Geräusch von Flügeln. Wenn du hier Wasser zum Angeln gefunden hast, sag es niemandem.",  -- 650
-        "Die Seen von Winterquell frieren an den Rändern zu und dampfen in der Mitte. Die Fische dort sind fett gegen die Kälte und den Fußmarsch wert.",  -- 651
-        "In den Teichen von Orgrimmar angeln Peons, die nichts Besseres zu tun haben, und alte Grunzer, die dasselbe behaupten. Beide erzählen dir, der Große sei ihnen entwischt.",  -- 652
-        "Ein Fisch aus den Teichen von Donnerfels hat sein ganzes Leben hoch über den Ebenen verbracht. Er scheint das gelassen zu nehmen.",  -- 653
-        "Darnassus hütet seine Gewässer so sorgsam wie seine Tempel. Die Fische haben sich daran gewöhnt, bewundert zu werden.",  -- 654
-        "Die Seen des Alteracgebirges sind Schmelzwasser, und die Oger und das Syndikat angeln dort, wenn niemand hinsieht.",  -- 655
-        "Arathis Ufer haben mehr Armeen gesehen als Angler. Den Fischen ist längst gleich, wessen Banner über dem Wasser weht.",  -- 656
-        "Das Ödland ist Staub von einem Ende zum anderen. Ein Biss ist hier ein kleines Wunder, also behandle ihn auch so.",  -- 657
-        "Die Küste der Verwüsteten Lande ist rot, kahl gescheuert und still. Was in dieser Brandung lebt, hat gelernt, mit einer ganzen Menge zu leben.",  -- 658
-        "Die Seen von Tirisfal liegen reglos unter einem kränklichen Himmel. Die Verlassenen angeln dort aus Gewohnheit. Die Toten essen nicht viel, aber sie erinnern sich, dass es ihnen einmal geschmeckt hat.",  -- 659
-        "Die lange Küste des Silberwalds besteht ganz aus Nebel und Kiefernschatten. Das Angeln ist gut, und das ist das einzig Fröhliche, was je einer über die Gegend sagt.",  -- 660
-        "Die Flüsse der Westlichen Pestländer fließen noch, wenn auch nicht sauber. Was du herausziehst, sieh dir zweimal an.",  -- 661
-        "Nur wenige angeln in den Östlichen Pestländern, und noch weniger geben es zu. Das Wasser behält, was die Seuche von ihm übrig gelassen hat.",  -- 662
-        "Der Fluss im Vorgebirge des Hügellands und sein langes Südufer haben in jedem Streit, der um sie geführt wurde, beide Seiten ernährt.",  -- 663
-        "Das Hinterland hält seine Seen hoch oben zwischen den Bäumen, wo die Wildhammerzwerge vom Greifenrücken aus angeln, wenn sie glauben, dass niemand zusieht.",  -- 664
-        "Die Seen von Dun Morogh sind die meiste Zeit des Jahres von Eis umringt. Ein Zwerg schlägt ein Loch, setzt sich mit einem Humpen hin und nennt es einen guten Tag, ganz gleich, was anbeißt.",  -- 665
-        "Die Sengende Schlucht hat Lava, wo andere Länder Flüsse haben. Bring statt der Angel lieber etwas zu trinken mit.",  -- 666
-        "Die Brennende Steppe ist Asche und Glut. Wenn dir das Wasser hier überhaupt etwas gibt, dann ist es heiß.",  -- 667
-        "Jedes Kind in Elwynn lernt am Kristallsee oder am Steinhügelsee das Angeln. Die kleinen Fische dort tricksen sie seit Generationen aus.",  -- 668
-        "Der Gebirgspass der Totenwinde hat wenig Wasser und noch weniger Gastfreundschaft. Was in den Tümpeln unterhalb von Karazhan ist, bleibt am besten dort.",  -- 669
-        "Der Fluss am Rand des Dämmerwalds ist zu jeder Stunde schwarz. Die Fische scheint die Dunkelheit nicht zu stören, die Angler schon.",  -- 670
-        "Der Loch ist der Stolz von Loch Modan, aufgestaut vom großen Steinwerkdamm. Zwerge messen jedes Anglerlatein an ihm, und meistens gewinnt der Loch.",  -- 671
-        "Der Immerruhsee im Rotkammgebirge ist schön wie ein Gemälde, und geangelt wird dort von jedem Steg in Seenhain. Die Leute im Ort kennen jede gute Stelle und verraten dir keine einzige.",  -- 672
-        "Von seinen Dschungelflüssen bis zum wilden Südkap hat das Schlingendorntal die reichsten Gewässer des Kontinents. Die Angler von Beutebucht tragen darum ein Turnier aus, und fast alle schummeln.",  -- 673
-        "Die Sümpfe des Elends sind grünes Wasser unter grünen Bäumen. Die Fische schmecken nach Schlamm, und die Einheimischen mögen sie genau so.",  -- 674
-        "Westfalls Felder haben versagt, seine Küste nicht. Wer geblieben ist, lebt vom langen grauen Strand.",  -- 675
-        "Das Sumpfland trägt seinen Namen zu Recht. Die Docks im Hafen von Menethil sind der trockenste Platz, um dort zu angeln, und die Krokilisken wissen das.",  -- 676
-        "In den Kanälen von Sturmwind angeln Kinder, Rentner und mindestens ein verkleidetes Mitglied des Adels. Niemand fragt, was sonst noch in den Kanälen ist.",  -- 677
-        "Die Düstere Höhle birgt den einzigen stillen Teich von Eisenschmiede. Alte Zwerge angeln dort stundenlang und sagen kein Wort.",  -- 678
-        "Die Kanäle von Unterstadt führen ein Grün, das nichts mit Algen zu tun hat. Die Verlassenen, die dort angeln, tun es nicht fürs Abendessen.",  -- 679
-        "Der erste Fisch, den die meisten Angler je an Land ziehen, und so leuchtend, dass sie ihn nicht vergessen.",  -- 680
-        "Glatt, flink und an jeder warmen Küste zu Hause. Gegrillt schmeckt das besser, als der Name vermuten lässt.",  -- 681
-        "Ganz Maul, und am glücklichsten in Wasser, das du nicht trinken würdest.",  -- 682
-        "Klein, bissig und furchtlos. Ein Schwarm davon soll einmal einen Bären aus dem Loch gejagt haben.",  -- 683
-        "Ein Farbblitz unter der Brandung. Hängt so ein Fisch an der Leine, gilt das unter Seeleuten als Glück für die Reise.",  -- 684
-        "Ein geduldiger Grundfisch mit Barthaaren wie ein Zwergenältester.",  -- 685
-        "Zweimal isst das niemand. Alchemisten kaufen jedes Exemplar, das sie kriegen können.",  -- 686
-        "Die Flossen glimmen wie Glut unter der Asche, und das ausgepresste Öl brennt fast genauso gut.",  -- 687
-        "Gepanzert wie ein kleiner Schild. Das Fleisch darin ist die Mühe wert.",  -- 688
-        "Irgendetwas im Wasser nahe den Höhlen des Wehklagens hat ihn verändert. Wer einen isst, den verändert es womöglich auch, für eine Weile.",  -- 689
-        "Das Flussvolk sagt, eine Mahlzeit davon kläre den Geist. Weise macht ihn das Schwimmen gegen den Strom.",  -- 690
-        "Älter, größer und weiser als sein Vetter, was ihn nicht von deinem Haken ferngehalten hat.",  -- 691
-        "Ein zäher Kämpfer aus warmen südlichen Meeren und ein Liebling auf jeder Tavernentafel von Beutebucht bis Gadgetzan.",  -- 692
-        "Die Stirn glänzt wie echtes Mithril. Mehr als ein Bergmann hat schon versucht, ein Exemplar einzuschmelzen.",  -- 693
-        "Die Schuppen lassen sich zu einem Öl einkochen, das die Haut hart wie Fels macht. Am liebsten ist ihm die Nacht.",  -- 694
-        "Poliert wie ein Paradeharnisch und beinahe genauso schwer.",  -- 695
-        "Er kommt nur in den kalten Monaten in Küstennähe, und die Köche, die ihn kennen, warten das ganze Jahr darauf.",  -- 696
-        "Er zieht, wenn die Tage lang sind. Die Küstenbewohner lesen an ihm die Jahreszeit ab.",  -- 697
-        "Fass ihn in der Mitte an, und nur ein einziges Mal.",  -- 698
-        "Ein Flussfisch aus wildem Land, an den Kiemen so rot wie die Kriegsbemalung eines Trolls.",  -- 699
-        "Er frisst nach Einbruch der Dunkelheit. Eine Suppe aus ihm beruhigt die Nerven eines Zauberwirkers.",  -- 700
-        "Er frisst am Tag, in fast allem das Gegenteil des Nachtflossenschnappers, und teilt sich trotzdem das Wasser mit ihm.",  -- 701
-        "Streng genommen kein Fisch. Er hält nichts davon, gefangen zu werden, und lässt dich das spüren.",  -- 702
-        "Bleich wie Flusseis, aus den kalten, klaren Seen des Nordens.",  -- 703
-        "Du wirst beide Hände brauchen, und vielleicht einen Freund.",  -- 704
-        "%.1f Pfd.",  -- 705
-        "Neu in deinem Angeltagebuch: %s, %s.",  -- 706
-        "Neu in deinem Angeltagebuch: %s.",  -- 707
-        "Dein bisher schwerster Fang – %s: %s (vorher %s).",  -- 708
-        "Angeltagebuch",  -- 709
-        "jeder Fang wird in dein Angeltagebuch geschrieben: wie viele von jeder Art, wo du sie zuerst gefangen hast, und ein zum Spaß erfundenes Gewicht mit deinem besten von jeder Art (/cchud journal öffnet es)",  -- 710
-        "Köder %s",  -- 711
-        "Kein Köder",  -- 712
-        "Gefangen %d",  -- 713
-        "Entkommen %d",  -- 714
-        "Angelanzeige",  -- 715
-        "mit einer Angelrute in den Händen: die Fische des Gewässers, an dem du stehst (die hier noch nicht gefangenen bleiben verborgen), deine Angelfertigkeit und was dein Köder dazugibt, wie viele du gefangen hast und wie viele entkommen sind, wie lange dein Köder hält, und deine letzten Fänge",  -- 716
-        "Ein Neugieriger: +%d%%",  -- 717
-        "Halte deinen Köder neben dem Fisch",  -- 718
-        "Nächster Fang +%d%%",  -- 719
-        "%s halten: der Köder läuft die Schnur entlang",  -- 720
-        "%d in Folge",  -- 721
-        "Ein Spiel, während der Schwimmer draußen ist",  -- 722
-        "auf der Zauberleiste gespielt, solange deine Schnur draußen ist: halte einen Abzug und dein Köder läuft die Schnur entlang, lass los und er treibt zurück; halte ihn beim Schatten des Fisches. Je besser du spielst, desto schwerer das erfundene Gewicht deines nächsten Fangs. Es belegt keine Taste und berührt weder Auswurf noch Fang",  -- 723
-        "%d gefangen, %d Arten, %d entkommen",  -- 724
-        "Schwerster: %s, %s",  -- 725
-        "Fische",  -- 726
-        "Gewässer",  -- 727
-        "Noch nichts gefangen. Nimm eine Angel mit ans Wasser.",  -- 728
-        "Gefangen: %d",  -- 729
-        "Schwerster: %s, in %s",  -- 730
-        "Zuerst gefangen: %s",  -- 731
-        "Hier gefangen: %d",  -- 732
-        "Hier gefundene Arten: %d",  -- 733
-        "Wählen",  -- 734
-        "Schließen",  -- 735
-        "dein Angeltagebuch öffnen oder schließen: jede Art, die du gefangen hast, dein schwerster Fang von jeder, und die Gewässer, in denen du geangelt hast",  -- 736
-        "Chat blendet aus, wenn es ruhig ist",  -- 737
-        "Chattext blendet nach einigen Sekunden ohne neue Nachrichten aus",  -- 738
-        "Sekunden bis der Chat ausblendet",  -- 739
-        "wie lange Chattext bleibt, bevor er ausblendet",  -- 740
-        "Koordinaten auf der Karte",  -- 741
-        "deine Koordinaten unter der Weltkarte",  -- 742
-        "%d Nachrichten seit deiner Anmeldung als Spam ausgeblendet.",  -- 743
-        "%d davon waren wiederholte Gildenwerbung.",  -- 744
-        "Klassensymbol und Stufe im Chat",  -- 745
-        "Klassensymbol und Stufe eines Spielers in Klammern vor seinem Namen, wenn das Spiel sie uns wissen lässt",  -- 746
-        "Kurze Kanalnamen im Chat",  -- 747
-        "der Kanal vor einer Zeile, gekürzt: [P] Gruppe, [PL] Gruppenleiter, [G] Gilde, [O] Offizier, [R] Schlachtzug, [RL] Schlachtzugsleiter, [I] Instanz, und ein nummerierter Kanal mit seiner Nummer, [1]",  -- 748
-        "Nur Vornamen im Chat",  -- 749
-        "ein Name mit Nachnamen erscheint nur mit dem Vornamen (Jory Spleeneater spricht als Jory); ein Flüstern oder Rechtsklick darauf erreicht weiterhin den ganzen Namen",  -- 750
-        "Größe des Chattexts",  -- 751
-        "die Größe des Texts in den Chatfenstern als Anteil der spieleigenen Größe (die Einstellung des Spiels bleibt, wie sie ist)",  -- 752
-        "Goldverkäufer und wiederholte Werbung ausblenden",  -- 753
-        "Nachrichten, die Gold oder Dienste mit einer Webadresse anbieten, und dieselbe Nachricht, die ein Spieler wiederholt, werden ausgeblendet (nie von deiner Gruppe, Gilde oder deinen Freunden)",  -- 754
-        "Wiederholte Gildenwerbung ausblenden",  -- 755
-        "in öffentlichen Kanälen wird die Werbung einer Gilde einmal gezeigt; dieselbe vom selben Spieler oder eine fast gleiche innerhalb von 15 Minuten wird ausgeblendet (nie von deiner Gruppe, Gilde oder deinen Freunden)",  -- 756
-        "listet die zuletzt als Spam ausgeblendeten Chatnachrichten auf",  -- 757
-        "Flug",  -- 758
-        "Ziel unbekannt",  -- 759
-        "geschätzt nach der Entfernung",  -- 760
-        "erster Flug auf dieser Route: die Flugzeit wird gelernt",  -- 761
-        "Landung",  -- 762
-        "%s: etwa %s, geschätzt nach der Entfernung",  -- 763
-        "%s: etwa %s",  -- 764
-        "%s: erster Flug auf dieser Strecke, Zeit unbekannt",  -- 765
-        "Im Flug, Ziel unbekannt",  -- 766
-        "%s: Flugzeit gelernt, %s",  -- 767
-        "%d Flugstrecken bekannt.",  -- 768
-        "Flüge: Zeit und Countdown",  -- 769
-        "auf einem Flug werden Ziel und Dauer im Chat genannt, und ein Balken oben am Bildschirm zählt bis zur Landung herunter; die Zeit jeder Strecke wird aus deinen Flügen gelernt",  -- 770
-        "Flüge: dein Reittier entlang der Leiste",  -- 771
-        "ein Greif, ein Windreiter oder eine Fledermaus (was der Flugmeister dir gab) gleitet die Flugleiste entlang zu deinem Landeplatz",  -- 772
-        "die Flugstrecken mit bekannter Zeit auflisten",  -- 773
-        "Ein Flug ist ein guter Moment dafür.",  -- 774
-        "Du spielst seit %s.",  -- 775
-        "Zeit für einen Schluck Wasser",  -- 776
-        "Erinnerung, Wasser zu trinken",  -- 777
-        "ab und zu beim Spielen eine sanfte Erinnerung, einen Schluck Wasser zu trinken (nie im Kampf)",  -- 778
-        "Wassererinnerung alle (Minuten)",  -- 779
-        "wie viele Spielminuten zwischen den Erinnerungen ans Wassertrinken liegen",  -- 780
-        "Wassererinnerung zu Beginn eines Flugs",  -- 781
-        "ein Flug ist eine natürliche Pause: die Erinnerung ans Wassertrinken kommt, wenn einer beginnt, außer die letzte ist noch nicht lange her",  -- 782
-        "die Erinnerung ans Wassertrinken zeigen",  -- 783
-        "Eigene Rahmen des Spiels umgestalten",  -- 784
-        "Tooltips, Buffs, Questverfolgung, Minikarte, Erfahrungsleiste, Chat-Reiter und Gamepad-Leisten im Aussehen des HUDs (die Maus-Oberfläche behält die des Spiels)",  -- 785
-        "Größe der Erfahrungsleiste",  -- 786
-        "die Größe der Erfahrungs- und Rufleisten, solange sie neu gestaltet sind, in Prozent",  -- 787
-        "Tooltips",  -- 788
-        "Tooltips in dunklem Glas, umrandet in der Farbe der Klasse eines Spielers oder der Qualität eines Gegenstands",  -- 789
-        "Gamepad-Leisten",  -- 790
-        "die Gamepad-Tasten mit einem schlanken Ring auf dunklem Untergrund statt der wuchtigen Grafik",  -- 791
-        "Buffs",  -- 792
-        "deine Buff- und Debuff-Symbole zugeschnitten und umrandet, ihre Zeiten mit Kontur",  -- 793
-        "Questverfolgung",  -- 794
-        "die Kopfzeilen der Questverfolgung in dunklem Glas, ihre Zeilen mit Kontur",  -- 795
-        "Minikarte",  -- 796
-        "ein schlanker Ring und ein weicher Schein um die Minikarte statt des goldenen Rands",  -- 797
-        "Erfahrungsleiste",  -- 798
-        "die Erfahrungs- und Rufleisten etwas kleiner, in eigenen Farben",  -- 799
-        "Chat",  -- 800
-        "Chat-Reiter mit Kontur und das Eingabefeld als dunkles Glas",  -- 801
-        "Schadensmesser",  -- 802
-        "die Schadensanzeige des Spiels im Look des HUD: ihre Balken schräg auf dunklem Grund und umrandeter Text; sie behält alles, was sie tut",  -- 803
-        "Prüfung: %d von %d bestanden",  -- 804
-        "Das Spiel ist seit dem Einloggen nicht stehen geblieben.",  -- 805
-        "Momente, in denen das Spiel stand, und der Anteil des HUD daran:",  -- 806
-        "Die langsamsten Momente des HUD:",  -- 807
-        "Debug-Berichte",  -- 808
-        "die Berichte zur Fehlersuche von selbst sammeln: beim Einloggen und erneut beim Neuladen oder Ausloggen (sie bleiben in den gespeicherten Einstellungen)",  -- 809
-        "die Momente, in denen das Spiel seit dem Einloggen stand, und wie viel davon die eigene Arbeit des HUD war",  -- 810
-        "HUD-Voreinstellung: %s, passend zur Kamera",  -- 811
-        "Preset: %s",  -- 812
-        "Ein Layout namens '%s' wurde dem Bearbeitungsmodus des Spiels hinzugefügt. Wähle es dort aus, um es zu benutzen (Spielmenü > Bearbeitungsmodus > Layout).",  -- 813
-        "unbekanntes Preset '%s'",  -- 814
-        "Für einen Fernseher: größerer Text im HUD und im Chat.",  -- 815
-        "Für einen Monitor: Text in seiner normalen Größe.",  -- 816
-        "Unsere Fenster sind wieder an ihrem Ausgangsplatz. Wähle im Bearbeitungsmodus das Layout %s des Spiels (Spielmenü > Bearbeitungsmodus > Layout).",  -- 817
-        "Voreinstellungen setzen den Kameraabstand",  -- 818
-        "eine Voreinstellung bringt die Kamera auch einmal auf den Abstand, für den ihr Layout gemacht wurde (danach frei zoomen)",  -- 819
-        "Aktion",  -- 820
-        "eine Ansicht aus der dritten Person: schmale vertikale Leisten neben deinem Charakter, alle Effekte an; außerhalb des Kampfes blendet alles aus",  -- 821
-        "Klassisch",  -- 822
-        "unsere Rahmen dort, wo WoW sie immer hatte, ruhigere Effekte, die Gamepad-Leisten des Spiels unverändert",  -- 823
-        "Minimal",  -- 824
-        "nur das Nötige: freundliche NPCs zeigen ihre Plakette (mit ihrer Tätigkeit) nur, solange du auf sie zeigst, sie anvisierst oder als Ziel hast; Namen ohne Titel; außerhalb des Kampfes ruhen deine Leisten als leiser Hinweis (wenig Gesundheit zeigt sich immer)",  -- 825
-        "Offene Welt",  -- 826
-        "ein klarer Bildschirm zum Erkunden: schmale Leisten neben dir, die verblasst ruhen, Plaketten ohne Kraftleisten, Chat, der ausblendet",  -- 827
-        "Abenteuer",  -- 828
-        "nach Konsolen-Abenteuern in offener Welt: Vitalwerte neben dir, ein kleines Ziel hoch in der Mitte, Stadtbewohner nur, wenn du auf sie zeigst, Chat, der schnell ausblendet",  -- 829
-        "Soulslike",  -- 830
-        "deine Leisten oben links, eine große Zielleiste tief in der Mitte wie eine Bossleiste, jeder Treffer spürbar",  -- 831
-        "Shooter",  -- 832
-        "aufrechte Leisten knapp rechts der Mitte, nah an deinem Ziel, das Ziel hoch oben, starke Trefferrückmeldung",  -- 833
-        "Crossbar",  -- 834
-        "nach MMOs mit Controller: Ziel und Fokus hoch in der Mitte, deine Leisten direkt über den Gamepad-Leisten, Gruppe links, volle Plaketten",  -- 835
-        "ARPG",  -- 836
-        "nach Action-Rollenspielen: die Kamera weit hinten, deine Vitalwerte unten links, das Ziel hoch in der Mitte, kleine Gegner klein, jeder Treffer laut",  -- 837
-        "Kompass",  -- 838
-        "nach Ego-Rollenspielen: die Kamera nah, deine Leisten unten in der Mitte, das Ziel unter dem oberen Rand, Stadtbewohner nur, wenn du auf sie zeigst",  -- 839
-        "Schlachtzug",  -- 840
-        "die Anordnung von WoW mit allem, was eine Gruppe braucht: Gruppen- und Schlachtzugsrahmen, Gesundheitsprozent und Stufen auf Plaketten",  -- 841
-        "ControllerCams Voreinstellungen folgen",  -- 842
-        "eine Kamera-Voreinstellung in ControllerCam für überall wählt auch die passende HUD-Voreinstellung (die Kamera behält ihre eigene Entfernung)",  -- 843
-        "Modern",  -- 844
-        "stelle das ganze HUD auf eine Voreinstellung: action, classic, minimal, openworld, adventure, soulslike, shooter, crossbar, arpg, compass, raid",  -- 845
-        "Zielrahmen und Namensplaketten kompakt oder voll, beide auf einmal",  -- 846
-        "der Zielrahmen kompakt oder voll",  -- 847
-        "den Text für einen Fernseher am anderen Ende des Zimmers oder für einen Monitor in Armlänge bemessen",  -- 848
-        "unsere Fenster an ihren Ausgangsplatz zurücksetzen, passend zum spieleigenen Layout Modern oder Klassisch",  -- 849
-        "Deine gesamte Einrichtung (HUD, Kamera und das Layout des Spiels): Kopiere diese Zeile (Strg+C), um sie aufzubewahren oder zu teilen.",  -- 850
-        "Füge eine Zeile mit HUD-Einstellungen ein (Ctrl+V) und bestätige.",  -- 851
-        "Diese Zeile ist beschädigt: Kopiere sie noch einmal, vollständig.",  -- 852
-        "Diese Zeile stammt von einer neueren Version: Aktualisiere das Addon.",  -- 853
-        "Das ist keine Zeile mit HUD-Einstellungen.",  -- 854
-        "Einstellungen importiert: %d übernommen, %d ausgelassen.",  -- 855
-        "Die Kameraeinrichtung wurde mit übernommen.",  -- 856
-        "Die Kameraeinrichtung wurde nicht verändert.",  -- 857
-        "Das Layout des Spiels ist jetzt '%s'.",  -- 858
-        "Das Layout des Spiels wurde nicht verändert.",  -- 859
-        "deine Einstellungen als eine Textzeile, zum Behalten oder Teilen",  -- 860
-        "übernimmt Einstellungen aus einer Textzeile, die mit /cchud export erstellt wurde",  -- 861
-        "Das HUD ist an, solange die Gamepad-Oberfläche benutzt wird. Seine Optionen: Optionen > AddOns > ControllerCam > HUD oder /cchud.",  -- 862
-        "Nur Kamera: Das HUD ruht und die Oberfläche des Spiels ist wie zuvor. /cchud on schaltet es ein.",  -- 863
-        "Auch den Bildschirm für den Controller einrichten? Das fügt dem Bearbeitungsmodus des Spiels ein Layout namens CCHUD hinzu, das du dort auswählen kannst: Es setzt die Abklingzeit-Reihen unter das Ziel, weg von den Gamepad-Tasten. Deine eigenen Layouts bleiben erhalten (/cchud setup bietet das erneut an).",  -- 864
-        "Einrichten",  -- 865
-        "Jetzt nicht",  -- 866
-        "ControllerCam bringt eine Controller-Oberfläche mit, das HUD: eigene Einheitenfenster, Namensplaketten, Zauberleiste und mehr, solange die Gamepad-Oberfläche benutzt wird. Möchtest du es oder nur die Kamera?",  -- 867
-        "Kamera + HUD",  -- 868
-        "Nur Kamera",  -- 869
-        "Dieser Client erlaubt Addons nicht, das Layout zu ändern.",  -- 870
-        "noch einmal fragen: die Kamera mit dem HUD oder nur die Kamera",  -- 871
-        "das für das HUD gemachte Bildschirmlayout erneut anbieten (Bearbeitungsmodus des Spiels)",  -- 872
-        "Wird angezeigt, solange die Gamepad-Oberfläche verwendet wird. Ziehe unsere Rahmen im Bearbeitungsmodus des Spiels.",  -- 873
-        "Presets",  -- 874
-        "Bemessen für",  -- 875
-        "Fernseher",  -- 876
-        "Monitor",  -- 877
-        "Tastensymbole",  -- 878
-        "die Symbole, die das Spiel für die Tasten deines Controllers zeigt: von selbst gefunden für den Controller in Gebrauch, oder die Art, die du wählst",  -- 879
-        "Schriftart",  -- 880
-        "Layout des Spiels zurücksetzen",  -- 881
-        "Ausprobieren",  -- 882
-        "Demo abspielen",  -- 883
-        "Jeden Treffereffekt anzeigen",  -- 884
-        "Selbstprüfung ausführen",  -- 885
-        "Gamepad-Leisten: kompakt / voll",  -- 886
-        "Einstellungen exportieren",  -- 887
-        "Einstellungen importieren",  -- 888
-        "Hake „Erweiterte Optionen anzeigen“ auf der Hauptseite an, um alle Einstellungen zu sehen.",  -- 889
-        "Module",  -- 890
-        "Schnellschalter",  -- 891
-        "Allgemein",  -- 892
-        "HUD",  -- 893
-        "Das Optionsfenster ist in diesem Client nicht verfügbar.",  -- 894
-        "Aktiviert",  -- 895
-        "das gesamte HUD; aus bringt die eigenen Rahmen des Spiels zurück",  -- 896
-        "Auch in der Maus-und-Tastatur-Oberfläche",  -- 897
-        "normalerweise läuft das HUD nur, solange die Gamepad-Oberfläche verwendet wird",  -- 898
-        "Rahmen des Spiels beiseitelegen",  -- 899
-        "blende die Spieler-, Ziel- und Fokusrahmen des Spiels aus, solange unsere angezeigt werden",  -- 900
-        "Chatfenster oben links",  -- 901
-        "verschiebe das Chatfenster nach oben links, solange das HUD läuft",  -- 902
-        "Vertikale Balken im Ruhezustand",  -- 903
-        "wie sichtbar die vertikalen Balken bei voller Gesundheit außerhalb des Kampfes bleiben (0 blendet sie aus)",  -- 904
-        "Klassenfarben",  -- 905
-        "färbe deine Leiste und die Leisten anderer Spieler nach Klasse",  -- 906
-        "Klassensymbole",  -- 907
-        "ein Klassensymbol vor dem Namen eines Spielers beim Ziel und beim Ziel des Ziels",  -- 908
-        "Bedrohung am Zielfenster",  -- 909
-        "ein Schildsymbol und ein Leuchten am Zielrahmen: rot, solange es dich angreift, rot und gelb, wenn du es gleich ziehst, gelb und blau, wenn du es verlierst, blau, wenn es nicht auf dir ist",  -- 910
-        "Überall kompakte Leisten",  -- 911
-        "Zielrahmen und Namensplaketten im kompakten Stil, gut halb so breit (jedes lässt sich weiter einzeln einstellen; Voreinstellungen ändern es nie)",  -- 912
-        "Kompaktes Zielfenster",  -- 913
-        "das Zielfenster etwas mehr als halb so breit",  -- 914
-        "Gesundheitsfarben im Kampf",  -- 915
-        "im Kampf wechseln die Gesundheitsbalken von Grün über Gelb zu Rot, wenn die Gesundheit sinkt",  -- 916
-        "Schatten hinter Text",  -- 917
-        "ein weiches dunkles Band hinter dem Text des Ziels, damit er lesbar bleibt",  -- 918
-        "Textgröße",  -- 919
-        "Größe des Texts auf unseren Rahmen",  -- 920
-        "Rahmengröße",  -- 921
-        "Größe unserer Einheitenrahmen",  -- 922
-        "Deine Leisten im Kampf",  -- 923
-        "wie sichtbar deine Leisten, Begleiter und Fokus im Kampf sind, bis etwas Aufmerksamkeit verlangt",  -- 924
-        "Voll bei Gesundheit unter",  -- 925
-        "deine Leisten kehren vollständig zurück, wenn deine Gesundheit unter diesen Wert fällt",  -- 926
-        "Voll bei Mana unter",  -- 927
-        "deine Leisten kehren vollständig zurück, wenn dein Mana unter diesen Wert fällt",  -- 928
-        "Spielerleiste im Leerlauf",  -- 929
-        "wie sichtbar die Spielerleiste bei voller Gesundheit oder außerhalb des Kampfes bleibt (0 blendet sie aus)",  -- 930
-        "Händler- und Bankhilfe",  -- 931
-        "die Schaltfläche Plunder verkaufen beim Händler fragt nach, was verkauft werden soll; schnelles Verschieben bei Händler und Bank",  -- 932
-        "Erweiterte Optionen anzeigen",  -- 933
-        "alle Einstellungen, nicht nur die Hauptschalter",  -- 934
-        "Spielerrahmen",  -- 935
-        "unsere Spielerleiste, oben links",  -- 936
-        "Zielrahmen",  -- 937
-        "unsere Zielleiste, oben mittig",  -- 938
-        "Haustierleiste",  -- 939
-        "eine kleine Begleiterleiste unter der Spielerleiste oder neben den senkrechten Leisten",  -- 940
-        "Fokusrahmen",  -- 941
-        "unser Fokusrahmen",  -- 942
-        "schmale aufrechte Gesundheits- und Energieleisten neben deinem Charakter, für eine Third-Person-Ansicht (statt der Spielerleiste)",  -- 943
-        "Plunder verkaufen, wenn ein Händler geöffnet wird",  -- 944
-        "verkaufe Plunder nach deinen Regeln, sobald ein Händler geöffnet wird",  -- 945
-        "Weiße Waffen und Rüstung sind Plunder",  -- 946
-        "weiße Waffen und Rüstungen als Plunder zählen (nie Werkzeuge, Angelruten, Ausrüstung mit Benutzen-Effekt oder mögliche Verbesserungen; es wird immer zuerst gefragt)",  -- 947
-        "Einlagern, wenn die Bank öffnet",  -- 948
-        "für die Bank markierte Gegenstände und, wenn eingeschaltet, was die Bank schon hat, kommen von selbst hinein",  -- 949
-        "die Option des Spiels; unser kleiner Rahmen folgt ihr",  -- 950
-        "Abklingzeitmanager",  -- 951
-        "der Abklingzeitmanager des Spiels",  -- 952
-        "Persönliche Ressourcenanzeige",  -- 953
-        "deine Gesundheit und Ressource unter deinem Charakter",  -- 954
-        "Bank nimmt Reagenzien automatisch auf",  -- 955
-        "die Option des Spiels für die Bank",  -- 956
-        "Tooltip bei Beginn eines Buffs",  -- 957
-        "die Option des Spiels: der Tooltip eines Buffs erscheint kurz, wenn er angewendet wird (Gamepad-UI)",  -- 958
-        "Klassenfarben für Namen im Chat",  -- 959
-        "die Chat-Einstellung des Spiels für alle Chatarten gleichzeitig: der Name eines Spielers in seiner Klassenfarbe",  -- 960
-        "öffne das Optionsfenster (Optionen > AddOns > ControllerCam HUD)",  -- 961
-        "Rahmen",  -- 962
-        "Bildschirm ausblenden",  -- 963
-        "Effekte",  -- 964
-        "Aussehen",  -- 965
-        "Quests, Chat und Karte",  -- 966
-        "Taschen, Bank und Händler",  -- 967
-        "Angeln",  -- 968
-        "Barrierefreiheit",  -- 969
-        "Native Optionen",  -- 970
-        "%s  |  Gamepad-Oberfläche: %s  |  läuft: %s",  -- 971
-        "Spieler %s, Ziel %s, Haustier %s, Fokus %s  |  Spielrahmen beiseitegelegt: %s  |  Chat verschoben: %s",  -- 972
-        "native Optionen: Ziel des Ziels %s, Abklingzeitmanager %s, persönliche Ressourcen %s",  -- 973
-        "Textgröße %d%%  |  Textschatten: %s",  -- 974
-        "Händler- und Bankhilfe: %s  |  Autoverkauf: %s  |  weiße Ausrüstung ist Plunder: %s",  -- 975
-        "Leerlaufsichtbarkeit %d%%  |  Skalierung %d%%  |  Klassenfarben: %s",  -- 976
-        "Ein minimalistisches Action-Spiel-HUD für die Gamepad-Oberfläche.",  -- 977
-        "aktiviert",  -- 978
-        "deaktiviert: die eigenen Rahmen des Spiels sind zurück",  -- 979
-        "auch in der Maus-und-Tastatur-Oberfläche nutzen: %s",  -- 980
-        "Spielrahmen beiseitegelegt: %s",  -- 981
-        "Chat nach oben links verschoben: %s",  -- 982
-        "Klassenfarben: %s",  -- 983
-        "Dieser Client hat diese Option nicht.",  -- 984
-        "%s: %s (die eigene Option des Spiels)",  -- 985
-        "Das Spiel hat das gerade nicht akzeptiert.",  -- 986
-        "Händler- und Bankhilfe: %s",  -- 987
-        "Autoverkauf: %s",  -- 988
-        "weiße Ausrüstung ist Plunder: %s",  -- 989
-        "Händlerhilfe ist aus.",  -- 990
-        "Verwendung: /cchud sell [junk | recommended | white | green | blue]",  -- 991
-        "markierte Gegenstände einzahlen, wenn die Bank geöffnet wird: %s",  -- 992
-        "Verwendung: /cchud junk <item> (Shift-Klick auf den Gegenstand fügt ihn in die Chatzeile ein)",  -- 993
-        "Gegenstand %d: Plunder, wird mit dem Rest verkauft",  -- 994
-        "Gegenstand %d: behalten, nie verkauft",  -- 995
-        "Gegenstand %d: für die Bank",  -- 996
-        "Textschatten: %s",  -- 997
-        "Verwendung: /cchud text <80-250>",  -- 998
-        "Textgröße %d%%",  -- 999
-        "Demo beendet",  -- 1000
-        "Das HUD läuft nicht.",  -- 1001
-        "Demo läuft: ein erfundener Kampf in Dauerschleife. Gib /cchud demo erneut ein, um sie zu beenden.",  -- 1002
-        "Verwendung: /cchud idle <0-100>",  -- 1003
-        "Leerlaufsichtbarkeit %d%%",  -- 1004
-        "Verwendung: /cchud scale <50-200>",  -- 1005
-        "Skalierung %d%%",  -- 1006
-        "Ziehe die Rahmen und gib dann /cchud lock ein.",  -- 1007
-        "Rahmen gesperrt",  -- 1008
-        "Alles ist wieder wie am Anfang: Einstellungen, Fenster und das Bildschirmlayout (deine Händlermarkierungen und der Preisverlauf bleiben erhalten).",  -- 1009
-        "Rahmen sind wieder an ihrer Ausgangsposition",  -- 1010
-        "unbekannter Befehl '%s'. Gib /cchud help ein",  -- 1011
-        "Fehlerliste geleert.",  -- 1012
-        "Keine Fehler aufgezeichnet.",  -- 1013
-        "%d Fehler aufgezeichnet (neueste zuletzt). /cchud errors clear leert die Liste.",  -- 1014
-        "Status anzeigen",  -- 1015
-        "das HUD ein- oder ausschalten (aus bringt die eigenen Rahmen des Spiels zurück)",  -- 1016
-        "das HUD auch in der Maus-und-Tastatur-Oberfläche verwenden",  -- 1017
-        "unseren Rahmen dafür verwenden oder den des Spiels",  -- 1018
-        "schmale, aufrechte Gesundheits- und Kraftbalken neben deinem Charakter",  -- 1019
-        "Ziel des Ziels (die eigene Option des Spiels, auch in dessen Menüs)",  -- 1020
-        "der Abklingzeitmanager des Spiels (die eigene Option des Spiels)",  -- 1021
-        "deine Gesundheit und Ressource unter deinem Charakter (die eigene Option des Spiels)",  -- 1022
-        "der Tooltip, der erscheint, wenn ein Buff beginnt (die eigene Option des Spiels)",  -- 1023
-        "die Spieler- und Zielrahmen des Spiels sichtbar lassen (an) oder beiseitelegen (aus)",  -- 1024
-        "beim Händler: wählen, was verkauft wird (auch: sell junk, sell recommended, sell white | green | blue)",  -- 1025
-        "zähle weiße Waffen und Rüstung als Plunder",  -- 1026
-        "einen Gegenstand markieren: immer verkauft, nie verkauft oder für die Bank (Shift-Klick fügt ihn in die Chatzeile ein)",  -- 1027
-        "an der Bank: einlagern, was die Bank schon hat, und alles für sie Markierte",  -- 1028
-        "an der Bank: herausnehmen, wovon du schon etwas trägst",  -- 1029
-        "einlagern, sobald die Bank öffnet",  -- 1030
-        "die Bank nimmt Reagenzien automatisch auf (die eigene Option des Spiels)",  -- 1031
-        "Textgröße in Prozent (150 passt gut auf einem Fernseher)",  -- 1032
-        "wie sichtbar die Spielerleiste bleibt, wenn nichts passiert (0 blendet sie aus)",  -- 1033
-        "Größe der Rahmen in Prozent",  -- 1034
-        "ziehe die Rahmen an die gewünschte Stelle (der Bearbeitungsmodus des Spiels kann das auch)",  -- 1035
-        "die Rahmen an ihre Ausgangsposition zurücksetzen",  -- 1036
-        "einen kurzen erfundenen Kampf abspielen, um zu sehen, wie die Rahmen reagieren (erneut zum Beenden)",  -- 1037
-        "gleiche das Angezeigte mit den Einstellungen ab (check listet jede Zeile auf)",  -- 1038
-        "eine Beschreibung der Gamepad-Oberfläche dieses Clients speichern (zur Fehlersuche)",  -- 1039
-        "diese Liste anzeigen",  -- 1040
-        "die letzten Fehler des HUD, auch nach einem Neuladen (um sie zu melden)",  -- 1041
+        "Nächste Quest fokussieren",  -- 544
+        "die Quest, auf die das Spiel dich hinweist, ist unterwegs immer die nächste deiner Liste; eine, die du selbst fokussierst, bleibt zehn Minuten unangetastet",  -- 545
+        "Questliste: kurze Ziele",  -- 546
+        "Ziele in der Questliste sagen nur das Nötige, mit einem Symbol für die Art davor: ein Schädel und 0/1 Kapitän Schreckhub, nicht 0/1 Kapitän Schreckhub getötet",  -- 547
+        "Questfortschritt im Chat",  -- 548
+        "eine kurze Zeile im Chat, sobald eine Quest vorankommt: Blutige Knochenketten: 4/25, ein Ziel erledigt, eine Quest bereit zur Abgabe",  -- 549
+        "Questfortschritt an deine Gruppe",  -- 550
+        "in einer Gruppe (nicht im Schlachtzug) gehen dieselben Zeilen in den Gruppenchat, damit die anderen sie sehen, jeweils kurz nacheinander; du siehst sie dort auch",  -- 551
+        "Behalten, was deine Quests brauchen",  -- 552
+        "ein Gegenstand, den eine Quest in deinem Log noch verlangt, oder einer, der eine Quest startet, die du noch machen kannst, wird als Quest markiert: nie für dich verkauft oder versteigert",  -- 553
+        "eine empfohlene Reihenfolge für deine Quests nennen: abgeben, was fertig ist, dann das Nächste, das du allein schaffst, dann der Rest",  -- 554
+        "Links der Quests",  -- 555
+        "Rechts der Quests",  -- 556
+        "Unter den Quests",  -- 557
+        "Die Farmliste ist voll.",  -- 558
+        "Farmliste: %s, %d gewünscht.",  -- 559
+        "Farmen",  -- 560
+        "%d weitere",  -- 561
+        "Noch nichts zu farmen.",  -- 562
+        "Einen Stapel mehr",  -- 563
+        "Entfernen",  -- 564
+        "Leeren",  -- 565
+        "Fertig",  -- 566
+        "Alles von der Farmliste nehmen?",  -- 567
+        "Farmliste: wählen / fertig",  -- 568
+        "Farmliste: den Gegenstand hinzufügen, auf den du zeigst",  -- 569
+        "Das steht nicht auf der Farmliste.",  -- 570
+        "Die Farmliste ist leer.",  -- 571
+        "Farmliste: wo sie sitzt",  -- 572
+        "Farmliste neben der Questliste",  -- 573
+        "Dinge, die du sammeln willst, mit wie vielen du hast und wie viele du willst: deine Taschen und Bank und die deiner anderen Charaktere auf diesem Realm. Füge die Reagenzien eines Levelplans mit einer Taste hinzu, oder jeden Gegenstand",  -- 574
+        "die Farmliste links der Questliste, rechts davon oder unter ihren Quests",  -- 575
+        "die Farmliste neben der Questliste: mit dem Controller wählen; add <Gegenstand> [wie viele], remove <Gegenstand>, clear, oder left / right / bottom für ihren Platz",  -- 576
+        "Nicht im Kampf.",  -- 577
+        "Dieser Client hat keine Gamepad-Leisten.",  -- 578
+        "Dieser Client erlaubt Addons keine Änderung; benutze den Bearbeitungsmodus.",  -- 579
+        "Gamepad-Leisten: %s",  -- 580
+        "kompakt",  -- 581
+        "voll",  -- 582
+        "Schlanke Gamepad-Leisten",  -- 583
+        "blende die wuchtige Grafik hinter den Gamepad-Aktionsleisten aus und zeichne sie kleiner",  -- 584
+        "Größe der Gamepad-Leisten",  -- 585
+        "Größe der Gamepad-Leisten bei aktiven schlanken Leisten, in Prozent",  -- 586
+        "die Gamepad-Leisten des Spiels im kompakten oder vollen Modus (wie die Einstellung im Bearbeitungsmodus)",  -- 587
+        "Ausblenden außerhalb des Kampfes",  -- 588
+        "/cchud fade <Teil> on | off stellt einen ein; all für das ganze Ausblenden.",  -- 589
+        "Gamepad-Leisten, Minikarte, Questliste, Schadensmesser und Erfahrungsleiste ruhen außerhalb des Kampfes gemeinsam und kommen für einen Kampf, einen gezogenen Trigger oder ein feindliches Ziel zurück",  -- 590
+        "Der Bildschirm in Ruhe",  -- 591
+        "wie sichtbar die ruhenden Teile des Bildschirms außerhalb des Kampfes bleiben (0 blendet sie aus)",  -- 592
+        "Blendet aus: Gamepad-Leisten",  -- 593
+        "Blendet aus: Minikarte",  -- 594
+        "Blendet aus: Questliste",  -- 595
+        "Blendet aus: Schadensmesser",  -- 596
+        "Blendet aus: Erfahrungsleiste",  -- 597
+        "Blendet aus: Stärkungszauber",  -- 598
+        "Blendet aus: Abklingzeit-Reihen",  -- 599
+        "ob dieser Teil des Bildschirms außerhalb des Kampfes mit dem Rest ausblendet (aus: er bleibt immer, wie er ist)",  -- 600
+        "das Ausblenden des Bildschirms außerhalb des Kampfes: was ausblendet (Minikarte, Questliste und der Rest), jedes an oder aus",  -- 601
+        "Gespeichert: gib /reload ein, damit das Spiel es auf die Festplatte schreibt.",  -- 602
+        "Haltungs- und Begleiterknöpfe über den Leisten",  -- 603
+        "die Knöpfe für Haltungen und Begleiterbefehle sitzen dort, wo die grünen und roten Zielsymbole waren, damit sich ihr Rad ganz im Bild öffnet; diese Symbole werden ausgeblendet",  -- 604
+        "auflisten, wo die Teile der Gamepad-Leisten sitzen und was ruht (zur Fehlersuche)",  -- 605
+        "Auto",  -- 606
+        "Allgemein",  -- 607
+        "die des Spiels",  -- 608
+        "Tastensymbole: %s.",  -- 609
+        "Gerade ist kein Controller in Gebrauch, oder das Spiel kennt keine Symbolstile: es wird gesetzt, sobald einer da ist.",  -- 610
+        "Das Spiel hat die Tastensymbole nicht übernommen.",  -- 611
+        "Der Controller sagt nicht, was er ist: die Symbole bleiben, wie das Spiel sie hat.",  -- 612
+        "die Symbole, die das Spiel für die Tasten deines Controllers zeigt: auto (nach dem Controller in Gebrauch), xbox, playstation, switch, steam, generic (Zahlen) oder game, um sie zu lassen, wie das Spiel sie hat",  -- 613
+        "Abklingzeit-Reihen neben den Gamepad-Leisten",  -- 614
+        "die Abklingzeit-Reihen des Spiels sitzen unter dem Ziel statt auf den Gamepad-Tasten und sind etwas kleiner (nur bei den eingebauten Layouts des Spiels: bei einem eigenen Layout bleiben sie, wo du sie hingesetzt hast)",  -- 615
+        "Angelmodus: aus.",  -- 616
+        "Angeln: %s zum Auswerfen",  -- 617
+        "Kein Köder: %s zweimal für %s",  -- 618
+        "%s, um die Angel wegzustecken",  -- 619
+        "Angelmodus: %s zum Auswerfen, und noch einmal zum Anschlagen, wenn der Schwimmer zuckt.",  -- 620
+        "%s zum Anhauen, %s zum erneuten Auswerfen",  -- 621
+        "Der Angelmodus braucht eine Angelrute in deinen Händen.",  -- 622
+        "Du beherrschst Angeln nicht.",  -- 623
+        "Angelmodus: eine Taste wirft aus und hakt",  -- 624
+        "Angeltaste: %s",  -- 625
+        "Angeln mit einer Taste",  -- 626
+        "mit einer Angel in der Hand: deine Interaktionstaste zum Auswerfen, wann immer es nichts zum Interagieren gibt, und noch einmal zum Anschlagen, wenn der Schwimmer zuckt; der Fang wird für dich genommen. B steckt die Angel weg und gibt dir deine Waffen zurück",  -- 627
+        "Mit einem Druck neu auswerfen",  -- 628
+        "solange der Schwimmer draußen ist, wirft deine Angeltaste mit einem Druck neu aus, und A haut den Fisch an (das Spiel gibt kein Zeichen für einen Biss, auf das man warten könnte, also kann eine Taste nicht beides); aus: die Angeltaste haut an, wie die Interaktion des Spiels",  -- 629
+        "Köder mit Doppeldruck",  -- 630
+        "drücke deine Angeltaste zweimal schnell: der zweite Druck bringt den besten Köder aus deinen Taschen an die Angel, wenn sie keinen hat",  -- 631
+        "Gamepad-Leisten beim Angeln ausblenden",  -- 632
+        "mit einer Angel in der Hand sind die Gamepad-Leisten ausgeblendet, damit das Wasser frei zu sehen ist; die Angelanzeige zeigt die Taste zum Auswerfen. Sie sind zurück, sobald ein Kampf beginnt oder die Angel weggesteckt wird",  -- 633
+        "Ein-Tasten-Angeln vorerst aus oder wieder an (mit einer Angel in der Hand ist es von selbst an)",  -- 634
+        "die Taste, die angelt: anfangs deine Interaktionstaste (Quadrat oder X) oder jede andere, zum Beispiel ein Trigger (rt)",  -- 635
+        "Durotars Küste ist roter Fels und warmes Flachwasser. Die Trolle der Echoinseln sagen, die Makrelen ziehen am dichtesten, wenn die Flut den Duft der Kochfeuer von den Inseln herüberträgt.",  -- 636
+        "Die Seen von Mulgore sind klein, klar und geduldig. Die Tauren angeln dort so, wie sie alles andere tun: langsam und mit Dank.",  -- 637
+        "Jede Oase im Brachland ist ein Treffpunkt. Was auch immer dort bei Tag trinkt, bei Nacht schwimmt etwas darunter.",  -- 638
+        "Die Teiche von Teldrassil liegen im Schatten eines einzigen Baumes. Nachtelfische Angler schwören, die Fische dort hätten nie die Sonne gesehen und vermissten sie auch nicht.",  -- 639
+        "Das Wasser der Dunkelküste ist grau, kalt und voller Wracks. Die Hälfte dessen, was vor Auberdine anbeißt, hat sich in irgendjemandes verlorener Fracht häuslich eingerichtet.",  -- 640
+        "Die Flüsse des Eschentals fließen unter Blättern, die älter sind als die meisten Königreiche. Die Fische sind flink, und die Schildwachen fragen noch flinker, was du dort zu suchen hast.",  -- 641
+        "Unten zwischen den Tausend Nadeln ist Wasser knapp und wird eifersüchtig gehütet. Ein Fisch von hier hat sich seinen Platz verdient.",  -- 642
+        "Die Seen des Steinkrallengebirges liegen hoch und kalt zwischen den Gipfeln. Die Goblins hätten sie längst trockengelegt, wäre das Angeln nicht so gut.",  -- 643
+        "Die Küste von Desolace besteht aus Knochen und grauer Brandung. Irgendetwas dort unten hat an beidem Geschmack gefunden.",  -- 644
+        "Feralas ist grün bis hinunter an die Wasserlinie. Seine Flüsse sind tief, warm und überaus lebendig.",  -- 645
+        "Niemand weiß genau, wo in den Düstermarschen das Land aufhört und das Wasser anfängt. Angle vom Ufer aus und zähl danach deine Zehen.",  -- 646
+        "Der Dampfdruckpier hat das einzige Wasser in Tanaris, das den Namen verdient. Die Goblins verkaufen dir das Recht, dort zu angeln, und zwar zweimal, wenn du sie lässt.",  -- 647
+        "Unter Azsharas heller Bucht liegt eine versunkene Stadt. Alte Angler sagen, die ganz Großen leben dort, wo einst ihre Gärten waren.",  -- 648
+        "Die Tümpel des Teufelswalds leuchten, und zwar nicht auf die gute Art. Was noch darin schwimmt, ist stur über jede Vernunft hinaus.",  -- 649
+        "Die heißen Quellen und teergesäumten Seen von Un'Goro haben Dinge bewahrt, die der Rest der Welt vergessen hat. Manche davon beißen.",  -- 650
+        "Der See Elune'ara auf der Mondlichtung ist so still wie ein angehaltener Atem. Die Druiden bitten nur darum, dass du nicht mehr nimmst, als du essen wirst.",  -- 651
+        "Silithus ist Sand, Wind und das Geräusch von Flügeln. Wenn du hier Wasser zum Angeln gefunden hast, sag es niemandem.",  -- 652
+        "Die Seen von Winterquell frieren an den Rändern zu und dampfen in der Mitte. Die Fische dort sind fett gegen die Kälte und den Fußmarsch wert.",  -- 653
+        "In den Teichen von Orgrimmar angeln Peons, die nichts Besseres zu tun haben, und alte Grunzer, die dasselbe behaupten. Beide erzählen dir, der Große sei ihnen entwischt.",  -- 654
+        "Ein Fisch aus den Teichen von Donnerfels hat sein ganzes Leben hoch über den Ebenen verbracht. Er scheint das gelassen zu nehmen.",  -- 655
+        "Darnassus hütet seine Gewässer so sorgsam wie seine Tempel. Die Fische haben sich daran gewöhnt, bewundert zu werden.",  -- 656
+        "Die Seen des Alteracgebirges sind Schmelzwasser, und die Oger und das Syndikat angeln dort, wenn niemand hinsieht.",  -- 657
+        "Arathis Ufer haben mehr Armeen gesehen als Angler. Den Fischen ist längst gleich, wessen Banner über dem Wasser weht.",  -- 658
+        "Das Ödland ist Staub von einem Ende zum anderen. Ein Biss ist hier ein kleines Wunder, also behandle ihn auch so.",  -- 659
+        "Die Küste der Verwüsteten Lande ist rot, kahl gescheuert und still. Was in dieser Brandung lebt, hat gelernt, mit einer ganzen Menge zu leben.",  -- 660
+        "Die Seen von Tirisfal liegen reglos unter einem kränklichen Himmel. Die Verlassenen angeln dort aus Gewohnheit. Die Toten essen nicht viel, aber sie erinnern sich, dass es ihnen einmal geschmeckt hat.",  -- 661
+        "Die lange Küste des Silberwalds besteht ganz aus Nebel und Kiefernschatten. Das Angeln ist gut, und das ist das einzig Fröhliche, was je einer über die Gegend sagt.",  -- 662
+        "Die Flüsse der Westlichen Pestländer fließen noch, wenn auch nicht sauber. Was du herausziehst, sieh dir zweimal an.",  -- 663
+        "Nur wenige angeln in den Östlichen Pestländern, und noch weniger geben es zu. Das Wasser behält, was die Seuche von ihm übrig gelassen hat.",  -- 664
+        "Der Fluss im Vorgebirge des Hügellands und sein langes Südufer haben in jedem Streit, der um sie geführt wurde, beide Seiten ernährt.",  -- 665
+        "Das Hinterland hält seine Seen hoch oben zwischen den Bäumen, wo die Wildhammerzwerge vom Greifenrücken aus angeln, wenn sie glauben, dass niemand zusieht.",  -- 666
+        "Die Seen von Dun Morogh sind die meiste Zeit des Jahres von Eis umringt. Ein Zwerg schlägt ein Loch, setzt sich mit einem Humpen hin und nennt es einen guten Tag, ganz gleich, was anbeißt.",  -- 667
+        "Die Sengende Schlucht hat Lava, wo andere Länder Flüsse haben. Bring statt der Angel lieber etwas zu trinken mit.",  -- 668
+        "Die Brennende Steppe ist Asche und Glut. Wenn dir das Wasser hier überhaupt etwas gibt, dann ist es heiß.",  -- 669
+        "Jedes Kind in Elwynn lernt am Kristallsee oder am Steinhügelsee das Angeln. Die kleinen Fische dort tricksen sie seit Generationen aus.",  -- 670
+        "Der Gebirgspass der Totenwinde hat wenig Wasser und noch weniger Gastfreundschaft. Was in den Tümpeln unterhalb von Karazhan ist, bleibt am besten dort.",  -- 671
+        "Der Fluss am Rand des Dämmerwalds ist zu jeder Stunde schwarz. Die Fische scheint die Dunkelheit nicht zu stören, die Angler schon.",  -- 672
+        "Der Loch ist der Stolz von Loch Modan, aufgestaut vom großen Steinwerkdamm. Zwerge messen jedes Anglerlatein an ihm, und meistens gewinnt der Loch.",  -- 673
+        "Der Immerruhsee im Rotkammgebirge ist schön wie ein Gemälde, und geangelt wird dort von jedem Steg in Seenhain. Die Leute im Ort kennen jede gute Stelle und verraten dir keine einzige.",  -- 674
+        "Von seinen Dschungelflüssen bis zum wilden Südkap hat das Schlingendorntal die reichsten Gewässer des Kontinents. Die Angler von Beutebucht tragen darum ein Turnier aus, und fast alle schummeln.",  -- 675
+        "Die Sümpfe des Elends sind grünes Wasser unter grünen Bäumen. Die Fische schmecken nach Schlamm, und die Einheimischen mögen sie genau so.",  -- 676
+        "Westfalls Felder haben versagt, seine Küste nicht. Wer geblieben ist, lebt vom langen grauen Strand.",  -- 677
+        "Das Sumpfland trägt seinen Namen zu Recht. Die Docks im Hafen von Menethil sind der trockenste Platz, um dort zu angeln, und die Krokilisken wissen das.",  -- 678
+        "In den Kanälen von Sturmwind angeln Kinder, Rentner und mindestens ein verkleidetes Mitglied des Adels. Niemand fragt, was sonst noch in den Kanälen ist.",  -- 679
+        "Die Düstere Höhle birgt den einzigen stillen Teich von Eisenschmiede. Alte Zwerge angeln dort stundenlang und sagen kein Wort.",  -- 680
+        "Die Kanäle von Unterstadt führen ein Grün, das nichts mit Algen zu tun hat. Die Verlassenen, die dort angeln, tun es nicht fürs Abendessen.",  -- 681
+        "Der erste Fisch, den die meisten Angler je an Land ziehen, und so leuchtend, dass sie ihn nicht vergessen.",  -- 682
+        "Glatt, flink und an jeder warmen Küste zu Hause. Gegrillt schmeckt das besser, als der Name vermuten lässt.",  -- 683
+        "Ganz Maul, und am glücklichsten in Wasser, das du nicht trinken würdest.",  -- 684
+        "Klein, bissig und furchtlos. Ein Schwarm davon soll einmal einen Bären aus dem Loch gejagt haben.",  -- 685
+        "Ein Farbblitz unter der Brandung. Hängt so ein Fisch an der Leine, gilt das unter Seeleuten als Glück für die Reise.",  -- 686
+        "Ein geduldiger Grundfisch mit Barthaaren wie ein Zwergenältester.",  -- 687
+        "Zweimal isst das niemand. Alchemisten kaufen jedes Exemplar, das sie kriegen können.",  -- 688
+        "Die Flossen glimmen wie Glut unter der Asche, und das ausgepresste Öl brennt fast genauso gut.",  -- 689
+        "Gepanzert wie ein kleiner Schild. Das Fleisch darin ist die Mühe wert.",  -- 690
+        "Irgendetwas im Wasser nahe den Höhlen des Wehklagens hat ihn verändert. Wer einen isst, den verändert es womöglich auch, für eine Weile.",  -- 691
+        "Das Flussvolk sagt, eine Mahlzeit davon kläre den Geist. Weise macht ihn das Schwimmen gegen den Strom.",  -- 692
+        "Älter, größer und weiser als sein Vetter, was ihn nicht von deinem Haken ferngehalten hat.",  -- 693
+        "Ein zäher Kämpfer aus warmen südlichen Meeren und ein Liebling auf jeder Tavernentafel von Beutebucht bis Gadgetzan.",  -- 694
+        "Die Stirn glänzt wie echtes Mithril. Mehr als ein Bergmann hat schon versucht, ein Exemplar einzuschmelzen.",  -- 695
+        "Die Schuppen lassen sich zu einem Öl einkochen, das die Haut hart wie Fels macht. Am liebsten ist ihm die Nacht.",  -- 696
+        "Poliert wie ein Paradeharnisch und beinahe genauso schwer.",  -- 697
+        "Er kommt nur in den kalten Monaten in Küstennähe, und die Köche, die ihn kennen, warten das ganze Jahr darauf.",  -- 698
+        "Er zieht, wenn die Tage lang sind. Die Küstenbewohner lesen an ihm die Jahreszeit ab.",  -- 699
+        "Fass ihn in der Mitte an, und nur ein einziges Mal.",  -- 700
+        "Ein Flussfisch aus wildem Land, an den Kiemen so rot wie die Kriegsbemalung eines Trolls.",  -- 701
+        "Er frisst nach Einbruch der Dunkelheit. Eine Suppe aus ihm beruhigt die Nerven eines Zauberwirkers.",  -- 702
+        "Er frisst am Tag, in fast allem das Gegenteil des Nachtflossenschnappers, und teilt sich trotzdem das Wasser mit ihm.",  -- 703
+        "Streng genommen kein Fisch. Er hält nichts davon, gefangen zu werden, und lässt dich das spüren.",  -- 704
+        "Bleich wie Flusseis, aus den kalten, klaren Seen des Nordens.",  -- 705
+        "Du wirst beide Hände brauchen, und vielleicht einen Freund.",  -- 706
+        "%.1f Pfd.",  -- 707
+        "Neu in deinem Angeltagebuch: %s, %s.",  -- 708
+        "Neu in deinem Angeltagebuch: %s.",  -- 709
+        "Dein bisher schwerster Fang – %s: %s (vorher %s).",  -- 710
+        "Angeltagebuch",  -- 711
+        "jeder Fang wird in dein Angeltagebuch geschrieben: wie viele von jeder Art, wo du sie zuerst gefangen hast, und ein zum Spaß erfundenes Gewicht mit deinem besten von jeder Art (/cchud journal öffnet es)",  -- 712
+        "Köder %s",  -- 713
+        "Kein Köder",  -- 714
+        "Gefangen %d",  -- 715
+        "Entkommen %d",  -- 716
+        "Angelanzeige",  -- 717
+        "mit einer Angelrute in den Händen: die Fische des Gewässers, an dem du stehst (die hier noch nicht gefangenen bleiben verborgen), deine Angelfertigkeit und was dein Köder dazugibt, wie viele du gefangen hast und wie viele entkommen sind, wie lange dein Köder hält, und deine letzten Fänge",  -- 718
+        "Ein Neugieriger: +%d%%",  -- 719
+        "Halte deinen Köder neben dem Fisch",  -- 720
+        "Nächster Fang +%d%%",  -- 721
+        "%s halten: der Köder läuft die Schnur entlang",  -- 722
+        "%d in Folge",  -- 723
+        "Ein Spiel, während der Schwimmer draußen ist",  -- 724
+        "auf der Zauberleiste gespielt, solange deine Schnur draußen ist: halte einen Abzug und dein Köder läuft die Schnur entlang, lass los und er treibt zurück; halte ihn beim Schatten des Fisches. Je besser du spielst, desto schwerer das erfundene Gewicht deines nächsten Fangs. Es belegt keine Taste und berührt weder Auswurf noch Fang",  -- 725
+        "%d gefangen, %d Arten, %d entkommen",  -- 726
+        "Schwerster: %s, %s",  -- 727
+        "Fische",  -- 728
+        "Gewässer",  -- 729
+        "Noch nichts gefangen. Nimm eine Angel mit ans Wasser.",  -- 730
+        "Gefangen: %d",  -- 731
+        "Schwerster: %s, in %s",  -- 732
+        "Zuerst gefangen: %s",  -- 733
+        "Hier gefangen: %d",  -- 734
+        "Hier gefundene Arten: %d",  -- 735
+        "Wählen",  -- 736
+        "Schließen",  -- 737
+        "dein Angeltagebuch öffnen oder schließen: jede Art, die du gefangen hast, dein schwerster Fang von jeder, und die Gewässer, in denen du geangelt hast",  -- 738
+        "Chat blendet aus, wenn es ruhig ist",  -- 739
+        "Chattext blendet nach einigen Sekunden ohne neue Nachrichten aus",  -- 740
+        "Sekunden bis der Chat ausblendet",  -- 741
+        "wie lange Chattext bleibt, bevor er ausblendet",  -- 742
+        "Koordinaten auf der Karte",  -- 743
+        "deine Koordinaten unter der Weltkarte",  -- 744
+        "%d Nachrichten seit deiner Anmeldung als Spam ausgeblendet.",  -- 745
+        "%d davon waren wiederholte Gildenwerbung.",  -- 746
+        "Klassensymbol und Stufe im Chat",  -- 747
+        "Klassensymbol und Stufe eines Spielers in Klammern vor seinem Namen, wenn das Spiel sie uns wissen lässt",  -- 748
+        "Kurze Kanalnamen im Chat",  -- 749
+        "der Kanal vor einer Zeile, gekürzt: [P] Gruppe, [PL] Gruppenleiter, [G] Gilde, [O] Offizier, [R] Schlachtzug, [RL] Schlachtzugsleiter, [I] Instanz, und ein nummerierter Kanal mit seiner Nummer, [1]",  -- 750
+        "Nur Vornamen im Chat",  -- 751
+        "ein Name mit Nachnamen erscheint nur mit dem Vornamen (Jory Spleeneater spricht als Jory); ein Flüstern oder Rechtsklick darauf erreicht weiterhin den ganzen Namen",  -- 752
+        "Größe des Chattexts",  -- 753
+        "die Größe des Texts in den Chatfenstern als Anteil der spieleigenen Größe (die Einstellung des Spiels bleibt, wie sie ist)",  -- 754
+        "Goldverkäufer und wiederholte Werbung ausblenden",  -- 755
+        "Nachrichten, die Gold oder Dienste mit einer Webadresse anbieten, und dieselbe Nachricht, die ein Spieler wiederholt, werden ausgeblendet (nie von deiner Gruppe, Gilde oder deinen Freunden)",  -- 756
+        "Wiederholte Gildenwerbung ausblenden",  -- 757
+        "in öffentlichen Kanälen wird die Werbung einer Gilde einmal gezeigt; dieselbe vom selben Spieler oder eine fast gleiche innerhalb von 15 Minuten wird ausgeblendet (nie von deiner Gruppe, Gilde oder deinen Freunden)",  -- 758
+        "listet die zuletzt als Spam ausgeblendeten Chatnachrichten auf",  -- 759
+        "Flug",  -- 760
+        "Ziel unbekannt",  -- 761
+        "geschätzt nach der Entfernung",  -- 762
+        "erster Flug auf dieser Route: die Flugzeit wird gelernt",  -- 763
+        "Landung",  -- 764
+        "%s: etwa %s, geschätzt nach der Entfernung",  -- 765
+        "%s: etwa %s",  -- 766
+        "%s: erster Flug auf dieser Strecke, Zeit unbekannt",  -- 767
+        "Im Flug, Ziel unbekannt",  -- 768
+        "%s: Flugzeit gelernt, %s",  -- 769
+        "%d Flugstrecken bekannt.",  -- 770
+        "Flüge: Zeit und Countdown",  -- 771
+        "auf einem Flug werden Ziel und Dauer im Chat genannt, und ein Balken oben am Bildschirm zählt bis zur Landung herunter; die Zeit jeder Strecke wird aus deinen Flügen gelernt",  -- 772
+        "Flüge: dein Reittier entlang der Leiste",  -- 773
+        "ein Greif, ein Windreiter oder eine Fledermaus (was der Flugmeister dir gab) gleitet die Flugleiste entlang zu deinem Landeplatz",  -- 774
+        "die Flugstrecken mit bekannter Zeit auflisten",  -- 775
+        "Gelandet! +%d",  -- 776
+        "In die Wolken: die Serie endet",  -- 777
+        "%d Fluggold",  -- 778
+        "%s flattern",  -- 779
+        "%s Netz",  -- 780
+        "%s große Höhe",  -- 781
+        "%s: zurück zum Spiel (%d Fluggold)",  -- 782
+        "%s: ein Spiel für unterwegs",  -- 783
+        "Das Flugspiel ist aus: /cchud flightgame on",  -- 784
+        "Das Flugspiel wird auf einem Flug gespielt.",  -- 785
+        "Nicht im Kampf.",  -- 786
+        "Flugspiel: spielen / große Höhe",  -- 787
+        "Flüge: ein Spiel für unterwegs",  -- 788
+        "auf einem Flug wird unter der Flugleiste ein kleines Spiel angeboten, und eine Taste startet es (nur diese Taste wird belegt, bis du sie drückst): Lass dein Reittier durch die Wolken flattern und fang die entgegenkommenden Reiter mit dem Netz, damit sie für Fluggold zu Boden gehen. Dieselbe Taste noch einmal ist große Höhe: Das Spiel wird weggelegt und die Tasten gehören wieder dem Spiel. Nie im Kampf, weg bei der Landung",  -- 789
+        "auf einem Flug: das Flugspiel starten, oder es in große Höhe bringen und zurück",  -- 790
+        "Ein Flug ist ein guter Moment dafür.",  -- 791
+        "Du spielst seit %s.",  -- 792
+        "Zeit für einen Schluck Wasser",  -- 793
+        "Erinnerung, Wasser zu trinken",  -- 794
+        "ab und zu beim Spielen eine sanfte Erinnerung, einen Schluck Wasser zu trinken (nie im Kampf)",  -- 795
+        "Wassererinnerung alle (Minuten)",  -- 796
+        "wie viele Spielminuten zwischen den Erinnerungen ans Wassertrinken liegen",  -- 797
+        "Wassererinnerung zu Beginn eines Flugs",  -- 798
+        "ein Flug ist eine natürliche Pause: die Erinnerung ans Wassertrinken kommt, wenn einer beginnt, außer die letzte ist noch nicht lange her",  -- 799
+        "die Erinnerung ans Wassertrinken zeigen",  -- 800
+        "Eigene Rahmen des Spiels umgestalten",  -- 801
+        "Tooltips, Buffs, Questverfolgung, Minikarte, Erfahrungsleiste, Chat-Reiter und Gamepad-Leisten im Aussehen des HUDs (die Maus-Oberfläche behält die des Spiels)",  -- 802
+        "Größe der Erfahrungsleiste",  -- 803
+        "die Größe der Erfahrungs- und Rufleisten, solange sie neu gestaltet sind, in Prozent",  -- 804
+        "Tooltips",  -- 805
+        "Tooltips in dunklem Glas, umrandet in der Farbe der Klasse eines Spielers oder der Qualität eines Gegenstands",  -- 806
+        "Gamepad-Leisten",  -- 807
+        "die Gamepad-Tasten mit einem schlanken Ring auf dunklem Untergrund statt der wuchtigen Grafik",  -- 808
+        "Buffs",  -- 809
+        "deine Buff- und Debuff-Symbole zugeschnitten und umrandet, ihre Zeiten mit Kontur",  -- 810
+        "Questverfolgung",  -- 811
+        "die Kopfzeilen der Questverfolgung in dunklem Glas, ihre Zeilen mit Kontur",  -- 812
+        "Minikarte",  -- 813
+        "ein schlanker Ring und ein weicher Schein um die Minikarte statt des goldenen Rands",  -- 814
+        "Erfahrungsleiste",  -- 815
+        "die Erfahrungs- und Rufleisten etwas kleiner, in eigenen Farben",  -- 816
+        "Chat",  -- 817
+        "Chat-Reiter mit Kontur und das Eingabefeld als dunkles Glas",  -- 818
+        "Schadensmesser",  -- 819
+        "die Schadensanzeige des Spiels im Look des HUD: ihre Balken schräg auf dunklem Grund und umrandeter Text; sie behält alles, was sie tut",  -- 820
+        "Prüfung: %d von %d bestanden",  -- 821
+        "Das Spiel ist seit dem Einloggen nicht stehen geblieben.",  -- 822
+        "Momente, in denen das Spiel stand, und der Anteil des HUD daran:",  -- 823
+        "Die langsamsten Momente des HUD:",  -- 824
+        "Debug-Berichte",  -- 825
+        "die Berichte zur Fehlersuche von selbst sammeln: beim Einloggen und erneut beim Neuladen oder Ausloggen (sie bleiben in den gespeicherten Einstellungen)",  -- 826
+        "die Momente, in denen das Spiel seit dem Einloggen stand, und wie viel davon die eigene Arbeit des HUD war",  -- 827
+        "HUD-Voreinstellung: %s, passend zur Kamera",  -- 828
+        "Preset: %s",  -- 829
+        "Ein Layout namens '%s' wurde dem Bearbeitungsmodus des Spiels hinzugefügt. Wähle es dort aus, um es zu benutzen (Spielmenü > Bearbeitungsmodus > Layout).",  -- 830
+        "unbekanntes Preset '%s'",  -- 831
+        "Für einen Fernseher: größerer Text im HUD und im Chat.",  -- 832
+        "Für einen Monitor: Text in seiner normalen Größe.",  -- 833
+        "Unsere Fenster sind wieder an ihrem Ausgangsplatz. Wähle im Bearbeitungsmodus das Layout %s des Spiels (Spielmenü > Bearbeitungsmodus > Layout).",  -- 834
+        "Voreinstellungen setzen den Kameraabstand",  -- 835
+        "eine Voreinstellung bringt die Kamera auch einmal auf den Abstand, für den ihr Layout gemacht wurde (danach frei zoomen)",  -- 836
+        "Aktion",  -- 837
+        "eine Ansicht aus der dritten Person: schmale vertikale Leisten neben deinem Charakter, alle Effekte an; außerhalb des Kampfes blendet alles aus",  -- 838
+        "Klassisch",  -- 839
+        "unsere Rahmen dort, wo WoW sie immer hatte, ruhigere Effekte, die Gamepad-Leisten des Spiels unverändert",  -- 840
+        "Minimal",  -- 841
+        "nur das Nötige: freundliche NPCs zeigen ihre Plakette (mit ihrer Tätigkeit) nur, solange du auf sie zeigst, sie anvisierst oder als Ziel hast; Namen ohne Titel; außerhalb des Kampfes ruhen deine Leisten als leiser Hinweis (wenig Gesundheit zeigt sich immer)",  -- 842
+        "Offene Welt",  -- 843
+        "ein klarer Bildschirm zum Erkunden: schmale Leisten neben dir, die verblasst ruhen, Plaketten ohne Kraftleisten, Chat, der ausblendet",  -- 844
+        "Abenteuer",  -- 845
+        "nach Konsolen-Abenteuern in offener Welt: Vitalwerte neben dir, ein kleines Ziel hoch in der Mitte, Stadtbewohner nur, wenn du auf sie zeigst, Chat, der schnell ausblendet",  -- 846
+        "Soulslike",  -- 847
+        "deine Leisten oben links, eine große Zielleiste tief in der Mitte wie eine Bossleiste, jeder Treffer spürbar",  -- 848
+        "Shooter",  -- 849
+        "aufrechte Leisten knapp rechts der Mitte, nah an deinem Ziel, das Ziel hoch oben, starke Trefferrückmeldung",  -- 850
+        "Crossbar",  -- 851
+        "nach MMOs mit Controller: Ziel und Fokus hoch in der Mitte, deine Leisten direkt über den Gamepad-Leisten, Gruppe links, volle Plaketten",  -- 852
+        "ARPG",  -- 853
+        "nach Action-Rollenspielen: die Kamera weit hinten, deine Vitalwerte unten links, das Ziel hoch in der Mitte, kleine Gegner klein, jeder Treffer laut",  -- 854
+        "Kompass",  -- 855
+        "nach Ego-Rollenspielen: die Kamera nah, deine Leisten unten in der Mitte, das Ziel unter dem oberen Rand, Stadtbewohner nur, wenn du auf sie zeigst",  -- 856
+        "Schlachtzug",  -- 857
+        "die Anordnung von WoW mit allem, was eine Gruppe braucht: Gruppen- und Schlachtzugsrahmen, Gesundheitsprozent und Stufen auf Plaketten",  -- 858
+        "ControllerCams Voreinstellungen folgen",  -- 859
+        "eine Kamera-Voreinstellung in ControllerCam für überall wählt auch die passende HUD-Voreinstellung (die Kamera behält ihre eigene Entfernung)",  -- 860
+        "Modern",  -- 861
+        "stelle das ganze HUD auf eine Voreinstellung: action, classic, minimal, openworld, adventure, soulslike, shooter, crossbar, arpg, compass, raid",  -- 862
+        "Zielrahmen und Namensplaketten kompakt oder voll, beide auf einmal",  -- 863
+        "der Zielrahmen kompakt oder voll",  -- 864
+        "den Text für einen Fernseher am anderen Ende des Zimmers oder für einen Monitor in Armlänge bemessen",  -- 865
+        "unsere Fenster an ihren Ausgangsplatz zurücksetzen, passend zum spieleigenen Layout Modern oder Klassisch",  -- 866
+        "Deine gesamte Einrichtung (HUD, Kamera und das Layout des Spiels): Kopiere diese Zeile (Strg+C), um sie aufzubewahren oder zu teilen.",  -- 867
+        "Füge eine Zeile mit HUD-Einstellungen ein (Ctrl+V) und bestätige.",  -- 868
+        "Diese Zeile ist beschädigt: Kopiere sie noch einmal, vollständig.",  -- 869
+        "Diese Zeile stammt von einer neueren Version: Aktualisiere das Addon.",  -- 870
+        "Das ist keine Zeile mit HUD-Einstellungen.",  -- 871
+        "Einstellungen importiert: %d übernommen, %d ausgelassen.",  -- 872
+        "Die Kameraeinrichtung wurde mit übernommen.",  -- 873
+        "Die Kameraeinrichtung wurde nicht verändert.",  -- 874
+        "Das Layout des Spiels ist jetzt '%s'.",  -- 875
+        "Das Layout des Spiels wurde nicht verändert.",  -- 876
+        "deine Einstellungen als eine Textzeile, zum Behalten oder Teilen",  -- 877
+        "übernimmt Einstellungen aus einer Textzeile, die mit /cchud export erstellt wurde",  -- 878
+        "Das HUD ist an, solange die Gamepad-Oberfläche benutzt wird. Seine Optionen: Optionen > AddOns > ControllerCam > HUD oder /cchud.",  -- 879
+        "Nur Kamera: Das HUD ruht und die Oberfläche des Spiels ist wie zuvor. /cchud on schaltet es ein.",  -- 880
+        "Auch den Bildschirm für den Controller einrichten? Das fügt dem Bearbeitungsmodus des Spiels ein Layout namens CCHUD hinzu, das du dort auswählen kannst: Es setzt die Abklingzeit-Reihen unter das Ziel, weg von den Gamepad-Tasten. Deine eigenen Layouts bleiben erhalten (/cchud setup bietet das erneut an).",  -- 881
+        "Einrichten",  -- 882
+        "Jetzt nicht",  -- 883
+        "ControllerCam bringt eine Controller-Oberfläche mit, das HUD: eigene Einheitenfenster, Namensplaketten, Zauberleiste und mehr, solange die Gamepad-Oberfläche benutzt wird. Möchtest du es oder nur die Kamera?",  -- 884
+        "Kamera + HUD",  -- 885
+        "Nur Kamera",  -- 886
+        "Dieser Client erlaubt Addons nicht, das Layout zu ändern.",  -- 887
+        "noch einmal fragen: die Kamera mit dem HUD oder nur die Kamera",  -- 888
+        "das für das HUD gemachte Bildschirmlayout erneut anbieten (Bearbeitungsmodus des Spiels)",  -- 889
+        "Wird angezeigt, solange die Gamepad-Oberfläche verwendet wird. Ziehe unsere Rahmen im Bearbeitungsmodus des Spiels.",  -- 890
+        "Presets",  -- 891
+        "Bemessen für",  -- 892
+        "Fernseher",  -- 893
+        "Monitor",  -- 894
+        "Tastensymbole",  -- 895
+        "die Symbole, die das Spiel für die Tasten deines Controllers zeigt: von selbst gefunden für den Controller in Gebrauch, oder die Art, die du wählst",  -- 896
+        "Schriftart",  -- 897
+        "Layout des Spiels zurücksetzen",  -- 898
+        "Ausprobieren",  -- 899
+        "Demo abspielen",  -- 900
+        "Jeden Treffereffekt anzeigen",  -- 901
+        "Selbstprüfung ausführen",  -- 902
+        "Gamepad-Leisten: kompakt / voll",  -- 903
+        "Einstellungen exportieren",  -- 904
+        "Einstellungen importieren",  -- 905
+        "Hake „Erweiterte Optionen anzeigen“ auf der Hauptseite an, um alle Einstellungen zu sehen.",  -- 906
+        "Module",  -- 907
+        "Schnellschalter",  -- 908
+        "Allgemein",  -- 909
+        "HUD",  -- 910
+        "Das Optionsfenster ist in diesem Client nicht verfügbar.",  -- 911
+        "Aktiviert",  -- 912
+        "das gesamte HUD; aus bringt die eigenen Rahmen des Spiels zurück",  -- 913
+        "Auch in der Maus-und-Tastatur-Oberfläche",  -- 914
+        "normalerweise läuft das HUD nur, solange die Gamepad-Oberfläche verwendet wird",  -- 915
+        "Rahmen des Spiels beiseitelegen",  -- 916
+        "blende die Spieler-, Ziel- und Fokusrahmen des Spiels aus, solange unsere angezeigt werden",  -- 917
+        "Chatfenster oben links",  -- 918
+        "verschiebe das Chatfenster nach oben links, solange das HUD läuft",  -- 919
+        "Vertikale Balken im Ruhezustand",  -- 920
+        "wie sichtbar die vertikalen Balken bei voller Gesundheit außerhalb des Kampfes bleiben (0 blendet sie aus)",  -- 921
+        "Klassenfarben",  -- 922
+        "färbe deine Leiste und die Leisten anderer Spieler nach Klasse",  -- 923
+        "Klassensymbole",  -- 924
+        "ein Klassensymbol vor dem Namen eines Spielers beim Ziel und beim Ziel des Ziels",  -- 925
+        "Bedrohung am Zielfenster",  -- 926
+        "ein Schildsymbol und ein Leuchten am Zielrahmen: rot, solange es dich angreift, rot und gelb, wenn du es gleich ziehst, gelb und blau, wenn du es verlierst, blau, wenn es nicht auf dir ist",  -- 927
+        "Überall kompakte Leisten",  -- 928
+        "Zielrahmen und Namensplaketten im kompakten Stil, gut halb so breit (jedes lässt sich weiter einzeln einstellen; Voreinstellungen ändern es nie)",  -- 929
+        "Kompaktes Zielfenster",  -- 930
+        "das Zielfenster etwas mehr als halb so breit",  -- 931
+        "Gesundheitsfarben im Kampf",  -- 932
+        "im Kampf wechseln die Gesundheitsbalken von Grün über Gelb zu Rot, wenn die Gesundheit sinkt",  -- 933
+        "Schatten hinter Text",  -- 934
+        "ein weiches dunkles Band hinter dem Text des Ziels, damit er lesbar bleibt",  -- 935
+        "Textgröße",  -- 936
+        "Größe des Texts auf unseren Rahmen",  -- 937
+        "Rahmengröße",  -- 938
+        "Größe unserer Einheitenrahmen",  -- 939
+        "Deine Leisten im Kampf",  -- 940
+        "wie sichtbar deine Leisten, Begleiter und Fokus im Kampf sind, bis etwas Aufmerksamkeit verlangt",  -- 941
+        "Voll bei Gesundheit unter",  -- 942
+        "deine Leisten kehren vollständig zurück, wenn deine Gesundheit unter diesen Wert fällt",  -- 943
+        "Voll bei Mana unter",  -- 944
+        "deine Leisten kehren vollständig zurück, wenn dein Mana unter diesen Wert fällt",  -- 945
+        "Spielerleiste im Leerlauf",  -- 946
+        "wie sichtbar die Spielerleiste bei voller Gesundheit oder außerhalb des Kampfes bleibt (0 blendet sie aus)",  -- 947
+        "Händler- und Bankhilfe",  -- 948
+        "die Schaltfläche Plunder verkaufen beim Händler fragt nach, was verkauft werden soll; schnelles Verschieben bei Händler und Bank",  -- 949
+        "Erweiterte Optionen anzeigen",  -- 950
+        "alle Einstellungen, nicht nur die Hauptschalter",  -- 951
+        "Spielerrahmen",  -- 952
+        "unsere Spielerleiste, oben links",  -- 953
+        "Zielrahmen",  -- 954
+        "unsere Zielleiste, oben mittig",  -- 955
+        "Haustierleiste",  -- 956
+        "eine kleine Begleiterleiste unter der Spielerleiste oder neben den senkrechten Leisten",  -- 957
+        "Fokusrahmen",  -- 958
+        "unser Fokusrahmen",  -- 959
+        "schmale aufrechte Gesundheits- und Energieleisten neben deinem Charakter, für eine Third-Person-Ansicht (statt der Spielerleiste)",  -- 960
+        "Plunder verkaufen, wenn ein Händler geöffnet wird",  -- 961
+        "verkaufe Plunder nach deinen Regeln, sobald ein Händler geöffnet wird",  -- 962
+        "Weiße Waffen und Rüstung sind Plunder",  -- 963
+        "weiße Waffen und Rüstungen als Plunder zählen (nie Werkzeuge, Angelruten, Ausrüstung mit Benutzen-Effekt oder mögliche Verbesserungen; es wird immer zuerst gefragt)",  -- 964
+        "Einlagern, wenn die Bank öffnet",  -- 965
+        "für die Bank markierte Gegenstände und, wenn eingeschaltet, was die Bank schon hat, kommen von selbst hinein",  -- 966
+        "die Option des Spiels; unser kleiner Rahmen folgt ihr",  -- 967
+        "Abklingzeitmanager",  -- 968
+        "der Abklingzeitmanager des Spiels",  -- 969
+        "Persönliche Ressourcenanzeige",  -- 970
+        "deine Gesundheit und Ressource unter deinem Charakter",  -- 971
+        "Bank nimmt Reagenzien automatisch auf",  -- 972
+        "die Option des Spiels für die Bank",  -- 973
+        "Tooltip bei Beginn eines Buffs",  -- 974
+        "die Option des Spiels: der Tooltip eines Buffs erscheint kurz, wenn er angewendet wird (Gamepad-UI)",  -- 975
+        "Klassenfarben für Namen im Chat",  -- 976
+        "die Chat-Einstellung des Spiels für alle Chatarten gleichzeitig: der Name eines Spielers in seiner Klassenfarbe",  -- 977
+        "öffne das Optionsfenster (Optionen > AddOns > ControllerCam HUD)",  -- 978
+        "Rahmen",  -- 979
+        "Bildschirm ausblenden",  -- 980
+        "Effekte",  -- 981
+        "Aussehen",  -- 982
+        "Quests, Chat und Karte",  -- 983
+        "Taschen, Bank und Händler",  -- 984
+        "Angeln",  -- 985
+        "Barrierefreiheit",  -- 986
+        "Native Optionen",  -- 987
+        "%s  |  Gamepad-Oberfläche: %s  |  läuft: %s",  -- 988
+        "Spieler %s, Ziel %s, Haustier %s, Fokus %s  |  Spielrahmen beiseitegelegt: %s  |  Chat verschoben: %s",  -- 989
+        "native Optionen: Ziel des Ziels %s, Abklingzeitmanager %s, persönliche Ressourcen %s",  -- 990
+        "Textgröße %d%%  |  Textschatten: %s",  -- 991
+        "Händler- und Bankhilfe: %s  |  Autoverkauf: %s  |  weiße Ausrüstung ist Plunder: %s",  -- 992
+        "Leerlaufsichtbarkeit %d%%  |  Skalierung %d%%  |  Klassenfarben: %s",  -- 993
+        "Ein minimalistisches Action-Spiel-HUD für die Gamepad-Oberfläche.",  -- 994
+        "aktiviert",  -- 995
+        "deaktiviert: die eigenen Rahmen des Spiels sind zurück",  -- 996
+        "auch in der Maus-und-Tastatur-Oberfläche nutzen: %s",  -- 997
+        "Spielrahmen beiseitegelegt: %s",  -- 998
+        "Chat nach oben links verschoben: %s",  -- 999
+        "Klassenfarben: %s",  -- 1000
+        "Dieser Client hat diese Option nicht.",  -- 1001
+        "%s: %s (die eigene Option des Spiels)",  -- 1002
+        "Das Spiel hat das gerade nicht akzeptiert.",  -- 1003
+        "Händler- und Bankhilfe: %s",  -- 1004
+        "Autoverkauf: %s",  -- 1005
+        "weiße Ausrüstung ist Plunder: %s",  -- 1006
+        "Händlerhilfe ist aus.",  -- 1007
+        "Verwendung: /cchud sell [junk | recommended | white | green | blue]",  -- 1008
+        "markierte Gegenstände einzahlen, wenn die Bank geöffnet wird: %s",  -- 1009
+        "Verwendung: /cchud junk <item> (Shift-Klick auf den Gegenstand fügt ihn in die Chatzeile ein)",  -- 1010
+        "Gegenstand %d: Plunder, wird mit dem Rest verkauft",  -- 1011
+        "Gegenstand %d: behalten, nie verkauft",  -- 1012
+        "Gegenstand %d: für die Bank",  -- 1013
+        "Textschatten: %s",  -- 1014
+        "Verwendung: /cchud text <80-250>",  -- 1015
+        "Textgröße %d%%",  -- 1016
+        "Demo beendet",  -- 1017
+        "Das HUD läuft nicht.",  -- 1018
+        "Demo läuft: ein erfundener Kampf in Dauerschleife. Gib /cchud demo erneut ein, um sie zu beenden.",  -- 1019
+        "Verwendung: /cchud idle <0-100>",  -- 1020
+        "Leerlaufsichtbarkeit %d%%",  -- 1021
+        "Verwendung: /cchud scale <50-200>",  -- 1022
+        "Skalierung %d%%",  -- 1023
+        "Ziehe die Rahmen und gib dann /cchud lock ein.",  -- 1024
+        "Rahmen gesperrt",  -- 1025
+        "Alles ist wieder wie am Anfang: Einstellungen, Fenster und das Bildschirmlayout (deine Händlermarkierungen und der Preisverlauf bleiben erhalten).",  -- 1026
+        "Rahmen sind wieder an ihrer Ausgangsposition",  -- 1027
+        "unbekannter Befehl '%s'. Gib /cchud help ein",  -- 1028
+        "Fehlerliste geleert.",  -- 1029
+        "Keine Fehler aufgezeichnet.",  -- 1030
+        "%d Fehler aufgezeichnet (neueste zuletzt). /cchud errors clear leert die Liste.",  -- 1031
+        "Status anzeigen",  -- 1032
+        "das HUD ein- oder ausschalten (aus bringt die eigenen Rahmen des Spiels zurück)",  -- 1033
+        "das HUD auch in der Maus-und-Tastatur-Oberfläche verwenden",  -- 1034
+        "unseren Rahmen dafür verwenden oder den des Spiels",  -- 1035
+        "schmale, aufrechte Gesundheits- und Kraftbalken neben deinem Charakter",  -- 1036
+        "Ziel des Ziels (die eigene Option des Spiels, auch in dessen Menüs)",  -- 1037
+        "der Abklingzeitmanager des Spiels (die eigene Option des Spiels)",  -- 1038
+        "deine Gesundheit und Ressource unter deinem Charakter (die eigene Option des Spiels)",  -- 1039
+        "der Tooltip, der erscheint, wenn ein Buff beginnt (die eigene Option des Spiels)",  -- 1040
+        "die Spieler- und Zielrahmen des Spiels sichtbar lassen (an) oder beiseitelegen (aus)",  -- 1041
+        "beim Händler: wählen, was verkauft wird (auch: sell junk, sell recommended, sell white | green | blue)",  -- 1042
+        "zähle weiße Waffen und Rüstung als Plunder",  -- 1043
+        "einen Gegenstand markieren: immer verkauft, nie verkauft oder für die Bank (Shift-Klick fügt ihn in die Chatzeile ein)",  -- 1044
+        "an der Bank: einlagern, was die Bank schon hat, und alles für sie Markierte",  -- 1045
+        "an der Bank: herausnehmen, wovon du schon etwas trägst",  -- 1046
+        "einlagern, sobald die Bank öffnet",  -- 1047
+        "die Bank nimmt Reagenzien automatisch auf (die eigene Option des Spiels)",  -- 1048
+        "Textgröße in Prozent (150 passt gut auf einem Fernseher)",  -- 1049
+        "wie sichtbar die Spielerleiste bleibt, wenn nichts passiert (0 blendet sie aus)",  -- 1050
+        "Größe der Rahmen in Prozent",  -- 1051
+        "ziehe die Rahmen an die gewünschte Stelle (der Bearbeitungsmodus des Spiels kann das auch)",  -- 1052
+        "die Rahmen an ihre Ausgangsposition zurücksetzen",  -- 1053
+        "einen kurzen erfundenen Kampf abspielen, um zu sehen, wie die Rahmen reagieren (erneut zum Beenden)",  -- 1054
+        "gleiche das Angezeigte mit den Einstellungen ab (check listet jede Zeile auf)",  -- 1055
+        "eine Beschreibung der Gamepad-Oberfläche dieses Clients speichern (zur Fehlersuche)",  -- 1056
+        "diese Liste anzeigen",  -- 1057
+        "die letzten Fehler des HUD, auch nach einem Neuladen (um sie zu melden)",  -- 1058
     },
     esES = {
         "error:",  -- 1
@@ -2638,504 +2672,521 @@ local TRANSLATIONS = {
         "mantener la lista de misiones ordenada por distancia, con la más cercana arriba",  -- 541
         "Lista de misiones: orden recomendado",  -- 542
         "mantener la lista de misiones en un orden recomendado: primero las listas para entregar, luego lo que puedes hacer por tu cuenta empezando por lo más cercano, luego las misiones por encima de tu nivel, las de grupo mientras vas solo, y las grises al final",  -- 543
-        "Lista de misiones: objetivos cortos",  -- 544
-        "los objetivos de la lista de misiones dicen solo lo necesario, con un icono del tipo delante: una calavera y 0/1 Capitán Pavoralzado, no 0/1 Capitán Pavoralzado muerto",  -- 545
-        "Progreso de misiones en el chat",  -- 546
-        "una línea breve en el chat cuando una misión avanza: Collares de hueso sangriento: 4/25, un objetivo cumplido, una misión lista para entregar",  -- 547
-        "Progreso de misiones a tu grupo",  -- 548
-        "en un grupo (no en una banda) las mismas líneas van al chat de grupo para que las vean los demás, con un momento entre ellas; tú también las ves allí",  -- 549
-        "Conservar lo que necesitan tus misiones",  -- 550
-        "un objeto que una misión de tu registro aún pide, o uno que inicia una misión que todavía puedes hacer, se marca como Misión: nunca se vende ni se subasta por ti",  -- 551
-        "decir un orden recomendado para tus misiones: entrega lo que está listo, luego lo más cercano que puedes hacer solo, luego el resto",  -- 552
-        "A la izquierda de las misiones",  -- 553
-        "A la derecha de las misiones",  -- 554
-        "Bajo las misiones",  -- 555
-        "La lista de farmeo está llena.",  -- 556
-        "Lista de farmeo: %s, %d deseados.",  -- 557
-        "Farmeo",  -- 558
-        "%d más",  -- 559
-        "Nada que farmear aún.",  -- 560
-        "Una pila más",  -- 561
-        "Quitar",  -- 562
-        "Vaciar",  -- 563
-        "Hecho",  -- 564
-        "¿Quitar todo de la lista de farmeo?",  -- 565
-        "Lista de farmeo: elegir / hecho",  -- 566
-        "Lista de farmeo: añadir el objeto al que apuntas",  -- 567
-        "Eso no está en la lista de farmeo.",  -- 568
-        "La lista de farmeo está vacía.",  -- 569
-        "Lista de farmeo: dónde se sitúa",  -- 570
-        "Lista de farmeo junto a la lista de misiones",  -- 571
-        "lo que piensas recolectar, con cuántos tienes y cuántos quieres: tus bolsas y banco y los de tus otros personajes en este reino. Añade los componentes de un plan de subida con un botón, o cualquier objeto",  -- 572
-        "la lista de farmeo a la izquierda de la lista de misiones, a su derecha o bajo sus misiones",  -- 573
-        "la lista de farmeo junto a la lista de misiones: elige con el mando; add <objeto> [cuántos], remove <objeto>, clear, o left / right / bottom para su sitio",  -- 574
-        "No estás en combate.",  -- 575
-        "Este cliente no tiene barras de mando.",  -- 576
-        "Este cliente no permite que los addons lo cambien; usa el Modo de edición.",  -- 577
-        "barras de mando: %s",  -- 578
-        "compactas",  -- 579
-        "completas",  -- 580
-        "Barras de mando delgadas",  -- 581
-        "oculta el arte pesado tras las barras de acción del mando y las dibuja más pequeñas",  -- 582
-        "Tamaño de las barras de mando",  -- 583
-        "tamaño de las barras de mando mientras las barras delgadas están activadas, en porcentaje",  -- 584
-        "las barras de mando del juego en modo compacto o completo (igual que su ajuste del Modo de edición)",  -- 585
-        "Desvanecer fuera de combate",  -- 586
-        "/cchud fade <parte> on | off ajusta una; all para todo el desvanecimiento.",  -- 587
-        "las barras del mando, el minimapa, la lista de misiones, el medidor de daño y la barra de experiencia descansan juntos fuera de combate, y vuelven para un combate, un gatillo apretado o un objetivo enemigo",  -- 588
-        "La pantalla en reposo",  -- 589
-        "cuánto se ven las partes de la pantalla que descansan fuera de combate (0 las oculta)",  -- 590
-        "Se desvanece: barras del mando",  -- 591
-        "Se desvanece: minimapa",  -- 592
-        "Se desvanece: lista de misiones",  -- 593
-        "Se desvanece: medidor de daño",  -- 594
-        "Se desvanece: barra de experiencia",  -- 595
-        "Se desvanece: beneficios",  -- 596
-        "Se desvanece: filas de reutilización",  -- 597
-        "si esta parte de la pantalla se desvanece con el resto fuera de combate (desactivado: siempre se queda como está)",  -- 598
-        "el desvanecimiento de la pantalla fuera de combate: qué se desvanece (minimapa, lista de misiones y el resto), cada uno activado o no",  -- 599
-        "Guardado: escribe /reload para que el juego lo escriba en el disco.",  -- 600
-        "Botones de actitud y de mascota sobre las barras",  -- 601
-        "los botones de actitudes y de órdenes de mascota se colocan donde estaban los iconos verde y rojo de selección, para que su rueda se abra entera en pantalla; esos iconos se ocultan",  -- 602
-        "listar dónde están las partes de las barras del mando y qué descansa (para diagnosticar)",  -- 603
-        "Auto",  -- 604
-        "Genérico",  -- 605
-        "los del juego",  -- 606
-        "Iconos de los botones: %s.",  -- 607
-        "Ahora mismo no hay ningún mando en uso, o el juego no tiene estilos de iconos: se aplicará cuando haya uno.",  -- 608
-        "El juego no aceptó los iconos de los botones.",  -- 609
-        "El mando no dice qué es: los iconos se quedan como los tiene el juego.",  -- 610
-        "los iconos que el juego muestra para los botones de tu mando: auto (según el mando en uso), xbox, playstation, switch, steam, generic (números), o game para dejarlos como los tiene el juego",  -- 611
-        "Filas de reutilización apartadas de las barras del mando",  -- 612
-        "las filas de reutilización del juego se colocan bajo el objetivo en lugar de encima de los botones del mando, algo más pequeñas (solo con los diseños integrados del juego: con un diseño propio se quedan donde las pusiste)",  -- 613
-        "Modo de pesca: desactivado.",  -- 614
-        "Pesca: %s para lanzar",  -- 615
-        "Sin cebo: %s dos veces para usar %s",  -- 616
-        "%s para guardar la caña",  -- 617
-        "Modo pesca: %s para lanzar el sedal, y otra vez para enganchar el pez cuando el corcho se mueva.",  -- 618
-        "%s para enganchar, %s para lanzar de nuevo",  -- 619
-        "El modo de pesca necesita una caña de pescar en tus manos.",  -- 620
-        "No conoces Pesca.",  -- 621
-        "Modo de pesca: un botón lanza y engancha",  -- 622
-        "Botón de pesca: %s",  -- 623
-        "Pesca con un botón",  -- 624
-        "con una caña en las manos: tu botón de interactuar para lanzar el sedal siempre que no haya nada con lo que interactuar, y otra vez para enganchar el pez cuando el corcho se mueva; la captura se recoge por ti. B para guardar la caña y recuperar tus armas",  -- 625
-        "Volver a lanzar con una pulsación",  -- 626
-        "mientras el corcho está fuera, tu botón de pesca lanza un sedal nuevo con una pulsación, y A engancha el pez (el juego no da ninguna señal de picada que esperar, así que un botón no puede hacer ambas cosas); desactivado: el botón de pesca engancha, como la interacción del juego",  -- 627
-        "Cebo con doble pulsación",  -- 628
-        "pulsa tu botón de pesca dos veces rápido: la segunda pulsación pone el mejor cebo de tus bolsas en la caña, cuando la caña no tiene ninguno",  -- 629
-        "Barras del mando ocultas al pescar",  -- 630
-        "con una caña en las manos las barras del mando se ocultan para ver bien el agua; el aviso de pesca muestra el botón para lanzar. Vuelven en cuanto empieza un combate o guardas la caña",  -- 631
-        "pesca con un botón desactivada por ahora, o activada de nuevo (con una caña en las manos se activa sola)",  -- 632
-        "el botón que pesca: al principio tu botón de interactuar (Cuadrado o X), o cualquier otro, por ejemplo un gatillo (rt)",  -- 633
-        "La costa de Durotar es roca roja y aguas cálidas y poco profundas. Los trols de las Islas del Eco dicen que la caballa pasa más apretada cuando la marea arrastra el olor de los fuegos de cocina de las islas.",  -- 634
-        "Los lagos de Mulgore son pequeños, claros y pacientes. Los tauren pescan en ellos como lo hacen todo: despacio y dando las gracias.",  -- 635
-        "Cada oasis de Los Baldíos es un lugar de encuentro. Beba allí lo que beba de día, algo nada por debajo de noche.",  -- 636
-        "Las pozas de Teldrassil están a la sombra de un único árbol. Los pescadores elfos de la noche juran que los peces de allí no han visto nunca el sol y que no lo echan de menos.",  -- 637
-        "El agua de Costa Oscura es gris, fría y llena de pecios. La mitad de lo que pica frente a Auberdine se ha instalado en el cargamento perdido de alguien.",  -- 638
-        "Los ríos de Vallefresno corren bajo hojas más viejas que la mayoría de los reinos. Los peces son rápidos, y las centinelas lo son más para preguntarte qué haces allí.",  -- 639
-        "Allá abajo, entre Las Mil Agujas, el agua escasea y se guarda con celo. Un pez de aquí se ha ganado su sitio.",  -- 640
-        "Los lagos de Sierra Espolón están altos y fríos entre los picos. Los goblins ya los habrían desecado si no se pescara tan bien.",  -- 641
-        "La costa de Desolace es huesos y oleaje gris. Algo ahí abajo le ha cogido el gusto a las dos cosas.",  -- 642
-        "Feralas es verde hasta la misma orilla. Sus ríos son profundos, cálidos y están muy, pero que muy vivos.",  -- 643
-        "Nadie sabe bien dónde acaba la tierra y empieza el agua en el Marjal Revolcafango. Pesca desde la orilla y cuéntate los dedos de los pies después.",  -- 644
-        "Puerto Bonvapor tiene la única agua digna de ese nombre en Tanaris. Los goblins te venderán el derecho a pescar en ella, dos veces si te dejas.",  -- 645
-        "Bajo la luminosa bahía de Azshara yace una ciudad sumergida. Los viejos pescadores dicen que los grandes viven en lo que fueron sus jardines.",  -- 646
-        "Las pozas de Frondavil brillan, y no en el buen sentido. Lo que aún nada en ellas es terco más allá de toda razón.",  -- 647
-        "Las aguas termales y los lagos bordeados de brea de Un'Goro han conservado cosas que el resto del mundo olvidó. Algunas muerden.",  -- 648
-        "El Lago Elune'ara, en Claro de la Luna, está tan quieto como un aliento contenido. Los druidas solo piden que no te lleves más de lo que vayas a comer.",  -- 649
-        "Silithus es arena, viento y rumor de alas. Si has encontrado agua donde pescar aquí, no se lo digas a nadie.",  -- 650
-        "Los lagos de Cuna del Invierno se hielan por los bordes y humean por el centro. Los peces de allí están gordos por el frío y bien valen la caminata.",  -- 651
-        "En los estanques de Orgrimmar pescan peones que no tienen nada mejor que hacer y viejos brutos que dicen lo mismo. Unos y otros te cuentan que el grande se les escapó.",  -- 652
-        "Un pez de los estanques de Cima del Trueno ha pasado toda su vida muy por encima de las llanuras. Parece llevarlo con calma.",  -- 653
-        "Darnassus cuida sus aguas con tanto esmero como sus templos. Los peces se han acostumbrado a que los admiren.",  -- 654
-        "Los lagos de las Montañas de Alterac son agua de deshielo, y los ogros y la Hermandad pescan en ellos cuando nadie mira.",  -- 655
-        "Las costas de Arathi han visto más ejércitos que pescadores. A los peces hace mucho que les da igual qué estandarte ondea sobre el agua.",  -- 656
-        "Las Tierras Inhóspitas son polvo de punta a punta. Aquí una picada es un pequeño milagro, así que trátala como tal.",  -- 657
-        "La costa de Las Tierras Devastadas es roja, arrasada y silenciosa. Lo que viva en ese oleaje ha aprendido a convivir con muchas cosas.",  -- 658
-        "Los lagos de Tirisfal yacen inmóviles bajo un cielo enfermizo. Los Renegados pescan en ellos por costumbre. Los muertos no comen gran cosa, pero recuerdan que les gustaba.",  -- 659
-        "La larga costa del Bosque de Argénteos es todo niebla y sombra de pinos. Se pesca bien, y es lo único alegre que alguien dice del lugar.",  -- 660
-        "Los ríos de las Tierras de la Peste del Oeste aún corren, aunque no limpios. Lo que saques de ellos, míralo dos veces.",  -- 661
-        "Poca gente pesca en las Tierras de la Peste del Este, y menos aún lo reconoce. El agua conserva lo que la peste dejó de ella.",  -- 662
-        "El río de Trabalomas y su larga costa sur han dado de comer a los dos bandos de cada disputa librada por ellos.",  -- 663
-        "Las Tierras del Interior guardan sus lagos en lo alto, entre los árboles, donde los enanos Martillo Salvaje pescan a lomos de grifo cuando creen que nadie los ve.",  -- 664
-        "Los lagos de Dun Morogh pasan casi todo el año cercados de hielo. Un enano abre un agujero, se sienta con una pinta y lo llama un buen día, pique lo que pique.",  -- 665
-        "La Garganta de Fuego tiene lava donde otras tierras tienen ríos. Mejor tráete algo de beber.",  -- 666
-        "Las Estepas Ardientes son ceniza y rescoldos. Si el agua de aquí te da algo, estará caliente.",  -- 667
-        "Todos los niños de Elwynn aprenden a pescar en el Lago de Cristal o en el Lago del Hito. Los pececillos de allí llevan generaciones siendo más listos que ellos.",  -- 668
-        "El Paso de la Muerte tiene poca agua y menos hospitalidad. Lo que haya en las pozas bajo Karazhan, mejor que se quede allí.",  -- 669
-        "El río que bordea el Bosque del Ocaso es negro a cualquier hora. A los peces no parece importarles la oscuridad, a los pescadores sí.",  -- 670
-        "El Loch es el orgullo de Loch Modan, contenido por la gran Presa de las Tres Cabezas. Los enanos miden contra él cualquier historia de pesca, y casi siempre gana el Loch.",  -- 671
-        "El Lago Sempiterno, en Crestagrana, es bonito como un cuadro y se pesca desde todos los muelles de Villa del Lago. Los vecinos conocen cada buen sitio y no te dirán ni uno.",  -- 672
-        "De sus ríos selváticos al salvaje cabo del sur, Tuercespina tiene las aguas más ricas del continente. Los pescadores de Bahía del Botín celebran un torneo en ellas, y casi todos hacen trampa.",  -- 673
-        "El Pantano de las Penas es agua verde bajo árboles verdes. Los peces saben a barro, y a los lugareños les gustan así.",  -- 674
-        "Los campos de los Páramos de Poniente se malograron, pero su costa no. Los que se quedaron viven de esa larga orilla gris.",  -- 675
-        "Los Humedales hacen honor a su nombre. Los muelles del Puerto de Menethil son el sitio más seco para pescar en ellos, y los crocoliscos lo saben.",  -- 676
-        "En los canales de Ventormenta pescan niños, jubilados y al menos un miembro de la nobleza disfrazado. Nadie pregunta qué más hay en los canales.",  -- 677
-        "La Caverna Abandonada guarda la única poza tranquila de Forjaz. Los enanos viejos pescan en ella durante horas sin decir palabra.",  -- 678
-        "Los canales de Entrañas corren de un verde que nada tiene que ver con las algas. Los Renegados que pescan en ellos no lo hacen por la cena.",  -- 679
-        "El primer pez que casi todo pescador saca del agua, y tan brillante que no se le olvida.",  -- 680
-        "Piel resbaladiza, mucha prisa y presencia en todas las costas cálidas. A la parrilla sabe mejor de lo que su nombre da a entender.",  -- 681
-        "Todo boca, y nunca tan a gusto como en un agua que tú no beberías.",  -- 682
-        "Poco tamaño, muchos dientes y ningún miedo. Dicen que un banco entero echó una vez a un oso del Loch.",  -- 683
-        "Un destello de color bajo las olas. Si pica en el sedal, los marineros lo toman por buena suerte para la travesía.",  -- 684
-        "Un paciente habitante del fondo, con unos bigotes dignos de un anciano enano.",  -- 685
-        "Nadie repite. Los alquimistas compran cuantos ejemplares encuentran.",  -- 686
-        "Sus aletas brillan como brasas bajo la ceniza, y el aceite que se le extrae arde casi igual de bien.",  -- 687
-        "Una coraza como un escudo pequeño. La carne de dentro merece el esfuerzo.",  -- 688
-        "Algo en el agua cerca de las Cuevas de los Lamentos lo cambió. Comerte uno puede cambiarte a ti también, durante un rato.",  -- 689
-        "La gente del río dice que comerlo despeja la mente. Lo que lo hace sabio es nadar río arriba.",  -- 690
-        "Más viejo, más grande y más sabio que su primo, lo cual no lo libró de tu anzuelo.",  -- 691
-        "Un duro rival de los cálidos mares del sur, y un clásico en la pizarra de toda taberna, de Bahía del Botín a Gadgetzan.",  -- 692
-        "Su frente brilla como el mithril auténtico. Más de un minero ha intentado llevarse un ejemplar a la fundición.",  -- 693
-        "Sus escamas, hervidas, dan un aceite que vuelve la piel dura como la roca. Prefiere la noche.",  -- 694
-        "Un pulido de coraza de desfile, y casi el mismo peso.",  -- 695
-        "Solo se acerca a la costa en los meses fríos, y los cocineros que lo conocen lo esperan todo el año.",  -- 696
-        "Llega cuando los días son largos. La gente de la costa cuenta las estaciones por su paso.",  -- 697
-        "Se agarra por el centro, y solo una vez.",  -- 698
-        "Un pez de río de tierras salvajes, con las agallas tan rojas como la pintura de guerra de un trol.",  -- 699
-        "Se alimenta cuando oscurece. Una sopa hecha con él templa los nervios de cualquier hechicero.",  -- 700
-        "Se alimenta de día, lo contrario del pargo nocturno en casi todo, y aun así comparten las mismas aguas.",  -- 701
-        "No es exactamente un pez. No está de acuerdo con acabar en tu anzuelo, y te lo hará saber.",  -- 702
-        "Pálido como el hielo de río, de los lagos fríos y claros del norte.",  -- 703
-        "Vas a necesitar las dos manos, y quizá un amigo.",  -- 704
-        "%.1f lb",  -- 705
-        "Nuevo en tu diario de pesca: %s, %s.",  -- 706
-        "Nuevo en tu diario de pesca: %s.",  -- 707
-        "Tu %s más pesado hasta ahora: %s (antes %s).",  -- 708
-        "Diario de pesca",  -- 709
-        "cada captura se anota en tu diario de pesca: cuántas de cada tipo, dónde la sacaste por primera vez, y un peso inventado por diversión con tu mejor marca de cada una (/cchud journal lo abre)",  -- 710
-        "Cebo %s",  -- 711
-        "Sin cebo",  -- 712
-        "Capturados %d",  -- 713
-        "Escapados %d",  -- 714
-        "Interfaz de pesca",  -- 715
-        "con una caña de pescar en las manos: los peces del agua en la que estás (los que aún no has sacado aquí permanecen ocultos), tu habilidad de pesca y lo que añade tu cebo, cuántos has capturado y cuántos se escaparon, cuánto dura tu cebo, y tus últimas capturas",  -- 716
-        "Uno curioso: +%d%%",  -- 717
-        "Mantén tu señuelo junto al pez",  -- 718
-        "Próxima captura +%d%%",  -- 719
-        "Mantén %s: el señuelo corre por el sedal",  -- 720
-        "%d seguidos",  -- 721
-        "Un juego mientras el flotador está fuera",  -- 722
-        "se juega en la barra de lanzamiento mientras el sedal está fuera: mantén un gatillo y tu señuelo corre por el sedal, suéltalo y vuelve a la deriva; mantenlo junto a la sombra del pez. Cuanto mejor lo hagas, más pesará el peso inventado de tu próxima captura. No ocupa ningún botón y nunca toca tu lanzamiento ni tu captura",  -- 723
-        "%d capturados, %d tipos, %d escapados",  -- 724
-        "El más pesado: %s, %s",  -- 725
-        "Peces",  -- 726
-        "Aguas",  -- 727
-        "Aún no has sacado nada. Lleva una caña al agua.",  -- 728
-        "Capturados: %d",  -- 729
-        "El más pesado: %s, en %s",  -- 730
-        "Primera captura: %s",  -- 731
-        "Capturados aquí: %d",  -- 732
-        "Tipos encontrados aquí: %d",  -- 733
-        "Elegir",  -- 734
-        "Cerrar",  -- 735
-        "abrir o cerrar tu diario de pesca: cada tipo que has sacado, el más pesado de cada uno, y las aguas en las que has pescado",  -- 736
-        "El chat se desvanece en calma",  -- 737
-        "el texto del chat se desvanece tras unos segundos sin mensajes nuevos",  -- 738
-        "Segundos antes de que el chat se desvanezca",  -- 739
-        "cuánto tiempo permanece el texto del chat antes de desvanecerse",  -- 740
-        "Coordenadas en el mapa",  -- 741
-        "tus coordenadas bajo el mapa del mundo",  -- 742
-        "%d mensajes ocultados como spam desde que iniciaste sesión.",  -- 743
-        "%d de ellos eran reclutamiento de hermandad repetido.",  -- 744
-        "Icono de clase y nivel en el chat",  -- 745
-        "el icono de clase y el nivel de un jugador entre corchetes delante de su nombre, cuando el juego nos deja conocerlos",  -- 746
-        "Nombres de canal cortos en el chat",  -- 747
-        "el canal delante de una línea, abreviado: [P] grupo, [PL] líder del grupo, [G] hermandad, [O] oficial, [R] banda, [RL] líder de banda, [I] estancia, y un canal numerado por su número, [1]",  -- 748
-        "Solo nombres de pila en el chat",  -- 749
-        "un nombre con apellido aparece solo con el nombre de pila (Jory Spleeneater habla como Jory); un susurro o un clic derecho sobre él sigue llegando al nombre completo",  -- 750
-        "Tamaño del texto del chat",  -- 751
-        "el tamaño del texto en las ventanas de chat, como proporción del tamaño propio del juego (el ajuste del juego se deja como está)",  -- 752
-        "Ocultar vendedores de oro y anuncios repetidos",  -- 753
-        "se ocultan los mensajes que venden oro o servicios con una dirección web, y el mismo mensaje repetido por un jugador (nunca de tu grupo, hermandad o amigos)",  -- 754
-        "Ocultar reclutamiento de hermandad repetido",  -- 755
-        "en los canales públicos el mensaje de reclutamiento de una hermandad se muestra una vez; el mismo del mismo jugador, o uno casi igual, en 15 minutos se oculta (nunca de tu grupo, hermandad o amigos)",  -- 756
-        "lista los mensajes de chat ocultados como spam recientemente",  -- 757
-        "Vuelo",  -- 758
-        "destino desconocido",  -- 759
-        "calculado por la distancia",  -- 760
-        "primer vuelo en esta ruta: aprendiendo su duración",  -- 761
-        "aterrizando",  -- 762
-        "%s: unos %s, calculado por la distancia",  -- 763
-        "%s: unos %s",  -- 764
-        "%s: primer vuelo en esta ruta, tiempo desconocido",  -- 765
-        "En vuelo, destino desconocido",  -- 766
-        "%s: tiempo de vuelo aprendido, %s",  -- 767
-        "%d rutas de vuelo conocidas.",  -- 768
-        "Vuelos: tiempo y cuenta atrás",  -- 769
-        "en un vuelo se dice en el chat adónde y cuánto dura, y una barra en lo alto de la pantalla cuenta hasta el aterrizaje; el tiempo de cada ruta se aprende de tus vuelos",  -- 770
-        "Vuelos: tu montura sobre la barra",  -- 771
-        "un grifo, un jinete del viento o un murciélago (el que te dio el maestro de vuelo) planea por la barra de vuelo hacia donde aterrizas",  -- 772
-        "listar las rutas de vuelo cuyo tiempo se conoce",  -- 773
-        "Un vuelo es un buen momento para ello.",  -- 774
-        "Llevas jugando %s.",  -- 775
-        "Hora de un sorbo de agua",  -- 776
-        "Recordatorio para beber agua",  -- 777
-        "de vez en cuando mientras juegas, un suave recordatorio para beber un sorbo de agua (nunca en combate)",  -- 778
-        "Recordatorio de agua cada (minutos)",  -- 779
-        "cuántos minutos de juego hay entre recordatorios para beber agua",  -- 780
-        "Recordatorio de agua al empezar un vuelo",  -- 781
-        "un vuelo es una pausa natural: el recordatorio para beber agua llega al empezar uno, salvo que el último fuera hace poco",  -- 782
-        "mostrar el recordatorio para beber agua",  -- 783
-        "Rediseñar los marcos propios del juego",  -- 784
-        "descripciones, beneficios, el seguimiento de misiones, el minimapa, la barra de experiencia, las pestañas del chat y las barras del mando con el aspecto del HUD (la interfaz del ratón conserva la del juego)",  -- 785
-        "Tamaño de la barra de experiencia",  -- 786
-        "el tamaño de las barras de experiencia y reputación mientras están rediseñadas, en porcentaje",  -- 787
-        "Descripciones",  -- 788
-        "descripciones en cristal oscuro, con borde del color de la clase de un jugador o de la calidad de un objeto",  -- 789
-        "Barras de mando",  -- 790
-        "los botones del mando con un anillo delgado sobre un fondo oscuro en lugar del arte pesado",  -- 791
-        "Beneficios",  -- 792
-        "tus iconos de beneficios y perjuicios recortados y con borde, sus tiempos con contorno",  -- 793
-        "Seguimiento de misiones",  -- 794
-        "los encabezados del seguimiento de misiones en cristal oscuro, sus líneas con contorno",  -- 795
-        "Minimapa",  -- 796
-        "un anillo delgado y un halo suave alrededor del minimapa en lugar del borde dorado",  -- 797
-        "Barra de experiencia",  -- 798
-        "las barras de experiencia y reputación un poco más pequeñas, con sus propios colores",  -- 799
-        "Chat",  -- 800
-        "nombres de las pestañas del chat con contorno y el cuadro donde escribes en cristal oscuro",  -- 801
-        "Medidor de daño",  -- 802
-        "el medidor de daño del juego con el estilo del HUD: sus barras, inclinadas sobre un fondo oscuro, y texto con contorno; conserva todo lo que hace",  -- 803
-        "comprobación: %d de %d superadas",  -- 804
-        "El juego no se ha detenido desde que entraste.",  -- 805
-        "Momentos en que el juego se detuvo y la parte del HUD en cada uno:",  -- 806
-        "Los momentos más lentos del HUD:",  -- 807
-        "Informes de depuración",  -- 808
-        "reunir los informes de diagnóstico por sí solos: al iniciar sesión y de nuevo al recargar o salir (se guardan en los ajustes guardados)",  -- 809
-        "los momentos en que el juego se detuvo desde que entraste, y cuánto de cada uno fue trabajo del propio HUD",  -- 810
-        "Ajuste del HUD: %s, a juego con la cámara",  -- 811
-        "preajuste: %s",  -- 812
-        "Se ha añadido un diseño llamado '%s' al modo edición del juego. Elígelo allí para usarlo (Menú del juego > Modo edición > Diseño).",  -- 813
-        "preajuste desconocido '%s'",  -- 814
-        "Para un televisor: texto más grande en el HUD y en el chat.",  -- 815
-        "Para un monitor: texto a su tamaño normal.",  -- 816
-        "Nuestros marcos han vuelto a su sitio inicial. Elige el diseño %s del juego en el modo edición (Menú del juego > Modo edición > Diseño).",  -- 817
-        "Los ajustes preestablecidos fijan la distancia de cámara",  -- 818
-        "un ajuste preestablecido también lleva la cámara a la distancia para la que se hizo su diseño, una sola vez (después haz zoom libremente)",  -- 819
-        "Acción",  -- 820
-        "una vista en tercera persona: barras verticales finas junto a tu personaje, todos los efectos activados; fuera de combate todo se desvanece",  -- 821
-        "Clásico",  -- 822
-        "nuestros marcos donde WoW siempre los ha tenido, efectos más discretos, las barras de mando del juego tal cual",  -- 823
-        "Mínimo",  -- 824
-        "solo lo que necesitas: los PNJ amistosos muestran su placa (con lo que hacen) solo mientras los señalas, apuntas o los tienes como objetivo; nombres sin títulos; fuera de combate tus barras quedan como un leve indicio (la salud baja siempre se muestra)",  -- 825
-        "Mundo abierto",  -- 826
-        "una pantalla limpia para explorar: barras finas a tu lado que descansan atenuadas, placas sin barras de poder, chat que se desvanece",  -- 827
-        "Aventura",  -- 828
-        "tras las aventuras de mundo abierto en consola: constantes vitales a tu lado, un objetivo pequeño arriba en el centro, aldeanos solo cuando los señalas, chat que se desvanece rápido",  -- 829
-        "Soulslike",  -- 830
-        "tus barras arriba a la izquierda, una gran barra del objetivo abajo en el centro como la de un jefe, cada golpe se siente",  -- 831
-        "Shooter",  -- 832
-        "barras verticales justo a la derecha del centro, cerca de donde apuntas, el objetivo bien arriba, respuesta fuerte a los golpes",  -- 833
-        "Crossbar",  -- 834
-        "tras los MMO jugados con mando: objetivo y foco arriba en el centro, tus barras justo encima de las barras de mando, grupo a la izquierda, placas completas",  -- 835
-        "ARPG",  -- 836
-        "tras los RPG de acción: la cámara lejos, tus constantes vitales abajo a la izquierda, el objetivo arriba en el centro, enemigos menores pequeños, cada golpe suena fuerte",  -- 837
-        "Brújula",  -- 838
-        "tras los RPG en primera persona: la cámara cerca, tus barras abajo en el centro, el objetivo bajo el borde superior, aldeanos solo cuando los señalas",  -- 839
-        "Banda",  -- 840
-        "la colocación de WoW con todo lo que necesita un grupo: marcos de grupo y banda, porcentajes de salud y niveles en las placas",  -- 841
-        "Seguir los ajustes de ControllerCam",  -- 842
-        "elegir un ajuste de cámara en ControllerCam para todas partes también elige el ajuste del HUD a juego (la cámara mantiene su propia distancia)",  -- 843
-        "Moderno",  -- 844
-        "pon todo el HUD en un ajuste preestablecido: action, classic, minimal, openworld, adventure, soulslike, shooter, crossbar, arpg, compass, raid",  -- 845
-        "el marco del objetivo y las placas compactos o completos, ambos a la vez",  -- 846
-        "el marco del objetivo compacto o completo",  -- 847
-        "ajustar el texto para un televisor al otro lado de la sala o para un monitor a un brazo de distancia",  -- 848
-        "devolver nuestros marcos a su sitio inicial, para el diseño Moderno o Clásico del propio juego",  -- 849
-        "Toda tu configuración (HUD, cámara y el diseño del juego): copia esta línea (Ctrl+C) para guardarla o compartirla.",  -- 850
-        "Pega una línea de ajustes del HUD (Ctrl+V) y acepta.",  -- 851
-        "Esa línea está dañada: cópiala de nuevo, completa.",  -- 852
-        "Esa línea se hizo con una versión más reciente: actualiza el addon.",  -- 853
-        "Eso no es una línea de ajustes del HUD.",  -- 854
-        "Ajustes importados: %d tomados, %d omitidos.",  -- 855
-        "La configuración de la cámara también se ha importado.",  -- 856
-        "La configuración de la cámara se ha dejado como estaba.",  -- 857
-        "El diseño del juego es ahora '%s'.",  -- 858
-        "El diseño del juego se ha dejado como estaba.",  -- 859
-        "tus ajustes como una línea de texto, para guardar o compartir",  -- 860
-        "toma ajustes de una línea de texto creada con /cchud export",  -- 861
-        "El HUD está activo mientras se usa la interfaz de mando. Sus opciones: Opciones > AddOns > ControllerCam > HUD, o /cchud.",  -- 862
-        "Solo cámara: el HUD descansa y la interfaz del juego queda como estaba. /cchud on lo activa.",  -- 863
-        "¿Configurar también la pantalla para el mando? Esto añade un diseño llamado CCHUD al modo edición del juego, para que lo elijas allí: coloca las filas de reutilización bajo el objetivo, lejos de los botones del mando. Tus propios diseños se conservan (/cchud setup lo ofrece de nuevo).",  -- 864
-        "Configurar",  -- 865
-        "Ahora no",  -- 866
-        "ControllerCam incluye una interfaz para mando, el HUD: sus propios marcos de unidad, placas de nombre, barra de lanzamiento y más mientras se usa la interfaz de mando. ¿La quieres, o solo la cámara?",  -- 867
-        "Cámara + HUD",  -- 868
-        "Solo cámara",  -- 869
-        "Este cliente no permite que los addons cambien la disposición.",  -- 870
-        "preguntar de nuevo: la cámara con el HUD, o solo la cámara",  -- 871
-        "ofrecer de nuevo el diseño de pantalla hecho para el HUD (modo edición del juego)",  -- 872
-        "Se muestra mientras se usa la interfaz de mando. Arrastra nuestros marcos en el Modo Edición del juego.",  -- 873
-        "Preajustes",  -- 874
-        "Ajustado para",  -- 875
-        "Televisor",  -- 876
-        "Monitor",  -- 877
-        "Iconos de los botones",  -- 878
-        "los iconos que el juego muestra para los botones de tu mando: detectados automáticamente para el mando en uso, o el tipo que elijas",  -- 879
-        "Fuente",  -- 880
-        "Restablecer la disposición del juego",  -- 881
-        "Pruébalo",  -- 882
-        "Reproducir la demo",  -- 883
-        "Mostrar todos los efectos de golpe",  -- 884
-        "Ejecutar la autocomprobación",  -- 885
-        "Barras de mando: compactas / completas",  -- 886
-        "Exportar ajustes",  -- 887
-        "Importar ajustes",  -- 888
-        "Marca «Mostrar opciones avanzadas» en la página principal para ver todos los ajustes.",  -- 889
-        "Módulos",  -- 890
-        "Interruptores rápidos",  -- 891
-        "General",  -- 892
-        "HUD",  -- 893
-        "El panel de opciones no está disponible en este cliente.",  -- 894
-        "Activado",  -- 895
-        "todo el HUD; si se desactiva, vuelven los marcos propios del juego",  -- 896
-        "También en la interfaz de ratón y teclado",  -- 897
-        "normalmente el HUD solo funciona mientras se usa la interfaz de mando",  -- 898
-        "Apartar los marcos del juego",  -- 899
-        "oculta los marcos de jugador, objetivo y foco del juego mientras se muestran los nuestros",  -- 900
-        "Ventana de chat arriba a la izquierda",  -- 901
-        "mueve la ventana de chat arriba a la izquierda mientras funciona el HUD",  -- 902
-        "Barras verticales en reposo",  -- 903
-        "cuán visibles se mantienen las barras verticales con salud completa fuera de combate (0 las oculta)",  -- 904
-        "Colores de clase",  -- 905
-        "colorea tu barra y las de otros jugadores según la clase",  -- 906
-        "Iconos de clase",  -- 907
-        "un icono de clase delante del nombre de un jugador en el objetivo y en el objetivo del objetivo",  -- 908
-        "Amenaza en el marco del objetivo",  -- 909
-        "un icono de escudo y un brillo en el marco del objetivo: rojo mientras te ataca, rojo y amarillo cuando estás a punto de atraerlo, amarillo y azul cuando lo estás perdiendo, azul cuando no está sobre ti",  -- 910
-        "Barras compactas en todas partes",  -- 911
-        "el marco del objetivo y las placas en su estilo compacto, algo más de la mitad de ancho (cada uno se puede ajustar por separado; los ajustes preestablecidos nunca lo cambian)",  -- 912
-        "Marco de objetivo compacto",  -- 913
-        "el marco de objetivo algo más de la mitad de ancho",  -- 914
-        "Colores de salud en combate",  -- 915
-        "en combate, las barras de salud pasan de verde a amarillo y a rojo a medida que baja la salud",  -- 916
-        "Sombreado tras el texto",  -- 917
-        "una banda oscura suave tras el texto del objetivo, para que se lea bien",  -- 918
-        "Tamaño del texto",  -- 919
-        "tamaño del texto de nuestros marcos",  -- 920
-        "Tamaño de los marcos",  -- 921
-        "tamaño de nuestros marcos de unidad",  -- 922
-        "Tus barras en combate",  -- 923
-        "qué tan visibles están tus barras, mascota y foco en combate hasta que algo requiera atención",  -- 924
-        "Completas con salud inferior a",  -- 925
-        "tus barras vuelven completas cuando tu salud baja de este valor",  -- 926
-        "Completas con maná inferior a",  -- 927
-        "tus barras vuelven completas cuando tu maná baja de este valor",  -- 928
-        "Barra del jugador en reposo",  -- 929
-        "qué tan visible queda la barra del jugador con la salud completa o fuera de combate (0 la oculta)",  -- 930
-        "Ayuda de vendedor y banco",  -- 931
-        "el botón Vender basura del vendedor pregunta qué vender; movimiento rápido en vendedor y banco",  -- 932
-        "Mostrar opciones avanzadas",  -- 933
-        "todos los ajustes, no solo los interruptores principales",  -- 934
-        "Marco del jugador",  -- 935
-        "nuestra barra del jugador, arriba a la izquierda",  -- 936
-        "Marco del objetivo",  -- 937
-        "nuestra barra del objetivo, arriba en el centro",  -- 938
-        "Barra de mascota",  -- 939
-        "una pequeña barra de mascota bajo la barra del jugador, o junto a las barras verticales",  -- 940
-        "Marco del foco",  -- 941
-        "nuestro marco del foco",  -- 942
-        "barras verticales finas de salud y poder junto a tu personaje, para una vista en tercera persona (en lugar de la barra del jugador)",  -- 943
-        "Vender basura al abrir un vendedor",  -- 944
-        "vende la basura según tus reglas en cuanto se abre un vendedor",  -- 945
-        "Las armas y armaduras blancas son basura",  -- 946
-        "cuenta las armas y armaduras blancas como basura (nunca herramientas, cañas de pescar, equipo con uso ni algo que pueda ser una mejora; siempre se pregunta antes)",  -- 947
-        "Depositar al abrir el banco",  -- 948
-        "los objetos marcados para el banco y, si está activado, lo que el banco ya tiene, entran solos",  -- 949
-        "la opción del juego; nuestro marco pequeño la sigue",  -- 950
-        "Gestor de reutilización",  -- 951
-        "el Gestor de reutilización del juego",  -- 952
-        "Visualización de recursos personales",  -- 953
-        "tu salud y recurso bajo tu personaje",  -- 954
-        "El banco toma componentes automáticamente",  -- 955
-        "la opción del juego para el banco",  -- 956
-        "Descripción emergente al empezar un beneficio",  -- 957
-        "la opción del juego: la descripción emergente de un beneficio aparece un momento al aplicarse (IU de mando)",  -- 958
-        "Colores de clase en los nombres del chat",  -- 959
-        "el ajuste del chat del juego para todos los tipos de chat a la vez: el nombre de un jugador con el color de su clase",  -- 960
-        "abre el panel de opciones (Opciones > AddOns > ControllerCam HUD)",  -- 961
-        "Marcos",  -- 962
-        "Desvanecer la pantalla",  -- 963
-        "Efectos",  -- 964
-        "Aspecto",  -- 965
-        "Misiones, chat y mapa",  -- 966
-        "Bolsas, banco y vendedor",  -- 967
-        "Pesca",  -- 968
-        "Accesibilidad",  -- 969
-        "Opciones nativas",  -- 970
-        "%s  |  Interfaz de mando: %s  |  en marcha: %s",  -- 971
-        "jugador %s, objetivo %s, mascota %s, foco %s  |  marcos del juego apartados: %s  |  chat movido: %s",  -- 972
-        "opciones nativas: objetivo del objetivo %s, Gestor de reutilización %s, recursos personales %s",  -- 973
-        "tamaño del texto %d%%  |  sombreado del texto: %s",  -- 974
-        "ayuda de vendedor y banco: %s  |  venta automática: %s  |  el equipo blanco es basura: %s",  -- 975
-        "visibilidad en reposo %d%%  |  escala %d%%  |  colores de clase: %s",  -- 976
-        "Un HUD de acción minimalista para la interfaz de mando.",  -- 977
-        "activado",  -- 978
-        "desactivado: vuelven los marcos propios del juego",  -- 979
-        "usar también en la interfaz de ratón y teclado: %s",  -- 980
-        "marcos del juego apartados: %s",  -- 981
-        "chat movido arriba a la izquierda: %s",  -- 982
-        "colores de clase: %s",  -- 983
-        "Este cliente no tiene esa opción.",  -- 984
-        "%s: %s (opción propia del juego)",  -- 985
-        "El juego no lo aceptó en este momento.",  -- 986
-        "ayuda de vendedor y banco: %s",  -- 987
-        "venta automática: %s",  -- 988
-        "el equipo blanco es basura: %s",  -- 989
-        "La ayuda de vendedor está desactivada.",  -- 990
-        "uso: /cchud sell [junk | recommended | white | green | blue]",  -- 991
-        "depositar los objetos marcados al abrir el banco: %s",  -- 992
-        "uso: /cchud junk <item> (Mayús + clic en el objeto para ponerlo en la línea de chat)",  -- 993
-        "objeto %d: basura, se vende con el resto",  -- 994
-        "objeto %d: conservado, nunca se vende",  -- 995
-        "objeto %d: para el banco",  -- 996
-        "sombreado del texto: %s",  -- 997
-        "uso: /cchud text <80-250>",  -- 998
-        "tamaño del texto %d%%",  -- 999
-        "demo detenida",  -- 1000
-        "El HUD no está en marcha.",  -- 1001
-        "Demo en marcha: un combate inventado en bucle. Escribe /cchud demo otra vez para detenerla.",  -- 1002
-        "uso: /cchud idle <0-100>",  -- 1003
-        "visibilidad en reposo %d%%",  -- 1004
-        "uso: /cchud scale <50-200>",  -- 1005
-        "escala %d%%",  -- 1006
-        "Arrastra los marcos y luego escribe /cchud lock.",  -- 1007
-        "marcos bloqueados",  -- 1008
-        "Todo ha vuelto a como empezó: ajustes, marcos y el diseño de pantalla (tus marcas de vendedor y el historial de precios se conservan).",  -- 1009
-        "los marcos han vuelto a su posición inicial",  -- 1010
-        "comando desconocido '%s'. Escribe /cchud help",  -- 1011
-        "Lista de errores vaciada.",  -- 1012
-        "No hay errores registrados.",  -- 1013
-        "%d errores registrados (el más reciente al final). /cchud errors clear vacía la lista.",  -- 1014
-        "mostrar el estado",  -- 1015
-        "activa o desactiva el HUD (desactivado devuelve los marcos propios del juego)",  -- 1016
-        "usar también el HUD en la interfaz de ratón y teclado",  -- 1017
-        "usar nuestro marco para ello, o el del propio juego",  -- 1018
-        "barras verticales delgadas de salud y poder junto a tu personaje",  -- 1019
-        "objetivo del objetivo (opción propia del juego, también en sus menús)",  -- 1020
-        "el Gestor de reutilización del juego (opción propia del juego)",  -- 1021
-        "tu salud y recurso bajo tu personaje (opción propia del juego)",  -- 1022
-        "la descripción emergente que aparece cuando empieza un beneficio (la opción propia del juego)",  -- 1023
-        "mantener visibles los marcos de jugador y objetivo del juego (on) o apartarlos (off)",  -- 1024
-        "en un vendedor: elige qué vender (también: sell junk, sell recommended, sell white | green | blue)",  -- 1025
-        "cuenta las armas y armaduras blancas como basura",  -- 1026
-        "marcar un objeto: siempre se vende, nunca se vende, o para el banco (Mayús + clic para ponerlo en la línea de chat)",  -- 1027
-        "en el banco: deposita lo que el banco ya tiene y todo lo marcado para él",  -- 1028
-        "en el banco: sacar lo que ya llevas en parte",  -- 1029
-        "depositar en cuanto se abre el banco",  -- 1030
-        "el banco toma componentes automáticamente (opción propia del juego)",  -- 1031
-        "tamaño del texto, en porcentaje (150 se lee bien en un televisor)",  -- 1032
-        "cuán visible queda la barra del jugador cuando no pasa nada (0 la oculta)",  -- 1033
-        "tamaño de los marcos, en porcentaje",  -- 1034
-        "arrastra los marcos adonde quieras (el Modo Edición del juego también lo permite)",  -- 1035
-        "devolver los marcos a su posición inicial",  -- 1036
-        "reproduce un combate inventado y breve, para ver cómo reaccionan los marcos (otra vez para detenerlo)",  -- 1037
-        "compara lo que hay en pantalla con los ajustes (check all enumera cada fila)",  -- 1038
-        "guarda una descripción de la interfaz de mando de este cliente (para solucionar problemas)",  -- 1039
-        "mostrar esta lista",  -- 1040
-        "los últimos errores del HUD, también tras recargar (para informar de ellos)",  -- 1041
+        "Enfocar la misión más cercana",  -- 544
+        "la misión a la que te guía el juego es siempre la más cercana de tu lista mientras viajas; una que enfoques tú se respeta durante diez minutos",  -- 545
+        "Lista de misiones: objetivos cortos",  -- 546
+        "los objetivos de la lista de misiones dicen solo lo necesario, con un icono del tipo delante: una calavera y 0/1 Capitán Pavoralzado, no 0/1 Capitán Pavoralzado muerto",  -- 547
+        "Progreso de misiones en el chat",  -- 548
+        "una línea breve en el chat cuando una misión avanza: Collares de hueso sangriento: 4/25, un objetivo cumplido, una misión lista para entregar",  -- 549
+        "Progreso de misiones a tu grupo",  -- 550
+        "en un grupo (no en una banda) las mismas líneas van al chat de grupo para que las vean los demás, con un momento entre ellas; tú también las ves allí",  -- 551
+        "Conservar lo que necesitan tus misiones",  -- 552
+        "un objeto que una misión de tu registro aún pide, o uno que inicia una misión que todavía puedes hacer, se marca como Misión: nunca se vende ni se subasta por ti",  -- 553
+        "decir un orden recomendado para tus misiones: entrega lo que está listo, luego lo más cercano que puedes hacer solo, luego el resto",  -- 554
+        "A la izquierda de las misiones",  -- 555
+        "A la derecha de las misiones",  -- 556
+        "Bajo las misiones",  -- 557
+        "La lista de farmeo está llena.",  -- 558
+        "Lista de farmeo: %s, %d deseados.",  -- 559
+        "Farmeo",  -- 560
+        "%d más",  -- 561
+        "Nada que farmear aún.",  -- 562
+        "Una pila más",  -- 563
+        "Quitar",  -- 564
+        "Vaciar",  -- 565
+        "Hecho",  -- 566
+        "¿Quitar todo de la lista de farmeo?",  -- 567
+        "Lista de farmeo: elegir / hecho",  -- 568
+        "Lista de farmeo: añadir el objeto al que apuntas",  -- 569
+        "Eso no está en la lista de farmeo.",  -- 570
+        "La lista de farmeo está vacía.",  -- 571
+        "Lista de farmeo: dónde se sitúa",  -- 572
+        "Lista de farmeo junto a la lista de misiones",  -- 573
+        "lo que piensas recolectar, con cuántos tienes y cuántos quieres: tus bolsas y banco y los de tus otros personajes en este reino. Añade los componentes de un plan de subida con un botón, o cualquier objeto",  -- 574
+        "la lista de farmeo a la izquierda de la lista de misiones, a su derecha o bajo sus misiones",  -- 575
+        "la lista de farmeo junto a la lista de misiones: elige con el mando; add <objeto> [cuántos], remove <objeto>, clear, o left / right / bottom para su sitio",  -- 576
+        "No estás en combate.",  -- 577
+        "Este cliente no tiene barras de mando.",  -- 578
+        "Este cliente no permite que los addons lo cambien; usa el Modo de edición.",  -- 579
+        "barras de mando: %s",  -- 580
+        "compactas",  -- 581
+        "completas",  -- 582
+        "Barras de mando delgadas",  -- 583
+        "oculta el arte pesado tras las barras de acción del mando y las dibuja más pequeñas",  -- 584
+        "Tamaño de las barras de mando",  -- 585
+        "tamaño de las barras de mando mientras las barras delgadas están activadas, en porcentaje",  -- 586
+        "las barras de mando del juego en modo compacto o completo (igual que su ajuste del Modo de edición)",  -- 587
+        "Desvanecer fuera de combate",  -- 588
+        "/cchud fade <parte> on | off ajusta una; all para todo el desvanecimiento.",  -- 589
+        "las barras del mando, el minimapa, la lista de misiones, el medidor de daño y la barra de experiencia descansan juntos fuera de combate, y vuelven para un combate, un gatillo apretado o un objetivo enemigo",  -- 590
+        "La pantalla en reposo",  -- 591
+        "cuánto se ven las partes de la pantalla que descansan fuera de combate (0 las oculta)",  -- 592
+        "Se desvanece: barras del mando",  -- 593
+        "Se desvanece: minimapa",  -- 594
+        "Se desvanece: lista de misiones",  -- 595
+        "Se desvanece: medidor de daño",  -- 596
+        "Se desvanece: barra de experiencia",  -- 597
+        "Se desvanece: beneficios",  -- 598
+        "Se desvanece: filas de reutilización",  -- 599
+        "si esta parte de la pantalla se desvanece con el resto fuera de combate (desactivado: siempre se queda como está)",  -- 600
+        "el desvanecimiento de la pantalla fuera de combate: qué se desvanece (minimapa, lista de misiones y el resto), cada uno activado o no",  -- 601
+        "Guardado: escribe /reload para que el juego lo escriba en el disco.",  -- 602
+        "Botones de actitud y de mascota sobre las barras",  -- 603
+        "los botones de actitudes y de órdenes de mascota se colocan donde estaban los iconos verde y rojo de selección, para que su rueda se abra entera en pantalla; esos iconos se ocultan",  -- 604
+        "listar dónde están las partes de las barras del mando y qué descansa (para diagnosticar)",  -- 605
+        "Auto",  -- 606
+        "Genérico",  -- 607
+        "los del juego",  -- 608
+        "Iconos de los botones: %s.",  -- 609
+        "Ahora mismo no hay ningún mando en uso, o el juego no tiene estilos de iconos: se aplicará cuando haya uno.",  -- 610
+        "El juego no aceptó los iconos de los botones.",  -- 611
+        "El mando no dice qué es: los iconos se quedan como los tiene el juego.",  -- 612
+        "los iconos que el juego muestra para los botones de tu mando: auto (según el mando en uso), xbox, playstation, switch, steam, generic (números), o game para dejarlos como los tiene el juego",  -- 613
+        "Filas de reutilización apartadas de las barras del mando",  -- 614
+        "las filas de reutilización del juego se colocan bajo el objetivo en lugar de encima de los botones del mando, algo más pequeñas (solo con los diseños integrados del juego: con un diseño propio se quedan donde las pusiste)",  -- 615
+        "Modo de pesca: desactivado.",  -- 616
+        "Pesca: %s para lanzar",  -- 617
+        "Sin cebo: %s dos veces para usar %s",  -- 618
+        "%s para guardar la caña",  -- 619
+        "Modo pesca: %s para lanzar el sedal, y otra vez para enganchar el pez cuando el corcho se mueva.",  -- 620
+        "%s para enganchar, %s para lanzar de nuevo",  -- 621
+        "El modo de pesca necesita una caña de pescar en tus manos.",  -- 622
+        "No conoces Pesca.",  -- 623
+        "Modo de pesca: un botón lanza y engancha",  -- 624
+        "Botón de pesca: %s",  -- 625
+        "Pesca con un botón",  -- 626
+        "con una caña en las manos: tu botón de interactuar para lanzar el sedal siempre que no haya nada con lo que interactuar, y otra vez para enganchar el pez cuando el corcho se mueva; la captura se recoge por ti. B para guardar la caña y recuperar tus armas",  -- 627
+        "Volver a lanzar con una pulsación",  -- 628
+        "mientras el corcho está fuera, tu botón de pesca lanza un sedal nuevo con una pulsación, y A engancha el pez (el juego no da ninguna señal de picada que esperar, así que un botón no puede hacer ambas cosas); desactivado: el botón de pesca engancha, como la interacción del juego",  -- 629
+        "Cebo con doble pulsación",  -- 630
+        "pulsa tu botón de pesca dos veces rápido: la segunda pulsación pone el mejor cebo de tus bolsas en la caña, cuando la caña no tiene ninguno",  -- 631
+        "Barras del mando ocultas al pescar",  -- 632
+        "con una caña en las manos las barras del mando se ocultan para ver bien el agua; el aviso de pesca muestra el botón para lanzar. Vuelven en cuanto empieza un combate o guardas la caña",  -- 633
+        "pesca con un botón desactivada por ahora, o activada de nuevo (con una caña en las manos se activa sola)",  -- 634
+        "el botón que pesca: al principio tu botón de interactuar (Cuadrado o X), o cualquier otro, por ejemplo un gatillo (rt)",  -- 635
+        "La costa de Durotar es roca roja y aguas cálidas y poco profundas. Los trols de las Islas del Eco dicen que la caballa pasa más apretada cuando la marea arrastra el olor de los fuegos de cocina de las islas.",  -- 636
+        "Los lagos de Mulgore son pequeños, claros y pacientes. Los tauren pescan en ellos como lo hacen todo: despacio y dando las gracias.",  -- 637
+        "Cada oasis de Los Baldíos es un lugar de encuentro. Beba allí lo que beba de día, algo nada por debajo de noche.",  -- 638
+        "Las pozas de Teldrassil están a la sombra de un único árbol. Los pescadores elfos de la noche juran que los peces de allí no han visto nunca el sol y que no lo echan de menos.",  -- 639
+        "El agua de Costa Oscura es gris, fría y llena de pecios. La mitad de lo que pica frente a Auberdine se ha instalado en el cargamento perdido de alguien.",  -- 640
+        "Los ríos de Vallefresno corren bajo hojas más viejas que la mayoría de los reinos. Los peces son rápidos, y las centinelas lo son más para preguntarte qué haces allí.",  -- 641
+        "Allá abajo, entre Las Mil Agujas, el agua escasea y se guarda con celo. Un pez de aquí se ha ganado su sitio.",  -- 642
+        "Los lagos de Sierra Espolón están altos y fríos entre los picos. Los goblins ya los habrían desecado si no se pescara tan bien.",  -- 643
+        "La costa de Desolace es huesos y oleaje gris. Algo ahí abajo le ha cogido el gusto a las dos cosas.",  -- 644
+        "Feralas es verde hasta la misma orilla. Sus ríos son profundos, cálidos y están muy, pero que muy vivos.",  -- 645
+        "Nadie sabe bien dónde acaba la tierra y empieza el agua en el Marjal Revolcafango. Pesca desde la orilla y cuéntate los dedos de los pies después.",  -- 646
+        "Puerto Bonvapor tiene la única agua digna de ese nombre en Tanaris. Los goblins te venderán el derecho a pescar en ella, dos veces si te dejas.",  -- 647
+        "Bajo la luminosa bahía de Azshara yace una ciudad sumergida. Los viejos pescadores dicen que los grandes viven en lo que fueron sus jardines.",  -- 648
+        "Las pozas de Frondavil brillan, y no en el buen sentido. Lo que aún nada en ellas es terco más allá de toda razón.",  -- 649
+        "Las aguas termales y los lagos bordeados de brea de Un'Goro han conservado cosas que el resto del mundo olvidó. Algunas muerden.",  -- 650
+        "El Lago Elune'ara, en Claro de la Luna, está tan quieto como un aliento contenido. Los druidas solo piden que no te lleves más de lo que vayas a comer.",  -- 651
+        "Silithus es arena, viento y rumor de alas. Si has encontrado agua donde pescar aquí, no se lo digas a nadie.",  -- 652
+        "Los lagos de Cuna del Invierno se hielan por los bordes y humean por el centro. Los peces de allí están gordos por el frío y bien valen la caminata.",  -- 653
+        "En los estanques de Orgrimmar pescan peones que no tienen nada mejor que hacer y viejos brutos que dicen lo mismo. Unos y otros te cuentan que el grande se les escapó.",  -- 654
+        "Un pez de los estanques de Cima del Trueno ha pasado toda su vida muy por encima de las llanuras. Parece llevarlo con calma.",  -- 655
+        "Darnassus cuida sus aguas con tanto esmero como sus templos. Los peces se han acostumbrado a que los admiren.",  -- 656
+        "Los lagos de las Montañas de Alterac son agua de deshielo, y los ogros y la Hermandad pescan en ellos cuando nadie mira.",  -- 657
+        "Las costas de Arathi han visto más ejércitos que pescadores. A los peces hace mucho que les da igual qué estandarte ondea sobre el agua.",  -- 658
+        "Las Tierras Inhóspitas son polvo de punta a punta. Aquí una picada es un pequeño milagro, así que trátala como tal.",  -- 659
+        "La costa de Las Tierras Devastadas es roja, arrasada y silenciosa. Lo que viva en ese oleaje ha aprendido a convivir con muchas cosas.",  -- 660
+        "Los lagos de Tirisfal yacen inmóviles bajo un cielo enfermizo. Los Renegados pescan en ellos por costumbre. Los muertos no comen gran cosa, pero recuerdan que les gustaba.",  -- 661
+        "La larga costa del Bosque de Argénteos es todo niebla y sombra de pinos. Se pesca bien, y es lo único alegre que alguien dice del lugar.",  -- 662
+        "Los ríos de las Tierras de la Peste del Oeste aún corren, aunque no limpios. Lo que saques de ellos, míralo dos veces.",  -- 663
+        "Poca gente pesca en las Tierras de la Peste del Este, y menos aún lo reconoce. El agua conserva lo que la peste dejó de ella.",  -- 664
+        "El río de Trabalomas y su larga costa sur han dado de comer a los dos bandos de cada disputa librada por ellos.",  -- 665
+        "Las Tierras del Interior guardan sus lagos en lo alto, entre los árboles, donde los enanos Martillo Salvaje pescan a lomos de grifo cuando creen que nadie los ve.",  -- 666
+        "Los lagos de Dun Morogh pasan casi todo el año cercados de hielo. Un enano abre un agujero, se sienta con una pinta y lo llama un buen día, pique lo que pique.",  -- 667
+        "La Garganta de Fuego tiene lava donde otras tierras tienen ríos. Mejor tráete algo de beber.",  -- 668
+        "Las Estepas Ardientes son ceniza y rescoldos. Si el agua de aquí te da algo, estará caliente.",  -- 669
+        "Todos los niños de Elwynn aprenden a pescar en el Lago de Cristal o en el Lago del Hito. Los pececillos de allí llevan generaciones siendo más listos que ellos.",  -- 670
+        "El Paso de la Muerte tiene poca agua y menos hospitalidad. Lo que haya en las pozas bajo Karazhan, mejor que se quede allí.",  -- 671
+        "El río que bordea el Bosque del Ocaso es negro a cualquier hora. A los peces no parece importarles la oscuridad, a los pescadores sí.",  -- 672
+        "El Loch es el orgullo de Loch Modan, contenido por la gran Presa de las Tres Cabezas. Los enanos miden contra él cualquier historia de pesca, y casi siempre gana el Loch.",  -- 673
+        "El Lago Sempiterno, en Crestagrana, es bonito como un cuadro y se pesca desde todos los muelles de Villa del Lago. Los vecinos conocen cada buen sitio y no te dirán ni uno.",  -- 674
+        "De sus ríos selváticos al salvaje cabo del sur, Tuercespina tiene las aguas más ricas del continente. Los pescadores de Bahía del Botín celebran un torneo en ellas, y casi todos hacen trampa.",  -- 675
+        "El Pantano de las Penas es agua verde bajo árboles verdes. Los peces saben a barro, y a los lugareños les gustan así.",  -- 676
+        "Los campos de los Páramos de Poniente se malograron, pero su costa no. Los que se quedaron viven de esa larga orilla gris.",  -- 677
+        "Los Humedales hacen honor a su nombre. Los muelles del Puerto de Menethil son el sitio más seco para pescar en ellos, y los crocoliscos lo saben.",  -- 678
+        "En los canales de Ventormenta pescan niños, jubilados y al menos un miembro de la nobleza disfrazado. Nadie pregunta qué más hay en los canales.",  -- 679
+        "La Caverna Abandonada guarda la única poza tranquila de Forjaz. Los enanos viejos pescan en ella durante horas sin decir palabra.",  -- 680
+        "Los canales de Entrañas corren de un verde que nada tiene que ver con las algas. Los Renegados que pescan en ellos no lo hacen por la cena.",  -- 681
+        "El primer pez que casi todo pescador saca del agua, y tan brillante que no se le olvida.",  -- 682
+        "Piel resbaladiza, mucha prisa y presencia en todas las costas cálidas. A la parrilla sabe mejor de lo que su nombre da a entender.",  -- 683
+        "Todo boca, y nunca tan a gusto como en un agua que tú no beberías.",  -- 684
+        "Poco tamaño, muchos dientes y ningún miedo. Dicen que un banco entero echó una vez a un oso del Loch.",  -- 685
+        "Un destello de color bajo las olas. Si pica en el sedal, los marineros lo toman por buena suerte para la travesía.",  -- 686
+        "Un paciente habitante del fondo, con unos bigotes dignos de un anciano enano.",  -- 687
+        "Nadie repite. Los alquimistas compran cuantos ejemplares encuentran.",  -- 688
+        "Sus aletas brillan como brasas bajo la ceniza, y el aceite que se le extrae arde casi igual de bien.",  -- 689
+        "Una coraza como un escudo pequeño. La carne de dentro merece el esfuerzo.",  -- 690
+        "Algo en el agua cerca de las Cuevas de los Lamentos lo cambió. Comerte uno puede cambiarte a ti también, durante un rato.",  -- 691
+        "La gente del río dice que comerlo despeja la mente. Lo que lo hace sabio es nadar río arriba.",  -- 692
+        "Más viejo, más grande y más sabio que su primo, lo cual no lo libró de tu anzuelo.",  -- 693
+        "Un duro rival de los cálidos mares del sur, y un clásico en la pizarra de toda taberna, de Bahía del Botín a Gadgetzan.",  -- 694
+        "Su frente brilla como el mithril auténtico. Más de un minero ha intentado llevarse un ejemplar a la fundición.",  -- 695
+        "Sus escamas, hervidas, dan un aceite que vuelve la piel dura como la roca. Prefiere la noche.",  -- 696
+        "Un pulido de coraza de desfile, y casi el mismo peso.",  -- 697
+        "Solo se acerca a la costa en los meses fríos, y los cocineros que lo conocen lo esperan todo el año.",  -- 698
+        "Llega cuando los días son largos. La gente de la costa cuenta las estaciones por su paso.",  -- 699
+        "Se agarra por el centro, y solo una vez.",  -- 700
+        "Un pez de río de tierras salvajes, con las agallas tan rojas como la pintura de guerra de un trol.",  -- 701
+        "Se alimenta cuando oscurece. Una sopa hecha con él templa los nervios de cualquier hechicero.",  -- 702
+        "Se alimenta de día, lo contrario del pargo nocturno en casi todo, y aun así comparten las mismas aguas.",  -- 703
+        "No es exactamente un pez. No está de acuerdo con acabar en tu anzuelo, y te lo hará saber.",  -- 704
+        "Pálido como el hielo de río, de los lagos fríos y claros del norte.",  -- 705
+        "Vas a necesitar las dos manos, y quizá un amigo.",  -- 706
+        "%.1f lb",  -- 707
+        "Nuevo en tu diario de pesca: %s, %s.",  -- 708
+        "Nuevo en tu diario de pesca: %s.",  -- 709
+        "Tu %s más pesado hasta ahora: %s (antes %s).",  -- 710
+        "Diario de pesca",  -- 711
+        "cada captura se anota en tu diario de pesca: cuántas de cada tipo, dónde la sacaste por primera vez, y un peso inventado por diversión con tu mejor marca de cada una (/cchud journal lo abre)",  -- 712
+        "Cebo %s",  -- 713
+        "Sin cebo",  -- 714
+        "Capturados %d",  -- 715
+        "Escapados %d",  -- 716
+        "Interfaz de pesca",  -- 717
+        "con una caña de pescar en las manos: los peces del agua en la que estás (los que aún no has sacado aquí permanecen ocultos), tu habilidad de pesca y lo que añade tu cebo, cuántos has capturado y cuántos se escaparon, cuánto dura tu cebo, y tus últimas capturas",  -- 718
+        "Uno curioso: +%d%%",  -- 719
+        "Mantén tu señuelo junto al pez",  -- 720
+        "Próxima captura +%d%%",  -- 721
+        "Mantén %s: el señuelo corre por el sedal",  -- 722
+        "%d seguidos",  -- 723
+        "Un juego mientras el flotador está fuera",  -- 724
+        "se juega en la barra de lanzamiento mientras el sedal está fuera: mantén un gatillo y tu señuelo corre por el sedal, suéltalo y vuelve a la deriva; mantenlo junto a la sombra del pez. Cuanto mejor lo hagas, más pesará el peso inventado de tu próxima captura. No ocupa ningún botón y nunca toca tu lanzamiento ni tu captura",  -- 725
+        "%d capturados, %d tipos, %d escapados",  -- 726
+        "El más pesado: %s, %s",  -- 727
+        "Peces",  -- 728
+        "Aguas",  -- 729
+        "Aún no has sacado nada. Lleva una caña al agua.",  -- 730
+        "Capturados: %d",  -- 731
+        "El más pesado: %s, en %s",  -- 732
+        "Primera captura: %s",  -- 733
+        "Capturados aquí: %d",  -- 734
+        "Tipos encontrados aquí: %d",  -- 735
+        "Elegir",  -- 736
+        "Cerrar",  -- 737
+        "abrir o cerrar tu diario de pesca: cada tipo que has sacado, el más pesado de cada uno, y las aguas en las que has pescado",  -- 738
+        "El chat se desvanece en calma",  -- 739
+        "el texto del chat se desvanece tras unos segundos sin mensajes nuevos",  -- 740
+        "Segundos antes de que el chat se desvanezca",  -- 741
+        "cuánto tiempo permanece el texto del chat antes de desvanecerse",  -- 742
+        "Coordenadas en el mapa",  -- 743
+        "tus coordenadas bajo el mapa del mundo",  -- 744
+        "%d mensajes ocultados como spam desde que iniciaste sesión.",  -- 745
+        "%d de ellos eran reclutamiento de hermandad repetido.",  -- 746
+        "Icono de clase y nivel en el chat",  -- 747
+        "el icono de clase y el nivel de un jugador entre corchetes delante de su nombre, cuando el juego nos deja conocerlos",  -- 748
+        "Nombres de canal cortos en el chat",  -- 749
+        "el canal delante de una línea, abreviado: [P] grupo, [PL] líder del grupo, [G] hermandad, [O] oficial, [R] banda, [RL] líder de banda, [I] estancia, y un canal numerado por su número, [1]",  -- 750
+        "Solo nombres de pila en el chat",  -- 751
+        "un nombre con apellido aparece solo con el nombre de pila (Jory Spleeneater habla como Jory); un susurro o un clic derecho sobre él sigue llegando al nombre completo",  -- 752
+        "Tamaño del texto del chat",  -- 753
+        "el tamaño del texto en las ventanas de chat, como proporción del tamaño propio del juego (el ajuste del juego se deja como está)",  -- 754
+        "Ocultar vendedores de oro y anuncios repetidos",  -- 755
+        "se ocultan los mensajes que venden oro o servicios con una dirección web, y el mismo mensaje repetido por un jugador (nunca de tu grupo, hermandad o amigos)",  -- 756
+        "Ocultar reclutamiento de hermandad repetido",  -- 757
+        "en los canales públicos el mensaje de reclutamiento de una hermandad se muestra una vez; el mismo del mismo jugador, o uno casi igual, en 15 minutos se oculta (nunca de tu grupo, hermandad o amigos)",  -- 758
+        "lista los mensajes de chat ocultados como spam recientemente",  -- 759
+        "Vuelo",  -- 760
+        "destino desconocido",  -- 761
+        "calculado por la distancia",  -- 762
+        "primer vuelo en esta ruta: aprendiendo su duración",  -- 763
+        "aterrizando",  -- 764
+        "%s: unos %s, calculado por la distancia",  -- 765
+        "%s: unos %s",  -- 766
+        "%s: primer vuelo en esta ruta, tiempo desconocido",  -- 767
+        "En vuelo, destino desconocido",  -- 768
+        "%s: tiempo de vuelo aprendido, %s",  -- 769
+        "%d rutas de vuelo conocidas.",  -- 770
+        "Vuelos: tiempo y cuenta atrás",  -- 771
+        "en un vuelo se dice en el chat adónde y cuánto dura, y una barra en lo alto de la pantalla cuenta hasta el aterrizaje; el tiempo de cada ruta se aprende de tus vuelos",  -- 772
+        "Vuelos: tu montura sobre la barra",  -- 773
+        "un grifo, un jinete del viento o un murciélago (el que te dio el maestro de vuelo) planea por la barra de vuelo hacia donde aterrizas",  -- 774
+        "listar las rutas de vuelo cuyo tiempo se conoce",  -- 775
+        "¡A tierra! +%d",  -- 776
+        "Entre las nubes: se acaba la racha",  -- 777
+        "%d de oro de vuelo",  -- 778
+        "%s aletear",  -- 779
+        "%s red",  -- 780
+        "%s gran altitud",  -- 781
+        "%s: volver al juego (%d de oro de vuelo)",  -- 782
+        "%s: un juego por el camino",  -- 783
+        "El juego de vuelo está desactivado: /cchud flightgame on",  -- 784
+        "El juego de vuelo se juega durante un vuelo.",  -- 785
+        "No en combate.",  -- 786
+        "Juego de vuelo: jugar / gran altitud",  -- 787
+        "Vuelos: un juego por el camino",  -- 788
+        "en un vuelo se ofrece un pequeño juego bajo la barra de vuelo, y un botón lo inicia (solo ese botón se ocupa hasta que lo pulses): haz que tu montura aletee entre las nubes y atrapa con la red a los jinetes que vienen de frente, bajándolos a tierra a cambio de oro de vuelo. El mismo botón otra vez es gran altitud: el juego se guarda y los botones vuelven a ser del juego. Nunca en combate, desaparece al aterrizar",  -- 789
+        "en un vuelo: iniciar el juego de vuelo, o llevarlo a gran altitud y de vuelta",  -- 790
+        "Un vuelo es un buen momento para ello.",  -- 791
+        "Llevas jugando %s.",  -- 792
+        "Hora de un sorbo de agua",  -- 793
+        "Recordatorio para beber agua",  -- 794
+        "de vez en cuando mientras juegas, un suave recordatorio para beber un sorbo de agua (nunca en combate)",  -- 795
+        "Recordatorio de agua cada (minutos)",  -- 796
+        "cuántos minutos de juego hay entre recordatorios para beber agua",  -- 797
+        "Recordatorio de agua al empezar un vuelo",  -- 798
+        "un vuelo es una pausa natural: el recordatorio para beber agua llega al empezar uno, salvo que el último fuera hace poco",  -- 799
+        "mostrar el recordatorio para beber agua",  -- 800
+        "Rediseñar los marcos propios del juego",  -- 801
+        "descripciones, beneficios, el seguimiento de misiones, el minimapa, la barra de experiencia, las pestañas del chat y las barras del mando con el aspecto del HUD (la interfaz del ratón conserva la del juego)",  -- 802
+        "Tamaño de la barra de experiencia",  -- 803
+        "el tamaño de las barras de experiencia y reputación mientras están rediseñadas, en porcentaje",  -- 804
+        "Descripciones",  -- 805
+        "descripciones en cristal oscuro, con borde del color de la clase de un jugador o de la calidad de un objeto",  -- 806
+        "Barras de mando",  -- 807
+        "los botones del mando con un anillo delgado sobre un fondo oscuro en lugar del arte pesado",  -- 808
+        "Beneficios",  -- 809
+        "tus iconos de beneficios y perjuicios recortados y con borde, sus tiempos con contorno",  -- 810
+        "Seguimiento de misiones",  -- 811
+        "los encabezados del seguimiento de misiones en cristal oscuro, sus líneas con contorno",  -- 812
+        "Minimapa",  -- 813
+        "un anillo delgado y un halo suave alrededor del minimapa en lugar del borde dorado",  -- 814
+        "Barra de experiencia",  -- 815
+        "las barras de experiencia y reputación un poco más pequeñas, con sus propios colores",  -- 816
+        "Chat",  -- 817
+        "nombres de las pestañas del chat con contorno y el cuadro donde escribes en cristal oscuro",  -- 818
+        "Medidor de daño",  -- 819
+        "el medidor de daño del juego con el estilo del HUD: sus barras, inclinadas sobre un fondo oscuro, y texto con contorno; conserva todo lo que hace",  -- 820
+        "comprobación: %d de %d superadas",  -- 821
+        "El juego no se ha detenido desde que entraste.",  -- 822
+        "Momentos en que el juego se detuvo y la parte del HUD en cada uno:",  -- 823
+        "Los momentos más lentos del HUD:",  -- 824
+        "Informes de depuración",  -- 825
+        "reunir los informes de diagnóstico por sí solos: al iniciar sesión y de nuevo al recargar o salir (se guardan en los ajustes guardados)",  -- 826
+        "los momentos en que el juego se detuvo desde que entraste, y cuánto de cada uno fue trabajo del propio HUD",  -- 827
+        "Ajuste del HUD: %s, a juego con la cámara",  -- 828
+        "preajuste: %s",  -- 829
+        "Se ha añadido un diseño llamado '%s' al modo edición del juego. Elígelo allí para usarlo (Menú del juego > Modo edición > Diseño).",  -- 830
+        "preajuste desconocido '%s'",  -- 831
+        "Para un televisor: texto más grande en el HUD y en el chat.",  -- 832
+        "Para un monitor: texto a su tamaño normal.",  -- 833
+        "Nuestros marcos han vuelto a su sitio inicial. Elige el diseño %s del juego en el modo edición (Menú del juego > Modo edición > Diseño).",  -- 834
+        "Los ajustes preestablecidos fijan la distancia de cámara",  -- 835
+        "un ajuste preestablecido también lleva la cámara a la distancia para la que se hizo su diseño, una sola vez (después haz zoom libremente)",  -- 836
+        "Acción",  -- 837
+        "una vista en tercera persona: barras verticales finas junto a tu personaje, todos los efectos activados; fuera de combate todo se desvanece",  -- 838
+        "Clásico",  -- 839
+        "nuestros marcos donde WoW siempre los ha tenido, efectos más discretos, las barras de mando del juego tal cual",  -- 840
+        "Mínimo",  -- 841
+        "solo lo que necesitas: los PNJ amistosos muestran su placa (con lo que hacen) solo mientras los señalas, apuntas o los tienes como objetivo; nombres sin títulos; fuera de combate tus barras quedan como un leve indicio (la salud baja siempre se muestra)",  -- 842
+        "Mundo abierto",  -- 843
+        "una pantalla limpia para explorar: barras finas a tu lado que descansan atenuadas, placas sin barras de poder, chat que se desvanece",  -- 844
+        "Aventura",  -- 845
+        "tras las aventuras de mundo abierto en consola: constantes vitales a tu lado, un objetivo pequeño arriba en el centro, aldeanos solo cuando los señalas, chat que se desvanece rápido",  -- 846
+        "Soulslike",  -- 847
+        "tus barras arriba a la izquierda, una gran barra del objetivo abajo en el centro como la de un jefe, cada golpe se siente",  -- 848
+        "Shooter",  -- 849
+        "barras verticales justo a la derecha del centro, cerca de donde apuntas, el objetivo bien arriba, respuesta fuerte a los golpes",  -- 850
+        "Crossbar",  -- 851
+        "tras los MMO jugados con mando: objetivo y foco arriba en el centro, tus barras justo encima de las barras de mando, grupo a la izquierda, placas completas",  -- 852
+        "ARPG",  -- 853
+        "tras los RPG de acción: la cámara lejos, tus constantes vitales abajo a la izquierda, el objetivo arriba en el centro, enemigos menores pequeños, cada golpe suena fuerte",  -- 854
+        "Brújula",  -- 855
+        "tras los RPG en primera persona: la cámara cerca, tus barras abajo en el centro, el objetivo bajo el borde superior, aldeanos solo cuando los señalas",  -- 856
+        "Banda",  -- 857
+        "la colocación de WoW con todo lo que necesita un grupo: marcos de grupo y banda, porcentajes de salud y niveles en las placas",  -- 858
+        "Seguir los ajustes de ControllerCam",  -- 859
+        "elegir un ajuste de cámara en ControllerCam para todas partes también elige el ajuste del HUD a juego (la cámara mantiene su propia distancia)",  -- 860
+        "Moderno",  -- 861
+        "pon todo el HUD en un ajuste preestablecido: action, classic, minimal, openworld, adventure, soulslike, shooter, crossbar, arpg, compass, raid",  -- 862
+        "el marco del objetivo y las placas compactos o completos, ambos a la vez",  -- 863
+        "el marco del objetivo compacto o completo",  -- 864
+        "ajustar el texto para un televisor al otro lado de la sala o para un monitor a un brazo de distancia",  -- 865
+        "devolver nuestros marcos a su sitio inicial, para el diseño Moderno o Clásico del propio juego",  -- 866
+        "Toda tu configuración (HUD, cámara y el diseño del juego): copia esta línea (Ctrl+C) para guardarla o compartirla.",  -- 867
+        "Pega una línea de ajustes del HUD (Ctrl+V) y acepta.",  -- 868
+        "Esa línea está dañada: cópiala de nuevo, completa.",  -- 869
+        "Esa línea se hizo con una versión más reciente: actualiza el addon.",  -- 870
+        "Eso no es una línea de ajustes del HUD.",  -- 871
+        "Ajustes importados: %d tomados, %d omitidos.",  -- 872
+        "La configuración de la cámara también se ha importado.",  -- 873
+        "La configuración de la cámara se ha dejado como estaba.",  -- 874
+        "El diseño del juego es ahora '%s'.",  -- 875
+        "El diseño del juego se ha dejado como estaba.",  -- 876
+        "tus ajustes como una línea de texto, para guardar o compartir",  -- 877
+        "toma ajustes de una línea de texto creada con /cchud export",  -- 878
+        "El HUD está activo mientras se usa la interfaz de mando. Sus opciones: Opciones > AddOns > ControllerCam > HUD, o /cchud.",  -- 879
+        "Solo cámara: el HUD descansa y la interfaz del juego queda como estaba. /cchud on lo activa.",  -- 880
+        "¿Configurar también la pantalla para el mando? Esto añade un diseño llamado CCHUD al modo edición del juego, para que lo elijas allí: coloca las filas de reutilización bajo el objetivo, lejos de los botones del mando. Tus propios diseños se conservan (/cchud setup lo ofrece de nuevo).",  -- 881
+        "Configurar",  -- 882
+        "Ahora no",  -- 883
+        "ControllerCam incluye una interfaz para mando, el HUD: sus propios marcos de unidad, placas de nombre, barra de lanzamiento y más mientras se usa la interfaz de mando. ¿La quieres, o solo la cámara?",  -- 884
+        "Cámara + HUD",  -- 885
+        "Solo cámara",  -- 886
+        "Este cliente no permite que los addons cambien la disposición.",  -- 887
+        "preguntar de nuevo: la cámara con el HUD, o solo la cámara",  -- 888
+        "ofrecer de nuevo el diseño de pantalla hecho para el HUD (modo edición del juego)",  -- 889
+        "Se muestra mientras se usa la interfaz de mando. Arrastra nuestros marcos en el Modo Edición del juego.",  -- 890
+        "Preajustes",  -- 891
+        "Ajustado para",  -- 892
+        "Televisor",  -- 893
+        "Monitor",  -- 894
+        "Iconos de los botones",  -- 895
+        "los iconos que el juego muestra para los botones de tu mando: detectados automáticamente para el mando en uso, o el tipo que elijas",  -- 896
+        "Fuente",  -- 897
+        "Restablecer la disposición del juego",  -- 898
+        "Pruébalo",  -- 899
+        "Reproducir la demo",  -- 900
+        "Mostrar todos los efectos de golpe",  -- 901
+        "Ejecutar la autocomprobación",  -- 902
+        "Barras de mando: compactas / completas",  -- 903
+        "Exportar ajustes",  -- 904
+        "Importar ajustes",  -- 905
+        "Marca «Mostrar opciones avanzadas» en la página principal para ver todos los ajustes.",  -- 906
+        "Módulos",  -- 907
+        "Interruptores rápidos",  -- 908
+        "General",  -- 909
+        "HUD",  -- 910
+        "El panel de opciones no está disponible en este cliente.",  -- 911
+        "Activado",  -- 912
+        "todo el HUD; si se desactiva, vuelven los marcos propios del juego",  -- 913
+        "También en la interfaz de ratón y teclado",  -- 914
+        "normalmente el HUD solo funciona mientras se usa la interfaz de mando",  -- 915
+        "Apartar los marcos del juego",  -- 916
+        "oculta los marcos de jugador, objetivo y foco del juego mientras se muestran los nuestros",  -- 917
+        "Ventana de chat arriba a la izquierda",  -- 918
+        "mueve la ventana de chat arriba a la izquierda mientras funciona el HUD",  -- 919
+        "Barras verticales en reposo",  -- 920
+        "cuán visibles se mantienen las barras verticales con salud completa fuera de combate (0 las oculta)",  -- 921
+        "Colores de clase",  -- 922
+        "colorea tu barra y las de otros jugadores según la clase",  -- 923
+        "Iconos de clase",  -- 924
+        "un icono de clase delante del nombre de un jugador en el objetivo y en el objetivo del objetivo",  -- 925
+        "Amenaza en el marco del objetivo",  -- 926
+        "un icono de escudo y un brillo en el marco del objetivo: rojo mientras te ataca, rojo y amarillo cuando estás a punto de atraerlo, amarillo y azul cuando lo estás perdiendo, azul cuando no está sobre ti",  -- 927
+        "Barras compactas en todas partes",  -- 928
+        "el marco del objetivo y las placas en su estilo compacto, algo más de la mitad de ancho (cada uno se puede ajustar por separado; los ajustes preestablecidos nunca lo cambian)",  -- 929
+        "Marco de objetivo compacto",  -- 930
+        "el marco de objetivo algo más de la mitad de ancho",  -- 931
+        "Colores de salud en combate",  -- 932
+        "en combate, las barras de salud pasan de verde a amarillo y a rojo a medida que baja la salud",  -- 933
+        "Sombreado tras el texto",  -- 934
+        "una banda oscura suave tras el texto del objetivo, para que se lea bien",  -- 935
+        "Tamaño del texto",  -- 936
+        "tamaño del texto de nuestros marcos",  -- 937
+        "Tamaño de los marcos",  -- 938
+        "tamaño de nuestros marcos de unidad",  -- 939
+        "Tus barras en combate",  -- 940
+        "qué tan visibles están tus barras, mascota y foco en combate hasta que algo requiera atención",  -- 941
+        "Completas con salud inferior a",  -- 942
+        "tus barras vuelven completas cuando tu salud baja de este valor",  -- 943
+        "Completas con maná inferior a",  -- 944
+        "tus barras vuelven completas cuando tu maná baja de este valor",  -- 945
+        "Barra del jugador en reposo",  -- 946
+        "qué tan visible queda la barra del jugador con la salud completa o fuera de combate (0 la oculta)",  -- 947
+        "Ayuda de vendedor y banco",  -- 948
+        "el botón Vender basura del vendedor pregunta qué vender; movimiento rápido en vendedor y banco",  -- 949
+        "Mostrar opciones avanzadas",  -- 950
+        "todos los ajustes, no solo los interruptores principales",  -- 951
+        "Marco del jugador",  -- 952
+        "nuestra barra del jugador, arriba a la izquierda",  -- 953
+        "Marco del objetivo",  -- 954
+        "nuestra barra del objetivo, arriba en el centro",  -- 955
+        "Barra de mascota",  -- 956
+        "una pequeña barra de mascota bajo la barra del jugador, o junto a las barras verticales",  -- 957
+        "Marco del foco",  -- 958
+        "nuestro marco del foco",  -- 959
+        "barras verticales finas de salud y poder junto a tu personaje, para una vista en tercera persona (en lugar de la barra del jugador)",  -- 960
+        "Vender basura al abrir un vendedor",  -- 961
+        "vende la basura según tus reglas en cuanto se abre un vendedor",  -- 962
+        "Las armas y armaduras blancas son basura",  -- 963
+        "cuenta las armas y armaduras blancas como basura (nunca herramientas, cañas de pescar, equipo con uso ni algo que pueda ser una mejora; siempre se pregunta antes)",  -- 964
+        "Depositar al abrir el banco",  -- 965
+        "los objetos marcados para el banco y, si está activado, lo que el banco ya tiene, entran solos",  -- 966
+        "la opción del juego; nuestro marco pequeño la sigue",  -- 967
+        "Gestor de reutilización",  -- 968
+        "el Gestor de reutilización del juego",  -- 969
+        "Visualización de recursos personales",  -- 970
+        "tu salud y recurso bajo tu personaje",  -- 971
+        "El banco toma componentes automáticamente",  -- 972
+        "la opción del juego para el banco",  -- 973
+        "Descripción emergente al empezar un beneficio",  -- 974
+        "la opción del juego: la descripción emergente de un beneficio aparece un momento al aplicarse (IU de mando)",  -- 975
+        "Colores de clase en los nombres del chat",  -- 976
+        "el ajuste del chat del juego para todos los tipos de chat a la vez: el nombre de un jugador con el color de su clase",  -- 977
+        "abre el panel de opciones (Opciones > AddOns > ControllerCam HUD)",  -- 978
+        "Marcos",  -- 979
+        "Desvanecer la pantalla",  -- 980
+        "Efectos",  -- 981
+        "Aspecto",  -- 982
+        "Misiones, chat y mapa",  -- 983
+        "Bolsas, banco y vendedor",  -- 984
+        "Pesca",  -- 985
+        "Accesibilidad",  -- 986
+        "Opciones nativas",  -- 987
+        "%s  |  Interfaz de mando: %s  |  en marcha: %s",  -- 988
+        "jugador %s, objetivo %s, mascota %s, foco %s  |  marcos del juego apartados: %s  |  chat movido: %s",  -- 989
+        "opciones nativas: objetivo del objetivo %s, Gestor de reutilización %s, recursos personales %s",  -- 990
+        "tamaño del texto %d%%  |  sombreado del texto: %s",  -- 991
+        "ayuda de vendedor y banco: %s  |  venta automática: %s  |  el equipo blanco es basura: %s",  -- 992
+        "visibilidad en reposo %d%%  |  escala %d%%  |  colores de clase: %s",  -- 993
+        "Un HUD de acción minimalista para la interfaz de mando.",  -- 994
+        "activado",  -- 995
+        "desactivado: vuelven los marcos propios del juego",  -- 996
+        "usar también en la interfaz de ratón y teclado: %s",  -- 997
+        "marcos del juego apartados: %s",  -- 998
+        "chat movido arriba a la izquierda: %s",  -- 999
+        "colores de clase: %s",  -- 1000
+        "Este cliente no tiene esa opción.",  -- 1001
+        "%s: %s (opción propia del juego)",  -- 1002
+        "El juego no lo aceptó en este momento.",  -- 1003
+        "ayuda de vendedor y banco: %s",  -- 1004
+        "venta automática: %s",  -- 1005
+        "el equipo blanco es basura: %s",  -- 1006
+        "La ayuda de vendedor está desactivada.",  -- 1007
+        "uso: /cchud sell [junk | recommended | white | green | blue]",  -- 1008
+        "depositar los objetos marcados al abrir el banco: %s",  -- 1009
+        "uso: /cchud junk <item> (Mayús + clic en el objeto para ponerlo en la línea de chat)",  -- 1010
+        "objeto %d: basura, se vende con el resto",  -- 1011
+        "objeto %d: conservado, nunca se vende",  -- 1012
+        "objeto %d: para el banco",  -- 1013
+        "sombreado del texto: %s",  -- 1014
+        "uso: /cchud text <80-250>",  -- 1015
+        "tamaño del texto %d%%",  -- 1016
+        "demo detenida",  -- 1017
+        "El HUD no está en marcha.",  -- 1018
+        "Demo en marcha: un combate inventado en bucle. Escribe /cchud demo otra vez para detenerla.",  -- 1019
+        "uso: /cchud idle <0-100>",  -- 1020
+        "visibilidad en reposo %d%%",  -- 1021
+        "uso: /cchud scale <50-200>",  -- 1022
+        "escala %d%%",  -- 1023
+        "Arrastra los marcos y luego escribe /cchud lock.",  -- 1024
+        "marcos bloqueados",  -- 1025
+        "Todo ha vuelto a como empezó: ajustes, marcos y el diseño de pantalla (tus marcas de vendedor y el historial de precios se conservan).",  -- 1026
+        "los marcos han vuelto a su posición inicial",  -- 1027
+        "comando desconocido '%s'. Escribe /cchud help",  -- 1028
+        "Lista de errores vaciada.",  -- 1029
+        "No hay errores registrados.",  -- 1030
+        "%d errores registrados (el más reciente al final). /cchud errors clear vacía la lista.",  -- 1031
+        "mostrar el estado",  -- 1032
+        "activa o desactiva el HUD (desactivado devuelve los marcos propios del juego)",  -- 1033
+        "usar también el HUD en la interfaz de ratón y teclado",  -- 1034
+        "usar nuestro marco para ello, o el del propio juego",  -- 1035
+        "barras verticales delgadas de salud y poder junto a tu personaje",  -- 1036
+        "objetivo del objetivo (opción propia del juego, también en sus menús)",  -- 1037
+        "el Gestor de reutilización del juego (opción propia del juego)",  -- 1038
+        "tu salud y recurso bajo tu personaje (opción propia del juego)",  -- 1039
+        "la descripción emergente que aparece cuando empieza un beneficio (la opción propia del juego)",  -- 1040
+        "mantener visibles los marcos de jugador y objetivo del juego (on) o apartarlos (off)",  -- 1041
+        "en un vendedor: elige qué vender (también: sell junk, sell recommended, sell white | green | blue)",  -- 1042
+        "cuenta las armas y armaduras blancas como basura",  -- 1043
+        "marcar un objeto: siempre se vende, nunca se vende, o para el banco (Mayús + clic para ponerlo en la línea de chat)",  -- 1044
+        "en el banco: deposita lo que el banco ya tiene y todo lo marcado para él",  -- 1045
+        "en el banco: sacar lo que ya llevas en parte",  -- 1046
+        "depositar en cuanto se abre el banco",  -- 1047
+        "el banco toma componentes automáticamente (opción propia del juego)",  -- 1048
+        "tamaño del texto, en porcentaje (150 se lee bien en un televisor)",  -- 1049
+        "cuán visible queda la barra del jugador cuando no pasa nada (0 la oculta)",  -- 1050
+        "tamaño de los marcos, en porcentaje",  -- 1051
+        "arrastra los marcos adonde quieras (el Modo Edición del juego también lo permite)",  -- 1052
+        "devolver los marcos a su posición inicial",  -- 1053
+        "reproduce un combate inventado y breve, para ver cómo reaccionan los marcos (otra vez para detenerlo)",  -- 1054
+        "compara lo que hay en pantalla con los ajustes (check all enumera cada fila)",  -- 1055
+        "guarda una descripción de la interfaz de mando de este cliente (para solucionar problemas)",  -- 1056
+        "mostrar esta lista",  -- 1057
+        "los últimos errores del HUD, también tras recargar (para informar de ellos)",  -- 1058
     },
     frFR = {
         "erreur:",  -- 1
@@ -3681,504 +3732,521 @@ local TRANSLATIONS = {
         "garder la liste de quêtes dans l'ordre des distances, la quête la plus proche en haut",  -- 541
         "Liste de quêtes: ordre recommandé",  -- 542
         "garder la liste de quêtes dans un ordre recommandé: d'abord celles prêtes à être rendues, puis ce que vous pouvez faire seul en commençant par le plus proche, puis les quêtes au-dessus de votre niveau, les quêtes de groupe tant que vous êtes seul, et les quêtes grises en dernier",  -- 543
-        "Liste de quêtes: objectifs courts",  -- 544
-        "les objectifs de la liste de quêtes ne disent que le nécessaire, avec une icône du type devant: un crâne et 0/1 Capitaine Levépouvante, et non 0/1 Capitaine Levépouvante tué",  -- 545
-        "Progression des quêtes dans le chat",  -- 546
-        "une courte ligne dans le chat quand une quête avance : Colliers d'os sanglants : 4/25, un objectif rempli, une quête prête à être rendue",  -- 547
-        "Progression des quêtes à votre groupe",  -- 548
-        "en groupe (pas en raid), les mêmes lignes vont dans la discussion de groupe pour que les autres les voient, à un moment d'intervalle ; vous les y voyez aussi",  -- 549
-        "Garder ce dont vos quêtes ont besoin",  -- 550
-        "un objet qu'une quête de votre journal demande encore, ou qui lance une quête que vous pouvez encore faire, est marqué Quête : jamais vendu ni mis aux enchères pour vous",  -- 551
-        "dire un ordre recommandé pour vos quêtes: rendre ce qui est prêt, puis la plus proche faisable seul, puis le reste",  -- 552
-        "À gauche des quêtes",  -- 553
-        "À droite des quêtes",  -- 554
-        "Sous les quêtes",  -- 555
-        "La liste à farmer est pleine.",  -- 556
-        "Liste à farmer : %s, %d voulu(s).",  -- 557
-        "À farmer",  -- 558
-        "%d de plus",  -- 559
-        "Rien à farmer pour l'instant.",  -- 560
-        "Une pile de plus",  -- 561
-        "Retirer",  -- 562
-        "Vider",  -- 563
-        "Terminé",  -- 564
-        "Tout retirer de la liste à farmer ?",  -- 565
-        "Liste à farmer : choisir / terminé",  -- 566
-        "Liste à farmer : ajouter l'objet pointé",  -- 567
-        "Ce n'est pas sur la liste à farmer.",  -- 568
-        "La liste à farmer est vide.",  -- 569
-        "Liste à farmer : où elle se place",  -- 570
-        "Liste à farmer à côté de la liste de quêtes",  -- 571
-        "ce que vous comptez récolter, avec combien vous en avez et combien vous en voulez : vos sacs et votre banque et ceux de vos autres personnages sur ce royaume. Ajoutez les composants d'un plan de progression d'un bouton, ou n'importe quel objet",  -- 572
-        "la liste à farmer à gauche de la liste de quêtes, à sa droite ou sous ses quêtes",  -- 573
-        "la liste à farmer à côté de la liste de quêtes : choisir avec la manette ; add <objet> [combien], remove <objet>, clear, ou left / right / bottom pour sa place",  -- 574
-        "Pas en combat.",  -- 575
-        "Ce client n'a pas de barres de manette.",  -- 576
-        "Ce client ne permet pas aux addons de le modifier ; utilisez le mode Édition.",  -- 577
-        "barres de manette : %s",  -- 578
-        "compactes",  -- 579
-        "complètes",  -- 580
-        "Barres manette fines",  -- 581
-        "masquer l'habillage lourd derrière les barres d'action de la manette et les dessiner plus petites",  -- 582
-        "Taille des barres manette",  -- 583
-        "taille des barres manette quand les barres fines sont activées, en pourcentage",  -- 584
-        "les barres de manette du jeu en mode compact ou complet (comme son réglage du mode Édition)",  -- 585
-        "Estomper hors combat",  -- 586
-        "/cchud fade <partie> on | off en règle une ; all pour tout le fondu.",  -- 587
-        "les barres de manette, la minicarte, la liste des quêtes, le compteur de dégâts et la barre d'expérience se reposent ensemble hors combat, et reviennent pour un combat, une gâchette pressée ou une cible ennemie",  -- 588
-        "L'écran au repos",  -- 589
-        "à quel point les parties de l'écran au repos restent visibles hors combat (0 les masque)",  -- 590
-        "S'estompe : barres de manette",  -- 591
-        "S'estompe : minicarte",  -- 592
-        "S'estompe : liste des quêtes",  -- 593
-        "S'estompe : compteur de dégâts",  -- 594
-        "S'estompe : barre d'expérience",  -- 595
-        "S'estompe : améliorations",  -- 596
-        "S'estompe : rangées de temps de recharge",  -- 597
-        "si cette partie de l'écran s'estompe avec le reste hors combat (désactivé : elle reste toujours telle quelle)",  -- 598
-        "le fondu de l'écran hors combat : ce qui s'estompe (minicarte, liste des quêtes et le reste), chacun activé ou non",  -- 599
-        "Enregistré : tapez /reload pour que le jeu l'écrive sur le disque.",  -- 600
-        "Boutons de posture et de familier au-dessus des barres",  -- 601
-        "les boutons de postures et d'ordres du familier se placent là où étaient les icônes de ciblage verte et rouge, pour que leur roue s'ouvre entièrement à l'écran ; ces icônes sont masquées",  -- 602
-        "lister où se trouvent les parties des barres de manette et ce qui se repose (pour le dépannage)",  -- 603
-        "Auto",  -- 604
-        "Générique",  -- 605
-        "ceux du jeu",  -- 606
-        "Icônes des boutons : %s.",  -- 607
-        "Aucune manette n'est utilisée pour le moment, ou le jeu n'a pas de styles d'icônes: ce sera appliqué dès qu'il y en aura une.",  -- 608
-        "Le jeu n'a pas accepté les icônes des boutons.",  -- 609
-        "La manette ne dit pas ce qu'elle est: les icônes restent comme le jeu les a.",  -- 610
-        "les icônes que le jeu affiche pour les boutons de votre manette: auto (selon la manette utilisée), xbox, playstation, switch, steam, generic (chiffres), ou game pour les laisser comme le jeu les a",  -- 611
-        "Rangées de temps de recharge à l'écart des barres de manette",  -- 612
-        "les rangées de temps de recharge du jeu se placent sous la cible au lieu d'être sur les boutons de la manette, un peu plus petites (seulement avec les dispositions intégrées du jeu : avec une disposition à vous, elles restent où vous les avez mises)",  -- 613
-        "Mode pêche : désactivé.",  -- 614
-        "Pêche: %s pour lancer",  -- 615
-        "Pas d'appât: %s deux fois pour utiliser %s",  -- 616
-        "%s pour ranger la canne",  -- 617
-        "Mode pêche: %s pour lancer la ligne, et encore pour ferrer le poisson quand le bouchon bouge.",  -- 618
-        "%s pour ferrer, %s pour relancer",  -- 619
-        "Le mode pêche demande une canne à pêche dans vos mains.",  -- 620
-        "Vous ne connaissez pas la Pêche.",  -- 621
-        "Mode pêche : un bouton lance et ferre",  -- 622
-        "Bouton de pêche : %s",  -- 623
-        "Pêche à un bouton",  -- 624
-        "avec une canne à pêche en main: votre bouton d'interaction pour lancer la ligne quand il n'y a rien avec quoi interagir, et encore pour ferrer le poisson quand le bouchon bouge; la prise est ramassée pour vous. B pour ranger la canne et reprendre vos armes",  -- 625
-        "Relancer d’une seule pression",  -- 626
-        "tant que le flotteur est à l’eau, votre bouton de pêche relance une ligne d’une seule pression, et A ferre le poisson (le jeu ne donne aucun signe de touche à attendre, un seul bouton ne peut donc pas faire les deux) ; désactivé : le bouton de pêche ferre, comme l’interaction du jeu",  -- 627
-        "Appât sur double appui",  -- 628
-        "appuyez deux fois rapidement sur votre bouton de pêche: le second appui met le meilleur appât de vos sacs sur votre canne, quand elle n'en a pas",  -- 629
-        "Barres de manette masquées pendant la pêche",  -- 630
-        "avec une canne à pêche en main, les barres de la manette sont masquées pour bien voir l'eau; l'invite de pêche montre le bouton pour lancer. Elles reviennent dès qu'un combat commence ou que la canne est rangée",  -- 631
-        "pêche à un bouton désactivée pour l'instant, ou réactivée (avec une canne en main elle s'active toute seule)",  -- 632
-        "le bouton qui pêche : votre bouton d'interaction au départ (Carré ou X), ou n'importe quel autre, une gâchette par exemple (rt)",  -- 633
-        "La côte de Durotar, c'est de la roche rouge et des hauts-fonds tièdes. Les trolls des îles de l'Écho disent que les maquereaux passent en bancs plus serrés quand la marée porte l'odeur des feux de cuisine des îles.",  -- 634
-        "Les lacs de Mulgore sont petits, clairs et patients. Les taurens y pêchent comme ils font tout le reste, lentement et en disant merci.",  -- 635
-        "Chaque oasis des Tarides est un lieu de rendez-vous. Peu importe ce qui s'y abreuve le jour, quelque chose nage dessous la nuit.",  -- 636
-        "Les bassins de Teldrassil reposent à l'ombre d'un seul arbre. Les pêcheurs elfes de la nuit jurent que les poissons n'y ont jamais vu le soleil et qu'il ne leur manque pas.",  -- 637
-        "L'eau de Sombrivage est grise, froide et pleine d'épaves. La moitié de ce qui mord au large d'Auberdine a élu domicile dans la cargaison perdue de quelqu'un.",  -- 638
-        "Les rivières d'Orneval coulent sous des feuillages plus vieux que la plupart des royaumes. Les poissons sont vifs, et les sentinelles plus vives encore à vous demander ce que vous faites là.",  -- 639
-        "Au fond des Mille pointes, l'eau est rare et jalousement gardée. Un poisson d'ici a mérité sa place.",  -- 640
-        "Les lacs des Serres-Rocheuses dorment haut et froid entre les pics. Les gobelins les auraient déjà asséchés si la pêche n'y était pas si bonne.",  -- 641
-        "La côte de Désolace n'est qu'ossements et ressac gris. Quelque chose, là-dessous, a pris goût aux deux.",  -- 642
-        "À Féralas, tout est vert jusqu'au ras de l'eau. Les rivières y sont profondes, chaudes et bien vivantes.",  -- 643
-        "Nul ne sait au juste où finit la terre et où commence l'eau dans le marécage d'Âprefange. Pêchez depuis la rive, et recomptez vos orteils ensuite.",  -- 644
-        "Port Gentepression possède la seule eau digne de ce nom de tout Tanaris. Les gobelins vous vendront le droit d'y pêcher, deux fois si vous les laissez faire.",  -- 645
-        "Sous la baie lumineuse d'Azshara repose une cité engloutie. Les vieux pêcheurs disent que les plus gros vivent dans ce qui fut ses jardins.",  -- 646
-        "Les mares de Gangrebois luisent, et pas dans le bon sens. Ce qui y nage encore est têtu au-delà du raisonnable.",  -- 647
-        "Les sources chaudes et les lacs bordés de goudron d'Un'Goro ont gardé des choses que le reste du monde a oubliées. Certaines mordent.",  -- 648
-        "Le lac Elune'ara, à Reflet-de-Lune, est calme comme un souffle retenu. Les druides demandent seulement que vous ne preniez pas plus que vous ne mangerez.",  -- 649
-        "Silithus, c'est du sable, du vent et un bruit d'ailes. Si vous y avez trouvé de l'eau où pêcher, ne le dites à personne.",  -- 650
-        "Les lacs de Berceau-de-l'Hiver gèlent sur les bords et fument au milieu. Les poissons y sont gras contre le froid, et valent bien la marche.",  -- 651
-        "Dans les bassins d'Orgrimmar pêchent des péons qui n'ont rien de mieux à faire et de vieux grunts qui disent la même chose. Les uns comme les autres vous raconteront que le gros leur a échappé.",  -- 652
-        "Un poisson des étangs des Pitons-du-Tonnerre a passé toute sa vie très haut au-dessus des plaines. Il a l'air de bien le prendre.",  -- 653
-        "Darnassus veille sur ses eaux avec autant de soin que sur ses temples. Les poissons ont pris l'habitude d'être admirés.",  -- 654
-        "Les lacs des montagnes d'Alterac sont de la neige fondue, et les ogres comme le Syndicat y pêchent quand personne ne regarde.",  -- 655
-        "Les rivages d'Arathi ont vu passer plus d'armées que de pêcheurs. Les poissons ont depuis longtemps cessé de se soucier de la bannière qui flotte au-dessus de l'eau.",  -- 656
-        "Les Terres ingrates ne sont que poussière d'un bout à l'autre. Ici, une touche est un petit miracle, alors traitez-la comme tel.",  -- 657
-        "La côte des Terres foudroyées est rouge, décapée et silencieuse. Ce qui vit dans ce ressac a appris à s'accommoder de bien des choses.",  -- 658
-        "Les lacs de Tirisfal reposent, immobiles, sous un ciel maladif. Les Réprouvés y pêchent par habitude. Les morts ne mangent pas beaucoup, mais ils se souviennent d'avoir aimé ça.",  -- 659
-        "La longue côte de la forêt des Pins-Argentés n'est que brume et ombre de pins. La pêche y est bonne, et c'est bien la seule chose gaie qu'on dise de l'endroit.",  -- 660
-        "Les rivières des Maleterres de l'Ouest coulent encore, mais pas propres. Ce que vous en tirez, regardez-le à deux fois.",  -- 661
-        "Peu de gens pêchent dans les Maleterres de l'Est, et moins encore l'avouent. L'eau garde ce que la peste a laissé d'elle.",  -- 662
-        "La rivière de Hautebrande et son long rivage sud ont nourri les deux camps de chaque querelle livrée pour eux.",  -- 663
-        "Les Hinterlands gardent leurs lacs en hauteur, parmi les arbres, là où les nains Marteaux-hardis pêchent à dos de griffon quand ils pensent que personne ne les voit.",  -- 664
-        "Les lacs de Dun Morogh sont cerclés de glace presque toute l'année. Un nain y perce un trou, s'assied avec une pinte et appelle ça une bonne journée, peu importe ce qui mord.",  -- 665
-        "La gorge des Vents brûlants a de la lave là où d'autres terres ont des rivières. Apportez plutôt de quoi boire.",  -- 666
-        "Les Steppes ardentes ne sont que cendres et braises. Si l'eau d'ici vous donne quoi que ce soit, ce sera chaud.",  -- 667
-        "Tous les enfants d'Elwynn apprennent à pêcher au lac de Cristal ou au lac du Cairn. Le menu fretin s'y joue d'eux depuis des générations.",  -- 668
-        "Le défilé de Deuillevent a peu d'eau et encore moins d'hospitalité. Ce qui se trouve dans les mares sous Karazhan, mieux vaut l'y laisser.",  -- 669
-        "La rivière qui borde le bois de la Pénombre est noire à toute heure. L'obscurité ne semble pas gêner les poissons. Les pêcheurs, si.",  -- 670
-        "Le Loch est la fierté du Loch Modan, retenu par le grand barrage de Formepierre. Les nains mesurent toute histoire de pêche à son aune, et c'est en général le Loch qui gagne.",  -- 671
-        "Le lac Placide, dans les Carmines, est joli comme un tableau, et l'on y pêche depuis chaque ponton de Comté-du-Lac. Les habitants connaissent tous les bons coins et ne vous en indiqueront aucun.",  -- 672
-        "De ses rivières de jungle à son cap sauvage au sud, Strangleronce possède les eaux les plus riches du continent. Les pêcheurs de Baie-du-Butin en font un tournoi, et presque tous trichent.",  -- 673
-        "Le marais des Chagrins, c'est de l'eau verte sous des arbres verts. Les poissons ont un goût de vase, et les gens du coin les aiment ainsi.",  -- 674
-        "Les champs de la marche de l'Ouest ont dépéri, mais pas sa côte. Ceux qui sont restés vivent de ce long rivage gris.",  -- 675
-        "Les Paluns portent bien leur nom. Les quais de Port-Menethil sont l'endroit le plus sec pour y pêcher, et les crocilisques le savent.",  -- 676
-        "Dans les canaux de Hurlevent pêchent des enfants, des retraités et au moins un membre de la noblesse déguisé. Personne ne demande ce qu'il y a d'autre dans les canaux.",  -- 677
-        "La Caverne lugubre abrite le seul bassin tranquille de Forgefer. De vieux nains y pêchent des heures durant sans jamais dire un mot.",  -- 678
-        "Les canaux de Fossoyeuse charrient un vert qui ne doit rien aux algues. Les Réprouvés qui y pêchent ne le font pas pour le dîner.",  -- 679
-        "Le premier poisson que la plupart des pêcheurs remontent, et assez éclatant pour qu'ils s'en souviennent.",  -- 680
-        "Luisant, vif et commun le long de toutes les côtes chaudes. Grillé, il vaut mieux que son nom ne le laisse croire.",  -- 681
-        "Tout en gueule, et jamais plus heureux que dans une eau que vous ne boiriez pas.",  -- 682
-        "Petit, plein de dents et sans peur. On raconte qu'un banc entier a un jour chassé un ours hors du Loch.",  -- 683
-        "Un éclair de couleur sous le ressac. Quand il mord à la ligne, les marins y voient un gage de chance pour la traversée.",  -- 684
-        "Un patient fouilleur de fond, aux moustaches dignes d'un ancien chez les nains.",  -- 685
-        "Personne n'en mange deux fois. Les alchimistes achètent tout ce qu'ils peuvent en trouver.",  -- 686
-        "Ses nageoires rougeoient comme des braises sous la cendre, et l'huile qu'on en tire brûle presque aussi bien.",  -- 687
-        "Une armure digne d'un petit bouclier. La chair qu'elle protège vaut la peine qu'on se donne.",  -- 688
-        "Quelque chose dans l'eau, près des cavernes des Lamentations, l'a changé. En manger pourrait bien vous changer aussi, pour un temps.",  -- 689
-        "Les gens du fleuve disent qu'en faire un repas éclaircit l'esprit. C'est de remonter le courant que lui vient sa sagesse.",  -- 690
-        "Plus d'âge, de taille et de sagesse que dans le reste de la famille, ce qui ne lui a pas évité votre hameçon.",  -- 691
-        "Un rude adversaire venu des mers chaudes du sud, et un classique de toutes les ardoises de taverne, de Baie-du-Butin à Gadgetzan.",  -- 692
-        "Son front brille comme du vrai mithril. Plus d'un mineur a voulu passer la bête à la fonderie.",  -- 693
-        "Ses écailles, bouillies, donnent une huile qui rend la peau dure comme le roc. Sa préférence va à la nuit.",  -- 694
-        "Un poli de cuirasse de parade, et presque le même poids.",  -- 695
-        "Il ne s'approche des côtes qu'aux mois froids, et les cuisiniers qui le connaissent l'attendent toute l'année.",  -- 696
-        "Sa saison, ce sont les jours longs. Sur la côte, on règle le calendrier sur son passage.",  -- 697
-        "À tenir par le milieu, et une seule fois.",  -- 698
-        "Un poisson de rivière des contrées sauvages, aux ouïes aussi rouges que les peintures de guerre d'un troll.",  -- 699
-        "Il se nourrit une fois la nuit tombée. En soupe, il calme les nerfs des lanceurs de sorts.",  -- 700
-        "Il se nourrit de jour, tout le contraire du lutjan nocturne ou presque, et partage pourtant les mêmes eaux.",  -- 701
-        "Pas un poisson à proprement parler. Il n'est pas d'accord pour se faire prendre et vous le fera savoir.",  -- 702
-        "Pâle comme la glace des rivières, venu des lacs froids et limpides du nord.",  -- 703
-        "Il vous faudra les deux mains, et peut-être un ami.",  -- 704
-        "%.1f lb",  -- 705
-        "Nouveau dans votre journal de pêche : %s, %s.",  -- 706
-        "Nouveau dans votre journal de pêche : %s.",  -- 707
-        "Votre plus gros %s à ce jour : %s (avant : %s).",  -- 708
-        "Journal de pêche",  -- 709
-        "chaque prise est notée dans votre journal de pêche: combien de chaque espèce, où vous l'avez sortie la première fois, et un poids inventé pour le plaisir avec votre record pour chacune (/cchud journal l'ouvre)",  -- 710
-        "Appât %s",  -- 711
-        "Pas d'appât",  -- 712
-        "Pris %d",  -- 713
-        "Échappés %d",  -- 714
-        "Interface de pêche",  -- 715
-        "avec une canne à pêche en main: les poissons de l'eau où vous vous tenez (ceux que vous n'avez pas encore sortis ici restent cachés), votre compétence de pêche et ce qu'ajoute votre appât, combien vous en avez pris et combien se sont échappés, combien de temps dure votre appât, et vos dernières prises",  -- 716
-        "Un curieux : +%d%%",  -- 717
-        "Gardez votre leurre près du poisson",  -- 718
-        "Prochaine prise +%d%%",  -- 719
-        "Maintenez %s : le leurre court le long de la ligne",  -- 720
-        "%d d'affilée",  -- 721
-        "Un jeu pendant que le bouchon est à l'eau",  -- 722
-        "se joue sur la barre d’incantation tant que votre ligne est à l’eau : maintenez une gâchette et votre leurre court le long de la ligne, relâchez et il dérive en arrière ; gardez-le près de l’ombre du poisson. Mieux vous jouez, plus le poids inventé de votre prochaine prise est lourd. Aucun bouton n’est pris, ni votre lancer ni votre prise ne sont touchés",  -- 723
-        "%d pris, %d espèces, %d échappés",  -- 724
-        "Le plus lourd : %s, %s",  -- 725
-        "Poissons",  -- 726
-        "Eaux",  -- 727
-        "Rien de pris pour l'instant. Emportez une canne au bord de l'eau.",  -- 728
-        "Pris : %d",  -- 729
-        "Le plus lourd : %s, à %s",  -- 730
-        "Première prise : %s",  -- 731
-        "Pris ici : %d",  -- 732
-        "Espèces trouvées ici : %d",  -- 733
-        "Choisir",  -- 734
-        "Fermer",  -- 735
-        "ouvrir ou fermer votre journal de pêche: chaque espèce que vous avez prise, la plus lourde de chacune, et les eaux où vous avez pêché",  -- 736
-        "Le chat s'estompe au calme",  -- 737
-        "le texte du chat s'estompe après quelques secondes sans nouveau message",  -- 738
-        "Secondes avant que le chat s'estompe",  -- 739
-        "durée d'affichage du texte du chat avant qu'il s'estompe",  -- 740
-        "Coordonnées sur la carte",  -- 741
-        "vos coordonnées sous la carte du monde",  -- 742
-        "%d messages masqués comme spam depuis votre connexion.",  -- 743
-        "%d d'entre eux étaient du recrutement de guilde répété.",  -- 744
-        "Icône de classe et niveau dans le chat",  -- 745
-        "l'icône de classe et le niveau d'un joueur entre crochets devant son nom, quand le jeu nous les fait connaître",  -- 746
-        "Noms de canaux courts dans la discussion",  -- 747
-        "le canal devant une ligne, raccourci: [P] groupe, [PL] chef de groupe, [G] guilde, [O] officier, [R] raid, [RL] chef de raid, [I] instance, et un canal numéroté par son numéro, [1]",  -- 748
-        "Prénoms seuls dans la discussion",  -- 749
-        "un nom avec un nom de famille s’affiche avec le seul prénom (Jory Spleeneater parle en tant que Jory) ; un chuchotement ou un clic droit dessus atteint toujours le nom complet",  -- 750
-        "Taille du texte du chat",  -- 751
-        "la taille du texte dans les fenêtres de discussion, en proportion de la taille propre au jeu (le réglage du jeu reste tel quel)",  -- 752
-        "Masquer les vendeurs d'or et les annonces répétées",  -- 753
-        "les messages qui vendent de l'or ou des services avec une adresse web, et le même message répété par un joueur, sont masqués (jamais ceux de votre groupe, guilde ou amis)",  -- 754
-        "Masquer le recrutement de guilde répété",  -- 755
-        "dans les canaux publics, le message de recrutement d'une guilde est montré une fois ; le même du même joueur, ou un presque identique, dans les 15 minutes est masqué (jamais ceux de votre groupe, guilde ou amis)",  -- 756
-        "liste les messages du chat récemment masqués comme spam",  -- 757
-        "Vol",  -- 758
-        "destination inconnue",  -- 759
-        "estimé d'après la distance",  -- 760
-        "premier vol sur cette route : apprentissage de sa durée",  -- 761
-        "atterrissage",  -- 762
-        "%s : environ %s, estimé d'après la distance",  -- 763
-        "%s : environ %s",  -- 764
-        "%s : premier vol sur ce trajet, durée inconnue",  -- 765
-        "En vol, destination inconnue",  -- 766
-        "%s : durée du vol apprise, %s",  -- 767
-        "%d trajets aériens connus.",  -- 768
-        "Vols : durée et compte à rebours",  -- 769
-        "en vol, la destination et la durée sont indiquées dans le chat, et une barre en haut de l'écran compte à rebours jusqu'à l'atterrissage ; la durée de chaque trajet est apprise de vos vols",  -- 770
-        "Vols : votre monture le long de la barre",  -- 771
-        "un griffon, un coursier du vent ou une chauve-souris (celui que le maître de vol vous a donné) plane le long de la barre de vol vers votre point d’arrivée",  -- 772
-        "lister les trajets aériens dont la durée est connue",  -- 773
-        "Un vol est un bon moment pour ça.",  -- 774
-        "Vous jouez depuis %s.",  -- 775
-        "C'est l'heure d'une gorgée d'eau",  -- 776
-        "Rappel pour boire de l'eau",  -- 777
-        "de temps en temps pendant que vous jouez, un doux rappel pour boire une gorgée d'eau (jamais en combat)",  -- 778
-        "Rappel d'eau toutes les (minutes)",  -- 779
-        "combien de minutes de jeu entre deux rappels pour boire de l'eau",  -- 780
-        "Rappel d'eau au début d'un vol",  -- 781
-        "un vol est une pause naturelle : le rappel pour boire de l'eau vient quand un vol commence, sauf si le dernier date de peu",  -- 782
-        "montrer le rappel pour boire de l'eau",  -- 783
-        "Restyler les cadres du jeu",  -- 784
-        "infobulles, bonus, suivi de quêtes, minicarte, barre d'expérience, onglets du chat et barres de manette dans le style du HUD (l'interface à la souris garde celle du jeu)",  -- 785
-        "Taille de la barre d'expérience",  -- 786
-        "la taille des barres d'expérience et de réputation lorsqu'elles sont restylées, en pourcentage",  -- 787
-        "Infobulles",  -- 788
-        "infobulles en verre sombre, bordées de la couleur de la classe d'un joueur ou de la qualité d'un objet",  -- 789
-        "Barres manette",  -- 790
-        "les boutons de la manette avec un anneau fin sur un fond sombre à la place de l'habillage lourd",  -- 791
-        "Bonus",  -- 792
-        "vos icônes de bonus et d'affaiblissements rognées et bordées, leurs durées cerclées",  -- 793
-        "Suivi de quêtes",  -- 794
-        "les en-têtes du suivi de quêtes en verre sombre, ses lignes cerclées",  -- 795
-        "Minicarte",  -- 796
-        "un anneau fin et un halo doux autour de la minicarte à la place du bord doré",  -- 797
-        "Barre d'expérience",  -- 798
-        "les barres d'expérience et de réputation un peu plus petites, avec leurs propres couleurs",  -- 799
-        "Chat",  -- 800
-        "noms des onglets du chat cerclés et zone de saisie en verre sombre",  -- 801
-        "Compteur de dégâts",  -- 802
-        "le compteur de dégâts du jeu dans le style du HUD : ses barres, inclinées sur un fond sombre, et un texte détouré ; il garde tout ce qu'il fait",  -- 803
-        "vérification: %d sur %d réussies",  -- 804
-        "Le jeu ne s’est pas figé depuis votre connexion.",  -- 805
-        "Moments où le jeu s’est figé, et la part du HUD dans chacun :",  -- 806
-        "Les moments les plus lents du HUD :",  -- 807
-        "Rapports de débogage",  -- 808
-        "rassembler les rapports de dépannage tout seuls : à la connexion, et de nouveau au rechargement ou à la déconnexion (ils sont gardés dans les réglages enregistrés)",  -- 809
-        "les moments où le jeu s’est figé depuis votre connexion, et la part de chacun due au travail du HUD",  -- 810
-        "Préréglage du HUD : %s, assorti à la caméra",  -- 811
-        "préréglage : %s",  -- 812
-        "Une disposition nommée '%s' a été ajoutée au mode Édition du jeu. Choisissez-la là pour l'utiliser (Menu du jeu > Mode Édition > Disposition).",  -- 813
-        "préréglage inconnu '%s'",  -- 814
-        "Pour une télé : texte plus grand sur le HUD et dans la discussion.",  -- 815
-        "Pour un moniteur : texte à sa taille normale.",  -- 816
-        "Nos cadres sont revenus à leur place de départ. Choisissez la disposition %s du jeu dans le mode Édition (Menu du jeu > Mode Édition > Disposition).",  -- 817
-        "Les préréglages fixent la distance de la caméra",  -- 818
-        "un préréglage amène aussi la caméra à la distance pour laquelle sa disposition a été conçue, une seule fois (zoomez librement ensuite)",  -- 819
-        "Action",  -- 820
-        "une vue à la troisième personne : fines barres verticales à côté de votre personnage, tous les effets activés ; hors combat, tout s'estompe",  -- 821
-        "Classique",  -- 822
-        "nos cadres là où WoW les a toujours placés, effets plus discrets, les barres de manette du jeu telles quelles",  -- 823
-        "Minimal",  -- 824
-        "seulement l'essentiel : les PNJ amicaux n'affichent leur barre (avec leur fonction) que lorsque vous les pointez, les visez ou les ciblez ; noms sans titres ; hors combat, vos barres restent en retrait (une santé basse s'affiche toujours)",  -- 825
-        "Monde ouvert",  -- 826
-        "un écran épuré pour explorer : des barres fines à côté de vous qui s'estompent au repos, des barres de nom sans barre de ressource, une discussion qui s'efface",  -- 827
-        "Aventure",  -- 828
-        "après les aventures en monde ouvert sur console : constantes vitales à côté de vous, une petite cible en haut au centre, villageois seulement quand vous les pointez, chat qui s'estompe vite",  -- 829
-        "Soulslike",  -- 830
-        "vos barres en haut à gauche, une grande barre de cible en bas au centre comme une barre de boss, chaque coup ressenti",  -- 831
-        "Tir",  -- 832
-        "barres verticales juste à droite du centre, près de votre visée, la cible tout en haut, retour de coup marqué",  -- 833
-        "Crossbar",  -- 834
-        "après les MMO joués à la manette : la cible et la focalisation en haut au centre, vos barres juste au-dessus des barres de manette, groupe à gauche, barres de nom complètes",  -- 835
-        "ARPG",  -- 836
-        "après les RPG d'action : la caméra loin, vos constantes vitales en bas à gauche, la cible en haut au centre, ennemis mineurs petits, chaque coup résonne",  -- 837
-        "Boussole",  -- 838
-        "après les RPG à la première personne : la caméra proche, vos barres en bas au centre, la cible sous le bord supérieur, villageois seulement quand vous les pointez",  -- 839
-        "Raid",  -- 840
-        "la disposition de WoW avec tout ce qu'il faut à un groupe : cadres de groupe et de raid, pourcentages de vie et niveaux sur les barres",  -- 841
-        "Suivre les préréglages de ControllerCam",  -- 842
-        "choisir un préréglage de caméra dans ControllerCam pour partout choisit aussi le préréglage du HUD assorti (la caméra garde sa propre distance)",  -- 843
-        "Moderne",  -- 844
-        "régler tout le HUD sur un préréglage : action, classic, minimal, openworld, adventure, soulslike, shooter, crossbar, arpg, compass, raid",  -- 845
-        "le cadre de la cible et les barres de nom compacts ou complets, les deux à la fois",  -- 846
-        "le cadre de la cible compact ou complet",  -- 847
-        "dimensionner le texte pour une télé à l'autre bout de la pièce ou pour un moniteur à portée de bras",  -- 848
-        "remettre nos cadres à leur place de départ, pour la disposition Moderne ou Classique du jeu",  -- 849
-        "Toute votre configuration (HUD, caméra et disposition du jeu) : copiez cette ligne (Ctrl+C) pour la garder ou la partager.",  -- 850
-        "Collez une ligne de réglages du HUD (Ctrl+V) et validez.",  -- 851
-        "Cette ligne est abîmée : copiez-la de nouveau, en entier.",  -- 852
-        "Cette ligne vient d'une version plus récente : mettez l'addon à jour.",  -- 853
-        "Ce n'est pas une ligne de réglages du HUD.",  -- 854
-        "Réglages importés: %d repris, %d ignorés.",  -- 855
-        "La configuration de la caméra a été reprise aussi.",  -- 856
-        "La configuration de la caméra est restée telle quelle.",  -- 857
-        "La disposition du jeu est maintenant '%s'.",  -- 858
-        "La disposition du jeu est restée telle quelle.",  -- 859
-        "vos réglages sous forme d'une ligne de texte, à garder ou partager",  -- 860
-        "reprend les réglages d'une ligne de texte créée par /cchud export",  -- 861
-        "Le HUD est actif tant que l'interface manette est utilisée. Ses options : Options > AddOns > ControllerCam > HUD, ou /cchud.",  -- 862
-        "Caméra seule : le HUD reste au repos et l'interface du jeu est comme avant. /cchud on l'active.",  -- 863
-        "Préparer aussi l'écran pour la manette ? Cela ajoute une disposition nommée CCHUD au mode Édition du jeu, à choisir là-bas : elle place les rangées de temps de recharge sous la cible, à l'écart des boutons de la manette. Vos propres dispositions sont conservées (/cchud setup le propose de nouveau).",  -- 864
-        "Préparer",  -- 865
-        "Pas maintenant",  -- 866
-        "ControllerCam est fourni avec une interface pour manette, le HUD : ses propres cadres d'unité, barres de nom, barre d'incantation et plus encore tant que l'interface manette est utilisée. La voulez-vous, ou la caméra seule ?",  -- 867
-        "Caméra + HUD",  -- 868
-        "Caméra seule",  -- 869
-        "Ce client ne permet pas aux addons de modifier la disposition.",  -- 870
-        "redemander : la caméra avec le HUD, ou la caméra seule",  -- 871
-        "proposer de nouveau la disposition d'écran faite pour le HUD (mode Édition du jeu)",  -- 872
-        "Affiché tant que l'interface manette est utilisée. Faites glisser nos cadres dans le mode Édition du jeu.",  -- 873
-        "Préréglages",  -- 874
-        "Dimensionné pour",  -- 875
-        "Télé",  -- 876
-        "Moniteur",  -- 877
-        "Icônes des boutons",  -- 878
-        "les icônes que le jeu affiche pour les boutons de votre manette: trouvées automatiquement pour la manette utilisée, ou le type que vous choisissez",  -- 879
-        "Police",  -- 880
-        "Réinitialiser la disposition du jeu",  -- 881
-        "Essayer",  -- 882
-        "Lancer la démo",  -- 883
-        "Afficher chaque effet de coup",  -- 884
-        "Lancer l'autotest",  -- 885
-        "Barres de manette : compactes / complètes",  -- 886
-        "Exporter les réglages",  -- 887
-        "Importer les réglages",  -- 888
-        "Cochez « Afficher les options avancées » sur la page principale pour accéder à tous les réglages.",  -- 889
-        "Modules",  -- 890
-        "Bascules rapides",  -- 891
-        "Général",  -- 892
-        "HUD",  -- 893
-        "Le panneau d'options n'est pas disponible dans ce client.",  -- 894
-        "Activé",  -- 895
-        "tout le HUD; désactivé rend ses propres cadres au jeu",  -- 896
-        "Aussi dans l'interface souris et clavier",  -- 897
-        "normalement, le HUD ne fonctionne que lorsque l'interface manette est utilisée",  -- 898
-        "Mettre de côté les cadres du jeu",  -- 899
-        "masquer les cadres du joueur, de la cible et de la focalisation du jeu tant que les nôtres sont affichés",  -- 900
-        "Fenêtre de discussion en haut à gauche",  -- 901
-        "déplacer la fenêtre de discussion en haut à gauche tant que le HUD fonctionne",  -- 902
-        "Barres verticales au repos",  -- 903
-        "la visibilité des barres verticales à pleine santé hors combat (0 les masque)",  -- 904
-        "Couleurs de classe",  -- 905
-        "colorer votre barre et celles des autres joueurs selon la classe",  -- 906
-        "Icônes de classe",  -- 907
-        "une icône de classe devant le nom d'un joueur sur la cible et la cible de la cible",  -- 908
-        "Menace sur le cadre de cible",  -- 909
-        "une icône de bouclier et une lueur sur le cadre de la cible : rouge tant qu'il vous attaque, rouge et jaune quand vous êtes sur le point de l'attirer, jaune et bleu quand vous le perdez, bleu quand il n'est pas sur vous",  -- 910
-        "Barres compactes partout",  -- 911
-        "le cadre de la cible et les barres de nom en style compact, un peu plus de la moitié de la largeur (chacun reste réglable à part ; les préréglages n'y touchent jamais)",  -- 912
-        "Cadre de cible compact",  -- 913
-        "le cadre de cible un peu plus de moitié moins large",  -- 914
-        "Couleurs de santé en combat",  -- 915
-        "en combat, les barres de santé passent du vert au jaune puis au rouge à mesure que la santé baisse",  -- 916
-        "Ombre derrière le texte",  -- 917
-        "une bande sombre et douce derrière le texte de la cible, pour qu'il reste lisible",  -- 918
-        "Taille du texte",  -- 919
-        "taille du texte sur nos cadres",  -- 920
-        "Taille des cadres",  -- 921
-        "taille de nos cadres d'unité",  -- 922
-        "Vos barres en combat",  -- 923
-        "la visibilité de vos barres, familier et focalisation en combat jusqu'à ce que quelque chose demande de l'attention",  -- 924
-        "Complètes sous la santé de",  -- 925
-        "vos barres reviennent complètes quand votre santé passe sous cette valeur",  -- 926
-        "Complètes sous le mana de",  -- 927
-        "vos barres reviennent complètes quand votre mana passe sous cette valeur",  -- 928
-        "Barre du joueur au repos",  -- 929
-        "visibilité de la barre du joueur avec la vie au maximum ou hors combat (0 la masque)",  -- 930
-        "Aide marchand et banque",  -- 931
-        "le bouton Vendre la camelote du marchand demande quoi vendre; déplacement rapide chez le marchand et à la banque",  -- 932
-        "Afficher les options avancées",  -- 933
-        "tous les réglages, pas seulement les principaux",  -- 934
-        "Cadre du joueur",  -- 935
-        "notre barre de joueur, en haut à gauche",  -- 936
-        "Cadre de la cible",  -- 937
-        "notre barre de cible, en haut au centre",  -- 938
-        "Barre du familier",  -- 939
-        "une petite barre de familier sous la barre du joueur, ou à côté des barres verticales",  -- 940
-        "Cadre de focalisation",  -- 941
-        "notre cadre de focalisation",  -- 942
-        "fines barres verticales de vie et de puissance à côté de votre personnage, pour une vue à la troisième personne (à la place de la barre du joueur)",  -- 943
-        "Vendre la camelote à l'ouverture d'un marchand",  -- 944
-        "vendre la camelote selon vos règles dès l'ouverture d'un marchand",  -- 945
-        "Les armes et armures blanches sont de la camelote",  -- 946
-        "compter les armes et armures blanches comme camelote (jamais les outils, cannes à pêche, équipements avec un effet Utiliser ou ce qui pourrait être une amélioration ; toujours demandé d'abord)",  -- 947
-        "Déposer à l'ouverture de la banque",  -- 948
-        "les objets marqués pour la banque et, si activé, ce que la banque contient déjà, y vont d'eux-mêmes",  -- 949
-        "l'option du jeu; notre petit cadre la suit",  -- 950
-        "Gestionnaire de temps de recharge",  -- 951
-        "le Gestionnaire de temps de recharge du jeu",  -- 952
-        "Affichage des ressources personnelles",  -- 953
-        "votre santé et votre ressource sous votre personnage",  -- 954
-        "La banque prend les composants toute seule",  -- 955
-        "l'option du jeu pour la banque",  -- 956
-        "Infobulle au début d'un buff",  -- 957
-        "l'option du jeu : l'infobulle d'un buff s'affiche un instant quand il est appliqué (interface manette)",  -- 958
-        "Couleurs de classe pour les noms dans le chat",  -- 959
-        "le réglage du chat du jeu pour tous les types de chat à la fois : le nom d'un joueur dans la couleur de sa classe",  -- 960
-        "ouvrir le panneau d'options (Options > AddOns > ControllerCam HUD)",  -- 961
-        "Cadres",  -- 962
-        "Fondu de l'écran",  -- 963
-        "Effets",  -- 964
-        "Style",  -- 965
-        "Quêtes, discussion et carte",  -- 966
-        "Sacs, banque et marchand",  -- 967
-        "Pêche",  -- 968
-        "Accessibilité",  -- 969
-        "Options natives",  -- 970
-        "%s  |  Interface manette: %s  |  en cours: %s",  -- 971
-        "joueur %s, cible %s, familier %s, focalisation %s  |  cadres du jeu mis de côté: %s  |  discussion déplacée: %s",  -- 972
-        "options natives: cible de la cible %s, Gestionnaire de temps de recharge %s, ressources personnelles %s",  -- 973
-        "taille du texte %d%%  |  ombre du texte: %s",  -- 974
-        "aide marchand et banque: %s  |  vente auto: %s  |  équipement blanc = camelote: %s",  -- 975
-        "visibilité au repos %d%%  |  échelle %d%%  |  couleurs de classe: %s",  -- 976
-        "Un HUD minimaliste de jeu d'action pour l'interface manette.",  -- 977
-        "activé",  -- 978
-        "désactivé: les cadres du jeu sont de retour",  -- 979
-        "utiliser aussi dans l'interface souris et clavier: %s",  -- 980
-        "cadres du jeu mis de côté: %s",  -- 981
-        "discussion déplacée en haut à gauche: %s",  -- 982
-        "couleurs de classe: %s",  -- 983
-        "Ce client n'a pas cette option.",  -- 984
-        "%s: %s (l'option propre au jeu)",  -- 985
-        "Le jeu n'a pas accepté cela pour l'instant.",  -- 986
-        "aide marchand et banque: %s",  -- 987
-        "vente auto: %s",  -- 988
-        "équipement blanc = camelote: %s",  -- 989
-        "L'aide marchand est désactivée.",  -- 990
-        "utilisation: /cchud sell [junk | recommended | white | green | blue]",  -- 991
-        "déposer les objets marqués à l'ouverture de la banque: %s",  -- 992
-        "utilisation: /cchud junk <item> (Maj-clic sur l'objet pour l'insérer dans la ligne de discussion)",  -- 993
-        "objet %d: camelote, vendu avec le reste",  -- 994
-        "objet %d: conservé, jamais vendu",  -- 995
-        "objet %d: pour la banque",  -- 996
-        "ombre du texte: %s",  -- 997
-        "utilisation : /cchud text <80-250>",  -- 998
-        "taille du texte %d%%",  -- 999
-        "démo arrêtée",  -- 1000
-        "Le HUD ne fonctionne pas.",  -- 1001
-        "Démo en cours: un combat fictif en boucle. Tapez /cchud demo à nouveau pour l'arrêter.",  -- 1002
-        "utilisation: /cchud idle <0-100>",  -- 1003
-        "visibilité au repos %d%%",  -- 1004
-        "utilisation: /cchud scale <50-200>",  -- 1005
-        "échelle %d%%",  -- 1006
-        "Faites glisser les cadres, puis tapez /cchud lock.",  -- 1007
-        "cadres verrouillés",  -- 1008
-        "Tout est revenu comme au départ : réglages, cadres et disposition d'écran (vos marques de vendeur et l'historique des prix sont conservés).",  -- 1009
-        "les cadres sont revenus à leur position initiale",  -- 1010
-        "commande inconnue '%s'. Tapez /cchud help",  -- 1011
-        "Liste des erreurs vidée.",  -- 1012
-        "Aucune erreur enregistrée.",  -- 1013
-        "%d erreurs enregistrées (la plus récente en dernier). /cchud errors clear vide la liste.",  -- 1014
-        "afficher l'état",  -- 1015
-        "activer ou désactiver le HUD (désactivé rend ses propres cadres au jeu)",  -- 1016
-        "utiliser aussi le HUD dans l'interface souris et clavier",  -- 1017
-        "utiliser notre cadre pour cela, ou celui du jeu",  -- 1018
-        "fines barres verticales de santé et d'énergie à côté de votre personnage",  -- 1019
-        "cible de la cible (l'option propre au jeu, aussi dans ses menus)",  -- 1020
-        "le Gestionnaire de temps de recharge du jeu (l'option propre au jeu)",  -- 1021
-        "votre santé et votre ressource sous votre personnage (l'option propre au jeu)",  -- 1022
-        "l'infobulle qui s'affiche quand un buff commence (l'option propre au jeu)",  -- 1023
-        "garder visibles les cadres du joueur et de la cible du jeu (activé) ou les mettre de côté (désactivé)",  -- 1024
-        "chez un marchand: choisir quoi vendre (aussi: sell junk, sell recommended, sell white | green | blue)",  -- 1025
-        "compter les armes et armures blanches comme camelote",  -- 1026
-        "marquer un objet: toujours vendu, jamais vendu, ou pour la banque (Maj-clic pour l'insérer dans la ligne de discussion)",  -- 1027
-        "à la banque : déposer ce que la banque contient déjà, et tout ce qui est marqué pour elle",  -- 1028
-        "à la banque: retirer ce dont vous portez déjà un peu",  -- 1029
-        "déposer dès l'ouverture de la banque",  -- 1030
-        "la banque prend les composants toute seule (l'option propre au jeu)",  -- 1031
-        "taille du texte, en pourcentage (150 se lit bien sur une télévision)",  -- 1032
-        "visibilité de la barre du joueur quand rien ne se passe (0 la masque)",  -- 1033
-        "taille des cadres, en pourcentage",  -- 1034
-        "faites glisser les cadres où vous voulez (le mode Édition du jeu le permet aussi)",  -- 1035
-        "remettre les cadres à leur position initiale",  -- 1036
-        "lancer un court combat fictif pour voir comment réagissent les cadres (encore pour arrêter)",  -- 1037
-        "comparer ce qui est à l'écran avec les réglages (check liste chaque ligne)",  -- 1038
-        "enregistrer une description de l'interface manette de ce client (pour le dépannage)",  -- 1039
-        "afficher cette liste",  -- 1040
-        "les dernières erreurs du HUD, même après un rechargement (pour les signaler)",  -- 1041
+        "Suivre la quête la plus proche",  -- 544
+        "la quête que le jeu vous indique est toujours la plus proche de votre liste en chemin ; une quête que vous suivez vous-même est laissée tranquille dix minutes",  -- 545
+        "Liste de quêtes: objectifs courts",  -- 546
+        "les objectifs de la liste de quêtes ne disent que le nécessaire, avec une icône du type devant: un crâne et 0/1 Capitaine Levépouvante, et non 0/1 Capitaine Levépouvante tué",  -- 547
+        "Progression des quêtes dans le chat",  -- 548
+        "une courte ligne dans le chat quand une quête avance : Colliers d'os sanglants : 4/25, un objectif rempli, une quête prête à être rendue",  -- 549
+        "Progression des quêtes à votre groupe",  -- 550
+        "en groupe (pas en raid), les mêmes lignes vont dans la discussion de groupe pour que les autres les voient, à un moment d'intervalle ; vous les y voyez aussi",  -- 551
+        "Garder ce dont vos quêtes ont besoin",  -- 552
+        "un objet qu'une quête de votre journal demande encore, ou qui lance une quête que vous pouvez encore faire, est marqué Quête : jamais vendu ni mis aux enchères pour vous",  -- 553
+        "dire un ordre recommandé pour vos quêtes: rendre ce qui est prêt, puis la plus proche faisable seul, puis le reste",  -- 554
+        "À gauche des quêtes",  -- 555
+        "À droite des quêtes",  -- 556
+        "Sous les quêtes",  -- 557
+        "La liste à farmer est pleine.",  -- 558
+        "Liste à farmer : %s, %d voulu(s).",  -- 559
+        "À farmer",  -- 560
+        "%d de plus",  -- 561
+        "Rien à farmer pour l'instant.",  -- 562
+        "Une pile de plus",  -- 563
+        "Retirer",  -- 564
+        "Vider",  -- 565
+        "Terminé",  -- 566
+        "Tout retirer de la liste à farmer ?",  -- 567
+        "Liste à farmer : choisir / terminé",  -- 568
+        "Liste à farmer : ajouter l'objet pointé",  -- 569
+        "Ce n'est pas sur la liste à farmer.",  -- 570
+        "La liste à farmer est vide.",  -- 571
+        "Liste à farmer : où elle se place",  -- 572
+        "Liste à farmer à côté de la liste de quêtes",  -- 573
+        "ce que vous comptez récolter, avec combien vous en avez et combien vous en voulez : vos sacs et votre banque et ceux de vos autres personnages sur ce royaume. Ajoutez les composants d'un plan de progression d'un bouton, ou n'importe quel objet",  -- 574
+        "la liste à farmer à gauche de la liste de quêtes, à sa droite ou sous ses quêtes",  -- 575
+        "la liste à farmer à côté de la liste de quêtes : choisir avec la manette ; add <objet> [combien], remove <objet>, clear, ou left / right / bottom pour sa place",  -- 576
+        "Pas en combat.",  -- 577
+        "Ce client n'a pas de barres de manette.",  -- 578
+        "Ce client ne permet pas aux addons de le modifier ; utilisez le mode Édition.",  -- 579
+        "barres de manette : %s",  -- 580
+        "compactes",  -- 581
+        "complètes",  -- 582
+        "Barres manette fines",  -- 583
+        "masquer l'habillage lourd derrière les barres d'action de la manette et les dessiner plus petites",  -- 584
+        "Taille des barres manette",  -- 585
+        "taille des barres manette quand les barres fines sont activées, en pourcentage",  -- 586
+        "les barres de manette du jeu en mode compact ou complet (comme son réglage du mode Édition)",  -- 587
+        "Estomper hors combat",  -- 588
+        "/cchud fade <partie> on | off en règle une ; all pour tout le fondu.",  -- 589
+        "les barres de manette, la minicarte, la liste des quêtes, le compteur de dégâts et la barre d'expérience se reposent ensemble hors combat, et reviennent pour un combat, une gâchette pressée ou une cible ennemie",  -- 590
+        "L'écran au repos",  -- 591
+        "à quel point les parties de l'écran au repos restent visibles hors combat (0 les masque)",  -- 592
+        "S'estompe : barres de manette",  -- 593
+        "S'estompe : minicarte",  -- 594
+        "S'estompe : liste des quêtes",  -- 595
+        "S'estompe : compteur de dégâts",  -- 596
+        "S'estompe : barre d'expérience",  -- 597
+        "S'estompe : améliorations",  -- 598
+        "S'estompe : rangées de temps de recharge",  -- 599
+        "si cette partie de l'écran s'estompe avec le reste hors combat (désactivé : elle reste toujours telle quelle)",  -- 600
+        "le fondu de l'écran hors combat : ce qui s'estompe (minicarte, liste des quêtes et le reste), chacun activé ou non",  -- 601
+        "Enregistré : tapez /reload pour que le jeu l'écrive sur le disque.",  -- 602
+        "Boutons de posture et de familier au-dessus des barres",  -- 603
+        "les boutons de postures et d'ordres du familier se placent là où étaient les icônes de ciblage verte et rouge, pour que leur roue s'ouvre entièrement à l'écran ; ces icônes sont masquées",  -- 604
+        "lister où se trouvent les parties des barres de manette et ce qui se repose (pour le dépannage)",  -- 605
+        "Auto",  -- 606
+        "Générique",  -- 607
+        "ceux du jeu",  -- 608
+        "Icônes des boutons : %s.",  -- 609
+        "Aucune manette n'est utilisée pour le moment, ou le jeu n'a pas de styles d'icônes: ce sera appliqué dès qu'il y en aura une.",  -- 610
+        "Le jeu n'a pas accepté les icônes des boutons.",  -- 611
+        "La manette ne dit pas ce qu'elle est: les icônes restent comme le jeu les a.",  -- 612
+        "les icônes que le jeu affiche pour les boutons de votre manette: auto (selon la manette utilisée), xbox, playstation, switch, steam, generic (chiffres), ou game pour les laisser comme le jeu les a",  -- 613
+        "Rangées de temps de recharge à l'écart des barres de manette",  -- 614
+        "les rangées de temps de recharge du jeu se placent sous la cible au lieu d'être sur les boutons de la manette, un peu plus petites (seulement avec les dispositions intégrées du jeu : avec une disposition à vous, elles restent où vous les avez mises)",  -- 615
+        "Mode pêche : désactivé.",  -- 616
+        "Pêche: %s pour lancer",  -- 617
+        "Pas d'appât: %s deux fois pour utiliser %s",  -- 618
+        "%s pour ranger la canne",  -- 619
+        "Mode pêche: %s pour lancer la ligne, et encore pour ferrer le poisson quand le bouchon bouge.",  -- 620
+        "%s pour ferrer, %s pour relancer",  -- 621
+        "Le mode pêche demande une canne à pêche dans vos mains.",  -- 622
+        "Vous ne connaissez pas la Pêche.",  -- 623
+        "Mode pêche : un bouton lance et ferre",  -- 624
+        "Bouton de pêche : %s",  -- 625
+        "Pêche à un bouton",  -- 626
+        "avec une canne à pêche en main: votre bouton d'interaction pour lancer la ligne quand il n'y a rien avec quoi interagir, et encore pour ferrer le poisson quand le bouchon bouge; la prise est ramassée pour vous. B pour ranger la canne et reprendre vos armes",  -- 627
+        "Relancer d’une seule pression",  -- 628
+        "tant que le flotteur est à l’eau, votre bouton de pêche relance une ligne d’une seule pression, et A ferre le poisson (le jeu ne donne aucun signe de touche à attendre, un seul bouton ne peut donc pas faire les deux) ; désactivé : le bouton de pêche ferre, comme l’interaction du jeu",  -- 629
+        "Appât sur double appui",  -- 630
+        "appuyez deux fois rapidement sur votre bouton de pêche: le second appui met le meilleur appât de vos sacs sur votre canne, quand elle n'en a pas",  -- 631
+        "Barres de manette masquées pendant la pêche",  -- 632
+        "avec une canne à pêche en main, les barres de la manette sont masquées pour bien voir l'eau; l'invite de pêche montre le bouton pour lancer. Elles reviennent dès qu'un combat commence ou que la canne est rangée",  -- 633
+        "pêche à un bouton désactivée pour l'instant, ou réactivée (avec une canne en main elle s'active toute seule)",  -- 634
+        "le bouton qui pêche : votre bouton d'interaction au départ (Carré ou X), ou n'importe quel autre, une gâchette par exemple (rt)",  -- 635
+        "La côte de Durotar, c'est de la roche rouge et des hauts-fonds tièdes. Les trolls des îles de l'Écho disent que les maquereaux passent en bancs plus serrés quand la marée porte l'odeur des feux de cuisine des îles.",  -- 636
+        "Les lacs de Mulgore sont petits, clairs et patients. Les taurens y pêchent comme ils font tout le reste, lentement et en disant merci.",  -- 637
+        "Chaque oasis des Tarides est un lieu de rendez-vous. Peu importe ce qui s'y abreuve le jour, quelque chose nage dessous la nuit.",  -- 638
+        "Les bassins de Teldrassil reposent à l'ombre d'un seul arbre. Les pêcheurs elfes de la nuit jurent que les poissons n'y ont jamais vu le soleil et qu'il ne leur manque pas.",  -- 639
+        "L'eau de Sombrivage est grise, froide et pleine d'épaves. La moitié de ce qui mord au large d'Auberdine a élu domicile dans la cargaison perdue de quelqu'un.",  -- 640
+        "Les rivières d'Orneval coulent sous des feuillages plus vieux que la plupart des royaumes. Les poissons sont vifs, et les sentinelles plus vives encore à vous demander ce que vous faites là.",  -- 641
+        "Au fond des Mille pointes, l'eau est rare et jalousement gardée. Un poisson d'ici a mérité sa place.",  -- 642
+        "Les lacs des Serres-Rocheuses dorment haut et froid entre les pics. Les gobelins les auraient déjà asséchés si la pêche n'y était pas si bonne.",  -- 643
+        "La côte de Désolace n'est qu'ossements et ressac gris. Quelque chose, là-dessous, a pris goût aux deux.",  -- 644
+        "À Féralas, tout est vert jusqu'au ras de l'eau. Les rivières y sont profondes, chaudes et bien vivantes.",  -- 645
+        "Nul ne sait au juste où finit la terre et où commence l'eau dans le marécage d'Âprefange. Pêchez depuis la rive, et recomptez vos orteils ensuite.",  -- 646
+        "Port Gentepression possède la seule eau digne de ce nom de tout Tanaris. Les gobelins vous vendront le droit d'y pêcher, deux fois si vous les laissez faire.",  -- 647
+        "Sous la baie lumineuse d'Azshara repose une cité engloutie. Les vieux pêcheurs disent que les plus gros vivent dans ce qui fut ses jardins.",  -- 648
+        "Les mares de Gangrebois luisent, et pas dans le bon sens. Ce qui y nage encore est têtu au-delà du raisonnable.",  -- 649
+        "Les sources chaudes et les lacs bordés de goudron d'Un'Goro ont gardé des choses que le reste du monde a oubliées. Certaines mordent.",  -- 650
+        "Le lac Elune'ara, à Reflet-de-Lune, est calme comme un souffle retenu. Les druides demandent seulement que vous ne preniez pas plus que vous ne mangerez.",  -- 651
+        "Silithus, c'est du sable, du vent et un bruit d'ailes. Si vous y avez trouvé de l'eau où pêcher, ne le dites à personne.",  -- 652
+        "Les lacs de Berceau-de-l'Hiver gèlent sur les bords et fument au milieu. Les poissons y sont gras contre le froid, et valent bien la marche.",  -- 653
+        "Dans les bassins d'Orgrimmar pêchent des péons qui n'ont rien de mieux à faire et de vieux grunts qui disent la même chose. Les uns comme les autres vous raconteront que le gros leur a échappé.",  -- 654
+        "Un poisson des étangs des Pitons-du-Tonnerre a passé toute sa vie très haut au-dessus des plaines. Il a l'air de bien le prendre.",  -- 655
+        "Darnassus veille sur ses eaux avec autant de soin que sur ses temples. Les poissons ont pris l'habitude d'être admirés.",  -- 656
+        "Les lacs des montagnes d'Alterac sont de la neige fondue, et les ogres comme le Syndicat y pêchent quand personne ne regarde.",  -- 657
+        "Les rivages d'Arathi ont vu passer plus d'armées que de pêcheurs. Les poissons ont depuis longtemps cessé de se soucier de la bannière qui flotte au-dessus de l'eau.",  -- 658
+        "Les Terres ingrates ne sont que poussière d'un bout à l'autre. Ici, une touche est un petit miracle, alors traitez-la comme tel.",  -- 659
+        "La côte des Terres foudroyées est rouge, décapée et silencieuse. Ce qui vit dans ce ressac a appris à s'accommoder de bien des choses.",  -- 660
+        "Les lacs de Tirisfal reposent, immobiles, sous un ciel maladif. Les Réprouvés y pêchent par habitude. Les morts ne mangent pas beaucoup, mais ils se souviennent d'avoir aimé ça.",  -- 661
+        "La longue côte de la forêt des Pins-Argentés n'est que brume et ombre de pins. La pêche y est bonne, et c'est bien la seule chose gaie qu'on dise de l'endroit.",  -- 662
+        "Les rivières des Maleterres de l'Ouest coulent encore, mais pas propres. Ce que vous en tirez, regardez-le à deux fois.",  -- 663
+        "Peu de gens pêchent dans les Maleterres de l'Est, et moins encore l'avouent. L'eau garde ce que la peste a laissé d'elle.",  -- 664
+        "La rivière de Hautebrande et son long rivage sud ont nourri les deux camps de chaque querelle livrée pour eux.",  -- 665
+        "Les Hinterlands gardent leurs lacs en hauteur, parmi les arbres, là où les nains Marteaux-hardis pêchent à dos de griffon quand ils pensent que personne ne les voit.",  -- 666
+        "Les lacs de Dun Morogh sont cerclés de glace presque toute l'année. Un nain y perce un trou, s'assied avec une pinte et appelle ça une bonne journée, peu importe ce qui mord.",  -- 667
+        "La gorge des Vents brûlants a de la lave là où d'autres terres ont des rivières. Apportez plutôt de quoi boire.",  -- 668
+        "Les Steppes ardentes ne sont que cendres et braises. Si l'eau d'ici vous donne quoi que ce soit, ce sera chaud.",  -- 669
+        "Tous les enfants d'Elwynn apprennent à pêcher au lac de Cristal ou au lac du Cairn. Le menu fretin s'y joue d'eux depuis des générations.",  -- 670
+        "Le défilé de Deuillevent a peu d'eau et encore moins d'hospitalité. Ce qui se trouve dans les mares sous Karazhan, mieux vaut l'y laisser.",  -- 671
+        "La rivière qui borde le bois de la Pénombre est noire à toute heure. L'obscurité ne semble pas gêner les poissons. Les pêcheurs, si.",  -- 672
+        "Le Loch est la fierté du Loch Modan, retenu par le grand barrage de Formepierre. Les nains mesurent toute histoire de pêche à son aune, et c'est en général le Loch qui gagne.",  -- 673
+        "Le lac Placide, dans les Carmines, est joli comme un tableau, et l'on y pêche depuis chaque ponton de Comté-du-Lac. Les habitants connaissent tous les bons coins et ne vous en indiqueront aucun.",  -- 674
+        "De ses rivières de jungle à son cap sauvage au sud, Strangleronce possède les eaux les plus riches du continent. Les pêcheurs de Baie-du-Butin en font un tournoi, et presque tous trichent.",  -- 675
+        "Le marais des Chagrins, c'est de l'eau verte sous des arbres verts. Les poissons ont un goût de vase, et les gens du coin les aiment ainsi.",  -- 676
+        "Les champs de la marche de l'Ouest ont dépéri, mais pas sa côte. Ceux qui sont restés vivent de ce long rivage gris.",  -- 677
+        "Les Paluns portent bien leur nom. Les quais de Port-Menethil sont l'endroit le plus sec pour y pêcher, et les crocilisques le savent.",  -- 678
+        "Dans les canaux de Hurlevent pêchent des enfants, des retraités et au moins un membre de la noblesse déguisé. Personne ne demande ce qu'il y a d'autre dans les canaux.",  -- 679
+        "La Caverne lugubre abrite le seul bassin tranquille de Forgefer. De vieux nains y pêchent des heures durant sans jamais dire un mot.",  -- 680
+        "Les canaux de Fossoyeuse charrient un vert qui ne doit rien aux algues. Les Réprouvés qui y pêchent ne le font pas pour le dîner.",  -- 681
+        "Le premier poisson que la plupart des pêcheurs remontent, et assez éclatant pour qu'ils s'en souviennent.",  -- 682
+        "Luisant, vif et commun le long de toutes les côtes chaudes. Grillé, il vaut mieux que son nom ne le laisse croire.",  -- 683
+        "Tout en gueule, et jamais plus heureux que dans une eau que vous ne boiriez pas.",  -- 684
+        "Petit, plein de dents et sans peur. On raconte qu'un banc entier a un jour chassé un ours hors du Loch.",  -- 685
+        "Un éclair de couleur sous le ressac. Quand il mord à la ligne, les marins y voient un gage de chance pour la traversée.",  -- 686
+        "Un patient fouilleur de fond, aux moustaches dignes d'un ancien chez les nains.",  -- 687
+        "Personne n'en mange deux fois. Les alchimistes achètent tout ce qu'ils peuvent en trouver.",  -- 688
+        "Ses nageoires rougeoient comme des braises sous la cendre, et l'huile qu'on en tire brûle presque aussi bien.",  -- 689
+        "Une armure digne d'un petit bouclier. La chair qu'elle protège vaut la peine qu'on se donne.",  -- 690
+        "Quelque chose dans l'eau, près des cavernes des Lamentations, l'a changé. En manger pourrait bien vous changer aussi, pour un temps.",  -- 691
+        "Les gens du fleuve disent qu'en faire un repas éclaircit l'esprit. C'est de remonter le courant que lui vient sa sagesse.",  -- 692
+        "Plus d'âge, de taille et de sagesse que dans le reste de la famille, ce qui ne lui a pas évité votre hameçon.",  -- 693
+        "Un rude adversaire venu des mers chaudes du sud, et un classique de toutes les ardoises de taverne, de Baie-du-Butin à Gadgetzan.",  -- 694
+        "Son front brille comme du vrai mithril. Plus d'un mineur a voulu passer la bête à la fonderie.",  -- 695
+        "Ses écailles, bouillies, donnent une huile qui rend la peau dure comme le roc. Sa préférence va à la nuit.",  -- 696
+        "Un poli de cuirasse de parade, et presque le même poids.",  -- 697
+        "Il ne s'approche des côtes qu'aux mois froids, et les cuisiniers qui le connaissent l'attendent toute l'année.",  -- 698
+        "Sa saison, ce sont les jours longs. Sur la côte, on règle le calendrier sur son passage.",  -- 699
+        "À tenir par le milieu, et une seule fois.",  -- 700
+        "Un poisson de rivière des contrées sauvages, aux ouïes aussi rouges que les peintures de guerre d'un troll.",  -- 701
+        "Il se nourrit une fois la nuit tombée. En soupe, il calme les nerfs des lanceurs de sorts.",  -- 702
+        "Il se nourrit de jour, tout le contraire du lutjan nocturne ou presque, et partage pourtant les mêmes eaux.",  -- 703
+        "Pas un poisson à proprement parler. Il n'est pas d'accord pour se faire prendre et vous le fera savoir.",  -- 704
+        "Pâle comme la glace des rivières, venu des lacs froids et limpides du nord.",  -- 705
+        "Il vous faudra les deux mains, et peut-être un ami.",  -- 706
+        "%.1f lb",  -- 707
+        "Nouveau dans votre journal de pêche : %s, %s.",  -- 708
+        "Nouveau dans votre journal de pêche : %s.",  -- 709
+        "Votre plus gros %s à ce jour : %s (avant : %s).",  -- 710
+        "Journal de pêche",  -- 711
+        "chaque prise est notée dans votre journal de pêche: combien de chaque espèce, où vous l'avez sortie la première fois, et un poids inventé pour le plaisir avec votre record pour chacune (/cchud journal l'ouvre)",  -- 712
+        "Appât %s",  -- 713
+        "Pas d'appât",  -- 714
+        "Pris %d",  -- 715
+        "Échappés %d",  -- 716
+        "Interface de pêche",  -- 717
+        "avec une canne à pêche en main: les poissons de l'eau où vous vous tenez (ceux que vous n'avez pas encore sortis ici restent cachés), votre compétence de pêche et ce qu'ajoute votre appât, combien vous en avez pris et combien se sont échappés, combien de temps dure votre appât, et vos dernières prises",  -- 718
+        "Un curieux : +%d%%",  -- 719
+        "Gardez votre leurre près du poisson",  -- 720
+        "Prochaine prise +%d%%",  -- 721
+        "Maintenez %s : le leurre court le long de la ligne",  -- 722
+        "%d d'affilée",  -- 723
+        "Un jeu pendant que le bouchon est à l'eau",  -- 724
+        "se joue sur la barre d’incantation tant que votre ligne est à l’eau : maintenez une gâchette et votre leurre court le long de la ligne, relâchez et il dérive en arrière ; gardez-le près de l’ombre du poisson. Mieux vous jouez, plus le poids inventé de votre prochaine prise est lourd. Aucun bouton n’est pris, ni votre lancer ni votre prise ne sont touchés",  -- 725
+        "%d pris, %d espèces, %d échappés",  -- 726
+        "Le plus lourd : %s, %s",  -- 727
+        "Poissons",  -- 728
+        "Eaux",  -- 729
+        "Rien de pris pour l'instant. Emportez une canne au bord de l'eau.",  -- 730
+        "Pris : %d",  -- 731
+        "Le plus lourd : %s, à %s",  -- 732
+        "Première prise : %s",  -- 733
+        "Pris ici : %d",  -- 734
+        "Espèces trouvées ici : %d",  -- 735
+        "Choisir",  -- 736
+        "Fermer",  -- 737
+        "ouvrir ou fermer votre journal de pêche: chaque espèce que vous avez prise, la plus lourde de chacune, et les eaux où vous avez pêché",  -- 738
+        "Le chat s'estompe au calme",  -- 739
+        "le texte du chat s'estompe après quelques secondes sans nouveau message",  -- 740
+        "Secondes avant que le chat s'estompe",  -- 741
+        "durée d'affichage du texte du chat avant qu'il s'estompe",  -- 742
+        "Coordonnées sur la carte",  -- 743
+        "vos coordonnées sous la carte du monde",  -- 744
+        "%d messages masqués comme spam depuis votre connexion.",  -- 745
+        "%d d'entre eux étaient du recrutement de guilde répété.",  -- 746
+        "Icône de classe et niveau dans le chat",  -- 747
+        "l'icône de classe et le niveau d'un joueur entre crochets devant son nom, quand le jeu nous les fait connaître",  -- 748
+        "Noms de canaux courts dans la discussion",  -- 749
+        "le canal devant une ligne, raccourci: [P] groupe, [PL] chef de groupe, [G] guilde, [O] officier, [R] raid, [RL] chef de raid, [I] instance, et un canal numéroté par son numéro, [1]",  -- 750
+        "Prénoms seuls dans la discussion",  -- 751
+        "un nom avec un nom de famille s’affiche avec le seul prénom (Jory Spleeneater parle en tant que Jory) ; un chuchotement ou un clic droit dessus atteint toujours le nom complet",  -- 752
+        "Taille du texte du chat",  -- 753
+        "la taille du texte dans les fenêtres de discussion, en proportion de la taille propre au jeu (le réglage du jeu reste tel quel)",  -- 754
+        "Masquer les vendeurs d'or et les annonces répétées",  -- 755
+        "les messages qui vendent de l'or ou des services avec une adresse web, et le même message répété par un joueur, sont masqués (jamais ceux de votre groupe, guilde ou amis)",  -- 756
+        "Masquer le recrutement de guilde répété",  -- 757
+        "dans les canaux publics, le message de recrutement d'une guilde est montré une fois ; le même du même joueur, ou un presque identique, dans les 15 minutes est masqué (jamais ceux de votre groupe, guilde ou amis)",  -- 758
+        "liste les messages du chat récemment masqués comme spam",  -- 759
+        "Vol",  -- 760
+        "destination inconnue",  -- 761
+        "estimé d'après la distance",  -- 762
+        "premier vol sur cette route : apprentissage de sa durée",  -- 763
+        "atterrissage",  -- 764
+        "%s : environ %s, estimé d'après la distance",  -- 765
+        "%s : environ %s",  -- 766
+        "%s : premier vol sur ce trajet, durée inconnue",  -- 767
+        "En vol, destination inconnue",  -- 768
+        "%s : durée du vol apprise, %s",  -- 769
+        "%d trajets aériens connus.",  -- 770
+        "Vols : durée et compte à rebours",  -- 771
+        "en vol, la destination et la durée sont indiquées dans le chat, et une barre en haut de l'écran compte à rebours jusqu'à l'atterrissage ; la durée de chaque trajet est apprise de vos vols",  -- 772
+        "Vols : votre monture le long de la barre",  -- 773
+        "un griffon, un coursier du vent ou une chauve-souris (celui que le maître de vol vous a donné) plane le long de la barre de vol vers votre point d’arrivée",  -- 774
+        "lister les trajets aériens dont la durée est connue",  -- 775
+        "À terre ! +%d",  -- 776
+        "Dans les nuages : la série s'arrête",  -- 777
+        "%d d'or de vol",  -- 778
+        "%s battre des ailes",  -- 779
+        "%s filet",  -- 780
+        "%s haute altitude",  -- 781
+        "%s : retour au jeu (%d d'or de vol)",  -- 782
+        "%s : un jeu en chemin",  -- 783
+        "Le jeu de vol est désactivé : /cchud flightgame on",  -- 784
+        "Le jeu de vol se joue pendant un vol.",  -- 785
+        "Pas en combat.",  -- 786
+        "Jeu de vol : jouer / haute altitude",  -- 787
+        "Vols : un jeu en chemin",  -- 788
+        "pendant un vol, un petit jeu est proposé sous la barre de vol, et un bouton le lance (seul ce bouton est pris tant que vous ne l'avez pas pressé) : faites battre des ailes votre monture à travers les nuages et prenez au filet les cavaliers qui arrivent en face, pour les faire atterrir contre de l'or de vol. Le même bouton à nouveau, c'est la haute altitude : le jeu est rangé et les boutons sont de nouveau ceux du jeu. Jamais en combat, disparaît à l'atterrissage",  -- 789
+        "pendant un vol : lancer le jeu de vol, ou le mettre en haute altitude et l'en ramener",  -- 790
+        "Un vol est un bon moment pour ça.",  -- 791
+        "Vous jouez depuis %s.",  -- 792
+        "C'est l'heure d'une gorgée d'eau",  -- 793
+        "Rappel pour boire de l'eau",  -- 794
+        "de temps en temps pendant que vous jouez, un doux rappel pour boire une gorgée d'eau (jamais en combat)",  -- 795
+        "Rappel d'eau toutes les (minutes)",  -- 796
+        "combien de minutes de jeu entre deux rappels pour boire de l'eau",  -- 797
+        "Rappel d'eau au début d'un vol",  -- 798
+        "un vol est une pause naturelle : le rappel pour boire de l'eau vient quand un vol commence, sauf si le dernier date de peu",  -- 799
+        "montrer le rappel pour boire de l'eau",  -- 800
+        "Restyler les cadres du jeu",  -- 801
+        "infobulles, bonus, suivi de quêtes, minicarte, barre d'expérience, onglets du chat et barres de manette dans le style du HUD (l'interface à la souris garde celle du jeu)",  -- 802
+        "Taille de la barre d'expérience",  -- 803
+        "la taille des barres d'expérience et de réputation lorsqu'elles sont restylées, en pourcentage",  -- 804
+        "Infobulles",  -- 805
+        "infobulles en verre sombre, bordées de la couleur de la classe d'un joueur ou de la qualité d'un objet",  -- 806
+        "Barres manette",  -- 807
+        "les boutons de la manette avec un anneau fin sur un fond sombre à la place de l'habillage lourd",  -- 808
+        "Bonus",  -- 809
+        "vos icônes de bonus et d'affaiblissements rognées et bordées, leurs durées cerclées",  -- 810
+        "Suivi de quêtes",  -- 811
+        "les en-têtes du suivi de quêtes en verre sombre, ses lignes cerclées",  -- 812
+        "Minicarte",  -- 813
+        "un anneau fin et un halo doux autour de la minicarte à la place du bord doré",  -- 814
+        "Barre d'expérience",  -- 815
+        "les barres d'expérience et de réputation un peu plus petites, avec leurs propres couleurs",  -- 816
+        "Chat",  -- 817
+        "noms des onglets du chat cerclés et zone de saisie en verre sombre",  -- 818
+        "Compteur de dégâts",  -- 819
+        "le compteur de dégâts du jeu dans le style du HUD : ses barres, inclinées sur un fond sombre, et un texte détouré ; il garde tout ce qu'il fait",  -- 820
+        "vérification: %d sur %d réussies",  -- 821
+        "Le jeu ne s’est pas figé depuis votre connexion.",  -- 822
+        "Moments où le jeu s’est figé, et la part du HUD dans chacun :",  -- 823
+        "Les moments les plus lents du HUD :",  -- 824
+        "Rapports de débogage",  -- 825
+        "rassembler les rapports de dépannage tout seuls : à la connexion, et de nouveau au rechargement ou à la déconnexion (ils sont gardés dans les réglages enregistrés)",  -- 826
+        "les moments où le jeu s’est figé depuis votre connexion, et la part de chacun due au travail du HUD",  -- 827
+        "Préréglage du HUD : %s, assorti à la caméra",  -- 828
+        "préréglage : %s",  -- 829
+        "Une disposition nommée '%s' a été ajoutée au mode Édition du jeu. Choisissez-la là pour l'utiliser (Menu du jeu > Mode Édition > Disposition).",  -- 830
+        "préréglage inconnu '%s'",  -- 831
+        "Pour une télé : texte plus grand sur le HUD et dans la discussion.",  -- 832
+        "Pour un moniteur : texte à sa taille normale.",  -- 833
+        "Nos cadres sont revenus à leur place de départ. Choisissez la disposition %s du jeu dans le mode Édition (Menu du jeu > Mode Édition > Disposition).",  -- 834
+        "Les préréglages fixent la distance de la caméra",  -- 835
+        "un préréglage amène aussi la caméra à la distance pour laquelle sa disposition a été conçue, une seule fois (zoomez librement ensuite)",  -- 836
+        "Action",  -- 837
+        "une vue à la troisième personne : fines barres verticales à côté de votre personnage, tous les effets activés ; hors combat, tout s'estompe",  -- 838
+        "Classique",  -- 839
+        "nos cadres là où WoW les a toujours placés, effets plus discrets, les barres de manette du jeu telles quelles",  -- 840
+        "Minimal",  -- 841
+        "seulement l'essentiel : les PNJ amicaux n'affichent leur barre (avec leur fonction) que lorsque vous les pointez, les visez ou les ciblez ; noms sans titres ; hors combat, vos barres restent en retrait (une santé basse s'affiche toujours)",  -- 842
+        "Monde ouvert",  -- 843
+        "un écran épuré pour explorer : des barres fines à côté de vous qui s'estompent au repos, des barres de nom sans barre de ressource, une discussion qui s'efface",  -- 844
+        "Aventure",  -- 845
+        "après les aventures en monde ouvert sur console : constantes vitales à côté de vous, une petite cible en haut au centre, villageois seulement quand vous les pointez, chat qui s'estompe vite",  -- 846
+        "Soulslike",  -- 847
+        "vos barres en haut à gauche, une grande barre de cible en bas au centre comme une barre de boss, chaque coup ressenti",  -- 848
+        "Tir",  -- 849
+        "barres verticales juste à droite du centre, près de votre visée, la cible tout en haut, retour de coup marqué",  -- 850
+        "Crossbar",  -- 851
+        "après les MMO joués à la manette : la cible et la focalisation en haut au centre, vos barres juste au-dessus des barres de manette, groupe à gauche, barres de nom complètes",  -- 852
+        "ARPG",  -- 853
+        "après les RPG d'action : la caméra loin, vos constantes vitales en bas à gauche, la cible en haut au centre, ennemis mineurs petits, chaque coup résonne",  -- 854
+        "Boussole",  -- 855
+        "après les RPG à la première personne : la caméra proche, vos barres en bas au centre, la cible sous le bord supérieur, villageois seulement quand vous les pointez",  -- 856
+        "Raid",  -- 857
+        "la disposition de WoW avec tout ce qu'il faut à un groupe : cadres de groupe et de raid, pourcentages de vie et niveaux sur les barres",  -- 858
+        "Suivre les préréglages de ControllerCam",  -- 859
+        "choisir un préréglage de caméra dans ControllerCam pour partout choisit aussi le préréglage du HUD assorti (la caméra garde sa propre distance)",  -- 860
+        "Moderne",  -- 861
+        "régler tout le HUD sur un préréglage : action, classic, minimal, openworld, adventure, soulslike, shooter, crossbar, arpg, compass, raid",  -- 862
+        "le cadre de la cible et les barres de nom compacts ou complets, les deux à la fois",  -- 863
+        "le cadre de la cible compact ou complet",  -- 864
+        "dimensionner le texte pour une télé à l'autre bout de la pièce ou pour un moniteur à portée de bras",  -- 865
+        "remettre nos cadres à leur place de départ, pour la disposition Moderne ou Classique du jeu",  -- 866
+        "Toute votre configuration (HUD, caméra et disposition du jeu) : copiez cette ligne (Ctrl+C) pour la garder ou la partager.",  -- 867
+        "Collez une ligne de réglages du HUD (Ctrl+V) et validez.",  -- 868
+        "Cette ligne est abîmée : copiez-la de nouveau, en entier.",  -- 869
+        "Cette ligne vient d'une version plus récente : mettez l'addon à jour.",  -- 870
+        "Ce n'est pas une ligne de réglages du HUD.",  -- 871
+        "Réglages importés: %d repris, %d ignorés.",  -- 872
+        "La configuration de la caméra a été reprise aussi.",  -- 873
+        "La configuration de la caméra est restée telle quelle.",  -- 874
+        "La disposition du jeu est maintenant '%s'.",  -- 875
+        "La disposition du jeu est restée telle quelle.",  -- 876
+        "vos réglages sous forme d'une ligne de texte, à garder ou partager",  -- 877
+        "reprend les réglages d'une ligne de texte créée par /cchud export",  -- 878
+        "Le HUD est actif tant que l'interface manette est utilisée. Ses options : Options > AddOns > ControllerCam > HUD, ou /cchud.",  -- 879
+        "Caméra seule : le HUD reste au repos et l'interface du jeu est comme avant. /cchud on l'active.",  -- 880
+        "Préparer aussi l'écran pour la manette ? Cela ajoute une disposition nommée CCHUD au mode Édition du jeu, à choisir là-bas : elle place les rangées de temps de recharge sous la cible, à l'écart des boutons de la manette. Vos propres dispositions sont conservées (/cchud setup le propose de nouveau).",  -- 881
+        "Préparer",  -- 882
+        "Pas maintenant",  -- 883
+        "ControllerCam est fourni avec une interface pour manette, le HUD : ses propres cadres d'unité, barres de nom, barre d'incantation et plus encore tant que l'interface manette est utilisée. La voulez-vous, ou la caméra seule ?",  -- 884
+        "Caméra + HUD",  -- 885
+        "Caméra seule",  -- 886
+        "Ce client ne permet pas aux addons de modifier la disposition.",  -- 887
+        "redemander : la caméra avec le HUD, ou la caméra seule",  -- 888
+        "proposer de nouveau la disposition d'écran faite pour le HUD (mode Édition du jeu)",  -- 889
+        "Affiché tant que l'interface manette est utilisée. Faites glisser nos cadres dans le mode Édition du jeu.",  -- 890
+        "Préréglages",  -- 891
+        "Dimensionné pour",  -- 892
+        "Télé",  -- 893
+        "Moniteur",  -- 894
+        "Icônes des boutons",  -- 895
+        "les icônes que le jeu affiche pour les boutons de votre manette: trouvées automatiquement pour la manette utilisée, ou le type que vous choisissez",  -- 896
+        "Police",  -- 897
+        "Réinitialiser la disposition du jeu",  -- 898
+        "Essayer",  -- 899
+        "Lancer la démo",  -- 900
+        "Afficher chaque effet de coup",  -- 901
+        "Lancer l'autotest",  -- 902
+        "Barres de manette : compactes / complètes",  -- 903
+        "Exporter les réglages",  -- 904
+        "Importer les réglages",  -- 905
+        "Cochez « Afficher les options avancées » sur la page principale pour accéder à tous les réglages.",  -- 906
+        "Modules",  -- 907
+        "Bascules rapides",  -- 908
+        "Général",  -- 909
+        "HUD",  -- 910
+        "Le panneau d'options n'est pas disponible dans ce client.",  -- 911
+        "Activé",  -- 912
+        "tout le HUD; désactivé rend ses propres cadres au jeu",  -- 913
+        "Aussi dans l'interface souris et clavier",  -- 914
+        "normalement, le HUD ne fonctionne que lorsque l'interface manette est utilisée",  -- 915
+        "Mettre de côté les cadres du jeu",  -- 916
+        "masquer les cadres du joueur, de la cible et de la focalisation du jeu tant que les nôtres sont affichés",  -- 917
+        "Fenêtre de discussion en haut à gauche",  -- 918
+        "déplacer la fenêtre de discussion en haut à gauche tant que le HUD fonctionne",  -- 919
+        "Barres verticales au repos",  -- 920
+        "la visibilité des barres verticales à pleine santé hors combat (0 les masque)",  -- 921
+        "Couleurs de classe",  -- 922
+        "colorer votre barre et celles des autres joueurs selon la classe",  -- 923
+        "Icônes de classe",  -- 924
+        "une icône de classe devant le nom d'un joueur sur la cible et la cible de la cible",  -- 925
+        "Menace sur le cadre de cible",  -- 926
+        "une icône de bouclier et une lueur sur le cadre de la cible : rouge tant qu'il vous attaque, rouge et jaune quand vous êtes sur le point de l'attirer, jaune et bleu quand vous le perdez, bleu quand il n'est pas sur vous",  -- 927
+        "Barres compactes partout",  -- 928
+        "le cadre de la cible et les barres de nom en style compact, un peu plus de la moitié de la largeur (chacun reste réglable à part ; les préréglages n'y touchent jamais)",  -- 929
+        "Cadre de cible compact",  -- 930
+        "le cadre de cible un peu plus de moitié moins large",  -- 931
+        "Couleurs de santé en combat",  -- 932
+        "en combat, les barres de santé passent du vert au jaune puis au rouge à mesure que la santé baisse",  -- 933
+        "Ombre derrière le texte",  -- 934
+        "une bande sombre et douce derrière le texte de la cible, pour qu'il reste lisible",  -- 935
+        "Taille du texte",  -- 936
+        "taille du texte sur nos cadres",  -- 937
+        "Taille des cadres",  -- 938
+        "taille de nos cadres d'unité",  -- 939
+        "Vos barres en combat",  -- 940
+        "la visibilité de vos barres, familier et focalisation en combat jusqu'à ce que quelque chose demande de l'attention",  -- 941
+        "Complètes sous la santé de",  -- 942
+        "vos barres reviennent complètes quand votre santé passe sous cette valeur",  -- 943
+        "Complètes sous le mana de",  -- 944
+        "vos barres reviennent complètes quand votre mana passe sous cette valeur",  -- 945
+        "Barre du joueur au repos",  -- 946
+        "visibilité de la barre du joueur avec la vie au maximum ou hors combat (0 la masque)",  -- 947
+        "Aide marchand et banque",  -- 948
+        "le bouton Vendre la camelote du marchand demande quoi vendre; déplacement rapide chez le marchand et à la banque",  -- 949
+        "Afficher les options avancées",  -- 950
+        "tous les réglages, pas seulement les principaux",  -- 951
+        "Cadre du joueur",  -- 952
+        "notre barre de joueur, en haut à gauche",  -- 953
+        "Cadre de la cible",  -- 954
+        "notre barre de cible, en haut au centre",  -- 955
+        "Barre du familier",  -- 956
+        "une petite barre de familier sous la barre du joueur, ou à côté des barres verticales",  -- 957
+        "Cadre de focalisation",  -- 958
+        "notre cadre de focalisation",  -- 959
+        "fines barres verticales de vie et de puissance à côté de votre personnage, pour une vue à la troisième personne (à la place de la barre du joueur)",  -- 960
+        "Vendre la camelote à l'ouverture d'un marchand",  -- 961
+        "vendre la camelote selon vos règles dès l'ouverture d'un marchand",  -- 962
+        "Les armes et armures blanches sont de la camelote",  -- 963
+        "compter les armes et armures blanches comme camelote (jamais les outils, cannes à pêche, équipements avec un effet Utiliser ou ce qui pourrait être une amélioration ; toujours demandé d'abord)",  -- 964
+        "Déposer à l'ouverture de la banque",  -- 965
+        "les objets marqués pour la banque et, si activé, ce que la banque contient déjà, y vont d'eux-mêmes",  -- 966
+        "l'option du jeu; notre petit cadre la suit",  -- 967
+        "Gestionnaire de temps de recharge",  -- 968
+        "le Gestionnaire de temps de recharge du jeu",  -- 969
+        "Affichage des ressources personnelles",  -- 970
+        "votre santé et votre ressource sous votre personnage",  -- 971
+        "La banque prend les composants toute seule",  -- 972
+        "l'option du jeu pour la banque",  -- 973
+        "Infobulle au début d'un buff",  -- 974
+        "l'option du jeu : l'infobulle d'un buff s'affiche un instant quand il est appliqué (interface manette)",  -- 975
+        "Couleurs de classe pour les noms dans le chat",  -- 976
+        "le réglage du chat du jeu pour tous les types de chat à la fois : le nom d'un joueur dans la couleur de sa classe",  -- 977
+        "ouvrir le panneau d'options (Options > AddOns > ControllerCam HUD)",  -- 978
+        "Cadres",  -- 979
+        "Fondu de l'écran",  -- 980
+        "Effets",  -- 981
+        "Style",  -- 982
+        "Quêtes, discussion et carte",  -- 983
+        "Sacs, banque et marchand",  -- 984
+        "Pêche",  -- 985
+        "Accessibilité",  -- 986
+        "Options natives",  -- 987
+        "%s  |  Interface manette: %s  |  en cours: %s",  -- 988
+        "joueur %s, cible %s, familier %s, focalisation %s  |  cadres du jeu mis de côté: %s  |  discussion déplacée: %s",  -- 989
+        "options natives: cible de la cible %s, Gestionnaire de temps de recharge %s, ressources personnelles %s",  -- 990
+        "taille du texte %d%%  |  ombre du texte: %s",  -- 991
+        "aide marchand et banque: %s  |  vente auto: %s  |  équipement blanc = camelote: %s",  -- 992
+        "visibilité au repos %d%%  |  échelle %d%%  |  couleurs de classe: %s",  -- 993
+        "Un HUD minimaliste de jeu d'action pour l'interface manette.",  -- 994
+        "activé",  -- 995
+        "désactivé: les cadres du jeu sont de retour",  -- 996
+        "utiliser aussi dans l'interface souris et clavier: %s",  -- 997
+        "cadres du jeu mis de côté: %s",  -- 998
+        "discussion déplacée en haut à gauche: %s",  -- 999
+        "couleurs de classe: %s",  -- 1000
+        "Ce client n'a pas cette option.",  -- 1001
+        "%s: %s (l'option propre au jeu)",  -- 1002
+        "Le jeu n'a pas accepté cela pour l'instant.",  -- 1003
+        "aide marchand et banque: %s",  -- 1004
+        "vente auto: %s",  -- 1005
+        "équipement blanc = camelote: %s",  -- 1006
+        "L'aide marchand est désactivée.",  -- 1007
+        "utilisation: /cchud sell [junk | recommended | white | green | blue]",  -- 1008
+        "déposer les objets marqués à l'ouverture de la banque: %s",  -- 1009
+        "utilisation: /cchud junk <item> (Maj-clic sur l'objet pour l'insérer dans la ligne de discussion)",  -- 1010
+        "objet %d: camelote, vendu avec le reste",  -- 1011
+        "objet %d: conservé, jamais vendu",  -- 1012
+        "objet %d: pour la banque",  -- 1013
+        "ombre du texte: %s",  -- 1014
+        "utilisation : /cchud text <80-250>",  -- 1015
+        "taille du texte %d%%",  -- 1016
+        "démo arrêtée",  -- 1017
+        "Le HUD ne fonctionne pas.",  -- 1018
+        "Démo en cours: un combat fictif en boucle. Tapez /cchud demo à nouveau pour l'arrêter.",  -- 1019
+        "utilisation: /cchud idle <0-100>",  -- 1020
+        "visibilité au repos %d%%",  -- 1021
+        "utilisation: /cchud scale <50-200>",  -- 1022
+        "échelle %d%%",  -- 1023
+        "Faites glisser les cadres, puis tapez /cchud lock.",  -- 1024
+        "cadres verrouillés",  -- 1025
+        "Tout est revenu comme au départ : réglages, cadres et disposition d'écran (vos marques de vendeur et l'historique des prix sont conservés).",  -- 1026
+        "les cadres sont revenus à leur position initiale",  -- 1027
+        "commande inconnue '%s'. Tapez /cchud help",  -- 1028
+        "Liste des erreurs vidée.",  -- 1029
+        "Aucune erreur enregistrée.",  -- 1030
+        "%d erreurs enregistrées (la plus récente en dernier). /cchud errors clear vide la liste.",  -- 1031
+        "afficher l'état",  -- 1032
+        "activer ou désactiver le HUD (désactivé rend ses propres cadres au jeu)",  -- 1033
+        "utiliser aussi le HUD dans l'interface souris et clavier",  -- 1034
+        "utiliser notre cadre pour cela, ou celui du jeu",  -- 1035
+        "fines barres verticales de santé et d'énergie à côté de votre personnage",  -- 1036
+        "cible de la cible (l'option propre au jeu, aussi dans ses menus)",  -- 1037
+        "le Gestionnaire de temps de recharge du jeu (l'option propre au jeu)",  -- 1038
+        "votre santé et votre ressource sous votre personnage (l'option propre au jeu)",  -- 1039
+        "l'infobulle qui s'affiche quand un buff commence (l'option propre au jeu)",  -- 1040
+        "garder visibles les cadres du joueur et de la cible du jeu (activé) ou les mettre de côté (désactivé)",  -- 1041
+        "chez un marchand: choisir quoi vendre (aussi: sell junk, sell recommended, sell white | green | blue)",  -- 1042
+        "compter les armes et armures blanches comme camelote",  -- 1043
+        "marquer un objet: toujours vendu, jamais vendu, ou pour la banque (Maj-clic pour l'insérer dans la ligne de discussion)",  -- 1044
+        "à la banque : déposer ce que la banque contient déjà, et tout ce qui est marqué pour elle",  -- 1045
+        "à la banque: retirer ce dont vous portez déjà un peu",  -- 1046
+        "déposer dès l'ouverture de la banque",  -- 1047
+        "la banque prend les composants toute seule (l'option propre au jeu)",  -- 1048
+        "taille du texte, en pourcentage (150 se lit bien sur une télévision)",  -- 1049
+        "visibilité de la barre du joueur quand rien ne se passe (0 la masque)",  -- 1050
+        "taille des cadres, en pourcentage",  -- 1051
+        "faites glisser les cadres où vous voulez (le mode Édition du jeu le permet aussi)",  -- 1052
+        "remettre les cadres à leur position initiale",  -- 1053
+        "lancer un court combat fictif pour voir comment réagissent les cadres (encore pour arrêter)",  -- 1054
+        "comparer ce qui est à l'écran avec les réglages (check liste chaque ligne)",  -- 1055
+        "enregistrer une description de l'interface manette de ce client (pour le dépannage)",  -- 1056
+        "afficher cette liste",  -- 1057
+        "les dernières erreurs du HUD, même après un rechargement (pour les signaler)",  -- 1058
     },
     itIT = {
         "errore:",  -- 1
@@ -4724,504 +4792,521 @@ local TRANSLATIONS = {
         "mantieni l'elenco delle missioni in ordine di distanza, con la più vicina in cima",  -- 541
         "Elenco missioni: ordine consigliato",  -- 542
         "mantieni l'elenco delle missioni in un ordine consigliato: prima quelle pronte da consegnare, poi ciò che puoi fare da solo partendo dalla più vicina, poi le missioni sopra il tuo livello, quelle di gruppo finché sei da solo, e le grigie per ultime",  -- 543
-        "Elenco missioni: obiettivi brevi",  -- 544
-        "gli obiettivi nell'elenco delle missioni dicono solo il necessario, con un'icona del tipo davanti: un teschio e 0/1 Capitano Terrorsorto, non 0/1 Capitano Terrorsorto ucciso",  -- 545
-        "Progressi delle missioni in chat",  -- 546
-        "una breve riga in chat quando una missione avanza: Collane d'osso insanguinate: 4/25, un obiettivo completato, una missione pronta da consegnare",  -- 547
-        "Progressi delle missioni al tuo gruppo",  -- 548
-        "in un gruppo (non in un'incursione) le stesse righe vanno nella chat di gruppo perché gli altri le vedano, a un attimo l'una dall'altra; le vedi lì anche tu",  -- 549
-        "Tieni ciò che serve alle tue missioni",  -- 550
-        "un oggetto che una missione del tuo registro chiede ancora, o uno che avvia una missione che puoi ancora fare, è segnato come Missione: mai venduto né messo all'asta per te",  -- 551
-        "indica un ordine consigliato per le tue missioni: consegna ciò che è pronto, poi la più vicina che puoi fare da solo, poi il resto",  -- 552
-        "A sinistra delle missioni",  -- 553
-        "A destra delle missioni",  -- 554
-        "Sotto le missioni",  -- 555
-        "La lista da farmare è piena.",  -- 556
-        "Lista da farmare: %s, %d voluti.",  -- 557
-        "Da farmare",  -- 558
-        "altri %d",  -- 559
-        "Ancora niente da farmare.",  -- 560
-        "Una pila in più",  -- 561
-        "Togli",  -- 562
-        "Svuota",  -- 563
-        "Fatto",  -- 564
-        "Togliere tutto dalla lista da farmare?",  -- 565
-        "Lista da farmare: scegli / fatto",  -- 566
-        "Lista da farmare: aggiungi l'oggetto indicato",  -- 567
-        "Non è nella lista da farmare.",  -- 568
-        "La lista da farmare è vuota.",  -- 569
-        "Lista da farmare: dove si trova",  -- 570
-        "Lista da farmare accanto all'elenco delle missioni",  -- 571
-        "ciò che intendi raccogliere, con quanti ne hai e quanti ne vuoi: le tue borse e la banca e quelle degli altri tuoi personaggi su questo reame. Aggiungi i reagenti di un piano di avanzamento con un pulsante, o qualsiasi oggetto",  -- 572
-        "la lista da farmare a sinistra dell'elenco delle missioni, alla sua destra o sotto le sue missioni",  -- 573
-        "la lista da farmare accanto all'elenco delle missioni: scegli col controller; add <oggetto> [quanti], remove <oggetto>, clear, o left / right / bottom per la posizione",  -- 574
-        "Non in combattimento.",  -- 575
-        "Questo client non ha barre del gamepad.",  -- 576
-        "Questo client non permette agli addon di modificarlo; usa la Modalità Modifica.",  -- 577
-        "barre del gamepad: %s",  -- 578
-        "compatte",  -- 579
-        "complete",  -- 580
-        "Barre gamepad sottili",  -- 581
-        "nascondi la grafica pesante dietro le barre azione del gamepad e disegnale più piccole",  -- 582
-        "Dimensione barre gamepad",  -- 583
-        "dimensione delle barre gamepad con le barre sottili attive, in percentuale",  -- 584
-        "le barre del gamepad del gioco in modalità compatta o completa (come la sua impostazione della Modalità Modifica)",  -- 585
-        "Dissolvi fuori combattimento",  -- 586
-        "/cchud fade <parte> on | off ne imposta una; all per tutta la dissolvenza.",  -- 587
-        "le barre del controller, la minimappa, l'elenco delle missioni, il misuratore di danni e la barra dell'esperienza riposano insieme fuori dal combattimento, e tornano per uno scontro, un grilletto premuto o un bersaglio nemico",  -- 588
-        "Lo schermo a riposo",  -- 589
-        "quanto restano visibili le parti dello schermo a riposo fuori dal combattimento (0 le nasconde)",  -- 590
-        "Sfuma: barre del controller",  -- 591
-        "Sfuma: minimappa",  -- 592
-        "Sfuma: elenco delle missioni",  -- 593
-        "Sfuma: misuratore di danni",  -- 594
-        "Sfuma: barra dell'esperienza",  -- 595
-        "Sfuma: benefici",  -- 596
-        "Sfuma: righe dei recuperi",  -- 597
-        "se questa parte dello schermo sfuma con il resto fuori dal combattimento (disattivato: resta sempre com'è)",  -- 598
-        "la dissolvenza dello schermo fuori dal combattimento: cosa sfuma (minimappa, elenco delle missioni e il resto), ognuno attivo o no",  -- 599
-        "Salvato: scrivi /reload perché il gioco lo scriva su disco.",  -- 600
-        "Pulsanti di postura e del famiglio sopra le barre",  -- 601
-        "i pulsanti delle posture e dei comandi del famiglio stanno dove c'erano le icone verde e rossa di bersaglio, così la loro ruota si apre tutta sullo schermo; quelle icone vengono nascoste",  -- 602
-        "elenca dove si trovano le parti delle barre del controller e cosa riposa (per la diagnosi)",  -- 603
-        "Auto",  -- 604
-        "Generico",  -- 605
-        "quelle del gioco",  -- 606
-        "Icone dei pulsanti: %s.",  -- 607
-        "Nessun controller è in uso in questo momento, o il gioco non ha stili di icone: verrà impostato quando ce ne sarà uno.",  -- 608
-        "Il gioco non ha accettato le icone dei pulsanti.",  -- 609
-        "Il controller non dice che cos'è: le icone restano come le ha il gioco.",  -- 610
-        "le icone che il gioco mostra per i pulsanti del tuo controller: auto (in base al controller in uso), xbox, playstation, switch, steam, generic (numeri), oppure game per lasciarle come le ha il gioco",  -- 611
-        "Righe dei recuperi lontane dalle barre del gamepad",  -- 612
-        "le righe dei recuperi del gioco stanno sotto il bersaglio invece che sopra i pulsanti del gamepad, un po' più piccole (solo con i layout integrati del gioco: con un tuo layout restano dove le hai messe)",  -- 613
-        "Modalità pesca: disattivata.",  -- 614
-        "Pesca: %s per lanciare",  -- 615
-        "Niente esca: %s due volte per usare %s",  -- 616
-        "%s per riporre la canna",  -- 617
-        "Modalità pesca: %s per lanciare la lenza, e di nuovo per ferrare il pesce quando il galleggiante si muove.",  -- 618
-        "%s per ferrare, %s per rilanciare",  -- 619
-        "La modalità pesca richiede una canna da pesca tra le mani.",  -- 620
-        "Non conosci Pesca.",  -- 621
-        "Modalità pesca: un pulsante lancia e aggancia",  -- 622
-        "Pulsante di pesca: %s",  -- 623
-        "Pesca con un pulsante",  -- 624
-        "con una canna da pesca in mano: il tuo tasto di interazione per lanciare la lenza quando non c'è nulla con cui interagire, e di nuovo per ferrare il pesce quando il galleggiante si muove; il pescato viene raccolto per te. B per riporre la canna e riprendere le tue armi",  -- 625
-        "Rilancia con una pressione",  -- 626
-        "mentre il galleggiante è in acqua, il tuo pulsante di pesca rilancia la lenza con una pressione, e A ferra il pesce (il gioco non dà alcun segnale di abboccata da aspettare, quindi un solo pulsante non può fare entrambe le cose); disattivato: il pulsante di pesca ferra, come l’interazione del gioco",  -- 627
-        "Esca con doppia pressione",  -- 628
-        "premi due volte rapidamente il pulsante di pesca: la seconda pressione mette la migliore esca delle tue borse sulla canna, quando la canna non ne ha",  -- 629
-        "Barre del controller nascoste durante la pesca",  -- 630
-        "con una canna da pesca in mano le barre del controller sono nascoste, per vedere bene l'acqua; l'avviso di pesca mostra il tasto per lanciare. Tornano appena inizia un combattimento o la canna viene riposta",  -- 631
-        "pesca con un pulsante disattivata per ora, o di nuovo attiva (con una canna in mano si attiva da sola)",  -- 632
-        "il pulsante che pesca: all'inizio il tuo pulsante di interazione (Quadrato o X), o qualsiasi altro, per esempio un grilletto (rt)",  -- 633
-        "La costa di Durotar è roccia rossa e bassi fondali tiepidi. I troll delle Isole dell'Eco dicono che gli sgombri passano più fitti quando la marea porta l'odore dei fuochi di cucina delle isole.",  -- 634
-        "I laghi di Mulgore sono piccoli, limpidi e pazienti. I tauren ci pescano come fanno tutto il resto: con calma, e ringraziando.",  -- 635
-        "Ogni oasi delle Savane è un luogo d'incontro. Qualunque cosa ci beva di giorno, di notte lì sotto nuota qualcos'altro.",  -- 636
-        "Le pozze di Teldrassil stanno all'ombra di un albero solo. I pescatori elfi della notte giurano che i pesci di lì non hanno mai visto il sole e non ne sentono la mancanza.",  -- 637
-        "L'acqua di Rivafosca è grigia, fredda e piena di relitti. Metà di ciò che abbocca al largo di Auberdine ha messo su casa nel carico perduto di qualcuno.",  -- 638
-        "I fiumi di Valtetra scorrono sotto foglie più vecchie di gran parte dei regni. I pesci sono svelti, e le Sentinelle ancora più svelte a chiederti che cosa ci fai lì.",  -- 639
-        "Giù tra le Mille Guglie l'acqua è poca e custodita gelosamente. Un pesce di qui il suo posto se l'è guadagnato.",  -- 640
-        "I laghi delle Vette degli Artigli stanno in alto, gelidi, tra le cime. I goblin li avrebbero già prosciugati se non ci si pescasse così bene.",  -- 641
-        "La costa di Desolanda è ossa e risacca grigia. Laggiù qualcosa ha un debole per entrambe.",  -- 642
-        "Feralas è verde fino al pelo dell'acqua. I suoi fiumi sono profondi, caldi e vivi, parecchio vivi.",  -- 643
-        "Nessuno sa bene dove finisca la terra e cominci l'acqua ad Acquemorte. Pesca dalla riva, e poi contati le dita dei piedi.",  -- 644
-        "Steamwheedle Port ha l'unica acqua degna di questo nome in tutta Tanaris. I goblin ti venderanno il diritto di pescarci, anche due volte se li lasci fare.",  -- 645
-        "Sotto la baia luminosa di Azshara giace una città sommersa. I vecchi pescatori dicono che i pesci grossi vivono in quelli che un tempo erano i suoi giardini.",  -- 646
-        "Le pozze di Vilbosco brillano, e non in senso buono. Quello che ci nuota ancora è testardo oltre ogni ragionevolezza.",  -- 647
-        "Le sorgenti calde e i laghi orlati di catrame del Cratere di Un'Goro hanno conservato cose che il resto del mondo ha dimenticato. Alcune mordono.",  -- 648
-        "Il Lago Elune'ara, a Radaluna, è calmo come un respiro trattenuto. I druidi chiedono solo che tu non prenda più di quanto mangerai.",  -- 649
-        "Silitus è sabbia, vento e rumore d'ali. Se qui hai trovato dell'acqua in cui pescare, non dirlo a nessuno.",  -- 650
-        "I laghi di Fontefredda gelano ai bordi e fumano al centro. I pesci lì sono grassi per il freddo e valgono la camminata.",  -- 651
-        "Nelle pozze di Orgrimmar pescano i peoni che non hanno di meglio da fare e i vecchi soldati che dicono lo stesso. Gli uni e gli altri ti raccontano che quello grosso è scappato.",  -- 652
-        "Un pesce degli stagni di Picco del Tuono ha passato tutta la vita molto al di sopra delle pianure. Sembra averla presa con calma.",  -- 653
-        "Darnassus cura le sue acque con la stessa attenzione dei suoi templi. I pesci si sono abituati a essere ammirati.",  -- 654
-        "I laghi dei monti di Alterac sono neve sciolta, e gli ogre e il Sindacato ci pescano quando nessuno guarda.",  -- 655
-        "Le rive degli Altopiani d'Arathi hanno visto più eserciti che pescatori. I pesci hanno smesso da un pezzo di badare a quale stendardo sventoli sopra l'acqua.",  -- 656
-        "Le Maleterre sono polvere da un capo all'altro. Qui un pesce che abbocca è un piccolo miracolo: trattalo come tale.",  -- 657
-        "La costa delle Terre Devastate è rossa, spazzata e silenziosa. Qualunque cosa viva in quella risacca ha imparato a convivere con parecchio.",  -- 658
-        "I laghi delle Radure di Tirisfal giacciono immobili sotto un cielo malaticcio. I Reietti ci pescano per abitudine: i morti non mangiano granché, ma ricordano che gli piaceva.",  -- 659
-        "La lunga costa della Selva Pinargento è tutta nebbia e ombra di pini. Si pesca bene, ed è l'unica cosa allegra che si senta dire di quel posto.",  -- 660
-        "I fiumi delle Terre Infette Occidentali scorrono ancora, anche se non puliti. Quello che ne tiri fuori, guardalo due volte.",  -- 661
-        "Pochi pescano nelle Terre Infette Orientali, e ancora meno lo ammettono. L'acqua conserva quello che il morbo ne ha lasciato.",  -- 662
-        "Il fiume di Colletorto e la sua lunga riva meridionale hanno sfamato entrambe le parti di ogni lite scoppiata per averli.",  -- 663
-        "Le Entroterre tengono i loro laghi in alto tra gli alberi, dove i nani Granmartello pescano in groppa ai grifoni quando credono che nessuno li veda.",  -- 664
-        "I laghi di Dun Morogh sono orlati di ghiaccio per gran parte dell'anno. Un nano taglia un buco, si siede con una pinta e la chiama una buona giornata, qualunque cosa abbocchi.",  -- 665
-        "La Gola Rovente ha la lava dove le altre terre hanno i fiumi. Portati piuttosto qualcosa da bere.",  -- 666
-        "Le Steppe Ardenti sono cenere e braci. Se qui l'acqua ti dà qualcosa, sarà bollente.",  -- 667
-        "Ogni bambino di Elwynn impara a pescare a Crystal Lake o a Stone Cairn Lake. I pesciolini di lì li fregano da generazioni.",  -- 668
-        "Il Valico Ventomorto ha poca acqua e ancora meno accoglienza. Quello che sta nelle pozze sotto Karazhan è meglio lasciarlo dov'è.",  -- 669
-        "Il fiume al margine di Boscovespro è nero a qualsiasi ora. Ai pesci il buio non sembra dare fastidio; ai pescatori sì.",  -- 670
-        "Il Loch è l'orgoglio di Loch Modan, trattenuto dalla grande diga Stonewrought. I nani ci misurano ogni storia di pesca, e di solito vince il Loch.",  -- 671
-        "Il Lago Placido, tra le Montagne Crestarossa, è bello come un dipinto e ci si pesca da ogni molo di Borgolago. La gente del paese conosce ogni punto buono e non te ne dirà nemmeno uno.",  -- 672
-        "Dai fiumi della giungla al selvaggio capo meridionale, Rovotorto ha le acque più ricche del continente. I pescatori di Baia del Bottino ci organizzano un torneo, e barano quasi tutti.",  -- 673
-        "La Palude del Dolore è acqua verde sotto alberi verdi. I pesci sanno di fango, e alla gente del posto piacciono così.",  -- 674
-        "I campi delle Marche Occidentali sono andati in malora, la costa no. Chi è rimasto vive della lunga riva grigia.",  -- 675
-        "Le Paludi Grigie hanno il nome che si meritano. I moli di Porto di Menethil sono il posto più asciutto da cui pescarci, e i crocolischi lo sanno.",  -- 676
-        "Nei canali di Roccavento pescano bambini, pensionati e almeno un nobile in incognito. Nessuno chiede che cos'altro ci sia, nei canali.",  -- 677
-        "La Forlorn Cavern custodisce l'unica pozza tranquilla di Forgiardente. I vecchi nani ci pescano per ore senza dire una parola.",  -- 678
-        "I canali di Sepulcra scorrono di un verde che con le alghe non c'entra nulla. I Reietti che ci pescano non lo fanno per la cena.",  -- 679
-        "Il primo pesce che quasi ogni pescatore tira a riva, e così vistoso che non se lo scorda.",  -- 680
-        "Sguscia via, fila veloce e si trova lungo ogni costa calda. Alla griglia è meglio di quanto il nome lasci pensare.",  -- 681
-        "Tutto bocca, e mai così felice come nell'acqua che tu non berresti.",  -- 682
-        "Taglia piccola, denti tanti, paura nessuna. Si dice che un banco intero abbia cacciato un orso dal Loch.",  -- 683
-        "Un lampo di colore sotto la risacca. Per i marinai, averne uno all'amo porta fortuna al viaggio.",  -- 684
-        "Un paziente abitante del fondale, con i baffi di un anziano dei nani.",  -- 685
-        "Nessuno ne mangia due volte. Gli alchimisti comprano tutto il pescato che trovano.",  -- 686
-        "Le pinne brillano come braci sotto la cenere, e l'olio che se ne spreme brucia quasi altrettanto bene.",  -- 687
-        "Una corazza da piccolo scudo. La carne che c'è dentro vale la fatica.",  -- 688
-        "Qualcosa nell'acqua vicino alle Caverne dei Lamenti ha cambiato questo pesce. Mangiarne uno potrebbe cambiare anche te, per un po'.",  -- 689
-        "La gente di fiume dice che mangiarne schiarisce la mente. È il nuotare controcorrente a dare la saggezza.",  -- 690
-        "Più anni, più stazza e più saggezza del cugino, e al tuo amo ha abboccato lo stesso.",  -- 691
-        "Un duro combattente dei caldi mari del sud, e un classico sul menu di ogni taverna da Baia del Bottino a Meccania.",  -- 692
-        "La fronte luccica come vero mithril. Più di un minatore ha provato a fonderla.",  -- 693
-        "Dalle scaglie, bollite, si ricava un olio che rende la pelle dura come roccia. Preferisce la notte.",  -- 694
-        "Luccica come una corazza da parata, e pesa quasi altrettanto.",  -- 695
-        "Si avvicina a riva solo nei mesi freddi, e i cuochi che se ne intendono aspettano tutto l'anno.",  -- 696
-        "Passa quando le giornate sono lunghe. La gente di costa ci regola la stagione.",  -- 697
-        "Si afferra a metà, e una volta sola.",  -- 698
-        "Un pesce di fiume delle terre selvagge, con le branchie rosse come le pitture di guerra di un troll.",  -- 699
-        "Mangia quando fa buio. Una zuppa fatta con questo pesce calma i nervi di chi lancia incantesimi.",  -- 700
-        "Mangia di giorno, in quasi tutto il contrario del cugino notturno, eppure ne condivide le acque.",  -- 701
-        "Non è proprio un pesce. Non è d'accordo con l'idea di finire all'amo, e te lo farà sapere.",  -- 702
-        "Ha il pallore del ghiaccio di fiume e viene dai laghi freddi e limpidi del nord.",  -- 703
-        "Ti serviranno tutte e due le mani, e magari un amico.",  -- 704
-        "%.1f lb",  -- 705
-        "Nuovo nel tuo diario di pesca: %s, %s.",  -- 706
-        "Nuovo nel tuo diario di pesca: %s.",  -- 707
-        "Il tuo %s più pesante finora: %s (prima %s).",  -- 708
-        "Diario di pesca",  -- 709
-        "ogni cattura viene scritta nel tuo diario di pesca: quante di ogni tipo, dove l'hai presa la prima volta, e un peso inventato per divertimento con il tuo record per ciascuna (/cchud journal lo apre)",  -- 710
-        "Esca %s",  -- 711
-        "Nessuna esca",  -- 712
-        "Presi %d",  -- 713
-        "Scappati %d",  -- 714
-        "Interfaccia di pesca",  -- 715
-        "con una canna da pesca tra le mani: i pesci dell'acqua in cui ti trovi (quelli che non hai ancora preso qui restano nascosti), la tua abilità di pesca e ciò che aggiunge la tua esca, quanti ne hai presi e quanti sono scappati, quanto dura la tua esca, e le tue ultime catture",  -- 716
-        "Un curioso: +%d%%",  -- 717
-        "Tieni l'esca accanto al pesce",  -- 718
-        "Prossima cattura +%d%%",  -- 719
-        "Tieni premuto %s: l’esca corre lungo la lenza",  -- 720
-        "%d di fila",  -- 721
-        "Un gioco mentre il galleggiante è in acqua",  -- 722
-        "si gioca sulla barra di lancio mentre la lenza è in acqua: tieni premuto un grilletto e l’esca corre lungo la lenza, rilascialo e torna indietro alla deriva; tienila accanto all’ombra del pesce. Meglio giochi, più pesa il peso inventato della prossima cattura. Non occupa alcun pulsante e non tocca mai il lancio né la cattura",  -- 723
-        "%d presi, %d tipi, %d scappati",  -- 724
-        "Il più pesante: %s, %s",  -- 725
-        "Pesci",  -- 726
-        "Acque",  -- 727
-        "Ancora niente. Porta una canna all'acqua.",  -- 728
-        "Presi: %d",  -- 729
-        "Il più pesante: %s, a %s",  -- 730
-        "Prima cattura: %s",  -- 731
-        "Presi qui: %d",  -- 732
-        "Tipi trovati qui: %d",  -- 733
-        "Scegli",  -- 734
-        "Chiudi",  -- 735
-        "apri o chiudi il tuo diario di pesca: ogni tipo che hai preso, il più pesante di ciascuno, e le acque in cui hai pescato",  -- 736
-        "La chat svanisce quando è tranquilla",  -- 737
-        "il testo della chat svanisce dopo qualche secondo senza nuovi messaggi",  -- 738
-        "Secondi prima che la chat svanisca",  -- 739
-        "quanto resta il testo della chat prima di svanire",  -- 740
-        "Coordinate sulla mappa",  -- 741
-        "le tue coordinate sotto la mappa del mondo",  -- 742
-        "%d messaggi nascosti come spam da quando hai effettuato l'accesso.",  -- 743
-        "%d di questi erano reclutamenti di gilda ripetuti.",  -- 744
-        "Icona di classe e livello nella chat",  -- 745
-        "l'icona di classe e il livello di un giocatore tra parentesi quadre davanti al suo nome, quando il gioco ce li fa conoscere",  -- 746
-        "Nomi dei canali brevi nella chat",  -- 747
-        "il canale davanti a una riga, abbreviato: [P] gruppo, [PL] capogruppo, [G] gilda, [O] ufficiale, [R] incursione, [RL] capo incursione, [I] istanza, e un canale numerato col suo numero, [1]",  -- 748
-        "Solo nomi propri in chat",  -- 749
-        "un nome con cognome appare col solo nome proprio (Jory Spleeneater parla come Jory); un sussurro o un clic destro su di esso raggiunge comunque il nome completo",  -- 750
-        "Dimensione del testo della chat",  -- 751
-        "la dimensione del testo nelle finestre della chat, in proporzione a quella propria del gioco (l'impostazione del gioco resta com'è)",  -- 752
-        "Nascondi venditori di oro e annunci ripetuti",  -- 753
-        "i messaggi che vendono oro o servizi con un indirizzo web, e lo stesso messaggio ripetuto da un giocatore, vengono nascosti (mai quelli del tuo gruppo, gilda o amici)",  -- 754
-        "Nascondi i reclutamenti di gilda ripetuti",  -- 755
-        "nei canali pubblici il messaggio di reclutamento di una gilda viene mostrato una volta; lo stesso dello stesso giocatore, o uno quasi uguale, entro 15 minuti viene nascosto (mai quelli del tuo gruppo, gilda o amici)",  -- 756
-        "elenca i messaggi della chat nascosti come spam di recente",  -- 757
-        "Volo",  -- 758
-        "destinazione sconosciuta",  -- 759
-        "stimato dalla distanza",  -- 760
-        "primo volo su questa rotta: sto imparando la sua durata",  -- 761
-        "atterraggio",  -- 762
-        "%s: circa %s, stimato dalla distanza",  -- 763
-        "%s: circa %s",  -- 764
-        "%s: primo volo su questa rotta, durata sconosciuta",  -- 765
-        "In volo, destinazione sconosciuta",  -- 766
-        "%s: durata del volo imparata, %s",  -- 767
-        "%d rotte di volo conosciute.",  -- 768
-        "Voli: durata e conto alla rovescia",  -- 769
-        "in volo, la destinazione e la durata vengono dette in chat, e una barra in cima allo schermo conta alla rovescia fino all'atterraggio; la durata di ogni rotta si impara dai tuoi voli",  -- 770
-        "Voli: la tua cavalcatura lungo la barra",  -- 771
-        "un grifone, un cavaliere del vento o un pipistrello (quello che ti ha dato il maestro di volo) plana lungo la barra del volo verso dove atterri",  -- 772
-        "elenca le rotte di volo di cui si conosce la durata",  -- 773
-        "Un volo è un buon momento per farlo.",  -- 774
-        "Stai giocando da %s.",  -- 775
-        "È ora di un sorso d'acqua",  -- 776
-        "Promemoria per bere acqua",  -- 777
-        "ogni tanto mentre giochi, un gentile promemoria per bere un sorso d'acqua (mai in combattimento)",  -- 778
-        "Promemoria dell'acqua ogni (minuti)",  -- 779
-        "quanti minuti di gioco tra un promemoria per bere acqua e l'altro",  -- 780
-        "Promemoria dell'acqua all'inizio di un volo",  -- 781
-        "un volo è una pausa naturale: il promemoria per bere acqua arriva quando ne inizia uno, a meno che l'ultimo sia stato da poco",  -- 782
-        "mostra il promemoria per bere acqua",  -- 783
-        "Ridisegna i riquadri del gioco",  -- 784
-        "tooltip, bonus, tracciamento missioni, minimappa, barra dell'esperienza, schede della chat e barre del gamepad con l'aspetto dell'HUD (l'interfaccia del mouse mantiene quella del gioco)",  -- 785
-        "Dimensione della barra dell'esperienza",  -- 786
-        "la dimensione delle barre di esperienza e reputazione mentre sono ridisegnate, in percentuale",  -- 787
-        "Tooltip",  -- 788
-        "tooltip in vetro scuro, bordati con il colore della classe di un giocatore o della qualità di un oggetto",  -- 789
-        "Barre gamepad",  -- 790
-        "i pulsanti del gamepad con un anello sottile su uno sfondo scuro al posto della grafica pesante",  -- 791
-        "Bonus",  -- 792
-        "le tue icone di bonus e malus ritagliate e bordate, i loro tempi con contorno",  -- 793
-        "Tracciamento missioni",  -- 794
-        "le intestazioni del tracciamento missioni in vetro scuro, le sue righe con contorno",  -- 795
-        "Minimappa",  -- 796
-        "un anello sottile e un alone morbido attorno alla minimappa al posto del bordo dorato",  -- 797
-        "Barra dell'esperienza",  -- 798
-        "le barre di esperienza e reputazione un po' più piccole, con i loro colori",  -- 799
-        "Chat",  -- 800
-        "nomi delle schede della chat con contorno e la casella in cui scrivi in vetro scuro",  -- 801
-        "Misuratore dei danni",  -- 802
-        "il misuratore dei danni del gioco nello stile dell'HUD: le sue barre, inclinate su uno sfondo scuro, e testo contornato; conserva tutto ciò che fa",  -- 803
-        "verifica: %d di %d superate",  -- 804
-        "Il gioco non si è bloccato da quando hai effettuato l’accesso.",  -- 805
-        "Momenti in cui il gioco si è bloccato, e la parte dell’HUD in ciascuno:",  -- 806
-        "I momenti più lenti dell’HUD:",  -- 807
-        "Rapporti di debug",  -- 808
-        "raccogli da soli i rapporti di diagnosi: quando accedi e di nuovo quando ricarichi o esci (restano nelle impostazioni salvate)",  -- 809
-        "i momenti in cui il gioco si è bloccato dall’accesso, e quanto di ciascuno è stato lavoro dell’HUD",  -- 810
-        "Preset dell'HUD: %s, abbinato alla telecamera",  -- 811
-        "preset: %s",  -- 812
-        "Un layout chiamato '%s' è stato aggiunto alla Modalità modifica del gioco. Sceglilo lì per usarlo (Menu di gioco > Modalità modifica > Layout).",  -- 813
-        "preset sconosciuto '%s'",  -- 814
-        "Per una TV: testo più grande sull'HUD e nella chat.",  -- 815
-        "Per un monitor: testo alla sua dimensione normale.",  -- 816
-        "I nostri riquadri sono tornati al punto di partenza. Scegli il layout %s del gioco nella Modalità modifica (Menu di gioco > Modalità modifica > Layout).",  -- 817
-        "I preset impostano la distanza della telecamera",  -- 818
-        "un preset porta anche la telecamera alla distanza per cui è stato pensato il suo layout, una sola volta (poi zooma liberamente)",  -- 819
-        "Azione",  -- 820
-        "una visuale in terza persona: barre verticali sottili accanto al tuo personaggio, tutti gli effetti attivi; fuori combattimento tutto si dissolve",  -- 821
-        "Classico",  -- 822
-        "i nostri riquadri dove WoW li ha sempre messi, effetti più discreti, le barre del gamepad del gioco così come sono",  -- 823
-        "Minimale",  -- 824
-        "solo l'essenziale: i PNG amichevoli mostrano la targhetta (con cosa fanno) solo mentre li indichi, li miri o li hai come bersaglio; nomi senza titoli; fuori combattimento le tue barre restano un leggero accenno (la salute bassa si vede sempre)",  -- 825
-        "Mondo aperto",  -- 826
-        "uno schermo pulito per esplorare: barre sottili accanto a te che riposano sbiadite, targhette senza barre di risorsa, chat che svanisce",  -- 827
-        "Avventura",  -- 828
-        "dopo le avventure open world su console: parametri vitali accanto a te, un piccolo bersaglio in alto al centro, cittadini solo quando li indichi, chat che svanisce in fretta",  -- 829
-        "Soulslike",  -- 830
-        "le tue barre in alto a sinistra, una grande barra del bersaglio in basso al centro come quella di un boss, ogni colpo si sente",  -- 831
-        "Sparatutto",  -- 832
-        "barre verticali appena a destra del centro, vicino a dove miri, il bersaglio in alto, forte riscontro dei colpi",  -- 833
-        "Crossbar",  -- 834
-        "dopo gli MMO giocati con il controller: bersaglio e focus in alto al centro, le tue barre appena sopra le barre del gamepad, gruppo a sinistra, targhette complete",  -- 835
-        "ARPG",  -- 836
-        "dopo gli RPG d'azione: telecamera lontana, parametri vitali in basso a sinistra, bersaglio in alto al centro, nemici minori piccoli, ogni colpo rimbomba",  -- 837
-        "Bussola",  -- 838
-        "dopo gli RPG in prima persona: telecamera vicina, le tue barre in basso al centro, bersaglio sotto il bordo superiore, cittadini solo quando li indichi",  -- 839
-        "Incursione",  -- 840
-        "la disposizione di WoW con tutto ciò che serve a un gruppo: riquadri di gruppo e incursione, percentuali di salute e livelli sulle barre",  -- 841
-        "Segui i preset di ControllerCam",  -- 842
-        "scegliere un preset della telecamera in ControllerCam per ovunque sceglie anche il preset dell'HUD abbinato (la telecamera mantiene la sua distanza)",  -- 843
-        "Moderno",  -- 844
-        "imposta tutto l'HUD su un preset: action, classic, minimal, openworld, adventure, soulslike, shooter, crossbar, arpg, compass, raid",  -- 845
-        "il riquadro del bersaglio e le targhette compatti o completi, insieme",  -- 846
-        "il riquadro del bersaglio compatto o completo",  -- 847
-        "dimensiona il testo per una TV dall'altra parte della stanza o per un monitor a portata di braccio",  -- 848
-        "rimetti i nostri riquadri al punto di partenza, per il layout Moderno o Classico del gioco",  -- 849
-        "Tutta la tua configurazione (HUD, telecamera e layout del gioco): copia questa riga (Ctrl+C) per conservarla o condividerla.",  -- 850
-        "Incolla una riga di impostazioni dell'HUD (Ctrl+V) e accetta.",  -- 851
-        "Questa riga è danneggiata: copiala di nuovo, per intero.",  -- 852
-        "Questa riga è stata creata con una versione più recente: aggiorna l'addon.",  -- 853
-        "Questa non è una riga di impostazioni dell'HUD.",  -- 854
-        "Impostazioni importate: %d prese, %d escluse.",  -- 855
-        "È stata importata anche la configurazione della telecamera.",  -- 856
-        "La configurazione della telecamera è rimasta com'era.",  -- 857
-        "Il layout del gioco ora è '%s'.",  -- 858
-        "Il layout del gioco è rimasto com'era.",  -- 859
-        "le tue impostazioni come una riga di testo, da tenere o condividere",  -- 860
-        "prende le impostazioni da una riga di testo creata con /cchud export",  -- 861
-        "L'HUD è attivo mentre è in uso l'interfaccia gamepad. Le sue opzioni: Opzioni > AddOns > ControllerCam > HUD, oppure /cchud.",  -- 862
-        "Solo telecamera: l'HUD riposa e l'interfaccia del gioco resta com'era. /cchud on lo attiva.",  -- 863
-        "Preparare anche lo schermo per il controller? Aggiunge un layout chiamato CCHUD alla Modalità modifica del gioco, da scegliere lì: mette le righe dei recuperi sotto il bersaglio, lontano dai pulsanti del gamepad. I tuoi layout restano (/cchud setup lo propone di nuovo).",  -- 864
-        "Prepara",  -- 865
-        "Non ora",  -- 866
-        "ControllerCam include un'interfaccia per controller, l'HUD: i suoi riquadri delle unità, le barre dei nomi, la barra di lancio e altro mentre è in uso l'interfaccia gamepad. La vuoi, o solo la telecamera?",  -- 867
-        "Telecamera + HUD",  -- 868
-        "Solo telecamera",  -- 869
-        "Questo client non permette agli addon di cambiare il layout.",  -- 870
-        "chiedi di nuovo: la telecamera con l'HUD, o solo la telecamera",  -- 871
-        "proponi di nuovo il layout dello schermo fatto per l'HUD (Modalità modifica del gioco)",  -- 872
-        "Mostrato mentre è in uso l'interfaccia gamepad. Trascina i nostri riquadri nella Modalità Modifica del gioco.",  -- 873
-        "Preset",  -- 874
-        "Dimensionato per",  -- 875
-        "TV",  -- 876
-        "Monitor",  -- 877
-        "Icone dei pulsanti",  -- 878
-        "le icone che il gioco mostra per i pulsanti del tuo controller: trovate da sole per il controller in uso, o il tipo che scegli",  -- 879
-        "Carattere",  -- 880
-        "Reimposta il layout del gioco",  -- 881
-        "Provalo",  -- 882
-        "Avvia la demo",  -- 883
-        "Mostra ogni effetto dei colpi",  -- 884
-        "Esegui l'autoverifica",  -- 885
-        "Barre del gamepad: compatte / complete",  -- 886
-        "Esporta impostazioni",  -- 887
-        "Importa impostazioni",  -- 888
-        "Seleziona «Mostra opzioni avanzate» nella pagina principale per vedere tutte le impostazioni.",  -- 889
-        "Moduli",  -- 890
-        "Interruttori rapidi",  -- 891
-        "Generali",  -- 892
-        "HUD",  -- 893
-        "Il pannello delle opzioni non è disponibile in questo client.",  -- 894
-        "Attivo",  -- 895
-        "l'intero HUD; disattivo restituisce i riquadri del gioco",  -- 896
-        "Anche nell'interfaccia mouse e tastiera",  -- 897
-        "normalmente l'HUD funziona solo mentre è in uso l'interfaccia gamepad",  -- 898
-        "Metti da parte i riquadri del gioco",  -- 899
-        "nascondi i riquadri di giocatore, bersaglio e focus del gioco mentre sono mostrati i nostri",  -- 900
-        "Finestra di chat in alto a sinistra",  -- 901
-        "sposta la finestra di chat in alto a sinistra mentre l'HUD è in funzione",  -- 902
-        "Barre verticali a riposo",  -- 903
-        "quanto restano visibili le barre verticali a salute piena fuori dal combattimento (0 le nasconde)",  -- 904
-        "Colori di classe",  -- 905
-        "colora la tua barra e quelle degli altri giocatori in base alla classe",  -- 906
-        "Icone di classe",  -- 907
-        "un'icona di classe davanti al nome di un giocatore sul bersaglio e sul bersaglio del bersaglio",  -- 908
-        "Minaccia sul riquadro del bersaglio",  -- 909
-        "un'icona a scudo e un bagliore sul riquadro del bersaglio: rosso mentre ti attacca, rosso e giallo quando stai per attirarlo, giallo e blu quando lo stai perdendo, blu quando non è su di te",  -- 910
-        "Barre compatte ovunque",  -- 911
-        "il riquadro del bersaglio e le targhette in stile compatto, poco più di metà larghezza (ognuno si può ancora impostare da sé; i preset non lo cambiano mai)",  -- 912
-        "Riquadro bersaglio compatto",  -- 913
-        "il riquadro del bersaglio poco più largo della metà",  -- 914
-        "Colori della salute in combattimento",  -- 915
-        "in combattimento, le barre della salute passano dal verde al giallo al rosso mentre la salute scende",  -- 916
-        "Ombra dietro il testo",  -- 917
-        "una morbida fascia scura dietro il testo del bersaglio, per mantenerlo leggibile",  -- 918
-        "Dimensione del testo",  -- 919
-        "dimensione del testo sui nostri riquadri",  -- 920
-        "Dimensione dei riquadri",  -- 921
-        "dimensione dei nostri riquadri unità",  -- 922
-        "Le tue barre in combattimento",  -- 923
-        "quanto sono visibili le tue barre, famiglio e focus in combattimento finché qualcosa non richiede attenzione",  -- 924
-        "Complete con salute sotto",  -- 925
-        "le tue barre tornano complete quando la tua salute scende sotto questo valore",  -- 926
-        "Complete con mana sotto",  -- 927
-        "le tue barre tornano complete quando il tuo mana scende sotto questo valore",  -- 928
-        "Barra del giocatore a riposo",  -- 929
-        "quanto resta visibile la barra del giocatore a salute piena o fuori combattimento (0 la nasconde)",  -- 930
-        "Aiuto venditore e banca",  -- 931
-        "il pulsante Vendi robaccia del venditore chiede cosa vendere; spostamento rapido presso venditore e banca",  -- 932
-        "Mostra opzioni avanzate",  -- 933
-        "tutte le impostazioni, non solo gli interruttori principali",  -- 934
-        "Riquadro del giocatore",  -- 935
-        "la nostra barra del giocatore, in alto a sinistra",  -- 936
-        "Riquadro del bersaglio",  -- 937
-        "la nostra barra del bersaglio, in alto al centro",  -- 938
-        "Barra dell'animale",  -- 939
-        "una piccola barra del famiglio sotto la barra del giocatore, o accanto alle barre verticali",  -- 940
-        "Riquadro del focus",  -- 941
-        "il nostro riquadro del focus",  -- 942
-        "sottili barre verticali di salute e potere accanto al personaggio, per una visuale in terza persona (al posto della barra del giocatore)",  -- 943
-        "Vendi robaccia all'apertura di un venditore",  -- 944
-        "vendi la robaccia secondo le tue regole appena si apre un venditore",  -- 945
-        "Armi e armature bianche sono robaccia",  -- 946
-        "considera spazzatura armi e armature bianche (mai attrezzi, canne da pesca, equipaggiamento con un uso o ciò che potrebbe essere un miglioramento; chiede sempre prima)",  -- 947
-        "Deposita quando si apre la banca",  -- 948
-        "gli oggetti segnati per la banca e, se attivo, ciò che la banca contiene già, entrano da soli",  -- 949
-        "l'opzione del gioco; il nostro piccolo riquadro la segue",  -- 950
-        "Gestore dei tempi di recupero",  -- 951
-        "il Gestore dei tempi di recupero del gioco",  -- 952
-        "Visualizzazione risorse personali",  -- 953
-        "la tua salute e la tua risorsa sotto il tuo personaggio",  -- 954
-        "La banca prende i reagenti da sola",  -- 955
-        "l'opzione del gioco per la banca",  -- 956
-        "Tooltip all'inizio di un buff",  -- 957
-        "l'opzione del gioco: il tooltip di un buff compare per un momento quando viene applicato (IU gamepad)",  -- 958
-        "Colori di classe per i nomi nella chat",  -- 959
-        "l'impostazione della chat del gioco per ogni tipo di chat insieme: il nome di un giocatore nel colore della sua classe",  -- 960
-        "apri il pannello delle opzioni (Opzioni > AddOns > ControllerCam HUD)",  -- 961
-        "Riquadri",  -- 962
-        "Dissolvenza dello schermo",  -- 963
-        "Effetti",  -- 964
-        "Aspetto",  -- 965
-        "Missioni, chat e mappa",  -- 966
-        "Borse, banca e venditore",  -- 967
-        "Pesca",  -- 968
-        "Accessibilità",  -- 969
-        "Opzioni native",  -- 970
-        "%s  |  Interfaccia gamepad: %s  |  in esecuzione: %s",  -- 971
-        "giocatore %s, bersaglio %s, animale %s, focus %s  |  riquadri del gioco messi da parte: %s  |  chat spostata: %s",  -- 972
-        "opzioni native: bersaglio del bersaglio %s, Gestore dei tempi di recupero %s, risorse personali %s",  -- 973
-        "dimensione testo %d%%  |  ombra del testo: %s",  -- 974
-        "aiuto venditore e banca: %s  |  vendita automatica: %s  |  equipaggiamento bianco è robaccia: %s",  -- 975
-        "visibilità a riposo %d%%  |  scala %d%%  |  colori di classe: %s",  -- 976
-        "Un HUD minimale da gioco d'azione per l'interfaccia gamepad.",  -- 977
-        "attivo",  -- 978
-        "disattivo: i riquadri del gioco sono tornati",  -- 979
-        "usa anche nell'interfaccia mouse e tastiera: %s",  -- 980
-        "riquadri del gioco messi da parte: %s",  -- 981
-        "chat spostata in alto a sinistra: %s",  -- 982
-        "colori di classe: %s",  -- 983
-        "Questo client non ha quell'opzione.",  -- 984
-        "%s: %s (l'opzione propria del gioco)",  -- 985
-        "Il gioco non l'ha accettato in questo momento.",  -- 986
-        "aiuto venditore e banca: %s",  -- 987
-        "vendita automatica: %s",  -- 988
-        "equipaggiamento bianco è robaccia: %s",  -- 989
-        "L'aiuto venditore è disattivato.",  -- 990
-        "uso: /cchud sell [junk | recommended | white | green | blue]",  -- 991
-        "deposita gli oggetti segnati all'apertura della banca: %s",  -- 992
-        "uso: /cchud junk <item> (Maiusc+clic sull'oggetto per inserirlo nella riga di chat)",  -- 993
-        "oggetto %d: robaccia, venduto con il resto",  -- 994
-        "oggetto %d: conservato, mai venduto",  -- 995
-        "oggetto %d: per la banca",  -- 996
-        "ombra del testo: %s",  -- 997
-        "uso: /cchud text <80-250>",  -- 998
-        "dimensione testo %d%%",  -- 999
-        "demo interrotta",  -- 1000
-        "L'HUD non è in funzione.",  -- 1001
-        "Demo in corso: un combattimento inventato in ciclo. Digita di nuovo /cchud demo per fermarla.",  -- 1002
-        "uso: /cchud idle <0-100>",  -- 1003
-        "visibilità a riposo %d%%",  -- 1004
-        "uso: /cchud scale <50-200>",  -- 1005
-        "scala %d%%",  -- 1006
-        "Trascina i riquadri, poi digita /cchud lock.",  -- 1007
-        "riquadri bloccati",  -- 1008
-        "Tutto è tornato com'era all'inizio: impostazioni, riquadri e layout dello schermo (i tuoi contrassegni del venditore e lo storico dei prezzi restano).",  -- 1009
-        "i riquadri sono tornati dove erano all'inizio",  -- 1010
-        "comando sconosciuto '%s'. Digita /cchud help",  -- 1011
-        "Elenco errori svuotato.",  -- 1012
-        "Nessun errore registrato.",  -- 1013
-        "%d errori registrati (il più recente per ultimo). /cchud errors clear svuota l'elenco.",  -- 1014
-        "mostra lo stato",  -- 1015
-        "attiva o disattiva l'HUD (disattivo restituisce i riquadri del gioco)",  -- 1016
-        "usa l'HUD anche nell'interfaccia mouse e tastiera",  -- 1017
-        "usa il nostro riquadro per questo, oppure quello del gioco",  -- 1018
-        "barre verticali sottili di salute e potere accanto al tuo personaggio",  -- 1019
-        "bersaglio del bersaglio (l'opzione propria del gioco, anche nei suoi menu)",  -- 1020
-        "il Gestore dei tempi di recupero del gioco (l'opzione propria del gioco)",  -- 1021
-        "la tua salute e la tua risorsa sotto il tuo personaggio (l'opzione propria del gioco)",  -- 1022
-        "il tooltip che compare quando inizia un buff (l'opzione propria del gioco)",  -- 1023
-        "mantieni visibili i riquadri di giocatore e bersaglio del gioco (on) o mettili da parte (off)",  -- 1024
-        "presso un venditore: scegli cosa vendere (anche: sell junk, sell recommended, sell white | green | blue)",  -- 1025
-        "conta armi e armature bianche come robaccia",  -- 1026
-        "segna un oggetto: sempre venduto, mai venduto o per la banca (Maiusc+clic per inserirlo nella riga di chat)",  -- 1027
-        "in banca: deposita ciò che la banca contiene già e tutto ciò che è segnato per lei",  -- 1028
-        "in banca: prendere ciò di cui porti già qualcosa",  -- 1029
-        "deposita appena si apre la banca",  -- 1030
-        "la banca prende i reagenti da sola (l'opzione propria del gioco)",  -- 1031
-        "dimensione del testo, in percentuale (150 si legge bene su una TV)",  -- 1032
-        "quanto resta visibile la barra del giocatore quando non succede nulla (0 la nasconde)",  -- 1033
-        "dimensione dei riquadri, in percentuale",  -- 1034
-        "trascina i riquadri dove vuoi (anche la Modalità Modifica del gioco lo permette)",  -- 1035
-        "rimetti i riquadri dove erano all'inizio",  -- 1036
-        "avvia un breve combattimento inventato per vedere come reagiscono i riquadri (di nuovo per fermarlo)",  -- 1037
-        "confronta ciò che è a schermo con le impostazioni (check elenca ogni riga)",  -- 1038
-        "salva una descrizione dell'interfaccia gamepad di questo client (per la risoluzione dei problemi)",  -- 1039
-        "mostra questo elenco",  -- 1040
-        "gli ultimi errori dell'HUD, anche dopo un ricaricamento (per segnalarli)",  -- 1041
+        "Segui la missione più vicina",  -- 544
+        "la missione che il gioco ti indica è sempre la più vicina della tua lista mentre viaggi; una che segui tu resta com'è per dieci minuti",  -- 545
+        "Elenco missioni: obiettivi brevi",  -- 546
+        "gli obiettivi nell'elenco delle missioni dicono solo il necessario, con un'icona del tipo davanti: un teschio e 0/1 Capitano Terrorsorto, non 0/1 Capitano Terrorsorto ucciso",  -- 547
+        "Progressi delle missioni in chat",  -- 548
+        "una breve riga in chat quando una missione avanza: Collane d'osso insanguinate: 4/25, un obiettivo completato, una missione pronta da consegnare",  -- 549
+        "Progressi delle missioni al tuo gruppo",  -- 550
+        "in un gruppo (non in un'incursione) le stesse righe vanno nella chat di gruppo perché gli altri le vedano, a un attimo l'una dall'altra; le vedi lì anche tu",  -- 551
+        "Tieni ciò che serve alle tue missioni",  -- 552
+        "un oggetto che una missione del tuo registro chiede ancora, o uno che avvia una missione che puoi ancora fare, è segnato come Missione: mai venduto né messo all'asta per te",  -- 553
+        "indica un ordine consigliato per le tue missioni: consegna ciò che è pronto, poi la più vicina che puoi fare da solo, poi il resto",  -- 554
+        "A sinistra delle missioni",  -- 555
+        "A destra delle missioni",  -- 556
+        "Sotto le missioni",  -- 557
+        "La lista da farmare è piena.",  -- 558
+        "Lista da farmare: %s, %d voluti.",  -- 559
+        "Da farmare",  -- 560
+        "altri %d",  -- 561
+        "Ancora niente da farmare.",  -- 562
+        "Una pila in più",  -- 563
+        "Togli",  -- 564
+        "Svuota",  -- 565
+        "Fatto",  -- 566
+        "Togliere tutto dalla lista da farmare?",  -- 567
+        "Lista da farmare: scegli / fatto",  -- 568
+        "Lista da farmare: aggiungi l'oggetto indicato",  -- 569
+        "Non è nella lista da farmare.",  -- 570
+        "La lista da farmare è vuota.",  -- 571
+        "Lista da farmare: dove si trova",  -- 572
+        "Lista da farmare accanto all'elenco delle missioni",  -- 573
+        "ciò che intendi raccogliere, con quanti ne hai e quanti ne vuoi: le tue borse e la banca e quelle degli altri tuoi personaggi su questo reame. Aggiungi i reagenti di un piano di avanzamento con un pulsante, o qualsiasi oggetto",  -- 574
+        "la lista da farmare a sinistra dell'elenco delle missioni, alla sua destra o sotto le sue missioni",  -- 575
+        "la lista da farmare accanto all'elenco delle missioni: scegli col controller; add <oggetto> [quanti], remove <oggetto>, clear, o left / right / bottom per la posizione",  -- 576
+        "Non in combattimento.",  -- 577
+        "Questo client non ha barre del gamepad.",  -- 578
+        "Questo client non permette agli addon di modificarlo; usa la Modalità Modifica.",  -- 579
+        "barre del gamepad: %s",  -- 580
+        "compatte",  -- 581
+        "complete",  -- 582
+        "Barre gamepad sottili",  -- 583
+        "nascondi la grafica pesante dietro le barre azione del gamepad e disegnale più piccole",  -- 584
+        "Dimensione barre gamepad",  -- 585
+        "dimensione delle barre gamepad con le barre sottili attive, in percentuale",  -- 586
+        "le barre del gamepad del gioco in modalità compatta o completa (come la sua impostazione della Modalità Modifica)",  -- 587
+        "Dissolvi fuori combattimento",  -- 588
+        "/cchud fade <parte> on | off ne imposta una; all per tutta la dissolvenza.",  -- 589
+        "le barre del controller, la minimappa, l'elenco delle missioni, il misuratore di danni e la barra dell'esperienza riposano insieme fuori dal combattimento, e tornano per uno scontro, un grilletto premuto o un bersaglio nemico",  -- 590
+        "Lo schermo a riposo",  -- 591
+        "quanto restano visibili le parti dello schermo a riposo fuori dal combattimento (0 le nasconde)",  -- 592
+        "Sfuma: barre del controller",  -- 593
+        "Sfuma: minimappa",  -- 594
+        "Sfuma: elenco delle missioni",  -- 595
+        "Sfuma: misuratore di danni",  -- 596
+        "Sfuma: barra dell'esperienza",  -- 597
+        "Sfuma: benefici",  -- 598
+        "Sfuma: righe dei recuperi",  -- 599
+        "se questa parte dello schermo sfuma con il resto fuori dal combattimento (disattivato: resta sempre com'è)",  -- 600
+        "la dissolvenza dello schermo fuori dal combattimento: cosa sfuma (minimappa, elenco delle missioni e il resto), ognuno attivo o no",  -- 601
+        "Salvato: scrivi /reload perché il gioco lo scriva su disco.",  -- 602
+        "Pulsanti di postura e del famiglio sopra le barre",  -- 603
+        "i pulsanti delle posture e dei comandi del famiglio stanno dove c'erano le icone verde e rossa di bersaglio, così la loro ruota si apre tutta sullo schermo; quelle icone vengono nascoste",  -- 604
+        "elenca dove si trovano le parti delle barre del controller e cosa riposa (per la diagnosi)",  -- 605
+        "Auto",  -- 606
+        "Generico",  -- 607
+        "quelle del gioco",  -- 608
+        "Icone dei pulsanti: %s.",  -- 609
+        "Nessun controller è in uso in questo momento, o il gioco non ha stili di icone: verrà impostato quando ce ne sarà uno.",  -- 610
+        "Il gioco non ha accettato le icone dei pulsanti.",  -- 611
+        "Il controller non dice che cos'è: le icone restano come le ha il gioco.",  -- 612
+        "le icone che il gioco mostra per i pulsanti del tuo controller: auto (in base al controller in uso), xbox, playstation, switch, steam, generic (numeri), oppure game per lasciarle come le ha il gioco",  -- 613
+        "Righe dei recuperi lontane dalle barre del gamepad",  -- 614
+        "le righe dei recuperi del gioco stanno sotto il bersaglio invece che sopra i pulsanti del gamepad, un po' più piccole (solo con i layout integrati del gioco: con un tuo layout restano dove le hai messe)",  -- 615
+        "Modalità pesca: disattivata.",  -- 616
+        "Pesca: %s per lanciare",  -- 617
+        "Niente esca: %s due volte per usare %s",  -- 618
+        "%s per riporre la canna",  -- 619
+        "Modalità pesca: %s per lanciare la lenza, e di nuovo per ferrare il pesce quando il galleggiante si muove.",  -- 620
+        "%s per ferrare, %s per rilanciare",  -- 621
+        "La modalità pesca richiede una canna da pesca tra le mani.",  -- 622
+        "Non conosci Pesca.",  -- 623
+        "Modalità pesca: un pulsante lancia e aggancia",  -- 624
+        "Pulsante di pesca: %s",  -- 625
+        "Pesca con un pulsante",  -- 626
+        "con una canna da pesca in mano: il tuo tasto di interazione per lanciare la lenza quando non c'è nulla con cui interagire, e di nuovo per ferrare il pesce quando il galleggiante si muove; il pescato viene raccolto per te. B per riporre la canna e riprendere le tue armi",  -- 627
+        "Rilancia con una pressione",  -- 628
+        "mentre il galleggiante è in acqua, il tuo pulsante di pesca rilancia la lenza con una pressione, e A ferra il pesce (il gioco non dà alcun segnale di abboccata da aspettare, quindi un solo pulsante non può fare entrambe le cose); disattivato: il pulsante di pesca ferra, come l’interazione del gioco",  -- 629
+        "Esca con doppia pressione",  -- 630
+        "premi due volte rapidamente il pulsante di pesca: la seconda pressione mette la migliore esca delle tue borse sulla canna, quando la canna non ne ha",  -- 631
+        "Barre del controller nascoste durante la pesca",  -- 632
+        "con una canna da pesca in mano le barre del controller sono nascoste, per vedere bene l'acqua; l'avviso di pesca mostra il tasto per lanciare. Tornano appena inizia un combattimento o la canna viene riposta",  -- 633
+        "pesca con un pulsante disattivata per ora, o di nuovo attiva (con una canna in mano si attiva da sola)",  -- 634
+        "il pulsante che pesca: all'inizio il tuo pulsante di interazione (Quadrato o X), o qualsiasi altro, per esempio un grilletto (rt)",  -- 635
+        "La costa di Durotar è roccia rossa e bassi fondali tiepidi. I troll delle Isole dell'Eco dicono che gli sgombri passano più fitti quando la marea porta l'odore dei fuochi di cucina delle isole.",  -- 636
+        "I laghi di Mulgore sono piccoli, limpidi e pazienti. I tauren ci pescano come fanno tutto il resto: con calma, e ringraziando.",  -- 637
+        "Ogni oasi delle Savane è un luogo d'incontro. Qualunque cosa ci beva di giorno, di notte lì sotto nuota qualcos'altro.",  -- 638
+        "Le pozze di Teldrassil stanno all'ombra di un albero solo. I pescatori elfi della notte giurano che i pesci di lì non hanno mai visto il sole e non ne sentono la mancanza.",  -- 639
+        "L'acqua di Rivafosca è grigia, fredda e piena di relitti. Metà di ciò che abbocca al largo di Auberdine ha messo su casa nel carico perduto di qualcuno.",  -- 640
+        "I fiumi di Valtetra scorrono sotto foglie più vecchie di gran parte dei regni. I pesci sono svelti, e le Sentinelle ancora più svelte a chiederti che cosa ci fai lì.",  -- 641
+        "Giù tra le Mille Guglie l'acqua è poca e custodita gelosamente. Un pesce di qui il suo posto se l'è guadagnato.",  -- 642
+        "I laghi delle Vette degli Artigli stanno in alto, gelidi, tra le cime. I goblin li avrebbero già prosciugati se non ci si pescasse così bene.",  -- 643
+        "La costa di Desolanda è ossa e risacca grigia. Laggiù qualcosa ha un debole per entrambe.",  -- 644
+        "Feralas è verde fino al pelo dell'acqua. I suoi fiumi sono profondi, caldi e vivi, parecchio vivi.",  -- 645
+        "Nessuno sa bene dove finisca la terra e cominci l'acqua ad Acquemorte. Pesca dalla riva, e poi contati le dita dei piedi.",  -- 646
+        "Steamwheedle Port ha l'unica acqua degna di questo nome in tutta Tanaris. I goblin ti venderanno il diritto di pescarci, anche due volte se li lasci fare.",  -- 647
+        "Sotto la baia luminosa di Azshara giace una città sommersa. I vecchi pescatori dicono che i pesci grossi vivono in quelli che un tempo erano i suoi giardini.",  -- 648
+        "Le pozze di Vilbosco brillano, e non in senso buono. Quello che ci nuota ancora è testardo oltre ogni ragionevolezza.",  -- 649
+        "Le sorgenti calde e i laghi orlati di catrame del Cratere di Un'Goro hanno conservato cose che il resto del mondo ha dimenticato. Alcune mordono.",  -- 650
+        "Il Lago Elune'ara, a Radaluna, è calmo come un respiro trattenuto. I druidi chiedono solo che tu non prenda più di quanto mangerai.",  -- 651
+        "Silitus è sabbia, vento e rumore d'ali. Se qui hai trovato dell'acqua in cui pescare, non dirlo a nessuno.",  -- 652
+        "I laghi di Fontefredda gelano ai bordi e fumano al centro. I pesci lì sono grassi per il freddo e valgono la camminata.",  -- 653
+        "Nelle pozze di Orgrimmar pescano i peoni che non hanno di meglio da fare e i vecchi soldati che dicono lo stesso. Gli uni e gli altri ti raccontano che quello grosso è scappato.",  -- 654
+        "Un pesce degli stagni di Picco del Tuono ha passato tutta la vita molto al di sopra delle pianure. Sembra averla presa con calma.",  -- 655
+        "Darnassus cura le sue acque con la stessa attenzione dei suoi templi. I pesci si sono abituati a essere ammirati.",  -- 656
+        "I laghi dei monti di Alterac sono neve sciolta, e gli ogre e il Sindacato ci pescano quando nessuno guarda.",  -- 657
+        "Le rive degli Altopiani d'Arathi hanno visto più eserciti che pescatori. I pesci hanno smesso da un pezzo di badare a quale stendardo sventoli sopra l'acqua.",  -- 658
+        "Le Maleterre sono polvere da un capo all'altro. Qui un pesce che abbocca è un piccolo miracolo: trattalo come tale.",  -- 659
+        "La costa delle Terre Devastate è rossa, spazzata e silenziosa. Qualunque cosa viva in quella risacca ha imparato a convivere con parecchio.",  -- 660
+        "I laghi delle Radure di Tirisfal giacciono immobili sotto un cielo malaticcio. I Reietti ci pescano per abitudine: i morti non mangiano granché, ma ricordano che gli piaceva.",  -- 661
+        "La lunga costa della Selva Pinargento è tutta nebbia e ombra di pini. Si pesca bene, ed è l'unica cosa allegra che si senta dire di quel posto.",  -- 662
+        "I fiumi delle Terre Infette Occidentali scorrono ancora, anche se non puliti. Quello che ne tiri fuori, guardalo due volte.",  -- 663
+        "Pochi pescano nelle Terre Infette Orientali, e ancora meno lo ammettono. L'acqua conserva quello che il morbo ne ha lasciato.",  -- 664
+        "Il fiume di Colletorto e la sua lunga riva meridionale hanno sfamato entrambe le parti di ogni lite scoppiata per averli.",  -- 665
+        "Le Entroterre tengono i loro laghi in alto tra gli alberi, dove i nani Granmartello pescano in groppa ai grifoni quando credono che nessuno li veda.",  -- 666
+        "I laghi di Dun Morogh sono orlati di ghiaccio per gran parte dell'anno. Un nano taglia un buco, si siede con una pinta e la chiama una buona giornata, qualunque cosa abbocchi.",  -- 667
+        "La Gola Rovente ha la lava dove le altre terre hanno i fiumi. Portati piuttosto qualcosa da bere.",  -- 668
+        "Le Steppe Ardenti sono cenere e braci. Se qui l'acqua ti dà qualcosa, sarà bollente.",  -- 669
+        "Ogni bambino di Elwynn impara a pescare a Crystal Lake o a Stone Cairn Lake. I pesciolini di lì li fregano da generazioni.",  -- 670
+        "Il Valico Ventomorto ha poca acqua e ancora meno accoglienza. Quello che sta nelle pozze sotto Karazhan è meglio lasciarlo dov'è.",  -- 671
+        "Il fiume al margine di Boscovespro è nero a qualsiasi ora. Ai pesci il buio non sembra dare fastidio; ai pescatori sì.",  -- 672
+        "Il Loch è l'orgoglio di Loch Modan, trattenuto dalla grande diga Stonewrought. I nani ci misurano ogni storia di pesca, e di solito vince il Loch.",  -- 673
+        "Il Lago Placido, tra le Montagne Crestarossa, è bello come un dipinto e ci si pesca da ogni molo di Borgolago. La gente del paese conosce ogni punto buono e non te ne dirà nemmeno uno.",  -- 674
+        "Dai fiumi della giungla al selvaggio capo meridionale, Rovotorto ha le acque più ricche del continente. I pescatori di Baia del Bottino ci organizzano un torneo, e barano quasi tutti.",  -- 675
+        "La Palude del Dolore è acqua verde sotto alberi verdi. I pesci sanno di fango, e alla gente del posto piacciono così.",  -- 676
+        "I campi delle Marche Occidentali sono andati in malora, la costa no. Chi è rimasto vive della lunga riva grigia.",  -- 677
+        "Le Paludi Grigie hanno il nome che si meritano. I moli di Porto di Menethil sono il posto più asciutto da cui pescarci, e i crocolischi lo sanno.",  -- 678
+        "Nei canali di Roccavento pescano bambini, pensionati e almeno un nobile in incognito. Nessuno chiede che cos'altro ci sia, nei canali.",  -- 679
+        "La Forlorn Cavern custodisce l'unica pozza tranquilla di Forgiardente. I vecchi nani ci pescano per ore senza dire una parola.",  -- 680
+        "I canali di Sepulcra scorrono di un verde che con le alghe non c'entra nulla. I Reietti che ci pescano non lo fanno per la cena.",  -- 681
+        "Il primo pesce che quasi ogni pescatore tira a riva, e così vistoso che non se lo scorda.",  -- 682
+        "Sguscia via, fila veloce e si trova lungo ogni costa calda. Alla griglia è meglio di quanto il nome lasci pensare.",  -- 683
+        "Tutto bocca, e mai così felice come nell'acqua che tu non berresti.",  -- 684
+        "Taglia piccola, denti tanti, paura nessuna. Si dice che un banco intero abbia cacciato un orso dal Loch.",  -- 685
+        "Un lampo di colore sotto la risacca. Per i marinai, averne uno all'amo porta fortuna al viaggio.",  -- 686
+        "Un paziente abitante del fondale, con i baffi di un anziano dei nani.",  -- 687
+        "Nessuno ne mangia due volte. Gli alchimisti comprano tutto il pescato che trovano.",  -- 688
+        "Le pinne brillano come braci sotto la cenere, e l'olio che se ne spreme brucia quasi altrettanto bene.",  -- 689
+        "Una corazza da piccolo scudo. La carne che c'è dentro vale la fatica.",  -- 690
+        "Qualcosa nell'acqua vicino alle Caverne dei Lamenti ha cambiato questo pesce. Mangiarne uno potrebbe cambiare anche te, per un po'.",  -- 691
+        "La gente di fiume dice che mangiarne schiarisce la mente. È il nuotare controcorrente a dare la saggezza.",  -- 692
+        "Più anni, più stazza e più saggezza del cugino, e al tuo amo ha abboccato lo stesso.",  -- 693
+        "Un duro combattente dei caldi mari del sud, e un classico sul menu di ogni taverna da Baia del Bottino a Meccania.",  -- 694
+        "La fronte luccica come vero mithril. Più di un minatore ha provato a fonderla.",  -- 695
+        "Dalle scaglie, bollite, si ricava un olio che rende la pelle dura come roccia. Preferisce la notte.",  -- 696
+        "Luccica come una corazza da parata, e pesa quasi altrettanto.",  -- 697
+        "Si avvicina a riva solo nei mesi freddi, e i cuochi che se ne intendono aspettano tutto l'anno.",  -- 698
+        "Passa quando le giornate sono lunghe. La gente di costa ci regola la stagione.",  -- 699
+        "Si afferra a metà, e una volta sola.",  -- 700
+        "Un pesce di fiume delle terre selvagge, con le branchie rosse come le pitture di guerra di un troll.",  -- 701
+        "Mangia quando fa buio. Una zuppa fatta con questo pesce calma i nervi di chi lancia incantesimi.",  -- 702
+        "Mangia di giorno, in quasi tutto il contrario del cugino notturno, eppure ne condivide le acque.",  -- 703
+        "Non è proprio un pesce. Non è d'accordo con l'idea di finire all'amo, e te lo farà sapere.",  -- 704
+        "Ha il pallore del ghiaccio di fiume e viene dai laghi freddi e limpidi del nord.",  -- 705
+        "Ti serviranno tutte e due le mani, e magari un amico.",  -- 706
+        "%.1f lb",  -- 707
+        "Nuovo nel tuo diario di pesca: %s, %s.",  -- 708
+        "Nuovo nel tuo diario di pesca: %s.",  -- 709
+        "Il tuo %s più pesante finora: %s (prima %s).",  -- 710
+        "Diario di pesca",  -- 711
+        "ogni cattura viene scritta nel tuo diario di pesca: quante di ogni tipo, dove l'hai presa la prima volta, e un peso inventato per divertimento con il tuo record per ciascuna (/cchud journal lo apre)",  -- 712
+        "Esca %s",  -- 713
+        "Nessuna esca",  -- 714
+        "Presi %d",  -- 715
+        "Scappati %d",  -- 716
+        "Interfaccia di pesca",  -- 717
+        "con una canna da pesca tra le mani: i pesci dell'acqua in cui ti trovi (quelli che non hai ancora preso qui restano nascosti), la tua abilità di pesca e ciò che aggiunge la tua esca, quanti ne hai presi e quanti sono scappati, quanto dura la tua esca, e le tue ultime catture",  -- 718
+        "Un curioso: +%d%%",  -- 719
+        "Tieni l'esca accanto al pesce",  -- 720
+        "Prossima cattura +%d%%",  -- 721
+        "Tieni premuto %s: l’esca corre lungo la lenza",  -- 722
+        "%d di fila",  -- 723
+        "Un gioco mentre il galleggiante è in acqua",  -- 724
+        "si gioca sulla barra di lancio mentre la lenza è in acqua: tieni premuto un grilletto e l’esca corre lungo la lenza, rilascialo e torna indietro alla deriva; tienila accanto all’ombra del pesce. Meglio giochi, più pesa il peso inventato della prossima cattura. Non occupa alcun pulsante e non tocca mai il lancio né la cattura",  -- 725
+        "%d presi, %d tipi, %d scappati",  -- 726
+        "Il più pesante: %s, %s",  -- 727
+        "Pesci",  -- 728
+        "Acque",  -- 729
+        "Ancora niente. Porta una canna all'acqua.",  -- 730
+        "Presi: %d",  -- 731
+        "Il più pesante: %s, a %s",  -- 732
+        "Prima cattura: %s",  -- 733
+        "Presi qui: %d",  -- 734
+        "Tipi trovati qui: %d",  -- 735
+        "Scegli",  -- 736
+        "Chiudi",  -- 737
+        "apri o chiudi il tuo diario di pesca: ogni tipo che hai preso, il più pesante di ciascuno, e le acque in cui hai pescato",  -- 738
+        "La chat svanisce quando è tranquilla",  -- 739
+        "il testo della chat svanisce dopo qualche secondo senza nuovi messaggi",  -- 740
+        "Secondi prima che la chat svanisca",  -- 741
+        "quanto resta il testo della chat prima di svanire",  -- 742
+        "Coordinate sulla mappa",  -- 743
+        "le tue coordinate sotto la mappa del mondo",  -- 744
+        "%d messaggi nascosti come spam da quando hai effettuato l'accesso.",  -- 745
+        "%d di questi erano reclutamenti di gilda ripetuti.",  -- 746
+        "Icona di classe e livello nella chat",  -- 747
+        "l'icona di classe e il livello di un giocatore tra parentesi quadre davanti al suo nome, quando il gioco ce li fa conoscere",  -- 748
+        "Nomi dei canali brevi nella chat",  -- 749
+        "il canale davanti a una riga, abbreviato: [P] gruppo, [PL] capogruppo, [G] gilda, [O] ufficiale, [R] incursione, [RL] capo incursione, [I] istanza, e un canale numerato col suo numero, [1]",  -- 750
+        "Solo nomi propri in chat",  -- 751
+        "un nome con cognome appare col solo nome proprio (Jory Spleeneater parla come Jory); un sussurro o un clic destro su di esso raggiunge comunque il nome completo",  -- 752
+        "Dimensione del testo della chat",  -- 753
+        "la dimensione del testo nelle finestre della chat, in proporzione a quella propria del gioco (l'impostazione del gioco resta com'è)",  -- 754
+        "Nascondi venditori di oro e annunci ripetuti",  -- 755
+        "i messaggi che vendono oro o servizi con un indirizzo web, e lo stesso messaggio ripetuto da un giocatore, vengono nascosti (mai quelli del tuo gruppo, gilda o amici)",  -- 756
+        "Nascondi i reclutamenti di gilda ripetuti",  -- 757
+        "nei canali pubblici il messaggio di reclutamento di una gilda viene mostrato una volta; lo stesso dello stesso giocatore, o uno quasi uguale, entro 15 minuti viene nascosto (mai quelli del tuo gruppo, gilda o amici)",  -- 758
+        "elenca i messaggi della chat nascosti come spam di recente",  -- 759
+        "Volo",  -- 760
+        "destinazione sconosciuta",  -- 761
+        "stimato dalla distanza",  -- 762
+        "primo volo su questa rotta: sto imparando la sua durata",  -- 763
+        "atterraggio",  -- 764
+        "%s: circa %s, stimato dalla distanza",  -- 765
+        "%s: circa %s",  -- 766
+        "%s: primo volo su questa rotta, durata sconosciuta",  -- 767
+        "In volo, destinazione sconosciuta",  -- 768
+        "%s: durata del volo imparata, %s",  -- 769
+        "%d rotte di volo conosciute.",  -- 770
+        "Voli: durata e conto alla rovescia",  -- 771
+        "in volo, la destinazione e la durata vengono dette in chat, e una barra in cima allo schermo conta alla rovescia fino all'atterraggio; la durata di ogni rotta si impara dai tuoi voli",  -- 772
+        "Voli: la tua cavalcatura lungo la barra",  -- 773
+        "un grifone, un cavaliere del vento o un pipistrello (quello che ti ha dato il maestro di volo) plana lungo la barra del volo verso dove atterri",  -- 774
+        "elenca le rotte di volo di cui si conosce la durata",  -- 775
+        "A terra! +%d",  -- 776
+        "Tra le nuvole: la serie finisce",  -- 777
+        "%d oro di volo",  -- 778
+        "%s battere le ali",  -- 779
+        "%s rete",  -- 780
+        "%s alta quota",  -- 781
+        "%s: torna al gioco (%d oro di volo)",  -- 782
+        "%s: un gioco durante il viaggio",  -- 783
+        "Il gioco di volo è disattivato: /cchud flightgame on",  -- 784
+        "Il gioco di volo si gioca durante un volo.",  -- 785
+        "Non in combattimento.",  -- 786
+        "Gioco di volo: gioca / alta quota",  -- 787
+        "Voli: un gioco durante il viaggio",  -- 788
+        "in volo viene proposto un piccolo gioco sotto la barra di volo, e un pulsante lo avvia (solo quel pulsante è occupato finché non lo premi): fai battere le ali alla tua cavalcatura tra le nuvole e cattura con la rete i cavalieri che arrivano di fronte, facendoli atterrare in cambio di oro di volo. Lo stesso pulsante di nuovo è alta quota: il gioco viene messo via e i pulsanti tornano al gioco. Mai in combattimento, sparisce all'atterraggio",  -- 789
+        "in volo: avvia il gioco di volo, o portalo in alta quota e ritorno",  -- 790
+        "Un volo è un buon momento per farlo.",  -- 791
+        "Stai giocando da %s.",  -- 792
+        "È ora di un sorso d'acqua",  -- 793
+        "Promemoria per bere acqua",  -- 794
+        "ogni tanto mentre giochi, un gentile promemoria per bere un sorso d'acqua (mai in combattimento)",  -- 795
+        "Promemoria dell'acqua ogni (minuti)",  -- 796
+        "quanti minuti di gioco tra un promemoria per bere acqua e l'altro",  -- 797
+        "Promemoria dell'acqua all'inizio di un volo",  -- 798
+        "un volo è una pausa naturale: il promemoria per bere acqua arriva quando ne inizia uno, a meno che l'ultimo sia stato da poco",  -- 799
+        "mostra il promemoria per bere acqua",  -- 800
+        "Ridisegna i riquadri del gioco",  -- 801
+        "tooltip, bonus, tracciamento missioni, minimappa, barra dell'esperienza, schede della chat e barre del gamepad con l'aspetto dell'HUD (l'interfaccia del mouse mantiene quella del gioco)",  -- 802
+        "Dimensione della barra dell'esperienza",  -- 803
+        "la dimensione delle barre di esperienza e reputazione mentre sono ridisegnate, in percentuale",  -- 804
+        "Tooltip",  -- 805
+        "tooltip in vetro scuro, bordati con il colore della classe di un giocatore o della qualità di un oggetto",  -- 806
+        "Barre gamepad",  -- 807
+        "i pulsanti del gamepad con un anello sottile su uno sfondo scuro al posto della grafica pesante",  -- 808
+        "Bonus",  -- 809
+        "le tue icone di bonus e malus ritagliate e bordate, i loro tempi con contorno",  -- 810
+        "Tracciamento missioni",  -- 811
+        "le intestazioni del tracciamento missioni in vetro scuro, le sue righe con contorno",  -- 812
+        "Minimappa",  -- 813
+        "un anello sottile e un alone morbido attorno alla minimappa al posto del bordo dorato",  -- 814
+        "Barra dell'esperienza",  -- 815
+        "le barre di esperienza e reputazione un po' più piccole, con i loro colori",  -- 816
+        "Chat",  -- 817
+        "nomi delle schede della chat con contorno e la casella in cui scrivi in vetro scuro",  -- 818
+        "Misuratore dei danni",  -- 819
+        "il misuratore dei danni del gioco nello stile dell'HUD: le sue barre, inclinate su uno sfondo scuro, e testo contornato; conserva tutto ciò che fa",  -- 820
+        "verifica: %d di %d superate",  -- 821
+        "Il gioco non si è bloccato da quando hai effettuato l’accesso.",  -- 822
+        "Momenti in cui il gioco si è bloccato, e la parte dell’HUD in ciascuno:",  -- 823
+        "I momenti più lenti dell’HUD:",  -- 824
+        "Rapporti di debug",  -- 825
+        "raccogli da soli i rapporti di diagnosi: quando accedi e di nuovo quando ricarichi o esci (restano nelle impostazioni salvate)",  -- 826
+        "i momenti in cui il gioco si è bloccato dall’accesso, e quanto di ciascuno è stato lavoro dell’HUD",  -- 827
+        "Preset dell'HUD: %s, abbinato alla telecamera",  -- 828
+        "preset: %s",  -- 829
+        "Un layout chiamato '%s' è stato aggiunto alla Modalità modifica del gioco. Sceglilo lì per usarlo (Menu di gioco > Modalità modifica > Layout).",  -- 830
+        "preset sconosciuto '%s'",  -- 831
+        "Per una TV: testo più grande sull'HUD e nella chat.",  -- 832
+        "Per un monitor: testo alla sua dimensione normale.",  -- 833
+        "I nostri riquadri sono tornati al punto di partenza. Scegli il layout %s del gioco nella Modalità modifica (Menu di gioco > Modalità modifica > Layout).",  -- 834
+        "I preset impostano la distanza della telecamera",  -- 835
+        "un preset porta anche la telecamera alla distanza per cui è stato pensato il suo layout, una sola volta (poi zooma liberamente)",  -- 836
+        "Azione",  -- 837
+        "una visuale in terza persona: barre verticali sottili accanto al tuo personaggio, tutti gli effetti attivi; fuori combattimento tutto si dissolve",  -- 838
+        "Classico",  -- 839
+        "i nostri riquadri dove WoW li ha sempre messi, effetti più discreti, le barre del gamepad del gioco così come sono",  -- 840
+        "Minimale",  -- 841
+        "solo l'essenziale: i PNG amichevoli mostrano la targhetta (con cosa fanno) solo mentre li indichi, li miri o li hai come bersaglio; nomi senza titoli; fuori combattimento le tue barre restano un leggero accenno (la salute bassa si vede sempre)",  -- 842
+        "Mondo aperto",  -- 843
+        "uno schermo pulito per esplorare: barre sottili accanto a te che riposano sbiadite, targhette senza barre di risorsa, chat che svanisce",  -- 844
+        "Avventura",  -- 845
+        "dopo le avventure open world su console: parametri vitali accanto a te, un piccolo bersaglio in alto al centro, cittadini solo quando li indichi, chat che svanisce in fretta",  -- 846
+        "Soulslike",  -- 847
+        "le tue barre in alto a sinistra, una grande barra del bersaglio in basso al centro come quella di un boss, ogni colpo si sente",  -- 848
+        "Sparatutto",  -- 849
+        "barre verticali appena a destra del centro, vicino a dove miri, il bersaglio in alto, forte riscontro dei colpi",  -- 850
+        "Crossbar",  -- 851
+        "dopo gli MMO giocati con il controller: bersaglio e focus in alto al centro, le tue barre appena sopra le barre del gamepad, gruppo a sinistra, targhette complete",  -- 852
+        "ARPG",  -- 853
+        "dopo gli RPG d'azione: telecamera lontana, parametri vitali in basso a sinistra, bersaglio in alto al centro, nemici minori piccoli, ogni colpo rimbomba",  -- 854
+        "Bussola",  -- 855
+        "dopo gli RPG in prima persona: telecamera vicina, le tue barre in basso al centro, bersaglio sotto il bordo superiore, cittadini solo quando li indichi",  -- 856
+        "Incursione",  -- 857
+        "la disposizione di WoW con tutto ciò che serve a un gruppo: riquadri di gruppo e incursione, percentuali di salute e livelli sulle barre",  -- 858
+        "Segui i preset di ControllerCam",  -- 859
+        "scegliere un preset della telecamera in ControllerCam per ovunque sceglie anche il preset dell'HUD abbinato (la telecamera mantiene la sua distanza)",  -- 860
+        "Moderno",  -- 861
+        "imposta tutto l'HUD su un preset: action, classic, minimal, openworld, adventure, soulslike, shooter, crossbar, arpg, compass, raid",  -- 862
+        "il riquadro del bersaglio e le targhette compatti o completi, insieme",  -- 863
+        "il riquadro del bersaglio compatto o completo",  -- 864
+        "dimensiona il testo per una TV dall'altra parte della stanza o per un monitor a portata di braccio",  -- 865
+        "rimetti i nostri riquadri al punto di partenza, per il layout Moderno o Classico del gioco",  -- 866
+        "Tutta la tua configurazione (HUD, telecamera e layout del gioco): copia questa riga (Ctrl+C) per conservarla o condividerla.",  -- 867
+        "Incolla una riga di impostazioni dell'HUD (Ctrl+V) e accetta.",  -- 868
+        "Questa riga è danneggiata: copiala di nuovo, per intero.",  -- 869
+        "Questa riga è stata creata con una versione più recente: aggiorna l'addon.",  -- 870
+        "Questa non è una riga di impostazioni dell'HUD.",  -- 871
+        "Impostazioni importate: %d prese, %d escluse.",  -- 872
+        "È stata importata anche la configurazione della telecamera.",  -- 873
+        "La configurazione della telecamera è rimasta com'era.",  -- 874
+        "Il layout del gioco ora è '%s'.",  -- 875
+        "Il layout del gioco è rimasto com'era.",  -- 876
+        "le tue impostazioni come una riga di testo, da tenere o condividere",  -- 877
+        "prende le impostazioni da una riga di testo creata con /cchud export",  -- 878
+        "L'HUD è attivo mentre è in uso l'interfaccia gamepad. Le sue opzioni: Opzioni > AddOns > ControllerCam > HUD, oppure /cchud.",  -- 879
+        "Solo telecamera: l'HUD riposa e l'interfaccia del gioco resta com'era. /cchud on lo attiva.",  -- 880
+        "Preparare anche lo schermo per il controller? Aggiunge un layout chiamato CCHUD alla Modalità modifica del gioco, da scegliere lì: mette le righe dei recuperi sotto il bersaglio, lontano dai pulsanti del gamepad. I tuoi layout restano (/cchud setup lo propone di nuovo).",  -- 881
+        "Prepara",  -- 882
+        "Non ora",  -- 883
+        "ControllerCam include un'interfaccia per controller, l'HUD: i suoi riquadri delle unità, le barre dei nomi, la barra di lancio e altro mentre è in uso l'interfaccia gamepad. La vuoi, o solo la telecamera?",  -- 884
+        "Telecamera + HUD",  -- 885
+        "Solo telecamera",  -- 886
+        "Questo client non permette agli addon di cambiare il layout.",  -- 887
+        "chiedi di nuovo: la telecamera con l'HUD, o solo la telecamera",  -- 888
+        "proponi di nuovo il layout dello schermo fatto per l'HUD (Modalità modifica del gioco)",  -- 889
+        "Mostrato mentre è in uso l'interfaccia gamepad. Trascina i nostri riquadri nella Modalità Modifica del gioco.",  -- 890
+        "Preset",  -- 891
+        "Dimensionato per",  -- 892
+        "TV",  -- 893
+        "Monitor",  -- 894
+        "Icone dei pulsanti",  -- 895
+        "le icone che il gioco mostra per i pulsanti del tuo controller: trovate da sole per il controller in uso, o il tipo che scegli",  -- 896
+        "Carattere",  -- 897
+        "Reimposta il layout del gioco",  -- 898
+        "Provalo",  -- 899
+        "Avvia la demo",  -- 900
+        "Mostra ogni effetto dei colpi",  -- 901
+        "Esegui l'autoverifica",  -- 902
+        "Barre del gamepad: compatte / complete",  -- 903
+        "Esporta impostazioni",  -- 904
+        "Importa impostazioni",  -- 905
+        "Seleziona «Mostra opzioni avanzate» nella pagina principale per vedere tutte le impostazioni.",  -- 906
+        "Moduli",  -- 907
+        "Interruttori rapidi",  -- 908
+        "Generali",  -- 909
+        "HUD",  -- 910
+        "Il pannello delle opzioni non è disponibile in questo client.",  -- 911
+        "Attivo",  -- 912
+        "l'intero HUD; disattivo restituisce i riquadri del gioco",  -- 913
+        "Anche nell'interfaccia mouse e tastiera",  -- 914
+        "normalmente l'HUD funziona solo mentre è in uso l'interfaccia gamepad",  -- 915
+        "Metti da parte i riquadri del gioco",  -- 916
+        "nascondi i riquadri di giocatore, bersaglio e focus del gioco mentre sono mostrati i nostri",  -- 917
+        "Finestra di chat in alto a sinistra",  -- 918
+        "sposta la finestra di chat in alto a sinistra mentre l'HUD è in funzione",  -- 919
+        "Barre verticali a riposo",  -- 920
+        "quanto restano visibili le barre verticali a salute piena fuori dal combattimento (0 le nasconde)",  -- 921
+        "Colori di classe",  -- 922
+        "colora la tua barra e quelle degli altri giocatori in base alla classe",  -- 923
+        "Icone di classe",  -- 924
+        "un'icona di classe davanti al nome di un giocatore sul bersaglio e sul bersaglio del bersaglio",  -- 925
+        "Minaccia sul riquadro del bersaglio",  -- 926
+        "un'icona a scudo e un bagliore sul riquadro del bersaglio: rosso mentre ti attacca, rosso e giallo quando stai per attirarlo, giallo e blu quando lo stai perdendo, blu quando non è su di te",  -- 927
+        "Barre compatte ovunque",  -- 928
+        "il riquadro del bersaglio e le targhette in stile compatto, poco più di metà larghezza (ognuno si può ancora impostare da sé; i preset non lo cambiano mai)",  -- 929
+        "Riquadro bersaglio compatto",  -- 930
+        "il riquadro del bersaglio poco più largo della metà",  -- 931
+        "Colori della salute in combattimento",  -- 932
+        "in combattimento, le barre della salute passano dal verde al giallo al rosso mentre la salute scende",  -- 933
+        "Ombra dietro il testo",  -- 934
+        "una morbida fascia scura dietro il testo del bersaglio, per mantenerlo leggibile",  -- 935
+        "Dimensione del testo",  -- 936
+        "dimensione del testo sui nostri riquadri",  -- 937
+        "Dimensione dei riquadri",  -- 938
+        "dimensione dei nostri riquadri unità",  -- 939
+        "Le tue barre in combattimento",  -- 940
+        "quanto sono visibili le tue barre, famiglio e focus in combattimento finché qualcosa non richiede attenzione",  -- 941
+        "Complete con salute sotto",  -- 942
+        "le tue barre tornano complete quando la tua salute scende sotto questo valore",  -- 943
+        "Complete con mana sotto",  -- 944
+        "le tue barre tornano complete quando il tuo mana scende sotto questo valore",  -- 945
+        "Barra del giocatore a riposo",  -- 946
+        "quanto resta visibile la barra del giocatore a salute piena o fuori combattimento (0 la nasconde)",  -- 947
+        "Aiuto venditore e banca",  -- 948
+        "il pulsante Vendi robaccia del venditore chiede cosa vendere; spostamento rapido presso venditore e banca",  -- 949
+        "Mostra opzioni avanzate",  -- 950
+        "tutte le impostazioni, non solo gli interruttori principali",  -- 951
+        "Riquadro del giocatore",  -- 952
+        "la nostra barra del giocatore, in alto a sinistra",  -- 953
+        "Riquadro del bersaglio",  -- 954
+        "la nostra barra del bersaglio, in alto al centro",  -- 955
+        "Barra dell'animale",  -- 956
+        "una piccola barra del famiglio sotto la barra del giocatore, o accanto alle barre verticali",  -- 957
+        "Riquadro del focus",  -- 958
+        "il nostro riquadro del focus",  -- 959
+        "sottili barre verticali di salute e potere accanto al personaggio, per una visuale in terza persona (al posto della barra del giocatore)",  -- 960
+        "Vendi robaccia all'apertura di un venditore",  -- 961
+        "vendi la robaccia secondo le tue regole appena si apre un venditore",  -- 962
+        "Armi e armature bianche sono robaccia",  -- 963
+        "considera spazzatura armi e armature bianche (mai attrezzi, canne da pesca, equipaggiamento con un uso o ciò che potrebbe essere un miglioramento; chiede sempre prima)",  -- 964
+        "Deposita quando si apre la banca",  -- 965
+        "gli oggetti segnati per la banca e, se attivo, ciò che la banca contiene già, entrano da soli",  -- 966
+        "l'opzione del gioco; il nostro piccolo riquadro la segue",  -- 967
+        "Gestore dei tempi di recupero",  -- 968
+        "il Gestore dei tempi di recupero del gioco",  -- 969
+        "Visualizzazione risorse personali",  -- 970
+        "la tua salute e la tua risorsa sotto il tuo personaggio",  -- 971
+        "La banca prende i reagenti da sola",  -- 972
+        "l'opzione del gioco per la banca",  -- 973
+        "Tooltip all'inizio di un buff",  -- 974
+        "l'opzione del gioco: il tooltip di un buff compare per un momento quando viene applicato (IU gamepad)",  -- 975
+        "Colori di classe per i nomi nella chat",  -- 976
+        "l'impostazione della chat del gioco per ogni tipo di chat insieme: il nome di un giocatore nel colore della sua classe",  -- 977
+        "apri il pannello delle opzioni (Opzioni > AddOns > ControllerCam HUD)",  -- 978
+        "Riquadri",  -- 979
+        "Dissolvenza dello schermo",  -- 980
+        "Effetti",  -- 981
+        "Aspetto",  -- 982
+        "Missioni, chat e mappa",  -- 983
+        "Borse, banca e venditore",  -- 984
+        "Pesca",  -- 985
+        "Accessibilità",  -- 986
+        "Opzioni native",  -- 987
+        "%s  |  Interfaccia gamepad: %s  |  in esecuzione: %s",  -- 988
+        "giocatore %s, bersaglio %s, animale %s, focus %s  |  riquadri del gioco messi da parte: %s  |  chat spostata: %s",  -- 989
+        "opzioni native: bersaglio del bersaglio %s, Gestore dei tempi di recupero %s, risorse personali %s",  -- 990
+        "dimensione testo %d%%  |  ombra del testo: %s",  -- 991
+        "aiuto venditore e banca: %s  |  vendita automatica: %s  |  equipaggiamento bianco è robaccia: %s",  -- 992
+        "visibilità a riposo %d%%  |  scala %d%%  |  colori di classe: %s",  -- 993
+        "Un HUD minimale da gioco d'azione per l'interfaccia gamepad.",  -- 994
+        "attivo",  -- 995
+        "disattivo: i riquadri del gioco sono tornati",  -- 996
+        "usa anche nell'interfaccia mouse e tastiera: %s",  -- 997
+        "riquadri del gioco messi da parte: %s",  -- 998
+        "chat spostata in alto a sinistra: %s",  -- 999
+        "colori di classe: %s",  -- 1000
+        "Questo client non ha quell'opzione.",  -- 1001
+        "%s: %s (l'opzione propria del gioco)",  -- 1002
+        "Il gioco non l'ha accettato in questo momento.",  -- 1003
+        "aiuto venditore e banca: %s",  -- 1004
+        "vendita automatica: %s",  -- 1005
+        "equipaggiamento bianco è robaccia: %s",  -- 1006
+        "L'aiuto venditore è disattivato.",  -- 1007
+        "uso: /cchud sell [junk | recommended | white | green | blue]",  -- 1008
+        "deposita gli oggetti segnati all'apertura della banca: %s",  -- 1009
+        "uso: /cchud junk <item> (Maiusc+clic sull'oggetto per inserirlo nella riga di chat)",  -- 1010
+        "oggetto %d: robaccia, venduto con il resto",  -- 1011
+        "oggetto %d: conservato, mai venduto",  -- 1012
+        "oggetto %d: per la banca",  -- 1013
+        "ombra del testo: %s",  -- 1014
+        "uso: /cchud text <80-250>",  -- 1015
+        "dimensione testo %d%%",  -- 1016
+        "demo interrotta",  -- 1017
+        "L'HUD non è in funzione.",  -- 1018
+        "Demo in corso: un combattimento inventato in ciclo. Digita di nuovo /cchud demo per fermarla.",  -- 1019
+        "uso: /cchud idle <0-100>",  -- 1020
+        "visibilità a riposo %d%%",  -- 1021
+        "uso: /cchud scale <50-200>",  -- 1022
+        "scala %d%%",  -- 1023
+        "Trascina i riquadri, poi digita /cchud lock.",  -- 1024
+        "riquadri bloccati",  -- 1025
+        "Tutto è tornato com'era all'inizio: impostazioni, riquadri e layout dello schermo (i tuoi contrassegni del venditore e lo storico dei prezzi restano).",  -- 1026
+        "i riquadri sono tornati dove erano all'inizio",  -- 1027
+        "comando sconosciuto '%s'. Digita /cchud help",  -- 1028
+        "Elenco errori svuotato.",  -- 1029
+        "Nessun errore registrato.",  -- 1030
+        "%d errori registrati (il più recente per ultimo). /cchud errors clear svuota l'elenco.",  -- 1031
+        "mostra lo stato",  -- 1032
+        "attiva o disattiva l'HUD (disattivo restituisce i riquadri del gioco)",  -- 1033
+        "usa l'HUD anche nell'interfaccia mouse e tastiera",  -- 1034
+        "usa il nostro riquadro per questo, oppure quello del gioco",  -- 1035
+        "barre verticali sottili di salute e potere accanto al tuo personaggio",  -- 1036
+        "bersaglio del bersaglio (l'opzione propria del gioco, anche nei suoi menu)",  -- 1037
+        "il Gestore dei tempi di recupero del gioco (l'opzione propria del gioco)",  -- 1038
+        "la tua salute e la tua risorsa sotto il tuo personaggio (l'opzione propria del gioco)",  -- 1039
+        "il tooltip che compare quando inizia un buff (l'opzione propria del gioco)",  -- 1040
+        "mantieni visibili i riquadri di giocatore e bersaglio del gioco (on) o mettili da parte (off)",  -- 1041
+        "presso un venditore: scegli cosa vendere (anche: sell junk, sell recommended, sell white | green | blue)",  -- 1042
+        "conta armi e armature bianche come robaccia",  -- 1043
+        "segna un oggetto: sempre venduto, mai venduto o per la banca (Maiusc+clic per inserirlo nella riga di chat)",  -- 1044
+        "in banca: deposita ciò che la banca contiene già e tutto ciò che è segnato per lei",  -- 1045
+        "in banca: prendere ciò di cui porti già qualcosa",  -- 1046
+        "deposita appena si apre la banca",  -- 1047
+        "la banca prende i reagenti da sola (l'opzione propria del gioco)",  -- 1048
+        "dimensione del testo, in percentuale (150 si legge bene su una TV)",  -- 1049
+        "quanto resta visibile la barra del giocatore quando non succede nulla (0 la nasconde)",  -- 1050
+        "dimensione dei riquadri, in percentuale",  -- 1051
+        "trascina i riquadri dove vuoi (anche la Modalità Modifica del gioco lo permette)",  -- 1052
+        "rimetti i riquadri dove erano all'inizio",  -- 1053
+        "avvia un breve combattimento inventato per vedere come reagiscono i riquadri (di nuovo per fermarlo)",  -- 1054
+        "confronta ciò che è a schermo con le impostazioni (check elenca ogni riga)",  -- 1055
+        "salva una descrizione dell'interfaccia gamepad di questo client (per la risoluzione dei problemi)",  -- 1056
+        "mostra questo elenco",  -- 1057
+        "gli ultimi errori dell'HUD, anche dopo un ricaricamento (per segnalarli)",  -- 1058
     },
     koKR = {
         "오류:",  -- 1
@@ -5767,504 +5852,521 @@ local TRANSLATIONS = {
         "퀘스트 목록을 거리 순으로 유지하고 가장 가까운 퀘스트를 맨 위에 둡니다",  -- 541
         "퀘스트 목록: 추천 순서",  -- 542
         "퀘스트 목록을 추천 순서로 유지합니다: 완료 보고할 퀘스트 먼저, 그다음 혼자 할 수 있는 퀘스트를 가까운 순으로, 그다음 내 레벨보다 높은 퀘스트, 혼자일 때의 파티 퀘스트, 회색 퀘스트는 마지막",  -- 543
-        "퀘스트 목록: 짧은 목표",  -- 544
-        "퀘스트 목록의 목표를 필요한 말만 남기고 종류 아이콘을 앞에 붙입니다: 0/1 드레드라이즈 선장 처치 대신 해골 아이콘과 0/1 드레드라이즈 선장",  -- 545
-        "채팅에 퀘스트 진행 상황",  -- 546
-        "퀘스트가 진행될 때 채팅에 짧은 한 줄: 피묻은 뼈 목걸이: 4/25, 목표 완료, 완료 보고 가능한 퀘스트",  -- 547
-        "파티에 퀘스트 진행 알림",  -- 548
-        "파티에서는(공격대 제외) 같은 줄이 파티 대화로 가서 다른 사람도 볼 수 있음, 잠깐씩 간격을 두고; 당신도 거기서 봄",  -- 549
-        "퀘스트에 필요한 것 보관",  -- 550
-        "퀘스트 목록의 퀘스트가 아직 요구하는 아이템, 또는 아직 할 수 있는 퀘스트를 시작하는 아이템은 퀘스트로 표시됨: 대신 팔거나 경매에 올리지 않음",  -- 551
-        "퀘스트의 추천 순서를 알려줍니다: 완료된 것을 보고하고, 혼자 할 수 있는 가장 가까운 것, 그다음 나머지",  -- 552
-        "퀘스트 왼쪽",  -- 553
-        "퀘스트 오른쪽",  -- 554
-        "퀘스트 아래",  -- 555
-        "파밍 목록이 가득 찼습니다.",  -- 556
-        "파밍 목록: %s, %d개 원함.",  -- 557
-        "파밍",  -- 558
-        "%d개 더",  -- 559
-        "아직 파밍할 것이 없습니다.",  -- 560
-        "한 묶음 더",  -- 561
-        "빼기",  -- 562
-        "비우기",  -- 563
-        "완료",  -- 564
-        "파밍 목록을 모두 비울까요?",  -- 565
-        "파밍 목록: 선택 / 완료",  -- 566
-        "파밍 목록: 가리킨 아이템 추가",  -- 567
-        "파밍 목록에 없습니다.",  -- 568
-        "파밍 목록이 비었습니다.",  -- 569
-        "파밍 목록: 위치",  -- 570
-        "퀘스트 목록 옆에 파밍 목록",  -- 571
-        "모으려는 것과 가진 수, 원하는 수: 내 가방과 은행, 그리고 이 서버의 다른 캐릭터들 것까지. 숙련 계획의 재료를 버튼 하나로 추가하거나 어떤 아이템이든 추가하세요",  -- 572
-        "파밍 목록을 퀘스트 목록의 왼쪽, 오른쪽 또는 퀘스트 아래에 둡니다",  -- 573
-        "퀘스트 목록 옆의 파밍 목록: 컨트롤러로 선택; add <아이템> [수량], remove <아이템>, clear, 또는 위치는 left / right / bottom",  -- 574
-        "전투 중이 아닙니다.",  -- 575
-        "이 클라이언트에는 게임패드 바가 없습니다.",  -- 576
-        "이 클라이언트는 애드온이 변경하는 것을 허용하지 않습니다. 편집 모드를 사용하세요.",  -- 577
-        "게임패드 바: %s",  -- 578
-        "간략",  -- 579
-        "전체",  -- 580
-        "슬림 게임패드 바",  -- 581
-        "게임패드 행동 단축바 뒤의 무거운 그림을 숨기고 더 작게 표시",  -- 582
-        "게임패드 바 크기",  -- 583
-        "슬림 바를 켰을 때 게임패드 바의 크기 (퍼센트)",  -- 584
-        "게임의 게임패드 바를 간략 또는 전체 모드로 (편집 모드 설정과 동일)",  -- 585
-        "전투 중이 아닐 때 흐리게",  -- 586
-        "/cchud fade <요소> on | off 로 하나를 설정합니다. all 은 흐리게 전체입니다.",  -- 587
-        "게임패드 바, 미니맵, 퀘스트 목록, 피해 측정기, 경험치 바가 전투 중이 아닐 때 함께 쉬고, 전투, 트리거 당김 또는 적 대상이 있으면 돌아옵니다",  -- 588
-        "쉴 때의 화면",  -- 589
-        "전투 중이 아닐 때 쉬는 화면 요소가 얼마나 보이는지 (0이면 숨김)",  -- 590
-        "흐려짐: 게임패드 바",  -- 591
-        "흐려짐: 미니맵",  -- 592
-        "흐려짐: 퀘스트 목록",  -- 593
-        "흐려짐: 피해 측정기",  -- 594
-        "흐려짐: 경험치 바",  -- 595
-        "흐려짐: 강화 효과",  -- 596
-        "흐려짐: 재사용 대기시간 줄",  -- 597
-        "이 화면 요소가 전투 중이 아닐 때 나머지와 함께 흐려질지 여부 (끄면: 항상 그대로 유지)",  -- 598
-        "전투 중이 아닐 때 화면 흐리게: 무엇이 흐려지는지 (미니맵, 퀘스트 목록 등), 각각 켜기 또는 끄기",  -- 599
-        "저장됨: 게임이 디스크에 쓰도록 /reload 를 입력하세요.",  -- 600
-        "태세와 소환수 버튼을 바 위로",  -- 601
-        "태세와 소환수 명령 버튼이 초록색과 빨간색 대상 지정 아이콘이 있던 자리에 놓여 휠이 화면에 온전히 열립니다; 그 아이콘들은 숨겨집니다",  -- 602
-        "게임패드 바의 요소가 어디에 있고 무엇이 쉬는지 나열 (문제 해결용)",  -- 603
-        "자동",  -- 604
-        "기본",  -- 605
-        "게임 설정 그대로",  -- 606
-        "버튼 아이콘: %s.",  -- 607
-        "지금 사용 중인 컨트롤러가 없거나 게임에 아이콘 스타일이 없습니다. 컨트롤러가 연결되면 적용됩니다.",  -- 608
-        "게임이 버튼 아이콘을 받아들이지 않았습니다.",  -- 609
-        "컨트롤러가 자신의 종류를 알려주지 않습니다. 아이콘은 게임 설정 그대로 둡니다.",  -- 610
-        "게임이 컨트롤러 버튼에 표시하는 아이콘: auto (사용 중인 컨트롤러에 맞춤), xbox, playstation, switch, steam, generic (숫자), 또는 게임 설정 그대로 두려면 game",  -- 611
-        "게임패드 바에서 비켜난 재사용 대기시간 줄",  -- 612
-        "게임의 재사용 대기시간 줄이 게임패드 버튼 위가 아니라 대상 아래에 조금 작게 놓입니다 (게임의 기본 레이아웃에서만: 직접 만든 레이아웃에서는 배치한 자리에 그대로 있습니다)",  -- 613
-        "낚시 모드: 꺼짐.",  -- 614
-        "낚시: %s 눌러 던지기",  -- 615
-        "미끼 없음: %s 두 번 눌러 %s 사용",  -- 616
-        "%s 눌러 낚싯대 넣기",  -- 617
-        "낚시 모드: %s 눌러 낚싯줄을 던지고, 찌가 흔들리면 다시 눌러 물고기를 낚아챕니다.",  -- 618
-        "%s 낚아채기, %s 다시 던지기",  -- 619
-        "낚시 모드는 손에 낚싯대가 있어야 합니다.",  -- 620
-        "낚시를 배우지 않았습니다.",  -- 621
-        "낚시 모드: 버튼 하나로 던지고 낚아채기",  -- 622
-        "낚시 버튼: %s",  -- 623
-        "버튼 하나로 낚시",  -- 624
-        "낚싯대를 들고 있으면: 상호작용할 대상이 없을 때 상호작용 버튼으로 낚싯줄을 던지고, 찌가 흔들리면 다시 눌러 낚아챕니다. 잡은 것은 자동으로 챙깁니다. B를 누르면 낚싯대를 넣고 무기를 다시 듭니다",  -- 625
-        "한 번 눌러 다시 던지기",  -- 626
-        "찌가 나가 있는 동안 낚시 버튼을 한 번 누르면 새로 던지고, A로 물고기를 낚아챕니다 (게임이 입질을 알려 주지 않아 한 버튼으로 둘 다 할 수 없습니다); 끄면: 낚시 버튼이 게임의 상호작용처럼 낚아챕니다",  -- 627
-        "두 번 눌러 미끼 달기",  -- 628
-        "낚시 버튼을 빠르게 두 번 누르면, 낚싯대에 미끼가 없을 때 두 번째 누름이 가방 속 가장 좋은 미끼를 낚싯대에 답니다",  -- 629
-        "낚시 중 게임패드 바 숨기기",  -- 630
-        "낚싯대를 들고 있으면 게임패드 바가 숨겨져 물이 잘 보입니다. 낚시 안내에 던지기 버튼이 표시됩니다. 전투가 시작되거나 낚싯대를 넣으면 바로 돌아옵니다",  -- 631
-        "한 버튼 낚시를 잠시 끄거나 다시 켜기 (낚싯대를 들면 저절로 켜집니다)",  -- 632
-        "낚시하는 버튼: 처음에는 상호작용 버튼(네모 또는 X), 또는 다른 아무 버튼, 예를 들어 트리거 (rt)",  -- 633
-        "듀로타의 해안은 붉은 바위와 따뜻한 얕은 바다입니다. 메아리 군도의 트롤들은 섬의 밥 짓는 불 냄새가 밀물에 실려 올 때 고등어 떼가 가장 많이 몰린다고 말합니다.",  -- 634
-        "멀고어의 호수는 작고 맑으며 느긋합니다. 타우렌은 다른 모든 일을 할 때처럼 낚시도 천천히, 감사하는 마음으로 합니다.",  -- 635
-        "불모의 땅의 오아시스는 어디나 만남의 장소입니다. 낮에 무엇이 와서 물을 마시든, 밤이면 그 아래에서 무언가가 헤엄칩니다.",  -- 636
-        "텔드랏실의 연못은 모두 한 그루 나무의 그늘 아래 있습니다. 나이트 엘프 낚시꾼들은 이곳 물고기가 해를 본 적도 없고 그리워하지도 않는다고 장담합니다.",  -- 637
-        "어둠의 해안의 물은 잿빛이고 차가우며 난파선으로 가득합니다. 아우버다인 앞바다에서 입질하는 녀석의 절반은 누군가 잃어버린 화물 속에 살림을 차렸습니다.",  -- 638
-        "잿빛 골짜기의 강은 웬만한 왕국보다 오래된 나뭇잎 아래로 흐릅니다. 물고기도 빠르지만, 여기서 뭘 하느냐고 물으러 오는 파수꾼들은 더 빠릅니다.",  -- 639
-        "버섯구름 봉우리 아래에서는 물이 귀해서 다들 악착같이 지킵니다. 이곳 물고기는 제 자리를 당당히 얻어 낸 녀석입니다.",  -- 640
-        "돌발톱 산맥의 호수는 봉우리 사이 높고 추운 곳에 있습니다. 낚시가 이렇게 잘되지만 않았어도 고블린들이 진작 물을 다 빼 버렸을 겁니다.",  -- 641
-        "잊혀진 땅의 해안은 뼈와 잿빛 파도뿐입니다. 저 아래 무언가는 둘 다 즐겨 먹는 모양입니다.",  -- 642
-        "페랄라스는 물가까지 온통 푸릅니다. 강은 깊고 따뜻하며, 그야말로 살아 숨 쉽니다.",  -- 643
-        "먼지진흙 습지대는 어디까지가 땅이고 어디부터 물인지 아무도 모릅니다. 물가에서 낚시하고, 끝나면 발가락 수를 세어 보십시오.",  -- 644
-        "타나리스에서 물이라 부를 만한 것은 스팀휘들 항구에만 있습니다. 고블린들은 낚시할 권리를 팔 텐데, 가만두면 두 번 팝니다.",  -- 645
-        "아즈샤라의 눈부신 만 아래에는 물에 잠긴 도시가 있습니다. 노련한 낚시꾼들은 큰 놈들이 옛 정원 자리에 산다고 합니다.",  -- 646
-        "악령의 숲의 웅덩이는 빛이 나는데, 좋은 뜻으로 그런 것은 아닙니다. 아직도 거기서 헤엄치는 녀석들은 고집이 상상을 초월합니다.",  -- 647
-        "운고로의 온천과 타르가 둘러진 호수에는 세상이 잊어버린 것들이 남아 있습니다. 그중 몇몇은 뭅니다.",  -- 648
-        "달의 숲의 엘룬아라 호수는 참은 숨처럼 고요합니다. 드루이드들이 바라는 것은 먹을 만큼만 잡아 가라는 것뿐입니다.",  -- 649
-        "실리더스는 모래와 바람, 그리고 날갯짓 소리뿐입니다. 여기서 낚시할 물을 찾았다면 아무에게도 말하지 마십시오.",  -- 650
-        "여명의 설원의 호수는 가장자리는 얼고 한가운데에서는 김이 오릅니다. 이곳 물고기는 추위에 대비해 살이 올라 있어, 먼 길을 걸어온 보람이 있습니다.",  -- 651
-        "오그리마의 연못에서는 딱히 할 일이 없는 일꾼들과, 자기도 그렇다고 말하는 늙은 그런트들이 낚시를 합니다. 둘 다 큰 놈은 놓쳤다고 말합니다.",  -- 652
-        "썬더 블러프의 연못에서 잡힌 물고기는 평생을 평원보다 한참 높은 곳에서 살았습니다. 그래도 태연해 보입니다.",  -- 653
-        "다르나서스는 물도 신전만큼이나 정성껏 돌봅니다. 물고기들은 감탄받는 데 익숙해졌습니다.",  -- 654
-        "알터랙 산맥의 호수는 눈 녹은 물이며, 오우거와 비밀결사대가 아무도 보지 않을 때 낚시를 합니다.",  -- 655
-        "아라시의 물가는 낚시꾼보다 군대를 더 많이 보았습니다. 물고기들은 물 위에 누구의 깃발이 나부끼든 신경 쓰지 않은 지 오래입니다.",  -- 656
-        "황야의 땅은 끝에서 끝까지 먼지뿐입니다. 여기서 입질이 온다면 작은 기적이니, 기적답게 대하십시오.",  -- 657
-        "저주받은 땅의 해안은 붉고, 깎여 나갔고, 조용합니다. 그 파도 속에 사는 것은 참 많은 것을 견디며 사는 법을 배웠습니다.",  -- 658
-        "티리스팔의 호수는 병든 빛깔의 하늘 아래 잔잔히 누워 있습니다. 포세이큰은 습관처럼 낚시를 합니다. 죽은 자는 많이 먹지 않지만, 좋아했다는 것만은 기억합니다.",  -- 659
-        "은빛소나무 숲의 긴 해안은 온통 안개와 소나무 그림자입니다. 낚시는 잘되는데, 이곳에 대해 누가 하는 밝은 말은 그것 하나뿐입니다.",  -- 660
-        "서부 역병지대의 강은 아직 흐르지만 깨끗하지는 않습니다. 건져 올린 것은 두 번 살펴보십시오.",  -- 661
-        "동부 역병지대에서 낚시하는 사람은 드물고, 했다고 말하는 사람은 더 드뭅니다. 이곳의 물은 역병이 남겨 둔 것만을 간직하고 있습니다.",  -- 662
-        "힐스브래드의 강과 긴 남쪽 해안은 이 땅을 두고 벌어진 모든 싸움에서 양쪽 모두를 먹여 살렸습니다.",  -- 663
-        "동부 내륙지의 호수는 높은 숲 속에 숨어 있고, 와일드해머 드워프들은 아무도 못 본다 싶으면 그리핀 등에 탄 채로 낚시를 합니다.",  -- 664
-        "던 모로의 호수는 한 해의 대부분 얼음에 둘러싸여 있습니다. 드워프는 구멍을 뚫고 맥주 한 잔과 함께 앉아서, 무엇이 물든 좋은 하루였다고 합니다.",  -- 665
-        "이글거리는 협곡에는 다른 땅이라면 강이 있을 자리에 용암이 흐릅니다. 낚싯대 대신 마실 것을 챙겨 오십시오.",  -- 666
-        "불타는 평원은 재와 불씨뿐입니다. 이곳의 물이 무언가를 내어 준다면, 분명 뜨거울 겁니다.",  -- 667
-        "엘윈의 아이들은 누구나 수정 호수나 돌무덤 호수에서 낚시를 배웁니다. 그곳의 잔챙이들은 대대로 아이들을 골탕 먹여 왔습니다.",  -- 668
-        "죽음의 고개에는 물도 적고 반기는 이는 더 적습니다. 카라잔 아래 웅덩이에 있는 것은 그대로 두는 편이 좋습니다.",  -- 669
-        "그늘숲 가장자리를 따라 흐르는 강은 언제 보아도 검습니다. 물고기는 어둠을 개의치 않는 듯한데, 낚시꾼은 그렇지 않습니다.",  -- 670
-        "모단 호수는 이 땅의 자랑이며, 거대한 스톤워트 댐이 그 물을 막고 있습니다. 드워프들은 낚시 무용담을 이 호수에 견주어 보는데, 대개는 호수가 이깁니다.",  -- 671
-        "붉은마루의 영원의 호수는 그림처럼 아름답고, 레이크샤이어의 부두마다 낚싯대가 드리워져 있습니다. 마을 사람들은 좋은 자리를 전부 알지만 하나도 알려 주지 않습니다.",  -- 672
-        "밀림의 강에서 거친 남쪽 곶까지, 가시덤불 골짜기는 대륙에서 가장 풍요로운 물을 품고 있습니다. 무법항의 낚시꾼들은 이를 두고 대회를 여는데, 거의 다 반칙을 합니다.",  -- 673
-        "슬픔의 늪은 초록 나무 아래 초록 물입니다. 물고기에서 진흙 맛이 나는데, 이곳 주민들은 그 맛을 좋아합니다.",  -- 674
-        "서부 몰락지대의 밭은 망했지만 바다는 그렇지 않았습니다. 남은 사람들은 길고 잿빛인 해안에 기대어 살아갑니다.",  -- 675
-        "저습지는 이름값을 합니다. 메네실 항구의 부두가 그나마 가장 마른 낚시터인데, 악어들도 그 사실을 압니다.",  -- 676
-        "스톰윈드의 운하에서는 아이들과 은퇴한 노인들, 그리고 변장한 귀족이 적어도 한 명 낚시를 합니다. 운하에 또 무엇이 있는지는 아무도 묻지 않습니다.",  -- 677
-        "쓸쓸한 동굴에는 아이언포지에서 하나뿐인 조용한 연못이 있습니다. 늙은 드워프들은 몇 시간이고 낚시를 하면서 한마디도 하지 않습니다.",  -- 678
-        "언더시티의 운하는 초록빛인데, 물이끼와는 아무 상관이 없습니다. 거기서 낚시하는 포세이큰은 저녁거리를 구하려는 것이 아닙니다.",  -- 679
-        "낚시꾼 대부분이 생애 처음으로 낚는 물고기이며, 기억에 남을 만큼 빛깔이 곱습니다.",  -- 680
-        "미끈하고 날쌔며 따뜻한 해안 어디에나 흔합니다. 이름에서 풍기는 느낌보다는 구웠을 때 맛이 좋습니다.",  -- 681
-        "온몸이 입이나 다름없고, 마시고 싶지 않은 물에서 가장 행복해합니다.",  -- 682
-        "작고, 이빨이 날카롭고, 겁이 없습니다. 한 떼가 모단 호수에서 곰을 쫓아냈다는 이야기가 있습니다.",  -- 683
-        "파도 아래에서 번뜩이는 한 줄기 빛깔입니다. 뱃사람들은 낚싯줄에 한 마리 걸리면 항해에 운이 따른다고 여깁니다.",  -- 684
-        "드워프 원로 같은 수염을 단, 참을성 많은 바닥 물고기입니다.",  -- 685
-        "두 번 먹는 사람은 없습니다. 연금술사들은 구할 수 있는 대로 다 사 갑니다.",  -- 686
-        "지느러미가 재 속에 묻어 둔 숯불처럼 빛나고, 짜낸 기름도 그에 못지않게 잘 탑니다.",  -- 687
-        "작은 방패처럼 단단히 무장하고 있습니다. 속살은 그 수고를 들일 만합니다.",  -- 688
-        "통곡의 동굴 근처 물속의 무언가가 이 물고기를 바꿔 놓았습니다. 먹으면 당신도 한동안 바뀔지 모릅니다.",  -- 689
-        "강가 사람들은 이것을 먹으면 머리가 맑아진다고 합니다. 이 물고기가 지혜로워진 것은 물살을 거슬러 헤엄친 덕분입니다.",  -- 690
-        "사촌보다 나이도 많고 몸집도 크고 더 지혜롭지만, 그래도 당신의 바늘은 피하지 못했습니다.",  -- 691
-        "따뜻한 남쪽 바다에서 온 억센 싸움꾼으로, 무법항에서 가젯잔까지 선술집 차림표마다 빠지지 않는 인기 요리입니다.",  -- 692
-        "이마가 진짜 미스릴처럼 빛납니다. 제련해 보려던 광부가 한둘이 아닙니다.",  -- 693
-        "비늘을 졸이면 피부를 바위처럼 단단하게 해 주는 기름이 됩니다. 이 물고기는 밤을 더 좋아합니다.",  -- 694
-        "열병식 흉갑처럼 반들반들하고, 무게도 거의 그만큼 나갑니다.",  -- 695
-        "추운 계절에만 연안으로 들어오며, 그 맛을 아는 요리사들은 일 년 내내 기다립니다.",  -- 696
-        "낮이 길어지면 떼 지어 몰려옵니다. 바닷가 사람들은 이것으로 계절을 가늠합니다.",  -- 697
-        "몸통 한가운데를 잡으십시오. 기회는 딱 한 번뿐입니다.",  -- 698
-        "거친 땅에서 온 강 물고기로, 아가미가 트롤의 전투 분장처럼 붉습니다.",  -- 699
-        "해가 진 뒤에 먹이를 찾습니다. 이것으로 끓인 수프는 주문 시전자의 신경을 가라앉혀 줍니다.",  -- 700
-        "낮에 먹이를 찾으며 거의 모든 면에서 밤지느러미퉁돔과 정반대이지만, 그래도 같은 물에서 삽니다.",  -- 701
-        "엄밀히 말하면 물고기는 아닙니다. 잡히는 데 동의하지 않으며, 그 뜻을 분명히 알려 줍니다.",  -- 702
-        "강의 얼음처럼 창백하며, 북쪽의 차고 맑은 호수에서 납니다.",  -- 703
-        "두 손이 다 필요할 겁니다. 어쩌면 친구도 한 명 필요할지 모릅니다.",  -- 704
-        "%.1f파운드",  -- 705
-        "낚시 일지에 새로 기록: %s, %s.",  -- 706
-        "낚시 일지에 새로 기록: %s.",  -- 707
-        "지금까지 가장 무거운 %s: %s (이전 %s).",  -- 708
-        "낚시 일지",  -- 709
-        "모든 낚은 것이 낚시 일지에 기록됩니다: 종류별 마릿수, 처음 낚은 곳, 재미로 지어낸 무게와 종류별 최고 기록 (/cchud journal 로 엽니다)",  -- 710
-        "미끼 %s",  -- 711
-        "미끼 없음",  -- 712
-        "낚음 %d",  -- 713
-        "놓침 %d",  -- 714
-        "낚시 인터페이스",  -- 715
-        "낚싯대를 들고 있을 때: 서 있는 물가의 물고기(여기서 아직 낚지 못한 것은 숨겨짐), 낚시 숙련도와 미끼가 더해 주는 수치, 낚은 수와 놓친 수, 미끼의 남은 시간, 그리고 최근에 낚은 것들",  -- 716
-        "호기심 많은 녀석: +%d%%",  -- 717
-        "미끼를 물고기 곁에 두세요",  -- 718
-        "다음 낚는 것 +%d%%",  -- 719
-        "%s 누르기: 미끼가 낚싯줄을 따라 움직입니다",  -- 720
-        "%d연속",  -- 721
-        "찌를 던져 둔 동안 즐기는 놀이",  -- 722
-        "낚싯줄이 나가 있는 동안 시전 바 위에서 즐깁니다: 트리거를 누르면 미끼가 줄을 따라 움직이고, 떼면 되돌아갑니다. 물고기 그림자 곁에 두세요. 잘할수록 다음 어획물의 가상 무게가 무거워집니다. 버튼을 차지하지 않고 던지기나 어획에 영향을 주지 않습니다",  -- 723
-        "%d마리 낚음, %d종, %d마리 놓침",  -- 724
-        "가장 무거운 것: %s, %s",  -- 725
-        "물고기",  -- 726
-        "물가",  -- 727
-        "아직 낚은 것이 없습니다. 낚싯대를 들고 물가로 가세요.",  -- 728
-        "낚은 수: %d",  -- 729
-        "가장 무거운 것: %s, %s에서",  -- 730
-        "처음 낚은 곳: %s",  -- 731
-        "여기서 낚은 수: %d",  -- 732
-        "여기서 찾은 종류: %d",  -- 733
-        "선택",  -- 734
-        "닫기",  -- 735
-        "낚시 일지를 열거나 닫습니다: 낚은 모든 종류, 종류별 가장 무거운 것, 낚시한 물가",  -- 736
-        "조용할 때 대화창 흐리게",  -- 737
-        "새 메시지가 없으면 몇 초 후 대화 내용이 흐려짐",  -- 738
-        "대화창이 흐려지기까지의 초",  -- 739
-        "대화 내용이 흐려지기 전까지 남아 있는 시간",  -- 740
-        "지도에 좌표 표시",  -- 741
-        "세계 지도 아래에 내 좌표 표시",  -- 742
-        "접속한 이후 스팸으로 숨긴 메시지 %d개.",  -- 743
-        "%d개는 반복된 길드 모집이었습니다.",  -- 744
-        "대화창에 직업 아이콘과 레벨 표시",  -- 745
-        "게임이 알려 주는 경우, 플레이어의 직업 아이콘과 레벨을 이름 앞에 대괄호로 표시",  -- 746
-        "대화창의 짧은 채널 이름",  -- 747
-        "줄 앞의 채널 이름을 줄여서 표시: [P] 파티, [PL] 파티장, [G] 길드, [O] 길드 관리자, [R] 공격대, [RL] 공격대장, [I] 인스턴스, 번호가 있는 채널은 번호만, [1]",  -- 748
-        "대화창에 이름만 표시",  -- 749
-        "성이 있는 이름은 이름만 표시됩니다 (Jory Spleeneater는 Jory로 표시); 귓속말이나 오른쪽 클릭은 여전히 전체 이름으로 갑니다",  -- 750
-        "대화 글자 크기",  -- 751
-        "대화창 글자 크기를 게임 자체 크기에 대한 비율로 설정 (게임 자체 설정은 그대로 둡니다)",  -- 752
-        "골드 판매상과 반복 광고 숨기기",  -- 753
-        "웹 주소와 함께 골드나 서비스를 파는 메시지와 한 플레이어가 반복한 같은 메시지를 숨김 (파티, 길드, 친구는 제외)",  -- 754
-        "반복되는 길드 모집 숨기기",  -- 755
-        "공개 채널에서 길드 모집 메시지는 한 번 표시되고, 15분 안에 같은 플레이어가 다시 보내거나 거의 같은 메시지는 숨김 (파티, 길드, 친구는 제외)",  -- 756
-        "최근 스팸으로 숨긴 대화 메시지를 나열",  -- 757
-        "비행",  -- 758
-        "목적지 알 수 없음",  -- 759
-        "거리로 추정",  -- 760
-        "이 경로의 첫 비행: 비행 시간 학습 중",  -- 761
-        "착륙 중",  -- 762
-        "%s: 약 %s, 거리로 추정",  -- 763
-        "%s: 약 %s",  -- 764
-        "%s: 이 경로의 첫 비행, 시간 모름",  -- 765
-        "비행 중, 목적지 모름",  -- 766
-        "%s: 비행 시간 학습됨, %s",  -- 767
-        "알려진 비행 경로 %d개.",  -- 768
-        "비행: 시간과 카운트다운",  -- 769
-        "비행 중에는 목적지와 소요 시간을 채팅에 알리고, 화면 위쪽의 바가 착륙까지 카운트다운합니다. 각 경로의 시간은 비행할 때마다 학습됩니다",  -- 770
-        "비행: 막대를 따라가는 탈것",  -- 771
-        "그리폰, 와이번 또는 박쥐(비행 조련사가 내준 것)가 비행 막대를 따라 착륙 지점으로 날아갑니다",  -- 772
-        "시간을 아는 비행 경로 목록",  -- 773
-        "비행은 물 마시기 좋은 때입니다.",  -- 774
-        "%s 동안 플레이했습니다.",  -- 775
-        "물 한 모금 마실 시간",  -- 776
-        "물 마시기 알림",  -- 777
-        "플레이하는 동안 가끔 물 한 모금 마시라는 부드러운 알림 (전투 중에는 없음)",  -- 778
-        "물 알림 간격 (분)",  -- 779
-        "물 마시기 알림 사이의 플레이 시간(분)",  -- 780
-        "비행 시작 시 물 알림",  -- 781
-        "비행은 자연스러운 휴식입니다: 비행이 시작될 때 물 마시기 알림이 나옵니다 (마지막 알림이 얼마 전이 아니라면)",  -- 782
-        "물 마시기 알림 보기",  -- 783
-        "게임 기본 프레임 다시 꾸미기",  -- 784
-        "툴팁, 버프, 퀘스트 추적기, 미니맵, 경험치 바, 대화창 탭, 게임패드 바를 HUD의 모양으로 표시 (마우스 UI는 게임 기본 모양 유지)",  -- 785
-        "경험치 바 크기",  -- 786
-        "다시 꾸민 경험치 바와 평판 바의 크기 (퍼센트)",  -- 787
-        "툴팁",  -- 788
-        "어두운 유리 모양의 툴팁, 테두리는 플레이어의 직업 색상이나 아이템 등급 색상",  -- 789
-        "게임패드 바",  -- 790
-        "무거운 그림 대신 어두운 바탕에 얇은 고리가 있는 게임패드 버튼",  -- 791
-        "버프",  -- 792
-        "내 버프와 디버프 아이콘을 잘라내 테두리를 두르고 시간에 윤곽선 표시",  -- 793
-        "퀘스트 추적기",  -- 794
-        "퀘스트 추적기의 제목을 어두운 유리 모양으로, 줄에는 윤곽선 표시",  -- 795
-        "미니맵",  -- 796
-        "금색 테두리 대신 미니맵 주위에 얇은 고리와 부드러운 후광 표시",  -- 797
-        "경험치 바",  -- 798
-        "경험치 바와 평판 바를 조금 더 작게, 각자의 색으로",  -- 799
-        "대화창",  -- 800
-        "대화창 탭 이름에 윤곽선을 넣고 입력 상자는 어두운 유리 모양으로",  -- 801
-        "피해 측정기",  -- 802
-        "게임의 피해량 측정기를 HUD 모양으로: 어두운 바탕에 기울어진 막대와 외곽선 글자; 하는 일은 모두 그대로입니다",  -- 803
-        "점검: %d 중 %d 통과",  -- 804
-        "접속한 뒤로 게임이 멈춘 적이 없습니다.",  -- 805
-        "게임이 멈춘 순간과 그중 HUD가 차지한 몫:",  -- 806
-        "HUD가 가장 느렸던 순간:",  -- 807
-        "디버그 보고서",  -- 808
-        "문제 해결 보고서를 알아서 수집: 접속할 때, 그리고 다시 불러오거나 접속을 종료할 때 한 번 더 (저장된 설정에 보관됩니다)",  -- 809
-        "접속한 뒤로 게임이 멈춘 순간과 그중 HUD 자체 작업이 차지한 몫",  -- 810
-        "HUD 프리셋: %s, 카메라에 맞춤",  -- 811
-        "프리셋: %s",  -- 812
-        "'%s' 레이아웃이 게임의 편집 모드에 추가되었습니다. 사용하려면 거기에서 선택하세요 (게임 메뉴 > 편집 모드 > 레이아웃).",  -- 813
-        "알 수 없는 프리셋 '%s'",  -- 814
-        "TV용: HUD와 대화창의 글자가 커집니다.",  -- 815
-        "모니터용: 글자가 기본 크기입니다.",  -- 816
-        "우리 프레임이 처음 위치로 돌아갔습니다. 편집 모드에서 게임의 %s 레이아웃을 선택하세요 (게임 메뉴 > 편집 모드 > 레이아웃).",  -- 817
-        "프리셋이 카메라 거리를 설정함",  -- 818
-        "프리셋이 레이아웃에 맞는 거리로 카메라도 한 번 옮겨 줌 (이후에는 자유롭게 확대·축소)",  -- 819
-        "액션",  -- 820
-        "삼인칭 시점: 캐릭터 옆의 얇은 세로 바, 모든 효과 켜짐, 전투 중이 아닐 때는 흐려집니다",  -- 821
-        "클래식",  -- 822
-        "우리 프레임을 WoW의 기본 위치에 배치, 차분한 효과, 게임의 게임패드 바를 그대로 사용",  -- 823
-        "최소",  -- 824
-        "꼭 필요한 것만: 우호적인 NPC는 가리키거나 조준하거나 대상으로 지정했을 때만 이름표(하는 일 포함)를 표시; 칭호 없는 이름; 전투 밖에서는 내 바가 희미하게 쉬고 있음 (생명력이 낮으면 항상 표시)",  -- 825
-        "오픈 월드",  -- 826
-        "탐험을 위한 깔끔한 화면: 옆에서 흐리게 쉬는 얇은 바, 자원 바 없는 이름표, 사라지는 대화창",  -- 827
-        "모험",  -- 828
-        "콘솔 오픈 월드 모험 스타일: 옆에 생명력 표시, 가운데 위쪽에 작은 대상, 마을 주민은 가리킬 때만, 빠르게 사라지는 채팅",  -- 829
-        "소울라이크",  -- 830
-        "왼쪽 위에 내 바, 보스 바처럼 화면 아래 중앙의 큰 대상 바, 모든 타격이 느껴짐",  -- 831
-        "슈터",  -- 832
-        "조준하는 곳 가까이 중앙 바로 오른쪽의 세로 바, 높이 위치한 대상, 강한 타격 반응",  -- 833
-        "크로스바",  -- 834
-        "컨트롤러로 즐기는 MMO 스타일: 가운데 위쪽에 대상과 주시 대상, 게임패드 바 바로 위에 내 바, 왼쪽에 파티, 전체 이름표",  -- 835
-        "ARPG",  -- 836
-        "액션 RPG 스타일: 카메라는 멀리, 왼쪽 아래에 생명력 표시, 가운데 위쪽에 대상, 잔챙이 적은 작게, 모든 타격이 크게",  -- 837
-        "나침반",  -- 838
-        "1인칭 RPG 스타일: 카메라는 가까이, 가운데 아래에 내 바, 위쪽 가장자리 아래에 대상, 마을 주민은 가리킬 때만",  -- 839
-        "공격대",  -- 840
-        "WoW 기본 배치에 파티와 공격대 창, 이름표의 생명력 퍼센트와 레벨 등 그룹에 필요한 모든 것",  -- 841
-        "ControllerCam 프리셋 따르기",  -- 842
-        "ControllerCam에서 모든 곳에 카메라 프리셋을 고르면 맞는 HUD 프리셋도 함께 고름 (카메라는 자체 거리를 유지)",  -- 843
-        "현대적",  -- 844
-        "HUD 전체를 프리셋으로 설정: action, classic, minimal, openworld, adventure, soulslike, shooter, crossbar, arpg, compass, raid",  -- 845
-        "대상 프레임과 이름표를 한 번에 소형 또는 전체로",  -- 846
-        "대상 프레임을 소형 또는 전체로",  -- 847
-        "방 건너편의 TV 또는 팔 닿는 거리의 모니터에 맞게 글자 크기 조정",  -- 848
-        "게임 자체의 현대적 또는 클래식 레이아웃에 맞게 우리 프레임을 처음 위치로 되돌리기",  -- 849
-        "전체 설정(HUD, 카메라, 게임 레이아웃): 이 줄을 복사(Ctrl+C)하여 보관하거나 공유하세요.",  -- 850
-        "HUD 설정 한 줄을 붙여넣고(Ctrl+V) 확인하세요.",  -- 851
-        "이 줄이 손상되었습니다: 처음부터 끝까지 다시 복사하세요.",  -- 852
-        "이 줄은 더 새로운 버전에서 만들어졌습니다: 애드온을 업데이트하세요.",  -- 853
-        "HUD 설정 줄이 아닙니다.",  -- 854
-        "설정을 가져왔습니다: %d개 적용, %d개 제외.",  -- 855
-        "카메라 설정도 함께 가져왔습니다.",  -- 856
-        "카메라 설정은 그대로 두었습니다.",  -- 857
-        "게임 레이아웃이 이제 '%s'입니다.",  -- 858
-        "게임 레이아웃은 그대로 두었습니다.",  -- 859
-        "설정을 한 줄의 텍스트로, 보관하거나 공유",  -- 860
-        "/cchud export로 만든 텍스트 줄에서 설정 가져오기",  -- 861
-        "게임패드 UI를 사용하는 동안 HUD가 켜집니다. 옵션: 옵션 > 애드온 > ControllerCam > HUD 또는 /cchud.",  -- 862
-        "카메라만: HUD는 쉬고 게임 인터페이스는 그대로입니다. /cchud on 으로 켤 수 있습니다.",  -- 863
-        "컨트롤러에 맞게 화면도 설정할까요? 게임의 편집 모드에 CCHUD라는 레이아웃을 추가하며, 거기에서 직접 선택하면 됩니다: 재사용 대기시간 줄을 게임패드 버튼에서 떨어진 대상 아래에 놓습니다. 기존 레이아웃은 그대로 유지됩니다 (/cchud setup 으로 다시 제안합니다).",  -- 864
-        "설정하기",  -- 865
-        "나중에",  -- 866
-        "ControllerCam에는 컨트롤러용 인터페이스인 HUD가 함께 들어 있습니다: 게임패드 UI를 사용하는 동안 자체 유닛 프레임, 이름표, 시전 바 등을 보여 줍니다. HUD도 사용할까요, 카메라만 사용할까요?",  -- 867
-        "카메라 + HUD",  -- 868
-        "카메라만",  -- 869
-        "이 클라이언트에서는 애드온이 레이아웃을 변경할 수 없습니다.",  -- 870
-        "다시 묻기: 카메라와 HUD, 또는 카메라만",  -- 871
-        "HUD용 화면 레이아웃을 다시 제안 (게임의 편집 모드)",  -- 872
-        "게임패드 UI를 사용하는 동안 표시됩니다. 게임의 편집 모드에서 프레임을 끌어 옮기세요.",  -- 873
-        "프리셋",  -- 874
-        "화면 기준",  -- 875
-        "TV",  -- 876
-        "모니터",  -- 877
-        "버튼 아이콘",  -- 878
-        "게임이 컨트롤러 버튼에 표시하는 아이콘: 사용 중인 컨트롤러에 맞춰 자동으로 찾거나, 직접 고른 종류",  -- 879
-        "글꼴",  -- 880
-        "게임 레이아웃 초기화",  -- 881
-        "체험해 보기",  -- 882
-        "데모 재생",  -- 883
-        "모든 적중 효과 표시",  -- 884
-        "자가 점검 실행",  -- 885
-        "게임패드 바: 간략 / 전체",  -- 886
-        "설정 내보내기",  -- 887
-        "설정 가져오기",  -- 888
-        "모든 설정을 보려면 기본 페이지에서 「고급 옵션 표시」를 선택하세요.",  -- 889
-        "모듈",  -- 890
-        "빠른 전환",  -- 891
-        "일반",  -- 892
-        "HUD",  -- 893
-        "이 클라이언트에서는 옵션 창을 사용할 수 없습니다.",  -- 894
-        "활성화",  -- 895
-        "HUD 전체; 끄면 게임 기본 프레임이 돌아옴",  -- 896
-        "마우스 및 키보드 UI에서도 사용",  -- 897
-        "평소에는 HUD가 게임패드 UI를 사용하는 동안에만 작동합니다",  -- 898
-        "게임 기본 프레임 치우기",  -- 899
-        "우리 프레임이 표시되는 동안 게임의 플레이어, 대상, 주시 대상 프레임을 숨김",  -- 900
-        "채팅창을 왼쪽 위로",  -- 901
-        "HUD가 작동하는 동안 채팅창을 왼쪽 위로 이동",  -- 902
-        "대기 시 세로 막대",  -- 903
-        "전투 중이 아닐 때 생명력이 가득 찬 상태에서 세로 막대가 보이는 정도 (0이면 숨김)",  -- 904
-        "직업 색상",  -- 905
-        "내 바와 다른 플레이어의 바를 직업 색상으로 표시",  -- 906
-        "직업 아이콘",  -- 907
-        "대상과 대상의 대상에서 플레이어 이름 앞에 직업 아이콘 표시",  -- 908
-        "대상 프레임의 위협 수준",  -- 909
-        "대상 프레임의 방패 아이콘과 빛: 나를 공격하는 동안 빨강, 곧 끌어올 때 빨강과 노랑, 잃고 있을 때 노랑과 파랑, 나를 노리지 않을 때 파랑",  -- 910
-        "모든 곳에 소형 바",  -- 911
-        "대상 프레임과 이름표를 소형 스타일로, 너비 절반 남짓 (각각 따로 설정할 수 있으며, 프리셋은 이를 바꾸지 않음)",  -- 912
-        "간략한 대상 프레임",  -- 913
-        "대상 프레임을 절반보다 약간 넓게",  -- 914
-        "전투 중 체력 색상",  -- 915
-        "전투 중 체력이 줄어들수록 체력 바가 녹색에서 노란색을 거쳐 빨간색으로 변함",  -- 916
-        "글자 뒤 음영",  -- 917
-        "대상의 글자가 잘 보이도록 뒤에 옅은 어두운 띠를 표시",  -- 918
-        "글자 크기",  -- 919
-        "우리 프레임의 글자 크기",  -- 920
-        "프레임 크기",  -- 921
-        "우리 유닛 프레임의 크기",  -- 922
-        "전투 중 행동 바",  -- 923
-        "주의가 필요할 때까지 전투 중 행동 바, 소환수, 주시 대상이 얼마나 보이는지",  -- 924
-        "생명력이 다음 미만이면 전체",  -- 925
-        "생명력이 이 값 아래로 떨어지면 바가 전체로 돌아옵니다",  -- 926
-        "마나가 다음 미만이면 전체",  -- 927
-        "마나가 이 값 아래로 떨어지면 바가 전체로 돌아옵니다",  -- 928
-        "대기 중 플레이어 바",  -- 929
-        "생명력이 가득하거나 전투 중이 아닐 때 플레이어 바의 표시 정도 (0이면 숨김)",  -- 930
-        "상인 및 은행 도움말",  -- 931
-        "상인의 잡동사니 판매 버튼이 판매할 항목을 물어봄; 상인과 은행에서 빠른 이동",  -- 932
-        "고급 옵션 표시",  -- 933
-        "주요 스위치만이 아닌 모든 설정",  -- 934
-        "플레이어 프레임",  -- 935
-        "우리 플레이어 바, 왼쪽 위",  -- 936
-        "대상 프레임",  -- 937
-        "우리 대상 바, 위 가운데",  -- 938
-        "소환수 바",  -- 939
-        "플레이어 바 아래 또는 세로 바 옆에 작은 소환수 바",  -- 940
-        "주시 대상 프레임",  -- 941
-        "우리 주시 대상 프레임",  -- 942
-        "3인칭 시점용으로 캐릭터 옆에 표시되는 얇은 세로 생명력 및 자원 바 (플레이어 바 대신)",  -- 943
-        "상인이 열리면 잡동사니 판매",  -- 944
-        "상인이 열리자마자 규칙에 따라 잡동사니 판매",  -- 945
-        "흰색 무기와 방어구는 잡동사니",  -- 946
-        "흰색 무기와 방어구를 잡동사니로 취급 (도구, 낚싯대, 사용 효과가 있는 장비, 업그레이드가 될 수 있는 것은 제외; 항상 먼저 확인)",  -- 947
-        "은행을 열면 보관",  -- 948
-        "은행용으로 표시한 물건과, 켜져 있으면 은행에 이미 있는 물건이 저절로 들어갑니다",  -- 949
-        "게임의 옵션; 우리 작은 프레임이 이를 따름",  -- 950
-        "재사용 대기시간 관리자",  -- 951
-        "게임의 재사용 대기시간 관리자",  -- 952
-        "개인 자원 표시",  -- 953
-        "캐릭터 아래에 생명력과 자원 표시",  -- 954
-        "은행이 재료를 자동으로 받음",  -- 955
-        "은행에 대한 게임의 옵션",  -- 956
-        "버프 시작 시 툴팁",  -- 957
-        "게임 옵션: 버프가 적용될 때 버프 툴팁이 잠깐 나타납니다 (게임패드 UI)",  -- 958
-        "대화창 이름에 직업 색상 사용",  -- 959
-        "모든 종류의 대화에 한 번에 적용되는 게임의 대화 설정: 플레이어 이름을 직업 색상으로 표시",  -- 960
-        "옵션 창 열기 (옵션 > 애드온 > ControllerCam HUD)",  -- 961
-        "프레임",  -- 962
-        "화면 흐리게",  -- 963
-        "효과",  -- 964
-        "모양",  -- 965
-        "퀘스트, 대화 및 지도",  -- 966
-        "가방, 은행, 상인",  -- 967
-        "낚시",  -- 968
-        "접근성",  -- 969
-        "네이티브 옵션",  -- 970
-        "%s  |  게임패드 UI: %s  |  실행 중: %s",  -- 971
-        "플레이어 %s, 대상 %s, 소환수 %s, 주시 대상 %s  |  게임 프레임 치움: %s  |  채팅 이동: %s",  -- 972
-        "네이티브 옵션: 대상의 대상 %s, 재사용 대기시간 관리자 %s, 개인 자원 %s",  -- 973
-        "글자 크기 %d%%  |  글자 음영: %s",  -- 974
-        "상인 및 은행 도움말: %s  |  자동 판매: %s  |  흰색 장비는 잡동사니: %s",  -- 975
-        "대기 중 가시성 %d%%  |  크기 %d%%  |  직업 색상: %s",  -- 976
-        "게임패드 UI를 위한 최소한의 액션 게임 HUD.",  -- 977
-        "활성화됨",  -- 978
-        "비활성화됨: 게임 기본 프레임이 돌아왔습니다",  -- 979
-        "마우스 및 키보드 UI에서도 사용: %s",  -- 980
-        "게임 기본 프레임 치움: %s",  -- 981
-        "채팅을 왼쪽 위로 이동: %s",  -- 982
-        "직업 색상: %s",  -- 983
-        "이 클라이언트에는 해당 옵션이 없습니다.",  -- 984
-        "%s: %s (게임의 기본 옵션)",  -- 985
-        "지금은 게임이 이를 받아들이지 않았습니다.",  -- 986
-        "상인 및 은행 도움말: %s",  -- 987
-        "자동 판매: %s",  -- 988
-        "흰색 장비는 잡동사니: %s",  -- 989
-        "상인 도움말이 꺼져 있습니다.",  -- 990
-        "사용법: /cchud sell [junk | recommended | white | green | blue]",  -- 991
-        "은행이 열리면 표시된 아이템 입금: %s",  -- 992
-        "사용법: /cchud junk <item> (아이템을 Shift+클릭해 채팅 입력줄에 넣으세요)",  -- 993
-        "아이템 %d: 잡동사니, 나머지와 함께 판매",  -- 994
-        "아이템 %d: 보관, 절대 판매 안 함",  -- 995
-        "아이템 %d: 은행용",  -- 996
-        "글자 음영: %s",  -- 997
-        "사용법: /cchud text <80-250>",  -- 998
-        "글자 크기 %d%%",  -- 999
-        "데모 중지됨",  -- 1000
-        "HUD가 실행 중이 아닙니다.",  -- 1001
-        "데모 실행 중: 가상의 전투를 반복 재생합니다. 중지하려면 /cchud demo를 다시 입력하세요.",  -- 1002
-        "사용법: /cchud idle <0-100>",  -- 1003
-        "대기 중 가시성 %d%%",  -- 1004
-        "사용법: /cchud scale <50-200>",  -- 1005
-        "크기 %d%%",  -- 1006
-        "프레임을 끌어 옮긴 다음 /cchud lock을 입력하세요.",  -- 1007
-        "프레임 고정됨",  -- 1008
-        "모든 것이 처음 상태로 돌아갔습니다: 설정, 프레임, 화면 레이아웃 (상인 표시와 가격 기록은 유지됩니다).",  -- 1009
-        "프레임이 처음 위치로 돌아왔습니다",  -- 1010
-        "알 수 없는 명령 '%s'. /cchud help를 입력하세요",  -- 1011
-        "오류 목록을 비웠습니다.",  -- 1012
-        "기록된 오류가 없습니다.",  -- 1013
-        "오류 %d개 기록됨 (최신이 마지막). /cchud errors clear로 목록을 비웁니다.",  -- 1014
-        "상태 표시",  -- 1015
-        "HUD 켜기 또는 끄기 (끄면 게임 기본 프레임이 돌아옴)",  -- 1016
-        "마우스 및 키보드 UI에서도 HUD 사용",  -- 1017
-        "우리 프레임 또는 게임 기본 프레임 중 선택",  -- 1018
-        "캐릭터 옆에 표시되는 얇은 세로 생명력 및 자원 막대",  -- 1019
-        "대상의 대상 (게임의 기본 옵션, 게임 메뉴에도 있음)",  -- 1020
-        "게임의 재사용 대기시간 관리자 (게임의 기본 옵션)",  -- 1021
-        "캐릭터 아래의 생명력과 자원 (게임의 기본 옵션)",  -- 1022
-        "버프가 시작될 때 나타나는 툴팁 (게임 자체 옵션)",  -- 1023
-        "게임 기본 플레이어 및 대상 프레임을 계속 표시(켜기) 또는 치움(끄기)",  -- 1024
-        "상인에게서: 판매할 항목 선택 (또는: sell junk, sell recommended, sell white | green | blue)",  -- 1025
-        "흰색 무기와 방어구를 잡동사니로 간주",  -- 1026
-        "아이템 표시: 항상 판매, 절대 판매 안 함, 또는 은행용 (Shift+클릭해 채팅 입력줄에 넣기)",  -- 1027
-        "은행에서: 은행에 이미 있는 물건과 은행용으로 표시한 물건을 모두 보관",  -- 1028
-        "은행에서: 이미 조금 가지고 있는 아이템 꺼내기",  -- 1029
-        "은행을 열자마자 보관",  -- 1030
-        "은행이 재료를 자동으로 받음 (게임의 기본 옵션)",  -- 1031
-        "글자 크기, 퍼센트 단위 (150이면 TV에서 보기 좋음)",  -- 1032
-        "아무 일도 없을 때 플레이어 바가 보이는 정도 (0이면 숨김)",  -- 1033
-        "프레임 크기 (퍼센트)",  -- 1034
-        "프레임을 원하는 위치로 끌기 (게임의 편집 모드로도 가능)",  -- 1035
-        "프레임을 처음 위치로 되돌리기",  -- 1036
-        "프레임 반응을 보기 위해 짧은 가상 전투 재생 (다시 입력하면 중지)",  -- 1037
-        "화면에 표시된 것을 설정과 비교 (check all은 모든 행을 나열)",  -- 1038
-        "이 클라이언트의 게임패드 UI 설명 저장 (문제 해결용)",  -- 1039
-        "이 목록 표시",  -- 1040
-        "HUD의 최근 오류, 다시 불러온 후에도 (보고용)",  -- 1041
+        "가장 가까운 퀘스트 집중",  -- 544
+        "이동하는 동안 게임이 안내하는 퀘스트가 항상 목록에서 가장 가까운 퀘스트가 됩니다. 직접 집중한 퀘스트는 10분 동안 그대로 둡니다",  -- 545
+        "퀘스트 목록: 짧은 목표",  -- 546
+        "퀘스트 목록의 목표를 필요한 말만 남기고 종류 아이콘을 앞에 붙입니다: 0/1 드레드라이즈 선장 처치 대신 해골 아이콘과 0/1 드레드라이즈 선장",  -- 547
+        "채팅에 퀘스트 진행 상황",  -- 548
+        "퀘스트가 진행될 때 채팅에 짧은 한 줄: 피묻은 뼈 목걸이: 4/25, 목표 완료, 완료 보고 가능한 퀘스트",  -- 549
+        "파티에 퀘스트 진행 알림",  -- 550
+        "파티에서는(공격대 제외) 같은 줄이 파티 대화로 가서 다른 사람도 볼 수 있음, 잠깐씩 간격을 두고; 당신도 거기서 봄",  -- 551
+        "퀘스트에 필요한 것 보관",  -- 552
+        "퀘스트 목록의 퀘스트가 아직 요구하는 아이템, 또는 아직 할 수 있는 퀘스트를 시작하는 아이템은 퀘스트로 표시됨: 대신 팔거나 경매에 올리지 않음",  -- 553
+        "퀘스트의 추천 순서를 알려줍니다: 완료된 것을 보고하고, 혼자 할 수 있는 가장 가까운 것, 그다음 나머지",  -- 554
+        "퀘스트 왼쪽",  -- 555
+        "퀘스트 오른쪽",  -- 556
+        "퀘스트 아래",  -- 557
+        "파밍 목록이 가득 찼습니다.",  -- 558
+        "파밍 목록: %s, %d개 원함.",  -- 559
+        "파밍",  -- 560
+        "%d개 더",  -- 561
+        "아직 파밍할 것이 없습니다.",  -- 562
+        "한 묶음 더",  -- 563
+        "빼기",  -- 564
+        "비우기",  -- 565
+        "완료",  -- 566
+        "파밍 목록을 모두 비울까요?",  -- 567
+        "파밍 목록: 선택 / 완료",  -- 568
+        "파밍 목록: 가리킨 아이템 추가",  -- 569
+        "파밍 목록에 없습니다.",  -- 570
+        "파밍 목록이 비었습니다.",  -- 571
+        "파밍 목록: 위치",  -- 572
+        "퀘스트 목록 옆에 파밍 목록",  -- 573
+        "모으려는 것과 가진 수, 원하는 수: 내 가방과 은행, 그리고 이 서버의 다른 캐릭터들 것까지. 숙련 계획의 재료를 버튼 하나로 추가하거나 어떤 아이템이든 추가하세요",  -- 574
+        "파밍 목록을 퀘스트 목록의 왼쪽, 오른쪽 또는 퀘스트 아래에 둡니다",  -- 575
+        "퀘스트 목록 옆의 파밍 목록: 컨트롤러로 선택; add <아이템> [수량], remove <아이템>, clear, 또는 위치는 left / right / bottom",  -- 576
+        "전투 중이 아닙니다.",  -- 577
+        "이 클라이언트에는 게임패드 바가 없습니다.",  -- 578
+        "이 클라이언트는 애드온이 변경하는 것을 허용하지 않습니다. 편집 모드를 사용하세요.",  -- 579
+        "게임패드 바: %s",  -- 580
+        "간략",  -- 581
+        "전체",  -- 582
+        "슬림 게임패드 바",  -- 583
+        "게임패드 행동 단축바 뒤의 무거운 그림을 숨기고 더 작게 표시",  -- 584
+        "게임패드 바 크기",  -- 585
+        "슬림 바를 켰을 때 게임패드 바의 크기 (퍼센트)",  -- 586
+        "게임의 게임패드 바를 간략 또는 전체 모드로 (편집 모드 설정과 동일)",  -- 587
+        "전투 중이 아닐 때 흐리게",  -- 588
+        "/cchud fade <요소> on | off 로 하나를 설정합니다. all 은 흐리게 전체입니다.",  -- 589
+        "게임패드 바, 미니맵, 퀘스트 목록, 피해 측정기, 경험치 바가 전투 중이 아닐 때 함께 쉬고, 전투, 트리거 당김 또는 적 대상이 있으면 돌아옵니다",  -- 590
+        "쉴 때의 화면",  -- 591
+        "전투 중이 아닐 때 쉬는 화면 요소가 얼마나 보이는지 (0이면 숨김)",  -- 592
+        "흐려짐: 게임패드 바",  -- 593
+        "흐려짐: 미니맵",  -- 594
+        "흐려짐: 퀘스트 목록",  -- 595
+        "흐려짐: 피해 측정기",  -- 596
+        "흐려짐: 경험치 바",  -- 597
+        "흐려짐: 강화 효과",  -- 598
+        "흐려짐: 재사용 대기시간 줄",  -- 599
+        "이 화면 요소가 전투 중이 아닐 때 나머지와 함께 흐려질지 여부 (끄면: 항상 그대로 유지)",  -- 600
+        "전투 중이 아닐 때 화면 흐리게: 무엇이 흐려지는지 (미니맵, 퀘스트 목록 등), 각각 켜기 또는 끄기",  -- 601
+        "저장됨: 게임이 디스크에 쓰도록 /reload 를 입력하세요.",  -- 602
+        "태세와 소환수 버튼을 바 위로",  -- 603
+        "태세와 소환수 명령 버튼이 초록색과 빨간색 대상 지정 아이콘이 있던 자리에 놓여 휠이 화면에 온전히 열립니다; 그 아이콘들은 숨겨집니다",  -- 604
+        "게임패드 바의 요소가 어디에 있고 무엇이 쉬는지 나열 (문제 해결용)",  -- 605
+        "자동",  -- 606
+        "기본",  -- 607
+        "게임 설정 그대로",  -- 608
+        "버튼 아이콘: %s.",  -- 609
+        "지금 사용 중인 컨트롤러가 없거나 게임에 아이콘 스타일이 없습니다. 컨트롤러가 연결되면 적용됩니다.",  -- 610
+        "게임이 버튼 아이콘을 받아들이지 않았습니다.",  -- 611
+        "컨트롤러가 자신의 종류를 알려주지 않습니다. 아이콘은 게임 설정 그대로 둡니다.",  -- 612
+        "게임이 컨트롤러 버튼에 표시하는 아이콘: auto (사용 중인 컨트롤러에 맞춤), xbox, playstation, switch, steam, generic (숫자), 또는 게임 설정 그대로 두려면 game",  -- 613
+        "게임패드 바에서 비켜난 재사용 대기시간 줄",  -- 614
+        "게임의 재사용 대기시간 줄이 게임패드 버튼 위가 아니라 대상 아래에 조금 작게 놓입니다 (게임의 기본 레이아웃에서만: 직접 만든 레이아웃에서는 배치한 자리에 그대로 있습니다)",  -- 615
+        "낚시 모드: 꺼짐.",  -- 616
+        "낚시: %s 눌러 던지기",  -- 617
+        "미끼 없음: %s 두 번 눌러 %s 사용",  -- 618
+        "%s 눌러 낚싯대 넣기",  -- 619
+        "낚시 모드: %s 눌러 낚싯줄을 던지고, 찌가 흔들리면 다시 눌러 물고기를 낚아챕니다.",  -- 620
+        "%s 낚아채기, %s 다시 던지기",  -- 621
+        "낚시 모드는 손에 낚싯대가 있어야 합니다.",  -- 622
+        "낚시를 배우지 않았습니다.",  -- 623
+        "낚시 모드: 버튼 하나로 던지고 낚아채기",  -- 624
+        "낚시 버튼: %s",  -- 625
+        "버튼 하나로 낚시",  -- 626
+        "낚싯대를 들고 있으면: 상호작용할 대상이 없을 때 상호작용 버튼으로 낚싯줄을 던지고, 찌가 흔들리면 다시 눌러 낚아챕니다. 잡은 것은 자동으로 챙깁니다. B를 누르면 낚싯대를 넣고 무기를 다시 듭니다",  -- 627
+        "한 번 눌러 다시 던지기",  -- 628
+        "찌가 나가 있는 동안 낚시 버튼을 한 번 누르면 새로 던지고, A로 물고기를 낚아챕니다 (게임이 입질을 알려 주지 않아 한 버튼으로 둘 다 할 수 없습니다); 끄면: 낚시 버튼이 게임의 상호작용처럼 낚아챕니다",  -- 629
+        "두 번 눌러 미끼 달기",  -- 630
+        "낚시 버튼을 빠르게 두 번 누르면, 낚싯대에 미끼가 없을 때 두 번째 누름이 가방 속 가장 좋은 미끼를 낚싯대에 답니다",  -- 631
+        "낚시 중 게임패드 바 숨기기",  -- 632
+        "낚싯대를 들고 있으면 게임패드 바가 숨겨져 물이 잘 보입니다. 낚시 안내에 던지기 버튼이 표시됩니다. 전투가 시작되거나 낚싯대를 넣으면 바로 돌아옵니다",  -- 633
+        "한 버튼 낚시를 잠시 끄거나 다시 켜기 (낚싯대를 들면 저절로 켜집니다)",  -- 634
+        "낚시하는 버튼: 처음에는 상호작용 버튼(네모 또는 X), 또는 다른 아무 버튼, 예를 들어 트리거 (rt)",  -- 635
+        "듀로타의 해안은 붉은 바위와 따뜻한 얕은 바다입니다. 메아리 군도의 트롤들은 섬의 밥 짓는 불 냄새가 밀물에 실려 올 때 고등어 떼가 가장 많이 몰린다고 말합니다.",  -- 636
+        "멀고어의 호수는 작고 맑으며 느긋합니다. 타우렌은 다른 모든 일을 할 때처럼 낚시도 천천히, 감사하는 마음으로 합니다.",  -- 637
+        "불모의 땅의 오아시스는 어디나 만남의 장소입니다. 낮에 무엇이 와서 물을 마시든, 밤이면 그 아래에서 무언가가 헤엄칩니다.",  -- 638
+        "텔드랏실의 연못은 모두 한 그루 나무의 그늘 아래 있습니다. 나이트 엘프 낚시꾼들은 이곳 물고기가 해를 본 적도 없고 그리워하지도 않는다고 장담합니다.",  -- 639
+        "어둠의 해안의 물은 잿빛이고 차가우며 난파선으로 가득합니다. 아우버다인 앞바다에서 입질하는 녀석의 절반은 누군가 잃어버린 화물 속에 살림을 차렸습니다.",  -- 640
+        "잿빛 골짜기의 강은 웬만한 왕국보다 오래된 나뭇잎 아래로 흐릅니다. 물고기도 빠르지만, 여기서 뭘 하느냐고 물으러 오는 파수꾼들은 더 빠릅니다.",  -- 641
+        "버섯구름 봉우리 아래에서는 물이 귀해서 다들 악착같이 지킵니다. 이곳 물고기는 제 자리를 당당히 얻어 낸 녀석입니다.",  -- 642
+        "돌발톱 산맥의 호수는 봉우리 사이 높고 추운 곳에 있습니다. 낚시가 이렇게 잘되지만 않았어도 고블린들이 진작 물을 다 빼 버렸을 겁니다.",  -- 643
+        "잊혀진 땅의 해안은 뼈와 잿빛 파도뿐입니다. 저 아래 무언가는 둘 다 즐겨 먹는 모양입니다.",  -- 644
+        "페랄라스는 물가까지 온통 푸릅니다. 강은 깊고 따뜻하며, 그야말로 살아 숨 쉽니다.",  -- 645
+        "먼지진흙 습지대는 어디까지가 땅이고 어디부터 물인지 아무도 모릅니다. 물가에서 낚시하고, 끝나면 발가락 수를 세어 보십시오.",  -- 646
+        "타나리스에서 물이라 부를 만한 것은 스팀휘들 항구에만 있습니다. 고블린들은 낚시할 권리를 팔 텐데, 가만두면 두 번 팝니다.",  -- 647
+        "아즈샤라의 눈부신 만 아래에는 물에 잠긴 도시가 있습니다. 노련한 낚시꾼들은 큰 놈들이 옛 정원 자리에 산다고 합니다.",  -- 648
+        "악령의 숲의 웅덩이는 빛이 나는데, 좋은 뜻으로 그런 것은 아닙니다. 아직도 거기서 헤엄치는 녀석들은 고집이 상상을 초월합니다.",  -- 649
+        "운고로의 온천과 타르가 둘러진 호수에는 세상이 잊어버린 것들이 남아 있습니다. 그중 몇몇은 뭅니다.",  -- 650
+        "달의 숲의 엘룬아라 호수는 참은 숨처럼 고요합니다. 드루이드들이 바라는 것은 먹을 만큼만 잡아 가라는 것뿐입니다.",  -- 651
+        "실리더스는 모래와 바람, 그리고 날갯짓 소리뿐입니다. 여기서 낚시할 물을 찾았다면 아무에게도 말하지 마십시오.",  -- 652
+        "여명의 설원의 호수는 가장자리는 얼고 한가운데에서는 김이 오릅니다. 이곳 물고기는 추위에 대비해 살이 올라 있어, 먼 길을 걸어온 보람이 있습니다.",  -- 653
+        "오그리마의 연못에서는 딱히 할 일이 없는 일꾼들과, 자기도 그렇다고 말하는 늙은 그런트들이 낚시를 합니다. 둘 다 큰 놈은 놓쳤다고 말합니다.",  -- 654
+        "썬더 블러프의 연못에서 잡힌 물고기는 평생을 평원보다 한참 높은 곳에서 살았습니다. 그래도 태연해 보입니다.",  -- 655
+        "다르나서스는 물도 신전만큼이나 정성껏 돌봅니다. 물고기들은 감탄받는 데 익숙해졌습니다.",  -- 656
+        "알터랙 산맥의 호수는 눈 녹은 물이며, 오우거와 비밀결사대가 아무도 보지 않을 때 낚시를 합니다.",  -- 657
+        "아라시의 물가는 낚시꾼보다 군대를 더 많이 보았습니다. 물고기들은 물 위에 누구의 깃발이 나부끼든 신경 쓰지 않은 지 오래입니다.",  -- 658
+        "황야의 땅은 끝에서 끝까지 먼지뿐입니다. 여기서 입질이 온다면 작은 기적이니, 기적답게 대하십시오.",  -- 659
+        "저주받은 땅의 해안은 붉고, 깎여 나갔고, 조용합니다. 그 파도 속에 사는 것은 참 많은 것을 견디며 사는 법을 배웠습니다.",  -- 660
+        "티리스팔의 호수는 병든 빛깔의 하늘 아래 잔잔히 누워 있습니다. 포세이큰은 습관처럼 낚시를 합니다. 죽은 자는 많이 먹지 않지만, 좋아했다는 것만은 기억합니다.",  -- 661
+        "은빛소나무 숲의 긴 해안은 온통 안개와 소나무 그림자입니다. 낚시는 잘되는데, 이곳에 대해 누가 하는 밝은 말은 그것 하나뿐입니다.",  -- 662
+        "서부 역병지대의 강은 아직 흐르지만 깨끗하지는 않습니다. 건져 올린 것은 두 번 살펴보십시오.",  -- 663
+        "동부 역병지대에서 낚시하는 사람은 드물고, 했다고 말하는 사람은 더 드뭅니다. 이곳의 물은 역병이 남겨 둔 것만을 간직하고 있습니다.",  -- 664
+        "힐스브래드의 강과 긴 남쪽 해안은 이 땅을 두고 벌어진 모든 싸움에서 양쪽 모두를 먹여 살렸습니다.",  -- 665
+        "동부 내륙지의 호수는 높은 숲 속에 숨어 있고, 와일드해머 드워프들은 아무도 못 본다 싶으면 그리핀 등에 탄 채로 낚시를 합니다.",  -- 666
+        "던 모로의 호수는 한 해의 대부분 얼음에 둘러싸여 있습니다. 드워프는 구멍을 뚫고 맥주 한 잔과 함께 앉아서, 무엇이 물든 좋은 하루였다고 합니다.",  -- 667
+        "이글거리는 협곡에는 다른 땅이라면 강이 있을 자리에 용암이 흐릅니다. 낚싯대 대신 마실 것을 챙겨 오십시오.",  -- 668
+        "불타는 평원은 재와 불씨뿐입니다. 이곳의 물이 무언가를 내어 준다면, 분명 뜨거울 겁니다.",  -- 669
+        "엘윈의 아이들은 누구나 수정 호수나 돌무덤 호수에서 낚시를 배웁니다. 그곳의 잔챙이들은 대대로 아이들을 골탕 먹여 왔습니다.",  -- 670
+        "죽음의 고개에는 물도 적고 반기는 이는 더 적습니다. 카라잔 아래 웅덩이에 있는 것은 그대로 두는 편이 좋습니다.",  -- 671
+        "그늘숲 가장자리를 따라 흐르는 강은 언제 보아도 검습니다. 물고기는 어둠을 개의치 않는 듯한데, 낚시꾼은 그렇지 않습니다.",  -- 672
+        "모단 호수는 이 땅의 자랑이며, 거대한 스톤워트 댐이 그 물을 막고 있습니다. 드워프들은 낚시 무용담을 이 호수에 견주어 보는데, 대개는 호수가 이깁니다.",  -- 673
+        "붉은마루의 영원의 호수는 그림처럼 아름답고, 레이크샤이어의 부두마다 낚싯대가 드리워져 있습니다. 마을 사람들은 좋은 자리를 전부 알지만 하나도 알려 주지 않습니다.",  -- 674
+        "밀림의 강에서 거친 남쪽 곶까지, 가시덤불 골짜기는 대륙에서 가장 풍요로운 물을 품고 있습니다. 무법항의 낚시꾼들은 이를 두고 대회를 여는데, 거의 다 반칙을 합니다.",  -- 675
+        "슬픔의 늪은 초록 나무 아래 초록 물입니다. 물고기에서 진흙 맛이 나는데, 이곳 주민들은 그 맛을 좋아합니다.",  -- 676
+        "서부 몰락지대의 밭은 망했지만 바다는 그렇지 않았습니다. 남은 사람들은 길고 잿빛인 해안에 기대어 살아갑니다.",  -- 677
+        "저습지는 이름값을 합니다. 메네실 항구의 부두가 그나마 가장 마른 낚시터인데, 악어들도 그 사실을 압니다.",  -- 678
+        "스톰윈드의 운하에서는 아이들과 은퇴한 노인들, 그리고 변장한 귀족이 적어도 한 명 낚시를 합니다. 운하에 또 무엇이 있는지는 아무도 묻지 않습니다.",  -- 679
+        "쓸쓸한 동굴에는 아이언포지에서 하나뿐인 조용한 연못이 있습니다. 늙은 드워프들은 몇 시간이고 낚시를 하면서 한마디도 하지 않습니다.",  -- 680
+        "언더시티의 운하는 초록빛인데, 물이끼와는 아무 상관이 없습니다. 거기서 낚시하는 포세이큰은 저녁거리를 구하려는 것이 아닙니다.",  -- 681
+        "낚시꾼 대부분이 생애 처음으로 낚는 물고기이며, 기억에 남을 만큼 빛깔이 곱습니다.",  -- 682
+        "미끈하고 날쌔며 따뜻한 해안 어디에나 흔합니다. 이름에서 풍기는 느낌보다는 구웠을 때 맛이 좋습니다.",  -- 683
+        "온몸이 입이나 다름없고, 마시고 싶지 않은 물에서 가장 행복해합니다.",  -- 684
+        "작고, 이빨이 날카롭고, 겁이 없습니다. 한 떼가 모단 호수에서 곰을 쫓아냈다는 이야기가 있습니다.",  -- 685
+        "파도 아래에서 번뜩이는 한 줄기 빛깔입니다. 뱃사람들은 낚싯줄에 한 마리 걸리면 항해에 운이 따른다고 여깁니다.",  -- 686
+        "드워프 원로 같은 수염을 단, 참을성 많은 바닥 물고기입니다.",  -- 687
+        "두 번 먹는 사람은 없습니다. 연금술사들은 구할 수 있는 대로 다 사 갑니다.",  -- 688
+        "지느러미가 재 속에 묻어 둔 숯불처럼 빛나고, 짜낸 기름도 그에 못지않게 잘 탑니다.",  -- 689
+        "작은 방패처럼 단단히 무장하고 있습니다. 속살은 그 수고를 들일 만합니다.",  -- 690
+        "통곡의 동굴 근처 물속의 무언가가 이 물고기를 바꿔 놓았습니다. 먹으면 당신도 한동안 바뀔지 모릅니다.",  -- 691
+        "강가 사람들은 이것을 먹으면 머리가 맑아진다고 합니다. 이 물고기가 지혜로워진 것은 물살을 거슬러 헤엄친 덕분입니다.",  -- 692
+        "사촌보다 나이도 많고 몸집도 크고 더 지혜롭지만, 그래도 당신의 바늘은 피하지 못했습니다.",  -- 693
+        "따뜻한 남쪽 바다에서 온 억센 싸움꾼으로, 무법항에서 가젯잔까지 선술집 차림표마다 빠지지 않는 인기 요리입니다.",  -- 694
+        "이마가 진짜 미스릴처럼 빛납니다. 제련해 보려던 광부가 한둘이 아닙니다.",  -- 695
+        "비늘을 졸이면 피부를 바위처럼 단단하게 해 주는 기름이 됩니다. 이 물고기는 밤을 더 좋아합니다.",  -- 696
+        "열병식 흉갑처럼 반들반들하고, 무게도 거의 그만큼 나갑니다.",  -- 697
+        "추운 계절에만 연안으로 들어오며, 그 맛을 아는 요리사들은 일 년 내내 기다립니다.",  -- 698
+        "낮이 길어지면 떼 지어 몰려옵니다. 바닷가 사람들은 이것으로 계절을 가늠합니다.",  -- 699
+        "몸통 한가운데를 잡으십시오. 기회는 딱 한 번뿐입니다.",  -- 700
+        "거친 땅에서 온 강 물고기로, 아가미가 트롤의 전투 분장처럼 붉습니다.",  -- 701
+        "해가 진 뒤에 먹이를 찾습니다. 이것으로 끓인 수프는 주문 시전자의 신경을 가라앉혀 줍니다.",  -- 702
+        "낮에 먹이를 찾으며 거의 모든 면에서 밤지느러미퉁돔과 정반대이지만, 그래도 같은 물에서 삽니다.",  -- 703
+        "엄밀히 말하면 물고기는 아닙니다. 잡히는 데 동의하지 않으며, 그 뜻을 분명히 알려 줍니다.",  -- 704
+        "강의 얼음처럼 창백하며, 북쪽의 차고 맑은 호수에서 납니다.",  -- 705
+        "두 손이 다 필요할 겁니다. 어쩌면 친구도 한 명 필요할지 모릅니다.",  -- 706
+        "%.1f파운드",  -- 707
+        "낚시 일지에 새로 기록: %s, %s.",  -- 708
+        "낚시 일지에 새로 기록: %s.",  -- 709
+        "지금까지 가장 무거운 %s: %s (이전 %s).",  -- 710
+        "낚시 일지",  -- 711
+        "모든 낚은 것이 낚시 일지에 기록됩니다: 종류별 마릿수, 처음 낚은 곳, 재미로 지어낸 무게와 종류별 최고 기록 (/cchud journal 로 엽니다)",  -- 712
+        "미끼 %s",  -- 713
+        "미끼 없음",  -- 714
+        "낚음 %d",  -- 715
+        "놓침 %d",  -- 716
+        "낚시 인터페이스",  -- 717
+        "낚싯대를 들고 있을 때: 서 있는 물가의 물고기(여기서 아직 낚지 못한 것은 숨겨짐), 낚시 숙련도와 미끼가 더해 주는 수치, 낚은 수와 놓친 수, 미끼의 남은 시간, 그리고 최근에 낚은 것들",  -- 718
+        "호기심 많은 녀석: +%d%%",  -- 719
+        "미끼를 물고기 곁에 두세요",  -- 720
+        "다음 낚는 것 +%d%%",  -- 721
+        "%s 누르기: 미끼가 낚싯줄을 따라 움직입니다",  -- 722
+        "%d연속",  -- 723
+        "찌를 던져 둔 동안 즐기는 놀이",  -- 724
+        "낚싯줄이 나가 있는 동안 시전 바 위에서 즐깁니다: 트리거를 누르면 미끼가 줄을 따라 움직이고, 떼면 되돌아갑니다. 물고기 그림자 곁에 두세요. 잘할수록 다음 어획물의 가상 무게가 무거워집니다. 버튼을 차지하지 않고 던지기나 어획에 영향을 주지 않습니다",  -- 725
+        "%d마리 낚음, %d종, %d마리 놓침",  -- 726
+        "가장 무거운 것: %s, %s",  -- 727
+        "물고기",  -- 728
+        "물가",  -- 729
+        "아직 낚은 것이 없습니다. 낚싯대를 들고 물가로 가세요.",  -- 730
+        "낚은 수: %d",  -- 731
+        "가장 무거운 것: %s, %s에서",  -- 732
+        "처음 낚은 곳: %s",  -- 733
+        "여기서 낚은 수: %d",  -- 734
+        "여기서 찾은 종류: %d",  -- 735
+        "선택",  -- 736
+        "닫기",  -- 737
+        "낚시 일지를 열거나 닫습니다: 낚은 모든 종류, 종류별 가장 무거운 것, 낚시한 물가",  -- 738
+        "조용할 때 대화창 흐리게",  -- 739
+        "새 메시지가 없으면 몇 초 후 대화 내용이 흐려짐",  -- 740
+        "대화창이 흐려지기까지의 초",  -- 741
+        "대화 내용이 흐려지기 전까지 남아 있는 시간",  -- 742
+        "지도에 좌표 표시",  -- 743
+        "세계 지도 아래에 내 좌표 표시",  -- 744
+        "접속한 이후 스팸으로 숨긴 메시지 %d개.",  -- 745
+        "%d개는 반복된 길드 모집이었습니다.",  -- 746
+        "대화창에 직업 아이콘과 레벨 표시",  -- 747
+        "게임이 알려 주는 경우, 플레이어의 직업 아이콘과 레벨을 이름 앞에 대괄호로 표시",  -- 748
+        "대화창의 짧은 채널 이름",  -- 749
+        "줄 앞의 채널 이름을 줄여서 표시: [P] 파티, [PL] 파티장, [G] 길드, [O] 길드 관리자, [R] 공격대, [RL] 공격대장, [I] 인스턴스, 번호가 있는 채널은 번호만, [1]",  -- 750
+        "대화창에 이름만 표시",  -- 751
+        "성이 있는 이름은 이름만 표시됩니다 (Jory Spleeneater는 Jory로 표시); 귓속말이나 오른쪽 클릭은 여전히 전체 이름으로 갑니다",  -- 752
+        "대화 글자 크기",  -- 753
+        "대화창 글자 크기를 게임 자체 크기에 대한 비율로 설정 (게임 자체 설정은 그대로 둡니다)",  -- 754
+        "골드 판매상과 반복 광고 숨기기",  -- 755
+        "웹 주소와 함께 골드나 서비스를 파는 메시지와 한 플레이어가 반복한 같은 메시지를 숨김 (파티, 길드, 친구는 제외)",  -- 756
+        "반복되는 길드 모집 숨기기",  -- 757
+        "공개 채널에서 길드 모집 메시지는 한 번 표시되고, 15분 안에 같은 플레이어가 다시 보내거나 거의 같은 메시지는 숨김 (파티, 길드, 친구는 제외)",  -- 758
+        "최근 스팸으로 숨긴 대화 메시지를 나열",  -- 759
+        "비행",  -- 760
+        "목적지 알 수 없음",  -- 761
+        "거리로 추정",  -- 762
+        "이 경로의 첫 비행: 비행 시간 학습 중",  -- 763
+        "착륙 중",  -- 764
+        "%s: 약 %s, 거리로 추정",  -- 765
+        "%s: 약 %s",  -- 766
+        "%s: 이 경로의 첫 비행, 시간 모름",  -- 767
+        "비행 중, 목적지 모름",  -- 768
+        "%s: 비행 시간 학습됨, %s",  -- 769
+        "알려진 비행 경로 %d개.",  -- 770
+        "비행: 시간과 카운트다운",  -- 771
+        "비행 중에는 목적지와 소요 시간을 채팅에 알리고, 화면 위쪽의 바가 착륙까지 카운트다운합니다. 각 경로의 시간은 비행할 때마다 학습됩니다",  -- 772
+        "비행: 막대를 따라가는 탈것",  -- 773
+        "그리폰, 와이번 또는 박쥐(비행 조련사가 내준 것)가 비행 막대를 따라 착륙 지점으로 날아갑니다",  -- 774
+        "시간을 아는 비행 경로 목록",  -- 775
+        "착륙! +%d",  -- 776
+        "구름 속으로: 연속 기록 끝",  -- 777
+        "비행 골드 %d",  -- 778
+        "%s 날갯짓",  -- 779
+        "%s 그물",  -- 780
+        "%s 높은 고도",  -- 781
+        "%s: 게임으로 돌아가기 (비행 골드 %d)",  -- 782
+        "%s: 가는 길의 게임",  -- 783
+        "비행 게임이 꺼져 있습니다: /cchud flightgame on",  -- 784
+        "비행 게임은 비행 중에 플레이합니다.",  -- 785
+        "전투 중에는 안 됩니다.",  -- 786
+        "비행 게임: 플레이 / 높은 고도",  -- 787
+        "비행: 가는 길의 게임",  -- 788
+        "비행 중에는 비행 막대 아래에 작은 게임이 제안되고, 버튼 하나로 시작합니다 (시작하기 전까지는 그 버튼만 사용합니다): 탈것을 날갯짓시켜 구름 사이를 지나고, 맞은편에서 오는 기수들을 그물로 잡아 땅으로 내려보내 비행 골드를 얻으세요. 같은 버튼을 다시 누르면 높은 고도: 게임을 치우고 버튼은 다시 게임의 것이 됩니다. 전투 중에는 없고, 착륙하면 사라집니다",  -- 789
+        "비행 중: 비행 게임을 시작하거나, 높은 고도로 올렸다가 되돌립니다",  -- 790
+        "비행은 물 마시기 좋은 때입니다.",  -- 791
+        "%s 동안 플레이했습니다.",  -- 792
+        "물 한 모금 마실 시간",  -- 793
+        "물 마시기 알림",  -- 794
+        "플레이하는 동안 가끔 물 한 모금 마시라는 부드러운 알림 (전투 중에는 없음)",  -- 795
+        "물 알림 간격 (분)",  -- 796
+        "물 마시기 알림 사이의 플레이 시간(분)",  -- 797
+        "비행 시작 시 물 알림",  -- 798
+        "비행은 자연스러운 휴식입니다: 비행이 시작될 때 물 마시기 알림이 나옵니다 (마지막 알림이 얼마 전이 아니라면)",  -- 799
+        "물 마시기 알림 보기",  -- 800
+        "게임 기본 프레임 다시 꾸미기",  -- 801
+        "툴팁, 버프, 퀘스트 추적기, 미니맵, 경험치 바, 대화창 탭, 게임패드 바를 HUD의 모양으로 표시 (마우스 UI는 게임 기본 모양 유지)",  -- 802
+        "경험치 바 크기",  -- 803
+        "다시 꾸민 경험치 바와 평판 바의 크기 (퍼센트)",  -- 804
+        "툴팁",  -- 805
+        "어두운 유리 모양의 툴팁, 테두리는 플레이어의 직업 색상이나 아이템 등급 색상",  -- 806
+        "게임패드 바",  -- 807
+        "무거운 그림 대신 어두운 바탕에 얇은 고리가 있는 게임패드 버튼",  -- 808
+        "버프",  -- 809
+        "내 버프와 디버프 아이콘을 잘라내 테두리를 두르고 시간에 윤곽선 표시",  -- 810
+        "퀘스트 추적기",  -- 811
+        "퀘스트 추적기의 제목을 어두운 유리 모양으로, 줄에는 윤곽선 표시",  -- 812
+        "미니맵",  -- 813
+        "금색 테두리 대신 미니맵 주위에 얇은 고리와 부드러운 후광 표시",  -- 814
+        "경험치 바",  -- 815
+        "경험치 바와 평판 바를 조금 더 작게, 각자의 색으로",  -- 816
+        "대화창",  -- 817
+        "대화창 탭 이름에 윤곽선을 넣고 입력 상자는 어두운 유리 모양으로",  -- 818
+        "피해 측정기",  -- 819
+        "게임의 피해량 측정기를 HUD 모양으로: 어두운 바탕에 기울어진 막대와 외곽선 글자; 하는 일은 모두 그대로입니다",  -- 820
+        "점검: %d 중 %d 통과",  -- 821
+        "접속한 뒤로 게임이 멈춘 적이 없습니다.",  -- 822
+        "게임이 멈춘 순간과 그중 HUD가 차지한 몫:",  -- 823
+        "HUD가 가장 느렸던 순간:",  -- 824
+        "디버그 보고서",  -- 825
+        "문제 해결 보고서를 알아서 수집: 접속할 때, 그리고 다시 불러오거나 접속을 종료할 때 한 번 더 (저장된 설정에 보관됩니다)",  -- 826
+        "접속한 뒤로 게임이 멈춘 순간과 그중 HUD 자체 작업이 차지한 몫",  -- 827
+        "HUD 프리셋: %s, 카메라에 맞춤",  -- 828
+        "프리셋: %s",  -- 829
+        "'%s' 레이아웃이 게임의 편집 모드에 추가되었습니다. 사용하려면 거기에서 선택하세요 (게임 메뉴 > 편집 모드 > 레이아웃).",  -- 830
+        "알 수 없는 프리셋 '%s'",  -- 831
+        "TV용: HUD와 대화창의 글자가 커집니다.",  -- 832
+        "모니터용: 글자가 기본 크기입니다.",  -- 833
+        "우리 프레임이 처음 위치로 돌아갔습니다. 편집 모드에서 게임의 %s 레이아웃을 선택하세요 (게임 메뉴 > 편집 모드 > 레이아웃).",  -- 834
+        "프리셋이 카메라 거리를 설정함",  -- 835
+        "프리셋이 레이아웃에 맞는 거리로 카메라도 한 번 옮겨 줌 (이후에는 자유롭게 확대·축소)",  -- 836
+        "액션",  -- 837
+        "삼인칭 시점: 캐릭터 옆의 얇은 세로 바, 모든 효과 켜짐, 전투 중이 아닐 때는 흐려집니다",  -- 838
+        "클래식",  -- 839
+        "우리 프레임을 WoW의 기본 위치에 배치, 차분한 효과, 게임의 게임패드 바를 그대로 사용",  -- 840
+        "최소",  -- 841
+        "꼭 필요한 것만: 우호적인 NPC는 가리키거나 조준하거나 대상으로 지정했을 때만 이름표(하는 일 포함)를 표시; 칭호 없는 이름; 전투 밖에서는 내 바가 희미하게 쉬고 있음 (생명력이 낮으면 항상 표시)",  -- 842
+        "오픈 월드",  -- 843
+        "탐험을 위한 깔끔한 화면: 옆에서 흐리게 쉬는 얇은 바, 자원 바 없는 이름표, 사라지는 대화창",  -- 844
+        "모험",  -- 845
+        "콘솔 오픈 월드 모험 스타일: 옆에 생명력 표시, 가운데 위쪽에 작은 대상, 마을 주민은 가리킬 때만, 빠르게 사라지는 채팅",  -- 846
+        "소울라이크",  -- 847
+        "왼쪽 위에 내 바, 보스 바처럼 화면 아래 중앙의 큰 대상 바, 모든 타격이 느껴짐",  -- 848
+        "슈터",  -- 849
+        "조준하는 곳 가까이 중앙 바로 오른쪽의 세로 바, 높이 위치한 대상, 강한 타격 반응",  -- 850
+        "크로스바",  -- 851
+        "컨트롤러로 즐기는 MMO 스타일: 가운데 위쪽에 대상과 주시 대상, 게임패드 바 바로 위에 내 바, 왼쪽에 파티, 전체 이름표",  -- 852
+        "ARPG",  -- 853
+        "액션 RPG 스타일: 카메라는 멀리, 왼쪽 아래에 생명력 표시, 가운데 위쪽에 대상, 잔챙이 적은 작게, 모든 타격이 크게",  -- 854
+        "나침반",  -- 855
+        "1인칭 RPG 스타일: 카메라는 가까이, 가운데 아래에 내 바, 위쪽 가장자리 아래에 대상, 마을 주민은 가리킬 때만",  -- 856
+        "공격대",  -- 857
+        "WoW 기본 배치에 파티와 공격대 창, 이름표의 생명력 퍼센트와 레벨 등 그룹에 필요한 모든 것",  -- 858
+        "ControllerCam 프리셋 따르기",  -- 859
+        "ControllerCam에서 모든 곳에 카메라 프리셋을 고르면 맞는 HUD 프리셋도 함께 고름 (카메라는 자체 거리를 유지)",  -- 860
+        "현대적",  -- 861
+        "HUD 전체를 프리셋으로 설정: action, classic, minimal, openworld, adventure, soulslike, shooter, crossbar, arpg, compass, raid",  -- 862
+        "대상 프레임과 이름표를 한 번에 소형 또는 전체로",  -- 863
+        "대상 프레임을 소형 또는 전체로",  -- 864
+        "방 건너편의 TV 또는 팔 닿는 거리의 모니터에 맞게 글자 크기 조정",  -- 865
+        "게임 자체의 현대적 또는 클래식 레이아웃에 맞게 우리 프레임을 처음 위치로 되돌리기",  -- 866
+        "전체 설정(HUD, 카메라, 게임 레이아웃): 이 줄을 복사(Ctrl+C)하여 보관하거나 공유하세요.",  -- 867
+        "HUD 설정 한 줄을 붙여넣고(Ctrl+V) 확인하세요.",  -- 868
+        "이 줄이 손상되었습니다: 처음부터 끝까지 다시 복사하세요.",  -- 869
+        "이 줄은 더 새로운 버전에서 만들어졌습니다: 애드온을 업데이트하세요.",  -- 870
+        "HUD 설정 줄이 아닙니다.",  -- 871
+        "설정을 가져왔습니다: %d개 적용, %d개 제외.",  -- 872
+        "카메라 설정도 함께 가져왔습니다.",  -- 873
+        "카메라 설정은 그대로 두었습니다.",  -- 874
+        "게임 레이아웃이 이제 '%s'입니다.",  -- 875
+        "게임 레이아웃은 그대로 두었습니다.",  -- 876
+        "설정을 한 줄의 텍스트로, 보관하거나 공유",  -- 877
+        "/cchud export로 만든 텍스트 줄에서 설정 가져오기",  -- 878
+        "게임패드 UI를 사용하는 동안 HUD가 켜집니다. 옵션: 옵션 > 애드온 > ControllerCam > HUD 또는 /cchud.",  -- 879
+        "카메라만: HUD는 쉬고 게임 인터페이스는 그대로입니다. /cchud on 으로 켤 수 있습니다.",  -- 880
+        "컨트롤러에 맞게 화면도 설정할까요? 게임의 편집 모드에 CCHUD라는 레이아웃을 추가하며, 거기에서 직접 선택하면 됩니다: 재사용 대기시간 줄을 게임패드 버튼에서 떨어진 대상 아래에 놓습니다. 기존 레이아웃은 그대로 유지됩니다 (/cchud setup 으로 다시 제안합니다).",  -- 881
+        "설정하기",  -- 882
+        "나중에",  -- 883
+        "ControllerCam에는 컨트롤러용 인터페이스인 HUD가 함께 들어 있습니다: 게임패드 UI를 사용하는 동안 자체 유닛 프레임, 이름표, 시전 바 등을 보여 줍니다. HUD도 사용할까요, 카메라만 사용할까요?",  -- 884
+        "카메라 + HUD",  -- 885
+        "카메라만",  -- 886
+        "이 클라이언트에서는 애드온이 레이아웃을 변경할 수 없습니다.",  -- 887
+        "다시 묻기: 카메라와 HUD, 또는 카메라만",  -- 888
+        "HUD용 화면 레이아웃을 다시 제안 (게임의 편집 모드)",  -- 889
+        "게임패드 UI를 사용하는 동안 표시됩니다. 게임의 편집 모드에서 프레임을 끌어 옮기세요.",  -- 890
+        "프리셋",  -- 891
+        "화면 기준",  -- 892
+        "TV",  -- 893
+        "모니터",  -- 894
+        "버튼 아이콘",  -- 895
+        "게임이 컨트롤러 버튼에 표시하는 아이콘: 사용 중인 컨트롤러에 맞춰 자동으로 찾거나, 직접 고른 종류",  -- 896
+        "글꼴",  -- 897
+        "게임 레이아웃 초기화",  -- 898
+        "체험해 보기",  -- 899
+        "데모 재생",  -- 900
+        "모든 적중 효과 표시",  -- 901
+        "자가 점검 실행",  -- 902
+        "게임패드 바: 간략 / 전체",  -- 903
+        "설정 내보내기",  -- 904
+        "설정 가져오기",  -- 905
+        "모든 설정을 보려면 기본 페이지에서 「고급 옵션 표시」를 선택하세요.",  -- 906
+        "모듈",  -- 907
+        "빠른 전환",  -- 908
+        "일반",  -- 909
+        "HUD",  -- 910
+        "이 클라이언트에서는 옵션 창을 사용할 수 없습니다.",  -- 911
+        "활성화",  -- 912
+        "HUD 전체; 끄면 게임 기본 프레임이 돌아옴",  -- 913
+        "마우스 및 키보드 UI에서도 사용",  -- 914
+        "평소에는 HUD가 게임패드 UI를 사용하는 동안에만 작동합니다",  -- 915
+        "게임 기본 프레임 치우기",  -- 916
+        "우리 프레임이 표시되는 동안 게임의 플레이어, 대상, 주시 대상 프레임을 숨김",  -- 917
+        "채팅창을 왼쪽 위로",  -- 918
+        "HUD가 작동하는 동안 채팅창을 왼쪽 위로 이동",  -- 919
+        "대기 시 세로 막대",  -- 920
+        "전투 중이 아닐 때 생명력이 가득 찬 상태에서 세로 막대가 보이는 정도 (0이면 숨김)",  -- 921
+        "직업 색상",  -- 922
+        "내 바와 다른 플레이어의 바를 직업 색상으로 표시",  -- 923
+        "직업 아이콘",  -- 924
+        "대상과 대상의 대상에서 플레이어 이름 앞에 직업 아이콘 표시",  -- 925
+        "대상 프레임의 위협 수준",  -- 926
+        "대상 프레임의 방패 아이콘과 빛: 나를 공격하는 동안 빨강, 곧 끌어올 때 빨강과 노랑, 잃고 있을 때 노랑과 파랑, 나를 노리지 않을 때 파랑",  -- 927
+        "모든 곳에 소형 바",  -- 928
+        "대상 프레임과 이름표를 소형 스타일로, 너비 절반 남짓 (각각 따로 설정할 수 있으며, 프리셋은 이를 바꾸지 않음)",  -- 929
+        "간략한 대상 프레임",  -- 930
+        "대상 프레임을 절반보다 약간 넓게",  -- 931
+        "전투 중 체력 색상",  -- 932
+        "전투 중 체력이 줄어들수록 체력 바가 녹색에서 노란색을 거쳐 빨간색으로 변함",  -- 933
+        "글자 뒤 음영",  -- 934
+        "대상의 글자가 잘 보이도록 뒤에 옅은 어두운 띠를 표시",  -- 935
+        "글자 크기",  -- 936
+        "우리 프레임의 글자 크기",  -- 937
+        "프레임 크기",  -- 938
+        "우리 유닛 프레임의 크기",  -- 939
+        "전투 중 행동 바",  -- 940
+        "주의가 필요할 때까지 전투 중 행동 바, 소환수, 주시 대상이 얼마나 보이는지",  -- 941
+        "생명력이 다음 미만이면 전체",  -- 942
+        "생명력이 이 값 아래로 떨어지면 바가 전체로 돌아옵니다",  -- 943
+        "마나가 다음 미만이면 전체",  -- 944
+        "마나가 이 값 아래로 떨어지면 바가 전체로 돌아옵니다",  -- 945
+        "대기 중 플레이어 바",  -- 946
+        "생명력이 가득하거나 전투 중이 아닐 때 플레이어 바의 표시 정도 (0이면 숨김)",  -- 947
+        "상인 및 은행 도움말",  -- 948
+        "상인의 잡동사니 판매 버튼이 판매할 항목을 물어봄; 상인과 은행에서 빠른 이동",  -- 949
+        "고급 옵션 표시",  -- 950
+        "주요 스위치만이 아닌 모든 설정",  -- 951
+        "플레이어 프레임",  -- 952
+        "우리 플레이어 바, 왼쪽 위",  -- 953
+        "대상 프레임",  -- 954
+        "우리 대상 바, 위 가운데",  -- 955
+        "소환수 바",  -- 956
+        "플레이어 바 아래 또는 세로 바 옆에 작은 소환수 바",  -- 957
+        "주시 대상 프레임",  -- 958
+        "우리 주시 대상 프레임",  -- 959
+        "3인칭 시점용으로 캐릭터 옆에 표시되는 얇은 세로 생명력 및 자원 바 (플레이어 바 대신)",  -- 960
+        "상인이 열리면 잡동사니 판매",  -- 961
+        "상인이 열리자마자 규칙에 따라 잡동사니 판매",  -- 962
+        "흰색 무기와 방어구는 잡동사니",  -- 963
+        "흰색 무기와 방어구를 잡동사니로 취급 (도구, 낚싯대, 사용 효과가 있는 장비, 업그레이드가 될 수 있는 것은 제외; 항상 먼저 확인)",  -- 964
+        "은행을 열면 보관",  -- 965
+        "은행용으로 표시한 물건과, 켜져 있으면 은행에 이미 있는 물건이 저절로 들어갑니다",  -- 966
+        "게임의 옵션; 우리 작은 프레임이 이를 따름",  -- 967
+        "재사용 대기시간 관리자",  -- 968
+        "게임의 재사용 대기시간 관리자",  -- 969
+        "개인 자원 표시",  -- 970
+        "캐릭터 아래에 생명력과 자원 표시",  -- 971
+        "은행이 재료를 자동으로 받음",  -- 972
+        "은행에 대한 게임의 옵션",  -- 973
+        "버프 시작 시 툴팁",  -- 974
+        "게임 옵션: 버프가 적용될 때 버프 툴팁이 잠깐 나타납니다 (게임패드 UI)",  -- 975
+        "대화창 이름에 직업 색상 사용",  -- 976
+        "모든 종류의 대화에 한 번에 적용되는 게임의 대화 설정: 플레이어 이름을 직업 색상으로 표시",  -- 977
+        "옵션 창 열기 (옵션 > 애드온 > ControllerCam HUD)",  -- 978
+        "프레임",  -- 979
+        "화면 흐리게",  -- 980
+        "효과",  -- 981
+        "모양",  -- 982
+        "퀘스트, 대화 및 지도",  -- 983
+        "가방, 은행, 상인",  -- 984
+        "낚시",  -- 985
+        "접근성",  -- 986
+        "네이티브 옵션",  -- 987
+        "%s  |  게임패드 UI: %s  |  실행 중: %s",  -- 988
+        "플레이어 %s, 대상 %s, 소환수 %s, 주시 대상 %s  |  게임 프레임 치움: %s  |  채팅 이동: %s",  -- 989
+        "네이티브 옵션: 대상의 대상 %s, 재사용 대기시간 관리자 %s, 개인 자원 %s",  -- 990
+        "글자 크기 %d%%  |  글자 음영: %s",  -- 991
+        "상인 및 은행 도움말: %s  |  자동 판매: %s  |  흰색 장비는 잡동사니: %s",  -- 992
+        "대기 중 가시성 %d%%  |  크기 %d%%  |  직업 색상: %s",  -- 993
+        "게임패드 UI를 위한 최소한의 액션 게임 HUD.",  -- 994
+        "활성화됨",  -- 995
+        "비활성화됨: 게임 기본 프레임이 돌아왔습니다",  -- 996
+        "마우스 및 키보드 UI에서도 사용: %s",  -- 997
+        "게임 기본 프레임 치움: %s",  -- 998
+        "채팅을 왼쪽 위로 이동: %s",  -- 999
+        "직업 색상: %s",  -- 1000
+        "이 클라이언트에는 해당 옵션이 없습니다.",  -- 1001
+        "%s: %s (게임의 기본 옵션)",  -- 1002
+        "지금은 게임이 이를 받아들이지 않았습니다.",  -- 1003
+        "상인 및 은행 도움말: %s",  -- 1004
+        "자동 판매: %s",  -- 1005
+        "흰색 장비는 잡동사니: %s",  -- 1006
+        "상인 도움말이 꺼져 있습니다.",  -- 1007
+        "사용법: /cchud sell [junk | recommended | white | green | blue]",  -- 1008
+        "은행이 열리면 표시된 아이템 입금: %s",  -- 1009
+        "사용법: /cchud junk <item> (아이템을 Shift+클릭해 채팅 입력줄에 넣으세요)",  -- 1010
+        "아이템 %d: 잡동사니, 나머지와 함께 판매",  -- 1011
+        "아이템 %d: 보관, 절대 판매 안 함",  -- 1012
+        "아이템 %d: 은행용",  -- 1013
+        "글자 음영: %s",  -- 1014
+        "사용법: /cchud text <80-250>",  -- 1015
+        "글자 크기 %d%%",  -- 1016
+        "데모 중지됨",  -- 1017
+        "HUD가 실행 중이 아닙니다.",  -- 1018
+        "데모 실행 중: 가상의 전투를 반복 재생합니다. 중지하려면 /cchud demo를 다시 입력하세요.",  -- 1019
+        "사용법: /cchud idle <0-100>",  -- 1020
+        "대기 중 가시성 %d%%",  -- 1021
+        "사용법: /cchud scale <50-200>",  -- 1022
+        "크기 %d%%",  -- 1023
+        "프레임을 끌어 옮긴 다음 /cchud lock을 입력하세요.",  -- 1024
+        "프레임 고정됨",  -- 1025
+        "모든 것이 처음 상태로 돌아갔습니다: 설정, 프레임, 화면 레이아웃 (상인 표시와 가격 기록은 유지됩니다).",  -- 1026
+        "프레임이 처음 위치로 돌아왔습니다",  -- 1027
+        "알 수 없는 명령 '%s'. /cchud help를 입력하세요",  -- 1028
+        "오류 목록을 비웠습니다.",  -- 1029
+        "기록된 오류가 없습니다.",  -- 1030
+        "오류 %d개 기록됨 (최신이 마지막). /cchud errors clear로 목록을 비웁니다.",  -- 1031
+        "상태 표시",  -- 1032
+        "HUD 켜기 또는 끄기 (끄면 게임 기본 프레임이 돌아옴)",  -- 1033
+        "마우스 및 키보드 UI에서도 HUD 사용",  -- 1034
+        "우리 프레임 또는 게임 기본 프레임 중 선택",  -- 1035
+        "캐릭터 옆에 표시되는 얇은 세로 생명력 및 자원 막대",  -- 1036
+        "대상의 대상 (게임의 기본 옵션, 게임 메뉴에도 있음)",  -- 1037
+        "게임의 재사용 대기시간 관리자 (게임의 기본 옵션)",  -- 1038
+        "캐릭터 아래의 생명력과 자원 (게임의 기본 옵션)",  -- 1039
+        "버프가 시작될 때 나타나는 툴팁 (게임 자체 옵션)",  -- 1040
+        "게임 기본 플레이어 및 대상 프레임을 계속 표시(켜기) 또는 치움(끄기)",  -- 1041
+        "상인에게서: 판매할 항목 선택 (또는: sell junk, sell recommended, sell white | green | blue)",  -- 1042
+        "흰색 무기와 방어구를 잡동사니로 간주",  -- 1043
+        "아이템 표시: 항상 판매, 절대 판매 안 함, 또는 은행용 (Shift+클릭해 채팅 입력줄에 넣기)",  -- 1044
+        "은행에서: 은행에 이미 있는 물건과 은행용으로 표시한 물건을 모두 보관",  -- 1045
+        "은행에서: 이미 조금 가지고 있는 아이템 꺼내기",  -- 1046
+        "은행을 열자마자 보관",  -- 1047
+        "은행이 재료를 자동으로 받음 (게임의 기본 옵션)",  -- 1048
+        "글자 크기, 퍼센트 단위 (150이면 TV에서 보기 좋음)",  -- 1049
+        "아무 일도 없을 때 플레이어 바가 보이는 정도 (0이면 숨김)",  -- 1050
+        "프레임 크기 (퍼센트)",  -- 1051
+        "프레임을 원하는 위치로 끌기 (게임의 편집 모드로도 가능)",  -- 1052
+        "프레임을 처음 위치로 되돌리기",  -- 1053
+        "프레임 반응을 보기 위해 짧은 가상 전투 재생 (다시 입력하면 중지)",  -- 1054
+        "화면에 표시된 것을 설정과 비교 (check all은 모든 행을 나열)",  -- 1055
+        "이 클라이언트의 게임패드 UI 설명 저장 (문제 해결용)",  -- 1056
+        "이 목록 표시",  -- 1057
+        "HUD의 최근 오류, 다시 불러온 후에도 (보고용)",  -- 1058
     },
     ptBR = {
         "erro:",  -- 1
@@ -6810,504 +6912,521 @@ local TRANSLATIONS = {
         "manter a lista de missões em ordem de distância, com a mais próxima no topo",  -- 541
         "Lista de missões: ordem recomendada",  -- 542
         "manter a lista de missões em uma ordem recomendada: primeiro as prontas para entregar, depois o que você consegue fazer sozinho começando pela mais próxima, depois as missões acima do seu nível, as de grupo enquanto você está sozinho, e as cinzas por último",  -- 543
-        "Lista de missões: objetivos curtos",  -- 544
-        "os objetivos na lista de missões dizem só o necessário, com um ícone do tipo na frente: uma caveira e 0/1 Capitão Pavorerguido, não 0/1 Capitão Pavorerguido morto",  -- 545
-        "Progresso das missões no chat",  -- 546
-        "uma linha curta no chat quando uma missão avança: Colares de Osso Sangrento: 4/25, um objetivo cumprido, uma missão pronta para entregar",  -- 547
-        "Progresso das missões para o seu grupo",  -- 548
-        "em um grupo (não em uma raide) as mesmas linhas vão para o bate-papo do grupo para os outros verem, com um instante entre elas; você também as vê lá",  -- 549
-        "Guardar o que suas missões precisam",  -- 550
-        "um item que uma missão do seu registro ainda pede, ou um que inicia uma missão que você ainda pode fazer, é marcado como Missão: nunca vendido nem leiloado por você",  -- 551
-        "dizer uma ordem recomendada para suas missões: entregue o que está pronto, depois a mais próxima que dá para fazer sozinho, depois o resto",  -- 552
-        "À esquerda das missões",  -- 553
-        "À direita das missões",  -- 554
-        "Abaixo das missões",  -- 555
-        "A lista de farm está cheia.",  -- 556
-        "Lista de farm: %s, %d desejados.",  -- 557
-        "Farm",  -- 558
-        "mais %d",  -- 559
-        "Nada para farmar ainda.",  -- 560
-        "Uma pilha a mais",  -- 561
-        "Tirar",  -- 562
-        "Limpar",  -- 563
-        "Pronto",  -- 564
-        "Tirar tudo da lista de farm?",  -- 565
-        "Lista de farm: escolher / pronto",  -- 566
-        "Lista de farm: adicionar o item que você aponta",  -- 567
-        "Isso não está na lista de farm.",  -- 568
-        "A lista de farm está vazia.",  -- 569
-        "Lista de farm: onde fica",  -- 570
-        "Lista de farm ao lado da lista de missões",  -- 571
-        "o que você pretende coletar, com quantos tem e quantos quer: suas bolsas e banco e os dos seus outros personagens neste reino. Adicione os reagentes de um plano de evolução com um botão, ou qualquer item",  -- 572
-        "a lista de farm à esquerda da lista de missões, à direita dela ou abaixo das missões",  -- 573
-        "a lista de farm ao lado da lista de missões: escolha com o controle; add <item> [quantos], remove <item>, clear, ou left / right / bottom para o lugar",  -- 574
-        "Fora de combate.",  -- 575
-        "Este cliente não tem barras de controle.",  -- 576
-        "Este cliente não permite que addons o alterem; use o Modo de Edição.",  -- 577
-        "barras de controle: %s",  -- 578
-        "compactas",  -- 579
-        "completas",  -- 580
-        "Barras de controle compactas",  -- 581
-        "esconde a arte pesada atrás das barras de ação do controle e as desenha menores",  -- 582
-        "Tamanho das barras de controle",  -- 583
-        "tamanho das barras de controle enquanto as barras compactas estão ativadas, em porcentagem",  -- 584
-        "as barras de controle do jogo no modo compacto ou completo (igual à configuração do Modo de Edição)",  -- 585
-        "Esmaecer fora de combate",  -- 586
-        "/cchud fade <parte> on | off ajusta uma; all para todo o esmaecimento.",  -- 587
-        "as barras do controle, o minimapa, a lista de missões, o medidor de dano e a barra de experiência descansam juntos fora de combate, e voltam para uma luta, um gatilho puxado ou um alvo inimigo",  -- 588
-        "A tela em repouso",  -- 589
-        "quão visíveis ficam as partes da tela em repouso fora de combate (0 as esconde)",  -- 590
-        "Esmaece: barras do controle",  -- 591
-        "Esmaece: minimapa",  -- 592
-        "Esmaece: lista de missões",  -- 593
-        "Esmaece: medidor de dano",  -- 594
-        "Esmaece: barra de experiência",  -- 595
-        "Esmaece: bônus",  -- 596
-        "Esmaece: fileiras de recarga",  -- 597
-        "se esta parte da tela esmaece com o resto fora de combate (desligado: fica sempre como está)",  -- 598
-        "o esmaecimento da tela fora de combate: o que esmaece (minimapa, lista de missões e o resto), cada um ligado ou desligado",  -- 599
-        "Salvo: digite /reload para o jogo gravar no disco.",  -- 600
-        "Botões de postura e de mascote acima das barras",  -- 601
-        "os botões de posturas e de comandos do mascote ficam onde estavam os ícones verde e vermelho de alvo, para que a roda deles abra inteira na tela; esses ícones são escondidos",  -- 602
-        "listar onde ficam as partes das barras do controle e o que descansa (para diagnóstico)",  -- 603
-        "Auto",  -- 604
-        "Genérico",  -- 605
-        "os do jogo",  -- 606
-        "Ícones dos botões: %s.",  -- 607
-        "Nenhum controle está em uso agora, ou o jogo não tem estilos de ícones: será definido quando houver um.",  -- 608
-        "O jogo não aceitou os ícones dos botões.",  -- 609
-        "O controle não diz o que é: os ícones ficam como o jogo os tem.",  -- 610
-        "os ícones que o jogo mostra para os botões do seu controle: auto (pelo controle em uso), xbox, playstation, switch, steam, generic (números), ou game para deixá-los como o jogo os tem",  -- 611
-        "Fileiras de recarga fora das barras do controle",  -- 612
-        "as fileiras de recarga do jogo ficam sob o alvo em vez de em cima dos botões do controle, um pouco menores (só nos layouts embutidos do jogo: num layout seu elas ficam onde você as pôs)",  -- 613
-        "Modo de pesca: desligado.",  -- 614
-        "Pesca: %s para lançar",  -- 615
-        "Sem isca: %s duas vezes para usar %s",  -- 616
-        "%s para guardar a vara",  -- 617
-        "Modo pesca: %s para lançar a linha, e de novo para fisgar o peixe quando a boia mexer.",  -- 618
-        "%s para fisgar, %s para lançar de novo",  -- 619
-        "O modo de pesca precisa de uma vara de pescar nas suas mãos.",  -- 620
-        "Você não conhece Pesca.",  -- 621
-        "Modo de pesca: um botão lança e fisga",  -- 622
-        "Botão de pesca: %s",  -- 623
-        "Pesca com um botão",  -- 624
-        "com uma vara de pesca nas mãos: seu botão de interagir para lançar a linha sempre que não houver nada com que interagir, e de novo para fisgar o peixe quando a boia mexer; a pesca é recolhida para você. B para guardar a vara e pegar suas armas de volta",  -- 625
-        "Lançar de novo com um toque",  -- 626
-        "enquanto a boia está na água, seu botão de pesca lança uma linha nova com um toque, e A fisga o peixe (o jogo não dá sinal de mordida para esperar, então um botão não pode fazer as duas coisas); desligado: o botão de pesca fisga, como a interação do jogo",  -- 627
-        "Isca com toque duplo",  -- 628
-        "aperte seu botão de pesca duas vezes rápido: o segundo toque coloca a melhor isca das suas bolsas na vara, quando a vara não tem nenhuma",  -- 629
-        "Barras do controle ocultas ao pescar",  -- 630
-        "com uma vara de pesca nas mãos as barras do controle ficam ocultas, para ver bem a água; o aviso de pesca mostra o botão para lançar. Elas voltam assim que um combate começa ou a vara é guardada",  -- 631
-        "pesca com um botão desligada por ora, ou ligada de novo (com uma vara nas mãos ela liga sozinha)",  -- 632
-        "o botão que pesca: no início seu botão de interagir (Quadrado ou X), ou qualquer outro, um gatilho por exemplo (rt)",  -- 633
-        "O litoral de Durotar é rocha vermelha e água rasa e morna. Os trolls das Ilhas do Eco dizem que a cavala passa em maior número quando a maré traz o cheiro das fogueiras de cozinha das ilhas.",  -- 634
-        "Os lagos de Mulgore são pequenos, límpidos e pacientes. Os tauren pescam neles como fazem todo o resto: devagar e com gratidão.",  -- 635
-        "Todo oásis dos Sertões é um ponto de encontro. Seja lá o que beba ali de dia, alguma coisa nada por baixo à noite.",  -- 636
-        "As lagoas de Teldrassil ficam à sombra de uma única árvore. Os pescadores elfos noturnos juram que os peixes de lá nunca viram o sol e não sentem a menor falta.",  -- 637
-        "A água da Costa Negra é cinzenta, fria e cheia de naufrágios. Metade do que morde a isca perto de Auberdine fez morada na carga perdida de alguém.",  -- 638
-        "Os rios do Vale Gris correm sob folhas mais velhas que a maioria dos reinos. Os peixes são rápidos, e as sentinelas são ainda mais rápidas em perguntar o que você está fazendo ali.",  -- 639
-        "Lá embaixo, em Mil Agulhas, a água é pouca e guardada com ciúme. Um peixe daqui fez por merecer o seu lugar.",  -- 640
-        "Os lagos da Cordilheira das Torres de Pedra ficam lá no alto, gelados, entre os picos. Os goblins já os teriam drenado se a pescaria não fosse tão boa.",  -- 641
-        "A costa da Desolação é feita de ossos e ressaca cinzenta. Alguma coisa lá no fundo tem gosto pelos dois.",  -- 642
-        "Feralas é verde até a beira da água. Seus rios são fundos, mornos e muito, muito vivos.",  -- 643
-        "Ninguém sabe ao certo onde termina a terra e começa a água no Pântano Vadeoso. Pesque da margem e conte os dedos dos pés depois.",  -- 644
-        "O Porto Bondebico tem a única água digna do nome em Tanaris. Os goblins vendem o direito de pescar nela, e até duas vezes, se você deixar.",  -- 645
-        "Sob a baía luminosa de Azshara jaz uma cidade afogada. Os pescadores velhos dizem que os grandões vivem onde antes ficavam os jardins.",  -- 646
-        "As lagoas de Selva Maleva brilham, e não no bom sentido. O que ainda nada nelas é teimoso além da conta.",  -- 647
-        "As fontes termais e os lagos orlados de piche da Cratera Un'Goro guardaram coisas que o resto do mundo esqueceu. Algumas delas mordem.",  -- 648
-        "O Lago Elune'ara, na Clareira da Lua, é calmo como um fôlego suspenso. Os druidas só pedem que você não leve mais do que vai comer.",  -- 649
-        "Silithus é areia, vento e som de asas. Se você achou água para pescar aqui, não conte a ninguém.",  -- 650
-        "Os lagos de Hibérnia congelam nas bordas e fumegam no meio. Os peixes de lá são gordos por causa do frio e valem a caminhada.",  -- 651
-        "Nas lagoas de Orgrimmar pescam os peões que não têm nada melhor para fazer e os velhos brutamontes que dizem o mesmo. Uns e outros contam que o grandão escapou.",  -- 652
-        "Um peixe dos laguinhos do Penhasco do Trovão passou a vida inteira bem acima das planícies. Parece lidar bem com isso.",  -- 653
-        "Darnassus cuida de suas águas com o mesmo zelo com que cuida dos templos. Os peixes já se acostumaram a ser admirados.",  -- 654
-        "Os lagos das Montanhas de Alterac são neve derretida, e os ogros e a Camarilha pescam neles quando ninguém está olhando.",  -- 655
-        "As margens do Planalto Arathi viram mais exércitos do que pescadores. Faz tempo que os peixes deixaram de se importar com a bandeira que tremula sobre a água.",  -- 656
-        "Os Ermos são poeira de uma ponta a outra. Uma fisgada aqui é um pequeno milagre; trate-a como tal.",  -- 657
-        "A costa da Barreira do Inferno é vermelha, castigada e silenciosa. O que quer que viva naquela arrebentação aprendeu a conviver com muita coisa.",  -- 658
-        "Os lagos das Clareiras de Tirisfal jazem imóveis sob um céu doentio. Os Renegados pescam neles por hábito; os mortos não comem muito, mas lembram que gostavam.",  -- 659
-        "A longa costa da Floresta de Pinhaprata é só névoa e sombra de pinheiro. A pesca é boa, e essa é a única coisa alegre que alguém diz sobre o lugar.",  -- 660
-        "Os rios das Terras Pestilentas Ocidentais ainda correm, embora não limpos. O que você tirar deles, olhe duas vezes.",  -- 661
-        "Pouca gente pesca nas Terras Pestilentas Orientais, e menos gente ainda admite. A água guarda o que a peste deixou dela.",  -- 662
-        "O rio de Eira dos Montes e sua longa costa sul alimentaram os dois lados de todas as brigas travadas por causa deles.",  -- 663
-        "As Terras Agrestes guardam seus lagos no alto, entre as árvores, onde os anões Martelo Feroz pescam montados em grifos quando acham que ninguém está vendo.",  -- 664
-        "Os lagos de Dun Morogh passam a maior parte do ano cercados de gelo. Um anão abre um buraco, senta com uma caneca de cerveja e diz que foi um bom dia, morda o que morder.",  -- 665
-        "A Garganta Abrasadora tem lava onde outras terras têm rios. Melhor trazer alguma coisa para beber.",  -- 666
-        "As Estepes Ardentes são cinzas e brasas. Se a água daqui lhe der alguma coisa, vai estar quente.",  -- 667
-        "Toda criança de Elwynn aprende a pescar no Crystal Lake ou no Stone Cairn Lake. Os peixinhos de lá passam a perna nelas há gerações.",  -- 668
-        "A Trilha do Vento Morto tem pouca água e menos acolhida ainda. O que há nas poças abaixo de Karazhan é melhor deixar por lá.",  -- 669
-        "O rio na beira da Floresta do Crepúsculo é negro a qualquer hora. Os peixes não parecem se incomodar com o escuro; os pescadores, sim.",  -- 670
-        "O Loch é o orgulho de Loch Modan, contido pela grande barragem Stonewrought. Os anões medem toda história de pescador pelo tamanho dele, e o Loch costuma ganhar.",  -- 671
-        "O Lago Plácido, nas Montanhas Cristarrubra, é bonito como uma pintura, e pesca-se nele de todos os cais de Vila Plácida. Os moradores conhecem cada ponto bom e não vão lhe contar nenhum.",  -- 672
-        "Dos rios da selva ao cabo selvagem do sul, a Selva do Espinhaço tem as águas mais ricas do continente. Os pescadores da Angra do Butim fazem um torneio por lá, e quase todos trapaceiam.",  -- 673
-        "O Pântano das Mágoas é água verde sob árvores verdes. Os peixes têm gosto de lama, e é assim que o povo de lá gosta.",  -- 674
-        "As lavouras de Cerro Oeste fracassaram, mas a costa não. Quem ficou vive da longa praia cinzenta.",  -- 675
-        "O Pantanal faz jus ao nome. Os cais do Porto de Menethil são o lugar mais seco para pescar por lá, e os crocoliscos sabem disso.",  -- 676
-        "Nos canais de Ventobravo pescam crianças, aposentados e pelo menos um membro da nobreza disfarçado. Ninguém pergunta o que mais existe nos canais.",  -- 677
-        "A Forlorn Cavern abriga o único laguinho sossegado de Altaforja. Os anões velhos pescam ali por horas e não dizem uma palavra.",  -- 678
-        "Os canais da Cidade Baixa correm num verde que não tem nada a ver com algas. Os Renegados que pescam ali não estão atrás do jantar.",  -- 679
-        "O primeiro peixe que a maioria dos pescadores tira da água, e vistoso o bastante para ficar na memória.",  -- 680
-        "Escorrega, corre e aparece em toda costa quente. Na grelha, fica melhor do que o nome sugere.",  -- 681
-        "É só boca, e nunca está tão feliz quanto numa água que você não beberia.",  -- 682
-        "Tamanho pequeno, dentes de sobra e medo nenhum. Dizem que um cardume inteiro já expulsou um urso do Loch.",  -- 683
-        "Um lampejo de cor sob a arrebentação. Para os marinheiros, um desses no anzol é sorte para a viagem.",  -- 684
-        "Um paciente comedor de fundo, com bigodes de ancião anão.",  -- 685
-        "Ninguém come duas vezes. Os alquimistas compram tudo o que aparece.",  -- 686
-        "As nadadeiras brilham como brasas dormidas, e o óleo extraído deste peixe queima quase tão bem.",  -- 687
-        "Uma blindagem de pequeno escudo. A carne lá dentro compensa o trabalho.",  -- 688
-        "Alguma coisa na água perto das Cavernas Ululantes transformou este peixe. Comer um talvez transforme você também, por um tempo.",  -- 689
-        "O povo do rio diz que uma refeição dessas clareia a mente. É nadar contra a corrente que traz a sabedoria.",  -- 690
-        "Mais idade, mais tamanho e mais sabedoria que o primo, e nada disso evitou o seu anzol.",  -- 691
-        "Um lutador valente dos mares quentes do sul e o favorito em toda taberna, da Angra do Butim a Geringontzan.",  -- 692
-        "A testa brilha como mithril de verdade. Mais de um minerador já tentou fundi-la.",  -- 693
-        "As escamas, fervidas, viram um óleo que deixa a pele dura como pedra. Prefere a noite.",  -- 694
-        "Brilha como uma couraça de desfile, e pesa quase o mesmo.",  -- 695
-        "Só chega perto da costa nos meses frios, e os cozinheiros que conhecem o segredo esperam o ano inteiro.",  -- 696
-        "Aparece quando os dias são longos. O povo do litoral marca a estação pela sua chegada.",  -- 697
-        "Segure pelo meio, e só uma vez.",  -- 698
-        "Um peixe de rio de terras selvagens, com as guelras vermelhas como a pintura de guerra de um troll.",  -- 699
-        "Come depois que escurece. Uma sopa feita com este peixe acalma os nervos de quem lança feitiços.",  -- 700
-        "Come de dia, o oposto do primo noturno em quase tudo, e mesmo assim divide a água com ele.",  -- 701
-        "Não é bem um peixe. Discorda de ter ido parar no anzol e faz questão de deixar isso claro.",  -- 702
-        "Tem a palidez do gelo de rio e vem dos lagos frios e límpidos do norte.",  -- 703
-        "Você vai precisar das duas mãos, e talvez de um amigo.",  -- 704
-        "%.1f lb",  -- 705
-        "Novo no seu diário de pesca: %s, %s.",  -- 706
-        "Novo no seu diário de pesca: %s.",  -- 707
-        "Seu %s mais pesado até agora: %s (era %s).",  -- 708
-        "Diário de pesca",  -- 709
-        "cada captura é anotada no seu diário de pesca: quantas de cada tipo, onde você a pegou pela primeira vez, e um peso inventado por diversão com o seu melhor de cada uma (/cchud journal abre o diário)",  -- 710
-        "Isca %s",  -- 711
-        "Sem isca",  -- 712
-        "Pegos %d",  -- 713
-        "Escaparam %d",  -- 714
-        "Interface de pesca",  -- 715
-        "com uma vara de pescar nas mãos: os peixes da água onde você está (os que você ainda não pegou aqui ficam ocultos), sua perícia em pesca e o que sua isca acrescenta, quantos você pegou e quantos escaparam, quanto tempo sua isca dura, e suas últimas capturas",  -- 716
-        "Um curioso: +%d%%",  -- 717
-        "Mantenha sua isca ao lado do peixe",  -- 718
-        "Próxima captura +%d%%",  -- 719
-        "Segure %s: a isca corre pela linha",  -- 720
-        "%d seguidos",  -- 721
-        "Um jogo enquanto a boia está na água",  -- 722
-        "jogado na barra de lançamento enquanto a linha está na água: segure um gatilho e sua isca corre pela linha, solte e ela volta à deriva; mantenha-a junto à sombra do peixe. Quanto melhor você jogar, mais pesado o peso inventado da próxima captura. Não ocupa nenhum botão e nunca mexe no seu lançamento nem na captura",  -- 723
-        "%d pegos, %d tipos, %d escaparam",  -- 724
-        "Mais pesado: %s, %s",  -- 725
-        "Peixes",  -- 726
-        "Águas",  -- 727
-        "Nada pego ainda. Leve uma vara até a água.",  -- 728
-        "Pegos: %d",  -- 729
-        "Mais pesado: %s, em %s",  -- 730
-        "Primeira captura: %s",  -- 731
-        "Pegos aqui: %d",  -- 732
-        "Tipos encontrados aqui: %d",  -- 733
-        "Escolher",  -- 734
-        "Fechar",  -- 735
-        "abrir ou fechar seu diário de pesca: cada tipo que você pegou, o mais pesado de cada um, e as águas onde você pescou",  -- 736
-        "O chat esmaece quando está calmo",  -- 737
-        "o texto do chat esmaece após alguns segundos sem novas mensagens",  -- 738
-        "Segundos até o chat esmaecer",  -- 739
-        "quanto tempo o texto do chat fica antes de esmaecer",  -- 740
-        "Coordenadas no mapa",  -- 741
-        "suas coordenadas abaixo do mapa-múndi",  -- 742
-        "%d mensagens ocultadas como spam desde que você entrou.",  -- 743
-        "%d delas eram recrutamento de guilda repetido.",  -- 744
-        "Ícone de classe e nível no chat",  -- 745
-        "o ícone de classe e o nível de um jogador entre colchetes na frente do nome, quando o jogo nos deixa conhecê-los",  -- 746
-        "Nomes de canal curtos no bate-papo",  -- 747
-        "o canal na frente de uma linha, abreviado: [P] grupo, [PL] líder do grupo, [G] guilda, [O] oficial, [R] raide, [RL] líder da raide, [I] instância, e um canal numerado pelo seu número, [1]",  -- 748
-        "Só o primeiro nome no chat",  -- 749
-        "um nome com sobrenome aparece só com o primeiro nome (Jory Spleeneater fala como Jory); um sussurro ou clique direito nele ainda chega ao nome completo",  -- 750
-        "Tamanho do texto do chat",  -- 751
-        "o tamanho do texto nas janelas de chat, como proporção do tamanho próprio do jogo (a configuração do jogo fica como está)",  -- 752
-        "Ocultar vendedores de ouro e anúncios repetidos",  -- 753
-        "mensagens que vendem ouro ou serviços com um endereço web, e a mesma mensagem repetida por um jogador, são ocultadas (nunca do seu grupo, guilda ou amigos)",  -- 754
-        "Ocultar recrutamento de guilda repetido",  -- 755
-        "nos canais públicos a mensagem de recrutamento de uma guilda é mostrada uma vez; a mesma do mesmo jogador, ou uma quase igual, em 15 minutos é ocultada (nunca do seu grupo, guilda ou amigos)",  -- 756
-        "lista as mensagens do chat ocultadas como spam recentemente",  -- 757
-        "Voo",  -- 758
-        "destino desconhecido",  -- 759
-        "estimado pela distância",  -- 760
-        "primeiro voo nesta rota: aprendendo a duração",  -- 761
-        "pousando",  -- 762
-        "%s: cerca de %s, estimado pela distância",  -- 763
-        "%s: cerca de %s",  -- 764
-        "%s: primeiro voo nesta rota, tempo desconhecido",  -- 765
-        "Em voo, destino desconhecido",  -- 766
-        "%s: tempo de voo aprendido, %s",  -- 767
-        "%d rotas de voo conhecidas.",  -- 768
-        "Voos: tempo e contagem regressiva",  -- 769
-        "num voo, o destino e a duração são ditos no chat, e uma barra no alto da tela faz a contagem regressiva até o pouso; o tempo de cada rota é aprendido com os seus voos",  -- 770
-        "Voos: sua montaria ao longo da barra",  -- 771
-        "um grifo, uma mantícora ou um morcego (o que o mestre de voo lhe deu) plana pela barra do voo até onde você pousa",  -- 772
-        "listar as rotas de voo cujo tempo é conhecido",  -- 773
-        "Um voo é um bom momento para isso.",  -- 774
-        "Você está jogando há %s.",  -- 775
-        "Hora de um gole de água",  -- 776
-        "Lembrete para beber água",  -- 777
-        "de vez em quando enquanto você joga, um lembrete gentil para tomar um gole de água (nunca em combate)",  -- 778
-        "Lembrete de água a cada (minutos)",  -- 779
-        "quantos minutos de jogo entre os lembretes para beber água",  -- 780
-        "Lembrete de água no início de um voo",  -- 781
-        "um voo é uma pausa natural: o lembrete para beber água vem quando um começa, a menos que o último tenha sido há pouco",  -- 782
-        "mostrar o lembrete para beber água",  -- 783
-        "Redesenhar os quadros do próprio jogo",  -- 784
-        "dicas, buffs, o rastreador de missões, o minimapa, a barra de experiência, as abas do chat e as barras de controle no visual do HUD (a interface do mouse mantém a do jogo)",  -- 785
-        "Tamanho da barra de experiência",  -- 786
-        "o tamanho das barras de experiência e reputação enquanto estão redesenhadas, em porcentagem",  -- 787
-        "Dicas",  -- 788
-        "dicas em vidro escuro, com borda na cor da classe de um jogador ou da qualidade de um item",  -- 789
-        "Barras de controle",  -- 790
-        "os botões do controle com um anel fino sobre um fundo escuro em vez da arte pesada",  -- 791
-        "Buffs",  -- 792
-        "seus ícones de buffs e debuffs recortados e com borda, seus tempos com contorno",  -- 793
-        "Rastreador de missões",  -- 794
-        "os cabeçalhos do rastreador de missões em vidro escuro, suas linhas com contorno",  -- 795
-        "Minimapa",  -- 796
-        "um anel fino e um halo suave ao redor do minimapa em vez da borda dourada",  -- 797
-        "Barra de experiência",  -- 798
-        "as barras de experiência e reputação um pouco menores, com cores próprias",  -- 799
-        "Chat",  -- 800
-        "nomes das abas do chat com contorno e a caixa onde você digita em vidro escuro",  -- 801
-        "Medidor de dano",  -- 802
-        "o medidor de dano do jogo no visual do HUD: suas barras, inclinadas sobre um fundo escuro, e texto contornado; ele mantém tudo o que faz",  -- 803
-        "verificação: %d de %d passaram",  -- 804
-        "O jogo não travou desde que você entrou.",  -- 805
-        "Momentos em que o jogo travou, e a parte do HUD em cada um:",  -- 806
-        "Os momentos mais lentos do HUD:",  -- 807
-        "Relatórios de depuração",  -- 808
-        "reunir os relatórios de diagnóstico sozinhos: ao entrar e de novo ao recarregar ou sair (ficam nas configurações salvas)",  -- 809
-        "os momentos em que o jogo travou desde que você entrou, e quanto de cada um foi trabalho do próprio HUD",  -- 810
-        "Predefinição do HUD: %s, combinando com a câmera",  -- 811
-        "predefinição: %s",  -- 812
-        "Um layout chamado '%s' foi adicionado ao Modo de Edição do jogo. Escolha-o lá para usá-lo (Menu do Jogo > Modo de Edição > Layout).",  -- 813
-        "predefinição desconhecida '%s'",  -- 814
-        "Para uma TV: texto maior no HUD e no chat.",  -- 815
-        "Para um monitor: texto no tamanho normal.",  -- 816
-        "Nossos quadros voltaram para onde começam. Escolha o layout %s do jogo no Modo de Edição (Menu do Jogo > Modo de Edição > Layout).",  -- 817
-        "As predefinições definem a distância da câmera",  -- 818
-        "uma predefinição também leva a câmera à distância para a qual seu layout foi feito, uma vez (depois faça zoom à vontade)",  -- 819
-        "Ação",  -- 820
-        "uma visão em terceira pessoa: barras verticais finas ao lado do seu personagem, todos os efeitos ativos; fora de combate tudo esmaece",  -- 821
-        "Clássico",  -- 822
-        "nossos quadros onde o WoW sempre os teve, efeitos mais discretos, as barras de controle do jogo do jeito que são",  -- 823
-        "Mínimo",  -- 824
-        "só o que você precisa: PNJs amigáveis mostram a placa (com o que fazem) só enquanto você aponta, mira ou os tem como alvo; nomes sem títulos; fora de combate suas barras ficam como um leve sinal (vida baixa sempre aparece)",  -- 825
-        "Mundo aberto",  -- 826
-        "uma tela limpa para explorar: barras finas ao seu lado que descansam esmaecidas, placas sem barras de recurso, bate-papo que esmaece",  -- 827
-        "Aventura",  -- 828
-        "após as aventuras de mundo aberto no console: sinais vitais ao seu lado, um alvo pequeno no alto do centro, moradores só quando você aponta para eles, chat que esmaece rápido",  -- 829
-        "Soulslike",  -- 830
-        "suas barras no alto à esquerda, uma grande barra do alvo embaixo no centro como a de um chefe, cada golpe sentido",  -- 831
-        "Tiro",  -- 832
-        "barras verticais logo à direita do centro, perto de onde você mira, o alvo bem no alto, resposta forte aos golpes",  -- 833
-        "Crossbar",  -- 834
-        "após MMOs jogados no controle: alvo e foco no alto do centro, suas barras logo acima das barras de controle, grupo à esquerda, placas completas",  -- 835
-        "ARPG",  -- 836
-        "após RPGs de ação: a câmera bem afastada, seus sinais vitais embaixo à esquerda, o alvo no alto do centro, inimigos menores pequenos, cada golpe soa alto",  -- 837
-        "Bússola",  -- 838
-        "após RPGs em primeira pessoa: a câmera perto, suas barras embaixo no centro, o alvo sob a borda superior, moradores só quando você aponta para eles",  -- 839
-        "Raide",  -- 840
-        "o posicionamento do WoW com tudo que um grupo precisa: quadros de grupo e raide, porcentagens de vida e níveis nas placas",  -- 841
-        "Seguir as predefinições do ControllerCam",  -- 842
-        "escolher uma predefinição de câmera no ControllerCam para todo lugar também escolhe a predefinição do HUD correspondente (a câmera mantém sua própria distância)",  -- 843
-        "Moderno",  -- 844
-        "define todo o HUD com uma predefinição: action, classic, minimal, openworld, adventure, soulslike, shooter, crossbar, arpg, compass, raid",  -- 845
-        "o quadro do alvo e as placas compactos ou completos, os dois de uma vez",  -- 846
-        "o quadro do alvo compacto ou completo",  -- 847
-        "dimensionar o texto para uma TV do outro lado da sala ou para um monitor à distância de um braço",  -- 848
-        "pôr nossos quadros de volta onde começam, para o layout Moderno ou Clássico do próprio jogo",  -- 849
-        "Toda a sua configuração (HUD, câmera e o layout do jogo): copie esta linha (Ctrl+C) para guardar ou compartilhar.",  -- 850
-        "Cole uma linha de configurações do HUD (Ctrl+V) e aceite.",  -- 851
-        "Essa linha está danificada: copie de novo, por inteiro.",  -- 852
-        "Essa linha foi feita com uma versão mais nova: atualize o addon.",  -- 853
-        "Isso não é uma linha de configurações do HUD.",  -- 854
-        "Configurações importadas: %d usadas, %d deixadas de fora.",  -- 855
-        "A configuração da câmera veio junto.",  -- 856
-        "A configuração da câmera ficou como estava.",  -- 857
-        "O layout do jogo agora é '%s'.",  -- 858
-        "O layout do jogo ficou como estava.",  -- 859
-        "suas configurações como uma linha de texto, para guardar ou compartilhar",  -- 860
-        "pega configurações de uma linha de texto feita com /cchud export",  -- 861
-        "O HUD fica ativo enquanto a interface de controle está em uso. Suas opções: Opções > AddOns > ControllerCam > HUD, ou /cchud.",  -- 862
-        "Só a câmera: o HUD descansa e a interface do jogo fica como estava. /cchud on o ativa.",  -- 863
-        "Preparar também a tela para o controle? Isso adiciona um layout chamado CCHUD ao Modo de Edição do jogo, para você escolher lá: ele põe as fileiras de recarga sob o alvo, longe dos botões do controle. Seus próprios layouts são mantidos (/cchud setup oferece isso de novo).",  -- 864
-        "Preparar",  -- 865
-        "Agora não",  -- 866
-        "O ControllerCam vem com uma interface para controle, o HUD: seus próprios quadros de unidade, placas de identificação, barra de lançamento e mais enquanto a interface de controle está em uso. Você quer o HUD, ou só a câmera?",  -- 867
-        "Câmera + HUD",  -- 868
-        "Só a câmera",  -- 869
-        "Este cliente não permite que addons alterem o layout.",  -- 870
-        "perguntar de novo: a câmera com o HUD, ou só a câmera",  -- 871
-        "oferecer de novo o layout de tela feito para o HUD (Modo de Edição do jogo)",  -- 872
-        "Exibido enquanto a interface de controle está em uso. Arraste nossos quadros no Modo de Edição do jogo.",  -- 873
-        "Predefinições",  -- 874
-        "Dimensionado para",  -- 875
-        "TV",  -- 876
-        "Monitor",  -- 877
-        "Ícones dos botões",  -- 878
-        "os ícones que o jogo mostra para os botões do seu controle: encontrados sozinhos para o controle em uso, ou o tipo que você escolher",  -- 879
-        "Fonte",  -- 880
-        "Redefinir o layout do jogo",  -- 881
-        "Experimente",  -- 882
-        "Reproduzir a demonstração",  -- 883
-        "Mostrar todos os efeitos de golpe",  -- 884
-        "Executar a autoverificação",  -- 885
-        "Barras de controle: compactas / completas",  -- 886
-        "Exportar configurações",  -- 887
-        "Importar configurações",  -- 888
-        "Marque «Mostrar opções avançadas» na página principal para ver todas as configurações.",  -- 889
-        "Módulos",  -- 890
-        "Botões rápidos",  -- 891
-        "Geral",  -- 892
-        "HUD",  -- 893
-        "O painel de opções não está disponível neste cliente.",  -- 894
-        "Ativado",  -- 895
-        "todo o HUD; desativado, os quadros do próprio jogo voltam",  -- 896
-        "Também na interface de mouse e teclado",  -- 897
-        "normalmente o HUD só funciona enquanto a interface de controle está em uso",  -- 898
-        "Pôr de lado os quadros do jogo",  -- 899
-        "esconde os quadros de jogador, alvo e foco do jogo enquanto os nossos são exibidos",  -- 900
-        "Janela de bate-papo no canto superior esquerdo",  -- 901
-        "move a janela de bate-papo para o canto superior esquerdo enquanto o HUD funciona",  -- 902
-        "Barras verticais em repouso",  -- 903
-        "quão visíveis as barras verticais ficam com a vida cheia fora de combate (0 as oculta)",  -- 904
-        "Cores de classe",  -- 905
-        "colore sua barra e as de outros jogadores por classe",  -- 906
-        "Ícones de classe",  -- 907
-        "um ícone de classe na frente do nome de um jogador no alvo e no alvo do alvo",  -- 908
-        "Ameaça no quadro do alvo",  -- 909
-        "um ícone de escudo e um brilho no quadro do alvo: vermelho enquanto ataca você, vermelho e amarelo quando você está prestes a puxá-lo, amarelo e azul quando você está perdendo, azul quando não está em você",  -- 910
-        "Barras compactas em todo lugar",  -- 911
-        "o quadro do alvo e as placas no estilo compacto, pouco mais da metade da largura (cada um ainda pode ser ajustado sozinho; predefinições nunca mudam isso)",  -- 912
-        "Moldura de alvo compacta",  -- 913
-        "a moldura de alvo um pouco mais da metade da largura",  -- 914
-        "Cores da vida em combate",  -- 915
-        "em combate, as barras de vida passam de verde a amarelo e a vermelho conforme a vida diminui",  -- 916
-        "Sombra atrás do texto",  -- 917
-        "uma faixa escura suave atrás do texto do alvo, para mantê-lo legível",  -- 918
-        "Tamanho do texto",  -- 919
-        "tamanho do texto dos nossos quadros",  -- 920
-        "Tamanho dos quadros",  -- 921
-        "tamanho dos nossos quadros de unidade",  -- 922
-        "Suas barras em combate",  -- 923
-        "quão visíveis suas barras, ajudante e foco ficam em combate até algo exigir atenção",  -- 924
-        "Completas com vida abaixo de",  -- 925
-        "suas barras voltam completas quando sua vida cai abaixo deste valor",  -- 926
-        "Completas com mana abaixo de",  -- 927
-        "suas barras voltam completas quando sua mana cai abaixo deste valor",  -- 928
-        "Barra do jogador em repouso",  -- 929
-        "quão visível a barra do jogador fica com a vida cheia ou fora de combate (0 a oculta)",  -- 930
-        "Ajuda de vendedor e banco",  -- 931
-        "o botão Vender lixo do vendedor pergunta o que vender; movimento rápido no vendedor e no banco",  -- 932
-        "Mostrar opções avançadas",  -- 933
-        "todas as configurações, não só os controles principais",  -- 934
-        "Quadro do jogador",  -- 935
-        "nossa barra do jogador, no alto à esquerda",  -- 936
-        "Quadro do alvo",  -- 937
-        "nossa barra do alvo, no alto ao centro",  -- 938
-        "Barra do ajudante",  -- 939
-        "uma pequena barra de ajudante sob a barra do jogador, ou ao lado das barras verticais",  -- 940
-        "Quadro do foco",  -- 941
-        "nosso quadro do foco",  -- 942
-        "barras verticais finas de vida e poder ao lado do personagem, para uma visão em terceira pessoa (no lugar da barra do jogador)",  -- 943
-        "Vender lixo quando um vendedor abrir",  -- 944
-        "vende o lixo conforme suas regras assim que um vendedor abre",  -- 945
-        "Armas e armaduras brancas são lixo",  -- 946
-        "contar armas e armaduras brancas como sucata (nunca ferramentas, varas de pescar, equipamento com efeito de uso ou o que possa ser uma melhoria; sempre pergunta antes)",  -- 947
-        "Depositar ao abrir o banco",  -- 948
-        "itens marcados para o banco e, quando ativado, o que o banco já tem, entram sozinhos",  -- 949
-        "a opção do jogo; nosso quadro pequeno a acompanha",  -- 950
-        "Gerenciador de Tempo de Recarga",  -- 951
-        "o Gerenciador de Tempo de Recarga do jogo",  -- 952
-        "Exibição de Recursos Pessoais",  -- 953
-        "sua vida e poder abaixo do seu personagem",  -- 954
-        "O banco pega reagentes sozinho",  -- 955
-        "a opção do jogo para o banco",  -- 956
-        "Dica ao iniciar um buff",  -- 957
-        "a opção do jogo: a dica de um buff aparece por um instante quando ele é aplicado (IU de controle)",  -- 958
-        "Cores de classe para nomes no chat",  -- 959
-        "a configuração de chat do jogo para todos os tipos de chat de uma vez: o nome de um jogador na cor da classe dele",  -- 960
-        "abre o painel de opções (Opções > AddOns > ControllerCam HUD)",  -- 961
-        "Quadros",  -- 962
-        "Esmaecer a tela",  -- 963
-        "Efeitos",  -- 964
-        "Visual",  -- 965
-        "Missões, bate-papo e mapa",  -- 966
-        "Bolsas, banco e vendedor",  -- 967
-        "Pesca",  -- 968
-        "Acessibilidade",  -- 969
-        "Opções nativas",  -- 970
-        "%s  |  Interface de controle: %s  |  em execução: %s",  -- 971
-        "jogador %s, alvo %s, ajudante %s, foco %s  |  quadros do jogo postos de lado: %s  |  bate-papo movido: %s",  -- 972
-        "opções nativas: alvo do alvo %s, Gerenciador de Tempo de Recarga %s, recursos pessoais %s",  -- 973
-        "tamanho do texto %d%%  |  sombra do texto: %s",  -- 974
-        "ajuda de vendedor e banco: %s  |  venda automática: %s  |  equipamento branco é lixo: %s",  -- 975
-        "visibilidade em repouso %d%%  |  escala %d%%  |  cores de classe: %s",  -- 976
-        "Um HUD de ação minimalista para a interface de controle.",  -- 977
-        "ativado",  -- 978
-        "desativado: os quadros do próprio jogo voltaram",  -- 979
-        "usar também na interface de mouse e teclado: %s",  -- 980
-        "quadros do jogo postos de lado: %s",  -- 981
-        "bate-papo movido para o canto superior esquerdo: %s",  -- 982
-        "cores de classe: %s",  -- 983
-        "Este cliente não tem essa opção.",  -- 984
-        "%s: %s (opção do próprio jogo)",  -- 985
-        "O jogo não aceitou isso agora.",  -- 986
-        "ajuda de vendedor e banco: %s",  -- 987
-        "venda automática: %s",  -- 988
-        "equipamento branco é lixo: %s",  -- 989
-        "A ajuda de vendedor está desativada.",  -- 990
-        "uso: /cchud sell [junk | recommended | white | green | blue]",  -- 991
-        "depositar itens marcados quando o banco abrir: %s",  -- 992
-        "uso: /cchud junk <item> (Shift+clique no item para colocá-lo na linha de bate-papo)",  -- 993
-        "item %d: lixo, vendido junto com o resto",  -- 994
-        "item %d: mantido, nunca vendido",  -- 995
-        "item %d: para o banco",  -- 996
-        "sombra do texto: %s",  -- 997
-        "uso: /cchud text <80-250>",  -- 998
-        "tamanho do texto %d%%",  -- 999
-        "demonstração parada",  -- 1000
-        "O HUD não está em execução.",  -- 1001
-        "Demonstração em andamento: uma luta inventada em repetição. Digite /cchud demo de novo para parar.",  -- 1002
-        "uso: /cchud idle <0-100>",  -- 1003
-        "visibilidade em repouso %d%%",  -- 1004
-        "uso: /cchud scale <50-200>",  -- 1005
-        "escala %d%%",  -- 1006
-        "Arraste os quadros e depois digite /cchud lock.",  -- 1007
-        "quadros travados",  -- 1008
-        "Tudo voltou a como começou: configurações, quadros e o layout de tela (suas marcas de vendedor e o histórico de preços são mantidos).",  -- 1009
-        "os quadros voltaram ao lugar de origem",  -- 1010
-        "comando desconhecido '%s'. Digite /cchud help",  -- 1011
-        "Lista de erros limpa.",  -- 1012
-        "Nenhum erro registrado.",  -- 1013
-        "%d erros registrados (o mais recente por último). /cchud errors clear limpa a lista.",  -- 1014
-        "mostrar o estado",  -- 1015
-        "liga ou desliga o HUD (desligado traz de volta os quadros do próprio jogo)",  -- 1016
-        "usar o HUD também na interface de mouse e teclado",  -- 1017
-        "usar nosso quadro para isso, ou o do próprio jogo",  -- 1018
-        "barras verticais finas de vida e poder ao lado do seu personagem",  -- 1019
-        "alvo do alvo (opção do próprio jogo, também nos menus dele)",  -- 1020
-        "o Gerenciador de Tempo de Recarga do jogo (opção do próprio jogo)",  -- 1021
-        "sua vida e poder abaixo do seu personagem (opção do próprio jogo)",  -- 1022
-        "a dica que aparece quando um buff começa (a opção própria do jogo)",  -- 1023
-        "manter visíveis os quadros de jogador e alvo do jogo (on) ou pô-los de lado (off)",  -- 1024
-        "em um vendedor: escolher o que vender (também: sell junk, sell recommended, sell white | green | blue)",  -- 1025
-        "conta armas e armaduras brancas como lixo",  -- 1026
-        "marcar um item: sempre vendido, nunca vendido, ou para o banco (Shift+clique para colocá-lo na linha de bate-papo)",  -- 1027
-        "no banco: deposita o que o banco já tem e tudo o que está marcado para ele",  -- 1028
-        "no banco: tirar aquilo de que você já carrega um pouco",  -- 1029
-        "depositar assim que o banco abrir",  -- 1030
-        "o banco pega reagentes sozinho (opção do próprio jogo)",  -- 1031
-        "tamanho do texto, em porcentagem (150 fica bom em uma TV)",  -- 1032
-        "quão visível a barra do jogador fica quando nada acontece (0 a esconde)",  -- 1033
-        "tamanho dos quadros, em porcentagem",  -- 1034
-        "arraste os quadros para onde quiser (o Modo de Edição do jogo também faz isso)",  -- 1035
-        "devolver os quadros ao lugar de origem",  -- 1036
-        "reproduz uma luta curta e inventada, para ver como os quadros reagem (de novo para parar)",  -- 1037
-        "compara o que está na tela com as configurações (check all lista cada linha)",  -- 1038
-        "salva uma descrição da interface de controle deste cliente (para solução de problemas)",  -- 1039
-        "mostrar esta lista",  -- 1040
-        "os últimos erros do HUD, mesmo após recarregar (para relatá-los)",  -- 1041
+        "Focar a missão mais próxima",  -- 544
+        "a missão para a qual o jogo aponta é sempre a mais próxima da sua lista enquanto você viaja; uma que você mesmo focar fica intocada por dez minutos",  -- 545
+        "Lista de missões: objetivos curtos",  -- 546
+        "os objetivos na lista de missões dizem só o necessário, com um ícone do tipo na frente: uma caveira e 0/1 Capitão Pavorerguido, não 0/1 Capitão Pavorerguido morto",  -- 547
+        "Progresso das missões no chat",  -- 548
+        "uma linha curta no chat quando uma missão avança: Colares de Osso Sangrento: 4/25, um objetivo cumprido, uma missão pronta para entregar",  -- 549
+        "Progresso das missões para o seu grupo",  -- 550
+        "em um grupo (não em uma raide) as mesmas linhas vão para o bate-papo do grupo para os outros verem, com um instante entre elas; você também as vê lá",  -- 551
+        "Guardar o que suas missões precisam",  -- 552
+        "um item que uma missão do seu registro ainda pede, ou um que inicia uma missão que você ainda pode fazer, é marcado como Missão: nunca vendido nem leiloado por você",  -- 553
+        "dizer uma ordem recomendada para suas missões: entregue o que está pronto, depois a mais próxima que dá para fazer sozinho, depois o resto",  -- 554
+        "À esquerda das missões",  -- 555
+        "À direita das missões",  -- 556
+        "Abaixo das missões",  -- 557
+        "A lista de farm está cheia.",  -- 558
+        "Lista de farm: %s, %d desejados.",  -- 559
+        "Farm",  -- 560
+        "mais %d",  -- 561
+        "Nada para farmar ainda.",  -- 562
+        "Uma pilha a mais",  -- 563
+        "Tirar",  -- 564
+        "Limpar",  -- 565
+        "Pronto",  -- 566
+        "Tirar tudo da lista de farm?",  -- 567
+        "Lista de farm: escolher / pronto",  -- 568
+        "Lista de farm: adicionar o item que você aponta",  -- 569
+        "Isso não está na lista de farm.",  -- 570
+        "A lista de farm está vazia.",  -- 571
+        "Lista de farm: onde fica",  -- 572
+        "Lista de farm ao lado da lista de missões",  -- 573
+        "o que você pretende coletar, com quantos tem e quantos quer: suas bolsas e banco e os dos seus outros personagens neste reino. Adicione os reagentes de um plano de evolução com um botão, ou qualquer item",  -- 574
+        "a lista de farm à esquerda da lista de missões, à direita dela ou abaixo das missões",  -- 575
+        "a lista de farm ao lado da lista de missões: escolha com o controle; add <item> [quantos], remove <item>, clear, ou left / right / bottom para o lugar",  -- 576
+        "Fora de combate.",  -- 577
+        "Este cliente não tem barras de controle.",  -- 578
+        "Este cliente não permite que addons o alterem; use o Modo de Edição.",  -- 579
+        "barras de controle: %s",  -- 580
+        "compactas",  -- 581
+        "completas",  -- 582
+        "Barras de controle compactas",  -- 583
+        "esconde a arte pesada atrás das barras de ação do controle e as desenha menores",  -- 584
+        "Tamanho das barras de controle",  -- 585
+        "tamanho das barras de controle enquanto as barras compactas estão ativadas, em porcentagem",  -- 586
+        "as barras de controle do jogo no modo compacto ou completo (igual à configuração do Modo de Edição)",  -- 587
+        "Esmaecer fora de combate",  -- 588
+        "/cchud fade <parte> on | off ajusta uma; all para todo o esmaecimento.",  -- 589
+        "as barras do controle, o minimapa, a lista de missões, o medidor de dano e a barra de experiência descansam juntos fora de combate, e voltam para uma luta, um gatilho puxado ou um alvo inimigo",  -- 590
+        "A tela em repouso",  -- 591
+        "quão visíveis ficam as partes da tela em repouso fora de combate (0 as esconde)",  -- 592
+        "Esmaece: barras do controle",  -- 593
+        "Esmaece: minimapa",  -- 594
+        "Esmaece: lista de missões",  -- 595
+        "Esmaece: medidor de dano",  -- 596
+        "Esmaece: barra de experiência",  -- 597
+        "Esmaece: bônus",  -- 598
+        "Esmaece: fileiras de recarga",  -- 599
+        "se esta parte da tela esmaece com o resto fora de combate (desligado: fica sempre como está)",  -- 600
+        "o esmaecimento da tela fora de combate: o que esmaece (minimapa, lista de missões e o resto), cada um ligado ou desligado",  -- 601
+        "Salvo: digite /reload para o jogo gravar no disco.",  -- 602
+        "Botões de postura e de mascote acima das barras",  -- 603
+        "os botões de posturas e de comandos do mascote ficam onde estavam os ícones verde e vermelho de alvo, para que a roda deles abra inteira na tela; esses ícones são escondidos",  -- 604
+        "listar onde ficam as partes das barras do controle e o que descansa (para diagnóstico)",  -- 605
+        "Auto",  -- 606
+        "Genérico",  -- 607
+        "os do jogo",  -- 608
+        "Ícones dos botões: %s.",  -- 609
+        "Nenhum controle está em uso agora, ou o jogo não tem estilos de ícones: será definido quando houver um.",  -- 610
+        "O jogo não aceitou os ícones dos botões.",  -- 611
+        "O controle não diz o que é: os ícones ficam como o jogo os tem.",  -- 612
+        "os ícones que o jogo mostra para os botões do seu controle: auto (pelo controle em uso), xbox, playstation, switch, steam, generic (números), ou game para deixá-los como o jogo os tem",  -- 613
+        "Fileiras de recarga fora das barras do controle",  -- 614
+        "as fileiras de recarga do jogo ficam sob o alvo em vez de em cima dos botões do controle, um pouco menores (só nos layouts embutidos do jogo: num layout seu elas ficam onde você as pôs)",  -- 615
+        "Modo de pesca: desligado.",  -- 616
+        "Pesca: %s para lançar",  -- 617
+        "Sem isca: %s duas vezes para usar %s",  -- 618
+        "%s para guardar a vara",  -- 619
+        "Modo pesca: %s para lançar a linha, e de novo para fisgar o peixe quando a boia mexer.",  -- 620
+        "%s para fisgar, %s para lançar de novo",  -- 621
+        "O modo de pesca precisa de uma vara de pescar nas suas mãos.",  -- 622
+        "Você não conhece Pesca.",  -- 623
+        "Modo de pesca: um botão lança e fisga",  -- 624
+        "Botão de pesca: %s",  -- 625
+        "Pesca com um botão",  -- 626
+        "com uma vara de pesca nas mãos: seu botão de interagir para lançar a linha sempre que não houver nada com que interagir, e de novo para fisgar o peixe quando a boia mexer; a pesca é recolhida para você. B para guardar a vara e pegar suas armas de volta",  -- 627
+        "Lançar de novo com um toque",  -- 628
+        "enquanto a boia está na água, seu botão de pesca lança uma linha nova com um toque, e A fisga o peixe (o jogo não dá sinal de mordida para esperar, então um botão não pode fazer as duas coisas); desligado: o botão de pesca fisga, como a interação do jogo",  -- 629
+        "Isca com toque duplo",  -- 630
+        "aperte seu botão de pesca duas vezes rápido: o segundo toque coloca a melhor isca das suas bolsas na vara, quando a vara não tem nenhuma",  -- 631
+        "Barras do controle ocultas ao pescar",  -- 632
+        "com uma vara de pesca nas mãos as barras do controle ficam ocultas, para ver bem a água; o aviso de pesca mostra o botão para lançar. Elas voltam assim que um combate começa ou a vara é guardada",  -- 633
+        "pesca com um botão desligada por ora, ou ligada de novo (com uma vara nas mãos ela liga sozinha)",  -- 634
+        "o botão que pesca: no início seu botão de interagir (Quadrado ou X), ou qualquer outro, um gatilho por exemplo (rt)",  -- 635
+        "O litoral de Durotar é rocha vermelha e água rasa e morna. Os trolls das Ilhas do Eco dizem que a cavala passa em maior número quando a maré traz o cheiro das fogueiras de cozinha das ilhas.",  -- 636
+        "Os lagos de Mulgore são pequenos, límpidos e pacientes. Os tauren pescam neles como fazem todo o resto: devagar e com gratidão.",  -- 637
+        "Todo oásis dos Sertões é um ponto de encontro. Seja lá o que beba ali de dia, alguma coisa nada por baixo à noite.",  -- 638
+        "As lagoas de Teldrassil ficam à sombra de uma única árvore. Os pescadores elfos noturnos juram que os peixes de lá nunca viram o sol e não sentem a menor falta.",  -- 639
+        "A água da Costa Negra é cinzenta, fria e cheia de naufrágios. Metade do que morde a isca perto de Auberdine fez morada na carga perdida de alguém.",  -- 640
+        "Os rios do Vale Gris correm sob folhas mais velhas que a maioria dos reinos. Os peixes são rápidos, e as sentinelas são ainda mais rápidas em perguntar o que você está fazendo ali.",  -- 641
+        "Lá embaixo, em Mil Agulhas, a água é pouca e guardada com ciúme. Um peixe daqui fez por merecer o seu lugar.",  -- 642
+        "Os lagos da Cordilheira das Torres de Pedra ficam lá no alto, gelados, entre os picos. Os goblins já os teriam drenado se a pescaria não fosse tão boa.",  -- 643
+        "A costa da Desolação é feita de ossos e ressaca cinzenta. Alguma coisa lá no fundo tem gosto pelos dois.",  -- 644
+        "Feralas é verde até a beira da água. Seus rios são fundos, mornos e muito, muito vivos.",  -- 645
+        "Ninguém sabe ao certo onde termina a terra e começa a água no Pântano Vadeoso. Pesque da margem e conte os dedos dos pés depois.",  -- 646
+        "O Porto Bondebico tem a única água digna do nome em Tanaris. Os goblins vendem o direito de pescar nela, e até duas vezes, se você deixar.",  -- 647
+        "Sob a baía luminosa de Azshara jaz uma cidade afogada. Os pescadores velhos dizem que os grandões vivem onde antes ficavam os jardins.",  -- 648
+        "As lagoas de Selva Maleva brilham, e não no bom sentido. O que ainda nada nelas é teimoso além da conta.",  -- 649
+        "As fontes termais e os lagos orlados de piche da Cratera Un'Goro guardaram coisas que o resto do mundo esqueceu. Algumas delas mordem.",  -- 650
+        "O Lago Elune'ara, na Clareira da Lua, é calmo como um fôlego suspenso. Os druidas só pedem que você não leve mais do que vai comer.",  -- 651
+        "Silithus é areia, vento e som de asas. Se você achou água para pescar aqui, não conte a ninguém.",  -- 652
+        "Os lagos de Hibérnia congelam nas bordas e fumegam no meio. Os peixes de lá são gordos por causa do frio e valem a caminhada.",  -- 653
+        "Nas lagoas de Orgrimmar pescam os peões que não têm nada melhor para fazer e os velhos brutamontes que dizem o mesmo. Uns e outros contam que o grandão escapou.",  -- 654
+        "Um peixe dos laguinhos do Penhasco do Trovão passou a vida inteira bem acima das planícies. Parece lidar bem com isso.",  -- 655
+        "Darnassus cuida de suas águas com o mesmo zelo com que cuida dos templos. Os peixes já se acostumaram a ser admirados.",  -- 656
+        "Os lagos das Montanhas de Alterac são neve derretida, e os ogros e a Camarilha pescam neles quando ninguém está olhando.",  -- 657
+        "As margens do Planalto Arathi viram mais exércitos do que pescadores. Faz tempo que os peixes deixaram de se importar com a bandeira que tremula sobre a água.",  -- 658
+        "Os Ermos são poeira de uma ponta a outra. Uma fisgada aqui é um pequeno milagre; trate-a como tal.",  -- 659
+        "A costa da Barreira do Inferno é vermelha, castigada e silenciosa. O que quer que viva naquela arrebentação aprendeu a conviver com muita coisa.",  -- 660
+        "Os lagos das Clareiras de Tirisfal jazem imóveis sob um céu doentio. Os Renegados pescam neles por hábito; os mortos não comem muito, mas lembram que gostavam.",  -- 661
+        "A longa costa da Floresta de Pinhaprata é só névoa e sombra de pinheiro. A pesca é boa, e essa é a única coisa alegre que alguém diz sobre o lugar.",  -- 662
+        "Os rios das Terras Pestilentas Ocidentais ainda correm, embora não limpos. O que você tirar deles, olhe duas vezes.",  -- 663
+        "Pouca gente pesca nas Terras Pestilentas Orientais, e menos gente ainda admite. A água guarda o que a peste deixou dela.",  -- 664
+        "O rio de Eira dos Montes e sua longa costa sul alimentaram os dois lados de todas as brigas travadas por causa deles.",  -- 665
+        "As Terras Agrestes guardam seus lagos no alto, entre as árvores, onde os anões Martelo Feroz pescam montados em grifos quando acham que ninguém está vendo.",  -- 666
+        "Os lagos de Dun Morogh passam a maior parte do ano cercados de gelo. Um anão abre um buraco, senta com uma caneca de cerveja e diz que foi um bom dia, morda o que morder.",  -- 667
+        "A Garganta Abrasadora tem lava onde outras terras têm rios. Melhor trazer alguma coisa para beber.",  -- 668
+        "As Estepes Ardentes são cinzas e brasas. Se a água daqui lhe der alguma coisa, vai estar quente.",  -- 669
+        "Toda criança de Elwynn aprende a pescar no Crystal Lake ou no Stone Cairn Lake. Os peixinhos de lá passam a perna nelas há gerações.",  -- 670
+        "A Trilha do Vento Morto tem pouca água e menos acolhida ainda. O que há nas poças abaixo de Karazhan é melhor deixar por lá.",  -- 671
+        "O rio na beira da Floresta do Crepúsculo é negro a qualquer hora. Os peixes não parecem se incomodar com o escuro; os pescadores, sim.",  -- 672
+        "O Loch é o orgulho de Loch Modan, contido pela grande barragem Stonewrought. Os anões medem toda história de pescador pelo tamanho dele, e o Loch costuma ganhar.",  -- 673
+        "O Lago Plácido, nas Montanhas Cristarrubra, é bonito como uma pintura, e pesca-se nele de todos os cais de Vila Plácida. Os moradores conhecem cada ponto bom e não vão lhe contar nenhum.",  -- 674
+        "Dos rios da selva ao cabo selvagem do sul, a Selva do Espinhaço tem as águas mais ricas do continente. Os pescadores da Angra do Butim fazem um torneio por lá, e quase todos trapaceiam.",  -- 675
+        "O Pântano das Mágoas é água verde sob árvores verdes. Os peixes têm gosto de lama, e é assim que o povo de lá gosta.",  -- 676
+        "As lavouras de Cerro Oeste fracassaram, mas a costa não. Quem ficou vive da longa praia cinzenta.",  -- 677
+        "O Pantanal faz jus ao nome. Os cais do Porto de Menethil são o lugar mais seco para pescar por lá, e os crocoliscos sabem disso.",  -- 678
+        "Nos canais de Ventobravo pescam crianças, aposentados e pelo menos um membro da nobreza disfarçado. Ninguém pergunta o que mais existe nos canais.",  -- 679
+        "A Forlorn Cavern abriga o único laguinho sossegado de Altaforja. Os anões velhos pescam ali por horas e não dizem uma palavra.",  -- 680
+        "Os canais da Cidade Baixa correm num verde que não tem nada a ver com algas. Os Renegados que pescam ali não estão atrás do jantar.",  -- 681
+        "O primeiro peixe que a maioria dos pescadores tira da água, e vistoso o bastante para ficar na memória.",  -- 682
+        "Escorrega, corre e aparece em toda costa quente. Na grelha, fica melhor do que o nome sugere.",  -- 683
+        "É só boca, e nunca está tão feliz quanto numa água que você não beberia.",  -- 684
+        "Tamanho pequeno, dentes de sobra e medo nenhum. Dizem que um cardume inteiro já expulsou um urso do Loch.",  -- 685
+        "Um lampejo de cor sob a arrebentação. Para os marinheiros, um desses no anzol é sorte para a viagem.",  -- 686
+        "Um paciente comedor de fundo, com bigodes de ancião anão.",  -- 687
+        "Ninguém come duas vezes. Os alquimistas compram tudo o que aparece.",  -- 688
+        "As nadadeiras brilham como brasas dormidas, e o óleo extraído deste peixe queima quase tão bem.",  -- 689
+        "Uma blindagem de pequeno escudo. A carne lá dentro compensa o trabalho.",  -- 690
+        "Alguma coisa na água perto das Cavernas Ululantes transformou este peixe. Comer um talvez transforme você também, por um tempo.",  -- 691
+        "O povo do rio diz que uma refeição dessas clareia a mente. É nadar contra a corrente que traz a sabedoria.",  -- 692
+        "Mais idade, mais tamanho e mais sabedoria que o primo, e nada disso evitou o seu anzol.",  -- 693
+        "Um lutador valente dos mares quentes do sul e o favorito em toda taberna, da Angra do Butim a Geringontzan.",  -- 694
+        "A testa brilha como mithril de verdade. Mais de um minerador já tentou fundi-la.",  -- 695
+        "As escamas, fervidas, viram um óleo que deixa a pele dura como pedra. Prefere a noite.",  -- 696
+        "Brilha como uma couraça de desfile, e pesa quase o mesmo.",  -- 697
+        "Só chega perto da costa nos meses frios, e os cozinheiros que conhecem o segredo esperam o ano inteiro.",  -- 698
+        "Aparece quando os dias são longos. O povo do litoral marca a estação pela sua chegada.",  -- 699
+        "Segure pelo meio, e só uma vez.",  -- 700
+        "Um peixe de rio de terras selvagens, com as guelras vermelhas como a pintura de guerra de um troll.",  -- 701
+        "Come depois que escurece. Uma sopa feita com este peixe acalma os nervos de quem lança feitiços.",  -- 702
+        "Come de dia, o oposto do primo noturno em quase tudo, e mesmo assim divide a água com ele.",  -- 703
+        "Não é bem um peixe. Discorda de ter ido parar no anzol e faz questão de deixar isso claro.",  -- 704
+        "Tem a palidez do gelo de rio e vem dos lagos frios e límpidos do norte.",  -- 705
+        "Você vai precisar das duas mãos, e talvez de um amigo.",  -- 706
+        "%.1f lb",  -- 707
+        "Novo no seu diário de pesca: %s, %s.",  -- 708
+        "Novo no seu diário de pesca: %s.",  -- 709
+        "Seu %s mais pesado até agora: %s (era %s).",  -- 710
+        "Diário de pesca",  -- 711
+        "cada captura é anotada no seu diário de pesca: quantas de cada tipo, onde você a pegou pela primeira vez, e um peso inventado por diversão com o seu melhor de cada uma (/cchud journal abre o diário)",  -- 712
+        "Isca %s",  -- 713
+        "Sem isca",  -- 714
+        "Pegos %d",  -- 715
+        "Escaparam %d",  -- 716
+        "Interface de pesca",  -- 717
+        "com uma vara de pescar nas mãos: os peixes da água onde você está (os que você ainda não pegou aqui ficam ocultos), sua perícia em pesca e o que sua isca acrescenta, quantos você pegou e quantos escaparam, quanto tempo sua isca dura, e suas últimas capturas",  -- 718
+        "Um curioso: +%d%%",  -- 719
+        "Mantenha sua isca ao lado do peixe",  -- 720
+        "Próxima captura +%d%%",  -- 721
+        "Segure %s: a isca corre pela linha",  -- 722
+        "%d seguidos",  -- 723
+        "Um jogo enquanto a boia está na água",  -- 724
+        "jogado na barra de lançamento enquanto a linha está na água: segure um gatilho e sua isca corre pela linha, solte e ela volta à deriva; mantenha-a junto à sombra do peixe. Quanto melhor você jogar, mais pesado o peso inventado da próxima captura. Não ocupa nenhum botão e nunca mexe no seu lançamento nem na captura",  -- 725
+        "%d pegos, %d tipos, %d escaparam",  -- 726
+        "Mais pesado: %s, %s",  -- 727
+        "Peixes",  -- 728
+        "Águas",  -- 729
+        "Nada pego ainda. Leve uma vara até a água.",  -- 730
+        "Pegos: %d",  -- 731
+        "Mais pesado: %s, em %s",  -- 732
+        "Primeira captura: %s",  -- 733
+        "Pegos aqui: %d",  -- 734
+        "Tipos encontrados aqui: %d",  -- 735
+        "Escolher",  -- 736
+        "Fechar",  -- 737
+        "abrir ou fechar seu diário de pesca: cada tipo que você pegou, o mais pesado de cada um, e as águas onde você pescou",  -- 738
+        "O chat esmaece quando está calmo",  -- 739
+        "o texto do chat esmaece após alguns segundos sem novas mensagens",  -- 740
+        "Segundos até o chat esmaecer",  -- 741
+        "quanto tempo o texto do chat fica antes de esmaecer",  -- 742
+        "Coordenadas no mapa",  -- 743
+        "suas coordenadas abaixo do mapa-múndi",  -- 744
+        "%d mensagens ocultadas como spam desde que você entrou.",  -- 745
+        "%d delas eram recrutamento de guilda repetido.",  -- 746
+        "Ícone de classe e nível no chat",  -- 747
+        "o ícone de classe e o nível de um jogador entre colchetes na frente do nome, quando o jogo nos deixa conhecê-los",  -- 748
+        "Nomes de canal curtos no bate-papo",  -- 749
+        "o canal na frente de uma linha, abreviado: [P] grupo, [PL] líder do grupo, [G] guilda, [O] oficial, [R] raide, [RL] líder da raide, [I] instância, e um canal numerado pelo seu número, [1]",  -- 750
+        "Só o primeiro nome no chat",  -- 751
+        "um nome com sobrenome aparece só com o primeiro nome (Jory Spleeneater fala como Jory); um sussurro ou clique direito nele ainda chega ao nome completo",  -- 752
+        "Tamanho do texto do chat",  -- 753
+        "o tamanho do texto nas janelas de chat, como proporção do tamanho próprio do jogo (a configuração do jogo fica como está)",  -- 754
+        "Ocultar vendedores de ouro e anúncios repetidos",  -- 755
+        "mensagens que vendem ouro ou serviços com um endereço web, e a mesma mensagem repetida por um jogador, são ocultadas (nunca do seu grupo, guilda ou amigos)",  -- 756
+        "Ocultar recrutamento de guilda repetido",  -- 757
+        "nos canais públicos a mensagem de recrutamento de uma guilda é mostrada uma vez; a mesma do mesmo jogador, ou uma quase igual, em 15 minutos é ocultada (nunca do seu grupo, guilda ou amigos)",  -- 758
+        "lista as mensagens do chat ocultadas como spam recentemente",  -- 759
+        "Voo",  -- 760
+        "destino desconhecido",  -- 761
+        "estimado pela distância",  -- 762
+        "primeiro voo nesta rota: aprendendo a duração",  -- 763
+        "pousando",  -- 764
+        "%s: cerca de %s, estimado pela distância",  -- 765
+        "%s: cerca de %s",  -- 766
+        "%s: primeiro voo nesta rota, tempo desconhecido",  -- 767
+        "Em voo, destino desconhecido",  -- 768
+        "%s: tempo de voo aprendido, %s",  -- 769
+        "%d rotas de voo conhecidas.",  -- 770
+        "Voos: tempo e contagem regressiva",  -- 771
+        "num voo, o destino e a duração são ditos no chat, e uma barra no alto da tela faz a contagem regressiva até o pouso; o tempo de cada rota é aprendido com os seus voos",  -- 772
+        "Voos: sua montaria ao longo da barra",  -- 773
+        "um grifo, uma mantícora ou um morcego (o que o mestre de voo lhe deu) plana pela barra do voo até onde você pousa",  -- 774
+        "listar as rotas de voo cujo tempo é conhecido",  -- 775
+        "Ao chão! +%d",  -- 776
+        "Nas nuvens: a sequência acaba",  -- 777
+        "%d de ouro de voo",  -- 778
+        "%s bater as asas",  -- 779
+        "%s rede",  -- 780
+        "%s grande altitude",  -- 781
+        "%s: voltar ao jogo (%d de ouro de voo)",  -- 782
+        "%s: um jogo no caminho",  -- 783
+        "O jogo de voo está desligado: /cchud flightgame on",  -- 784
+        "O jogo de voo é jogado durante um voo.",  -- 785
+        "Não em combate.",  -- 786
+        "Jogo de voo: jogar / grande altitude",  -- 787
+        "Voos: um jogo no caminho",  -- 788
+        "num voo, um pequeno jogo é oferecido sob a barra de voo, e um botão o inicia (só esse botão é ocupado até você apertá-lo): faça sua montaria bater as asas entre as nuvens e pegue com a rede os cavaleiros que vêm no sentido contrário, levando-os ao chão em troca de ouro de voo. O mesmo botão de novo é grande altitude: o jogo é guardado e os botões voltam a ser do jogo. Nunca em combate, some ao pousar",  -- 789
+        "num voo: iniciar o jogo de voo, ou levá-lo à grande altitude e de volta",  -- 790
+        "Um voo é um bom momento para isso.",  -- 791
+        "Você está jogando há %s.",  -- 792
+        "Hora de um gole de água",  -- 793
+        "Lembrete para beber água",  -- 794
+        "de vez em quando enquanto você joga, um lembrete gentil para tomar um gole de água (nunca em combate)",  -- 795
+        "Lembrete de água a cada (minutos)",  -- 796
+        "quantos minutos de jogo entre os lembretes para beber água",  -- 797
+        "Lembrete de água no início de um voo",  -- 798
+        "um voo é uma pausa natural: o lembrete para beber água vem quando um começa, a menos que o último tenha sido há pouco",  -- 799
+        "mostrar o lembrete para beber água",  -- 800
+        "Redesenhar os quadros do próprio jogo",  -- 801
+        "dicas, buffs, o rastreador de missões, o minimapa, a barra de experiência, as abas do chat e as barras de controle no visual do HUD (a interface do mouse mantém a do jogo)",  -- 802
+        "Tamanho da barra de experiência",  -- 803
+        "o tamanho das barras de experiência e reputação enquanto estão redesenhadas, em porcentagem",  -- 804
+        "Dicas",  -- 805
+        "dicas em vidro escuro, com borda na cor da classe de um jogador ou da qualidade de um item",  -- 806
+        "Barras de controle",  -- 807
+        "os botões do controle com um anel fino sobre um fundo escuro em vez da arte pesada",  -- 808
+        "Buffs",  -- 809
+        "seus ícones de buffs e debuffs recortados e com borda, seus tempos com contorno",  -- 810
+        "Rastreador de missões",  -- 811
+        "os cabeçalhos do rastreador de missões em vidro escuro, suas linhas com contorno",  -- 812
+        "Minimapa",  -- 813
+        "um anel fino e um halo suave ao redor do minimapa em vez da borda dourada",  -- 814
+        "Barra de experiência",  -- 815
+        "as barras de experiência e reputação um pouco menores, com cores próprias",  -- 816
+        "Chat",  -- 817
+        "nomes das abas do chat com contorno e a caixa onde você digita em vidro escuro",  -- 818
+        "Medidor de dano",  -- 819
+        "o medidor de dano do jogo no visual do HUD: suas barras, inclinadas sobre um fundo escuro, e texto contornado; ele mantém tudo o que faz",  -- 820
+        "verificação: %d de %d passaram",  -- 821
+        "O jogo não travou desde que você entrou.",  -- 822
+        "Momentos em que o jogo travou, e a parte do HUD em cada um:",  -- 823
+        "Os momentos mais lentos do HUD:",  -- 824
+        "Relatórios de depuração",  -- 825
+        "reunir os relatórios de diagnóstico sozinhos: ao entrar e de novo ao recarregar ou sair (ficam nas configurações salvas)",  -- 826
+        "os momentos em que o jogo travou desde que você entrou, e quanto de cada um foi trabalho do próprio HUD",  -- 827
+        "Predefinição do HUD: %s, combinando com a câmera",  -- 828
+        "predefinição: %s",  -- 829
+        "Um layout chamado '%s' foi adicionado ao Modo de Edição do jogo. Escolha-o lá para usá-lo (Menu do Jogo > Modo de Edição > Layout).",  -- 830
+        "predefinição desconhecida '%s'",  -- 831
+        "Para uma TV: texto maior no HUD e no chat.",  -- 832
+        "Para um monitor: texto no tamanho normal.",  -- 833
+        "Nossos quadros voltaram para onde começam. Escolha o layout %s do jogo no Modo de Edição (Menu do Jogo > Modo de Edição > Layout).",  -- 834
+        "As predefinições definem a distância da câmera",  -- 835
+        "uma predefinição também leva a câmera à distância para a qual seu layout foi feito, uma vez (depois faça zoom à vontade)",  -- 836
+        "Ação",  -- 837
+        "uma visão em terceira pessoa: barras verticais finas ao lado do seu personagem, todos os efeitos ativos; fora de combate tudo esmaece",  -- 838
+        "Clássico",  -- 839
+        "nossos quadros onde o WoW sempre os teve, efeitos mais discretos, as barras de controle do jogo do jeito que são",  -- 840
+        "Mínimo",  -- 841
+        "só o que você precisa: PNJs amigáveis mostram a placa (com o que fazem) só enquanto você aponta, mira ou os tem como alvo; nomes sem títulos; fora de combate suas barras ficam como um leve sinal (vida baixa sempre aparece)",  -- 842
+        "Mundo aberto",  -- 843
+        "uma tela limpa para explorar: barras finas ao seu lado que descansam esmaecidas, placas sem barras de recurso, bate-papo que esmaece",  -- 844
+        "Aventura",  -- 845
+        "após as aventuras de mundo aberto no console: sinais vitais ao seu lado, um alvo pequeno no alto do centro, moradores só quando você aponta para eles, chat que esmaece rápido",  -- 846
+        "Soulslike",  -- 847
+        "suas barras no alto à esquerda, uma grande barra do alvo embaixo no centro como a de um chefe, cada golpe sentido",  -- 848
+        "Tiro",  -- 849
+        "barras verticais logo à direita do centro, perto de onde você mira, o alvo bem no alto, resposta forte aos golpes",  -- 850
+        "Crossbar",  -- 851
+        "após MMOs jogados no controle: alvo e foco no alto do centro, suas barras logo acima das barras de controle, grupo à esquerda, placas completas",  -- 852
+        "ARPG",  -- 853
+        "após RPGs de ação: a câmera bem afastada, seus sinais vitais embaixo à esquerda, o alvo no alto do centro, inimigos menores pequenos, cada golpe soa alto",  -- 854
+        "Bússola",  -- 855
+        "após RPGs em primeira pessoa: a câmera perto, suas barras embaixo no centro, o alvo sob a borda superior, moradores só quando você aponta para eles",  -- 856
+        "Raide",  -- 857
+        "o posicionamento do WoW com tudo que um grupo precisa: quadros de grupo e raide, porcentagens de vida e níveis nas placas",  -- 858
+        "Seguir as predefinições do ControllerCam",  -- 859
+        "escolher uma predefinição de câmera no ControllerCam para todo lugar também escolhe a predefinição do HUD correspondente (a câmera mantém sua própria distância)",  -- 860
+        "Moderno",  -- 861
+        "define todo o HUD com uma predefinição: action, classic, minimal, openworld, adventure, soulslike, shooter, crossbar, arpg, compass, raid",  -- 862
+        "o quadro do alvo e as placas compactos ou completos, os dois de uma vez",  -- 863
+        "o quadro do alvo compacto ou completo",  -- 864
+        "dimensionar o texto para uma TV do outro lado da sala ou para um monitor à distância de um braço",  -- 865
+        "pôr nossos quadros de volta onde começam, para o layout Moderno ou Clássico do próprio jogo",  -- 866
+        "Toda a sua configuração (HUD, câmera e o layout do jogo): copie esta linha (Ctrl+C) para guardar ou compartilhar.",  -- 867
+        "Cole uma linha de configurações do HUD (Ctrl+V) e aceite.",  -- 868
+        "Essa linha está danificada: copie de novo, por inteiro.",  -- 869
+        "Essa linha foi feita com uma versão mais nova: atualize o addon.",  -- 870
+        "Isso não é uma linha de configurações do HUD.",  -- 871
+        "Configurações importadas: %d usadas, %d deixadas de fora.",  -- 872
+        "A configuração da câmera veio junto.",  -- 873
+        "A configuração da câmera ficou como estava.",  -- 874
+        "O layout do jogo agora é '%s'.",  -- 875
+        "O layout do jogo ficou como estava.",  -- 876
+        "suas configurações como uma linha de texto, para guardar ou compartilhar",  -- 877
+        "pega configurações de uma linha de texto feita com /cchud export",  -- 878
+        "O HUD fica ativo enquanto a interface de controle está em uso. Suas opções: Opções > AddOns > ControllerCam > HUD, ou /cchud.",  -- 879
+        "Só a câmera: o HUD descansa e a interface do jogo fica como estava. /cchud on o ativa.",  -- 880
+        "Preparar também a tela para o controle? Isso adiciona um layout chamado CCHUD ao Modo de Edição do jogo, para você escolher lá: ele põe as fileiras de recarga sob o alvo, longe dos botões do controle. Seus próprios layouts são mantidos (/cchud setup oferece isso de novo).",  -- 881
+        "Preparar",  -- 882
+        "Agora não",  -- 883
+        "O ControllerCam vem com uma interface para controle, o HUD: seus próprios quadros de unidade, placas de identificação, barra de lançamento e mais enquanto a interface de controle está em uso. Você quer o HUD, ou só a câmera?",  -- 884
+        "Câmera + HUD",  -- 885
+        "Só a câmera",  -- 886
+        "Este cliente não permite que addons alterem o layout.",  -- 887
+        "perguntar de novo: a câmera com o HUD, ou só a câmera",  -- 888
+        "oferecer de novo o layout de tela feito para o HUD (Modo de Edição do jogo)",  -- 889
+        "Exibido enquanto a interface de controle está em uso. Arraste nossos quadros no Modo de Edição do jogo.",  -- 890
+        "Predefinições",  -- 891
+        "Dimensionado para",  -- 892
+        "TV",  -- 893
+        "Monitor",  -- 894
+        "Ícones dos botões",  -- 895
+        "os ícones que o jogo mostra para os botões do seu controle: encontrados sozinhos para o controle em uso, ou o tipo que você escolher",  -- 896
+        "Fonte",  -- 897
+        "Redefinir o layout do jogo",  -- 898
+        "Experimente",  -- 899
+        "Reproduzir a demonstração",  -- 900
+        "Mostrar todos os efeitos de golpe",  -- 901
+        "Executar a autoverificação",  -- 902
+        "Barras de controle: compactas / completas",  -- 903
+        "Exportar configurações",  -- 904
+        "Importar configurações",  -- 905
+        "Marque «Mostrar opções avançadas» na página principal para ver todas as configurações.",  -- 906
+        "Módulos",  -- 907
+        "Botões rápidos",  -- 908
+        "Geral",  -- 909
+        "HUD",  -- 910
+        "O painel de opções não está disponível neste cliente.",  -- 911
+        "Ativado",  -- 912
+        "todo o HUD; desativado, os quadros do próprio jogo voltam",  -- 913
+        "Também na interface de mouse e teclado",  -- 914
+        "normalmente o HUD só funciona enquanto a interface de controle está em uso",  -- 915
+        "Pôr de lado os quadros do jogo",  -- 916
+        "esconde os quadros de jogador, alvo e foco do jogo enquanto os nossos são exibidos",  -- 917
+        "Janela de bate-papo no canto superior esquerdo",  -- 918
+        "move a janela de bate-papo para o canto superior esquerdo enquanto o HUD funciona",  -- 919
+        "Barras verticais em repouso",  -- 920
+        "quão visíveis as barras verticais ficam com a vida cheia fora de combate (0 as oculta)",  -- 921
+        "Cores de classe",  -- 922
+        "colore sua barra e as de outros jogadores por classe",  -- 923
+        "Ícones de classe",  -- 924
+        "um ícone de classe na frente do nome de um jogador no alvo e no alvo do alvo",  -- 925
+        "Ameaça no quadro do alvo",  -- 926
+        "um ícone de escudo e um brilho no quadro do alvo: vermelho enquanto ataca você, vermelho e amarelo quando você está prestes a puxá-lo, amarelo e azul quando você está perdendo, azul quando não está em você",  -- 927
+        "Barras compactas em todo lugar",  -- 928
+        "o quadro do alvo e as placas no estilo compacto, pouco mais da metade da largura (cada um ainda pode ser ajustado sozinho; predefinições nunca mudam isso)",  -- 929
+        "Moldura de alvo compacta",  -- 930
+        "a moldura de alvo um pouco mais da metade da largura",  -- 931
+        "Cores da vida em combate",  -- 932
+        "em combate, as barras de vida passam de verde a amarelo e a vermelho conforme a vida diminui",  -- 933
+        "Sombra atrás do texto",  -- 934
+        "uma faixa escura suave atrás do texto do alvo, para mantê-lo legível",  -- 935
+        "Tamanho do texto",  -- 936
+        "tamanho do texto dos nossos quadros",  -- 937
+        "Tamanho dos quadros",  -- 938
+        "tamanho dos nossos quadros de unidade",  -- 939
+        "Suas barras em combate",  -- 940
+        "quão visíveis suas barras, ajudante e foco ficam em combate até algo exigir atenção",  -- 941
+        "Completas com vida abaixo de",  -- 942
+        "suas barras voltam completas quando sua vida cai abaixo deste valor",  -- 943
+        "Completas com mana abaixo de",  -- 944
+        "suas barras voltam completas quando sua mana cai abaixo deste valor",  -- 945
+        "Barra do jogador em repouso",  -- 946
+        "quão visível a barra do jogador fica com a vida cheia ou fora de combate (0 a oculta)",  -- 947
+        "Ajuda de vendedor e banco",  -- 948
+        "o botão Vender lixo do vendedor pergunta o que vender; movimento rápido no vendedor e no banco",  -- 949
+        "Mostrar opções avançadas",  -- 950
+        "todas as configurações, não só os controles principais",  -- 951
+        "Quadro do jogador",  -- 952
+        "nossa barra do jogador, no alto à esquerda",  -- 953
+        "Quadro do alvo",  -- 954
+        "nossa barra do alvo, no alto ao centro",  -- 955
+        "Barra do ajudante",  -- 956
+        "uma pequena barra de ajudante sob a barra do jogador, ou ao lado das barras verticais",  -- 957
+        "Quadro do foco",  -- 958
+        "nosso quadro do foco",  -- 959
+        "barras verticais finas de vida e poder ao lado do personagem, para uma visão em terceira pessoa (no lugar da barra do jogador)",  -- 960
+        "Vender lixo quando um vendedor abrir",  -- 961
+        "vende o lixo conforme suas regras assim que um vendedor abre",  -- 962
+        "Armas e armaduras brancas são lixo",  -- 963
+        "contar armas e armaduras brancas como sucata (nunca ferramentas, varas de pescar, equipamento com efeito de uso ou o que possa ser uma melhoria; sempre pergunta antes)",  -- 964
+        "Depositar ao abrir o banco",  -- 965
+        "itens marcados para o banco e, quando ativado, o que o banco já tem, entram sozinhos",  -- 966
+        "a opção do jogo; nosso quadro pequeno a acompanha",  -- 967
+        "Gerenciador de Tempo de Recarga",  -- 968
+        "o Gerenciador de Tempo de Recarga do jogo",  -- 969
+        "Exibição de Recursos Pessoais",  -- 970
+        "sua vida e poder abaixo do seu personagem",  -- 971
+        "O banco pega reagentes sozinho",  -- 972
+        "a opção do jogo para o banco",  -- 973
+        "Dica ao iniciar um buff",  -- 974
+        "a opção do jogo: a dica de um buff aparece por um instante quando ele é aplicado (IU de controle)",  -- 975
+        "Cores de classe para nomes no chat",  -- 976
+        "a configuração de chat do jogo para todos os tipos de chat de uma vez: o nome de um jogador na cor da classe dele",  -- 977
+        "abre o painel de opções (Opções > AddOns > ControllerCam HUD)",  -- 978
+        "Quadros",  -- 979
+        "Esmaecer a tela",  -- 980
+        "Efeitos",  -- 981
+        "Visual",  -- 982
+        "Missões, bate-papo e mapa",  -- 983
+        "Bolsas, banco e vendedor",  -- 984
+        "Pesca",  -- 985
+        "Acessibilidade",  -- 986
+        "Opções nativas",  -- 987
+        "%s  |  Interface de controle: %s  |  em execução: %s",  -- 988
+        "jogador %s, alvo %s, ajudante %s, foco %s  |  quadros do jogo postos de lado: %s  |  bate-papo movido: %s",  -- 989
+        "opções nativas: alvo do alvo %s, Gerenciador de Tempo de Recarga %s, recursos pessoais %s",  -- 990
+        "tamanho do texto %d%%  |  sombra do texto: %s",  -- 991
+        "ajuda de vendedor e banco: %s  |  venda automática: %s  |  equipamento branco é lixo: %s",  -- 992
+        "visibilidade em repouso %d%%  |  escala %d%%  |  cores de classe: %s",  -- 993
+        "Um HUD de ação minimalista para a interface de controle.",  -- 994
+        "ativado",  -- 995
+        "desativado: os quadros do próprio jogo voltaram",  -- 996
+        "usar também na interface de mouse e teclado: %s",  -- 997
+        "quadros do jogo postos de lado: %s",  -- 998
+        "bate-papo movido para o canto superior esquerdo: %s",  -- 999
+        "cores de classe: %s",  -- 1000
+        "Este cliente não tem essa opção.",  -- 1001
+        "%s: %s (opção do próprio jogo)",  -- 1002
+        "O jogo não aceitou isso agora.",  -- 1003
+        "ajuda de vendedor e banco: %s",  -- 1004
+        "venda automática: %s",  -- 1005
+        "equipamento branco é lixo: %s",  -- 1006
+        "A ajuda de vendedor está desativada.",  -- 1007
+        "uso: /cchud sell [junk | recommended | white | green | blue]",  -- 1008
+        "depositar itens marcados quando o banco abrir: %s",  -- 1009
+        "uso: /cchud junk <item> (Shift+clique no item para colocá-lo na linha de bate-papo)",  -- 1010
+        "item %d: lixo, vendido junto com o resto",  -- 1011
+        "item %d: mantido, nunca vendido",  -- 1012
+        "item %d: para o banco",  -- 1013
+        "sombra do texto: %s",  -- 1014
+        "uso: /cchud text <80-250>",  -- 1015
+        "tamanho do texto %d%%",  -- 1016
+        "demonstração parada",  -- 1017
+        "O HUD não está em execução.",  -- 1018
+        "Demonstração em andamento: uma luta inventada em repetição. Digite /cchud demo de novo para parar.",  -- 1019
+        "uso: /cchud idle <0-100>",  -- 1020
+        "visibilidade em repouso %d%%",  -- 1021
+        "uso: /cchud scale <50-200>",  -- 1022
+        "escala %d%%",  -- 1023
+        "Arraste os quadros e depois digite /cchud lock.",  -- 1024
+        "quadros travados",  -- 1025
+        "Tudo voltou a como começou: configurações, quadros e o layout de tela (suas marcas de vendedor e o histórico de preços são mantidos).",  -- 1026
+        "os quadros voltaram ao lugar de origem",  -- 1027
+        "comando desconhecido '%s'. Digite /cchud help",  -- 1028
+        "Lista de erros limpa.",  -- 1029
+        "Nenhum erro registrado.",  -- 1030
+        "%d erros registrados (o mais recente por último). /cchud errors clear limpa a lista.",  -- 1031
+        "mostrar o estado",  -- 1032
+        "liga ou desliga o HUD (desligado traz de volta os quadros do próprio jogo)",  -- 1033
+        "usar o HUD também na interface de mouse e teclado",  -- 1034
+        "usar nosso quadro para isso, ou o do próprio jogo",  -- 1035
+        "barras verticais finas de vida e poder ao lado do seu personagem",  -- 1036
+        "alvo do alvo (opção do próprio jogo, também nos menus dele)",  -- 1037
+        "o Gerenciador de Tempo de Recarga do jogo (opção do próprio jogo)",  -- 1038
+        "sua vida e poder abaixo do seu personagem (opção do próprio jogo)",  -- 1039
+        "a dica que aparece quando um buff começa (a opção própria do jogo)",  -- 1040
+        "manter visíveis os quadros de jogador e alvo do jogo (on) ou pô-los de lado (off)",  -- 1041
+        "em um vendedor: escolher o que vender (também: sell junk, sell recommended, sell white | green | blue)",  -- 1042
+        "conta armas e armaduras brancas como lixo",  -- 1043
+        "marcar um item: sempre vendido, nunca vendido, ou para o banco (Shift+clique para colocá-lo na linha de bate-papo)",  -- 1044
+        "no banco: deposita o que o banco já tem e tudo o que está marcado para ele",  -- 1045
+        "no banco: tirar aquilo de que você já carrega um pouco",  -- 1046
+        "depositar assim que o banco abrir",  -- 1047
+        "o banco pega reagentes sozinho (opção do próprio jogo)",  -- 1048
+        "tamanho do texto, em porcentagem (150 fica bom em uma TV)",  -- 1049
+        "quão visível a barra do jogador fica quando nada acontece (0 a esconde)",  -- 1050
+        "tamanho dos quadros, em porcentagem",  -- 1051
+        "arraste os quadros para onde quiser (o Modo de Edição do jogo também faz isso)",  -- 1052
+        "devolver os quadros ao lugar de origem",  -- 1053
+        "reproduz uma luta curta e inventada, para ver como os quadros reagem (de novo para parar)",  -- 1054
+        "compara o que está na tela com as configurações (check all lista cada linha)",  -- 1055
+        "salva uma descrição da interface de controle deste cliente (para solução de problemas)",  -- 1056
+        "mostrar esta lista",  -- 1057
+        "os últimos erros do HUD, mesmo após recarregar (para relatá-los)",  -- 1058
     },
     ruRU = {
         "ошибка:",  -- 1
@@ -7853,504 +7972,521 @@ local TRANSLATIONS = {
         "держать список заданий в порядке расстояния, ближайшее задание сверху",  -- 541
         "Список заданий: рекомендуемый порядок",  -- 542
         "держать список заданий в рекомендуемом порядке: сначала готовые к сдаче, затем то, что можно сделать в одиночку, начиная с ближайшего, затем задания выше вашего уровня, групповые задания, пока вы одни, и серые задания в конце",  -- 543
-        "Список заданий: короткие цели",  -- 544
-        "цели в списке заданий говорят только нужное, со значком типа впереди: череп и 0/1 Капитан Дредрайз, а не 0/1 Капитан Дредрайз убит",  -- 545
-        "Прогресс заданий в чате",  -- 546
-        "короткая строка в чате, когда задание продвигается: Окровавленные костяные ожерелья: 4/25, цель выполнена, задание можно сдать",  -- 547
-        "Ход заданий для группы",  -- 548
-        "в группе (не в рейде) те же строки уходят в чат группы, чтобы их видели остальные, с небольшим промежутком; вы тоже видите их там",  -- 549
-        "Хранить то, что нужно для заданий",  -- 550
-        "предмет, который ещё требует задание из вашего журнала, или предмет, начинающий задание, которое вы ещё можете выполнить, помечается как «Задание»: его никогда не продают и не выставляют на аукцион за вас",  -- 551
-        "назвать рекомендуемый порядок заданий: сдать готовое, затем ближайшее, что можно сделать в одиночку, затем остальное",  -- 552
-        "Слева от заданий",  -- 553
-        "Справа от заданий",  -- 554
-        "Под заданиями",  -- 555
-        "Список фарма полон.",  -- 556
-        "Список фарма: %s, нужно %d.",  -- 557
-        "Фарм",  -- 558
-        "ещё %d",  -- 559
-        "Пока нечего фармить.",  -- 560
-        "На стопку больше",  -- 561
-        "Убрать",  -- 562
-        "Очистить",  -- 563
-        "Готово",  -- 564
-        "Убрать всё из списка фарма?",  -- 565
-        "Список фарма: выбрать / готово",  -- 566
-        "Список фарма: добавить предмет под указателем",  -- 567
-        "Этого нет в списке фарма.",  -- 568
-        "Список фарма пуст.",  -- 569
-        "Список фарма: где он стоит",  -- 570
-        "Список фарма рядом со списком заданий",  -- 571
-        "то, что вы хотите собрать, сколько есть и сколько нужно: ваши сумки и банк и те же у других ваших персонажей в этом игровом мире. Добавьте реагенты плана прокачки одной кнопкой, или любой предмет",  -- 572
-        "список фарма слева от списка заданий, справа от него или под его заданиями",  -- 573
-        "список фарма рядом со списком заданий: выбор контроллером; add <предмет> [сколько], remove <предмет>, clear, или left / right / bottom для его места",  -- 574
-        "Не в бою.",  -- 575
-        "В этом клиенте нет панелей геймпада.",  -- 576
-        "Этот клиент не позволяет аддонам менять это; используйте режим редактирования.",  -- 577
-        "панели геймпада: %s",  -- 578
-        "компактные",  -- 579
-        "полные",  -- 580
-        "Узкие панели геймпада",  -- 581
-        "скрывает громоздкое оформление за панелями действий геймпада и делает их меньше",  -- 582
-        "Размер панелей геймпада",  -- 583
-        "размер панелей геймпада при включённых узких панелях, в процентах",  -- 584
-        "панели геймпада игры в компактном или полном режиме (так же, как настройка режима редактирования)",  -- 585
-        "Скрывать вне боя",  -- 586
-        "/cchud fade <часть> on | off задаёт одну; all — всё затухание.",  -- 587
-        "панели геймпада, миникарта, список заданий, счётчик урона и полоса опыта отдыхают вместе вне боя и возвращаются для боя, при нажатом триггере или враждебной цели",  -- 588
-        "Экран в покое",  -- 589
-        "насколько видны отдыхающие части экрана вне боя (0 скрывает их)",  -- 590
-        "Затухает: панели геймпада",  -- 591
-        "Затухает: миникарта",  -- 592
-        "Затухает: список заданий",  -- 593
-        "Затухает: счётчик урона",  -- 594
-        "Затухает: полоса опыта",  -- 595
-        "Затухает: положительные эффекты",  -- 596
-        "Затухает: ряды восстановления",  -- 597
-        "затухает ли эта часть экрана вместе с остальным вне боя (выкл.: всегда остаётся как есть)",  -- 598
-        "затухание экрана вне боя: что затухает (миникарта, список заданий и остальное), каждое вкл. или выкл.",  -- 599
-        "Сохранено: введите /reload, чтобы игра записала это на диск.",  -- 600
-        "Кнопки стоек и питомца над панелями",  -- 601
-        "кнопки стоек и команд питомца стоят там, где были зелёный и красный значки выбора цели, чтобы их колесо открывалось на экране целиком; эти значки скрыты",  -- 602
-        "перечислить, где находятся части панелей геймпада и что отдыхает (для диагностики)",  -- 603
-        "Авто",  -- 604
-        "Обычные",  -- 605
-        "как в игре",  -- 606
-        "Значки кнопок: %s.",  -- 607
-        "Сейчас контроллер не используется, или в игре нет стилей значков: будет применено, когда он появится.",  -- 608
-        "Игра не приняла значки кнопок.",  -- 609
-        "Контроллер не сообщает, что он такое: значки остаются такими, как в игре.",  -- 610
-        "значки, которые игра показывает для кнопок вашего контроллера: auto (по используемому контроллеру), xbox, playstation, switch, steam, generic (цифры) или game, чтобы оставить их такими, как в игре",  -- 611
-        "Ряды восстановления в стороне от панелей геймпада",  -- 612
-        "ряды восстановления игры располагаются под целью, а не поверх кнопок геймпада, и немного меньше (только при встроенных раскладках игры: в вашей раскладке они остаются там, куда вы их поставили)",  -- 613
-        "Режим рыбалки: выключен.",  -- 614
-        "Рыбалка: %s — забросить",  -- 615
-        "Нет наживки: %s дважды — %s",  -- 616
-        "%s — убрать удочку",  -- 617
-        "Режим рыбалки: %s — забросить леску, и ещё раз — подсечь рыбу, когда поплавок дёрнется.",  -- 618
-        "%s — подсечь, %s — забросить снова",  -- 619
-        "Режиму рыбалки нужна удочка в руках.",  -- 620
-        "Вы не владеете рыбной ловлей.",  -- 621
-        "Режим рыбалки: одна кнопка забрасывает и подсекает",  -- 622
-        "Кнопка рыбалки: %s",  -- 623
-        "Рыбалка одной кнопкой",  -- 624
-        "с удочкой в руках: кнопка взаимодействия забрасывает леску, когда взаимодействовать не с чем, и ещё раз — подсекает рыбу, когда поплавок дёрнется; улов забирается за вас. B убирает удочку и возвращает ваше оружие",  -- 625
-        "Перезаброс одним нажатием",  -- 626
-        "пока поплавок в воде, кнопка рыбалки одним нажатием забрасывает удочку заново, а A подсекает рыбу (игра не подаёт знака о поклёвке, которого можно ждать, поэтому одна кнопка не может делать и то и другое); выкл.: кнопка рыбалки подсекает, как взаимодействие игры",  -- 627
-        "Наживка двойным нажатием",  -- 628
-        "быстро нажмите кнопку рыбалки дважды: второе нажатие насадит лучшую наживку из ваших сумок на удочку, если на ней её нет",  -- 629
-        "Панели геймпада скрыты во время рыбалки",  -- 630
-        "с удочкой в руках панели геймпада скрыты, чтобы было видно воду; подсказка рыбалки показывает кнопку заброса. Они возвращаются, как только начинается бой или удочка убрана",  -- 631
-        "рыбалка одной кнопкой пока выключена или снова включена (с удочкой в руках она включается сама)",  -- 632
-        "кнопка, которая ловит рыбу: сначала ваша кнопка взаимодействия (Квадрат или X) или любая другая, например триггер (rt)",  -- 633
-        "Побережье Дуротара — красные скалы и теплое мелководье. Тролли с Островов Эха говорят, что макрель идет гуще всего, когда прилив несет запах островных очагов.",  -- 634
-        "Озера Мулгора невелики, чисты и терпеливы. Таурены рыбачат на них так же, как делают все остальное: не спеша и с благодарностью.",  -- 635
-        "Каждый оазис в Степях — место встречи. Кто бы ни приходил туда на водопой днем, ночью под водой плавает кое-кто еще.",  -- 636
-        "Заводи Тельдрассила лежат в тени одного-единственного дерева. Рыбаки ночных эльфов клянутся, что здешняя рыба никогда не видела солнца и ничуть по нему не скучает.",  -- 637
-        "Вода у Темных берегов серая, холодная и полная затонувших кораблей. Половина того, что клюет близ Аубердина, обжилась в чьем-то потерянном грузе.",  -- 638
-        "Реки Ясеневого леса текут под листвой, которая старше большинства королевств. Рыба здесь проворна, а часовые еще проворнее спросят, что вы тут делаете.",  -- 639
-        "В Тысяче Игл воды мало, и берегут ее ревниво. Здешняя рыба свое место заслужила.",  -- 640
-        "Озера Когтистых гор лежат высоко меж вершин, и вода в них ледяная. Гоблины давно бы их осушили, не будь там такой хорошей рыбалки.",  -- 641
-        "Побережье Пустошей — кости да серый прибой. Кому-то там, в глубине, по вкусу и то, и другое.",  -- 642
-        "Фералас зелен до самой кромки воды. Реки здесь глубокие, теплые и очень, очень живые.",  -- 643
-        "Никто толком не знает, где в Пылевых топях кончается суша и начинается вода. Рыбачьте с берега, а потом пересчитайте пальцы на ногах.",  -- 644
-        "В Порту Картеля — единственная в Танарисе вода, достойная этого слова. Гоблины продадут вам право в ней рыбачить, и даже дважды, если позволите.",  -- 645
-        "Под сияющим заливом Азшары лежит затонувший город. Старые рыбаки говорят, что самая крупная рыба живет там, где когда-то были его сады.",  -- 646
-        "Заводи Оскверненного леса светятся, и не по-хорошему. То, что в них до сих пор плавает, упрямо сверх всякой меры.",  -- 647
-        "Горячие источники и озера со смоляными берегами в кратере Ун'Горо сберегли то, о чем остальной мир забыл. Кое-что из этого кусается.",  -- 648
-        "Озеро Элуне'ара на Лунной поляне спокойно, как затаенное дыхание. Друиды просят лишь об одном: не берите больше, чем съедите.",  -- 649
-        "Силитус — это песок, ветер и шум крыльев. Если вы нашли здесь воду, в которой можно рыбачить, никому не говорите.",  -- 650
-        "Озера Зимних Ключей замерзают по краям и парят посередине. Рыба здесь жирная от холода и стоит долгой дороги.",  -- 651
-        "В прудах Оргриммара рыбачат батраки, которым больше нечем заняться, и старые рубаки, которые говорят о себе то же самое. И те, и другие расскажут вам, что самая большая сорвалась.",  -- 652
-        "Рыба из прудов Громового Утеса всю жизнь прожила высоко-высоко над равнинами. Похоже, ее это ничуть не тревожит.",  -- 653
-        "Дарнас хранит свои воды так же бережно, как свои храмы. Рыба привыкла, что ею любуются.",  -- 654
-        "Озера Альтеракских гор — талый снег, и огры с Синдикатом рыбачат в них, пока никто не видит.",  -- 655
-        "Берега Нагорья Арати видели больше армий, чем рыбаков. Рыбе давно все равно, чье знамя реет над водой.",  -- 656
-        "Бесплодные земли — пыль от края до края. Поклевка здесь — маленькое чудо; так к ней и относитесь.",  -- 657
-        "Побережье Выжженных земель красное, выскобленное и тихое. То, что живет в этом прибое, научилось мириться с очень многим.",  -- 658
-        "Озера Тирисфальских лесов неподвижны под болезненным небом. Отрекшиеся рыбачат в них по привычке: мертвые едят немного, но помнят, что им это нравилось.",  -- 659
-        "Длинное побережье Серебряного бора — сплошь туман да тени сосен. Рыбалка здесь хорошая, и это единственное доброе слово, которое можно услышать об этих местах.",  -- 660
-        "Реки Западных Чумных земель все еще текут, хоть и не чистые. На то, что вы из них вытащите, посмотрите дважды.",  -- 661
-        "Мало кто рыбачит в Восточных Чумных землях, и еще меньше тех, кто в этом признается. Вода бережет то немногое, что оставила от нее чума.",  -- 662
-        "Река и длинный южный берег Предгорий Хилсбрада кормили обе стороны каждой распри, которую из-за них затевали.",  -- 663
-        "Внутренние земли прячут свои озера высоко среди деревьев, и дворфы клана Громового Молота рыбачат там прямо со спин грифонов, когда думают, что никто не видит.",  -- 664
-        "Озера Дун Морога большую часть года окованы льдом по берегам. Дворф прорубит лунку, усядется с кружкой эля и назовет день удачным, что бы ни клюнуло.",  -- 665
-        "В Тлеющем ущелье лава течет там, где в других краях реки. Возьмите лучше с собой что-нибудь попить.",  -- 666
-        "Пылающие степи — пепел и угли. Если здешняя вода вам хоть что-нибудь даст, оно будет горячим.",  -- 667
-        "Каждый ребенок в Элвиннском лесу учится рыбачить на Хрустальном озере или на озере Каменных Столбов. Тамошняя мелюзга водит детвору за нос уже не первое поколение.",  -- 668
-        "На Перевале Мертвого Ветра мало воды и еще меньше гостеприимства. То, что водится в заводях под Каражаном, лучше там и оставить.",  -- 669
-        "Река на краю Сумеречного леса черна в любой час. Рыбе темнота, похоже, не мешает, а вот рыбакам — еще как.",  -- 670
-        "Лок — гордость Лок Модана, и удерживает его великая Каменная плотина. Дворфы сверяют с ним каждую рыбацкую байку, и обычно Лок побеждает.",  -- 671
-        "Озеро Безмятежности в Красногорье красиво, как на картине, и рыбачат на нем с каждого причала Приозерья. Горожане знают все хорошие места и не выдадут вам ни одного.",  -- 672
-        "От рек в джунглях до дикого южного мыса — в Тернистой долине самые богатые воды на континенте. Рыбаки Пиратской Бухты устраивают на них турнир, и почти все жульничают.",  -- 673
-        "Болото Печали — зеленая вода под зелеными деревьями. Рыба отдает тиной, и местным она именно такой и нравится.",  -- 674
-        "Поля Западного Края погибли, а побережье — нет. Те, кто остался, кормятся с длинного серого берега.",  -- 675
-        "Болотина оправдывает свое название. Причалы Гавани Менетилов — самое сухое место для здешней рыбалки, и кроколиски об этом знают.",  -- 676
-        "В каналах Штормграда рыбачат дети, пенсионеры и по меньшей мере один переодетый дворянин. Никто не спрашивает, что еще водится в этих каналах.",  -- 677
-        "В Заброшенном гроте — единственная тихая заводь Стальгорна. Старые дворфы рыбачат там часами и не говорят ни слова.",  -- 678
-        "Каналы Подгорода зеленые, и водоросли тут ни при чем. Отрекшиеся рыбачат в них вовсе не ради ужина.",  -- 679
-        "Первая рыба, которую вылавливает почти каждый рыбак, и такая яркая, что ее запоминают.",  -- 680
-        "Скользкая, проворная рыба, обычная у любого теплого берега. На углях она куда вкуснее, чем можно подумать по названию.",  -- 681
-        "Один сплошной рот. Лучше всего чувствует себя в воде, которую вы бы пить не стали.",  -- 682
-        "Мелкая, зубастая и бесстрашная рыбешка. Говорят, их стая однажды выгнала из Лока медведя.",  -- 683
-        "Вспышка цвета под прибоем. Моряки верят: такая на крючке — к удачному плаванию.",  -- 684
-        "Терпеливый донный житель с усами, как у дворфийского старейшины.",  -- 685
-        "Дважды это никто не ест. Алхимики скупают все, что удается достать.",  -- 686
-        "Плавники светятся, как тлеющие угли, а масло, которое выжимают из этой рыбы, горит почти так же хорошо.",  -- 687
-        "Броня — что маленький щит. Мясо под ней стоит хлопот.",  -- 688
-        "Что-то в воде близ Пещер Стенаний изменило эту рыбу. Съешьте такую — и, возможно, на время изменитесь сами.",  -- 689
-        "Речной народ говорит, что такая трапеза проясняет ум. А мудрость приходит оттого, что плыть надо против течения.",  -- 690
-        "Старше, крупнее и мудрее своей родни, но от вашего крючка это не спасло.",  -- 691
-        "Упорный боец из теплых южных морей и любимое блюдо в каждой таверне от Пиратской Бухты до Прибамбасска.",  -- 692
-        "Лоб блестит, как настоящий мифрил. Не один рудокоп пытался его переплавить.",  -- 693
-        "Из чешуи вываривают масло, от которого кожа становится твердой, как камень. Предпочитает ночь.",  -- 694
-        "Блестит, как парадная кираса, и весит почти столько же.",  -- 695
-        "К берегу подходит только в холодные месяцы, и повара, которые знают в этом толк, ждут целый год.",  -- 696
-        "Идет, когда дни длинны. Жители побережья сверяют по этому ходу время года.",  -- 697
-        "Держите посередине, и только один раз.",  -- 698
-        "Речная рыба из диких краев, с жабрами красными, как боевая раскраска тролля.",  -- 699
-        "Кормится после заката. Суп из этой рыбы успокаивает нервы заклинателя.",  -- 700
-        "Кормится днем, почти во всем наперекор своему ночному собрату, и все же делит с ним одну воду.",  -- 701
-        "Строго говоря, не рыба. Против поимки возражает и непременно даст вам это понять.",  -- 702
-        "Рыба бледная, как речной лед, из холодных прозрачных озер севера.",  -- 703
-        "Вам понадобятся обе руки, а возможно, и друг.",  -- 704
-        "%.1f фунт.",  -- 705
-        "Новое в вашем рыболовном журнале: %s, %s.",  -- 706
-        "Новое в вашем рыболовном журнале: %s.",  -- 707
-        "Ваш самый тяжёлый улов — %s: %s (было %s).",  -- 708
-        "Рыболовный журнал",  -- 709
-        "каждый улов записывается в ваш рыболовный журнал: сколько каждого вида, где вы поймали его впервые, и придуманный ради забавы вес с вашим рекордом по каждому виду (/cchud journal открывает его)",  -- 710
-        "Наживка %s",  -- 711
-        "Нет наживки",  -- 712
-        "Поймано %d",  -- 713
-        "Сорвалось %d",  -- 714
-        "Интерфейс рыбалки",  -- 715
-        "с удочкой в руках: рыба водоёма, у которого вы стоите (ту, что вы здесь ещё не поймали, не видно), ваш навык рыбной ловли и прибавка от наживки, сколько вы поймали и сколько сорвалось, сколько ещё продержится наживка, и ваши последние уловы",  -- 716
-        "Любопытная: +%d%%",  -- 717
-        "Держите приманку рядом с рыбой",  -- 718
-        "Следующий улов +%d%%",  -- 719
-        "Удерживайте %s: приманка бежит вдоль лески",  -- 720
-        "%d подряд",  -- 721
-        "Игра, пока поплавок в воде",  -- 722
-        "игра на полосе заклинания, пока леска в воде: удерживайте курок, и приманка бежит вдоль лески, отпустите — и она плывёт назад; держите её рядом с тенью рыбы. Чем лучше играете, тем тяжелее придуманный вес следующего улова. Не занимает ни одной кнопки и не касается ни заброса, ни улова",  -- 723
-        "%d поймано, %d видов, %d сорвалось",  -- 724
-        "Самый тяжёлый: %s, %s",  -- 725
-        "Рыба",  -- 726
-        "Водоёмы",  -- 727
-        "Пока ничего не поймано. Возьмите удочку и идите к воде.",  -- 728
-        "Поймано: %d",  -- 729
-        "Самый тяжёлый: %s, место: %s",  -- 730
-        "Впервые поймано: %s",  -- 731
-        "Поймано здесь: %d",  -- 732
-        "Видов найдено здесь: %d",  -- 733
-        "Выбрать",  -- 734
-        "Закрыть",  -- 735
-        "открыть или закрыть ваш рыболовный журнал: каждый пойманный вид, самый тяжёлый улов каждого вида и водоёмы, где вы рыбачили",  -- 736
-        "Чат угасает в тишине",  -- 737
-        "текст чата угасает через несколько секунд без новых сообщений",  -- 738
-        "Секунд до угасания чата",  -- 739
-        "сколько текст чата остаётся перед угасанием",  -- 740
-        "Координаты на карте",  -- 741
-        "ваши координаты под картой мира",  -- 742
-        "%d сообщений скрыто как спам с момента входа в игру.",  -- 743
-        "%d из них были повторным набором в гильдию.",  -- 744
-        "Значок класса и уровень в чате",  -- 745
-        "значок класса и уровень игрока в квадратных скобках перед его именем, когда игра позволяет их узнать",  -- 746
-        "Короткие названия каналов в чате",  -- 747
-        "канал перед строкой, сокращённо: [P] группа, [PL] лидер группы, [G] гильдия, [O] офицер, [R] рейд, [RL] лидер рейда, [I] подземелье, а номерной канал — его номером, [1]",  -- 748
-        "Только имена в чате",  -- 749
-        "имя с фамилией показывается одним именем (Jory Spleeneater говорит как Jory); шёпот или щелчок правой кнопкой по нему по-прежнему находит полное имя",  -- 750
-        "Размер текста чата",  -- 751
-        "размер текста в окнах чата как доля собственного размера игры (собственная настройка игры не меняется)",  -- 752
-        "Скрывать продавцов золота и повторяющуюся рекламу",  -- 753
-        "сообщения, продающие золото или услуги с веб-адресом, и повторяющиеся сообщения одного игрока скрываются (кроме сообщений вашей группы, гильдии и друзей)",  -- 754
-        "Скрывать повторный набор в гильдию",  -- 755
-        "в общих каналах сообщение гильдии о наборе показывается один раз; то же от того же игрока или почти такое же в течение 15 минут скрывается (кроме сообщений вашей группы, гильдии и друзей)",  -- 756
-        "перечисляет сообщения чата, недавно скрытые как спам",  -- 757
-        "Полёт",  -- 758
-        "пункт назначения неизвестен",  -- 759
-        "оценка по расстоянию",  -- 760
-        "первый полёт по этому маршруту: время запоминается",  -- 761
-        "посадка",  -- 762
-        "%s: около %s, оценка по расстоянию",  -- 763
-        "%s: около %s",  -- 764
-        "%s: первый полёт по этому маршруту, время неизвестно",  -- 765
-        "В полёте, место назначения неизвестно",  -- 766
-        "%s: время полёта запомнено, %s",  -- 767
-        "Известно маршрутов полёта: %d.",  -- 768
-        "Полёты: время и обратный отсчёт",  -- 769
-        "в полёте в чате говорится, куда и сколько лететь, а полоса вверху экрана отсчитывает время до посадки; время каждого маршрута запоминается по вашим полётам",  -- 770
-        "Полёты: ваш ездовой зверь на полосе",  -- 771
-        "грифон, ветрокрыл или летучая мышь (кого дал распорядитель полётов) скользит по полосе полёта к месту посадки",  -- 772
-        "показать маршруты полёта с известным временем",  -- 773
-        "Полёт — хороший момент для этого.",  -- 774
-        "Вы играете уже %s.",  -- 775
-        "Время глотнуть воды",  -- 776
-        "Напоминание выпить воды",  -- 777
-        "время от времени во время игры мягкое напоминание сделать глоток воды (никогда в бою)",  -- 778
-        "Напоминание о воде каждые (минуты)",  -- 779
-        "сколько минут игры между напоминаниями выпить воды",  -- 780
-        "Напоминание о воде в начале полёта",  -- 781
-        "полёт — естественный перерыв: напоминание выпить воды приходит, когда он начинается, если только последнее было не совсем недавно",  -- 782
-        "показать напоминание выпить воды",  -- 783
-        "Изменить вид штатных рамок игры",  -- 784
-        "подсказки, баффы, отслеживание заданий, миникарту, полосу опыта, вкладки чата и панели геймпада в виде HUD (интерфейс мыши остаётся игровым)",  -- 785
-        "Размер полосы опыта",  -- 786
-        "размер полос опыта и репутации, пока они переоформлены, в процентах",  -- 787
-        "Подсказки",  -- 788
-        "подсказки из тёмного стекла с каймой цвета класса игрока или качества предмета",  -- 789
-        "Панели геймпада",  -- 790
-        "кнопки геймпада с тонким кольцом на тёмной подложке вместо громоздкого оформления",  -- 791
-        "Баффы",  -- 792
-        "ваши значки баффов и дебаффов обрезаны и обведены, их время с контуром",  -- 793
-        "Отслеживание заданий",  -- 794
-        "заголовки отслеживания заданий из тёмного стекла, его строки с контуром",  -- 795
-        "Миникарта",  -- 796
-        "тонкое кольцо и мягкое свечение вокруг миникарты вместо золотой рамки",  -- 797
-        "Полоса опыта",  -- 798
-        "полосы опыта и репутации чуть меньше, в собственных цветах",  -- 799
-        "Чат",  -- 800
-        "названия вкладок чата с контуром, а поле ввода из тёмного стекла",  -- 801
-        "Измеритель урона",  -- 802
-        "счётчик урона игры в стиле HUD: его полосы, наклонённые на тёмном фоне, и обведённый текст; он сохраняет всё, что умеет",  -- 803
-        "проверка: пройдено %d из %d",  -- 804
-        "С момента входа игра не замирала.",  -- 805
-        "Моменты, когда игра замирала, и доля HUD в каждом:",  -- 806
-        "Самые медленные моменты HUD:",  -- 807
-        "Отладочные отчёты",  -- 808
-        "собирать отчёты для диагностики автоматически: при входе и ещё раз при перезагрузке или выходе (они хранятся в сохранённых настройках)",  -- 809
-        "моменты, когда игра замирала с момента входа, и какая часть каждого пришлась на работу самого HUD",  -- 810
-        "Пресет HUD: %s, под камеру",  -- 811
-        "набор: %s",  -- 812
-        "Раскладка '%s' добавлена в режим редактирования игры. Выберите её там, чтобы использовать (Меню игры > Режим редактирования > Раскладка).",  -- 813
-        "неизвестный набор '%s'",  -- 814
-        "Для телевизора: текст на HUD и в чате крупнее.",  -- 815
-        "Для монитора: текст обычного размера.",  -- 816
-        "Наши рамки вернулись на исходные места. Выберите раскладку игры %s в режиме редактирования (Меню игры > Режим редактирования > Раскладка).",  -- 817
-        "Пресеты задают расстояние камеры",  -- 818
-        "пресет также один раз переводит камеру на расстояние, для которого сделана его раскладка (потом приближайте свободно)",  -- 819
-        "Действие",  -- 820
-        "вид от третьего лица: тонкие вертикальные панели рядом с персонажем, все эффекты включены; вне боя все скрывается",  -- 821
-        "Классический",  -- 822
-        "наши рамки там, где они всегда были в WoW, более спокойные эффекты, панели геймпада игры без изменений",  -- 823
-        "Минимальный",  -- 824
-        "только нужное: дружественные НИП показывают индикатор (с их занятием), только пока вы на них указываете, целитесь или выбираете их целью; имена без званий; вне боя ваши полосы лишь слегка видны (низкое здоровье видно всегда)",  -- 825
-        "Открытый мир",  -- 826
-        "чистый экран для исследования: тонкие полосы рядом с вами, приглушённые в покое, индикаторы без полос ресурса, чат, который гаснет",  -- 827
-        "Приключение",  -- 828
-        "как в консольных приключениях с открытым миром: показатели жизни рядом с вами, небольшая цель вверху по центру, горожане только когда вы наводитесь на них, быстро угасающий чат",  -- 829
-        "Соулслайк",  -- 830
-        "ваши полосы слева вверху, большая полоса цели внизу по центру, как у босса, каждый удар ощутим",  -- 831
-        "Шутер",  -- 832
-        "вертикальные полосы чуть правее центра, рядом с прицелом, цель высоко вверху, сильный отклик на удары",  -- 833
-        "Crossbar",  -- 834
-        "как в MMO с контроллером: цель и фокус вверху по центру, ваши полосы чуть выше панелей геймпада, группа слева, полные индикаторы",  -- 835
-        "ARPG",  -- 836
-        "как в action RPG: камера далеко, ваши показатели жизни внизу слева, цель вверху по центру, мелкие враги маленькие, каждый удар громкий",  -- 837
-        "Компас",  -- 838
-        "как в RPG от первого лица: камера близко, ваши полосы внизу по центру, цель под верхним краем, горожане только когда вы наводитесь на них",  -- 839
-        "Рейд",  -- 840
-        "расположение WoW со всем, что нужно группе: рамки группы и рейда, проценты здоровья и уровни на табличках",  -- 841
-        "Следовать пресетам ControllerCam",  -- 842
-        "выбор пресета камеры в ControllerCam для всех ситуаций выбирает и подходящий пресет HUD (камера сохраняет своё расстояние)",  -- 843
-        "Современный",  -- 844
-        "установить весь HUD по пресету: action, classic, minimal, openworld, adventure, soulslike, shooter, crossbar, arpg, compass, raid",  -- 845
-        "рамка цели и индикаторы компактные или полные, обе сразу",  -- 846
-        "рамка цели компактная или полная",  -- 847
-        "подобрать размер текста для телевизора в другом конце комнаты или для монитора на расстоянии вытянутой руки",  -- 848
-        "вернуть наши рамки на исходные места под собственную раскладку игры «Современная» или «Классическая»",  -- 849
-        "Вся ваша настройка (HUD, камера и раскладка игры): скопируйте эту строку (Ctrl+C), чтобы сохранить её или поделиться.",  -- 850
-        "Вставьте строку с настройками HUD (Ctrl+V) и подтвердите.",  -- 851
-        "Эта строка повреждена: скопируйте её ещё раз, целиком.",  -- 852
-        "Эта строка создана в более новой версии: обновите аддон.",  -- 853
-        "Это не строка с настройками HUD.",  -- 854
-        "Настройки импортированы: принято %d, пропущено %d.",  -- 855
-        "Настройка камеры тоже перенесена.",  -- 856
-        "Настройка камеры оставлена как есть.",  -- 857
-        "Раскладка игры теперь '%s'.",  -- 858
-        "Раскладка игры оставлена как есть.",  -- 859
-        "ваши настройки одной строкой текста, чтобы сохранить или поделиться",  -- 860
-        "берёт настройки из строки текста, созданной командой /cchud export",  -- 861
-        "HUD включён, пока используется интерфейс геймпада. Его настройки: Настройки > Модификации > ControllerCam > HUD или /cchud.",  -- 862
-        "Только камера: HUD отдыхает, а интерфейс игры остаётся прежним. /cchud on включает его.",  -- 863
-        "Настроить и экран под контроллер? В режим редактирования игры будет добавлена раскладка CCHUD, которую вы выберете там сами: она ставит ряды восстановления под целью, в стороне от кнопок геймпада. Ваши собственные раскладки сохранятся (/cchud setup предложит это снова).",  -- 864
-        "Настроить",  -- 865
-        "Не сейчас",  -- 866
-        "Вместе с ControllerCam идёт интерфейс для контроллера — HUD: свои рамки персонажей, индикаторы здоровья, полоса заклинаний и многое другое, пока используется интерфейс геймпада. Включить его или оставить только камеру?",  -- 867
-        "Камера + HUD",  -- 868
-        "Только камера",  -- 869
-        "Этот клиент не позволяет аддонам менять раскладку.",  -- 870
-        "спросить ещё раз: камера вместе с HUD или только камера",  -- 871
-        "снова предложить раскладку экрана, сделанную для HUD (режим редактирования игры)",  -- 872
-        "Показывается, пока используется интерфейс геймпада. Перетаскивайте наши рамки в режиме редактирования игры.",  -- 873
-        "Наборы",  -- 874
-        "Размер под",  -- 875
-        "Телевизор",  -- 876
-        "Монитор",  -- 877
-        "Значки кнопок",  -- 878
-        "значки, которые игра показывает для кнопок вашего контроллера: определяются сами для используемого контроллера или тот вид, что вы выберете",  -- 879
-        "Шрифт",  -- 880
-        "Сбросить раскладку игры",  -- 881
-        "Попробовать",  -- 882
-        "Запустить демо",  -- 883
-        "Показывать все эффекты ударов",  -- 884
-        "Запустить самопроверку",  -- 885
-        "Панели геймпада: компактные / полные",  -- 886
-        "Экспорт настроек",  -- 887
-        "Импорт настроек",  -- 888
-        "Отметьте «Показывать расширенные настройки» на главной странице, чтобы увидеть все параметры.",  -- 889
-        "Модули",  -- 890
-        "Быстрые переключатели",  -- 891
-        "Общие",  -- 892
-        "HUD",  -- 893
-        "Панель настроек недоступна в этом клиенте.",  -- 894
-        "Включено",  -- 895
-        "весь HUD; если выключено, возвращаются собственные рамки игры",  -- 896
-        "Также в интерфейсе мыши и клавиатуры",  -- 897
-        "обычно HUD работает только пока используется интерфейс геймпада",  -- 898
-        "Убрать рамки игры",  -- 899
-        "скрывает рамки игрока, цели и фокуса игры, пока показаны наши",  -- 900
-        "Окно чата вверху слева",  -- 901
-        "переносит окно чата в левый верхний угол, пока работает HUD",  -- 902
-        "Вертикальные полосы в покое",  -- 903
-        "насколько заметны вертикальные полосы при полном здоровье вне боя (0 скрывает их)",  -- 904
-        "Цвета классов",  -- 905
-        "окрашивает вашу полосу и полосы других игроков по классу",  -- 906
-        "Значки классов",  -- 907
-        "значок класса перед именем игрока на цели и цели цели",  -- 908
-        "Угроза на рамке цели",  -- 909
-        "значок щита и свечение на рамке цели: красное, пока он атакует вас, красное и жёлтое, когда вы вот-вот перетянете его, жёлтое и синее, когда вы его теряете, синее, когда он не на вас",  -- 910
-        "Компактные полосы везде",  -- 911
-        "рамка цели и индикаторы в компактном стиле, чуть больше половины ширины (каждую можно настроить отдельно; пресеты это не меняют)",  -- 912
-        "Компактная рамка цели",  -- 913
-        "рамка цели чуть больше чем вполовину уже",  -- 914
-        "Цвета здоровья в бою",  -- 915
-        "в бою полоски здоровья меняются от зелёного через жёлтый к красному по мере снижения здоровья",  -- 916
-        "Затемнение под текстом",  -- 917
-        "мягкая тёмная полоса под текстом цели для лучшей читаемости",  -- 918
-        "Размер текста",  -- 919
-        "размер текста на наших рамках",  -- 920
-        "Размер рамок",  -- 921
-        "размер наших рамок юнитов",  -- 922
-        "Ваши панели в бою",  -- 923
-        "насколько заметны ваши панели, питомец и фокус в бою, пока что-то не потребует внимания",  -- 924
-        "Полные при здоровье ниже",  -- 925
-        "ваши панели возвращаются полными, когда здоровье падает ниже этого значения",  -- 926
-        "Полные при мане ниже",  -- 927
-        "ваши панели возвращаются полными, когда мана падает ниже этого значения",  -- 928
-        "Полоса игрока в покое",  -- 929
-        "насколько видна полоса игрока при полном здоровье или вне боя (0 скрывает её)",  -- 930
-        "Помощь у торговца и в банке",  -- 931
-        "кнопка «Продать хлам» у торговца спрашивает, что продать; быстрое перемещение у торговца и в банке",  -- 932
-        "Показывать расширенные настройки",  -- 933
-        "все параметры, а не только основные переключатели",  -- 934
-        "Рамка игрока",  -- 935
-        "наша полоса игрока, вверху слева",  -- 936
-        "Рамка цели",  -- 937
-        "наша полоса цели, вверху по центру",  -- 938
-        "Полоса питомца",  -- 939
-        "небольшая полоса питомца под полосой игрока или рядом с вертикальными полосами",  -- 940
-        "Рамка фокуса",  -- 941
-        "наша рамка фокуса",  -- 942
-        "тонкие вертикальные полосы здоровья и ресурса рядом с персонажем, для вида от третьего лица (вместо полосы игрока)",  -- 943
-        "Продавать хлам при открытии окна торговца",  -- 944
-        "продаёт хлам по вашим правилам, как только открывается окно торговца",  -- 945
-        "Белые оружие и броня — хлам",  -- 946
-        "считать белое оружие и броню хламом (никогда инструменты, удочки, снаряжение с эффектом использования или возможные улучшения; всегда спрашивать сначала)",  -- 947
-        "Класть в банк при его открытии",  -- 948
-        "отмеченные для банка предметы и, если включено, то, что в банке уже есть, кладутся сами",  -- 949
-        "настройка игры; наша маленькая рамка следует ей",  -- 950
-        "Менеджер перезарядки",  -- 951
-        "Менеджер перезарядки игры",  -- 952
-        "Личные ресурсы",  -- 953
-        "ваше здоровье и ресурс под вашим персонажем",  -- 954
-        "Банк сам забирает реагенты",  -- 955
-        "настройка игры для банка",  -- 956
-        "Подсказка при начале эффекта",  -- 957
-        "опция игры: подсказка эффекта на мгновение появляется при его наложении (интерфейс геймпада)",  -- 958
-        "Цвета классов для имён в чате",  -- 959
-        "игровая настройка чата для всех видов чата сразу: имя игрока цветом его класса",  -- 960
-        "открыть панель настроек (Настройки > Модификации > ControllerCam HUD)",  -- 961
-        "Рамки",  -- 962
-        "Затухание экрана",  -- 963
-        "Эффекты",  -- 964
-        "Вид",  -- 965
-        "Задания, чат и карта",  -- 966
-        "Сумки, банк и торговец",  -- 967
-        "Рыбалка",  -- 968
-        "Специальные возможности",  -- 969
-        "Родные настройки",  -- 970
-        "%s  |  Интерфейс геймпада: %s  |  работает: %s",  -- 971
-        "игрок %s, цель %s, питомец %s, фокус %s  |  рамки игры убраны: %s  |  чат перенесён: %s",  -- 972
-        "родные настройки: цель цели %s, Менеджер перезарядки %s, личные ресурсы %s",  -- 973
-        "размер текста %d%%  |  затемнение текста: %s",  -- 974
-        "помощь у торговца и в банке: %s  |  автопродажа: %s  |  белая экипировка — хлам: %s",  -- 975
-        "видимость в покое %d%%  |  масштаб %d%%  |  цвета классов: %s",  -- 976
-        "Минималистичный HUD в стиле экшена для интерфейса геймпада.",  -- 977
-        "включено",  -- 978
-        "выключено: собственные рамки игры вернулись",  -- 979
-        "использовать и в интерфейсе мыши и клавиатуры: %s",  -- 980
-        "рамки игры убраны: %s",  -- 981
-        "чат перенесён вверх влево: %s",  -- 982
-        "цвета классов: %s",  -- 983
-        "В этом клиенте нет такой настройки.",  -- 984
-        "%s: %s (собственная настройка игры)",  -- 985
-        "Игра сейчас не приняла это.",  -- 986
-        "помощь у торговца и в банке: %s",  -- 987
-        "автопродажа: %s",  -- 988
-        "белая экипировка — хлам: %s",  -- 989
-        "Помощь у торговца выключена.",  -- 990
-        "использование: /cchud sell [junk | recommended | white | green | blue]",  -- 991
-        "сдавать отмеченные предметы при открытии банка: %s",  -- 992
-        "использование: /cchud junk <item> (Shift+щелчок по предмету вставит его в строку чата)",  -- 993
-        "предмет %d: хлам, продаётся вместе с остальным",  -- 994
-        "предмет %d: оставлен, никогда не продаётся",  -- 995
-        "предмет %d: для банка",  -- 996
-        "затемнение текста: %s",  -- 997
-        "использование: /cchud text <80-250>",  -- 998
-        "размер текста %d%%",  -- 999
-        "демо остановлено",  -- 1000
-        "HUD не запущен.",  -- 1001
-        "Демо запущено: придуманный бой по кругу. Введите /cchud demo ещё раз, чтобы остановить.",  -- 1002
-        "использование: /cchud idle <0-100>",  -- 1003
-        "видимость в покое %d%%",  -- 1004
-        "использование: /cchud scale <50-200>",  -- 1005
-        "масштаб %d%%",  -- 1006
-        "Перетащите рамки, затем введите /cchud lock.",  -- 1007
-        "рамки закреплены",  -- 1008
-        "Всё вернулось к исходному состоянию: настройки, рамки и раскладка экрана (ваши пометки для торговца и история цен сохранены).",  -- 1009
-        "рамки вернулись на исходные места",  -- 1010
-        "неизвестная команда «%s». Введите /cchud help",  -- 1011
-        "Список ошибок очищен.",  -- 1012
-        "Ошибок не записано.",  -- 1013
-        "Записано ошибок: %d (новые в конце). /cchud errors clear очищает список.",  -- 1014
-        "показать состояние",  -- 1015
-        "включает или выключает HUD (выключенный возвращает собственные рамки игры)",  -- 1016
-        "использовать HUD и в интерфейсе мыши и клавиатуры",  -- 1017
-        "использовать для этого нашу рамку или игровую",  -- 1018
-        "тонкие вертикальные полосы здоровья и энергии рядом с вашим персонажем",  -- 1019
-        "цель цели (собственная настройка игры, также в её меню)",  -- 1020
-        "Менеджер перезарядки игры (собственная настройка игры)",  -- 1021
-        "ваше здоровье и ресурс под вашим персонажем (собственная настройка игры)",  -- 1022
-        "подсказка, появляющаяся при начале эффекта (собственная опция игры)",  -- 1023
-        "оставить рамки игрока и цели игры видимыми (on) или убрать их (off)",  -- 1024
-        "у торговца: выбрать, что продать (также: sell junk, sell recommended, sell white | green | blue)",  -- 1025
-        "считать белое оружие и белую броню хламом",  -- 1026
-        "отметить предмет: всегда продаётся, никогда не продаётся или для банка (Shift+щелчок вставит его в строку чата)",  -- 1027
-        "в банке: положить то, что там уже есть, и всё отмеченное для банка",  -- 1028
-        "в банке: забрать то, что у вас уже есть при себе",  -- 1029
-        "класть в банк сразу при его открытии",  -- 1030
-        "банк сам забирает реагенты (собственная настройка игры)",  -- 1031
-        "размер текста в процентах (150 хорошо читается на телевизоре)",  -- 1032
-        "насколько заметна полоса игрока, когда ничего не происходит (0 скрывает её)",  -- 1033
-        "размер рамок, в процентах",  -- 1034
-        "перетащите рамки, куда хотите (режим редактирования игры тоже это умеет)",  -- 1035
-        "вернуть рамки на исходные места",  -- 1036
-        "запускает короткий придуманный бой, чтобы увидеть реакцию рамок (повторно — остановить)",  -- 1037
-        "сравнивает то, что на экране, с настройками (check all перечисляет каждую строку)",  -- 1038
-        "сохраняет описание интерфейса геймпада этого клиента (для поиска неисправностей)",  -- 1039
-        "показать этот список",  -- 1040
-        "последние ошибки HUD, и после перезагрузки (чтобы сообщить о них)",  -- 1041
+        "Отслеживать ближайшее задание",  -- 544
+        "задание, на которое указывает игра, всегда ближайшее из вашего списка по пути; выбранное вами самим не трогается десять минут",  -- 545
+        "Список заданий: короткие цели",  -- 546
+        "цели в списке заданий говорят только нужное, со значком типа впереди: череп и 0/1 Капитан Дредрайз, а не 0/1 Капитан Дредрайз убит",  -- 547
+        "Прогресс заданий в чате",  -- 548
+        "короткая строка в чате, когда задание продвигается: Окровавленные костяные ожерелья: 4/25, цель выполнена, задание можно сдать",  -- 549
+        "Ход заданий для группы",  -- 550
+        "в группе (не в рейде) те же строки уходят в чат группы, чтобы их видели остальные, с небольшим промежутком; вы тоже видите их там",  -- 551
+        "Хранить то, что нужно для заданий",  -- 552
+        "предмет, который ещё требует задание из вашего журнала, или предмет, начинающий задание, которое вы ещё можете выполнить, помечается как «Задание»: его никогда не продают и не выставляют на аукцион за вас",  -- 553
+        "назвать рекомендуемый порядок заданий: сдать готовое, затем ближайшее, что можно сделать в одиночку, затем остальное",  -- 554
+        "Слева от заданий",  -- 555
+        "Справа от заданий",  -- 556
+        "Под заданиями",  -- 557
+        "Список фарма полон.",  -- 558
+        "Список фарма: %s, нужно %d.",  -- 559
+        "Фарм",  -- 560
+        "ещё %d",  -- 561
+        "Пока нечего фармить.",  -- 562
+        "На стопку больше",  -- 563
+        "Убрать",  -- 564
+        "Очистить",  -- 565
+        "Готово",  -- 566
+        "Убрать всё из списка фарма?",  -- 567
+        "Список фарма: выбрать / готово",  -- 568
+        "Список фарма: добавить предмет под указателем",  -- 569
+        "Этого нет в списке фарма.",  -- 570
+        "Список фарма пуст.",  -- 571
+        "Список фарма: где он стоит",  -- 572
+        "Список фарма рядом со списком заданий",  -- 573
+        "то, что вы хотите собрать, сколько есть и сколько нужно: ваши сумки и банк и те же у других ваших персонажей в этом игровом мире. Добавьте реагенты плана прокачки одной кнопкой, или любой предмет",  -- 574
+        "список фарма слева от списка заданий, справа от него или под его заданиями",  -- 575
+        "список фарма рядом со списком заданий: выбор контроллером; add <предмет> [сколько], remove <предмет>, clear, или left / right / bottom для его места",  -- 576
+        "Не в бою.",  -- 577
+        "В этом клиенте нет панелей геймпада.",  -- 578
+        "Этот клиент не позволяет аддонам менять это; используйте режим редактирования.",  -- 579
+        "панели геймпада: %s",  -- 580
+        "компактные",  -- 581
+        "полные",  -- 582
+        "Узкие панели геймпада",  -- 583
+        "скрывает громоздкое оформление за панелями действий геймпада и делает их меньше",  -- 584
+        "Размер панелей геймпада",  -- 585
+        "размер панелей геймпада при включённых узких панелях, в процентах",  -- 586
+        "панели геймпада игры в компактном или полном режиме (так же, как настройка режима редактирования)",  -- 587
+        "Скрывать вне боя",  -- 588
+        "/cchud fade <часть> on | off задаёт одну; all — всё затухание.",  -- 589
+        "панели геймпада, миникарта, список заданий, счётчик урона и полоса опыта отдыхают вместе вне боя и возвращаются для боя, при нажатом триггере или враждебной цели",  -- 590
+        "Экран в покое",  -- 591
+        "насколько видны отдыхающие части экрана вне боя (0 скрывает их)",  -- 592
+        "Затухает: панели геймпада",  -- 593
+        "Затухает: миникарта",  -- 594
+        "Затухает: список заданий",  -- 595
+        "Затухает: счётчик урона",  -- 596
+        "Затухает: полоса опыта",  -- 597
+        "Затухает: положительные эффекты",  -- 598
+        "Затухает: ряды восстановления",  -- 599
+        "затухает ли эта часть экрана вместе с остальным вне боя (выкл.: всегда остаётся как есть)",  -- 600
+        "затухание экрана вне боя: что затухает (миникарта, список заданий и остальное), каждое вкл. или выкл.",  -- 601
+        "Сохранено: введите /reload, чтобы игра записала это на диск.",  -- 602
+        "Кнопки стоек и питомца над панелями",  -- 603
+        "кнопки стоек и команд питомца стоят там, где были зелёный и красный значки выбора цели, чтобы их колесо открывалось на экране целиком; эти значки скрыты",  -- 604
+        "перечислить, где находятся части панелей геймпада и что отдыхает (для диагностики)",  -- 605
+        "Авто",  -- 606
+        "Обычные",  -- 607
+        "как в игре",  -- 608
+        "Значки кнопок: %s.",  -- 609
+        "Сейчас контроллер не используется, или в игре нет стилей значков: будет применено, когда он появится.",  -- 610
+        "Игра не приняла значки кнопок.",  -- 611
+        "Контроллер не сообщает, что он такое: значки остаются такими, как в игре.",  -- 612
+        "значки, которые игра показывает для кнопок вашего контроллера: auto (по используемому контроллеру), xbox, playstation, switch, steam, generic (цифры) или game, чтобы оставить их такими, как в игре",  -- 613
+        "Ряды восстановления в стороне от панелей геймпада",  -- 614
+        "ряды восстановления игры располагаются под целью, а не поверх кнопок геймпада, и немного меньше (только при встроенных раскладках игры: в вашей раскладке они остаются там, куда вы их поставили)",  -- 615
+        "Режим рыбалки: выключен.",  -- 616
+        "Рыбалка: %s — забросить",  -- 617
+        "Нет наживки: %s дважды — %s",  -- 618
+        "%s — убрать удочку",  -- 619
+        "Режим рыбалки: %s — забросить леску, и ещё раз — подсечь рыбу, когда поплавок дёрнется.",  -- 620
+        "%s — подсечь, %s — забросить снова",  -- 621
+        "Режиму рыбалки нужна удочка в руках.",  -- 622
+        "Вы не владеете рыбной ловлей.",  -- 623
+        "Режим рыбалки: одна кнопка забрасывает и подсекает",  -- 624
+        "Кнопка рыбалки: %s",  -- 625
+        "Рыбалка одной кнопкой",  -- 626
+        "с удочкой в руках: кнопка взаимодействия забрасывает леску, когда взаимодействовать не с чем, и ещё раз — подсекает рыбу, когда поплавок дёрнется; улов забирается за вас. B убирает удочку и возвращает ваше оружие",  -- 627
+        "Перезаброс одним нажатием",  -- 628
+        "пока поплавок в воде, кнопка рыбалки одним нажатием забрасывает удочку заново, а A подсекает рыбу (игра не подаёт знака о поклёвке, которого можно ждать, поэтому одна кнопка не может делать и то и другое); выкл.: кнопка рыбалки подсекает, как взаимодействие игры",  -- 629
+        "Наживка двойным нажатием",  -- 630
+        "быстро нажмите кнопку рыбалки дважды: второе нажатие насадит лучшую наживку из ваших сумок на удочку, если на ней её нет",  -- 631
+        "Панели геймпада скрыты во время рыбалки",  -- 632
+        "с удочкой в руках панели геймпада скрыты, чтобы было видно воду; подсказка рыбалки показывает кнопку заброса. Они возвращаются, как только начинается бой или удочка убрана",  -- 633
+        "рыбалка одной кнопкой пока выключена или снова включена (с удочкой в руках она включается сама)",  -- 634
+        "кнопка, которая ловит рыбу: сначала ваша кнопка взаимодействия (Квадрат или X) или любая другая, например триггер (rt)",  -- 635
+        "Побережье Дуротара — красные скалы и теплое мелководье. Тролли с Островов Эха говорят, что макрель идет гуще всего, когда прилив несет запах островных очагов.",  -- 636
+        "Озера Мулгора невелики, чисты и терпеливы. Таурены рыбачат на них так же, как делают все остальное: не спеша и с благодарностью.",  -- 637
+        "Каждый оазис в Степях — место встречи. Кто бы ни приходил туда на водопой днем, ночью под водой плавает кое-кто еще.",  -- 638
+        "Заводи Тельдрассила лежат в тени одного-единственного дерева. Рыбаки ночных эльфов клянутся, что здешняя рыба никогда не видела солнца и ничуть по нему не скучает.",  -- 639
+        "Вода у Темных берегов серая, холодная и полная затонувших кораблей. Половина того, что клюет близ Аубердина, обжилась в чьем-то потерянном грузе.",  -- 640
+        "Реки Ясеневого леса текут под листвой, которая старше большинства королевств. Рыба здесь проворна, а часовые еще проворнее спросят, что вы тут делаете.",  -- 641
+        "В Тысяче Игл воды мало, и берегут ее ревниво. Здешняя рыба свое место заслужила.",  -- 642
+        "Озера Когтистых гор лежат высоко меж вершин, и вода в них ледяная. Гоблины давно бы их осушили, не будь там такой хорошей рыбалки.",  -- 643
+        "Побережье Пустошей — кости да серый прибой. Кому-то там, в глубине, по вкусу и то, и другое.",  -- 644
+        "Фералас зелен до самой кромки воды. Реки здесь глубокие, теплые и очень, очень живые.",  -- 645
+        "Никто толком не знает, где в Пылевых топях кончается суша и начинается вода. Рыбачьте с берега, а потом пересчитайте пальцы на ногах.",  -- 646
+        "В Порту Картеля — единственная в Танарисе вода, достойная этого слова. Гоблины продадут вам право в ней рыбачить, и даже дважды, если позволите.",  -- 647
+        "Под сияющим заливом Азшары лежит затонувший город. Старые рыбаки говорят, что самая крупная рыба живет там, где когда-то были его сады.",  -- 648
+        "Заводи Оскверненного леса светятся, и не по-хорошему. То, что в них до сих пор плавает, упрямо сверх всякой меры.",  -- 649
+        "Горячие источники и озера со смоляными берегами в кратере Ун'Горо сберегли то, о чем остальной мир забыл. Кое-что из этого кусается.",  -- 650
+        "Озеро Элуне'ара на Лунной поляне спокойно, как затаенное дыхание. Друиды просят лишь об одном: не берите больше, чем съедите.",  -- 651
+        "Силитус — это песок, ветер и шум крыльев. Если вы нашли здесь воду, в которой можно рыбачить, никому не говорите.",  -- 652
+        "Озера Зимних Ключей замерзают по краям и парят посередине. Рыба здесь жирная от холода и стоит долгой дороги.",  -- 653
+        "В прудах Оргриммара рыбачат батраки, которым больше нечем заняться, и старые рубаки, которые говорят о себе то же самое. И те, и другие расскажут вам, что самая большая сорвалась.",  -- 654
+        "Рыба из прудов Громового Утеса всю жизнь прожила высоко-высоко над равнинами. Похоже, ее это ничуть не тревожит.",  -- 655
+        "Дарнас хранит свои воды так же бережно, как свои храмы. Рыба привыкла, что ею любуются.",  -- 656
+        "Озера Альтеракских гор — талый снег, и огры с Синдикатом рыбачат в них, пока никто не видит.",  -- 657
+        "Берега Нагорья Арати видели больше армий, чем рыбаков. Рыбе давно все равно, чье знамя реет над водой.",  -- 658
+        "Бесплодные земли — пыль от края до края. Поклевка здесь — маленькое чудо; так к ней и относитесь.",  -- 659
+        "Побережье Выжженных земель красное, выскобленное и тихое. То, что живет в этом прибое, научилось мириться с очень многим.",  -- 660
+        "Озера Тирисфальских лесов неподвижны под болезненным небом. Отрекшиеся рыбачат в них по привычке: мертвые едят немного, но помнят, что им это нравилось.",  -- 661
+        "Длинное побережье Серебряного бора — сплошь туман да тени сосен. Рыбалка здесь хорошая, и это единственное доброе слово, которое можно услышать об этих местах.",  -- 662
+        "Реки Западных Чумных земель все еще текут, хоть и не чистые. На то, что вы из них вытащите, посмотрите дважды.",  -- 663
+        "Мало кто рыбачит в Восточных Чумных землях, и еще меньше тех, кто в этом признается. Вода бережет то немногое, что оставила от нее чума.",  -- 664
+        "Река и длинный южный берег Предгорий Хилсбрада кормили обе стороны каждой распри, которую из-за них затевали.",  -- 665
+        "Внутренние земли прячут свои озера высоко среди деревьев, и дворфы клана Громового Молота рыбачат там прямо со спин грифонов, когда думают, что никто не видит.",  -- 666
+        "Озера Дун Морога большую часть года окованы льдом по берегам. Дворф прорубит лунку, усядется с кружкой эля и назовет день удачным, что бы ни клюнуло.",  -- 667
+        "В Тлеющем ущелье лава течет там, где в других краях реки. Возьмите лучше с собой что-нибудь попить.",  -- 668
+        "Пылающие степи — пепел и угли. Если здешняя вода вам хоть что-нибудь даст, оно будет горячим.",  -- 669
+        "Каждый ребенок в Элвиннском лесу учится рыбачить на Хрустальном озере или на озере Каменных Столбов. Тамошняя мелюзга водит детвору за нос уже не первое поколение.",  -- 670
+        "На Перевале Мертвого Ветра мало воды и еще меньше гостеприимства. То, что водится в заводях под Каражаном, лучше там и оставить.",  -- 671
+        "Река на краю Сумеречного леса черна в любой час. Рыбе темнота, похоже, не мешает, а вот рыбакам — еще как.",  -- 672
+        "Лок — гордость Лок Модана, и удерживает его великая Каменная плотина. Дворфы сверяют с ним каждую рыбацкую байку, и обычно Лок побеждает.",  -- 673
+        "Озеро Безмятежности в Красногорье красиво, как на картине, и рыбачат на нем с каждого причала Приозерья. Горожане знают все хорошие места и не выдадут вам ни одного.",  -- 674
+        "От рек в джунглях до дикого южного мыса — в Тернистой долине самые богатые воды на континенте. Рыбаки Пиратской Бухты устраивают на них турнир, и почти все жульничают.",  -- 675
+        "Болото Печали — зеленая вода под зелеными деревьями. Рыба отдает тиной, и местным она именно такой и нравится.",  -- 676
+        "Поля Западного Края погибли, а побережье — нет. Те, кто остался, кормятся с длинного серого берега.",  -- 677
+        "Болотина оправдывает свое название. Причалы Гавани Менетилов — самое сухое место для здешней рыбалки, и кроколиски об этом знают.",  -- 678
+        "В каналах Штормграда рыбачат дети, пенсионеры и по меньшей мере один переодетый дворянин. Никто не спрашивает, что еще водится в этих каналах.",  -- 679
+        "В Заброшенном гроте — единственная тихая заводь Стальгорна. Старые дворфы рыбачат там часами и не говорят ни слова.",  -- 680
+        "Каналы Подгорода зеленые, и водоросли тут ни при чем. Отрекшиеся рыбачат в них вовсе не ради ужина.",  -- 681
+        "Первая рыба, которую вылавливает почти каждый рыбак, и такая яркая, что ее запоминают.",  -- 682
+        "Скользкая, проворная рыба, обычная у любого теплого берега. На углях она куда вкуснее, чем можно подумать по названию.",  -- 683
+        "Один сплошной рот. Лучше всего чувствует себя в воде, которую вы бы пить не стали.",  -- 684
+        "Мелкая, зубастая и бесстрашная рыбешка. Говорят, их стая однажды выгнала из Лока медведя.",  -- 685
+        "Вспышка цвета под прибоем. Моряки верят: такая на крючке — к удачному плаванию.",  -- 686
+        "Терпеливый донный житель с усами, как у дворфийского старейшины.",  -- 687
+        "Дважды это никто не ест. Алхимики скупают все, что удается достать.",  -- 688
+        "Плавники светятся, как тлеющие угли, а масло, которое выжимают из этой рыбы, горит почти так же хорошо.",  -- 689
+        "Броня — что маленький щит. Мясо под ней стоит хлопот.",  -- 690
+        "Что-то в воде близ Пещер Стенаний изменило эту рыбу. Съешьте такую — и, возможно, на время изменитесь сами.",  -- 691
+        "Речной народ говорит, что такая трапеза проясняет ум. А мудрость приходит оттого, что плыть надо против течения.",  -- 692
+        "Старше, крупнее и мудрее своей родни, но от вашего крючка это не спасло.",  -- 693
+        "Упорный боец из теплых южных морей и любимое блюдо в каждой таверне от Пиратской Бухты до Прибамбасска.",  -- 694
+        "Лоб блестит, как настоящий мифрил. Не один рудокоп пытался его переплавить.",  -- 695
+        "Из чешуи вываривают масло, от которого кожа становится твердой, как камень. Предпочитает ночь.",  -- 696
+        "Блестит, как парадная кираса, и весит почти столько же.",  -- 697
+        "К берегу подходит только в холодные месяцы, и повара, которые знают в этом толк, ждут целый год.",  -- 698
+        "Идет, когда дни длинны. Жители побережья сверяют по этому ходу время года.",  -- 699
+        "Держите посередине, и только один раз.",  -- 700
+        "Речная рыба из диких краев, с жабрами красными, как боевая раскраска тролля.",  -- 701
+        "Кормится после заката. Суп из этой рыбы успокаивает нервы заклинателя.",  -- 702
+        "Кормится днем, почти во всем наперекор своему ночному собрату, и все же делит с ним одну воду.",  -- 703
+        "Строго говоря, не рыба. Против поимки возражает и непременно даст вам это понять.",  -- 704
+        "Рыба бледная, как речной лед, из холодных прозрачных озер севера.",  -- 705
+        "Вам понадобятся обе руки, а возможно, и друг.",  -- 706
+        "%.1f фунт.",  -- 707
+        "Новое в вашем рыболовном журнале: %s, %s.",  -- 708
+        "Новое в вашем рыболовном журнале: %s.",  -- 709
+        "Ваш самый тяжёлый улов — %s: %s (было %s).",  -- 710
+        "Рыболовный журнал",  -- 711
+        "каждый улов записывается в ваш рыболовный журнал: сколько каждого вида, где вы поймали его впервые, и придуманный ради забавы вес с вашим рекордом по каждому виду (/cchud journal открывает его)",  -- 712
+        "Наживка %s",  -- 713
+        "Нет наживки",  -- 714
+        "Поймано %d",  -- 715
+        "Сорвалось %d",  -- 716
+        "Интерфейс рыбалки",  -- 717
+        "с удочкой в руках: рыба водоёма, у которого вы стоите (ту, что вы здесь ещё не поймали, не видно), ваш навык рыбной ловли и прибавка от наживки, сколько вы поймали и сколько сорвалось, сколько ещё продержится наживка, и ваши последние уловы",  -- 718
+        "Любопытная: +%d%%",  -- 719
+        "Держите приманку рядом с рыбой",  -- 720
+        "Следующий улов +%d%%",  -- 721
+        "Удерживайте %s: приманка бежит вдоль лески",  -- 722
+        "%d подряд",  -- 723
+        "Игра, пока поплавок в воде",  -- 724
+        "игра на полосе заклинания, пока леска в воде: удерживайте курок, и приманка бежит вдоль лески, отпустите — и она плывёт назад; держите её рядом с тенью рыбы. Чем лучше играете, тем тяжелее придуманный вес следующего улова. Не занимает ни одной кнопки и не касается ни заброса, ни улова",  -- 725
+        "%d поймано, %d видов, %d сорвалось",  -- 726
+        "Самый тяжёлый: %s, %s",  -- 727
+        "Рыба",  -- 728
+        "Водоёмы",  -- 729
+        "Пока ничего не поймано. Возьмите удочку и идите к воде.",  -- 730
+        "Поймано: %d",  -- 731
+        "Самый тяжёлый: %s, место: %s",  -- 732
+        "Впервые поймано: %s",  -- 733
+        "Поймано здесь: %d",  -- 734
+        "Видов найдено здесь: %d",  -- 735
+        "Выбрать",  -- 736
+        "Закрыть",  -- 737
+        "открыть или закрыть ваш рыболовный журнал: каждый пойманный вид, самый тяжёлый улов каждого вида и водоёмы, где вы рыбачили",  -- 738
+        "Чат угасает в тишине",  -- 739
+        "текст чата угасает через несколько секунд без новых сообщений",  -- 740
+        "Секунд до угасания чата",  -- 741
+        "сколько текст чата остаётся перед угасанием",  -- 742
+        "Координаты на карте",  -- 743
+        "ваши координаты под картой мира",  -- 744
+        "%d сообщений скрыто как спам с момента входа в игру.",  -- 745
+        "%d из них были повторным набором в гильдию.",  -- 746
+        "Значок класса и уровень в чате",  -- 747
+        "значок класса и уровень игрока в квадратных скобках перед его именем, когда игра позволяет их узнать",  -- 748
+        "Короткие названия каналов в чате",  -- 749
+        "канал перед строкой, сокращённо: [P] группа, [PL] лидер группы, [G] гильдия, [O] офицер, [R] рейд, [RL] лидер рейда, [I] подземелье, а номерной канал — его номером, [1]",  -- 750
+        "Только имена в чате",  -- 751
+        "имя с фамилией показывается одним именем (Jory Spleeneater говорит как Jory); шёпот или щелчок правой кнопкой по нему по-прежнему находит полное имя",  -- 752
+        "Размер текста чата",  -- 753
+        "размер текста в окнах чата как доля собственного размера игры (собственная настройка игры не меняется)",  -- 754
+        "Скрывать продавцов золота и повторяющуюся рекламу",  -- 755
+        "сообщения, продающие золото или услуги с веб-адресом, и повторяющиеся сообщения одного игрока скрываются (кроме сообщений вашей группы, гильдии и друзей)",  -- 756
+        "Скрывать повторный набор в гильдию",  -- 757
+        "в общих каналах сообщение гильдии о наборе показывается один раз; то же от того же игрока или почти такое же в течение 15 минут скрывается (кроме сообщений вашей группы, гильдии и друзей)",  -- 758
+        "перечисляет сообщения чата, недавно скрытые как спам",  -- 759
+        "Полёт",  -- 760
+        "пункт назначения неизвестен",  -- 761
+        "оценка по расстоянию",  -- 762
+        "первый полёт по этому маршруту: время запоминается",  -- 763
+        "посадка",  -- 764
+        "%s: около %s, оценка по расстоянию",  -- 765
+        "%s: около %s",  -- 766
+        "%s: первый полёт по этому маршруту, время неизвестно",  -- 767
+        "В полёте, место назначения неизвестно",  -- 768
+        "%s: время полёта запомнено, %s",  -- 769
+        "Известно маршрутов полёта: %d.",  -- 770
+        "Полёты: время и обратный отсчёт",  -- 771
+        "в полёте в чате говорится, куда и сколько лететь, а полоса вверху экрана отсчитывает время до посадки; время каждого маршрута запоминается по вашим полётам",  -- 772
+        "Полёты: ваш ездовой зверь на полосе",  -- 773
+        "грифон, ветрокрыл или летучая мышь (кого дал распорядитель полётов) скользит по полосе полёта к месту посадки",  -- 774
+        "показать маршруты полёта с известным временем",  -- 775
+        "На землю! +%d",  -- 776
+        "В облака: серия прервана",  -- 777
+        "%d полётного золота",  -- 778
+        "%s взмах",  -- 779
+        "%s сеть",  -- 780
+        "%s большая высота",  -- 781
+        "%s: назад к игре (%d полётного золота)",  -- 782
+        "%s: игра в пути",  -- 783
+        "Игра в полёте выключена: /cchud flightgame on",  -- 784
+        "В игру в полёте играют во время полёта.",  -- 785
+        "Не в бою.",  -- 786
+        "Игра в полёте: играть / большая высота",  -- 787
+        "Полёты: игра в пути",  -- 788
+        "в полёте под полосой полёта предлагается маленькая игра, и одна кнопка запускает её (до этого занята только эта кнопка): взмахами крыльев ведите ездового зверя сквозь облака и ловите сетью встречных всадников, спуская их на землю за полётное золото. Та же кнопка ещё раз — большая высота: игра убирается, и кнопки снова принадлежат игре. Никогда в бою, исчезает при посадке",  -- 789
+        "в полёте: запустить игру в полёте или поднять её на большую высоту и обратно",  -- 790
+        "Полёт — хороший момент для этого.",  -- 791
+        "Вы играете уже %s.",  -- 792
+        "Время глотнуть воды",  -- 793
+        "Напоминание выпить воды",  -- 794
+        "время от времени во время игры мягкое напоминание сделать глоток воды (никогда в бою)",  -- 795
+        "Напоминание о воде каждые (минуты)",  -- 796
+        "сколько минут игры между напоминаниями выпить воды",  -- 797
+        "Напоминание о воде в начале полёта",  -- 798
+        "полёт — естественный перерыв: напоминание выпить воды приходит, когда он начинается, если только последнее было не совсем недавно",  -- 799
+        "показать напоминание выпить воды",  -- 800
+        "Изменить вид штатных рамок игры",  -- 801
+        "подсказки, баффы, отслеживание заданий, миникарту, полосу опыта, вкладки чата и панели геймпада в виде HUD (интерфейс мыши остаётся игровым)",  -- 802
+        "Размер полосы опыта",  -- 803
+        "размер полос опыта и репутации, пока они переоформлены, в процентах",  -- 804
+        "Подсказки",  -- 805
+        "подсказки из тёмного стекла с каймой цвета класса игрока или качества предмета",  -- 806
+        "Панели геймпада",  -- 807
+        "кнопки геймпада с тонким кольцом на тёмной подложке вместо громоздкого оформления",  -- 808
+        "Баффы",  -- 809
+        "ваши значки баффов и дебаффов обрезаны и обведены, их время с контуром",  -- 810
+        "Отслеживание заданий",  -- 811
+        "заголовки отслеживания заданий из тёмного стекла, его строки с контуром",  -- 812
+        "Миникарта",  -- 813
+        "тонкое кольцо и мягкое свечение вокруг миникарты вместо золотой рамки",  -- 814
+        "Полоса опыта",  -- 815
+        "полосы опыта и репутации чуть меньше, в собственных цветах",  -- 816
+        "Чат",  -- 817
+        "названия вкладок чата с контуром, а поле ввода из тёмного стекла",  -- 818
+        "Измеритель урона",  -- 819
+        "счётчик урона игры в стиле HUD: его полосы, наклонённые на тёмном фоне, и обведённый текст; он сохраняет всё, что умеет",  -- 820
+        "проверка: пройдено %d из %d",  -- 821
+        "С момента входа игра не замирала.",  -- 822
+        "Моменты, когда игра замирала, и доля HUD в каждом:",  -- 823
+        "Самые медленные моменты HUD:",  -- 824
+        "Отладочные отчёты",  -- 825
+        "собирать отчёты для диагностики автоматически: при входе и ещё раз при перезагрузке или выходе (они хранятся в сохранённых настройках)",  -- 826
+        "моменты, когда игра замирала с момента входа, и какая часть каждого пришлась на работу самого HUD",  -- 827
+        "Пресет HUD: %s, под камеру",  -- 828
+        "набор: %s",  -- 829
+        "Раскладка '%s' добавлена в режим редактирования игры. Выберите её там, чтобы использовать (Меню игры > Режим редактирования > Раскладка).",  -- 830
+        "неизвестный набор '%s'",  -- 831
+        "Для телевизора: текст на HUD и в чате крупнее.",  -- 832
+        "Для монитора: текст обычного размера.",  -- 833
+        "Наши рамки вернулись на исходные места. Выберите раскладку игры %s в режиме редактирования (Меню игры > Режим редактирования > Раскладка).",  -- 834
+        "Пресеты задают расстояние камеры",  -- 835
+        "пресет также один раз переводит камеру на расстояние, для которого сделана его раскладка (потом приближайте свободно)",  -- 836
+        "Действие",  -- 837
+        "вид от третьего лица: тонкие вертикальные панели рядом с персонажем, все эффекты включены; вне боя все скрывается",  -- 838
+        "Классический",  -- 839
+        "наши рамки там, где они всегда были в WoW, более спокойные эффекты, панели геймпада игры без изменений",  -- 840
+        "Минимальный",  -- 841
+        "только нужное: дружественные НИП показывают индикатор (с их занятием), только пока вы на них указываете, целитесь или выбираете их целью; имена без званий; вне боя ваши полосы лишь слегка видны (низкое здоровье видно всегда)",  -- 842
+        "Открытый мир",  -- 843
+        "чистый экран для исследования: тонкие полосы рядом с вами, приглушённые в покое, индикаторы без полос ресурса, чат, который гаснет",  -- 844
+        "Приключение",  -- 845
+        "как в консольных приключениях с открытым миром: показатели жизни рядом с вами, небольшая цель вверху по центру, горожане только когда вы наводитесь на них, быстро угасающий чат",  -- 846
+        "Соулслайк",  -- 847
+        "ваши полосы слева вверху, большая полоса цели внизу по центру, как у босса, каждый удар ощутим",  -- 848
+        "Шутер",  -- 849
+        "вертикальные полосы чуть правее центра, рядом с прицелом, цель высоко вверху, сильный отклик на удары",  -- 850
+        "Crossbar",  -- 851
+        "как в MMO с контроллером: цель и фокус вверху по центру, ваши полосы чуть выше панелей геймпада, группа слева, полные индикаторы",  -- 852
+        "ARPG",  -- 853
+        "как в action RPG: камера далеко, ваши показатели жизни внизу слева, цель вверху по центру, мелкие враги маленькие, каждый удар громкий",  -- 854
+        "Компас",  -- 855
+        "как в RPG от первого лица: камера близко, ваши полосы внизу по центру, цель под верхним краем, горожане только когда вы наводитесь на них",  -- 856
+        "Рейд",  -- 857
+        "расположение WoW со всем, что нужно группе: рамки группы и рейда, проценты здоровья и уровни на табличках",  -- 858
+        "Следовать пресетам ControllerCam",  -- 859
+        "выбор пресета камеры в ControllerCam для всех ситуаций выбирает и подходящий пресет HUD (камера сохраняет своё расстояние)",  -- 860
+        "Современный",  -- 861
+        "установить весь HUD по пресету: action, classic, minimal, openworld, adventure, soulslike, shooter, crossbar, arpg, compass, raid",  -- 862
+        "рамка цели и индикаторы компактные или полные, обе сразу",  -- 863
+        "рамка цели компактная или полная",  -- 864
+        "подобрать размер текста для телевизора в другом конце комнаты или для монитора на расстоянии вытянутой руки",  -- 865
+        "вернуть наши рамки на исходные места под собственную раскладку игры «Современная» или «Классическая»",  -- 866
+        "Вся ваша настройка (HUD, камера и раскладка игры): скопируйте эту строку (Ctrl+C), чтобы сохранить её или поделиться.",  -- 867
+        "Вставьте строку с настройками HUD (Ctrl+V) и подтвердите.",  -- 868
+        "Эта строка повреждена: скопируйте её ещё раз, целиком.",  -- 869
+        "Эта строка создана в более новой версии: обновите аддон.",  -- 870
+        "Это не строка с настройками HUD.",  -- 871
+        "Настройки импортированы: принято %d, пропущено %d.",  -- 872
+        "Настройка камеры тоже перенесена.",  -- 873
+        "Настройка камеры оставлена как есть.",  -- 874
+        "Раскладка игры теперь '%s'.",  -- 875
+        "Раскладка игры оставлена как есть.",  -- 876
+        "ваши настройки одной строкой текста, чтобы сохранить или поделиться",  -- 877
+        "берёт настройки из строки текста, созданной командой /cchud export",  -- 878
+        "HUD включён, пока используется интерфейс геймпада. Его настройки: Настройки > Модификации > ControllerCam > HUD или /cchud.",  -- 879
+        "Только камера: HUD отдыхает, а интерфейс игры остаётся прежним. /cchud on включает его.",  -- 880
+        "Настроить и экран под контроллер? В режим редактирования игры будет добавлена раскладка CCHUD, которую вы выберете там сами: она ставит ряды восстановления под целью, в стороне от кнопок геймпада. Ваши собственные раскладки сохранятся (/cchud setup предложит это снова).",  -- 881
+        "Настроить",  -- 882
+        "Не сейчас",  -- 883
+        "Вместе с ControllerCam идёт интерфейс для контроллера — HUD: свои рамки персонажей, индикаторы здоровья, полоса заклинаний и многое другое, пока используется интерфейс геймпада. Включить его или оставить только камеру?",  -- 884
+        "Камера + HUD",  -- 885
+        "Только камера",  -- 886
+        "Этот клиент не позволяет аддонам менять раскладку.",  -- 887
+        "спросить ещё раз: камера вместе с HUD или только камера",  -- 888
+        "снова предложить раскладку экрана, сделанную для HUD (режим редактирования игры)",  -- 889
+        "Показывается, пока используется интерфейс геймпада. Перетаскивайте наши рамки в режиме редактирования игры.",  -- 890
+        "Наборы",  -- 891
+        "Размер под",  -- 892
+        "Телевизор",  -- 893
+        "Монитор",  -- 894
+        "Значки кнопок",  -- 895
+        "значки, которые игра показывает для кнопок вашего контроллера: определяются сами для используемого контроллера или тот вид, что вы выберете",  -- 896
+        "Шрифт",  -- 897
+        "Сбросить раскладку игры",  -- 898
+        "Попробовать",  -- 899
+        "Запустить демо",  -- 900
+        "Показывать все эффекты ударов",  -- 901
+        "Запустить самопроверку",  -- 902
+        "Панели геймпада: компактные / полные",  -- 903
+        "Экспорт настроек",  -- 904
+        "Импорт настроек",  -- 905
+        "Отметьте «Показывать расширенные настройки» на главной странице, чтобы увидеть все параметры.",  -- 906
+        "Модули",  -- 907
+        "Быстрые переключатели",  -- 908
+        "Общие",  -- 909
+        "HUD",  -- 910
+        "Панель настроек недоступна в этом клиенте.",  -- 911
+        "Включено",  -- 912
+        "весь HUD; если выключено, возвращаются собственные рамки игры",  -- 913
+        "Также в интерфейсе мыши и клавиатуры",  -- 914
+        "обычно HUD работает только пока используется интерфейс геймпада",  -- 915
+        "Убрать рамки игры",  -- 916
+        "скрывает рамки игрока, цели и фокуса игры, пока показаны наши",  -- 917
+        "Окно чата вверху слева",  -- 918
+        "переносит окно чата в левый верхний угол, пока работает HUD",  -- 919
+        "Вертикальные полосы в покое",  -- 920
+        "насколько заметны вертикальные полосы при полном здоровье вне боя (0 скрывает их)",  -- 921
+        "Цвета классов",  -- 922
+        "окрашивает вашу полосу и полосы других игроков по классу",  -- 923
+        "Значки классов",  -- 924
+        "значок класса перед именем игрока на цели и цели цели",  -- 925
+        "Угроза на рамке цели",  -- 926
+        "значок щита и свечение на рамке цели: красное, пока он атакует вас, красное и жёлтое, когда вы вот-вот перетянете его, жёлтое и синее, когда вы его теряете, синее, когда он не на вас",  -- 927
+        "Компактные полосы везде",  -- 928
+        "рамка цели и индикаторы в компактном стиле, чуть больше половины ширины (каждую можно настроить отдельно; пресеты это не меняют)",  -- 929
+        "Компактная рамка цели",  -- 930
+        "рамка цели чуть больше чем вполовину уже",  -- 931
+        "Цвета здоровья в бою",  -- 932
+        "в бою полоски здоровья меняются от зелёного через жёлтый к красному по мере снижения здоровья",  -- 933
+        "Затемнение под текстом",  -- 934
+        "мягкая тёмная полоса под текстом цели для лучшей читаемости",  -- 935
+        "Размер текста",  -- 936
+        "размер текста на наших рамках",  -- 937
+        "Размер рамок",  -- 938
+        "размер наших рамок юнитов",  -- 939
+        "Ваши панели в бою",  -- 940
+        "насколько заметны ваши панели, питомец и фокус в бою, пока что-то не потребует внимания",  -- 941
+        "Полные при здоровье ниже",  -- 942
+        "ваши панели возвращаются полными, когда здоровье падает ниже этого значения",  -- 943
+        "Полные при мане ниже",  -- 944
+        "ваши панели возвращаются полными, когда мана падает ниже этого значения",  -- 945
+        "Полоса игрока в покое",  -- 946
+        "насколько видна полоса игрока при полном здоровье или вне боя (0 скрывает её)",  -- 947
+        "Помощь у торговца и в банке",  -- 948
+        "кнопка «Продать хлам» у торговца спрашивает, что продать; быстрое перемещение у торговца и в банке",  -- 949
+        "Показывать расширенные настройки",  -- 950
+        "все параметры, а не только основные переключатели",  -- 951
+        "Рамка игрока",  -- 952
+        "наша полоса игрока, вверху слева",  -- 953
+        "Рамка цели",  -- 954
+        "наша полоса цели, вверху по центру",  -- 955
+        "Полоса питомца",  -- 956
+        "небольшая полоса питомца под полосой игрока или рядом с вертикальными полосами",  -- 957
+        "Рамка фокуса",  -- 958
+        "наша рамка фокуса",  -- 959
+        "тонкие вертикальные полосы здоровья и ресурса рядом с персонажем, для вида от третьего лица (вместо полосы игрока)",  -- 960
+        "Продавать хлам при открытии окна торговца",  -- 961
+        "продаёт хлам по вашим правилам, как только открывается окно торговца",  -- 962
+        "Белые оружие и броня — хлам",  -- 963
+        "считать белое оружие и броню хламом (никогда инструменты, удочки, снаряжение с эффектом использования или возможные улучшения; всегда спрашивать сначала)",  -- 964
+        "Класть в банк при его открытии",  -- 965
+        "отмеченные для банка предметы и, если включено, то, что в банке уже есть, кладутся сами",  -- 966
+        "настройка игры; наша маленькая рамка следует ей",  -- 967
+        "Менеджер перезарядки",  -- 968
+        "Менеджер перезарядки игры",  -- 969
+        "Личные ресурсы",  -- 970
+        "ваше здоровье и ресурс под вашим персонажем",  -- 971
+        "Банк сам забирает реагенты",  -- 972
+        "настройка игры для банка",  -- 973
+        "Подсказка при начале эффекта",  -- 974
+        "опция игры: подсказка эффекта на мгновение появляется при его наложении (интерфейс геймпада)",  -- 975
+        "Цвета классов для имён в чате",  -- 976
+        "игровая настройка чата для всех видов чата сразу: имя игрока цветом его класса",  -- 977
+        "открыть панель настроек (Настройки > Модификации > ControllerCam HUD)",  -- 978
+        "Рамки",  -- 979
+        "Затухание экрана",  -- 980
+        "Эффекты",  -- 981
+        "Вид",  -- 982
+        "Задания, чат и карта",  -- 983
+        "Сумки, банк и торговец",  -- 984
+        "Рыбалка",  -- 985
+        "Специальные возможности",  -- 986
+        "Родные настройки",  -- 987
+        "%s  |  Интерфейс геймпада: %s  |  работает: %s",  -- 988
+        "игрок %s, цель %s, питомец %s, фокус %s  |  рамки игры убраны: %s  |  чат перенесён: %s",  -- 989
+        "родные настройки: цель цели %s, Менеджер перезарядки %s, личные ресурсы %s",  -- 990
+        "размер текста %d%%  |  затемнение текста: %s",  -- 991
+        "помощь у торговца и в банке: %s  |  автопродажа: %s  |  белая экипировка — хлам: %s",  -- 992
+        "видимость в покое %d%%  |  масштаб %d%%  |  цвета классов: %s",  -- 993
+        "Минималистичный HUD в стиле экшена для интерфейса геймпада.",  -- 994
+        "включено",  -- 995
+        "выключено: собственные рамки игры вернулись",  -- 996
+        "использовать и в интерфейсе мыши и клавиатуры: %s",  -- 997
+        "рамки игры убраны: %s",  -- 998
+        "чат перенесён вверх влево: %s",  -- 999
+        "цвета классов: %s",  -- 1000
+        "В этом клиенте нет такой настройки.",  -- 1001
+        "%s: %s (собственная настройка игры)",  -- 1002
+        "Игра сейчас не приняла это.",  -- 1003
+        "помощь у торговца и в банке: %s",  -- 1004
+        "автопродажа: %s",  -- 1005
+        "белая экипировка — хлам: %s",  -- 1006
+        "Помощь у торговца выключена.",  -- 1007
+        "использование: /cchud sell [junk | recommended | white | green | blue]",  -- 1008
+        "сдавать отмеченные предметы при открытии банка: %s",  -- 1009
+        "использование: /cchud junk <item> (Shift+щелчок по предмету вставит его в строку чата)",  -- 1010
+        "предмет %d: хлам, продаётся вместе с остальным",  -- 1011
+        "предмет %d: оставлен, никогда не продаётся",  -- 1012
+        "предмет %d: для банка",  -- 1013
+        "затемнение текста: %s",  -- 1014
+        "использование: /cchud text <80-250>",  -- 1015
+        "размер текста %d%%",  -- 1016
+        "демо остановлено",  -- 1017
+        "HUD не запущен.",  -- 1018
+        "Демо запущено: придуманный бой по кругу. Введите /cchud demo ещё раз, чтобы остановить.",  -- 1019
+        "использование: /cchud idle <0-100>",  -- 1020
+        "видимость в покое %d%%",  -- 1021
+        "использование: /cchud scale <50-200>",  -- 1022
+        "масштаб %d%%",  -- 1023
+        "Перетащите рамки, затем введите /cchud lock.",  -- 1024
+        "рамки закреплены",  -- 1025
+        "Всё вернулось к исходному состоянию: настройки, рамки и раскладка экрана (ваши пометки для торговца и история цен сохранены).",  -- 1026
+        "рамки вернулись на исходные места",  -- 1027
+        "неизвестная команда «%s». Введите /cchud help",  -- 1028
+        "Список ошибок очищен.",  -- 1029
+        "Ошибок не записано.",  -- 1030
+        "Записано ошибок: %d (новые в конце). /cchud errors clear очищает список.",  -- 1031
+        "показать состояние",  -- 1032
+        "включает или выключает HUD (выключенный возвращает собственные рамки игры)",  -- 1033
+        "использовать HUD и в интерфейсе мыши и клавиатуры",  -- 1034
+        "использовать для этого нашу рамку или игровую",  -- 1035
+        "тонкие вертикальные полосы здоровья и энергии рядом с вашим персонажем",  -- 1036
+        "цель цели (собственная настройка игры, также в её меню)",  -- 1037
+        "Менеджер перезарядки игры (собственная настройка игры)",  -- 1038
+        "ваше здоровье и ресурс под вашим персонажем (собственная настройка игры)",  -- 1039
+        "подсказка, появляющаяся при начале эффекта (собственная опция игры)",  -- 1040
+        "оставить рамки игрока и цели игры видимыми (on) или убрать их (off)",  -- 1041
+        "у торговца: выбрать, что продать (также: sell junk, sell recommended, sell white | green | blue)",  -- 1042
+        "считать белое оружие и белую броню хламом",  -- 1043
+        "отметить предмет: всегда продаётся, никогда не продаётся или для банка (Shift+щелчок вставит его в строку чата)",  -- 1044
+        "в банке: положить то, что там уже есть, и всё отмеченное для банка",  -- 1045
+        "в банке: забрать то, что у вас уже есть при себе",  -- 1046
+        "класть в банк сразу при его открытии",  -- 1047
+        "банк сам забирает реагенты (собственная настройка игры)",  -- 1048
+        "размер текста в процентах (150 хорошо читается на телевизоре)",  -- 1049
+        "насколько заметна полоса игрока, когда ничего не происходит (0 скрывает её)",  -- 1050
+        "размер рамок, в процентах",  -- 1051
+        "перетащите рамки, куда хотите (режим редактирования игры тоже это умеет)",  -- 1052
+        "вернуть рамки на исходные места",  -- 1053
+        "запускает короткий придуманный бой, чтобы увидеть реакцию рамок (повторно — остановить)",  -- 1054
+        "сравнивает то, что на экране, с настройками (check all перечисляет каждую строку)",  -- 1055
+        "сохраняет описание интерфейса геймпада этого клиента (для поиска неисправностей)",  -- 1056
+        "показать этот список",  -- 1057
+        "последние ошибки HUD, и после перезагрузки (чтобы сообщить о них)",  -- 1058
     },
     zhCN = {
         "错误：",  -- 1
@@ -8896,504 +9032,521 @@ local TRANSLATIONS = {
         "让任务列表按距离排序，最近的任务在最上面",  -- 541
         "任务列表：推荐顺序",  -- 542
         "让任务列表保持推荐顺序：先是可以交付的，然后是你能独自完成的（由近到远），再是高于你等级的任务、独自一人时的组队任务，灰色任务排在最后",  -- 543
-        "任务列表：简短目标",  -- 544
-        "任务列表中的目标只保留必要的文字，前面带有类型图标：骷髅图标加 0/1 德雷德莱斯船长，而不是 0/1 已杀死德雷德莱斯船长",  -- 545
-        "聊天中的任务进度",  -- 546
-        "任务推进时在聊天中显示一行简短信息：血骨项链：4/25、一个目标完成、一个任务可以交付",  -- 547
-        "向小队报告任务进度",  -- 548
-        "在小队中（团队中不会），同样的内容会发到小队频道让其他人看到，每条间隔片刻；你也会在那里看到",  -- 549
-        "保留任务需要的物品",  -- 550
-        "任务日志中的任务仍需要的物品，或能开始一个你还能做的任务的物品，会标记为任务：绝不会替你卖掉或拍卖",  -- 551
-        "说出任务的推荐顺序：先交付已完成的，再做最近的可单人任务，然后是其余的",  -- 552
-        "任务左侧",  -- 553
-        "任务右侧",  -- 554
-        "任务下方",  -- 555
-        "采集清单已满。",  -- 556
-        "采集清单：%s，需要%d个。",  -- 557
-        "采集",  -- 558
-        "还有%d项",  -- 559
-        "暂无需采集的物品。",  -- 560
-        "再加一组",  -- 561
-        "移除",  -- 562
-        "清空",  -- 563
-        "完成",  -- 564
-        "清空整个采集清单？",  -- 565
-        "采集清单：选择 / 完成",  -- 566
-        "采集清单：添加你指向的物品",  -- 567
-        "它不在采集清单上。",  -- 568
-        "采集清单为空。",  -- 569
-        "采集清单：位置",  -- 570
-        "任务列表旁的采集清单",  -- 571
-        "你打算采集的东西，显示拥有数量和需要数量：你的背包和银行，以及你在本服务器其他角色的。可一键加入升级计划所需的材料，也可加入任意物品",  -- 572
-        "采集清单放在任务列表左侧、右侧或其任务下方",  -- 573
-        "任务列表旁的采集清单：用手柄选择；add <物品> [数量]，remove <物品>，clear，或用 left / right / bottom 设置位置",  -- 574
-        "不在战斗中。",  -- 575
-        "此客户端没有手柄动作条。",  -- 576
-        "此客户端不允许插件修改；请使用编辑模式。",  -- 577
-        "手柄动作条：%s",  -- 578
-        "紧凑",  -- 579
-        "完整",  -- 580
-        "精简手柄动作条",  -- 581
-        "隐藏手柄动作条后面的厚重图案并缩小显示",  -- 582
-        "手柄动作条大小",  -- 583
-        "开启精简动作条时手柄动作条的大小，百分比",  -- 584
-        "游戏自带手柄动作条的紧凑或完整模式（与其编辑模式设置相同）",  -- 585
-        "脱战淡出",  -- 586
-        "/cchud fade <部分> on | off 设置其中一项；all 表示整个淡出。",  -- 587
-        "手柄动作条、小地图、任务列表、伤害统计和经验条在脱战时一起休息，并在战斗、扣下扳机或有敌对目标时恢复",  -- 588
-        "休息时的屏幕",  -- 589
-        "脱战时屏幕上休息的部分保持多明显（0 为隐藏）",  -- 590
-        "淡出：手柄动作条",  -- 591
-        "淡出：小地图",  -- 592
-        "淡出：任务列表",  -- 593
-        "淡出：伤害统计",  -- 594
-        "淡出：经验条",  -- 595
-        "淡出：增益效果",  -- 596
-        "淡出：冷却行",  -- 597
-        "屏幕的这一部分是否在脱战时与其余部分一起淡出（关闭：始终保持原样）",  -- 598
-        "脱战时的屏幕淡出：哪些部分淡出（小地图、任务列表等），每项可开可关",  -- 599
-        "已保存：输入 /reload 让游戏把它写入磁盘。",  -- 600
-        "姿态和宠物按钮移到动作条上方",  -- 601
-        "姿态和宠物指令按钮放在原来绿色和红色选目标图标的位置，这样它们的轮盘能完整显示在屏幕上；那些图标会被隐藏",  -- 602
-        "列出手柄动作条各部分的位置以及哪些在休息（用于排查问题）",  -- 603
-        "自动",  -- 604
-        "通用",  -- 605
-        "游戏自带",  -- 606
-        "按键图标：%s。",  -- 607
-        "目前没有正在使用的手柄，或者游戏没有图标样式：有手柄时会自动设置。",  -- 608
-        "游戏没有接受按键图标的设置。",  -- 609
-        "手柄没有说明自己是什么：图标保持游戏原样。",  -- 610
-        "游戏为你的手柄按键显示的图标：auto（按正在使用的手柄）、xbox、playstation、switch、steam、generic（数字），或用 game 保持游戏原样",  -- 611
-        "冷却行避开手柄动作条",  -- 612
-        "游戏的冷却行放在目标下方而不是压在手柄按键上，并略微缩小（仅在游戏自带布局下：在你自己的布局中它们留在你放的位置）",  -- 613
-        "钓鱼模式：关闭。",  -- 614
-        "钓鱼：按%s抛竿",  -- 615
-        "没有鱼饵：按两次%s使用%s",  -- 616
-        "按%s收起鱼竿",  -- 617
-        "钓鱼模式：按%s抛竿，鱼漂晃动时再按一次收竿。",  -- 618
-        "%s 收竿，%s 重新抛竿",  -- 619
-        "钓鱼模式需要手持鱼竿。",  -- 620
-        "你没有学会钓鱼。",  -- 621
-        "钓鱼模式：一个按钮抛竿和提竿",  -- 622
-        "钓鱼按键：%s",  -- 623
-        "一键钓鱼",  -- 624
-        "手持鱼竿时：没有可互动的目标时，用互动按钮抛竿，鱼漂晃动时再按一次收竿；渔获自动拾取。按B收起鱼竿并换回武器",  -- 625
-        "一键重新抛竿",  -- 626
-        "浮标在水上时，钓鱼按钮按一下就重新抛竿，用 A 收竿钓鱼（游戏不提供可等待的咬钩信号，所以一个按钮无法兼顾两者）；关闭：钓鱼按钮像游戏的互动一样收竿",  -- 627
-        "双击上饵",  -- 628
-        "快速按两下钓鱼按键：当鱼竿上没有鱼饵时，第二下会把背包里最好的鱼饵装到鱼竿上",  -- 629
-        "钓鱼时隐藏手柄动作条",  -- 630
-        "手持鱼竿时隐藏手柄动作条，水面一览无余；钓鱼提示显示抛竿的按钮。战斗开始或收起鱼竿时立即恢复",  -- 631
-        "暂时关闭一键钓鱼，或重新开启（手持鱼竿时会自动开启）",  -- 632
-        "用于钓鱼的按键：起初是你的互动键（方块或 X），也可以是任何其他按键，例如扳机键 (rt)",  -- 633
-        "杜隆塔尔的海岸尽是红岩与温暖的浅滩。回音群岛的巨魔说，潮水捎来岛上炊火味道的时候，鲭鱼群最旺。",  -- 634
-        "莫高雷的湖泊小巧、清澈，也很有耐心。牛头人钓鱼和做别的事一样：慢慢来，并且心怀感恩。",  -- 635
-        "贫瘠之地的每一处绿洲都是聚会的地方。不管白天来喝水的是什么，夜里总有东西在水下游动。",  -- 636
-        "泰达希尔的水潭全都躺在同一棵树的树荫里。暗夜精灵钓手们发誓说，那儿的鱼从没见过太阳，也并不想念。",  -- 637
-        "黑海岸的海水灰暗、冰冷，满是沉船。在奥伯丁外海咬钩的鱼，有一半都把家安在了别人丢失的货物里。",  -- 638
-        "灰谷的河流在比大多数王国还古老的树叶下流淌。鱼儿很快，哨兵赶来盘问你在干什么更快。",  -- 639
-        "在千针石林的谷底，水很稀少，被人看得很紧。这里的鱼，位置都是自己挣来的。",  -- 640
-        "石爪山脉的湖泊高踞群峰之间，寒冷刺骨。要不是这么好钓，地精早就把湖水抽干了。",  -- 641
-        "凄凉之地的海岸只有白骨和灰色的浪。水底下有什么东西，对这两样都很有胃口。",  -- 642
-        "菲拉斯一路绿到水边。那里的河又深又暖，生机勃勃得很。",  -- 643
-        "没人说得清尘泥沼泽的陆地到哪儿为止、水从哪儿开始。站在岸上钓吧，钓完记得数数脚趾。",  -- 644
-        "整个塔纳利斯只有热砂港的水还配叫水。地精会把钓鱼的权利卖给你，你要是不留神，他们会卖两次。",  -- 645
-        "艾萨拉明亮的海湾之下躺着一座沉没的城市。老钓手说，大家伙都住在从前的花园里。",  -- 646
-        "费伍德森林的水潭会发光，可不是什么好兆头的那种光。还在里面游的东西，顽固得不讲道理。",  -- 647
-        "安戈洛的温泉和焦油环绕的湖泊，留住了被外面的世界遗忘的东西。其中有一些还会咬。",  -- 648
-        "月光林地的月神湖平静得像屏住的一口气。德鲁伊只有一个请求：吃多少，钓多少。",  -- 649
-        "希利苏斯只有沙子、风和振翅的声音。要是你在这儿找到了能钓鱼的水，谁也别告诉。",  -- 650
-        "冬泉谷的湖泊边缘结冰，中间却冒着热气。那里的鱼为了御寒长得肥美，值得走这一趟。",  -- 651
-        "在奥格瑞玛的水池边钓鱼的，是闲着没事的苦工，还有自称也闲着没事的老步兵。两种人都会告诉你，大的那条跑了。",  -- 652
-        "雷霆崖池塘里的鱼，一辈子都住在远高于平原的地方。它看上去倒挺淡定。",  -- 653
-        "达纳苏斯照看水域，就像照看神殿一样用心。鱼儿早已习惯了被人欣赏。",  -- 654
-        "奥特兰克山脉的湖水是融化的雪水，食人魔和辛迪加趁没人看见的时候在那儿钓鱼。",  -- 655
-        "阿拉希的岸边见过的军队比钓手还多。水面上飘的是谁家的旗帜，鱼儿早就不在乎了。",  -- 656
-        "荒芜之地从这头到那头全是尘土。在这里有鱼咬钩算是个小小的奇迹，请拿它当奇迹对待。",  -- 657
-        "诅咒之地的海岸赤红、荒秃而寂静。能活在那片浪里的东西，早就学会了忍受许多。",  -- 658
-        "提瑞斯法的湖泊静卧在病恹恹的天空下。被遗忘者钓鱼是出于习惯；死人吃得不多，但他们记得自己曾经爱吃。",  -- 659
-        "银松森林漫长的海岸上只有雾气和松影。这里鱼很好钓，这也是人们对这地方唯一说得出的好话。",  -- 660
-        "西瘟疫之地的河还在流，只是不干净。从里面拉上来的东西，请多看一眼。",  -- 661
-        "很少有人在东瘟疫之地钓鱼，肯承认的就更少了。瘟疫给这片水留下了多少，它就守着多少。",  -- 662
-        "希尔斯布莱德的河流和漫长的南岸，在每一场为争夺它们而起的纷争中，都养活过交战的双方。",  -- 663
-        "辛特兰把湖泊藏在高处的林间，蛮锤矮人以为没人看见的时候，会骑在狮鹫背上钓鱼。",  -- 664
-        "丹莫罗的湖泊一年里大半时间都围着一圈冰。矮人会凿个洞，端着一杯酒坐下来，不管钓上什么都说今天过得不错。",  -- 665
-        "别处有河的地方，灼热峡谷有的是熔岩。还是改带点喝的来吧。",  -- 666
-        "燃烧平原只有灰烬和余火。这里的水要是真肯给你点什么，那也一定是烫的。",  -- 667
-        "艾尔文的每个孩子都是在水晶湖或石碑湖学会钓鱼的。那里的小鱼已经把一代又一代的孩子耍得团团转。",  -- 668
-        "逆风小径水少，欢迎你的人更少。卡拉赞下面水潭里的东西，最好就让它留在那儿。",  -- 669
-        "沿着暮色森林边缘流淌的河，什么时候看都是黑的。鱼似乎不介意黑暗，钓鱼的人可介意。",  -- 670
-        "洛克湖是洛克莫丹的骄傲，由宏伟的巨石水坝拦蓄而成。矮人讲钓鱼故事时总爱拿它来比，而赢的通常是湖。",  -- 671
-        "赤脊山的止水湖美得像一幅画，湖畔镇的每座码头上都有人垂钓。镇民知道每一个好钓点，却一个也不会告诉你。",  -- 672
-        "从丛林里的河流到荒凉的南海角，荆棘谷拥有这片大陆上最丰饶的水域。藏宝海湾的钓手为此举办钓鱼大赛，而且几乎个个作弊。",  -- 673
-        "悲伤沼泽就是绿树下的一片绿水。鱼有股泥味，而本地人就好这一口。",  -- 674
-        "西部荒野的田地荒了，海岸却没有。留下来的人靠着这条漫长的灰色海岸过活。",  -- 675
-        "湿地名副其实。米奈希尔港的码头是这里最干的钓鱼处，鳄鱼们也清楚这一点。",  -- 676
-        "在暴风城运河边钓鱼的有孩子、退休老人，还有至少一位乔装打扮的贵族。运河里还有些什么，没人过问。",  -- 677
-        "荒弃的洞穴里有铁炉堡唯一一处安静的水潭。老矮人一钓就是几个钟头，一句话也不说。",  -- 678
-        "幽暗城的运河泛着一种绿色，跟水藻毫无关系。在那儿钓鱼的被遗忘者，可不是为了晚饭。",  -- 679
-        "大多数钓手钓上的第一条鱼，鲜亮得让人忘不了。",  -- 680
-        "滑溜、敏捷，每一处温暖的海岸都很常见。烤着吃比它的名字听起来要好。",  -- 681
-        "浑身上下就是一张嘴，在你不愿喝的水里过得最快活。",  -- 682
-        "个头小，牙齿尖，天不怕地不怕。据说一群这种鱼曾把一头熊赶出了洛克湖。",  -- 683
-        "浪花下的一抹亮色。水手们认为钓线上挂着一条，这趟航行就会走运。",  -- 684
-        "一种很有耐心的底栖鱼，长着矮人长老一般的胡须。",  -- 685
-        "没人会吃第二次。炼金师却是有多少收多少。",  -- 686
-        "它的鳍像压着火的余炭一样发亮，榨出来的油烧起来也差不了多少。",  -- 687
-        "像一面小盾牌一样披着甲。里面的肉值得你费这番功夫。",  -- 688
-        "哀嚎洞穴附近的水里有什么东西改变了它。吃上一条，你也可能跟着变一阵子。",  -- 689
-        "住在河边的人说，吃一顿它能让头脑清明。让它变聪明的，其实是逆流而上的那段路。",  -- 690
-        "比它的表亲更老、更大，也更睿智，可这并没有让它躲开你的鱼钩。",  -- 691
-        "来自温暖南海的狠角色，挣扎起来毫不含糊。从藏宝海湾到加基森，每家酒馆的菜牌上都少不了它。",  -- 692
-        "它的额头像真正的秘银一样闪亮。想把它拿去熔炼的矿工不止一个。",  -- 693
-        "它的鳞片能熬成一种油，让皮肤硬如岩石。它更喜欢夜晚。",  -- 694
-        "亮得像阅兵用的胸甲，也差不多一样沉。",  -- 695
-        "它只在寒冷的月份才游到近岸，懂行的厨师会等上一整年。",  -- 696
-        "白昼变长的时候它就成群洄游。沿海的人靠它来辨认时节。",  -- 697
-        "抓它要抓中间，而且只有一次机会。",  -- 698
-        "来自荒野之地的河鱼，鳃红得像巨魔的战纹。",  -- 699
-        "它在天黑后觅食。用它熬的汤能安抚施法者的神经。",  -- 700
-        "它在白天觅食，几乎处处与夜鳞鲷鱼相反，却照样与它同住一片水。",  -- 701
-        "严格说来不算鱼。它不同意被抓，而且会让你知道。",  -- 702
-        "苍白如河冰，产自北方寒冷清澈的湖泊。",  -- 703
-        "你得用上两只手，也许还得叫上一位朋友。",  -- 704
-        "%.1f磅",  -- 705
-        "钓鱼日志新增：%s，%s。",  -- 706
-        "钓鱼日志新增：%s。",  -- 707
-        "你迄今最重的%s：%s（之前是%s）。",  -- 708
-        "钓鱼日志",  -- 709
-        "每次渔获都会写进你的钓鱼日志：每种的数量、第一次钓到的地点，以及为了好玩而编造的重量和每种的最佳纪录（/cchud journal 打开它）",  -- 710
-        "鱼饵 %s",  -- 711
-        "没有鱼饵",  -- 712
-        "钓到 %d",  -- 713
-        "跑掉 %d",  -- 714
-        "钓鱼界面",  -- 715
-        "手持鱼竿时：你所在水域的鱼（还没在这里钓到的保持隐藏）、你的钓鱼技能和鱼饵的加成、钓到多少和跑掉多少、鱼饵还能持续多久，以及你最近的渔获",  -- 716
-        "好奇的一条：+%d%%",  -- 717
-        "让鱼饵保持在鱼的旁边",  -- 718
-        "下一条渔获 +%d%%",  -- 719
-        "按住 %s：鱼饵沿着鱼线移动",  -- 720
-        "连续 %d 条",  -- 721
-        "浮标在水里时的小游戏",  -- 722
-        "在鱼线入水时于施法条上进行：按住扳机，鱼饵沿着鱼线移动，松开则漂回；让它待在鱼影旁边。玩得越好，下一条渔获的虚构重量越重。不占用任何按钮，也从不影响抛竿或收获",  -- 723
-        "钓到 %d，%d 种，跑掉 %d",  -- 724
-        "最重：%s，%s",  -- 725
-        "鱼",  -- 726
-        "水域",  -- 727
-        "还没有钓到任何东西。带上鱼竿去水边吧。",  -- 728
-        "钓到：%d",  -- 729
-        "最重：%s，于%s",  -- 730
-        "首次钓到：%s",  -- 731
-        "在这里钓到：%d",  -- 732
-        "在这里发现的种类：%d",  -- 733
-        "选择",  -- 734
-        "关闭",  -- 735
-        "打开或关闭你的钓鱼日志：你钓到过的每个种类、每种最重的一条，以及你钓过鱼的水域",  -- 736
-        "聊天安静时淡出",  -- 737
-        "几秒内没有新消息时聊天文字淡出",  -- 738
-        "聊天淡出前的秒数",  -- 739
-        "聊天文字在淡出前停留的时间",  -- 740
-        "地图上的坐标",  -- 741
-        "在世界地图下方显示你的坐标",  -- 742
-        "自你登录以来已有 %d 条消息被作为垃圾信息隐藏。",  -- 743
-        "其中 %d 条是重复的公会招募。",  -- 744
-        "聊天中的职业图标和等级",  -- 745
-        "在玩家名字前用方括号显示其职业图标和等级（在游戏允许我们得知时）",  -- 746
-        "聊天中使用简短频道名",  -- 747
-        "行首的频道名会被缩写：[P] 小队，[PL] 小队队长，[G] 公会，[O] 官员，[R] 团队，[RL] 团队领袖，[I] 副本，带编号的频道只显示编号，[1]",  -- 748
-        "聊天中只显示名字",  -- 749
-        "带姓氏的名字只显示名字（Jory Spleeneater 显示为 Jory）；对它密语或右键点击仍然对应完整名字",  -- 750
-        "聊天文字大小",  -- 751
-        "聊天窗口中文字的大小，按游戏自身大小的比例设置（游戏自身的设置保持不变）",  -- 752
-        "隐藏金币商人和重复广告",  -- 753
-        "带有网址的出售金币或服务的消息，以及同一玩家重复发送的相同消息，将被隐藏（你的队伍、公会和好友除外）",  -- 754
-        "隐藏重复的公会招募",  -- 755
-        "在公共频道中，公会招募消息只显示一次；15 分钟内同一玩家再次发送的，或几乎相同的消息将被隐藏（你的队伍、公会和好友除外）",  -- 756
-        "列出最近被作为垃圾信息隐藏的聊天消息",  -- 757
-        "飞行",  -- 758
-        "目的地未知",  -- 759
-        "按距离估算",  -- 760
-        "此航线首次飞行：正在记录飞行时间",  -- 761
-        "即将降落",  -- 762
-        "%s：约 %s，按距离估算",  -- 763
-        "%s：约 %s",  -- 764
-        "%s：此航线首次飞行，时间未知",  -- 765
-        "飞行中，目的地未知",  -- 766
-        "%s：已记住飞行时间，%s",  -- 767
-        "已知 %d 条飞行航线。",  -- 768
-        "飞行：时间和倒计时",  -- 769
-        "飞行时在聊天中说明目的地和所需时间，屏幕顶部的计时条倒数至降落；每条航线的时间从你的飞行中学习",  -- 770
-        "飞行：坐骑沿进度条飞行",  -- 771
-        "狮鹫、双足飞龙或蝙蝠（飞行管理员给你的那只）沿飞行进度条飞向你的降落地点",  -- 772
-        "列出已知时间的飞行航线",  -- 773
-        "飞行是个好时机。",  -- 774
-        "你已经玩了 %s。",  -- 775
-        "该喝口水了",  -- 776
-        "喝水提醒",  -- 777
-        "游戏时不时温和地提醒你喝口水（战斗中不会）",  -- 778
-        "喝水提醒间隔（分钟）",  -- 779
-        "两次喝水提醒之间的游戏分钟数",  -- 780
-        "飞行开始时提醒喝水",  -- 781
-        "飞行是天然的休息：开始飞行时会提醒你喝水，除非上次提醒才过去不久",  -- 782
-        "显示喝水提醒",  -- 783
-        "重新设计游戏自带的框体",  -- 784
-        "鼠标提示、增益、任务追踪、小地图、经验条、聊天标签和手柄动作条采用HUD的外观（鼠标界面保持游戏原样）",  -- 785
-        "经验条大小",  -- 786
-        "重新设计样式时经验条和声望条的大小，百分比",  -- 787
-        "鼠标提示",  -- 788
-        "暗色玻璃样式的鼠标提示，边缘为玩家职业颜色或物品品质颜色",  -- 789
-        "手柄动作条",  -- 790
-        "手柄按钮采用深色底座上的纤细圆环，取代厚重的图案",  -- 791
-        "增益",  -- 792
-        "你的增益和减益图标经过裁切并加边框，其时间带描边",  -- 793
-        "任务追踪",  -- 794
-        "任务追踪的标题采用暗色玻璃样式，其文字行带描边",  -- 795
-        "小地图",  -- 796
-        "在小地图周围显示纤细圆环和柔和光晕，取代金色边框",  -- 797
-        "经验条",  -- 798
-        "经验条和声望条稍小一些，使用各自的颜色",  -- 799
-        "聊天",  -- 800
-        "聊天标签名称带描边，输入框采用暗色玻璃样式",  -- 801
-        "伤害统计",  -- 802
-        "游戏伤害统计以HUD风格显示：深色背景上的斜条和描边文字；功能完全保留",  -- 803
-        "检查：%d 项中通过 %d 项",  -- 804
-        "自你登录以来游戏没有卡顿过。",  -- 805
-        "游戏卡顿的时刻，以及每次中 HUD 所占的部分：",  -- 806
-        "HUD 最慢的时刻：",  -- 807
-        "调试报告",  -- 808
-        "自动收集排查问题的报告：登录时，以及重载或登出时再收集一次（保存在已保存的设置中）",  -- 809
-        "自你登录以来游戏卡顿的时刻，以及每次中 HUD 自身工作所占的部分",  -- 810
-        "HUD预设：%s，与镜头匹配",  -- 811
-        "预设：%s",  -- 812
-        "名为“%s”的布局已添加到游戏的编辑模式。请在那里选择它以使用（游戏菜单 > 编辑模式 > 布局）。",  -- 813
-        "未知预设 '%s'",  -- 814
-        "适合电视：HUD 和聊天中的文字更大。",  -- 815
-        "适合显示器：文字为普通大小。",  -- 816
-        "我们的框体已回到起始位置。请在编辑模式中选择游戏的%s布局（游戏菜单 > 编辑模式 > 布局）。",  -- 817
-        "预设会设置镜头距离",  -- 818
-        "预设还会把镜头一次性调到其布局所设计的距离（之后可自由缩放）",  -- 819
-        "动作",  -- 820
-        "第三人称视角：角色旁的纤细竖条，所有效果开启；脱战时一切淡出",  -- 821
-        "经典",  -- 822
-        "我们的框体位于魔兽世界一贯的位置，特效更柔和，保留游戏自带的手柄动作条",  -- 823
-        "极简",  -- 824
-        "只显示需要的：友方NPC只在你指向、瞄准或选中时显示姓名板（含职能）；名字不带头衔；脱战时你的条淡淡显示（生命值低时总会显示）",  -- 825
-        "开放世界",  -- 826
-        "适合探索的干净界面：身旁静息时变淡的细条、不带能量条的姓名板、会淡出的聊天",  -- 827
-        "冒险",  -- 828
-        "参照主机开放世界冒险：生命状态在你身旁，小目标框在中上方，村民仅在你指向时显示，聊天快速淡出",  -- 829
-        "魂系",  -- 830
-        "你的条在左上角，目标条像首领血条一样大而居中靠下，每一击都有感觉",  -- 831
-        "射击",  -- 832
-        "中央偏右的竖条靠近准星，目标在上方，强烈的命中反馈",  -- 833
-        "十字栏",  -- 834
-        "参照手柄玩的MMO：目标和焦点在中上方，你的条紧贴手柄动作条上方，小队在左侧，完整姓名板",  -- 835
-        "ARPG",  -- 836
-        "参照动作RPG：镜头拉远，生命状态在左下方，目标在中上方，杂兵显示较小，每次命中都很醒目",  -- 837
-        "罗盘",  -- 838
-        "参照第一人称RPG：镜头拉近，你的条在中下方，目标在顶部边缘下方，村民仅在你指向时显示",  -- 839
-        "团队",  -- 840
-        "WoW 原有布局加上团队所需的一切：小队和团队框体、姓名板上的生命百分比和等级",  -- 841
-        "跟随ControllerCam的预设",  -- 842
-        "在ControllerCam中为所有情境选择镜头预设时，也会选择匹配的HUD预设（镜头保持自己的距离）",  -- 843
-        "现代",  -- 844
-        "将整个HUD设为预设：action, classic, minimal, openworld, adventure, soulslike, shooter, crossbar, arpg, compass, raid",  -- 845
-        "目标框体和姓名板同时设为紧凑或完整",  -- 846
-        "目标框体设为紧凑或完整",  -- 847
-        "按房间另一头的电视或一臂之遥的显示器来设定文字大小",  -- 848
-        "把我们的框体放回起始位置，以配合游戏自带的现代或经典布局",  -- 849
-        "你的整套设置（HUD、镜头和游戏布局）：复制这一行（Ctrl+C）以保存或分享。",  -- 850
-        "粘贴一行 HUD 设置（Ctrl+V）并确认。",  -- 851
-        "这一行已损坏：请重新完整复制。",  -- 852
-        "这一行由更新的版本生成：请更新插件。",  -- 853
-        "这不是一行 HUD 设置。",  -- 854
-        "设置已导入：采用 %d 项，略过 %d 项。",  -- 855
-        "镜头设置也一并导入了。",  -- 856
-        "镜头设置保持原样。",  -- 857
-        "游戏布局现在是“%s”。",  -- 858
-        "游戏布局保持原样。",  -- 859
-        "你的设置，作为一行文本，用于保存或分享",  -- 860
-        "从由 /cchud export 生成的文本行中读取设置",  -- 861
-        "使用手柄界面时 HUD 已开启。它的选项：选项 > 插件 > ControllerCam > HUD，或 /cchud。",  -- 862
-        "仅镜头：HUD 休息，游戏界面保持原样。/cchud on 可将其开启。",  -- 863
-        "要同时为手柄设置屏幕吗？这会在游戏的编辑模式中添加一个名为 CCHUD 的布局，由你在那里选择：它把冷却行放在目标下方，避开手柄按键。你自己的布局会保留（/cchud setup 可再次提供此选项）。",  -- 864
-        "设置",  -- 865
-        "暂不",  -- 866
-        "ControllerCam 附带一套手柄界面，即 HUD：使用手柄界面时显示它自己的单位框体、姓名板、施法条等。你想要它，还是只要镜头？",  -- 867
-        "镜头 + HUD",  -- 868
-        "仅镜头",  -- 869
-        "此客户端不允许插件更改布局。",  -- 870
-        "再问一次：镜头加 HUD，还是只要镜头",  -- 871
-        "再次提供为 HUD 制作的屏幕布局（游戏的编辑模式）",  -- 872
-        "使用游戏手柄界面时显示。请在游戏的编辑模式中拖动我们的框体。",  -- 873
-        "预设",  -- 874
-        "适合的屏幕",  -- 875
-        "电视",  -- 876
-        "显示器",  -- 877
-        "按键图标",  -- 878
-        "游戏为你的手柄按键显示的图标：根据正在使用的手柄自动识别，或你选择的类型",  -- 879
-        "字体",  -- 880
-        "重置游戏布局",  -- 881
-        "试一试",  -- 882
-        "播放演示",  -- 883
-        "显示所有命中特效",  -- 884
-        "运行自检",  -- 885
-        "手柄动作条：紧凑 / 完整",  -- 886
-        "导出设置",  -- 887
-        "导入设置",  -- 888
-        "在主页面勾选「显示高级选项」以查看所有设置。",  -- 889
-        "模块",  -- 890
-        "快速开关",  -- 891
-        "通用",  -- 892
-        "HUD",  -- 893
-        "此客户端无法使用选项面板。",  -- 894
-        "启用",  -- 895
-        "整个 HUD；关闭后恢复游戏自带的框体",  -- 896
-        "鼠标和键盘界面中也启用",  -- 897
-        "通常 HUD 仅在使用游戏手柄界面时运行",  -- 898
-        "隐藏游戏自带的框体",  -- 899
-        "显示我们的框体时，隐藏游戏的玩家、目标和焦点框体",  -- 900
-        "聊天窗口移到左上角",  -- 901
-        "HUD 运行时将聊天窗口移到左上角",  -- 902
-        "空闲时的垂直条",  -- 903
-        "非战斗状态下生命值已满时，垂直条保持的可见程度（0 为隐藏）",  -- 904
-        "职业颜色",  -- 905
-        "按职业为你的血条和其他玩家的血条着色",  -- 906
-        "职业图标",  -- 907
-        "在目标和目标的目标的玩家名字前显示职业图标",  -- 908
-        "目标框体威胁",  -- 909
-        "目标框体上的盾牌图标和光晕：攻击你时为红色，即将拉到仇恨时红黄交替，正在失去仇恨时黄蓝交替，不在你身上时为蓝色",  -- 910
-        "全部使用紧凑条",  -- 911
-        "目标框体和姓名板使用紧凑样式，宽度略多于一半（仍可分别设置；预设不会改变它）",  -- 912
-        "紧凑目标框体",  -- 913
-        "目标框体宽度略大于一半",  -- 914
-        "战斗中的生命值颜色",  -- 915
-        "战斗中，生命值条随生命值下降由绿色经黄色变为红色",  -- 916
-        "文字背景阴影",  -- 917
-        "在目标文字后加一条淡淡的暗带，使其易于阅读",  -- 918
-        "文字大小",  -- 919
-        "我们框体上文字的大小",  -- 920
-        "框体大小",  -- 921
-        "我们的单位框体的大小",  -- 922
-        "战斗中的动作条",  -- 923
-        "在有事需要注意之前，战斗中你的动作条、宠物和焦点有多明显",  -- 924
-        "生命值低于时完整",  -- 925
-        "当你的生命值低于此值时，动作条恢复为完整",  -- 926
-        "法力值低于时完整",  -- 927
-        "当你的法力值低于此值时，动作条恢复为完整",  -- 928
-        "空闲时的玩家条",  -- 929
-        "生命值全满或脱离战斗时玩家条的可见程度（0 为隐藏）",  -- 930
-        "商人和银行帮助",  -- 931
-        "商人的“出售垃圾”按钮会询问出售什么；商人和银行处可快速移动",  -- 932
-        "显示高级选项",  -- 933
-        "所有设置，而不仅是主要开关",  -- 934
-        "玩家框体",  -- 935
-        "我们的玩家条，左上角",  -- 936
-        "目标框体",  -- 937
-        "我们的目标条，顶部中间",  -- 938
-        "宠物条",  -- 939
-        "玩家条下方或竖直条旁边的小型宠物条",  -- 940
-        "焦点框体",  -- 941
-        "我们的焦点框体",  -- 942
-        "角色旁的细长竖直生命条和能量条，适合第三人称视角（代替玩家条）",  -- 943
-        "商人打开时出售垃圾",  -- 944
-        "商人一打开就按你的规则出售垃圾",  -- 945
-        "白色武器和护甲算作垃圾",  -- 946
-        "将白色武器和护甲视为垃圾（工具、鱼竿、有使用效果的装备或可能是升级的物品除外；总是先询问）",  -- 947
-        "打开银行时存放",  -- 948
-        "标记为存银行的物品，以及（开启时）银行里已有的物品，会自动存入",  -- 949
-        "游戏自带的选项；我们的小框体会跟随它",  -- 950
-        "冷却管理器",  -- 951
-        "游戏的冷却管理器",  -- 952
-        "个人资源显示",  -- 953
-        "角色下方的生命值和能量",  -- 954
-        "银行自动接收材料",  -- 955
-        "游戏中银行的选项",  -- 956
-        "增益开始时显示提示",  -- 957
-        "游戏选项：增益生效时，其提示会短暂弹出（手柄界面）",  -- 958
-        "聊天名称使用职业颜色",  -- 959
-        "游戏的聊天设置，一次应用于所有聊天类型：玩家名称显示为其职业颜色",  -- 960
-        "打开选项面板（选项 > 插件 > ControllerCam HUD）",  -- 961
-        "框体",  -- 962
-        "屏幕淡出",  -- 963
-        "特效",  -- 964
-        "外观",  -- 965
-        "任务、聊天和地图",  -- 966
-        "背包、银行和商人",  -- 967
-        "钓鱼",  -- 968
-        "辅助功能",  -- 969
-        "原生选项",  -- 970
-        "%s  |  游戏手柄界面：%s  |  运行中：%s",  -- 971
-        "玩家 %s，目标 %s，宠物 %s，焦点 %s  |  已隐藏游戏框体：%s  |  聊天已移动：%s",  -- 972
-        "原生选项：目标的目标 %s，冷却管理器 %s，个人资源 %s",  -- 973
-        "文字大小 %d%%  |  文字阴影：%s",  -- 974
-        "商人和银行帮助：%s  |  自动出售：%s  |  白色装备算垃圾：%s",  -- 975
-        "空闲可见度 %d%%  |  缩放 %d%%  |  职业颜色：%s",  -- 976
-        "适用于游戏手柄界面的极简动作游戏风格 HUD。",  -- 977
-        "已启用",  -- 978
-        "已禁用：游戏自带的框体已恢复",  -- 979
-        "鼠标和键盘界面中也使用：%s",  -- 980
-        "已隐藏游戏框体：%s",  -- 981
-        "聊天已移到左上角：%s",  -- 982
-        "职业颜色：%s",  -- 983
-        "此客户端没有该选项。",  -- 984
-        "%s：%s（游戏自带的选项）",  -- 985
-        "游戏目前不接受该操作。",  -- 986
-        "商人和银行帮助：%s",  -- 987
-        "自动出售：%s",  -- 988
-        "白色装备算垃圾：%s",  -- 989
-        "商人帮助已关闭。",  -- 990
-        "用法：/cchud sell [junk | recommended | white | green | blue]",  -- 991
-        "银行打开时存入已标记的物品：%s",  -- 992
-        "用法：/cchud junk <item>（按住 Shift 点击物品，将其放入聊天输入行）",  -- 993
-        "物品 %d：垃圾，与其余一起出售",  -- 994
-        "物品 %d：保留，从不出售",  -- 995
-        "物品 %d：存入银行",  -- 996
-        "文字阴影：%s",  -- 997
-        "用法：/cchud text <80-250>",  -- 998
-        "文字大小 %d%%",  -- 999
-        "演示已停止",  -- 1000
-        "HUD 未运行。",  -- 1001
-        "演示运行中：循环播放一场虚构的战斗。再次输入 /cchud demo 可停止。",  -- 1002
-        "用法：/cchud idle <0-100>",  -- 1003
-        "空闲可见度 %d%%",  -- 1004
-        "用法：/cchud scale <50-200>",  -- 1005
-        "缩放 %d%%",  -- 1006
-        "拖动框体，然后输入 /cchud lock。",  -- 1007
-        "框体已锁定",  -- 1008
-        "一切已恢复到初始状态：设置、框体和屏幕布局（你的商人标记和价格历史会保留）。",  -- 1009
-        "框体已恢复到初始位置",  -- 1010
-        "未知命令“%s”。输入 /cchud help",  -- 1011
-        "错误列表已清空。",  -- 1012
-        "没有记录的错误。",  -- 1013
-        "已记录 %d 个错误（最新的在最后）。/cchud errors clear 清空列表。",  -- 1014
-        "显示状态",  -- 1015
-        "开启或关闭 HUD（关闭后恢复游戏自带的框体）",  -- 1016
-        "鼠标和键盘界面中也使用 HUD",  -- 1017
-        "使用我们的框体，或游戏自带的",  -- 1018
-        "角色旁边的细长垂直生命值和能量条",  -- 1019
-        "目标的目标（游戏自带的选项，游戏菜单中也有）",  -- 1020
-        "游戏的冷却管理器（游戏自带的选项）",  -- 1021
-        "角色下方的生命值和能量（游戏自带的选项）",  -- 1022
-        "增益开始时弹出的提示（游戏自带选项）",  -- 1023
-        "保持游戏自带的玩家和目标框体可见（开）或将其隐藏（关）",  -- 1024
-        "在商人处：选择出售什么（另有：sell junk, sell recommended, sell white | green | blue）",  -- 1025
-        "将白色武器和护甲算作垃圾",  -- 1026
-        "标记物品：始终出售、从不出售或存入银行（按住 Shift 点击，将其放入聊天输入行）",  -- 1027
-        "在银行：存入银行里已有的物品和所有标记为存银行的物品",  -- 1028
-        "在银行：取出你身上已有的物品",  -- 1029
-        "打开银行后立即存放",  -- 1030
-        "银行自动接收材料（游戏自带的选项）",  -- 1031
-        "文字大小，以百分比表示（150在电视上很清晰）",  -- 1032
-        "无事发生时玩家条的可见程度（0 为隐藏）",  -- 1033
-        "框体大小，百分比",  -- 1034
-        "将框体拖到你想要的位置（游戏的编辑模式也能做到）",  -- 1035
-        "将框体恢复到初始位置",  -- 1036
-        "播放一场简短的虚构战斗，查看框体如何反应（再次输入可停止）",  -- 1037
-        "将屏幕上的内容与设置对比（check all 列出每一行）",  -- 1038
-        "保存此客户端游戏手柄界面的描述（用于排查问题）",  -- 1039
-        "显示此列表",  -- 1040
-        "HUD最近遇到的错误，重载后也保留（用于报告）",  -- 1041
+        "聚焦最近的任务",  -- 544
+        "游戏为你指引的任务始终是列表中离你最近的那个；你自己聚焦的任务会保留十分钟不变",  -- 545
+        "任务列表：简短目标",  -- 546
+        "任务列表中的目标只保留必要的文字，前面带有类型图标：骷髅图标加 0/1 德雷德莱斯船长，而不是 0/1 已杀死德雷德莱斯船长",  -- 547
+        "聊天中的任务进度",  -- 548
+        "任务推进时在聊天中显示一行简短信息：血骨项链：4/25、一个目标完成、一个任务可以交付",  -- 549
+        "向小队报告任务进度",  -- 550
+        "在小队中（团队中不会），同样的内容会发到小队频道让其他人看到，每条间隔片刻；你也会在那里看到",  -- 551
+        "保留任务需要的物品",  -- 552
+        "任务日志中的任务仍需要的物品，或能开始一个你还能做的任务的物品，会标记为任务：绝不会替你卖掉或拍卖",  -- 553
+        "说出任务的推荐顺序：先交付已完成的，再做最近的可单人任务，然后是其余的",  -- 554
+        "任务左侧",  -- 555
+        "任务右侧",  -- 556
+        "任务下方",  -- 557
+        "采集清单已满。",  -- 558
+        "采集清单：%s，需要%d个。",  -- 559
+        "采集",  -- 560
+        "还有%d项",  -- 561
+        "暂无需采集的物品。",  -- 562
+        "再加一组",  -- 563
+        "移除",  -- 564
+        "清空",  -- 565
+        "完成",  -- 566
+        "清空整个采集清单？",  -- 567
+        "采集清单：选择 / 完成",  -- 568
+        "采集清单：添加你指向的物品",  -- 569
+        "它不在采集清单上。",  -- 570
+        "采集清单为空。",  -- 571
+        "采集清单：位置",  -- 572
+        "任务列表旁的采集清单",  -- 573
+        "你打算采集的东西，显示拥有数量和需要数量：你的背包和银行，以及你在本服务器其他角色的。可一键加入升级计划所需的材料，也可加入任意物品",  -- 574
+        "采集清单放在任务列表左侧、右侧或其任务下方",  -- 575
+        "任务列表旁的采集清单：用手柄选择；add <物品> [数量]，remove <物品>，clear，或用 left / right / bottom 设置位置",  -- 576
+        "不在战斗中。",  -- 577
+        "此客户端没有手柄动作条。",  -- 578
+        "此客户端不允许插件修改；请使用编辑模式。",  -- 579
+        "手柄动作条：%s",  -- 580
+        "紧凑",  -- 581
+        "完整",  -- 582
+        "精简手柄动作条",  -- 583
+        "隐藏手柄动作条后面的厚重图案并缩小显示",  -- 584
+        "手柄动作条大小",  -- 585
+        "开启精简动作条时手柄动作条的大小，百分比",  -- 586
+        "游戏自带手柄动作条的紧凑或完整模式（与其编辑模式设置相同）",  -- 587
+        "脱战淡出",  -- 588
+        "/cchud fade <部分> on | off 设置其中一项；all 表示整个淡出。",  -- 589
+        "手柄动作条、小地图、任务列表、伤害统计和经验条在脱战时一起休息，并在战斗、扣下扳机或有敌对目标时恢复",  -- 590
+        "休息时的屏幕",  -- 591
+        "脱战时屏幕上休息的部分保持多明显（0 为隐藏）",  -- 592
+        "淡出：手柄动作条",  -- 593
+        "淡出：小地图",  -- 594
+        "淡出：任务列表",  -- 595
+        "淡出：伤害统计",  -- 596
+        "淡出：经验条",  -- 597
+        "淡出：增益效果",  -- 598
+        "淡出：冷却行",  -- 599
+        "屏幕的这一部分是否在脱战时与其余部分一起淡出（关闭：始终保持原样）",  -- 600
+        "脱战时的屏幕淡出：哪些部分淡出（小地图、任务列表等），每项可开可关",  -- 601
+        "已保存：输入 /reload 让游戏把它写入磁盘。",  -- 602
+        "姿态和宠物按钮移到动作条上方",  -- 603
+        "姿态和宠物指令按钮放在原来绿色和红色选目标图标的位置，这样它们的轮盘能完整显示在屏幕上；那些图标会被隐藏",  -- 604
+        "列出手柄动作条各部分的位置以及哪些在休息（用于排查问题）",  -- 605
+        "自动",  -- 606
+        "通用",  -- 607
+        "游戏自带",  -- 608
+        "按键图标：%s。",  -- 609
+        "目前没有正在使用的手柄，或者游戏没有图标样式：有手柄时会自动设置。",  -- 610
+        "游戏没有接受按键图标的设置。",  -- 611
+        "手柄没有说明自己是什么：图标保持游戏原样。",  -- 612
+        "游戏为你的手柄按键显示的图标：auto（按正在使用的手柄）、xbox、playstation、switch、steam、generic（数字），或用 game 保持游戏原样",  -- 613
+        "冷却行避开手柄动作条",  -- 614
+        "游戏的冷却行放在目标下方而不是压在手柄按键上，并略微缩小（仅在游戏自带布局下：在你自己的布局中它们留在你放的位置）",  -- 615
+        "钓鱼模式：关闭。",  -- 616
+        "钓鱼：按%s抛竿",  -- 617
+        "没有鱼饵：按两次%s使用%s",  -- 618
+        "按%s收起鱼竿",  -- 619
+        "钓鱼模式：按%s抛竿，鱼漂晃动时再按一次收竿。",  -- 620
+        "%s 收竿，%s 重新抛竿",  -- 621
+        "钓鱼模式需要手持鱼竿。",  -- 622
+        "你没有学会钓鱼。",  -- 623
+        "钓鱼模式：一个按钮抛竿和提竿",  -- 624
+        "钓鱼按键：%s",  -- 625
+        "一键钓鱼",  -- 626
+        "手持鱼竿时：没有可互动的目标时，用互动按钮抛竿，鱼漂晃动时再按一次收竿；渔获自动拾取。按B收起鱼竿并换回武器",  -- 627
+        "一键重新抛竿",  -- 628
+        "浮标在水上时，钓鱼按钮按一下就重新抛竿，用 A 收竿钓鱼（游戏不提供可等待的咬钩信号，所以一个按钮无法兼顾两者）；关闭：钓鱼按钮像游戏的互动一样收竿",  -- 629
+        "双击上饵",  -- 630
+        "快速按两下钓鱼按键：当鱼竿上没有鱼饵时，第二下会把背包里最好的鱼饵装到鱼竿上",  -- 631
+        "钓鱼时隐藏手柄动作条",  -- 632
+        "手持鱼竿时隐藏手柄动作条，水面一览无余；钓鱼提示显示抛竿的按钮。战斗开始或收起鱼竿时立即恢复",  -- 633
+        "暂时关闭一键钓鱼，或重新开启（手持鱼竿时会自动开启）",  -- 634
+        "用于钓鱼的按键：起初是你的互动键（方块或 X），也可以是任何其他按键，例如扳机键 (rt)",  -- 635
+        "杜隆塔尔的海岸尽是红岩与温暖的浅滩。回音群岛的巨魔说，潮水捎来岛上炊火味道的时候，鲭鱼群最旺。",  -- 636
+        "莫高雷的湖泊小巧、清澈，也很有耐心。牛头人钓鱼和做别的事一样：慢慢来，并且心怀感恩。",  -- 637
+        "贫瘠之地的每一处绿洲都是聚会的地方。不管白天来喝水的是什么，夜里总有东西在水下游动。",  -- 638
+        "泰达希尔的水潭全都躺在同一棵树的树荫里。暗夜精灵钓手们发誓说，那儿的鱼从没见过太阳，也并不想念。",  -- 639
+        "黑海岸的海水灰暗、冰冷，满是沉船。在奥伯丁外海咬钩的鱼，有一半都把家安在了别人丢失的货物里。",  -- 640
+        "灰谷的河流在比大多数王国还古老的树叶下流淌。鱼儿很快，哨兵赶来盘问你在干什么更快。",  -- 641
+        "在千针石林的谷底，水很稀少，被人看得很紧。这里的鱼，位置都是自己挣来的。",  -- 642
+        "石爪山脉的湖泊高踞群峰之间，寒冷刺骨。要不是这么好钓，地精早就把湖水抽干了。",  -- 643
+        "凄凉之地的海岸只有白骨和灰色的浪。水底下有什么东西，对这两样都很有胃口。",  -- 644
+        "菲拉斯一路绿到水边。那里的河又深又暖，生机勃勃得很。",  -- 645
+        "没人说得清尘泥沼泽的陆地到哪儿为止、水从哪儿开始。站在岸上钓吧，钓完记得数数脚趾。",  -- 646
+        "整个塔纳利斯只有热砂港的水还配叫水。地精会把钓鱼的权利卖给你，你要是不留神，他们会卖两次。",  -- 647
+        "艾萨拉明亮的海湾之下躺着一座沉没的城市。老钓手说，大家伙都住在从前的花园里。",  -- 648
+        "费伍德森林的水潭会发光，可不是什么好兆头的那种光。还在里面游的东西，顽固得不讲道理。",  -- 649
+        "安戈洛的温泉和焦油环绕的湖泊，留住了被外面的世界遗忘的东西。其中有一些还会咬。",  -- 650
+        "月光林地的月神湖平静得像屏住的一口气。德鲁伊只有一个请求：吃多少，钓多少。",  -- 651
+        "希利苏斯只有沙子、风和振翅的声音。要是你在这儿找到了能钓鱼的水，谁也别告诉。",  -- 652
+        "冬泉谷的湖泊边缘结冰，中间却冒着热气。那里的鱼为了御寒长得肥美，值得走这一趟。",  -- 653
+        "在奥格瑞玛的水池边钓鱼的，是闲着没事的苦工，还有自称也闲着没事的老步兵。两种人都会告诉你，大的那条跑了。",  -- 654
+        "雷霆崖池塘里的鱼，一辈子都住在远高于平原的地方。它看上去倒挺淡定。",  -- 655
+        "达纳苏斯照看水域，就像照看神殿一样用心。鱼儿早已习惯了被人欣赏。",  -- 656
+        "奥特兰克山脉的湖水是融化的雪水，食人魔和辛迪加趁没人看见的时候在那儿钓鱼。",  -- 657
+        "阿拉希的岸边见过的军队比钓手还多。水面上飘的是谁家的旗帜，鱼儿早就不在乎了。",  -- 658
+        "荒芜之地从这头到那头全是尘土。在这里有鱼咬钩算是个小小的奇迹，请拿它当奇迹对待。",  -- 659
+        "诅咒之地的海岸赤红、荒秃而寂静。能活在那片浪里的东西，早就学会了忍受许多。",  -- 660
+        "提瑞斯法的湖泊静卧在病恹恹的天空下。被遗忘者钓鱼是出于习惯；死人吃得不多，但他们记得自己曾经爱吃。",  -- 661
+        "银松森林漫长的海岸上只有雾气和松影。这里鱼很好钓，这也是人们对这地方唯一说得出的好话。",  -- 662
+        "西瘟疫之地的河还在流，只是不干净。从里面拉上来的东西，请多看一眼。",  -- 663
+        "很少有人在东瘟疫之地钓鱼，肯承认的就更少了。瘟疫给这片水留下了多少，它就守着多少。",  -- 664
+        "希尔斯布莱德的河流和漫长的南岸，在每一场为争夺它们而起的纷争中，都养活过交战的双方。",  -- 665
+        "辛特兰把湖泊藏在高处的林间，蛮锤矮人以为没人看见的时候，会骑在狮鹫背上钓鱼。",  -- 666
+        "丹莫罗的湖泊一年里大半时间都围着一圈冰。矮人会凿个洞，端着一杯酒坐下来，不管钓上什么都说今天过得不错。",  -- 667
+        "别处有河的地方，灼热峡谷有的是熔岩。还是改带点喝的来吧。",  -- 668
+        "燃烧平原只有灰烬和余火。这里的水要是真肯给你点什么，那也一定是烫的。",  -- 669
+        "艾尔文的每个孩子都是在水晶湖或石碑湖学会钓鱼的。那里的小鱼已经把一代又一代的孩子耍得团团转。",  -- 670
+        "逆风小径水少，欢迎你的人更少。卡拉赞下面水潭里的东西，最好就让它留在那儿。",  -- 671
+        "沿着暮色森林边缘流淌的河，什么时候看都是黑的。鱼似乎不介意黑暗，钓鱼的人可介意。",  -- 672
+        "洛克湖是洛克莫丹的骄傲，由宏伟的巨石水坝拦蓄而成。矮人讲钓鱼故事时总爱拿它来比，而赢的通常是湖。",  -- 673
+        "赤脊山的止水湖美得像一幅画，湖畔镇的每座码头上都有人垂钓。镇民知道每一个好钓点，却一个也不会告诉你。",  -- 674
+        "从丛林里的河流到荒凉的南海角，荆棘谷拥有这片大陆上最丰饶的水域。藏宝海湾的钓手为此举办钓鱼大赛，而且几乎个个作弊。",  -- 675
+        "悲伤沼泽就是绿树下的一片绿水。鱼有股泥味，而本地人就好这一口。",  -- 676
+        "西部荒野的田地荒了，海岸却没有。留下来的人靠着这条漫长的灰色海岸过活。",  -- 677
+        "湿地名副其实。米奈希尔港的码头是这里最干的钓鱼处，鳄鱼们也清楚这一点。",  -- 678
+        "在暴风城运河边钓鱼的有孩子、退休老人，还有至少一位乔装打扮的贵族。运河里还有些什么，没人过问。",  -- 679
+        "荒弃的洞穴里有铁炉堡唯一一处安静的水潭。老矮人一钓就是几个钟头，一句话也不说。",  -- 680
+        "幽暗城的运河泛着一种绿色，跟水藻毫无关系。在那儿钓鱼的被遗忘者，可不是为了晚饭。",  -- 681
+        "大多数钓手钓上的第一条鱼，鲜亮得让人忘不了。",  -- 682
+        "滑溜、敏捷，每一处温暖的海岸都很常见。烤着吃比它的名字听起来要好。",  -- 683
+        "浑身上下就是一张嘴，在你不愿喝的水里过得最快活。",  -- 684
+        "个头小，牙齿尖，天不怕地不怕。据说一群这种鱼曾把一头熊赶出了洛克湖。",  -- 685
+        "浪花下的一抹亮色。水手们认为钓线上挂着一条，这趟航行就会走运。",  -- 686
+        "一种很有耐心的底栖鱼，长着矮人长老一般的胡须。",  -- 687
+        "没人会吃第二次。炼金师却是有多少收多少。",  -- 688
+        "它的鳍像压着火的余炭一样发亮，榨出来的油烧起来也差不了多少。",  -- 689
+        "像一面小盾牌一样披着甲。里面的肉值得你费这番功夫。",  -- 690
+        "哀嚎洞穴附近的水里有什么东西改变了它。吃上一条，你也可能跟着变一阵子。",  -- 691
+        "住在河边的人说，吃一顿它能让头脑清明。让它变聪明的，其实是逆流而上的那段路。",  -- 692
+        "比它的表亲更老、更大，也更睿智，可这并没有让它躲开你的鱼钩。",  -- 693
+        "来自温暖南海的狠角色，挣扎起来毫不含糊。从藏宝海湾到加基森，每家酒馆的菜牌上都少不了它。",  -- 694
+        "它的额头像真正的秘银一样闪亮。想把它拿去熔炼的矿工不止一个。",  -- 695
+        "它的鳞片能熬成一种油，让皮肤硬如岩石。它更喜欢夜晚。",  -- 696
+        "亮得像阅兵用的胸甲，也差不多一样沉。",  -- 697
+        "它只在寒冷的月份才游到近岸，懂行的厨师会等上一整年。",  -- 698
+        "白昼变长的时候它就成群洄游。沿海的人靠它来辨认时节。",  -- 699
+        "抓它要抓中间，而且只有一次机会。",  -- 700
+        "来自荒野之地的河鱼，鳃红得像巨魔的战纹。",  -- 701
+        "它在天黑后觅食。用它熬的汤能安抚施法者的神经。",  -- 702
+        "它在白天觅食，几乎处处与夜鳞鲷鱼相反，却照样与它同住一片水。",  -- 703
+        "严格说来不算鱼。它不同意被抓，而且会让你知道。",  -- 704
+        "苍白如河冰，产自北方寒冷清澈的湖泊。",  -- 705
+        "你得用上两只手，也许还得叫上一位朋友。",  -- 706
+        "%.1f磅",  -- 707
+        "钓鱼日志新增：%s，%s。",  -- 708
+        "钓鱼日志新增：%s。",  -- 709
+        "你迄今最重的%s：%s（之前是%s）。",  -- 710
+        "钓鱼日志",  -- 711
+        "每次渔获都会写进你的钓鱼日志：每种的数量、第一次钓到的地点，以及为了好玩而编造的重量和每种的最佳纪录（/cchud journal 打开它）",  -- 712
+        "鱼饵 %s",  -- 713
+        "没有鱼饵",  -- 714
+        "钓到 %d",  -- 715
+        "跑掉 %d",  -- 716
+        "钓鱼界面",  -- 717
+        "手持鱼竿时：你所在水域的鱼（还没在这里钓到的保持隐藏）、你的钓鱼技能和鱼饵的加成、钓到多少和跑掉多少、鱼饵还能持续多久，以及你最近的渔获",  -- 718
+        "好奇的一条：+%d%%",  -- 719
+        "让鱼饵保持在鱼的旁边",  -- 720
+        "下一条渔获 +%d%%",  -- 721
+        "按住 %s：鱼饵沿着鱼线移动",  -- 722
+        "连续 %d 条",  -- 723
+        "浮标在水里时的小游戏",  -- 724
+        "在鱼线入水时于施法条上进行：按住扳机，鱼饵沿着鱼线移动，松开则漂回；让它待在鱼影旁边。玩得越好，下一条渔获的虚构重量越重。不占用任何按钮，也从不影响抛竿或收获",  -- 725
+        "钓到 %d，%d 种，跑掉 %d",  -- 726
+        "最重：%s，%s",  -- 727
+        "鱼",  -- 728
+        "水域",  -- 729
+        "还没有钓到任何东西。带上鱼竿去水边吧。",  -- 730
+        "钓到：%d",  -- 731
+        "最重：%s，于%s",  -- 732
+        "首次钓到：%s",  -- 733
+        "在这里钓到：%d",  -- 734
+        "在这里发现的种类：%d",  -- 735
+        "选择",  -- 736
+        "关闭",  -- 737
+        "打开或关闭你的钓鱼日志：你钓到过的每个种类、每种最重的一条，以及你钓过鱼的水域",  -- 738
+        "聊天安静时淡出",  -- 739
+        "几秒内没有新消息时聊天文字淡出",  -- 740
+        "聊天淡出前的秒数",  -- 741
+        "聊天文字在淡出前停留的时间",  -- 742
+        "地图上的坐标",  -- 743
+        "在世界地图下方显示你的坐标",  -- 744
+        "自你登录以来已有 %d 条消息被作为垃圾信息隐藏。",  -- 745
+        "其中 %d 条是重复的公会招募。",  -- 746
+        "聊天中的职业图标和等级",  -- 747
+        "在玩家名字前用方括号显示其职业图标和等级（在游戏允许我们得知时）",  -- 748
+        "聊天中使用简短频道名",  -- 749
+        "行首的频道名会被缩写：[P] 小队，[PL] 小队队长，[G] 公会，[O] 官员，[R] 团队，[RL] 团队领袖，[I] 副本，带编号的频道只显示编号，[1]",  -- 750
+        "聊天中只显示名字",  -- 751
+        "带姓氏的名字只显示名字（Jory Spleeneater 显示为 Jory）；对它密语或右键点击仍然对应完整名字",  -- 752
+        "聊天文字大小",  -- 753
+        "聊天窗口中文字的大小，按游戏自身大小的比例设置（游戏自身的设置保持不变）",  -- 754
+        "隐藏金币商人和重复广告",  -- 755
+        "带有网址的出售金币或服务的消息，以及同一玩家重复发送的相同消息，将被隐藏（你的队伍、公会和好友除外）",  -- 756
+        "隐藏重复的公会招募",  -- 757
+        "在公共频道中，公会招募消息只显示一次；15 分钟内同一玩家再次发送的，或几乎相同的消息将被隐藏（你的队伍、公会和好友除外）",  -- 758
+        "列出最近被作为垃圾信息隐藏的聊天消息",  -- 759
+        "飞行",  -- 760
+        "目的地未知",  -- 761
+        "按距离估算",  -- 762
+        "此航线首次飞行：正在记录飞行时间",  -- 763
+        "即将降落",  -- 764
+        "%s：约 %s，按距离估算",  -- 765
+        "%s：约 %s",  -- 766
+        "%s：此航线首次飞行，时间未知",  -- 767
+        "飞行中，目的地未知",  -- 768
+        "%s：已记住飞行时间，%s",  -- 769
+        "已知 %d 条飞行航线。",  -- 770
+        "飞行：时间和倒计时",  -- 771
+        "飞行时在聊天中说明目的地和所需时间，屏幕顶部的计时条倒数至降落；每条航线的时间从你的飞行中学习",  -- 772
+        "飞行：坐骑沿进度条飞行",  -- 773
+        "狮鹫、双足飞龙或蝙蝠（飞行管理员给你的那只）沿飞行进度条飞向你的降落地点",  -- 774
+        "列出已知时间的飞行航线",  -- 775
+        "落地！+%d",  -- 776
+        "撞进云里：连击中断",  -- 777
+        "%d 飞行金币",  -- 778
+        "%s 振翅",  -- 779
+        "%s 撒网",  -- 780
+        "%s 高空",  -- 781
+        "%s：回到游戏（%d 飞行金币）",  -- 782
+        "%s：途中的小游戏",  -- 783
+        "飞行小游戏已关闭：/cchud flightgame on",  -- 784
+        "飞行小游戏在飞行途中进行。",  -- 785
+        "战斗中不行。",  -- 786
+        "飞行小游戏：开始 / 高空",  -- 787
+        "飞行：途中的小游戏",  -- 788
+        "飞行时会在飞行条下方提供一个小游戏，按一个按钮开始（开始前只占用这一个按钮）：让坐骑振翅穿过云层，用网捕获迎面而来的骑手，让他们落地以赢得飞行金币。再按同一个按钮就是高空：游戏收起，按钮重新归游戏所有。战斗中从不出现，降落后消失",  -- 789
+        "飞行途中：开始飞行小游戏，或把它收到高空再拿回来",  -- 790
+        "飞行是个好时机。",  -- 791
+        "你已经玩了 %s。",  -- 792
+        "该喝口水了",  -- 793
+        "喝水提醒",  -- 794
+        "游戏时不时温和地提醒你喝口水（战斗中不会）",  -- 795
+        "喝水提醒间隔（分钟）",  -- 796
+        "两次喝水提醒之间的游戏分钟数",  -- 797
+        "飞行开始时提醒喝水",  -- 798
+        "飞行是天然的休息：开始飞行时会提醒你喝水，除非上次提醒才过去不久",  -- 799
+        "显示喝水提醒",  -- 800
+        "重新设计游戏自带的框体",  -- 801
+        "鼠标提示、增益、任务追踪、小地图、经验条、聊天标签和手柄动作条采用HUD的外观（鼠标界面保持游戏原样）",  -- 802
+        "经验条大小",  -- 803
+        "重新设计样式时经验条和声望条的大小，百分比",  -- 804
+        "鼠标提示",  -- 805
+        "暗色玻璃样式的鼠标提示，边缘为玩家职业颜色或物品品质颜色",  -- 806
+        "手柄动作条",  -- 807
+        "手柄按钮采用深色底座上的纤细圆环，取代厚重的图案",  -- 808
+        "增益",  -- 809
+        "你的增益和减益图标经过裁切并加边框，其时间带描边",  -- 810
+        "任务追踪",  -- 811
+        "任务追踪的标题采用暗色玻璃样式，其文字行带描边",  -- 812
+        "小地图",  -- 813
+        "在小地图周围显示纤细圆环和柔和光晕，取代金色边框",  -- 814
+        "经验条",  -- 815
+        "经验条和声望条稍小一些，使用各自的颜色",  -- 816
+        "聊天",  -- 817
+        "聊天标签名称带描边，输入框采用暗色玻璃样式",  -- 818
+        "伤害统计",  -- 819
+        "游戏伤害统计以HUD风格显示：深色背景上的斜条和描边文字；功能完全保留",  -- 820
+        "检查：%d 项中通过 %d 项",  -- 821
+        "自你登录以来游戏没有卡顿过。",  -- 822
+        "游戏卡顿的时刻，以及每次中 HUD 所占的部分：",  -- 823
+        "HUD 最慢的时刻：",  -- 824
+        "调试报告",  -- 825
+        "自动收集排查问题的报告：登录时，以及重载或登出时再收集一次（保存在已保存的设置中）",  -- 826
+        "自你登录以来游戏卡顿的时刻，以及每次中 HUD 自身工作所占的部分",  -- 827
+        "HUD预设：%s，与镜头匹配",  -- 828
+        "预设：%s",  -- 829
+        "名为“%s”的布局已添加到游戏的编辑模式。请在那里选择它以使用（游戏菜单 > 编辑模式 > 布局）。",  -- 830
+        "未知预设 '%s'",  -- 831
+        "适合电视：HUD 和聊天中的文字更大。",  -- 832
+        "适合显示器：文字为普通大小。",  -- 833
+        "我们的框体已回到起始位置。请在编辑模式中选择游戏的%s布局（游戏菜单 > 编辑模式 > 布局）。",  -- 834
+        "预设会设置镜头距离",  -- 835
+        "预设还会把镜头一次性调到其布局所设计的距离（之后可自由缩放）",  -- 836
+        "动作",  -- 837
+        "第三人称视角：角色旁的纤细竖条，所有效果开启；脱战时一切淡出",  -- 838
+        "经典",  -- 839
+        "我们的框体位于魔兽世界一贯的位置，特效更柔和，保留游戏自带的手柄动作条",  -- 840
+        "极简",  -- 841
+        "只显示需要的：友方NPC只在你指向、瞄准或选中时显示姓名板（含职能）；名字不带头衔；脱战时你的条淡淡显示（生命值低时总会显示）",  -- 842
+        "开放世界",  -- 843
+        "适合探索的干净界面：身旁静息时变淡的细条、不带能量条的姓名板、会淡出的聊天",  -- 844
+        "冒险",  -- 845
+        "参照主机开放世界冒险：生命状态在你身旁，小目标框在中上方，村民仅在你指向时显示，聊天快速淡出",  -- 846
+        "魂系",  -- 847
+        "你的条在左上角，目标条像首领血条一样大而居中靠下，每一击都有感觉",  -- 848
+        "射击",  -- 849
+        "中央偏右的竖条靠近准星，目标在上方，强烈的命中反馈",  -- 850
+        "十字栏",  -- 851
+        "参照手柄玩的MMO：目标和焦点在中上方，你的条紧贴手柄动作条上方，小队在左侧，完整姓名板",  -- 852
+        "ARPG",  -- 853
+        "参照动作RPG：镜头拉远，生命状态在左下方，目标在中上方，杂兵显示较小，每次命中都很醒目",  -- 854
+        "罗盘",  -- 855
+        "参照第一人称RPG：镜头拉近，你的条在中下方，目标在顶部边缘下方，村民仅在你指向时显示",  -- 856
+        "团队",  -- 857
+        "WoW 原有布局加上团队所需的一切：小队和团队框体、姓名板上的生命百分比和等级",  -- 858
+        "跟随ControllerCam的预设",  -- 859
+        "在ControllerCam中为所有情境选择镜头预设时，也会选择匹配的HUD预设（镜头保持自己的距离）",  -- 860
+        "现代",  -- 861
+        "将整个HUD设为预设：action, classic, minimal, openworld, adventure, soulslike, shooter, crossbar, arpg, compass, raid",  -- 862
+        "目标框体和姓名板同时设为紧凑或完整",  -- 863
+        "目标框体设为紧凑或完整",  -- 864
+        "按房间另一头的电视或一臂之遥的显示器来设定文字大小",  -- 865
+        "把我们的框体放回起始位置，以配合游戏自带的现代或经典布局",  -- 866
+        "你的整套设置（HUD、镜头和游戏布局）：复制这一行（Ctrl+C）以保存或分享。",  -- 867
+        "粘贴一行 HUD 设置（Ctrl+V）并确认。",  -- 868
+        "这一行已损坏：请重新完整复制。",  -- 869
+        "这一行由更新的版本生成：请更新插件。",  -- 870
+        "这不是一行 HUD 设置。",  -- 871
+        "设置已导入：采用 %d 项，略过 %d 项。",  -- 872
+        "镜头设置也一并导入了。",  -- 873
+        "镜头设置保持原样。",  -- 874
+        "游戏布局现在是“%s”。",  -- 875
+        "游戏布局保持原样。",  -- 876
+        "你的设置，作为一行文本，用于保存或分享",  -- 877
+        "从由 /cchud export 生成的文本行中读取设置",  -- 878
+        "使用手柄界面时 HUD 已开启。它的选项：选项 > 插件 > ControllerCam > HUD，或 /cchud。",  -- 879
+        "仅镜头：HUD 休息，游戏界面保持原样。/cchud on 可将其开启。",  -- 880
+        "要同时为手柄设置屏幕吗？这会在游戏的编辑模式中添加一个名为 CCHUD 的布局，由你在那里选择：它把冷却行放在目标下方，避开手柄按键。你自己的布局会保留（/cchud setup 可再次提供此选项）。",  -- 881
+        "设置",  -- 882
+        "暂不",  -- 883
+        "ControllerCam 附带一套手柄界面，即 HUD：使用手柄界面时显示它自己的单位框体、姓名板、施法条等。你想要它，还是只要镜头？",  -- 884
+        "镜头 + HUD",  -- 885
+        "仅镜头",  -- 886
+        "此客户端不允许插件更改布局。",  -- 887
+        "再问一次：镜头加 HUD，还是只要镜头",  -- 888
+        "再次提供为 HUD 制作的屏幕布局（游戏的编辑模式）",  -- 889
+        "使用游戏手柄界面时显示。请在游戏的编辑模式中拖动我们的框体。",  -- 890
+        "预设",  -- 891
+        "适合的屏幕",  -- 892
+        "电视",  -- 893
+        "显示器",  -- 894
+        "按键图标",  -- 895
+        "游戏为你的手柄按键显示的图标：根据正在使用的手柄自动识别，或你选择的类型",  -- 896
+        "字体",  -- 897
+        "重置游戏布局",  -- 898
+        "试一试",  -- 899
+        "播放演示",  -- 900
+        "显示所有命中特效",  -- 901
+        "运行自检",  -- 902
+        "手柄动作条：紧凑 / 完整",  -- 903
+        "导出设置",  -- 904
+        "导入设置",  -- 905
+        "在主页面勾选「显示高级选项」以查看所有设置。",  -- 906
+        "模块",  -- 907
+        "快速开关",  -- 908
+        "通用",  -- 909
+        "HUD",  -- 910
+        "此客户端无法使用选项面板。",  -- 911
+        "启用",  -- 912
+        "整个 HUD；关闭后恢复游戏自带的框体",  -- 913
+        "鼠标和键盘界面中也启用",  -- 914
+        "通常 HUD 仅在使用游戏手柄界面时运行",  -- 915
+        "隐藏游戏自带的框体",  -- 916
+        "显示我们的框体时，隐藏游戏的玩家、目标和焦点框体",  -- 917
+        "聊天窗口移到左上角",  -- 918
+        "HUD 运行时将聊天窗口移到左上角",  -- 919
+        "空闲时的垂直条",  -- 920
+        "非战斗状态下生命值已满时，垂直条保持的可见程度（0 为隐藏）",  -- 921
+        "职业颜色",  -- 922
+        "按职业为你的血条和其他玩家的血条着色",  -- 923
+        "职业图标",  -- 924
+        "在目标和目标的目标的玩家名字前显示职业图标",  -- 925
+        "目标框体威胁",  -- 926
+        "目标框体上的盾牌图标和光晕：攻击你时为红色，即将拉到仇恨时红黄交替，正在失去仇恨时黄蓝交替，不在你身上时为蓝色",  -- 927
+        "全部使用紧凑条",  -- 928
+        "目标框体和姓名板使用紧凑样式，宽度略多于一半（仍可分别设置；预设不会改变它）",  -- 929
+        "紧凑目标框体",  -- 930
+        "目标框体宽度略大于一半",  -- 931
+        "战斗中的生命值颜色",  -- 932
+        "战斗中，生命值条随生命值下降由绿色经黄色变为红色",  -- 933
+        "文字背景阴影",  -- 934
+        "在目标文字后加一条淡淡的暗带，使其易于阅读",  -- 935
+        "文字大小",  -- 936
+        "我们框体上文字的大小",  -- 937
+        "框体大小",  -- 938
+        "我们的单位框体的大小",  -- 939
+        "战斗中的动作条",  -- 940
+        "在有事需要注意之前，战斗中你的动作条、宠物和焦点有多明显",  -- 941
+        "生命值低于时完整",  -- 942
+        "当你的生命值低于此值时，动作条恢复为完整",  -- 943
+        "法力值低于时完整",  -- 944
+        "当你的法力值低于此值时，动作条恢复为完整",  -- 945
+        "空闲时的玩家条",  -- 946
+        "生命值全满或脱离战斗时玩家条的可见程度（0 为隐藏）",  -- 947
+        "商人和银行帮助",  -- 948
+        "商人的“出售垃圾”按钮会询问出售什么；商人和银行处可快速移动",  -- 949
+        "显示高级选项",  -- 950
+        "所有设置，而不仅是主要开关",  -- 951
+        "玩家框体",  -- 952
+        "我们的玩家条，左上角",  -- 953
+        "目标框体",  -- 954
+        "我们的目标条，顶部中间",  -- 955
+        "宠物条",  -- 956
+        "玩家条下方或竖直条旁边的小型宠物条",  -- 957
+        "焦点框体",  -- 958
+        "我们的焦点框体",  -- 959
+        "角色旁的细长竖直生命条和能量条，适合第三人称视角（代替玩家条）",  -- 960
+        "商人打开时出售垃圾",  -- 961
+        "商人一打开就按你的规则出售垃圾",  -- 962
+        "白色武器和护甲算作垃圾",  -- 963
+        "将白色武器和护甲视为垃圾（工具、鱼竿、有使用效果的装备或可能是升级的物品除外；总是先询问）",  -- 964
+        "打开银行时存放",  -- 965
+        "标记为存银行的物品，以及（开启时）银行里已有的物品，会自动存入",  -- 966
+        "游戏自带的选项；我们的小框体会跟随它",  -- 967
+        "冷却管理器",  -- 968
+        "游戏的冷却管理器",  -- 969
+        "个人资源显示",  -- 970
+        "角色下方的生命值和能量",  -- 971
+        "银行自动接收材料",  -- 972
+        "游戏中银行的选项",  -- 973
+        "增益开始时显示提示",  -- 974
+        "游戏选项：增益生效时，其提示会短暂弹出（手柄界面）",  -- 975
+        "聊天名称使用职业颜色",  -- 976
+        "游戏的聊天设置，一次应用于所有聊天类型：玩家名称显示为其职业颜色",  -- 977
+        "打开选项面板（选项 > 插件 > ControllerCam HUD）",  -- 978
+        "框体",  -- 979
+        "屏幕淡出",  -- 980
+        "特效",  -- 981
+        "外观",  -- 982
+        "任务、聊天和地图",  -- 983
+        "背包、银行和商人",  -- 984
+        "钓鱼",  -- 985
+        "辅助功能",  -- 986
+        "原生选项",  -- 987
+        "%s  |  游戏手柄界面：%s  |  运行中：%s",  -- 988
+        "玩家 %s，目标 %s，宠物 %s，焦点 %s  |  已隐藏游戏框体：%s  |  聊天已移动：%s",  -- 989
+        "原生选项：目标的目标 %s，冷却管理器 %s，个人资源 %s",  -- 990
+        "文字大小 %d%%  |  文字阴影：%s",  -- 991
+        "商人和银行帮助：%s  |  自动出售：%s  |  白色装备算垃圾：%s",  -- 992
+        "空闲可见度 %d%%  |  缩放 %d%%  |  职业颜色：%s",  -- 993
+        "适用于游戏手柄界面的极简动作游戏风格 HUD。",  -- 994
+        "已启用",  -- 995
+        "已禁用：游戏自带的框体已恢复",  -- 996
+        "鼠标和键盘界面中也使用：%s",  -- 997
+        "已隐藏游戏框体：%s",  -- 998
+        "聊天已移到左上角：%s",  -- 999
+        "职业颜色：%s",  -- 1000
+        "此客户端没有该选项。",  -- 1001
+        "%s：%s（游戏自带的选项）",  -- 1002
+        "游戏目前不接受该操作。",  -- 1003
+        "商人和银行帮助：%s",  -- 1004
+        "自动出售：%s",  -- 1005
+        "白色装备算垃圾：%s",  -- 1006
+        "商人帮助已关闭。",  -- 1007
+        "用法：/cchud sell [junk | recommended | white | green | blue]",  -- 1008
+        "银行打开时存入已标记的物品：%s",  -- 1009
+        "用法：/cchud junk <item>（按住 Shift 点击物品，将其放入聊天输入行）",  -- 1010
+        "物品 %d：垃圾，与其余一起出售",  -- 1011
+        "物品 %d：保留，从不出售",  -- 1012
+        "物品 %d：存入银行",  -- 1013
+        "文字阴影：%s",  -- 1014
+        "用法：/cchud text <80-250>",  -- 1015
+        "文字大小 %d%%",  -- 1016
+        "演示已停止",  -- 1017
+        "HUD 未运行。",  -- 1018
+        "演示运行中：循环播放一场虚构的战斗。再次输入 /cchud demo 可停止。",  -- 1019
+        "用法：/cchud idle <0-100>",  -- 1020
+        "空闲可见度 %d%%",  -- 1021
+        "用法：/cchud scale <50-200>",  -- 1022
+        "缩放 %d%%",  -- 1023
+        "拖动框体，然后输入 /cchud lock。",  -- 1024
+        "框体已锁定",  -- 1025
+        "一切已恢复到初始状态：设置、框体和屏幕布局（你的商人标记和价格历史会保留）。",  -- 1026
+        "框体已恢复到初始位置",  -- 1027
+        "未知命令“%s”。输入 /cchud help",  -- 1028
+        "错误列表已清空。",  -- 1029
+        "没有记录的错误。",  -- 1030
+        "已记录 %d 个错误（最新的在最后）。/cchud errors clear 清空列表。",  -- 1031
+        "显示状态",  -- 1032
+        "开启或关闭 HUD（关闭后恢复游戏自带的框体）",  -- 1033
+        "鼠标和键盘界面中也使用 HUD",  -- 1034
+        "使用我们的框体，或游戏自带的",  -- 1035
+        "角色旁边的细长垂直生命值和能量条",  -- 1036
+        "目标的目标（游戏自带的选项，游戏菜单中也有）",  -- 1037
+        "游戏的冷却管理器（游戏自带的选项）",  -- 1038
+        "角色下方的生命值和能量（游戏自带的选项）",  -- 1039
+        "增益开始时弹出的提示（游戏自带选项）",  -- 1040
+        "保持游戏自带的玩家和目标框体可见（开）或将其隐藏（关）",  -- 1041
+        "在商人处：选择出售什么（另有：sell junk, sell recommended, sell white | green | blue）",  -- 1042
+        "将白色武器和护甲算作垃圾",  -- 1043
+        "标记物品：始终出售、从不出售或存入银行（按住 Shift 点击，将其放入聊天输入行）",  -- 1044
+        "在银行：存入银行里已有的物品和所有标记为存银行的物品",  -- 1045
+        "在银行：取出你身上已有的物品",  -- 1046
+        "打开银行后立即存放",  -- 1047
+        "银行自动接收材料（游戏自带的选项）",  -- 1048
+        "文字大小，以百分比表示（150在电视上很清晰）",  -- 1049
+        "无事发生时玩家条的可见程度（0 为隐藏）",  -- 1050
+        "框体大小，百分比",  -- 1051
+        "将框体拖到你想要的位置（游戏的编辑模式也能做到）",  -- 1052
+        "将框体恢复到初始位置",  -- 1053
+        "播放一场简短的虚构战斗，查看框体如何反应（再次输入可停止）",  -- 1054
+        "将屏幕上的内容与设置对比（check all 列出每一行）",  -- 1055
+        "保存此客户端游戏手柄界面的描述（用于排查问题）",  -- 1056
+        "显示此列表",  -- 1057
+        "HUD最近遇到的错误，重载后也保留（用于报告）",  -- 1058
     },
     zhTW = {
         "錯誤：",  -- 1
@@ -9939,504 +10092,521 @@ local TRANSLATIONS = {
         "讓任務清單依距離排序，最近的任務在最上面",  -- 541
         "任務清單：建議順序",  -- 542
         "讓任務清單保持建議順序：先是可以交付的，然後是你能獨自完成的（由近到遠），再是高於你等級的任務、獨自一人時的組隊任務，灰色任務排在最後",  -- 543
-        "任務清單：簡短目標",  -- 544
-        "任務清單中的目標只保留必要的文字，前面帶有類型圖示：骷髏圖示加 0/1 德雷德萊斯船長，而不是 0/1 已殺死德雷德萊斯船長",  -- 545
-        "聊天中的任務進度",  -- 546
-        "任務推進時在聊天中顯示一行簡短訊息：血骨項鍊：4/25、一個目標完成、一個任務可以交付",  -- 547
-        "向隊伍回報任務進度",  -- 548
-        "在隊伍中（團隊中不會），同樣的內容會發到隊伍頻道讓其他人看到，每條間隔片刻；你也會在那裡看到",  -- 549
-        "保留任務需要的物品",  -- 550
-        "任務日誌中的任務仍需要的物品，或能開始一個你還能做的任務的物品，會標記為任務：絕不會替你賣掉或拍賣",  -- 551
-        "說出任務的建議順序：先交付已完成的，再做最近的可單人任務，然後是其餘的",  -- 552
-        "任務左側",  -- 553
-        "任務右側",  -- 554
-        "任務下方",  -- 555
-        "採集清單已滿。",  -- 556
-        "採集清單：%s，需要%d個。",  -- 557
-        "採集",  -- 558
-        "還有%d項",  -- 559
-        "暫無需採集的物品。",  -- 560
-        "再加一組",  -- 561
-        "移除",  -- 562
-        "清空",  -- 563
-        "完成",  -- 564
-        "清空整個採集清單？",  -- 565
-        "採集清單：選擇 / 完成",  -- 566
-        "採集清單：加入你指向的物品",  -- 567
-        "它不在採集清單上。",  -- 568
-        "採集清單為空。",  -- 569
-        "採集清單：位置",  -- 570
-        "任務列表旁的採集清單",  -- 571
-        "你打算採集的東西，顯示擁有數量和需要數量：你的背包和銀行，以及你在本伺服器其他角色的。可一鍵加入升級計畫所需的材料，也可加入任意物品",  -- 572
-        "採集清單放在任務列表左側、右側或其任務下方",  -- 573
-        "任務列表旁的採集清單：用手把選擇；add <物品> [數量]，remove <物品>，clear，或用 left / right / bottom 設定位置",  -- 574
-        "不在戰鬥中。",  -- 575
-        "此客戶端沒有手把快捷列。",  -- 576
-        "此客戶端不允許插件修改；請使用編輯模式。",  -- 577
-        "手把快捷列：%s",  -- 578
-        "精簡",  -- 579
-        "完整",  -- 580
-        "精簡手把動作條",  -- 581
-        "隱藏手把動作條後方厚重的圖案並縮小顯示",  -- 582
-        "手把動作條大小",  -- 583
-        "開啟精簡動作條時手把動作條的大小，百分比",  -- 584
-        "遊戲內建手把快捷列的精簡或完整模式（與其編輯模式設定相同）",  -- 585
-        "脫戰淡出",  -- 586
-        "/cchud fade <部分> on | off 設定其中一項；all 表示整個淡出。",  -- 587
-        "手把快捷列、小地圖、任務列表、傷害統計和經驗條在脫離戰鬥時一起休息，並在戰鬥、扣下扳機或有敵對目標時恢復",  -- 588
-        "休息時的畫面",  -- 589
-        "脫離戰鬥時畫面上休息的部分保持多明顯（0 為隱藏）",  -- 590
-        "淡出：手把快捷列",  -- 591
-        "淡出：小地圖",  -- 592
-        "淡出：任務列表",  -- 593
-        "淡出：傷害統計",  -- 594
-        "淡出：經驗條",  -- 595
-        "淡出：增益效果",  -- 596
-        "淡出：冷卻列",  -- 597
-        "畫面的這一部分是否在脫離戰鬥時與其餘部分一起淡出（關閉：始終保持原樣）",  -- 598
-        "脫離戰鬥時的畫面淡出：哪些部分淡出（小地圖、任務列表等），每項可開可關",  -- 599
-        "已儲存：輸入 /reload 讓遊戲把它寫入磁碟。",  -- 600
-        "姿態和寵物按鈕移到快捷列上方",  -- 601
-        "姿態和寵物指令按鈕放在原本綠色和紅色選目標圖示的位置，這樣它們的輪盤能完整顯示在畫面上；那些圖示會被隱藏",  -- 602
-        "列出手把快捷列各部分的位置以及哪些在休息（用於排查問題）",  -- 603
-        "自動",  -- 604
-        "通用",  -- 605
-        "遊戲內建",  -- 606
-        "按鍵圖示：%s。",  -- 607
-        "目前沒有正在使用的控制器，或者遊戲沒有圖示樣式：有控制器時會自動設定。",  -- 608
-        "遊戲沒有接受按鍵圖示的設定。",  -- 609
-        "控制器沒有說明自己是什麼：圖示保持遊戲原樣。",  -- 610
-        "遊戲為你的控制器按鍵顯示的圖示：auto（依正在使用的控制器）、xbox、playstation、switch、steam、generic（數字），或用 game 保持遊戲原樣",  -- 611
-        "冷卻列避開手把快捷列",  -- 612
-        "遊戲的冷卻列放在目標下方而不是壓在手把按鍵上，並略微縮小（僅在遊戲內建版面下：在你自己的版面中它們留在你放的位置）",  -- 613
-        "釣魚模式：關閉。",  -- 614
-        "釣魚：按%s拋竿",  -- 615
-        "沒有魚餌：按兩次%s使用%s",  -- 616
-        "按%s收起魚竿",  -- 617
-        "釣魚模式：按%s拋竿，浮標晃動時再按一次收竿。",  -- 618
-        "%s 收竿，%s 重新拋竿",  -- 619
-        "釣魚模式需要手持魚竿。",  -- 620
-        "你沒有學會釣魚。",  -- 621
-        "釣魚模式：一個按鈕拋竿和提竿",  -- 622
-        "釣魚按鍵：%s",  -- 623
-        "一鍵釣魚",  -- 624
-        "手持魚竿時：沒有可互動的目標時，用互動按鈕拋竿，浮標晃動時再按一次收竿；漁獲自動拾取。按B收起魚竿並換回武器",  -- 625
-        "一鍵重新拋竿",  -- 626
-        "浮標在水上時，釣魚按鈕按一下就重新拋竿，用 A 收竿釣魚（遊戲不提供可等待的咬鉤訊號，所以一個按鈕無法兼顧兩者）；關閉：釣魚按鈕像遊戲的互動一樣收竿",  -- 627
-        "連按兩下上餌",  -- 628
-        "快速按兩下釣魚按鍵：當魚竿上沒有魚餌時，第二下會把背包裡最好的魚餌裝到魚竿上",  -- 629
-        "釣魚時隱藏控制器動作條",  -- 630
-        "手持魚竿時隱藏手把快捷列，水面一覽無遺；釣魚提示顯示拋竿的按鈕。戰鬥開始或收起魚竿時立即恢復",  -- 631
-        "暫時關閉一鍵釣魚，或重新開啟（手持釣竿時會自動開啟）",  -- 632
-        "用於釣魚的按鍵：起初是你的互動鍵（方塊或 X），也可以是任何其他按鍵，例如扳機鍵 (rt)",  -- 633
-        "杜洛塔的海岸是一片紅岩與溫暖的淺灘。回音群島的食人妖說，當潮水捎來島上炊火的氣味時，鯖魚群最是密集。",  -- 634
-        "莫高雷的湖泊小巧、清澈，而且從容。牛頭人釣魚就跟做其他事情一樣：慢慢來，並且心懷感謝。",  -- 635
-        "貧瘠之地的每座綠洲都是聚會場所。不論白天來喝水的是誰，到了夜裡，水面下總有東西在游。",  -- 636
-        "泰達希爾的池水全都在同一棵樹的樹蔭底下。夜精靈釣客信誓旦旦地說，那裡的魚從沒見過太陽，也一點都不想念。",  -- 637
-        "黑海岸的海水灰濛濛、冷冰冰，到處是沉船殘骸。在奧伯丁外海上鉤的魚，有一半都在某人遺失的貨物裡安了家。",  -- 638
-        "梣谷的河流在比多數王國還古老的枝葉下流過。魚的動作很快，但哨兵跑來問你在做什麼的動作更快。",  -- 639
-        "在千針石林底下，水源稀少，而且被看得死緊。這裡的魚，都是憑本事掙得一席之地的。",  -- 640
-        "石爪山脈的湖泊高高座落在群峰之間，冷得很。要不是這裡這麼好釣，哥布林早就把湖水抽光了。",  -- 641
-        "淒涼之地的海岸只有骨骸與灰色的浪花。水底下有個東西，兩樣都愛吃。",  -- 642
-        "菲拉斯一路綠到水邊。這裡的河流又深又暖，而且活力十足。",  -- 643
-        "沒有人確定塵泥沼澤的陸地在哪裡結束、水又從哪裡開始。請在岸上釣魚，釣完後數一數自己的腳趾。",  -- 644
-        "塔納利斯唯一稱得上是水的地方就在熱砂港。哥布林會把釣魚權賣給你，你不注意的話還會賣你兩次。",  -- 645
-        "艾薩拉明亮的海灣底下有一座沉沒的城市。老釣客說，大魚都住在昔日的花園裡。",  -- 646
-        "費伍德森林的水池會發光，但不是好的那種。還在裡頭游的東西，頑強到毫無道理可言。",  -- 647
-        "安戈洛的溫泉與焦油圍繞的湖泊，保存了世界其他地方早已遺忘的東西。其中有些還會咬。",  -- 648
-        "月光林地的月神湖靜得像屏住的呼吸。德魯伊只要求一件事：吃多少就拿多少。",  -- 649
-        "希利蘇斯只有沙、風，還有翅膀拍動的聲音。如果你在這裡找到了能釣魚的水，別告訴任何人。",  -- 650
-        "冬泉谷的湖泊邊緣結冰，中央卻冒著蒸氣。那裡的魚為了禦寒養得肥滋滋的，值得你走這一趟。",  -- 651
-        "在奧格瑪的水池釣魚的，有無事可做的苦工，也有嘴上說自己同樣無事可做的老步兵。兩邊都會告訴你，最大的那條跑掉了。",  -- 652
-        "雷霆崖池塘裡的魚，一輩子都住在比平原高出一大截的地方。牠看起來倒是很平靜。",  -- 653
-        "達納蘇斯對待水域就像對待神殿一樣細心。魚兒已經習慣受人讚賞了。",  -- 654
-        "奧特蘭克山脈的湖泊是融雪匯成的，巨魔和辛迪加會趁沒人注意時來釣魚。",  -- 655
-        "阿拉希的岸邊見過的軍隊比釣客還多。水面上飄揚的是誰的旗幟，魚兒早就不在意了。",  -- 656
-        "荒蕪之地從頭到尾都是塵土。在這裡有魚上鉤是個小小的奇蹟，請把它當奇蹟看待。",  -- 657
-        "詛咒之地的海岸赤紅、光禿又安靜。活在那片浪裡的東西，已經學會跟很多事情共存。",  -- 658
-        "提里斯法的湖泊靜靜躺在病懨懨的天空下。被遺忘者釣魚是出於習慣；死者吃得不多，但他們還記得自己喜歡過。",  -- 659
-        "銀松森林長長的海岸盡是霧氣與松影。這裡很好釣，這也是大家對這個地方唯一說得出口的好話。",  -- 660
-        "西瘟疫之地的河流還在流，只是不乾淨。從裡頭拉上來的東西，請看兩遍。",  -- 661
-        "很少人在東瘟疫之地釣魚，願意承認的更少。這裡的水只剩下瘟疫留給它的部分，而它還守著。",  -- 662
-        "希爾斯布萊德的河流與長長的南岸，在每一場為了爭奪它們而打的仗裡，都餵飽過雙方的人。",  -- 663
-        "辛特蘭的湖泊高高藏在樹林之間，蠻錘矮人以為沒人看得見的時候，會騎在獅鷲背上釣魚。",  -- 664
-        "丹莫洛的湖泊一年中大半時間都被冰圍著。矮人會鑿個洞，帶著一杯啤酒坐下來，不管釣到什麼都說今天是好日子。",  -- 665
-        "別的地方有河流，灼熱峽谷有的是熔岩。改帶點喝的來吧。",  -- 666
-        "燃燒平原只有灰燼與餘火。這裡的水就算真的給了你什麼，也會是燙的。",  -- 667
-        "艾爾文的每個孩子都在水晶湖或石碑湖學釣魚。那裡的小魚已經把他們耍了好幾代。",  -- 668
-        "逆風小徑水很少，歡迎更少。卡拉贊底下水池裡的東西，最好就留在那裡。",  -- 669
-        "暮色森林邊緣的那條河，不管幾點都是黑的。魚好像不介意黑暗，介意的是釣客。",  -- 670
-        "洛克湖是洛克莫丹的驕傲，由雄偉的巨石水壩攔住。矮人會拿它來衡量釣魚故事，而贏的通常是湖。",  -- 671
-        "赤脊山的止水湖美得像幅畫，湖畔鎮的每座碼頭都有人在釣。鎮民知道每一個好位置，卻一個也不會告訴你。",  -- 672
-        "從叢林河流到荒野般的南方海岬，荊棘谷擁有整塊大陸最富饒的水域。藏寶海灣的釣客為此舉辦釣魚大賽，而且幾乎人人作弊。",  -- 673
-        "悲傷沼澤是綠樹底下的綠水。魚吃起來有泥巴味，當地人偏偏就愛這一味。",  -- 674
-        "西部荒野的田地毀了，海岸卻沒有。留下來的人靠著那條長長的灰色海岸維生。",  -- 675
-        "濕地這名字取得好。米奈希爾港的碼頭是這裡最乾的釣點，而鱷魚也知道這件事。",  -- 676
-        "在暴風城運河釣魚的有小孩、退休老人，以及至少一位喬裝過的貴族。沒有人會問運河裡還有什麼。",  -- 677
-        "荒棄的洞穴裡有鐵爐堡唯一一座安靜的水池。老矮人會在那裡釣上好幾個小時，一句話也不說。",  -- 678
-        "幽暗城運河的那種綠，跟藻類一點關係也沒有。在那裡釣魚的被遺忘者，並不是為了張羅晚餐。",  -- 679
-        "多數釣客這輩子釣起的第一條魚，顏色鮮豔到讓人忘不了。",  -- 680
-        "滑溜、敏捷，在每一處溫暖海岸都很常見。烤來吃比名字給人的印象好多了。",  -- 681
-        "整條魚幾乎都是嘴，在你不會想喝的水裡最快樂。",  -- 682
-        "嬌小、滿口利牙，而且什麼都不怕。據說曾有一群把熊趕出了洛克湖。",  -- 683
-        "浪花底下的一道色彩。水手認為釣線上有一條，這趟航程就會順利。",  -- 684
-        "很有耐心的底棲魚，鬍鬚長得像矮人長老。",  -- 685
-        "沒有人會吃第二次。鍊金師倒是能買多少就買多少。",  -- 686
-        "牠的鰭像悶燒的炭火一樣發亮，榨出來的油也幾乎一樣好燒。",  -- 687
-        "像小盾牌一樣全身披甲。裡頭的肉值得你費這番工夫。",  -- 688
-        "哀嚎洞穴附近的水裡有某種東西改變了牠。吃下一條，你可能也會跟著變上一陣子。",  -- 689
-        "河邊的居民說吃一頓能讓頭腦清醒。真正讓牠有智慧的，是逆流而上這件事。",  -- 690
-        "比牠的表親更老、更大、更有智慧，但還是沒能躲過你的魚鉤。",  -- 691
-        "來自溫暖南方海域的頑強鬥士，從藏寶海灣到加基森，每間酒館的菜單上都少不了牠。",  -- 692
-        "牠的額頭像真正的秘銀一樣閃亮。試過拿去熔煉的礦工不只一個。",  -- 693
-        "牠的鱗片可以熬成一種油，讓皮膚硬得像石頭。牠偏好夜晚。",  -- 694
-        "擦得像閱兵用的胸甲一樣亮，重量也差不多。",  -- 695
-        "牠只在寒冷的月份靠岸，識貨的廚師會等上一整年。",  -- 696
-        "白天變長時牠就會成群洄游。沿海居民用牠來標記季節。",  -- 697
-        "要抓就抓中間，而且只有一次機會。",  -- 698
-        "來自蠻荒地帶的河魚，鰓紅得像食人妖的戰紋。",  -- 699
-        "牠在天黑後覓食。用牠煮的湯能穩定施法者的神經。",  -- 700
-        "牠在白天覓食，幾乎每一點都跟夜鱗鯛魚相反，卻還是同住一片水域。",  -- 701
-        "嚴格來說不算魚。牠不同意被抓，而且會讓你清楚知道。",  -- 702
-        "蒼白如河冰，來自北方寒冷清澈的湖泊。",  -- 703
-        "你會需要兩隻手，也許還要一個朋友。",  -- 704
-        "%.1f磅",  -- 705
-        "釣魚日誌新增：%s，%s。",  -- 706
-        "釣魚日誌新增：%s。",  -- 707
-        "你至今最重的%s：%s（之前是%s）。",  -- 708
-        "釣魚日誌",  -- 709
-        "每次漁獲都會寫進你的釣魚日誌：每種的數量、第一次釣到的地點，以及為了好玩而編造的重量和每種的最佳紀錄（/cchud journal 開啟它）",  -- 710
-        "魚餌 %s",  -- 711
-        "沒有魚餌",  -- 712
-        "釣到 %d",  -- 713
-        "跑掉 %d",  -- 714
-        "釣魚介面",  -- 715
-        "手持魚竿時：你所在水域的魚（還沒在這裡釣到的保持隱藏）、你的釣魚技能和魚餌的加成、釣到多少和跑掉多少、魚餌還能持續多久，以及你最近的漁獲",  -- 716
-        "好奇的一條：+%d%%",  -- 717
-        "讓魚餌保持在魚的旁邊",  -- 718
-        "下一條漁獲 +%d%%",  -- 719
-        "按住 %s：魚餌沿著魚線移動",  -- 720
-        "連續 %d 條",  -- 721
-        "浮標在水裡時的小遊戲",  -- 722
-        "在魚線入水時於施法條上進行：按住扳機，魚餌沿著魚線移動，放開則漂回；讓它待在魚影旁邊。玩得越好，下一條漁獲的虛構重量越重。不占用任何按鈕，也從不影響拋竿或收獲",  -- 723
-        "釣到 %d，%d 種，跑掉 %d",  -- 724
-        "最重：%s，%s",  -- 725
-        "魚",  -- 726
-        "水域",  -- 727
-        "還沒有釣到任何東西。帶上魚竿去水邊吧。",  -- 728
-        "釣到：%d",  -- 729
-        "最重：%s，於%s",  -- 730
-        "首次釣到：%s",  -- 731
-        "在這裡釣到：%d",  -- 732
-        "在這裡發現的種類：%d",  -- 733
-        "選擇",  -- 734
-        "關閉",  -- 735
-        "開啟或關閉你的釣魚日誌：你釣到過的每個種類、每種最重的一條，以及你釣過魚的水域",  -- 736
-        "聊天安靜時淡出",  -- 737
-        "幾秒內沒有新訊息時聊天文字淡出",  -- 738
-        "聊天淡出前的秒數",  -- 739
-        "聊天文字在淡出前停留的時間",  -- 740
-        "地圖上的座標",  -- 741
-        "在世界地圖下方顯示你的座標",  -- 742
-        "自你登入以來已有 %d 則訊息被當作垃圾訊息隱藏。",  -- 743
-        "其中 %d 則是重複的公會招募。",  -- 744
-        "聊天中的職業圖示和等級",  -- 745
-        "在玩家名字前用方括號顯示其職業圖示和等級（在遊戲允許我們得知時）",  -- 746
-        "聊天中使用簡短頻道名",  -- 747
-        "行首的頻道名會被縮寫：[P] 隊伍，[PL] 隊長，[G] 公會，[O] 幹部，[R] 團隊，[RL] 團隊隊長，[I] 副本，帶編號的頻道只顯示編號，[1]",  -- 748
-        "聊天中只顯示名字",  -- 749
-        "帶姓氏的名字只顯示名字（Jory Spleeneater 顯示為 Jory）；對它密語或右鍵點擊仍然對應完整名字",  -- 750
-        "聊天文字大小",  -- 751
-        "聊天視窗中文字的大小，按遊戲本身大小的比例設定（遊戲本身的設定維持不變）",  -- 752
-        "隱藏金幣商人和重複廣告",  -- 753
-        "帶有網址的出售金幣或服務的訊息，以及同一玩家重複發送的相同訊息，將被隱藏（你的隊伍、公會和好友除外）",  -- 754
-        "隱藏重複的公會招募",  -- 755
-        "在公共頻道中，公會招募訊息只顯示一次；15 分鐘內同一玩家再次發送的，或幾乎相同的訊息將被隱藏（你的隊伍、公會和好友除外）",  -- 756
-        "列出最近被當作垃圾訊息隱藏的聊天訊息",  -- 757
-        "飛行",  -- 758
-        "目的地未知",  -- 759
-        "依距離估算",  -- 760
-        "此航線首次飛行：正在記錄飛行時間",  -- 761
-        "即將降落",  -- 762
-        "%s：約 %s，依距離估算",  -- 763
-        "%s：約 %s",  -- 764
-        "%s：此航線首次飛行，時間未知",  -- 765
-        "飛行中，目的地未知",  -- 766
-        "%s：已記住飛行時間，%s",  -- 767
-        "已知 %d 條飛行航線。",  -- 768
-        "飛行：時間和倒數",  -- 769
-        "飛行時在聊天中說明目的地和所需時間，畫面頂部的計時條倒數至降落；每條航線的時間從你的飛行中學習",  -- 770
-        "飛行：坐騎沿進度條飛行",  -- 771
-        "獅鷲獸、雙足飛龍或蝙蝠（飛行管理員給你的那隻）沿飛行進度條飛向你的降落地點",  -- 772
-        "列出已知時間的飛行航線",  -- 773
-        "飛行是個好時機。",  -- 774
-        "你已經玩了 %s。",  -- 775
-        "該喝口水了",  -- 776
-        "喝水提醒",  -- 777
-        "遊戲時不時溫和地提醒你喝口水（戰鬥中不會）",  -- 778
-        "喝水提醒間隔（分鐘）",  -- 779
-        "兩次喝水提醒之間的遊戲分鐘數",  -- 780
-        "飛行開始時提醒喝水",  -- 781
-        "飛行是天然的休息：開始飛行時會提醒你喝水，除非上次提醒才過去不久",  -- 782
-        "顯示喝水提醒",  -- 783
-        "重新設計遊戲內建的框架",  -- 784
-        "滑鼠提示、增益、任務追蹤、小地圖、經驗條、聊天標籤和手把快捷列採用HUD的外觀（滑鼠介面保持遊戲原樣）",  -- 785
-        "經驗條大小",  -- 786
-        "重新設計樣式時經驗條和聲望條的大小，百分比",  -- 787
-        "滑鼠提示",  -- 788
-        "暗色玻璃樣式的滑鼠提示，邊緣為玩家職業顏色或物品品質顏色",  -- 789
-        "手把動作條",  -- 790
-        "手把按鈕採用深色底座上的纖細圓環，取代厚重的圖案",  -- 791
-        "增益",  -- 792
-        "你的增益和減益圖示經過裁切並加邊框，其時間帶描邊",  -- 793
-        "任務追蹤",  -- 794
-        "任務追蹤的標題採用暗色玻璃樣式，其文字行帶描邊",  -- 795
-        "小地圖",  -- 796
-        "在小地圖周圍顯示纖細圓環和柔和光暈，取代金色邊框",  -- 797
-        "經驗條",  -- 798
-        "經驗條和聲望條稍小一些，使用各自的顏色",  -- 799
-        "聊天",  -- 800
-        "聊天標籤名稱帶描邊，輸入框採用暗色玻璃樣式",  -- 801
-        "傷害統計",  -- 802
-        "遊戲傷害統計以HUD風格顯示：深色背景上的斜條和描邊文字；功能完全保留",  -- 803
-        "檢查：%d 項中通過 %d 項",  -- 804
-        "自你登入以來遊戲沒有卡頓過。",  -- 805
-        "遊戲卡頓的時刻，以及每次中 HUD 所占的部分：",  -- 806
-        "HUD 最慢的時刻：",  -- 807
-        "除錯報告",  -- 808
-        "自動收集排查問題的報告：登入時，以及重新載入或登出時再收集一次（保存在已儲存的設定中）",  -- 809
-        "自你登入以來遊戲卡頓的時刻，以及每次中 HUD 自身工作所占的部分",  -- 810
-        "HUD預設：%s，與鏡頭相配",  -- 811
-        "預設：%s",  -- 812
-        "名為「%s」的版面已新增到遊戲的編輯模式。請在那裡選擇它以使用（遊戲選單 > 編輯模式 > 版面）。",  -- 813
-        "未知的預設 '%s'",  -- 814
-        "適合電視：HUD 和聊天中的文字更大。",  -- 815
-        "適合螢幕：文字為一般大小。",  -- 816
-        "我們的框架已回到起始位置。請在編輯模式中選擇遊戲的%s版面（遊戲選單 > 編輯模式 > 版面）。",  -- 817
-        "預設會設定鏡頭距離",  -- 818
-        "預設還會把鏡頭一次性調到其版面所設計的距離（之後可自由縮放）",  -- 819
-        "動作",  -- 820
-        "第三人稱視角：角色旁的纖細直條，所有特效開啟；脫戰時一切淡出",  -- 821
-        "經典",  -- 822
-        "我們的框架位於魔獸世界一貫的位置，特效較柔和，保留遊戲內建的遊戲手把動作列",  -- 823
-        "精簡",  -- 824
-        "只顯示需要的：友方NPC只在你指向、瞄準或選取時顯示名條（含職能）；名字不帶頭銜；脫戰時你的條淡淡顯示（生命值低時總會顯示）",  -- 825
-        "開放世界",  -- 826
-        "適合探索的乾淨介面：身旁靜息時變淡的細條、不帶能量條的名條、會淡出的聊天",  -- 827
-        "冒險",  -- 828
-        "參照主機開放世界冒險：生命狀態在你身旁，小目標框在中上方，村民僅在你指向時顯示，聊天快速淡出",  -- 829
-        "魂系",  -- 830
-        "你的條在左上角，目標條像首領血條一樣大而置中偏下，每一擊都有感覺",  -- 831
-        "射擊",  -- 832
-        "中央偏右的直條靠近準星，目標在上方，強烈的命中回饋",  -- 833
-        "十字欄",  -- 834
-        "參照手把玩的MMO：目標和專注目標在中上方，你的條緊貼手把快捷列上方，小隊在左側，完整名條",  -- 835
-        "ARPG",  -- 836
-        "參照動作RPG：鏡頭拉遠，生命狀態在左下方，目標在中上方，雜兵顯示較小，每次命中都很醒目",  -- 837
-        "羅盤",  -- 838
-        "參照第一人稱RPG：鏡頭拉近，你的條在中下方，目標在頂部邊緣下方，村民僅在你指向時顯示",  -- 839
-        "團隊",  -- 840
-        "WoW 原有配置加上團隊所需的一切：隊伍和團隊框架、名條上的生命百分比和等級",  -- 841
-        "跟隨ControllerCam的預設",  -- 842
-        "在ControllerCam中為所有情境選擇鏡頭預設時，也會選擇相配的HUD預設（鏡頭保持自己的距離）",  -- 843
-        "現代",  -- 844
-        "將整個HUD設為預設：action, classic, minimal, openworld, adventure, soulslike, shooter, crossbar, arpg, compass, raid",  -- 845
-        "目標框架和名條同時設為緊湊或完整",  -- 846
-        "目標框架設為緊湊或完整",  -- 847
-        "按房間另一頭的電視或一臂之遙的螢幕來設定文字大小",  -- 848
-        "把我們的框架放回起始位置，以配合遊戲內建的現代或經典版面",  -- 849
-        "你的整套設定（HUD、鏡頭和遊戲版面）：複製這一行（Ctrl+C）以保存或分享。",  -- 850
-        "貼上一行 HUD 設定（Ctrl+V）並確認。",  -- 851
-        "這一行已損壞：請重新完整複製。",  -- 852
-        "這一行由較新的版本產生：請更新插件。",  -- 853
-        "這不是一行 HUD 設定。",  -- 854
-        "設定已匯入：採用 %d 項，略過 %d 項。",  -- 855
-        "鏡頭設定也一併匯入了。",  -- 856
-        "鏡頭設定維持原樣。",  -- 857
-        "遊戲版面現在是「%s」。",  -- 858
-        "遊戲版面維持原樣。",  -- 859
-        "你的設定，作為一行文字，用於保存或分享",  -- 860
-        "從由 /cchud export 產生的文字行中讀取設定",  -- 861
-        "使用手把介面時 HUD 已開啟。它的選項：選項 > 插件 > ControllerCam > HUD，或 /cchud。",  -- 862
-        "僅鏡頭：HUD 休息，遊戲介面維持原樣。/cchud on 可將其開啟。",  -- 863
-        "要同時為手把設定畫面嗎？這會在遊戲的編輯模式中新增一個名為 CCHUD 的版面，由你在那裡選擇：它把冷卻列放在目標下方，避開手把按鍵。你自己的版面會保留（/cchud setup 可再次提供此選項）。",  -- 864
-        "設定",  -- 865
-        "暫不",  -- 866
-        "ControllerCam 附帶一套手把介面，即 HUD：使用手把介面時顯示它自己的單位框架、名條、施法條等。你想要它，還是只要鏡頭？",  -- 867
-        "鏡頭 + HUD",  -- 868
-        "僅鏡頭",  -- 869
-        "此客戶端不允許插件變更版面配置。",  -- 870
-        "再問一次：鏡頭加 HUD，還是只要鏡頭",  -- 871
-        "再次提供為 HUD 製作的畫面版面（遊戲的編輯模式）",  -- 872
-        "使用遊戲手把介面時顯示。請在遊戲的編輯模式中拖曳我們的框架。",  -- 873
-        "預設",  -- 874
-        "適合的螢幕",  -- 875
-        "電視",  -- 876
-        "螢幕",  -- 877
-        "按鍵圖示",  -- 878
-        "遊戲為你的控制器按鍵顯示的圖示：依正在使用的控制器自動辨識，或你選擇的類型",  -- 879
-        "字型",  -- 880
-        "重置遊戲版面配置",  -- 881
-        "試試看",  -- 882
-        "播放示範",  -- 883
-        "顯示所有命中特效",  -- 884
-        "執行自我檢查",  -- 885
-        "手把快捷列：精簡 / 完整",  -- 886
-        "匯出設定",  -- 887
-        "匯入設定",  -- 888
-        "在主頁面勾選「顯示進階選項」以查看所有設定。",  -- 889
-        "模組",  -- 890
-        "快速開關",  -- 891
-        "一般",  -- 892
-        "HUD",  -- 893
-        "此用戶端無法使用選項面板。",  -- 894
-        "啟用",  -- 895
-        "整個 HUD；關閉後恢復遊戲內建的框架",  -- 896
-        "滑鼠和鍵盤介面中也啟用",  -- 897
-        "通常 HUD 僅在使用遊戲手把介面時執行",  -- 898
-        "隱藏遊戲內建的框架",  -- 899
-        "顯示我們的框架時，隱藏遊戲的玩家、目標和專注目標框架",  -- 900
-        "聊天視窗移到左上角",  -- 901
-        "HUD 執行時將聊天視窗移到左上角",  -- 902
-        "閒置時的垂直條",  -- 903
-        "非戰鬥狀態下生命力全滿時，垂直條保持的可見程度（0 為隱藏）",  -- 904
-        "職業顏色",  -- 905
-        "依職業為你的血條和其他玩家的血條著色",  -- 906
-        "職業圖示",  -- 907
-        "在目標和目標的目標的玩家名字前顯示職業圖示",  -- 908
-        "目標框架威脅",  -- 909
-        "目標框架上的盾牌圖示和光暈：攻擊你時為紅色，即將拉到仇恨時紅黃交替，正在失去仇恨時黃藍交替，不在你身上時為藍色",  -- 910
-        "全部使用緊湊條",  -- 911
-        "目標框架和名條使用緊湊樣式，寬度略多於一半（仍可分別設定；預設不會改變它）",  -- 912
-        "精簡目標框架",  -- 913
-        "目標框架寬度略大於一半",  -- 914
-        "戰鬥中的生命值顏色",  -- 915
-        "戰鬥中，生命值條隨生命值下降由綠色經黃色變為紅色",  -- 916
-        "文字背景陰影",  -- 917
-        "在目標文字後加一條淡淡的暗帶，使其易於閱讀",  -- 918
-        "文字大小",  -- 919
-        "我們框架上文字的大小",  -- 920
-        "框架大小",  -- 921
-        "我們的單位框架的大小",  -- 922
-        "戰鬥中的快捷列",  -- 923
-        "在有事需要注意之前，戰鬥中你的快捷列、寵物和專注目標有多明顯",  -- 924
-        "生命力低於時完整",  -- 925
-        "當你的生命力低於此值時，快捷列恢復為完整",  -- 926
-        "法力低於時完整",  -- 927
-        "當你的法力低於此值時，快捷列恢復為完整",  -- 928
-        "閒置時的玩家條",  -- 929
-        "生命值全滿或脫離戰鬥時玩家條的可見程度（0 為隱藏）",  -- 930
-        "商人和銀行說明",  -- 931
-        "商人的「出售垃圾」按鈕會詢問出售什麼；商人和銀行處可快速移動",  -- 932
-        "顯示進階選項",  -- 933
-        "所有設定，而不僅是主要開關",  -- 934
-        "玩家框架",  -- 935
-        "我們的玩家條，左上角",  -- 936
-        "目標框架",  -- 937
-        "我們的目標條，頂部中間",  -- 938
-        "寵物條",  -- 939
-        "玩家條下方或直立條旁邊的小型寵物條",  -- 940
-        "專注目標框架",  -- 941
-        "我們的專注目標框架",  -- 942
-        "角色旁的細長直立生命條和能量條，適合第三人稱視角（取代玩家條）",  -- 943
-        "商人開啟時出售垃圾",  -- 944
-        "商人一開啟就依你的規則出售垃圾",  -- 945
-        "白色武器和護甲算作垃圾",  -- 946
-        "將白色武器和護甲視為垃圾（工具、魚竿、有使用效果的裝備或可能是升級的物品除外；總是先詢問）",  -- 947
-        "打開銀行時存放",  -- 948
-        "標記為存銀行的物品，以及（開啟時）銀行裡已有的物品，會自動存入",  -- 949
-        "遊戲內建的選項；我們的小框架會跟隨它",  -- 950
-        "冷卻管理員",  -- 951
-        "遊戲的冷卻管理員",  -- 952
-        "個人資源顯示",  -- 953
-        "角色下方的生命值和能量",  -- 954
-        "銀行自動接收材料",  -- 955
-        "遊戲中銀行的選項",  -- 956
-        "增益開始時顯示提示",  -- 957
-        "遊戲選項：增益生效時，其提示會短暫彈出（手把介面）",  -- 958
-        "聊天名稱使用職業顏色",  -- 959
-        "遊戲的聊天設定，一次套用於所有聊天類型：玩家名稱顯示為其職業顏色",  -- 960
-        "開啟選項面板（選項 > 插件 > ControllerCam HUD）",  -- 961
-        "框架",  -- 962
-        "畫面淡出",  -- 963
-        "特效",  -- 964
-        "外觀",  -- 965
-        "任務、聊天和地圖",  -- 966
-        "背包、銀行和商人",  -- 967
-        "釣魚",  -- 968
-        "協助工具",  -- 969
-        "原生選項",  -- 970
-        "%s  |  遊戲手把介面：%s  |  執行中：%s",  -- 971
-        "玩家 %s，目標 %s，寵物 %s，專注目標 %s  |  已隱藏遊戲框架：%s  |  聊天已移動：%s",  -- 972
-        "原生選項：目標的目標 %s，冷卻管理員 %s，個人資源 %s",  -- 973
-        "文字大小 %d%%  |  文字陰影：%s",  -- 974
-        "商人和銀行說明：%s  |  自動出售：%s  |  白色裝備算垃圾：%s",  -- 975
-        "閒置可見度 %d%%  |  縮放 %d%%  |  職業顏色：%s",  -- 976
-        "適用於遊戲手把介面的極簡動作遊戲風格 HUD。",  -- 977
-        "已啟用",  -- 978
-        "已停用：遊戲內建的框架已恢復",  -- 979
-        "滑鼠和鍵盤介面中也使用：%s",  -- 980
-        "已隱藏遊戲框架：%s",  -- 981
-        "聊天已移到左上角：%s",  -- 982
-        "職業顏色：%s",  -- 983
-        "此用戶端沒有該選項。",  -- 984
-        "%s：%s（遊戲內建的選項）",  -- 985
-        "遊戲目前不接受該操作。",  -- 986
-        "商人和銀行說明：%s",  -- 987
-        "自動出售：%s",  -- 988
-        "白色裝備算垃圾：%s",  -- 989
-        "商人說明已關閉。",  -- 990
-        "用法：/cchud sell [junk | recommended | white | green | blue]",  -- 991
-        "銀行開啟時存入已標記的物品：%s",  -- 992
-        "用法：/cchud junk <item>（按住 Shift 點擊物品，將其放入聊天輸入列）",  -- 993
-        "物品 %d：垃圾，與其餘一起出售",  -- 994
-        "物品 %d：保留，永不出售",  -- 995
-        "物品 %d：存入銀行",  -- 996
-        "文字陰影：%s",  -- 997
-        "用法：/cchud text <80-250>",  -- 998
-        "文字大小 %d%%",  -- 999
-        "示範已停止",  -- 1000
-        "HUD 未執行。",  -- 1001
-        "示範執行中：循環播放一場虛構的戰鬥。再次輸入 /cchud demo 可停止。",  -- 1002
-        "用法：/cchud idle <0-100>",  -- 1003
-        "閒置可見度 %d%%",  -- 1004
-        "用法：/cchud scale <50-200>",  -- 1005
-        "縮放 %d%%",  -- 1006
-        "拖曳框架，然後輸入 /cchud lock。",  -- 1007
-        "框架已鎖定",  -- 1008
-        "一切已恢復到初始狀態：設定、框架和畫面版面（你的商人標記和價格歷史會保留）。",  -- 1009
-        "框架已恢復到初始位置",  -- 1010
-        "未知指令「%s」。輸入 /cchud help",  -- 1011
-        "錯誤列表已清空。",  -- 1012
-        "沒有記錄的錯誤。",  -- 1013
-        "已記錄 %d 個錯誤（最新的在最後）。/cchud errors clear 清空列表。",  -- 1014
-        "顯示狀態",  -- 1015
-        "開啟或關閉 HUD（關閉後恢復遊戲內建的框架）",  -- 1016
-        "滑鼠和鍵盤介面中也使用 HUD",  -- 1017
-        "使用我們的框架，或遊戲內建的",  -- 1018
-        "角色旁邊的細長垂直生命力和能量條",  -- 1019
-        "目標的目標（遊戲內建的選項，遊戲選單中也有）",  -- 1020
-        "遊戲的冷卻管理員（遊戲內建的選項）",  -- 1021
-        "角色下方的生命值和能量（遊戲內建的選項）",  -- 1022
-        "增益開始時彈出的提示（遊戲內建選項）",  -- 1023
-        "保持遊戲內建的玩家和目標框架可見（開）或將其隱藏（關）",  -- 1024
-        "在商人處：選擇出售什麼（另有：sell junk, sell recommended, sell white | green | blue）",  -- 1025
-        "將白色武器和護甲算作垃圾",  -- 1026
-        "標記物品：一律出售、永不出售或存入銀行（按住 Shift 點擊，將其放入聊天輸入列）",  -- 1027
-        "在銀行：存入銀行裡已有的物品和所有標記為存銀行的物品",  -- 1028
-        "在銀行：取出你身上已有的物品",  -- 1029
-        "打開銀行後立即存放",  -- 1030
-        "銀行自動接收材料（遊戲內建的選項）",  -- 1031
-        "文字大小，以百分比表示（150在電視上很清晰）",  -- 1032
-        "沒事發生時玩家條的可見程度（0 為隱藏）",  -- 1033
-        "框架大小，百分比",  -- 1034
-        "將框架拖曳到你想要的位置（遊戲的編輯模式也能做到）",  -- 1035
-        "將框架恢復到初始位置",  -- 1036
-        "播放一場簡短的虛構戰鬥，查看框架如何反應（再次輸入可停止）",  -- 1037
-        "將螢幕上的內容與設定比對（check all 列出每一列）",  -- 1038
-        "儲存此用戶端遊戲手把介面的描述（用於疑難排解）",  -- 1039
-        "顯示此清單",  -- 1040
-        "HUD最近遇到的錯誤，重載後也保留（用於回報）",  -- 1041
+        "聚焦最近的任務",  -- 544
+        "遊戲為你指引的任務始終是清單中離你最近的那個；你自己聚焦的任務會保留十分鐘不變",  -- 545
+        "任務清單：簡短目標",  -- 546
+        "任務清單中的目標只保留必要的文字，前面帶有類型圖示：骷髏圖示加 0/1 德雷德萊斯船長，而不是 0/1 已殺死德雷德萊斯船長",  -- 547
+        "聊天中的任務進度",  -- 548
+        "任務推進時在聊天中顯示一行簡短訊息：血骨項鍊：4/25、一個目標完成、一個任務可以交付",  -- 549
+        "向隊伍回報任務進度",  -- 550
+        "在隊伍中（團隊中不會），同樣的內容會發到隊伍頻道讓其他人看到，每條間隔片刻；你也會在那裡看到",  -- 551
+        "保留任務需要的物品",  -- 552
+        "任務日誌中的任務仍需要的物品，或能開始一個你還能做的任務的物品，會標記為任務：絕不會替你賣掉或拍賣",  -- 553
+        "說出任務的建議順序：先交付已完成的，再做最近的可單人任務，然後是其餘的",  -- 554
+        "任務左側",  -- 555
+        "任務右側",  -- 556
+        "任務下方",  -- 557
+        "採集清單已滿。",  -- 558
+        "採集清單：%s，需要%d個。",  -- 559
+        "採集",  -- 560
+        "還有%d項",  -- 561
+        "暫無需採集的物品。",  -- 562
+        "再加一組",  -- 563
+        "移除",  -- 564
+        "清空",  -- 565
+        "完成",  -- 566
+        "清空整個採集清單？",  -- 567
+        "採集清單：選擇 / 完成",  -- 568
+        "採集清單：加入你指向的物品",  -- 569
+        "它不在採集清單上。",  -- 570
+        "採集清單為空。",  -- 571
+        "採集清單：位置",  -- 572
+        "任務列表旁的採集清單",  -- 573
+        "你打算採集的東西，顯示擁有數量和需要數量：你的背包和銀行，以及你在本伺服器其他角色的。可一鍵加入升級計畫所需的材料，也可加入任意物品",  -- 574
+        "採集清單放在任務列表左側、右側或其任務下方",  -- 575
+        "任務列表旁的採集清單：用手把選擇；add <物品> [數量]，remove <物品>，clear，或用 left / right / bottom 設定位置",  -- 576
+        "不在戰鬥中。",  -- 577
+        "此客戶端沒有手把快捷列。",  -- 578
+        "此客戶端不允許插件修改；請使用編輯模式。",  -- 579
+        "手把快捷列：%s",  -- 580
+        "精簡",  -- 581
+        "完整",  -- 582
+        "精簡手把動作條",  -- 583
+        "隱藏手把動作條後方厚重的圖案並縮小顯示",  -- 584
+        "手把動作條大小",  -- 585
+        "開啟精簡動作條時手把動作條的大小，百分比",  -- 586
+        "遊戲內建手把快捷列的精簡或完整模式（與其編輯模式設定相同）",  -- 587
+        "脫戰淡出",  -- 588
+        "/cchud fade <部分> on | off 設定其中一項；all 表示整個淡出。",  -- 589
+        "手把快捷列、小地圖、任務列表、傷害統計和經驗條在脫離戰鬥時一起休息，並在戰鬥、扣下扳機或有敵對目標時恢復",  -- 590
+        "休息時的畫面",  -- 591
+        "脫離戰鬥時畫面上休息的部分保持多明顯（0 為隱藏）",  -- 592
+        "淡出：手把快捷列",  -- 593
+        "淡出：小地圖",  -- 594
+        "淡出：任務列表",  -- 595
+        "淡出：傷害統計",  -- 596
+        "淡出：經驗條",  -- 597
+        "淡出：增益效果",  -- 598
+        "淡出：冷卻列",  -- 599
+        "畫面的這一部分是否在脫離戰鬥時與其餘部分一起淡出（關閉：始終保持原樣）",  -- 600
+        "脫離戰鬥時的畫面淡出：哪些部分淡出（小地圖、任務列表等），每項可開可關",  -- 601
+        "已儲存：輸入 /reload 讓遊戲把它寫入磁碟。",  -- 602
+        "姿態和寵物按鈕移到快捷列上方",  -- 603
+        "姿態和寵物指令按鈕放在原本綠色和紅色選目標圖示的位置，這樣它們的輪盤能完整顯示在畫面上；那些圖示會被隱藏",  -- 604
+        "列出手把快捷列各部分的位置以及哪些在休息（用於排查問題）",  -- 605
+        "自動",  -- 606
+        "通用",  -- 607
+        "遊戲內建",  -- 608
+        "按鍵圖示：%s。",  -- 609
+        "目前沒有正在使用的控制器，或者遊戲沒有圖示樣式：有控制器時會自動設定。",  -- 610
+        "遊戲沒有接受按鍵圖示的設定。",  -- 611
+        "控制器沒有說明自己是什麼：圖示保持遊戲原樣。",  -- 612
+        "遊戲為你的控制器按鍵顯示的圖示：auto（依正在使用的控制器）、xbox、playstation、switch、steam、generic（數字），或用 game 保持遊戲原樣",  -- 613
+        "冷卻列避開手把快捷列",  -- 614
+        "遊戲的冷卻列放在目標下方而不是壓在手把按鍵上，並略微縮小（僅在遊戲內建版面下：在你自己的版面中它們留在你放的位置）",  -- 615
+        "釣魚模式：關閉。",  -- 616
+        "釣魚：按%s拋竿",  -- 617
+        "沒有魚餌：按兩次%s使用%s",  -- 618
+        "按%s收起魚竿",  -- 619
+        "釣魚模式：按%s拋竿，浮標晃動時再按一次收竿。",  -- 620
+        "%s 收竿，%s 重新拋竿",  -- 621
+        "釣魚模式需要手持魚竿。",  -- 622
+        "你沒有學會釣魚。",  -- 623
+        "釣魚模式：一個按鈕拋竿和提竿",  -- 624
+        "釣魚按鍵：%s",  -- 625
+        "一鍵釣魚",  -- 626
+        "手持魚竿時：沒有可互動的目標時，用互動按鈕拋竿，浮標晃動時再按一次收竿；漁獲自動拾取。按B收起魚竿並換回武器",  -- 627
+        "一鍵重新拋竿",  -- 628
+        "浮標在水上時，釣魚按鈕按一下就重新拋竿，用 A 收竿釣魚（遊戲不提供可等待的咬鉤訊號，所以一個按鈕無法兼顧兩者）；關閉：釣魚按鈕像遊戲的互動一樣收竿",  -- 629
+        "連按兩下上餌",  -- 630
+        "快速按兩下釣魚按鍵：當魚竿上沒有魚餌時，第二下會把背包裡最好的魚餌裝到魚竿上",  -- 631
+        "釣魚時隱藏控制器動作條",  -- 632
+        "手持魚竿時隱藏手把快捷列，水面一覽無遺；釣魚提示顯示拋竿的按鈕。戰鬥開始或收起魚竿時立即恢復",  -- 633
+        "暫時關閉一鍵釣魚，或重新開啟（手持釣竿時會自動開啟）",  -- 634
+        "用於釣魚的按鍵：起初是你的互動鍵（方塊或 X），也可以是任何其他按鍵，例如扳機鍵 (rt)",  -- 635
+        "杜洛塔的海岸是一片紅岩與溫暖的淺灘。回音群島的食人妖說，當潮水捎來島上炊火的氣味時，鯖魚群最是密集。",  -- 636
+        "莫高雷的湖泊小巧、清澈，而且從容。牛頭人釣魚就跟做其他事情一樣：慢慢來，並且心懷感謝。",  -- 637
+        "貧瘠之地的每座綠洲都是聚會場所。不論白天來喝水的是誰，到了夜裡，水面下總有東西在游。",  -- 638
+        "泰達希爾的池水全都在同一棵樹的樹蔭底下。夜精靈釣客信誓旦旦地說，那裡的魚從沒見過太陽，也一點都不想念。",  -- 639
+        "黑海岸的海水灰濛濛、冷冰冰，到處是沉船殘骸。在奧伯丁外海上鉤的魚，有一半都在某人遺失的貨物裡安了家。",  -- 640
+        "梣谷的河流在比多數王國還古老的枝葉下流過。魚的動作很快，但哨兵跑來問你在做什麼的動作更快。",  -- 641
+        "在千針石林底下，水源稀少，而且被看得死緊。這裡的魚，都是憑本事掙得一席之地的。",  -- 642
+        "石爪山脈的湖泊高高座落在群峰之間，冷得很。要不是這裡這麼好釣，哥布林早就把湖水抽光了。",  -- 643
+        "淒涼之地的海岸只有骨骸與灰色的浪花。水底下有個東西，兩樣都愛吃。",  -- 644
+        "菲拉斯一路綠到水邊。這裡的河流又深又暖，而且活力十足。",  -- 645
+        "沒有人確定塵泥沼澤的陸地在哪裡結束、水又從哪裡開始。請在岸上釣魚，釣完後數一數自己的腳趾。",  -- 646
+        "塔納利斯唯一稱得上是水的地方就在熱砂港。哥布林會把釣魚權賣給你，你不注意的話還會賣你兩次。",  -- 647
+        "艾薩拉明亮的海灣底下有一座沉沒的城市。老釣客說，大魚都住在昔日的花園裡。",  -- 648
+        "費伍德森林的水池會發光，但不是好的那種。還在裡頭游的東西，頑強到毫無道理可言。",  -- 649
+        "安戈洛的溫泉與焦油圍繞的湖泊，保存了世界其他地方早已遺忘的東西。其中有些還會咬。",  -- 650
+        "月光林地的月神湖靜得像屏住的呼吸。德魯伊只要求一件事：吃多少就拿多少。",  -- 651
+        "希利蘇斯只有沙、風，還有翅膀拍動的聲音。如果你在這裡找到了能釣魚的水，別告訴任何人。",  -- 652
+        "冬泉谷的湖泊邊緣結冰，中央卻冒著蒸氣。那裡的魚為了禦寒養得肥滋滋的，值得你走這一趟。",  -- 653
+        "在奧格瑪的水池釣魚的，有無事可做的苦工，也有嘴上說自己同樣無事可做的老步兵。兩邊都會告訴你，最大的那條跑掉了。",  -- 654
+        "雷霆崖池塘裡的魚，一輩子都住在比平原高出一大截的地方。牠看起來倒是很平靜。",  -- 655
+        "達納蘇斯對待水域就像對待神殿一樣細心。魚兒已經習慣受人讚賞了。",  -- 656
+        "奧特蘭克山脈的湖泊是融雪匯成的，巨魔和辛迪加會趁沒人注意時來釣魚。",  -- 657
+        "阿拉希的岸邊見過的軍隊比釣客還多。水面上飄揚的是誰的旗幟，魚兒早就不在意了。",  -- 658
+        "荒蕪之地從頭到尾都是塵土。在這裡有魚上鉤是個小小的奇蹟，請把它當奇蹟看待。",  -- 659
+        "詛咒之地的海岸赤紅、光禿又安靜。活在那片浪裡的東西，已經學會跟很多事情共存。",  -- 660
+        "提里斯法的湖泊靜靜躺在病懨懨的天空下。被遺忘者釣魚是出於習慣；死者吃得不多，但他們還記得自己喜歡過。",  -- 661
+        "銀松森林長長的海岸盡是霧氣與松影。這裡很好釣，這也是大家對這個地方唯一說得出口的好話。",  -- 662
+        "西瘟疫之地的河流還在流，只是不乾淨。從裡頭拉上來的東西，請看兩遍。",  -- 663
+        "很少人在東瘟疫之地釣魚，願意承認的更少。這裡的水只剩下瘟疫留給它的部分，而它還守著。",  -- 664
+        "希爾斯布萊德的河流與長長的南岸，在每一場為了爭奪它們而打的仗裡，都餵飽過雙方的人。",  -- 665
+        "辛特蘭的湖泊高高藏在樹林之間，蠻錘矮人以為沒人看得見的時候，會騎在獅鷲背上釣魚。",  -- 666
+        "丹莫洛的湖泊一年中大半時間都被冰圍著。矮人會鑿個洞，帶著一杯啤酒坐下來，不管釣到什麼都說今天是好日子。",  -- 667
+        "別的地方有河流，灼熱峽谷有的是熔岩。改帶點喝的來吧。",  -- 668
+        "燃燒平原只有灰燼與餘火。這裡的水就算真的給了你什麼，也會是燙的。",  -- 669
+        "艾爾文的每個孩子都在水晶湖或石碑湖學釣魚。那裡的小魚已經把他們耍了好幾代。",  -- 670
+        "逆風小徑水很少，歡迎更少。卡拉贊底下水池裡的東西，最好就留在那裡。",  -- 671
+        "暮色森林邊緣的那條河，不管幾點都是黑的。魚好像不介意黑暗，介意的是釣客。",  -- 672
+        "洛克湖是洛克莫丹的驕傲，由雄偉的巨石水壩攔住。矮人會拿它來衡量釣魚故事，而贏的通常是湖。",  -- 673
+        "赤脊山的止水湖美得像幅畫，湖畔鎮的每座碼頭都有人在釣。鎮民知道每一個好位置，卻一個也不會告訴你。",  -- 674
+        "從叢林河流到荒野般的南方海岬，荊棘谷擁有整塊大陸最富饒的水域。藏寶海灣的釣客為此舉辦釣魚大賽，而且幾乎人人作弊。",  -- 675
+        "悲傷沼澤是綠樹底下的綠水。魚吃起來有泥巴味，當地人偏偏就愛這一味。",  -- 676
+        "西部荒野的田地毀了，海岸卻沒有。留下來的人靠著那條長長的灰色海岸維生。",  -- 677
+        "濕地這名字取得好。米奈希爾港的碼頭是這裡最乾的釣點，而鱷魚也知道這件事。",  -- 678
+        "在暴風城運河釣魚的有小孩、退休老人，以及至少一位喬裝過的貴族。沒有人會問運河裡還有什麼。",  -- 679
+        "荒棄的洞穴裡有鐵爐堡唯一一座安靜的水池。老矮人會在那裡釣上好幾個小時，一句話也不說。",  -- 680
+        "幽暗城運河的那種綠，跟藻類一點關係也沒有。在那裡釣魚的被遺忘者，並不是為了張羅晚餐。",  -- 681
+        "多數釣客這輩子釣起的第一條魚，顏色鮮豔到讓人忘不了。",  -- 682
+        "滑溜、敏捷，在每一處溫暖海岸都很常見。烤來吃比名字給人的印象好多了。",  -- 683
+        "整條魚幾乎都是嘴，在你不會想喝的水裡最快樂。",  -- 684
+        "嬌小、滿口利牙，而且什麼都不怕。據說曾有一群把熊趕出了洛克湖。",  -- 685
+        "浪花底下的一道色彩。水手認為釣線上有一條，這趟航程就會順利。",  -- 686
+        "很有耐心的底棲魚，鬍鬚長得像矮人長老。",  -- 687
+        "沒有人會吃第二次。鍊金師倒是能買多少就買多少。",  -- 688
+        "牠的鰭像悶燒的炭火一樣發亮，榨出來的油也幾乎一樣好燒。",  -- 689
+        "像小盾牌一樣全身披甲。裡頭的肉值得你費這番工夫。",  -- 690
+        "哀嚎洞穴附近的水裡有某種東西改變了牠。吃下一條，你可能也會跟著變上一陣子。",  -- 691
+        "河邊的居民說吃一頓能讓頭腦清醒。真正讓牠有智慧的，是逆流而上這件事。",  -- 692
+        "比牠的表親更老、更大、更有智慧，但還是沒能躲過你的魚鉤。",  -- 693
+        "來自溫暖南方海域的頑強鬥士，從藏寶海灣到加基森，每間酒館的菜單上都少不了牠。",  -- 694
+        "牠的額頭像真正的秘銀一樣閃亮。試過拿去熔煉的礦工不只一個。",  -- 695
+        "牠的鱗片可以熬成一種油，讓皮膚硬得像石頭。牠偏好夜晚。",  -- 696
+        "擦得像閱兵用的胸甲一樣亮，重量也差不多。",  -- 697
+        "牠只在寒冷的月份靠岸，識貨的廚師會等上一整年。",  -- 698
+        "白天變長時牠就會成群洄游。沿海居民用牠來標記季節。",  -- 699
+        "要抓就抓中間，而且只有一次機會。",  -- 700
+        "來自蠻荒地帶的河魚，鰓紅得像食人妖的戰紋。",  -- 701
+        "牠在天黑後覓食。用牠煮的湯能穩定施法者的神經。",  -- 702
+        "牠在白天覓食，幾乎每一點都跟夜鱗鯛魚相反，卻還是同住一片水域。",  -- 703
+        "嚴格來說不算魚。牠不同意被抓，而且會讓你清楚知道。",  -- 704
+        "蒼白如河冰，來自北方寒冷清澈的湖泊。",  -- 705
+        "你會需要兩隻手，也許還要一個朋友。",  -- 706
+        "%.1f磅",  -- 707
+        "釣魚日誌新增：%s，%s。",  -- 708
+        "釣魚日誌新增：%s。",  -- 709
+        "你至今最重的%s：%s（之前是%s）。",  -- 710
+        "釣魚日誌",  -- 711
+        "每次漁獲都會寫進你的釣魚日誌：每種的數量、第一次釣到的地點，以及為了好玩而編造的重量和每種的最佳紀錄（/cchud journal 開啟它）",  -- 712
+        "魚餌 %s",  -- 713
+        "沒有魚餌",  -- 714
+        "釣到 %d",  -- 715
+        "跑掉 %d",  -- 716
+        "釣魚介面",  -- 717
+        "手持魚竿時：你所在水域的魚（還沒在這裡釣到的保持隱藏）、你的釣魚技能和魚餌的加成、釣到多少和跑掉多少、魚餌還能持續多久，以及你最近的漁獲",  -- 718
+        "好奇的一條：+%d%%",  -- 719
+        "讓魚餌保持在魚的旁邊",  -- 720
+        "下一條漁獲 +%d%%",  -- 721
+        "按住 %s：魚餌沿著魚線移動",  -- 722
+        "連續 %d 條",  -- 723
+        "浮標在水裡時的小遊戲",  -- 724
+        "在魚線入水時於施法條上進行：按住扳機，魚餌沿著魚線移動，放開則漂回；讓它待在魚影旁邊。玩得越好，下一條漁獲的虛構重量越重。不占用任何按鈕，也從不影響拋竿或收獲",  -- 725
+        "釣到 %d，%d 種，跑掉 %d",  -- 726
+        "最重：%s，%s",  -- 727
+        "魚",  -- 728
+        "水域",  -- 729
+        "還沒有釣到任何東西。帶上魚竿去水邊吧。",  -- 730
+        "釣到：%d",  -- 731
+        "最重：%s，於%s",  -- 732
+        "首次釣到：%s",  -- 733
+        "在這裡釣到：%d",  -- 734
+        "在這裡發現的種類：%d",  -- 735
+        "選擇",  -- 736
+        "關閉",  -- 737
+        "開啟或關閉你的釣魚日誌：你釣到過的每個種類、每種最重的一條，以及你釣過魚的水域",  -- 738
+        "聊天安靜時淡出",  -- 739
+        "幾秒內沒有新訊息時聊天文字淡出",  -- 740
+        "聊天淡出前的秒數",  -- 741
+        "聊天文字在淡出前停留的時間",  -- 742
+        "地圖上的座標",  -- 743
+        "在世界地圖下方顯示你的座標",  -- 744
+        "自你登入以來已有 %d 則訊息被當作垃圾訊息隱藏。",  -- 745
+        "其中 %d 則是重複的公會招募。",  -- 746
+        "聊天中的職業圖示和等級",  -- 747
+        "在玩家名字前用方括號顯示其職業圖示和等級（在遊戲允許我們得知時）",  -- 748
+        "聊天中使用簡短頻道名",  -- 749
+        "行首的頻道名會被縮寫：[P] 隊伍，[PL] 隊長，[G] 公會，[O] 幹部，[R] 團隊，[RL] 團隊隊長，[I] 副本，帶編號的頻道只顯示編號，[1]",  -- 750
+        "聊天中只顯示名字",  -- 751
+        "帶姓氏的名字只顯示名字（Jory Spleeneater 顯示為 Jory）；對它密語或右鍵點擊仍然對應完整名字",  -- 752
+        "聊天文字大小",  -- 753
+        "聊天視窗中文字的大小，按遊戲本身大小的比例設定（遊戲本身的設定維持不變）",  -- 754
+        "隱藏金幣商人和重複廣告",  -- 755
+        "帶有網址的出售金幣或服務的訊息，以及同一玩家重複發送的相同訊息，將被隱藏（你的隊伍、公會和好友除外）",  -- 756
+        "隱藏重複的公會招募",  -- 757
+        "在公共頻道中，公會招募訊息只顯示一次；15 分鐘內同一玩家再次發送的，或幾乎相同的訊息將被隱藏（你的隊伍、公會和好友除外）",  -- 758
+        "列出最近被當作垃圾訊息隱藏的聊天訊息",  -- 759
+        "飛行",  -- 760
+        "目的地未知",  -- 761
+        "依距離估算",  -- 762
+        "此航線首次飛行：正在記錄飛行時間",  -- 763
+        "即將降落",  -- 764
+        "%s：約 %s，依距離估算",  -- 765
+        "%s：約 %s",  -- 766
+        "%s：此航線首次飛行，時間未知",  -- 767
+        "飛行中，目的地未知",  -- 768
+        "%s：已記住飛行時間，%s",  -- 769
+        "已知 %d 條飛行航線。",  -- 770
+        "飛行：時間和倒數",  -- 771
+        "飛行時在聊天中說明目的地和所需時間，畫面頂部的計時條倒數至降落；每條航線的時間從你的飛行中學習",  -- 772
+        "飛行：坐騎沿進度條飛行",  -- 773
+        "獅鷲獸、雙足飛龍或蝙蝠（飛行管理員給你的那隻）沿飛行進度條飛向你的降落地點",  -- 774
+        "列出已知時間的飛行航線",  -- 775
+        "落地！+%d",  -- 776
+        "撞進雲裡：連擊中斷",  -- 777
+        "%d 飛行金幣",  -- 778
+        "%s 振翅",  -- 779
+        "%s 撒網",  -- 780
+        "%s 高空",  -- 781
+        "%s：回到遊戲（%d 飛行金幣）",  -- 782
+        "%s：途中的小遊戲",  -- 783
+        "飛行小遊戲已關閉：/cchud flightgame on",  -- 784
+        "飛行小遊戲在飛行途中進行。",  -- 785
+        "戰鬥中不行。",  -- 786
+        "飛行小遊戲：開始 / 高空",  -- 787
+        "飛行：途中的小遊戲",  -- 788
+        "飛行時會在飛行條下方提供一個小遊戲，按一個按鈕開始（開始前只佔用這一個按鈕）：讓坐騎振翅穿過雲層，用網捕獲迎面而來的騎手，讓他們落地以贏得飛行金幣。再按同一個按鈕就是高空：遊戲收起，按鈕重新歸遊戲所有。戰鬥中從不出現，降落後消失",  -- 789
+        "飛行途中：開始飛行小遊戲，或把它收到高空再拿回來",  -- 790
+        "飛行是個好時機。",  -- 791
+        "你已經玩了 %s。",  -- 792
+        "該喝口水了",  -- 793
+        "喝水提醒",  -- 794
+        "遊戲時不時溫和地提醒你喝口水（戰鬥中不會）",  -- 795
+        "喝水提醒間隔（分鐘）",  -- 796
+        "兩次喝水提醒之間的遊戲分鐘數",  -- 797
+        "飛行開始時提醒喝水",  -- 798
+        "飛行是天然的休息：開始飛行時會提醒你喝水，除非上次提醒才過去不久",  -- 799
+        "顯示喝水提醒",  -- 800
+        "重新設計遊戲內建的框架",  -- 801
+        "滑鼠提示、增益、任務追蹤、小地圖、經驗條、聊天標籤和手把快捷列採用HUD的外觀（滑鼠介面保持遊戲原樣）",  -- 802
+        "經驗條大小",  -- 803
+        "重新設計樣式時經驗條和聲望條的大小，百分比",  -- 804
+        "滑鼠提示",  -- 805
+        "暗色玻璃樣式的滑鼠提示，邊緣為玩家職業顏色或物品品質顏色",  -- 806
+        "手把動作條",  -- 807
+        "手把按鈕採用深色底座上的纖細圓環，取代厚重的圖案",  -- 808
+        "增益",  -- 809
+        "你的增益和減益圖示經過裁切並加邊框，其時間帶描邊",  -- 810
+        "任務追蹤",  -- 811
+        "任務追蹤的標題採用暗色玻璃樣式，其文字行帶描邊",  -- 812
+        "小地圖",  -- 813
+        "在小地圖周圍顯示纖細圓環和柔和光暈，取代金色邊框",  -- 814
+        "經驗條",  -- 815
+        "經驗條和聲望條稍小一些，使用各自的顏色",  -- 816
+        "聊天",  -- 817
+        "聊天標籤名稱帶描邊，輸入框採用暗色玻璃樣式",  -- 818
+        "傷害統計",  -- 819
+        "遊戲傷害統計以HUD風格顯示：深色背景上的斜條和描邊文字；功能完全保留",  -- 820
+        "檢查：%d 項中通過 %d 項",  -- 821
+        "自你登入以來遊戲沒有卡頓過。",  -- 822
+        "遊戲卡頓的時刻，以及每次中 HUD 所占的部分：",  -- 823
+        "HUD 最慢的時刻：",  -- 824
+        "除錯報告",  -- 825
+        "自動收集排查問題的報告：登入時，以及重新載入或登出時再收集一次（保存在已儲存的設定中）",  -- 826
+        "自你登入以來遊戲卡頓的時刻，以及每次中 HUD 自身工作所占的部分",  -- 827
+        "HUD預設：%s，與鏡頭相配",  -- 828
+        "預設：%s",  -- 829
+        "名為「%s」的版面已新增到遊戲的編輯模式。請在那裡選擇它以使用（遊戲選單 > 編輯模式 > 版面）。",  -- 830
+        "未知的預設 '%s'",  -- 831
+        "適合電視：HUD 和聊天中的文字更大。",  -- 832
+        "適合螢幕：文字為一般大小。",  -- 833
+        "我們的框架已回到起始位置。請在編輯模式中選擇遊戲的%s版面（遊戲選單 > 編輯模式 > 版面）。",  -- 834
+        "預設會設定鏡頭距離",  -- 835
+        "預設還會把鏡頭一次性調到其版面所設計的距離（之後可自由縮放）",  -- 836
+        "動作",  -- 837
+        "第三人稱視角：角色旁的纖細直條，所有特效開啟；脫戰時一切淡出",  -- 838
+        "經典",  -- 839
+        "我們的框架位於魔獸世界一貫的位置，特效較柔和，保留遊戲內建的遊戲手把動作列",  -- 840
+        "精簡",  -- 841
+        "只顯示需要的：友方NPC只在你指向、瞄準或選取時顯示名條（含職能）；名字不帶頭銜；脫戰時你的條淡淡顯示（生命值低時總會顯示）",  -- 842
+        "開放世界",  -- 843
+        "適合探索的乾淨介面：身旁靜息時變淡的細條、不帶能量條的名條、會淡出的聊天",  -- 844
+        "冒險",  -- 845
+        "參照主機開放世界冒險：生命狀態在你身旁，小目標框在中上方，村民僅在你指向時顯示，聊天快速淡出",  -- 846
+        "魂系",  -- 847
+        "你的條在左上角，目標條像首領血條一樣大而置中偏下，每一擊都有感覺",  -- 848
+        "射擊",  -- 849
+        "中央偏右的直條靠近準星，目標在上方，強烈的命中回饋",  -- 850
+        "十字欄",  -- 851
+        "參照手把玩的MMO：目標和專注目標在中上方，你的條緊貼手把快捷列上方，小隊在左側，完整名條",  -- 852
+        "ARPG",  -- 853
+        "參照動作RPG：鏡頭拉遠，生命狀態在左下方，目標在中上方，雜兵顯示較小，每次命中都很醒目",  -- 854
+        "羅盤",  -- 855
+        "參照第一人稱RPG：鏡頭拉近，你的條在中下方，目標在頂部邊緣下方，村民僅在你指向時顯示",  -- 856
+        "團隊",  -- 857
+        "WoW 原有配置加上團隊所需的一切：隊伍和團隊框架、名條上的生命百分比和等級",  -- 858
+        "跟隨ControllerCam的預設",  -- 859
+        "在ControllerCam中為所有情境選擇鏡頭預設時，也會選擇相配的HUD預設（鏡頭保持自己的距離）",  -- 860
+        "現代",  -- 861
+        "將整個HUD設為預設：action, classic, minimal, openworld, adventure, soulslike, shooter, crossbar, arpg, compass, raid",  -- 862
+        "目標框架和名條同時設為緊湊或完整",  -- 863
+        "目標框架設為緊湊或完整",  -- 864
+        "按房間另一頭的電視或一臂之遙的螢幕來設定文字大小",  -- 865
+        "把我們的框架放回起始位置，以配合遊戲內建的現代或經典版面",  -- 866
+        "你的整套設定（HUD、鏡頭和遊戲版面）：複製這一行（Ctrl+C）以保存或分享。",  -- 867
+        "貼上一行 HUD 設定（Ctrl+V）並確認。",  -- 868
+        "這一行已損壞：請重新完整複製。",  -- 869
+        "這一行由較新的版本產生：請更新插件。",  -- 870
+        "這不是一行 HUD 設定。",  -- 871
+        "設定已匯入：採用 %d 項，略過 %d 項。",  -- 872
+        "鏡頭設定也一併匯入了。",  -- 873
+        "鏡頭設定維持原樣。",  -- 874
+        "遊戲版面現在是「%s」。",  -- 875
+        "遊戲版面維持原樣。",  -- 876
+        "你的設定，作為一行文字，用於保存或分享",  -- 877
+        "從由 /cchud export 產生的文字行中讀取設定",  -- 878
+        "使用手把介面時 HUD 已開啟。它的選項：選項 > 插件 > ControllerCam > HUD，或 /cchud。",  -- 879
+        "僅鏡頭：HUD 休息，遊戲介面維持原樣。/cchud on 可將其開啟。",  -- 880
+        "要同時為手把設定畫面嗎？這會在遊戲的編輯模式中新增一個名為 CCHUD 的版面，由你在那裡選擇：它把冷卻列放在目標下方，避開手把按鍵。你自己的版面會保留（/cchud setup 可再次提供此選項）。",  -- 881
+        "設定",  -- 882
+        "暫不",  -- 883
+        "ControllerCam 附帶一套手把介面，即 HUD：使用手把介面時顯示它自己的單位框架、名條、施法條等。你想要它，還是只要鏡頭？",  -- 884
+        "鏡頭 + HUD",  -- 885
+        "僅鏡頭",  -- 886
+        "此客戶端不允許插件變更版面配置。",  -- 887
+        "再問一次：鏡頭加 HUD，還是只要鏡頭",  -- 888
+        "再次提供為 HUD 製作的畫面版面（遊戲的編輯模式）",  -- 889
+        "使用遊戲手把介面時顯示。請在遊戲的編輯模式中拖曳我們的框架。",  -- 890
+        "預設",  -- 891
+        "適合的螢幕",  -- 892
+        "電視",  -- 893
+        "螢幕",  -- 894
+        "按鍵圖示",  -- 895
+        "遊戲為你的控制器按鍵顯示的圖示：依正在使用的控制器自動辨識，或你選擇的類型",  -- 896
+        "字型",  -- 897
+        "重置遊戲版面配置",  -- 898
+        "試試看",  -- 899
+        "播放示範",  -- 900
+        "顯示所有命中特效",  -- 901
+        "執行自我檢查",  -- 902
+        "手把快捷列：精簡 / 完整",  -- 903
+        "匯出設定",  -- 904
+        "匯入設定",  -- 905
+        "在主頁面勾選「顯示進階選項」以查看所有設定。",  -- 906
+        "模組",  -- 907
+        "快速開關",  -- 908
+        "一般",  -- 909
+        "HUD",  -- 910
+        "此用戶端無法使用選項面板。",  -- 911
+        "啟用",  -- 912
+        "整個 HUD；關閉後恢復遊戲內建的框架",  -- 913
+        "滑鼠和鍵盤介面中也啟用",  -- 914
+        "通常 HUD 僅在使用遊戲手把介面時執行",  -- 915
+        "隱藏遊戲內建的框架",  -- 916
+        "顯示我們的框架時，隱藏遊戲的玩家、目標和專注目標框架",  -- 917
+        "聊天視窗移到左上角",  -- 918
+        "HUD 執行時將聊天視窗移到左上角",  -- 919
+        "閒置時的垂直條",  -- 920
+        "非戰鬥狀態下生命力全滿時，垂直條保持的可見程度（0 為隱藏）",  -- 921
+        "職業顏色",  -- 922
+        "依職業為你的血條和其他玩家的血條著色",  -- 923
+        "職業圖示",  -- 924
+        "在目標和目標的目標的玩家名字前顯示職業圖示",  -- 925
+        "目標框架威脅",  -- 926
+        "目標框架上的盾牌圖示和光暈：攻擊你時為紅色，即將拉到仇恨時紅黃交替，正在失去仇恨時黃藍交替，不在你身上時為藍色",  -- 927
+        "全部使用緊湊條",  -- 928
+        "目標框架和名條使用緊湊樣式，寬度略多於一半（仍可分別設定；預設不會改變它）",  -- 929
+        "精簡目標框架",  -- 930
+        "目標框架寬度略大於一半",  -- 931
+        "戰鬥中的生命值顏色",  -- 932
+        "戰鬥中，生命值條隨生命值下降由綠色經黃色變為紅色",  -- 933
+        "文字背景陰影",  -- 934
+        "在目標文字後加一條淡淡的暗帶，使其易於閱讀",  -- 935
+        "文字大小",  -- 936
+        "我們框架上文字的大小",  -- 937
+        "框架大小",  -- 938
+        "我們的單位框架的大小",  -- 939
+        "戰鬥中的快捷列",  -- 940
+        "在有事需要注意之前，戰鬥中你的快捷列、寵物和專注目標有多明顯",  -- 941
+        "生命力低於時完整",  -- 942
+        "當你的生命力低於此值時，快捷列恢復為完整",  -- 943
+        "法力低於時完整",  -- 944
+        "當你的法力低於此值時，快捷列恢復為完整",  -- 945
+        "閒置時的玩家條",  -- 946
+        "生命值全滿或脫離戰鬥時玩家條的可見程度（0 為隱藏）",  -- 947
+        "商人和銀行說明",  -- 948
+        "商人的「出售垃圾」按鈕會詢問出售什麼；商人和銀行處可快速移動",  -- 949
+        "顯示進階選項",  -- 950
+        "所有設定，而不僅是主要開關",  -- 951
+        "玩家框架",  -- 952
+        "我們的玩家條，左上角",  -- 953
+        "目標框架",  -- 954
+        "我們的目標條，頂部中間",  -- 955
+        "寵物條",  -- 956
+        "玩家條下方或直立條旁邊的小型寵物條",  -- 957
+        "專注目標框架",  -- 958
+        "我們的專注目標框架",  -- 959
+        "角色旁的細長直立生命條和能量條，適合第三人稱視角（取代玩家條）",  -- 960
+        "商人開啟時出售垃圾",  -- 961
+        "商人一開啟就依你的規則出售垃圾",  -- 962
+        "白色武器和護甲算作垃圾",  -- 963
+        "將白色武器和護甲視為垃圾（工具、魚竿、有使用效果的裝備或可能是升級的物品除外；總是先詢問）",  -- 964
+        "打開銀行時存放",  -- 965
+        "標記為存銀行的物品，以及（開啟時）銀行裡已有的物品，會自動存入",  -- 966
+        "遊戲內建的選項；我們的小框架會跟隨它",  -- 967
+        "冷卻管理員",  -- 968
+        "遊戲的冷卻管理員",  -- 969
+        "個人資源顯示",  -- 970
+        "角色下方的生命值和能量",  -- 971
+        "銀行自動接收材料",  -- 972
+        "遊戲中銀行的選項",  -- 973
+        "增益開始時顯示提示",  -- 974
+        "遊戲選項：增益生效時，其提示會短暫彈出（手把介面）",  -- 975
+        "聊天名稱使用職業顏色",  -- 976
+        "遊戲的聊天設定，一次套用於所有聊天類型：玩家名稱顯示為其職業顏色",  -- 977
+        "開啟選項面板（選項 > 插件 > ControllerCam HUD）",  -- 978
+        "框架",  -- 979
+        "畫面淡出",  -- 980
+        "特效",  -- 981
+        "外觀",  -- 982
+        "任務、聊天和地圖",  -- 983
+        "背包、銀行和商人",  -- 984
+        "釣魚",  -- 985
+        "協助工具",  -- 986
+        "原生選項",  -- 987
+        "%s  |  遊戲手把介面：%s  |  執行中：%s",  -- 988
+        "玩家 %s，目標 %s，寵物 %s，專注目標 %s  |  已隱藏遊戲框架：%s  |  聊天已移動：%s",  -- 989
+        "原生選項：目標的目標 %s，冷卻管理員 %s，個人資源 %s",  -- 990
+        "文字大小 %d%%  |  文字陰影：%s",  -- 991
+        "商人和銀行說明：%s  |  自動出售：%s  |  白色裝備算垃圾：%s",  -- 992
+        "閒置可見度 %d%%  |  縮放 %d%%  |  職業顏色：%s",  -- 993
+        "適用於遊戲手把介面的極簡動作遊戲風格 HUD。",  -- 994
+        "已啟用",  -- 995
+        "已停用：遊戲內建的框架已恢復",  -- 996
+        "滑鼠和鍵盤介面中也使用：%s",  -- 997
+        "已隱藏遊戲框架：%s",  -- 998
+        "聊天已移到左上角：%s",  -- 999
+        "職業顏色：%s",  -- 1000
+        "此用戶端沒有該選項。",  -- 1001
+        "%s：%s（遊戲內建的選項）",  -- 1002
+        "遊戲目前不接受該操作。",  -- 1003
+        "商人和銀行說明：%s",  -- 1004
+        "自動出售：%s",  -- 1005
+        "白色裝備算垃圾：%s",  -- 1006
+        "商人說明已關閉。",  -- 1007
+        "用法：/cchud sell [junk | recommended | white | green | blue]",  -- 1008
+        "銀行開啟時存入已標記的物品：%s",  -- 1009
+        "用法：/cchud junk <item>（按住 Shift 點擊物品，將其放入聊天輸入列）",  -- 1010
+        "物品 %d：垃圾，與其餘一起出售",  -- 1011
+        "物品 %d：保留，永不出售",  -- 1012
+        "物品 %d：存入銀行",  -- 1013
+        "文字陰影：%s",  -- 1014
+        "用法：/cchud text <80-250>",  -- 1015
+        "文字大小 %d%%",  -- 1016
+        "示範已停止",  -- 1017
+        "HUD 未執行。",  -- 1018
+        "示範執行中：循環播放一場虛構的戰鬥。再次輸入 /cchud demo 可停止。",  -- 1019
+        "用法：/cchud idle <0-100>",  -- 1020
+        "閒置可見度 %d%%",  -- 1021
+        "用法：/cchud scale <50-200>",  -- 1022
+        "縮放 %d%%",  -- 1023
+        "拖曳框架，然後輸入 /cchud lock。",  -- 1024
+        "框架已鎖定",  -- 1025
+        "一切已恢復到初始狀態：設定、框架和畫面版面（你的商人標記和價格歷史會保留）。",  -- 1026
+        "框架已恢復到初始位置",  -- 1027
+        "未知指令「%s」。輸入 /cchud help",  -- 1028
+        "錯誤列表已清空。",  -- 1029
+        "沒有記錄的錯誤。",  -- 1030
+        "已記錄 %d 個錯誤（最新的在最後）。/cchud errors clear 清空列表。",  -- 1031
+        "顯示狀態",  -- 1032
+        "開啟或關閉 HUD（關閉後恢復遊戲內建的框架）",  -- 1033
+        "滑鼠和鍵盤介面中也使用 HUD",  -- 1034
+        "使用我們的框架，或遊戲內建的",  -- 1035
+        "角色旁邊的細長垂直生命力和能量條",  -- 1036
+        "目標的目標（遊戲內建的選項，遊戲選單中也有）",  -- 1037
+        "遊戲的冷卻管理員（遊戲內建的選項）",  -- 1038
+        "角色下方的生命值和能量（遊戲內建的選項）",  -- 1039
+        "增益開始時彈出的提示（遊戲內建選項）",  -- 1040
+        "保持遊戲內建的玩家和目標框架可見（開）或將其隱藏（關）",  -- 1041
+        "在商人處：選擇出售什麼（另有：sell junk, sell recommended, sell white | green | blue）",  -- 1042
+        "將白色武器和護甲算作垃圾",  -- 1043
+        "標記物品：一律出售、永不出售或存入銀行（按住 Shift 點擊，將其放入聊天輸入列）",  -- 1044
+        "在銀行：存入銀行裡已有的物品和所有標記為存銀行的物品",  -- 1045
+        "在銀行：取出你身上已有的物品",  -- 1046
+        "打開銀行後立即存放",  -- 1047
+        "銀行自動接收材料（遊戲內建的選項）",  -- 1048
+        "文字大小，以百分比表示（150在電視上很清晰）",  -- 1049
+        "沒事發生時玩家條的可見程度（0 為隱藏）",  -- 1050
+        "框架大小，百分比",  -- 1051
+        "將框架拖曳到你想要的位置（遊戲的編輯模式也能做到）",  -- 1052
+        "將框架恢復到初始位置",  -- 1053
+        "播放一場簡短的虛構戰鬥，查看框架如何反應（再次輸入可停止）",  -- 1054
+        "將螢幕上的內容與設定比對（check all 列出每一列）",  -- 1055
+        "儲存此用戶端遊戲手把介面的描述（用於疑難排解）",  -- 1056
+        "顯示此清單",  -- 1057
+        "HUD最近遇到的錯誤，重載後也保留（用於回報）",  -- 1058
     },
 }
 TRANSLATIONS.esMX = TRANSLATIONS.esES      -- Latin American Spanish uses the same text
