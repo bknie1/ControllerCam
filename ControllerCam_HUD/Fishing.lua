@@ -389,6 +389,9 @@ function F:Bars()
 end
 
 function F:Bind()
+    -- the pole looked at again each time: put away a moment after the game said the gear changed (B, a swap),
+    -- an old answer kept the bars put away and the prompt up after you stopped fishing
+    self.pole = self.active and F.HasPole() or false
     self:Bars()
     if InCombatLockdown() then return end
     local state = self:Want()
@@ -402,6 +405,8 @@ function F:Bind()
             else
                 self:Prompt():Show()
             end
+        elseif state == nil and hint and hint:IsShown() then    -- (nothing to prompt: never left up)
+            hint:Hide()
         end
         return
     end
@@ -518,7 +523,8 @@ end))
 -- (what is in front of you can change without the game saying so: looked at a few times a second)
 local since = 0
 events:SetScript("OnUpdate", ns.Protect(function(_, dt)
-    if not (F.active and F.pole) then return end
+    -- while you hold a pole, and until all of fishing is put away again (the bars, the prompt, the button)
+    if not (F.active and (F.pole or F.state or F.barsHidden or (hint and hint:IsShown()))) then return end
     since = since + dt
     if since < 0.3 then return end
     since = 0

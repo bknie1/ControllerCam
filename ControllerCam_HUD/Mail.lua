@@ -207,11 +207,17 @@ function MB:Button(show)
             local t = ns.Tooltip and ns.Tooltip.Own()
             if t then t:Hide() end
         end)
-        local game = _G.OpenAllMail
-        if type(game) == "table" and game.GetObjectType then
-            b:SetPoint("LEFT", game, "RIGHT", 6, 0)
+        -- under the window, in the row of the mailbox's tabs (Inbox, Send Mail), past the shoulder button's
+        -- prompt beside them, like Smart sell at the vendor: inside the window there is no room to spare
+        local last
+        for i = 1, 4 do
+            local tab = _G["MailFrameTab" .. i]
+            if type(tab) == "table" and tab.GetObjectType then last = tab end
+        end
+        if last then
+            b:SetPoint("LEFT", last, "RIGHT", 30, 0)
         else
-            b:SetPoint("BOTTOM", inbox, "BOTTOM", 0, 100)
+            b:SetPoint("TOPRIGHT", _G.MailFrame or inbox, "BOTTOMRIGHT", -8, -4)
         end
         self.button = b
         self:Label(self.run and L["Taking..."] or nil)

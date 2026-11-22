@@ -12,7 +12,7 @@
 ## Notes-zhCN: 手柄玩家的镜头配置。开箱即用的动作镜头，另有混合、经典等配置，可按情境（骑乘、战斗、团队副本、城市等）选择。支持导入/导出分享配置。
 ## Notes-zhTW: 手把玩家的鏡頭設定檔。開箱即用的動作鏡頭，另有混合、經典等設定檔，可依情境（騎乘、戰鬥、團隊副本、城市等）選擇。支援匯入/匯出分享設定檔。
 ## Author: bknie1
-## Version: 1.3.0
+## Version: 1.3.1
 ## IconTexture: Interface\AddOns\ControllerCam\Media\icon
 ## X-Website: https://github.com/bknie1/ControllerCam
 ## X-License: MIT

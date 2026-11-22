@@ -6220,6 +6220,21 @@ class FishingMode(unittest.TestCase):
         self.assertFalse(F.hint.shown)
         self.assertEqual(e.errors(), [])
 
+    def test_putting_the_pole_away_leaves_nothing_of_fishing_behind(self):
+        e = self.env()
+        F = e.ns.Fishing
+        e.update(0.6)
+        self.assertTrue(F.hint.shown)
+        self.assertTrue(F.barsHidden)
+        e.mock.fire("PLAYER_EQUIPMENT_CHANGED", 16)                  # the game says the gear changed ...
+        e.mock.state.mainHand = 25                                   # ... and the pole goes a moment later
+        e.update(1)
+        self.assertFalse(F.hint.shown)                               # the prompt gone,
+        self.assertFalse(F.barsHidden)                               # the bars back,
+        self.assertIsNone(e.mock.overrides.PAD3)                     # the button the game's
+        self.assertFalse(F.pole)
+        self.assertEqual(e.errors(), [])
+
     def test_a_quick_second_press_is_caught_as_soon_as_the_cast_is_sent(self):
         e = self.env()
         e.mock.put(0, 1, e.lua.table(id=6529, name="Shiny Bauble", count=3, **{"class": 0}))

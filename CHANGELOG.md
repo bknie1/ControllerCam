@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.3.1
+
+ControllerCam: HUD
+- Fixed: putting the fishing pole away (B, or swapping gear) could leave fishing behind: the gamepad bars stayed put away and the cast prompt could stay up, until the gear changed again. Whether you hold a pole is now looked at each time, and fishing keeps looking until all of it is put away.
+- Fixed: the mailbox's Take everything button ran past the right edge of the window. It now sits under the window, in the row of its tabs (Inbox, Send Mail), as Smart sell does at the vendor.
+
 ## 1.3.0
 
 Screen fade, the most asked for
