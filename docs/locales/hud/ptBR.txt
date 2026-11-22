@@ -38,6 +38,9 @@ Foco
 Barras verticais
 Fôlego com bolhas
 debaixo d'água, seu fôlego numa barra nossa com bolhas subindo: ao lado das barras verticais, sob o quadro do jogador ou no alto da tela
+Só a especialização atual
+Primária e secundária
+Qualquer especialização
 %d itens depositados
 %d itens tirados do banco
 %d itens vendidos por %s (/cchud sold lista-os)
@@ -90,6 +93,8 @@ A aba de recompra de um vendedor os recupera até você sair do jogo.
 Reparado por %s do banco da guilda
 Ouro insuficiente para reparar tudo (%s).
 Reparado por %s
+Melhorias: para quais especializações
+para quais das suas especializações uma melhoria conta, nas dicas, no Mercado e no que nunca é vendido: os talentos ativos agora, seus dois grupos de talentos ou qualquer árvore de talentos da sua classe
 Depositar também guarda o que o banco já tem
 um depósito move cada item do qual seu banco já tem algum (materiais, poções...), além dos itens marcados para o banco; nunca itens cinza, ferramentas ou itens marcados como lixo ou mantidos
 Reparar com vendedores
@@ -170,6 +175,12 @@ os seus já venderam aqui
 os seus não venderam
 segurado pelo preço do vendedor
 Casa de Leilões
+esta especialização
+%s (outra especialização)
+sua outra especialização
+%s (não é sua especialização)
+árvore de talentos %d
+Melhoria: %s
 Sobe perícia: %s
 Missão: %s
 %d%% de chance de vender
@@ -198,24 +209,35 @@ lê todos os preços da Casa de Leilões de uma vez (abra-a antes; a cada 15 min
 Fabrica: %s
 Guardar o que suas profissões ainda precisam
 um item pelo qual uma receita de um dos seus personagens ainda dá um ponto de perícia (receitas laranjas e amarelas, como o jogo as mostra na janela da profissão), ou com o qual se fabrica algo que vale mais na casa de leilões do que o próprio item, é guardado em vez de vendido, e a dica dele diz por quê. As receitas são lidas quando a janela de uma profissão está aberta
+Abra a janela de uma profissão e eu dou uma olhada nas suas receitas.
+Esse é o teto, %d. Um instrutor tem a próxima categoria para você.
+Nada mais a aprender em %d. Vá ver um instrutor sobre a próxima categoria.
+Suas receitas ficaram pequenas para você. Procure um instrutor: %s espera por você em %d.
+Faltam %d para %d, e o que você sabe não vai levá-lo até lá. Um instrutor tem %s para você em %d.
+Suas receitas ficaram pequenas para você. Procure um instrutor: %s espera por você.
+Suas receitas param de ensinar a %d de %d. Peça %s a um instrutor.
+Suas receitas se esgotam a %d de %d. Um instrutor terá algo novo.
+O que você sabe não vai levá-lo pelos últimos %d. Hora de ver um instrutor.
+%s já não vai ensinar muito, mas é o melhor que você tem. Faltam %d para %d.
+Daqui em diante é devagar: %s dá um ponto de vez em quando. Faltam %d.
+Faltam %d para %d. Comece com %s.
+%s é agora o seu melhor mestre. %d pontos até %d.
+Mãos firmes. Primeiro %s, e faltam %d.
 Para coletar ou comprar
 %d vezes: %s
 %s: você tem %d, o plano usa %d
 para %s
-Plano de evolução: %s %d > %d
-uma estimativa pelas cores das receitas, refeita conforme você evolui
-No máximo: um instrutor tem o próximo nível.
-%d pontos que nenhuma receita sua dá: aprenda novas com um instrutor
-Plano de evolução
-Abra a janela de uma profissão para fazer um plano.
+O Mentor: %s %d > %d
+O Mentor
 Farmar isto
 Farmar tudo
 Voltar
 Usar o plano
 %d adicionado(s) à lista de farm.
 Nada faltando: você tem o necessário.
-Plano de evolução: mostrar / ocultar
-Plano de evolução ao lado da janela da profissão
+Abra a janela de uma profissão para fazer um plano.
+O Mentor (plano de evolução): mostrar / ocultar
+O Mentor: um plano de evolução ao lado da janela da profissão
 enquanto a janela de uma profissão está aberta, um painel ao lado diz quais receitas fazer e quantas para chegar ao máximo, e o que isso exige, até o minério e as ervas; uma estimativa pelas cores das receitas
 Janela da profissão: quantos você poderia fazer com o seu banco
 ao lado do número do jogo de quantas vezes você pode fazer uma receita com as suas bolsas, um segundo número em azul inclui os reagentes do seu banco. Só aparece quando isso dá mais

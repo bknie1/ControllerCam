@@ -1,4 +1,4 @@
--- ControllerCam HUD: a levelling plan beside a profession's window.
+-- ControllerCam HUD: The Mentor, a levelling plan beside a profession's window.
 -- While a profession's window is open, a panel of our own sits beside it: which recipes to make, how many of
 -- each, and what that takes, to reach the profession's cap. It is an estimate, made again whenever the window
 -- changes (each craft), from what the window shows:
@@ -13,6 +13,8 @@
 -- What it takes is broken down through what your characters can make: a Bronze Bar the plan needs, less the
 -- ones you hold, becomes Copper Bars and Tin Bars, and those Copper Ore and Tin Ore, less what you hold of each.
 -- What is still missing can be put on the farm list (Farm.lua) with one button.
+-- The Mentor says it in a few plain words at the top (a few ways of putting each, picked when the window opens),
+-- and names the recipe to learn next when one of your characters has been seen with it (or the window lists it).
 -- Only read: nothing in the profession's window is opened, expanded, changed or written to.
 -- Also here: beside the game's count of a recipe you can make, a second one that counts your bank too.
 
@@ -30,10 +32,11 @@ LV.ROWS = 12
 LV.KEYS = { "PADDUP", "PADDDOWN", "PAD1", "PAD3", "PAD2", "ESCAPE", "PADLSTICK" }
 LV.KEY = "PADLSTICK"      -- while the window is open: L3 takes the plan's buttons, and gives them back
 LV.WINDOWS = { "TradeSkillFrame", "CraftFrame", "ProfessionsFrame" }
+LV.REACH = 120            -- how far past a window's edge its own tabs may stick out (the panel goes past them)
 
 ns.RegisterSetting({
     key = "skillPlan", kind = "boolean", default = true, command = "levelhelp", section = "Bags, bank and vendor",
-    label = "Levelling plan beside the profession window",
+    label = "The Mentor: a levelling plan beside the profession window",
     tip = "while a profession's window is open, a panel beside it says which recipes to make and how many to reach the cap, and what that takes, down to the ore and herbs; an estimate from the recipes' colours",
 })
 
@@ -63,7 +66,7 @@ local function CleanBounds(old)
             for name, b in pairs(list) do
                 if type(name) == "string" and type(b) == "table" then
                     local c = {}
-                    for _, k in ipairs({ "yl", "yh", "gl", "gh", "xl", "xh" }) do c[k] = tonumber(b[k]) end
+                    for _, k in ipairs({ "yl", "yh", "gl", "gh", "xl", "xh", "o" }) do c[k] = tonumber(b[k]) end
                     keep[name] = c
                 end
             end
@@ -73,6 +76,27 @@ local function CleanBounds(old)
     return out
 end
 ns.RegisterSaved("skillSteps", CleanBounds)
+
+-- The recipes each character has been seen to know: [name-realm][kind] = { [recipe] = true } (only ever added
+-- to, so a list filtered by a search never makes a recipe look unknown)
+ns.RegisterSaved("skillKnown", function(old)
+    local out = {}
+    if type(old) ~= "table" then return out end
+    for who, kinds in pairs(old) do
+        if type(who) == "string" and type(kinds) == "table" then
+            local keep = {}
+            for kind, list in pairs(kinds) do
+                if type(kind) == "string" and type(list) == "table" then
+                    local names = {}
+                    for name, on in pairs(list) do if type(name) == "string" and on then names[name] = true end end
+                    keep[kind] = names
+                end
+            end
+            out[who] = keep
+        end
+    end
+    return out
+end)
 
 ns.RegisterSaved("skillMakes", function(old)
     local out = {}
@@ -171,9 +195,14 @@ local function ReadModern()
     if type(name) ~= "string" or name == "" then return nil end
     local ok, ids = pcall(T.GetAllRecipeIDs)
     if not ok or type(ids) ~= "table" then return nil end
-    local read = { name = name, rank = Num(rank), cap = Num(cap), via = "modern", list = {} }
+    local read = { name = name, rank = Num(rank), cap = Num(cap), via = "modern", list = {}, missing = {} }
     for _, id in ipairs(ids) do
         local okI, info = pcall(T.GetRecipeInfo, id)
+        if okI and type(info) == "table" and info.learned == false then              -- a trainer's, still to learn
+            local m = MODERN[Plain(info.relativeDifficulty) or -1]
+            local n = Plain(info.name)
+            if m and m > 0 and type(n) == "string" then read.missing[#read.missing + 1] = n end
+        end
         local c = okI and type(info) == "table" and info.learned and MODERN[Plain(info.relativeDifficulty) or -1]
         local recipe = c and Plain(info.name)
         if c and type(recipe) == "string" then
@@ -220,10 +249,20 @@ function LV.Learn(read)
     db.skillMakes = db.skillMakes or {}
     local steps = db.skillSteps[read.kind] or {}
     db.skillSteps[read.kind] = steps
+    local me = ns.Inventory and ns.Inventory.Me and ns.Inventory.Me()
+    local known
+    if me then
+        db.skillKnown = db.skillKnown or {}
+        db.skillKnown[me] = db.skillKnown[me] or {}
+        known = db.skillKnown[me][read.kind] or {}
+        db.skillKnown[me][read.kind] = known
+    end
     local r = read.rank
     for _, rec in ipairs(read.list) do
         local b = steps[rec.n] or {}
         steps[rec.n] = b
+        Lower(b, "o", r)                                            -- (the lowest rank it was seen at, by anyone)
+        if known then known[rec.n] = true end
         if rec.c == 3 then Higher(b, "yl", r)                       -- orange: all of its changes are still ahead
         elseif rec.c == 2 then Lower(b, "yh", r); Higher(b, "gl", r)
         elseif rec.c == 1 then Lower(b, "gh", r); Higher(b, "xl", r)
@@ -278,6 +317,33 @@ function LV.Chance(rank, Y, X)
     if rank < Y then return 1 end
     if rank >= X then return 0 end
     return (X - rank) / (X - Y)
+end
+
+-- The recipe to learn next: one this character does not know that still teaches at its rank, seen with one of
+-- your other characters (the lowest rank it was seen at, too) or listed by the window as not learned yet.
+-- name, rank (or nil)
+function LV.NextRecipe(read)
+    if not (read and read.kind and read.rank) then return nil end
+    local db = ns.db or {}
+    local me = ns.Inventory and ns.Inventory.Me and ns.Inventory.Me()
+    local known = me and db.skillKnown and db.skillKnown[me] and db.skillKnown[me][read.kind] or {}
+    local mine = {}
+    for _, rec in ipairs(read.list or {}) do mine[rec.n] = true end
+    local steps = db.skillSteps and db.skillSteps[read.kind] or {}
+    local best, bestAt
+    local function Consider(name, at)
+        if mine[name] or known[name] then return end
+        local b = steps[name]
+        local X = b and select(3, LV.Thresholds(b, nil, read.rank))
+        if X and X <= read.rank then return end                                          -- grey for you by now
+        if b and b.o and b.o > read.cap then return end                                   -- past this rank's cap
+        local better = not best or (at and not bestAt) or (at and bestAt and at < bestAt)
+            or ((at == nil) == (bestAt == nil) and at == bestAt and name < best)
+        if better then best, bestAt = name, at end
+    end
+    for _, name in ipairs(read.missing or {}) do Consider(name, steps[name] and steps[name].o) end
+    for name, b in pairs(steps) do Consider(name, b.o) end
+    return best, bestAt
 end
 
 ---------------------------------------------------------------------------
@@ -430,6 +496,7 @@ function LV.Plan(read, target)
         for _, x in ipairs(step.rec.r) do plan.need[x.id] = (plan.need[x.id] or 0) + step.crafts * x.n end
     end
     plan.raw, plan.total, plan.made, plan.via = LV.Breakdown(plan.need)
+    plan.next, plan.nextAt = LV.NextRecipe(read)
     return plan
 end
 
@@ -477,6 +544,60 @@ function LV.Chain(plan, id)
     return table.concat(names, " > ")
 end
 
+-- The Mentor's words at the top of the panel: a few ways of putting each, picked when the window opens (LV.voice),
+-- so they do not change with every craft. Each gets the plan and the first step.
+local function Pick(list) return list[(LV.voice or 0) % #list + 1] end
+LV.SAY = {
+    none = { function() return L["Open a profession's window and I'll look over your recipes."] end },
+    capped = {
+        function(p) return L["That's the cap, %d. A trainer has the next rank for you."]:format(p.rank) end,
+        function(p) return L["Nothing more to learn at %d. Go and see a trainer about the next rank."]:format(p.rank) end,
+    },
+    -- some points no recipe of yours gives: the next recipe, with the rank it was seen at
+    nextAt = {
+        function(p) return L["You've outgrown your recipes. See a trainer: %s is waiting at %d."]:format(p.next, p.nextAt) end,
+        function(p) return L["%d more to %d, and what you know won't take you there. A trainer has %s for you at %d."]:format(
+            p.target - p.rank, p.target, p.next, p.nextAt) end,
+    },
+    next = {
+        function(p) return L["You've outgrown your recipes. See a trainer: %s is waiting."]:format(p.next) end,
+        function(p) return L["Your recipes stop teaching you %d short of %d. Ask a trainer for %s."]:format(p.short,
+            p.target, p.next) end,
+    },
+    short = {
+        function(p) return L["Your recipes run dry %d short of %d. A trainer will have something new."]:format(p.short,
+            p.target) end,
+        function(p) return L["What you know won't carry you the last %d. Time to see a trainer."]:format(p.short) end,
+    },
+    -- the best recipe from here is green: it teaches, but not every time
+    green = {
+        function(p, s) return L["%s won't teach you much now, but it's the best you have. %d more to %d."]:format(
+            s.rec.n, p.target - p.rank, p.target) end,
+        function(p, s) return L["Slow going from here: %s gives a point now and then. %d to go."]:format(s.rec.n,
+            p.target - p.rank) end,
+    },
+    go = {
+        function(p, s) return L["%d more to %d. Start with %s."]:format(p.target - p.rank, p.target, s.rec.n) end,
+        function(p, s) return L["%s is your best teacher now. %d points to %d."]:format(s.rec.n, p.target - p.rank,
+            p.target) end,
+        function(p, s) return L["Steady hands. %s first, and %d to go."]:format(s.rec.n, p.target - p.rank) end,
+    },
+}
+
+function LV.Words(plan)
+    if not plan then return Pick(LV.SAY.none)() end
+    local first = plan.steps[1]
+    local kind
+    if plan.capped then kind = "capped"
+    elseif plan.short and plan.next then kind = plan.nextAt and "nextAt" or "next"
+    elseif plan.short then kind = "short"
+    elseif not first then kind = "short"
+    elseif first.colour == 1 then kind = "green"
+    else kind = "go" end
+    if kind == "short" and not plan.short then return Pick(LV.SAY.capped)(plan) end
+    return Pick(LV.SAY[kind])(plan, first)
+end
+
 local function Build()
     frame = CreateFrame("Frame", "ControllerCamHUD_SkillPlanPanel", UIParent)
     frame:SetSize(WIDTH, 200)
@@ -495,10 +616,13 @@ local function Build()
     frame.title = ns.FontString(frame, 12, "LEFT")
     frame.title:SetPoint("TOPLEFT", frame, "TOPLEFT", 10, -8)
     frame.title:SetPoint("TOPRIGHT", frame, "TOPRIGHT", -10, -8)
-    frame.sub = ns.FontString(frame, 8, "LEFT")
-    frame.sub:SetPoint("TOPLEFT", frame.title, "BOTTOMLEFT", 0, -2)
-    frame.sub:SetPoint("TOPRIGHT", frame.title, "BOTTOMRIGHT", 0, -2)
-    frame.sub:SetTextColor(unpack(C.muted))
+    if frame.title.SetWordWrap then frame.title:SetWordWrap(false) end
+    frame.sub = ns.FontString(frame, 9, "LEFT")                -- The Mentor talking: warm parchment, wrapped
+    frame.sub:SetPoint("TOPLEFT", frame.title, "BOTTOMLEFT", 0, -4)
+    frame.sub:SetPoint("TOPRIGHT", frame.title, "BOTTOMRIGHT", 0, -4)
+    frame.sub:SetWidth(WIDTH - 20)
+    if frame.sub.SetWordWrap then frame.sub:SetWordWrap(true) end
+    frame.sub:SetTextColor(0.91, 0.86, 0.72)
     for i = 1, LV.ROWS do
         local r = CreateFrame("Button", nil, frame)
         r:SetSize(WIDTH - 12, ROW - 1)
@@ -522,6 +646,7 @@ local function Build()
     frame.detail = ns.FontString(frame, 9, "LEFT")
     frame.detail:SetPoint("LEFT", frame, "LEFT", 10, 0)
     frame.detail:SetPoint("RIGHT", frame, "RIGHT", -10, 0)
+    frame.detail:SetWidth(WIDTH - 20)
     if frame.detail.SetWordWrap then frame.detail:SetWordWrap(true) end
     frame.detail:SetTextColor(0.78, 0.88, 1)
     frame.hint = ns.FontString(frame, 8, "LEFT")
@@ -583,6 +708,19 @@ local function Detail(plan, e)
     return ""
 end
 
+-- How tall a wrapped text is (the game measures it; an estimate where it cannot)
+local function TextHeight(fs, size)
+    local text = fs.GetText and Plain(fs:GetText())
+    if type(text) ~= "string" or text == "" then return 0 end
+    local h = fs.GetStringHeight and Num(fs:GetStringHeight())
+    if h and h > 0 then return math.ceil(h) end
+    local plainText = text:gsub("|c%x%x%x%x%x%x%x%x", ""):gsub("|r", ""):gsub("|A.-|a", "")
+    local lines = 0
+    for line in (plainText .. "\n"):gmatch("(.-)\n") do lines = lines + math.max(1, math.ceil(#line / 58)) end
+    return lines * (size + 3)
+end
+LV.TextHeight = TextHeight
+
 function LV:Refresh()
     if not (frame and frame:IsShown()) then return end
     local plan = self.plan
@@ -594,21 +732,18 @@ function LV:Refresh()
     if self.index > self.top + LV.ROWS - 1 then self.top = self.index - LV.ROWS + 1 end
     self.top = ns.Clamp(self.top, 1, math.max(1, n - LV.ROWS + 1))
     if plan then
-        frame.title:SetText(L["Levelling plan: %s %d > %d"]:format(plan.name, plan.rank, plan.target))
-        local sub = L["an estimate from the recipes' colours, made again as you level"]
-        if plan.capped then sub = L["At the cap: a trainer has the next rank."]
-        elseif plan.short then sub = L["%d points no recipe of yours gives: learn new ones at a trainer"]:format(plan.short) end
-        frame.sub:SetText(sub)
+        frame.title:SetText(L["The Mentor: %s %d > %d"]:format(plan.name, plan.rank, plan.target))
     else
-        frame.title:SetText(L["Levelling plan"])
-        frame.sub:SetText(L["Open a profession's window to make a plan."])
+        frame.title:SetText(L["The Mentor"])
     end
+    frame.sub:SetText(LV.Words(plan))
+    local top = 8 + 14 + 4 + TextHeight(frame.sub, 9) + 8          -- under the title and The Mentor's words
     local shown = 0
     for i, r in ipairs(self.rows) do
         local at = self.top + i - 1
         local e = self.entries[at]
         r:ClearAllPoints()
-        r:SetPoint("TOPLEFT", frame, "TOPLEFT", 6, -40 - (i - 1) * ROW)
+        r:SetPoint("TOPLEFT", frame, "TOPLEFT", 6, -top - (i - 1) * ROW)
         if e then
             shown = i
             r.at = (not e.head) and at or nil
@@ -634,31 +769,59 @@ function LV:Refresh()
             r:Hide()
         end
     end
-    local y = -40 - shown * ROW - 6
+    local y = top + shown * ROW + 4
     frame.detail:ClearAllPoints()
-    frame.detail:SetPoint("TOPLEFT", frame, "TOPLEFT", 10, y)
-    frame.detail:SetPoint("TOPRIGHT", frame, "TOPRIGHT", -10, y)
+    frame.detail:SetPoint("TOPLEFT", frame, "TOPLEFT", 10, -y)
+    frame.detail:SetPoint("TOPRIGHT", frame, "TOPRIGHT", -10, -y)
     frame.detail:SetText(self.focus and Detail(plan, self.entries[self.index]) or "")
+    local detail = TextHeight(frame.detail, 9)
+    if detail > 0 then y = y + detail + 6 end
     if self.focus then
         frame.hint:SetText(("%s %s   %s %s   %s %s"):format(KeyName("PAD1"), L["Farm this"], KeyName("PAD3"),
             L["Farm all"], KeyName("PAD2"), L["Back"]))
     else
         frame.hint:SetText(("%s %s"):format(KeyName(LV.KEY), L["Use the plan"]))
     end
-    frame:SetHeight(40 + shown * ROW + (self.focus and 40 or 6) + 18)
+    frame:SetHeight(math.floor(y + 6 + 18 + 0.5))                 -- then the buttons' line, at the bottom
+    self.layout = { top = top, rows = shown, detail = detail, height = y + 24 }
 end
 
--- Beside the game's window (or in the middle of the screen, away from one)
+-- How far the window's own parts (its tabs down the right edge) stick out past it: read, never changed
+function LV.Clearance(w)
+    local right = Num(w.GetRight and w:GetRight())
+    if not right then return 0 end
+    local far = right
+    local ok, kids = pcall(function() return { w:GetChildren() } end)
+    for _, k in ipairs(ok and kids or {}) do
+        if type(k) == "table" and k ~= w and k.IsShown and k:IsShown() then
+            local r = Num(k.GetRight and k:GetRight())
+            if r and r > far and r <= right + LV.REACH then far = r end
+        end
+    end
+    return far - right
+end
+
+-- Beside the game's window, past its tabs; left of it, or under it, where the screen has no room on the right
+-- (in the middle of the screen, away from one)
 function LV:Place()
     if not frame then return end
     local w = LV.Window()
     frame:ClearAllPoints()
-    if w then frame:SetPoint("TOPLEFT", w, "TOPRIGHT", 6, 0)
-    else frame:SetPoint("CENTER", UIParent, "CENTER", 0, 40) end
+    if not w then frame:SetPoint("CENTER", UIParent, "CENTER", 0, 40); return end
+    local gap = 6 + LV.Clearance(w)
+    local right, left = Num(w.GetRight and w:GetRight()), Num(w.GetLeft and w:GetLeft())
+    local screen = Num(UIParent.GetRight and UIParent:GetRight()) or Num(UIParent.GetWidth and UIParent:GetWidth())
+    if right and screen and right + gap + WIDTH > screen then
+        if left and left >= WIDTH + 6 then frame:SetPoint("TOPRIGHT", w, "TOPLEFT", -6, 0)
+        else frame:SetPoint("TOPLEFT", w, "BOTTOMLEFT", 0, -6) end
+        return
+    end
+    frame:SetPoint("TOPLEFT", w, "TOPRIGHT", gap, 0)
 end
 
 function LV:Show()
     if not frame then Build() end
+    if not frame:IsShown() then LV.voice = math.random(0, 59) end   -- The Mentor's way of saying things, this visit
     self:Place()
     frame:Show()
     if not self.focus then self.key:Set(true) end
@@ -821,7 +984,7 @@ function LV:Toggle()
 end
 
 function ControllerCamHUD_SkillPlan() ns.Protect(function() LV:Toggle() end)() end
-BINDING_NAME_CCHUD_SKILLPLAN = L["Levelling plan: show / hide"]
+BINDING_NAME_CCHUD_SKILLPLAN = L["The Mentor (levelling plan): show / hide"]
 ns.RegisterCommand("levelplan", function() LV:Toggle() end, "/cchud levelplan",
     "show the levelling plan of the profession window you opened last, with the controller's buttons on it")
 

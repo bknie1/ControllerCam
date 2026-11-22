@@ -229,8 +229,10 @@ function AP.Reason(e)
             .. (odds and ("  " .. SAYS .. odds .. "|r") or "")
     end
     if not e.price then return GREY .. L["no price known yet"] .. "|r" end
-    if e.verdict == "keep" then return GREY .. ns.Market.WORDS.keep .. "|r" end
-    if e.verdict == "equip" then return GREY .. ns.Market.WORDS.equip .. "|r" end
+    if e.verdict == "keep" or e.verdict == "equip" then              -- (and which of your specs it is for)
+        local specs = ns.Market.SpecWords(e.want)
+        return GREY .. ns.Market.WORDS[e.verdict] .. (specs and ("  " .. specs) or "") .. "|r"
+    end
     if e.verdict == "quest" then return GREY .. L["Quest: %s"]:format(ns.Quests.WantText(e.want)) .. "|r" end
     if e.verdict == "skill" then return GREY .. L["Skill-up: %s"]:format(ns.Professions.Words(e.want)) .. "|r" end
     if e.verdict == "craft" then return GREY .. ns.Professions.Words(e.want) .. "|r" end

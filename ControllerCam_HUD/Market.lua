@@ -265,6 +265,13 @@ function M.Advice(verdict, more, want, id)
     if verdict == "equip" then
         add(word)
         add(GREY .. L["better than what you wear"] .. "|r")
+        local specs = M.SpecWords(want)
+        if specs then add(GREY .. specs .. "|r") end
+        return lines
+    end
+    if verdict == "keep" and M.SpecWords(want) then                    -- an upgrade for another spec of yours
+        add(word)
+        add(GREY .. M.SpecWords(want) .. "|r")
         return lines
     end
     if verdict == "skill" then
@@ -390,6 +397,30 @@ M.ICON = {
 }
 M.WORDS = { auction = L["Auction house"], vendor = L["Vendor"], keep = L["Keep"], equip = L["Equip"], quest = L["Quest"] }
 
+-- Which of your specs an upgrade is for, in words (want.specs: Vendor.Specs' entries), or nil when there is no
+-- name to give: "Upgrade: Holy, Retribution (other spec)". A spec the game gives no name for is said plainly
+-- ("your other spec", "talent tree 2"); the one you have on, unnamed, is "this spec" (beside others) or left out.
+function M.SpecWords(want)
+    local specs = type(want) == "table" and want.specs
+    if type(specs) ~= "table" or #specs == 0 then return nil end
+    local parts, named = {}, false
+    for _, s in ipairs(specs) do
+        if s.rel == "current" then
+            parts[#parts + 1] = s.name or L["this spec"]
+            named = named or s.name ~= nil
+        elseif s.rel == "other" then
+            parts[#parts + 1] = s.name and L["%s (other spec)"]:format(s.name) or L["your other spec"]
+            named = true
+        else
+            parts[#parts + 1] = s.name and L["%s (not your spec)"]:format(s.name)
+                or L["talent tree %d"]:format(s.tree or 0)
+            named = true
+        end
+    end
+    if not named then return nil end
+    return L["Upgrade: %s"]:format(table.concat(parts, ", "))
+end
+
 -- The best use in words, with its icon: "Auction house +22c  80% likely to sell", "Skill-up: Alchemy 50/150"
 function M.BestText(verdict, more, want)
     local right
@@ -402,6 +433,8 @@ function M.BestText(verdict, more, want)
         return icon .. " " .. L["Quest: %s"]:format(ns.Quests.WantText(want))
     else
         right = (M.ICON[verdict] or "") .. " " .. (M.WORDS[verdict] or tostring(verdict))
+        local specs = (verdict == "equip" or verdict == "keep") and M.SpecWords(want)
+        if specs then right = right .. GREY .. "  " .. specs .. "|r" end
     end
     if more and verdict ~= "skill" then right = right .. "  |cff6fe06a+|r" .. ns.MoneyColored(more) end
     local chance = verdict == "auction" and type(want) == "table" and want.chance
@@ -467,8 +500,20 @@ function M.Verdict(id, bound)
             return "keep"                                                  -- your last tool of its kind
         end
         local V = ns.Vendor
-        if ok and V and V.Upgrade and (classID == 2 or classID == 4) and V.Upgrade(id, equipLoc) then
-            return "equip"                                                 -- better than what you wear
+        if ok and V and V.UpgradeSpecs and (classID == 2 or classID == 4) then
+            local specs = V.UpgradeSpecs(id, equipLoc)
+            if #specs > 0 then
+                -- better than what you wear: put it on. Better only for another spec of yours: kept for it.
+                -- (which specs, when there is a name to give: M.SpecWords)
+                local want = M.SpecWords({ specs = specs }) and { specs = specs } or nil
+                for _, spec in ipairs(specs) do
+                    if spec.rel == "current" then
+                        if want then return "equip", nil, want end
+                        return "equip"
+                    end
+                end
+                return "keep", nil, want
+            end
         end
         if ok and V and V.KeepConsumable and classID == 0 and V.KeepConsumable(id, nil, classID) then
             soft = true                                                    -- the best of its kind you carry

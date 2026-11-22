@@ -38,6 +38,9 @@ Focalisation
 Barres verticales
 Souffle avec bulles
 sous l'eau, votre souffle sur une barre à nous d'où montent des bulles : à côté des barres verticales, sous le cadre du joueur ou en haut de l'écran
+Spécialisation actuelle seule
+Principale et secondaire
+Toute spécialisation
 %d objets déposés
 %d objets retirés de la banque
 %d objets vendus pour %s (/cchud sold les liste)
@@ -90,6 +93,8 @@ L'onglet Rachat d'un marchand vous les rend jusqu'à votre déconnexion.
 Réparé pour %s depuis la banque de guilde
 Pas assez d'or pour tout réparer (%s).
 Réparé pour %s
+Améliorations : pour quelles spécialisations
+pour quelles spécialisations une amélioration compte, dans les infobulles, sur le Marché et dans ce qui n'est jamais vendu : les talents actifs maintenant, vos deux groupes de talents ou n'importe quel arbre de talents de votre classe
 Le dépôt range aussi ce que la banque contient déjà
 un dépôt déplace chaque objet dont votre banque a déjà un exemplaire (composants, potions...), en plus des objets marqués pour la banque ; jamais les objets gris, les outils ni les objets marqués comme camelote ou gardés
 Réparer chez les marchands
@@ -170,6 +175,12 @@ les tiens se sont déjà vendus ici
 les tiens sont restés invendus
 tenu par le prix du marchand
 Hôtel des ventes
+cette spécialisation
+%s (autre spécialisation)
+votre autre spécialisation
+%s (pas votre spécialisation)
+arbre de talents %d
+Amélioration : %s
 Monte une compétence: %s
 Quête : %s
 %d%% de chances de se vendre
@@ -198,24 +209,35 @@ lit tous les prix de l'hôtel des ventes d'un coup (ouvrez-le d'abord ; toutes l
 Fabrique: %s
 Garder ce dont vos métiers ont encore besoin
 un objet pour lequel une recette de l'un de vos personnages donne encore un point de compétence (recettes orange et jaunes, comme le jeu les montre dans la fenêtre du métier), ou qui sert à fabriquer quelque chose qui vaut plus à l'hôtel des ventes que l'objet lui-même, est gardé, pas vendu, et sa bulle d'aide dit pourquoi. Les recettes sont lues quand la fenêtre d'un métier est ouverte
+Ouvrez la fenêtre d'un métier et je jetterai un œil à vos recettes.
+C'est le plafond, %d. Un maître a le rang suivant pour vous.
+Plus rien à apprendre à %d. Allez voir un maître pour le rang suivant.
+Vos recettes ne vous suffisent plus. Allez voir un maître : %s vous attend à %d.
+Encore %d jusqu'à %d, et ce que vous savez ne vous y mènera pas. Un maître a %s pour vous à %d.
+Vos recettes ne vous suffisent plus. Allez voir un maître : %s vous attend.
+Vos recettes cessent de vous apprendre quoi que ce soit à %d de %d. Demandez %s à un maître.
+Vos recettes s'épuisent à %d de %d. Un maître aura quelque chose de nouveau.
+Ce que vous savez ne vous portera pas sur les %d derniers. Il est temps de voir un maître.
+%s ne vous apprendra plus grand-chose, mais c'est ce que vous avez de mieux. Encore %d jusqu'à %d.
+Ça avance lentement à partir d'ici : %s donne un point de temps en temps. Encore %d.
+Encore %d jusqu'à %d. Commencez par %s.
+%s est votre meilleur maître à présent. %d points jusqu'à %d.
+Les mains sûres. D'abord %s, et encore %d.
 À récolter ou acheter
 %d fabrications : %s
 %s : vous en avez %d, le plan en utilise %d
 pour %s
-Plan de progression : %s %d > %d
-une estimation d'après les couleurs des recettes, refaite à mesure que vous progressez
-Au maximum : un maître a le rang suivant.
-%d points qu'aucune de vos recettes ne donne : apprenez-en de nouvelles chez un maître
-Plan de progression
-Ouvrez la fenêtre d'un métier pour faire un plan.
+Le Mentor : %s %d > %d
+Le Mentor
 Farmer ceci
 Tout farmer
 Retour
 Utiliser le plan
 %d ajouté(s) à la liste à farmer.
 Rien ne manque : vous avez ce qu'il faut.
-Plan de progression : afficher / masquer
-Plan de progression à côté de la fenêtre du métier
+Ouvrez la fenêtre d'un métier pour faire un plan.
+Le Mentor (plan de progression) : afficher / masquer
+Le Mentor : un plan de progression à côté de la fenêtre du métier
 tant que la fenêtre d'un métier est ouverte, un panneau à côté indique quelles recettes faire et combien pour atteindre le maximum, et ce qu'il faut, jusqu'au minerai et aux herbes ; une estimation d'après les couleurs des recettes
 Fenêtre du métier : combien vous pourriez en fabriquer avec votre banque
 à côté du nombre du jeu de fois où vous pouvez fabriquer une recette avec vos sacs, un second nombre en bleu compte aussi les composants de votre banque. Il n'apparaît que s'il est plus grand

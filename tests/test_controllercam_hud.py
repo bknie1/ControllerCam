@@ -11441,6 +11441,125 @@ class Levelling(unittest.TestCase):
         self.assertEqual(e.errors(), [])
 
 
+class Mentor(unittest.TestCase):
+    """The Mentor: the levelling plan's own voice, laid out line under line, clear of the window's tabs."""
+
+    def env(self, **kw):
+        return Levelling().env(**kw)
+
+    def test_the_mentor_names_the_plan_in_a_few_plain_words(self):
+        e = self.env()
+        LV = e.ns.Levelling
+        panel = e.g.ControllerCamHUD_SkillPlanPanel
+        self.assertEqual(plain(panel.title.text), "The Mentor: Alchemy 50 > 60")
+        said = set()
+        for voice in range(3):
+            LV.voice = voice
+            LV.Refresh(LV)
+            said.add(plain(panel.sub.text))
+        self.assertEqual(len(said), 3)                               # three ways of putting it
+        for line in said:
+            self.assertIn("Minor Healing Potion", line)              # the recipe to start with
+        self.assertIn("10 more to 60. Start with Minor Healing Potion.", said)
+        e.ns.Professions = None                                      # (the words need nothing else)
+        T = e.lua.table
+        plan = T(rank=225, target=225, cap=225, capped=True, steps=T())
+        LV.voice = 0
+        self.assertEqual(LV.Words(plan), "That's the cap, 225. A trainer has the next rank for you.")
+        plan = T(rank=192, target=225, cap=225, short=33, steps=T(), next="Smelt Mithril", nextAt=175)
+        self.assertEqual(LV.Words(plan), "You've outgrown your recipes. See a trainer: Smelt Mithril is waiting at 175.")
+        LV.voice = 1
+        self.assertEqual(LV.Words(plan), "33 more to 225, and what you know won't take you there. "
+                                         "A trainer has Smelt Mithril for you at 175.")
+        plan.nextAt = None
+        self.assertEqual(LV.Words(plan), "Your recipes stop teaching you 33 short of 225. Ask a trainer for Smelt Mithril.")
+        plan.next = None
+        self.assertEqual(LV.Words(plan), "What you know won't carry you the last 33. Time to see a trainer.")
+        step = T(rec=T(n="Smelt Iron"), colour=1)
+        plan = T(rank=192, target=225, cap=225, steps=e.lua.table_from([step]))
+        LV.voice = 0
+        self.assertEqual(LV.Words(plan), "Smelt Iron won't teach you much now, but it's the best you have. 33 more to 225.")
+        self.assertEqual(LV.Words(None), "Open a profession's window and I'll look over your recipes.")
+        self.assertEqual(e.errors(), [])
+
+    def test_each_line_has_its_own_place(self):
+        e = self.env()
+        LV = e.ns.Levelling
+        panel = e.g.ControllerCamHUD_SkillPlanPanel
+        for words, rows in ((None, None), ("x " * 120, None)):      # one line, then words wrapping over several
+            if words:
+                LV.Words = e.lua.eval("function(w) return function() return w end end")(words)
+                LV.Refresh(LV)
+            lay = LV.layout
+            sub = LV.TextHeight(panel.sub, 9)
+            self.assertGreaterEqual(lay.top, 8 + 14 + 4 + sub + 8)  # the rows start under the words, however long
+            first = LV.rows[1].points[1]
+            self.assertEqual(first[5], -lay.top)
+            self.assertGreaterEqual(panel.height, lay.top + lay.rows * 20 + 24)   # and the buttons' line under them
+        self.assertGreater(LV.TextHeight(panel.sub, 9), 24)          # (the long one took several lines)
+        e.lua.execute("TRADE = { 'Alchemy', 60, 60 }")              # at the cap: no rows, words and buttons apart
+        e.mock.fire("TRADE_SKILL_UPDATE")
+        e.update(0.5)
+        self.assertTrue(LV.plan.capped)
+        self.assertEqual(LV.layout.rows, 0)
+        self.assertGreaterEqual(panel.height, LV.layout.top + 24)
+        self.assertEqual(e.errors(), [])
+
+    def test_the_next_recipe_comes_from_your_other_characters(self):
+        e = self.env()
+        LV, T = e.ns.Levelling, e.lua.table
+        steps = e.db.skillSteps.alchemy
+        steps["Healing Potion"] = T(o=55)                            # seen with another character from 55
+        steps["Swiftness Potion"] = T(o=58)
+        steps["Ancient Brew"] = T(o=5, xh=40, xl=35)                 # grey for you by now
+        steps["Strong Troll's Blood"] = T(o=90)                      # past this rank's cap
+        steps["Lesser Healing Potion"] = T(o=20)
+        e.db.skillKnown["Ghostlight-Forever"].alchemy["Lesser Healing Potion"] = True   # you know it (a search hid it)
+        self.assertTrue(e.db.skillKnown["Ghostlight-Forever"].alchemy["Minor Healing Potion"])
+        name, at = LV.NextRecipe(LV.read)
+        self.assertEqual((name, at), ("Healing Potion", 55))
+        e.mock.fire("TRADE_SKILL_UPDATE")                            # the plan made again carries it
+        e.update(0.5)
+        self.assertEqual((LV.plan["next"], LV.plan.nextAt), ("Healing Potion", 55))
+        LV.read.missing = e.lua.table_from(["Elixir of Wisdom"])     # the newer window lists one not learned yet
+        steps["Healing Potion"] = None
+        steps["Swiftness Potion"] = None
+        self.assertEqual(tuple(LV.NextRecipe(LV.read)), ("Elixir of Wisdom", None))
+        again = Env(db=e.mock.serialize(e.g.ControllerCamHUDDB))    # kept across a reload
+        self.assertTrue(again.db.skillKnown["Ghostlight-Forever"].alchemy["Lesser Healing Potion"])
+        self.assertEqual(again.db.skillSteps.alchemy["Minor Healing Potion"].o, 50)
+        self.assertEqual(e.errors(), [])
+
+    def test_the_panel_sits_clear_of_the_windows_tabs(self):
+        e = self.env()
+        LV = e.ns.Levelling
+        panel = e.g.ControllerCamHUD_SkillPlanPanel
+        e.lua.execute("""
+            TAB = CreateFrame("Button", nil, TradeSkillFrame)
+            TAB.GetRight = function() return 540 end
+            FAR = CreateFrame("Frame", nil, TradeSkillFrame)
+            FAR.GetRight = function() return 1400 end                -- (not a tab: much too far out)
+            TradeSkillFrame.GetRight = function() return 500 end
+            TradeSkillFrame.GetLeft = function() return 100 end
+            TradeSkillFrame.GetChildren = function() return TAB, FAR end
+            UIParent.GetRight = function() return 1920 end
+        """)
+        LV.Place(LV)
+        p = panel.points[1]
+        self.assertEqual((p[1], p[3], p[4], p[5]), ("TOPLEFT", "TOPRIGHT", 46, 0))   # past the tabs
+        self.assertTrue(e.same(p[2], e.window))
+        e.lua.execute("UIParent.GetRight = function() return 800 end; TradeSkillFrame.GetLeft = function() return 400 end")
+        LV.Place(LV)
+        p = panel.points[1]
+        self.assertEqual((p[1], p[3], p[4]), ("TOPRIGHT", "TOPLEFT", -6))             # no room: on the left
+        e.lua.execute("TradeSkillFrame.GetLeft = function() return 50 end")
+        LV.Place(LV)
+        p = panel.points[1]
+        self.assertEqual((p[1], p[3], p[4], p[5]), ("TOPLEFT", "BOTTOMLEFT", 0, -6))  # nor there: under it
+        self.assertEqual(len(e.window.points), 0)                     # nothing done to the game's window
+        self.assertEqual(e.errors(), [])
+
+
 class FarmList(unittest.TestCase):
     """Things to farm, beside the quest list."""
 
@@ -13039,6 +13158,152 @@ class BankCounts(unittest.TestCase):
         e.update(0.5)
         self.assertEqual(BK.shown, 0)
         self.assertIn("counts with the bank", "\n".join(e.ns.Levelling.Describe().values()))
+        self.assertEqual(e.errors(), [])
+
+
+class SpecUpgrades(unittest.TestCase):
+    """Upgrades by spec: which of your specs an item is better for, and the setting for which specs count."""
+
+    TALENTS = """function(mock, named)
+        TALENTS = { active = 1, groups = { { 31, 5, 0 }, { 0, 5, 31 } } }      -- holy, and retribution
+        GetNumSpecGroups = function() return #TALENTS.groups end
+        C_SpecializationInfo = {
+            GetActiveSpecGroup = function() return TALENTS.active end,
+            GetCombatConfigIDForSpecGroup = function(g) return 100 + g end,
+        }
+        C_Traits = {
+            GetConfigInfo = function(config) return { treeIDs = { 7 } } end,
+            GetGroupDisplayInfoByTreeID = function(tree)
+                return { { groupID = 11, orderIndex = 0, name = named and "Holy" or nil },
+                         { groupID = 12, orderIndex = 1, name = named and "Protection" or nil },
+                         { groupID = 13, orderIndex = 2, name = named and "Retribution" or nil } }
+            end,
+            GetGroupCurrencyInfo = function(config, ids)
+                local spent, out = TALENTS.groups[config - 100], {}
+                for i, id in ipairs(ids) do
+                    out[i] = { traitNodeGroupID = id, currencyInfos = { { spent = spent[id - 10] } } }
+                end
+                return out
+            end,
+        }
+        C_Item.GetItemStats = function(link)
+            local id = tonumber(tostring(link):match("item:(%d+)")) or link
+            local it = mock.items[id]
+            return it and it.stats
+        end
+    end"""
+
+    def env(self, mode=None, named=True):
+        db = "{ v = 5, sell = { gear = true }%s }" % ("" if mode is None else ", upgradeSpecs = %d" % mode)
+        e = Env(db=db)
+        e.mock.units.player["class"], e.mock.units.player.level = "PALADIN", 45      # plate
+        e.lua.eval(self.TALENTS)(e.mock, named)
+        T = e.lua.table
+
+        def chest(iid, name, bag_slot=None, **stats):
+            item = T(id=iid, name=name, quality=1, ilvl=30, price=50, loc="INVTYPE_CHEST", sub=4,
+                     stats=T(**stats), **{"class": 4})
+            if bag_slot:
+                e.mock.put(0, bag_slot, item)
+            else:
+                e.mock["items"][iid] = item
+        chest(980, "Worn Plate of Wisdom", ITEM_MOD_INTELLECT_SHORT=10, ITEM_MOD_STAMINA_SHORT=5)
+        e.mock.worn[5] = 980                                                 # holy gear on
+        chest(981, "Plate of Wisdom", 1, ITEM_MOD_INTELLECT_SHORT=16, ITEM_MOD_STAMINA_SHORT=6)
+        chest(982, "Plate of Might", 2, ITEM_MOD_STRENGTH_SHORT=16, ITEM_MOD_STAMINA_SHORT=6)
+        chest(983, "Bulwark Plate", 3, ITEM_MOD_STAMINA_SHORT=20, ITEM_MOD_STRENGTH_SHORT=4)
+        return e
+
+    def advice(self, e, iid):
+        lines = [plain(list(l.values())[0]) for l in e.mock.itemTooltip(iid).values()]
+        return lines[lines.index("Recommendation:") + 1:]
+
+    def words(self, e, iid):
+        verdict = e.ns.Market.Verdict(iid)
+        if not isinstance(verdict, tuple):
+            return verdict, None
+        return verdict[0], verdict[2] and plain(e.ns.Market.SpecWords(verdict[2]))
+
+    def sold(self, e):
+        items, _ = e.ns.Vendor.Collect(e.ns.Vendor, "rules", None)
+        return sorted(i.id for i in items.values())
+
+    def test_the_game_says_which_tree_each_talent_group_plays(self):
+        e = self.env()
+        V = e.ns.Vendor
+        self.assertEqual(V.SpecGroups(), (2, 1))
+        specs = [(s.tree, s.name, s.rel) for s in V.Specs(3).values()]
+        self.assertEqual(specs, [(1, "Holy", "current"), (3, "Retribution", "other"), (2, "Protection", "none")])
+        self.assertEqual([s.name for s in V.Specs(1).values()], ["Holy"])
+        self.assertEqual([s.name for s in V.Specs(2).values()], ["Holy", "Retribution"])
+        e.g.TALENTS.groups[2] = e.lua.table(31, 5, 0)                    # both groups holy: one spec
+        self.assertEqual([s.name for s in V.Specs(2).values()], ["Holy"])
+        e.g.TALENTS.groups[1] = e.lua.table(0, 0, 0)                     # no talents yet: no tree, class weights
+        first = V.Specs(1)[1]
+        self.assertIsNone(first.tree)
+        self.assertTrue(e.same(first.weights, V.WEIGHTS.PALADIN))
+        self.assertIn("group 1: 3 trees", "\n".join(V.DescribeSpecs().values()))
+        self.assertEqual(e.errors(), [])
+
+    def test_current_spec_only(self):
+        e = self.env(mode=1)
+        self.assertEqual(self.words(e, 981), ("equip", "Upgrade: Holy"))
+        self.assertIn("Upgrade: Holy", self.advice(e, 981))
+        self.assertEqual(len(e.ns.Vendor.UpgradeSpecs(982, "INVTYPE_CHEST")), 0)   # strength: not for holy
+        self.assertNotEqual(self.words(e, 982)[0], "keep")
+        self.assertFalse(any("Retribution" in l for l in self.advice(e, 982)))
+        self.assertIn(982, self.sold(e))                                 # nothing holds it back: white gear goes
+        self.assertEqual(e.errors(), [])
+
+    def test_primary_and_secondary(self):
+        e = self.env()                                                   # (the default)
+        self.assertEqual(e.db.upgradeSpecs, 2)
+        self.assertEqual(self.words(e, 981), ("equip", "Upgrade: Holy"))
+        self.assertEqual(self.words(e, 982), ("keep", "Upgrade: Retribution (other spec)"))
+        self.assertEqual(self.advice(e, 982), ["Keep", "Upgrade: Retribution (other spec)"])
+        self.assertNotIn(982, self.sold(e))                              # kept for your other spec
+        self.assertNotIn("Protection", str(self.words(e, 983)))          # a tree you have no group in
+        best = plain(e.ns.Market.BestText(*e.ns.Market.Verdict(982)))
+        self.assertIn("Upgrade: Retribution (other spec)", best)
+        e.g.TALENTS.active = 2                                           # now retribution is on
+        self.assertEqual(self.words(e, 982), ("equip", "Upgrade: Retribution"))
+        self.assertEqual(self.words(e, 981)[1], "Upgrade: Holy (other spec)")
+        self.assertEqual(e.errors(), [])
+
+    def test_any_spec(self):
+        e = self.env(mode=3)
+        self.assertEqual(self.words(e, 983), ("keep", "Upgrade: Protection (not your spec)"))
+        self.assertNotIn(983, self.sold(e))
+        e.cmd("upgradespecs 2")
+        self.assertEqual(e.db.upgradeSpecs, 2)
+        self.assertIn(983, self.sold(e))                                 # no spec of yours wants it any more
+        self.assertEqual(e.errors(), [])
+
+    def test_another_spec_goes_by_the_best_you_own_for_it(self):
+        e = self.env()
+        V = e.ns.Vendor
+        e.mock.put(1, 1, e.lua.table(id=984, name="Plate of Fury", quality=1, ilvl=30, price=50, loc="INVTYPE_CHEST",
+                                     sub=4, stats=e.lua.table(ITEM_MOD_STRENGTH_SHORT=30), **{"class": 4}))
+        self.assertEqual(len(V.UpgradeSpecs(982, "INVTYPE_CHEST")), 0)   # you carry better for retribution
+        self.assertEqual([s.name for s in V.UpgradeSpecs(984, "INVTYPE_CHEST").values()], ["Retribution"])
+        self.assertEqual(e.errors(), [])
+
+    def test_unnamed_specs_are_said_plainly_and_nothing_is_said_without_stats(self):
+        e = self.env(named=False)
+        self.assertEqual(self.words(e, 982), ("keep", "Upgrade: your other spec"))
+        self.assertEqual(self.words(e, 981), ("equip", None))            # the spec you have on, unnamed: as before
+        e.lua.execute("C_Item.GetItemStats = nil")                       # no stats from the game
+        self.assertEqual(len(e.ns.Vendor.UpgradeSpecs(982, "INVTYPE_CHEST")), 0)
+        self.assertEqual(e.errors(), [])
+
+    def test_the_setting_has_three_choices_and_the_market_names_the_spec(self):
+        e = self.env()
+        defs = [d for d in e.ns.settings.values() if d.key == "upgradeSpecs"]
+        self.assertEqual(len(defs), 1)
+        self.assertEqual(list(defs[0].choices.values()), ["Current spec only", "Primary and secondary", "Any spec"])
+        _, _, want = e.ns.Market.Verdict(982)
+        reason = e.ns.AuctionPanel.Reason(e.lua.table(verdict="keep", price=100, want=want))
+        self.assertIn("Upgrade: Retribution (other spec)", plain(reason))
         self.assertEqual(e.errors(), [])
 
 

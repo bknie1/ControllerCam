@@ -345,6 +345,7 @@ D.SECTIONS = {
     { "campfire", function() return ns.Campfire and ns.Campfire.Describe() or {} end },
     { "reticle", function() return ns.Reticle and ns.Reticle.Describe() or {} end },
     { "professions", function() return ns.Professions and ns.Professions.Describe() or {} end },
+    { "specs", function() return ns.Vendor and ns.Vendor.DescribeSpecs and ns.Vendor.DescribeSpecs() or {} end },
     { "damage meter", function() return ns.Skin and ns.Skin.MeterDescribe and ns.Skin.MeterDescribe() or {} end },
     { "aura rows", function() return ns.AuraWidgets and ns.AuraWidgets.Describe and { ns.AuraWidgets.Describe() } or {} end },
     { "tainted", function() return D.tainted end },

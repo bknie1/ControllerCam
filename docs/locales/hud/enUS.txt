@@ -38,6 +38,9 @@ Focus
 Vertical bars
 Breath with bubbles
 underwater, your breath as a bar of ours with bubbles rising off it: beside the vertical bars, under the player frame, or at the top of the screen
+Current spec only
+Primary and secondary
+Any spec
 deposited %d items
 took %d items out of the bank
 sold %d items for %s (/cchud sold lists them)
@@ -90,6 +93,8 @@ A vendor's Buyback tab buys these back until you log out.
 Repaired for %s from the guild bank
 Not enough gold to repair everything (%s).
 Repaired for %s
+Upgrades: for which specs
+which of your specs an upgrade counts for, in tooltips, on the Market and in what is never sold: the talents you have on now, both of your talent groups, or any of your class's talent trees
 Deposit also puts away what the bank already holds
 a deposit moves every item your bank already has some of (materials, potions...), on top of the items you marked for the bank; never grey items, tools or items you marked as junk or kept
 Repair at vendors
@@ -170,6 +175,12 @@ yours sold here before
 yours went unsold before
 held up by the vendor floor
 Auction house
+this spec
+%s (other spec)
+your other spec
+%s (not your spec)
+talent tree %d
+Upgrade: %s
 Skill-up: %s
 Quest: %s
 %d%% likely to sell
@@ -198,24 +209,35 @@ read every price at the auction house at once (open it first; every 15 minutes)
 Crafts: %s
 Keep what your professions still need
 an item that one of your characters' recipes still gives a skill point for (orange and yellow recipes, as the game shows them in the profession's window), or that crafts something worth more at the auction house than the item itself, is kept, not sold, and its tooltip says why. Recipes are read when a profession's window is open
+Open a profession's window and I'll look over your recipes.
+That's the cap, %d. A trainer has the next rank for you.
+Nothing more to learn at %d. Go and see a trainer about the next rank.
+You've outgrown your recipes. See a trainer: %s is waiting at %d.
+%d more to %d, and what you know won't take you there. A trainer has %s for you at %d.
+You've outgrown your recipes. See a trainer: %s is waiting.
+Your recipes stop teaching you %d short of %d. Ask a trainer for %s.
+Your recipes run dry %d short of %d. A trainer will have something new.
+What you know won't carry you the last %d. Time to see a trainer.
+%s won't teach you much now, but it's the best you have. %d more to %d.
+Slow going from here: %s gives a point now and then. %d to go.
+%d more to %d. Start with %s.
+%s is your best teacher now. %d points to %d.
+Steady hands. %s first, and %d to go.
 To gather or buy
 %d crafts: %s
 %s: you have %d, the plan uses %d
 for %s
-Levelling plan: %s %d > %d
-an estimate from the recipes' colours, made again as you level
-At the cap: a trainer has the next rank.
-%d points no recipe of yours gives: learn new ones at a trainer
-Levelling plan
-Open a profession's window to make a plan.
+The Mentor: %s %d > %d
+The Mentor
 Farm this
 Farm all
 Back
 Use the plan
 %d added to the farm list.
 Nothing missing: you have what it takes.
-Levelling plan: show / hide
-Levelling plan beside the profession window
+Open a profession's window to make a plan.
+The Mentor (levelling plan): show / hide
+The Mentor: a levelling plan beside the profession window
 while a profession's window is open, a panel beside it says which recipes to make and how many to reach the cap, and what that takes, down to the ore and herbs; an estimate from the recipes' colours
 Profession window: how many you could make with your bank
 beside the game's count of a recipe you can make from your bags, a second count in blue includes the reagents in your bank. It shows only when that makes more

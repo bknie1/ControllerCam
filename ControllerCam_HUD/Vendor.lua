@@ -137,13 +137,14 @@ local function Instant(item)
     return id, classID, subclassID, equipLoc
 end
 
-local function Fits(id)
+-- anySpec: leave the main stat to each spec (V.Specs below knows them), so another spec's gear still fits
+local function Fits(id, anySpec)
     if C_PlayerInfo and C_PlayerInfo.CanUseItem then
         local ok, can = pcall(C_PlayerInfo.CanUseItem, id)
         if ok and can == false then return false end
     end
     local stats = (C_Item and C_Item.GetItemStats) or GetItemStats
-    local spec = GetSpecialization and GetSpecialization()
+    local spec = not anySpec and GetSpecialization and GetSpecialization()
     local primary
     if spec and GetSpecializationInfo then
         local ok, _, _, _, _, _, stat = pcall(GetSpecializationInfo, spec)
@@ -210,11 +211,10 @@ local function Class()
     return ns.Plain(class)
 end
 
--- An item's score for you, or nil when the game says nothing of its stats
-function V.Score(item, equipLoc)
+-- An item's stats, as the game gives them ({ ITEM_MOD_... = n }), or nil
+local function Stats(item)
     local get = (C_Item and C_Item.GetItemStats) or GetItemStats
-    local w = V.WEIGHTS[Class() or ""]
-    if not (get and w and item) then return nil end
+    if not (get and item) then return nil end
     local link = item
     if type(item) == "number" then
         local info = (C_Item and C_Item.GetItemInfo) or GetItemInfo
@@ -222,6 +222,16 @@ function V.Score(item, equipLoc)
     end
     local ok, stats = pcall(get, link)
     if not ok or type(stats) ~= "table" then return nil end
+    return stats
+end
+
+-- An item's score for you (weights: a spec's, the class's when not given), or nil when the game says nothing of
+-- its stats
+function V.Score(item, equipLoc, weights)
+    local w = weights or V.WEIGHTS[Class() or ""]
+    if not (w and item) then return nil end
+    local stats = Stats(item)
+    if not stats then return nil end
     local score, any = 0, false
     for key, value in pairs(stats) do
         local name = type(key) == "string" and key:gsub("^ITEM_MOD_", ""):gsub("_SHORT$", "")
@@ -239,10 +249,11 @@ function V.Score(item, equipLoc)
 end
 
 -- Is it gear for you at all: usable, with no other class's main stat, and armor of the kind you wear?
-local function ForYou(item, equipLoc)
+-- anySpec: whichever of your specs (the main stat is then each spec's own to judge)
+local function ForYou(item, equipLoc, anySpec)
     local id, classID, subclassID = Instant(item)
     if not id then return true end
-    if not Fits(id) then return false end
+    if not Fits(id, anySpec) then return false end
     if classID == 4 and equipLoc ~= "INVTYPE_CLOAK" and (subclassID or 0) >= 1 and subclassID <= 4 then
         local kind = V.ArmorKind()
         if kind and subclassID ~= kind then return false end         -- lighter (or heavier) than you wear
@@ -253,7 +264,7 @@ V.ForYou = ForYou
 
 -- What you wear where it would go, scored: the weakest of its slots (a ring, a trinket, a one-hander), or for
 -- a two-hander both hands together. Returns the score, the worn item's level, and whether a slot is empty.
-local function Worn(equipLoc, slots)
+local function Worn(equipLoc, slots, weights)
     local scores, levels, empty = {}, {}, false
     for _, slot in ipairs(slots) do
         local worn = GetInventoryItemLink and GetInventoryItemLink("player", slot)
@@ -263,7 +274,7 @@ local function Worn(equipLoc, slots)
             if not (slot == 17 and mainLoc == "INVTYPE_2HWEAPON") then empty = true end
         else
             local _, _, _, wornLoc = Instant(worn)
-            scores[#scores + 1] = V.Score(worn, wornLoc)
+            scores[#scores + 1] = V.Score(worn, wornLoc, weights)
             levels[#levels + 1] = ItemLevel(worn)
         end
     end
@@ -273,7 +284,7 @@ local function Worn(equipLoc, slots)
         score = scores[1]
         if score and off then
             local _, _, _, offLoc = Instant(off)
-            score = score + (V.Score(off, offLoc) or 0)
+            score = score + (V.Score(off, offLoc, weights) or 0)
         end
         level = levels[1]
     else
@@ -283,37 +294,360 @@ local function Worn(equipLoc, slots)
     return score, level, empty
 end
 
--- Clearly better than what you wear: worth putting on (gear for you, scoring a good bit above what you wear
--- there, or by item level where the game says nothing of the stats)
-function V.Upgrade(item, equipLoc)
-    local slots = SLOTS[equipLoc or ""]
-    if not slots or not ForYou(item, equipLoc) then return false end
-    local id = Instant(item)
-    for _, slot in ipairs(slots) do
-        local worn = GetInventoryItemLink and GetInventoryItemLink("player", slot)
-        if worn and id and Instant(worn) == id then return false end  -- what you wear yourself
-    end
-    local wornScore, wornLevel, empty = Worn(equipLoc, slots)
-    if empty then return true end
-    local mine = V.Score(item, equipLoc)
-    if mine and wornScore then return mine > wornScore * V.BETTER + 0.5 end
-    local lvl = ItemLevel(item)
-    return (lvl and wornLevel and lvl > wornLevel) and true or false
+---------------------------------------------------------------------------
+-- Your specs. WoW: Forever has two talent groups (dual specialization: GetNumSpecGroups, the one you have on
+-- from C_SpecializationInfo.GetActiveSpecGroup) and the classic talent trees, kept as trait groups: the points
+-- in each come from C_Traits (GetSpecialization there says 1 whatever you play). Older clients:
+-- GetNumTalentGroups / GetActiveTalentGroup and GetTalentTabInfo. A talent group's spec is the tree with the most
+-- points in it; with no points, or two trees level, it has none we could name, and the class's weights stand.
+---------------------------------------------------------------------------
+ns.RegisterSetting({
+    key = "upgradeSpecs", kind = "number", default = 2, min = 1, max = 3, command = "upgradespecs",
+    section = "Bags, bank and vendor",
+    choices = { "Current spec only", "Primary and secondary", "Any spec" },
+    label = "Upgrades: for which specs",
+    tip = "which of your specs an upgrade counts for, in tooltips, on the Market and in what is never sold: the talents you have on now, both of your talent groups, or any of your class's talent trees",
+})
+V.SPEC_NAMES = { L["Current spec only"], L["Primary and secondary"], L["Any spec"] }
+
+-- The trees that want other gear than their class's weights above (by the tree's place in the game's talent
+-- window). main: the one main stat the tree lives on; gear with another main stat and not this one is not for it.
+V.TREE_WEIGHTS = {
+    WARRIOR = { [3] = { STAMINA = 1, STRENGTH = 0.8, AGILITY = 0.6, SPIRIT = 0.05, ATTACK_POWER = 0.3,
+                        ARMOR = 0.03, DPS = 2 } },
+    PALADIN = { [1] = { INTELLECT = 1, SPELL_POWER = 0.9, SPIRIT = 0.4, STAMINA = 0.5, STRENGTH = 0.1, ARMOR = 0.01,
+                        DPS = 0.2, main = "INTELLECT" },
+                [2] = { STAMINA = 1, STRENGTH = 0.7, AGILITY = 0.4, INTELLECT = 0.3, SPELL_POWER = 0.4, ARMOR = 0.03,
+                        DPS = 1.5 },
+                [3] = { STRENGTH = 1, AGILITY = 0.5, STAMINA = 0.6, INTELLECT = 0.2, ATTACK_POWER = 0.5, ARMOR = 0.02,
+                        DPS = 4, main = "STRENGTH" } },
+    SHAMAN = { [1] = { INTELLECT = 1, SPELL_POWER = 1, SPIRIT = 0.3, STAMINA = 0.5, ARMOR = 0.01, DPS = 0.2,
+                       main = "INTELLECT" },
+               [2] = { STRENGTH = 1, AGILITY = 0.8, STAMINA = 0.5, INTELLECT = 0.2, ATTACK_POWER = 0.5, ARMOR = 0.015,
+                       DPS = 4 },
+               [3] = { INTELLECT = 1, SPELL_POWER = 0.9, SPIRIT = 0.4, STAMINA = 0.5, ARMOR = 0.01, DPS = 0.2,
+                       main = "INTELLECT" } },
+    DRUID = { [1] = { INTELLECT = 1, SPELL_POWER = 1, SPIRIT = 0.4, STAMINA = 0.5, ARMOR = 0.005, DPS = 0.2,
+                      main = "INTELLECT" },
+              [2] = { AGILITY = 1, STRENGTH = 0.9, STAMINA = 0.7, ATTACK_POWER = 0.45, ARMOR = 0.03, DPS = 0.1 },
+              [3] = { INTELLECT = 1, SPELL_POWER = 0.9, SPIRIT = 0.6, STAMINA = 0.4, ARMOR = 0.005, DPS = 0.2,
+                      main = "INTELLECT" } },
+}
+
+-- While a whole bag is gone through (V:Collect, V:Recommend): your specs and your gear are read once, not once an
+-- item. Only within the same moment (GetTime), so a list left behind by an error goes stale at once.
+function V.BeginBatch() V.batch = { at = GetTime and GetTime() } end
+function V.EndBatch() V.batch = nil end
+function V.Batch()
+    local b = V.batch
+    if b and b.at == (GetTime and GetTime()) then return b end
+    return nil
 end
 
--- Could it be as good as what you wear there? Then it is never junk. Only gear for you counts; gear you cannot
--- use, of another class's main stat or another kind of armor goes like anything else.
-function V.MaybeUpgrade(item, equipLoc)
+local function Try(fn, ...)
+    if type(fn) ~= "function" then return false end
+    return pcall(fn, ...)
+end
+local function Num(v) v = ns.Plain(v); return type(v) == "number" and v or nil end
+local function Str(v) v = ns.Plain(v); return (type(v) == "string" and v ~= "") and v or nil end
+
+-- How many talent groups you have (1, or 2 with dual specialization), and the one you have on
+function V.SpecGroups()
+    local SI = C_SpecializationInfo
+    local ok, n = Try(GetNumSpecGroups)
+    n = ok and Num(n)
+    if not n then ok, n = Try(GetNumTalentGroups); n = ok and Num(n) end
+    local active
+    for _, fn in ipairs({ SI and SI.GetActiveSpecGroup or false, GetActiveSpecGroup or false,
+                          GetActiveTalentGroup or false }) do
+        local okA, a = Try(fn)
+        a = okA and Num(a)
+        if a and a >= 1 then active = a; break end
+    end
+    active = active or 1
+    return math.max(n or 1, active, 1), active
+end
+
+-- A talent group's trees: { [tree] = points spent }, { [tree] = its name }, how many trees (each nil where the
+-- game does not say)
+function V.Trees(group)
+    local points, names, count = {}, {}, nil
+    local SI, T = C_SpecializationInfo, C_Traits
+    -- WoW: Forever: the trees are the trait groups of the talent group's loadout
+    local ok, config = Try(SI and SI.GetCombatConfigIDForSpecGroup, group)
+    config = ok and Num(config)
+    if config and T then
+        local okI, info = Try(T.GetConfigInfo, config)
+        local tree = okI and type(info) == "table" and type(info.treeIDs) == "table" and Num(info.treeIDs[1])
+        local okD, groups = Try(T.GetGroupDisplayInfoByTreeID, tree)
+        if tree and okD and type(groups) == "table" then
+            local ids, at = {}, {}
+            for _, d in ipairs(groups) do
+                local id = type(d) == "table" and Num(d.groupID)
+                local order = type(d) == "table" and Num(d.orderIndex)
+                if id and order then
+                    ids[#ids + 1], at[id] = id, order + 1
+                    names[order + 1] = Str(d.name)
+                end
+            end
+            if #ids > 0 then count = #ids end
+            local okC, spent = Try(T.GetGroupCurrencyInfo, config, ids)
+            if okC and type(spent) == "table" then
+                for _, s in ipairs(spent) do
+                    local tab = type(s) == "table" and at[Num(s.traitNodeGroupID) or -1]
+                    local c = tab and type(s.currencyInfos) == "table" and s.currencyInfos[1]
+                    local n = type(c) == "table" and Num(c.spent)
+                    if n then points[tab] = n end
+                end
+            end
+        end
+    end
+    -- older clients: a talent tab for each tree (name, icon, points...; later id, name, text, icon, points...)
+    local okN, tabs = Try(GetNumTalentTabs)
+    tabs = okN and Num(tabs)
+    count = count or tabs
+    local fromTabs = next(points) == nil
+    for tab = 1, count or 0 do
+        local okT, a, b, c, _, e = Try(GetTalentTabInfo, tab, false, false, group)
+        if okT then
+            local later = Num(a) ~= nil
+            names[tab] = names[tab] or Str(later and b or a)
+            local n = Num(later and e or c)
+            if fromTabs and n then points[tab] = n end
+        end
+        if not names[tab] then
+            local okS, _, name = Try(SI and SI.GetSpecializationInfo, tab)
+            names[tab] = okS and Str(name) or nil
+        end
+    end
+    return points, names, count
+end
+
+-- The tree with the most points; none with no points at all, or with two trees level at the top
+function V.MainTree(points)
+    local best, most, level = nil, 0, false
+    for tree, n in pairs(points or {}) do
+        if n > most then best, most, level = tree, n, false
+        elseif n == most and n > 0 then level = true end
+    end
+    if level then return nil end
+    return best
+end
+
+-- The specs an upgrade counts for (mode: 1 the one you have on, 2 both talent groups, 3 any tree of your class;
+-- the setting when not given): { { tree, name, rel = "current" | "other" | "none", group, weights, main } }.
+-- The one you have on comes first, always there (without a tree when it has none yet). A second talent group with
+-- the same tree as the first adds nothing.
+function V.Specs(mode)
+    mode = tonumber(mode) or (ns.db and tonumber(ns.db.upgradeSpecs)) or 2
+    local batch = V.Batch()
+    if batch and batch.specs and batch.specs[mode] then return batch.specs[mode] end
+    local class = Class() or ""
+    local n, active = V.SpecGroups()
+    local out, seen = {}, {}
+    local function add(tree, rel, group, names)
+        if tree then
+            if seen[tree] then return end
+            seen[tree] = true
+        end
+        local own = tree and V.TREE_WEIGHTS[class] and V.TREE_WEIGHTS[class][tree]
+        out[#out + 1] = { tree = tree, name = tree and names[tree], rel = rel, group = group,
+                          weights = own or V.WEIGHTS[class], main = own and own.main }
+    end
+    local points, names, count = V.Trees(active)
+    add(V.MainTree(points), "current", active, names)
+    if mode >= 2 then
+        for g = 1, n do
+            if g ~= active then
+                local p, nm = V.Trees(g)
+                for tree, name in pairs(names) do nm[tree] = nm[tree] or name end
+                local tree = V.MainTree(p)
+                if tree then add(tree, "other", g, nm) end
+            end
+        end
+    end
+    if mode >= 3 then
+        for tree = 1, count or 0 do add(tree, "none", nil, names) end
+    end
+    if batch then
+        batch.specs = batch.specs or {}
+        batch.specs[mode] = out
+    end
+    return out
+end
+
+-- Gear with another main stat and not this spec's own: not for it
+local MAIN_STAT = { STRENGTH = "ITEM_MOD_STRENGTH_SHORT", AGILITY = "ITEM_MOD_AGILITY_SHORT",
+                    INTELLECT = "ITEM_MOD_INTELLECT_SHORT" }
+local function OtherMain(item, main)
+    local stats = main and Stats(item)
+    if not stats or stats[MAIN_STAT[main]] then return false end
+    for _, key in pairs(MAIN_STAT) do if stats[key] then return true end end
+    return false
+end
+
+-- Everything of yours that is worn: what you wear, and the gear for you in your bags ({ id, link, loc })
+local function Owned()
+    local batch = V.Batch()
+    if batch and batch.owned then return batch.owned end
+    local list = {}
+    for slot = 1, 18 do
+        local link = GetInventoryItemLink and GetInventoryItemLink("player", slot)
+        local id, _, _, loc = Instant(link)
+        if id and SLOTS[loc or ""] then list[#list + 1] = { id = id, link = link, loc = loc } end
+    end
+    local last = NUM_TOTAL_EQUIPPED_BAG_SLOTS or NUM_BAG_SLOTS or 4
+    for bag = 0, last do
+        for slot = 1, C_Container.GetContainerNumSlots(bag) or 0 do
+            local info = C_Container.GetContainerItemInfo(bag, slot)
+            local id = info and info.itemID
+            if id and not ns.IsSecret(id) then
+                local link = info.hyperlink or id
+                local _, classID, _, loc = Instant(link)
+                if GEAR[classID or -1] and SLOTS[loc or ""] and ForYou(link, loc, true) then
+                    list[#list + 1] = { id = id, link = link, loc = loc }
+                end
+            end
+        end
+    end
+    if batch then batch.owned = list end
+    return list
+end
+
+-- What that spec would wear there, of what you own (but `skip`), against the item: the item's worth there
+-- (with the other hand, for a weapon), and the best of yours there (nil: nothing of yours goes there).
+-- unknown: the game said nothing of the stats of something of yours there.
+local HAND_MAIN = { INVTYPE_WEAPON = true, INVTYPE_WEAPONMAINHAND = true }
+local HAND_OFF = { INVTYPE_SHIELD = true, INVTYPE_WEAPONOFFHAND = true, INVTYPE_HOLDABLE = true }
+local function Against(owned, weights, slots, equipLoc, skip, mine)
+    local unknown = false
+    local function score(o)
+        local s = V.Score(o.link, o.loc, weights)
+        if s == nil then unknown = true end
+        return s or 0
+    end
+    if equipLoc == "INVTYPE_2HWEAPON" or HAND_MAIN[equipLoc] or HAND_OFF[equipLoc] then
+        local okD, dual = Try(CanDualWield)
+        dual = okD and dual == true
+        local two, main, mainAt, off
+        for i, o in ipairs(owned) do
+            if o.id ~= skip then
+                if o.loc == "INVTYPE_2HWEAPON" then two = math.max(two or 0, score(o))
+                elseif HAND_MAIN[o.loc] then
+                    local s = score(o)
+                    if not main or s > main then main, mainAt = s, i end
+                end
+            end
+        end
+        for i, o in ipairs(owned) do
+            if o.id ~= skip and i ~= mainAt and (HAND_OFF[o.loc] or (dual and o.loc == "INVTYPE_WEAPON")) then
+                off = math.max(off or 0, score(o))
+            end
+        end
+        if unknown then return nil, nil, true end
+        local base = (two or main or off) and math.max(two or 0, (main or 0) + (off or 0)) or nil
+        local value
+        if equipLoc == "INVTYPE_2HWEAPON" then value = mine
+        elseif equipLoc == "INVTYPE_WEAPON" then value = mine + math.max(off or 0, dual and main or 0)
+        elseif HAND_MAIN[equipLoc] then value = mine + (off or 0)
+        else value = (main or 0) + mine end
+        return value, base
+    end
+    local into, scores = {}, {}
+    for _, s in ipairs(slots) do into[s] = true end
+    for _, o in ipairs(owned) do
+        if o.id ~= skip then
+            for _, s in ipairs(SLOTS[o.loc] or {}) do
+                if into[s] then scores[#scores + 1] = score(o); break end
+            end
+        end
+    end
+    if unknown then return nil, nil, true end
+    if #scores < #slots then return mine, nil end                     -- a slot that spec would leave empty
+    table.sort(scores, function(a, b) return a > b end)
+    return mine, scores[#slots]                                       -- the weakest of what it would wear
+end
+
+-- Is it better for this spec (about: could it be as good)? The spec you have on goes by what you wear (or by
+-- item level where the game says nothing of the stats); another goes by the best you own for it, and only by
+-- the stats: where the game gives none, nothing is said for another spec.
+local function Judge(spec, item, equipLoc, slots, id, about)
+    local w = spec.weights
+    if spec.main and OtherMain(item, spec.main) then return false end
+    if spec.rel == "current" then
+        local wornScore, wornLevel, empty = Worn(equipLoc, slots, w)
+        if empty then return true end
+        local mine = V.Score(item, equipLoc, w)
+        if mine and wornScore then
+            if about then return mine >= wornScore * V.ABOUT end
+            return mine > wornScore * V.BETTER + 0.5
+        end
+        local lvl = ItemLevel(item)
+        if about then
+            if not lvl or not wornLevel then return true end          -- cannot tell: kept
+            return lvl >= wornLevel
+        end
+        return (lvl and wornLevel and lvl > wornLevel) and true or false
+    end
+    local mine = V.Score(item, equipLoc, w)
+    if not mine then return false end
+    local value, base, unknown = Against(Owned(), w, slots, equipLoc, id, mine)
+    if unknown then return false end
+    if not base then return true end
+    if about then return value >= base * V.ABOUT end
+    return value > base * V.BETTER + 0.5
+end
+
+-- The specs of yours (the setting says which count; V.Specs) it is better for: { spec, ... }. about: those it
+-- could be as good for instead. Only gear for you counts; gear you cannot use, of another class's main stat or
+-- another kind of armor is for none of them.
+local function For(item, equipLoc, mode, about)
+    local list = {}
     local slots = SLOTS[equipLoc or ""]
-    if not slots then return false end
-    if not ForYou(item, equipLoc) then return false end
-    local wornScore, wornLevel, empty = Worn(equipLoc, slots)
-    if empty then return true end
-    local mine = V.Score(item, equipLoc)
-    if mine and wornScore then return mine >= wornScore * V.ABOUT end
-    local lvl = ItemLevel(item)
-    if not lvl or not wornLevel then return true end                  -- cannot tell: kept
-    return lvl >= wornLevel
+    if not slots then return list end
+    local specs = V.Specs(mode)
+    if not ForYou(item, equipLoc, #specs > 1 or specs[1].tree ~= nil) then return list end
+    local id = Instant(item)
+    if not about then
+        for _, slot in ipairs(slots) do
+            local worn = GetInventoryItemLink and GetInventoryItemLink("player", slot)
+            if worn and id and Instant(worn) == id then return list end   -- what you wear yourself
+        end
+    end
+    for _, spec in ipairs(specs) do
+        if Judge(spec, item, equipLoc, slots, id, about) then list[#list + 1] = spec end
+    end
+    return list
+end
+
+-- Clearly better than what you wear: worth putting on (gear for you, scoring a good bit above what you wear
+-- there, or by item level where the game says nothing of the stats). For another spec of yours: better than the
+-- best you own for it. V.UpgradeSpecs says for which.
+function V.UpgradeSpecs(item, equipLoc, mode) return For(item, equipLoc, mode, false) end
+function V.Upgrade(item, equipLoc, mode) return #For(item, equipLoc, mode, false) > 0 end
+
+-- Could it be as good as what you wear there (or, for another spec of yours, as the best you own for it)? Then
+-- it is never junk.
+function V.MaybeUpgrade(item, equipLoc, mode) return #For(item, equipLoc, mode, true) > 0 end
+
+-- For the debug report: what the game says of your specs
+function V.DescribeSpecs()
+    local n, active = V.SpecGroups()
+    local SI = C_SpecializationInfo
+    local out = { ("groups %d, on %d; GetNumSpecGroups %s, GetActiveSpecGroup %s, C_Traits %s, GetTalentTabInfo %s, "
+        .. "GetSpecialization %s, setting %s"):format(n, active, type(GetNumSpecGroups),
+        type(SI and SI.GetActiveSpecGroup), type(C_Traits), type(GetTalentTabInfo), type(GetSpecialization),
+        tostring(ns.db and ns.db.upgradeSpecs)) }
+    for g = 1, n do
+        local points, names, count = V.Trees(g)
+        local parts = {}
+        for tree = 1, count or 0 do
+            parts[#parts + 1] = ("%d %s %s"):format(tree, tostring(names[tree]), tostring(points[tree]))
+        end
+        out[#out + 1] = ("group %d: %d trees, main %s: %s"):format(g, count or 0, tostring(V.MainTree(points)),
+            table.concat(parts, ", "))
+    end
+    return out
 end
 
 local function HasUse(id)
@@ -429,6 +763,7 @@ end
 -- The items to sell, biggest first, and what they are worth together.
 function V:Collect(mode, upTo)
     local list, total = {}, 0
+    V.BeginBatch()
     local last = NUM_TOTAL_EQUIPPED_BAG_SLOTS or NUM_BAG_SLOTS or 4
     for bag = 0, last do
         if not BagLeftOut(bag) then
@@ -449,6 +784,7 @@ function V:Collect(mode, upTo)
             end
         end
     end
+    V.EndBatch()
     table.sort(list, function(a, b)
         if a.worth ~= b.worth then return a.worth > b.worth end
         if a.bag ~= b.bag then return a.bag < b.bag end
@@ -467,6 +803,7 @@ end
 -- auction house, read lately, had none up (nobody sells it there: a green that will not sell is junk).
 function V:Recommend()
     local out = { vendor = {}, auction = {}, skill = {}, quest = {}, unknown = 0, total = 0, gain = 0 }
+    V.BeginBatch()
     local M = ns.Market
     local sell = ns.db.sell
     local last = NUM_TOTAL_EQUIPPED_BAG_SLOTS or NUM_BAG_SLOTS or 4
@@ -517,6 +854,7 @@ function V:Recommend()
             end
         end
     end
+    V.EndBatch()
     table.sort(out.vendor, function(a, b) return a.worth > b.worth end)
     table.sort(out.auction, function(a, b) return a.gain > b.gain end)
     return out

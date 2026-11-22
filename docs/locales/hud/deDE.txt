@@ -38,6 +38,9 @@ Fokus
 Vertikale Balken
 Atem mit Blasen
 unter Wasser dein Atem als eigene Leiste mit aufsteigenden Blasen: neben den senkrechten Leisten, unter dem Spielerrahmen oder oben am Bildschirm
+Nur aktuelle Spezialisierung
+Primär und sekundär
+Jede Spezialisierung
 %d Gegenstände eingezahlt
 %d Gegenstände aus der Bank genommen
 %d Gegenstände für %s verkauft (/cchud sold listet sie auf)
@@ -90,6 +93,8 @@ In dieser Sitzung wurde noch nichts verkauft.
 Für %s aus der Gildenbank repariert
 Nicht genug Gold, um alles zu reparieren (%s).
 Für %s repariert
+Verbesserungen: für welche Spezialisierungen
+für welche deiner Spezialisierungen eine Verbesserung zählt, in Tooltips, auf dem Markt und bei dem, was nie verkauft wird: die Talente, die du gerade aktiv hast, beide Talentgruppen oder jeder Talentbaum deiner Klasse
 Einlagern räumt auch weg, was die Bank schon hat
 Einlagern bringt jeden Gegenstand, von dem deine Bank schon welche hat (Materialien, Tränke...), zusätzlich zu den für die Bank markierten; nie graue Gegenstände, Werkzeuge oder als Schrott oder behalten markierte
 Bei Händlern reparieren
@@ -170,6 +175,12 @@ deine gingen hier schon weg
 deine blieben schon liegen
 vom Händlerpreis gestützt
 Auktionshaus
+diese Spezialisierung
+%s (andere Spezialisierung)
+deine andere Spezialisierung
+%s (nicht deine Spezialisierung)
+Talentbaum %d
+Verbesserung: %s
 Fertigkeitspunkt: %s
 Quest: %s
 verkauft sich zu %d%%
@@ -198,24 +209,35 @@ liest alle Preise im Auktionshaus auf einmal (vorher öffnen; alle 15 Minuten)
 Stellt her: %s
 Behalten, was deine Berufe noch brauchen
 ein Gegenstand, für den ein Rezept eines deiner Charaktere noch einen Fertigkeitspunkt gibt (orange und gelbe Rezepte, wie das Spiel sie im Fenster des Berufs zeigt), oder aus dem sich etwas herstellen lässt, das im Auktionshaus mehr wert ist als er selbst, wird behalten statt verkauft, und sein Tooltip sagt, warum. Die Rezepte werden gelesen, wenn das Fenster eines Berufs offen ist
+Öffne das Fenster eines Berufs, und ich sehe mir deine Rezepte an.
+Das ist die Grenze, %d. Ein Lehrer hat den nächsten Rang für dich.
+Bei %d gibt es nichts mehr zu lernen. Sprich mit einem Lehrer über den nächsten Rang.
+Du bist deinen Rezepten entwachsen. Geh zum Lehrer: %s wartet bei %d auf dich.
+Noch %d bis %d, und was du kannst, bringt dich nicht dorthin. Ein Lehrer hat %s für dich, ab %d.
+Du bist deinen Rezepten entwachsen. Geh zum Lehrer: %s wartet auf dich.
+Deine Rezepte lehren dich nichts mehr, %d vor %d. Frag einen Lehrer nach %s.
+Deine Rezepte geben %d vor %d nichts mehr her. Ein Lehrer hat etwas Neues für dich.
+Was du kannst, trägt dich nicht über die letzten %d. Zeit für einen Lehrer.
+%s lehrt dich jetzt nicht mehr viel, aber es ist das Beste, was du hast. Noch %d bis %d.
+Ab hier geht es langsam: %s gibt ab und zu einen Punkt. Noch %d.
+Noch %d bis %d. Fang mit %s an.
+%s ist jetzt dein bester Lehrer. Noch %d Punkte bis %d.
+Ruhige Hände. Zuerst %s, dann noch %d.
 Zu sammeln oder zu kaufen
 %d-mal herstellen: %s
 %s: du hast %d, der Plan braucht %d
 für %s
-Levelplan: %s %d > %d
-eine Schätzung nach den Farben der Rezepte, neu berechnet, während du aufsteigst
-Am Maximum: Ein Lehrer hat die nächste Stufe.
-%d Punkte gibt keines deiner Rezepte: Lerne neue bei einem Lehrer
-Levelplan
-Öffne das Fenster eines Berufs, um einen Plan zu erstellen.
+Der Mentor: %s %d > %d
+Der Mentor
 Das farmen
 Alles farmen
 Zurück
 Plan bedienen
 %d zur Farmliste hinzugefügt.
 Nichts fehlt: Du hast alles, was nötig ist.
-Levelplan: zeigen / verbergen
-Levelplan neben dem Berufsfenster
+Öffne das Fenster eines Berufs, um einen Plan zu erstellen.
+Der Mentor (Levelplan): zeigen / verbergen
+Der Mentor: ein Levelplan neben dem Berufsfenster
 solange das Fenster eines Berufs offen ist, sagt eine Tafel daneben, welche Rezepte du wie oft herstellen solltest, um das Maximum zu erreichen, und was das braucht, bis hinunter zu Erz und Kräutern; eine Schätzung nach den Farben der Rezepte
 Berufsfenster: wie viele du mit deiner Bank herstellen könntest
 neben der Zahl des Spiels, wie oft du ein Rezept aus deinen Taschen herstellen kannst, zählt eine zweite Zahl in Blau auch die Reagenzien in deiner Bank mit. Sie erscheint nur, wenn das mehr ergibt

@@ -38,6 +38,9 @@ Focus
 Barre verticali
 Respiro con bolle
 sott'acqua, il tuo respiro su una barra nostra da cui salgono bolle: accanto alle barre verticali, sotto il riquadro del giocatore o in alto sullo schermo
+Solo la specializzazione attuale
+Primaria e secondaria
+Qualsiasi specializzazione
 %d oggetti depositati
 presi %d oggetti dalla banca
 %d oggetti venduti per %s (/cchud sold li elenca)
@@ -90,6 +93,8 @@ La scheda Riacquista di un mercante li ricompra finché non esci dal gioco.
 Riparato per %s dalla banca di gilda
 Oro insufficiente per riparare tutto (%s).
 Riparato per %s
+Miglioramenti: per quali specializzazioni
+per quali delle tue specializzazioni conta un miglioramento, nei tooltip, nel Mercato e in ciò che non viene mai venduto: i talenti che hai attivi ora, entrambi i gruppi di talenti o qualsiasi albero di talenti della tua classe
 Il deposito ripone anche ciò che la banca contiene già
 un deposito sposta ogni oggetto di cui la tua banca ha già qualche esemplare (materiali, pozioni...), oltre agli oggetti segnati per la banca; mai oggetti grigi, attrezzi o oggetti segnati come cianfrusaglie o da tenere
 Ripara dai venditori
@@ -170,6 +175,12 @@ i tuoi qui si sono venduti
 i tuoi sono rimasti invenduti
 sostenuto dal prezzo del mercante
 Casa d'aste
+questa specializzazione
+%s (altra specializzazione)
+la tua altra specializzazione
+%s (non è la tua specializzazione)
+albero di talenti %d
+Miglioramento: %s
 Sale di abilità: %s
 Missione: %s
 %d%% di probabilità di vendita
@@ -198,24 +209,35 @@ legge tutti i prezzi della casa d'aste insieme (aprila prima; ogni 15 minuti)
 Crea: %s
 Tieni ciò che serve ancora alle tue professioni
 un oggetto per cui una ricetta di uno dei tuoi personaggi dà ancora un punto di abilità (ricette arancioni e gialle, come il gioco le mostra nella finestra della professione), o con cui si crea qualcosa che vale di più alla casa d'aste dell'oggetto stesso, viene tenuto invece di essere venduto, e il suo suggerimento dice perché. Le ricette vengono lette quando la finestra di una professione è aperta
+Apri la finestra di una professione e darò un'occhiata alle tue ricette.
+È il tetto, %d. Un istruttore ha il grado successivo per te.
+Niente più da imparare a %d. Va' da un istruttore per il grado successivo.
+Le tue ricette ti stanno strette. Va' da un istruttore: %s ti aspetta a %d.
+Mancano %d a %d, e ciò che sai non ti ci porterà. Un istruttore ha %s per te a %d.
+Le tue ricette ti stanno strette. Va' da un istruttore: %s ti aspetta.
+Le tue ricette smettono di insegnarti a %d da %d. Chiedi %s a un istruttore.
+Le tue ricette si esauriscono a %d da %d. Un istruttore avrà qualcosa di nuovo.
+Ciò che sai non ti porterà per gli ultimi %d. È ora di vedere un istruttore.
+%s non ti insegnerà più molto, ma è il meglio che hai. Mancano %d a %d.
+Da qui si va piano: %s dà un punto ogni tanto. Ne mancano %d.
+Mancano %d a %d. Comincia con %s.
+%s è ora il tuo miglior maestro. %d punti a %d.
+Mani ferme. Prima %s, e ne mancano %d.
 Da raccogliere o comprare
 %d volte: %s
 %s: ne hai %d, il piano ne usa %d
 per %s
-Piano di avanzamento: %s %d > %d
-una stima dai colori delle ricette, rifatta mentre sali
-Al massimo: un istruttore ha il grado successivo.
-%d punti che nessuna tua ricetta dà: imparane di nuove da un istruttore
-Piano di avanzamento
-Apri la finestra di una professione per fare un piano.
+Il Mentore: %s %d > %d
+Il Mentore
 Farma questo
 Farma tutto
 Indietro
 Usa il piano
 %d aggiunti alla lista da farmare.
 Non manca niente: hai quello che serve.
-Piano di avanzamento: mostra / nascondi
-Piano di avanzamento accanto alla finestra della professione
+Apri la finestra di una professione per fare un piano.
+Il Mentore (piano di avanzamento): mostra / nascondi
+Il Mentore: un piano di avanzamento accanto alla finestra della professione
 mentre la finestra di una professione è aperta, un pannello accanto dice quali ricette fare e quante per arrivare al massimo, e cosa serve, fino al minerale e alle erbe; una stima dai colori delle ricette
 Finestra della professione: quanti potresti crearne con la tua banca
 accanto al numero del gioco di quante volte puoi creare una ricetta con le tue borse, un secondo numero in blu conta anche i reagenti nella tua banca. Compare solo quando così ne fai di più

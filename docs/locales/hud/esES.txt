@@ -38,6 +38,9 @@ Foco
 Barras verticales
 Respiración con burbujas
 bajo el agua, tu respiración como una barra propia con burbujas que suben: junto a las barras verticales, bajo el marco del jugador o arriba en la pantalla
+Solo la especialización actual
+Principal y secundaria
+Cualquier especialización
 %d objetos depositados
 sacaste %d objetos del banco
 %d objetos vendidos por %s (/cchud sold los muestra)
@@ -90,6 +93,8 @@ La pestaña de recompra de un vendedor los recupera hasta que cierres sesión.
 Reparado por %s desde el banco de hermandad
 No hay oro suficiente para repararlo todo (%s).
 Reparado por %s
+Mejoras: para qué especializaciones
+para cuáles de tus especializaciones cuenta una mejora, en las descripciones, en el Mercado y en lo que nunca se vende: los talentos que tienes activos ahora, tus dos grupos de talentos o cualquier árbol de talentos de tu clase
 Depositar también guarda lo que el banco ya tiene
 al depositar se mueve cada objeto del que tu banco ya tiene alguno (materiales, pociones...), además de los marcados para el banco; nunca objetos grises, herramientas ni objetos marcados como basura o conservados
 Reparar con los vendedores
@@ -170,6 +175,12 @@ los tuyos ya se vendieron aquí
 los tuyos no se vendieron
 sostenido por el precio del vendedor
 Casa de subastas
+esta especialización
+%s (otra especialización)
+tu otra especialización
+%s (no es tu especialización)
+árbol de talentos %d
+Mejora: %s
 Sube habilidad: %s
 Misión: %s
 %d%% de probabilidad de venta
@@ -198,24 +209,35 @@ lee todos los precios de la casa de subastas de una vez (ábrela antes; cada 15 
 Fabrica: %s
 Guardar lo que tus profesiones aún necesitan
 un objeto por el que una receta de alguno de tus personajes aún da un punto de habilidad (recetas naranjas y amarillas, como el juego las muestra en la ventana de la profesión), o con el que se fabrica algo que vale más en la casa de subastas que el propio objeto, se guarda en vez de venderse, y su descripción dice por qué. Las recetas se leen cuando la ventana de una profesión está abierta
+Abre la ventana de una profesión y echaré un vistazo a tus recetas.
+Ese es el tope, %d. Un instructor tiene el siguiente rango para ti.
+Nada más que aprender en %d. Ve a ver a un instructor por el siguiente rango.
+Tus recetas se te han quedado pequeñas. Ve a un instructor: %s te espera en %d.
+Faltan %d para %d, y lo que sabes no te llevará hasta allí. Un instructor tiene %s para ti en %d.
+Tus recetas se te han quedado pequeñas. Ve a un instructor: %s te espera.
+Tus recetas dejan de enseñarte a %d de %d. Pide a un instructor %s.
+Tus recetas se agotan a %d de %d. Un instructor tendrá algo nuevo.
+Lo que sabes no te llevará los últimos %d. Es hora de ver a un instructor.
+%s ya no te enseñará mucho, pero es lo mejor que tienes. Faltan %d para %d.
+A partir de aquí va despacio: %s da un punto de vez en cuando. Faltan %d.
+Faltan %d para %d. Empieza con %s.
+%s es ahora tu mejor maestro. %d puntos hasta %d.
+Pulso firme. Primero %s, y faltan %d.
 Para recolectar o comprar
 %d veces: %s
 %s: tienes %d, el plan usa %d
 para %s
-Plan de subida: %s %d > %d
-una estimación según los colores de las recetas, rehecha mientras subes
-En el máximo: un instructor tiene el siguiente rango.
-%d puntos que ninguna receta tuya da: aprende nuevas con un instructor
-Plan de subida
-Abre la ventana de una profesión para hacer un plan.
+El Mentor: %s %d > %d
+El Mentor
 Farmear esto
 Farmear todo
 Atrás
 Usar el plan
 %d añadido(s) a la lista de farmeo.
 No falta nada: tienes lo necesario.
-Plan de subida: mostrar / ocultar
-Plan de subida junto a la ventana de la profesión
+Abre la ventana de una profesión para hacer un plan.
+El Mentor (plan de subida): mostrar / ocultar
+El Mentor: un plan de subida junto a la ventana de la profesión
 mientras la ventana de una profesión está abierta, un panel a su lado dice qué recetas hacer y cuántas para llegar al máximo, y lo que hace falta, hasta el mineral y las hierbas; una estimación según los colores de las recetas
 Ventana de la profesión: cuántos podrías fabricar con tu banco
 junto al número del juego de cuántas veces puedes fabricar una receta con tus bolsas, un segundo número en azul incluye los componentes de tu banco. Solo aparece cuando eso da más

@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.4.5
+
+ControllerCam: HUD
+- Upgrades by spec (setting: **Upgrades: for which specs**, `/cchud upgradespecs`, buttons **Current spec only**, **Primary and secondary** (the default) and **Any spec**). An item's tooltip and the Market now say which of your specs it's an upgrade for: "Equip  Upgrade: Holy", or "Keep  Upgrade: Retribution (other spec)" for gear that's better only for your other talent group, or "(not your spec)" for a talent tree you have neither group in. Each spec is the tree with the most points in that talent group, and its gear is weighed for it: a Holy paladin by intellect, Protection by stamina, Retribution by strength, and so on for warriors, shamans and druids. The spec you have on is compared with what you wear. Another spec is compared with the best you own for it, worn or in your bags. Gear that only another spec of yours could use is no longer sold by your junk rules or the sell window. The setting decides which specs count, both for the advice and for what is kept. Where the game gives no stats, or no talents are spent, nothing is said for another spec. Where it gives no tree name, the tooltip says "your other spec" or "talent tree 2".
+- The levelling plan is now **The Mentor**, who talks you through it in a few plain words at the top: "10 more to 60. Start with Minor Healing Potion.", or, once your recipes stop teaching you, "You've outgrown your recipes. See a trainer: Smelt Mithril is waiting at 175." He names the recipe to learn next when another of your characters has been seen with it, and says each thing a few ways. Each line has its own place now, so long words no longer print over the list or the buttons' line, and the panel sits past the profession window's tabs instead of over them (left of the window, or under it, where the screen has no room).
+
 ## 1.4.4
 
 - New name: **ControllerCam + HUD (CCHUD) for Gamepad**. The game's addon list shows "ControllerCam for Gamepad" and "ControllerCam: HUD for Gamepad". Nothing else changes: same folders, same settings, same `/ccam` and `/cchud`.
