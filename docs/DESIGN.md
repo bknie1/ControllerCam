@@ -81,6 +81,10 @@ of the game's own Gamepad UI and can be added or removed without leaving a trace
   its reports by itself at login and at every reload or logout, in `ControllerCamHUDDB.debugReport` (`login`,
   `logout`, `notes`).
 - The download holds `ControllerCam` and `ControllerCam_HUD` (as `.github/workflows/release.yml` builds it).
+- CurseForge: a big release (a tag ending in `.0`, such as `v1.4.0`) is uploaded there by the release workflow;
+  a major hotfix by hand, with the "CurseForge upload" workflow (Actions tab, the tag to send). Both need the
+  `CF_API_TOKEN` repository secret (a CurseForge API token) and take the game version from the `CF_GAME_VERSION`
+  repository variable (1.60.1 when unset). A short changelog for CurseForge goes in `docs/curseforge/<version>.md`.
 
 ## Built from the backlog (1.3.0), and what is still unseen in the game
 
