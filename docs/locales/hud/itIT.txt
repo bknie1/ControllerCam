@@ -16,6 +16,8 @@ Guaritore amico
 Giocatore
 PNG amichevoli per reputazione
 il nome e la barra di un PNG amichevole sono colorati secondo la tua reputazione con la sua fazione: giallo neutrale, verde amichevole, poi verde acqua, turchese e blu per onorato, riverito ed esaltato
+L'altra fazione, ben visibile
+un giocatore dell'altra fazione porta lo stemma della fazione prima del nome e un bordo attorno alla barra della salute, blu Alleanza o rosso Orda, sulle targhette e nel riquadro del bersaglio
 Soglia di esecuzione sulle barre nemiche
 un nemico a un quarto della salute o meno: la sua barra della salute pulsa di rosso, con un bagliore intorno che batte come un polso, sui riquadri di bersaglio e focus e sulle targhette
 Scudi sulle barre della salute
@@ -749,6 +751,8 @@ Secondi prima che la chat svanisca
 quanto resta il testo della chat prima di svanire
 Coordinate sulla mappa
 le tue coordinate sotto la mappa del mondo
+Nascondi i messaggi di errore rossi del gioco
+«L'incantesimo non è ancora pronto», «Mana insufficiente» e simili al centro dello schermo restano nascosti
 %d messaggi nascosti come spam da quando hai effettuato l'accesso.
 %d di questi erano reclutamenti di gilda ripetuti.
 Icona di classe e livello nella chat

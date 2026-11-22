@@ -16,6 +16,8 @@ Friendly healer
 Player
 Friendly NPCs by reputation
 a friendly NPC's name and bar are coloured by your standing with its faction: yellow neutral, green friendly, then sea green, teal and blue for honored, revered and exalted
+The other faction, plainly
+a player of the other faction wears the faction's badge before the name and an outline round the health bar, Alliance blue or Horde red, on nameplates and the target frame
 Execute range on enemy bars
 an enemy at a quarter of its health or less: its health bar throbs red, with a glow round it beating like a pulse, on the target and focus frames and on nameplates
 Shields on health bars
@@ -749,6 +751,8 @@ Seconds before chat fades
 how long chat text stays before it fades
 Coordinates on the map
 your coordinates under the world map
+Hide the game's red error messages
+Spell is not ready yet, Not enough mana and the like in the middle of the screen are kept out of sight
 %d messages hidden as spam since you logged in.
 %d of them were repeated guild recruitment.
 Class icon and level in chat

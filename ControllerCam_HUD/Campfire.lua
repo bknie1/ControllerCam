@@ -46,6 +46,8 @@ CF.AT_CAMP = { ["welcoming campfire"] = true, -- on you while you sit at a camp 
                ["resting"] = true }            -- and lying in a sleeping bag
 CF.SLEEP = { ["resting"] = true }                -- the sleeping bag's: a camp at rest, maybe with no fire
 CF.COMPANY = 6                                    -- at most this many of your group named
+CF.LOOKING = { mouse = true, cursor = true }     -- the HUD wakes for these, but the scene waits on neither: at
+                                                 -- a camp you look at the fire's buff and its minute counting down
 CF.CAMP_ICON = 135805
 CF.WARM = { 1, 0.80, 0.48 }
 CF.WINDOWS = { "GameMenuFrame", "ContainerFrameCombinedBags", "ContainerFrame1", "StaticPopup1", "WorldMapFrame",
@@ -502,7 +504,7 @@ function CF.Busy()
     if AnyPadButton() then return "a button" end
     if WindowOpen() then return "a window" end
     local rest = ns.Rest and ns.Rest.Reason and ns.Rest.Reason()
-    if rest then return rest end
+    if rest and not CF.LOOKING[rest] then return rest end   -- (only looking: the cursor out, over a buff, is not busy)
     return nil
 end
 

@@ -98,9 +98,32 @@ function W:ApplyMap(want)
     self.mapActive = want and true or false
 end
 
+---------------------------------------------------------------------------
+-- The game's red messages in the middle of the screen ("Spell is not ready yet.", "Not enough mana"): out of
+-- sight when you would rather not have them (the game has no setting for it). The frame stays the game's and
+-- keeps working; only its alpha is kept at 0 while this is on, and put back when it is off.
+---------------------------------------------------------------------------
+ns.RegisterSetting({
+    key = "quietErrors", kind = "boolean", default = false, command = "quieterrors", section = "General",
+    label = "Hide the game's red error messages",
+    tip = "Spell is not ready yet, Not enough mana and the like in the middle of the screen are kept out of sight",
+})
+function W:ApplyErrors(want)
+    local f = _G.UIErrorsFrame
+    if type(f) ~= "table" or not f.SetAlpha then self.errorsQuiet = false; return end
+    if want and not self.errorsQuiet then
+        ns.KeepAlpha(f, 0)
+    elseif not want and self.errorsQuiet then
+        ns.KeepAlpha(f, nil)
+        f:SetAlpha(1)
+    end
+    self.errorsQuiet = want and true or false
+end
+
 function W:Apply(run)
     self:ApplyChat(run and ns.db.chatFade and true or false)
     self:ApplyMap(run and ns.db.mapCoords and true or false)
+    self:ApplyErrors(run and ns.db.quietErrors and true or false)
 end
 
 ns.RegisterCheck(function(row, run, db)

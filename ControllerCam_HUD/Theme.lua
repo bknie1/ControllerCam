@@ -472,6 +472,74 @@ function ns.NameByGUID(unit)
     end
 end
 
+---------------------------------------------------------------------------
+-- The other faction, plainly: a player of the other faction wears the faction's badge (the game's own) before
+-- the name, and an outline in the faction's colour round the health bar, Alliance blue and Horde red, on
+-- nameplates and the target frame. Names keep their colours (they are read by colour too). Your own faction is
+-- left as it is. (Setting: factionMarks, UnitFrames.lua.)
+---------------------------------------------------------------------------
+ns.FACTION_COLOR = { Alliance = { 0.30, 0.58, 1.00 }, Horde = { 0.95, 0.28, 0.24 } }
+local FACTION_ICON = { Alliance = "Interface\\TargetingFrame\\UI-PVP-Alliance",
+                       Horde = "Interface\\TargetingFrame\\UI-PVP-Horde" }
+local function Faction(unit)
+    if not UnitFactionGroup then return nil end
+    local ok, f = pcall(UnitFactionGroup, unit)
+    if ok and type(f) == "string" and not ns.IsSecret(f) then return f end
+end
+-- The other faction's name, when the unit is a player of it (and the option is on), else nil
+function ns.OtherFaction(unit)
+    if not (ns.db and ns.db.factionMarks and unit and UnitIsPlayer) then return nil end
+    local ok, isPlayer = pcall(UnitIsPlayer, unit)
+    if not (ok and ns.Yes(isPlayer)) then return nil end
+    local theirs, mine = Faction(unit), Faction("player")
+    if theirs and mine and theirs ~= mine and FACTION_ICON[theirs] then return theirs end
+end
+-- An outline round a bar in a faction's colour (color nil: none). Made the first time, on the bar itself, just
+-- outside its edges.
+ns.FACTION_EDGE = 2
+function ns.FactionEdge(bar, color)
+    if type(bar) ~= "table" or not bar.CreateTexture then return end
+    local e = rawget(bar, "factionEdge")
+    if not color then
+        if e then for _, t in ipairs(e) do t:Hide() end end
+        bar.factionShown = false
+        return
+    end
+    if not e then
+        local w = ns.FACTION_EDGE
+        e = {}
+        for i, side in ipairs({ "TOP", "BOTTOM", "LEFT", "RIGHT" }) do
+            local t = bar:CreateTexture(nil, "OVERLAY", nil, 7)
+            t:SetColorTexture(1, 1, 1, 1)
+            if side == "TOP" or side == "BOTTOM" then
+                local y = side == "TOP" and w or -w
+                t:SetPoint(side .. "LEFT", bar, side .. "LEFT", -w, y)
+                t:SetPoint(side .. "RIGHT", bar, side .. "RIGHT", w, y)
+                t:SetHeight(w)
+            else
+                local x = side == "LEFT" and -w or w
+                t:SetPoint("TOP" .. side, bar, "TOP" .. side, x, 0)
+                t:SetPoint("BOTTOM" .. side, bar, "BOTTOM" .. side, x, 0)
+                t:SetWidth(w)
+            end
+            e[i] = t
+        end
+        bar.factionEdge = e
+    end
+    for _, t in ipairs(e) do
+        t:SetVertexColor(color[1], color[2], color[3], 0.95)
+        t:Show()
+    end
+    bar.factionShown = true
+end
+
+-- The badge as text (before a name) and the faction's colour, or "" and nil
+function ns.FactionMark(unit)
+    local f = ns.OtherFaction(unit)
+    if not f then return "", nil end
+    return ("|T%s:0:0:0:0:64:64:0:40:0:40|t"):format(FACTION_ICON[f]), ns.FACTION_COLOR[f]
+end
+
 function ns.LevelText(level)
     local r, g, b = ns.LevelColor(level)
     local shown = (type(level) == "number" and not ns.IsSecret(level) and level > 0) and tostring(level) or "??"

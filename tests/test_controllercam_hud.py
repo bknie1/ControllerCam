@@ -1870,6 +1870,23 @@ class Campfire(unittest.TestCase):
         self.assertEqual(len(CF.scene.told), 0)                      # nothing told twice
         self.assertEqual(e.errors(), [])
 
+    def test_looking_at_the_fires_buff_with_the_cursor_out_does_not_hold_it_back(self):
+        e = self.env()
+        CF, T = e.ns.Campfire, e.lua.table
+        e.mock.setUnit("party1", T(name="Pablo Bile", isPlayer=True, health=5, healthMax=5, **{"class": "PALADIN"}))
+        e.lua.execute("""SmartNavigation = { IsCursorHidden = function() return false end,
+                                             IsShown = function() return true end }""")   # the cursor out
+        self.assertEqual(e.ns.Rest.Reason(), "cursor")
+        e.mock.units.player.auras = e.lua.table_from([T(name="Welcoming Campfire", icon=5, duration=60,
+                                                        sourceUnit="player", expirationTime=e.g.GetTime() + 60,
+                                                        auraInstanceID=4)])
+        e.update(11, 0.25)                                           # sitting, reading its minute count down
+        self.assertEqual(CF.shown, 1)
+        e.update(5, 0.25)
+        self.assertIsNotNone(CF.scene)                               # and it plays on
+        self.assertEqual(CF.Busy(), None)
+        self.assertEqual(e.errors(), [])
+
     def test_a_sleeping_bag_is_a_quiet_camp_with_your_company_named(self):
         e = self.env()
         CF, T = e.ns.Campfire, e.lua.table
@@ -11739,6 +11756,56 @@ class LongFrames(unittest.TestCase):
         e.g.WorldMapFrame.shown = False
         e.update(0.2)
         self.assertEqual(R.redraws, n + 1)                                   # done once it is closed
+        self.assertEqual(e.errors(), [])
+
+
+class OtherFaction(unittest.TestCase):
+    """A player of the other faction is plain to see: the faction's badge, and the name blue or red."""
+
+    def test_the_other_faction_wears_its_badge_and_colour(self):
+        e = Env()
+        e.lua.execute("""
+            FACTIONS = { player = "Horde" }
+            function UnitFactionGroup(u) return FACTIONS[u], FACTIONS[u] end
+        """)
+        g = e.lua.globals()
+        g.FACTIONS.target = "Alliance"
+        g.FACTIONS.nameplate1 = "Alliance"
+        g.FACTIONS.nameplate2 = "Horde"
+        e.target(isPlayer=True, attackable=False, reaction=4, **{"class": "PALADIN"})
+        f = e.frames.target
+        self.assertIn("UI-PVP-Alliance", f.name.text)                # the badge before the name
+        self.assertTrue(f.otherFaction)
+        self.assertTrue(f.health.factionShown)                       # an outline round the bar,
+        c = f.health.factionEdge[1].vcolor
+        self.assertGreater(c[3], c[1])                               # Alliance blue
+        self.assertEqual(tuple(round(f.name.tcolor[i], 2) for i in (1, 2, 3)),
+                         tuple(round(v, 2) for v in e.ns.colors.text.values()))   # the name keeps its colour
+        p1 = e.mock.addPlate("nameplate1", e.lua.table(name="Ally", level=38, health=500, healthMax=500,
+                                                       isPlayer=True, attackable=False, reaction=4))
+        o1 = e.ns.Nameplates.byPlate[p1]
+        self.assertIn("UI-PVP-Alliance", o1.name.text)
+        self.assertTrue(o1.health.factionShown)
+        p2 = e.mock.addPlate("nameplate2", e.lua.table(name="Mate", level=38, health=500, healthMax=500,
+                                                       isPlayer=True, attackable=False, reaction=5))
+        o2 = e.ns.Nameplates.byPlate[p2]
+        self.assertNotIn("UI-PVP", o2.name.text)                     # your own faction: as before
+        self.assertFalse(o2.otherFaction)
+        e.cmd("factionmarks off")
+        e.mock.fire("PLAYER_TARGET_CHANGED")
+        self.assertNotIn("UI-PVP", f.name.text)
+        self.assertFalse(f.health.factionShown)
+        self.assertEqual(e.errors(), [])
+
+
+class QuietErrors(unittest.TestCase):
+    def test_the_games_red_messages_can_be_kept_out_of_sight(self):
+        e = Env()
+        e.lua.execute("UIErrorsFrame = CreateFrame('Frame', 'UIErrorsFrame', UIParent)")
+        e.cmd("quieterrors on")
+        self.assertEqual(e.g.UIErrorsFrame.alpha, 0)
+        e.cmd("quieterrors off")
+        self.assertEqual(e.g.UIErrorsFrame.alpha, 1)
         self.assertEqual(e.errors(), [])
 
 

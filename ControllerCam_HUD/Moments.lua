@@ -483,7 +483,9 @@ function M:Apply(run)
 end
 
 ns.RegisterCommand("momenttest", function()
-    M:Show(1234, L["Judgement"], "holy")
+    -- a burst as one looks: two crits, their names in the column, the total big (the spells by the game's names)
+    local first, second = SpellName(20271) or L["Judgement"], SpellName(679) or MELEE or "Melee"
+    M:Show(826, ("+ %s\n+ %s"):format(first, second), "holy", nil, 2)
     if ns.Rumble then ns.Rumble.busyUntil = nil; ns.Rumble:Play("moment") end
 end, "/cchud momenttest", "show what a big moment looks and feels like")
 

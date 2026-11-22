@@ -16,6 +16,8 @@ Sanador aliado
 Jugador
 PNJ amistosos por reputación
 el nombre y la barra de un PNJ amistoso se colorean según tu reputación con su facción: amarillo neutral, verde amistoso, luego verde mar, turquesa y azul para honorable, reverenciado y exaltado
+La otra facción, a simple vista
+un jugador de la otra facción lleva el emblema de su facción delante del nombre y un contorno alrededor de la barra de salud, azul Alianza o rojo Horda, en placas de nombre y en el marco del objetivo
 Rango de ejecución en barras enemigas
 un enemigo con un cuarto de su salud o menos: su barra de salud late en rojo, con un brillo alrededor que palpita como un pulso, en los marcos de objetivo y foco y en las placas de nombre
 Escudos en las barras de salud
@@ -749,6 +751,8 @@ Segundos antes de que el chat se desvanezca
 cuánto tiempo permanece el texto del chat antes de desvanecerse
 Coordenadas en el mapa
 tus coordenadas bajo el mapa del mundo
+Ocultar los mensajes de error rojos del juego
+«El hechizo aún no está listo», «No hay suficiente maná» y similares en el centro de la pantalla quedan ocultos
 %d mensajes ocultados como spam desde que iniciaste sesión.
 %d de ellos eran reclutamiento de hermandad repetido.
 Icono de clase y nivel en el chat

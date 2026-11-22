@@ -16,6 +16,8 @@ Befreundeter Heiler
 Spieler
 Freundliche NPCs nach Ruf
 Name und Leiste eines freundlichen NPCs zeigen deinen Ruf bei seiner Fraktion: gelb neutral, grün freundlich, dann meergrün, türkis und blau für wohlwollend, respektvoll und ehrfürchtig
+Die andere Fraktion, deutlich
+ein Spieler der anderen Fraktion trägt das Fraktionswappen vor dem Namen und einen Rahmen um die Gesundheitsleiste, Allianz-blau oder Horde-rot, auf Namensplaketten und im Zielrahmen
 Hinrichtungsbereich auf feindlichen Leisten
 ein Feind bei einem Viertel seiner Gesundheit oder weniger: seine Gesundheitsleiste pocht rot, mit einem Leuchten darum, das wie ein Puls schlägt, auf Ziel- und Fokusrahmen und auf Namensplaketten
 Schilde auf Gesundheitsleisten
@@ -749,6 +751,8 @@ Sekunden bis der Chat ausblendet
 wie lange Chattext bleibt, bevor er ausblendet
 Koordinaten auf der Karte
 deine Koordinaten unter der Weltkarte
+Die roten Fehlermeldungen des Spiels ausblenden
+„Zauber ist noch nicht bereit“, „Nicht genug Mana“ und dergleichen in der Bildschirmmitte werden ausgeblendet
 %d Nachrichten seit deiner Anmeldung als Spam ausgeblendet.
 %d davon waren wiederholte Gildenwerbung.
 Klassensymbol und Stufe im Chat

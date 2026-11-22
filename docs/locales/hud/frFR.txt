@@ -16,6 +16,8 @@ Soigneur allié
 Joueur
 PNJ amicaux selon la réputation
 le nom et la barre d’un PNJ amical prennent la couleur de votre réputation auprès de sa faction : jaune neutre, vert amical, puis vert d’eau, turquoise et bleu pour honoré, révéré et exalté
+L'autre faction, bien visible
+un joueur de l'autre faction porte l'emblème de sa faction devant son nom et un contour autour de la barre de vie, bleu Alliance ou rouge Horde, sur les barres d'info et le cadre de la cible
 Zone d’exécution sur les barres ennemies
 un ennemi à un quart de sa vie ou moins : sa barre de vie palpite en rouge, avec une lueur autour qui bat comme un pouls, sur les cadres de cible et de focalisation et sur les barres de nom
 Boucliers sur les barres de vie
@@ -749,6 +751,8 @@ Secondes avant que le chat s'estompe
 durée d'affichage du texte du chat avant qu'il s'estompe
 Coordonnées sur la carte
 vos coordonnées sous la carte du monde
+Masquer les messages d'erreur rouges du jeu
+« Ce sort n'est pas encore prêt », « Pas assez de mana » et autres au milieu de l'écran sont masqués
 %d messages masqués comme spam depuis votre connexion.
 %d d'entre eux étaient du recrutement de guilde répété.
 Icône de classe et niveau dans le chat

@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.4.3
+
+ControllerCam: HUD
+- The other faction, plainly (switch: **The other faction, plainly**, `/cchud factionmarks`): a player of the other faction wears the faction's badge (the game's own) before the name and an outline round the health bar, Alliance blue or Horde red, on nameplates, the target frame, its target and the focus. Names keep their colours. On an RP-PvP or PvP realm an Alliance player no longer reads as a friend to the Horde (and the other way round). Your own faction is as before.
+- Hide the game's red error messages (switch: **Hide the game's red error messages**, `/cchud quieterrors`, off by default): "Spell is not ready yet.", "Not enough mana" and the like in the middle of the screen are kept out of sight; handy for screenshots.
+- `/cchud momenttest` shows a big moment as one looks now: two crits named in the column, the total big.
+- The campfire scene starts while you look at the fire's buff: with the cursor out, reading Welcoming Campfire's minute count down, the scene waited on you and never began (and a cursor brought out mid-scene ended it). Looking is not busy any more; a button, a step, a window, a fight or a spell still end it at once.
+
 ## 1.4.2
 
 ControllerCam: HUD

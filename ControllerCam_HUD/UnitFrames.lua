@@ -317,6 +317,11 @@ ns.RegisterSetting({
     label = "Friendly NPCs by reputation",
     tip = "a friendly NPC's name and bar are coloured by your standing with its faction: yellow neutral, green friendly, then sea green, teal and blue for honored, revered and exalted",
 })
+ns.RegisterSetting({
+    key = "factionMarks", kind = "boolean", default = true, command = "factionmarks", section = "Frames",
+    label = "The other faction, plainly",
+    tip = "a player of the other faction wears the faction's badge before the name and an outline round the health bar, Alliance blue or Horde red, on nameplates and the target frame",
+})
 UF.STANDING = {
     [1] = C.hostile, [2] = C.hostile, [3] = { 0.98, 0.55, 0.25 },       -- hated, hostile, unfriendly
     [4] = C.neutral, [5] = C.friendly,                                  -- neutral, friendly
@@ -587,8 +592,12 @@ local function UpdateInfo(f)
     if not f.name then return end
     local name, level, kind = U.Info(f.unit)
     local mark = (f.key == "tot" or f.key == "target") and ClassMark(f) or ""
+    local badge, fcolor = ns.FactionMark(f.unit)                         -- the other faction, plainly
+    mark = badge .. mark
     local ok = pcall(function() f.name:SetFormattedText("%s%s  %s", mark, ns.LevelText(level), name or "") end)
     if not ok then pcall(f.name.SetText, f.name, name) end
+    if f.health and ns.FactionEdge then ns.FactionEdge(f.health, fcolor) end   -- (the name keeps its colours)
+    f.otherFaction = fcolor and true or false
     f.classMark = mark ~= ""
     UF.Mark(f)
     if f.key == "tot" then return end

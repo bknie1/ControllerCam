@@ -397,6 +397,9 @@ local function UpdateInfo(o)
     o.bars = WantsBars(o)
     local r, g, b = ns.UnitFrames.TargetColor(unit)
     local mark = NP.ClassMark(unit, isPlayer)                          -- a player's class, in the line itself
+    local badge, fcolor = ns.FactionMark(unit)                          -- the other faction, plainly
+    mark = badge .. mark
+    o.otherFaction = fcolor and true or false
     local levelText = ns.db.plateLevels and not o.mini and ns.LevelText(level) or nil   -- a small plate: the name only
     if o.hostile then
         local rank = ns.RankOf(kind, level)
@@ -408,6 +411,7 @@ local function UpdateInfo(o)
         SetName(o.name, name, ns.Yes(isPlayer) and levelText or nil, mark)
         o.name:SetTextColor(r, g, b)
     end
+    ns.FactionEdge(o.health, fcolor)                                    -- (the name keeps its colours)
     local sub = ns.db.plateSubtitles and not o.mini and Subtitle(unit) or nil
     if sub then
         o.sub:SetText(isPlayer and ("<" .. sub .. ">") or sub)

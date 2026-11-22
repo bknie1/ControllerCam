@@ -16,6 +16,8 @@ Curandeiro amigo
 Jogador
 PNJs amistosos por reputação
 o nome e a barra de um PNJ amistoso são coloridos pela sua reputação com a facção dele: amarelo neutro, verde amistoso, depois verde-água, turquesa e azul para honrado, reverenciado e exaltado
+A outra facção, bem à vista
+um jogador da outra facção leva o emblema da facção antes do nome e um contorno em volta da barra de vida, azul Aliança ou vermelho Horda, nas placas de nome e no quadro do alvo
 Faixa de execução nas barras inimigas
 um inimigo com um quarto da vida ou menos: sua barra de vida pulsa em vermelho, com um brilho ao redor batendo como um pulso, nos quadros de alvo e foco e nas placas de nome
 Escudos nas barras de vida
@@ -749,6 +751,8 @@ Segundos até o chat esmaecer
 quanto tempo o texto do chat fica antes de esmaecer
 Coordenadas no mapa
 suas coordenadas abaixo do mapa-múndi
+Ocultar as mensagens de erro vermelhas do jogo
+"O feitiço ainda não está pronto", "Mana insuficiente" e afins no meio da tela ficam ocultos
 %d mensagens ocultadas como spam desde que você entrou.
 %d delas eram recrutamento de guilda repetido.
 Ícone de classe e nível no chat
