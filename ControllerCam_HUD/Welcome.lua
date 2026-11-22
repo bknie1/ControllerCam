@@ -66,10 +66,12 @@ function W.Screen(yes)
     end
 end
 
+-- (asked in a window of our own, Core.lua: never in the game's dialog box)
 local function Define()
-    if W.defined or not StaticPopupDialogs then return end
+    if W.defined then return end
     W.defined = true
-    StaticPopupDialogs["CCHUD_SCREEN"] = {
+    local specs = {}
+    specs["CCHUD_SCREEN"] = {
         text = L["Set up the screen for the controller too? This adds a layout named CCHUD to the game's Edit Mode, for you to choose there: it puts the cooldown rows under the target, clear of the gamepad buttons. Your own layouts are kept (/cchud setup offers this again)."],
         button1 = L["Set it up"], button2 = L["Not now"],
         OnAccept = function() W.Screen(true) end,
@@ -78,7 +80,7 @@ local function Define()
         end,
         timeout = 0, whileDead = true, hideOnEscape = false,
     }
-    StaticPopupDialogs["CCHUD_WELCOME"] = {
+    specs["CCHUD_WELCOME"] = {
         text = L["ControllerCam comes with a controller interface, the HUD: its own unit frames, nameplates, cast bar and more while the Gamepad UI is in use. Do you want it, or the camera alone?"],
         button1 = L["Camera + HUD"], button2 = L["Camera only"],
         OnAccept = function() W.Answer(true) end,
@@ -88,20 +90,17 @@ local function Define()
         end,
         timeout = 0, whileDead = true, hideOnEscape = false,
     }
+    for which, spec in pairs(specs) do ns.Dialog.Define(which, spec) end
 end
 
 function W.Ask()
     Define()
-    if not (W.defined and StaticPopup_Show) then return false end
-    StaticPopup_Show("CCHUD_WELCOME")
-    return true
+    return ns.Dialog.Show("CCHUD_WELCOME")
 end
 
 function W.AskScreen()
     Define()
-    if not (W.defined and StaticPopup_Show) then return false end
-    StaticPopup_Show("CCHUD_SCREEN")
-    return true
+    return ns.Dialog.Show("CCHUD_SCREEN")
 end
 
 -- At login, before anything is applied (Core.lua)

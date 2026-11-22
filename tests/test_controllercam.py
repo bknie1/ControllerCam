@@ -540,16 +540,37 @@ class Applying(unittest.TestCase):
         self.assertEqual(cv("test_cameraTargetFocusEnemyEnable"), "0")        # not in the profile: game default
         self.assertEqual(cv("cameraSmoothStyle"), "0")
         self.assertEqual(env.mock.state.zoom, 7)
-        self.assertEqual(cv("test_cameraOverShoulder"), "2")                  # +2 close up (the zoom curve)
+        self.assertEqual(cv("test_cameraOverShoulder"), "2.35")               # close up, on the zoom curve
         self.assertEqual(env.ns.Status().profile, "Action")
 
     def test_shoulder_offset_follows_the_zoom_curve(self):
         env = Env()
         frame = env.ns.frame
-        for zoom, expect in [(7, "2"), (8, "2"), (14, "1"), (20, "0"), (30, "0"), (3, "1"), (0, "0")]:
+        for zoom, expect in [(7, "2.35"), (8, "2.7"), (14, "1.35"), (20, "0"), (30, "0"), (3, "1"), (0, "0")]:
             env.state(zoom=zoom)
             frame.scripts.OnUpdate(frame, 0.2)
             self.assertEqual(env.cv("test_cameraOverShoulder"), expect, zoom)
+
+    def test_a_scene_of_the_huds_holds_the_camera_in_the_middle(self):
+        """The HUD's camp fire scene turns the camera round the character: the offset rests at the middle while it
+        plays, the curve and the profile's distance stay out of it, and letting go puts the profile back."""
+        env = Env()
+        frame, cam = env.ns.frame, env.lua.globals().ControllerCam
+        env.state(zoom=8)
+        frame.scripts.OnUpdate(frame, 0.2)
+        self.assertEqual(env.cv("test_cameraOverShoulder"), "2.7")
+        cam.Hold(True)
+        self.assertTrue(cam.IsHeld())
+        self.assertEqual(env.cv("test_cameraOverShoulder"), "0")
+        env.state(zoom=11)                                             # the scene eases the camera out
+        frame.scripts.OnUpdate(frame, 0.2)
+        env.ns.Evaluate(True)
+        self.assertEqual(env.cv("test_cameraOverShoulder"), "0")       # neither the curve nor a profile moves it
+        self.assertEqual(env.mock.state.zoom, 11)
+        cam.Hold(False)
+        self.assertNotEqual(env.cv("test_cameraOverShoulder"), "0")     # back on the curve at once
+        self.assertEqual(env.cv("test_cameraOverShoulder"),
+                         env.ns.FormatNumber(env.run("return NS.EvalCurve(NS.BUILTIN.action.values.shoulderCurve, 11)")))
 
     def test_close_zoom_keeps_the_character_on_screen(self):
         """A sideways offset in yards covers more screen the closer the camera is: keep it a fraction of the view."""
@@ -564,6 +585,21 @@ class Applying(unittest.TestCase):
                 offset = env.run("return NS.EvalCurve(NS.BUILTIN['%s'].values.shoulderCurve, %s)" % (prof.id, zoom))
                 self.assertLessEqual(abs(offset) / (1.78 * zoom), 0.25, "%s at zoom %s: offset %s" % (prof.id, zoom, offset))
 
+    def test_the_middle_zoom_band_keeps_the_character_where_close_zoom_puts_it(self):
+        """Up to `hold` the offset grows with the distance, so the character stays at the same place on screen as
+        at the closest zoom; it used to stop growing at `ramp`, and the character drifted toward the middle."""
+        env = Env()
+        ns = env.ns
+        for i in range(1, len(ns.BUILTIN_LIST) + 1):
+            prof = ns.BUILTIN_LIST[i]
+            curve = prof["values"]["shoulderCurve"]
+            if curve is None or len(curve) < 4:
+                continue
+            (ramp, near), (hold, mid) = (curve[2][1], curve[2][2]), (curve[3][1], curve[3][2])
+            self.assertGreater(mid, near, prof.id)                                   # further out in the middle,
+            self.assertAlmostEqual(mid / hold, near / ramp, delta=0.01, msg=prof.id)  # by the same share of the view
+            self.assertEqual(curve[1][2], 0, prof.id)                                # (the close end as it was)
+
     def test_curve_only_writes_when_the_value_changes(self):
         env = Env()
         env.state(zoom=14)
@@ -577,13 +613,13 @@ class Applying(unittest.TestCase):
     def test_mirror_shoulder(self):
         env = Env()
         env.ns.SetFlipShoulder(True)
-        self.assertEqual(env.cv("test_cameraOverShoulder"), "-2")
+        self.assertEqual(env.cv("test_cameraOverShoulder"), "-2.35")
         env.state(zoom=14)
         frame = env.ns.frame
         frame.scripts.OnUpdate(frame, 0.2)
-        self.assertEqual(env.cv("test_cameraOverShoulder"), "-1")
+        self.assertEqual(env.cv("test_cameraOverShoulder"), "-1.35")
         env.ns.SetFlipShoulder(False)
-        self.assertEqual(env.cv("test_cameraOverShoulder"), "1")             # zoom 14 is kept: edits do not move the camera
+        self.assertEqual(env.cv("test_cameraOverShoulder"), "1.35")          # zoom 14 is kept: edits do not move the camera
 
     def test_classic_goes_back_to_game_defaults_and_keeps_zoom(self):
         env = Env()
@@ -667,7 +703,7 @@ class Situations(unittest.TestCase):
         env.state(resting=False); env.tick(2); self.assertEqual(name(), "Action")
         env.state(mounted=True); env.tick(); self.assertEqual(name(), "Mounted cruise")
         env.state(flying=True); env.tick(); self.assertEqual(name(), "Flying")
-        env.state(flying=False, mounted=False, swimming=True); env.tick(2); self.assertEqual(name(), "Hybrid")
+        env.state(flying=False, mounted=False, swimming=True); env.tick(2); self.assertEqual(name(), "Action")
         env.state(swimming=False, vehicle=True); env.tick(2); self.assertEqual(name(), "Hybrid")
         env.state(vehicle=False, instance="raid"); env.tick(2); self.assertEqual(name(), "Raid view")
         env.state(instance="party"); env.tick(2); self.assertEqual(name(), "Action")
@@ -719,6 +755,45 @@ class Situations(unittest.TestCase):
         later = Env(db="{ v = 2, assign = { default = 'hybrid' } }")
         self.assertIsNone(later.ns.db.assign.fishing)                                   # emptied since: stays empty
 
+    def test_head_tracking_rests_in_the_water_and_the_way_in_is_noted(self):
+        env = Env()
+        head = lambda: float(env.cv("test_cameraHeadMovementStrength"))
+        self.assertEqual(head(), 1)
+        shoulder = env.cv("test_cameraOverShoulder")
+        env.state(swimming=True); env.tick(2)
+        self.assertEqual(head(), 0)                                    # the stroke does not drag the camera
+        self.assertEqual(env.cv("test_cameraOverShoulder"), shoulder)  # the offset is left as it was
+        self.assertEqual(env.ns.Status().profile, "Action")
+        env.state(swimming=False); env.tick(2)
+        self.assertEqual(head(), 1)                                    # out of the water: as the profile has it
+        trace = list(env.ns.GetDB().trace.values())
+        self.assertTrue(any("into the water: " in l and "test_cameraOverShoulder=" in l and "facing=" in l
+                            for l in trace))
+        self.assertTrue(any("a second later: " in l for l in trace))
+        self.assertTrue(any("out of the water: " in l for l in trace))
+
+    def test_in_the_water_you_face_the_way_you_do_on_land(self):
+        env = Env()
+        for id in ("action", "hybrid", "stroll", "cruise", "skies", "shooter"):
+            env.ns.UseEverywhere(id)
+            env.tick(1)
+            self.assertEqual(float(env.cv("GamePadFaceMovementSwimming")), 0, id)   # no turning to the stick
+
+    def test_the_water_keeps_the_camera_you_have(self):
+        env = Env()
+        self.assertIsNone(env.ns.db.assign.swimming)                  # a fresh install: no swap in the water
+        before = {k: env.mock.cvars[k] for k in ("test_cameraOverShoulder", "GamePadFaceMovementMaxAngle")}
+        env.state(swimming=True); env.tick(2)
+        self.assertEqual(env.ns.Status().profile, "Action")
+        after = {k: env.mock.cvars[k] for k in before}
+        self.assertEqual(before, after)                                # nothing moves sideways, nothing turns you
+        old = Env(db="{ v = 2, assign = { default = 'action', swimming = 'hybrid' } }")
+        self.assertIsNone(old.ns.db.assign.swimming)                   # the old starter's swap goes
+        mine = Env(db="{ v = 3, assign = { default = 'action', swimming = 'hybrid' } }")
+        self.assertEqual(mine.ns.db.assign.swimming, "hybrid")         # chosen since: yours
+        other = Env(db="{ v = 2, assign = { default = 'action', swimming = 'cruise' } }")
+        self.assertEqual(other.ns.db.assign.swimming, "cruise")        # one you picked yourself: kept
+
     def test_a_preset_for_everywhere_tells_the_hud(self):
         env = Env()
         env.lua.execute("HUDHEARD = {}; ControllerCamHUD = { CameraPreset = function(id) table.insert(HUDHEARD, id) end }")
@@ -733,7 +808,7 @@ class Situations(unittest.TestCase):
     def test_shapeshift_forms_scale_the_shoulder_offset(self):
         env = Env()
         env.cmd("use shooter")
-        env.mock.state.zoom = 8
+        env.mock.state.zoom = 5
         env.tick(1)
         normal = float(env.cv("test_cameraOverShoulder"))
         self.assertGreater(normal, 0)
@@ -992,7 +1067,7 @@ class SlashCommands(unittest.TestCase):
         self.assertIn("out-of-the-box", text)                                 # the description
         self.assertIn("Camera distance (yards): 7", text)
         self.assertIn("Head tracking strength: 1", text)
-        self.assertIn("0:0 6:2 8:2 20:0", text)                              # the shoulder curve
+        self.assertIn("0:0 6:2 8:2.7 20:0", text)                              # the shoulder curve
         self.assertIn("game default", text)
         classic = plain(self.said("describe classic"))
         self.assertIn("game's own camera", classic)
@@ -1015,6 +1090,75 @@ class SlashCommands(unittest.TestCase):
     def test_tokenizer(self):
         t = self.env.run("return NS.Tokenize('a \"b c\" d  \"e')")
         self.assertEqual([t[i] for i in range(1, 5)], ["a", "b c", "d", "e"])
+
+
+class ExperimentalNotice(unittest.TestCase):
+    """The game's notice about its experimental camera settings: answered once, then not asked again."""
+
+    def env(self, db=None):
+        e = Env(db=db)
+        e.lua.execute("""
+            POPUP = false
+            function StaticPopup_Visible(which) return POPUP and which == "EXPERIMENTAL_CVAR_WARNING" and "StaticPopup1" or nil end""")
+        e.g = e.lua.globals()
+        e.g.UIParent.RegisterEvent(e.g.UIParent, "EXPERIMENTAL_CVAR_CONFIRMATION_NEEDED")   # the game's own
+        return e
+
+    def ask(self, e, answer):
+        e.g.POPUP = True
+        e.mock.fire("EXPERIMENTAL_CVAR_CONFIRMATION_NEEDED")
+        e.advance(1)
+        e.g.POPUP = False
+        if answer == "disable":                                     # the game puts its test settings back
+            for k in list(e.mock.cvars.keys()):
+                if k.startswith("test_"):
+                    e.mock.cvars[k] = e.mock.defaults[k]
+        e.advance(1)
+
+    def test_accepted_once_it_is_not_asked_again(self):
+        e = self.env()
+        self.assertTrue(e.ns.TestCvarsOn())                        # the Action camera's shoulder offset
+        self.assertFalse(e.db().noticeAccepted)
+        self.ask(e, "accept")
+        self.assertTrue(e.db().noticeAccepted)
+        self.assertIsNone(e.g.UIParent.events["EXPERIMENTAL_CVAR_CONFIRMATION_NEEDED"])   # the game is not told to ask
+        saved = e.lua.eval("function(t) local o = {} for k, v in pairs(t) do if type(v) ~= 'table' then o[#o + 1] = k .. '=' .. tostring(v) end end return table.concat(o, ',') end")(e.db())
+        self.assertIn("noticeAccepted=true", saved)
+        e2 = Env(db="{ v = 3, noticeAccepted = true }")             # the next login
+        self.assertIsNone(e2.lua.globals().UIParent.events["EXPERIMENTAL_CVAR_CONFIRMATION_NEEDED"])
+        self.assertTrue(e2.ns.notice.quieted)
+        self.assertIn("ask about its experimental camera settings again", " ".join(e2.cmd("notice")))
+        self.assertFalse(e2.db().noticeAccepted)
+        self.assertTrue(e2.lua.globals().UIParent.events["EXPERIMENTAL_CVAR_CONFIRMATION_NEEDED"])
+
+    def test_every_listener_of_the_game_is_quieted_not_only_uiparent(self):
+        e = Env(db="{ v = 3, noticeAccepted = true }", login=False)
+        g = e.lua.globals()
+        e.lua.execute("""
+            OtherAsker = CreateFrame("Frame", "OtherAsker")
+            OtherAsker:RegisterEvent("EXPERIMENTAL_CVAR_CONFIRMATION_NEEDED")
+            function GetFramesRegisteredForEvent(event)
+                local out = {}
+                for _, f in ipairs(ALL_FRAMES) do if f.events[event] then out[#out + 1] = f end end
+                return unpack(out)
+            end""".replace("ALL_FRAMES", "WOW_MOCK_FRAMES"))
+        g.WOW_MOCK_FRAMES = e.mock.frames
+        e.mock.fire("ADDON_LOADED", "ControllerCam")
+        e.mock.fire("PLAYER_LOGIN")
+        self.assertIsNone(g.OtherAsker.events["EXPERIMENTAL_CVAR_CONFIRMATION_NEEDED"])
+        self.assertIn("OtherAsker", e.ns.notice.quietedFrom)
+
+    def test_disable_is_respected_and_nothing_is_remembered(self):
+        e = self.env()
+        self.ask(e, "disable")
+        self.assertFalse(e.db().noticeAccepted)
+        self.assertTrue(e.g.UIParent.events["EXPERIMENTAL_CVAR_CONFIRMATION_NEEDED"])
+
+    def test_a_request_the_game_never_shows_is_not_taken_for_a_yes(self):
+        e = self.env()
+        e.mock.fire("EXPERIMENTAL_CVAR_CONFIRMATION_NEEDED")        # no dialog appears
+        e.advance(7)
+        self.assertFalse(e.db().noticeAccepted)
 
 
 class OptionsPanel(unittest.TestCase):

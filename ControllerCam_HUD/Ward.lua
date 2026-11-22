@@ -83,7 +83,7 @@ local function FromCast(caster, spellID)
     if not shield[3] then
         local t = caster == "player" and "target" or (caster .. "target")
         local okA, hostile = pcall(UnitCanAttack, caster, t)
-        if UnitExists(t) and not (okA and hostile and not ns.IsSecret(hostile)) then dest = t end
+        if UnitExists(t) and not (okA and ns.Yes(hostile)) then dest = t end
         if caster == "player" and W.sentTo and UnitExists(W.sentTo) then dest = W.sentTo end
     end
     Note(ns.GUID(dest), shield)

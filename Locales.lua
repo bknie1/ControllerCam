@@ -211,6 +211,9 @@ local ENGLISH = {
     "You are not in a form.",  -- 201
     "Shoulder offset in this form: %d%%",  -- 202
     "usage: /ccam formoffset <percent> (or reset)",  -- 203
+    "The game will ask about its experimental camera settings again at the next login.",  -- 204
+    "The game will not ask about the experimental camera settings again (you accepted them). /ccam notice brings the question back.",  -- 205
+    "let the game ask about its experimental camera settings again at the next login",  -- 206
 }
 
 local TRANSLATIONS = {
@@ -418,6 +421,9 @@ local TRANSLATIONS = {
         "Du bist in keiner Gestalt.",  -- 201
         "Schulterversatz in dieser Gestalt: %d%%",  -- 202
         "Verwendung: /ccam formoffset <Prozent> (oder reset)",  -- 203
+        "Das Spiel fragt beim nächsten Einloggen wieder nach seinen experimentellen Kameraeinstellungen.",  -- 204
+        "Das Spiel fragt nicht mehr nach den experimentellen Kameraeinstellungen (du hast sie akzeptiert). /ccam notice holt die Frage zurück.",  -- 205
+        "das Spiel beim nächsten Einloggen wieder nach seinen experimentellen Kameraeinstellungen fragen lassen",  -- 206
     },
     esES = {
         "En un vehículo",  -- 1
@@ -623,6 +629,9 @@ local TRANSLATIONS = {
         "No estás en ninguna forma.",  -- 201
         "Desplazamiento de hombro en esta forma: %d%%",  -- 202
         "uso: /ccam formoffset <porcentaje> (o reset)",  -- 203
+        "El juego volverá a preguntar por sus ajustes de cámara experimentales al iniciar sesión la próxima vez.",  -- 204
+        "El juego no volverá a preguntar por los ajustes de cámara experimentales (los aceptaste). /ccam notice recupera la pregunta.",  -- 205
+        "hacer que el juego vuelva a preguntar por sus ajustes de cámara experimentales al iniciar sesión",  -- 206
     },
     frFR = {
         "Dans un véhicule",  -- 1
@@ -828,6 +837,9 @@ local TRANSLATIONS = {
         "Vous n'êtes sous aucune forme.",  -- 201
         "Décalage d'épaule dans cette forme : %d%%",  -- 202
         "utilisation : /ccam formoffset <pourcentage> (ou reset)",  -- 203
+        "Le jeu redemandera pour ses réglages de caméra expérimentaux à la prochaine connexion.",  -- 204
+        "Le jeu ne demandera plus pour les réglages de caméra expérimentaux (vous les avez acceptés). /ccam notice fait revenir la question.",  -- 205
+        "laisser le jeu redemander pour ses réglages de caméra expérimentaux à la prochaine connexion",  -- 206
     },
     itIT = {
         "In un veicolo",  -- 1
@@ -1033,6 +1045,9 @@ local TRANSLATIONS = {
         "Non sei in nessuna forma.",  -- 201
         "Spostamento sulla spalla in questa forma: %d%%",  -- 202
         "uso: /ccam formoffset <percentuale> (o reset)",  -- 203
+        "Il gioco chiederà di nuovo delle sue impostazioni sperimentali della telecamera al prossimo accesso.",  -- 204
+        "Il gioco non chiederà più delle impostazioni sperimentali della telecamera (le hai accettate). /ccam notice riporta la domanda.",  -- 205
+        "far chiedere di nuovo al gioco delle sue impostazioni sperimentali della telecamera al prossimo accesso",  -- 206
     },
     koKR = {
         "탈것 이용 중",  -- 1
@@ -1238,6 +1253,9 @@ local TRANSLATIONS = {
         "변신 상태가 아닙니다.",  -- 201
         "이 변신 상태의 어깨 시점 이동: %d%%",  -- 202
         "사용법: /ccam formoffset <퍼센트> (또는 reset)",  -- 203
+        "다음 접속 시 게임이 실험적 카메라 설정에 대해 다시 묻습니다.",  -- 204
+        "게임이 더 이상 실험적 카메라 설정에 대해 묻지 않습니다 (수락했습니다). /ccam notice 로 질문을 다시 받을 수 있습니다.",  -- 205
+        "다음 접속 시 게임이 실험적 카메라 설정에 대해 다시 묻게 합니다",  -- 206
     },
     ptBR = {
         "Em um veículo",  -- 1
@@ -1443,6 +1461,9 @@ local TRANSLATIONS = {
         "Você não está em nenhuma forma.",  -- 201
         "Deslocamento de ombro nesta forma: %d%%",  -- 202
         "uso: /ccam formoffset <porcentagem> (ou reset)",  -- 203
+        "O jogo perguntará novamente sobre suas configurações experimentais de câmera no próximo login.",  -- 204
+        "O jogo não perguntará mais sobre as configurações experimentais de câmera (você as aceitou). /ccam notice traz a pergunta de volta.",  -- 205
+        "fazer o jogo perguntar novamente sobre suas configurações experimentais de câmera no próximo login",  -- 206
     },
     ruRU = {
         "В транспорте",  -- 1
@@ -1648,6 +1669,9 @@ local TRANSLATIONS = {
         "Вы не в облике.",  -- 201
         "Смещение к плечу в этом облике: %d%%",  -- 202
         "использование: /ccam formoffset <процент> (или reset)",  -- 203
+        "При следующем входе игра снова спросит об экспериментальных настройках камеры.",  -- 204
+        "Игра больше не будет спрашивать об экспериментальных настройках камеры (вы их приняли). /ccam notice возвращает вопрос.",  -- 205
+        "игра снова спросит об экспериментальных настройках камеры при следующем входе",  -- 206
     },
     zhCN = {
         "载具中",  -- 1
@@ -1853,6 +1877,9 @@ local TRANSLATIONS = {
         "你当前不在任何形态中。",  -- 201
         "此形态下的越肩偏移：%d%%",  -- 202
         "用法：/ccam formoffset <百分比>（或 reset）",  -- 203
+        "下次登录时，游戏会再次询问其实验性镜头设置。",  -- 204
+        "游戏不会再询问实验性镜头设置（你已接受）。/ccam notice 可恢复询问。",  -- 205
+        "下次登录时让游戏再次询问其实验性镜头设置",  -- 206
     },
     zhTW = {
         "載具中",  -- 1
@@ -2058,6 +2085,9 @@ local TRANSLATIONS = {
         "你目前不在任何形態中。",  -- 201
         "此形態下的越肩偏移：%d%%",  -- 202
         "用法：/ccam formoffset <百分比>（或 reset）",  -- 203
+        "下次登入時，遊戲會再次詢問其實驗性鏡頭設定。",  -- 204
+        "遊戲不會再詢問實驗性鏡頭設定（你已接受）。/ccam notice 可恢復詢問。",  -- 205
+        "下次登入時讓遊戲再次詢問其實驗性鏡頭設定",  -- 206
     },
 }
 TRANSLATIONS.esMX = TRANSLATIONS.esES      -- Latin American Spanish uses the same text

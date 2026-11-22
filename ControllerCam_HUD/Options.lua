@@ -43,7 +43,7 @@ View({ section = "General", kind = "boolean", key = "chat", label = "Chat window
 
 Unit("player", "Player frame", "our player bar, top left")
 Unit("target", "Target frame", "our target bar, top centre")
-Unit("pet", "Pet bar", "a small pet bar under the player bar")
+Unit("pet", "Pet bar", "a small pet bar under the player bar, or beside the vertical bars")
 Unit("focus", "Focus frame", "our focus frame")
 Unit("vertical", "Vertical bars", "slim upright health and power bars beside your character, for a third-person view (in place of the player bar)")
 View({ section = "Frames", kind = "number", key = "verticalIdle", min = 0, max = 1, percent = true, onChange = function() end,
@@ -119,7 +119,15 @@ for _, label in ipairs({
     "Cooldown rows clear of the gamepad bars", "Fishing front and centre", "Fish journal", "Fishing interface",
     "Bait on a double press", "Quest list: nearest first", "Quest list: recommended order",
     "Quest list: no group quests while alone", "Quest list: only the nearest", "Shields show as a ward",
-    "A game while the float is out", "Party nameplates in dungeons: names only", "Party nameplates in dungeons: hidden", "Tooltip background",
+    "A game while the float is out", "Party nameplates in dungeons: names only", "Party nameplates in dungeons: hidden",
+    "Seconds before chat fades", "Quest list: short objectives", "Gamepad bars put away while fishing",
+    "Reduce animations", "Catches and camp buffs across the screen",
+    "Quest progress in chat", "Flights: time and countdown", "Reminder to drink water", "Water reminder every (minutes)",
+    "Hide repeated guild recruitment",
+    "Keep what your quests need",
+    "Quest progress to your party",
+    "Fades: gamepad bars", "Fades: minimap", "Fades: quest list", "Fades: damage meter", "Fades: experience bar",
+    "Fades: buffs", "Fades: cooldown rows",
 }) do BASIC[label] = true end
 ns.BASIC_OPTIONS = BASIC
 
@@ -129,12 +137,13 @@ local PAGE_OF = {
     ["Quests"] = "Quests, chat and map", ["Quests, chat and map"] = "Quests, chat and map",
     ["Gamepad bars"] = "Gamepad bars", ["Bags, bank and vendor"] = "Bags, bank and vendor",
     ["Native Options"] = "Native Options", ["Look"] = "Look", ["Fishing"] = "Fishing",
+    ["Accessibility"] = "Accessibility", ["Screen fade"] = "Screen fade",
 }
 local EFFECTS = { impacts = true, impactFx = true, castWindup = true, combatColors = true, castArt = true }
 local FISHING = { fishing = true, fishBig = true }      -- registered with the cast bar; they belong with fishing
 local CHAT_MAP = { chatFade = true, chatTime = true, mapCoords = true, chat = true }
-local PAGES = { "Frames", "Effects", "Look", "Nameplates", "Quests, chat and map", "Bags, bank and vendor",
-                "Gamepad bars", "Fishing", "Native Options" }
+local PAGES = { "Frames", "Screen fade", "Effects", "Look", "Nameplates", "Quests, chat and map",
+                "Bags, bank and vendor", "Gamepad bars", "Fishing", "Accessibility", "Native Options" }
 
 local function PageOf(def)
     if def.key and EFFECTS[def.key] then return "Effects" end
@@ -162,12 +171,18 @@ end
 ns.RefreshOptions = RefreshAll
 
 local function Tooltip(frame, text)
+    -- (a tooltip of our own: the game's is never opened or closed by us, Tooltip.lua says why)
     frame:SetScript("OnEnter", function(self)
-        GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
-        GameTooltip:SetText(text, 1, 1, 1, 1, true)
-        GameTooltip:Show()
+        local tip = ns.Tooltip and ns.Tooltip.Own()
+        if not tip then return end
+        tip:SetOwner(self, "ANCHOR_RIGHT")
+        tip:SetText(text, 1, 1, 1, 1, true)
+        tip:Show()
     end)
-    frame:SetScript("OnLeave", function() GameTooltip:Hide() end)
+    frame:SetScript("OnLeave", function()
+        local tip = ns.Tooltip and ns.Tooltip.Own()
+        if tip then tip:Hide() end
+    end)
 end
 
 local function Text(parent, template, text)
@@ -186,9 +201,8 @@ local function Button(parent, label, onClick, tip, width)
     return b
 end
 
--- Quick switches, right under the modules: tooltips at the cursor, and the bar style (compact or full,
--- everywhere or one by one)
-ns.STYLE = { "tooltipCursor", "compactAll", "targetCompact", "plateCompact" }
+-- Quick switches, right under the modules: the bar style (compact or full, everywhere or one by one)
+ns.STYLE = { "compactAll", "targetCompact", "plateCompact" }
 
 -- The HUD's modules, switched on and off at the top of its main page
 ns.MODULES = { "nameplates", "group", "castbar", "impacts", "numbers", "rumble", "skin", "vendor", "invTotals",
@@ -219,6 +233,30 @@ local function Row(content, def)
         refreshers[#refreshers + 1] = function()
             cb:SetChecked(ns.Get(def) and true or false)
             if def.available then cb:SetEnabled(def.available() and true or false) end
+        end
+    elseif def.choices then
+        -- one of a few (a number setting, 1 to the number of choices): a button each, the chosen one lit
+        local label = Text(content, "GameFontHighlight", L[def.label])
+        local holder = CreateFrame("Frame", nil, content)
+        local perRow = 3                                  -- (more than three wrap onto the next row)
+        local rows = math.ceil(#def.choices / perRow)
+        holder:SetSize(math.min(#def.choices, perRow) * 92, 24 + (rows - 1) * 28)
+        local buttons = {}
+        for i, choice in ipairs(def.choices) do
+            local b = Button(holder, L[choice], function()
+                if refreshing then return end
+                ns.Set(def, i)
+                RefreshAll()
+            end, def.tip and L[def.tip], 88)
+            b:SetPoint("TOPLEFT", holder, "TOPLEFT", ((i - 1) % perRow) * 92, -math.floor((i - 1) / perRow) * 28)
+            buttons[i] = b
+        end
+        row.widget, row.label, row.height, row.buttons = holder, label, 32 + (rows - 1) * 28, buttons
+        refreshers[#refreshers + 1] = function()
+            local v = ns.Get(def)
+            for i, b in ipairs(buttons) do
+                if i == v then b:LockHighlight() else b:UnlockHighlight() end
+            end
         end
     else
         local mult = def.percent and 100 or 1
@@ -338,6 +376,22 @@ function ns.BuildOptions()
         end
         ns.padIconButtons[kind] = b
         prev = b
+    end
+    if ns.FontsOffered() then
+        local fontHead = Text(main, "GameFontNormal", L["Font"])
+        fontHead:SetPoint("TOPLEFT", rowStart, "BOTTOMLEFT", 0, -12)
+        prev = nil
+        for _, c in ipairs(ns.FONT_CHOICES) do
+            local b = Button(main, ns.FontName(c[1]), function() SlashCmdList["CCHUD"]("font " .. c[1]) end,
+                L["one font for the HUD and the game's own text (windows, tooltips, chat, buttons); each keeps its size"], 94)
+            if prev then
+                b:SetPoint("LEFT", prev, "RIGHT", 6, 0)
+            else
+                b:SetPoint("TOPLEFT", fontHead, "BOTTOMLEFT", 0, -6)
+                rowStart = b
+            end
+            prev = b
+        end
     end
     local layoutHead = Text(main, "GameFontNormal", L["Reset the game's layout"])
     layoutHead:SetPoint("TOPLEFT", rowStart, "BOTTOMLEFT", 0, -12)

@@ -1,85 +1,190 @@
--- ControllerCam HUD: tooltips follow your cursor.
--- The game puts most tooltips (units in the world, things you point at) in a fixed corner. While the HUD runs
--- they open at your cursor instead, the Gamepad UI's cursor included, except in a fight, where they stay in
--- the corner, out of the way. Tooltips the game anchors to a frame of its own (a buff, a bag slot) are left
--- where they are.
+-- ControllerCam HUD: what the HUD adds to tooltips, beside them.
+-- Tooltips are the game's: where it puts them and how they look (with the HUD's look on, the dark glass of
+-- the rest of the HUD). Tooltips followed your cursor once, with a see-through background; that is gone.
 --
--- A tooltip at the cursor sits on top of what you are looking at, so its background and border can be made
--- see-through, as far as you like: the HUD's own glass behind tooltips when the game's frames wear our look,
--- the game's own background otherwise (kept at that level by our timer, and put back when the HUD is off).
+-- The game's tooltips are only looked at here, never filled and never added to. A line an addon adds to one of
+-- the game's tooltips is a piece of that tooltip made by the addon, and so is everything the tooltip's own
+-- scripts write while an addon is the one showing or hiding it. The game stops trusting what it does after
+-- reading such a piece, and it reads tooltips while the controller's cursor moves: seen here as the gamepad
+-- bars refusing their own buttons after a visit to a vendor, until a reload. So: our lines for an item hang
+-- under its tooltip on a panel of our own (T.Annex), and our own windows explain themselves in a tooltip of
+-- our own (T.Own).
 
 local ADDON, ns = ...
 
-local T = { active = false, running = false, faded = {} }
+local T = {}
 ns.Tooltip = T
 
-T.TIPS = { "GameTooltip", "ItemRefTooltip", "ShoppingTooltip1", "ShoppingTooltip2", "EmbeddedItemTooltip",
-           "GameTooltipTooltip" }
+---------------------------------------------------------------------------
+-- Our lines for what a tooltip shows, on a panel of our own under it
+---------------------------------------------------------------------------
+T.annex = setmetatable({}, { __mode = "k" })
+T.ROW = 14
 
-ns.RegisterSetting({
-    key = "tooltipGlass", kind = "number", default = 0.4, min = 0, max = 1, percent = true, command = "tooltipglass",
-    section = "Look", label = "Tooltip background",
-    tip = "how solid the background and border of tooltips are: 100% is the full dark glass, 0% leaves only the text",
-    onChange = function() ns.Tooltip.Glass() end,
-})
+local function Title(tooltip)
+    local ok, text = pcall(function()
+        local name = tooltip.GetName and tooltip:GetName()
+        local fs = type(name) == "string" and _G[name .. "TextLeft1"]
+        return fs and fs.GetText and fs:GetText() or nil
+    end)
+    if ok and type(text) == "string" and not ns.IsSecret(text) then return text end
+end
 
--- Puts every tooltip's background and border at the level asked for (or back as it was: the HUD is not running)
-function T.Glass()
-    local S = ns.Skin
-    local v = T.running and ns.db.tooltipGlass or 1
-    for _, name in ipairs(T.TIPS) do
-        local tip = _G[name]
-        if type(tip) == "table" then
-            local p = S and S.PanelOf and S.PanelOf(tip)
-            if p then S.PanelAlpha(p, v) end
-            local nine = rawget(tip, "NineSlice")
-            if type(nine) == "table" and nine.SetAlpha and nine.GetAlpha then
-                if S and S.done and S.done[nine] then
-                    T.faded[nine] = nil                     -- our look is on it: the game's own background is put away
-                elseif v < 0.995 then
-                    if T.faded[nine] == nil then
-                        T.faded[nine] = nine:GetAlpha() or 1
-                        if S and S.orig then S.orig[nine] = S.orig[nine] or T.faded[nine] end   -- (what "as it was" is)
-                    end
-                    ns.KeepAlpha(nine, T.faded[nine] * v)
-                elseif T.faded[nine] ~= nil then
-                    ns.KeepAlpha(nine, nil)
-                    nine:SetAlpha(T.faded[nine])
-                    if S and S.orig then S.orig[nine] = nil end
-                    T.faded[nine] = nil
-                end
-            end
+-- Which way the panel grows when it is wider than the tooltip: away from what the tooltip is about. The game
+-- puts an item's tooltip beside the item; grown toward it, the panel covered the item itself.
+local function Away(tooltip)
+    local ok, side = pcall(function()
+        local owner = tooltip:GetOwner()
+        local ox = owner and owner.GetCenter and owner:GetCenter()
+        local tx = tooltip:GetCenter()
+        if type(ox) == "number" and type(tx) == "number" and not ns.IsSecret(ox) and not ns.IsSecret(tx) then
+            return ox > tx and "LEFT" or "RIGHT"                -- the owner on the right: grow to the left
         end
+        local w = UIParent and UIParent:GetWidth()
+        if type(tx) == "number" and type(w) == "number" and not ns.IsSecret(tx) then
+            return tx > w / 2 and "LEFT" or "RIGHT"            -- else away from the edge it is near
+        end
+    end)
+    return (ok and side) or "RIGHT"
+end
+T.Away = Away
+
+-- Where it goes is looked at for a moment while the tooltip settles, then kept until the tooltip shows something
+-- else: looked at all the time, a tooltip near the bottom of the screen (the game keeps those on the screen)
+-- had it flip between under and over, over and over.
+T.SETTLE = 0.3
+local function PlaceAnnex(a, tooltip)
+    local f = a.frame
+    if a.settled then return end
+    if a.since and GetTime() - a.since > T.SETTLE and a.below ~= nil then a.settled = true; return end
+    local below = true
+    local ok, bottom = pcall(function() return tooltip.GetBottom and tooltip:GetBottom() end)
+    if ok and type(bottom) == "number" and not ns.IsSecret(bottom) and bottom < f:GetHeight() + 6 then below = false end
+    local side = Away(tooltip)
+    if below == a.below and side == a.side then return end
+    a.below, a.side = below, side
+    -- the edge on the item's side stays with the tooltip's; the panel grows the other way
+    local edge = side == "LEFT" and "RIGHT" or "LEFT"
+    f:ClearAllPoints()
+    if below then                                            -- (no room under a tooltip in the corner: over it)
+        f:SetPoint("TOP" .. edge, tooltip, "BOTTOM" .. edge, 0, -2)
+    else
+        f:SetPoint("BOTTOM" .. edge, tooltip, "TOP" .. edge, 0, 2)
     end
 end
 
-ns.RegisterSetting({
-    key = "tooltipCursor", kind = "boolean", default = true, command = "tooltipcursor", section = "General",
-    label = "Tooltips follow the cursor", tip = "tooltips open at your cursor instead of the corner of the screen (in a fight they stay in the corner)",
-})
-
-local function AtCursor(tooltip, parent)
-    if not T.active or not tooltip or not tooltip.SetOwner then return end
-    if UnitAffectingCombat("player") then return end         -- in a fight: the game's corner
-    local ok = pcall(tooltip.SetOwner, tooltip, parent or UIParent, "ANCHOR_CURSOR_RIGHT", 24, 12)
-    if not ok then pcall(tooltip.SetOwner, tooltip, parent or UIParent, "ANCHOR_CURSOR") end
+local function BuildAnnex(a, tooltip)
+    local f = CreateFrame("Frame", nil, tooltip)
+    f:SetFrameStrata("TOOLTIP")                              -- over the bags and everything else, like the tooltip
+    local okL, level = pcall(function() return tooltip:GetFrameLevel() end)
+    if okL and type(level) == "number" and not ns.IsSecret(level) then f:SetFrameLevel(level + 2) end
+    a.frame = f
+    f.back = f:CreateTexture(nil, "BACKGROUND")
+    f.back:SetAllPoints(f)
+    f.edge = f:CreateTexture(nil, "BORDER")
+    f.edge:SetHeight(1)
+    f.edge:SetPoint("TOPLEFT", f, "TOPLEFT", 0, 0)
+    f.edge:SetPoint("TOPRIGHT", f, "TOPRIGHT", 0, 0)
+    local since = 0
+    f:SetScript("OnUpdate", ns.Protect(function(self, dt)   -- the tooltip went on to something else: gone
+        since = since + dt
+        if since < 0.1 then return end
+        since = 0
+        if a.title and Title(tooltip) ~= a.title then self:Hide(); return end
+        PlaceAnnex(a, tooltip)
+    end))
 end
 
-function T:Apply(run)
-    self.active = run and ns.db.tooltipCursor and true or false
-    if self.active and not self.hooked and type(GameTooltip_SetDefaultAnchor) == "function" then
-        self.hooked = true
-        hooksecurefunc("GameTooltip_SetDefaultAnchor", ns.Protect(AtCursor))
+-- lines: { { left, right }, ... }, or { text } for a line of its own; none: the panel is put away
+function T.Annex(tooltip, lines)
+    if type(tooltip) ~= "table" then return end
+    local a = T.annex[tooltip]
+    if not lines or #lines == 0 then
+        if a then
+            a.lines, a.key = {}, nil
+            if a.frame then a.frame:Hide() end
+        end
+        return
     end
+    if not a then
+        a = { rows = {} }
+        T.annex[tooltip] = a
+    end
+    -- the game shows a tooltip again and again while it compares (and as the item's details come in): the same
+    -- lines for the same item leave the panel as it is, where it is (laid out and placed again, it flickered)
+    local parts = {}
+    for i, l in ipairs(lines) do parts[i] = tostring(l[1]) .. "|" .. tostring(l[2]) end
+    local key, title = table.concat(parts, "||"), Title(tooltip)
+    local okO, owner = pcall(function() return tooltip.GetOwner and tooltip:GetOwner() end)
+    owner = okO and owner or nil
+    local shown = a.frame and a.frame:IsShown() and owner == a.owner     -- (another slot: placed anew)
+    if shown and key == a.key and title == a.title then return end
+    local same = shown and title ~= nil and title == a.title          -- the same item, new lines: keep its place
+    a.owner = owner
+    a.key = key
+    a.lines = lines
+    if not a.frame and not pcall(BuildAnnex, a, tooltip) then a.frame = nil end
+    local f = a.frame
+    if not f then return end
+    local S, C = ns.Skin, ns.colors
+    local glass, edge = (S and S.GLASS) or { 0.03, 0.04, 0.07, 0.82 }, (S and S.EDGE) or { 0.55, 0.62, 0.75, 0.55 }
+    f.back:SetColorTexture(glass[1], glass[2], glass[3], math.max(glass[4], 0.92))     -- solid: it is read
+    f.edge:SetColorTexture(edge[1], edge[2], edge[3], edge[4])
+    for i, l in ipairs(lines) do
+        local r = a.rows[i]
+        if not r then
+            r = { left = ns.FontString(f, 10, "LEFT"), right = ns.FontString(f, 10, "RIGHT") }
+            r.left:SetPoint("TOPLEFT", f, "TOPLEFT", 10, -(5 + (i - 1) * T.ROW))
+            r.right:SetPoint("TOPRIGHT", f, "TOPRIGHT", -10, -(5 + (i - 1) * T.ROW))
+            r.left:SetTextColor(unpack(C.muted))
+            a.rows[i] = r
+        end
+        r.left:SetText(l[1] or "")
+        r.right:SetText(l[2] or "")
+        r.left:SetTextColor(unpack(l[2] == nil and C.text or C.muted))      -- a line of its own colours itself
+        r.left:Show()
+        r.right:Show()
+    end
+    for i = #lines + 1, #a.rows do
+        a.rows[i].left:Hide()
+        a.rows[i].right:Hide()
+    end
+    -- as wide as its longest line needs (each side apart from the other), and no wider: it hangs beside what the
+    -- tooltip is about (a merchant's price, the item itself) and should cover as little of it as it can
+    local function Width(fs)
+        local ok, w = pcall(fs.GetStringWidth, fs)
+        if ok and type(w) == "number" and not ns.IsSecret(w) then return w end
+        local okT, text = pcall(fs.GetText, fs)
+        return (okT and type(text) == "string") and #text:gsub("|c%x%x%x%x%x%x%x%x", ""):gsub("|r", "") * 6 or 60
+    end
+    local wide = 0
+    for i, l in ipairs(lines) do
+        if l[2] == nil then wide = math.max(wide, Width(a.rows[i].left) + 20)
+        else wide = math.max(wide, Width(a.rows[i].left) + Width(a.rows[i].right) + 34) end
+    end
+    f:SetWidth(wide)
+    a.wide = wide
+    f:SetHeight(#lines * T.ROW + 10)
+    if not same then
+        a.title, a.below, a.side, a.settled, a.since = title, nil, nil, false, GetTime()
+        PlaceAnnex(a, tooltip)
+    end
+    f:Show()
 end
 
--- A key binding to flip it, for a controller button
-function ControllerCamHUD_ToggleTooltipCursor() ns.Protect(function()
-    ns.db.tooltipCursor = not ns.db.tooltipCursor
-    ns.Apply()
-    if ns.RefreshOptions then ns.RefreshOptions() end
-    ns.Say(ns.db.tooltipCursor and ns.L["Tooltips follow the cursor."] or ns.L["Tooltips stay in their corner."])
-end)() end
-BINDING_NAME_CCHUD_TOOLTIPCURSOR = ns.L["Tooltips at the cursor: on / off"]
+-- What hangs under a tooltip right now (for the tests and the reports)
+function T.AnnexLines(tooltip)
+    local a = T.annex[tooltip]
+    return a and a.lines or {}
+end
 
-ns.RegisterModule("tooltip", T)
+---------------------------------------------------------------------------
+-- A tooltip of our own, for what our own windows explain
+---------------------------------------------------------------------------
+function T.Own()
+    if T.own == nil then
+        local ok, tip = pcall(CreateFrame, "GameTooltip", "ControllerCamHUD_Tip", UIParent, "GameTooltipTemplate")
+        T.own = (ok and tip) or false
+    end
+    return T.own or nil
+end

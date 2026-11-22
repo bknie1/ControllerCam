@@ -1,13 +1,13 @@
 -- ControllerCam HUD: something to do while the float is out (off unless you switch it on).
--- Beside the fishing interface is a small stretch of water. Your lure hangs in it, and the shadow of a fish
--- drifts up and down. Hold a trigger and the lure sinks; let go and it rises. Keep the lure beside the shadow
--- and the fish grows curious: a meter fills. Whatever you land next is the heavier for it (the weights are
--- made up for the journal anyway), and the meter starts again. It carries over from cast to cast, a fish that
--- gets away costs half of it, and every catch in a row without one getting away makes the shadow a little
--- quicker.
+-- Played on the cast bar itself, while your line is out: the fish's shadow swims back and forth along the line,
+-- and a pale band on the bar shows how far your lure reaches. Hold a trigger and the lure runs along the line;
+-- let go and it drifts back. Keep the fish inside the band and the fish grows curious, the band turns gold and a
+-- meter under the bar fills. Whatever you land next is the heavier for it (the weights are made up for the
+-- journal anyway), and the meter starts again. It carries over from cast to cast, a fish that gets away costs
+-- half of it, and every catch in a row without one getting away makes the fish a little quicker.
 --
 -- It cannot touch your fishing: it binds nothing and takes no button. The trigger is only looked at (the way
--- the screen at rest looks at it), your cast and your hook are the same one press as ever, and with the game
+-- the screen at rest looks at it), your cast and your hook are the same presses as ever, and with the game
 -- off or ignored every catch is exactly what it would have been.
 
 local ADDON, ns = ...
@@ -17,17 +17,20 @@ local C = ns.colors
 local G = { active = false, y = 0.2, s = 0.5, goal = 0.5, m = 0, streak = 0, turn = 0 }
 ns.FishGame = G
 
-G.W, G.H = 150, 60            -- the water
-G.SINK, G.RISE = 0.9, 0.6     -- how fast the lure sinks while the trigger is held, and rises when it is not
-G.NEAR = 0.16                 -- how close (of the water's depth) counts as beside the shadow
-G.FILL, G.DRAIN = 0.11, 0.035 -- the meter per second, beside the shadow and away from it
-G.SWIM, G.QUICKER, G.FASTEST = 0.45, 0.03, 0.9     -- the shadow's speed, more per catch in a row, at most
+G.W = 260                     -- the cast bar's length: the line the game is played on
+G.BAND = 18                   -- how tall the band of your lure's reach is drawn on the bar
+G.SINK, G.RISE = 0.9, 0.6     -- how fast the lure runs along while the trigger is held, and drifts back when not
+G.NEAR = 0.16                 -- how close (of the line's length) counts as beside the fish
+G.FILL, G.DRAIN = 0.11, 0.035 -- the meter per second, beside the fish and away from it
+G.SWIM, G.QUICKER, G.FASTEST = 0.45, 0.03, 0.9     -- the fish's speed, more per catch in a row, at most
 G.BONUS = 0.6                 -- a full meter makes the next catch this much heavier
+G.UNDER = -24                 -- the meter and the words: this far under the line (under what bites, said there)
+local PAD = 10                -- the lure and the fish keep this far from the ends of the line
 
 ns.RegisterSetting({
     key = "fishGame", kind = "boolean", default = false, command = "fishgame", section = "Fishing",
     label = "A game while the float is out",
-    tip = "a small stretch of water beside the fishing interface: hold a trigger to sink your lure and let go to let it rise, and keep it beside the shadow of the fish. The better you do, the heavier the made-up weight of your next catch. It takes no button and never touches your cast or your catch",
+    tip = "played on the cast bar while your line is out: hold a trigger and your lure runs along the line, let go and it drifts back; keep it beside the shadow of the fish. The better you do, the heavier the made-up weight of your next catch. It takes no button and never touches your cast or your catch",
 })
 
 local frame
@@ -80,42 +83,71 @@ function G:Away()
 end
 
 ---------------------------------------------------------------------------
--- The water
+-- On the cast bar
 ---------------------------------------------------------------------------
+-- Where it is played: on our cast bar (drawn at its size: larger while you fish front and centre), or where the
+-- game's own cast bar sits when ours is off
+function G.Spot()
+    local CB = ns.CastBar
+    if CB and CB.active and CB.bar then return "castbar", CB.bar, CB.frame end
+    local native = _G.PlayerCastingBarFrame
+    if type(native) == "table" and native.GetObjectType then return "native", native, nil end
+    return "screen", UIParent, nil
+end
+
+function G.Place()
+    if not frame then return end
+    local where, anchor, scaled = G.Spot()
+    frame:ClearAllPoints()
+    frame:SetScale(scaled and scaled:GetScale() or 1)
+    if where == "screen" then
+        frame:SetPoint("TOP", UIParent, "BOTTOM", 0, 300)
+    else
+        frame:SetPoint("TOP", anchor, "CENTER", 0, 0)            -- its top edge along the line itself
+    end
+    G.where, G.scale = where, scaled and scaled:GetScale() or 1
+end
+
 local function Build()
     frame = CreateFrame("Frame", "ControllerCamHUD_FishGame", UIParent)
-    frame:SetSize(G.W, G.H + 34)
+    frame:SetSize(G.W, 60)
     frame:SetFrameStrata("MEDIUM")
-    frame:SetPoint("TOPRIGHT", UIParent, "CENTER", -140, ns.FishPanel and ns.FishPanel.Y or -168)
-    frame.water = frame:CreateTexture(nil, "BACKGROUND")
-    frame.water:SetSize(G.W, G.H)
-    frame.water:SetPoint("TOP", frame, "TOP", 0, 0)
-    frame.water:SetColorTexture(0.05, 0.16, 0.3, 0.6)
-    frame.surface = frame:CreateTexture(nil, "BORDER")
-    frame.surface:SetHeight(1.5)
-    frame.surface:SetPoint("TOPLEFT", frame.water, "TOPLEFT", 0, 0)
-    frame.surface:SetPoint("TOPRIGHT", frame.water, "TOPRIGHT", 0, 0)
-    frame.surface:SetColorTexture(0.6, 0.84, 1, 0.9)
-    frame.shadow = frame:CreateTexture(nil, "ARTWORK")          -- the fish: a dark shape under the water
-    frame.shadow:SetTexture(ns.media.soft)
-    frame.shadow:SetVertexColor(0, 0.02, 0.06, 1)
-    frame.shadow:SetSize(44, 16)
-    frame.thread = frame:CreateTexture(nil, "ARTWORK")          -- your line, down to the lure
-    frame.thread:SetWidth(1)
-    frame.thread:SetColorTexture(0.88, 0.94, 1, 0.7)
-    frame.lure = frame:CreateTexture(nil, "OVERLAY")
-    frame.lure:SetTexture(ns.media.bobber)
-    frame.lure:SetSize(14, 14)
-    frame.track = frame:CreateTexture(nil, "BACKGROUND")        -- the meter: how curious the fish is
-    frame.track:SetSize(G.W, 4)
-    frame.track:SetPoint("TOP", frame.water, "BOTTOM", 0, -3)
-    frame.track:SetColorTexture(0.03, 0.05, 0.09, 0.75)
+    frame:SetFrameLevel(40)                                       -- over the cast bar
+    G.Place()
+    frame.shade = frame:CreateTexture(nil, "BACKGROUND", nil, -2) -- a soft shade under the words, no box
+    frame.shade:SetTexture(ns.media.soft)
+    frame.shade:SetVertexColor(0, 0, 0, 0.5)
+    frame.shade:SetPoint("TOPLEFT", frame, "TOPLEFT", -50, G.UNDER + 6)
+    frame.shade:SetPoint("BOTTOMRIGHT", frame, "BOTTOMRIGHT", 50, -6)
+    frame.band = frame:CreateTexture(nil, "ARTWORK")              -- how far your lure reaches, on the line
+    frame.band:SetTexture(ns.media.soft)
+    frame.band:SetBlendMode("ADD")
+    frame.band:SetSize(2 * G.NEAR * (G.W - 2 * PAD), G.BAND)
+    frame.fish = frame:CreateTexture(nil, "ARTWORK", nil, 1)      -- the fish's shadow, swimming along the line
+    frame.fish:SetTexture(ns.media.fish)
+    frame.fish:SetSize(22, 22)
+    frame.fish:SetVertexColor(0.08, 0.16, 0.24, 0.85)
+    frame.lure = frame:CreateTexture(nil, "OVERLAY")              -- your lure, in the middle of its band
+    frame.lure:SetTexture(ns.media.spark)
+    frame.lure:SetBlendMode("ADD")
+    frame.lure:SetSize(12, 12)
+    frame.track = frame:CreateTexture(nil, "BACKGROUND")         -- the meter: how curious the fish is
+    frame.track:SetSize(G.W, 3)
+    frame.track:SetPoint("TOP", frame, "TOP", 0, G.UNDER)
+    frame.track:SetColorTexture(0.03, 0.05, 0.09, 0.85)
     frame.fill = frame:CreateTexture(nil, "ARTWORK")
-    frame.fill:SetHeight(4)
+    frame.fill:SetHeight(3)
     frame.fill:SetPoint("LEFT", frame.track, "LEFT", 0, 0)
-    frame.fill:SetColorTexture(1, 0.82, 0.3, 0.95)
-    frame.text = ns.FontString(frame, 9, "CENTER")
-    frame.text:SetPoint("TOP", frame.track, "BOTTOM", 0, -4)
+    frame.fill:SetColorTexture(1, 0.82, 0.3, 1)
+    frame.title = ns.FontString(frame, 9, "LEFT")                -- what there is to do
+    frame.title:SetPoint("TOPLEFT", frame.track, "BOTTOMLEFT", 0, -3)
+    frame.title:SetText(L["Keep your lure beside the fish"])
+    frame.title:SetTextColor(unpack(C.muted))
+    frame.bonus = ns.FontString(frame, 9, "RIGHT")               -- what it is worth
+    frame.bonus:SetPoint("TOPRIGHT", frame.track, "BOTTOMRIGHT", 0, -3)
+    frame.bonus:SetTextColor(unpack(C.cast))
+    frame.text = ns.FontString(frame, 9, "CENTER")               -- how it is played
+    frame.text:SetPoint("TOP", frame.track, "BOTTOM", 0, -16)
     frame.text:SetTextColor(unpack(C.muted))
     frame:Hide()
     G.frame = frame
@@ -126,25 +158,30 @@ local function KeyName(key)
     return (type(text) == "string" and text ~= "") and text or key
 end
 
+-- Along the line: 0 its start, 1 its end
+local function Along(v) return PAD + v * (G.W - 2 * PAD) end
+
 function G:Draw(now)
-    local x = G.W / 2
-    local sway = math.sin(now * 0.9) * 22                  -- the shadow weaves from side to side as it goes
-    frame.shadow:ClearAllPoints()
-    frame.shadow:SetPoint("CENTER", frame.water, "TOPLEFT", x + sway, -(6 + self.s * (G.H - 12)))
+    local fx = Along(self.s)
+    local heading = self.goal >= self.s                    -- (which way the fish is swimming just now)
+    frame.fish:ClearAllPoints()
+    frame.fish:SetPoint("CENTER", frame, "TOPLEFT", fx, math.sin(now * 3) * 1.5)
+    if heading then frame.fish:SetTexCoord(0, 1, 0, 1) else frame.fish:SetTexCoord(1, 0, 0, 1) end
     local near = math.abs(self.y - self.s) < G.NEAR
-    frame.shadow:SetAlpha(near and 0.95 or 0.6)
-    local depth = 6 + self.y * (G.H - 12)
+    self.near = near
+    local x = Along(self.y)
+    frame.band:ClearAllPoints()
+    frame.band:SetPoint("CENTER", frame, "TOPLEFT", x, 0)
+    if near then frame.band:SetVertexColor(1, 0.84, 0.35, 0.55) else frame.band:SetVertexColor(1, 1, 1, 0.22) end
     frame.lure:ClearAllPoints()
-    frame.lure:SetPoint("CENTER", frame.water, "TOPLEFT", x, -depth)
-    frame.thread:ClearAllPoints()
-    frame.thread:SetPoint("TOP", frame.water, "TOPLEFT", x, 0)
-    frame.thread:SetHeight(math.max(1, depth - 5))
+    frame.lure:SetPoint("CENTER", frame, "TOPLEFT", x, 0)
     frame.fill:SetWidth(math.max(0.01, G.W * self.m))
+    frame.bonus:SetText(L["Next catch +%d%%"]:format(math.floor(self.m * G.BONUS * 100 + 0.5)))
     if self.saidUntil and now < self.saidUntil then
         frame.text:SetText(self.said)
         frame.text:SetTextColor(unpack(C.cast))
     else
-        local text = L["Hold %s: the lure sinks"]:format(KeyName(G.Key()))
+        local text = L["Hold %s: the lure runs along the line"]:format(KeyName(G.Key()))
         if self.streak > 1 then text = L["%d in a row"]:format(self.streak) .. "   " .. text end
         frame.text:SetText(text)
         frame.text:SetTextColor(unpack(C.muted))
@@ -170,8 +207,11 @@ end
 
 function G:Refresh() end
 
+-- Only while you are fishing: your line is out, or it just came in and there is something to say about it
 function G:Want()
-    return self.active and not ns.arranging and not InCombatLockdown() and ns.Fishing.HasPole() and true or false
+    if not (self.active and not ns.arranging and not InCombatLockdown() and ns.Fishing.HasPole()) then return false end
+    if ns.FishLog.cast ~= nil then return true end
+    return self.saidUntil ~= nil and GetTime() < self.saidUntil
 end
 
 local driver = CreateFrame("Frame")
@@ -179,22 +219,26 @@ local since = 1
 driver:SetScript("OnUpdate", ns.Protect(function(_, dt)
     if not G.active then return end
     since = since + dt
-    local shown = frame and frame:IsShown()
-    if since >= 0.25 or shown then
-        if since >= 0.25 then
-            since = 0
-            local want = G:Want()
-            if want and not frame then Build() end
-            if frame and want ~= frame:IsShown() then
-                if want then frame:Show() else frame:Hide() end
+    if since >= 0.25 then
+        since = 0
+        local want = G:Want()
+        if want and not frame then Build() end
+        if frame and want ~= frame:IsShown() then
+            if want then
+                G.Place()
+                if ns.db.textShade ~= false then frame.shade:Show() else frame.shade:Hide() end
+                frame:Show()
+            else
+                frame:Hide()
             end
-            shown = frame and frame:IsShown()
+        end
+        if frame and want then
+            local where, _, scaled = G.Spot()
+            if where ~= G.where or (scaled and scaled:GetScale() or 1) ~= G.scale then G.Place() end
         end
     end
-    if not shown then return end
-    local out = ns.FishLog.cast ~= nil                      -- your line is out: the water moves
-    if out then G:Step(math.min(dt, 0.1)) end
-    frame:SetAlpha(out and 1 or 0.5)
+    if not (frame and frame:IsShown()) then return end
+    if ns.FishLog.cast ~= nil then G:Step(math.min(dt, 0.1)) end     -- your line is out: the water moves
     G:Draw(GetTime())
 end))
 
@@ -208,8 +252,8 @@ function G:Apply(run)
 end
 
 function G.Describe()
-    return ("on %s, shown %s, trigger %s (held %s), meter %.2f, in a row %d"):format(tostring(G.active),
-        tostring(frame and frame:IsShown() or false), G.Key(), tostring(G.Held()), G.m, G.streak)
+    return ("on %s, shown %s (%s), trigger %s (held %s), meter %.2f, in a row %d"):format(tostring(G.active),
+        tostring(frame and frame:IsShown() or false), tostring(G.where), G.Key(), tostring(G.Held()), G.m, G.streak)
 end
 
 ns.RegisterModule("fishgame", G)

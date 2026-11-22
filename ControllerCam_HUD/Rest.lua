@@ -7,6 +7,9 @@
 --   * while the controller's cursor is out, or the mouse is over one of them.
 -- The game sets the alpha of some of these itself at times: ours is put back each time, from a timer of our
 -- own (never from inside the game's code). Off, or with the HUD off, everything has the alpha it had.
+-- Its switches have a page of their own in the options (Screen fade), each part on its own line, and one
+-- command: /cchud fade lists them, /cchud fade minimap off (or bars, quests, meter, xp, buffs, rows; all for the
+-- whole fade) sets one.
 
 local ADDON, ns = ...
 local L = ns.L
@@ -15,32 +18,58 @@ local R = { active = false, alpha = 1, awake = 0, frames = {} }
 ns.Rest = R
 
 ns.RegisterSetting({
-    key = "hudFade", kind = "boolean", default = true, command = "hudfade", section = "Gamepad bars",
+    key = "hudFade", kind = "boolean", default = true, command = "hudfade", section = "Screen fade",
     label = "Fade out of combat",
     tip = "the gamepad bars, minimap, quest list, damage meter and experience bar rest together out of combat, and come back for a fight, a pulled trigger or an enemy target",
 })
 ns.RegisterSetting({
     key = "hudIdle", kind = "number", default = 0.3, min = 0, max = 1, percent = true, command = "hudidle",
-    section = "Gamepad bars", label = "The screen at rest", tip = "how visible the resting parts of the screen stay out of combat (0 hides them)",
+    section = "Screen fade", label = "The screen at rest", tip = "how visible the resting parts of the screen stay out of combat (0 hides them)",
     onChange = function() end,
 })
 
 -- The parts that rest (each can be left out, under Advanced)
+-- (word: its name for /cchud fade)
 R.PARTS = {
-    { key = "restBars", label = "Rests: gamepad bars", names = { "GamepadMainActionBarFrame" } },
-    { key = "restMinimap", label = "Rests: minimap", names = { "MinimapCluster" } },
-    { key = "restTracker", label = "Rests: quest list", names = { "ObjectiveTrackerFrame", "QuestWatchFrame", "WatchFrame" } },
-    { key = "restMeter", label = "Rests: damage meter", names = { "DamageMeter", "DamageMeterFrame" }, prefix = "^DamageMeter" },
-    { key = "restXP", label = "Rests: experience bar", names = { "StatusTrackingBarManager", "MainStatusTrackingBarContainer" } },
-    { key = "restBuffs", label = "Rests: buffs", names = { "BuffFrame" } },
-    { key = "restRows", label = "Rests: cooldown rows", names = { "EssentialCooldownViewer", "UtilityCooldownViewer",
+    { key = "restBars", word = "bars", label = "Fades: gamepad bars", names = { "GamepadMainActionBarFrame" } },
+    { key = "restMinimap", word = "minimap", label = "Fades: minimap", names = { "MinimapCluster" } },
+    { key = "restTracker", word = "quests", label = "Fades: quest list", names = { "ObjectiveTrackerFrame", "QuestWatchFrame", "WatchFrame" } },
+    { key = "restMeter", word = "meter", label = "Fades: damage meter", names = { "DamageMeter", "DamageMeterFrame" }, prefix = "^DamageMeter" },
+    { key = "restXP", word = "xp", label = "Fades: experience bar", names = { "StatusTrackingBarManager", "MainStatusTrackingBarContainer" } },
+    { key = "restBuffs", word = "buffs", label = "Fades: buffs", names = { "BuffFrame" } },
+    { key = "restRows", word = "rows", label = "Fades: cooldown rows", names = { "EssentialCooldownViewer", "UtilityCooldownViewer",
                                                                  "BuffIconCooldownViewer", "BuffBarCooldownViewer" } },
 }
 for _, part in ipairs(R.PARTS) do
     ns.RegisterSetting({ key = part.key, kind = "boolean", default = true, command = part.key:lower(),
-                         section = "Gamepad bars", label = part.label,
-                         tip = "whether this part of the screen takes part in the fade out of combat" })
+                         section = "Screen fade", label = part.label,
+                         tip = "whether this part of the screen fades with the rest out of combat (off: it always stays as it is)" })
 end
+
+-- /cchud fade: every switch of the fade at a glance; /cchud fade minimap off sets one (all: the whole fade)
+local function Def(key)
+    for _, def in ipairs(ns.settings) do if def.key == key then return def end end
+end
+ns.RegisterCommand("fade", function(arg)
+    local word, value = tostring(arg or ""):lower():match("^%s*(%S*)%s*(%S*)")
+    if word == "" then
+        ns.Say(("%s: %s"):format(L["Fade out of combat"], ns.OnOff(ns.db.hudFade)))
+        for _, part in ipairs(R.PARTS) do
+            ns.Say(("  %s (%s): %s"):format(L[part.label], part.word, ns.OnOff(ns.db[part.key])))
+        end
+        ns.Say(L["/cchud fade <part> on | off sets one; all for the whole fade."])
+        return
+    end
+    local key = word == "all" and "hudFade" or nil
+    for _, part in ipairs(R.PARTS) do if part.word == word then key = part.key end end
+    local def = key and Def(key)
+    if not def then
+        ns.Say(L["/cchud fade <part> on | off sets one; all for the whole fade."])
+        return
+    end
+    ns.Set(def, ns.Toggle(value, ns.Get(def)))
+    ns.Say(("%s: %s"):format(L[def.label], ns.OnOff(ns.Get(def))))
+end, "/cchud fade [part] [on | off]", "the screen's fade out of combat: what fades (minimap, quest list and the rest), each on or off")
 
 local LINGER = 4              -- seconds the screen stays up after the last reason to
 local FADE_IN, FADE_OUT = 6, 1.5
@@ -181,18 +210,43 @@ local sinceLook, sinceFind, want = 1, 0, 1
 
 local function SetAll(a)
     for f, base in pairs(R.frames) do
-        local v = base * a
-        if math.abs((f:GetAlpha() or 1) - v) > 0.004 then f:SetAlpha(v) end
+        if not R.muted[f] then                           -- (put away altogether just now: not ours to fade)
+            local v = base * a
+            if math.abs((f:GetAlpha() or 1) - v) > 0.004 then f:SetAlpha(v) end
+        end
     end
+end
+
+-- Puts one of the game's frames away altogether for a while, or brings it back: invisible, still working where
+-- it is (the gamepad bars while you fish). Kept so by our own timer, like everything else here.
+R.muted, R.mutedWas = {}, {}
+function R.Mute(name, on)
+    local f = _G[name]
+    if not IsFrame(f) then return false end
+    if on and not R.muted[f] then
+        R.muted[f] = true
+        R.mutedWas[f] = R.frames[f] or f:GetAlpha() or 1
+        ns.KeepAlpha(f, 0)
+    elseif not on and R.muted[f] then
+        R.muted[f] = nil
+        ns.KeepAlpha(f, nil)
+        f:SetAlpha(R.frames[f] and (R.frames[f] * (R.active and R.alpha or 1)) or R.mutedWas[f] or 1)
+        R.mutedWas[f] = nil
+    end
+    return true
 end
 
 -- The minimap draws its terrain apart from the rest of itself, and (indoors above all) can lose it when its
 -- transparency changes. Asking for another zoom level and back makes it draw the terrain again; done each
--- time the fade comes to rest, at either end.
+-- time the fade comes to rest, at either end. Never while the world map is open (its controller cursor brings the
+-- screen up): the minimap loading its terrain again then would hold the game up as the map loads its own. It is
+-- done once the map is closed.
 R.redraws = 0
 function R.RedrawMinimap()
     local map = _G.Minimap
     if not (type(map) == "table" and map.GetZoom and map.SetZoom) or not R.frames[_G.MinimapCluster or false] then return end
+    if ns.MapOpen() then R.redrawLater = true; return end
+    R.redrawLater = nil
     local ok, zoom = pcall(map.GetZoom, map)
     if not ok or type(zoom) ~= "number" then return end
     pcall(map.SetZoom, map, zoom > 0 and zoom - 1 or zoom + 1)
@@ -221,6 +275,8 @@ local Tick = ns.Protect(function(_, dt)
     if moving and a == want then
         moving = false
         R.RedrawMinimap()
+    elseif R.redrawLater and not ns.MapOpen() then
+        R.RedrawMinimap()                                -- (the map was open when it came to rest)
     end
 end)
 

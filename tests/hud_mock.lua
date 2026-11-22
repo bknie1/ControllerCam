@@ -35,17 +35,25 @@ function decorate(f)
     f.SetParent = function(self, p) self.parent = p end
     f.GetParent = function(self) return self.parent end
     f.SetSize = function(self, w, h) self.width, self.height = w, h end
+    f.SetHeight = function(self, h) self.height = h end
     f.GetHeight = function(self) return self.height or 10 end
     f.GetCenter = function(self) return self.cx or 0, self.cy or 0 end
     f.SetMinMaxValues = function(self, a, b) self.min, self.max = a, b end
-    f.SetStatusBarTexture = function(self, t) self.barPath = t; self.barTex = self.barTex or child("Texture", self) end
+    f.SetStatusBarTexture = function(self, t)
+        self.barPath = t; self.barTex = self.barTex or child("Texture", self); self.barTex.texture = t
+    end
     f.GetStatusBarTexture = function(self) self.barTex = self.barTex or child("Texture", self); return self.barTex end
     f.SetStatusBarColor = function(self, r, g, b, a) self.color = { r, g, b, a } end
     f.SetVertexColor = function(self, r, g, b, a) self.vcolor = { r, g, b, a } end
     f.SetTextColor = function(self, r, g, b, a) self.tcolor = { r, g, b, a } end
     f.SetTexture = function(self, t) self.texture = t end
+    f.GetTexture = function(self) return self.texture end
+    f.GetTextureFilePath = function(self) return type(self.texture) == "string" and self.texture or nil end
+    f.GetAtlas = function(self) return self.atlas end
+    f.SetAtlas = function(self, a) self.atlas, self.texture = a, nil end
     f.SetFont = function(self, file, size, flags) self.fontFile, self.fontSize, self.fontFlags = file, size, flags end
     f.GetFont = function(self) return self.fontFile or "Fonts\FRIZQT__.TTF", self.fontSize or 12, self.fontFlags or "" end
+    f.SetWordWrap = function(self, v) self.wordWrap = v end
     f.GetObjectType = function(self) return self.kind or "Frame" end
     f.GetTexCoord = function(self)
         if self.texCoord then return unpack(self.texCoord) end
@@ -77,11 +85,18 @@ function decorate(f)
     end
     f.SetCooldown = function(self, start, duration) self.cdStart, self.cdDuration = start, duration end
     f.SetOrientation = function(self, o) self.orientation = o end
-    f.SetTimerDuration = function(self, d) self.timer = d end
+    f.SetTimerDuration = function(self, d, _, way) self.timer, self.timerWay = d, way end
     f.SetTextScale = function(self, k) self.textScale = k end
     f.SetTexCoord = function(self, ...) self.texCoord = { ... } end
     f.AddMaskTexture = function(self, m) self.mask = m end
     f.CreateTexture = function(self) return child("Texture", self) end
+    f.CreateLine = function(self)
+        local l = child("Texture", self)
+        l.SetStartPoint = function(s, ...) s.from = { ... } end
+        l.SetEndPoint = function(s, ...) s.to = { ... } end
+        l.SetThickness = function(s, t) s.thickness = t end
+        return l
+    end
     f.CreateFontString = function(self) return child("FontString", self) end
     f.CreateMaskTexture = function(self) return child("MaskTexture", self) end
     f.RegisterUnitEvent = function(self, e) self:RegisterEvent(e) end
@@ -188,6 +203,9 @@ ObjectiveTrackerFrame.Header.Text = ObjectiveTrackerFrame.Header:CreateFontStrin
 MinimapCluster = CreateFrame("Frame", "MinimapCluster", UIParent)
 Minimap = CreateFrame("Minimap", "Minimap", UIParent)
 Minimap.GetWidth = function() return 198 end
+Minimap.zoom = 0
+Minimap.GetZoom = function(self) return self.zoom end
+Minimap.SetZoom = function(self, z) self.zoom = z end
 MinimapCompassTexture = Minimap:CreateTexture()
 MinimapZoneText = Minimap:CreateFontString()
 StatusTrackingBarManager = CreateFrame("Frame", "StatusTrackingBarManager", UIParent)
@@ -210,11 +228,18 @@ for i = 1, 3 do
 end
 NUM_CHAT_WINDOWS = 3
 WorldMapFrame = CreateFrame("Frame", "WorldMapFrame", UIParent)
+WorldMapFrame.shown = false                     -- (closed until a test opens it)
+mock.clockMs = 0                                -- the game's own clock in ms: a handler can make itself slow
+function debugprofilestop() return mock.clockMs + (mock.time or 0) * 1000 end
 mock.playerPos = { 0.738, 0.328 }
 C_Map = C_Map or {}
 
 -- Tooltips: where the game puts them by default
-GameTooltip.SetOwner = function(self, owner, anchor) self.owner, self.anchor = owner, anchor end
+GameTooltip.SetOwner = function(self, owner, anchor)
+    self.owner, self.anchor = owner, anchor
+    self.owned = (self.owned or 0) + 1
+end
+GameTooltip.SetAnchorType = function(self, anchor) self.anchor = anchor end
 function GameTooltip_SetDefaultAnchor(tooltip, parent)
     tooltip:SetOwner(parent, "ANCHOR_NONE")
     tooltip.cornered = true
@@ -436,6 +461,7 @@ C_Item = {
         return it.name, nil, it.quality, it.ilvl, it.req, it.kind, it.subkind, it.stack, nil, it.icon, it.price
     end,
     GetItemInfoInstant = function(id)
+        if type(id) == "string" then id = tonumber(id:match("item:(%d+)")) or id end    -- (a link, as the game takes)
         local it = mock.items[id]
         if not it then return nil end
         return id, nil, nil, it.loc, nil, it.class, it.sub
@@ -553,7 +579,7 @@ function CreateFrame(kind, name, parent, template)
     local f = plainCreate("Frame", name, parent, template)
     f.groups = {}
     f.AddAuraGroup = function(self, key, _, opts)
-        local g = { init = opts.initializeFrame, enabled = false }
+        local g = { init = opts.initializeFrame, enabled = false, frames = {} }
         self.groups[key] = g
         -- one icon made now, so its look can be checked
         local icon = plainCreate("Frame", nil, self)
@@ -580,6 +606,9 @@ function CreateFrame(kind, name, parent, template)
     f.SetFlowLayoutGrowthDirection = function(self, a, b) self.grow = a end
     f.SetFlowLayoutAnchorPoint = function(self, p) self.flowAnchor = p end
     f.SetUnit = function(self, u) self.unit = u; self.setUnitCalls = (self.setUnitCalls or 0) + 1 end
+    f.UpdateAllAuras = function(self) self.looks = (self.looks or 0) + 1 end
+    f.GetAuraGroupFrameCount = function(self, key) return #self.groups[key].frames end
+    f.GetAuraGroupFrame = function(self, key, i) return self.groups[key].frames[i] end
     f.SetEnabled = function(self, on) self.enabled = on end
     mock.containers[#mock.containers + 1] = f
     return f
@@ -681,7 +710,10 @@ function mock.itemTooltip(id)
     for _, kind in ipairs({ Enum.TooltipDataType.Item, "ALL" }) do
         for _, fn in ipairs(mock.tipCalls[kind] or {}) do fn(tip, { type = Enum.TooltipDataType.Item, id = id }) end
     end
-    return tip.lines
+    mock.lastTip = tip
+    -- what the HUD says about the item: on its own panel under the tooltip; nothing may be added to the tooltip
+    assert(#tip.lines == 0, "a line was added to the game's tooltip")
+    return mock.annexLines and mock.annexLines(tip) or tip.lines
 end
 mock.money = 12345
 function GetMoney() return mock.money end
@@ -829,6 +861,46 @@ function GetAuctionItemInfo(kind, i)
     local a = mock.auctions[i]
     if not a then return nil end
     return "name", 1, a.count, 1, true, 1, "", 0, 0, a.buyout, 0, false, nil, "owner", nil, 0, a.id, true
+end
+
+-- Flights: the flight master's map (its places, which one you are at), its buttons, and being on a flight
+mock.taxi = { nodes = {}, current = nil, onTaxi = false }
+function NumTaxiNodes() return #mock.taxi.nodes end
+function TaxiNodeName(i) return mock.taxi.nodes[i] end
+function TaxiNodeGetType(i)
+    if not mock.taxi.nodes[i] then return "NONE" end
+    return i == mock.taxi.current and "CURRENT" or "REACHABLE"
+end
+function UnitOnTaxi(unit) return unit == "player" and mock.taxi.onTaxi or false end
+-- where each place is on the flight map (0..1 each way), and the map's id
+mock.taxi.pos = {}
+function TaxiNodePosition(i)
+    local p = mock.taxi.pos[i]
+    if p then return p[1], p[2] end
+end
+function GetTaxiMapID() return mock.taxi.map or 1415 end
+-- One of the flight map's buttons (the pointer is over it when it is mock.focus)
+function mock.taxiButton(i)
+    local b = _G["TaxiButton" .. i] or CreateFrame("Button", "TaxiButton" .. i)
+    b.GetID = function() return i end
+    b.IsMouseOver = function(self) return mock.focus == self end
+    return b
+end
+-- Open the map at `from` (an index of nodes), choose `to` with the pointer, take off; fly() lands after `seconds`
+function mock.takeFlight(nodes, from, to)
+    mock.taxi.nodes, mock.taxi.current = nodes, from
+    mock.fire("TAXIMAP_OPENED")
+    local b = mock.taxiButton(to)
+    mock.focus = b
+    mock.fire("TAXIMAP_CLOSED")
+    mock.focus = nil
+    mock.taxi.onTaxi = true
+    mock.fire("PLAYER_CONTROL_LOST")
+end
+function mock.landFlight(subzone)
+    mock.taxi.onTaxi = false
+    mock.subzone = subzone or mock.subzone
+    mock.fire("PLAYER_CONTROL_GAINED")
 end
 
 function mock.loadHud(path, ns)

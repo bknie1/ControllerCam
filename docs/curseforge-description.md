@@ -56,7 +56,7 @@ A controller interface that takes over while the Gamepad UI is in use and gives 
 - **Bags and bank.** The right stick button moves the item you point at and sorts when you point at nothing (the left one stays your auto-run), deposit what the bank already holds, and see how many of an item every character has.
 - **Vendor.** Junk rules that ask before they sell, with tools, upgrades and anything you marked kept left alone. Automatic repairs.
 - **Auction house.** A Market tab you can work with the controller: what in your bags is worth selling, at what price, and why, with a price chart beside it.
-- **Tooltips.** At your cursor, with vendor and auction prices and what each stat is worth to your character.
+- **Tooltips.** Vendor and auction prices, what you hold across your characters and what each stat is worth to your character.
 - **Chat.** `[class icon level] Name: text`, text sized for a TV, and gold sellers and repeated adverts hidden.
 - **Quest list.** The game's own list, thinned out and put in order: only the zone you are in, no group quests while you are alone, only the nearest few, nearest first, or a recommended order (hand in what is ready, then the nearest you can do alone). `/cchud questplan` says the order in chat.
 

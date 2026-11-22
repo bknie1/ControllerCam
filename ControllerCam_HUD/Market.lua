@@ -28,7 +28,7 @@ ns.RegisterSetting({
 })
 ns.RegisterSetting({
     key = "auctionVerdict", kind = "boolean", default = true, command = "auctionverdict", section = "Bags, bank and vendor",
-    label = "Best use of an item", tip = "an item's tooltip says what to do with it: sell it at the auction house (and how much more that brings), sell it to a vendor, or keep it",
+    label = "Best use of an item", tip = "an item's tooltip says what to do with it: sell it at the auction house (and how much more that brings), sell it to a vendor, keep it, or keep it for a quest",
 })
 ns.RegisterSaved("auctionScanAt", function(old) return tonumber(old) or 0 end)
 
@@ -151,11 +151,15 @@ function M.Lines(id)
         if each then lines[#lines + 1] = { L["Vendor"], Price(each, stack) } end
     end
     if ns.db.auctionVerdict then
-        local verdict, more = M.Verdict(id)
+        local verdict, more, want = M.Verdict(id)
         if verdict then
-            local right = M.ICON[verdict] .. " " .. M.WORDS[verdict]
-            if more then right = right .. "  |cff6fe06a+|r" .. ns.MoneyColored(more) end
-            lines[#lines + 1] = { L["Best"], right }
+            lines[#lines + 1] = { L["Best"], M.BestText(verdict, more, want) }
+            -- a skill-up: the recipes it is for, as the profession's window showed them (orange, yellow)
+            if verdict == "skill" then
+                for i, r in ipairs(ns.Professions.Recipes(want, id)) do
+                    lines[#lines + 1] = { i == 1 and L["Recipes"] or "", ns.Professions.RecipeText(r) }
+                end
+            end
         end
     end
     if ns.db.auctionPrice then
@@ -168,37 +172,255 @@ function M.Lines(id)
     return lines
 end
 
+-- The panel under an item's tooltip: narrow, one line each, read top to bottom; the prices first (what a merchant
+-- asks for it, when it is one of theirs), the advice apart, its keyword and its gain picked out:
+--   Cost: 45s
+--   Vendor: 12s 50c
+--   Auction: 75s (2 hours ago)
+--
+--   Recommendation:
+--   Auction for +46s 25c
+--   80% chance of sale
+local GOLD, GAIN = "|cffffd100", "|cff6fe06a"
+local function Labelled(label, value) return { GREY .. label .. ":|r " .. value } end
+
+-- What the merchant asks for it, when the tooltip is over one of the merchant's items (or one to buy back):
+-- price, how many for it
+function M.MerchantCost(tooltip)
+    if type(tooltip) ~= "table" or not tooltip.GetOwner then return nil end
+    local ok, owner = pcall(tooltip.GetOwner, tooltip)
+    if not ok or type(owner) ~= "table" or not owner.GetName then return nil end
+    local okN, name = pcall(owner.GetName, owner)
+    name = okN and Plain(name)
+    if type(name) ~= "string" or not name:find("^MerchantItem%d+ItemButton$") then return nil end
+    local okI, index = pcall(owner.GetID, owner)
+    index = okI and Plain(index)
+    if type(index) ~= "number" or index < 1 then return nil end
+    local merchant = _G.MerchantFrame
+    local tab = type(merchant) == "table" and rawget(merchant, "selectedTab")
+    local price, count
+    if tab == 2 then                                             -- the buyback tab
+        if GetBuybackItemInfo then
+            local okB, _, _, p, q = pcall(GetBuybackItemInfo, index)
+            if okB then price, count = p, q end
+        end
+    else
+        if C_MerchantFrame and C_MerchantFrame.GetItemInfo then
+            local okM, info = pcall(C_MerchantFrame.GetItemInfo, index)
+            if okM and type(info) == "table" then price, count = info.price, info.stackCount end
+        end
+        if price == nil and GetMerchantItemInfo then
+            local okM, _, _, p, q = pcall(GetMerchantItemInfo, index)
+            if okM then price, count = p, q end
+        end
+    end
+    price, count = Plain(price), Plain(count)
+    if type(price) ~= "number" or price <= 0 then return nil end           -- paid in tokens or items: not ours to say
+    return price, (type(count) == "number" and count > 1) and count or 1
+end
+
+-- The advice, in lines of its own: { { text }, ... }
+function M.Advice(verdict, more, want, id)
+    local lines = { { GREY .. L["Recommendation"] .. ":|r" } }
+    local function add(text) lines[#lines + 1] = { text } end
+    local word = GOLD .. ((verdict == "auction" and L["Auction"]) or (verdict == "vendor" and L["Vendor"])
+        or (verdict == "equip" and L["Equip"]) or (verdict == "quest" and L["Quest"]) or L["Keep"]) .. "|r"
+    if verdict == "quest" then
+        add(word)
+        add(GREY .. ns.Quests.WantText(want) .. "|r")
+        return lines
+    end
+    if verdict == "equip" then
+        add(word)
+        add(GREY .. L["better than what you wear"] .. "|r")
+        return lines
+    end
+    if verdict == "skill" then
+        -- Keep for Cooking 221/225, and under it the recipes that still give a point, with the window's arrows
+        add(L["%s for %s"]:format(word, ns.Professions.Words(want)))
+        if want.via then add(GREY .. L["made into %s"]:format(ns.Professions.ItemName(want.via)) .. "|r") end
+        for _, r in ipairs(ns.Professions.Recipes(want, id)) do add("   " .. ns.Professions.RecipeText(r)) end
+    elseif verdict == "craft" then
+        add(word)
+        add(ns.Professions.Words(want))
+    else
+        if more and more > 0 then add(L["%s for %s"]:format(word, GAIN .. "+" .. ns.Money(more) .. "|r")) else add(word) end
+        local chance = verdict == "auction" and type(want) == "table" and want.chance
+        if chance then add(GREY .. L["%d%% chance of sale"]:format(math.floor(chance * 100 + 0.5)) .. "|r") end
+    end
+    return lines
+end
+
+-- The tooltip panel's two parts: the prices, and the advice
+function M.TipLines(id, tooltip)
+    local prices, advice = {}, {}
+    local cost, count = M.MerchantCost(tooltip)
+    if cost then
+        prices[#prices + 1] = Labelled(L["Cost"], ns.MoneyColored(cost) .. (count > 1 and (GREY .. " x" .. count .. "|r") or ""))
+    end
+    if ns.db.vendorPrice then
+        local each = M.Vendor(id)
+        if each then prices[#prices + 1] = Labelled(L["Vendor"], ns.MoneyColored(each)) end
+    end
+    if ns.db.auctionPrice then
+        local each, t = M.Auction(id)
+        if each then prices[#prices + 1] = Labelled(L["Auction"], ns.MoneyColored(each) .. GREY .. " (" .. Ago(t) .. ")|r") end
+    end
+    if ns.db.auctionVerdict then
+        local verdict, more, want = M.Verdict(id)
+        if verdict then advice = M.Advice(verdict, more, want, id) end
+    end
+    return prices, advice
+end
+
 ---------------------------------------------------------------------------
 -- The best use of an item: keep it, sell it to a vendor, or put it up at the auction house
 ---------------------------------------------------------------------------
 local CUT = 0.95                                     -- what the auction house leaves you of a sale
+M.BETTER, M.WORTH = 1.1, 100                         -- a tenth more than a vendor (after all the below), a silver a stack
+-- and never for pennies: at least 10 copper more for each one, and something that sells for at least 25 copper
+-- (Smooth Pebble at 8c against a vendor's 4c is not worth a trip to the auction house, however big a stack)
+M.MIN_EACH, M.MIN_PRICE = 10, 25
+-- The deposit: lost when an auction does not sell (given back when it does). The game works it out from the
+-- item's vendor price and the auction's length; a share of the vendor price for a 24-hour auction stands in
+-- for it here, as the real one can only be asked for an item put in the auction house's sell slot.
+M.DEPOSIT = 0.30
+M.CHANCE = 0.7                                       -- the chance of a sale when nothing says otherwise
+
+function M.Deposit(id)
+    local each = M.Vendor(id)
+    return (each or 0) * M.DEPOSIT
+end
+
+-- How likely an auction of it is to sell, from what the auction house has shown you (there are no sales to go
+-- by, only listings): a price seen lately and on several days is likely; an old price, or one unusually low
+-- today (sellers outnumber buyers), less so. How many are up says little: plenty of Silk Cloth up (1,600 of it
+-- in 71 auctions) is a busy market, where cloth sells, not a sign that it will not.
+function M.SellChance(id)
+    local rec = ns.db and ns.db.auction and ns.db.auction[id]
+    if not rec then return nil end
+    local now = time and time() or 0
+    local p = 0.8
+    local age = now - (rec.t or 0)
+    if age > 3 * 86400 then p = p - 0.15 elseif age > 86400 then p = p - 0.05 end
+    local trend = M.Trend(id)
+    if trend and trend < -0.25 then p = p - 0.1 end
+    local _, days = M.Usual(id, 7)
+    if (days or 0) >= 3 then p = p + 0.05 end
+    return math.max(0.3, math.min(0.9, p))
+end
 M.ICON = {
     auction = "|TInterface\\Minimap\\Tracking\\Auctioneer:14:14|t",
     vendor = "|TInterface\\Icons\\INV_Misc_Coin_01:14:14:0:0:64:64:5:59:5:59|t",
     keep = "|TInterface\\Icons\\INV_Misc_Bag_08:14:14:0:0:64:64:5:59:5:59|t",
+    quest = "|TInterface\\GossipFrame\\ActiveQuestIcon:14:14|t",
+    starts = "|TInterface\\GossipFrame\\AvailableQuestIcon:14:14|t",
 }
-M.WORDS = { auction = L["Auction house"], vendor = L["Vendor"], keep = L["Keep"] }
+M.WORDS = { auction = L["Auction house"], vendor = L["Vendor"], keep = L["Keep"], equip = L["Equip"], quest = L["Quest"] }
 
--- "auction" (with how much more it brings than a vendor), "vendor", "keep", or nil when there is nothing to say
-function M.Verdict(id)
+-- The best use in words, with its icon: "Auction house +22c  80% likely to sell", "Skill-up: Alchemy 50/150"
+function M.BestText(verdict, more, want)
+    local right
+    if verdict == "skill" then
+        right = M.ICON.keep .. " " .. L["Skill-up: %s"]:format(ns.Professions.Words(want))
+    elseif verdict == "craft" then
+        return M.ICON.keep .. " " .. ns.Professions.Words(want)
+    elseif verdict == "quest" then
+        local icon = (type(want) == "table" and want.starts) and M.ICON.starts or M.ICON.quest
+        return icon .. " " .. L["Quest: %s"]:format(ns.Quests.WantText(want))
+    else
+        right = (M.ICON[verdict] or "") .. " " .. (M.WORDS[verdict] or tostring(verdict))
+    end
+    if more and verdict ~= "skill" then right = right .. "  |cff6fe06a+|r" .. ns.MoneyColored(more) end
+    local chance = verdict == "auction" and type(want) == "table" and want.chance
+    if chance then right = right .. GREY .. "  " .. L["%d%% likely to sell"]:format(math.floor(chance * 100 + 0.5)) .. "|r" end
+    return right
+end
+
+-- The whole auction house read lately (in the last three days): an item it had none of is not sold there
+M.LATELY = 3 * 86400
+function M.ReadLately()
+    local read = ns.db and ns.db.auctionReadAt or 0
+    return read > 0 and (time and time() or 0) - read < M.LATELY
+end
+
+-- An item's quality (0 grey ... ), or nil
+function M.Quality(id)
+    local get = (C_Item and C_Item.GetItemInfo) or GetItemInfo
+    if not get then return nil end
+    local ok, _, _, quality = pcall(get, id)
+    quality = ok and Plain(quality)
+    return type(quality) == "number" and quality or nil
+end
+
+-- Enough prices to go by: the whole house read in the last two weeks, or 20 prices noted in that time
+M.FRESH_DATA = 14 * 86400
+function M.HasData()
+    local db = ns.db
+    if not db then return false end
+    local now = time and time() or 0
+    if (db.auctionReadAt or 0) > 0 and now - db.auctionReadAt < M.FRESH_DATA then return true end
+    local n = 0
+    for _, rec in pairs(db.auction or {}) do
+        if now - (rec.t or 0) < M.FRESH_DATA then
+            n = n + 1
+            if n >= 20 then return true end
+        end
+    end
+    return false
+end
+
+-- "auction" (with how much more it brings than a vendor), "vendor", "keep", "quest" (with what a quest of yours
+-- wants it for: Quests.lua), "skill" (with who can still learn from it: Professions.lua), or nil when there is
+-- nothing to say. bound: it cannot go to the auction house.
+function M.Verdict(id, bound)
     local sell = ns.db.sell
     if sell and sell.keep[id] then return "keep" end
     if sell and sell.junk[id] then return "vendor" end
+    local quest = ns.Quests and ns.Quests.ItemWant and ns.Quests.ItemWant(id)
+    if quest then return "quest", nil, quest end                         -- a quest of yours still needs it
     local get = (C_Item and C_Item.GetItemInfoInstant) or GetItemInfoInstant
     if get then
-        local ok, _, _, _, equipLoc, _, classID = pcall(get, id)
+        local ok, _, _, _, equipLoc, _, classID, subclassID = pcall(get, id)
         if ok and classID == 12 then return "keep" end                    -- a quest item
+        local Vn = ns.Vendor
+        if ok and Vn and Vn.IsTool and Vn.IsTool(id, classID, subclassID) and Vn.LastTool(id) then
+            return "keep"                                                  -- your last tool of its kind
+        end
         local V = ns.Vendor
+        if ok and V and V.Upgrade and (classID == 2 or classID == 4) and V.Upgrade(id, equipLoc) then
+            return "equip"                                                 -- better than what you wear
+        end
+        if ok and V and V.KeepConsumable and classID == 0 and V.KeepConsumable(id, nil, classID) then
+            return "keep"                                                  -- the best of its kind you carry
+        end
         if ok and V and V.MaybeUpgrade and (classID == 2 or classID == 4) and V.MaybeUpgrade(id, equipLoc) then
             return "keep"                                                  -- it could be an upgrade for you
         end
     end
+    -- grey: to a vendor. It may be up at the auction house for more, but grey things there seldom sell
+    if M.Quality(id) == 0 then
+        if M.Vendor(id) then return "vendor" end
+        return nil
+    end
+    local want = ns.Professions and ns.Professions.Wants(id)
+    if want then return "skill", nil, want end                             -- one of yours still learns from it
     local vendor = M.Vendor(id)
-    local auction = M.Auction(id)
+    local auction = not bound and M.Auction(id)
+    local own = math.max((auction or 0) * CUT, vendor or 0)
+    local craft = ns.Professions and ns.Professions.Crafts(id, own)
+    if craft then return "craft", math.floor(craft.each - own + 0.5), craft end   -- worth more made into something
+    -- the auction house when what it can be expected to bring is clearly more than a vendor pays, and the
+    -- difference over a full stack is worth the trip (a silver). Expected: it sells (its chance, M.SellChance) for
+    -- the price after the house's cut; or it does not, the deposit is lost and it goes to a vendor after all
     if auction then
-        local net = auction * CUT
-        if net > (vendor or 0) * 1.25 and net - (vendor or 0) >= 50 then
-            return "auction", math.floor(net - (vendor or 0) + 0.5)
+        local v = vendor or 0
+        local p = M.SellChance(id) or M.CHANCE
+        local expect = p * auction * CUT + (1 - p) * (v - M.Deposit(id))
+        local _, stack = M.Vendor(id)
+        if expect > v * M.BETTER and (expect - v) * (stack or 1) >= M.WORTH and expect - v >= M.MIN_EACH
+            and auction >= M.MIN_PRICE then
+            return "auction", math.floor(expect - v + 0.5), { chance = p, deposit = M.Deposit(id) }
         end
     end
     if vendor then return "vendor" end

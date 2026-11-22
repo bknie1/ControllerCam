@@ -22,15 +22,17 @@ local LAYOUT = {
     focus  = { unit = "focus",  w = 200, h = 30, point = { "TOP", -280, -82 }, bar = 8, text = 11, barY = -15 },   -- left of the target
     vertical = { unit = "player", w = 16, h = 96, point = { "CENTER", -280, -30 } },    -- beside your character
                                                      -- (who stands left of centre with the shoulder view)
+    vpet   = { unit = "pet",    w = 6,   h = 48 },   -- your pet, left of the vertical bars: half their height,
+                                                     -- level with their feet
 }
 UF.LAYOUT = LAYOUT
-local ORDER = { "player", "target", "pet", "tot", "focus", "vertical" }
-local WATCHED = { "target", "pet", "tot", "focus" }     -- shown by the game while their unit exists
+local ORDER = { "player", "target", "pet", "tot", "focus", "vertical", "vpet" }
+local WATCHED = { "target", "pet", "tot", "focus", "vpet" }     -- shown by the game while their unit exists
 local MOVERS = { "player", "target", "tot", "focus", "vertical" }   -- each placed and dragged on its own
 local ALWAYS = { player = true, vertical = true }       -- always shown while on (your own bars)
 local TARGETLIKE = { target = true, tot = true, focus = true }     -- coloured by what the unit is to you
 local LABEL = { player = "Player", target = "Target", pet = "Pet", tot = "Target of target", focus = "Focus",
-                vertical = "Vertical bars" }
+                vertical = "Vertical bars", vpet = "Pet" }
 
 local FADE_DELAY = 1.5          -- seconds of calm before the player bar dims
 local FADE_SPEED = 4            -- opacity change per second
@@ -159,6 +161,15 @@ local function Create(key)
         f.text:SetTextColor(unpack(C.muted))
         f.ptext = ns.FontString(visual, 6, "RIGHT")
         f.ptext:SetPoint("TOPRIGHT", f.text, "BOTTOMRIGHT", 0, -1)
+        -- your cast, upright on the right of the power bar (an option: CastBar.lua runs it), a small timer on top
+        f.upCast = ns.CreateBar(visual, 3, lay.h, { vertical = true })
+        f.upCast:SetPoint("TOPLEFT", f.power, "TOPRIGHT", 3, 0)
+        f.upCast.shadow:SetAlpha(0.35)
+        f.upCast:Hide()
+        f.upCastTime = ns.FontString(visual, 6, "CENTER")
+        f.upCastTime:SetPoint("BOTTOM", f.upCast, "TOP", 0, 2)
+        f.upCastTime:SetTextColor(unpack(C.muted))
+        f.upCastTime:Hide()
     elseif key == "player" then
         f.health = ns.CreateBar(visual, lay.w, 10, { segments = 4 })
         f.health:SetPoint("TOPLEFT", visual, "TOPLEFT", 0, 0)
@@ -173,6 +184,23 @@ local function Create(key)
     elseif key == "pet" then
         f.health = ns.CreateBar(visual, lay.w, lay.h)
         f.health:SetPoint("TOPLEFT", visual, "TOPLEFT", 0, 0)
+        -- its mood: a thin band under the bar, and food beside it when it needs feeding (UpdateMood)
+        f.mood = visual:CreateTexture(nil, "ARTWORK")
+        f.mood:SetSize(lay.w, 2)
+        f.mood:SetPoint("TOPLEFT", f.health, "BOTTOMLEFT", 0, -2)
+        f.moodIcon = visual:CreateTexture(nil, "OVERLAY")
+        f.moodIcon:SetSize(12, 12)
+        f.moodIcon:SetPoint("LEFT", f.health, "RIGHT", 4, 0)
+    elseif key == "vpet" then                           -- upright like the vertical bars, half their height
+        f.health = ns.CreateBar(visual, lay.w, lay.h, { vertical = true })
+        f.health:SetPoint("TOPLEFT", visual, "TOPLEFT", 0, 0)
+        f.health.shadow:SetAlpha(0.35)
+        f.mood = visual:CreateTexture(nil, "ARTWORK")   -- its mood: a thin band on the far side of it
+        f.mood:SetSize(2, lay.h)
+        f.mood:SetPoint("TOPRIGHT", f.health, "TOPLEFT", -2, 0)
+        f.moodIcon = visual:CreateTexture(nil, "OVERLAY")
+        f.moodIcon:SetSize(12, 12)
+        f.moodIcon:SetPoint("BOTTOM", f.health, "TOP", 0, 3)
     elseif key == "tot" then
         f.name = ns.FontString(visual, lay.text, "LEFT")
         f.name:SetPoint("TOPLEFT", visual, "TOPLEFT", 2, 0)
@@ -183,14 +211,30 @@ local function Create(key)
         f.name:SetPoint("TOP", visual, "TOP", 0, 0)
         f.health = ns.CreateBar(visual, lay.w, lay.bar, { segments = 4 })
         f.health:SetPoint("TOPLEFT", visual, "TOPLEFT", 0, lay.barY)
+        -- its mana (or rage, energy...): a slim bar right under the health, when it has any (UpdatePower)
+        f.power = ns.CreateBar(visual, lay.w, 3)
+        f.power:SetPoint("TOPLEFT", f.health, "BOTTOMLEFT", 0, -2)
+        f.power.shadow:SetAlpha(0.35)
+        f.power:Hide()
         -- a soft dark band behind the text, so it reads against a bright sky
         f.shade = visual:CreateTexture(nil, "BACKGROUND")
         f.shade:SetTexture(ns.media.soft)
         f.shade:SetVertexColor(0, 0, 0, 0.6)
         f.shade:SetPoint("TOPLEFT", visual, "TOPLEFT", -24, 14)
         f.shade:SetPoint("BOTTOMRIGHT", f.health, "TOPRIGHT", 24, -10)
-        f.text = ns.FontString(f.health.over or visual, 9, "RIGHT")   -- on the bar: the name above has the room
-        f.text:SetPoint("RIGHT", f.health, "RIGHT", -6, 0)
+        -- the health text: hanging from the bar's lower edge at its right end, on a soft shade of its own. It
+        -- has a layer to itself above the bars (drawn inside the health bar it was cut off at the bar's edge)
+        f.textHolder = CreateFrame("Frame", nil, visual)
+        f.textHolder:SetAllPoints(f.health)
+        f.textHolder:SetFrameLevel((tonumber(visual:GetFrameLevel()) or 1) + 8)
+        f.text = ns.FontString(f.textHolder, 9, "RIGHT")
+        f.text:SetPoint("TOPRIGHT", f.power, "BOTTOMRIGHT", -6, -3)          -- (under the power bar)
+        f.textShade = f.textHolder:CreateTexture(nil, "BACKGROUND")
+        f.textShade:SetTexture(ns.media.soft)
+        f.textShade:SetVertexColor(0, 0, 0, 0.55)
+        f.textShade:SetPoint("TOPLEFT", f.text, "TOPLEFT", -12, 5)
+        f.textShade:SetPoint("BOTTOMRIGHT", f.text, "BOTTOMRIGHT", 10, -5)
+        f.textShade:Hide()
         f.mark = visual:CreateTexture(nil, "OVERLAY")
         f.mark:SetTexture(ns.media.mark)
         f.mark:SetSize(12, 12)
@@ -198,7 +242,7 @@ local function Create(key)
         f.mark:Hide()
 
         f.cast = ns.CreateBar(visual, lay.w - 16, 4)
-        f.cast:SetPoint("TOP", f.health, "BOTTOM", 0, -4)
+        f.cast:SetPoint("TOP", f.power, "BOTTOM", 0, -4)
         f.cast:SetColor(unpack(C.cast))
         f.cast.spark = f.cast.over:CreateTexture(nil, "OVERLAY")
         f.cast.spark:SetTexture(ns.media.spark)
@@ -239,6 +283,10 @@ local function Place(f)
         mover:SetPoint("TOPLEFT", UF.frames.player.mover, "BOTTOMLEFT", 0, -7)
         return
     end
+    if f.key == "vpet" then                             -- on the other side of the vertical bars, level with their feet
+        mover:SetPoint("BOTTOMRIGHT", UF.frames.vertical.mover, "BOTTOMLEFT", -5, 0)
+        return
+    end
     local pos = ns.db.pos[f.key]
     if f.key == "tot" and not pos then
         -- well clear of the target's bar end, where its threat shield and the end of a long name sit
@@ -262,6 +310,23 @@ local function ClassColor(unit)
     if c then return c.r, c.g, c.b end
 end
 
+-- A friendly NPC by your standing with its faction (the game's reaction, 1 hated to 8 exalted): the HUD's own
+-- tones, warm to cool as the standing grows
+ns.RegisterSetting({
+    key = "repColors", kind = "boolean", default = true, command = "repcolors", section = "Frames",
+    label = "Friendly NPCs by reputation",
+    tip = "a friendly NPC's name and bar are coloured by your standing with its faction: yellow neutral, green friendly, then sea green, teal and blue for honored, revered and exalted",
+})
+UF.STANDING = {
+    [1] = C.hostile, [2] = C.hostile, [3] = { 0.98, 0.55, 0.25 },       -- hated, hostile, unfriendly
+    [4] = C.neutral, [5] = C.friendly,                                  -- neutral, friendly
+    [6] = { 0.36, 0.86, 0.66 }, [7] = { 0.32, 0.82, 0.88 }, [8] = { 0.45, 0.72, 1.00 },   -- honored, revered, exalted
+}
+function UF.StandingColor(reaction)
+    local c = type(reaction) == "number" and UF.STANDING[reaction]
+    if c then return c[1], c[2], c[3] end
+end
+
 local function TargetColor(unit)
     local dead, tapped, isPlayer, attackable, reaction = U.Standing(unit)
     if dead or tapped then return unpack(C.tapped) end
@@ -272,6 +337,10 @@ local function TargetColor(unit)
     if attackable then
         if reaction and reaction >= 4 then return unpack(C.neutral) end
         return unpack(C.hostile)
+    end
+    if not isPlayer and ns.db.repColors then                            -- a friendly NPC: by your standing
+        local r, g, b = UF.StandingColor(reaction)
+        if r then return r, g, b end
     end
     return unpack(C.friendly)
 end
@@ -392,6 +461,39 @@ local function Hit(f, share)
     if share >= SHAKE_FROM then ns.Impact:Shake(f.visual, f.button, HEAVY, 1 + share * 2) end
 end
 
+ns.RegisterSetting({
+    key = "executeGlow", kind = "boolean", default = true, command = "execute", section = "Frames",
+    label = "Execute range on enemy bars",
+    tip = "an enemy at a quarter of its health or less: its health bar throbs red, with a glow round it beating like a pulse, on the target and focus frames and on nameplates",
+})
+
+-- In execute range, and an enemy: what the bar shows (see ns.ExecuteState), or nil
+function UF.Execute(unit, frac)
+    if not ns.db.executeGlow then return nil end
+    local ok, enemy = pcall(UnitCanAttack, "player", unit)
+    if not (ok and ns.Yes(enemy)) then return nil end
+    local okD, dead = pcall(UnitIsDead, unit)
+    if okD and ns.Yes(dead) then return nil end
+    return ns.ExecuteState(unit, frac)
+end
+
+ns.RegisterSetting({
+    key = "shieldBars", kind = "boolean", default = true, command = "shieldbars", section = "Frames",
+    label = "Shields on health bars",
+    tip = "how much a shield on a unit will soak, as a silver-blue band from the far end of its health bar: on your frames, your target's, your party's and nameplates",
+})
+
+-- How much shielding a unit has (the game's own total; may be a value it keeps to itself), or nil
+function UF.Absorb(unit)
+    if UF.fake then
+        local k = UF.fake[unit]
+        return k and k.absorb
+    end
+    if not UnitGetTotalAbsorbs then return nil end
+    local ok, amount = pcall(UnitGetTotalAbsorbs, unit)
+    return ok and amount or nil
+end
+
 local function UpdateHealth(f, instant)
     local unit = f.unit
     local cur, max = U.Health(unit)
@@ -401,7 +503,12 @@ local function UpdateHealth(f, instant)
     f.lastFrac = frac
     if UnitGetIncomingHeals then
         if ns.Bloom then f.health:SetIncomingColor(ns.Bloom.IncomingColor(unit)) end
-        f.health:SetIncoming(UnitGetIncomingHeals(unit))
+        f.health:SetIncoming(ns.IncomingHeals(unit))               -- yours, then everyone else's
+    end
+    f.health:SetAbsorb(UF.Absorb(unit))                            -- a shield on it, and how much it soaks
+    if f.key == "target" or f.key == "focus" then
+        f.health:SetExecute(UF.Execute(unit, frac))
+        if ns.Impact and ns.Impact.Bleed then ns.Impact:Bleed(f.health, unit, frac) end    -- it bleeds out
     end
     if TARGETLIKE[f.key] then
         f.health:SetColor(TargetHealthColor(unit, frac))
@@ -410,7 +517,13 @@ local function UpdateHealth(f, instant)
         elseif f.text then
             -- full size: the health left, shortened, and the percent; compact: the percent alone
             local compact = f.key == "target" and ns.db.targetCompact
-            if ns.db.targetHealthText then ns.HealthLine(f.text, unit, frac, not compact, true) else f.text:Hide() end
+            -- (at full health there is nothing to say: no text until the unit is hurt, where the game lets us know)
+            local full = type(frac) == "number" and not ns.IsSecret(frac) and frac >= 0.999
+            local said = false
+            if ns.db.targetHealthText and not full then said = ns.HealthLine(f.text, unit, frac, not compact, true) else f.text:Hide() end
+            if f.textShade then
+                if said and ns.db.textShade then f.textShade:Show() else f.textShade:Hide() end
+            end
         end
     else
         f.health:SetColor(OwnColor(unit, frac))
@@ -424,6 +537,17 @@ end
 local function UpdatePower(f, instant)
     if not f.power then return end
     local cur, max, token = U.Power(f.unit)
+    if ns.IsSecret(token) then token = nil end
+    if f.key == "target" or f.key == "focus" then
+        -- only a unit that really has a resource: mana when it has any at all; rage, energy and the rest while
+        -- there is some (a monster that never builds it would show an empty track). Amounts the game keeps to
+        -- itself in a fight: shown all the same, the game's own bar draws them.
+        local known = not ns.IsSecret(max) and not ns.IsSecret(cur)
+        local has = not known or (type(max) == "number" and max > 0
+            and (token == "MANA" or token == nil or (type(cur) == "number" and cur > 0)))
+        if not has then f.power:Hide(); f.powerToken = token; return end
+        f.power:Show()
+    end
     f.powerToken = token
     local color = C.power[token or ""] or C.power.MANA
     f.power:SetColor(unpack(color))
@@ -440,42 +564,33 @@ local function UpdatePower(f, instant)
     end
 end
 
--- A player's class as an icon, in front of the name (target and target of target)
+-- A player's class as an icon, in the line itself, right against the level: icon, level, name, as in chat
+-- (target and target of target). "" when there is none to show.
 local CLASS_ICONS = "Interface\\GLUES\\CHARACTERCREATE\\UI-CHARACTERCREATE-CLASSES"
-local function ClassIcon(f)
-    if f.classIcon then return f.classIcon end
-    local icon = f.visual:CreateTexture(nil, "OVERLAY")
-    icon:SetTexture(CLASS_ICONS)
-    icon:Hide()
-    f.classIcon = icon
-    return icon
-end
-
-local function UpdateClassIcon(f)
-    local icon = ClassIcon(f)
+local function ClassMark(f)
     local class = ns.db.classIcons and U.Class(f.unit)
     local _, _, isPlayer = U.Standing(f.unit)
-    local coords = class and isPlayer and CLASS_ICON_TCOORDS and CLASS_ICON_TCOORDS[class]
-    if not coords then icon:Hide(); return end
-    icon:SetTexCoord(unpack(coords))
-    local size = math.ceil((LAYOUT[f.key].text or 12) * ns.db.textScale)
-    icon:SetSize(size, size)
-    icon:ClearAllPoints()
-    if f.key == "tot" then
-        icon:SetPoint("RIGHT", f.name, "LEFT", -3, 0)
-    else
-        icon:SetPoint("RIGHT", f.name, "LEFT", -4, 0)
-    end
-    icon:Show()
+    local c = class and isPlayer and CLASS_ICON_TCOORDS and CLASS_ICON_TCOORDS[class]
+    if not c then return "" end
+    return ("|T%s:0:0:0:0:256:256:%d:%d:%d:%d|t"):format(CLASS_ICONS, c[1] * 256, c[2] * 256, c[3] * 256, c[4] * 256)
 end
-UF.UpdateClassIcon = UpdateClassIcon
+UF.ClassMark = ClassMark
+
+-- Its raid mark, just before its name (the target, its target, the focus, your pet...)
+function UF.Mark(f)
+    if not (f and f.name and f.visual) then return end
+    local size = f.key == "tot" and 12 or 16
+    ns.ShowRaidMark(f, f.visual, f.unit, size, "RIGHT", f.name, "LEFT", -4, 0)
+end
 
 local function UpdateInfo(f)
     if not f.name then return end
     local name, level, kind = U.Info(f.unit)
-    local ok = pcall(function() f.name:SetFormattedText("%s  %s", ns.LevelText(level), name or "") end)
+    local mark = (f.key == "tot" or f.key == "target") and ClassMark(f) or ""
+    local ok = pcall(function() f.name:SetFormattedText("%s%s  %s", mark, ns.LevelText(level), name or "") end)
     if not ok then pcall(f.name.SetText, f.name, name) end
-    if f.key == "tot" or f.key == "target" then UpdateClassIcon(f) end
+    f.classMark = mark ~= ""
+    UF.Mark(f)
     if f.key == "tot" then return end
     if not f.rankGlow then
         f.rankGlow = f.visual:CreateTexture(nil, "BACKGROUND")
@@ -491,6 +606,10 @@ end
 -- Cast bar: runs on the times the game gives. When it keeps them secret the bar shows full with the name.
 local function CastOnUpdate(bar)
     local now = GetTime()
+    if now >= bar.stop and bar.estimated then            -- our own guess of its length ran out: full, until it ends
+        bar.fill:SetValue(1)
+        return
+    end
     if now >= bar.stop then
         bar:SetScript("OnUpdate", nil)
         bar:Hide()
@@ -510,6 +629,7 @@ local function UpdateCast(f)
         bar:SetScript("OnUpdate", nil)
         bar:Hide()
         bar.label:Hide()
+        bar.seen, bar.estimated, bar.duration = nil, nil, nil
         return
     end
     bar.label:SetText(name)
@@ -517,16 +637,79 @@ local function UpdateCast(f)
     bar:Show()
     bar:SetColor(unpack((not ns.IsSecret(shielded) and shielded) and C.shielded or C.cast))
     bar.fill:SetMinMaxValues(0, 1)
+    bar.fill:SetAlpha(1)
     bar.trail:SetValue(0)
     if ns.IsSecret(startMS) or ns.IsSecret(endMS) or not startMS or not endMS or endMS <= startMS then
+        -- the game keeps the times to itself: the cast's own duration fills the bar (Theme.lua); failing that,
+        -- the spell's length or what this unit took last time, from the moment we saw it begin; failing all of
+        -- it, a dim full bar that only says "casting"
         bar:SetScript("OnUpdate", nil)
-        bar.fill:SetValue(1)
+        bar.estimated = nil
+        bar.seen = bar.seen or GetTime()
+        if ns.GameCastTimer(bar, f.unit, channel) then
+            if bar.duration then bar:SetScript("OnUpdate", ns.CastTick) end
+            return
+        end
+        local length = (not channel) and ns.CastLength(f.unit)
+        if length then
+            bar.start, bar.stop, bar.channel, bar.estimated = bar.seen, bar.seen + length, false, true
+            bar:SetScript("OnUpdate", CastOnUpdate)
+            CastOnUpdate(bar)
+        else
+            bar.fill:SetValue(1)
+            bar.fill:SetAlpha(0.35)
+        end
         return
     end
+    bar.seen, bar.estimated, bar.duration = nil, nil, nil
     bar.start, bar.stop, bar.channel = startMS / 1000, endMS / 1000, channel and true or false
     bar:SetScript("OnUpdate", CastOnUpdate)
     CastOnUpdate(bar)
 end
+
+---------------------------------------------------------------------------
+-- Your pet's mood (a hunter's pet: happy, content, unhappy), as the game tells it: a thin band beside the pet
+-- bar in its colour, and food beside it when it needs feeding. A pet without one (a warlock's, a guardian), or a
+-- game that does not say: nothing is shown.
+---------------------------------------------------------------------------
+ns.RegisterSetting({
+    key = "petMood", kind = "boolean", default = true, command = "petmood", section = "Frames",
+    label = "Pet happiness",
+    tip = "beside the pet bar, a thin band in the colour of your pet's mood: green happy, yellow content, red unhappy, with food beside it when it needs feeding. Nothing for a pet without a mood",
+})
+UF.MOOD = { [1] = "danger", [2] = "caution", [3] = "health" }      -- unhappy, content, happy: ns.colors
+UF.FOOD = "Interface\\Icons\\INV_Misc_Food_14"
+
+-- 1 unhappy, 2 content, 3 happy; nil when there is nothing to say
+function UF.PetMood()
+    if UF.fake then return UF.fake.mood end
+    if not GetPetHappiness then return nil end
+    local ok, mood = pcall(GetPetHappiness)
+    mood = ok and ns.Plain(mood)
+    if type(mood) ~= "number" or not UF.MOOD[mood] then return nil end
+    return mood
+end
+
+local function UpdateMood(f)
+    if not f.mood then return end
+    local mood = ns.db.petMood and UF.PetMood()
+    f.moodKey = mood and UF.MOOD[mood] or nil
+    if not mood then
+        f.mood:Hide()
+        f.moodIcon:Hide()
+        return
+    end
+    local c = C[UF.MOOD[mood]]
+    f.mood:SetColorTexture(c[1], c[2], c[3], mood == 3 and 0.55 or 0.95)    -- happy: there, but quiet
+    f.mood:Show()
+    if mood == 1 then
+        f.moodIcon:SetTexture(UF.FOOD)
+        f.moodIcon:Show()
+    else
+        f.moodIcon:Hide()
+    end
+end
+UF.UpdateMood = UpdateMood
 
 local function UpdateAll(f, instant)
     if not f.on then return end
@@ -535,7 +718,21 @@ local function UpdateAll(f, instant)
     UpdatePower(f, instant)
     UpdateInfo(f)
     UpdateCast(f)
+    UpdateMood(f)
 end
+
+-- The vertical bars' figures sit at their foot, on the side the pet bar takes: beside it they move out past it
+local function PlaceVerticalText()
+    local v, p = UF.frames.vertical, UF.frames.vpet
+    if not (v and v.text) then return end
+    v.text:ClearAllPoints()
+    if p and p.on and p.button:IsShown() then
+        v.text:SetPoint("BOTTOMRIGHT", p.health, "BOTTOMLEFT", -8, 9)
+    else
+        v.text:SetPoint("BOTTOMRIGHT", v.health, "BOTTOMLEFT", -4, 9)
+    end
+end
+UF.PlaceVerticalText = PlaceVerticalText
 
 ---------------------------------------------------------------------------
 -- Life: the player bar dims when nothing is happening, and every bar reacts to what happens to it
@@ -622,7 +819,10 @@ ns.RegisterSetting({
     key = "targetHealthText", kind = "boolean", default = true, command = "targethealthtext", section = "Frames",
     label = "Health on the target bar", tip = "the health left (12.3k) and the percent on the target and focus bars; a compact target shows the percent alone",
 })
-local FOLLOW = { gain = 0.35, inward = -0.25, near = 3, margin = 24, rate = 2.5 }
+local FOLLOW = { gain = 0.35, inward = -0.25, near = 3, margin = 24, rate = 2.5, nudge = 60 }
+-- nudge: a little further out still as the camera comes in, up to this much (about four of the bars' widths) by
+-- the time you look half again as big; your character, over the camera's shoulder, sits further out at those
+-- distances than its size alone says
 UF.FOLLOW = FOLLOW
 local function CameraDistance()
     if not GetCameraZoom then return nil end
@@ -656,6 +856,10 @@ function UF:Follow(dt)
         local ux, uy = UIParent:GetCenter()
         if type(cx) == "number" and type(ux) == "number" then
             tx, ty = (cx - ux) * grow, (cy - uy) * grow
+            if grow > 0 and cx ~= ux then                            -- outward: away from the middle
+                local away = cx < ux and -1 or 1
+                tx = tx + away * FOLLOW.nudge * math.min(1, grow / FOLLOW.gain)
+            end
             local okS, w, h = pcall(f.mover.GetSize, f.mover)
             if not okS or type(w) ~= "number" or type(h) ~= "number" then w, h = 0, 0 end
             local m = FOLLOW.margin
@@ -670,6 +874,11 @@ function UF:Follow(dt)
     v.baseX, v.baseY = bx + (tx - bx) * rate, by + (ty - by) * rate
     if not ns.Impact.shaking[v] and not Offset(f, 0, 0) then
         v.baseX, v.baseY = bx, by                                    -- held still in a fight: from here afterwards
+    end
+    local pet = self.frames.vpet                                     -- the pet beside them goes along
+    if pet and pet.on then
+        pet.visual.baseX, pet.visual.baseY = v.baseX, v.baseY
+        if not ns.Impact.shaking[pet.visual] then Offset(pet, 0, 0) end
     end
 end
 
@@ -719,6 +928,7 @@ local function OnUpdate(_, dt)
             if vwant > va then va = math.min(vwant, va + step * 3) else va = math.max(vwant, va - step) end
             UF.valpha = va
             vertical.visual:SetAlpha(va)
+            UF.frames.vpet.visual:SetAlpha(va)                -- (the pet beside them with them)
         end
     end
     -- the focus frame steps back out of combat (it does not depend on your health)
@@ -754,14 +964,14 @@ local UNIT_EVENTS = {
     UNIT_POWER_UPDATE = UpdatePower, UNIT_MAXPOWER = UpdatePower, UNIT_DISPLAYPOWER = UpdatePower,
     UNIT_NAME_UPDATE = UpdateInfo, UNIT_LEVEL = UpdateInfo, UNIT_CLASSIFICATION_CHANGED = UpdateInfo,
     UNIT_FACTION = UpdateHealth, UNIT_FLAGS = UpdateHealth,
-    UNIT_HEAL_PREDICTION = UpdateHealth,
+    UNIT_HEAL_PREDICTION = UpdateHealth, UNIT_ABSORB_AMOUNT_CHANGED = UpdateHealth,
     UNIT_SPELLCAST_START = UpdateCast, UNIT_SPELLCAST_STOP = UpdateCast, UNIT_SPELLCAST_FAILED = UpdateCast,
     UNIT_SPELLCAST_INTERRUPTED = UpdateCast, UNIT_SPELLCAST_DELAYED = UpdateCast,
     UNIT_SPELLCAST_CHANNEL_START = UpdateCast, UNIT_SPELLCAST_CHANNEL_STOP = UpdateCast,
     UNIT_SPELLCAST_CHANNEL_UPDATE = UpdateCast,
 }
 local WORLD_EVENTS = { "PLAYER_ENTERING_WORLD", "PLAYER_TARGET_CHANGED", "PLAYER_FOCUS_CHANGED", "UNIT_PET",
-                       "PLAYER_REGEN_DISABLED" }
+                       "PLAYER_REGEN_DISABLED", "UNIT_HAPPINESS", "PET_UI_UPDATE", "RAID_TARGET_UPDATE" }
 
 local OnEvent = ns.Protect(function(_, event, unit)
     if event == "PLAYER_REGEN_DISABLED" then
@@ -787,6 +997,16 @@ local OnEvent = ns.Protect(function(_, event, unit)
         if UF.frames.focus then UpdateAll(UF.frames.focus, true) end
     elseif event == "UNIT_PET" then
         if UF.frames.pet then UpdateAll(UF.frames.pet, true) end
+        if UF.frames.vpet then UpdateAll(UF.frames.vpet, true) end
+        PlaceVerticalText()                    -- (the game shows its button a moment later: OnShow does it again)
+    elseif event == "RAID_TARGET_UPDATE" then          -- someone marked or unmarked: every mark looked at again
+        for _, key in ipairs(ORDER) do
+            local f = UF.frames[key]
+            if f and f.on then UF.Mark(f) end
+        end
+    elseif event == "UNIT_HAPPINESS" or event == "PET_UI_UPDATE" then   -- the pet's mood
+        if UF.frames.pet then UpdateMood(UF.frames.pet) end
+        if UF.frames.vpet then UpdateMood(UF.frames.vpet) end
     else
         for _, key in ipairs(ORDER) do
             if UF.frames[key] then UpdateAll(UF.frames[key], true) end
@@ -832,6 +1052,7 @@ function UF:Wanted(key, run)
     if key == "tot" then return (db.units.target and ns.GetNative("tot") ~= false) and true or false end
     if key == "player" and db.units.vertical then return false end        -- the vertical bars take its place
     if key == "pet" and (not db.units.player or db.units.vertical) then return false end   -- it hangs under the player bar
+    if key == "vpet" then return (db.units.vertical and db.units.pet) and true or false end   -- beside the vertical bars
     return db.units[key] and true or false
 end
 
@@ -841,6 +1062,9 @@ function UF:Apply(run)
     if run then HookEditMode() end
     if run and not self.frames.player then
         for _, key in ipairs(ORDER) do Create(key) end
+        local vpet = self.frames.vpet
+        vpet.button:HookScript("OnShow", ns.Protect(PlaceVerticalText))
+        vpet.button:HookScript("OnHide", ns.Protect(PlaceVerticalText))
     end
     local any = false
     for _, key in ipairs(ORDER) do
@@ -873,6 +1097,7 @@ function UF:Apply(run)
     ns.SetBlizzardFaded("TargetFrame", aside and db.units.target or false)
     ns.SetBlizzardFaded("FocusFrame", aside and db.units.focus or false)
     SetEvents(any)
+    PlaceVerticalText()
     if not any and self.unlocked then self:SetUnlocked(false) end
     self:ApplyLook()
     for _, key in ipairs(ORDER) do
@@ -889,6 +1114,7 @@ function UF:ApplyLook()
         local w = ns.db.targetCompact and math.floor(LAYOUT.target.w * 0.6) or LAYOUT.target.w
         target.mover:SetWidth(w)
         target.health:SetBarWidth(w)
+        target.power:SetBarWidth(w)
         target.cast:SetBarWidth(w - 16)
         -- the name has the bar's width, and room even over a compact bar (it may reach past the bar's end); a
         -- longer one ends with "...". The threat shield sits beside the bar, so nothing competes with the name;
@@ -1033,6 +1259,8 @@ function UF:SetUnlocked(unlock)
             end
         end
     end
+    local soon = ns.Numbers and ns.Numbers.Soon                 -- the cooldown callouts move with the frames
+    if soon then soon:SetUnlocked(self.unlocked) end
     return true
 end
 
@@ -1178,5 +1406,98 @@ function UF:SetDemo(on)
     self:DemoOthers()
     return true
 end
+
+---------------------------------------------------------------------------
+-- At rest (an inn, a city): your frame dozes. Little z's drift up from the top of your health one after
+-- another, growing as they rise and fading away, and a soft moonlit glow breathes slowly round your bar. The
+-- z's keep their own light, so they show even while the frame itself has faded out of combat. Never in a
+-- fight; with Reduce animations the z's stand still.
+---------------------------------------------------------------------------
+ns.RegisterSetting({
+    key = "sleepy", kind = "boolean", default = true, command = "sleepy", section = "Frames",
+    label = "Sleepy while resting",
+    tip = "in an inn or a city your frame dozes: little z's drift up from it and a soft moonlit glow breathes round it (never in a fight)",
+})
+UF.MOON = { 0.70, 0.74, 1.00 }  -- moonlight
+UF.Z_LIFE = 3.3                  -- seconds for a z to rise and fade
+UF.Z_FROM, UF.Z_TO = 9, 18       -- its size as it starts and as it fades
+UF.BREATH = 5                    -- seconds for the glow to breathe in and out
+UF.dozes = 0
+
+local sleep = CreateFrame("Frame", "ControllerCamHUD_Sleep", UIParent)
+sleep:SetSize(1, 1)
+sleep:SetFrameStrata("MEDIUM")
+sleep:Hide()
+sleep.z = {}
+for i = 1, 3 do
+    local z = ns.FontString(sleep, UF.Z_FROM, "CENTER")
+    z:SetText(i == 3 and "Z" or "z")
+    z:SetTextColor(UF.MOON[1], UF.MOON[2], UF.MOON[3])
+    z:SetAlpha(0)
+    sleep.z[i] = z
+end
+UF.sleep = sleep
+
+-- The frame that dozes now (the vertical bars, else the player frame), or nil
+function UF.Dozing()
+    if not (ns.db and ns.db.sleepy) then return nil end
+    local f = UF.frames.vertical
+    if not (f and f.on) then f = UF.frames.player end
+    if not (f and f.on and f.health and f.visual) then return nil end
+    if ns.Yes(UnitAffectingCombat("player")) then return nil end
+    if not (IsResting and ns.Yes(IsResting())) then return nil end
+    return f
+end
+
+function UF.Doze(f)
+    local was = sleep.f
+    if was and was ~= f and was.sleepGlow then was.sleepGlow:Hide() end
+    sleep.f = f
+    if not f then sleep:Hide(); return end
+    if not f.sleepGlow then f.sleepGlow = AddGlow(f.visual, f.health, UF.MOON, 12) end
+    f.sleepGlow:SetAlpha(0.2)
+    f.sleepGlow:Show()
+    sleep:Show()
+    UF.dozes = UF.dozes + 1
+    ns.Note("unit frames: resting, %s dozes", f.key)
+end
+
+local function Drift(z, f, p, calm)
+    local size = math.floor(UF.Z_FROM + (UF.Z_TO - UF.Z_FROM) * p + 0.5)
+    if z.drawn ~= size then
+        z.drawn = size
+        local file, _, flags = z:GetFont()
+        if file then z:SetFont(file, size, flags) end
+    end
+    z:ClearAllPoints()
+    z:SetPoint("BOTTOMLEFT", f.health, "TOPRIGHT", 2 + p * 16 + (calm and 0 or math.sin(p * 6) * 2), 2 + p * 30)
+    local a
+    if calm then a = 0.8
+    elseif p < 0.15 then a = p / 0.15 * 0.9
+    else a = (1 - (p - 0.15) / 0.85) * 0.9 end
+    z:SetAlpha(math.max(0, a))
+end
+
+local doze = CreateFrame("Frame")
+local dozeLook = 1
+doze:SetScript("OnUpdate", ns.Protect(function(_, dt)
+    dozeLook = dozeLook + dt
+    if dozeLook >= 0.5 then                                  -- (a look at the world twice a second)
+        dozeLook = 0
+        local f = UF.Dozing()
+        if f ~= sleep.f then UF.Doze(f) end
+    end
+    local f = sleep.f
+    if not f then return end
+    local now = GetTime()
+    local calm = ns.Calm() and true or false
+    for i, z in ipairs(sleep.z) do
+        local p = calm and (0.2 + (i - 1) * 0.3) or ((now / UF.Z_LIFE + (i - 1) / 3) % 1)   -- one after another
+        Drift(z, f, p, calm)
+    end
+    if f.sleepGlow then
+        f.sleepGlow:SetAlpha(calm and 0.25 or (0.15 + 0.2 * (0.5 + 0.5 * math.sin(now * 2 * math.pi / UF.BREATH))))
+    end
+end))
 
 ns.RegisterModule("unitframes", UF)

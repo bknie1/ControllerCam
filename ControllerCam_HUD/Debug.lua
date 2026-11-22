@@ -125,6 +125,139 @@ local function Errors()
     return out
 end
 
+-- Why the game refuses: its own code read a value that an addon wrote, and from then on it is not trusted
+-- with what only the game may do. The game can say of any value who wrote it last (issecurevariable), so the
+-- first time something is refused, everything of the gamepad interface is asked about once: its tables and
+-- the frames' own fields, and every global of the game's that carries our name. Only looked at; nothing is
+-- called and nothing is written.
+D.SUSPECTS = { "Gamepad", "SmartNav", "FrameControls", "BindingSet", "InputPrompt", "ActionBar", "Tooltip", "Popup",
+               "UISpecialFrames", "UIPanelWindows", "UIMenus", "Merchant" }
+D.tainted, D.windows = {}, {}
+local function OurName(name)
+    return name:find("^ControllerCam") or name:find("^CCHUD") or name:find("^SLASH_CCHUD") or name:find("^SLASH_CONTROLLERCAM")
+        or name:find("^BINDING_[%u]+_CCHUD") or name:find("^BINDING_[%u]+_CONTROLLERCAM")
+end
+function D.Tainted()
+    local out = {}
+    if type(issecurevariable) ~= "function" then return { "the game cannot say who wrote a value" } end
+    local tables, checked = 0, 0
+    local function Row(text)
+        if #out < 80 then out[#out + 1] = text end
+    end
+    local function Look(t, label)
+        tables = tables + 1
+        for k in pairs(t) do
+            if type(k) == "string" then
+                checked = checked + 1
+                local ok, secure, by = pcall(issecurevariable, t, k)
+                if ok and not secure then Row(("%s.%s (written by %s)"):format(label, k, tostring(by))) end
+            end
+        end
+    end
+    for name, v in pairs(_G) do
+        if type(name) == "string" then
+            checked = checked + 1
+            local ok, secure, by = pcall(issecurevariable, name)
+            if ok and not secure and by == ADDON and not OurName(name) then
+                Row(("global %s (written by %s)"):format(name, tostring(by)))
+            end
+            if type(v) == "table" and tables < 4000 and not OurName(name) then
+                for _, word in ipairs(D.SUSPECTS) do
+                    if name:find(word, 1, true) then
+                        pcall(Look, v, name)
+                        break
+                    end
+                end
+            end
+        end
+    end
+    table.sort(out)
+    table.insert(out, 1, ("%d values asked about in %d tables: %d not the game's own"):format(checked, tables, #out))
+    return out
+end
+
+-- And then every other table the game keeps under a name, a few hundred a frame so the game does not stall:
+-- what carries our name there is added to the list (D.tainted) as it is found.
+D.CHUNK = 300
+function D.TaintedEverywhere()
+    if type(issecurevariable) ~= "function" or D.sweeping then return end
+    D.sweeping = true
+    local names = {}
+    for name, v in pairs(_G) do
+        if type(name) == "string" and type(v) == "table" and not OurName(name) then
+            local suspect = false
+            for _, word in ipairs(D.SUSPECTS) do
+                if name:find(word, 1, true) then suspect = true; break end
+            end
+            if not suspect then names[#names + 1] = name end
+        end
+    end
+    local at, found, checked = 0, 0, 0
+    local function Step()
+        for _ = 1, D.CHUNK do
+            at = at + 1
+            local name = names[at]
+            if not name then
+                D.sweeping = false
+                D.tainted[#D.tainted + 1] = ("everywhere else: %d values asked about in %d tables: %d not the game's own"):format(
+                    checked, #names, found)
+                return
+            end
+            local t = _G[name]
+            if type(t) == "table" then
+                pcall(function()
+                    for k in pairs(t) do
+                        if type(k) == "string" or type(k) == "number" then
+                            checked = checked + 1
+                            local ok, secure, by = pcall(issecurevariable, t, k)
+                            if ok and not secure and by == ADDON then
+                                found = found + 1
+                                if found <= 40 then
+                                    D.tainted[#D.tainted + 1] = ("%s[%s] (written by %s)"):format(name, tostring(k), tostring(by))
+                                end
+                            end
+                        end
+                    end
+                end)
+            end
+        end
+        C_Timer.After(0.02, Step)
+    end
+    Step()
+end
+
+-- What was open at that moment: the game's windows and ours, and what the pointer was on
+function D.Windows()
+    local out = {}
+    for _, list in ipairs({ _G.UISpecialFrames or {}, _G.UIMenus or {} }) do
+        for _, name in ipairs(list) do
+            local f = _G[name]
+            if type(f) == "table" and f.IsShown then
+                local ok, shown = pcall(f.IsShown, f)
+                if ok and shown == true then out[#out + 1] = name end
+            end
+        end
+    end
+    if type(_G.UIPanelWindows) == "table" then
+        for name in pairs(_G.UIPanelWindows) do
+            local f = _G[name]
+            if type(f) == "table" and f.IsShown then
+                local ok, shown = pcall(f.IsShown, f)
+                if ok and shown == true then out[#out + 1] = name end
+            end
+        end
+    end
+    local focus = GetMouseFoci and select(2, pcall(GetMouseFoci)) or nil
+    if type(focus) == "table" then
+        for _, f in ipairs(focus) do
+            local ok, name = pcall(function() return f.GetDebugName and f:GetDebugName() or f:GetName() end)
+            if ok and type(name) == "string" then out[#out + 1] = "pointer on " .. name:sub(1, 80) end
+        end
+    end
+    table.sort(out)
+    return out
+end
+
 -- What the game refused us: an action only its own interface may take, or one that our code had touched.
 -- The game names what was called; kept here so it can be read afterwards.
 D.refused = {}
@@ -135,17 +268,17 @@ guard:SetScript("OnEvent", function(_, event, addon, what)
     if addon ~= ADDON then return end
     local line = ("%s %s: %s"):format(date and date("%H:%M:%S") or "", event == "ADDON_ACTION_FORBIDDEN" and "forbidden" or "blocked",
         tostring(what))
-    if debugstack and (D.traced or 0) < 8 then              -- the first few: the path that led to it
+    if debugstack and (D.traced or 0) < 4 then              -- the first few: the path that led to it
         D.traced = (D.traced or 0) + 1
-        local ok, stack = pcall(debugstack, 2, 12, 0)
+        local ok, stack = pcall(debugstack, 2, 30, 0)
         local from, path = {}, {}
         if ok and type(stack) == "string" then
             for file, n in stack:gmatch("ControllerCam_HUD[/\\]([%w_]+%.lua)[^:\n]*:(%d+)") do
                 if file ~= "Debug.lua" then from[#from + 1] = file .. ":" .. n end
             end
             for row in stack:gmatch("[^\n]+") do              -- the game's own lines too: where it was when it refused
-                if #path < 8 and not row:find("Debug%.lua") then
-                    path[#path + 1] = (row:gsub("^%s+", ""):gsub("Interface[/\\]", ""):sub(1, 110))
+                if #path < 24 and not row:find("Debug%.lua") then
+                    path[#path + 1] = (row:gsub("^%s+", ""):gsub("Interface[/\\]", ""):gsub("AddOns/Blizzard_", "B_"):sub(1, 120))
                 end
             end
         end
@@ -155,6 +288,18 @@ guard:SetScript("OnEvent", function(_, event, addon, what)
     D.refused[#D.refused + 1] = line
     if #D.refused > 30 then table.remove(D.refused, 1) end
     ns.Note("refused: %s", line)
+    if not D.asked and ns.db and ns.db.debug then          -- once: what was open, and whose values the game read
+        D.asked = true
+        local ok, windows = pcall(D.Windows)
+        D.windows = ok and windows or { tostring(windows) }
+        local function Ask()
+            local ok2, found = pcall(D.Tainted)
+            D.tainted = ok2 and found or { tostring(found) }
+            for i = 1, math.min(#D.tainted, 12) do ns.Note("not the game's own: %s", D.tainted[i]) end
+            if C_Timer and C_Timer.After then pcall(D.TaintedEverywhere) end
+        end
+        if C_Timer and C_Timer.After then C_Timer.After(0, Ask) else Ask() end
+    end
 end)
 
 local function Layouts()
@@ -193,6 +338,17 @@ D.SECTIONS = {
     { "layout", Layouts },
     { "chat", function() return ns.Chat and ns.Chat.Describe and { ns.Chat.Describe() } or {} end },
     { "refused", function() return D.refused end },
+    { "enemy casts", function() return ns.CastRoutes and ns.CastRoutes() or {} end },
+    { "readouts", function() return ns.Readout and ns.Readout.Describe() or {} end },
+    { "big moments", function() return ns.Moments and ns.Moments.Describe and ns.Moments.Describe() or {} end },
+    { "cooldown callouts", function() return ns.Numbers and ns.Numbers.Soon and ns.Numbers.Soon.Describe() or {} end },
+    { "campfire", function() return ns.Campfire and ns.Campfire.Describe() or {} end },
+    { "reticle", function() return ns.Reticle and ns.Reticle.Describe() or {} end },
+    { "professions", function() return ns.Professions and ns.Professions.Describe() or {} end },
+    { "damage meter", function() return ns.Skin and ns.Skin.MeterDescribe and ns.Skin.MeterDescribe() or {} end },
+    { "aura rows", function() return ns.AuraWidgets and ns.AuraWidgets.Describe and { ns.AuraWidgets.Describe() } or {} end },
+    { "tainted", function() return D.tainted end },
+    { "open when refused", function() return D.windows end },
     { "sizes", function() return ns.Sizes and ns.Sizes.Describe() or {} end },
     { "screen", Screen },
     { "bindings", Bindings },
@@ -206,6 +362,13 @@ D.SECTIONS = {
         return out
     end },
     { "quests", function() return ns.Quests and ns.Quests.Describe and { ns.Quests.Describe() } or {} end },
+    { "travel", function()
+        local out = {}
+        for _, part in ipairs({ ns.Flights, ns.Hydrate }) do
+            if part and part.Describe then out[#out + 1] = part.Describe() end
+        end
+        return out
+    end },
     { "padicons", function() return ns.PadIcons and { ns.PadIcons.Describe() } or {} end },
     { "auction", function() return ns.AuctionPanel and ns.AuctionPanel.Describe() or {} end },
     { "cast", Casting },
@@ -220,6 +383,7 @@ D.SECTIONS = {
         table.sort(out)
         return out
     end },
+    { "slow", function() return D.Slow() end },
     { "errors", Errors },
 }
 
@@ -312,6 +476,73 @@ local function AtLogin()
     end
     D.Collect("login")
 end
+
+---------------------------------------------------------------------------
+-- Long frames: a moment the game stood still (a frame that took D.HITCH or more), kept with how much of it was
+-- the HUD's own work and which of its handlers took the most. Told by /cchud slow, and kept in the reports.
+-- Always on: it only reads the game's clock.
+---------------------------------------------------------------------------
+D.HITCH = 0.4
+D.hitches = {}
+local hitch = CreateFrame("Frame")
+local was, wasTop, wasWhere = 0, 0, nil
+hitch:SetScript("OnUpdate", function(_, dt)
+    local S = ns.spent
+    if not S then return end
+    if type(dt) == "number" and dt >= D.HITCH then
+        local top, where = S.top, S.topWhere
+        if wasTop > top then top, where = wasTop, wasWhere end
+        local line = ("%.1f the game stood still %.0f ms; the HUD's part %.0f ms (most: %s, %.0f ms)%s"):format(
+            GetTime and GetTime() or 0, dt * 1000, S.now + was, tostring(where or "-"), top,
+            ns.MapOpen() and "; the map open" or "")
+        D.hitches[#D.hitches + 1] = line
+        if #D.hitches > 20 then table.remove(D.hitches, 1) end
+        ns.Note("%s", line)
+    end
+    was, wasTop, wasWhere = S.now, S.top, S.topWhere
+    S.now, S.top, S.topWhere = 0, 0, nil
+end)
+
+-- What the game's own addon profiler says of the two addons, where it has one
+function D.Profiler()
+    local P = C_AddOnProfiler
+    if type(P) ~= "table" or type(P.GetAddOnMetric) ~= "function" then return { "the game has no addon profiler" } end
+    local metrics = Enum and Enum.AddOnProfilerMetric
+    local out = {}
+    for _, addon in ipairs({ "ControllerCam", "ControllerCam_HUD" }) do
+        local parts = {}
+        for name, id in pairs(type(metrics) == "table" and metrics or {}) do
+            local ok, v = pcall(P.GetAddOnMetric, addon, id)
+            if ok and type(v) == "number" and not ns.IsSecret(v) then parts[#parts + 1] = ("%s %.2f"):format(name, v) end
+        end
+        table.sort(parts)
+        out[#out + 1] = addon .. ": " .. (#parts > 0 and table.concat(parts, ", ") or "nothing told")
+    end
+    return out
+end
+
+function D.Slow()
+    local out = {}
+    for _, line in ipairs(D.hitches) do out[#out + 1] = line end
+    for _, line in ipairs(ns.spent and ns.spent.calls or {}) do out[#out + 1] = "slow call " .. line end
+    for _, line in ipairs(D.Profiler()) do out[#out + 1] = "profiler " .. line end
+    return out
+end
+
+ns.RegisterCommand("slow", function()
+    if #D.hitches == 0 then
+        ns.Say(L["The game has not stood still since you logged in."])
+    else
+        ns.Say(L["Moments the game stood still, and the HUD's part in each:"])
+        for i = math.max(1, #D.hitches - 7), #D.hitches do print("  " .. D.hitches[i]) end
+    end
+    local calls = ns.spent and ns.spent.calls or {}
+    if #calls > 0 then
+        ns.Say(L["The HUD's slowest moments:"])
+        for i = math.max(1, #calls - 7), #calls do print("  " .. calls[i]) end
+    end
+    for _, line in ipairs(D.Profiler()) do print("  " .. line) end
+end, "/cchud slow", "the moments the game stood still since you logged in, and how much of each was the HUD's own work")
 
 local events = CreateFrame("Frame")
 local since = 0

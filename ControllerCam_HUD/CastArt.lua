@@ -1,13 +1,16 @@
 -- ControllerCam HUD: what works on a cast bar while it fills.
 -- A cast bar shows what is being cast, not only how far along it is:
---   mining      little picks peck at the end of the bar, chips fly at every strike
---   crafting    a hammer does the same
---   herbs       leaves sprout along the bar as it fills
+--   mining      a pick is hauled back and brought down on the bar once a second, in time with your swings at
+--               the vein (chips fly, a crack stays); the last blow crumbles the bar and its pieces fall
+--   crafting    little hammers peck at the end of the bar
+--   herbs       leaves sprout along the bar as it fills; when it lands the bar is plucked, leaves and all
+--   skinning    the hide lifts off what is filled, rolled up at the cut; when it lands the bar peels away
 --   nature      green lightning runs along it, stroke after stroke
 --   lightning   the same in the pale blue of the sky
 --   roots       (the spells that root a foe) roots creep along it, budding as they go
 --   a heal      a vine winds along it and flowers open on it, one after another
 --   a holy heal wounds along the bar that the light sears shut one by one; the bar blazes when it lands
+-- Every show grows with the cast, its pieces a little smaller at the start and a little bigger as it completes.
 -- Every show builds with the cast and ends on something when it lands: fire kindles, catches and leaps;
 -- lightning arcs now and then, then faster, then flashes; flowers open; runes take shape; ice shatters.
 --   physical    only a glint of steel
@@ -16,14 +19,20 @@
 --   frost       ice crystals freeze onto the bar one after another, and shatter when it lands
 --   shadow      a dark haze with shades drifting through it: hooded, hollow-eyed, their jaws hanging open
 --   holy        rays of light rise off it
+--   travel      (a hearthstone, a teleport) a whirlpool of calm wind gathers over the bar: wisps circle its
+--               middle and are drawn in to a turning eye, wider and quicker as the cast builds; when it lands the
+--               whirl opens out in a ring of light, and you are on your way home
 --   fishing     the water rings around your float
+--   revive      (Revive Pet) a ring of leaves sprouts round the bar like the marks of a clock, one each twelfth of
+--               the cast, while a vine hand sweeps round and a heart of light beats quicker at its middle; when it
+--               lands every leaf blooms and a ring of green light opens out: back to life
 -- Your own cast bar wears the full show; nameplates a lighter one (fewer pieces, smaller).
 -- One Art belongs to one bar: Start(look) when a cast begins, Update(fill, progress, now) every frame,
 -- Finish(landed) when it ends (the art fades, in its own way), Stop() to clear it.
 
 local ADDON, ns = ...
 
-local A = { FADE = 0.4 }
+local A = { FADE = 0.4, GROW = { 0.85, 1.25 } }      -- pieces' size at the start of a cast and as it completes
 ns.CastArt = A
 
 ns.RegisterSetting({
@@ -34,9 +43,10 @@ ns.RegisterSetting({
 
 -- Which show a kind of cast gets (a kind is a key of CastLook.KINDS, a school, or "fishing")
 A.STYLE_OF = {
-    mining = "tool", crafting = "tool", herbs = "leaves", nature = "bolts", lightning = "bolts", roots = "roots",
+    mining = "mine", crafting = "tool", herbs = "leaves", skinning = "peel", nature = "bolts", lightning = "bolts",
+    roots = "roots",
     heal = "vines", arcane = "runes", disenchant = "runes", fire = "flames", frost = "crystals", shadow = "wisps",
-    holy = "rays", travel = "rays", physical = "glint", fishing = "ripples",
+    holy = "rays", travel = "whirl", physical = "glint", fishing = "ripples", revive = "revive",
 }
 
 local sin, cos, floor, max, min, pi = math.sin, math.cos, math.floor, math.max, math.min, math.pi
@@ -74,6 +84,12 @@ end
 
 local function Turn(t, radians)
     if t.SetRotation then t:SetRotation(radians) end
+end
+
+-- The same "chance" every time for piece j (0-1), so pieces scatter unevenly without a dice roll per frame
+local function Scatter(j, salt)
+    local v = sin(j * 12.9898 + salt * 78.233) * 43758.5453
+    return v - floor(v)
 end
 
 ---------------------------------------------------------------------------
@@ -116,17 +132,111 @@ STYLES.tool = {
     end,
 }
 
--- Leaves sprouting along the top of the bar
-STYLES.leaves = {
+-- A pick at the vein. You swing at a vein once a second, so the pick on the bar does too: it bounces off the
+-- stone, is hauled back slowly, and comes down hard on the second. Every blow throws chips and leaves a crack.
+-- The blow that ends the cast breaks the bar: it falls in pieces.
+STYLES.mine = {
+    bursts = true, fade = 0.8, ownFade = true,
     start = function(art)
-        local st = art.state
+        local st, c = art.state, art.color
+        st.strikes, st.beat, st.crackAt = 0, 0, {}
+        st.cracks = {}
+        for i = 1, art.light and 1 or 3 do st.cracks[i] = art:Piece("bolt", nil, 0.12, 0.08, 0.05) end
+        st.flash = art:Piece("soft", "ADD", 1, 0.9, 0.7)
+        st.chunks = {}
+        if not art.light then
+            for j = 1, max(6, floor(art.w / (16 * art.scale))) do st.chunks[j] = art:Piece("bar", nil, c[1], c[2], c[3]) end
+        end
+        st.pick = art:Piece("pick")
+    end,
+    update = function(art, edge, p, now)
+        local s, st = art.scale, art.state
+        local t = max(0, now - (art.began or now))
+        local beat = t % 1
+        if floor(t) > st.beat then                                   -- the second came round: it strikes
+            st.beat = floor(t)
+            st.strikes = st.strikes + 1
+            st.hitAt, st.hitX = now, edge
+            st.crackAt[((st.strikes - 1) % #st.cracks) + 1] = edge
+            A.Strike(art)
+        end
+        local lift
+        if beat < 0.12 then
+            lift = 0.35 * (beat / 0.12)                              -- it bounces off the stone,
+        elseif beat < 0.78 then
+            local k = (beat - 0.12) / 0.66
+            lift = 0.35 + 0.65 * k * (2 - k)                         -- is hauled back, slowing at the top,
+        else
+            local k = (beat - 0.78) / 0.22
+            lift = 1 - k * k                                         -- and comes down hard
+        end
+        st.lift = lift
+        local size = 30 * s
+        Put(art, st.pick, max(edge, 6 * s) - size * 0.40, art.h / 2 + size * 0.10 + lift * 10 * s, size)
+        Turn(st.pick, lift * 1.25)
+        st.pick:SetAlpha(1)
+        local since = st.hitAt and (now - st.hitAt) or 1
+        if since < 0.18 then
+            Put(art, st.flash, st.hitX, 0, (26 + 60 * since) * s, art.h + 16 * s)
+            st.flash:SetAlpha(1 - since / 0.18)
+        else
+            st.flash:SetAlpha(0)
+        end
+        for i, crack in ipairs(st.cracks) do
+            if st.crackAt[i] then
+                Put(art, crack, st.crackAt[i], 0, 18 * s, art.h + 6 * s)
+                crack:SetAlpha(0.8)
+            else
+                crack:SetAlpha(0)
+            end
+        end
+        for _, chunk in ipairs(st.chunks) do chunk:SetAlpha(0) end
+    end,
+    finish = function(art, k, now, landed)
+        local s, st = art.scale, art.state
+        if not landed or art.light then art.layer:SetAlpha(1 - k); return end
+        if not st.crumbled then                                      -- the last blow
+            st.crumbled = true
+            st.strikes = st.strikes + 1
+            A.Strike(art)
+            A.HideBar(art)
+        end
+        local size = 30 * s
+        Put(art, st.pick, art.w - size * 0.40, art.h / 2 + size * 0.10, size)
+        Turn(st.pick, 0)
+        st.pick:SetAlpha(1 - Clamp01(k * 2.2))
+        Put(art, st.flash, art.w, 0, (30 + 90 * k) * s, art.h + 22 * s)
+        st.flash:SetAlpha(1 - Clamp01(k * 4))
+        for _, crack in ipairs(st.cracks) do crack:SetAlpha(0) end
+        local n = #st.chunks
+        local wide = art.w / n
+        local t = k * STYLES.mine.fade
+        for j, chunk in ipairs(st.chunks) do
+            local a, b, c = Scatter(j, 1), Scatter(j, 2), Scatter(j, 3)
+            local u = max(0, t - (1 - j / n) * 0.18)                 -- the pieces by the blow go first
+            Put(art, chunk, (j - 0.5) * wide + (a - 0.5) * 44 * s * u, (18 + 34 * b) * s * u - 330 * s * u * u,
+                wide * (0.7 + 0.3 * c), art.h * (0.8 + 0.4 * b))    -- a hop, then it falls
+            Turn(chunk, (a - 0.5) * 9 * u)
+            chunk:SetAlpha(1 - Clamp01((k - 0.55) / 0.45))
+        end
+    end,
+}
+
+-- Leaves sprouting along the top of the bar. When the herb is yours the bar is picked like one: a tug, then it
+-- comes up and away, leaves and all.
+STYLES.leaves = {
+    fade = 0.7, ownFade = true,
+    start = function(art)
+        local st, c = art.state, art.color
         st.leaves = {}
         local n = max(2, floor(art.w / (30 * art.scale)))
+        st.stem = art:Piece("bar", nil, c[1], c[2], c[3])
         for j = 1, n do st.leaves[j] = art:Piece("leaf") end
     end,
     update = function(art, edge, p, now)
         local s, st = art.scale, art.state
         local n = #st.leaves
+        st.stem:SetAlpha(0)
         for j, t in ipairs(st.leaves) do
             local x = (j - 0.5) * art.w / n
             local grow = Clamp01((edge - x) / (12 * s))
@@ -138,6 +248,83 @@ STYLES.leaves = {
                 Turn(t, sin(now * 2.2 + j) * 0.22 + ((j % 2 == 0) and 0.45 or -0.45))
                 t:SetAlpha(1)
             end
+        end
+    end,
+    finish = function(art, k, now, landed)
+        local s, st = art.scale, art.state
+        if not landed or art.light then art.layer:SetAlpha(1 - k); return end
+        if not st.plucked then
+            st.plucked = true
+            A.HideBar(art)
+        end
+        local lift, tilt
+        if k < 0.2 then
+            lift, tilt = -3 * s * sin(k / 0.2 * pi), 0               -- the tug
+        else
+            local u = (k - 0.2) / 0.8
+            lift, tilt = u * u * 46 * s, 0.32 * u                    -- and out it comes
+        end
+        st.lift = lift
+        local alpha = 1 - Clamp01((k - 0.5) / 0.5)
+        local mid = art.w / 2
+        Put(art, st.stem, mid, lift, art.w, art.h)
+        Turn(st.stem, tilt)
+        st.stem:SetAlpha(alpha)
+        local n = #st.leaves
+        for j, t in ipairs(st.leaves) do
+            local size = (14 + (j * 5) % 4) * s
+            local dx, dy = (j - 0.5) * art.w / n - mid, art.h / 2 + size * 0.42
+            Put(art, t, mid + dx * cos(tilt) - dy * sin(tilt), lift + dx * sin(tilt) + dy * cos(tilt), size)
+            Turn(t, tilt + ((j % 2 == 0) and 0.45 or -0.45))
+            t:SetAlpha(alpha)
+        end
+    end,
+}
+
+-- Skinning: the hide lifts off the top of what is filled, rolled up where the knife is. When the cast lands
+-- the bar itself peels away, strip after strip from the left, each curling up as it goes.
+STYLES.peel = {
+    fade = 0.75, ownFade = true,
+    start = function(art)
+        local st, c = art.state, art.color
+        local pale = { c[1] + (1 - c[1]) * 0.5, c[2] + (1 - c[2]) * 0.5, c[3] + (1 - c[3]) * 0.5 }
+        st.hide = art:Piece("bar", nil, pale[1], pale[2], pale[3])
+        st.curl = art:Piece("disc", nil, pale[1], pale[2], pale[3])
+        st.strips = {}
+        if not art.light then
+            for j = 1, max(5, floor(art.w / (22 * art.scale))) do st.strips[j] = art:Piece("bar", nil, c[1], c[2], c[3]) end
+        end
+    end,
+    update = function(art, edge, p, now)
+        local s, st = art.scale, art.state
+        for _, strip in ipairs(st.strips) do strip:SetAlpha(0) end
+        if edge < 4 then
+            st.hide:SetAlpha(0)
+            st.curl:SetAlpha(0)
+            return
+        end
+        Put(art, st.hide, edge / 2, art.h / 2 + 2 * s, edge, 2.5 * s)
+        st.hide:SetAlpha(0.85)
+        local roll = art.h + 5 * s
+        Put(art, st.curl, edge, art.h / 2 + 1.5 * s + sin(now * 9) * 0.6 * s, roll)
+        st.curl:SetAlpha(1)
+    end,
+    finish = function(art, k, now, landed)
+        local s, st = art.scale, art.state
+        if not landed or art.light then art.layer:SetAlpha(1 - k); return end
+        if not st.peeled then
+            st.peeled = true
+            A.HideBar(art)
+        end
+        st.hide:SetAlpha(0)
+        st.curl:SetAlpha(0)
+        local n = #st.strips
+        local wide = art.w / n
+        for j, strip in ipairs(st.strips) do
+            local u = Clamp01((k - (j - 1) / n * 0.5) / 0.5)          -- one after another, from the left
+            Put(art, strip, (j - 0.5) * wide - u * 10 * s, u * u * 26 * s, wide + 1, art.h)
+            Turn(strip, u * 1.1)
+            strip:SetAlpha(1 - u * u)
         end
     end,
 }
@@ -555,6 +742,133 @@ STYLES.rays = {
     end,
 }
 
+-- Travel: a whirlpool of calm wind. Wisps go round the middle of the bar on a flattened circle, each drawn in
+-- toward the eye as it goes (then it starts again outside), the whole turning faster and opening wider as the
+-- cast builds; a soft halo turns slowly at the eye. When it lands the whirl opens out in a ring of light.
+STYLES.whirl = {
+    fade = 0.6, ownFade = true,
+    start = function(art)
+        local st, c = art.state, art.color
+        local soft = { c[1] * 0.5 + 0.5, c[2] * 0.5 + 0.5, c[3] * 0.5 + 0.5 }       -- calmer, paler
+        st.wisps = {}
+        for i = 1, art.light and 6 or 12 do st.wisps[i] = art:Piece("soft", "ADD", soft[1], soft[2], soft[3]) end
+        st.eye = art:Piece("halo", "ADD", c[1], c[2], c[3])
+        st.ring = art:Piece("ring", "ADD", 0.85, 0.95, 1)
+        st.spin = 0
+    end,
+    update = function(art, edge, p, now)
+        local s, st = art.scale, art.state
+        local n = #st.wisps
+        local cx = art.w / 2
+        st.spin = now * (1.8 + 2.6 * p)
+        local rx = art.w * (0.16 + 0.24 * p)
+        local ry = art.h / 2 + (9 + 9 * p) * s
+        for i, t in ipairs(st.wisps) do
+            local life = (now * 0.5 + i / n) % 1                 -- drawn in to the eye, then out again
+            local a = st.spin + i * (2 * pi / n) + life * 2.4
+            local r = 1 - life * 0.8
+            Put(art, t, cx + cos(a) * rx * r, sin(a) * ry * r, (11 + 8 * p) * s * (1 - life * 0.4), (4 + 3 * p) * s)
+            Turn(t, a + pi / 2)                                  -- lying along its way round
+            t:SetAlpha(sin(life * pi) * (0.4 + 0.55 * p))
+        end
+        Put(art, st.eye, cx, 0, (20 + 26 * p) * s)
+        Turn(st.eye, -st.spin * 0.5)
+        st.eye:SetAlpha(0.2 + 0.5 * p)
+        st.ring:SetAlpha(0)
+        st.last = p
+    end,
+    finish = function(art, k, now, landed)
+        local s, st = art.scale, art.state
+        local n = #st.wisps
+        for i, t in ipairs(st.wisps) do                          -- the wind lets go, outward
+            local a = st.spin + i * (2 * pi / n) + k * 2
+            Put(art, t, art.w / 2 + cos(a) * art.w * (0.4 + 0.3 * k), sin(a) * (art.h / 2 + 18 * s) * (1 + k), 14 * s, 4 * s)
+            Turn(t, a + pi / 2)
+            t:SetAlpha(0.6 * (1 - k))
+        end
+        st.eye:SetAlpha(0.6 * (1 - k))
+        if landed then
+            Put(art, st.ring, art.w / 2, 0, art.w * (0.3 + 1.1 * k), (art.h + 30 * s) * (0.6 + k))
+            st.ring:SetAlpha(1 - k)
+        else
+            st.ring:SetAlpha(0)
+        end
+    end,
+}
+
+-- Revive Pet: nature bringing a life back, in its own time. A dial over the middle of the bar: twelve leaves
+-- sprout on a flattened circle like the marks of a clock, each when the cast reaches its hour; a vine hand sweeps
+-- round from the top; a heart of soft light beats at the centre, quicker as the cast builds. When it lands each
+-- leaf turns into a flower and a ring of green light opens out.
+STYLES.revive = {
+    fade = 0.7, ownFade = true,
+    start = function(art)
+        local st, c = art.state, art.color
+        st.leaves, st.flowers = {}, {}
+        local n = art.light and 8 or 12
+        for j = 1, n do
+            st.leaves[j] = art:Piece("leaf", nil, c[1], c[2], c[3])
+            st.flowers[j] = art:Piece("flower", nil, 1, 1, 1)
+            st.flowers[j]:SetAlpha(0)
+        end
+        st.hand = art:Piece("vine", nil, 1, 1, 1)
+        st.heart = art:Piece("halo", "ADD", c[1], c[2], c[3])
+        st.ring = art:Piece("ring", "ADD", c[1] * 0.6 + 0.4, c[2] * 0.6 + 0.4, c[3] * 0.6 + 0.4)
+        st.ring:SetAlpha(0)
+    end,
+    update = function(art, edge, p, now)
+        local s, st = art.scale, art.state
+        local n = #st.leaves
+        local cx = art.w / 2
+        local rx, ry = math.min(art.w * 0.3, 60 * s), art.h / 2 + 14 * s
+        st.rx, st.ry = rx, ry
+        for j, t in ipairs(st.leaves) do
+            local a = pi / 2 - (j - 1) * 2 * pi / n               -- from the top, clockwise: the hours
+            local grow = Clamp01((p * n - (j - 1)) / 0.6)
+            if grow <= 0 then
+                t:SetAlpha(0)
+            else
+                Put(art, t, cx + cos(a) * rx, sin(a) * ry, 12 * s * grow)
+                Turn(t, a - pi / 2 + sin(now * 2 + j) * 0.1)
+                t:SetAlpha(0.95)
+            end
+        end
+        local hand = pi / 2 - p * 2 * pi                          -- the hand sweeps round with the cast
+        Put(art, st.hand, cx + cos(hand) * rx * 0.45, sin(hand) * ry * 0.45, rx * 0.9, 8 * s)
+        Turn(st.hand, hand)
+        st.hand:SetAlpha(0.85)
+        local beat = (sin(now * (3 + 7 * p)) + 1) / 2              -- a heart coming back: quicker as it builds
+        Put(art, st.heart, cx, 0, (16 + 14 * p + 6 * beat) * s)
+        st.heart:SetAlpha(0.25 + 0.45 * p * (0.6 + 0.4 * beat))
+    end,
+    finish = function(art, k, now, landed)
+        local s, st = art.scale, art.state
+        local n = #st.leaves
+        local cx, rx, ry = art.w / 2, st.rx or art.w * 0.3, st.ry or (art.h / 2 + 14 * s)
+        for j, t in ipairs(st.leaves) do
+            local a = pi / 2 - (j - 1) * 2 * pi / n
+            t:SetAlpha(landed and math.max(0, 1 - k * 2) or (1 - k))
+            local f = st.flowers[j]
+            if landed then                                         -- every hour blooms
+                local open = Clamp01(k * 2.5)
+                Put(art, f, cx + cos(a) * rx * (1 + 0.25 * k), sin(a) * ry * (1 + 0.25 * k), 15 * s * open)
+                Turn(f, a + k)
+                f:SetAlpha(1 - Clamp01((k - 0.6) / 0.4))
+            else
+                f:SetAlpha(0)
+            end
+        end
+        st.hand:SetAlpha(0.85 * (1 - k))
+        st.heart:SetAlpha((landed and 0.9 or 0.4) * (1 - k))
+        if landed then                                             -- back to life: the green opens out
+            Put(art, st.ring, cx, 0, (rx * 2) * (0.5 + 1.2 * k), (ry * 2) * (0.5 + 1.2 * k))
+            st.ring:SetAlpha(1 - k)
+        else
+            st.ring:SetAlpha(0)
+        end
+    end,
+}
+
 -- Fishing: rings spreading on the water around the float at the end of the line
 STYLES.ripples = {
     start = function(art)
@@ -582,10 +896,21 @@ function A.Strike(art)
     ns.Impact:Burst(art.bar, art.look, 0.6)
 end
 
+-- An ending that takes the bar itself apart (crumbled, plucked, peeled): the bar's own fill goes out of sight,
+-- the pieces stand in for it, and it is back when the art stops. Your own bar only.
+function A.HideBar(art)
+    if art.light or art.hid then return end
+    art.hid = true
+    local bar = art.bar
+    bar.fill:SetAlpha(0)
+    if bar.back then bar.back:SetAlpha(0) end
+    if bar.spark then bar.spark:SetAlpha(0) end
+end
+
 -- bar: one of ours (ns.CreateBar); scale: how big the pieces are; light: fewer of them (nameplates)
 function A.Attach(bar, scale, light)
-    local art = setmetatable({ bar = bar, scale = scale or 1, light = light and true or false, pieces = {}, n = 0,
-                               state = {} }, Art)
+    local art = setmetatable({ bar = bar, scale = scale or 1, base = scale or 1, light = light and true or false,
+                               pieces = {}, n = 0, state = {} }, Art)
     local layer = CreateFrame("Frame", nil, bar:GetParent())
     layer:SetAllPoints(bar)
     layer:SetFrameLevel((bar.over and bar.over:GetFrameLevel() or bar:GetFrameLevel()) + 3)
@@ -600,12 +925,14 @@ function Art:Start(look)
     local key = look and A.STYLE_OF[look.kind] or ""
     if look and look.kind == "heal" and look.school == "holy" then key = "sear" end      -- light, not leaves
     local style = STYLES[key]
-    if not style or not ns.db.castArt then return false end
+    if not style or not ns.db.castArt or ns.Calm() then return false end         -- (Reduce animations: none)
     self.look, self.kind, self.style, self.color = look, look.kind, style, look.color or { 1, 1, 1 }
     self.bursts = style.bursts and not self.light or false
     self.w, self.h = self.bar:GetWidth() or 100, self.bar:GetHeight() or 8
     if self.w < 1 then self.w = 100 end
     self.n, self.state = 0, {}
+    self.scale = self.base                              -- (how many pieces: by the size it has at heart)
+    self.began = GetTime()                              -- (whoever knows when the cast really began says so after)
     style.start(self)
     self.layer:SetAlpha(1)
     self.layer:Show()
@@ -617,9 +944,9 @@ function Art:Update(fill, progress, now)
     local style = self.style
     if not style then return end
     if self.finishing then
-        local k = (now - self.finishing) / A.FADE
+        local k = (now - self.finishing) / (self.fade or A.FADE)
         if k >= 1 then self:Stop(); return end
-        self.layer:SetAlpha(1 - k)
+        if not style.ownFade then self.layer:SetAlpha(1 - k) end     -- (an ending of its own fades its own pieces)
         if style.finish then style.finish(self, k, now, self.landed) end
         return
     end
@@ -627,18 +954,34 @@ function Art:Update(fill, progress, now)
     local w = self.bar:GetWidth()
     if type(w) == "number" and w > 1 then self.w = w end
     self.edge = fill * self.w
-    style.update(self, self.edge, progress or 0, now)
+    local p = progress or 0
+    self.scale = self.base * (A.GROW[1] + (A.GROW[2] - A.GROW[1]) * Clamp01(p))   -- bigger as it completes
+    style.update(self, self.edge, p, now)
 end
 
 function Art:Finish(landed, now)
     if not self.style or self.finishing then return end
     self.finishing, self.landed = now or GetTime(), landed and true or false
+    -- an ending of its own (a bar crumbling) takes its time; a cast cut short just fades
+    self.fade = (self.landed and not self.light and self.style.fade) or A.FADE
+end
+
+-- How long the ending that is running takes (seconds; 0 when none is)
+function Art:Ending()
+    return self.finishing and (self.fade or A.FADE) or 0
 end
 
 function Art:Stop()
     for i = 1, #self.pieces do self.pieces[i]:Hide() end
     self.layer:Hide()
-    self.style, self.kind, self.look, self.finishing, self.landed, self.bursts, self.edge = nil
+    if self.hid then                                    -- the bar was taken out of sight for the ending: back
+        self.hid = nil
+        local bar = self.bar
+        bar.fill:SetAlpha(1)
+        if bar.back then bar.back:SetAlpha(1) end
+        if bar.spark then bar.spark:SetAlpha(1) end
+    end
+    self.style, self.kind, self.look, self.finishing, self.landed, self.bursts, self.edge, self.fade = nil
 end
 
 -- How many pieces are on screen (for the self-check and the tests)

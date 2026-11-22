@@ -20,11 +20,12 @@ local HELP = {
     { "/cchud chat on | off",         "move the chat window to the top left while the HUD runs" },
     { "/cchud classcolor on | off",   "colour your bar, and other players' bars, by class" },
     { "/cchud vendor on | off",       "the vendor's Sell junk button asks what to sell; quick move at vendor and bank" },
-    { "/cchud sell",                  "at a vendor: choose what to sell (also: sell junk, sell white | green | blue)" },
+    { "/cchud sell",                  "at a vendor: choose what to sell (also: sell junk, sell recommended, sell white | green | blue)" },
     { "/cchud autosell on | off",     "sell junk by your rules as soon as a vendor opens" },
     { "/cchud sellgear on | off",     "count white weapons and armor as junk" },
     { "/cchud junk | keep | bank <item>", "mark an item: always sold, never sold, or for the bank (shift-click it into the chat line)" },
     { "/cchud deposit",               "at the bank: deposit what the bank already holds, and every item marked for it" },
+    { "/cchud withdraw",              "at the bank: take out what you already carry some of" },
     { "/cchud autodeposit on | off",  "deposit as soon as the bank opens" },
     { "/cchud reagents on | off",     "the bank takes reagents by itself (the game's own option)" },
     { "/cchud shade on | off",        "a soft dark band behind the target's text, to keep it readable" },
@@ -137,14 +138,19 @@ SlashCmdList["CCHUD"] = function(msg)
             V:Prompt()
         elseif arg == "junk" then
             V:SellJunk()
+        elseif arg == "recommended" then
+            V:ConfirmAdvised()
         else
             local quality = V.ParseQuality(arg)
-            if not quality then say(L["usage: /cchud sell [junk | white | green | blue]"]); return end
+            if not quality then say(L["usage: /cchud sell [junk | recommended | white | green | blue]"]); return end
             V:Confirm(V:Collect("quality", quality))
         end
     elseif cmd == "deposit" then
         if not ns.Vendor.active then say(L["Vendor help is off."]); return end
         ns.Vendor:Deposit()
+    elseif cmd == "withdraw" then
+        if not ns.Vendor.active then say(L["Vendor help is off."]); return end
+        ns.Vendor:Withdraw()
     elseif cmd == "autodeposit" then
         db.sell.deposit = Toggle(arg, db.sell.deposit)
         say(L["deposit marked items when the bank opens: %s"]:format(onoff(db.sell.deposit)))

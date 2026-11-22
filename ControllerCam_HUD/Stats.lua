@@ -1,5 +1,6 @@
 -- ControllerCam HUD: what an item's stats are worth to you.
--- Each stat line in an item's tooltip gets its value for your character in brackets:
+-- The stat lines of an item's tooltip, with their value for your character in brackets, on the panel under the
+-- tooltip (Tooltip.lua; the game's tooltip is only read, never written to: docs/DESIGN.md rule 11):
 --   +10 Agility   (+10 AP, +20 RAP, +0.19% crit, +0.5% dodge)
 --   +10 Intellect (+150 mana, +0.17% spell crit)
 -- By your class: Strength and Agility into attack power and ranged attack power, Agility into crit and dodge,
@@ -16,7 +17,7 @@ ns.Stats = ST
 ns.RegisterSetting({
     key = "statValues", kind = "boolean", default = true, command = "statvalues", section = "Bags, bank and vendor",
     label = "What stats are worth to you",
-    tip = "each stat line in an item's tooltip gets its value for your character: attack power, ranged attack power, crit, dodge, health, mana",
+    tip = "under an item's tooltip, its stat lines with their value for your character: attack power, ranged attack power, crit, dodge, health, mana",
 })
 
 -- Per class: attack power per Strength and per Agility, ranged attack power per Agility, points of Agility per
@@ -137,28 +138,31 @@ function ST.Annotate(text)
     end
 end
 
-local function OnItem(tooltip)
-    if not (ST.active and ns.db.statValues) or not (tooltip and tooltip.GetName and tooltip.NumLines) then return end
-    local name = tooltip:GetName()
-    if not name then return end
-    for i = 2, tooltip:NumLines() do
+-- The stat lines of a tooltip with their worth, { { text }, ... }, for the panel under it (Inventory.lua puts
+-- them there). The tooltip's lines are read, never changed: written to, they carried the HUD's name into the
+-- game's own tooltip code, which the game then refused to let run.
+function ST.Lines(tooltip)
+    local out = {}
+    if not (ST.active and ns.db.statValues) or type(tooltip) ~= "table" or not (tooltip.GetName and tooltip.NumLines) then
+        return out
+    end
+    local okN, name = pcall(tooltip.GetName, tooltip)
+    local okL, n = pcall(tooltip.NumLines, tooltip)
+    name, n = okN and ns.Plain(name), okL and ns.Plain(n)
+    if type(name) ~= "string" or type(n) ~= "number" then return out end
+    for i = 2, n do
         local fs = _G[name .. "TextLeft" .. i]
         if fs and fs.GetText then
             local ok, text = pcall(fs.GetText, fs)
             local done = ok and ST.Annotate(text)
-            if done then fs:SetText(done) end
+            if done then out[#out + 1] = { done } end
         end
     end
+    return out
 end
 
-local listening = false
 function ST:Apply(run)
     self.active = run and true or false
-    if self.active and not listening and TooltipDataProcessor and TooltipDataProcessor.AddTooltipPostCall
-        and Enum and Enum.TooltipDataType and Enum.TooltipDataType.Item then
-        listening = true
-        TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Item, ns.Protect(OnItem))
-    end
 end
 
 ns.RegisterModule("stats", ST)

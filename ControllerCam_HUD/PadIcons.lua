@@ -61,15 +61,37 @@ function I:Supported()
         and G.GetDeviceRawState and true or false
 end
 
--- The controller in use: { maker, product, name }, or nil
+-- The controller in use: { maker, product, name, how }, or nil. The game does not always name one in use (at
+-- login, before a button is pressed, or with a controller that comes through Steam): then any controller that
+-- is connected, and failing that the controller the game keeps settings of its own for (the one you play with).
+local function Raw(id)
+    if type(id) ~= "number" then return nil end
+    local ok, state = pcall(C_GamePad.GetDeviceRawState, id)
+    if not ok or type(state) ~= "table" or not (state.vendorID or state.name) then return nil end
+    return { maker = tonumber(state.vendorID), product = tonumber(state.productID),
+             name = type(state.name) == "string" and state.name or "" }
+end
 function I.Device()
     if not I:Supported() then return nil end
     local ok, id = pcall(C_GamePad.GetActiveDeviceID)
-    if not ok or type(id) ~= "number" then return nil end
-    local ok2, state = pcall(C_GamePad.GetDeviceRawState, id)
-    if not ok2 or type(state) ~= "table" then return nil end
-    return { maker = tonumber(state.vendorID), product = tonumber(state.productID),
-             name = type(state.name) == "string" and state.name or "" }
+    local d = ok and Raw(id)
+    if d then d.how = "in use"; return d end
+    if C_GamePad.GetAllDeviceIDs then
+        local okA, ids = pcall(C_GamePad.GetAllDeviceIDs)
+        for _, i in ipairs(okA and type(ids) == "table" and ids or {}) do
+            d = Raw(i)
+            if d then d.how = "connected"; return d end
+        end
+    end
+    if C_GamePad.GetAllConfigIDs then
+        local okC, list = pcall(C_GamePad.GetAllConfigIDs)
+        for _, c in ipairs(okC and type(list) == "table" and list or {}) do
+            if type(c) == "table" and tonumber(c.vendorID) and tonumber(c.productID) then
+                return { maker = tonumber(c.vendorID), product = tonumber(c.productID), name = "", how = "settings" }
+            end
+        end
+    end
+    return nil
 end
 
 -- What kind of controller that is, or nil when it does not say
@@ -222,9 +244,10 @@ end
 function I.Describe()
     local device = I.Device()
     local config, key = I.Config(device)
-    return ("the game has icon styles %s; chosen %s; controller %s (maker %s, product %s), taken for %s; its settings %s, style now %s; changed by us: %s"):format(
+    return ("the game has icon styles %s; chosen %s; controller %s (maker %s, product %s, %s), taken for %s; its settings %s, style now %s; changed by us: %s"):format(
         tostring(I:Supported()), tostring(ns.db and ns.db.padIcons), device and device.name or "none",
-        tostring(device and device.maker), tostring(device and device.product), tostring(I.Detect(device)),
+        tostring(device and device.maker), tostring(device and device.product), tostring(device and device.how),
+        tostring(I.Detect(device)),
         tostring(key), tostring(config and config.labelStyle),
         (function()
             local out = {}

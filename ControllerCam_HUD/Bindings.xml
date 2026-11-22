@@ -11,11 +11,17 @@
 	<Binding name="CCHUD_DEPOSIT" category="ADDONS">
 		ControllerCamHUD_Deposit()
 	</Binding>
+	<Binding name="CCHUD_SMARTSELL" category="ADDONS">
+		ControllerCamHUD_SmartSell()
+	</Binding>
+	<Binding name="CCHUD_WITHDRAW" category="ADDONS">
+		ControllerCamHUD_Withdraw()
+	</Binding>
+	<Binding name="CCHUD_TAKEMAIL" category="ADDONS">
+		ControllerCamHUD_TakeMail()
+	</Binding>
 	<Binding name="CCHUD_ITEMINFO" category="ADDONS">
 		ControllerCamHUD_ItemInfo()
-	</Binding>
-	<Binding name="CCHUD_TOOLTIPCURSOR" category="ADDONS">
-		ControllerCamHUD_ToggleTooltipCursor()
 	</Binding>
 	<Binding name="CCHUD_FISHING" category="ADDONS">
 		ControllerCamHUD_Fishing()
@@ -25,5 +31,14 @@
 	</Binding>
 	<Binding name="CCHUD_MARKET" category="ADDONS">
 		ControllerCamHUD_Market()
+	</Binding>
+	<Binding name="CCHUD_SKILLPLAN" category="ADDONS">
+		ControllerCamHUD_SkillPlan()
+	</Binding>
+	<Binding name="CCHUD_FARM" category="ADDONS">
+		ControllerCamHUD_Farm()
+	</Binding>
+	<Binding name="CCHUD_FARMADD" category="ADDONS">
+		ControllerCamHUD_FarmAdd()
 	</Binding>
 </Bindings>

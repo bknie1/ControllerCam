@@ -81,6 +81,7 @@ local function Width(native)
     return (ok and type(w) == "number" and w > 20) and w or 100
 end
 
+G.NARROW = 120                -- a frame narrower than this has its status after the name, not at its right end
 local function NewOverlayFor(native, width)
     local o = CreateFrame("Frame", nil, UIParent)
     o:SetFrameStrata("LOW")
@@ -94,8 +95,19 @@ local function NewOverlayFor(native, width)
     o.edge:Hide()
     o.name = ns.FontString(o, 10, "LEFT")
     o.name:SetPoint("TOPLEFT", o, "TOPLEFT", 3, -2)
-    o.status = ns.FontString(o, 9, "RIGHT")
-    o.status:SetPoint("TOPRIGHT", o, "TOPRIGHT", -3, -2)
+    -- How they are (80%, Dead, Offline). On a wide frame it sits at the right end, and the name stops short of
+    -- it. On a narrow one (the game's own party frames are) a name runs past the frame's end, so there it
+    -- follows the name instead of lying across it.
+    o.narrow = o.width < G.NARROW
+    if o.narrow then
+        o.status = ns.FontString(o, 9, "LEFT")
+        o.status:SetPoint("LEFT", o.name, "RIGHT", 5, 0)
+    else
+        o.status = ns.FontString(o, 9, "RIGHT")
+        o.status:SetPoint("TOPRIGHT", o, "TOPRIGHT", -3, -2)
+        o.name:SetWidth(o.width - 52)
+        if o.name.SetWordWrap then o.name:SetWordWrap(false) end
+    end
     o.status:SetTextColor(unpack(C.muted))
     o.health = ns.CreateBar(o, o.width - 6, 8, { square = o.width < 90 })
     o.health:SetPoint("BOTTOMLEFT", o, "BOTTOMLEFT", 3, 7)
@@ -169,10 +181,20 @@ local function Update(o, instant)
     local cur, max = U.Health(unit)
     local frac = o.health:Update(cur, max, instant)
     o.health:SetColor(Color(unit, frac, dead or offline))
+    o.health:SetAbsorb(ns.UnitFrames.Absorb(unit))
+    if UnitGetIncomingHeals then                             -- heals on their way: yours, then everyone else's
+        if ns.Bloom then o.health:SetIncomingColor(ns.Bloom.IncomingColor(unit)) end
+        o.health:SetIncoming(ns.IncomingHeals(unit))
+    end
     local pcur, pmax, token = U.Power(unit)
     o.power:SetValues(pcur, pmax, instant)
     o.power:SetColor(unpack(C.power[token or ""] or C.power.MANA))
     pcall(o.name.SetText, o.name, ns.FullName(UnitName(unit)) or "")
+    ns.ShowRaidMark(o, o, unit, 16, "RIGHT", o, "LEFT", -3, 0)        -- a raid mark: just outside, on the left
+    if offline ~= o.offline then                             -- gone: their name is as faint as their bar
+        o.offline = offline
+        o.name:SetTextColor(unpack(offline and C.muted or C.text))
+    end
     if offline then
         o.status:SetText(L["Offline"])
     elseif dead then
@@ -231,11 +253,17 @@ function G:Refresh()
             end
         end
     end
+    -- one look per person: the game may show the same party member twice (its party frames and its raid-style
+    -- ones at once); the first of them is drawn on (the party frames, where the D-pad's group targeting is)
+    local drawnFor = {}
     for _, native in ipairs(Natives()) do
         local unit = IsVisible(native) and UnitOf(native) or nil
+        local twice = unit and drawnFor[unit]
         found[#found + 1] = ("%s=%s%s"):format(tostring(native.GetName and native:GetName() or "?"),
-            tostring((UnitOf(native))), IsVisible(native) and "" or "(hidden)")
+            tostring((UnitOf(native))), (not IsVisible(native)) and "(hidden)" or twice and "(again)" or "")
         local o = self.overlays[native]
+        if twice then unit = nil end
+        if unit then drawnFor[unit] = true end
         if unit and UnitExists(unit) then
             if not o then
                 o = NewOverlay(native)
@@ -268,8 +296,8 @@ function G:Refresh()
 end
 
 local UNIT_EVENTS = { "UNIT_HEALTH", "UNIT_MAXHEALTH", "UNIT_POWER_UPDATE", "UNIT_MAXPOWER", "UNIT_DISPLAYPOWER",
-                      "UNIT_NAME_UPDATE", "UNIT_CONNECTION" }
-local WORLD_EVENTS = { "GROUP_ROSTER_UPDATE", "PLAYER_TARGET_CHANGED", "PLAYER_ENTERING_WORLD" }
+                      "UNIT_NAME_UPDATE", "UNIT_CONNECTION", "UNIT_ABSORB_AMOUNT_CHANGED", "UNIT_HEAL_PREDICTION" }
+local WORLD_EVENTS = { "GROUP_ROSTER_UPDATE", "PLAYER_TARGET_CHANGED", "PLAYER_ENTERING_WORLD", "RAID_TARGET_UPDATE" }
 local isUnitEvent = {}
 for _, e in ipairs(UNIT_EVENTS) do isUnitEvent[e] = true end
 

@@ -109,6 +109,7 @@ local HELP = {
     { "/ccam delay <seconds>",              "how long a situation is kept after it ends (default 1.5)" },
     { "/ccam on | off",                     "turn on, or turn off and restore your original camera settings" },
     { "/ccam info",                         "show the zoom, shoulder offset and motion settings right now (for troubleshooting)" },
+    { "/ccam notice",                       "let the game ask about its experimental camera settings again at the next login" },
     { "/ccam config",                       "open the options panel (Options > AddOns > ControllerCam)" },
     { "/ccam help",                         "show this list" },
 }
@@ -283,6 +284,9 @@ local function Command(msg)
         say(("CameraKeepCharacterCentered = %s  |  CameraReduceUnexpectedMovement = %s  |  head tracking strength = %s"):format(
             tostring(GetCVar("CameraKeepCharacterCentered")), tostring(GetCVar("CameraReduceUnexpectedMovement")),
             tostring(GetCVar("test_cameraHeadMovementStrength"))))
+    elseif cmd == "notice" then
+        ns.AskNoticeAgain()
+        say(L["The game will ask about its experimental camera settings again at the next login."])
     elseif cmd == "debug" then
         ns.SetDebug(not ns.IsDebug()); say("debug " .. onoff(ns.IsDebug()))
     else

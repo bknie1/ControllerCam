@@ -12,7 +12,7 @@ ns.media = {
     -- cast bar art (CastArt.lua)
     pick = MEDIA .. "pick", hammer = MEDIA .. "hammer", flame = MEDIA .. "flame", crystal = MEDIA .. "crystal",
     ghost = MEDIA .. "ghost", leaf = MEDIA .. "leaf", runes = MEDIA .. "runes", roots = MEDIA .. "roots",
-    bolt = MEDIA .. "bolt", flower = MEDIA .. "flower", vine = MEDIA .. "vine",
+    bolt = MEDIA .. "bolt", flower = MEDIA .. "flower", vine = MEDIA .. "vine", fish = MEDIA .. "fish",
 }
 
 ns.colors = {
@@ -39,7 +39,94 @@ ns.colors = {
 
 ns.fonts = {}
 
-local function FontFile() return STANDARD_TEXT_FONT or "Fonts\\FRIZQT__.TTF" end
+---------------------------------------------------------------------------
+-- One font for everything, if you choose one: the HUD's own text, and the game's shared fonts that its windows,
+-- tooltips, chat and buttons are drawn with. Each keeps its size and outline; only the typeface changes, and
+-- the game's own come back when you choose "The game's" or the HUD stops. Offered where the game's language is
+-- written in Latin letters: these fonts have no Cyrillic, Korean or Chinese characters.
+---------------------------------------------------------------------------
+ns.FONT_CHOICES = { { "game" }, { "friz", "Friz Quadrata", "Fonts\\FRIZQT__.TTF" },
+                    { "arial", "Arial Narrow", "Fonts\\ARIALN.TTF" }, { "skurri", "Skurri", "Fonts\\skurri.ttf" },
+                    { "morpheus", "Morpheus", "Fonts\\MORPHEUS.TTF" } }
+local LATIN = { enUS = true, enGB = true, deDE = true, esES = true, esMX = true, frFR = true, itIT = true,
+                ptBR = true, ptPT = true }
+function ns.FontsOffered()
+    local loc = GetLocale and GetLocale() or "enUS"
+    return LATIN[loc] or false
+end
+ns.RegisterSaved("font", function(old)
+    for _, c in ipairs(ns.FONT_CHOICES) do if c[1] == old then return old end end
+    return "game"
+end)
+
+-- The typeface chosen (a file), or nil for the game's own
+function ns.ChosenFont()
+    local key = ns.db and ns.db.font
+    if not (ns.fontsRunning and key and key ~= "game" and ns.FontsOffered()) then return nil end
+    for _, c in ipairs(ns.FONT_CHOICES) do if c[1] == key then return c[3] end end
+end
+
+-- The game's shared fonts (every Font object it keeps under a name): the chosen typeface, or their own back
+local swapped = {}
+ns.fontsSwapped = swapped
+function ns.ApplyGameFont()
+    local file = ns.ChosenFont()
+    if not file then
+        for font, own in pairs(swapped) do
+            local ok, _, size, flags = pcall(font.GetFont, font)
+            if ok and type(size) == "number" then pcall(font.SetFont, font, own, size, flags) end
+            swapped[font] = nil
+        end
+        return 0
+    end
+    local n = 0
+    for name, v in pairs(_G) do
+        if type(name) == "string" and type(v) == "table" and name:find("Font", 1, true) then
+            local ok, kind = pcall(function() return v.GetObjectType and v:GetObjectType() end)
+            if ok and kind == "Font" then
+                local okF, cur, size, flags = pcall(v.GetFont, v)
+                if okF and type(cur) == "string" and type(size) == "number" and size > 0 then
+                    if swapped[v] == nil then swapped[v] = cur end
+                    if cur ~= file then pcall(v.SetFont, v, file, size, flags) end
+                    n = n + 1
+                end
+            end
+        end
+    end
+    return n
+end
+
+ns.RegisterModule("fonts", { Apply = function(_, run)
+    ns.fontsRunning = run and true or false
+    ns.ApplyGameFont()
+    ns.ApplyFonts()
+end })
+
+local function FontFile() return ns.ChosenFont() or STANDARD_TEXT_FONT or "Fonts\\FRIZQT__.TTF" end
+ns.FontFile = FontFile
+
+function ns.FontName(key)
+    for _, c in ipairs(ns.FONT_CHOICES) do if c[1] == key then return c[2] or ns.L["The game's"] end end
+    return ns.L["The game's"]
+end
+
+ns.RegisterCommand("font", function(arg)
+    local L = ns.L
+    if not ns.FontsOffered() then ns.Say(L["Fonts can be chosen only where the game's language is written in Latin letters."]); return end
+    local key = (arg or ""):lower()
+    local found
+    for _, c in ipairs(ns.FONT_CHOICES) do if c[1] == key then found = c[1] end end
+    if not found then
+        ns.Say(L["Font: %s"]:format(ns.FontName(ns.db.font)))
+        ns.Say("/cchud font game | friz | arial | skurri | morpheus")
+        return
+    end
+    ns.db.font = found
+    ns.Apply()
+    if ns.RefreshOptions then ns.RefreshOptions() end
+    ns.Say(L["Font: %s"]:format(ns.FontName(found)))
+end, "/cchud font game | friz | arial | skurri | morpheus",
+    "one font for the HUD and the game's own text (windows, tooltips, chat, buttons); each keeps its size")
 local function TextScale() return ns.db and ns.db.textScale or 1 end
 
 -- Re-applies the text size setting to every text of the HUD.
@@ -101,11 +188,6 @@ local function BarOnUpdate(self, dt)
         self.trail:SetValue(self.trailValue)
         settled = self.disp == v and self.trailValue == self.disp
     end
-    if self.flashA and self.flashA > 0 then
-        self.flashA = math.max(0, self.flashA - dt * (self.flashFade or 3.5))
-        self.flashTex:SetAlpha(self.flashA)
-        settled = settled and self.flashA == 0
-    end
     if settled then
         self:SetScript("OnUpdate", nil)
         self.animating = false
@@ -154,7 +236,15 @@ function BarMethods:SetValues(cur, max, instant)
 end
 
 -- A flash over the bar, stronger for a bigger hit. color: { r, g, b } (white when left out); fade: how fast it
--- fades (per second).
+-- fades (per second). It fades on a timer of its own: a bar whose own timer something else runs (a cast bar,
+-- filled by the cast) would otherwise keep the flash lit for good, a solid bright bar.
+local function FlashOnUpdate(driver, dt)
+    local bar = driver.bar
+    bar.flashA = math.max(0, (bar.flashA or 0) - dt * (bar.flashFade or 3.5))
+    bar.flashTex:SetAlpha(bar.flashA)
+    if bar.flashA <= 0 then driver:SetScript("OnUpdate", nil) end
+end
+
 function BarMethods:Flash(share, color, fade)
     if not self.flashTex then
         local flash = self.over:CreateTexture(nil, "OVERLAY")
@@ -163,16 +253,15 @@ function BarMethods:Flash(share, color, fade)
         flash:SetBlendMode("ADD")
         if self.mask then pcall(flash.AddMaskTexture, flash, self.mask) end
         self.flashTex = flash
+        self.flashDriver = CreateFrame("Frame", nil, self)
+        self.flashDriver.bar = self
     end
     local c = color or { 1, 1, 1 }
     self.flashTex:SetVertexColor(c[1], c[2], c[3], 1)
     self.flashFade = fade or 3.5
     self.flashA = math.min(1, 0.45 + (share or 0) * 2)
     self.flashTex:SetAlpha(self.flashA)
-    if not self.animating then
-        self.animating = true
-        self:SetScript("OnUpdate", BarOnUpdate)
-    end
+    self.flashDriver:SetScript("OnUpdate", FlashOnUpdate)
 end
 
 -- SetValues, plus the flash when the value dropped. Returns the filled share (nil when secret).
@@ -218,20 +307,90 @@ function BarMethods:SetIncomingColor(c)
     end
 end
 
-function BarMethods:SetIncoming(heal)
-    if self.vertical then return self:SetIncomingUp(heal) end
+-- Heals on their way: yours first, from the end of the health, in its school's colour; then everyone else's,
+-- paler, after it (others may be nil: then heal is all of it, in the one colour)
+ns.OTHERS_HEAL = { 0.86, 0.95, 1 }
+function BarMethods:SetIncoming(heal, others)
+    if self.vertical then
+        local plain = type(heal) == "number" and type(others) == "number" and not ns.IsSecret(heal) and not ns.IsSecret(others)
+        return self:SetIncomingUp(plain and (heal + others) or (Some(heal) and heal or others))
+    end
     if self.SetClipsChildren and not self.clipped then self:SetClipsChildren(true); self.clipped = true end
     local max = self.rawMax
     local fillTex = self.fill:GetStatusBarTexture()
+    local after = fillTex
     if Some(heal) and max then
         local h = Extra(self, "healBar", fillTex, 0.55, 1, 0.6, 0.55)
         self:SetIncomingColor(self.healColor)
         h:SetMinMaxValues(0, max)
         h:SetValue(heal)
         h:Show()
+        after = h:GetStatusBarTexture()
     elseif self.healBar then
         self.healBar:Hide()
     end
+    if Some(others) and max then
+        local c = ns.OTHERS_HEAL
+        local o = Extra(self, "othersBar", after, c[1], c[2], c[3], 0.4)
+        o:SetMinMaxValues(0, max)
+        o:SetValue(others)
+        o:Show()
+    elseif self.othersBar then
+        self.othersBar:Hide()
+    end
+end
+
+-- A unit's heals on their way: yours, and everyone else's (the game's own totals). Where the game keeps the
+-- amounts to itself no sum can be done: then all of it comes as one, and others is nil.
+function ns.IncomingHeals(unit)
+    if not UnitGetIncomingHeals then return nil, nil end
+    local okA, all = pcall(UnitGetIncomingHeals, unit)
+    if not okA then return nil, nil end
+    local okM, mine = pcall(UnitGetIncomingHeals, unit, "player")
+    if not okM or ns.IsSecret(all) or ns.IsSecret(mine) or type(all) ~= "number" then return all, nil end
+    mine = type(mine) == "number" and mine or 0
+    return mine, math.max(0, all - mine)
+end
+
+-- A shield on the unit: how much it will soak, as a silver-blue band laid over the bar from its far end (the top
+-- of an upright bar), with a bright edge where it begins. Drawn from the end rather than after the health, so it
+-- shows on a full bar too and works with amounts the game keeps to itself (the bar is given them unread).
+ns.SHIELD_COLOR = { 0.72, 0.85, 1 }
+function BarMethods:SetAbsorb(amount)
+    local max = self.rawMax
+    if not (Some(amount) and max and ns.db and ns.db.shieldBars) then
+        if self.absorbBar then self.absorbBar:Hide() end
+        return
+    end
+    local x = self.absorbBar
+    if not x then
+        local c = ns.SHIELD_COLOR
+        x = CreateFrame("StatusBar", nil, self)
+        x:SetAllPoints(self)
+        x:SetStatusBarTexture(ns.media.bar)
+        x:SetStatusBarColor(c[1], c[2], c[3], 0.55)
+        if x.SetReverseFill then x:SetReverseFill(true) end
+        if self.vertical then x:SetOrientation("VERTICAL") end
+        x:SetFrameLevel((self.over and self.over:GetFrameLevel() or self.fill:GetFrameLevel()) - 0)
+        if self.mask then pcall(function() x:GetStatusBarTexture():AddMaskTexture(self.mask) end) end
+        local edge = x:CreateTexture(nil, "OVERLAY")
+        edge:SetColorTexture(0.9, 0.96, 1, 0.9)
+        local tex = x:GetStatusBarTexture()
+        if self.vertical then
+            edge:SetHeight(1)
+            edge:SetPoint("BOTTOMLEFT", tex, "BOTTOMLEFT", 0, 0)
+            edge:SetPoint("BOTTOMRIGHT", tex, "BOTTOMRIGHT", 0, 0)
+        else
+            edge:SetWidth(1)
+            edge:SetPoint("TOPLEFT", tex, "TOPLEFT", 0, 0)
+            edge:SetPoint("BOTTOMLEFT", tex, "BOTTOMLEFT", 0, 0)
+        end
+        x.edge = edge
+        self.absorbBar = x
+    end
+    x:SetMinMaxValues(0, max)
+    x:SetValue(amount)
+    x:Show()
 end
 
 -- The same for an upright bar: the heal sits on top of the filled part
@@ -336,6 +495,48 @@ function ns.RankOf(kind, level)
     return ns.RANK[kind or ""]
 end
 
+---------------------------------------------------------------------------
+-- Raid target marks (skull, cross, star...): the game's own icons, on whatever shows a unit. Made the first time
+-- a unit there is marked. holder keeps it (as holder.raidMark), parent draws it, then its size and where it goes.
+-- Where the game keeps the mark secret it is drawn by the game's own sheet of them, unread.
+---------------------------------------------------------------------------
+ns.RAID_MARKS = "Interface\\TargetingFrame\\UI-RaidTargetingIcons"
+ns.marksShown = 0
+function ns.ShowRaidMark(holder, parent, unit, size, ...)
+    local ok, index = false, nil
+    if unit and GetRaidTargetIndex then ok, index = pcall(GetRaidTargetIndex, unit) end
+    local t = holder.raidMark
+    local secret = ok and ns.IsSecret(index)
+    if not secret then
+        index = ok and tonumber(index) or nil
+        if not index or index < 1 or index > 8 then
+            if t then t:Hide() end
+            holder.raidIndex = nil
+            return nil
+        end
+    end
+    if not t then
+        t = parent:CreateTexture(nil, "OVERLAY", nil, 7)
+        t:SetTexture(ns.RAID_MARKS)
+        t:SetSize(size, size)
+        t:SetPoint(...)
+        holder.raidMark = t
+    end
+    if secret then
+        if not (t.SetSpriteSheetCell and pcall(t.SetSpriteSheetCell, t, index, 4, 4)) then
+            t:Hide()
+            return nil
+        end
+    else
+        local col, row = (index - 1) % 4, math.floor((index - 1) / 4)
+        t:SetTexCoord(col * 0.25, (col + 1) * 0.25, row * 0.25, (row + 1) * 0.25)
+    end
+    t:Show()
+    if holder.raidIndex ~= index then ns.marksShown = ns.marksShown + 1 end
+    holder.raidIndex = index
+    return index
+end
+
 -- Sets a mark texture and a glow texture (either may be nil) for a rank; returns the rank (or nil)
 function ns.ShowRank(mark, glow, kind, level)
     local rank = ns.RankOf(kind, level)
@@ -359,17 +560,154 @@ function ns.ShowRank(mark, glow, kind, level)
     return rank
 end
 
--- A cast bar running on the game's own timer, for when it keeps the cast's times secret. Returns true when
--- the game took it over.
+-- A cast whose times the game keeps to itself (an enemy's, in a fight). Its bar still has to fill, so each of
+-- these is tried in turn, and what was used and why the ones before it were not is kept for the reports:
+--   1. the cast's duration, as the game hands it out: its elapsed time is read every frame and passed to the
+--      bar unseen, the way health the game hides is ("elapsed")
+--   2. the bar's own timer, run by the game on that duration ("timer")
+--   3. the spell's own cast time, from the moment we saw the cast begin ("spell length", an estimate)
+--   4. how long this kind of unit took over a cast the last time we watched one through ("learned", an estimate)
+--   5. none of it known: a dim full bar that only says "casting"
+ns.castRoutes, ns.castWhy, ns.castLearned = {}, {}, {}
+local function Took(route)
+    ns.castRoutes[route] = (ns.castRoutes[route] or 0) + 1
+    ns.castRoute = route
+    return route
+end
+ns.CastTook = Took
+local function Why(stage, err)
+    err = tostring(err)
+    if ns.castWhy[stage] ~= err then
+        ns.castWhy[stage] = err
+        ns.Note("cast bars: %s was not to be had (%s)", stage, err)
+    end
+end
+
+-- Returns "elapsed" or "timer" when the game runs the bar, false when it cannot. With "elapsed" the bar keeps
+-- the duration (bar.duration) and whoever shows it calls ns.CastTick(bar) every frame.
 function ns.GameCastTimer(bar, unit, channel)
+    bar.duration, bar.durationChannel = nil, nil
     local get = channel and UnitChannelDuration or UnitCastingDuration
-    if not (get and bar.fill.SetTimerDuration) then return false end
-    local ok = pcall(function()
-        local duration = get(unit)
-        if not duration then error("no duration") end
-        bar.fill:SetTimerDuration(duration)
+    if not get then
+        Why("the cast's duration", "this game has no function for it")
+        return false
+    end
+    local okD, duration = pcall(get, unit)
+    if not okD then Why("the cast's duration", duration); return false end
+    -- (never tested as true or false: the game may hand it out as something that cannot be looked at)
+    if not ns.IsSecret(duration) and duration == nil then
+        Why("the cast's duration", "the game gave none for a unit that is casting")
+        return false
+    end
+    local ok, err = pcall(function()
+        bar.fill:SetMinMaxValues(0, duration:GetTotalDuration())
+        bar.fill:SetValue(channel and duration:GetRemainingDuration() or duration:GetElapsedDuration())
     end)
-    return ok
+    if ok then
+        bar.duration, bar.durationChannel = duration, channel and true or false
+        return Took("elapsed")
+    end
+    Why("the cast's elapsed time", err)
+    bar.fill:SetMinMaxValues(0, 1)
+    if not bar.fill.SetTimerDuration then
+        Why("the bar's own timer", "this game has none")
+        return false
+    end
+    -- which way it runs is said outright: a cast fills, a channel drains
+    local way = Enum and Enum.StatusBarTimerDirection
+    way = way and (channel and way.RemainingTime or way.ElapsedTime) or nil
+    ok, err = pcall(function()
+        if way ~= nil then bar.fill:SetTimerDuration(duration, nil, way) else bar.fill:SetTimerDuration(duration) end
+    end)
+    if ok then return Took("timer") end
+    Why("the bar's own timer", err)
+    return false
+end
+
+-- Every frame, for a bar that runs on the cast's own duration: where the cast is now
+function ns.CastTick(bar)
+    local d = bar.duration
+    if not d then return end
+    local ok, v = pcall(bar.durationChannel and d.GetRemainingDuration or d.GetElapsedDuration, d)
+    if ok then pcall(bar.fill.SetValue, bar.fill, v) end
+end
+
+-- How long a kind of unit takes over a cast, watched on our own clock from the cast's start to its landing
+-- (the game does not hide when those happen). Kept by the unit's name: the last cast we saw through.
+local function Who(unit)
+    local ok, name = pcall(UnitName, unit)
+    if ok and type(name) == "string" and not ns.IsSecret(name) and name ~= "" then return name end
+end
+local began, learnedCount = {}, 0
+local learner = CreateFrame("Frame")
+for _, event in ipairs({ "UNIT_SPELLCAST_START", "UNIT_SPELLCAST_SUCCEEDED", "UNIT_SPELLCAST_STOP",
+                         "UNIT_SPELLCAST_INTERRUPTED", "UNIT_SPELLCAST_FAILED" }) do
+    pcall(learner.RegisterEvent, learner, event)
+end
+learner:SetScript("OnEvent", function(_, event, unit)
+    if type(unit) ~= "string" or unit == "player" then return end
+    local now = GetTime()
+    if event == "UNIT_SPELLCAST_START" then
+        began[unit] = { at = now, who = Who(unit) }
+    elseif event == "UNIT_SPELLCAST_STOP" then                -- (comes with the landing, before it or after)
+        if began[unit] then began[unit].stopped = now end
+    elseif event == "UNIT_SPELLCAST_SUCCEEDED" then
+        local b = began[unit]
+        began[unit] = nil
+        if b and b.who and b.who == Who(unit) and (not b.stopped or now - b.stopped < 0.3) then
+            local took = (b.stopped or now) - b.at
+            if took > 0.4 and took < 15 then
+                if not ns.castLearned[b.who] then
+                    learnedCount = learnedCount + 1
+                    if learnedCount > 300 then ns.castLearned, learnedCount = {}, 1 end
+                end
+                ns.castLearned[b.who] = took
+            end
+        end
+    else
+        began[unit] = nil
+    end
+end)
+
+-- How long the spell a unit is casting takes (seconds; nil when that cannot be known), and how it is known:
+-- by the spell itself, or by what this kind of unit took the last time. For a cast whose times the game
+-- keeps to itself and gives no duration for: its bar then fills from the moment we saw the cast begin. An
+-- estimate: haste and pushback are not in it.
+function ns.CastLength(unit)
+    local _, spellID = ns.CastLook.Casting(unit)
+    local ms
+    if spellID and not ns.IsSecret(spellID) then
+        if C_Spell and C_Spell.GetSpellInfo then
+            local ok, info = pcall(C_Spell.GetSpellInfo, spellID)
+            if ok and type(info) == "table" then ms = info.castTime end
+        end
+        if ms == nil and GetSpellInfo then
+            local ok, _, _, _, t = pcall(GetSpellInfo, spellID)
+            if ok then ms = t end
+        end
+    end
+    if type(ms) == "number" and not ns.IsSecret(ms) and ms > 0 then
+        ns.castRoute = "spell length"
+        return ms / 1000
+    end
+    local who = Who(unit)
+    local learned = who and ns.castLearned[who]
+    if learned then
+        ns.castRoute = "learned"
+        return learned
+    end
+    ns.castRoute = "unknown"
+    return nil
+end
+
+-- For the reports: how enemy cast bars were run, and why not better
+function ns.CastRoutes()
+    local out, n = {}, 0
+    for _ in pairs(ns.castLearned) do n = n + 1 end
+    out[1] = ("the last hidden cast ran on: %s; the game ran %d by elapsed time and %d by its timer; lengths learned by watching: %d"):format(
+        tostring(ns.castRoute or "none yet"), ns.castRoutes.elapsed or 0, ns.castRoutes.timer or 0, n)
+    for stage, why in pairs(ns.castWhy) do out[#out + 1] = ("%s: %s"):format(stage, why) end
+    return out
 end
 
 -- A health colour that runs from green through yellow to red as health drops (frac 0-1)
@@ -396,6 +734,83 @@ function ns.HealthGradientFor(unit)
         return UnitHealthPercent(unit, true, curve)
     end)
     if ok and color and color.GetRGB then return color:GetRGB() end
+end
+
+---------------------------------------------------------------------------
+-- Execute range: an enemy at a quarter of its health or less. Its bar throbs red, a glow round it beating like a
+-- pulse, so you know it is open to an Execute, a Hammer of Wrath, a killing blow.
+---------------------------------------------------------------------------
+ns.EXECUTE = 0.25
+
+-- Is it in range? true or false where health can be read. Where the game keeps health to itself, the game is
+-- asked on a curve of its own and answers with something only a frame can take (1 in range, 0 not), which is
+-- handed on as it is; nil when even that cannot be had.
+local execCurve
+function ns.ExecuteState(unit, frac)
+    if type(frac) == "number" and not ns.IsSecret(frac) then return frac > 0 and frac <= ns.EXECUTE end
+    if not (C_CurveUtil and C_CurveUtil.CreateCurve and UnitHealthPercent) then return nil end
+    local ok, a = pcall(function()
+        if not execCurve then
+            execCurve = C_CurveUtil.CreateCurve()
+            if execCurve.SetType and Enum and Enum.LuaCurveType and Enum.LuaCurveType.Step then
+                execCurve:SetType(Enum.LuaCurveType.Step)
+            end
+            execCurve:AddPoint(0, 1)
+            execCurve:AddPoint(ns.EXECUTE, 1)
+            execCurve:AddPoint(ns.EXECUTE + 0.0001, 0)
+            execCurve:AddPoint(1, 0)
+        end
+        return UnitHealthPercent(unit, true, execCurve)
+    end)
+    if ok and a ~= nil then return a end
+    return nil
+end
+
+local executing = {}
+local execDriver = CreateFrame("Frame")
+local function ExecPulse()
+    local now, calm = GetTime(), ns.Calm and ns.Calm()
+    local any = false
+    for bar in pairs(executing) do
+        any = true
+        local beat = calm and 0.5 or (0.5 + 0.5 * math.sin(now * 6.5))    -- about a beat a second
+        local e = bar.exec
+        e.glow:SetAlpha(0.35 + 0.45 * beat)
+        e.tint:SetAlpha(0.12 + 0.28 * beat)
+    end
+    if not any then execDriver:SetScript("OnUpdate", nil) end
+end
+
+-- state: true, false, the game's own answer (see ns.ExecuteState), or nil (not known: off)
+function BarMethods:SetExecute(state)
+    if not state then
+        if self.exec then self.exec:Hide() end
+        executing[self] = nil
+        return
+    end
+    if not self.exec then
+        local e = CreateFrame("Frame", nil, self)
+        e:SetAllPoints(self)
+        e:SetFrameLevel((self.over and self.over:GetFrameLevel() or self:GetFrameLevel()) + 1)
+        e.glow = e:CreateTexture(nil, "BACKGROUND")               -- a red glow round the bar, beating
+        e.glow:SetTexture(ns.media.soft)
+        e.glow:SetBlendMode("ADD")
+        e.glow:SetVertexColor(1, 0.12, 0.08, 1)
+        e.glow:SetPoint("TOPLEFT", self, "TOPLEFT", -10, 8)
+        e.glow:SetPoint("BOTTOMRIGHT", self, "BOTTOMRIGHT", 10, -8)
+        e.tint = e:CreateTexture(nil, "OVERLAY")                  -- and the bar itself throbbing red with it
+        e.tint:SetTexture(ns.media.bar)
+        e.tint:SetBlendMode("ADD")
+        e.tint:SetVertexColor(1, 0.1, 0.05, 1)
+        e.tint:SetAllPoints(self)
+        self.exec = e
+    end
+    self.exec:Show()
+    if state == true then self.exec:SetAlpha(1) else pcall(self.exec.SetAlpha, self.exec, state) end
+    self.executeState = state
+    executing[self] = true
+    execDriver:SetScript("OnUpdate", ExecPulse)
+    ExecPulse()
 end
 
 -- Share of the bar that is filled (0-1), or nil when the game keeps the value secret.

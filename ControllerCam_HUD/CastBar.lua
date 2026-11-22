@@ -6,6 +6,7 @@ local ADDON, ns = ...
 local L, C, U = ns.L, ns.colors, ns.Unit
 
 local CB = { active = false }
+CB.TIME_ROOM = 44              -- what the time under the bar's right end takes
 ns.CastBar = CB
 
 ns.RegisterSetting({
@@ -25,6 +26,12 @@ ns.RegisterSetting({
     key = "castScale", kind = "number", default = 1.35, min = 0.8, max = 2, percent = true, command = "castsize",
     section = "Frames", label = "Cast bar size",
     tip = "how large your cast bar is drawn, with the fishing float and everything else that plays on it",
+})
+
+ns.RegisterSetting({
+    key = "castUpright", kind = "boolean", default = false, command = "castupright", section = "Frames",
+    label = "Cast bar beside the vertical bars",
+    tip = "with the vertical bars on, your cast runs on a slim upright bar on the right of your mana, with a small timer and no text, in place of the cast bar under you (fishing keeps its own)",
 })
 
 ns.RegisterSetting({
@@ -81,6 +88,8 @@ local function Build()
     end
     frame.catch = ns.FontString(frame, 10, "LEFT")
     frame.catch:SetPoint("TOPLEFT", bar, "BOTTOMLEFT", 8, -5)
+    frame.catch:SetPoint("TOPRIGHT", bar, "BOTTOMRIGHT", -CB.TIME_ROOM, -5)    -- clear of the time beside it
+    if frame.catch.SetWordWrap then frame.catch:SetWordWrap(false) end
     frame.catch:SetTextColor(unpack(C.muted))
     frame.catchIcon = frame:CreateTexture(nil, "ARTWORK")
     frame.catchIcon:SetSize(18, 18)
@@ -88,10 +97,14 @@ local function Build()
     frame.catchIcon:SetTexCoord(0.08, 0.92, 0.08, 0.92)
     frame.catch:Hide()
     frame.catchIcon:Hide()
+    -- the name over the bar, the whole width of it (a longer one ends in "..." rather than run past the bar); the
+    -- time under the bar at its right end, out of the name's way
     frame.label = ns.FontString(frame, 11, "LEFT")
     frame.label:SetPoint("BOTTOMLEFT", bar, "TOPLEFT", 8, 4)
+    frame.label:SetPoint("BOTTOMRIGHT", bar, "TOPRIGHT", -8, 4)
+    if frame.label.SetWordWrap then frame.label:SetWordWrap(false) end
     frame.time = ns.FontString(frame, 10, "RIGHT")
-    frame.time:SetPoint("BOTTOMRIGHT", bar, "TOPRIGHT", -8, 4)
+    frame.time:SetPoint("TOPRIGHT", bar, "BOTTOMRIGHT", -8, -5)
     frame.time:SetTextColor(unpack(C.muted))
     frame:Hide()
     CB.frame, CB.bar = frame, bar
@@ -137,9 +150,43 @@ local function Place()
     end
 end
 
+---------------------------------------------------------------------------
+-- Upright, beside the vertical bars (an option): the same cast on a slim bar on the right of your mana, a small
+-- timer on top and no text; the cast bar under you then stands aside (it still runs, unseen). Never for
+-- fishing, whose float and line need the long bar.
+---------------------------------------------------------------------------
+local function UprightFrame()
+    local UF = ns.UnitFrames
+    local v = UF and UF.frames and UF.frames.vertical
+    if not (ns.db.castUpright and v and v.on and v.upCast) or CB.fishing or CB.demo then return nil end
+    return v
+end
+
+local function UpHide()
+    local v = CB.up
+    CB.up = nil
+    if frame then frame:SetAlpha(1) end
+    if v then v.upCast:Hide(); v.upCastTime:Hide() end
+end
+
+local function UpShow(color)
+    local v = UprightFrame()
+    if not v then UpHide(); return end
+    CB.up = v
+    frame:SetAlpha(0)
+    v.upCast:SetColor(unpack(color))
+    v.upCast.fill:SetMinMaxValues(0, 1)
+    v.upCast.fill:SetAlpha(1)
+    v.upCast:Show()
+    v.upCastTime:SetText("")
+    v.upCastTime:Show()
+end
+CB.UprightFrame = UprightFrame
+
 local function Stop()
     frame:SetScript("OnUpdate", nil)
     frame:Hide()
+    UpHide()
     CB.casting, CB.until_, CB.fishing, CB.look, CB.nextFx = false, nil, false, nil, nil
     bar.charge:SetAlpha(0)
     bar.bobber:Hide()
@@ -174,6 +221,10 @@ local function OnUpdate()
     local fill = CB.channel and (1 - p) or p
     local share = fill
     bar.fill:SetValue(fill)
+    if CB.up then
+        CB.up.upCast.fill:SetValue(fill)
+        CB.up.upCastTime:SetText(("%.1f"):format(CB.stop - now))
+    end
     CB.art:Update(fill, p, now)
     if not CB.channel and not CB.fishing and not CB.demo and ns.Rumble then ns.Rumble:Build(p) end   -- felt as it builds
     frame.time:SetText(("%.1f"):format(CB.stop - now))
@@ -198,7 +249,7 @@ local function OnUpdate()
     if CB.fishing then
         return                                -- the float is the show
     end
-    if ns.db.castWindup and not CB.channel then
+    if ns.db.castWindup and not CB.channel and not ns.Calm() then
         -- the wind-up: the glow builds, the spark grows, and it pulses when the cast is about to land
         local k = p * p
         local pulse = p > 0.85 and (0.15 * math.sin(now * 30)) or 0
@@ -217,6 +268,11 @@ function CB:Result(failed)
     self.casting, self.timed = false, false
     self.art:Finish(not failed, GetTime())
     if ns.Rumble and not self.demo then ns.Rumble:BuildEnd(not failed) end
+    if self.up then
+        self.up.upCastTime:SetText("")
+        if failed then self.up.upCast:SetColor(unpack(C.danger)); self.up.upCast.fill:SetValue(1)
+        else self.up.upCast.fill:SetValue(self.channel and 0 or 1); self.up.upCast:Flash(0.2) end
+    end
     if failed then
         bar:SetColor(unpack(C.danger))
         frame.label:SetText(L["Interrupted"])
@@ -232,7 +288,7 @@ function CB:Result(failed)
     bar.bobber:Hide()
     HideLine()
     frame.time:SetText("")
-    self.until_ = GetTime() + LINGER
+    self.until_ = GetTime() + math.max(LINGER, self.art:Ending())    -- (a bar that crumbles takes a moment longer)
     frame:SetScript("OnUpdate", OnUpdate)
 end
 
@@ -256,14 +312,17 @@ function CB:Refresh()
     bar.fill:SetMinMaxValues(0, 1)
     bar.trail:SetValue(0)
     frame:Show()
+    UpShow(color)
     if ns.IsSecret(startMS) or ns.IsSecret(endMS) or not startMS or not endMS or endMS <= startMS then
         self.timed = false
         bar.fill:SetValue(1)
+        if self.up then self.up.upCast.fill:SetValue(1); self.up.upCast.fill:SetAlpha(0.5) end
         frame.time:SetText("")
         self.art:Stop()                                 -- nothing to follow along the bar
     else
         self.timed, self.start, self.stop = true, startMS / 1000, endMS / 1000
         self.art:Start(self.fishing and WATER or self.look)
+        self.art.began = self.start                     -- (a pick swings on the second, counted from here)
     end
     if ns.Debug then
         local said = ("%s, kind %s, animation %s"):format(tostring(ns.Plain(cname)), tostring(self.look and self.look.kind),
@@ -376,7 +435,7 @@ CB.FISHING = FISHING
 ---------------------------------------------------------------------------
 -- /cchud casttest: every kind of cast once, a short made-up cast each
 ---------------------------------------------------------------------------
-CB.DEMO = { "mining", "crafting", "herbs", "nature", "lightning", "roots", "heal", "arcane", "fire", "frost", "shadow",
+CB.DEMO = { "mining", "crafting", "herbs", "skinning", "nature", "lightning", "roots", "heal", "arcane", "fire", "frost", "shadow",
             "holy", "physical", "fishing" }
 
 function CB:DemoNext()

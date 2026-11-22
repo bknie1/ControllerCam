@@ -3,6 +3,10 @@ an
 aus
 Verwendung:
 Änderungen werden nach dem Kampf übernommen.
+Die des Spiels
+Schriftarten lassen sich nur wählen, wo die Sprache des Spiels in lateinischen Buchstaben geschrieben wird.
+Schriftart: %s
+eine Schriftart für das HUD und die eigenen Texte des Spiels (Fenster, Tooltips, Chat, Tasten); alles behält seine Größe
 Feuerball
 Befreundeter Magier
 Heilung
@@ -10,25 +14,56 @@ Haustier
 Trainingspuppe
 Befreundeter Heiler
 Spieler
+Freundliche NPCs nach Ruf
+Name und Leiste eines freundlichen NPCs zeigen deinen Ruf bei seiner Fraktion: gelb neutral, grün freundlich, dann meergrün, türkis und blau für wohlwollend, respektvoll und ehrfürchtig
+Hinrichtungsbereich auf feindlichen Leisten
+ein Feind bei einem Viertel seiner Gesundheit oder weniger: seine Gesundheitsleiste pocht rot, mit einem Leuchten darum, das wie ein Puls schlägt, auf Ziel- und Fokusrahmen und auf Namensplaketten
+Schilde auf Gesundheitsleisten
+wie viel ein Schild auf einer Einheit noch abfängt, als silberblaues Band vom fernen Ende ihrer Gesundheitsleiste: auf deinen Rahmen, dem deines Ziels, deiner Gruppe und auf Namensplaketten
+Zufriedenheit des Begleiters
+neben der Begleiterleiste ein schmales Band in der Farbe der Laune deines Begleiters: grün glücklich, gelb zufrieden, rot unglücklich, mit Futter daneben, wenn er gefüttert werden muss. Nichts bei einem Begleiter ohne Laune
 Vertikale Balken folgen der Kamera
 die vertikalen Balken behalten ihren Platz neben deinem Charakter, während die Kamera ein- und auszoomt (platziere sie im Bearbeitungsmodus in einem Abstand, der dir gefällt)
 Nachnamen
 der volle Name eines Spielers auf den Einheitenfenstern und Namensplaketten, mit Nachnamen: Faith Ashborne
 Gesundheit auf der Zielleiste
 die verbleibende Gesundheit (12.3k) und der Prozentwert auf Ziel- und Fokusleiste; ein kompaktes Ziel zeigt nur den Prozentwert
+Schläfrig beim Ausruhen
+in einem Gasthaus oder einer Stadt döst dein Rahmen: kleine Z steigen auf und ein sanftes Mondlicht atmet um ihn (nie im Kampf)
 Ziel
 Ziel des Ziels
 Fokus
 Vertikale Balken
 %d Gegenstände eingezahlt
+%d Gegenstände aus der Bank genommen
 %d Gegenstände für %s verkauft (/cchud sold listet sie auf)
 Nichts zu verkaufen.
 Öffne zuerst die Bank.
+Nichts zu holen: Die Bank hat nichts von dem, was du trägst.
+Abheben
+nimmt aus der Bank, wovon du schon etwas trägst (Materialien, Tränke, Essen), um deine Taschen aufzufüllen
+Einlagern
+legt in die Bank, wovon sie schon etwas hat, und was du für sie markiert hast
+Öffne zuerst einen Händler.
+Schlau verkaufen
+verkauft, wofür ein Händler am meisten zahlt: Plunder und was im Auktionshaus nicht mehr bringt (erst aufgelistet und bestätigt); was im Auktionshaus mehr wert ist oder deine Berufe noch brauchen, bleibt
 Nichts einzulagern: deine Bank hat nichts von dem, was du trägst, und nichts ist für sie markiert.
 Nichts ist für die Bank markiert. Zeige auf einen Gegenstand und nutze Gegenstand markieren.
-Öffne zuerst einen Händler.
-Plunder verkaufen: %d Gegenstände für %s.\n\nOder Waffen und Rüstung nach Qualität verkaufen.
-Plunder verkaufen
+%d Gegenstände, %s
+...und %d weitere
+An den Händler verkaufen: %s
+Noch keine Auktionspreise: besuche einmal das Auktionshaus.
+Behalten: im Auktionshaus mehr wert
+Behalten für deine Berufe
+Behalten für deine Quests
+Öffne diese Berufsfenster einmal, damit ihre Fertigkeitspunkte zählen: %s
+Für die besten Schätzungen öffne ab und zu deine Berufsfenster und das Auktionshaus.
+Was verkaufen?\n\nPlunder: %s\nMit weißen Waffen und Rüstungen: %s\nMit grünen Waffen und Rüstungen: %s\n\nNach einem Besuch im Auktionshaus gibt es hier auch Empfehlungen.
+Plunder
++ Weiße Ausrüstung
++ Grüne Ausrüstung
+Was verkaufen?\n\nEmpfohlen: %s an den Händler. %d Gegenstände bleiben, weil sie im Auktionshaus mehr wert sind, %d, weil deine Berufe sie noch brauchen.\nNur Plunder: %s
+Empfohlen
 Nach Qualität
 Waffen und Rüstung bis zu welcher Qualität verkaufen?\n\nGewöhnlich (weiß): %s\nUngewöhnlich (grün): %s
 Gewöhnlich
@@ -44,6 +79,8 @@ Zeige zuerst auf einen Gegenstand.
 Schnelles Verschieben: Gegenstand, auf den du zeigst, verkaufen, einzahlen, handeln oder verschicken
 Gegenstand markieren: Plunder / behalten / Bank / keine Markierung
 Einlagern: in die Bank, was sie schon hat, und was du für sie markiert hast
+Abheben: aus der Bank nehmen, wovon du schon etwas trägst
+Schlau verkaufen: wofür ein Händler am meisten zahlt, erst aufgelistet und bestätigt
 In dieser Sitzung wurde noch nichts verkauft.
 Über den Rückkauf-Reiter eines Händlers kannst du sie bis zum Ausloggen zurückkaufen.
 Für %s aus der Gildenbank repariert
@@ -56,6 +93,23 @@ repariert alles, sobald sich ein Händler mit Reparaturservice öffnet
 Aus der Gildenbank reparieren
 bezahlt Reparaturen aus der Gildenbank, wenn deine Gilde es erlaubt, sonst mit deinem eigenen Gold
 listet auf, was in dieser Sitzung für dich verkauft wurde, um etwas zurückzukaufen
+1 Gegenstand
+%d Gegenstände
+Nichts im Briefkasten zu holen.
+Briefkasten: %s entnommen.
+ und 
+Briefe mit Nachnahme, für dich zum Öffnen liegen gelassen: %d
+Deine Taschen sind voll: die übrigen Gegenstände warten in ihren Briefen.
+Gegenstände, die das Spiel nicht herausgab (einzigartig oder verweigert), in ihren Briefen gelassen: %d
+Warte auf weitere...
+Öffne zuerst einen Briefkasten.
+Wird entnommen...
+Alles nehmen
+nimmt Geld und Gegenstände aus jedem Brief, Auktionsverkäufe eingeschlossen, auf jeder Seite (erneut drücken zum Anhalten); Briefe mit Nachnahme bleiben unberührt
+Alles aus dem Briefkasten nehmen (erneut drücken zum Anhalten)
+Alles aus dem Briefkasten nehmen
+ein Knopf neben Alle öffnen am Briefkasten: nimmt Geld und Gegenstände aus jedem Brief, Auktionsverkäufe eingeschlossen, auf jeder Seite; Briefe mit Nachnahme bleiben unberührt
+nimmt Geld und Gegenstände aus jedem Brief im offenen Briefkasten (erneut zum Anhalten)
 Tasche
 Bank
 Du
@@ -79,9 +133,21 @@ vor %d Stunden
 vor %d Tagen
 Händler
 Am besten
+Rezepte
 Auktion
-Auktionshaus
+Empfehlung
+Anlegen
+Quest
 Behalten
+besser als das, was du trägst
+%s für %s
+verarbeitet zu %s
+%d%% Verkaufschance
+Kosten
+Auktionshaus
+Fertigkeitspunkt: %s
+Quest: %s
+verkauft sich zu %d%%
 5% unter dem niedrigsten Preis, für einen schnellen Verkauf
 der Markt ist heute ungewöhnlich niedrig: nahe am üblichen Preis angesetzt, um auf Käufer zu warten
 knapp unter dem niedrigsten Preis: wenige im Angebot, sollte sich verkaufen
@@ -100,10 +166,33 @@ das niedrigste Sofortkaufangebot, das du für einen Gegenstand im Auktionshaus g
 Auktionshaus beim Besuch lesen
 der erste Besuch nach einer Weile liest alle Preise auf einmal (das Spiel erlaubt es alle 15 Minuten); /cchud scan fragt danach
 Beste Verwendung eines Gegenstands
-der Tooltip eines Gegenstands sagt, was damit zu tun ist: im Auktionshaus verkaufen (und wie viel mehr das bringt), beim Händler verkaufen oder behalten
+der Tooltip eines Gegenstands sagt, was du damit tun sollst: im Auktionshaus verkaufen (und wie viel mehr das bringt), an einen Händler verkaufen, behalten oder für eine Quest behalten
 Schnellverkäufe im Auktionshaus
 Preis 5% unter dem niedrigsten für einen Verkauf jetzt; aus: geduldige Preise, knapp unter dem niedrigsten, die sich verkaufen, wenn Käufer kommen
 liest alle Preise im Auktionshaus auf einmal (vorher öffnen; alle 15 Minuten)
+Stellt her: %s
+Behalten, was deine Berufe noch brauchen
+ein Gegenstand, für den ein Rezept eines deiner Charaktere noch einen Fertigkeitspunkt gibt (orange und gelbe Rezepte, wie das Spiel sie im Fenster des Berufs zeigt), oder aus dem sich etwas herstellen lässt, das im Auktionshaus mehr wert ist als er selbst, wird behalten statt verkauft, und sein Tooltip sagt, warum. Die Rezepte werden gelesen, wenn das Fenster eines Berufs offen ist
+Zu sammeln oder zu kaufen
+%d-mal herstellen: %s
+%s: du hast %d, der Plan braucht %d
+für %s
+Levelplan: %s %d > %d
+eine Schätzung nach den Farben der Rezepte, neu berechnet, während du aufsteigst
+Am Maximum: Ein Lehrer hat die nächste Stufe.
+%d Punkte gibt keines deiner Rezepte: Lerne neue bei einem Lehrer
+Levelplan
+Öffne das Fenster eines Berufs, um einen Plan zu erstellen.
+Das farmen
+Alles farmen
+Zurück
+Plan bedienen
+%d zur Farmliste hinzugefügt.
+Nichts fehlt: Du hast alles, was nötig ist.
+Levelplan: zeigen / verbergen
+Levelplan neben dem Berufsfenster
+solange das Fenster eines Berufs offen ist, sagt eine Tafel daneben, welche Rezepte du wie oft herstellen solltest, um das Maximum zu erreichen, und was das braucht, bis hinunter zu Erz und Kräutern; eine Schätzung nach den Farben der Rezepte
+zeigt den Levelplan des zuletzt geöffneten Berufsfensters, mit den Tasten des Controllers darauf
 AK
 Distanz-AK
 krit.
@@ -112,7 +201,7 @@ Gesundheit
 Mana
 Zauberkrit.
 Was Werte dir bringen
-jede Wertezeile im Tooltip eines Gegenstands bekommt ihren Wert für deinen Charakter: Angriffskraft, Distanzangriffskraft, kritische Trefferchance, Ausweichen, Gesundheit, Mana
+unter dem Tooltip eines Gegenstands seine Werte-Zeilen mit ihrem Wert für deinen Charakter: Angriffskraft, Distanzangriffskraft, kritische Treffer, Ausweichen, Gesundheit, Mana
 Gegenstandsstufe
 Benötigte Stufe
 Stapelt bis
@@ -128,28 +217,46 @@ zeigt alles über den Gegenstand, auf den du zeigst (oder den angegebenen): Prei
 +%s gegenüber einem Händler
 noch kein Preis bekannt
 ein Händler zahlt genauso viel
+Der Makler
 Markt
+jede Münze gezählt, Freund
 Einstellen
 Geduldig
 Alle Preise lesen
+Behaltenes zeigen
 In deinen Taschen lässt sich hier nichts verkaufen.
 Noch keine Preisgeschichte: lies das Auktionshaus an ein paar Tagen.
+Erst ein Tag Preise: Die Linie wächst mit jedem Tag, an dem du das Auktionshaus besuchst.
+Verlangt %s pro Stück, %s für alle %d
 Niedrigster
+gelesen %s
 Üblich
-Im Angebot
+7 Tage: %s bis %s
+Eingestellt: %d Auktionen, %d Gegenstände
+%s pro Stück, %s für alle %d
+Du hast hier %d eingestellt, %d Auktionen verkauft
 Kein Preis bekannt: lies zuerst das Auktionshaus.
 %d lohnen sich hier, %d weitere möglich
 %d Preise bekannt, alle gelesen %s
 nie
+Das Beste zuerst: der größte Gewinn gegenüber einem Händler pro Stück
+was du behältst, wird auch gelistet (%s verbirgt es)
+%d behalten (für deine Berufe, zum Tragen oder markiert), nicht gelistet (%s zeigt sie)
+Behaltenes verbergen
+pro Stück
 keine Daten
 Schnellverkauf
-Zurück
 %d für %s einstellen
+Alle %d für %s einstellen
 In das Auktionshaus dieses Clients kann von hier aus nicht eingestellt werden.
 %d für %s eingestellt.
 Markt im Auktionshaus: öffnen / schließen
 Markt-Reiter im Auktionshaus
 ein Markt-Reiter im Auktionshaus: was sich aus deinen Taschen dort zu verkaufen lohnt und warum, daneben ein Preisverlauf, und Einstellen mit einem Druck
+Gruß des Auktionators im Markt
+ein Goblin-Auktionator sagt einen kurzen Satz aus den Klängen des Spiels, wenn der Markt öffnet; aus: er öffnet still
+Markt: zeigen, was du behältst
+der Markt listet auch, was du behältst: woraus deine Berufe noch lernen oder etwas Wertvolleres herstellen, und was du zum Behalten markiert hast; aus: nur, was du verkaufen würdest
 den Markt öffnen oder schließen (ein Reiter des Auktionshauses)
 welches Auktionshaus dieser Client hat (zur Fehlersuche)
 Offline
@@ -169,12 +276,14 @@ Zauberleiste
 unsere Zauberleiste anstelle der des Spiels (sie bleibt dort, wo der Bearbeitungsmodus die des Spiels platziert)
 Größe der Zauberleiste
 wie groß deine Zauberleiste gezeichnet wird, mit dem Schwimmer beim Angeln und allem anderen, was darauf spielt
+Zauberleiste neben den senkrechten Leisten
+mit den senkrechten Leisten läuft dein Zauber auf einer schmalen aufrechten Leiste rechts neben deinem Mana, mit kleinem Zeitgeber und ohne Text, anstelle der Zauberleiste unter dir (das Angeln behält seine eigene)
 Angeln im Mittelpunkt
 solange du angelst, rückt die Zauberleiste in die Bildschirmmitte und wird größer gezeichnet: Schnur, Schwimmer und was hier beißt sind die Hauptsache
 Wähle zuerst ein Ziel.
 %d Effekte aufgelistet und gespeichert. Tippe /reload, damit das Spiel sie speichert.
 Deine Effekte auf dem Ziel
-eine Reihe deiner eigenen Schwächungs- oder Stärkungszauber unter der Zielleiste
+eine Reihe unter der Zielleiste: deine Schwächungen auf einem Feind, die Stärkungen eines Freundes (alle, egal wer sie gewirkt hat)
 Gegnerische Buffs am Ziel
 die Stärkungen eines feindlichen Ziels, rechts unter seiner Leiste: die wichtigen, oder alle, wenn Nur die Effekte, die zählen aus ist
 Nur die Effekte, die zählen
@@ -235,7 +344,7 @@ die Plaketten freundlicher NPCs (Händler, Questgeber, Stadtbewohner) erscheinen
 Namen über Dingen, mit denen du interagieren kannst
 ein Name über Erz, Truhen, Tafeln und dergleichen, solange du ihnen zugewandt bist (aus: sie bleiben ohne Namen, die Anzeige des Spiels sagt bereits, was sie sind)
 Mini-Namensplaketten
-Diener, Kleintiere und graue Feinde, die keine Erfahrung geben, bekommen eine kleine Plakette: eine schmale Leiste und den Namen, mehr nicht (ob sie überhaupt Plaketten haben, entscheidet die Spieloption)
+Diener, Kleintiere und graue Gegner ohne Erfahrung bekommen eine kleine Plakette: eine schmale Leiste mit deinen Schwächungen darauf und ohne Namen (ein Kleintier ohne Leiste behält seinen Namen; ob sie überhaupt Plaketten haben, entscheidet die Option des Spiels)
 Gruppen-Namensplaketten in Dungeons: nur Namen
 in einem Dungeon oder Schlachtzug zeichnet das Spiel die Namensplaketten freundlicher Spieler selbst, und Addons dürfen sie nicht ändern: dort werden die eigenen Optionen des Spiels so gesetzt, dass sie als klassenfarbige Namen ohne Leisten erscheinen, wie unsere, und im Kampf kommen die Leisten des Spiels zurück (wenn Leisten für Freunde im Kampf an sind); beim Verlassen wird alles zurückgestellt
 Gruppen-Namensplaketten in Dungeons: ausgeblendet
@@ -245,6 +354,8 @@ die Namensplaketten auf dem Bildschirm auflisten und ob sie unser Aussehen trage
 Zeige jede Schadensart einmal (die letzte als kritischer Treffer).
 Trefferpartikel
 Heiliges blitzt auf, Feuer steigt empor, Frostkristalle verweilen, Schatten qualmt, arkane Runen funkeln auf dem getroffenen Balken
+Wunden je nach Art des Gegners
+deine Treffer verwunden die Leiste eines Gegners auf seine eigene Art, umso mehr, je weniger Gesundheit er hat: Wildtiere, Humanoide und Drachkin bluten, Dämonen verspritzen Teufelsblut, Elementare zersplittern, Maschinen sprühen Funken, Untote zerfallen zu Asche
 Deine Leisten wackeln bei Treffern
 dein Spielerrahmen und deine senkrechten Leisten wackeln leicht, in der Schule des Treffers, wenn du Schaden nimmst
 Treffereffekte nach Schadensart
@@ -256,8 +367,32 @@ Heilung über Zeit wächst auf der Leiste
 Wurzeln und Zweige (Natur) oder goldene Fäden (Heilig) wachsen über die Leiste deines Ziels, Fokus oder dir, solange eine Heilung über Zeit wirkt, und welken, wenn sie endet
 Schilde als Schutzzeichen zeigen
 ein Schild auf deinem Ziel, deinem Fokus oder dir (Machtwort: Schild, Gottesschild, Eisbarriere...) flammt in der Farbe seiner Schule um die Gesundheitsleiste auf, leuchtet, solange der Schild hält, und verblasst, wenn er bricht
+%d absorbiert
+Abklingzeiten kommen zurück
 Stilisierte Zahlen auf dir
 erlittener Schaden und erhaltene Heilung springen auf wie deine eigenen Treffer, statt des scrollenden Texts des Spiels (folgt der Spieloption für Kampftext auf dir)
+Fähigkeiten bereit
+wenn eine Fähigkeit, die nur ein Moment erlaubt, einsetzbar wird (Mungobiss, Überwältigen, Rache, Riposte, Gegenangriff) oder das Spiel eine auf deiner Leiste aufleuchten lässt: ihr Name in fettem Rot kurz in der Bildschirmmitte
+deine Schlüsselfähigkeiten steigen in den letzten zwei Sekunden ihrer Abklingzeit neben deinem Charakter auf und wachsen, dann leuchten sie golden auf, sobald sie bereit sind (statt einer Abklingzeitleiste)
+Stärkungszauber laufen aus
+ein Stärkungszauber, den du auf dich selbst wirkst (ein Siegel, Heiliger Schild, ein Ruf oder Schild), meldet sich mit deinen Abklingzeiten, wenn er ausläuft, und in Rot, sobald er weg ist, auch wenn er vorher verbraucht wird
+Das des Spiels
+Punkt
+Ring
+Ring mit Punkt
+Fadenkreuz
+Winkel
+Weiß
+Klassenfarbe
+Nach Ziel
+Zielpunkt
+das Fadenkreuz in der Bildschirmmitte: das des Spiels, oder an seiner Stelle ein Punkt, Ring, Ring mit Punkt, Fadenkreuz oder Winkel des HUD (der Schlagtimer und die Aktionssymbole des Spiels bleiben, wie sie sind)
+Zielpunkt: Farbe
+weiß, deine Klassenfarbe oder die Farbe deines Ziels: rot für einen Feind, gelb für einen neutralen, grün für einen Freund (weiß ohne Ziel)
+Zielpunkt: Größe
+wie groß der Zielpunkt des HUD ist
+Zielpunkt: Deckkraft
+wie deckend der Zielpunkt des HUD ist
 Die Vibration des Spiels ist aus (oder dieser Controller kann nicht vibrieren).
 Jedes Vibrationsmuster wird einmal abgespielt.
 Vibrationsstärke
@@ -289,8 +424,55 @@ Richturteil
 Vibration: deine Schlüsselfähigkeiten
 die Schlüsselfähigkeiten jeder Klasse fühlen sich am Controller eigen an (ein Richturteil spritzt, ein Heiliger Stoß schnappt zu, Windzorn klopft dreimal)
 Große Momente
-selten wird ein wirklich besonderer Treffer groß und golden in der Bildschirmmitte angeheftet: kritische Treffer deiner Schlüsselfähigkeiten kurz nacheinander, ein kritischer Windzorn oder ein kritischer Treffer weit über dem Üblichen des Kampfes (höchstens zweimal pro Kampf)
+ein Ausbruch wird groß und golden in der Bildschirmmitte angeheftet: kritische Treffer direkt nacheinander, jeder innerhalb einer Sekunde nach dem letzten (ein Doppelschlag, Richturteil und Heiliger Stoß zusammen), mit dem, was sie zusammen bewirkt haben (höchstens zweimal pro Kampf)
 zeigt, wie ein großer Moment aussieht und sich anfühlt
+neu!
+Rekord!
+%d Std.
+%d Min.
+Stärkungen erhalten
+Fänge und Lager-Stärkungen quer über den Bildschirm
+die Fische, die du an Land ziehst, und die Stärkungen, die dir ein Lager oder ein Schrein gibt, werden quer über die obere Bildschirmmitte angekündigt: ein Fang schwappt herein wie eine Welle, Stärkungen fegen mit Glut herein
+Animationen reduzieren
+nichts auf dem Bildschirm wackelt, gleitet, fliegt oder platzt: Zauberleisten-Animationen, Treffereffekte, Bewegung der Namensplaketten, große Momente und die Anzeigen von Fängen und Stärkungen sind ruhig oder still. Die eigenen Einstellungen des Spiels für Bildschirmwackeln und unerwartete Kamerabewegung zählen ebenfalls
+zeigen, wie die Anzeigen eines Fangs und von Stärkungen aussehen
+Großmeister
+Meister
+Fachmann
+Experte
+Geselle
+Lehrling
+Stufe %d erreicht (von %d)
+Stufe %d erreicht
+%s und %d weitere besiegt in: %s
+%s besiegt
+%s: jetzt %s, bis %d
+%s hat %d erreicht
+%d neue Flugrouten, zuletzt %s
+Neue Flugroute: %s
+Neues Reittier: %s
+Neuer Begleiter: %s
+Neues Spielzeug: %s
+Erfolg: %s
+Das Lager
+In Ruhe
+Am Feuer
+Morgengrauen
+Morgen
+Nachmittag
+Abend
+Nacht
+%s in %s
+Mit %s
+Die Lagerfeuerszene ist aus.
+Die Lagerfeuerszene wartet, bis du nicht mehr im Kampf bist.
+Lagerfeuerszene
+sitz ein paar Sekunden still in einem Lager, und der Bildschirm wird für eine Minute zum Film: Die Kamera umkreist dich, deine großen Momente seit dem letzten Lager werden erzählt (Bosse, Stufen, Berufe, neue Reittiere), und zum Schluss die Stärkungen des Lagers, nach Klasse. Jede Bewegung oder Taste beendet ihn
+die Lagerfeuerszene jetzt abspielen
+erledigt
+%s: bereit zur Abgabe
+startet eine Quest
+eine deiner Quests
 bereit zur Abgabe
 über deiner Stufe
 braucht eine Gruppe
@@ -308,7 +490,37 @@ Questliste: nächste zuerst
 die Questliste nach Entfernung ordnen, die nächste Quest ganz oben
 Questliste: empfohlene Reihenfolge
 die Questliste in einer empfohlenen Reihenfolge halten: zuerst, was abgegeben werden kann, dann was du allein schaffst, das Nächste zuerst, dann Quests über deiner Stufe, Gruppenquests, solange du allein bist, und graue Quests zuletzt
+Questliste: kurze Ziele
+Ziele in der Questliste sagen nur das Nötige, mit einem Symbol für die Art davor: ein Schädel und 0/1 Kapitän Schreckhub, nicht 0/1 Kapitän Schreckhub getötet
+Questfortschritt im Chat
+eine kurze Zeile im Chat, sobald eine Quest vorankommt: Blutige Knochenketten: 4/25, ein Ziel erledigt, eine Quest bereit zur Abgabe
+Questfortschritt an deine Gruppe
+in einer Gruppe (nicht im Schlachtzug) gehen dieselben Zeilen in den Gruppenchat, damit die anderen sie sehen, jeweils kurz nacheinander; du siehst sie dort auch
+Behalten, was deine Quests brauchen
+ein Gegenstand, den eine Quest in deinem Log noch verlangt, oder einer, der eine Quest startet, die du noch machen kannst, wird als Quest markiert: nie für dich verkauft oder versteigert
 eine empfohlene Reihenfolge für deine Quests nennen: abgeben, was fertig ist, dann das Nächste, das du allein schaffst, dann der Rest
+Links der Quests
+Rechts der Quests
+Unter den Quests
+Die Farmliste ist voll.
+Farmliste: %s, %d gewünscht.
+Farmen
+%d weitere
+Noch nichts zu farmen.
+Einen Stapel mehr
+Entfernen
+Leeren
+Fertig
+Alles von der Farmliste nehmen?
+Farmliste: wählen / fertig
+Farmliste: den Gegenstand hinzufügen, auf den du zeigst
+Das steht nicht auf der Farmliste.
+Die Farmliste ist leer.
+Farmliste: wo sie sitzt
+Farmliste neben der Questliste
+Dinge, die du sammeln willst, mit wie vielen du hast und wie viele du willst: deine Taschen und Bank und die deiner anderen Charaktere auf diesem Realm. Füge die Reagenzien eines Levelplans mit einer Taste hinzu, oder jeden Gegenstand
+die Farmliste links der Questliste, rechts davon oder unter ihren Quests
+die Farmliste neben der Questliste: mit dem Controller wählen; add <Gegenstand> [wie viele], remove <Gegenstand>, clear, oder left / right / bottom für ihren Platz
 Nicht im Kampf.
 Dieser Client hat keine Gamepad-Leisten.
 Dieser Client erlaubt Addons keine Änderung; benutze den Bearbeitungsmodus.
@@ -321,17 +533,19 @@ Größe der Gamepad-Leisten
 Größe der Gamepad-Leisten bei aktiven schlanken Leisten, in Prozent
 die Gamepad-Leisten des Spiels im kompakten oder vollen Modus (wie die Einstellung im Bearbeitungsmodus)
 Ausblenden außerhalb des Kampfes
+/cchud fade <Teil> on | off stellt einen ein; all für das ganze Ausblenden.
 Gamepad-Leisten, Minikarte, Questliste, Schadensmesser und Erfahrungsleiste ruhen außerhalb des Kampfes gemeinsam und kommen für einen Kampf, einen gezogenen Trigger oder ein feindliches Ziel zurück
 Der Bildschirm in Ruhe
 wie sichtbar die ruhenden Teile des Bildschirms außerhalb des Kampfes bleiben (0 blendet sie aus)
-Ruht: Gamepad-Leisten
-Ruht: Minikarte
-Ruht: Questliste
-Ruht: Schadensmesser
-Ruht: Erfahrungsleiste
-Ruht: Stärkungszauber
-Ruht: Abklingzeit-Reihen
-ob dieser Teil des Bildschirms beim Ausblenden außerhalb des Kampfes mitmacht
+Blendet aus: Gamepad-Leisten
+Blendet aus: Minikarte
+Blendet aus: Questliste
+Blendet aus: Schadensmesser
+Blendet aus: Erfahrungsleiste
+Blendet aus: Stärkungszauber
+Blendet aus: Abklingzeit-Reihen
+ob dieser Teil des Bildschirms außerhalb des Kampfes mit dem Rest ausblendet (aus: er bleibt immer, wie er ist)
+das Ausblenden des Bildschirms außerhalb des Kampfes: was ausblendet (Minikarte, Questliste und der Rest), jedes an oder aus
 Gespeichert: gib /reload ein, damit das Spiel es auf die Festplatte schreibt.
 Haltungs- und Begleiterknöpfe über den Leisten
 die Knöpfe für Haltungen und Begleiterbefehle sitzen dort, wo die grünen und roten Zielsymbole waren, damit sich ihr Rad ganz im Bild öffnet; diese Symbole werden ausgeblendet
@@ -346,17 +560,24 @@ Der Controller sagt nicht, was er ist: die Symbole bleiben, wie das Spiel sie ha
 die Symbole, die das Spiel für die Tasten deines Controllers zeigt: auto (nach dem Controller in Gebrauch), xbox, playstation, switch, steam, generic (Zahlen) oder game, um sie zu lassen, wie das Spiel sie hat
 Abklingzeit-Reihen neben den Gamepad-Leisten
 die Abklingzeit-Reihen des Spiels sitzen unter dem Ziel statt auf den Gamepad-Tasten und sind etwas kleiner (nur bei den eingebauten Layouts des Spiels: bei einem eigenen Layout bleiben sie, wo du sie hingesetzt hast)
-Angeln: %s wirft aus
-Angelmodus: %s wirft deine Leine aus und hakt den Fisch, wenn der Schwimmer zuckt.
 Angelmodus: aus.
+Angeln: %s zum Auswerfen
+Kein Köder: %s zweimal für %s
+%s, um die Angel wegzustecken
+Angelmodus: %s zum Auswerfen, und noch einmal zum Anschlagen, wenn der Schwimmer zuckt.
+%s zum Anhauen, %s zum erneuten Auswerfen
 Der Angelmodus braucht eine Angelrute in deinen Händen.
 Du beherrschst Angeln nicht.
 Angelmodus: eine Taste wirft aus und hakt
 Angeltaste: %s
 Angeln mit einer Taste
-mit einer Angel in der Hand wirft deine Interaktionstaste die Angel aus, wann immer es nichts zum Interagieren gibt, und holt den Fisch ein, wenn der Schwimmer wippt; der Fang wird für dich aufgenommen
+mit einer Angel in der Hand: deine Interaktionstaste zum Auswerfen, wann immer es nichts zum Interagieren gibt, und noch einmal zum Anschlagen, wenn der Schwimmer zuckt; der Fang wird für dich genommen. B steckt die Angel weg und gibt dir deine Waffen zurück
+Mit einem Druck neu auswerfen
+solange der Schwimmer draußen ist, wirft deine Angeltaste mit einem Druck neu aus, und A haut den Fisch an (das Spiel gibt kein Zeichen für einen Biss, auf das man warten könnte, also kann eine Taste nicht beides); aus: die Angeltaste haut an, wie die Interaktion des Spiels
 Köder mit Doppeldruck
 drücke deine Angeltaste zweimal schnell: der zweite Druck bringt den besten Köder aus deinen Taschen an die Angel, wenn sie keinen hat
+Gamepad-Leisten beim Angeln ausblenden
+mit einer Angel in der Hand sind die Gamepad-Leisten ausgeblendet, damit das Wasser frei zu sehen ist; die Angelanzeige zeigt die Taste zum Auswerfen. Sie sind zurück, sobald ein Kampf beginnt oder die Angel weggesteckt wird
 Ein-Tasten-Angeln vorerst aus oder wieder an (mit einer Angel in der Hand ist es von selbst an)
 die Taste, die angelt: anfangs deine Interaktionstaste (Quadrat oder X) oder jede andere, zum Beispiel ein Trigger (rt)
 Durotars Küste ist roter Fels und warmes Flachwasser. Die Trolle der Echoinseln sagen, die Makrelen ziehen am dichtesten, wenn die Flut den Duft der Kochfeuer von den Inseln herüberträgt.
@@ -437,19 +658,18 @@ Dein bisher schwerster Fang – %s: %s (vorher %s).
 Angeltagebuch
 jeder Fang wird in dein Angeltagebuch geschrieben: wie viele von jeder Art, wo du sie zuerst gefangen hast, und ein zum Spaß erfundenes Gewicht mit deinem besten von jeder Art (/cchud journal öffnet es)
 Köder %s
-Kein Köder: drücke %s zweimal für %s
 Kein Köder
 Gefangen %d
 Entkommen %d
-neu!
-Rekord!
 Angelanzeige
 mit einer Angelrute in den Händen: die Fische des Gewässers, an dem du stehst (die hier noch nicht gefangenen bleiben verborgen), deine Angelfertigkeit und was dein Köder dazugibt, wie viele du gefangen hast und wie viele entkommen sind, wie lange dein Köder hält, und deine letzten Fänge
 Ein Neugieriger: +%d%%
-%s halten: der Köder sinkt
+Halte deinen Köder neben dem Fisch
+Nächster Fang +%d%%
+%s halten: der Köder läuft die Schnur entlang
 %d in Folge
 Ein Spiel, während der Schwimmer draußen ist
-ein kleines Stück Wasser neben der Angelanzeige: halte einen Trigger, um deinen Köder sinken zu lassen, und lass los, damit er steigt, und halte ihn neben dem Schatten des Fisches. Je besser du bist, desto schwerer das erfundene Gewicht deines nächsten Fangs. Es nimmt keine Taste und berührt nie deinen Wurf oder deinen Fang
+auf der Zauberleiste gespielt, solange deine Schnur draußen ist: halte einen Abzug und dein Köder läuft die Schnur entlang, lass los und er treibt zurück; halte ihn beim Schatten des Fisches. Je besser du spielst, desto schwerer das erfundene Gewicht deines nächsten Fangs. Es belegt keine Taste und berührt weder Auswurf noch Fang
 %d gefangen, %d Arten, %d entkommen
 Schwerster: %s, %s
 Fische
@@ -470,20 +690,46 @@ wie lange Chattext bleibt, bevor er ausblendet
 Koordinaten auf der Karte
 deine Koordinaten unter der Weltkarte
 %d Nachrichten seit deiner Anmeldung als Spam ausgeblendet.
+%d davon waren wiederholte Gildenwerbung.
 Klassensymbol und Stufe im Chat
 Klassensymbol und Stufe eines Spielers in Klammern vor seinem Namen, wenn das Spiel sie uns wissen lässt
+Kurze Kanalnamen im Chat
+der Kanal vor einer Zeile, gekürzt: [P] Gruppe, [PL] Gruppenleiter, [G] Gilde, [O] Offizier, [R] Schlachtzug, [RL] Schlachtzugsleiter, [I] Instanz, und ein nummerierter Kanal mit seiner Nummer, [1]
+Nur Vornamen im Chat
+ein Name mit Nachnamen erscheint nur mit dem Vornamen (Jory Spleeneater spricht als Jory); ein Flüstern oder Rechtsklick darauf erreicht weiterhin den ganzen Namen
 Größe des Chattexts
 die Größe des Texts in den Chatfenstern als Anteil der spieleigenen Größe (die Einstellung des Spiels bleibt, wie sie ist)
 Goldverkäufer und wiederholte Werbung ausblenden
 Nachrichten, die Gold oder Dienste mit einer Webadresse anbieten, und dieselbe Nachricht, die ein Spieler wiederholt, werden ausgeblendet (nie von deiner Gruppe, Gilde oder deinen Freunden)
+Wiederholte Gildenwerbung ausblenden
+in öffentlichen Kanälen wird die Werbung einer Gilde einmal gezeigt; dieselbe vom selben Spieler oder eine fast gleiche innerhalb von 15 Minuten wird ausgeblendet (nie von deiner Gruppe, Gilde oder deinen Freunden)
 listet die zuletzt als Spam ausgeblendeten Chatnachrichten auf
-Tooltips folgen dem Cursor.
-Tooltips bleiben in ihrer Ecke.
-Tooltips am Cursor: an / aus
-Tooltip-Hintergrund
-wie deckend Hintergrund und Rand von Tooltips sind: 100% ist das volle dunkle Glas, bei 0% bleibt nur der Text
-Tooltips folgen dem Cursor
-Tooltips öffnen sich am Cursor statt in der Bildschirmecke (im Kampf bleiben sie in der Ecke)
+Flug
+Ziel unbekannt
+geschätzt nach der Entfernung
+erster Flug auf dieser Route: die Flugzeit wird gelernt
+Landung
+%s: etwa %s, geschätzt nach der Entfernung
+%s: etwa %s
+%s: erster Flug auf dieser Strecke, Zeit unbekannt
+Im Flug, Ziel unbekannt
+%s: Flugzeit gelernt, %s
+%d Flugstrecken bekannt.
+Flüge: Zeit und Countdown
+auf einem Flug werden Ziel und Dauer im Chat genannt, und ein Balken oben am Bildschirm zählt bis zur Landung herunter; die Zeit jeder Strecke wird aus deinen Flügen gelernt
+Flüge: dein Reittier entlang der Leiste
+ein Greif, ein Windreiter oder eine Fledermaus (was der Flugmeister dir gab) gleitet die Flugleiste entlang zu deinem Landeplatz
+die Flugstrecken mit bekannter Zeit auflisten
+Ein Flug ist ein guter Moment dafür.
+Du spielst seit %s.
+Zeit für einen Schluck Wasser
+Erinnerung, Wasser zu trinken
+ab und zu beim Spielen eine sanfte Erinnerung, einen Schluck Wasser zu trinken (nie im Kampf)
+Wassererinnerung alle (Minuten)
+wie viele Spielminuten zwischen den Erinnerungen ans Wassertrinken liegen
+Wassererinnerung zu Beginn eines Flugs
+ein Flug ist eine natürliche Pause: die Erinnerung ans Wassertrinken kommt, wenn einer beginnt, außer die letzte ist noch nicht lange her
+die Erinnerung ans Wassertrinken zeigen
 Eigene Rahmen des Spiels umgestalten
 Tooltips, Buffs, Questverfolgung, Minikarte, Erfahrungsleiste, Chat-Reiter und Gamepad-Leisten im Aussehen des HUDs (die Maus-Oberfläche behält die des Spiels)
 Größe der Erfahrungsleiste
@@ -502,13 +748,15 @@ Erfahrungsleiste
 die Erfahrungs- und Rufleisten etwas kleiner, in eigenen Farben
 Chat
 Chat-Reiter mit Kontur und das Eingabefeld als dunkles Glas
-Die Hinweise des Spiels werden erneut abgefragt.
-Hinweis zu experimentellen Funktionen bestätigen
-nachdem du den Hinweis des Spiels zu experimentellen Funktionen einmal akzeptiert hast, wird er bei späteren Anmeldungen für dich akzeptiert
-vergiss die akzeptierten Hinweise, damit das Spiel erneut fragt
+Schadensmesser
+die Schadensanzeige des Spiels im Look des HUD: ihre Balken schräg auf dunklem Grund und umrandeter Text; sie behält alles, was sie tut
 Prüfung: %d von %d bestanden
+Das Spiel ist seit dem Einloggen nicht stehen geblieben.
+Momente, in denen das Spiel stand, und der Anteil des HUD daran:
+Die langsamsten Momente des HUD:
 Debug-Berichte
 die Berichte zur Fehlersuche von selbst sammeln: beim Einloggen und erneut beim Neuladen oder Ausloggen (sie bleiben in den gespeicherten Einstellungen)
+die Momente, in denen das Spiel seit dem Einloggen stand, und wie viel davon die eigene Arbeit des HUD war
 HUD-Voreinstellung: %s, passend zur Kamera
 Preset: %s
 Ein Layout namens '%s' wurde dem Bearbeitungsmodus des Spiels hinzugefügt. Wähle es dort aus, um es zu benutzen (Spielmenü > Bearbeitungsmodus > Layout).
@@ -578,6 +826,7 @@ Fernseher
 Monitor
 Tastensymbole
 die Symbole, die das Spiel für die Tasten deines Controllers zeigt: von selbst gefunden für den Controller in Gebrauch, oder die Art, die du wählst
+Schriftart
 Layout des Spiels zurücksetzen
 Ausprobieren
 Demo abspielen
@@ -637,7 +886,7 @@ unsere Spielerleiste, oben links
 Zielrahmen
 unsere Zielleiste, oben mittig
 Haustierleiste
-eine kleine Haustierleiste unter der Spielerleiste
+eine kleine Begleiterleiste unter der Spielerleiste oder neben den senkrechten Leisten
 Fokusrahmen
 unser Fokusrahmen
 schmale aufrechte Gesundheits- und Energieleisten neben deinem Charakter, für eine Third-Person-Ansicht (statt der Spielerleiste)
@@ -660,11 +909,13 @@ Klassenfarben für Namen im Chat
 die Chat-Einstellung des Spiels für alle Chatarten gleichzeitig: der Name eines Spielers in seiner Klassenfarbe
 öffne das Optionsfenster (Optionen > AddOns > ControllerCam HUD)
 Rahmen
+Bildschirm ausblenden
 Effekte
 Aussehen
 Quests, Chat und Karte
 Taschen, Bank und Händler
 Angeln
+Barrierefreiheit
 Native Optionen
 %s  |  Gamepad-Oberfläche: %s  |  läuft: %s
 Spieler %s, Ziel %s, Haustier %s, Fokus %s  |  Spielrahmen beiseitegelegt: %s  |  Chat verschoben: %s
@@ -686,7 +937,7 @@ Händler- und Bankhilfe: %s
 Autoverkauf: %s
 weiße Ausrüstung ist Plunder: %s
 Händlerhilfe ist aus.
-Verwendung: /cchud sell [junk | white | green | blue]
+Verwendung: /cchud sell [junk | recommended | white | green | blue]
 markierte Gegenstände einzahlen, wenn die Bank geöffnet wird: %s
 Verwendung: /cchud junk <item> (Shift-Klick auf den Gegenstand fügt ihn in die Chatzeile ein)
 Gegenstand %d: Plunder, wird mit dem Rest verkauft
@@ -720,10 +971,11 @@ der Abklingzeitmanager des Spiels (die eigene Option des Spiels)
 deine Gesundheit und Ressource unter deinem Charakter (die eigene Option des Spiels)
 der Tooltip, der erscheint, wenn ein Buff beginnt (die eigene Option des Spiels)
 die Spieler- und Zielrahmen des Spiels sichtbar lassen (an) oder beiseitelegen (aus)
-beim Händler: wählen, was verkauft wird (auch: sell junk, sell white | green | blue)
+beim Händler: wählen, was verkauft wird (auch: sell junk, sell recommended, sell white | green | blue)
 zähle weiße Waffen und Rüstung als Plunder
 einen Gegenstand markieren: immer verkauft, nie verkauft oder für die Bank (Shift-Klick fügt ihn in die Chatzeile ein)
 an der Bank: einlagern, was die Bank schon hat, und alles für sie Markierte
+an der Bank: herausnehmen, wovon du schon etwas trägst
 einlagern, sobald die Bank öffnet
 die Bank nimmt Reagenzien automatisch auf (die eigene Option des Spiels)
 Textgröße in Prozent (150 passt gut auf einem Fernseher)

@@ -1,10 +1,14 @@
 -- ControllerCam HUD: the fishing interface.
--- With a fishing pole in your hands, under the middle of the screen: the fish of the water you stand at (the
--- ones you have not landed here are a "?"), your Fishing skill as a small bar with what bait and pole add to
--- it, how many you caught and how many got away since you logged in, the bait on your pole and how long it
--- lasts, and to its right your latest catches. It is plain while your line is out and fainter between casts;
--- it is gone in a fight and when the pole is put away. It only shows: nothing in it takes a press.
--- It is kept low and wide: there is not much room between the fishing line and the gamepad bars.
+-- With a fishing pole in your hands, at the bottom of the screen, where the gamepad bars are while you are
+-- not fishing (they are put away meanwhile; if you keep them, it sits where your target frame does and steps
+-- aside for a target): the fish of the water you stand at (the ones you have not landed here are a "?"), your
+-- Fishing skill as a small bar with what bait and pole add to it, how many you caught and how many got away
+-- at this water, the bait on your pole and how long it lasts, your latest catch with its weight, and beside
+-- it a tally of what you have landed here this session, kind by kind. The tally and the counts start again
+-- when you move on to another zone.
+-- It has no box: the text has its shadow and a soft shade lies under it. It is plain while your line is out
+-- and a touch fainter between casts; it is gone in a fight and when the pole is put away. It only shows:
+-- nothing in it takes a press.
 
 local ADDON, ns = ...
 local L = ns.L
@@ -13,12 +17,13 @@ local C = ns.colors
 local P = { active = false, slots = {}, rows = {} }
 ns.FishPanel = P
 
-P.Y = -168                    -- how far under the middle of the screen
 P.LINGER = 12                 -- seconds after your line came in that it stays plain
-P.IDLE = 0.6                  -- how visible it is between casts
-P.FEED_LIFE = 90              -- seconds a catch stays in the feed
-local SLOT, GAP, ROWS = 30, 4, 3
-local BAR_W, BAR_H = 180, 4
+P.IDLE = 0.9                  -- how visible it is between casts
+P.LATEST = 14                 -- seconds your latest catch is spelled out
+P.ROWS = 5                    -- kinds listed in the tally
+local SLOT, GAP = 30, 4
+P.BOTTOM = 40                 -- how far above the bottom of the screen it sits
+local BAR_W, BAR_H, WIDTH, ROW = 180, 4, 200, 20
 
 ns.RegisterSetting({
     key = "fishPanel", kind = "boolean", default = true, command = "fishpanel", section = "Fishing",
@@ -34,11 +39,40 @@ local function Clock(seconds)
 end
 P.Clock = Clock
 
+-- Where it goes: the bottom of the screen while the gamepad bars are put away; with the bars kept, the target
+-- frame's place (wherever you have put that), or the top of the screen without one
+function P.Bottom() return ns.Fishing and ns.Fishing.barsHidden and true or false end
+function P.Place(f)
+    f:ClearAllPoints()
+    if P.Bottom() then
+        P.at = "bottom"
+        f:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, P.BOTTOM)
+        return
+    end
+    P.at = "top"
+    local target = ns.UnitFrames and ns.UnitFrames.frames and ns.UnitFrames.frames.target
+    if target and target.mover then
+        f:SetPoint("TOP", target.mover, "TOP", 0, 0)
+    else
+        f:SetPoint("TOP", UIParent, "TOP", 0, -78)
+    end
+end
+
 local function Build()
     frame = CreateFrame("Frame", "ControllerCamHUD_FishPanel", UIParent)
-    frame:SetSize(240, 96)
+    frame:SetSize(WIDTH, 120)
     frame:SetFrameStrata("MEDIUM")
-    frame:SetPoint("TOP", UIParent, "CENTER", 0, P.Y)
+    P.Place(frame)
+    frame.shade = frame:CreateTexture(nil, "BACKGROUND", nil, -2)   -- a soft shade, no box: nothing to spill out of
+    frame.shade:SetTexture(ns.media.soft)
+    frame.shade:SetVertexColor(0, 0, 0, 0.5)
+    frame.shade:SetPoint("TOPLEFT", frame, "TOPLEFT", -70, 26)
+    frame.shade:SetPoint("BOTTOMRIGHT", frame, "BOTTOMRIGHT", 70, -22)
+    frame.tallyShade = frame:CreateTexture(nil, "BACKGROUND", nil, -2)
+    frame.tallyShade:SetTexture(ns.media.soft)
+    frame.tallyShade:SetVertexColor(0, 0, 0, 0.45)
+    frame.tallyShade:SetPoint("TOPLEFT", frame, "TOPRIGHT", -20, 22)
+    frame.tallyShade:Hide()
     for i = 1, ns.FishLog.SLOTS do
         local s = { back = frame:CreateTexture(nil, "BACKGROUND"), icon = frame:CreateTexture(nil, "ARTWORK"),
                     q = ns.FontString(frame, 12, "CENTER") }
@@ -68,12 +102,19 @@ local function Build()
     frame.stats:SetTextColor(unpack(C.muted))
     frame.bait = ns.FontString(frame, 10, "CENTER")
     frame.bait:SetPoint("TOP", frame.stats, "BOTTOM", 0, -3)
-    for i = 1, ROWS do                                      -- the feed: beside it, the latest on top
-        local r = { text = ns.FontString(frame, 10, "LEFT"), icon = frame:CreateTexture(nil, "ARTWORK") }
+    -- your latest catch, spelled out for a moment; beside it all, what you have landed here this session
+    frame.latest = ns.FontString(frame, 10, "CENTER")
+    frame.latest:SetPoint("TOP", frame.bait, "BOTTOM", 0, -6)
+    frame.latest:SetTextColor(unpack(C.cast))
+    for i = 1, P.ROWS do
+        local r = { text = ns.FontString(frame, 10, "LEFT"), icon = frame:CreateTexture(nil, "ARTWORK"),
+                    count = ns.FontString(frame, 10, "RIGHT") }
         r.icon:SetSize(16, 16)
-        r.icon:SetPoint("TOPLEFT", frame, "TOPRIGHT", 16, -(i - 1) * 22 - 2)
+        r.icon:SetPoint("TOPLEFT", frame, "TOPRIGHT", 44, -((i - 1) * ROW + 4))
         r.icon:SetTexCoord(0.08, 0.92, 0.08, 0.92)
-        r.text:SetPoint("LEFT", r.icon, "RIGHT", 5, 0)
+        r.text:SetPoint("LEFT", r.icon, "RIGHT", 6, 0)
+        r.count:SetPoint("RIGHT", r.icon, "LEFT", -6, 0)
+        r.count:SetTextColor(unpack(C.muted))
         P.rows[i] = r
     end
     frame:Hide()
@@ -89,7 +130,7 @@ local function Icon(id, icon)
     return nil
 end
 
--- The parts that change with the clock: the bait and the feed's fading
+-- The parts that change with the clock: the bait, and the latest catch fading
 function P:Tick(now)
     local F = ns.Fishing
     local left = F.BaitLeft()
@@ -97,31 +138,18 @@ function P:Tick(now)
         frame.bait:SetText(L["Bait %s"]:format(Clock(left)))
         if left < 60 then frame.bait:SetTextColor(unpack(C.caution)) else frame.bait:SetTextColor(unpack(C.health)) end
     else
-        local _, name = F.Bait()
-        if name and F.BaitReady() then
-            frame.bait:SetText(L["No bait: press %s twice for %s"]:format(F.KeyName(F.Keys()[1]), name))
-        else
-            frame.bait:SetText(L["No bait"])
-        end
+        frame.bait:SetText(L["No bait"])                  -- (how to put some on is said by the cast prompt)
         frame.bait:SetTextColor(unpack(C.muted))
     end
-    for i, r in ipairs(P.rows) do
-        local c = ns.FishLog.feed[i]
-        local age = c and (now - c.at) or P.FEED_LIFE
-        if c and age < P.FEED_LIFE then
-            local a = ns.Clamp((P.FEED_LIFE - age) / 20, 0, 1) * (1 - (i - 1) * 0.25)
-            r.text:SetAlpha(a)
-            r.icon:SetAlpha(a)
-        else
-            r.text:SetAlpha(0)
-            r.icon:SetAlpha(0)
-        end
-    end
+    local c = ns.FishLog.feed[1]
+    local age = c and (now - c.at) or P.LATEST
+    frame.latest:SetAlpha(c and ns.Clamp((P.LATEST - age) / 4, 0, 1) or 0)
 end
 
 function P:Refresh()
     if not (frame and frame:IsShown()) then return end
     local J, F = ns.FishLog, ns.Fishing
+    J:Water()                                              -- (moved on to another water: the tally starts again)
     local waters = J.Waters()
     local n = #waters
     for i, s in ipairs(P.slots) do
@@ -158,26 +186,48 @@ function P:Refresh()
     end
     P.share = rank and ns.Clamp(rank / math.max(1, cap or rank), 0, 1) or nil
     frame.stats:SetText(L["Caught %d"]:format(J.session.caught) .. "     " .. L["Got away %d"]:format(J.session.away))
+    local c = J.feed[1]
+    if c then
+        local text = c.name or ("item:" .. c.id)
+        if c.weight then text = text .. "  " .. J.Pounds(c.weight) end
+        if c.new then text = text .. "  |cffffd24a" .. L["new!"] .. "|r"
+        elseif c.best then text = text .. "  |cffffd24a" .. L["best!"] .. "|r" end
+        frame.latest:SetText(text)
+    else
+        frame.latest:SetText("")
+    end
+    local tally = J.Tally()
+    local shown = 0
     for i, r in ipairs(P.rows) do
-        local c = J.feed[i]
-        if c then
-            local text = c.name or ("item:" .. c.id)
-            if c.weight then text = text .. "  " .. J.Pounds(c.weight) end
-            if c.new then text = text .. "  |cffffd24a" .. L["new!"] .. "|r"
-            elseif c.best then text = text .. "  |cffffd24a" .. L["best!"] .. "|r" end
-            r.text:SetText(text)
-            local icon = Icon(c.id, c.icon)
+        local t = tally[i]
+        if t then
+            shown = i
+            r.text:SetText(t.name or ("item:" .. t.id))
+            r.count:SetText(("x%d"):format(t.n))
+            local icon = Icon(t.id, t.icon)
             if icon then r.icon:SetTexture(icon); r.icon:Show() else r.icon:Hide() end
+            r.text:Show(); r.count:Show()
         else
-            r.text:SetText("")
-            r.icon:Hide()
+            r.text:Hide(); r.count:Hide(); r.icon:Hide()
         end
+    end
+    P.tallied = shown
+    local shade = ns.db.textShade ~= false
+    if shade then frame.shade:Show() else frame.shade:Hide() end
+    if shade and shown > 0 then
+        frame.tallyShade:SetSize(250, shown * ROW + 48)
+        frame.tallyShade:Show()
+    else
+        frame.tallyShade:Hide()
     end
     self:Tick(GetTime())
 end
 
 function P:Want()
-    return self.active and not ns.arranging and not InCombatLockdown() and ns.Fishing.HasPole() and true or false
+    if not (self.active and not ns.arranging and not InCombatLockdown() and ns.Fishing.HasPole()) then return false end
+    if P.Bottom() then return true end
+    local ok, target = pcall(UnitExists, "target")         -- up where the target frame sits: a target has the place
+    return not (ok and ns.Yes(target))
 end
 
 local driver = CreateFrame("Frame")
@@ -193,6 +243,7 @@ driver:SetScript("OnUpdate", ns.Protect(function(_, dt)
     if not frame then return end
     if want ~= frame:IsShown() then
         if want then
+            P.Place(frame)
             frame:Show()
             P:Refresh()
         else
@@ -200,6 +251,7 @@ driver:SetScript("OnUpdate", ns.Protect(function(_, dt)
         end
     end
     if not want then return end
+    if (P.Bottom() and "bottom" or "top") ~= P.at then P.Place(frame) end      -- (the bars were put away, or kept)
     local now, J = GetTime(), ns.FishLog
     local lively = J.cast or (J.lineAt and now - J.lineAt < P.LINGER)
     frame:SetAlpha(lively and 1 or P.IDLE)
@@ -224,12 +276,13 @@ ns.RegisterCheck(function(row, run, db)
 end)
 
 function P.Describe()
-    return ("on %s, shown %s, slots known %s"):format(tostring(P.active), tostring(frame and frame:IsShown() or false),
+    return ("on %s, shown %s at the %s, slots known %s, kinds in the tally %s"):format(tostring(P.active),
+        tostring(frame and frame:IsShown() or false), tostring(P.at),
         (function()
             local n = 0
             for _, s in ipairs(P.slots) do if s.known then n = n + 1 end end
             return n
-        end)())
+        end)(), tostring(P.tallied or 0))
 end
 
 ns.RegisterModule("fishpanel", P)

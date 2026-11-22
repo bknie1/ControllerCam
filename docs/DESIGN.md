@@ -27,6 +27,18 @@ of the game's own Gamepad UI and can be added or removed without leaving a trace
    addon; this design only reads the setting it controls.
 10. **Proven end to end.** Every module has mock tests, a grid over every combination of its switches,
     an in-game self-check (`/cchud check`) and a demo (`/cchud demo`).
+11. **The game's tooltips are only looked at.** Nothing is added to one (`AddLine`, `AddDoubleLine`) and none
+    is opened, filled or closed by our code (`SetOwner`, `SetText`, `Hide`). Our lines for an item hang under
+    its tooltip on a panel of our own (`Tooltip.Annex`); our windows use a tooltip of our own (`Tooltip.Own`).
+    A piece of a game tooltip made by an addon taints what the game does after reading it: on 2026-11-20 that
+    was the gamepad bars refusing their own actions after a vendor, until a reload. The debug report's
+    `tainted` section lists every value of the game's that carries our name; it should stay empty.
+12. **The game's dialogs, buttons and lists of windows are the game's.** No dialog of ours goes in the game's
+    dialog box (`StaticPopup_Show`) and none of the game's is pressed by us (`StaticPopup_OnClick`); no script
+    of a game button is replaced (`SetScript`); no window of ours is put on `UISpecialFrames`. The controller's
+    cursor works on all of those with the game's own code, which then runs in our name and is refused what it
+    does next. Our questions are asked by `ns.Dialog`, our windows take their keys with `ns.PadKeys` (Escape
+    among them). Still on the game's dialog box: `/cchud export` and `/cchud import` (`Share.lua`).
 
 ## Modules
 
@@ -46,6 +58,8 @@ of the game's own Gamepad UI and can be added or removed without leaving a trace
 | The game's own frames in the HUD's look (gamepad bars, tooltips, buffs, tracker, minimap, XP bar, chat) | built, mock-tested only |
 | Bags: sorting, item counts across characters, gold; repairs at vendors | built, mock-tested only |
 | Chat: class icon and level, spam filter | built, mock-tested only |
+| Items your quests need: a Quest verdict beside auction, vendor and keep (Quests.lua decides, Market.lua says it, Vendor.lua and the Market keep it) | built, mock-tested only |
+| Quest progress in chat; flights: destination, learned times and a countdown bar; a reminder to drink water; repeated guild recruitment hidden | built, mock-tested only: how the flight map says the chosen place under the Gamepad UI has not been seen in the game |
 | The screen rests out of combat: bars, minimap, quest list, damage meter and XP bar fade together | built, mock-tested only |
 | Stance and pet buttons moved above the bars (in place of the targeting icons) | built, mock-tested only: the icons' names are a guess (`/cchud padinfo` shows what is there) |
 | Cast bar animations by kind of cast (your bar, and a lighter show on nameplates) | built, mock-tested only (`/cchud casttest`) |
@@ -55,29 +69,10 @@ of the game's own Gamepad UI and can be added or removed without leaving a trace
 | Button icons: the game's own style for the controller in use, found or chosen | built, mock-tested only |
 | Shields as a ward round the health bar | built, mock-tested only |
 | Market: a tab of the auction house with its own controller keys, and a pane that only shows | built, mock-tested only |
+| Levelling plan beside a profession's window, broken down to raw materials; a farm list beside the quest list | built, mock-tested only |
 | First run: beside ControllerCam the HUD rests and asks "Camera + HUD" or "Camera only" (`/cchud welcome` asks again) | built, mock-tested only |
 | Setup: after the first-run choice the screen is offered too, a layout named ControllerCam added to the game's Edit Mode (`/cchud setup`) | built, mock-tested only: adding a layout has not been seen in the game |
 | The whole setup as one line: HUD settings, camera setup and the game's Edit Mode layout (`/cchud export`, `/cchud import`) | built, mock-tested only: adding a layout to the game's own has not been seen in the game |
-| Gather (a third addon, `ControllerCam_Gather`): herbs, ore, chests and other nodes on the world map and the minimap, recorded as you gather; takes over the nodes GatherMate2 saved for you (`/ccgather import`); sharing with group and guild (off by default) | built, mock-tested only: not yet seen in the game |
-
-## Gather: where the nodes come from
-
-The addon ships no node list. Every node is the player's own: gathered, read at run time from the tables their
-GatherMate2 saved (`/ccgather import`, while GatherMate2 is switched on), or told by a group or guild member
-who shares. Wowhead has the locations for this game, but its `robots.txt` shuts out automated collectors and
-no terms could be found that allow copying its data into another product, so nothing is collected from it and
-nothing of it is bundled. GatherMate2 and its data addon are not copied either: no code, no data files.
-
-What the installed GatherMate2 (1.52.7) and GatherMate2_Data (v2026-11-14) say about themselves: GatherMate2's
-`LICENSE.txt` is the GNU GPL, version 2 or later, while its `.toc` says `X-License: ARR`; GatherMate2_Data has
-no licence file at all, only the note "data fetched from Wowhead"; the three Storage addons hold no data, only
-names of saved tables. The GPL would let its code be reused only in a GPL addon (ours is MIT), and nothing
-grants a right to the data, which is Wowhead's to begin with. Both were read for which game functions exist
-on this client; what was learned is in how Gather asks the game for a zone's size, the layer of its world map
-pins and the minimap's view, each written here from scratch.
-
-Gather replaces nothing of the game's (rule 9 does not apply to it): its pins are textures of its own on the
-world map and the minimap, so it runs in the mouse and keyboard UI as well. It changes no game setting.
 
 ## Before publishing
 
@@ -105,6 +100,10 @@ All of it is mock-tested only until played.
    To see in the game: that the game takes the style and the bars follow it.
 5. **A game while the float is out** (`FishGame.lua`), off by default. It reads a trigger and binds nothing.
 6. **Wards for shields** (`Ward.lua`): target, focus and player frames.
+7. **The Market posts all and greets** (`AuctionPanel.lua`). To see in the game: that one post takes every
+   stack (`PostCommodity`/`PostItem` with the whole quantity; the older `PostAuction` with several stacks),
+   that `PlaySound(5958, "Dialog")` (GoblinMaleGruffNPCGreetings, 5964 the Zany ones after it) plays on this
+   client, and that the auctioneer's portrait draws.
 
 Also from play: inside dungeons and raids, where friendly nameplates are the game's own and closed to every
 addon, the game's own options show them as class-coloured names without bars, like ours, with the game's bars

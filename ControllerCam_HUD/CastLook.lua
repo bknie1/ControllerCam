@@ -10,6 +10,7 @@
 --   mount         dust kicked up
 --   lightning     pale blue (lightning bolts and the like: nature by school, but they look like the sky's)
 --   roots         the spells that hold a foe in roots
+--   revive        bringing a pet back to life: the green of new growth (Revive Pet)
 --   a heal        growing green (or the gold of a holy heal), whatever its school
 --   a spell       the colour and effects of its school (physical, holy, fire, nature, frost, shadow, arcane),
 --                 learned from the combat log
@@ -43,12 +44,15 @@ K.KINDS = {
                    ids = { 403, 421, 324, 26364, 45284, 51490 } },
     roots      = { color = { 0.56, 0.78, 0.36 }, fx = FX("motes", "soft", 4, 9, 0.9, 22), every = 0.5,
                    ids = { 339, 16689, 19975, 102359, 64695 } },
+    revive     = { color = { 0.5, 0.95, 0.5 }, fx = FX("motes", "soft", 5, 10, 1.1, 26), every = 0.45,
+                   ids = { 982 } },
     crafting   = { color = { 1, 0.74, 0.35 }, fx = FX("sparks", "spark", 4, 9, 0.3, 120), every = 0.6 },
     mount      = { color = { 0.82, 0.72, 0.52 }, fx = FX("smoke", "soft", 3, 16, 0.6, 18), every = 0.45 },
 }
 
 -- The school of the spells players cast most, by one rank of each (every rank shares the name). A spell not
--- listed here is learned as you play: from the combat log, or from the hit or heal that follows your cast.
+-- listed here is learned as you play: from the combat log, or, as a guess, from the hit or heal that follows
+-- your cast. A guess never speaks for a spell listed here.
 K.SCHOOLS = {
     holy = { 635, 19750, 879, 2812, 24275, 26573, 20473, 20154, 20271, 21082, 20165, 20166, 20375, 19740, 19742,
              20217, 1038, 465, 7294, 642, 633, 7328, 1152, 4987, 853, 2878, 585, 2054, 2050, 2060, 2061, 139, 596,
@@ -58,13 +62,14 @@ K.SCHOOLS = {
     arcane = { 5143, 1449, 1459, 118, 1953, 8921, 2912, 3044, 604, 1008 },
     shadow = { 686, 172, 980, 689, 1120, 6789, 5782, 589, 8092, 15407, 8122, 1454, 17877, 702, 1714, 5138, 2944 },
     nature = { 403, 421, 8042, 331, 8004, 1064, 5176, 339, 774, 8936, 5185, 740, 16914, 5570, 1978, 1126, 467,
-               2484, 5394 },
+               2484, 5394, 136 },                 -- (136: Mend Pet, a hunter's nature heal)
 }
 local schoolByID = {}
 for school, ids in pairs(K.SCHOOLS) do for _, id in ipairs(ids) do schoolByID[id] = school end end
 
 -- Heals, by one rank of each. A heal not listed here is learned as you play, from the combat log.
-K.HEALS = { 331, 8004, 1064, 5185, 774, 8936, 740, 5394, 18562, 635, 19750, 2054, 2050, 2060, 2061, 139, 596, 633 }
+K.HEALS = { 331, 8004, 1064, 5185, 774, 8936, 740, 5394, 18562, 635, 19750, 2054, 2050, 2060, 2061, 139, 596, 633,
+            136 }
 K.HEAL_COLOR = { nature = { 0.45, 0.9, 0.4 } }      -- the bar of a heal; other schools keep their own colour
 local healByID = {}
 for _, id in ipairs(K.HEALS) do healByID[id] = true end
@@ -109,18 +114,21 @@ function K.IsHeal(name, spellID)
     return false
 end
 
--- A spell's school: learned, listed, or known by its name
+-- A spell's school: as the combat log told it, listed, known by its name, or (last of all) guessed from the
+-- hits that followed it
 function K.SchoolOf(name, spellID)
     local IM = ns.Impact
-    if spellID and not ns.IsSecret(spellID) then
-        local learned = IM and IM.SCHOOL_OF and IM.SCHOOL_OF[spellID]
+    local id = spellID and not ns.IsSecret(spellID) and spellID or nil
+    if id then
+        local learned = IM and IM.SCHOOL_OF and IM.SCHOOL_OF[id]
         if learned then return learned end
-        if schoolByID[spellID] then return schoolByID[spellID] end
+        if schoolByID[id] then return schoolByID[id] end
     end
     if type(name) == "string" and not ns.IsSecret(name) then
         Names()
-        return schoolByName[name]
+        if schoolByName[name] then return schoolByName[name] end
     end
+    return id and IM and IM.Guess and IM.Guess(id) or nil
 end
 
 -- The kind of a cast: name and spellID as the game gives them (either may be secret), tradeSkill when the

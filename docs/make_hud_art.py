@@ -643,3 +643,27 @@ for i, bx in enumerate(range(18, 500, 47)):
         rope(stem, [(bx + 14, wind(bx + 14))] + curl, 2.8, 1.4)
 img = paint(stem, base=(72, 152, 52), dark=(38, 98, 36), light=(146, 214, 92), line=(16, 48, 16), edge=2.0, depth=2.2, rim=1.0)
 save(small(over(img, leaves), w, h), "vine")
+
+# fish: one plump fish seen from the side, swimming to the right (the game beside the fishing interface;
+# mirrored in the game when it swims the other way)
+def fish_edge(sign):
+    out = []
+    for i in range(41):
+        t = i / 40
+        half = 12.5 * math.sin(math.pi * t) ** 0.7 * (1 - 0.18 * t)
+        out.append((17 + t * 35, 32 + sign * half))
+    return out
+
+
+body = poly(sheet(), fish_edge(-1) + fish_edge(1)[::-1])
+tail = poly(sheet(), [(20, 32), (6, 20), (9.5, 32), (6, 44)])
+fins = poly(poly(sheet(), [(29, 22), (37, 13.5), (43, 22.5)]), [(31, 41.5), (36, 49), (40, 41)])
+img = over(paint(tail, base=(232, 126, 44), dark=(170, 78, 28), light=(255, 186, 96), line=(58, 24, 10), depth=2.4),
+           paint(fins, base=(232, 126, 44), dark=(170, 78, 28), light=(255, 186, 96), line=(58, 24, 10), depth=2.0),
+           paint(body, base=(246, 160, 58), dark=(188, 96, 32), light=(255, 216, 128), line=(58, 24, 10), depth=3.4))
+belly = ImageChops.multiply(blob(sheet(), [22, 33, 48, 47]), thinner(body, 2.2))
+ink(img, (255, 232, 176), belly)
+ink(img, (58, 24, 10), rope(sheet(), [(40.5, 26), (39.5, 31), (40.5, 37)], 1.3))        # the gill
+ink(img, (255, 255, 255), blob(sheet(), [43, 25.5, 48.6, 31.1]))
+ink(img, (24, 14, 10), blob(sheet(), [45, 27.2, 48, 30.2]))
+save(small(img), "fish")

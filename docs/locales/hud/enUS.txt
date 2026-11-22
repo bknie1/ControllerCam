@@ -3,6 +3,10 @@ on
 off
 usage:
 Changes are applied when combat ends.
+The game's
+Fonts can be chosen only where the game's language is written in Latin letters.
+Font: %s
+one font for the HUD and the game's own text (windows, tooltips, chat, buttons); each keeps its size
 Fireball
 Friendly mage
 Healing
@@ -10,25 +14,56 @@ Pet
 Training dummy
 Friendly healer
 Player
+Friendly NPCs by reputation
+a friendly NPC's name and bar are coloured by your standing with its faction: yellow neutral, green friendly, then sea green, teal and blue for honored, revered and exalted
+Execute range on enemy bars
+an enemy at a quarter of its health or less: its health bar throbs red, with a glow round it beating like a pulse, on the target and focus frames and on nameplates
+Shields on health bars
+how much a shield on a unit will soak, as a silver-blue band from the far end of its health bar: on your frames, your target's, your party's and nameplates
+Pet happiness
+beside the pet bar, a thin band in the colour of your pet's mood: green happy, yellow content, red unhappy, with food beside it when it needs feeding. Nothing for a pet without a mood
 Vertical bars follow the camera
 the vertical bars keep their place beside your character as the camera zooms in and out (place them in Edit Mode at a distance you like)
 Last names
 a player's full name on the unit frames and nameplates, last name included: Faith Ashborne
 Health on the target bar
 the health left (12.3k) and the percent on the target and focus bars; a compact target shows the percent alone
+Sleepy while resting
+in an inn or a city your frame dozes: little z's drift up from it and a soft moonlit glow breathes round it (never in a fight)
 Target
 Target of target
 Focus
 Vertical bars
 deposited %d items
+took %d items out of the bank
 sold %d items for %s (/cchud sold lists them)
 Nothing to sell.
 Open the bank first.
+Nothing to take out: the bank holds none of what you carry.
+Withdraw
+take out of the bank what you already carry some of (materials, potions, food), to top your bags up
+Deposit
+put in the bank what it already holds some of, and what you marked for it
+Open a vendor first.
+Smart sell
+sell what a vendor pays best for: junk, and what the auction house would not do better with (listed and confirmed first); what is worth more at the auction house or still needed by your professions stays
 Nothing to deposit: your bank holds none of what you carry, and nothing is marked for it.
 Nothing is marked for the bank. Point at an item and use Mark item.
-Open a vendor first.
-Sell junk: %d items for %s.\n\nOr sell weapons and armor by quality.
-Sell junk
+%d items, %s
+...and %d more
+Sell to the vendor: %s
+No auction house prices yet: visit the auction house once.
+Kept: worth more at the auction house
+Kept for your professions
+Kept for your quests
+Open these profession windows once so their skill-ups count: %s
+For the best estimates, open your profession windows and the auction house now and then.
+What to sell?\n\nJunk: %s\nWith white weapons and armor: %s\nWith green weapons and armor: %s\n\nAfter a visit to the auction house, recommendations are offered here too.
+Junk
++ White gear
++ Green gear
+What to sell?\n\nRecommended: %s to the vendor. %d items stay because they are worth more at the auction house, %d because your professions still need them.\nJunk only: %s
+Recommended
 By quality
 Sell weapons and armor up to which quality?\n\nCommon (white): %s\nUncommon (green): %s
 Common
@@ -44,6 +79,8 @@ Point at an item first.
 Quick move: sell, bank, trade or mail the item you point at
 Mark the item: junk / kept / bank / no mark
 Deposit: put in the bank what it already holds, and what you marked for it
+Withdraw: take out of the bank what you already carry some of
+Smart sell: what a vendor pays best for, listed and confirmed first
 Nothing sold yet this session.
 A vendor's Buyback tab buys these back until you log out.
 Repaired for %s from the guild bank
@@ -56,6 +93,23 @@ repair everything as soon as a vendor who repairs opens
 Repair from the guild bank
 pay for repairs from the guild bank when your guild allows it, your own gold otherwise
 list what was sold for you this session, to buy something back
+1 item
+%d items
+Nothing to take from the mailbox.
+Mailbox: took %s.
+ and 
+Letters asking for payment on delivery, left for you to open: %d
+Your bags are full: the other items wait in their letters.
+Items the game would not hand over (one of a kind, or refused), left in their letters: %d
+Waiting for more...
+Open a mailbox first.
+Taking...
+Take everything
+take the money and items from every letter, auction sales included, on every page (press again to stop); letters asking for payment on delivery are left alone
+Take everything from the mailbox (press again to stop)
+Take everything from the mailbox
+a button beside the mailbox's Open All: takes the money and items from every letter, auction sales included, on every page; letters asking for payment on delivery are left alone
+take the money and items from every letter in the open mailbox (again to stop)
 Bag
 Bank
 You
@@ -79,9 +133,21 @@ just now
 %d days ago
 Vendor
 Best
+Recipes
 Auction
-Auction house
+Recommendation
+Equip
+Quest
 Keep
+better than what you wear
+%s for %s
+made into %s
+%d%% chance of sale
+Cost
+Auction house
+Skill-up: %s
+Quest: %s
+%d%% likely to sell
 5% under the lowest, for a quick sale
 the market is unusually low today: priced near its usual, to wait for buyers
 just under the lowest: few are up, it should sell
@@ -100,10 +166,33 @@ the lowest buyout you have seen for an item at the auction house, and how long a
 Read the auction house when you visit
 the first visit in a while reads every price at once (the game allows it every 15 minutes); /cchud scan asks for it
 Best use of an item
-an item's tooltip says what to do with it: sell it at the auction house (and how much more that brings), sell it to a vendor, or keep it
+an item's tooltip says what to do with it: sell it at the auction house (and how much more that brings), sell it to a vendor, keep it, or keep it for a quest
 Quick sales at the auction house
 price 5% under the lowest for a sale now; off: patient prices, just under the lowest, that sell when buyers come
 read every price at the auction house at once (open it first; every 15 minutes)
+Crafts: %s
+Keep what your professions still need
+an item that one of your characters' recipes still gives a skill point for (orange and yellow recipes, as the game shows them in the profession's window), or that crafts something worth more at the auction house than the item itself, is kept, not sold, and its tooltip says why. Recipes are read when a profession's window is open
+To gather or buy
+%d crafts: %s
+%s: you have %d, the plan uses %d
+for %s
+Levelling plan: %s %d > %d
+an estimate from the recipes' colours, made again as you level
+At the cap: a trainer has the next rank.
+%d points no recipe of yours gives: learn new ones at a trainer
+Levelling plan
+Open a profession's window to make a plan.
+Farm this
+Farm all
+Back
+Use the plan
+%d added to the farm list.
+Nothing missing: you have what it takes.
+Levelling plan: show / hide
+Levelling plan beside the profession window
+while a profession's window is open, a panel beside it says which recipes to make and how many to reach the cap, and what that takes, down to the ore and herbs; an estimate from the recipes' colours
+show the levelling plan of the profession window you opened last, with the controller's buttons on it
 AP
 RAP
 crit
@@ -112,7 +201,7 @@ health
 mana
 spell crit
 What stats are worth to you
-each stat line in an item's tooltip gets its value for your character: attack power, ranged attack power, crit, dodge, health, mana
+under an item's tooltip, its stat lines with their value for your character: attack power, ranged attack power, crit, dodge, health, mana
 Item level
 Requires level
 Stacks to
@@ -128,28 +217,46 @@ show everything about the item you point at (or the one given): prices, who hold
 +%s over a vendor
 no price known yet
 a vendor pays as much
+The Broker
 Market
+every coin counted, friend
 Post
 Patient
 Read all prices
+Show kept
 Nothing in your bags can be sold here.
 No price history yet: read the auction house on a few days.
+One day of prices so far: the line grows each day you visit the auction house.
+Asking %s each, %s for all %d
 Lowest
+read %s
 Usual
-Up
+7 days: %s to %s
+Up: %d auctions, %d items
+%s each, %s for all %d
+You posted %d here, %d auctions sold
 No price known: read the auction house first.
 %d worth selling here, %d more you could
 %d prices known, all read %s
 never
+Best first: the most gained over a vendor for each one
+what you keep is listed too (%s hides it)
+%d kept (for your professions, to wear, or marked), not listed (%s shows them)
+Hide kept
+each
 no data
 Quick sale
-Back
 Post %d for %s
+Post all %d for %s
 This client's auction house cannot be posted to from here.
 Posted %d for %s.
 Market at the auction house: open / close
 Market tab at the auction house
 a Market tab on the auction house: what in your bags is worth selling there and why, a price chart beside it, and posting in one press
+Auctioneer's greeting on the Market
+a goblin auctioneer says one short line, from the game's own sounds, when the Market opens; off: it opens in silence
+Market: show what you keep
+the Market lists what you keep too: what your professions still learn from or make into something worth more, and what you marked to keep; off: only what you would sell
 open or close the Market (a tab of the auction house)
 which auction house this client has (for troubleshooting)
 Offline
@@ -169,12 +276,14 @@ Cast bar
 our cast bar in place of the game's (it stays where Edit Mode puts the game's)
 Cast bar size
 how large your cast bar is drawn, with the fishing float and everything else that plays on it
+Cast bar beside the vertical bars
+with the vertical bars on, your cast runs on a slim upright bar on the right of your mana, with a small timer and no text, in place of the cast bar under you (fishing keeps its own)
 Fishing front and centre
 while you fish, the cast bar moves to the middle of the screen and is drawn larger: the line, the float and what bites are the main event
 Target something first.
 %d effects listed and saved. Type /reload so the game writes them to disk.
 Your effects on the target
-a row of your own debuffs or buffs under the target bar
+a row under the target bar: your debuffs on an enemy, a friend's buffs (all of them, whoever cast them)
 Enemy buffs on the target
 an enemy target's buffs, on the right under its bar: the ones that matter, or all of them when Only the effects that matter is off
 Only the effects that matter
@@ -235,7 +344,7 @@ the plates of friendly NPCs (vendors, quest givers, townsfolk) show only while y
 Names on things you can interact with
 a name over ore, chests, plaques and the like while you face them (off: they stay bare, as the game's own prompt already says what they are)
 Mini plates
-minions, critters and grey enemies that give no experience get a small plate: a slim bar and the name, nothing more (the game's own option decides whether they have plates at all)
+minions, critters and grey enemies that give no experience get a small plate: a slim bar with your debuffs on it and no name (a critter, with no bar, keeps its name; the game's own option decides whether they have plates at all)
 Party nameplates in dungeons: names only
 inside a dungeon or raid the game draws friendly players' nameplates itself and addons may not change them: in there the game's own options are set to show them as class-coloured names without bars, like ours, with the game's bars back while you fight (when bars for friends in a fight are on); all put back when you leave
 Party nameplates in dungeons: hidden
@@ -245,6 +354,8 @@ list the nameplates on screen and whether they wear our look (for troubleshootin
 Showing every damage school once (the last one as a crit).
 Hit particles
 holy flashes, fire rises, frost crystals linger, shadow smokes, arcane runes twinkle on the bar you hit
+Wounds by the kind of foe
+your hits wound an enemy's bar in its own way, more as its health runs low: beasts, humanoids and dragonkin bleed, demons spill fel ichor, elementals shatter, machines throw sparks, undead wither to ash
 Your bars shake when you are hit
 your player frame and vertical bars give a small shake, in the hit's school, when you take damage
 Hit effects by damage school
@@ -256,8 +367,32 @@ Heals over time grow on the bar
 roots and branches (nature) or golden threads (holy) grow over the bar of your target, focus or you while a heal over time lasts, and wither when it ends
 Shields show as a ward
 a shield on your target, your focus or you (Power Word: Shield, Divine Shield, Ice Barrier...) flares round the health bar in its school's colour, glows while the shield holds, and fades when it breaks
+%d absorbed
+Cooldowns coming back
 Stylized numbers on you
 the damage and healing you take pop like your own hits, instead of the game's scrolling text (follows the game's option for combat text on you)
+Abilities ready
+when an ability only a moment allows becomes usable (Mongoose Bite, Overpower, Revenge, Riposte, Counterattack) or the game lights one up on your bar: its name in bold red in the middle of the screen for a moment
+your key abilities rise and grow beside your character in the last two seconds of their cooldown, then pop gold the moment they are ready (in place of a cooldown bar)
+Buffs wearing off
+a buff you cast on yourself (a Seal, Holy Shield, a shout or shield) calls out with your cooldowns as it runs out, and in red the moment it is gone, also when it is used up early
+The game's own
+Dot
+Ring
+Ring and dot
+Crosshair
+Chevron
+White
+Class colour
+By target
+Aiming dot
+the reticle in the middle of the screen: the game's own, or a dot, ring, ring and dot, crosshair or chevron of the HUD's in its place (the swing timer and the game's action icons stay as they are)
+Aiming dot: colour
+white, your class colour, or the colour of your target: red for an enemy, yellow for a neutral one, green for a friend (white with no target)
+Aiming dot: size
+how big the HUD's aiming dot is
+Aiming dot: opacity
+how solid the HUD's aiming dot is
 The game's vibration is off (or this controller cannot rumble).
 Playing every vibration pattern once.
 Vibration strength
@@ -289,8 +424,55 @@ Judgement
 Rumble: your key abilities
 each class's key abilities have a feel of their own on the controller (a Judgement splashes, a Holy Strike snaps, Windfury knocks three times)
 Big moments
-rarely, a really special hit is pinned big and golden in the middle of the screen: back-to-back crits of your key abilities, a Windfury crit, or a crit far above the fight's usual (at most twice a fight)
+a burst is pinned big and golden in the middle of the screen: crits landing back to back, each within a second of the last (a double swing, Judgement and Holy Strike together), with what they did together (at most twice a fight)
 show what a big moment looks and feels like
+new!
+best!
+%d h
+%d min
+Buffs received
+Catches and camp buffs across the screen
+the fish you land, and the buffs a camp or a shrine gives you, are announced across the upper middle of the screen: a catch washes in like a wave, buffs sweep in with embers
+Reduce animations
+nothing on the screen shakes, sweeps, flies or bursts: cast bar animations, hit effects, nameplate motion, big moments and the readouts of catches and buffs are calm or still. The game's own settings for screen shake and unexpected camera movement count too
+show what the readouts of a catch and of buffs look like
+Grand Master
+Master
+Artisan
+Expert
+Journeyman
+Apprentice
+Reached level %d (from %d)
+Reached level %d
+Defeated %s and %d more in %s
+Defeated %s
+%s: now %s, up to %d
+%s reached %d
+%d new flight paths, the last %s
+New flight path: %s
+New mount: %s
+New companion: %s
+New toy: %s
+Achievement: %s
+The camp
+At rest
+By the fire
+Dawn
+Morning
+Afternoon
+Evening
+Night
+%s in %s
+With %s
+The campfire scene is off.
+The campfire scene waits until you are out of combat.
+Campfire scene
+sit still at a camp for a few seconds and the screen turns to film for a minute: the camera circles you, your big moments since the last camp are told (bosses, levels, professions, new mounts), and the camp's buffs close it, by class. Any move or button ends it
+play the campfire scene now
+done
+%s: ready to hand in
+starts a quest
+a quest of yours
 ready to hand in
 above your level
 wants a group
@@ -308,7 +490,37 @@ Quest list: nearest first
 keep the quest list in order of distance, the nearest quest at the top
 Quest list: recommended order
 keep the quest list in a recommended order: ready to hand in first, then what you can do on your own nearest first, then quests above your level, group quests while you are alone, and grey quests last
+Quest list: short objectives
+objectives in the quest list say only what is needed, with an icon for the kind in front: a skull and 0/1 Captain Dreadrise, not 0/1 Captain Dreadrise slain
+Quest progress in chat
+a short line in chat as a quest moves on: Bloody Bone Necklaces: 4/25, an objective done, a quest ready to hand in
+Quest progress to your party
+in a party (not a raid) the same lines go to party chat, for the others to see, a moment apart; you see them there too
+Keep what your quests need
+an item a quest in your log still asks for, or one that starts a quest you can still do, is marked Quest: never sold or put up for auction for you
 say a recommended order for your quests: hand in what is ready, then the nearest you can do alone, then the rest
+Left of the quests
+Right of the quests
+Under the quests
+The farm list is full.
+Farm list: %s, %d wanted.
+Farm
+%d more
+Nothing to farm yet.
+A stack more
+Take off
+Clear
+Done
+Take everything off the farm list?
+Farm list: choose / done
+Farm list: add the item you point at
+That is not on the farm list.
+The farm list is empty.
+Farm list: where it sits
+Farm list beside the quest list
+things you mean to gather, with how many you have and how many you want: your bags and bank and your other characters' on this realm. Add the reagents of a levelling plan with one button, or any item
+the farm list to the left of the quest list, to its right, or under its quests
+the farm list beside the quest list: choose with the controller; add <item> [how many], remove <item>, clear, or left / right / bottom for where it sits
 Not in combat.
 This client has no gamepad bars.
 This client does not let addons change it; use Edit Mode.
@@ -321,17 +533,19 @@ Gamepad bar size
 size of the gamepad bars while slim bars are on, in percent
 the game's gamepad bars in compact or full mode (the same as its Edit Mode setting)
 Fade out of combat
+/cchud fade <part> on | off sets one; all for the whole fade.
 the gamepad bars, minimap, quest list, damage meter and experience bar rest together out of combat, and come back for a fight, a pulled trigger or an enemy target
 The screen at rest
 how visible the resting parts of the screen stay out of combat (0 hides them)
-Rests: gamepad bars
-Rests: minimap
-Rests: quest list
-Rests: damage meter
-Rests: experience bar
-Rests: buffs
-Rests: cooldown rows
-whether this part of the screen takes part in the fade out of combat
+Fades: gamepad bars
+Fades: minimap
+Fades: quest list
+Fades: damage meter
+Fades: experience bar
+Fades: buffs
+Fades: cooldown rows
+whether this part of the screen fades with the rest out of combat (off: it always stays as it is)
+the screen's fade out of combat: what fades (minimap, quest list and the rest), each on or off
 Saved: type /reload so the game writes it to disk.
 Stance and pet buttons above the bars
 the stance and pet command buttons sit where the green and red targeting icons were, so their wheel opens fully on screen; those icons are hidden
@@ -346,17 +560,24 @@ The controller does not say what it is: the icons stay as the game has them.
 the icons the game shows for your controller's buttons: auto (by the controller in use), xbox, playstation, switch, steam, generic (numbers), or game to leave them as the game has them
 Cooldown rows clear of the gamepad bars
 the game's cooldown rows sit under the target instead of on top of the gamepad buttons, a little smaller (only on the game's built-in layouts: on a layout of your own they stay where you put them)
-Fishing: %s casts
-Fishing mode: %s casts your line, and hooks the fish when the float bobs.
 Fishing mode: off.
+Fishing: %s to cast
+No bait: %s twice to use %s
+%s to put the pole away
+Fishing mode: %s to cast your line, and again to hook the fish when the float bobs.
+%s to hook, %s to cast again
 Fishing mode needs a fishing pole in your hands.
 You do not know Fishing.
 Fishing mode: one button casts and hooks
 Fishing button: %s
 One-button fishing
-with a fishing pole in your hands, your interact button casts your line whenever there is nothing to interact with, and hooks the fish when the float bobs; the catch is taken for you
+with a fishing pole in your hands: your interact button to cast your line whenever there is nothing to interact with, and again to hook the fish when the float bobs; the catch is taken for you. B to put the pole away and take your weapons back
+One press to cast again
+while the float is out, your fishing button casts a fresh line in one press, and A hooks the fish (the game gives no sign of a bite to wait for, so one button cannot do both); off: the fishing button hooks, as the game's interact
 Bait on a double press
 press your fishing button twice quickly: the second press puts the best bait in your bags on your pole, when the pole has none
+Gamepad bars put away while fishing
+with a fishing pole in your hands the gamepad bars are hidden, so the water is clear to look at; the fishing prompt shows the button to cast. They are back the moment a fight starts or the pole is put away
 one-button fishing off for now, or on again (with a pole in your hands it is on by itself)
 the button that fishes: your interact button to begin with (Square or X), or any other, a trigger for one (rt)
 Durotar's coast is red rock and warm shallows. Trolls of the Echo Isles say the mackerel run thickest when the tide carries the smell of the islands' cooking fires.
@@ -437,19 +658,18 @@ Your heaviest %s yet: %s (it was %s).
 Fish journal
 every catch is written into your fish journal: how many of each kind, where you first landed it, and a weight made up for fun with your best of each (/cchud journal opens it)
 Bait %s
-No bait: press %s twice for %s
 No bait
 Caught %d
 Got away %d
-new!
-best!
 Fishing interface
 with a fishing pole in your hands: the fish of the water you stand at (the ones you have not landed here stay hidden), your Fishing skill and what your bait adds, how many you caught and how many got away, how long your bait lasts, and your latest catches
 A curious one: +%d%%
-Hold %s: the lure sinks
+Keep your lure beside the fish
+Next catch +%d%%
+Hold %s: the lure runs along the line
 %d in a row
 A game while the float is out
-a small stretch of water beside the fishing interface: hold a trigger to sink your lure and let go to let it rise, and keep it beside the shadow of the fish. The better you do, the heavier the made-up weight of your next catch. It takes no button and never touches your cast or your catch
+played on the cast bar while your line is out: hold a trigger and your lure runs along the line, let go and it drifts back; keep it beside the shadow of the fish. The better you do, the heavier the made-up weight of your next catch. It takes no button and never touches your cast or your catch
 %d landed, %d kinds, %d got away
 Heaviest: %s, %s
 Fish
@@ -470,20 +690,46 @@ how long chat text stays before it fades
 Coordinates on the map
 your coordinates under the world map
 %d messages hidden as spam since you logged in.
+%d of them were repeated guild recruitment.
 Class icon and level in chat
 a player's class icon and level in brackets in front of their name, when the game lets us know them
+Short channel names in chat
+the channel in front of a line, shortened: [P] party, [PL] party leader, [G] guild, [O] officer, [R] raid, [RL] raid leader, [I] instance, and a numbered channel by its number, [1]
+First names only in chat
+a name with a surname shows as the first name alone (Jory Spleeneater says it as Jory); a whisper or a right-click on it still reaches the whole name
 Chat text size
 the size of the text in the chat windows, as a share of the game's own size (the game's own setting is left as it is)
 Hide gold sellers and repeated adverts
 messages selling gold or services with a web address, and the same message repeated by one player, are hidden (never from your group, guild or friends)
+Hide repeated guild recruitment
+in public channels a guild's recruiting message is shown once; the same player's again, or one nearly the same, within 15 minutes is hidden (never from your group, guild or friends)
 list the chat messages hidden as spam lately
-Tooltips follow the cursor.
-Tooltips stay in their corner.
-Tooltips at the cursor: on / off
-Tooltip background
-how solid the background and border of tooltips are: 100% is the full dark glass, 0% leaves only the text
-Tooltips follow the cursor
-tooltips open at your cursor instead of the corner of the screen (in a fight they stay in the corner)
+Flight
+destination unknown
+a guess from the distance
+first flight on this route: learning its time
+landing
+%s: about %s, a guess from the distance
+%s: about %s
+%s: first flight on this route, time unknown
+On a flight, destination unknown
+%s: flight time learned, %s
+%d flight routes known.
+Flights: time and countdown
+on a flight, where to and how long is said in chat, and a bar at the top of the screen counts down to the landing; each route's time is learned from your flights
+Flights: your mount along the bar
+a gryphon, a wind rider or a bat (whichever the flight master gave you) glides along the flight bar towards where you land
+list the flight routes whose times are known
+A flight is a good moment for it.
+You have played for %s.
+Time for a sip of water
+Reminder to drink water
+now and then while you play, a gentle reminder to have a sip of water (never in a fight)
+Water reminder every (minutes)
+how many minutes of play between reminders to drink water
+Water reminder as a flight begins
+a flight is a natural break: the reminder to drink water comes as one begins, unless the last was not long ago
+show the reminder to drink water
 Restyle the game's own frames
 tooltips, buffs, the quest tracker, the minimap, the experience bar, chat tabs and the gamepad bars in the HUD's look (the mouse UI keeps the game's)
 Experience bar size
@@ -502,13 +748,15 @@ Experience bar
 the experience and reputation bars a little smaller, in their own colours
 Chat
 chat tab names outlined and the box you type in as dark glass
-The game's notices will be asked again.
-Confirm the experimental features notice
-after you have accepted the game's experimental features notice once, it is accepted for you at later logins
-forget the notices you have accepted, so the game asks again
+Damage meter
+the game's damage meter in the HUD's look: its bars, slanted on a dark back, and outlined text; it keeps all it does
 check: %d of %d passed
+The game has not stood still since you logged in.
+Moments the game stood still, and the HUD's part in each:
+The HUD's slowest moments:
 Debug reports
 gather the troubleshooting reports by themselves: when you log in, and again when you reload or log out (they are kept in the saved settings)
+the moments the game stood still since you logged in, and how much of each was the HUD's own work
 HUD preset: %s, to match the camera
 preset: %s
 A layout named '%s' was added to the game's Edit Mode. Choose it there to use it (Game Menu > Edit Mode > Layout).
@@ -578,6 +826,7 @@ TV
 Monitor
 Button icons
 the icons the game shows for your controller's buttons: found by itself for the controller in use, or the kind you choose
+Font
 Reset the game's layout
 Try it out
 Play the demo
@@ -637,7 +886,7 @@ our player bar, top left
 Target frame
 our target bar, top centre
 Pet bar
-a small pet bar under the player bar
+a small pet bar under the player bar, or beside the vertical bars
 Focus frame
 our focus frame
 slim upright health and power bars beside your character, for a third-person view (in place of the player bar)
@@ -660,11 +909,13 @@ Class colours for names in chat
 the game's chat setting for every kind of chat at once: a player's name in their class colour
 open the options panel (Options > AddOns > ControllerCam HUD)
 Frames
+Screen fade
 Effects
 Look
 Quests, chat and map
 Bags, bank and vendor
 Fishing
+Accessibility
 Native Options
 %s  |  Gamepad UI: %s  |  running: %s
 player %s, target %s, pet %s, focus %s  |  game frames put aside: %s  |  chat moved: %s
@@ -686,7 +937,7 @@ vendor and bank help: %s
 auto-sell: %s
 white gear is junk: %s
 Vendor help is off.
-usage: /cchud sell [junk | white | green | blue]
+usage: /cchud sell [junk | recommended | white | green | blue]
 deposit marked items when the bank opens: %s
 usage: /cchud junk <item> (shift-click the item into the chat line)
 item %d: junk, sold with the rest
@@ -720,10 +971,11 @@ the game's Cooldown Manager (the game's own option)
 your health and power under your character (the game's own option)
 the tooltip that pops up when a buff starts (the game's own option)
 keep the game's own player and target frames visible (on) or put them aside (off)
-at a vendor: choose what to sell (also: sell junk, sell white | green | blue)
+at a vendor: choose what to sell (also: sell junk, sell recommended, sell white | green | blue)
 count white weapons and armor as junk
 mark an item: always sold, never sold, or for the bank (shift-click it into the chat line)
 at the bank: deposit what the bank already holds, and every item marked for it
+at the bank: take out what you already carry some of
 deposit as soon as the bank opens
 the bank takes reagents by itself (the game's own option)
 text size, in percent (150 reads well on a TV)

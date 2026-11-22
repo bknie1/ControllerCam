@@ -19,7 +19,8 @@ ns.RegisterSetting({
     tip = "an item's tooltip says how many you have in your bags and bank, and how many your other characters hold",
 })
 
--- What each character holds: [name-realm] = { class, money, bags = { [itemID] = n }, bank = { ... }, seen }
+-- What each character holds: [name-realm] = { class, money, bags = { [itemID] = n }, bank = { ... }, seen,
+-- prof = { [kind] = { name, rank, cap, at, recipes, via, uses = { [itemID] = level } } } (Professions.lua) }
 ns.RegisterSaved("inventory", function(old)
     local out = {}
     if type(old) ~= "table" then return out end
@@ -31,6 +32,51 @@ ns.RegisterSaved("inventory", function(old)
                 if type(rec[place]) == "table" then
                     for id, n in pairs(rec[place]) do
                         if type(id) == "number" and type(n) == "number" and n > 0 then clean[place][id] = n end
+                    end
+                end
+            end
+            if type(rec.prof) == "table" then
+                clean.prof = {}
+                for kind, p in pairs(rec.prof) do
+                    if type(kind) == "string" and type(p) == "table" then
+                        local c = { name = type(p.name) == "string" and p.name or nil, rank = tonumber(p.rank),
+                                    cap = tonumber(p.cap), at = tonumber(p.at), recipes = tonumber(p.recipes),
+                                    via = type(p.via) == "string" and p.via or nil }
+                        if type(p.uses) == "table" then
+                            c.uses = {}
+                            for id, level in pairs(p.uses) do
+                                if type(id) == "number" and tonumber(level) then c.uses[id] = tonumber(level) end
+                            end
+                        end
+                        if type(p.why) == "table" then
+                            c.why = {}
+                            for id, list in pairs(p.why) do
+                                if type(id) == "number" and type(list) == "table" then
+                                    local keep = {}
+                                    for _, r in ipairs(list) do
+                                        if type(r) == "table" and type(r.n) == "string" and tonumber(r.l) and #keep < 5 then
+                                            keep[#keep + 1] = { n = r.n, l = tonumber(r.l) }
+                                        end
+                                    end
+                                    if #keep > 0 then c.why[id] = keep end
+                                end
+                            end
+                        end
+                        if type(p.crafts) == "table" then
+                            c.crafts = {}
+                            for id, list in pairs(p.crafts) do
+                                if type(id) == "number" and type(list) == "table" then
+                                    local keep = {}
+                                    for _, k in ipairs(list) do
+                                        if type(k) == "table" and tonumber(k.p) and #keep < 6 then
+                                            keep[#keep + 1] = { p = tonumber(k.p), n = tonumber(k.n) or 1, m = tonumber(k.m) or 1 }
+                                        end
+                                    end
+                                    if #keep > 0 then c.crafts[id] = keep end
+                                end
+                            end
+                        end
+                        clean.prof[kind] = c
                     end
                 end
             end
@@ -78,6 +124,7 @@ local function BankBags()
     if REAGENTBANK_CONTAINER then list[#list + 1] = REAGENTBANK_CONTAINER end
     return list
 end
+I.BankBags = BankBags
 
 local function Count(bags)
     local out = {}
@@ -151,19 +198,33 @@ function I.Lines(id)
     return lines
 end
 
+-- (they hang under the tooltip on a panel of ours, Tooltip.lua: nothing is added to the game's tooltip)
 local function OnItem(tooltip, data)
-    if not I.active or not (tooltip and tooltip.AddDoubleLine) then return end
+    if not tooltip or not (ns.Tooltip and ns.Tooltip.Annex) then return end
     local id = data and data.id
-    if not id or ns.IsSecret(id) then return end
-    local lines = ns.db.invTotals and I.Lines(id) or {}
-    if ns.Market then
-        for _, l in ipairs(ns.Market.Lines(id)) do lines[#lines + 1] = l end      -- what it is worth
+    local lines = {}
+    -- not under the comparison tooltips beside it (what you wear): one panel, under the item pointed at
+    local okN, name = pcall(tooltip.GetName, tooltip)
+    name = okN and ns.Plain(name)
+    local comparing = type(name) == "string" and name:find("ShoppingTooltip", 1, true) ~= nil
+    if I.active and id and not ns.IsSecret(id) and not comparing then
+        local prices, advice = {}, {}
+        if ns.Market then prices, advice = ns.Market.TipLines(id, tooltip) end      -- what it costs, what it is worth
+        for _, l in ipairs(prices) do lines[#lines + 1] = l end
+        if ns.db.invTotals then
+            for _, l in ipairs(I.Lines(id)) do lines[#lines + 1] = l end           -- how many you have, and where
+        end
+        local stats = ns.Stats and ns.Stats.Lines(tooltip) or {}                   -- what its stats are worth to you
+        if #stats > 0 then
+            if #lines > 0 then lines[#lines + 1] = { "" } end
+            for _, l in ipairs(stats) do lines[#lines + 1] = l end
+        end
+        if #advice > 0 then
+            if #lines > 0 then lines[#lines + 1] = { "" } end                       -- the advice, apart
+            for _, l in ipairs(advice) do lines[#lines + 1] = l end
+        end
     end
-    if #lines == 0 then return end
-    local C = ns.colors
-    for _, l in ipairs(lines) do
-        tooltip:AddDoubleLine(l[1], l[2], C.muted[1], C.muted[2], C.muted[3], 1, 1, 1)
-    end
+    ns.Tooltip.Annex(tooltip, lines)
 end
 
 ---------------------------------------------------------------------------

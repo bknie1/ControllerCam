@@ -34,7 +34,7 @@ Setting("plateClassIcons", "Class icons on nameplates", "a player's class icon i
 Setting("plateServiceIcons", "What NPCs do, as icons", "an icon over friendly NPCs that offer something: a bag over vendors, an anvil over smiths who repair, a book over trainers... (the game's own icons; they show even while the plate itself waits to be pointed at)", true)
 Setting("plateHoverNPC", "Friendly NPCs only when pointed at", "the plates of friendly NPCs (vendors, quest givers, townsfolk) show only while you point at them, like their tooltip", false)
 Setting("plateObjects", "Names on things you can interact with", "a name over ore, chests, plaques and the like while you face them (off: they stay bare, as the game's own prompt already says what they are)", false)
-Setting("plateMini", "Mini plates", "minions, critters and grey enemies that give no experience get a small plate: a slim bar and the name, nothing more (the game's own option decides whether they have plates at all)", true)
+Setting("plateMini", "Mini plates", "minions, critters and grey enemies that give no experience get a small plate: a slim bar with your debuffs on it and no name (a critter, with no bar, keeps its name; the game's own option decides whether they have plates at all)", true)
 
 -- Minor units: the game's "minus" classification (minions, small adds) and critters, by creature type in each
 -- game language
@@ -152,15 +152,18 @@ ns.RegisterCommand("names", function()
     print("  we show: " .. show((U.Info("target"))))
 end, "/cchud names", "show what the game gives for your target's name (for troubleshooting)")
 
--- A name on a font string, with the level in front for enemies. A name the game keeps secret cannot be
--- joined to other text by us, so the game formats it itself.
-local function SetName(fs, name, level)
-    if ns.IsSecret(name) then                          -- handed to the game as it is: it can show it
-        pcall(fs.SetText, fs, name)
+-- A name on a font string: a player's class icon, the level, the name, in that order (icon and level only
+-- where they are wanted). A name the game keeps secret cannot be joined to other text by us, so the game
+-- puts the line together itself.
+local function SetName(fs, name, level, mark)
+    local front = (mark or "") .. (level and (level .. " ") or "")
+    if ns.IsSecret(name) then
+        if front == "" or not pcall(fs.SetFormattedText, fs, "%s%s", front, name) then
+            pcall(fs.SetText, fs, name)                -- handed to the game as it is: it can show it
+        end
         return
     end
-    name = name or ""
-    fs:SetText(level and (level .. " " .. name) or name)
+    fs:SetText(front .. (name or ""))
 end
 NP.SetName = SetName
 
@@ -203,9 +206,10 @@ function NP.ShowRank(o, kind, level)
 end
 
 -- How visible a plate's name is: hidden on your target's plate when that option is off (on every target
--- alike, whoever it is attacking), shown otherwise
+-- alike, whoever it is attacking), and on a mini plate with a bar; shown otherwise
 function NP.NameAlpha(o)
     if o.bars and not ns.db.plateTargetName and o.unit and ns.IsTarget(o.unit) then return 0 end
+    if o.mini and o.bars then return 0 end          -- a mini plate's bar needs no name (a critter's name stays)
     return 1
 end
 
@@ -240,7 +244,7 @@ local function New(plate)
     o.edge:SetPoint("TOPLEFT", o.health, "TOPLEFT", -12, 10)
     o.edge:SetPoint("BOTTOMRIGHT", o.health, "BOTTOMRIGHT", 12, -10)
     o.edge:Hide()
-    o.percent = ns.FontString(o.health.over, 8, "RIGHT")
+    o.percent = ns.FontString(o.health.over, 7, "RIGHT")      -- small: the bar is not tall
     o.percent:SetPoint("RIGHT", o.health, "RIGHT", -4, 0)
     o.power = ns.CreateBar(o, W - 12, 2, { square = true })
     o.power:SetPoint("TOP", o.health, "BOTTOM", 0, -2)
@@ -347,10 +351,18 @@ local function UpdateHealth(o, instant)
         ns.Impact:Hit({ frame = o, anchor = o.plate, bar = o.health }, "physical", false)
     end
     o.health:SetColor(ns.UnitFrames.TargetHealthColor(o.unit, frac))
+    o.health:SetAbsorb(ns.UnitFrames.Absorb(o.unit))
+    o.health:SetExecute(o.bars and not o.mini and ns.UnitFrames.Execute(o.unit, frac) or nil)   -- open to an execute
+    if ns.Impact and ns.Impact.Bleed then ns.Impact:Bleed(o.health, o.bars and o.unit or nil, frac) end
     ns.PlateStates:Update(o, frac)
 end
 
 local function UpdateAuras(o) ns.PlateStates:Update(o, o.health:GetFraction()) end
+
+-- Its raid mark, at the left end of its bar (a name-only friend: where the bar would be)
+function NP.Mark(o)
+    if o and o.unit then ns.ShowRaidMark(o, o, o.unit, 20, "RIGHT", o.health, "LEFT", -5, 0) end
+end
 
 local function UpdateInfo(o)
     local unit = o.unit
@@ -367,14 +379,16 @@ local function UpdateInfo(o)
     o.cast:SetBarWidth(math.max(40, width - 10))
     o.bars = WantsBars(o)
     local r, g, b = ns.UnitFrames.TargetColor(unit)
+    local mark = NP.ClassMark(unit, isPlayer)                          -- a player's class, in the line itself
+    local levelText = ns.db.plateLevels and not o.mini and ns.LevelText(level) or nil   -- a small plate: the name only
     if o.hostile then
         local rank = ns.RankOf(kind, level)
-        local levelText = ns.db.plateLevels and not o.mini and ns.LevelText(level) or nil   -- a small plate: the name only
         if rank and rank.mark == "skull" then levelText = nil end      -- the skull says it
-        SetName(o.name, name, levelText)
+        SetName(o.name, name, levelText, mark)
         o.name:SetTextColor(unpack(C.text))
     else
-        SetName(o.name, name)
+        -- a friend: a player reads icon, level, name like everyone else; an NPC is its name alone
+        SetName(o.name, name, ns.Yes(isPlayer) and levelText or nil, mark)
         o.name:SetTextColor(r, g, b)
     end
     local sub = ns.db.plateSubtitles and not o.mini and Subtitle(unit) or nil
@@ -385,7 +399,7 @@ local function UpdateInfo(o)
         o.sub:Hide()
     end
     NP.ShowRank(o, kind, level)
-    NP.ClassIcon(o, unit, isPlayer)
+    NP.Mark(o)
     UpdateHealth(o, true)
     UpdatePower(o, true)
     Arrange(o)
@@ -393,33 +407,20 @@ local function UpdateInfo(o)
     NP.ServiceIcon(o, isPlayer)
 end
 
--- A player's class icon in front of their name, friend or enemy
+-- A player's class as an icon, friend or enemy: in the name's own line, right against the level ("" when there
+-- is none to show)
 local CLASS_ICONS = "Interface\\GLUES\\CHARACTERCREATE\\UI-CHARACTERCREATE-CLASSES"
-function NP.ClassIcon(o, unit, isPlayer)
-    local coords
-    if ns.db.plateClassIcons and isPlayer and not ns.IsSecret(isPlayer) and CLASS_ICON_TCOORDS then
-        local ok, _, class = pcall(UnitClass, unit)
-        if ok and class and not ns.IsSecret(class) then coords = CLASS_ICON_TCOORDS[class] end
-    end
-    if not coords then
-        if o.classIcon then o.classIcon:Hide() end
-        return
-    end
-    if not o.classIcon then
-        o.classIcon = o:CreateTexture(nil, "OVERLAY")
-        o.classIcon:SetTexture(CLASS_ICONS)
-    end
-    local size = math.ceil(10 * (ns.db.textScale or 1))
-    o.classIcon:SetSize(size, size)
-    o.classIcon:SetTexCoord(unpack(coords))
-    o.classIcon:ClearAllPoints()
-    o.classIcon:SetPoint("RIGHT", o.name, "LEFT", -3, 0)
-    o.classIcon:SetAlpha(o.name:GetAlpha())
-    o.classIcon:Show()
+function NP.ClassMark(unit, isPlayer)
+    if not (ns.db.plateClassIcons and ns.Yes(isPlayer) and CLASS_ICON_TCOORDS) then return "" end
+    local ok, _, class = pcall(UnitClass, unit)
+    local c = ok and class and not ns.IsSecret(class) and CLASS_ICON_TCOORDS[class]
+    if not c then return "" end
+    return ("|T%s:0:0:0:0:256:256:%d:%d:%d:%d|t"):format(CLASS_ICONS, c[1] * 256, c[2] * 256, c[3] * 256, c[4] * 256)
 end
 
 -- What an NPC offers, as an icon above its name. First by what the line under its name says it is (the game's own
--- map-tracking icons, one per kind, so a banker never looks like a vendor); otherwise the game's interaction
+-- map-tracking icons, one per kind, so a banker never looks like a vendor; a trainer by what it teaches: the
+-- profession's icon, or the class's); otherwise the game's interaction
 -- icon (the one by the cursor). It sits on a frame of its own, so it shows even while a townsperson's plate
 -- waits until you point at it.
 local TRACKING = "Interface\\Minimap\\Tracking\\"
@@ -442,15 +443,146 @@ NP.SERVICES = {
     { "trainer", { "trainer", "lehrer", "maître", "instructor", "istruttore", "instrutor", "учитель" }, "Profession" },
 }
 
--- The kind of service in the line under an NPC's name, and its icon (nil, nil when it says none)
-function NP.ServiceKind(subtitle)
+-- Trainers wear what they teach. A profession's trainer has that profession's own icon (the game's: asked for
+-- by the profession's spell, with the usual icon file to fall back on); a class trainer has the class's icon.
+-- A profession is known by its English words and by its name in your language (the spell's name).
+-- { kind, the icon's file, the profession's spell, words }
+NP.PROFESSIONS = {
+    { "blacksmithing", "Trade_BlackSmithing", 2018, { "blacksmith" } },
+    { "leatherworking", "Trade_LeatherWorking", 2108, { "leatherwork" } },
+    { "tailoring", "Trade_Tailoring", 3908, { "tailor" } },
+    { "alchemy", "Trade_Alchemy", 2259, { "alchem" } },
+    { "enchanting", "Trade_Engraving", 7411, { "enchant" } },
+    { "engineering", "Trade_Engineering", 4036, { "engineer" } },
+    { "jewelcrafting", "INV_Misc_Gem_01", 25229, { "jewelcraft" } },
+    { "inscription", "INV_Inscription_Tradeskill01", 45357, { "inscription", "scribe" } },
+    { "herbalism", "Trade_Herbalism", 2366, { "herbalis" } },
+    { "mining", "Trade_Mining", 2575, { "mining", "miner" } },
+    { "skinning", "INV_Misc_Pelt_Wolf_01", 8613, { "skinn" } },
+    { "cooking", "INV_Misc_Food_15", 2550, { "cook" } },
+    { "fishing", "Trade_Fishing", 7620, { "fish" } },
+    { "firstaid", "Spell_Holy_SealOfSacrifice", 3273, { "first aid", "physician", "trauma surgeon" } },
+}
+local SELLS = { "suppl", "vendor", "merchant", "goods", "trade" }        -- (somebody who sells for it, not teaches)
+local TEACHES = { "trainer", "lehrer", "maître", "instructor", "istruttore", "instrutor", "учитель" }
+local CLASS_WORDS = { WARRIOR = "warrior", PALADIN = "paladin", HUNTER = "hunter", ROGUE = "rogue", PRIEST = "priest",
+                      SHAMAN = "shaman", MAGE = "mage", WARLOCK = "warlock", DRUID = "druid", DEATHKNIGHT = "death knight",
+                      MONK = "monk", DEMONHUNTER = "demon hunter", EVOKER = "evoker" }
+
+local function Has(text, words)
+    for _, word in ipairs(words) do
+        if word ~= "" and text:find(word, 1, true) then return true end
+    end
+    return false
+end
+
+local profWords, classWords
+local function Learn()
+    profWords, classWords = {}, {}
+    local get = (C_Spell and C_Spell.GetSpellName) or GetSpellInfo
+    for i, p in ipairs(NP.PROFESSIONS) do
+        local words = {}
+        for _, w in ipairs(p[4]) do words[#words + 1] = w end
+        if get then
+            local ok, name = pcall(get, p[3])
+            if ok and type(name) == "string" and not ns.IsSecret(name) and #name >= 4 then
+                name = name:lower()
+                words[#words + 1] = name
+                -- (a language that bends the word inside a title, "Angeln" in "Angellehrer": its stem as well)
+                if #name >= 6 then words[#words + 1] = name:sub(1, #name - 1) end
+            end
+        end
+        profWords[i] = words
+    end
+    for token, english in pairs(CLASS_WORDS) do
+        local words = { english }
+        for _, list in ipairs({ LOCALIZED_CLASS_NAMES_MALE, LOCALIZED_CLASS_NAMES_FEMALE }) do
+            local name = type(list) == "table" and list[token]
+            if type(name) == "string" and name ~= "" then words[#words + 1] = name:lower() end
+        end
+        classWords[#classWords + 1] = { token = token, words = words, long = #english }
+    end
+    table.sort(classWords, function(a, b) return a.long > b.long end)    -- "demon hunter" before "hunter"
+end
+
+-- What a trainer teaches, by the line under the name: the kind, its icon, and (a class) where on the sheet of
+-- class icons it is. nil for anybody else.
+function NP.TrainerKind(text)
+    if Has(text, SELLS) then return nil end
+    if not profWords then Learn() end
+    for i, p in ipairs(NP.PROFESSIONS) do
+        if Has(text, profWords[i]) then
+            local icon
+            local tex = (C_Spell and C_Spell.GetSpellTexture) or GetSpellTexture
+            if tex then
+                local ok, found = pcall(tex, p[3])
+                if ok and (type(found) == "number" or type(found) == "string") and not ns.IsSecret(found) then icon = found end
+            end
+            return p[1], icon or ("Interface\\Icons\\" .. p[2]), { 0.08, 0.92, 0.08, 0.92 }
+        end
+    end
+    if Has(text, TEACHES) and CLASS_ICON_TCOORDS then
+        for _, c in ipairs(classWords) do
+            if CLASS_ICON_TCOORDS[c.token] and Has(text, c.words) then
+                return "class", "Interface\\GLUES\\CHARACTERCREATE\\UI-CHARACTERCREATE-CLASSES", CLASS_ICON_TCOORDS[c.token]
+            end
+        end
+    end
+    return nil
+end
+
+-- The kind of service in the line under an NPC's name, its icon, and (some icons) the part of the file to show
+-- (nil when it says none). named: the text is the NPC's own name, where only the plain kinds are looked for.
+function NP.ServiceKind(subtitle, named)
     if type(subtitle) ~= "string" or ns.IsSecret(subtitle) then return nil end
     local text = subtitle:lower()
+    if not named then
+        local kind, icon, coords = NP.TrainerKind(text)
+        if kind then return kind, icon, coords end
+    end
     for _, s in ipairs(NP.SERVICES) do
         for _, word in ipairs(s[2]) do
             if text:find(word, 1, true) then return s[1], TRACKING .. s[3] end
         end
     end
+end
+
+-- The game's interaction icon has a grey twin for "too far away to use" (a grey bag over a vendor across the
+-- square). Over a nameplate the icon says what the NPC is, not whether you can reach it from here: the grey
+-- twin is swapped for the plain one (the brown bag). Its name is the plain one's with "unable" in it, as an
+-- atlas ("Cursor_unablebuy_32") or as a file ("Interface\Cursor\UnableBuy"). Returns what it found and what
+-- it set (nil when it was the plain one already).
+NP.cursorsSeen = {}
+function NP.PlainCursor(tex)
+    local function Without(name) return (name:gsub("[Uu][Nn][Aa][Bb][Ll][Ee]", "")) end
+    local okA, atlas = pcall(function() return tex.GetAtlas and tex:GetAtlas() end)
+    if okA and type(atlas) == "string" and atlas ~= "" and not ns.IsSecret(atlas) then
+        local plain = Without(atlas)
+        if plain == atlas then return atlas, nil end
+        local known = true
+        if C_Texture and C_Texture.GetAtlasInfo then
+            local ok, info = pcall(C_Texture.GetAtlasInfo, plain)
+            known = ok and info ~= nil
+        end
+        if known and tex.SetAtlas then
+            tex:SetAtlas(plain)
+            return atlas, plain
+        end
+        return atlas, nil
+    end
+    local okP, path = pcall(function()
+        return (tex.GetTextureFilePath and tex:GetTextureFilePath()) or (tex.GetTexture and tex:GetTexture())
+    end)
+    if okP and type(path) == "string" and path ~= "" and not ns.IsSecret(path) then
+        local plain = Without(path)
+        if plain == path then return path, nil end
+        if tex:SetTexture(plain) == false then               -- (no such file here: the grey one is better than none)
+            tex:SetTexture(path)
+            return path, nil
+        end
+        return path, plain
+    end
+    return okP and path or nil, nil
 end
 
 function NP.ServiceIcon(o, isPlayer)
@@ -466,19 +598,27 @@ function NP.ServiceIcon(o, isPlayer)
     s:SetPoint("BOTTOM", o.name, "TOP", 0, 2)
     local show, kind = false, nil
     if ns.db.plateServiceIcons and not o.hostile and not isPlayer then
-        local icon
-        kind, icon = NP.ServiceKind(Subtitle(o.unit))
+        local icon, coords
+        kind, icon, coords = NP.ServiceKind(Subtitle(o.unit))
         if not icon then                                 -- "Auctioneer Tricket": the job in the name itself
             local okN, name = pcall(UnitName, o.unit)
-            if okN then kind, icon = NP.ServiceKind(name) end
+            if okN then kind, icon, coords = NP.ServiceKind(name, true) end
         end
         if icon then
             s.icon:SetTexture(icon)
-            s.icon:SetTexCoord(0, 1, 0, 1)
+            if coords then s.icon:SetTexCoord(unpack(coords)) else s.icon:SetTexCoord(0, 1, 0, 1) end
             show = true
         elseif SetUnitCursorTexture then
             local ok, has = pcall(SetUnitCursorTexture, s.icon, o.unit)
             show = ok and has and not ns.IsSecret(has) and true or false
+            if show then
+                local okC, was, now = pcall(NP.PlainCursor, s.icon)
+                local key = okC and tostring(was) or "?"
+                if not NP.cursorsSeen[key] then              -- (each kind once, for the report)
+                    NP.cursorsSeen[key] = true
+                    ns.Note("plates: the game's interaction icon %s%s", key, (okC and now) and (" shown as " .. tostring(now)) or "")
+                end
+            end
         end
     end
     if show then s:Show() else s:Hide() end
@@ -491,6 +631,11 @@ local function CastOnUpdate(bar)
     if look and look.every and ns.db.impactFx and ns.Impact and (not bar.nextFx or now >= bar.nextFx) then
         bar.nextFx = now + look.every
         ns.Impact:Burst(bar, look, 0.5)
+    end
+    if now >= bar.stop and bar.estimated then            -- our own guess of its length ran out: full, until it ends
+        bar.fill:SetValue(1)
+        NP.CastAlert(bar, now, 1)
+        return
     end
     if now >= bar.stop then
         bar:SetScript("OnUpdate", nil)
@@ -506,7 +651,7 @@ local function CastOnUpdate(bar)
     local p = (now - bar.start) / (bar.stop - bar.start)
     bar.fill:SetValue(bar.channel and (1 - p) or p)
     if bar.art then bar.art:Update(bar.channel and (1 - p) or p, p, now) end
-    bar.time:SetText(("%.1f"):format(bar.stop - now))
+    if not bar.estimated then bar.time:SetText(("%.1f"):format(bar.stop - now)) end
     -- about to land: the bar brightens, so an interrupt can be timed
     bar.fill:SetAlpha(p > 0.8 and (0.75 + 0.25 * math.sin(now * 30)) or 1)
     NP.CastAlert(bar, now, p)
@@ -576,6 +721,30 @@ function NP.CastEnd(o, how)
     return true
 end
 
+-- Who a cast is aimed at, for the line beside the spell's name. The game does not say whom a spell is cast
+-- at, only whom the caster has targeted, and those differ when it matters: a priest with you targeted who
+-- heals is not healing you. A heal cast with an enemy targeted is for that enemy's target, the one it is
+-- fighting (the priest itself when you are on the priest, the rifleman when you are on the rifleman), so
+-- that is who is named. When that one is no friend of the caster's either, nothing is said.
+function NP.CastAim(unit, look)
+    local t = unit .. "target"
+    local okN, name = pcall(UnitName, t)
+    if not okN or name == nil then return nil end
+    if look and look.kind == "heal" then
+        local function Foe(who)
+            local okA, foe = pcall(UnitCanAttack, unit, who)
+            return okA and not ns.IsSecret(foe) and foe and true or false
+        end
+        if Foe(t) then
+            local tt = t .. "target"
+            local okT, theirs = pcall(UnitName, tt)
+            if okT and theirs ~= nil and not Foe(tt) then return theirs end
+            return nil
+        end
+    end
+    return name
+end
+
 local function UpdateCast(o)
     local bar = o.cast
     bar.text, bar.time, bar.glow = o.castText, o.castTime, o.castGlow
@@ -629,7 +798,7 @@ local function UpdateCast(o)
             bar:Flash(0.5, { 1, 0.85, 0.3 }, 2.5)        -- the cast starts with a bang
         end
     end
-    local aim = ns.db.plateCastTarget and UnitName(o.unit .. "target") or nil
+    local aim = ns.db.plateCastTarget and NP.CastAim(o.unit, bar.look) or nil
     local ok = pcall(function()
         if aim then o.castText:SetFormattedText("%s  |cffb8c2db>|r %s", name, aim)
         else o.castText:SetFormattedText("%s", name) end
@@ -641,14 +810,31 @@ local function UpdateCast(o)
     bar.fill:SetAlpha(1)
     bar:Show()
     if ns.IsSecret(startMS) or ns.IsSecret(endMS) or not startMS or not endMS or endMS <= startMS then
-        -- the game keeps the times to itself: its own timer runs the bar, and the alert pulses without them
+        -- the game keeps the times to itself: its own timer runs the bar, and the alert pulses without them;
+        -- with no timer either, the bar fills over the spell's own length from when we saw it begin
         o.castTime:Hide()
+        bar.estimated = nil
+        if fresh then bar.seen = GetTime() end
+        if not ns.GameCastTimer(bar, o.unit, channel) then
+            local length = (not channel) and ns.CastLength(o.unit)
+            if length then
+                bar.start, bar.stop, bar.channel, bar.estimated = bar.seen or GetTime(), (bar.seen or GetTime()) + length, false, true
+                bar:SetScript("OnUpdate", CastOnUpdate)
+                CastOnUpdate(bar)
+                return
+            end
+            bar.fill:SetValue(1)                               -- nothing known: dim, it only says "casting"
+            bar.fill:SetAlpha(0.35)
+        end
         if bar.art then bar.art:Stop() end
-        if not ns.GameCastTimer(bar, o.unit, channel) then bar.fill:SetValue(1) end
-        bar:SetScript("OnUpdate", function(b) NP.CastAlert(b, GetTime(), nil) end)
+        bar:SetScript("OnUpdate", function(b)
+            ns.CastTick(b)                                     -- (on the cast's own duration: where it is now)
+            NP.CastAlert(b, GetTime(), nil)
+        end)
         NP.CastAlert(bar, GetTime(), nil)
         return
     end
+    bar.estimated, bar.duration = nil, nil
     o.castTime:Show()
     bar.start, bar.stop, bar.channel = startMS / 1000, endMS / 1000, channel and true or false
     bar:SetScript("OnUpdate", CastOnUpdate)
@@ -685,7 +871,6 @@ function UpdateTarget(o)
         local a = NP.NameAlpha(o)
         o.name:SetAlpha(a)
         o.sub:SetAlpha(a)
-        if o.classIcon then o.classIcon:SetAlpha(a) end
     end
     o.waiting = NP.Waits(o)
     if o.waiting then o:SetAlpha(0) else o:SetAlpha((isTarget or not any) and 1 or OTHER_ALPHA) end
@@ -838,6 +1023,7 @@ end, "/cchud plates", "list the nameplates on screen and whether they wear our l
 
 local UNIT_EVENTS = {
     UNIT_HEALTH = UpdateHealth, UNIT_MAXHEALTH = UpdateHealth, UNIT_FACTION = Full,
+    UNIT_ABSORB_AMOUNT_CHANGED = UpdateHealth,
     UNIT_NAME_UPDATE = Full, UNIT_LEVEL = Full, UNIT_CLASSIFICATION_CHANGED = Full,
     UNIT_POWER_UPDATE = UpdatePower, UNIT_MAXPOWER = UpdatePower, UNIT_DISPLAYPOWER = UpdatePower,
     UNIT_AURA = UpdateAuras, UNIT_THREAT_SITUATION_UPDATE = UpdateAuras, UNIT_THREAT_LIST_UPDATE = UpdateAuras,
@@ -861,6 +1047,8 @@ local OnEvent = ns.Protect(function(_, event, unit)
         for _, o in pairs(NP.plates) do UpdateTarget(o) end
     elseif event == "QUEST_LOG_UPDATE" or event == "UNIT_QUEST_LOG_CHANGED" then
         for _, o in pairs(NP.plates) do ns.PlateStates:Quest(o) end
+    elseif event == "RAID_TARGET_UPDATE" then
+        for _, o in pairs(NP.plates) do NP.Mark(o) end
     else
         local o = unit and NP.plates[unit]
         if o then UNIT_EVENTS[event](o) end
@@ -891,7 +1079,8 @@ function NP:Apply(run)
         for event in pairs(UNIT_EVENTS) do pcall(events.RegisterEvent, events, event) end
         for _, e in ipairs({ "NAME_PLATE_UNIT_ADDED", "NAME_PLATE_UNIT_REMOVED", "PLAYER_TARGET_CHANGED",
                              "QUEST_LOG_UPDATE", "UNIT_QUEST_LOG_CHANGED", "UPDATE_MOUSEOVER_UNIT",
-                             "PLAYER_SOFT_INTERACT_CHANGED", "PLAYER_SOFT_FRIEND_CHANGED", "PLAYER_ENTERING_WORLD" }) do
+                             "PLAYER_SOFT_INTERACT_CHANGED", "PLAYER_SOFT_FRIEND_CHANGED", "PLAYER_ENTERING_WORLD",
+                             "RAID_TARGET_UPDATE" }) do
             pcall(events.RegisterEvent, events, e)
         end
         events:SetScript("OnEvent", OnEvent)

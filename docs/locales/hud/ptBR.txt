@@ -3,6 +3,10 @@ ativado
 desativado
 uso:
 As alterações são aplicadas quando o combate termina.
+A do jogo
+As fontes só podem ser escolhidas onde o idioma do jogo é escrito em letras latinas.
+Fonte: %s
+uma fonte para o HUD e os textos do próprio jogo (janelas, dicas, bate-papo, botões); tudo mantém o seu tamanho
 Bola de Fogo
 Mago amigo
 Cura
@@ -10,25 +14,56 @@ Ajudante
 Boneco de treino
 Curandeiro amigo
 Jogador
+PNJs amistosos por reputação
+o nome e a barra de um PNJ amistoso são coloridos pela sua reputação com a facção dele: amarelo neutro, verde amistoso, depois verde-água, turquesa e azul para honrado, reverenciado e exaltado
+Faixa de execução nas barras inimigas
+um inimigo com um quarto da vida ou menos: sua barra de vida pulsa em vermelho, com um brilho ao redor batendo como um pulso, nos quadros de alvo e foco e nas placas de nome
+Escudos nas barras de vida
+quanto um escudo numa unidade ainda vai absorver, como uma faixa azul-prateada a partir do fim da barra de vida: nos seus quadros, no do alvo, nos do grupo e nas placas de nome
+Felicidade do ajudante
+ao lado da barra do ajudante, uma faixa fina na cor do humor dele: verde feliz, amarelo contente, vermelho infeliz, com comida ao lado quando precisa ser alimentado. Nada para um ajudante sem humor
 As barras verticais seguem a câmera
 as barras verticais mantêm o lugar ao lado do seu personagem enquanto a câmera aproxima e afasta (coloque-as no Modo de Edição na distância que preferir)
 Sobrenomes
 o nome completo de um jogador nos quadros de unidade e nas placas de nome, com sobrenome: Faith Ashborne
 Vida na barra do alvo
 a vida restante (12.3k) e a porcentagem nas barras do alvo e do foco; um alvo compacto mostra só a porcentagem
+Sonolento ao descansar
+em uma estalagem ou cidade seu quadro cochila: pequenos z sobem flutuando e um suave brilho de lua respira ao redor (nunca em combate)
 Alvo
 Alvo do alvo
 Foco
 Barras verticais
 %d itens depositados
+%d itens tirados do banco
 %d itens vendidos por %s (/cchud sold lista-os)
 Nada para vender.
 Abra o banco primeiro.
+Nada para tirar: o banco não tem nada do que você carrega.
+Retirar
+tira do banco aquilo de que você já carrega um pouco (materiais, poções, comida), para completar suas bolsas
+Depositar
+guarda no banco o que ele já tem um pouco, e o que você marcou para ele
+Abra um vendedor primeiro.
+Venda esperta
+vende o que um vendedor paga melhor: lixo, e o que a casa de leilões não faria melhor (listado e confirmado antes); o que vale mais na casa de leilões ou ainda serve às suas profissões fica
 Nada para depositar: seu banco não tem nada do que você carrega, e nada está marcado para ele.
 Nada está marcado para o banco. Aponte para um item e use Marcar item.
-Abra um vendedor primeiro.
-Vender lixo: %d itens por %s.\n\nOu venda armas e armaduras por qualidade.
-Vender lixo
+%d itens, %s
+...e mais %d
+Vender ao vendedor: %s
+Ainda não há preços de leilão: visite a casa de leilões uma vez.
+Mantidos: valem mais na casa de leilões
+Mantidos para suas profissões
+Mantidos para suas missões
+Abra estas janelas de profissão uma vez para que os pontos de perícia contem: %s
+Para as melhores estimativas, abra de vez em quando as janelas das suas profissões e a casa de leilões.
+O que vender?\n\nLixo: %s\nCom armas e armaduras brancas: %s\nCom armas e armaduras verdes: %s\n\nDepois de uma visita à casa de leilões, recomendações também aparecem aqui.
+Lixo
++ Equipamento branco
++ Equipamento verde
+O que vender?\n\nRecomendado: %s ao vendedor. %d itens ficam porque valem mais na casa de leilões, %d porque suas profissões ainda precisam deles.\nSó lixo: %s
+Recomendado
 Por qualidade
 Vender armas e armaduras até qual qualidade?\n\nComum (branco): %s\nIncomum (verde): %s
 Comum
@@ -44,6 +79,8 @@ Aponte para um item primeiro.
 Movimento rápido: vender, depositar, trocar ou enviar por correio o item para o qual você aponta
 Marcar o item: lixo / mantido / banco / sem marca
 Depositar: guardar no banco o que ele já tem e o que você marcou para ele
+Retirar: tirar do banco aquilo de que você já carrega um pouco
+Venda esperta: o que um vendedor paga melhor, listado e confirmado antes
 Nada vendido ainda nesta sessão.
 A aba de recompra de um vendedor os recupera até você sair do jogo.
 Reparado por %s do banco da guilda
@@ -56,6 +93,23 @@ repara tudo assim que um vendedor que repara é aberto
 Reparar do banco da guilda
 paga os reparos com o banco da guilda quando sua guilda permite, e com seu próprio ouro caso contrário
 lista o que foi vendido por você nesta sessão, para recomprar algo
+1 item
+%d itens
+Nada para pegar na caixa de correio.
+Caixa de correio: pegou %s.
+ e 
+Cartas com pagamento na entrega, deixadas para você abrir: %d
+Suas bolsas estão cheias: os outros itens esperam nas cartas.
+Itens que o jogo não entregou (únicos ou recusados), deixados nas cartas: %d
+Aguardando mais...
+Abra uma caixa de correio primeiro.
+Pegando...
+Pegar tudo
+pega o dinheiro e os itens de cada carta, vendas no leilão incluídas, em todas as páginas (pressione de novo para parar); cartas com pagamento na entrega não são tocadas
+Pegar tudo da caixa de correio (de novo para parar)
+Pegar tudo da caixa de correio
+um botão ao lado de Abrir tudo na caixa de correio: pega o dinheiro e os itens de cada carta, vendas no leilão incluídas, em todas as páginas; cartas com pagamento na entrega não são tocadas
+pega o dinheiro e os itens de cada carta da caixa de correio aberta (de novo para parar)
 Bolsa
 Banco
 Você
@@ -79,9 +133,21 @@ há %d horas
 há %d dias
 Vendedor
 Melhor
+Receitas
 Leilão
-Casa de Leilões
+Recomendação
+Equipar
+Missão
 Guardar
+melhor do que o que você usa
+%s por %s
+transformado em %s
+%d%% de chance de venda
+Custo
+Casa de Leilões
+Sobe perícia: %s
+Missão: %s
+%d%% de chance de vender
 5% abaixo do menor, para uma venda rápida
 o mercado está incomumente baixo hoje: preço perto do usual, para esperar compradores
 logo abaixo do menor: poucos à venda, deve vender
@@ -100,10 +166,33 @@ a menor compra imediata que você viu para um item na casa de leilões, e há qu
 Ler a Casa de Leilões ao visitar
 a primeira visita depois de um tempo lê todos os preços de uma vez (o jogo permite a cada 15 minutos); /cchud scan pede isso
 Melhor uso de um item
-a dica de um item diz o que fazer com ele: vender na Casa de Leilões (e quanto mais isso rende), vender a um vendedor ou guardar
+a dica de um item diz o que fazer com ele: vender na casa de leilões (e quanto a mais isso rende), vender a um vendedor, guardar ou guardar para uma missão
 Vendas rápidas na Casa de Leilões
 preço 5% abaixo do menor para vender agora; desligado: preços pacientes, logo abaixo do menor, que vendem quando os compradores chegam
 lê todos os preços da Casa de Leilões de uma vez (abra-a antes; a cada 15 minutos)
+Fabrica: %s
+Guardar o que suas profissões ainda precisam
+um item pelo qual uma receita de um dos seus personagens ainda dá um ponto de perícia (receitas laranjas e amarelas, como o jogo as mostra na janela da profissão), ou com o qual se fabrica algo que vale mais na casa de leilões do que o próprio item, é guardado em vez de vendido, e a dica dele diz por quê. As receitas são lidas quando a janela de uma profissão está aberta
+Para coletar ou comprar
+%d vezes: %s
+%s: você tem %d, o plano usa %d
+para %s
+Plano de evolução: %s %d > %d
+uma estimativa pelas cores das receitas, refeita conforme você evolui
+No máximo: um instrutor tem o próximo nível.
+%d pontos que nenhuma receita sua dá: aprenda novas com um instrutor
+Plano de evolução
+Abra a janela de uma profissão para fazer um plano.
+Farmar isto
+Farmar tudo
+Voltar
+Usar o plano
+%d adicionado(s) à lista de farm.
+Nada faltando: você tem o necessário.
+Plano de evolução: mostrar / ocultar
+Plano de evolução ao lado da janela da profissão
+enquanto a janela de uma profissão está aberta, um painel ao lado diz quais receitas fazer e quantas para chegar ao máximo, e o que isso exige, até o minério e as ervas; uma estimativa pelas cores das receitas
+mostra o plano de evolução da última janela de profissão aberta, com os botões do controle nele
 PA
 PA à dist.
 crít.
@@ -112,7 +201,7 @@ vida
 mana
 crít. de feitiço
 O que os atributos valem para você
-cada linha de atributo na dica de um item recebe seu valor para o seu personagem: poder de ataque, poder de ataque à distância, crítico, esquiva, vida, mana
+sob a dica de um item, suas linhas de atributos com o valor para seu personagem: poder de ataque, poder de ataque à distância, crítico, esquiva, vida, mana
 Nível do item
 Requer nível
 Empilha até
@@ -128,28 +217,46 @@ mostra tudo sobre o item para o qual você aponta (ou o indicado): preços, quem
 +%s a mais que um vendedor
 nenhum preço conhecido ainda
 um vendedor paga o mesmo
+O Corretor
 Mercado
+cada moeda contada, amigo
 Postar
 Paciente
 Ler todos os preços
+Mostrar guardados
 Nada nas suas bolsas pode ser vendido aqui.
 Ainda sem histórico de preços: leia a Casa de Leilões por alguns dias.
+Só um dia de preços até agora: a linha cresce a cada dia que você visita a casa de leilões.
+Pede %s cada, %s por todos os %d
 Menor
+lido %s
 Usual
-À venda
+7 dias: de %s a %s
+À venda: %d leilões, %d itens
+%s cada, %s por todos os %d
+Você anunciou %d aqui, %d leilões vendidos
 Nenhum preço conhecido: leia a Casa de Leilões primeiro.
 %d valem a venda aqui, mais %d que você poderia
 %d preços conhecidos, todos lidos %s
 nunca
+O melhor primeiro: o maior ganho sobre um vendedor por unidade
+o que você guarda também é listado (%s oculta)
+%d guardados (para suas profissões, para usar ou marcados), não listados (%s mostra)
+Ocultar guardados
+cada
 sem dados
 Venda rápida
-Voltar
 Postar %d por %s
+Anunciar todos os %d por %s
 Não é possível postar na Casa de Leilões deste cliente a partir daqui.
 Postado %d por %s.
 Mercado na casa de leilões: abrir / fechar
 Aba Mercado na casa de leilões
 uma aba Mercado na casa de leilões: o que nas suas bolsas vale vender lá e por quê, um gráfico de preços ao lado, e anunciar com um toque
+Saudação do leiloeiro no Mercado
+um leiloeiro goblin diz uma frase curta, dos sons do próprio jogo, quando o Mercado abre; desligado: abre em silêncio
+Mercado: mostrar o que você guarda
+o Mercado também lista o que você guarda: o que suas profissões ainda aprendem ou transformam em algo que vale mais, e o que você marcou para guardar; desligado: só o que você venderia
 abrir ou fechar o Mercado (uma aba da casa de leilões)
 qual Casa de Leilões este cliente tem (para solução de problemas)
 Offline
@@ -169,12 +276,14 @@ Barra de lançamento
 nossa barra de lançamento no lugar da do jogo (ela fica onde o Modo de Edição coloca a do jogo)
 Tamanho da barra de lançamento
 o tamanho com que sua barra de lançamento é desenhada, com a boia de pesca e tudo o mais que acontece nela
+Barra de lançamento ao lado das barras verticais
+com as barras verticais ligadas, seu lançamento corre numa barra vertical fina à direita da sua mana, com um pequeno cronômetro e sem texto, no lugar da barra de lançamento abaixo de você (a pesca mantém a sua)
 A pesca em destaque
 enquanto você pesca, a barra de lançamento vai para o meio da tela e é desenhada maior: a linha, a boia e o que morde são o evento principal
 Selecione um alvo primeiro.
 %d efeitos listados e salvos. Digite /reload para o jogo gravá-los no disco.
 Seus efeitos no alvo
-uma fileira com seus próprios debuffs ou buffs abaixo da barra do alvo
+uma fileira sob a barra do alvo: suas penalidades em um inimigo, os bônus de um aliado (todos, não importa quem lançou)
 Buffs do inimigo no alvo
 os bônus de um alvo inimigo, à direita sob a barra: os que importam, ou todos quando Só os efeitos que importam está desligado
 Só os efeitos que importam
@@ -235,7 +344,7 @@ as placas dos NPCs amigos (vendedores, doadores de missões, moradores) só apar
 Nomes nas coisas com que você pode interagir
 um nome sobre minérios, baús, placas e afins enquanto você está de frente para eles (desligado: ficam sem nome, o aviso do próprio jogo já diz o que são)
 Mini placas
-lacaios, bichos e inimigos cinzentos que não dão experiência ganham uma placa pequena: uma barra fina e o nome, nada mais (a opção do jogo decide se têm placa)
+lacaios, bichos e inimigos cinzentos que não dão experiência ganham uma placa pequena: uma barra fina com seus efeitos negativos e sem nome (um bicho, sem barra, mantém o nome; a opção do jogo decide se eles têm placas)
 Placas de nome do grupo em masmorras: só nomes
 dentro de uma masmorra ou raide o próprio jogo desenha as placas de nome dos jogadores aliados e os addons não podem mudá-las: lá as opções do próprio jogo são ajustadas para mostrá-las como nomes na cor da classe, sem barras, como as nossas, e as barras do jogo voltam enquanto você luta (se as barras de aliados em combate estiverem ligadas); tudo volta ao que era quando você sai
 Placas de nome do grupo em masmorras: ocultas
@@ -245,6 +354,8 @@ lista as placas de nome na tela e se usam nossa aparência (para solução de pr
 Mostrando cada escola de dano uma vez (a última como crítico).
 Partículas de impacto
 sagrado pisca, fogo sobe, cristais de gelo permanecem, sombra fumega, runas arcanas cintilam na barra atingida
+Ferimentos conforme o tipo de inimigo
+seus golpes ferem a barra de um inimigo do seu jeito, mais quanto menos vida ele tem: feras, humanoides e dracônicos sangram, demônios derramam icor vil, elementais se despedaçam, máquinas soltam faíscas, mortos-vivos definham em cinzas
 Suas barras tremem quando você é atingido
 seu quadro de jogador e suas barras verticais tremem um pouco, conforme a escola do golpe, quando você sofre dano
 Efeitos de acerto por escola de dano
@@ -256,8 +367,32 @@ Curas ao longo do tempo crescem na barra
 raízes e galhos (Natureza) ou fios dourados (Sagrado) crescem sobre a barra do seu alvo, foco ou a sua enquanto dura uma cura ao longo do tempo, e murcham quando ela acaba
 Escudos aparecem como uma proteção
 um escudo no seu alvo, no seu foco ou em você (Palavra de Poder: Escudo, Escudo Divino, Barreira de Gelo...) lampeja em volta da barra de vida na cor da sua escola, brilha enquanto o escudo aguenta e some quando ele quebra
+%d absorvido
+Recargas voltando
 Números estilizados em você
 o dano e a cura que você recebe saltam como seus próprios golpes, em vez do texto rolante do jogo (segue a opção do jogo de texto de combate em você)
+Habilidades prontas
+quando uma habilidade que só um momento permite fica utilizável (Mordida do Mangusto, Sobrepujar, Revanche, Riposta, Contra-ataque) ou o jogo acende uma na sua barra: o nome dela em vermelho negrito por um momento no meio da tela
+suas habilidades principais sobem e crescem ao lado do personagem nos dois últimos segundos da recarga e explodem em dourado assim que ficam prontas (no lugar de uma barra de recargas)
+Bônus acabando
+um bônus que você lança em si mesmo (um Selo, Escudo Sagrado, um grito ou escudo) avisa junto com suas recargas quando está acabando, e em vermelho assim que some, também se for gasto antes
+O do jogo
+Ponto
+Anel
+Anel e ponto
+Mira em cruz
+Divisa
+Branco
+Cor da classe
+Pelo alvo
+Ponto de mira
+a retícula no meio da tela: a do jogo, ou no lugar dela um ponto, anel, anel e ponto, mira em cruz ou divisa do HUD (o temporizador de golpes e os ícones de ação do jogo ficam como estão)
+Ponto de mira: cor
+branco, a cor da sua classe ou a do seu alvo: vermelho para um inimigo, amarelo para um neutro, verde para um amigo (branco sem alvo)
+Ponto de mira: tamanho
+o tamanho do ponto de mira do HUD
+Ponto de mira: opacidade
+a opacidade do ponto de mira do HUD
 A vibração do jogo está desativada (ou este controle não consegue vibrar).
 Reproduzindo cada padrão de vibração uma vez.
 Intensidade da vibração
@@ -289,8 +424,55 @@ Julgamento
 Vibração: suas habilidades-chave
 as habilidades-chave de cada classe têm uma sensação própria no controle (um Julgamento espalha, um Golpe Sagrado estala, Fúria dos Ventos bate três vezes)
 Grandes momentos
-raramente, um golpe realmente especial é fixado grande e dourado no meio da tela: críticos seguidos das suas habilidades-chave, um crítico de Fúria dos Ventos ou um crítico muito acima do comum na luta (no máximo duas vezes por luta)
+uma rajada é fixada grande e dourada no meio da tela: críticos em sequência, cada um a menos de um segundo do anterior (um golpe duplo, Julgamento e Golpe Sagrado juntos), com o que fizeram juntos (no máximo duas vezes por luta)
 mostra como é ver e sentir um grande momento
+novo!
+recorde!
+%d h
+%d min
+Bônus recebidos
+Pescas e bônus de acampamento pela tela
+os peixes que você tira da água e os bônus que um acampamento ou um santuário lhe dá são anunciados no alto, no meio da tela: uma pesca chega como uma onda, os bônus entram com brasas
+Reduzir animações
+nada na tela treme, desliza, voa ou estoura: as animações da barra de lançamento, os efeitos de golpe, o movimento das placas de nome, os grandes momentos e os anúncios de pescas e bônus ficam calmos ou parados. Também contam as configurações do próprio jogo para tremor de tela e movimento inesperado da câmera
+mostra como ficam os anúncios de uma pesca e de bônus
+Grão-mestre
+Mestre
+Artesão
+Especialista
+Artífice
+Aprendiz
+Nível %d alcançado (desde o %d)
+Nível %d alcançado
+Derrotou %s e mais %d em %s
+Derrotou %s
+%s: agora %s, até %d
+%s chegou a %d
+%d novas rotas de voo, a última %s
+Nova rota de voo: %s
+Nova montaria: %s
+Novo mascote: %s
+Novo brinquedo: %s
+Conquista: %s
+O acampamento
+Em repouso
+Junto ao fogo
+Alvorada
+Manhã
+Tarde
+Entardecer
+Noite
+%s em %s
+Com %s
+A cena da fogueira está desligada.
+A cena da fogueira espera você sair de combate.
+Cena da fogueira
+fique parado alguns segundos num acampamento e a tela vira filme por um minuto: a câmera gira ao seu redor, seus grandes momentos desde o último acampamento são contados (chefes, níveis, profissões, novas montarias) e os bônus do acampamento fecham, por classe. Qualquer movimento ou botão encerra
+reproduzir a cena da fogueira agora
+feito
+%s: pronta para entregar
+inicia uma missão
+uma missão sua
 pronta para entregar
 acima do seu nível
 pede um grupo
@@ -308,7 +490,37 @@ Lista de missões: a mais próxima primeiro
 manter a lista de missões em ordem de distância, com a mais próxima no topo
 Lista de missões: ordem recomendada
 manter a lista de missões em uma ordem recomendada: primeiro as prontas para entregar, depois o que você consegue fazer sozinho começando pela mais próxima, depois as missões acima do seu nível, as de grupo enquanto você está sozinho, e as cinzas por último
+Lista de missões: objetivos curtos
+os objetivos na lista de missões dizem só o necessário, com um ícone do tipo na frente: uma caveira e 0/1 Capitão Pavorerguido, não 0/1 Capitão Pavorerguido morto
+Progresso das missões no chat
+uma linha curta no chat quando uma missão avança: Colares de Osso Sangrento: 4/25, um objetivo cumprido, uma missão pronta para entregar
+Progresso das missões para o seu grupo
+em um grupo (não em uma raide) as mesmas linhas vão para o bate-papo do grupo para os outros verem, com um instante entre elas; você também as vê lá
+Guardar o que suas missões precisam
+um item que uma missão do seu registro ainda pede, ou um que inicia uma missão que você ainda pode fazer, é marcado como Missão: nunca vendido nem leiloado por você
 dizer uma ordem recomendada para suas missões: entregue o que está pronto, depois a mais próxima que dá para fazer sozinho, depois o resto
+À esquerda das missões
+À direita das missões
+Abaixo das missões
+A lista de farm está cheia.
+Lista de farm: %s, %d desejados.
+Farm
+mais %d
+Nada para farmar ainda.
+Uma pilha a mais
+Tirar
+Limpar
+Pronto
+Tirar tudo da lista de farm?
+Lista de farm: escolher / pronto
+Lista de farm: adicionar o item que você aponta
+Isso não está na lista de farm.
+A lista de farm está vazia.
+Lista de farm: onde fica
+Lista de farm ao lado da lista de missões
+o que você pretende coletar, com quantos tem e quantos quer: suas bolsas e banco e os dos seus outros personagens neste reino. Adicione os reagentes de um plano de evolução com um botão, ou qualquer item
+a lista de farm à esquerda da lista de missões, à direita dela ou abaixo das missões
+a lista de farm ao lado da lista de missões: escolha com o controle; add <item> [quantos], remove <item>, clear, ou left / right / bottom para o lugar
 Fora de combate.
 Este cliente não tem barras de controle.
 Este cliente não permite que addons o alterem; use o Modo de Edição.
@@ -321,17 +533,19 @@ Tamanho das barras de controle
 tamanho das barras de controle enquanto as barras compactas estão ativadas, em porcentagem
 as barras de controle do jogo no modo compacto ou completo (igual à configuração do Modo de Edição)
 Esmaecer fora de combate
+/cchud fade <parte> on | off ajusta uma; all para todo o esmaecimento.
 as barras do controle, o minimapa, a lista de missões, o medidor de dano e a barra de experiência descansam juntos fora de combate, e voltam para uma luta, um gatilho puxado ou um alvo inimigo
 A tela em repouso
 quão visíveis ficam as partes da tela em repouso fora de combate (0 as esconde)
-Descansa: barras do controle
-Descansa: minimapa
-Descansa: lista de missões
-Descansa: medidor de dano
-Descansa: barra de experiência
-Descansa: bônus
-Descansa: fileiras de recarga
-se esta parte da tela participa do esmaecimento fora de combate
+Esmaece: barras do controle
+Esmaece: minimapa
+Esmaece: lista de missões
+Esmaece: medidor de dano
+Esmaece: barra de experiência
+Esmaece: bônus
+Esmaece: fileiras de recarga
+se esta parte da tela esmaece com o resto fora de combate (desligado: fica sempre como está)
+o esmaecimento da tela fora de combate: o que esmaece (minimapa, lista de missões e o resto), cada um ligado ou desligado
 Salvo: digite /reload para o jogo gravar no disco.
 Botões de postura e de mascote acima das barras
 os botões de posturas e de comandos do mascote ficam onde estavam os ícones verde e vermelho de alvo, para que a roda deles abra inteira na tela; esses ícones são escondidos
@@ -346,17 +560,24 @@ O controle não diz o que é: os ícones ficam como o jogo os tem.
 os ícones que o jogo mostra para os botões do seu controle: auto (pelo controle em uso), xbox, playstation, switch, steam, generic (números), ou game para deixá-los como o jogo os tem
 Fileiras de recarga fora das barras do controle
 as fileiras de recarga do jogo ficam sob o alvo em vez de em cima dos botões do controle, um pouco menores (só nos layouts embutidos do jogo: num layout seu elas ficam onde você as pôs)
-Pesca: %s lança
-Modo de pesca: %s lança sua linha e fisga o peixe quando a boia se mexe.
 Modo de pesca: desligado.
+Pesca: %s para lançar
+Sem isca: %s duas vezes para usar %s
+%s para guardar a vara
+Modo pesca: %s para lançar a linha, e de novo para fisgar o peixe quando a boia mexer.
+%s para fisgar, %s para lançar de novo
 O modo de pesca precisa de uma vara de pescar nas suas mãos.
 Você não conhece Pesca.
 Modo de pesca: um botão lança e fisga
 Botão de pesca: %s
 Pesca com um botão
-com uma vara de pescar nas mãos, seu botão de interagir lança a linha sempre que não houver nada com que interagir, e fisga o peixe quando a boia se mexe; a pescaria é coletada para você
+com uma vara de pesca nas mãos: seu botão de interagir para lançar a linha sempre que não houver nada com que interagir, e de novo para fisgar o peixe quando a boia mexer; a pesca é recolhida para você. B para guardar a vara e pegar suas armas de volta
+Lançar de novo com um toque
+enquanto a boia está na água, seu botão de pesca lança uma linha nova com um toque, e A fisga o peixe (o jogo não dá sinal de mordida para esperar, então um botão não pode fazer as duas coisas); desligado: o botão de pesca fisga, como a interação do jogo
 Isca com toque duplo
 aperte seu botão de pesca duas vezes rápido: o segundo toque coloca a melhor isca das suas bolsas na vara, quando a vara não tem nenhuma
+Barras do controle ocultas ao pescar
+com uma vara de pesca nas mãos as barras do controle ficam ocultas, para ver bem a água; o aviso de pesca mostra o botão para lançar. Elas voltam assim que um combate começa ou a vara é guardada
 pesca com um botão desligada por ora, ou ligada de novo (com uma vara nas mãos ela liga sozinha)
 o botão que pesca: no início seu botão de interagir (Quadrado ou X), ou qualquer outro, um gatilho por exemplo (rt)
 O litoral de Durotar é rocha vermelha e água rasa e morna. Os trolls das Ilhas do Eco dizem que a cavala passa em maior número quando a maré traz o cheiro das fogueiras de cozinha das ilhas.
@@ -437,19 +658,18 @@ Seu %s mais pesado até agora: %s (era %s).
 Diário de pesca
 cada captura é anotada no seu diário de pesca: quantas de cada tipo, onde você a pegou pela primeira vez, e um peso inventado por diversão com o seu melhor de cada uma (/cchud journal abre o diário)
 Isca %s
-Sem isca: aperte %s duas vezes para %s
 Sem isca
 Pegos %d
 Escaparam %d
-novo!
-recorde!
 Interface de pesca
 com uma vara de pescar nas mãos: os peixes da água onde você está (os que você ainda não pegou aqui ficam ocultos), sua perícia em pesca e o que sua isca acrescenta, quantos você pegou e quantos escaparam, quanto tempo sua isca dura, e suas últimas capturas
 Um curioso: +%d%%
-Segure %s: a isca afunda
+Mantenha sua isca ao lado do peixe
+Próxima captura +%d%%
+Segure %s: a isca corre pela linha
 %d seguidos
 Um jogo enquanto a boia está na água
-um pequeno trecho de água ao lado da interface de pesca: segure um gatilho para afundar sua isca e solte para ela subir, e mantenha-a ao lado da sombra do peixe. Quanto melhor você for, mais pesa (de mentirinha) sua próxima captura. Não ocupa nenhum botão e nunca mexe no seu arremesso nem na sua captura
+jogado na barra de lançamento enquanto a linha está na água: segure um gatilho e sua isca corre pela linha, solte e ela volta à deriva; mantenha-a junto à sombra do peixe. Quanto melhor você jogar, mais pesado o peso inventado da próxima captura. Não ocupa nenhum botão e nunca mexe no seu lançamento nem na captura
 %d pegos, %d tipos, %d escaparam
 Mais pesado: %s, %s
 Peixes
@@ -470,20 +690,46 @@ quanto tempo o texto do chat fica antes de esmaecer
 Coordenadas no mapa
 suas coordenadas abaixo do mapa-múndi
 %d mensagens ocultadas como spam desde que você entrou.
+%d delas eram recrutamento de guilda repetido.
 Ícone de classe e nível no chat
 o ícone de classe e o nível de um jogador entre colchetes na frente do nome, quando o jogo nos deixa conhecê-los
+Nomes de canal curtos no bate-papo
+o canal na frente de uma linha, abreviado: [P] grupo, [PL] líder do grupo, [G] guilda, [O] oficial, [R] raide, [RL] líder da raide, [I] instância, e um canal numerado pelo seu número, [1]
+Só o primeiro nome no chat
+um nome com sobrenome aparece só com o primeiro nome (Jory Spleeneater fala como Jory); um sussurro ou clique direito nele ainda chega ao nome completo
 Tamanho do texto do chat
 o tamanho do texto nas janelas de chat, como proporção do tamanho próprio do jogo (a configuração do jogo fica como está)
 Ocultar vendedores de ouro e anúncios repetidos
 mensagens que vendem ouro ou serviços com um endereço web, e a mesma mensagem repetida por um jogador, são ocultadas (nunca do seu grupo, guilda ou amigos)
+Ocultar recrutamento de guilda repetido
+nos canais públicos a mensagem de recrutamento de uma guilda é mostrada uma vez; a mesma do mesmo jogador, ou uma quase igual, em 15 minutos é ocultada (nunca do seu grupo, guilda ou amigos)
 lista as mensagens do chat ocultadas como spam recentemente
-As dicas seguem o cursor.
-As dicas ficam no canto.
-Dicas no cursor: sim / não
-Fundo das dicas
-quão sólidos são o fundo e a borda das dicas: 100% é o vidro escuro completo, 0% deixa só o texto
-Dicas seguem o cursor
-as dicas abrem no cursor em vez de no canto da tela (em combate ficam no canto)
+Voo
+destino desconhecido
+estimado pela distância
+primeiro voo nesta rota: aprendendo a duração
+pousando
+%s: cerca de %s, estimado pela distância
+%s: cerca de %s
+%s: primeiro voo nesta rota, tempo desconhecido
+Em voo, destino desconhecido
+%s: tempo de voo aprendido, %s
+%d rotas de voo conhecidas.
+Voos: tempo e contagem regressiva
+num voo, o destino e a duração são ditos no chat, e uma barra no alto da tela faz a contagem regressiva até o pouso; o tempo de cada rota é aprendido com os seus voos
+Voos: sua montaria ao longo da barra
+um grifo, uma mantícora ou um morcego (o que o mestre de voo lhe deu) plana pela barra do voo até onde você pousa
+listar as rotas de voo cujo tempo é conhecido
+Um voo é um bom momento para isso.
+Você está jogando há %s.
+Hora de um gole de água
+Lembrete para beber água
+de vez em quando enquanto você joga, um lembrete gentil para tomar um gole de água (nunca em combate)
+Lembrete de água a cada (minutos)
+quantos minutos de jogo entre os lembretes para beber água
+Lembrete de água no início de um voo
+um voo é uma pausa natural: o lembrete para beber água vem quando um começa, a menos que o último tenha sido há pouco
+mostrar o lembrete para beber água
 Redesenhar os quadros do próprio jogo
 dicas, buffs, o rastreador de missões, o minimapa, a barra de experiência, as abas do chat e as barras de controle no visual do HUD (a interface do mouse mantém a do jogo)
 Tamanho da barra de experiência
@@ -502,13 +748,15 @@ Barra de experiência
 as barras de experiência e reputação um pouco menores, com cores próprias
 Chat
 nomes das abas do chat com contorno e a caixa onde você digita em vidro escuro
-Os avisos do jogo serão perguntados de novo.
-Confirmar o aviso de recursos experimentais
-depois de aceitar uma vez o aviso de recursos experimentais do jogo, ele é aceito por você nos logins seguintes
-esquecer os avisos aceitos, para que o jogo pergunte de novo
+Medidor de dano
+o medidor de dano do jogo no visual do HUD: suas barras, inclinadas sobre um fundo escuro, e texto contornado; ele mantém tudo o que faz
 verificação: %d de %d passaram
+O jogo não travou desde que você entrou.
+Momentos em que o jogo travou, e a parte do HUD em cada um:
+Os momentos mais lentos do HUD:
 Relatórios de depuração
 reunir os relatórios de diagnóstico sozinhos: ao entrar e de novo ao recarregar ou sair (ficam nas configurações salvas)
+os momentos em que o jogo travou desde que você entrou, e quanto de cada um foi trabalho do próprio HUD
 Predefinição do HUD: %s, combinando com a câmera
 predefinição: %s
 Um layout chamado '%s' foi adicionado ao Modo de Edição do jogo. Escolha-o lá para usá-lo (Menu do Jogo > Modo de Edição > Layout).
@@ -578,6 +826,7 @@ TV
 Monitor
 Ícones dos botões
 os ícones que o jogo mostra para os botões do seu controle: encontrados sozinhos para o controle em uso, ou o tipo que você escolher
+Fonte
 Redefinir o layout do jogo
 Experimente
 Reproduzir a demonstração
@@ -637,7 +886,7 @@ nossa barra do jogador, no alto à esquerda
 Quadro do alvo
 nossa barra do alvo, no alto ao centro
 Barra do ajudante
-uma pequena barra do ajudante abaixo da barra do jogador
+uma pequena barra de ajudante sob a barra do jogador, ou ao lado das barras verticais
 Quadro do foco
 nosso quadro do foco
 barras verticais finas de vida e poder ao lado do personagem, para uma visão em terceira pessoa (no lugar da barra do jogador)
@@ -660,11 +909,13 @@ Cores de classe para nomes no chat
 a configuração de chat do jogo para todos os tipos de chat de uma vez: o nome de um jogador na cor da classe dele
 abre o painel de opções (Opções > AddOns > ControllerCam HUD)
 Quadros
+Esmaecer a tela
 Efeitos
 Visual
 Missões, bate-papo e mapa
 Bolsas, banco e vendedor
 Pesca
+Acessibilidade
 Opções nativas
 %s  |  Interface de controle: %s  |  em execução: %s
 jogador %s, alvo %s, ajudante %s, foco %s  |  quadros do jogo postos de lado: %s  |  bate-papo movido: %s
@@ -686,7 +937,7 @@ ajuda de vendedor e banco: %s
 venda automática: %s
 equipamento branco é lixo: %s
 A ajuda de vendedor está desativada.
-uso: /cchud sell [junk | white | green | blue]
+uso: /cchud sell [junk | recommended | white | green | blue]
 depositar itens marcados quando o banco abrir: %s
 uso: /cchud junk <item> (Shift+clique no item para colocá-lo na linha de bate-papo)
 item %d: lixo, vendido junto com o resto
@@ -720,10 +971,11 @@ o Gerenciador de Tempo de Recarga do jogo (opção do próprio jogo)
 sua vida e poder abaixo do seu personagem (opção do próprio jogo)
 a dica que aparece quando um buff começa (a opção própria do jogo)
 manter visíveis os quadros de jogador e alvo do jogo (on) ou pô-los de lado (off)
-em um vendedor: escolher o que vender (também: sell junk, sell white | green | blue)
+em um vendedor: escolher o que vender (também: sell junk, sell recommended, sell white | green | blue)
 conta armas e armaduras brancas como lixo
 marcar um item: sempre vendido, nunca vendido, ou para o banco (Shift+clique para colocá-lo na linha de bate-papo)
 no banco: deposita o que o banco já tem e tudo o que está marcado para ele
+no banco: tirar aquilo de que você já carrega um pouco
 depositar assim que o banco abrir
 o banco pega reagentes sozinho (opção do próprio jogo)
 tamanho do texto, em porcentagem (150 fica bom em uma TV)

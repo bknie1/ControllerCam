@@ -13,7 +13,7 @@ local C = ns.colors
 local W = { page = "fish", index = 1, top = 1, rows = {}, list = {} }
 ns.FishJournal = W
 
-W.KEYS = { "PADDUP", "PADDDOWN", "PADDLEFT", "PADDRIGHT", "PADLSHOULDER", "PADRSHOULDER", "PAD2" }
+W.KEYS = { "PADDUP", "PADDDOWN", "PADDLEFT", "PADDRIGHT", "PADLSHOULDER", "PADRSHOULDER", "PAD2", "ESCAPE" }
 local ROWS, ROW, TOP = 8, 36, 74
 local WIDTH, HEIGHT, LIST = 640, 420, 300
 
@@ -165,8 +165,9 @@ local function Build()
     frame.hint:SetTextColor(unpack(C.muted))
 
     W.keys = ns.PadKeys("Journal", W.KEYS, function(key) W:Pad(key) end, function() frame:Hide() end)
-    frame:SetScript("OnHide", ns.Protect(function() W.keys:Set(false) end))      -- (closed with Escape, say)
-    if UISpecialFrames then table.insert(UISpecialFrames, "ControllerCamHUD_FishJournalWindow") end   -- Escape closes it
+    frame:SetScript("OnHide", ns.Protect(function() W.keys:Set(false) end))
+    -- (Escape is one of its keys while it is open. It is not put on the game's list of windows that Escape
+    -- closes: the game goes through that list with its own code, and an entry of ours spoils the run.)
     frame:Hide()
     W.frame = frame
 end
@@ -265,7 +266,7 @@ function W:Pad(button)
     elseif button == "PADDDOWN" then self:Choose(self.index + 1)
     elseif button == "PADDLEFT" or button == "PADDRIGHT" or button == "PADLSHOULDER" or button == "PADRSHOULDER" then
         self:Page(self.page == "fish" and "waters" or "fish")
-    elseif button == "PAD2" then self:Close()
+    elseif button == "PAD2" or button == "ESCAPE" then self:Close()
     else return false end
     return true
 end

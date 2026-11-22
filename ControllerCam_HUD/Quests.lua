@@ -13,9 +13,16 @@
 --   nearest first       by how far away each quest is.
 --   recommended order   ready to hand in first; then what you can do on your own, nearest first; then quests
 --                       above your level; then group quests while you are alone; grey quests last.
--- The order is kept by tracking the quests in that order, which is how the game lists them; where the game has
--- its own "sort by distance" that is used for nearest first. /cchud questplan says the recommended order for
--- your whole quest log in chat, whatever the list shows.
+-- The order is kept by tracking the quests again in that order, which is how the game lists them (the game's
+-- own "sort" is not used: it did not give nearest first). The game adds a newly tracked quest at
+-- one end of its list, and which end differs between clients: after putting the list in order we look at what
+-- the game made of it, and if it came out upside down we do it the other way round from then on. If the game
+-- keeps putting the list back its own way, we stop asking (three tries) instead of shuffling it for ever.
+-- /cchud questplan says the recommended order for your whole quest log in chat, whatever the list shows.
+--
+-- Short objectives: an objective says only what is needed, with an icon for its kind in front: a skull and
+-- "0/1 Captain Dreadrise" for "0/1 Captain Dreadrise slain". It is the game's own line; its text is looked at
+-- a few times a second by our own timer and put in the short form (never by code of ours inside the game's).
 
 local ADDON, ns = ...
 local L = ns.L
@@ -26,6 +33,8 @@ ns.Quests = Q
 Q.STEP = 40                   -- distances are compared in steps of this many yards, so the list does not flicker
 Q.ABOVE = 3                   -- a quest more than this many levels above you waits
 Q.EVERY = 4                   -- seconds between looks at the distances while you travel
+Q.EVERY_SLOW = 60             -- ... when putting the list in order once took long (Q.SLOW_PUT ms or more)
+Q.SLOW_PUT = 150
 
 ns.RegisterSetting({
     key = "questzone", kind = "boolean", default = false, command = "questzone", section = "Quests",
@@ -145,7 +154,16 @@ local function Alone()
     return not (IsInGroup and ns.Yes(IsInGroup()))
 end
 
-local function Step(q) return q.far and math.floor(q.far / Q.STEP) or 1e6 end
+-- How far a quest is, in steps. A quest right on the edge of a step keeps the step it had: walking along that
+-- edge does not swap it back and forth.
+Q.steps = {}
+local function Step(q)
+    if not q.far then return 1e6 end
+    local step, last = math.floor(q.far / Q.STEP), Q.steps[q.id]
+    if last and last ~= step and math.abs(q.far - (last + 0.5) * Q.STEP) <= Q.STEP * 0.8 then step = last end
+    Q.steps[q.id] = step
+    return step
+end
 
 -- Where a quest stands in the recommended order: 0 hand it in, 1 do it, 2 above your level, 3 wants a group,
 -- 4 grey
@@ -164,11 +182,11 @@ function Q.Sort(quests, plan)
     for i, q in ipairs(quests) do
         q.at = i
         q.tier = plan and Q.Tier(q, level, alone) or 1
+        q.step = Step(q)
     end
     table.sort(quests, function(a, b)
         if a.tier ~= b.tier then return a.tier < b.tier end
-        local sa, sb = Step(a), Step(b)
-        if sa ~= sb then return sa < sb end
+        if a.step ~= b.step then return a.step < b.step end
         return a.at < b.at                              -- as close as each other: as they were
     end)
     return quests
@@ -238,31 +256,112 @@ local function Listed()
     return list
 end
 
+local function Same(a, b)
+    if #a ~= #b then return false end
+    for i = 1, #a do
+        if a[i] ~= b[i] then return false end
+    end
+    return true
+end
+
+-- The quests of `ids` in the order the game lists them now
+local function ListedOf(ids)
+    local set, out = {}, {}
+    for _, id in ipairs(ids) do set[id] = true end
+    for _, id in ipairs(Listed() or {}) do
+        if set[id] then out[#out + 1] = id end
+    end
+    return out
+end
+
+-- Tracks these quests again so that the game lists them in this order (the first on top). Each quest tracked
+-- again makes the game redraw what shows the quests (with the map open, all of its quest panel: seconds for a
+-- long list), so only the ones out of place are: what is already in place at the end where the game does not
+-- add stays. (now: the order the game lists them in; the first time, all of them, to learn which end it adds at.)
+Q.moved = 0
+local function Put(ids, now)
+    local from, to = 1, #ids
+    if Q.endKnown and type(now) == "table" and #now == #ids then
+        if Q.addsOnTop then
+            while to >= 1 and ids[to] == now[to] do to = to - 1 end
+        else
+            while from <= #ids and ids[from] == now[from] do from = from + 1 end
+        end
+    end
+    local part = {}
+    for i = from, to do part[#part + 1] = ids[i] end
+    for _, id in ipairs(part) do C_QuestLog.RemoveQuestWatch(id) end
+    if Q.addsOnTop then
+        for i = #part, 1, -1 do C_QuestLog.AddQuestWatch(part[i]) end
+    else
+        for _, id in ipairs(part) do C_QuestLog.AddQuestWatch(id) end
+    end
+    Q.moved = Q.moved + #part
+    return #part
+end
+
 function Q:Order(quests)
     local db = ns.db
     local listed = Listed()
     if not listed or #listed < 2 then return false end
     local byId = {}
     for _, q in ipairs(quests) do byId[q.id] = q end
-    local want = {}
+    -- the quests of the log among what is listed (anything else the game lists is left where it is)
+    local known, now = {}, {}
     for _, id in ipairs(listed) do
-        if byId[id] then want[#want + 1] = Q.Look(byId[id]) end
+        if byId[id] then
+            known[#known + 1] = Q.Look(byId[id])
+            now[#now + 1] = id
+        end
     end
-    if #want ~= #listed then return false end          -- something listed that is not a quest of the log: left be
-    Q.Sort(want, db.questPlan)
-    local same = true
-    for i, q in ipairs(want) do
-        if q.id ~= listed[i] then same = false; break end
+    if #known < 2 then return false end
+    Q.Sort(known, db.questPlan)
+    local want = {}
+    for i, q in ipairs(known) do want[i] = q.id end
+    if Same(want, now) then
+        self.tries = 0
+        return false
     end
-    if same then return false end
-    if not db.questPlan and C_QuestLog.SortQuestWatches then
-        pcall(C_QuestLog.SortQuestWatches)             -- nearest first is something the game does itself
-        ns.Note("quests: the game sorted the list by distance")
-        return true
+    local key = table.concat(want, ",")
+    -- (the game has a sort of its own, but what it calls sorted is not nearest first on every client: asked for
+    -- again and again it kept putting the list its own way. So the order is always put by us.)
+    if self.asked == key then                           -- we put it so, and it is not so again: the game's doing
+        self.tries = (self.tries or 0) + 1
+        if self.tries >= 3 then
+            if self.stuck ~= key then
+                self.stuck = key
+                ns.Note("quests: the game keeps putting the list in its own order; left as it is")
+            end
+            return false
+        end
+    else
+        self.tries = 0
     end
-    for _, q in ipairs(want) do C_QuestLog.RemoveQuestWatch(q.id) end
-    for _, q in ipairs(want) do C_QuestLog.AddQuestWatch(q.id) end
-    ns.Note("quests: the list was put in order (%d quests)", #want)
+    self.asked = key
+    local clock = debugprofilestop
+    local t0 = type(clock) == "function" and clock() or nil
+    local moved = Put(want, now)
+    local got = ListedOf(want)
+    if not Same(got, want) and #got == #want then
+        local upside = true
+        for i = 1, #want do
+            if got[i] ~= want[#want + 1 - i] then upside = false; break end
+        end
+        if upside then                                  -- upside down: this game adds at the other end
+            self.addsOnTop = not self.addsOnTop
+            ns.Note("quests: the game adds a tracked quest at the %s of its list", self.addsOnTop and "top" or "bottom")
+            moved = Put(want)
+            got = ListedOf(want)
+        end
+    end
+    if Same(got, want) then Q.endKnown = true end
+    local took = t0 and clock() - t0
+    if took and took >= Q.SLOW_PUT and not Q.slowPut then             -- the game is slow to redraw: seldom, then
+        Q.slowPut = true
+        ns.Note("quests: putting the list in order took %.0f ms: from now on looked at every %d s", took, Q.EVERY_SLOW)
+    end
+    ns.Note("quests: the list was put in order (%d quests, %d moved): %s; the game now lists %s", #want, moved, key,
+        table.concat(got, ","))
     return true
 end
 
@@ -284,6 +383,453 @@ function Q:Restore()
     TrackOnly(quests, set)
     ns.db.questSaved = nil
     return true
+end
+
+---------------------------------------------------------------------------
+-- Short objectives
+---------------------------------------------------------------------------
+ns.RegisterSetting({
+    key = "questShort", kind = "boolean", default = true, command = "questshort", section = "Quests",
+    label = "Quest list: short objectives",
+    tip = "objectives in the quest list say only what is needed, with an icon for the kind in front: a skull and 0/1 Captain Dreadrise, not 0/1 Captain Dreadrise slain",
+})
+
+-- An icon for each kind of objective (the game's own art): something to kill, to collect, to use
+Q.KIND_ICON = { monster = "Interface\\TargetingFrame\\UI-TargetingFrame-Skull", item = "Interface\\ICONS\\INV_Misc_Bag_08",
+                object = "Interface\\ICONS\\INV_Misc_Gear_01" }
+Q.TRACKERS = { "ObjectiveTrackerFrame", "QuestWatchFrame", "WatchFrame" }
+
+-- The game's own wording for a kill, in your language ("%s slain: %d/%d"), as a pattern that finds the name
+local killPattern
+local function KillName(label)
+    if killPattern == nil then
+        local words = type(QUEST_MONSTERS_KILLED) == "string" and QUEST_MONSTERS_KILLED or "%s slain: %d/%d"
+        words = words:gsub("%%%d+%$", "%%")              -- ("%1$s": the same thing, numbered)
+        words = words:gsub("%s*[:：]?%s*%%d%s*/%s*%%d%s*", " ")   -- without the count, wherever it stands
+        words = words:gsub("^%s+", ""):gsub("%s+$", "")
+        local before, after = words:match("^(.-)%%s(.-)$")
+        if before and (before ~= "" or after ~= "") then
+            local function plain(text) return (text:gsub("%p", "%%%0")) end
+            killPattern = "^" .. plain(before) .. "(.-)" .. plain(after) .. "$"
+        else
+            killPattern = false
+        end
+    end
+    local name = killPattern and label:match(killPattern)
+    -- (a game that words it another way than it says: the English ending, at least)
+    if not name or name == "" then name = label:match("^(.-) slain$") end
+    return (name and name ~= "") and name or label
+end
+
+-- An objective's words without its count: "Captain Dreadrise slain: 0/1" and "0/1 Captain Dreadrise slain" alike
+local function Label(text)
+    return text:match("^(.-)%s*[:：]%s*%d+/%d+$") or text:match("^%d+/%d+%s+(.+)$") or text
+end
+
+-- What the listed quests want done: the words of each objective -> { its kind, its short form }
+function Q.Objectives()
+    local map = {}
+    if not C_QuestLog.GetQuestObjectives then return map end
+    for _, q in ipairs(Log()) do
+        if Watched(q.id) then
+            local ok, list = pcall(C_QuestLog.GetQuestObjectives, q.id)
+            for _, o in ipairs((ok and type(list) == "table") and list or {}) do
+                local text = type(o) == "table" and o.text
+                if type(text) == "string" and not ns.IsSecret(text) then
+                    local label = Label(text)
+                    map[label] = { kind = o.type, short = (o.type == "monster") and KillName(label) or label }
+                end
+            end
+        end
+    end
+    return map
+end
+
+-- The short form of a line of the quest list, or nil when it is not an objective we know (or is short already)
+function Q.ShortLine(text, map)
+    local count, label = text:match("^(%d+/%d+)%s+(.+)$")
+    if not count then label, count = text:match("^(.-)%s*[:：]%s*(%d+/%d+)$") end
+    local o = label and map[label]
+    if not o then return nil end
+    local icon = Q.KIND_ICON[o.kind]
+    if not icon and o.short == label then return nil end
+    return (icon and ("|T%s:0|t "):format(icon) or "") .. count .. " " .. o.short
+end
+
+-- Every text of the game's quest list (looked for again now and then: the list makes and reuses its lines)
+local texts, textsAt = {}, -10
+local function Collect(frame, depth, into)
+    if type(frame) ~= "table" or depth > 7 then return end
+    if frame.GetRegions then
+        for _, r in ipairs({ frame:GetRegions() }) do
+            if type(r) == "table" and r.GetObjectType and r:GetObjectType() == "FontString" and r.GetText and r.SetText then
+                into[#into + 1] = r
+            end
+        end
+    end
+    if frame.GetChildren then
+        for _, child in ipairs({ frame:GetChildren() }) do Collect(child, depth + 1, into) end
+    end
+end
+
+local changed = setmetatable({}, { __mode = "k" })      -- line -> { ours, the game's }
+function Q:Shorten()
+    local now = GetTime()
+    if now - textsAt > 2 then
+        textsAt, texts = now, {}
+        for _, name in ipairs(Q.TRACKERS) do
+            if type(_G[name]) == "table" then pcall(Collect, _G[name], 0, texts) end
+        end
+    end
+    local map
+    for _, fs in ipairs(texts) do
+        local ok, text = pcall(fs.GetText, fs)
+        if ok and type(text) == "string" and not ns.IsSecret(text) and text:find("%d/%d") and text:sub(1, 2) ~= "|T" then
+            map = map or Q.Objectives()
+            local short = Q.ShortLine(text, map)
+            if short then
+                changed[fs] = { ours = short, game = text }
+                pcall(fs.SetText, fs, short)
+                self.shortened = (self.shortened or 0) + 1
+            end
+        end
+    end
+end
+
+-- Back to the game's own words (switched off)
+function Q:Lengthen()
+    for fs, rec in pairs(changed) do
+        local ok, text = pcall(fs.GetText, fs)
+        if ok and text == rec.ours then pcall(fs.SetText, fs, rec.game) end
+        changed[fs] = nil
+    end
+end
+
+local shortDriver = CreateFrame("Frame")
+local shortSince = 0
+shortDriver:SetScript("OnUpdate", ns.Protect(function(_, dt)
+    if not Q.shortOn then return end
+    shortSince = shortSince + dt
+    if shortSince < 0.3 then return end
+    shortSince = 0
+    Q:Shorten()
+end))
+
+---------------------------------------------------------------------------
+-- Progress in chat: a short line as a quest moves on ("[Q] Bloody Bone Necklaces: 4/25", an objective done, a
+-- quest ready to hand in). What the log says is looked at after it changes and compared with the last look;
+-- a quest seen for the first time (just taken, or the log just loaded) says nothing.
+---------------------------------------------------------------------------
+ns.RegisterSetting({
+    key = "questProgress", kind = "boolean", default = true, command = "questchat", section = "Quests",
+    label = "Quest progress in chat",
+    tip = "a short line in chat as a quest moves on: Bloody Bone Necklaces: 4/25, an objective done, a quest ready to hand in",
+})
+
+ns.RegisterSetting({
+    key = "questParty", kind = "boolean", default = true, command = "questparty", section = "Quests",
+    label = "Quest progress to your party",
+    tip = "in a party (not a raid) the same lines go to party chat, for the others to see, a moment apart; you see them there too",
+})
+
+Q.progress, Q.told = {}, 0
+
+-- In a party, the lines go to party chat instead (a raid is left alone: too many people for it). Without the
+-- colours and icons the game would refuse, one each second, and never more than a few waiting.
+Q.partyQueue, Q.partySent = {}, 0
+Q.PARTY_GAP, Q.PARTY_MAX = 1, 6
+function Q.InParty()
+    return IsInGroup ~= nil and ns.Yes(IsInGroup()) and not (IsInRaid and ns.Yes(IsInRaid())) and true or false
+end
+function Q.PartyText(line)
+    if type(line) ~= "string" or ns.IsSecret(line) then return nil end
+    local text = line:gsub("|c%x%x%x%x%x%x%x%x", "")
+    text = text:gsub("|r", "")
+    text = text:gsub("|T.-|t", "")
+    text = text:gsub("%s+", " ")
+    text = text:gsub("^ ", ""):gsub(" $", "")
+    return text ~= "" and text or nil
+end
+local sending = false
+local function SendNext()
+    local text = table.remove(Q.partyQueue, 1)
+    if not text then sending = false; return end            -- (a gap has gone by with nothing new: idle)
+    if Q.InParty() and SendChatMessage then
+        local ok = pcall(SendChatMessage, text, "PARTY")
+        if ok then Q.partySent = Q.partySent + 1 end
+    end
+    C_Timer.After(Q.PARTY_GAP, SendNext)
+end
+function Q.ToParty(line)
+    local text = Q.PartyText(line)
+    if not text then return end
+    if #Q.partyQueue >= Q.PARTY_MAX then table.remove(Q.partyQueue, 1) end   -- (the oldest news goes first)
+    Q.partyQueue[#Q.partyQueue + 1] = text
+    if not sending then
+        sending = true
+        SendNext()
+    end
+end
+
+-- The log as it stands: quest id -> { title, done, objs = { { label, have, need, finished } } }, and their order
+local function Progress()
+    local now, order = {}, {}
+    for _, q in ipairs(Log()) do
+        local ok, list = pcall(C_QuestLog.GetQuestObjectives, q.id)
+        local objs = {}
+        for i, o in ipairs((ok and type(list) == "table") and list or {}) do
+            local text = type(o) == "table" and ns.Plain(o.text)
+            if type(text) == "string" and text ~= "" then
+                local have, need = ns.Plain(o.numFulfilled), ns.Plain(o.numRequired)
+                if type(have) ~= "number" or type(need) ~= "number" then         -- (or read off the words)
+                    local a, b = text:match("(%d+)%s*/%s*(%d+)")
+                    have, need = tonumber(a), tonumber(b)
+                end
+                objs[i] = { label = Label(text), have = have, need = need, finished = ns.Plain(o.finished) == true }
+            end
+        end
+        now[q.id] = { title = ns.Plain(q.title), objs = objs,
+                      done = (Ask("ReadyForTurnIn", q.id) == true or Ask("IsComplete", q.id) == true) }
+        order[#order + 1] = q.id
+    end
+    return now, order
+end
+
+-- What changed since the last look, as lines for chat
+function Q.Changes()
+    local now, order = Progress()
+    local lines = {}
+    for _, id in ipairs(order) do
+        local cur, old = now[id], Q.progress[id]
+        if old then
+            for i, o in pairs(cur.objs) do
+                local was = old.objs[i]
+                local full = o.finished or (o.have and o.need and o.have >= o.need)
+                if was and o.have and o.need and o.need > 1 and was.have and o.have > was.have then
+                    local line = ("%s: %d/%d"):format(o.label, o.have, o.need)
+                    if full then line = line .. "  |cff7fe07f" .. L["done"] .. "|r" end
+                    lines[#lines + 1] = line
+                elseif was and full and not was.finished and not (was.have and was.need and was.have >= was.need) then
+                    lines[#lines + 1] = ("%s: |cff7fe07f%s|r"):format(o.label, L["done"])
+                end
+            end
+            if cur.done and not old.done and cur.title then
+                lines[#lines + 1] = "|cffffd24a" .. L["%s: ready to hand in"]:format(cur.title) .. "|r"
+            end
+        end
+    end
+    for id, cur in pairs(now) do Q.progress[id] = cur end      -- (a quest under a folded heading keeps its last look)
+    return lines
+end
+
+local progressEvents = CreateFrame("Frame")
+local progressDirty = false
+local function Tell()
+    progressDirty = false
+    if not Q.chatOn then return end
+    local party = ns.db.questParty and Q.InParty()
+    for _, line in ipairs(Q.Changes()) do
+        Q.told = Q.told + 1
+        if party then
+            Q.ToParty(line)
+        elseif ns.db.questProgress then
+            if not (ns.Chat and ns.Chat.Line and ns.Chat.Line("quest", line)) then ns.Say(line) end
+        end
+    end
+end
+Tell = ns.Protect(Tell)
+progressEvents:SetScript("OnEvent", ns.Protect(function(_, event, a)
+    if event == "QUEST_REMOVED" or event == "QUEST_TURNED_IN" then
+        if type(a) == "number" then Q.progress[a] = nil end
+        return
+    end
+    if progressDirty then return end
+    progressDirty = true
+    C_Timer.After(0.2, Tell)                -- several of these come together
+end))
+
+function Q:ProgressOn(on)
+    if on == (self.chatOn or false) then return end
+    self.chatOn = on
+    if on then
+        self.progress = {}
+        self.Changes()                      -- the log as it is now is the start: nothing of it is news
+        for _, e in ipairs({ "QUEST_LOG_UPDATE", "QUEST_WATCH_UPDATE", "UNIT_QUEST_LOG_CHANGED", "QUEST_REMOVED",
+                             "QUEST_TURNED_IN" }) do
+            pcall(progressEvents.RegisterEvent, progressEvents, e)
+        end
+    else
+        progressEvents:UnregisterAllEvents()
+        self.progress = {}
+    end
+end
+
+---------------------------------------------------------------------------
+-- Items your quests want: the "Quest" verdict of an item (Market.lua), so it is never sold or put up for auction
+-- while a quest of yours needs it. What counts:
+--   * an item an objective of a quest in your log asks for ("Linen Cloth: 3/10"), matched by its name, as long as
+--     the quest is not grey for you (one ready to hand in counts however grey: the items go with it);
+--   * an item the game marks as wanted by a quest you have (its own quest items);
+--   * an item that starts a quest you have not done, unless that quest is grey for you (its level is the item's).
+-- The game has no list of the quests you have not taken, so the log (where you have been questing) is what
+-- counts. Looked at again when the log, your bags or your level change.
+---------------------------------------------------------------------------
+ns.RegisterSetting({
+    key = "questItems", kind = "boolean", default = true, command = "questitems", section = "Bags, bank and vendor",
+    label = "Keep what your quests need",
+    tip = "an item a quest in your log still asks for, or one that starts a quest you can still do, is marked Quest: never sold or put up for auction for you",
+})
+
+-- How many levels under yours a quest turns grey (the game's own number when it says it)
+function Q.GreenRange(level)
+    local fn = GetQuestGreenRange
+    if fn then
+        local ok, n = pcall(fn, "player")
+        n = ok and ns.Plain(n)
+        if type(n) == "number" and n > 0 then return n end
+    end
+    if level <= 5 then return level end                  -- nothing is grey this early
+    if level < 40 then return math.floor(level / 10) + 5 end
+    if level < 60 then return math.floor(level / 5) + 1 end
+    return 9
+end
+
+-- Is a quest of this level grey for you (too easy to be worth it)?
+function Q.Grey(level)
+    local me = UnitLevel and tonumber(ns.Plain(UnitLevel("player"))) or 0
+    if type(level) ~= "number" or level <= 0 or me <= 0 then return false end
+    return me - level > Q.GreenRange(me)
+end
+
+local function ItemName(id)
+    local get = (C_Item and C_Item.GetItemInfo) or GetItemInfo
+    if not get then return nil end
+    local ok, name, _, _, ilvl = pcall(get, id)
+    name, ilvl = ok and ns.Plain(name), ok and ns.Plain(ilvl)
+    return type(name) == "string" and name ~= "" and name or nil, type(ilvl) == "number" and ilvl or nil
+end
+
+-- What the game says of an item in your bags and quests: wanted by a quest (its id), and is that quest yours
+local function BagQuestInfo(bag, slot)
+    local fn = (C_Container and C_Container.GetContainerItemQuestInfo) or GetContainerItemQuestInfo
+    if not fn then return nil end
+    local ok, a, b, c = pcall(fn, bag, slot)
+    if not ok then return nil end
+    if type(a) == "table" then a, b, c = a.isQuestItem, a.questID, a.isActive end
+    a, b, c = ns.Plain(a), ns.Plain(b), ns.Plain(c)
+    return a == true, type(b) == "number" and b > 0 and b or nil, c == true
+end
+
+local function Done(questID)
+    local fn = (C_QuestLog and C_QuestLog.IsQuestFlaggedCompleted) or IsQuestFlaggedCompleted
+    if not fn then return false end
+    local ok, done = pcall(fn, questID)
+    return ok and ns.Plain(done) == true
+end
+
+-- The look: byName[lower-case item name] and byId[item id] -> { title, zone, have, need, done, starts, level }
+Q.items = { dirty = true, at = -100, byName = {}, byId = {} }
+Q.ITEMS_EVERY = 10            -- (looked at again after this many seconds anyway)
+
+local function LookAtItems()
+    local byName, byId, titles = {}, {}, {}
+    for _, q in ipairs(Log()) do
+        titles[q.id] = q
+        local done = (Ask("ReadyForTurnIn", q.id) == true or Ask("IsComplete", q.id) == true)
+        local grey = Ask("IsQuestTrivial", q.id) == true or Q.Grey(q.level)
+        q.done = done
+        if done or not grey then
+            local ok, list = pcall(C_QuestLog.GetQuestObjectives, q.id)
+            for _, o in ipairs((ok and type(list) == "table") and list or {}) do
+                local text = type(o) == "table" and ns.Plain(o.text)
+                if type(text) == "string" and text ~= "" and o.type == "item" then
+                    local have, need = ns.Plain(o.numFulfilled), ns.Plain(o.numRequired)
+                    if type(have) ~= "number" or type(need) ~= "number" then
+                        local x, y = text:match("(%d+)%s*/%s*(%d+)")
+                        have, need = tonumber(x), tonumber(y)
+                    end
+                    local key = Label(text):lower()
+                    byName[key] = byName[key] or { title = ns.Plain(q.title), zone = ns.Plain(q.header), have = have,
+                                                   need = need, done = done, level = q.level, questID = q.id }
+                end
+            end
+        end
+    end
+    -- what the game itself marks in your bags: quest items, and items that start a quest
+    local bags = type(C_Container) == "table" and C_Container.GetContainerNumSlots and C_Container.GetContainerItemID
+    local last = bags and (NUM_TOTAL_EQUIPPED_BAG_SLOTS or NUM_BAG_SLOTS or 4) or -1
+    for bag = 0, last do
+        local okN, slots = pcall(C_Container.GetContainerNumSlots, bag)
+        for slot = 1, (okN and tonumber(slots)) or 0 do
+            local okI, id = pcall(C_Container.GetContainerItemID, bag, slot)
+            id = okI and ns.Plain(id)
+            if type(id) == "number" and not byId[id] then
+                local isQuest, questID, active = BagQuestInfo(bag, slot)
+                if questID and not active then
+                    local _, ilvl = ItemName(id)
+                    if not Done(questID) and not (ilvl and ilvl > 1 and Q.Grey(ilvl)) then
+                        byId[id] = { starts = true, questID = questID, level = ilvl }
+                    end
+                elseif questID and active then
+                    local q = titles[questID]
+                    byId[id] = { title = q and ns.Plain(q.title), zone = q and ns.Plain(q.header),
+                                 done = q and q.done, level = q and q.level, questID = questID }
+                elseif isQuest then
+                    byId[id] = false                             -- (a quest item: its name may still match below)
+                end
+            end
+        end
+    end
+    for id, w in pairs(byId) do if w == false then byId[id] = nil end end
+    Q.items = { dirty = false, at = GetTime and GetTime() or 0, byName = byName, byId = byId, names = {} }
+end
+LookAtItems = ns.Protect(LookAtItems)
+
+-- What a quest of yours wants this item for, or nil
+function Q.ItemWant(id)
+    if not (Q.itemsOn and ns.db and ns.db.questItems) or type(id) ~= "number" or ns.IsSecret(id) then return nil end
+    local now = GetTime and GetTime() or 0
+    if Q.items.dirty or now - Q.items.at > Q.ITEMS_EVERY then LookAtItems() end
+    local items = Q.items
+    if items.byId[id] then return items.byId[id] end
+    if not next(items.byName) then return nil end
+    local name = items.names and items.names[id]
+    if name == nil then
+        name = ItemName(id)
+        name = name and name:lower() or false
+        if items.names then items.names[id] = name end
+    end
+    return name and items.byName[name] or nil
+end
+
+-- The want in a few words: "Bloody Bones 3/25 (Duskwood)", "starts a quest"
+function Q.WantText(w)
+    if type(w) ~= "table" then return "" end
+    if w.starts then return L["starts a quest"] end
+    local text = w.title or L["a quest of yours"]
+    if w.done then
+        text = text .. ", " .. L["ready to hand in"]
+    elseif w.have and w.need and w.need > 1 then
+        text = text .. (" %d/%d"):format(w.have, w.need)
+    end
+    if w.zone then text = text .. " (" .. w.zone .. ")" end
+    return text
+end
+
+local itemEvents = CreateFrame("Frame")
+itemEvents:SetScript("OnEvent", function() Q.items.dirty = true end)
+function Q:ItemsOn(on)
+    if on == (self.itemsOn or false) then return end
+    self.itemsOn = on
+    Q.items.dirty = true
+    if on then
+        for _, e in ipairs({ "QUEST_LOG_UPDATE", "QUEST_ACCEPTED", "QUEST_REMOVED", "QUEST_TURNED_IN", "BAG_UPDATE_DELAYED",
+                             "PLAYER_LEVEL_UP", "UNIT_QUEST_LOG_CHANGED" }) do
+            pcall(itemEvents.RegisterEvent, itemEvents, e)
+        end
+    else
+        itemEvents:UnregisterAllEvents()
+    end
 end
 
 ---------------------------------------------------------------------------
@@ -318,8 +864,29 @@ end, "/cchud questplan", "say a recommended order for your quests: hand in what 
 ---------------------------------------------------------------------------
 local events = CreateFrame("Frame")
 local dirty = false
+-- Never while the world map, the quest log or a quest window is open: each quest tracked again makes the game
+-- redraw what it shows of your quests there (the map's quest markers too), which held the game up for seconds.
+-- The order only matters in the quest list at the side of the screen; it is put once they are all closed.
+Q.WINDOWS = { "WorldMapFrame", "QuestMapFrame", "QuestLogFrame", "QuestFrame", "QuestLogPopupDetailFrame" }
+function Q.Busy()
+    if ns.MapOpen() then return "WorldMapFrame" end
+    for _, name in ipairs(Q.WINDOWS) do
+        local f = _G[name]
+        if type(f) == "table" and f.IsVisible then
+            local ok, on = pcall(f.IsVisible, f)
+            if ok and on == true then return name end
+        end
+    end
+end
 local function Work()
     dirty = false
+    local busy = Q.Busy()
+    if busy then
+        if not Q.held then ns.Note("quests: the list waits while %s is open", busy) end
+        Q.held = true
+        return
+    end
+    Q.held = nil
     if Q.active or Q.ordering then
         Q:Sync()
     elseif ns.db.questSaved then
@@ -350,9 +917,10 @@ end))
 -- (distances change as you travel, and the game does not say so: looked at now and then, never in a fight)
 local since = 0
 events:SetScript("OnUpdate", ns.Protect(function(_, dt)
+    if Q.held and not Q.Busy() then Later() end                  -- (held while the map was open)
     if not (Q.ordering or (Q.active and (ns.db.questNear or 0) > 0)) then return end
     since = since + dt
-    if since < Q.EVERY then return end
+    if since < (Q.slowPut and Q.EVERY_SLOW or Q.EVERY) then return end
     since = 0
     if not InCombatLockdown() then Later() end
 end))
@@ -362,7 +930,15 @@ local EVENTS = { "ZONE_CHANGED_NEW_AREA", "QUEST_ACCEPTED", "QUEST_REMOVED", "PL
 
 function Q:Apply(run)
     local db = ns.db
+    self.asked, self.tries, self.stuck = nil, 0, nil     -- (a switch changed: whatever was given up on is tried again)
     local can = run and self:Supported() and true or false
+    local api = C_QuestLog
+    self:ProgressOn(run and (db.questProgress or db.questParty) and type(api) == "table" and api.GetNumQuestLogEntries and api.GetInfo
+        and api.GetQuestObjectives and true or false)
+    self:ItemsOn(run and db.questItems and type(api) == "table" and api.GetNumQuestLogEntries and api.GetInfo and true or false)
+    local short =can and db.questShort and C_QuestLog.GetQuestObjectives ~= nil and true or false
+    if self.shortOn and not short then self:Lengthen() end
+    self.shortOn = short
     local manage, order = can and Managing(db), can and Ordering(db)
     if manage or order then
         if not self.listening then
@@ -399,8 +975,16 @@ end
 function Q.Describe()
     local api = type(C_QuestLog) == "table" and C_QuestLog or {}
     local listed = Q:Supported() and Listed()
-    return ("deciding the list %s, ordering it %s, zone quests %s, listed in the game's order: %s; the game has: distance %s, its own sort %s, tags %s, group size %s"):format(
-        tostring(Q.active), tostring(Q.ordering), tostring(Q.zoneCount), listed and table.concat(listed, " ") or "not told",
+    local wanted = 0
+    for _ in pairs(Q.items.byName) do wanted = wanted + 1 end
+    for _ in pairs(Q.items.byId) do wanted = wanted + 1 end
+    return ("to party %s (%d sent, in a party now %s), "):format(tostring(ns.db and ns.db.questParty or false), Q.partySent,
+        tostring(Q.InParty())) .. ("items for quests %s (%d wanted; the game marks quest items in bags: %s), "):format(tostring(Q.itemsOn or false),
+        wanted, tostring(type(C_Container) == "table" and C_Container.GetContainerItemQuestInfo ~= nil)) ..
+        ("progress in chat %s (%d lines), deciding the list %s, ordering it %s (quests tracked again %d, held for the map %s, slow to redraw %s, the game adds on top: %s, given up on: %s), short objectives %s (%s lines changed), zone quests %s, listed in the game's order: %s; the game has: distance %s, its own sort %s, tags %s, group size %s"):format(
+        tostring(Q.chatOn or false), Q.told, tostring(Q.active), tostring(Q.ordering), Q.moved or 0, tostring(Q.held or false), tostring(Q.slowPut or false), tostring(Q.addsOnTop or false), tostring(Q.stuck or "nothing"),
+        tostring(Q.shortOn or false), tostring(Q.shortened or 0), tostring(Q.zoneCount),
+        listed and table.concat(listed, " ") or "not told",
         tostring(api.GetDistanceSqToQuest ~= nil), tostring(api.SortQuestWatches ~= nil), tostring(api.GetQuestTagInfo ~= nil),
         tostring(api.GetSuggestedGroupSize ~= nil))
 end

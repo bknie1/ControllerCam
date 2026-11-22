@@ -43,7 +43,9 @@ local function Build()
     frame.sub:SetTextColor(unpack(C.muted))
     frame.rows = {}
     frame:Hide()
-    if UISpecialFrames then table.insert(UISpecialFrames, "ControllerCamHUD_ItemInfoWindow") end   -- Escape / B closes it
+    -- B or Escape closes it: keys of its own while it is open (never the game's list of windows, Core.lua)
+    IN.keys = ns.PadKeys("ItemInfo", { "PAD2", "ESCAPE" }, function() frame:Hide() end, function() frame:Hide() end)
+    frame:SetScript("OnHide", ns.Protect(function() IN.keys:Set(false) end))
     IN.frame = frame
 end
 
@@ -132,6 +134,7 @@ function IN:Show(arg)
     for i = #rows + 1, #frame.rows do frame.rows[i].left:Hide(); frame.rows[i].right:Hide() end
     frame:SetHeight(72 + #rows * ROW)
     frame:Show()
+    IN.keys:Set(true)
     IN.shown = id
     return true
 end

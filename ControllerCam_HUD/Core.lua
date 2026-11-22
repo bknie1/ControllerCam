@@ -12,7 +12,7 @@ local L = ns.L
 
 ns.STYLE_CVAR = "InputDeviceInterfaceStyle"     -- "1" while the Gamepad UI is in use (what InputSwap switches)
 
-local MOVABLE = { player = true, target = true, tot = true, focus = true, vertical = true }
+local MOVABLE = { player = true, target = true, tot = true, focus = true, vertical = true, soon = true }
 
 local DEFAULTS = {
     enabled = true,
@@ -69,9 +69,51 @@ function ns.Note(fmt, ...)
     if #notes > 120 then table.remove(notes, 1) end
 end
 
+-- Every handler of the HUD runs through this: an error is kept instead of breaking the rest, and the time it
+-- took is counted by the game's own clock (Debug.lua's long frames, /cchud slow). A call that took long is kept
+-- with the place it was made ("Rest.lua:251").
+ns.spent = { now = 0, top = 0, topWhere = nil, calls = {}, depth = 0 }
+ns.SLOW_MS = 20
+local function Where()
+    if type(debugstack) ~= "function" then return "?" end
+    local ok, s = pcall(debugstack, 4, 1, 0)          -- (the line that asked for the handler)
+    if not (ok and type(s) == "string") then return "?" end
+    local file, line = s:match("([%w_]+%.lua)%]?:(%d+)")
+    return file and (file .. ":" .. line) or s:sub(1, 60)
+end
+function ns.MapOpen()
+    local m = _G.WorldMapFrame
+    if type(m) ~= "table" or not m.IsShown then return false end
+    local ok, shown = pcall(m.IsShown, m)
+    return ok and shown == true
+end
+function ns.Slow(where, ms)
+    local calls = ns.spent.calls
+    calls[#calls + 1] = ("%.1f %s took %.0f ms%s"):format(GetTime and GetTime() or 0, tostring(where), ms,
+        ns.MapOpen() and " (the map open)" or "")
+    if #calls > 30 then table.remove(calls, 1) end
+end
 function ns.Protect(fn)
+    local clock = debugprofilestop
+    if type(clock) ~= "function" then
+        return function(...)
+            local ok, err = pcall(fn, ...)
+            if not ok then ns.Error(err) end
+        end
+    end
+    local where, S = Where(), ns.spent
     return function(...)
+        S.depth = S.depth + 1
+        local t0 = clock()
         local ok, err = pcall(fn, ...)
+        local ms = clock() - t0
+        S.depth = S.depth - 1
+        if S.depth <= 0 then                                    -- (a handler inside another counts once)
+            S.depth = 0
+            S.now = S.now + ms
+            if ms > S.top then S.top, S.topWhere = ms, where end
+        end
+        if ms >= ns.SLOW_MS then ns.Slow(where, ms) end
         if not ok then ns.Error(err) end
     end
 end
@@ -203,6 +245,11 @@ local function InitDB()
         local x = tonumber(old.pos.vertical.x)
         if x == -460 or x == -380 then old.pos.vertical.x = -320 end
     end
+    -- before version 12 chat faded after 15 seconds, which was too soon: that old default becomes the new one
+    if (tonumber(old.v) or 0) < 12 and tonumber(old.chatTime) == 15 then old.chatTime = nil end
+    -- before version 12 nameplates showed the health number beside the percent to begin with; now the percent
+    -- alone: plates still on that old default take the new one
+    if (tonumber(old.v) or 0) < 12 and old.plateValue == true then old.plateValue = nil end
     -- and before version 11 a little further left than now: the same again
     if (tonumber(old.v) or 0) < 11 and type(old.pos) == "table" and type(old.pos.vertical) == "table" then
         if tonumber(old.pos.vertical.x) == -320 then old.pos.vertical.x = -280 end
@@ -214,7 +261,7 @@ local function InitDB()
     -- the gamepad bars' own fade became the fade of the whole screen: what you chose for it carries over
     if old.hudFade == nil and type(old.barsFade) == "boolean" then old.hudFade = old.barsFade end
     if old.hudIdle == nil and tonumber(old.barsIdle) then old.hudIdle = tonumber(old.barsIdle) end
-    local db = { v = 11, units = {}, pos = {}, saved = {} }
+    local db = { v = 12, units = {}, pos = {}, saved = {} }
     -- game settings we changed, with the value they had (put back when the HUD stops)
     if type(old.saved) == "table" then
         for name, value in pairs(old.saved) do
@@ -398,6 +445,156 @@ function ns.PadKeys(tag, keys, handler, onLost)
         end
     end))
     return K
+end
+
+-- A question of ours ("Sell 12 items?") is asked in a window of ours, answered with the controller through
+-- key bindings of its own (above) or with the mouse. It is never put in the game's own dialog box: that box
+-- is the game's, the controller's cursor works on it with the game's code, and a dialog an addon put there
+-- (or one an addon presses a button of) leaves that code running in the addon's name, with the game then
+-- refusing what it does next. Seen here as the gamepad bars refusing their own buttons after a vendor.
+--   ns.Dialog.Define(which, { text =, button1 =, button2 =, button3 =, button4 =, OnAccept =, OnCancel =,
+--                             OnAlt =, OnExtra =, Footer = function returning a line to add, hideOnEscape = false,
+--                             list = true (a list: read from the left, in a wider window) })
+--   ns.Dialog.Show(which, ...)            the text's %s and %d are filled from the rest
+-- button1 is A (accept), button2 is B (cancel; Escape too unless hideOnEscape is false), button3 is X
+-- (OnAlt), button4 is Y (OnExtra).
+-- OnCancel(nil, nil, reason): "clicked" when you said no, "override" when it was only taken off the screen
+-- (another question, a fight), which is not an answer.
+local Dialog = { specs = {}, log = {}, KEYS = { "PAD1", "PAD2", "PAD3", "PAD4", "ESCAPE" } }
+ns.Dialog = Dialog
+local dialogFrame
+
+function Dialog.Define(which, spec) Dialog.specs[which] = spec end
+
+local function DialogButton(parent, index)
+    local b = CreateFrame("Button", nil, parent)
+    b:SetSize(150, 26)
+    b.back = b:CreateTexture(nil, "BACKGROUND")
+    b.back:SetAllPoints(b)
+    b.back:SetColorTexture(0.16, 0.2, 0.3, 0.9)
+    b.text = ns.FontString(b, 11, "CENTER")
+    b.text:SetPoint("CENTER", b, "CENTER", 0, 0)
+    b:SetScript("OnClick", ns.Protect(function() Dialog.Click(index) end))
+    return b
+end
+
+local function BuildDialog()
+    local f = CreateFrame("Frame", "ControllerCamHUD_Dialog", UIParent)
+    f:SetSize(440, 150)
+    f:SetPoint("CENTER", UIParent, "CENTER", 0, 120)
+    f:SetFrameStrata("DIALOG")
+    f:EnableMouse(true)
+    f.back = f:CreateTexture(nil, "BACKGROUND")
+    f.back:SetAllPoints(f)
+    f.back:SetColorTexture(0.03, 0.04, 0.07, 0.94)
+    for _, side in ipairs({ "TOP", "BOTTOM" }) do
+        local t = f:CreateTexture(nil, "BORDER")
+        t:SetPoint(side .. "LEFT", f, side .. "LEFT")
+        t:SetPoint(side .. "RIGHT", f, side .. "RIGHT")
+        t:SetHeight(1)
+        t:SetColorTexture(0.55, 0.62, 0.75, 0.6)
+    end
+    f.text = ns.FontString(f, 12, "CENTER")
+    f.text:SetPoint("TOPLEFT", f, "TOPLEFT", 18, -16)
+    f.text:SetPoint("TOPRIGHT", f, "TOPRIGHT", -18, -16)
+    if f.text.SetWordWrap then f.text:SetWordWrap(true) end
+    f.buttons = { DialogButton(f, 1), DialogButton(f, 2), DialogButton(f, 3), DialogButton(f, 4) }
+    f:Hide()
+    dialogFrame = f
+    Dialog.frame = f
+    Dialog.keys = ns.PadKeys("Ask", Dialog.KEYS, function(key)
+        local v = Dialog.visible
+        if not v then return end
+        if key == "PAD1" then Dialog.Click(1)
+        elseif key == "PAD2" then Dialog.Click(2)
+        elseif key == "PAD3" then if v.dialog.button3 then Dialog.Click(3) end
+        elseif key == "PAD4" then if v.dialog.button4 then Dialog.Click(4) end
+        elseif key == "ESCAPE" then if v.dialog.hideOnEscape ~= false then Dialog.Click(2) end
+        end
+    end, function() Dialog.Close("override") end)
+end
+
+local function KeyLabel(key, text)
+    local name = GetBindingText and GetBindingText(key) or key
+    if type(name) ~= "string" or name == "" then name = key end
+    return ("%s  %s"):format(name, text)
+end
+
+function Dialog.Show(which, ...)
+    local spec = Dialog.specs[which]
+    if not spec then return false end
+    if Dialog.visible then Dialog.Close("override") end
+    if not dialogFrame then BuildDialog() end
+    local f = dialogFrame
+    local ok, text = pcall(string.format, spec.text, ...)
+    text = ok and text or spec.text
+    if spec.Footer then                                       -- a line under it that depends on the moment
+        local okF, footer = pcall(spec.Footer)
+        if okF and type(footer) == "string" and footer ~= "" then text = text .. "\n\n" .. footer end
+    end
+    f.text:SetJustifyH(spec.list and "LEFT" or "CENTER")
+    f.text:SetText(text)
+    local order = { { 1, spec.button1, "PAD1" }, { 3, spec.button3, "PAD3" }, { 4, spec.button4, "PAD4" },
+                    { 2, spec.button2, "PAD2" } }
+    local shown = {}
+    for _, o in ipairs(order) do
+        local b = f.buttons[o[1]]
+        if o[2] then
+            b.text:SetText(KeyLabel(o[3], o[2]))
+            b:Show()
+            shown[#shown + 1] = b
+        else
+            b:Hide()
+        end
+    end
+    f:SetWidth(math.max(spec.list and 520 or 440, #shown * 160 + 20))
+    for i, b in ipairs(shown) do                              -- side by side along the bottom, centred
+        b:ClearAllPoints()
+        b:SetPoint("BOTTOM", f, "BOTTOM", (i - (#shown + 1) / 2) * 160, 14)
+    end
+    -- as tall as its words, measured once they are laid out (guessed from the text where that cannot be had)
+    local okH, h = pcall(f.text.GetStringHeight, f.text)
+    if not (okH and type(h) == "number" and h > 0) then
+        local lines = 1
+        for _ in text:gmatch("\n") do lines = lines + 1 end
+        h = (lines + math.floor(#text / 60)) * 15
+    end
+    f:SetHeight(math.max(120, h + 76))
+    f:Show()
+    Dialog.visible = { which = which, text = text, dialog = spec }
+    Dialog.log[#Dialog.log + 1] = Dialog.visible
+    Dialog.keys:Set(true)
+    return true
+end
+
+local function TakeDown()
+    local v = Dialog.visible
+    Dialog.visible = nil
+    if dialogFrame then dialogFrame:Hide() end
+    if Dialog.keys then Dialog.keys:Set(false) end
+    return v
+end
+
+-- You answered: 1 the first button, 2 the second (no), 3 the third, 4 the fourth
+function Dialog.Click(index)
+    local v = TakeDown()
+    if not v then return end
+    local spec = v.dialog
+    if index == 1 then
+        if spec.OnAccept then spec.OnAccept() end
+    elseif index == 3 then
+        if spec.OnAlt then spec.OnAlt() end
+    elseif index == 4 then
+        if spec.OnExtra then spec.OnExtra() end
+    elseif spec.OnCancel then
+        spec.OnCancel(nil, nil, "clicked")
+    end
+end
+
+-- Taken off the screen without an answer
+function Dialog.Close(reason)
+    local v = TakeDown()
+    if v and v.dialog.OnCancel then v.dialog.OnCancel(nil, nil, reason or "override") end
 end
 
 -- While the game's Edit Mode is open the screen is being arranged: frames of the game that we draw over are

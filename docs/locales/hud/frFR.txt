@@ -3,6 +3,10 @@ activé
 désactivé
 utilisation:
 Les changements s'appliquent à la fin du combat.
+Celle du jeu
+Les polices ne peuvent être choisies que là où la langue du jeu s'écrit en lettres latines.
+Police: %s
+une police pour le HUD et les textes du jeu lui-même (fenêtres, bulles d'aide, discussion, boutons); chacun garde sa taille
 Boule de feu
 Mage allié
 Soins
@@ -10,25 +14,56 @@ Familier
 Mannequin d'entraînement
 Soigneur allié
 Joueur
+PNJ amicaux selon la réputation
+le nom et la barre d’un PNJ amical prennent la couleur de votre réputation auprès de sa faction : jaune neutre, vert amical, puis vert d’eau, turquoise et bleu pour honoré, révéré et exalté
+Zone d’exécution sur les barres ennemies
+un ennemi à un quart de sa vie ou moins : sa barre de vie palpite en rouge, avec une lueur autour qui bat comme un pouls, sur les cadres de cible et de focalisation et sur les barres de nom
+Boucliers sur les barres de vie
+ce qu'un bouclier sur une unité absorbera encore, en bande bleu argenté depuis le bout de sa barre de vie: sur vos cadres, celui de votre cible, ceux de votre groupe et les barres de nom
+Bonheur du familier
+à côté de la barre du familier, une fine bande de la couleur de son humeur: vert heureux, jaune satisfait, rouge mécontent, avec de la nourriture à côté quand il faut le nourrir. Rien pour un familier sans humeur
 Les barres verticales suivent la caméra
 les barres verticales gardent leur place à côté de votre personnage quand la caméra zoome et dézoome (placez-les en mode Édition à la distance qui vous convient)
 Noms de famille
 le nom complet d'un joueur sur les cadres d'unité et les barres de nom, nom de famille compris : Faith Ashborne
 Santé sur la barre de la cible
 la santé restante (12.3k) et le pourcentage sur les barres de la cible et de la focalisation ; une cible compacte n'affiche que le pourcentage
+Somnolent au repos
+dans une auberge ou une ville, votre cadre somnole : de petits z s’envolent et une douce lueur de lune respire autour (jamais en combat)
 Cible
 Cible de la cible
 Focalisation
 Barres verticales
 %d objets déposés
+%d objets retirés de la banque
 %d objets vendus pour %s (/cchud sold les liste)
 Rien à vendre.
 Ouvrez d'abord la banque.
+Rien à retirer: la banque n'a rien de ce que vous portez.
+Retirer
+retire de la banque ce dont vous portez déjà un peu (matériaux, potions, nourriture), pour remplir vos sacs
+Déposer
+dépose à la banque ce qu'elle contient déjà en partie, et ce que vous avez marqué pour elle
+Ouvrez d'abord un marchand.
+Vente futée
+vend ce qu'un marchand paie le mieux: la camelote, et ce que l'hôtel des ventes ne vendrait pas mieux (listé et confirmé d'abord); ce qui vaut plus à l'hôtel des ventes ou sert encore à vos métiers reste
 Rien à déposer : votre banque ne contient rien de ce que vous portez, et rien n'est marqué pour elle.
 Rien n'est marqué pour la banque. Pointez un objet et utilisez Marquer l'objet.
-Ouvrez d'abord un marchand.
-Vendre la camelote: %d objets pour %s.\n\nOu vendre les armes et armures selon leur qualité.
-Vendre la camelote
+%d objets, %s
+...et %d de plus
+Vendre au marchand : %s
+Pas encore de prix d'enchères: passez une fois à l'hôtel des ventes.
+Gardé : vaut plus à l’hôtel des ventes
+Gardé pour vos métiers
+Gardé pour vos quêtes
+Ouvrez une fois ces fenêtres de métier pour que leurs points de compétence comptent: %s
+Pour les meilleures estimations, ouvrez de temps en temps vos fenêtres de métier et l'hôtel des ventes.
+Que vendre?\n\nCamelote: %s\nAvec les armes et armures blanches: %s\nAvec les armes et armures vertes: %s\n\nAprès un passage à l'hôtel des ventes, des recommandations sont aussi proposées ici.
+Camelote
++ Équipement blanc
++ Équipement vert
+Que vendre?\n\nRecommandé: %s au marchand. %d objets restent parce qu'ils valent plus à l'hôtel des ventes, %d parce que vos métiers en ont encore besoin.\nCamelote seule: %s
+Recommandé
 Par qualité
 Vendre les armes et armures jusqu'à quelle qualité ?\n\nCommun (blanc): %s\nPeu commun (vert): %s
 Commun
@@ -44,6 +79,8 @@ Pointez d'abord un objet.
 Déplacement rapide: vendre, déposer, échanger ou envoyer par courrier l'objet que vous visez
 Marquer l'objet: camelote / conservé / banque / sans marque
 Déposer : mettre en banque ce qu'elle contient déjà, et ce que vous avez marqué pour elle
+Retirer: sortir de la banque ce dont vous portez déjà un peu
+Vente futée: ce qu'un marchand paie le mieux, listé et confirmé d'abord
 Rien n'a encore été vendu pendant cette session.
 L'onglet Rachat d'un marchand vous les rend jusqu'à votre déconnexion.
 Réparé pour %s depuis la banque de guilde
@@ -56,6 +93,23 @@ répare tout dès que s'ouvre un marchand qui répare
 Réparer depuis la banque de guilde
 paie les réparations avec la banque de guilde si votre guilde l'autorise, avec votre propre or sinon
 liste ce qui a été vendu pour vous pendant cette session, pour racheter quelque chose
+1 objet
+%d objets
+Rien à prendre dans la boîte aux lettres.
+Boîte aux lettres : %s récupéré.
+ et 
+Lettres contre remboursement, laissées à ouvrir vous-même : %d
+Vos sacs sont pleins : les autres objets attendent dans leurs lettres.
+Objets que le jeu n’a pas remis (uniques ou refusés), laissés dans leurs lettres : %d
+En attente des suivantes...
+Ouvrez d’abord une boîte aux lettres.
+Récupération...
+Tout prendre
+prend l’argent et les objets de chaque lettre, ventes aux enchères comprises, sur toutes les pages (appuyez à nouveau pour arrêter) ; les lettres contre remboursement ne sont pas touchées
+Tout prendre dans la boîte aux lettres (à nouveau pour arrêter)
+Tout prendre dans la boîte aux lettres
+un bouton à côté de Tout ouvrir à la boîte aux lettres : prend l’argent et les objets de chaque lettre, ventes aux enchères comprises, sur toutes les pages ; les lettres contre remboursement ne sont pas touchées
+prend l’argent et les objets de chaque lettre de la boîte aux lettres ouverte (à nouveau pour arrêter)
 Sac
 Banque
 Vous
@@ -79,9 +133,21 @@ il y a %d heures
 il y a %d jours
 Marchand
 Idéal
+Recettes
 Vente
-Hôtel des ventes
+Recommandation
+Équiper
+Quête
 Garder
+mieux que ce que vous portez
+%s pour %s
+transformé en %s
+%d%% de chances de vente
+Coût
+Hôtel des ventes
+Monte une compétence: %s
+Quête : %s
+%d%% de chances de se vendre
 5% en dessous du plus bas, pour une vente rapide
 le marché est exceptionnellement bas aujourd'hui : prix proche de l'habituel, pour attendre les acheteurs
 juste en dessous du plus bas : peu sont en vente, cela devrait se vendre
@@ -100,10 +166,33 @@ le prix d'achat immédiat le plus bas que vous avez vu pour un objet à l'hôtel
 Lire l'hôtel des ventes à la visite
 la première visite depuis un moment lit tous les prix d'un coup (le jeu le permet toutes les 15 minutes) ; /cchud scan le demande
 Meilleur usage d'un objet
-l'infobulle d'un objet dit quoi en faire : le vendre à l'hôtel des ventes (et combien de plus cela rapporte), le vendre à un marchand ou le garder
+l'infobulle d'un objet dit quoi en faire : le vendre à l'hôtel des ventes (et combien cela rapporte de plus), le vendre à un marchand, le garder ou le garder pour une quête
 Ventes rapides à l'hôtel des ventes
 prix 5% en dessous du plus bas pour vendre tout de suite ; désactivé : prix patients, juste en dessous du plus bas, qui se vendent quand les acheteurs viennent
 lit tous les prix de l'hôtel des ventes d'un coup (ouvrez-le d'abord ; toutes les 15 minutes)
+Fabrique: %s
+Garder ce dont vos métiers ont encore besoin
+un objet pour lequel une recette de l'un de vos personnages donne encore un point de compétence (recettes orange et jaunes, comme le jeu les montre dans la fenêtre du métier), ou qui sert à fabriquer quelque chose qui vaut plus à l'hôtel des ventes que l'objet lui-même, est gardé, pas vendu, et sa bulle d'aide dit pourquoi. Les recettes sont lues quand la fenêtre d'un métier est ouverte
+À récolter ou acheter
+%d fabrications : %s
+%s : vous en avez %d, le plan en utilise %d
+pour %s
+Plan de progression : %s %d > %d
+une estimation d'après les couleurs des recettes, refaite à mesure que vous progressez
+Au maximum : un maître a le rang suivant.
+%d points qu'aucune de vos recettes ne donne : apprenez-en de nouvelles chez un maître
+Plan de progression
+Ouvrez la fenêtre d'un métier pour faire un plan.
+Farmer ceci
+Tout farmer
+Retour
+Utiliser le plan
+%d ajouté(s) à la liste à farmer.
+Rien ne manque : vous avez ce qu'il faut.
+Plan de progression : afficher / masquer
+Plan de progression à côté de la fenêtre du métier
+tant que la fenêtre d'un métier est ouverte, un panneau à côté indique quelles recettes faire et combien pour atteindre le maximum, et ce qu'il faut, jusqu'au minerai et aux herbes ; une estimation d'après les couleurs des recettes
+affiche le plan de progression de la dernière fenêtre de métier ouverte, avec les boutons de la manette dessus
 PA
 PA dist.
 crit.
@@ -112,7 +201,7 @@ vie
 mana
 crit. sorts
 Ce que valent les caractéristiques
-chaque ligne de caractéristique d'une infobulle d'objet reçoit sa valeur pour votre personnage : puissance d'attaque, puissance d'attaque à distance, critique, esquive, vie, mana
+sous l'infobulle d'un objet, ses lignes de caractéristiques avec leur valeur pour votre personnage: puissance d'attaque, puissance d'attaque à distance, critique, esquive, vie, mana
 Niveau d'objet
 Niveau requis
 Pile jusqu'à
@@ -128,28 +217,46 @@ affiche tout sur l'objet que vous visez (ou celui indiqué): prix, qui le possè
 +%s de plus qu'un marchand
 pas encore de prix connu
 un marchand paie autant
+Le Courtier
 Marché
+chaque pièce comptée, l'ami
 Poster
 Patient
 Lire tous les prix
+Montrer le gardé
 Rien dans vos sacs ne peut être vendu ici.
 Pas encore d'historique des prix : lisez l'hôtel des ventes quelques jours.
+Un seul jour de prix pour l'instant: la ligne s'allonge chaque jour où vous passez à l'hôtel des ventes.
+Demande %s pièce, %s pour les %d
 Plus bas
+lu %s
 Habituel
-En vente
+7 jours : de %s à %s
+En vente : %d enchères, %d objets
+%s pièce, %s pour les %d
+Vous avez mis %d en vente ici, %d enchères vendues
 Aucun prix connu : lisez d'abord l'hôtel des ventes.
 %d valent la vente ici, %d autres possibles
 %d prix connus, tous lus %s
 jamais
+Le meilleur d'abord : le plus gagné sur un marchand pour chacun
+ce que vous gardez est listé aussi (%s le masque)
+%d gardés (pour vos métiers, à porter ou marqués), non listés (%s les montre)
+Masquer le gardé
+pièce
 aucune donnée
 Vente rapide
-Retour
 Poster %d pour %s
+Mettre les %d en vente pour %s
 Ce client ne permet pas de poster à l'hôtel des ventes depuis ici.
 %d posté pour %s.
 Marché à l'hôtel des ventes : ouvrir / fermer
 Onglet Marché à l'hôtel des ventes
 un onglet Marché à l'hôtel des ventes : ce qui, dans vos sacs, vaut d'y être vendu et pourquoi, une courbe des prix à côté, et la mise en vente d'une pression
+Salut du commissaire-priseur au Marché
+un commissaire-priseur gobelin dit une courte phrase, tirée des sons du jeu, à l'ouverture du Marché ; désactivé : il s'ouvre en silence
+Marché : montrer ce que vous gardez
+le Marché liste aussi ce que vous gardez : ce dont vos métiers apprennent encore ou qu'ils transforment en quelque chose de plus cher, et ce que vous avez marqué à garder ; désactivé : seulement ce que vous vendriez
 ouvrir ou fermer le Marché (un onglet de l'hôtel des ventes)
 quel hôtel des ventes a ce client (pour le dépannage)
 Hors ligne
@@ -169,12 +276,14 @@ Barre d'incantation
 notre barre d'incantation à la place de celle du jeu (elle reste là où le mode Édition place celle du jeu)
 Taille de la barre d'incantation
 la taille à laquelle votre barre d'incantation est dessinée, avec le bouchon de pêche et tout ce qui s'y joue
+Barre d'incantation à côté des barres verticales
+avec les barres verticales, ton incantation défile sur une fine barre verticale à droite de ton mana, avec un petit minuteur et sans texte, à la place de la barre d'incantation sous toi (la pêche garde la sienne)
 La pêche au premier plan
 tant que vous pêchez, la barre d'incantation passe au milieu de l'écran et est dessinée plus grande : la ligne, le bouchon et ce qui mord sont l'essentiel
 Ciblez d'abord quelque chose.
 %d effets listés et enregistrés. Tapez /reload pour que le jeu les écrive sur le disque.
 Vos effets sur la cible
-une rangée de vos propres affaiblissements ou bonus sous la barre de la cible
+une rangée sous la barre de la cible: vos affaiblissements sur un ennemi, les améliorations d'un allié (toutes, quel que soit leur lanceur)
 Bonus de l'ennemi sur la cible
 les améliorations d'une cible ennemie, à droite sous sa barre : celles qui comptent, ou toutes si Seulement les effets qui comptent est désactivé
 Seulement les effets qui comptent
@@ -235,7 +344,7 @@ les barres des PNJ amicaux (marchands, donneurs de quêtes, habitants) ne s'affi
 Noms sur les objets avec lesquels vous pouvez interagir
 un nom au-dessus des minerais, coffres, plaques et autres tant que vous leur faites face (désactivé : ils restent sans nom, l'invite du jeu dit déjà ce qu'ils sont)
 Mini-plaques
-les serviteurs, les bestioles et les ennemis gris qui ne donnent pas d'expérience ont une petite barre : une barre fine et le nom, rien de plus (l'option du jeu décide s'ils ont une barre)
+les serviteurs, bestioles et ennemis gris qui ne donnent pas d'expérience ont une petite barre: une barre fine avec vos affaiblissements dessus et sans nom (une bestiole, sans barre, garde son nom; l'option du jeu décide s'ils ont une barre)
 Barres de nom du groupe en donjon: noms seuls
 dans un donjon ou un raid, le jeu dessine lui-même les barres de nom des joueurs alliés et les addons ne peuvent pas les modifier: les options propres au jeu y sont réglées pour les afficher comme des noms à la couleur de la classe, sans barres, comme les nôtres, et les barres du jeu reviennent pendant un combat (si les barres des alliés en combat sont activées); tout est remis en place à la sortie
 Barres de nom du groupe en donjon: masquées
@@ -245,6 +354,8 @@ lister les barres d'info à l'écran et si elles portent notre apparence (pour l
 Affichage de chaque école de dégâts une fois (la dernière en coup critique).
 Particules d'impact
 des éclairs sacrés, le feu s'élève, des cristaux de givre persistent, l'ombre fume, des runes des arcanes scintillent sur la barre touchée
+Blessures selon le type d’ennemi
+vos coups blessent la barre d’un ennemi à sa façon, d’autant plus que sa vie baisse : bêtes, humanoïdes et draconiens saignent, les démons répandent un ichor gangrené, les élémentaires volent en éclats, les machines crachent des étincelles, les morts-vivants se flétrissent en cendres
 Vos barres tremblent quand vous êtes touché
 votre cadre de joueur et vos barres verticales tremblent un peu, selon l'école du coup, quand vous subissez des dégâts
 Effets de coup par école de dégâts
@@ -256,8 +367,32 @@ Les soins sur la durée poussent sur la barre
 des racines et des branches (Nature) ou des fils dorés (Sacré) poussent sur la barre de votre cible, focalisation ou la vôtre tant qu'un soin sur la durée agit, et se fanent à la fin
 Les boucliers s'affichent comme une protection
 un bouclier sur votre cible, votre focalisation ou vous (Mot de pouvoir : Bouclier, Bouclier divin, Barrière de glace...) jaillit autour de la barre de vie dans la couleur de son école, luit tant que le bouclier tient et s'estompe quand il se brise
+%d absorbés
+Temps de recharge qui reviennent
 Chiffres stylisés sur vous
 les dégâts et les soins que vous recevez surgissent comme vos propres coups, au lieu du texte défilant du jeu (suit l'option du jeu de texte de combat sur vous)
+Techniques prêtes
+quand une technique qu'un seul moment permet devient utilisable (Morsure de la mangouste, Fulgurance, Vengeance, Riposte, Contre-attaque) ou que le jeu en illumine une sur votre barre: son nom en rouge gras un instant au milieu de l'écran
+vos techniques clés montent et grandissent à côté de votre personnage pendant les deux dernières secondes de leur temps de recharge, puis éclatent en or dès qu’elles sont prêtes (au lieu d’une barre de temps de recharge)
+Améliorations qui s’estompent
+une amélioration que vous lancez sur vous-même (un Sceau, Bouclier sacré, un cri ou bouclier) s’annonce avec vos temps de recharge quand elle s’achève, et en rouge dès qu’elle a disparu, même consommée plus tôt
+Celui du jeu
+Point
+Anneau
+Anneau et point
+Croix
+Chevron
+Blanc
+Couleur de classe
+Selon la cible
+Point de visée
+le réticule au centre de l’écran : celui du jeu, ou à sa place un point, un anneau, un anneau et un point, une croix ou un chevron du HUD (le minuteur de coups et les icônes d’action du jeu restent tels quels)
+Point de visée : couleur
+blanc, la couleur de votre classe ou celle de votre cible : rouge pour un ennemi, jaune pour un neutre, vert pour un ami (blanc sans cible)
+Point de visée : taille
+la taille du point de visée du HUD
+Point de visée : opacité
+l’opacité du point de visée du HUD
 La vibration du jeu est désactivée (ou cette manette ne peut pas vibrer).
 Lecture de chaque motif de vibration une fois.
 Intensité des vibrations
@@ -289,8 +424,55 @@ Jugement
 Vibration : vos techniques clés
 les techniques clés de chaque classe ont leur propre sensation à la manette (un Jugement éclabousse, une Frappe sacrée claque, Furie-des-vents frappe trois fois)
 Grands moments
-rarement, un coup vraiment spécial s'affiche en grand et doré au centre de l'écran : des critiques de vos techniques clés coup sur coup, un critique de Furie-des-vents ou un critique bien au-dessus de l'habitude du combat (au plus deux fois par combat)
+une rafale s’affiche en grand et en or au centre de l’écran : des critiques coup sur coup, chacun moins d’une seconde après le précédent (un double coup, Jugement et Frappe sacrée ensemble), avec ce qu’ils ont fait ensemble (au plus deux fois par combat)
 montre l'aspect et la sensation d'un grand moment
+nouveau !
+record !
+%d h
+%d min
+Améliorations reçues
+Prises et améliorations de camp à travers l'écran
+les poissons que vous sortez de l'eau et les améliorations que vous donne un camp ou un autel sont annoncés en haut au centre de l'écran: une prise arrive comme une vague, les améliorations entrent avec des braises
+Réduire les animations
+rien à l'écran ne tremble, ne glisse, ne vole ni n'éclate: les animations de la barre d'incantation, les effets de coups, le mouvement des barres de nom, les grands moments et les annonces de prises et d'améliorations sont calmes ou immobiles. Les réglages du jeu lui-même pour le tremblement de l'écran et les mouvements de caméra inattendus comptent aussi
+montrer à quoi ressemblent les annonces d'une prise et d'améliorations
+Grand maître
+Maître
+Artisan
+Expert
+Compagnon
+Apprenti
+Niveau %d atteint (depuis le %d)
+Niveau %d atteint
+%s et %d autres vaincus dans : %s
+%s vaincu
+%s : désormais %s, jusqu'à %d
+%s a atteint %d
+%d nouveaux trajets aériens, le dernier : %s
+Nouveau trajet aérien : %s
+Nouvelle monture : %s
+Nouvelle mascotte : %s
+Nouveau jouet : %s
+Haut fait : %s
+Le campement
+Au repos
+Au coin du feu
+Aube
+Matin
+Après-midi
+Soir
+Nuit
+%s, %s
+Avec %s
+La scène du feu de camp est désactivée.
+La scène du feu de camp attend la fin du combat.
+Scène du feu de camp
+reste immobile quelques secondes dans un campement et l'écran devient un film pendant une minute : la caméra tourne autour de toi, tes grands moments depuis le dernier campement sont racontés (boss, niveaux, métiers, nouvelles montures), et les améliorations du campement concluent, par classe. Un mouvement ou un bouton l'arrête
+jouer la scène du feu de camp maintenant
+fait
+%s : prête à être rendue
+lance une quête
+une de vos quêtes
 prête à être rendue
 au-dessus de votre niveau
 demande un groupe
@@ -308,7 +490,37 @@ Liste de quêtes: la plus proche d'abord
 garder la liste de quêtes dans l'ordre des distances, la quête la plus proche en haut
 Liste de quêtes: ordre recommandé
 garder la liste de quêtes dans un ordre recommandé: d'abord celles prêtes à être rendues, puis ce que vous pouvez faire seul en commençant par le plus proche, puis les quêtes au-dessus de votre niveau, les quêtes de groupe tant que vous êtes seul, et les quêtes grises en dernier
+Liste de quêtes: objectifs courts
+les objectifs de la liste de quêtes ne disent que le nécessaire, avec une icône du type devant: un crâne et 0/1 Capitaine Levépouvante, et non 0/1 Capitaine Levépouvante tué
+Progression des quêtes dans le chat
+une courte ligne dans le chat quand une quête avance : Colliers d'os sanglants : 4/25, un objectif rempli, une quête prête à être rendue
+Progression des quêtes à votre groupe
+en groupe (pas en raid), les mêmes lignes vont dans la discussion de groupe pour que les autres les voient, à un moment d'intervalle ; vous les y voyez aussi
+Garder ce dont vos quêtes ont besoin
+un objet qu'une quête de votre journal demande encore, ou qui lance une quête que vous pouvez encore faire, est marqué Quête : jamais vendu ni mis aux enchères pour vous
 dire un ordre recommandé pour vos quêtes: rendre ce qui est prêt, puis la plus proche faisable seul, puis le reste
+À gauche des quêtes
+À droite des quêtes
+Sous les quêtes
+La liste à farmer est pleine.
+Liste à farmer : %s, %d voulu(s).
+À farmer
+%d de plus
+Rien à farmer pour l'instant.
+Une pile de plus
+Retirer
+Vider
+Terminé
+Tout retirer de la liste à farmer ?
+Liste à farmer : choisir / terminé
+Liste à farmer : ajouter l'objet pointé
+Ce n'est pas sur la liste à farmer.
+La liste à farmer est vide.
+Liste à farmer : où elle se place
+Liste à farmer à côté de la liste de quêtes
+ce que vous comptez récolter, avec combien vous en avez et combien vous en voulez : vos sacs et votre banque et ceux de vos autres personnages sur ce royaume. Ajoutez les composants d'un plan de progression d'un bouton, ou n'importe quel objet
+la liste à farmer à gauche de la liste de quêtes, à sa droite ou sous ses quêtes
+la liste à farmer à côté de la liste de quêtes : choisir avec la manette ; add <objet> [combien], remove <objet>, clear, ou left / right / bottom pour sa place
 Pas en combat.
 Ce client n'a pas de barres de manette.
 Ce client ne permet pas aux addons de le modifier ; utilisez le mode Édition.
@@ -321,17 +533,19 @@ Taille des barres manette
 taille des barres manette quand les barres fines sont activées, en pourcentage
 les barres de manette du jeu en mode compact ou complet (comme son réglage du mode Édition)
 Estomper hors combat
+/cchud fade <partie> on | off en règle une ; all pour tout le fondu.
 les barres de manette, la minicarte, la liste des quêtes, le compteur de dégâts et la barre d'expérience se reposent ensemble hors combat, et reviennent pour un combat, une gâchette pressée ou une cible ennemie
 L'écran au repos
 à quel point les parties de l'écran au repos restent visibles hors combat (0 les masque)
-Au repos : barres de manette
-Au repos : minicarte
-Au repos : liste des quêtes
-Au repos : compteur de dégâts
-Au repos : barre d'expérience
-Au repos : améliorations
-Au repos : rangées de temps de recharge
-si cette partie de l'écran participe au fondu hors combat
+S'estompe : barres de manette
+S'estompe : minicarte
+S'estompe : liste des quêtes
+S'estompe : compteur de dégâts
+S'estompe : barre d'expérience
+S'estompe : améliorations
+S'estompe : rangées de temps de recharge
+si cette partie de l'écran s'estompe avec le reste hors combat (désactivé : elle reste toujours telle quelle)
+le fondu de l'écran hors combat : ce qui s'estompe (minicarte, liste des quêtes et le reste), chacun activé ou non
 Enregistré : tapez /reload pour que le jeu l'écrive sur le disque.
 Boutons de posture et de familier au-dessus des barres
 les boutons de postures et d'ordres du familier se placent là où étaient les icônes de ciblage verte et rouge, pour que leur roue s'ouvre entièrement à l'écran ; ces icônes sont masquées
@@ -346,17 +560,24 @@ La manette ne dit pas ce qu'elle est: les icônes restent comme le jeu les a.
 les icônes que le jeu affiche pour les boutons de votre manette: auto (selon la manette utilisée), xbox, playstation, switch, steam, generic (chiffres), ou game pour les laisser comme le jeu les a
 Rangées de temps de recharge à l'écart des barres de manette
 les rangées de temps de recharge du jeu se placent sous la cible au lieu d'être sur les boutons de la manette, un peu plus petites (seulement avec les dispositions intégrées du jeu : avec une disposition à vous, elles restent où vous les avez mises)
-Pêche : %s lance
-Mode pêche : %s lance votre ligne et ferre le poisson quand le bouchon bouge.
 Mode pêche : désactivé.
+Pêche: %s pour lancer
+Pas d'appât: %s deux fois pour utiliser %s
+%s pour ranger la canne
+Mode pêche: %s pour lancer la ligne, et encore pour ferrer le poisson quand le bouchon bouge.
+%s pour ferrer, %s pour relancer
 Le mode pêche demande une canne à pêche dans vos mains.
 Vous ne connaissez pas la Pêche.
 Mode pêche : un bouton lance et ferre
 Bouton de pêche : %s
 Pêche à un bouton
-avec une canne à pêche en main, votre bouton d'interaction lance la ligne dès qu'il n'y a rien avec quoi interagir, et ferre le poisson quand le bouchon bouge ; la prise est ramassée pour vous
+avec une canne à pêche en main: votre bouton d'interaction pour lancer la ligne quand il n'y a rien avec quoi interagir, et encore pour ferrer le poisson quand le bouchon bouge; la prise est ramassée pour vous. B pour ranger la canne et reprendre vos armes
+Relancer d’une seule pression
+tant que le flotteur est à l’eau, votre bouton de pêche relance une ligne d’une seule pression, et A ferre le poisson (le jeu ne donne aucun signe de touche à attendre, un seul bouton ne peut donc pas faire les deux) ; désactivé : le bouton de pêche ferre, comme l’interaction du jeu
 Appât sur double appui
 appuyez deux fois rapidement sur votre bouton de pêche: le second appui met le meilleur appât de vos sacs sur votre canne, quand elle n'en a pas
+Barres de manette masquées pendant la pêche
+avec une canne à pêche en main, les barres de la manette sont masquées pour bien voir l'eau; l'invite de pêche montre le bouton pour lancer. Elles reviennent dès qu'un combat commence ou que la canne est rangée
 pêche à un bouton désactivée pour l'instant, ou réactivée (avec une canne en main elle s'active toute seule)
 le bouton qui pêche : votre bouton d'interaction au départ (Carré ou X), ou n'importe quel autre, une gâchette par exemple (rt)
 La côte de Durotar, c'est de la roche rouge et des hauts-fonds tièdes. Les trolls des îles de l'Écho disent que les maquereaux passent en bancs plus serrés quand la marée porte l'odeur des feux de cuisine des îles.
@@ -437,19 +658,18 @@ Votre plus gros %s à ce jour : %s (avant : %s).
 Journal de pêche
 chaque prise est notée dans votre journal de pêche: combien de chaque espèce, où vous l'avez sortie la première fois, et un poids inventé pour le plaisir avec votre record pour chacune (/cchud journal l'ouvre)
 Appât %s
-Pas d'appât : appuyez deux fois sur %s pour %s
 Pas d'appât
 Pris %d
 Échappés %d
-nouveau !
-record !
 Interface de pêche
 avec une canne à pêche en main: les poissons de l'eau où vous vous tenez (ceux que vous n'avez pas encore sortis ici restent cachés), votre compétence de pêche et ce qu'ajoute votre appât, combien vous en avez pris et combien se sont échappés, combien de temps dure votre appât, et vos dernières prises
 Un curieux : +%d%%
-Maintenez %s : le leurre coule
+Gardez votre leurre près du poisson
+Prochaine prise +%d%%
+Maintenez %s : le leurre court le long de la ligne
 %d d'affilée
 Un jeu pendant que le bouchon est à l'eau
-un petit bout d'eau à côté de l'interface de pêche: maintenez une gâchette pour faire couler votre leurre et relâchez pour qu'il remonte, et gardez-le près de l'ombre du poisson. Mieux vous jouez, plus le poids inventé de votre prochaine prise est élevé. Il ne prend aucun bouton et ne touche jamais à votre lancer ni à votre prise
+se joue sur la barre d’incantation tant que votre ligne est à l’eau : maintenez une gâchette et votre leurre court le long de la ligne, relâchez et il dérive en arrière ; gardez-le près de l’ombre du poisson. Mieux vous jouez, plus le poids inventé de votre prochaine prise est lourd. Aucun bouton n’est pris, ni votre lancer ni votre prise ne sont touchés
 %d pris, %d espèces, %d échappés
 Le plus lourd : %s, %s
 Poissons
@@ -470,20 +690,46 @@ durée d'affichage du texte du chat avant qu'il s'estompe
 Coordonnées sur la carte
 vos coordonnées sous la carte du monde
 %d messages masqués comme spam depuis votre connexion.
+%d d'entre eux étaient du recrutement de guilde répété.
 Icône de classe et niveau dans le chat
 l'icône de classe et le niveau d'un joueur entre crochets devant son nom, quand le jeu nous les fait connaître
+Noms de canaux courts dans la discussion
+le canal devant une ligne, raccourci: [P] groupe, [PL] chef de groupe, [G] guilde, [O] officier, [R] raid, [RL] chef de raid, [I] instance, et un canal numéroté par son numéro, [1]
+Prénoms seuls dans la discussion
+un nom avec un nom de famille s’affiche avec le seul prénom (Jory Spleeneater parle en tant que Jory) ; un chuchotement ou un clic droit dessus atteint toujours le nom complet
 Taille du texte du chat
 la taille du texte dans les fenêtres de discussion, en proportion de la taille propre au jeu (le réglage du jeu reste tel quel)
 Masquer les vendeurs d'or et les annonces répétées
 les messages qui vendent de l'or ou des services avec une adresse web, et le même message répété par un joueur, sont masqués (jamais ceux de votre groupe, guilde ou amis)
+Masquer le recrutement de guilde répété
+dans les canaux publics, le message de recrutement d'une guilde est montré une fois ; le même du même joueur, ou un presque identique, dans les 15 minutes est masqué (jamais ceux de votre groupe, guilde ou amis)
 liste les messages du chat récemment masqués comme spam
-Les infobulles suivent le curseur.
-Les infobulles restent dans leur coin.
-Infobulles au curseur : oui / non
-Fond des infobulles
-à quel point le fond et la bordure des infobulles sont opaques: 100% est le verre sombre complet, 0% ne laisse que le texte
-Les infobulles suivent le curseur
-les infobulles s'ouvrent au curseur au lieu du coin de l'écran (en combat, elles restent dans le coin)
+Vol
+destination inconnue
+estimé d'après la distance
+premier vol sur cette route : apprentissage de sa durée
+atterrissage
+%s : environ %s, estimé d'après la distance
+%s : environ %s
+%s : premier vol sur ce trajet, durée inconnue
+En vol, destination inconnue
+%s : durée du vol apprise, %s
+%d trajets aériens connus.
+Vols : durée et compte à rebours
+en vol, la destination et la durée sont indiquées dans le chat, et une barre en haut de l'écran compte à rebours jusqu'à l'atterrissage ; la durée de chaque trajet est apprise de vos vols
+Vols : votre monture le long de la barre
+un griffon, un coursier du vent ou une chauve-souris (celui que le maître de vol vous a donné) plane le long de la barre de vol vers votre point d’arrivée
+lister les trajets aériens dont la durée est connue
+Un vol est un bon moment pour ça.
+Vous jouez depuis %s.
+C'est l'heure d'une gorgée d'eau
+Rappel pour boire de l'eau
+de temps en temps pendant que vous jouez, un doux rappel pour boire une gorgée d'eau (jamais en combat)
+Rappel d'eau toutes les (minutes)
+combien de minutes de jeu entre deux rappels pour boire de l'eau
+Rappel d'eau au début d'un vol
+un vol est une pause naturelle : le rappel pour boire de l'eau vient quand un vol commence, sauf si le dernier date de peu
+montrer le rappel pour boire de l'eau
 Restyler les cadres du jeu
 infobulles, bonus, suivi de quêtes, minicarte, barre d'expérience, onglets du chat et barres de manette dans le style du HUD (l'interface à la souris garde celle du jeu)
 Taille de la barre d'expérience
@@ -502,13 +748,15 @@ Barre d'expérience
 les barres d'expérience et de réputation un peu plus petites, avec leurs propres couleurs
 Chat
 noms des onglets du chat cerclés et zone de saisie en verre sombre
-Les avis du jeu seront demandés de nouveau.
-Confirmer l'avis des fonctions expérimentales
-une fois l'avis des fonctions expérimentales du jeu accepté, il est accepté pour vous aux connexions suivantes
-oublier les avis acceptés, pour que le jeu les demande de nouveau
+Compteur de dégâts
+le compteur de dégâts du jeu dans le style du HUD : ses barres, inclinées sur un fond sombre, et un texte détouré ; il garde tout ce qu'il fait
 vérification: %d sur %d réussies
+Le jeu ne s’est pas figé depuis votre connexion.
+Moments où le jeu s’est figé, et la part du HUD dans chacun :
+Les moments les plus lents du HUD :
 Rapports de débogage
 rassembler les rapports de dépannage tout seuls : à la connexion, et de nouveau au rechargement ou à la déconnexion (ils sont gardés dans les réglages enregistrés)
+les moments où le jeu s’est figé depuis votre connexion, et la part de chacun due au travail du HUD
 Préréglage du HUD : %s, assorti à la caméra
 préréglage : %s
 Une disposition nommée '%s' a été ajoutée au mode Édition du jeu. Choisissez-la là pour l'utiliser (Menu du jeu > Mode Édition > Disposition).
@@ -578,6 +826,7 @@ Télé
 Moniteur
 Icônes des boutons
 les icônes que le jeu affiche pour les boutons de votre manette: trouvées automatiquement pour la manette utilisée, ou le type que vous choisissez
+Police
 Réinitialiser la disposition du jeu
 Essayer
 Lancer la démo
@@ -637,7 +886,7 @@ notre barre de joueur, en haut à gauche
 Cadre de la cible
 notre barre de cible, en haut au centre
 Barre du familier
-une petite barre de familier sous la barre du joueur
+une petite barre de familier sous la barre du joueur, ou à côté des barres verticales
 Cadre de focalisation
 notre cadre de focalisation
 fines barres verticales de vie et de puissance à côté de votre personnage, pour une vue à la troisième personne (à la place de la barre du joueur)
@@ -660,11 +909,13 @@ Couleurs de classe pour les noms dans le chat
 le réglage du chat du jeu pour tous les types de chat à la fois : le nom d'un joueur dans la couleur de sa classe
 ouvrir le panneau d'options (Options > AddOns > ControllerCam HUD)
 Cadres
+Fondu de l'écran
 Effets
 Style
 Quêtes, discussion et carte
 Sacs, banque et marchand
 Pêche
+Accessibilité
 Options natives
 %s  |  Interface manette: %s  |  en cours: %s
 joueur %s, cible %s, familier %s, focalisation %s  |  cadres du jeu mis de côté: %s  |  discussion déplacée: %s
@@ -686,7 +937,7 @@ aide marchand et banque: %s
 vente auto: %s
 équipement blanc = camelote: %s
 L'aide marchand est désactivée.
-utilisation: /cchud sell [junk | white | green | blue]
+utilisation: /cchud sell [junk | recommended | white | green | blue]
 déposer les objets marqués à l'ouverture de la banque: %s
 utilisation: /cchud junk <item> (Maj-clic sur l'objet pour l'insérer dans la ligne de discussion)
 objet %d: camelote, vendu avec le reste
@@ -720,10 +971,11 @@ le Gestionnaire de temps de recharge du jeu (l'option propre au jeu)
 votre santé et votre ressource sous votre personnage (l'option propre au jeu)
 l'infobulle qui s'affiche quand un buff commence (l'option propre au jeu)
 garder visibles les cadres du joueur et de la cible du jeu (activé) ou les mettre de côté (désactivé)
-chez un marchand: choisir quoi vendre (aussi: sell junk, sell white | green | blue)
+chez un marchand: choisir quoi vendre (aussi: sell junk, sell recommended, sell white | green | blue)
 compter les armes et armures blanches comme camelote
 marquer un objet: toujours vendu, jamais vendu, ou pour la banque (Maj-clic pour l'insérer dans la ligne de discussion)
 à la banque : déposer ce que la banque contient déjà, et tout ce qui est marqué pour elle
+à la banque: retirer ce dont vous portez déjà un peu
 déposer dès l'ouverture de la banque
 la banque prend les composants toute seule (l'option propre au jeu)
 taille du texte, en pourcentage (150 se lit bien sur une télévision)

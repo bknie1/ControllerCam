@@ -14,7 +14,7 @@ ns.RegisterSetting({
     label = "Chat fades when quiet", tip = "chat text fades out after a few seconds without new messages",
 })
 ns.RegisterSetting({
-    key = "chatTime", kind = "number", default = 15, min = 5, max = 120, command = "chattime", section = "General",
+    key = "chatTime", kind = "number", default = 45, min = 5, max = 300, command = "chattime", section = "General",
     label = "Seconds before chat fades", tip = "how long chat text stays before it fades",
 })
 ns.RegisterSetting({

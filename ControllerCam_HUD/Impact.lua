@@ -15,6 +15,11 @@ ns.RegisterSetting({
     tip = "holy flashes, fire rises, frost crystals linger, shadow smokes, arcane runes twinkle on the bar you hit",
 })
 ns.RegisterSetting({
+    key = "woundFx", kind = "boolean", default = true, command = "wounds", section = "Effects",
+    label = "Wounds by the kind of foe",
+    tip = "your hits wound an enemy's bar in its own way, more as its health runs low: beasts, humanoids and dragonkin bleed, demons spill fel ichor, elementals shatter, machines throw sparks, undead wither to ash",
+})
+ns.RegisterSetting({
     key = "playerShake", kind = "boolean", default = true, command = "playershake", section = "Frames",
     label = "Your bars shake when you are hit", tip = "your player frame and vertical bars give a small shake, in the hit's school, when you take damage",
 })
@@ -126,6 +131,7 @@ end
 OnUpdate = ns.Protect(OnUpdate)
 
 function IM:Shake(frame, anchor, profile, mult)
+    if ns.Calm() then return end                                 -- (Reduce animations: nothing shakes)
     local p = profile or IM.PROFILES.physical
     local s = self.shaking[frame]
     local amp = p.amp * (mult or 1)
@@ -177,7 +183,8 @@ local function FxTick(_, dt)
         else
             any = true
             t.x = t.x + t.vx * dt
-            t.y = math.max(-t.y0, math.min(t.y0, t.y + t.vy * dt))
+            if t.gravity then t.vy = t.vy - t.gravity * dt end
+            t.y = math.max(-t.y0, math.min(t.yTop or t.y0, t.y + t.vy * dt))
             local a, size = 1 - k, t.size
             if t.kind == "rays" then size = t.size * (1 + k * 0.6) end
             if t.SetRotation and (t.kind == "rays" or t.kind == "sparks") then t:SetRotation(math.pi / 2) end
@@ -188,6 +195,9 @@ local function FxTick(_, dt)
                 if t.SetRotation then t:SetRotation(t.age * 4) end
             end
             if t.kind == "flames" then a = (1 - k) * (0.7 + 0.3 * math.sin(t.age * 40)) end
+            if t.kind == "drip" then a = (k < 0.6) and 1 or (1 - (k - 0.6) / 0.4); size = t.size * (1 + 0.4 * k) end
+            if t.kind == "shard" and t.SetRotation then t:SetRotation(t.age * t.spin) end
+            if t.kind == "ash" then a = 0.8 * (1 - k); size = t.size * (1 + 0.8 * k) end
             t:SetSize(size, size)
             t:ClearAllPoints()
             t:SetPoint("CENTER", t.layer, "LEFT", t.x, t.y)
@@ -199,6 +209,7 @@ end
 FxTick = ns.Protect(FxTick)
 
 function IM:Burst(bar, p, mult)
+    if ns.Calm() then return end                                 -- (nor bursts)
     local fx = p.fx
     if not fx then return end
     local layer = Layer(bar)
@@ -209,6 +220,7 @@ function IM:Burst(bar, p, mult)
         local t = table.remove(pool) or layer:CreateTexture(nil, "OVERLAY")
         if t:GetParent() ~= layer and t.SetParent then t:SetParent(layer) end
         t.layer, t.kind, t.age = layer, fx.kind, 0
+        t.gravity, t.yTop = nil, nil                             -- (a texture a wound used before)
         t.life = fx.life * (0.8 + math.random() * 0.4)
         t.size = fx.size * (0.7 + math.random() * 0.6)
         t:SetTexture(ns.media[fx.tex])
@@ -244,11 +256,179 @@ function IM:Hit(target, school, crit)
     target.frame.lastImpact = GetTime()
     target.bar:Flash(crit and 0.5 or 0.15, p.color, p.fade)
     if ns.db.impactFx then self:Burst(target.bar, p, mult) end
+    if ns.db.woundFx and target.unit then self:Wound(target.bar, target.unit, crit) end
     if p.twice then
         C_Timer.After(0.12, function() target.bar:Flash(0.2, p.color, p.fade) end)
     end
     self:Shake(target.frame, target.anchor, p, mult)
     self.last = { school = school, crit = crit and true or false }
+end
+
+---------------------------------------------------------------------------
+-- Wounds: what your hit does to the kind of thing it hits, from the end of its health. More as it runs low.
+--   bleed    beasts, humanoids, giants: red drops that fall from the bar and fade
+--   dragon   dragonkin: darker, heavier blood
+--   ichor    demons: fel-green ichor, dripping
+--   void     aberrations: violet ichor
+--   shatter  elementals: chips of stone breaking off, thrown up and falling, spinning
+--   sparks   machines: bright sparks spat out and falling
+--   splinter totems: splinters of wood
+--   ash      undead: grey ash and dust lifting off and drifting away, as they wither
+-- Critters, gas clouds and what the game does not name have none.
+---------------------------------------------------------------------------
+IM.WOUNDS = {
+    bleed    = { color = { 0.72, 0.04, 0.04 }, kind = "drip",  tex = "soft",  count = 3, size = 5,  life = 0.9 },
+    dragon   = { color = { 0.5, 0.02, 0.06 },  kind = "drip",  tex = "soft",  count = 4, size = 6,  life = 1.0 },
+    ichor    = { color = { 0.35, 0.9, 0.15 },  kind = "drip",  tex = "soft",  count = 3, size = 5,  life = 0.9 },
+    void     = { color = { 0.55, 0.2, 0.75 },  kind = "drip",  tex = "soft",  count = 3, size = 5,  life = 0.9 },
+    shatter  = { color = { 0.62, 0.56, 0.48 }, kind = "shard", tex = "crystal", count = 4, size = 7, life = 0.75 },
+    sparks   = { color = { 1, 0.8, 0.35 },     kind = "shard", tex = "spark", count = 4, size = 6,  life = 0.5, add = true },
+    splinter = { color = { 0.55, 0.38, 0.2 },  kind = "shard", tex = "mark",  count = 3, size = 6,  life = 0.6 },
+    ash      = { color = { 0.62, 0.64, 0.6 },  kind = "ash",   tex = "soft",  count = 4, size = 7,  life = 1.1 },
+}
+-- The game's creature types by number (the same in every language): 1 beast, 2 dragonkin, 3 demon, 4 elemental,
+-- 5 giant, 6 undead, 7 humanoid, 9 mechanical, 11 totem, 15 aberration
+IM.WOUND_OF = { [1] = "bleed", [2] = "dragon", [3] = "ichor", [4] = "shatter", [5] = "bleed", [6] = "ash",
+                [7] = "bleed", [9] = "sparks", [11] = "splinter", [15] = "void" }
+-- Their names, for clients without the game's list of them (English)
+local TYPE_NAMES = { Beast = 1, Dragonkin = 2, Demon = 3, Elemental = 4, Giant = 5, Undead = 6, Humanoid = 7,
+                     Critter = 8, Mechanical = 9, ["Not specified"] = 10, Totem = 11, ["Non-combat Pet"] = 12,
+                     ["Gas Cloud"] = 13, ["Wild Pet"] = 14, Aberration = 15 }
+local typeIDs
+local function TypeIDs()
+    if typeIDs then return typeIDs end
+    typeIDs = {}
+    for name, id in pairs(TYPE_NAMES) do typeIDs[name] = id end
+    local C = C_CreatureInfo
+    if C and C.GetCreatureTypeIDs and C.GetCreatureTypeInfo then           -- the names in this game's language
+        local ok, ids = pcall(C.GetCreatureTypeIDs)
+        for _, id in ipairs(ok and type(ids) == "table" and ids or {}) do
+            local okI, info = pcall(C.GetCreatureTypeInfo, id)
+            if okI and type(info) == "table" and type(info.name) == "string" then typeIDs[info.name] = id end
+        end
+    end
+    return typeIDs
+end
+
+-- The wound of a unit, by its creature type, or nil
+function IM.WoundOf(unit)
+    local ok, ctype = pcall(UnitCreatureType, unit)
+    if not ok or ns.IsSecret(ctype) or type(ctype) ~= "string" then return nil end
+    local id = TypeIDs()[ctype]
+    return id and IM.WOUND_OF[id] or nil
+end
+
+function IM:Wound(bar, unit, crit, count, layer)
+    if ns.Calm() then return end
+    local name = IM.WoundOf(unit)
+    local w = name and IM.WOUNDS[name]
+    if not w then return end
+    layer = layer or Layer(bar)
+    local width, h = bar:GetWidth() or 100, bar:GetHeight() or 8
+    local fill = bar:GetFraction()
+    local edge = fill and math.max(4, width * fill) or width * 0.5
+    -- more as its health runs low (when the game lets us know how low): up to three times at the end
+    local low = fill and (1 - fill) or 0.3
+    local n = count or math.floor(w.count * (1 + 2 * low) * (crit and 1.5 or 1) + 0.5)
+    for _ = 1, n do
+        local t = table.remove(pool) or layer:CreateTexture(nil, "OVERLAY")
+        if t:GetParent() ~= layer and t.SetParent then t:SetParent(layer) end
+        t.layer, t.kind, t.age = layer, w.kind, 0
+        t.life = w.life * (0.8 + math.random() * 0.4)
+        t.size = w.size * (0.7 + math.random() * 0.6)
+        t:SetTexture(ns.media[w.tex])
+        t:SetBlendMode(w.add and "ADD" or "BLEND")
+        local shade = 0.85 + math.random() * 0.3
+        t:SetVertexColor(w.color[1] * shade, w.color[2] * shade, w.color[3] * shade, 1)
+        local jitter = math.random() * 2 - 1
+        t.x, t.y = math.max(0, math.min(width, edge + jitter * 4)), -h * 0.3
+        t.gravity, t.spin, t.yTop = nil, 0, h
+        if w.kind == "drip" then                                  -- falls from the bar
+            t.vx, t.vy, t.gravity = jitter * 8, -6, 70
+            t.y0 = h * 3.5
+        elseif w.kind == "shard" then                             -- thrown off, up and out, then falling
+            t.vx, t.vy, t.gravity = jitter * 55, 25 + math.random() * 25, 110
+            t.spin = (math.random() < 0.5 and -1 or 1) * (6 + math.random() * 6)
+            t.y0 = h * 3
+        else                                                      -- ash: lifts off and drifts away, slowly
+            t.vx, t.vy, t.gravity = jitter * 14 + 6, 6 + math.random() * 8, nil
+            t.y, t.y0, t.yTop = 0, h, h * 1.4
+        end
+        t:Show()
+        live[t] = true
+    end
+    fxDriver:SetScript("OnUpdate", FxTick)
+    if not count then self.wounded = (self.wounded or 0) + 1 end
+    self.lastWound = name
+end
+
+---------------------------------------------------------------------------
+-- Bleeding out: a wounded foe keeps showing it between your hits, more the lower its health. From under 60% a
+-- drop now and then from the end of its health; from a quarter, a steady stream (blood, ichor, falling chips of
+-- stone, sparks, ash). Where the game keeps health to itself, its own answer to "a quarter or less?" (the same
+-- as the execute glow's) shows the stream or hides it, unread.
+---------------------------------------------------------------------------
+IM.BLEED_FROM = 0.6             -- it starts below this share of health
+IM.BLEED_RATE = 3               -- drops a second just under it ...
+IM.BLEED_LOW = 9                -- ... and at a quarter or less
+local bleeding = {}
+IM.bleeding = bleeding
+local bleedDriver = CreateFrame("Frame")
+
+local function BleedTick(_, dt)
+    local any = false
+    for bar, b in pairs(bleeding) do
+        any = true
+        if not (ns.db.woundFx and ns.db.impacts) then bleeding[bar] = nil
+        elseif bar:IsVisible() and not ns.Calm() then
+            b.due = (b.due or 0) + dt * b.rate
+            local n = math.floor(b.due)
+            if n > 0 then
+                b.due = b.due - n
+                IM:Wound(bar, b.unit, false, n, b.layer)
+                IM.bled = (IM.bled or 0) + n
+            end
+        end
+    end
+    if not any then bleedDriver:SetScript("OnUpdate", nil) end
+end
+BleedTick = ns.Protect(BleedTick)
+
+-- The health of a foe's bar changed: how much it bleeds now (bar, its unit, its share of health or nil)
+function IM:Bleed(bar, unit, frac)
+    local on = ns.db.woundFx and ns.db.impacts and unit and IM.WoundOf(unit)
+    if on then
+        local ok, enemy = pcall(UnitCanAttack, "player", unit)
+        local okD, dead = pcall(UnitIsDead, unit)
+        on = ok and ns.Yes(enemy) and not (okD and ns.Yes(dead))
+    end
+    local rate, gate
+    if on and type(frac) == "number" and not ns.IsSecret(frac) then
+        if frac > 0 and frac < IM.BLEED_FROM then
+            local k = (IM.BLEED_FROM - frac) / (IM.BLEED_FROM - ns.EXECUTE)
+            rate = frac <= ns.EXECUTE and IM.BLEED_LOW or (0.5 + (IM.BLEED_RATE - 0.5) * math.min(1, k))
+        end
+    elseif on then
+        gate = ns.ExecuteState and ns.ExecuteState(unit, nil)                 -- the game's own answer, unread
+        if gate ~= nil then rate = IM.BLEED_LOW end
+    end
+    if not rate then bleeding[bar] = nil; return end
+    local b = bleeding[bar] or {}
+    b.unit, b.rate = unit, rate
+    if gate ~= nil then
+        if not bar.bleedLayer then                                         -- a layer of its own, shown or not by it
+            local l = CreateFrame("Frame", nil, bar:GetParent())
+            l:SetAllPoints(bar)
+            l:SetFrameLevel((bar.over and bar.over:GetFrameLevel() or bar:GetFrameLevel()) + 2)
+            bar.bleedLayer = l
+        end
+        pcall(bar.bleedLayer.SetAlpha, bar.bleedLayer, gate)
+        b.layer = bar.bleedLayer
+    else
+        b.layer = nil
+    end
+    bleeding[bar] = b
+    bleedDriver:SetScript("OnUpdate", BleedTick)
 end
 
 -- Every bar of ours showing this unit (by GUID)
@@ -259,24 +439,56 @@ local function Targets(guid)
     for _, key in ipairs({ "target", "focus" }) do
         local f = UF.frames[key]
         if f and f.on and ns.GUID(f.unit) == guid then
-            list[#list + 1] = { frame = f.visual, anchor = f.button, bar = f.health }
+            list[#list + 1] = { frame = f.visual, anchor = f.button, bar = f.health, unit = f.unit }
         end
     end
     local plate = ns.Nameplates and ns.Nameplates.byGuid[guid]
     if plate and plate:IsShown() then
-        list[#list + 1] = { frame = plate, anchor = plate.plate, bar = plate.health }
+        list[#list + 1] = { frame = plate, anchor = plate.plate, bar = plate.health, unit = plate.unit }
     end
     return list
 end
 IM.Targets = Targets
 
+-- Every bar of ours showing this unit, by the unit the game named ("target", "focus", "nameplate3"): for a hit
+-- whose unit's GUID the game keeps to itself in a fight (then Targets cannot match it)
+function IM.DescribeUnits()
+    local parts = {}
+    for kind, n in pairs(IM.byUnit) do parts[#parts + 1] = kind .. " " .. n end
+    table.sort(parts)
+    return #parts > 0 and (" (by unit: " .. table.concat(parts, ", ") .. ")") or ""
+end
+
+local function TargetsOfUnit(unit)
+    local list = {}
+    if type(unit) ~= "string" or ns.IsSecret(unit) then return list end
+    local UF = ns.UnitFrames
+    for _, key in ipairs({ "target", "focus" }) do
+        local f = UF.frames[key]
+        if f and f.on and f.unit == unit then
+            list[#list + 1] = { frame = f.visual, anchor = f.button, bar = f.health, unit = f.unit }
+        end
+    end
+    for _, o in pairs(ns.Nameplates and ns.Nameplates.plates or {}) do
+        if o.unit == unit and o:IsShown() then
+            list[#list + 1] = { frame = o, anchor = o.plate, bar = o.health, unit = o.unit }
+        end
+    end
+    return list
+end
+IM.TargetsOfUnit = TargetsOfUnit
+
 local lastLanded = {}
-local function Land(guid, school, crit)
-    if not guid or ns.IsSecret(guid) then return end
+IM.byUnit = {}                   -- hits heard from the game's unit event, by the kind of unit (for the reports)
+local function Land(guid, school, crit, unit)
+    local key = (guid and not ns.IsSecret(guid)) and guid or nil
+    local list = key and Targets(key) or {}
+    if #list == 0 and unit then list = TargetsOfUnit(unit); key = key or unit end   -- (its GUID kept from us)
+    if not key then return end
     local now = GetTime()
-    if lastLanded[guid] and now - lastLanded[guid] < 0.05 then return end     -- heard twice (log and unit event)
-    lastLanded[guid] = now
-    for _, t in ipairs(Targets(guid)) do
+    if lastLanded[key] and now - lastLanded[key] < 0.05 then return end       -- heard twice (log and unit event)
+    lastLanded[key] = now
+    for _, t in ipairs(list) do
         IM:Hit(t, school, crit)
         IM.landed = IM.landed + 1
     end
@@ -334,13 +546,14 @@ local DAMAGE = { SWING_DAMAGE = 12, RANGE_DAMAGE = 15, SPELL_DAMAGE = 15, SPELL_
 -- take their colour and their effects from it
 IM.SCHOOL_OF = {}
 IM.HEAL_OF = {}                  -- and which spells heal: their casts grow vines and flowers
+IM.GUESSED = {}                  -- a school guessed from the hit that followed a cast: { [spellID] = { school = times } }
 local learned = 0
 local function Learn(sub, spellID, mask)
     if type(sub) ~= "string" or sub:sub(1, 6) ~= "SPELL_" then return end
     if ns.IsSecret(spellID) or ns.IsSecret(mask) or type(spellID) ~= "number" or type(mask) ~= "number" then return end
     if sub == "SPELL_HEAL" or sub == "SPELL_PERIODIC_HEAL" then IM.HEAL_OF[spellID] = true end
     if IM.SCHOOL_OF[spellID] then return end
-    if learned > 2000 then IM.SCHOOL_OF, IM.HEAL_OF, learned = {}, {}, 0 end
+    if learned > 2000 then IM.SCHOOL_OF, IM.HEAL_OF, IM.GUESSED, learned = {}, {}, {}, 0 end
     if mask >= 128 then ns.Note("school %d of spell %d is not one we know", mask, spellID) end
     IM.SCHOOL_OF[spellID] = IM.School(mask)
     learned = learned + 1
@@ -359,12 +572,22 @@ local function FromLog()
     end
     if sub == "SPELL_HEAL" or sub == "SPELL_PERIODIC_HEAL" then
         HealLand(e[8], IM.School(e[14]))
+        if sub == "SPELL_HEAL" and sourceGUID == ns.GUID("player") and ns.Moments then     -- your heals, for a moment
+            ns.Moments.HealFromLog(e[12], e[13], e[15], e[16], e[18], e[14])
+        end
         return
     end
     if sub == "SPELL_EXTRA_ATTACKS" and sourceGUID == ns.GUID("player") and ns.Moments then
         ns.Moments.ExtraAttack(e[12], e[13])                         -- Windfury and the like: the next swing is it
     end
     local at = DAMAGE[sub]
+    if destGUID == ns.GUID("player") and ns.Numbers then                -- what a shield took off a hit on you
+        if at then ns.Numbers.FromLogAbsorb(e[at + 5], e[14])
+        elseif sub == "SWING_MISSED" and e[12] == "ABSORB" then ns.Numbers.FromLogAbsorb(e[14], 1)
+        elseif (sub == "SPELL_MISSED" or sub == "RANGE_MISSED" or sub == "SPELL_PERIODIC_MISSED") and e[15] == "ABSORB" then
+            ns.Numbers.FromLogAbsorb(e[17], e[14])
+        end
+    end
     if not at then return end
     if sourceGUID ~= ns.GUID("player") and sourceGUID ~= ns.GUID("pet") then return end
     local crit = e[at + 6]
@@ -379,21 +602,76 @@ end
 -- Without the combat log: the game's hit event for a unit (any attacker). The amount may be secret: a hit
 -- is a hit.
 -- Your last finished cast: the hit or heal that follows it within a moment tells its school, for clients
--- whose combat log addons cannot read
-local lastCast
+-- whose combat log addons cannot read. That is a guess (somebody else's hit may land in that moment: a
+-- poison ticking on your target right after your Holy Light), so it is kept apart from what the log said, it
+-- is only asked when nothing else knows the spell, and the school seen most often after the spell is the one.
+local lastCast, lastOwn = nil, -10
 function IM.NoteCast(spellID)
+    lastOwn = GetTime()                              -- (a cast of yours, whatever it was: see Mine below)
     if ns.IsSecret(spellID) or type(spellID) ~= "number" then return end
     lastCast = { id = spellID, at = GetTime() }
+end
+
+-- The game's hit event does not say who hit. Only your own hits shake and light the target frame and the
+-- nameplates (a group's or a raid's all at once would be far too busy), so a hit it tells of counts when:
+--   * you are not in a group (then it is yours or your pet's),
+--   * it comes right after a cast of yours (a spell landing, a shot: Auto Shot is a cast too),
+--   * or it is a tick in the school of an effect you put on that unit (your Serpent Sting, your Immolation Trap).
+-- In a group your plain melee swings are not told apart from the others' there; the combat log, where it can
+-- be read, names who hit and needs none of this.
+IM.OWN_WINDOW = 0.8
+IM.others = 0
+local function YoursOn(unit, school)
+    local U = ns.Unit
+    local list = U and U.Filtered and U.Filtered(unit, "HARMFUL", "HARMFUL|PLAYER", 40)
+    for _, a in ipairs(list or {}) do
+        local id = ns.Plain(a.spellId)
+        if type(id) == "number" then
+            local s = IM.SCHOOL_OF[id] or IM.Guess(id)
+            if not s and ns.CastLook and ns.CastLook.SchoolOf then
+                local ok, k = pcall(ns.CastLook.SchoolOf, ns.Plain(a.name), id)
+                s = ok and k or nil
+            end
+            if s == school then return true end
+        end
+    end
+    return false
+end
+function IM.Mine(unit, school)
+    if not (IsInGroup and ns.Yes(IsInGroup())) then return true, "alone" end
+    if GetTime() - lastOwn <= IM.OWN_WINDOW then return true, "after your cast" end
+    if YoursOn(unit, school) then return true, "your effect" end
+    return false
 end
 local function LearnFromHit(mask)
     if not lastCast or GetTime() - lastCast.at > 1.0 then return end
     if ns.IsSecret(mask) or type(mask) ~= "number" or mask <= 1 then return end    -- physical says nothing
-    if not IM.SCHOOL_OF[lastCast.id] then IM.SCHOOL_OF[lastCast.id] = IM.School(mask) end
+    local seen = IM.GUESSED[lastCast.id]
+    if not seen then
+        seen = {}
+        IM.GUESSED[lastCast.id] = seen
+        learned = learned + 1
+    end
+    local school = IM.School(mask)
+    seen[school] = (seen[school] or 0) + 1
     lastCast = nil
+end
+
+-- The school guessed for a spell: the one seen most often right after it, or nil
+function IM.Guess(spellID)
+    local seen = IM.GUESSED[spellID]
+    if not seen then return nil end
+    local best, most = nil, 0
+    for school, n in pairs(seen) do
+        if n > most or (n == most and school < best) then best, most = school, n end
+    end
+    return best
 end
 
 local function FromUnit(unit, action, flag, amount, mask)
     IM.heard = IM.heard + 1
+    local kind = type(unit) == "string" and not ns.IsSecret(unit) and (unit:match("^%a+") or unit) or "?"
+    IM.byUnit[kind] = (IM.byUnit[kind] or 0) + 1
     if ns.IsSecret(action) or unit == "pet" then return end
     if action == "HEAL" then
         LearnFromHit(mask)
@@ -425,7 +703,8 @@ local function FromUnit(unit, action, flag, amount, mask)
         end
         return
     end
-    Land(ns.GUID(unit), school, crit)
+    if not IM.Mine(unit, school) then IM.others = IM.others + 1; return end    -- someone else's hit
+    Land(ns.GUID(unit), school, crit, unit)       -- (a damage over time ticks here too, and shots: their school)
 end
 
 local events = CreateFrame("Frame")
@@ -453,7 +732,8 @@ end
 ns.RegisterCheck(function(row, run, db)
     if run and db.impacts then
         row("hit effects can hear hits", IM.source ~= nil,
-            (IM.source or "neither the combat log nor UNIT_COMBAT") .. (", %d heard, %d shown"):format(IM.heard, IM.landed))
+            (IM.source or "neither the combat log nor UNIT_COMBAT") .. (", %d heard, %d shown, %d others' left out"):format(IM.heard, IM.landed, IM.others)
+            .. IM.DescribeUnits())
     end
 end)
 

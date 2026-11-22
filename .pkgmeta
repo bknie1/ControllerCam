@@ -13,5 +13,4 @@ ignore:
   - .gitattributes
   - tests
   - docs
-  - ControllerCam_Gather
   - "*.zip"

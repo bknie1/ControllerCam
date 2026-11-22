@@ -38,6 +38,7 @@ local lastMatch = {}          -- situation -> GetTime() it last matched (for the
 local retryAfterCombat = false
 local curve                   -- the shoulder curve of the active profile, if any
 local curveFlip, lastCurveValue = false, nil
+local held = false            -- a scene of the HUD's has the camera (ControllerCam.Hold)
 local debugOn = false
 local fresh = false           -- first run ever (no saved data)
 local firstApply = true       -- the first apply after a load keeps your zoom, unless this is a fresh install
@@ -424,6 +425,7 @@ local function SameValue(a, b)
     return tostring(a) == tostring(b)
 end
 
+local lastSet = {}            -- cvar -> GetTime() we last set it (the trace tells ours from the game's)
 local function SetOne(cvar, value)
     local cur = GetCVar(cvar)
     if cur == nil then return end                 -- this client does not have that CVar
@@ -435,6 +437,7 @@ local function SetOne(cvar, value)
         dbg(("could not set %s = %s now, will retry after combat"):format(cvar, tostring(value)))
         return false
     end
+    lastSet[cvar] = GetTime()
     dbg(("%s = %s"):format(cvar, tostring(value)))
     return true
 end
@@ -566,14 +569,67 @@ local function EnforceMotion(need)
     end
 end
 
+---------------------------------------------------------------------------
+-- In the water
+-- The swimming stroke moves your character's head a long way, and head tracking pulls the camera after it: the
+-- camera swung aside as you went in. While you swim, head tracking rests; the profile's own value is back the
+-- moment you leave the water. What happens as you go in and come out is noted in ControllerCamDB.trace, to be
+-- read after a reload: the camera's values, any the game changes by itself, and whether your character turned.
+---------------------------------------------------------------------------
+ns.WATER = { test_cameraHeadMovementStrength = "0" }
+ns.WATCHED = { "test_cameraOverShoulder", "test_cameraHeadMovementStrength", "GamePadFaceMovementSwimming",
+               "GamePadFaceMovementMaxAngle", "GamePadTurnWithCamera", "test_cameraDynamicPitch",
+               "CameraFollowOnStick", "GamepadCameraFollowOnStick" }
+local swimming, traceUntil = false, 0
+
+local function Trace(msg)
+    if not db then return end
+    db.trace = db.trace or {}
+    db.trace[#db.trace + 1] = ("%s %s"):format(date and date("%H:%M:%S") or "", msg)
+    while #db.trace > 40 do table.remove(db.trace, 1) end
+end
+ns.Trace = Trace
+
+local function Snapshot()
+    local parts = {}
+    for _, cvar in ipairs(ns.WATCHED) do
+        local v = GetCVar(cvar)
+        if v ~= nil then parts[#parts + 1] = cvar .. "=" .. tostring(v) end
+    end
+    local z, facing = G("GetCameraZoom"), G("GetPlayerFacing")
+    parts[#parts + 1] = "zoom=" .. (type(z) == "number" and ("%.1f"):format(z) or tostring(z))
+    parts[#parts + 1] = "facing=" .. (type(facing) == "number" and ("%.2f"):format(facing) or tostring(facing))
+    parts[#parts + 1] = "profile=" .. tostring(active.id) .. " (" .. tostring(active.sit) .. ")"
+    return table.concat(parts, " ")
+end
+
+function ns.Water()
+    if not (db and db.enabled) then return end
+    local now = G("IsSwimming") and true or false
+    if now == swimming then return end
+    swimming = now
+    Trace((now and "into the water: " or "out of the water: ") .. Snapshot())
+    traceUntil = GetTime() + 3
+    ns.Evaluate(true)
+    C_Timer.After(1, function() Trace("a second later: " .. Snapshot()) end)
+end
+
+function ns.Swimming() return swimming end
+
 local function Apply(id, withZoom)
     local profile = Profile(id)
     if not profile then return end
     local desired, zoom, theCurve, needsMotion = Resolve(profile, withZoom)
+    if swimming then                          -- in the water: head tracking rests (see above)
+        for cvar, value in pairs(ns.WATER) do
+            if desired[cvar] ~= nil then desired[cvar] = value end
+        end
+    end
 
+    if held then desired.test_cameraOverShoulder = nil end      -- (a scene has the camera: the middle, for now)
     EnforceMotion(needsMotion)            -- first: the offset and friends are ignored while these are on
     for cvar, value in pairs(desired) do SetOne(cvar, value) end
-    if withZoom and zoom then SetZoom(zoom, desired) end
+    if withZoom and zoom and not held then SetZoom(zoom, desired) end
 
     curve, curveFlip, lastCurveValue = theCurve, db.flipShoulder, tonumber(desired.test_cameraOverShoulder)
     dbg(("profile '%s' applied"):format(ns.ProfileName(id)))
@@ -600,7 +656,7 @@ end
 
 -- Follows the zoom level to move the shoulder offset along the profile's curve.
 function ns.CurveTick()
-    if not (db and db.enabled and curve) then return end
+    if held or not (db and db.enabled and curve) then return end
     local z = tonumber(G("GetCameraZoom"))
     if not z then return end
     local v = ns.EvalCurve(curve, z) * ns.ShoulderScale()
@@ -609,6 +665,24 @@ function ns.CurveTick()
     local ok, res = pcall(SetCVar, "test_cameraOverShoulder", ns.FormatNumber(v))
     if ok and res ~= false then lastCurveValue = v end
 end
+
+-- A scene of the HUD's (the camp fire) has the camera for a while: the shoulder offset rests at the middle, so
+-- the camera turns round your character, and the profile keeps its hands off the distance. Let go, the profile in
+-- effect comes back as it was.
+function ControllerCam.Hold(on)
+    on = on and true or false
+    if on == held then return end
+    held = on
+    if not (db and db.enabled) then return end
+    if held then
+        SetOne("test_cameraOverShoulder", "0")
+    else
+        lastCurveValue = nil
+        ns.Evaluate(true)
+        ns.CurveTick()
+    end
+end
+function ControllerCam.IsHeld() return held end
 
 ---------------------------------------------------------------------------
 -- Settings changes made by the options panel and the slash commands
@@ -714,11 +788,12 @@ local function InitDB()
     if type(old) ~= "table" then old = {} end
 
     local d = {
-        v = 2,
+        v = 3,
         enabled = old.enabled ~= false,
         exitDelay = math.min(math.max(tonumber(old.exitDelay) or DEFAULT_EXIT_DELAY, 0), 10),
         flipShoulder = old.flipShoulder == true,
         welcomed = old.welcomed == true,
+        noticeAccepted = old.noticeAccepted == true,      -- the game's experimental camera notice, accepted once
         advanced = old.advanced == true,
         profiles = {}, overrides = {}, assign = {}, originals = {}, motion = {}, formOffset = {},
     }
@@ -759,11 +834,20 @@ local function InitDB()
     -- before version 2 fishing had no camera of its own until you picked one: it takes the starter's once
     -- (/ccam set fishing none puts it back to nothing)
     if not fresh and (tonumber(old.v) or 0) < 2 and d.assign.fishing == nil then d.assign.fishing = ns.STARTER.fishing end
+    -- before version 3 the starter swapped to Hybrid in the water, which turned you as you went in: that one
+    -- goes (Hybrid chosen for swimming again since is kept)
+    if not fresh and (tonumber(old.v) or 0) < 3 and d.assign.swimming == "hybrid" then d.assign.swimming = nil end
     if type(old.force) == "string" and ns.GetProfile(old.force) then d.force = old.force end
     local known = KnownCVars()
     if type(old.originals) == "table" then
         for cvar, val in pairs(old.originals) do
             if known[cvar] and type(val) == "string" then d.originals[cvar] = val end
+        end
+    end
+    if type(old.trace) == "table" then                            -- what was noted going into the water
+        d.trace = {}
+        for _, line in ipairs(old.trace) do
+            if type(line) == "string" and #d.trace < 40 then d.trace[#d.trace + 1] = line end
         end
     end
     if type(old.motion) == "table" then
@@ -779,6 +863,112 @@ end
 ---------------------------------------------------------------------------
 -- Events
 ---------------------------------------------------------------------------
+---------------------------------------------------------------------------
+-- The game's notice about experimental camera settings
+-- The shoulder offset and head tracking are settings the game calls experimental (its "test_camera..."
+-- settings). While one is on, the game asks at every login whether you accept them. You answer it yourself,
+-- once: after you have pressed Accept, the game is no longer told to ask (its UIParent stops listening for
+-- that one request, the way an addon stops listening for any event), so the notice does not come back at
+-- every login. The dialog itself stays the game's: we never show it, press it or hook it. Pressing Disable is
+-- respected (the game turns the settings off, nothing is remembered). /ccam notice brings the question back.
+---------------------------------------------------------------------------
+ns.NOTICE_EVENT = "EXPERIMENTAL_CVAR_CONFIRMATION_NEEDED"
+ns.NOTICE_POPUP = "EXPERIMENTAL_CVAR_WARNING"
+local notice = { asking = false, quieted = false }
+ns.notice = notice
+
+-- Is one of the game's experimental camera settings away from the game's own value?
+local function TestCvarsOn()
+    for cvar in pairs(KnownCVars()) do
+        if cvar:find("^test_") then
+            local v, d = tonumber(GetCVar(cvar)), tonumber(GetCVarDefault and GetCVarDefault(cvar))
+            if v and d and math.abs(v - d) > 0.0001 then return true end
+        end
+    end
+    return false
+end
+ns.TestCvarsOn = TestCvarsOn
+
+local function PopupShown()
+    if not StaticPopup_Visible then return false end
+    local ok, v = pcall(StaticPopup_Visible, ns.NOTICE_POPUP)
+    return ok and v and true or false
+end
+
+-- After you accepted once: the game is not told to ask again
+-- (every frame of the game's that listens for the request, not only UIParent: more than one may ask, and
+-- some only start listening later, so this is done again at login, after loading screens and when it is heard)
+local noticeFrame
+function ns.QuietNotice()
+    if not (db and db.noticeAccepted) then return end
+    notice.from = notice.from or {}                       -- (every listener quieted so far, for the trace)
+    local names = notice.from
+    local function Add(name) for _, n in ipairs(names) do if n == name then return end end names[#names + 1] = name end
+    local ok = pcall(UIParent.UnregisterEvent, UIParent, ns.NOTICE_EVENT)
+    if ok then Add("UIParent") end
+    if GetFramesRegisteredForEvent then
+        local okL, list = pcall(function() return { GetFramesRegisteredForEvent(ns.NOTICE_EVENT) } end)
+        for _, frame in ipairs(okL and list or {}) do
+            if frame ~= noticeFrame and frame ~= UIParent then
+                local okU = pcall(frame.UnregisterEvent, frame, ns.NOTICE_EVENT)
+                if okU then
+                    local okN, name = pcall(frame.GetName, frame)
+                    Add((okN and type(name) == "string") and name or (frame.__name or "a frame without a name"))
+                end
+            end
+        end
+    end
+    notice.quieted = ok
+    notice.quietedFrom = table.concat(names, ", ")
+end
+
+-- /ccam notice: the game asks again next time
+function ns.AskNoticeAgain()
+    db.noticeAccepted = false
+    pcall(UIParent.RegisterEvent, UIParent, ns.NOTICE_EVENT)
+    notice.quieted = false
+end
+
+-- The game asked: once you have answered (the dialog gone), Accept leaves the settings on, Disable turns them off
+local function Watch()
+    if not notice.asking then return end
+    local now = GetTime()
+    if PopupShown() then
+        notice.seen = true
+    elseif notice.seen then
+        notice.asking = false
+        if TestCvarsOn() then
+            db.noticeAccepted = true
+            ns.QuietNotice()
+            Trace("experimental camera notice accepted: not asked again")
+            ns.Say(L["The game will not ask about the experimental camera settings again (you accepted them). /ccam notice brings the question back."])
+        else
+            Trace("experimental camera notice: disabled")
+        end
+        return
+    elseif now - notice.since > 5 then
+        notice.asking = false                    -- the game did not show it after all
+        return
+    end
+    if now - notice.since > 600 then notice.asking = false; return end
+    C_Timer.After(0.5, Watch)
+end
+
+noticeFrame = CreateFrame("Frame")
+pcall(noticeFrame.RegisterEvent, noticeFrame, ns.NOTICE_EVENT)
+for _, e in ipairs({ "PLAYER_LOGIN", "PLAYER_ENTERING_WORLD" }) do pcall(noticeFrame.RegisterEvent, noticeFrame, e) end
+noticeFrame:SetScript("OnEvent", function(_, event)
+    if event ~= ns.NOTICE_EVENT then ns.QuietNotice(); return end         -- (late listeners: quieted too)
+    if db and db.noticeAccepted then                                     -- asked again although you accepted
+        ns.QuietNotice()
+        Trace("experimental camera notice asked again although accepted; listeners quieted: " .. tostring(notice.quietedFrom))
+        return
+    end
+    if not db or notice.asking then return end
+    notice.asking, notice.seen, notice.since = true, false, GetTime()
+    C_Timer.After(0.5, Watch)
+end)
+
 local f = CreateFrame("Frame", "ControllerCamFrame", UIParent)
 ns.frame = f
 
@@ -787,12 +977,13 @@ local EVENTS = {
     "PLAYER_REGEN_DISABLED", "PLAYER_REGEN_ENABLED",
     "PLAYER_MOUNT_DISPLAY_CHANGED", "PLAYER_UPDATE_RESTING", "ZONE_CHANGED_NEW_AREA",
     "UNIT_ENTERED_VEHICLE", "UNIT_EXITED_VEHICLE", "UPDATE_SHAPESHIFT_FORM",
-    "ZONE_CHANGED", "ZONE_CHANGED_INDOORS", "PLAYER_EQUIPMENT_CHANGED",
+    "ZONE_CHANGED", "ZONE_CHANGED_INDOORS", "PLAYER_EQUIPMENT_CHANGED", "CVAR_UPDATE",
 }
 for _, e in ipairs(EVENTS) do pcall(f.RegisterEvent, f, e) end    -- a missing event must not break the addon
 
 local function ScheduleTick()
     C_Timer.After(TICK, function()
+        ns.Water()
         ns.Evaluate()
         ScheduleTick()
     end)
@@ -815,10 +1006,24 @@ local function Welcome(fresh)
     end
 end
 
-f:SetScript("OnEvent", function(_, event, arg1)
+f:SetScript("OnEvent", function(_, event, arg1, arg2)
+    if event == "CVAR_UPDATE" then
+        -- noted for a moment after you go into or out of the water: which of the camera's values changed, and
+        -- whether it was us or the game
+        if db and GetTime() < traceUntil and type(arg1) == "string" then
+            for _, cvar in ipairs(ns.WATCHED) do
+                if cvar:lower() == arg1:lower() then
+                    local ours = lastSet[cvar] and GetTime() - lastSet[cvar] < 0.1
+                    Trace(("%s %s = %s"):format(ours and "we set" or "the game set", cvar, tostring(arg2 or GetCVar(cvar))))
+                end
+            end
+        end
+        return
+    end
     if event == "ADDON_LOADED" then
         if arg1 ~= ADDON then return end
         fresh = InitDB()
+        ns.QuietNotice()
         if ns.OnDBReady then ns.OnDBReady() end
     elseif not db then
         return

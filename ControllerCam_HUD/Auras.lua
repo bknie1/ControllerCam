@@ -10,7 +10,7 @@ ns.Auras = A
 
 ns.RegisterSetting({
     key = "auras", kind = "boolean", default = true, command = "auras", section = "Frames",
-    label = "Your effects on the target", tip = "a row of your own debuffs or buffs under the target bar",
+    label = "Your effects on the target", tip = "a row under the target bar: your debuffs on an enemy, a friend's buffs (all of them, whoever cast them)",
 })
 ns.RegisterSetting({
     key = "targetBuffs", kind = "boolean", default = true, command = "targetbuffs", section = "Frames",
@@ -341,17 +341,18 @@ local function Build(target)
     -- crowd control on it from anyone, large, at the end of the bar
     local W = ns.AuraWidgets
     -- (rows under the bar start at their top: anything more goes below, never over the bar)
+    -- (a little further apart than our own icons: "60m" under each one needs the room)
     A.wMine = W.Row(A.row, { filter = W.ENEMY_DEBUFFS, max = MAX_ICONS, size = ICON, text = 10,
-                             spacing = GAP, below = true, down = true })
+                             spacing = GAP + 8, below = true, down = true })
     if A.wMine then
         A.wMine:SetPoint(A.wMine.point, A.row, "TOPLEFT", 0, 0)
         A.wBuffs = W.Row(visual, { filter = W.ENEMY_BUFFS, max = MAX_BUFFS, size = ICON - 2, text = 10,
-                                   edge = { 0.25, 0.05, 0.05, 0.95 }, grow = "LEFT", spacing = GAP - 2,
+                                   edge = { 0.25, 0.05, 0.05, 0.95 }, grow = "LEFT", spacing = GAP + 6,
                                    below = true, typed = true, down = true })
         A.wBuffs:SetPoint(A.wBuffs.point, target.health, "BOTTOMRIGHT", -8, -26)
         -- a friend's debuffs worth acting on, in the same place
         A.wHelp = W.Row(visual, { filter = W.FRIEND_DEBUFFS, max = MAX_BUFFS, size = ICON, text = 10,
-                                  grow = "LEFT", spacing = GAP, below = true, typed = true, down = true })
+                                  grow = "LEFT", spacing = GAP + 8, below = true, typed = true, down = true })
         A.wHelp:SetPoint(A.wHelp.point, target.health, "BOTTOMRIGHT", -8, -26)
         A.wCC = ns.AuraWidgets.Row(visual, { filter = "HARMFUL|CROWD_CONTROL", max = 1, size = ICON + 6, text = 12,
                                             edge = { 0.35, 0.6, 1, 0.95 }, down = true })
@@ -380,8 +381,9 @@ local function GameRows(self, unit)
     local _, _, _, attackable = U.Standing(unit)
     local W = ns.AuraWidgets
     local smart = ns.db.smartAuras
+    -- an enemy: your debuffs on it. A friend (a party member you tab to): the buffs they have, whoever cast them
     W.Show(self.wMine, unit, attackable and (smart and W.ENEMY_DEBUFFS or "HARMFUL|!CROWD_CONTROL|PLAYER")
-                             or "HELPFUL|PLAYER", exists, fresh)
+                             or "HELPFUL", exists, fresh)
     W.Show(self.wBuffs, unit, smart and W.ENEMY_BUFFS or "HELPFUL|!PLAYER", exists and ns.db.targetBuffs and attackable, fresh)
     W.Show(self.wHelp, unit, smart and W.FRIEND_DEBUFFS or "HARMFUL",
            exists and ns.db.friendDebuffs and not attackable, fresh)
@@ -405,7 +407,9 @@ function A:UpdateAuras()
     local shown = 0
     if self.aurasOn and U.Exists(unit) then
         local _, _, _, attackable = U.Standing(unit)
-        for i, aura in ipairs(U.MyAuras(unit, attackable, MAX_ICONS)) do
+        local list = attackable and U.MyAuras(unit, true, MAX_ICONS)
+            or U.Filtered(unit, "HELPFUL", "HELPFUL", MAX_ICONS) or U.MyAuras(unit, false, MAX_ICONS)
+        for i, aura in ipairs(list) do
             shown = i
             ns.ShowAura(self.icons[i], unit, aura)
         end

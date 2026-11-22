@@ -17,7 +17,7 @@ local function Setting(key, label, tip, default)
     ns.RegisterSetting({ key = key, kind = "boolean", default = default, command = key:lower(), section = "Nameplates",
                          label = label, tip = tip })
 end
-Setting("plateValue", "Health number", "the health left, shortened (12.3k), on the bar (not on compact plates: the percent says enough there)", true)
+Setting("plateValue", "Health number", "the health left, shortened (12.3k), on the bar (not on compact plates: the percent says enough there)", false)
 Setting("plateDebuffs", "Your debuffs", "your debuffs on the unit, above its name, with their time", true)
 Setting("plateAllDebuffs", "Everyone's debuffs", "the debuffs the game marks for nameplates from everyone, not only yours", false)
 Setting("plateBuffs", "Enemy buffs", "an enemy's buffs beside its debuffs: the ones that matter (important, enraged, or ones you can dispel or steal), or all of them when Only the effects that matter is off", true)
@@ -29,6 +29,7 @@ ns.RegisterSetting({
 })
 Setting("plateQuest", "Quest marker", "a gold marker on units your quests still need", true)
 Setting("plateMotion", "Nameplate animations", "plates fade in, low health breathes, crowd control shimmers", true)
+function PS.Motion() return ns.db.plateMotion and not ns.Calm() end      -- (and not with Reduce animations)
 
 local MAX_DEBUFFS, ICON = 4, 18
 local LOW = 0.2
@@ -92,11 +93,13 @@ end
 local function Short(n) return ns.ShortNumber(n) end
 PS.Short = Short
 
--- Full size: the health left (12.3k) and the percent; compact: the percent alone
+-- The percent, and with "Health number" on the health left as well (12.3k; not on compact plates). At full
+-- health there is nothing to say: no text until the unit is hurt (where the game lets us know that it is full).
 function PS:HealthText(o, frac)
     local db = ns.db
     local fs = o.percent
     if not o.bars or o.mini then fs:Hide(); return end
+    if type(frac) == "number" and not ns.IsSecret(frac) and frac >= 0.999 then fs:Hide(); return end
     ns.HealthLine(fs, o.unit, frac, db.plateValue and not db.plateCompact, db.platePercent)
 end
 
@@ -140,6 +143,43 @@ local function GameRows(o)
     return o.wDebuffs
 end
 
+-- For the reports (only while they are on): what the game counts on your target's plate and what our rows
+-- there are doing, noted whenever it changes. The effects themselves are not read, only counted.
+local function Count(unit, filter)
+    if not (C_UnitAuras and C_UnitAuras.GetUnitAuraInstanceIDs) then return "?" end
+    local ok, ids = pcall(C_UnitAuras.GetUnitAuraInstanceIDs, unit, filter)
+    return (ok and type(ids) == "table") and tostring(#ids) or "?"
+end
+local function RowSays(row)
+    if not row then return "none" end
+    local icons = 0
+    if row.GetChildren then
+        for _, child in ipairs({ row:GetChildren() }) do
+            if type(child) == "table" and child.IsShown and child:IsShown() == true then icons = icons + 1 end
+        end
+    end
+    local alpha = row.GetEffectiveAlpha and row:GetEffectiveAlpha()
+    return ("%s, %s, %d icons, alpha %s"):format(row.on and "on" or "off", row:IsShown() == true and "shown" or "hidden",
+        icons, type(alpha) == "number" and ("%.1f"):format(alpha) or "?")
+end
+function PS.Trace(o, again)
+    if not (ns.db and ns.db.debug and o and o.unit) then return end
+    local ok, target = pcall(UnitIsUnit, o.unit, "target")
+    if not (ok and ns.Yes(target)) then return end
+    local unit = o.unit
+    local line = ("harmful %s, yours %s, crowd control %s, important %s; hostile %s, minor %s, bars %s; debuffs: %s; crowd control: %s"):format(
+        Count(unit, "HARMFUL"), Count(unit, "HARMFUL|PLAYER"), Count(unit, "HARMFUL|CROWD_CONTROL"),
+        Count(unit, "HARMFUL|IMPORTANT"), tostring(o.hostile), tostring(o.mini), tostring(o.bars),
+        RowSays(o.wDebuffs), RowSays(o.wCC))
+    if line == PS.traced then return end
+    PS.traced = line
+    ns.Note("plates: your target's plate: %s", line)
+    -- (the game fills its rows a moment after the effect lands: looked at once more)
+    if not again and C_Timer and C_Timer.After then
+        C_Timer.After(0.4, function() pcall(PS.Trace, o, true) end)
+    end
+end
+
 function PS:Auras(o)
     local unit = o.unit
     local db = ns.db
@@ -150,20 +190,23 @@ function PS:Auras(o)
         local fresh = o.auraFresh
         o.auraFresh = nil
         local enemy = o.hostile and not o.mini
-        -- only what matters (the setting): your debuffs and the important ones; buffs you can act on or must watch
+        -- only what matters (the setting): your debuffs and the important ones; buffs you can act on or must watch.
+        -- A mini plate keeps the debuffs and what holds it (your sting, your trap), and leaves out its buffs.
         local smart = db.smartAuras
         W.Show(o.wDebuffs, unit, db.plateAllDebuffs and DEBUFFS_ALL or (smart and W.ENEMY_DEBUFFS or DEBUFFS_MINE),
-               enemy and db.plateDebuffs, fresh)
+               o.hostile and db.plateDebuffs, fresh)
         W.Show(o.wBuffs, unit, smart and W.ENEMY_BUFFS or "HELPFUL|!PLAYER", enemy and db.plateBuffs, fresh)
-        W.Show(o.wCC, unit, nil, enemy and db.plateCC and o.bars, fresh)
+        W.Show(o.wCC, unit, nil, o.hostile and db.plateCC and o.bars, fresh)
         o.cc = o.bars and (W.Has(unit, "HARMFUL|CROWD_CONTROL") or IsCC(unit)) or false
+        pcall(PS.Trace, o)
         return
     end
     local shown, buffShown = 0, 0
     local debuffs, buffs, cc
-    if o.hostile and not o.mini then
+    if o.hostile then
         debuffs, buffs, cc = U.PlateAuras(unit, MAX_DEBUFFS, not db.plateAllDebuffs)
         if not debuffs then debuffs = U.MyAuras(unit, true, MAX_DEBUFFS) end        -- an older client
+        if o.mini then buffs = nil end                                              -- a mini plate: no buffs
     end
     -- debuffs above the name, centred; the enemy's buffs after them, smaller and edged red
     local list = (db.plateDebuffs and debuffs) or {}
@@ -251,7 +294,7 @@ local moving = {}
 local driver = CreateFrame("Frame")
 
 local function Busy(o)
-    return o.spawn or o.threatState or o.threatPop or o.cc or (o.low and ns.db.plateMotion)
+    return o.spawn or o.threatState or o.threatPop or o.cc or (o.low and PS.Motion())
 end
 
 local function Tick(_, dt)
@@ -306,13 +349,13 @@ local function Tick(_, dt)
                 local r, g, b = ns.ThreatLook(o.threatState, now)
                 o.glow:SetVertexColor(r, g, b, 1)
                 o.glow:SetAlpha(0.55 + 0.35 * math.sin(now * (o.threat == "tank" and 5 or 12)))
-            elseif o.low and ns.db.plateMotion then
+            elseif o.low and PS.Motion() then
                 o.glow:SetVertexColor(C.danger[1], C.danger[2], C.danger[3], 1)
                 o.glow:SetAlpha(0.25 + 0.25 * math.sin(now * 6))
             else
                 o.glow:SetAlpha(0)
             end
-            if o.low and ns.db.plateMotion then
+            if o.low and PS.Motion() then
                 o.health.fill:SetAlpha(0.75 + 0.25 * math.sin(now * 6))
             else
                 o.health.fill:SetAlpha(1)
@@ -419,7 +462,7 @@ end
 -- A plate just appeared
 function PS:Spawn(o)
     self:Build(o)
-    if ns.db.plateMotion then
+    if PS.Motion() then
         o.spawn = SPAWN
         o.name:SetAlpha(0)
         o.health:SetAlpha(0)

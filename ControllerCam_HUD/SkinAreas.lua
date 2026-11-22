@@ -259,9 +259,136 @@ local function ChatBoxGlass()
 end
 S.Again("chat", ChatBoxGlass)
 
--- Tooltips' background and border, as solid as asked (Tooltip.lua): after the look above has been put on or
--- taken off, so it works on whichever background tooltips have now
-ns.RegisterModule("tooltipglass", { Apply = function(_, run)
-    ns.Tooltip.running = run and true or false
-    ns.Tooltip.Glass()
-end })
+---------------------------------------------------------------------------
+-- Damage meter: the game's own meter keeps all it does (sessions, kinds, its settings, and the numbers, which
+-- the game may keep secret in a fight: only its own code reads them); each row's bar is dressed as the HUD's
+-- bars are: the slim bar texture, slanted ends, a dark back under it in place of the game's, and the text in our
+-- outline. The game reuses rows as the list scrolls and may set a bar's look again: looked at again twice a
+-- second. Nothing is written into the game's frames and none of its functions is called to change it (that would
+-- run its code in our name and could break its secret numbers): what we changed is kept in tables of our own.
+---------------------------------------------------------------------------
+local meterBars = setmetatable({}, { __mode = "k" })     -- status bar -> { own = its texture, ours = ours as read back }
+S.meterBars = meterBars
+local function MeterBars(frame, depth, list)
+    if type(frame) ~= "table" or depth > 6 or not frame.GetChildren then return list end
+    for _, child in ipairs({ frame:GetChildren() }) do
+        local ok, kind = pcall(child.GetObjectType, child)
+        if ok and kind == "StatusBar" then list[#list + 1] = child end
+        MeterBars(child, depth + 1, list)
+    end
+    return list
+end
+
+-- The HUD's bar look on one of the meter's bars: slanted ends (a mask on its fill), a dark back of ours under
+-- it, and the game's own backing put out of sight (its icon and text stay as they are)
+local function DressMeterBar(bar, rec)
+    local fill = bar.GetStatusBarTexture and bar:GetStatusBarTexture()
+    if not rec.back and bar.CreateTexture then
+        local back = bar:CreateTexture(nil, "BACKGROUND", nil, -8)
+        back:SetAllPoints(bar)
+        local c = ns.colors.back
+        back:SetColorTexture(c[1], c[2], c[3], 0.85)
+        rec.back = back
+        rec.hidden = {}
+        for _, r in ipairs({ bar:GetRegions() }) do              -- the game's backing: a background texture
+            local okK, kind = pcall(r.GetObjectType, r)
+            local okL, layer = pcall(r.GetDrawLayer, r)
+            if okK and kind == "Texture" and r ~= back and r ~= fill and okL and layer == "BACKGROUND" then
+                rec.hidden[r] = r:GetAlpha()
+                r:SetAlpha(0)
+            end
+        end
+        if bar.CreateMaskTexture then
+            pcall(function()
+                local mask = bar:CreateMaskTexture()
+                mask:SetAllPoints(bar)
+                mask:SetTexture(ns.media.mask, "CLAMPTOBLACKADDITIVE", "CLAMPTOBLACKADDITIVE")
+                back:AddMaskTexture(mask)
+                rec.mask = mask
+            end)
+        end
+        S.Undo(function()
+            back:Hide()
+            for r, a in pairs(rec.hidden or {}) do pcall(r.SetAlpha, r, a) end
+            if rec.mask and rec.masked and rec.masked.RemoveMaskTexture then
+                pcall(rec.masked.RemoveMaskTexture, rec.masked, rec.mask)
+            end
+            rec.back, rec.hidden, rec.mask, rec.masked = nil, nil, nil, nil
+        end)
+    end
+    rec.back:Show()
+    if rec.mask and fill and rec.masked ~= fill then             -- a new fill texture: slant it too
+        if pcall(fill.AddMaskTexture, fill, rec.mask) then rec.masked = fill end
+    end
+end
+
+-- What the meter shows, for the reports: its windows, which session and kind each shows (read only), its bars
+function S.MeterDescribe()
+    local out = {}
+    for i = 1, 4 do
+        local w = _G["DamageMeterSessionWindow" .. i]
+        if type(w) == "table" then
+            local function Ask(name)
+                local fn = w[name]
+                if type(fn) ~= "function" then return "-" end
+                local ok, v = pcall(fn, w)
+                return ok and tostring(ns.Plain(v)) or "error"
+            end
+            local bars = MeterBars(w, 1, {})
+            local dressed = 0
+            for _, b in ipairs(bars) do if meterBars[b] and meterBars[b].back then dressed = dressed + 1 end end
+            out[#out + 1] = ("window %d: shown %s, session type %s, session %s, kind %s, style %s, bars %d (dressed %d)")
+                :format(i, tostring(w:IsShown()), Ask("GetSessionType"), Ask("GetSessionID"), Ask("GetDamageMeterType"),
+                        Ask("GetStyle"), #bars, dressed)
+            local first = bars[1]
+            if first then
+                local parts = {}
+                for _, r in ipairs({ first:GetRegions() }) do
+                    local okK, kind = pcall(r.GetObjectType, r)
+                    local okL, layer = pcall(r.GetDrawLayer, r)
+                    parts[#parts + 1] = tostring(okK and kind) .. "/" .. tostring(okL and layer)
+                end
+                out[#out + 1] = "  first bar's regions: " .. table.concat(parts, ", ")
+            end
+        end
+    end
+    return out
+end
+
+local function DressMeter()
+    local n = 0
+    for i = 1, 4 do
+        local w = _G["DamageMeterSessionWindow" .. i]
+        if type(w) == "table" then
+            for _, bar in ipairs(MeterBars(w, 1, {})) do
+                local tex = bar.GetStatusBarTexture and bar:GetStatusBarTexture()
+                local now = tex and tex.GetTexture and tex:GetTexture()
+                local rec = meterBars[bar]
+                if not rec then
+                    rec = { own = now }
+                    meterBars[bar] = rec
+                    S.Undo(function()
+                        if rec.own then pcall(bar.SetStatusBarTexture, bar, rec.own) end
+                        meterBars[bar] = nil
+                    end)
+                end
+                if rec.ours == nil or now ~= rec.ours then          -- new, or the game set its own look again
+                    bar:SetStatusBarTexture(ns.media.bar)
+                    local t = bar:GetStatusBarTexture()
+                    rec.ours = t and t.GetTexture and t:GetTexture()
+                end
+                DressMeterBar(bar, rec)
+                n = n + 1
+            end
+            S.TextsIn(w, 0)
+        end
+    end
+    return n
+end
+
+Area("damagemeter", "Damage meter", "the game's damage meter in the HUD's look: its bars, slanted on a dark back, and outlined text; it keeps all it does", function()
+    if not _G.DamageMeter then return 0 end
+    DressMeter()
+    return 1
+end)
+S.Again("damagemeter", DressMeter)

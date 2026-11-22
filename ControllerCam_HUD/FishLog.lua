@@ -8,7 +8,7 @@
 local ADDON, ns = ...
 local L = ns.L
 
-local J = { active = false, session = { caught = 0, away = 0 }, feed = {} }
+local J = { active = false, session = { caught = 0, away = 0 }, feed = {}, tally = {} }
 ns.FishLog = J
 
 J.FEED = 4                    -- recent catches kept for the fishing interface
@@ -105,8 +105,30 @@ local function Changed()
     if ns.FishGame then ns.FishGame:Refresh() end
 end
 
+-- A session is one stay at a water: its counts and its tally start again when you move on to another zone
+function J:Water()
+    local where = (J.Where())
+    if where ~= self.water then
+        self.water = where
+        self.session, self.tally, self.feed = { caught = 0, away = 0 }, {}, {}
+    end
+    return where
+end
+
+-- What you have landed at this water this session, kind by kind: { id, n, name, icon }, the most first
+function J.Tally()
+    local out, log = {}, J.Log()
+    for id, n in pairs(J.tally) do
+        local e = log.fish[id] or {}
+        out[#out + 1] = { id = id, n = n, name = e.name, icon = e.icon }
+    end
+    table.sort(out, function(a, b) if a.n ~= b.n then return a.n > b.n end return a.id < b.id end)
+    return out
+end
+
 function J:Catch(id, name, icon, quality, count, curious)
     local log = J.Log()
+    self:Water()
     local where, map = J.Where()
     count = math.max(1, tonumber(count) or 1)
     local e = log.fish[id]
@@ -135,6 +157,7 @@ function J:Catch(id, name, icon, quality, count, curious)
     zone.fish[id] = (zone.fish[id] or 0) + count
     log.total = log.total + count
     self.session.caught = self.session.caught + count
+    self.tally[id] = (self.tally[id] or 0) + count
     table.insert(self.feed, 1, { id = id, name = e.name, icon = e.icon, weight = weight, best = best, new = new,
                                  at = GetTime() })
     while #self.feed > J.FEED do table.remove(self.feed) end
@@ -145,11 +168,13 @@ function J:Catch(id, name, icon, quality, count, curious)
     elseif best and was then
         ns.Say(L["Your heaviest %s yet: %s (it was %s)."]:format(shown, J.Pounds(weight), J.Pounds(was)))
     end
+    if ns.Readout then ns.Readout.Catch(shown, e.icon or icon, quality, count, weight, new, best) end   -- across the screen
     return e, weight, new, best
 end
 
 function J:Away()
     local log = J.Log()
+    self:Water()
     log.away = log.away + 1
     self.session.away = self.session.away + 1
     ns.Note("fishing: one got away (%d this session)", self.session.away)

@@ -19,8 +19,18 @@
 -- your way of interacting.
 --
 -- Bait: press the button twice quickly and the second press puts your best bait on the pole, when the pole has
--- none. For the half second after a cast of yours begins, the button is bound to a button of the game's secure
+-- none. From the moment your cast is sent (not when the game says it began, a moment later: a quick second press
+-- came too soon for that) and for a little under a second, the button is bound to a button of the game's secure
 -- kind that uses the bait; after that it is as described above. No fish bites that early, so no catch is lost.
+--
+-- Cast again (on unless you turn it off): while the float is out, the same button casts a fresh line in one
+-- press (a bad spot, a float out of sight). The game gives no sign of a bite an addon could wait for, so the same
+-- press cannot also hook: A (Cross) hooks the fish meanwhile, bound to the game's Interact for that time. With
+-- this off, or with A as your fishing button, the button hooks as before.
+--
+-- Back (B, or Circle): while the button casts, it puts the pole away and takes back the weapons you held before
+-- it (remembered for each character), as the game's equip command does; with none remembered it just ends
+-- fishing mode for now. Not while a window of the game's is open: B closes it, as always.
 
 local ADDON, ns = ...
 local L = ns.L
@@ -31,7 +41,13 @@ ns.Fishing = F
 ns.RegisterSetting({
     key = "fishMode", kind = "boolean", default = true, command = "fishmode", section = "Fishing",
     label = "One-button fishing",
-    tip = "with a fishing pole in your hands, your interact button casts your line whenever there is nothing to interact with, and hooks the fish when the float bobs; the catch is taken for you",
+    tip = "with a fishing pole in your hands: your interact button to cast your line whenever there is nothing to interact with, and again to hook the fish when the float bobs; the catch is taken for you. B to put the pole away and take your weapons back",
+})
+
+ns.RegisterSetting({
+    key = "fishRecast", kind = "boolean", default = true, command = "fishrecast", section = "Fishing",
+    label = "One press to cast again",
+    tip = "while the float is out, your fishing button casts a fresh line in one press, and A hooks the fish (the game gives no sign of a bite to wait for, so one button cannot do both); off: the fishing button hooks, as the game's interact",
 })
 
 ns.RegisterSetting({
@@ -40,8 +56,17 @@ ns.RegisterSetting({
     tip = "press your fishing button twice quickly: the second press puts the best bait in your bags on your pole, when the pole has none",
 })
 
+ns.RegisterSetting({
+    key = "fishHideBars", kind = "boolean", default = true, command = "fishhidebars", section = "Fishing",
+    label = "Gamepad bars put away while fishing",
+    tip = "with a fishing pole in your hands the gamepad bars are hidden, so the water is clear to look at; the fishing prompt shows the button to cast. They are back the moment a fight starts or the pole is put away",
+})
+
+F.BARS = "GamepadMainActionBarFrame"
 F.KEY = "PAD3"                -- the Gamepad UI's interact button to begin with
-F.DOUBLE = 0.5                -- a second press this soon after your cast began is a double press
+F.DOUBLE = 0.8                -- a second press this soon after your cast was sent is a double press
+F.BACK = "PAD2"               -- B / Circle: the pole away, your weapons back
+F.HOOK = "PAD1"               -- A / Cross: hooks the fish while the fishing button casts again
 -- Bait, best first: the item, and what it adds to your fishing
 F.BAITS = { { 6533, 100 }, { 7307, 75 }, { 6532, 75 }, { 6811, 50 }, { 6530, 50 }, { 6529, 25 } }
 local POLE_SUBCLASS = 20      -- the game's item sub-class of fishing poles (a weapon)
@@ -51,6 +76,17 @@ ns.RegisterSaved("fishKey", function(old)
 end)
 
 local owner = CreateFrame("Frame", "ControllerCamHUD_FishingKeys", UIParent)
+
+-- The weapons you held before the pole, for each character: { [16] = item, [17] = item }
+ns.RegisterSaved("fishWeapons", function(old)
+    local out = {}
+    for who, rec in pairs(type(old) == "table" and old or {}) do
+        if type(who) == "string" and type(rec) == "table" then
+            out[who] = { [16] = tonumber(rec[16]), [17] = tonumber(rec[17]) }
+        end
+    end
+    return out
+end)
 
 ---------------------------------------------------------------------------
 -- What the game knows
@@ -82,6 +118,13 @@ function F.LineOut()
     if not ok or not name then return false end
     if ns.IsSecret(spellID) then return false end
     return (ns.CastBar and ns.CastBar.FISHING or {})[spellID or 0] and true or false
+end
+
+-- Are you casting something (not fishing: putting bait on, say)? The prompt to cast steps aside meanwhile.
+function F.Casting()
+    if not UnitCastingInfo then return false end
+    local ok, name = pcall(UnitCastingInfo, "player")
+    return ok and name ~= nil and true or false
 end
 
 -- Is there something to interact with (someone to talk to, a thing to open)? Then the button is needed for that.
@@ -173,6 +216,62 @@ local function BaitButton(id)
     return baitButton
 end
 
+local function Me()
+    return ns.Inventory and ns.Inventory.Me and ns.Inventory.Me() or (UnitName and UnitName("player")) or "you"
+end
+
+-- What you hold now, while it is not the pole: remembered for B
+function F.RememberWeapons()
+    if F.HasPole() or not GetInventoryItemID then return end
+    local main = GetInventoryItemID("player", 16)
+    if not main or ns.IsSecret(main) then return end
+    local off = GetInventoryItemID("player", 17)
+    if ns.IsSecret(off) then off = nil end
+    ns.db.fishWeapons = ns.db.fishWeapons or {}
+    ns.db.fishWeapons[Me()] = { [16] = main, [17] = off }
+end
+
+-- B: the pole away and your weapons back (or, with none remembered, fishing mode off for now)
+function F:Back()
+    if InCombatLockdown() then return end
+    local rec = ns.db.fishWeapons and ns.db.fishWeapons[Me()]
+    if rec and rec[16] and EquipItemByName then
+        pcall(EquipItemByName, rec[16], 16)
+        if rec[17] then pcall(EquipItemByName, rec[17], 17) end
+        ns.Note("fishing: B put the pole away")
+        return
+    end
+    self.paused = true
+    self:Bind()
+    ns.Say(L["Fishing mode: off."])
+end
+
+-- Is a window of the game's open? (B is the game's then: it closes it)
+local PANELS = { "left", "center", "right", "doublewide", "fullscreen" }
+function F.WindowOpen()
+    if GetUIPanel then
+        for _, where in ipairs(PANELS) do
+            local ok, panel = pcall(GetUIPanel, where)
+            if ok and panel then return true end
+        end
+    end
+    for _, name in ipairs({ "GameMenuFrame", "ContainerFrameCombinedBags", "ContainerFrame1", "SettingsPanel" }) do
+        local f = _G[name]
+        if type(f) == "table" and f.IsShown and f:IsShown() then return true end
+    end
+    return false
+end
+
+local backButton
+local function BackButton()
+    if not backButton then
+        backButton = CreateFrame("Button", "ControllerCamHUD_FishingBack", UIParent)
+        backButton:SetScript("OnClick", ns.Protect(function() F:Back() end))
+        F.backButton = backButton
+    end
+    return backButton
+end
+
 -- The buttons that fish: your interact keys, or (the Gamepad UI has none) the one named for it
 function F.Keys()
     local keys = {}
@@ -214,6 +313,14 @@ local function Hint()
     hint.text = ns.FontString(hint, 12, "CENTER")
     hint.text:SetPoint("CENTER", hint, "CENTER", F.FLOAT / 2, 0)
     hint.icon:SetPoint("RIGHT", hint.text, "LEFT", -6, 0)
+    hint.sub = ns.FontString(hint, 10, "CENTER")                -- bait in the bags and none on the pole: how
+    hint.sub:SetPoint("TOP", hint, "CENTER", 0, -16)
+    hint.sub:SetTextColor(unpack(ns.colors.muted))
+    hint.sub:Hide()
+    hint.back = ns.FontString(hint, 10, "CENTER")               -- B: the pole away
+    hint.back:SetPoint("TOP", hint.sub, "BOTTOM", 0, -3)
+    hint.back:SetTextColor(unpack(ns.colors.muted))
+    hint.back:Hide()
     hint:Hide()
     hint:SetScript("OnUpdate", function(self)
         self.icon:ClearAllPoints()                              -- the float bobs while it waits
@@ -232,38 +339,86 @@ F.KeyName = KeyName
 ---------------------------------------------------------------------------
 -- The button
 ---------------------------------------------------------------------------
--- What the button should do right now: "cast", "hook" (a button that is not the game's interact button, while
--- the float is out), or nil for the game's own
+-- What the button should do right now: "cast", "recast" (the float is out: it casts again and A hooks), "hook"
+-- (a button that is not the game's interact button, while the float is out), or nil for the game's own
 function F:Want()
     if not self.active or self.paused or InCombatLockdown() or not F.HasPole() then return nil end
     local own = F.IsInteract(F.Keys()[1])
+    -- a second press soon after your cast was sent: the bait (whether or not the game has said the line is out)
+    if self.baitUntil and GetTime() < self.baitUntil and F.BaitReady() then return "bait" end
     if F.LineOut() then
-        if self.baitUntil and GetTime() < self.baitUntil and F.BaitReady() then return "bait" end
+        if ns.db.fishRecast and F.Keys()[1] ~= F.HOOK and F.Spell() then return "recast" end
         return (not own) and "hook" or nil
     end
     if own and F.Busy() then return nil end
     return F.Spell() and "cast" or nil
 end
 
+-- What the prompt says while the button casts: which button, and (with bait in your bags and none on the pole)
+-- that a second press puts the best of it on
+function F:Prompt()
+    local h = Hint()
+    local key = F.Keys()[1]
+    h.text:SetText(L["Fishing: %s to cast"]:format(KeyName(key)))
+    local _, name = F.Bait()
+    if name and not F.BaitLeft() and F.BaitReady() then
+        h.sub:SetText(L["No bait: %s twice to use %s"]:format(KeyName(key), name))
+        h.sub:Show()
+    else
+        h.sub:SetText("")
+        h.sub:Hide()
+    end
+    if self.back then
+        h.back:SetText(L["%s to put the pole away"]:format(KeyName(F.BACK)))
+        h.back:Show()
+    else
+        h.back:Hide()
+    end
+    return h
+end
+
+-- The gamepad bars: out of sight while you fish (never in a fight)
+function F:Bars()
+    if not (ns.Rest and ns.Rest.Mute) then return end
+    local hide = self.active and ns.db.fishHideBars and not self.paused and self.pole and not InCombatLockdown()
+        and true or false
+    if hide ~= (self.barsHidden or false) then
+        self.barsHidden = hide
+        ns.Rest.Mute(F.BARS, hide)
+    end
+end
+
 function F:Bind()
+    self:Bars()
     if InCombatLockdown() then return end
     local state = self:Want()
-    if state == self.state then return end
-    self.state = state
+    -- B puts the pole away while the button casts (not when B is the fishing button, nor over a window)
+    local back = state == "cast" and not F.WindowOpen() and F.Keys()[1] ~= F.BACK and SetOverrideBindingClick and true
+        or false
+    if state == self.state and back == (self.back or false) then
+        if state == "cast" then                                  -- (bait put on, or run out; bait going on now)
+            if F.Casting() then
+                if hint then hint:Hide() end
+            else
+                self:Prompt():Show()
+            end
+        end
+        return
+    end
+    self.state, self.back = state, back
     ClearOverrideBindings(owner)
+    if back then SetOverrideBindingClick(owner, true, F.BACK, BackButton():GetName(), "LeftButton") end
     if state == "cast" then
         self.keys, self.spell = F.Keys(), F.Spell()
         for _, key in ipairs(self.keys) do
             if SetOverrideBindingSpell then SetOverrideBindingSpell(owner, true, key, self.spell) end
         end
         local key = self.keys[1]
-        ns.Note("fishing: %s casts (the game now says: %s)", key, tostring(GetBindingAction and GetBindingAction(key, true)))
-        local h = Hint()
-        h.text:SetText(L["Fishing: %s casts"]:format(KeyName(key)))
-        h:Show()
+        ns.Note("fishing: %s to cast (the game now says: %s)", key, tostring(GetBindingAction and GetBindingAction(key, true)))
+        if F.Casting() then self:Prompt():Hide() else self:Prompt():Show() end   -- (bait going on: out of the way)
         if not self.told then                                   -- said once, the first time it happens
             self.told = true
-            ns.Say(L["Fishing mode: %s casts your line, and hooks the fish when the float bobs."]:format(KeyName(key)))
+            ns.Say(L["Fishing mode: %s to cast your line, and again to hook the fish when the float bobs."]:format(KeyName(key)))
         end
     elseif state == "bait" then
         local button = BaitButton((F.Bait()))
@@ -272,6 +427,18 @@ function F:Bind()
             ns.Note("fishing: a second press now puts bait on")
         end
         if hint then hint:Hide() end
+    elseif state == "recast" then
+        self.keys, self.spell = F.Keys(), F.Spell()
+        for _, key in ipairs(self.keys) do
+            if SetOverrideBindingSpell then SetOverrideBindingSpell(owner, true, key, self.spell) end
+        end
+        SetOverrideBinding(owner, true, F.HOOK, "INTERACTTARGET")
+        ns.Note("fishing: %s casts again, %s hooks", self.keys[1], F.HOOK)
+        local h = Hint()
+        h.text:SetText(L["%s to hook, %s to cast again"]:format(KeyName(F.HOOK), KeyName(self.keys[1])))
+        h.sub:Hide()
+        h.back:Hide()
+        h:Show()
     elseif state == "hook" then
         local keys = F.Keys()
         for _, key in ipairs(keys) do SetOverrideBinding(owner, true, key, "INTERACTTARGET") end
@@ -309,7 +476,11 @@ local function TakeCatch()
 end
 
 local function Release()
-    F.state, F.baitUntil = nil, nil
+    F.state, F.baitUntil, F.back = nil, nil, false
+    if F.barsHidden and ns.Rest and ns.Rest.Mute then      -- (a fight, or switched off: the bars are back at once)
+        F.barsHidden = false
+        ns.Rest.Mute(F.BARS, false)
+    end
     ClearOverrideBindings(owner)
     if hint then hint:Hide() end
 end
@@ -320,17 +491,23 @@ events:SetScript("OnEvent", ns.Protect(function(_, event, unit)
         Release()                                               -- (bindings can still be cleared at this moment)
     elseif event == "PLAYER_EQUIPMENT_CHANGED" or event == "UNIT_INVENTORY_CHANGED" then
         if unit and event == "UNIT_INVENTORY_CHANGED" and unit ~= "player" then return end
+        F.RememberWeapons()
         F.pole = F.HasPole()
         F:Bind()
     elseif event == "LOOT_OPENED" then
         if ns.FishLog then ns.FishLog:Read() end                -- written down before it leaves the line
         if F.pole and not F.paused then TakeCatch() end
-    elseif event == "UNIT_SPELLCAST_CHANNEL_START" then
+    elseif event == "UNIT_SPELLCAST_SENT" or event == "UNIT_SPELLCAST_CHANNEL_START" then
         if unit ~= "player" then return end
-        -- your cast began: for a moment a second press is for the bait
-        if F.state == "cast" and F.LineOut() and F.BaitReady() then
-            F.baitUntil = GetTime() + F.DOUBLE
-            C_Timer.After(F.DOUBLE + 0.05, ns.Protect(function() F.baitUntil = nil; F:Bind() end))
+        -- your cast was sent (or, if that went unseen, began): for a moment a second press is for the bait
+        local fishing = event == "UNIT_SPELLCAST_SENT" or F.LineOut()
+        if (F.state == "cast" or F.state == "recast") and fishing and not F.baitUntil and F.BaitReady() then
+            local untilT = GetTime() + F.DOUBLE
+            F.baitUntil = untilT
+            C_Timer.After(F.DOUBLE + 0.05, ns.Protect(function()
+                if F.baitUntil == untilT then F.baitUntil = nil end
+                F:Bind()
+            end))
         end
         F:Bind()
     elseif event:sub(1, 5) ~= "UNIT_" or unit == "player" then  -- a fight ended, your line, what is in front of you
@@ -349,8 +526,9 @@ events:SetScript("OnUpdate", ns.Protect(function(_, dt)
 end))
 
 local EVENTS = { "PLAYER_REGEN_DISABLED", "PLAYER_REGEN_ENABLED", "PLAYER_EQUIPMENT_CHANGED", "UNIT_INVENTORY_CHANGED",
-                 "PLAYER_SOFT_INTERACT_CHANGED", "LOOT_OPENED", "UNIT_SPELLCAST_CHANNEL_START",
-                 "UNIT_SPELLCAST_CHANNEL_STOP" }
+                 "PLAYER_SOFT_INTERACT_CHANGED", "LOOT_OPENED", "UNIT_SPELLCAST_SENT", "UNIT_SPELLCAST_CHANNEL_START",
+                 "UNIT_SPELLCAST_CHANNEL_STOP", "UNIT_SPELLCAST_START", "UNIT_SPELLCAST_STOP",
+                 "UNIT_SPELLCAST_FAILED", "UNIT_SPELLCAST_INTERRUPTED" }
 
 function F:Apply(run)
     local want = run and ns.db.fishMode and true or false

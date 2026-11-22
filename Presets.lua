@@ -10,15 +10,20 @@ local L = ns.L
 
 -- Over-the-shoulder offset by camera distance. A sideways offset in yards covers more of the screen the closer
 -- the camera is, so a fixed offset throws the character out of view when you zoom in. The offset therefore grows
--- in proportion to the distance (the character stays in about the same place on screen) up to its full value at `ramp` yards, stays there until
--- `hold`, and fades to 0 at `fade`.
+-- in proportion to the distance (the character stays in about the same place on screen): `offset` at `ramp`
+-- yards, and on at the same rate to `hold` (it used to stop growing at `ramp`, and between the two the character
+-- drifted toward the middle of the screen), then fades to 0 at `fade`.
 local function ShoulderCurve(offset, ramp, hold, fade)
     local points = { { 0, 0 }, { ramp, offset } }
-    if hold > ramp then points[#points + 1] = { hold, offset } end
+    if hold > ramp then points[#points + 1] = { hold, math.floor(offset * hold / ramp * 10 + 0.5) / 10 } end
     points[#points + 1] = { fade, 0 }
     return points
 end
 
+-- In the water you face the way you do on land: the game's "face movement direction when swimming" stays off.
+-- With it on, your character turned to the side of the stick as soon as it swam (the camera followed, and the
+-- shoulder offset swung with it). It can be turned on again in a profile of your own.
+--
 -- id, English name, English description, values. Listed in the order shown in menus.
 local BUILTIN = {
     {
@@ -31,7 +36,7 @@ local BUILTIN = {
             yawSpeed = "x1.25", pitchSpeed = "x1.15",
             followOnStick = 1, followYawSpeed = "x1.2", followDelay = "x0.8",
             faceAngle = 0, faceAngleCombat = 180, turnWithCamera = 1,
-            faceMount = 1, faceSwim = 1, faceFly = 1,
+            faceMount = 1, faceSwim = 0, faceFly = 1,
             shoulderCurve = ShoulderCurve(2, 6, 8, 20),
             dynamicPitch = 1,
             headStrength = 1, headStanding = 0.3, headMoving = 0.5, headRange = 5,
@@ -48,7 +53,7 @@ local BUILTIN = {
             yawSpeed = "x1.1", pitchSpeed = "x1.1",
             followOnStick = 1,
             faceAngle = 115, faceAngleCombat = 180, turnWithCamera = 1,
-            faceMount = 1, faceSwim = 1, faceFly = 1,
+            faceMount = 1, faceSwim = 0, faceFly = 1,
             shoulderCurve = ShoulderCurve(1, 4, 10, 22),
             headStrength = 0.5, headStanding = 0.3, headMoving = 0.5,
             focusInteract = 1, focusInteractYaw = 1, focusInteractPitch = 0.75,
@@ -70,7 +75,7 @@ local BUILTIN = {
             yawSpeed = "x1.4", pitchSpeed = "x1.3",
             followOnStick = 0,
             faceAngle = 0, faceAngleCombat = 180, turnWithCamera = 1,
-            faceMount = 1, faceSwim = 1, faceFly = 1,
+            faceMount = 1, faceSwim = 0, faceFly = 1,
             shoulderCurve = ShoulderCurve(2, 5, 8, 16),
             headStrength = 0.6, headStanding = 0.2, headMoving = 0.4,
             focusInteract = 1, focusInteractYaw = 1, focusInteractPitch = 0.75,
@@ -86,7 +91,7 @@ local BUILTIN = {
             yawSpeed = "x1.6", pitchSpeed = "x1.4",
             followOnStick = 0,
             faceAngle = 90, faceAngleCombat = 180, turnWithCamera = 2,
-            faceMount = 1, faceSwim = 1, faceFly = 1,
+            faceMount = 1, faceSwim = 0, faceFly = 1,
             shoulderCurve = ShoulderCurve(1.5, 3.5, 6, 12),
             headStrength = 0.4, headStanding = 0.2, headMoving = 0.3,
         },
@@ -101,7 +106,7 @@ local BUILTIN = {
             yawSpeed = "x0.75", pitchSpeed = "x0.75",
             followOnStick = 1, followYawSpeed = "x0.7", followPitchSpeed = "x0.7",
             faceAngle = 0, faceAngleCombat = 115, turnWithCamera = 1,
-            faceMount = 1, faceSwim = 1, faceFly = 1,
+            faceMount = 1, faceSwim = 0, faceFly = 1,
             shoulderCurve = ShoulderCurve(1.5, 6, 12, 25),
             dynamicPitch = 1,
             headStrength = 1, headStanding = 0.5, headMoving = 0.7, headRange = 6,
@@ -118,7 +123,7 @@ local BUILTIN = {
             zoom = 10,
             followOnStick = 1,
             faceAngle = 115, faceAngleCombat = 180, turnWithCamera = 3,
-            faceMount = 1, faceSwim = 1, faceFly = 1,
+            faceMount = 1, faceSwim = 0, faceFly = 1,
             shoulderCurve = ShoulderCurve(1, 4, 6, 12),
             headStrength = 0.4,
             focusEnemy = 1, focusEnemyYaw = 0.5, focusEnemyPitch = 0.4,
@@ -145,7 +150,7 @@ local BUILTIN = {
             followTerrain = 0,
             zoom = 16,
             followOnStick = 1, followYawSpeed = "x1.3",
-            faceAngle = 0, faceMount = 1, faceSwim = 1, faceFly = 1,
+            faceAngle = 0, faceMount = 1, faceSwim = 0, faceFly = 1,
             headStrength = 0.3, headStanding = 0.2, headMoving = 0.3,
         },
     },
@@ -157,7 +162,7 @@ local BUILTIN = {
             followTerrain = 0,
             zoom = 20,
             followOnStick = 1, followPitchSpeed = "x1.5",
-            faceAngle = 0, faceMount = 1, faceSwim = 1, faceFly = 1,
+            faceAngle = 0, faceMount = 1, faceSwim = 0, faceFly = 1,
         },
     },
     {
@@ -170,7 +175,7 @@ local BUILTIN = {
             yawSpeed = "x0.85", pitchSpeed = "x0.85",
             followOnStick = 1,
             faceAngle = 0, faceAngleCombat = 115, turnWithCamera = 1,
-            faceMount = 1, faceSwim = 1, faceFly = 1,
+            faceMount = 1, faceSwim = 0, faceFly = 1,
             shoulderCurve = ShoulderCurve(1, 4, 6, 12),
             dynamicPitch = 1,
             headStrength = 0.7, headStanding = 0.4, headMoving = 0.5,
@@ -184,7 +189,10 @@ ns.BUILTIN = {}
 for _, p in ipairs(BUILTIN) do ns.BUILTIN[p.id] = p end
 
 -- What a fresh install uses: the Action camera everywhere, with calmer profiles where the situation calls for it.
--- "combat" is left empty on purpose, so the profile of the place you are in (dungeon, raid, ...) stays.
+-- "combat" is left empty on purpose, so the profile of the place you are in (dungeon, raid, ...) stays. So is
+-- "swimming": going into the water swapped the camera to another profile, whose shoulder offset and facing angle
+-- differ, and the camera jumped sideways and turned your character as you went in. In the water the camera you
+-- had stays.
 ns.STARTER = {
     default  = "action",
     city     = "stroll",
@@ -192,7 +200,6 @@ ns.STARTER = {
     raid     = "raid",
     mounted  = "cruise",
     flying   = "skies",
-    swimming = "hybrid",
     vehicle  = "hybrid",
     fishing  = "shooter",       -- when you cast your line: close over the shoulder, looking out at the float
 }

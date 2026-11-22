@@ -61,11 +61,6 @@ function ns.RunCheck(showAll, quiet)
         if want then row("the chat window sits top left", (chat:GetPoint(1)) == "TOPLEFT") end
     end
 
-    if _G.MerchantSellAllJunkButton then
-        local want = (run and db.vendor) and true or false
-        row(want and "the vendor's Sell junk button asks what to sell" or "the vendor's Sell junk button is left alone",
-            (ns.Vendor.hooked and true or false) == want)
-    end
     if _G.EditModeManagerFrame and run then
         row("frames can be dragged in Edit Mode", UF.editHooked == true)
     end

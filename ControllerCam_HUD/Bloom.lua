@@ -79,14 +79,14 @@ local function TargetOf(caster) return caster == "player" and "target" or (caste
 local function Aimed(caster, unit)
     local t = TargetOf(caster)
     local ok, same = pcall(UnitIsUnit, t, unit)
-    if ok and same and not ns.IsSecret(same) then
+    if ok and ns.Yes(same) then
         local okA, hostile = pcall(UnitCanAttack, caster, t)
-        if not (okA and hostile and not ns.IsSecret(hostile)) then return true end
+        if not (okA and ns.Yes(hostile)) then return true end
     end
     -- a heal cast with a hostile (or no) target lands on the caster
     if ns.Yes(UnitIsUnit(caster, unit)) then
         local okA, hostile = pcall(UnitCanAttack, caster, t)
-        if not UnitExists(t) or (okA and hostile and not ns.IsSecret(hostile)) then return true end
+        if not UnitExists(t) or (okA and ns.Yes(hostile)) then return true end
     end
     return false
 end
@@ -120,7 +120,7 @@ local function FromCast(caster, spellID)
     if not hot then return end
     local dest = TargetOf(caster)
     local okA, hostile = pcall(UnitCanAttack, caster, dest)
-    if not UnitExists(dest) or (okA and hostile and not ns.IsSecret(hostile)) then dest = caster end
+    if not UnitExists(dest) or (okA and ns.Yes(hostile)) then dest = caster end
     if caster == "player" and B.sentTo and UnitExists(B.sentTo) then dest = B.sentTo end
     Note(ns.GUID(dest), hot)
 end

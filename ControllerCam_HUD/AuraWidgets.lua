@@ -138,14 +138,109 @@ local function Apply(row, what)
             end
             row.count = i
         end
-        local ok = (pcall(row.SetAuraGroupFilterString, row, key, g[1])
-                    or (g.fallback and pcall(row.SetAuraGroupFilterString, row, key, g.fallback)))
-            and pcall(row.SetAuraGroupCandidateFilters, row, key, g[2] or {})
+        local used
+        if pcall(row.SetAuraGroupFilterString, row, key, g[1]) then
+            used = g[1]
+        elseif g.fallback and pcall(row.SetAuraGroupFilterString, row, key, g.fallback) then
+            used = g.fallback
+        end
+        local ok = used and pcall(row.SetAuraGroupCandidateFilters, row, key, g[2] or {})
             and pcall(row.SetAuraGroupMaxFrameCount, row, key, math.min(g.max or row.max, row.max))
         row:SetAuraGroupEnabled(key, ok and true or false)
+        row.filters[i] = ok and used or nil                  -- (what this group shows, for the count below)
     end
-    for i = #groups + 1, row.count do row:SetAuraGroupEnabled(tostring(i), false) end
+    for i = #groups + 1, row.count do
+        row:SetAuraGroupEnabled(tostring(i), false)
+        row.filters[i] = nil
+    end
     row.filter = what
+end
+
+-- The unit behind a row's token is another one now (a new target, a plate used again), or what the row shows
+-- changed. The row has to let go of what it showed and start over: seen in the game, tabbing from one party
+-- member to the next left the last one's effects on the target frame, and effects were drawn twice. Pointing
+-- the row at the same token again does not do it (to the game nothing changed, or it adds to what is there),
+-- so the row is pointed at nothing first, then at the token, and then asked to go through the effects.
+-- (Which of the two faults that mends is not proven; W.Audit below counts the icons afterwards either way.)
+local function Look(row)
+    local unit = row.unit
+    pcall(row.SetUnit, row, nil)
+    row:SetUnit(unit)
+    if row.UpdateAllAuras then pcall(row.UpdateAllAuras, row) end
+end
+
+-- A row is counted a moment after it was touched: more icons in a group than the unit has effects under that
+-- group's filter means the game drew some twice. The row is then set up from nothing, once, and it is noted
+-- for the reports.
+W.repairs = 0
+function W.Repair(row, shown, have, filter)
+    W.repairs = W.repairs + 1
+    W.lastRepair = ("%d icons for %d effects under %s"):format(shown, have, tostring(filter))
+    if W.noted ~= W.lastRepair then
+        W.noted = W.lastRepair
+        ns.Note("aura rows: %s: the row is set up again", W.lastRepair)
+    end
+    local now = GetTime()
+    if row.repairedAt and now - row.repairedAt < 2 then return end      -- (not over and over)
+    row.repairedAt = now
+    local unit = row.unit
+    row:SetEnabled(false)
+    pcall(row.SetUnit, row, nil)
+    row:SetUnit(unit)
+    row:SetEnabled(true)
+    if row.UpdateAllAuras then pcall(row.UpdateAllAuras, row) end
+    W.Watch(row)
+end
+
+function W.Audit(row)
+    if not (row.on and row.unit and row.GetAuraGroupFrame and C_UnitAuras and C_UnitAuras.GetUnitAuraInstanceIDs) then
+        return false
+    end
+    for i = 1, row.count do
+        local filter, key = row.filters[i], tostring(i)
+        if filter then
+            local limit = 40
+            if row.GetAuraGroupFrameCount then
+                local okC, n = pcall(row.GetAuraGroupFrameCount, row, key)
+                if okC and type(n) == "number" and not ns.IsSecret(n) then limit = math.min(n, 40) end
+            end
+            local shown = 0
+            for j = 1, limit do
+                local okF, f = pcall(row.GetAuraGroupFrame, row, key, j)
+                if not okF or type(f) ~= "table" then break end
+                if f.IsShown and f:IsShown() == true then shown = shown + 1 end
+            end
+            local ok, ids = pcall(C_UnitAuras.GetUnitAuraInstanceIDs, row.unit, filter)
+            if ok and type(ids) == "table" then
+                if shown > #ids then
+                    W.Repair(row, shown, #ids, filter)
+                    return true
+                end
+                -- fewer icons than effects is as it should be for a group with a limit or extra conditions;
+                -- for the reports it is said once all the same (a row that shows another unit's would look so)
+                local said = ("%s: %d icons, %d effects under %s"):format(tostring(row.unit), shown, #ids, filter)
+                if shown < #ids and W.short ~= said then
+                    W.short = said
+                    ns.Note("aura rows: %s", said)
+                end
+            end
+        end
+    end
+    return false
+end
+
+function W.Watch(row)
+    if row.watching or not (C_Timer and C_Timer.After) then return end
+    row.watching = true
+    C_Timer.After(0.35, function()
+        row.watching = nil
+        pcall(W.Audit, row)
+    end)
+end
+
+function W.Describe()
+    return ("rows set up again because the game drew an effect twice: %d%s"):format(W.repairs,
+        W.lastRepair and (" (last: " .. W.lastRepair .. ")") or "")
 end
 
 -- A row of the game's icons: { filter = "HARMFUL|PLAYER" or groups (above), max = 4, size = 18, text = 9,
@@ -161,7 +256,7 @@ function W.Row(parent, opts)
     row.styler = Styler(opts.size, opts.text, opts.edge, opts.below, opts.typed)
     row.layout = { elementSpacing = gap, lineSpacing = 3, groupSpacing = gap, groupLineSpacing = 3,
                    forceNewLine = false, elementWidth = opts.size, elementHeight = opts.size }
-    row.count, row.max = 0, opts.max
+    row.count, row.max, row.filters = 0, opts.max, {}
     row.point = (opts.down and "TOP" or "BOTTOM") .. (opts.grow == "LEFT" and "RIGHT" or "LEFT")
     local flow = AnchorUtil and AnchorUtil.FlowDirection
     if flow and row.SetFlowLayoutGrowthDirection then
@@ -188,15 +283,18 @@ function W.Show(row, unit, filter, on, fresh)
             Apply(row, filter)
             fresh = true
         end
-        if fresh or row.unit ~= unit or not row.on then
+        if row.unit ~= unit or not row.on then
             row.unit = unit
             row:SetUnit(unit)
+        elseif fresh then
+            Look(row)
         end
         if not row.on then
             row.on = true
             row:SetEnabled(true)
             row:Show()
         end
+        W.Watch(row)
     elseif row.on ~= false then
         row.on, row.unit = false, nil
         row:SetEnabled(false)

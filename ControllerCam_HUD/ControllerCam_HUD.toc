@@ -16,8 +16,11 @@ UnitFrames.lua
 Layout.lua
 Cooldowns.lua
 Vendor.lua
+Mail.lua
 Inventory.lua
 Market.lua
+Professions.lua
+Levelling.lua
 Stats.lua
 ItemInfo.lua
 AuctionPanel.lua
@@ -33,9 +36,13 @@ Impact.lua
 Bloom.lua
 Ward.lua
 Numbers.lua
+Reticle.lua
 Rumble.lua
 Moments.lua
+Readout.lua
+Campfire.lua
 Quests.lua
+Farm.lua
 Bars.lua
 Rest.lua
 PadButtons.lua
@@ -49,6 +56,8 @@ FishGame.lua
 FishJournal.lua
 World.lua
 Chat.lua
+Flights.lua
+Hydrate.lua
 Tooltip.lua
 Skin.lua
 SkinAreas.lua
