@@ -228,7 +228,23 @@ local function PartyNative(native)
     return type(unit) == "string" and (unit:match("^party") or unit == "player")
 end
 
-function G:Refresh()
+-- Who a unit is (its GUID), or nil where the game keeps it secret. A slot is not a person: when someone leaves
+-- the party (kicked while offline, say) the ones after move up a slot, "party3" becoming "party2", and a look
+-- kept for "party2" went on showing whoever was there before until something else redrew it.
+local function Who(unit)
+    local ok, guid = pcall(UnitGUID, unit)
+    if ok and type(guid) == "string" and not ns.IsSecret(guid) then return guid end
+end
+-- Draw this look for `unit` now, all of it, when the unit or the person behind it changed (or `force`)
+local function Fresh(o, unit, force)
+    local who = Who(unit)
+    local changed = force or o.unit ~= unit or not o:IsShown() or o.who ~= who
+    o.unit, o.who = unit, who
+    o:Show()
+    if changed then Update(o, true) end
+end
+
+function G:Refresh(force)
     local drawn, found = 0, {}
     -- whether the game shows any party frame at all; when it does not, ours take their place
     local inRaid = IsInRaid and IsInRaid() or false
@@ -241,10 +257,7 @@ function G:Refresh()
         for _, p in ipairs(self.party) do
             local o, unit = p.o, "party" .. _
             if p.button:IsVisible() and UnitExists(unit) then
-                local changed = o.unit ~= unit or not o:IsShown()
-                o.unit = unit
-                o:Show()
-                if changed then Update(o, true) end
+                Fresh(o, unit, force)
                 Glance(o)
                 drawn = drawn + 1
             else
@@ -275,10 +288,7 @@ function G:Refresh()
                 o.health:SetWidth(w - 6)
                 o.power:SetWidth(w - 6)
             end
-            local changed = o.unit ~= unit or not o:IsShown()
-            o.unit = unit
-            o:Show()
-            if changed then Update(o, true) end
+            Fresh(o, unit, force)
             Glance(o)
             drawn = drawn + 1
         elseif o then
@@ -312,7 +322,8 @@ local OnEvent = ns.Protect(function(_, event, unit)
             if p.o.unit == unit and p.o:IsShown() then Update(p.o, false) end
         end
     else
-        G:Refresh()
+        -- the roster changed (someone joined, left, was kicked): every look drawn again, slots may hold others now
+        G:Refresh(event == "GROUP_ROSTER_UPDATE" or event == "PLAYER_ENTERING_WORLD")
     end
 end)
 local OnUpdate = ns.Protect(function(_, dt)

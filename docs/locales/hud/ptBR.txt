@@ -217,6 +217,8 @@ Nada faltando: você tem o necessário.
 Plano de evolução: mostrar / ocultar
 Plano de evolução ao lado da janela da profissão
 enquanto a janela de uma profissão está aberta, um painel ao lado diz quais receitas fazer e quantas para chegar ao máximo, e o que isso exige, até o minério e as ervas; uma estimativa pelas cores das receitas
+Janela da profissão: quantos você poderia fazer com o seu banco
+ao lado do número do jogo de quantas vezes você pode fazer uma receita com as suas bolsas, um segundo número em azul inclui os reagentes do seu banco. Só aparece quando isso dá mais
 mostra o plano de evolução da última janela de profissão aberta, com os botões do controle nele
 PA
 PA à dist.
@@ -262,6 +264,7 @@ Um dia de preços até agora: uma vela a mais a cada dia em que você visita a c
 30 dias, o menor do dia: verde sobe, vermelho desce
 Ainda sem histórico de preços: leia a Casa de Leilões por alguns dias.
 Só um dia de preços até agora: a linha cresce a cada dia que você visita a casa de leilões.
+Peço %s cada, %s pelos %d que você solta; %d ficam com você
 Pede %s cada, %s por todos os %d
 Menor
 lido %s
@@ -299,6 +302,8 @@ Mostrar guardados
 Linha
 Velas
 Postar
+%d de %d
+Postar %d de %d a %s cada
 Postar %d por %s
 Anunciar todos os %d por %s
 Não é possível postar na Casa de Leilões deste cliente a partir daqui.
@@ -753,6 +758,8 @@ Coordenadas no mapa
 suas coordenadas abaixo do mapa-múndi
 Ocultar as mensagens de erro vermelhas do jogo
 "O feitiço ainda não está pronto", "Mana insuficiente" e afins no meio da tela ficam ocultos
+Ocultar os erros de “ainda não está pronto”
+“O feitiço ainda não está pronto”, “A habilidade ainda não está pronta” e “O item ainda não está pronto” ficam fora do centro da tela; as outras mensagens vermelhas do jogo continuam aparecendo
 %d mensagens ocultadas como spam desde que você entrou.
 %d delas eram recrutamento de guilda repetido.
 Ícone de classe e nível no chat
@@ -769,6 +776,8 @@ Ocultar recrutamento de guilda repetido
 nos canais públicos a mensagem de recrutamento de uma guilda é mostrada uma vez; a mesma do mesmo jogador, ou uma quase igual, em 15 minutos é ocultada (nunca do seu grupo, guilda ou amigos)
 lista as mensagens do chat ocultadas como spam recentemente
 Voo
+pouso antecipado
+pouso no próximo ponto de voo
 destino desconhecido
 estimado pela distância
 primeiro voo nesta rota: aprendendo a duração
@@ -778,14 +787,37 @@ pousando
 %s: primeiro voo nesta rota, tempo desconhecido
 Em voo, destino desconhecido
 %s: tempo de voo aprendido, %s
+Pouso antecipado: %s, cerca de %s
+Pouso antecipado no próximo ponto de voo
+fresco e frio, neve sob os pés e o fôlego pairando no ar
+um frio cortante, com um vento dos picos que encontra cada fresta da armadura
+quente e úmido, um ar tão denso que dá para beber
+calor pegajoso sob a copa das árvores, e os insetos barulhentos
+quente e seco, com poeira no vento
+sol escaldante e terra rachada; beba quando puder
+fumaça e cinzas num vento quente
+ar chamuscado, com fagulhas à deriva
+cinzento e frio, uma névoa úmida que gruda
+um frio no ar e quase nenhuma luz
+ameno e agradável, com uma brisa suave
+tempo agradável, bom para viajar
+fresco e verde, as folhas sussurrando
+luz suave entre as árvores, e o ar fresco
+abafado e úmido, o chão mole sob os pés
+ar quente e molhado, e o cheiro do pântano
+%s em %s: %s
 %d rotas de voo conhecidas.
 Voos: tempo e contagem regressiva
 num voo, o destino e a duração são ditos no chat, e uma barra no alto da tela faz a contagem regressiva até o pouso; o tempo de cada rota é aprendido com os seus voos
 Voos: sua montaria ao longo da barra
 um grifo, uma mantícora ou um morcego (o que o mestre de voo lhe deu) plana pela barra do voo até onde você pousa
+Voos: o tempo onde você pousa
+ao pousar, o chat diz como é o ar onde você chegou, como o lugar costuma ser (quente e úmido em Selva do Espinhaço, neve sob os pés em Dun Morogh), e a hora do dia
 listar as rotas de voo cujo tempo é conhecido
 Ao chão! +%d
-Nas nuvens: a sequência acaba
+Batida: a sequência acaba
+%s bater as asas  ·  desvie das copas das árvores e dos zepelins
+%s pegue os cavaleiros com a rede por ouro de voo  ·  %s grande altitude
 %d de ouro de voo
 %s bater as asas
 %s rede
@@ -797,7 +829,7 @@ O jogo de voo é jogado durante um voo.
 Não em combate.
 Jogo de voo: jogar / grande altitude
 Voos: um jogo no caminho
-num voo, um pequeno jogo é oferecido sob a barra de voo, e um botão o inicia (só esse botão é ocupado até você apertá-lo): faça sua montaria bater as asas entre as nuvens e pegue com a rede os cavaleiros que vêm no sentido contrário, levando-os ao chão em troca de ouro de voo. O mesmo botão de novo é grande altitude: o jogo é guardado e os botões voltam a ser do jogo. Nunca em combate, some ao pousar
+num voo, um pequeno jogo é oferecido sob a barra de voo, e um botão o inicia (só esse botão é ocupado até você apertá-lo): faça sua montaria bater as asas sobre as copas das árvores e entre os zepelins, e pegue com a rede os cavaleiros que vêm no sentido contrário, levando-os ao chão em troca de ouro de voo. O mesmo botão de novo é grande altitude: o jogo é guardado e os botões voltam a ser do jogo. Nunca em combate, some ao pousar
 num voo: iniciar o jogo de voo, ou levá-lo à grande altitude e de volta
 Um voo é um bom momento para isso.
 Você está jogando há %s.

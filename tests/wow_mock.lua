@@ -56,6 +56,7 @@ local function newFrame(name)
     local methods = {
         SetScript = function(self, k, fn) self.scripts[k] = fn end,
         GetScript = function(self, k) return self.scripts[k] end,
+        SetIgnoreParentAlpha = function(self, v) self.ignoreParentAlpha = v and true or false end,
         RegisterEvent = function(self, e)
             if mock.badEvents[e] then error('Frame:RegisterEvent(): Unknown event: ' .. e) end
             self.events[e] = true

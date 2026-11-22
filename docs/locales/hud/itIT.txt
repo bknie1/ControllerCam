@@ -217,6 +217,8 @@ Non manca niente: hai quello che serve.
 Piano di avanzamento: mostra / nascondi
 Piano di avanzamento accanto alla finestra della professione
 mentre la finestra di una professione è aperta, un pannello accanto dice quali ricette fare e quante per arrivare al massimo, e cosa serve, fino al minerale e alle erbe; una stima dai colori delle ricette
+Finestra della professione: quanti potresti crearne con la tua banca
+accanto al numero del gioco di quante volte puoi creare una ricetta con le tue borse, un secondo numero in blu conta anche i reagenti nella tua banca. Compare solo quando così ne fai di più
 mostra il piano di avanzamento dell'ultima finestra di professione aperta, con i pulsanti del controller
 PA
 PA dist.
@@ -262,6 +264,7 @@ Un giorno di prezzi finora: si aggiunge una candela ogni giorno che visiti la ca
 30 giorni, il più basso del giorno: verde su, rosso giù
 Ancora nessuna cronologia dei prezzi: leggi la casa d'aste per qualche giorno.
 Un solo giorno di prezzi finora: la linea cresce ogni giorno in cui visiti la casa d'aste.
+Chiedo %s l'uno, %s per i %d che lasci andare; %d restano a te
 Chiede %s l'uno, %s per tutti i %d
 Più basso
 letto %s
@@ -299,6 +302,8 @@ Mostra i tenuti
 Linea
 Candele
 Metti
+%d di %d
+Metti %d di %d a %s l'uno
 Metti %d a %s
 Metti in vendita tutti i %d per %s
 Da qui non si può mettere in vendita alla casa d'aste di questo client.
@@ -753,6 +758,8 @@ Coordinate sulla mappa
 le tue coordinate sotto la mappa del mondo
 Nascondi i messaggi di errore rossi del gioco
 «L'incantesimo non è ancora pronto», «Mana insufficiente» e simili al centro dello schermo restano nascosti
+Nascondi gli errori «non ancora pronto»
+«L'incantesimo non è ancora pronto», «L'abilità non è ancora pronta» e «L'oggetto non è ancora pronto» restano fuori dal centro dello schermo; gli altri messaggi rossi del gioco compaiono ancora
 %d messaggi nascosti come spam da quando hai effettuato l'accesso.
 %d di questi erano reclutamenti di gilda ripetuti.
 Icona di classe e livello nella chat
@@ -769,6 +776,8 @@ Nascondi i reclutamenti di gilda ripetuti
 nei canali pubblici il messaggio di reclutamento di una gilda viene mostrato una volta; lo stesso dello stesso giocatore, o uno quasi uguale, entro 15 minuti viene nascosto (mai quelli del tuo gruppo, gilda o amici)
 elenca i messaggi della chat nascosti come spam di recente
 Volo
+atterraggio anticipato
+atterraggio al prossimo punto di volo
 destinazione sconosciuta
 stimato dalla distanza
 primo volo su questa rotta: sto imparando la sua durata
@@ -778,14 +787,37 @@ atterraggio
 %s: primo volo su questa rotta, durata sconosciuta
 In volo, destinazione sconosciuta
 %s: durata del volo imparata, %s
+Atterraggio anticipato: %s, circa %s
+Atterraggio anticipato al prossimo punto di volo
+fresco e freddo, neve sotto i piedi e il fiato sospeso nell'aria
+un freddo pungente, con un vento dalle vette che trova ogni fessura dell'armatura
+caldo e umido, un'aria così densa da poterla bere
+caldo appiccicoso sotto la volta degli alberi, e gli insetti rumorosi
+caldo e secco, con polvere nel vento
+sole cocente e terra screpolata; bevi quando puoi
+fumo e cenere su un vento caldo
+aria bruciata, con faville alla deriva
+grigio e freddo, una nebbia umida che si appiccica
+un freddo nell'aria e quasi niente luce
+mite e sereno, con una brezza leggera
+bel tempo, ottimo per viaggiare
+fresco e verde, le foglie che sussurrano
+luce tenue tra gli alberi, e l'aria fresca
+afoso e umido, il terreno molle sotto i piedi
+aria calda e umida, e l'odore della palude
+%s a %s: %s
 %d rotte di volo conosciute.
 Voli: durata e conto alla rovescia
 in volo, la destinazione e la durata vengono dette in chat, e una barra in cima allo schermo conta alla rovescia fino all'atterraggio; la durata di ogni rotta si impara dai tuoi voli
 Voli: la tua cavalcatura lungo la barra
 un grifone, un cavaliere del vento o un pipistrello (quello che ti ha dato il maestro di volo) plana lungo la barra del volo verso dove atterri
+Voli: il tempo all'arrivo
+all'atterraggio, la chat dice com'è l'aria dove arrivi, com'è di solito il luogo (caldo e umido a Rovotorto, neve sotto i piedi a Dun Morogh), e l'ora del giorno
 elenca le rotte di volo di cui si conosce la durata
 A terra! +%d
-Tra le nuvole: la serie finisce
+Urto: la serie finisce
+%s battere le ali  ·  schiva le cime degli alberi e gli zeppelin
+%s cattura i cavalieri con la rete per oro di volo  ·  %s alta quota
 %d oro di volo
 %s battere le ali
 %s rete
@@ -797,7 +829,7 @@ Il gioco di volo si gioca durante un volo.
 Non in combattimento.
 Gioco di volo: gioca / alta quota
 Voli: un gioco durante il viaggio
-in volo viene proposto un piccolo gioco sotto la barra di volo, e un pulsante lo avvia (solo quel pulsante è occupato finché non lo premi): fai battere le ali alla tua cavalcatura tra le nuvole e cattura con la rete i cavalieri che arrivano di fronte, facendoli atterrare in cambio di oro di volo. Lo stesso pulsante di nuovo è alta quota: il gioco viene messo via e i pulsanti tornano al gioco. Mai in combattimento, sparisce all'atterraggio
+in volo viene proposto un piccolo gioco sotto la barra di volo, e un pulsante lo avvia (solo quel pulsante è occupato finché non lo premi): fai battere le ali alla tua cavalcatura sopra le cime degli alberi e tra gli zeppelin, e cattura con la rete i cavalieri che arrivano di fronte, facendoli atterrare in cambio di oro di volo. Lo stesso pulsante di nuovo è alta quota: il gioco viene messo via e i pulsanti tornano al gioco. Mai in combattimento, sparisce all'atterraggio
 in volo: avvia il gioco di volo, o portalo in alta quota e ritorno
 Un volo è un buon momento per farlo.
 Stai giocando da %s.

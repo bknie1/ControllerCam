@@ -533,11 +533,43 @@ function ns.FactionEdge(bar, color)
     bar.factionShown = true
 end
 
--- The badge as text (before a name) and the faction's colour, or "" and nil
+-- The badge as text (before a name, the name's own height) and the faction's colour, or "" and nil. For a plate
+-- with no bar; where there is a bar the badge is a picture of its own beside it (FactionBadge): a badge bigger
+-- than the text inside the text made the line taller than its place and pushed the name down into the bar.
 function ns.FactionMark(unit)
     local f = ns.OtherFaction(unit)
     if not f then return "", nil end
     return ("|T%s:0:0:0:0:64:64:0:40:0:40|t"):format(FACTION_ICON[f]), ns.FACTION_COLOR[f]
+end
+
+-- The badge, big, just left of a bar (made the first time, on the bar itself): shown for a player of the other
+-- faction, hidden otherwise. Its size: FACTION_BADGE times the name's font (`text`), within BADGE_MIN..BADGE_MAX.
+-- Returns the faction's colour, or nil.
+ns.FACTION_BADGE, ns.BADGE_MIN, ns.BADGE_MAX = 1.8, 16, 36
+function ns.FactionBadge(bar, unit, text)
+    if type(bar) ~= "table" or not bar.CreateTexture then return nil end
+    local f = unit and ns.OtherFaction(unit)
+    local t = rawget(bar, "factionBadge")
+    if not f then
+        if t then t:Hide() end
+        return nil
+    end
+    if not t then
+        t = bar:CreateTexture(nil, "OVERLAY", nil, 7)
+        t:SetTexCoord(0, 40 / 64, 0, 40 / 64)
+        t:SetPoint("RIGHT", bar, "LEFT", -6, 0)
+        bar.factionBadge = t
+    end
+    local font = 12
+    if type(text) == "table" and text.GetFont then
+        local ok, _, height = pcall(text.GetFont, text)
+        if ok and tonumber(height) then font = tonumber(height) end
+    end
+    local size = math.max(ns.BADGE_MIN, math.min(ns.BADGE_MAX, math.floor(font * ns.FACTION_BADGE + 0.5)))
+    t:SetTexture(FACTION_ICON[f])
+    t:SetSize(size, size)
+    t:Show()
+    return ns.FACTION_COLOR[f]
 end
 
 function ns.LevelText(level)

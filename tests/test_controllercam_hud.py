@@ -131,14 +131,14 @@ class Files(unittest.TestCase):
 
     def test_textures_are_valid_tga(self):
         names = sorted(os.listdir(os.path.join(HUD, "Media")))
-        self.assertEqual(names, ["bar.tga", "bobber.tga", "bolt.tga", "crystal.tga", "disc.tga", "fish.tga", "flame.tga",
+        self.assertEqual(names, ["bar.tga", "bobber.tga", "bolt.tga", "cloud.tga", "crystal.tga", "disc.tga", "fish.tga", "flame.tga",
                                  "flower.tga", "ghost.tga", "halo.tga", "hammer.tga", "leaf.tga", "mapring.tga",
                                  "mark.tga", "mask.tga", "pad_ps_circle.tga", "pad_ps_cross.tga",
                                  "pad_ps_square.tga", "pad_ps_triangle.tga", "pad_steam_a.tga", "pad_steam_b.tga",
                                  "pad_steam_x.tga", "pad_steam_y.tga", "pad_xbox_a.tga", "pad_xbox_b.tga",
                                  "pad_xbox_x.tga", "pad_xbox_y.tga", "pick.tga", "quest.tga", "ring.tga", "roots.tga",
-                                 "runes.tga", "skull.tga", "soft.tga", "spark.tga", "threat.tga", "vine.tga",
-                                 "vines.tga", "wing.tga"])
+                                 "runes.tga", "skull.tga", "soft.tga", "spark.tga", "threat.tga", "treetop.tga",
+                                 "vine.tga", "vines.tga", "wing.tga", "zeppelin.tga"])
         for n in names:
             data = open(os.path.join(HUD, "Media", n), "rb").read()
             image_type = data[2]
@@ -2731,6 +2731,29 @@ class GroupFrames(unittest.TestCase):
         self.assertFalse(b1.shown)
         self.assertFalse(G.ownParty)
 
+    def test_a_kicked_member_leaves_and_the_others_move_up(self):
+        # kicking someone offline from slot 1: the one in slot 2 becomes "party1", and slot 1 shows them at once
+        e = Env(setup=lambda env: setattr(env.mock, "partyHidden", True))
+        e.mock.setUnit("party1", e.lua.table(name="Gone", guid="Player-1", health=0, healthMax=1000, connected=False))
+        e.mock.setUnit("party2", e.lua.table(name="Stays", guid="Player-2", health=700, healthMax=1000))
+        e.update(0.3)
+        G = e.ns.Group
+        o1 = G.party[1].o
+        self.assertEqual(o1.name.text, "Gone")
+        e.mock.units.party1 = e.mock.units.party2                     # the roster moves up a slot
+        e.mock.units.party2 = None
+        e.update(0.3)                                                 # (no event for it at all: still seen)
+        self.assertEqual(o1.name.text, "Stays")
+        self.assertEqual(o1.health.fill.value, 700)
+        self.assertEqual(o1.status.text, "70%")                       # not "Offline", the one who left
+        self.assertFalse(G.party[2].o.shown)
+        # a roster change draws everything again, even where who it is cannot be told (a secret GUID)
+        e.lua.execute("UnitGUID = function() return nil end")
+        e.mock.units.party1 = e.lua.table(name="Next", health=1000, healthMax=1000)
+        e.mock.fire("GROUP_ROSTER_UPDATE")
+        self.assertEqual(o1.name.text, "Next")
+        self.assertEqual(e.errors(), [])
+
     def test_members_found_inside_the_games_containers(self):
         e = Env()
         holder = e.g.CreateFrame("Frame", None, e.g.CompactRaidFrameContainer)
@@ -3383,6 +3406,7 @@ class Plates(unittest.TestCase):
         data, plate, o = self.enemy(e, classification="elite")
         self.assertTrue(o.shown)
         self.assertTrue(e.same(o.parent, plate))
+        self.assertTrue(o.ignoreParentAlpha)              # the game's fade for one out of sight does not flash ours
         self.assertEqual(plate.UnitFrame.alpha, 0)
         self.assertIn("34", o.name.text)
         self.assertIn("Raptor", o.name.text)
@@ -9344,7 +9368,27 @@ class AuctionHouse(unittest.TestCase):
         self.assertEqual(M.Verdict(4306)[0], "auction")               # vendor; plenty up: the auction house
         e.db.sell.keep[2592] = True
         self.assertEqual(M.Verdict(2592), "keep")
-        lines = [plain(list(l.values())[0]) for l in e.mock.itemTooltip(2589).values()]
+        # a quest item no quest of yours needs (pages of a quest done), and the best drink you carry: kept, unless
+        # the auction house pays for them
+        e.mock["items"][2725] = e.lua.table(name="Green Hills of Stranglethorn - Page 1", quality=1, price=0,
+                                            stack=10, **{"class": 12})
+        e.mock["items"][21151] = e.lua.table(name="Rumsey Rum Black Label", quality=1, price=5, stack=20,
+                                             **{"class": 0})
+        self.assertEqual(M.Verdict(2725), "keep")
+        self.assertEqual(M.Verdict(21151), "keep")
+        e.db.auction[2725] = e.lua.table(p=400, t=e.g.time())
+        e.db.auction[21151] = e.lua.table(p=99, t=e.g.time())
+        self.assertEqual(M.Verdict(2725)[0], "auction")
+        self.assertEqual(M.Verdict(21151)[0], "auction")
+        self.assertEqual(M.Verdict(2725, True), "keep")              # bound: no auction house for it
+        # cheap quest items no vendor buys, in stacks (Gorilla Fang 66c, Lesser Bloodstone Ore 34c, a busy market):
+        # worth it over a stack, though not over one (with no vendor price the stack was taken for one, and kept)
+        for iid, name, p in ((2799, "Gorilla Fang", 66), (4278, "Lesser Bloodstone Ore", 34)):
+            e.mock["items"][iid] = e.lua.table(name=name, quality=1, price=0, stack=20, **{"class": 12})
+            e.db.auction[iid] = e.lua.table(p=p, t=e.g.time(), q=223, n=34)
+            self.assertEqual(M.Stack(iid), 20)
+            self.assertEqual(M.Verdict(iid)[0], "auction", name)
+        lines =[plain(list(l.values())[0]) for l in e.mock.itemTooltip(2589).values()]
         advice = lines[lines.index("Recommendation:"):]               # apart, under the prices:
         self.assertEqual(advice[1], "Auction for +%s" % e.ns.Money(more))     # the keyword, and what it brings more
         self.assertEqual(advice[2], "70% chance of sale")
@@ -9748,6 +9792,90 @@ class MarketPanel(unittest.TestCase):
         self.assertEqual(list(e.g.POSTED.values()), ["item", 2, 25, False, 149])
         self.assertEqual(e.errors(), [])
 
+    NEWER_HOUSE = """
+            POSTED, COMMODITY = nil, 2
+            Enum.ItemCommodityStatus = { Unknown = 0, Item = 1, Commodity = 2 }
+            ItemLocation = { CreateFromBagAndSlot = function(self, bag, slot) return { bag = bag, slot = slot } end }
+            C_AuctionHouse = {
+                GetItemCommodityStatus = function(loc) return COMMODITY end,
+                PostCommodity = function(loc, dur, n, each) POSTED = { "commodity", dur, n, each } end,
+                PostItem = function(loc, dur, n, bid, buyout) POSTED = { "item", dur, n, bid or false, buyout } end,
+            }
+    """
+
+    def test_you_choose_how_many_to_post(self):
+        e = self.env()
+        e.lua.execute(self.NEWER_HOUSE)
+        P = self.house(e)
+        e.g.ControllerCamHUD_Market()
+        self.linen(e, P)
+        v, each = P.view, plain(e.ns.MoneyColored(149))
+        self.assertEqual(plain(v.amount.label.text), "20 of 20")       # all of them, to begin with
+        self.assertEqual(v.amount.letter.text, "<>")
+        self.assertIn("Post all 20 for", plain(v.post.label.text))
+        left = e.g.ControllerCamHUD_Key_Market_PADDLEFT
+        right = e.g.ControllerCamHUD_Key_Market_PADDRIGHT
+        left.scripts.OnClick(left)                                    # d-pad left: one fewer
+        self.assertEqual(plain(v.amount.label.text), "19 of 20")
+        self.assertEqual(plain(v.post.label.text), "Post 19 of 20 for %s each" % each)
+        self.assertIn("for the 19 you let go; 1 stay with you", plain(P.panel.facts.text))
+        for _ in range(14):
+            left.scripts.OnClick(left)
+        self.assertEqual(P.Amount(P.chosen), 5)
+        self.assertTrue(P.Post(P))
+        self.assertEqual(list(e.g.POSTED.values()), ["commodity", 2, 5, 149])   # 5 of them, priced each
+        e.g.COMMODITY = 1                                             # not a commodity: 5 auctions of one
+        self.assertTrue(P.Post(P))
+        self.assertEqual(list(e.g.POSTED.values()), ["item", 2, 5, False, 149])
+        self.assertEqual(e.db.ahLedger[2589].posted, 10)
+        right.scripts.OnClick(right)                                  # and back up
+        self.assertEqual(P.Amount(P.chosen), 6)
+        P.want[2589] = None
+        P.Refresh(P)
+        right.scripts.OnClick(right)                                  # past all: round to one, the quick way there
+        self.assertEqual(plain(v.amount.label.text), "1 of 20")
+        self.assertEqual(plain(v.post.label.text), "Post 1 of 20 for %s each" % each)
+        left.scripts.OnClick(left)                                    # past one: round to all
+        self.assertEqual(plain(v.amount.label.text), "20 of 20")
+        v.amount.scripts.OnClick(v.amount)                            # a click on the chip steps it too
+        self.assertEqual(P.Amount(P.chosen), 1)
+        e.g.ControllerCamHUD_Key_Market_PADDUP.scripts.OnClick()      # kept for the item while you look at another
+        e.g.ControllerCamHUD_Key_Market_PADDDOWN.scripts.OnClick()
+        self.assertEqual((P.chosen.id, P.Amount(P.chosen)), (2589, 1))
+        e.mock.fire("BAG_UPDATE_DELAYED")                             # until the bags change: all again
+        self.assertEqual(P.Amount(P.chosen), 20)
+        self.assertEqual(e.errors(), [])
+
+    def test_how_many_on_the_older_house_and_by_fives(self):
+        e = self.env()
+        T = e.lua.table
+        e.mock.put(0, 3, T(id=2589, name="Linen Cloth", quality=1, price=13, count=20, stack=20, **{"class": 7}))
+        e.mock.put(0, 4, T(id=2589, name="Linen Cloth", quality=1, price=13, count=20, stack=20, **{"class": 7}))
+        e.lua.execute(self.OLD_HOUSE)
+        P = self.house(e)
+        e.g.ControllerCamHUD_Market()
+        self.linen(e, P)
+        self.assertEqual(P.chosen.count, 60)
+        self.assertEqual(list(P.Plan(P.chosen)), [20, 3, 0])
+        steps = [P.Step(P.chosen, -1) for _ in range(3)]              # past 40: five at a time
+        self.assertEqual(steps, [55, 50, 45])
+        P.want[2589] = 7
+        self.assertEqual(P.Step(P.chosen, -1), 5)                     # onto the fives
+        self.assertEqual(P.Step(P.chosen, 1), 10)
+        P.want[2589] = 25
+        P.Refresh(P)
+        self.assertEqual(list(P.Plan(P.chosen)), [5, 5, 0])           # 25 of a 20-stack: 5 auctions of 5
+        self.assertTrue(P.Post(P))
+        self.assertEqual(list(e.g.POSTED.values())[3:], [5, 5])
+        self.assertEqual(e.db.ahLedger[2589].posted, 25)
+        e.mock["items"][1002] = T(name="Worn Sword", quality=1, price=300, stack=1, **{"class": 2})
+        for slot in range(1, 8):                                      # 7 that do not stack: 5 auctions of one
+            e.mock.put(3, slot, T(id=1002, name="Worn Sword", quality=1, price=300, count=1, stack=1, **{"class": 2}))
+        sword = e.lua.table(id=1002, count=7, stack=1)
+        P.want[1002] = 5
+        self.assertEqual(list(P.Plan(sword)), [1, 5, 0])
+        self.assertEqual(e.errors(), [])
+
     def test_the_chosen_row_stays_put_after_posting_some(self):
         e = self.env()
         P = self.house(e)
@@ -9836,8 +9964,8 @@ class MarketPanel(unittest.TestCase):
         e.g.ControllerCamHUD_Market()
         v = P.view
         chips = list(v.chips.values())
-        self.assertEqual([c.letter.text for c in chips], ["A", "X", "Y", "LB", "RB", "R3", "B"])   # each action once
-        self.assertEqual([plain(c.label.text) for c in chips][1:],
+        self.assertEqual([c.letter.text for c in chips], ["A", "<>", "X", "Y", "LB", "RB", "R3", "B"])   # each action once
+        self.assertEqual([plain(c.label.text) for c in chips][2:],
                          ["Patient", "24h", "Read all prices", "Show kept", "Candles", "Back"])
         self.assertTrue(all(c.disc.shown for c in chips))           # a white letter on a black disc
         self.assertIsNone(v.hint)                                    # no second row of hints
@@ -9848,7 +9976,7 @@ class MarketPanel(unittest.TestCase):
             self.assertEqual(e.mock.overrides[key], "CLICK ControllerCamHUD_Key_Market_%s:LeftButton" % key)
         e.db.padIcons = "switch"                                     # a Switch pad's letters
         P.Refresh(P)
-        self.assertEqual([c.letter.text for c in chips], ["B", "Y", "X", "L", "R", "R3", "A"])
+        self.assertEqual([c.letter.text for c in chips], ["B", "<>", "Y", "X", "L", "R", "R3", "A"])
         self.assertRegex(plain(v.keptNote.text), r"\bR (shows them|if you want them)")   # and the notes name it so
         e.db.padIcons = "playstation"                                # shapes: the game's own icons
         P.Refresh(P)
@@ -11774,7 +11902,16 @@ class OtherFaction(unittest.TestCase):
         g.FACTIONS.nameplate2 = "Horde"
         e.target(isPlayer=True, attackable=False, reaction=4, **{"class": "PALADIN"})
         f = e.frames.target
-        self.assertIn("UI-PVP-Alliance", f.name.text)                # the badge before the name
+        badge = f.health.factionBadge                                # the badge, big, beside the bar
+        self.assertTrue(badge.shown)
+        self.assertIn("UI-PVP-Alliance", badge.texture)
+        size = round(f.name.GetFont(f.name)[1] * e.ns.FACTION_BADGE)
+        size = max(e.ns.BADGE_MIN, min(e.ns.BADGE_MAX, size))
+        self.assertEqual((badge.width, badge.height), (size, size))
+        self.assertGreater(size, f.name.GetFont(f.name)[1])         # bigger than the name
+        self.assertEqual(badge.points[1][1], "RIGHT")
+        self.assertEqual(badge.points[1][3], "LEFT")                 # left of the bar, not in the name's line,
+        self.assertNotIn("UI-PVP", f.name.text)                      # which it pushed down into the bar
         self.assertTrue(f.otherFaction)
         self.assertTrue(f.health.factionShown)                       # an outline round the bar,
         c = f.health.factionEdge[1].vcolor
@@ -11784,8 +11921,20 @@ class OtherFaction(unittest.TestCase):
         p1 = e.mock.addPlate("nameplate1", e.lua.table(name="Ally", level=38, health=500, healthMax=500,
                                                        isPlayer=True, attackable=False, reaction=4))
         o1 = e.ns.Nameplates.byPlate[p1]
-        self.assertIn("UI-PVP-Alliance", o1.name.text)
+        if o1.bars:                                                  # a plate with a bar: beside it, as above
+            self.assertTrue(o1.health.factionBadge.shown)
+            self.assertNotIn("UI-PVP", o1.name.text)
+        else:                                                        # a name alone: in its line, its own height
+            self.assertIn("UI-PVP-Alliance:0:0:", o1.name.text)
         self.assertTrue(o1.health.factionShown)
+        # an enemy of the other faction, with a bar: the badge beside it
+        g.FACTIONS.nameplate3 = "Alliance"
+        p3 = e.mock.addPlate("nameplate3", e.lua.table(name="Foe", level=38, health=500, healthMax=500,
+                                                       isPlayer=True, attackable=True, reaction=2))
+        o3 = e.ns.Nameplates.byPlate[p3]
+        self.assertTrue(o3.bars)
+        self.assertTrue(o3.health.factionBadge.shown)
+        self.assertNotIn("UI-PVP", o3.name.text)
         p2 = e.mock.addPlate("nameplate2", e.lua.table(name="Mate", level=38, health=500, healthMax=500,
                                                        isPlayer=True, attackable=False, reaction=5))
         o2 = e.ns.Nameplates.byPlate[p2]
@@ -11795,6 +11944,7 @@ class OtherFaction(unittest.TestCase):
         e.mock.fire("PLAYER_TARGET_CHANGED")
         self.assertNotIn("UI-PVP", f.name.text)
         self.assertFalse(f.health.factionShown)
+        self.assertFalse(f.health.factionBadge.shown)
         self.assertEqual(e.errors(), [])
 
 
@@ -11806,6 +11956,26 @@ class QuietErrors(unittest.TestCase):
         self.assertEqual(e.g.UIErrorsFrame.alpha, 0)
         e.cmd("quieterrors off")
         self.assertEqual(e.g.UIErrorsFrame.alpha, 1)
+        self.assertEqual(e.errors(), [])
+
+    def test_not_ready_errors_are_left_out_by_default(self):
+        e = Env()
+        e.lua.execute("""
+            ERR_SPELL_COOLDOWN = "Spell is not ready yet."
+            ERR_ABILITY_COOLDOWN = "Ability is not ready yet."
+            UIErrorsFrame = CreateFrame('Frame', 'UIErrorsFrame', UIParent)
+            SHOWN = {}
+            UIErrorsFrame:SetScript("OnEvent", function(self, event, kind, msg) SHOWN[#SHOWN + 1] = msg end)""")
+        e.ns.World.Apply(e.ns.World, True)
+        h = e.lua.eval("function(ev, kind, msg) UIErrorsFrame:GetScript('OnEvent')(UIErrorsFrame, ev, kind, msg) end")
+        h("UI_ERROR_MESSAGE", 51, "Spell is not ready yet.")
+        h("UI_ERROR_MESSAGE", 52, "Ability is not ready yet.")
+        h("UI_ERROR_MESSAGE", 3, "Not enough mana")
+        self.assertEqual(list(e.g.SHOWN.values()), ["Not enough mana"])          # only the others show
+        self.assertEqual(e.ns.World.notReadyHidden, 2)
+        e.cmd("notready off")
+        h("UI_ERROR_MESSAGE", 51, "Spell is not ready yet.")
+        self.assertEqual(list(e.g.SHOWN.values()), ["Not enough mana", "Spell is not ready yet."])
         self.assertEqual(e.errors(), [])
 
 
@@ -12101,6 +12271,94 @@ class Flights(unittest.TestCase):
         e.mock.landFlight("Booty Bay")
         self.assertEqual(e.errors(), [])
 
+    LEGS = """
+        GetNumRoutes = function(slot) return slot == 2 and 2 or 0 end
+        local legs = { { 0.5, 0.6, 0.7, 0.6 }, { 0.7, 0.6, 0.5, 0.9 } }
+        TaxiGetSrcX = function(slot, i) return legs[i][1] end
+        TaxiGetSrcY = function(slot, i) return legs[i][2] end
+        TaxiGetDestX = function(slot, i) return legs[i][3] end
+        TaxiGetDestY = function(slot, i) return legs[i][4] end"""
+
+    def test_landing_early_goes_to_the_next_stop(self):
+        # Stormwind to Booty Bay by way of Ironforge (0.2 of the 0.48 of the way), 100 s; 10 s in you ask to land
+        db = "{ flightTimes = { ['Stormwind, Elwynn > Booty Bay, Stranglethorn'] = { t = 100, n = 1 } } }"
+        e = Env(db=db)
+        e.lua.execute(self.LEGS)
+        self.pick_with_the_pad(e, 1, 2)
+        stops = e.ns.Flights.flight.stops
+        self.assertEqual(stops[1].n, "Ironforge, Dun Morogh")
+        self.assertAlmostEqual(stops[1].f, 0.2 / (0.2 + 0.08 ** 0.5), delta=0.01)
+        self.assertEqual(stops[2].f, 1)
+        e.update(10, step=0.5)
+        n = len(e.mock.printed)
+        e.lua.execute("TaxiRequestEarlyLanding()")
+        lines = said(e, n)
+        self.assertEqual(len(lines), 1)
+        self.assertTrue(lines[0].startswith("[F] Landing early: Ironforge, Dun Morogh, about 0:3"), lines)
+        bar = e.g.ControllerCamHUD_Flight
+        self.assertEqual(bar.name.text, "Ironforge")
+        self.assertIn("landing early", bar.status.text)
+        self.assertTrue(e.db.flightNow.early)
+        self.assertEqual(e.db.flightNow.to, "Ironforge, Dun Morogh")
+        e.update(25, step=0.5)
+        e.mock.landFlight("Ironforge")
+        self.assertIsNone(e.db.flightTimes["Stormwind, Elwynn > Ironforge, Dun Morogh"])   # not a measure of it
+        self.assertEqual(e.db.flightTimes[self.ROUTE].t, 100)
+        self.assertEqual(e.errors(), [])
+
+    def test_the_weather_where_you_land(self):
+        e = Env()
+        F = e.ns.Flights
+        e.lua.execute("C_Map.GetBestMapForUnit = function() return 1434 end; GetGameTime = function() return 19, 30 end")
+        self.fly(e)
+        e.update(40, step=0.5)
+        e.mock.landFlight("Booty Bay")
+        n = len(e.mock.printed)
+        e.mock.advance(1.2)
+        lines = said(e, n)
+        jungle = list(F.CLIMATES.jungle.values())
+        self.assertEqual(len(lines), 1, lines)
+        self.assertIn(lines[0], ["[F] Evening at Booty Bay: " + air for air in jungle])
+        # a town's own map is part of its zone's; a map not known says nothing
+        e.lua.execute("""C_Map.GetBestMapForUnit = function() return 9001 end
+            C_Map.GetMapInfo = function(id) return id == 9001 and { parentMapID = 1426 } or nil end
+            GetGameTime = function() return 2, 0 end""")
+        self.assertTrue(F.Weather("Ironforge, Dun Morogh").startswith("Night at Ironforge: "))
+        self.assertIn(F.Weather("Ironforge, Dun Morogh").split(": ", 1)[1], list(F.CLIMATES.snow.values()))
+        e.lua.execute("C_Map.GetBestMapForUnit = function() return 12 end")
+        self.assertIsNone(F.Weather("Somewhere"))
+        e.cmd("flightweather off")                                           # off: not said
+        e.lua.execute("C_Map.GetBestMapForUnit = function() return 1434 end")
+        self.fly(e)
+        e.update(40, step=0.5)
+        e.mock.landFlight("Booty Bay")
+        n = len(e.mock.printed)
+        e.mock.advance(1.2)
+        self.assertEqual([l for l in said(e, n) if " at Booty Bay: " in l], [])
+        self.assertEqual(e.errors(), [])
+
+    def test_landing_early_past_the_last_stop_or_without_stops(self):
+        db = "{ flightTimes = { ['Stormwind, Elwynn > Booty Bay, Stranglethorn'] = { t = 100, n = 1 } } }"
+        e = Env(db=db)
+        e.lua.execute(self.LEGS)
+        self.pick_with_the_pad(e, 1, 2)
+        e.update(60, step=0.5)                                               # past Ironforge: Booty Bay anyway
+        e.lua.execute("TaxiRequestEarlyLanding()")
+        self.assertEqual(e.g.ControllerCamHUD_Flight.name.text, "Booty Bay")
+        self.assertFalse(e.ns.Flights.flight.early)
+        e.update(45, step=0.5)
+        e.mock.landFlight("Booty Bay")
+        e.lua.execute("GetNumRoutes = function() return 0 end")              # the map draws no legs
+        self.pick_with_the_pad(e, 1, 2)
+        e.update(5, step=0.5)
+        n = len(e.mock.printed)
+        e.lua.execute("TaxiRequestEarlyLanding()")
+        self.assertEqual(said(e, n), ["[F] Landing early at the next flight point"])
+        bar = e.g.ControllerCamHUD_Flight
+        self.assertIn("landing at the next flight point", bar.status.text)
+        self.assertTrue(bar.time.text.startswith("+"))                      # counting up: no time to it known
+        self.assertEqual(e.errors(), [])
+
     def test_a_route_flown_before_paces_were_kept_gives_the_pace(self):
         # Undercity to Tarren Mill was learned (2:21) before paces were kept; at Tarren Mill the map shows both
         # ends, so the first flight on to Hammerfall is a guess, not a count up
@@ -12340,6 +12598,26 @@ class FlightGame(unittest.TestCase):
         self.assertIn("flap", plain(G.frame.help.text))
         self.assertEqual(e.errors(), [])
 
+    def test_played_mid_screen_over_the_rider_clear_of_the_zone_names(self):
+        e = self.env()
+        G = e.ns.FlightGame
+        self.fly(e)
+        bar = e.g.ControllerCamHUD_Flight.bar
+        self.assertTrue(e.same(G.hint.points[1][2], bar))                  # the offer: under the flight bar
+        self.press(e, "PAD4", "FlightStart")
+        point = G.frame.points[1]
+        self.assertEqual((point[1], point[3], point[4]), ("CENTER", "CENTER", 0))
+        self.assertTrue(e.same(point[2], e.g.UIParent))                      # the lane: the middle of the screen,
+        self.assertEqual(point[5], G.Y)
+        self.assertLessEqual(G.Y, 0)                                         # over you on your mount
+        screen = e.g.UIParent.cy * 2
+        zone_names_lowest = screen / 2 - 0.35 * screen                       # (the game's zone text: 0.2-0.35 down)
+        self.assertLess(G.Y + G.H / 2, zone_names_lowest)                    # its top stays under them
+        self.assertTrue(e.g.ControllerCamHUD_Flight.shown)                   # and the flight bar stays at the top
+        self.press(e, "PAD4")
+        self.assertTrue(e.same(G.hint.points[1][2], bar))                    # away: the line is under the bar again
+        self.assertEqual(e.errors(), [])
+
     def test_high_altitude_puts_it_away_and_brings_it_back(self):
         e = self.env()
         G, ov = e.ns.FlightGame, e.mock.overrides
@@ -12390,8 +12668,8 @@ class FlightGame(unittest.TestCase):
         G = e.ns.FlightGame
         self.fly(e)
         self.press(e, "PAD4", "FlightStart")
-        G.clouds = e.lua.table()
-        G.nextCloud = 999
+        G.things = e.lua.table()
+        G.nextThing = 999
         G.y, G.vy = 42, 0
         r = e.lua.table(x=G.X + 60, y=42, base=42, speed=0, race="Human", female=False, mount="gryphon", phase=0)
         G.riders = e.lua.table_from([r])
@@ -12421,7 +12699,7 @@ class FlightGame(unittest.TestCase):
         self.assertEqual(len(G.riders), 0)                                   # and gone below
         self.assertEqual(e.errors(), [])
 
-    def test_a_run_of_catches_is_worth_more_and_a_cloud_ends_it(self):
+    def test_a_run_of_catches_is_worth_more_and_a_bump_ends_it(self):
         e = self.env()
         G = e.ns.FlightGame
         self.fly(e)
@@ -12429,8 +12707,8 @@ class FlightGame(unittest.TestCase):
         for _ in range(3):
             G.Ground(G, e.lua.table(x=100, y=40))
         self.assertEqual(G.gold, 1 + 2 + 3)
-        G.y = 10
-        G.clouds = e.lua.table_from([e.lua.table(x=G.X, gap=60)])           # flown into the cloud below the gap
+        G.y = 30
+        G.things = e.lua.table_from([e.lua.table(kind="tree", x=G.X, top=60, w=32)])   # flown into a treetop
         G.Step(G, 0.01)
         self.assertEqual(G.streak, 0)
         self.assertGreater(G.dazed, 0)
@@ -12439,6 +12717,98 @@ class FlightGame(unittest.TestCase):
         G.cool = 0
         self.assertTrue(G.Fire(G))
         self.assertEqual(G.gold, 6)                                          # nothing taken away
+        self.assertEqual(e.errors(), [])
+
+    def test_a_taller_sky_of_treetops_and_zeppelins_that_vary_with_always_a_way_past(self):
+        import random
+        e = self.env()
+        G = e.ns.FlightGame
+        self.assertGreaterEqual(G.H, 120)                                    # taller than the old 84
+        rnd = random.Random(7)
+        G.random = lambda: rnd.random()
+        G.things = e.lua.table()
+        kinds, trees, zeps, pairs = set(), [], [], 0
+        for _ in range(300):
+            G.things = e.lua.table()
+            G.Spawn(G)
+            things = list(G.things.values())
+            pairs += len(things) == 2
+            for th in things:
+                kinds.add(th.kind)
+                (trees if th.kind == "tree" else zeps).append(th)
+                th.x = G.X                                                   # right where your mount flies:
+            free = [y for y in range(G.EDGE, G.H - G.EDGE + 1)
+                    if not any(G.Touches(th, y) for th in things)]
+            self.assertTrue(free, [(th.kind, th.top, th.y, th.w) for th in things])   # always a way past
+        self.assertEqual(kinds, {"tree", "zeppelin"})
+        self.assertGreater(pairs, 50)                                        # a treetop with a zeppelin over it
+        tops = [th.top for th in trees]
+        self.assertGreater(max(tops) - min(tops), 40)                        # tall trees and short ones
+        widths = [th.w for th in zeps]
+        self.assertGreater(max(widths) - min(widths), 20)                    # big zeppelins and small ones
+        heights = [th.y for th in zeps]
+        self.assertGreater(max(heights) - min(heights), 60)                  # at all heights
+        # and how far apart they come varies too
+        e.lua.execute("flight_spawns = {}")
+        e.lua.eval("function(G) local old = G.Spawn; G.Spawn = function(self) flight_spawns[#flight_spawns + 1] = self.clock; return old(self) end end")(G)
+        self.fly(e)
+        self.press(e, "PAD4", "FlightStart")
+        for _ in range(600):
+            G.y, G.vy = G.H / 2, 0
+            e.update(0.1, step=0.1)
+        times = list(e.g.flight_spawns.values())
+        self.assertGreater(len(times), 15)
+        gaps = [b - a for a, b in zip(times, times[1:])]
+        self.assertGreater(max(gaps) - min(gaps), 1)
+        self.assertGreaterEqual(min(gaps), G.SPACING[1] - 0.15)
+        self.assertGreater(G.bumps, 0)                                       # (flying straight on, it bumps)
+        drawn = {t.texture for t in G.thingTex.values() if t.shown}
+        self.assertTrue(drawn <= {G.ART.tree, G.ART.zeppelin} and drawn, drawn)
+        self.assertEqual(e.errors(), [])
+
+    def test_how_to_play_shows_as_a_run_starts(self):
+        e = self.env()
+        G = e.ns.FlightGame
+        self.fly(e)
+        self.press(e, "PAD4", "FlightStart")
+        e.update(0.2)
+        self.assertTrue(G.frame.intro.shown)
+        text = plain(G.frame.intro.text)
+        for words in ("flap", "dodge the treetops and zeppelins", "net the riders for flight gold", "high altitude"):
+            self.assertIn(words, text)
+        e.update(2)
+        self.assertEqual(len(G.things), 0)                                   # time to read before the first one
+        e.update(G.INTRO)
+        self.assertFalse(G.frame.intro.shown)
+        self.press(e, "PAD4")                                                # high altitude,
+        self.press(e, "PAD4", "FlightStart")                                 # and back: a reminder
+        e.update(0.2)
+        self.assertTrue(G.frame.intro.shown)
+        e.update(G.AGAIN)
+        self.assertFalse(G.frame.intro.shown)
+        self.assertEqual(e.errors(), [])
+
+    def test_clouds_are_only_scenery_and_the_art_is_our_own(self):
+        e = self.env()
+        G = e.ns.FlightGame
+        self.fly(e)
+        self.press(e, "PAD4", "FlightStart")
+        self.assertEqual(len(G.clouds), G.CLOUDS)
+        c = G.clouds[1]
+        G.y, G.vy = c.y, 0
+        G.things = e.lua.table()
+        G.Step(G, 0.01)
+        self.assertEqual(G.bumps, 0)                                         # flying through a cloud is fine
+        e.update(0.1)
+        self.assertTrue(G.cloudTex[1].shown)
+        self.assertEqual(G.cloudTex[1].texture, G.ART.cloud)
+        for path in G.ART.values():
+            name = path.split("\\")[-1] + ".tga"
+            self.assertTrue(os.path.isfile(os.path.join(HUD, "Media", name)), name)
+        e.cmd("reducemotion on")
+        x = G.clouds[1].x
+        e.update(1)
+        self.assertEqual(G.clouds[1].x, x)                                   # with fewer animations: still
         self.assertEqual(e.errors(), [])
 
     def test_a_fight_and_the_landing_give_every_button_back(self):
@@ -12553,6 +12923,123 @@ class FlightGame(unittest.TestCase):
         self.assertIn("all 12", G.Describe())
         self.assertEqual(e.errors(), [])
 
+
+
+class BankCounts(unittest.TestCase):
+    """Beside the game's count of a recipe you can make, a second one that counts your bank too."""
+
+    ROWS = """
+        AVAIL = { [2] = 5, [3] = 0, [4] = 2 }
+        GetTradeSkillInfo = function(i)
+            local r = RECIPES[i]
+            return r.name, r.kind or "header", AVAIL[i] or 0, false, nil, r.ups
+        end
+        TradeSkillFrame = CreateFrame("Frame", "TradeSkillFrame", UIParent)
+        TradeSkillFrame.shown = false
+        for i = 1, 3 do
+            local b = CreateFrame("Button", "TradeSkillSkill" .. i, TradeSkillFrame)
+            b.id = i + 1
+            b.GetID = function(self) return self.id end
+            local t = CreateFrame("Frame", "TradeSkillSkill" .. i .. "Text")
+            local c = CreateFrame("Frame", "TradeSkillSkill" .. i .. "Count")
+            t.text, c.text = " " .. RECIPES[i + 1].name, ""
+            if (AVAIL[i + 1] or 0) > 0 then c.text = "[" .. AVAIL[i + 1] .. "]" end
+        end
+    """
+
+    def env(self, **kw):
+        def setup(env):
+            env.lua.execute(Levelling.WINDOW)
+            env.lua.execute(self.ROWS)
+        e = Env(setup=setup, **kw)
+        T = e.lua.table
+        for id, name in ((2447, "Peacebloom"), (765, "Silverleaf"), (2449, "Earthroot")):
+            e.mock["items"][id] = T(name=name, stack=20, **{"class": 7})
+        e.mock.put(0, 1, T(id=2447, name="Peacebloom", count=5))
+        e.mock.put(0, 2, T(id=765, name="Silverleaf", count=4))
+        e.mock.fire("PLAYER_ENTERING_WORLD")
+        e.update(0.5)
+        e.db.inventory["Ghostlight-Forever"].bank = e.lua.table_from({2447: 15})
+        return e
+
+    def open(self, e):
+        e.g.TradeSkillFrame.shown = True
+        e.mock.fire("TRADE_SKILL_SHOW")
+        e.update(0.5)
+
+    def test_the_count_with_the_bank_sits_after_the_games_own(self):
+        e = self.env()
+        BK = e.ns.Levelling.Bank
+        self.open(e)
+        self.assertEqual(BK.shown, 1)                     # only where the bank makes more
+        label = BK.labels[1]
+        self.assertTrue(label.shown)
+        self.assertEqual(plain(label.text), "[20]")      # 5 in the bags, 15 in the bank
+        self.assertIn("|cff8fd0ff", label.text)          # in the bank's blue
+        p = label.points[1]
+        self.assertEqual((p[1], p[3], p[4]), ("LEFT", "LEFT", 83))       # just past the game's "[5]"
+        self.assertTrue(e.same(p[2], e.g.TradeSkillSkill1Count))
+        for name in ("TradeSkillSkill1", "TradeSkillSkill1Count", "TradeSkillSkill1Text"):
+            self.assertEqual(len(e.g[name].points), 0)   # nothing done to the game's rows
+        self.assertEqual(e.g.TradeSkillSkill1Count.text, "[5]")          # and its count stays its own
+        self.assertEqual(e.g.TradeSkillSkill1.text, "")
+        self.assertEqual(e.errors(), [])
+
+    def test_no_count_of_its_own_from_the_bags_then_ours_follows_the_name(self):
+        e = self.env()
+        BK = e.ns.Levelling.Bank
+        e.db.inventory["Ghostlight-Forever"].bank = e.lua.table_from({765: 6})
+        e.g.AVAIL[4] = 0
+        e.g.TradeSkillSkill3Count.text = ""
+        self.open(e)
+        texts = sorted(plain(BK.labels[i].text) for i in range(1, BK.shown + 1))
+        self.assertEqual(texts, ["[5]"])                 # Weak Troll Blood: (4 + 6) / 2; the potion: no bank now
+        p = BK.labels[1].points[1]
+        self.assertTrue(e.same(p[2], e.g.TradeSkillSkill3Text))
+        self.assertEqual(e.errors(), [])
+
+    def test_scrolling_bags_and_the_open_bank_move_and_change_it(self):
+        e = self.env()
+        BK = e.ns.Levelling.Bank
+        self.open(e)
+        self.assertEqual(BK.shown, 1)
+        e.g.TradeSkillSkill1.id = 3                      # the list scrolled: the first row is now the elixir
+        e.g.TradeSkillSkill2.id = 4
+        e.g.TradeSkillSkill3.id = 2
+        e.g.TradeSkillSkill3Count.text = "[5]"
+        e.update(0.5)
+        self.assertEqual(BK.shown, 1)
+        self.assertTrue(e.same(BK.labels[1].points[1][2], e.g.TradeSkillSkill3Count))
+        e.db.inventory["Ghostlight-Forever"].bank[2449] = 3     # Earthroot banked (seen at the bank)
+        e.mock.fire("BAG_UPDATE_DELAYED")
+        e.update(0.5)
+        self.assertEqual(BK.shown, 2)                    # the elixir too now: 3 Earthroot banked, 4 Silverleaf carried
+        self.assertEqual(sorted(plain(BK.labels[i].text) for i in (1, 2)), ["[20]", "[3]"])
+        e.ns.Inventory.bankOpen = True                   # at the bank the game's own count of it is used
+        e.lua.execute("GetItemCount = (function(old) return function(id, bank) "
+                      "return old(id) + ((bank and id == 2447) and 1 or 0) end end)(GetItemCount)")
+        e.mock.fire("BANKFRAME_OPENED")
+        e.update(0.5)
+        self.assertEqual(sorted(plain(BK.labels[i].text) for i in range(1, BK.shown + 1)), ["[6]"])
+        self.assertEqual(e.errors(), [])
+
+    def test_off_and_closed_show_nothing(self):
+        e = self.env()
+        BK = e.ns.Levelling.Bank
+        self.open(e)
+        self.assertEqual(BK.shown, 1)
+        e.cmd("skillbank off")
+        self.assertEqual(BK.shown, 0)
+        self.assertFalse(BK.labels[1].shown)
+        e.cmd("skillbank on")
+        e.update(0.5)
+        self.assertEqual(BK.shown, 1)
+        e.g.TradeSkillFrame.shown = False
+        e.mock.fire("TRADE_SKILL_CLOSE")
+        e.update(0.5)
+        self.assertEqual(BK.shown, 0)
+        self.assertIn("counts with the bank", "\n".join(e.ns.Levelling.Describe().values()))
+        self.assertEqual(e.errors(), [])
 
 
 if __name__ == "__main__":

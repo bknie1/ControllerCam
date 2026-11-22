@@ -136,6 +136,32 @@ function AP.Sellable(showKept)
     return shown, hidden
 end
 
+-- How many of it to post: all you carry, until you choose fewer (d-pad left and right). The choice is kept for
+-- each item until your bags change.
+AP.want = {}
+function AP.Amount(e)
+    local count = e.count or 1
+    local want = AP.want[e.id]
+    if not want then return count end
+    return math.max(1, math.min(count, want))
+end
+
+-- One fewer or one more (five at a time past 40); past one it goes round to all, past all to one
+function AP.Step(e, way)
+    local count = e.count or 1
+    if count <= 1 then return 1 end
+    local n, step = AP.Amount(e), count > 40 and 5 or 1
+    if way < 0 then
+        if n <= 1 then n = count
+        else n = math.max(1, (n % step == 0 and n - step) or (n - n % step)) end
+    else
+        if n >= count then n = 1
+        else n = math.min(count, n + step - (n % step)) end
+    end
+    AP.want[e.id] = n < count and n or nil
+    return n
+end
+
 -- The most one auction of it may hold (its stack size), or nil
 local function MaxStack(id)
     local get = (C_Item and C_Item.GetItemInfo) or GetItemInfo
@@ -145,13 +171,13 @@ local function MaxStack(id)
     return stack
 end
 
--- How the older auction house posts all of it in one press: auctions of `size`, `stacks` of them. An even
+-- How the older auction house posts what you chose of it (all, unless fewer) in one press: auctions of `size`, `stacks` of them. An even
 -- split when one exists of at least a quarter stack (25 of a 20-stack: 5 auctions of 5); otherwise full
 -- stacks now and `rest` left for the next press (23 of a 20-stack: one of 20, then 3), rather than 23
 -- auctions of one.
-function AP.Plan(e)
+function AP.Plan(e, n)
     local max = MaxStack(e.id) or e.stack or 1
-    local count = e.count or 1
+    local count = n or AP.Amount(e)
     if count <= max then return count, 1, 0 end
     for size = max, 1, -1 do
         if count % size == 0 then
@@ -167,7 +193,7 @@ end
 local function Newer() return C_AuctionHouse and C_AuctionHouse.PostCommodity and ItemLocation
                               and ItemLocation.CreateFromBagAndSlot end
 function AP.WillPost(e)
-    if Newer() then return e.count, 0 end
+    if Newer() then return AP.Amount(e), 0 end
     local size, stacks, rest = AP.Plan(e)
     return size * stacks, rest
 end
@@ -321,7 +347,7 @@ end
 local function LayoutBar(bar, chips)
     local x, tall = 0, 0
     for _, b in ipairs(chips) do
-        local letter = Letter(b.key)
+        local letter = b.glyph or Letter(b.key)
         local d = math.floor(LineH(b.letter) + 5 + 0.5)
         local w = d
         if letter then
@@ -476,7 +502,9 @@ local function BuildView()
     view.kept = Chip(view.bar, "PADRSHOULDER", function() AP:ShowKept() end)
     view.chartKind = Chip(view.bar, "PADRSTICK", function() AP:ChartKind() end)
     view.leave = Chip(view.bar, "PAD2", function() AP:HideView() end)
-    view.chips = { view.post, view.strategy, view.duration, view.scan, view.kept, view.chartKind, view.leave }
+    view.amount = Chip(view.bar, "PADDRIGHT", function() AP:Amounts(1) end)   -- (d-pad left: one fewer)
+    view.amount.glyph = "<>"                                  -- the d-pad, left and right, on every controller
+    view.chips = { view.post, view.amount, view.strategy, view.duration, view.scan, view.kept, view.chartKind, view.leave }
     view.empty = ns.FontString(view, 10, "CENTER")
     view.empty:SetPoint("CENTER", view, "CENTER", 0, 10)
     view.empty:SetTextColor(unpack(C.muted))
@@ -806,7 +834,13 @@ function AP.Facts(e)
     local M, money, dash = ns.Market, ns.MoneyColored, GREY .. "-|r"
     local lines = {}
     if e.price then
-        lines[#lines + 1] = L["Asking %s each, %s for all %d"]:format(money(e.price), money(e.price * e.count), e.count)
+        local n = AP.Amount(e)
+        if n < e.count then
+            lines[#lines + 1] = L["Asking %s each, %s for the %d you let go; %d stay with you"]:format(money(e.price),
+                money(e.price * n), n, e.count - n)
+        else
+            lines[#lines + 1] = L["Asking %s each, %s for all %d"]:format(money(e.price), money(e.price * e.count), e.count)
+        end
     end
     local low, at = M.Auction(e.id)
     lines[#lines + 1] = L["Lowest"] .. " " .. (low and money(low) or dash) .. "   " .. TrendText(e.trend)
@@ -979,9 +1013,13 @@ function AP:Refresh()
         return
     end
     view.empty:Hide()
+    local amount = AP.Amount(chosen)
+    ChipSays(view.amount, L["%d of %d"]:format(amount, chosen.count), chosen.count > 1)
     if chosen.price then
         local n, rest = AP.WillPost(chosen)
-        if rest > 0 or n == 1 then                           -- one, or the older house in uneven stacks (the rest next)
+        if amount < chosen.count and rest == 0 then          -- fewer than you carry: how many of how many, each
+            ChipSays(view.post, L["Post %d of %d for %s each"]:format(n, chosen.count, ns.MoneyColored(chosen.price)))
+        elseif rest > 0 or n == 1 then                       -- one, or the older house in uneven stacks (the rest next)
             ChipSays(view.post, L["Post %d for %s"]:format(n, ns.MoneyColored(chosen.price * n)))
         else
             ChipSays(view.post, L["Post all %d for %s"]:format(n, ns.MoneyColored(chosen.price * n)))
@@ -1021,6 +1059,13 @@ function AP:ShowKept()
     self:Refresh()
 end
 
+-- How many of the chosen item to post: one fewer (way -1) or one more
+function AP:Amounts(way)
+    if not self.chosen then return end
+    AP.Step(self.chosen, way)
+    self:Refresh()
+end
+
 -- The price chart: a candle a day for a week, or the line of a month's lowest prices
 function AP:ChartKind()
     ns.db.ahCandles = not ns.db.ahCandles
@@ -1033,8 +1078,8 @@ function AP:Pad(button)
     ns.Note("market: button %s", tostring(button))
     if button == "PADDUP" then self:Choose(self.index - 1)
     elseif button == "PADDDOWN" then self:Choose(self.index + 1)
-    elseif button == "PADDLEFT" then self:Choose(self.index - self.perPage)
-    elseif button == "PADDRIGHT" then self:Choose(self.index + self.perPage)
+    elseif button == "PADDLEFT" then self:Amounts(-1)
+    elseif button == "PADDRIGHT" then self:Amounts(1)
     elseif button == "PAD1" then self:Post()
     elseif button == "PAD3" then self:Strategy()
     elseif button == "PAD4" then self:Duration()
@@ -1081,7 +1126,7 @@ function AP:Post()
         local loc = ItemLocation:CreateFromBagAndSlot(e.bag, e.slot)
         local okS, status = pcall(AH.GetItemCommodityStatus, loc)
         local commodity = okS and Enum and Enum.ItemCommodityStatus and status == Enum.ItemCommodityStatus.Commodity
-        n = e.count
+        n = AP.Amount(e)
         lots = commodity and 1 or n                          -- (any other item: an auction of each)
         if commodity then
             ok, err = pcall(AH.PostCommodity, loc, dur, n, e.price)
@@ -1214,7 +1259,9 @@ local events = CreateFrame("Frame")
 events:SetScript("OnEvent", ns.Protect(function(_, event, arg)
     if event == "AUCTION_HOUSE_SHOW" then AP:Open()
     elseif event == "AUCTION_HOUSE_CLOSED" then AP:Close()
-    elseif event == "BAG_UPDATE_DELAYED" then AP:Refresh()
+    elseif event == "BAG_UPDATE_DELAYED" then
+        AP.want = {}                                         -- what you carry changed: all of each again
+        AP:Refresh()
     elseif event == "CHAT_MSG_SYSTEM" then AP.Sold(arg) end
 end))
 

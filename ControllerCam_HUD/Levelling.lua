@@ -14,6 +14,7 @@
 -- ones you hold, becomes Copper Bars and Tin Bars, and those Copper Ore and Tin Ore, less what you hold of each.
 -- What is still missing can be put on the farm list (Farm.lua) with one button.
 -- Only read: nothing in the profession's window is opened, expanded, changed or written to.
+-- Also here: beside the game's count of a recipe you can make, a second one that counts your bank too.
 
 local ADDON, ns = ...
 local L = ns.L
@@ -847,3 +848,279 @@ ns.RegisterCheck(function(row, run, db)
 end)
 
 ns.RegisterModule("levelling", LV)
+
+---------------------------------------------------------------------------
+-- With the bank: how many of a recipe you could make counting your bank too
+---------------------------------------------------------------------------
+-- The game's recipe list says how many you can make from your bags ("Heavy Silk Bandage [20]"). Beside it a
+-- second number, in blue, counts your bank as well ("[20] [40]"): the bank as the game knows it now, or as you
+-- last saw it. It shows only when it is more. It is our own text over the list: nothing in the game's window
+-- is changed, and the game's own count stays as the game has it.
+local BK = { labels = {}, cache = {}, shown = 0 }
+LV.Bank = BK
+BK.POLL = 0.2              -- how often the rows are looked at while a window is open (they scroll without an event)
+BK.COLOUR = "|cff8fd0ff"   -- the bank's blue, as in an item's tooltip
+BK.ROWS = { { window = "TradeSkillFrame", prefix = "TradeSkillSkill" }, { window = "CraftFrame", prefix = "Craft", craft = true } }
+
+ns.RegisterSetting({
+    key = "skillBank", kind = "boolean", default = true, command = "skillbank", section = "Bags, bank and vendor",
+    label = "Profession window: how many you could make with your bank",
+    tip = "beside the game's count of a recipe you can make from your bags, a second count in blue includes the reagents in your bank. It shows only when that makes more",
+    onChange = function() if BK.Refresh then BK:Refresh() end end,
+})
+
+local function Field(t, k) return type(t) == "table" and rawget(t, k) or nil end
+
+-- How many of an item are in your bags, and how many in your bank
+function BK.Held(id)
+    local bags, all = 0, 0
+    if GetItemCount then
+        local ok, n = pcall(GetItemCount, id)
+        bags = (ok and Num(n)) or 0
+        local okB, m = pcall(GetItemCount, id, true)
+        all = (okB and Num(m)) or bags
+    end
+    local live = math.max(0, all - bags)
+    local I = ns.Inventory
+    if I and I.bankOpen then return bags, live end                    -- the bank is open: the game knows it now
+    local me = I and I.Me and I.Me()
+    local rec = me and ns.db and type(ns.db.inventory) == "table" and ns.db.inventory[me]
+    local kept = rec and type(rec.bank) == "table" and tonumber(rec.bank[id]) or 0
+    return bags, math.max(live, kept)
+end
+
+-- How many crafts the reagents make: { { id, n } } > with the bank, from the bags alone (nil: a reagent unknown)
+function BK.Makes(reagents)
+    if type(reagents) ~= "table" or #reagents == 0 then return nil end
+    local withBank, fromBags
+    for _, r in ipairs(reagents) do
+        if not r.id then return nil end
+        local bags, bank = BK.Held(r.id)
+        local need = math.max(1, r.n or 1)
+        local a, b = math.floor((bags + bank) / need), math.floor(bags / need)
+        withBank = withBank and math.min(withBank, a) or a
+        fromBags = fromBags and math.min(fromBags, b) or b
+    end
+    return withBank, fromBags
+end
+
+local function ClassicReagents(craft, index)
+    local count = craft and GetCraftNumReagents or GetTradeSkillNumReagents
+    local link = craft and GetCraftReagentItemLink or GetTradeSkillReagentItemLink
+    local info = craft and GetCraftReagentInfo or GetTradeSkillReagentInfo
+    if not (count and link) then return nil end
+    local list = {}
+    local ok, k = pcall(count, index)
+    for j = 1, (ok and Num(k)) or 0 do
+        local okL, l = pcall(link, index, j)
+        local need = 1
+        if info then
+            local okC, _, _, c = pcall(info, index, j)
+            need = (okC and Num(c)) or 1
+        end
+        list[#list + 1] = { id = okL and ItemOf(l) or nil, n = need }
+    end
+    return list
+end
+
+-- One recipe row of the older windows: the reagents (read once, until bags or the list change), the game's count
+local function ClassicRow(craft, index)
+    local okI, name, kind, available
+    if craft then
+        if not GetCraftInfo then return nil end
+        local _, k, n
+        okI, name, _, k, n = pcall(GetCraftInfo, index)
+        kind, available = k, n
+    else
+        if not GetTradeSkillInfo then return nil end
+        okI, name, kind, available = pcall(GetTradeSkillInfo, index)
+    end
+    name, kind = okI and Plain(name), okI and Plain(kind)
+    if type(name) ~= "string" or not CLASSIC[kind or ""] then return nil end          -- (headers have no count)
+    local key = (craft and "c:" or "t:") .. index .. ":" .. name
+    if BK.cache[key] == nil then BK.cache[key] = ClassicReagents(craft, index) or false end
+    return BK.cache[key] or nil, Num(available) or 0
+end
+
+-- One recipe row of the newer window (read from the list's own data, never changed)
+local function ModernRow(row)
+    local data
+    if row.GetElementData then
+        local ok, d = pcall(row.GetElementData, row)
+        data = ok and d or nil
+    end
+    if type(data) == "table" and data.GetData then
+        local ok, d = pcall(data.GetData, data)
+        data = ok and d or nil
+    end
+    local info = type(data) == "table" and rawget(data, "recipeInfo")
+    local id = type(info) == "table" and Num(info.recipeID)
+    if not id then return nil end
+    local key = "m:" .. id
+    if BK.cache[key] == nil then
+        local T, list = C_TradeSkillUI, false
+        if T and T.GetRecipeSchematic then
+            local okS, s = pcall(T.GetRecipeSchematic, id, false)
+            if okS and type(s) == "table" and type(s.reagentSlotSchematics) == "table" then
+                list = {}
+                for _, slot in ipairs(s.reagentSlotSchematics) do
+                    if slot.reagentType == nil or slot.reagentType == 1 then                 -- the basic reagents
+                        local first = type(slot.reagents) == "table" and slot.reagents[1]
+                        list[#list + 1] = { id = first and Num(first.itemID), n = Num(slot.quantityRequired) or 1 }
+                    end
+                end
+            end
+        end
+        BK.cache[key] = list
+    end
+    return BK.cache[key] or nil, Num(info.numAvailable) or 0
+end
+
+-- The recipe rows on screen: each(row, the text ours goes after, reagents, the game's count, the window)
+local function EachRow(each)
+    for _, kind in ipairs(BK.ROWS) do
+        local w = _G[kind.window]
+        if type(w) == "table" and w.IsShown and w:IsShown() then
+            for i = 1, 40 do
+                local b = _G[kind.prefix .. i]
+                if type(b) ~= "table" then break end
+                local index = b.IsShown and b:IsShown() and b.GetID and Num(b:GetID())
+                if index and index > 0 then
+                    local reagents, game = ClassicRow(kind.craft, index)
+                    if reagents then
+                        local count = _G[kind.prefix .. i .. "Count"]
+                        local text = type(count) == "table" and count.GetText and Plain(count:GetText())
+                        local after = (type(text) == "string" and text ~= "" and count)
+                            or _G[kind.prefix .. i .. "Text"] or (b.GetFontString and b:GetFontString())
+                        each(b, after, reagents, game, w)
+                    end
+                end
+            end
+        end
+    end
+    local pf = _G.ProfessionsFrame
+    if type(pf) == "table" and pf.IsShown and pf:IsShown() then
+        local box = Field(Field(Field(pf, "CraftingPage"), "RecipeList"), "ScrollBox")
+        if box and box.ForEachFrame then
+            pcall(box.ForEachFrame, box, function(row)
+                if type(row) ~= "table" or not (row.IsShown and row:IsShown()) then return end
+                local reagents, game = ModernRow(row)
+                if not reagents then return end
+                local count = Field(row, "Count")
+                local text = count and count.GetText and Plain(count:GetText())
+                each(row, (type(text) == "string" and text ~= "" and count) or Field(row, "Label"), reagents, game, pf)
+            end)
+        end
+    end
+end
+
+local function Label(i)
+    local l = BK.labels[i]
+    if not l then
+        l = ns.FontString(BK.frame, 10, "LEFT")
+        BK.labels[i] = l
+    end
+    return l
+end
+
+-- Ours after the game's text: in the same font, just past it, kept inside the row
+local function Place(l, row, after)
+    l:ClearAllPoints()
+    if type(after) == "table" and after.GetFont then
+        local ok, file, size, flags = pcall(after.GetFont, after)
+        if ok and type(file) == "string" and type(size) == "number" then pcall(l.SetFont, l, file, size, flags) end
+    end
+    local width = type(after) == "table" and after.GetStringWidth and Num(after:GetStringWidth())
+    if not width then
+        l:SetPoint("RIGHT", row, "RIGHT", -4, 0)
+        return
+    end
+    local x = width + 3
+    local left, right = Num(after.GetLeft and after:GetLeft()), Num(row.GetRight and row:GetRight())
+    local own = Num(l.GetStringWidth and l:GetStringWidth()) or 0
+    if left and right and left + x + own > right - 2 then x = math.max(0, right - 2 - own - left) end
+    l:SetPoint("LEFT", after, "LEFT", x, 0)
+end
+
+function BK:Refresh()
+    if not self.frame then return end
+    local used = 0
+    if self.active and ns.db and ns.db.skillBank then
+        EachRow(function(row, after, reagents, game, window)
+            local withBank = BK.Makes(reagents)
+            if not withBank or withBank <= game then return end
+            used = used + 1
+            if used == 1 then                                  -- drawn just over the window, not over everything
+                local okS, strata = pcall(window.GetFrameStrata, window)
+                local okL, level = pcall(window.GetFrameLevel, window)
+                if okS and type(strata) == "string" then self.frame:SetFrameStrata(strata) end
+                if okL and type(level) == "number" then self.frame:SetFrameLevel(level + 50) end
+            end
+            local l = Label(used)
+            l:SetText(BK.COLOUR .. "[" .. withBank .. "]|r")
+            Place(l, row, after)
+            l:Show()
+        end)
+    end
+    for i = used + 1, #self.labels do self.labels[i]:SetText(""); self.labels[i]:Hide() end
+    self.shown = used
+end
+
+local function AnyWindow()
+    for _, name in ipairs(LV.WINDOWS) do
+        local w = _G[name]
+        if type(w) == "table" and w.IsShown and w:IsShown() then return true end
+    end
+    return false
+end
+
+local BANK_EVENTS = { "TRADE_SKILL_SHOW", "TRADE_SKILL_UPDATE", "TRADE_SKILL_LIST_UPDATE", "TRADE_SKILL_CLOSE",
+                      "CRAFT_SHOW", "CRAFT_UPDATE", "CRAFT_CLOSE", "BAG_UPDATE_DELAYED", "BANKFRAME_OPENED",
+                      "BANKFRAME_CLOSED" }
+
+local function BuildBank()
+    BK.frame = CreateFrame("Frame", "ControllerCamHUD_BankCounts", UIParent)
+    BK.frame:SetAllPoints(UIParent)
+    BK.frame:EnableMouse(false)
+    local since = 0
+    BK.frame:SetScript("OnEvent", ns.Protect(function(_, event)
+        if event ~= "TRADE_SKILL_SHOW" and event ~= "CRAFT_SHOW" then BK.cache = {} end   -- bags, bank or list changed
+        since = BK.POLL                                                                    -- looked at on the next frame
+    end))
+    BK.frame:SetScript("OnUpdate", ns.Protect(function(_, dt)
+        since = since + dt
+        if since < BK.POLL then return end
+        since = 0
+        if AnyWindow() then BK:Refresh() elseif BK.shown > 0 then BK.cache = {}; BK:Refresh() end
+    end))
+end
+
+function BK:Apply(run)
+    local on = run and ns.db.skillBank and true or false
+    if on and not self.active then
+        if not self.frame then BuildBank() end
+        self.active = true
+        for _, e in ipairs(BANK_EVENTS) do pcall(self.frame.RegisterEvent, self.frame, e) end
+        self.frame:Show()
+    elseif not on and self.active then
+        self.active = false
+        self.frame:UnregisterAllEvents()
+        self.cache = {}
+        self:Refresh()
+        self.frame:Hide()
+    end
+end
+
+-- (the debug report's levelling section gets a line for these counts)
+local DescribePlan = LV.Describe
+function LV.Describe()
+    local lines = DescribePlan()
+    lines[#lines + 1] = ("counts with the bank: on %s, shown %d"):format(tostring(ns.db and ns.db.skillBank), BK.shown)
+    return lines
+end
+
+ns.RegisterCheck(function(row, run, db)
+    if not (run and db.skillBank) then row("no counts with the bank on the game's profession window", BK.shown == 0) end
+end)
+
+ns.RegisterModule("craftbank", BK)

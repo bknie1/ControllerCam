@@ -62,7 +62,7 @@ def main():
     metadata = {
         "changelog": changelog(version),
         "changelogType": "markdown",
-        "displayName": "ControllerCam + HUD (CCHUD) v%s" % version,
+        "displayName": "ControllerCam + HUD (CCHUD) for Gamepad v%s" % version,
         "gameVersions": [game_version_id(token, game)],
         "releaseType": os.environ.get("CF_RELEASE_TYPE", "").strip() or "release",
     }

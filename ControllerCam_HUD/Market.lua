@@ -144,6 +144,16 @@ function M.Vendor(id)
     return price, (type(stack) == "number" and stack > 1) and stack or 1
 end
 
+-- How many make a stack (1 when not known): also for an item no vendor buys (most quest items), which M.Vendor
+-- leaves out altogether
+function M.Stack(id)
+    local get = (C_Item and C_Item.GetItemInfo) or GetItemInfo
+    if not get then return 1 end
+    local ok, _, _, _, _, _, _, _, stack = pcall(get, id)
+    stack = ok and Plain(stack)
+    return (type(stack) == "number" and stack > 1) and stack or 1
+end
+
 function M.Auction(id)
     local rec = ns.db and ns.db.auction and ns.db.auction[id]
     if not rec then return nil end
@@ -441,10 +451,17 @@ function M.Verdict(id, bound)
     if sell and sell.junk[id] then return "vendor" end
     local quest = ns.Quests and ns.Quests.ItemWant and ns.Quests.ItemWant(id)
     if quest then return "quest", nil, quest end                         -- a quest of yours still needs it
+    -- Kept unless the auction house pays clearly more: a quest item no quest of yours still needs (Green Hills of
+    -- Stranglethorn pages once the quest is done) that can still be traded, and the best consumable of its kind
+    -- you carry (a potion, Rumsey Rum). Without a price worth the trip they stay "keep".
+    local soft
     local get = (C_Item and C_Item.GetItemInfoInstant) or GetItemInfoInstant
     if get then
         local ok, _, _, _, equipLoc, _, classID, subclassID = pcall(get, id)
-        if ok and classID == 12 then return "keep" end                    -- a quest item
+        if ok and classID == 12 then                                       -- a quest item
+            if bound then return "keep" end
+            soft = true
+        end
         local Vn = ns.Vendor
         if ok and Vn and Vn.IsTool and Vn.IsTool(id, classID, subclassID) and Vn.LastTool(id) then
             return "keep"                                                  -- your last tool of its kind
@@ -454,12 +471,13 @@ function M.Verdict(id, bound)
             return "equip"                                                 -- better than what you wear
         end
         if ok and V and V.KeepConsumable and classID == 0 and V.KeepConsumable(id, nil, classID) then
-            return "keep"                                                  -- the best of its kind you carry
+            soft = true                                                    -- the best of its kind you carry
         end
         if ok and V and V.MaybeUpgrade and (classID == 2 or classID == 4) and V.MaybeUpgrade(id, equipLoc) then
             return "keep"                                                  -- it could be an upgrade for you
         end
     end
+    if soft and not M.Fetches(id, bound) then return "keep" end
     -- grey: to a vendor. It may be up at the auction house for more, but grey things there seldom sell
     if M.Quality(id) == 0 then
         if M.Vendor(id) then return "vendor" end
@@ -472,20 +490,27 @@ function M.Verdict(id, bound)
     local own = math.max((auction or 0) * CUT, vendor or 0)
     local craft = ns.Professions and ns.Professions.Crafts(id, own)
     if craft then return "craft", math.floor(craft.each - own + 0.5), craft end   -- worth more made into something
-    -- the auction house when what it can be expected to bring is clearly more than a vendor pays, and the
-    -- difference over a full stack is worth the trip (a silver). Expected: it sells (its chance, M.SellChance) for
-    -- the price after the house's cut; or it does not, the deposit is lost and it goes to a vendor after all
-    if auction then
-        local v = vendor or 0
-        local p = M.SellChance(id) or M.CHANCE
-        local expect = p * auction * CUT + (1 - p) * (v - M.Deposit(id))
-        local _, stack = M.Vendor(id)
-        if expect > v * M.BETTER and (expect - v) * (stack or 1) >= M.WORTH and expect - v >= M.MIN_EACH
-            and auction >= M.MIN_PRICE then
-            return "auction", math.floor(expect - v + 0.5), { chance = p, deposit = M.Deposit(id) }
-        end
-    end
+    local more, how = M.Fetches(id, bound)
+    if more then return "auction", more, how end
     if vendor then return "vendor" end
+    return nil
+end
+
+-- The auction house when what it can be expected to bring is clearly more than a vendor pays, and the
+-- difference over a full stack is worth the trip (a silver). Expected: it sells (its chance, M.SellChance) for
+-- the price after the house's cut; or it does not, the deposit is lost and it goes to a vendor after all.
+-- How much more it brings, and { chance, deposit }; or nil.
+function M.Fetches(id, bound)
+    local auction = not bound and M.Auction(id)
+    if not auction then return nil end
+    local v = M.Vendor(id) or 0
+    local p = M.SellChance(id) or M.CHANCE
+    local expect = p * auction * CUT + (1 - p) * (v - M.Deposit(id))
+    local stack = M.Stack(id)                 -- (not M.Vendor's: with no vendor price, that said a stack of one)
+    if expect > v * M.BETTER and (expect - v) * stack >= M.WORTH and expect - v >= M.MIN_EACH
+        and auction >= M.MIN_PRICE then
+        return math.floor(expect - v + 0.5), { chance = p, deposit = M.Deposit(id) }
+    end
     return nil
 end
 

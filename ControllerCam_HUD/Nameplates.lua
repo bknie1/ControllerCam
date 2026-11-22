@@ -247,6 +247,9 @@ NP.FullName, NP.Subtitle = FullName, Subtitle
 local function New(plate)
     local o = CreateFrame("Frame", nil, plate)
     o:SetAllPoints(plate)
+    -- the game fades its plate for a unit out of sight (behind a wall, a tree) and back as it walks out: with a
+    -- few about, ours flashed with it. Ours keeps its own alpha (UpdateTarget), steady.
+    if o.SetIgnoreParentAlpha then pcall(o.SetIgnoreParentAlpha, o, true) end
     o.edge = o:CreateTexture(nil, "BACKGROUND")
     o.edge:SetTexture(ns.media.soft)
     o.edge:SetVertexColor(1, 1, 1, 0.7)
@@ -397,8 +400,15 @@ local function UpdateInfo(o)
     o.bars = WantsBars(o)
     local r, g, b = ns.UnitFrames.TargetColor(unit)
     local mark = NP.ClassMark(unit, isPlayer)                          -- a player's class, in the line itself
-    local badge, fcolor = ns.FactionMark(unit)                          -- the other faction, plainly
-    mark = badge .. mark
+    local fcolor                                                        -- the other faction, plainly: its badge big
+    if o.bars then                                                      -- beside the bar, or in the name's line
+        fcolor = ns.FactionBadge(o.health, unit, o.name)
+    else
+        ns.FactionBadge(o.health, nil)
+        local badge
+        badge, fcolor = ns.FactionMark(unit)
+        mark = badge .. mark
+    end
     o.otherFaction = fcolor and true or false
     local levelText = ns.db.plateLevels and not o.mini and ns.LevelText(level) or nil   -- a small plate: the name only
     if o.hostile then
@@ -610,6 +620,7 @@ function NP.ServiceIcon(o, isPlayer)
     if not o.service then
         o.service = CreateFrame("Frame", nil, o.plate)
         o.service:SetSize(22, 22)
+        if o.service.SetIgnoreParentAlpha then pcall(o.service.SetIgnoreParentAlpha, o.service, true) end
         o.service.icon = o.service:CreateTexture(nil, "OVERLAY")
         o.service.icon:SetAllPoints(o.service)
     end
@@ -895,6 +906,7 @@ function UpdateTarget(o)
     end
     o.waiting = NP.Waits(o)
     if o.waiting then o:SetAlpha(0) else o:SetAlpha((isTarget or not any) and 1 or OTHER_ALPHA) end
+    if o.service then o.service:SetAlpha(1) end    -- (steady too, and still saying what it is while the plate waits)
     if isTarget and o.bars then o.edge:Show() else o.edge:Hide() end
 end
 

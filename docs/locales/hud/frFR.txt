@@ -217,6 +217,8 @@ Rien ne manque : vous avez ce qu'il faut.
 Plan de progression : afficher / masquer
 Plan de progression à côté de la fenêtre du métier
 tant que la fenêtre d'un métier est ouverte, un panneau à côté indique quelles recettes faire et combien pour atteindre le maximum, et ce qu'il faut, jusqu'au minerai et aux herbes ; une estimation d'après les couleurs des recettes
+Fenêtre du métier : combien vous pourriez en fabriquer avec votre banque
+à côté du nombre du jeu de fois où vous pouvez fabriquer une recette avec vos sacs, un second nombre en bleu compte aussi les composants de votre banque. Il n'apparaît que s'il est plus grand
 affiche le plan de progression de la dernière fenêtre de métier ouverte, avec les boutons de la manette dessus
 PA
 PA dist.
@@ -262,6 +264,7 @@ Un jour de prix pour l'instant : une bougie s'ajoute chaque jour où vous passez
 30 jours, le plus bas du jour : vert en hausse, rouge en baisse
 Pas encore d'historique des prix : lisez l'hôtel des ventes quelques jours.
 Un seul jour de prix pour l'instant: la ligne s'allonge chaque jour où vous passez à l'hôtel des ventes.
+Je demande %s l'unité, %s pour les %d que tu lâches ; %d restent avec toi
 Demande %s pièce, %s pour les %d
 Plus bas
 lu %s
@@ -299,6 +302,8 @@ Montrer le gardé
 Ligne
 Bougies
 Poster
+%d sur %d
+Poster %d sur %d à %s l'unité
 Poster %d pour %s
 Mettre les %d en vente pour %s
 Ce client ne permet pas de poster à l'hôtel des ventes depuis ici.
@@ -753,6 +758,8 @@ Coordonnées sur la carte
 vos coordonnées sous la carte du monde
 Masquer les messages d'erreur rouges du jeu
 « Ce sort n'est pas encore prêt », « Pas assez de mana » et autres au milieu de l'écran sont masqués
+Masquer les erreurs « pas encore prêt »
+« Le sort n'est pas encore prêt », « La technique n'est pas encore prête » et « L'objet n'est pas encore prêt » restent hors du centre de l'écran ; les autres messages rouges du jeu s'affichent toujours
 %d messages masqués comme spam depuis votre connexion.
 %d d'entre eux étaient du recrutement de guilde répété.
 Icône de classe et niveau dans le chat
@@ -769,6 +776,8 @@ Masquer le recrutement de guilde répété
 dans les canaux publics, le message de recrutement d'une guilde est montré une fois ; le même du même joueur, ou un presque identique, dans les 15 minutes est masqué (jamais ceux de votre groupe, guilde ou amis)
 liste les messages du chat récemment masqués comme spam
 Vol
+atterrissage anticipé
+atterrissage au prochain point de vol
 destination inconnue
 estimé d'après la distance
 premier vol sur cette route : apprentissage de sa durée
@@ -778,14 +787,37 @@ atterrissage
 %s : premier vol sur ce trajet, durée inconnue
 En vol, destination inconnue
 %s : durée du vol apprise, %s
+Atterrissage anticipé : %s, environ %s
+Atterrissage anticipé au prochain point de vol
+vif et froid, la neige sous les pieds et le souffle suspendu dans l'air
+un froid mordant, avec un vent des sommets qui trouve chaque faille de votre armure
+chaud et humide, un air si épais qu'on pourrait le boire
+une chaleur moite sous la canopée, et les insectes bruyants
+chaud et sec, avec de la poussière dans le vent
+un soleil brûlant et une terre craquelée ; buvez quand vous le pouvez
+fumée et cendres sur un vent chaud
+un air brûlé, et des escarbilles qui dérivent
+gris et froid, une brume humide qui colle
+un froid dans l'air et presque pas de lumière
+doux et beau, avec une brise légère
+un temps agréable, idéal pour voyager
+frais et vert, les feuilles qui murmurent
+une lumière douce entre les arbres, et l'air frais
+lourd et humide, le sol mou sous les pieds
+un air chaud et mouillé, et l'odeur du marais
+%s à %s : %s
 %d trajets aériens connus.
 Vols : durée et compte à rebours
 en vol, la destination et la durée sont indiquées dans le chat, et une barre en haut de l'écran compte à rebours jusqu'à l'atterrissage ; la durée de chaque trajet est apprise de vos vols
 Vols : votre monture le long de la barre
 un griffon, un coursier du vent ou une chauve-souris (celui que le maître de vol vous a donné) plane le long de la barre de vol vers votre point d’arrivée
+Vols : le temps à l'arrivée
+à l'atterrissage, la discussion dit comment est l'air là où vous arrivez, tel que l'endroit est d'habitude (chaud et humide à Strangleronce, neige sous les pieds à Dun Morogh), et le moment de la journée
 lister les trajets aériens dont la durée est connue
 À terre ! +%d
-Dans les nuages : la série s'arrête
+Heurté : la série s'arrête
+%s battre des ailes  ·  évitez les cimes des arbres et les zeppelins
+%s prenez les cavaliers au filet pour de l'or de vol  ·  %s haute altitude
 %d d'or de vol
 %s battre des ailes
 %s filet
@@ -797,7 +829,7 @@ Le jeu de vol se joue pendant un vol.
 Pas en combat.
 Jeu de vol : jouer / haute altitude
 Vols : un jeu en chemin
-pendant un vol, un petit jeu est proposé sous la barre de vol, et un bouton le lance (seul ce bouton est pris tant que vous ne l'avez pas pressé) : faites battre des ailes votre monture à travers les nuages et prenez au filet les cavaliers qui arrivent en face, pour les faire atterrir contre de l'or de vol. Le même bouton à nouveau, c'est la haute altitude : le jeu est rangé et les boutons sont de nouveau ceux du jeu. Jamais en combat, disparaît à l'atterrissage
+pendant un vol, un petit jeu est proposé sous la barre de vol, et un bouton le lance (seul ce bouton est pris tant que vous ne l'avez pas pressé) : faites battre des ailes votre monture au-dessus des cimes et entre les zeppelins, et prenez au filet les cavaliers qui arrivent en face, pour les faire atterrir contre de l'or de vol. Le même bouton à nouveau, c'est la haute altitude : le jeu est rangé et les boutons sont de nouveau ceux du jeu. Jamais en combat, disparaît à l'atterrissage
 pendant un vol : lancer le jeu de vol, ou le mettre en haute altitude et l'en ramener
 Un vol est un bon moment pour ça.
 Vous jouez depuis %s.

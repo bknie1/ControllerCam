@@ -1,19 +1,25 @@
--- ControllerCam HUD: a game on the way, played under the flight bar (Flights.lua) while a flight master's
--- mount carries you.
+-- ControllerCam HUD: a game on the way, played while a flight master's mount carries you (Flights.lua shows the
+-- flight bar at the top of the screen). The game is played in the middle of the screen, over you on your mount,
+-- so the names of the zones you fly into (the game's own, high in the middle) stay in sight above it.
 --   * On a flight it is offered, not started: one line under the flight bar says which button starts it, and
 --     that one button is the only one taken until you press it. An option turns it off altogether.
---   * Playing: your mount (the same one the flight bar shows) flies through a lane of clouds. A flaps it up and
---     it sinks again on its own; the gaps in the clouds are wide and the clouds slow, and flying into one only
---     fogs the net gun for a moment and ends your run of catches. Nothing is lost, nobody falls.
+--   * Playing: your mount (the same one the flight bar shows) flies a lane of open sky. A flaps it up and it
+--     sinks again on its own. Treetops rise from below and zeppelins drift past at all heights, sometimes a
+--     treetop with a zeppelin over it and a gap between; how tall, how big, how wide the gap and how far apart
+--     all vary. Clouds drift behind as scenery only. Flying into a tree or a zeppelin only fogs the net gun for
+--     a moment and ends your run of catches. Nothing is lost, nobody falls.
 --   * Riders come the other way, small round portraits of the game's own (the other side's peoples, on the other
 --     side's mounts). X fires a net: a rider it catches is grounded, never slain, and floats down under a
---     parachute. Each one is worth flight gold (more for a run without a cloud), shown small; the total is kept
+--     parachute. Each one is worth flight gold (more for a run without a bump), shown small; the total is kept
 --     with the HUD's saved settings, for later.
+--   * How it is played shows in the middle of the lane as a run starts (and briefly when it comes back), and
+--     the buttons stay listed under the lane.
 --   * Y again is high altitude: the game is put away (the flight bar stays) and every button is the game's
 --     again, but the one that brings it back. A fight, the landing or the HUD stopping put it away at once.
 -- Its buttons are bound with key bindings of its own only while it is played (ns.PadKeys), never in a fight,
 -- and given back on landing. Nothing of the game's flight, map or buttons is touched. With fewer animations
--- the riders fly straight, the grounded drop straight down and nothing tilts or spins.
+-- the riders and zeppelins fly straight, the clouds behind stand still, the grounded drop straight down and
+-- nothing tilts or spins. The treetop, zeppelin and cloud are drawings of our own (docs/make_flight_art.py).
 --
 -- For later, not built yet: an on-rails section where a wing of the other side's riders comes at you; hazards
 -- (a goblin's parachuted dynamite you can set off and must fly clear of); catching parachuting loot and goodies
@@ -26,19 +32,36 @@ local C = ns.colors
 local G = { state = "off", gold = 0, streak = 0, grounded = 0, fired = 0, bumps = 0, active = false }
 ns.FlightGame = G
 
-G.W, G.H = 300, 84                 -- the lane: as wide as the flight bar, and how tall
-G.X = 44                           -- where your mount flies, from the lane's left
-G.EDGE = 9                         -- your mount keeps this far from the lane's top and bottom
-G.GRAVITY, G.FLAP, G.FALL = 230, 105, 150    -- how fast it sinks, how hard a flap lifts it, its fastest fall
-G.SPEED = 42                       -- the clouds drift by this fast (pixels a second)
-G.EVERY = 3.4                      -- a bank of clouds this often (seconds)
-G.GAP, G.CLOUD_W = 50, 30          -- the gap in a bank of clouds; how wide a bank is
+local MEDIA = "Interface\\AddOns\\ControllerCam_HUD\\Media\\"
+G.ART = { tree = MEDIA .. "treetop", zeppelin = MEDIA .. "zeppelin", cloud = MEDIA .. "cloud" }
+
+G.W, G.H = 300, 140                -- the lane: as wide as the flight bar, and how tall
+G.Y = -40                          -- the lane's middle: this far under the middle of the screen, over you on your
+                                   -- mount (the zone names the game shows high in the middle stay clear above it)
+G.X = 48                           -- where your mount flies, from the lane's left
+G.EDGE = 10                        -- your mount keeps this far from the lane's top and bottom
+G.GRAVITY, G.FLAP, G.FALL = 240, 120, 160    -- how fast it sinks, how hard a flap lifts it, its fastest fall
+G.SPEED = 44                       -- treetops (and the zeppelins with them) go by this fast (pixels a second)
+G.SPACING = { 1.7, 3.6 }           -- the next treetop or zeppelin comes after this many seconds (between the two)
+G.FIRST = 3                        -- the first one after this long: time to read how it is played
+G.TREE = { 26, 80 }                -- how tall a treetop alone rises (its height in the lane)
+G.ZEP_W = { 42, 72 }               -- how wide a zeppelin is (it is half as tall)
+G.ZEP_Y = { 30, 118 }              -- where a zeppelin alone drifts (its middle)
+G.PAIR = 0.35                      -- how often a treetop comes with a zeppelin over it
+G.LONE_ZEP = 0.45                  -- otherwise, how often it is a zeppelin alone (else a treetop alone)
+G.GAP = { 52, 76 }                 -- the gap between a treetop and the zeppelin over it
+G.PAIR_TREE = { 22, 52 }           -- how tall the treetop under a zeppelin is
+G.DRIFT = { 0, 14 }                -- a zeppelin alone drifts a little faster than the wind, by this much
+G.THINGS = 10                      -- treetops and zeppelins in the lane at once, at most
+G.CLOUDS, G.CLOUD_SPEED = 3, 14    -- the clouds behind: how many, how fast they drift (scenery only)
+G.INTRO, G.AGAIN = 6, 3            -- how long how it is played shows: as a run starts, and when it comes back
 G.RIDER_EVERY = { 2.2, 4.2 }       -- a rider every this many seconds (between the two)
 G.RIDER_SPEED = { 60, 80 }
 G.RIDERS = 4                       -- riders in the lane at once, at most
 G.NET_SPEED, G.NET_EVERY, G.NETS = 190, 0.5, 3   -- a net's speed, how often one can be fired, how many fly at once
 G.HIT = 13                         -- a net this close to a rider catches it
-G.DAZED = 1.2                      -- a cloud fogs the net gun this long
+G.REACH = 7                        -- how close your mount (its middle) can come to a treetop or zeppelin: forgiving
+G.DAZED = 1.2                      -- a bump fogs the net gun this long
 G.DROP = 34                        -- a grounded rider floats down this fast
 G.YOU, G.RIDER = 24, 18            -- sizes of your mount and a rider's
 G.WORTH = 5                        -- a catch is worth 1 flight gold, one more for each in a run, up to this
@@ -48,7 +71,7 @@ G.START = "PAD4"                   -- the one button bound while the game is off
 ns.RegisterSetting({
     key = "flightGame", kind = "boolean", default = true, command = "flightgame", section = "Quests, chat and map",
     label = "Flights: a game on the way",
-    tip = "on a flight a small game is offered under the flight bar, and one button starts it (only that button is taken until you do): flap your mount up through the clouds and net the riders coming the other way, grounding them for flight gold. The same button again is high altitude: the game is put away and the buttons are the game's again. Never in a fight, gone on landing",
+    tip = "on a flight a small game is offered under the flight bar, and one button starts it (only that button is taken until you do): flap your mount over the treetops and past the zeppelins, and net the riders coming the other way, grounding them for flight gold. The same button again is high altitude: the game is put away and the buttons are the game's again. Never in a fight, gone on landing",
 })
 
 -- Flight gold: all you have won (kept for later), and the most on one flight
@@ -117,13 +140,21 @@ end
 ---------------------------------------------------------------------------
 -- The game itself (no drawing here)
 ---------------------------------------------------------------------------
+-- The clouds behind: scenery, never in the way
+local function Cloud(x)
+    return { x = x, y = G.H * (0.45 + 0.45 * Random()), w = 70 + 50 * Random() }
+end
+
 function G:NewRound()
     self.y, self.vy = G.H / 2, 0
-    self.clouds, self.riders, self.nets = {}, {}, {}
-    self.nextCloud, self.nextRider = 1.2, 1.6
+    self.things, self.riders, self.nets = {}, {}, {}
+    self.clouds = {}
+    for i = 1, G.CLOUDS do self.clouds[i] = Cloud((i - 0.5) * (G.W / G.CLOUDS) + 30 * Random()) end
+    self.nextThing, self.nextRider = G.FIRST, G.FIRST + 0.6
     self.cool, self.dazed, self.clock = 0, 0, 0
     self.gold, self.streak, self.grounded, self.fired, self.bumps = 0, 0, 0, 0, 0
     self.word, self.wordUntil = nil, nil
+    self.introUntil = (GetTime() or 0) + G.INTRO
     self.round = true
 end
 
@@ -157,12 +188,53 @@ function G:Ground(r)
     self:Say(L["Grounded! +%d"]:format(worth))
 end
 
-function G:Bump(c)
-    c.bumped = true
+function G:Bump(t)
+    t.bumped = true
     self.dazed = G.DAZED
     self.bumps = self.bumps + 1
-    if self.streak > 1 then self:Say(L["Into the clouds: the run ends"]) end
+    if self.streak > 1 then self:Say(L["Bumped: the run ends"]) end
     self.streak = 0
+end
+
+-- A treetop: { kind = "tree", x, top (how tall it rises), w }. Drawn as tall as it rises (its picture is twice as
+-- tall as it is wide), so a taller one is a larger tree, not a stretched one.
+local function Tree(x, top)
+    return { kind = "tree", x = x, top = top, w = (top + 4) / 2 }
+end
+-- A zeppelin: { kind = "zeppelin", x, y (the middle of its envelope), w, h, drift, base, phase }
+local function Zeppelin(x, y, w, drift)
+    return { kind = "zeppelin", x = x, y = y, base = y, w = w, h = w / 2, drift = drift, phase = Random() * 6.28 }
+end
+
+-- What comes next, and when: a treetop alone, a zeppelin alone, or a treetop with a zeppelin over it and a gap
+-- to fly through. Each leaves a way past.
+function G:Spawn()
+    local r = Random()
+    local at = G.W + 40
+    if r < G.PAIR then
+        local top = Between(G.PAIR_TREE)
+        local w = Between(G.ZEP_W)
+        local gap = Between(G.GAP)
+        self.things[#self.things + 1] = Tree(at, top)
+        self.things[#self.things + 1] = Zeppelin(at, top + gap + w / 2 * 0.3, w, 0)   -- (keeps pace: the gap stays)
+    elseif r < G.PAIR + (1 - G.PAIR) * G.LONE_ZEP then
+        self.things[#self.things + 1] = Zeppelin(at, Between(G.ZEP_Y), Between(G.ZEP_W), Between(G.DRIFT))
+    else
+        self.things[#self.things + 1] = Tree(at, Between(G.TREE))
+    end
+    while #self.things > G.THINGS do table.remove(self.things, 1) end
+end
+
+-- Is your mount (its middle at G.X, y) touching it? Forgiving: the canopy is taken narrower than drawn, the
+-- zeppelin is its envelope only.
+function G.Touches(t, y)
+    local dx = math.abs(t.x - G.X)
+    if t.kind == "tree" then
+        return dx < t.w * 0.36 + G.REACH and y < t.top + G.REACH - 4
+    end
+    local a, b = t.w * 0.42 + G.REACH, t.h * 0.3 + G.REACH
+    local dy = y - t.y
+    return (dx / a) ^ 2 + (dy / b) ^ 2 < 1
 end
 
 function G:Step(dt)
@@ -178,21 +250,29 @@ function G:Step(dt)
     end
     self.cool = math.max(0, self.cool - dt)
     self.dazed = math.max(0, self.dazed - dt)
-    -- the clouds drift by, a gap in each bank
-    self.nextCloud = self.nextCloud - dt
-    if self.nextCloud <= 0 then
-        local half = G.GAP / 2
-        self.clouds[#self.clouds + 1] = { x = G.W + G.CLOUD_W, gap = half + 6 + (G.H - G.GAP - 12) * Random() }
-        self.nextCloud = G.EVERY
+    -- the clouds behind drift slowly (and stand still with fewer animations)
+    if not calm then
+        for i, c in ipairs(self.clouds) do
+            c.x = c.x - G.CLOUD_SPEED * dt
+            if c.x < -c.w / 2 then self.clouds[i] = Cloud(G.W + c.w / 2 + 20 * Random()) end
+        end
     end
-    for i = #self.clouds, 1, -1 do
-        local c = self.clouds[i]
-        c.x = c.x - G.SPEED * dt
-        if c.x < -G.CLOUD_W then
-            table.remove(self.clouds, i)
-        elseif not c.bumped and math.abs(c.x - G.X) < G.CLOUD_W / 2 + 7
-            and math.abs(self.y - c.gap) > G.GAP / 2 - 7 then
-            self:Bump(c)
+    -- treetops and zeppelins come by
+    self.nextThing = self.nextThing - dt
+    if self.nextThing <= 0 then
+        self:Spawn()
+        self.nextThing = Between(G.SPACING)
+    end
+    for i = #self.things, 1, -1 do
+        local t = self.things[i]
+        t.x = t.x - (G.SPEED + (t.drift or 0)) * dt
+        if t.kind == "zeppelin" then
+            t.y = calm and t.base or (t.base + math.sin(self.clock * 1.1 + t.phase) * (t.drift > 0 and 4 or 0))
+        end
+        if t.x < -t.w then
+            table.remove(self.things, i)
+        elseif not t.bumped and G.Touches(t, self.y) then
+            self:Bump(t)
         end
     end
     -- riders come the other way
@@ -203,7 +283,7 @@ function G:Step(dt)
             local who = G.Others()
             local race = who.races[math.floor(Random() * #who.races) + 1] or who.races[1]
             local mount = (race == "Scourge" and Random() < 0.5) and "bat" or who.mount
-            local base = 14 + (G.H - 28) * Random()
+            local base = 16 + (G.H - 32) * Random()
             self.riders[#self.riders + 1] = { x = G.W + 12, y = base, base = base, speed = Between(G.RIDER_SPEED),
                 race = race, female = Random() < 0.5, mount = mount, phase = Random() * 6.28 }
         end
@@ -276,12 +356,12 @@ end
 ---------------------------------------------------------------------------
 local frame, hint
 
-local function Letter(key) return ns.PadIcons and ns.PadIcons.Letter and ns.PadIcons.Letter(key) or nil end
+-- A button as your controller shows it (its own icon where the HUD has one), else its name
 local function KeyText(key)
-    local icon = ns.PadIcons and ns.PadIcons.Markup and ns.PadIcons.Markup(key)  -- (your controller's own icons)
-    if icon then return icon end
-    local letter = Letter(key)
-    if letter then return "|cffffffff" .. letter .. "|r" end
+    if ns.KeyText then
+        local ok, text = pcall(ns.KeyText, key)
+        if ok and type(text) == "string" and text ~= "" then return text end
+    end
     local text = GetBindingText and GetBindingText(key) or key
     return (type(text) == "string" and text ~= "") and text or key
 end
@@ -293,7 +373,13 @@ local function Tex(parent, layer, sub, path)
     return t
 end
 
--- Under the flight bar's own lines
+-- The lane: in the middle of the screen, over you on your mount
+local function Place(f)
+    f:ClearAllPoints()
+    f:SetPoint("CENTER", UIParent, "CENTER", 0, G.Y)
+end
+
+-- The one line while it is offered or away: under the flight bar's own lines
 local function Anchor(f, below)
     local bar = ns.Flights and ns.Flights.frame and ns.Flights.frame.bar
     f:ClearAllPoints()
@@ -306,22 +392,24 @@ local function Build()
     frame:SetSize(G.W, G.H)
     frame:SetFrameStrata("MEDIUM")
     if frame.SetClipsChildren then pcall(frame.SetClipsChildren, frame, true) end
-    Anchor(frame, -38)
-    local back = Tex(frame, "BACKGROUND", -2, ns.media.soft)         -- a soft dark sky, no box
-    back:SetVertexColor(0.02, 0.05, 0.1, 0.6)
-    back:SetPoint("TOPLEFT", frame, "TOPLEFT", -20, 8)
-    back:SetPoint("BOTTOMRIGHT", frame, "BOTTOMRIGHT", 20, -22)
+    Place(frame)
+    local back = Tex(frame, "BACKGROUND", -2, ns.media.soft)         -- a soft evening sky, no box
+    back:SetVertexColor(0.1, 0.2, 0.38, 0.7)
+    back:SetPoint("TOPLEFT", frame, "TOPLEFT", -20, 10)
+    back:SetPoint("BOTTOMRIGHT", frame, "BOTTOMRIGHT", 20, -24)
     frame.back = back
     G.cloudTex = {}
-    for i = 1, 4 do                                                    -- banks of clouds: a body and a puff, above
-        local set = {}                                                 -- the gap and below it
-        for j = 1, 4 do
-            local t = Tex(frame, "BORDER", j % 2, ns.media.soft)
-            t:SetVertexColor(0.92, 0.95, 1, j % 2 == 1 and 0.42 or 0.5)
-            t:Hide()
-            set[j] = t
-        end
-        G.cloudTex[i] = set
+    for i = 1, G.CLOUDS do                                             -- the clouds behind, faint
+        local t = Tex(frame, "BACKGROUND", -1, G.ART.cloud)
+        t:SetVertexColor(0.9, 0.94, 1, 0.28)
+        t:Hide()
+        G.cloudTex[i] = t
+    end
+    G.thingTex = {}
+    for i = 1, G.THINGS do                                             -- treetops and zeppelins
+        local t = Tex(frame, "BORDER", 0)
+        t:Hide()
+        G.thingTex[i] = t
     end
     G.riderTex = {}
     for i = 1, G.RIDERS do
@@ -371,7 +459,11 @@ local function Build()
     frame.word = ns.FontString(frame, 10, "CENTER")                    -- what just happened
     frame.word:SetPoint("TOP", frame, "TOP", 0, -3)
     frame.word:SetTextColor(unpack(C.text))
-    frame.help = ns.FontString(frame, 9, "CENTER")                     -- how it is played, under the lane
+    frame.intro = ns.FontString(frame, 11, "CENTER")                   -- how it is played, as a run starts
+    frame.intro:SetPoint("CENTER", frame, "CENTER", 0, 6)
+    frame.intro:SetWidth(G.W - 16)
+    frame.intro:SetTextColor(unpack(C.text))
+    frame.help = ns.FontString(frame, 9, "CENTER")                     -- the buttons, under the lane
     frame.help:SetPoint("TOP", frame, "BOTTOM", 0, -4)
     frame.help:SetTextColor(unpack(C.muted))
     frame:Hide()
@@ -399,6 +491,12 @@ local function At(t, x, y)
     t:SetPoint("CENTER", frame, "BOTTOMLEFT", x, y)
 end
 
+-- How it is played, in two short lines
+function G.HowTo()
+    return L["%s flap  ·  dodge the treetops and zeppelins"]:format(KeyText("PAD1")) .. "\n"
+        .. L["%s net the riders for flight gold  ·  %s high altitude"]:format(KeyText("PAD3"), KeyText("PAD4"))
+end
+
 function G:Draw(now)
     if not frame then return end
     local calm = ns.Calm()
@@ -415,29 +513,39 @@ function G:Draw(now)
     local fog = self.dazed > 0 and (calm and 0.55 or (0.45 + 0.35 * math.abs(math.sin(now * 10)))) or 1
     frame.you:SetAlpha(fog)
     frame.ring:SetAlpha(fog)
-    -- clouds
-    for i, set in ipairs(G.cloudTex) do
+    -- the clouds behind
+    for i, t in ipairs(G.cloudTex) do
         local c = self.clouds[i]
         if c then
-            local a = Edge(c.x, G.CLOUD_W)
-            local top = G.H - (c.gap + G.GAP / 2)
-            local low = c.gap - G.GAP / 2
-            set[1]:ClearAllPoints()
-            set[1]:SetPoint("TOP", frame, "TOPLEFT", c.x, 6)
-            set[1]:SetSize(G.CLOUD_W, math.max(1, top + 6))
-            set[2]:SetSize(G.CLOUD_W + 12, 18)
-            At(set[2], c.x, c.gap + G.GAP / 2 + 2)
-            set[3]:ClearAllPoints()
-            set[3]:SetPoint("BOTTOM", frame, "BOTTOMLEFT", c.x, -6)
-            set[3]:SetSize(G.CLOUD_W, math.max(1, low + 6))
-            set[4]:SetSize(G.CLOUD_W + 12, 18)
-            At(set[4], c.x, c.gap - G.GAP / 2 - 2)
-            for _, t in ipairs(set) do
-                t:SetAlpha(a)
-                if a > 0 then t:Show() else t:Hide() end
-            end
+            t:SetSize(c.w, c.w / 2)
+            At(t, c.x, c.y)
+            t:SetAlpha(Edge(c.x, c.w))
+            t:Show()
         else
-            for _, t in ipairs(set) do t:Hide() end
+            t:Hide()
+        end
+    end
+    -- treetops rise from the lane's foot; zeppelins drift
+    for i, t in ipairs(G.thingTex) do
+        local th = self.things[i]
+        local a = th and Edge(th.x, th.w) or 0
+        if a > 0 then
+            if t.kind ~= th.kind then
+                t:SetTexture(G.ART[th.kind])
+                t.kind = th.kind
+            end
+            t:ClearAllPoints()
+            if th.kind == "tree" then
+                t:SetSize(th.w, th.top + 4)
+                t:SetPoint("BOTTOM", frame, "BOTTOMLEFT", th.x, -4)
+            else
+                t:SetSize(th.w, th.h)
+                t:SetPoint("CENTER", frame, "BOTTOMLEFT", th.x, th.y - th.h * 0.14)   -- (the envelope sits high)
+            end
+            t:SetAlpha(a)
+            t:Show()
+        else
+            t:Hide()
         end
     end
     -- riders
@@ -493,6 +601,14 @@ function G:Draw(now)
     else
         frame.word:Hide()
     end
+    local left = (self.introUntil or 0) - now
+    if left > 0 then                                   -- how it is played: as a run starts, fading at the end
+        frame.intro:SetText(G.HowTo())
+        frame.intro:SetAlpha(calm and 1 or math.min(1, left))
+        frame.intro:Show()
+    else
+        frame.intro:Hide()
+    end
     frame.help:SetText(("%s   %s   %s"):format(L["%s flap"]:format(KeyText("PAD1")), L["%s net"]:format(KeyText("PAD3")),
         L["%s high altitude"]:format(KeyText("PAD4"))))
 end
@@ -505,7 +621,7 @@ function G:Show()
     if not frame and not (lane or line) then return end
     if not frame then Build() end
     if lane then
-        Anchor(frame, -38)
+        Place(frame)
         if ns.db.textShade ~= false then frame.back:Show() else frame.back:Hide() end
         frame:Show()
     else
@@ -531,7 +647,11 @@ end
 ---------------------------------------------------------------------------
 function G:Play()
     if not (self.active and G.Flying()) or InCombatLockdown() then return false end
-    if not self.round then self:NewRound() end
+    if self.round then
+        self.introUntil = (GetTime() or 0) + G.AGAIN                -- (back from high altitude: a reminder)
+    else
+        self:NewRound()
+    end
     self.state = "playing"
     self:Bind()
     self:Show()
@@ -637,7 +757,7 @@ ns.RegisterCommand("flightplay", function() G.Command() end, "/cchud flightplay"
     "on a flight: start the flight game, or take it to high altitude and back")
 
 function G.Describe()
-    return ("on %s, %s, buttons %s, flight gold now %d (all %d, best %d), grounded %d, nets %d, clouds %d"):format(
+    return ("on %s, %s, buttons %s, flight gold now %d (all %d, best %d), grounded %d, nets %d, bumps %d"):format(
         tostring(G.active), G.state, G.bound, G.gold or 0, ns.db and ns.db.flightGold or 0,
         ns.db and ns.db.flightGameBest or 0, G.grounded or 0, G.fired or 0, G.bumps or 0)
 end

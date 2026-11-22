@@ -217,6 +217,8 @@ Nichts fehlt: Du hast alles, was nötig ist.
 Levelplan: zeigen / verbergen
 Levelplan neben dem Berufsfenster
 solange das Fenster eines Berufs offen ist, sagt eine Tafel daneben, welche Rezepte du wie oft herstellen solltest, um das Maximum zu erreichen, und was das braucht, bis hinunter zu Erz und Kräutern; eine Schätzung nach den Farben der Rezepte
+Berufsfenster: wie viele du mit deiner Bank herstellen könntest
+neben der Zahl des Spiels, wie oft du ein Rezept aus deinen Taschen herstellen kannst, zählt eine zweite Zahl in Blau auch die Reagenzien in deiner Bank mit. Sie erscheint nur, wenn das mehr ergibt
 zeigt den Levelplan des zuletzt geöffneten Berufsfensters, mit den Tasten des Controllers darauf
 AK
 Distanz-AK
@@ -262,6 +264,7 @@ Erst ein Tag mit Preisen: Jeden Tag, an dem du das Auktionshaus besuchst, kommt 
 30 Tage, der niedrigste des Tages: grün hoch, rot runter
 Noch keine Preisgeschichte: lies das Auktionshaus an ein paar Tagen.
 Erst ein Tag Preise: Die Linie wächst mit jedem Tag, an dem du das Auktionshaus besuchst.
+Verlange %s pro Stück, %s für die %d, die du abgibst; %d bleiben bei dir
 Verlangt %s pro Stück, %s für alle %d
 Niedrigster
 gelesen %s
@@ -299,6 +302,8 @@ Behaltenes zeigen
 Linie
 Kerzen
 Einstellen
+%d von %d
+%d von %d einstellen, je %s
 %d für %s einstellen
 Alle %d für %s einstellen
 In das Auktionshaus dieses Clients kann von hier aus nicht eingestellt werden.
@@ -753,6 +758,8 @@ Koordinaten auf der Karte
 deine Koordinaten unter der Weltkarte
 Die roten Fehlermeldungen des Spiels ausblenden
 „Zauber ist noch nicht bereit“, „Nicht genug Mana“ und dergleichen in der Bildschirmmitte werden ausgeblendet
+Meldungen „noch nicht bereit“ ausblenden
+„Der Zauber ist noch nicht bereit“, „Die Fähigkeit ist noch nicht bereit“ und „Der Gegenstand ist noch nicht bereit“ bleiben aus der Bildschirmmitte fern; die anderen roten Meldungen des Spiels erscheinen weiterhin
 %d Nachrichten seit deiner Anmeldung als Spam ausgeblendet.
 %d davon waren wiederholte Gildenwerbung.
 Klassensymbol und Stufe im Chat
@@ -769,6 +776,8 @@ Wiederholte Gildenwerbung ausblenden
 in öffentlichen Kanälen wird die Werbung einer Gilde einmal gezeigt; dieselbe vom selben Spieler oder eine fast gleiche innerhalb von 15 Minuten wird ausgeblendet (nie von deiner Gruppe, Gilde oder deinen Freunden)
 listet die zuletzt als Spam ausgeblendeten Chatnachrichten auf
 Flug
+Landung vorzeitig
+Landung am nächsten Flugpunkt
 Ziel unbekannt
 geschätzt nach der Entfernung
 erster Flug auf dieser Route: die Flugzeit wird gelernt
@@ -778,14 +787,37 @@ Landung
 %s: erster Flug auf dieser Strecke, Zeit unbekannt
 Im Flug, Ziel unbekannt
 %s: Flugzeit gelernt, %s
+Vorzeitige Landung: %s, etwa %s
+Vorzeitige Landung am nächsten Flugpunkt
+frisch und kalt, Schnee unter den Füßen und der Atem hängt in der Luft
+bitterkalt, mit einem Wind von den Gipfeln, der jede Lücke in der Rüstung findet
+heiß und schwül, die Luft so dick, dass man sie trinken könnte
+drückende Hitze unter dem Blätterdach, und die Insekten sind laut
+heiß und trocken, mit Staub im Wind
+glühende Sonne und rissige Erde; trinkt, wann immer Ihr könnt
+Rauch und Asche auf einem heißen Wind
+versengte Luft, und Funken treiben umher
+grau und kalt, ein feuchter Nebel, der sich festsetzt
+eine Kühle in der Luft und kaum Licht
+mild und freundlich, mit einer sanften Brise
+angenehmes Wetter, gut zum Reisen
+kühl und grün, die Blätter flüstern
+sanftes Licht zwischen den Bäumen, und die Luft ist frisch
+schwül und feucht, der Boden weich unter den Füßen
+warme, nasse Luft und der Geruch des Moors
+%s in %s: %s
 %d Flugstrecken bekannt.
 Flüge: Zeit und Countdown
 auf einem Flug werden Ziel und Dauer im Chat genannt, und ein Balken oben am Bildschirm zählt bis zur Landung herunter; die Zeit jeder Strecke wird aus deinen Flügen gelernt
 Flüge: dein Reittier entlang der Leiste
 ein Greif, ein Windreiter oder eine Fledermaus (was der Flugmeister dir gab) gleitet die Flugleiste entlang zu deinem Landeplatz
+Flüge: das Wetter am Ziel
+bei der Landung sagt der Chat, wie die Luft dort ist, wo Ihr ankommt, so wie der Ort gewöhnlich ist (heiß und schwül im Schlingendorntal, Schnee unter den Füßen in Dun Morogh), und die Tageszeit
 die Flugstrecken mit bekannter Zeit auflisten
 Gelandet! +%d
-In die Wolken: die Serie endet
+Angestoßen: die Serie endet
+%s flattern  ·  weiche den Baumkronen und Zeppelinen aus
+%s fang die Reiter mit dem Netz für Fluggold  ·  %s große Höhe
 %d Fluggold
 %s flattern
 %s Netz
@@ -797,7 +829,7 @@ Das Flugspiel wird auf einem Flug gespielt.
 Nicht im Kampf.
 Flugspiel: spielen / große Höhe
 Flüge: ein Spiel für unterwegs
-auf einem Flug wird unter der Flugleiste ein kleines Spiel angeboten, und eine Taste startet es (nur diese Taste wird belegt, bis du sie drückst): Lass dein Reittier durch die Wolken flattern und fang die entgegenkommenden Reiter mit dem Netz, damit sie für Fluggold zu Boden gehen. Dieselbe Taste noch einmal ist große Höhe: Das Spiel wird weggelegt und die Tasten gehören wieder dem Spiel. Nie im Kampf, weg bei der Landung
+auf einem Flug wird unter der Flugleiste ein kleines Spiel angeboten, und eine Taste startet es (nur diese Taste wird belegt, bis du sie drückst): Lass dein Reittier über die Baumkronen und an den Zeppelinen vorbei flattern und fang die entgegenkommenden Reiter mit dem Netz, damit sie für Fluggold zu Boden gehen. Dieselbe Taste noch einmal ist große Höhe: Das Spiel wird weggelegt und die Tasten gehören wieder dem Spiel. Nie im Kampf, weg bei der Landung
 auf einem Flug: das Flugspiel starten, oder es in große Höhe bringen und zurück
 Ein Flug ist ein guter Moment dafür.
 Du spielst seit %s.

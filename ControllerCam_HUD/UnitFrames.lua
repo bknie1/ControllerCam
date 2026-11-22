@@ -592,8 +592,13 @@ local function UpdateInfo(f)
     if not f.name then return end
     local name, level, kind = U.Info(f.unit)
     local mark = (f.key == "tot" or f.key == "target") and ClassMark(f) or ""
-    local badge, fcolor = ns.FactionMark(f.unit)                         -- the other faction, plainly
-    mark = badge .. mark
+    local fcolor                                                         -- the other faction, plainly: its badge
+    if f.health then fcolor = ns.FactionBadge(f.health, f.unit, f.name)  -- big beside the bar
+    else
+        local badge
+        badge, fcolor = ns.FactionMark(f.unit)
+        mark = badge .. mark
+    end
     local ok = pcall(function() f.name:SetFormattedText("%s%s  %s", mark, ns.LevelText(level), name or "") end)
     if not ok then pcall(f.name.SetText, f.name, name) end
     if f.health and ns.FactionEdge then ns.FactionEdge(f.health, fcolor) end   -- (the name keeps its colours)

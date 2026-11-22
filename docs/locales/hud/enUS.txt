@@ -217,6 +217,8 @@ Nothing missing: you have what it takes.
 Levelling plan: show / hide
 Levelling plan beside the profession window
 while a profession's window is open, a panel beside it says which recipes to make and how many to reach the cap, and what that takes, down to the ore and herbs; an estimate from the recipes' colours
+Profession window: how many you could make with your bank
+beside the game's count of a recipe you can make from your bags, a second count in blue includes the reagents in your bank. It shows only when that makes more
 show the levelling plan of the profession window you opened last, with the controller's buttons on it
 AP
 RAP
@@ -262,6 +264,7 @@ One day of prices so far: a candle comes each day you visit the auction house.
 30 days, the day's lowest: green up, red down
 No price history yet: read the auction house on a few days.
 One day of prices so far: the line grows each day you visit the auction house.
+Asking %s each, %s for the %d you let go; %d stay with you
 Asking %s each, %s for all %d
 Lowest
 read %s
@@ -299,6 +302,8 @@ Show kept
 Line
 Candles
 Post
+%d of %d
+Post %d of %d for %s each
 Post %d for %s
 Post all %d for %s
 This client's auction house cannot be posted to from here.
@@ -753,6 +758,8 @@ Coordinates on the map
 your coordinates under the world map
 Hide the game's red error messages
 Spell is not ready yet, Not enough mana and the like in the middle of the screen are kept out of sight
+Hide the not-ready-yet errors
+Spell is not ready yet, Ability is not ready yet and Item is not ready yet stay out of the middle of the screen; the game's other red messages still show
 %d messages hidden as spam since you logged in.
 %d of them were repeated guild recruitment.
 Class icon and level in chat
@@ -769,6 +776,8 @@ Hide repeated guild recruitment
 in public channels a guild's recruiting message is shown once; the same player's again, or one nearly the same, within 15 minutes is hidden (never from your group, guild or friends)
 list the chat messages hidden as spam lately
 Flight
+landing early
+landing at the next flight point
 destination unknown
 a guess from the distance
 first flight on this route: learning its time
@@ -778,14 +787,37 @@ landing
 %s: first flight on this route, time unknown
 On a flight, destination unknown
 %s: flight time learned, %s
+Landing early: %s, about %s
+Landing early at the next flight point
+crisp and cold, snow underfoot and your breath hanging in the air
+bitterly cold, with a wind off the peaks that finds every gap in your armour
+hot and humid, the air thick enough to drink
+sticky heat under the canopy, and the insects loud
+hot and dry, with dust on the wind
+baking sun and cracked earth; drink when you can
+smoke and ash on a hot wind
+scorched air, with cinders drifting
+grey and cold, a damp mist that clings
+a chill in the air and little light to speak of
+mild and fair, with a gentle breeze
+pleasant weather, good for travelling
+cool and green, the leaves whispering
+soft light through the trees, and the air fresh
+muggy and damp, the ground soft underfoot
+warm, wet air and the smell of the bog
+%s at %s: %s
 %d flight routes known.
 Flights: time and countdown
 on a flight, where to and how long is said in chat, and a bar at the top of the screen counts down to the landing; each route's time is learned from your flights
 Flights: your mount along the bar
 a gryphon, a wind rider or a bat (whichever the flight master gave you) glides along the flight bar towards where you land
+Flights: the weather where you land
+on landing, chat says what the air is like where you came down, as the place usually is (hot and humid in Stranglethorn, snow underfoot in Dun Morogh), and the time of day
 list the flight routes whose times are known
 Grounded! +%d
-Into the clouds: the run ends
+Bumped: the run ends
+%s flap  ·  dodge the treetops and zeppelins
+%s net the riders for flight gold  ·  %s high altitude
 %d flight gold
 %s flap
 %s net
@@ -797,7 +829,7 @@ The flight game is played on a flight.
 Not in a fight.
 Flight game: play / high altitude
 Flights: a game on the way
-on a flight a small game is offered under the flight bar, and one button starts it (only that button is taken until you do): flap your mount up through the clouds and net the riders coming the other way, grounding them for flight gold. The same button again is high altitude: the game is put away and the buttons are the game's again. Never in a fight, gone on landing
+on a flight a small game is offered under the flight bar, and one button starts it (only that button is taken until you do): flap your mount over the treetops and past the zeppelins, and net the riders coming the other way, grounding them for flight gold. The same button again is high altitude: the game is put away and the buttons are the game's again. Never in a fight, gone on landing
 on a flight: start the flight game, or take it to high altitude and back
 A flight is a good moment for it.
 You have played for %s.

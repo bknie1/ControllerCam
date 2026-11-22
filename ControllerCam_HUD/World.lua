@@ -120,10 +120,46 @@ function W:ApplyErrors(want)
     self.errorsQuiet = want and true or false
 end
 
+-- Only the "not ready yet" ones (on by default): pressing a button before its cooldown is done is no mistake worth
+-- red text in the middle of the screen. Every other message shows as the game shows it. The game's frame keeps
+-- its own handler; ours stands in front of it and passes on everything but these.
+ns.RegisterSetting({
+    key = "quietNotReady", kind = "boolean", default = true, command = "notready", section = "General",
+    label = "Hide the not-ready-yet errors",
+    tip = "Spell is not ready yet, Ability is not ready yet and Item is not ready yet stay out of the middle of the screen; the game's other red messages still show",
+})
+W.NOT_READY = { "ERR_SPELL_COOLDOWN", "ERR_ABILITY_COOLDOWN", "ERR_ITEM_COOLDOWN", "SPELL_FAILED_NOT_READY" }
+W.notReadyHidden = 0
+function W.NotReady(msg)
+    if type(msg) ~= "string" or ns.IsSecret(msg) then return false end
+    for _, key in ipairs(W.NOT_READY) do
+        if _G[key] == msg then return true end
+    end
+    return false
+end
+function W:WrapErrors()
+    if self.errorsWrapped then return end
+    local f = _G.UIErrorsFrame
+    if type(f) ~= "table" or not (f.GetScript and f.SetScript) then return end
+    local ok, game = pcall(f.GetScript, f, "OnEvent")
+    if not ok or type(game) ~= "function" then return end
+    f:SetScript("OnEvent", function(frame, event, ...)
+        if W.notReadyOn and event == "UI_ERROR_MESSAGE" then
+            local a, b = ...                                   -- (the message comes second, or alone on older games)
+            local okN, hide = pcall(function() return W.NotReady(b) or W.NotReady(a) end)
+            if okN and hide then W.notReadyHidden = W.notReadyHidden + 1; return end
+        end
+        return game(frame, event, ...)
+    end)
+    self.errorsWrapped = true
+end
+
 function W:Apply(run)
     self:ApplyChat(run and ns.db.chatFade and true or false)
     self:ApplyMap(run and ns.db.mapCoords and true or false)
     self:ApplyErrors(run and ns.db.quietErrors and true or false)
+    self.notReadyOn = run and ns.db.quietNotReady and true or false
+    if self.notReadyOn then self:WrapErrors() end
 end
 
 ns.RegisterCheck(function(row, run, db)

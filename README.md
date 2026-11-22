@@ -1,4 +1,4 @@
-# ControllerCam
+# ControllerCam + HUD (CCHUD) for Gamepad
 
 Camera profiles for **World of Warcraft: Forever**, made for playing with a controller. Install it and you get an **Action camera** straight away: a close third-person view over your shoulder, head tracking, and a camera that follows where you run. Prefer something calmer? `/ccam use hybrid` or `/ccam use classic` and you are there. Every situation (mounted, combat, raid, city, ...) can use its own profile.
 

@@ -879,6 +879,8 @@ function TaxiNodePosition(i)
     if p then return p[1], p[2] end
 end
 function GetTaxiMapID() return mock.taxi.map or 1415 end
+-- the game's button to leave a flight: you come down at the next flight point
+function TaxiRequestEarlyLanding() mock.taxi.early = true end
 -- One of the flight map's buttons (the pointer is over it when it is mock.focus)
 function mock.taxiButton(i)
     local b = _G["TaxiButton" .. i] or CreateFrame("Button", "TaxiButton" .. i)

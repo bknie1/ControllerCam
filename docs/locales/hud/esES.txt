@@ -217,6 +217,8 @@ No falta nada: tienes lo necesario.
 Plan de subida: mostrar / ocultar
 Plan de subida junto a la ventana de la profesión
 mientras la ventana de una profesión está abierta, un panel a su lado dice qué recetas hacer y cuántas para llegar al máximo, y lo que hace falta, hasta el mineral y las hierbas; una estimación según los colores de las recetas
+Ventana de la profesión: cuántos podrías fabricar con tu banco
+junto al número del juego de cuántas veces puedes fabricar una receta con tus bolsas, un segundo número en azul incluye los componentes de tu banco. Solo aparece cuando eso da más
 muestra el plan de subida de la última ventana de profesión abierta, con los botones del mando en él
 PA
 PA a dist.
@@ -262,6 +264,7 @@ Un día de precios hasta ahora: cada día que visites la casa de subastas se añ
 30 días, el más bajo del día: verde sube, rojo baja
 Aún no hay historial de precios: lee la casa de subastas durante unos días.
 Solo un día de precios: la línea crece cada día que visitas la casa de subastas.
+Pido %s cada uno, %s por los %d que sueltas; %d se quedan contigo
 Pide %s cada uno, %s por los %d
 Más bajo
 leído %s
@@ -299,6 +302,8 @@ Mostrar lo guardado
 Línea
 Velas
 Publicar
+%d de %d
+Publicar %d de %d a %s cada uno
 Publicar %d por %s
 Poner los %d por %s
 Este cliente no permite publicar en la casa de subastas desde aquí.
@@ -753,6 +758,8 @@ Coordenadas en el mapa
 tus coordenadas bajo el mapa del mundo
 Ocultar los mensajes de error rojos del juego
 «El hechizo aún no está listo», «No hay suficiente maná» y similares en el centro de la pantalla quedan ocultos
+Ocultar los errores de «aún no está listo»
+«El hechizo aún no está listo», «La habilidad aún no está lista» y «El objeto aún no está listo» no aparecen en el centro de la pantalla; los demás mensajes rojos del juego siguen apareciendo
 %d mensajes ocultados como spam desde que iniciaste sesión.
 %d de ellos eran reclutamiento de hermandad repetido.
 Icono de clase y nivel en el chat
@@ -769,6 +776,8 @@ Ocultar reclutamiento de hermandad repetido
 en los canales públicos el mensaje de reclutamiento de una hermandad se muestra una vez; el mismo del mismo jugador, o uno casi igual, en 15 minutos se oculta (nunca de tu grupo, hermandad o amigos)
 lista los mensajes de chat ocultados como spam recientemente
 Vuelo
+aterrizaje anticipado
+aterrizaje en el siguiente punto de vuelo
 destino desconocido
 calculado por la distancia
 primer vuelo en esta ruta: aprendiendo su duración
@@ -778,14 +787,37 @@ aterrizando
 %s: primer vuelo en esta ruta, tiempo desconocido
 En vuelo, destino desconocido
 %s: tiempo de vuelo aprendido, %s
+Aterrizaje anticipado: %s, unos %s
+Aterrizaje anticipado en el siguiente punto de vuelo
+fresco y frío, nieve bajo los pies y el aliento suspendido en el aire
+un frío cortante, con un viento de las cumbres que encuentra cada hueco de tu armadura
+caluroso y húmedo, un aire tan denso que se podría beber
+calor pegajoso bajo la espesura, y los insectos ruidosos
+caluroso y seco, con polvo en el viento
+sol abrasador y tierra agrietada; bebe cuando puedas
+humo y ceniza en un viento cálido
+aire abrasado, con pavesas a la deriva
+gris y frío, una neblina húmeda que se pega
+un frío en el aire y apenas luz
+templado y agradable, con una brisa suave
+buen tiempo, ideal para viajar
+fresco y verde, las hojas susurrando
+luz suave entre los árboles, y el aire fresco
+bochornoso y húmedo, el suelo blando bajo los pies
+aire cálido y húmedo, y el olor de la ciénaga
+%s en %s: %s
 %d rutas de vuelo conocidas.
 Vuelos: tiempo y cuenta atrás
 en un vuelo se dice en el chat adónde y cuánto dura, y una barra en lo alto de la pantalla cuenta hasta el aterrizaje; el tiempo de cada ruta se aprende de tus vuelos
 Vuelos: tu montura sobre la barra
 un grifo, un jinete del viento o un murciélago (el que te dio el maestro de vuelo) planea por la barra de vuelo hacia donde aterrizas
+Vuelos: el tiempo donde aterrizas
+al aterrizar, el chat dice cómo es el aire donde llegas, como suele ser el lugar (caluroso y húmedo en Tuercespina, nieve bajo los pies en Dun Morogh), y la hora del día
 listar las rutas de vuelo cuyo tiempo se conoce
 ¡A tierra! +%d
-Entre las nubes: se acaba la racha
+Choque: se acaba la racha
+%s aletear  ·  esquiva las copas de los árboles y los zepelines
+%s atrapa a los jinetes con la red por oro de vuelo  ·  %s gran altitud
 %d de oro de vuelo
 %s aletear
 %s red
@@ -797,7 +829,7 @@ El juego de vuelo se juega durante un vuelo.
 No en combate.
 Juego de vuelo: jugar / gran altitud
 Vuelos: un juego por el camino
-en un vuelo se ofrece un pequeño juego bajo la barra de vuelo, y un botón lo inicia (solo ese botón se ocupa hasta que lo pulses): haz que tu montura aletee entre las nubes y atrapa con la red a los jinetes que vienen de frente, bajándolos a tierra a cambio de oro de vuelo. El mismo botón otra vez es gran altitud: el juego se guarda y los botones vuelven a ser del juego. Nunca en combate, desaparece al aterrizar
+en un vuelo se ofrece un pequeño juego bajo la barra de vuelo, y un botón lo inicia (solo ese botón se ocupa hasta que lo pulses): haz que tu montura aletee sobre las copas de los árboles y entre los zepelines, y atrapa con la red a los jinetes que vienen de frente, bajándolos a tierra a cambio de oro de vuelo. El mismo botón otra vez es gran altitud: el juego se guarda y los botones vuelven a ser del juego. Nunca en combate, desaparece al aterrizar
 en un vuelo: iniciar el juego de vuelo, o llevarlo a gran altitud y de vuelta
 Un vuelo es un buen momento para ello.
 Llevas jugando %s.

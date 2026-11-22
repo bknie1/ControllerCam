@@ -29,6 +29,12 @@ ns.RegisterSetting({
     tip = "a gryphon, a wind rider or a bat (whichever the flight master gave you) glides along the flight bar towards where you land",
 })
 
+ns.RegisterSetting({
+    key = "flightWeather", kind = "boolean", default = true, command = "flightweather", section = "Quests, chat and map",
+    label = "Flights: the weather where you land",
+    tip = "on landing, chat says what the air is like where you came down, as the place usually is (hot and humid in Stranglethorn, snow underfoot in Dun Morogh), and the time of day",
+})
+
 F.W, F.H, F.Y = 300, 10, -96   -- the bar: width, height; where it sits under the top of the screen
 F.MAX = 3600                  -- a flight longer than this was not one flight (a disconnect, a long pause): not learned
 
@@ -43,12 +49,24 @@ ns.RegisterSaved("flightTimes", function(old)
     end
     return out
 end)
--- The flight under way when the game was reloaded: { from, to, at = time(), dist, map }
+-- The flight under way when the game was reloaded: { from, to, at = time(), dist, map, mount, stops }, and after
+-- asking to land early: early, with the time to the stop (eta, guess)
+local function CleanStops(list)
+    if type(list) ~= "table" then return nil end
+    local out = {}
+    for i = 1, math.min(#list, 20) do
+        local s = list[i]
+        if type(s) ~= "table" or not tonumber(s.f) then return nil end
+        out[i] = { n = type(s.n) == "string" and s.n or nil, f = tonumber(s.f) }
+    end
+    return #out > 0 and out or nil
+end
 ns.RegisterSaved("flightNow", function(old)
     if type(old) ~= "table" or not tonumber(old.at) then return nil end
     return { from = type(old.from) == "string" and old.from or nil, to = type(old.to) == "string" and old.to or nil,
              at = tonumber(old.at), dist = tonumber(old.dist), map = type(old.map) == "string" and old.map or nil,
-             mount = type(old.mount) == "string" and old.mount or nil }
+             mount = type(old.mount) == "string" and old.mount or nil, stops = CleanStops(old.stops),
+             early = old.early and true or nil, eta = tonumber(old.eta), guess = old.guess and true or nil }
 end)
 -- The pace of your flights on each flight map, for a guess at a route not flown yet: map -> { s = seconds for
 -- each unit of the map's distance, n = flights averaged }
@@ -160,6 +178,38 @@ function F.Distance(slot)
     return d > 0 and d or nil
 end
 
+-- The stops along the way to a place: the flight point each of its legs ends at, with how far along the whole way
+-- it is (0..1; the last one is the place itself). Where you come down when you ask to land early: the first stop
+-- still ahead. Nil where the map does not draw the legs.
+F.STOP_NEAR = 0.02            -- (a leg's end this close to a flight point on the map is that point)
+function F.Stops(slot)
+    if type(slot) ~= "number" or not (TaxiGetSrcX and TaxiGetSrcY and TaxiGetDestX and TaxiGetDestY) then return nil end
+    local legs = tonumber(Ask(GetNumRoutes, slot)) or 0
+    if legs < 1 then return nil end
+    local at = {}
+    for i, name in pairs(F.nodes or {}) do
+        local x, y = Two(TaxiNodePosition, i)
+        if x and y then at[#at + 1] = { name, x, y } end
+    end
+    local stops, d = {}, 0
+    for leg = 1, math.min(legs, 20) do
+        local sx, sy = tonumber(Ask(TaxiGetSrcX, slot, leg)), tonumber(Ask(TaxiGetSrcY, slot, leg))
+        local dx, dy = tonumber(Ask(TaxiGetDestX, slot, leg)), tonumber(Ask(TaxiGetDestY, slot, leg))
+        if not (sx and sy and dx and dy) then return nil end
+        d = d + Apart(sx, sy, dx, dy)
+        local best, near
+        for _, p in ipairs(at) do
+            local e = Apart(p[2], p[3], dx, dy)
+            if not near or e < near then best, near = p[1], e end
+        end
+        stops[leg] = { n = (near and near <= F.STOP_NEAR) and best or nil, d = d }
+    end
+    if d <= 0 then return nil end
+    for _, s in ipairs(stops) do s.f, s.d = s.d / d, nil end
+    stops[#stops].f = 1
+    return stops
+end
+
 -- The pace of this map from routes already flown: with no pace of its own yet, the routes whose both ends this
 -- map shows (and whose time is known) give one, so the first flight from a new place is a guess too. (A route
 -- learned before paces were kept, or flown from somewhere else, counts as well.)
@@ -249,7 +299,7 @@ function F.Remember()
     if not name then return end
     local h = F.hover
     if not (h and h.name == name) then
-        h = { name = name, slot = slot, how = how, dist = F.Distance(slot) }
+        h = { name = name, slot = slot, how = how, dist = F.Distance(slot), stops = F.Stops(slot) }
         F.hover = h
     end
     h.at = GetTime()
@@ -380,7 +430,9 @@ function F.Draw(now)
     local name, zone = F.Split(fl.to)
     frame.name:SetText(name or L["Flight"])
     local how
-    if not fl.to then
+    if fl.early then
+        how = fl.to and L["landing early"] or L["landing at the next flight point"]
+    elseif not fl.to then
         how = L["destination unknown"]
     elseif fl.guess then
         how = L["a guess from the distance"]
@@ -457,17 +509,20 @@ function F.Start(resumed)
     local fresh = now - (F.closedAt or -100) <= 10      -- (a flight without the map, a quest's: from and to unknown)
     local fl = resumed or { from = fresh and F.here or nil, to = fresh and F.picked or nil, at = now,
                             dist = fresh and F.pickedDist or nil, map = fresh and F.map or nil,
-                            mount = fresh and F.mount or nil }
+                            mount = fresh and F.mount or nil, stops = fresh and F.pickedStops or nil }
     fl.mount = F.MOUNTS[fl.mount or ""] and fl.mount or F.MountOf()
-    F.flight, F.picked, F.pickedDist = fl, nil, nil
+    F.flight, F.picked, F.pickedDist, F.pickedStops = fl, nil, nil, nil
     F.flights = F.flights + 1
-    local route = F.Route(fl.from, fl.to)
-    local rec = route and ns.db.flightTimes[route]
-    fl.eta, fl.guess = rec and rec.t or nil, nil
-    local pace = not fl.eta and fl.to and fl.dist and fl.map and ns.db.flightPace[fl.map]
-    if pace then fl.eta, fl.guess = fl.dist * pace.s, true end        -- not flown yet: a guess from the distance
+    if not fl.early then                         -- (resumed after asking to land early: its own time to the stop)
+        local route = F.Route(fl.from, fl.to)
+        local rec = route and ns.db.flightTimes[route]
+        fl.eta, fl.guess = rec and rec.t or nil, nil
+        local pace = not fl.eta and fl.to and fl.dist and fl.map and ns.db.flightPace[fl.map]
+        if pace then fl.eta, fl.guess = fl.dist * pace.s, true end    -- not flown yet: a guess from the distance
+    end
     if not resumed then
-        ns.db.flightNow = { from = fl.from, to = fl.to, at = time(), dist = fl.dist, map = fl.map, mount = fl.mount }
+        ns.db.flightNow = { from = fl.from, to = fl.to, at = time(), dist = fl.dist, map = fl.map, mount = fl.mount,
+                            stops = fl.stops }
         if fl.to and fl.guess then
             Say(L["%s: about %s, a guess from the distance"]:format(fl.to, F.Clock(fl.eta)))
         elseif fl.to and fl.eta then
@@ -501,7 +556,12 @@ function F.Land()
     local took = GetTime() - fl.at
     local to = fl.to or F.Landed()
     local route = F.Route(fl.from, to)
-    ns.Note("flight: landed at %s after %s (route %s)", tostring(to), F.Clock(took), tostring(route))
+    ns.Note("flight: landed at %s after %s (route %s%s)", tostring(to), F.Clock(took), tostring(route),
+        fl.early and ", landed early: not learned" or "")
+    if took >= 5 and ns.db.flightWeather then
+        C_Timer.After(F.WEATHER_AFTER, function() F.SayWeather(to) end)   -- (once the zone is the new one)
+    end
+    if fl.early then return end                               -- (a landing asked for is no measure of the route)
     if not route or took < 5 or took > F.MAX then return end
     if fl.dist and fl.dist > 0 and fl.map then                -- the pace of flights on this map, for guesses
         local pace = ns.db.flightPace[fl.map]
@@ -522,6 +582,116 @@ function F.Land()
         F.learned = F.learned + 1
         Say(L["%s: flight time learned, %s"]:format(to, F.Clock(took)))
     end
+end
+
+-- Asked to land early (the game's button to leave a flight): you come down at the next flight point on the way,
+-- so the bar goes there, with the time to it. The next stop is the first one still ahead of how far along the way
+-- you are; without the route's stops or its time the bar says only that you land at the next flight point.
+F.AHEAD = 0.02                -- (a stop you are about to pass is not where you come down)
+function F.EarlyLanding()
+    local fl = F.flight
+    if not fl or fl.early or not OnTaxi() then return end
+    local now = GetTime()
+    local gone = now - fl.at
+    local stop
+    if fl.eta and fl.stops then
+        local p = gone / fl.eta
+        for _, s in ipairs(fl.stops) do
+            if s.f > p + F.AHEAD then stop = s; break end
+        end
+        stop = stop or fl.stops[#fl.stops]
+        if stop.f >= 1 then return end                        -- the place you were going anyway: nothing changes
+    end
+    fl.early = true
+    if stop and stop.n then
+        fl.to, fl.eta = stop.n, fl.eta * stop.f
+        Say(L["Landing early: %s, about %s"]:format(stop.n, F.Clock(math.max(0, fl.eta - gone))))
+    else
+        fl.to, fl.eta, fl.guess = nil, nil, nil
+        Say(L["Landing early at the next flight point"])
+    end
+    ns.Note("flight: asked to land early, %s", tostring(fl.to or "next flight point"))
+    local saved = ns.db.flightNow
+    if saved then saved.to, saved.early, saved.eta, saved.guess = fl.to, true, fl.eta, fl.guess end
+    F.Draw(now)
+end
+if type(TaxiRequestEarlyLanding) == "function" and hooksecurefunc then
+    hooksecurefunc("TaxiRequestEarlyLanding", ns.Protect(function()
+        if F.running then F.EarlyLanding() end
+    end))
+end
+
+---------------------------------------------------------------------------
+-- The weather where you land. The game says nothing of its weather, so this is the air of the place as it usually
+-- is, by its map (Stranglethorn is hot and humid, Dun Morogh cold), never rain or sun it cannot see; two ways of
+-- saying each, which one by the day. With the time of day: "Evening at Booty Bay: hot and humid, ..."
+---------------------------------------------------------------------------
+F.WEATHER_AFTER = 1
+F.CLIMATES = {
+    snow = { L["crisp and cold, snow underfoot and your breath hanging in the air"],
+             L["bitterly cold, with a wind off the peaks that finds every gap in your armour"] },
+    jungle = { L["hot and humid, the air thick enough to drink"], L["sticky heat under the canopy, and the insects loud"] },
+    desert = { L["hot and dry, with dust on the wind"], L["baking sun and cracked earth; drink when you can"] },
+    ash = { L["smoke and ash on a hot wind"], L["scorched air, with cinders drifting"] },
+    gloom = { L["grey and cold, a damp mist that clings"], L["a chill in the air and little light to speak of"] },
+    mild = { L["mild and fair, with a gentle breeze"], L["pleasant weather, good for travelling"] },
+    forest = { L["cool and green, the leaves whispering"], L["soft light through the trees, and the air fresh"] },
+    marsh = { L["muggy and damp, the ground soft underfoot"], L["warm, wet air and the smell of the bog"] },
+}
+local CLIMATE_OF = {
+    snow = { 1416, 1426, 1452, 1455 },
+    jungle = { 1434, 1449 },
+    desert = { 1411, 1413, 1418, 1441, 1443, 1446, 1451, 1454 },
+    ash = { 1419, 1427, 1428 },
+    gloom = { 1420, 1421, 1422, 1423, 1430, 1431, 1448, 1458 },
+    mild = { 1412, 1417, 1424, 1425, 1429, 1432, 1433, 1436, 1442, 1447, 1453, 1456 },
+    forest = { 1438, 1439, 1440, 1444, 1450, 1457 },
+    marsh = { 1435, 1437, 1445 },
+}
+F.CLIMATE = {}
+for climate, maps in pairs(CLIMATE_OF) do
+    for _, map in ipairs(maps) do F.CLIMATE[map] = climate end
+end
+
+-- The map you are on, or the zone it is part of (a town's own map)
+function F.Climate()
+    if not (C_Map and C_Map.GetBestMapForUnit) then return nil end
+    local map = tonumber(Ask(C_Map.GetBestMapForUnit, "player"))
+    for _ = 1, 3 do
+        if not map then return nil end
+        if F.CLIMATE[map] then return F.CLIMATE[map], map end
+        local info = C_Map.GetMapInfo and Ask(C_Map.GetMapInfo, map)
+        map = type(info) == "table" and tonumber(Plain(info.parentMapID)) or nil
+    end
+end
+
+function F.TimeOfDay()
+    local h = tonumber(Ask(GetGameTime))
+    if not h then return nil end
+    if h >= 5 and h < 7 then return L["Dawn"] end
+    if h >= 7 and h < 12 then return L["Morning"] end
+    if h >= 12 and h < 17 then return L["Afternoon"] end
+    if h >= 17 and h < 21 then return L["Evening"] end
+    return L["Night"]
+end
+
+-- The line said on landing at `place`, or nil where the place's air is not known
+function F.Weather(place)
+    local climate, map = F.Climate()
+    if not climate then return nil end
+    local ways = F.CLIMATES[climate]
+    local day = math.floor((time and time() or 0) / 86400)
+    local air = ways[(day + map) % #ways + 1]
+    local name = F.Split(place) or Ask(GetSubZoneText) or Ask(GetZoneText)
+    local when = F.TimeOfDay()
+    if type(name) == "string" and name ~= "" and when then return L["%s at %s: %s"]:format(when, name, air) end
+    return air
+end
+
+function F.SayWeather(place)
+    if not (F.running and ns.db.flightWeather) or F.flight then return end
+    local line = F.Weather(place)
+    if line then Say(line) end
 end
 
 -- On a flight now? (the map just closed, control was lost): taken off
@@ -545,7 +715,7 @@ events:SetScript("OnEvent", ns.Protect(function(_, event)
         local h = F.hover
         F.closedAt = GetTime()
         if h and h.at and F.closedAt - h.at <= F.HOVER_KEPT then
-            F.picked, F.how, F.pickedDist = h.name, h.how, h.dist
+            F.picked, F.how, F.pickedDist, F.pickedStops = h.name, h.how, h.dist, h.stops
         end
         F.hover = nil
         for _, t in ipairs({ 0.5, 1.5, 3 }) do C_Timer.After(t, Check) end
@@ -570,7 +740,7 @@ function F.Resume()
     local gone = time() - saved.at
     if not OnTaxi() or gone < 0 or gone > F.MAX then ns.db.flightNow = nil; return end
     F.Start({ from = saved.from, to = saved.to, at = GetTime() - gone, dist = saved.dist, map = saved.map,
-              mount = saved.mount })
+              mount = saved.mount, stops = saved.stops, early = saved.early, eta = saved.eta, guess = saved.guess })
 end
 
 local EVENTS = { "TAXIMAP_OPENED", "TAXIMAP_CLOSED", "PLAYER_CONTROL_LOST", "PLAYER_CONTROL_GAINED",
