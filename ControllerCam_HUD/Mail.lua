@@ -87,6 +87,33 @@ function MB.Next(run)
     return nil
 end
 
+---------------------------------------------------------------------------
+-- The Postmaster says how it went, in chat under his own name, in his own words (a few ways of putting each)
+---------------------------------------------------------------------------
+MB.SAY = {
+    took = { L["There you are: %s, out of the sacks and into your bags. Mind the string."],
+             L["All yours: %s. That's the last of the sacks, near enough."],
+             L["Signed, sealed and handed over: %s."] },
+    nothing = { L["Not a scrap for you today. I checked twice."],
+                L["Empty box, friend. Even the moths have moved out."] },
+    cod = { L["Letters wanting coin on delivery: %d. Those you open yourself; I don't pay other folks' bills."] },
+    full = { L["Your bags are bursting. The rest waits in the letters till you make room."] },
+    refused = { L["%d I couldn't pass you: one of a kind, or the box wouldn't let go. Still in their letters."] },
+}
+function MB.Words(kind)
+    local list = MB.SAY[kind]
+    return list[math.random(#list)]
+end
+local function Post(text)
+    local chat = ns.Chat
+    if chat and chat.Line and type(chat.TAGS) == "table" then
+        chat.TAGS.mail = chat.TAGS.mail or { L["Postmaster"], "e6b86a" }
+        if chat.Line("mail", text) then return end
+    end
+    say(text)
+end
+MB.Post = Post
+
 local function Finish(why)
     local run = MB.run
     if not run then return end
@@ -98,15 +125,15 @@ local function Finish(why)
     if run.items == 1 then parts[#parts + 1] = L["1 item"]
     elseif run.items > 1 then parts[#parts + 1] = L["%d items"]:format(run.items) end
     if #parts == 0 then
-        if why ~= "closed" then say(L["Nothing to take from the mailbox."]) end
+        if why ~= "closed" then Post(MB.Words("nothing")) end
     else
-        say(L["Mailbox: took %s."]:format(table.concat(parts, L[" and "])))
+        Post(MB.Words("took"):format(table.concat(parts, L[" and "])))
     end
     local cod = 0
     for _ in pairs(run.cod or {}) do cod = cod + 1 end
-    if cod > 0 then say(L["Letters asking for payment on delivery, left for you to open: %d"]:format(cod)) end
-    if run.full then say(L["Your bags are full: the other items wait in their letters."]) end
-    if run.refused > 0 then say(L["Items the game would not hand over (one of a kind, or refused), left in their letters: %d"]:format(run.refused)) end
+    if cod > 0 then Post(MB.Words("cod"):format(cod)) end
+    if run.full then Post(MB.Words("full")) end
+    if run.refused > 0 then Post(MB.Words("refused"):format(run.refused)) end
     ns.Note("mail: took %s copper, %d items, %d refused, %d takes (%s)", got, run.items, run.refused, run.takes, tostring(why))
 end
 MB.Finish = Finish
@@ -170,7 +197,7 @@ end
 MB.Answered = Answered
 
 function MB:Start()
-    if not self.open then say(L["Open a mailbox first."]); return false end
+    if not self.open then Post(L["Find a mailbox first, then we'll talk."]); return false end
     if self.run then Finish("stopped"); return false end           -- pressed again: stops
     self.run = { skip = {}, timeouts = {}, items = 0, refused = 0, takes = 0, at = -10, money0 = Num(GetMoney and GetMoney()) }
     self:Label(L["Taking..."])
@@ -246,11 +273,63 @@ local function Refusal(msg)
 end
 MB.Refusal = Refusal
 
+---------------------------------------------------------------------------
+-- Sending: what you attach names the letter. While its subject is empty (or still the one we wrote), it says
+-- what goes in it: "Linen Cloth x20", "Linen Cloth x20, Wool Cloth x5", "Linen Cloth x20 and 3 more". A subject
+-- you typed yourself is never touched. Typing on a controller is slow; this spares it.
+---------------------------------------------------------------------------
+ns.RegisterSetting({
+    key = "mailSubject", kind = "boolean", default = true, command = "mailsubject", section = "Bags, bank and vendor",
+    label = "Mail: subject from what you attach",
+    tip = "attaching items to a letter fills in its subject with what they are (Linen Cloth x20, or the first and how many more); a subject you typed yourself is left alone",
+})
+MB.SUBJECT_MAX = 64
+
+function MB.SubjectFor()
+    if not GetSendMailItem then return nil end
+    local order, counts = {}, {}
+    for i = 1, (ATTACHMENTS_MAX_SEND or 12) do
+        local ok, name, _, _, count = pcall(GetSendMailItem, i)
+        if ok and type(name) == "string" and name ~= "" and not ns.IsSecret(name) then
+            count = (type(count) == "number" and not ns.IsSecret(count) and count > 0) and count or 1
+            if not counts[name] then order[#order + 1] = name; counts[name] = 0 end
+            counts[name] = counts[name] + count
+        end
+    end
+    if #order == 0 then return nil end
+    local function One(name) return counts[name] > 1 and ("%s x%d"):format(name, counts[name]) or name end
+    if #order == 2 then
+        local both = One(order[1]) .. ", " .. One(order[2])
+        if #both <= MB.SUBJECT_MAX then return both end
+    end
+    if #order >= 2 then return L["%s and %d more"]:format(One(order[1]), #order - 1):sub(1, MB.SUBJECT_MAX) end
+    return One(order[1]):sub(1, MB.SUBJECT_MAX)
+end
+
+function MB.FillSubject()
+    if not ns.db.mailSubject then return end
+    local box = _G.SendMailSubjectEditBox
+    if type(box) ~= "table" or not (box.GetText and box.SetText) then return end
+    local ok, now = pcall(box.GetText, box)
+    if not ok or ns.IsSecret(now) then return end
+    now = now or ""
+    if now ~= "" and now ~= MB.filled then return end                  -- yours: left alone
+    local want = MB.SubjectFor() or ""
+    if want == now then return end
+    pcall(box.SetText, box, want)
+    MB.filled = want ~= "" and want or nil
+    MB.subjects = (MB.subjects or 0) + 1
+end
+
 local events = CreateFrame("Frame")
 events:SetScript("OnEvent", ns.Protect(function(_, event, a, b)
-    if event == "MAIL_SHOW" then
+    if event == "MAIL_SEND_INFO_UPDATE" then
+        MB.FillSubject()
+    elseif event == "MAIL_SEND_SUCCESS" then
+        MB.filled = nil
+    elseif event == "MAIL_SHOW" then
         MB.open = true
-        MB:Button(true)
+        MB:Button(ns.db.mailTakeAll and true or false)
     elseif event == "MAIL_CLOSED" then
         MB.open = false
         if MB.run then Finish("closed") end
@@ -263,13 +342,15 @@ events:SetScript("OnEvent", ns.Protect(function(_, event, a, b)
     end
 end))
 
-local WATCH = { "MAIL_SHOW", "MAIL_CLOSED", "MAIL_INBOX_UPDATE", "MAIL_SUCCESS", "MAIL_FAILED", "UI_ERROR_MESSAGE" }
+local WATCH = { "MAIL_SHOW", "MAIL_CLOSED", "MAIL_INBOX_UPDATE", "MAIL_SUCCESS", "MAIL_FAILED", "UI_ERROR_MESSAGE",
+                "MAIL_SEND_INFO_UPDATE", "MAIL_SEND_SUCCESS" }
 function MB:Apply(run)
-    local want = run and ns.db.mailTakeAll and true or false
+    local want = run and (ns.db.mailTakeAll or ns.db.mailSubject) and true or false
+    if self.active and want then self:Button(ns.db.mailTakeAll and self.open) end
     if want and not self.active then
         self.active = true
         for _, e in ipairs(WATCH) do pcall(events.RegisterEvent, events, e) end
-        if self.open then self:Button(true) end
+        if self.open then self:Button(ns.db.mailTakeAll and true or false) end
     elseif not want and self.active then
         self.active = false
         events:UnregisterAllEvents()

@@ -93,22 +93,29 @@ répare tout dès que s'ouvre un marchand qui répare
 Réparer depuis la banque de guilde
 paie les réparations avec la banque de guilde si votre guilde l'autorise, avec votre propre or sinon
 liste ce qui a été vendu pour vous pendant cette session, pour racheter quelque chose
+Et voilà : %s, des sacs postaux à vos sacs. Attention à la ficelle.
+Tout est à vous : %s. C'était à peu près le dernier sac.
+Signé, scellé et remis : %s.
+Pas un bout de papier pour vous aujourd'hui. J'ai vérifié deux fois.
+Boîte vide, l'ami. Même les mites ont déménagé.
+Lettres à payer à la livraison : %d. Celles-là, vous les ouvrez vous-même ; je ne paie pas les factures des autres.
+Vos sacs débordent. Le reste attend dans les lettres que vous fassiez de la place.
+%d que je n'ai pas pu vous remettre : objets uniques, ou la boîte n'a pas voulu les lâcher. Toujours dans leurs lettres.
+Maître de poste
 1 objet
 %d objets
-Rien à prendre dans la boîte aux lettres.
-Boîte aux lettres : %s récupéré.
  et 
-Lettres contre remboursement, laissées à ouvrir vous-même : %d
-Vos sacs sont pleins : les autres objets attendent dans leurs lettres.
-Objets que le jeu n’a pas remis (uniques ou refusés), laissés dans leurs lettres : %d
 En attente des suivantes...
-Ouvrez d’abord une boîte aux lettres.
+Trouvez d'abord une boîte aux lettres, ensuite on parlera.
 Récupération...
 Tout prendre
 prend l’argent et les objets de chaque lettre, ventes aux enchères comprises, sur toutes les pages (appuyez à nouveau pour arrêter) ; les lettres contre remboursement ne sont pas touchées
 Tout prendre dans la boîte aux lettres (à nouveau pour arrêter)
+%s et %d de plus
 Tout prendre dans la boîte aux lettres
 un bouton à côté de Tout ouvrir à la boîte aux lettres : prend l’argent et les objets de chaque lettre, ventes aux enchères comprises, sur toutes les pages ; les lettres contre remboursement ne sont pas touchées
+Courrier : objet selon les pièces jointes
+joindre des objets à une lettre en remplit l'objet avec ce qu'ils sont (Étoffe de lin x20, ou le premier et combien d'autres) ; un objet que vous avez tapé vous-même n'est pas touché
 prend l’argent et les objets de chaque lettre de la boîte aux lettres ouverte (à nouveau pour arrêter)
 Sac
 Banque
@@ -144,6 +151,20 @@ mieux que ce que vous portez
 transformé en %s
 %d%% de chances de vente
 Coût
+vieux prix
+sous le plus bas
+au-dessus du plus bas
+sous l'habituel
+au-dessus de l'habituel
+vu plusieurs jours
+un marché animé
+presque rien en vente
+prix en hausse
+prix en baisse
+prix qui sautent
+les tiens se sont déjà vendus ici
+les tiens sont restés invendus
+tenu par le prix du marchand
 Hôtel des ventes
 Monte une compétence: %s
 Quête : %s
@@ -214,17 +235,27 @@ banque
 Votre marque
 Détails de l'objet: tout sur l'objet que vous visez
 affiche tout sur l'objet que vous visez (ou celui indiqué): prix, qui le possède, votre marque
+Ça part à coup sûr (%d%%)
+Ça se vend tout seul (%d%%)
+Je pense que ça se vendra (%d%%)
+Devrait trouver preneur (%d%%)
+Une chance sur deux (%d%%)
+Ça peut aller dans les deux sens (%d%%)
+Un peu un pari (%d%%)
+Pourrait traîner un moment (%d%%)
+Je ne compterais pas dessus (%d%%)
+Mal parti, l'ami (%d%%)
 +%s de plus qu'un marchand
 pas encore de prix connu
 un marchand paie autant
 Le Courtier
 Marché
 chaque pièce comptée, l'ami
-Poster
-Patient
-Lire tous les prix
-Montrer le gardé
 Rien dans vos sacs ne peut être vendu ici.
+Aucun prix ces 7 derniers jours.
+Un jour de prix pour l'instant : une bougie s'ajoute chaque jour où vous passez à l'hôtel des ventes.
+7 jours, une bougie par jour : vert clôturé plus haut, rouge plus bas
+30 jours, le plus bas du jour : vert en hausse, rouge en baisse
 Pas encore d'historique des prix : lisez l'hôtel des ventes quelques jours.
 Un seul jour de prix pour l'instant: la ligne s'allonge chaque jour où vous passez à l'hôtel des ventes.
 Demande %s pièce, %s pour les %d
@@ -236,16 +267,34 @@ En vente : %d enchères, %d objets
 %s pièce, %s pour les %d
 Vous avez mis %d en vente ici, %d enchères vendues
 Aucun prix connu : lisez d'abord l'hôtel des ventes.
-%d valent la vente ici, %d autres possibles
-%d prix connus, tous lus %s
-jamais
-Le meilleur d'abord : le plus gagné sur un marchand pour chacun
-ce que vous gardez est listé aussi (%s le masque)
-%d gardés (pour vos métiers, à porter ou marqués), non listés (%s les montre)
-Masquer le gardé
+Sacs vides, l'ami. Apporte-moi de quoi vendre.
+Rien ici ne bat un marchand aujourd'hui. %d peut-être, avec un peu de patience.
+Pas de profit sûr dans ces sacs, l'ami. %d pourraient payer si tu attends.
+Le meilleur en haut : %d ici battent tout marchand, %d de plus pour les patients.
+%d rapportent plus ici qu'au marchand, le meilleur d'abord. %d de plus si tu attends.
+Le haut de la pile paie le mieux : %d ventes sûres, %d de plus si tu peux attendre.
+Pas encore lu le tableau. %s et je te ramène tous les prix.
+Pas encore de prix, l'ami. %s lit tout le tableau.
+Prix tout frais du tableau, l'ami : %d.
+Je viens de lire le tableau : %d prix, encore chauds.
+%d prix, lus %s. Ça ira, l'ami.
+Dernier coup d'œil au tableau : %s, %d prix.
+Prix relevés %s, rassis comme du vieux pain. %s relit le tableau.
+%d prix, mais lus %s. %s et je regarde à nouveau.
+Ce que tu gardes est aussi sur la liste. %s le range.
+J'affiche aussi ce que tu gardes. %s le cache à nouveau.
+%d mis de côté : matériaux de métier, équipement à porter, ce que tu as marqué. %s les montre.
+%d gardés pour tes métiers, à porter ou marqués par toi. %s si tu les veux.
 pièce
 aucune donnée
 Vente rapide
+Patient
+Lire tous les prix
+Masquer le gardé
+Montrer le gardé
+Ligne
+Bougies
+Poster
 Poster %d pour %s
 Mettre les %d en vente pour %s
 Ce client ne permet pas de poster à l'hôtel des ventes depuis ici.
@@ -257,6 +306,8 @@ Salut du commissaire-priseur au Marché
 un commissaire-priseur gobelin dit une courte phrase, tirée des sons du jeu, à l'ouverture du Marché ; désactivé : il s'ouvre en silence
 Marché : montrer ce que vous gardez
 le Marché liste aussi ce que vous gardez : ce dont vos métiers apprennent encore ou qu'ils transforment en quelque chose de plus cher, et ce que vous avez marqué à garder ; désactivé : seulement ce que vous vendriez
+Marché : graphique des prix en bougies
+le graphique des prix du Marché est une bougie par jour sur les 7 derniers jours (où le prix a ouvert, son plus haut et son plus bas, et où il a clôturé : vert s'il a clôturé plus haut, rouge plus bas) ; désactivé : une ligne du prix le plus bas de chaque jour sur 30 jours
 ouvrir ou fermer le Marché (un onglet de l'hôtel des ventes)
 quel hôtel des ventes a ce client (pour le dépannage)
 Hors ligne

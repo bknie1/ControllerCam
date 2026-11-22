@@ -4,6 +4,8 @@
 
 local ADDON, ns = ...
 local L = ns.L
+local Options = { UNCHOSEN = 0.45 }        -- how faint the buttons not chosen in a row of choices are
+ns.OptionsLook = Options
 
 ---------------------------------------------------------------------------
 -- The settings that already had commands, described here so they get a row too
@@ -249,13 +251,28 @@ local function Row(content, def)
                 RefreshAll()
             end, def.tip and L[def.tip], 88)
             b:SetPoint("TOPLEFT", holder, "TOPLEFT", ((i - 1) % perRow) * 92, -math.floor((i - 1) / perRow) * 28)
+            -- the chosen one: a gold line under it and gold text; the others dimmed (still pressable)
+            b.chosenLine = b:CreateTexture(nil, "OVERLAY")
+            b.chosenLine:SetColorTexture(1, 0.82, 0.2, 1)
+            b.chosenLine:SetHeight(2)
+            b.chosenLine:SetPoint("TOPLEFT", b, "BOTTOMLEFT", 4, -1)
+            b.chosenLine:SetPoint("TOPRIGHT", b, "BOTTOMRIGHT", -4, -1)
+            b.chosenLine:Hide()
             buttons[i] = b
         end
         row.widget, row.label, row.height, row.buttons = holder, label, 32 + (rows - 1) * 28, buttons
         refreshers[#refreshers + 1] = function()
             local v = ns.Get(def)
             for i, b in ipairs(buttons) do
-                if i == v then b:LockHighlight() else b:UnlockHighlight() end
+                local on = i == v
+                if on then b:LockHighlight() else b:UnlockHighlight() end
+                b:SetAlpha(on and 1 or Options.UNCHOSEN)
+                b.chosenLine:SetShown(on)
+                b.chosen = on
+                local fs = b.GetFontString and b:GetFontString()
+                if fs and fs.SetTextColor then
+                    if on then fs:SetTextColor(1, 0.82, 0.2) else fs:SetTextColor(0.75, 0.75, 0.75) end
+                end
             end
         end
     else

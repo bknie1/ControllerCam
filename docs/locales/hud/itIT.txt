@@ -93,22 +93,29 @@ ripara tutto appena si apre un venditore che ripara
 Ripara dalla banca di gilda
 paga le riparazioni con la banca di gilda se la tua gilda lo consente, altrimenti con il tuo oro
 elenca ciò che è stato venduto per te in questa sessione, per riacquistare qualcosa
+Ecco qua: %s, dai sacchi alle tue borse. Occhio allo spago.
+Tutto tuo: %s. Era più o meno l'ultimo sacco.
+Firmato, sigillato e consegnato: %s.
+Oggi neanche un foglietto per te. Ho controllato due volte.
+Cassetta vuota, amico. Persino le tarme se ne sono andate.
+Lettere da pagare alla consegna: %d. Quelle le apri tu; io non pago i conti degli altri.
+Le tue borse scoppiano. Il resto aspetta nelle lettere finché non fai spazio.
+%d non sono riuscito a dartele: oggetti unici, o la cassetta non voleva mollarli. Sono ancora nelle lettere.
+Mastro postale
 1 oggetto
 %d oggetti
-Niente da prendere dalla cassetta postale.
-Cassetta postale: presi %s.
  e 
-Lettere con pagamento alla consegna, lasciate da aprire a te: %d
-Le tue borse sono piene: gli altri oggetti aspettano nelle loro lettere.
-Oggetti che il gioco non ha consegnato (unici o rifiutati), lasciati nelle loro lettere: %d
 In attesa delle altre...
-Apri prima una cassetta postale.
+Prima trova una cassetta delle lettere, poi parliamo.
 Prelievo...
 Prendi tutto
 prende denaro e oggetti da ogni lettera, vendite all’asta comprese, su tutte le pagine (premi di nuovo per fermare); le lettere con pagamento alla consegna restano intatte
 Prendi tutto dalla cassetta postale (di nuovo per fermare)
+%s e altri %d
 Prendi tutto dalla cassetta postale
 un pulsante accanto ad Apri tutto alla cassetta postale: prende denaro e oggetti da ogni lettera, vendite all’asta comprese, su tutte le pagine; le lettere con pagamento alla consegna restano intatte
+Posta: oggetto dagli allegati
+allegare oggetti a una lettera ne compila l'oggetto con ciò che sono (Stoffa di lino x20, o il primo e quanti altri); un oggetto scritto da te resta com'è
 prende denaro e oggetti da ogni lettera della cassetta postale aperta (di nuovo per fermare)
 Borsa
 Banca
@@ -144,6 +151,20 @@ migliore di ciò che indossi
 trasformato in %s
 %d%% di probabilità di vendita
 Costo
+prezzi vecchi
+sotto il più basso
+sopra il più basso
+sotto il solito
+sopra il solito
+visto per più giorni
+un mercato vivace
+quasi niente in vendita
+prezzi in salita
+prezzi in calo
+prezzi che saltano
+i tuoi qui si sono venduti
+i tuoi sono rimasti invenduti
+sostenuto dal prezzo del mercante
 Casa d'aste
 Sale di abilità: %s
 Missione: %s
@@ -214,17 +235,27 @@ banca
 Il tuo segno
 Dettagli oggetto: tutto sull'oggetto che stai puntando
 mostra tutto sull'oggetto che stai puntando (o su quello indicato): prezzi, chi lo possiede, il tuo segno
+Va via di sicuro (%d%%)
+Si vende da solo (%d%%)
+Penso che si venderà (%d%%)
+Dovrebbe trovare un compratore (%d%%)
+Metà e metà (%d%%)
+Può andare in tutti e due i modi (%d%%)
+Un po' un azzardo (%d%%)
+Potrebbe restare lì un po' (%d%%)
+Non ci conterei (%d%%)
+Brutte probabilità, amico (%d%%)
 +%s rispetto a un mercante
 nessun prezzo ancora noto
 un mercante paga altrettanto
 Il Mediatore
 Mercato
 ogni moneta contata, amico
-Metti
-Paziente
-Leggi tutti i prezzi
-Mostra i tenuti
 Nelle tue borse non c'è niente che si possa vendere qui.
+Nessun prezzo negli ultimi 7 giorni.
+Un giorno di prezzi finora: si aggiunge una candela ogni giorno che visiti la casa d'aste.
+7 giorni, una candela al giorno: verde chiusa più in alto, rossa più in basso
+30 giorni, il più basso del giorno: verde su, rosso giù
 Ancora nessuna cronologia dei prezzi: leggi la casa d'aste per qualche giorno.
 Un solo giorno di prezzi finora: la linea cresce ogni giorno in cui visiti la casa d'aste.
 Chiede %s l'uno, %s per tutti i %d
@@ -236,16 +267,34 @@ In vendita: %d aste, %d oggetti
 %s l'uno, %s per tutti i %d
 Hai messo in vendita %d qui, %d aste vendute
 Nessun prezzo noto: leggi prima la casa d'aste.
-%d conviene venderli qui, altri %d potresti
-%d prezzi noti, tutti letti %s
-mai
-Prima il migliore: il guadagno maggiore su un mercante per ciascuno
-anche ciò che tieni è elencato (%s lo nasconde)
-%d tenuti (per le professioni, da indossare o segnati), non elencati (%s li mostra)
-Nascondi i tenuti
+Borse vuote, amico. Portami qualcosa da vendere.
+Oggi niente batte un mercante. %d forse, con un po' di pazienza.
+Nessun guadagno sicuro in queste borse, amico. %d potrebbero rendere se aspetti.
+Il meglio in cima: %d qui battono ogni mercante, %d in più per i pazienti.
+%d rendono più qui che da un mercante, prima il meglio. %d in più se aspetti.
+In cima alla pila si guadagna di più: %d vendite sicure, %d in più se sai aspettare.
+Non ho ancora letto la bacheca. %s e ti porto ogni prezzo.
+Ancora nessun prezzo, amico. %s legge tutta la bacheca.
+Prezzi freschi dalla bacheca, amico: %d.
+Ho appena letto la bacheca: %d prezzi, ancora caldi.
+%d prezzi, letti %s. Basta così, amico.
+Ultima occhiata alla bacheca: %s, %d prezzi.
+Prezzi di %s, raffermi come pane vecchio. %s rilegge la bacheca.
+%d prezzi, ma letti %s. %s e ci do un'altra occhiata.
+Anche ciò che tieni è in lista. %s lo mette via.
+Mostro anche ciò che tieni. %s lo nasconde di nuovo.
+%d messi da parte: roba per le professioni, da indossare, segnata da te. %s li mostra.
+Ne ho tenuti %d per i tuoi mestieri, da indossare o segnati. %s se li vuoi.
 l'uno
 nessun dato
 Vendita rapida
+Paziente
+Leggi tutti i prezzi
+Nascondi i tenuti
+Mostra i tenuti
+Linea
+Candele
+Metti
 Metti %d a %s
 Metti in vendita tutti i %d per %s
 Da qui non si può mettere in vendita alla casa d'aste di questo client.
@@ -257,6 +306,8 @@ Saluto del banditore al Mercato
 un banditore goblin dice una breve battuta, dai suoni del gioco, quando si apre il Mercato; disattivato: si apre in silenzio
 Mercato: mostra ciò che tieni
 il Mercato elenca anche ciò che tieni: ciò da cui le tue professioni imparano ancora o che trasformano in qualcosa di più prezioso, e ciò che hai segnato da tenere; disattivato: solo ciò che venderesti
+Mercato: grafico dei prezzi a candele
+il grafico dei prezzi del Mercato è una candela al giorno per gli ultimi 7 giorni (dove il prezzo ha aperto, il più alto e il più basso, e dove ha chiuso: verde se ha chiuso più in alto, rossa se più in basso); spento: una linea del prezzo più basso di ogni giorno su 30 giorni
 apri o chiudi il Mercato (una scheda della casa d'aste)
 quale casa d'aste ha questo client (per la risoluzione dei problemi)
 Offline

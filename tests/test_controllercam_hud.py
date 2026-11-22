@@ -2296,7 +2296,7 @@ class Vendor(unittest.TestCase):
         e.mock.put(2, 2, T(id=2447, name="Peacebloom", quality=1, price=10, count=5, **{"class": 7, "sub": 9}))
         e.db.auctionReadAt = now                                   # the auction house was read
         e.db.auction[2] = T(p=100, t=now)                          # the sword: a vendor pays more (300)
-        e.db.auction[4] = T(p=150, t=now)                          # linen: 150 each there, 13 at a vendor
+        e.db.auction[4] = T(p=200, t=now)                          # linen: 200 each there, 13 at a vendor
         e.db.auction[2447] = T(p=500, t=now)
         e.db.inventory["Sol-Forever"] = T(bags=T(), bank=T(), money=0, prof=T(alchemy=T(
             name="Alchemy", rank=50, cap=150, at=now, recipes=12, uses=T(**{"2447": 3}))))
@@ -9150,12 +9150,12 @@ class AuctionHouse(unittest.TestCase):
         verdict, more, how = M.Verdict(2589)
         self.assertEqual(verdict, "auction")
         p, deposit = how.chance, 13 * 0.30                            # its chance of selling; the deposit if not
-        self.assertAlmostEqual(p, 0.8)
+        self.assertAlmostEqual(p, 0.7)                                # a fresh price, just under the lowest
         self.assertEqual(more, int(p * 150 * 0.95 + (1 - p) * (13 - deposit) - 13 + 0.5))   # what it can be expected to bring
-        e.db.auction[2589].q = 5000                                   # plenty up: a busy market, as likely
-        self.assertAlmostEqual(M.SellChance(2589), 0.8)
+        e.db.auction[2589].q = 5000                                   # plenty of items up says nothing by itself
+        self.assertAlmostEqual(M.SellChance(2589)[0], 0.7)
         e.db.auction[2589].t = e.g.time() - 5 * 86400                 # a price from days ago: less sure
-        self.assertAlmostEqual(M.SellChance(2589), 0.65)
+        self.assertAlmostEqual(M.SellChance(2589)[0], 0.55)
         e.db.auction[2589].t = e.g.time()
         e.db.auction[2592] = e.lua.table(p=35, t=e.g.time())          # barely more than the vendor gives
         self.assertEqual(M.Verdict(2592), "vendor")
@@ -9167,7 +9167,64 @@ class AuctionHouse(unittest.TestCase):
         lines = [plain(list(l.values())[0]) for l in e.mock.itemTooltip(2589).values()]
         advice = lines[lines.index("Recommendation:"):]               # apart, under the prices:
         self.assertEqual(advice[1], "Auction for +%s" % e.ns.Money(more))     # the keyword, and what it brings more
-        self.assertEqual(advice[2], "80% chance of sale")
+        self.assertEqual(advice[2], "70% chance of sale")
+
+    def odds_env(self):
+        e = self.env()
+        T, now, day = e.lua.table, e.g.time(), e.ns.Market.Today()
+        e.mock.advance(10 * 86400)                                    # (room for prices read days ago)
+        return e, T, e.g.time(), e.ns.Market.Today()
+
+    def test_the_chance_to_sell_tells_items_apart(self):
+        e, T, now, day = self.odds_env()
+        M = e.ns.Market
+        # clearly likely: read now, plenty up, under its usual, seen all week, and yours sold here before
+        e.db.auction[2589] = T(p=150, t=now, n=40, q=800)
+        e.db.auctionHistory[2589] = e.lua.table_from([T(d=day - 7 + i, p=160) for i in range(7)])
+        e.db.ahLedger[2589] = T(posted=80, lots=4, sold=3, t=now - 3 * 86400)
+        p, why = M.SellChance(2589)
+        self.assertGreaterEqual(p, 0.9)
+        said = [w.text for w in why.values()]
+        for text in ("under the lowest", "under the usual", "a busy market", "yours sold here before"):
+            self.assertIn(text, said)
+        # clearly unlikely: read days ago, next to none up, falling, asked well over the lowest, yours came back
+        e.db.auction[2592] = T(p=50, t=now - 5 * 86400, n=1, q=1)
+        e.db.auctionHistory[2592] = e.lua.table_from([T(d=day - 7 + i, p=120) for i in range(6)] + [T(d=day, p=50)])
+        e.db.ahLedger[2592] = T(posted=20, lots=4, sold=0, t=now - 3 * 86400)
+        p, why = M.SellChance(2592)
+        self.assertLessEqual(p, 0.2)
+        said = [w.text for w in why.values()]
+        for text in ("over the lowest", "old prices", "hardly any up", "prices falling", "yours went unsold before"):
+            self.assertIn(text, said)
+        self.assertEqual(abs(list(why.values())[0].d), max(abs(w.d) for w in why.values()))   # biggest first
+        # in between, and never more exact than 5%
+        e.db.auction[2770] = T(p=40, t=now - 2 * 86400, n=12)
+        seen = set()
+        for id in (2589, 2592, 2770):
+            for ask in (20, 39, 45, 60, 149, 200):
+                q = M.SellChance(id, ask)[0]
+                self.assertAlmostEqual(q * 20, round(q * 20))
+                self.assertTrue(0.05 <= q <= 0.95)
+                seen.add(q)
+        self.assertGreaterEqual(len(seen), 6)                         # spread across the range, not one number
+        self.assertGreater(M.SellChance(2770, 30)[0], M.SellChance(2770, 60)[0])   # asking less: likelier
+        self.assertEqual(e.errors(), [])
+
+    def test_the_brokers_word_on_the_chance(self):
+        e = self.env()
+        AP = e.ns.AuctionPanel
+        AP.voice = 0
+        bands = {0.95: ("Sure to go", "That one sells itself"), 0.75: ("I think it'll sell", "Should find a buyer"),
+                 0.55: ("Even odds", "Could go either way"), 0.4: ("A bit of a gamble", "Might sit a while"),
+                 0.15: ("I wouldn't hold my breath", "Long odds, friend")}
+        for p, words in bands.items():
+            for id in (0, 1):
+                said = AP.Odds(p, id)
+                self.assertIn(said.split(" (")[0], words)
+                self.assertTrue(said.endswith("(%d%%)" % round(p * 100)), said)
+        self.assertNotEqual(AP.Odds(0.75, 0), AP.Odds(0.75, 1))      # neighbours need not say it the same way
+        self.assertIsNone(AP.Odds(None))
+        self.assertEqual(e.errors(), [])
 
 
 class MarketPanel(unittest.TestCase):
@@ -9256,7 +9313,9 @@ class MarketPanel(unittest.TestCase):
         self.assertIn("few are up", plain(rows[1].why.text))
         self.assertFalse(rows[2].mark.shown)
         self.assertIn("a vendor pays as much", plain(rows[2].why.text))
-        self.assertIn("2 worth selling here, 1 more", plain(P.view.status.text))
+        status = plain(P.view.status.text)                           # the Broker says it, one way or another
+        self.assertTrue(any(x in status for x in ("on top: 2 here", "2 pay better", "2 sure sales")), status)
+        self.assertIn("1 more", status)
         self.assertIn("Auction house", plain(P.panel.best.text))
         self.assertIn("many are up", P.panel.why.text)
 
@@ -9278,7 +9337,7 @@ class MarketPanel(unittest.TestCase):
         self.assertEqual(P.index, 1)                                 # it stops at the ends
         self.assertTrue(P.Pad(P, "PAD3"))
         self.assertTrue(e.db.ahStrategy)                             # X: quick sale
-        self.assertEqual(plain(P.view.strategy.text), "Quick sale")
+        self.assertEqual(plain(P.view.strategy.label.text), "Quick sale")
         P.Pad(P, "PAD3")
         self.assertTrue(P.Pad(P, "PAD4"))
         self.assertEqual(e.db.ahDuration, 3)                         # Y: how long
@@ -9431,7 +9490,7 @@ class MarketPanel(unittest.TestCase):
         P = self.house(e)
         e.g.ControllerCamHUD_Market()
         P.Choose(P, 2)                                                # Linen Cloth
-        self.assertIn("Post all 20 for", plain(P.view.post.text))
+        self.assertIn("Post all 20 for", plain(P.view.post.label.text))
         self.assertTrue(P.Post(P))
         posted = list(e.g.POSTED.values())
         self.assertEqual(posted[1], 149 * 20)                         # the buyout for the stack
@@ -9471,13 +9530,13 @@ class MarketPanel(unittest.TestCase):
         e.g.ControllerCamHUD_Market()
         self.linen(e, P)
         self.assertEqual(P.chosen.count, 25)                          # both stacks, one row
-        self.assertIn("Post all 25 for", plain(P.view.post.text))
+        self.assertIn("Post all 25 for", plain(P.view.post.label.text))
         self.assertTrue(P.Post(P))
         self.assertEqual(list(e.g.POSTED.values()), [int(149 * 5 * 0.9), 149 * 5, 2, 5, 5])   # 5 auctions of 5
         self.assertEqual(e.db.ahLedger[2589].posted, 25)
         e.mock.bags[0][3].count = 3                                   # 23: no even split worth making,
         e.mock.fire("BAG_UPDATE_DELAYED")
-        self.assertIn("Post 20 for", plain(P.view.post.text))         # a full stack now, the 3 next
+        self.assertIn("Post 20 for", plain(P.view.post.label.text))         # a full stack now, the 3 next
         self.assertEqual(list(P.Plan(P.chosen)), [20, 1, 3])
         e.mock.bags[0][3].count = 20                                  # 40: two full stacks
         e.mock.fire("BAG_UPDATE_DELAYED")
@@ -9501,7 +9560,7 @@ class MarketPanel(unittest.TestCase):
         P = self.house(e)
         e.g.ControllerCamHUD_Market()
         self.linen(e, P)
-        self.assertIn("Post all 25 for", plain(P.view.post.text))
+        self.assertIn("Post all 25 for", plain(P.view.post.label.text))
         self.assertTrue(P.Post(P))
         self.assertEqual(list(e.g.POSTED.values()), ["commodity", 2, 25, 149])   # every one, priced each
         e.g.COMMODITY = 1
@@ -9520,7 +9579,7 @@ class MarketPanel(unittest.TestCase):
         e.mock.fire("BAG_UPDATE_DELAYED")
         self.assertEqual([x.id for x in P.list.values()], before)     # the order goes by each one, not how many
         self.assertEqual((P.index, P.chosen.id), (at, 2589))
-        self.assertIn("for each one", plain(P.view.order.text))       # and says so
+        self.assertIn("best", plain(P.view.status.text).lower())     # and says so
         e.mock.bags[0][1] = None                                      # all of it up: the next takes its place
         e.mock.fire("BAG_UPDATE_DELAYED")
         self.assertEqual(P.index, at)
@@ -9561,9 +9620,10 @@ class MarketPanel(unittest.TestCase):
         P = self.house(e)
         e.g.ControllerCamHUD_Market()
         v = P.view
-        self.assertIn("for each one", plain(v.order.text))            # the order and what is left out: a line each,
+        self.assertIn("best", plain(v.status.text).lower())           # the order, the prices, what is left out: a line each
+        self.assertIn("board", plain(v.order.text))
         self.assertNotIn("kept", plain(v.order.text))
-        self.assertIn("1 kept", plain(v.keptNote.text))
+        self.assertRegex(plain(v.keptNote.text), r"1 kept back|Set 1 aside")
         for fs in (v.status, v.order, v.keptNote):                    # each as wide as the Market, never past it
             self.assertGreater(fs.width, 0)
             self.assertFalse(fs.wordWrap)
@@ -9589,13 +9649,155 @@ class MarketPanel(unittest.TestCase):
         self.assertGreater(h, 96 + 30)
         self.assertEqual(e.errors(), [])
 
+    def test_the_actions_are_one_row_with_the_pads_letters(self):
+        e = self.env()
+        e.db.sell.keep[2592] = True
+        P = self.house(e)
+        e.g.ControllerCamHUD_Market()
+        v = P.view
+        chips = list(v.chips.values())
+        self.assertEqual([c.letter.text for c in chips], ["A", "X", "Y", "LB", "RB", "R3", "B"])   # each action once
+        self.assertEqual([plain(c.label.text) for c in chips][1:],
+                         ["Patient", "24h", "Read all prices", "Show kept", "Candles", "Back"])
+        self.assertTrue(all(c.disc.shown for c in chips))           # a white letter on a black disc
+        self.assertIsNone(v.hint)                                    # no second row of hints
+        xs = [c.points[1][4] for c in chips]
+        self.assertEqual(xs, sorted(xs))                             # side by side, in that order
+        self.assertLessEqual(v.bar.width * v.bar.k, 800)             # and inside the Market
+        for key in ("PADLSHOULDER", "PADRSTICK"):
+            self.assertEqual(e.mock.overrides[key], "CLICK ControllerCamHUD_Key_Market_%s:LeftButton" % key)
+        e.db.padIcons = "switch"                                     # a Switch pad's letters
+        P.Refresh(P)
+        self.assertEqual([c.letter.text for c in chips], ["B", "Y", "X", "L", "R", "R3", "A"])
+        self.assertRegex(plain(v.keptNote.text), r"\bR (shows them|if you want them)")   # and the notes name it so
+        e.db.padIcons = "playstation"                                # shapes: the game's own icons
+        P.Refresh(P)
+        self.assertEqual(chips[0].letter.text, "PAD1")
+        self.assertFalse(chips[0].disc.shown)
+        e.db.padIcons = "auto"
+        P.Refresh(P)
+        rstick = e.g.ControllerCamHUD_Key_Market_PADRSTICK
+        rstick.scripts.OnClick(rstick)                               # R3: the other chart
+        self.assertTrue(e.db.ahCandles)
+        self.assertEqual(plain(v.chartKind.label.text), "Line")
+        self.linen(e, P)
+        v.post.on = False                                            # a chip that cannot now does nothing
+        v.post.scripts.OnClick(v.post)
+        self.assertIsNone(P.posted)
+        v.leave.scripts.OnClick(v.leave)                             # the Back chip leaves the Market
+        self.assertFalse(v.shown)
+        self.assertEqual(e.errors(), [])
+
+    def history(self, e, id, days):
+        T, today = e.lua.table, e.ns.Market.Today()
+        e.db.auctionHistory[id] = e.lua.table_from([T(d=today - len(days) + 1 + i, **d) for i, d in enumerate(days)])
+
+    def test_the_line_goes_green_up_and_red_down(self):
+        e = self.env()
+        self.history(e, 2589, [dict(p=120), dict(p=130), dict(p=110), dict(p=110)])
+        P = self.house(e)
+        e.g.ControllerCamHUD_Market()
+        self.linen(e, P)
+        chart = P.panel.chart
+        ways = [chart.lines[i].way for i in range(1, 4)]
+        self.assertEqual(ways, ["up", "down", "flat"])               # each day's piece by where it went
+        self.assertTrue(all(chart.lines[i].shown for i in range(1, 4)))
+        self.assertIn("green up, red down", plain(P.panel.caption.text))
+        self.assertEqual(e.errors(), [])
+
+    def test_candles_a_day_for_a_week(self):
+        e = self.env()
+        self.history(e, 2589, [dict(p=90), dict(p=100, o=110, x=130, c=105), dict(p=105, o=105, x=140, c=135),
+                               dict(p=120)])                         # today: kept before candles, its lowest alone
+        M = e.ns.Market
+        c = list(M.Candles(2589, 7).values())
+        self.assertEqual((c[1].o, c[1].h, c[1].l, c[1].c), (110, 130, 100, 105))
+        self.assertEqual((c[3].o, c[3].c), (135, 120))               # opens where yesterday closed
+        e.db.ahCandles = True
+        P = self.house(e)
+        e.g.ControllerCamHUD_Market()
+        self.linen(e, P)
+        chart = P.panel.chart
+        shown = [k for k in chart.candles.values() if k.body.shown]
+        self.assertEqual([k.way for k in shown], ["flat", "down", "up", "down"])
+        self.assertFalse(any(l and l.shown for l in (chart.lines or e.lua.table()).values()))
+        self.assertIn("a candle a day", plain(P.panel.caption.text))
+        tall = {k.way: k.body.height for k in shown}
+        self.assertGreater(tall["up"], tall["down"])                 # 105 to 135 is a longer body than 110 to 105
+        self.assertTrue(chart.usual.shown)
+        P.ChartKind(P)                                               # and back to the line
+        self.assertFalse(any(k.body.shown for k in chart.candles.values()))
+        self.assertEqual(e.errors(), [])
+
+    def test_a_days_candle_is_kept_as_prices_are_read(self):
+        e = self.env()
+        M = e.ns.Market
+        for price in (200, 150, 260, 230):
+            M.Note(9999, price)
+        last = list(M.History(9999).values())[-1]
+        self.assertEqual((last.p, last.o, last.x, last.c), (150, 200, 260, 230))
+        self.assertEqual(e.errors(), [])
+
+    def test_the_broker_says_it_in_his_own_words(self):
+        e = self.env()
+        e.db.sell.keep[2592] = True
+        P = self.house(e)
+        e.g.ControllerCamHUD_Market()
+        self.assertTrue(0 <= P.voice <= 59)                          # a way of saying it, picked on opening
+        v = P.view
+        seen = len(list(e.db.auction.keys()))
+
+        def say(voice, age=None):                                    # read the house `age` seconds back
+            P.voice = voice
+            if age is not None:
+                e.db.auctionReadAt = e.g.time()
+                e.mock.advance(age)
+            P.Refresh(P)
+            return plain(v.status.text), plain(v.order.text), plain(v.keptNote.text)
+
+        e.db.auctionReadAt = 0
+        sales, board, kept = say(0)
+        self.assertEqual(sales, "Best on top: 1 here beat any vendor, 1 more for the patient.")
+        self.assertEqual(board, "Haven't read the board yet. LB and I'll fetch every price.")
+        self.assertEqual(kept, "1 kept back: trade goods, gear to wear, things you marked. RB shows them.")
+        self.assertEqual(len({say(i)[0] for i in range(3)}), 3)      # it does not say it the same way each visit
+        self.assertEqual(say(0, 60)[1], "Prices fresh off the board, friend: %d of them." % seen)
+        self.assertEqual(say(0, 3 * 3600)[1], "Last look at the board was 3 hours ago: %d prices." % seen)
+        self.assertEqual(say(1, 2 * 86400)[1], "Prices from 2 days ago, stale as old bread. LB reads the board again.")
+        self.assertEqual(say(0)[1], "%d prices, but I read them 2 days ago. LB and I'll look again." % seen)
+        for line in say(0):
+            self.assertNotIn("prices known", line)
+            self.assertLess(len(line), 90)                           # short enough for the header
+        self.assertEqual(plain(P.Sales(0, 0, 0)), "Empty bags, friend. Bring me something to sell.")
+        self.assertIn("3 might", plain(P.Sales(0, 3, 3)))
+        P.voice = 7
+        P.Refresh(P)
+        first = plain(v.status.text)
+        e.g.ControllerCamHUD_Key_Market_PADDDOWN.scripts.OnClick()  # the words stay put while you choose
+        self.assertEqual(plain(v.status.text), first)
+        self.assertEqual(e.errors(), [])
+
+    def test_each_row_says_its_chance_after_why(self):
+        e = self.env()
+        P = self.house(e)
+        e.g.ControllerCamHUD_Market()
+        self.linen(e, P)
+        row = [r for r in P.rows.values() if r.shown and r.entry and r.entry.id == 2589][0]
+        why = plain(row.why.text)
+        chance = P.chosen.chance
+        self.assertRegex(why, r"are up[^(]*  [A-Z][^(]+ \(%d%%\)$" % round(chance * 100))   # after the reason, in his words
+        facts = plain(P.panel.facts.text)
+        self.assertIn("(%d%%)" % round(chance * 100), facts)          # and in the pane, with what moved it
+        self.assertRegex(facts, r"[+-] (under|over) the (lowest|usual)")
+        self.assertEqual(e.errors(), [])
+
     def test_one_item_is_posted_not_all_of_one(self):
         e = self.env()
         e.mock.bags[0][1].count = 1                                   # one Linen Cloth
         P = self.house(e)
         e.g.ControllerCamHUD_Market()
         self.linen(e, P)
-        self.assertTrue(plain(P.view.post.text).startswith("Post 1 for"))
+        self.assertTrue(plain(P.view.post.label.text).startswith("Post 1 for"))
         self.assertEqual(e.errors(), [])
 
     def test_the_broker_greets_you_with_the_games_own_line(self):
@@ -9636,14 +9838,14 @@ class MarketPanel(unittest.TestCase):
         e.g.ControllerCamHUD_Market()
         self.assertNotIn(2592, [x.id for x in P.list.values()])
         self.assertEqual(P.hidden, 1)
-        self.assertIn("1 kept (for your professions, to wear, or marked), not listed", plain(P.view.keptNote.text))
+        self.assertRegex(plain(P.view.keptNote.text), r"^(1 kept back: trade goods|Set 1 aside for your crafts)")
         self.assertEqual(e.mock.overrides.PADRSHOULDER, "CLICK ControllerCamHUD_Key_Market_PADRSHOULDER:LeftButton")
         rb = e.g.ControllerCamHUD_Key_Market_PADRSHOULDER
         rb.scripts.OnClick(rb)                                        # RB: show it too
         self.assertTrue(e.db.ahShowKept)
         self.assertIn(2592, [x.id for x in P.list.values()])
-        self.assertEqual(plain(P.view.kept.text), "Hide kept")
-        self.assertIn("is listed too", plain(P.view.keptNote.text))
+        self.assertEqual(plain(P.view.kept.label.text), "Hide kept")
+        self.assertRegex(plain(P.view.keptNote.text), r"on the list too|what you keep as well")
         P.view.kept.scripts.OnClick(P.view.kept)                      # the button does the same
         self.assertFalse(e.db.ahShowKept)
         self.assertNotIn(2592, [x.id for x in P.list.values()])
@@ -11022,6 +11224,10 @@ class FarmList(unittest.TestCase):
         self.assertEqual(row.page, "Quests, chat and map")
         row.buttons[2].scripts.OnClick()
         self.assertEqual(e.db.farmSide, 2)
+        self.assertTrue(row.buttons[2].chosen)                       # the chosen one stands out,
+        self.assertEqual(row.buttons[2].alpha, 1)
+        self.assertFalse(row.buttons[1].chosen)                      # the others are dimmed
+        self.assertLess(row.buttons[1].alpha, 1)
         self.assertEqual(e.errors(), [])
 
     def test_only_in_the_gamepad_ui_and_gone_when_off(self):
@@ -11061,6 +11267,39 @@ class FarmList(unittest.TestCase):
 def said(e, since):
     """What was printed to chat since `since` (a count of earlier prints), without colour codes."""
     return [plain(t) for t in list(e.mock.printed.values())[since:]]
+
+
+class MailSubject(unittest.TestCase):
+    """What you attach to a letter names it, unless you named it yourself."""
+
+    def test_the_subject_follows_what_you_attach(self):
+        e = Env()
+        e.lua.execute("""
+            SENDING = {}
+            function GetSendMailItem(i) local a = SENDING[i]; if a then return a[1], 1, 0, a[2] end end
+            SendMailSubjectEditBox = CreateFrame("EditBox", "SendMailSubjectEditBox", UIParent)
+            SendMailSubjectEditBox.text = ""
+        """)
+        g = e.lua.globals()
+        box = g.SendMailSubjectEditBox
+        def attach(*items):
+            for i in range(1, 13):
+                g.SENDING[i] = None
+            for i, (name, n) in enumerate(items, 1):
+                g.SENDING[i] = e.lua.table(name, n)
+            e.mock.fire("MAIL_SEND_INFO_UPDATE")
+        attach(("Linen Cloth", 20))
+        self.assertEqual(box.text, "Linen Cloth x20")
+        attach(("Linen Cloth", 20), ("Wool Cloth", 5))
+        self.assertEqual(box.text, "Linen Cloth x20, Wool Cloth x5")
+        attach(("Linen Cloth", 20), ("Wool Cloth", 5), ("Silk Cloth", 1), ("Linen Cloth", 20))
+        self.assertEqual(box.text, "Linen Cloth x40 and 2 more")
+        attach()
+        self.assertEqual(box.text, "")                                # taken off again: cleared
+        box.text = "for the guild bank"                              # yours
+        attach(("Copper Ore", 10))
+        self.assertEqual(box.text, "for the guild bank")
+        self.assertEqual(e.errors(), [])
 
 
 class MailTakeAll(unittest.TestCase):
@@ -11136,9 +11375,10 @@ class MailTakeAll(unittest.TestCase):
         names = [e.g.MAIL[i].subject for i in range(1, len(e.g.MAIL) + 1)]
         self.assertEqual(names, ["mats", "pay me"])                   # C.O.D. never opened
         out = " ".join(said(e, since))
-        self.assertIn("took 71s and 1 item", out)
-        self.assertIn("payment on delivery, left for you to open: 1", out)
-        self.assertIn("left in their letters: 1", out)
+        self.assertIn("[Postmaster]", out)
+        self.assertIn(" 71s and 1 item", out)                       # in his own words, whichever he picks
+        self.assertIn("Letters wanting coin on delivery: 1", out)
+        self.assertIn("1 I couldn't pass you", out)
         self.assertEqual(e.errors(), [])
 
     def test_full_bags_still_take_the_money_and_pressing_again_stops(self):
@@ -11150,7 +11390,7 @@ class MailTakeAll(unittest.TestCase):
         e.update(20)
         self.assertEqual(e.mock.money - money0, 7100)
         self.assertEqual(len(e.g.TAKEN), 0)
-        self.assertIn("Your bags are full", " ".join(said(e, since)))
+        self.assertIn("Your bags are bursting", " ".join(said(e, since)))
         e2 = self.env()
         e2.mock.fire("MAIL_SHOW")
         M2 = e2.ns.Mail
@@ -11158,7 +11398,7 @@ class MailTakeAll(unittest.TestCase):
         self.assertFalse(M2.Start(M2))                                # again: stops
         self.assertIsNone(M2.run)
         e2.mock.fire("MAIL_CLOSED")
-        self.assertIn("Open a mailbox first", e2.cmd("mail"))
+        self.assertIn("Find a mailbox first", e2.cmd("mail"))
         self.assertIsNotNone(e2.g.BINDING_NAME_CCHUD_TAKEMAIL)
         self.assertEqual(e.errors() + e2.errors(), [])
 

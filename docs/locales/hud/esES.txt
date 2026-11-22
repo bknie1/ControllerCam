@@ -93,22 +93,29 @@ repara todo en cuanto se abre un vendedor que repara
 Reparar desde el banco de hermandad
 paga las reparaciones con el banco de hermandad si tu hermandad lo permite, y con tu propio oro si no
 muestra lo que se vendió por ti en esta sesión, para recomprar algo
+Aquí tienes: %s, de los sacos a tus bolsas. Cuidado con el cordel.
+Todo tuyo: %s. Ese era casi el último saco.
+Firmado, sellado y entregado: %s.
+Hoy no hay ni un papelito para ti. Lo he mirado dos veces.
+Buzón vacío, amigo. Hasta las polillas se han mudado.
+Cartas que piden pago contra reembolso: %d. Esas las abres tú; yo no pago las facturas de otros.
+Tus bolsas revientan. El resto espera en las cartas hasta que hagas sitio.
+%d no pude dártelos: únicos, o el buzón no quiso soltarlos. Siguen en sus cartas.
+Jefe de correos
 1 objeto
 %d objetos
-No hay nada que recoger del buzón.
-Buzón: recogido %s.
  y 
-Cartas con pago contra reembolso, dejadas para que las abras tú: %d
-Tus bolsas están llenas: los demás objetos esperan en sus cartas.
-Objetos que el juego no entregó (únicos o rechazados), dejados en sus cartas: %d
 Esperando más...
-Abre primero un buzón.
+Busca primero un buzón y luego hablamos.
 Recogiendo...
 Recogerlo todo
 recoge el dinero y los objetos de cada carta, ventas de subasta incluidas, en todas las páginas (pulsa otra vez para parar); las cartas con pago contra reembolso no se tocan
 Recoger todo del buzón (pulsa otra vez para parar)
+%s y %d más
 Recoger todo del buzón
 un botón junto a Abrir todo en el buzón: recoge el dinero y los objetos de cada carta, ventas de subasta incluidas, en todas las páginas; las cartas con pago contra reembolso no se tocan
+Correo: asunto según lo adjunto
+adjuntar objetos a una carta rellena su asunto con lo que son (Paño de lino x20, o el primero y cuántos más); un asunto que hayas escrito tú no se toca
 recoge el dinero y los objetos de cada carta del buzón abierto (otra vez para parar)
 Bolsa
 Banco
@@ -144,6 +151,20 @@ mejor que lo que llevas
 convertido en %s
 %d%% de probabilidad de venta
 Coste
+precios viejos
+por debajo del mínimo
+por encima del mínimo
+por debajo de lo habitual
+por encima de lo habitual
+visto varios días
+un mercado animado
+casi nada a la venta
+precios al alza
+precios a la baja
+precios que saltan
+los tuyos ya se vendieron aquí
+los tuyos no se vendieron
+sostenido por el precio del vendedor
 Casa de subastas
 Sube habilidad: %s
 Misión: %s
@@ -214,17 +235,27 @@ banco
 Tu marca
 Detalles del objeto: todo sobre el objeto al que apuntas
 muestra todo sobre el objeto al que apuntas (o el indicado): precios, quién lo tiene, tu marca
+Se va seguro (%d%%)
+Eso se vende solo (%d%%)
+Creo que se venderá (%d%%)
+Debería encontrar comprador (%d%%)
+Mitad y mitad (%d%%)
+Puede salir de cualquier manera (%d%%)
+Es un poco de apuesta (%d%%)
+Puede que tarde un rato (%d%%)
+Yo no contaría con ello (%d%%)
+Lo veo difícil, amigo (%d%%)
 +%s más que un vendedor
 aún no se conoce el precio
 un vendedor paga lo mismo
 El Corredor
 Mercado
 cada moneda contada, amigo
-Publicar
-Paciente
-Leer todos los precios
-Mostrar lo guardado
 No hay nada en tus bolsas que se pueda vender aquí.
+Sin precios en los últimos 7 días.
+Un día de precios hasta ahora: cada día que visites la casa de subastas se añade una vela.
+7 días, una vela por día: verde cerró más alto, rojo más bajo
+30 días, el más bajo del día: verde sube, rojo baja
 Aún no hay historial de precios: lee la casa de subastas durante unos días.
 Solo un día de precios: la línea crece cada día que visitas la casa de subastas.
 Pide %s cada uno, %s por los %d
@@ -236,16 +267,34 @@ En venta: %d subastas, %d objetos
 %s cada uno, %s por los %d
 Pusiste %d aquí, %d subastas vendidas
 No se conoce ningún precio: lee primero la casa de subastas.
-%d merecen venderse aquí, %d más podrías
-%d precios conocidos, todos leídos %s
-nunca
-Lo mejor primero: lo que más gana sobre un vendedor por unidad
-lo que guardas también aparece (%s lo oculta)
-%d guardados (para tus profesiones, para llevar o marcados), no listados (%s los muestra)
-Ocultar lo guardado
+Bolsas vacías, amigo. Tráeme algo que vender.
+Hoy nada supera al vendedor. %d quizá, con un poco de paciencia.
+Nada de ganancia segura en estas bolsas, amigo. %d pagarían si esperas.
+Lo mejor arriba: %d aquí superan a cualquier vendedor, %d más para los pacientes.
+%d pagan más aquí que en un vendedor, lo mejor primero. %d más si esperas.
+Lo de arriba paga más: %d ventas seguras, %d más si puedes esperar.
+Aún no he leído el tablón. %s y te traigo todos los precios.
+Sin precios todavía, amigo. %s lee el tablón entero.
+Precios recién sacados del tablón, amigo: %d.
+Acabo de leer el tablón: %d precios, aún calientes.
+%d precios, leídos %s. Suficiente, amigo.
+Última mirada al tablón: %s, %d precios.
+Precios de %s, más duros que pan viejo. %s vuelve a leer el tablón.
+%d precios, pero los leí %s. %s y vuelvo a mirar.
+Lo que guardas también está en la lista. %s lo aparta.
+También muestro lo que guardas. %s lo vuelve a ocultar.
+%d apartados: material de oficio, equipo para llevar, lo que marcaste. %s los muestra.
+Aparté %d: para tus oficios, para vestir y los que marcaste. %s si los quieres.
 cada uno
 sin datos
 Venta rápida
+Paciente
+Leer todos los precios
+Ocultar lo guardado
+Mostrar lo guardado
+Línea
+Velas
+Publicar
 Publicar %d por %s
 Poner los %d por %s
 Este cliente no permite publicar en la casa de subastas desde aquí.
@@ -257,6 +306,8 @@ Saludo del subastador en el Mercado
 un subastador goblin dice una frase corta, de los sonidos del propio juego, cuando abre el Mercado; desactivado: se abre en silencio
 Mercado: mostrar lo que guardas
 el Mercado también lista lo que guardas: de lo que tus profesiones aún aprenden o convierten en algo que vale más, y lo que marcaste para guardar; desactivado: solo lo que venderías
+Mercado: gráfico de precios en velas
+el gráfico de precios del Mercado es una vela por día durante los últimos 7 días (dónde abrió el precio, su máximo y su mínimo, y dónde cerró: verde si cerró más alto, rojo si más bajo); desactivado: una línea del precio más bajo de cada día durante 30 días
 abrir o cerrar el Mercado (una pestaña de la casa de subastas)
 qué casa de subastas tiene este cliente (para solucionar problemas)
 Desconectado

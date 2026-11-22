@@ -38,9 +38,15 @@ ns.RegisterSetting({
     label = "Market: show what you keep",
     tip = "the Market lists what you keep too: what your professions still learn from or make into something worth more, and what you marked to keep; off: only what you would sell",
 })
+ns.RegisterSetting({
+    key = "ahCandles", kind = "boolean", default = false, command = "ahcandles", section = "Bags, bank and vendor",
+    label = "Market: price chart as candles",
+    tip = "the Market's price chart is a candle a day for the last 7 days (where the price opened, went highest and lowest, and closed: green when it closed higher, red lower); off: a line of the day's lowest price over 30 days",
+})
 ns.RegisterSaved("ahDuration", function(old) local d = tonumber(old); return (d == 1 or d == 2 or d == 3) and d or 2 end)
 ns.RegisterSaved("auctionReadAt", function(old) return tonumber(old) or 0 end)
--- What you posted here and what of it sold: [itemID] = { posted = items, sold = auctions, name = its name }
+-- What you posted here and what of it sold: [itemID] = { posted = items, lots = auctions, sold = auctions,
+-- name = its name }
 local MAX_LEDGER = 2000
 ns.RegisterSaved("ahLedger", function(old)
     local out, n = {}, 0
@@ -48,7 +54,7 @@ ns.RegisterSaved("ahLedger", function(old)
     for id, rec in pairs(old) do
         if n >= MAX_LEDGER then break end
         if type(id) == "number" and type(rec) == "table" then
-            out[id] = { posted = tonumber(rec.posted) or 0, sold = tonumber(rec.sold) or 0,
+            out[id] = { posted = tonumber(rec.posted) or 0, sold = tonumber(rec.sold) or 0, lots = tonumber(rec.lots),
                         name = type(rec.name) == "string" and rec.name or nil, t = tonumber(rec.t) or 0 }
             n = n + 1
         end
@@ -57,13 +63,16 @@ ns.RegisterSaved("ahLedger", function(old)
 end)
 
 local PANE_W, PANE_H = 320, 360
-local ROW, FOOT, MAX_ROWS = 38, 56, 10
+local ROW, FOOT, MAX_ROWS = 38, 46, 10
 local TOP = 70                                          -- where the rows begin (Layout makes it fit the header)
 local GREY, GREEN, GOLD = "|cff9aa3b5", "|cff6fe06a", "|cffffd25a"
 local DURATIONS = { "12h", "24h", "48h" }
 -- the Broker's colours: a goblin's counter, dark green felt under brass
 local FELT, BRASS = { 0.035, 0.06, 0.04 }, { 0.86, 0.69, 0.28 }
-AP.KEYS = { "PADDUP", "PADDDOWN", "PADDLEFT", "PADDRIGHT", "PAD1", "PAD2", "PAD3", "PAD4", "PADRSHOULDER" }   -- while up
+AP.KEYS = { "PADDUP", "PADDDOWN", "PADDLEFT", "PADDRIGHT", "PAD1", "PAD2", "PAD3", "PAD4", "PADLSHOULDER",
+            "PADRSHOULDER", "PADRSTICK" }                                                  -- while up
+-- The colours of a price going up, down or nowhere
+local UP, DOWN, FLAT = { 0.36, 0.84, 0.42 }, { 0.92, 0.32, 0.28 }, { 0.66, 0.7, 0.78 }
 -- The greeting: the game's own goblin NPC greetings (sound kits, each a few short lines the game picks from):
 -- GoblinMaleGruffNPCGreetings, then GoblinMaleZanyNPCGreetings for a client without the first
 AP.VOICE = { 5958, 5964 }
@@ -106,6 +115,7 @@ function AP.Sellable(showKept)
     local shown, hidden = {}, 0
     for _, e in ipairs(list) do
         e.price, e.why = M.Suggest(e.id)
+        if e.price then e.chance, e.odds = M.SellChance(e.id, e.price) end   -- at the price we would ask
         e.value = (e.price or 0) * e.count
         e.trend = M.Trend(e.id)
         local verdict, more, want = M.Verdict(e.id)
@@ -172,9 +182,25 @@ end
 AP.TrendText = TrendText
 
 -- One line on why (or why not) to sell it here
+-- The Broker's word on the chance to sell, by how likely it is, the share after it: "Even odds (55%)". Two ways
+-- of saying each, so the rows do not all say the same.
+function AP.Odds(p, id)
+    if not p then return nil end
+    local list
+    if p >= 0.9 then list = { L["Sure to go (%d%%)"], L["That one sells itself (%d%%)"] }
+    elseif p >= 0.7 then list = { L["I think it'll sell (%d%%)"], L["Should find a buyer (%d%%)"] }
+    elseif p >= 0.5 then list = { L["Even odds (%d%%)"], L["Could go either way (%d%%)"] }
+    elseif p >= 0.3 then list = { L["A bit of a gamble (%d%%)"], L["Might sit a while (%d%%)"] }
+    else list = { L["I wouldn't hold my breath (%d%%)"], L["Long odds, friend (%d%%)"] } end
+    return list[((AP.voice or 0) + (id or 0)) % #list + 1]:format(math.floor(p * 100 + 0.5))
+end
+
+local SAYS = "|cffe8dcb8"                                      -- the Broker's remarks: warm parchment
 function AP.Reason(e)
     if e.worth then
+        local odds = AP.Odds(e.chance, e.id)
         return GREEN .. L["+%s over a vendor"]:format(ns.MoneyColored(e.more or 0)) .. "|r" .. GREY .. "  " .. (e.why or "") .. "|r"
+            .. (odds and ("  " .. SAYS .. odds .. "|r") or "")
     end
     if not e.price then return GREY .. L["no price known yet"] .. "|r" end
     if e.verdict == "keep" then return GREY .. ns.Market.WORDS.keep .. "|r" end
@@ -190,18 +216,16 @@ local function KeyName(key)
     return (type(text) == "string" and text ~= "") and text or key
 end
 
+local function Letter(key) return ns.PadIcons and ns.PadIcons.Letter and ns.PadIcons.Letter(key) or nil end
+local function KeyText(key)
+    local letter = Letter(key)
+    return letter and ("|cffffffff" .. letter .. "|r") or KeyName(key)
+end
+
 ---------------------------------------------------------------------------
 -- Building
 ---------------------------------------------------------------------------
 local function HouseFrame() return _G.AuctionHouseFrame or _G.AuctionFrame end
-
-local function Button(parent, text, w, onClick)
-    local b = CreateFrame("Button", nil, parent, "UIPanelButtonTemplate")
-    b:SetSize(w, 22)
-    b:SetText(text)
-    b:SetScript("OnClick", ns.Protect(onClick))
-    return b
-end
 
 -- A brass rule along the top and the bottom, and a fainter one below the top (a counter's edge)
 local function Edge(frame)
@@ -232,6 +256,7 @@ local function OneLine(fs) if fs.SetWordWrap then fs:SetWordWrap(false) end end
 -- The header's lines as wide as the Market (cut short rather than running out of it), and the rows under
 -- them, wherever the HUD's text size puts their last line
 local function Layout(width)
+    barWidth = width or 720
     local w = math.max(200, (width or 720) - 64 - 14)
     view.status:SetWidth(w - 60)                             -- (the page number sits at its right)
     view.order:SetWidth(w)
@@ -243,6 +268,92 @@ local function Layout(width)
         r:SetPoint("TOPLEFT", view, "TOPLEFT", 10, -TOP - (i - 1) * ROW)
         r:SetPoint("TOPRIGHT", view, "TOPRIGHT", -10, -TOP - (i - 1) * ROW)
     end
+end
+
+-- The actions, one row along the bottom: a chip each, its controller button (a white letter on a black disc,
+-- as the pad in use prints it; the game's own icon for a pad without letters) and what it does. The button,
+-- or a click on the chip, does it.
+local DISC = "Interface\\CharacterFrame\\TempPortraitAlphaMask"
+local barWidth = 720
+local function Chip(parent, key, onClick)
+    local b = CreateFrame("Button", nil, parent)
+    b.key, b.on = key, true
+    b.back = b:CreateTexture(nil, "BACKGROUND")
+    b.back:SetAllPoints(b)
+    b.back:SetColorTexture(0, 0, 0, 0.55)
+    b.lit = b:CreateTexture(nil, "BORDER")
+    b.lit:SetAllPoints(b)
+    b.lit:SetColorTexture(BRASS[1], BRASS[2], BRASS[3], 0.18)
+    b.lit:Hide()
+    b.rule = b:CreateTexture(nil, "BORDER")
+    b.rule:SetPoint("BOTTOMLEFT", b, "BOTTOMLEFT", 0, 0)
+    b.rule:SetPoint("BOTTOMRIGHT", b, "BOTTOMRIGHT", 0, 0)
+    b.rule:SetHeight(1)
+    b.rule:SetColorTexture(BRASS[1], BRASS[2], BRASS[3], 0.55)
+    b.rim = b:CreateTexture(nil, "ARTWORK")                -- a white rim round a black disc
+    b.rim:SetTexture(DISC)
+    b.rim:SetVertexColor(1, 1, 1, 0.9)
+    b.rim:SetPoint("LEFT", b, "LEFT", 4, 0)
+    b.disc = b:CreateTexture(nil, "OVERLAY")
+    b.disc:SetTexture(DISC)
+    b.disc:SetVertexColor(0, 0, 0, 1)
+    b.disc:SetPoint("CENTER", b.rim, "CENTER", 0, 0)
+    b.letter = ns.FontString(b, 8, "CENTER")
+    b.letter:SetPoint("CENTER", b.rim, "CENTER", 0, 0)
+    b.letter:SetTextColor(1, 1, 1)
+    b.label = ns.FontString(b, 9, "LEFT")
+    b.label:SetPoint("LEFT", b.rim, "RIGHT", 6, 0)
+    OneLine(b.label)
+    b:SetScript("OnClick", ns.Protect(function(self) if self.on then onClick() end end))
+    b:SetScript("OnEnter", ns.Protect(function(self) self.lit:Show() end))
+    b:SetScript("OnLeave", ns.Protect(function(self) self.lit:Hide() end))
+    return b
+end
+
+-- What a chip says it does, and whether it can now
+local function ChipSays(b, text, on)
+    b.label:SetText(text)
+    b.on = on ~= false
+    b:SetAlpha(b.on and 1 or 0.45)
+end
+
+-- Each chip as wide as what it says, side by side; the whole row smaller when it would not fit
+local function LayoutBar(bar, chips)
+    local x, tall = 0, 0
+    for _, b in ipairs(chips) do
+        local letter = Letter(b.key)
+        local d = math.floor(LineH(b.letter) + 5 + 0.5)
+        local w = d
+        if letter then
+            if #letter > 1 then w = d + 8 end
+            b.letter:SetText(letter)
+            b.rim:SetSize(w, d)
+            b.disc:SetSize(w - 3, d - 3)
+            b.rim:Show(); b.disc:Show()
+        else
+            b.letter:SetText(KeyName(b.key))                -- the game's own icon for this pad
+            b.rim:SetSize(w, d)
+            b.rim:SetAlpha(0); b.disc:Hide()
+        end
+        if letter then b.rim:SetAlpha(1) end
+        local text = b.label.GetStringWidth and b.label:GetStringWidth()
+        local width = math.floor(4 + w + 6 + (type(text) == "number" and text or 60) + 10 + 0.5)
+        local h = d + 6
+        b:SetSize(width, h)
+        b:ClearAllPoints()
+        b:SetPoint("BOTTOMLEFT", bar, "BOTTOMLEFT", x, 0)
+        x = x + width + 6
+        if h > tall then tall = h end
+    end
+    x = math.max(1, x - 6)
+    local room = math.max(200, barWidth - 24)
+    local k = x > room and room / x or 1
+    bar:SetScale(k)
+    bar:SetSize(x, tall)
+    bar:ClearAllPoints()
+    bar:SetPoint("BOTTOMLEFT", bar:GetParent(), "BOTTOMLEFT", 12 / k, 8 / k)
+    bar.k = k
+    return tall * k
 end
 
 local function Felt(frame, alpha)
@@ -308,9 +419,9 @@ local function BuildView()
     view.motto:SetText(L["Market"] .. "  -  " .. L["every coin counted, friend"])
     view.status = ns.FontString(view, 9, "LEFT")
     view.status:SetPoint("TOPLEFT", view.title, "BOTTOMLEFT", 0, -3)
-    view.status:SetTextColor(unpack(C.muted))
+    view.status:SetTextColor(unpack(C.text))                 -- the Broker talking
     OneLine(view.status)
-    view.order = ns.FontString(view, 8, "LEFT")              -- what the order is, said once under the status
+    view.order = ns.FontString(view, 8, "LEFT")              -- how fresh his prices are
     view.order:SetPoint("TOPLEFT", view.status, "BOTTOMLEFT", 0, -2)
     view.order:SetTextColor(BRASS[1], BRASS[2], BRASS[3])
     OneLine(view.order)
@@ -342,7 +453,7 @@ local function BuildView()
         r.name:SetPoint("TOPLEFT", r.icon, "TOPRIGHT", 8, 0)
         r.why = ns.FontString(r, 8, "LEFT")
         r.why:SetPoint("BOTTOMLEFT", r.icon, "BOTTOMRIGHT", 8, 0)
-        r.why:SetPoint("RIGHT", r, "RIGHT", -150, 0)
+        r.why:SetPoint("RIGHT", r, "RIGHT", -70, 0)
         if r.why.SetWordWrap then r.why:SetWordWrap(false) end
         r.price = ns.FontString(r, 10, "RIGHT")
         r.price:SetPoint("TOPRIGHT", r, "TOPRIGHT", -8, -3)
@@ -357,19 +468,15 @@ local function BuildView()
         AP.rows[i] = r
     end
 
-    view.post = Button(view, L["Post"], 250, function() AP:Post() end)
-    view.post:SetPoint("BOTTOMLEFT", view, "BOTTOMLEFT", 12, 26)
-    view.strategy = Button(view, L["Patient"], 110, function() AP:Strategy() end)
-    view.strategy:SetPoint("LEFT", view.post, "RIGHT", 6, 0)
-    view.duration = Button(view, "24h", 56, function() AP:Duration() end)
-    view.duration:SetPoint("LEFT", view.strategy, "RIGHT", 6, 0)
-    view.scan = Button(view, L["Read all prices"], 130, function() ns.Market:Scan() end)
-    view.scan:SetPoint("LEFT", view.duration, "RIGHT", 6, 0)
-    view.kept = Button(view, L["Show kept"], 110, function() AP:ShowKept() end)
-    view.kept:SetPoint("LEFT", view.scan, "RIGHT", 6, 0)
-    view.hint = ns.FontString(view, 9, "LEFT")
-    view.hint:SetPoint("BOTTOMLEFT", view, "BOTTOMLEFT", 14, 8)
-    view.hint:SetTextColor(unpack(C.muted))
+    view.bar = CreateFrame("Frame", nil, view)
+    view.post = Chip(view.bar, "PAD1", function() AP:Post() end)
+    view.strategy = Chip(view.bar, "PAD3", function() AP:Strategy() end)
+    view.duration = Chip(view.bar, "PAD4", function() AP:Duration() end)
+    view.scan = Chip(view.bar, "PADLSHOULDER", function() ns.Market:Scan() end)
+    view.kept = Chip(view.bar, "PADRSHOULDER", function() AP:ShowKept() end)
+    view.chartKind = Chip(view.bar, "PADRSTICK", function() AP:ChartKind() end)
+    view.leave = Chip(view.bar, "PAD2", function() AP:HideView() end)
+    view.chips = { view.post, view.strategy, view.duration, view.scan, view.kept, view.chartKind, view.leave }
     view.empty = ns.FontString(view, 10, "CENTER")
     view.empty:SetPoint("CENTER", view, "CENTER", 0, 10)
     view.empty:SetTextColor(unpack(C.muted))
@@ -425,8 +532,13 @@ local function BuildPane()
     pane.chart.empty:SetPoint("TOP", pane.chart, "TOP", 0, -4)
     pane.chart.empty:SetWidth(cw - 20)
     pane.chart.empty:SetTextColor(unpack(C.muted))
+    pane.caption = ns.FontString(pane, 8, "LEFT")            -- what the chart shows
+    pane.caption:SetPoint("TOPLEFT", pane.chart, "BOTTOMLEFT", 0, -3)
+    pane.caption:SetWidth(cw)
+    pane.caption:SetTextColor(unpack(C.muted))
+    OneLine(pane.caption)
     pane.facts = ns.FontString(pane, 9, "LEFT")
-    pane.facts:SetPoint("TOPLEFT", pane.chart, "BOTTOMLEFT", 0, -8)
+    pane.facts:SetPoint("TOPLEFT", pane.caption, "BOTTOMLEFT", 0, -6)
     pane.facts:SetWidth(cw)
     pane.facts:SetJustifyH("LEFT")
     pane.why = ns.FontString(pane, 9, "LEFT")
@@ -498,18 +610,24 @@ end
 ---------------------------------------------------------------------------
 -- Showing
 ---------------------------------------------------------------------------
--- The price over the last 30 days as a line: the day's lowest price, joined day to day, today's point in gold,
--- the usual price as a pale level line across. With one day of prices so far it is a point, and it says so.
+-- The price chart, one of two (switched with ahCandles, R3 on the Market):
+--   a line: the day's lowest price over the last 30 days, each day joined to the next, green where it went up,
+--   red where it went down; today's point in gold, the usual price as a pale level line across.
+--   candles: a candle a day for the last 7 days, a thin wick from the day's lowest to its highest read, a body
+--   from where it opened to where it closed: green when it closed higher than it opened, red lower.
+-- With one day of prices so far it says so.
+local function Way(from, to)
+    if to > from then return "up", UP elseif to < from then return "down", DOWN end
+    return "flat", FLAT
+end
+
 local function LinePiece(chart, i)
     chart.lines = chart.lines or {}
     local l = chart.lines[i]
     if l == nil then
         local ok, x = pcall(chart.CreateLine, chart, nil, "ARTWORK")
         l = (ok and type(x) == "table" and x ~= chart and x.SetStartPoint) and x or false
-        if l then
-            l:SetThickness(2)
-            l:SetColorTexture(0.55, 0.9, 0.6, 0.9)
-        end
+        if l then l:SetThickness(2) end
         chart.lines[i] = l
     end
     return l or nil
@@ -527,6 +645,67 @@ local function Dot(chart, i)
     return d
 end
 
+local function Candle(chart, i)
+    chart.candles = chart.candles or {}
+    local k = chart.candles[i]
+    if not k then
+        k = { wick = chart:CreateTexture(nil, "ARTWORK"), body = chart:CreateTexture(nil, "OVERLAY") }
+        k.wick:SetWidth(2)
+        chart.candles[i] = k
+    end
+    return k
+end
+
+local function Level(chart, y)                                   -- the usual price, across
+    chart.usual:ClearAllPoints()
+    chart.usual:SetPoint("BOTTOMLEFT", chart, "BOTTOMLEFT", 0, y)
+    chart.usual:SetPoint("BOTTOMRIGHT", chart, "BOTTOMRIGHT", 0, y)
+    chart.usual:Show()
+end
+
+local function Candles(chart, id, usual)
+    local list = ns.Market.Candles(id, 7)
+    if #list == 0 then
+        chart.empty:SetText(L["No prices in the last 7 days."])
+        chart.empty:Show()
+        return
+    end
+    local lo, hi = math.huge, 0                                  -- the week's own range, so a move shows
+    for _, c in ipairs(list) do
+        if c.l < lo then lo = c.l end
+        if c.h > hi then hi = c.h end
+    end
+    if usual then lo, hi = math.min(lo, usual), math.max(hi, usual) end
+    local room = math.max((hi - lo) * 0.1, hi * 0.05, 1)
+    lo, hi = math.max(0, lo - room), hi + room
+    local w, tall, today = chart:GetWidth() or 296, chart.height, ns.Market.Today()
+    local slot = w / 7
+    local function Y(v) return tall * (v - lo) / (hi - lo) end
+    for i, c in ipairs(list) do
+        local x = slot * (7 - (today - c.d) - 0.5)
+        local way, colour = Way(c.o, c.c)
+        local k = Candle(chart, i)
+        k.way, k.d = way, c.d
+        local a = c.d == today and 1 or 0.85
+        k.wick:ClearAllPoints()
+        k.wick:SetPoint("BOTTOM", chart, "BOTTOMLEFT", x, Y(c.l))
+        k.wick:SetHeight(math.max(1, Y(c.h) - Y(c.l)))
+        k.wick:SetColorTexture(colour[1], colour[2], colour[3], a * 0.8)
+        local bottom, top = math.min(c.o, c.c), math.max(c.o, c.c)
+        k.body:ClearAllPoints()
+        k.body:SetPoint("BOTTOM", chart, "BOTTOMLEFT", x, Y(bottom))
+        k.body:SetSize(math.max(4, math.floor(slot * 0.5)), math.max(2, Y(top) - Y(bottom)))
+        k.body:SetColorTexture(colour[1], colour[2], colour[3], a)
+        k.wick:Show()
+        k.body:Show()
+    end
+    if #list == 1 then
+        chart.empty:SetText(L["One day of prices so far: a candle comes each day you visit the auction house."])
+        chart.empty:Show()
+    end
+    if usual then Level(chart, Y(usual)) end
+end
+
 local function Chart(id)
     local chart = pane.chart
     local h = ns.Market.History(id)
@@ -536,10 +715,14 @@ local function Chart(id)
     for i = 1, 30 do chart.bars[i]:Hide() end
     for _, l in pairs(chart.lines or {}) do if l then l:Hide() end end
     for _, d in pairs(chart.dots or {}) do d:Hide() end
+    for _, k in pairs(chart.candles or {}) do k.wick:Hide(); k.body:Hide() end
     chart.usual:Hide()
+    pane.caption:SetText(ns.db.ahCandles and L["7 days, a candle a day: green closed higher, red lower"]
+        or L["30 days, the day's lowest: green up, red down"])
     if top == 0 then chart.empty:SetText(L["No price history yet: read the auction house on a few days."]); chart.empty:Show(); return end
     chart.empty:Hide()
     local usual = ns.Market.Usual(id, 7)
+    if ns.db.ahCandles then Candles(chart, id, usual); return end
     if LinePiece(chart, 1) then                               -- a line, where this game draws lines
         local w = chart:GetWidth() or 300
         local span = math.max(top, usual or 0) * 1.15
@@ -547,24 +730,25 @@ local function Chart(id)
         for _, e in ipairs(h) do
             local back = today - e.d
             if back >= 0 and back < 30 then
-                points[#points + 1] = { x = w * (29 - back) / 29, y = chart.height * e.p / span, today = back == 0,
-                                        low = usual and e.p < usual }
+                points[#points + 1] = { x = w * (29 - back) / 29, y = chart.height * e.p / span, p = e.p, today = back == 0 }
             end
         end
         table.sort(points, function(a, b) return a.x < b.x end)
-        for i, p in ipairs(points) do
+        for i, pt in ipairs(points) do
             local d = Dot(chart, i)
             d:ClearAllPoints()
-            d:SetPoint("CENTER", chart, "BOTTOMLEFT", p.x, p.y)
-            if p.today then d:SetVertexColor(1, 0.85, 0.3, 1) elseif p.low then d:SetVertexColor(0.55, 0.62, 0.75, 1)
-            else d:SetVertexColor(0.55, 0.9, 0.6, 1) end
+            d:SetPoint("CENTER", chart, "BOTTOMLEFT", pt.x, pt.y)
+            if pt.today then d:SetVertexColor(1, 0.85, 0.3, 1) else d:SetVertexColor(0.85, 0.87, 0.9, 1) end
             d:Show()
             if i > 1 then
                 local l = LinePiece(chart, i - 1)
                 if l then
                     local q = points[i - 1]
+                    local way, colour = Way(q.p, pt.p)              -- each day's piece by where it went
+                    l.way = way
+                    l:SetColorTexture(colour[1], colour[2], colour[3], 0.95)
                     l:SetStartPoint("BOTTOMLEFT", chart, q.x, q.y)
-                    l:SetEndPoint("BOTTOMLEFT", chart, p.x, p.y)
+                    l:SetEndPoint("BOTTOMLEFT", chart, pt.x, pt.y)
                     l:Show()
                 end
             end
@@ -573,32 +757,24 @@ local function Chart(id)
             chart.empty:SetText(L["One day of prices so far: the line grows each day you visit the auction house."])
             chart.empty:Show()
         end
-        if usual then
-            chart.usual:ClearAllPoints()
-            chart.usual:SetPoint("BOTTOMLEFT", chart, "BOTTOMLEFT", 0, chart.height * usual / span)
-            chart.usual:SetPoint("BOTTOMRIGHT", chart, "BOTTOMRIGHT", 0, chart.height * usual / span)
-            chart.usual:Show()
-        end
+        if usual then Level(chart, chart.height * usual / span) end
         return
     end
+    local last                                                -- bars, where it does not
     for _, e in ipairs(h) do
         local slot = 30 - (today - e.d)
         if slot >= 1 and slot <= 30 then
             local b = chart.bars[slot]
             b:SetHeight(math.max(2, chart.height * e.p / top))
-            local below = usual and e.p < usual
+            local way, colour = Way(last or e.p, e.p)
+            b.way = way
             if e.d == today then b:SetColorTexture(1, 0.85, 0.3, 0.95)             -- today
-            elseif below then b:SetColorTexture(0.55, 0.62, 0.75, 0.55)
-            else b:SetColorTexture(0.42, 0.85, 0.45, 0.7) end
+            else b:SetColorTexture(colour[1], colour[2], colour[3], 0.75) end
             b:Show()
         end
+        last = e.p
     end
-    if usual then
-        chart.usual:ClearAllPoints()
-        chart.usual:SetPoint("BOTTOMLEFT", chart, "BOTTOMLEFT", 0, chart.height * usual / top)
-        chart.usual:SetPoint("BOTTOMRIGHT", chart, "BOTTOMRIGHT", 0, chart.height * usual / top)
-        chart.usual:Show()
-    end
+    if usual then Level(chart, chart.height * usual / top) end
 end
 
 local function ItemName(e)
@@ -644,6 +820,14 @@ function AP.Facts(e)
     local vendor = M.Vendor(e.id)
     lines[#lines + 1] = L["Vendor"] .. " " .. (vendor and L["%s each, %s for all %d"]:format(money(vendor),
         money(vendor * e.count), e.count) or dash)
+    if e.chance then
+        local said = {}
+        for i, w in ipairs(e.odds or {}) do
+            if i > 4 then break end                                  -- what moved it most
+            said[#said + 1] = (w.d > 0 and (GREEN .. "+ ") or "|cffff7060- ") .. w.text .. "|r"
+        end
+        lines[#lines + 1] = SAYS .. AP.Odds(e.chance, e.id) .. "|r" .. (#said > 0 and ("   " .. table.concat(said, "  ")) or "")
+    end
     local rec = ns.db.ahLedger and ns.db.ahLedger[e.id]
     if rec and (rec.posted or 0) > 0 then
         lines[#lines + 1] = GOLD .. L["You posted %d here, %d auctions sold"]:format(rec.posted, rec.sold or 0) .. "|r"
@@ -684,9 +868,56 @@ local function ShowPane(e)
         end
     end
     pane.why:SetText(why)
-    pane:SetHeight(math.floor(head + 8 + pane.chart:GetHeight() + 8 + TextH(pane.facts, #facts) + 8
+    pane:SetHeight(math.floor(head + 8 + pane.chart:GetHeight() + 3 + LineH(pane.caption) + 6 + TextH(pane.facts, #facts) + 8
         + TextH(pane.why, Lines(why)) + 14 + 0.5))
     pane:Show()
+end
+
+-- The Broker's header, in his own words: what is worth selling here (best on top), how fresh his prices are,
+-- and what he kept back. A few ways of saying each; which one is picked when the Market opens (AP.voice), so
+-- the words do not change under you while you choose.
+local function Pick(list) return list[(AP.voice or 0) % #list + 1] end
+
+function AP.Sales(worth, more, total)
+    if total == 0 then return L["Empty bags, friend. Bring me something to sell."] end
+    if worth == 0 then
+        return Pick({ L["Nothing here beats a vendor today. %d might, with a little patience."],
+                      L["No sure profits in these bags, friend. %d could pay if you wait."] }):format(more)
+    end
+    return Pick({ L["Best on top: %d here beat any vendor, %d more for the patient."],
+                  L["%d pay better here than at a vendor, best first. %d more if you wait."],
+                  L["Top of the pile pays best: %d sure sales, %d more if you can wait."] }):format(worth, more)
+end
+
+-- seen: prices known; read: when the whole house was last read (0: never). Within the hour the prices are
+-- fresh; after six hours he says to read them again (LB).
+function AP.Board(seen, read)
+    local M, scan = ns.Market, KeyText("PADLSHOULDER")
+    local age = (read or 0) > 0 and math.max(0, (time and time() or 0) - read) or nil
+    local second = (AP.voice or 0) % 2 == 1
+    if not age then
+        return Pick({ L["Haven't read the board yet. %s and I'll fetch every price."],
+                      L["No prices yet, friend. %s reads the whole board."] }):format(scan)
+    elseif age < 3600 then
+        return Pick({ L["Prices fresh off the board, friend: %d of them."],
+                      L["Just read the board: %d prices, still warm."] }):format(seen)
+    elseif age < 6 * 3600 then
+        if second then return L["%d prices, read %s. Near enough, friend."]:format(seen, M.Ago(read)) end
+        return L["Last look at the board was %s: %d prices."]:format(M.Ago(read), seen)
+    end
+    if second then return L["Prices from %s, stale as old bread. %s reads the board again."]:format(M.Ago(read), scan) end
+    return L["%d prices, but I read them %s. %s and I'll look again."]:format(seen, M.Ago(read), scan)
+end
+
+function AP.Kept(hidden)
+    local key = KeyText("PADRSHOULDER")
+    if ns.db.ahShowKept then
+        return Pick({ L["Your keepers are on the list too. %s tucks them away."],
+                      L["Showing what you keep as well. %s hides it again."] }):format(key)
+    end
+    if (hidden or 0) == 0 then return "" end
+    return Pick({ L["%d kept back: trade goods, gear to wear, things you marked. %s shows them."],
+                  L["Set %d aside for your crafts, your back and your marks. %s if you want them."] }):format(hidden, key)
 end
 
 function AP:Refresh()
@@ -708,18 +939,9 @@ function AP:Refresh()
     for _, e in ipairs(list) do if e.worth then worth = worth + 1 end end
     for _ in pairs(ns.db.auction or {}) do seen = seen + 1 end
     local read = ns.db.auctionReadAt or 0
-    view.status:SetText(L["%d worth selling here, %d more you could"]:format(worth, #list - worth) .. "   " .. GREY
-        .. L["%d prices known, all read %s"]:format(seen, read > 0 and M.Ago(read) or L["never"]) .. "|r")
-    view.order:SetText(L["Best first: the most gained over a vendor for each one"])
-    if ns.db.ahShowKept then
-        view.keptNote:SetText(L["what you keep is listed too (%s hides it)"]:format(KeyName("PADRSHOULDER")))
-    elseif hidden > 0 then
-        view.keptNote:SetText(L["%d kept (for your professions, to wear, or marked), not listed (%s shows them)"]:format(
-            hidden, KeyName("PADRSHOULDER")))
-    else
-        view.keptNote:SetText("")
-    end
-    view.kept:SetText(ns.db.ahShowKept and L["Hide kept"] or L["Show kept"])
+    view.status:SetText(AP.Sales(worth, #list - worth, #list))
+    view.order:SetText(AP.Board(seen, read))
+    view.keptNote:SetText(AP.Kept(hidden))
     view.pageText:SetText(pages > 1 and ("%d / %d"):format(AP.page, pages) or "")
     for i, r in ipairs(AP.rows) do
         local at = (AP.page - 1) * per + i
@@ -743,15 +965,16 @@ function AP:Refresh()
         end
     end
     local quick = ns.db.ahStrategy
-    view.strategy:SetText(quick and L["Quick sale"] or L["Patient"])
-    view.duration:SetText(DURATIONS[ns.db.ahDuration or 2])
-    view.hint:SetText(("%s %s    %s %s    %s %s    %s %s    %s %s"):format(KeyName("PAD1"), L["Post"], KeyName("PAD3"),
-        quick and L["Quick sale"] or L["Patient"], KeyName("PAD4"), DURATIONS[ns.db.ahDuration or 2],
-        KeyName("PADRSHOULDER"), ns.db.ahShowKept and L["Hide kept"] or L["Show kept"], KeyName("PAD2"), L["Back"]))
+    ChipSays(view.strategy, quick and L["Quick sale"] or L["Patient"])
+    ChipSays(view.duration, DURATIONS[ns.db.ahDuration or 2])
+    ChipSays(view.scan, L["Read all prices"])
+    ChipSays(view.kept, ns.db.ahShowKept and L["Hide kept"] or L["Show kept"])
+    ChipSays(view.chartKind, ns.db.ahCandles and L["Line"] or L["Candles"])
+    ChipSays(view.leave, L["Back"])
     if not chosen then
         view.empty:Show()
-        view.post:SetText(L["Post"])
-        view.post:Disable()
+        ChipSays(view.post, L["Post"], false)
+        LayoutBar(view.bar, view.chips)
         ShowPane(nil)
         return
     end
@@ -759,15 +982,14 @@ function AP:Refresh()
     if chosen.price then
         local n, rest = AP.WillPost(chosen)
         if rest > 0 or n == 1 then                           -- one, or the older house in uneven stacks (the rest next)
-            view.post:SetText(L["Post %d for %s"]:format(n, ns.MoneyColored(chosen.price * n)))
+            ChipSays(view.post, L["Post %d for %s"]:format(n, ns.MoneyColored(chosen.price * n)))
         else
-            view.post:SetText(L["Post all %d for %s"]:format(n, ns.MoneyColored(chosen.price * n)))
+            ChipSays(view.post, L["Post all %d for %s"]:format(n, ns.MoneyColored(chosen.price * n)))
         end
-        view.post:Enable()
     else
-        view.post:SetText(L["Post"])
-        view.post:Disable()
+        ChipSays(view.post, L["Post"], false)
     end
+    LayoutBar(view.bar, view.chips)
     ShowPane(chosen)
 end
 
@@ -799,6 +1021,12 @@ function AP:ShowKept()
     self:Refresh()
 end
 
+-- The price chart: a candle a day for a week, or the line of a month's lowest prices
+function AP:ChartKind()
+    ns.db.ahCandles = not ns.db.ahCandles
+    self:Refresh()
+end
+
 -- A controller button while the Market is up: true when it was ours
 function AP:Pad(button)
     if not (view and view:IsShown()) then return false end
@@ -811,6 +1039,8 @@ function AP:Pad(button)
     elseif button == "PAD3" then self:Strategy()
     elseif button == "PAD4" then self:Duration()
     elseif button == "PADRSHOULDER" then self:ShowKept()
+    elseif button == "PADLSHOULDER" then ns.Market:Scan()
+    elseif button == "PADRSTICK" then self:ChartKind()
     elseif button == "PAD2" then self:HideView()
     else return false end
     return true
@@ -824,7 +1054,7 @@ end
 --   older one: one press posts `stacks` auctions of `size` (AP.Plan), the buyout per auction; the item in the
 --   sell slot is its biggest stack, the game takes the rest from your bags.
 ---------------------------------------------------------------------------
-local function Ledger(e, n)
+local function Ledger(e, n, lots)
     local db = ns.db
     db.ahLedger = db.ahLedger or {}
     local rec = db.ahLedger[e.id]
@@ -836,6 +1066,7 @@ local function Ledger(e, n)
         db.ahLedger[e.id] = rec
     end
     rec.posted = (rec.posted or 0) + n
+    rec.lots = (rec.lots or 0) + (lots or 1)
     rec.name = ItemName(e)
     rec.t = time and time() or 0
 end
@@ -845,12 +1076,13 @@ function AP:Post()
     if not (e and e.price) then return false end
     local dur = ns.db.ahDuration or 2
     local AH = C_AuctionHouse
-    local ok, err, n
+    local ok, err, n, lots
     if Newer() then
         local loc = ItemLocation:CreateFromBagAndSlot(e.bag, e.slot)
         local okS, status = pcall(AH.GetItemCommodityStatus, loc)
         local commodity = okS and Enum and Enum.ItemCommodityStatus and status == Enum.ItemCommodityStatus.Commodity
         n = e.count
+        lots = commodity and 1 or n                          -- (any other item: an auction of each)
         if commodity then
             ok, err = pcall(AH.PostCommodity, loc, dur, n, e.price)
         else
@@ -858,7 +1090,7 @@ function AP:Post()
         end
     elseif PostAuction and ClickAuctionSellItemButton then
         local size, stacks = AP.Plan(e)
-        n = size * stacks
+        n, lots = size * stacks, stacks
         ClearCursor()
         local pickup = (C_Container and C_Container.PickupContainerItem) or PickupContainerItem
         pickup(e.bag, e.slot)
@@ -873,7 +1105,7 @@ function AP:Post()
     if ok then
         ns.Say(L["Posted %d for %s."]:format(n, ns.MoneyColored(e.price * n)))
         self.posted = (self.posted or 0) + 1
-        Ledger(e, n)
+        Ledger(e, n, lots)
         C_Timer.After(0.5, function() AP:Refresh() end)
     else
         ns.Error(err)
@@ -944,6 +1176,7 @@ function AP:ShowView()
     Layout(width)
     self.perPage = math.max(3, math.min(MAX_ROWS, math.floor((height - TOP - FOOT) / ROW)))
     local opening = not view:IsShown()
+    if opening then self.voice = math.random(0, 59) end      -- the Broker's way of saying things, this visit
     view:Show()
     self.keys:Set(true)
     TabLook()

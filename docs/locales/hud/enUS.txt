@@ -93,22 +93,29 @@ repair everything as soon as a vendor who repairs opens
 Repair from the guild bank
 pay for repairs from the guild bank when your guild allows it, your own gold otherwise
 list what was sold for you this session, to buy something back
+There you are: %s, out of the sacks and into your bags. Mind the string.
+All yours: %s. That's the last of the sacks, near enough.
+Signed, sealed and handed over: %s.
+Not a scrap for you today. I checked twice.
+Empty box, friend. Even the moths have moved out.
+Letters wanting coin on delivery: %d. Those you open yourself; I don't pay other folks' bills.
+Your bags are bursting. The rest waits in the letters till you make room.
+%d I couldn't pass you: one of a kind, or the box wouldn't let go. Still in their letters.
+Postmaster
 1 item
 %d items
-Nothing to take from the mailbox.
-Mailbox: took %s.
  and 
-Letters asking for payment on delivery, left for you to open: %d
-Your bags are full: the other items wait in their letters.
-Items the game would not hand over (one of a kind, or refused), left in their letters: %d
 Waiting for more...
-Open a mailbox first.
+Find a mailbox first, then we'll talk.
 Taking...
 Take everything
 take the money and items from every letter, auction sales included, on every page (press again to stop); letters asking for payment on delivery are left alone
 Take everything from the mailbox (press again to stop)
+%s and %d more
 Take everything from the mailbox
 a button beside the mailbox's Open All: takes the money and items from every letter, auction sales included, on every page; letters asking for payment on delivery are left alone
+Mail: subject from what you attach
+attaching items to a letter fills in its subject with what they are (Linen Cloth x20, or the first and how many more); a subject you typed yourself is left alone
 take the money and items from every letter in the open mailbox (again to stop)
 Bag
 Bank
@@ -144,6 +151,20 @@ better than what you wear
 made into %s
 %d%% chance of sale
 Cost
+old prices
+under the lowest
+over the lowest
+under the usual
+over the usual
+seen on several days
+a busy market
+hardly any up
+prices rising
+prices falling
+prices jump about
+yours sold here before
+yours went unsold before
+held up by the vendor floor
 Auction house
 Skill-up: %s
 Quest: %s
@@ -214,17 +235,27 @@ bank
 Your mark
 Item details: everything about the item you point at
 show everything about the item you point at (or the one given): prices, who holds it, your mark
+Sure to go (%d%%)
+That one sells itself (%d%%)
+I think it'll sell (%d%%)
+Should find a buyer (%d%%)
+Even odds (%d%%)
+Could go either way (%d%%)
+A bit of a gamble (%d%%)
+Might sit a while (%d%%)
+I wouldn't hold my breath (%d%%)
+Long odds, friend (%d%%)
 +%s over a vendor
 no price known yet
 a vendor pays as much
 The Broker
 Market
 every coin counted, friend
-Post
-Patient
-Read all prices
-Show kept
 Nothing in your bags can be sold here.
+No prices in the last 7 days.
+One day of prices so far: a candle comes each day you visit the auction house.
+7 days, a candle a day: green closed higher, red lower
+30 days, the day's lowest: green up, red down
 No price history yet: read the auction house on a few days.
 One day of prices so far: the line grows each day you visit the auction house.
 Asking %s each, %s for all %d
@@ -236,16 +267,34 @@ Up: %d auctions, %d items
 %s each, %s for all %d
 You posted %d here, %d auctions sold
 No price known: read the auction house first.
-%d worth selling here, %d more you could
-%d prices known, all read %s
-never
-Best first: the most gained over a vendor for each one
-what you keep is listed too (%s hides it)
-%d kept (for your professions, to wear, or marked), not listed (%s shows them)
-Hide kept
+Empty bags, friend. Bring me something to sell.
+Nothing here beats a vendor today. %d might, with a little patience.
+No sure profits in these bags, friend. %d could pay if you wait.
+Best on top: %d here beat any vendor, %d more for the patient.
+%d pay better here than at a vendor, best first. %d more if you wait.
+Top of the pile pays best: %d sure sales, %d more if you can wait.
+Haven't read the board yet. %s and I'll fetch every price.
+No prices yet, friend. %s reads the whole board.
+Prices fresh off the board, friend: %d of them.
+Just read the board: %d prices, still warm.
+%d prices, read %s. Near enough, friend.
+Last look at the board was %s: %d prices.
+Prices from %s, stale as old bread. %s reads the board again.
+%d prices, but I read them %s. %s and I'll look again.
+Your keepers are on the list too. %s tucks them away.
+Showing what you keep as well. %s hides it again.
+%d kept back: trade goods, gear to wear, things you marked. %s shows them.
+Set %d aside for your crafts, your back and your marks. %s if you want them.
 each
 no data
 Quick sale
+Patient
+Read all prices
+Hide kept
+Show kept
+Line
+Candles
+Post
 Post %d for %s
 Post all %d for %s
 This client's auction house cannot be posted to from here.
@@ -257,6 +306,8 @@ Auctioneer's greeting on the Market
 a goblin auctioneer says one short line, from the game's own sounds, when the Market opens; off: it opens in silence
 Market: show what you keep
 the Market lists what you keep too: what your professions still learn from or make into something worth more, and what you marked to keep; off: only what you would sell
+Market: price chart as candles
+the Market's price chart is a candle a day for the last 7 days (where the price opened, went highest and lowest, and closed: green when it closed higher, red lower); off: a line of the day's lowest price over 30 days
 open or close the Market (a tab of the auction house)
 which auction house this client has (for troubleshooting)
 Offline

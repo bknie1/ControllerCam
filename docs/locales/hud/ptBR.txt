@@ -93,22 +93,29 @@ repara tudo assim que um vendedor que repara é aberto
 Reparar do banco da guilda
 paga os reparos com o banco da guilda quando sua guilda permite, e com seu próprio ouro caso contrário
 lista o que foi vendido por você nesta sessão, para recomprar algo
+Aqui está: %s, dos sacos para as suas bolsas. Cuidado com o barbante.
+Tudo seu: %s. Era mais ou menos o último saco.
+Assinado, selado e entregue: %s.
+Nem um papelzinho para você hoje. Conferi duas vezes.
+Caixa vazia, amigo. Até as traças se mudaram.
+Cartas com pagamento na entrega: %d. Essas você abre; eu não pago a conta dos outros.
+Suas bolsas estão estourando. O resto espera nas cartas até você abrir espaço.
+%d eu não consegui entregar: únicos, ou a caixa não quis soltar. Ainda estão nas cartas.
+Chefe dos correios
 1 item
 %d itens
-Nada para pegar na caixa de correio.
-Caixa de correio: pegou %s.
  e 
-Cartas com pagamento na entrega, deixadas para você abrir: %d
-Suas bolsas estão cheias: os outros itens esperam nas cartas.
-Itens que o jogo não entregou (únicos ou recusados), deixados nas cartas: %d
 Aguardando mais...
-Abra uma caixa de correio primeiro.
+Encontre uma caixa de correio primeiro, depois conversamos.
 Pegando...
 Pegar tudo
 pega o dinheiro e os itens de cada carta, vendas no leilão incluídas, em todas as páginas (pressione de novo para parar); cartas com pagamento na entrega não são tocadas
 Pegar tudo da caixa de correio (de novo para parar)
+%s e mais %d
 Pegar tudo da caixa de correio
 um botão ao lado de Abrir tudo na caixa de correio: pega o dinheiro e os itens de cada carta, vendas no leilão incluídas, em todas as páginas; cartas com pagamento na entrega não são tocadas
+Correio: assunto pelos anexos
+anexar itens a uma carta preenche o assunto com o que eles são (Tecido de Linho x20, ou o primeiro e quantos mais); um assunto digitado por você não é alterado
 pega o dinheiro e os itens de cada carta da caixa de correio aberta (de novo para parar)
 Bolsa
 Banco
@@ -144,6 +151,20 @@ melhor do que o que você usa
 transformado em %s
 %d%% de chance de venda
 Custo
+preços velhos
+abaixo do menor
+acima do menor
+abaixo do usual
+acima do usual
+visto em vários dias
+um mercado movimentado
+quase nada à venda
+preços subindo
+preços caindo
+preços pulando
+os seus já venderam aqui
+os seus não venderam
+segurado pelo preço do vendedor
 Casa de Leilões
 Sobe perícia: %s
 Missão: %s
@@ -214,17 +235,27 @@ banco
 Sua marca
 Detalhes do item: tudo sobre o item para o qual você aponta
 mostra tudo sobre o item para o qual você aponta (ou o indicado): preços, quem o tem, sua marca
+Vende com certeza (%d%%)
+Isso se vende sozinho (%d%%)
+Acho que vende (%d%%)
+Deve achar comprador (%d%%)
+Meio a meio (%d%%)
+Pode ir pra qualquer lado (%d%%)
+Meio que uma aposta (%d%%)
+Pode ficar parado um tempo (%d%%)
+Eu não contaria com isso (%d%%)
+Chance pequena, amigo (%d%%)
 +%s a mais que um vendedor
 nenhum preço conhecido ainda
 um vendedor paga o mesmo
 O Corretor
 Mercado
 cada moeda contada, amigo
-Postar
-Paciente
-Ler todos os preços
-Mostrar guardados
 Nada nas suas bolsas pode ser vendido aqui.
+Sem preços nos últimos 7 dias.
+Um dia de preços até agora: uma vela a mais a cada dia em que você visita a casa de leilões.
+7 dias, uma vela por dia: verde fechou mais alto, vermelho mais baixo
+30 dias, o menor do dia: verde sobe, vermelho desce
 Ainda sem histórico de preços: leia a Casa de Leilões por alguns dias.
 Só um dia de preços até agora: a linha cresce a cada dia que você visita a casa de leilões.
 Pede %s cada, %s por todos os %d
@@ -236,16 +267,34 @@ Usual
 %s cada, %s por todos os %d
 Você anunciou %d aqui, %d leilões vendidos
 Nenhum preço conhecido: leia a Casa de Leilões primeiro.
-%d valem a venda aqui, mais %d que você poderia
-%d preços conhecidos, todos lidos %s
-nunca
-O melhor primeiro: o maior ganho sobre um vendedor por unidade
-o que você guarda também é listado (%s oculta)
-%d guardados (para suas profissões, para usar ou marcados), não listados (%s mostra)
-Ocultar guardados
+Bolsas vazias, amigo. Traga algo pra vender.
+Hoje nada aqui bate um vendedor. %d talvez, com um pouco de paciência.
+Nenhum lucro certo nessas bolsas, amigo. %d podem pagar se você esperar.
+O melhor em cima: %d aqui batem qualquer vendedor, %d a mais pros pacientes.
+%d pagam melhor aqui que num vendedor, o melhor primeiro. %d a mais se esperar.
+O topo da pilha paga mais: %d vendas certas, %d a mais se puder esperar.
+Ainda não li o quadro. %s e eu busco todos os preços.
+Nenhum preço ainda, amigo. %s lê o quadro inteiro.
+Preços fresquinhos do quadro, amigo: %d.
+Acabei de ler o quadro: %d preços, ainda quentes.
+%d preços, lidos %s. Tá bom, amigo.
+Última olhada no quadro: %s, %d preços.
+Preços lidos %s, duros como pão velho. %s lê o quadro de novo.
+%d preços, mas lidos %s. %s e eu olho de novo.
+O que você guarda também está na lista. %s tira de vista.
+Mostrando o que você guarda também. %s esconde de novo.
+%d guardados: material de profissão, equipamento pra usar, o que você marcou. %s mostra.
+Separei %d pras suas profissões, pra vestir e os marcados. %s se quiser.
 cada
 sem dados
 Venda rápida
+Paciente
+Ler todos os preços
+Ocultar guardados
+Mostrar guardados
+Linha
+Velas
+Postar
 Postar %d por %s
 Anunciar todos os %d por %s
 Não é possível postar na Casa de Leilões deste cliente a partir daqui.
@@ -257,6 +306,8 @@ Saudação do leiloeiro no Mercado
 um leiloeiro goblin diz uma frase curta, dos sons do próprio jogo, quando o Mercado abre; desligado: abre em silêncio
 Mercado: mostrar o que você guarda
 o Mercado também lista o que você guarda: o que suas profissões ainda aprendem ou transformam em algo que vale mais, e o que você marcou para guardar; desligado: só o que você venderia
+Mercado: gráfico de preços em velas
+o gráfico de preços do Mercado é uma vela por dia nos últimos 7 dias (onde o preço abriu, sua máxima e mínima, e onde fechou: verde quando fechou mais alto, vermelho mais baixo); desligado: uma linha do menor preço de cada dia em 30 dias
 abrir ou fechar o Mercado (uma aba da casa de leilões)
 qual Casa de Leilões este cliente tem (para solução de problemas)
 Offline

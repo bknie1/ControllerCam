@@ -120,6 +120,23 @@ function I.Config(device)
     return nil
 end
 
+-- The letters printed on a controller's buttons, for windows of ours that name a button: A B X Y on an Xbox pad
+-- or a Steam controller (and on a pad that does not say what it is), B A Y X on a Switch pad
+I.LETTERS = {
+    letters = { PAD1 = "A", PAD2 = "B", PAD3 = "X", PAD4 = "Y", PADLSHOULDER = "LB", PADRSHOULDER = "RB",
+                PADLTRIGGER = "LT", PADRTRIGGER = "RT", PADLSTICK = "L3", PADRSTICK = "R3" },
+    switch = { PAD1 = "B", PAD2 = "A", PAD3 = "Y", PAD4 = "X", PADLSHOULDER = "L", PADRSHOULDER = "R",
+               PADLTRIGGER = "ZL", PADRTRIGGER = "ZR", PADLSTICK = "L3", PADRSTICK = "R3" },
+}
+-- A button's letter by the kind of controller chosen (or found), or nil: a PlayStation pad's shapes and the
+-- numbers are the game's own icons (GetBindingText)
+function I.Letter(key)
+    local choice = ns.db and ns.db.padIcons or "auto"
+    local kind = (choice ~= "auto" and choice ~= "game") and choice or I.Detect()
+    if kind == "playstation" or kind == "generic" then return nil end
+    return (kind == "switch" and I.LETTERS.switch or I.LETTERS.letters)[key]
+end
+
 function I.Current()
     local config = I.Config()
     return config and (type(config.labelStyle) == "string" and config.labelStyle or "Generic") or nil

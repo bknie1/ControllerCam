@@ -59,7 +59,10 @@ ns.RegisterSaved("auctionHistory", function(old)
         if type(id) == "number" and type(list) == "table" then
             local clean = {}
             for _, e in ipairs(list) do
-                if type(e) == "table" and tonumber(e.d) and tonumber(e.p) then clean[#clean + 1] = { d = tonumber(e.d), p = tonumber(e.p) } end
+                if type(e) == "table" and tonumber(e.d) and tonumber(e.p) then
+                    clean[#clean + 1] = { d = tonumber(e.d), p = tonumber(e.p), o = tonumber(e.o), x = tonumber(e.x),
+                                          c = tonumber(e.c) }
+                end
             end
             if #clean > 0 then out[id] = clean; n = n + 1 end
         end
@@ -82,11 +85,30 @@ local function Remember(id, each)
     local day = Today()
     local last = h[#h]
     if last and last.d == day then
+        last.o = last.o or last.p                                  -- (a day kept before candles: its lowest)
         if each < last.p then last.p = each end
+        if not last.x or each > last.x then last.x = each end
+        last.c = each
     else
-        h[#h + 1] = { d = day, p = each }
+        -- p the day's lowest; for its candle: o where it opened (the first read), x the highest, c the last read
+        h[#h + 1] = { d = day, p = each, o = each, x = each, c = each }
         while #h > DAYS do table.remove(h, 1) end
     end
+end
+
+-- A candle for each day of the last `days` (7) with a price, oldest first: { d, o = opened, h = highest,
+-- l = lowest, c = closed }. A day kept before candles were (its lowest price alone) opens where the day before
+-- closed and closes at its lowest.
+function M.Candles(id, days)
+    local today, out, prev = Today(), {}, nil
+    for _, e in ipairs(M.History(id)) do
+        local o = e.o or (prev and prev.c) or e.p
+        local c = e.c or e.p
+        local candle = { d = e.d, o = o, c = c, l = math.min(e.p, o, c), h = math.max(e.x or e.p, o, c) }
+        if e.d > today - (days or 7) and e.d <= today then out[#out + 1] = candle end
+        prev = candle
+    end
+    return out
 end
 
 -- The usual price: the middle of the last days before today (nil without them)
@@ -292,22 +314,62 @@ function M.Deposit(id)
     return (each or 0) * M.DEPOSIT
 end
 
--- How likely an auction of it is to sell, from what the auction house has shown you (there are no sales to go
--- by, only listings): a price seen lately and on several days is likely; an old price, or one unusually low
--- today (sellers outnumber buyers), less so. How many are up says little: plenty of Silk Cloth up (1,600 of it
--- in 71 auctions) is a busy market, where cloth sells, not a sign that it will not.
-function M.SellChance(id)
+-- How likely an auction of it is to sell at `ask` each (the suggested price when not given). The house shows
+-- listings, not sales, so this is a judgement, rounded to 5% (it is no more exact than that). A fresh price
+-- just under the lowest starts at 70%; from there, up or down by:
+--   the asking price against the lowest up and against the usual price (under sells, over waits);
+--   how many auctions are up (plenty is a busy market, where things sell; next to none, few buyers look);
+--   where the price went this week (rising, falling, jumping about) and on how many days it was seen;
+--   how your own auctions of it did here (sold, or came back);
+--   a price held up by the vendor floor, and a price read days ago.
+-- Returns the chance (0.05 to 0.95) and what moved it, biggest first: { { text =, d = +/- share }, ... }.
+M.ODDS = 0.60
+function M.SellChance(id, ask)
     local rec = ns.db and ns.db.auction and ns.db.auction[id]
     if not rec then return nil end
+    ask = ask or M.Suggest(id)
     local now = time and time() or 0
-    local p = 0.8
+    local p, why = M.ODDS, {}
+    local function By(d, text) p = p + d; why[#why + 1] = { text = text, d = d } end
     local age = now - (rec.t or 0)
-    if age > 3 * 86400 then p = p - 0.15 elseif age > 86400 then p = p - 0.05 end
+    if age > 3 * 86400 then By(-0.15, L["old prices"]) elseif age > 86400 then By(-0.05, L["old prices"]) end
+    local low = rec.p
+    if ask and low and low > 0 then
+        local r = ask / low
+        if r <= 0.96 then By(0.15, L["under the lowest"]) elseif r < 1 then By(0.10, L["under the lowest"])
+        elseif r > 1.15 then By(-0.20, L["over the lowest"]) elseif r > 1.02 then By(-0.10, L["over the lowest"]) end
+    end
+    local usual, days = M.Usual(id, 7)
+    if ask and usual and usual > 0 then
+        local u = ask / usual
+        if u <= 0.85 then By(0.10, L["under the usual"]) elseif u <= 1 then By(0.05, L["under the usual"])
+        elseif u > 1.3 then By(-0.15, L["over the usual"]) elseif u > 1.15 then By(-0.05, L["over the usual"]) end
+    end
+    if (days or 0) >= 3 then By(0.05, L["seen on several days"]) end
+    if rec.n then
+        if rec.n >= 30 then By(0.05, L["a busy market"]) elseif rec.n <= 2 then By(-0.10, L["hardly any up"]) end
+    end
     local trend = M.Trend(id)
-    if trend and trend < -0.25 then p = p - 0.1 end
-    local _, days = M.Usual(id, 7)
-    if (days or 0) >= 3 then p = p + 0.05 end
-    return math.max(0.3, math.min(0.9, p))
+    if trend and trend > 0.10 then By(0.05, L["prices rising"])
+    elseif trend and trend < -0.15 then By(-0.10, L["prices falling"]) end
+    local lo, hi, today = nil, nil, Today()
+    for _, e in ipairs(M.History(id)) do
+        if e.d > today - 7 and e.d <= today then
+            lo, hi = math.min(lo or e.p, e.p), math.max(hi or e.p, e.p)
+        end
+    end
+    if (days or 0) >= 3 and lo and hi > lo * 1.6 then By(-0.05, L["prices jump about"]) end
+    local mine = ns.db.ahLedger and ns.db.ahLedger[id]               -- (a day after your last post of it)
+    if mine and (mine.lots or 0) >= 2 and now - (mine.t or 0) > 86400 then
+        local rate = math.min(1, (mine.sold or 0) / mine.lots)
+        if rate >= 0.6 then By(0.10, L["yours sold here before"])
+        elseif rate <= 0.25 then By(-0.15, L["yours went unsold before"]) end
+    end
+    local vendor = M.Vendor(id)
+    if ask and vendor and ask * CUT <= vendor * 1.06 then By(-0.05, L["held up by the vendor floor"]) end
+    p = math.floor(math.max(0.05, math.min(0.95, p)) * 20 + 0.5) / 20
+    table.sort(why, function(a, b) return math.abs(a.d) > math.abs(b.d) end)
+    return p, why
 end
 M.ICON = {
     auction = "|TInterface\\Minimap\\Tracking\\Auctioneer:14:14|t",

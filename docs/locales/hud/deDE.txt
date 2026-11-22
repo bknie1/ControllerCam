@@ -93,22 +93,29 @@ repariert alles, sobald sich ein Händler mit Reparaturservice öffnet
 Aus der Gildenbank reparieren
 bezahlt Reparaturen aus der Gildenbank, wenn deine Gilde es erlaubt, sonst mit deinem eigenen Gold
 listet auf, was in dieser Sitzung für dich verkauft wurde, um etwas zurückzukaufen
+Bitte sehr: %s, aus den Säcken in deine Taschen. Vorsicht mit der Schnur.
+Alles deins: %s. Das war so ziemlich der letzte Sack.
+Unterschrieben, versiegelt und übergeben: %s.
+Heute kein Fetzen für dich. Ich hab zweimal nachgesehen.
+Leerer Kasten, Freund. Sogar die Motten sind ausgezogen.
+Briefe, die bei Lieferung Münzen wollen: %d. Die öffnest du selbst; fremde Rechnungen zahle ich nicht.
+Deine Taschen platzen aus allen Nähten. Der Rest wartet in den Briefen, bis du Platz machst.
+%d konnte ich dir nicht geben: Einzelstücke, oder der Kasten wollte nicht loslassen. Sie liegen noch in ihren Briefen.
+Postmeister
 1 Gegenstand
 %d Gegenstände
-Nichts im Briefkasten zu holen.
-Briefkasten: %s entnommen.
  und 
-Briefe mit Nachnahme, für dich zum Öffnen liegen gelassen: %d
-Deine Taschen sind voll: die übrigen Gegenstände warten in ihren Briefen.
-Gegenstände, die das Spiel nicht herausgab (einzigartig oder verweigert), in ihren Briefen gelassen: %d
 Warte auf weitere...
-Öffne zuerst einen Briefkasten.
+Such dir erst einen Briefkasten, dann reden wir.
 Wird entnommen...
 Alles nehmen
 nimmt Geld und Gegenstände aus jedem Brief, Auktionsverkäufe eingeschlossen, auf jeder Seite (erneut drücken zum Anhalten); Briefe mit Nachnahme bleiben unberührt
 Alles aus dem Briefkasten nehmen (erneut drücken zum Anhalten)
+%s und %d weitere
 Alles aus dem Briefkasten nehmen
 ein Knopf neben Alle öffnen am Briefkasten: nimmt Geld und Gegenstände aus jedem Brief, Auktionsverkäufe eingeschlossen, auf jeder Seite; Briefe mit Nachnahme bleiben unberührt
+Post: Betreff aus den Anhängen
+Gegenstände an einen Brief anhängen füllt seinen Betreff mit dem, was sie sind (Leinenstoff x20, oder der erste und wie viele mehr); einen selbst getippten Betreff lässt es in Ruhe
 nimmt Geld und Gegenstände aus jedem Brief im offenen Briefkasten (erneut zum Anhalten)
 Tasche
 Bank
@@ -144,6 +151,20 @@ besser als das, was du trägst
 verarbeitet zu %s
 %d%% Verkaufschance
 Kosten
+alte Preise
+unter dem Niedrigsten
+über dem Niedrigsten
+unter dem Üblichen
+über dem Üblichen
+an mehreren Tagen gesehen
+reger Markt
+kaum etwas im Angebot
+Preise steigen
+Preise fallen
+Preise springen
+deine gingen hier schon weg
+deine blieben schon liegen
+vom Händlerpreis gestützt
 Auktionshaus
 Fertigkeitspunkt: %s
 Quest: %s
@@ -214,17 +235,27 @@ Bank
 Deine Markierung
 Gegenstandsdetails: alles über den Gegenstand, auf den du zeigst
 zeigt alles über den Gegenstand, auf den du zeigst (oder den angegebenen): Preise, wer ihn besitzt, deine Markierung
+Geht sicher weg (%d%%)
+Das verkauft sich von selbst (%d%%)
+Ich denke, das geht weg (%d%%)
+Sollte einen Käufer finden (%d%%)
+Halbe-halbe (%d%%)
+Kann so oder so ausgehen (%d%%)
+Ein kleines Glücksspiel (%d%%)
+Könnte eine Weile liegen (%d%%)
+Darauf würde ich nicht wetten (%d%%)
+Schlechte Karten, Freund (%d%%)
 +%s gegenüber einem Händler
 noch kein Preis bekannt
 ein Händler zahlt genauso viel
 Der Makler
 Markt
 jede Münze gezählt, Freund
-Einstellen
-Geduldig
-Alle Preise lesen
-Behaltenes zeigen
 In deinen Taschen lässt sich hier nichts verkaufen.
+Keine Preise in den letzten 7 Tagen.
+Erst ein Tag mit Preisen: Jeden Tag, an dem du das Auktionshaus besuchst, kommt eine Kerze hinzu.
+7 Tage, eine Kerze pro Tag: grün höher geschlossen, rot tiefer
+30 Tage, der niedrigste des Tages: grün hoch, rot runter
 Noch keine Preisgeschichte: lies das Auktionshaus an ein paar Tagen.
 Erst ein Tag Preise: Die Linie wächst mit jedem Tag, an dem du das Auktionshaus besuchst.
 Verlangt %s pro Stück, %s für alle %d
@@ -236,16 +267,34 @@ Eingestellt: %d Auktionen, %d Gegenstände
 %s pro Stück, %s für alle %d
 Du hast hier %d eingestellt, %d Auktionen verkauft
 Kein Preis bekannt: lies zuerst das Auktionshaus.
-%d lohnen sich hier, %d weitere möglich
-%d Preise bekannt, alle gelesen %s
-nie
-Das Beste zuerst: der größte Gewinn gegenüber einem Händler pro Stück
-was du behältst, wird auch gelistet (%s verbirgt es)
-%d behalten (für deine Berufe, zum Tragen oder markiert), nicht gelistet (%s zeigt sie)
-Behaltenes verbergen
+Leere Taschen, Freund. Bring mir was zum Verkaufen.
+Hier schlägt heute nichts den Händler. %d vielleicht, mit etwas Geduld.
+Kein sicherer Gewinn in diesen Taschen, Freund. %d lohnen sich, wenn du wartest.
+Das Beste oben: %d hier schlagen jeden Händler, %d mehr für Geduldige.
+%d bringen hier mehr als beim Händler, Bestes zuerst. %d mehr, wenn du wartest.
+Oben liegt das Geld: %d sichere Verkäufe, %d mehr, wenn du warten kannst.
+Hab das Brett noch nicht gelesen. %s, und ich hol jeden Preis.
+Noch keine Preise, Freund. %s liest das ganze Brett.
+Preise frisch vom Brett, Freund: %d Stück.
+Gerade das Brett gelesen: %d Preise, noch warm.
+%d Preise, gelesen %s. Gut genug, Freund.
+Zuletzt aufs Brett geschaut: %s, %d Preise.
+Preise von %s, altbacken wie Brot von gestern. %s liest das Brett neu.
+%d Preise, aber gelesen %s. %s, und ich schau nochmal.
+Was du behältst, steht auch auf der Liste. %s räumt es weg.
+Ich zeig auch, was du behältst. %s blendet es wieder aus.
+%d zurückgelegt: Material für Berufe, Ausrüstung, Markiertes. %s zeigt sie.
+%d beiseitegelegt: fürs Handwerk, zum Anziehen, von dir markiert. %s, wenn du sie willst.
 pro Stück
 keine Daten
 Schnellverkauf
+Geduldig
+Alle Preise lesen
+Behaltenes verbergen
+Behaltenes zeigen
+Linie
+Kerzen
+Einstellen
 %d für %s einstellen
 Alle %d für %s einstellen
 In das Auktionshaus dieses Clients kann von hier aus nicht eingestellt werden.
@@ -257,6 +306,8 @@ Gruß des Auktionators im Markt
 ein Goblin-Auktionator sagt einen kurzen Satz aus den Klängen des Spiels, wenn der Markt öffnet; aus: er öffnet still
 Markt: zeigen, was du behältst
 der Markt listet auch, was du behältst: woraus deine Berufe noch lernen oder etwas Wertvolleres herstellen, und was du zum Behalten markiert hast; aus: nur, was du verkaufen würdest
+Markt: Preisverlauf als Kerzen
+der Preisverlauf im Markt ist eine Kerze pro Tag für die letzten 7 Tage (wo der Preis eröffnete, am höchsten und am niedrigsten war und schloss: grün, wenn er höher schloss, rot, wenn tiefer); aus: eine Linie des niedrigsten Tagespreises über 30 Tage
 den Markt öffnen oder schließen (ein Reiter des Auktionshauses)
 welches Auktionshaus dieser Client hat (zur Fehlersuche)
 Offline
