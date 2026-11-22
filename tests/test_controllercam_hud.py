@@ -133,7 +133,10 @@ class Files(unittest.TestCase):
         names = sorted(os.listdir(os.path.join(HUD, "Media")))
         self.assertEqual(names, ["bar.tga", "bobber.tga", "bolt.tga", "crystal.tga", "disc.tga", "fish.tga", "flame.tga",
                                  "flower.tga", "ghost.tga", "halo.tga", "hammer.tga", "leaf.tga", "mapring.tga",
-                                 "mark.tga", "mask.tga", "pick.tga", "quest.tga", "ring.tga", "roots.tga",
+                                 "mark.tga", "mask.tga", "pad_ps_circle.tga", "pad_ps_cross.tga",
+                                 "pad_ps_square.tga", "pad_ps_triangle.tga", "pad_steam_a.tga", "pad_steam_b.tga",
+                                 "pad_steam_x.tga", "pad_steam_y.tga", "pad_xbox_a.tga", "pad_xbox_b.tga",
+                                 "pad_xbox_x.tga", "pad_xbox_y.tga", "pick.tga", "quest.tga", "ring.tga", "roots.tga",
                                  "runes.tga", "skull.tga", "soft.tga", "spark.tga", "threat.tga", "vine.tga",
                                  "vines.tga", "wing.tga"])
         for n in names:
@@ -165,8 +168,11 @@ class Packaging(unittest.TestCase):
         wf = open(os.path.join(ROOT, ".github", "workflows", "release.yml"), encoding="utf-8").read()
         for piece in ("ControllerCam_HUD/ControllerCam_HUD.toc", "ControllerCam_HUD/*.lua", "ControllerCam_HUD/Bindings.xml",
                       "cp -r ControllerCam_HUD/Media dist/ControllerCam_HUD/Media", "python tests/test_controllercam_hud.py",
-                      "ControllerCam ControllerCam_HUD)"):
+                      "ControllerCam ControllerCam_HUD InputSwap)", "submodules: true",
+                      "cp -r InputSwap/Media dist/InputSwap/Media"):    # (InputSwap: the third of the stack)
             self.assertIn(piece, wf)
+        self.assertIn("ControllerCam/InputSwap: InputSwap", open(os.path.join(ROOT, ".pkgmeta"), encoding="utf-8").read())
+        self.assertTrue(os.path.isfile(os.path.join(ROOT, "InputSwap", "InputSwap.toc")))
         self.assertIn("python tests/test_controllercam_hud.py",
                       open(os.path.join(ROOT, ".github", "workflows", "tests.yml"), encoding="utf-8").read())
         self.assertIn("ControllerCam/ControllerCam_HUD: ControllerCam_HUD",
@@ -3397,6 +3403,26 @@ class Plates(unittest.TestCase):
         self.assertEqual(col(o), tuple(e.ns.colors.friendly.values()))   # off: friendly green for all
         self.assertEqual(e.errors(), [])
 
+    def test_only_your_targets_plate_shakes_and_only_for_you(self):
+        e = Env()
+        IM = e.ns.Impact
+        data, plate, o = self.enemy(e)
+        data2, plate2, o2 = self.enemy(e, "nameplate2", name="Other")
+        e.update(1)
+        data2.health = 300                                           # someone else hits another mob
+        e.mock.fire("UNIT_HEALTH", "nameplate2")
+        self.assertFalse(IM.IsShaking(IM, o2))
+        e.mock.setUnit("target", data)
+        data.health = 500                                            # your target loses health, nothing of yours
+        e.mock.fire("UNIT_HEALTH", "nameplate1")
+        self.assertFalse(IM.IsShaking(IM, o))
+        e.update(1)
+        e.mock.fire("UNIT_SPELLCAST_SUCCEEDED", "player", "cast", 133)   # you cast, and it is hit
+        data.health = 400
+        e.mock.fire("UNIT_HEALTH", "nameplate1")
+        self.assertTrue(IM.IsShaking(IM, o))
+        self.assertEqual(e.errors(), [])
+
     def test_your_target_stands_out(self):
         e = Env()
         data, plate, o = self.enemy(e)
@@ -5785,6 +5811,19 @@ class ShortObjectives(unittest.TestCase):
 class PadIcons(unittest.TestCase):
     """The icons on the buttons are the game's own style for the controller in use: found, or chosen."""
 
+    def test_our_prompts_draw_the_buttons_of_your_controller(self):
+        e = Env()
+        I = e.ns.PadIcons
+        for choice, key, art in (("steam", "PAD3", "pad_steam_x"), ("xbox", "PAD1", "pad_xbox_a"),
+                                 ("playstation", "PAD2", "pad_ps_circle"), ("switch", "PAD1", "pad_steam_b")):
+            e.db.padIcons = choice
+            self.assertIn(art, e.ns.KeyText(key), choice)
+        e.db.padIcons = "steam"
+        self.assertNotIn("pad_", e.ns.KeyText("PADLSHOULDER"))     # any other button: the game's own
+        e.db.padIcons = "generic"
+        self.assertNotIn("pad_", e.ns.KeyText("PAD3"))             # numbers: the game's own
+        self.assertEqual(e.errors(), [])
+
     GAME = """function(mock)
         local function copy(t)
             local out = {}
@@ -6244,9 +6283,9 @@ class FishingMode(unittest.TestCase):
         self.assertIn("PAD3 to cast your line", list(e.mock.printed.values())[-1])    # said once
         said = len(e.mock.printed)
         self.line(e, True)
-        self.assertEqual(e.mock.overrides.PAD3, "SPELL Fishing")   # the float is out: one press casts again
-        self.assertEqual(e.mock.overrides.PAD1, "INTERACTTARGET")  # and A hooks the fish
-        self.assertEqual(plain(F.hint.text.text), "PAD1 to hook, PAD3 to cast again")
+        self.assertIsNone(e.mock.overrides.PAD3)                    # the float is out: X hooks (the game's interact)
+        self.assertEqual(e.mock.overrides.PAD1, "SPELL Fishing")   # and A casts a fresh line
+        self.assertEqual(plain(F.hint.text.text), "PAD3 to hook, PAD1 to cast again")
         self.line(e, False)
         self.assertEqual(e.mock.overrides.PAD3, "SPELL Fishing")   # and it casts again
         self.assertIsNone(e.mock.overrides.PAD1)                    # A is the game's again
@@ -6284,8 +6323,8 @@ class FishingMode(unittest.TestCase):
         self.line(e, True)                                           # it began: still the bait, for the same moment
         self.assertEqual(e.mock.overrides.PAD3, "CLICK ControllerCamHUD_FishingBait:LeftButton")
         e.update(0.9)
-        self.assertEqual(e.mock.overrides.PAD3, "SPELL Fishing")     # then a fresh cast again,
-        self.assertEqual(e.mock.overrides.PAD1, "INTERACTTARGET")    # and A for the hook
+        self.assertIsNone(e.mock.overrides.PAD3)                     # then X hooks,
+        self.assertEqual(e.mock.overrides.PAD1, "SPELL Fishing")     # and A casts again
         self.assertEqual(e.errors(), [])
 
     def test_the_prompt_steps_aside_while_bait_goes_on(self):
@@ -6442,9 +6481,9 @@ class FishingMode(unittest.TestCase):
         e.update(0.5)
         self.assertEqual(e.mock.overrides.PADRTRIGGER, "SPELL Fishing")    # it casts all the same
         e.mock.units.softinteract = None
-        self.line(e, True)                                           # the float is out: the trigger casts again,
-        self.assertEqual(e.mock.overrides.PADRTRIGGER, "SPELL Fishing")
-        self.assertEqual(e.mock.overrides.PAD1, "INTERACTTARGET")   # and A hooks
+        self.line(e, True)                                           # the float is out: the trigger hooks,
+        self.assertEqual(e.mock.overrides.PADRTRIGGER, "INTERACTTARGET")
+        self.assertEqual(e.mock.overrides.PAD1, "SPELL Fishing")    # and A casts again
         e.cmd("fishrecast off")
         self.assertEqual(e.mock.overrides.PADRTRIGGER, "INTERACTTARGET")   # off: the trigger hooks, by the game's Interact
         e.cmd("fishrecast on")
@@ -6459,8 +6498,36 @@ class FishingMode(unittest.TestCase):
         self.assertEqual(e.mock.overrides.PAD3, "SPELL Fishing")
         self.assertIsNone(e.mock.overrides.PADRTRIGGER)
         self.line(e, True)
-        self.assertEqual(e.mock.overrides.PAD3, "SPELL Fishing")    # which casts again,
-        self.assertEqual(e.mock.overrides.PAD1, "INTERACTTARGET")   # and A hooks
+        self.assertIsNone(e.mock.overrides.PAD3)                    # which hooks (the game's interact),
+        self.assertEqual(e.mock.overrides.PAD1, "SPELL Fishing")    # and A casts again
+        self.assertEqual(e.errors(), [])
+
+    def test_nothing_is_taken_while_a_window_is_open_and_b_is_yours_without_weapons(self):
+        e = self.env(pole=False)
+        F = e.ns.Fishing
+        e.lua.execute("ContainerFrameCombinedBags = CreateFrame('Frame', 'ContainerFrameCombinedBags', UIParent)")
+        e.g.ContainerFrameCombinedBags.shown = True                  # your bags are open as you put the pole on
+        e.mock.state.mainHand = 6256
+        e.mock.fire("PLAYER_EQUIPMENT_CHANGED", 16)
+        e.update(0.5)
+        self.assertIsNone(e.mock.overrides.PAD3)                     # X and B are the bags'
+        self.assertIsNone(e.mock.overrides.PAD2)
+        e.g.ContainerFrameCombinedBags.shown = False                 # closed: fishing
+        e.update(0.5)
+        self.assertEqual(e.mock.overrides.PAD3, "SPELL Fishing")
+        self.assertEqual(e.mock.overrides.PAD2, "CLICK ControllerCamHUD_FishingBack:LeftButton")   # the sword is known
+        e.db.fishWeapons = None                                      # nothing known to take back:
+        e.mock.fire("PLAYER_EQUIPMENT_CHANGED", 16)
+        e.update(0.5)
+        self.assertIsNone(e.mock.overrides.PAD2)                     # B stays yours
+        F.paused = True                                              # turned off, then the pole put away and back:
+        e.mock.state.mainHand = 25
+        e.mock.fire("PLAYER_EQUIPMENT_CHANGED", 16)
+        e.mock.state.mainHand = 6256
+        e.mock.fire("PLAYER_EQUIPMENT_CHANGED", 16)
+        e.update(0.5)
+        self.assertFalse(F.paused)                                   # on again
+        self.assertEqual(e.mock.overrides.PAD3, "SPELL Fishing")
         self.assertEqual(e.errors(), [])
 
     def test_the_catch_is_taken_and_your_auto_loot_is_left_alone(self):
@@ -7151,7 +7218,7 @@ class FishingGame(unittest.TestCase):
         self.line(e, True)
         e.mock.keysDown.PADLTRIGGER = True
         e.update(2)
-        self.assertEqual(e.mock.overrides.PAD1, "INTERACTTARGET")   # and the hook is the game's own interact, on A
+        self.assertEqual(e.mock.overrides.PAD1, "SPELL Fishing")    # A casts again; X hooks, the game's own interact
         self.assertIsNone(e.mock.overrides.PADLTRIGGER)             # the trigger is only looked at
         self.assertIsNone(G.frame.scripts.OnGamePadButtonDown)      # no press is taken
         self.assertIsNone(G.frame.scripts.OnKeyDown)
@@ -7163,7 +7230,7 @@ class FishingGame(unittest.TestCase):
         self.line(e, True)
         e.update(0.6)
         self.assertIn("RTRIGGER", G.frame.text.text)
-        self.assertEqual(e.mock.overrides.PADLTRIGGER, "SPELL Fishing")    # (casts again; A hooks)
+        self.assertEqual(e.mock.overrides.PADLTRIGGER, "INTERACTTARGET")   # (hooks; A casts again)
         self.assertIsNone(e.mock.overrides.PADRTRIGGER)
         e.mock.keysDown.PADLTRIGGER = False
         e.mock.keysDown.PADRTRIGGER = True
@@ -7971,6 +8038,28 @@ class TooltipsAreTheGames(unittest.TestCase):
         self.assertNotIn("tooltipCursor", list(e.ns.STYLE.values()))
         self.assertEqual(e.errors(), [])
 
+    def test_the_panel_under_a_tooltip_stays_while_the_game_fills_it_again(self):
+        e = Env()
+        e.lua.execute("""
+            AnnexTip = CreateFrame("GameTooltip", "AnnexTip", UIParent)
+            AnnexTipTextLeft1 = CreateFrame("Frame")
+            AnnexTipTextLeft1.text = "Linen Cloth"
+        """)
+        g = e.lua.globals()
+        T = e.ns.Tooltip
+        T.Annex(g.AnnexTip, e.lua.table_from([e.lua.table_from(["Vendor", "10c"])]))
+        panel = T.annex[g.AnnexTip].frame
+        self.assertTrue(panel.shown)
+        g.AnnexTipTextLeft1.text = ""                                # the game fills it again: a blink
+        e.update(0.15)
+        g.AnnexTipTextLeft1.text = "Linen Cloth"
+        e.update(0.5)
+        self.assertTrue(panel.shown)                                 # still there
+        g.AnnexTipTextLeft1.text = "Wool Cloth"                      # moved on for good
+        e.update(0.6)
+        self.assertFalse(panel.shown)
+        self.assertEqual(e.errors(), [])
+
 
 class BuffsRest(unittest.TestCase):
     def test_buffs_fade_with_the_rest_of_the_screen(self):
@@ -8397,6 +8486,28 @@ class Moments(unittest.TestCase):
         self.assertEqual(M.frame.label.text, "+ Holy Strike\n+ Melee")   # not Holy Strike twice
         self.assertEqual(e.errors(), [])
 
+    def test_hidden_amounts_are_added_up_where_the_game_allows_it(self):
+        e = self.env()
+        M = e.ns.Moments
+        make = e.lua.eval("""function(v)
+            local mt = {}
+            mt.__add = function(a, b)
+                local x = (type(a) == "table" and a.v or a) + (type(b) == "table" and b.v or b)
+                return setmetatable({ secret = true, v = x }, mt)
+            end
+            return setmetatable({ secret = true, v = v }, mt)
+        end""")
+        self.land(e, 20271, make(200), True)
+        e.update(0.1)
+        self.land(e, 679, make(150), True)
+        e.update(0.6)
+        self.assertTrue(M.secretSum)                                 # the game adds them: a total of its own
+        self.assertEqual(M.fight.chain.total.v, 350)
+        self.assertEqual(M.frame.label.text, "+ Judgement\n+ Holy Strike")    # the names, and the total big
+        self.assertNotIn("crits", M.frame.number.text)
+        self.assertIn("hidden amounts added up: yes", M.Describe()[1])
+        self.assertEqual(e.errors(), [])
+
     def test_small_crits_are_no_moment(self):
         e = self.env()
         M = e.ns.Moments
@@ -8492,10 +8603,9 @@ class Moments(unittest.TestCase):
         e.update(0.1)
         self.land(e, 679, 450, True)
         e.update(0.6)
-        self.assertIsNotNone(M.live)                                # still the moment, with both names,
-        self.assertEqual(M.frame.label.text, "+ Judgement\n+ Holy Strike")
-        self.assertEqual(M.frame.number.text, "42 + 450")           # each hit side by side (the game writes
-        self.assertLess(M.live.base, 46)                             # out the secret one), smaller to fit
+        self.assertIsNotNone(M.live)                                # still the moment: each crit's amount
+        self.assertEqual(M.frame.label.text, "+ Judgement  42\n+ Holy Strike  450")   # beside its name (the game
+        self.assertEqual(M.frame.number.text, "2 crits")            # writes out the secret one), and big how many
         self.assertIn("1 secret", M.Describe()[1])
         e.mock.fire("PLAYER_REGEN_DISABLED")                        # another fight, the combat log readable
         e.update(10)
@@ -9072,7 +9182,7 @@ class Inventory(unittest.TestCase):
         self.assertEqual([(p[1], p[3], p[4], p[5]) for p in a.frame.points.values()], frame_points)
         e.lua.execute("GameTooltip.GetBottom = function() return 4 end")
         e.g.TITLE = "Some Button"                                    # the tooltip went on to something else
-        e.update(0.3)
+        e.update(0.6)
         self.assertFalse(a.frame.shown)
         e.g.TITLE = "Odd Thing"
         e.g.ShowItem(2589)
@@ -9478,7 +9588,7 @@ class MarketPanel(unittest.TestCase):
         P = self.house(e)
         e.g.ControllerCamHUD_Market()
         self.assertNotIn(2770, [x.id for x in P.list.values()])               # kept for a profession: not listed,
-        self.assertIn("1 kept", plain(P.view.keptNote.text))
+        self.assertRegex(plain(P.view.keptNote.text), r"1 kept|Set 1 aside")  # (the Broker says it two ways)
         P.Pad(P, "PADRSHOULDER")                                              # until RB asks for it
         for _ in range(5):
             if P.chosen and P.chosen.id == 2770:
@@ -11606,6 +11716,42 @@ class LongFrames(unittest.TestCase):
         e.g.WorldMapFrame.shown = False
         e.update(0.2)
         self.assertEqual(R.redraws, n + 1)                                   # done once it is closed
+        self.assertEqual(e.errors(), [])
+
+
+class BreathBar(unittest.TestCase):
+    """Underwater: a breath bar of ours with bubbles, beside the vertical bars; the game's own kept out of sight."""
+
+    def test_breath_with_bubbles_beside_the_vertical_bars(self):
+        e = Env()
+        e.lua.execute("""
+            BREATH_MS = 60000
+            function GetMirrorTimerProgress(t) if t == "BREATH" then return BREATH_MS end end
+            MirrorTimer1 = CreateFrame("Frame", "MirrorTimer1", UIParent)
+            MirrorTimer1.timer = "BREATH"
+        """)
+        g = e.lua.globals()
+        B = e.ns.Breath
+        e.cmd("vertical on")
+        e.mock.fire("MIRROR_TIMER_START", "BREATH", 60000, 60000, -1, 0, "Breath")
+        e.update(0.5)
+        self.assertTrue(B.running)
+        self.assertTrue(B.frame.shown)
+        self.assertEqual(B.where, "vertical")                        # on the player data
+        self.assertEqual(g.MirrorTimer1.alpha, 0)                    # the game's own out of sight
+        g.BREATH_MS = 6000                                           # little left
+        e.update(1.5)
+        c = B.frame.bar.fill.color
+        self.assertGreater(c[1], c[3])                               # red now
+        self.assertTrue(any(b.born for b in B.bubbles.values()))     # bubbles rising
+        e.mock.fire("MIRROR_TIMER_STOP", "BREATH")
+        self.assertFalse(B.frame.shown)
+        self.assertEqual(g.MirrorTimer1.alpha, 1)                    # the game's own as it was
+        e.cmd("vertical off")
+        e.mock.fire("MIRROR_TIMER_START", "BREATH", 60000, 60000, -1, 0, "Breath")
+        self.assertIn(B.where, ("player", "top"))
+        e.cmd("breath off")
+        self.assertFalse(B.frame.shown)
         self.assertEqual(e.errors(), [])
 
 

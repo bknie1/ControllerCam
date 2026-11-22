@@ -34,6 +34,8 @@ Ziel
 Ziel des Ziels
 Fokus
 Vertikale Balken
+Atem mit Blasen
+unter Wasser dein Atem als eigene Leiste mit aufsteigenden Blasen: neben den senkrechten Leisten, unter dem Spielerrahmen oder oben am Bildschirm
 %d Gegenstände eingezahlt
 %d Gegenstände aus der Bank genommen
 %d Gegenstände für %s verkauft (/cchud sold listet sie auf)
@@ -471,6 +473,8 @@ ein Anschwellen beim Stufenaufstieg, ein langes tiefes Grollen, wenn du stirbst
 Lichtleiste zeigt deine Gesundheit
 ein Controller mit Lichtleiste (DualSense) zeigt darin deine Gesundheit: von Grün zu Rot, pulsierend bei wenig Gesundheit im Kampf
 jedes Vibrationsmuster einmal abspielen
+%d kritische Heilungen
+%d Krits
 Richturteil
 Vibration: deine Schlüsselfähigkeiten
 die Schlüsselfähigkeiten jeder Klasse fühlen sich am Controller eigen an (ein Richturteil spritzt, ein Heiliger Stoß schnappt zu, Windzorn klopft dreimal)
@@ -626,7 +630,7 @@ Angeltaste: %s
 Angeln mit einer Taste
 mit einer Angel in der Hand: deine Interaktionstaste zum Auswerfen, wann immer es nichts zum Interagieren gibt, und noch einmal zum Anschlagen, wenn der Schwimmer zuckt; der Fang wird für dich genommen. B steckt die Angel weg und gibt dir deine Waffen zurück
 Mit einem Druck neu auswerfen
-solange der Schwimmer draußen ist, wirft deine Angeltaste mit einem Druck neu aus, und A haut den Fisch an (das Spiel gibt kein Zeichen für einen Biss, auf das man warten könnte, also kann eine Taste nicht beides); aus: die Angeltaste haut an, wie die Interaktion des Spiels
+solange der Schwimmer draußen ist, holt deine Angeltaste den Fisch ein und A wirft mit einem Druck neu aus; aus: A gehört dir
 Köder mit Doppeldruck
 drücke deine Angeltaste zweimal schnell: der zweite Druck bringt den besten Köder aus deinen Taschen an die Angel, wenn sie keinen hat
 Gamepad-Leisten beim Angeln ausblenden

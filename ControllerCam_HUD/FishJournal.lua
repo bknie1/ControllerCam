@@ -20,6 +20,7 @@ local WIDTH, HEIGHT, LIST = 640, 420, 300
 local frame
 
 local function KeyName(key)
+    if ns.KeyText then return ns.KeyText(key) end                  -- (your controller's own icons: PadIcons.lua)
     local text = GetBindingText and GetBindingText(key) or key
     return (type(text) == "string" and text ~= "") and text or key
 end

@@ -250,7 +250,7 @@ end
 ---------------------------------------------------------------------------
 -- A hit on a bar: { frame = (what shakes), anchor = (what it is pinned to), bar = (what flashes) }
 ---------------------------------------------------------------------------
-function IM:Hit(target, school, crit)
+function IM:Hit(target, school, crit, shake)
     local p = self.PROFILES[school] or self.PROFILES.physical
     local mult = crit and CRIT or 1
     target.frame.lastImpact = GetTime()
@@ -260,7 +260,7 @@ function IM:Hit(target, school, crit)
     if p.twice then
         C_Timer.After(0.12, function() target.bar:Flash(0.2, p.color, p.fade) end)
     end
-    self:Shake(target.frame, target.anchor, p, mult)
+    self:Shake(target.frame, target.anchor, p, mult * (shake or 1))
     self.last = { school = school, crit = crit and true or false }
 end
 
@@ -620,6 +620,8 @@ end
 -- In a group your plain melee swings are not told apart from the others' there; the combat log, where it can
 -- be read, names who hit and needs none of this.
 IM.OWN_WINDOW = 0.8
+-- Did you just do something (a cast of yours this moment)? A nameplate only shakes for that.
+function IM.JustYou() return GetTime() - lastOwn <= IM.OWN_WINDOW end
 IM.others = 0
 local function YoursOn(unit, school)
     local U = ns.Unit

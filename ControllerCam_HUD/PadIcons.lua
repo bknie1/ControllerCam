@@ -137,6 +137,42 @@ function I.Letter(key)
     return (kind == "switch" and I.LETTERS.switch or I.LETTERS.letters)[key]
 end
 
+---------------------------------------------------------------------------
+-- Our own icons for the four face buttons, for every prompt of ours that names a button ("X to cast"): white
+-- letters on a black disc for a Steam controller, the coloured letters of an Xbox pad, the coloured shapes of a
+-- PlayStation pad, a Switch pad's letters the other way round. The game's own icon (its numbers) for any other
+-- button, any other pad, and where nothing says what the pad is. Drawn by docs/make_pad_art.py. The game's own
+-- bars keep the game's icons: it has no setting of its own for every controller.
+---------------------------------------------------------------------------
+I.ART = "Interface\\AddOns\\ControllerCam_HUD\\Media\\pad_"
+I.ICONS = {
+    steam = { PAD1 = "steam_a", PAD2 = "steam_b", PAD3 = "steam_x", PAD4 = "steam_y" },
+    xbox = { PAD1 = "xbox_a", PAD2 = "xbox_b", PAD3 = "xbox_x", PAD4 = "xbox_y" },
+    playstation = { PAD1 = "ps_cross", PAD2 = "ps_circle", PAD3 = "ps_square", PAD4 = "ps_triangle" },
+    switch = { PAD1 = "steam_b", PAD2 = "steam_a", PAD3 = "steam_y", PAD4 = "steam_x" },
+}
+function I.Kind()
+    local choice = ns.db and ns.db.padIcons or "auto"
+    if choice ~= "auto" and choice ~= "game" then return choice end
+    return I.Detect()
+end
+-- The icon of a button as text (|T...|t), size in pixels (0: the height of the line), or nil
+function I.Markup(key, size)
+    local set = I.ICONS[I.Kind() or ""]
+    local art = set and set[key]
+    if not art then return nil end
+    return ("|T%s%s:%d:%d|t"):format(I.ART, art, size or 0, size or 0)
+end
+-- What a prompt of ours writes for a button: our icon, else the game's own name for it (its icon), else the key
+function I.KeyText(key, size)
+    local markup = I.Markup(key, size)
+    if markup then return markup end
+    local text = GetBindingText and GetBindingText(key) or key
+    if type(text) ~= "string" or ns.IsSecret(text) or text == "" then return tostring(key) end
+    return text
+end
+function ns.KeyText(key, size) return I.KeyText(key, size) end
+
 function I.Current()
     local config = I.Config()
     return config and (type(config.labelStyle) == "string" and config.labelStyle or "Generic") or nil

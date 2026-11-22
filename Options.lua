@@ -227,10 +227,32 @@ end)
 Tooltip(delay, L["Stops the camera from flickering between profiles when a situation switches on and off quickly."])
 refreshers[#refreshers + 1] = function() delay:SetValue(ns.db.exitDelay); DelayLabel(ns.db.exitDelay) end
 
+-- Closer on an enemy target (0: off)
+local near = CreateFrame("Slider", "ControllerCamOptTargetZoom", panel, "OptionsSliderTemplate")
+near:SetPoint("TOPLEFT", delay, "BOTTOMLEFT", 0, -34)
+near:SetWidth(240)
+near:SetMinMaxValues(0, 15)
+near:SetValueStep(0.5)
+if near.SetObeyStepOnDrag then near:SetObeyStepOnDrag(true) end
+local nearText = _G["ControllerCamOptTargetZoomText"]
+local function NearLabel(v)
+    if not nearText then return end
+    if v > 0 then nearText:SetText((L["Closer on an enemy target: %.1f yards"]):format(v))
+    else nearText:SetText(L["Closer on an enemy target: off"]) end
+end
+if _G["ControllerCamOptTargetZoomLow"] then _G["ControllerCamOptTargetZoomLow"]:SetText(L["off"]) end
+if _G["ControllerCamOptTargetZoomHigh"] then _G["ControllerCamOptTargetZoomHigh"]:SetText("15") end
+near:SetScript("OnValueChanged", function(_, value)
+    NearLabel(value)
+    if not refreshing then ns.SetTargetZoom(value) end
+end)
+Tooltip(near, L["Target an enemy and the camera comes in to this distance; let it go and it goes back to where you had it (not while mounted). Roam far out, fight up close."])
+refreshers[#refreshers + 1] = function() near:SetValue(ns.db.targetZoom or 0); NearLabel(ns.db.targetZoom or 0) end
+
 local flip = MakeCheckbox(panel, "ControllerCamOptFlip", L["Mirror the shoulder offset (other shoulder)"],
     L["Swaps which shoulder the camera looks over."],
     function() return ns.db.flipShoulder end, function(v) ns.SetFlipShoulder(v) end)
-flip:SetPoint("TOPLEFT", delay, "BOTTOMLEFT", -8, -16)
+flip:SetPoint("TOPLEFT", near, "BOTTOMLEFT", -8, -16)
 
 local nowDesc = panel:CreateFontString(nil, "ARTWORK", "GameFontHighlightSmall")
 nowDesc:SetPoint("TOPLEFT", flip, "BOTTOMLEFT", 2, -10)

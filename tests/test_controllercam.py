@@ -709,6 +709,40 @@ class Situations(unittest.TestCase):
         env.state(instance="party"); env.tick(2); self.assertEqual(name(), "Action")
         env.state(instance=None); env.tick(2); self.assertEqual(name(), "Action")
 
+    def test_closer_on_an_enemy_target_and_back_out_after(self):
+        env = Env()
+        env.run("""
+            ENEMY = false
+            function UnitExists(u) return u == "target" and ENEMY end
+            function UnitCanAttack() return ENEMY end
+            function UnitIsDead() return false end
+        """)
+        g = env.lua.globals()
+        self.assertEqual(env.db().targetZoom, 0)                     # off to begin with
+        env.state(zoom=14)
+        g.ENEMY = True
+        env.mock.fire("PLAYER_TARGET_CHANGED")
+        self.assertEqual(env.mock.state.zoom, 14)                    # off: nothing
+        self.assertIn("6.0", " ".join(env.cmd("targetzoom 6")))
+        self.assertAlmostEqual(env.mock.state.zoom, 6)               # an enemy target: in close
+        g.ENEMY = False
+        env.mock.fire("PLAYER_TARGET_CHANGED")
+        env.tick(0.6)
+        self.assertAlmostEqual(env.mock.state.zoom, 6)               # (a moment: the next one may come)
+        env.tick(2.5)
+        self.assertAlmostEqual(env.mock.state.zoom, 14)              # gone: back out where you had it
+        g.ENEMY = True
+        env.mock.fire("PLAYER_TARGET_CHANGED")
+        env.state(zoom=9)                                            # you zoom yourself meanwhile
+        g.ENEMY = False
+        env.mock.fire("PLAYER_TARGET_CHANGED")
+        env.tick(3)
+        self.assertAlmostEqual(env.mock.state.zoom, 9)               # yours stays
+        env.state(mounted=True, zoom=20)
+        g.ENEMY = True
+        env.mock.fire("PLAYER_TARGET_CHANGED")
+        self.assertAlmostEqual(env.mock.state.zoom, 20)              # mounted: left alone
+
     def test_indoors_does_nothing_until_assigned_and_a_pole_alone_changes_nothing(self):
         env = Env()
         name = lambda: env.ns.Status().profile
@@ -760,12 +794,17 @@ class Situations(unittest.TestCase):
         head = lambda: float(env.cv("test_cameraHeadMovementStrength"))
         self.assertEqual(head(), 1)
         shoulder = env.cv("test_cameraOverShoulder")
+        pitch = lambda: float(env.cv("test_cameraDynamicPitch"))
+        self.assertEqual(pitch(), 1)
         env.state(swimming=True); env.tick(2)
         self.assertEqual(head(), 0)                                    # the stroke does not drag the camera
+        self.assertEqual(pitch(), 0)                                   # nor does the sea bed tilt it
+        self.assertEqual(float(env.cv("cameraTerrainTilt")), 0)
         self.assertEqual(env.cv("test_cameraOverShoulder"), shoulder)  # the offset is left as it was
         self.assertEqual(env.ns.Status().profile, "Action")
         env.state(swimming=False); env.tick(2)
         self.assertEqual(head(), 1)                                    # out of the water: as the profile has it
+        self.assertEqual(pitch(), 1)
         trace = list(env.ns.GetDB().trace.values())
         self.assertTrue(any("into the water: " in l and "test_cameraOverShoulder=" in l and "facing=" in l
                             for l in trace))

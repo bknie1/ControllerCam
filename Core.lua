@@ -576,7 +576,9 @@ end
 -- moment you leave the water. What happens as you go in and come out is noted in ControllerCamDB.trace, to be
 -- read after a reload: the camera's values, any the game changes by itself, and whether your character turned.
 ---------------------------------------------------------------------------
-ns.WATER = { test_cameraHeadMovementStrength = "0" }
+-- The camera that tilts with the ground under you (dynamic pitch, terrain tilt) tilts with the sea bed too: it
+-- swung up and down as you swam over it. Both rest in the water as well.
+ns.WATER = { test_cameraHeadMovementStrength = "0", test_cameraDynamicPitch = "0", cameraTerrainTilt = "0" }
 ns.WATCHED = { "test_cameraOverShoulder", "test_cameraHeadMovementStrength", "GamePadFaceMovementSwimming",
                "GamePadFaceMovementMaxAngle", "GamePadTurnWithCamera", "test_cameraDynamicPitch",
                "CameraFollowOnStick", "GamepadCameraFollowOnStick" }
@@ -748,6 +750,55 @@ function ns.SetExitDelay(n)
     db.exitDelay = math.min(math.max(tonumber(n) or DEFAULT_EXIT_DELAY, 0), 10)
 end
 
+---------------------------------------------------------------------------
+-- Closer on an enemy: target an enemy and the camera comes in to this distance (yards), the profile in effect
+-- otherwise as it is (its offset, its angle); let the target go (dead, or none for a moment) and it goes back to
+-- where you had it, unless you zoomed yourself meanwhile. Roaming far out, fighting up close. 0: off. Not while
+-- mounted, flying or in a vehicle, and not while a scene of the HUD has the camera.
+---------------------------------------------------------------------------
+local TARGET_LET_GO = 2.0     -- seconds without an enemy target before the camera goes back out
+local closer, lostAt          -- { from = the distance you had, to = ours }
+local function Yes(fn, ...)   -- a yes from the game (one it keeps to itself counts as no)
+    local ok, v = pcall(fn, ...)
+    if not ok then return false end
+    local okT, yes = pcall(function() return v == true or (v ~= nil and v ~= false and v ~= 0) end)
+    return okT and yes or false
+end
+local function EnemyTarget()
+    if not (UnitExists and UnitCanAttack and UnitIsDead) then return false end
+    return Yes(UnitExists, "target") and Yes(UnitCanAttack, "player", "target") and not Yes(UnitIsDead, "target")
+end
+ns.EnemyTarget = EnemyTarget
+
+function ns.TargetZoom()
+    if not db or held then return end
+    local want = tonumber(db.targetZoom) or 0
+    local blocked = not db.enabled or want <= 0 or Yes(G, "IsMounted") or Yes(G, "IsFlying")
+        or Yes(G, "UnitInVehicle", "player")
+    local cur = tonumber(G("GetCameraZoom"))
+    if not blocked and EnemyTarget() then
+        lostAt = nil
+        if not closer and cur and cur > want + 0.5 then
+            closer = { from = cur, to = want }
+            SetZoom(want, {})
+            ns.closerCount = (ns.closerCount or 0) + 1
+        end
+        return
+    end
+    if not closer then return end
+    lostAt = lostAt or GetTime()
+    if blocked or GetTime() - lostAt >= TARGET_LET_GO then
+        if cur and math.abs(cur - closer.to) < 1.0 then SetZoom(closer.from, {}) end   -- (zoomed yourself: stays)
+        closer, lostAt = nil, nil
+    end
+end
+function ns.TargetZoomState() return closer and { from = closer.from, to = closer.to } or nil end
+
+function ns.SetTargetZoom(n)
+    db.targetZoom = math.min(math.max(tonumber(n) or 0, 0), 15)
+    ns.TargetZoom()
+end
+
 function ns.SetFlipShoulder(v)
     db.flipShoulder = v and true or false
     ns.Evaluate(true)
@@ -791,6 +842,7 @@ local function InitDB()
         v = 3,
         enabled = old.enabled ~= false,
         exitDelay = math.min(math.max(tonumber(old.exitDelay) or DEFAULT_EXIT_DELAY, 0), 10),
+        targetZoom = math.min(math.max(tonumber(old.targetZoom) or 0, 0), 15),   -- closer on an enemy (0: off)
         flipShoulder = old.flipShoulder == true,
         welcomed = old.welcomed == true,
         noticeAccepted = old.noticeAccepted == true,      -- the game's experimental camera notice, accepted once
@@ -977,7 +1029,7 @@ local EVENTS = {
     "PLAYER_REGEN_DISABLED", "PLAYER_REGEN_ENABLED",
     "PLAYER_MOUNT_DISPLAY_CHANGED", "PLAYER_UPDATE_RESTING", "ZONE_CHANGED_NEW_AREA",
     "UNIT_ENTERED_VEHICLE", "UNIT_EXITED_VEHICLE", "UPDATE_SHAPESHIFT_FORM",
-    "ZONE_CHANGED", "ZONE_CHANGED_INDOORS", "PLAYER_EQUIPMENT_CHANGED", "CVAR_UPDATE",
+    "ZONE_CHANGED", "ZONE_CHANGED_INDOORS", "PLAYER_EQUIPMENT_CHANGED", "CVAR_UPDATE", "PLAYER_TARGET_CHANGED",
 }
 for _, e in ipairs(EVENTS) do pcall(f.RegisterEvent, f, e) end    -- a missing event must not break the addon
 
@@ -985,6 +1037,7 @@ local function ScheduleTick()
     C_Timer.After(TICK, function()
         ns.Water()
         ns.Evaluate()
+        pcall(ns.TargetZoom)                     -- (never in the way of the next tick)
         ScheduleTick()
     end)
 end
@@ -1037,6 +1090,8 @@ f:SetScript("OnEvent", function(_, event, arg1, arg2)
         ns.Evaluate(retryAfterCombat)
     elseif event == "UNIT_ENTERED_VEHICLE" or event == "UNIT_EXITED_VEHICLE" then
         if arg1 == "player" then ns.Evaluate() end
+    elseif event == "PLAYER_TARGET_CHANGED" then
+        ns.TargetZoom()                          -- (closer on an enemy, out again when it is gone)
     elseif event == "UPDATE_SHAPESHIFT_FORM" then
         lastCurveValue = nil                     -- the shoulder offset follows the new form at once
         ns.Evaluate(true)

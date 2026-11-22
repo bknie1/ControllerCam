@@ -34,6 +34,8 @@ Objetivo
 Objetivo del objetivo
 Foco
 Barras verticales
+Respiración con burbujas
+bajo el agua, tu respiración como una barra propia con burbujas que suben: junto a las barras verticales, bajo el marco del jugador o arriba en la pantalla
 %d objetos depositados
 sacaste %d objetos del banco
 %d objetos vendidos por %s (/cchud sold los muestra)
@@ -471,6 +473,8 @@ una oleada al subir de nivel, un retumbar largo y grave al morir
 La barra de luz muestra tu salud
 un mando con barra de luz (DualSense) muestra en ella tu salud: de verde a rojo, con pulsos si es baja en un combate
 reproduce cada patrón de vibración una vez
+%d sanaciones críticas
+%d críticos
 Sentencia
 Vibración: tus habilidades clave
 las habilidades clave de cada clase se sienten distintas en el mando (una Sentencia salpica, un Golpe sagrado chasquea, Viento furioso golpea tres veces)
@@ -626,7 +630,7 @@ Botón de pesca: %s
 Pesca con un botón
 con una caña en las manos: tu botón de interactuar para lanzar el sedal siempre que no haya nada con lo que interactuar, y otra vez para enganchar el pez cuando el corcho se mueva; la captura se recoge por ti. B para guardar la caña y recuperar tus armas
 Volver a lanzar con una pulsación
-mientras el corcho está fuera, tu botón de pesca lanza un sedal nuevo con una pulsación, y A engancha el pez (el juego no da ninguna señal de picada que esperar, así que un botón no puede hacer ambas cosas); desactivado: el botón de pesca engancha, como la interacción del juego
+mientras el corcho está en el agua, tu botón de pesca engancha el pez y A lanza de nuevo con una pulsación; desactivado: A es tuyo
 Cebo con doble pulsación
 pulsa tu botón de pesca dos veces rápido: la segunda pulsación pone el mejor cebo de tus bolsas en la caña, cuando la caña no tiene ninguno
 Barras del mando ocultas al pescar

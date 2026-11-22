@@ -278,6 +278,8 @@ local frame, hint
 
 local function Letter(key) return ns.PadIcons and ns.PadIcons.Letter and ns.PadIcons.Letter(key) or nil end
 local function KeyText(key)
+    local icon = ns.PadIcons and ns.PadIcons.Markup and ns.PadIcons.Markup(key)  -- (your controller's own icons)
+    if icon then return icon end
     local letter = Letter(key)
     if letter then return "|cffffffff" .. letter .. "|r" end
     local text = GetBindingText and GetBindingText(key) or key

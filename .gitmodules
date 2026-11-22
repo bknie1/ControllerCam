@@ -1,0 +1,3 @@
+[submodule "InputSwap"]
+	path = InputSwap
+	url = https://github.com/bknie1/InputSwap.git

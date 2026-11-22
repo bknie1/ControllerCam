@@ -90,15 +90,16 @@ M.fight = fight
 local GAP, PER_FIGHT = 8, 2
 M.BURST = 1.0                   -- crits this close to the one before are one burst
 M.seen = { plain = 0, secret = 0, none = 0 }   -- the amounts crits came with (for the debug report)
-M.LIST_MAX = 4                  -- hits the game keeps secret are shown side by side, at most this many
 M.DELAY = 0.5                   -- the total comes this long after the burst's last crit (the numbers fly first)
 
 -- What a burst shows: its total, or (when the game keeps some amounts to itself: those cannot be added up)
 -- each of its hits side by side, "450 + 512", the game writing out the ones it keeps secret
+-- What the big figure says: the total when every amount can be added up; where the game keeps the amounts to
+-- itself they cannot be added (nor compared), so it says how many crits it was, and each one's own amount goes
+-- in the column beside its name
 function M.Number(run, amount)
-    if run.total then return run.total end
-    if run.amounts and #run.amounts > 0 then return { list = run.amounts } end
-    return amount
+    if run.hasTotal then return run.total end
+    return { count = run.n }
 end
 
 -- The run of crits: how many, what they did together (nil when the game keeps an amount to itself: those
@@ -113,7 +114,18 @@ local function Join(amount, name, now, key)
     end
     c.n, c.at = c.n + 1, now
     local plain = (not ns.IsSecret(amount)) and type(amount) == "number" and amount or nil
-    if plain and c.total then c.total = c.total + plain else c.total = nil end
+    -- the total: added up even where the game keeps the amounts to itself (the sum is then its own as well, and
+    -- the game writes it out for us); only where it will not add them is there no total (M.secretSum says which)
+    -- (whether there is one is kept apart: a total the game keeps to itself cannot even be asked if it is nil)
+    if c.hasTotal == nil then c.hasTotal = true end
+    if c.hasTotal and amount ~= nil then
+        local total = c.total
+        local ok, sum = pcall(function() return total + amount end)
+        if ns.IsSecret(amount) then M.secretSum = ok end
+        c.total, c.hasTotal = ok and sum or nil, ok and true or false
+    else
+        c.total, c.hasTotal = nil, false
+    end
     c.amounts = c.amounts or {}
     if amount ~= nil then c.amounts[#c.amounts + 1] = amount end     -- (each one, kept even when secret)
     local seen = M.seen
@@ -122,6 +134,8 @@ local function Join(amount, name, now, key)
     else seen.none = seen.none + 1 end
     M.lastRun = c
     c.seq = c.seq or {}
+    c.seqAmount = c.seqAmount or {}
+    c.seqAmount[#c.seq + 1] = amount ~= nil and amount or false      -- (each crit's own, kept even when secret)
     if type(name) == "string" and not ns.IsSecret(name) and name ~= "" then
         if not c.names[name] then c.order[#c.order + 1] = name end
         c.names[name] = (c.names[name] or 0) + 1
@@ -144,12 +158,27 @@ M.RunLabel = RunLabel
 
 -- The column at the total's left: one line for each crit, in the order they landed (the last few)
 M.LINES = 5
-local function RunLines(c)
+local function RunLines(c, withAmounts)
     local seq, out = c.seq or {}, {}
     local from = math.max(1, #seq - M.LINES + 1)
     if from > 1 then out[1] = "..." end
-    for i = from, #seq do out[#out + 1] = "+ " .. seq[i] end
-    return table.concat(out, "\n")
+    if not withAmounts then
+        for i = from, #seq do out[#out + 1] = "+ " .. seq[i] end
+        return table.concat(out, "\n")
+    end
+    -- with each crit's amount after its name (drawn by the game even when it keeps the number to itself)
+    local args = {}
+    for i = from, #seq do
+        local amount = c.seqAmount and c.seqAmount[i]
+        args[#args + 1] = seq[i]
+        if amount then
+            out[#out + 1] = "+ %s  %d"
+            args[#args + 1] = amount
+        else
+            out[#out + 1] = "+ %s"
+        end
+    end
+    return { fmt = table.concat(out, "\n"), args = args }
 end
 M.RunLines = RunLines
 
@@ -233,19 +262,19 @@ function M:Show(amount, name, school, heal, count)
     local calm = ns.Calm() and true or false
     local one = heal and "+%d" or "%d"
     local fmt, args, base = one, { amount }, SIZE
-    if type(amount) == "table" and not ns.IsSecret(amount) and amount.list then   -- hits that cannot be added
-        local list, parts = amount.list, {}
-        args = {}
-        local from = math.max(1, #list - M.LIST_MAX + 1)
-        for i = from, #list do parts[#parts + 1] = one; args[#args + 1] = list[i] end
-        fmt = (from > 1 and "... " or "") .. table.concat(parts, " + ")
-        base = math.floor(SIZE * (#args > 2 and 0.5 or 0.65))      -- smaller, to fit them all
+    if type(amount) == "table" and not ns.IsSecret(amount) and amount.count then  -- amounts that cannot be added
+        fmt, args = heal and L["%d crit heals"] or L["%d crits"], { amount.count }
+        base = math.floor(SIZE * 0.8)
     end
     frame.number:SetFont(Font(), base * (calm and 1.2 or 2.6), "THICKOUTLINE")
     if heal then frame.number:SetTextColor(c[1], c[2], c[3]) else frame.number:SetTextColor(1, 0.86, 0.35) end
     local ok = pcall(frame.number.SetFormattedText, frame.number, fmt, unpack(args))
     if not ok then frame.number:SetText("!") end
-    frame.label:SetText(name or "")
+    if type(name) == "table" then
+        if not pcall(frame.label.SetFormattedText, frame.label, name.fmt, unpack(name.args)) then frame.label:SetText("") end
+    else
+        frame.label:SetText(name or "")
+    end
     frame.glow:SetVertexColor(c[1], c[2], c[3], 1)
     frame:SetAlpha(1)
     frame:Show()
@@ -298,7 +327,7 @@ function M:Consider(amount, crit, ability, name, school)
     local now = GetTime()
     local run = Join(amount, name, now)
     if run.n < 2 or not ns.db.bigMoments then return false end     -- a crit on its own: no burst yet
-    local number, label = M.Number(run, amount), RunLines(run)
+    local number, label = M.Number(run, amount), RunLines(run, not run.hasTotal)
     if not run.shown then                                          -- a new moment: kept rare
         if fight.moments >= PER_FIGHT or now - fight.lastMoment < GAP then return false end
         fight.moments = fight.moments + 1
@@ -325,7 +354,7 @@ function M:Healed(spellID, name, amount, crit, school)
         run.shown = true
     end
     fight.lastMoment = now
-    self:Pin(M.Number(run, amount), RunLines(run), school or "holy", true, run.n)
+    self:Pin(M.Number(run, amount), RunLines(run, not run.hasTotal), school or "holy", true, run.n)
     return true
 end
 
@@ -461,8 +490,9 @@ end, "/cchud momenttest", "show what a big moment looks and feels like")
 -- For the debug report: how the amounts came, and the last burst
 function M.Describe()
     local s = M.seen
-    local out = { ("crit amounts: %d plain, %d secret, %d none; combat log read: %s"):format(s.plain, s.secret,
-                  s.none, tostring(M.usesLog or false)) }
+    local out = { ("crit amounts: %d plain, %d secret, %d none; combat log read: %s; hidden amounts added up: %s"):format(
+                  s.plain, s.secret, s.none, tostring(M.usesLog or false),
+                  M.secretSum == nil and "not tried yet" or (M.secretSum and "yes" or "refused by the game")) }
     local c = M.lastRun
     if c then
         local kinds = {}
@@ -470,7 +500,7 @@ function M.Describe()
             kinds[#kinds + 1] = ns.IsSecret(a) and "secret" or tostring(a)
         end
         out[#out + 1] = ("last burst: %d crits (%s), total %s: %s"):format(c.n, table.concat(kinds, ", "),
-            tostring(c.total), RunLabel(c))
+            ns.IsSecret(c.total) and "secret" or tostring(c.total), RunLabel(c))
     end
     return out
 end

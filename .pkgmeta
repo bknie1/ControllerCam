@@ -2,6 +2,7 @@ package-as: ControllerCam
 
 move-folders:
   ControllerCam/ControllerCam_HUD: ControllerCam_HUD
+  ControllerCam/InputSwap: InputSwap
 
 manual-changelog:
   filename: CHANGELOG.md

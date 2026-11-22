@@ -34,6 +34,8 @@ Target
 Target of target
 Focus
 Vertical bars
+Breath with bubbles
+underwater, your breath as a bar of ours with bubbles rising off it: beside the vertical bars, under the player frame, or at the top of the screen
 deposited %d items
 took %d items out of the bank
 sold %d items for %s (/cchud sold lists them)
@@ -471,6 +473,8 @@ a swell when you level up, a long low rumble when you die
 Light bar shows your health
 a controller with a light bar (DualSense) shows your health in it: green to red, pulsing when low in a fight
 play every vibration pattern once
+%d crit heals
+%d crits
 Judgement
 Rumble: your key abilities
 each class's key abilities have a feel of their own on the controller (a Judgement splashes, a Holy Strike snaps, Windfury knocks three times)
@@ -626,7 +630,7 @@ Fishing button: %s
 One-button fishing
 with a fishing pole in your hands: your interact button to cast your line whenever there is nothing to interact with, and again to hook the fish when the float bobs; the catch is taken for you. B to put the pole away and take your weapons back
 One press to cast again
-while the float is out, your fishing button casts a fresh line in one press, and A hooks the fish (the game gives no sign of a bite to wait for, so one button cannot do both); off: the fishing button hooks, as the game's interact
+while the float is out, your fishing button hooks the fish and A casts a fresh line in one press; off: A is yours
 Bait on a double press
 press your fishing button twice quickly: the second press puts the best bait in your bags on your pole, when the pole has none
 Gamepad bars put away while fishing

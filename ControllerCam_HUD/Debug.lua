@@ -369,6 +369,7 @@ D.SECTIONS = {
         end
         return out
     end },
+    { "breath", function() return ns.Breath and { ns.Breath.Describe() } or {} end },
     { "padicons", function() return ns.PadIcons and { ns.PadIcons.Describe() } or {} end },
     { "auction", function() return ns.AuctionPanel and ns.AuctionPanel.Describe() or {} end },
     { "cast", Casting },

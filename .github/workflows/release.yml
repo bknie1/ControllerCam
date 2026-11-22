@@ -1,7 +1,8 @@
 name: Release
 
 # Push a tag like v1.0.0 to build ControllerCam-v1.0.0.zip and attach it to a GitHub release.
-# WoWUp's GitHub source installs from that zip (top-level folders: ControllerCam/ and ControllerCam_HUD/).
+# WoWUp's GitHub source installs from that zip (top-level folders: ControllerCam/, ControllerCam_HUD/ and InputSwap/,
+# the CCHUD stack; InputSwap is a repository of its own, here as a submodule).
 on:
   push:
     tags:
@@ -15,6 +16,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          submodules: true
 
       - name: Tag must match the TOC version
         run: |
@@ -47,7 +50,10 @@ jobs:
           mkdir -p dist/ControllerCam_HUD
           cp ControllerCam_HUD/ControllerCam_HUD.toc ControllerCam_HUD/*.lua ControllerCam_HUD/Bindings.xml LICENSE dist/ControllerCam_HUD/
           cp -r ControllerCam_HUD/Media dist/ControllerCam_HUD/Media
-          (cd dist && zip -r "ControllerCam-${GITHUB_REF_NAME}.zip" ControllerCam ControllerCam_HUD)
+          mkdir -p dist/InputSwap
+          cp InputSwap/InputSwap.toc InputSwap/*.lua InputSwap/LICENSE InputSwap/README.md InputSwap/CHANGELOG.md dist/InputSwap/
+          cp -r InputSwap/Media dist/InputSwap/Media
+          (cd dist && zip -r "ControllerCam-${GITHUB_REF_NAME}.zip" ControllerCam ControllerCam_HUD InputSwap)
 
       - name: Create GitHub release
         env:

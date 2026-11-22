@@ -34,6 +34,8 @@ Alvo
 Alvo do alvo
 Foco
 Barras verticais
+Fôlego com bolhas
+debaixo d'água, seu fôlego numa barra nossa com bolhas subindo: ao lado das barras verticais, sob o quadro do jogador ou no alto da tela
 %d itens depositados
 %d itens tirados do banco
 %d itens vendidos por %s (/cchud sold lista-os)
@@ -471,6 +473,8 @@ uma onda ao subir de nível, um estrondo longo e grave ao morrer
 A barra de luz mostra sua vida
 um controle com barra de luz (DualSense) mostra nela sua vida: de verde a vermelho, pulsando quando está baixa em uma luta
 reproduz cada padrão de vibração uma vez
+%d curas críticas
+%d críticos
 Julgamento
 Vibração: suas habilidades-chave
 as habilidades-chave de cada classe têm uma sensação própria no controle (um Julgamento espalha, um Golpe Sagrado estala, Fúria dos Ventos bate três vezes)
@@ -626,7 +630,7 @@ Botão de pesca: %s
 Pesca com um botão
 com uma vara de pesca nas mãos: seu botão de interagir para lançar a linha sempre que não houver nada com que interagir, e de novo para fisgar o peixe quando a boia mexer; a pesca é recolhida para você. B para guardar a vara e pegar suas armas de volta
 Lançar de novo com um toque
-enquanto a boia está na água, seu botão de pesca lança uma linha nova com um toque, e A fisga o peixe (o jogo não dá sinal de mordida para esperar, então um botão não pode fazer as duas coisas); desligado: o botão de pesca fisga, como a interação do jogo
+enquanto a boia está na água, seu botão de pesca fisga o peixe e A lança de novo com um toque; desligado: A é seu
 Isca com toque duplo
 aperte seu botão de pesca duas vezes rápido: o segundo toque coloca a melhor isca das suas bolsas na vara, quando a vara não tem nenhuma
 Barras do controle ocultas ao pescar

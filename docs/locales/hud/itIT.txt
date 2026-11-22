@@ -34,6 +34,8 @@ Bersaglio
 Bersaglio del bersaglio
 Focus
 Barre verticali
+Respiro con bolle
+sott'acqua, il tuo respiro su una barra nostra da cui salgono bolle: accanto alle barre verticali, sotto il riquadro del giocatore o in alto sullo schermo
 %d oggetti depositati
 presi %d oggetti dalla banca
 %d oggetti venduti per %s (/cchud sold li elenca)
@@ -471,6 +473,8 @@ un'ondata quando sali di livello, un lungo rombo grave quando muori
 La barra luminosa mostra la tua salute
 un controller con barra luminosa (DualSense) mostra in essa la tua salute: da verde a rosso, pulsante quando è bassa in combattimento
 riproduci ogni schema di vibrazione una volta
+%d cure critiche
+%d critici
 Giudizio
 Vibrazione: le tue abilità chiave
 le abilità chiave di ogni classe hanno una sensazione propria sul controller (un Giudizio esplode, un Assalto sacro schiocca, Furia del vento colpisce tre volte)
@@ -626,7 +630,7 @@ Pulsante di pesca: %s
 Pesca con un pulsante
 con una canna da pesca in mano: il tuo tasto di interazione per lanciare la lenza quando non c'è nulla con cui interagire, e di nuovo per ferrare il pesce quando il galleggiante si muove; il pescato viene raccolto per te. B per riporre la canna e riprendere le tue armi
 Rilancia con una pressione
-mentre il galleggiante è in acqua, il tuo pulsante di pesca rilancia la lenza con una pressione, e A ferra il pesce (il gioco non dà alcun segnale di abboccata da aspettare, quindi un solo pulsante non può fare entrambe le cose); disattivato: il pulsante di pesca ferra, come l’interazione del gioco
+finché il galleggiante è in acqua, il tuo pulsante di pesca aggancia il pesce e A rilancia con una pressione; disattivato: A è tuo
 Esca con doppia pressione
 premi due volte rapidamente il pulsante di pesca: la seconda pressione mette la migliore esca delle tue borse sulla canna, quando la canna non ne ha
 Barre del controller nascoste durante la pesca

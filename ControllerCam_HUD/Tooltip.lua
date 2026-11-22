@@ -53,6 +53,7 @@ T.Away = Away
 -- else: looked at all the time, a tooltip near the bottom of the screen (the game keeps those on the screen)
 -- had it flip between under and over, over and over.
 T.SETTLE = 0.3
+T.MOVED_ON = 0.3               -- the tooltip about something else for this long: the panel goes
 local function PlaceAnnex(a, tooltip)
     local f = a.frame
     if a.settled then return end
@@ -90,7 +91,15 @@ local function BuildAnnex(a, tooltip)
         since = since + dt
         if since < 0.1 then return end
         since = 0
-        if a.title and Title(tooltip) ~= a.title then self:Hide(); return end
+        -- (the game fills its tooltip again now and then, the same item: for a moment it has another title, or
+        -- none. Only a title that stays other than ours for a while means the tooltip moved on; hidden at once
+        -- for every blink, the panel flickered.)
+        if a.title and Title(tooltip) ~= a.title then
+            a.otherSince = a.otherSince or GetTime()
+            if GetTime() - a.otherSince >= T.MOVED_ON then a.otherSince = nil; self:Hide(); return end
+        else
+            a.otherSince = nil
+        end
         PlaceAnnex(a, tooltip)
     end))
 end

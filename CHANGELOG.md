@@ -1,5 +1,24 @@
 # Changelog
 
+## 1.4.1
+
+The CCHUD stack
+- ControllerCam: InputSwap comes in the same download now, beside ControllerCam and ControllerCam: HUD: it switches the game's Gamepad UI on and off by whether you last moved with the stick or the keyboard. It is the InputSwap addon as before (its folder and settings unchanged), and still its own project.
+
+ControllerCam
+- In the water the camera no longer tilts with the sea bed: dynamic pitch and following the terrain rest while you swim, as head tracking already did, and the profile's own values are back the moment you leave the water.
+- Closer on an enemy target (`/ccam targetzoom <yards>`, or **Closer on an enemy target** in the options; off until you set it): target an enemy and the camera comes in to that distance, the profile in effect otherwise as it is; let the target go (dead, or none for two seconds) and it goes back to where you had it, unless you zoomed yourself meanwhile. Roam far out, fight up close. Not while mounted, flying or in a vehicle.
+
+ControllerCam: HUD
+- Breath with bubbles (new; a full restart of the game, not only /reload; switch: **Breath with bubbles**, `/cchud breath`): underwater your breath is a bar of ours, upright beside the vertical bars (or a thin bar under the player frame, or at the top of the screen), light blue with bubbles rising off it, more and quicker as your breath runs out, and red when little is left. The game's own breath bar is kept out of sight meanwhile; its other timers are the game's as ever. With Reduce animations the bubbles stay away.
+- Fixed: putting on a fishing pole with a window open (your bags, the character window) took X and B from it at once: X cast a line instead of the window's action, and B, meant to close the window, ended fishing mode for good (until a reload). Fishing now takes no button while a window or the controller's cursor is up, B only puts the pole away when there are weapons to take back, and fishing mode is on again the next time you take up the pole.
+- Fishing: while the float is out your fishing button (X) hooks the fish, and A casts a fresh line (the other way round before): the one button does the catching.
+- Button icons of your controller in the HUD's own prompts (the fishing prompts, the farm list, the fish journal, levelling, the flight game, its questions): white A B X Y on black for a Steam controller, the coloured letters of an Xbox pad, the coloured shapes of a PlayStation pad, by the controller found or the one you choose (`/cchud padicons`). The game's own bars keep the game's icons. New art: a full restart of the game, not only /reload, to see it.
+- Fixed: nameplates flashed in and out as you moved. The game fades its own plate by distance, and the HUD put it out of sight again only ten times a second, so it showed through ours in between. It is now kept out of sight every frame, and what is inside it (its bar, its name) is hidden too. `/cchud plates` says how often the game showed it again.
+- Fixed: the vendor and auction lines under an item's tooltip flickered: each time the game filled the tooltip again for the same item, the panel went away for a moment. It now waits until the tooltip has really moved on to something else.
+- Big moments show the total of the burst even where the game keeps each amount to itself: they are added up all the same (the sum is then the game's own as well, and written out by it), the abilities listed beside it. Only if the game will not add them does the big figure say how many crits it was (`2 crits`), each crit's own amount then beside its name. The debug report says which it was (`hidden amounts added up`).
+- Fixed: nameplates shook whenever anything hurt their mob, whoever did it (a guard, a pet, a stranger nearby), so in a busy place every plate trembled. A plate now shakes only when it is your target and you have just cast at it, and half as much as the target frame. The flash and the wounds on the bar are as before.
+
 ## 1.4.0
 
 ControllerCam: HUD

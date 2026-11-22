@@ -34,6 +34,8 @@ Cible
 Cible de la cible
 Focalisation
 Barres verticales
+Souffle avec bulles
+sous l'eau, votre souffle sur une barre à nous d'où montent des bulles : à côté des barres verticales, sous le cadre du joueur ou en haut de l'écran
 %d objets déposés
 %d objets retirés de la banque
 %d objets vendus pour %s (/cchud sold les liste)
@@ -471,6 +473,8 @@ une onde quand vous gagnez un niveau, une longue vibration grave quand vous mour
 La barre lumineuse affiche votre santé
 une manette à barre lumineuse (DualSense) y affiche votre santé : du vert au rouge, pulsant quand elle est faible en combat
 jouer chaque motif de vibration une fois
+%d soins critiques
+%d critiques
 Jugement
 Vibration : vos techniques clés
 les techniques clés de chaque classe ont leur propre sensation à la manette (un Jugement éclabousse, une Frappe sacrée claque, Furie-des-vents frappe trois fois)
@@ -626,7 +630,7 @@ Bouton de pêche : %s
 Pêche à un bouton
 avec une canne à pêche en main: votre bouton d'interaction pour lancer la ligne quand il n'y a rien avec quoi interagir, et encore pour ferrer le poisson quand le bouchon bouge; la prise est ramassée pour vous. B pour ranger la canne et reprendre vos armes
 Relancer d’une seule pression
-tant que le flotteur est à l’eau, votre bouton de pêche relance une ligne d’une seule pression, et A ferre le poisson (le jeu ne donne aucun signe de touche à attendre, un seul bouton ne peut donc pas faire les deux) ; désactivé : le bouton de pêche ferre, comme l’interaction du jeu
+tant que le bouchon est à l'eau, votre bouton de pêche ferre le poisson et A relance d'une pression ; désactivé : A est à vous
 Appât sur double appui
 appuyez deux fois rapidement sur votre bouton de pêche: le second appui met le meilleur appât de vos sacs sur votre canne, quand elle n'en a pas
 Barres de manette masquées pendant la pêche

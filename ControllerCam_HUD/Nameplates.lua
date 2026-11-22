@@ -65,6 +65,7 @@ end
 NP.OTHERS = { "Platynator", "Plater", "Kui_Nameplates", "TidyPlates", "TidyPlates_ThreatPlates", "NeatPlates",
               "ElvUI", "bdNameplates" }
 local W, H = 120, 7
+NP.SHAKE = 0.5                  -- a plate shakes this much of what the target frame does
 local TARGET_SCALE, OTHER_ALPHA = 1.15, 0.85
 local LOOK_EVERY = 0.3          -- friends entering or leaving a fight have no event of their own
 
@@ -96,12 +97,25 @@ end
 
 -- Hidden natives stay hidden: the game sets their alpha again on its own (target changes, range), so every
 -- time it does, it is set back to 0.
+-- Looked at every frame (the game fades its own plate by distance as you move: looked at less often, it flashed
+-- through ours), and what is inside it too (its bar, its name), which the game leaves alone: so even a frame
+-- where the game has set its plate's alpha again shows nothing of it.
+local insideOf = setmetatable({}, { __mode = "k" })     -- (kept in a table of ours: nothing written on the game's frame)
 local function HideNative(frame, hide)
+    local inside = {}
+    local okC, kids = pcall(function() return { frame:GetChildren() } end)
+    for _, c in ipairs(okC and kids or {}) do if c.SetAlpha then inside[#inside + 1] = c end end
+    local okR, regions = pcall(function() return { frame:GetRegions() } end)
+    for _, r in ipairs(okR and regions or {}) do if r.SetAlpha then inside[#inside + 1] = r end end
     if hide then
-        ns.KeepAlpha(frame, 0)
+        ns.KeepAlphaFast(frame, 0)
+        for _, part in ipairs(inside) do pcall(part.SetAlpha, part, 0) end
+        insideOf[frame] = inside
     else
-        ns.KeepAlpha(frame, nil)
+        ns.KeepAlphaFast(frame, nil)
         frame:SetAlpha(1)
+        for _, part in ipairs(insideOf[frame] or inside) do pcall(part.SetAlpha, part, 1) end
+        insideOf[frame] = nil
     end
 end
 
@@ -346,9 +360,12 @@ local function UpdateHealth(o, instant)
     local cur, max = U.Health(o.unit)
     local before = o.health:GetFraction()
     local frac = o.health:Update(cur, max, instant)
+    -- a hit: only on your target's plate and only right after a cast of yours (anyone else's damage, a guard's,
+    -- a pet's, a stranger's, left every plate around shaking), and gentler than the target frame
     if not instant and before and frac and frac < before - 0.001 and ns.Impact and ns.Impact.active
-        and GetTime() - (o.lastImpact or 0) > 0.3 then
-        ns.Impact:Hit({ frame = o, anchor = o.plate, bar = o.health }, "physical", false)
+        and GetTime() - (o.lastImpact or 0) > 0.3 and ns.IsTarget(o.unit)
+        and ns.Impact.JustYou and ns.Impact.JustYou() then
+        ns.Impact:Hit({ frame = o, anchor = o.plate, bar = o.health }, "physical", false, NP.SHAKE)
     end
     o.health:SetColor(ns.UnitFrames.TargetHealthColor(o.unit, frac))
     o.health:SetAbsorb(ns.UnitFrames.Absorb(o.unit))
@@ -998,7 +1015,7 @@ function NP.Report()
             if plate.IsForbidden and plate:IsForbidden() == true then hidden = hidden + 1 end
         end
     end)
-    rows[#rows + 1] = ("plates on screen: %d, of which the game keeps to itself: %d"):format(total, hidden)
+    rows[#rows + 1] = ("plates on screen: %d, of which the game keeps to itself: %d; the game showed its own drawing again %d times (each put away at once)"):format(total, hidden, ns.alphaFixes or 0)
     local seen = {}
     for _, plate in ipairs(C_NamePlate.GetNamePlates and C_NamePlate.GetNamePlates() or {}) do
         local unit = plate.namePlateUnitToken or (plate.UnitFrame and plate.UnitFrame.unit)

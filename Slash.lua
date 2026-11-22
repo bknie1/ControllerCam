@@ -107,6 +107,7 @@ local HELP = {
     { "/ccam flip",                         "switch the shoulder offset to the other shoulder" },
     { "/ccam formoffset <percent | reset>", "the shoulder offset in the form you are in (druid forms, ghost wolf), in percent of normal" },
     { "/ccam delay <seconds>",              "how long a situation is kept after it ends (default 1.5)" },
+    { "/ccam targetzoom <yards>",           "on an enemy target the camera comes in this close, and goes back out after (0: off)" },
     { "/ccam on | off",                     "turn on, or turn off and restore your original camera settings" },
     { "/ccam info",                         "show the zoom, shoulder offset and motion settings right now (for troubleshooting)" },
     { "/ccam notice",                       "let the game ask about its experimental camera settings again at the next login" },
@@ -270,6 +271,13 @@ local function Command(msg)
         local n = tonumber(args[1])
         if n and n >= 0 then ns.SetExitDelay(n); say((L["Situations are kept for %.1f seconds after they end."]):format(db.exitDelay))
         else say(L["usage: /ccam delay <seconds>"]) end
+    elseif cmd == "targetzoom" or cmd == "closer" then
+        local n = tonumber(args[1]) or (args[1] == "off" and 0) or nil
+        if n and n >= 0 then
+            ns.SetTargetZoom(n)
+            if db.targetZoom > 0 then say((L["On an enemy target the camera comes in to %.1f yards."]):format(db.targetZoom))
+            else say(L["The camera keeps its distance on an enemy target."]) end
+        else say(L["usage: /ccam targetzoom <yards> (0 or off: off)"]) end
     elseif cmd == "config" or cmd == "options" then
         if ns.OpenOptions then ns.OpenOptions() else say(L["options panel is not available in this client"]) end
     elseif cmd == "info" then

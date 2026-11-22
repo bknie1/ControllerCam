@@ -214,6 +214,13 @@ local ENGLISH = {
     "The game will ask about its experimental camera settings again at the next login.",  -- 204
     "The game will not ask about the experimental camera settings again (you accepted them). /ccam notice brings the question back.",  -- 205
     "let the game ask about its experimental camera settings again at the next login",  -- 206
+    "On an enemy target the camera comes in to %.1f yards.",  -- 207
+    "The camera keeps its distance on an enemy target.",  -- 208
+    "usage: /ccam targetzoom <yards> (0 or off: off)",  -- 209
+    "on an enemy target the camera comes in this close, and goes back out after (0: off)",  -- 210
+    "Closer on an enemy target: %.1f yards",  -- 211
+    "Closer on an enemy target: off",  -- 212
+    "Target an enemy and the camera comes in to this distance; let it go and it goes back to where you had it (not while mounted). Roam far out, fight up close.",  -- 213
 }
 
 local TRANSLATIONS = {
@@ -424,6 +431,13 @@ local TRANSLATIONS = {
         "Das Spiel fragt beim nächsten Einloggen wieder nach seinen experimentellen Kameraeinstellungen.",  -- 204
         "Das Spiel fragt nicht mehr nach den experimentellen Kameraeinstellungen (du hast sie akzeptiert). /ccam notice holt die Frage zurück.",  -- 205
         "das Spiel beim nächsten Einloggen wieder nach seinen experimentellen Kameraeinstellungen fragen lassen",  -- 206
+        "Bei einem feindlichen Ziel kommt die Kamera auf %.1f Meter heran.",  -- 207
+        "Die Kamera behält bei einem feindlichen Ziel ihren Abstand.",  -- 208
+        "Verwendung: /ccam targetzoom <Meter> (0 oder off: aus)",  -- 209
+        "bei einem feindlichen Ziel kommt die Kamera so nah heran und geht danach wieder zurück (0: aus)",  -- 210
+        "Näher bei feindlichem Ziel: %.1f Meter",  -- 211
+        "Näher bei feindlichem Ziel: aus",  -- 212
+        "Ziele auf einen Feind und die Kamera kommt auf diesen Abstand heran; lässt du ihn los, geht sie zurück, wo du sie hattest (nicht auf dem Reittier). Weit draußen unterwegs, nah dran im Kampf.",  -- 213
     },
     esES = {
         "En un vehículo",  -- 1
@@ -632,6 +646,13 @@ local TRANSLATIONS = {
         "El juego volverá a preguntar por sus ajustes de cámara experimentales al iniciar sesión la próxima vez.",  -- 204
         "El juego no volverá a preguntar por los ajustes de cámara experimentales (los aceptaste). /ccam notice recupera la pregunta.",  -- 205
         "hacer que el juego vuelva a preguntar por sus ajustes de cámara experimentales al iniciar sesión",  -- 206
+        "Con un enemigo como objetivo, la cámara se acerca a %.1f yardas.",  -- 207
+        "La cámara mantiene su distancia con un enemigo como objetivo.",  -- 208
+        "uso: /ccam targetzoom <yardas> (0 u off: desactivado)",  -- 209
+        "con un enemigo como objetivo, la cámara se acerca a esta distancia y luego vuelve (0: desactivado)",  -- 210
+        "Más cerca con un enemigo como objetivo: %.1f yardas",  -- 211
+        "Más cerca con un enemigo como objetivo: desactivado",  -- 212
+        "Al fijar un enemigo, la cámara se acerca a esta distancia; al soltarlo vuelve a donde la tenías (no montado). Explora de lejos, lucha de cerca.",  -- 213
     },
     frFR = {
         "Dans un véhicule",  -- 1
@@ -840,6 +861,13 @@ local TRANSLATIONS = {
         "Le jeu redemandera pour ses réglages de caméra expérimentaux à la prochaine connexion.",  -- 204
         "Le jeu ne demandera plus pour les réglages de caméra expérimentaux (vous les avez acceptés). /ccam notice fait revenir la question.",  -- 205
         "laisser le jeu redemander pour ses réglages de caméra expérimentaux à la prochaine connexion",  -- 206
+        "Sur une cible ennemie, la caméra se rapproche à %.1f mètres.",  -- 207
+        "La caméra garde sa distance sur une cible ennemie.",  -- 208
+        "utilisation : /ccam targetzoom <mètres> (0 ou off : désactivé)",  -- 209
+        "sur une cible ennemie, la caméra se rapproche à cette distance puis revient (0 : désactivé)",  -- 210
+        "Plus près sur une cible ennemie : %.1f mètres",  -- 211
+        "Plus près sur une cible ennemie : désactivé",  -- 212
+        "Ciblez un ennemi et la caméra se rapproche à cette distance ; relâchez-le et elle revient où vous l'aviez (pas sur une monture). Explorez de loin, combattez de près.",  -- 213
     },
     itIT = {
         "In un veicolo",  -- 1
@@ -1048,6 +1076,13 @@ local TRANSLATIONS = {
         "Il gioco chiederà di nuovo delle sue impostazioni sperimentali della telecamera al prossimo accesso.",  -- 204
         "Il gioco non chiederà più delle impostazioni sperimentali della telecamera (le hai accettate). /ccam notice riporta la domanda.",  -- 205
         "far chiedere di nuovo al gioco delle sue impostazioni sperimentali della telecamera al prossimo accesso",  -- 206
+        "Con un nemico come bersaglio, la telecamera si avvicina a %.1f iarde.",  -- 207
+        "La telecamera mantiene la distanza con un nemico come bersaglio.",  -- 208
+        "uso: /ccam targetzoom <iarde> (0 o off: disattivo)",  -- 209
+        "con un nemico come bersaglio, la telecamera si avvicina a questa distanza e poi torna indietro (0: disattivo)",  -- 210
+        "Più vicino con un nemico come bersaglio: %.1f iarde",  -- 211
+        "Più vicino con un nemico come bersaglio: disattivo",  -- 212
+        "Prendi di mira un nemico e la telecamera si avvicina a questa distanza; lascialo e torna dov'era (non in sella). Esplora da lontano, combatti da vicino.",  -- 213
     },
     koKR = {
         "탈것 이용 중",  -- 1
@@ -1256,6 +1291,13 @@ local TRANSLATIONS = {
         "다음 접속 시 게임이 실험적 카메라 설정에 대해 다시 묻습니다.",  -- 204
         "게임이 더 이상 실험적 카메라 설정에 대해 묻지 않습니다 (수락했습니다). /ccam notice 로 질문을 다시 받을 수 있습니다.",  -- 205
         "다음 접속 시 게임이 실험적 카메라 설정에 대해 다시 묻게 합니다",  -- 206
+        "적을 대상으로 잡으면 카메라가 %.1f야드까지 다가옵니다.",  -- 207
+        "적을 대상으로 잡아도 카메라 거리가 그대로입니다.",  -- 208
+        "사용법: /ccam targetzoom <야드> (0 또는 off: 끔)",  -- 209
+        "적을 대상으로 잡으면 카메라가 이만큼 다가왔다가 다시 물러납니다 (0: 끔)",  -- 210
+        "적 대상 시 가까이: %.1f야드",  -- 211
+        "적 대상 시 가까이: 끔",  -- 212
+        "적을 대상으로 잡으면 카메라가 이 거리까지 다가오고, 놓으면 원래 위치로 돌아갑니다 (탈것 탑승 중 제외). 멀리서 둘러보고, 가까이서 싸우세요.",  -- 213
     },
     ptBR = {
         "Em um veículo",  -- 1
@@ -1464,6 +1506,13 @@ local TRANSLATIONS = {
         "O jogo perguntará novamente sobre suas configurações experimentais de câmera no próximo login.",  -- 204
         "O jogo não perguntará mais sobre as configurações experimentais de câmera (você as aceitou). /ccam notice traz a pergunta de volta.",  -- 205
         "fazer o jogo perguntar novamente sobre suas configurações experimentais de câmera no próximo login",  -- 206
+        "Com um inimigo como alvo, a câmera se aproxima a %.1f jardas.",  -- 207
+        "A câmera mantém a distância com um inimigo como alvo.",  -- 208
+        "uso: /ccam targetzoom <jardas> (0 ou off: desligado)",  -- 209
+        "com um inimigo como alvo, a câmera se aproxima a esta distância e depois volta (0: desligado)",  -- 210
+        "Mais perto com um inimigo como alvo: %.1f jardas",  -- 211
+        "Mais perto com um inimigo como alvo: desligado",  -- 212
+        "Mire um inimigo e a câmera se aproxima a esta distância; solte-o e ela volta para onde estava (não montado). Explore de longe, lute de perto.",  -- 213
     },
     ruRU = {
         "В транспорте",  -- 1
@@ -1672,6 +1721,13 @@ local TRANSLATIONS = {
         "При следующем входе игра снова спросит об экспериментальных настройках камеры.",  -- 204
         "Игра больше не будет спрашивать об экспериментальных настройках камеры (вы их приняли). /ccam notice возвращает вопрос.",  -- 205
         "игра снова спросит об экспериментальных настройках камеры при следующем входе",  -- 206
+        "При враждебной цели камера приближается до %.1f ярдов.",  -- 207
+        "При враждебной цели камера сохраняет расстояние.",  -- 208
+        "использование: /ccam targetzoom <ярды> (0 или off: выкл.)",  -- 209
+        "при враждебной цели камера приближается на это расстояние, а потом отходит обратно (0: выкл.)",  -- 210
+        "Ближе при враждебной цели: %.1f ярда",  -- 211
+        "Ближе при враждебной цели: выкл.",  -- 212
+        "Возьмите врага в цель — камера приблизится на это расстояние; отпустите — вернётся туда, где была (не верхом). Исследуйте издалека, сражайтесь вблизи.",  -- 213
     },
     zhCN = {
         "载具中",  -- 1
@@ -1880,6 +1936,13 @@ local TRANSLATIONS = {
         "下次登录时，游戏会再次询问其实验性镜头设置。",  -- 204
         "游戏不会再询问实验性镜头设置（你已接受）。/ccam notice 可恢复询问。",  -- 205
         "下次登录时让游戏再次询问其实验性镜头设置",  -- 206
+        "选中敌人时，镜头拉近到 %.1f 码。",  -- 207
+        "选中敌人时镜头保持距离。",  -- 208
+        "用法：/ccam targetzoom <码>（0 或 off：关闭）",  -- 209
+        "选中敌人时镜头拉近到这个距离，之后再拉回（0：关闭）",  -- 210
+        "选中敌人时拉近：%.1f 码",  -- 211
+        "选中敌人时拉近：关闭",  -- 212
+        "选中敌人时镜头拉近到这个距离；放开后回到原来的位置（骑乘时除外）。远处漫游，近身战斗。",  -- 213
     },
     zhTW = {
         "載具中",  -- 1
@@ -2088,6 +2151,13 @@ local TRANSLATIONS = {
         "下次登入時，遊戲會再次詢問其實驗性鏡頭設定。",  -- 204
         "遊戲不會再詢問實驗性鏡頭設定（你已接受）。/ccam notice 可恢復詢問。",  -- 205
         "下次登入時讓遊戲再次詢問其實驗性鏡頭設定",  -- 206
+        "選中敵人時，鏡頭拉近到 %.1f 碼。",  -- 207
+        "選中敵人時鏡頭保持距離。",  -- 208
+        "用法：/ccam targetzoom <碼>（0 或 off：關閉）",  -- 209
+        "選中敵人時鏡頭拉近到這個距離，之後再拉回（0：關閉）",  -- 210
+        "選中敵人時拉近：%.1f 碼",  -- 211
+        "選中敵人時拉近：關閉",  -- 212
+        "選中敵人時鏡頭拉近到這個距離；放開後回到原來的位置（騎乘時除外）。遠處漫遊，近身戰鬥。",  -- 213
     },
 }
 TRANSLATIONS.esMX = TRANSLATIONS.esES      -- Latin American Spanish uses the same text

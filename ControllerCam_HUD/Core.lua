@@ -382,6 +382,34 @@ ns.KeepAlpha = function(frame, a)
     if frame:GetAlpha() ~= a then frame:SetAlpha(a) end
 end
 
+-- The same, looked at every frame: for what the game sets again and again as you move (a nameplate's own
+-- drawing, faded by distance), where a tenth of a second is long enough to see it flash through. ns.alphaFixes
+-- counts how often the game had shown one again (the debug report says it).
+local keptFast = {}
+ns.alphaFixes = 0
+local fastKeeper = CreateFrame("Frame")
+local function KeepFast()
+    local any = false
+    for frame, a in pairs(keptFast) do
+        any = true
+        if frame:GetAlpha() ~= a then
+            frame:SetAlpha(a)
+            ns.alphaFixes = ns.alphaFixes + 1
+        end
+    end
+    if not any then fastKeeper:SetScript("OnUpdate", nil) end
+end
+local function FastTick()
+    local ok, err = pcall(KeepFast)
+    if not ok then ns.Error(err) end
+end
+ns.KeepAlphaFast = function(frame, a)
+    if a == nil then keptFast[frame] = nil; return end
+    keptFast[frame] = a
+    if frame:GetAlpha() ~= a then frame:SetAlpha(a) end
+    fastKeeper:SetScript("OnUpdate", FastTick)
+end
+
 -- Or only made invisible: the frame stays in place and keeps working (targeting, the controller's unit menu,
 -- Edit Mode), under our look.
 local faded = {}
@@ -515,7 +543,7 @@ local function BuildDialog()
 end
 
 local function KeyLabel(key, text)
-    local name = GetBindingText and GetBindingText(key) or key
+    local name = ns.KeyText and ns.KeyText(key) or (GetBindingText and GetBindingText(key)) or key
     if type(name) ~= "string" or name == "" then name = key end
     return ("%s  %s"):format(name, text)
 end

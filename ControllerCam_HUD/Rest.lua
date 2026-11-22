@@ -168,6 +168,8 @@ local function CursorOut()
     return ok and hidden == false and nav:IsShown() and true or false
 end
 
+R.CursorOut = CursorOut
+
 local function MouseOver()
     for f in pairs(R.frames) do
         if f.IsMouseOver and f:IsVisible() then
