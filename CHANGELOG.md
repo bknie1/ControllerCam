@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.4.7
+
+ControllerCam: HUD
+- R3 is the game's again (its ping) whenever no bank, vendor, trade or mailbox window is open. A window whose closing the game never announced (the mailbox, on some games) left R3 moving items for good, saying "Point at an item first.". Now the window also has to be in sight.
+
 ## 1.4.6
 
 ControllerCam: HUD

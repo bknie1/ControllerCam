@@ -1308,8 +1308,23 @@ function V:QuickMove()
 end
 
 -- Is a window open where quick move moves things?
+-- Is a window open where R3 moves things? Each is noted open by its event, and still has to be in sight: an event
+-- for its closing that never came (the mailbox's, on some games) left R3 taken for good, away from the game's ping.
+V.MOVE_WINDOWS = { merchantOpen = "MerchantFrame", bankOpen = "BankFrame", tradeOpen = "TradeFrame",
+                   mailOpen = "MailFrame" }
 function V:MoveOpen()
-    return (self.merchantOpen or self.bankOpen or self.tradeOpen or self.mailOpen) and true or false
+    local open = false
+    for flag, name in pairs(V.MOVE_WINDOWS) do
+        if self[flag] then
+            local f = _G[name]
+            local ok, shown = false, nil
+            if type(f) == "table" and f.IsShown then ok, shown = pcall(f.IsShown, f) end
+            if not ok or ns.IsSecret(shown) then open = true                 -- (no window to look at: as noted)
+            elseif shown then open = true
+            else self[flag] = false end                                       -- closed, though nothing said so
+        end
+    end
+    return open
 end
 
 -- Cycle the item you are pointing at: no mark -> junk (always sold) -> kept (never sold) -> bank -> no mark.

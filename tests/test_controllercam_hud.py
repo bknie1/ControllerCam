@@ -10367,6 +10367,19 @@ class MarketAndItems(unittest.TestCase):
         e.update(0.5)
         self.assertIsNone(e.mock.overrides.PADRSTICK)
 
+    def test_r3_is_given_back_when_a_window_closes_without_saying_so(self):
+        # the mailbox opened and closed, but its closing event never came: R3 goes back to the game's ping
+        e = self.env()
+        mail = e.g.CreateFrame("Frame", "MailFrame", e.g.UIParent)
+        e.mock.fire("MAIL_SHOW")
+        e.update(0.5)
+        self.assertEqual(e.mock.overrides.PADRSTICK, "CLICK ControllerCamHUD_StickKey:LeftButton")
+        mail.Hide(mail)                                                           # (no MAIL_CLOSED)
+        e.update(0.5)
+        self.assertIsNone(e.mock.overrides.PADRSTICK)
+        self.assertFalse(e.ns.Vendor.mailOpen)
+        self.assertEqual(e.errors(), [])
+
     def test_quick_move_hands_items_over_in_a_trade_and_at_the_mailbox(self):
         e = self.env()
         e.mock.pointAt(0, 1)
