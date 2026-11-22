@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.4.6
+
+ControllerCam: HUD
+- Keep always says why. Beside every Keep, on the tooltip and on the Market, is its reason: "you chose to keep it", "your only tool of its kind", "an upgrade for another spec of yours", "it could be an upgrade for you", or "your best of its kind".
+- A quest item no quest of yours needs is never kept: Gorilla Fangs, Lesser Bloodstone Ore, Burning Charms, Green Hills of Stranglethorn pages once that quest is done. The auction house when anyone buys it there (even for a few coppers), a vendor when one pays for it, and otherwise no advice at all. One a quest of yours does want still says which quest and where.
+
 ## 1.4.5
 
 ControllerCam: HUD

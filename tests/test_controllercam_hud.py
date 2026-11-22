@@ -11,6 +11,18 @@ import re
 import struct
 import unittest
 
+
+def _assert_kept(self, M, iid):
+    """Kept, and never without a reason that shows beside it."""
+    verdict, _, want = M.Verdict(iid)
+    self.assertEqual(verdict, "keep")
+    why = M.SpecWords(want) or (want and want.why)
+    self.assertTrue(why, "kept without a reason: %s" % iid)
+    self.assertIn(why, M.BestText(verdict, None, want))
+
+
+unittest.TestCase.assertKept = _assert_kept
+
 from lupa.lua51 import LuaRuntime
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -1597,8 +1609,8 @@ class Junk(unittest.TestCase):
         e.mock.put(0, 8, e.lua.table(id=5956, name="Blacksmith Hammer", quality=1, price=4, loc="INVTYPE_WEAPON",
                                      sub=14, **{"class": 2}))
         self.assertTrue(V.LastTool(5956))
-        self.assertEqual(M.Verdict(5956), "keep")                    # the only one: kept, not for the auction house
-        self.assertEqual(M.Verdict(2901), "keep")                    # the only pick
+        self.assertKept(M, 5956)                    # the only one: kept, not for the auction house
+        self.assertKept(M, 2901)                    # the only pick
         e.mock.put(0, 9, e.lua.table(id=20723, name="Brann's Trusty Pick", quality=1, price=4,
                                      loc="INVTYPE_WEAPONMAINHAND", sub=0, **{"class": 2}))
         self.assertFalse(V.LastTool(2901))                           # two picks: one of them may go
@@ -1661,7 +1673,7 @@ class Junk(unittest.TestCase):
         self.assertTrue(V.Outclassed(118))                      # a better healing potion is carried: junk
         self.assertFalse(V.Outclassed(858))                     # the best of its kind: kept
         self.assertFalse(V.Outclassed(2459))                    # nothing like it: kept, it may be worth a lot
-        self.assertEqual(M.Verdict(858), "keep")
+        self.assertKept(M, 858)
         self.assertNotEqual(M.Verdict(118), "keep")
         self.assertFalse(V.Outclassed(117))                     # food, and whether it feeds cannot be told: kept
         e.mock.spellNames = e.lua.table_from({19705: "Well Fed"})
@@ -1685,7 +1697,7 @@ class Junk(unittest.TestCase):
         e.mock["items"][953] = T(id=953, name="Ring", quality=2, ilvl=20, price=100, loc="INVTYPE_FINGER",
                                  **{"class": 4})
         e.mock.worn[11], e.mock.worn[12] = 953, 950             # a ring you wear, beside one as good
-        self.assertEqual(M.Verdict(953), "keep")                # never "vendor" for what you wear
+        self.assertKept(M, 953)                # never "vendor" for what you wear
         e.lua.execute("""SHOP = CreateFrame("GameTooltip", "ShoppingTooltip1", UIParent)
             SHOP.NumLines = function() return 1 end""")
         for fn in e.mock.tipCalls[e.g.Enum.TooltipDataType.Item].values():
@@ -9367,20 +9379,25 @@ class AuctionHouse(unittest.TestCase):
         e.db.auction[4306] = e.lua.table(p=199, t=e.g.time(), q=1620, n=71)   # 1s 89c after the cut, 1s 50c at a
         self.assertEqual(M.Verdict(4306)[0], "auction")               # vendor; plenty up: the auction house
         e.db.sell.keep[2592] = True
-        self.assertEqual(M.Verdict(2592), "keep")
-        # a quest item no quest of yours needs (pages of a quest done), and the best drink you carry: kept, unless
-        # the auction house pays for them
+        self.assertKept(M, 2592)
+        # a quest item no quest of yours needs (pages of a quest done) is never kept: nothing to say while no
+        # one buys it; the best drink you carry is kept (and says so) unless the auction house pays for it
         e.mock["items"][2725] = e.lua.table(name="Green Hills of Stranglethorn - Page 1", quality=1, price=0,
                                             stack=10, **{"class": 12})
         e.mock["items"][21151] = e.lua.table(name="Rumsey Rum Black Label", quality=1, price=5, stack=20,
                                              **{"class": 0})
-        self.assertEqual(M.Verdict(2725), "keep")
-        self.assertEqual(M.Verdict(21151), "keep")
+        self.assertIsNone(M.Verdict(2725))
+        self.assertKept(M, 21151)
+        self.assertIn("your best of its kind", M.BestText(*M.Verdict(21151)))
         e.db.auction[2725] = e.lua.table(p=400, t=e.g.time())
         e.db.auction[21151] = e.lua.table(p=99, t=e.g.time())
         self.assertEqual(M.Verdict(2725)[0], "auction")
         self.assertEqual(M.Verdict(21151)[0], "auction")
-        self.assertEqual(M.Verdict(2725, True), "keep")              # bound: no auction house for it
+        self.assertIsNone(M.Verdict(2725, True))                     # bound, no vendor buys it: nothing to say
+        # one that sells for a few coppers only: the auction house all the same, not kept
+        e.mock["items"][6747] = e.lua.table(name="Burning Charm", quality=1, price=0, stack=1, **{"class": 12})
+        e.db.auction[6747] = e.lua.table(p=30, t=e.g.time(), q=3, n=2)
+        self.assertEqual(M.Verdict(6747)[0], "auction")
         # cheap quest items no vendor buys, in stacks (Gorilla Fang 66c, Lesser Bloodstone Ore 34c, a busy market):
         # worth it over a stack, though not over one (with no vendor price the stack was taken for one, and kept)
         for iid, name, p in ((2799, "Gorilla Fang", 66), (4278, "Lesser Bloodstone Ore", 34)):
@@ -13364,8 +13381,8 @@ class QuestItems(unittest.TestCase):
         self.assertEqual(verdict, "quest")                        # Torn Letter starts a quest at your level
         self.assertTrue(want.starts)
         self.assertIn("starts a quest", M.BestText(verdict, more, want))
-        self.assertEqual(self.kind(e, 9), "keep")                    # its quest is grey: just a quest item
-        self.assertEqual(self.kind(e, 10), "keep")                   # its quest is done already
+        self.assertNotEqual(self.kind(e, 9), "keep")                 # its quest is grey: kept for nothing
+        self.assertNotEqual(self.kind(e, 10), "keep")                # its quest is done already: nor this
         advice = M.Advice(*M.Verdict(4), 4)
         self.assertIn("Quest", advice[2][1])
         self.assertIn("The Weaver's Cloth", advice[3][1])

@@ -184,6 +184,11 @@ Upgrade: %s
 Skill-up: %s
 Quest: %s
 %d%% likely to sell
+you chose to keep it
+your only tool of its kind
+an upgrade for another spec of yours
+it could be an upgrade for you
+your best of its kind
 5% under the lowest, for a quick sale
 the market is unusually low today: priced near its usual, to wait for buyers
 just under the lowest: few are up, it should sell

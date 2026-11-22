@@ -184,6 +184,11 @@ Amélioration : %s
 Monte une compétence: %s
 Quête : %s
 %d%% de chances de se vendre
+vous avez choisi de le garder
+votre seul outil de ce type
+une amélioration pour une autre de vos spécialisations
+cela pourrait être une amélioration pour vous
+le meilleur de son type que vous portez
 5% en dessous du plus bas, pour une vente rapide
 le marché est exceptionnellement bas aujourd'hui : prix proche de l'habituel, pour attendre les acheteurs
 juste en dessous du plus bas : peu sont en vente, cela devrait se vendre

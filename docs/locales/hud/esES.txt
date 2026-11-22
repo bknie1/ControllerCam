@@ -184,6 +184,11 @@ Mejora: %s
 Sube habilidad: %s
 Misión: %s
 %d%% de probabilidad de venta
+elegiste conservarlo
+tu única herramienta de este tipo
+una mejora para otra de tus especializaciones
+podría ser una mejora para ti
+lo mejor de su tipo que llevas
 5% por debajo del más bajo, para una venta rápida
 el mercado está hoy inusualmente bajo: precio cercano al habitual, para esperar compradores
 justo por debajo del más bajo: hay pocos a la venta, debería venderse

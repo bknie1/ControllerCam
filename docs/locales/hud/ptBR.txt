@@ -184,6 +184,11 @@ Melhoria: %s
 Sobe perícia: %s
 Missão: %s
 %d%% de chance de vender
+você escolheu guardar
+sua única ferramenta deste tipo
+uma melhoria para outra especialização sua
+pode ser uma melhoria para você
+o melhor do tipo que você carrega
 5% abaixo do menor, para uma venda rápida
 o mercado está incomumente baixo hoje: preço perto do usual, para esperar compradores
 logo abaixo do menor: poucos à venda, deve vender

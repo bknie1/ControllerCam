@@ -184,6 +184,11 @@ Verbesserung: %s
 Fertigkeitspunkt: %s
 Quest: %s
 verkauft sich zu %d%%
+Ihr habt es zum Behalten markiert
+Euer einziges Werkzeug dieser Art
+eine Verbesserung für eine andere Spezialisierung von Euch
+es könnte eine Verbesserung für Euch sein
+das Beste seiner Art, das Ihr habt
 5% unter dem niedrigsten Preis, für einen schnellen Verkauf
 der Markt ist heute ungewöhnlich niedrig: nahe am üblichen Preis angesetzt, um auf Käufer zu warten
 knapp unter dem niedrigsten Preis: wenige im Angebot, sollte sich verkaufen

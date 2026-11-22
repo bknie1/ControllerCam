@@ -269,9 +269,10 @@ function M.Advice(verdict, more, want, id)
         if specs then add(GREY .. specs .. "|r") end
         return lines
     end
-    if verdict == "keep" and M.SpecWords(want) then                    -- an upgrade for another spec of yours
+    if verdict == "keep" then                                          -- and why: always
         add(word)
-        add(GREY .. M.SpecWords(want) .. "|r")
+        local why = M.SpecWords(want) or (type(want) == "table" and want.why)
+        if why then add(GREY .. why .. "|r") end
         return lines
     end
     if verdict == "skill" then
@@ -434,6 +435,7 @@ function M.BestText(verdict, more, want)
     else
         right = (M.ICON[verdict] or "") .. " " .. (M.WORDS[verdict] or tostring(verdict))
         local specs = (verdict == "equip" or verdict == "keep") and M.SpecWords(want)
+        if not specs and verdict == "keep" and type(want) == "table" then specs = want.why end   -- (Keep says why)
         if specs then right = right .. GREY .. "  " .. specs .. "|r" end
     end
     if more and verdict ~= "skill" then right = right .. "  |cff6fe06a+|r" .. ns.MoneyColored(more) end
@@ -478,26 +480,32 @@ end
 -- "auction" (with how much more it brings than a vendor), "vendor", "keep", "quest" (with what a quest of yours
 -- wants it for: Quests.lua), "skill" (with who can still learn from it: Professions.lua), or nil when there is
 -- nothing to say. bound: it cannot go to the auction house.
+-- "keep" always comes with its reason (want.why, shown beside it): never a bare Keep
+local function Kept(why, want)
+    want = type(want) == "table" and want or {}
+    want.why = why
+    return "keep", nil, want
+end
+M.Kept = Kept
+
 function M.Verdict(id, bound)
     local sell = ns.db.sell
-    if sell and sell.keep[id] then return "keep" end
+    if sell and sell.keep[id] then return Kept(L["you chose to keep it"]) end
     if sell and sell.junk[id] then return "vendor" end
     local quest = ns.Quests and ns.Quests.ItemWant and ns.Quests.ItemWant(id)
     if quest then return "quest", nil, quest end                         -- a quest of yours still needs it
-    -- Kept unless the auction house pays clearly more: a quest item no quest of yours still needs (Green Hills of
-    -- Stranglethorn pages once the quest is done) that can still be traded, and the best consumable of its kind
-    -- you carry (a potion, Rumsey Rum). Without a price worth the trip they stay "keep".
-    local soft
+    -- A quest item no quest of yours needs (Green Hills of Stranglethorn pages once the quest is done, Gorilla
+    -- Fangs) is never kept: the auction house where there is any market for it, else a vendor, else nothing is
+    -- said. The best consumable of its kind you carry (a potion, Rumsey Rum) is kept unless the auction house
+    -- pays clearly more.
+    local soft, questItem
     local get = (C_Item and C_Item.GetItemInfoInstant) or GetItemInfoInstant
     if get then
         local ok, _, _, _, equipLoc, _, classID, subclassID = pcall(get, id)
-        if ok and classID == 12 then                                       -- a quest item
-            if bound then return "keep" end
-            soft = true
-        end
+        if ok and classID == 12 then questItem = true end                 -- a quest item (none of yours wants it)
         local Vn = ns.Vendor
         if ok and Vn and Vn.IsTool and Vn.IsTool(id, classID, subclassID) and Vn.LastTool(id) then
-            return "keep"                                                  -- your last tool of its kind
+            return Kept(L["your only tool of its kind"])
         end
         local V = ns.Vendor
         if ok and V and V.UpgradeSpecs and (classID == 2 or classID == 4) then
@@ -512,17 +520,17 @@ function M.Verdict(id, bound)
                         return "equip"
                     end
                 end
-                return "keep", nil, want
+                return Kept(L["an upgrade for another spec of yours"], want)
             end
         end
         if ok and V and V.KeepConsumable and classID == 0 and V.KeepConsumable(id, nil, classID) then
             soft = true                                                    -- the best of its kind you carry
         end
         if ok and V and V.MaybeUpgrade and (classID == 2 or classID == 4) and V.MaybeUpgrade(id, equipLoc) then
-            return "keep"                                                  -- it could be an upgrade for you
+            return Kept(L["it could be an upgrade for you"])
         end
     end
-    if soft and not M.Fetches(id, bound) then return "keep" end
+    if soft and not M.Fetches(id, bound) then return Kept(L["your best of its kind"]) end
     -- grey: to a vendor. It may be up at the auction house for more, but grey things there seldom sell
     if M.Quality(id) == 0 then
         if M.Vendor(id) then return "vendor" end
@@ -538,6 +546,8 @@ function M.Verdict(id, bound)
     local more, how = M.Fetches(id, bound)
     if more then return "auction", more, how end
     if vendor then return "vendor" end
+    -- a quest item no vendor buys, with buyers at the auction house all the same: there, however little it brings
+    if questItem and auction then return "auction", nil, { chance = M.SellChance(id) or M.CHANCE } end
     return nil
 end
 

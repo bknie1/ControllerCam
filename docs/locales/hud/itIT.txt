@@ -184,6 +184,11 @@ Miglioramento: %s
 Sale di abilità: %s
 Missione: %s
 %d%% di probabilità di vendita
+hai scelto di tenerlo
+il tuo unico attrezzo di questo tipo
+un miglioramento per un'altra tua specializzazione
+potrebbe essere un miglioramento per te
+il migliore del suo tipo che porti
 5% in meno del più basso, per una vendita rapida
 il mercato oggi è insolitamente basso: prezzo vicino al solito, per aspettare i compratori
 appena sotto il più basso: ce ne sono pochi, dovrebbe vendersi

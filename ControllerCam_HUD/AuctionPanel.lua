@@ -231,6 +231,7 @@ function AP.Reason(e)
     if not e.price then return GREY .. L["no price known yet"] .. "|r" end
     if e.verdict == "keep" or e.verdict == "equip" then              -- (and which of your specs it is for)
         local specs = ns.Market.SpecWords(e.want)
+        if not specs and e.verdict == "keep" and type(e.want) == "table" then specs = e.want.why end   -- (why kept)
         return GREY .. ns.Market.WORDS[e.verdict] .. (specs and ("  " .. specs) or "") .. "|r"
     end
     if e.verdict == "quest" then return GREY .. L["Quest: %s"]:format(ns.Quests.WantText(e.want)) .. "|r" end
