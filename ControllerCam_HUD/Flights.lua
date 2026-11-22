@@ -493,6 +493,7 @@ local function Tick(_, dt)
     if not F.flight then driver:SetScript("OnUpdate", nil); return end
     if not OnTaxi() then F.Land(); return end
     F.Draw(GetTime())
+    F.WeatherAhead(GetTime())
 end
 Tick = ns.Protect(Tick)
 
@@ -558,7 +559,7 @@ function F.Land()
     local route = F.Route(fl.from, to)
     ns.Note("flight: landed at %s after %s (route %s%s)", tostring(to), F.Clock(took), tostring(route),
         fl.early and ", landed early: not learned" or "")
-    if took >= 5 and ns.db.flightWeather then
+    if took >= 5 and ns.db.flightWeather and not fl.weatherSaid then   -- (not said already as you came in)
         C_Timer.After(F.WEATHER_AFTER, function() F.SayWeather(to) end)   -- (once the zone is the new one)
     end
     if fl.early then return end                               -- (a landing asked for is no measure of the route)
@@ -627,6 +628,7 @@ end
 -- saying each, which one by the day. With the time of day: "Evening at Booty Bay: hot and humid, ..."
 ---------------------------------------------------------------------------
 F.WEATHER_AFTER = 1
+F.WEATHER_BEFORE = 15          -- seconds before the landing: said as you come in (when the flight's time is known)
 F.CLIMATES = {
     snow = { L["crisp and cold, snow underfoot and your breath hanging in the air"],
              L["bitterly cold, with a wind off the peaks that finds every gap in your armour"] },
@@ -675,9 +677,28 @@ function F.TimeOfDay()
     return L["Night"]
 end
 
--- The line said on landing at `place`, or nil where the place's air is not known
-function F.Weather(place)
-    local climate, map = F.Climate()
+-- The climate of where you land, by the zone in its name ("Booty Bay, Stranglethorn": Stranglethorn Vale), for
+-- the weather said while you are still in the air over somewhere else
+function F.ClimateOf(place)
+    local _, zone = F.Split(place)
+    zone = type(zone) == "string" and zone:lower() or nil
+    if not (zone and C_Map and C_Map.GetMapInfo) then return nil end
+    for map, climate in pairs(F.CLIMATE) do
+        local info = Ask(C_Map.GetMapInfo, map)
+        local name = type(info) == "table" and Plain(info.name)
+        name = type(name) == "string" and name:lower() or nil
+        if name and (name == zone or name:sub(1, #zone) == zone or zone:sub(1, #name) == name) then
+            return climate, map
+        end
+    end
+end
+
+-- The line said as you land at `place` (ahead: still in the air, so by the place's own zone first), or nil where
+-- the place's air is not known
+function F.Weather(place, ahead)
+    local climate, map
+    if ahead then climate, map = F.ClimateOf(place) end
+    if not climate then climate, map = F.Climate() end
     if not climate then return nil end
     local ways = F.CLIMATES[climate]
     local day = math.floor((time and time() or 0) / 86400)
@@ -686,6 +707,17 @@ function F.Weather(place)
     local when = F.TimeOfDay()
     if type(name) == "string" and name ~= "" and when then return L["%s at %s: %s"]:format(when, name, air) end
     return air
+end
+
+-- As you come in to land: the weather where you land, said once, F.WEATHER_BEFORE seconds out
+function F.WeatherAhead(now)
+    local fl = F.flight
+    if not (fl and fl.eta and fl.to and ns.db.flightWeather) or fl.weatherSaid then return end
+    local left = fl.eta - (now - fl.at)
+    if left > F.WEATHER_BEFORE or left <= 0 then return end
+    fl.weatherSaid = true
+    local line = F.Weather(fl.to, true)
+    if line then Say(line) end
 end
 
 function F.SayWeather(place)

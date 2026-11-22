@@ -8656,9 +8656,10 @@ class Moments(unittest.TestCase):
         e.update(0.1)
         self.land(e, 679, 450, True)
         e.update(0.6)
-        self.assertIsNotNone(M.live)                                # still the moment: each crit's amount
-        self.assertEqual(M.frame.label.text, "+ Judgement  42\n+ Holy Strike  450")   # beside its name (the game
-        self.assertEqual(M.frame.number.text, "2 crits")            # writes out the secret one), and big how many
+        self.assertIsNotNone(M.live)                                # still the moment: the names in the column,
+        self.assertEqual(M.frame.label.text, "+ Judgement\n+ Holy Strike")
+        self.assertEqual(M.frame.number.text, "42 + 450")           # and big, the amounts side by side (the game
+        self.assertNotIn("crits", M.frame.number.text)              # writes out the secret one): never "2 crits"
         self.assertIn("1 secret", M.Describe()[1])
         e.mock.fire("PLAYER_REGEN_DISABLED")                        # another fight, the combat log readable
         e.update(10)
@@ -12485,6 +12486,33 @@ class Flights(unittest.TestCase):
         e.mock.advance(1.2)
         self.assertEqual([l for l in said(e, n) if " at Booty Bay: " in l], [])
         self.assertEqual(e.errors(), [])
+
+    def test_the_weather_is_said_as_you_come_in_to_land(self):
+        # a known route: fifteen seconds out, the weather where you land (by its zone, though you are still over
+        # another one), and not again once you are down
+        db = "{ flightTimes = { ['Stormwind, Elwynn > Booty Bay, Stranglethorn'] = { t = 100, n = 1 } } }"
+        e = Env(db=db)
+        F = e.ns.Flights
+        e.lua.execute("""C_Map.GetBestMapForUnit = function() return 1436 end
+            C_Map.GetMapInfo = function(id)
+                local names = { [1434] = "Stranglethorn Vale", [1436] = "Westfall" }
+                return names[id] and { name = names[id] } or nil
+            end
+            GetGameTime = function() return 19, 30 end""")
+        self.fly(e)
+        n = len(e.mock.printed)
+        e.update(80, step=0.5)
+        self.assertEqual([l for l in said(e, n) if " at Booty Bay: " in l], [])      # not yet
+        e.update(6, step=0.5)                                                       # 14 s out
+        lines = [l for l in said(e, n) if " at Booty Bay: " in l]
+        self.assertEqual(len(lines), 1)
+        self.assertIn(lines[0], ["[F] Evening at Booty Bay: " + a for a in F.CLIMATES.jungle.values()])
+        e.update(15, step=0.5)
+        e.mock.landFlight("Booty Bay")
+        e.mock.advance(1.2)
+        self.assertEqual(len([l for l in said(e, n) if " at Booty Bay: " in l]), 1)   # said once
+        self.assertEqual(e.errors(), [])
+
 
     def test_landing_early_past_the_last_stop_or_without_stops(self):
         db = "{ flightTimes = { ['Stormwind, Elwynn > Booty Bay, Stranglethorn'] = { t = 100, n = 1 } } }"

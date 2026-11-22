@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.4.8
+
+ControllerCam: HUD
+- Big moments show the amounts. Where the game keeps each crit's amount to itself it won't let an addon add them up, so instead of "2 crits" the big line now shows them side by side, "431 + 86", with the spell names in the column beside it. Where the amounts can be added, it's the total as before. A Lua error with such amounts ("attempt to compare local 'lines'") is gone too.
+- The weather where you land is said as you come in, fifteen seconds before the landing, for the place you're landing at (not the zone you're still flying over). On a route whose time isn't known yet it's said right after landing, as before.
+
 ## 1.4.7
 
 ControllerCam: HUD

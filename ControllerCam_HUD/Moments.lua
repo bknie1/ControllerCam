@@ -97,9 +97,14 @@ M.DELAY = 0.5                   -- the total comes this long after the burst's l
 -- What the big figure says: the total when every amount can be added up; where the game keeps the amounts to
 -- itself they cannot be added (nor compared), so it says how many crits it was, and each one's own amount goes
 -- in the column beside its name
+-- (secret amounts: up to M.SIDE of them, the last ones, written out by the game itself, "431 + 86")
+M.SIDE = 4
 function M.Number(run, amount)
     if run.hasTotal then return run.total end
-    return { count = run.n }
+    local all, side = run.amounts or {}, {}
+    for i = math.max(1, #all - M.SIDE + 1), #all do side[#side + 1] = all[i] end
+    if #side == 0 then return { count = run.n } end
+    return { side = side, more = #all > #side }
 end
 
 -- The run of crits: how many, what they did together (nil when the game keeps an amount to itself: those
@@ -190,7 +195,8 @@ M.SHADE = 0.55                 -- how dark the shade behind it
 local function FitShade(size)
     local h = size or 0
     local ok, lines = pcall(frame.label.GetStringHeight, frame.label)
-    if ok and type(lines) == "number" and lines > h then h = lines end
+    -- (a text holding a number the game keeps to itself has a height it keeps to itself too: not compared)
+    if ok and type(lines) == "number" and not ns.IsSecret(lines) and lines > h then h = lines end
     frame.shade:SetHeight(h + 26)
 end
 local function Build()
@@ -262,7 +268,12 @@ function M:Show(amount, name, school, heal, count)
     local calm = ns.Calm() and true or false
     local one = heal and "+%d" or "%d"
     local fmt, args, base = one, { amount }, SIZE
-    if type(amount) == "table" and not ns.IsSecret(amount) and amount.count then  -- amounts that cannot be added
+    if type(amount) == "table" and not ns.IsSecret(amount) and amount.side then   -- amounts that cannot be added:
+        local parts = {}                                                           -- side by side, "431 + 86"
+        for i = 1, #amount.side do parts[i] = one end
+        fmt, args = (amount.more and "... + " or "") .. table.concat(parts, " + "), amount.side
+        base = math.floor(SIZE * math.max(0.5, 0.95 - 0.12 * #amount.side))
+    elseif type(amount) == "table" and not ns.IsSecret(amount) and amount.count then
         fmt, args = heal and L["%d crit heals"] or L["%d crits"], { amount.count }
         base = math.floor(SIZE * 0.8)
     end
@@ -327,7 +338,7 @@ function M:Consider(amount, crit, ability, name, school)
     local now = GetTime()
     local run = Join(amount, name, now)
     if run.n < 2 or not ns.db.bigMoments then return false end     -- a crit on its own: no burst yet
-    local number, label = M.Number(run, amount), RunLines(run, not run.hasTotal)
+    local number, label = M.Number(run, amount), RunLines(run, false)
     if not run.shown then                                          -- a new moment: kept rare
         if fight.moments >= PER_FIGHT or now - fight.lastMoment < GAP then return false end
         fight.moments = fight.moments + 1
@@ -354,7 +365,7 @@ function M:Healed(spellID, name, amount, crit, school)
         run.shown = true
     end
     fight.lastMoment = now
-    self:Pin(M.Number(run, amount), RunLines(run, not run.hasTotal), school or "holy", true, run.n)
+    self:Pin(M.Number(run, amount), RunLines(run, false), school or "holy", true, run.n)
     return true
 end
 
