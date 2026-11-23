@@ -548,9 +548,13 @@ una oleada al subir de nivel, un retumbar largo y grave al morir
 La barra de luz muestra tu salud
 un mando con barra de luz (DualSense) muestra en ella tu salud: de verde a rojo, con pulsos si es baja en un combate
 reproduce cada patrón de vibración una vez
+Lista a la derecha
+Uno en el centro
 %d sanaciones críticas
 %d críticos
 Sentencia
+Grandes momentos: dónde
+un bloque justo encima de los avisos de reutilización a la derecha de tu personaje, el más reciente junto a ellos y los anteriores subiendo por encima mientras se desvanecen, o uno a la vez en el centro
 Vibración: tus habilidades clave
 las habilidades clave de cada clase se sienten distintas en el mando (una Sentencia salpica, un Golpe sagrado chasquea, Viento furioso golpea tres veces)
 Grandes momentos
@@ -998,6 +1002,8 @@ Solo esta bolsa
 Meter
 Coger bolsa
 Más
+Descripción
+Ocultar descripción
 Bolsas
 %d libres
 Hueco libre
@@ -1017,6 +1023,8 @@ Ver banco
 Depositar lo marcado
 Vender lo aconsejado
 Suelta para destruir
+Este objeto inicia una misión.
+Es un objeto de misión.
 ¿Destruir %s?
 El juego conservó %s: destrúyelo desde sus propias bolsas.
 %s destruido.

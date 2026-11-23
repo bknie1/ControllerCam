@@ -8594,7 +8594,7 @@ class Moments(unittest.TestCase):
         e.update(0.1)
         e.mock.fire("UNIT_COMBAT", "target", "WOUND", "CRITICAL", 300, 1)   # and a white swing crits right behind it
         e.update(0.6)
-        self.assertEqual(M.frame.label.text, "Holy Strike + Melee  |cffffd24d×2|r")   # not Holy Strike twice
+        self.assertEqual(M.frame.label.text, "+ Holy Strike\n+ Melee  |cffffd24d×2|r")   # not Holy Strike twice
         self.assertEqual(e.errors(), [])
 
     def test_hidden_amounts_are_added_up_where_the_game_allows_it(self):
@@ -8614,7 +8614,7 @@ class Moments(unittest.TestCase):
         e.update(0.6)
         self.assertTrue(M.secretSum)                                 # the game adds them: a total of its own
         self.assertEqual(M.fight.chain.total.v, 350)
-        self.assertEqual(M.frame.label.text, "Judgement + Holy Strike  |cffffd24d×2|r")    # the names, and the total big
+        self.assertEqual(M.frame.label.text, "+ Judgement\n+ Holy Strike  |cffffd24d×2|r")    # the names, and the total big
         self.assertNotIn("crits", M.frame.number.text)
         self.assertIn("hidden amounts added up: yes", M.Describe()[1])
         self.assertEqual(e.errors(), [])
@@ -8632,6 +8632,36 @@ class Moments(unittest.TestCase):
         self.assertGreater(M.smallSkipped, 0)
         M.FromLog(679, "Holy Strike", 450, True, 1)                 # a real one is
         self.assertEqual(M.fight.chain.n, 2)
+        self.assertEqual(e.errors(), [])
+
+    def test_moments_are_a_feed_right_of_the_middle(self):
+        e = self.env()
+        M = e.ns.Moments
+        M.Show(M, e.lua.table(side=e.lua.table(200, 300)), "Judgement + Holy Strike", "holy", None, 2)
+        e.update(1.4)                                               # past its hold, fading:
+        M.Show(M, 512, "Exorcism + Melee", "holy", None, 2)         # a second moment is a new entry
+        e.update(0.05)
+        entries = [M.entries[i] for i in range(1, len(M.entries) + 1)]
+        self.assertEqual(len(entries), 2)
+        self.assertIn("Exorcism", entries[0].f.label.text)          # the newest first,
+        p0, p1 = entries[0].f.points[1], entries[1].f.points[1]
+        self.assertEqual((p0[1], p0[3]), ("TOPLEFT", "CENTER"))
+        self.assertGreater(p0[4], 0)                                # right of the middle,
+        self.assertGreater(p1[5], p0[5])                            # the older one moving up over it,
+        RC = e.ns.Numbers.Soon                                      # all of it a block above the cooldowns'
+        x, y = RC.Spot()[0], RC.Spot()[1]
+        self.assertAlmostEqual(p0[4], x, delta=30)                  # (their left edge)
+        self.assertGreater(p0[5] - entries[0].f.tall, y + RC.GRIP.y + RC.GRIP.h)
+        e.update(3)
+        self.assertEqual(len(M.entries), 0)                         # each gone on its own time
+        e.cmd("momentplace 2")                                      # or one at a time, in the middle
+        M.Show(M, 512, "Exorcism + Melee", "holy", None, 2)
+        e.update(1.4)
+        M.Show(M, 300, "Judgement + Melee", "holy", None, 2)
+        e.update(0.05)
+        self.assertEqual(len(M.entries), 1)
+        self.assertEqual(M.entries[1].f.points[1][1], "TOP")
+        self.assertEqual(M.entries[1].f.points[1][4], 0)
         self.assertEqual(e.errors(), [])
 
     def test_crits_within_half_a_second_are_a_burst_rarely(self):
@@ -8652,7 +8682,7 @@ class Moments(unittest.TestCase):
         e.update(0.3)
         self.assertIsNotNone(M.live)                                # over: the total, half a second on
         self.assertEqual(M.frame.number.text, "1450")               # what they did together
-        self.assertEqual(M.frame.label.text, "Judgement + Holy Strike + Judgement  |cffffd24d×3|r")   # one line a crit
+        self.assertEqual(M.frame.label.text, "+ Judgement\n+ Holy Strike\n+ Judgement  |cffffd24d×3|r")   # one line a crit
         self.assertEqual(e.ns.Rumble.last, "moment")
         self.assertEqual(M.fight.moments, 1)                        # (one moment, not two)
         e.update(1.0)
@@ -8676,7 +8706,7 @@ class Moments(unittest.TestCase):
         M.FromLog(26573, "Consecration", 300, True, 2)
         self.assertEqual(M.fight.chain.n, 2)
         e.update(0.6)
-        self.assertEqual(M.frame.label.text, "Judgement + Consecration  |cffffd24d×2|r")
+        self.assertEqual(M.frame.label.text, "+ Judgement\n+ Consecration  |cffffd24d×2|r")
         e.mock.fire("PLAYER_REGEN_DISABLED")                        # a new fight
         self.assertEqual(M.fight.moments, 0)
 
@@ -8705,7 +8735,7 @@ class Moments(unittest.TestCase):
         e.mock.logHit("SWING_DAMAGE", "player", "target", 1, True)  # and the swing beside it too: a burst
         e.update(0.6)
         self.assertIsNotNone(e.ns.Moments.live)
-        self.assertIn("Windfury Attack + ", e.ns.Moments.frame.label.text)
+        self.assertIn("+ Windfury Attack\n+ ", e.ns.Moments.frame.label.text)
 
     def test_amounts_the_game_hides_cannot_be_added_and_weapon_crits_count_with_the_log(self):
         e = self.env()
@@ -8715,7 +8745,7 @@ class Moments(unittest.TestCase):
         self.land(e, 679, 450, True)
         e.update(0.6)
         self.assertIsNotNone(M.live)                                # still the moment: the names in the column,
-        self.assertEqual(M.frame.label.text, "Judgement + Holy Strike  |cffffd24d×2|r")
+        self.assertEqual(M.frame.label.text, "+ Judgement\n+ Holy Strike  |cffffd24d×2|r")
         self.assertEqual(M.frame.number.text, "42  ·  450")           # and big, the amounts side by side (the game
         self.assertNotIn("crits", M.frame.number.text)              # writes out the secret one): never "2 crits"
         self.assertIn("1 secret", M.Describe()[1])
@@ -8725,7 +8755,7 @@ class Moments(unittest.TestCase):
         e.mock.logHit("SWING_DAMAGE", "player", "target", 1, True)  # your weapon crits right after
         self.assertEqual(M.fight.chain.n, 2)
         e.update(0.6)
-        self.assertIn("Judgement + ", M.frame.label.text)
+        self.assertIn("+ Judgement\n+ ", M.frame.label.text)
         e.mock.logHit("SWING_DAMAGE", "player", "target", 1, False) # a plain swing does not end the run
         self.assertEqual(M.fight.chain.n, 2)
         self.assertEqual(e.errors(), [])
@@ -8752,7 +8782,7 @@ class Moments(unittest.TestCase):
         self.assertEqual(M.frame.number.text, "+2700")              # (each counted once)
         self.assertEqual(tuple(round(x, 2) for x in list(M.frame.number.tcolor.values())[:3]), (0.42, 1.0, 0.66))
         self.assertEqual(e.ns.Rumble.last, "moment")
-        self.assertEqual(M.frame.label.text, "Holy Light + Flash of Light + Holy Light  |cffffd24d×3|r")
+        self.assertEqual(M.frame.label.text, "+ Holy Light\n+ Flash of Light\n+ Holy Light  |cffffd24d×3|r")
         self.assertEqual(M.fight.moments, 1)
         e.update(1)
         self.heal(e, 635, 500, True)                                # a second later: a new start
@@ -8772,7 +8802,7 @@ class Moments(unittest.TestCase):
             e.mock.fire("COMBAT_LOG_EVENT_UNFILTERED")
         e.update(0.6)
         self.assertEqual(M.frame.number.text, "+2200")              # overheal taken off
-        self.assertEqual(M.frame.label.text, "Holy Light + Holy Light  |cffffd24d×2|r")
+        self.assertEqual(M.frame.label.text, "+ Holy Light\n+ Holy Light  |cffffd24d×2|r")
         self.assertEqual(e.errors(), [])
 
     def test_big_moments_can_be_switched_off(self):
@@ -10437,6 +10467,7 @@ class MarketAndItems(unittest.TestCase):
 
     def test_stick_buttons_only_while_the_windows_are_open(self):
         e = self.env()
+        e.cmd("bagwindow off")                         # (the game's own bags: the HUD's bag window takes R3 for tooltips)
         e.update(0.5)
         self.assertEqual(len(list(e.mock.overrides.keys())), 0)                  # R3 and L3 are yours
         e.g.ContainerFrame1.Show(e.g.ContainerFrame1)
@@ -14523,6 +14554,23 @@ class BagWindow(unittest.TestCase):
         self.assertEqual(e.mock.overrides.PAD1, "CLICK ControllerCamHUD_BagKey_PAD1:LeftButton")  # A: the hold
         self.assertNotIn("BagUse", e.mock.overrides.PAD3)            # (no use while asking)
         self.assertIn("PAD1 Hold to destroy   PAD2 Keep", plain(B.frame.legend.text))
+        tip, hold = e.g.GameTooltip, B.frame.confirm.hold
+        self.assertFalse(tip.shown)                                  # no tooltip over the question
+        e.mock.fire("ITEM_LOCK_CHANGED")                             # (picked up: the slot locks, the window redraws)
+        e.mock.advance(0.1)
+        self.assertFalse(tip.shown)                                  # still none
+        self.assertEqual(plain(hold.text.text), "PAD1 Hold to destroy")   # the one instruction,
+        a.scripts.OnClick(a, "LeftButton", True)
+        e.update(1.1)
+        self.assertEqual(plain(hold.text.text), "Let go to destroy")      # then the next, in its place
+        a.scripts.OnClick(a, "LeftButton", False)                    # (a full hold let go: destroyed)
+        self.assertEqual(list(e.g.DELETED.values()), [103])
+        e.lua.execute("DELETED = {}")
+        e.mock.put(1, 2, e.lua.table(id=103, name="Linen Cloth", quality=1, price=13, count=20, **{"class": 7}))
+        e.mock.fire("BAG_UPDATE_DELAYED")
+        e.mock.advance(0.1)
+        self.assertTrue(self.destroy_menu(e))
+        self.assertEqual(plain(hold.text.text), "PAD1 Hold to destroy")   # (each question starts over)
         a.scripts.OnClick(a, "LeftButton", True)                     # held a moment, let go early: nothing
         e.mock.advance(0.4)
         a.scripts.OnClick(a, "LeftButton", False)
@@ -14531,6 +14579,7 @@ class BagWindow(unittest.TestCase):
         self.press(e, "PAD2")                                        # B: kept, put back
         self.assertIsNone(B.confirm)
         self.assertIsNone(e.g.CURSOR_ITEM)
+        self.assertTrue(tip.shown)                                   # and the item's tooltip back
         self.assertEqual(len(e.g.DELETED), 0)
         self.assertTrue(self.destroy_menu(e))
         a.scripts.OnClick(a, "LeftButton", True)                     # a full hold, then let go: destroyed
@@ -14539,6 +14588,29 @@ class BagWindow(unittest.TestCase):
         self.assertEqual(list(e.g.DELETED.values()), [103])
         self.assertIsNone(B.confirm)
         self.assertIn("Destroyed Linen Cloth x20.", list(e.mock.printed.values())[-1])
+        self.assertEqual(e.errors(), [])
+
+    def test_destroying_what_begins_a_quest_says_so_in_red(self):
+        e = self.env(self.DESTROY + """
+            C_Container.GetContainerItemQuestInfo = function(b, s)
+                if b == 2 and s == 16 then return { isQuestItem = true, questID = 77, isActive = false } end
+                return { isQuestItem = false }
+            end
+        """)
+        e.g.ToggleAllBags()
+        B = e.ns.Bags
+        for _ in range(3):
+            self.press(e, "PADDRIGHT")                               # the Gnoll Paw (it begins a quest here)
+        self.assertTrue(self.destroy_menu(e))
+        f = B.frame.confirm
+        self.assertTrue(f.warn.shown)
+        self.assertEqual(f.warn.text, "This item begins a quest.")
+        self.assertEqual(f.warn.tcolor[1], 0.92)                     # (red, as the game's own warning)
+        self.press(e, "PAD2")
+        self.press(e, "PADDLEFT")
+        self.press(e, "PADDLEFT")
+        self.assertTrue(self.destroy_menu(e))                        # an ordinary item: no warning
+        self.assertFalse(f.warn.shown)
         self.assertEqual(e.errors(), [])
 
     def test_closing_or_a_fight_while_asking_destroys_nothing(self):
@@ -14570,6 +14642,46 @@ class BagWindow(unittest.TestCase):
             self.press(e, "PADDRIGHT")                               # the Gnoll Paw
         self.assertEqual(e.ns.Bags.list[e.ns.Bags.index].id, 104)
         self.assertFalse(self.destroy_menu(e))
+        self.assertEqual(e.errors(), [])
+
+    def test_tooltips_follow_the_games_setting_and_r3_turns_them_on_and_off_as_in_its_bags(self):
+        e = self.env()
+        e.mock.knownCVars.GamepadDisableTooltips = True
+        e.mock.cvars.GamepadDisableTooltips = "0"
+        e.g.ToggleAllBags()
+        B, tip = e.ns.Bags, e.g.GameTooltip
+        self.assertEqual(e.mock.overrides.PADRSTICK, "CLICK ControllerCamHUD_BagKey_PADRSTICK:LeftButton")  # (not sort)
+        self.assertIn("PADRSTICK Hide tooltip", plain(B.frame.legend.text))
+        self.assertTrue(tip.shown)
+        self.press(e, "PADRSTICK")                                   # R3: the game's own switch, off
+        self.assertEqual(e.mock.cvars.GamepadDisableTooltips, "1")
+        self.assertFalse(tip.shown)
+        self.press(e, "PADDRIGHT")
+        self.assertFalse(tip.shown)                                  # (the d-pad shows none now)
+        self.assertIn("PADRSTICK Tooltip", plain(B.frame.legend.text))
+        slot = e.g.ControllerCamHUD_Bag1_2
+        slot.scripts.OnEnter(slot)
+        self.assertTrue(tip.shown)                                   # the mouse: always, as the game's
+        self.press(e, "PADRSTICK")                                   # on again
+        self.assertEqual(e.mock.cvars.GamepadDisableTooltips, "0")
+        self.assertEqual(e.errors(), [])
+
+    def test_the_game_own_bags_buttons_are_read_for_the_report(self):
+        e = self.env()
+        e.lua.execute("""
+            local legend = CreateFrame("Frame", nil, ContainerFrameCombinedBags)
+            ContainerFrameCombinedBags.ContainerFrameCombinedBagsFooterinputLegend = legend
+            for _, p in ipairs({ { "Gamepad_Ltr_X", "Use" }, { "Gamepad_Ltr_Y", "Options" } }) do
+                local prompt = CreateFrame("Frame", nil, legend)
+                prompt:CreateTexture():SetAtlas(p[1])
+                prompt:CreateFontString():SetText(p[2])
+            end
+        """)
+        e.g.ToggleAllBags()
+        e.update(1.2)
+        report = "\n".join(e.ns.Bags.Describe().values())
+        self.assertIn("native: Gamepad_Ltr_X = Use", report)         # (read only, for keeping ours in line)
+        self.assertIn("native: Gamepad_Ltr_Y = Options", report)
         self.assertEqual(e.errors(), [])
 
     def test_each_bag_shows_its_slots_in_the_corner(self):

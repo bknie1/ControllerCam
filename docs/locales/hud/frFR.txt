@@ -548,9 +548,13 @@ une onde quand vous gagnez un niveau, une longue vibration grave quand vous mour
 La barre lumineuse affiche votre santé
 une manette à barre lumineuse (DualSense) y affiche votre santé : du vert au rouge, pulsant quand elle est faible en combat
 jouer chaque motif de vibration une fois
+Liste à droite
+Un au centre
 %d soins critiques
 %d critiques
 Jugement
+Grands moments : où
+un bloc juste au-dessus des annonces de temps de recharge à droite de votre personnage, le plus récent au plus près et les précédents montant au-dessus en s'effaçant, ou un seul à la fois au centre
 Vibration : vos techniques clés
 les techniques clés de chaque classe ont leur propre sensation à la manette (un Jugement éclabousse, une Frappe sacrée claque, Furie-des-vents frappe trois fois)
 Grands moments
@@ -998,6 +1002,8 @@ Ce sac seulement
 Mettre dedans
 Prendre le sac
 Plus
+Infobulle
+Masquer l'infobulle
 Sacs
 %d libres
 Emplacement libre
@@ -1017,6 +1023,8 @@ Voir la banque
 Déposer les objets marqués
 Vendre les objets conseillés
 Relâchez pour détruire
+Cet objet permet de commencer une quête.
+C'est un objet de quête.
 Détruire %s ?
 Le jeu a gardé %s: détruisez-le depuis ses propres sacs.
 %s détruit.

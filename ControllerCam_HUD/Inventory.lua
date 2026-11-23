@@ -382,8 +382,12 @@ end
 
 function I:Keys()
     local V = ns.Vendor
-    local sort = self.active and ns.db.padSort and BagsOpen() or false
-    local move = self.active and ns.db.padMove and V and V:MoveOpen() or false
+    -- (the HUD's bag window with the controller: R3 is its own there, the game's tooltip switch as in the game's
+    -- bags; sorting is in its Y, moving is its X)
+    local B = ns.Bags
+    local theirs = B and B.active and B.open and B.hasPad and true or false
+    local sort = self.active and ns.db.padSort and BagsOpen() and not theirs or false
+    local move = self.active and ns.db.padMove and V and V:MoveOpen() and not theirs or false
     if sort == self.sortKey and move == self.moveKey then return end
     if InCombatLockdown() then return end             -- bindings change only out of a fight: next look
     self.sortKey, self.moveKey = sort, move

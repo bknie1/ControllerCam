@@ -187,92 +187,171 @@ local function RunLines(c, withAmounts)
 end
 M.RunLines = RunLines
 
--- The names in one line, in the order they landed, and how many hits: "Judgement + Seal of Command + Holy
--- Strike  x3" (the last few, when it ran long)
+-- The names one to a line, in the order they landed, and how many hits after the last: "+ Judgement /
+-- + Seal of Command / + Holy Strike  x3" (the last few, when it ran long)
 function M.Names(c)
     local seq, names = c.seq or {}, {}
     local from = math.max(1, #seq - M.LINES + 1)
     if from > 1 then names[1] = "..." end
-    for i = from, #seq do names[#names + 1] = seq[i] end
-    return table.concat(names, " + ") .. ("  |cffffd24d×%d|r"):format(c.n or #seq)
+    for i = from, #seq do names[#names + 1] = "+ " .. seq[i] end
+    -- one to a line (narrow: in one line a long combo ran under the quest tracker), the count after the last
+    return table.concat(names, "\n") .. ("  |cffffd24d×%d|r"):format(c.n or #seq)
 end
 
-local frame
+-- Where they show (setting: momentPlace): a feed (the default), a block just above the cooldown callouts on the
+-- right of your character, each moment its own entry, the newest nearest the cooldowns and the older ones moving
+-- up over it, each fading on its own time, at most M.FEED at once; or one at a time in the middle. M.frame and M.live are the newest entry and its timing.
+ns.RegisterSetting({
+    key = "momentPlace", kind = "number", default = 1, min = 1, max = 2, section = "Effects",
+    choices = { "Feed on the right", "One in the middle" }, command = "momentplace", label = "Big moments: where",
+    tip = "a block just above the cooldown callouts on the right of your character, the newest nearest them and the older ones moving up over it as they fade, or one at a time in the middle",
+})
+M.PLACE_NAMES = { L["Feed on the right"], L["One in the middle"] }   -- (in your language: the options show them so)
+local function Feed() return (ns.db and ns.db.momentPlace or 1) ~= 2 end
+
+local frame                                       -- (the newest entry)
 M.LINE_SIZE = 17               -- the abilities' line over the damage
 M.SHADE = 0.55                 -- how dark the shade behind it
+M.FEED_X, M.FEED_Y = 260, 120  -- where the feed starts: right of the middle, a little above it
+M.MIDDLE_Y = 150               -- one in the middle: this far above the middle
+M.FEED, M.FEED_GAP = 4, 8      -- how many at once; the space between two
+M.entries = {}                 -- newest first: { f = frame, m = timing, y = where it is drawn }
+local pool = {}
 
 -- The shade as tall as what it is behind: the damage, and the names' line over it
-local function FitShade(size)
+local function FitShade(f, size)
     local h = size or 0
-    local ok, lines = pcall(frame.label.GetStringHeight, frame.label)
+    local ok, lines = pcall(f.label.GetStringHeight, f.label)
     -- (a text holding a number the game keeps to itself has a height it keeps to itself too: not added)
     if ok and type(lines) == "number" and not ns.IsSecret(lines) then h = h + lines end
-    frame.shade:SetHeight(h + 26)
+    f.shade:SetHeight(h + 26)
+    f.tall = h + 12
 end
+
+-- An entry's lines, aligned for where it shows: from the left in the feed, centred in the middle
+local function Align(f, feed)
+    if f.feed == feed then return end
+    f.feed = feed
+    f.number:ClearAllPoints()
+    f.label:ClearAllPoints()
+    if feed then
+        f.number:SetPoint("TOPLEFT", f, "TOPLEFT", 0, -(M.LINE_SIZE + 6))
+        f.label:SetPoint("BOTTOMLEFT", f.number, "TOPLEFT", 0, 2)
+    else
+        f.number:SetPoint("TOP", f, "TOP", 0, -(M.LINE_SIZE + 6))
+        f.label:SetPoint("BOTTOM", f.number, "TOP", 0, 2)
+    end
+    if f.number.SetJustifyH then f.number:SetJustifyH(feed and "LEFT" or "CENTER") end
+    if f.label.SetJustifyH then f.label:SetJustifyH(feed and "LEFT" or "CENTER") end
+end
+
 local function Build()
-    frame = CreateFrame("Frame", nil, UIParent)
-    frame:SetSize(10, 10)
-    frame:SetPoint("CENTER", UIParent, "CENTER", 0, 150)
-    frame:SetFrameStrata("HIGH")
-    frame.glow = frame:CreateTexture(nil, "BACKGROUND")
-    frame.glow:SetTexture(ns.media.disc)
-    frame.glow:SetBlendMode("ADD")
-    frame.glow:SetSize(260, 130)
-    frame.glow:SetPoint("CENTER", frame, "CENTER", 0, 0)
-    frame.number = frame:CreateFontString(nil, "OVERLAY")
-    frame.number:SetPoint("CENTER", frame, "CENTER", 0, 0)
-    frame.number:SetShadowColor(0, 0, 0, 0.9)
-    frame.number:SetShadowOffset(3, -3)
-    frame.label = ns.FontString(frame, M.LINE_SIZE, "CENTER")            -- the abilities, one line, above it
-    frame.label:SetPoint("BOTTOM", frame.number, "TOP", 0, 2)
-    frame.label:SetTextColor(1, 0.9, 0.62)
+    local f = table.remove(pool)
+    if f then return f end
+    f = CreateFrame("Frame", nil, UIParent)
+    f:SetSize(10, 10)
+    f:SetFrameStrata("HIGH")
+    f.glow = f:CreateTexture(nil, "BACKGROUND")
+    f.glow:SetTexture(ns.media.disc)
+    f.glow:SetBlendMode("ADD")
+    f.glow:SetSize(220, 110)
+    f.number = f:CreateFontString(nil, "OVERLAY")
+    f.number:SetShadowColor(0, 0, 0, 0.9)
+    f.number:SetShadowOffset(3, -3)
+    f.glow:SetPoint("CENTER", f.number, "CENTER", 0, 0)
+    f.label = ns.FontString(f, M.LINE_SIZE, "LEFT")                       -- the abilities, one to a line, above it
+    if f.label.SetSpacing then f.label:SetSpacing(2) end
+    f.label:SetTextColor(1, 0.9, 0.62)
     -- a soft dark shade behind all of it, like the one under the target's health text: easier to read
-    frame.shade = frame:CreateTexture(nil, "BACKGROUND", nil, -8)
-    frame.shade:SetTexture(ns.media.soft)
-    frame.shade:SetVertexColor(0, 0, 0, M.SHADE)
-    frame.shade:SetPoint("LEFT", frame.number, "LEFT", -40, 0)
-    frame.shade:SetPoint("RIGHT", frame.number, "RIGHT", 40, 0)
-    frame.shade:SetHeight(80)
-    frame:Hide()
-    M.frame = frame
+    f.shade = f:CreateTexture(nil, "BACKGROUND", nil, -8)
+    f.shade:SetTexture(ns.media.soft)
+    f.shade:SetVertexColor(0, 0, 0, M.SHADE)
+    f.shade:SetPoint("LEFT", f.number, "LEFT", -30, 8)
+    f.shade:SetPoint("RIGHT", f.number, "RIGHT", 30, 8)
+    f.shade:SetHeight(80)
+    f:Hide()
+    return f
 end
 
 -- Brief, like a crit's flash: long enough to see what happened, gone before it is in the way
 local SLAM, HOLD, FADE, SIZE = 0.14, 0.9, 0.4, 46
 M.PER_CRIT = 0.25              -- a little longer for each further crit of the burst ...
 M.HOLD_MAX = 1.6               -- ... never longer than this
+M.SLIDE = 12                   -- how quickly an entry slides to its place in the feed
 local function Font() return DAMAGE_TEXT_FONT or STANDARD_TEXT_FONT or "Fonts\\FRIZQT__.TTF" end
 
-local function Animate(_, dt)
-    local m = M.live
-    if not m then frame:SetScript("OnUpdate", nil); frame:Hide(); return end
-    m.t = m.t + dt
-    local t = m.t
-    local scale
-    if m.calm then scale = 1.2                                                     -- (Reduce animations: still)
-    elseif t < SLAM then scale = 2.6 - 1.4 * (t / SLAM)                              -- slams in from big
-    elseif t < SLAM + m.hold then scale = 1.2 + 0.05 * math.sin((t - SLAM) * 6)    -- holds, breathing
-    else scale = 1.2 end
-    local size = math.floor((m.base or SIZE) * scale + 0.5)
-    if size ~= m.drawn then
-        m.drawn = size
-        frame.number:SetFont(Font(), size, "THICKOUTLINE")
-        FitShade(size)
+local function Drop(i)
+    local old = table.remove(M.entries, i)
+    old.f:Hide()
+    pool[#pool + 1] = old.f
+end
+
+-- The feed's place: a block just above the cooldown callouts (Numbers.lua's stack, on the right of your
+-- character), its left edge on theirs, growing upwards from there; where those are not to be had, right of the
+-- middle, growing down. Returns x, y, and whether it grows up.
+M.ABOVE = 40                   -- the space between the cooldowns' block and the moments'
+function M.FeedBase()
+    local RC = ns.Numbers and ns.Numbers.Soon
+    if RC and RC.Spot then
+        local ok, x, y = pcall(RC.Spot)
+        if ok and type(x) == "number" and type(y) == "number" then
+            local G = RC.GRIP or { h = 80, y = -16 }
+            return x, y + G.y + G.h + M.ABOVE, true
+        end
     end
-    local out = math.max(0, t - SLAM - m.hold)
-    frame:ClearAllPoints()
-    frame:SetPoint("CENTER", UIParent, "CENTER", 0, 150 + (m.calm and 0 or 40 * out))
-    local a = 1 - out / FADE
-    frame:SetAlpha(math.max(0, a))
-    frame.glow:SetAlpha(math.max(0, a) * (0.35 + 0.15 * math.sin(t * 5)))
-    if out >= FADE then M.live = nil; frame:SetScript("OnUpdate", nil); frame:Hide() end
+    return M.FEED_X, M.FEED_Y, false
+end
+
+local driver = CreateFrame("Frame")
+local function Animate(_, dt)
+    for i = #M.entries, 1, -1 do                                     -- (gone ones out first)
+        local m = M.entries[i].m
+        m.t = m.t + dt
+        if m.t - SLAM - m.hold >= FADE then Drop(i) end
+    end
+    local feed = Feed()
+    local baseX, at, up = M.FEED_X, M.MIDDLE_Y, false
+    if feed then baseX, at, up = M.FeedBase() end
+    for _, e in ipairs(M.entries) do
+        local f, m = e.f, e.m
+        local t = m.t
+        local scale
+        if m.calm then scale = 1.2                                                     -- (Reduce animations: still)
+        elseif t < SLAM then scale = 2.6 - 1.4 * (t / SLAM)                              -- slams in from big
+        elseif t < SLAM + m.hold then scale = 1.2 + 0.05 * math.sin((t - SLAM) * 6)    -- holds, breathing
+        else scale = 1.2 end
+        local size = math.floor((m.base or SIZE) * scale + 0.5)
+        if size ~= m.drawn then
+            m.drawn = size
+            f.number:SetFont(Font(), size, "THICKOUTLINE")
+            FitShade(f, math.floor((m.base or SIZE) * 1.2 + 0.5))           -- (its place: as tall as it settles)
+        end
+        local tall = (f.tall or 60) + 6
+        local top = up and (at + tall) or at                           -- (its top edge: up, over the newer ones)
+        e.y = e.y and (m.calm and top or e.y + (top - e.y) * math.min(1, dt * M.SLIDE)) or top
+        local out = math.max(0, t - SLAM - m.hold)
+        f:ClearAllPoints()
+        if feed then                                                   -- drifts on to the right as it fades
+            f:SetPoint("TOPLEFT", UIParent, "CENTER", baseX + (m.calm and 0 or 24 * out), e.y)
+        else                                                           -- rises a little as it fades
+            f:SetPoint("TOP", UIParent, "CENTER", 0, e.y + (m.calm and 0 or 40 * out))
+        end
+        local a = 1 - out / FADE
+        f:SetAlpha(math.max(0, a))
+        f.glow:SetAlpha(math.max(0, a) * (0.3 + 0.12 * math.sin(t * 5)))
+        if up then at = at + tall + M.FEED_GAP else at = at - tall - M.FEED_GAP end
+    end
+    local newest = M.entries[1]
+    if newest then frame = newest.f end
+    M.frame = frame
+    M.live = newest and newest.m or nil
+    if #M.entries == 0 then driver:SetScript("OnUpdate", nil) end
 end
 Animate = ns.Protect(Animate)
 
 -- Pin it: amount (may be secret), the ability's name; heal: it is what your heals did ("+2450", green)
 M.HEAL_COLOR = { 0.42, 1, 0.66 }
 function M:Show(amount, name, school, heal, count)
-    if not frame then Build() end
     local p = ns.Impact and ns.Impact.PROFILES[school or ""]
     local c = (p and school ~= "physical") and p.color or { 1, 0.82, 0.3 }
     if heal then c = M.HEAL_COLOR end
@@ -280,7 +359,7 @@ function M:Show(amount, name, school, heal, count)
     local one = heal and "+%d" or "%d"
     local fmt, args, base = one, { amount }, SIZE
     if type(amount) == "table" and not ns.IsSecret(amount) and amount.side then   -- amounts that cannot be added:
-        local parts = {}                                                           -- side by side, "431 + 86"
+        local parts = {}                                                           -- side by side, "431 · 86"
         for i = 1, #amount.side do parts[i] = one end
         fmt, args = (amount.more and "... · " or "") .. table.concat(parts, "  ·  "), amount.side
         base = math.floor(SIZE * math.max(0.5, 0.95 - 0.12 * #amount.side))
@@ -288,27 +367,42 @@ function M:Show(amount, name, school, heal, count)
         fmt, args = heal and L["%d crit heals"] or L["%d crits"], { amount.count }
         base = math.floor(SIZE * 0.8)
     end
-    frame.number:SetFont(Font(), base * (calm and 1.2 or 2.6), "THICKOUTLINE")
-    if heal then frame.number:SetTextColor(c[1], c[2], c[3]) else frame.number:SetTextColor(1, 0.86, 0.35) end
-    local ok = pcall(frame.number.SetFormattedText, frame.number, fmt, unpack(args))
-    if not ok then frame.number:SetText("!") end
-    if type(name) == "table" then
-        if not pcall(frame.label.SetFormattedText, frame.label, name.fmt, unpack(name.args)) then frame.label:SetText("") end
-    else
-        frame.label:SetText(name or "")
+    -- a burst that grows while its entry is still held is that entry, held longer from now (not slammed in again);
+    -- anything else is a new entry at the top (in the middle: in place of the one there)
+    local feed = Feed()
+    local newest = M.entries[1]
+    local again = newest and newest.m.t < SLAM + newest.m.hold
+    local e = again and newest or nil
+    if not e then
+        e = { f = Build() }
+        table.insert(M.entries, 1, e)
+        while #M.entries > (feed and M.FEED or 1) do Drop(#M.entries) end      -- (the oldest makes room)
     end
-    frame.glow:SetVertexColor(c[1], c[2], c[3], 1)
-    frame:SetAlpha(1)
-    frame:Show()
-    -- held a second longer for each crit; a burst that grows while shown is not slammed in again, only held
-    -- longer from now
-    local again = self.live and frame:IsShown() and self.live.t < SLAM + self.live.hold
-    self.live = { t = again and SLAM or 0, calm = calm, base = base, hold = math.min(M.HOLD_MAX, HOLD + M.PER_CRIT * math.max(0, (count or 1) - 1)) }
+    local f = e.f
+    Align(f, feed)
+    frame = f
+    M.frame = f
+    f.number:SetFont(Font(), base * (calm and 1.2 or 2.6), "THICKOUTLINE")
+    if heal then f.number:SetTextColor(c[1], c[2], c[3]) else f.number:SetTextColor(1, 0.86, 0.35) end
+    local ok = pcall(f.number.SetFormattedText, f.number, fmt, unpack(args))
+    if not ok then f.number:SetText("!") end
+    if type(name) == "table" then
+        if not pcall(f.label.SetFormattedText, f.label, name.fmt, unpack(name.args)) then f.label:SetText("") end
+    else
+        f.label:SetText(name or "")
+    end
+    f.glow:SetVertexColor(c[1], c[2], c[3], 1)
+    f:SetAlpha(1)
+    f:Show()
+    e.m = { t = again and SLAM or 0, calm = calm, base = base,
+            hold = math.min(M.HOLD_MAX, HOLD + M.PER_CRIT * math.max(0, (count or 1) - 1)) }
+    self.live = e.m
     self.shown = (self.shown or 0) + 1
-    frame:SetScript("OnUpdate", Animate)
+    driver:SetScript("OnUpdate", Animate)
+    Animate(nil, 0)
     if ns.Impact and ns.db.impactFx then                       -- a little light thrown off it
-        local f = ns.UnitFrames and ns.UnitFrames.frames.target
-        if f and f.on then ns.Impact:Burst(f.health, ns.Impact.PROFILES.holy, 1.4) end
+        local tf = ns.UnitFrames and ns.UnitFrames.frames.target
+        if tf and tf.on then ns.Impact:Burst(tf.health, ns.Impact.PROFILES.holy, 1.4) end
     end
 end
 
@@ -500,6 +594,7 @@ function M:Apply(run)
     else
         events:UnregisterAllEvents()
         self.live = nil
+        for i = #M.entries, 1, -1 do M.entries[i].f:Hide(); table.remove(M.entries, i) end   -- (the whole feed)
         if frame then frame:Hide() end
     end
 end

@@ -58,7 +58,7 @@ B.TOP = 72                                     -- where the grid begins (under t
 B.BAG = B.SIZE                                 -- a bag in the bag row: a slot's size, in the grid's columns
 B.RULE = 9                                     -- grid, rule, bags: the space either side of the rule
 B.KEYS = { "PADDUP", "PADDDOWN", "PADDLEFT", "PADDRIGHT", "PAD1", "PAD2", "PAD3", "PAD4", "PADLSHOULDER",
-           "PADRSHOULDER", "PADBACK" }        -- (the back button only while the bank is open)
+           "PADRSHOULDER", "PADRSTICK", "PADBACK" }   -- (R3: tooltips on and off, as in the game's own bags)        -- (the back button only while the bank is open)
 B.SWITCH = { "PADLTRIGGER", "PADRTRIGGER" }    -- read, never bound: they are the Gamepad UI's Shift and Ctrl
 -- Windows the controller can be handed to and back (LT / RT)
 B.OTHER = { "MerchantFrame", "BankFrame", "MailFrame", "TradeFrame", "AuctionHouseFrame", "AuctionFrame",
@@ -517,7 +517,7 @@ function B:FollowFocus(now)
     if self.hasPad ~= was then
         self:Layout()
         if self.hasPad then self:Tip()
-        elseif Try(GameTooltip.GetOwner, GameTooltip) == frame then GameTooltip:Hide() end   -- (ours goes with it)
+        elseif B.tipMine then GameTooltip:Hide(); B.tipMine = false end   -- (ours goes with it)
     end
 end
 
@@ -1153,6 +1153,7 @@ end
 -- screen (where it opens), else to its right; level with its top
 function B.TipBeside()
     GameTooltip:SetOwner(frame, "ANCHOR_NONE")
+    B.tipMine = true                                    -- (ours: put away with the window, or by R3)
     GameTooltip:ClearAllPoints()
     local x = Num(Try(frame.GetCenter, frame))
     local w = Num(Try(UIParent.GetWidth, UIParent))
@@ -1248,6 +1249,7 @@ function B:Legend()
         if pick then add("PAD1", pick) end
     end
     add("PAD4", L["More"]); add("PAD2", L["Close"])
+    add("PADRSTICK", B.TipsOff() and L["Tooltip"] or L["Hide tooltip"])
     if self.bankOpen then add("PADBACK", self.view == "bank" and L["Bags"] or L["Bank"]) end
     local text = table.concat(parts, "   ")
     if B.OtherWindow() then
@@ -1391,9 +1393,28 @@ function B:Mark()
     sel:Show()
 end
 
--- The tooltip of the chosen slot, when the d-pad chose it (the mouse has the game's own)
-function B:Tip()
+-- Tooltips as in the game's own bags: with the controller, the game's setting (GamepadDisableTooltips), which
+-- R3 turns on and off; with the mouse, always
+function B.TipsOff()
+    local v = Try(rawget(_G, "GetCVar"), "GamepadDisableTooltips")
+    return v == "1" or v == true
+end
+function B:ToggleTips()
+    local set = (C_CVar and C_CVar.SetCVar) or rawget(_G, "SetCVar")
+    Try(set, "GamepadDisableTooltips", B.TipsOff() and "0" or "1")
+    if B.TipsOff() and B.tipMine then GameTooltip:Hide(); B.tipMine = false end
+    self:Tip()
+    if frame then frame.legend:SetText(self:Legend()) end
+end
+
+-- The tooltip of the chosen slot, beside the window (mouse: true when the mouse chose it)
+function B:Tip(mouse)
+    if self.confirm then                                     -- (asking: the question names the item, nothing over it)
+        if B.tipMine then GameTooltip:Hide(); B.tipMine = false end
+        return
+    end
     if not (self.open and self.padTip) then return end
+    if not mouse and B.TipsOff() then return end
     local target = self.zone == "bags" and frame.bagButtons[self.bagIndex] or self:Selected()
     if not target then GameTooltip:Hide(); return end
     if self.zone == "bags" then return self:BagTip(target, self.bagIndex) end
@@ -1630,6 +1651,7 @@ function B:Pad(key)
     elseif key == "PAD4" then self:OpenMenu()
     elseif key == "PAD2" then self:Close()
     elseif key == "PADBACK" then self:SwitchView()
+    elseif key == "PADRSTICK" then self:ToggleTips()
     else return false end
     return true
 end
@@ -1693,7 +1715,7 @@ function B:Pointed(button)
             self:Mark()
             self:Bind()
             frame.legend:SetText(self:Legend())
-            self:Tip()                                   -- (the game's tooltip, put beside the window)
+            self:Tip(true)                               -- (the game's tooltip, put beside the window)
             B.CoverOver(button)                          -- (the mouse's clicks: the secure cover's)
             return
         end
@@ -1816,8 +1838,10 @@ function B.CanDestroy(e)
     if not (e and e.id) then return false end
     local inSet = Try(C_Container.GetContainerItemEquipmentSetInfo, e.bag, e.slot)
     if inSet == true and e.bound then return false end
+    -- a quest of yours still needs it: never (one it only starts is offered, with the game's red warning)
     local Q = ns.Quests
-    if Q and Q.ItemWant and Try(Q.ItemWant, e.id) then return false end
+    local want = Q and Q.ItemWant and Try(Q.ItemWant, e.id)
+    if want and not (type(want) == "table" and want.starts) then return false end
     return true
 end
 
@@ -1836,11 +1860,16 @@ function B.DestroyName(c)
     return text
 end
 
+B.CONFIRM_W = 260
+
+-- The question's panel: the item (icon, name, stack), a red warning where the game would give one, the bar that
+-- fills while A is held, and two buttons: the hold (its words are the one instruction: "A Hold to destroy", then
+-- "Let go to destroy" once the bar is full) and Keep. Each placed under the one before by its measured height.
 local function ConfirmFrame()
     if frame.confirm then return frame.confirm end
     local f = CreateFrame("Frame", nil, frame)
     f:SetPoint("TOPRIGHT", frame, "TOPLEFT", -6, 0)
-    f:SetSize(260, 118)
+    f:SetSize(B.CONFIRM_W, 140)
     f:EnableMouse(true)
     f.back = Edge(f, "BACKGROUND", 0.03, 0.04, 0.07, 0.94)
     f.back:SetAllPoints(f)
@@ -1853,57 +1882,54 @@ local function ConfirmFrame()
     f.icon:SetPoint("TOPLEFT", f, "TOPLEFT", 12, -14)
     f.icon:SetTexCoord(0.08, 0.92, 0.08, 0.92)
     f.text = ns.FontString(f, 11, "LEFT")
-    f.text:SetPoint("LEFT", f.icon, "RIGHT", 10, 0)
-    f.text:SetPoint("RIGHT", f, "RIGHT", -12, 0)
+    f.text:SetWidth(B.CONFIRM_W - 12 - 30 - 10 - 12)
     if f.text.SetWordWrap then f.text:SetWordWrap(true) end
+    f.warn = ns.FontString(f, 10, "LEFT")
+    f.warn:SetWidth(B.CONFIRM_W - 24)
+    f.warn:SetTextColor(0.92, 0.33, 0.38)
+    if f.warn.SetWordWrap then f.warn:SetWordWrap(true) end
     f.track = Edge(f, "ARTWORK", 1, 1, 1, 0.12)
-    f.track:SetPoint("TOPLEFT", f, "TOPLEFT", 12, -56)
-    f.track:SetPoint("TOPRIGHT", f, "TOPRIGHT", -12, -56)
-    f.track:SetHeight(4)
+    f.track:SetSize(B.CONFIRM_W - 24, 4)
     f.fill = Edge(f, "OVERLAY", 0.92, 0.33, 0.38, 1)
     f.fill:SetPoint("TOPLEFT", f.track, "TOPLEFT", 0, 0)
     f.fill:SetHeight(4)
     f.fill:SetWidth(1)
     f.fill:Hide()
-    f.hint = ns.FontString(f, 10, "LEFT")
-    f.hint:SetPoint("TOPLEFT", f.track, "BOTTOMLEFT", 0, -10)
-    f.hint:SetPoint("TOPRIGHT", f.track, "BOTTOMRIGHT", 0, -10)
-    -- the mouse: the same hold on a button of its own, and Keep
-    local hold = CreateFrame("Button", nil, f)
-    hold:SetSize(116, 22)
-    hold:SetPoint("BOTTOMLEFT", f, "BOTTOMLEFT", 12, 10)
-    hold.back = Edge(hold, "BACKGROUND", 0.92, 0.33, 0.38, 0.25)
-    hold.back:SetAllPoints(hold)
-    hold.text = ns.FontString(hold, 10, "CENTER")
-    hold.text:SetPoint("CENTER", hold, "CENTER", 0, 0)
-    hold.text:SetText(L["Hold to destroy"])
+    local function Button(r, g, b, a)
+        local x = CreateFrame("Button", nil, f)
+        x:SetSize(B.CONFIRM_W - 24, 26)
+        x.back = Edge(x, "BACKGROUND", r, g, b, a)
+        x.back:SetAllPoints(x)
+        x.text = ns.FontString(x, 10, "CENTER")
+        x.text:SetPoint("LEFT", x, "LEFT", 6, 0)
+        x.text:SetPoint("RIGHT", x, "RIGHT", -6, 0)
+        if x.text.SetWordWrap then x.text:SetWordWrap(false) end
+        return x
+    end
+    local hold = Button(0.92, 0.33, 0.38, 0.25)
     hold:RegisterForClicks("LeftButtonDown", "LeftButtonUp")
     hold:SetScript("OnClick", ns.Protect(function(_, _, down)
         if down then B:PadDown("PAD1") else B:ConfirmPad("PAD1") end
     end))
     f.hold = hold
-    local keep = CreateFrame("Button", nil, f)
-    keep:SetSize(116, 22)
-    keep:SetPoint("BOTTOMRIGHT", f, "BOTTOMRIGHT", -12, 10)
-    keep.back = Edge(keep, "BACKGROUND", 1, 1, 1, 0.08)
-    keep.back:SetAllPoints(keep)
-    keep.text = ns.FontString(keep, 10, "CENTER")
-    keep.text:SetPoint("CENTER", keep, "CENTER", 0, 0)
-    keep.text:SetText(L["Keep"])
+    local keep = Button(1, 1, 1, 0.08)
     keep:SetScript("OnClick", ns.Protect(function() B:ConfirmPad("PAD2") end))
     f.keep = keep
-    -- the bar fills while A (or the button) is held
+    -- the bar fills while A (or the button) is held; full, the instruction becomes "let go"
     f:SetScript("OnUpdate", ns.Protect(function(self)
         local at = B.holdAt
-        if not at then self.fill:Hide(); return end
-        local k = math.min(1, ((GetTime and GetTime() or 0) - at) / B.HOLD)
-        local w = Num(Try(self.track.GetWidth, self.track)) or 236
-        self.fill:SetWidth(math.max(1, w * k))
-        self.fill:Show()
+        local k = at and math.min(1, ((GetTime and GetTime() or 0) - at) / B.HOLD) or 0
+        if at then
+            local w = Num(Try(self.track.GetWidth, self.track)) or (B.CONFIRM_W - 24)
+            self.fill:SetWidth(math.max(1, w * k))
+            self.fill:Show()
+        else
+            self.fill:Hide()
+        end
         local full = k >= 1
         if full ~= self.full then
             self.full = full
-            self.hint:SetText(full and (GOLD .. L["Let go to destroy"] .. "|r") or B:ConfirmHint())
+            self.hold.text:SetText(B:HoldWords(full))
         end
     end))
     f:Hide()
@@ -1911,8 +1937,24 @@ local function ConfirmFrame()
     return f
 end
 
-function B:ConfirmHint()
-    return Key("PAD1") .. " " .. L["Hold to destroy"] .. "   " .. Key("PAD2") .. " " .. L["Keep"]
+-- The hold button's words: the one instruction at a time
+function B:HoldWords(full)
+    if full then return GOLD .. L["Let go to destroy"] .. "|r" end
+    return Key("PAD1") .. " " .. L["Hold to destroy"]
+end
+
+-- Where the game's own deleting warns, so does this (in red): an item that starts a quest, a quest's item
+function B.DestroyWarning(c)
+    if c.questStart then return L["This item begins a quest."] end
+    if c.quest then return L["This is a quest item."] end
+    return nil
+end
+
+local function Height(fs, lines)
+    local h = Num(Try(fs.GetStringHeight, fs))
+    if h and h > 0 then return h end
+    local _, size = Try(fs.GetFont, fs)
+    return (Num(size) or 12) * 1.25 * (lines or 1)
 end
 
 function B:DrawConfirm()
@@ -1921,9 +1963,34 @@ function B:DrawConfirm()
     local f = ConfirmFrame()
     f.icon:SetTexture(c.icon)
     f.text:SetText(L["Destroy %s?"]:format(B.DestroyName(c)))
-    f.full = nil
-    f.hint:SetText(self:ConfirmHint())
+    local warn = B.DestroyWarning(c)
+    f.warn:SetText(warn or "")
+    Showing(f.warn, warn ~= nil)
+    f.full = false
+    f.hold.text:SetText(self:HoldWords(false))
+    f.keep.text:SetText(Key("PAD2") .. " " .. L["Keep"])
     f.fill:Hide()
+    -- top to bottom, each under the one before, by what it measures (nothing laid over anything)
+    local y = 14
+    local titleH = Height(f.text, 2)
+    f.text:ClearAllPoints()
+    f.text:SetPoint("TOPLEFT", f, "TOPLEFT", 12 + 30 + 10, -(y + math.max(0, (30 - titleH) / 2)))
+    y = y + math.max(30, titleH) + 8
+    if warn then
+        f.warn:ClearAllPoints()
+        f.warn:SetPoint("TOPLEFT", f, "TOPLEFT", 12, -y)
+        y = y + Height(f.warn) + 8
+    end
+    f.track:ClearAllPoints()
+    f.track:SetPoint("TOPLEFT", f, "TOPLEFT", 12, -y)
+    y = y + 4 + 12
+    f.hold:ClearAllPoints()
+    f.hold:SetPoint("TOPLEFT", f, "TOPLEFT", 12, -y)
+    y = y + 26 + 6
+    f.keep:ClearAllPoints()
+    f.keep:SetPoint("TOPLEFT", f, "TOPLEFT", 12, -y)
+    y = y + 26 + 12
+    f:SetHeight(y)
     f:Show()
 end
 
@@ -1932,9 +1999,13 @@ function B:AskDestroy(e)
     if InCombatLockdown() or not B.CanDestroy(e) then return false end
     Try(rawget(_G, "ClearCursor"))
     Try(C_Container.PickupContainerItem, e.bag, e.slot)
-    self.confirm = { bag = e.bag, slot = e.slot, id = e.id, count = e.count, link = e.link, icon = e.icon }
+    local Q = ns.Quests
+    local want = Q and Q.ItemWant and Try(Q.ItemWant, e.id)
+    self.confirm = { bag = e.bag, slot = e.slot, id = e.id, count = e.count, link = e.link, icon = e.icon,
+                     quest = e.quest, questStart = e.questStart or (type(want) == "table" and want.starts) or nil }
     self.holdAt = nil
-    GameTooltip:Hide()
+    GameTooltip:Hide()                                       -- (no tooltip over the question: it names the item)
+    B.tipMine = false
     self:DrawConfirm()
     return true
 end
@@ -1946,6 +2017,7 @@ function B:CancelDestroy()
     self.confirm, self.holdAt = nil, nil
     if Holding(c.id) then Try(rawget(_G, "ClearCursor")) end
     if frame and frame.confirm then frame.confirm:Hide() end
+    if self.open then self:Tip() end                         -- (the item's tooltip back)
 end
 
 -- From the release of a full hold (your own press): the item on the cursor destroyed, by the game
@@ -2188,6 +2260,63 @@ function B.Park(name, on)
     end
 end
 
+-- The game's own bag window's button line, as it shows (read only, never changed): what each of its buttons
+-- says, gathered as it changes (for keeping ours in line with it; the debug report lists it)
+B.nativeSeen, B.nativeLines = {}, {}
+local function NativeLegend(bag)
+    local legend = rawget(bag, "ContainerFrameCombinedBagsFooterinputLegend")
+    if type(legend) ~= "table" then
+        local footer = rawget(bag, "gamepadFooter") or rawget(bag, "footer")
+        legend = type(footer) == "table" and rawget(footer, "inputLegend") or nil
+    end
+    return type(legend) == "table" and legend or nil
+end
+local function Bits(frame, text, art, depth)
+    for _, r in ipairs({ Try(frame.GetRegions, frame) }) do
+        if type(r) == "table" and Shown(r) then
+            local kind = Try(r.GetObjectType, r)
+            if kind == "FontString" then
+                local s = Str(Try(r.GetText, r))
+                if s then text[#text + 1] = s end
+            elseif kind == "Texture" then
+                local a = Str(Try(r.GetAtlas, r)) or ns.Plain(Try(r.GetTexture, r))
+                if a then art[#art + 1] = tostring(a) end
+            end
+        end
+    end
+    if depth < 2 then
+        for _, c in ipairs({ Try(frame.GetChildren, frame) }) do
+            if type(c) == "table" and Shown(c) then Bits(c, text, art, depth + 1) end
+        end
+    end
+end
+function B.ReadNative()
+    local bag = rawget(_G, "ContainerFrameCombinedBags")
+    if not Shown(bag) then return end
+    local legend = NativeLegend(bag)
+    if not legend then return end
+    for _, prompt in ipairs({ Try(legend.GetChildren, legend) }) do
+        if type(prompt) == "table" and Shown(prompt) then
+            local text, art = {}, {}
+            Bits(prompt, text, art, 0)
+            if #text > 0 then
+                local line = table.concat(art, "+") .. " = " .. table.concat(text, " ")
+                if not B.nativeSeen[line] and #B.nativeLines < 40 then
+                    B.nativeSeen[line] = true
+                    B.nativeLines[#B.nativeLines + 1] = line
+                end
+            end
+        end
+    end
+end
+local looker, lookedAt = CreateFrame("Frame"), 0
+looker:SetScript("OnUpdate", ns.Protect(function(_, dt)
+    lookedAt = lookedAt + (dt or 0)
+    if lookedAt < 1 then return end
+    lookedAt = 0
+    B.ReadNative()
+end))
+
 -- For the debug report: what this client's slots are made of, and who has the controller
 function B.Describe()
     local out = {}
@@ -2227,6 +2356,8 @@ function B.Describe()
             break
         end
     end
+    out[#out + 1] = ("the game's own bags' buttons seen: %d"):format(#B.nativeLines)
+    for _, line in ipairs(B.nativeLines) do out[#out + 1] = "  native: " .. line end
     local keys = {}
     for key, what in pairs(B.bound) do keys[#keys + 1] = key .. " = " .. what end
     table.sort(keys)

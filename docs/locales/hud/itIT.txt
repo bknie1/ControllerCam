@@ -548,9 +548,13 @@ un'ondata quando sali di livello, un lungo rombo grave quando muori
 La barra luminosa mostra la tua salute
 un controller con barra luminosa (DualSense) mostra in essa la tua salute: da verde a rosso, pulsante quando è bassa in combattimento
 riproduci ogni schema di vibrazione una volta
+Elenco a destra
+Uno al centro
 %d cure critiche
 %d critici
 Giudizio
+Grandi momenti: dove
+un blocco appena sopra gli avvisi di ricarica a destra del tuo personaggio, il più recente vicino a loro e i precedenti che salgono sopra mentre svaniscono, o uno alla volta al centro
 Vibrazione: le tue abilità chiave
 le abilità chiave di ogni classe hanno una sensazione propria sul controller (un Giudizio esplode, un Assalto sacro schiocca, Furia del vento colpisce tre volte)
 Grandi momenti
@@ -998,6 +1002,8 @@ Solo questa borsa
 Metti dentro
 Prendi borsa
 Altro
+Descrizione
+Nascondi descrizione
 Borse
 %d liberi
 Posto vuoto
@@ -1017,6 +1023,8 @@ Mostra banca
 Deposita i segnati
 Vendi i consigliati
 Rilascia per distruggere
+Questo oggetto avvia una missione.
+È un oggetto di una missione.
 Distruggere %s?
 Il gioco ha tenuto %s: distruggilo dalle sue borse.
 %s distrutto.

@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.4.11
+
+ControllerCam: HUD
+- Big moments are a feed: a block just above the cooldown callouts on the right of your character (setting: **Big moments: where**, `/cchud momentplace`, buttons **Feed on the right** (the default) and **One in the middle**). Each moment is its own entry, the newest nearest the cooldowns; the older ones move up over it and each fades on its own time, up to four at once. One in the middle is how they showed before. The abilities stand one to a line ("+ Judgement", "+ Holy Strike  ×2"), so a long combo no longer runs under the quest tracker, and the block sits a little higher over the cooldowns.
+- The bag window's tooltips work as in the game's own bags. With the controller they follow the game's own tooltip setting, and R3 turns it on and off, as the game's bags do ("R3 Hide tooltip" / "R3 Tooltip" on the button line). With the mouse an item's tooltip always shows. R3 no longer sorts while the bag window has the controller; sorting stays in Y.
+- Destroy's question is never covered: the item's tooltip stays away while it asks (the question names the item), and comes back once you choose. It shows one instruction at a time, on its button: "A Hold to destroy", then "Let go to destroy" once the bar is full, with **Keep** under it. Nothing overlaps at any text size. An item that begins a quest says so in red ("This item begins a quest."), as the game's own delete warning does, and so does a quest item. An item a quest in your log still needs is still never offered.
+
 ## 1.4.10
 
 ControllerCam: HUD

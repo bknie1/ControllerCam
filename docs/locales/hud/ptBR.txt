@@ -548,9 +548,13 @@ uma onda ao subir de nível, um estrondo longo e grave ao morrer
 A barra de luz mostra sua vida
 um controle com barra de luz (DualSense) mostra nela sua vida: de verde a vermelho, pulsando quando está baixa em uma luta
 reproduz cada padrão de vibração uma vez
+Lista à direita
+Um no centro
 %d curas críticas
 %d críticos
 Julgamento
+Grandes momentos: onde
+um bloco logo acima dos avisos de recarga à direita do seu personagem, o mais recente junto a eles e os anteriores subindo enquanto somem, ou um de cada vez no centro
 Vibração: suas habilidades-chave
 as habilidades-chave de cada classe têm uma sensação própria no controle (um Julgamento espalha, um Golpe Sagrado estala, Fúria dos Ventos bate três vezes)
 Grandes momentos
@@ -998,6 +1002,8 @@ Só esta bolsa
 Colocar
 Pegar bolsa
 Mais
+Dica
+Ocultar dica
 Bolsas
 %d livres
 Espaço vazio
@@ -1017,6 +1023,8 @@ Ver banco
 Depositar os marcados
 Vender os recomendados
 Solte para destruir
+Este item inicia uma missão.
+É um item de missão.
 Destruir %s?
 O jogo manteve %s: destrua pelas bolsas do próprio jogo.
 %s destruído.

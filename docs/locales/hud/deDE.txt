@@ -548,9 +548,13 @@ ein Anschwellen beim Stufenaufstieg, ein langes tiefes Grollen, wenn du stirbst
 Lichtleiste zeigt deine Gesundheit
 ein Controller mit Lichtleiste (DualSense) zeigt darin deine Gesundheit: von Grün zu Rot, pulsierend bei wenig Gesundheit im Kampf
 jedes Vibrationsmuster einmal abspielen
+Liste rechts
+Einzeln in der Mitte
 %d kritische Heilungen
 %d Krits
 Richturteil
+Große Momente: wo
+ein Block direkt über den Abklingzeit-Meldungen rechts von Eurer Figur, der neueste am nächsten daran und die älteren darüber aufsteigend, während sie verblassen, oder einzeln in der Mitte
 Vibration: deine Schlüsselfähigkeiten
 die Schlüsselfähigkeiten jeder Klasse fühlen sich am Controller eigen an (ein Richturteil spritzt, ein Heiliger Stoß schnappt zu, Windzorn klopft dreimal)
 Große Momente
@@ -998,6 +1002,8 @@ Nur diese Tasche
 Hineinlegen
 Tasche aufnehmen
 Mehr
+Tooltip
+Tooltip aus
 Taschen
 %d frei
 Freier Platz
@@ -1017,6 +1023,8 @@ Bank zeigen
 Markiertes einlagern
 Empfohlenes verkaufen
 Loslassen zum Zerstören
+Dieser Gegenstand startet eine Quest.
+Das ist ein Questgegenstand.
 %s zerstören?
 Das Spiel hat %s behalten: zerstöre es in seinen eigenen Taschen.
 %s zerstört.

@@ -548,9 +548,13 @@ a swell when you level up, a long low rumble when you die
 Light bar shows your health
 a controller with a light bar (DualSense) shows your health in it: green to red, pulsing when low in a fight
 play every vibration pattern once
+Feed on the right
+One in the middle
 %d crit heals
 %d crits
 Judgement
+Big moments: where
+a block just above the cooldown callouts on the right of your character, the newest nearest them and the older ones moving up over it as they fade, or one at a time in the middle
 Rumble: your key abilities
 each class's key abilities have a feel of their own on the controller (a Judgement splashes, a Holy Strike snaps, Windfury knocks three times)
 Big moments
@@ -998,6 +1002,8 @@ Only this bag
 Put in
 Pick up bag
 More
+Tooltip
+Hide tooltip
 Bags
 %d free
 Empty slot
@@ -1017,6 +1023,8 @@ Show bank
 Deposit marked items
 Sell advised items
 Let go to destroy
+This item begins a quest.
+This is a quest item.
 Destroy %s?
 The game kept %s: destroy it from its own bags.
 Destroyed %s.
