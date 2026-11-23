@@ -269,7 +269,11 @@ local function InitDB()
     -- the gamepad bars' own fade became the fade of the whole screen: what you chose for it carries over
     if old.hudFade == nil and type(old.barsFade) == "boolean" then old.hudFade = old.barsFade end
     if old.hudIdle == nil and tonumber(old.barsIdle) then old.hudIdle = tonumber(old.barsIdle) end
-    local db = { v = 12, units = {}, pos = {}, saved = {} }
+    -- before version 13 the chat rewrites (class icon and level, short channel names, first names) were on by
+    -- default: they wrap the game's chat frames, which taints them, and in a battleground every line then counted
+    -- addon errors against us until the game warned. Off once for everyone (yours to turn on again, warned)
+    if (tonumber(old.v) or 0) < 13 then old.chatInfo, old.chatShort, old.chatFirstName = nil, nil, nil end
+    local db = { v = 13, units = {}, pos = {}, saved = {} }
     -- game settings we changed, with the value they had (put back when the HUD stops)
     if type(old.saved) == "table" then
         for name, value in pairs(old.saved) do

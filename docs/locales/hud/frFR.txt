@@ -20,6 +20,8 @@ PNJ amicaux selon la réputation
 le nom et la barre d’un PNJ amical prennent la couleur de votre réputation auprès de sa faction : jaune neutre, vert amical, puis vert d’eau, turquoise et bleu pour honoré, révéré et exalté
 L'autre faction, bien visible
 un joueur de l'autre faction porte l'emblème de sa faction devant son nom et un contour autour de la barre de vie, bleu Alliance ou rouge Horde, sur les barres d'info et le cadre de la cible
+Noms des joueurs à la couleur de leur classe
+le nom d'un joueur à la couleur de sa classe sur les barres d'info et le cadre de la cible, aussi en champ de bataille où le jeu garde la classe pour lui (le jeu le colore pour nous)
 L'autre faction : couleurs
 la couleur du contour et de la surbrillance sur les barres de l'autre faction : celle de la faction (Alliance bleu, Horde rouge) ou le rouge d'un ennemi, quelle que soit la faction
 Zone d’exécution sur les barres ennemies
@@ -855,11 +857,11 @@ Masquer les erreurs « pas encore prêt »
 %d messages masqués comme spam depuis votre connexion.
 %d d'entre eux étaient du recrutement de guilde répété.
 Icône de classe et niveau dans le chat
-l'icône de classe et le niveau d'un joueur entre crochets devant son nom, quand le jeu nous les fait connaître
+l'icône de classe et le niveau d'un joueur entre crochets devant son nom, quand le jeu nous les fait connaître. Désactivé par défaut : cela réécrit les lignes de discussion du jeu, et dans les champs de bataille et les instances, cela déclenche l'avertissement du jeu sur les erreurs d'addons
 Noms de canaux courts dans la discussion
-le canal devant une ligne, raccourci: [P] groupe, [PL] chef de groupe, [G] guilde, [O] officier, [R] raid, [RL] chef de raid, [I] instance, et un canal numéroté par son numéro, [1]
+le canal devant une ligne, raccourci: [P] groupe, [PL] chef de groupe, [G] guilde, [O] officier, [R] raid, [RL] chef de raid, [I] instance, et un canal numéroté par son numéro, [1]. Désactivé par défaut : cela réécrit les lignes de discussion du jeu, et dans les champs de bataille et les instances, cela déclenche l'avertissement du jeu sur les erreurs d'addons
 Prénoms seuls dans la discussion
-un nom avec un nom de famille s’affiche avec le seul prénom (Jory Spleeneater parle en tant que Jory) ; un chuchotement ou un clic droit dessus atteint toujours le nom complet
+un nom avec un nom de famille s’affiche avec le seul prénom (Jory Spleeneater parle en tant que Jory) ; un chuchotement ou un clic droit dessus atteint toujours le nom complet. Désactivé par défaut : cela réécrit les lignes de discussion du jeu, et dans les champs de bataille et les instances, cela déclenche l'avertissement du jeu sur les erreurs d'addons
 Taille du texte du chat
 la taille du texte dans les fenêtres de discussion, en proportion de la taille propre au jeu (le réglage du jeu reste tel quel)
 Masquer les vendeurs d'or et les annonces répétées
@@ -964,6 +966,7 @@ Les moments les plus lents du HUD :
 Rapports de débogage
 rassembler les rapports de dépannage tout seuls : à la connexion, et de nouveau au rechargement ou à la déconnexion (ils sont gardés dans les réglages enregistrés)
 les moments où le jeu s’est figé depuis votre connexion, et la part de chacun due au travail du HUD
+ce que le jeu cache de la classe de votre cible, et quels moyens peuvent encore la montrer (à lancer une fois, sur un joueur ennemi en champ de bataille)
 Tout
 Équipement
 Consommables

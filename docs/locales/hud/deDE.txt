@@ -20,6 +20,8 @@ Freundliche NPCs nach Ruf
 Name und Leiste eines freundlichen NPCs zeigen deinen Ruf bei seiner Fraktion: gelb neutral, grün freundlich, dann meergrün, türkis und blau für wohlwollend, respektvoll und ehrfürchtig
 Die andere Fraktion, deutlich
 ein Spieler der anderen Fraktion trägt das Fraktionswappen vor dem Namen und einen Rahmen um die Gesundheitsleiste, Allianz-blau oder Horde-rot, auf Namensplaketten und im Zielrahmen
+Spielernamen in ihrer Klassenfarbe
+der Name eines Spielers in seiner Klassenfarbe auf Namensplaketten und im Zielrahmen, auch auf Schlachtfeldern, wo das Spiel die Klasse für sich behält (das Spiel färbt ihn für uns)
 Die andere Fraktion: Farben
 die Farbe des Rahmens und der Hervorhebung auf den Leisten der anderen Fraktion: die eigene der Fraktion (Allianz blau, Horde rot) oder das Rot eines Feindes, gleich welcher Fraktion
 Hinrichtungsbereich auf feindlichen Leisten
@@ -855,11 +857,11 @@ Meldungen „noch nicht bereit“ ausblenden
 %d Nachrichten seit deiner Anmeldung als Spam ausgeblendet.
 %d davon waren wiederholte Gildenwerbung.
 Klassensymbol und Stufe im Chat
-Klassensymbol und Stufe eines Spielers in Klammern vor seinem Namen, wenn das Spiel sie uns wissen lässt
+Klassensymbol und Stufe eines Spielers in Klammern vor seinem Namen, wenn das Spiel sie uns wissen lässt. Standardmäßig aus: es schreibt die Chatzeilen des Spiels um, und in Schlachtfeldern und Instanzen löst das die Warnung des Spiels vor Addon-Fehlern aus
 Kurze Kanalnamen im Chat
-der Kanal vor einer Zeile, gekürzt: [P] Gruppe, [PL] Gruppenleiter, [G] Gilde, [O] Offizier, [R] Schlachtzug, [RL] Schlachtzugsleiter, [I] Instanz, und ein nummerierter Kanal mit seiner Nummer, [1]
+der Kanal vor einer Zeile, gekürzt: [P] Gruppe, [PL] Gruppenleiter, [G] Gilde, [O] Offizier, [R] Schlachtzug, [RL] Schlachtzugsleiter, [I] Instanz, und ein nummerierter Kanal mit seiner Nummer, [1]. Standardmäßig aus: es schreibt die Chatzeilen des Spiels um, und in Schlachtfeldern und Instanzen löst das die Warnung des Spiels vor Addon-Fehlern aus
 Nur Vornamen im Chat
-ein Name mit Nachnamen erscheint nur mit dem Vornamen (Jory Spleeneater spricht als Jory); ein Flüstern oder Rechtsklick darauf erreicht weiterhin den ganzen Namen
+ein Name mit Nachnamen erscheint nur mit dem Vornamen (Jory Spleeneater spricht als Jory); ein Flüstern oder Rechtsklick darauf erreicht weiterhin den ganzen Namen. Standardmäßig aus: es schreibt die Chatzeilen des Spiels um, und in Schlachtfeldern und Instanzen löst das die Warnung des Spiels vor Addon-Fehlern aus
 Größe des Chattexts
 die Größe des Texts in den Chatfenstern als Anteil der spieleigenen Größe (die Einstellung des Spiels bleibt, wie sie ist)
 Goldverkäufer und wiederholte Werbung ausblenden
@@ -964,6 +966,7 @@ Die langsamsten Momente des HUD:
 Debug-Berichte
 die Berichte zur Fehlersuche von selbst sammeln: beim Einloggen und erneut beim Neuladen oder Ausloggen (sie bleiben in den gespeicherten Einstellungen)
 die Momente, in denen das Spiel seit dem Einloggen stand, und wie viel davon die eigene Arbeit des HUD war
+was das Spiel über die Klasse Eures Ziels geheim hält und wie sie sich trotzdem zeigen lässt (einmal ausführen, bei einem feindlichen Spieler auf einem Schlachtfeld)
 Alle
 Ausrüstung
 Verbrauchbares

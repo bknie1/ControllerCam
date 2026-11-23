@@ -20,6 +20,8 @@ PNJ amistosos por reputación
 el nombre y la barra de un PNJ amistoso se colorean según tu reputación con su facción: amarillo neutral, verde amistoso, luego verde mar, turquesa y azul para honorable, reverenciado y exaltado
 La otra facción, a simple vista
 un jugador de la otra facción lleva el emblema de su facción delante del nombre y un contorno alrededor de la barra de salud, azul Alianza o rojo Horda, en placas de nombre y en el marco del objetivo
+Nombres de jugadores en el color de su clase
+el nombre de un jugador en el color de su clase en las placas de nombre y en el marco del objetivo, también en campos de batalla donde el juego se guarda la clase (el juego lo colorea por nosotros)
 La otra facción: colores
 el color del contorno y del resaltado en las barras de la otra facción: el de la facción (Alianza azul, Horda rojo) o el rojo de un enemigo, sea cual sea la facción
 Rango de ejecución en barras enemigas
@@ -855,11 +857,11 @@ Ocultar los errores de «aún no está listo»
 %d mensajes ocultados como spam desde que iniciaste sesión.
 %d de ellos eran reclutamiento de hermandad repetido.
 Icono de clase y nivel en el chat
-el icono de clase y el nivel de un jugador entre corchetes delante de su nombre, cuando el juego nos deja conocerlos
+el icono de clase y el nivel de un jugador entre corchetes delante de su nombre, cuando el juego nos deja conocerlos. Desactivado por defecto: reescribe las líneas del chat del juego, y en campos de batalla e instancias eso hace saltar el aviso del juego sobre errores de addons
 Nombres de canal cortos en el chat
-el canal delante de una línea, abreviado: [P] grupo, [PL] líder del grupo, [G] hermandad, [O] oficial, [R] banda, [RL] líder de banda, [I] estancia, y un canal numerado por su número, [1]
+el canal delante de una línea, abreviado: [P] grupo, [PL] líder del grupo, [G] hermandad, [O] oficial, [R] banda, [RL] líder de banda, [I] estancia, y un canal numerado por su número, [1]. Desactivado por defecto: reescribe las líneas del chat del juego, y en campos de batalla e instancias eso hace saltar el aviso del juego sobre errores de addons
 Solo nombres de pila en el chat
-un nombre con apellido aparece solo con el nombre de pila (Jory Spleeneater habla como Jory); un susurro o un clic derecho sobre él sigue llegando al nombre completo
+un nombre con apellido aparece solo con el nombre de pila (Jory Spleeneater habla como Jory); un susurro o un clic derecho sobre él sigue llegando al nombre completo. Desactivado por defecto: reescribe las líneas del chat del juego, y en campos de batalla e instancias eso hace saltar el aviso del juego sobre errores de addons
 Tamaño del texto del chat
 el tamaño del texto en las ventanas de chat, como proporción del tamaño propio del juego (el ajuste del juego se deja como está)
 Ocultar vendedores de oro y anuncios repetidos
@@ -964,6 +966,7 @@ Los momentos más lentos del HUD:
 Informes de depuración
 reunir los informes de diagnóstico por sí solos: al iniciar sesión y de nuevo al recargar o salir (se guardan en los ajustes guardados)
 los momentos en que el juego se detuvo desde que entraste, y cuánto de cada uno fue trabajo del propio HUD
+qué oculta el juego de la clase de tu objetivo y qué formas pueden mostrarla igualmente (ejecútalo una vez, sobre un jugador enemigo en un campo de batalla)
 Todo
 Equipo
 Consumibles

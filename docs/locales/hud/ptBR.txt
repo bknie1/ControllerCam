@@ -20,6 +20,8 @@ PNJs amistosos por reputação
 o nome e a barra de um PNJ amistoso são coloridos pela sua reputação com a facção dele: amarelo neutro, verde amistoso, depois verde-água, turquesa e azul para honrado, reverenciado e exaltado
 A outra facção, bem à vista
 um jogador da outra facção leva o emblema da facção antes do nome e um contorno em volta da barra de vida, azul Aliança ou vermelho Horda, nas placas de nome e no quadro do alvo
+Nomes dos jogadores na cor da classe
+o nome de um jogador na cor da sua classe nas placas de nome e no quadro do alvo, também em campos de batalha onde o jogo esconde a classe (o jogo colore para nós)
 A outra facção: cores
 a cor do contorno e do destaque nas barras da outra facção: a da facção (Aliança azul, Horda vermelho) ou o vermelho de um inimigo, seja qual for a facção
 Faixa de execução nas barras inimigas
@@ -855,11 +857,11 @@ Ocultar os erros de “ainda não está pronto”
 %d mensagens ocultadas como spam desde que você entrou.
 %d delas eram recrutamento de guilda repetido.
 Ícone de classe e nível no chat
-o ícone de classe e o nível de um jogador entre colchetes na frente do nome, quando o jogo nos deixa conhecê-los
+o ícone de classe e o nível de um jogador entre colchetes na frente do nome, quando o jogo nos deixa conhecê-los. Desligado por padrão: reescreve as linhas do chat do jogo, e em campos de batalha e instâncias isso dispara o aviso do jogo sobre erros de addons
 Nomes de canal curtos no bate-papo
-o canal na frente de uma linha, abreviado: [P] grupo, [PL] líder do grupo, [G] guilda, [O] oficial, [R] raide, [RL] líder da raide, [I] instância, e um canal numerado pelo seu número, [1]
+o canal na frente de uma linha, abreviado: [P] grupo, [PL] líder do grupo, [G] guilda, [O] oficial, [R] raide, [RL] líder da raide, [I] instância, e um canal numerado pelo seu número, [1]. Desligado por padrão: reescreve as linhas do chat do jogo, e em campos de batalha e instâncias isso dispara o aviso do jogo sobre erros de addons
 Só o primeiro nome no chat
-um nome com sobrenome aparece só com o primeiro nome (Jory Spleeneater fala como Jory); um sussurro ou clique direito nele ainda chega ao nome completo
+um nome com sobrenome aparece só com o primeiro nome (Jory Spleeneater fala como Jory); um sussurro ou clique direito nele ainda chega ao nome completo. Desligado por padrão: reescreve as linhas do chat do jogo, e em campos de batalha e instâncias isso dispara o aviso do jogo sobre erros de addons
 Tamanho do texto do chat
 o tamanho do texto nas janelas de chat, como proporção do tamanho próprio do jogo (a configuração do jogo fica como está)
 Ocultar vendedores de ouro e anúncios repetidos
@@ -964,6 +966,7 @@ Os momentos mais lentos do HUD:
 Relatórios de depuração
 reunir os relatórios de diagnóstico sozinhos: ao entrar e de novo ao recarregar ou sair (ficam nas configurações salvas)
 os momentos em que o jogo travou desde que você entrou, e quanto de cada um foi trabalho do próprio HUD
+o que o jogo esconde da classe do seu alvo e quais formas ainda podem mostrá-la (execute uma vez, em um jogador inimigo num campo de batalha)
 Tudo
 Equipamento
 Consumíveis

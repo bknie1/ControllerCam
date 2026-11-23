@@ -546,6 +546,66 @@ ns.RegisterCommand("slow", function()
     for _, line in ipairs(D.Profiler()) do print("  " .. line) end
 end, "/cchud slow", "the moments the game stood still since you logged in, and how much of each was the HUD's own work")
 
+-- /cchud classprobe: what the game keeps secret about your target's class, and which of its own ways can still
+-- show a class it keeps secret (a bar's colour, a name's colour, an icon). Each is tried once, by hand: a refused
+-- try counts as an addon error, so this is never run by itself. The answers are kept (ns.db.classProbe).
+ns.RegisterSaved("classProbe", function(old) return type(old) == "table" and old or nil end)
+function D.ClassProbe(unit)
+    unit = unit or "target"
+    local out = {}
+    local function say(k, v) out[#out + 1] = ("%s: %s"):format(k, tostring(v)) end
+    local function kind(v) return ns.IsSecret(v) and "secret" or (v == nil and "nil" or type(v)) end
+    local okP, isPlayer = pcall(UnitIsPlayer, unit)
+    say("UnitIsPlayer", okP and kind(isPlayer) or "error")
+    local okC, _, class = pcall(UnitClass, unit)
+    say("UnitClass", okC and kind(class) or "error")
+    local okG, guid = pcall(UnitGUID, unit)
+    say("UnitGUID", okG and kind(guid) or "error")
+    local okN, name = pcall(UnitName, unit)
+    say("UnitName", okN and kind(name) or "error")
+    if okC and class ~= nil then
+        local getColor = C_ClassColor and C_ClassColor.GetClassColor
+        local color
+        if getColor then
+            local ok, c = pcall(getColor, class)
+            say("C_ClassColor.GetClassColor", ok and kind(c) or ("refused: " .. tostring(c)))
+            color = ok and c or nil
+        end
+        local r, g, b
+        if color and color.GetRGB then
+            local ok, cr, cg, cb = pcall(color.GetRGB, color)
+            say("color:GetRGB", ok and kind(cr) or "refused")
+            if ok then r, g, b = cr, cg, cb end
+        end
+        if r ~= nil then
+            local bar = CreateFrame("StatusBar")
+            local okB = pcall(bar.SetStatusBarColor, bar, r, g, b)
+            say("StatusBar:SetStatusBarColor(class)", okB and "works" or "refused")
+            local fs = UIParent:CreateFontString(nil, "OVERLAY", "GameFontNormal")
+            local okF = pcall(fs.SetTextColor, fs, r, g, b)
+            say("FontString:SetTextColor(class)", okF and "works" or "refused")
+        end
+        local atlasFn = GetClassAtlas or (C_Texture and C_Texture.GetClassAtlas)
+        if atlasFn then
+            local ok, atlas = pcall(atlasFn, class)
+            say("GetClassAtlas", ok and kind(atlas) or "refused")
+            if ok and atlas ~= nil then
+                local t = UIParent:CreateTexture()
+                local okA = pcall(t.SetAtlas, t, atlas)
+                say("Texture:SetAtlas(class atlas)", okA and "works" or "refused")
+            end
+        else
+            say("GetClassAtlas", "missing")
+        end
+    end
+    if ns.db then ns.db.classProbe = { when = date and date("%Y-%m-%d %H:%M") or "?", lines = out } end
+    return out
+end
+ns.RegisterCommand("classprobe", function()
+    if not UnitExists("target") then ns.Say(L["Target something first."]); return end
+    for _, line in ipairs(D.ClassProbe("target")) do print("  " .. line) end
+end, "/cchud classprobe", "what the game keeps secret about your target's class, and which ways can still show it (run once, on an enemy player in a battleground)")
+
 local events = CreateFrame("Frame")
 local since = 0
 events:SetScript("OnUpdate", function(_, dt)

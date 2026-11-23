@@ -323,6 +323,11 @@ ns.RegisterSetting({
     tip = "a player of the other faction wears the faction's badge before the name and an outline round the health bar, Alliance blue or Horde red, on nameplates and the target frame",
 })
 ns.RegisterSetting({
+    key = "classNames", kind = "boolean", default = true, command = "classnames", section = "Frames",
+    label = "Players' names in their class colour",
+    tip = "a player's name in their class's colour on nameplates and the target frame, also in a battleground where the game keeps the class to itself (the game colours it for us)",
+})
+ns.RegisterSetting({
     key = "factionStyle", kind = "number", default = 1, min = 1, max = 2, section = "Frames",
     choices = { "Faction colours", "Ally or enemy" }, command = "factionstyle", label = "The other faction: colours",
     tip = "the colour of the outline and the highlight on the other faction's bars: the faction's own (Alliance blue, Horde red), or the red of an enemy whichever faction it is",
@@ -619,7 +624,12 @@ local function UpdateInfo(f)
     if not ok then pcall(f.name.SetText, f.name, name) end
     if f.health and ns.FactionEdge then ns.FactionEdge(f.health, fcolor) end   -- (the name keeps its colours)
     f.otherFaction = fcolor and true or false
-    f.classMark = mark ~= ""
+    -- a player's name in their class's colour (or as ever), and a class kept secret still with its icon
+    local _, _, isPlayer = U.Standing(f.unit)
+    if not (ns.db.classNames and isPlayer and ns.ClassNameColor(f.name, f.unit)) then f.name:SetTextColor(unpack(C.text)) end
+    local secretIcon = ns.SecretClassIcon(f.visual or f, f.name, f.unit,
+        ns.db.classIcons and isPlayer and (f.key == "tot" or f.key == "target"))
+    f.classMark = mark ~= "" or secretIcon
     UF.Mark(f)
     if f.key == "tot" then return end
     if not f.rankGlow then

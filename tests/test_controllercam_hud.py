@@ -7593,8 +7593,20 @@ class Chat(unittest.TestCase):
 
     LINE = "12:00 |Hchannel:SAY|h[S]|h |Hplayer:%s:%d:SAY|h[|cff3fc7eb%s|r]|h says: %s"
 
+    def test_the_games_chat_frames_are_left_alone_by_default(self):
+        # wrapping the game's chat frames taints them: in a battleground every line then counted addon errors
+        # against the HUD until the game warned. Off by default, and switched off once for older settings
+        e = self.env()
+        self.assertFalse(e.db.chatInfo or e.db.chatShort or e.db.chatFirstName)
+        self.assertEqual(len(list(e.ns.Chat.hooked.keys())), 0)       # no chat window wrapped
+        old = Env(db="{ v = 12, chatInfo = true, chatShort = true, chatFirstName = true }")
+        self.assertFalse(old.db.chatInfo or old.db.chatShort or old.db.chatFirstName)
+        self.assertEqual(len(list(old.ns.Chat.hooked.keys())), 0)
+        self.assertEqual(e.errors(), [])
+
     def test_class_icon_and_level_in_brackets_before_the_name(self):
         e = self.env()
+        e.cmd("chatinfo on")                                        # (off by default since 1.4.15)
         C = e.ns.Chat
         self.assertEqual(e.mock.chat("CHAT_MSG_SAY", "hello there", "Uther-Forever", self.GUID), "hello there")
         self.assertEqual(e.mock.lastArgs[12], self.GUID)            # what is said, and all else, passed on as it was
@@ -7649,6 +7661,7 @@ class Chat(unittest.TestCase):
 
     def test_channel_names_are_short(self):
         e = self.env()
+        e.cmd("chatshort on")                                       # (off by default since 1.4.15)
         C = e.ns.Chat
         line = lambda channel, name: "|Hchannel:%s|h[%s]|h |Hplayer:Uther:5:%s|h[Uther]|h: hi" % (channel, name, channel)
         for channel, name, short in (("PARTY", "Party", "P"), ("PARTY", "Party Leader", "PL"), ("GUILD", "Guild", "G"),
@@ -7663,6 +7676,7 @@ class Chat(unittest.TestCase):
         e.g.CHAT_MSG_GUILD = "Gilde"                                 # the game's own word, in your language
         fresh = Env(setup=lambda env: env.lua.execute(
             "CHAT_MSG_GUILD = 'Gilde'; ChatFrame1.AddMessage = function(self, text) GOT = text end"))
+        fresh.cmd("chatshort on")
         fresh.g.ChatFrame1.AddMessage(fresh.g.ChatFrame1, "|Hchannel:GUILD|h[Gilde]|h x")
         self.assertEqual(fresh.g.GOT, "|Hchannel:GUILD|h[G]|h x")
         e.cmd("chatshort off")
@@ -16083,6 +16097,50 @@ class Compass(unittest.TestCase):
         e.mock.fire("UNIT_AURA", "player")
         e.update(0.6)
         self.assertEqual(C.width, C.W)
+        self.assertEqual(e.errors(), [])
+
+
+class ClassShown(unittest.TestCase):
+    """A player's class colour on the name, and their class icon, also where the game keeps the class secret."""
+
+    def test_a_plain_class_colours_the_name(self):
+        e = Env()
+        e.target(name="Uther", isPlayer=True, attackable=True, reaction=2, **{"class": "MAGE"})
+        e.update(0.3)
+        f = e.frames.target
+        self.assertEqual(tuple(round(f.name.tcolor[i], 2) for i in (1, 2, 3)), (0.25, 0.78, 0.92))
+        e.cmd("classnames off")
+        e.mock.fire("PLAYER_TARGET_CHANGED")
+        self.assertEqual(tuple(round(f.name.tcolor[i], 2) for i in (1, 2, 3)),
+                         tuple(round(v, 2) for v in e.ns.colors.text.values()))
+        self.assertEqual(e.errors(), [])
+
+    def test_a_secret_class_is_shown_by_the_game(self):
+        e = Env()
+        e.lua.execute("""
+            SECRET_CLASS = { secret = true }
+            UnitClass = function(u) if u == "target" or u:match("^nameplate") then return SECRET_CLASS, SECRET_CLASS end end
+            local col = { secret = true }
+            C_ClassColor = { GetClassColor = function(c) return { GetRGB = function() return col, col, col end } end }
+            GetClassAtlas = function(c) return { secret = true, atlas = true } end
+        """)
+        e.target(name="Joshua", isPlayer=True, attackable=True, reaction=2)
+        e.update(0.3)
+        f = e.frames.target
+        self.assertTrue(e.lua.eval("function(t) return t.tcolor and t.tcolor[1] and t.tcolor[1].secret end")(f.name))
+        tex = f.visual.classTex
+        self.assertTrue(tex.shown)                                    # the icon, from the game's own atlas
+        p = e.mock.addPlate("nameplate1", e.mock.units.target)
+        o = e.ns.Nameplates.byPlate[p]
+        self.assertTrue(o.classTex.shown)
+        self.assertTrue(e.ns.secretWays.classIcon)
+        # a way the game refuses is never tried again (each refusal counts as an addon error)
+        e.lua.execute("TRIES = 0; GetClassAtlas = function() TRIES = TRIES + 1; error('refused') end; ns_reset = true")
+        e.ns.secretWays.classAtlas = None
+        for _ in range(5):
+            e.mock.fire("PLAYER_TARGET_CHANGED")
+        self.assertEqual(e.g.TRIES, 1)
+        self.assertFalse(f.visual.classTex.shown)
         self.assertEqual(e.errors(), [])
 
 

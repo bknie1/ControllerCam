@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.4.15
+
+ControllerCam: HUD
+- Players' names in their class colour (setting: **Players' names in their class colour**, `/cchud classnames`, on by default), on nameplates and the target frame, and their class icon. In a battleground the game keeps the other side's class to itself; there the game colours the name and draws the icon for us. A health bar can't take a colour the game keeps secret, so bars there stay as they are; the name and the icon say the class. `/cchud classprobe` reports what the game allows on your current target.
+- Fixed: the game's "large number of errors" warning in battlegrounds, again. The chat extras (a class icon and level before names, short channel names, first names only) work by wrapping the game's chat windows, and that marks the game's own chat code as ours: in a battleground, where the game keeps much of what passes through chat to itself, every line it then refused counted as an addon error against us, and a battleground's flood of "has joined the battle" lines brought the warning. They're off by default now, switched off once for everyone, and each says what it costs if you turn it on. Hiding gold sellers and repeated recruitment works without them and stays on.
+
 ## 1.4.14
 
 ControllerCam: HUD

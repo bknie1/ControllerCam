@@ -33,19 +33,19 @@ local CH = { active = false, hidden = 0, recent = {}, levels = {}, byName = {}, 
 ns.Chat = CH
 
 ns.RegisterSetting({
-    key = "chatInfo", kind = "boolean", default = true, command = "chatinfo", section = "Quests, chat and map",
+    key = "chatInfo", kind = "boolean", default = false, command = "chatinfo", section = "Quests, chat and map",
     label = "Class icon and level in chat",
-    tip = "a player's class icon and level in brackets in front of their name, when the game lets us know them",
+    tip = "a player's class icon and level in brackets in front of their name, when the game lets us know them. Off by default: it rewrites the game's chat lines, and in battlegrounds and instances that sets off the game's warning about addon errors",
 })
 ns.RegisterSetting({
-    key = "chatShort", kind = "boolean", default = true, command = "chatshort", section = "Quests, chat and map",
+    key = "chatShort", kind = "boolean", default = false, command = "chatshort", section = "Quests, chat and map",
     label = "Short channel names in chat",
-    tip = "the channel in front of a line, shortened: [P] party, [PL] party leader, [G] guild, [O] officer, [R] raid, [RL] raid leader, [I] instance, and a numbered channel by its number, [1]",
+    tip = "the channel in front of a line, shortened: [P] party, [PL] party leader, [G] guild, [O] officer, [R] raid, [RL] raid leader, [I] instance, and a numbered channel by its number, [1]. Off by default: it rewrites the game's chat lines, and in battlegrounds and instances that sets off the game's warning about addon errors",
 })
 ns.RegisterSetting({
     key = "chatFirstName", kind = "boolean", default = false, command = "chatfirstname", section = "Quests, chat and map",
     label = "First names only in chat",
-    tip = "a name with a surname shows as the first name alone (Jory Spleeneater says it as Jory); a whisper or a right-click on it still reaches the whole name",
+    tip = "a name with a surname shows as the first name alone (Jory Spleeneater says it as Jory); a whisper or a right-click on it still reaches the whole name. Off by default: it rewrites the game's chat lines, and in battlegrounds and instances that sets off the game's warning about addon errors",
 })
 ns.RegisterSetting({
     key = "chatScale", kind = "number", default = 1.5, min = 1, max = 2, percent = true, command = "chatsize",

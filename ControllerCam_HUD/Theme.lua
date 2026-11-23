@@ -575,6 +575,86 @@ function ns.FactionEdge(bar, color)
     bar.factionShown = true
 end
 
+-- A player's class, where the game keeps it secret (a battleground's other side): the game can still show it for
+-- us. A name takes its colour (C_ClassColor's colour, FontString:SetTextColor) and a texture its icon (the game's
+-- GetClassAtlas, Texture:SetAtlas); a bar does not take a secret colour, so bars stay as they are there. (Tried in
+-- the game: /cchud classprobe.) A way the game refuses is never tried again: each refusal counts as an addon error.
+ns.secretWays = {}
+local function Way(key, fn, ...)
+    if ns.secretWays[key] == false or type(fn) ~= "function" then return false end
+    local ok, a, b, c = pcall(fn, ...)
+    if not ok then ns.secretWays[key] = false; return false end
+    ns.secretWays[key] = true
+    return true, a, b, c
+end
+ns.CLASS_ICONS = "Interface\\GLUES\\CHARACTERCREATE\\UI-CHARACTERCREATE-CLASSES"
+
+-- A player's name in their class's colour, the class kept secret or not; false where it cannot be had
+function ns.ClassNameColor(fs, unit)
+    if not (fs and unit) then return false end
+    local okC, _, class = pcall(UnitClass, unit)
+    if not okC then return false end
+    if not ns.IsSecret(class) then
+        local c = type(class) == "string" and RAID_CLASS_COLORS and RAID_CLASS_COLORS[class]
+        if not c then return false end
+        fs:SetTextColor(c.r, c.g, c.b)
+        return true
+    end
+    local okG, color = Way("classColor", C_ClassColor and C_ClassColor.GetClassColor, class)
+    if not okG or type(color) ~= "table" or not color.GetRGB then return false end
+    local okR, r, g, b = Way("classRGB", color.GetRGB, color)
+    if not okR then return false end
+    return (Way("classNameColor", fs.SetTextColor, fs, r, g, b))
+end
+
+-- A player's class icon on a texture, the class kept secret or not; false where it cannot be had
+function ns.ClassIconTexture(tex, unit)
+    if not (tex and unit) then return false end
+    local okC, _, class = pcall(UnitClass, unit)
+    if not okC then return false end
+    if not ns.IsSecret(class) then
+        local c = type(class) == "string" and CLASS_ICON_TCOORDS and CLASS_ICON_TCOORDS[class]
+        if not c then return false end
+        tex:SetTexture(ns.CLASS_ICONS)
+        tex:SetTexCoord(c[1], c[2], c[3], c[4])
+        return true
+    end
+    local okA, atlas = Way("classAtlas", rawget(_G, "GetClassAtlas") or (C_Texture and C_Texture.GetClassAtlas), class)
+    if not okA then return false end
+    tex:SetTexCoord(0, 1, 0, 1)
+    return (Way("classIcon", tex.SetAtlas, tex, atlas))
+end
+
+-- The icon of a class kept secret, as a texture of its own just before a line of text (the line can't carry it:
+-- a secret can't be written into text). holder keeps it (holder.classTex); hidden when there is none to show.
+function ns.SecretClassIcon(holder, fs, unit, show)
+    local t = rawget(holder, "classTex")
+    local okC, _, class = pcall(UnitClass, unit)
+    if not (show and okC and ns.IsSecret(class)) then
+        if t then t:Hide() end
+        return false
+    end
+    if not t then
+        t = holder:CreateTexture(nil, "OVERLAY")
+        holder.classTex = t
+    end
+    local okF, _, size = pcall(fs.GetFont, fs)
+    size = (okF and tonumber(size)) or 12
+    t:SetSize(size + 2, size + 2)
+    local okW, w = pcall(fs.GetStringWidth, fs)
+    w = (okW and type(w) == "number" and not ns.IsSecret(w)) and w or 0
+    local okJ, justify = pcall(fs.GetJustifyH, fs)
+    t:ClearAllPoints()
+    if okJ and justify == "LEFT" then
+        t:SetPoint("RIGHT", fs, "LEFT", -2, 0)
+    else
+        t:SetPoint("RIGHT", fs, "CENTER", -w / 2 - 2, 0)
+    end
+    if ns.ClassIconTexture(t, unit) then t:Show(); return true end
+    t:Hide()
+    return false
+end
+
 -- The badge as text (before a name, the name's own height) and the faction's colour, or "" and nil. For a plate
 -- with no bar; where there is a bar the badge is a picture of its own beside it (FactionBadge): a badge bigger
 -- than the text inside the text made the line taller than its place and pushed the name down into the bar.

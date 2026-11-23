@@ -20,6 +20,8 @@ PNG amichevoli per reputazione
 il nome e la barra di un PNG amichevole sono colorati secondo la tua reputazione con la sua fazione: giallo neutrale, verde amichevole, poi verde acqua, turchese e blu per onorato, riverito ed esaltato
 L'altra fazione, ben visibile
 un giocatore dell'altra fazione porta lo stemma della fazione prima del nome e un bordo attorno alla barra della salute, blu Alleanza o rosso Orda, sulle targhette e nel riquadro del bersaglio
+Nomi dei giocatori nel colore della classe
+il nome di un giocatore nel colore della sua classe sulle targhette e nel riquadro del bersaglio, anche nei campi di battaglia dove il gioco tiene nascosta la classe (il gioco lo colora per noi)
 L'altra fazione: colori
 il colore del bordo e dell'evidenziazione sulle barre dell'altra fazione: quello della fazione (Alleanza blu, Orda rosso) o il rosso di un nemico, qualunque sia la fazione
 Soglia di esecuzione sulle barre nemiche
@@ -855,11 +857,11 @@ Nascondi gli errori «non ancora pronto»
 %d messaggi nascosti come spam da quando hai effettuato l'accesso.
 %d di questi erano reclutamenti di gilda ripetuti.
 Icona di classe e livello nella chat
-l'icona di classe e il livello di un giocatore tra parentesi quadre davanti al suo nome, quando il gioco ce li fa conoscere
+l'icona di classe e il livello di un giocatore tra parentesi quadre davanti al suo nome, quando il gioco ce li fa conoscere. Disattivato di base: riscrive le righe della chat del gioco, e nei campi di battaglia e nelle istanze questo fa scattare l'avviso del gioco sugli errori degli addon
 Nomi dei canali brevi nella chat
-il canale davanti a una riga, abbreviato: [P] gruppo, [PL] capogruppo, [G] gilda, [O] ufficiale, [R] incursione, [RL] capo incursione, [I] istanza, e un canale numerato col suo numero, [1]
+il canale davanti a una riga, abbreviato: [P] gruppo, [PL] capogruppo, [G] gilda, [O] ufficiale, [R] incursione, [RL] capo incursione, [I] istanza, e un canale numerato col suo numero, [1]. Disattivato di base: riscrive le righe della chat del gioco, e nei campi di battaglia e nelle istanze questo fa scattare l'avviso del gioco sugli errori degli addon
 Solo nomi propri in chat
-un nome con cognome appare col solo nome proprio (Jory Spleeneater parla come Jory); un sussurro o un clic destro su di esso raggiunge comunque il nome completo
+un nome con cognome appare col solo nome proprio (Jory Spleeneater parla come Jory); un sussurro o un clic destro su di esso raggiunge comunque il nome completo. Disattivato di base: riscrive le righe della chat del gioco, e nei campi di battaglia e nelle istanze questo fa scattare l'avviso del gioco sugli errori degli addon
 Dimensione del testo della chat
 la dimensione del testo nelle finestre della chat, in proporzione a quella propria del gioco (l'impostazione del gioco resta com'è)
 Nascondi venditori di oro e annunci ripetuti
@@ -964,6 +966,7 @@ I momenti più lenti dell’HUD:
 Rapporti di debug
 raccogli da soli i rapporti di diagnosi: quando accedi e di nuovo quando ricarichi o esci (restano nelle impostazioni salvate)
 i momenti in cui il gioco si è bloccato dall’accesso, e quanto di ciascuno è stato lavoro dell’HUD
+cosa il gioco tiene nascosto della classe del tuo bersaglio e quali modi possono ancora mostrarla (da eseguire una volta, su un giocatore nemico in un campo di battaglia)
 Tutto
 Equipaggiamento
 Consumabili

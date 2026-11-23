@@ -483,6 +483,10 @@ local function UpdateInfo(o)
         SetName(o.name, name, ns.Yes(isPlayer) and levelText or nil, mark)
         o.name:SetTextColor(r, g, b)
     end
+    -- a player: the name in their class's colour, and where the game keeps the class secret (a battleground's
+    -- other side) its icon beside the line all the same, the game drawing both
+    if ns.db.classNames and ns.Yes(isPlayer) then ns.ClassNameColor(o.name, unit) end
+    ns.SecretClassIcon(o, o.name, unit, ns.db.plateClassIcons and ns.Yes(isPlayer) and not o.mini)
     ns.FactionEdge(o.health, fcolor)                                    -- (the name keeps its colours)
     local sub = ns.db.plateSubtitles and not o.mini and Subtitle(unit) or nil
     if sub then
