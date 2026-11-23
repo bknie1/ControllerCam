@@ -5,11 +5,11 @@
 ControllerCam
 - Your movement settings are yours. The camera profiles also set the game's controller movement options: whether your character faces the way you move and at what angle, turning with the camera, facing on a mount, swimming or flying, and the stick's turn and look speeds. Now they leave those alone until you say they may. At the first login, ControllerCam asks once (A: let the profiles set them, B: keep mine). **Keep mine** puts back any values a profile had already changed, as you had them. Change it any time with the new option **Profiles also set how you move and the stick's speeds**, or `/ccam movement`. The camera itself (distance, shoulder offset, head tracking) is set as before.
 
-## 1.4.19
-
 ControllerCam: HUD (load-on-demand modules)
 - Parts you switch off cost nothing now. Twelve parts of the HUD are addons of their own, loaded only while you have them switched on: nameplates, party and raid frames, combat numbers and callouts, the bag window, the Market tab, The Mentor, the transmog Sets tab, the quest compass, fishing, the characters in the windows, the campfire scene and flights. Switched off in the options' Modules list (or by its command), a part stops at once, as before, and its memory is freed at your next /reload; switched on, it loads at once, no /reload needed. Its settings are kept while it's off, and /cchud export carries them. A command of a part that's off says how to switch it on. They all come in the same download, under ControllerCam in the game's AddOns list.
 - The HUD takes about 1.5 MB less memory: it no longer keeps the texts of every language, only yours.
+
+## 1.4.19
 
 ControllerCam: HUD
 - The bank is in the bag window. With **One bag window** on, the game's own bank window is put out of sight and away while you're at the bank, so the controller starts in the bag window, and the bag window shows the bank instead. Its items work like your bags: X moves the chosen item into your bags (and from your bags into the bank), Y opens the same menu, and A picks up. LT shows the bank and RT shows your bags, and the bottom line says so. Both stay in sight, the bank on the left and your bags on the right, drawn exactly alike: the same height, title, filters, slots and bag row, so the only difference is which one has the cursor. Each keeps its own filter. Closing the window closes the bank. Before, the game's bank window took every button for itself whenever its cursor had the controller, so X and Y did nothing there. If the bank opens during a fight, the game's own bank window is used, as before.
