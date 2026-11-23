@@ -100,7 +100,7 @@ pcall(refusals.RegisterEvent, refusals, "PLAYER_REGEN_ENABLED")
 refusals:SetScript("OnEvent", function(_, event, addon, what)
     if event == "PLAYER_REGEN_ENABLED" then
         IM.held = {}
-    elseif addon == ADDON and lastPinned and GetTime() - lastAt < 0.2
+    elseif ns.IsOurAddon(addon) and lastPinned and GetTime() - lastAt < 0.2
         and type(what) == "string" and what:find("Points?%(") then
         -- the game just refused the frame we were moving: no more of that in this fight
         if not IM.held[lastPinned] then ns.Note("a frame the game holds still in a fight: left where it is") end

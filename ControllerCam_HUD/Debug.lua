@@ -158,7 +158,7 @@ function D.Tainted()
         if type(name) == "string" then
             checked = checked + 1
             local ok, secure, by = pcall(issecurevariable, name)
-            if ok and not secure and by == ADDON and not OurName(name) then
+            if ok and not secure and ns.IsOurAddon(by) and not OurName(name) then
                 Row(("global %s (written by %s)"):format(name, tostring(by)))
             end
             if type(v) == "table" and tables < 4000 and not OurName(name) then
@@ -210,7 +210,7 @@ function D.TaintedEverywhere()
                         if type(k) == "string" or type(k) == "number" then
                             checked = checked + 1
                             local ok, secure, by = pcall(issecurevariable, t, k)
-                            if ok and not secure and by == ADDON then
+                            if ok and not secure and ns.IsOurAddon(by) then
                                 found = found + 1
                                 if found <= 40 then
                                     D.tainted[#D.tainted + 1] = ("%s[%s] (written by %s)"):format(name, tostring(k), tostring(by))
@@ -265,7 +265,7 @@ local guard = CreateFrame("Frame")
 pcall(guard.RegisterEvent, guard, "ADDON_ACTION_FORBIDDEN")
 pcall(guard.RegisterEvent, guard, "ADDON_ACTION_BLOCKED")
 guard:SetScript("OnEvent", function(_, event, addon, what)
-    if addon ~= ADDON then return end
+    if not ns.IsOurAddon(addon) then return end          -- (the HUD or one of its modules)
     local line = ("%s %s: %s"):format(date and date("%H:%M:%S") or "", event == "ADDON_ACTION_FORBIDDEN" and "forbidden" or "blocked",
         tostring(what))
     if debugstack and (D.traced or 0) < 4 then              -- the first few: the path that led to it
@@ -388,6 +388,7 @@ D.SECTIONS = {
         return out
     end },
     { "slow", function() return D.Slow() end },
+    { "modules", function() return ns.ModuleList and ns.ModuleList.Describe() or {} end },
     { "errors", Errors },
 }
 
@@ -507,13 +508,17 @@ hitch:SetScript("OnUpdate", function(_, dt)
     S.now, S.top, S.topWhere = 0, 0, nil
 end)
 
--- What the game's own addon profiler says of the two addons, where it has one
+-- What the game's own addon profiler says of the camera, the HUD and each of the HUD's modules loaded, where it has one
 function D.Profiler()
     local P = C_AddOnProfiler
     if type(P) ~= "table" or type(P.GetAddOnMetric) ~= "function" then return { "the game has no addon profiler" } end
     local metrics = Enum and Enum.AddOnProfilerMetric
     local out = {}
-    for _, addon in ipairs({ "ControllerCam", "ControllerCam_HUD" }) do
+    local addons = { "ControllerCam", "ControllerCam_HUD" }
+    for _, m in ipairs(ns.ModuleList and ns.ModuleList.list or {}) do
+        if m.state == "loaded" then addons[#addons + 1] = m.addon end
+    end
+    for _, addon in ipairs(addons) do
         local parts = {}
         for name, id in pairs(type(metrics) == "table" and metrics or {}) do
             local ok, v = pcall(P.GetAddOnMetric, addon, id)

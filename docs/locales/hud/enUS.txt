@@ -3,6 +3,59 @@ on
 off
 usage:
 Changes are applied when combat ends.
+%s is not installed: the folder %s is not in your AddOns folder.
+%s could not be loaded: the game refused it (%s).
+%s is off: /cchud %s on
+Turning it off frees its memory at your next /reload.
+Turning it off frees its memory at your next /reload, once these are off too: %s.
+Nameplates
+our look on the game's nameplates (its nameplate options still apply)
+Party and raid frames
+draw our look over the game's party and raid frames (their targeting and options keep working)
+Stylized numbers on you
+the damage and healing you take pop like your own hits, instead of the game's scrolling text (follows the game's option for combat text on you)
+Abilities ready
+when an ability only a moment allows becomes usable (Mongoose Bite, Overpower, Revenge, Riposte, Counterattack) or the game lights one up on your bar: its name in bold red in the middle of the screen for a moment
+Cooldowns coming back
+your key abilities rise and grow beside your character in the last two seconds of their cooldown, then pop gold the moment they are ready (in place of a cooldown bar)
+Buffs wearing off
+a buff you cast on yourself (a Seal, Holy Shield, a shout or shield) calls out with your cooldowns as it runs out, and in red the moment it is gone, also when it is used up early
+Big moments
+a burst is pinned big and golden in the middle of the screen: crits landing back to back, each within a second of the last (a double swing, Judgement and Holy Strike together), with what they did together (at most twice a fight)
+Rumble: your key abilities
+each class's key abilities have a feel of their own on the controller (a Judgement splashes, a Holy Strike snaps, Windfury knocks three times)
+One bag window with quick filters
+your bags in one window of the HUD's own, in place of the game's: every item together, the empty slots gathered at the end, your bags in a row of their own, and quick filters along the top (LB and RB). The bank too, while it is open. Off: the game's own bags
+Market tab at the auction house
+a Market tab on the auction house: what in your bags is worth selling there and why, a price chart beside it, and posting in one press
+The Mentor: a levelling plan beside the profession window
+while a profession's window is open, a panel beside it says which recipes to make and how many to reach the cap, and what that takes, down to the ore and herbs; an estimate from the recipes' colours
+Profession window: how many you could make with your bank
+beside the game's count of a recipe you can make from your bags, a second count in blue includes the reagents in your bank. It shows only when that makes more
+Farm list beside the quest list
+things you mean to gather, with how many you have and how many you want: your bags and bank and your other characters' on this realm. Add the reagents of a levelling plan with one button, or any item
+Sets tab at the transmogrifier
+a Sets tab in the Transmogrify window: gear from your collection that shares a name (Green Iron Helm, Green Iron Gauntlets...) and the game's own sets, put on your outfit in one press, with Undo; nothing is kept or paid until you press Apply
+Appearance collected, in item tooltips
+under the tooltip of gear and cosmetics: whether its look is in your collection yet, or only through another item that looks the same, so you can tell what is new to you
+Quest compass
+a compass along the top of the screen: the way you face, and your quests where they lie, each with how far it is. The quest the game points you to stands out
+One-button fishing
+with a fishing pole in your hands: your interact button to cast your line whenever there is nothing to interact with, and again to hook the fish when the float bobs; the catch is taken for you. B to put the pole away and take your weapons back
+Fish journal
+every catch is written into your fish journal: how many of each kind, where you first landed it, and a weight made up for fun with your best of each (/cchud journal opens it)
+Fishing interface
+with a fishing pole in your hands: the fish of the water you stand at (the ones you have not landed here stay hidden), your Fishing skill and what your bait adds, how many you caught and how many got away, how long your bait lasts, and your latest catches
+Narrative: characters in the windows
+every window the HUD improves has someone who helps you, with their portrait and a short line on what is in front of you and why: you over your bags and at the water, the vendor, the banker, the Postmaster, the flight master, the Broker at the auction house and The Mentor at your profession; off: the windows are plain and quiet
+Campfire scene
+sit still at a camp for a few seconds and the screen turns to film for a minute: the camera circles you, your big moments since the last camp are told (bosses, levels, professions, new mounts), and the camp's buffs close it, by class. Any move or button ends it
+Flights: time and countdown
+on a flight, where to and how long is said in chat, and a bar at the top of the screen counts down to the landing; each route's time is learned from your flights
+Cinematic flights
+on a flight master's flight the screen turns to film: black bars, the HUD faded back, the camera drawn out wide and swinging slowly round you and your mount, with the flight bar in the top bar. The flight game, a window or a button steps out of it, and it bows out as you come in to land
+Flights: a game on the way
+on a flight a small game is offered under the flight bar, and one button starts it (only that button is taken until you do): flap your mount over the treetops and past the zeppelins, and net the riders coming the other way, grounding them for flight gold. The same button again is high altitude: the game is put away and the buttons are the game's again. Never in a fight, gone on landing
 The game's
 Fonts can be chosen only where the game's language is written in Latin letters.
 Font: %s
@@ -269,86 +322,6 @@ read every price at the auction house at once (open it first; every 15 minutes)
 Crafts: %s
 Keep what your professions still need
 an item that one of your characters' recipes still gives a skill point for (orange and yellow recipes, as the game shows them in the profession's window), that the profession's next steps use (the levelling guides' recipes, and those another of your characters knows, up to 75 points ahead), or that crafts something worth more at the auction house than the item itself, is kept, not sold, and its tooltip says why. Recipes are read when a profession's window is open
-Open a profession's window and I'll look over your recipes.
-That's the cap, %d. A trainer has the next rank for you.
-Nothing more to learn at %d. Go and see a trainer about the next rank.
-You've outgrown your recipes. See a trainer: %s is waiting at %d.
-%d more to %d, and what you know won't take you there. A trainer has %s for you at %d.
-You've outgrown your recipes. See a trainer: %s is waiting.
-Your recipes stop teaching you %d short of %d. Ask a trainer for %s.
-Your recipes run dry %d short of %d. A trainer will have something new.
-What you know won't carry you the last %d. Time to see a trainer.
-%s won't teach you much now, but it's the best you have. %d more to %d.
-Slow going from here: %s gives a point now and then. %d to go.
-First you'll want %s, %s. The guides start this stretch with it.
-Learn %s, %s, and we'll begin: %d more to %d.
-%d more to %d. The guides send you out for %s until %d.
-Gathering teaches you here: %s until %d.
-%d more to %d. Start with %s, or %s if you'd rather: %s.
-%s first, as the guides have it. %s does the job too: %s.
-%d more to %d. Start with %s.
-%s is your best teacher now. %d points to %d.
-Steady hands. %s first, and %d to go.
-at a trainer
-from a vendor
-found as loot
-from a quest
-cheaper materials
-materials from a vendor
-materials you gather yourself
-it sells well
-something you'll use
-fewer crafts
-a recipe you find or buy
-other materials
-the guides' first choice
-Open a profession's window for a levelling plan.
-At the cap, %d. A trainer has the next rank.
-%d more to %d; your recipes stop short. A trainer has %s at %d.
-%d more to %d; your recipes stop short. A trainer has %s.
-Your recipes stop %d short of %d. A trainer has more.
-%d more to %d. Best now: %s, green (a point now and then).
-%d more to %d. First learn %s, %s.
-%d more to %d. Gather %s until %d.
-%d more to %d. First: %s, or %s (%s).
-%d more to %d. First: %s.
-To gather or buy
-%d crafts: %s
-Learn it %s, at %d.
-Learn it %s.
-%s: %d in your bags, %d in the bank, %d each
-The guides level this stretch by gathering %s.
-%s: you have %d, the plan uses %d
-for %s
-The Mentor: what your bank can make
-What your bank can make
-Nothing more to make with what's in your bank.
-%d you can make counting your bank, %d of them only with it.
-The Mentor: %s %d > %d
-The Mentor
-Levelling plan
-or
-Gather %s
-to learn
-Try on
-Hide
-The plan
-Back
-Farm this
-Farm all
-With the bank
-Use the plan
-twice to hide
-Nothing here to try on.
-%d added to the farm list.
-Nothing missing: you have what it takes.
-Open a profession's window to make a plan.
-The Mentor (levelling plan): show / hide
-The Mentor: a levelling plan beside the profession window
-while a profession's window is open, a panel beside it says which recipes to make and how many to reach the cap, and what that takes, down to the ore and herbs; an estimate from the recipes' colours
-Profession window: how many you could make with your bank
-beside the game's count of a recipe you can make from your bags, a second count in blue includes the reagents in your bank. It shows only when that makes more
-show the levelling plan of the profession window you opened last, with the controller's buttons on it
 AP
 RAP
 crit
@@ -370,126 +343,6 @@ bank
 Your mark
 Item details: everything about the item you point at
 show everything about the item you point at (or the one given): prices, who holds it, your mark
-%d%% to sell
-Sure to go (%d%%)
-That one sells itself (%d%%)
-I think it'll sell (%d%%)
-Should find a buyer (%d%%)
-Even odds (%d%%)
-Could go either way (%d%%)
-A bit of a gamble (%d%%)
-Might sit a while (%d%%)
-I wouldn't hold my breath (%d%%)
-Long odds, friend (%d%%)
-+%s over a vendor
-no price known yet
-a vendor pays as much
-The Broker
-Market
-every coin counted, friend
-Nothing in your bags can be sold here.
-No prices in the last 7 days.
-One day of prices so far: a candle comes each day you visit the auction house.
-7 days, a candle a day: green closed higher, red lower
-30 days, the day's lowest: green up, red down
-No price history yet: read the auction house on a few days.
-One day of prices so far: the line grows each day you visit the auction house.
-Asking %s each, %s for the %d you let go; %d stay with you
-Asking %s each, %s for all %d
-Lowest
-read %s
-Usual
-7 days: %s to %s
-Up: %d auctions, %d items
-%s each, %s for all %d
-You posted %d here, %d auctions sold
-No price known: read the auction house first.
-Nothing in your bags to sell here.
-Nothing sells better here than at a vendor today; %d might, with patience.
-Best first: %d sell better here than at a vendor, %d more with patience.
-Empty bags, friend. Bring me something to sell.
-Nothing here beats a vendor today. %d might, with a little patience.
-No sure profits in these bags, friend. %d could pay if you wait.
-Best on top: %d here beat any vendor, %d more for the patient.
-%d pay better here than at a vendor, best first. %d more if you wait.
-Top of the pile pays best: %d sure sales, %d more if you can wait.
-No prices yet: %s reads the auction house.
-Prices read just now: %d.
-%d prices, read %s.
-%d prices, read %s. %s reads them again.
-Haven't read the board yet. %s and I'll fetch every price.
-No prices yet, friend. %s reads the whole board.
-Prices fresh off the board, friend: %d of them.
-Just read the board: %d prices, still warm.
-%d prices, read %s. Near enough, friend.
-Last look at the board was %s: %d prices.
-Prices from %s, stale as old bread. %s reads the board again.
-%d prices, but I read them %s. %s and I'll look again.
-Showing what you keep too. %s hides it.
-Kept back: %d, for your professions, your gear and your marks. %s shows them.
-Your keepers are on the list too. %s tucks them away.
-Showing what you keep as well. %s hides it again.
-%d kept back: trade goods, gear to wear, things you marked. %s shows them.
-Set %d aside for your crafts, your back and your marks. %s if you want them.
-each
-no data
-Quick sale
-Patient
-Read all prices
-Hide kept
-Show kept
-Line
-Candles
-Post
-%d of %d
-Post %d of %d for %s each
-Post %d for %s
-Post all %d for %s
-This client's auction house cannot be posted to from here.
-Posted %d for %s.
-Market at the auction house: open / close
-Market tab at the auction house
-a Market tab on the auction house: what in your bags is worth selling there and why, a price chart beside it, and posting in one press
-Auctioneer's greeting on the Market
-a goblin auctioneer says one short line, from the game's own sounds, when the Market opens; off: it opens in silence
-Market: show what you keep
-the Market lists what you keep too: what your professions still learn from or make into something worth more, and what you marked to keep; off: only what you would sell
-Market: price chart as candles
-the Market's price chart is a candle a day for the last 7 days (where the price opened, went highest and lowest, and closed: green when it closed higher, red lower); off: a line of the day's lowest price over 30 days
-open or close the Market (a tab of the auction house)
-which auction house this client has (for troubleshooting)
-collected
-collected from another item
-not collected yet
-Appearance
-Pick a set to put its pieces on your outfit. %s keeps it; nothing is paid before that.
-Looking through your collection...
-Your outfit is back as it was.
-%s: %d of %d pieces put on.
-%d would not go on this outfit.
-One set you have pieces of
-%d sets you have pieces of
-you can't wear this
-missing
-All %d pieces
-%d of %d pieces
-Missing: %s
-No sets yet. Items that share a name, like Green Iron Helm and Green Iron Gauntlets, show here once you have one of them.
-Undo
-Sets tab at the transmogrifier
-a Sets tab in the Transmogrify window: gear from your collection that shares a name (Green Iron Helm, Green Iron Gauntlets...) and the game's own sets, put on your outfit in one press, with Undo; nothing is kept or paid until you press Apply
-Appearance collected, in item tooltips
-under the tooltip of gear and cosmetics: whether its look is in your collection yet, or only through another item that looks the same, so you can tell what is new to you
-Offline
-Dead
-Off
-In a healing spec
-Always
-Too far
-Party and raid frames
-draw our look over the game's party and raid frames (their targeting and options keep working)
-Healer's party and raid
-in a party: your party beside your character, each with the button that targets them; in a raid: slimmer frames. Each shows only how much healing they need, a debuff you can cure, and whether they are in range
 Cast bar animations
 a cast bar shows what is being cast: picks chip at it while mining, lightning runs along it for nature, a vine flowers for a heal, runes take shape for arcane, flames, ice and shades for fire, frost and shadow
 show every cast bar animation once, on your cast bar
@@ -520,79 +373,6 @@ on the right under a friend's bar: the debuffs you can dispel (edged in their ki
 Combo points
 combo points as pips above the target's name
 list what the game says about your target's effects (for troubleshooting)
-Threat percent
-your share of the threat as a number beside the threat icon, on the target frame and nameplates
-Health number
-the health left, shortened (12.3k), on the bar (not on compact plates: the percent says enough there)
-Your debuffs
-your debuffs on the unit, above its name, with their time
-Everyone's debuffs
-the debuffs the game marks for nameplates from everyone, not only yours
-Enemy buffs
-an enemy's buffs beside its debuffs: the ones that matter (important, enraged, or ones you can dispel or steal), or all of them when Only the effects that matter is off
-Crowd control icon
-a large icon with its time when the unit is stunned, rooted, feared...
-Aggro glow
-a shield icon and a glow behind the name: red while it attacks you, red and yellow when you are about to pull it, yellow and blue when you are losing it, blue when it is not on you
-Quest marker
-a gold marker on units your quests still need
-Nameplate animations
-plates fade in, low health breathes, crowd control shimmers
-Small
-Normal
-Large
-Full name
-Short name
-No name
-Full
-Minimal
-Minimal mini
-Nameplate size
-how big the bars on nameplates are: small and slim, normal, or large (wider and taller)
-Names on nameplates
-the name on a plate with a health bar: in full, cut short, or left out (the target frame gives it in full; the level and class icon stay). A plate with no bar, a friendly NPC's, always keeps its name
-Nameplate look
-the nameplate switches in one press. Full: everything. Minimal: no power bar, guild or title, short names. Minimal mini: small bars with health, your debuffs and the buffs that matter, level and class, no name (the target frame has it). Threat, crowd control and loud casts always stay
-Nameplates
-our look on the game's nameplates (its nameplate options still apply)
-Player titles
-show a player's title with their name
-Guilds and NPC jobs
-a line under the name: the player's guild, or what the NPC does
-Bars for friends in a fight
-friendly plates show health, power and casts while that unit is in combat
-The game's own friendly nameplates
-leave friendly plates (your party, other players, friendly NPCs) to the game's own look; ours only on enemies
-Power bars
-a thin mana, rage or energy bar under the health bar
-Cast target
-who a cast is aimed at, next to the spell's name
-Health percent
-the health percent on the bar
-Name on your target's plate
-off: your target's plate drops its name and level (the target frame shows them)
-Levels on nameplates
-the level in front of an enemy's name, coloured by difficulty
-Compact nameplates
-nameplates about half as wide
-Loud enemy casts
-an enemy's cast flashes, swells and pulses ever faster until it lands, so it can be interrupted in time
-Class icons on nameplates
-a player's class icon in front of their name, friend or enemy
-What NPCs do, as icons
-an icon over friendly NPCs that offer something: a bag over vendors, an anvil over smiths who repair, a book over trainers... (the game's own icons; they show even while the plate itself waits to be pointed at)
-Friendly NPCs only when pointed at
-the plates of friendly NPCs (vendors, quest givers, townsfolk) show only while you point at them, like their tooltip
-Names on things you can interact with
-a name over ore, chests, plaques and the like while you face them (off: they stay bare, as the game's own prompt already says what they are)
-Mini plates
-minions, critters and grey enemies that give no experience get a small plate: a slim bar with your debuffs on it and no name (a critter, with no bar, keeps its name; the game's own option decides whether they have plates at all)
-Party nameplates in dungeons: names only
-inside a dungeon or raid the game draws friendly players' nameplates itself and addons may not change them: in there the game's own options are set to show them as class-coloured names without bars, like ours, with the game's bars back while you fight (when bars for friends in a fight are on); all put back when you leave
-Party nameplates in dungeons: hidden
-inside a dungeon or raid, switch the game's nameplates for friendly players off altogether (and back the way you had them when you leave)
-show what the game gives for your target's name (for troubleshooting)
-list the nameplates on screen and whether they wear our look (for troubleshooting)
 Showing every damage school once (the last one as a crit).
 Hit particles
 holy flashes, fire rises, frost crystals linger, shadow smokes, arcane runes twinkle on the bar you hit
@@ -609,15 +389,6 @@ Heals over time grow on the bar
 roots and branches (nature) or golden threads (holy) grow over the bar of your target, focus or you while a heal over time lasts, and wither when it ends
 Shields show as a ward
 a shield on your target, your focus or you (Power Word: Shield, Divine Shield, Ice Barrier...) flares round the health bar in its school's colour, glows while the shield holds, and fades when it breaks
-%d absorbed
-Cooldowns coming back
-Stylized numbers on you
-the damage and healing you take pop like your own hits, instead of the game's scrolling text (follows the game's option for combat text on you)
-Abilities ready
-when an ability only a moment allows becomes usable (Mongoose Bite, Overpower, Revenge, Riposte, Counterattack) or the game lights one up on your bar: its name in bold red in the middle of the screen for a moment
-your key abilities rise and grow beside your character in the last two seconds of their cooldown, then pop gold the moment they are ready (in place of a cooldown bar)
-Buffs wearing off
-a buff you cast on yourself (a Seal, Holy Shield, a shout or shield) calls out with your cooldowns as it runs out, and in red the moment it is gone, also when it is used up early
 The game's own
 Dot
 Ring
@@ -662,18 +433,6 @@ a swell when you level up, a long low rumble when you die
 Light bar shows your health
 a controller with a light bar (DualSense) shows your health in it: green to red, pulsing when low in a fight
 play every vibration pattern once
-Feed on the right
-One in the middle
-%d crit heals
-%d crits
-Judgement
-Big moments: where
-a block just above the cooldown callouts on the right of your character, the newest nearest them and the older ones moving up over it as they fade, or one at a time in the middle
-Rumble: your key abilities
-each class's key abilities have a feel of their own on the controller (a Judgement splashes, a Holy Strike snaps, Windfury knocks three times)
-Big moments
-a burst is pinned big and golden in the middle of the screen: crits landing back to back, each within a second of the last (a double swing, Judgement and Holy Strike together), with what they did together (at most twice a fight)
-show what a big moment looks and feels like
 new!
 best!
 %d h
@@ -684,39 +443,6 @@ the fish you land, and the buffs a camp or a shrine gives you, are announced acr
 Reduce animations
 nothing on the screen shakes, sweeps, flies or bursts: cast bar animations, hit effects, nameplate motion, big moments and the readouts of catches and buffs are calm or still. The game's own settings for screen shake and unexpected camera movement count too
 show what the readouts of a catch and of buffs look like
-Grand Master
-Master
-Artisan
-Expert
-Journeyman
-Apprentice
-Reached level %d (from %d)
-Reached level %d
-Defeated %s and %d more in %s
-Defeated %s
-%s: now %s, up to %d
-%s reached %d
-%d new flight paths, the last %s
-New flight path: %s
-New mount: %s
-New companion: %s
-New toy: %s
-Achievement: %s
-The camp
-At rest
-By the fire
-Dawn
-Morning
-Afternoon
-Evening
-Night
-%s in %s
-With %s
-The campfire scene is off.
-The campfire scene waits until you are out of combat.
-Campfire scene
-sit still at a camp for a few seconds and the screen turns to film for a minute: the camera circles you, your big moments since the last camp are told (bosses, levels, professions, new mounts), and the camp's buffs close it, by class. Any move or button ends it
-play the campfire scene now
 done
 %s: ready to hand in
 Finishing up [%s].
@@ -753,45 +479,6 @@ every step of your quests goes to party chat (Bloody Bone Necklaces: 4/25), not 
 Keep what your quests need
 an item a quest in your log still asks for, or one that starts a quest you can still do, is marked Quest: never sold or put up for auction for you
 say a recommended order for your quests: hand in what is ready, then the nearest you can do alone, then the rest
-Top
-Bottom
-N
-NW
-W
-SW
-S
-SE
-E
-NE
-The quest compass is off: /cchud compass on
-The compass needs to know where you are, and the game does not say it here.
-Quest compass
-a compass along the top of the screen: the way you face, and your quests where they lie, each with how far it is. The quest the game points you to stands out
-Quest compass: place
-at the top of the screen, or at the bottom in the experience bar's place (the bar then goes to the top)
-a few marks on the quest compass, around you, for twenty seconds
-Left of the quests
-Right of the quests
-Under the quests
-The farm list is full.
-Farm list: %s, %d wanted.
-Farm
-%d more
-Nothing to farm yet.
-A stack more
-Take off
-Clear
-Done
-Take everything off the farm list?
-Farm list: choose / done
-Farm list: add the item you point at
-That is not on the farm list.
-The farm list is empty.
-Farm list: where it sits
-Farm list beside the quest list
-things you mean to gather, with how many you have and how many you want: your bags and bank and your other characters' on this realm. Add the reagents of a levelling plan with one button, or any item
-the farm list to the left of the quest list, to its right, or under its quests
-the farm list beside the quest list: choose with the controller; add <item> [how many], remove <item>, clear, or left / right / bottom for where it sits
 Not in combat.
 This client has no gamepad bars.
 This client does not let addons change it; use Edit Mode.
@@ -831,129 +518,6 @@ The controller does not say what it is: the icons stay as the game has them.
 the icons the game shows for your controller's buttons: auto (by the controller in use), xbox, playstation, switch, steam, generic (numbers), or game to leave them as the game has them
 Cooldown rows clear of the gamepad bars
 the game's cooldown rows sit under the target instead of on top of the gamepad buttons, a little smaller (only on the game's built-in layouts: on a layout of your own they stay where you put them)
-Fishing mode: off.
-Fishing: %s to cast
-No bait: %s twice to use %s
-%s to put the pole away
-Fishing mode: %s to cast your line, and again to hook the fish when the float bobs.
-%s to hook, %s to cast again
-Fishing mode needs a fishing pole in your hands.
-You do not know Fishing.
-Fishing mode: one button casts and hooks
-Fishing button: %s
-One-button fishing
-with a fishing pole in your hands: your interact button to cast your line whenever there is nothing to interact with, and again to hook the fish when the float bobs; the catch is taken for you. B to put the pole away and take your weapons back
-One press to cast again
-while the float is out, your fishing button hooks the fish and A casts a fresh line in one press; off: A is yours
-Bait on a double press
-press your fishing button twice quickly: the second press puts the best bait in your bags on your pole, when the pole has none
-Gamepad bars put away while fishing
-with a fishing pole in your hands the gamepad bars are hidden, so the water is clear to look at; the fishing prompt shows the button to cast. They are back the moment a fight starts or the pole is put away
-one-button fishing off for now, or on again (with a pole in your hands it is on by itself)
-the button that fishes: your interact button to begin with (Square or X), or any other, a trigger for one (rt)
-Durotar's coast is red rock and warm shallows. Trolls of the Echo Isles say the mackerel run thickest when the tide carries the smell of the islands' cooking fires.
-The lakes of Mulgore are small, clear and patient. The tauren fish them the way they do everything else: slowly, and with thanks.
-Every oasis in the Barrens is a meeting place. Whatever drinks there by day, something swims under it by night.
-The pools of Teldrassil lie in the shade of one tree. Night elf anglers swear the fish there have never seen the sun and do not miss it.
-Darkshore's water is grey, cold and full of wrecks. Half of what bites off Auberdine has made a home in somebody's lost cargo.
-The rivers of Ashenvale run under leaves older than most kingdoms. The fish are quick, and the sentinels are quicker to ask what you are doing there.
-Down among the Thousand Needles the water is scarce and jealously kept. A fish from here has earned its place.
-Stonetalon's lakes sit high and cold between the peaks. The goblins would have drained them by now if the fishing were not so good.
-The coast of Desolace is bones and grey surf. Something down there has a taste for both.
-Feralas is green all the way down to the waterline. Its rivers are deep, warm and very much alive.
-Nobody is sure where Dustwallow's land stops and its water begins. Fish from the shore, and count your toes afterwards.
-Steamwheedle Port has the only water worth the name in Tanaris. The goblins will sell you the right to fish it, twice if you let them.
-Under Azshara's bright bay lies a drowned city. Old anglers say the big ones live in what used to be its gardens.
-The pools of Felwood glow, and not in a good way. What still swims in them is stubborn beyond reason.
-The hot springs and tar-rimmed lakes of Un'Goro have kept things the rest of the world forgot. Some of them bite.
-Lake Elune'ara in Moonglade is as calm as a held breath. The druids ask only that you take no more than you will eat.
-Silithus is sand, wind and the sound of wings. If you have found water to fish here, tell no one.
-The lakes of Winterspring freeze at the edges and steam in the middle. The fish there are fat for the cold and worth the walk.
-The pools of Orgrimmar are fished by peons with nothing better to do and by old grunts who say the same. Both tell you the big one got away.
-A fish from the ponds of Thunder Bluff has lived its whole life a long way above the plains. It seems calm about it.
-Darnassus keeps its waters as carefully as its temples. The fish have grown used to being admired.
-The lakes of the Alterac Mountains are snowmelt, and the ogres and the Syndicate fish them when no one is looking.
-Arathi's shores have seen more armies than anglers. The fish have long since stopped caring whose banner flies above the water.
-The Badlands are dust from one end to the other. A bite here is a small miracle; treat it as one.
-The coast of the Blasted Lands is red, scoured and quiet. Whatever lives in that surf has learned to live with a great deal.
-The lakes of Tirisfal lie still under a sickly sky. The Forsaken fish them out of habit; the dead do not eat much, but they remember liking it.
-Silverpine's long coast is all mist and pine shadow. The fishing is good, which is the one cheerful thing anyone says about the place.
-The rivers of the Western Plaguelands still run, though not clean. What you pull from them, look at twice.
-Few people fish the Eastern Plaguelands, and fewer say so. The water keeps what the plague left of it.
-Hillsbrad's river and its long southern shore have fed both sides of every quarrel fought over them.
-The Hinterlands keep their lakes high among the trees, where the Wildhammer dwarves fish from gryphon-back when they think no one can see.
-The lakes of Dun Morogh are ringed with ice most of the year. A dwarf will cut a hole, sit down with a pint and call it a good day whatever bites.
-The Searing Gorge has lava where other lands have rivers. Bring something to drink instead.
-The Burning Steppes are ash and embers. If the water here gives you anything at all, it will be hot.
-Every child in Elwynn learns to fish at Crystal Lake or Stone Cairn. The smallfish there have been outwitting them for generations.
-Deadwind Pass has little water and less welcome. What is in the pools below Karazhan is best left there.
-The river along Duskwood's edge is black at any hour. The fish do not seem to mind the dark; the anglers do.
-The Loch is the pride of Loch Modan, held back by the great Stonewrought Dam. Dwarves measure a fishing story against it, and the Loch usually wins.
-Lake Everstill in Redridge is as pretty as a painting and fished from every dock in Lakeshire. The townsfolk know each good spot and will not tell you one.
-From its jungle rivers to the wild southern cape, Stranglethorn has the richest water on the continent. Booty Bay's anglers hold a tournament over it, and nearly all of them cheat.
-The Swamp of Sorrows is green water under green trees. The fish taste of mud, and the locals like them that way.
-Westfall's fields failed, but its coast did not. The folk who stayed live off the long grey shore.
-The Wetlands are well named. Menethil Harbor's docks are the driest place to fish them, and the crocolisks know it.
-The canals of Stormwind are fished by children, pensioners and at least one member of the nobility in disguise. Nobody asks what else is in the canals.
-The Forlorn Cavern holds Ironforge's one quiet pool. Old dwarves fish it for hours and never say a word.
-The canals of the Undercity run a green that has nothing to do with algae. The Forsaken who fish them are not doing it for supper.
-The first fish most anglers ever land, and bright enough that they remember it.
-Slick, quick and common along every warm coast. It is better grilled than its name suggests.
-All mouth, and happiest in water you would not drink.
-Small, toothy and fearless. A shoal of them is said to have chased a bear out of the Loch.
-A flash of colour under the surf. Sailors count one on the line as luck for the voyage.
-A patient bottom-feeder with whiskers like a dwarven elder.
-No one eats it twice. Alchemists buy every one they can get.
-Its fins glow like banked coals, and the oil pressed from it burns nearly as well.
-Armoured like a small shield. The meat inside is worth the trouble.
-Something in the water near the Wailing Caverns changed it. Eating one may change you as well, for a while.
-River folk say a meal of it clears the mind. It is the swimming upstream that makes it wise.
-Older, larger and wiser than its cousin, which did not keep it off your hook.
-A hard fighter from warm southern seas, and a favourite on every tavern board from Booty Bay to Gadgetzan.
-Its brow shines like true mithril. More than one miner has tried to smelt one.
-Its scales boil down into an oil that makes the skin as hard as rock. It prefers the night.
-Polished like a parade breastplate, and nearly as heavy.
-It comes inshore only in the cold months, and the cooks who know it wait all year.
-It runs when the days are long. Coastal folk mark the season by it.
-Hold it by the middle, and only once.
-A river fish from wild country, as red at the gills as a troll's warpaint.
-It feeds after dark. A soup of it steadies a spellcaster's nerves.
-It feeds by day, the nightfin's opposite in nearly everything, and shares its water all the same.
-Not strictly a fish. It disagrees with being caught and will make that known.
-Pale as river ice, from the cold clear lakes of the north.
-You will want both hands, and perhaps a friend.
-%.1f lb
-New in your fish journal: %s, %s.
-New in your fish journal: %s.
-Your heaviest %s yet: %s (it was %s).
-Fish journal
-every catch is written into your fish journal: how many of each kind, where you first landed it, and a weight made up for fun with your best of each (/cchud journal opens it)
-Bait %s
-No bait
-Caught %d
-Got away %d
-Fishing interface
-with a fishing pole in your hands: the fish of the water you stand at (the ones you have not landed here stay hidden), your Fishing skill and what your bait adds, how many you caught and how many got away, how long your bait lasts, and your latest catches
-A curious one: +%d%%
-Keep your lure beside the fish
-Next catch +%d%%
-Hold %s: the lure runs along the line
-%d in a row
-A game while the float is out
-played on the cast bar while your line is out: hold a trigger and your lure runs along the line, let go and it drifts back; keep it beside the shadow of the fish. The better you do, the heavier the made-up weight of your next catch. It takes no button and never touches your cast or your catch
-%d landed, %d kinds, %d got away
-Heaviest: %s, %s
-Fish
-Waters
-Nothing landed yet. Take a pole to the water.
-Landed: %d
-Heaviest: %s, at %s
-First landed: %s
-Landed here: %d
-Kinds found here: %d
-Choose
-Close
-open or close your fish journal: every kind you have landed, your heaviest of each, and the waters you have fished
 Chat fades when quiet
 chat text fades out after a few seconds without new messages
 Seconds before chat fades
@@ -979,66 +543,6 @@ messages selling gold or services with a web address, and the same message repea
 Hide repeated guild recruitment
 in public channels a guild's recruiting message is shown once; the same player's again, or one nearly the same, within 15 minutes is hidden (never from your group, guild or friends)
 list the chat messages hidden as spam lately
-Flight
-landing early
-landing at the next flight point
-destination unknown
-a guess from the distance
-first flight on this route: learning its time
-landing
-%s: about %s, a guess from the distance
-%s: about %s
-%s: first flight on this route, time unknown
-On a flight, destination unknown
-%s: flight time learned, %s
-Landing early: %s, about %s
-Landing early at the next flight point
-crisp and cold, snow underfoot and your breath hanging in the air
-bitterly cold, with a wind off the peaks that finds every gap in your armour
-hot and humid, the air thick enough to drink
-sticky heat under the canopy, and the insects loud
-hot and dry, with dust on the wind
-baking sun and cracked earth; drink when you can
-smoke and ash on a hot wind
-scorched air, with cinders drifting
-grey and cold, a damp mist that clings
-a chill in the air and little light to speak of
-mild and fair, with a gentle breeze
-pleasant weather, good for travelling
-cool and green, the leaves whispering
-soft light through the trees, and the air fresh
-muggy and damp, the ground soft underfoot
-warm, wet air and the smell of the bog
-%s at %s: %s
-%d flight routes known.
-Flights: time and countdown
-on a flight, where to and how long is said in chat, and a bar at the top of the screen counts down to the landing; each route's time is learned from your flights
-Flights: your mount along the bar
-a gryphon, a wind rider or a bat (whichever the flight master gave you) glides along the flight bar towards where you land
-Flights: the weather where you land
-on landing, chat says what the air is like where you came down, as the place usually is (hot and humid in Stranglethorn, snow underfoot in Dun Morogh), and the time of day
-list the flight routes whose times are known
-Grounded! +%d
-Bumped: the run ends
-%s flap  ·  dodge the treetops and zeppelins
-%s net the riders for flight gold  ·  %s high altitude
-%d flight gold
-%s flap
-%s net
-%s high altitude
-%s: back to the game (%d flight gold)
-%s: a game on the way
-The flight game is off: /cchud flightgame on
-The flight game is played on a flight.
-Not in a fight.
-Flight game: play / high altitude
-Flights: a game on the way
-on a flight a small game is offered under the flight bar, and one button starts it (only that button is taken until you do): flap your mount over the treetops and past the zeppelins, and net the riders coming the other way, grounding them for flight gold. The same button again is high altitude: the game is put away and the buttons are the game's again. Never in a fight, gone on landing
-on a flight: start the flight game, or take it to high altitude and back
-Cinematic flights
-on a flight master's flight the screen turns to film: black bars, the HUD faded back, the camera drawn out wide and swinging slowly round you and your mount, with the flight bar in the top bar. The flight game, a window or a button steps out of it, and it bows out as you come in to land
-Cinematic flights: the camera circles you
-on film, the camera circles slowly round you and your mount, a whole turn in about a minute and a half, and comes round behind you again before you land. Off: a still shot
 A flight is a good moment for it.
 You have played for %s.
 Time for a sip of water
@@ -1077,138 +581,6 @@ Debug reports
 gather the troubleshooting reports by themselves: when you log in, and again when you reload or log out (they are kept in the saved settings)
 the moments the game stood still since you logged in, and how much of each was the HUD's own work
 what the game keeps secret about your target's class, and which ways can still show it (run once, on an enemy player in a battleground)
-All
-Equipment
-Consumables
-Trade goods
-New
-Smart
-By type
-As in your bags
-Reagents
-Other
-Nothing here.
-Empty slots
-Sold %s: the vendor can sell it back to you.
-Armour can't be changed in a fight.
-Keyring
-Backpack
-%d of %d slots used
-Put down
-Pick up
-Use
-To bags
-To bank
-Attach
-Trade
-%s or %s: to the mail
-%s or %s: to the vendor
-%s or %s: to the bank
-%s or %s: to the trade
-%s or %s: to the auction house
-%s or %s: to the guild bank
-%s or %s: to your character
-%s or %s: to the loot
-%s or %s: other window
-Controller buttons return after the fight.
-%s or %s: back to bags
-Hold to destroy
-All bags
-Only this bag
-Put in
-Pick up bag
-More
-Sort
-Bags
-%d free
-Empty slot
-In a fight, close your bags with B.
-for the bank
-no mark
-No empty slot.
-Put down here
-Split stack
-Mark: %s
-Item details
-Destroy
-Sort bank
-Sort bags
-Show bags
-Show bank
-Sell advised items
-Let go to destroy
-This item begins a quest.
-This is a quest item.
-Destroy %s?
-The game kept %s: destroy it from its own bags.
-Destroyed %s.
-One bag window with quick filters
-your bags in one window of the HUD's own, in place of the game's: every item together, the empty slots gathered at the end, your bags in a row of their own, and quick filters along the top (LB and RB). The bank too, while it is open. Off: the game's own bags
-Bag window: order
-Smart: what you use first (consumables, items with a use), then the rest by kind, junk last and faded. By type: in sections under their own headings. As in your bags: the game's own order
-Right, then.
-Och, what a heap.
-Now, let's see, let's see...
-Elune grant me patience.
-By the Naaru, such a jumble.
-Blasted pack.
-A tidy pack is a light pack.
-Bah. Too much clutter.
-Dead weight, the lot of it.
-Patience. The Earth Mother provides.
-Ey, what we got here, mon?
-Such clutter. Unbecoming.
-Time is money. Let's count it.
-Aye, that'll do.
-Elune be thanked.
-The Light provides.
-Hrm. Good enough.
-Hm. Enough to fight with.
-Travelling light. Good.
-Acceptable. Barely.
-Not a slot to spare. The junk would fetch %s: selling it makes room.
-Not a slot to spare. Anything I won't need on the road can wait in the bank.
-Junk: %d, worth %s here. X sells the one I've picked; Smart sell takes it all.
-%d of these belong in the bank: it holds more of the same, or I marked them. Deposit puts them away.
-Only %d slots left. The junk would fetch %s at any vendor.
-Only %d slots left. Time to sell or bank a few things.
-New since I last looked: %d. The gold dot marks each one.
-Worth selling: %d. The Sell filter gathers them, and each tooltip says where it fetches most.
-Junk: %d, worth %s. The next vendor can have it.
-Just the essentials. Nothing worth selling.
-All in order, and %d slots free.
-Your gear's mended: %s.
-I can mend your gear for %s; a broken piece gives you none of its armour or stats.
-Your bags are full. I'll take %d things for %s: Smart sell, and you have room again.
-I'll give you %s for %d things: the junk, and what the auction house wouldn't pay more for. Smart sell, and it's done.
-Keep the %d the auction house wants: it pays %s more than I would.
-Your bags are full. Sell me something before you buy.
-Nothing in your bags I'd pay well for. Have a look at my wares.
-%d of what you carry belong in here: I hold more of the same, or you marked them. Deposit puts them away.
-I hold more of %d things you carry. Withdraw tops your bags up before you head out.
-Your bags are nearly full. Leave what you won't need on the road with me.
-All safe with me, and your bags have %d slots free.
-Nothing for you today. I checked twice.
-Letters for you: %d, nothing attached. Read them when you like.
-Letters for you: %d. In them: %s.
-Take everything empties them in one go.
-Coin on delivery: %d. Those you open and pay for yourself.
-Your bags are full: the items wait in their letters.
-Where to? Point at a place and I'll tell you how long the ride takes.
-%s: about %s by the map. You haven't flown that one yet.
-%s: about %s, going by your last flight there.
-%s: I can't say how long yet. Fly it once and I'll know.
-%d got away. This water wants more skill than I have: bait helps, and so does a better pole.
-No bait on the hook. It adds to my skill, so fewer get away.
-Bait's nearly spent. Another on the hook keeps my skill up.
-Fish here I haven't landed yet: %d. Keep casting.
-I've landed every fish this water has. Somewhere new, then.
-Nothing landed yet. The first fish of every water goes in here.
-Kinds landed: %d. Every water hides a few more: the fishing panel shows a ? for each I haven't caught there.
-Rested by the fire: the next %d experience from kills comes double.
-No rest saved up. A night at an inn or in a city, and kills give double experience for a while.
-Narrative: characters in the windows
-every window the HUD improves has someone who helps you, with their portrait and a short line on what is in front of you and why: you over your bags and at the water, the vendor, the banker, the Postmaster, the flight master, the Broker at the auction house and The Mentor at your profession; off: the windows are plain and quiet
 HUD preset: %s, to match the camera
 preset: %s
 A layout named '%s' was added to the game's Edit Mode. Choose it there to use it (Game Menu > Edit Mode > Layout).
@@ -1222,6 +594,7 @@ Action
 a third-person view: slim vertical bars beside your character, every effect on; out of combat things fade
 Classic
 our frames where WoW has always had them, calmer effects, the game's gamepad bars as they are
+Minimal
 only what you need: friendly NPCs show their plate (with what they do) only while you point at them, aim at them or target them; names without titles; out of combat your bars rest as a faint hint (low health always shows)
 Open world
 a clean screen for exploring: slim bars beside you that rest faded, plates without power bars, chat that fades
@@ -1290,6 +663,7 @@ Tick “Show advanced options” on the main page for every setting.
 Modules
 Quick switches
 General
+Its settings show here when it is on.
 HUD
 The options panel is not available in this client.
 Enabled
@@ -1405,6 +779,7 @@ Quest progress
 Farm list
 Map
 Flight bar
+Bags
 Mail
 Item advice
 Appearances
@@ -1481,3 +856,634 @@ compare what is on screen with the settings (check all lists every row)
 save a description of this client's Gamepad UI (for troubleshooting)
 show this list
 the last errors the HUD met, also after a reload (to report them)
+All
+Equipment
+Consumables
+Trade goods
+New
+Smart
+By type
+As in your bags
+Reagents
+Other
+Nothing here.
+Empty slots
+Sold %s: the vendor can sell it back to you.
+Armour can't be changed in a fight.
+Keyring
+Backpack
+%d of %d slots used
+Put down
+Pick up
+Use
+To bags
+To bank
+Attach
+Trade
+%s or %s: to the mail
+%s or %s: to the vendor
+%s or %s: to the bank
+%s or %s: to the trade
+%s or %s: to the auction house
+%s or %s: to the guild bank
+%s or %s: to your character
+%s or %s: to the loot
+%s or %s: other window
+Controller buttons return after the fight.
+Close
+%s or %s: back to bags
+Hold to destroy
+Choose
+Back
+All bags
+Only this bag
+Put in
+Pick up bag
+More
+Sort
+%d free
+Empty slot
+In a fight, close your bags with B.
+for the bank
+no mark
+No empty slot.
+Put down here
+Split stack
+Mark: %s
+Item details
+Try on
+Destroy
+Sort bank
+Sort bags
+Show bags
+Show bank
+Sell advised items
+Let go to destroy
+This item begins a quest.
+This is a quest item.
+Destroy %s?
+The game kept %s: destroy it from its own bags.
+Destroyed %s.
+Bag window: order
+Smart: what you use first (consumables, items with a use), then the rest by kind, junk last and faded. By type: in sections under their own headings. As in your bags: the game's own order
+Grand Master
+Master
+Artisan
+Expert
+Journeyman
+Apprentice
+Reached level %d (from %d)
+Reached level %d
+Defeated %s and %d more in %s
+Defeated %s
+%s: now %s, up to %d
+%s reached %d
+%d new flight paths, the last %s
+New flight path: %s
+New mount: %s
+New companion: %s
+New toy: %s
+Achievement: %s
+The camp
+At rest
+By the fire
+Dawn
+Morning
+Afternoon
+Evening
+Night
+%s in %s
+With %s
+The campfire scene is off.
+The campfire scene waits until you are out of combat.
+play the campfire scene now
+Top
+Bottom
+N
+NW
+W
+SW
+S
+SE
+E
+NE
+The quest compass is off: /cchud compass on
+The compass needs to know where you are, and the game does not say it here.
+Quest compass: place
+at the top of the screen, or at the bottom in the experience bar's place (the bar then goes to the top)
+a few marks on the quest compass, around you, for twenty seconds
+Fishing mode: off.
+Fishing: %s to cast
+No bait: %s twice to use %s
+%s to put the pole away
+Fishing mode: %s to cast your line, and again to hook the fish when the float bobs.
+%s to hook, %s to cast again
+Fishing mode needs a fishing pole in your hands.
+You do not know Fishing.
+Fishing mode: one button casts and hooks
+Fishing button: %s
+One press to cast again
+while the float is out, your fishing button hooks the fish and A casts a fresh line in one press; off: A is yours
+Bait on a double press
+press your fishing button twice quickly: the second press puts the best bait in your bags on your pole, when the pole has none
+Gamepad bars put away while fishing
+with a fishing pole in your hands the gamepad bars are hidden, so the water is clear to look at; the fishing prompt shows the button to cast. They are back the moment a fight starts or the pole is put away
+one-button fishing off for now, or on again (with a pole in your hands it is on by itself)
+the button that fishes: your interact button to begin with (Square or X), or any other, a trigger for one (rt)
+Durotar's coast is red rock and warm shallows. Trolls of the Echo Isles say the mackerel run thickest when the tide carries the smell of the islands' cooking fires.
+The lakes of Mulgore are small, clear and patient. The tauren fish them the way they do everything else: slowly, and with thanks.
+Every oasis in the Barrens is a meeting place. Whatever drinks there by day, something swims under it by night.
+The pools of Teldrassil lie in the shade of one tree. Night elf anglers swear the fish there have never seen the sun and do not miss it.
+Darkshore's water is grey, cold and full of wrecks. Half of what bites off Auberdine has made a home in somebody's lost cargo.
+The rivers of Ashenvale run under leaves older than most kingdoms. The fish are quick, and the sentinels are quicker to ask what you are doing there.
+Down among the Thousand Needles the water is scarce and jealously kept. A fish from here has earned its place.
+Stonetalon's lakes sit high and cold between the peaks. The goblins would have drained them by now if the fishing were not so good.
+The coast of Desolace is bones and grey surf. Something down there has a taste for both.
+Feralas is green all the way down to the waterline. Its rivers are deep, warm and very much alive.
+Nobody is sure where Dustwallow's land stops and its water begins. Fish from the shore, and count your toes afterwards.
+Steamwheedle Port has the only water worth the name in Tanaris. The goblins will sell you the right to fish it, twice if you let them.
+Under Azshara's bright bay lies a drowned city. Old anglers say the big ones live in what used to be its gardens.
+The pools of Felwood glow, and not in a good way. What still swims in them is stubborn beyond reason.
+The hot springs and tar-rimmed lakes of Un'Goro have kept things the rest of the world forgot. Some of them bite.
+Lake Elune'ara in Moonglade is as calm as a held breath. The druids ask only that you take no more than you will eat.
+Silithus is sand, wind and the sound of wings. If you have found water to fish here, tell no one.
+The lakes of Winterspring freeze at the edges and steam in the middle. The fish there are fat for the cold and worth the walk.
+The pools of Orgrimmar are fished by peons with nothing better to do and by old grunts who say the same. Both tell you the big one got away.
+A fish from the ponds of Thunder Bluff has lived its whole life a long way above the plains. It seems calm about it.
+Darnassus keeps its waters as carefully as its temples. The fish have grown used to being admired.
+The lakes of the Alterac Mountains are snowmelt, and the ogres and the Syndicate fish them when no one is looking.
+Arathi's shores have seen more armies than anglers. The fish have long since stopped caring whose banner flies above the water.
+The Badlands are dust from one end to the other. A bite here is a small miracle; treat it as one.
+The coast of the Blasted Lands is red, scoured and quiet. Whatever lives in that surf has learned to live with a great deal.
+The lakes of Tirisfal lie still under a sickly sky. The Forsaken fish them out of habit; the dead do not eat much, but they remember liking it.
+Silverpine's long coast is all mist and pine shadow. The fishing is good, which is the one cheerful thing anyone says about the place.
+The rivers of the Western Plaguelands still run, though not clean. What you pull from them, look at twice.
+Few people fish the Eastern Plaguelands, and fewer say so. The water keeps what the plague left of it.
+Hillsbrad's river and its long southern shore have fed both sides of every quarrel fought over them.
+The Hinterlands keep their lakes high among the trees, where the Wildhammer dwarves fish from gryphon-back when they think no one can see.
+The lakes of Dun Morogh are ringed with ice most of the year. A dwarf will cut a hole, sit down with a pint and call it a good day whatever bites.
+The Searing Gorge has lava where other lands have rivers. Bring something to drink instead.
+The Burning Steppes are ash and embers. If the water here gives you anything at all, it will be hot.
+Every child in Elwynn learns to fish at Crystal Lake or Stone Cairn. The smallfish there have been outwitting them for generations.
+Deadwind Pass has little water and less welcome. What is in the pools below Karazhan is best left there.
+The river along Duskwood's edge is black at any hour. The fish do not seem to mind the dark; the anglers do.
+The Loch is the pride of Loch Modan, held back by the great Stonewrought Dam. Dwarves measure a fishing story against it, and the Loch usually wins.
+Lake Everstill in Redridge is as pretty as a painting and fished from every dock in Lakeshire. The townsfolk know each good spot and will not tell you one.
+From its jungle rivers to the wild southern cape, Stranglethorn has the richest water on the continent. Booty Bay's anglers hold a tournament over it, and nearly all of them cheat.
+The Swamp of Sorrows is green water under green trees. The fish taste of mud, and the locals like them that way.
+Westfall's fields failed, but its coast did not. The folk who stayed live off the long grey shore.
+The Wetlands are well named. Menethil Harbor's docks are the driest place to fish them, and the crocolisks know it.
+The canals of Stormwind are fished by children, pensioners and at least one member of the nobility in disguise. Nobody asks what else is in the canals.
+The Forlorn Cavern holds Ironforge's one quiet pool. Old dwarves fish it for hours and never say a word.
+The canals of the Undercity run a green that has nothing to do with algae. The Forsaken who fish them are not doing it for supper.
+The first fish most anglers ever land, and bright enough that they remember it.
+Slick, quick and common along every warm coast. It is better grilled than its name suggests.
+All mouth, and happiest in water you would not drink.
+Small, toothy and fearless. A shoal of them is said to have chased a bear out of the Loch.
+A flash of colour under the surf. Sailors count one on the line as luck for the voyage.
+A patient bottom-feeder with whiskers like a dwarven elder.
+No one eats it twice. Alchemists buy every one they can get.
+Its fins glow like banked coals, and the oil pressed from it burns nearly as well.
+Armoured like a small shield. The meat inside is worth the trouble.
+Something in the water near the Wailing Caverns changed it. Eating one may change you as well, for a while.
+River folk say a meal of it clears the mind. It is the swimming upstream that makes it wise.
+Older, larger and wiser than its cousin, which did not keep it off your hook.
+A hard fighter from warm southern seas, and a favourite on every tavern board from Booty Bay to Gadgetzan.
+Its brow shines like true mithril. More than one miner has tried to smelt one.
+Its scales boil down into an oil that makes the skin as hard as rock. It prefers the night.
+Polished like a parade breastplate, and nearly as heavy.
+It comes inshore only in the cold months, and the cooks who know it wait all year.
+It runs when the days are long. Coastal folk mark the season by it.
+Hold it by the middle, and only once.
+A river fish from wild country, as red at the gills as a troll's warpaint.
+It feeds after dark. A soup of it steadies a spellcaster's nerves.
+It feeds by day, the nightfin's opposite in nearly everything, and shares its water all the same.
+Not strictly a fish. It disagrees with being caught and will make that known.
+Pale as river ice, from the cold clear lakes of the north.
+You will want both hands, and perhaps a friend.
+%.1f lb
+New in your fish journal: %s, %s.
+New in your fish journal: %s.
+Your heaviest %s yet: %s (it was %s).
+Bait %s
+No bait
+Caught %d
+Got away %d
+A curious one: +%d%%
+Keep your lure beside the fish
+Next catch +%d%%
+Hold %s: the lure runs along the line
+%d in a row
+A game while the float is out
+played on the cast bar while your line is out: hold a trigger and your lure runs along the line, let go and it drifts back; keep it beside the shadow of the fish. The better you do, the heavier the made-up weight of your next catch. It takes no button and never touches your cast or your catch
+%d landed, %d kinds, %d got away
+Heaviest: %s, %s
+Fish
+Waters
+Nothing landed yet. Take a pole to the water.
+Landed: %d
+Heaviest: %s, at %s
+First landed: %s
+Landed here: %d
+Kinds found here: %d
+open or close your fish journal: every kind you have landed, your heaviest of each, and the waters you have fished
+Flight
+landing early
+landing at the next flight point
+destination unknown
+a guess from the distance
+first flight on this route: learning its time
+landing
+%s: about %s, a guess from the distance
+%s: about %s
+%s: first flight on this route, time unknown
+On a flight, destination unknown
+%s: flight time learned, %s
+Landing early: %s, about %s
+Landing early at the next flight point
+crisp and cold, snow underfoot and your breath hanging in the air
+bitterly cold, with a wind off the peaks that finds every gap in your armour
+hot and humid, the air thick enough to drink
+sticky heat under the canopy, and the insects loud
+hot and dry, with dust on the wind
+baking sun and cracked earth; drink when you can
+smoke and ash on a hot wind
+scorched air, with cinders drifting
+grey and cold, a damp mist that clings
+a chill in the air and little light to speak of
+mild and fair, with a gentle breeze
+pleasant weather, good for travelling
+cool and green, the leaves whispering
+soft light through the trees, and the air fresh
+muggy and damp, the ground soft underfoot
+warm, wet air and the smell of the bog
+%s at %s: %s
+%d flight routes known.
+Flights: your mount along the bar
+a gryphon, a wind rider or a bat (whichever the flight master gave you) glides along the flight bar towards where you land
+Flights: the weather where you land
+on landing, chat says what the air is like where you came down, as the place usually is (hot and humid in Stranglethorn, snow underfoot in Dun Morogh), and the time of day
+list the flight routes whose times are known
+Grounded! +%d
+Bumped: the run ends
+%s flap  ·  dodge the treetops and zeppelins
+%s net the riders for flight gold  ·  %s high altitude
+%d flight gold
+%s flap
+%s net
+%s high altitude
+%s: back to the game (%d flight gold)
+%s: a game on the way
+The flight game is off: /cchud flightgame on
+The flight game is played on a flight.
+Not in a fight.
+Flight game: play / high altitude
+on a flight: start the flight game, or take it to high altitude and back
+Cinematic flights: the camera circles you
+on film, the camera circles slowly round you and your mount, a whole turn in about a minute and a half, and comes round behind you again before you land. Off: a still shot
+Offline
+Dead
+Off
+In a healing spec
+Always
+Too far
+Healer's party and raid
+in a party: your party beside your character, each with the button that targets them; in a raid: slimmer frames. Each shows only how much healing they need, a debuff you can cure, and whether they are in range
+%d%% to sell
+Sure to go (%d%%)
+That one sells itself (%d%%)
+I think it'll sell (%d%%)
+Should find a buyer (%d%%)
+Even odds (%d%%)
+Could go either way (%d%%)
+A bit of a gamble (%d%%)
+Might sit a while (%d%%)
+I wouldn't hold my breath (%d%%)
+Long odds, friend (%d%%)
++%s over a vendor
+no price known yet
+a vendor pays as much
+The Broker
+Market
+every coin counted, friend
+Nothing in your bags can be sold here.
+No prices in the last 7 days.
+One day of prices so far: a candle comes each day you visit the auction house.
+7 days, a candle a day: green closed higher, red lower
+30 days, the day's lowest: green up, red down
+No price history yet: read the auction house on a few days.
+One day of prices so far: the line grows each day you visit the auction house.
+Asking %s each, %s for the %d you let go; %d stay with you
+Asking %s each, %s for all %d
+Lowest
+read %s
+Usual
+7 days: %s to %s
+Up: %d auctions, %d items
+%s each, %s for all %d
+You posted %d here, %d auctions sold
+No price known: read the auction house first.
+Nothing in your bags to sell here.
+Nothing sells better here than at a vendor today; %d might, with patience.
+Best first: %d sell better here than at a vendor, %d more with patience.
+Empty bags, friend. Bring me something to sell.
+Nothing here beats a vendor today. %d might, with a little patience.
+No sure profits in these bags, friend. %d could pay if you wait.
+Best on top: %d here beat any vendor, %d more for the patient.
+%d pay better here than at a vendor, best first. %d more if you wait.
+Top of the pile pays best: %d sure sales, %d more if you can wait.
+No prices yet: %s reads the auction house.
+Prices read just now: %d.
+%d prices, read %s.
+%d prices, read %s. %s reads them again.
+Haven't read the board yet. %s and I'll fetch every price.
+No prices yet, friend. %s reads the whole board.
+Prices fresh off the board, friend: %d of them.
+Just read the board: %d prices, still warm.
+%d prices, read %s. Near enough, friend.
+Last look at the board was %s: %d prices.
+Prices from %s, stale as old bread. %s reads the board again.
+%d prices, but I read them %s. %s and I'll look again.
+Showing what you keep too. %s hides it.
+Kept back: %d, for your professions, your gear and your marks. %s shows them.
+Your keepers are on the list too. %s tucks them away.
+Showing what you keep as well. %s hides it again.
+%d kept back: trade goods, gear to wear, things you marked. %s shows them.
+Set %d aside for your crafts, your back and your marks. %s if you want them.
+each
+no data
+Quick sale
+Patient
+Read all prices
+Hide kept
+Show kept
+Line
+Candles
+Post
+%d of %d
+Post %d of %d for %s each
+Post %d for %s
+Post all %d for %s
+This client's auction house cannot be posted to from here.
+Posted %d for %s.
+Market at the auction house: open / close
+Auctioneer's greeting on the Market
+a goblin auctioneer says one short line, from the game's own sounds, when the Market opens; off: it opens in silence
+Market: show what you keep
+the Market lists what you keep too: what your professions still learn from or make into something worth more, and what you marked to keep; off: only what you would sell
+Market: price chart as candles
+the Market's price chart is a candle a day for the last 7 days (where the price opened, went highest and lowest, and closed: green when it closed higher, red lower); off: a line of the day's lowest price over 30 days
+open or close the Market (a tab of the auction house)
+which auction house this client has (for troubleshooting)
+Open a profession's window and I'll look over your recipes.
+That's the cap, %d. A trainer has the next rank for you.
+Nothing more to learn at %d. Go and see a trainer about the next rank.
+You've outgrown your recipes. See a trainer: %s is waiting at %d.
+%d more to %d, and what you know won't take you there. A trainer has %s for you at %d.
+You've outgrown your recipes. See a trainer: %s is waiting.
+Your recipes stop teaching you %d short of %d. Ask a trainer for %s.
+Your recipes run dry %d short of %d. A trainer will have something new.
+What you know won't carry you the last %d. Time to see a trainer.
+%s won't teach you much now, but it's the best you have. %d more to %d.
+Slow going from here: %s gives a point now and then. %d to go.
+First you'll want %s, %s. The guides start this stretch with it.
+Learn %s, %s, and we'll begin: %d more to %d.
+%d more to %d. The guides send you out for %s until %d.
+Gathering teaches you here: %s until %d.
+%d more to %d. Start with %s, or %s if you'd rather: %s.
+%s first, as the guides have it. %s does the job too: %s.
+%d more to %d. Start with %s.
+%s is your best teacher now. %d points to %d.
+Steady hands. %s first, and %d to go.
+at a trainer
+from a vendor
+found as loot
+from a quest
+cheaper materials
+materials from a vendor
+materials you gather yourself
+it sells well
+something you'll use
+fewer crafts
+a recipe you find or buy
+other materials
+the guides' first choice
+Open a profession's window for a levelling plan.
+At the cap, %d. A trainer has the next rank.
+%d more to %d; your recipes stop short. A trainer has %s at %d.
+%d more to %d; your recipes stop short. A trainer has %s.
+Your recipes stop %d short of %d. A trainer has more.
+%d more to %d. Best now: %s, green (a point now and then).
+%d more to %d. First learn %s, %s.
+%d more to %d. Gather %s until %d.
+%d more to %d. First: %s, or %s (%s).
+%d more to %d. First: %s.
+To gather or buy
+%d crafts: %s
+Learn it %s, at %d.
+Learn it %s.
+%s: %d in your bags, %d in the bank, %d each
+The guides level this stretch by gathering %s.
+%s: you have %d, the plan uses %d
+for %s
+The Mentor: what your bank can make
+What your bank can make
+Nothing more to make with what's in your bank.
+%d you can make counting your bank, %d of them only with it.
+The Mentor: %s %d > %d
+The Mentor
+Levelling plan
+or
+Gather %s
+to learn
+Hide
+The plan
+Farm this
+Farm all
+With the bank
+Use the plan
+twice to hide
+Nothing here to try on.
+%d added to the farm list.
+Nothing missing: you have what it takes.
+Open a profession's window to make a plan.
+The Mentor (levelling plan): show / hide
+show the levelling plan of the profession window you opened last, with the controller's buttons on it
+Left of the quests
+Right of the quests
+Under the quests
+The farm list is full.
+Farm list: %s, %d wanted.
+Farm
+%d more
+Nothing to farm yet.
+A stack more
+Take off
+Clear
+Done
+Take everything off the farm list?
+Farm list: choose / done
+Farm list: add the item you point at
+That is not on the farm list.
+The farm list is empty.
+Farm list: where it sits
+the farm list to the left of the quest list, to its right, or under its quests
+the farm list beside the quest list: choose with the controller; add <item> [how many], remove <item>, clear, or left / right / bottom for where it sits
+Threat percent
+your share of the threat as a number beside the threat icon, on the target frame and nameplates
+Health number
+the health left, shortened (12.3k), on the bar (not on compact plates: the percent says enough there)
+Your debuffs
+your debuffs on the unit, above its name, with their time
+Everyone's debuffs
+the debuffs the game marks for nameplates from everyone, not only yours
+Enemy buffs
+an enemy's buffs beside its debuffs: the ones that matter (important, enraged, or ones you can dispel or steal), or all of them when Only the effects that matter is off
+Crowd control icon
+a large icon with its time when the unit is stunned, rooted, feared...
+Aggro glow
+a shield icon and a glow behind the name: red while it attacks you, red and yellow when you are about to pull it, yellow and blue when you are losing it, blue when it is not on you
+Quest marker
+a gold marker on units your quests still need
+Nameplate animations
+plates fade in, low health breathes, crowd control shimmers
+Small
+Normal
+Large
+Full name
+Short name
+No name
+Full
+Minimal mini
+Nameplate size
+how big the bars on nameplates are: small and slim, normal, or large (wider and taller)
+Names on nameplates
+the name on a plate with a health bar: in full, cut short, or left out (the target frame gives it in full; the level and class icon stay). A plate with no bar, a friendly NPC's, always keeps its name
+Nameplate look
+the nameplate switches in one press. Full: everything. Minimal: no power bar, guild or title, short names. Minimal mini: small bars with health, your debuffs and the buffs that matter, level and class, no name (the target frame has it). Threat, crowd control and loud casts always stay
+Player titles
+show a player's title with their name
+Guilds and NPC jobs
+a line under the name: the player's guild, or what the NPC does
+Bars for friends in a fight
+friendly plates show health, power and casts while that unit is in combat
+The game's own friendly nameplates
+leave friendly plates (your party, other players, friendly NPCs) to the game's own look; ours only on enemies
+Power bars
+a thin mana, rage or energy bar under the health bar
+Cast target
+who a cast is aimed at, next to the spell's name
+Health percent
+the health percent on the bar
+Name on your target's plate
+off: your target's plate drops its name and level (the target frame shows them)
+Levels on nameplates
+the level in front of an enemy's name, coloured by difficulty
+Compact nameplates
+nameplates about half as wide
+Loud enemy casts
+an enemy's cast flashes, swells and pulses ever faster until it lands, so it can be interrupted in time
+Class icons on nameplates
+a player's class icon in front of their name, friend or enemy
+What NPCs do, as icons
+an icon over friendly NPCs that offer something: a bag over vendors, an anvil over smiths who repair, a book over trainers... (the game's own icons; they show even while the plate itself waits to be pointed at)
+Friendly NPCs only when pointed at
+the plates of friendly NPCs (vendors, quest givers, townsfolk) show only while you point at them, like their tooltip
+Names on things you can interact with
+a name over ore, chests, plaques and the like while you face them (off: they stay bare, as the game's own prompt already says what they are)
+Mini plates
+minions, critters and grey enemies that give no experience get a small plate: a slim bar with your debuffs on it and no name (a critter, with no bar, keeps its name; the game's own option decides whether they have plates at all)
+Party nameplates in dungeons: names only
+inside a dungeon or raid the game draws friendly players' nameplates itself and addons may not change them: in there the game's own options are set to show them as class-coloured names without bars, like ours, with the game's bars back while you fight (when bars for friends in a fight are on); all put back when you leave
+Party nameplates in dungeons: hidden
+inside a dungeon or raid, switch the game's nameplates for friendly players off altogether (and back the way you had them when you leave)
+show what the game gives for your target's name (for troubleshooting)
+list the nameplates on screen and whether they wear our look (for troubleshooting)
+Right, then.
+Och, what a heap.
+Now, let's see, let's see...
+Elune grant me patience.
+By the Naaru, such a jumble.
+Blasted pack.
+A tidy pack is a light pack.
+Bah. Too much clutter.
+Dead weight, the lot of it.
+Patience. The Earth Mother provides.
+Ey, what we got here, mon?
+Such clutter. Unbecoming.
+Time is money. Let's count it.
+Aye, that'll do.
+Elune be thanked.
+The Light provides.
+Hrm. Good enough.
+Hm. Enough to fight with.
+Travelling light. Good.
+Acceptable. Barely.
+Not a slot to spare. The junk would fetch %s: selling it makes room.
+Not a slot to spare. Anything I won't need on the road can wait in the bank.
+Junk: %d, worth %s here. X sells the one I've picked; Smart sell takes it all.
+%d of these belong in the bank: it holds more of the same, or I marked them. Deposit puts them away.
+Only %d slots left. The junk would fetch %s at any vendor.
+Only %d slots left. Time to sell or bank a few things.
+New since I last looked: %d. The gold dot marks each one.
+Worth selling: %d. The Sell filter gathers them, and each tooltip says where it fetches most.
+Junk: %d, worth %s. The next vendor can have it.
+Just the essentials. Nothing worth selling.
+All in order, and %d slots free.
+Your gear's mended: %s.
+I can mend your gear for %s; a broken piece gives you none of its armour or stats.
+Your bags are full. I'll take %d things for %s: Smart sell, and you have room again.
+I'll give you %s for %d things: the junk, and what the auction house wouldn't pay more for. Smart sell, and it's done.
+Keep the %d the auction house wants: it pays %s more than I would.
+Your bags are full. Sell me something before you buy.
+Nothing in your bags I'd pay well for. Have a look at my wares.
+%d of what you carry belong in here: I hold more of the same, or you marked them. Deposit puts them away.
+I hold more of %d things you carry. Withdraw tops your bags up before you head out.
+Your bags are nearly full. Leave what you won't need on the road with me.
+All safe with me, and your bags have %d slots free.
+Nothing for you today. I checked twice.
+Letters for you: %d, nothing attached. Read them when you like.
+Letters for you: %d. In them: %s.
+Take everything empties them in one go.
+Coin on delivery: %d. Those you open and pay for yourself.
+Your bags are full: the items wait in their letters.
+Where to? Point at a place and I'll tell you how long the ride takes.
+%s: about %s by the map. You haven't flown that one yet.
+%s: about %s, going by your last flight there.
+%s: I can't say how long yet. Fly it once and I'll know.
+%d got away. This water wants more skill than I have: bait helps, and so does a better pole.
+No bait on the hook. It adds to my skill, so fewer get away.
+Bait's nearly spent. Another on the hook keeps my skill up.
+Fish here I haven't landed yet: %d. Keep casting.
+I've landed every fish this water has. Somewhere new, then.
+Nothing landed yet. The first fish of every water goes in here.
+Kinds landed: %d. Every water hides a few more: the fishing panel shows a ? for each I haven't caught there.
+Rested by the fire: the next %d experience from kills comes double.
+No rest saved up. A night at an inn or in a city, and kills give double experience for a while.
+%d absorbed
+Feed on the right
+One in the middle
+%d crit heals
+%d crits
+Judgement
+Big moments: where
+a block just above the cooldown callouts on the right of your character, the newest nearest them and the older ones moving up over it as they fade, or one at a time in the middle
+show what a big moment looks and feels like
+collected
+collected from another item
+not collected yet
+Appearance
+Pick a set to put its pieces on your outfit. %s keeps it; nothing is paid before that.
+Looking through your collection...
+Your outfit is back as it was.
+%s: %d of %d pieces put on.
+%d would not go on this outfit.
+One set you have pieces of
+%d sets you have pieces of
+you can't wear this
+missing
+All %d pieces
+%d of %d pieces
+Missing: %s
+No sets yet. Items that share a name, like Green Iron Helm and Green Iron Gauntlets, show here once you have one of them.
+Undo

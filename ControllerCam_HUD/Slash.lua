@@ -217,6 +217,8 @@ SlashCmdList["CCHUD"] = function(msg)
         ns.RunProbe()
     elseif ns.commands[cmd] then
         ns.commands[cmd](arg, msg)
+    elseif ns.ModuleForCommand and ns.ModuleForCommand(cmd) then
+        ns.ModuleList.Off(ns.ModuleForCommand(cmd))        -- a module's command, and the module is off
     else
         say(L["unknown command '%s'. Type /cchud help"]:format(cmd))
     end

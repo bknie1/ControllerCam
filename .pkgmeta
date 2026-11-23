@@ -2,6 +2,18 @@ package-as: ControllerCam
 
 move-folders:
   ControllerCam/ControllerCam_HUD: ControllerCam_HUD
+  ControllerCam/ControllerCam_HUD_Bags: ControllerCam_HUD_Bags
+  ControllerCam/ControllerCam_HUD_Campfire: ControllerCam_HUD_Campfire
+  ControllerCam/ControllerCam_HUD_Compass: ControllerCam_HUD_Compass
+  ControllerCam/ControllerCam_HUD_Fishing: ControllerCam_HUD_Fishing
+  ControllerCam/ControllerCam_HUD_Flights: ControllerCam_HUD_Flights
+  ControllerCam/ControllerCam_HUD_Group: ControllerCam_HUD_Group
+  ControllerCam/ControllerCam_HUD_Market: ControllerCam_HUD_Market
+  ControllerCam/ControllerCam_HUD_Mentor: ControllerCam_HUD_Mentor
+  ControllerCam/ControllerCam_HUD_Nameplates: ControllerCam_HUD_Nameplates
+  ControllerCam/ControllerCam_HUD_Narrative: ControllerCam_HUD_Narrative
+  ControllerCam/ControllerCam_HUD_Numbers: ControllerCam_HUD_Numbers
+  ControllerCam/ControllerCam_HUD_Transmog: ControllerCam_HUD_Transmog
   ControllerCam/InputSwap: InputSwap
 
 manual-changelog:

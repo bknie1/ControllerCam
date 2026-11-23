@@ -6,6 +6,17 @@
 
 local ADDON, ns = ...
 
+-- The HUD's namespace, shared with its modules: each module is an addon of its own (ControllerCam_HUD_Fishing and
+-- the others, loaded only while switched on: Modules.lua), and the game gives every addon a table of its own, so a
+-- module's files take this one instead. ControllerCamHUD is also what the camera addon calls (Presets.lua).
+ControllerCamHUD = ControllerCamHUD or {}
+ControllerCamHUD.ns = ns
+
+-- Is this addon one of ours? The HUD and its modules (the game names the addon it blames for a refused action)
+function ns.IsOurAddon(name)
+    return type(name) == "string" and not ns.IsSecret(name) and (name == ADDON or name:sub(1, #ADDON + 1) == ADDON .. "_")
+end
+
 -- English text is the key; translations can be added later without touching the code.
 ns.L = ns.L or setmetatable({}, { __index = function(_, key) return key end })      -- Locales.lua fills it
 local L = ns.L
@@ -186,6 +197,28 @@ function ns.Toggle(arg, current)
     return not current
 end
 
+-- Money as the game writes it: 12g 3s 50c
+function ns.Money(copper)
+    copper = math.floor(copper or 0)
+    local g, s, c = math.floor(copper / 10000), math.floor(copper / 100) % 100, copper % 100
+    local parts = {}
+    if g > 0 then parts[#parts + 1] = g .. "g" end
+    if s > 0 then parts[#parts + 1] = s .. "s" end
+    if c > 0 or #parts == 0 then parts[#parts + 1] = c .. "c" end
+    return table.concat(parts, " ")
+end
+
+-- The same, in the coins' colours (gold, silver, copper), for tooltips
+function ns.MoneyColored(copper)
+    copper = math.floor(copper or 0)
+    local g, s, c = math.floor(copper / 10000), math.floor(copper / 100) % 100, copper % 100
+    local parts = {}
+    if g > 0 then parts[#parts + 1] = "|cffffd700" .. g .. "g|r" end
+    if s > 0 then parts[#parts + 1] = "|cffc7c7cf" .. s .. "s|r" end
+    if c > 0 or #parts == 0 then parts[#parts + 1] = "|cffeda55f" .. c .. "c|r" end
+    return table.concat(parts, " ")
+end
+
 ---------------------------------------------------------------------------
 -- What modules plug into: settings, commands, self-check rows
 ---------------------------------------------------------------------------
@@ -214,11 +247,25 @@ end
 function ns.RegisterCheck(fn) ns.checks[#ns.checks + 1] = fn end
 
 -- Saved data of another shape (a list, say): fn gets what was saved and returns the cleaned value.
+-- A module loaded after the settings were read (switched on during play) has its part cleaned as it registers.
 ns.saved = {}
-function ns.RegisterSaved(key, fn) ns.saved[key] = fn end
+function ns.RegisterSaved(key, fn)
+    ns.saved[key] = fn
+    if ns.db then ns.db[key] = fn(ns.db[key]) end
+end
+
+-- A setting's saved value, cleaned: the default when it is missing or of the wrong kind, a number kept in range
+local function Clean(def, v)
+    if def.kind == "boolean" then
+        if type(v) == "boolean" then return v end
+        return def.default
+    end
+    return ns.Clamp(tonumber(v) or def.default, def.min, def.max)
+end
 
 function ns.RegisterSetting(def)
     ns.settings[#ns.settings + 1] = def
+    if def.key and ns.db then ns.db[def.key] = Clean(def, ns.db[def.key]) end
     if def.command then
         local usage = "/cchud " .. def.command .. (def.kind == "boolean" and " on | off"
             or (" <%d-%d>"):format(def.min * (def.percent and 100 or 1), def.max * (def.percent and 100 or 1)))
@@ -242,6 +289,9 @@ end
 ---------------------------------------------------------------------------
 -- Saved settings
 ---------------------------------------------------------------------------
+-- Saved values no version reads any more (they are not kept for a module that may come back)
+local DROPPED = { barsFade = true, barsIdle = true, nativeScale = true }
+
 local function InitDB()
     local had = type(ControllerCamHUDDB) == "table"
     local old = had and ControllerCamHUDDB or {}
@@ -327,14 +377,19 @@ local function InitDB()
         end
     end
     for key, clean in pairs(ns.saved) do db[key] = clean(old[key]) end
+    local claimed = {}
     for _, def in ipairs(ns.settings) do
         if def.key then
-            local v = old[def.key]
-            if def.kind == "boolean" then
-                if type(v) == "boolean" then db[def.key] = v else db[def.key] = def.default end
-            else
-                db[def.key] = ns.Clamp(tonumber(v) or def.default, def.min, def.max)
-            end
+            db[def.key] = Clean(def, old[def.key])
+            claimed[def.key] = true
+        end
+    end
+    -- what no setting here claims is kept as it was: the settings of a module that is not loaded (switched off,
+    -- Modules.lua) must still be there when it is switched on again. Each is cleaned when its module registers it.
+    for key, v in pairs(old) do
+        if type(key) == "string" and db[key] == nil and not claimed[key] and ns.saved[key] == nil
+            and not DROPPED[key] and type(v) ~= "function" then
+            db[key] = v
         end
     end
     -- a first run rests, switched off, until it is known whether the HUD is wanted at all (Welcome.lua);
@@ -668,6 +723,7 @@ function ns.Apply()
     if not ns.db then return end
     if InCombatLockdown() then pending = true; return false end
     pending = false
+    if ns.LoadWanted then ns.LoadWanted() end          -- a module switched on: its addon now (Modules.lua)
     local run = ns.ShouldRun()
     for _, module in ipairs(ns.modules) do
         local ok, err = pcall(module.Apply, module, run)
@@ -686,6 +742,7 @@ pcall(f.RegisterEvent, f, "CVAR_UPDATE")        -- a game option changed in its 
 f:SetScript("OnEvent", function(_, event, arg1)
     if event == "ADDON_LOADED" and arg1 == ADDON then
         InitDB()
+        if ns.LoadWanted then ns.LoadWanted() end      -- the modules switched on, before the game logs in
     elseif event == "PLAYER_LOGIN" then
         if not ns.db then InitDB() end
         if ns.Welcome then ns.Welcome.Login() end

@@ -166,6 +166,8 @@ local function DefaultOf(key)
     for _, def in ipairs(ns.settings) do
         if def.key == key then return def.default end
     end
+    local unloaded = ns.ModuleList and ns.ModuleList.UnloadedKeys() or {}      -- a module that is not loaded
+    if unloaded[key] ~= nil then return unloaded[key] end
     return ns.DEFAULTS[key]
 end
 
@@ -272,6 +274,7 @@ function P:ResetAll()
     for _, def in ipairs(ns.settings) do
         if def.key and def.default ~= nil and def.share ~= false then db[def.key] = def.default end
     end
+    for key, default in pairs(ns.ModuleList and ns.ModuleList.UnloadedKeys() or {}) do db[key] = default end
     for unit, on in pairs(ns.DEFAULTS.units) do db.units[unit] = on end
     db.pos, db.preset, db.followRef, db.sizedFor = {}, nil, nil, nil
     ns.Apply()

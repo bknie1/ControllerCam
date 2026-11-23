@@ -44,6 +44,10 @@ local function Known()
     for key, value in pairs(ns.DEFAULTS) do
         if not known[key] and not private[key] and type(value) ~= "table" then known[key] = { default = value } end
     end
+    -- and those of the modules that are not loaded (switched off): kept, carried and taken all the same
+    for key, default in pairs(ns.ModuleList and ns.ModuleList.UnloadedKeys() or {}) do
+        if not known[key] then known[key] = { default = default } end
+    end
     return known
 end
 

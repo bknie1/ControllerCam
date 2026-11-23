@@ -27,26 +27,7 @@ local QUALITY_WORD = { grey = 0, gray = 0, poor = 0, white = 1, common = 1, gree
 ---------------------------------------------------------------------------
 -- Items
 ---------------------------------------------------------------------------
-function ns.Money(copper)
-    copper = math.floor(copper or 0)
-    local g, s, c = math.floor(copper / 10000), math.floor(copper / 100) % 100, copper % 100
-    local parts = {}
-    if g > 0 then parts[#parts + 1] = g .. "g" end
-    if s > 0 then parts[#parts + 1] = s .. "s" end
-    if c > 0 or #parts == 0 then parts[#parts + 1] = c .. "c" end
-    return table.concat(parts, " ")
-end
-
--- The same, in the coins' colours (gold, silver, copper), for tooltips
-function ns.MoneyColored(copper)
-    copper = math.floor(copper or 0)
-    local g, s, c = math.floor(copper / 10000), math.floor(copper / 100) % 100, copper % 100
-    local parts = {}
-    if g > 0 then parts[#parts + 1] = "|cffffd700" .. g .. "g|r" end
-    if s > 0 then parts[#parts + 1] = "|cffc7c7cf" .. s .. "s|r" end
-    if c > 0 or #parts == 0 then parts[#parts + 1] = "|cffeda55f" .. c .. "c|r" end
-    return table.concat(parts, " ")
-end
+-- (ns.Money and ns.MoneyColored are in Core.lua: every module writes money)
 
 local function SellPrice(link, id)
     local get = (C_Item and C_Item.GetItemInfo) or GetItemInfo
