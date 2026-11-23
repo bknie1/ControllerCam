@@ -364,7 +364,13 @@ local function CombatColor(unit, frac)
 end
 
 local function TargetHealthColor(unit, frac)
-    local dead, tapped = U.Standing(unit)
+    local dead, tapped, isPlayer = U.Standing(unit)
+    -- a player keeps their class colour in a fight too: in a battleground everyone is in one, and the health
+    -- gradient left no telling a priest from a warrior (how much is left: the percent says)
+    if isPlayer and not dead and ns.db.classColors then
+        local r, g, b = ClassColor(unit)
+        if r then return r, g, b end
+    end
     if not (dead or tapped) then
         local r, g, b = CombatColor(unit, frac)
         if r then return r, g, b end
@@ -452,10 +458,14 @@ function ns.HealthLine(fs, unit, frac, value, percent)
     return ok
 end
 
--- "73%" when the game keeps health secret: the game formats the number itself
+-- "73%" when the game keeps health secret: the game scales it (Percent100) and formats it itself. Nothing is
+-- ever worked out on a secret here: a blocked attempt counts as an addon error even inside a pcall, and in a
+-- battleground they piled up to the game's "large number of errors" warning.
 function ns.SecretPercent(fs, unit)
     if not (UnitHealthPercent and fs.SetFormattedText) then return false end
-    return pcall(function() fs:SetFormattedText("%d%%", UnitHealthPercent(unit, true) * 100) end) and true or false
+    local okP, p = pcall(Percent100, unit)
+    if not okP or p == nil then return false end
+    return pcall(fs.SetFormattedText, fs, "%d%%", p) and true or false
 end
 
 -- A hit lights the bar up; a heavy one shakes it. When a hit effect of yours just landed on this frame

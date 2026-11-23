@@ -434,7 +434,7 @@ end
 local function Wheels()
     for _, name in ipairs(WheelNames()) do
         local f = _G[name]
-        local shown = type(f) == "table" and f.IsShown and f:IsShown() == true
+        local shown = ns.ShownPlain(f)
         if shown and not D.seen[name] then
             D.seen[name] = true
             local ok, left, bottom, w, h = pcall(f.GetRect, f)

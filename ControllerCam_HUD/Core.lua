@@ -118,6 +118,14 @@ function ns.Protect(fn)
     end
 end
 
+-- Shown, plainly: true only when the game says so in a value we may look at (a secret answer is never compared:
+-- a blocked comparison counts as an addon error, even inside a pcall)
+function ns.ShownPlain(f)
+    if type(f) ~= "table" or not f.IsShown then return false end
+    local ok, on = pcall(f.IsShown, f)
+    return ok and not ns.IsSecret(on) and on == true or false
+end
+
 function ns.IsSecret(v)
     return type(issecretvalue) == "function" and issecretvalue(v) or false
 end

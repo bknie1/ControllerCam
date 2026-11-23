@@ -123,10 +123,14 @@ local function Join(amount, name, now, key)
     -- the game writes it out for us); only where it will not add them is there no total (M.secretSum says which)
     -- (whether there is one is kept apart: a total the game keeps to itself cannot even be asked if it is nil)
     if c.hasTotal == nil then c.hasTotal = true end
-    if c.hasTotal and amount ~= nil then
+    if c.hasTotal and amount ~= nil and (ns.IsSecret(amount) or ns.IsSecret(c.total)) then
+        -- the game will not add amounts it keeps to itself, and every refused attempt counts as an addon error:
+        -- not tried at all (the amounts are shown side by side instead)
+        M.secretSum = false
+        c.total, c.hasTotal = nil, false
+    elseif c.hasTotal and amount ~= nil then
         local total = c.total
         local ok, sum = pcall(function() return total + amount end)
-        if ns.IsSecret(amount) then M.secretSum = ok end
         c.total, c.hasTotal = ok and sum or nil, ok and true or false
     else
         c.total, c.hasTotal = nil, false

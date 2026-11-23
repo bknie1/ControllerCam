@@ -150,7 +150,7 @@ end
 function P:Wheels()
     for _, name in ipairs(self.FLYOUTS) do
         local f = _G[name]
-        if type(f) == "table" and f.IsShown and f:IsShown() == true and f.SetPoint and f.ClearAllPoints then
+        if ns.ShownPlain(f) and f.SetPoint and f.ClearAllPoints then
             local fx, fy = Middle(f)
             local best, bestD
             for b, m in pairs(self.moved) do

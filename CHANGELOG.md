@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.4.14
+
+ControllerCam: HUD
+- Fixed: the game's "Your AddOns are experiencing a large number of errors" warning in battlegrounds. Where the game keeps health or an amount to itself, the HUD tried working it out anyway inside a safe call and fell back when refused; nothing showed wrong, but every refusal counted as an addon error, and with a raid's worth of frames updating they piled up. Now nothing is ever worked out on a hidden value: the health percent is scaled by the game itself, crit amounts are never added, and shown-or-not answers the game keeps secret are never compared.
+- Players' bars keep their class colour in a fight, on nameplates and the target frame. In a battleground everyone is in combat, and the in-fight health colours (green, yellow, red) left no telling a priest from a warrior; the percent still says how much is left. NPCs are as before. (With **Class colours** on, as by default.)
+- Raid frames show first names only ("Taric", not "Taric Lumenshield"), kept inside their tile and cut at its edge, so names no longer run across the next tiles; how they are (80%, Dead) sits in the tile's corner. Party frames keep full names.
+
 ## 1.4.13
 
 (1.4.12 was tagged but never released: its build failed.)

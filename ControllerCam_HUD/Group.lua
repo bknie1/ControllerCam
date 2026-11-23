@@ -84,6 +84,14 @@ local function Width(native)
 end
 
 G.NARROW = 120                -- a frame narrower than this has its status after the name, not at its right end
+-- A raid member's name: the first only ("Taric" for "Taric Lumenshield"), the tiles being narrow; a party's in
+-- full. A name the game keeps to itself is shown as it is.
+function G.ShownName(unit, name)
+    if type(name) ~= "string" or ns.IsSecret(name) then return name end
+    if type(unit) == "string" and unit:match("^raid") then return name:match("^(%S+)") or name end
+    return name
+end
+
 local function NewOverlayFor(native, width)
     local o = CreateFrame("Frame", nil, UIParent)
     o:SetFrameStrata("LOW")
@@ -101,7 +109,15 @@ local function NewOverlayFor(native, width)
     -- it. On a narrow one (the game's own party frames are) a name runs past the frame's end, so there it
     -- follows the name instead of lying across it.
     o.narrow = o.width < G.NARROW
-    if o.narrow then
+    local unit = UnitOf(native)
+    o.raidTile = o.narrow and type(unit) == "string" and unit:match("^raid") and true or false
+    if o.raidTile then
+        -- a raid tile (narrow, others beside it): the name kept inside it, cut short, how they are in its corner
+        o.status = ns.FontString(o, 9, "RIGHT")
+        o.status:SetPoint("TOPRIGHT", o, "TOPRIGHT", -2, -2)
+        o.name:SetWidth(math.max(10, o.width - 28))
+        if o.name.SetWordWrap then o.name:SetWordWrap(false) end
+    elseif o.narrow then
         o.status = ns.FontString(o, 9, "LEFT")
         o.status:SetPoint("LEFT", o.name, "RIGHT", 5, 0)
     else
@@ -195,7 +211,7 @@ local function Update(o, instant)
     local pcur, pmax, token = U.Power(unit)
     o.power:SetValues(pcur, pmax, instant)
     o.power:SetColor(unpack(C.power[token or ""] or C.power.MANA))
-    pcall(o.name.SetText, o.name, ns.FullName(UnitName(unit)) or "")
+    pcall(o.name.SetText, o.name, G.ShownName(unit, ns.FullName(UnitName(unit))) or "")
     ns.ShowRaidMark(o, o, unit, 16, "RIGHT", o, "LEFT", -3, 0)        -- a raid mark: just outside, on the left
     if offline ~= o.offline then                             -- gone: their name is as faint as their bar
         o.offline = offline
@@ -547,7 +563,7 @@ local function UpdateHeal(o, instant)
         if ns.Bloom then o.health:SetIncomingColor(ns.Bloom.IncomingColor(unit)) end
         o.health:SetIncoming(ns.IncomingHeals(unit))
     end
-    pcall(o.name.SetText, o.name, (UnitName(unit)) or "")
+    pcall(o.name.SetText, o.name, G.ShownName(unit, (UnitName(unit))) or "")
     if offline ~= o.offline then
         o.offline = offline
         o.name:SetTextColor(unpack(offline and C.muted or C.text))

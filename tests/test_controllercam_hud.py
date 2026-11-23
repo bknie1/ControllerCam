@@ -857,6 +857,25 @@ class Target(unittest.TestCase):
 
 
 class Reading(unittest.TestCase):
+    def test_players_keep_their_class_colour_in_a_fight(self):
+        # a battleground: everyone in a fight, combat colours on; a player's bar is still their class's colour
+        e = Env()
+        e.ns.db.combatColors = True
+        e.target(name="Smitey", isPlayer=True, attackable=True, reaction=2, combat=True, health=500, healthMax=1000,
+                 **{"class": "MAGE"})
+        f = e.frames.target
+        e.update(0.3)
+        self.assertEqual(e.color(f.health), (0.25, 0.78, 0.92))             # the mage's blue, not the gradient
+        p = e.mock.addPlate("nameplate1", e.mock.units.target)
+        o = e.ns.Nameplates.byPlate[p]
+        e.update(0.3)
+        self.assertEqual(e.color(o.health), (0.25, 0.78, 0.92))
+        npc = e.mock.addPlate("nameplate2", e.lua.table(name="Ogre", level=38, health=500, healthMax=1000,
+                                                        attackable=True, reaction=2, combat=True))
+        e.update(0.3)
+        self.assertNotEqual(e.color(e.ns.Nameplates.byPlate[npc].health), (0.25, 0.78, 0.92))   # an NPC: as before
+        self.assertEqual(e.errors(), [])
+
     def test_target_of_target_follows_along(self):
         e = Env()
         e.target()
@@ -2865,6 +2884,20 @@ class GroupFrames(unittest.TestCase):
         native.shown = False
         e.update(0.3)
         self.assertFalse(o.shown)
+
+    def test_raid_names_are_first_names_kept_inside_the_tile(self):
+        e = Env()
+        native = e.mock.raidFrame(1, "raid1")
+        e.mock.setUnit("raid1", e.lua.table(name="Taric Lumenshield", health=8, healthMax=10))
+        o = e.ns.Group.overlays[native]
+        e.update(0.3)
+        self.assertEqual(o.name.text, "Taric")                       # the first name only
+        self.assertTrue(o.raidTile)                                  # a narrow raid tile: cut at its edge,
+        if o.raidTile:                                               # one line
+            self.assertLessEqual(o.name.width, o.width)
+            self.assertEqual(o.status.points[1][1], "TOPRIGHT")      # how they are: in its corner
+        self.assertEqual(e.ns.Group.ShownName("party1", "Taric Lumenshield"), "Taric Lumenshield")   # a party: in full
+        self.assertEqual(e.errors(), [])
 
     def test_off_and_edit_mode_give_the_games_frames_back(self):
         e = Env()
@@ -8597,26 +8630,27 @@ class Moments(unittest.TestCase):
         self.assertEqual(M.frame.label.text, "+ Holy Strike\n+ Melee  |cffffd24d×2|r")   # not Holy Strike twice
         self.assertEqual(e.errors(), [])
 
-    def test_hidden_amounts_are_added_up_where_the_game_allows_it(self):
+    def test_hidden_amounts_are_never_added(self):
+        # the game refuses arithmetic on amounts it keeps to itself, and every refused try counts as an addon
+        # error (in a battleground they reached the game's warning): never tried, the hits shown side by side
         e = self.env()
         M = e.ns.Moments
-        make = e.lua.eval("""function(v)
+        tried = []
+        make = e.lua.eval("""function(v, tried)
             local mt = {}
-            mt.__add = function(a, b)
-                local x = (type(a) == "table" and a.v or a) + (type(b) == "table" and b.v or b)
-                return setmetatable({ secret = true, v = x }, mt)
-            end
+            mt.__add = function(a, b) tried[#tried + 1] = true; error("blocked") end
             return setmetatable({ secret = true, v = v }, mt)
         end""")
-        self.land(e, 20271, make(200), True)
+        log = e.lua.table()
+        self.land(e, 20271, make(200, log), True)
         e.update(0.1)
-        self.land(e, 679, make(150), True)
+        self.land(e, 679, make(150, log), True)
         e.update(0.6)
-        self.assertTrue(M.secretSum)                                 # the game adds them: a total of its own
-        self.assertEqual(M.fight.chain.total.v, 350)
-        self.assertEqual(M.frame.label.text, "+ Judgement\n+ Holy Strike  |cffffd24d×2|r")    # the names, and the total big
+        self.assertEqual(len(log), 0)                                # not even tried
+        self.assertFalse(M.secretSum)
+        self.assertFalse(M.fight.chain.hasTotal)
+        self.assertEqual(M.frame.label.text, "+ Judgement\n+ Holy Strike  |cffffd24d×2|r")
         self.assertNotIn("crits", M.frame.number.text)
-        self.assertIn("hidden amounts added up: yes", M.Describe()[1])
         self.assertEqual(e.errors(), [])
 
     def test_small_crits_are_no_moment(self):
@@ -16049,6 +16083,26 @@ class Compass(unittest.TestCase):
         e.mock.fire("UNIT_AURA", "player")
         e.update(0.6)
         self.assertEqual(C.width, C.W)
+        self.assertEqual(e.errors(), [])
+
+
+class NoSecretArithmetic(unittest.TestCase):
+    """A blocked operation on a value the game keeps secret counts as an addon error even inside a pcall; in a
+    battleground they reached the game's "large number of errors" warning. None is ever tried."""
+
+    def test_a_hidden_health_percent_is_never_multiplied(self):
+        e = Env()
+        e.lua.execute("""
+            TRIED = 0
+            local mt = { __mul = function() TRIED = TRIED + 1; error("blocked") end,
+                         __add = function() TRIED = TRIED + 1; error("blocked") end,
+                         __lt = function() TRIED = TRIED + 1; error("blocked") end }
+            SECRET_PCT = setmetatable({ secret = true }, mt)
+            UnitHealthPercent = function() return SECRET_PCT end
+        """)
+        fs = e.g.CreateFrame("Frame").CreateFontString(e.g.CreateFrame("Frame"))
+        e.ns.SecretPercent(fs, "target")
+        self.assertEqual(e.g.TRIED, 0)
         self.assertEqual(e.errors(), [])
 
 

@@ -210,7 +210,8 @@ function W.Audit(row)
             for j = 1, limit do
                 local okF, f = pcall(row.GetAuraGroupFrame, row, key, j)
                 if not okF or type(f) ~= "table" then break end
-                if f.IsShown and f:IsShown() == true then shown = shown + 1 end
+                local okS, on = pcall(f.IsShown, f)                  -- (a state kept secret is not compared)
+                if okS and not ns.IsSecret(on) and on == true then shown = shown + 1 end
             end
             local ok, ids = pcall(C_UnitAuras.GetUnitAuraInstanceIDs, row.unit, filter)
             if ok and type(ids) == "table" then

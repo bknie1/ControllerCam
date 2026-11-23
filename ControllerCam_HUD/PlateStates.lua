@@ -155,11 +155,14 @@ local function RowSays(row)
     local icons = 0
     if row.GetChildren then
         for _, child in ipairs({ row:GetChildren() }) do
-            if type(child) == "table" and child.IsShown and child:IsShown() == true then icons = icons + 1 end
+            if type(child) == "table" and child.IsShown then
+                local okS, on = pcall(child.IsShown, child)            -- (a state kept secret is not compared)
+                if okS and not ns.IsSecret(on) and on == true then icons = icons + 1 end
+            end
         end
     end
     local alpha = row.GetEffectiveAlpha and row:GetEffectiveAlpha()
-    return ("%s, %s, %d icons, alpha %s"):format(row.on and "on" or "off", row:IsShown() == true and "shown" or "hidden",
+    return ("%s, %s, %d icons, alpha %s"):format(row.on and "on" or "off", ns.ShownPlain(row) and "shown" or "hidden",
         icons, type(alpha) == "number" and ("%.1f"):format(alpha) or "?")
 end
 function PS.Trace(o, again)
