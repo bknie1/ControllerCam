@@ -1,7 +1,8 @@
 -- ControllerCam HUD: a flight on film.
 -- On a flight master's flight (Flights.lua's flight bar is up) the screen turns to film a few seconds after take-off,
 -- as at a camp fire (Campfire.lua): black bars close in from the top and the bottom, the rest of the screen fades
--- back and the camera draws out wide and swings slowly round you and your mount, to one side, behind, to the other.
+-- back and the camera draws out wide and circles slowly round you and your mount, a whole turn in about a minute and
+-- a half (a switch of its own leaves it a still shot). About half a minute out it comes round behind you again.
 -- Where you are going comes up in the bottom bar, and each new zone you fly into after it.
 --   * The flight bar rises into the top bar and stays there, readable, with the flight game's line under it.
 --   * The flight game steps out of the film at once (its lane plays over the screen as ever); put away at high
@@ -28,6 +29,12 @@ ns.RegisterSetting({
     tip = "on a flight master's flight the screen turns to film: black bars, the HUD faded back, the camera drawn out wide and swinging slowly round you and your mount, with the flight bar in the top bar. The flight game, a window or a button steps out of it, and it bows out as you come in to land",
 })
 
+ns.RegisterSetting({
+    key = "flightOrbit", kind = "boolean", default = true, command = "flightorbit", section = "Effects",
+    label = "Cinematic flights: the camera circles you",
+    tip = "on film, the camera circles slowly round you and your mount, a whole turn in about a minute and a half, and comes round behind you again before you land. Off: a still shot",
+})
+
 R.AFTER = 3                      -- seconds after take-off before it comes in
 R.IN, R.OUT, R.QUICK = 2.5, 3.5, 0.8   -- seconds to come in, to bow out as you land, to step out of your way
 R.BOW = 2                        -- it bows out this long before the weather line (Flights' WEATHER_BEFORE)
@@ -36,11 +43,11 @@ R.BACK = 8                       -- the controller left alone this long after a 
 R.RETURN = 3                     -- back this long after the game is put away or a window closes
 R.BAR = 0.11                     -- each black bar: this share of the screen's height
 R.ZOOM = 8                       -- the camera draws out this much further
-R.SWING, R.PERIOD = 80, 56       -- how far round it swings each side (degrees), and the time for a swing out and back
-R.FOLLOW = 1.5                   -- seconds the camera takes to catch up with where it should look
-R.VMAX, R.STEP = 14, 1           -- its fastest turn, and the steps its speed changes by (degrees a second)
-R.HOME = 2                       -- bowing out, it turns back to within this many degrees of where it was
-R.HOMING = { 0.5, 40 }           -- and on its way out it catches up faster (seconds), up to this fast (degrees a second)
+R.ORBIT = 4                      -- the camera circles you this fast (degrees a second: a whole turn in 90 seconds)
+R.HOME_LEAD, R.HOME_TIME = 10, 12   -- coming in: it starts round behind you this long before it bows out, and takes
+                                    -- this long (the shorter way round), so it is behind you as the weather is said
+R.HOME = 2                       -- behind you to within this many degrees
+R.VMAX, R.STEP = 30, 0.25        -- its fastest turn, and the steps its speed changes by (degrees a second)
 R.STICK = 0.35                   -- a stick pushed this far is a hand on the controller
 R.CAPTION = { 1.2, 7.5 }         -- where you are going: in, out (seconds of film)
 R.ZONE = 5                       -- a new zone's name shows this long
@@ -155,15 +162,29 @@ local function YawSpeed()
     return (v and v > 0) and v or 180
 end
 
--- The camera's turn, in degrees a second (+ to the right), in steps
+-- The camera's turn, in degrees a second (+ to the right), in steps. Where the game will not turn it (a call
+-- refused, or missing), it stays a still shot from then on.
+local function StopTurning()
+    Call(MoveViewRightStop)
+    Call(MoveViewLeftStop)
+end
+
 local function Turn(s, v)
+    v = math.max(-R.VMAX, math.min(R.VMAX, v))
     v = math.floor(v / R.STEP + 0.5) * R.STEP
     if math.abs(v) < R.STEP then v = 0 end
     if v == s.v then return end
     if s.v > 0 and v <= 0 then Call(MoveViewRightStop) end
     if s.v < 0 and v >= 0 then Call(MoveViewLeftStop) end
-    if v > 0 then Call(MoveViewRightStart, v / YawSpeed())
-    elseif v < 0 then Call(MoveViewLeftStart, -v / YawSpeed()) end
+    local ok = true
+    if v > 0 then ok = Call(MoveViewRightStart, v / YawSpeed())
+    elseif v < 0 then ok = Call(MoveViewLeftStart, -v / YawSpeed()) end
+    if not ok then
+        StopTurning()
+        R.noTurn, s.v = true, 0
+        ns.Note("flight film: the camera cannot be turned here: a still shot")
+        return
+    end
     s.v = v
 end
 
@@ -266,7 +287,7 @@ function R.Start(now)
     local okA, alpha = pcall(UIParent.GetAlpha, UIParent)
     local okS, scale = pcall(UIParent.GetEffectiveScale, UIParent)
     film:SetScale((okS and type(scale) == "number" and scale > 0) and scale or 1)
-    local s = { at = now, t = 0, p = 0, target = 1, v = 0, yaw = 0, swing = 0, adopted = {},
+    local s = { at = now, t = 0, p = 0, target = 1, v = 0, yaw = 0, adopted = {},
                 calm = ns.Calm() and true or false,
                 alpha = (okA and type(Plain(alpha)) == "number") and alpha or 1 }
     R.scene = s
@@ -292,8 +313,10 @@ function R.Finish(why)
     if not s then return end
     R.scene = nil
     Turn(s, 0)
+    StopTurning()                                                   -- (whatever it was doing: never left turning)
     Zoom(s, false, GetTime())
     SetUIAlpha(s.alpha)
+    if ns.Campfire and ns.Campfire.Minimap then ns.Campfire.Minimap(s, false) end
     Release(s)
     if film then film:Hide() end
     Hold(false)
@@ -314,6 +337,7 @@ function R.Step(now, dt, why, hard)
     Adopt(s)                                                        -- (the game's line, made after the film began)
     -- the screen fades back, the bars close in
     SetUIAlpha(s.alpha * (1 - k))
+    if ns.Campfire and ns.Campfire.Minimap then ns.Campfire.Minimap(s, k > 0.5) end   -- (its marks don't fade)
     local okH, h = pcall(UIParent.GetHeight, UIParent)             -- (the film is scaled as the screen is)
     h = (okH and type(Plain(h)) == "number" and h > 0) and h or 768
     local bar = h * R.BAR
@@ -340,19 +364,33 @@ function R.Step(now, dt, why, hard)
     local a = c and Window(s.t, c.from, c.to, 0.9) * k or 0
     film.title:SetAlpha(a)
     film.sub:SetAlpha(a)
-    -- the camera: drawn out, swinging slowly round; back home as the film goes
+    -- the camera: drawn out, circling slowly round you; round behind you again as you come in. Stepping out of
+    -- your way (the game, a window, your hand on the controller) it stops at once: the camera is yours.
     Zoom(s, s.target == 1, now)
-    if not s.calm then
-        s.swing = s.swing + dt * k
-        local want = k * R.SWING * math.sin(2 * math.pi * s.swing / R.PERIOD)
-        local follow, vmax = R.FOLLOW, R.VMAX
-        if s.target == 0 then follow, vmax = R.HOMING[1], R.HOMING[2] end   -- going: home without dawdling
-        local v = math.max(-vmax, math.min(vmax, (want - s.yaw) / follow))
-        if s.p == 0 and math.abs(s.yaw) <= R.HOME then v = 0 end
+    local going = s.target == 1 or slow
+    if not s.calm and ns.db.flightOrbit and not R.noTurn then
+        local left = Left(R.fl, now)
+        if not s.home and going and left and left <= BowAt() + R.HOME_LEAD then
+            local r = s.yaw % 360                                   -- how far past behind you: the shorter way back
+            s.home = { from = s.yaw, to = (r <= 180) and (s.yaw - r) or (s.yaw + 360 - r), at = s.t }
+        end
+        local v = 0
+        local h = s.home
+        if h and going then
+            local q = Clamp01((s.t - h.at) / R.HOME_TIME)
+            local want = h.from + (h.to - h.from) * Ease(q)
+            v = (h.to - h.from) * 6 * q * (1 - q) / R.HOME_TIME + (want - s.yaw) / 0.5
+            if q >= 1 and math.abs(h.to - s.yaw) <= R.HOME then v = 0 end
+        elseif s.target == 1 then
+            v = k * R.ORBIT                                         -- (eased in with the film)
+        end
         Turn(s, v)
         s.yaw = s.yaw + s.v * dt
+    elseif s.v ~= 0 then
+        Turn(s, 0)
     end
-    if s.target == 0 and s.p == 0 and (s.calm or math.abs(s.yaw) <= R.HOME) then
+    local homed = not (s.home and going) or (s.v == 0 and math.abs(s.home.to - s.yaw) <= R.HOME)
+    if s.target == 0 and s.p == 0 and homed then
         R.Finish(why)                                               -- gone: everything given back
     end
 end
@@ -414,7 +452,8 @@ end
 function R.Describe()
     local s = R.scene
     return ("flight film: on %s, rolled %d, %s; last ended: %s"):format(tostring(R.active), R.shown,
-        s and ("playing, in %.2f, turning %d, swung %.0f deg"):format(s.p, s.v, s.yaw)
+        s and ("playing, in %.2f, turning %.2f deg/s, turned %.0f deg%s"):format(s.p, s.v, s.yaw,
+            s.home and " (coming round behind you)" or "")
             or ("not playing: " .. tostring(R.why or "-")), tostring(R.last or "-"))
 end
 

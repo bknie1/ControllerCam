@@ -7,6 +7,8 @@ A do jogo
 As fontes só podem ser escolhidas onde o idioma do jogo é escrito em letras latinas.
 Fonte: %s
 uma fonte para o HUD e os textos do próprio jogo (janelas, dicas, bate-papo, botões); tudo mantém o seu tamanho
+Cores de facção
+Aliado ou inimigo
 Bola de Fogo
 Mago amigo
 Cura
@@ -18,6 +20,8 @@ PNJs amistosos por reputação
 o nome e a barra de um PNJ amistoso são coloridos pela sua reputação com a facção dele: amarelo neutro, verde amistoso, depois verde-água, turquesa e azul para honrado, reverenciado e exaltado
 A outra facção, bem à vista
 um jogador da outra facção leva o emblema da facção antes do nome e um contorno em volta da barra de vida, azul Aliança ou vermelho Horda, nas placas de nome e no quadro do alvo
+A outra facção: cores
+a cor do contorno e do destaque nas barras da outra facção: a da facção (Aliança azul, Horda vermelho) ou o vermelho de um inimigo, seja qual for a facção
 Faixa de execução nas barras inimigas
 um inimigo com um quarto da vida ou menos: sua barra de vida pulsa em vermelho, com um brilho ao redor batendo como um pulso, nos quadros de alvo e foco e nas placas de nome
 Escudos nas barras de vida
@@ -144,6 +148,7 @@ R3 move o item para o qual você aponta (banco, vendedor, troca, caixa de correi
 enquanto um deles está aberto, o botão do direcional direito move o item para o qual você aponta: para dentro ou fora do banco, vendido, para a troca ou para a carta. Sem apontar para nada, ele organiza
 organiza suas bolsas, e o banco enquanto estiver aberto
 lista o ouro de cada um dos seus personagens, e o total
+Guardar
 agora mesmo
 há %d horas
 há %d dias
@@ -154,7 +159,6 @@ Leilão
 Recomendação
 Equipar
 Missão
-Guardar
 melhor do que o que você usa
 Desencantar
 %s por %s
@@ -186,14 +190,22 @@ Melhoria: %s
 Sobe perícia: %s
 Missão: %s
 %d%% de chance de vender
+no seu conjunto de equipamentos %s
+em um dos seus conjuntos de equipamentos
 vale %s no leilão
 mais do que vale usá-lo
 você escolheu guardar
 sua única ferramenta deste tipo
 uma melhoria para outra especialização sua
 você o está usando
+seu equipamento de %s
+equipamento para uma das suas especializações
+você usa
+único, e seu
 Melhoria para %s
 o melhor do tipo que você carrega
+mantido: nada diz que é lixo
+poderia render %s na casa de leilões
 5% abaixo do menor, para uma venda rápida
 o mercado está incomumente baixo hoje: preço perto do usual, para esperar compradores
 logo abaixo do menor: poucos à venda, deve vender
@@ -213,6 +225,8 @@ Ler a Casa de Leilões ao visitar
 a primeira visita depois de um tempo lê todos os preços de uma vez (o jogo permite a cada 15 minutos); /cchud scan pede isso
 Melhor uso de um item
 a dica de um item diz o que fazer com ele: vender na casa de leilões (e quanto a mais isso rende), vender a um vendedor, guardar ou guardar para uma missão
+Conselho de itens: na dúvida
+Guardar: só itens cinza e o que você marcar como lixo são aconselhados para venda; todo o resto é mantido, com seus preços. Vender: o que nada diz para manter vai para a casa de leilões onde compensa, senão para um vendedor
 Vendas rápidas na Casa de Leilões
 preço 5% abaixo do menor para vender agora; desligado: preços pacientes, logo abaixo do menor, que vendem quando os compradores chegam
 lê todos os preços da Casa de Leilões de uma vez (abra-a antes; a cada 15 minutos)
@@ -905,6 +919,8 @@ num voo, um pequeno jogo é oferecido sob a barra de voo, e um botão o inicia (
 num voo: iniciar o jogo de voo, ou levá-lo à grande altitude e de volta
 Voos cinematográficos
 num voo do mestre de voo a tela vira um filme: faixas pretas, o HUD some ao fundo, a câmera se afasta e gira devagar ao redor de você e da sua montaria, com a barra de voo na faixa de cima. O jogo de voo, uma janela ou um botão o interrompem, e ele termina suavemente quando você se aproxima do pouso
+Voos cinematográficos: a câmera gira ao seu redor
+no filme, a câmera gira devagar ao redor de você e da sua montaria, uma volta inteira em cerca de um minuto e meio, e volta para trás de você antes do pouso. Desligado: uma cena parada
 Um voo é um bom momento para isso.
 Você está jogando há %s.
 Hora de um gole de água
@@ -947,28 +963,45 @@ Equipamento
 Consumíveis
 Mercadorias
 Novo
+Inteligente
+Por tipo
+Como nas bolsas
+Reagentes
+Outros
+Nada aqui.
+Espaços vazios
+A armadura não pode ser trocada em combate.
 Chaveiro
 Mochila
 %d de %d espaços usados
 Soltar
+Pegar
 Usar
 Para as bolsas
 Para o banco
 Anexar
 Negociar
-Pegar
+%s ou %s: para o correio
+%s ou %s: para o vendedor
+%s ou %s: para o banco
+%s ou %s: para a troca
+%s ou %s: para a casa de leilões
+%s ou %s: para o banco da guilda
+%s ou %s: para o seu personagem
+%s ou %s: para o saque
+%s ou %s: outra janela
 Os botões do controle voltam após o combate.
 %s ou %s: de volta às bolsas
+Segure para destruir
 Todas as bolsas
 Só esta bolsa
 Colocar
 Pegar bolsa
 Mais
 Bolsas
-%s ou %s: outra janela
-Nada aqui.
 %d livres
-%d espaços livres
+Espaço vazio
+Em combate, feche suas bolsas com B.
 para o banco
 sem marca
 Nenhum espaço livre.
@@ -976,14 +1009,21 @@ Soltar aqui
 Dividir pilha
 Marca: %s
 Detalhes do item
+Destruir
 Organizar banco
 Organizar bolsas
 Ver bolsas
 Ver banco
 Depositar os marcados
 Vender os recomendados
+Solte para destruir
+Destruir %s?
+O jogo manteve %s: destrua pelas bolsas do próprio jogo.
+%s destruído.
 Uma janela de bolsas com filtros rápidos
 suas bolsas numa janela própria do HUD em vez da do jogo: todos os itens juntos, os espaços vazios reunidos no fim, suas bolsas numa fileira à parte e filtros rápidos no topo (LB e RB). O banco também, enquanto estiver aberto. Desligado: as bolsas do jogo
+Janela de bolsas: ordem
+Inteligente: o que você usa primeiro (consumíveis, itens com uso), depois o resto por tipo, o lixo por último e esmaecido. Por tipo: em seções com títulos próprios. Como nas bolsas: a ordem do jogo
 Predefinição do HUD: %s, combinando com a câmera
 predefinição: %s
 Um layout chamado '%s' foi adicionado ao Modo de Edição do jogo. Escolha-o lá para usá-lo (Menu do Jogo > Modo de Edição > Layout).

@@ -7,6 +7,8 @@ Die des Spiels
 Schriftarten lassen sich nur wählen, wo die Sprache des Spiels in lateinischen Buchstaben geschrieben wird.
 Schriftart: %s
 eine Schriftart für das HUD und die eigenen Texte des Spiels (Fenster, Tooltips, Chat, Tasten); alles behält seine Größe
+Fraktionsfarben
+Freund oder Feind
 Feuerball
 Befreundeter Magier
 Heilung
@@ -18,6 +20,8 @@ Freundliche NPCs nach Ruf
 Name und Leiste eines freundlichen NPCs zeigen deinen Ruf bei seiner Fraktion: gelb neutral, grün freundlich, dann meergrün, türkis und blau für wohlwollend, respektvoll und ehrfürchtig
 Die andere Fraktion, deutlich
 ein Spieler der anderen Fraktion trägt das Fraktionswappen vor dem Namen und einen Rahmen um die Gesundheitsleiste, Allianz-blau oder Horde-rot, auf Namensplaketten und im Zielrahmen
+Die andere Fraktion: Farben
+die Farbe des Rahmens und der Hervorhebung auf den Leisten der anderen Fraktion: die eigene der Fraktion (Allianz blau, Horde rot) oder das Rot eines Feindes, gleich welcher Fraktion
 Hinrichtungsbereich auf feindlichen Leisten
 ein Feind bei einem Viertel seiner Gesundheit oder weniger: seine Gesundheitsleiste pocht rot, mit einem Leuchten darum, das wie ein Puls schlägt, auf Ziel- und Fokusrahmen und auf Namensplaketten
 Schilde auf Gesundheitsleisten
@@ -144,6 +148,7 @@ R3 verschiebt den Gegenstand, auf den du zeigst (Bank, Händler, Handel, Briefka
 solange eines davon offen ist, verschiebt der rechte Stick-Knopf den Gegenstand, auf den du zeigst: in die Bank oder heraus, verkauft, in den Handel oder in den Brief. Zeigst du auf nichts, sortiert er
 sortiert deine Taschen und die Bank, solange sie offen ist
 listet das Gold jedes deiner Charaktere und die Summe auf
+Behalten
 gerade eben
 vor %d Stunden
 vor %d Tagen
@@ -154,7 +159,6 @@ Auktion
 Empfehlung
 Anlegen
 Quest
-Behalten
 besser als das, was du trägst
 Entzaubern
 %s für %s
@@ -186,14 +190,22 @@ Verbesserung: %s
 Fertigkeitspunkt: %s
 Quest: %s
 verkauft sich zu %d%%
+in Eurem Ausrüstungsset %s
+in einem Eurer Ausrüstungssets
 im Auktionshaus %s wert
 mehr, als es Euch zum Tragen wert ist
 Ihr habt es zum Behalten markiert
 Euer einziges Werkzeug dieser Art
 eine Verbesserung für eine andere Spezialisierung von Euch
 Ihr tragt es
+Eure Ausrüstung für %s
+Ausrüstung für eine Eurer Spezialisierungen
+du benutzt es
+einzigartig, und deins
 Verbesserung für %s
 das Beste seiner Art, das Ihr habt
+behalten: nichts spricht für Plunder
+könnte %s im Auktionshaus bringen
 5% unter dem niedrigsten Preis, für einen schnellen Verkauf
 der Markt ist heute ungewöhnlich niedrig: nahe am üblichen Preis angesetzt, um auf Käufer zu warten
 knapp unter dem niedrigsten Preis: wenige im Angebot, sollte sich verkaufen
@@ -213,6 +225,8 @@ Auktionshaus beim Besuch lesen
 der erste Besuch nach einer Weile liest alle Preise auf einmal (das Spiel erlaubt es alle 15 Minuten); /cchud scan fragt danach
 Beste Verwendung eines Gegenstands
 der Tooltip eines Gegenstands sagt, was du damit tun sollst: im Auktionshaus verkaufen (und wie viel mehr das bringt), an einen Händler verkaufen, behalten oder für eine Quest behalten
+Gegenstandsrat: im Zweifel
+Behalten: nur graue Gegenstände und was du als Plunder markierst, wird zum Verkauf geraten; alles andere wird behalten, mit seinen Preisen. Verkaufen: was nichts zum Behalten gibt, geht ins Auktionshaus, wo es sich lohnt, sonst zu einem Händler
 Schnellverkäufe im Auktionshaus
 Preis 5% unter dem niedrigsten für einen Verkauf jetzt; aus: geduldige Preise, knapp unter dem niedrigsten, die sich verkaufen, wenn Käufer kommen
 liest alle Preise im Auktionshaus auf einmal (vorher öffnen; alle 15 Minuten)
@@ -905,6 +919,8 @@ auf einem Flug wird unter der Flugleiste ein kleines Spiel angeboten, und eine T
 auf einem Flug: das Flugspiel starten, oder es in große Höhe bringen und zurück
 Filmische Flüge
 auf einem Flug mit dem Flugmeister wird der Bildschirm zum Film: schwarze Balken, das HUD tritt zurück, die Kamera zieht weit auf und schwenkt langsam um dich und dein Reittier, die Flugleiste im oberen Balken. Das Flugspiel, ein Fenster oder eine Taste unterbrechen ihn, und er endet sanft, wenn du zur Landung ansetzt
+Filmische Flüge: die Kamera kreist um dich
+im Film kreist die Kamera langsam um dich und dein Reittier, eine ganze Runde in etwa anderthalb Minuten, und kommt vor der Landung wieder hinter dich. Aus: eine ruhige Einstellung
 Ein Flug ist ein guter Moment dafür.
 Du spielst seit %s.
 Zeit für einen Schluck Wasser
@@ -947,28 +963,45 @@ Ausrüstung
 Verbrauchbares
 Handwerkswaren
 Neu
+Clever
+Nach Art
+Wie in den Taschen
+Reagenzien
+Sonstiges
+Nichts hier.
+Freie Plätze
+Rüstung lässt sich im Kampf nicht wechseln.
 Schlüsselbund
 Rucksack
 %d von %d Plätzen belegt
 Ablegen
+Aufnehmen
 Benutzen
 In die Taschen
 In die Bank
 Anhängen
 Handeln
-Aufnehmen
+%s oder %s: zur Post
+%s oder %s: zum Händler
+%s oder %s: zur Bank
+%s oder %s: zum Handel
+%s oder %s: zum Auktionshaus
+%s oder %s: zur Gildenbank
+%s oder %s: zu deinem Charakter
+%s oder %s: zur Beute
+%s oder %s: anderes Fenster
 Controller-Tasten kommen nach dem Kampf zurück.
 %s oder %s: zurück zu den Taschen
+Halten zum Zerstören
 Alle Taschen
 Nur diese Tasche
 Hineinlegen
 Tasche aufnehmen
 Mehr
 Taschen
-%s oder %s: anderes Fenster
-Nichts hier.
 %d frei
-%d freie Plätze
+Freier Platz
+Im Kampf schließt B deine Taschen.
 für die Bank
 keine Markierung
 Kein freier Platz.
@@ -976,14 +1009,21 @@ Hier ablegen
 Stapel teilen
 Markierung: %s
 Gegenstandsdetails
+Zerstören
 Bank sortieren
 Taschen sortieren
 Taschen zeigen
 Bank zeigen
 Markiertes einlagern
 Empfohlenes verkaufen
+Loslassen zum Zerstören
+%s zerstören?
+Das Spiel hat %s behalten: zerstöre es in seinen eigenen Taschen.
+%s zerstört.
 Ein Taschenfenster mit Schnellfiltern
 deine Taschen in einem eigenen Fenster des HUD statt dem des Spiels: alle Gegenstände beisammen, die freien Plätze am Ende gesammelt, deine Taschen in einer eigenen Reihe und Schnellfilter oben (LB und RB). Auch die Bank, solange sie offen ist. Aus: die Taschen des Spiels
+Taschenfenster: Reihenfolge
+Clever: was du benutzt zuerst (Verbrauchbares, Gegenstände mit Benutzen), dann der Rest nach Art, Plunder zuletzt und verblasst. Nach Art: in Abschnitten unter eigenen Überschriften. Wie in den Taschen: die Reihenfolge des Spiels
 HUD-Voreinstellung: %s, passend zur Kamera
 Preset: %s
 Ein Layout namens '%s' wurde dem Bearbeitungsmodus des Spiels hinzugefügt. Wähle es dort aus, um es zu benutzen (Spielmenü > Bearbeitungsmodus > Layout).

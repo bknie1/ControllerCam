@@ -628,7 +628,9 @@ local function Apply(id, withZoom)
         end
     end
 
-    if held then desired.test_cameraOverShoulder = nil end      -- (a scene has the camera: the middle, for now)
+    if held then                              -- (a scene has the camera: the middle, no auto-follow, for now)
+        for cvar in pairs(ns.HELD) do desired[cvar] = nil end
+    end
     EnforceMotion(needsMotion)            -- first: the offset and friends are ignored while these are on
     for cvar, value in pairs(desired) do SetOne(cvar, value) end
     if withZoom and zoom and not held then SetZoom(zoom, desired) end
@@ -671,18 +673,39 @@ end
 -- A scene of the HUD's (the camp fire) has the camera for a while: the shoulder offset rests at the middle, so
 -- the camera turns round your character, and the profile keeps its hands off the distance. Let go, the profile in
 -- effect comes back as it was.
+-- While a scene of the HUD's has the camera: the offset at the middle, and the game's auto-follow resting (on a
+-- flight you are moving, and auto-follow pulled the camera back behind you as the scene turned it round). What
+-- these were is kept (with the saved settings too, in case the game closes mid-scene) and put back on letting go.
+ns.HELD = { test_cameraOverShoulder = "0", cameraSmoothStyle = "0" }
 function ControllerCam.Hold(on)
     on = on and true or false
     if on == held then return end
     held = on
     if not (db and db.enabled) then return end
     if held then
-        SetOne("test_cameraOverShoulder", "0")
+        db.heldWas = {}
+        for cvar, value in pairs(ns.HELD) do
+            local cur = GetCVar(cvar)
+            if cur ~= nil then
+                db.heldWas[cvar] = tostring(cur)
+                SetOne(cvar, value)
+            end
+        end
     else
+        local was = db.heldWas
+        db.heldWas = nil
+        for cvar, value in pairs(was or {}) do SetOne(cvar, value) end
         lastCurveValue = nil
         ns.Evaluate(true)
         ns.CurveTick()
     end
+end
+
+-- A scene cut off (the game closed while it held the camera): what it held, put back as the addon loads
+function ns.Unhold()
+    if not (db and db.heldWas) or held then return end
+    for cvar, value in pairs(db.heldWas) do pcall(SetCVar, cvar, value) end
+    db.heldWas = nil
 end
 function ControllerCam.IsHeld() return held end
 
@@ -896,6 +919,12 @@ local function InitDB()
             if known[cvar] and type(val) == "string" then d.originals[cvar] = val end
         end
     end
+    if type(old.heldWas) == "table" then                          -- a scene's hold, cut off: put back on load
+        d.heldWas = {}
+        for cvar, val in pairs(old.heldWas) do
+            if ns.HELD[cvar] and type(val) == "string" then d.heldWas[cvar] = val end
+        end
+    end
     if type(old.trace) == "table" then                            -- what was noted going into the water
         d.trace = {}
         for _, line in ipairs(old.trace) do
@@ -1076,6 +1105,7 @@ f:SetScript("OnEvent", function(_, event, arg1, arg2)
     if event == "ADDON_LOADED" then
         if arg1 ~= ADDON then return end
         fresh = InitDB()
+        ns.Unhold()
         ns.QuietNotice()
         if ns.OnDBReady then ns.OnDBReady() end
     elseif not db then

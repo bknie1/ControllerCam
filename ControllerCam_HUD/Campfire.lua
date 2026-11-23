@@ -494,6 +494,47 @@ end
 
 CF.WindowOpen, CF.AnyPadButton = WindowOpen, AnyPadButton   -- (the ride's film asks the same)
 
+-- The minimap's own marks (your arrow, the quest arrows and dots it draws) do not fade with the screen: a scene
+-- hides the whole minimap once the screen has faded, and shows again what was shown as it comes back (the ride's
+-- film too). Never hidden in a fight; shown again when the fight ends if the game will not show it in one.
+CF.MAPS = { "MinimapCluster", "Minimap" }
+local mapLater = CreateFrame("Frame")
+local function ShowMaps(list)
+    local failed = {}
+    for _, f in ipairs(list) do
+        if not pcall(f.Show, f) then failed[#failed + 1] = f end
+    end
+    if ns.Rest and ns.Rest.RedrawMinimap then pcall(ns.Rest.RedrawMinimap) end   -- (its terrain drawn again)
+    if #failed > 0 then
+        mapLater.list = failed
+        pcall(mapLater.RegisterEvent, mapLater, "PLAYER_REGEN_ENABLED")
+    end
+end
+mapLater:SetScript("OnEvent", ns.Protect(function(self)
+    self:UnregisterAllEvents()
+    local list = self.list
+    self.list = nil
+    if list then ShowMaps(list) end
+end))
+
+function CF.Minimap(s, hide)
+    if hide then
+        if s.maps or Yes(InCombatLockdown()) then return end
+        s.maps = {}
+        for _, name in ipairs(CF.MAPS) do
+            local f = _G[name]
+            if type(f) == "table" and f.IsShown and f.Hide then
+                local ok, shown = pcall(f.IsShown, f)
+                if ok and shown and pcall(f.Hide, f) then s.maps[#s.maps + 1] = f end
+            end
+        end
+    elseif s.maps then
+        local list = s.maps
+        s.maps = nil
+        ShowMaps(list)
+    end
+end
+
 -- What keeps you busy right now (a word), or nil
 function CF.Busy()
     if Yes(UnitAffectingCombat("player")) or Yes(InCombatLockdown()) then return "combat" end
@@ -779,6 +820,7 @@ function CF.Finish(why)
         if back > 0.05 then Call(CameraZoomIn, back) elseif back < -0.05 then Call(CameraZoomOut, -back) end
     end
     SetUIAlpha(s.alpha)
+    CF.Minimap(s, false)
     if cine then cine:Hide() end
     Hold(false)
     CF.playedAt, CF.last, CF.stillSince = GetTime(), why, GetTime()
@@ -798,7 +840,9 @@ function CF.Step()
     h = (okH and type(Plain(h)) == "number") and h or 768
     local bar = h * CF.BAR
     local fadeIn, fadeBack = Clamp01(t / 1.2), Clamp01((t - (CF.LENGTH - 1.5)) / 1.5)
-    SetUIAlpha(s.alpha * math.max(1 - fadeIn, fadeBack))
+    local screen = math.max(1 - fadeIn, fadeBack)
+    SetUIAlpha(s.alpha * screen)
+    CF.Minimap(s, screen < 0.5)
     if s.calm then                                     -- still: the bars fade in where they stand
         cine.top:SetHeight(bar)
         cine.bottom:SetHeight(bar)

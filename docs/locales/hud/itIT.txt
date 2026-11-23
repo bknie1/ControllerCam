@@ -7,6 +7,8 @@ Quello del gioco
 I caratteri si possono scegliere solo dove la lingua del gioco si scrive in lettere latine.
 Carattere: %s
 un carattere per l'HUD e i testi del gioco stesso (finestre, suggerimenti, chat, pulsanti); ognuno mantiene la sua dimensione
+Colori di fazione
+Alleato o nemico
 Palla di fuoco
 Mago amico
 Cura
@@ -18,6 +20,8 @@ PNG amichevoli per reputazione
 il nome e la barra di un PNG amichevole sono colorati secondo la tua reputazione con la sua fazione: giallo neutrale, verde amichevole, poi verde acqua, turchese e blu per onorato, riverito ed esaltato
 L'altra fazione, ben visibile
 un giocatore dell'altra fazione porta lo stemma della fazione prima del nome e un bordo attorno alla barra della salute, blu Alleanza o rosso Orda, sulle targhette e nel riquadro del bersaglio
+L'altra fazione: colori
+il colore del bordo e dell'evidenziazione sulle barre dell'altra fazione: quello della fazione (Alleanza blu, Orda rosso) o il rosso di un nemico, qualunque sia la fazione
 Soglia di esecuzione sulle barre nemiche
 un nemico a un quarto della salute o meno: la sua barra della salute pulsa di rosso, con un bagliore intorno che batte come un polso, sui riquadri di bersaglio e focus e sulle targhette
 Scudi sulle barre della salute
@@ -144,6 +148,7 @@ R3 sposta l'oggetto che stai puntando (banca, venditore, scambio, cassetta della
 mentre uno di questi è aperto, il pulsante dello stick destro sposta l'oggetto che stai puntando: dentro o fuori dalla banca, venduto, nello scambio o sulla lettera. Se non punti nulla, ordina
 ordina le tue borse, e la banca finché è aperta
 elenca l'oro di ciascuno dei tuoi personaggi, e il totale
+Tieni
 adesso
 %d ore fa
 %d giorni fa
@@ -154,7 +159,6 @@ Asta
 Consiglio
 Equipaggia
 Missione
-Tieni
 migliore di ciò che indossi
 Disincanta
 %s per %s
@@ -186,14 +190,22 @@ Miglioramento: %s
 Sale di abilità: %s
 Missione: %s
 %d%% di probabilità di vendita
+nel tuo set di equipaggiamento %s
+in uno dei tuoi set di equipaggiamento
 vale %s all'asta
 più di quanto valga indossarlo
 hai scelto di tenerlo
 il tuo unico attrezzo di questo tipo
 un miglioramento per un'altra tua specializzazione
 lo indossi
+il tuo equipaggiamento %s
+equipaggiamento per una delle tue specializzazioni
+lo usi
+unico, e tuo
 Miglioramento per %s
 il migliore del suo tipo che porti
+tenuto: niente dice che sia robaccia
+potrebbe fruttare %s alla casa d'aste
 5% in meno del più basso, per una vendita rapida
 il mercato oggi è insolitamente basso: prezzo vicino al solito, per aspettare i compratori
 appena sotto il più basso: ce ne sono pochi, dovrebbe vendersi
@@ -213,6 +225,8 @@ Leggi la casa d'aste alla visita
 la prima visita dopo un po' legge tutti i prezzi insieme (il gioco lo consente ogni 15 minuti); /cchud scan lo chiede
 Uso migliore di un oggetto
 il tooltip di un oggetto dice cosa farne: venderlo alla casa d'aste (e quanto di più rende), venderlo a un mercante, tenerlo o tenerlo per una missione
+Consiglio sugli oggetti: nel dubbio
+Tieni: si consiglia di vendere solo gli oggetti grigi e ciò che segni come robaccia; tutto il resto è tenuto, con i suoi prezzi. Vendi: ciò che nulla dice di tenere va alla casa d'aste dove conviene, altrimenti a un mercante
 Vendite rapide alla casa d'aste
 prezzo 5% in meno del più basso per vendere subito; disattivato: prezzi pazienti, appena sotto il più basso, che si vendono quando arrivano i compratori
 legge tutti i prezzi della casa d'aste insieme (aprila prima; ogni 15 minuti)
@@ -905,6 +919,8 @@ in volo viene proposto un piccolo gioco sotto la barra di volo, e un pulsante lo
 in volo: avvia il gioco di volo, o portalo in alta quota e ritorno
 Voli cinematografici
 durante un volo del maestro di volo lo schermo diventa un film: bande nere, l'HUD si dissolve, la telecamera si allarga e ruota lentamente intorno a te e alla tua cavalcatura, con la barra del volo nella banda in alto. Il gioco di volo, una finestra o un tasto lo interrompono, e si chiude dolcemente quando ti avvicini all'atterraggio
+Voli cinematografici: la telecamera ti gira intorno
+durante il film la telecamera gira lentamente intorno a te e alla tua cavalcatura, un giro completo in circa un minuto e mezzo, e torna alle tue spalle prima dell'atterraggio. Disattivato: un'inquadratura fissa
 Un volo è un buon momento per farlo.
 Stai giocando da %s.
 È ora di un sorso d'acqua
@@ -947,28 +963,45 @@ Equipaggiamento
 Consumabili
 Beni commerciali
 Nuovi
+Intelligente
+Per tipo
+Come nelle borse
+Reagenti
+Altro
+Niente qui.
+Posti vuoti
+L'armatura non si può cambiare in combattimento.
 Portachiavi
 Zaino
 %d di %d posti occupati
 Posa
+Prendi
 Usa
 Nelle borse
 In banca
 Allega
 Scambia
-Prendi
+%s o %s: alla posta
+%s o %s: al mercante
+%s o %s: alla banca
+%s o %s: allo scambio
+%s o %s: alla casa d'aste
+%s o %s: alla banca di gilda
+%s o %s: al tuo personaggio
+%s o %s: al bottino
+%s o %s: altra finestra
 I tasti del controller tornano dopo il combattimento.
 %s o %s: torna alle borse
+Tieni premuto per distruggere
 Tutte le borse
 Solo questa borsa
 Metti dentro
 Prendi borsa
 Altro
 Borse
-%s o %s: altra finestra
-Niente qui.
 %d liberi
-%d posti liberi
+Posto vuoto
+In combattimento, chiudi le borse con B.
 per la banca
 nessun segno
 Nessun posto libero.
@@ -976,14 +1009,21 @@ Posa qui
 Dividi pila
 Segno: %s
 Dettagli dell'oggetto
+Distruggi
 Riordina banca
 Riordina borse
 Mostra borse
 Mostra banca
 Deposita i segnati
 Vendi i consigliati
+Rilascia per distruggere
+Distruggere %s?
+Il gioco ha tenuto %s: distruggilo dalle sue borse.
+%s distrutto.
 Una finestra delle borse con filtri rapidi
 le tue borse in una finestra dell'HUD invece di quella del gioco: tutti gli oggetti insieme, i posti vuoti raccolti alla fine, le tue borse in una fila a parte e filtri rapidi in alto (LB e RB). Anche la banca, mentre è aperta. Disattivato: le borse del gioco
+Finestra delle borse: ordine
+Intelligente: prima ciò che usi (consumabili, oggetti con un uso), poi il resto per tipo, la robaccia in fondo e sbiadita. Per tipo: in sezioni con il proprio titolo. Come nelle borse: l'ordine del gioco
 Preset dell'HUD: %s, abbinato alla telecamera
 preset: %s
 Un layout chiamato '%s' è stato aggiunto alla Modalità modifica del gioco. Sceglilo lì per usarlo (Menu di gioco > Modalità modifica > Layout).

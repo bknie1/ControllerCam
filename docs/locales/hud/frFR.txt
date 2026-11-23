@@ -7,6 +7,8 @@ Celle du jeu
 Les polices ne peuvent être choisies que là où la langue du jeu s'écrit en lettres latines.
 Police: %s
 une police pour le HUD et les textes du jeu lui-même (fenêtres, bulles d'aide, discussion, boutons); chacun garde sa taille
+Couleurs de faction
+Allié ou ennemi
 Boule de feu
 Mage allié
 Soins
@@ -18,6 +20,8 @@ PNJ amicaux selon la réputation
 le nom et la barre d’un PNJ amical prennent la couleur de votre réputation auprès de sa faction : jaune neutre, vert amical, puis vert d’eau, turquoise et bleu pour honoré, révéré et exalté
 L'autre faction, bien visible
 un joueur de l'autre faction porte l'emblème de sa faction devant son nom et un contour autour de la barre de vie, bleu Alliance ou rouge Horde, sur les barres d'info et le cadre de la cible
+L'autre faction : couleurs
+la couleur du contour et de la surbrillance sur les barres de l'autre faction : celle de la faction (Alliance bleu, Horde rouge) ou le rouge d'un ennemi, quelle que soit la faction
 Zone d’exécution sur les barres ennemies
 un ennemi à un quart de sa vie ou moins : sa barre de vie palpite en rouge, avec une lueur autour qui bat comme un pouls, sur les cadres de cible et de focalisation et sur les barres de nom
 Boucliers sur les barres de vie
@@ -144,6 +148,7 @@ R3 déplace l'objet que vous visez (banque, marchand, échange, boîte aux lettr
 tant que l'un d'eux est ouvert, le bouton du stick droit déplace l'objet que vous visez: vers la banque ou hors de celle-ci, vendu, dans l'échange ou sur la lettre. Si vous ne visez rien, il trie
 trie vos sacs, et la banque tant qu'elle est ouverte
 liste l'or de chacun de vos personnages, et le total
+Garder
 à l'instant
 il y a %d heures
 il y a %d jours
@@ -154,7 +159,6 @@ Vente
 Recommandation
 Équiper
 Quête
-Garder
 mieux que ce que vous portez
 Désenchanter
 %s pour %s
@@ -186,14 +190,22 @@ Amélioration : %s
 Monte une compétence: %s
 Quête : %s
 %d%% de chances de se vendre
+dans votre ensemble d'équipement %s
+dans l'un de vos ensembles d'équipement
 vaut %s à l'hôtel des ventes
 plus que ce qu'il vaut à porter
 vous avez choisi de le garder
 votre seul outil de ce type
 une amélioration pour une autre de vos spécialisations
 vous le portez
+votre équipement %s
+équipement pour l'une de vos spécialisations
+vous l'utilisez
+unique, et à vous
 Amélioration pour %s
 le meilleur de son type que vous portez
+gardé: rien ne dit que c'est de la camelote
+pourrait rapporter %s à l'hôtel des ventes
 5% en dessous du plus bas, pour une vente rapide
 le marché est exceptionnellement bas aujourd'hui : prix proche de l'habituel, pour attendre les acheteurs
 juste en dessous du plus bas : peu sont en vente, cela devrait se vendre
@@ -213,6 +225,8 @@ Lire l'hôtel des ventes à la visite
 la première visite depuis un moment lit tous les prix d'un coup (le jeu le permet toutes les 15 minutes) ; /cchud scan le demande
 Meilleur usage d'un objet
 l'infobulle d'un objet dit quoi en faire : le vendre à l'hôtel des ventes (et combien cela rapporte de plus), le vendre à un marchand, le garder ou le garder pour une quête
+Conseil d'objet: en cas de doute
+Garder: seuls les objets gris et ce que vous marquez comme camelote sont conseillés à la vente; tout le reste est gardé, ses prix affichés. Vendre: ce que rien ne dit de garder va à l'hôtel des ventes où ça rapporte, sinon à un marchand
 Ventes rapides à l'hôtel des ventes
 prix 5% en dessous du plus bas pour vendre tout de suite ; désactivé : prix patients, juste en dessous du plus bas, qui se vendent quand les acheteurs viennent
 lit tous les prix de l'hôtel des ventes d'un coup (ouvrez-le d'abord ; toutes les 15 minutes)
@@ -905,6 +919,8 @@ pendant un vol, un petit jeu est proposé sous la barre de vol, et un bouton le 
 pendant un vol : lancer le jeu de vol, ou le mettre en haute altitude et l'en ramener
 Vols cinématiques
 pendant un vol de maître de vol, l'écran devient un film : bandes noires, l'ATH s'efface, la caméra s'éloigne et tourne lentement autour de vous et de votre monture, la barre de vol dans la bande du haut. Le jeu de vol, une fenêtre ou un bouton l'interrompent, et il s'achève en douceur à l'approche de l'atterrissage
+Vols cinématiques : la caméra tourne autour de vous
+pendant le film, la caméra tourne lentement autour de vous et de votre monture, un tour complet en une minute et demie environ, et revient derrière vous avant l'atterrissage. Désactivé : un plan fixe
 Un vol est un bon moment pour ça.
 Vous jouez depuis %s.
 C'est l'heure d'une gorgée d'eau
@@ -947,28 +963,45 @@ Tout
 Consommables
 Artisanat
 Nouveau
+Malin
+Par type
+Comme dans vos sacs
+Composants
+Autres
+Rien ici.
+Emplacements libres
+L'armure ne peut pas être changée en combat.
 Trousseau
 Sac à dos
 %d sur %d emplacements occupés
 Poser
+Prendre
 Utiliser
 Vers les sacs
 Vers la banque
 Joindre
 Échanger
-Prendre
+%s ou %s: vers le courrier
+%s ou %s: vers le marchand
+%s ou %s: vers la banque
+%s ou %s: vers l'échange
+%s ou %s: vers l'hôtel des ventes
+%s ou %s: vers la banque de guilde
+%s ou %s: vers votre personnage
+%s ou %s: vers le butin
+%s ou %s: autre fenêtre
 Les boutons de la manette reviennent après le combat.
 %s ou %s: retour aux sacs
+Maintenir pour détruire
 Tous les sacs
 Ce sac seulement
 Mettre dedans
 Prendre le sac
 Plus
 Sacs
-%s ou %s: autre fenêtre
-Rien ici.
 %d libres
-%d emplacements libres
+Emplacement libre
+En combat, fermez vos sacs avec B.
 pour la banque
 sans marque
 Aucun emplacement libre.
@@ -976,14 +1009,21 @@ Poser ici
 Diviser la pile
 Marque: %s
 Détails de l'objet
+Détruire
 Trier la banque
 Trier les sacs
 Voir les sacs
 Voir la banque
 Déposer les objets marqués
 Vendre les objets conseillés
+Relâchez pour détruire
+Détruire %s ?
+Le jeu a gardé %s: détruisez-le depuis ses propres sacs.
+%s détruit.
 Une fenêtre de sacs avec filtres rapides
 vos sacs dans une fenêtre propre au HUD au lieu de celle du jeu: tous les objets ensemble, les emplacements vides regroupés à la fin, vos sacs sur une rangée à part et des filtres rapides en haut (LB et RB). La banque aussi, tant qu'elle est ouverte. Désactivé: les sacs du jeu
+Fenêtre des sacs: ordre
+Malin: ce que vous utilisez d'abord (consommables, objets avec une utilisation), puis le reste par type, la camelote à la fin et estompée. Par type: en sections sous leurs propres titres. Comme dans vos sacs: l'ordre du jeu
 Préréglage du HUD : %s, assorti à la caméra
 préréglage : %s
 Une disposition nommée '%s' a été ajoutée au mode Édition du jeu. Choisissez-la là pour l'utiliser (Menu du jeu > Mode Édition > Disposition).

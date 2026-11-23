@@ -322,6 +322,12 @@ ns.RegisterSetting({
     label = "The other faction, plainly",
     tip = "a player of the other faction wears the faction's badge before the name and an outline round the health bar, Alliance blue or Horde red, on nameplates and the target frame",
 })
+ns.RegisterSetting({
+    key = "factionStyle", kind = "number", default = 1, min = 1, max = 2, section = "Frames",
+    choices = { "Faction colours", "Ally or enemy" }, command = "factionstyle", label = "The other faction: colours",
+    tip = "the colour of the outline and the highlight on the other faction's bars: the faction's own (Alliance blue, Horde red), or the red of an enemy whichever faction it is",
+})
+UF.FACTION_NAMES = { L["Faction colours"], L["Ally or enemy"] }   -- (in your language: the options show them so)
 UF.STANDING = {
     [1] = C.hostile, [2] = C.hostile, [3] = { 0.98, 0.55, 0.25 },       -- hated, hostile, unfriendly
     [4] = C.neutral, [5] = C.friendly,                                  -- neutral, friendly

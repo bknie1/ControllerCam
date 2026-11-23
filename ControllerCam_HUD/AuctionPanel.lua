@@ -120,10 +120,13 @@ function AP.Sellable(showKept)
         e.trend = M.Trend(e.id)
         local verdict, more, want = M.Verdict(e.id)
         e.verdict, e.more, e.want = verdict, more, want
-        e.worth = verdict == "auction" and e.price ~= nil
-        e.each = e.worth and (more or 0) or 0                 -- gained over a vendor, for each one
+        -- kept only for want of a reason to sell (Item advice: when unsure, Keep): still yours to sell here
+        local unsure = verdict == "keep" and type(want) == "table" and want.unsure
+        if unsure then e.more = want.gain end
+        e.worth = (verdict == "auction" or (unsure and want.gain ~= nil)) and e.price ~= nil
+        e.each = e.worth and (e.more or 0) or 0               -- gained over a vendor, for each one
         e.gain = e.each * e.count                             -- and for all you carry
-        e.kept = KEPT[verdict] or false
+        e.kept = (KEPT[verdict] and not unsure) or false
         if showKept or not e.kept then shown[#shown + 1] = e else hidden = hidden + 1 end
     end
     table.sort(shown, function(a, b)
@@ -229,6 +232,7 @@ function AP.Reason(e)
             .. (odds and ("  " .. SAYS .. odds .. "|r") or "")
     end
     if not e.price then return GREY .. L["no price known yet"] .. "|r" end
+    if e.verdict == "keep" and type(e.want) == "table" and e.want.unsure then return GREY .. L["a vendor pays as much"] .. "|r" end
     if e.verdict == "keep" or e.verdict == "equip" then              -- (and which of your specs it is for)
         local specs = ns.Market.SpecWords(e.want)
         if not specs and e.verdict == "keep" and type(e.want) == "table" then specs = e.want.why end   -- (why kept)

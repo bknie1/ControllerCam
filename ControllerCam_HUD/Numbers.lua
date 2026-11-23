@@ -652,6 +652,11 @@ function RC.Cast(spellID)
             end
         end
     end
+    -- a buff of yours cast again while the game keeps its time to itself: it lasts from now as long as before
+    local b = name and RC.buffs[name]
+    if b and b.present and b.hidden and b.dur then
+        b.castAt, b.readyAt, b.gen = now, now + b.dur, b.gen + 1
+    end
 end
 
 -- How early the pop comes: when a press is already taken (the spell queue window)
@@ -869,15 +874,21 @@ end
 -- Where the game keeps the time left secret, only the moment it is gone.
 ---------------------------------------------------------------------------
 RC.buffs = {}                      -- [name] = { name, icon, gen, readyAt (when it runs out), present }
-local castable = {}
+local castable, askedAt = {}, {}
+RC.ASK_AGAIN = 30                  -- a spell not yours yet is asked about again this often (spells load late)
 local function Passive(id)
     local fn = (C_Spell and C_Spell.IsSpellPassive) or IsPassiveSpell
     if not fn then return false end
     local ok, yes = pcall(fn, id)
     return ok and ns.Yes(yes) or false
 end
+-- One of your own spells you cast, not a passive: a yes is kept, a no asked again in a while (at login the
+-- spellbook may not be read yet, and a no kept for good left a Seal out for the whole session)
 local function Castable(id, name)
-    if castable[id] == nil then castable[id] = (Have(id, name) and not Passive(id)) and true or false end
+    local now = GetTime()
+    if castable[id] == nil or (castable[id] == false and now - (askedAt[id] or 0) > RC.ASK_AGAIN) then
+        castable[id], askedAt[id] = (Have(id, name) and not Passive(id)) and true or false, now
+    end
     return castable[id]
 end
 
@@ -911,11 +922,16 @@ local function ReadBuffs(now)
             end
             b.icon = Num(a.icon) or ns.Plain(a.icon) or b.icon
             if not b.present then                                      -- cast (again): a new one
-                b.gen, b.present, b.readyAt = b.gen + 1, true, nil
+                b.gen, b.present, b.readyAt, b.castAt = b.gen + 1, true, nil, now
             end
             if dur and ends and ends > 0 then
                 if b.readyAt and ends > b.readyAt + 0.5 then b.gen = b.gen + 1 end    -- refreshed
-                b.readyAt, b.dur = ends, dur
+                b.readyAt, b.dur, b.hidden = ends, dur, false
+            else
+                -- the game keeps its time to itself (in a fight, often): it runs out as long after it went on
+                -- as it lasted when its time could still be read (a recast moves it: RC.Cast)
+                b.hidden = true
+                if not b.readyAt and b.dur and b.castAt then b.readyAt = b.castAt + b.dur end
             end
         end
     end

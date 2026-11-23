@@ -7,6 +7,8 @@ The game's
 Fonts can be chosen only where the game's language is written in Latin letters.
 Font: %s
 one font for the HUD and the game's own text (windows, tooltips, chat, buttons); each keeps its size
+Faction colours
+Ally or enemy
 Fireball
 Friendly mage
 Healing
@@ -18,6 +20,8 @@ Friendly NPCs by reputation
 a friendly NPC's name and bar are coloured by your standing with its faction: yellow neutral, green friendly, then sea green, teal and blue for honored, revered and exalted
 The other faction, plainly
 a player of the other faction wears the faction's badge before the name and an outline round the health bar, Alliance blue or Horde red, on nameplates and the target frame
+The other faction: colours
+the colour of the outline and the highlight on the other faction's bars: the faction's own (Alliance blue, Horde red), or the red of an enemy whichever faction it is
 Execute range on enemy bars
 an enemy at a quarter of its health or less: its health bar throbs red, with a glow round it beating like a pulse, on the target and focus frames and on nameplates
 Shields on health bars
@@ -144,6 +148,7 @@ R3 moves the item you point at (bank, vendor, trade, mailbox)
 while one of those is open, the right stick button moves the item you point at: into or out of the bank, sold, into the trade, or onto the letter. Pointing at nothing, it sorts
 sort your bags, and the bank while it is open
 list the gold on each of your characters, and the total
+Keep
 just now
 %d hours ago
 %d days ago
@@ -154,7 +159,6 @@ Auction
 Recommendation
 Equip
 Quest
-Keep
 better than what you wear
 Disenchant
 %s for %s
@@ -186,14 +190,22 @@ Upgrade: %s
 Skill-up: %s
 Quest: %s
 %d%% likely to sell
+in your equipment set %s
+in one of your equipment sets
 worth %s at auction
 more than it is worth to wear
 you chose to keep it
 your only tool of its kind
 an upgrade for another spec of yours
 you wear it
+your %s gear
+gear for one of your specs
+you use it
+unique, and yours
 Upgrade for %s
 your best of its kind
+kept: nothing says it's junk
+could fetch %s at the auction house
 5% under the lowest, for a quick sale
 the market is unusually low today: priced near its usual, to wait for buyers
 just under the lowest: few are up, it should sell
@@ -213,6 +225,8 @@ Read the auction house when you visit
 the first visit in a while reads every price at once (the game allows it every 15 minutes); /cchud scan asks for it
 Best use of an item
 an item's tooltip says what to do with it: sell it at the auction house (and how much more that brings), sell it to a vendor, keep it, or keep it for a quest
+Item advice: when unsure
+Keep: only grey items and what you mark as junk are advised for sale; everything else is kept, its prices shown. Sell: what nothing says to keep goes to the auction house where it pays, else to a vendor
 Quick sales at the auction house
 price 5% under the lowest for a sale now; off: patient prices, just under the lowest, that sell when buyers come
 read every price at the auction house at once (open it first; every 15 minutes)
@@ -905,6 +919,8 @@ on a flight a small game is offered under the flight bar, and one button starts 
 on a flight: start the flight game, or take it to high altitude and back
 Cinematic flights
 on a flight master's flight the screen turns to film: black bars, the HUD faded back, the camera drawn out wide and swinging slowly round you and your mount, with the flight bar in the top bar. The flight game, a window or a button steps out of it, and it bows out as you come in to land
+Cinematic flights: the camera circles you
+on film, the camera circles slowly round you and your mount, a whole turn in about a minute and a half, and comes round behind you again before you land. Off: a still shot
 A flight is a good moment for it.
 You have played for %s.
 Time for a sip of water
@@ -947,28 +963,45 @@ Equipment
 Consumables
 Trade goods
 New
+Smart
+By type
+As in your bags
+Reagents
+Other
+Nothing here.
+Empty slots
+Armour can't be changed in a fight.
 Keyring
 Backpack
 %d of %d slots used
 Put down
+Pick up
 Use
 To bags
 To bank
 Attach
 Trade
-Pick up
+%s or %s: to the mail
+%s or %s: to the vendor
+%s or %s: to the bank
+%s or %s: to the trade
+%s or %s: to the auction house
+%s or %s: to the guild bank
+%s or %s: to your character
+%s or %s: to the loot
+%s or %s: other window
 Controller buttons return after the fight.
 %s or %s: back to bags
+Hold to destroy
 All bags
 Only this bag
 Put in
 Pick up bag
 More
 Bags
-%s or %s: other window
-Nothing here.
 %d free
-%d free slots
+Empty slot
+In a fight, close your bags with B.
 for the bank
 no mark
 No empty slot.
@@ -976,14 +1009,21 @@ Put down here
 Split stack
 Mark: %s
 Item details
+Destroy
 Sort bank
 Sort bags
 Show bags
 Show bank
 Deposit marked items
 Sell advised items
+Let go to destroy
+Destroy %s?
+The game kept %s: destroy it from its own bags.
+Destroyed %s.
 One bag window with quick filters
 your bags in one window of the HUD's own, in place of the game's: every item together, the empty slots gathered at the end, your bags in a row of their own, and quick filters along the top (LB and RB). The bank too, while it is open. Off: the game's own bags
+Bag window: order
+Smart: what you use first (consumables, items with a use), then the rest by kind, junk last and faded. By type: in sections under their own headings. As in your bags: the game's own order
 HUD preset: %s, to match the camera
 preset: %s
 A layout named '%s' was added to the game's Edit Mode. Choose it there to use it (Game Menu > Edit Mode > Layout).

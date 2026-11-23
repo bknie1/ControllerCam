@@ -187,16 +187,26 @@ local function RunLines(c, withAmounts)
 end
 M.RunLines = RunLines
 
+-- The names in one line, in the order they landed, and how many hits: "Judgement + Seal of Command + Holy
+-- Strike  x3" (the last few, when it ran long)
+function M.Names(c)
+    local seq, names = c.seq or {}, {}
+    local from = math.max(1, #seq - M.LINES + 1)
+    if from > 1 then names[1] = "..." end
+    for i = from, #seq do names[#names + 1] = seq[i] end
+    return table.concat(names, " + ") .. ("  |cffffd24d×%d|r"):format(c.n or #seq)
+end
+
 local frame
-M.LINE_SIZE = 14               -- the abilities' lines; the total, held, is about four times as tall
+M.LINE_SIZE = 17               -- the abilities' line over the damage
 M.SHADE = 0.55                 -- how dark the shade behind it
 
--- The shade as tall as what it is behind (the total, or the column when that is taller)
+-- The shade as tall as what it is behind: the damage, and the names' line over it
 local function FitShade(size)
     local h = size or 0
     local ok, lines = pcall(frame.label.GetStringHeight, frame.label)
-    -- (a text holding a number the game keeps to itself has a height it keeps to itself too: not compared)
-    if ok and type(lines) == "number" and not ns.IsSecret(lines) and lines > h then h = lines end
+    -- (a text holding a number the game keeps to itself has a height it keeps to itself too: not added)
+    if ok and type(lines) == "number" and not ns.IsSecret(lines) then h = h + lines end
     frame.shade:SetHeight(h + 26)
 end
 local function Build()
@@ -213,23 +223,24 @@ local function Build()
     frame.number:SetPoint("CENTER", frame, "CENTER", 0, 0)
     frame.number:SetShadowColor(0, 0, 0, 0.9)
     frame.number:SetShadowOffset(3, -3)
-    frame.label = ns.FontString(frame, M.LINE_SIZE, "RIGHT")             -- the abilities, small, at its left
-    frame.label:SetPoint("RIGHT", frame.number, "LEFT", -14, 0)
-    if frame.label.SetSpacing then frame.label:SetSpacing(2) end
+    frame.label = ns.FontString(frame, M.LINE_SIZE, "CENTER")            -- the abilities, one line, above it
+    frame.label:SetPoint("BOTTOM", frame.number, "TOP", 0, 2)
     frame.label:SetTextColor(1, 0.9, 0.62)
     -- a soft dark shade behind all of it, like the one under the target's health text: easier to read
     frame.shade = frame:CreateTexture(nil, "BACKGROUND", nil, -8)
     frame.shade:SetTexture(ns.media.soft)
     frame.shade:SetVertexColor(0, 0, 0, M.SHADE)
-    frame.shade:SetPoint("LEFT", frame.label, "LEFT", -22, 0)
-    frame.shade:SetPoint("RIGHT", frame.number, "RIGHT", 22, 0)
+    frame.shade:SetPoint("LEFT", frame.number, "LEFT", -40, 0)
+    frame.shade:SetPoint("RIGHT", frame.number, "RIGHT", 40, 0)
     frame.shade:SetHeight(80)
     frame:Hide()
     M.frame = frame
 end
 
-local SLAM, HOLD, FADE, SIZE = 0.14, 1.2, 0.6, 46
-M.PER_CRIT = 1                 -- it stays a second longer for each crit of the burst
+-- Brief, like a crit's flash: long enough to see what happened, gone before it is in the way
+local SLAM, HOLD, FADE, SIZE = 0.14, 0.9, 0.4, 46
+M.PER_CRIT = 0.25              -- a little longer for each further crit of the burst ...
+M.HOLD_MAX = 1.6               -- ... never longer than this
 local function Font() return DAMAGE_TEXT_FONT or STANDARD_TEXT_FONT or "Fonts\\FRIZQT__.TTF" end
 
 local function Animate(_, dt)
@@ -271,7 +282,7 @@ function M:Show(amount, name, school, heal, count)
     if type(amount) == "table" and not ns.IsSecret(amount) and amount.side then   -- amounts that cannot be added:
         local parts = {}                                                           -- side by side, "431 + 86"
         for i = 1, #amount.side do parts[i] = one end
-        fmt, args = (amount.more and "... + " or "") .. table.concat(parts, " + "), amount.side
+        fmt, args = (amount.more and "... · " or "") .. table.concat(parts, "  ·  "), amount.side
         base = math.floor(SIZE * math.max(0.5, 0.95 - 0.12 * #amount.side))
     elseif type(amount) == "table" and not ns.IsSecret(amount) and amount.count then
         fmt, args = heal and L["%d crit heals"] or L["%d crits"], { amount.count }
@@ -292,7 +303,7 @@ function M:Show(amount, name, school, heal, count)
     -- held a second longer for each crit; a burst that grows while shown is not slammed in again, only held
     -- longer from now
     local again = self.live and frame:IsShown() and self.live.t < SLAM + self.live.hold
-    self.live = { t = again and SLAM or 0, calm = calm, base = base, hold = HOLD + M.PER_CRIT * (count or 1) }
+    self.live = { t = again and SLAM or 0, calm = calm, base = base, hold = math.min(M.HOLD_MAX, HOLD + M.PER_CRIT * math.max(0, (count or 1) - 1)) }
     self.shown = (self.shown or 0) + 1
     frame:SetScript("OnUpdate", Animate)
     if ns.Impact and ns.db.impactFx then                       -- a little light thrown off it
@@ -338,7 +349,7 @@ function M:Consider(amount, crit, ability, name, school)
     local now = GetTime()
     local run = Join(amount, name, now)
     if run.n < 2 or not ns.db.bigMoments then return false end     -- a crit on its own: no burst yet
-    local number, label = M.Number(run, amount), RunLines(run, false)
+    local number, label = M.Number(run, amount), M.Names(run)
     if not run.shown then                                          -- a new moment: kept rare
         if fight.moments >= PER_FIGHT or now - fight.lastMoment < GAP then return false end
         fight.moments = fight.moments + 1
@@ -365,7 +376,7 @@ function M:Healed(spellID, name, amount, crit, school)
         run.shown = true
     end
     fight.lastMoment = now
-    self:Pin(M.Number(run, amount), RunLines(run, false), school or "holy", true, run.n)
+    self:Pin(M.Number(run, amount), M.Names(run), school or "holy", true, run.n)
     return true
 end
 
@@ -496,7 +507,7 @@ end
 ns.RegisterCommand("momenttest", function()
     -- a burst as one looks: two crits, their names in the column, the total big (the spells by the game's names)
     local first, second = SpellName(20271) or L["Judgement"], SpellName(679) or MELEE or "Melee"
-    M:Show(826, ("+ %s\n+ %s"):format(first, second), "holy", nil, 2)
+    M:Show({ side = { 476, 350 } }, M.Names({ seq = { first, second }, n = 2 }), "holy", nil, 2)
     if ns.Rumble then ns.Rumble.busyUntil = nil; ns.Rumble:Play("moment") end
 end, "/cchud momenttest", "show what a big moment looks and feels like")
 

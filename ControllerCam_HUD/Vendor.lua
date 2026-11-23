@@ -494,7 +494,7 @@ local function Owned()
     for slot = 1, 18 do
         local link = GetInventoryItemLink and GetInventoryItemLink("player", slot)
         local id, _, _, loc = Instant(link)
-        if id and SLOTS[loc or ""] then list[#list + 1] = { id = id, link = link, loc = loc } end
+        if id and SLOTS[loc or ""] then list[#list + 1] = { id = id, link = link, loc = loc, worn = true } end
     end
     local last = NUM_TOTAL_EQUIPPED_BAG_SLOTS or NUM_BAG_SLOTS or 4
     for bag = 0, last do
@@ -516,15 +516,16 @@ end
 
 -- What that spec would wear there, of what you own (but `skip`), against the item: the item's worth there
 -- (with the other hand, for a weapon), and the best of yours there (nil: nothing of yours goes there).
--- unknown: the game said nothing of the stats of something of yours there.
+-- unknown: the game said nothing of the stats of something of yours there. wornFirst: what you wear wins a tie
+-- (a second one as good as yours is no reason to keep it).
 local HAND_MAIN = { INVTYPE_WEAPON = true, INVTYPE_WEAPONMAINHAND = true }
 local HAND_OFF = { INVTYPE_SHIELD = true, INVTYPE_WEAPONOFFHAND = true, INVTYPE_HOLDABLE = true }
-local function Against(owned, weights, slots, equipLoc, skip, mine)
+local function Against(owned, weights, slots, equipLoc, skip, mine, wornFirst)
     local unknown = false
     local function score(o)
         local s = V.Score(o.link, o.loc, weights)
         if s == nil then unknown = true end
-        return s or 0
+        return (s or 0) + ((wornFirst and o.worn) and 1e-6 or 0)
     end
     if equipLoc == "INVTYPE_2HWEAPON" or HAND_MAIN[equipLoc] or HAND_OFF[equipLoc] then
         local okD, dual = Try(CanDualWield)
@@ -629,6 +630,49 @@ function V.Upgrade(item, equipLoc, mode) return #For(item, equipLoc, mode, false
 -- Could it be as good as what you wear there (or, for another spec of yours, as the best you own for it)? Then
 -- it is never junk.
 function V.MaybeUpgrade(item, equipLoc, mode) return #For(item, equipLoc, mode, true) > 0 end
+
+-- The specs of yours for which it is among what that spec would wear, of all you own (worn or in your bags; level
+-- with the best counts, but a tie with what you wear does not): your Protection sword and shield while you play Holy. Never sold, whatever the rules.
+-- The specs: those the upgrade setting counts, and never fewer than both talent groups. Only by the stats: where
+-- the game gives none (for it, or for something of yours in that slot), nothing is said.
+function V.BestFor(item, equipLoc, mode)
+    local list = {}
+    local slots = SLOTS[equipLoc or ""]
+    if not slots then return list end
+    mode = math.max(tonumber(mode) or (ns.db and tonumber(ns.db.upgradeSpecs)) or 2, 2)
+    local specs = V.Specs(mode)
+    if not ForYou(item, equipLoc, #specs > 1 or specs[1].tree ~= nil) then return list end
+    local id = Instant(item)
+    for _, spec in ipairs(specs) do
+        if not (spec.main and OtherMain(item, spec.main)) then
+            local mine = V.Score(item, equipLoc, spec.weights)
+            if mine then
+                local value, base, unknown = Against(Owned(), spec.weights, slots, equipLoc, id, mine, true)
+                if not unknown and (not base or value >= base) then list[#list + 1] = spec end
+            end
+        end
+    end
+    return list
+end
+
+-- The name of one of the game's equipment sets this item is in ("" when the set has no name to give), or nil
+function V.EquipmentSetOf(id)
+    local ES = C_EquipmentSet
+    local ok, sets = Try(ES and ES.GetEquipmentSetIDs)
+    if not ok or type(sets) ~= "table" then return nil end
+    for _, set in ipairs(sets) do
+        local okI, items = Try(ES.GetItemIDs, set)
+        if okI and type(items) == "table" then
+            for _, each in pairs(items) do
+                if Num(each) == id then
+                    local okN, name = Try(ES.GetEquipmentSetInfo, set)
+                    return (okN and Str(name)) or ""
+                end
+            end
+        end
+    end
+    return nil
+end
 
 ---------------------------------------------------------------------------
 -- Upgrades for your other characters: the HUD notes what each one wears, its class and level (Inventory.lua).
@@ -839,10 +883,78 @@ function V.KeepConsumable(id, quality, classID)
     return classID == 0 and (quality or 1) >= 1 and not V.Outclassed(id)
 end
 
--- Never sold by a rule: tools, fishing poles, gear with a use of its own, and consumables still the best of their
--- kind you carry
+-- The item's tooltip, its left lines as plain text (nil when the game gives none)
+local function TipTexts(id)
+    local get = C_TooltipInfo and C_TooltipInfo.GetItemByID
+    if not get then return nil end
+    local ok, data = pcall(get, id)
+    if not ok or type(data) ~= "table" or type(data.lines) ~= "table" then return nil end
+    local out = {}
+    for _, line in ipairs(data.lines) do
+        local text = type(line) == "table" and ns.Plain(line.leftText)
+        if type(text) == "string" then out[#out + 1] = text end
+    end
+    return out
+end
+
+-- One of the game's texts ("%d |4Charge:Charges;", "Unique (%d)") as a pattern for a whole line
+local function LinePattern(text)
+    if type(text) ~= "string" or ns.IsSecret(text) then return nil end
+    text = text:gsub("|4[^;]*;", "")
+    text = text:gsub("([%(%)%.%+%-%*%?%[%]%^%$%%])", "%%%1")
+    text = text:gsub("%%%%d", "%%d+"):gsub("%%%%s", ".+"):gsub("", ".-")
+    return "^" .. text .. "$"
+end
+-- Does a line match one of the patterns? (patterns: a list that may have holes where a game text is missing)
+local function AnyLine(lines, patterns, n)
+    for _, line in ipairs(lines or {}) do
+        for i = 1, n do
+            local p = patterns[i]
+            if p and line:find(p) then return true end
+        end
+    end
+    return false
+end
+
+-- How many go in a stack (1: it does not stack), or nil
+local function StackSize(id)
+    local get = (C_Item and C_Item.GetItemInfo) or GetItemInfo
+    if not get then return nil end
+    local ok, stack = pcall(function() return select(8, get(id)) end)
+    stack = ok and ns.Plain(stack)
+    return type(stack) == "number" and stack or nil
+end
+
+local function QualityOf(id, quality)
+    if quality == nil and ns.Market then quality = ns.Market.Quality(id) end
+    return quality
+end
+
+-- Something you use and keep: a Use: of its own, one to a stack and no charges to use up (a sleeping bag, a toy,
+-- a hearthstone, a fishing pole, a trinket with a use). Never grey. Where the game does not say how it stacks,
+-- nothing is said.
+function V.Reusable(id, quality)
+    quality = QualityOf(id, quality)
+    if not quality or quality < 1 or not HasUse(id) or StackSize(id) ~= 1 then return false end
+    local charges = { LinePattern(_G.ITEM_SPELL_CHARGES), "^%d+ [Cc]harges?$" }
+    return not AnyLine(TipTexts(id), charges, 2)
+end
+
+-- Unique ("Unique", "Unique (1)" in its tooltip; not "Unique-Equipped"), not grey nor a quest item: yours to keep
+function V.UniqueKeep(id, quality, classID)
+    quality = QualityOf(id, quality)
+    if not quality or quality < 1 then return false end
+    if classID == nil then classID = ItemKind(id) end
+    if classID == 12 then return false end                 -- (a quest item none of yours needs goes as before)
+    local unique = { LinePattern(_G.ITEM_UNIQUE), LinePattern(_G.ITEM_UNIQUE_MULTIPLE), "^Unique$", "^Unique %(%d+%)$" }
+    return AnyLine(TipTexts(id), unique, 4)
+end
+
+-- Never sold by a rule: tools, fishing poles, gear with a use of its own, anything you use and keep, unique
+-- things, and consumables still the best of their kind you carry
 function V.Protected(id, quality, classID, subclassID)
     if V.TOOLS[id] then return true end
+    if V.Reusable(id, quality) or V.UniqueKeep(id, quality, classID) then return true end
     if classID == 0 and V.KeepConsumable(id, quality, classID) then return true end
     if classID == 2 and TOOL_SUBCLASS[subclassID or -1] then return true end
     if GEAR[classID or -1] and (quality or 0) >= 1 and HasUse(id) then return true end
@@ -874,6 +986,8 @@ function V:Decide(id, quality, classID, mode, upTo, subclassID, equipLoc, link)
     if quality == 0 then return true end
     if not GEAR[classID or -1] then return false end
     if V.MaybeUpgrade(link or id, equipLoc) then return false end
+    if V.EquipmentSetOf(id) then return false end                                     -- in one of your sets
+    if #V.BestFor(link or id, equipLoc) > 0 then return false end                    -- the best you own for a spec
     if #V.AltUpgrades(link or id, equipLoc) > 0 then return false end                -- for another of yours
     if quality >= 2 and ns.Professions and ns.Professions.Disenchant
         and ns.Professions.Disenchant(id, (SellPrice(link, id))) then

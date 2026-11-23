@@ -494,22 +494,57 @@ function ns.OtherFaction(unit)
     local theirs, mine = Faction(unit), Faction("player")
     if theirs and mine and theirs ~= mine and FACTION_ICON[theirs] then return theirs end
 end
--- An outline round a bar in a faction's colour (color nil: none). Made the first time, on the bar itself, just
--- outside its edges.
+-- The colour a player of the other faction is marked in: the faction's own (Alliance blue, Horde red), or, with
+-- "Ally or enemy" chosen, the red of an enemy whichever faction it is (setting: factionStyle, UnitFrames.lua)
+ns.ENEMY_COLOR = { 0.95, 0.28, 0.24 }
+function ns.FactionColor(f)
+    if not f then return nil end
+    if ns.db and ns.db.factionStyle == 2 then return ns.ENEMY_COLOR end
+    return ns.FACTION_COLOR[f]
+end
+
+-- The faction's marks on a bar (its outline, a tint over the health, the badge beside it) live on a layer of
+-- their own over the bar, not on the bar: a bar that shows incoming heals clips what is drawn on it to its own
+-- edges, which took the badge and the outline (both just outside) away on the target frame. The layer shows and
+-- hides with the bar.
+local function Layer(bar)
+    local layer = rawget(bar, "factionLayer")
+    if layer then return layer end
+    local okP, parent = pcall(bar.GetParent, bar)
+    layer = CreateFrame("Frame", nil, (okP and parent) or UIParent)
+    layer:SetAllPoints(bar)
+    local okL, level = pcall(bar.GetFrameLevel, bar)
+    layer:SetFrameLevel(((okL and tonumber(level)) or 1) + 10)
+    bar.factionLayer = layer
+    if bar.HookScript then
+        bar:HookScript("OnShow", function() layer:Show() end)
+        bar:HookScript("OnHide", function() layer:Hide() end)
+    end
+    local okS, shown = pcall(bar.IsShown, bar)
+    if okS and not shown then layer:Hide() end
+    return layer
+end
+ns.FactionLayer = Layer
+
+-- An outline round a bar in a faction's colour and a light tint of it over the health (color nil: none). Made the
+-- first time, on the bar's layer, the outline just outside its edges.
 ns.FACTION_EDGE = 2
+ns.FACTION_TINT = 0.22
 function ns.FactionEdge(bar, color)
     if type(bar) ~= "table" or not bar.CreateTexture then return end
     local e = rawget(bar, "factionEdge")
     if not color then
         if e then for _, t in ipairs(e) do t:Hide() end end
+        if rawget(bar, "factionTint") then bar.factionTint:Hide() end
         bar.factionShown = false
         return
     end
+    local layer = Layer(bar)
     if not e then
         local w = ns.FACTION_EDGE
         e = {}
         for i, side in ipairs({ "TOP", "BOTTOM", "LEFT", "RIGHT" }) do
-            local t = bar:CreateTexture(nil, "OVERLAY", nil, 7)
+            local t = layer:CreateTexture(nil, "OVERLAY", nil, 7)
             t:SetColorTexture(1, 1, 1, 1)
             if side == "TOP" or side == "BOTTOM" then
                 local y = side == "TOP" and w or -w
@@ -525,11 +560,18 @@ function ns.FactionEdge(bar, color)
             e[i] = t
         end
         bar.factionEdge = e
+        local tint = layer:CreateTexture(nil, "ARTWORK")                -- the highlight: the bar lit in its colour
+        tint:SetColorTexture(1, 1, 1, 1)
+        tint:SetBlendMode("ADD")
+        tint:SetAllPoints(bar)
+        bar.factionTint = tint
     end
     for _, t in ipairs(e) do
         t:SetVertexColor(color[1], color[2], color[3], 0.95)
         t:Show()
     end
+    bar.factionTint:SetVertexColor(color[1], color[2], color[3], ns.FACTION_TINT)
+    bar.factionTint:Show()
     bar.factionShown = true
 end
 
@@ -539,7 +581,7 @@ end
 function ns.FactionMark(unit)
     local f = ns.OtherFaction(unit)
     if not f then return "", nil end
-    return ("|T%s:0:0:0:0:64:64:0:40:0:40|t"):format(FACTION_ICON[f]), ns.FACTION_COLOR[f]
+    return ("|T%s:0:0:0:0:64:64:0:40:0:40|t"):format(FACTION_ICON[f]), ns.FactionColor(f)
 end
 
 -- The badge, big, just left of a bar (made the first time, on the bar itself): shown for a player of the other
@@ -555,7 +597,7 @@ function ns.FactionBadge(bar, unit, text)
         return nil
     end
     if not t then
-        t = bar:CreateTexture(nil, "OVERLAY", nil, 7)
+        t = Layer(bar):CreateTexture(nil, "OVERLAY", nil, 7)              -- (on the bar's layer: never clipped)
         t:SetTexCoord(0, 40 / 64, 0, 40 / 64)
         t:SetPoint("RIGHT", bar, "LEFT", -6, 0)
         bar.factionBadge = t
@@ -569,7 +611,7 @@ function ns.FactionBadge(bar, unit, text)
     t:SetTexture(FACTION_ICON[f])
     t:SetSize(size, size)
     t:Show()
-    return ns.FACTION_COLOR[f]
+    return ns.FactionColor(f)
 end
 
 function ns.LevelText(level)
@@ -632,8 +674,10 @@ function ns.ShowRaidMark(holder, parent, unit, size, ...)
         t:SetTexCoord(col * 0.25, (col + 1) * 0.25, row * 0.25, (row + 1) * 0.25)
     end
     t:Show()
-    if holder.raidIndex ~= index then ns.marksShown = ns.marksShown + 1 end
-    holder.raidIndex = index
+    -- (a mark the game keeps secret cannot be compared with the last one: counted as new, kept as "secret")
+    local last = holder.raidIndex
+    if secret or ns.IsSecret(last) or last ~= index then ns.marksShown = ns.marksShown + 1 end
+    holder.raidIndex = secret and "secret" or index
     return index
 end
 

@@ -30,6 +30,13 @@ ns.RegisterSetting({
     key = "auctionVerdict", kind = "boolean", default = true, command = "auctionverdict", section = "Bags, bank and vendor",
     label = "Best use of an item", tip = "an item's tooltip says what to do with it: sell it at the auction house (and how much more that brings), sell it to a vendor, keep it, or keep it for a quest",
 })
+ns.RegisterSetting({
+    key = "adviceUnsure", kind = "number", default = 1, min = 1, max = 2, command = "adviceunsure",
+    section = "Bags, bank and vendor", choices = { "Keep", "Sell" },
+    label = "Item advice: when unsure",
+    tip = "Keep: only grey items and what you mark as junk are advised for sale; everything else is kept, its prices shown. Sell: what nothing says to keep goes to the auction house where it pays, else to a vendor",
+})
+M.UNSURE_NAMES = { L["Keep"], L["Sell"] }
 ns.RegisterSaved("auctionScanAt", function(old) return tonumber(old) or 0 end)
 
 -- [itemID] = { p = lowest buyout each (copper), t = when (time()) }
@@ -275,7 +282,7 @@ function M.Advice(verdict, more, want, id)
         add(word)
         local why = M.SpecWords(want) or (type(want) == "table" and want.why)
         if why then add(GREY .. why .. "|r") end
-        local worth = M.WorthWords(want, true)
+        local worth = M.WorthWords(want, true) or M.FetchWords(want, true)
         if worth then add(GREY .. worth .. "|r") end
         return lines
     end
@@ -454,7 +461,7 @@ function M.BestText(verdict, more, want)
         local specs = (verdict == "equip" or verdict == "keep") and M.SpecWords(want)
         if not specs and verdict == "keep" and type(want) == "table" then specs = want.why end   -- (Keep says why)
         if specs then right = right .. GREY .. "  " .. specs .. "|r" end
-        local worth = (verdict == "equip" or verdict == "keep") and M.WorthWords(want, true)
+        local worth = (verdict == "equip" or verdict == "keep") and (M.WorthWords(want, true) or M.FetchWords(want, true))
         if worth then right = right .. GREY .. "  ·  " .. worth .. "|r" end
     end
     if more and verdict ~= "skill" then right = right .. "  |cff6fe06a+|r" .. ns.MoneyColored(more) end
@@ -506,6 +513,12 @@ local function Kept(why, want)
     return "keep", nil, want
 end
 M.Kept = Kept
+
+-- Kept for being in one of the game's equipment sets (V.EquipmentSetOf: its name, or "" without one)
+function M.SetWords(set)
+    if set ~= "" then return L["in your equipment set %s"]:format(set) end
+    return L["in one of your equipment sets"]
+end
 
 -- Do you wear one of these now?
 function M.Wearing(id)
@@ -604,6 +617,9 @@ function M.Verdict(id, bound)
                         return "equip"
                     end
                 end
+                -- (gear of one of your equipment sets says so first: it is already that spec's)
+                local set = V.EquipmentSetOf and V.EquipmentSetOf(id)
+                if set then return Kept(M.SetWords(set)) end
                 return Kept(L["an upgrade for another spec of yours"], want)
             end
         end
@@ -613,6 +629,24 @@ function M.Verdict(id, bound)
         if ok and (classID == 2 or classID == 4) and M.Wearing(id) then
             return Kept(L["you wear it"])
         end
+        -- in one of the game's equipment sets: always yours to keep
+        local set = ok and (classID == 2 or classID == 4) and V and V.EquipmentSetOf and V.EquipmentSetOf(id)
+        if set then
+            return Kept(M.SetWords(set))
+        end
+        -- the best you own for one of your specs (your Protection sword and shield while you play Holy)
+        if ok and V and V.BestFor and (classID == 2 or classID == 4) then
+            local best = V.BestFor(id, equipLoc)
+            if #best > 0 then
+                local names = {}
+                for _, spec in ipairs(best) do if spec.name then names[#names + 1] = spec.name end end
+                return Kept(#names > 0 and L["your %s gear"]:format(table.concat(names, ", "))
+                    or L["gear for one of your specs"])
+            end
+        end
+        -- something you use and keep (a sleeping bag, a toy, a hearthstone), and anything unique
+        if ok and V and V.Reusable and V.Reusable(id) then return Kept(L["you use it"]) end
+        if ok and V and V.UniqueKeep and V.UniqueKeep(id, nil, classID) then return Kept(L["unique, and yours"]) end
         -- an upgrade for another character of yours: "Upgrade for Sol" (mail it over)
         if ok and V and V.AltUpgrades and (classID == 2 or classID == 4) then
             local alts = V.AltUpgrades(id, equipLoc, bound)
@@ -648,11 +682,40 @@ function M.Verdict(id, bound)
     local craft = ns.Professions and ns.Professions.Crafts(id, own)
     if craft then return "craft", math.floor(craft.each - own + 0.5), craft end   -- worth more made into something
     local more, how = M.Fetches(id, bound)
-    if more then return "auction", more, how end
-    if vendor then return "vendor" end
+    if more then
+        if M.KeepWhenUnsure() then return M.Unsure(id, more, how) end
+        return "auction", more, how
+    end
+    if vendor then
+        if M.KeepWhenUnsure() then return M.Unsure(id) end
+        return "vendor"
+    end
     -- a quest item no vendor buys, with buyers at the auction house all the same: there, however little it brings
-    if questItem and auction then return "auction", nil, { chance = M.SellChance(id) or M.CHANCE } end
+    if questItem and auction then
+        if M.KeepWhenUnsure() then return M.Unsure(id, 0, { chance = M.SellChance(id) or M.CHANCE }) end
+        return "auction", nil, { chance = M.SellChance(id) or M.CHANCE }
+    end
     return nil
+end
+
+-- When nothing says what an item is for: kept (the setting "Item advice: when unsure", Keep, the default) or sold
+-- (Sell: the auction house where it pays, else a vendor). Only grey items and your junk are junk either way.
+function M.KeepWhenUnsure() return (tonumber(ns.db and ns.db.adviceUnsure) or 1) ~= 2 end
+
+-- Kept for want of a reason to sell it: what the auction house could fetch goes with it, as a note (want.fetch:
+-- its price each; want.gain: over a vendor, each; want.chance), and the Market still offers it for sale
+-- (want.unsure)
+function M.Unsure(id, gain, how)
+    local want = type(how) == "table" and how or {}
+    want.unsure = true
+    if gain then want.gain, want.fetch = gain, M.Auction(id) end
+    return Kept(L["kept: nothing says it's junk"], want)
+end
+
+-- The note: "could fetch 7s at the auction house"
+function M.FetchWords(want, colored)
+    if type(want) ~= "table" or not want.fetch then return nil end
+    return L["could fetch %s at the auction house"]:format(colored and ns.MoneyColored(want.fetch) or ns.Money(want.fetch))
 end
 
 -- The auction house when what it can be expected to bring is clearly more than a vendor pays, and the

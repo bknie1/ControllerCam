@@ -559,18 +559,30 @@ class Applying(unittest.TestCase):
         env.state(zoom=8)
         frame.scripts.OnUpdate(frame, 0.2)
         self.assertEqual(env.cv("test_cameraOverShoulder"), "2.7")
+        env.mock.cvars.cameraSmoothStyle = "4"                         # the game's auto-follow, on
         cam.Hold(True)
         self.assertTrue(cam.IsHeld())
         self.assertEqual(env.cv("test_cameraOverShoulder"), "0")
+        self.assertEqual(env.cv("cameraSmoothStyle"), "0")             # resting: it pulled a flight's camera back
+        self.assertEqual(env.ns.db.heldWas.cameraSmoothStyle, "4")     # (kept, in case the game closes now)
         env.state(zoom=11)                                             # the scene eases the camera out
         frame.scripts.OnUpdate(frame, 0.2)
         env.ns.Evaluate(True)
         self.assertEqual(env.cv("test_cameraOverShoulder"), "0")       # neither the curve nor a profile moves it
         self.assertEqual(env.mock.state.zoom, 11)
         cam.Hold(False)
+        self.assertEqual(env.cv("cameraSmoothStyle"), "0")             # auto-follow as the profile has it
+        self.assertIsNone(env.ns.db.heldWas)
         self.assertNotEqual(env.cv("test_cameraOverShoulder"), "0")     # back on the curve at once
         self.assertEqual(env.cv("test_cameraOverShoulder"),
                          env.ns.FormatNumber(env.run("return NS.EvalCurve(NS.BUILTIN.action.values.shoulderCurve, 11)")))
+
+    def test_a_scene_cut_off_by_the_game_closing_is_put_back_on_load(self):
+        env = Env(db='{ heldWas = { cameraSmoothStyle = "4", bogus = "1" } }', cvars={"cameraSmoothStyle": "0"},
+                  login=False)
+        env.mock.fire("ADDON_LOADED", "ControllerCam")
+        self.assertEqual(env.cv("cameraSmoothStyle"), "4")             # what the scene held, given back
+        self.assertIsNone(env.ns.db.heldWas)
 
     def test_close_zoom_keeps_the_character_on_screen(self):
         """A sideways offset in yards covers more screen the closer the camera is: keep it a fraction of the view."""

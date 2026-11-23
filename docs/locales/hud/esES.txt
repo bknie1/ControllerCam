@@ -7,6 +7,8 @@ La del juego
 Las fuentes solo se pueden elegir donde el idioma del juego se escribe con letras latinas.
 Fuente: %s
 una fuente para el HUD y los textos del propio juego (ventanas, descripciones, chat, botones); todo conserva su tamaño
+Colores de facción
+Aliado o enemigo
 Bola de fuego
 Mago aliado
 Sanación
@@ -18,6 +20,8 @@ PNJ amistosos por reputación
 el nombre y la barra de un PNJ amistoso se colorean según tu reputación con su facción: amarillo neutral, verde amistoso, luego verde mar, turquesa y azul para honorable, reverenciado y exaltado
 La otra facción, a simple vista
 un jugador de la otra facción lleva el emblema de su facción delante del nombre y un contorno alrededor de la barra de salud, azul Alianza o rojo Horda, en placas de nombre y en el marco del objetivo
+La otra facción: colores
+el color del contorno y del resaltado en las barras de la otra facción: el de la facción (Alianza azul, Horda rojo) o el rojo de un enemigo, sea cual sea la facción
 Rango de ejecución en barras enemigas
 un enemigo con un cuarto de su salud o menos: su barra de salud late en rojo, con un brillo alrededor que palpita como un pulso, en los marcos de objetivo y foco y en las placas de nombre
 Escudos en las barras de salud
@@ -144,6 +148,7 @@ R3 mueve el objeto al que apuntas (banco, vendedor, intercambio, buzón)
 mientras uno de ellos está abierto, el botón del stick derecho mueve el objeto al que apuntas: al banco o fuera de él, vendido, al intercambio o a la carta. Si no apuntas a nada, ordena
 ordena tus bolsas, y el banco mientras esté abierto
 lista el oro de cada uno de tus personajes y el total
+Guardar
 justo ahora
 hace %d horas
 hace %d días
@@ -154,7 +159,6 @@ Subasta
 Recomendación
 Equipar
 Misión
-Guardar
 mejor que lo que llevas
 Desencantar
 %s por %s
@@ -186,14 +190,22 @@ Mejora: %s
 Sube habilidad: %s
 Misión: %s
 %d%% de probabilidad de venta
+en tu equipamiento %s
+en uno de tus equipamientos
 vale %s en la casa de subastas
 más de lo que vale llevarlo puesto
 elegiste conservarlo
 tu única herramienta de este tipo
 una mejora para otra de tus especializaciones
 lo llevas puesto
+tu equipo de %s
+equipo para una de tus especializaciones
+lo usas
+único, y tuyo
 Mejora para %s
 lo mejor de su tipo que llevas
+conservado: nada dice que sea basura
+podría valer %s en la casa de subastas
 5% por debajo del más bajo, para una venta rápida
 el mercado está hoy inusualmente bajo: precio cercano al habitual, para esperar compradores
 justo por debajo del más bajo: hay pocos a la venta, debería venderse
@@ -213,6 +225,8 @@ Leer la casa de subastas al visitarla
 la primera visita en un rato lee todos los precios de una vez (el juego lo permite cada 15 minutos); /cchud scan lo pide
 Mejor uso de un objeto
 la descripción de un objeto dice qué hacer con él: venderlo en la casa de subastas (y cuánto más se saca), vendérselo a un vendedor, conservarlo o conservarlo para una misión
+Consejo de objetos: en caso de duda
+Guardar: solo se aconseja vender los objetos grises y lo que marques como basura; todo lo demás se guarda, con sus precios. Vender: lo que nada dice que guardes va a la casa de subastas donde compensa, si no a un vendedor
 Ventas rápidas en la casa de subastas
 precio 5% por debajo del más bajo para vender ya; desactivado: precios pacientes, justo por debajo del más bajo, que se venden cuando llegan compradores
 lee todos los precios de la casa de subastas de una vez (ábrela antes; cada 15 minutos)
@@ -905,6 +919,8 @@ en un vuelo se ofrece un pequeño juego bajo la barra de vuelo, y un botón lo i
 en un vuelo: iniciar el juego de vuelo, o llevarlo a gran altitud y de vuelta
 Vuelos cinematográficos
 en un vuelo del maestro de vuelo la pantalla se convierte en película: franjas negras, el HUD se desvanece, la cámara se aleja y gira despacio a tu alrededor y de tu montura, con la barra de vuelo en la franja superior. El juego de vuelo, una ventana o un botón la interrumpen, y termina suavemente al aproximarte a aterrizar
+Vuelos cinematográficos: la cámara gira a tu alrededor
+en la película, la cámara gira despacio a tu alrededor y de tu montura, una vuelta completa en un minuto y medio más o menos, y vuelve a quedar detrás de ti antes de aterrizar. Desactivado: un plano fijo
 Un vuelo es un buen momento para ello.
 Llevas jugando %s.
 Hora de un sorbo de agua
@@ -947,28 +963,45 @@ Equipo
 Consumibles
 Objetos comerciables
 Nuevo
+Inteligente
+Por tipo
+Como en tus bolsas
+Componentes
+Otros
+Nada aquí.
+Huecos libres
+La armadura no se puede cambiar en combate.
 Llavero
 Mochila
 %d de %d huecos ocupados
 Dejar
+Coger
 Usar
 A las bolsas
 Al banco
 Adjuntar
 Comerciar
-Coger
+%s o %s: al correo
+%s o %s: al vendedor
+%s o %s: al banco
+%s o %s: al comercio
+%s o %s: a la casa de subastas
+%s o %s: al banco de hermandad
+%s o %s: a tu personaje
+%s o %s: al botín
+%s o %s: otra ventana
 Los botones del mando vuelven tras el combate.
 %s o %s: volver a las bolsas
+Mantén para destruir
 Todas las bolsas
 Solo esta bolsa
 Meter
 Coger bolsa
 Más
 Bolsas
-%s o %s: otra ventana
-Nada aquí.
 %d libres
-%d huecos libres
+Hueco libre
+En combate, cierra tus bolsas con B.
 para el banco
 sin marca
 No hay hueco libre.
@@ -976,14 +1009,21 @@ Dejar aquí
 Dividir montón
 Marca: %s
 Detalles del objeto
+Destruir
 Ordenar banco
 Ordenar bolsas
 Ver bolsas
 Ver banco
 Depositar lo marcado
 Vender lo aconsejado
+Suelta para destruir
+¿Destruir %s?
+El juego conservó %s: destrúyelo desde sus propias bolsas.
+%s destruido.
 Una ventana de bolsas con filtros rápidos
 tus bolsas en una ventana propia del HUD en lugar de la del juego: todos los objetos juntos, los huecos vacíos reunidos al final, tus bolsas en una fila aparte y filtros rápidos arriba (LB y RB). También el banco, mientras está abierto. Desactivado: las bolsas del juego
+Ventana de bolsas: orden
+Inteligente: lo que usas primero (consumibles, objetos con un uso), luego el resto por tipo, la basura al final y atenuada. Por tipo: en secciones con su propio título. Como en tus bolsas: el orden del juego
 Ajuste del HUD: %s, a juego con la cámara
 preajuste: %s
 Se ha añadido un diseño llamado '%s' al modo edición del juego. Elígelo allí para usarlo (Menú del juego > Modo edición > Diseño).
