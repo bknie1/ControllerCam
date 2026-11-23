@@ -14859,6 +14859,33 @@ class BagWindow(unittest.TestCase):
         self.assertEqual(B.frame.points[1][1], "TOPRIGHT")           # placed by its top: it fills downward
         self.assertEqual(e.errors(), [])
 
+    def test_the_comparisons_go_further_out_never_over_the_window(self):
+        e = self.env()
+        e.lua.execute("""
+            ShoppingTooltip1 = CreateFrame("Frame", "ShoppingTooltip1", UIParent)
+            ShoppingTooltip2 = CreateFrame("Frame", "ShoppingTooltip2", UIParent)
+            ShoppingTooltip1:SetWidth(200); ShoppingTooltip2:SetWidth(200)
+        """)
+        e.g.ToggleAllBags()
+        B, tip = e.ns.Bags, e.g.GameTooltip
+        self.assertTrue(e.same(tip.owner, B.frame))
+        s1, s2 = e.g.ShoppingTooltip1, e.g.ShoppingTooltip2
+        s1.SetPoint(s1, "TOPLEFT", B.frame, "TOPLEFT", 0, 0)           # the game put them over the window
+        B.PlaceCompare()
+        side = B.tipSide
+        if side == "left":
+            self.assertEqual((s1.points[1][1], s1.points[1][3]), ("TOPRIGHT", "TOPLEFT"))
+        else:
+            self.assertEqual((s1.points[1][1], s1.points[1][3]), ("TOPLEFT", "TOPRIGHT"))
+        self.assertTrue(e.same(s1.points[1][2], tip))                # beside our tooltip,
+        self.assertTrue(e.same(s2.points[1][2], s1))                 # the second beside the first
+        tip.GetLeft = e.lua.eval("function() return 150 end")       # no room further out on the left:
+        tip.GetRight = e.lua.eval("function() return 1500 end")
+        e.g.UIParent.GetWidth = e.lua.eval("function() return 1536 end")
+        B.PlaceCompare()
+        self.assertEqual(s1.points[1][3], "BOTTOMLEFT" if side == "right" else "BOTTOMRIGHT")   # stacked under it
+        self.assertEqual(e.errors(), [])
+
     def test_y_opens_its_menu_on_the_side_with_room(self):
         e = self.env()
         e.g.ToggleAllBags()

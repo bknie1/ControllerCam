@@ -1375,18 +1375,83 @@ end
 
 -- The tooltip beside the window, never over its slots: to its left where the window sits on the right of the
 -- screen (where it opens), else to its right; level with its top
+-- (outside both windows at the bank: beside the outer one, on the side of the screen with more room; the
+-- comparisons with what you wear go further out from it, or under it where the screen runs out: B.PlaceCompare)
 function B.TipBeside()
     GameTooltip:SetOwner(frame, "ANCHOR_NONE")
     B.tipMine = true                                    -- (ours: put away with the window, or by R3)
     GameTooltip:ClearAllPoints()
-    local x = Num(Try(frame.GetCenter, frame))
     local w = Num(Try(UIParent.GetWidth, UIParent))
-    if x and w and x < w / 2 then
-        GameTooltip:SetPoint("TOPLEFT", frame, "TOPRIGHT", 8, 0)
+    local leftF, rightF = frame, frame
+    local besideF = rawget(B, "beside")
+    if besideF and Shown(besideF) then
+        local bl, fl = Num(Try(besideF.GetLeft, besideF)), Num(Try(frame.GetLeft, frame))
+        if bl and fl then
+            if bl < fl then leftF = besideF else rightF = besideF end
+        end
+    end
+    local left, right = Num(Try(leftF.GetLeft, leftF)), Num(Try(rightF.GetRight, rightF))
+    local toRight
+    if left and right and w then
+        toRight = (w - right) > left                    -- (the side with more room)
+    else
+        local x = Num(Try(frame.GetCenter, frame))
+        toRight = x and w and x < w / 2 or false
+    end
+    if toRight then
+        GameTooltip:SetPoint("TOPLEFT", rightF, "TOPRIGHT", 8, 0)
         B.tipSide = "right"
     else
-        GameTooltip:SetPoint("TOPRIGHT", frame, "TOPLEFT", -8, 0)
+        GameTooltip:SetPoint("TOPRIGHT", leftF, "TOPLEFT", -8, 0)
         B.tipSide = "left"
+    end
+end
+
+-- The game's comparison tooltips (what you wear in that slot), for our tooltip: further out from it, side by
+-- side, never back over the window; under it, stacked, where the screen has no room that way
+B.COMPARE = { "ShoppingTooltip1", "ShoppingTooltip2" }
+function B.PlaceCompare()
+    if not (B.tipMine and frame and Try(GameTooltip.GetOwner, GameTooltip) == frame) then return end
+    local tips = {}
+    for _, name in ipairs(B.COMPARE) do
+        local t = rawget(_G, name)
+        if type(t) == "table" and Shown(t) then tips[#tips + 1] = t end
+    end
+    if #tips == 0 then return end
+    local need = 0
+    for _, t in ipairs(tips) do need = need + (Num(Try(t.GetWidth, t)) or 0) + 4 end
+    local w = Num(Try(UIParent.GetWidth, UIParent))
+    local out
+    if B.tipSide == "right" then
+        local r = Num(Try(GameTooltip.GetRight, GameTooltip))
+        out = not (r and w) or (r + need <= w)
+    else
+        local l = Num(Try(GameTooltip.GetLeft, GameTooltip))
+        out = not l or (l - need >= 0)
+    end
+    local prev = GameTooltip
+    for _, t in ipairs(tips) do
+        Try(t.ClearAllPoints, t)
+        if out and B.tipSide == "right" then Try(t.SetPoint, t, "TOPLEFT", prev, "TOPRIGHT", 4, 0)
+        elseif out then Try(t.SetPoint, t, "TOPRIGHT", prev, "TOPLEFT", -4, 0)
+        elseif B.tipSide == "right" then Try(t.SetPoint, t, "TOPLEFT", prev, "BOTTOMLEFT", 0, -4)
+        else Try(t.SetPoint, t, "TOPRIGHT", prev, "BOTTOMRIGHT", 0, -4) end
+        prev = t
+    end
+end
+do  -- after the game places them (its own placing runs first; ours only moves them)
+    local hooked = false
+    function B.HookCompare()
+        if hooked or type(hooksecurefunc) ~= "function" then return end
+        hooked = true
+        local place = ns.Protect(B.PlaceCompare)
+        local M = rawget(_G, "TooltipComparisonManager")
+        if type(M) == "table" and type(M.AnchorShoppingTooltips) == "function" then
+            hooksecurefunc(M, "AnchorShoppingTooltips", place)
+        end
+        for _, name in ipairs({ "GameTooltip_ShowCompareItem", "GameTooltip_AnchorComparisonTooltips" }) do
+            if type(rawget(_G, name)) == "function" then hooksecurefunc(name, place) end
+        end
     end
 end
 
@@ -1703,6 +1768,9 @@ function B:Tip(mouse)
         GameTooltip:SetText(L["Empty slot"])
     end
     GameTooltip:Show()
+    B.HookCompare()
+    B.PlaceCompare()
+    C_Timer.After(0, B.PlaceCompare)
 end
 
 -- Read the bags again (keepRead: only the filter or the view changed) and draw
