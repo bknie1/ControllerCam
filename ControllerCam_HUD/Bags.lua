@@ -265,7 +265,9 @@ end
 
 -- The smart order: what you use first (consumables, anything with a use), then the rest, junk last; each by
 -- kind, then name, then where it is (so nothing moves about while the bags stay as they are)
+B.FIRST = { [6948] = true }    -- the Hearthstone: always the first of all
 local function Group(e)
+    if B.FIRST[e.id] then return 0 end
     if B.Junk(e) then return 3 end
     if e.kind == "consumable" or e.use then return 1 end
     return 2
@@ -568,7 +570,7 @@ local function Holder(bag)
 end
 
 -- Using an item is protected: only the game's own secure code may do it. So a use goes through the game's
--- secure item button (SecureActionButtonTemplate, type "item", item "<bag> <slot>"), its attributes set out of
+-- secure button (SecureActionButtonTemplate) with the macro "/use <bag> <slot>", its attributes set out of
 -- combat, and pressed by the game itself: by X's binding, or by your mouse on the cover over the slot you point
 -- at. Neither is ever clicked by code of ours. Both hang from the screen, never from our window, so the window
 -- stays an ordinary one that can open and change in a fight (when the two are put away and do nothing).
@@ -583,7 +585,11 @@ end
 
 -- X: the chosen slot's use. Shown (a binding clicks it) but never seen or pointed at.
 B.SecureUse = SecureButton("ControllerCamHUD_BagUse")
-B.SecureUse:SetAttribute("type", "item")
+-- (a macro, not the template's "item" action: that one equips anything that can be worn, by its name, before it
+-- would use the slot, so at a vendor gear was put on instead of sold. "/use <bag> <slot>" uses that very slot, as
+-- the game's own right click does: sold at a vendor, moved at the bank, attached at the mailbox, else used or
+-- put on.)
+B.SecureUse:SetAttribute("type", "macro")
 B.SecureUse:SetSize(1, 1)
 B.SecureUse:SetPoint("TOPLEFT", UIParent, "TOPLEFT", -10, 10)
 B.SecureUse:SetAlpha(0)
@@ -594,7 +600,7 @@ function B.Aim(bag, slot)
     if InCombatLockdown() then return false end
     local value = bag and (bag .. " " .. slot) or nil
     if B.aimed ~= value then
-        B.SecureUse:SetAttribute("item", value)
+        B.SecureUse:SetAttribute("macrotext", value and ("/use " .. value) or nil)
         B.aimed = value
     end
     return value ~= nil
@@ -638,7 +644,7 @@ B.NAV_SNIPPET = [[
     if to then
         owner:SetAttribute("i", to)
         local use = owner:GetFrameRef("use")
-        if use then use:SetAttribute("item", owner:GetAttribute("slot" .. to)) end
+        if use then use:SetAttribute("macrotext", owner:GetAttribute("slot" .. to)) end
     end
 ]]
 B.navButtons = {}
@@ -670,11 +676,27 @@ Try(rawget(_G, "SecureHandlerWrapScript"), B.SecureClose, "OnClick", B.Secure, [
 ]])
 B.SecureClose:SetScript("PostClick", ns.Protect(function(_, _, down) if not down then B:Close() end end))
 
--- X in a fight on armour: said, not tried
+-- X in a fight on armour: said, not tried. At a vendor, a sale of something of an equipment set, or worth a gold
+-- or more, is said in chat (the vendor's buyback has it); nothing is asked first: X there is a sale, as the game's
+B.SOLD_SAY = 10000
+function B.SaySold(e)
+    if not (e and e.id and B.merchantOpen) then return false end
+    local inSet = Try(C_Container.GetContainerItemEquipmentSetInfo, e.bag, e.slot) == true
+    local M = ns.Market
+    local each = M and M.Vendor and Num(Try(M.Vendor, e.id)) or 0
+    local worth = each * (e.count or 1)
+    if not (inSet or worth >= B.SOLD_SAY) then return false end
+    ns.Say(L["Sold %s: the vendor can sell it back to you."]:format(B.DestroyName(e)))
+    return true
+end
 B.SecureUse:SetScript("PostClick", ns.Protect(function(_, _, down)
-    if down or not InCombatLockdown() then return end
+    if down then return end
     local e = B.list and B.list[B.index]
-    if e and e.id and B.NoFightEquip(e) then ns.Say(L["Armour can't be changed in a fight."]) end
+    if InCombatLockdown() then
+        if e and e.id and B.NoFightEquip(e) then ns.Say(L["Armour can't be changed in a fight."]) end
+        return
+    end
+    B.SaySold(e)
 end))
 
 -- The fight's bindings: key -> "CLICK button:LeftButton" or a binding of the game's
@@ -693,7 +715,7 @@ end
 local function ShowSnippet()
     local lines = { "if not PlayerInCombat() then return end", 'self:SetAttribute("i", 1)',
                     'local use = self:GetFrameRef("use")',
-                    'if use then use:SetAttribute("item", self:GetAttribute("slot1")) end',
+                    'if use then use:SetAttribute("macrotext", self:GetAttribute("slot1")) end',
                     'self:SetAttribute("combatbound", true)' }
     local keys = {}
     for key in pairs(B.NAV) do keys[#keys + 1] = key end
@@ -718,7 +740,7 @@ function B.SecureSync(list, model, index)
     local S, n = B.Secure, #list
     for k = 1, math.max(n, B.syncedN or 0) do
         local e = list[k]
-        S:SetAttribute("slot" .. k, (e and e.id and not B.NoFightEquip(e)) and (e.bag .. " " .. e.slot) or nil)
+        S:SetAttribute("slot" .. k, (e and e.id and not B.NoFightEquip(e)) and ("/use " .. e.bag .. " " .. e.slot) or nil)
         for _, way in ipairs({ "up", "down", "left", "right" }) do
             local to = e and model and B.StepModel(model, k, way, n)
             S:SetAttribute(way .. k, (type(to) == "number" and to ~= k) and to or nil)
@@ -733,7 +755,7 @@ end
 -- stays an ordinary frame). Right click: the use (secure). Left click, or a drag: picks up and puts down.
 -- Shift + left click: links it in chat.
 B.Cover = SecureButton("ControllerCamHUD_BagCover")
-B.Cover:SetAttribute("type2", "item")
+B.Cover:SetAttribute("type2", "macro")
 B.Cover:RegisterForDrag("LeftButton")
 B.Cover:SetFrameStrata("HIGH")
 B.Cover:Hide()
@@ -774,7 +796,7 @@ function B.CoverOver(button)
     c:SetPoint("CENTER", UIParent, "BOTTOMLEFT", x * k, y * k)
     c:SetSize(B.SIZE * k, B.SIZE * k)
     c:SetFrameLevel((Num(Try(button.GetFrameLevel, button)) or 1) + 30)
-    c:SetAttribute("item", s.bag .. " " .. s.slot)
+    c:SetAttribute("macrotext", "/use " .. s.bag .. " " .. s.slot)
     B.coverSlot = s                                        -- (ours: nothing written on the button)
     c:Show()
     return true
@@ -785,7 +807,7 @@ function B.Uncover()
     if InCombatLockdown() and not B.fightStarting then return end
     local c = B.Cover
     B.coverSlot = nil
-    c:SetAttribute("item", nil)
+    c:SetAttribute("macrotext", nil)
     c:Hide()
 end
 
@@ -1619,7 +1641,7 @@ function B:FightBind()
     if self.zone ~= "grid" then self.zone = "grid" end
     local S = B.Secure
     S:SetAttribute("i", self.index)
-    B.SecureUse:SetAttribute("item", S:GetAttribute("slot" .. self.index))
+    B.SecureUse:SetAttribute("macrotext", S:GetAttribute("slot" .. self.index))
     B.aimed = nil
     ClearOverrideBindings(owner)
     local set = B.FightSet()

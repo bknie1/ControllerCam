@@ -656,6 +656,54 @@ function V.BestFor(item, equipLoc, mode)
 end
 
 -- The name of one of the game's equipment sets this item is in ("" when the set has no name to give), or nil
+-- Gear plainly for selling (to a vendor, or the auction house where it pays clearly more): white of any binding,
+-- or green that binds when equipped and is not bound yet, that is
+--   * armor your class never wears: lighter than you wear now (cloth or leather for a paladin), or heavier than
+--     your class ever wears (plate for a priest); a warrior of 30 keeps plate for 40;
+--   * or below the item level of what you wear where it goes (rings, trinkets and one-handers: the lower of the
+--     two slots; nothing worn there: not below).
+-- Returns its reason, or nil. Only the rule itself: the reasons to keep come first (M.Verdict).
+-- bound: true when it is bound to you (nil: not known, taken as not bound).
+function V.PlainlySellable(id, equipLoc, bound, classID, subclassID)
+    if classID == nil then classID, subclassID, equipLoc = ItemKind(id) end
+    if not GEAR[classID or -1] then return nil end
+    local get = (C_Item and C_Item.GetItemInfo) or GetItemInfo
+    if not get then return nil end
+    local ok, quality, bind = pcall(function()
+        local info = { get(id) }
+        return info[3], info[14]
+    end)
+    quality, bind = ok and ns.Plain(quality), ok and ns.Plain(bind)
+    if quality == 2 then
+        if bind ~= 2 or bound == true then return nil end        -- green: only one that binds when equipped, unbound
+    elseif quality ~= 1 then
+        return nil                                               -- never blue or better (nor grey: junk anyway)
+    end
+    if classID == 4 and equipLoc ~= "INVTYPE_CLOAK" and (subclassID or 0) >= 1 and subclassID <= 4 then
+        local _, class = UnitClass("player")
+        local at = ARMOR_AT[ns.Plain(class) or ""]
+        local now = V.ArmorKind()
+        if at and now and (subclassID < now or subclassID > at[2]) then return L["not your armour type"] end
+    end
+    local slots = SLOTS[equipLoc or ""]
+    local mine = ItemLevel(id)
+    if not slots or not mine then return nil end
+    if equipLoc == "INVTYPE_2HWEAPON" then slots = { 16 } end
+    if equipLoc == "INVTYPE_WEAPON" then                         -- the off hand too only for those who dual-wield
+        local okD, dual = Try(CanDualWield)
+        if not (okD and dual == true) then slots = { 16 } end
+    end
+    local lowest
+    for _, slot in ipairs(slots) do
+        local worn = GetInventoryItemLink and GetInventoryItemLink("player", slot)
+        local lvl = worn and ItemLevel(worn)
+        if not lvl then return nil end                           -- nothing there (or no level to go by)
+        if lowest == nil or lvl < lowest then lowest = lvl end
+    end
+    if lowest and mine < lowest then return L["below what you wear"] end
+    return nil
+end
+
 function V.EquipmentSetOf(id)
     local ES = C_EquipmentSet
     local ok, sets = Try(ES and ES.GetEquipmentSetIDs)
@@ -1079,7 +1127,8 @@ function V:Recommend()
                         -- white and green gear nobody has up at the auction house (it was all read lately and
                         -- had none): no market for it, a vendor's
                         local unlisted = gear and not known and M.ReadLately()
-                        if sell.junk[id] or known or boundGear or unlisted
+                        local plain = type(want) == "table" and want.plain      -- (V.PlainlySellable)
+                        if sell.junk[id] or known or boundGear or unlisted or plain
                             or self:Decide(id, info.quality, classID, "rules", nil, subclassID, equipLoc, info.hyperlink) then
                             out.vendor[#out.vendor + 1] = item
                             out.total = out.total + item.worth

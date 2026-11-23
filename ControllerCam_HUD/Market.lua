@@ -307,6 +307,8 @@ function M.Advice(verdict, more, want, id)
         if more and more > 0 then add(L["%s for %s"]:format(word, GAIN .. "+" .. ns.Money(more) .. "|r")) else add(word) end
         local chance = verdict == "auction" and type(want) == "table" and want.chance
         if chance then add(GREY .. L["%d%% chance of sale"]:format(math.floor(chance * 100 + 0.5)) .. "|r") end
+        local why = (verdict == "auction" or verdict == "vendor") and type(want) == "table" and want.plain and want.why
+        if why then add(GREY .. why .. "|r") end
     end
     return lines
 end
@@ -463,6 +465,8 @@ function M.BestText(verdict, more, want)
         if specs then right = right .. GREY .. "  " .. specs .. "|r" end
         local worth = (verdict == "equip" or verdict == "keep") and (M.WorthWords(want, true) or M.FetchWords(want, true))
         if worth then right = right .. GREY .. "  ·  " .. worth .. "|r" end
+        local plain = (verdict == "auction" or verdict == "vendor") and type(want) == "table" and want.plain and want.why
+        if plain then right = right .. GREY .. "  " .. plain .. "|r" end
     end
     if more and verdict ~= "skill" then right = right .. "  |cff6fe06a+|r" .. ns.MoneyColored(more) end
     local chance = verdict == "auction" and type(want) == "table" and want.chance
@@ -665,6 +669,21 @@ function M.Verdict(id, bound)
             if de then
                 local more = de.value and de.value > own and math.floor(de.value - own + 0.5) or nil
                 return "disenchant", more, de
+            end
+        end
+        -- white, or an unbound green that binds when equipped, below what you wear or not your armour type: to a
+        -- vendor, or the auction house where it pays clearly more (whatever "when unsure" says: this is sure)
+        if ok and V and V.PlainlySellable and (classID == 2 or classID == 4) then
+            if bound == nil then bound = M.BoundInBags(id) end
+            local plain = V.PlainlySellable(id, equipLoc, bound, classID, subclassID)
+            if plain then
+                local more, how = M.Fetches(id, bound)
+                if more then
+                    how = how or {}
+                    how.why, how.plain = plain, true
+                    return "auction", more, how
+                end
+                if M.Vendor(id) then return "vendor", nil, { why = plain, plain = true } end
             end
         end
     end

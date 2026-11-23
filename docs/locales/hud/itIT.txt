@@ -45,6 +45,8 @@ sott'acqua, il tuo respiro su una barra nostra da cui salgono bolle: accanto all
 Solo la specializzazione attuale
 Primaria e secondaria
 Qualsiasi specializzazione
+non è il tuo tipo di armatura
+inferiore a ciò che indossi
 %d oggetti depositati
 presi %d oggetti dalla banca
 %d oggetti venduti per %s (/cchud sold li elenca)
@@ -974,6 +976,7 @@ Reagenti
 Altro
 Niente qui.
 Posti vuoti
+%s venduto: il mercante può rivendertelo.
 L'armatura non si può cambiare in combattimento.
 Portachiavi
 Zaino

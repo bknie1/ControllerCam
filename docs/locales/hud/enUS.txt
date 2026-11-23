@@ -45,6 +45,8 @@ underwater, your breath as a bar of ours with bubbles rising off it: beside the 
 Current spec only
 Primary and secondary
 Any spec
+not your armour type
+below what you wear
 deposited %d items
 took %d items out of the bank
 sold %d items for %s (/cchud sold lists them)
@@ -974,6 +976,7 @@ Reagents
 Other
 Nothing here.
 Empty slots
+Sold %s: the vendor can sell it back to you.
 Armour can't be changed in a fight.
 Keyring
 Backpack

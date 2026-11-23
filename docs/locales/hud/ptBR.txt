@@ -45,6 +45,8 @@ debaixo d'água, seu fôlego numa barra nossa com bolhas subindo: ao lado das ba
 Só a especialização atual
 Primária e secundária
 Qualquer especialização
+não é seu tipo de armadura
+abaixo do que você usa
 %d itens depositados
 %d itens tirados do banco
 %d itens vendidos por %s (/cchud sold lista-os)
@@ -974,6 +976,7 @@ Reagentes
 Outros
 Nada aqui.
 Espaços vazios
+%s vendido: o vendedor pode vendê-lo de volta.
 A armadura não pode ser trocada em combate.
 Chaveiro
 Mochila

@@ -45,6 +45,8 @@ sous l'eau, votre souffle sur une barre à nous d'où montent des bulles : à c�
 Spécialisation actuelle seule
 Principale et secondaire
 Toute spécialisation
+pas votre type d'armure
+inférieur à ce que vous portez
 %d objets déposés
 %d objets retirés de la banque
 %d objets vendus pour %s (/cchud sold les liste)
@@ -974,6 +976,7 @@ Composants
 Autres
 Rien ici.
 Emplacements libres
+%s vendu: le marchand peut vous le revendre.
 L'armure ne peut pas être changée en combat.
 Trousseau
 Sac à dos

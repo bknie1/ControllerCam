@@ -45,6 +45,8 @@ bajo el agua, tu respiración como una barra propia con burbujas que suben: junt
 Solo la especialización actual
 Principal y secundaria
 Cualquier especialización
+no es tu tipo de armadura
+por debajo de lo que llevas
 %d objetos depositados
 sacaste %d objetos del banco
 %d objetos vendidos por %s (/cchud sold los muestra)
@@ -974,6 +976,7 @@ Componentes
 Otros
 Nada aquí.
 Huecos libres
+%s vendido: el vendedor puede volver a vendértelo.
 La armadura no se puede cambiar en combate.
 Llavero
 Mochila

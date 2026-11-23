@@ -45,6 +45,8 @@ unter Wasser dein Atem als eigene Leiste mit aufsteigenden Blasen: neben den sen
 Nur aktuelle Spezialisierung
 Primär und sekundär
 Jede Spezialisierung
+nicht deine Rüstungsart
+schlechter als das, was du trägst
 %d Gegenstände eingezahlt
 %d Gegenstände aus der Bank genommen
 %d Gegenstände für %s verkauft (/cchud sold listet sie auf)
@@ -974,6 +976,7 @@ Reagenzien
 Sonstiges
 Nichts hier.
 Freie Plätze
+%s verkauft: der Händler kann es dir zurückverkaufen.
 Rüstung lässt sich im Kampf nicht wechseln.
 Schlüsselbund
 Rucksack

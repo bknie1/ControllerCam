@@ -13956,7 +13956,7 @@ class BagWindow(unittest.TestCase):
         o, use = e.mock.overrides, e.g.ControllerCamHUD_BagUse
         self.assertEqual(o.PAD3, "CLICK ControllerCamHUD_BagUse:LeftButton")             # X: the game's secure item button
         self.assertEqual(use.template, "SecureActionButtonTemplate")
-        self.assertEqual((use.attrs.type, use.attrs.item), ("item", "0 1"))      # aimed at the chosen slot
+        self.assertEqual((use.attrs.type, use.attrs.macrotext), ("macro", "/use 0 1"))   # that very slot
         self.assertEqual(o.PAD1, "CLICK ControllerCamHUD_BagKey_PAD1:LeftButton")  # A: ours, picking up
         self.press(e, "PAD1")
         self.assertEqual(list(e.g.PICKED.values()), ["0:1"])
@@ -13965,7 +13965,7 @@ class BagWindow(unittest.TestCase):
         self.assertEqual(o.PADRSHOULDER, "CLICK ControllerCamHUD_BagKey_PADRSHOULDER:LeftButton")
         self.assertIsNone(o.PADBACK)                                 # (only while the bank is open)
         self.press(e, "PADDRIGHT")
-        self.assertEqual(use.attrs.item, "0 3")                      # the next item, wherever it is
+        self.assertEqual(use.attrs.macrotext, "/use 0 3")            # the next item, wherever it is
         e.mock.openMerchant(True)
         e.mock.advance(0.1)
         self.assertEqual(o.PAD3, "CLICK ControllerCamHUD_BagUse:LeftButton")             # X sells at a vendor (the game's use there)
@@ -14005,12 +14005,12 @@ class BagWindow(unittest.TestCase):
         self.press(e, "PADDUP")                                      # up: the last row, in that bag's column
         self.assertEqual((B.zone, B.index), ("grid", 72))
         self.assertEqual(e.mock.overrides.PAD3, "CLICK ControllerCamHUD_BagKey_PAD3:LeftButton")   # (empty: no use)
-        self.assertIsNone(e.g.ControllerCamHUD_BagUse.attrs.item)
+        self.assertIsNone(e.g.ControllerCamHUD_BagUse.attrs.macrotext)
         for _ in range(7):
             self.press(e, "PADDUP")
         self.press(e, "PADDLEFT")                                    # the top row again: an item
         self.assertEqual(e.mock.overrides.PAD3, "CLICK ControllerCamHUD_BagUse:LeftButton")
-        self.assertEqual(e.g.ControllerCamHUD_BagUse.attrs.item, "0 1")
+        self.assertEqual(e.g.ControllerCamHUD_BagUse.attrs.macrotext, "/use 0 1")
         self.assertEqual(e.errors(), [])
 
     def test_more_rows_than_fit_scroll_with_the_choice(self):
@@ -14104,7 +14104,8 @@ class BagWindow(unittest.TestCase):
         e.g.SECURE_CLICK(e.g["ControllerCamHUD_BagNav_" + key])
 
     def use(self, e):
-        return e.g.ControllerCamHUD_BagUse.attrs.item
+        m = e.g.ControllerCamHUD_BagUse.attrs.macrotext
+        return m and m.replace("/use ", "")
 
     def test_in_a_fight_the_open_window_moves_and_uses_through_secure_snippets(self):
         e = self.fight_env()
@@ -14159,7 +14160,7 @@ class BagWindow(unittest.TestCase):
         B, o, S = e.ns.Bags, e.mock.overrides, e.g.ControllerCamHUD_BagSecure
         e.mock.fire("BAG_UPDATE_DELAYED")                            # (your bags as the game says they are,
         e.mock.advance(1.5)                                          # remembered for a fight while closed)
-        self.assertEqual(S.attrs.slot1, "0 3")
+        self.assertEqual(S.attrs.slot1, "/use 0 3")                  # (the slot's own use, never a name)
         self.fight(e, True)
         self.assertIsNone(o.PADDRIGHT)                               # closed: the controller is all yours
         e.g.SECURE_SHOWN(S, True)                                    # your bag key, mid-fight: the game's bags show,
@@ -14272,7 +14273,7 @@ class BagWindow(unittest.TestCase):
         self.press(e, "PADBACK")
         self.assertEqual(B.view, "bank")
         self.assertEqual(self.ids(e), [301])
-        self.assertEqual(e.g.ControllerCamHUD_BagUse.attrs.item, "-1 1")       # X: out of the bank
+        self.assertEqual(e.g.ControllerCamHUD_BagUse.attrs.macrotext, "/use -1 1")   # X: out of the bank
         self.assertTrue(B.frame.title.text.startswith("Bank"))
         e.mock.openBank(False)
         e.mock.advance(0.1)
@@ -14388,6 +14389,52 @@ class BagWindow(unittest.TestCase):
         self.assertEqual(e.g.GameTooltip.anchor, "ANCHOR_NONE")
         self.assertEqual(e.errors(), [])
 
+    def game_press(self, e, button):
+        """The game pressing a secure macro button: "/use <bag> <slot>" is its container use (and PostClick)."""
+        e.lua.eval("""function(b)
+            local m = b.attrs.macrotext
+            assert(b.attrs.type == "macro" and m, "not the slot's own use")
+            local bag, slot = m:match("^/use (%-?%d+) (%d+)$")
+            assert(bag, "not a bag slot: " .. tostring(m))
+            C_Container.UseContainerItem(tonumber(bag), tonumber(slot))
+            if b.scripts.PostClick then b.scripts.PostClick(b, "LeftButton", false) end
+        end""")(button)
+
+    def test_at_a_vendor_x_sells_gear_too_and_away_from_one_puts_it_on(self):
+        e = self.env()
+        e.mock.put(0, 5, e.lua.table(id=701, name="Ornate Blade", quality=2, price=15000, loc="INVTYPE_WEAPONMAINHAND",
+                                     **{"class": 2}))
+        e.g.ToggleAllBags()
+        B, use = e.ns.Bags, e.g.ControllerCamHUD_BagUse
+        self.press(e, "PADDRIGHT")
+        self.press(e, "PADDRIGHT")
+        self.assertEqual(B.list[B.index].id, 701)                    # the blade (it binds when equipped)
+        self.assertEqual(use.attrs.macrotext, "/use 0 5")            # its slot, never its name
+        e.mock.openMerchant(True)
+        e.mock.advance(0.1)
+        self.assertIn("PAD3 Sell", plain(B.frame.legend.text))
+        self.game_press(e, use)                                      # X at the vendor: sold, as the game's own
+        self.assertEqual(list(e.mock.sold.values()), [701])
+        self.assertIn("Sold Ornate Blade", list(e.mock.printed.values())[-1])   # (worth a gold: said)
+        e.mock.fire("BAG_UPDATE_DELAYED")
+        e.mock.advance(0.1)
+        self.press(e, "PADDLEFT")                                    # the potion sells the same way, said nothing
+        said = len(e.mock.printed)
+        self.game_press(e, use)
+        self.assertEqual(list(e.mock.sold.values()), [701, 102])
+        self.assertEqual(len(e.mock.printed), said)
+        e.mock.openMerchant(False)
+        e.mock.put(0, 5, e.lua.table(id=701, name="Ornate Blade", quality=2, price=15000, loc="INVTYPE_WEAPONMAINHAND",
+                                     **{"class": 2}))
+        e.mock.fire("BAG_UPDATE_DELAYED")
+        e.mock.advance(0.1)
+        while B.list[B.index].id != 701:
+            self.press(e, "PADDRIGHT")
+        self.game_press(e, use)                                      # no vendor: the slot used, so the blade goes on
+        self.assertEqual(e.mock.usedItem, 701)
+        self.assertEqual(len(e.mock.sold), 2)
+        self.assertEqual(e.errors(), [])
+
     def test_nothing_of_the_windows_uses_an_item_itself(self):
         # using an item is protected: never from the HUD's own code, only by the game's secure button
         code = open(os.path.join(HUD, "Bags.lua"), encoding="utf-8").read()
@@ -14431,12 +14478,12 @@ class BagWindow(unittest.TestCase):
                 return { isQuestItem = false }
             end
         """, order=1)
-        e.mock.put(4, 1, e.lua.table(id=106, name="Hearthstone", quality=1, price=0, use="Hearthstone", **{"class": 15}))
+        e.mock.put(4, 1, e.lua.table(id=6948, name="Hearthstone", quality=1, price=0, use="Hearthstone", **{"class": 15}))
         e.mock.put(1, 5, e.lua.table(id=107, name="Arcane Powder", quality=1, price=5, count=4, **{"class": 7}))
         e.g.ToggleAllBags()
         B = e.ns.Bags
-        # what you use (the potion, the hearthstone), the rest by kind then name, the grey fang last
-        self.assertEqual(self.ids(e), [102, 106, 101, 107, 103, 104, 105])
+        # the Hearthstone first of all, then what you use (the potion), the rest by kind then name, the grey fang last
+        self.assertEqual(self.ids(e), [6948, 102, 101, 107, 103, 104, 105])
         fang, axe, paw = e.g.ControllerCamHUD_Bag3_1, e.g.ControllerCamHUD_Bag0_1, e.g.ControllerCamHUD_Bag2_16
         self.assertEqual(fang.alpha, B.FADED)                        # junk: faded and greyed, with its coin
         self.assertTrue(B.extra[fang].junk.shown)
@@ -14448,7 +14495,7 @@ class BagWindow(unittest.TestCase):
         e.g.ToggleAllBags()
         e.cmd("bagorder 3")                                          # as in your bags: the game's order
         e.g.ToggleAllBags()
-        self.assertEqual(self.ids(e), [101, 102, 103, 107, 104, 105, 106])
+        self.assertEqual(self.ids(e), [101, 102, 103, 107, 104, 105, 6948])
         self.assertEqual(fang.alpha, B.FADED)                        # (junk is faded in every order)
         self.assertEqual(e.errors(), [])
 
@@ -14504,11 +14551,11 @@ class BagWindow(unittest.TestCase):
         b = e.g.ControllerCamHUD_Bag1_2
         b.scripts.OnEnter(b)
         self.assertEqual(e.ns.Bags.index, 3)
-        self.assertEqual(e.g.ControllerCamHUD_BagUse.attrs.item, "1 2")
+        self.assertEqual(e.g.ControllerCamHUD_BagUse.attrs.macrotext, "/use 1 2")
         cover = e.g.ControllerCamHUD_BagCover                        # the mouse's clicks: the secure cover's
         self.assertTrue(cover.shown)
         self.assertEqual(cover.template, "SecureActionButtonTemplate")
-        self.assertEqual((cover.attrs.type2, cover.attrs.item), ("item", "1 2"))   # right click: the use
+        self.assertEqual((cover.attrs.type2, cover.attrs.macrotext), ("macro", "/use 1 2"))   # right click: the use
         self.assertIsNone(cover.attrs.type1)
         cover.scripts.PreClick(cover, "LeftButton", True)            # (the press: nothing yet)
         cover.scripts.PreClick(cover, "LeftButton", False)           # left click: picked up
@@ -15125,6 +15172,102 @@ class KeepByDefault(unittest.TestCase):
         defs = [d for d in e.ns.settings.values() if d.key == "adviceUnsure"]
         self.assertEqual(list(defs[0].choices.values()), ["Keep", "Sell"])
         self.assertEqual(defs[0].default, 1)
+
+
+class PlainSale(unittest.TestCase):
+    """White, or green that binds when equipped and isn't bound yet, below what you wear or not your armour type:
+    sold, even when unsure items are kept."""
+
+    def env(self):
+        e = Env(db="{ v = 5, sell = { gear = true } }")                  # (Item advice: when unsure, Keep)
+        e.mock.units.player["class"], e.mock.units.player.level = "PALADIN", 45      # plate
+        e.lua.eval(AdviceRule.STATS)(e.mock)
+        T = e.lua.table
+
+        def gear(iid, name, quality, ilvl, loc, sub, bag_slot=None, bind=None, **stats):
+            it = T(id=iid, name=name, quality=quality, ilvl=ilvl, price=200, stack=1, loc=loc, sub=sub, bind=bind,
+                   stats=T(**stats), **{"class": 4})
+            if bag_slot:
+                e.mock.put(0, bag_slot, it)
+            else:
+                e.mock["items"][iid] = it
+        gear(1100, "Worn Plate Helm", 2, 30, "INVTYPE_HEAD", 4, ITEM_MOD_STRENGTH_SHORT=10)
+        gear(1105, "Worn Plate Chest", 2, 30, "INVTYPE_CHEST", 4, ITEM_MOD_STRENGTH_SHORT=10)
+        e.mock.worn[1], e.mock.worn[5] = 1100, 1105
+        gear(1101, "Green Leather Cap", 2, 40, "INVTYPE_HEAD", 2, 1, bind=2, ITEM_MOD_AGILITY_SHORT=12)
+        gear(1102, "Old Plate Helm", 2, 25, "INVTYPE_HEAD", 4, 2, bind=2, ITEM_MOD_STRENGTH_SHORT=10)
+        gear(1103, "New Plate Helm", 2, 35, "INVTYPE_HEAD", 4, 3, bind=2, ITEM_MOD_STRENGTH_SHORT=10)
+        gear(1104, "Plain Mail Vest", 1, 20, "INVTYPE_CHEST", 3, 4, ITEM_MOD_STAMINA_SHORT=3)
+        gear(1106, "Blue Leather Cap", 3, 20, "INVTYPE_HEAD", 2, 5, bind=2, ITEM_MOD_AGILITY_SHORT=12)
+        gear(1107, "Bound Leather Cap", 2, 20, "INVTYPE_HEAD", 2, 6, bind=1, ITEM_MOD_AGILITY_SHORT=12)
+        gear(1108, "Green Cloth Bracers", 2, 30, "INVTYPE_WRIST", 1, 7, bind=2, ITEM_MOD_INTELLECT_SHORT=5)
+        for iid, name in ((11083, "Soul Dust"), (11082, "Greater Astral Essence"), (11084, "Large Glimmering Shard")):
+            e.mock["items"][iid] = T(id=iid, name=name, quality=1, price=0, **{"class": 7})
+        e.mock.fire("PLAYER_EQUIPMENT_CHANGED")
+        e.update(0.5)
+        e.ns.Market.HasData = e.lua.eval("function() return true end")
+        return e
+
+    def verdict(self, e, iid):
+        v = e.ns.Market.Verdict(iid)
+        v = v if isinstance(v, tuple) else (v, None, None)
+        return v[0], v[2] and v[2].why
+
+    def smart(self, e):
+        return sorted(i.id for i in e.ns.Vendor.Recommend(e.ns.Vendor).vendor.values())
+
+    def junk(self, e, iid, quality=2):
+        return bool(e.ns.Bags.IsJunk(e.lua.table(id=iid, quality=quality)))
+
+    def test_not_your_armour_type_sells(self):
+        e = self.env()
+        self.assertEqual(self.verdict(e, 1101), ("vendor", "not your armour type"))
+        self.assertIn("not your armour type", plain(e.ns.Market.BestText(*e.ns.Market.Verdict(1101))))
+        self.assertIn(1101, self.smart(e))
+        self.assertTrue(self.junk(e, 1101))
+        self.assertEqual(e.errors(), [])
+
+    def test_below_what_you_wear_sells_and_above_is_kept(self):
+        e = self.env()
+        self.assertEqual(self.verdict(e, 1102), ("vendor", "below what you wear"))
+        self.assertIn(1102, self.smart(e))
+        verdict, why = self.verdict(e, 1103)                             # as good, a higher level: could be yours
+        self.assertEqual(verdict, "keep")
+        self.assertNotIn(1103, self.smart(e))
+        self.assertFalse(self.junk(e, 1103))
+        e.db.auction[1102] = e.lua.table(p=50000, t=e.g.time(), q=40, n=40)
+        self.assertEqual(self.verdict(e, 1102), ("auction", "below what you wear"))   # where it pays clearly more
+        self.assertEqual(e.errors(), [])
+
+    def test_white_of_any_binding_below_or_not_your_armour_sells(self):
+        e = self.env()
+        self.assertEqual(self.verdict(e, 1104)[0], "vendor")             # white mail at 45, level 20 under 30
+        self.assertIsNotNone(self.verdict(e, 1104)[1])
+        self.assertIn(1104, self.smart(e))
+        self.assertEqual(e.errors(), [])
+
+    def test_never_blue_nor_a_soulbound_green(self):
+        e = self.env()
+        self.assertEqual(self.verdict(e, 1106)[0], "keep")               # blue: never by this rule
+        self.assertEqual(self.verdict(e, 1107)[0], "keep")               # soulbound green: the keep rules decide
+        for iid in (1106, 1107):
+            self.assertNotIn(iid, self.smart(e))
+        self.assertIsNone(e.ns.Vendor.PlainlySellable(1102, "INVTYPE_HEAD", True))   # bound: not covered
+        self.assertEqual(e.errors(), [])
+
+    def test_a_green_an_enchanter_of_yours_skills_up_on_is_disenchanted(self):
+        e = self.env()
+        self.assertEqual(self.verdict(e, 1108), ("vendor", "not your armour type"))   # cloth: no enchanter yet
+        T = e.lua.table
+        e.db.inventory["Ench-Forever"] = T(level=30, faction="Horde", bags=T(), bank=T(), money=0, seen=0,
+                                           prof=T(enchanting=T(name="Enchanting", rank=100, cap=150, at=e.g.time(),
+                                                               uses=e.lua.table_from({11083: 3}))),
+                                           **{"class": "MAGE"})
+        verdict, more, want = e.ns.Market.Verdict(1108)
+        self.assertEqual(verdict, "disenchant")
+        self.assertTrue(want.skill)
+        self.assertNotIn(1108, self.smart(e))
+        self.assertEqual(e.errors(), [])
 
 
 if __name__ == "__main__":
