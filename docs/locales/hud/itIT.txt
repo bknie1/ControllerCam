@@ -1005,8 +1005,7 @@ Solo questa borsa
 Metti dentro
 Prendi borsa
 Altro
-Descrizione
-Nascondi descrizione
+Ordina
 Borse
 %d liberi
 Posto vuoto

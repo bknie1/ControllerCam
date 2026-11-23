@@ -2,7 +2,7 @@
 ## Title: ControllerCam: HUD for Gamepad
 ## Notes: The controller interface for the Gamepad UI: slim unit frames, party, raid and nameplate looks, cast bar, vendor and bank help.
 ## Author: bknie1
-## Version: 1.4.12
+## Version: 1.4.13
 ## X-License: MIT
 ## IconTexture: Interface\AddOns\ControllerCam\Media\icon
 ## OptionalDeps: ControllerCam

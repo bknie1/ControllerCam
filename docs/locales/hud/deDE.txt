@@ -1005,8 +1005,7 @@ Nur diese Tasche
 Hineinlegen
 Tasche aufnehmen
 Mehr
-Tooltip
-Tooltip aus
+Sortieren
 Taschen
 %d frei
 Freier Platz

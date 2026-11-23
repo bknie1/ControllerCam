@@ -1005,8 +1005,7 @@ Solo esta bolsa
 Meter
 Coger bolsa
 Más
-Descripción
-Ocultar descripción
+Ordenar
 Bolsas
 %d libres
 Hueco libre

@@ -14258,6 +14258,47 @@ class BagWindow(unittest.TestCase):
         self.assertTrue(B.hasPad)
         self.assertEqual(e.errors(), [])
 
+    def test_at_the_bank_lt_and_rt_go_between_your_bags_and_the_bank_in_the_window(self):
+        e = self.env()
+        e.lua.execute("MOCK_BANK = {}; BankFrame = CreateFrame('Frame', 'BankFrame', UIParent)")
+        e.mock.bags[-1] = e.g.MOCK_BANK
+        T = e.lua.table
+        e.mock.put(-1, 1, T(id=301, name="Silk Cloth", quality=1, price=40, count=20, **{"class": 7}))
+        e.mock.put(-1, 2, T(id=302, name="Iron Ore", quality=1, price=25, count=13, **{"class": 7}))
+        e.mock.openBank(True)
+        e.g.OpenAllBags()
+        B, o, use = e.ns.Bags, e.mock.overrides, e.g.ControllerCamHUD_BagUse
+        e.update(0.05)
+        self.press(e, "PADDRIGHT")
+        self.press(e, "PADDRIGHT")                                   # in your bags, the third item
+        self.assertIn("PADLTRIGGER or PADRTRIGGER: to the bank", plain(B.frame.legend.text))
+        e.mock.keysDown.PADLTRIGGER = True                           # LT: the bank, in this window
+        e.update(0.05)
+        self.assertEqual(B.view, "bank")
+        self.assertTrue(B.hasPad)                                    # the controller stays here
+        self.assertEqual((B.index, B.list[1].id), (1, 301))          # on the bank's first item,
+        self.assertTrue(B.frame.sel.shown)                           # its ring in sight
+        self.assertEqual(B.frame.sel.alpha, 1)
+        self.assertEqual(use.attrs.macrotext, "/use -1 1")           # X: the bank's own slot
+        self.assertIn("PADLTRIGGER or PADRTRIGGER: back to bags", plain(B.frame.legend.text))
+        self.assertIn("PAD3 To bags", plain(B.frame.legend.text))
+        self.press(e, "PADDRIGHT")
+        self.assertEqual(use.attrs.macrotext, "/use -1 2")
+        self.game_press(e, use)                                      # X: into your bags, the game's own move
+        self.assertEqual(list(e.mock.moved.values()), [302])
+        e.mock.keysDown.PADLTRIGGER = False
+        e.update(0.05)
+        e.mock.keysDown.PADRTRIGGER = True                           # RT: back to your bags,
+        e.update(0.05)
+        self.assertEqual((B.view, B.index), ("bags", 3))             # where you were
+        self.assertTrue(B.hasPad)
+        self.assertIsNotNone(o.PAD1)
+        e.mock.keysDown.PADRTRIGGER = False
+        e.update(0.05)
+        self.press(e, "PADBACK")                                     # the back button: the bank again,
+        self.assertEqual((B.view, B.index), ("bank", 2))             # where you were there
+        self.assertEqual(e.errors(), [])
+
     def test_the_bank_in_the_same_window(self):
         e = self.env()
         e.lua.execute("MOCK_BANK = {}")
@@ -14691,26 +14732,28 @@ class BagWindow(unittest.TestCase):
         self.assertFalse(self.destroy_menu(e))
         self.assertEqual(e.errors(), [])
 
-    def test_tooltips_follow_the_games_setting_and_r3_turns_them_on_and_off_as_in_its_bags(self):
+    def test_r3_sorts_and_the_chosen_slots_tooltip_always_shows(self):
         e = self.env()
         e.mock.knownCVars.GamepadDisableTooltips = True
-        e.mock.cvars.GamepadDisableTooltips = "0"
-        e.g.ToggleAllBags()
-        B, tip = e.ns.Bags, e.g.GameTooltip
-        self.assertEqual(e.mock.overrides.PADRSTICK, "CLICK ControllerCamHUD_BagKey_PADRSTICK:LeftButton")  # (not sort)
-        self.assertIn("PADRSTICK Hide tooltip", plain(B.frame.legend.text))
-        self.assertTrue(tip.shown)
-        self.press(e, "PADRSTICK")                                   # R3: the game's own switch, off
-        self.assertEqual(e.mock.cvars.GamepadDisableTooltips, "1")
-        self.assertFalse(tip.shown)
+        e.mock.cvars.GamepadDisableTooltips = "1"                    # (the game's own switch: ours shows all the same)
+        e.lua.execute("MOCK_BANK = {}; BankFrame = CreateFrame('Frame', 'BankFrame', UIParent)")
+        e.mock.bags[-1] = e.g.MOCK_BANK
+        e.mock.put(-1, 1, e.lua.table(id=301, name="Silk Cloth", quality=1, price=40, count=20, **{"class": 7}))
+        e.mock.openBank(True)
+        e.g.OpenAllBags()
+        B, tip, o = e.ns.Bags, e.g.GameTooltip, e.mock.overrides
+        self.assertEqual(o.PADRSTICK, "CLICK ControllerCamHUD_BagKey_PADRSTICK:LeftButton")
+        self.assertIn("PADRSTICK Sort", plain(B.frame.legend.text))
+        self.assertTrue(tip.shown)                                   # the chosen slot's tooltip
         self.press(e, "PADDRIGHT")
-        self.assertFalse(tip.shown)                                  # (the d-pad shows none now)
-        self.assertIn("PADRSTICK Tooltip", plain(B.frame.legend.text))
-        slot = e.g.ControllerCamHUD_Bag1_2
-        slot.scripts.OnEnter(slot)
-        self.assertTrue(tip.shown)                                   # the mouse: always, as the game's
-        self.press(e, "PADRSTICK")                                   # on again
-        self.assertEqual(e.mock.cvars.GamepadDisableTooltips, "0")
+        self.assertTrue(tip.shown)                                   # (on every move)
+        self.press(e, "PADRSTICK")                                   # R3: your bags sorted
+        self.assertEqual(list(e.mock.sorted.values()), ["bags"])
+        self.press(e, "PADBACK")                                     # the bank in the window:
+        self.assertEqual(B.list[1].id, 301)                          # its contents,
+        self.assertTrue(tip.shown)
+        self.press(e, "PADRSTICK")                                   # and R3 sorts the bank
+        self.assertEqual(list(e.mock.sorted.values()), ["bags", "bank"])
         self.assertEqual(e.errors(), [])
 
     def test_the_game_own_bags_buttons_are_read_for_the_report(self):
@@ -15270,8 +15313,6 @@ class PlainSale(unittest.TestCase):
         self.assertEqual(e.errors(), [])
 
 
-if __name__ == "__main__":
-    unittest.main()
 
 
 class QuestItems(SellWhenUnsure, unittest.TestCase):
@@ -16009,3 +16050,15 @@ class Compass(unittest.TestCase):
         e.update(0.6)
         self.assertEqual(C.width, C.W)
         self.assertEqual(e.errors(), [])
+
+
+class TestFileShape(unittest.TestCase):
+    def test_every_class_runs_when_the_file_is_run_as_a_script(self):
+        # CI runs this file as a script: classes written after unittest.main() never ran there (1.4.12)
+        text = open(os.path.abspath(__file__), encoding="utf-8").read().rstrip()
+        self.assertTrue(text.endswith('if __name__ == "__main__":' + chr(10) + '    unittest.main()'))
+        self.assertEqual(len(re.findall(r"(?m)^\s*unittest\.main\(", text)), 1)   # (the one call: at the end)
+
+
+if __name__ == "__main__":
+    unittest.main()

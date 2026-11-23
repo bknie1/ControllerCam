@@ -1014,266 +1014,265 @@ local ENGLISH = {
     "Put in",  -- 1005
     "Pick up bag",  -- 1006
     "More",  -- 1007
-    "Tooltip",  -- 1008
-    "Hide tooltip",  -- 1009
-    "Bags",  -- 1010
-    "%d free",  -- 1011
-    "Empty slot",  -- 1012
-    "In a fight, close your bags with B.",  -- 1013
-    "for the bank",  -- 1014
-    "no mark",  -- 1015
-    "No empty slot.",  -- 1016
-    "Put down here",  -- 1017
-    "Split stack",  -- 1018
-    "Mark: %s",  -- 1019
-    "Item details",  -- 1020
-    "Destroy",  -- 1021
-    "Sort bank",  -- 1022
-    "Sort bags",  -- 1023
-    "Show bags",  -- 1024
-    "Show bank",  -- 1025
-    "Deposit marked items",  -- 1026
-    "Sell advised items",  -- 1027
-    "Let go to destroy",  -- 1028
-    "This item begins a quest.",  -- 1029
-    "This is a quest item.",  -- 1030
-    "Destroy %s?",  -- 1031
-    "The game kept %s: destroy it from its own bags.",  -- 1032
-    "Destroyed %s.",  -- 1033
-    "One bag window with quick filters",  -- 1034
-    "your bags in one window of the HUD's own, in place of the game's: every item together, the empty slots gathered at the end, your bags in a row of their own, and quick filters along the top (LB and RB). The bank too, while it is open. Off: the game's own bags",  -- 1035
-    "Bag window: order",  -- 1036
-    "Smart: what you use first (consumables, items with a use), then the rest by kind, junk last and faded. By type: in sections under their own headings. As in your bags: the game's own order",  -- 1037
-    "HUD preset: %s, to match the camera",  -- 1038
-    "preset: %s",  -- 1039
-    "A layout named '%s' was added to the game's Edit Mode. Choose it there to use it (Game Menu > Edit Mode > Layout).",  -- 1040
-    "unknown preset '%s'",  -- 1041
-    "Sized for a TV: bigger text on the HUD and in chat.",  -- 1042
-    "Sized for a monitor: text at its plain size.",  -- 1043
-    "Our frames are back where they start. Choose the game's %s layout in Edit Mode (Game Menu > Edit Mode > Layout).",  -- 1044
-    "Presets set the camera distance",  -- 1045
-    "a preset also brings the camera to the distance its layout was made for, once (zoom freely afterwards)",  -- 1046
-    "Action",  -- 1047
-    "a third-person view: slim vertical bars beside your character, every effect on; out of combat things fade",  -- 1048
-    "Classic",  -- 1049
-    "our frames where WoW has always had them, calmer effects, the game's gamepad bars as they are",  -- 1050
-    "only what you need: friendly NPCs show their plate (with what they do) only while you point at them, aim at them or target them; names without titles; out of combat your bars rest as a faint hint (low health always shows)",  -- 1051
-    "Open world",  -- 1052
-    "a clean screen for exploring: slim bars beside you that rest faded, plates without power bars, chat that fades",  -- 1053
-    "Adventure",  -- 1054
-    "after console open-world adventures: vitals beside you, a small target high in the middle, townsfolk only when you point at them, chat that fades fast",  -- 1055
-    "Soulslike",  -- 1056
-    "your bars top left, a big target bar low in the middle like a boss bar, every hit felt",  -- 1057
-    "Shooter",  -- 1058
-    "upright bars just right of centre, close to where you aim, the target high above, strong hit feedback",  -- 1059
-    "Crossbar",  -- 1060
-    "after MMOs played on a controller: the target and focus high in the middle, your bars just above the gamepad bars, party on the left, full plates",  -- 1061
-    "ARPG",  -- 1062
-    "after action RPGs: the camera far back, your vitals low on the left, the target high in the middle, minor enemies small, every hit loud",  -- 1063
-    "Compass",  -- 1064
-    "after first-person RPGs: the camera close, your bars low in the middle, the target under the top edge, townsfolk only when you point at them",  -- 1065
-    "Raid",  -- 1066
-    "WoW's own placement with everything a group needs: party and raid frames, health percents and levels on plates",  -- 1067
-    "Follow ControllerCam's presets",  -- 1068
-    "choosing a camera preset in ControllerCam for everywhere also chooses the matching HUD preset (the camera keeps its own distance)",  -- 1069
-    "Modern",  -- 1070
-    "set the whole HUD to a preset: action, classic, minimal, openworld, adventure, soulslike, shooter, crossbar, arpg, compass, raid",  -- 1071
-    "the target frame and nameplates compact or full, both at once",  -- 1072
-    "the target frame compact or full",  -- 1073
-    "size the text for a TV across the room, or for a monitor at arm's length",  -- 1074
-    "put our frames back where they start, for the game's own Modern or Classic layout",  -- 1075
-    "Your whole setup (HUD, camera and the game's layout): copy this line (Ctrl+C) to keep or share it.",  -- 1076
-    "Paste a line of HUD settings (Ctrl+V) and accept.",  -- 1077
-    "That line is damaged: copy it again, completely.",  -- 1078
-    "That line was made by a newer version: update the addon.",  -- 1079
-    "That is not a line of HUD settings.",  -- 1080
-    "Settings imported: %d taken, %d left out.",  -- 1081
-    "The camera setup came along.",  -- 1082
-    "The camera setup was left as it is.",  -- 1083
-    "The game's layout is now '%s'.",  -- 1084
-    "The game's layout was left as it is.",  -- 1085
-    "your settings as one line of text, to keep or share",  -- 1086
-    "take settings from a line of text made by /cchud export",  -- 1087
-    "The HUD is on while the Gamepad UI is in use. Its options: Options > AddOns > ControllerCam > HUD, or /cchud.",  -- 1088
-    "Camera only: the HUD rests and the game's interface is as it was. /cchud on switches it on.",  -- 1089
-    "Set up the screen for the controller too? This adds a layout named CCHUD to the game's Edit Mode, for you to choose there: it puts the cooldown rows under the target, clear of the gamepad buttons. Your own layouts are kept (/cchud setup offers this again).",  -- 1090
-    "Set it up",  -- 1091
-    "Not now",  -- 1092
-    "ControllerCam comes with a controller interface, the HUD: its own unit frames, nameplates, cast bar and more while the Gamepad UI is in use. Do you want it, or the camera alone?",  -- 1093
-    "Camera + HUD",  -- 1094
-    "Camera only",  -- 1095
-    "This client does not let addons change the layout.",  -- 1096
-    "ask again: the camera with the HUD, or the camera alone",  -- 1097
-    "offer the screen layout made for the HUD again (the game's Edit Mode)",  -- 1098
-    "Shown while the Gamepad UI is in use. Drag our frames in the game's Edit Mode.",  -- 1099
-    "Presets",  -- 1100
-    "Sized for",  -- 1101
-    "TV",  -- 1102
-    "Monitor",  -- 1103
-    "Button icons",  -- 1104
-    "the icons the game shows for your controller's buttons: found by itself for the controller in use, or the kind you choose",  -- 1105
-    "Font",  -- 1106
-    "Reset the game's layout",  -- 1107
-    "Try it out",  -- 1108
-    "Play the demo",  -- 1109
-    "Show every hit effect",  -- 1110
-    "Run the self-check",  -- 1111
-    "Gamepad bars: compact / full",  -- 1112
-    "Export settings",  -- 1113
-    "Import settings",  -- 1114
-    "Tick “Show advanced options” on the main page for every setting.",  -- 1115
-    "Modules",  -- 1116
-    "Quick switches",  -- 1117
-    "General",  -- 1118
-    "HUD",  -- 1119
-    "The options panel is not available in this client.",  -- 1120
-    "Enabled",  -- 1121
-    "the whole HUD; off brings the game's own frames back",  -- 1122
-    "Also in the mouse & keyboard UI",  -- 1123
-    "normally the HUD only runs while the Gamepad UI is in use",  -- 1124
-    "Put the game's frames aside",  -- 1125
-    "hide the game's player, target and focus frames while ours are shown",  -- 1126
-    "Chat window at the top left",  -- 1127
-    "move the chat window to the top left while the HUD runs",  -- 1128
-    "Vertical bars when idle",  -- 1129
-    "how visible the vertical bars stay at full health out of combat (0 hides them)",  -- 1130
-    "Class colours",  -- 1131
-    "colour your bar, and other players' bars, by class",  -- 1132
-    "Class icons",  -- 1133
-    "a class icon in front of a player's name on the target and target of target",  -- 1134
-    "Threat on the target frame",  -- 1135
-    "a shield icon and a glow on the target frame: red while it attacks you, red and yellow when you are about to pull it, yellow and blue when you are losing it, blue when it is not on you",  -- 1136
-    "Compact bars everywhere",  -- 1137
-    "the target frame and nameplates in their compact style, a little over half as wide (each one can still be set on its own; presets never change it)",  -- 1138
-    "Compact target frame",  -- 1139
-    "the target frame a little over half as wide",  -- 1140
-    "Health colours in a fight",  -- 1141
-    "in a fight, health bars turn from green through yellow to red as health drops",  -- 1142
-    "Shade behind text",  -- 1143
-    "a soft dark band behind the target's text, to keep it readable",  -- 1144
-    "Text size",  -- 1145
-    "size of the text on our frames",  -- 1146
-    "Frame size",  -- 1147
-    "size of our unit frames",  -- 1148
-    "Your bars in a fight",  -- 1149
-    "how visible your bars, pet and focus are in a fight until something calls for attention",  -- 1150
-    "Full when health is below",  -- 1151
-    "your bars come back in full when your health drops below this",  -- 1152
-    "Full when mana is below",  -- 1153
-    "your bars come back in full when your mana drops below this",  -- 1154
-    "Player bar when idle",  -- 1155
-    "how visible the player bar stays at full health or out of combat (0 hides it)",  -- 1156
-    "Vendor and bank help",  -- 1157
-    "the vendor's Sell junk button asks what to sell; quick move at vendor and bank",  -- 1158
-    "Show advanced options",  -- 1159
-    "every setting, not only the main switches",  -- 1160
-    "Player frame",  -- 1161
-    "our player bar, top left",  -- 1162
-    "Target frame",  -- 1163
-    "our target bar, top centre",  -- 1164
-    "Pet bar",  -- 1165
-    "a small pet bar under the player bar, or beside the vertical bars",  -- 1166
-    "Focus frame",  -- 1167
-    "our focus frame",  -- 1168
-    "slim upright health and power bars beside your character, for a third-person view (in place of the player bar)",  -- 1169
-    "Sell junk when a vendor opens",  -- 1170
-    "sell junk by your rules as soon as a vendor opens",  -- 1171
-    "White weapons and armor are junk",  -- 1172
-    "count white weapons and armor as junk (never tools, fishing poles, gear with a use, or anything that could be an upgrade; always asked first)",  -- 1173
-    "Deposit when the bank opens",  -- 1174
-    "items marked for the bank, and what the bank already holds (when that is on), go in by themselves",  -- 1175
-    "the game's option; our small frame follows it",  -- 1176
-    "Cooldown Manager",  -- 1177
-    "the game's Cooldown Manager",  -- 1178
-    "Personal Resource Display",  -- 1179
-    "your health and power under your character",  -- 1180
-    "Bank takes reagents by itself",  -- 1181
-    "the game's option for the bank",  -- 1182
-    "Tooltip when a buff starts",  -- 1183
-    "the game's option: a buff's tooltip pops up for a moment when it is applied (Gamepad UI)",  -- 1184
-    "Class colours for names in chat",  -- 1185
-    "the game's chat setting for every kind of chat at once: a player's name in their class colour",  -- 1186
-    "open the options panel (Options > AddOns > ControllerCam HUD)",  -- 1187
-    "Frames",  -- 1188
-    "Screen fade",  -- 1189
-    "Effects",  -- 1190
-    "Look",  -- 1191
-    "Quests, chat and map",  -- 1192
-    "Bags, bank and vendor",  -- 1193
-    "Fishing",  -- 1194
-    "Accessibility",  -- 1195
-    "Native Options",  -- 1196
-    "%s  |  Gamepad UI: %s  |  running: %s",  -- 1197
-    "player %s, target %s, pet %s, focus %s  |  game frames put aside: %s  |  chat moved: %s",  -- 1198
-    "native options: target of target %s, Cooldown Manager %s, personal resource %s",  -- 1199
-    "text size %d%%  |  text shade: %s",  -- 1200
-    "vendor and bank help: %s  |  auto-sell: %s  |  white gear is junk: %s",  -- 1201
-    "idle visibility %d%%  |  scale %d%%  |  class colours: %s",  -- 1202
-    "A minimal action-game HUD for the Gamepad UI.",  -- 1203
-    "enabled",  -- 1204
-    "disabled: the game's own frames are back",  -- 1205
-    "use in the mouse & keyboard UI too: %s",  -- 1206
-    "game frames put aside: %s",  -- 1207
-    "chat moved to the top left: %s",  -- 1208
-    "class colours: %s",  -- 1209
-    "This client does not have that option.",  -- 1210
-    "%s: %s (the game's own option)",  -- 1211
-    "The game did not accept that right now.",  -- 1212
-    "vendor and bank help: %s",  -- 1213
-    "auto-sell: %s",  -- 1214
-    "white gear is junk: %s",  -- 1215
-    "Vendor help is off.",  -- 1216
-    "usage: /cchud sell [junk | recommended | white | green | blue]",  -- 1217
-    "deposit marked items when the bank opens: %s",  -- 1218
-    "usage: /cchud junk <item> (shift-click the item into the chat line)",  -- 1219
-    "item %d: junk, sold with the rest",  -- 1220
-    "item %d: kept, never sold",  -- 1221
-    "item %d: for the bank",  -- 1222
-    "text shade: %s",  -- 1223
-    "usage: /cchud text <80-250>",  -- 1224
-    "text size %d%%",  -- 1225
-    "demo stopped",  -- 1226
-    "The HUD is not running.",  -- 1227
-    "Demo running: a made-up fight on a loop. Type /cchud demo again to stop.",  -- 1228
-    "usage: /cchud idle <0-100>",  -- 1229
-    "idle visibility %d%%",  -- 1230
-    "usage: /cchud scale <50-200>",  -- 1231
-    "scale %d%%",  -- 1232
-    "Drag the frames, then type /cchud lock.",  -- 1233
-    "frames locked",  -- 1234
-    "Everything is back to how it started: settings, frames and the screen layout (your vendor marks and price history are kept).",  -- 1235
-    "frames are back where they started",  -- 1236
-    "unknown command '%s'. Type /cchud help",  -- 1237
-    "Error list cleared.",  -- 1238
-    "No errors recorded.",  -- 1239
-    "%d errors recorded (newest last). /cchud errors clear empties the list.",  -- 1240
-    "show status",  -- 1241
-    "turn the HUD on or off (off brings the game's own frames back)",  -- 1242
-    "also use the HUD in the mouse & keyboard UI",  -- 1243
-    "use our frame for it, or the game's own",  -- 1244
-    "slim upright health and power bars beside your character",  -- 1245
-    "target of target (the game's own option, also in its menus)",  -- 1246
-    "the game's Cooldown Manager (the game's own option)",  -- 1247
-    "your health and power under your character (the game's own option)",  -- 1248
-    "the tooltip that pops up when a buff starts (the game's own option)",  -- 1249
-    "keep the game's own player and target frames visible (on) or put them aside (off)",  -- 1250
-    "at a vendor: choose what to sell (also: sell junk, sell recommended, sell white | green | blue)",  -- 1251
-    "count white weapons and armor as junk",  -- 1252
-    "mark an item: always sold, never sold, or for the bank (shift-click it into the chat line)",  -- 1253
-    "at the bank: deposit what the bank already holds, and every item marked for it",  -- 1254
-    "at the bank: take out what you already carry some of",  -- 1255
-    "deposit as soon as the bank opens",  -- 1256
-    "the bank takes reagents by itself (the game's own option)",  -- 1257
-    "text size, in percent (150 reads well on a TV)",  -- 1258
-    "how visible the player bar stays when nothing is happening (0 hides it)",  -- 1259
-    "size of the frames, in percent",  -- 1260
-    "drag the frames to where you want them (the game's Edit Mode does this too)",  -- 1261
-    "put the frames back where they started",  -- 1262
-    "play a short made-up fight, to see how the frames react (again to stop)",  -- 1263
-    "compare what is on screen with the settings (check all lists every row)",  -- 1264
-    "save a description of this client's Gamepad UI (for troubleshooting)",  -- 1265
-    "show this list",  -- 1266
-    "the last errors the HUD met, also after a reload (to report them)",  -- 1267
+    "Sort",  -- 1008
+    "Bags",  -- 1009
+    "%d free",  -- 1010
+    "Empty slot",  -- 1011
+    "In a fight, close your bags with B.",  -- 1012
+    "for the bank",  -- 1013
+    "no mark",  -- 1014
+    "No empty slot.",  -- 1015
+    "Put down here",  -- 1016
+    "Split stack",  -- 1017
+    "Mark: %s",  -- 1018
+    "Item details",  -- 1019
+    "Destroy",  -- 1020
+    "Sort bank",  -- 1021
+    "Sort bags",  -- 1022
+    "Show bags",  -- 1023
+    "Show bank",  -- 1024
+    "Deposit marked items",  -- 1025
+    "Sell advised items",  -- 1026
+    "Let go to destroy",  -- 1027
+    "This item begins a quest.",  -- 1028
+    "This is a quest item.",  -- 1029
+    "Destroy %s?",  -- 1030
+    "The game kept %s: destroy it from its own bags.",  -- 1031
+    "Destroyed %s.",  -- 1032
+    "One bag window with quick filters",  -- 1033
+    "your bags in one window of the HUD's own, in place of the game's: every item together, the empty slots gathered at the end, your bags in a row of their own, and quick filters along the top (LB and RB). The bank too, while it is open. Off: the game's own bags",  -- 1034
+    "Bag window: order",  -- 1035
+    "Smart: what you use first (consumables, items with a use), then the rest by kind, junk last and faded. By type: in sections under their own headings. As in your bags: the game's own order",  -- 1036
+    "HUD preset: %s, to match the camera",  -- 1037
+    "preset: %s",  -- 1038
+    "A layout named '%s' was added to the game's Edit Mode. Choose it there to use it (Game Menu > Edit Mode > Layout).",  -- 1039
+    "unknown preset '%s'",  -- 1040
+    "Sized for a TV: bigger text on the HUD and in chat.",  -- 1041
+    "Sized for a monitor: text at its plain size.",  -- 1042
+    "Our frames are back where they start. Choose the game's %s layout in Edit Mode (Game Menu > Edit Mode > Layout).",  -- 1043
+    "Presets set the camera distance",  -- 1044
+    "a preset also brings the camera to the distance its layout was made for, once (zoom freely afterwards)",  -- 1045
+    "Action",  -- 1046
+    "a third-person view: slim vertical bars beside your character, every effect on; out of combat things fade",  -- 1047
+    "Classic",  -- 1048
+    "our frames where WoW has always had them, calmer effects, the game's gamepad bars as they are",  -- 1049
+    "only what you need: friendly NPCs show their plate (with what they do) only while you point at them, aim at them or target them; names without titles; out of combat your bars rest as a faint hint (low health always shows)",  -- 1050
+    "Open world",  -- 1051
+    "a clean screen for exploring: slim bars beside you that rest faded, plates without power bars, chat that fades",  -- 1052
+    "Adventure",  -- 1053
+    "after console open-world adventures: vitals beside you, a small target high in the middle, townsfolk only when you point at them, chat that fades fast",  -- 1054
+    "Soulslike",  -- 1055
+    "your bars top left, a big target bar low in the middle like a boss bar, every hit felt",  -- 1056
+    "Shooter",  -- 1057
+    "upright bars just right of centre, close to where you aim, the target high above, strong hit feedback",  -- 1058
+    "Crossbar",  -- 1059
+    "after MMOs played on a controller: the target and focus high in the middle, your bars just above the gamepad bars, party on the left, full plates",  -- 1060
+    "ARPG",  -- 1061
+    "after action RPGs: the camera far back, your vitals low on the left, the target high in the middle, minor enemies small, every hit loud",  -- 1062
+    "Compass",  -- 1063
+    "after first-person RPGs: the camera close, your bars low in the middle, the target under the top edge, townsfolk only when you point at them",  -- 1064
+    "Raid",  -- 1065
+    "WoW's own placement with everything a group needs: party and raid frames, health percents and levels on plates",  -- 1066
+    "Follow ControllerCam's presets",  -- 1067
+    "choosing a camera preset in ControllerCam for everywhere also chooses the matching HUD preset (the camera keeps its own distance)",  -- 1068
+    "Modern",  -- 1069
+    "set the whole HUD to a preset: action, classic, minimal, openworld, adventure, soulslike, shooter, crossbar, arpg, compass, raid",  -- 1070
+    "the target frame and nameplates compact or full, both at once",  -- 1071
+    "the target frame compact or full",  -- 1072
+    "size the text for a TV across the room, or for a monitor at arm's length",  -- 1073
+    "put our frames back where they start, for the game's own Modern or Classic layout",  -- 1074
+    "Your whole setup (HUD, camera and the game's layout): copy this line (Ctrl+C) to keep or share it.",  -- 1075
+    "Paste a line of HUD settings (Ctrl+V) and accept.",  -- 1076
+    "That line is damaged: copy it again, completely.",  -- 1077
+    "That line was made by a newer version: update the addon.",  -- 1078
+    "That is not a line of HUD settings.",  -- 1079
+    "Settings imported: %d taken, %d left out.",  -- 1080
+    "The camera setup came along.",  -- 1081
+    "The camera setup was left as it is.",  -- 1082
+    "The game's layout is now '%s'.",  -- 1083
+    "The game's layout was left as it is.",  -- 1084
+    "your settings as one line of text, to keep or share",  -- 1085
+    "take settings from a line of text made by /cchud export",  -- 1086
+    "The HUD is on while the Gamepad UI is in use. Its options: Options > AddOns > ControllerCam > HUD, or /cchud.",  -- 1087
+    "Camera only: the HUD rests and the game's interface is as it was. /cchud on switches it on.",  -- 1088
+    "Set up the screen for the controller too? This adds a layout named CCHUD to the game's Edit Mode, for you to choose there: it puts the cooldown rows under the target, clear of the gamepad buttons. Your own layouts are kept (/cchud setup offers this again).",  -- 1089
+    "Set it up",  -- 1090
+    "Not now",  -- 1091
+    "ControllerCam comes with a controller interface, the HUD: its own unit frames, nameplates, cast bar and more while the Gamepad UI is in use. Do you want it, or the camera alone?",  -- 1092
+    "Camera + HUD",  -- 1093
+    "Camera only",  -- 1094
+    "This client does not let addons change the layout.",  -- 1095
+    "ask again: the camera with the HUD, or the camera alone",  -- 1096
+    "offer the screen layout made for the HUD again (the game's Edit Mode)",  -- 1097
+    "Shown while the Gamepad UI is in use. Drag our frames in the game's Edit Mode.",  -- 1098
+    "Presets",  -- 1099
+    "Sized for",  -- 1100
+    "TV",  -- 1101
+    "Monitor",  -- 1102
+    "Button icons",  -- 1103
+    "the icons the game shows for your controller's buttons: found by itself for the controller in use, or the kind you choose",  -- 1104
+    "Font",  -- 1105
+    "Reset the game's layout",  -- 1106
+    "Try it out",  -- 1107
+    "Play the demo",  -- 1108
+    "Show every hit effect",  -- 1109
+    "Run the self-check",  -- 1110
+    "Gamepad bars: compact / full",  -- 1111
+    "Export settings",  -- 1112
+    "Import settings",  -- 1113
+    "Tick “Show advanced options” on the main page for every setting.",  -- 1114
+    "Modules",  -- 1115
+    "Quick switches",  -- 1116
+    "General",  -- 1117
+    "HUD",  -- 1118
+    "The options panel is not available in this client.",  -- 1119
+    "Enabled",  -- 1120
+    "the whole HUD; off brings the game's own frames back",  -- 1121
+    "Also in the mouse & keyboard UI",  -- 1122
+    "normally the HUD only runs while the Gamepad UI is in use",  -- 1123
+    "Put the game's frames aside",  -- 1124
+    "hide the game's player, target and focus frames while ours are shown",  -- 1125
+    "Chat window at the top left",  -- 1126
+    "move the chat window to the top left while the HUD runs",  -- 1127
+    "Vertical bars when idle",  -- 1128
+    "how visible the vertical bars stay at full health out of combat (0 hides them)",  -- 1129
+    "Class colours",  -- 1130
+    "colour your bar, and other players' bars, by class",  -- 1131
+    "Class icons",  -- 1132
+    "a class icon in front of a player's name on the target and target of target",  -- 1133
+    "Threat on the target frame",  -- 1134
+    "a shield icon and a glow on the target frame: red while it attacks you, red and yellow when you are about to pull it, yellow and blue when you are losing it, blue when it is not on you",  -- 1135
+    "Compact bars everywhere",  -- 1136
+    "the target frame and nameplates in their compact style, a little over half as wide (each one can still be set on its own; presets never change it)",  -- 1137
+    "Compact target frame",  -- 1138
+    "the target frame a little over half as wide",  -- 1139
+    "Health colours in a fight",  -- 1140
+    "in a fight, health bars turn from green through yellow to red as health drops",  -- 1141
+    "Shade behind text",  -- 1142
+    "a soft dark band behind the target's text, to keep it readable",  -- 1143
+    "Text size",  -- 1144
+    "size of the text on our frames",  -- 1145
+    "Frame size",  -- 1146
+    "size of our unit frames",  -- 1147
+    "Your bars in a fight",  -- 1148
+    "how visible your bars, pet and focus are in a fight until something calls for attention",  -- 1149
+    "Full when health is below",  -- 1150
+    "your bars come back in full when your health drops below this",  -- 1151
+    "Full when mana is below",  -- 1152
+    "your bars come back in full when your mana drops below this",  -- 1153
+    "Player bar when idle",  -- 1154
+    "how visible the player bar stays at full health or out of combat (0 hides it)",  -- 1155
+    "Vendor and bank help",  -- 1156
+    "the vendor's Sell junk button asks what to sell; quick move at vendor and bank",  -- 1157
+    "Show advanced options",  -- 1158
+    "every setting, not only the main switches",  -- 1159
+    "Player frame",  -- 1160
+    "our player bar, top left",  -- 1161
+    "Target frame",  -- 1162
+    "our target bar, top centre",  -- 1163
+    "Pet bar",  -- 1164
+    "a small pet bar under the player bar, or beside the vertical bars",  -- 1165
+    "Focus frame",  -- 1166
+    "our focus frame",  -- 1167
+    "slim upright health and power bars beside your character, for a third-person view (in place of the player bar)",  -- 1168
+    "Sell junk when a vendor opens",  -- 1169
+    "sell junk by your rules as soon as a vendor opens",  -- 1170
+    "White weapons and armor are junk",  -- 1171
+    "count white weapons and armor as junk (never tools, fishing poles, gear with a use, or anything that could be an upgrade; always asked first)",  -- 1172
+    "Deposit when the bank opens",  -- 1173
+    "items marked for the bank, and what the bank already holds (when that is on), go in by themselves",  -- 1174
+    "the game's option; our small frame follows it",  -- 1175
+    "Cooldown Manager",  -- 1176
+    "the game's Cooldown Manager",  -- 1177
+    "Personal Resource Display",  -- 1178
+    "your health and power under your character",  -- 1179
+    "Bank takes reagents by itself",  -- 1180
+    "the game's option for the bank",  -- 1181
+    "Tooltip when a buff starts",  -- 1182
+    "the game's option: a buff's tooltip pops up for a moment when it is applied (Gamepad UI)",  -- 1183
+    "Class colours for names in chat",  -- 1184
+    "the game's chat setting for every kind of chat at once: a player's name in their class colour",  -- 1185
+    "open the options panel (Options > AddOns > ControllerCam HUD)",  -- 1186
+    "Frames",  -- 1187
+    "Screen fade",  -- 1188
+    "Effects",  -- 1189
+    "Look",  -- 1190
+    "Quests, chat and map",  -- 1191
+    "Bags, bank and vendor",  -- 1192
+    "Fishing",  -- 1193
+    "Accessibility",  -- 1194
+    "Native Options",  -- 1195
+    "%s  |  Gamepad UI: %s  |  running: %s",  -- 1196
+    "player %s, target %s, pet %s, focus %s  |  game frames put aside: %s  |  chat moved: %s",  -- 1197
+    "native options: target of target %s, Cooldown Manager %s, personal resource %s",  -- 1198
+    "text size %d%%  |  text shade: %s",  -- 1199
+    "vendor and bank help: %s  |  auto-sell: %s  |  white gear is junk: %s",  -- 1200
+    "idle visibility %d%%  |  scale %d%%  |  class colours: %s",  -- 1201
+    "A minimal action-game HUD for the Gamepad UI.",  -- 1202
+    "enabled",  -- 1203
+    "disabled: the game's own frames are back",  -- 1204
+    "use in the mouse & keyboard UI too: %s",  -- 1205
+    "game frames put aside: %s",  -- 1206
+    "chat moved to the top left: %s",  -- 1207
+    "class colours: %s",  -- 1208
+    "This client does not have that option.",  -- 1209
+    "%s: %s (the game's own option)",  -- 1210
+    "The game did not accept that right now.",  -- 1211
+    "vendor and bank help: %s",  -- 1212
+    "auto-sell: %s",  -- 1213
+    "white gear is junk: %s",  -- 1214
+    "Vendor help is off.",  -- 1215
+    "usage: /cchud sell [junk | recommended | white | green | blue]",  -- 1216
+    "deposit marked items when the bank opens: %s",  -- 1217
+    "usage: /cchud junk <item> (shift-click the item into the chat line)",  -- 1218
+    "item %d: junk, sold with the rest",  -- 1219
+    "item %d: kept, never sold",  -- 1220
+    "item %d: for the bank",  -- 1221
+    "text shade: %s",  -- 1222
+    "usage: /cchud text <80-250>",  -- 1223
+    "text size %d%%",  -- 1224
+    "demo stopped",  -- 1225
+    "The HUD is not running.",  -- 1226
+    "Demo running: a made-up fight on a loop. Type /cchud demo again to stop.",  -- 1227
+    "usage: /cchud idle <0-100>",  -- 1228
+    "idle visibility %d%%",  -- 1229
+    "usage: /cchud scale <50-200>",  -- 1230
+    "scale %d%%",  -- 1231
+    "Drag the frames, then type /cchud lock.",  -- 1232
+    "frames locked",  -- 1233
+    "Everything is back to how it started: settings, frames and the screen layout (your vendor marks and price history are kept).",  -- 1234
+    "frames are back where they started",  -- 1235
+    "unknown command '%s'. Type /cchud help",  -- 1236
+    "Error list cleared.",  -- 1237
+    "No errors recorded.",  -- 1238
+    "%d errors recorded (newest last). /cchud errors clear empties the list.",  -- 1239
+    "show status",  -- 1240
+    "turn the HUD on or off (off brings the game's own frames back)",  -- 1241
+    "also use the HUD in the mouse & keyboard UI",  -- 1242
+    "use our frame for it, or the game's own",  -- 1243
+    "slim upright health and power bars beside your character",  -- 1244
+    "target of target (the game's own option, also in its menus)",  -- 1245
+    "the game's Cooldown Manager (the game's own option)",  -- 1246
+    "your health and power under your character (the game's own option)",  -- 1247
+    "the tooltip that pops up when a buff starts (the game's own option)",  -- 1248
+    "keep the game's own player and target frames visible (on) or put them aside (off)",  -- 1249
+    "at a vendor: choose what to sell (also: sell junk, sell recommended, sell white | green | blue)",  -- 1250
+    "count white weapons and armor as junk",  -- 1251
+    "mark an item: always sold, never sold, or for the bank (shift-click it into the chat line)",  -- 1252
+    "at the bank: deposit what the bank already holds, and every item marked for it",  -- 1253
+    "at the bank: take out what you already carry some of",  -- 1254
+    "deposit as soon as the bank opens",  -- 1255
+    "the bank takes reagents by itself (the game's own option)",  -- 1256
+    "text size, in percent (150 reads well on a TV)",  -- 1257
+    "how visible the player bar stays when nothing is happening (0 hides it)",  -- 1258
+    "size of the frames, in percent",  -- 1259
+    "drag the frames to where you want them (the game's Edit Mode does this too)",  -- 1260
+    "put the frames back where they started",  -- 1261
+    "play a short made-up fight, to see how the frames react (again to stop)",  -- 1262
+    "compare what is on screen with the settings (check all lists every row)",  -- 1263
+    "save a description of this client's Gamepad UI (for troubleshooting)",  -- 1264
+    "show this list",  -- 1265
+    "the last errors the HUD met, also after a reload (to report them)",  -- 1266
 }
 
 local TRANSLATIONS = {
@@ -2285,266 +2284,265 @@ local TRANSLATIONS = {
         "Hineinlegen",  -- 1005
         "Tasche aufnehmen",  -- 1006
         "Mehr",  -- 1007
-        "Tooltip",  -- 1008
-        "Tooltip aus",  -- 1009
-        "Taschen",  -- 1010
-        "%d frei",  -- 1011
-        "Freier Platz",  -- 1012
-        "Im Kampf schließt B deine Taschen.",  -- 1013
-        "für die Bank",  -- 1014
-        "keine Markierung",  -- 1015
-        "Kein freier Platz.",  -- 1016
-        "Hier ablegen",  -- 1017
-        "Stapel teilen",  -- 1018
-        "Markierung: %s",  -- 1019
-        "Gegenstandsdetails",  -- 1020
-        "Zerstören",  -- 1021
-        "Bank sortieren",  -- 1022
-        "Taschen sortieren",  -- 1023
-        "Taschen zeigen",  -- 1024
-        "Bank zeigen",  -- 1025
-        "Markiertes einlagern",  -- 1026
-        "Empfohlenes verkaufen",  -- 1027
-        "Loslassen zum Zerstören",  -- 1028
-        "Dieser Gegenstand startet eine Quest.",  -- 1029
-        "Das ist ein Questgegenstand.",  -- 1030
-        "%s zerstören?",  -- 1031
-        "Das Spiel hat %s behalten: zerstöre es in seinen eigenen Taschen.",  -- 1032
-        "%s zerstört.",  -- 1033
-        "Ein Taschenfenster mit Schnellfiltern",  -- 1034
-        "deine Taschen in einem eigenen Fenster des HUD statt dem des Spiels: alle Gegenstände beisammen, die freien Plätze am Ende gesammelt, deine Taschen in einer eigenen Reihe und Schnellfilter oben (LB und RB). Auch die Bank, solange sie offen ist. Aus: die Taschen des Spiels",  -- 1035
-        "Taschenfenster: Reihenfolge",  -- 1036
-        "Clever: was du benutzt zuerst (Verbrauchbares, Gegenstände mit Benutzen), dann der Rest nach Art, Plunder zuletzt und verblasst. Nach Art: in Abschnitten unter eigenen Überschriften. Wie in den Taschen: die Reihenfolge des Spiels",  -- 1037
-        "HUD-Voreinstellung: %s, passend zur Kamera",  -- 1038
-        "Preset: %s",  -- 1039
-        "Ein Layout namens '%s' wurde dem Bearbeitungsmodus des Spiels hinzugefügt. Wähle es dort aus, um es zu benutzen (Spielmenü > Bearbeitungsmodus > Layout).",  -- 1040
-        "unbekanntes Preset '%s'",  -- 1041
-        "Für einen Fernseher: größerer Text im HUD und im Chat.",  -- 1042
-        "Für einen Monitor: Text in seiner normalen Größe.",  -- 1043
-        "Unsere Fenster sind wieder an ihrem Ausgangsplatz. Wähle im Bearbeitungsmodus das Layout %s des Spiels (Spielmenü > Bearbeitungsmodus > Layout).",  -- 1044
-        "Voreinstellungen setzen den Kameraabstand",  -- 1045
-        "eine Voreinstellung bringt die Kamera auch einmal auf den Abstand, für den ihr Layout gemacht wurde (danach frei zoomen)",  -- 1046
-        "Aktion",  -- 1047
-        "eine Ansicht aus der dritten Person: schmale vertikale Leisten neben deinem Charakter, alle Effekte an; außerhalb des Kampfes blendet alles aus",  -- 1048
-        "Klassisch",  -- 1049
-        "unsere Rahmen dort, wo WoW sie immer hatte, ruhigere Effekte, die Gamepad-Leisten des Spiels unverändert",  -- 1050
-        "nur das Nötige: freundliche NPCs zeigen ihre Plakette (mit ihrer Tätigkeit) nur, solange du auf sie zeigst, sie anvisierst oder als Ziel hast; Namen ohne Titel; außerhalb des Kampfes ruhen deine Leisten als leiser Hinweis (wenig Gesundheit zeigt sich immer)",  -- 1051
-        "Offene Welt",  -- 1052
-        "ein klarer Bildschirm zum Erkunden: schmale Leisten neben dir, die verblasst ruhen, Plaketten ohne Kraftleisten, Chat, der ausblendet",  -- 1053
-        "Abenteuer",  -- 1054
-        "nach Konsolen-Abenteuern in offener Welt: Vitalwerte neben dir, ein kleines Ziel hoch in der Mitte, Stadtbewohner nur, wenn du auf sie zeigst, Chat, der schnell ausblendet",  -- 1055
-        "Soulslike",  -- 1056
-        "deine Leisten oben links, eine große Zielleiste tief in der Mitte wie eine Bossleiste, jeder Treffer spürbar",  -- 1057
-        "Shooter",  -- 1058
-        "aufrechte Leisten knapp rechts der Mitte, nah an deinem Ziel, das Ziel hoch oben, starke Trefferrückmeldung",  -- 1059
-        "Crossbar",  -- 1060
-        "nach MMOs mit Controller: Ziel und Fokus hoch in der Mitte, deine Leisten direkt über den Gamepad-Leisten, Gruppe links, volle Plaketten",  -- 1061
-        "ARPG",  -- 1062
-        "nach Action-Rollenspielen: die Kamera weit hinten, deine Vitalwerte unten links, das Ziel hoch in der Mitte, kleine Gegner klein, jeder Treffer laut",  -- 1063
-        "Kompass",  -- 1064
-        "nach Ego-Rollenspielen: die Kamera nah, deine Leisten unten in der Mitte, das Ziel unter dem oberen Rand, Stadtbewohner nur, wenn du auf sie zeigst",  -- 1065
-        "Schlachtzug",  -- 1066
-        "die Anordnung von WoW mit allem, was eine Gruppe braucht: Gruppen- und Schlachtzugsrahmen, Gesundheitsprozent und Stufen auf Plaketten",  -- 1067
-        "ControllerCams Voreinstellungen folgen",  -- 1068
-        "eine Kamera-Voreinstellung in ControllerCam für überall wählt auch die passende HUD-Voreinstellung (die Kamera behält ihre eigene Entfernung)",  -- 1069
-        "Modern",  -- 1070
-        "stelle das ganze HUD auf eine Voreinstellung: action, classic, minimal, openworld, adventure, soulslike, shooter, crossbar, arpg, compass, raid",  -- 1071
-        "Zielrahmen und Namensplaketten kompakt oder voll, beide auf einmal",  -- 1072
-        "der Zielrahmen kompakt oder voll",  -- 1073
-        "den Text für einen Fernseher am anderen Ende des Zimmers oder für einen Monitor in Armlänge bemessen",  -- 1074
-        "unsere Fenster an ihren Ausgangsplatz zurücksetzen, passend zum spieleigenen Layout Modern oder Klassisch",  -- 1075
-        "Deine gesamte Einrichtung (HUD, Kamera und das Layout des Spiels): Kopiere diese Zeile (Strg+C), um sie aufzubewahren oder zu teilen.",  -- 1076
-        "Füge eine Zeile mit HUD-Einstellungen ein (Ctrl+V) und bestätige.",  -- 1077
-        "Diese Zeile ist beschädigt: Kopiere sie noch einmal, vollständig.",  -- 1078
-        "Diese Zeile stammt von einer neueren Version: Aktualisiere das Addon.",  -- 1079
-        "Das ist keine Zeile mit HUD-Einstellungen.",  -- 1080
-        "Einstellungen importiert: %d übernommen, %d ausgelassen.",  -- 1081
-        "Die Kameraeinrichtung wurde mit übernommen.",  -- 1082
-        "Die Kameraeinrichtung wurde nicht verändert.",  -- 1083
-        "Das Layout des Spiels ist jetzt '%s'.",  -- 1084
-        "Das Layout des Spiels wurde nicht verändert.",  -- 1085
-        "deine Einstellungen als eine Textzeile, zum Behalten oder Teilen",  -- 1086
-        "übernimmt Einstellungen aus einer Textzeile, die mit /cchud export erstellt wurde",  -- 1087
-        "Das HUD ist an, solange die Gamepad-Oberfläche benutzt wird. Seine Optionen: Optionen > AddOns > ControllerCam > HUD oder /cchud.",  -- 1088
-        "Nur Kamera: Das HUD ruht und die Oberfläche des Spiels ist wie zuvor. /cchud on schaltet es ein.",  -- 1089
-        "Auch den Bildschirm für den Controller einrichten? Das fügt dem Bearbeitungsmodus des Spiels ein Layout namens CCHUD hinzu, das du dort auswählen kannst: Es setzt die Abklingzeit-Reihen unter das Ziel, weg von den Gamepad-Tasten. Deine eigenen Layouts bleiben erhalten (/cchud setup bietet das erneut an).",  -- 1090
-        "Einrichten",  -- 1091
-        "Jetzt nicht",  -- 1092
-        "ControllerCam bringt eine Controller-Oberfläche mit, das HUD: eigene Einheitenfenster, Namensplaketten, Zauberleiste und mehr, solange die Gamepad-Oberfläche benutzt wird. Möchtest du es oder nur die Kamera?",  -- 1093
-        "Kamera + HUD",  -- 1094
-        "Nur Kamera",  -- 1095
-        "Dieser Client erlaubt Addons nicht, das Layout zu ändern.",  -- 1096
-        "noch einmal fragen: die Kamera mit dem HUD oder nur die Kamera",  -- 1097
-        "das für das HUD gemachte Bildschirmlayout erneut anbieten (Bearbeitungsmodus des Spiels)",  -- 1098
-        "Wird angezeigt, solange die Gamepad-Oberfläche verwendet wird. Ziehe unsere Rahmen im Bearbeitungsmodus des Spiels.",  -- 1099
-        "Presets",  -- 1100
-        "Bemessen für",  -- 1101
-        "Fernseher",  -- 1102
-        "Monitor",  -- 1103
-        "Tastensymbole",  -- 1104
-        "die Symbole, die das Spiel für die Tasten deines Controllers zeigt: von selbst gefunden für den Controller in Gebrauch, oder die Art, die du wählst",  -- 1105
-        "Schriftart",  -- 1106
-        "Layout des Spiels zurücksetzen",  -- 1107
-        "Ausprobieren",  -- 1108
-        "Demo abspielen",  -- 1109
-        "Jeden Treffereffekt anzeigen",  -- 1110
-        "Selbstprüfung ausführen",  -- 1111
-        "Gamepad-Leisten: kompakt / voll",  -- 1112
-        "Einstellungen exportieren",  -- 1113
-        "Einstellungen importieren",  -- 1114
-        "Hake „Erweiterte Optionen anzeigen“ auf der Hauptseite an, um alle Einstellungen zu sehen.",  -- 1115
-        "Module",  -- 1116
-        "Schnellschalter",  -- 1117
-        "Allgemein",  -- 1118
-        "HUD",  -- 1119
-        "Das Optionsfenster ist in diesem Client nicht verfügbar.",  -- 1120
-        "Aktiviert",  -- 1121
-        "das gesamte HUD; aus bringt die eigenen Rahmen des Spiels zurück",  -- 1122
-        "Auch in der Maus-und-Tastatur-Oberfläche",  -- 1123
-        "normalerweise läuft das HUD nur, solange die Gamepad-Oberfläche verwendet wird",  -- 1124
-        "Rahmen des Spiels beiseitelegen",  -- 1125
-        "blende die Spieler-, Ziel- und Fokusrahmen des Spiels aus, solange unsere angezeigt werden",  -- 1126
-        "Chatfenster oben links",  -- 1127
-        "verschiebe das Chatfenster nach oben links, solange das HUD läuft",  -- 1128
-        "Vertikale Balken im Ruhezustand",  -- 1129
-        "wie sichtbar die vertikalen Balken bei voller Gesundheit außerhalb des Kampfes bleiben (0 blendet sie aus)",  -- 1130
-        "Klassenfarben",  -- 1131
-        "färbe deine Leiste und die Leisten anderer Spieler nach Klasse",  -- 1132
-        "Klassensymbole",  -- 1133
-        "ein Klassensymbol vor dem Namen eines Spielers beim Ziel und beim Ziel des Ziels",  -- 1134
-        "Bedrohung am Zielfenster",  -- 1135
-        "ein Schildsymbol und ein Leuchten am Zielrahmen: rot, solange es dich angreift, rot und gelb, wenn du es gleich ziehst, gelb und blau, wenn du es verlierst, blau, wenn es nicht auf dir ist",  -- 1136
-        "Überall kompakte Leisten",  -- 1137
-        "Zielrahmen und Namensplaketten im kompakten Stil, gut halb so breit (jedes lässt sich weiter einzeln einstellen; Voreinstellungen ändern es nie)",  -- 1138
-        "Kompaktes Zielfenster",  -- 1139
-        "das Zielfenster etwas mehr als halb so breit",  -- 1140
-        "Gesundheitsfarben im Kampf",  -- 1141
-        "im Kampf wechseln die Gesundheitsbalken von Grün über Gelb zu Rot, wenn die Gesundheit sinkt",  -- 1142
-        "Schatten hinter Text",  -- 1143
-        "ein weiches dunkles Band hinter dem Text des Ziels, damit er lesbar bleibt",  -- 1144
-        "Textgröße",  -- 1145
-        "Größe des Texts auf unseren Rahmen",  -- 1146
-        "Rahmengröße",  -- 1147
-        "Größe unserer Einheitenrahmen",  -- 1148
-        "Deine Leisten im Kampf",  -- 1149
-        "wie sichtbar deine Leisten, Begleiter und Fokus im Kampf sind, bis etwas Aufmerksamkeit verlangt",  -- 1150
-        "Voll bei Gesundheit unter",  -- 1151
-        "deine Leisten kehren vollständig zurück, wenn deine Gesundheit unter diesen Wert fällt",  -- 1152
-        "Voll bei Mana unter",  -- 1153
-        "deine Leisten kehren vollständig zurück, wenn dein Mana unter diesen Wert fällt",  -- 1154
-        "Spielerleiste im Leerlauf",  -- 1155
-        "wie sichtbar die Spielerleiste bei voller Gesundheit oder außerhalb des Kampfes bleibt (0 blendet sie aus)",  -- 1156
-        "Händler- und Bankhilfe",  -- 1157
-        "die Schaltfläche Plunder verkaufen beim Händler fragt nach, was verkauft werden soll; schnelles Verschieben bei Händler und Bank",  -- 1158
-        "Erweiterte Optionen anzeigen",  -- 1159
-        "alle Einstellungen, nicht nur die Hauptschalter",  -- 1160
-        "Spielerrahmen",  -- 1161
-        "unsere Spielerleiste, oben links",  -- 1162
-        "Zielrahmen",  -- 1163
-        "unsere Zielleiste, oben mittig",  -- 1164
-        "Haustierleiste",  -- 1165
-        "eine kleine Begleiterleiste unter der Spielerleiste oder neben den senkrechten Leisten",  -- 1166
-        "Fokusrahmen",  -- 1167
-        "unser Fokusrahmen",  -- 1168
-        "schmale aufrechte Gesundheits- und Energieleisten neben deinem Charakter, für eine Third-Person-Ansicht (statt der Spielerleiste)",  -- 1169
-        "Plunder verkaufen, wenn ein Händler geöffnet wird",  -- 1170
-        "verkaufe Plunder nach deinen Regeln, sobald ein Händler geöffnet wird",  -- 1171
-        "Weiße Waffen und Rüstung sind Plunder",  -- 1172
-        "weiße Waffen und Rüstungen als Plunder zählen (nie Werkzeuge, Angelruten, Ausrüstung mit Benutzen-Effekt oder mögliche Verbesserungen; es wird immer zuerst gefragt)",  -- 1173
-        "Einlagern, wenn die Bank öffnet",  -- 1174
-        "für die Bank markierte Gegenstände und, wenn eingeschaltet, was die Bank schon hat, kommen von selbst hinein",  -- 1175
-        "die Option des Spiels; unser kleiner Rahmen folgt ihr",  -- 1176
-        "Abklingzeitmanager",  -- 1177
-        "der Abklingzeitmanager des Spiels",  -- 1178
-        "Persönliche Ressourcenanzeige",  -- 1179
-        "deine Gesundheit und Ressource unter deinem Charakter",  -- 1180
-        "Bank nimmt Reagenzien automatisch auf",  -- 1181
-        "die Option des Spiels für die Bank",  -- 1182
-        "Tooltip bei Beginn eines Buffs",  -- 1183
-        "die Option des Spiels: der Tooltip eines Buffs erscheint kurz, wenn er angewendet wird (Gamepad-UI)",  -- 1184
-        "Klassenfarben für Namen im Chat",  -- 1185
-        "die Chat-Einstellung des Spiels für alle Chatarten gleichzeitig: der Name eines Spielers in seiner Klassenfarbe",  -- 1186
-        "öffne das Optionsfenster (Optionen > AddOns > ControllerCam HUD)",  -- 1187
-        "Rahmen",  -- 1188
-        "Bildschirm ausblenden",  -- 1189
-        "Effekte",  -- 1190
-        "Aussehen",  -- 1191
-        "Quests, Chat und Karte",  -- 1192
-        "Taschen, Bank und Händler",  -- 1193
-        "Angeln",  -- 1194
-        "Barrierefreiheit",  -- 1195
-        "Native Optionen",  -- 1196
-        "%s  |  Gamepad-Oberfläche: %s  |  läuft: %s",  -- 1197
-        "Spieler %s, Ziel %s, Haustier %s, Fokus %s  |  Spielrahmen beiseitegelegt: %s  |  Chat verschoben: %s",  -- 1198
-        "native Optionen: Ziel des Ziels %s, Abklingzeitmanager %s, persönliche Ressourcen %s",  -- 1199
-        "Textgröße %d%%  |  Textschatten: %s",  -- 1200
-        "Händler- und Bankhilfe: %s  |  Autoverkauf: %s  |  weiße Ausrüstung ist Plunder: %s",  -- 1201
-        "Leerlaufsichtbarkeit %d%%  |  Skalierung %d%%  |  Klassenfarben: %s",  -- 1202
-        "Ein minimalistisches Action-Spiel-HUD für die Gamepad-Oberfläche.",  -- 1203
-        "aktiviert",  -- 1204
-        "deaktiviert: die eigenen Rahmen des Spiels sind zurück",  -- 1205
-        "auch in der Maus-und-Tastatur-Oberfläche nutzen: %s",  -- 1206
-        "Spielrahmen beiseitegelegt: %s",  -- 1207
-        "Chat nach oben links verschoben: %s",  -- 1208
-        "Klassenfarben: %s",  -- 1209
-        "Dieser Client hat diese Option nicht.",  -- 1210
-        "%s: %s (die eigene Option des Spiels)",  -- 1211
-        "Das Spiel hat das gerade nicht akzeptiert.",  -- 1212
-        "Händler- und Bankhilfe: %s",  -- 1213
-        "Autoverkauf: %s",  -- 1214
-        "weiße Ausrüstung ist Plunder: %s",  -- 1215
-        "Händlerhilfe ist aus.",  -- 1216
-        "Verwendung: /cchud sell [junk | recommended | white | green | blue]",  -- 1217
-        "markierte Gegenstände einzahlen, wenn die Bank geöffnet wird: %s",  -- 1218
-        "Verwendung: /cchud junk <item> (Shift-Klick auf den Gegenstand fügt ihn in die Chatzeile ein)",  -- 1219
-        "Gegenstand %d: Plunder, wird mit dem Rest verkauft",  -- 1220
-        "Gegenstand %d: behalten, nie verkauft",  -- 1221
-        "Gegenstand %d: für die Bank",  -- 1222
-        "Textschatten: %s",  -- 1223
-        "Verwendung: /cchud text <80-250>",  -- 1224
-        "Textgröße %d%%",  -- 1225
-        "Demo beendet",  -- 1226
-        "Das HUD läuft nicht.",  -- 1227
-        "Demo läuft: ein erfundener Kampf in Dauerschleife. Gib /cchud demo erneut ein, um sie zu beenden.",  -- 1228
-        "Verwendung: /cchud idle <0-100>",  -- 1229
-        "Leerlaufsichtbarkeit %d%%",  -- 1230
-        "Verwendung: /cchud scale <50-200>",  -- 1231
-        "Skalierung %d%%",  -- 1232
-        "Ziehe die Rahmen und gib dann /cchud lock ein.",  -- 1233
-        "Rahmen gesperrt",  -- 1234
-        "Alles ist wieder wie am Anfang: Einstellungen, Fenster und das Bildschirmlayout (deine Händlermarkierungen und der Preisverlauf bleiben erhalten).",  -- 1235
-        "Rahmen sind wieder an ihrer Ausgangsposition",  -- 1236
-        "unbekannter Befehl '%s'. Gib /cchud help ein",  -- 1237
-        "Fehlerliste geleert.",  -- 1238
-        "Keine Fehler aufgezeichnet.",  -- 1239
-        "%d Fehler aufgezeichnet (neueste zuletzt). /cchud errors clear leert die Liste.",  -- 1240
-        "Status anzeigen",  -- 1241
-        "das HUD ein- oder ausschalten (aus bringt die eigenen Rahmen des Spiels zurück)",  -- 1242
-        "das HUD auch in der Maus-und-Tastatur-Oberfläche verwenden",  -- 1243
-        "unseren Rahmen dafür verwenden oder den des Spiels",  -- 1244
-        "schmale, aufrechte Gesundheits- und Kraftbalken neben deinem Charakter",  -- 1245
-        "Ziel des Ziels (die eigene Option des Spiels, auch in dessen Menüs)",  -- 1246
-        "der Abklingzeitmanager des Spiels (die eigene Option des Spiels)",  -- 1247
-        "deine Gesundheit und Ressource unter deinem Charakter (die eigene Option des Spiels)",  -- 1248
-        "der Tooltip, der erscheint, wenn ein Buff beginnt (die eigene Option des Spiels)",  -- 1249
-        "die Spieler- und Zielrahmen des Spiels sichtbar lassen (an) oder beiseitelegen (aus)",  -- 1250
-        "beim Händler: wählen, was verkauft wird (auch: sell junk, sell recommended, sell white | green | blue)",  -- 1251
-        "zähle weiße Waffen und Rüstung als Plunder",  -- 1252
-        "einen Gegenstand markieren: immer verkauft, nie verkauft oder für die Bank (Shift-Klick fügt ihn in die Chatzeile ein)",  -- 1253
-        "an der Bank: einlagern, was die Bank schon hat, und alles für sie Markierte",  -- 1254
-        "an der Bank: herausnehmen, wovon du schon etwas trägst",  -- 1255
-        "einlagern, sobald die Bank öffnet",  -- 1256
-        "die Bank nimmt Reagenzien automatisch auf (die eigene Option des Spiels)",  -- 1257
-        "Textgröße in Prozent (150 passt gut auf einem Fernseher)",  -- 1258
-        "wie sichtbar die Spielerleiste bleibt, wenn nichts passiert (0 blendet sie aus)",  -- 1259
-        "Größe der Rahmen in Prozent",  -- 1260
-        "ziehe die Rahmen an die gewünschte Stelle (der Bearbeitungsmodus des Spiels kann das auch)",  -- 1261
-        "die Rahmen an ihre Ausgangsposition zurücksetzen",  -- 1262
-        "einen kurzen erfundenen Kampf abspielen, um zu sehen, wie die Rahmen reagieren (erneut zum Beenden)",  -- 1263
-        "gleiche das Angezeigte mit den Einstellungen ab (check listet jede Zeile auf)",  -- 1264
-        "eine Beschreibung der Gamepad-Oberfläche dieses Clients speichern (zur Fehlersuche)",  -- 1265
-        "diese Liste anzeigen",  -- 1266
-        "die letzten Fehler des HUD, auch nach einem Neuladen (um sie zu melden)",  -- 1267
+        "Sortieren",  -- 1008
+        "Taschen",  -- 1009
+        "%d frei",  -- 1010
+        "Freier Platz",  -- 1011
+        "Im Kampf schließt B deine Taschen.",  -- 1012
+        "für die Bank",  -- 1013
+        "keine Markierung",  -- 1014
+        "Kein freier Platz.",  -- 1015
+        "Hier ablegen",  -- 1016
+        "Stapel teilen",  -- 1017
+        "Markierung: %s",  -- 1018
+        "Gegenstandsdetails",  -- 1019
+        "Zerstören",  -- 1020
+        "Bank sortieren",  -- 1021
+        "Taschen sortieren",  -- 1022
+        "Taschen zeigen",  -- 1023
+        "Bank zeigen",  -- 1024
+        "Markiertes einlagern",  -- 1025
+        "Empfohlenes verkaufen",  -- 1026
+        "Loslassen zum Zerstören",  -- 1027
+        "Dieser Gegenstand startet eine Quest.",  -- 1028
+        "Das ist ein Questgegenstand.",  -- 1029
+        "%s zerstören?",  -- 1030
+        "Das Spiel hat %s behalten: zerstöre es in seinen eigenen Taschen.",  -- 1031
+        "%s zerstört.",  -- 1032
+        "Ein Taschenfenster mit Schnellfiltern",  -- 1033
+        "deine Taschen in einem eigenen Fenster des HUD statt dem des Spiels: alle Gegenstände beisammen, die freien Plätze am Ende gesammelt, deine Taschen in einer eigenen Reihe und Schnellfilter oben (LB und RB). Auch die Bank, solange sie offen ist. Aus: die Taschen des Spiels",  -- 1034
+        "Taschenfenster: Reihenfolge",  -- 1035
+        "Clever: was du benutzt zuerst (Verbrauchbares, Gegenstände mit Benutzen), dann der Rest nach Art, Plunder zuletzt und verblasst. Nach Art: in Abschnitten unter eigenen Überschriften. Wie in den Taschen: die Reihenfolge des Spiels",  -- 1036
+        "HUD-Voreinstellung: %s, passend zur Kamera",  -- 1037
+        "Preset: %s",  -- 1038
+        "Ein Layout namens '%s' wurde dem Bearbeitungsmodus des Spiels hinzugefügt. Wähle es dort aus, um es zu benutzen (Spielmenü > Bearbeitungsmodus > Layout).",  -- 1039
+        "unbekanntes Preset '%s'",  -- 1040
+        "Für einen Fernseher: größerer Text im HUD und im Chat.",  -- 1041
+        "Für einen Monitor: Text in seiner normalen Größe.",  -- 1042
+        "Unsere Fenster sind wieder an ihrem Ausgangsplatz. Wähle im Bearbeitungsmodus das Layout %s des Spiels (Spielmenü > Bearbeitungsmodus > Layout).",  -- 1043
+        "Voreinstellungen setzen den Kameraabstand",  -- 1044
+        "eine Voreinstellung bringt die Kamera auch einmal auf den Abstand, für den ihr Layout gemacht wurde (danach frei zoomen)",  -- 1045
+        "Aktion",  -- 1046
+        "eine Ansicht aus der dritten Person: schmale vertikale Leisten neben deinem Charakter, alle Effekte an; außerhalb des Kampfes blendet alles aus",  -- 1047
+        "Klassisch",  -- 1048
+        "unsere Rahmen dort, wo WoW sie immer hatte, ruhigere Effekte, die Gamepad-Leisten des Spiels unverändert",  -- 1049
+        "nur das Nötige: freundliche NPCs zeigen ihre Plakette (mit ihrer Tätigkeit) nur, solange du auf sie zeigst, sie anvisierst oder als Ziel hast; Namen ohne Titel; außerhalb des Kampfes ruhen deine Leisten als leiser Hinweis (wenig Gesundheit zeigt sich immer)",  -- 1050
+        "Offene Welt",  -- 1051
+        "ein klarer Bildschirm zum Erkunden: schmale Leisten neben dir, die verblasst ruhen, Plaketten ohne Kraftleisten, Chat, der ausblendet",  -- 1052
+        "Abenteuer",  -- 1053
+        "nach Konsolen-Abenteuern in offener Welt: Vitalwerte neben dir, ein kleines Ziel hoch in der Mitte, Stadtbewohner nur, wenn du auf sie zeigst, Chat, der schnell ausblendet",  -- 1054
+        "Soulslike",  -- 1055
+        "deine Leisten oben links, eine große Zielleiste tief in der Mitte wie eine Bossleiste, jeder Treffer spürbar",  -- 1056
+        "Shooter",  -- 1057
+        "aufrechte Leisten knapp rechts der Mitte, nah an deinem Ziel, das Ziel hoch oben, starke Trefferrückmeldung",  -- 1058
+        "Crossbar",  -- 1059
+        "nach MMOs mit Controller: Ziel und Fokus hoch in der Mitte, deine Leisten direkt über den Gamepad-Leisten, Gruppe links, volle Plaketten",  -- 1060
+        "ARPG",  -- 1061
+        "nach Action-Rollenspielen: die Kamera weit hinten, deine Vitalwerte unten links, das Ziel hoch in der Mitte, kleine Gegner klein, jeder Treffer laut",  -- 1062
+        "Kompass",  -- 1063
+        "nach Ego-Rollenspielen: die Kamera nah, deine Leisten unten in der Mitte, das Ziel unter dem oberen Rand, Stadtbewohner nur, wenn du auf sie zeigst",  -- 1064
+        "Schlachtzug",  -- 1065
+        "die Anordnung von WoW mit allem, was eine Gruppe braucht: Gruppen- und Schlachtzugsrahmen, Gesundheitsprozent und Stufen auf Plaketten",  -- 1066
+        "ControllerCams Voreinstellungen folgen",  -- 1067
+        "eine Kamera-Voreinstellung in ControllerCam für überall wählt auch die passende HUD-Voreinstellung (die Kamera behält ihre eigene Entfernung)",  -- 1068
+        "Modern",  -- 1069
+        "stelle das ganze HUD auf eine Voreinstellung: action, classic, minimal, openworld, adventure, soulslike, shooter, crossbar, arpg, compass, raid",  -- 1070
+        "Zielrahmen und Namensplaketten kompakt oder voll, beide auf einmal",  -- 1071
+        "der Zielrahmen kompakt oder voll",  -- 1072
+        "den Text für einen Fernseher am anderen Ende des Zimmers oder für einen Monitor in Armlänge bemessen",  -- 1073
+        "unsere Fenster an ihren Ausgangsplatz zurücksetzen, passend zum spieleigenen Layout Modern oder Klassisch",  -- 1074
+        "Deine gesamte Einrichtung (HUD, Kamera und das Layout des Spiels): Kopiere diese Zeile (Strg+C), um sie aufzubewahren oder zu teilen.",  -- 1075
+        "Füge eine Zeile mit HUD-Einstellungen ein (Ctrl+V) und bestätige.",  -- 1076
+        "Diese Zeile ist beschädigt: Kopiere sie noch einmal, vollständig.",  -- 1077
+        "Diese Zeile stammt von einer neueren Version: Aktualisiere das Addon.",  -- 1078
+        "Das ist keine Zeile mit HUD-Einstellungen.",  -- 1079
+        "Einstellungen importiert: %d übernommen, %d ausgelassen.",  -- 1080
+        "Die Kameraeinrichtung wurde mit übernommen.",  -- 1081
+        "Die Kameraeinrichtung wurde nicht verändert.",  -- 1082
+        "Das Layout des Spiels ist jetzt '%s'.",  -- 1083
+        "Das Layout des Spiels wurde nicht verändert.",  -- 1084
+        "deine Einstellungen als eine Textzeile, zum Behalten oder Teilen",  -- 1085
+        "übernimmt Einstellungen aus einer Textzeile, die mit /cchud export erstellt wurde",  -- 1086
+        "Das HUD ist an, solange die Gamepad-Oberfläche benutzt wird. Seine Optionen: Optionen > AddOns > ControllerCam > HUD oder /cchud.",  -- 1087
+        "Nur Kamera: Das HUD ruht und die Oberfläche des Spiels ist wie zuvor. /cchud on schaltet es ein.",  -- 1088
+        "Auch den Bildschirm für den Controller einrichten? Das fügt dem Bearbeitungsmodus des Spiels ein Layout namens CCHUD hinzu, das du dort auswählen kannst: Es setzt die Abklingzeit-Reihen unter das Ziel, weg von den Gamepad-Tasten. Deine eigenen Layouts bleiben erhalten (/cchud setup bietet das erneut an).",  -- 1089
+        "Einrichten",  -- 1090
+        "Jetzt nicht",  -- 1091
+        "ControllerCam bringt eine Controller-Oberfläche mit, das HUD: eigene Einheitenfenster, Namensplaketten, Zauberleiste und mehr, solange die Gamepad-Oberfläche benutzt wird. Möchtest du es oder nur die Kamera?",  -- 1092
+        "Kamera + HUD",  -- 1093
+        "Nur Kamera",  -- 1094
+        "Dieser Client erlaubt Addons nicht, das Layout zu ändern.",  -- 1095
+        "noch einmal fragen: die Kamera mit dem HUD oder nur die Kamera",  -- 1096
+        "das für das HUD gemachte Bildschirmlayout erneut anbieten (Bearbeitungsmodus des Spiels)",  -- 1097
+        "Wird angezeigt, solange die Gamepad-Oberfläche verwendet wird. Ziehe unsere Rahmen im Bearbeitungsmodus des Spiels.",  -- 1098
+        "Presets",  -- 1099
+        "Bemessen für",  -- 1100
+        "Fernseher",  -- 1101
+        "Monitor",  -- 1102
+        "Tastensymbole",  -- 1103
+        "die Symbole, die das Spiel für die Tasten deines Controllers zeigt: von selbst gefunden für den Controller in Gebrauch, oder die Art, die du wählst",  -- 1104
+        "Schriftart",  -- 1105
+        "Layout des Spiels zurücksetzen",  -- 1106
+        "Ausprobieren",  -- 1107
+        "Demo abspielen",  -- 1108
+        "Jeden Treffereffekt anzeigen",  -- 1109
+        "Selbstprüfung ausführen",  -- 1110
+        "Gamepad-Leisten: kompakt / voll",  -- 1111
+        "Einstellungen exportieren",  -- 1112
+        "Einstellungen importieren",  -- 1113
+        "Hake „Erweiterte Optionen anzeigen“ auf der Hauptseite an, um alle Einstellungen zu sehen.",  -- 1114
+        "Module",  -- 1115
+        "Schnellschalter",  -- 1116
+        "Allgemein",  -- 1117
+        "HUD",  -- 1118
+        "Das Optionsfenster ist in diesem Client nicht verfügbar.",  -- 1119
+        "Aktiviert",  -- 1120
+        "das gesamte HUD; aus bringt die eigenen Rahmen des Spiels zurück",  -- 1121
+        "Auch in der Maus-und-Tastatur-Oberfläche",  -- 1122
+        "normalerweise läuft das HUD nur, solange die Gamepad-Oberfläche verwendet wird",  -- 1123
+        "Rahmen des Spiels beiseitelegen",  -- 1124
+        "blende die Spieler-, Ziel- und Fokusrahmen des Spiels aus, solange unsere angezeigt werden",  -- 1125
+        "Chatfenster oben links",  -- 1126
+        "verschiebe das Chatfenster nach oben links, solange das HUD läuft",  -- 1127
+        "Vertikale Balken im Ruhezustand",  -- 1128
+        "wie sichtbar die vertikalen Balken bei voller Gesundheit außerhalb des Kampfes bleiben (0 blendet sie aus)",  -- 1129
+        "Klassenfarben",  -- 1130
+        "färbe deine Leiste und die Leisten anderer Spieler nach Klasse",  -- 1131
+        "Klassensymbole",  -- 1132
+        "ein Klassensymbol vor dem Namen eines Spielers beim Ziel und beim Ziel des Ziels",  -- 1133
+        "Bedrohung am Zielfenster",  -- 1134
+        "ein Schildsymbol und ein Leuchten am Zielrahmen: rot, solange es dich angreift, rot und gelb, wenn du es gleich ziehst, gelb und blau, wenn du es verlierst, blau, wenn es nicht auf dir ist",  -- 1135
+        "Überall kompakte Leisten",  -- 1136
+        "Zielrahmen und Namensplaketten im kompakten Stil, gut halb so breit (jedes lässt sich weiter einzeln einstellen; Voreinstellungen ändern es nie)",  -- 1137
+        "Kompaktes Zielfenster",  -- 1138
+        "das Zielfenster etwas mehr als halb so breit",  -- 1139
+        "Gesundheitsfarben im Kampf",  -- 1140
+        "im Kampf wechseln die Gesundheitsbalken von Grün über Gelb zu Rot, wenn die Gesundheit sinkt",  -- 1141
+        "Schatten hinter Text",  -- 1142
+        "ein weiches dunkles Band hinter dem Text des Ziels, damit er lesbar bleibt",  -- 1143
+        "Textgröße",  -- 1144
+        "Größe des Texts auf unseren Rahmen",  -- 1145
+        "Rahmengröße",  -- 1146
+        "Größe unserer Einheitenrahmen",  -- 1147
+        "Deine Leisten im Kampf",  -- 1148
+        "wie sichtbar deine Leisten, Begleiter und Fokus im Kampf sind, bis etwas Aufmerksamkeit verlangt",  -- 1149
+        "Voll bei Gesundheit unter",  -- 1150
+        "deine Leisten kehren vollständig zurück, wenn deine Gesundheit unter diesen Wert fällt",  -- 1151
+        "Voll bei Mana unter",  -- 1152
+        "deine Leisten kehren vollständig zurück, wenn dein Mana unter diesen Wert fällt",  -- 1153
+        "Spielerleiste im Leerlauf",  -- 1154
+        "wie sichtbar die Spielerleiste bei voller Gesundheit oder außerhalb des Kampfes bleibt (0 blendet sie aus)",  -- 1155
+        "Händler- und Bankhilfe",  -- 1156
+        "die Schaltfläche Plunder verkaufen beim Händler fragt nach, was verkauft werden soll; schnelles Verschieben bei Händler und Bank",  -- 1157
+        "Erweiterte Optionen anzeigen",  -- 1158
+        "alle Einstellungen, nicht nur die Hauptschalter",  -- 1159
+        "Spielerrahmen",  -- 1160
+        "unsere Spielerleiste, oben links",  -- 1161
+        "Zielrahmen",  -- 1162
+        "unsere Zielleiste, oben mittig",  -- 1163
+        "Haustierleiste",  -- 1164
+        "eine kleine Begleiterleiste unter der Spielerleiste oder neben den senkrechten Leisten",  -- 1165
+        "Fokusrahmen",  -- 1166
+        "unser Fokusrahmen",  -- 1167
+        "schmale aufrechte Gesundheits- und Energieleisten neben deinem Charakter, für eine Third-Person-Ansicht (statt der Spielerleiste)",  -- 1168
+        "Plunder verkaufen, wenn ein Händler geöffnet wird",  -- 1169
+        "verkaufe Plunder nach deinen Regeln, sobald ein Händler geöffnet wird",  -- 1170
+        "Weiße Waffen und Rüstung sind Plunder",  -- 1171
+        "weiße Waffen und Rüstungen als Plunder zählen (nie Werkzeuge, Angelruten, Ausrüstung mit Benutzen-Effekt oder mögliche Verbesserungen; es wird immer zuerst gefragt)",  -- 1172
+        "Einlagern, wenn die Bank öffnet",  -- 1173
+        "für die Bank markierte Gegenstände und, wenn eingeschaltet, was die Bank schon hat, kommen von selbst hinein",  -- 1174
+        "die Option des Spiels; unser kleiner Rahmen folgt ihr",  -- 1175
+        "Abklingzeitmanager",  -- 1176
+        "der Abklingzeitmanager des Spiels",  -- 1177
+        "Persönliche Ressourcenanzeige",  -- 1178
+        "deine Gesundheit und Ressource unter deinem Charakter",  -- 1179
+        "Bank nimmt Reagenzien automatisch auf",  -- 1180
+        "die Option des Spiels für die Bank",  -- 1181
+        "Tooltip bei Beginn eines Buffs",  -- 1182
+        "die Option des Spiels: der Tooltip eines Buffs erscheint kurz, wenn er angewendet wird (Gamepad-UI)",  -- 1183
+        "Klassenfarben für Namen im Chat",  -- 1184
+        "die Chat-Einstellung des Spiels für alle Chatarten gleichzeitig: der Name eines Spielers in seiner Klassenfarbe",  -- 1185
+        "öffne das Optionsfenster (Optionen > AddOns > ControllerCam HUD)",  -- 1186
+        "Rahmen",  -- 1187
+        "Bildschirm ausblenden",  -- 1188
+        "Effekte",  -- 1189
+        "Aussehen",  -- 1190
+        "Quests, Chat und Karte",  -- 1191
+        "Taschen, Bank und Händler",  -- 1192
+        "Angeln",  -- 1193
+        "Barrierefreiheit",  -- 1194
+        "Native Optionen",  -- 1195
+        "%s  |  Gamepad-Oberfläche: %s  |  läuft: %s",  -- 1196
+        "Spieler %s, Ziel %s, Haustier %s, Fokus %s  |  Spielrahmen beiseitegelegt: %s  |  Chat verschoben: %s",  -- 1197
+        "native Optionen: Ziel des Ziels %s, Abklingzeitmanager %s, persönliche Ressourcen %s",  -- 1198
+        "Textgröße %d%%  |  Textschatten: %s",  -- 1199
+        "Händler- und Bankhilfe: %s  |  Autoverkauf: %s  |  weiße Ausrüstung ist Plunder: %s",  -- 1200
+        "Leerlaufsichtbarkeit %d%%  |  Skalierung %d%%  |  Klassenfarben: %s",  -- 1201
+        "Ein minimalistisches Action-Spiel-HUD für die Gamepad-Oberfläche.",  -- 1202
+        "aktiviert",  -- 1203
+        "deaktiviert: die eigenen Rahmen des Spiels sind zurück",  -- 1204
+        "auch in der Maus-und-Tastatur-Oberfläche nutzen: %s",  -- 1205
+        "Spielrahmen beiseitegelegt: %s",  -- 1206
+        "Chat nach oben links verschoben: %s",  -- 1207
+        "Klassenfarben: %s",  -- 1208
+        "Dieser Client hat diese Option nicht.",  -- 1209
+        "%s: %s (die eigene Option des Spiels)",  -- 1210
+        "Das Spiel hat das gerade nicht akzeptiert.",  -- 1211
+        "Händler- und Bankhilfe: %s",  -- 1212
+        "Autoverkauf: %s",  -- 1213
+        "weiße Ausrüstung ist Plunder: %s",  -- 1214
+        "Händlerhilfe ist aus.",  -- 1215
+        "Verwendung: /cchud sell [junk | recommended | white | green | blue]",  -- 1216
+        "markierte Gegenstände einzahlen, wenn die Bank geöffnet wird: %s",  -- 1217
+        "Verwendung: /cchud junk <item> (Shift-Klick auf den Gegenstand fügt ihn in die Chatzeile ein)",  -- 1218
+        "Gegenstand %d: Plunder, wird mit dem Rest verkauft",  -- 1219
+        "Gegenstand %d: behalten, nie verkauft",  -- 1220
+        "Gegenstand %d: für die Bank",  -- 1221
+        "Textschatten: %s",  -- 1222
+        "Verwendung: /cchud text <80-250>",  -- 1223
+        "Textgröße %d%%",  -- 1224
+        "Demo beendet",  -- 1225
+        "Das HUD läuft nicht.",  -- 1226
+        "Demo läuft: ein erfundener Kampf in Dauerschleife. Gib /cchud demo erneut ein, um sie zu beenden.",  -- 1227
+        "Verwendung: /cchud idle <0-100>",  -- 1228
+        "Leerlaufsichtbarkeit %d%%",  -- 1229
+        "Verwendung: /cchud scale <50-200>",  -- 1230
+        "Skalierung %d%%",  -- 1231
+        "Ziehe die Rahmen und gib dann /cchud lock ein.",  -- 1232
+        "Rahmen gesperrt",  -- 1233
+        "Alles ist wieder wie am Anfang: Einstellungen, Fenster und das Bildschirmlayout (deine Händlermarkierungen und der Preisverlauf bleiben erhalten).",  -- 1234
+        "Rahmen sind wieder an ihrer Ausgangsposition",  -- 1235
+        "unbekannter Befehl '%s'. Gib /cchud help ein",  -- 1236
+        "Fehlerliste geleert.",  -- 1237
+        "Keine Fehler aufgezeichnet.",  -- 1238
+        "%d Fehler aufgezeichnet (neueste zuletzt). /cchud errors clear leert die Liste.",  -- 1239
+        "Status anzeigen",  -- 1240
+        "das HUD ein- oder ausschalten (aus bringt die eigenen Rahmen des Spiels zurück)",  -- 1241
+        "das HUD auch in der Maus-und-Tastatur-Oberfläche verwenden",  -- 1242
+        "unseren Rahmen dafür verwenden oder den des Spiels",  -- 1243
+        "schmale, aufrechte Gesundheits- und Kraftbalken neben deinem Charakter",  -- 1244
+        "Ziel des Ziels (die eigene Option des Spiels, auch in dessen Menüs)",  -- 1245
+        "der Abklingzeitmanager des Spiels (die eigene Option des Spiels)",  -- 1246
+        "deine Gesundheit und Ressource unter deinem Charakter (die eigene Option des Spiels)",  -- 1247
+        "der Tooltip, der erscheint, wenn ein Buff beginnt (die eigene Option des Spiels)",  -- 1248
+        "die Spieler- und Zielrahmen des Spiels sichtbar lassen (an) oder beiseitelegen (aus)",  -- 1249
+        "beim Händler: wählen, was verkauft wird (auch: sell junk, sell recommended, sell white | green | blue)",  -- 1250
+        "zähle weiße Waffen und Rüstung als Plunder",  -- 1251
+        "einen Gegenstand markieren: immer verkauft, nie verkauft oder für die Bank (Shift-Klick fügt ihn in die Chatzeile ein)",  -- 1252
+        "an der Bank: einlagern, was die Bank schon hat, und alles für sie Markierte",  -- 1253
+        "an der Bank: herausnehmen, wovon du schon etwas trägst",  -- 1254
+        "einlagern, sobald die Bank öffnet",  -- 1255
+        "die Bank nimmt Reagenzien automatisch auf (die eigene Option des Spiels)",  -- 1256
+        "Textgröße in Prozent (150 passt gut auf einem Fernseher)",  -- 1257
+        "wie sichtbar die Spielerleiste bleibt, wenn nichts passiert (0 blendet sie aus)",  -- 1258
+        "Größe der Rahmen in Prozent",  -- 1259
+        "ziehe die Rahmen an die gewünschte Stelle (der Bearbeitungsmodus des Spiels kann das auch)",  -- 1260
+        "die Rahmen an ihre Ausgangsposition zurücksetzen",  -- 1261
+        "einen kurzen erfundenen Kampf abspielen, um zu sehen, wie die Rahmen reagieren (erneut zum Beenden)",  -- 1262
+        "gleiche das Angezeigte mit den Einstellungen ab (check listet jede Zeile auf)",  -- 1263
+        "eine Beschreibung der Gamepad-Oberfläche dieses Clients speichern (zur Fehlersuche)",  -- 1264
+        "diese Liste anzeigen",  -- 1265
+        "die letzten Fehler des HUD, auch nach einem Neuladen (um sie zu melden)",  -- 1266
     },
     esES = {
         "error:",  -- 1
@@ -3554,266 +3552,265 @@ local TRANSLATIONS = {
         "Meter",  -- 1005
         "Coger bolsa",  -- 1006
         "Más",  -- 1007
-        "Descripción",  -- 1008
-        "Ocultar descripción",  -- 1009
-        "Bolsas",  -- 1010
-        "%d libres",  -- 1011
-        "Hueco libre",  -- 1012
-        "En combate, cierra tus bolsas con B.",  -- 1013
-        "para el banco",  -- 1014
-        "sin marca",  -- 1015
-        "No hay hueco libre.",  -- 1016
-        "Dejar aquí",  -- 1017
-        "Dividir montón",  -- 1018
-        "Marca: %s",  -- 1019
-        "Detalles del objeto",  -- 1020
-        "Destruir",  -- 1021
-        "Ordenar banco",  -- 1022
-        "Ordenar bolsas",  -- 1023
-        "Ver bolsas",  -- 1024
-        "Ver banco",  -- 1025
-        "Depositar lo marcado",  -- 1026
-        "Vender lo aconsejado",  -- 1027
-        "Suelta para destruir",  -- 1028
-        "Este objeto inicia una misión.",  -- 1029
-        "Es un objeto de misión.",  -- 1030
-        "¿Destruir %s?",  -- 1031
-        "El juego conservó %s: destrúyelo desde sus propias bolsas.",  -- 1032
-        "%s destruido.",  -- 1033
-        "Una ventana de bolsas con filtros rápidos",  -- 1034
-        "tus bolsas en una ventana propia del HUD en lugar de la del juego: todos los objetos juntos, los huecos vacíos reunidos al final, tus bolsas en una fila aparte y filtros rápidos arriba (LB y RB). También el banco, mientras está abierto. Desactivado: las bolsas del juego",  -- 1035
-        "Ventana de bolsas: orden",  -- 1036
-        "Inteligente: lo que usas primero (consumibles, objetos con un uso), luego el resto por tipo, la basura al final y atenuada. Por tipo: en secciones con su propio título. Como en tus bolsas: el orden del juego",  -- 1037
-        "Ajuste del HUD: %s, a juego con la cámara",  -- 1038
-        "preajuste: %s",  -- 1039
-        "Se ha añadido un diseño llamado '%s' al modo edición del juego. Elígelo allí para usarlo (Menú del juego > Modo edición > Diseño).",  -- 1040
-        "preajuste desconocido '%s'",  -- 1041
-        "Para un televisor: texto más grande en el HUD y en el chat.",  -- 1042
-        "Para un monitor: texto a su tamaño normal.",  -- 1043
-        "Nuestros marcos han vuelto a su sitio inicial. Elige el diseño %s del juego en el modo edición (Menú del juego > Modo edición > Diseño).",  -- 1044
-        "Los ajustes preestablecidos fijan la distancia de cámara",  -- 1045
-        "un ajuste preestablecido también lleva la cámara a la distancia para la que se hizo su diseño, una sola vez (después haz zoom libremente)",  -- 1046
-        "Acción",  -- 1047
-        "una vista en tercera persona: barras verticales finas junto a tu personaje, todos los efectos activados; fuera de combate todo se desvanece",  -- 1048
-        "Clásico",  -- 1049
-        "nuestros marcos donde WoW siempre los ha tenido, efectos más discretos, las barras de mando del juego tal cual",  -- 1050
-        "solo lo que necesitas: los PNJ amistosos muestran su placa (con lo que hacen) solo mientras los señalas, apuntas o los tienes como objetivo; nombres sin títulos; fuera de combate tus barras quedan como un leve indicio (la salud baja siempre se muestra)",  -- 1051
-        "Mundo abierto",  -- 1052
-        "una pantalla limpia para explorar: barras finas a tu lado que descansan atenuadas, placas sin barras de poder, chat que se desvanece",  -- 1053
-        "Aventura",  -- 1054
-        "tras las aventuras de mundo abierto en consola: constantes vitales a tu lado, un objetivo pequeño arriba en el centro, aldeanos solo cuando los señalas, chat que se desvanece rápido",  -- 1055
-        "Soulslike",  -- 1056
-        "tus barras arriba a la izquierda, una gran barra del objetivo abajo en el centro como la de un jefe, cada golpe se siente",  -- 1057
-        "Shooter",  -- 1058
-        "barras verticales justo a la derecha del centro, cerca de donde apuntas, el objetivo bien arriba, respuesta fuerte a los golpes",  -- 1059
-        "Crossbar",  -- 1060
-        "tras los MMO jugados con mando: objetivo y foco arriba en el centro, tus barras justo encima de las barras de mando, grupo a la izquierda, placas completas",  -- 1061
-        "ARPG",  -- 1062
-        "tras los RPG de acción: la cámara lejos, tus constantes vitales abajo a la izquierda, el objetivo arriba en el centro, enemigos menores pequeños, cada golpe suena fuerte",  -- 1063
-        "Brújula",  -- 1064
-        "tras los RPG en primera persona: la cámara cerca, tus barras abajo en el centro, el objetivo bajo el borde superior, aldeanos solo cuando los señalas",  -- 1065
-        "Banda",  -- 1066
-        "la colocación de WoW con todo lo que necesita un grupo: marcos de grupo y banda, porcentajes de salud y niveles en las placas",  -- 1067
-        "Seguir los ajustes de ControllerCam",  -- 1068
-        "elegir un ajuste de cámara en ControllerCam para todas partes también elige el ajuste del HUD a juego (la cámara mantiene su propia distancia)",  -- 1069
-        "Moderno",  -- 1070
-        "pon todo el HUD en un ajuste preestablecido: action, classic, minimal, openworld, adventure, soulslike, shooter, crossbar, arpg, compass, raid",  -- 1071
-        "el marco del objetivo y las placas compactos o completos, ambos a la vez",  -- 1072
-        "el marco del objetivo compacto o completo",  -- 1073
-        "ajustar el texto para un televisor al otro lado de la sala o para un monitor a un brazo de distancia",  -- 1074
-        "devolver nuestros marcos a su sitio inicial, para el diseño Moderno o Clásico del propio juego",  -- 1075
-        "Toda tu configuración (HUD, cámara y el diseño del juego): copia esta línea (Ctrl+C) para guardarla o compartirla.",  -- 1076
-        "Pega una línea de ajustes del HUD (Ctrl+V) y acepta.",  -- 1077
-        "Esa línea está dañada: cópiala de nuevo, completa.",  -- 1078
-        "Esa línea se hizo con una versión más reciente: actualiza el addon.",  -- 1079
-        "Eso no es una línea de ajustes del HUD.",  -- 1080
-        "Ajustes importados: %d tomados, %d omitidos.",  -- 1081
-        "La configuración de la cámara también se ha importado.",  -- 1082
-        "La configuración de la cámara se ha dejado como estaba.",  -- 1083
-        "El diseño del juego es ahora '%s'.",  -- 1084
-        "El diseño del juego se ha dejado como estaba.",  -- 1085
-        "tus ajustes como una línea de texto, para guardar o compartir",  -- 1086
-        "toma ajustes de una línea de texto creada con /cchud export",  -- 1087
-        "El HUD está activo mientras se usa la interfaz de mando. Sus opciones: Opciones > AddOns > ControllerCam > HUD, o /cchud.",  -- 1088
-        "Solo cámara: el HUD descansa y la interfaz del juego queda como estaba. /cchud on lo activa.",  -- 1089
-        "¿Configurar también la pantalla para el mando? Esto añade un diseño llamado CCHUD al modo edición del juego, para que lo elijas allí: coloca las filas de reutilización bajo el objetivo, lejos de los botones del mando. Tus propios diseños se conservan (/cchud setup lo ofrece de nuevo).",  -- 1090
-        "Configurar",  -- 1091
-        "Ahora no",  -- 1092
-        "ControllerCam incluye una interfaz para mando, el HUD: sus propios marcos de unidad, placas de nombre, barra de lanzamiento y más mientras se usa la interfaz de mando. ¿La quieres, o solo la cámara?",  -- 1093
-        "Cámara + HUD",  -- 1094
-        "Solo cámara",  -- 1095
-        "Este cliente no permite que los addons cambien la disposición.",  -- 1096
-        "preguntar de nuevo: la cámara con el HUD, o solo la cámara",  -- 1097
-        "ofrecer de nuevo el diseño de pantalla hecho para el HUD (modo edición del juego)",  -- 1098
-        "Se muestra mientras se usa la interfaz de mando. Arrastra nuestros marcos en el Modo Edición del juego.",  -- 1099
-        "Preajustes",  -- 1100
-        "Ajustado para",  -- 1101
-        "Televisor",  -- 1102
-        "Monitor",  -- 1103
-        "Iconos de los botones",  -- 1104
-        "los iconos que el juego muestra para los botones de tu mando: detectados automáticamente para el mando en uso, o el tipo que elijas",  -- 1105
-        "Fuente",  -- 1106
-        "Restablecer la disposición del juego",  -- 1107
-        "Pruébalo",  -- 1108
-        "Reproducir la demo",  -- 1109
-        "Mostrar todos los efectos de golpe",  -- 1110
-        "Ejecutar la autocomprobación",  -- 1111
-        "Barras de mando: compactas / completas",  -- 1112
-        "Exportar ajustes",  -- 1113
-        "Importar ajustes",  -- 1114
-        "Marca «Mostrar opciones avanzadas» en la página principal para ver todos los ajustes.",  -- 1115
-        "Módulos",  -- 1116
-        "Interruptores rápidos",  -- 1117
-        "General",  -- 1118
-        "HUD",  -- 1119
-        "El panel de opciones no está disponible en este cliente.",  -- 1120
-        "Activado",  -- 1121
-        "todo el HUD; si se desactiva, vuelven los marcos propios del juego",  -- 1122
-        "También en la interfaz de ratón y teclado",  -- 1123
-        "normalmente el HUD solo funciona mientras se usa la interfaz de mando",  -- 1124
-        "Apartar los marcos del juego",  -- 1125
-        "oculta los marcos de jugador, objetivo y foco del juego mientras se muestran los nuestros",  -- 1126
-        "Ventana de chat arriba a la izquierda",  -- 1127
-        "mueve la ventana de chat arriba a la izquierda mientras funciona el HUD",  -- 1128
-        "Barras verticales en reposo",  -- 1129
-        "cuán visibles se mantienen las barras verticales con salud completa fuera de combate (0 las oculta)",  -- 1130
-        "Colores de clase",  -- 1131
-        "colorea tu barra y las de otros jugadores según la clase",  -- 1132
-        "Iconos de clase",  -- 1133
-        "un icono de clase delante del nombre de un jugador en el objetivo y en el objetivo del objetivo",  -- 1134
-        "Amenaza en el marco del objetivo",  -- 1135
-        "un icono de escudo y un brillo en el marco del objetivo: rojo mientras te ataca, rojo y amarillo cuando estás a punto de atraerlo, amarillo y azul cuando lo estás perdiendo, azul cuando no está sobre ti",  -- 1136
-        "Barras compactas en todas partes",  -- 1137
-        "el marco del objetivo y las placas en su estilo compacto, algo más de la mitad de ancho (cada uno se puede ajustar por separado; los ajustes preestablecidos nunca lo cambian)",  -- 1138
-        "Marco de objetivo compacto",  -- 1139
-        "el marco de objetivo algo más de la mitad de ancho",  -- 1140
-        "Colores de salud en combate",  -- 1141
-        "en combate, las barras de salud pasan de verde a amarillo y a rojo a medida que baja la salud",  -- 1142
-        "Sombreado tras el texto",  -- 1143
-        "una banda oscura suave tras el texto del objetivo, para que se lea bien",  -- 1144
-        "Tamaño del texto",  -- 1145
-        "tamaño del texto de nuestros marcos",  -- 1146
-        "Tamaño de los marcos",  -- 1147
-        "tamaño de nuestros marcos de unidad",  -- 1148
-        "Tus barras en combate",  -- 1149
-        "qué tan visibles están tus barras, mascota y foco en combate hasta que algo requiera atención",  -- 1150
-        "Completas con salud inferior a",  -- 1151
-        "tus barras vuelven completas cuando tu salud baja de este valor",  -- 1152
-        "Completas con maná inferior a",  -- 1153
-        "tus barras vuelven completas cuando tu maná baja de este valor",  -- 1154
-        "Barra del jugador en reposo",  -- 1155
-        "qué tan visible queda la barra del jugador con la salud completa o fuera de combate (0 la oculta)",  -- 1156
-        "Ayuda de vendedor y banco",  -- 1157
-        "el botón Vender basura del vendedor pregunta qué vender; movimiento rápido en vendedor y banco",  -- 1158
-        "Mostrar opciones avanzadas",  -- 1159
-        "todos los ajustes, no solo los interruptores principales",  -- 1160
-        "Marco del jugador",  -- 1161
-        "nuestra barra del jugador, arriba a la izquierda",  -- 1162
-        "Marco del objetivo",  -- 1163
-        "nuestra barra del objetivo, arriba en el centro",  -- 1164
-        "Barra de mascota",  -- 1165
-        "una pequeña barra de mascota bajo la barra del jugador, o junto a las barras verticales",  -- 1166
-        "Marco del foco",  -- 1167
-        "nuestro marco del foco",  -- 1168
-        "barras verticales finas de salud y poder junto a tu personaje, para una vista en tercera persona (en lugar de la barra del jugador)",  -- 1169
-        "Vender basura al abrir un vendedor",  -- 1170
-        "vende la basura según tus reglas en cuanto se abre un vendedor",  -- 1171
-        "Las armas y armaduras blancas son basura",  -- 1172
-        "cuenta las armas y armaduras blancas como basura (nunca herramientas, cañas de pescar, equipo con uso ni algo que pueda ser una mejora; siempre se pregunta antes)",  -- 1173
-        "Depositar al abrir el banco",  -- 1174
-        "los objetos marcados para el banco y, si está activado, lo que el banco ya tiene, entran solos",  -- 1175
-        "la opción del juego; nuestro marco pequeño la sigue",  -- 1176
-        "Gestor de reutilización",  -- 1177
-        "el Gestor de reutilización del juego",  -- 1178
-        "Visualización de recursos personales",  -- 1179
-        "tu salud y recurso bajo tu personaje",  -- 1180
-        "El banco toma componentes automáticamente",  -- 1181
-        "la opción del juego para el banco",  -- 1182
-        "Descripción emergente al empezar un beneficio",  -- 1183
-        "la opción del juego: la descripción emergente de un beneficio aparece un momento al aplicarse (IU de mando)",  -- 1184
-        "Colores de clase en los nombres del chat",  -- 1185
-        "el ajuste del chat del juego para todos los tipos de chat a la vez: el nombre de un jugador con el color de su clase",  -- 1186
-        "abre el panel de opciones (Opciones > AddOns > ControllerCam HUD)",  -- 1187
-        "Marcos",  -- 1188
-        "Desvanecer la pantalla",  -- 1189
-        "Efectos",  -- 1190
-        "Aspecto",  -- 1191
-        "Misiones, chat y mapa",  -- 1192
-        "Bolsas, banco y vendedor",  -- 1193
-        "Pesca",  -- 1194
-        "Accesibilidad",  -- 1195
-        "Opciones nativas",  -- 1196
-        "%s  |  Interfaz de mando: %s  |  en marcha: %s",  -- 1197
-        "jugador %s, objetivo %s, mascota %s, foco %s  |  marcos del juego apartados: %s  |  chat movido: %s",  -- 1198
-        "opciones nativas: objetivo del objetivo %s, Gestor de reutilización %s, recursos personales %s",  -- 1199
-        "tamaño del texto %d%%  |  sombreado del texto: %s",  -- 1200
-        "ayuda de vendedor y banco: %s  |  venta automática: %s  |  el equipo blanco es basura: %s",  -- 1201
-        "visibilidad en reposo %d%%  |  escala %d%%  |  colores de clase: %s",  -- 1202
-        "Un HUD de acción minimalista para la interfaz de mando.",  -- 1203
-        "activado",  -- 1204
-        "desactivado: vuelven los marcos propios del juego",  -- 1205
-        "usar también en la interfaz de ratón y teclado: %s",  -- 1206
-        "marcos del juego apartados: %s",  -- 1207
-        "chat movido arriba a la izquierda: %s",  -- 1208
-        "colores de clase: %s",  -- 1209
-        "Este cliente no tiene esa opción.",  -- 1210
-        "%s: %s (opción propia del juego)",  -- 1211
-        "El juego no lo aceptó en este momento.",  -- 1212
-        "ayuda de vendedor y banco: %s",  -- 1213
-        "venta automática: %s",  -- 1214
-        "el equipo blanco es basura: %s",  -- 1215
-        "La ayuda de vendedor está desactivada.",  -- 1216
-        "uso: /cchud sell [junk | recommended | white | green | blue]",  -- 1217
-        "depositar los objetos marcados al abrir el banco: %s",  -- 1218
-        "uso: /cchud junk <item> (Mayús + clic en el objeto para ponerlo en la línea de chat)",  -- 1219
-        "objeto %d: basura, se vende con el resto",  -- 1220
-        "objeto %d: conservado, nunca se vende",  -- 1221
-        "objeto %d: para el banco",  -- 1222
-        "sombreado del texto: %s",  -- 1223
-        "uso: /cchud text <80-250>",  -- 1224
-        "tamaño del texto %d%%",  -- 1225
-        "demo detenida",  -- 1226
-        "El HUD no está en marcha.",  -- 1227
-        "Demo en marcha: un combate inventado en bucle. Escribe /cchud demo otra vez para detenerla.",  -- 1228
-        "uso: /cchud idle <0-100>",  -- 1229
-        "visibilidad en reposo %d%%",  -- 1230
-        "uso: /cchud scale <50-200>",  -- 1231
-        "escala %d%%",  -- 1232
-        "Arrastra los marcos y luego escribe /cchud lock.",  -- 1233
-        "marcos bloqueados",  -- 1234
-        "Todo ha vuelto a como empezó: ajustes, marcos y el diseño de pantalla (tus marcas de vendedor y el historial de precios se conservan).",  -- 1235
-        "los marcos han vuelto a su posición inicial",  -- 1236
-        "comando desconocido '%s'. Escribe /cchud help",  -- 1237
-        "Lista de errores vaciada.",  -- 1238
-        "No hay errores registrados.",  -- 1239
-        "%d errores registrados (el más reciente al final). /cchud errors clear vacía la lista.",  -- 1240
-        "mostrar el estado",  -- 1241
-        "activa o desactiva el HUD (desactivado devuelve los marcos propios del juego)",  -- 1242
-        "usar también el HUD en la interfaz de ratón y teclado",  -- 1243
-        "usar nuestro marco para ello, o el del propio juego",  -- 1244
-        "barras verticales delgadas de salud y poder junto a tu personaje",  -- 1245
-        "objetivo del objetivo (opción propia del juego, también en sus menús)",  -- 1246
-        "el Gestor de reutilización del juego (opción propia del juego)",  -- 1247
-        "tu salud y recurso bajo tu personaje (opción propia del juego)",  -- 1248
-        "la descripción emergente que aparece cuando empieza un beneficio (la opción propia del juego)",  -- 1249
-        "mantener visibles los marcos de jugador y objetivo del juego (on) o apartarlos (off)",  -- 1250
-        "en un vendedor: elige qué vender (también: sell junk, sell recommended, sell white | green | blue)",  -- 1251
-        "cuenta las armas y armaduras blancas como basura",  -- 1252
-        "marcar un objeto: siempre se vende, nunca se vende, o para el banco (Mayús + clic para ponerlo en la línea de chat)",  -- 1253
-        "en el banco: deposita lo que el banco ya tiene y todo lo marcado para él",  -- 1254
-        "en el banco: sacar lo que ya llevas en parte",  -- 1255
-        "depositar en cuanto se abre el banco",  -- 1256
-        "el banco toma componentes automáticamente (opción propia del juego)",  -- 1257
-        "tamaño del texto, en porcentaje (150 se lee bien en un televisor)",  -- 1258
-        "cuán visible queda la barra del jugador cuando no pasa nada (0 la oculta)",  -- 1259
-        "tamaño de los marcos, en porcentaje",  -- 1260
-        "arrastra los marcos adonde quieras (el Modo Edición del juego también lo permite)",  -- 1261
-        "devolver los marcos a su posición inicial",  -- 1262
-        "reproduce un combate inventado y breve, para ver cómo reaccionan los marcos (otra vez para detenerlo)",  -- 1263
-        "compara lo que hay en pantalla con los ajustes (check all enumera cada fila)",  -- 1264
-        "guarda una descripción de la interfaz de mando de este cliente (para solucionar problemas)",  -- 1265
-        "mostrar esta lista",  -- 1266
-        "los últimos errores del HUD, también tras recargar (para informar de ellos)",  -- 1267
+        "Ordenar",  -- 1008
+        "Bolsas",  -- 1009
+        "%d libres",  -- 1010
+        "Hueco libre",  -- 1011
+        "En combate, cierra tus bolsas con B.",  -- 1012
+        "para el banco",  -- 1013
+        "sin marca",  -- 1014
+        "No hay hueco libre.",  -- 1015
+        "Dejar aquí",  -- 1016
+        "Dividir montón",  -- 1017
+        "Marca: %s",  -- 1018
+        "Detalles del objeto",  -- 1019
+        "Destruir",  -- 1020
+        "Ordenar banco",  -- 1021
+        "Ordenar bolsas",  -- 1022
+        "Ver bolsas",  -- 1023
+        "Ver banco",  -- 1024
+        "Depositar lo marcado",  -- 1025
+        "Vender lo aconsejado",  -- 1026
+        "Suelta para destruir",  -- 1027
+        "Este objeto inicia una misión.",  -- 1028
+        "Es un objeto de misión.",  -- 1029
+        "¿Destruir %s?",  -- 1030
+        "El juego conservó %s: destrúyelo desde sus propias bolsas.",  -- 1031
+        "%s destruido.",  -- 1032
+        "Una ventana de bolsas con filtros rápidos",  -- 1033
+        "tus bolsas en una ventana propia del HUD en lugar de la del juego: todos los objetos juntos, los huecos vacíos reunidos al final, tus bolsas en una fila aparte y filtros rápidos arriba (LB y RB). También el banco, mientras está abierto. Desactivado: las bolsas del juego",  -- 1034
+        "Ventana de bolsas: orden",  -- 1035
+        "Inteligente: lo que usas primero (consumibles, objetos con un uso), luego el resto por tipo, la basura al final y atenuada. Por tipo: en secciones con su propio título. Como en tus bolsas: el orden del juego",  -- 1036
+        "Ajuste del HUD: %s, a juego con la cámara",  -- 1037
+        "preajuste: %s",  -- 1038
+        "Se ha añadido un diseño llamado '%s' al modo edición del juego. Elígelo allí para usarlo (Menú del juego > Modo edición > Diseño).",  -- 1039
+        "preajuste desconocido '%s'",  -- 1040
+        "Para un televisor: texto más grande en el HUD y en el chat.",  -- 1041
+        "Para un monitor: texto a su tamaño normal.",  -- 1042
+        "Nuestros marcos han vuelto a su sitio inicial. Elige el diseño %s del juego en el modo edición (Menú del juego > Modo edición > Diseño).",  -- 1043
+        "Los ajustes preestablecidos fijan la distancia de cámara",  -- 1044
+        "un ajuste preestablecido también lleva la cámara a la distancia para la que se hizo su diseño, una sola vez (después haz zoom libremente)",  -- 1045
+        "Acción",  -- 1046
+        "una vista en tercera persona: barras verticales finas junto a tu personaje, todos los efectos activados; fuera de combate todo se desvanece",  -- 1047
+        "Clásico",  -- 1048
+        "nuestros marcos donde WoW siempre los ha tenido, efectos más discretos, las barras de mando del juego tal cual",  -- 1049
+        "solo lo que necesitas: los PNJ amistosos muestran su placa (con lo que hacen) solo mientras los señalas, apuntas o los tienes como objetivo; nombres sin títulos; fuera de combate tus barras quedan como un leve indicio (la salud baja siempre se muestra)",  -- 1050
+        "Mundo abierto",  -- 1051
+        "una pantalla limpia para explorar: barras finas a tu lado que descansan atenuadas, placas sin barras de poder, chat que se desvanece",  -- 1052
+        "Aventura",  -- 1053
+        "tras las aventuras de mundo abierto en consola: constantes vitales a tu lado, un objetivo pequeño arriba en el centro, aldeanos solo cuando los señalas, chat que se desvanece rápido",  -- 1054
+        "Soulslike",  -- 1055
+        "tus barras arriba a la izquierda, una gran barra del objetivo abajo en el centro como la de un jefe, cada golpe se siente",  -- 1056
+        "Shooter",  -- 1057
+        "barras verticales justo a la derecha del centro, cerca de donde apuntas, el objetivo bien arriba, respuesta fuerte a los golpes",  -- 1058
+        "Crossbar",  -- 1059
+        "tras los MMO jugados con mando: objetivo y foco arriba en el centro, tus barras justo encima de las barras de mando, grupo a la izquierda, placas completas",  -- 1060
+        "ARPG",  -- 1061
+        "tras los RPG de acción: la cámara lejos, tus constantes vitales abajo a la izquierda, el objetivo arriba en el centro, enemigos menores pequeños, cada golpe suena fuerte",  -- 1062
+        "Brújula",  -- 1063
+        "tras los RPG en primera persona: la cámara cerca, tus barras abajo en el centro, el objetivo bajo el borde superior, aldeanos solo cuando los señalas",  -- 1064
+        "Banda",  -- 1065
+        "la colocación de WoW con todo lo que necesita un grupo: marcos de grupo y banda, porcentajes de salud y niveles en las placas",  -- 1066
+        "Seguir los ajustes de ControllerCam",  -- 1067
+        "elegir un ajuste de cámara en ControllerCam para todas partes también elige el ajuste del HUD a juego (la cámara mantiene su propia distancia)",  -- 1068
+        "Moderno",  -- 1069
+        "pon todo el HUD en un ajuste preestablecido: action, classic, minimal, openworld, adventure, soulslike, shooter, crossbar, arpg, compass, raid",  -- 1070
+        "el marco del objetivo y las placas compactos o completos, ambos a la vez",  -- 1071
+        "el marco del objetivo compacto o completo",  -- 1072
+        "ajustar el texto para un televisor al otro lado de la sala o para un monitor a un brazo de distancia",  -- 1073
+        "devolver nuestros marcos a su sitio inicial, para el diseño Moderno o Clásico del propio juego",  -- 1074
+        "Toda tu configuración (HUD, cámara y el diseño del juego): copia esta línea (Ctrl+C) para guardarla o compartirla.",  -- 1075
+        "Pega una línea de ajustes del HUD (Ctrl+V) y acepta.",  -- 1076
+        "Esa línea está dañada: cópiala de nuevo, completa.",  -- 1077
+        "Esa línea se hizo con una versión más reciente: actualiza el addon.",  -- 1078
+        "Eso no es una línea de ajustes del HUD.",  -- 1079
+        "Ajustes importados: %d tomados, %d omitidos.",  -- 1080
+        "La configuración de la cámara también se ha importado.",  -- 1081
+        "La configuración de la cámara se ha dejado como estaba.",  -- 1082
+        "El diseño del juego es ahora '%s'.",  -- 1083
+        "El diseño del juego se ha dejado como estaba.",  -- 1084
+        "tus ajustes como una línea de texto, para guardar o compartir",  -- 1085
+        "toma ajustes de una línea de texto creada con /cchud export",  -- 1086
+        "El HUD está activo mientras se usa la interfaz de mando. Sus opciones: Opciones > AddOns > ControllerCam > HUD, o /cchud.",  -- 1087
+        "Solo cámara: el HUD descansa y la interfaz del juego queda como estaba. /cchud on lo activa.",  -- 1088
+        "¿Configurar también la pantalla para el mando? Esto añade un diseño llamado CCHUD al modo edición del juego, para que lo elijas allí: coloca las filas de reutilización bajo el objetivo, lejos de los botones del mando. Tus propios diseños se conservan (/cchud setup lo ofrece de nuevo).",  -- 1089
+        "Configurar",  -- 1090
+        "Ahora no",  -- 1091
+        "ControllerCam incluye una interfaz para mando, el HUD: sus propios marcos de unidad, placas de nombre, barra de lanzamiento y más mientras se usa la interfaz de mando. ¿La quieres, o solo la cámara?",  -- 1092
+        "Cámara + HUD",  -- 1093
+        "Solo cámara",  -- 1094
+        "Este cliente no permite que los addons cambien la disposición.",  -- 1095
+        "preguntar de nuevo: la cámara con el HUD, o solo la cámara",  -- 1096
+        "ofrecer de nuevo el diseño de pantalla hecho para el HUD (modo edición del juego)",  -- 1097
+        "Se muestra mientras se usa la interfaz de mando. Arrastra nuestros marcos en el Modo Edición del juego.",  -- 1098
+        "Preajustes",  -- 1099
+        "Ajustado para",  -- 1100
+        "Televisor",  -- 1101
+        "Monitor",  -- 1102
+        "Iconos de los botones",  -- 1103
+        "los iconos que el juego muestra para los botones de tu mando: detectados automáticamente para el mando en uso, o el tipo que elijas",  -- 1104
+        "Fuente",  -- 1105
+        "Restablecer la disposición del juego",  -- 1106
+        "Pruébalo",  -- 1107
+        "Reproducir la demo",  -- 1108
+        "Mostrar todos los efectos de golpe",  -- 1109
+        "Ejecutar la autocomprobación",  -- 1110
+        "Barras de mando: compactas / completas",  -- 1111
+        "Exportar ajustes",  -- 1112
+        "Importar ajustes",  -- 1113
+        "Marca «Mostrar opciones avanzadas» en la página principal para ver todos los ajustes.",  -- 1114
+        "Módulos",  -- 1115
+        "Interruptores rápidos",  -- 1116
+        "General",  -- 1117
+        "HUD",  -- 1118
+        "El panel de opciones no está disponible en este cliente.",  -- 1119
+        "Activado",  -- 1120
+        "todo el HUD; si se desactiva, vuelven los marcos propios del juego",  -- 1121
+        "También en la interfaz de ratón y teclado",  -- 1122
+        "normalmente el HUD solo funciona mientras se usa la interfaz de mando",  -- 1123
+        "Apartar los marcos del juego",  -- 1124
+        "oculta los marcos de jugador, objetivo y foco del juego mientras se muestran los nuestros",  -- 1125
+        "Ventana de chat arriba a la izquierda",  -- 1126
+        "mueve la ventana de chat arriba a la izquierda mientras funciona el HUD",  -- 1127
+        "Barras verticales en reposo",  -- 1128
+        "cuán visibles se mantienen las barras verticales con salud completa fuera de combate (0 las oculta)",  -- 1129
+        "Colores de clase",  -- 1130
+        "colorea tu barra y las de otros jugadores según la clase",  -- 1131
+        "Iconos de clase",  -- 1132
+        "un icono de clase delante del nombre de un jugador en el objetivo y en el objetivo del objetivo",  -- 1133
+        "Amenaza en el marco del objetivo",  -- 1134
+        "un icono de escudo y un brillo en el marco del objetivo: rojo mientras te ataca, rojo y amarillo cuando estás a punto de atraerlo, amarillo y azul cuando lo estás perdiendo, azul cuando no está sobre ti",  -- 1135
+        "Barras compactas en todas partes",  -- 1136
+        "el marco del objetivo y las placas en su estilo compacto, algo más de la mitad de ancho (cada uno se puede ajustar por separado; los ajustes preestablecidos nunca lo cambian)",  -- 1137
+        "Marco de objetivo compacto",  -- 1138
+        "el marco de objetivo algo más de la mitad de ancho",  -- 1139
+        "Colores de salud en combate",  -- 1140
+        "en combate, las barras de salud pasan de verde a amarillo y a rojo a medida que baja la salud",  -- 1141
+        "Sombreado tras el texto",  -- 1142
+        "una banda oscura suave tras el texto del objetivo, para que se lea bien",  -- 1143
+        "Tamaño del texto",  -- 1144
+        "tamaño del texto de nuestros marcos",  -- 1145
+        "Tamaño de los marcos",  -- 1146
+        "tamaño de nuestros marcos de unidad",  -- 1147
+        "Tus barras en combate",  -- 1148
+        "qué tan visibles están tus barras, mascota y foco en combate hasta que algo requiera atención",  -- 1149
+        "Completas con salud inferior a",  -- 1150
+        "tus barras vuelven completas cuando tu salud baja de este valor",  -- 1151
+        "Completas con maná inferior a",  -- 1152
+        "tus barras vuelven completas cuando tu maná baja de este valor",  -- 1153
+        "Barra del jugador en reposo",  -- 1154
+        "qué tan visible queda la barra del jugador con la salud completa o fuera de combate (0 la oculta)",  -- 1155
+        "Ayuda de vendedor y banco",  -- 1156
+        "el botón Vender basura del vendedor pregunta qué vender; movimiento rápido en vendedor y banco",  -- 1157
+        "Mostrar opciones avanzadas",  -- 1158
+        "todos los ajustes, no solo los interruptores principales",  -- 1159
+        "Marco del jugador",  -- 1160
+        "nuestra barra del jugador, arriba a la izquierda",  -- 1161
+        "Marco del objetivo",  -- 1162
+        "nuestra barra del objetivo, arriba en el centro",  -- 1163
+        "Barra de mascota",  -- 1164
+        "una pequeña barra de mascota bajo la barra del jugador, o junto a las barras verticales",  -- 1165
+        "Marco del foco",  -- 1166
+        "nuestro marco del foco",  -- 1167
+        "barras verticales finas de salud y poder junto a tu personaje, para una vista en tercera persona (en lugar de la barra del jugador)",  -- 1168
+        "Vender basura al abrir un vendedor",  -- 1169
+        "vende la basura según tus reglas en cuanto se abre un vendedor",  -- 1170
+        "Las armas y armaduras blancas son basura",  -- 1171
+        "cuenta las armas y armaduras blancas como basura (nunca herramientas, cañas de pescar, equipo con uso ni algo que pueda ser una mejora; siempre se pregunta antes)",  -- 1172
+        "Depositar al abrir el banco",  -- 1173
+        "los objetos marcados para el banco y, si está activado, lo que el banco ya tiene, entran solos",  -- 1174
+        "la opción del juego; nuestro marco pequeño la sigue",  -- 1175
+        "Gestor de reutilización",  -- 1176
+        "el Gestor de reutilización del juego",  -- 1177
+        "Visualización de recursos personales",  -- 1178
+        "tu salud y recurso bajo tu personaje",  -- 1179
+        "El banco toma componentes automáticamente",  -- 1180
+        "la opción del juego para el banco",  -- 1181
+        "Descripción emergente al empezar un beneficio",  -- 1182
+        "la opción del juego: la descripción emergente de un beneficio aparece un momento al aplicarse (IU de mando)",  -- 1183
+        "Colores de clase en los nombres del chat",  -- 1184
+        "el ajuste del chat del juego para todos los tipos de chat a la vez: el nombre de un jugador con el color de su clase",  -- 1185
+        "abre el panel de opciones (Opciones > AddOns > ControllerCam HUD)",  -- 1186
+        "Marcos",  -- 1187
+        "Desvanecer la pantalla",  -- 1188
+        "Efectos",  -- 1189
+        "Aspecto",  -- 1190
+        "Misiones, chat y mapa",  -- 1191
+        "Bolsas, banco y vendedor",  -- 1192
+        "Pesca",  -- 1193
+        "Accesibilidad",  -- 1194
+        "Opciones nativas",  -- 1195
+        "%s  |  Interfaz de mando: %s  |  en marcha: %s",  -- 1196
+        "jugador %s, objetivo %s, mascota %s, foco %s  |  marcos del juego apartados: %s  |  chat movido: %s",  -- 1197
+        "opciones nativas: objetivo del objetivo %s, Gestor de reutilización %s, recursos personales %s",  -- 1198
+        "tamaño del texto %d%%  |  sombreado del texto: %s",  -- 1199
+        "ayuda de vendedor y banco: %s  |  venta automática: %s  |  el equipo blanco es basura: %s",  -- 1200
+        "visibilidad en reposo %d%%  |  escala %d%%  |  colores de clase: %s",  -- 1201
+        "Un HUD de acción minimalista para la interfaz de mando.",  -- 1202
+        "activado",  -- 1203
+        "desactivado: vuelven los marcos propios del juego",  -- 1204
+        "usar también en la interfaz de ratón y teclado: %s",  -- 1205
+        "marcos del juego apartados: %s",  -- 1206
+        "chat movido arriba a la izquierda: %s",  -- 1207
+        "colores de clase: %s",  -- 1208
+        "Este cliente no tiene esa opción.",  -- 1209
+        "%s: %s (opción propia del juego)",  -- 1210
+        "El juego no lo aceptó en este momento.",  -- 1211
+        "ayuda de vendedor y banco: %s",  -- 1212
+        "venta automática: %s",  -- 1213
+        "el equipo blanco es basura: %s",  -- 1214
+        "La ayuda de vendedor está desactivada.",  -- 1215
+        "uso: /cchud sell [junk | recommended | white | green | blue]",  -- 1216
+        "depositar los objetos marcados al abrir el banco: %s",  -- 1217
+        "uso: /cchud junk <item> (Mayús + clic en el objeto para ponerlo en la línea de chat)",  -- 1218
+        "objeto %d: basura, se vende con el resto",  -- 1219
+        "objeto %d: conservado, nunca se vende",  -- 1220
+        "objeto %d: para el banco",  -- 1221
+        "sombreado del texto: %s",  -- 1222
+        "uso: /cchud text <80-250>",  -- 1223
+        "tamaño del texto %d%%",  -- 1224
+        "demo detenida",  -- 1225
+        "El HUD no está en marcha.",  -- 1226
+        "Demo en marcha: un combate inventado en bucle. Escribe /cchud demo otra vez para detenerla.",  -- 1227
+        "uso: /cchud idle <0-100>",  -- 1228
+        "visibilidad en reposo %d%%",  -- 1229
+        "uso: /cchud scale <50-200>",  -- 1230
+        "escala %d%%",  -- 1231
+        "Arrastra los marcos y luego escribe /cchud lock.",  -- 1232
+        "marcos bloqueados",  -- 1233
+        "Todo ha vuelto a como empezó: ajustes, marcos y el diseño de pantalla (tus marcas de vendedor y el historial de precios se conservan).",  -- 1234
+        "los marcos han vuelto a su posición inicial",  -- 1235
+        "comando desconocido '%s'. Escribe /cchud help",  -- 1236
+        "Lista de errores vaciada.",  -- 1237
+        "No hay errores registrados.",  -- 1238
+        "%d errores registrados (el más reciente al final). /cchud errors clear vacía la lista.",  -- 1239
+        "mostrar el estado",  -- 1240
+        "activa o desactiva el HUD (desactivado devuelve los marcos propios del juego)",  -- 1241
+        "usar también el HUD en la interfaz de ratón y teclado",  -- 1242
+        "usar nuestro marco para ello, o el del propio juego",  -- 1243
+        "barras verticales delgadas de salud y poder junto a tu personaje",  -- 1244
+        "objetivo del objetivo (opción propia del juego, también en sus menús)",  -- 1245
+        "el Gestor de reutilización del juego (opción propia del juego)",  -- 1246
+        "tu salud y recurso bajo tu personaje (opción propia del juego)",  -- 1247
+        "la descripción emergente que aparece cuando empieza un beneficio (la opción propia del juego)",  -- 1248
+        "mantener visibles los marcos de jugador y objetivo del juego (on) o apartarlos (off)",  -- 1249
+        "en un vendedor: elige qué vender (también: sell junk, sell recommended, sell white | green | blue)",  -- 1250
+        "cuenta las armas y armaduras blancas como basura",  -- 1251
+        "marcar un objeto: siempre se vende, nunca se vende, o para el banco (Mayús + clic para ponerlo en la línea de chat)",  -- 1252
+        "en el banco: deposita lo que el banco ya tiene y todo lo marcado para él",  -- 1253
+        "en el banco: sacar lo que ya llevas en parte",  -- 1254
+        "depositar en cuanto se abre el banco",  -- 1255
+        "el banco toma componentes automáticamente (opción propia del juego)",  -- 1256
+        "tamaño del texto, en porcentaje (150 se lee bien en un televisor)",  -- 1257
+        "cuán visible queda la barra del jugador cuando no pasa nada (0 la oculta)",  -- 1258
+        "tamaño de los marcos, en porcentaje",  -- 1259
+        "arrastra los marcos adonde quieras (el Modo Edición del juego también lo permite)",  -- 1260
+        "devolver los marcos a su posición inicial",  -- 1261
+        "reproduce un combate inventado y breve, para ver cómo reaccionan los marcos (otra vez para detenerlo)",  -- 1262
+        "compara lo que hay en pantalla con los ajustes (check all enumera cada fila)",  -- 1263
+        "guarda una descripción de la interfaz de mando de este cliente (para solucionar problemas)",  -- 1264
+        "mostrar esta lista",  -- 1265
+        "los últimos errores del HUD, también tras recargar (para informar de ellos)",  -- 1266
     },
     frFR = {
         "erreur:",  -- 1
@@ -4823,266 +4820,265 @@ local TRANSLATIONS = {
         "Mettre dedans",  -- 1005
         "Prendre le sac",  -- 1006
         "Plus",  -- 1007
-        "Infobulle",  -- 1008
-        "Masquer l'infobulle",  -- 1009
-        "Sacs",  -- 1010
-        "%d libres",  -- 1011
-        "Emplacement libre",  -- 1012
-        "En combat, fermez vos sacs avec B.",  -- 1013
-        "pour la banque",  -- 1014
-        "sans marque",  -- 1015
-        "Aucun emplacement libre.",  -- 1016
-        "Poser ici",  -- 1017
-        "Diviser la pile",  -- 1018
-        "Marque: %s",  -- 1019
-        "Détails de l'objet",  -- 1020
-        "Détruire",  -- 1021
-        "Trier la banque",  -- 1022
-        "Trier les sacs",  -- 1023
-        "Voir les sacs",  -- 1024
-        "Voir la banque",  -- 1025
-        "Déposer les objets marqués",  -- 1026
-        "Vendre les objets conseillés",  -- 1027
-        "Relâchez pour détruire",  -- 1028
-        "Cet objet permet de commencer une quête.",  -- 1029
-        "C'est un objet de quête.",  -- 1030
-        "Détruire %s ?",  -- 1031
-        "Le jeu a gardé %s: détruisez-le depuis ses propres sacs.",  -- 1032
-        "%s détruit.",  -- 1033
-        "Une fenêtre de sacs avec filtres rapides",  -- 1034
-        "vos sacs dans une fenêtre propre au HUD au lieu de celle du jeu: tous les objets ensemble, les emplacements vides regroupés à la fin, vos sacs sur une rangée à part et des filtres rapides en haut (LB et RB). La banque aussi, tant qu'elle est ouverte. Désactivé: les sacs du jeu",  -- 1035
-        "Fenêtre des sacs: ordre",  -- 1036
-        "Malin: ce que vous utilisez d'abord (consommables, objets avec une utilisation), puis le reste par type, la camelote à la fin et estompée. Par type: en sections sous leurs propres titres. Comme dans vos sacs: l'ordre du jeu",  -- 1037
-        "Préréglage du HUD : %s, assorti à la caméra",  -- 1038
-        "préréglage : %s",  -- 1039
-        "Une disposition nommée '%s' a été ajoutée au mode Édition du jeu. Choisissez-la là pour l'utiliser (Menu du jeu > Mode Édition > Disposition).",  -- 1040
-        "préréglage inconnu '%s'",  -- 1041
-        "Pour une télé : texte plus grand sur le HUD et dans la discussion.",  -- 1042
-        "Pour un moniteur : texte à sa taille normale.",  -- 1043
-        "Nos cadres sont revenus à leur place de départ. Choisissez la disposition %s du jeu dans le mode Édition (Menu du jeu > Mode Édition > Disposition).",  -- 1044
-        "Les préréglages fixent la distance de la caméra",  -- 1045
-        "un préréglage amène aussi la caméra à la distance pour laquelle sa disposition a été conçue, une seule fois (zoomez librement ensuite)",  -- 1046
-        "Action",  -- 1047
-        "une vue à la troisième personne : fines barres verticales à côté de votre personnage, tous les effets activés ; hors combat, tout s'estompe",  -- 1048
-        "Classique",  -- 1049
-        "nos cadres là où WoW les a toujours placés, effets plus discrets, les barres de manette du jeu telles quelles",  -- 1050
-        "seulement l'essentiel : les PNJ amicaux n'affichent leur barre (avec leur fonction) que lorsque vous les pointez, les visez ou les ciblez ; noms sans titres ; hors combat, vos barres restent en retrait (une santé basse s'affiche toujours)",  -- 1051
-        "Monde ouvert",  -- 1052
-        "un écran épuré pour explorer : des barres fines à côté de vous qui s'estompent au repos, des barres de nom sans barre de ressource, une discussion qui s'efface",  -- 1053
-        "Aventure",  -- 1054
-        "après les aventures en monde ouvert sur console : constantes vitales à côté de vous, une petite cible en haut au centre, villageois seulement quand vous les pointez, chat qui s'estompe vite",  -- 1055
-        "Soulslike",  -- 1056
-        "vos barres en haut à gauche, une grande barre de cible en bas au centre comme une barre de boss, chaque coup ressenti",  -- 1057
-        "Tir",  -- 1058
-        "barres verticales juste à droite du centre, près de votre visée, la cible tout en haut, retour de coup marqué",  -- 1059
-        "Crossbar",  -- 1060
-        "après les MMO joués à la manette : la cible et la focalisation en haut au centre, vos barres juste au-dessus des barres de manette, groupe à gauche, barres de nom complètes",  -- 1061
-        "ARPG",  -- 1062
-        "après les RPG d'action : la caméra loin, vos constantes vitales en bas à gauche, la cible en haut au centre, ennemis mineurs petits, chaque coup résonne",  -- 1063
-        "Boussole",  -- 1064
-        "après les RPG à la première personne : la caméra proche, vos barres en bas au centre, la cible sous le bord supérieur, villageois seulement quand vous les pointez",  -- 1065
-        "Raid",  -- 1066
-        "la disposition de WoW avec tout ce qu'il faut à un groupe : cadres de groupe et de raid, pourcentages de vie et niveaux sur les barres",  -- 1067
-        "Suivre les préréglages de ControllerCam",  -- 1068
-        "choisir un préréglage de caméra dans ControllerCam pour partout choisit aussi le préréglage du HUD assorti (la caméra garde sa propre distance)",  -- 1069
-        "Moderne",  -- 1070
-        "régler tout le HUD sur un préréglage : action, classic, minimal, openworld, adventure, soulslike, shooter, crossbar, arpg, compass, raid",  -- 1071
-        "le cadre de la cible et les barres de nom compacts ou complets, les deux à la fois",  -- 1072
-        "le cadre de la cible compact ou complet",  -- 1073
-        "dimensionner le texte pour une télé à l'autre bout de la pièce ou pour un moniteur à portée de bras",  -- 1074
-        "remettre nos cadres à leur place de départ, pour la disposition Moderne ou Classique du jeu",  -- 1075
-        "Toute votre configuration (HUD, caméra et disposition du jeu) : copiez cette ligne (Ctrl+C) pour la garder ou la partager.",  -- 1076
-        "Collez une ligne de réglages du HUD (Ctrl+V) et validez.",  -- 1077
-        "Cette ligne est abîmée : copiez-la de nouveau, en entier.",  -- 1078
-        "Cette ligne vient d'une version plus récente : mettez l'addon à jour.",  -- 1079
-        "Ce n'est pas une ligne de réglages du HUD.",  -- 1080
-        "Réglages importés: %d repris, %d ignorés.",  -- 1081
-        "La configuration de la caméra a été reprise aussi.",  -- 1082
-        "La configuration de la caméra est restée telle quelle.",  -- 1083
-        "La disposition du jeu est maintenant '%s'.",  -- 1084
-        "La disposition du jeu est restée telle quelle.",  -- 1085
-        "vos réglages sous forme d'une ligne de texte, à garder ou partager",  -- 1086
-        "reprend les réglages d'une ligne de texte créée par /cchud export",  -- 1087
-        "Le HUD est actif tant que l'interface manette est utilisée. Ses options : Options > AddOns > ControllerCam > HUD, ou /cchud.",  -- 1088
-        "Caméra seule : le HUD reste au repos et l'interface du jeu est comme avant. /cchud on l'active.",  -- 1089
-        "Préparer aussi l'écran pour la manette ? Cela ajoute une disposition nommée CCHUD au mode Édition du jeu, à choisir là-bas : elle place les rangées de temps de recharge sous la cible, à l'écart des boutons de la manette. Vos propres dispositions sont conservées (/cchud setup le propose de nouveau).",  -- 1090
-        "Préparer",  -- 1091
-        "Pas maintenant",  -- 1092
-        "ControllerCam est fourni avec une interface pour manette, le HUD : ses propres cadres d'unité, barres de nom, barre d'incantation et plus encore tant que l'interface manette est utilisée. La voulez-vous, ou la caméra seule ?",  -- 1093
-        "Caméra + HUD",  -- 1094
-        "Caméra seule",  -- 1095
-        "Ce client ne permet pas aux addons de modifier la disposition.",  -- 1096
-        "redemander : la caméra avec le HUD, ou la caméra seule",  -- 1097
-        "proposer de nouveau la disposition d'écran faite pour le HUD (mode Édition du jeu)",  -- 1098
-        "Affiché tant que l'interface manette est utilisée. Faites glisser nos cadres dans le mode Édition du jeu.",  -- 1099
-        "Préréglages",  -- 1100
-        "Dimensionné pour",  -- 1101
-        "Télé",  -- 1102
-        "Moniteur",  -- 1103
-        "Icônes des boutons",  -- 1104
-        "les icônes que le jeu affiche pour les boutons de votre manette: trouvées automatiquement pour la manette utilisée, ou le type que vous choisissez",  -- 1105
-        "Police",  -- 1106
-        "Réinitialiser la disposition du jeu",  -- 1107
-        "Essayer",  -- 1108
-        "Lancer la démo",  -- 1109
-        "Afficher chaque effet de coup",  -- 1110
-        "Lancer l'autotest",  -- 1111
-        "Barres de manette : compactes / complètes",  -- 1112
-        "Exporter les réglages",  -- 1113
-        "Importer les réglages",  -- 1114
-        "Cochez « Afficher les options avancées » sur la page principale pour accéder à tous les réglages.",  -- 1115
-        "Modules",  -- 1116
-        "Bascules rapides",  -- 1117
-        "Général",  -- 1118
-        "HUD",  -- 1119
-        "Le panneau d'options n'est pas disponible dans ce client.",  -- 1120
-        "Activé",  -- 1121
-        "tout le HUD; désactivé rend ses propres cadres au jeu",  -- 1122
-        "Aussi dans l'interface souris et clavier",  -- 1123
-        "normalement, le HUD ne fonctionne que lorsque l'interface manette est utilisée",  -- 1124
-        "Mettre de côté les cadres du jeu",  -- 1125
-        "masquer les cadres du joueur, de la cible et de la focalisation du jeu tant que les nôtres sont affichés",  -- 1126
-        "Fenêtre de discussion en haut à gauche",  -- 1127
-        "déplacer la fenêtre de discussion en haut à gauche tant que le HUD fonctionne",  -- 1128
-        "Barres verticales au repos",  -- 1129
-        "la visibilité des barres verticales à pleine santé hors combat (0 les masque)",  -- 1130
-        "Couleurs de classe",  -- 1131
-        "colorer votre barre et celles des autres joueurs selon la classe",  -- 1132
-        "Icônes de classe",  -- 1133
-        "une icône de classe devant le nom d'un joueur sur la cible et la cible de la cible",  -- 1134
-        "Menace sur le cadre de cible",  -- 1135
-        "une icône de bouclier et une lueur sur le cadre de la cible : rouge tant qu'il vous attaque, rouge et jaune quand vous êtes sur le point de l'attirer, jaune et bleu quand vous le perdez, bleu quand il n'est pas sur vous",  -- 1136
-        "Barres compactes partout",  -- 1137
-        "le cadre de la cible et les barres de nom en style compact, un peu plus de la moitié de la largeur (chacun reste réglable à part ; les préréglages n'y touchent jamais)",  -- 1138
-        "Cadre de cible compact",  -- 1139
-        "le cadre de cible un peu plus de moitié moins large",  -- 1140
-        "Couleurs de santé en combat",  -- 1141
-        "en combat, les barres de santé passent du vert au jaune puis au rouge à mesure que la santé baisse",  -- 1142
-        "Ombre derrière le texte",  -- 1143
-        "une bande sombre et douce derrière le texte de la cible, pour qu'il reste lisible",  -- 1144
-        "Taille du texte",  -- 1145
-        "taille du texte sur nos cadres",  -- 1146
-        "Taille des cadres",  -- 1147
-        "taille de nos cadres d'unité",  -- 1148
-        "Vos barres en combat",  -- 1149
-        "la visibilité de vos barres, familier et focalisation en combat jusqu'à ce que quelque chose demande de l'attention",  -- 1150
-        "Complètes sous la santé de",  -- 1151
-        "vos barres reviennent complètes quand votre santé passe sous cette valeur",  -- 1152
-        "Complètes sous le mana de",  -- 1153
-        "vos barres reviennent complètes quand votre mana passe sous cette valeur",  -- 1154
-        "Barre du joueur au repos",  -- 1155
-        "visibilité de la barre du joueur avec la vie au maximum ou hors combat (0 la masque)",  -- 1156
-        "Aide marchand et banque",  -- 1157
-        "le bouton Vendre la camelote du marchand demande quoi vendre; déplacement rapide chez le marchand et à la banque",  -- 1158
-        "Afficher les options avancées",  -- 1159
-        "tous les réglages, pas seulement les principaux",  -- 1160
-        "Cadre du joueur",  -- 1161
-        "notre barre de joueur, en haut à gauche",  -- 1162
-        "Cadre de la cible",  -- 1163
-        "notre barre de cible, en haut au centre",  -- 1164
-        "Barre du familier",  -- 1165
-        "une petite barre de familier sous la barre du joueur, ou à côté des barres verticales",  -- 1166
-        "Cadre de focalisation",  -- 1167
-        "notre cadre de focalisation",  -- 1168
-        "fines barres verticales de vie et de puissance à côté de votre personnage, pour une vue à la troisième personne (à la place de la barre du joueur)",  -- 1169
-        "Vendre la camelote à l'ouverture d'un marchand",  -- 1170
-        "vendre la camelote selon vos règles dès l'ouverture d'un marchand",  -- 1171
-        "Les armes et armures blanches sont de la camelote",  -- 1172
-        "compter les armes et armures blanches comme camelote (jamais les outils, cannes à pêche, équipements avec un effet Utiliser ou ce qui pourrait être une amélioration ; toujours demandé d'abord)",  -- 1173
-        "Déposer à l'ouverture de la banque",  -- 1174
-        "les objets marqués pour la banque et, si activé, ce que la banque contient déjà, y vont d'eux-mêmes",  -- 1175
-        "l'option du jeu; notre petit cadre la suit",  -- 1176
-        "Gestionnaire de temps de recharge",  -- 1177
-        "le Gestionnaire de temps de recharge du jeu",  -- 1178
-        "Affichage des ressources personnelles",  -- 1179
-        "votre santé et votre ressource sous votre personnage",  -- 1180
-        "La banque prend les composants toute seule",  -- 1181
-        "l'option du jeu pour la banque",  -- 1182
-        "Infobulle au début d'un buff",  -- 1183
-        "l'option du jeu : l'infobulle d'un buff s'affiche un instant quand il est appliqué (interface manette)",  -- 1184
-        "Couleurs de classe pour les noms dans le chat",  -- 1185
-        "le réglage du chat du jeu pour tous les types de chat à la fois : le nom d'un joueur dans la couleur de sa classe",  -- 1186
-        "ouvrir le panneau d'options (Options > AddOns > ControllerCam HUD)",  -- 1187
-        "Cadres",  -- 1188
-        "Fondu de l'écran",  -- 1189
-        "Effets",  -- 1190
-        "Style",  -- 1191
-        "Quêtes, discussion et carte",  -- 1192
-        "Sacs, banque et marchand",  -- 1193
-        "Pêche",  -- 1194
-        "Accessibilité",  -- 1195
-        "Options natives",  -- 1196
-        "%s  |  Interface manette: %s  |  en cours: %s",  -- 1197
-        "joueur %s, cible %s, familier %s, focalisation %s  |  cadres du jeu mis de côté: %s  |  discussion déplacée: %s",  -- 1198
-        "options natives: cible de la cible %s, Gestionnaire de temps de recharge %s, ressources personnelles %s",  -- 1199
-        "taille du texte %d%%  |  ombre du texte: %s",  -- 1200
-        "aide marchand et banque: %s  |  vente auto: %s  |  équipement blanc = camelote: %s",  -- 1201
-        "visibilité au repos %d%%  |  échelle %d%%  |  couleurs de classe: %s",  -- 1202
-        "Un HUD minimaliste de jeu d'action pour l'interface manette.",  -- 1203
-        "activé",  -- 1204
-        "désactivé: les cadres du jeu sont de retour",  -- 1205
-        "utiliser aussi dans l'interface souris et clavier: %s",  -- 1206
-        "cadres du jeu mis de côté: %s",  -- 1207
-        "discussion déplacée en haut à gauche: %s",  -- 1208
-        "couleurs de classe: %s",  -- 1209
-        "Ce client n'a pas cette option.",  -- 1210
-        "%s: %s (l'option propre au jeu)",  -- 1211
-        "Le jeu n'a pas accepté cela pour l'instant.",  -- 1212
-        "aide marchand et banque: %s",  -- 1213
-        "vente auto: %s",  -- 1214
-        "équipement blanc = camelote: %s",  -- 1215
-        "L'aide marchand est désactivée.",  -- 1216
-        "utilisation: /cchud sell [junk | recommended | white | green | blue]",  -- 1217
-        "déposer les objets marqués à l'ouverture de la banque: %s",  -- 1218
-        "utilisation: /cchud junk <item> (Maj-clic sur l'objet pour l'insérer dans la ligne de discussion)",  -- 1219
-        "objet %d: camelote, vendu avec le reste",  -- 1220
-        "objet %d: conservé, jamais vendu",  -- 1221
-        "objet %d: pour la banque",  -- 1222
-        "ombre du texte: %s",  -- 1223
-        "utilisation : /cchud text <80-250>",  -- 1224
-        "taille du texte %d%%",  -- 1225
-        "démo arrêtée",  -- 1226
-        "Le HUD ne fonctionne pas.",  -- 1227
-        "Démo en cours: un combat fictif en boucle. Tapez /cchud demo à nouveau pour l'arrêter.",  -- 1228
-        "utilisation: /cchud idle <0-100>",  -- 1229
-        "visibilité au repos %d%%",  -- 1230
-        "utilisation: /cchud scale <50-200>",  -- 1231
-        "échelle %d%%",  -- 1232
-        "Faites glisser les cadres, puis tapez /cchud lock.",  -- 1233
-        "cadres verrouillés",  -- 1234
-        "Tout est revenu comme au départ : réglages, cadres et disposition d'écran (vos marques de vendeur et l'historique des prix sont conservés).",  -- 1235
-        "les cadres sont revenus à leur position initiale",  -- 1236
-        "commande inconnue '%s'. Tapez /cchud help",  -- 1237
-        "Liste des erreurs vidée.",  -- 1238
-        "Aucune erreur enregistrée.",  -- 1239
-        "%d erreurs enregistrées (la plus récente en dernier). /cchud errors clear vide la liste.",  -- 1240
-        "afficher l'état",  -- 1241
-        "activer ou désactiver le HUD (désactivé rend ses propres cadres au jeu)",  -- 1242
-        "utiliser aussi le HUD dans l'interface souris et clavier",  -- 1243
-        "utiliser notre cadre pour cela, ou celui du jeu",  -- 1244
-        "fines barres verticales de santé et d'énergie à côté de votre personnage",  -- 1245
-        "cible de la cible (l'option propre au jeu, aussi dans ses menus)",  -- 1246
-        "le Gestionnaire de temps de recharge du jeu (l'option propre au jeu)",  -- 1247
-        "votre santé et votre ressource sous votre personnage (l'option propre au jeu)",  -- 1248
-        "l'infobulle qui s'affiche quand un buff commence (l'option propre au jeu)",  -- 1249
-        "garder visibles les cadres du joueur et de la cible du jeu (activé) ou les mettre de côté (désactivé)",  -- 1250
-        "chez un marchand: choisir quoi vendre (aussi: sell junk, sell recommended, sell white | green | blue)",  -- 1251
-        "compter les armes et armures blanches comme camelote",  -- 1252
-        "marquer un objet: toujours vendu, jamais vendu, ou pour la banque (Maj-clic pour l'insérer dans la ligne de discussion)",  -- 1253
-        "à la banque : déposer ce que la banque contient déjà, et tout ce qui est marqué pour elle",  -- 1254
-        "à la banque: retirer ce dont vous portez déjà un peu",  -- 1255
-        "déposer dès l'ouverture de la banque",  -- 1256
-        "la banque prend les composants toute seule (l'option propre au jeu)",  -- 1257
-        "taille du texte, en pourcentage (150 se lit bien sur une télévision)",  -- 1258
-        "visibilité de la barre du joueur quand rien ne se passe (0 la masque)",  -- 1259
-        "taille des cadres, en pourcentage",  -- 1260
-        "faites glisser les cadres où vous voulez (le mode Édition du jeu le permet aussi)",  -- 1261
-        "remettre les cadres à leur position initiale",  -- 1262
-        "lancer un court combat fictif pour voir comment réagissent les cadres (encore pour arrêter)",  -- 1263
-        "comparer ce qui est à l'écran avec les réglages (check liste chaque ligne)",  -- 1264
-        "enregistrer une description de l'interface manette de ce client (pour le dépannage)",  -- 1265
-        "afficher cette liste",  -- 1266
-        "les dernières erreurs du HUD, même après un rechargement (pour les signaler)",  -- 1267
+        "Trier",  -- 1008
+        "Sacs",  -- 1009
+        "%d libres",  -- 1010
+        "Emplacement libre",  -- 1011
+        "En combat, fermez vos sacs avec B.",  -- 1012
+        "pour la banque",  -- 1013
+        "sans marque",  -- 1014
+        "Aucun emplacement libre.",  -- 1015
+        "Poser ici",  -- 1016
+        "Diviser la pile",  -- 1017
+        "Marque: %s",  -- 1018
+        "Détails de l'objet",  -- 1019
+        "Détruire",  -- 1020
+        "Trier la banque",  -- 1021
+        "Trier les sacs",  -- 1022
+        "Voir les sacs",  -- 1023
+        "Voir la banque",  -- 1024
+        "Déposer les objets marqués",  -- 1025
+        "Vendre les objets conseillés",  -- 1026
+        "Relâchez pour détruire",  -- 1027
+        "Cet objet permet de commencer une quête.",  -- 1028
+        "C'est un objet de quête.",  -- 1029
+        "Détruire %s ?",  -- 1030
+        "Le jeu a gardé %s: détruisez-le depuis ses propres sacs.",  -- 1031
+        "%s détruit.",  -- 1032
+        "Une fenêtre de sacs avec filtres rapides",  -- 1033
+        "vos sacs dans une fenêtre propre au HUD au lieu de celle du jeu: tous les objets ensemble, les emplacements vides regroupés à la fin, vos sacs sur une rangée à part et des filtres rapides en haut (LB et RB). La banque aussi, tant qu'elle est ouverte. Désactivé: les sacs du jeu",  -- 1034
+        "Fenêtre des sacs: ordre",  -- 1035
+        "Malin: ce que vous utilisez d'abord (consommables, objets avec une utilisation), puis le reste par type, la camelote à la fin et estompée. Par type: en sections sous leurs propres titres. Comme dans vos sacs: l'ordre du jeu",  -- 1036
+        "Préréglage du HUD : %s, assorti à la caméra",  -- 1037
+        "préréglage : %s",  -- 1038
+        "Une disposition nommée '%s' a été ajoutée au mode Édition du jeu. Choisissez-la là pour l'utiliser (Menu du jeu > Mode Édition > Disposition).",  -- 1039
+        "préréglage inconnu '%s'",  -- 1040
+        "Pour une télé : texte plus grand sur le HUD et dans la discussion.",  -- 1041
+        "Pour un moniteur : texte à sa taille normale.",  -- 1042
+        "Nos cadres sont revenus à leur place de départ. Choisissez la disposition %s du jeu dans le mode Édition (Menu du jeu > Mode Édition > Disposition).",  -- 1043
+        "Les préréglages fixent la distance de la caméra",  -- 1044
+        "un préréglage amène aussi la caméra à la distance pour laquelle sa disposition a été conçue, une seule fois (zoomez librement ensuite)",  -- 1045
+        "Action",  -- 1046
+        "une vue à la troisième personne : fines barres verticales à côté de votre personnage, tous les effets activés ; hors combat, tout s'estompe",  -- 1047
+        "Classique",  -- 1048
+        "nos cadres là où WoW les a toujours placés, effets plus discrets, les barres de manette du jeu telles quelles",  -- 1049
+        "seulement l'essentiel : les PNJ amicaux n'affichent leur barre (avec leur fonction) que lorsque vous les pointez, les visez ou les ciblez ; noms sans titres ; hors combat, vos barres restent en retrait (une santé basse s'affiche toujours)",  -- 1050
+        "Monde ouvert",  -- 1051
+        "un écran épuré pour explorer : des barres fines à côté de vous qui s'estompent au repos, des barres de nom sans barre de ressource, une discussion qui s'efface",  -- 1052
+        "Aventure",  -- 1053
+        "après les aventures en monde ouvert sur console : constantes vitales à côté de vous, une petite cible en haut au centre, villageois seulement quand vous les pointez, chat qui s'estompe vite",  -- 1054
+        "Soulslike",  -- 1055
+        "vos barres en haut à gauche, une grande barre de cible en bas au centre comme une barre de boss, chaque coup ressenti",  -- 1056
+        "Tir",  -- 1057
+        "barres verticales juste à droite du centre, près de votre visée, la cible tout en haut, retour de coup marqué",  -- 1058
+        "Crossbar",  -- 1059
+        "après les MMO joués à la manette : la cible et la focalisation en haut au centre, vos barres juste au-dessus des barres de manette, groupe à gauche, barres de nom complètes",  -- 1060
+        "ARPG",  -- 1061
+        "après les RPG d'action : la caméra loin, vos constantes vitales en bas à gauche, la cible en haut au centre, ennemis mineurs petits, chaque coup résonne",  -- 1062
+        "Boussole",  -- 1063
+        "après les RPG à la première personne : la caméra proche, vos barres en bas au centre, la cible sous le bord supérieur, villageois seulement quand vous les pointez",  -- 1064
+        "Raid",  -- 1065
+        "la disposition de WoW avec tout ce qu'il faut à un groupe : cadres de groupe et de raid, pourcentages de vie et niveaux sur les barres",  -- 1066
+        "Suivre les préréglages de ControllerCam",  -- 1067
+        "choisir un préréglage de caméra dans ControllerCam pour partout choisit aussi le préréglage du HUD assorti (la caméra garde sa propre distance)",  -- 1068
+        "Moderne",  -- 1069
+        "régler tout le HUD sur un préréglage : action, classic, minimal, openworld, adventure, soulslike, shooter, crossbar, arpg, compass, raid",  -- 1070
+        "le cadre de la cible et les barres de nom compacts ou complets, les deux à la fois",  -- 1071
+        "le cadre de la cible compact ou complet",  -- 1072
+        "dimensionner le texte pour une télé à l'autre bout de la pièce ou pour un moniteur à portée de bras",  -- 1073
+        "remettre nos cadres à leur place de départ, pour la disposition Moderne ou Classique du jeu",  -- 1074
+        "Toute votre configuration (HUD, caméra et disposition du jeu) : copiez cette ligne (Ctrl+C) pour la garder ou la partager.",  -- 1075
+        "Collez une ligne de réglages du HUD (Ctrl+V) et validez.",  -- 1076
+        "Cette ligne est abîmée : copiez-la de nouveau, en entier.",  -- 1077
+        "Cette ligne vient d'une version plus récente : mettez l'addon à jour.",  -- 1078
+        "Ce n'est pas une ligne de réglages du HUD.",  -- 1079
+        "Réglages importés: %d repris, %d ignorés.",  -- 1080
+        "La configuration de la caméra a été reprise aussi.",  -- 1081
+        "La configuration de la caméra est restée telle quelle.",  -- 1082
+        "La disposition du jeu est maintenant '%s'.",  -- 1083
+        "La disposition du jeu est restée telle quelle.",  -- 1084
+        "vos réglages sous forme d'une ligne de texte, à garder ou partager",  -- 1085
+        "reprend les réglages d'une ligne de texte créée par /cchud export",  -- 1086
+        "Le HUD est actif tant que l'interface manette est utilisée. Ses options : Options > AddOns > ControllerCam > HUD, ou /cchud.",  -- 1087
+        "Caméra seule : le HUD reste au repos et l'interface du jeu est comme avant. /cchud on l'active.",  -- 1088
+        "Préparer aussi l'écran pour la manette ? Cela ajoute une disposition nommée CCHUD au mode Édition du jeu, à choisir là-bas : elle place les rangées de temps de recharge sous la cible, à l'écart des boutons de la manette. Vos propres dispositions sont conservées (/cchud setup le propose de nouveau).",  -- 1089
+        "Préparer",  -- 1090
+        "Pas maintenant",  -- 1091
+        "ControllerCam est fourni avec une interface pour manette, le HUD : ses propres cadres d'unité, barres de nom, barre d'incantation et plus encore tant que l'interface manette est utilisée. La voulez-vous, ou la caméra seule ?",  -- 1092
+        "Caméra + HUD",  -- 1093
+        "Caméra seule",  -- 1094
+        "Ce client ne permet pas aux addons de modifier la disposition.",  -- 1095
+        "redemander : la caméra avec le HUD, ou la caméra seule",  -- 1096
+        "proposer de nouveau la disposition d'écran faite pour le HUD (mode Édition du jeu)",  -- 1097
+        "Affiché tant que l'interface manette est utilisée. Faites glisser nos cadres dans le mode Édition du jeu.",  -- 1098
+        "Préréglages",  -- 1099
+        "Dimensionné pour",  -- 1100
+        "Télé",  -- 1101
+        "Moniteur",  -- 1102
+        "Icônes des boutons",  -- 1103
+        "les icônes que le jeu affiche pour les boutons de votre manette: trouvées automatiquement pour la manette utilisée, ou le type que vous choisissez",  -- 1104
+        "Police",  -- 1105
+        "Réinitialiser la disposition du jeu",  -- 1106
+        "Essayer",  -- 1107
+        "Lancer la démo",  -- 1108
+        "Afficher chaque effet de coup",  -- 1109
+        "Lancer l'autotest",  -- 1110
+        "Barres de manette : compactes / complètes",  -- 1111
+        "Exporter les réglages",  -- 1112
+        "Importer les réglages",  -- 1113
+        "Cochez « Afficher les options avancées » sur la page principale pour accéder à tous les réglages.",  -- 1114
+        "Modules",  -- 1115
+        "Bascules rapides",  -- 1116
+        "Général",  -- 1117
+        "HUD",  -- 1118
+        "Le panneau d'options n'est pas disponible dans ce client.",  -- 1119
+        "Activé",  -- 1120
+        "tout le HUD; désactivé rend ses propres cadres au jeu",  -- 1121
+        "Aussi dans l'interface souris et clavier",  -- 1122
+        "normalement, le HUD ne fonctionne que lorsque l'interface manette est utilisée",  -- 1123
+        "Mettre de côté les cadres du jeu",  -- 1124
+        "masquer les cadres du joueur, de la cible et de la focalisation du jeu tant que les nôtres sont affichés",  -- 1125
+        "Fenêtre de discussion en haut à gauche",  -- 1126
+        "déplacer la fenêtre de discussion en haut à gauche tant que le HUD fonctionne",  -- 1127
+        "Barres verticales au repos",  -- 1128
+        "la visibilité des barres verticales à pleine santé hors combat (0 les masque)",  -- 1129
+        "Couleurs de classe",  -- 1130
+        "colorer votre barre et celles des autres joueurs selon la classe",  -- 1131
+        "Icônes de classe",  -- 1132
+        "une icône de classe devant le nom d'un joueur sur la cible et la cible de la cible",  -- 1133
+        "Menace sur le cadre de cible",  -- 1134
+        "une icône de bouclier et une lueur sur le cadre de la cible : rouge tant qu'il vous attaque, rouge et jaune quand vous êtes sur le point de l'attirer, jaune et bleu quand vous le perdez, bleu quand il n'est pas sur vous",  -- 1135
+        "Barres compactes partout",  -- 1136
+        "le cadre de la cible et les barres de nom en style compact, un peu plus de la moitié de la largeur (chacun reste réglable à part ; les préréglages n'y touchent jamais)",  -- 1137
+        "Cadre de cible compact",  -- 1138
+        "le cadre de cible un peu plus de moitié moins large",  -- 1139
+        "Couleurs de santé en combat",  -- 1140
+        "en combat, les barres de santé passent du vert au jaune puis au rouge à mesure que la santé baisse",  -- 1141
+        "Ombre derrière le texte",  -- 1142
+        "une bande sombre et douce derrière le texte de la cible, pour qu'il reste lisible",  -- 1143
+        "Taille du texte",  -- 1144
+        "taille du texte sur nos cadres",  -- 1145
+        "Taille des cadres",  -- 1146
+        "taille de nos cadres d'unité",  -- 1147
+        "Vos barres en combat",  -- 1148
+        "la visibilité de vos barres, familier et focalisation en combat jusqu'à ce que quelque chose demande de l'attention",  -- 1149
+        "Complètes sous la santé de",  -- 1150
+        "vos barres reviennent complètes quand votre santé passe sous cette valeur",  -- 1151
+        "Complètes sous le mana de",  -- 1152
+        "vos barres reviennent complètes quand votre mana passe sous cette valeur",  -- 1153
+        "Barre du joueur au repos",  -- 1154
+        "visibilité de la barre du joueur avec la vie au maximum ou hors combat (0 la masque)",  -- 1155
+        "Aide marchand et banque",  -- 1156
+        "le bouton Vendre la camelote du marchand demande quoi vendre; déplacement rapide chez le marchand et à la banque",  -- 1157
+        "Afficher les options avancées",  -- 1158
+        "tous les réglages, pas seulement les principaux",  -- 1159
+        "Cadre du joueur",  -- 1160
+        "notre barre de joueur, en haut à gauche",  -- 1161
+        "Cadre de la cible",  -- 1162
+        "notre barre de cible, en haut au centre",  -- 1163
+        "Barre du familier",  -- 1164
+        "une petite barre de familier sous la barre du joueur, ou à côté des barres verticales",  -- 1165
+        "Cadre de focalisation",  -- 1166
+        "notre cadre de focalisation",  -- 1167
+        "fines barres verticales de vie et de puissance à côté de votre personnage, pour une vue à la troisième personne (à la place de la barre du joueur)",  -- 1168
+        "Vendre la camelote à l'ouverture d'un marchand",  -- 1169
+        "vendre la camelote selon vos règles dès l'ouverture d'un marchand",  -- 1170
+        "Les armes et armures blanches sont de la camelote",  -- 1171
+        "compter les armes et armures blanches comme camelote (jamais les outils, cannes à pêche, équipements avec un effet Utiliser ou ce qui pourrait être une amélioration ; toujours demandé d'abord)",  -- 1172
+        "Déposer à l'ouverture de la banque",  -- 1173
+        "les objets marqués pour la banque et, si activé, ce que la banque contient déjà, y vont d'eux-mêmes",  -- 1174
+        "l'option du jeu; notre petit cadre la suit",  -- 1175
+        "Gestionnaire de temps de recharge",  -- 1176
+        "le Gestionnaire de temps de recharge du jeu",  -- 1177
+        "Affichage des ressources personnelles",  -- 1178
+        "votre santé et votre ressource sous votre personnage",  -- 1179
+        "La banque prend les composants toute seule",  -- 1180
+        "l'option du jeu pour la banque",  -- 1181
+        "Infobulle au début d'un buff",  -- 1182
+        "l'option du jeu : l'infobulle d'un buff s'affiche un instant quand il est appliqué (interface manette)",  -- 1183
+        "Couleurs de classe pour les noms dans le chat",  -- 1184
+        "le réglage du chat du jeu pour tous les types de chat à la fois : le nom d'un joueur dans la couleur de sa classe",  -- 1185
+        "ouvrir le panneau d'options (Options > AddOns > ControllerCam HUD)",  -- 1186
+        "Cadres",  -- 1187
+        "Fondu de l'écran",  -- 1188
+        "Effets",  -- 1189
+        "Style",  -- 1190
+        "Quêtes, discussion et carte",  -- 1191
+        "Sacs, banque et marchand",  -- 1192
+        "Pêche",  -- 1193
+        "Accessibilité",  -- 1194
+        "Options natives",  -- 1195
+        "%s  |  Interface manette: %s  |  en cours: %s",  -- 1196
+        "joueur %s, cible %s, familier %s, focalisation %s  |  cadres du jeu mis de côté: %s  |  discussion déplacée: %s",  -- 1197
+        "options natives: cible de la cible %s, Gestionnaire de temps de recharge %s, ressources personnelles %s",  -- 1198
+        "taille du texte %d%%  |  ombre du texte: %s",  -- 1199
+        "aide marchand et banque: %s  |  vente auto: %s  |  équipement blanc = camelote: %s",  -- 1200
+        "visibilité au repos %d%%  |  échelle %d%%  |  couleurs de classe: %s",  -- 1201
+        "Un HUD minimaliste de jeu d'action pour l'interface manette.",  -- 1202
+        "activé",  -- 1203
+        "désactivé: les cadres du jeu sont de retour",  -- 1204
+        "utiliser aussi dans l'interface souris et clavier: %s",  -- 1205
+        "cadres du jeu mis de côté: %s",  -- 1206
+        "discussion déplacée en haut à gauche: %s",  -- 1207
+        "couleurs de classe: %s",  -- 1208
+        "Ce client n'a pas cette option.",  -- 1209
+        "%s: %s (l'option propre au jeu)",  -- 1210
+        "Le jeu n'a pas accepté cela pour l'instant.",  -- 1211
+        "aide marchand et banque: %s",  -- 1212
+        "vente auto: %s",  -- 1213
+        "équipement blanc = camelote: %s",  -- 1214
+        "L'aide marchand est désactivée.",  -- 1215
+        "utilisation: /cchud sell [junk | recommended | white | green | blue]",  -- 1216
+        "déposer les objets marqués à l'ouverture de la banque: %s",  -- 1217
+        "utilisation: /cchud junk <item> (Maj-clic sur l'objet pour l'insérer dans la ligne de discussion)",  -- 1218
+        "objet %d: camelote, vendu avec le reste",  -- 1219
+        "objet %d: conservé, jamais vendu",  -- 1220
+        "objet %d: pour la banque",  -- 1221
+        "ombre du texte: %s",  -- 1222
+        "utilisation : /cchud text <80-250>",  -- 1223
+        "taille du texte %d%%",  -- 1224
+        "démo arrêtée",  -- 1225
+        "Le HUD ne fonctionne pas.",  -- 1226
+        "Démo en cours: un combat fictif en boucle. Tapez /cchud demo à nouveau pour l'arrêter.",  -- 1227
+        "utilisation: /cchud idle <0-100>",  -- 1228
+        "visibilité au repos %d%%",  -- 1229
+        "utilisation: /cchud scale <50-200>",  -- 1230
+        "échelle %d%%",  -- 1231
+        "Faites glisser les cadres, puis tapez /cchud lock.",  -- 1232
+        "cadres verrouillés",  -- 1233
+        "Tout est revenu comme au départ : réglages, cadres et disposition d'écran (vos marques de vendeur et l'historique des prix sont conservés).",  -- 1234
+        "les cadres sont revenus à leur position initiale",  -- 1235
+        "commande inconnue '%s'. Tapez /cchud help",  -- 1236
+        "Liste des erreurs vidée.",  -- 1237
+        "Aucune erreur enregistrée.",  -- 1238
+        "%d erreurs enregistrées (la plus récente en dernier). /cchud errors clear vide la liste.",  -- 1239
+        "afficher l'état",  -- 1240
+        "activer ou désactiver le HUD (désactivé rend ses propres cadres au jeu)",  -- 1241
+        "utiliser aussi le HUD dans l'interface souris et clavier",  -- 1242
+        "utiliser notre cadre pour cela, ou celui du jeu",  -- 1243
+        "fines barres verticales de santé et d'énergie à côté de votre personnage",  -- 1244
+        "cible de la cible (l'option propre au jeu, aussi dans ses menus)",  -- 1245
+        "le Gestionnaire de temps de recharge du jeu (l'option propre au jeu)",  -- 1246
+        "votre santé et votre ressource sous votre personnage (l'option propre au jeu)",  -- 1247
+        "l'infobulle qui s'affiche quand un buff commence (l'option propre au jeu)",  -- 1248
+        "garder visibles les cadres du joueur et de la cible du jeu (activé) ou les mettre de côté (désactivé)",  -- 1249
+        "chez un marchand: choisir quoi vendre (aussi: sell junk, sell recommended, sell white | green | blue)",  -- 1250
+        "compter les armes et armures blanches comme camelote",  -- 1251
+        "marquer un objet: toujours vendu, jamais vendu, ou pour la banque (Maj-clic pour l'insérer dans la ligne de discussion)",  -- 1252
+        "à la banque : déposer ce que la banque contient déjà, et tout ce qui est marqué pour elle",  -- 1253
+        "à la banque: retirer ce dont vous portez déjà un peu",  -- 1254
+        "déposer dès l'ouverture de la banque",  -- 1255
+        "la banque prend les composants toute seule (l'option propre au jeu)",  -- 1256
+        "taille du texte, en pourcentage (150 se lit bien sur une télévision)",  -- 1257
+        "visibilité de la barre du joueur quand rien ne se passe (0 la masque)",  -- 1258
+        "taille des cadres, en pourcentage",  -- 1259
+        "faites glisser les cadres où vous voulez (le mode Édition du jeu le permet aussi)",  -- 1260
+        "remettre les cadres à leur position initiale",  -- 1261
+        "lancer un court combat fictif pour voir comment réagissent les cadres (encore pour arrêter)",  -- 1262
+        "comparer ce qui est à l'écran avec les réglages (check liste chaque ligne)",  -- 1263
+        "enregistrer une description de l'interface manette de ce client (pour le dépannage)",  -- 1264
+        "afficher cette liste",  -- 1265
+        "les dernières erreurs du HUD, même après un rechargement (pour les signaler)",  -- 1266
     },
     itIT = {
         "errore:",  -- 1
@@ -6092,266 +6088,265 @@ local TRANSLATIONS = {
         "Metti dentro",  -- 1005
         "Prendi borsa",  -- 1006
         "Altro",  -- 1007
-        "Descrizione",  -- 1008
-        "Nascondi descrizione",  -- 1009
-        "Borse",  -- 1010
-        "%d liberi",  -- 1011
-        "Posto vuoto",  -- 1012
-        "In combattimento, chiudi le borse con B.",  -- 1013
-        "per la banca",  -- 1014
-        "nessun segno",  -- 1015
-        "Nessun posto libero.",  -- 1016
-        "Posa qui",  -- 1017
-        "Dividi pila",  -- 1018
-        "Segno: %s",  -- 1019
-        "Dettagli dell'oggetto",  -- 1020
-        "Distruggi",  -- 1021
-        "Riordina banca",  -- 1022
-        "Riordina borse",  -- 1023
-        "Mostra borse",  -- 1024
-        "Mostra banca",  -- 1025
-        "Deposita i segnati",  -- 1026
-        "Vendi i consigliati",  -- 1027
-        "Rilascia per distruggere",  -- 1028
-        "Questo oggetto avvia una missione.",  -- 1029
-        "È un oggetto di una missione.",  -- 1030
-        "Distruggere %s?",  -- 1031
-        "Il gioco ha tenuto %s: distruggilo dalle sue borse.",  -- 1032
-        "%s distrutto.",  -- 1033
-        "Una finestra delle borse con filtri rapidi",  -- 1034
-        "le tue borse in una finestra dell'HUD invece di quella del gioco: tutti gli oggetti insieme, i posti vuoti raccolti alla fine, le tue borse in una fila a parte e filtri rapidi in alto (LB e RB). Anche la banca, mentre è aperta. Disattivato: le borse del gioco",  -- 1035
-        "Finestra delle borse: ordine",  -- 1036
-        "Intelligente: prima ciò che usi (consumabili, oggetti con un uso), poi il resto per tipo, la robaccia in fondo e sbiadita. Per tipo: in sezioni con il proprio titolo. Come nelle borse: l'ordine del gioco",  -- 1037
-        "Preset dell'HUD: %s, abbinato alla telecamera",  -- 1038
-        "preset: %s",  -- 1039
-        "Un layout chiamato '%s' è stato aggiunto alla Modalità modifica del gioco. Sceglilo lì per usarlo (Menu di gioco > Modalità modifica > Layout).",  -- 1040
-        "preset sconosciuto '%s'",  -- 1041
-        "Per una TV: testo più grande sull'HUD e nella chat.",  -- 1042
-        "Per un monitor: testo alla sua dimensione normale.",  -- 1043
-        "I nostri riquadri sono tornati al punto di partenza. Scegli il layout %s del gioco nella Modalità modifica (Menu di gioco > Modalità modifica > Layout).",  -- 1044
-        "I preset impostano la distanza della telecamera",  -- 1045
-        "un preset porta anche la telecamera alla distanza per cui è stato pensato il suo layout, una sola volta (poi zooma liberamente)",  -- 1046
-        "Azione",  -- 1047
-        "una visuale in terza persona: barre verticali sottili accanto al tuo personaggio, tutti gli effetti attivi; fuori combattimento tutto si dissolve",  -- 1048
-        "Classico",  -- 1049
-        "i nostri riquadri dove WoW li ha sempre messi, effetti più discreti, le barre del gamepad del gioco così come sono",  -- 1050
-        "solo l'essenziale: i PNG amichevoli mostrano la targhetta (con cosa fanno) solo mentre li indichi, li miri o li hai come bersaglio; nomi senza titoli; fuori combattimento le tue barre restano un leggero accenno (la salute bassa si vede sempre)",  -- 1051
-        "Mondo aperto",  -- 1052
-        "uno schermo pulito per esplorare: barre sottili accanto a te che riposano sbiadite, targhette senza barre di risorsa, chat che svanisce",  -- 1053
-        "Avventura",  -- 1054
-        "dopo le avventure open world su console: parametri vitali accanto a te, un piccolo bersaglio in alto al centro, cittadini solo quando li indichi, chat che svanisce in fretta",  -- 1055
-        "Soulslike",  -- 1056
-        "le tue barre in alto a sinistra, una grande barra del bersaglio in basso al centro come quella di un boss, ogni colpo si sente",  -- 1057
-        "Sparatutto",  -- 1058
-        "barre verticali appena a destra del centro, vicino a dove miri, il bersaglio in alto, forte riscontro dei colpi",  -- 1059
-        "Crossbar",  -- 1060
-        "dopo gli MMO giocati con il controller: bersaglio e focus in alto al centro, le tue barre appena sopra le barre del gamepad, gruppo a sinistra, targhette complete",  -- 1061
-        "ARPG",  -- 1062
-        "dopo gli RPG d'azione: telecamera lontana, parametri vitali in basso a sinistra, bersaglio in alto al centro, nemici minori piccoli, ogni colpo rimbomba",  -- 1063
-        "Bussola",  -- 1064
-        "dopo gli RPG in prima persona: telecamera vicina, le tue barre in basso al centro, bersaglio sotto il bordo superiore, cittadini solo quando li indichi",  -- 1065
-        "Incursione",  -- 1066
-        "la disposizione di WoW con tutto ciò che serve a un gruppo: riquadri di gruppo e incursione, percentuali di salute e livelli sulle barre",  -- 1067
-        "Segui i preset di ControllerCam",  -- 1068
-        "scegliere un preset della telecamera in ControllerCam per ovunque sceglie anche il preset dell'HUD abbinato (la telecamera mantiene la sua distanza)",  -- 1069
-        "Moderno",  -- 1070
-        "imposta tutto l'HUD su un preset: action, classic, minimal, openworld, adventure, soulslike, shooter, crossbar, arpg, compass, raid",  -- 1071
-        "il riquadro del bersaglio e le targhette compatti o completi, insieme",  -- 1072
-        "il riquadro del bersaglio compatto o completo",  -- 1073
-        "dimensiona il testo per una TV dall'altra parte della stanza o per un monitor a portata di braccio",  -- 1074
-        "rimetti i nostri riquadri al punto di partenza, per il layout Moderno o Classico del gioco",  -- 1075
-        "Tutta la tua configurazione (HUD, telecamera e layout del gioco): copia questa riga (Ctrl+C) per conservarla o condividerla.",  -- 1076
-        "Incolla una riga di impostazioni dell'HUD (Ctrl+V) e accetta.",  -- 1077
-        "Questa riga è danneggiata: copiala di nuovo, per intero.",  -- 1078
-        "Questa riga è stata creata con una versione più recente: aggiorna l'addon.",  -- 1079
-        "Questa non è una riga di impostazioni dell'HUD.",  -- 1080
-        "Impostazioni importate: %d prese, %d escluse.",  -- 1081
-        "È stata importata anche la configurazione della telecamera.",  -- 1082
-        "La configurazione della telecamera è rimasta com'era.",  -- 1083
-        "Il layout del gioco ora è '%s'.",  -- 1084
-        "Il layout del gioco è rimasto com'era.",  -- 1085
-        "le tue impostazioni come una riga di testo, da tenere o condividere",  -- 1086
-        "prende le impostazioni da una riga di testo creata con /cchud export",  -- 1087
-        "L'HUD è attivo mentre è in uso l'interfaccia gamepad. Le sue opzioni: Opzioni > AddOns > ControllerCam > HUD, oppure /cchud.",  -- 1088
-        "Solo telecamera: l'HUD riposa e l'interfaccia del gioco resta com'era. /cchud on lo attiva.",  -- 1089
-        "Preparare anche lo schermo per il controller? Aggiunge un layout chiamato CCHUD alla Modalità modifica del gioco, da scegliere lì: mette le righe dei recuperi sotto il bersaglio, lontano dai pulsanti del gamepad. I tuoi layout restano (/cchud setup lo propone di nuovo).",  -- 1090
-        "Prepara",  -- 1091
-        "Non ora",  -- 1092
-        "ControllerCam include un'interfaccia per controller, l'HUD: i suoi riquadri delle unità, le barre dei nomi, la barra di lancio e altro mentre è in uso l'interfaccia gamepad. La vuoi, o solo la telecamera?",  -- 1093
-        "Telecamera + HUD",  -- 1094
-        "Solo telecamera",  -- 1095
-        "Questo client non permette agli addon di cambiare il layout.",  -- 1096
-        "chiedi di nuovo: la telecamera con l'HUD, o solo la telecamera",  -- 1097
-        "proponi di nuovo il layout dello schermo fatto per l'HUD (Modalità modifica del gioco)",  -- 1098
-        "Mostrato mentre è in uso l'interfaccia gamepad. Trascina i nostri riquadri nella Modalità Modifica del gioco.",  -- 1099
-        "Preset",  -- 1100
-        "Dimensionato per",  -- 1101
-        "TV",  -- 1102
-        "Monitor",  -- 1103
-        "Icone dei pulsanti",  -- 1104
-        "le icone che il gioco mostra per i pulsanti del tuo controller: trovate da sole per il controller in uso, o il tipo che scegli",  -- 1105
-        "Carattere",  -- 1106
-        "Reimposta il layout del gioco",  -- 1107
-        "Provalo",  -- 1108
-        "Avvia la demo",  -- 1109
-        "Mostra ogni effetto dei colpi",  -- 1110
-        "Esegui l'autoverifica",  -- 1111
-        "Barre del gamepad: compatte / complete",  -- 1112
-        "Esporta impostazioni",  -- 1113
-        "Importa impostazioni",  -- 1114
-        "Seleziona «Mostra opzioni avanzate» nella pagina principale per vedere tutte le impostazioni.",  -- 1115
-        "Moduli",  -- 1116
-        "Interruttori rapidi",  -- 1117
-        "Generali",  -- 1118
-        "HUD",  -- 1119
-        "Il pannello delle opzioni non è disponibile in questo client.",  -- 1120
-        "Attivo",  -- 1121
-        "l'intero HUD; disattivo restituisce i riquadri del gioco",  -- 1122
-        "Anche nell'interfaccia mouse e tastiera",  -- 1123
-        "normalmente l'HUD funziona solo mentre è in uso l'interfaccia gamepad",  -- 1124
-        "Metti da parte i riquadri del gioco",  -- 1125
-        "nascondi i riquadri di giocatore, bersaglio e focus del gioco mentre sono mostrati i nostri",  -- 1126
-        "Finestra di chat in alto a sinistra",  -- 1127
-        "sposta la finestra di chat in alto a sinistra mentre l'HUD è in funzione",  -- 1128
-        "Barre verticali a riposo",  -- 1129
-        "quanto restano visibili le barre verticali a salute piena fuori dal combattimento (0 le nasconde)",  -- 1130
-        "Colori di classe",  -- 1131
-        "colora la tua barra e quelle degli altri giocatori in base alla classe",  -- 1132
-        "Icone di classe",  -- 1133
-        "un'icona di classe davanti al nome di un giocatore sul bersaglio e sul bersaglio del bersaglio",  -- 1134
-        "Minaccia sul riquadro del bersaglio",  -- 1135
-        "un'icona a scudo e un bagliore sul riquadro del bersaglio: rosso mentre ti attacca, rosso e giallo quando stai per attirarlo, giallo e blu quando lo stai perdendo, blu quando non è su di te",  -- 1136
-        "Barre compatte ovunque",  -- 1137
-        "il riquadro del bersaglio e le targhette in stile compatto, poco più di metà larghezza (ognuno si può ancora impostare da sé; i preset non lo cambiano mai)",  -- 1138
-        "Riquadro bersaglio compatto",  -- 1139
-        "il riquadro del bersaglio poco più largo della metà",  -- 1140
-        "Colori della salute in combattimento",  -- 1141
-        "in combattimento, le barre della salute passano dal verde al giallo al rosso mentre la salute scende",  -- 1142
-        "Ombra dietro il testo",  -- 1143
-        "una morbida fascia scura dietro il testo del bersaglio, per mantenerlo leggibile",  -- 1144
-        "Dimensione del testo",  -- 1145
-        "dimensione del testo sui nostri riquadri",  -- 1146
-        "Dimensione dei riquadri",  -- 1147
-        "dimensione dei nostri riquadri unità",  -- 1148
-        "Le tue barre in combattimento",  -- 1149
-        "quanto sono visibili le tue barre, famiglio e focus in combattimento finché qualcosa non richiede attenzione",  -- 1150
-        "Complete con salute sotto",  -- 1151
-        "le tue barre tornano complete quando la tua salute scende sotto questo valore",  -- 1152
-        "Complete con mana sotto",  -- 1153
-        "le tue barre tornano complete quando il tuo mana scende sotto questo valore",  -- 1154
-        "Barra del giocatore a riposo",  -- 1155
-        "quanto resta visibile la barra del giocatore a salute piena o fuori combattimento (0 la nasconde)",  -- 1156
-        "Aiuto venditore e banca",  -- 1157
-        "il pulsante Vendi robaccia del venditore chiede cosa vendere; spostamento rapido presso venditore e banca",  -- 1158
-        "Mostra opzioni avanzate",  -- 1159
-        "tutte le impostazioni, non solo gli interruttori principali",  -- 1160
-        "Riquadro del giocatore",  -- 1161
-        "la nostra barra del giocatore, in alto a sinistra",  -- 1162
-        "Riquadro del bersaglio",  -- 1163
-        "la nostra barra del bersaglio, in alto al centro",  -- 1164
-        "Barra dell'animale",  -- 1165
-        "una piccola barra del famiglio sotto la barra del giocatore, o accanto alle barre verticali",  -- 1166
-        "Riquadro del focus",  -- 1167
-        "il nostro riquadro del focus",  -- 1168
-        "sottili barre verticali di salute e potere accanto al personaggio, per una visuale in terza persona (al posto della barra del giocatore)",  -- 1169
-        "Vendi robaccia all'apertura di un venditore",  -- 1170
-        "vendi la robaccia secondo le tue regole appena si apre un venditore",  -- 1171
-        "Armi e armature bianche sono robaccia",  -- 1172
-        "considera spazzatura armi e armature bianche (mai attrezzi, canne da pesca, equipaggiamento con un uso o ciò che potrebbe essere un miglioramento; chiede sempre prima)",  -- 1173
-        "Deposita quando si apre la banca",  -- 1174
-        "gli oggetti segnati per la banca e, se attivo, ciò che la banca contiene già, entrano da soli",  -- 1175
-        "l'opzione del gioco; il nostro piccolo riquadro la segue",  -- 1176
-        "Gestore dei tempi di recupero",  -- 1177
-        "il Gestore dei tempi di recupero del gioco",  -- 1178
-        "Visualizzazione risorse personali",  -- 1179
-        "la tua salute e la tua risorsa sotto il tuo personaggio",  -- 1180
-        "La banca prende i reagenti da sola",  -- 1181
-        "l'opzione del gioco per la banca",  -- 1182
-        "Tooltip all'inizio di un buff",  -- 1183
-        "l'opzione del gioco: il tooltip di un buff compare per un momento quando viene applicato (IU gamepad)",  -- 1184
-        "Colori di classe per i nomi nella chat",  -- 1185
-        "l'impostazione della chat del gioco per ogni tipo di chat insieme: il nome di un giocatore nel colore della sua classe",  -- 1186
-        "apri il pannello delle opzioni (Opzioni > AddOns > ControllerCam HUD)",  -- 1187
-        "Riquadri",  -- 1188
-        "Dissolvenza dello schermo",  -- 1189
-        "Effetti",  -- 1190
-        "Aspetto",  -- 1191
-        "Missioni, chat e mappa",  -- 1192
-        "Borse, banca e venditore",  -- 1193
-        "Pesca",  -- 1194
-        "Accessibilità",  -- 1195
-        "Opzioni native",  -- 1196
-        "%s  |  Interfaccia gamepad: %s  |  in esecuzione: %s",  -- 1197
-        "giocatore %s, bersaglio %s, animale %s, focus %s  |  riquadri del gioco messi da parte: %s  |  chat spostata: %s",  -- 1198
-        "opzioni native: bersaglio del bersaglio %s, Gestore dei tempi di recupero %s, risorse personali %s",  -- 1199
-        "dimensione testo %d%%  |  ombra del testo: %s",  -- 1200
-        "aiuto venditore e banca: %s  |  vendita automatica: %s  |  equipaggiamento bianco è robaccia: %s",  -- 1201
-        "visibilità a riposo %d%%  |  scala %d%%  |  colori di classe: %s",  -- 1202
-        "Un HUD minimale da gioco d'azione per l'interfaccia gamepad.",  -- 1203
-        "attivo",  -- 1204
-        "disattivo: i riquadri del gioco sono tornati",  -- 1205
-        "usa anche nell'interfaccia mouse e tastiera: %s",  -- 1206
-        "riquadri del gioco messi da parte: %s",  -- 1207
-        "chat spostata in alto a sinistra: %s",  -- 1208
-        "colori di classe: %s",  -- 1209
-        "Questo client non ha quell'opzione.",  -- 1210
-        "%s: %s (l'opzione propria del gioco)",  -- 1211
-        "Il gioco non l'ha accettato in questo momento.",  -- 1212
-        "aiuto venditore e banca: %s",  -- 1213
-        "vendita automatica: %s",  -- 1214
-        "equipaggiamento bianco è robaccia: %s",  -- 1215
-        "L'aiuto venditore è disattivato.",  -- 1216
-        "uso: /cchud sell [junk | recommended | white | green | blue]",  -- 1217
-        "deposita gli oggetti segnati all'apertura della banca: %s",  -- 1218
-        "uso: /cchud junk <item> (Maiusc+clic sull'oggetto per inserirlo nella riga di chat)",  -- 1219
-        "oggetto %d: robaccia, venduto con il resto",  -- 1220
-        "oggetto %d: conservato, mai venduto",  -- 1221
-        "oggetto %d: per la banca",  -- 1222
-        "ombra del testo: %s",  -- 1223
-        "uso: /cchud text <80-250>",  -- 1224
-        "dimensione testo %d%%",  -- 1225
-        "demo interrotta",  -- 1226
-        "L'HUD non è in funzione.",  -- 1227
-        "Demo in corso: un combattimento inventato in ciclo. Digita di nuovo /cchud demo per fermarla.",  -- 1228
-        "uso: /cchud idle <0-100>",  -- 1229
-        "visibilità a riposo %d%%",  -- 1230
-        "uso: /cchud scale <50-200>",  -- 1231
-        "scala %d%%",  -- 1232
-        "Trascina i riquadri, poi digita /cchud lock.",  -- 1233
-        "riquadri bloccati",  -- 1234
-        "Tutto è tornato com'era all'inizio: impostazioni, riquadri e layout dello schermo (i tuoi contrassegni del venditore e lo storico dei prezzi restano).",  -- 1235
-        "i riquadri sono tornati dove erano all'inizio",  -- 1236
-        "comando sconosciuto '%s'. Digita /cchud help",  -- 1237
-        "Elenco errori svuotato.",  -- 1238
-        "Nessun errore registrato.",  -- 1239
-        "%d errori registrati (il più recente per ultimo). /cchud errors clear svuota l'elenco.",  -- 1240
-        "mostra lo stato",  -- 1241
-        "attiva o disattiva l'HUD (disattivo restituisce i riquadri del gioco)",  -- 1242
-        "usa l'HUD anche nell'interfaccia mouse e tastiera",  -- 1243
-        "usa il nostro riquadro per questo, oppure quello del gioco",  -- 1244
-        "barre verticali sottili di salute e potere accanto al tuo personaggio",  -- 1245
-        "bersaglio del bersaglio (l'opzione propria del gioco, anche nei suoi menu)",  -- 1246
-        "il Gestore dei tempi di recupero del gioco (l'opzione propria del gioco)",  -- 1247
-        "la tua salute e la tua risorsa sotto il tuo personaggio (l'opzione propria del gioco)",  -- 1248
-        "il tooltip che compare quando inizia un buff (l'opzione propria del gioco)",  -- 1249
-        "mantieni visibili i riquadri di giocatore e bersaglio del gioco (on) o mettili da parte (off)",  -- 1250
-        "presso un venditore: scegli cosa vendere (anche: sell junk, sell recommended, sell white | green | blue)",  -- 1251
-        "conta armi e armature bianche come robaccia",  -- 1252
-        "segna un oggetto: sempre venduto, mai venduto o per la banca (Maiusc+clic per inserirlo nella riga di chat)",  -- 1253
-        "in banca: deposita ciò che la banca contiene già e tutto ciò che è segnato per lei",  -- 1254
-        "in banca: prendere ciò di cui porti già qualcosa",  -- 1255
-        "deposita appena si apre la banca",  -- 1256
-        "la banca prende i reagenti da sola (l'opzione propria del gioco)",  -- 1257
-        "dimensione del testo, in percentuale (150 si legge bene su una TV)",  -- 1258
-        "quanto resta visibile la barra del giocatore quando non succede nulla (0 la nasconde)",  -- 1259
-        "dimensione dei riquadri, in percentuale",  -- 1260
-        "trascina i riquadri dove vuoi (anche la Modalità Modifica del gioco lo permette)",  -- 1261
-        "rimetti i riquadri dove erano all'inizio",  -- 1262
-        "avvia un breve combattimento inventato per vedere come reagiscono i riquadri (di nuovo per fermarlo)",  -- 1263
-        "confronta ciò che è a schermo con le impostazioni (check elenca ogni riga)",  -- 1264
-        "salva una descrizione dell'interfaccia gamepad di questo client (per la risoluzione dei problemi)",  -- 1265
-        "mostra questo elenco",  -- 1266
-        "gli ultimi errori dell'HUD, anche dopo un ricaricamento (per segnalarli)",  -- 1267
+        "Ordina",  -- 1008
+        "Borse",  -- 1009
+        "%d liberi",  -- 1010
+        "Posto vuoto",  -- 1011
+        "In combattimento, chiudi le borse con B.",  -- 1012
+        "per la banca",  -- 1013
+        "nessun segno",  -- 1014
+        "Nessun posto libero.",  -- 1015
+        "Posa qui",  -- 1016
+        "Dividi pila",  -- 1017
+        "Segno: %s",  -- 1018
+        "Dettagli dell'oggetto",  -- 1019
+        "Distruggi",  -- 1020
+        "Riordina banca",  -- 1021
+        "Riordina borse",  -- 1022
+        "Mostra borse",  -- 1023
+        "Mostra banca",  -- 1024
+        "Deposita i segnati",  -- 1025
+        "Vendi i consigliati",  -- 1026
+        "Rilascia per distruggere",  -- 1027
+        "Questo oggetto avvia una missione.",  -- 1028
+        "È un oggetto di una missione.",  -- 1029
+        "Distruggere %s?",  -- 1030
+        "Il gioco ha tenuto %s: distruggilo dalle sue borse.",  -- 1031
+        "%s distrutto.",  -- 1032
+        "Una finestra delle borse con filtri rapidi",  -- 1033
+        "le tue borse in una finestra dell'HUD invece di quella del gioco: tutti gli oggetti insieme, i posti vuoti raccolti alla fine, le tue borse in una fila a parte e filtri rapidi in alto (LB e RB). Anche la banca, mentre è aperta. Disattivato: le borse del gioco",  -- 1034
+        "Finestra delle borse: ordine",  -- 1035
+        "Intelligente: prima ciò che usi (consumabili, oggetti con un uso), poi il resto per tipo, la robaccia in fondo e sbiadita. Per tipo: in sezioni con il proprio titolo. Come nelle borse: l'ordine del gioco",  -- 1036
+        "Preset dell'HUD: %s, abbinato alla telecamera",  -- 1037
+        "preset: %s",  -- 1038
+        "Un layout chiamato '%s' è stato aggiunto alla Modalità modifica del gioco. Sceglilo lì per usarlo (Menu di gioco > Modalità modifica > Layout).",  -- 1039
+        "preset sconosciuto '%s'",  -- 1040
+        "Per una TV: testo più grande sull'HUD e nella chat.",  -- 1041
+        "Per un monitor: testo alla sua dimensione normale.",  -- 1042
+        "I nostri riquadri sono tornati al punto di partenza. Scegli il layout %s del gioco nella Modalità modifica (Menu di gioco > Modalità modifica > Layout).",  -- 1043
+        "I preset impostano la distanza della telecamera",  -- 1044
+        "un preset porta anche la telecamera alla distanza per cui è stato pensato il suo layout, una sola volta (poi zooma liberamente)",  -- 1045
+        "Azione",  -- 1046
+        "una visuale in terza persona: barre verticali sottili accanto al tuo personaggio, tutti gli effetti attivi; fuori combattimento tutto si dissolve",  -- 1047
+        "Classico",  -- 1048
+        "i nostri riquadri dove WoW li ha sempre messi, effetti più discreti, le barre del gamepad del gioco così come sono",  -- 1049
+        "solo l'essenziale: i PNG amichevoli mostrano la targhetta (con cosa fanno) solo mentre li indichi, li miri o li hai come bersaglio; nomi senza titoli; fuori combattimento le tue barre restano un leggero accenno (la salute bassa si vede sempre)",  -- 1050
+        "Mondo aperto",  -- 1051
+        "uno schermo pulito per esplorare: barre sottili accanto a te che riposano sbiadite, targhette senza barre di risorsa, chat che svanisce",  -- 1052
+        "Avventura",  -- 1053
+        "dopo le avventure open world su console: parametri vitali accanto a te, un piccolo bersaglio in alto al centro, cittadini solo quando li indichi, chat che svanisce in fretta",  -- 1054
+        "Soulslike",  -- 1055
+        "le tue barre in alto a sinistra, una grande barra del bersaglio in basso al centro come quella di un boss, ogni colpo si sente",  -- 1056
+        "Sparatutto",  -- 1057
+        "barre verticali appena a destra del centro, vicino a dove miri, il bersaglio in alto, forte riscontro dei colpi",  -- 1058
+        "Crossbar",  -- 1059
+        "dopo gli MMO giocati con il controller: bersaglio e focus in alto al centro, le tue barre appena sopra le barre del gamepad, gruppo a sinistra, targhette complete",  -- 1060
+        "ARPG",  -- 1061
+        "dopo gli RPG d'azione: telecamera lontana, parametri vitali in basso a sinistra, bersaglio in alto al centro, nemici minori piccoli, ogni colpo rimbomba",  -- 1062
+        "Bussola",  -- 1063
+        "dopo gli RPG in prima persona: telecamera vicina, le tue barre in basso al centro, bersaglio sotto il bordo superiore, cittadini solo quando li indichi",  -- 1064
+        "Incursione",  -- 1065
+        "la disposizione di WoW con tutto ciò che serve a un gruppo: riquadri di gruppo e incursione, percentuali di salute e livelli sulle barre",  -- 1066
+        "Segui i preset di ControllerCam",  -- 1067
+        "scegliere un preset della telecamera in ControllerCam per ovunque sceglie anche il preset dell'HUD abbinato (la telecamera mantiene la sua distanza)",  -- 1068
+        "Moderno",  -- 1069
+        "imposta tutto l'HUD su un preset: action, classic, minimal, openworld, adventure, soulslike, shooter, crossbar, arpg, compass, raid",  -- 1070
+        "il riquadro del bersaglio e le targhette compatti o completi, insieme",  -- 1071
+        "il riquadro del bersaglio compatto o completo",  -- 1072
+        "dimensiona il testo per una TV dall'altra parte della stanza o per un monitor a portata di braccio",  -- 1073
+        "rimetti i nostri riquadri al punto di partenza, per il layout Moderno o Classico del gioco",  -- 1074
+        "Tutta la tua configurazione (HUD, telecamera e layout del gioco): copia questa riga (Ctrl+C) per conservarla o condividerla.",  -- 1075
+        "Incolla una riga di impostazioni dell'HUD (Ctrl+V) e accetta.",  -- 1076
+        "Questa riga è danneggiata: copiala di nuovo, per intero.",  -- 1077
+        "Questa riga è stata creata con una versione più recente: aggiorna l'addon.",  -- 1078
+        "Questa non è una riga di impostazioni dell'HUD.",  -- 1079
+        "Impostazioni importate: %d prese, %d escluse.",  -- 1080
+        "È stata importata anche la configurazione della telecamera.",  -- 1081
+        "La configurazione della telecamera è rimasta com'era.",  -- 1082
+        "Il layout del gioco ora è '%s'.",  -- 1083
+        "Il layout del gioco è rimasto com'era.",  -- 1084
+        "le tue impostazioni come una riga di testo, da tenere o condividere",  -- 1085
+        "prende le impostazioni da una riga di testo creata con /cchud export",  -- 1086
+        "L'HUD è attivo mentre è in uso l'interfaccia gamepad. Le sue opzioni: Opzioni > AddOns > ControllerCam > HUD, oppure /cchud.",  -- 1087
+        "Solo telecamera: l'HUD riposa e l'interfaccia del gioco resta com'era. /cchud on lo attiva.",  -- 1088
+        "Preparare anche lo schermo per il controller? Aggiunge un layout chiamato CCHUD alla Modalità modifica del gioco, da scegliere lì: mette le righe dei recuperi sotto il bersaglio, lontano dai pulsanti del gamepad. I tuoi layout restano (/cchud setup lo propone di nuovo).",  -- 1089
+        "Prepara",  -- 1090
+        "Non ora",  -- 1091
+        "ControllerCam include un'interfaccia per controller, l'HUD: i suoi riquadri delle unità, le barre dei nomi, la barra di lancio e altro mentre è in uso l'interfaccia gamepad. La vuoi, o solo la telecamera?",  -- 1092
+        "Telecamera + HUD",  -- 1093
+        "Solo telecamera",  -- 1094
+        "Questo client non permette agli addon di cambiare il layout.",  -- 1095
+        "chiedi di nuovo: la telecamera con l'HUD, o solo la telecamera",  -- 1096
+        "proponi di nuovo il layout dello schermo fatto per l'HUD (Modalità modifica del gioco)",  -- 1097
+        "Mostrato mentre è in uso l'interfaccia gamepad. Trascina i nostri riquadri nella Modalità Modifica del gioco.",  -- 1098
+        "Preset",  -- 1099
+        "Dimensionato per",  -- 1100
+        "TV",  -- 1101
+        "Monitor",  -- 1102
+        "Icone dei pulsanti",  -- 1103
+        "le icone che il gioco mostra per i pulsanti del tuo controller: trovate da sole per il controller in uso, o il tipo che scegli",  -- 1104
+        "Carattere",  -- 1105
+        "Reimposta il layout del gioco",  -- 1106
+        "Provalo",  -- 1107
+        "Avvia la demo",  -- 1108
+        "Mostra ogni effetto dei colpi",  -- 1109
+        "Esegui l'autoverifica",  -- 1110
+        "Barre del gamepad: compatte / complete",  -- 1111
+        "Esporta impostazioni",  -- 1112
+        "Importa impostazioni",  -- 1113
+        "Seleziona «Mostra opzioni avanzate» nella pagina principale per vedere tutte le impostazioni.",  -- 1114
+        "Moduli",  -- 1115
+        "Interruttori rapidi",  -- 1116
+        "Generali",  -- 1117
+        "HUD",  -- 1118
+        "Il pannello delle opzioni non è disponibile in questo client.",  -- 1119
+        "Attivo",  -- 1120
+        "l'intero HUD; disattivo restituisce i riquadri del gioco",  -- 1121
+        "Anche nell'interfaccia mouse e tastiera",  -- 1122
+        "normalmente l'HUD funziona solo mentre è in uso l'interfaccia gamepad",  -- 1123
+        "Metti da parte i riquadri del gioco",  -- 1124
+        "nascondi i riquadri di giocatore, bersaglio e focus del gioco mentre sono mostrati i nostri",  -- 1125
+        "Finestra di chat in alto a sinistra",  -- 1126
+        "sposta la finestra di chat in alto a sinistra mentre l'HUD è in funzione",  -- 1127
+        "Barre verticali a riposo",  -- 1128
+        "quanto restano visibili le barre verticali a salute piena fuori dal combattimento (0 le nasconde)",  -- 1129
+        "Colori di classe",  -- 1130
+        "colora la tua barra e quelle degli altri giocatori in base alla classe",  -- 1131
+        "Icone di classe",  -- 1132
+        "un'icona di classe davanti al nome di un giocatore sul bersaglio e sul bersaglio del bersaglio",  -- 1133
+        "Minaccia sul riquadro del bersaglio",  -- 1134
+        "un'icona a scudo e un bagliore sul riquadro del bersaglio: rosso mentre ti attacca, rosso e giallo quando stai per attirarlo, giallo e blu quando lo stai perdendo, blu quando non è su di te",  -- 1135
+        "Barre compatte ovunque",  -- 1136
+        "il riquadro del bersaglio e le targhette in stile compatto, poco più di metà larghezza (ognuno si può ancora impostare da sé; i preset non lo cambiano mai)",  -- 1137
+        "Riquadro bersaglio compatto",  -- 1138
+        "il riquadro del bersaglio poco più largo della metà",  -- 1139
+        "Colori della salute in combattimento",  -- 1140
+        "in combattimento, le barre della salute passano dal verde al giallo al rosso mentre la salute scende",  -- 1141
+        "Ombra dietro il testo",  -- 1142
+        "una morbida fascia scura dietro il testo del bersaglio, per mantenerlo leggibile",  -- 1143
+        "Dimensione del testo",  -- 1144
+        "dimensione del testo sui nostri riquadri",  -- 1145
+        "Dimensione dei riquadri",  -- 1146
+        "dimensione dei nostri riquadri unità",  -- 1147
+        "Le tue barre in combattimento",  -- 1148
+        "quanto sono visibili le tue barre, famiglio e focus in combattimento finché qualcosa non richiede attenzione",  -- 1149
+        "Complete con salute sotto",  -- 1150
+        "le tue barre tornano complete quando la tua salute scende sotto questo valore",  -- 1151
+        "Complete con mana sotto",  -- 1152
+        "le tue barre tornano complete quando il tuo mana scende sotto questo valore",  -- 1153
+        "Barra del giocatore a riposo",  -- 1154
+        "quanto resta visibile la barra del giocatore a salute piena o fuori combattimento (0 la nasconde)",  -- 1155
+        "Aiuto venditore e banca",  -- 1156
+        "il pulsante Vendi robaccia del venditore chiede cosa vendere; spostamento rapido presso venditore e banca",  -- 1157
+        "Mostra opzioni avanzate",  -- 1158
+        "tutte le impostazioni, non solo gli interruttori principali",  -- 1159
+        "Riquadro del giocatore",  -- 1160
+        "la nostra barra del giocatore, in alto a sinistra",  -- 1161
+        "Riquadro del bersaglio",  -- 1162
+        "la nostra barra del bersaglio, in alto al centro",  -- 1163
+        "Barra dell'animale",  -- 1164
+        "una piccola barra del famiglio sotto la barra del giocatore, o accanto alle barre verticali",  -- 1165
+        "Riquadro del focus",  -- 1166
+        "il nostro riquadro del focus",  -- 1167
+        "sottili barre verticali di salute e potere accanto al personaggio, per una visuale in terza persona (al posto della barra del giocatore)",  -- 1168
+        "Vendi robaccia all'apertura di un venditore",  -- 1169
+        "vendi la robaccia secondo le tue regole appena si apre un venditore",  -- 1170
+        "Armi e armature bianche sono robaccia",  -- 1171
+        "considera spazzatura armi e armature bianche (mai attrezzi, canne da pesca, equipaggiamento con un uso o ciò che potrebbe essere un miglioramento; chiede sempre prima)",  -- 1172
+        "Deposita quando si apre la banca",  -- 1173
+        "gli oggetti segnati per la banca e, se attivo, ciò che la banca contiene già, entrano da soli",  -- 1174
+        "l'opzione del gioco; il nostro piccolo riquadro la segue",  -- 1175
+        "Gestore dei tempi di recupero",  -- 1176
+        "il Gestore dei tempi di recupero del gioco",  -- 1177
+        "Visualizzazione risorse personali",  -- 1178
+        "la tua salute e la tua risorsa sotto il tuo personaggio",  -- 1179
+        "La banca prende i reagenti da sola",  -- 1180
+        "l'opzione del gioco per la banca",  -- 1181
+        "Tooltip all'inizio di un buff",  -- 1182
+        "l'opzione del gioco: il tooltip di un buff compare per un momento quando viene applicato (IU gamepad)",  -- 1183
+        "Colori di classe per i nomi nella chat",  -- 1184
+        "l'impostazione della chat del gioco per ogni tipo di chat insieme: il nome di un giocatore nel colore della sua classe",  -- 1185
+        "apri il pannello delle opzioni (Opzioni > AddOns > ControllerCam HUD)",  -- 1186
+        "Riquadri",  -- 1187
+        "Dissolvenza dello schermo",  -- 1188
+        "Effetti",  -- 1189
+        "Aspetto",  -- 1190
+        "Missioni, chat e mappa",  -- 1191
+        "Borse, banca e venditore",  -- 1192
+        "Pesca",  -- 1193
+        "Accessibilità",  -- 1194
+        "Opzioni native",  -- 1195
+        "%s  |  Interfaccia gamepad: %s  |  in esecuzione: %s",  -- 1196
+        "giocatore %s, bersaglio %s, animale %s, focus %s  |  riquadri del gioco messi da parte: %s  |  chat spostata: %s",  -- 1197
+        "opzioni native: bersaglio del bersaglio %s, Gestore dei tempi di recupero %s, risorse personali %s",  -- 1198
+        "dimensione testo %d%%  |  ombra del testo: %s",  -- 1199
+        "aiuto venditore e banca: %s  |  vendita automatica: %s  |  equipaggiamento bianco è robaccia: %s",  -- 1200
+        "visibilità a riposo %d%%  |  scala %d%%  |  colori di classe: %s",  -- 1201
+        "Un HUD minimale da gioco d'azione per l'interfaccia gamepad.",  -- 1202
+        "attivo",  -- 1203
+        "disattivo: i riquadri del gioco sono tornati",  -- 1204
+        "usa anche nell'interfaccia mouse e tastiera: %s",  -- 1205
+        "riquadri del gioco messi da parte: %s",  -- 1206
+        "chat spostata in alto a sinistra: %s",  -- 1207
+        "colori di classe: %s",  -- 1208
+        "Questo client non ha quell'opzione.",  -- 1209
+        "%s: %s (l'opzione propria del gioco)",  -- 1210
+        "Il gioco non l'ha accettato in questo momento.",  -- 1211
+        "aiuto venditore e banca: %s",  -- 1212
+        "vendita automatica: %s",  -- 1213
+        "equipaggiamento bianco è robaccia: %s",  -- 1214
+        "L'aiuto venditore è disattivato.",  -- 1215
+        "uso: /cchud sell [junk | recommended | white | green | blue]",  -- 1216
+        "deposita gli oggetti segnati all'apertura della banca: %s",  -- 1217
+        "uso: /cchud junk <item> (Maiusc+clic sull'oggetto per inserirlo nella riga di chat)",  -- 1218
+        "oggetto %d: robaccia, venduto con il resto",  -- 1219
+        "oggetto %d: conservato, mai venduto",  -- 1220
+        "oggetto %d: per la banca",  -- 1221
+        "ombra del testo: %s",  -- 1222
+        "uso: /cchud text <80-250>",  -- 1223
+        "dimensione testo %d%%",  -- 1224
+        "demo interrotta",  -- 1225
+        "L'HUD non è in funzione.",  -- 1226
+        "Demo in corso: un combattimento inventato in ciclo. Digita di nuovo /cchud demo per fermarla.",  -- 1227
+        "uso: /cchud idle <0-100>",  -- 1228
+        "visibilità a riposo %d%%",  -- 1229
+        "uso: /cchud scale <50-200>",  -- 1230
+        "scala %d%%",  -- 1231
+        "Trascina i riquadri, poi digita /cchud lock.",  -- 1232
+        "riquadri bloccati",  -- 1233
+        "Tutto è tornato com'era all'inizio: impostazioni, riquadri e layout dello schermo (i tuoi contrassegni del venditore e lo storico dei prezzi restano).",  -- 1234
+        "i riquadri sono tornati dove erano all'inizio",  -- 1235
+        "comando sconosciuto '%s'. Digita /cchud help",  -- 1236
+        "Elenco errori svuotato.",  -- 1237
+        "Nessun errore registrato.",  -- 1238
+        "%d errori registrati (il più recente per ultimo). /cchud errors clear svuota l'elenco.",  -- 1239
+        "mostra lo stato",  -- 1240
+        "attiva o disattiva l'HUD (disattivo restituisce i riquadri del gioco)",  -- 1241
+        "usa l'HUD anche nell'interfaccia mouse e tastiera",  -- 1242
+        "usa il nostro riquadro per questo, oppure quello del gioco",  -- 1243
+        "barre verticali sottili di salute e potere accanto al tuo personaggio",  -- 1244
+        "bersaglio del bersaglio (l'opzione propria del gioco, anche nei suoi menu)",  -- 1245
+        "il Gestore dei tempi di recupero del gioco (l'opzione propria del gioco)",  -- 1246
+        "la tua salute e la tua risorsa sotto il tuo personaggio (l'opzione propria del gioco)",  -- 1247
+        "il tooltip che compare quando inizia un buff (l'opzione propria del gioco)",  -- 1248
+        "mantieni visibili i riquadri di giocatore e bersaglio del gioco (on) o mettili da parte (off)",  -- 1249
+        "presso un venditore: scegli cosa vendere (anche: sell junk, sell recommended, sell white | green | blue)",  -- 1250
+        "conta armi e armature bianche come robaccia",  -- 1251
+        "segna un oggetto: sempre venduto, mai venduto o per la banca (Maiusc+clic per inserirlo nella riga di chat)",  -- 1252
+        "in banca: deposita ciò che la banca contiene già e tutto ciò che è segnato per lei",  -- 1253
+        "in banca: prendere ciò di cui porti già qualcosa",  -- 1254
+        "deposita appena si apre la banca",  -- 1255
+        "la banca prende i reagenti da sola (l'opzione propria del gioco)",  -- 1256
+        "dimensione del testo, in percentuale (150 si legge bene su una TV)",  -- 1257
+        "quanto resta visibile la barra del giocatore quando non succede nulla (0 la nasconde)",  -- 1258
+        "dimensione dei riquadri, in percentuale",  -- 1259
+        "trascina i riquadri dove vuoi (anche la Modalità Modifica del gioco lo permette)",  -- 1260
+        "rimetti i riquadri dove erano all'inizio",  -- 1261
+        "avvia un breve combattimento inventato per vedere come reagiscono i riquadri (di nuovo per fermarlo)",  -- 1262
+        "confronta ciò che è a schermo con le impostazioni (check elenca ogni riga)",  -- 1263
+        "salva una descrizione dell'interfaccia gamepad di questo client (per la risoluzione dei problemi)",  -- 1264
+        "mostra questo elenco",  -- 1265
+        "gli ultimi errori dell'HUD, anche dopo un ricaricamento (per segnalarli)",  -- 1266
     },
     koKR = {
         "오류:",  -- 1
@@ -7361,266 +7356,265 @@ local TRANSLATIONS = {
         "넣기",  -- 1005
         "가방 집기",  -- 1006
         "더 보기",  -- 1007
-        "툴팁",  -- 1008
-        "툴팁 숨기기",  -- 1009
-        "가방",  -- 1010
-        "%d칸 비어 있음",  -- 1011
-        "빈 칸",  -- 1012
-        "전투 중에는 B로 가방을 닫으세요.",  -- 1013
-        "은행용",  -- 1014
-        "표시 없음",  -- 1015
-        "빈 칸이 없습니다.",  -- 1016
-        "여기에 내려놓기",  -- 1017
-        "더미 나누기",  -- 1018
-        "표시: %s",  -- 1019
-        "아이템 정보",  -- 1020
-        "파괴",  -- 1021
-        "은행 정리",  -- 1022
-        "가방 정리",  -- 1023
-        "가방 보기",  -- 1024
-        "은행 보기",  -- 1025
-        "표시한 것 맡기기",  -- 1026
-        "권장 아이템 팔기",  -- 1027
-        "놓으면 파괴",  -- 1028
-        "퀘스트를 시작하는 아이템입니다.",  -- 1029
-        "퀘스트 아이템입니다.",  -- 1030
-        "%s 아이템을 파괴할까요?",  -- 1031
-        "게임이 %s 아이템을 지켰습니다: 게임의 가방에서 파괴하세요.",  -- 1032
-        "%s 아이템을 파괴했습니다.",  -- 1033
-        "빠른 필터가 있는 하나의 가방 창",  -- 1034
-        "게임의 가방 대신 HUD의 가방 창 하나에: 모든 아이템을 함께, 빈 칸은 끝에 모아서, 가방은 따로 한 줄에, 위쪽에는 빠른 필터(LB와 RB). 은행이 열려 있는 동안에는 은행도. 끄면: 게임의 가방",  -- 1035
-        "가방 창: 정렬",  -- 1036
-        "스마트: 사용하는 것 먼저(소비용품, 사용 효과가 있는 아이템), 나머지는 종류별로, 잡동사니는 맨 뒤에 흐리게. 종류별: 제목이 있는 구역으로. 가방 그대로: 게임의 순서",  -- 1037
-        "HUD 프리셋: %s, 카메라에 맞춤",  -- 1038
-        "프리셋: %s",  -- 1039
-        "'%s' 레이아웃이 게임의 편집 모드에 추가되었습니다. 사용하려면 거기에서 선택하세요 (게임 메뉴 > 편집 모드 > 레이아웃).",  -- 1040
-        "알 수 없는 프리셋 '%s'",  -- 1041
-        "TV용: HUD와 대화창의 글자가 커집니다.",  -- 1042
-        "모니터용: 글자가 기본 크기입니다.",  -- 1043
-        "우리 프레임이 처음 위치로 돌아갔습니다. 편집 모드에서 게임의 %s 레이아웃을 선택하세요 (게임 메뉴 > 편집 모드 > 레이아웃).",  -- 1044
-        "프리셋이 카메라 거리를 설정함",  -- 1045
-        "프리셋이 레이아웃에 맞는 거리로 카메라도 한 번 옮겨 줌 (이후에는 자유롭게 확대·축소)",  -- 1046
-        "액션",  -- 1047
-        "삼인칭 시점: 캐릭터 옆의 얇은 세로 바, 모든 효과 켜짐, 전투 중이 아닐 때는 흐려집니다",  -- 1048
-        "클래식",  -- 1049
-        "우리 프레임을 WoW의 기본 위치에 배치, 차분한 효과, 게임의 게임패드 바를 그대로 사용",  -- 1050
-        "꼭 필요한 것만: 우호적인 NPC는 가리키거나 조준하거나 대상으로 지정했을 때만 이름표(하는 일 포함)를 표시; 칭호 없는 이름; 전투 밖에서는 내 바가 희미하게 쉬고 있음 (생명력이 낮으면 항상 표시)",  -- 1051
-        "오픈 월드",  -- 1052
-        "탐험을 위한 깔끔한 화면: 옆에서 흐리게 쉬는 얇은 바, 자원 바 없는 이름표, 사라지는 대화창",  -- 1053
-        "모험",  -- 1054
-        "콘솔 오픈 월드 모험 스타일: 옆에 생명력 표시, 가운데 위쪽에 작은 대상, 마을 주민은 가리킬 때만, 빠르게 사라지는 채팅",  -- 1055
-        "소울라이크",  -- 1056
-        "왼쪽 위에 내 바, 보스 바처럼 화면 아래 중앙의 큰 대상 바, 모든 타격이 느껴짐",  -- 1057
-        "슈터",  -- 1058
-        "조준하는 곳 가까이 중앙 바로 오른쪽의 세로 바, 높이 위치한 대상, 강한 타격 반응",  -- 1059
-        "크로스바",  -- 1060
-        "컨트롤러로 즐기는 MMO 스타일: 가운데 위쪽에 대상과 주시 대상, 게임패드 바 바로 위에 내 바, 왼쪽에 파티, 전체 이름표",  -- 1061
-        "ARPG",  -- 1062
-        "액션 RPG 스타일: 카메라는 멀리, 왼쪽 아래에 생명력 표시, 가운데 위쪽에 대상, 잔챙이 적은 작게, 모든 타격이 크게",  -- 1063
-        "나침반",  -- 1064
-        "1인칭 RPG 스타일: 카메라는 가까이, 가운데 아래에 내 바, 위쪽 가장자리 아래에 대상, 마을 주민은 가리킬 때만",  -- 1065
-        "공격대",  -- 1066
-        "WoW 기본 배치에 파티와 공격대 창, 이름표의 생명력 퍼센트와 레벨 등 그룹에 필요한 모든 것",  -- 1067
-        "ControllerCam 프리셋 따르기",  -- 1068
-        "ControllerCam에서 모든 곳에 카메라 프리셋을 고르면 맞는 HUD 프리셋도 함께 고름 (카메라는 자체 거리를 유지)",  -- 1069
-        "현대적",  -- 1070
-        "HUD 전체를 프리셋으로 설정: action, classic, minimal, openworld, adventure, soulslike, shooter, crossbar, arpg, compass, raid",  -- 1071
-        "대상 프레임과 이름표를 한 번에 소형 또는 전체로",  -- 1072
-        "대상 프레임을 소형 또는 전체로",  -- 1073
-        "방 건너편의 TV 또는 팔 닿는 거리의 모니터에 맞게 글자 크기 조정",  -- 1074
-        "게임 자체의 현대적 또는 클래식 레이아웃에 맞게 우리 프레임을 처음 위치로 되돌리기",  -- 1075
-        "전체 설정(HUD, 카메라, 게임 레이아웃): 이 줄을 복사(Ctrl+C)하여 보관하거나 공유하세요.",  -- 1076
-        "HUD 설정 한 줄을 붙여넣고(Ctrl+V) 확인하세요.",  -- 1077
-        "이 줄이 손상되었습니다: 처음부터 끝까지 다시 복사하세요.",  -- 1078
-        "이 줄은 더 새로운 버전에서 만들어졌습니다: 애드온을 업데이트하세요.",  -- 1079
-        "HUD 설정 줄이 아닙니다.",  -- 1080
-        "설정을 가져왔습니다: %d개 적용, %d개 제외.",  -- 1081
-        "카메라 설정도 함께 가져왔습니다.",  -- 1082
-        "카메라 설정은 그대로 두었습니다.",  -- 1083
-        "게임 레이아웃이 이제 '%s'입니다.",  -- 1084
-        "게임 레이아웃은 그대로 두었습니다.",  -- 1085
-        "설정을 한 줄의 텍스트로, 보관하거나 공유",  -- 1086
-        "/cchud export로 만든 텍스트 줄에서 설정 가져오기",  -- 1087
-        "게임패드 UI를 사용하는 동안 HUD가 켜집니다. 옵션: 옵션 > 애드온 > ControllerCam > HUD 또는 /cchud.",  -- 1088
-        "카메라만: HUD는 쉬고 게임 인터페이스는 그대로입니다. /cchud on 으로 켤 수 있습니다.",  -- 1089
-        "컨트롤러에 맞게 화면도 설정할까요? 게임의 편집 모드에 CCHUD라는 레이아웃을 추가하며, 거기에서 직접 선택하면 됩니다: 재사용 대기시간 줄을 게임패드 버튼에서 떨어진 대상 아래에 놓습니다. 기존 레이아웃은 그대로 유지됩니다 (/cchud setup 으로 다시 제안합니다).",  -- 1090
-        "설정하기",  -- 1091
-        "나중에",  -- 1092
-        "ControllerCam에는 컨트롤러용 인터페이스인 HUD가 함께 들어 있습니다: 게임패드 UI를 사용하는 동안 자체 유닛 프레임, 이름표, 시전 바 등을 보여 줍니다. HUD도 사용할까요, 카메라만 사용할까요?",  -- 1093
-        "카메라 + HUD",  -- 1094
-        "카메라만",  -- 1095
-        "이 클라이언트에서는 애드온이 레이아웃을 변경할 수 없습니다.",  -- 1096
-        "다시 묻기: 카메라와 HUD, 또는 카메라만",  -- 1097
-        "HUD용 화면 레이아웃을 다시 제안 (게임의 편집 모드)",  -- 1098
-        "게임패드 UI를 사용하는 동안 표시됩니다. 게임의 편집 모드에서 프레임을 끌어 옮기세요.",  -- 1099
-        "프리셋",  -- 1100
-        "화면 기준",  -- 1101
-        "TV",  -- 1102
-        "모니터",  -- 1103
-        "버튼 아이콘",  -- 1104
-        "게임이 컨트롤러 버튼에 표시하는 아이콘: 사용 중인 컨트롤러에 맞춰 자동으로 찾거나, 직접 고른 종류",  -- 1105
-        "글꼴",  -- 1106
-        "게임 레이아웃 초기화",  -- 1107
-        "체험해 보기",  -- 1108
-        "데모 재생",  -- 1109
-        "모든 적중 효과 표시",  -- 1110
-        "자가 점검 실행",  -- 1111
-        "게임패드 바: 간략 / 전체",  -- 1112
-        "설정 내보내기",  -- 1113
-        "설정 가져오기",  -- 1114
-        "모든 설정을 보려면 기본 페이지에서 「고급 옵션 표시」를 선택하세요.",  -- 1115
-        "모듈",  -- 1116
-        "빠른 전환",  -- 1117
-        "일반",  -- 1118
-        "HUD",  -- 1119
-        "이 클라이언트에서는 옵션 창을 사용할 수 없습니다.",  -- 1120
-        "활성화",  -- 1121
-        "HUD 전체; 끄면 게임 기본 프레임이 돌아옴",  -- 1122
-        "마우스 및 키보드 UI에서도 사용",  -- 1123
-        "평소에는 HUD가 게임패드 UI를 사용하는 동안에만 작동합니다",  -- 1124
-        "게임 기본 프레임 치우기",  -- 1125
-        "우리 프레임이 표시되는 동안 게임의 플레이어, 대상, 주시 대상 프레임을 숨김",  -- 1126
-        "채팅창을 왼쪽 위로",  -- 1127
-        "HUD가 작동하는 동안 채팅창을 왼쪽 위로 이동",  -- 1128
-        "대기 시 세로 막대",  -- 1129
-        "전투 중이 아닐 때 생명력이 가득 찬 상태에서 세로 막대가 보이는 정도 (0이면 숨김)",  -- 1130
-        "직업 색상",  -- 1131
-        "내 바와 다른 플레이어의 바를 직업 색상으로 표시",  -- 1132
-        "직업 아이콘",  -- 1133
-        "대상과 대상의 대상에서 플레이어 이름 앞에 직업 아이콘 표시",  -- 1134
-        "대상 프레임의 위협 수준",  -- 1135
-        "대상 프레임의 방패 아이콘과 빛: 나를 공격하는 동안 빨강, 곧 끌어올 때 빨강과 노랑, 잃고 있을 때 노랑과 파랑, 나를 노리지 않을 때 파랑",  -- 1136
-        "모든 곳에 소형 바",  -- 1137
-        "대상 프레임과 이름표를 소형 스타일로, 너비 절반 남짓 (각각 따로 설정할 수 있으며, 프리셋은 이를 바꾸지 않음)",  -- 1138
-        "간략한 대상 프레임",  -- 1139
-        "대상 프레임을 절반보다 약간 넓게",  -- 1140
-        "전투 중 체력 색상",  -- 1141
-        "전투 중 체력이 줄어들수록 체력 바가 녹색에서 노란색을 거쳐 빨간색으로 변함",  -- 1142
-        "글자 뒤 음영",  -- 1143
-        "대상의 글자가 잘 보이도록 뒤에 옅은 어두운 띠를 표시",  -- 1144
-        "글자 크기",  -- 1145
-        "우리 프레임의 글자 크기",  -- 1146
-        "프레임 크기",  -- 1147
-        "우리 유닛 프레임의 크기",  -- 1148
-        "전투 중 행동 바",  -- 1149
-        "주의가 필요할 때까지 전투 중 행동 바, 소환수, 주시 대상이 얼마나 보이는지",  -- 1150
-        "생명력이 다음 미만이면 전체",  -- 1151
-        "생명력이 이 값 아래로 떨어지면 바가 전체로 돌아옵니다",  -- 1152
-        "마나가 다음 미만이면 전체",  -- 1153
-        "마나가 이 값 아래로 떨어지면 바가 전체로 돌아옵니다",  -- 1154
-        "대기 중 플레이어 바",  -- 1155
-        "생명력이 가득하거나 전투 중이 아닐 때 플레이어 바의 표시 정도 (0이면 숨김)",  -- 1156
-        "상인 및 은행 도움말",  -- 1157
-        "상인의 잡동사니 판매 버튼이 판매할 항목을 물어봄; 상인과 은행에서 빠른 이동",  -- 1158
-        "고급 옵션 표시",  -- 1159
-        "주요 스위치만이 아닌 모든 설정",  -- 1160
-        "플레이어 프레임",  -- 1161
-        "우리 플레이어 바, 왼쪽 위",  -- 1162
-        "대상 프레임",  -- 1163
-        "우리 대상 바, 위 가운데",  -- 1164
-        "소환수 바",  -- 1165
-        "플레이어 바 아래 또는 세로 바 옆에 작은 소환수 바",  -- 1166
-        "주시 대상 프레임",  -- 1167
-        "우리 주시 대상 프레임",  -- 1168
-        "3인칭 시점용으로 캐릭터 옆에 표시되는 얇은 세로 생명력 및 자원 바 (플레이어 바 대신)",  -- 1169
-        "상인이 열리면 잡동사니 판매",  -- 1170
-        "상인이 열리자마자 규칙에 따라 잡동사니 판매",  -- 1171
-        "흰색 무기와 방어구는 잡동사니",  -- 1172
-        "흰색 무기와 방어구를 잡동사니로 취급 (도구, 낚싯대, 사용 효과가 있는 장비, 업그레이드가 될 수 있는 것은 제외; 항상 먼저 확인)",  -- 1173
-        "은행을 열면 보관",  -- 1174
-        "은행용으로 표시한 물건과, 켜져 있으면 은행에 이미 있는 물건이 저절로 들어갑니다",  -- 1175
-        "게임의 옵션; 우리 작은 프레임이 이를 따름",  -- 1176
-        "재사용 대기시간 관리자",  -- 1177
-        "게임의 재사용 대기시간 관리자",  -- 1178
-        "개인 자원 표시",  -- 1179
-        "캐릭터 아래에 생명력과 자원 표시",  -- 1180
-        "은행이 재료를 자동으로 받음",  -- 1181
-        "은행에 대한 게임의 옵션",  -- 1182
-        "버프 시작 시 툴팁",  -- 1183
-        "게임 옵션: 버프가 적용될 때 버프 툴팁이 잠깐 나타납니다 (게임패드 UI)",  -- 1184
-        "대화창 이름에 직업 색상 사용",  -- 1185
-        "모든 종류의 대화에 한 번에 적용되는 게임의 대화 설정: 플레이어 이름을 직업 색상으로 표시",  -- 1186
-        "옵션 창 열기 (옵션 > 애드온 > ControllerCam HUD)",  -- 1187
-        "프레임",  -- 1188
-        "화면 흐리게",  -- 1189
-        "효과",  -- 1190
-        "모양",  -- 1191
-        "퀘스트, 대화 및 지도",  -- 1192
-        "가방, 은행, 상인",  -- 1193
-        "낚시",  -- 1194
-        "접근성",  -- 1195
-        "네이티브 옵션",  -- 1196
-        "%s  |  게임패드 UI: %s  |  실행 중: %s",  -- 1197
-        "플레이어 %s, 대상 %s, 소환수 %s, 주시 대상 %s  |  게임 프레임 치움: %s  |  채팅 이동: %s",  -- 1198
-        "네이티브 옵션: 대상의 대상 %s, 재사용 대기시간 관리자 %s, 개인 자원 %s",  -- 1199
-        "글자 크기 %d%%  |  글자 음영: %s",  -- 1200
-        "상인 및 은행 도움말: %s  |  자동 판매: %s  |  흰색 장비는 잡동사니: %s",  -- 1201
-        "대기 중 가시성 %d%%  |  크기 %d%%  |  직업 색상: %s",  -- 1202
-        "게임패드 UI를 위한 최소한의 액션 게임 HUD.",  -- 1203
-        "활성화됨",  -- 1204
-        "비활성화됨: 게임 기본 프레임이 돌아왔습니다",  -- 1205
-        "마우스 및 키보드 UI에서도 사용: %s",  -- 1206
-        "게임 기본 프레임 치움: %s",  -- 1207
-        "채팅을 왼쪽 위로 이동: %s",  -- 1208
-        "직업 색상: %s",  -- 1209
-        "이 클라이언트에는 해당 옵션이 없습니다.",  -- 1210
-        "%s: %s (게임의 기본 옵션)",  -- 1211
-        "지금은 게임이 이를 받아들이지 않았습니다.",  -- 1212
-        "상인 및 은행 도움말: %s",  -- 1213
-        "자동 판매: %s",  -- 1214
-        "흰색 장비는 잡동사니: %s",  -- 1215
-        "상인 도움말이 꺼져 있습니다.",  -- 1216
-        "사용법: /cchud sell [junk | recommended | white | green | blue]",  -- 1217
-        "은행이 열리면 표시된 아이템 입금: %s",  -- 1218
-        "사용법: /cchud junk <item> (아이템을 Shift+클릭해 채팅 입력줄에 넣으세요)",  -- 1219
-        "아이템 %d: 잡동사니, 나머지와 함께 판매",  -- 1220
-        "아이템 %d: 보관, 절대 판매 안 함",  -- 1221
-        "아이템 %d: 은행용",  -- 1222
-        "글자 음영: %s",  -- 1223
-        "사용법: /cchud text <80-250>",  -- 1224
-        "글자 크기 %d%%",  -- 1225
-        "데모 중지됨",  -- 1226
-        "HUD가 실행 중이 아닙니다.",  -- 1227
-        "데모 실행 중: 가상의 전투를 반복 재생합니다. 중지하려면 /cchud demo를 다시 입력하세요.",  -- 1228
-        "사용법: /cchud idle <0-100>",  -- 1229
-        "대기 중 가시성 %d%%",  -- 1230
-        "사용법: /cchud scale <50-200>",  -- 1231
-        "크기 %d%%",  -- 1232
-        "프레임을 끌어 옮긴 다음 /cchud lock을 입력하세요.",  -- 1233
-        "프레임 고정됨",  -- 1234
-        "모든 것이 처음 상태로 돌아갔습니다: 설정, 프레임, 화면 레이아웃 (상인 표시와 가격 기록은 유지됩니다).",  -- 1235
-        "프레임이 처음 위치로 돌아왔습니다",  -- 1236
-        "알 수 없는 명령 '%s'. /cchud help를 입력하세요",  -- 1237
-        "오류 목록을 비웠습니다.",  -- 1238
-        "기록된 오류가 없습니다.",  -- 1239
-        "오류 %d개 기록됨 (최신이 마지막). /cchud errors clear로 목록을 비웁니다.",  -- 1240
-        "상태 표시",  -- 1241
-        "HUD 켜기 또는 끄기 (끄면 게임 기본 프레임이 돌아옴)",  -- 1242
-        "마우스 및 키보드 UI에서도 HUD 사용",  -- 1243
-        "우리 프레임 또는 게임 기본 프레임 중 선택",  -- 1244
-        "캐릭터 옆에 표시되는 얇은 세로 생명력 및 자원 막대",  -- 1245
-        "대상의 대상 (게임의 기본 옵션, 게임 메뉴에도 있음)",  -- 1246
-        "게임의 재사용 대기시간 관리자 (게임의 기본 옵션)",  -- 1247
-        "캐릭터 아래의 생명력과 자원 (게임의 기본 옵션)",  -- 1248
-        "버프가 시작될 때 나타나는 툴팁 (게임 자체 옵션)",  -- 1249
-        "게임 기본 플레이어 및 대상 프레임을 계속 표시(켜기) 또는 치움(끄기)",  -- 1250
-        "상인에게서: 판매할 항목 선택 (또는: sell junk, sell recommended, sell white | green | blue)",  -- 1251
-        "흰색 무기와 방어구를 잡동사니로 간주",  -- 1252
-        "아이템 표시: 항상 판매, 절대 판매 안 함, 또는 은행용 (Shift+클릭해 채팅 입력줄에 넣기)",  -- 1253
-        "은행에서: 은행에 이미 있는 물건과 은행용으로 표시한 물건을 모두 보관",  -- 1254
-        "은행에서: 이미 조금 가지고 있는 아이템 꺼내기",  -- 1255
-        "은행을 열자마자 보관",  -- 1256
-        "은행이 재료를 자동으로 받음 (게임의 기본 옵션)",  -- 1257
-        "글자 크기, 퍼센트 단위 (150이면 TV에서 보기 좋음)",  -- 1258
-        "아무 일도 없을 때 플레이어 바가 보이는 정도 (0이면 숨김)",  -- 1259
-        "프레임 크기 (퍼센트)",  -- 1260
-        "프레임을 원하는 위치로 끌기 (게임의 편집 모드로도 가능)",  -- 1261
-        "프레임을 처음 위치로 되돌리기",  -- 1262
-        "프레임 반응을 보기 위해 짧은 가상 전투 재생 (다시 입력하면 중지)",  -- 1263
-        "화면에 표시된 것을 설정과 비교 (check all은 모든 행을 나열)",  -- 1264
-        "이 클라이언트의 게임패드 UI 설명 저장 (문제 해결용)",  -- 1265
-        "이 목록 표시",  -- 1266
-        "HUD의 최근 오류, 다시 불러온 후에도 (보고용)",  -- 1267
+        "정렬",  -- 1008
+        "가방",  -- 1009
+        "%d칸 비어 있음",  -- 1010
+        "빈 칸",  -- 1011
+        "전투 중에는 B로 가방을 닫으세요.",  -- 1012
+        "은행용",  -- 1013
+        "표시 없음",  -- 1014
+        "빈 칸이 없습니다.",  -- 1015
+        "여기에 내려놓기",  -- 1016
+        "더미 나누기",  -- 1017
+        "표시: %s",  -- 1018
+        "아이템 정보",  -- 1019
+        "파괴",  -- 1020
+        "은행 정리",  -- 1021
+        "가방 정리",  -- 1022
+        "가방 보기",  -- 1023
+        "은행 보기",  -- 1024
+        "표시한 것 맡기기",  -- 1025
+        "권장 아이템 팔기",  -- 1026
+        "놓으면 파괴",  -- 1027
+        "퀘스트를 시작하는 아이템입니다.",  -- 1028
+        "퀘스트 아이템입니다.",  -- 1029
+        "%s 아이템을 파괴할까요?",  -- 1030
+        "게임이 %s 아이템을 지켰습니다: 게임의 가방에서 파괴하세요.",  -- 1031
+        "%s 아이템을 파괴했습니다.",  -- 1032
+        "빠른 필터가 있는 하나의 가방 창",  -- 1033
+        "게임의 가방 대신 HUD의 가방 창 하나에: 모든 아이템을 함께, 빈 칸은 끝에 모아서, 가방은 따로 한 줄에, 위쪽에는 빠른 필터(LB와 RB). 은행이 열려 있는 동안에는 은행도. 끄면: 게임의 가방",  -- 1034
+        "가방 창: 정렬",  -- 1035
+        "스마트: 사용하는 것 먼저(소비용품, 사용 효과가 있는 아이템), 나머지는 종류별로, 잡동사니는 맨 뒤에 흐리게. 종류별: 제목이 있는 구역으로. 가방 그대로: 게임의 순서",  -- 1036
+        "HUD 프리셋: %s, 카메라에 맞춤",  -- 1037
+        "프리셋: %s",  -- 1038
+        "'%s' 레이아웃이 게임의 편집 모드에 추가되었습니다. 사용하려면 거기에서 선택하세요 (게임 메뉴 > 편집 모드 > 레이아웃).",  -- 1039
+        "알 수 없는 프리셋 '%s'",  -- 1040
+        "TV용: HUD와 대화창의 글자가 커집니다.",  -- 1041
+        "모니터용: 글자가 기본 크기입니다.",  -- 1042
+        "우리 프레임이 처음 위치로 돌아갔습니다. 편집 모드에서 게임의 %s 레이아웃을 선택하세요 (게임 메뉴 > 편집 모드 > 레이아웃).",  -- 1043
+        "프리셋이 카메라 거리를 설정함",  -- 1044
+        "프리셋이 레이아웃에 맞는 거리로 카메라도 한 번 옮겨 줌 (이후에는 자유롭게 확대·축소)",  -- 1045
+        "액션",  -- 1046
+        "삼인칭 시점: 캐릭터 옆의 얇은 세로 바, 모든 효과 켜짐, 전투 중이 아닐 때는 흐려집니다",  -- 1047
+        "클래식",  -- 1048
+        "우리 프레임을 WoW의 기본 위치에 배치, 차분한 효과, 게임의 게임패드 바를 그대로 사용",  -- 1049
+        "꼭 필요한 것만: 우호적인 NPC는 가리키거나 조준하거나 대상으로 지정했을 때만 이름표(하는 일 포함)를 표시; 칭호 없는 이름; 전투 밖에서는 내 바가 희미하게 쉬고 있음 (생명력이 낮으면 항상 표시)",  -- 1050
+        "오픈 월드",  -- 1051
+        "탐험을 위한 깔끔한 화면: 옆에서 흐리게 쉬는 얇은 바, 자원 바 없는 이름표, 사라지는 대화창",  -- 1052
+        "모험",  -- 1053
+        "콘솔 오픈 월드 모험 스타일: 옆에 생명력 표시, 가운데 위쪽에 작은 대상, 마을 주민은 가리킬 때만, 빠르게 사라지는 채팅",  -- 1054
+        "소울라이크",  -- 1055
+        "왼쪽 위에 내 바, 보스 바처럼 화면 아래 중앙의 큰 대상 바, 모든 타격이 느껴짐",  -- 1056
+        "슈터",  -- 1057
+        "조준하는 곳 가까이 중앙 바로 오른쪽의 세로 바, 높이 위치한 대상, 강한 타격 반응",  -- 1058
+        "크로스바",  -- 1059
+        "컨트롤러로 즐기는 MMO 스타일: 가운데 위쪽에 대상과 주시 대상, 게임패드 바 바로 위에 내 바, 왼쪽에 파티, 전체 이름표",  -- 1060
+        "ARPG",  -- 1061
+        "액션 RPG 스타일: 카메라는 멀리, 왼쪽 아래에 생명력 표시, 가운데 위쪽에 대상, 잔챙이 적은 작게, 모든 타격이 크게",  -- 1062
+        "나침반",  -- 1063
+        "1인칭 RPG 스타일: 카메라는 가까이, 가운데 아래에 내 바, 위쪽 가장자리 아래에 대상, 마을 주민은 가리킬 때만",  -- 1064
+        "공격대",  -- 1065
+        "WoW 기본 배치에 파티와 공격대 창, 이름표의 생명력 퍼센트와 레벨 등 그룹에 필요한 모든 것",  -- 1066
+        "ControllerCam 프리셋 따르기",  -- 1067
+        "ControllerCam에서 모든 곳에 카메라 프리셋을 고르면 맞는 HUD 프리셋도 함께 고름 (카메라는 자체 거리를 유지)",  -- 1068
+        "현대적",  -- 1069
+        "HUD 전체를 프리셋으로 설정: action, classic, minimal, openworld, adventure, soulslike, shooter, crossbar, arpg, compass, raid",  -- 1070
+        "대상 프레임과 이름표를 한 번에 소형 또는 전체로",  -- 1071
+        "대상 프레임을 소형 또는 전체로",  -- 1072
+        "방 건너편의 TV 또는 팔 닿는 거리의 모니터에 맞게 글자 크기 조정",  -- 1073
+        "게임 자체의 현대적 또는 클래식 레이아웃에 맞게 우리 프레임을 처음 위치로 되돌리기",  -- 1074
+        "전체 설정(HUD, 카메라, 게임 레이아웃): 이 줄을 복사(Ctrl+C)하여 보관하거나 공유하세요.",  -- 1075
+        "HUD 설정 한 줄을 붙여넣고(Ctrl+V) 확인하세요.",  -- 1076
+        "이 줄이 손상되었습니다: 처음부터 끝까지 다시 복사하세요.",  -- 1077
+        "이 줄은 더 새로운 버전에서 만들어졌습니다: 애드온을 업데이트하세요.",  -- 1078
+        "HUD 설정 줄이 아닙니다.",  -- 1079
+        "설정을 가져왔습니다: %d개 적용, %d개 제외.",  -- 1080
+        "카메라 설정도 함께 가져왔습니다.",  -- 1081
+        "카메라 설정은 그대로 두었습니다.",  -- 1082
+        "게임 레이아웃이 이제 '%s'입니다.",  -- 1083
+        "게임 레이아웃은 그대로 두었습니다.",  -- 1084
+        "설정을 한 줄의 텍스트로, 보관하거나 공유",  -- 1085
+        "/cchud export로 만든 텍스트 줄에서 설정 가져오기",  -- 1086
+        "게임패드 UI를 사용하는 동안 HUD가 켜집니다. 옵션: 옵션 > 애드온 > ControllerCam > HUD 또는 /cchud.",  -- 1087
+        "카메라만: HUD는 쉬고 게임 인터페이스는 그대로입니다. /cchud on 으로 켤 수 있습니다.",  -- 1088
+        "컨트롤러에 맞게 화면도 설정할까요? 게임의 편집 모드에 CCHUD라는 레이아웃을 추가하며, 거기에서 직접 선택하면 됩니다: 재사용 대기시간 줄을 게임패드 버튼에서 떨어진 대상 아래에 놓습니다. 기존 레이아웃은 그대로 유지됩니다 (/cchud setup 으로 다시 제안합니다).",  -- 1089
+        "설정하기",  -- 1090
+        "나중에",  -- 1091
+        "ControllerCam에는 컨트롤러용 인터페이스인 HUD가 함께 들어 있습니다: 게임패드 UI를 사용하는 동안 자체 유닛 프레임, 이름표, 시전 바 등을 보여 줍니다. HUD도 사용할까요, 카메라만 사용할까요?",  -- 1092
+        "카메라 + HUD",  -- 1093
+        "카메라만",  -- 1094
+        "이 클라이언트에서는 애드온이 레이아웃을 변경할 수 없습니다.",  -- 1095
+        "다시 묻기: 카메라와 HUD, 또는 카메라만",  -- 1096
+        "HUD용 화면 레이아웃을 다시 제안 (게임의 편집 모드)",  -- 1097
+        "게임패드 UI를 사용하는 동안 표시됩니다. 게임의 편집 모드에서 프레임을 끌어 옮기세요.",  -- 1098
+        "프리셋",  -- 1099
+        "화면 기준",  -- 1100
+        "TV",  -- 1101
+        "모니터",  -- 1102
+        "버튼 아이콘",  -- 1103
+        "게임이 컨트롤러 버튼에 표시하는 아이콘: 사용 중인 컨트롤러에 맞춰 자동으로 찾거나, 직접 고른 종류",  -- 1104
+        "글꼴",  -- 1105
+        "게임 레이아웃 초기화",  -- 1106
+        "체험해 보기",  -- 1107
+        "데모 재생",  -- 1108
+        "모든 적중 효과 표시",  -- 1109
+        "자가 점검 실행",  -- 1110
+        "게임패드 바: 간략 / 전체",  -- 1111
+        "설정 내보내기",  -- 1112
+        "설정 가져오기",  -- 1113
+        "모든 설정을 보려면 기본 페이지에서 「고급 옵션 표시」를 선택하세요.",  -- 1114
+        "모듈",  -- 1115
+        "빠른 전환",  -- 1116
+        "일반",  -- 1117
+        "HUD",  -- 1118
+        "이 클라이언트에서는 옵션 창을 사용할 수 없습니다.",  -- 1119
+        "활성화",  -- 1120
+        "HUD 전체; 끄면 게임 기본 프레임이 돌아옴",  -- 1121
+        "마우스 및 키보드 UI에서도 사용",  -- 1122
+        "평소에는 HUD가 게임패드 UI를 사용하는 동안에만 작동합니다",  -- 1123
+        "게임 기본 프레임 치우기",  -- 1124
+        "우리 프레임이 표시되는 동안 게임의 플레이어, 대상, 주시 대상 프레임을 숨김",  -- 1125
+        "채팅창을 왼쪽 위로",  -- 1126
+        "HUD가 작동하는 동안 채팅창을 왼쪽 위로 이동",  -- 1127
+        "대기 시 세로 막대",  -- 1128
+        "전투 중이 아닐 때 생명력이 가득 찬 상태에서 세로 막대가 보이는 정도 (0이면 숨김)",  -- 1129
+        "직업 색상",  -- 1130
+        "내 바와 다른 플레이어의 바를 직업 색상으로 표시",  -- 1131
+        "직업 아이콘",  -- 1132
+        "대상과 대상의 대상에서 플레이어 이름 앞에 직업 아이콘 표시",  -- 1133
+        "대상 프레임의 위협 수준",  -- 1134
+        "대상 프레임의 방패 아이콘과 빛: 나를 공격하는 동안 빨강, 곧 끌어올 때 빨강과 노랑, 잃고 있을 때 노랑과 파랑, 나를 노리지 않을 때 파랑",  -- 1135
+        "모든 곳에 소형 바",  -- 1136
+        "대상 프레임과 이름표를 소형 스타일로, 너비 절반 남짓 (각각 따로 설정할 수 있으며, 프리셋은 이를 바꾸지 않음)",  -- 1137
+        "간략한 대상 프레임",  -- 1138
+        "대상 프레임을 절반보다 약간 넓게",  -- 1139
+        "전투 중 체력 색상",  -- 1140
+        "전투 중 체력이 줄어들수록 체력 바가 녹색에서 노란색을 거쳐 빨간색으로 변함",  -- 1141
+        "글자 뒤 음영",  -- 1142
+        "대상의 글자가 잘 보이도록 뒤에 옅은 어두운 띠를 표시",  -- 1143
+        "글자 크기",  -- 1144
+        "우리 프레임의 글자 크기",  -- 1145
+        "프레임 크기",  -- 1146
+        "우리 유닛 프레임의 크기",  -- 1147
+        "전투 중 행동 바",  -- 1148
+        "주의가 필요할 때까지 전투 중 행동 바, 소환수, 주시 대상이 얼마나 보이는지",  -- 1149
+        "생명력이 다음 미만이면 전체",  -- 1150
+        "생명력이 이 값 아래로 떨어지면 바가 전체로 돌아옵니다",  -- 1151
+        "마나가 다음 미만이면 전체",  -- 1152
+        "마나가 이 값 아래로 떨어지면 바가 전체로 돌아옵니다",  -- 1153
+        "대기 중 플레이어 바",  -- 1154
+        "생명력이 가득하거나 전투 중이 아닐 때 플레이어 바의 표시 정도 (0이면 숨김)",  -- 1155
+        "상인 및 은행 도움말",  -- 1156
+        "상인의 잡동사니 판매 버튼이 판매할 항목을 물어봄; 상인과 은행에서 빠른 이동",  -- 1157
+        "고급 옵션 표시",  -- 1158
+        "주요 스위치만이 아닌 모든 설정",  -- 1159
+        "플레이어 프레임",  -- 1160
+        "우리 플레이어 바, 왼쪽 위",  -- 1161
+        "대상 프레임",  -- 1162
+        "우리 대상 바, 위 가운데",  -- 1163
+        "소환수 바",  -- 1164
+        "플레이어 바 아래 또는 세로 바 옆에 작은 소환수 바",  -- 1165
+        "주시 대상 프레임",  -- 1166
+        "우리 주시 대상 프레임",  -- 1167
+        "3인칭 시점용으로 캐릭터 옆에 표시되는 얇은 세로 생명력 및 자원 바 (플레이어 바 대신)",  -- 1168
+        "상인이 열리면 잡동사니 판매",  -- 1169
+        "상인이 열리자마자 규칙에 따라 잡동사니 판매",  -- 1170
+        "흰색 무기와 방어구는 잡동사니",  -- 1171
+        "흰색 무기와 방어구를 잡동사니로 취급 (도구, 낚싯대, 사용 효과가 있는 장비, 업그레이드가 될 수 있는 것은 제외; 항상 먼저 확인)",  -- 1172
+        "은행을 열면 보관",  -- 1173
+        "은행용으로 표시한 물건과, 켜져 있으면 은행에 이미 있는 물건이 저절로 들어갑니다",  -- 1174
+        "게임의 옵션; 우리 작은 프레임이 이를 따름",  -- 1175
+        "재사용 대기시간 관리자",  -- 1176
+        "게임의 재사용 대기시간 관리자",  -- 1177
+        "개인 자원 표시",  -- 1178
+        "캐릭터 아래에 생명력과 자원 표시",  -- 1179
+        "은행이 재료를 자동으로 받음",  -- 1180
+        "은행에 대한 게임의 옵션",  -- 1181
+        "버프 시작 시 툴팁",  -- 1182
+        "게임 옵션: 버프가 적용될 때 버프 툴팁이 잠깐 나타납니다 (게임패드 UI)",  -- 1183
+        "대화창 이름에 직업 색상 사용",  -- 1184
+        "모든 종류의 대화에 한 번에 적용되는 게임의 대화 설정: 플레이어 이름을 직업 색상으로 표시",  -- 1185
+        "옵션 창 열기 (옵션 > 애드온 > ControllerCam HUD)",  -- 1186
+        "프레임",  -- 1187
+        "화면 흐리게",  -- 1188
+        "효과",  -- 1189
+        "모양",  -- 1190
+        "퀘스트, 대화 및 지도",  -- 1191
+        "가방, 은행, 상인",  -- 1192
+        "낚시",  -- 1193
+        "접근성",  -- 1194
+        "네이티브 옵션",  -- 1195
+        "%s  |  게임패드 UI: %s  |  실행 중: %s",  -- 1196
+        "플레이어 %s, 대상 %s, 소환수 %s, 주시 대상 %s  |  게임 프레임 치움: %s  |  채팅 이동: %s",  -- 1197
+        "네이티브 옵션: 대상의 대상 %s, 재사용 대기시간 관리자 %s, 개인 자원 %s",  -- 1198
+        "글자 크기 %d%%  |  글자 음영: %s",  -- 1199
+        "상인 및 은행 도움말: %s  |  자동 판매: %s  |  흰색 장비는 잡동사니: %s",  -- 1200
+        "대기 중 가시성 %d%%  |  크기 %d%%  |  직업 색상: %s",  -- 1201
+        "게임패드 UI를 위한 최소한의 액션 게임 HUD.",  -- 1202
+        "활성화됨",  -- 1203
+        "비활성화됨: 게임 기본 프레임이 돌아왔습니다",  -- 1204
+        "마우스 및 키보드 UI에서도 사용: %s",  -- 1205
+        "게임 기본 프레임 치움: %s",  -- 1206
+        "채팅을 왼쪽 위로 이동: %s",  -- 1207
+        "직업 색상: %s",  -- 1208
+        "이 클라이언트에는 해당 옵션이 없습니다.",  -- 1209
+        "%s: %s (게임의 기본 옵션)",  -- 1210
+        "지금은 게임이 이를 받아들이지 않았습니다.",  -- 1211
+        "상인 및 은행 도움말: %s",  -- 1212
+        "자동 판매: %s",  -- 1213
+        "흰색 장비는 잡동사니: %s",  -- 1214
+        "상인 도움말이 꺼져 있습니다.",  -- 1215
+        "사용법: /cchud sell [junk | recommended | white | green | blue]",  -- 1216
+        "은행이 열리면 표시된 아이템 입금: %s",  -- 1217
+        "사용법: /cchud junk <item> (아이템을 Shift+클릭해 채팅 입력줄에 넣으세요)",  -- 1218
+        "아이템 %d: 잡동사니, 나머지와 함께 판매",  -- 1219
+        "아이템 %d: 보관, 절대 판매 안 함",  -- 1220
+        "아이템 %d: 은행용",  -- 1221
+        "글자 음영: %s",  -- 1222
+        "사용법: /cchud text <80-250>",  -- 1223
+        "글자 크기 %d%%",  -- 1224
+        "데모 중지됨",  -- 1225
+        "HUD가 실행 중이 아닙니다.",  -- 1226
+        "데모 실행 중: 가상의 전투를 반복 재생합니다. 중지하려면 /cchud demo를 다시 입력하세요.",  -- 1227
+        "사용법: /cchud idle <0-100>",  -- 1228
+        "대기 중 가시성 %d%%",  -- 1229
+        "사용법: /cchud scale <50-200>",  -- 1230
+        "크기 %d%%",  -- 1231
+        "프레임을 끌어 옮긴 다음 /cchud lock을 입력하세요.",  -- 1232
+        "프레임 고정됨",  -- 1233
+        "모든 것이 처음 상태로 돌아갔습니다: 설정, 프레임, 화면 레이아웃 (상인 표시와 가격 기록은 유지됩니다).",  -- 1234
+        "프레임이 처음 위치로 돌아왔습니다",  -- 1235
+        "알 수 없는 명령 '%s'. /cchud help를 입력하세요",  -- 1236
+        "오류 목록을 비웠습니다.",  -- 1237
+        "기록된 오류가 없습니다.",  -- 1238
+        "오류 %d개 기록됨 (최신이 마지막). /cchud errors clear로 목록을 비웁니다.",  -- 1239
+        "상태 표시",  -- 1240
+        "HUD 켜기 또는 끄기 (끄면 게임 기본 프레임이 돌아옴)",  -- 1241
+        "마우스 및 키보드 UI에서도 HUD 사용",  -- 1242
+        "우리 프레임 또는 게임 기본 프레임 중 선택",  -- 1243
+        "캐릭터 옆에 표시되는 얇은 세로 생명력 및 자원 막대",  -- 1244
+        "대상의 대상 (게임의 기본 옵션, 게임 메뉴에도 있음)",  -- 1245
+        "게임의 재사용 대기시간 관리자 (게임의 기본 옵션)",  -- 1246
+        "캐릭터 아래의 생명력과 자원 (게임의 기본 옵션)",  -- 1247
+        "버프가 시작될 때 나타나는 툴팁 (게임 자체 옵션)",  -- 1248
+        "게임 기본 플레이어 및 대상 프레임을 계속 표시(켜기) 또는 치움(끄기)",  -- 1249
+        "상인에게서: 판매할 항목 선택 (또는: sell junk, sell recommended, sell white | green | blue)",  -- 1250
+        "흰색 무기와 방어구를 잡동사니로 간주",  -- 1251
+        "아이템 표시: 항상 판매, 절대 판매 안 함, 또는 은행용 (Shift+클릭해 채팅 입력줄에 넣기)",  -- 1252
+        "은행에서: 은행에 이미 있는 물건과 은행용으로 표시한 물건을 모두 보관",  -- 1253
+        "은행에서: 이미 조금 가지고 있는 아이템 꺼내기",  -- 1254
+        "은행을 열자마자 보관",  -- 1255
+        "은행이 재료를 자동으로 받음 (게임의 기본 옵션)",  -- 1256
+        "글자 크기, 퍼센트 단위 (150이면 TV에서 보기 좋음)",  -- 1257
+        "아무 일도 없을 때 플레이어 바가 보이는 정도 (0이면 숨김)",  -- 1258
+        "프레임 크기 (퍼센트)",  -- 1259
+        "프레임을 원하는 위치로 끌기 (게임의 편집 모드로도 가능)",  -- 1260
+        "프레임을 처음 위치로 되돌리기",  -- 1261
+        "프레임 반응을 보기 위해 짧은 가상 전투 재생 (다시 입력하면 중지)",  -- 1262
+        "화면에 표시된 것을 설정과 비교 (check all은 모든 행을 나열)",  -- 1263
+        "이 클라이언트의 게임패드 UI 설명 저장 (문제 해결용)",  -- 1264
+        "이 목록 표시",  -- 1265
+        "HUD의 최근 오류, 다시 불러온 후에도 (보고용)",  -- 1266
     },
     ptBR = {
         "erro:",  -- 1
@@ -8630,266 +8624,265 @@ local TRANSLATIONS = {
         "Colocar",  -- 1005
         "Pegar bolsa",  -- 1006
         "Mais",  -- 1007
-        "Dica",  -- 1008
-        "Ocultar dica",  -- 1009
-        "Bolsas",  -- 1010
-        "%d livres",  -- 1011
-        "Espaço vazio",  -- 1012
-        "Em combate, feche suas bolsas com B.",  -- 1013
-        "para o banco",  -- 1014
-        "sem marca",  -- 1015
-        "Nenhum espaço livre.",  -- 1016
-        "Soltar aqui",  -- 1017
-        "Dividir pilha",  -- 1018
-        "Marca: %s",  -- 1019
-        "Detalhes do item",  -- 1020
-        "Destruir",  -- 1021
-        "Organizar banco",  -- 1022
-        "Organizar bolsas",  -- 1023
-        "Ver bolsas",  -- 1024
-        "Ver banco",  -- 1025
-        "Depositar os marcados",  -- 1026
-        "Vender os recomendados",  -- 1027
-        "Solte para destruir",  -- 1028
-        "Este item inicia uma missão.",  -- 1029
-        "É um item de missão.",  -- 1030
-        "Destruir %s?",  -- 1031
-        "O jogo manteve %s: destrua pelas bolsas do próprio jogo.",  -- 1032
-        "%s destruído.",  -- 1033
-        "Uma janela de bolsas com filtros rápidos",  -- 1034
-        "suas bolsas numa janela própria do HUD em vez da do jogo: todos os itens juntos, os espaços vazios reunidos no fim, suas bolsas numa fileira à parte e filtros rápidos no topo (LB e RB). O banco também, enquanto estiver aberto. Desligado: as bolsas do jogo",  -- 1035
-        "Janela de bolsas: ordem",  -- 1036
-        "Inteligente: o que você usa primeiro (consumíveis, itens com uso), depois o resto por tipo, o lixo por último e esmaecido. Por tipo: em seções com títulos próprios. Como nas bolsas: a ordem do jogo",  -- 1037
-        "Predefinição do HUD: %s, combinando com a câmera",  -- 1038
-        "predefinição: %s",  -- 1039
-        "Um layout chamado '%s' foi adicionado ao Modo de Edição do jogo. Escolha-o lá para usá-lo (Menu do Jogo > Modo de Edição > Layout).",  -- 1040
-        "predefinição desconhecida '%s'",  -- 1041
-        "Para uma TV: texto maior no HUD e no chat.",  -- 1042
-        "Para um monitor: texto no tamanho normal.",  -- 1043
-        "Nossos quadros voltaram para onde começam. Escolha o layout %s do jogo no Modo de Edição (Menu do Jogo > Modo de Edição > Layout).",  -- 1044
-        "As predefinições definem a distância da câmera",  -- 1045
-        "uma predefinição também leva a câmera à distância para a qual seu layout foi feito, uma vez (depois faça zoom à vontade)",  -- 1046
-        "Ação",  -- 1047
-        "uma visão em terceira pessoa: barras verticais finas ao lado do seu personagem, todos os efeitos ativos; fora de combate tudo esmaece",  -- 1048
-        "Clássico",  -- 1049
-        "nossos quadros onde o WoW sempre os teve, efeitos mais discretos, as barras de controle do jogo do jeito que são",  -- 1050
-        "só o que você precisa: PNJs amigáveis mostram a placa (com o que fazem) só enquanto você aponta, mira ou os tem como alvo; nomes sem títulos; fora de combate suas barras ficam como um leve sinal (vida baixa sempre aparece)",  -- 1051
-        "Mundo aberto",  -- 1052
-        "uma tela limpa para explorar: barras finas ao seu lado que descansam esmaecidas, placas sem barras de recurso, bate-papo que esmaece",  -- 1053
-        "Aventura",  -- 1054
-        "após as aventuras de mundo aberto no console: sinais vitais ao seu lado, um alvo pequeno no alto do centro, moradores só quando você aponta para eles, chat que esmaece rápido",  -- 1055
-        "Soulslike",  -- 1056
-        "suas barras no alto à esquerda, uma grande barra do alvo embaixo no centro como a de um chefe, cada golpe sentido",  -- 1057
-        "Tiro",  -- 1058
-        "barras verticais logo à direita do centro, perto de onde você mira, o alvo bem no alto, resposta forte aos golpes",  -- 1059
-        "Crossbar",  -- 1060
-        "após MMOs jogados no controle: alvo e foco no alto do centro, suas barras logo acima das barras de controle, grupo à esquerda, placas completas",  -- 1061
-        "ARPG",  -- 1062
-        "após RPGs de ação: a câmera bem afastada, seus sinais vitais embaixo à esquerda, o alvo no alto do centro, inimigos menores pequenos, cada golpe soa alto",  -- 1063
-        "Bússola",  -- 1064
-        "após RPGs em primeira pessoa: a câmera perto, suas barras embaixo no centro, o alvo sob a borda superior, moradores só quando você aponta para eles",  -- 1065
-        "Raide",  -- 1066
-        "o posicionamento do WoW com tudo que um grupo precisa: quadros de grupo e raide, porcentagens de vida e níveis nas placas",  -- 1067
-        "Seguir as predefinições do ControllerCam",  -- 1068
-        "escolher uma predefinição de câmera no ControllerCam para todo lugar também escolhe a predefinição do HUD correspondente (a câmera mantém sua própria distância)",  -- 1069
-        "Moderno",  -- 1070
-        "define todo o HUD com uma predefinição: action, classic, minimal, openworld, adventure, soulslike, shooter, crossbar, arpg, compass, raid",  -- 1071
-        "o quadro do alvo e as placas compactos ou completos, os dois de uma vez",  -- 1072
-        "o quadro do alvo compacto ou completo",  -- 1073
-        "dimensionar o texto para uma TV do outro lado da sala ou para um monitor à distância de um braço",  -- 1074
-        "pôr nossos quadros de volta onde começam, para o layout Moderno ou Clássico do próprio jogo",  -- 1075
-        "Toda a sua configuração (HUD, câmera e o layout do jogo): copie esta linha (Ctrl+C) para guardar ou compartilhar.",  -- 1076
-        "Cole uma linha de configurações do HUD (Ctrl+V) e aceite.",  -- 1077
-        "Essa linha está danificada: copie de novo, por inteiro.",  -- 1078
-        "Essa linha foi feita com uma versão mais nova: atualize o addon.",  -- 1079
-        "Isso não é uma linha de configurações do HUD.",  -- 1080
-        "Configurações importadas: %d usadas, %d deixadas de fora.",  -- 1081
-        "A configuração da câmera veio junto.",  -- 1082
-        "A configuração da câmera ficou como estava.",  -- 1083
-        "O layout do jogo agora é '%s'.",  -- 1084
-        "O layout do jogo ficou como estava.",  -- 1085
-        "suas configurações como uma linha de texto, para guardar ou compartilhar",  -- 1086
-        "pega configurações de uma linha de texto feita com /cchud export",  -- 1087
-        "O HUD fica ativo enquanto a interface de controle está em uso. Suas opções: Opções > AddOns > ControllerCam > HUD, ou /cchud.",  -- 1088
-        "Só a câmera: o HUD descansa e a interface do jogo fica como estava. /cchud on o ativa.",  -- 1089
-        "Preparar também a tela para o controle? Isso adiciona um layout chamado CCHUD ao Modo de Edição do jogo, para você escolher lá: ele põe as fileiras de recarga sob o alvo, longe dos botões do controle. Seus próprios layouts são mantidos (/cchud setup oferece isso de novo).",  -- 1090
-        "Preparar",  -- 1091
-        "Agora não",  -- 1092
-        "O ControllerCam vem com uma interface para controle, o HUD: seus próprios quadros de unidade, placas de identificação, barra de lançamento e mais enquanto a interface de controle está em uso. Você quer o HUD, ou só a câmera?",  -- 1093
-        "Câmera + HUD",  -- 1094
-        "Só a câmera",  -- 1095
-        "Este cliente não permite que addons alterem o layout.",  -- 1096
-        "perguntar de novo: a câmera com o HUD, ou só a câmera",  -- 1097
-        "oferecer de novo o layout de tela feito para o HUD (Modo de Edição do jogo)",  -- 1098
-        "Exibido enquanto a interface de controle está em uso. Arraste nossos quadros no Modo de Edição do jogo.",  -- 1099
-        "Predefinições",  -- 1100
-        "Dimensionado para",  -- 1101
-        "TV",  -- 1102
-        "Monitor",  -- 1103
-        "Ícones dos botões",  -- 1104
-        "os ícones que o jogo mostra para os botões do seu controle: encontrados sozinhos para o controle em uso, ou o tipo que você escolher",  -- 1105
-        "Fonte",  -- 1106
-        "Redefinir o layout do jogo",  -- 1107
-        "Experimente",  -- 1108
-        "Reproduzir a demonstração",  -- 1109
-        "Mostrar todos os efeitos de golpe",  -- 1110
-        "Executar a autoverificação",  -- 1111
-        "Barras de controle: compactas / completas",  -- 1112
-        "Exportar configurações",  -- 1113
-        "Importar configurações",  -- 1114
-        "Marque «Mostrar opções avançadas» na página principal para ver todas as configurações.",  -- 1115
-        "Módulos",  -- 1116
-        "Botões rápidos",  -- 1117
-        "Geral",  -- 1118
-        "HUD",  -- 1119
-        "O painel de opções não está disponível neste cliente.",  -- 1120
-        "Ativado",  -- 1121
-        "todo o HUD; desativado, os quadros do próprio jogo voltam",  -- 1122
-        "Também na interface de mouse e teclado",  -- 1123
-        "normalmente o HUD só funciona enquanto a interface de controle está em uso",  -- 1124
-        "Pôr de lado os quadros do jogo",  -- 1125
-        "esconde os quadros de jogador, alvo e foco do jogo enquanto os nossos são exibidos",  -- 1126
-        "Janela de bate-papo no canto superior esquerdo",  -- 1127
-        "move a janela de bate-papo para o canto superior esquerdo enquanto o HUD funciona",  -- 1128
-        "Barras verticais em repouso",  -- 1129
-        "quão visíveis as barras verticais ficam com a vida cheia fora de combate (0 as oculta)",  -- 1130
-        "Cores de classe",  -- 1131
-        "colore sua barra e as de outros jogadores por classe",  -- 1132
-        "Ícones de classe",  -- 1133
-        "um ícone de classe na frente do nome de um jogador no alvo e no alvo do alvo",  -- 1134
-        "Ameaça no quadro do alvo",  -- 1135
-        "um ícone de escudo e um brilho no quadro do alvo: vermelho enquanto ataca você, vermelho e amarelo quando você está prestes a puxá-lo, amarelo e azul quando você está perdendo, azul quando não está em você",  -- 1136
-        "Barras compactas em todo lugar",  -- 1137
-        "o quadro do alvo e as placas no estilo compacto, pouco mais da metade da largura (cada um ainda pode ser ajustado sozinho; predefinições nunca mudam isso)",  -- 1138
-        "Moldura de alvo compacta",  -- 1139
-        "a moldura de alvo um pouco mais da metade da largura",  -- 1140
-        "Cores da vida em combate",  -- 1141
-        "em combate, as barras de vida passam de verde a amarelo e a vermelho conforme a vida diminui",  -- 1142
-        "Sombra atrás do texto",  -- 1143
-        "uma faixa escura suave atrás do texto do alvo, para mantê-lo legível",  -- 1144
-        "Tamanho do texto",  -- 1145
-        "tamanho do texto dos nossos quadros",  -- 1146
-        "Tamanho dos quadros",  -- 1147
-        "tamanho dos nossos quadros de unidade",  -- 1148
-        "Suas barras em combate",  -- 1149
-        "quão visíveis suas barras, ajudante e foco ficam em combate até algo exigir atenção",  -- 1150
-        "Completas com vida abaixo de",  -- 1151
-        "suas barras voltam completas quando sua vida cai abaixo deste valor",  -- 1152
-        "Completas com mana abaixo de",  -- 1153
-        "suas barras voltam completas quando sua mana cai abaixo deste valor",  -- 1154
-        "Barra do jogador em repouso",  -- 1155
-        "quão visível a barra do jogador fica com a vida cheia ou fora de combate (0 a oculta)",  -- 1156
-        "Ajuda de vendedor e banco",  -- 1157
-        "o botão Vender lixo do vendedor pergunta o que vender; movimento rápido no vendedor e no banco",  -- 1158
-        "Mostrar opções avançadas",  -- 1159
-        "todas as configurações, não só os controles principais",  -- 1160
-        "Quadro do jogador",  -- 1161
-        "nossa barra do jogador, no alto à esquerda",  -- 1162
-        "Quadro do alvo",  -- 1163
-        "nossa barra do alvo, no alto ao centro",  -- 1164
-        "Barra do ajudante",  -- 1165
-        "uma pequena barra de ajudante sob a barra do jogador, ou ao lado das barras verticais",  -- 1166
-        "Quadro do foco",  -- 1167
-        "nosso quadro do foco",  -- 1168
-        "barras verticais finas de vida e poder ao lado do personagem, para uma visão em terceira pessoa (no lugar da barra do jogador)",  -- 1169
-        "Vender lixo quando um vendedor abrir",  -- 1170
-        "vende o lixo conforme suas regras assim que um vendedor abre",  -- 1171
-        "Armas e armaduras brancas são lixo",  -- 1172
-        "contar armas e armaduras brancas como sucata (nunca ferramentas, varas de pescar, equipamento com efeito de uso ou o que possa ser uma melhoria; sempre pergunta antes)",  -- 1173
-        "Depositar ao abrir o banco",  -- 1174
-        "itens marcados para o banco e, quando ativado, o que o banco já tem, entram sozinhos",  -- 1175
-        "a opção do jogo; nosso quadro pequeno a acompanha",  -- 1176
-        "Gerenciador de Tempo de Recarga",  -- 1177
-        "o Gerenciador de Tempo de Recarga do jogo",  -- 1178
-        "Exibição de Recursos Pessoais",  -- 1179
-        "sua vida e poder abaixo do seu personagem",  -- 1180
-        "O banco pega reagentes sozinho",  -- 1181
-        "a opção do jogo para o banco",  -- 1182
-        "Dica ao iniciar um buff",  -- 1183
-        "a opção do jogo: a dica de um buff aparece por um instante quando ele é aplicado (IU de controle)",  -- 1184
-        "Cores de classe para nomes no chat",  -- 1185
-        "a configuração de chat do jogo para todos os tipos de chat de uma vez: o nome de um jogador na cor da classe dele",  -- 1186
-        "abre o painel de opções (Opções > AddOns > ControllerCam HUD)",  -- 1187
-        "Quadros",  -- 1188
-        "Esmaecer a tela",  -- 1189
-        "Efeitos",  -- 1190
-        "Visual",  -- 1191
-        "Missões, bate-papo e mapa",  -- 1192
-        "Bolsas, banco e vendedor",  -- 1193
-        "Pesca",  -- 1194
-        "Acessibilidade",  -- 1195
-        "Opções nativas",  -- 1196
-        "%s  |  Interface de controle: %s  |  em execução: %s",  -- 1197
-        "jogador %s, alvo %s, ajudante %s, foco %s  |  quadros do jogo postos de lado: %s  |  bate-papo movido: %s",  -- 1198
-        "opções nativas: alvo do alvo %s, Gerenciador de Tempo de Recarga %s, recursos pessoais %s",  -- 1199
-        "tamanho do texto %d%%  |  sombra do texto: %s",  -- 1200
-        "ajuda de vendedor e banco: %s  |  venda automática: %s  |  equipamento branco é lixo: %s",  -- 1201
-        "visibilidade em repouso %d%%  |  escala %d%%  |  cores de classe: %s",  -- 1202
-        "Um HUD de ação minimalista para a interface de controle.",  -- 1203
-        "ativado",  -- 1204
-        "desativado: os quadros do próprio jogo voltaram",  -- 1205
-        "usar também na interface de mouse e teclado: %s",  -- 1206
-        "quadros do jogo postos de lado: %s",  -- 1207
-        "bate-papo movido para o canto superior esquerdo: %s",  -- 1208
-        "cores de classe: %s",  -- 1209
-        "Este cliente não tem essa opção.",  -- 1210
-        "%s: %s (opção do próprio jogo)",  -- 1211
-        "O jogo não aceitou isso agora.",  -- 1212
-        "ajuda de vendedor e banco: %s",  -- 1213
-        "venda automática: %s",  -- 1214
-        "equipamento branco é lixo: %s",  -- 1215
-        "A ajuda de vendedor está desativada.",  -- 1216
-        "uso: /cchud sell [junk | recommended | white | green | blue]",  -- 1217
-        "depositar itens marcados quando o banco abrir: %s",  -- 1218
-        "uso: /cchud junk <item> (Shift+clique no item para colocá-lo na linha de bate-papo)",  -- 1219
-        "item %d: lixo, vendido junto com o resto",  -- 1220
-        "item %d: mantido, nunca vendido",  -- 1221
-        "item %d: para o banco",  -- 1222
-        "sombra do texto: %s",  -- 1223
-        "uso: /cchud text <80-250>",  -- 1224
-        "tamanho do texto %d%%",  -- 1225
-        "demonstração parada",  -- 1226
-        "O HUD não está em execução.",  -- 1227
-        "Demonstração em andamento: uma luta inventada em repetição. Digite /cchud demo de novo para parar.",  -- 1228
-        "uso: /cchud idle <0-100>",  -- 1229
-        "visibilidade em repouso %d%%",  -- 1230
-        "uso: /cchud scale <50-200>",  -- 1231
-        "escala %d%%",  -- 1232
-        "Arraste os quadros e depois digite /cchud lock.",  -- 1233
-        "quadros travados",  -- 1234
-        "Tudo voltou a como começou: configurações, quadros e o layout de tela (suas marcas de vendedor e o histórico de preços são mantidos).",  -- 1235
-        "os quadros voltaram ao lugar de origem",  -- 1236
-        "comando desconhecido '%s'. Digite /cchud help",  -- 1237
-        "Lista de erros limpa.",  -- 1238
-        "Nenhum erro registrado.",  -- 1239
-        "%d erros registrados (o mais recente por último). /cchud errors clear limpa a lista.",  -- 1240
-        "mostrar o estado",  -- 1241
-        "liga ou desliga o HUD (desligado traz de volta os quadros do próprio jogo)",  -- 1242
-        "usar o HUD também na interface de mouse e teclado",  -- 1243
-        "usar nosso quadro para isso, ou o do próprio jogo",  -- 1244
-        "barras verticais finas de vida e poder ao lado do seu personagem",  -- 1245
-        "alvo do alvo (opção do próprio jogo, também nos menus dele)",  -- 1246
-        "o Gerenciador de Tempo de Recarga do jogo (opção do próprio jogo)",  -- 1247
-        "sua vida e poder abaixo do seu personagem (opção do próprio jogo)",  -- 1248
-        "a dica que aparece quando um buff começa (a opção própria do jogo)",  -- 1249
-        "manter visíveis os quadros de jogador e alvo do jogo (on) ou pô-los de lado (off)",  -- 1250
-        "em um vendedor: escolher o que vender (também: sell junk, sell recommended, sell white | green | blue)",  -- 1251
-        "conta armas e armaduras brancas como lixo",  -- 1252
-        "marcar um item: sempre vendido, nunca vendido, ou para o banco (Shift+clique para colocá-lo na linha de bate-papo)",  -- 1253
-        "no banco: deposita o que o banco já tem e tudo o que está marcado para ele",  -- 1254
-        "no banco: tirar aquilo de que você já carrega um pouco",  -- 1255
-        "depositar assim que o banco abrir",  -- 1256
-        "o banco pega reagentes sozinho (opção do próprio jogo)",  -- 1257
-        "tamanho do texto, em porcentagem (150 fica bom em uma TV)",  -- 1258
-        "quão visível a barra do jogador fica quando nada acontece (0 a esconde)",  -- 1259
-        "tamanho dos quadros, em porcentagem",  -- 1260
-        "arraste os quadros para onde quiser (o Modo de Edição do jogo também faz isso)",  -- 1261
-        "devolver os quadros ao lugar de origem",  -- 1262
-        "reproduz uma luta curta e inventada, para ver como os quadros reagem (de novo para parar)",  -- 1263
-        "compara o que está na tela com as configurações (check all lista cada linha)",  -- 1264
-        "salva uma descrição da interface de controle deste cliente (para solução de problemas)",  -- 1265
-        "mostrar esta lista",  -- 1266
-        "os últimos erros do HUD, mesmo após recarregar (para relatá-los)",  -- 1267
+        "Organizar",  -- 1008
+        "Bolsas",  -- 1009
+        "%d livres",  -- 1010
+        "Espaço vazio",  -- 1011
+        "Em combate, feche suas bolsas com B.",  -- 1012
+        "para o banco",  -- 1013
+        "sem marca",  -- 1014
+        "Nenhum espaço livre.",  -- 1015
+        "Soltar aqui",  -- 1016
+        "Dividir pilha",  -- 1017
+        "Marca: %s",  -- 1018
+        "Detalhes do item",  -- 1019
+        "Destruir",  -- 1020
+        "Organizar banco",  -- 1021
+        "Organizar bolsas",  -- 1022
+        "Ver bolsas",  -- 1023
+        "Ver banco",  -- 1024
+        "Depositar os marcados",  -- 1025
+        "Vender os recomendados",  -- 1026
+        "Solte para destruir",  -- 1027
+        "Este item inicia uma missão.",  -- 1028
+        "É um item de missão.",  -- 1029
+        "Destruir %s?",  -- 1030
+        "O jogo manteve %s: destrua pelas bolsas do próprio jogo.",  -- 1031
+        "%s destruído.",  -- 1032
+        "Uma janela de bolsas com filtros rápidos",  -- 1033
+        "suas bolsas numa janela própria do HUD em vez da do jogo: todos os itens juntos, os espaços vazios reunidos no fim, suas bolsas numa fileira à parte e filtros rápidos no topo (LB e RB). O banco também, enquanto estiver aberto. Desligado: as bolsas do jogo",  -- 1034
+        "Janela de bolsas: ordem",  -- 1035
+        "Inteligente: o que você usa primeiro (consumíveis, itens com uso), depois o resto por tipo, o lixo por último e esmaecido. Por tipo: em seções com títulos próprios. Como nas bolsas: a ordem do jogo",  -- 1036
+        "Predefinição do HUD: %s, combinando com a câmera",  -- 1037
+        "predefinição: %s",  -- 1038
+        "Um layout chamado '%s' foi adicionado ao Modo de Edição do jogo. Escolha-o lá para usá-lo (Menu do Jogo > Modo de Edição > Layout).",  -- 1039
+        "predefinição desconhecida '%s'",  -- 1040
+        "Para uma TV: texto maior no HUD e no chat.",  -- 1041
+        "Para um monitor: texto no tamanho normal.",  -- 1042
+        "Nossos quadros voltaram para onde começam. Escolha o layout %s do jogo no Modo de Edição (Menu do Jogo > Modo de Edição > Layout).",  -- 1043
+        "As predefinições definem a distância da câmera",  -- 1044
+        "uma predefinição também leva a câmera à distância para a qual seu layout foi feito, uma vez (depois faça zoom à vontade)",  -- 1045
+        "Ação",  -- 1046
+        "uma visão em terceira pessoa: barras verticais finas ao lado do seu personagem, todos os efeitos ativos; fora de combate tudo esmaece",  -- 1047
+        "Clássico",  -- 1048
+        "nossos quadros onde o WoW sempre os teve, efeitos mais discretos, as barras de controle do jogo do jeito que são",  -- 1049
+        "só o que você precisa: PNJs amigáveis mostram a placa (com o que fazem) só enquanto você aponta, mira ou os tem como alvo; nomes sem títulos; fora de combate suas barras ficam como um leve sinal (vida baixa sempre aparece)",  -- 1050
+        "Mundo aberto",  -- 1051
+        "uma tela limpa para explorar: barras finas ao seu lado que descansam esmaecidas, placas sem barras de recurso, bate-papo que esmaece",  -- 1052
+        "Aventura",  -- 1053
+        "após as aventuras de mundo aberto no console: sinais vitais ao seu lado, um alvo pequeno no alto do centro, moradores só quando você aponta para eles, chat que esmaece rápido",  -- 1054
+        "Soulslike",  -- 1055
+        "suas barras no alto à esquerda, uma grande barra do alvo embaixo no centro como a de um chefe, cada golpe sentido",  -- 1056
+        "Tiro",  -- 1057
+        "barras verticais logo à direita do centro, perto de onde você mira, o alvo bem no alto, resposta forte aos golpes",  -- 1058
+        "Crossbar",  -- 1059
+        "após MMOs jogados no controle: alvo e foco no alto do centro, suas barras logo acima das barras de controle, grupo à esquerda, placas completas",  -- 1060
+        "ARPG",  -- 1061
+        "após RPGs de ação: a câmera bem afastada, seus sinais vitais embaixo à esquerda, o alvo no alto do centro, inimigos menores pequenos, cada golpe soa alto",  -- 1062
+        "Bússola",  -- 1063
+        "após RPGs em primeira pessoa: a câmera perto, suas barras embaixo no centro, o alvo sob a borda superior, moradores só quando você aponta para eles",  -- 1064
+        "Raide",  -- 1065
+        "o posicionamento do WoW com tudo que um grupo precisa: quadros de grupo e raide, porcentagens de vida e níveis nas placas",  -- 1066
+        "Seguir as predefinições do ControllerCam",  -- 1067
+        "escolher uma predefinição de câmera no ControllerCam para todo lugar também escolhe a predefinição do HUD correspondente (a câmera mantém sua própria distância)",  -- 1068
+        "Moderno",  -- 1069
+        "define todo o HUD com uma predefinição: action, classic, minimal, openworld, adventure, soulslike, shooter, crossbar, arpg, compass, raid",  -- 1070
+        "o quadro do alvo e as placas compactos ou completos, os dois de uma vez",  -- 1071
+        "o quadro do alvo compacto ou completo",  -- 1072
+        "dimensionar o texto para uma TV do outro lado da sala ou para um monitor à distância de um braço",  -- 1073
+        "pôr nossos quadros de volta onde começam, para o layout Moderno ou Clássico do próprio jogo",  -- 1074
+        "Toda a sua configuração (HUD, câmera e o layout do jogo): copie esta linha (Ctrl+C) para guardar ou compartilhar.",  -- 1075
+        "Cole uma linha de configurações do HUD (Ctrl+V) e aceite.",  -- 1076
+        "Essa linha está danificada: copie de novo, por inteiro.",  -- 1077
+        "Essa linha foi feita com uma versão mais nova: atualize o addon.",  -- 1078
+        "Isso não é uma linha de configurações do HUD.",  -- 1079
+        "Configurações importadas: %d usadas, %d deixadas de fora.",  -- 1080
+        "A configuração da câmera veio junto.",  -- 1081
+        "A configuração da câmera ficou como estava.",  -- 1082
+        "O layout do jogo agora é '%s'.",  -- 1083
+        "O layout do jogo ficou como estava.",  -- 1084
+        "suas configurações como uma linha de texto, para guardar ou compartilhar",  -- 1085
+        "pega configurações de uma linha de texto feita com /cchud export",  -- 1086
+        "O HUD fica ativo enquanto a interface de controle está em uso. Suas opções: Opções > AddOns > ControllerCam > HUD, ou /cchud.",  -- 1087
+        "Só a câmera: o HUD descansa e a interface do jogo fica como estava. /cchud on o ativa.",  -- 1088
+        "Preparar também a tela para o controle? Isso adiciona um layout chamado CCHUD ao Modo de Edição do jogo, para você escolher lá: ele põe as fileiras de recarga sob o alvo, longe dos botões do controle. Seus próprios layouts são mantidos (/cchud setup oferece isso de novo).",  -- 1089
+        "Preparar",  -- 1090
+        "Agora não",  -- 1091
+        "O ControllerCam vem com uma interface para controle, o HUD: seus próprios quadros de unidade, placas de identificação, barra de lançamento e mais enquanto a interface de controle está em uso. Você quer o HUD, ou só a câmera?",  -- 1092
+        "Câmera + HUD",  -- 1093
+        "Só a câmera",  -- 1094
+        "Este cliente não permite que addons alterem o layout.",  -- 1095
+        "perguntar de novo: a câmera com o HUD, ou só a câmera",  -- 1096
+        "oferecer de novo o layout de tela feito para o HUD (Modo de Edição do jogo)",  -- 1097
+        "Exibido enquanto a interface de controle está em uso. Arraste nossos quadros no Modo de Edição do jogo.",  -- 1098
+        "Predefinições",  -- 1099
+        "Dimensionado para",  -- 1100
+        "TV",  -- 1101
+        "Monitor",  -- 1102
+        "Ícones dos botões",  -- 1103
+        "os ícones que o jogo mostra para os botões do seu controle: encontrados sozinhos para o controle em uso, ou o tipo que você escolher",  -- 1104
+        "Fonte",  -- 1105
+        "Redefinir o layout do jogo",  -- 1106
+        "Experimente",  -- 1107
+        "Reproduzir a demonstração",  -- 1108
+        "Mostrar todos os efeitos de golpe",  -- 1109
+        "Executar a autoverificação",  -- 1110
+        "Barras de controle: compactas / completas",  -- 1111
+        "Exportar configurações",  -- 1112
+        "Importar configurações",  -- 1113
+        "Marque «Mostrar opções avançadas» na página principal para ver todas as configurações.",  -- 1114
+        "Módulos",  -- 1115
+        "Botões rápidos",  -- 1116
+        "Geral",  -- 1117
+        "HUD",  -- 1118
+        "O painel de opções não está disponível neste cliente.",  -- 1119
+        "Ativado",  -- 1120
+        "todo o HUD; desativado, os quadros do próprio jogo voltam",  -- 1121
+        "Também na interface de mouse e teclado",  -- 1122
+        "normalmente o HUD só funciona enquanto a interface de controle está em uso",  -- 1123
+        "Pôr de lado os quadros do jogo",  -- 1124
+        "esconde os quadros de jogador, alvo e foco do jogo enquanto os nossos são exibidos",  -- 1125
+        "Janela de bate-papo no canto superior esquerdo",  -- 1126
+        "move a janela de bate-papo para o canto superior esquerdo enquanto o HUD funciona",  -- 1127
+        "Barras verticais em repouso",  -- 1128
+        "quão visíveis as barras verticais ficam com a vida cheia fora de combate (0 as oculta)",  -- 1129
+        "Cores de classe",  -- 1130
+        "colore sua barra e as de outros jogadores por classe",  -- 1131
+        "Ícones de classe",  -- 1132
+        "um ícone de classe na frente do nome de um jogador no alvo e no alvo do alvo",  -- 1133
+        "Ameaça no quadro do alvo",  -- 1134
+        "um ícone de escudo e um brilho no quadro do alvo: vermelho enquanto ataca você, vermelho e amarelo quando você está prestes a puxá-lo, amarelo e azul quando você está perdendo, azul quando não está em você",  -- 1135
+        "Barras compactas em todo lugar",  -- 1136
+        "o quadro do alvo e as placas no estilo compacto, pouco mais da metade da largura (cada um ainda pode ser ajustado sozinho; predefinições nunca mudam isso)",  -- 1137
+        "Moldura de alvo compacta",  -- 1138
+        "a moldura de alvo um pouco mais da metade da largura",  -- 1139
+        "Cores da vida em combate",  -- 1140
+        "em combate, as barras de vida passam de verde a amarelo e a vermelho conforme a vida diminui",  -- 1141
+        "Sombra atrás do texto",  -- 1142
+        "uma faixa escura suave atrás do texto do alvo, para mantê-lo legível",  -- 1143
+        "Tamanho do texto",  -- 1144
+        "tamanho do texto dos nossos quadros",  -- 1145
+        "Tamanho dos quadros",  -- 1146
+        "tamanho dos nossos quadros de unidade",  -- 1147
+        "Suas barras em combate",  -- 1148
+        "quão visíveis suas barras, ajudante e foco ficam em combate até algo exigir atenção",  -- 1149
+        "Completas com vida abaixo de",  -- 1150
+        "suas barras voltam completas quando sua vida cai abaixo deste valor",  -- 1151
+        "Completas com mana abaixo de",  -- 1152
+        "suas barras voltam completas quando sua mana cai abaixo deste valor",  -- 1153
+        "Barra do jogador em repouso",  -- 1154
+        "quão visível a barra do jogador fica com a vida cheia ou fora de combate (0 a oculta)",  -- 1155
+        "Ajuda de vendedor e banco",  -- 1156
+        "o botão Vender lixo do vendedor pergunta o que vender; movimento rápido no vendedor e no banco",  -- 1157
+        "Mostrar opções avançadas",  -- 1158
+        "todas as configurações, não só os controles principais",  -- 1159
+        "Quadro do jogador",  -- 1160
+        "nossa barra do jogador, no alto à esquerda",  -- 1161
+        "Quadro do alvo",  -- 1162
+        "nossa barra do alvo, no alto ao centro",  -- 1163
+        "Barra do ajudante",  -- 1164
+        "uma pequena barra de ajudante sob a barra do jogador, ou ao lado das barras verticais",  -- 1165
+        "Quadro do foco",  -- 1166
+        "nosso quadro do foco",  -- 1167
+        "barras verticais finas de vida e poder ao lado do personagem, para uma visão em terceira pessoa (no lugar da barra do jogador)",  -- 1168
+        "Vender lixo quando um vendedor abrir",  -- 1169
+        "vende o lixo conforme suas regras assim que um vendedor abre",  -- 1170
+        "Armas e armaduras brancas são lixo",  -- 1171
+        "contar armas e armaduras brancas como sucata (nunca ferramentas, varas de pescar, equipamento com efeito de uso ou o que possa ser uma melhoria; sempre pergunta antes)",  -- 1172
+        "Depositar ao abrir o banco",  -- 1173
+        "itens marcados para o banco e, quando ativado, o que o banco já tem, entram sozinhos",  -- 1174
+        "a opção do jogo; nosso quadro pequeno a acompanha",  -- 1175
+        "Gerenciador de Tempo de Recarga",  -- 1176
+        "o Gerenciador de Tempo de Recarga do jogo",  -- 1177
+        "Exibição de Recursos Pessoais",  -- 1178
+        "sua vida e poder abaixo do seu personagem",  -- 1179
+        "O banco pega reagentes sozinho",  -- 1180
+        "a opção do jogo para o banco",  -- 1181
+        "Dica ao iniciar um buff",  -- 1182
+        "a opção do jogo: a dica de um buff aparece por um instante quando ele é aplicado (IU de controle)",  -- 1183
+        "Cores de classe para nomes no chat",  -- 1184
+        "a configuração de chat do jogo para todos os tipos de chat de uma vez: o nome de um jogador na cor da classe dele",  -- 1185
+        "abre o painel de opções (Opções > AddOns > ControllerCam HUD)",  -- 1186
+        "Quadros",  -- 1187
+        "Esmaecer a tela",  -- 1188
+        "Efeitos",  -- 1189
+        "Visual",  -- 1190
+        "Missões, bate-papo e mapa",  -- 1191
+        "Bolsas, banco e vendedor",  -- 1192
+        "Pesca",  -- 1193
+        "Acessibilidade",  -- 1194
+        "Opções nativas",  -- 1195
+        "%s  |  Interface de controle: %s  |  em execução: %s",  -- 1196
+        "jogador %s, alvo %s, ajudante %s, foco %s  |  quadros do jogo postos de lado: %s  |  bate-papo movido: %s",  -- 1197
+        "opções nativas: alvo do alvo %s, Gerenciador de Tempo de Recarga %s, recursos pessoais %s",  -- 1198
+        "tamanho do texto %d%%  |  sombra do texto: %s",  -- 1199
+        "ajuda de vendedor e banco: %s  |  venda automática: %s  |  equipamento branco é lixo: %s",  -- 1200
+        "visibilidade em repouso %d%%  |  escala %d%%  |  cores de classe: %s",  -- 1201
+        "Um HUD de ação minimalista para a interface de controle.",  -- 1202
+        "ativado",  -- 1203
+        "desativado: os quadros do próprio jogo voltaram",  -- 1204
+        "usar também na interface de mouse e teclado: %s",  -- 1205
+        "quadros do jogo postos de lado: %s",  -- 1206
+        "bate-papo movido para o canto superior esquerdo: %s",  -- 1207
+        "cores de classe: %s",  -- 1208
+        "Este cliente não tem essa opção.",  -- 1209
+        "%s: %s (opção do próprio jogo)",  -- 1210
+        "O jogo não aceitou isso agora.",  -- 1211
+        "ajuda de vendedor e banco: %s",  -- 1212
+        "venda automática: %s",  -- 1213
+        "equipamento branco é lixo: %s",  -- 1214
+        "A ajuda de vendedor está desativada.",  -- 1215
+        "uso: /cchud sell [junk | recommended | white | green | blue]",  -- 1216
+        "depositar itens marcados quando o banco abrir: %s",  -- 1217
+        "uso: /cchud junk <item> (Shift+clique no item para colocá-lo na linha de bate-papo)",  -- 1218
+        "item %d: lixo, vendido junto com o resto",  -- 1219
+        "item %d: mantido, nunca vendido",  -- 1220
+        "item %d: para o banco",  -- 1221
+        "sombra do texto: %s",  -- 1222
+        "uso: /cchud text <80-250>",  -- 1223
+        "tamanho do texto %d%%",  -- 1224
+        "demonstração parada",  -- 1225
+        "O HUD não está em execução.",  -- 1226
+        "Demonstração em andamento: uma luta inventada em repetição. Digite /cchud demo de novo para parar.",  -- 1227
+        "uso: /cchud idle <0-100>",  -- 1228
+        "visibilidade em repouso %d%%",  -- 1229
+        "uso: /cchud scale <50-200>",  -- 1230
+        "escala %d%%",  -- 1231
+        "Arraste os quadros e depois digite /cchud lock.",  -- 1232
+        "quadros travados",  -- 1233
+        "Tudo voltou a como começou: configurações, quadros e o layout de tela (suas marcas de vendedor e o histórico de preços são mantidos).",  -- 1234
+        "os quadros voltaram ao lugar de origem",  -- 1235
+        "comando desconhecido '%s'. Digite /cchud help",  -- 1236
+        "Lista de erros limpa.",  -- 1237
+        "Nenhum erro registrado.",  -- 1238
+        "%d erros registrados (o mais recente por último). /cchud errors clear limpa a lista.",  -- 1239
+        "mostrar o estado",  -- 1240
+        "liga ou desliga o HUD (desligado traz de volta os quadros do próprio jogo)",  -- 1241
+        "usar o HUD também na interface de mouse e teclado",  -- 1242
+        "usar nosso quadro para isso, ou o do próprio jogo",  -- 1243
+        "barras verticais finas de vida e poder ao lado do seu personagem",  -- 1244
+        "alvo do alvo (opção do próprio jogo, também nos menus dele)",  -- 1245
+        "o Gerenciador de Tempo de Recarga do jogo (opção do próprio jogo)",  -- 1246
+        "sua vida e poder abaixo do seu personagem (opção do próprio jogo)",  -- 1247
+        "a dica que aparece quando um buff começa (a opção própria do jogo)",  -- 1248
+        "manter visíveis os quadros de jogador e alvo do jogo (on) ou pô-los de lado (off)",  -- 1249
+        "em um vendedor: escolher o que vender (também: sell junk, sell recommended, sell white | green | blue)",  -- 1250
+        "conta armas e armaduras brancas como lixo",  -- 1251
+        "marcar um item: sempre vendido, nunca vendido, ou para o banco (Shift+clique para colocá-lo na linha de bate-papo)",  -- 1252
+        "no banco: deposita o que o banco já tem e tudo o que está marcado para ele",  -- 1253
+        "no banco: tirar aquilo de que você já carrega um pouco",  -- 1254
+        "depositar assim que o banco abrir",  -- 1255
+        "o banco pega reagentes sozinho (opção do próprio jogo)",  -- 1256
+        "tamanho do texto, em porcentagem (150 fica bom em uma TV)",  -- 1257
+        "quão visível a barra do jogador fica quando nada acontece (0 a esconde)",  -- 1258
+        "tamanho dos quadros, em porcentagem",  -- 1259
+        "arraste os quadros para onde quiser (o Modo de Edição do jogo também faz isso)",  -- 1260
+        "devolver os quadros ao lugar de origem",  -- 1261
+        "reproduz uma luta curta e inventada, para ver como os quadros reagem (de novo para parar)",  -- 1262
+        "compara o que está na tela com as configurações (check all lista cada linha)",  -- 1263
+        "salva uma descrição da interface de controle deste cliente (para solução de problemas)",  -- 1264
+        "mostrar esta lista",  -- 1265
+        "os últimos erros do HUD, mesmo após recarregar (para relatá-los)",  -- 1266
     },
     ruRU = {
         "ошибка:",  -- 1
@@ -9899,266 +9892,265 @@ local TRANSLATIONS = {
         "Положить",  -- 1005
         "Взять сумку",  -- 1006
         "Ещё",  -- 1007
-        "Подсказка",  -- 1008
-        "Скрыть подсказку",  -- 1009
-        "Сумки",  -- 1010
-        "Свободно: %d",  -- 1011
-        "Пустая ячейка",  -- 1012
-        "В бою закрывайте сумки кнопкой B.",  -- 1013
-        "для банка",  -- 1014
-        "без отметки",  -- 1015
-        "Нет свободной ячейки.",  -- 1016
-        "Положить сюда",  -- 1017
-        "Разделить стопку",  -- 1018
-        "Отметка: %s",  -- 1019
-        "Сведения о предмете",  -- 1020
-        "Уничтожить",  -- 1021
-        "Сортировать банк",  -- 1022
-        "Сортировать сумки",  -- 1023
-        "Показать сумки",  -- 1024
-        "Показать банк",  -- 1025
-        "Положить отмеченное в банк",  -- 1026
-        "Продать рекомендованное",  -- 1027
-        "Отпустите, чтобы уничтожить",  -- 1028
-        "Этот предмет начинает задание.",  -- 1029
-        "Это предмет для задания.",  -- 1030
-        "Уничтожить %s?",  -- 1031
-        "Игра оставила %s: уничтожьте в её собственных сумках.",  -- 1032
-        "Уничтожено: %s.",  -- 1033
-        "Одно окно сумок с быстрыми фильтрами",  -- 1034
-        "ваши сумки в одном окне HUD вместо окна игры: все предметы вместе, пустые ячейки собраны в конце, сумки в отдельном ряду, быстрые фильтры сверху (LB и RB). И банк, пока он открыт. Выкл.: сумки игры",  -- 1035
-        "Окно сумок: порядок",  -- 1036
-        "Умная: сначала то, чем вы пользуетесь (расходуемые, предметы с использованием), затем остальное по типу, хлам в конце и бледнее. По типу: разделы со своими заголовками. Как в сумках: порядок игры",  -- 1037
-        "Пресет HUD: %s, под камеру",  -- 1038
-        "набор: %s",  -- 1039
-        "Раскладка '%s' добавлена в режим редактирования игры. Выберите её там, чтобы использовать (Меню игры > Режим редактирования > Раскладка).",  -- 1040
-        "неизвестный набор '%s'",  -- 1041
-        "Для телевизора: текст на HUD и в чате крупнее.",  -- 1042
-        "Для монитора: текст обычного размера.",  -- 1043
-        "Наши рамки вернулись на исходные места. Выберите раскладку игры %s в режиме редактирования (Меню игры > Режим редактирования > Раскладка).",  -- 1044
-        "Пресеты задают расстояние камеры",  -- 1045
-        "пресет также один раз переводит камеру на расстояние, для которого сделана его раскладка (потом приближайте свободно)",  -- 1046
-        "Действие",  -- 1047
-        "вид от третьего лица: тонкие вертикальные панели рядом с персонажем, все эффекты включены; вне боя все скрывается",  -- 1048
-        "Классический",  -- 1049
-        "наши рамки там, где они всегда были в WoW, более спокойные эффекты, панели геймпада игры без изменений",  -- 1050
-        "только нужное: дружественные НИП показывают индикатор (с их занятием), только пока вы на них указываете, целитесь или выбираете их целью; имена без званий; вне боя ваши полосы лишь слегка видны (низкое здоровье видно всегда)",  -- 1051
-        "Открытый мир",  -- 1052
-        "чистый экран для исследования: тонкие полосы рядом с вами, приглушённые в покое, индикаторы без полос ресурса, чат, который гаснет",  -- 1053
-        "Приключение",  -- 1054
-        "как в консольных приключениях с открытым миром: показатели жизни рядом с вами, небольшая цель вверху по центру, горожане только когда вы наводитесь на них, быстро угасающий чат",  -- 1055
-        "Соулслайк",  -- 1056
-        "ваши полосы слева вверху, большая полоса цели внизу по центру, как у босса, каждый удар ощутим",  -- 1057
-        "Шутер",  -- 1058
-        "вертикальные полосы чуть правее центра, рядом с прицелом, цель высоко вверху, сильный отклик на удары",  -- 1059
-        "Crossbar",  -- 1060
-        "как в MMO с контроллером: цель и фокус вверху по центру, ваши полосы чуть выше панелей геймпада, группа слева, полные индикаторы",  -- 1061
-        "ARPG",  -- 1062
-        "как в action RPG: камера далеко, ваши показатели жизни внизу слева, цель вверху по центру, мелкие враги маленькие, каждый удар громкий",  -- 1063
-        "Компас",  -- 1064
-        "как в RPG от первого лица: камера близко, ваши полосы внизу по центру, цель под верхним краем, горожане только когда вы наводитесь на них",  -- 1065
-        "Рейд",  -- 1066
-        "расположение WoW со всем, что нужно группе: рамки группы и рейда, проценты здоровья и уровни на табличках",  -- 1067
-        "Следовать пресетам ControllerCam",  -- 1068
-        "выбор пресета камеры в ControllerCam для всех ситуаций выбирает и подходящий пресет HUD (камера сохраняет своё расстояние)",  -- 1069
-        "Современный",  -- 1070
-        "установить весь HUD по пресету: action, classic, minimal, openworld, adventure, soulslike, shooter, crossbar, arpg, compass, raid",  -- 1071
-        "рамка цели и индикаторы компактные или полные, обе сразу",  -- 1072
-        "рамка цели компактная или полная",  -- 1073
-        "подобрать размер текста для телевизора в другом конце комнаты или для монитора на расстоянии вытянутой руки",  -- 1074
-        "вернуть наши рамки на исходные места под собственную раскладку игры «Современная» или «Классическая»",  -- 1075
-        "Вся ваша настройка (HUD, камера и раскладка игры): скопируйте эту строку (Ctrl+C), чтобы сохранить её или поделиться.",  -- 1076
-        "Вставьте строку с настройками HUD (Ctrl+V) и подтвердите.",  -- 1077
-        "Эта строка повреждена: скопируйте её ещё раз, целиком.",  -- 1078
-        "Эта строка создана в более новой версии: обновите аддон.",  -- 1079
-        "Это не строка с настройками HUD.",  -- 1080
-        "Настройки импортированы: принято %d, пропущено %d.",  -- 1081
-        "Настройка камеры тоже перенесена.",  -- 1082
-        "Настройка камеры оставлена как есть.",  -- 1083
-        "Раскладка игры теперь '%s'.",  -- 1084
-        "Раскладка игры оставлена как есть.",  -- 1085
-        "ваши настройки одной строкой текста, чтобы сохранить или поделиться",  -- 1086
-        "берёт настройки из строки текста, созданной командой /cchud export",  -- 1087
-        "HUD включён, пока используется интерфейс геймпада. Его настройки: Настройки > Модификации > ControllerCam > HUD или /cchud.",  -- 1088
-        "Только камера: HUD отдыхает, а интерфейс игры остаётся прежним. /cchud on включает его.",  -- 1089
-        "Настроить и экран под контроллер? В режим редактирования игры будет добавлена раскладка CCHUD, которую вы выберете там сами: она ставит ряды восстановления под целью, в стороне от кнопок геймпада. Ваши собственные раскладки сохранятся (/cchud setup предложит это снова).",  -- 1090
-        "Настроить",  -- 1091
-        "Не сейчас",  -- 1092
-        "Вместе с ControllerCam идёт интерфейс для контроллера — HUD: свои рамки персонажей, индикаторы здоровья, полоса заклинаний и многое другое, пока используется интерфейс геймпада. Включить его или оставить только камеру?",  -- 1093
-        "Камера + HUD",  -- 1094
-        "Только камера",  -- 1095
-        "Этот клиент не позволяет аддонам менять раскладку.",  -- 1096
-        "спросить ещё раз: камера вместе с HUD или только камера",  -- 1097
-        "снова предложить раскладку экрана, сделанную для HUD (режим редактирования игры)",  -- 1098
-        "Показывается, пока используется интерфейс геймпада. Перетаскивайте наши рамки в режиме редактирования игры.",  -- 1099
-        "Наборы",  -- 1100
-        "Размер под",  -- 1101
-        "Телевизор",  -- 1102
-        "Монитор",  -- 1103
-        "Значки кнопок",  -- 1104
-        "значки, которые игра показывает для кнопок вашего контроллера: определяются сами для используемого контроллера или тот вид, что вы выберете",  -- 1105
-        "Шрифт",  -- 1106
-        "Сбросить раскладку игры",  -- 1107
-        "Попробовать",  -- 1108
-        "Запустить демо",  -- 1109
-        "Показывать все эффекты ударов",  -- 1110
-        "Запустить самопроверку",  -- 1111
-        "Панели геймпада: компактные / полные",  -- 1112
-        "Экспорт настроек",  -- 1113
-        "Импорт настроек",  -- 1114
-        "Отметьте «Показывать расширенные настройки» на главной странице, чтобы увидеть все параметры.",  -- 1115
-        "Модули",  -- 1116
-        "Быстрые переключатели",  -- 1117
-        "Общие",  -- 1118
-        "HUD",  -- 1119
-        "Панель настроек недоступна в этом клиенте.",  -- 1120
-        "Включено",  -- 1121
-        "весь HUD; если выключено, возвращаются собственные рамки игры",  -- 1122
-        "Также в интерфейсе мыши и клавиатуры",  -- 1123
-        "обычно HUD работает только пока используется интерфейс геймпада",  -- 1124
-        "Убрать рамки игры",  -- 1125
-        "скрывает рамки игрока, цели и фокуса игры, пока показаны наши",  -- 1126
-        "Окно чата вверху слева",  -- 1127
-        "переносит окно чата в левый верхний угол, пока работает HUD",  -- 1128
-        "Вертикальные полосы в покое",  -- 1129
-        "насколько заметны вертикальные полосы при полном здоровье вне боя (0 скрывает их)",  -- 1130
-        "Цвета классов",  -- 1131
-        "окрашивает вашу полосу и полосы других игроков по классу",  -- 1132
-        "Значки классов",  -- 1133
-        "значок класса перед именем игрока на цели и цели цели",  -- 1134
-        "Угроза на рамке цели",  -- 1135
-        "значок щита и свечение на рамке цели: красное, пока он атакует вас, красное и жёлтое, когда вы вот-вот перетянете его, жёлтое и синее, когда вы его теряете, синее, когда он не на вас",  -- 1136
-        "Компактные полосы везде",  -- 1137
-        "рамка цели и индикаторы в компактном стиле, чуть больше половины ширины (каждую можно настроить отдельно; пресеты это не меняют)",  -- 1138
-        "Компактная рамка цели",  -- 1139
-        "рамка цели чуть больше чем вполовину уже",  -- 1140
-        "Цвета здоровья в бою",  -- 1141
-        "в бою полоски здоровья меняются от зелёного через жёлтый к красному по мере снижения здоровья",  -- 1142
-        "Затемнение под текстом",  -- 1143
-        "мягкая тёмная полоса под текстом цели для лучшей читаемости",  -- 1144
-        "Размер текста",  -- 1145
-        "размер текста на наших рамках",  -- 1146
-        "Размер рамок",  -- 1147
-        "размер наших рамок юнитов",  -- 1148
-        "Ваши панели в бою",  -- 1149
-        "насколько заметны ваши панели, питомец и фокус в бою, пока что-то не потребует внимания",  -- 1150
-        "Полные при здоровье ниже",  -- 1151
-        "ваши панели возвращаются полными, когда здоровье падает ниже этого значения",  -- 1152
-        "Полные при мане ниже",  -- 1153
-        "ваши панели возвращаются полными, когда мана падает ниже этого значения",  -- 1154
-        "Полоса игрока в покое",  -- 1155
-        "насколько видна полоса игрока при полном здоровье или вне боя (0 скрывает её)",  -- 1156
-        "Помощь у торговца и в банке",  -- 1157
-        "кнопка «Продать хлам» у торговца спрашивает, что продать; быстрое перемещение у торговца и в банке",  -- 1158
-        "Показывать расширенные настройки",  -- 1159
-        "все параметры, а не только основные переключатели",  -- 1160
-        "Рамка игрока",  -- 1161
-        "наша полоса игрока, вверху слева",  -- 1162
-        "Рамка цели",  -- 1163
-        "наша полоса цели, вверху по центру",  -- 1164
-        "Полоса питомца",  -- 1165
-        "небольшая полоса питомца под полосой игрока или рядом с вертикальными полосами",  -- 1166
-        "Рамка фокуса",  -- 1167
-        "наша рамка фокуса",  -- 1168
-        "тонкие вертикальные полосы здоровья и ресурса рядом с персонажем, для вида от третьего лица (вместо полосы игрока)",  -- 1169
-        "Продавать хлам при открытии окна торговца",  -- 1170
-        "продаёт хлам по вашим правилам, как только открывается окно торговца",  -- 1171
-        "Белые оружие и броня — хлам",  -- 1172
-        "считать белое оружие и броню хламом (никогда инструменты, удочки, снаряжение с эффектом использования или возможные улучшения; всегда спрашивать сначала)",  -- 1173
-        "Класть в банк при его открытии",  -- 1174
-        "отмеченные для банка предметы и, если включено, то, что в банке уже есть, кладутся сами",  -- 1175
-        "настройка игры; наша маленькая рамка следует ей",  -- 1176
-        "Менеджер перезарядки",  -- 1177
-        "Менеджер перезарядки игры",  -- 1178
-        "Личные ресурсы",  -- 1179
-        "ваше здоровье и ресурс под вашим персонажем",  -- 1180
-        "Банк сам забирает реагенты",  -- 1181
-        "настройка игры для банка",  -- 1182
-        "Подсказка при начале эффекта",  -- 1183
-        "опция игры: подсказка эффекта на мгновение появляется при его наложении (интерфейс геймпада)",  -- 1184
-        "Цвета классов для имён в чате",  -- 1185
-        "игровая настройка чата для всех видов чата сразу: имя игрока цветом его класса",  -- 1186
-        "открыть панель настроек (Настройки > Модификации > ControllerCam HUD)",  -- 1187
-        "Рамки",  -- 1188
-        "Затухание экрана",  -- 1189
-        "Эффекты",  -- 1190
-        "Вид",  -- 1191
-        "Задания, чат и карта",  -- 1192
-        "Сумки, банк и торговец",  -- 1193
-        "Рыбалка",  -- 1194
-        "Специальные возможности",  -- 1195
-        "Родные настройки",  -- 1196
-        "%s  |  Интерфейс геймпада: %s  |  работает: %s",  -- 1197
-        "игрок %s, цель %s, питомец %s, фокус %s  |  рамки игры убраны: %s  |  чат перенесён: %s",  -- 1198
-        "родные настройки: цель цели %s, Менеджер перезарядки %s, личные ресурсы %s",  -- 1199
-        "размер текста %d%%  |  затемнение текста: %s",  -- 1200
-        "помощь у торговца и в банке: %s  |  автопродажа: %s  |  белая экипировка — хлам: %s",  -- 1201
-        "видимость в покое %d%%  |  масштаб %d%%  |  цвета классов: %s",  -- 1202
-        "Минималистичный HUD в стиле экшена для интерфейса геймпада.",  -- 1203
-        "включено",  -- 1204
-        "выключено: собственные рамки игры вернулись",  -- 1205
-        "использовать и в интерфейсе мыши и клавиатуры: %s",  -- 1206
-        "рамки игры убраны: %s",  -- 1207
-        "чат перенесён вверх влево: %s",  -- 1208
-        "цвета классов: %s",  -- 1209
-        "В этом клиенте нет такой настройки.",  -- 1210
-        "%s: %s (собственная настройка игры)",  -- 1211
-        "Игра сейчас не приняла это.",  -- 1212
-        "помощь у торговца и в банке: %s",  -- 1213
-        "автопродажа: %s",  -- 1214
-        "белая экипировка — хлам: %s",  -- 1215
-        "Помощь у торговца выключена.",  -- 1216
-        "использование: /cchud sell [junk | recommended | white | green | blue]",  -- 1217
-        "сдавать отмеченные предметы при открытии банка: %s",  -- 1218
-        "использование: /cchud junk <item> (Shift+щелчок по предмету вставит его в строку чата)",  -- 1219
-        "предмет %d: хлам, продаётся вместе с остальным",  -- 1220
-        "предмет %d: оставлен, никогда не продаётся",  -- 1221
-        "предмет %d: для банка",  -- 1222
-        "затемнение текста: %s",  -- 1223
-        "использование: /cchud text <80-250>",  -- 1224
-        "размер текста %d%%",  -- 1225
-        "демо остановлено",  -- 1226
-        "HUD не запущен.",  -- 1227
-        "Демо запущено: придуманный бой по кругу. Введите /cchud demo ещё раз, чтобы остановить.",  -- 1228
-        "использование: /cchud idle <0-100>",  -- 1229
-        "видимость в покое %d%%",  -- 1230
-        "использование: /cchud scale <50-200>",  -- 1231
-        "масштаб %d%%",  -- 1232
-        "Перетащите рамки, затем введите /cchud lock.",  -- 1233
-        "рамки закреплены",  -- 1234
-        "Всё вернулось к исходному состоянию: настройки, рамки и раскладка экрана (ваши пометки для торговца и история цен сохранены).",  -- 1235
-        "рамки вернулись на исходные места",  -- 1236
-        "неизвестная команда «%s». Введите /cchud help",  -- 1237
-        "Список ошибок очищен.",  -- 1238
-        "Ошибок не записано.",  -- 1239
-        "Записано ошибок: %d (новые в конце). /cchud errors clear очищает список.",  -- 1240
-        "показать состояние",  -- 1241
-        "включает или выключает HUD (выключенный возвращает собственные рамки игры)",  -- 1242
-        "использовать HUD и в интерфейсе мыши и клавиатуры",  -- 1243
-        "использовать для этого нашу рамку или игровую",  -- 1244
-        "тонкие вертикальные полосы здоровья и энергии рядом с вашим персонажем",  -- 1245
-        "цель цели (собственная настройка игры, также в её меню)",  -- 1246
-        "Менеджер перезарядки игры (собственная настройка игры)",  -- 1247
-        "ваше здоровье и ресурс под вашим персонажем (собственная настройка игры)",  -- 1248
-        "подсказка, появляющаяся при начале эффекта (собственная опция игры)",  -- 1249
-        "оставить рамки игрока и цели игры видимыми (on) или убрать их (off)",  -- 1250
-        "у торговца: выбрать, что продать (также: sell junk, sell recommended, sell white | green | blue)",  -- 1251
-        "считать белое оружие и белую броню хламом",  -- 1252
-        "отметить предмет: всегда продаётся, никогда не продаётся или для банка (Shift+щелчок вставит его в строку чата)",  -- 1253
-        "в банке: положить то, что там уже есть, и всё отмеченное для банка",  -- 1254
-        "в банке: забрать то, что у вас уже есть при себе",  -- 1255
-        "класть в банк сразу при его открытии",  -- 1256
-        "банк сам забирает реагенты (собственная настройка игры)",  -- 1257
-        "размер текста в процентах (150 хорошо читается на телевизоре)",  -- 1258
-        "насколько заметна полоса игрока, когда ничего не происходит (0 скрывает её)",  -- 1259
-        "размер рамок, в процентах",  -- 1260
-        "перетащите рамки, куда хотите (режим редактирования игры тоже это умеет)",  -- 1261
-        "вернуть рамки на исходные места",  -- 1262
-        "запускает короткий придуманный бой, чтобы увидеть реакцию рамок (повторно — остановить)",  -- 1263
-        "сравнивает то, что на экране, с настройками (check all перечисляет каждую строку)",  -- 1264
-        "сохраняет описание интерфейса геймпада этого клиента (для поиска неисправностей)",  -- 1265
-        "показать этот список",  -- 1266
-        "последние ошибки HUD, и после перезагрузки (чтобы сообщить о них)",  -- 1267
+        "Сортировать",  -- 1008
+        "Сумки",  -- 1009
+        "Свободно: %d",  -- 1010
+        "Пустая ячейка",  -- 1011
+        "В бою закрывайте сумки кнопкой B.",  -- 1012
+        "для банка",  -- 1013
+        "без отметки",  -- 1014
+        "Нет свободной ячейки.",  -- 1015
+        "Положить сюда",  -- 1016
+        "Разделить стопку",  -- 1017
+        "Отметка: %s",  -- 1018
+        "Сведения о предмете",  -- 1019
+        "Уничтожить",  -- 1020
+        "Сортировать банк",  -- 1021
+        "Сортировать сумки",  -- 1022
+        "Показать сумки",  -- 1023
+        "Показать банк",  -- 1024
+        "Положить отмеченное в банк",  -- 1025
+        "Продать рекомендованное",  -- 1026
+        "Отпустите, чтобы уничтожить",  -- 1027
+        "Этот предмет начинает задание.",  -- 1028
+        "Это предмет для задания.",  -- 1029
+        "Уничтожить %s?",  -- 1030
+        "Игра оставила %s: уничтожьте в её собственных сумках.",  -- 1031
+        "Уничтожено: %s.",  -- 1032
+        "Одно окно сумок с быстрыми фильтрами",  -- 1033
+        "ваши сумки в одном окне HUD вместо окна игры: все предметы вместе, пустые ячейки собраны в конце, сумки в отдельном ряду, быстрые фильтры сверху (LB и RB). И банк, пока он открыт. Выкл.: сумки игры",  -- 1034
+        "Окно сумок: порядок",  -- 1035
+        "Умная: сначала то, чем вы пользуетесь (расходуемые, предметы с использованием), затем остальное по типу, хлам в конце и бледнее. По типу: разделы со своими заголовками. Как в сумках: порядок игры",  -- 1036
+        "Пресет HUD: %s, под камеру",  -- 1037
+        "набор: %s",  -- 1038
+        "Раскладка '%s' добавлена в режим редактирования игры. Выберите её там, чтобы использовать (Меню игры > Режим редактирования > Раскладка).",  -- 1039
+        "неизвестный набор '%s'",  -- 1040
+        "Для телевизора: текст на HUD и в чате крупнее.",  -- 1041
+        "Для монитора: текст обычного размера.",  -- 1042
+        "Наши рамки вернулись на исходные места. Выберите раскладку игры %s в режиме редактирования (Меню игры > Режим редактирования > Раскладка).",  -- 1043
+        "Пресеты задают расстояние камеры",  -- 1044
+        "пресет также один раз переводит камеру на расстояние, для которого сделана его раскладка (потом приближайте свободно)",  -- 1045
+        "Действие",  -- 1046
+        "вид от третьего лица: тонкие вертикальные панели рядом с персонажем, все эффекты включены; вне боя все скрывается",  -- 1047
+        "Классический",  -- 1048
+        "наши рамки там, где они всегда были в WoW, более спокойные эффекты, панели геймпада игры без изменений",  -- 1049
+        "только нужное: дружественные НИП показывают индикатор (с их занятием), только пока вы на них указываете, целитесь или выбираете их целью; имена без званий; вне боя ваши полосы лишь слегка видны (низкое здоровье видно всегда)",  -- 1050
+        "Открытый мир",  -- 1051
+        "чистый экран для исследования: тонкие полосы рядом с вами, приглушённые в покое, индикаторы без полос ресурса, чат, который гаснет",  -- 1052
+        "Приключение",  -- 1053
+        "как в консольных приключениях с открытым миром: показатели жизни рядом с вами, небольшая цель вверху по центру, горожане только когда вы наводитесь на них, быстро угасающий чат",  -- 1054
+        "Соулслайк",  -- 1055
+        "ваши полосы слева вверху, большая полоса цели внизу по центру, как у босса, каждый удар ощутим",  -- 1056
+        "Шутер",  -- 1057
+        "вертикальные полосы чуть правее центра, рядом с прицелом, цель высоко вверху, сильный отклик на удары",  -- 1058
+        "Crossbar",  -- 1059
+        "как в MMO с контроллером: цель и фокус вверху по центру, ваши полосы чуть выше панелей геймпада, группа слева, полные индикаторы",  -- 1060
+        "ARPG",  -- 1061
+        "как в action RPG: камера далеко, ваши показатели жизни внизу слева, цель вверху по центру, мелкие враги маленькие, каждый удар громкий",  -- 1062
+        "Компас",  -- 1063
+        "как в RPG от первого лица: камера близко, ваши полосы внизу по центру, цель под верхним краем, горожане только когда вы наводитесь на них",  -- 1064
+        "Рейд",  -- 1065
+        "расположение WoW со всем, что нужно группе: рамки группы и рейда, проценты здоровья и уровни на табличках",  -- 1066
+        "Следовать пресетам ControllerCam",  -- 1067
+        "выбор пресета камеры в ControllerCam для всех ситуаций выбирает и подходящий пресет HUD (камера сохраняет своё расстояние)",  -- 1068
+        "Современный",  -- 1069
+        "установить весь HUD по пресету: action, classic, minimal, openworld, adventure, soulslike, shooter, crossbar, arpg, compass, raid",  -- 1070
+        "рамка цели и индикаторы компактные или полные, обе сразу",  -- 1071
+        "рамка цели компактная или полная",  -- 1072
+        "подобрать размер текста для телевизора в другом конце комнаты или для монитора на расстоянии вытянутой руки",  -- 1073
+        "вернуть наши рамки на исходные места под собственную раскладку игры «Современная» или «Классическая»",  -- 1074
+        "Вся ваша настройка (HUD, камера и раскладка игры): скопируйте эту строку (Ctrl+C), чтобы сохранить её или поделиться.",  -- 1075
+        "Вставьте строку с настройками HUD (Ctrl+V) и подтвердите.",  -- 1076
+        "Эта строка повреждена: скопируйте её ещё раз, целиком.",  -- 1077
+        "Эта строка создана в более новой версии: обновите аддон.",  -- 1078
+        "Это не строка с настройками HUD.",  -- 1079
+        "Настройки импортированы: принято %d, пропущено %d.",  -- 1080
+        "Настройка камеры тоже перенесена.",  -- 1081
+        "Настройка камеры оставлена как есть.",  -- 1082
+        "Раскладка игры теперь '%s'.",  -- 1083
+        "Раскладка игры оставлена как есть.",  -- 1084
+        "ваши настройки одной строкой текста, чтобы сохранить или поделиться",  -- 1085
+        "берёт настройки из строки текста, созданной командой /cchud export",  -- 1086
+        "HUD включён, пока используется интерфейс геймпада. Его настройки: Настройки > Модификации > ControllerCam > HUD или /cchud.",  -- 1087
+        "Только камера: HUD отдыхает, а интерфейс игры остаётся прежним. /cchud on включает его.",  -- 1088
+        "Настроить и экран под контроллер? В режим редактирования игры будет добавлена раскладка CCHUD, которую вы выберете там сами: она ставит ряды восстановления под целью, в стороне от кнопок геймпада. Ваши собственные раскладки сохранятся (/cchud setup предложит это снова).",  -- 1089
+        "Настроить",  -- 1090
+        "Не сейчас",  -- 1091
+        "Вместе с ControllerCam идёт интерфейс для контроллера — HUD: свои рамки персонажей, индикаторы здоровья, полоса заклинаний и многое другое, пока используется интерфейс геймпада. Включить его или оставить только камеру?",  -- 1092
+        "Камера + HUD",  -- 1093
+        "Только камера",  -- 1094
+        "Этот клиент не позволяет аддонам менять раскладку.",  -- 1095
+        "спросить ещё раз: камера вместе с HUD или только камера",  -- 1096
+        "снова предложить раскладку экрана, сделанную для HUD (режим редактирования игры)",  -- 1097
+        "Показывается, пока используется интерфейс геймпада. Перетаскивайте наши рамки в режиме редактирования игры.",  -- 1098
+        "Наборы",  -- 1099
+        "Размер под",  -- 1100
+        "Телевизор",  -- 1101
+        "Монитор",  -- 1102
+        "Значки кнопок",  -- 1103
+        "значки, которые игра показывает для кнопок вашего контроллера: определяются сами для используемого контроллера или тот вид, что вы выберете",  -- 1104
+        "Шрифт",  -- 1105
+        "Сбросить раскладку игры",  -- 1106
+        "Попробовать",  -- 1107
+        "Запустить демо",  -- 1108
+        "Показывать все эффекты ударов",  -- 1109
+        "Запустить самопроверку",  -- 1110
+        "Панели геймпада: компактные / полные",  -- 1111
+        "Экспорт настроек",  -- 1112
+        "Импорт настроек",  -- 1113
+        "Отметьте «Показывать расширенные настройки» на главной странице, чтобы увидеть все параметры.",  -- 1114
+        "Модули",  -- 1115
+        "Быстрые переключатели",  -- 1116
+        "Общие",  -- 1117
+        "HUD",  -- 1118
+        "Панель настроек недоступна в этом клиенте.",  -- 1119
+        "Включено",  -- 1120
+        "весь HUD; если выключено, возвращаются собственные рамки игры",  -- 1121
+        "Также в интерфейсе мыши и клавиатуры",  -- 1122
+        "обычно HUD работает только пока используется интерфейс геймпада",  -- 1123
+        "Убрать рамки игры",  -- 1124
+        "скрывает рамки игрока, цели и фокуса игры, пока показаны наши",  -- 1125
+        "Окно чата вверху слева",  -- 1126
+        "переносит окно чата в левый верхний угол, пока работает HUD",  -- 1127
+        "Вертикальные полосы в покое",  -- 1128
+        "насколько заметны вертикальные полосы при полном здоровье вне боя (0 скрывает их)",  -- 1129
+        "Цвета классов",  -- 1130
+        "окрашивает вашу полосу и полосы других игроков по классу",  -- 1131
+        "Значки классов",  -- 1132
+        "значок класса перед именем игрока на цели и цели цели",  -- 1133
+        "Угроза на рамке цели",  -- 1134
+        "значок щита и свечение на рамке цели: красное, пока он атакует вас, красное и жёлтое, когда вы вот-вот перетянете его, жёлтое и синее, когда вы его теряете, синее, когда он не на вас",  -- 1135
+        "Компактные полосы везде",  -- 1136
+        "рамка цели и индикаторы в компактном стиле, чуть больше половины ширины (каждую можно настроить отдельно; пресеты это не меняют)",  -- 1137
+        "Компактная рамка цели",  -- 1138
+        "рамка цели чуть больше чем вполовину уже",  -- 1139
+        "Цвета здоровья в бою",  -- 1140
+        "в бою полоски здоровья меняются от зелёного через жёлтый к красному по мере снижения здоровья",  -- 1141
+        "Затемнение под текстом",  -- 1142
+        "мягкая тёмная полоса под текстом цели для лучшей читаемости",  -- 1143
+        "Размер текста",  -- 1144
+        "размер текста на наших рамках",  -- 1145
+        "Размер рамок",  -- 1146
+        "размер наших рамок юнитов",  -- 1147
+        "Ваши панели в бою",  -- 1148
+        "насколько заметны ваши панели, питомец и фокус в бою, пока что-то не потребует внимания",  -- 1149
+        "Полные при здоровье ниже",  -- 1150
+        "ваши панели возвращаются полными, когда здоровье падает ниже этого значения",  -- 1151
+        "Полные при мане ниже",  -- 1152
+        "ваши панели возвращаются полными, когда мана падает ниже этого значения",  -- 1153
+        "Полоса игрока в покое",  -- 1154
+        "насколько видна полоса игрока при полном здоровье или вне боя (0 скрывает её)",  -- 1155
+        "Помощь у торговца и в банке",  -- 1156
+        "кнопка «Продать хлам» у торговца спрашивает, что продать; быстрое перемещение у торговца и в банке",  -- 1157
+        "Показывать расширенные настройки",  -- 1158
+        "все параметры, а не только основные переключатели",  -- 1159
+        "Рамка игрока",  -- 1160
+        "наша полоса игрока, вверху слева",  -- 1161
+        "Рамка цели",  -- 1162
+        "наша полоса цели, вверху по центру",  -- 1163
+        "Полоса питомца",  -- 1164
+        "небольшая полоса питомца под полосой игрока или рядом с вертикальными полосами",  -- 1165
+        "Рамка фокуса",  -- 1166
+        "наша рамка фокуса",  -- 1167
+        "тонкие вертикальные полосы здоровья и ресурса рядом с персонажем, для вида от третьего лица (вместо полосы игрока)",  -- 1168
+        "Продавать хлам при открытии окна торговца",  -- 1169
+        "продаёт хлам по вашим правилам, как только открывается окно торговца",  -- 1170
+        "Белые оружие и броня — хлам",  -- 1171
+        "считать белое оружие и броню хламом (никогда инструменты, удочки, снаряжение с эффектом использования или возможные улучшения; всегда спрашивать сначала)",  -- 1172
+        "Класть в банк при его открытии",  -- 1173
+        "отмеченные для банка предметы и, если включено, то, что в банке уже есть, кладутся сами",  -- 1174
+        "настройка игры; наша маленькая рамка следует ей",  -- 1175
+        "Менеджер перезарядки",  -- 1176
+        "Менеджер перезарядки игры",  -- 1177
+        "Личные ресурсы",  -- 1178
+        "ваше здоровье и ресурс под вашим персонажем",  -- 1179
+        "Банк сам забирает реагенты",  -- 1180
+        "настройка игры для банка",  -- 1181
+        "Подсказка при начале эффекта",  -- 1182
+        "опция игры: подсказка эффекта на мгновение появляется при его наложении (интерфейс геймпада)",  -- 1183
+        "Цвета классов для имён в чате",  -- 1184
+        "игровая настройка чата для всех видов чата сразу: имя игрока цветом его класса",  -- 1185
+        "открыть панель настроек (Настройки > Модификации > ControllerCam HUD)",  -- 1186
+        "Рамки",  -- 1187
+        "Затухание экрана",  -- 1188
+        "Эффекты",  -- 1189
+        "Вид",  -- 1190
+        "Задания, чат и карта",  -- 1191
+        "Сумки, банк и торговец",  -- 1192
+        "Рыбалка",  -- 1193
+        "Специальные возможности",  -- 1194
+        "Родные настройки",  -- 1195
+        "%s  |  Интерфейс геймпада: %s  |  работает: %s",  -- 1196
+        "игрок %s, цель %s, питомец %s, фокус %s  |  рамки игры убраны: %s  |  чат перенесён: %s",  -- 1197
+        "родные настройки: цель цели %s, Менеджер перезарядки %s, личные ресурсы %s",  -- 1198
+        "размер текста %d%%  |  затемнение текста: %s",  -- 1199
+        "помощь у торговца и в банке: %s  |  автопродажа: %s  |  белая экипировка — хлам: %s",  -- 1200
+        "видимость в покое %d%%  |  масштаб %d%%  |  цвета классов: %s",  -- 1201
+        "Минималистичный HUD в стиле экшена для интерфейса геймпада.",  -- 1202
+        "включено",  -- 1203
+        "выключено: собственные рамки игры вернулись",  -- 1204
+        "использовать и в интерфейсе мыши и клавиатуры: %s",  -- 1205
+        "рамки игры убраны: %s",  -- 1206
+        "чат перенесён вверх влево: %s",  -- 1207
+        "цвета классов: %s",  -- 1208
+        "В этом клиенте нет такой настройки.",  -- 1209
+        "%s: %s (собственная настройка игры)",  -- 1210
+        "Игра сейчас не приняла это.",  -- 1211
+        "помощь у торговца и в банке: %s",  -- 1212
+        "автопродажа: %s",  -- 1213
+        "белая экипировка — хлам: %s",  -- 1214
+        "Помощь у торговца выключена.",  -- 1215
+        "использование: /cchud sell [junk | recommended | white | green | blue]",  -- 1216
+        "сдавать отмеченные предметы при открытии банка: %s",  -- 1217
+        "использование: /cchud junk <item> (Shift+щелчок по предмету вставит его в строку чата)",  -- 1218
+        "предмет %d: хлам, продаётся вместе с остальным",  -- 1219
+        "предмет %d: оставлен, никогда не продаётся",  -- 1220
+        "предмет %d: для банка",  -- 1221
+        "затемнение текста: %s",  -- 1222
+        "использование: /cchud text <80-250>",  -- 1223
+        "размер текста %d%%",  -- 1224
+        "демо остановлено",  -- 1225
+        "HUD не запущен.",  -- 1226
+        "Демо запущено: придуманный бой по кругу. Введите /cchud demo ещё раз, чтобы остановить.",  -- 1227
+        "использование: /cchud idle <0-100>",  -- 1228
+        "видимость в покое %d%%",  -- 1229
+        "использование: /cchud scale <50-200>",  -- 1230
+        "масштаб %d%%",  -- 1231
+        "Перетащите рамки, затем введите /cchud lock.",  -- 1232
+        "рамки закреплены",  -- 1233
+        "Всё вернулось к исходному состоянию: настройки, рамки и раскладка экрана (ваши пометки для торговца и история цен сохранены).",  -- 1234
+        "рамки вернулись на исходные места",  -- 1235
+        "неизвестная команда «%s». Введите /cchud help",  -- 1236
+        "Список ошибок очищен.",  -- 1237
+        "Ошибок не записано.",  -- 1238
+        "Записано ошибок: %d (новые в конце). /cchud errors clear очищает список.",  -- 1239
+        "показать состояние",  -- 1240
+        "включает или выключает HUD (выключенный возвращает собственные рамки игры)",  -- 1241
+        "использовать HUD и в интерфейсе мыши и клавиатуры",  -- 1242
+        "использовать для этого нашу рамку или игровую",  -- 1243
+        "тонкие вертикальные полосы здоровья и энергии рядом с вашим персонажем",  -- 1244
+        "цель цели (собственная настройка игры, также в её меню)",  -- 1245
+        "Менеджер перезарядки игры (собственная настройка игры)",  -- 1246
+        "ваше здоровье и ресурс под вашим персонажем (собственная настройка игры)",  -- 1247
+        "подсказка, появляющаяся при начале эффекта (собственная опция игры)",  -- 1248
+        "оставить рамки игрока и цели игры видимыми (on) или убрать их (off)",  -- 1249
+        "у торговца: выбрать, что продать (также: sell junk, sell recommended, sell white | green | blue)",  -- 1250
+        "считать белое оружие и белую броню хламом",  -- 1251
+        "отметить предмет: всегда продаётся, никогда не продаётся или для банка (Shift+щелчок вставит его в строку чата)",  -- 1252
+        "в банке: положить то, что там уже есть, и всё отмеченное для банка",  -- 1253
+        "в банке: забрать то, что у вас уже есть при себе",  -- 1254
+        "класть в банк сразу при его открытии",  -- 1255
+        "банк сам забирает реагенты (собственная настройка игры)",  -- 1256
+        "размер текста в процентах (150 хорошо читается на телевизоре)",  -- 1257
+        "насколько заметна полоса игрока, когда ничего не происходит (0 скрывает её)",  -- 1258
+        "размер рамок, в процентах",  -- 1259
+        "перетащите рамки, куда хотите (режим редактирования игры тоже это умеет)",  -- 1260
+        "вернуть рамки на исходные места",  -- 1261
+        "запускает короткий придуманный бой, чтобы увидеть реакцию рамок (повторно — остановить)",  -- 1262
+        "сравнивает то, что на экране, с настройками (check all перечисляет каждую строку)",  -- 1263
+        "сохраняет описание интерфейса геймпада этого клиента (для поиска неисправностей)",  -- 1264
+        "показать этот список",  -- 1265
+        "последние ошибки HUD, и после перезагрузки (чтобы сообщить о них)",  -- 1266
     },
     zhCN = {
         "错误：",  -- 1
@@ -11168,266 +11160,265 @@ local TRANSLATIONS = {
         "放入",  -- 1005
         "拿起背包",  -- 1006
         "更多",  -- 1007
-        "提示",  -- 1008
-        "隐藏提示",  -- 1009
-        "背包",  -- 1010
-        "%d 格空闲",  -- 1011
-        "空格",  -- 1012
-        "战斗中请用 B 关闭背包。",  -- 1013
-        "存银行",  -- 1014
-        "无标记",  -- 1015
-        "没有空格。",  -- 1016
-        "放在这里",  -- 1017
-        "拆分堆叠",  -- 1018
-        "标记：%s",  -- 1019
-        "物品详情",  -- 1020
-        "摧毁",  -- 1021
-        "整理银行",  -- 1022
-        "整理背包",  -- 1023
-        "显示背包",  -- 1024
-        "显示银行",  -- 1025
-        "存入已标记物品",  -- 1026
-        "出售建议物品",  -- 1027
-        "松开以摧毁",  -- 1028
-        "该物品会开始一个任务。",  -- 1029
-        "这是任务物品。",  -- 1030
-        "摧毁%s？",  -- 1031
-        "游戏保留了%s：请在游戏自己的背包中摧毁。",  -- 1032
-        "已摧毁%s。",  -- 1033
-        "带快速筛选的统一背包窗口",  -- 1034
-        "用 HUD 自己的一个窗口代替游戏的背包：所有物品放在一起，空格集中在最后，背包单独一排，顶部有快速筛选（LB 和 RB）。银行打开时也包括银行。关闭：使用游戏自己的背包",  -- 1035
-        "背包窗口：排序",  -- 1036
-        "智能：先放你会使用的（消耗品、有使用效果的物品），其余按类型，垃圾放最后并变淡。按类型：分区显示，各有标题。按背包顺序：游戏自己的顺序",  -- 1037
-        "HUD预设：%s，与镜头匹配",  -- 1038
-        "预设：%s",  -- 1039
-        "名为“%s”的布局已添加到游戏的编辑模式。请在那里选择它以使用（游戏菜单 > 编辑模式 > 布局）。",  -- 1040
-        "未知预设 '%s'",  -- 1041
-        "适合电视：HUD 和聊天中的文字更大。",  -- 1042
-        "适合显示器：文字为普通大小。",  -- 1043
-        "我们的框体已回到起始位置。请在编辑模式中选择游戏的%s布局（游戏菜单 > 编辑模式 > 布局）。",  -- 1044
-        "预设会设置镜头距离",  -- 1045
-        "预设还会把镜头一次性调到其布局所设计的距离（之后可自由缩放）",  -- 1046
-        "动作",  -- 1047
-        "第三人称视角：角色旁的纤细竖条，所有效果开启；脱战时一切淡出",  -- 1048
-        "经典",  -- 1049
-        "我们的框体位于魔兽世界一贯的位置，特效更柔和，保留游戏自带的手柄动作条",  -- 1050
-        "只显示需要的：友方NPC只在你指向、瞄准或选中时显示姓名板（含职能）；名字不带头衔；脱战时你的条淡淡显示（生命值低时总会显示）",  -- 1051
-        "开放世界",  -- 1052
-        "适合探索的干净界面：身旁静息时变淡的细条、不带能量条的姓名板、会淡出的聊天",  -- 1053
-        "冒险",  -- 1054
-        "参照主机开放世界冒险：生命状态在你身旁，小目标框在中上方，村民仅在你指向时显示，聊天快速淡出",  -- 1055
-        "魂系",  -- 1056
-        "你的条在左上角，目标条像首领血条一样大而居中靠下，每一击都有感觉",  -- 1057
-        "射击",  -- 1058
-        "中央偏右的竖条靠近准星，目标在上方，强烈的命中反馈",  -- 1059
-        "十字栏",  -- 1060
-        "参照手柄玩的MMO：目标和焦点在中上方，你的条紧贴手柄动作条上方，小队在左侧，完整姓名板",  -- 1061
-        "ARPG",  -- 1062
-        "参照动作RPG：镜头拉远，生命状态在左下方，目标在中上方，杂兵显示较小，每次命中都很醒目",  -- 1063
-        "罗盘",  -- 1064
-        "参照第一人称RPG：镜头拉近，你的条在中下方，目标在顶部边缘下方，村民仅在你指向时显示",  -- 1065
-        "团队",  -- 1066
-        "WoW 原有布局加上团队所需的一切：小队和团队框体、姓名板上的生命百分比和等级",  -- 1067
-        "跟随ControllerCam的预设",  -- 1068
-        "在ControllerCam中为所有情境选择镜头预设时，也会选择匹配的HUD预设（镜头保持自己的距离）",  -- 1069
-        "现代",  -- 1070
-        "将整个HUD设为预设：action, classic, minimal, openworld, adventure, soulslike, shooter, crossbar, arpg, compass, raid",  -- 1071
-        "目标框体和姓名板同时设为紧凑或完整",  -- 1072
-        "目标框体设为紧凑或完整",  -- 1073
-        "按房间另一头的电视或一臂之遥的显示器来设定文字大小",  -- 1074
-        "把我们的框体放回起始位置，以配合游戏自带的现代或经典布局",  -- 1075
-        "你的整套设置（HUD、镜头和游戏布局）：复制这一行（Ctrl+C）以保存或分享。",  -- 1076
-        "粘贴一行 HUD 设置（Ctrl+V）并确认。",  -- 1077
-        "这一行已损坏：请重新完整复制。",  -- 1078
-        "这一行由更新的版本生成：请更新插件。",  -- 1079
-        "这不是一行 HUD 设置。",  -- 1080
-        "设置已导入：采用 %d 项，略过 %d 项。",  -- 1081
-        "镜头设置也一并导入了。",  -- 1082
-        "镜头设置保持原样。",  -- 1083
-        "游戏布局现在是“%s”。",  -- 1084
-        "游戏布局保持原样。",  -- 1085
-        "你的设置，作为一行文本，用于保存或分享",  -- 1086
-        "从由 /cchud export 生成的文本行中读取设置",  -- 1087
-        "使用手柄界面时 HUD 已开启。它的选项：选项 > 插件 > ControllerCam > HUD，或 /cchud。",  -- 1088
-        "仅镜头：HUD 休息，游戏界面保持原样。/cchud on 可将其开启。",  -- 1089
-        "要同时为手柄设置屏幕吗？这会在游戏的编辑模式中添加一个名为 CCHUD 的布局，由你在那里选择：它把冷却行放在目标下方，避开手柄按键。你自己的布局会保留（/cchud setup 可再次提供此选项）。",  -- 1090
-        "设置",  -- 1091
-        "暂不",  -- 1092
-        "ControllerCam 附带一套手柄界面，即 HUD：使用手柄界面时显示它自己的单位框体、姓名板、施法条等。你想要它，还是只要镜头？",  -- 1093
-        "镜头 + HUD",  -- 1094
-        "仅镜头",  -- 1095
-        "此客户端不允许插件更改布局。",  -- 1096
-        "再问一次：镜头加 HUD，还是只要镜头",  -- 1097
-        "再次提供为 HUD 制作的屏幕布局（游戏的编辑模式）",  -- 1098
-        "使用游戏手柄界面时显示。请在游戏的编辑模式中拖动我们的框体。",  -- 1099
-        "预设",  -- 1100
-        "适合的屏幕",  -- 1101
-        "电视",  -- 1102
-        "显示器",  -- 1103
-        "按键图标",  -- 1104
-        "游戏为你的手柄按键显示的图标：根据正在使用的手柄自动识别，或你选择的类型",  -- 1105
-        "字体",  -- 1106
-        "重置游戏布局",  -- 1107
-        "试一试",  -- 1108
-        "播放演示",  -- 1109
-        "显示所有命中特效",  -- 1110
-        "运行自检",  -- 1111
-        "手柄动作条：紧凑 / 完整",  -- 1112
-        "导出设置",  -- 1113
-        "导入设置",  -- 1114
-        "在主页面勾选「显示高级选项」以查看所有设置。",  -- 1115
-        "模块",  -- 1116
-        "快速开关",  -- 1117
-        "通用",  -- 1118
-        "HUD",  -- 1119
-        "此客户端无法使用选项面板。",  -- 1120
-        "启用",  -- 1121
-        "整个 HUD；关闭后恢复游戏自带的框体",  -- 1122
-        "鼠标和键盘界面中也启用",  -- 1123
-        "通常 HUD 仅在使用游戏手柄界面时运行",  -- 1124
-        "隐藏游戏自带的框体",  -- 1125
-        "显示我们的框体时，隐藏游戏的玩家、目标和焦点框体",  -- 1126
-        "聊天窗口移到左上角",  -- 1127
-        "HUD 运行时将聊天窗口移到左上角",  -- 1128
-        "空闲时的垂直条",  -- 1129
-        "非战斗状态下生命值已满时，垂直条保持的可见程度（0 为隐藏）",  -- 1130
-        "职业颜色",  -- 1131
-        "按职业为你的血条和其他玩家的血条着色",  -- 1132
-        "职业图标",  -- 1133
-        "在目标和目标的目标的玩家名字前显示职业图标",  -- 1134
-        "目标框体威胁",  -- 1135
-        "目标框体上的盾牌图标和光晕：攻击你时为红色，即将拉到仇恨时红黄交替，正在失去仇恨时黄蓝交替，不在你身上时为蓝色",  -- 1136
-        "全部使用紧凑条",  -- 1137
-        "目标框体和姓名板使用紧凑样式，宽度略多于一半（仍可分别设置；预设不会改变它）",  -- 1138
-        "紧凑目标框体",  -- 1139
-        "目标框体宽度略大于一半",  -- 1140
-        "战斗中的生命值颜色",  -- 1141
-        "战斗中，生命值条随生命值下降由绿色经黄色变为红色",  -- 1142
-        "文字背景阴影",  -- 1143
-        "在目标文字后加一条淡淡的暗带，使其易于阅读",  -- 1144
-        "文字大小",  -- 1145
-        "我们框体上文字的大小",  -- 1146
-        "框体大小",  -- 1147
-        "我们的单位框体的大小",  -- 1148
-        "战斗中的动作条",  -- 1149
-        "在有事需要注意之前，战斗中你的动作条、宠物和焦点有多明显",  -- 1150
-        "生命值低于时完整",  -- 1151
-        "当你的生命值低于此值时，动作条恢复为完整",  -- 1152
-        "法力值低于时完整",  -- 1153
-        "当你的法力值低于此值时，动作条恢复为完整",  -- 1154
-        "空闲时的玩家条",  -- 1155
-        "生命值全满或脱离战斗时玩家条的可见程度（0 为隐藏）",  -- 1156
-        "商人和银行帮助",  -- 1157
-        "商人的“出售垃圾”按钮会询问出售什么；商人和银行处可快速移动",  -- 1158
-        "显示高级选项",  -- 1159
-        "所有设置，而不仅是主要开关",  -- 1160
-        "玩家框体",  -- 1161
-        "我们的玩家条，左上角",  -- 1162
-        "目标框体",  -- 1163
-        "我们的目标条，顶部中间",  -- 1164
-        "宠物条",  -- 1165
-        "玩家条下方或竖直条旁边的小型宠物条",  -- 1166
-        "焦点框体",  -- 1167
-        "我们的焦点框体",  -- 1168
-        "角色旁的细长竖直生命条和能量条，适合第三人称视角（代替玩家条）",  -- 1169
-        "商人打开时出售垃圾",  -- 1170
-        "商人一打开就按你的规则出售垃圾",  -- 1171
-        "白色武器和护甲算作垃圾",  -- 1172
-        "将白色武器和护甲视为垃圾（工具、鱼竿、有使用效果的装备或可能是升级的物品除外；总是先询问）",  -- 1173
-        "打开银行时存放",  -- 1174
-        "标记为存银行的物品，以及（开启时）银行里已有的物品，会自动存入",  -- 1175
-        "游戏自带的选项；我们的小框体会跟随它",  -- 1176
-        "冷却管理器",  -- 1177
-        "游戏的冷却管理器",  -- 1178
-        "个人资源显示",  -- 1179
-        "角色下方的生命值和能量",  -- 1180
-        "银行自动接收材料",  -- 1181
-        "游戏中银行的选项",  -- 1182
-        "增益开始时显示提示",  -- 1183
-        "游戏选项：增益生效时，其提示会短暂弹出（手柄界面）",  -- 1184
-        "聊天名称使用职业颜色",  -- 1185
-        "游戏的聊天设置，一次应用于所有聊天类型：玩家名称显示为其职业颜色",  -- 1186
-        "打开选项面板（选项 > 插件 > ControllerCam HUD）",  -- 1187
-        "框体",  -- 1188
-        "屏幕淡出",  -- 1189
-        "特效",  -- 1190
-        "外观",  -- 1191
-        "任务、聊天和地图",  -- 1192
-        "背包、银行和商人",  -- 1193
-        "钓鱼",  -- 1194
-        "辅助功能",  -- 1195
-        "原生选项",  -- 1196
-        "%s  |  游戏手柄界面：%s  |  运行中：%s",  -- 1197
-        "玩家 %s，目标 %s，宠物 %s，焦点 %s  |  已隐藏游戏框体：%s  |  聊天已移动：%s",  -- 1198
-        "原生选项：目标的目标 %s，冷却管理器 %s，个人资源 %s",  -- 1199
-        "文字大小 %d%%  |  文字阴影：%s",  -- 1200
-        "商人和银行帮助：%s  |  自动出售：%s  |  白色装备算垃圾：%s",  -- 1201
-        "空闲可见度 %d%%  |  缩放 %d%%  |  职业颜色：%s",  -- 1202
-        "适用于游戏手柄界面的极简动作游戏风格 HUD。",  -- 1203
-        "已启用",  -- 1204
-        "已禁用：游戏自带的框体已恢复",  -- 1205
-        "鼠标和键盘界面中也使用：%s",  -- 1206
-        "已隐藏游戏框体：%s",  -- 1207
-        "聊天已移到左上角：%s",  -- 1208
-        "职业颜色：%s",  -- 1209
-        "此客户端没有该选项。",  -- 1210
-        "%s：%s（游戏自带的选项）",  -- 1211
-        "游戏目前不接受该操作。",  -- 1212
-        "商人和银行帮助：%s",  -- 1213
-        "自动出售：%s",  -- 1214
-        "白色装备算垃圾：%s",  -- 1215
-        "商人帮助已关闭。",  -- 1216
-        "用法：/cchud sell [junk | recommended | white | green | blue]",  -- 1217
-        "银行打开时存入已标记的物品：%s",  -- 1218
-        "用法：/cchud junk <item>（按住 Shift 点击物品，将其放入聊天输入行）",  -- 1219
-        "物品 %d：垃圾，与其余一起出售",  -- 1220
-        "物品 %d：保留，从不出售",  -- 1221
-        "物品 %d：存入银行",  -- 1222
-        "文字阴影：%s",  -- 1223
-        "用法：/cchud text <80-250>",  -- 1224
-        "文字大小 %d%%",  -- 1225
-        "演示已停止",  -- 1226
-        "HUD 未运行。",  -- 1227
-        "演示运行中：循环播放一场虚构的战斗。再次输入 /cchud demo 可停止。",  -- 1228
-        "用法：/cchud idle <0-100>",  -- 1229
-        "空闲可见度 %d%%",  -- 1230
-        "用法：/cchud scale <50-200>",  -- 1231
-        "缩放 %d%%",  -- 1232
-        "拖动框体，然后输入 /cchud lock。",  -- 1233
-        "框体已锁定",  -- 1234
-        "一切已恢复到初始状态：设置、框体和屏幕布局（你的商人标记和价格历史会保留）。",  -- 1235
-        "框体已恢复到初始位置",  -- 1236
-        "未知命令“%s”。输入 /cchud help",  -- 1237
-        "错误列表已清空。",  -- 1238
-        "没有记录的错误。",  -- 1239
-        "已记录 %d 个错误（最新的在最后）。/cchud errors clear 清空列表。",  -- 1240
-        "显示状态",  -- 1241
-        "开启或关闭 HUD（关闭后恢复游戏自带的框体）",  -- 1242
-        "鼠标和键盘界面中也使用 HUD",  -- 1243
-        "使用我们的框体，或游戏自带的",  -- 1244
-        "角色旁边的细长垂直生命值和能量条",  -- 1245
-        "目标的目标（游戏自带的选项，游戏菜单中也有）",  -- 1246
-        "游戏的冷却管理器（游戏自带的选项）",  -- 1247
-        "角色下方的生命值和能量（游戏自带的选项）",  -- 1248
-        "增益开始时弹出的提示（游戏自带选项）",  -- 1249
-        "保持游戏自带的玩家和目标框体可见（开）或将其隐藏（关）",  -- 1250
-        "在商人处：选择出售什么（另有：sell junk, sell recommended, sell white | green | blue）",  -- 1251
-        "将白色武器和护甲算作垃圾",  -- 1252
-        "标记物品：始终出售、从不出售或存入银行（按住 Shift 点击，将其放入聊天输入行）",  -- 1253
-        "在银行：存入银行里已有的物品和所有标记为存银行的物品",  -- 1254
-        "在银行：取出你身上已有的物品",  -- 1255
-        "打开银行后立即存放",  -- 1256
-        "银行自动接收材料（游戏自带的选项）",  -- 1257
-        "文字大小，以百分比表示（150在电视上很清晰）",  -- 1258
-        "无事发生时玩家条的可见程度（0 为隐藏）",  -- 1259
-        "框体大小，百分比",  -- 1260
-        "将框体拖到你想要的位置（游戏的编辑模式也能做到）",  -- 1261
-        "将框体恢复到初始位置",  -- 1262
-        "播放一场简短的虚构战斗，查看框体如何反应（再次输入可停止）",  -- 1263
-        "将屏幕上的内容与设置对比（check all 列出每一行）",  -- 1264
-        "保存此客户端游戏手柄界面的描述（用于排查问题）",  -- 1265
-        "显示此列表",  -- 1266
-        "HUD最近遇到的错误，重载后也保留（用于报告）",  -- 1267
+        "整理",  -- 1008
+        "背包",  -- 1009
+        "%d 格空闲",  -- 1010
+        "空格",  -- 1011
+        "战斗中请用 B 关闭背包。",  -- 1012
+        "存银行",  -- 1013
+        "无标记",  -- 1014
+        "没有空格。",  -- 1015
+        "放在这里",  -- 1016
+        "拆分堆叠",  -- 1017
+        "标记：%s",  -- 1018
+        "物品详情",  -- 1019
+        "摧毁",  -- 1020
+        "整理银行",  -- 1021
+        "整理背包",  -- 1022
+        "显示背包",  -- 1023
+        "显示银行",  -- 1024
+        "存入已标记物品",  -- 1025
+        "出售建议物品",  -- 1026
+        "松开以摧毁",  -- 1027
+        "该物品会开始一个任务。",  -- 1028
+        "这是任务物品。",  -- 1029
+        "摧毁%s？",  -- 1030
+        "游戏保留了%s：请在游戏自己的背包中摧毁。",  -- 1031
+        "已摧毁%s。",  -- 1032
+        "带快速筛选的统一背包窗口",  -- 1033
+        "用 HUD 自己的一个窗口代替游戏的背包：所有物品放在一起，空格集中在最后，背包单独一排，顶部有快速筛选（LB 和 RB）。银行打开时也包括银行。关闭：使用游戏自己的背包",  -- 1034
+        "背包窗口：排序",  -- 1035
+        "智能：先放你会使用的（消耗品、有使用效果的物品），其余按类型，垃圾放最后并变淡。按类型：分区显示，各有标题。按背包顺序：游戏自己的顺序",  -- 1036
+        "HUD预设：%s，与镜头匹配",  -- 1037
+        "预设：%s",  -- 1038
+        "名为“%s”的布局已添加到游戏的编辑模式。请在那里选择它以使用（游戏菜单 > 编辑模式 > 布局）。",  -- 1039
+        "未知预设 '%s'",  -- 1040
+        "适合电视：HUD 和聊天中的文字更大。",  -- 1041
+        "适合显示器：文字为普通大小。",  -- 1042
+        "我们的框体已回到起始位置。请在编辑模式中选择游戏的%s布局（游戏菜单 > 编辑模式 > 布局）。",  -- 1043
+        "预设会设置镜头距离",  -- 1044
+        "预设还会把镜头一次性调到其布局所设计的距离（之后可自由缩放）",  -- 1045
+        "动作",  -- 1046
+        "第三人称视角：角色旁的纤细竖条，所有效果开启；脱战时一切淡出",  -- 1047
+        "经典",  -- 1048
+        "我们的框体位于魔兽世界一贯的位置，特效更柔和，保留游戏自带的手柄动作条",  -- 1049
+        "只显示需要的：友方NPC只在你指向、瞄准或选中时显示姓名板（含职能）；名字不带头衔；脱战时你的条淡淡显示（生命值低时总会显示）",  -- 1050
+        "开放世界",  -- 1051
+        "适合探索的干净界面：身旁静息时变淡的细条、不带能量条的姓名板、会淡出的聊天",  -- 1052
+        "冒险",  -- 1053
+        "参照主机开放世界冒险：生命状态在你身旁，小目标框在中上方，村民仅在你指向时显示，聊天快速淡出",  -- 1054
+        "魂系",  -- 1055
+        "你的条在左上角，目标条像首领血条一样大而居中靠下，每一击都有感觉",  -- 1056
+        "射击",  -- 1057
+        "中央偏右的竖条靠近准星，目标在上方，强烈的命中反馈",  -- 1058
+        "十字栏",  -- 1059
+        "参照手柄玩的MMO：目标和焦点在中上方，你的条紧贴手柄动作条上方，小队在左侧，完整姓名板",  -- 1060
+        "ARPG",  -- 1061
+        "参照动作RPG：镜头拉远，生命状态在左下方，目标在中上方，杂兵显示较小，每次命中都很醒目",  -- 1062
+        "罗盘",  -- 1063
+        "参照第一人称RPG：镜头拉近，你的条在中下方，目标在顶部边缘下方，村民仅在你指向时显示",  -- 1064
+        "团队",  -- 1065
+        "WoW 原有布局加上团队所需的一切：小队和团队框体、姓名板上的生命百分比和等级",  -- 1066
+        "跟随ControllerCam的预设",  -- 1067
+        "在ControllerCam中为所有情境选择镜头预设时，也会选择匹配的HUD预设（镜头保持自己的距离）",  -- 1068
+        "现代",  -- 1069
+        "将整个HUD设为预设：action, classic, minimal, openworld, adventure, soulslike, shooter, crossbar, arpg, compass, raid",  -- 1070
+        "目标框体和姓名板同时设为紧凑或完整",  -- 1071
+        "目标框体设为紧凑或完整",  -- 1072
+        "按房间另一头的电视或一臂之遥的显示器来设定文字大小",  -- 1073
+        "把我们的框体放回起始位置，以配合游戏自带的现代或经典布局",  -- 1074
+        "你的整套设置（HUD、镜头和游戏布局）：复制这一行（Ctrl+C）以保存或分享。",  -- 1075
+        "粘贴一行 HUD 设置（Ctrl+V）并确认。",  -- 1076
+        "这一行已损坏：请重新完整复制。",  -- 1077
+        "这一行由更新的版本生成：请更新插件。",  -- 1078
+        "这不是一行 HUD 设置。",  -- 1079
+        "设置已导入：采用 %d 项，略过 %d 项。",  -- 1080
+        "镜头设置也一并导入了。",  -- 1081
+        "镜头设置保持原样。",  -- 1082
+        "游戏布局现在是“%s”。",  -- 1083
+        "游戏布局保持原样。",  -- 1084
+        "你的设置，作为一行文本，用于保存或分享",  -- 1085
+        "从由 /cchud export 生成的文本行中读取设置",  -- 1086
+        "使用手柄界面时 HUD 已开启。它的选项：选项 > 插件 > ControllerCam > HUD，或 /cchud。",  -- 1087
+        "仅镜头：HUD 休息，游戏界面保持原样。/cchud on 可将其开启。",  -- 1088
+        "要同时为手柄设置屏幕吗？这会在游戏的编辑模式中添加一个名为 CCHUD 的布局，由你在那里选择：它把冷却行放在目标下方，避开手柄按键。你自己的布局会保留（/cchud setup 可再次提供此选项）。",  -- 1089
+        "设置",  -- 1090
+        "暂不",  -- 1091
+        "ControllerCam 附带一套手柄界面，即 HUD：使用手柄界面时显示它自己的单位框体、姓名板、施法条等。你想要它，还是只要镜头？",  -- 1092
+        "镜头 + HUD",  -- 1093
+        "仅镜头",  -- 1094
+        "此客户端不允许插件更改布局。",  -- 1095
+        "再问一次：镜头加 HUD，还是只要镜头",  -- 1096
+        "再次提供为 HUD 制作的屏幕布局（游戏的编辑模式）",  -- 1097
+        "使用游戏手柄界面时显示。请在游戏的编辑模式中拖动我们的框体。",  -- 1098
+        "预设",  -- 1099
+        "适合的屏幕",  -- 1100
+        "电视",  -- 1101
+        "显示器",  -- 1102
+        "按键图标",  -- 1103
+        "游戏为你的手柄按键显示的图标：根据正在使用的手柄自动识别，或你选择的类型",  -- 1104
+        "字体",  -- 1105
+        "重置游戏布局",  -- 1106
+        "试一试",  -- 1107
+        "播放演示",  -- 1108
+        "显示所有命中特效",  -- 1109
+        "运行自检",  -- 1110
+        "手柄动作条：紧凑 / 完整",  -- 1111
+        "导出设置",  -- 1112
+        "导入设置",  -- 1113
+        "在主页面勾选「显示高级选项」以查看所有设置。",  -- 1114
+        "模块",  -- 1115
+        "快速开关",  -- 1116
+        "通用",  -- 1117
+        "HUD",  -- 1118
+        "此客户端无法使用选项面板。",  -- 1119
+        "启用",  -- 1120
+        "整个 HUD；关闭后恢复游戏自带的框体",  -- 1121
+        "鼠标和键盘界面中也启用",  -- 1122
+        "通常 HUD 仅在使用游戏手柄界面时运行",  -- 1123
+        "隐藏游戏自带的框体",  -- 1124
+        "显示我们的框体时，隐藏游戏的玩家、目标和焦点框体",  -- 1125
+        "聊天窗口移到左上角",  -- 1126
+        "HUD 运行时将聊天窗口移到左上角",  -- 1127
+        "空闲时的垂直条",  -- 1128
+        "非战斗状态下生命值已满时，垂直条保持的可见程度（0 为隐藏）",  -- 1129
+        "职业颜色",  -- 1130
+        "按职业为你的血条和其他玩家的血条着色",  -- 1131
+        "职业图标",  -- 1132
+        "在目标和目标的目标的玩家名字前显示职业图标",  -- 1133
+        "目标框体威胁",  -- 1134
+        "目标框体上的盾牌图标和光晕：攻击你时为红色，即将拉到仇恨时红黄交替，正在失去仇恨时黄蓝交替，不在你身上时为蓝色",  -- 1135
+        "全部使用紧凑条",  -- 1136
+        "目标框体和姓名板使用紧凑样式，宽度略多于一半（仍可分别设置；预设不会改变它）",  -- 1137
+        "紧凑目标框体",  -- 1138
+        "目标框体宽度略大于一半",  -- 1139
+        "战斗中的生命值颜色",  -- 1140
+        "战斗中，生命值条随生命值下降由绿色经黄色变为红色",  -- 1141
+        "文字背景阴影",  -- 1142
+        "在目标文字后加一条淡淡的暗带，使其易于阅读",  -- 1143
+        "文字大小",  -- 1144
+        "我们框体上文字的大小",  -- 1145
+        "框体大小",  -- 1146
+        "我们的单位框体的大小",  -- 1147
+        "战斗中的动作条",  -- 1148
+        "在有事需要注意之前，战斗中你的动作条、宠物和焦点有多明显",  -- 1149
+        "生命值低于时完整",  -- 1150
+        "当你的生命值低于此值时，动作条恢复为完整",  -- 1151
+        "法力值低于时完整",  -- 1152
+        "当你的法力值低于此值时，动作条恢复为完整",  -- 1153
+        "空闲时的玩家条",  -- 1154
+        "生命值全满或脱离战斗时玩家条的可见程度（0 为隐藏）",  -- 1155
+        "商人和银行帮助",  -- 1156
+        "商人的“出售垃圾”按钮会询问出售什么；商人和银行处可快速移动",  -- 1157
+        "显示高级选项",  -- 1158
+        "所有设置，而不仅是主要开关",  -- 1159
+        "玩家框体",  -- 1160
+        "我们的玩家条，左上角",  -- 1161
+        "目标框体",  -- 1162
+        "我们的目标条，顶部中间",  -- 1163
+        "宠物条",  -- 1164
+        "玩家条下方或竖直条旁边的小型宠物条",  -- 1165
+        "焦点框体",  -- 1166
+        "我们的焦点框体",  -- 1167
+        "角色旁的细长竖直生命条和能量条，适合第三人称视角（代替玩家条）",  -- 1168
+        "商人打开时出售垃圾",  -- 1169
+        "商人一打开就按你的规则出售垃圾",  -- 1170
+        "白色武器和护甲算作垃圾",  -- 1171
+        "将白色武器和护甲视为垃圾（工具、鱼竿、有使用效果的装备或可能是升级的物品除外；总是先询问）",  -- 1172
+        "打开银行时存放",  -- 1173
+        "标记为存银行的物品，以及（开启时）银行里已有的物品，会自动存入",  -- 1174
+        "游戏自带的选项；我们的小框体会跟随它",  -- 1175
+        "冷却管理器",  -- 1176
+        "游戏的冷却管理器",  -- 1177
+        "个人资源显示",  -- 1178
+        "角色下方的生命值和能量",  -- 1179
+        "银行自动接收材料",  -- 1180
+        "游戏中银行的选项",  -- 1181
+        "增益开始时显示提示",  -- 1182
+        "游戏选项：增益生效时，其提示会短暂弹出（手柄界面）",  -- 1183
+        "聊天名称使用职业颜色",  -- 1184
+        "游戏的聊天设置，一次应用于所有聊天类型：玩家名称显示为其职业颜色",  -- 1185
+        "打开选项面板（选项 > 插件 > ControllerCam HUD）",  -- 1186
+        "框体",  -- 1187
+        "屏幕淡出",  -- 1188
+        "特效",  -- 1189
+        "外观",  -- 1190
+        "任务、聊天和地图",  -- 1191
+        "背包、银行和商人",  -- 1192
+        "钓鱼",  -- 1193
+        "辅助功能",  -- 1194
+        "原生选项",  -- 1195
+        "%s  |  游戏手柄界面：%s  |  运行中：%s",  -- 1196
+        "玩家 %s，目标 %s，宠物 %s，焦点 %s  |  已隐藏游戏框体：%s  |  聊天已移动：%s",  -- 1197
+        "原生选项：目标的目标 %s，冷却管理器 %s，个人资源 %s",  -- 1198
+        "文字大小 %d%%  |  文字阴影：%s",  -- 1199
+        "商人和银行帮助：%s  |  自动出售：%s  |  白色装备算垃圾：%s",  -- 1200
+        "空闲可见度 %d%%  |  缩放 %d%%  |  职业颜色：%s",  -- 1201
+        "适用于游戏手柄界面的极简动作游戏风格 HUD。",  -- 1202
+        "已启用",  -- 1203
+        "已禁用：游戏自带的框体已恢复",  -- 1204
+        "鼠标和键盘界面中也使用：%s",  -- 1205
+        "已隐藏游戏框体：%s",  -- 1206
+        "聊天已移到左上角：%s",  -- 1207
+        "职业颜色：%s",  -- 1208
+        "此客户端没有该选项。",  -- 1209
+        "%s：%s（游戏自带的选项）",  -- 1210
+        "游戏目前不接受该操作。",  -- 1211
+        "商人和银行帮助：%s",  -- 1212
+        "自动出售：%s",  -- 1213
+        "白色装备算垃圾：%s",  -- 1214
+        "商人帮助已关闭。",  -- 1215
+        "用法：/cchud sell [junk | recommended | white | green | blue]",  -- 1216
+        "银行打开时存入已标记的物品：%s",  -- 1217
+        "用法：/cchud junk <item>（按住 Shift 点击物品，将其放入聊天输入行）",  -- 1218
+        "物品 %d：垃圾，与其余一起出售",  -- 1219
+        "物品 %d：保留，从不出售",  -- 1220
+        "物品 %d：存入银行",  -- 1221
+        "文字阴影：%s",  -- 1222
+        "用法：/cchud text <80-250>",  -- 1223
+        "文字大小 %d%%",  -- 1224
+        "演示已停止",  -- 1225
+        "HUD 未运行。",  -- 1226
+        "演示运行中：循环播放一场虚构的战斗。再次输入 /cchud demo 可停止。",  -- 1227
+        "用法：/cchud idle <0-100>",  -- 1228
+        "空闲可见度 %d%%",  -- 1229
+        "用法：/cchud scale <50-200>",  -- 1230
+        "缩放 %d%%",  -- 1231
+        "拖动框体，然后输入 /cchud lock。",  -- 1232
+        "框体已锁定",  -- 1233
+        "一切已恢复到初始状态：设置、框体和屏幕布局（你的商人标记和价格历史会保留）。",  -- 1234
+        "框体已恢复到初始位置",  -- 1235
+        "未知命令“%s”。输入 /cchud help",  -- 1236
+        "错误列表已清空。",  -- 1237
+        "没有记录的错误。",  -- 1238
+        "已记录 %d 个错误（最新的在最后）。/cchud errors clear 清空列表。",  -- 1239
+        "显示状态",  -- 1240
+        "开启或关闭 HUD（关闭后恢复游戏自带的框体）",  -- 1241
+        "鼠标和键盘界面中也使用 HUD",  -- 1242
+        "使用我们的框体，或游戏自带的",  -- 1243
+        "角色旁边的细长垂直生命值和能量条",  -- 1244
+        "目标的目标（游戏自带的选项，游戏菜单中也有）",  -- 1245
+        "游戏的冷却管理器（游戏自带的选项）",  -- 1246
+        "角色下方的生命值和能量（游戏自带的选项）",  -- 1247
+        "增益开始时弹出的提示（游戏自带选项）",  -- 1248
+        "保持游戏自带的玩家和目标框体可见（开）或将其隐藏（关）",  -- 1249
+        "在商人处：选择出售什么（另有：sell junk, sell recommended, sell white | green | blue）",  -- 1250
+        "将白色武器和护甲算作垃圾",  -- 1251
+        "标记物品：始终出售、从不出售或存入银行（按住 Shift 点击，将其放入聊天输入行）",  -- 1252
+        "在银行：存入银行里已有的物品和所有标记为存银行的物品",  -- 1253
+        "在银行：取出你身上已有的物品",  -- 1254
+        "打开银行后立即存放",  -- 1255
+        "银行自动接收材料（游戏自带的选项）",  -- 1256
+        "文字大小，以百分比表示（150在电视上很清晰）",  -- 1257
+        "无事发生时玩家条的可见程度（0 为隐藏）",  -- 1258
+        "框体大小，百分比",  -- 1259
+        "将框体拖到你想要的位置（游戏的编辑模式也能做到）",  -- 1260
+        "将框体恢复到初始位置",  -- 1261
+        "播放一场简短的虚构战斗，查看框体如何反应（再次输入可停止）",  -- 1262
+        "将屏幕上的内容与设置对比（check all 列出每一行）",  -- 1263
+        "保存此客户端游戏手柄界面的描述（用于排查问题）",  -- 1264
+        "显示此列表",  -- 1265
+        "HUD最近遇到的错误，重载后也保留（用于报告）",  -- 1266
     },
     zhTW = {
         "錯誤：",  -- 1
@@ -12437,266 +12428,265 @@ local TRANSLATIONS = {
         "放入",  -- 1005
         "拿起背包",  -- 1006
         "更多",  -- 1007
-        "提示",  -- 1008
-        "隱藏提示",  -- 1009
-        "背包",  -- 1010
-        "%d 格空閒",  -- 1011
-        "空格",  -- 1012
-        "戰鬥中請用 B 關閉背包。",  -- 1013
-        "存銀行",  -- 1014
-        "無標記",  -- 1015
-        "沒有空格。",  -- 1016
-        "放在這裡",  -- 1017
-        "拆分堆疊",  -- 1018
-        "標記：%s",  -- 1019
-        "物品詳情",  -- 1020
-        "摧毀",  -- 1021
-        "整理銀行",  -- 1022
-        "整理背包",  -- 1023
-        "顯示背包",  -- 1024
-        "顯示銀行",  -- 1025
-        "存入已標記物品",  -- 1026
-        "出售建議物品",  -- 1027
-        "放開以摧毀",  -- 1028
-        "該物品會開始一個任務。",  -- 1029
-        "這是任務物品。",  -- 1030
-        "摧毀%s？",  -- 1031
-        "遊戲保留了%s：請在遊戲自己的背包中摧毀。",  -- 1032
-        "已摧毀%s。",  -- 1033
-        "帶快速篩選的統一背包視窗",  -- 1034
-        "用 HUD 自己的一個視窗代替遊戲的背包：所有物品放在一起，空格集中在最後，背包單獨一排，頂部有快速篩選（LB 和 RB）。銀行開啟時也包括銀行。關閉：使用遊戲自己的背包",  -- 1035
-        "背包視窗：排序",  -- 1036
-        "智慧：先放你會使用的（消耗品、有使用效果的物品），其餘依類型，垃圾放最後並變淡。依類型：分區顯示，各有標題。依背包順序：遊戲自己的順序",  -- 1037
-        "HUD預設：%s，與鏡頭相配",  -- 1038
-        "預設：%s",  -- 1039
-        "名為「%s」的版面已新增到遊戲的編輯模式。請在那裡選擇它以使用（遊戲選單 > 編輯模式 > 版面）。",  -- 1040
-        "未知的預設 '%s'",  -- 1041
-        "適合電視：HUD 和聊天中的文字更大。",  -- 1042
-        "適合螢幕：文字為一般大小。",  -- 1043
-        "我們的框架已回到起始位置。請在編輯模式中選擇遊戲的%s版面（遊戲選單 > 編輯模式 > 版面）。",  -- 1044
-        "預設會設定鏡頭距離",  -- 1045
-        "預設還會把鏡頭一次性調到其版面所設計的距離（之後可自由縮放）",  -- 1046
-        "動作",  -- 1047
-        "第三人稱視角：角色旁的纖細直條，所有特效開啟；脫戰時一切淡出",  -- 1048
-        "經典",  -- 1049
-        "我們的框架位於魔獸世界一貫的位置，特效較柔和，保留遊戲內建的遊戲手把動作列",  -- 1050
-        "只顯示需要的：友方NPC只在你指向、瞄準或選取時顯示名條（含職能）；名字不帶頭銜；脫戰時你的條淡淡顯示（生命值低時總會顯示）",  -- 1051
-        "開放世界",  -- 1052
-        "適合探索的乾淨介面：身旁靜息時變淡的細條、不帶能量條的名條、會淡出的聊天",  -- 1053
-        "冒險",  -- 1054
-        "參照主機開放世界冒險：生命狀態在你身旁，小目標框在中上方，村民僅在你指向時顯示，聊天快速淡出",  -- 1055
-        "魂系",  -- 1056
-        "你的條在左上角，目標條像首領血條一樣大而置中偏下，每一擊都有感覺",  -- 1057
-        "射擊",  -- 1058
-        "中央偏右的直條靠近準星，目標在上方，強烈的命中回饋",  -- 1059
-        "十字欄",  -- 1060
-        "參照手把玩的MMO：目標和專注目標在中上方，你的條緊貼手把快捷列上方，小隊在左側，完整名條",  -- 1061
-        "ARPG",  -- 1062
-        "參照動作RPG：鏡頭拉遠，生命狀態在左下方，目標在中上方，雜兵顯示較小，每次命中都很醒目",  -- 1063
-        "羅盤",  -- 1064
-        "參照第一人稱RPG：鏡頭拉近，你的條在中下方，目標在頂部邊緣下方，村民僅在你指向時顯示",  -- 1065
-        "團隊",  -- 1066
-        "WoW 原有配置加上團隊所需的一切：隊伍和團隊框架、名條上的生命百分比和等級",  -- 1067
-        "跟隨ControllerCam的預設",  -- 1068
-        "在ControllerCam中為所有情境選擇鏡頭預設時，也會選擇相配的HUD預設（鏡頭保持自己的距離）",  -- 1069
-        "現代",  -- 1070
-        "將整個HUD設為預設：action, classic, minimal, openworld, adventure, soulslike, shooter, crossbar, arpg, compass, raid",  -- 1071
-        "目標框架和名條同時設為緊湊或完整",  -- 1072
-        "目標框架設為緊湊或完整",  -- 1073
-        "按房間另一頭的電視或一臂之遙的螢幕來設定文字大小",  -- 1074
-        "把我們的框架放回起始位置，以配合遊戲內建的現代或經典版面",  -- 1075
-        "你的整套設定（HUD、鏡頭和遊戲版面）：複製這一行（Ctrl+C）以保存或分享。",  -- 1076
-        "貼上一行 HUD 設定（Ctrl+V）並確認。",  -- 1077
-        "這一行已損壞：請重新完整複製。",  -- 1078
-        "這一行由較新的版本產生：請更新插件。",  -- 1079
-        "這不是一行 HUD 設定。",  -- 1080
-        "設定已匯入：採用 %d 項，略過 %d 項。",  -- 1081
-        "鏡頭設定也一併匯入了。",  -- 1082
-        "鏡頭設定維持原樣。",  -- 1083
-        "遊戲版面現在是「%s」。",  -- 1084
-        "遊戲版面維持原樣。",  -- 1085
-        "你的設定，作為一行文字，用於保存或分享",  -- 1086
-        "從由 /cchud export 產生的文字行中讀取設定",  -- 1087
-        "使用手把介面時 HUD 已開啟。它的選項：選項 > 插件 > ControllerCam > HUD，或 /cchud。",  -- 1088
-        "僅鏡頭：HUD 休息，遊戲介面維持原樣。/cchud on 可將其開啟。",  -- 1089
-        "要同時為手把設定畫面嗎？這會在遊戲的編輯模式中新增一個名為 CCHUD 的版面，由你在那裡選擇：它把冷卻列放在目標下方，避開手把按鍵。你自己的版面會保留（/cchud setup 可再次提供此選項）。",  -- 1090
-        "設定",  -- 1091
-        "暫不",  -- 1092
-        "ControllerCam 附帶一套手把介面，即 HUD：使用手把介面時顯示它自己的單位框架、名條、施法條等。你想要它，還是只要鏡頭？",  -- 1093
-        "鏡頭 + HUD",  -- 1094
-        "僅鏡頭",  -- 1095
-        "此客戶端不允許插件變更版面配置。",  -- 1096
-        "再問一次：鏡頭加 HUD，還是只要鏡頭",  -- 1097
-        "再次提供為 HUD 製作的畫面版面（遊戲的編輯模式）",  -- 1098
-        "使用遊戲手把介面時顯示。請在遊戲的編輯模式中拖曳我們的框架。",  -- 1099
-        "預設",  -- 1100
-        "適合的螢幕",  -- 1101
-        "電視",  -- 1102
-        "螢幕",  -- 1103
-        "按鍵圖示",  -- 1104
-        "遊戲為你的控制器按鍵顯示的圖示：依正在使用的控制器自動辨識，或你選擇的類型",  -- 1105
-        "字型",  -- 1106
-        "重置遊戲版面配置",  -- 1107
-        "試試看",  -- 1108
-        "播放示範",  -- 1109
-        "顯示所有命中特效",  -- 1110
-        "執行自我檢查",  -- 1111
-        "手把快捷列：精簡 / 完整",  -- 1112
-        "匯出設定",  -- 1113
-        "匯入設定",  -- 1114
-        "在主頁面勾選「顯示進階選項」以查看所有設定。",  -- 1115
-        "模組",  -- 1116
-        "快速開關",  -- 1117
-        "一般",  -- 1118
-        "HUD",  -- 1119
-        "此用戶端無法使用選項面板。",  -- 1120
-        "啟用",  -- 1121
-        "整個 HUD；關閉後恢復遊戲內建的框架",  -- 1122
-        "滑鼠和鍵盤介面中也啟用",  -- 1123
-        "通常 HUD 僅在使用遊戲手把介面時執行",  -- 1124
-        "隱藏遊戲內建的框架",  -- 1125
-        "顯示我們的框架時，隱藏遊戲的玩家、目標和專注目標框架",  -- 1126
-        "聊天視窗移到左上角",  -- 1127
-        "HUD 執行時將聊天視窗移到左上角",  -- 1128
-        "閒置時的垂直條",  -- 1129
-        "非戰鬥狀態下生命力全滿時，垂直條保持的可見程度（0 為隱藏）",  -- 1130
-        "職業顏色",  -- 1131
-        "依職業為你的血條和其他玩家的血條著色",  -- 1132
-        "職業圖示",  -- 1133
-        "在目標和目標的目標的玩家名字前顯示職業圖示",  -- 1134
-        "目標框架威脅",  -- 1135
-        "目標框架上的盾牌圖示和光暈：攻擊你時為紅色，即將拉到仇恨時紅黃交替，正在失去仇恨時黃藍交替，不在你身上時為藍色",  -- 1136
-        "全部使用緊湊條",  -- 1137
-        "目標框架和名條使用緊湊樣式，寬度略多於一半（仍可分別設定；預設不會改變它）",  -- 1138
-        "精簡目標框架",  -- 1139
-        "目標框架寬度略大於一半",  -- 1140
-        "戰鬥中的生命值顏色",  -- 1141
-        "戰鬥中，生命值條隨生命值下降由綠色經黃色變為紅色",  -- 1142
-        "文字背景陰影",  -- 1143
-        "在目標文字後加一條淡淡的暗帶，使其易於閱讀",  -- 1144
-        "文字大小",  -- 1145
-        "我們框架上文字的大小",  -- 1146
-        "框架大小",  -- 1147
-        "我們的單位框架的大小",  -- 1148
-        "戰鬥中的快捷列",  -- 1149
-        "在有事需要注意之前，戰鬥中你的快捷列、寵物和專注目標有多明顯",  -- 1150
-        "生命力低於時完整",  -- 1151
-        "當你的生命力低於此值時，快捷列恢復為完整",  -- 1152
-        "法力低於時完整",  -- 1153
-        "當你的法力低於此值時，快捷列恢復為完整",  -- 1154
-        "閒置時的玩家條",  -- 1155
-        "生命值全滿或脫離戰鬥時玩家條的可見程度（0 為隱藏）",  -- 1156
-        "商人和銀行說明",  -- 1157
-        "商人的「出售垃圾」按鈕會詢問出售什麼；商人和銀行處可快速移動",  -- 1158
-        "顯示進階選項",  -- 1159
-        "所有設定，而不僅是主要開關",  -- 1160
-        "玩家框架",  -- 1161
-        "我們的玩家條，左上角",  -- 1162
-        "目標框架",  -- 1163
-        "我們的目標條，頂部中間",  -- 1164
-        "寵物條",  -- 1165
-        "玩家條下方或直立條旁邊的小型寵物條",  -- 1166
-        "專注目標框架",  -- 1167
-        "我們的專注目標框架",  -- 1168
-        "角色旁的細長直立生命條和能量條，適合第三人稱視角（取代玩家條）",  -- 1169
-        "商人開啟時出售垃圾",  -- 1170
-        "商人一開啟就依你的規則出售垃圾",  -- 1171
-        "白色武器和護甲算作垃圾",  -- 1172
-        "將白色武器和護甲視為垃圾（工具、魚竿、有使用效果的裝備或可能是升級的物品除外；總是先詢問）",  -- 1173
-        "打開銀行時存放",  -- 1174
-        "標記為存銀行的物品，以及（開啟時）銀行裡已有的物品，會自動存入",  -- 1175
-        "遊戲內建的選項；我們的小框架會跟隨它",  -- 1176
-        "冷卻管理員",  -- 1177
-        "遊戲的冷卻管理員",  -- 1178
-        "個人資源顯示",  -- 1179
-        "角色下方的生命值和能量",  -- 1180
-        "銀行自動接收材料",  -- 1181
-        "遊戲中銀行的選項",  -- 1182
-        "增益開始時顯示提示",  -- 1183
-        "遊戲選項：增益生效時，其提示會短暫彈出（手把介面）",  -- 1184
-        "聊天名稱使用職業顏色",  -- 1185
-        "遊戲的聊天設定，一次套用於所有聊天類型：玩家名稱顯示為其職業顏色",  -- 1186
-        "開啟選項面板（選項 > 插件 > ControllerCam HUD）",  -- 1187
-        "框架",  -- 1188
-        "畫面淡出",  -- 1189
-        "特效",  -- 1190
-        "外觀",  -- 1191
-        "任務、聊天和地圖",  -- 1192
-        "背包、銀行和商人",  -- 1193
-        "釣魚",  -- 1194
-        "協助工具",  -- 1195
-        "原生選項",  -- 1196
-        "%s  |  遊戲手把介面：%s  |  執行中：%s",  -- 1197
-        "玩家 %s，目標 %s，寵物 %s，專注目標 %s  |  已隱藏遊戲框架：%s  |  聊天已移動：%s",  -- 1198
-        "原生選項：目標的目標 %s，冷卻管理員 %s，個人資源 %s",  -- 1199
-        "文字大小 %d%%  |  文字陰影：%s",  -- 1200
-        "商人和銀行說明：%s  |  自動出售：%s  |  白色裝備算垃圾：%s",  -- 1201
-        "閒置可見度 %d%%  |  縮放 %d%%  |  職業顏色：%s",  -- 1202
-        "適用於遊戲手把介面的極簡動作遊戲風格 HUD。",  -- 1203
-        "已啟用",  -- 1204
-        "已停用：遊戲內建的框架已恢復",  -- 1205
-        "滑鼠和鍵盤介面中也使用：%s",  -- 1206
-        "已隱藏遊戲框架：%s",  -- 1207
-        "聊天已移到左上角：%s",  -- 1208
-        "職業顏色：%s",  -- 1209
-        "此用戶端沒有該選項。",  -- 1210
-        "%s：%s（遊戲內建的選項）",  -- 1211
-        "遊戲目前不接受該操作。",  -- 1212
-        "商人和銀行說明：%s",  -- 1213
-        "自動出售：%s",  -- 1214
-        "白色裝備算垃圾：%s",  -- 1215
-        "商人說明已關閉。",  -- 1216
-        "用法：/cchud sell [junk | recommended | white | green | blue]",  -- 1217
-        "銀行開啟時存入已標記的物品：%s",  -- 1218
-        "用法：/cchud junk <item>（按住 Shift 點擊物品，將其放入聊天輸入列）",  -- 1219
-        "物品 %d：垃圾，與其餘一起出售",  -- 1220
-        "物品 %d：保留，永不出售",  -- 1221
-        "物品 %d：存入銀行",  -- 1222
-        "文字陰影：%s",  -- 1223
-        "用法：/cchud text <80-250>",  -- 1224
-        "文字大小 %d%%",  -- 1225
-        "示範已停止",  -- 1226
-        "HUD 未執行。",  -- 1227
-        "示範執行中：循環播放一場虛構的戰鬥。再次輸入 /cchud demo 可停止。",  -- 1228
-        "用法：/cchud idle <0-100>",  -- 1229
-        "閒置可見度 %d%%",  -- 1230
-        "用法：/cchud scale <50-200>",  -- 1231
-        "縮放 %d%%",  -- 1232
-        "拖曳框架，然後輸入 /cchud lock。",  -- 1233
-        "框架已鎖定",  -- 1234
-        "一切已恢復到初始狀態：設定、框架和畫面版面（你的商人標記和價格歷史會保留）。",  -- 1235
-        "框架已恢復到初始位置",  -- 1236
-        "未知指令「%s」。輸入 /cchud help",  -- 1237
-        "錯誤列表已清空。",  -- 1238
-        "沒有記錄的錯誤。",  -- 1239
-        "已記錄 %d 個錯誤（最新的在最後）。/cchud errors clear 清空列表。",  -- 1240
-        "顯示狀態",  -- 1241
-        "開啟或關閉 HUD（關閉後恢復遊戲內建的框架）",  -- 1242
-        "滑鼠和鍵盤介面中也使用 HUD",  -- 1243
-        "使用我們的框架，或遊戲內建的",  -- 1244
-        "角色旁邊的細長垂直生命力和能量條",  -- 1245
-        "目標的目標（遊戲內建的選項，遊戲選單中也有）",  -- 1246
-        "遊戲的冷卻管理員（遊戲內建的選項）",  -- 1247
-        "角色下方的生命值和能量（遊戲內建的選項）",  -- 1248
-        "增益開始時彈出的提示（遊戲內建選項）",  -- 1249
-        "保持遊戲內建的玩家和目標框架可見（開）或將其隱藏（關）",  -- 1250
-        "在商人處：選擇出售什麼（另有：sell junk, sell recommended, sell white | green | blue）",  -- 1251
-        "將白色武器和護甲算作垃圾",  -- 1252
-        "標記物品：一律出售、永不出售或存入銀行（按住 Shift 點擊，將其放入聊天輸入列）",  -- 1253
-        "在銀行：存入銀行裡已有的物品和所有標記為存銀行的物品",  -- 1254
-        "在銀行：取出你身上已有的物品",  -- 1255
-        "打開銀行後立即存放",  -- 1256
-        "銀行自動接收材料（遊戲內建的選項）",  -- 1257
-        "文字大小，以百分比表示（150在電視上很清晰）",  -- 1258
-        "沒事發生時玩家條的可見程度（0 為隱藏）",  -- 1259
-        "框架大小，百分比",  -- 1260
-        "將框架拖曳到你想要的位置（遊戲的編輯模式也能做到）",  -- 1261
-        "將框架恢復到初始位置",  -- 1262
-        "播放一場簡短的虛構戰鬥，查看框架如何反應（再次輸入可停止）",  -- 1263
-        "將螢幕上的內容與設定比對（check all 列出每一列）",  -- 1264
-        "儲存此用戶端遊戲手把介面的描述（用於疑難排解）",  -- 1265
-        "顯示此清單",  -- 1266
-        "HUD最近遇到的錯誤，重載後也保留（用於回報）",  -- 1267
+        "整理",  -- 1008
+        "背包",  -- 1009
+        "%d 格空閒",  -- 1010
+        "空格",  -- 1011
+        "戰鬥中請用 B 關閉背包。",  -- 1012
+        "存銀行",  -- 1013
+        "無標記",  -- 1014
+        "沒有空格。",  -- 1015
+        "放在這裡",  -- 1016
+        "拆分堆疊",  -- 1017
+        "標記：%s",  -- 1018
+        "物品詳情",  -- 1019
+        "摧毀",  -- 1020
+        "整理銀行",  -- 1021
+        "整理背包",  -- 1022
+        "顯示背包",  -- 1023
+        "顯示銀行",  -- 1024
+        "存入已標記物品",  -- 1025
+        "出售建議物品",  -- 1026
+        "放開以摧毀",  -- 1027
+        "該物品會開始一個任務。",  -- 1028
+        "這是任務物品。",  -- 1029
+        "摧毀%s？",  -- 1030
+        "遊戲保留了%s：請在遊戲自己的背包中摧毀。",  -- 1031
+        "已摧毀%s。",  -- 1032
+        "帶快速篩選的統一背包視窗",  -- 1033
+        "用 HUD 自己的一個視窗代替遊戲的背包：所有物品放在一起，空格集中在最後，背包單獨一排，頂部有快速篩選（LB 和 RB）。銀行開啟時也包括銀行。關閉：使用遊戲自己的背包",  -- 1034
+        "背包視窗：排序",  -- 1035
+        "智慧：先放你會使用的（消耗品、有使用效果的物品），其餘依類型，垃圾放最後並變淡。依類型：分區顯示，各有標題。依背包順序：遊戲自己的順序",  -- 1036
+        "HUD預設：%s，與鏡頭相配",  -- 1037
+        "預設：%s",  -- 1038
+        "名為「%s」的版面已新增到遊戲的編輯模式。請在那裡選擇它以使用（遊戲選單 > 編輯模式 > 版面）。",  -- 1039
+        "未知的預設 '%s'",  -- 1040
+        "適合電視：HUD 和聊天中的文字更大。",  -- 1041
+        "適合螢幕：文字為一般大小。",  -- 1042
+        "我們的框架已回到起始位置。請在編輯模式中選擇遊戲的%s版面（遊戲選單 > 編輯模式 > 版面）。",  -- 1043
+        "預設會設定鏡頭距離",  -- 1044
+        "預設還會把鏡頭一次性調到其版面所設計的距離（之後可自由縮放）",  -- 1045
+        "動作",  -- 1046
+        "第三人稱視角：角色旁的纖細直條，所有特效開啟；脫戰時一切淡出",  -- 1047
+        "經典",  -- 1048
+        "我們的框架位於魔獸世界一貫的位置，特效較柔和，保留遊戲內建的遊戲手把動作列",  -- 1049
+        "只顯示需要的：友方NPC只在你指向、瞄準或選取時顯示名條（含職能）；名字不帶頭銜；脫戰時你的條淡淡顯示（生命值低時總會顯示）",  -- 1050
+        "開放世界",  -- 1051
+        "適合探索的乾淨介面：身旁靜息時變淡的細條、不帶能量條的名條、會淡出的聊天",  -- 1052
+        "冒險",  -- 1053
+        "參照主機開放世界冒險：生命狀態在你身旁，小目標框在中上方，村民僅在你指向時顯示，聊天快速淡出",  -- 1054
+        "魂系",  -- 1055
+        "你的條在左上角，目標條像首領血條一樣大而置中偏下，每一擊都有感覺",  -- 1056
+        "射擊",  -- 1057
+        "中央偏右的直條靠近準星，目標在上方，強烈的命中回饋",  -- 1058
+        "十字欄",  -- 1059
+        "參照手把玩的MMO：目標和專注目標在中上方，你的條緊貼手把快捷列上方，小隊在左側，完整名條",  -- 1060
+        "ARPG",  -- 1061
+        "參照動作RPG：鏡頭拉遠，生命狀態在左下方，目標在中上方，雜兵顯示較小，每次命中都很醒目",  -- 1062
+        "羅盤",  -- 1063
+        "參照第一人稱RPG：鏡頭拉近，你的條在中下方，目標在頂部邊緣下方，村民僅在你指向時顯示",  -- 1064
+        "團隊",  -- 1065
+        "WoW 原有配置加上團隊所需的一切：隊伍和團隊框架、名條上的生命百分比和等級",  -- 1066
+        "跟隨ControllerCam的預設",  -- 1067
+        "在ControllerCam中為所有情境選擇鏡頭預設時，也會選擇相配的HUD預設（鏡頭保持自己的距離）",  -- 1068
+        "現代",  -- 1069
+        "將整個HUD設為預設：action, classic, minimal, openworld, adventure, soulslike, shooter, crossbar, arpg, compass, raid",  -- 1070
+        "目標框架和名條同時設為緊湊或完整",  -- 1071
+        "目標框架設為緊湊或完整",  -- 1072
+        "按房間另一頭的電視或一臂之遙的螢幕來設定文字大小",  -- 1073
+        "把我們的框架放回起始位置，以配合遊戲內建的現代或經典版面",  -- 1074
+        "你的整套設定（HUD、鏡頭和遊戲版面）：複製這一行（Ctrl+C）以保存或分享。",  -- 1075
+        "貼上一行 HUD 設定（Ctrl+V）並確認。",  -- 1076
+        "這一行已損壞：請重新完整複製。",  -- 1077
+        "這一行由較新的版本產生：請更新插件。",  -- 1078
+        "這不是一行 HUD 設定。",  -- 1079
+        "設定已匯入：採用 %d 項，略過 %d 項。",  -- 1080
+        "鏡頭設定也一併匯入了。",  -- 1081
+        "鏡頭設定維持原樣。",  -- 1082
+        "遊戲版面現在是「%s」。",  -- 1083
+        "遊戲版面維持原樣。",  -- 1084
+        "你的設定，作為一行文字，用於保存或分享",  -- 1085
+        "從由 /cchud export 產生的文字行中讀取設定",  -- 1086
+        "使用手把介面時 HUD 已開啟。它的選項：選項 > 插件 > ControllerCam > HUD，或 /cchud。",  -- 1087
+        "僅鏡頭：HUD 休息，遊戲介面維持原樣。/cchud on 可將其開啟。",  -- 1088
+        "要同時為手把設定畫面嗎？這會在遊戲的編輯模式中新增一個名為 CCHUD 的版面，由你在那裡選擇：它把冷卻列放在目標下方，避開手把按鍵。你自己的版面會保留（/cchud setup 可再次提供此選項）。",  -- 1089
+        "設定",  -- 1090
+        "暫不",  -- 1091
+        "ControllerCam 附帶一套手把介面，即 HUD：使用手把介面時顯示它自己的單位框架、名條、施法條等。你想要它，還是只要鏡頭？",  -- 1092
+        "鏡頭 + HUD",  -- 1093
+        "僅鏡頭",  -- 1094
+        "此客戶端不允許插件變更版面配置。",  -- 1095
+        "再問一次：鏡頭加 HUD，還是只要鏡頭",  -- 1096
+        "再次提供為 HUD 製作的畫面版面（遊戲的編輯模式）",  -- 1097
+        "使用遊戲手把介面時顯示。請在遊戲的編輯模式中拖曳我們的框架。",  -- 1098
+        "預設",  -- 1099
+        "適合的螢幕",  -- 1100
+        "電視",  -- 1101
+        "螢幕",  -- 1102
+        "按鍵圖示",  -- 1103
+        "遊戲為你的控制器按鍵顯示的圖示：依正在使用的控制器自動辨識，或你選擇的類型",  -- 1104
+        "字型",  -- 1105
+        "重置遊戲版面配置",  -- 1106
+        "試試看",  -- 1107
+        "播放示範",  -- 1108
+        "顯示所有命中特效",  -- 1109
+        "執行自我檢查",  -- 1110
+        "手把快捷列：精簡 / 完整",  -- 1111
+        "匯出設定",  -- 1112
+        "匯入設定",  -- 1113
+        "在主頁面勾選「顯示進階選項」以查看所有設定。",  -- 1114
+        "模組",  -- 1115
+        "快速開關",  -- 1116
+        "一般",  -- 1117
+        "HUD",  -- 1118
+        "此用戶端無法使用選項面板。",  -- 1119
+        "啟用",  -- 1120
+        "整個 HUD；關閉後恢復遊戲內建的框架",  -- 1121
+        "滑鼠和鍵盤介面中也啟用",  -- 1122
+        "通常 HUD 僅在使用遊戲手把介面時執行",  -- 1123
+        "隱藏遊戲內建的框架",  -- 1124
+        "顯示我們的框架時，隱藏遊戲的玩家、目標和專注目標框架",  -- 1125
+        "聊天視窗移到左上角",  -- 1126
+        "HUD 執行時將聊天視窗移到左上角",  -- 1127
+        "閒置時的垂直條",  -- 1128
+        "非戰鬥狀態下生命力全滿時，垂直條保持的可見程度（0 為隱藏）",  -- 1129
+        "職業顏色",  -- 1130
+        "依職業為你的血條和其他玩家的血條著色",  -- 1131
+        "職業圖示",  -- 1132
+        "在目標和目標的目標的玩家名字前顯示職業圖示",  -- 1133
+        "目標框架威脅",  -- 1134
+        "目標框架上的盾牌圖示和光暈：攻擊你時為紅色，即將拉到仇恨時紅黃交替，正在失去仇恨時黃藍交替，不在你身上時為藍色",  -- 1135
+        "全部使用緊湊條",  -- 1136
+        "目標框架和名條使用緊湊樣式，寬度略多於一半（仍可分別設定；預設不會改變它）",  -- 1137
+        "精簡目標框架",  -- 1138
+        "目標框架寬度略大於一半",  -- 1139
+        "戰鬥中的生命值顏色",  -- 1140
+        "戰鬥中，生命值條隨生命值下降由綠色經黃色變為紅色",  -- 1141
+        "文字背景陰影",  -- 1142
+        "在目標文字後加一條淡淡的暗帶，使其易於閱讀",  -- 1143
+        "文字大小",  -- 1144
+        "我們框架上文字的大小",  -- 1145
+        "框架大小",  -- 1146
+        "我們的單位框架的大小",  -- 1147
+        "戰鬥中的快捷列",  -- 1148
+        "在有事需要注意之前，戰鬥中你的快捷列、寵物和專注目標有多明顯",  -- 1149
+        "生命力低於時完整",  -- 1150
+        "當你的生命力低於此值時，快捷列恢復為完整",  -- 1151
+        "法力低於時完整",  -- 1152
+        "當你的法力低於此值時，快捷列恢復為完整",  -- 1153
+        "閒置時的玩家條",  -- 1154
+        "生命值全滿或脫離戰鬥時玩家條的可見程度（0 為隱藏）",  -- 1155
+        "商人和銀行說明",  -- 1156
+        "商人的「出售垃圾」按鈕會詢問出售什麼；商人和銀行處可快速移動",  -- 1157
+        "顯示進階選項",  -- 1158
+        "所有設定，而不僅是主要開關",  -- 1159
+        "玩家框架",  -- 1160
+        "我們的玩家條，左上角",  -- 1161
+        "目標框架",  -- 1162
+        "我們的目標條，頂部中間",  -- 1163
+        "寵物條",  -- 1164
+        "玩家條下方或直立條旁邊的小型寵物條",  -- 1165
+        "專注目標框架",  -- 1166
+        "我們的專注目標框架",  -- 1167
+        "角色旁的細長直立生命條和能量條，適合第三人稱視角（取代玩家條）",  -- 1168
+        "商人開啟時出售垃圾",  -- 1169
+        "商人一開啟就依你的規則出售垃圾",  -- 1170
+        "白色武器和護甲算作垃圾",  -- 1171
+        "將白色武器和護甲視為垃圾（工具、魚竿、有使用效果的裝備或可能是升級的物品除外；總是先詢問）",  -- 1172
+        "打開銀行時存放",  -- 1173
+        "標記為存銀行的物品，以及（開啟時）銀行裡已有的物品，會自動存入",  -- 1174
+        "遊戲內建的選項；我們的小框架會跟隨它",  -- 1175
+        "冷卻管理員",  -- 1176
+        "遊戲的冷卻管理員",  -- 1177
+        "個人資源顯示",  -- 1178
+        "角色下方的生命值和能量",  -- 1179
+        "銀行自動接收材料",  -- 1180
+        "遊戲中銀行的選項",  -- 1181
+        "增益開始時顯示提示",  -- 1182
+        "遊戲選項：增益生效時，其提示會短暫彈出（手把介面）",  -- 1183
+        "聊天名稱使用職業顏色",  -- 1184
+        "遊戲的聊天設定，一次套用於所有聊天類型：玩家名稱顯示為其職業顏色",  -- 1185
+        "開啟選項面板（選項 > 插件 > ControllerCam HUD）",  -- 1186
+        "框架",  -- 1187
+        "畫面淡出",  -- 1188
+        "特效",  -- 1189
+        "外觀",  -- 1190
+        "任務、聊天和地圖",  -- 1191
+        "背包、銀行和商人",  -- 1192
+        "釣魚",  -- 1193
+        "協助工具",  -- 1194
+        "原生選項",  -- 1195
+        "%s  |  遊戲手把介面：%s  |  執行中：%s",  -- 1196
+        "玩家 %s，目標 %s，寵物 %s，專注目標 %s  |  已隱藏遊戲框架：%s  |  聊天已移動：%s",  -- 1197
+        "原生選項：目標的目標 %s，冷卻管理員 %s，個人資源 %s",  -- 1198
+        "文字大小 %d%%  |  文字陰影：%s",  -- 1199
+        "商人和銀行說明：%s  |  自動出售：%s  |  白色裝備算垃圾：%s",  -- 1200
+        "閒置可見度 %d%%  |  縮放 %d%%  |  職業顏色：%s",  -- 1201
+        "適用於遊戲手把介面的極簡動作遊戲風格 HUD。",  -- 1202
+        "已啟用",  -- 1203
+        "已停用：遊戲內建的框架已恢復",  -- 1204
+        "滑鼠和鍵盤介面中也使用：%s",  -- 1205
+        "已隱藏遊戲框架：%s",  -- 1206
+        "聊天已移到左上角：%s",  -- 1207
+        "職業顏色：%s",  -- 1208
+        "此用戶端沒有該選項。",  -- 1209
+        "%s：%s（遊戲內建的選項）",  -- 1210
+        "遊戲目前不接受該操作。",  -- 1211
+        "商人和銀行說明：%s",  -- 1212
+        "自動出售：%s",  -- 1213
+        "白色裝備算垃圾：%s",  -- 1214
+        "商人說明已關閉。",  -- 1215
+        "用法：/cchud sell [junk | recommended | white | green | blue]",  -- 1216
+        "銀行開啟時存入已標記的物品：%s",  -- 1217
+        "用法：/cchud junk <item>（按住 Shift 點擊物品，將其放入聊天輸入列）",  -- 1218
+        "物品 %d：垃圾，與其餘一起出售",  -- 1219
+        "物品 %d：保留，永不出售",  -- 1220
+        "物品 %d：存入銀行",  -- 1221
+        "文字陰影：%s",  -- 1222
+        "用法：/cchud text <80-250>",  -- 1223
+        "文字大小 %d%%",  -- 1224
+        "示範已停止",  -- 1225
+        "HUD 未執行。",  -- 1226
+        "示範執行中：循環播放一場虛構的戰鬥。再次輸入 /cchud demo 可停止。",  -- 1227
+        "用法：/cchud idle <0-100>",  -- 1228
+        "閒置可見度 %d%%",  -- 1229
+        "用法：/cchud scale <50-200>",  -- 1230
+        "縮放 %d%%",  -- 1231
+        "拖曳框架，然後輸入 /cchud lock。",  -- 1232
+        "框架已鎖定",  -- 1233
+        "一切已恢復到初始狀態：設定、框架和畫面版面（你的商人標記和價格歷史會保留）。",  -- 1234
+        "框架已恢復到初始位置",  -- 1235
+        "未知指令「%s」。輸入 /cchud help",  -- 1236
+        "錯誤列表已清空。",  -- 1237
+        "沒有記錄的錯誤。",  -- 1238
+        "已記錄 %d 個錯誤（最新的在最後）。/cchud errors clear 清空列表。",  -- 1239
+        "顯示狀態",  -- 1240
+        "開啟或關閉 HUD（關閉後恢復遊戲內建的框架）",  -- 1241
+        "滑鼠和鍵盤介面中也使用 HUD",  -- 1242
+        "使用我們的框架，或遊戲內建的",  -- 1243
+        "角色旁邊的細長垂直生命力和能量條",  -- 1244
+        "目標的目標（遊戲內建的選項，遊戲選單中也有）",  -- 1245
+        "遊戲的冷卻管理員（遊戲內建的選項）",  -- 1246
+        "角色下方的生命值和能量（遊戲內建的選項）",  -- 1247
+        "增益開始時彈出的提示（遊戲內建選項）",  -- 1248
+        "保持遊戲內建的玩家和目標框架可見（開）或將其隱藏（關）",  -- 1249
+        "在商人處：選擇出售什麼（另有：sell junk, sell recommended, sell white | green | blue）",  -- 1250
+        "將白色武器和護甲算作垃圾",  -- 1251
+        "標記物品：一律出售、永不出售或存入銀行（按住 Shift 點擊，將其放入聊天輸入列）",  -- 1252
+        "在銀行：存入銀行裡已有的物品和所有標記為存銀行的物品",  -- 1253
+        "在銀行：取出你身上已有的物品",  -- 1254
+        "打開銀行後立即存放",  -- 1255
+        "銀行自動接收材料（遊戲內建的選項）",  -- 1256
+        "文字大小，以百分比表示（150在電視上很清晰）",  -- 1257
+        "沒事發生時玩家條的可見程度（0 為隱藏）",  -- 1258
+        "框架大小，百分比",  -- 1259
+        "將框架拖曳到你想要的位置（遊戲的編輯模式也能做到）",  -- 1260
+        "將框架恢復到初始位置",  -- 1261
+        "播放一場簡短的虛構戰鬥，查看框架如何反應（再次輸入可停止）",  -- 1262
+        "將螢幕上的內容與設定比對（check all 列出每一列）",  -- 1263
+        "儲存此用戶端遊戲手把介面的描述（用於疑難排解）",  -- 1264
+        "顯示此清單",  -- 1265
+        "HUD最近遇到的錯誤，重載後也保留（用於回報）",  -- 1266
     },
 }
 TRANSLATIONS.esMX = TRANSLATIONS.esES      -- Latin American Spanish uses the same text

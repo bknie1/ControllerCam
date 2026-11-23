@@ -1005,8 +1005,7 @@ Ce sac seulement
 Mettre dedans
 Prendre le sac
 Plus
-Infobulle
-Masquer l'infobulle
+Trier
 Sacs
 %d libres
 Emplacement libre

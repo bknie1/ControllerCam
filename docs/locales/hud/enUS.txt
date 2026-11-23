@@ -1005,8 +1005,7 @@ Only this bag
 Put in
 Pick up bag
 More
-Tooltip
-Hide tooltip
+Sort
 Bags
 %d free
 Empty slot

@@ -1,11 +1,17 @@
 # Changelog
 
-## 1.4.12
+## 1.4.13
+
+(1.4.12 was tagged but never released: its build failed.)
+
 
 ControllerCam: HUD
+- The test suite runs in full on every release again: test classes added at the end of the HUD's test file were never run by the release build.
 - Plain gear sells again. A white item, or a green that binds when equipped and isn't bound yet, is advised for sale when it's below the item level of what you wear in that slot (for rings and trinkets the lower of the two), or armour your class never wears: lighter than you wear now (cloth or leather for a paladin), or heavier than your class ever wears. It says why: "Vendor  below what you wear", "Vendor  not your armour type", or Auction where the auction house clearly pays more. The bag window fades it with the junk and the vendor's Smart sale takes it. Blue and better never sell this way, nor a green already bound to you. The reasons to keep still come first: gear for one of your specs, an equipment set, unique, something you use, a quest, an upgrade for another character of yours, and a green one of your enchanters would still get a skill-up from (Disenchant).
 - The Hearthstone is the first item in the bag window's Smart order, ahead of everything else.
 - Fixed: at a vendor, X in the bag window put gear on (a bind-on-equip sword, armour) instead of selling it. X now uses that very bag slot, as the game's own right click does: at a vendor it sells anything, gear included, with no question, and the vendor's buyback has it as usual. At the bank it moves the item, at the mailbox it attaches it, in a trade it trades it, and anywhere else it uses it or puts it on. The mouse's right click and X in a fight work the same way. Selling gear of one of your equipment sets, or anything worth a gold or more, is said in chat ("Sold Ornate Blade: the vendor can sell it back to you.").
+- Fixed: at the bank, moving things out of it. LT and RT (said as "to the bank") gave the controller away, and with nowhere for it to go there was no cursor and nothing to choose. At the bank, LT, RT and the back button now go between your bags and the bank inside the bag window, and the controller stays with it. The bank opens on its first item, and X moves it into your bags, the game's own move. Going back to your bags puts you where you were, and so does going back to the bank.
+- R3 in the bag window sorts again (your bags, or the bank in the bank view), and the chosen slot's tooltip always shows.
 
 ## 1.4.11
 

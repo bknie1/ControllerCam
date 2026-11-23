@@ -58,7 +58,7 @@ B.TOP = 72                                     -- where the grid begins (under t
 B.BAG = B.SIZE                                 -- a bag in the bag row: a slot's size, in the grid's columns
 B.RULE = 9                                     -- grid, rule, bags: the space either side of the rule
 B.KEYS = { "PADDUP", "PADDDOWN", "PADDLEFT", "PADDRIGHT", "PAD1", "PAD2", "PAD3", "PAD4", "PADLSHOULDER",
-           "PADRSHOULDER", "PADRSTICK", "PADBACK" }   -- (R3: tooltips on and off, as in the game's own bags)        -- (the back button only while the bank is open)
+           "PADRSHOULDER", "PADRSTICK", "PADBACK" }   -- (R3: a quick sort)        -- (the back button only while the bank is open)
 B.SWITCH = { "PADLTRIGGER", "PADRTRIGGER" }    -- read, never bound: they are the Gamepad UI's Shift and Ctrl
 -- Windows the controller can be handed to and back (LT / RT)
 B.OTHER = { "MerchantFrame", "BankFrame", "MailFrame", "TradeFrame", "AuctionHouseFrame", "AuctionFrame",
@@ -500,7 +500,13 @@ function B:FollowFocus(now)
     local pressed = down and not self.triggerWas
     self.triggerWas = down
     local was = self.hasPad
-    if not B.OtherWindow() then
+    if self.bankOpen and Shown(rawget(_G, "BankFrame")) then
+        -- at the bank its items are in this window: LT / RT go between your bags and the bank here, as the back
+        -- button does, and the controller stays with the window (never handed to the game's bank window, whose
+        -- focus can rest on the game's own unseen bags: no cursor anywhere then)
+        self.hasPad, self.pressAt = true, nil
+        if pressed and not InCombatLockdown() then self:SwitchView() end
+    elseif not B.OtherWindow() then
         self.hasPad, self.pressAt = true, nil
     elseif not InCombatLockdown() then
         local f, known = B.GameFocus()
@@ -1271,10 +1277,13 @@ function B:Legend()
         if pick then add("PAD1", pick) end
     end
     add("PAD4", L["More"]); add("PAD2", L["Close"])
-    add("PADRSTICK", B.TipsOff() and L["Tooltip"] or L["Hide tooltip"])
+    add("PADRSTICK", L["Sort"])                                       -- (R3: a quick sort, as it always was)
     if self.bankOpen then add("PADBACK", self.view == "bank" and L["Bags"] or L["Bank"]) end
     local text = table.concat(parts, "   ")
-    if B.OtherWindow() then
+    if self.bankOpen and Shown(rawget(_G, "BankFrame")) then
+        local words = self.view == "bank" and L["%s or %s: back to bags"] or L["%s or %s: to the bank"]
+        text = text .. "\n" .. GREY .. words:format(Key("PADLTRIGGER"), Key("PADRTRIGGER")) .. "|r"
+    elseif B.OtherWindow() then
         text = text .. "\n" .. GREY .. B.ToOther():format(Key("PADLTRIGGER"), Key("PADRTRIGGER")) .. "|r"
     end
     return text
@@ -1415,19 +1424,8 @@ function B:Mark()
     sel:Show()
 end
 
--- Tooltips as in the game's own bags: with the controller, the game's setting (GamepadDisableTooltips), which
--- R3 turns on and off; with the mouse, always
-function B.TipsOff()
-    local v = Try(rawget(_G, "GetCVar"), "GamepadDisableTooltips")
-    return v == "1" or v == true
-end
-function B:ToggleTips()
-    local set = (C_CVar and C_CVar.SetCVar) or rawget(_G, "SetCVar")
-    Try(set, "GamepadDisableTooltips", B.TipsOff() and "0" or "1")
-    if B.TipsOff() and B.tipMine then GameTooltip:Hide(); B.tipMine = false end
-    self:Tip()
-    if frame then frame.legend:SetText(self:Legend()) end
-end
+-- The chosen slot's tooltip always shows (the user's call: no switching it off, R3 sorts instead)
+function B.TipsOff() return false end
 
 -- The tooltip of the chosen slot, beside the window (mouse: true when the mouse chose it)
 function B:Tip(mouse)
@@ -1673,7 +1671,7 @@ function B:Pad(key)
     elseif key == "PAD4" then self:OpenMenu()
     elseif key == "PAD2" then self:Close()
     elseif key == "PADBACK" then self:SwitchView()
-    elseif key == "PADRSTICK" then self:ToggleTips()
+    elseif key == "PADRSTICK" then self:Sort()
     else return false end
     return true
 end
@@ -1723,8 +1721,12 @@ end
 -- The bank in the window, or your bags again (only while the bank is open)
 function B:SwitchView(to)
     if not self.bankOpen then self.view = "bags"; return end
+    self.viewAt = self.viewAt or {}
+    self.viewAt[self.view] = self.index                      -- (where you were, kept for coming back)
     self.view = to or (self.view == "bank" and "bags" or "bank")
-    self.only, self.index, self.scroll, self.zone, self.bagIndex = nil, 1, 0, "grid", 1
+    self.only, self.scroll, self.zone, self.bagIndex = nil, 0, "grid", 1
+    self.index = self.viewAt[self.view] or 1                 -- (the bank: its first slot the first time)
+    self.padTip = true
     self:Update()
 end
 
@@ -2184,7 +2186,10 @@ events:SetScript("OnEvent", ns.Protect(function(_, event, who, what)
     local flag = FLAGS[event]
     if flag then
         B[flag[1]] = flag[2]
-        if event == "BANKFRAME_CLOSED" and B.view == "bank" then B.view, B.only = "bags", nil end
+        if event == "BANKFRAME_CLOSED" then
+            B.viewAt = nil
+            if B.view == "bank" then B.view, B.only, B.index = "bags", nil, 1 end
+        end
         Soon(false)
     elseif event == "PLAYER_REGEN_DISABLED" then
         -- (bindings can still be changed at this moment): with the window open and the controller its, the

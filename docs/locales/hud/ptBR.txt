@@ -1005,8 +1005,7 @@ Só esta bolsa
 Colocar
 Pegar bolsa
 Mais
-Dica
-Ocultar dica
+Organizar
 Bolsas
 %d livres
 Espaço vazio
