@@ -508,6 +508,12 @@ function B.HostBank(on)
         B.bankParent = Try(bank.GetParent, bank) or UIParent
         B.hosting = true
         Try(bank.SetParent, bank, B.holder)
+        -- out of sight is not enough: shown, the Gamepad UI's cursor still starts on it and keeps every button.
+        -- Put away as B would (the bank stays open: its hiding closes nothing while it's ours), now and once
+        -- the game is done showing it
+        B.PutBankAway()
+        C_Timer.After(0, B.PutBankAway)
+        C_Timer.After(0.2, B.PutBankAway)
         ns.Note("bags: the bank is in the bag window")
         return true
     elseif B.hosting then
@@ -517,6 +523,15 @@ function B.HostBank(on)
         ns.Note("bags: the game's bank window back")
     end
     return false
+end
+
+function B.PutBankAway()
+    local bank = rawget(_G, "BankFrame")
+    if not (B.hosting and B.bankOpen) or InCombatLockdown() or type(bank) ~= "table" or not Shown(bank) then return end
+    local hide = rawget(_G, "HideUIPanel")
+    if hide then Try(hide, bank) end                         -- (the game's own way: its window list kept right)
+    if Shown(bank) then Try(bank.Hide, bank) end
+    ns.Note("bags: the game's bank window put away (its cursor with it)")
 end
 
 -- The bank slot the game's own cursor is on, while its bank window has the controller: { bag, slot } or nil.

@@ -14667,7 +14667,9 @@ class BagWindow(unittest.TestCase):
         B, o, use, bank = e.ns.Bags, e.mock.overrides, e.g.ControllerCamHUD_BagUse, e.g.BankFrame
         e.update(0.05)
         self.assertTrue(B.hosting)
-        self.assertTrue(e.same(bank.parent, B.holder))               # the game's bank window out of sight
+        self.assertTrue(e.same(bank.parent, B.holder))               # the game's bank window out of sight,
+        self.assertFalse(bank.shown)                                 # and put away (its cursor can't start there)
+        self.assertTrue(B.bankOpen)
         self.assertEqual(e.g.BANK_CLOSED, 0)                         # (the bank stays open)
         self.assertTrue(B.open)
         self.assertEqual((B.view, B.list[1].id), ("bank", 301))      # this window is the bank,
