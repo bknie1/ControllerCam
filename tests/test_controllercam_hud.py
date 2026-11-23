@@ -12401,6 +12401,30 @@ class Sleepy(unittest.TestCase):
 class RaidMarks(unittest.TestCase):
     """Raid target marks (skull, cross...) on the target frame and on nameplates, as they are set and taken off."""
 
+    def test_a_mark_on_a_name_alone_sits_before_the_text(self):
+        # a friend's plate has no bar: the mark goes just before where the line starts, not over the level
+        e = Env()
+        e.lua.execute("mock_marks = {}; GetRaidTargetIndex = function(unit) return mock_marks[unit] end")
+        marks = e.lua.globals().mock_marks
+        p = e.mock.addPlate("nameplate1", e.lua.table(name="Mtt Burgerpants", level=34, isPlayer=True,
+                                                      attackable=False, reaction=5, health=5, healthMax=5))
+        o = e.ns.Nameplates.byPlate[p]
+        marks["nameplate1"] = 1                                        # a star
+        e.mock.fire("RAID_TARGET_UPDATE")
+        self.assertFalse(o.bars)
+        pt = o.raidMark.points[1]
+        self.assertTrue(e.same(pt[2], o.name))
+        self.assertEqual((pt[1], pt[3]), ("RIGHT", "CENTER"))
+        self.assertLess(pt[4], 0)                                       # left of the middle: before the text
+        foe = e.mock.addPlate("nameplate2", e.lua.table(name="Foe", level=34, isPlayer=True, attackable=True,
+                                                        reaction=2, health=5, healthMax=5, combat=True))
+        f = e.ns.Nameplates.byPlate[foe]
+        marks["nameplate2"] = 6
+        e.mock.fire("RAID_TARGET_UPDATE")
+        self.assertTrue(f.bars)
+        self.assertTrue(e.same(f.raidMark.points[1][2], f.health))      # with a bar: beside it, as ever
+        self.assertEqual(e.errors(), [])
+
     def test_marks_show_and_go(self):
         e = Env()
         e.lua.execute("mock_marks = {}; GetRaidTargetIndex = function(unit) return mock_marks[unit] end")
@@ -16161,6 +16185,28 @@ class NoSecretArithmetic(unittest.TestCase):
         fs = e.g.CreateFrame("Frame").CreateFontString(e.g.CreateFrame("Frame"))
         e.ns.SecretPercent(fs, "target")
         self.assertEqual(e.g.TRIED, 0)
+        self.assertEqual(e.errors(), [])
+
+
+class NoSecretAlpha(unittest.TestCase):
+    def test_a_plates_hidden_alpha_is_never_worked_on(self):
+        # in a battleground the game may keep a plate name's alpha to itself: the threat glow behind the name
+        # multiplied it on every frame, refused each time, an addon error each (PlateStates.lua:346, 1.4.15)
+        e = Env()
+        e.lua.execute("""
+            TRIED = 0
+            local mt = { __mul = function() TRIED = TRIED + 1; error("blocked") end,
+                         __sub = function() TRIED = TRIED + 1; error("blocked") end,
+                         __lt = function() TRIED = TRIED + 1; error("blocked") end }
+            HIDDEN_ALPHA = setmetatable({ secret = true }, mt)
+        """)
+        p = e.mock.addPlate("nameplate1", e.lua.table(name="Foe", level=40, health=5, healthMax=10,
+                                                      attackable=True, reaction=2, combat=True))
+        o = e.ns.Nameplates.byPlate[p]
+        e.lua.eval("function(o) o.name.GetAlpha = function() return HIDDEN_ALPHA end; o.threatState = 'aggro'; o.threatPop = 0.3 end")(o)
+        e.update(1.0, step=0.05)
+        self.assertEqual(e.g.TRIED, 0)
+        self.assertIsNone(e.ns.AlphaOf(o.name))
         self.assertEqual(e.errors(), [])
 
 

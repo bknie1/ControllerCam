@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.4.16
+
+ControllerCam: HUD
+- A raid mark on a friend's nameplate (a name alone, no bar) sits just before the name line, and before the class icon there, instead of over the level.
+- Fixed, found with the game's own record of it: the "large number of errors" warning in battlegrounds came from nameplates. The threat glow behind a name took its brightness from the name's own alpha, which the game keeps to itself in a battleground, and working on it was refused on every frame for every plate with threat showing (PlateStates.lua line 346). The glow now uses the alpha the HUD set itself, and nothing else in the HUD works on an alpha the game keeps secret.
+
 ## 1.4.15
 
 ControllerCam: HUD

@@ -437,8 +437,26 @@ end
 local function UpdateAuras(o) ns.PlateStates:Update(o, o.health:GetFraction()) end
 
 -- Its raid mark, at the left end of its bar (a name-only friend: where the bar would be)
+-- Its raid mark: left of the bar; on a plate with no bar (a friend's name alone), just before where the line's text
+-- starts (and before a class icon there), not at the hidden bar's end, which lay over the level
 function NP.Mark(o)
-    if o and o.unit then ns.ShowRaidMark(o, o, o.unit, 20, "RIGHT", o.health, "LEFT", -5, 0) end
+    if not (o and o.unit) then return end
+    ns.ShowRaidMark(o, o, o.unit, 20, "RIGHT", o.health, "LEFT", -5, 0)
+    local t = rawget(o, "raidMark")
+    if not t then return end
+    t:ClearAllPoints()
+    if o.bars then
+        t:SetPoint("RIGHT", o.health, "LEFT", -5, 0)
+        return
+    end
+    local icon = rawget(o, "classTex")
+    if icon and icon:IsShown() then
+        t:SetPoint("RIGHT", icon, "LEFT", -3, 0)
+        return
+    end
+    local ok, w = pcall(o.name.GetStringWidth, o.name)
+    w = (ok and type(w) == "number" and not ns.IsSecret(w)) and w or 0
+    t:SetPoint("RIGHT", o.name, "CENTER", -w / 2 - 3, 0)
 end
 
 local function UpdateInfo(o)

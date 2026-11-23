@@ -118,6 +118,14 @@ function ns.Protect(fn)
     end
 end
 
+-- A frame's alpha, plainly: nil where the game keeps it secret (in a battleground the game may keep a plate's, and
+-- its name's, to itself; working anything out on it is refused, and each refusal counts as an addon error)
+function ns.AlphaOf(f)
+    if type(f) ~= "table" or not f.GetAlpha then return nil end
+    local ok, a = pcall(f.GetAlpha, f)
+    if ok and type(a) == "number" and not ns.IsSecret(a) then return a end
+end
+
 -- Shown, plainly: true only when the game says so in a value we may look at (a secret answer is never compared:
 -- a blocked comparison counts as an addon error, even inside a pcall)
 function ns.ShownPlain(f)
@@ -378,7 +386,7 @@ local keeper = CreateFrame("Frame")
 local since = 0
 local function Keep()
     for frame, a in pairs(kept) do
-        if frame:GetAlpha() ~= a then frame:SetAlpha(a) end
+        if ns.AlphaOf(frame) ~= a then frame:SetAlpha(a) end
     end
 end
 keeper:SetScript("OnUpdate", function(_, dt)
@@ -391,7 +399,7 @@ end)
 ns.KeepAlpha = function(frame, a)
     if a == nil then kept[frame] = nil; return end
     kept[frame] = a
-    if frame:GetAlpha() ~= a then frame:SetAlpha(a) end
+    if ns.AlphaOf(frame) ~= a then frame:SetAlpha(a) end
 end
 
 -- The same, looked at every frame: for what the game sets again and again as you move (a nameplate's own
@@ -404,7 +412,7 @@ local function KeepFast()
     local any = false
     for frame, a in pairs(keptFast) do
         any = true
-        if frame:GetAlpha() ~= a then
+        if ns.AlphaOf(frame) ~= a then
             frame:SetAlpha(a)
             ns.alphaFixes = ns.alphaFixes + 1
         end
@@ -418,7 +426,7 @@ end
 ns.KeepAlphaFast = function(frame, a)
     if a == nil then keptFast[frame] = nil; return end
     keptFast[frame] = a
-    if frame:GetAlpha() ~= a then frame:SetAlpha(a) end
+    if ns.AlphaOf(frame) ~= a then frame:SetAlpha(a) end
     fastKeeper:SetScript("OnUpdate", FastTick)
 end
 
@@ -430,7 +438,7 @@ function ns.SetBlizzardFaded(name, fade)
     local frame = _G[name]
     if not frame or not frame.SetAlpha then return end
     if fade then
-        if not faded[name] then faded[name] = frame:GetAlpha() or 1 end
+        if not faded[name] then faded[name] = ns.AlphaOf(frame) or 1 end
         ns.KeepAlpha(frame, 0)
     elseif faded[name] then
         local was = faded[name]

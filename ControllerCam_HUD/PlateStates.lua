@@ -343,7 +343,10 @@ local function Tick(_, dt)
                 o.nameGlow:SetPoint("TOPLEFT", o.name, "TOPLEFT", -pad, 14)
                 o.nameGlow:SetPoint("BOTTOMRIGHT", o.name, "BOTTOMRIGHT", pad, -14)
                 o.nameGlow:SetVertexColor(r, g, b, 1)
-                o.nameGlow:SetAlpha(o.name:GetAlpha() * math.min(1, a + 0.3 * flare))   -- hidden name: no glow either
+                -- hidden name: no glow either. (Its alpha as we set it: the game may keep the one it reads back to
+                -- itself in a battleground, and multiplying that was refused on every frame, an addon error each.)
+                local nameAlpha = ns.AlphaOf(o.name) or ns.Nameplates.NameAlpha(o)
+                o.nameGlow:SetAlpha(nameAlpha * math.min(1, a + 0.3 * flare))
                 o.threatIcon:SetVertexColor(r, g, b, 1)
             else
                 o.nameGlow:SetAlpha(0)

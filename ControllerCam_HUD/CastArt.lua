@@ -989,7 +989,7 @@ function Art:Shown()
     local n = 0
     for i = 1, #self.pieces do
         local t = self.pieces[i]
-        if t:IsShown() and (t:GetAlpha() or 0) > 0 then n = n + 1 end
+        if t:IsShown() and (ns.AlphaOf(t) or 0) > 0 then n = n + 1 end
     end
     return n
 end

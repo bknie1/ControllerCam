@@ -129,7 +129,7 @@ local function Collect()
     end
     for f in pairs(want) do
         if R.frames[f] == nil then
-            local a = f:GetAlpha() or 1
+            local a = ns.AlphaOf(f) or 1
             R.frames[f] = (a > 0) and a or 1
         end
     end
@@ -214,7 +214,7 @@ local function SetAll(a)
     for f, base in pairs(R.frames) do
         if not R.muted[f] then                           -- (put away altogether just now: not ours to fade)
             local v = base * a
-            if math.abs((f:GetAlpha() or 1) - v) > 0.004 then f:SetAlpha(v) end
+            if math.abs((ns.AlphaOf(f) or 1) - v) > 0.004 then f:SetAlpha(v) end
         end
     end
 end
@@ -227,7 +227,7 @@ function R.Mute(name, on)
     if not IsFrame(f) then return false end
     if on and not R.muted[f] then
         R.muted[f] = true
-        R.mutedWas[f] = R.frames[f] or f:GetAlpha() or 1
+        R.mutedWas[f] = R.frames[f] or ns.AlphaOf(f) or 1
         ns.KeepAlpha(f, 0)
     elseif not on and R.muted[f] then
         R.muted[f] = nil
