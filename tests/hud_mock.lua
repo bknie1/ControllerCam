@@ -240,6 +240,7 @@ GameTooltip.SetOwner = function(self, owner, anchor)
     self.owned = (self.owned or 0) + 1
 end
 GameTooltip.SetAnchorType = function(self, anchor) self.anchor = anchor end
+GameTooltip.GetOwner = function(self) return self.owner end
 function GameTooltip_SetDefaultAnchor(tooltip, parent)
     tooltip:SetOwner(parent, "ANCHOR_NONE")
     tooltip.cornered = true

@@ -14652,6 +14652,18 @@ class BagWindow(unittest.TestCase):
         e.mock.keysDown.PADLTRIGGER = False
         e.update(0.05)
         self.assertFalse(B.hasPad)                                   # (never toggled out of step)
+        slot = e.g.CreateFrame("Button", "BankFrameItem2", e.g.BankFrame)   # the game's cursor on its 2nd slot:
+        slot.GetBagID = e.lua.eval("function() return -1 end")
+        slot.id = 2
+        slot.GetID = e.lua.eval("function(self) return self.id end")
+        e.mock.put(-1, 2, T(id=302, name="Iron Ore", quality=1, price=25, count=13, **{"class": 7}))
+        e.g.GameTooltip.SetOwner(e.g.GameTooltip, slot, "ANCHOR_RIGHT")   # (its tooltip, the game's)
+        e.g.GameTooltip.Show(e.g.GameTooltip)
+        e.update(0.05)
+        self.assertEqual(o.PAD3, "CLICK ControllerCamHUD_BagUse:LeftButton")   # X: into your bags, from there
+        self.assertEqual(e.g.ControllerCamHUD_BagUse.attrs.macrotext, "/use -1 2")
+        self.assertIsNone(o.PADDUP)                                  # (the rest stays the window's)
+        self.assertIn("PAD3 To bags", plain(B.frame.legend.text))
         e.mock.keysDown.PADRTRIGGER = True                           # RT: back to its bags, so ours
         m.focusedFrame = e.g.ContainerFrameCombinedBags
         e.update(0.25)

@@ -485,6 +485,31 @@ function B.IsWindow(f)
     return false
 end
 
+-- The bank slot the game's own cursor is on, while its bank window has the controller: { bag, slot } or nil.
+-- (The game shows that slot's tooltip: its owner is the slot's button, inside the game's bank window.)
+function B.GameBankPick()
+    local bank = rawget(_G, "BankFrame")
+    if not Shown(bank) then return nil end
+    local owner = Try(GameTooltip.GetOwner, GameTooltip)
+    if type(owner) ~= "table" or not Shown(GameTooltip) then return nil end
+    local f, inside = owner, false
+    for _ = 1, 8 do
+        if f == bank then inside = true; break end
+        f = type(f) == "table" and Try(f.GetParent, f) or nil
+        if not f then break end
+    end
+    if not inside then return nil end
+    local bag = Num(Try(owner.GetBagID, owner))
+    if not bag then
+        local parent = Try(owner.GetParent, owner)
+        bag = parent and Num(Try(parent.GetID, parent))
+    end
+    local slot = Num(Try(owner.GetID, owner))
+    if not (bag and slot and slot > 0) then return nil end
+    if not Try(C_Container.GetContainerItemID, bag, slot) then return nil end
+    return { bag = bag, slot = slot }
+end
+
 -- Where the controller is, with another window open beside the bags. LT and RT are the Gamepad UI's own: they
 -- move its focus along its row of open windows, and our window stands in for the game's bags in that row. So
 -- ours follows the game's focus: it has the controller while the game's focus is on its (unseen) bags, and lets
@@ -509,6 +534,9 @@ function B:FollowFocus(now)
         -- buttons while it has it, ours (your bags) while its bags have it. The back button still shows the bank
         -- in this window.
         if focus ~= self.focusWas then
+            local key = IsKeyDown and ((IsKeyDown("PADLTRIGGER") and "LT") or (IsKeyDown("PADRTRIGGER") and "RT")) or nil
+            ns.Note("bags: at the bank, %s: the game's focus to %s", key or "no trigger",
+                focus == bankFrame and "its bank window" or (B.IsGameBag(focus) and "its bags") or tostring(focus))
             self.focusWas = focus
             if focus == bankFrame then
                 self.hasPad = false
@@ -518,6 +546,11 @@ function B:FollowFocus(now)
             end
         end
         self.pressAt = nil
+        if not self.hasPad then
+            self:Bind()                                      -- (X follows the game's cursor in its bank window)
+            local f = rawget(B, "frame")
+            if f and f.legend then f.legend:SetText(self:Legend()) end
+        end
     elseif self.bankOpen and Shown(bankFrame) then
         -- at the bank with no window manager to ask: LT / RT go between your bags and the bank in this window,
         -- as the back button does, and the controller stays with the window
@@ -1273,7 +1306,11 @@ function B:Legend()
         return table.concat(parts, "   ")
     end
     if not self.hasPad then
-        return GOLD .. L["%s or %s: back to bags"]:format(Key("PADLTRIGGER"), Key("PADRTRIGGER")) .. "|r"
+        local back = GOLD .. L["%s or %s: back to bags"]:format(Key("PADLTRIGGER"), Key("PADRTRIGGER")) .. "|r"
+        if self.bankOpen and B.aimed and self.bound and self.bound.PAD3 then
+            return Key("PAD3") .. " " .. L["To bags"] .. "\n" .. back
+        end
+        return back
     end
     if self.confirm then
         add("PAD1", L["Hold to destroy"]); add("PAD2", L["Keep"])
@@ -1632,6 +1669,13 @@ end
 
 function B:Wanted()
     local want = {}
+    if self.active and self.open and not self.hasPad and self.bankOpen and not InCombatLockdown() and not B.Yield() then
+        -- the game's bank window has the controller: X still moves the item its cursor is on into your bags (the
+        -- game's own move, a use with the bank open), so X goes both ways; every other button is the window's
+        local pick = B.GameBankPick()
+        if B.Aim(pick and pick.bag, pick and pick.slot) then want.PAD3 = "CLICK ControllerCamHUD_BagUse:LeftButton" end
+        return want
+    end
     if not (self.active and self.open and self.hasPad) or InCombatLockdown() or B.Yield() then return want end
     for _, key in ipairs(B.KEYS) do
         if B.NAV[key] then want[key] = "CLICK ControllerCamHUD_BagNav_" .. key .. ":LeftButton"

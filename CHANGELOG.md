@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.4.18
+
+ControllerCam: HUD
+- At the bank, X goes both ways: while the game's bank window has the controller, X moves the item its cursor is on into your bags (the same move X makes from the bank view in the bag window). The window's other buttons stay the game's. The bottom line says "X To bags".
+
 ## 1.4.17
 
 ControllerCam: HUD
