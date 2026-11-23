@@ -292,6 +292,7 @@ function R.Start(now)
                 alpha = (okA and type(Plain(alpha)) == "number") and alpha or 1 }
     R.scene = s
     Hold(true)
+    if ns.Veil then ns.Veil("flight", true) end                    -- (names out of the picture)
     film.title:SetText("")
     film.sub:SetText("")
     film.title:SetAlpha(0)
@@ -319,6 +320,7 @@ function R.Finish(why)
     if ns.Campfire and ns.Campfire.Minimap then ns.Campfire.Minimap(s, false) end
     Release(s)
     if film then film:Hide() end
+    if ns.Veil then ns.Veil("flight", false) end
     Hold(false)
     R.last = why
     ns.Note("flight film: ends (%s) after %.0f s", tostring(why), GetTime() - s.at)

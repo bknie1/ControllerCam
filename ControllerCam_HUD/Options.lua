@@ -222,7 +222,7 @@ local LAYOUT = {
     } },
     { page = "Items and auction house", groups = {
         { head = "Item advice", "auctionVerdict", "adviceUnsure", "upgradeSpecs", "statValues", "questItems", "skillKeep" },
-        { head = "Tooltips", "invTotals", "vendorPrice", "auctionPrice" },
+        { head = "Tooltips", "invTotals", "vendorPrice", "auctionPrice", "craftCost" },
         { head = "Auction house", "ahPanel", "auctionScan", "ahStrategy", "ahVoice", "ahShowKept", "ahCandles" },
         { head = "Appearances", "transmogSets", "tipAppearance" },
     } },

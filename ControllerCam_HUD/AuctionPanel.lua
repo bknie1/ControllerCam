@@ -929,6 +929,10 @@ local function ShowPane(e)
         if e.want and e.want.via then                                -- the point is in what it is made into
             why = L["made into %s"]:format(ns.Professions.ItemName(e.want.via)) .. "\n" .. why
         end
+    elseif e.verdict == "craft" and e.want then                      -- as it is, against crafted
+        local list = {}
+        for _, text in ipairs({ ns.Market.CraftWords(e.want.value) }) do list[#list + 1] = text end
+        if #list > 0 then why = table.concat(list, "\n") end
     elseif e.verdict == "disenchant" and e.want then                 -- what it gives
         local list = {}
         for i, m in ipairs(e.want.mats or {}) do list[i] = ns.Professions.MatText(m) end

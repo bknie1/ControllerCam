@@ -485,6 +485,40 @@ function B.IsWindow(f)
     return false
 end
 
+-- The bank in this window (with "One bag window" on): while the bank is open the game's bank window is put out of
+-- sight (into a hidden holder, so the Gamepad UI's cursor can't rest there and take every button for itself), and
+-- this window is the bank: its items with X, Y and A as your bags have them, LT for the bank, RT for your bags.
+-- The bank stays open (the game's window only closes it when it really hides), and closes with this window. Put
+-- back as the bank closes. Never begun in a fight (the game's own bank window then, as ever).
+B.holder = CreateFrame("Frame")
+B.holder:Hide()
+function B.HostBank(on)
+    local bank = rawget(_G, "BankFrame")
+    if type(bank) ~= "table" then return false end
+    if on then
+        if B.hosting or InCombatLockdown() or not (B.active and ns.db.bagWindow) then return false end
+        if not B.hideGuard then
+            local was = Try(bank.GetScript, bank, "OnHide")
+            B.hideGuard = true
+            Try(bank.SetScript, bank, "OnHide", function(self, ...)
+                if B.hosting then return end                 -- (out of sight by us: the bank stays open)
+                if was then return was(self, ...) end
+            end)
+        end
+        B.bankParent = Try(bank.GetParent, bank) or UIParent
+        B.hosting = true
+        Try(bank.SetParent, bank, B.holder)
+        ns.Note("bags: the bank is in the bag window")
+        return true
+    elseif B.hosting then
+        B.hosting = false
+        Try(bank.SetParent, bank, B.bankParent or UIParent)
+        B.bankParent = nil
+        ns.Note("bags: the game's bank window back")
+    end
+    return false
+end
+
 -- The bank slot the game's own cursor is on, while its bank window has the controller: { bag, slot } or nil.
 -- (The game shows that slot's tooltip: its owner is the slot's button, inside the game's bank window.)
 function B.GameBankPick()
@@ -527,7 +561,15 @@ function B:FollowFocus(now)
     local was = self.hasPad
     local focus, known = B.GameFocus()
     local bankFrame = rawget(_G, "BankFrame")
-    if self.bankOpen and Shown(bankFrame) and known and not InCombatLockdown() then
+    if self.bankOpen and B.hosting then
+        -- the bank in this window: the controller stays here; LT shows the bank, RT your bags
+        self.hasPad, self.pressAt = true, nil
+        if pressed and not InCombatLockdown() then
+            local lt = IsKeyDown and IsKeyDown("PADLTRIGGER")
+            local to = lt and "bank" or "bags"
+            if self.view ~= to then self:SwitchView(to) end
+        end
+    elseif self.bankOpen and Shown(bankFrame) and known and not InCombatLockdown() then
         -- at the bank, with the Gamepad UI's window manager there: LT / RT are the game's, moving its focus
         -- between its bank window and its (unseen) bags, and a window with the game's focus takes the d-pad and
         -- A for itself, so ours could not move there. Ours follows the game's focus: the bank window's own
@@ -546,17 +588,20 @@ function B:FollowFocus(now)
             end
         end
         self.pressAt = nil
+        B.BankSide(true)
         if not self.hasPad then
             self:Bind()                                      -- (X follows the game's cursor in its bank window)
             local f = rawget(B, "frame")
             if f and f.legend then f.legend:SetText(self:Legend()) end
         end
     elseif self.bankOpen and Shown(bankFrame) then
+        B.BankSide(false)
         -- at the bank with no window manager to ask: LT / RT go between your bags and the bank in this window,
         -- as the back button does, and the controller stays with the window
         self.hasPad, self.pressAt = true, nil
         if pressed and not InCombatLockdown() then self:SwitchView() end
     elseif not B.OtherWindow() then
+        B.BankSide(false)
         self.hasPad, self.pressAt = true, nil
     elseif not InCombatLockdown() then
         local f = focus
@@ -1044,59 +1089,107 @@ end
 
 local function Width() return B.PAD * 2 + B.COLS * B.STEP - B.GAP end
 
+-- Where the window sits: its top right corner (so it fills top to bottom, never growing upward), where you
+-- dragged it or by default. With the bank in it, two spots side by side: the bank on the left, your bags on the
+-- right (where the window always is); the window takes the spot of what it shows, the other's shown beside it.
+B.spot = CreateFrame("Frame", nil, UIParent)
+B.spot:SetSize(1, 1)
 local function Place()
+    if B.sided then return end                               -- (side by side with the game's bank: BankSide's)
+    local db = ns.db
+    if db and not db.bagTop and db.bagPos then               -- (a place kept by its bottom, before: by its top now)
+        local h = Num(Try(frame.GetHeight, frame)) or 500
+        db.bagTop = { x = db.bagPos.x, y = db.bagPos.y + h }
+    end
+    local pos = db and db.bagTop
+    B.spot:ClearAllPoints()
+    B.spot:SetWidth(Num(Try(frame.GetWidth, frame)) or 400)
+    if pos then B.spot:SetPoint("TOPRIGHT", UIParent, "BOTTOMRIGHT", pos.x, pos.y)
+    else B.spot:SetPoint("TOPRIGHT", UIParent, "TOPRIGHT", -60, -100) end
     frame:ClearAllPoints()
-    local pos = ns.db and ns.db.bagPos
-    if pos then frame:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", pos.x, pos.y)
-    else frame:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -60, 170) end
+    if B.hosting and B.bankOpen and B.view == "bank" then
+        frame:SetPoint("TOPRIGHT", B.spot, "TOPLEFT", -B.BANK_GAP, 0)
+    else
+        frame:SetPoint("TOPRIGHT", B.spot, "TOPRIGHT", 0, 0)
+    end
+end
+B.Place = function() if frame then Place() end end
+
+-- At the bank, the windows in the game's own order for LT and RT: its bags come before its bank window (LT to
+-- the bags, RT to the bank), so ours (standing in for its bags) takes the bank window's place on the left and
+-- the bank window sits to its right. Put back as the bank closes. Never in a fight.
+B.BANK_GAP = 12
+function B.BankSide(on)
+    if not frame or InCombatLockdown() then return end
+    local bank = rawget(_G, "BankFrame")
+    if on then
+        if type(bank) ~= "table" or not Shown(bank) then return end
+        local _, rel = Try(bank.GetPoint, bank, 1)
+        if B.sided and rel == frame then return end         -- (as we left it)
+        if not B.sided then
+            local p = { Try(bank.GetPoint, bank, 1) }
+            B.bankWas = #p > 0 and p or nil
+        end
+        local left, top = Num(Try(bank.GetLeft, bank)), Num(Try(bank.GetTop, bank))
+        local kBank = Num(Try(bank.GetEffectiveScale, bank)) or 1
+        local kOurs = Num(Try(frame.GetEffectiveScale, frame)) or 1
+        frame:ClearAllPoints()
+        if left and top then
+            frame:SetPoint("TOPLEFT", UIParent, "BOTTOMLEFT", left * kBank / kOurs, top * kBank / kOurs)
+        else
+            frame:SetPoint("TOPLEFT", UIParent, "TOPLEFT", 20, -100)
+        end
+        Try(bank.ClearAllPoints, bank)
+        Try(bank.SetPoint, bank, "TOPLEFT", frame, "TOPRIGHT", B.BANK_GAP, 0)
+        B.sided = true
+    elseif B.sided then
+        B.sided = nil
+        if type(bank) == "table" then
+            local _, rel = Try(bank.GetPoint, bank, 1)
+            if rel == frame then
+                Try(bank.ClearAllPoints, bank)
+                if B.bankWas then Try(bank.SetPoint, bank, unpack(B.bankWas)) end
+            end
+        end
+        B.bankWas = nil
+        Place()
+    end
 end
 
-local function Build()
-    frame = CreateFrame("Frame", "ControllerCamHUD_Bags", UIParent)
-    frame:SetSize(Width(), 300)
-    frame:SetFrameStrata("HIGH")
-    frame:EnableMouse(true)
-    frame:SetMovable(true)
-    if frame.SetClampedToScreen then frame:SetClampedToScreen(true) end
-    frame:RegisterForDrag("LeftButton")
-    frame:SetScript("OnDragStart", function(self) self:StartMoving() end)
-    frame:SetScript("OnDragStop", ns.Protect(function(self)
-        self:StopMovingOrSizing()
-        local right, bottom, edge = self:GetRight(), self:GetBottom(), UIParent:GetRight()
-        if Num(right) and Num(bottom) and Num(edge) then ns.db.bagPos = { x = right - edge, y = bottom } end
-        Place()
-    end))
-    frame.back = Edge(frame, "BACKGROUND", 0.03, 0.04, 0.07, 0.92)
-    frame.back:SetAllPoints(frame)
+-- The window's shell: its back, title, money, close button, filters, grid, rule and bag row. The window has one,
+-- and at the bank (the bank in the window) so has the side beside it, drawn the same way (B.DrawFace).
+local function Shell(f, main)
+    f.back = Edge(f, "BACKGROUND", 0.03, 0.04, 0.07, 0.92)
+    f.back:SetAllPoints(f)
     for _, side in ipairs({ "TOP", "BOTTOM" }) do
-        local t = Edge(frame, "BORDER", 0.55, 0.62, 0.75, 0.6)
-        t:SetPoint(side .. "LEFT", frame, side .. "LEFT")
-        t:SetPoint(side .. "RIGHT", frame, side .. "RIGHT")
+        local t = Edge(f, "BORDER", 0.55, 0.62, 0.75, 0.6)
+        t:SetPoint(side .. "LEFT", f, side .. "LEFT")
+        t:SetPoint(side .. "RIGHT", f, side .. "RIGHT")
         t:SetHeight(1)
     end
-    frame.title = ns.FontString(frame, 13, "LEFT")
-    frame.title:SetPoint("LEFT", frame, "TOPLEFT", B.PAD, -15)          -- (level with the close button)
-    frame.title:SetTextColor(0.98, 0.82, 0.3)
+    f.title = ns.FontString(f, 13, "LEFT")
+    f.title:SetPoint("LEFT", f, "TOPLEFT", B.PAD, -15)          -- (level with the close button)
+    f.title:SetTextColor(0.98, 0.82, 0.3)
     -- the game's own close button (its look), for the mouse; it does what B does
-    local ok, close = pcall(CreateFrame, "Button", nil, frame, "UIPanelCloseButtonNoScripts")
+    local ok, close = pcall(CreateFrame, "Button", nil, f, "UIPanelCloseButtonNoScripts")
     if not (ok and close) then
-        close = CreateFrame("Button", nil, frame)
+        close = CreateFrame("Button", nil, f)
         close.text = ns.FontString(close, 11, "CENTER")
         close.text:SetPoint("CENTER", close, "CENTER", 0, 0)
         close.text:SetText("x")
     end
     close:SetSize(22, 22)
-    close:SetPoint("TOPRIGHT", frame, "TOPRIGHT", -4, -4)
+    close:SetPoint("TOPRIGHT", f, "TOPRIGHT", -4, -4)
     close:SetScript("OnClick", ns.Protect(function() B:Close() end))
-    frame.close = close
-    frame.money = ns.FontString(frame, 10, "RIGHT")
-    frame.money:SetPoint("RIGHT", close, "LEFT", -6, 0)
-    frame.title:SetPoint("RIGHT", frame.money, "LEFT", -8, 0)
-    if frame.title.SetWordWrap then frame.title:SetWordWrap(false) end
+    f.close = close
+    f.money = ns.FontString(f, 10, "RIGHT")
+    f.money:SetPoint("RIGHT", close, "LEFT", -6, 0)
+    f.title:SetPoint("RIGHT", f.money, "LEFT", -8, 0)
+    if f.title.SetWordWrap then f.title:SetWordWrap(false) end
     -- the filters: the chosen one in the middle, its neighbours either side, LB and RB at the ends
-    local row = CreateFrame("Frame", nil, frame)
-    row:SetPoint("TOPLEFT", frame, "TOPLEFT", B.PAD, -32)
-    row:SetPoint("TOPRIGHT", frame, "TOPRIGHT", -B.PAD, -32)
+    local row = CreateFrame("Frame", nil, f)
+    row:SetPoint("TOPLEFT", f, "TOPLEFT", B.PAD, -32)
+    row:SetPoint("TOPRIGHT", f, "TOPRIGHT", -B.PAD, -32)
     row:SetHeight(30)
     row.back = Edge(row, "BACKGROUND", 1, 1, 1, 0.05)
     row.back:SetAllPoints(row)
@@ -1113,45 +1206,77 @@ local function Build()
         d:SetPoint("BOTTOM", row, "BOTTOM", (i - (#B.FILTERS + 1) / 2) * 9, 3)
         row.dots[i] = d
     end
-    for way, anchor in pairs({ [-1] = "LEFT", [1] = "RIGHT" }) do      -- (the mouse: either half of the row)
+    for way, anchor in pairs(main and { [-1] = "LEFT", [1] = "RIGHT" } or {}) do   -- (the mouse: either half)
         local hit = CreateFrame("Button", nil, row)
         hit:SetPoint("TOP" .. anchor, row, "TOP" .. anchor, 0, 0)
         hit:SetSize((B.COLS * B.STEP - B.GAP) / 2, 30)
         hit:SetScript("OnClick", ns.Protect(function() B:Filter(way) end))
     end
-    frame.filters = row
-    frame.grid = CreateFrame("Frame", nil, frame)
-    frame.grid:SetPoint("TOPLEFT", frame, "TOPLEFT", B.PAD, -B.TOP)
-    frame.grid:SetSize(B.COLS * B.STEP - B.GAP, B.STEP)
-    frame.heads = {}                                        -- (the sections' headings, made as needed)
+    f.filters = row
+    f.grid = CreateFrame("Frame", nil, f)
+    f.grid:SetPoint("TOPLEFT", f, "TOPLEFT", B.PAD, -B.TOP)
+    f.grid:SetSize(B.COLS * B.STEP - B.GAP, B.STEP)
+    f.heads = {}                                        -- (the sections' headings, made as needed)
     -- more rows than fit: a slim bar in the margin right of the grid, its bright part the rows in sight
-    frame.track = Edge(frame, "ARTWORK", 1, 1, 1, 0.1)
-    frame.track:SetWidth(2)
-    frame.track:SetPoint("TOPLEFT", frame.grid, "TOPRIGHT", 5, 0)
-    frame.track:SetPoint("BOTTOMLEFT", frame.grid, "BOTTOMRIGHT", 5, 0)
-    frame.thumb = Edge(frame, "OVERLAY", 1, 0.82, 0.3, 0.8)
-    frame.thumb:SetWidth(2)
-    frame.bags = CreateFrame("Frame", nil, frame)
-    frame.bags:SetSize(B.COLS * B.STEP - B.GAP, B.BAG)
-    frame.bagButtons = {}
-    frame.space = ns.FontString(frame.bags, 10, "RIGHT")
-    frame.space:SetPoint("RIGHT", frame.bags, "RIGHT", 0, 0)
-    frame.space:SetTextColor(unpack(C.muted))
-    frame.rule = Edge(frame, "BORDER", 0.55, 0.62, 0.75, 0.25)          -- between the grid and the bags
-    frame.rule:SetHeight(1)
-    frame.rule:SetPoint("BOTTOMLEFT", frame.bags, "TOPLEFT", 0, B.RULE)
-    frame.rule:SetPoint("BOTTOMRIGHT", frame.bags, "TOPRIGHT", 0, B.RULE)
-    frame.legend = ns.FontString(frame, 10, "LEFT")
-    frame.legend:SetPoint("TOPLEFT", frame.bags, "BOTTOMLEFT", 0, -10)
-    frame.legend:SetPoint("TOPRIGHT", frame.bags, "BOTTOMRIGHT", 0, -10)
+    f.track = Edge(f, "ARTWORK", 1, 1, 1, 0.1)
+    f.track:SetWidth(2)
+    f.track:SetPoint("TOPLEFT", f.grid, "TOPRIGHT", 5, 0)
+    f.track:SetPoint("BOTTOMLEFT", f.grid, "BOTTOMRIGHT", 5, 0)
+    f.thumb = Edge(f, "OVERLAY", 1, 0.82, 0.3, 0.8)
+    f.thumb:SetWidth(2)
+    f.bags = CreateFrame("Frame", nil, f)
+    f.bags:SetSize(B.COLS * B.STEP - B.GAP, B.BAG)
+    f.bagButtons = {}
+    f.space = ns.FontString(f.bags, 10, "RIGHT")
+    f.space:SetPoint("RIGHT", f.bags, "RIGHT", 0, 0)
+    f.space:SetTextColor(unpack(C.muted))
+    f.rule = Edge(f, "BORDER", 0.55, 0.62, 0.75, 0.25)          -- between the grid and the bags
+    f.rule:SetHeight(1)
+    f.rule:SetPoint("BOTTOMLEFT", f.bags, "TOPLEFT", 0, B.RULE)
+    f.rule:SetPoint("BOTTOMRIGHT", f.bags, "TOPRIGHT", 0, B.RULE)
+end
+
+local function Build()
+    frame = CreateFrame("Frame", "ControllerCamHUD_Bags", UIParent)
+    frame:SetSize(Width(), 300)
+    frame:SetFrameStrata("HIGH")
+    frame:EnableMouse(true)
+    frame:SetMovable(true)
+    if frame.SetClampedToScreen then frame:SetClampedToScreen(true) end
+    frame:RegisterForDrag("LeftButton")
+    frame:SetScript("OnDragStart", function(self) self:StartMoving() end)
+    frame:SetScript("OnDragStop", ns.Protect(function(self)
+        self:StopMovingOrSizing()
+        local right, top, edge = self:GetRight(), self:GetTop(), UIParent:GetRight()
+        if not (B.hosting and B.bankOpen and B.view == "bank") and Num(right) and Num(top) and Num(edge) then
+            ns.db.bagTop = { x = right - edge, y = top }     -- (by its top: it fills downward)
+        end
+        Place()
+    end))
+    Shell(frame, true)
+    -- the buttons' line: a tab of its own under the window (the window keeps its height whatever it says)
+    frame.tab = CreateFrame("Frame", nil, frame)
+    frame.tab:SetPoint("TOPLEFT", frame, "BOTTOMLEFT", 0, -4)
+    frame.tab:SetPoint("TOPRIGHT", frame, "BOTTOMRIGHT", 0, -4)
+    frame.tab:SetHeight(30)
+    frame.tab.back = Edge(frame.tab, "BACKGROUND", 0.03, 0.04, 0.07, 0.92)
+    frame.tab.back:SetAllPoints(frame.tab)
+    local tabEdge = Edge(frame.tab, "BORDER", 0.55, 0.62, 0.75, 0.6)
+    tabEdge:SetPoint("BOTTOMLEFT", frame.tab, "BOTTOMLEFT")
+    tabEdge:SetPoint("BOTTOMRIGHT", frame.tab, "BOTTOMRIGHT")
+    tabEdge:SetHeight(1)
+    frame.legend = ns.FontString(frame.tab, 10, "LEFT")
+    frame.legend:SetPoint("TOPLEFT", frame.tab, "TOPLEFT", B.PAD, -8)
+    frame.legend:SetPoint("TOPRIGHT", frame.tab, "TOPRIGHT", -B.PAD, -8)
     if frame.legend.SetWordWrap then frame.legend:SetWordWrap(true) end
     frame.sel = Ring(frame)
     frame.sel:SetFrameLevel((frame:GetFrameLevel() or 1) + 20)
     frame.sel:Hide()
     -- Y: more, beside the window
     local menu = CreateFrame("Frame", nil, frame)
-    menu:SetPoint("TOPRIGHT", frame, "TOPLEFT", -6, 0)
+    menu:SetPoint("TOPRIGHT", frame, "TOPLEFT", -6, 0)      -- (or to its right: B.MenuSide)
     menu:SetSize(250, 40)
+    menu:SetFrameStrata("DIALOG")                            -- (over a window beside ours, the bank's)
     menu:EnableMouse(true)
     menu.back = Edge(menu, "BACKGROUND", 0.03, 0.04, 0.07, 0.94)
     menu.back:SetAllPoints(menu)
@@ -1175,12 +1300,13 @@ end
 
 -- A bag of the bag row: its icon; X (or a right click) shows it alone, A (or a left click) puts into it, or
 -- picks the bag up
-local function BagButton(i)
-    local b = frame.bagButtons[i]
+local function BagButton(i, f)
+    f = f or frame
+    local b = f.bagButtons[i]
     if b then return b end
-    b = CreateFrame("Button", nil, frame.bags)
+    b = CreateFrame("Button", nil, f.bags)
     b:SetSize(B.BAG, B.BAG)
-    b:SetPoint("LEFT", frame.bags, "LEFT", (i - 1) * B.STEP, 0)
+    b:SetPoint("LEFT", f.bags, "LEFT", (i - 1) * B.STEP, 0)
     B.SlotBack(b)
     b:RegisterForClicks("LeftButtonUp", "RightButtonUp")
     b:RegisterForDrag("LeftButton")
@@ -1192,12 +1318,17 @@ local function BagButton(i)
     b.size = ns.FontString(b, 9, "RIGHT")
     b.size:SetPoint("BOTTOMRIGHT", b, "BOTTOMRIGHT", -2, 2)
     if b.size.SetWordWrap then b.size:SetWordWrap(false) end
+    if f ~= frame then                                       -- (beside the window: only to be seen)
+        b:EnableMouse(false)
+        f.bagButtons[i] = b
+        return b
+    end
     b:SetScript("OnClick", ns.Protect(function(_, mouse) B:BagPress(mouse == "RightButton" and "only" or "put", i) end))
     b:SetScript("OnDragStart", ns.Protect(function() B:BagPress("put", i) end))
     b:SetScript("OnReceiveDrag", ns.Protect(function() B:BagPress("put", i) end))
     b:SetScript("OnEnter", ns.Protect(function(self) B:BagTip(self, i) end))
     b:SetScript("OnLeave", function() GameTooltip:Hide() end)
-    frame.bagButtons[i] = b
+    f.bagButtons[i] = b
     return b
 end
 
@@ -1334,7 +1465,10 @@ function B:Legend()
     add("PADRSTICK", L["Sort"])                                       -- (R3: a quick sort, as it always was)
     if self.bankOpen then add("PADBACK", self.view == "bank" and L["Bags"] or L["Bank"]) end
     local text = table.concat(parts, "   ")
-    if self.bankOpen and Shown(rawget(_G, "BankFrame")) then
+    if self.bankOpen and B.hosting then
+        text = text .. "\n" .. GREY .. Key("PADLTRIGGER") .. " " .. L["Bank"] .. "   " .. Key("PADRTRIGGER") .. " "
+            .. L["Bags"] .. "|r"
+    elseif self.bankOpen and Shown(rawget(_G, "BankFrame")) then
         local _, known = B.GameFocus()
         local words = (self.view == "bank" and not known) and L["%s or %s: back to bags"] or L["%s or %s: to the bank"]
         text = text .. "\n" .. GREY .. words:format(Key("PADLTRIGGER"), Key("PADRTRIGGER")) .. "|r"
@@ -1347,6 +1481,109 @@ end
 function B:Selected()
     if self.zone ~= "grid" then return nil end
     return self.at[self.index]
+end
+
+-- A side's grid: the slots and headings of a model in sight from scroll, into f's grid; marks the buttons used
+-- (they are shared: one per bag slot) and returns { index -> button }
+local function DrawGrid(f, list, model, scroll, viewH, used)
+    local from, to = scroll, scroll + viewH
+    local at, heads = {}, 0
+    for _, l in ipairs(model.lines) do
+        local inSight = l.y >= from - 0.5 and l.y + (l.kind == "row" and B.SIZE or l.h) <= to + 0.5
+        if inSight and l.kind == "head" then
+            heads = heads + 1
+            local fs = f.heads[heads]
+            if not fs then
+                fs = ns.FontString(f.grid, 10, "LEFT")
+                f.heads[heads] = fs
+            end
+            fs:ClearAllPoints()
+            fs:SetPoint("BOTTOMLEFT", f.grid, "TOPLEFT", 1, -(l.y - from) - l.h + 6)
+            fs:SetPoint("RIGHT", f.grid, "RIGHT", 0, 0)
+            local sec = l.sec
+            if sec.muted then fs:SetText(GREY .. sec.text .. "|r")
+            else fs:SetText(GOLD .. sec.text .. "|r  " .. GREY .. sec.count .. "|r") end
+            fs:Show()
+        elseif inSight then
+            for k = l.first, l.first + l.count - 1 do
+                local e = list[k]
+                local b = B.Button(e.bag, e.slot)
+                used[b] = true
+                b:ClearAllPoints()
+                b:SetPoint("TOPLEFT", f.grid, "TOPLEFT", (k - l.first) * B.STEP, -(l.y - from))
+                Paint(b, e)
+                b:Show()
+                at[k] = b
+            end
+        end
+    end
+    for k = heads + 1, #f.heads do f.heads[k]:Hide() end
+    return at
+end
+
+-- A side's grid height, scroll bar, bag row, title, money and filters. st: the side's state (view, only, read,
+-- counts, filter, scroll); the same for the window and the side beside it, so both look alike
+local function DrawFace(f, st, gridH, total, viewH)
+    f.grid:SetHeight(gridH)
+    local scrolls = total > viewH + 0.5
+    Showing(f.track, scrolls)
+    Showing(f.thumb, scrolls)
+    if scrolls then
+        f.thumb:ClearAllPoints()
+        f.thumb:SetPoint("TOPLEFT", f.track, "TOPLEFT", 0, -gridH * (st.scroll or 0) / total)
+        f.thumb:SetHeight(math.max(6, gridH * viewH / total))
+    end
+    f.bags:ClearAllPoints()
+    f.bags:SetPoint("TOPLEFT", f.grid, "BOTTOMLEFT", 0, -(B.RULE * 2 + 1))
+    local bagList = st.read and st.read.bags or {}
+    for k, rec in ipairs(bagList) do
+        local bb = BagButton(k, f)
+        bb.icon:SetTexture(BagIcon(rec))
+        if rec.bag == 0 then bb.icon:SetTexCoord(0, 1, 0, 1) else bb.icon:SetTexCoord(0.08, 0.92, 0.08, 0.92) end
+        Showing(bb.chosen, st.only == rec.bag)
+        bb.size:SetText(("%d/%d"):format(rec.used, rec.size))
+        local w = Num(Try(bb.size.GetStringWidth, bb.size))
+        if not (w and w <= B.BAG - 4) then bb.size:SetText(tostring(rec.size)) end   -- (too wide: the size alone)
+        bb:Show()
+    end
+    for k = #bagList + 1, #f.bagButtons do f.bagButtons[k]:Hide() end
+    local read = st.read or { total = 0, used = 0 }
+    f.space:SetText(L["%d free"]:format(math.max(0, (read.total or 0) - (read.used or 0))))
+    local title = st.view == "bank" and L["Bank"] or L["Bags"]
+    if st.only then
+        for _, rec in ipairs(bagList) do
+            if rec.bag == st.only then title = title .. GREY .. "  " .. B.BagName(rec) .. "|r" end
+        end
+    end
+    f.title:SetText(title)
+    local money = Num(Try(GetMoney))
+    f.money:SetText(money and ns.MoneyColored and ns.MoneyColored(money) or "")
+    local F, nf = B.FILTERS, #B.FILTERS
+    local cur = F[((st.filter or 1) - 1) % nf + 1]
+    f.filters.cur:SetText(GOLD .. cur.text .. "|r  " .. GREY .. ((st.counts or {})[cur.key] or 0) .. "|r")
+    f.filters.lb:SetText(Key("PADLSHOULDER"))
+    f.filters.rb:SetText(Key("PADRSHOULDER"))
+    for k, d in ipairs(f.filters.dots) do
+        if k == st.filter then d:SetColorTexture(1, 0.82, 0.3, 1) else d:SetColorTexture(1, 1, 1, 0.3) end
+    end
+    f:SetHeight(B.TOP + gridH + B.RULE * 2 + 1 + B.BAG + 12)
+end
+
+-- At the bank (in the window): the side the controller isn't on, beside the window, drawn as the window is:
+-- the bank on the left, your bags on the right
+local beside
+local function Beside()
+    if beside then return beside end
+    beside = CreateFrame("Frame", "ControllerCamHUD_BagsBeside", UIParent)
+    beside:SetFrameStrata("HIGH")
+    beside:SetSize(Width(), 300)
+    beside:EnableMouse(true)
+    Shell(beside, false)
+    B.beside = beside
+    return beside
+end
+function B.DrawBeside(on)
+    if not on and beside then beside:Hide() end
 end
 
 function B:Layout()
@@ -1372,97 +1609,41 @@ function B:Layout()
     self.scroll = ns.Clamp(self.scroll, 0, math.max(0, total - viewH))
     local first = model.lines[1]                -- (never moved by a heading's height alone: it stays in sight)
     if self.scroll > 0 and first and first.kind == "head" and self.scroll <= first.h then self.scroll = 0 end
-    local from, to = self.scroll, self.scroll + viewH
-    self.at = {}
-    local used, heads = {}, 0
-    for _, l in ipairs(model.lines) do
-        local inSight = l.y >= from - 0.5 and l.y + (l.kind == "row" and B.SIZE or l.h) <= to + 0.5
-        if inSight and l.kind == "head" then
-            heads = heads + 1
-            local fs = frame.heads[heads]
-            if not fs then
-                fs = ns.FontString(frame.grid, 10, "LEFT")
-                frame.heads[heads] = fs
-            end
-            fs:ClearAllPoints()
-            fs:SetPoint("BOTTOMLEFT", frame.grid, "TOPLEFT", 1, -(l.y - from) - l.h + 6)
-            fs:SetPoint("RIGHT", frame.grid, "RIGHT", 0, 0)
-            local s = l.sec
-            if s.muted then fs:SetText(GREY .. s.text .. "|r")
-            else fs:SetText(GOLD .. s.text .. "|r  " .. GREY .. s.count .. "|r") end
-            fs:Show()
-        elseif inSight then
-            for i = l.first, l.first + l.count - 1 do
-                local e = list[i]
-                local b = B.Button(e.bag, e.slot)
-                used[b] = true
-                b:ClearAllPoints()
-                b:SetPoint("TOPLEFT", frame.grid, "TOPLEFT", (i - l.first) * B.STEP, -(l.y - from))
-                Paint(b, e)
-                b:Show()
-                self.at[i] = b
-            end
-        end
+    local used = {}
+    self.at = DrawGrid(frame, list, model, self.scroll, viewH, used)
+    -- the other side, beside (at the bank, in the window)
+    local other = B.hosting and self.bankOpen and self.besideState or nil
+    if other then
+        DrawGrid(Beside(), other.list, other.model, 0, viewH, used)
     end
-    for i = heads + 1, #frame.heads do frame.heads[i]:Hide() end
     for _, b in pairs(self.buttons) do
         if not used[b] then b:Hide() end
     end
-    local gridH = math.max(B.HEAD, math.min(total, viewH))
-    frame.grid:SetHeight(gridH)
-    -- more than fits: the bar beside the grid, its bright part where you are
-    local scrolls = total > viewH + 0.5
-    Showing(frame.track, scrolls)
-    Showing(frame.thumb, scrolls)
-    if scrolls then
-        frame.thumb:ClearAllPoints()
-        frame.thumb:SetPoint("TOPLEFT", frame.track, "TOPLEFT", 0, -gridH * self.scroll / total)
-        frame.thumb:SetHeight(math.max(6, gridH * viewH / total))
-    end
-    self.scrolls = scrolls
-    -- the bag row, under the grid
-    frame.bags:ClearAllPoints()
-    frame.bags:SetPoint("TOPLEFT", frame.grid, "BOTTOMLEFT", 0, -(B.RULE * 2 + 1))
+    -- one height for every filter, and for both sides: as tall as the taller holds, up to what fits
+    local tall = math.max(total, self.fullH or 0, other and other.fullH or 0)
+    local gridH = math.max(B.HEAD, math.min(tall, viewH))
+    self.scrolls = total > viewH + 0.5
     self.bagList = self.read and self.read.bags or {}
     self.bagIndex = ns.Clamp(self.bagIndex, 1, math.max(1, #self.bagList))
-    for i, rec in ipairs(self.bagList) do
-        local bb = BagButton(i)
-        bb.icon:SetTexture(BagIcon(rec))
-        if rec.bag == 0 then bb.icon:SetTexCoord(0, 1, 0, 1) else bb.icon:SetTexCoord(0.08, 0.92, 0.08, 0.92) end
-        Showing(bb.chosen, self.only == rec.bag)
-        bb.size:SetText(("%d/%d"):format(rec.used, rec.size))
-        local w = Num(Try(bb.size.GetStringWidth, bb.size))
-        if not (w and w <= B.BAG - 4) then bb.size:SetText(tostring(rec.size)) end   -- (too wide: the size alone)
-        bb:Show()
-    end
-    for i = #self.bagList + 1, #frame.bagButtons do frame.bagButtons[i]:Hide() end
-    local read = self.read or { total = 0, used = 0 }
-    frame.space:SetText(L["%d free"]:format(math.max(0, read.total - read.used)))
-    -- the title, the money, the filters
-    local title = self.view == "bank" and L["Bank"] or L["Bags"]
-    if self.only then
-        for _, rec in ipairs(self.bagList) do
-            if rec.bag == self.only then title = title .. GREY .. "  " .. B.BagName(rec) .. "|r" end
-        end
-    end
-    frame.title:SetText(title)
-    local money = Num(Try(GetMoney))
-    frame.money:SetText(money and ns.MoneyColored and ns.MoneyColored(money) or "")
-    local F, nf = B.FILTERS, #B.FILTERS
-    local function name(i)
-        local f = F[(i - 1) % nf + 1]
-        return f.text, self.counts[f.key] or 0
-    end
-    local cur, count = name(self.filter)
-    frame.filters.cur:SetText(GOLD .. cur .. "|r  " .. GREY .. count .. "|r")
-    frame.filters.lb:SetText(Key("PADLSHOULDER"))
-    frame.filters.rb:SetText(Key("PADRSHOULDER"))
-    for i, d in ipairs(frame.filters.dots) do
-        if i == self.filter then d:SetColorTexture(1, 0.82, 0.3, 1) else d:SetColorTexture(1, 1, 1, 0.3) end
-    end
+    DrawFace(frame, self, gridH, total, viewH)
     frame.legend:SetText(self:Legend())
     local legendH = Num(Try(frame.legend.GetStringHeight, frame.legend)) or 14
-    frame:SetHeight(B.TOP + gridH + B.RULE * 2 + 1 + B.BAG + 10 + legendH + 12)
+    frame.tab:SetHeight(legendH + 16)
+    Place()
+    if other then
+        local f = Beside()
+        DrawFace(f, other, gridH, other.model.height, viewH)
+        f:SetFrameLevel(math.max(1, (Num(Try(frame.GetFrameLevel, frame)) or 2) - 1))
+        f:ClearAllPoints()
+        if other.view == "bank" then
+            f:SetPoint("TOPRIGHT", frame, "TOPLEFT", -B.BANK_GAP, 0)    -- (the bank on the left)
+        else
+            f:SetPoint("TOPLEFT", frame, "TOPRIGHT", B.BANK_GAP, 0)     -- (your bags on the right)
+        end
+        f:Show()
+    elseif beside then
+        beside:Hide()
+    end
     self:Mark()
     self:Bind()
 end
@@ -1527,6 +1708,27 @@ function B:Update(keepRead)
     end
     self.list, self.sections = B.List(self.read, B.FILTERS[self.filter].key, mode)
     self.model = B.Model(self.list, self.sections, B.COLS)
+    if not keepRead or not self.fullH then                   -- the window's height: everything in this view
+        local all, secs = B.List(self.read, "all", mode)
+        self.fullH = B.Model(all, secs, B.COLS).height
+    end
+    if B.hosting and self.bankOpen then                      -- the other side, shown beside, as it was left
+        local other = self.view == "bank" and "bags" or "bank"
+        local okR, read = pcall(B.Read, other, nil)
+        if okR and read then
+            if mode ~= "bags" then B.Order(read.items) end
+            local filter = (self.filterAt and self.filterAt[other]) or 1
+            local olist, osecs = B.List(read, B.FILTERS[filter].key, mode)
+            local all, asecs = B.List(read, "all", mode)
+            self.besideState = { view = other, read = read, counts = B.Counts(read), filter = filter, scroll = 0,
+                                 list = olist, model = B.Model(olist, osecs, B.COLS),
+                                 fullH = B.Model(all, asecs, B.COLS).height }
+        else
+            self.besideState = nil
+        end
+    else
+        self.besideState = nil
+    end
     self:Remember()
     self:Layout()
     self:Tip()
@@ -1622,12 +1824,17 @@ function B:Hide()
         frame:Hide()
         frame.menu:Hide()
     end
+    B.DrawBeside(false)
     local owner = Try(GameTooltip.GetOwner, GameTooltip)
     if owner and (owner == frame or B.slotOf[owner] or (frame and owner ~= GameTooltip and Try(owner.GetParent, owner) == frame.bags)) then
         GameTooltip:Hide()
     end
     B.Uncover()
     self:Bind()
+    if B.hosting and self.bankOpen and not InCombatLockdown() then
+        local close = (C_Bank and C_Bank.CloseBankFrame) or rawget(_G, "CloseBankFrame")
+        Try(close)                                          -- (the bank lived in this window: it closes with it)
+    end
     if not InCombatLockdown() then C_Timer.After(0, function() B.RememberDefault() end) end
 end
 
@@ -1793,7 +2000,10 @@ function B:SwitchView(to)
     if not self.bankOpen then self.view = "bags"; return end
     self.viewAt = self.viewAt or {}
     self.viewAt[self.view] = self.index                      -- (where you were, kept for coming back)
+    self.filterAt = self.filterAt or {}
+    self.filterAt[self.view] = self.filter                   -- (and its filter: each side keeps its own)
     self.view = to or (self.view == "bank" and "bags" or "bank")
+    self.filter = self.filterAt[self.view] or 1
     self.only, self.scroll, self.zone, self.bagIndex = nil, 0, "grid", 1
     self.index = self.viewAt[self.view] or 1                 -- (the bank: its first slot the first time)
     self.padTip = true
@@ -1924,7 +2134,17 @@ function B:Choices()
     if self.bankOpen then
         add(self.view == "bank" and L["Show bags"] or L["Show bank"], function() self:SwitchView() end)
         local V = ns.Vendor
-        if V and V.Deposit then add(L["Deposit marked items"], function() V:Deposit() end) end
+        if V and V.Deposit then add(L["Quick Deposit"], function() V:Deposit() end) end
+        if V and V.Withdraw then add(L["Quick Withdraw"], function() V:Withdraw() end) end
+        if V and V.MaterialChoices then
+            for _, to in ipairs({ "bank", "bags" }) do
+                local list = V.MaterialChoices(to)
+                if #list > 0 then
+                    out[#out + 1] = { text = (to == "bank" and L["Deposit materials"] or L["Withdraw materials"]) .. "  >",
+                                      sub = list }
+                end
+            end
+        end
     end
     if self.merchantOpen and ns.Vendor and ns.Vendor.SmartSell then
         add(L["Sell advised items"], function() ns.Vendor:SmartSell() end)
@@ -2206,8 +2426,26 @@ function B:DrawMenu()
     menu:Show()
 end
 
+-- Y's menu beside the window, on the side with room: its left, or its right where the window sits at the
+-- screen's left edge (at the bank it takes the bank window's place there)
+function B.MenuSide()
+    local menu = frame.menu
+    local left = Num(Try(frame.GetLeft, frame))
+    local k = Num(Try(frame.GetEffectiveScale, frame)) or 1
+    local uk = Num(Try(UIParent.GetEffectiveScale, UIParent)) or 1
+    local room = left and left * k / uk or 1000
+    menu:ClearAllPoints()
+    if room < (Num(Try(menu.GetWidth, menu)) or 250) + 12 then
+        menu:SetPoint("TOPLEFT", frame, "TOPRIGHT", 6, 0)
+        return "right"
+    end
+    menu:SetPoint("TOPRIGHT", frame, "TOPLEFT", -6, 0)
+    return "left"
+end
+
 function B:OpenMenu()
     if not frame then return end
+    B.MenuSide()
     self.menu = self:Choices()
     self.menuIndex = 1
     GameTooltip:Hide()
@@ -2224,6 +2462,11 @@ end
 function B:MenuChoose(i)
     local c = self.menu and self.menu[i or self.menuIndex]
     if not c then return end
+    if c.sub then                                            -- a list of its own (by kind): in the same menu
+        self.menu, self.menuIndex = c.sub, 1
+        self:DrawMenu()
+        return
+    end
     c.fn()
     if c.stay and self.open then
         self.menu = self:Choices()
@@ -2271,7 +2514,19 @@ events:SetScript("OnEvent", ns.Protect(function(_, event, who, what)
     local flag = FLAGS[event]
     if flag then
         B[flag[1]] = flag[2]
+        if event == "BANKFRAME_OPENED" then
+            local function Host()
+                if B.bankOpen and B.HostBank(true) then
+                    B.BankSide(false)
+                    if B.open then B:SwitchView("bank") else B.view = "bank"; B:Show() end
+                end
+            end
+            Host()                                           -- (at once: the game's window shows out of sight)
+            C_Timer.After(0, Host)                           -- (and after the game's own showing, if it came first)
+        end
         if event == "BANKFRAME_CLOSED" then
+            B.HostBank(false)
+            B.BankSide(false)
             B.viewAt = nil
             if B.view == "bank" then B.view, B.only, B.index = "bags", nil, 1 end
         end

@@ -55,10 +55,18 @@ sold %d items for %s (/cchud sold lists them)
 Nothing to sell.
 Open the bank first.
 Nothing to take out: the bank holds none of what you carry.
-Withdraw
+Materials
+Your bags are full.
+No materials in your bags to put away.
+No materials in the bank to take out.
+All materials (%d)
+Deposit materials
+Withdraw materials
+Quick Withdraw
 take out of the bank what you already carry some of (materials, potions, food), to top your bags up
-Deposit
+Quick Deposit
 put in the bank what it already holds some of, and what you marked for it
+crafting materials in or out of the bank: all of them, or one kind at a time (metal and stone, cloth, herbs...)
 Open a vendor first.
 Smart sell
 sell what a vendor pays best for: junk, and what the auction house would not do better with (listed and confirmed first); what is worth more at the auction house or still needed by your professions stays
@@ -165,6 +173,18 @@ Vendor
 Best
 Recipes
 Auction
+Crafting
+no price for %s yet
+Profit
+No auction price for %s yet: visit the auction house to compare
+Crafting into %s isn't worth the effort: the materials cost more than it sells for
+Smelt into %s: %s each vs %s as it is
+Craft into %s: %s each vs %s as it is
+Smelting into %s isn't worth the effort: %s each vs %s as it is
+Crafting into %s isn't worth the effort: %s each vs %s as it is
+%s sells for %s at auction; the other materials cost %s
+%s sells for %s at auction
+these prices are %d days old
 Recommendation
 Equip
 Quest
@@ -236,13 +256,19 @@ Best use of an item
 an item's tooltip says what to do with it: sell it at the auction house (and how much more that brings), sell it to a vendor, keep it, or keep it for a quest
 Item advice: when unsure
 Keep: only grey items and what you mark as junk are advised for sale; everything else is kept, its prices shown. Sell: what nothing says to keep goes to the auction house where it pays, else to a vendor
+Crafting cost in tooltips
+for something your characters make: what its materials cost, and what it makes at the auction house after them and the house's cut
 Quick sales at the auction house
 price 5% under the lowest for a sale now; off: patient prices, just under the lowest, that sell when buyers come
 read every price at the auction house at once (open it first; every 15 minutes)
+%s needs it now (you're at %d), for %s
+%s needs it now (%s is at %d), for %s
+%s needs it from %d (you're at %d), for %s
+%s needs it from %d (%s is at %d), for %s
 %s each
 Crafts: %s
 Keep what your professions still need
-an item that one of your characters' recipes still gives a skill point for (orange and yellow recipes, as the game shows them in the profession's window), or that crafts something worth more at the auction house than the item itself, is kept, not sold, and its tooltip says why. Recipes are read when a profession's window is open
+an item that one of your characters' recipes still gives a skill point for (orange and yellow recipes, as the game shows them in the profession's window), that the profession's next steps use (the levelling guides' recipes, and those another of your characters knows, up to 75 points ahead), or that crafts something worth more at the auction house than the item itself, is kept, not sold, and its tooltip says why. Recipes are read when a profession's window is open
 Open a profession's window and I'll look over your recipes.
 That's the cap, %d. A trainer has the next rank for you.
 Nothing more to learn at %d. Go and see a trainer about the next rank.
@@ -1109,7 +1135,6 @@ Sort bank
 Sort bags
 Show bags
 Show bank
-Deposit marked items
 Sell advised items
 Let go to destroy
 This item begins a quest.

@@ -55,10 +55,18 @@ inférieur à ce que vous portez
 Rien à vendre.
 Ouvrez d'abord la banque.
 Rien à retirer: la banque n'a rien de ce que vous portez.
-Retirer
+Matériaux
+Vos sacs sont pleins.
+Aucun matériau dans vos sacs à ranger.
+Aucun matériau à la banque à retirer.
+Tous les matériaux (%d)
+Déposer les matériaux
+Retirer les matériaux
+Retrait rapide
 retire de la banque ce dont vous portez déjà un peu (matériaux, potions, nourriture), pour remplir vos sacs
-Déposer
+Dépôt rapide
 dépose à la banque ce qu'elle contient déjà en partie, et ce que vous avez marqué pour elle
+les matériaux d'artisanat vers la banque ou hors de la banque : tous à la fois, ou un type à la fois (métal et pierre, tissu, herbes...)
 Ouvrez d'abord un marchand.
 Vente futée
 vend ce qu'un marchand paie le mieux: la camelote, et ce que l'hôtel des ventes ne vendrait pas mieux (listé et confirmé d'abord); ce qui vaut plus à l'hôtel des ventes ou sert encore à vos métiers reste
@@ -165,6 +173,18 @@ Marchand
 Idéal
 Recettes
 Vente
+Fabrication
+pas encore de prix pour %s
+Bénéfice
+Pas encore de prix de vente pour %s : passez à l'hôtel des ventes pour comparer
+Fabriquer %s n'en vaut pas la peine : les matériaux coûtent plus que sa vente ne rapporte
+Fondre en %s : %s l'unité contre %s tel quel
+Fabriquer %s : %s l'unité contre %s tel quel
+Fondre en %s n'en vaut pas la peine : %s l'unité contre %s tel quel
+Fabriquer %s n'en vaut pas la peine : %s l'unité contre %s tel quel
+%s se vend %s à l'hôtel des ventes ; les autres matériaux coûtent %s
+%s se vend %s à l'hôtel des ventes
+ces prix datent de %d jours
 Recommandation
 Équiper
 Quête
@@ -236,13 +256,19 @@ Meilleur usage d'un objet
 l'infobulle d'un objet dit quoi en faire : le vendre à l'hôtel des ventes (et combien cela rapporte de plus), le vendre à un marchand, le garder ou le garder pour une quête
 Conseil d'objet: en cas de doute
 Garder: seuls les objets gris et ce que vous marquez comme camelote sont conseillés à la vente; tout le reste est gardé, ses prix affichés. Vendre: ce que rien ne dit de garder va à l'hôtel des ventes où ça rapporte, sinon à un marchand
+Coût de fabrication dans les infobulles
+pour ce que vos personnages fabriquent : ce que coûtent ses matériaux, et ce qu'il rapporte à l'hôtel des ventes une fois ceux-ci et la commission déduits
 Ventes rapides à l'hôtel des ventes
 prix 5% en dessous du plus bas pour vendre tout de suite ; désactivé : prix patients, juste en dessous du plus bas, qui se vendent quand les acheteurs viennent
 lit tous les prix de l'hôtel des ventes d'un coup (ouvrez-le d'abord ; toutes les 15 minutes)
+%s en a besoin maintenant (vous êtes à %d), pour %s
+%s en a besoin maintenant (%s est à %d), pour %s
+%s en a besoin à partir de %d (vous êtes à %d), pour %s
+%s en a besoin à partir de %d (%s est à %d), pour %s
 %s pièce
 Fabrique: %s
 Garder ce dont vos métiers ont encore besoin
-un objet pour lequel une recette de l'un de vos personnages donne encore un point de compétence (recettes orange et jaunes, comme le jeu les montre dans la fenêtre du métier), ou qui sert à fabriquer quelque chose qui vaut plus à l'hôtel des ventes que l'objet lui-même, est gardé, pas vendu, et sa bulle d'aide dit pourquoi. Les recettes sont lues quand la fenêtre d'un métier est ouverte
+un objet pour lequel une recette d'un de vos personnages donne encore un point de compétence (recettes orange et jaunes, comme le jeu les montre dans la fenêtre du métier), que les prochaines étapes du métier utilisent (les recettes des guides de progression, et celles qu'un autre de vos personnages connaît, jusqu'à 75 points plus loin), ou qui fabrique quelque chose valant plus à l'hôtel des ventes que l'objet lui-même, est gardé, pas vendu, et son infobulle dit pourquoi. Les recettes sont lues quand la fenêtre d'un métier est ouverte
 Ouvrez la fenêtre d'un métier et je jetterai un œil à vos recettes.
 C'est le plafond, %d. Un maître a le rang suivant pour vous.
 Plus rien à apprendre à %d. Allez voir un maître pour le rang suivant.
@@ -1109,7 +1135,6 @@ Trier la banque
 Trier les sacs
 Voir les sacs
 Voir la banque
-Déposer les objets marqués
 Vendre les objets conseillés
 Relâchez pour détruire
 Cet objet permet de commencer une quête.

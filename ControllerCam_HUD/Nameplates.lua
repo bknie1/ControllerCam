@@ -1350,13 +1350,61 @@ function NP:FriendsInside(starting)
     end
 end
 
+-- Names and nameplates out of the picture while the screen is on film (a flight's, the camp fire's) and while
+-- you are away: the game's own switches for them, set back as it ends. Set back at the next login too, if the
+-- game went away mid-film. (Each by who asked: "flight", "camp", "afk".) Never changed in a fight; after it.
+NP.VEIL = { "nameplateShowEnemies", "nameplateShowFriends", "nameplateShowFriendlyNPCs", "UnitNameOwn", "UnitNameNPC",
+            "UnitNameFriendlyPlayerName", "UnitNameEnemyPlayerName", "UnitNameFriendlyPetName", "UnitNameEnemyPetName",
+            "UnitNameFriendlyGuardianName", "UnitNameEnemyGuardianName", "UnitNameFriendlyTotemName",
+            "UnitNameEnemyTotemName", "UnitNameInteractiveObject" }
+NP.veils = {}
+function NP.VeilApply()
+    if not (ns.db and GetCVar and SetCVar) then return end
+    if InCombatLockdown() then NP.veilLater = true; return end
+    NP.veilLater = nil
+    ns.db.plateVeilWas = ns.db.plateVeilWas or {}
+    local was = ns.db.plateVeilWas
+    if next(NP.veils) then
+        for _, cvar in ipairs(NP.VEIL) do
+            local now = GetCVar(cvar)
+            if now ~= nil and not was[cvar] and now ~= "0" then
+                was[cvar] = { was = now, set = "0" }
+                SetCVar(cvar, "0")
+            end
+        end
+    else
+        for cvar, rec in pairs(was) do
+            if GetCVar(cvar) == rec.set then SetCVar(cvar, rec.was) end      -- (changed by hand meanwhile: left)
+            was[cvar] = nil
+        end
+    end
+end
+function ns.Veil(who, on)
+    local before = NP.veils[who] and true or false
+    NP.veils[who] = on and true or nil
+    if before ~= (on and true or false) then
+        ns.Note("plates: names %s (%s)", next(NP.veils) and "out of the picture" or "back", tostring(who))
+        NP.VeilApply()
+    end
+end
+
 local inside = CreateFrame("Frame")
 for _, e in ipairs({ "PLAYER_ENTERING_WORLD", "ZONE_CHANGED_NEW_AREA", "PLAYER_REGEN_ENABLED", "PLAYER_REGEN_DISABLED",
-                     "FORBIDDEN_NAME_PLATE_UNIT_ADDED" }) do
+                     "FORBIDDEN_NAME_PLATE_UNIT_ADDED", "PLAYER_FLAGS_CHANGED" }) do
     pcall(inside.RegisterEvent, inside, e)
 end
-inside:SetScript("OnEvent", ns.Protect(function(_, event)
+inside:SetScript("OnEvent", ns.Protect(function(_, event, unit)
     if not ns.db then return end
+    if event == "PLAYER_FLAGS_CHANGED" then                -- away (AFK): names out of the picture too
+        if unit == nil or unit == "player" then
+            local ok, afk = pcall(UnitIsAFK or function() return false end, "player")
+            ns.Veil("afk", ok and ns.Yes(afk))
+        end
+        return
+    end
+    if event == "PLAYER_ENTERING_WORLD" or (event == "PLAYER_REGEN_ENABLED" and NP.veilLater) then
+        NP.VeilApply()                                   -- (as they were, if the game went away mid-film)
+    end
     if event == "PLAYER_ENTERING_WORLD" then
         NP.kept = false                                 -- somewhere new: not known yet
     elseif event == "FORBIDDEN_NAME_PLATE_UNIT_ADDED" then

@@ -1784,6 +1784,28 @@ class Campfire(unittest.TestCase):
             [T(name="Cozy Fire", spellId=7353, icon=9, duration=0, isFromPlayerOrPlayerPet=True, auraInstanceID=1)]
             + list(more))
 
+    def test_names_and_nameplates_are_out_of_the_picture_for_the_scene(self):
+        e = self.env()
+        for name in ("nameplateShowEnemies", "nameplateShowFriends", "UnitNameNPC", "UnitNameFriendlyPlayerName"):
+            e.mock.cvars[name], e.mock.knownCVars[name] = "1", True
+        e.mock.cvars.UnitNameOwn, e.mock.knownCVars.UnitNameOwn = "0", True      # (off already: left alone)
+        CF = e.ns.Campfire
+        self.assertTrue(CF.Start(True))
+        for name in ("nameplateShowEnemies", "nameplateShowFriends", "UnitNameNPC", "UnitNameFriendlyPlayerName"):
+            self.assertEqual(e.mock.cvars[name], "0", name)
+        CF.Finish("test")
+        for name in ("nameplateShowEnemies", "nameplateShowFriends", "UnitNameNPC", "UnitNameFriendlyPlayerName"):
+            self.assertEqual(e.mock.cvars[name], "1", name)              # as you had them
+        self.assertEqual(e.mock.cvars.UnitNameOwn, "0")
+        CF.Start(True)                                               # the game goes away mid-film:
+        e2 = Env(db=None)
+        e2.mock.cvars.UnitNameNPC, e2.mock.knownCVars.UnitNameNPC = "0", True
+        e2.db.plateVeilWas = e2.lua.table(UnitNameNPC=e2.lua.table(was="1", set="0"))
+        e2.mock.fire("PLAYER_ENTERING_WORLD")
+        self.assertEqual(e2.mock.cvars.UnitNameNPC, "1")              # back at the next login
+        self.assertEqual(e.errors(), [])
+        self.assertEqual(e2.errors(), [])
+
     def test_it_begins_after_sitting_still_at_a_camp_and_gives_everything_back(self):
         e = self.env()
         CF, g = e.ns.Campfire, e.g
@@ -2209,8 +2231,8 @@ class Professions(SellWhenUnsure, unittest.TestCase):
             GetTradeSkillItemLink = function(i) return "|Hitem:" .. RECIPES[i].product .. "|h[x]|h" end
             GetTradeSkillReagentInfo = function(i, r) return "x", 1, RECIPES[i].need[r], 0 end
             GetTradeSkillNumMade = function(i) return 1, 1 end
-            TRADE = { "Blacksmithing", 120, 150 }""")
-        e.mock.skills = e.lua.table_from([T(name="Blacksmithing", rank=120, cap=150)])
+            TRADE = { "Blacksmithing", 225, 300 }""")             # (past the guide's steps for these)
+        e.mock.skills = e.lua.table_from([T(name="Blacksmithing", rank=225, cap=300)])
         e.mock["items"][2836] = T(name="Coarse Stone", price=10, **{"class": 7, "sub": 7})
         e.mock["items"][3486] = T(name="Heavy Grinding Stone", price=100, **{"class": 7})
         e.mock["items"][2840] = T(name="Copper Bar", price=10, **{"class": 7})
@@ -2646,7 +2668,9 @@ class Vendor(SellWhenUnsure, unittest.TestCase):
         e.mock.advance(1)
         buttons = e.ns.Vendor.bankButtons
         self.assertTrue(buttons.deposit.shown and buttons.withdraw.shown)   # with the bank, beside its search box
-        self.assertTrue(e.same(buttons.withdraw.points[1][2], e.g.BankItemSearchBox))
+        self.assertEqual((buttons.deposit.text, buttons.withdraw.text), ("Quick Deposit", "Quick Withdraw"))
+        self.assertTrue(e.same(buttons.materials.points[1][2], e.g.BankItemSearchBox))
+        self.assertTrue(e.same(buttons.withdraw.points[1][2], buttons.materials))
         self.assertEqual(e.same(buttons.deposit.parent, e.g.BankFrame), True)
         buttons.withdraw.scripts.OnClick(buttons.withdraw)
         e.mock.advance(1)
@@ -2655,6 +2679,39 @@ class Vendor(SellWhenUnsure, unittest.TestCase):
         self.assertIsNotNone(e.g.BINDING_NAME_CCHUD_WITHDRAW)
         e.cmd("vendor off")
         self.assertFalse(buttons.withdraw.shown)
+        self.assertEqual(e.errors(), [])
+
+    def test_materials_go_in_and_out_of_the_bank_by_kind(self):
+        e = self.stock(Env(setup=lambda env: env.lua.execute("""
+            BankFrame = CreateFrame("Frame", "BankFrame", UIParent)
+            BankItemSearchBox = CreateFrame("EditBox", "BankItemSearchBox", BankFrame)
+            GetItemSubClassInfo = function(class, sub)
+                return ({ [5] = "Cloth", [7] = "Metal & Stone", [9] = "Herb" })[sub]
+            end""")))
+        put, T = e.mock.put, e.lua.table
+        e.mock["items"][4].sub = 5                                       # Linen Cloth (in the bags)
+        put(2, 2, T(id=20, name="Copper Bar", quality=1, price=10, count=10, sub=7, **{"class": 7}))
+        put(2, 3, T(id=21, name="Iron Ore", quality=1, price=10, count=10, sub=7, **{"class": 7}))
+        e.mock.bags[-1] = T()
+        put(-1, 1, T(id=22, name="Peacebloom", quality=1, price=5, count=20, sub=9, **{"class": 7}))
+        put(-1, 2, T(id=23, name="Wool Cloth", quality=1, price=5, count=20, sub=5, **{"class": 7}))
+        V = e.ns.Vendor
+        e.mock.openBank(True)
+        e.mock.advance(1)
+        into = [c.text for c in V.MaterialChoices("bank").values()]
+        self.assertEqual(into, ["All materials (3)", "Metal & Stone (2)", "Cloth (1)"])   # most first, the game's names
+        out = [c.text for c in V.MaterialChoices("bags").values()]
+        self.assertEqual(out, ["All materials (2)", "Cloth (1)", "Herb (1)"])
+        V.MoveMaterials(V, "bank", 7)                                # just the metal and stone
+        e.mock.advance(1)
+        self.assertEqual(sorted(e.mock.moved.values()), [20, 21])
+        self.assertIn("deposited 2 items", self.said(e))
+        V.MoveMaterials(V, "bags", None)                             # everything out
+        e.mock.advance(1)
+        self.assertEqual(sorted(e.mock.moved.values()), [20, 21, 22, 23])
+        b = V.bankButtons.materials                                  # with a mouse: the Materials list
+        b.scripts.OnClick(b)
+        self.assertTrue(V.materialsList.shown)
         self.assertEqual(e.errors(), [])
 
     def test_auto_deposit_and_the_games_reagent_option(self):
@@ -13220,6 +13277,18 @@ class Ride(unittest.TestCase):
     def turned(self, e):
         return [k for k in e.g.TURNS.values() if k != "stop"]
 
+    def test_names_and_nameplates_leave_the_film(self):
+        e = self.env()
+        e.mock.cvars.nameplateShowFriends, e.mock.knownCVars.nameplateShowFriends = "1", True
+        R = e.ns.Ride
+        self.fly(e)
+        e.update(3, 0.1)
+        self.assertIsNotNone(R.scene)
+        self.assertEqual(e.mock.cvars.nameplateShowFriends, "0")
+        R.Finish("test")
+        self.assertEqual(e.mock.cvars.nameplateShowFriends, "1")
+        self.assertEqual(e.errors(), [])
+
     def test_take_off_rolls_film_and_coming_in_gives_everything_back(self):
         e = self.env()
         R, g = e.ns.Ride, e.g
@@ -14580,49 +14649,92 @@ class BagWindow(unittest.TestCase):
         self.assertTrue(B.hasPad)
         self.assertEqual(e.errors(), [])
 
-    def test_at_the_bank_lt_and_rt_go_between_your_bags_and_the_bank_in_the_window(self):
+    def test_the_bank_is_in_the_bag_window_and_the_games_bank_window_out_of_sight(self):
         e = self.env()
-        e.lua.execute("MOCK_BANK = {}; BankFrame = CreateFrame('Frame', 'BankFrame', UIParent)")
+        e.lua.execute("""
+            MOCK_BANK = {}; BankFrame = CreateFrame('Frame', 'BankFrame', UIParent)
+            BANK_HIDES = 0; BANK_CLOSED = 0
+            BankFrame:SetScript("OnHide", function() BANK_HIDES = BANK_HIDES + 1 end)
+            CloseBankFrame = function() BANK_CLOSED = BANK_CLOSED + 1 end
+        """)
         e.mock.bags[-1] = e.g.MOCK_BANK
         T = e.lua.table
         e.mock.put(-1, 1, T(id=301, name="Silk Cloth", quality=1, price=40, count=20, **{"class": 7}))
         e.mock.put(-1, 2, T(id=302, name="Iron Ore", quality=1, price=25, count=13, **{"class": 7}))
         e.mock.openBank(True)
         e.g.OpenAllBags()
-        B, o, use = e.ns.Bags, e.mock.overrides, e.g.ControllerCamHUD_BagUse
+        e.mock.advance(0.1)
+        B, o, use, bank = e.ns.Bags, e.mock.overrides, e.g.ControllerCamHUD_BagUse, e.g.BankFrame
         e.update(0.05)
-        self.press(e, "PADDRIGHT")
-        self.press(e, "PADDRIGHT")                                   # in your bags, the third item
-        self.assertIn("PADLTRIGGER or PADRTRIGGER: to the bank", plain(B.frame.legend.text))
-        e.mock.keysDown.PADLTRIGGER = True                           # LT: the bank, in this window
-        e.update(0.05)
-        self.assertEqual(B.view, "bank")
-        self.assertTrue(B.hasPad)                                    # the controller stays here
-        self.assertEqual((B.index, B.list[1].id), (1, 301))          # on the bank's first item,
-        self.assertTrue(B.frame.sel.shown)                           # its ring in sight
-        self.assertEqual(B.frame.sel.alpha, 1)
-        self.assertEqual(use.attrs.macrotext, "/use -1 1")           # X: the bank's own slot
-        self.assertIn("PADLTRIGGER or PADRTRIGGER: back to bags", plain(B.frame.legend.text))
-        self.assertIn("PAD3 To bags", plain(B.frame.legend.text))
-        self.press(e, "PADDRIGHT")
-        self.assertEqual(use.attrs.macrotext, "/use -1 2")
-        self.game_press(e, use)                                      # X: into your bags, the game's own move
-        self.assertEqual(list(e.mock.moved.values()), [302])
-        e.mock.keysDown.PADLTRIGGER = False
-        e.update(0.05)
-        e.mock.keysDown.PADRTRIGGER = True                           # RT: back to your bags,
-        e.update(0.05)
-        self.assertEqual((B.view, B.index), ("bags", 3))             # where you were
+        self.assertTrue(B.hosting)
+        self.assertTrue(e.same(bank.parent, B.holder))               # the game's bank window out of sight
+        self.assertEqual(e.g.BANK_CLOSED, 0)                         # (the bank stays open)
+        self.assertTrue(B.open)
+        self.assertEqual((B.view, B.list[1].id), ("bank", 301))      # this window is the bank,
         self.assertTrue(B.hasPad)
-        self.assertIsNotNone(o.PAD1)
+        self.assertEqual(use.attrs.macrotext, "/use -1 1")           # X: into your bags
+        legend = plain(B.frame.legend.text)
+        self.assertIn("PAD3 To bags", legend)
+        self.assertIn("PADLTRIGGER Bank   PADRTRIGGER Bags", legend)
+        beside = B.beside                                            # your bags beside it, on the right,
+        self.assertTrue(beside.shown)
+        self.assertEqual(beside.points[1][1], "TOPLEFT")
+        self.assertTrue(e.same(beside.points[1][2], B.frame))
+        self.assertEqual(B.frame.points[1][1], "TOPRIGHT")           # the bank on the left of where bags sit
+        self.assertEqual(B.frame.points[1][3], "TOPLEFT")
+        self.assertIn("Bags", plain(beside.title.text))
+        self.assertEqual(beside.height, B.frame.height)              # drawn the same: as tall,
+        self.assertIn("All", plain(beside.filters.cur.text))         # its filters,
+        self.assertTrue(beside.bagButtons[1].shown)                  # its bag row,
+        self.assertIn("free", plain(beside.space.text))
+        self.assertTrue(e.same(B.frame.legend.parent, B.frame.tab))  # the buttons' line in its own tab, below
+        self.press(e, "PADDRIGHT")
+        self.game_press(e, use)
+        self.assertEqual(list(e.mock.moved.values()), [302])
+        e.mock.keysDown.PADRTRIGGER = True                           # RT: your bags
+        e.update(0.05)
         e.mock.keysDown.PADRTRIGGER = False
         e.update(0.05)
-        self.press(e, "PADBACK")                                     # the back button: the bank again,
-        self.assertEqual((B.view, B.index), ("bank", 2))             # where you were there
+        self.assertEqual(B.view, "bags")
+        self.assertTrue(B.hasPad)
+        e.mock.keysDown.PADRTRIGGER = True                           # RT again: still your bags
+        e.update(0.05)
+        e.mock.keysDown.PADRTRIGGER = False
+        e.update(0.05)
+        self.assertEqual(B.view, "bags")
+        e.mock.keysDown.PADLTRIGGER = True                           # LT: the bank, where you were
+        e.update(0.05)
+        e.mock.keysDown.PADLTRIGGER = False
+        e.update(0.05)
+        self.assertEqual((B.view, B.index), ("bank", 2))
+        self.press(e, "PAD4")                                        # Y: the menu, as for your bags
+        self.assertIsNotNone(B.menu)
+        self.press(e, "PAD2")
+        self.press(e, "PADRSHOULDER")                                # RB: the bank's next filter
+        bank_filter = B.filter
+        self.assertNotEqual(bank_filter, 1)
+        e.mock.keysDown.PADRTRIGGER = True                           # RT: your bags in the window, the bank beside
+        e.update(0.05)
+        e.mock.keysDown.PADRTRIGGER = False
+        e.update(0.05)
+        self.assertEqual(B.view, "bags")
+        self.assertEqual(B.beside.points[1][1], "TOPRIGHT")          # the bank on the left
+        self.assertEqual(B.filter, 1)                                # your bags keep their own filter,
+        self.assertEqual(B.besideState.filter, bank_filter)          # and the bank beside keeps its
+        self.assertIn("Bank", plain(B.beside.title.text))
+        self.assertTrue(e.same(B.frame.points[1][2], B.spot))         # your bags where they always are
+        self.assertEqual(B.frame.points[1][3], "TOPRIGHT")
+        B.Close(B)                                                   # closing the window closes the bank
+        self.assertEqual(e.g.BANK_CLOSED, 1)
+        e.mock.openBank(False)
+        self.assertFalse(B.hosting)
+        self.assertTrue(e.same(bank.parent, e.g.UIParent))           # the game's window back where it was
         self.assertEqual(e.errors(), [])
 
     def test_at_the_bank_the_controller_follows_the_games_focus_to_its_bank_window(self):
+        # (the fallback: the bank not taken into the window, as when it opened in a fight)
         e = self.env()
+        e.ns.Bags.HostBank = e.lua.eval("function() return false end")
         e.lua.execute("""
             MOCK_BANK = {}; BankFrame = CreateFrame('Frame', 'BankFrame', UIParent)
             GamepadMode = { FrameControlsManager = { focusedFrame = ContainerFrameCombinedBags, isUIFocused = true,
@@ -14638,6 +14750,13 @@ class BagWindow(unittest.TestCase):
         self.assertTrue(B.hasPad)                                    # the game's focus on its bags: ours
         self.assertEqual(B.view, "bags")
         self.assertIn("PADLTRIGGER or PADRTRIGGER: to the bank", plain(B.frame.legend.text))
+        # side by side in the game's order (LT its bags, RT its bank): ours on the left, the bank to its right
+        bank = e.g.BankFrame
+        self.assertTrue(B.sided)
+        self.assertEqual(bank.points[1][1], "TOPLEFT")
+        self.assertTrue(e.same(bank.points[1][2], B.frame))
+        self.assertEqual(bank.points[1][3], "TOPRIGHT")
+        self.assertEqual(B.frame.points[1][1], "TOPLEFT")
         self.press(e, "PADBACK")                                     # the back button: the bank in this window
         self.assertEqual(B.view, "bank")
         self.assertTrue(B.hasPad)
@@ -14672,6 +14791,11 @@ class BagWindow(unittest.TestCase):
         e.mock.keysDown.PADRTRIGGER = False
         e.update(0.05)
         self.assertEqual(B.view, "bags")
+        e.mock.openBank(False)                                       # the bank closes: ours back where it was
+        e.update(0.05)
+        self.assertFalse(B.sided)
+        self.assertEqual(B.frame.points[1][1], "TOPRIGHT")           # (by its top: it fills downward)
+        self.assertTrue(e.same(B.frame.points[1][2], B.spot))
         self.assertEqual(e.errors(), [])
 
     def test_the_bank_in_the_same_window(self):
@@ -14695,6 +14819,58 @@ class BagWindow(unittest.TestCase):
         e.mock.advance(0.1)
         self.assertEqual(B.view, "bags")
         self.assertIsNone(e.mock.overrides.PADBACK)
+        self.assertEqual(e.errors(), [])
+
+    def test_y_at_the_bank_deposits_and_withdraws_materials_by_kind(self):
+        e = self.env()
+        e.lua.execute("MOCK_BANK = {}; BankFrame = CreateFrame('Frame', 'BankFrame', UIParent)")
+        e.mock.bags[-1] = e.g.MOCK_BANK
+        T = e.lua.table
+        e.mock.put(-1, 1, T(id=301, name="Silk Cloth", quality=1, price=40, count=20, sub=5, **{"class": 7}))
+        e.mock.openBank(True)
+        e.g.OpenAllBags()
+        B = e.ns.Bags
+        e.update(0.05)
+        self.press(e, "PAD4")
+        texts = [c.text for c in B.menu.values()]
+        self.assertIn("Quick Deposit", texts)
+        self.assertIn("Quick Withdraw", texts)
+        self.assertIn("Withdraw materials  >", texts)
+        i = texts.index("Withdraw materials  >") + 1
+        B.MenuChoose(B, i)                                           # a list of its own, in the same menu
+        self.assertTrue(B.frame.menu.shown)
+        kinds = [c.text for c in B.menu.values()]
+        self.assertEqual(kinds[0], "All materials (1)")
+        B.MenuChoose(B, 1)
+        e.mock.advance(1)
+        self.assertIn(301, list(e.mock.moved.values()))
+        self.assertEqual(e.errors(), [])
+
+    def test_the_window_keeps_its_height_whatever_the_filter(self):
+        e = self.env()
+        e.g.ToggleAllBags()
+        B = e.ns.Bags
+        h = B.frame.height
+        for _ in range(len(list(e.ns.Bags.FILTERS.values())) - 1):
+            self.press(e, "PADRSHOULDER")                            # RB: the next filter
+            self.assertEqual(B.frame.height, h, B.FILTERS[B.filter].key)
+        self.assertEqual(B.frame.points[1][1], "TOPRIGHT")           # placed by its top: it fills downward
+        self.assertEqual(e.errors(), [])
+
+    def test_y_opens_its_menu_on_the_side_with_room(self):
+        e = self.env()
+        e.g.ToggleAllBags()
+        B = e.ns.Bags
+        self.press(e, "PAD4")
+        self.assertTrue(B.frame.menu.shown)
+        self.assertEqual(B.frame.menu.points[1][1], "TOPRIGHT")     # (room to the left: there)
+        self.press(e, "PAD2")
+        B.frame.GetLeft = e.lua.eval("function() return 20 end")    # at the screen's left edge (as at the bank)
+        self.press(e, "PAD4")
+        self.assertTrue(B.frame.menu.shown)
+        self.assertEqual(B.frame.menu.points[1][1], "TOPLEFT")      # to its right, in sight
+        self.assertTrue(e.same(B.frame.menu.points[1][2], B.frame))
+        self.assertEqual(B.frame.menu.points[1][3], "TOPRIGHT")
         self.assertEqual(e.errors(), [])
 
     def test_y_tries_gear_on_in_the_dressing_room(self):
@@ -15151,13 +15327,14 @@ class BagWindow(unittest.TestCase):
         self.assertTrue(tip.shown)                                   # the chosen slot's tooltip
         self.press(e, "PADDRIGHT")
         self.assertTrue(tip.shown)                                   # (on every move)
-        self.press(e, "PADRSTICK")                                   # R3: your bags sorted
-        self.assertEqual(list(e.mock.sorted.values()), ["bags"])
-        self.press(e, "PADBACK")                                     # the bank in the window:
-        self.assertEqual(B.list[1].id, 301)                          # its contents,
+        self.assertEqual(B.list[1].id, 301)                          # the bank in the window (it opens on it)
+        self.press(e, "PADRSTICK")                                   # R3: the bank sorted
+        self.assertEqual(list(e.mock.sorted.values()), ["bank"])
+        self.press(e, "PADBACK")                                     # your bags in the window:
+        self.assertEqual(B.view, "bags")
         self.assertTrue(tip.shown)
-        self.press(e, "PADRSTICK")                                   # and R3 sorts the bank
-        self.assertEqual(list(e.mock.sorted.values()), ["bags", "bank"])
+        self.press(e, "PADRSTICK")                                   # and R3 sorts them
+        self.assertEqual(list(e.mock.sorted.values()), ["bank", "bags"])
         self.assertEqual(e.errors(), [])
 
     def test_the_game_own_bags_buttons_are_read_for_the_report(self):
@@ -17138,6 +17315,198 @@ class Narrative(unittest.TestCase):
         self.assertEqual(lv.ns.Mail.Words("nothing"), "No mail.")
         self.assertEqual(e.errors(), [])
         self.assertEqual(lv.errors(), [])
+
+
+class CraftValue(unittest.TestCase):
+    """What your professions will need soon (the guides' next steps), and a material as it is against crafted."""
+
+    NAMES = {"blacksmithing": "Blacksmithing", "mining": "Mining", "engineering": "Engineering"}
+    ITEMS = {3860: ("Mithril Bar", 2000, 20), 3858: ("Mithril Ore", 250, 10), 3577: ("Gold Bar", 150, 20),
+             11128: ("Golden Rod", 500, 20), 3478: ("Coarse Grinding Stone", 10, 20), 12359: ("Thorium Bar", 600, 20),
+             99001: ("Shiny Scale", 40, 20), 99002: ("Shiny Helm", 900, 1)}
+
+    def env(self, who="Ghostlight-Forever", **ranks):
+        e = Env()
+        T = e.lua.table
+        for id, (name, price, stack) in self.ITEMS.items():
+            e.mock["items"][id] = T(name=name, quality=1, price=price, stack=stack, **{"class": 7})
+        self.skills(e, **ranks) if who == "Ghostlight-Forever" else self.skills(e)
+        if who != "Ghostlight-Forever":
+            e.db.inventory[who] = T(bags=T(), bank=T(), prof=T(**{k: T(name=self.NAMES[k], rank=r, cap=300)
+                                                                   for k, r in ranks.items()}))
+        return e
+
+    def skills(self, e, **ranks):
+        T = e.lua.table
+        e.mock.skills = e.lua.table_from([T(name=self.NAMES[k], rank=r, cap=300) for k, r in ranks.items()])
+        e.mock.fire("SKILL_LINES_CHANGED")
+        e.update(0.5)
+
+    def me(self, e):
+        return e.db.inventory["Ghostlight-Forever"]
+
+    def advice(self, e, id):
+        lines = [plain(list(l.values())[0]) for l in e.mock.itemTooltip(id).values()]
+        return lines[lines.index("Recommendation:"):]
+
+    def why(self, e, id):
+        verdict, _, want = e.ns.Market.Verdict(id)
+        return verdict, want and want.why
+
+    def test_a_bar_the_next_steps_use_is_kept_and_says_when(self):
+        e = self.env(blacksmithing=180)
+        M = e.ns.Market
+        self.assertEqual(self.why(e, 3860),
+                         ("keep", "Blacksmithing needs it from 210 (you're at 180), for Heavy Mithril Gauntlet"))
+        self.assertKept(M, 3860)
+        advice = self.advice(e, 3860)
+        self.assertEqual(advice[1:3], ["Keep", "Blacksmithing needs it from 210 (you're at 180), for Heavy Mithril Gauntlet"])
+        self.skills(e, blacksmithing=225)                               # the user's case: 225, the coif ahead
+        self.assertEqual(self.why(e, 3860)[1], "Blacksmithing needs it from 235 (you're at 225), for Mithril Coif")
+        self.skills(e, blacksmithing=240)                               # in the middle of its stretch: now
+        self.assertEqual(self.why(e, 3860)[1], "Blacksmithing needs it now (you're at 240), for Mithril Coif")
+        self.skills(e, blacksmithing=250)                               # an alternative of a later step
+        self.assertEqual(self.why(e, 3860)[1], "Blacksmithing needs it from 260 (you're at 250), for Heavy Mithril Boots")
+        self.skills(e, blacksmithing=265)                               # past every step that uses it
+        self.assertEqual(self.why(e, 3860), ("keep", "kept: nothing says it's junk"))
+        self.skills(e, blacksmithing=100)                               # Thorium is 160 points away: not soon
+        verdict, _, want = M.Verdict(12359)
+        self.assertIsNone(want.ahead)
+        self.assertEqual(e.errors(), [])
+
+    def test_ore_counts_through_the_bar_a_miner_of_yours_smelts(self):
+        e = self.env(blacksmithing=180, mining=150)
+        self.assertEqual(self.why(e, 3858)[1], "made into Mithril Bar: Blacksmithing needs it from 210 (you're at 180), "
+                                               "for Heavy Mithril Gauntlet")
+        self.skills(e, blacksmithing=180, mining=90)                    # Mithril smelting is a long way off
+        self.assertIsNone(e.ns.Market.Verdict(3858)[2].ahead)
+        self.skills(e, blacksmithing=180)                               # nobody of yours smelts it
+        self.assertIsNone(e.ns.Professions.Ahead(3858))
+        self.assertEqual(e.errors(), [])
+
+    def test_another_character_of_yours_and_the_setting(self):
+        e = self.env(who="Sol-Forever", blacksmithing=180)
+        self.assertEqual(self.why(e, 3860)[1], "Blacksmithing needs it from 210 (Sol is at 180), for Heavy Mithril Gauntlet")
+        e.db.inventory["Far-Elsewhere"] = e.db.inventory["Sol-Forever"]
+        e.db.inventory["Sol-Forever"] = None                            # another realm: cannot be mailed there
+        self.assertIsNone(e.ns.Professions.Ahead(3860))
+        e.db.inventory["Sol-Forever"] = e.db.inventory["Far-Elsewhere"]
+        e.cmd("skillkeep off")
+        self.assertIsNone(e.ns.Professions.Ahead(3860))
+        self.assertEqual(e.errors(), [])
+
+    def test_a_recipe_another_of_yours_knows_counts_from_where_it_was_seen(self):
+        e = self.env(blacksmithing=150)
+        e.lua.eval("""function(db)
+            db.skillKnown = { ["Sol-Forever"] = { blacksmithing = { ["Shiny Helm"] = 99002 } } }
+            db.skillMakes = { [99002] = { m = 1, k = "blacksmithing", r = { [99001] = 3 } } }
+            db.skillSteps = { blacksmithing = { ["Shiny Helm"] = { o = 190 } } }
+        end""")(e.db)
+        self.assertEqual(self.why(e, 99001)[1], "Blacksmithing needs it from 190 (you're at 150), for Shiny Helm")
+        e.lua.eval("function(db) db.skillKnown['Ghostlight-Forever'] = { blacksmithing = { ['Shiny Helm'] = 99002 } } end")(e.db)
+        self.assertIsNone(e.ns.Professions.Ahead(99001))                # yours already: its colour says (skill-ups)
+        self.assertEqual(e.errors(), [])
+
+    def golden_rod(self, e):
+        T, now = e.lua.table, e.g.time()
+        bs = self.me(e).prof.blacksmithing
+        bs.crafts = e.lua.table_from({3577: e.lua.table_from([T(p=11128, n=1, m=1)]),
+                                      3478: e.lua.table_from([T(p=11128, n=2, m=1)])})
+        e.lua.eval("function(db) db.skillMakes = { [11128] = { m = 1, k = 'blacksmithing', r = { [3577] = 1, [3478] = 2 } } } end")(e.db)
+        e.db.auction[11128] = T(p=12000, t=now)                         # Golden Rod 1g 20s
+        e.db.auction[3577] = T(p=4500, t=now)                           # Gold Bar 45s
+        e.db.auction[3478] = T(p=1000, t=now)                           # Coarse Grinding Stone 10s
+
+    def test_a_material_as_it_is_against_crafted_every_material_counted(self):
+        e = self.env(blacksmithing=225)                                 # (past the steps that use them)
+        M, P = e.ns.Market, e.ns.Professions
+        self.golden_rod(e)
+        c = M.CraftValue(3577)
+        # 1g 20s less the house's cut (1g 14s), less two grinding stones (20s): 94s for one Gold Bar, against 42s 75c
+        self.assertEqual((round(c.each), round(c.own), c.others, c.worth), (9400, 4275, 2000, True))
+        verdict, more, want = M.Verdict(3577)
+        self.assertEqual((verdict, more), ("craft", 5125))
+        self.assertEqual(self.advice(e, 3577)[1:], ["Keep", "Craft into Golden Rod: 94s each vs 42s 75c as it is",
+                                                    "Golden Rod sells for 1g 20s at auction; the other materials cost 20s"])
+        lines = [[plain(x) for x in l.values()] for l in M.Lines(3577).values()]
+        self.assertIn(["Crafting", "Craft into Golden Rod: 94s each vs 42s 75c as it is"], lines)
+        e.db.auction[3577].p = 9000                                     # the bars bring nearly as much as they are
+        self.assertEqual(M.Verdict(3577)[0], "keep")
+        self.assertIn("Crafting into Golden Rod isn't worth the effort: 94s each vs 85s 50c as it is", self.advice(e, 3577))
+        e.db.auction[11128].p = 2000                                    # the materials cost more than it sells for
+        self.assertIn("Crafting into Golden Rod isn't worth the effort: the materials cost more than it sells for",
+                      self.advice(e, 3577))
+        e.db.auction[11128] = None                                      # nothing to go by
+        self.assertIn("No auction price for Golden Rod yet: visit the auction house to compare", self.advice(e, 3577))
+        e.db.auction[11128] = e.lua.table(p=12000, t=e.g.time() - 9 * 86400)
+        e.db.auction[3478] = None
+        self.assertIn("No auction price for Coarse Grinding Stone yet: visit the auction house to compare",
+                      self.advice(e, 3577))
+        e.db.merchantPrice[3478] = 1000                                 # a merchant's price will do
+        advice = self.advice(e, 3577)
+        self.assertIn("Crafting into Golden Rod isn't worth the effort: 94s each vs 85s 50c as it is", advice)
+        self.assertEqual(advice[-1], "these prices are 9 days old")    # and an old price says so
+        self.assertEqual(P.Crafts(3577, 8550), None)
+        self.assertEqual(e.errors(), [])
+
+    def test_ore_against_its_bars(self):
+        e = self.env(mining=200)
+        M, now = e.ns.Market, e.g.time()
+        e.db.auction[3858] = e.lua.table(p=300, t=now)
+        e.db.auction[3860] = e.lua.table(p=1000, t=now)
+        # 9s 50c a bar against 2s 85c an ore: 6s 65c more each, 66s 50c over a stack of ten
+        self.assertEqual(M.Verdict(3858)[0], "craft")
+        self.assertEqual(self.advice(e, 3858)[1:], ["Keep", "Smelt into Mithril Bar: 9s 50c each vs 2s 85c as it is",
+                                                    "Mithril Bar sells for 10s at auction"])
+        e.db.auction[3858].p = 900
+        self.assertIn("Smelting into Mithril Bar isn't worth the effort: 9s 50c each vs 8s 55c as it is",
+                      self.advice(e, 3858))
+        self.assertEqual(e.errors(), [])
+
+    def test_what_making_one_costs_against_what_it_sells_for(self):
+        e = self.env(blacksmithing=225)
+        M = e.ns.Market
+        self.golden_rod(e)
+        tip = [plain(list(l.values())[0]) for l in e.mock.itemTooltip(11128).values()]
+        self.assertIn("Materials: 65s", tip)                            # a Gold Bar and two stones, at what they cost
+        self.assertIn("Profit: +49s", tip)                              # 1g 14s after the house's cut
+        e.db.auction[11128].p = 6000
+        self.assertIn("Profit: -8s", [plain(list(l.values())[0]) for l in e.mock.itemTooltip(11128).values()])
+        e.db.auction[3478] = None
+        self.assertIn("Materials: no price for Coarse Grinding Stone yet",
+                      [plain(list(l.values())[0]) for l in e.mock.itemTooltip(11128).values()])
+        self.skills(e, blacksmithing=225, mining=200)                   # a bar a miner of yours smelts
+        e.db.auction[3858] = e.lua.table(p=300, t=e.g.time())
+        e.db.auction[3860] = e.lua.table(p=1000, t=e.g.time())
+        self.assertEqual([[plain(x) for x in l.values()] for l in M.CostLines(3860).values()],
+                         [["Materials", "3s"], ["Profit", "+6s 50c"]])
+        e.cmd("craftcost off")
+        self.assertEqual(len(M.CostLines(3860)), 0)
+        self.assertEqual(e.errors(), [])
+
+    def test_merchant_prices_are_noted(self):
+        def setup(env):
+            env.lua.execute("""
+                MERCHANT = { { 2880, 100, 1, -1 }, { 4470, 190, 5, -1 }, { 5000, 500, 1, 3 }, { 5001, 700, 1, -1, true },
+                             { 5002, 0, 1, -1 } }
+                GetMerchantNumItems = function() return #MERCHANT end
+                GetMerchantItemLink = function(i) return "|Hitem:" .. MERCHANT[i][1] .. "|h[x]|h" end
+                GetMerchantItemInfo = function(i)
+                    local m = MERCHANT[i]
+                    return "x", 1, m[2], m[3], m[4], true, true, m[5] or false
+                end""")
+        e = Env(setup=setup)
+        e.mock.openMerchant(True)
+        prices = e.db.merchantPrice
+        self.assertEqual((prices[2880], prices[4470]), (100, 38))       # each, also for what comes five at a time
+        self.assertEqual((prices[5000], prices[5001], prices[5002]), (None, None, None))   # few, tokens, free
+        P = e.ns.Professions
+        self.assertEqual(P.Cost(2880)[0], 100)
+        e.db.auction[2880] = e.lua.table(p=60, t=e.g.time())           # the lower of the two
+        self.assertEqual(P.Cost(2880)[0], 60)
+        again = Env(db=e.mock.serialize(e.g.ControllerCamHUDDB))        # kept with your settings
+        self.assertEqual(again.db.merchantPrice[2880], 100)
+        self.assertEqual(e.errors(), [])
 
 
 if __name__ == "__main__":

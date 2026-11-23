@@ -3,8 +3,10 @@
 -- skills; and, whenever a profession's window is open, its recipes as the game shows them: which still give a
 -- skill point (orange and yellow ones, the game's own colours), what each needs and what each makes. With that
 -- an item in your bags is kept when it still gives you, or another of your characters on this realm, a skill
--- point (mail it over); or when it crafts something the auction house pays more for than the item itself.
--- Nothing is guessed: a profession whose window has not been opened yet keeps nothing.
+-- point (mail it over); when the profession's next steps use it (the levelling guides' recipes ahead of you,
+-- LevelGuides.lua); or when it crafts something the auction house pays more for than the item itself, every
+-- material counted (and an item's tooltip compares the two: as it is, and crafted).
+-- Nothing is guessed: a profession whose window has not been opened yet keeps nothing but what its guide uses.
 -- Only read: nothing in a profession's window is opened, expanded or changed.
 
 local ADDON, ns = ...
@@ -16,7 +18,7 @@ ns.Professions = P
 ns.RegisterSetting({
     key = "skillKeep", kind = "boolean", default = true, command = "skillkeep", section = "Bags, bank and vendor",
     label = "Keep what your professions still need",
-    tip = "an item that one of your characters' recipes still gives a skill point for (orange and yellow recipes, as the game shows them in the profession's window), or that crafts something worth more at the auction house than the item itself, is kept, not sold, and its tooltip says why. Recipes are read when a profession's window is open",
+    tip = "an item that one of your characters' recipes still gives a skill point for (orange and yellow recipes, as the game shows them in the profession's window), that the profession's next steps use (the levelling guides' recipes, and those another of your characters knows, up to 75 points ahead), or that crafts something worth more at the auction house than the item itself, is kept, not sold, and its tooltip says why. Recipes are read when a profession's window is open",
 })
 
 -- The crafting professions: a key, the game's spell for it (its name in your language), its name in English
@@ -28,7 +30,7 @@ P.LIST = {
 }
 P.LEVEL = 2               -- a recipe this colour or better gives a skill-up: 3 orange, 2 yellow, 1 green, 0 grey
 P.BETTER = 1.5            -- crafting is worth it when what it makes brings this many times the item's own price
-P.MIN = 2000              -- and at least this much (20 silver) at the auction house, after its cut
+P.MIN = 2000              -- and at least this much more (20 silver) over a stack of the item, after the house's cut
 local CLASSIC = { optimal = 3, medium = 2, easy = 1, trivial = 0 }
 local MODERN = { [0] = 3, [1] = 2, [2] = 1, [3] = 0 }      -- the game's relative difficulty: optimal .. trivial
 
@@ -360,30 +362,332 @@ function P.Wants(id)
     return nil
 end
 
--- What this item crafts that is worth more than the item itself: own = what the item brings as it is (the
--- auction house after its cut, or a vendor). { craft = true, product, price (each, at the auction house), each
--- (what one of this item is worth made into it), who, mine, kind, name } for the best one, or nil. Only for
--- recipes a character of yours knows, and only with the auction house's price for what they make.
-function P.Crafts(id, own)
+-- Smelting, where the guides stop short of it: [ore] = { bar, the Mining skill it takes }
+P.SMELT = { [2770] = { 2840, 1 }, [2771] = { 3576, 65 }, [2775] = { 2842, 75 }, [2772] = { 3575, 125 },
+            [2776] = { 3577, 155 }, [3858] = { 3860, 175 }, [7911] = { 6037, 230 }, [10620] = { 12359, 250 } }
+P.STALE = 7 * 86400       -- auction prices older than this are said to be old
+
+-- A character of yours on this realm with this profession: the first one (you first), or nil
+local function Has(kind, at)
+    for c in Characters() do
+        local p = c.rec.prof[kind]
+        if p and (not at or (tonumber(p.rank) or 0) >= at) then return c, p end
+    end
+    return nil
+end
+
+-- What one of an item costs to get: the auction house's price, or a merchant's (Market.lua notes what merchants
+-- sell, and theirs never runs out), the lower of the two; else what it is made of, by a recipe of yours. The
+-- price and when it was seen (the oldest of them, for something made), or nil when one has no price.
+local MadeOf
+function P.Cost(id, depth)
     local M = ns.Market
-    if type(id) ~= "number" or not (M and M.Auction) then return nil end
-    local best
+    local auction, t
+    if M and M.Auction then auction, t = M.Auction(id) end
+    local merchant = M and M.MerchantPrice and M.MerchantPrice(id)
+    if auction and merchant then
+        if merchant <= auction then return merchant, nil end
+        return auction, t
+    end
+    if auction then return auction, t end
+    if merchant then return merchant, nil end
+    local recipe = (depth or 0) < 2 and MadeOf(id)
+    if not recipe then return nil end
+    local sum, oldest = 0, nil
+    for _, rid in ipairs(P.SortedKeys(recipe.r)) do
+        local each, seen = P.Cost(rid, (depth or 0) + 1)
+        if not each then return nil, nil, rid end
+        sum = sum + each * recipe.r[rid]
+        if seen and (not oldest or seen < oldest) then oldest = seen end
+    end
+    return sum / (recipe.m or 1), oldest
+end
+
+function P.SortedKeys(set)
+    local ids = {}
+    for id in pairs(set) do ids[#ids + 1] = id end
+    table.sort(ids)
+    return ids
+end
+
+-- What an item is made of by a recipe of yours: { m = made each time, k = profession, r = { [reagent] = n } }:
+-- as The Mentor read it from a profession's window, or a bar smelted from its ore by a miner of yours
+MadeOf = function(id)
+    local LV = ns.Levelling
+    local made = LV and LV.MadeOf and LV.MadeOf(id)
+    if made then return made end
+    for ore, s in pairs(P.SMELT) do
+        if s[1] == id and Has("mining", s[2]) then return { m = 1, k = "mining", r = { [ore] = 1 } } end
+    end
+    return nil
+end
+P.MadeOf = MadeOf
+
+-- What it costs to make one of an item, by a recipe of yours, against what it sells for: { cost (for one made),
+-- price (at the auction house, each), profit (after the house's cut), missing (a material with no price), at
+-- (when the oldest price was seen) }, or nil when no recipe of yours makes it
+function P.MakeCost(id)
+    if type(id) ~= "number" then return nil end
+    local recipe = MadeOf(id)
+    if not recipe then return nil end
+    local out, sum, oldest = {}, 0, nil
+    for _, rid in ipairs(P.SortedKeys(recipe.r)) do
+        local each, seen, deeper = P.Cost(rid)
+        if not each then out.missing = deeper or rid; break end
+        sum = sum + each * recipe.r[rid]
+        if seen and (not oldest or seen < oldest) then oldest = seen end
+    end
+    local M = ns.Market
+    local price, t
+    if M and M.Auction then price, t = M.Auction(id) end
+    out.price = price
+    if t and (not oldest or t < oldest) then oldest = t end
+    out.at = oldest
+    if not out.missing then
+        out.cost = sum / (recipe.m or 1)
+        if price then out.profit = price * 0.95 - out.cost end
+    end
+    return out
+end
+
+-- What this item could be crafted into by a recipe a character of yours knows (as read from the profession's
+-- window), or smelted into by a miner of yours: { { p = what it makes, n = how many it takes, m = how many it
+-- makes, kind, who, mine, name } }
+local function Products(id)
+    local out, seen = {}, {}
     for c in Characters() do
         for kind, p in pairs(c.rec.prof) do
             for _, k in ipairs((type(p.crafts) == "table" and p.crafts[id]) or {}) do
-                local price = M.Auction(k.p)
-                if price then
-                    local net = price * 0.95 * (k.m or 1)
-                    local each = net / (k.n or 1)
-                    if net >= P.MIN and each >= (own or 0) * P.BETTER and (not best or each > best.each) then
-                        best = { craft = true, product = k.p, price = price, each = each, who = c.who, mine = c.mine,
-                                 kind = kind, name = p.name, sure = true }
+                if not seen[k.p] then
+                    seen[k.p] = true
+                    out[#out + 1] = { p = k.p, n = k.n or 1, m = k.m or 1, kind = kind, who = c.who, mine = c.mine,
+                                      name = p.name }
+                end
+            end
+        end
+    end
+    local s = P.SMELT[id]
+    if s and not seen[s[1]] then
+        local c, p = Has("mining", s[2])
+        if c then
+            out[#out + 1] = { p = s[1], n = 1, m = 1, kind = "mining", who = c.who, mine = c.mine, name = p.name }
+        end
+    end
+    return out
+end
+
+-- One of this item as it is, against made into something: own = what it brings as it is (the auction house
+-- after its cut, or a vendor; worked out when not given). For the best of what your recipes make of it:
+--   { product, kind, who, mine, name, n, m, own, price = the product's at the auction house, others = what the
+--     other materials of one craft cost, each = what one of this item is worth made into it (the product after
+--     the house's cut, less the other materials, for each of this item it takes), worth = clearly worth the
+--     effort (P.BETTER times as much, and P.MIN more over a stack of it), stale = days since the oldest price
+--     when that is more than P.STALE,
+--     missing = an item with no price to go by (then nothing is worked out) }
+-- or nil when nothing of yours makes anything of it. Every material counts, at what it costs to get (P.Cost).
+function P.CraftValue(id, own)
+    local M = ns.Market
+    if type(id) ~= "number" or not (M and M.Auction) then return nil end
+    if own == nil then own = math.max((M.Auction(id) or 0) * 0.95, (M.Vendor and M.Vendor(id)) or 0) end
+    local now = time and time() or 0
+    local best
+    local function Better(c)
+        if not best then return true end
+        if (best.missing ~= nil) ~= (c.missing ~= nil) then return best.missing ~= nil end
+        if best.worth ~= c.worth then return c.worth end
+        return (c.each or 0) > (best.each or 0)
+    end
+    for _, k in ipairs(Products(id)) do
+        local recipe = MadeOf(k.p)
+        local r = (recipe and recipe.r and recipe.r[id]) and recipe.r or { [id] = k.n }
+        local n, m = r[id], (recipe and recipe.m) or k.m or 1
+        local c = { product = k.p, kind = k.kind, who = k.who, mine = k.mine, name = k.name, n = n, m = m, own = own }
+        local price, t = M.Auction(k.p)
+        if not price then
+            c.missing = k.p
+        else
+            local others, oldest = 0, t
+            for _, rid in ipairs(P.SortedKeys(r)) do
+                if rid ~= id then
+                    local each, seen, deeper = P.Cost(rid)
+                    if not each then c.missing = deeper or rid; break end
+                    others = others + each * r[rid]
+                    if seen and seen < oldest then oldest = seen end
+                end
+            end
+            if not c.missing then
+                local net = price * 0.95 * m
+                c.price, c.others = price, others
+                c.each = (net - others) / n
+                -- worth the effort: clearly more each, and P.MIN more over a stack of it (a smelted stack of ore)
+                c.worth = c.each > own and c.each >= own * P.BETTER
+                    and (c.each - own) * ((M.Stack and M.Stack(id)) or 1) >= P.MIN
+                c.stale = now - oldest > P.STALE and math.floor((now - oldest) / 86400) or nil
+            end
+        end
+        if Better(c) then best = c end
+    end
+    return best
+end
+
+-- What this item crafts that is worth more than the item itself (P.CraftValue, when clearly worth the effort):
+-- { craft = true, product, price (each, at the auction house), each (what one of this item is worth made into
+-- it), who, mine, kind, name, value = the whole comparison }, or nil
+function P.Crafts(id, own)
+    local c = P.CraftValue(id, own)
+    if not (c and c.worth) then return nil end
+    return { craft = true, product = c.product, price = c.price, each = c.each, who = c.who, mine = c.mine,
+             kind = c.kind, name = c.name, sure = true, value = c }
+end
+
+---------------------------------------------------------------------------
+-- What your professions will need soon: the steps of the levelling guides (LevelGuides.lua) still ahead of a
+-- character of yours, within P.AHEAD points, and the recipes another of your characters was seen with that this
+-- one has yet to learn. For ore, through the bar it is smelted into. Only for a profession that character has.
+---------------------------------------------------------------------------
+P.AHEAD = 75              -- how far past your rank "soon" reaches: one rank of training
+
+-- Built once from the guides: uses[reagent] = { { kind, from, to, name, s = spell, p = product, main } },
+-- makes[reagent] = { { p, kind, at } } (what the guides make of it)
+local guideIndex
+function P.GuideIndex()
+    if guideIndex then return guideIndex end
+    guideIndex = { uses = {}, makes = {} }
+    for kind, guide in pairs(ns.LevelGuides or {}) do
+        for _, g in ipairs(guide) do
+            local options = { g }
+            for _, a in ipairs(g.alts or {}) do options[#options + 1] = a end
+            for _, o in ipairs(options) do
+                if not o.gather and type(o.r) == "table" then
+                    local from, to = o.lo or math.max(g[1], o.at or 0), o.hi or g[2]
+                    for i = 1, #o.r - 1, 2 do
+                        local rid = o.r[i]
+                        local list = guideIndex.uses[rid] or {}
+                        guideIndex.uses[rid] = list
+                        list[#list + 1] = { kind = kind, from = from, to = to, name = o.name, s = o.s, p = o.p,
+                                            main = o == g }
+                        if o.p and o.p ~= rid then
+                            local mk = guideIndex.makes[rid] or {}
+                            guideIndex.makes[rid] = mk
+                            mk[#mk + 1] = { p = o.p, kind = kind, at = o.at }
+                        end
                     end
                 end
             end
         end
     end
+    return guideIndex
+end
+
+local function SpellName(id)
+    local get = (C_Spell and C_Spell.GetSpellName) or GetSpellInfo
+    if not (get and id) then return nil end
+    local ok, name = pcall(get, id)
+    name = ok and Plain(name)
+    return type(name) == "string" and name ~= "" and name or nil
+end
+
+local function GuideRecipeName(u)
+    local name = SpellName(u.s)
+    if name then return name end
+    if u.p then
+        local item = P.ItemName(u.p)
+        if not item:find("^item %d") then return item end
+    end
+    return u.name or "?"
+end
+
+-- What an item goes into on the way: { { p, kind } } (smelted, made by the guides' recipes, or by yours), for a
+-- profession one of your characters has
+local function Into(id)
+    local out, seen = {}, {}
+    local function Add(p, kind, at)
+        if p and p ~= id and not seen[p] and Has(kind, at and at - P.AHEAD) then seen[p] = true; out[#out + 1] = { p = p, kind = kind, at = at } end
+    end
+    local s = P.SMELT[id]
+    if s then Add(s[1], "mining", s[2]) end
+    for _, mk in ipairs(P.GuideIndex().makes[id] or {}) do Add(mk.p, mk.kind, mk.at) end
+    for product, made in pairs(ns.db and ns.db.skillMakes or {}) do
+        if type(made) == "table" and type(made.r) == "table" and made.r[id] and made.k then Add(product, made.k) end
+    end
+    table.sort(out, function(a, b) return a.p < b.p end)
+    return out
+end
+
+-- The recipes this character does not know yet that another of yours was seen with, and what they need:
+-- each(name, from = the lowest rank it was seen at, reagents)
+local function OthersRecipes(who, kind, each)
+    local db = ns.db or {}
+    local known = db.skillKnown or {}
+    local mine = known[who] and known[who][kind] or {}
+    local steps = db.skillSteps and db.skillSteps[kind] or {}
+    for other, kinds in pairs(known) do
+        if other ~= who and type(kinds) == "table" and type(kinds[kind]) == "table" then
+            for name, product in pairs(kinds[kind]) do
+                local made = type(product) == "number" and db.skillMakes and db.skillMakes[product]
+                local b = steps[name]
+                if not mine[name] and made and type(made.r) == "table" and b and b.o then each(name, b.o, made.r) end
+            end
+        end
+    end
+end
+
+-- A material one of your characters' professions will use soon: { who, mine, kind, name = the profession's, rank,
+-- from = the skill it is needed from, recipe = the recipe's name, via = what it is made into first (ore: the
+-- bar) }; you first, then what is needed now, then what is needed soonest. Nil when none will.
+function P.Ahead(id)
+    if type(id) ~= "number" or not (ns.db and ns.db.skillKeep) then return nil end
+    local index = P.GuideIndex()
+    local best
+    local function Consider(c, kind, p, from, recipe, via, main)
+        local rank = tonumber(p.rank)
+        local w = { who = c.who, mine = c.mine, kind = kind, name = p.name, rank = rank, from = math.max(from, rank),
+                    recipe = recipe, via = via, main = main }
+        if not best then best = w; return end
+        local function Key(x) return { x.mine and 0 or 1, x.from, x.via and 1 or 0, x.main and 0 or 1 } end
+        local a, b = Key(w), Key(best)
+        for i = 1, #a do
+            if a[i] ~= b[i] then if a[i] < b[i] then best = w end return end
+        end
+    end
+    local function Look(c, kind, p, item, via)
+        local rank = tonumber(p.rank)
+        for _, u in ipairs(index.uses[item] or {}) do
+            if u.kind == kind and u.to > rank and u.from <= rank + P.AHEAD then
+                Consider(c, kind, p, u.from, GuideRecipeName(u), via, u.main)
+            end
+        end
+        OthersRecipes(c.who, kind, function(name, from, reagents)
+            if reagents[item] and from > rank and from <= rank + P.AHEAD then Consider(c, kind, p, from, name, via, false) end
+        end)
+    end
+    local into = Into(id)
+    for c in Characters() do
+        for kind, p in pairs(c.rec.prof) do
+            if type(tonumber(p.rank)) == "number" then
+                Look(c, kind, p, id, nil)
+                for _, x in ipairs(into) do Look(c, kind, p, x.p, x.p) end
+            end
+        end
+    end
     return best
+end
+
+-- Why it is kept, in a few words: "Blacksmithing needs it from 210 (you're at 180), for Heavy Mithril Gauntlet",
+-- "made into Mithril Bar: Blacksmithing needs it from 210 (Sol is at 180), for Heavy Mithril Gauntlet"
+function P.AheadWords(w)
+    if type(w) ~= "table" then return "" end
+    local prof, recipe = tostring(w.name or w.kind), tostring(w.recipe)
+    local text
+    if w.from <= w.rank then
+        text = w.mine and L["%s needs it now (you're at %d), for %s"]:format(prof, w.rank, recipe)
+            or L["%s needs it now (%s is at %d), for %s"]:format(prof, P.Short(w.who), w.rank, recipe)
+    else
+        text = w.mine and L["%s needs it from %d (you're at %d), for %s"]:format(prof, w.from, w.rank, recipe)
+            or L["%s needs it from %d (%s is at %d), for %s"]:format(prof, w.from, P.Short(w.who), w.rank, recipe)
+    end
+    if w.via then text = L["made into %s"]:format(P.ItemName(w.via)) .. ": " .. text end
+    return text
 end
 
 ---------------------------------------------------------------------------

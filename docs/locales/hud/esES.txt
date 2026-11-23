@@ -55,10 +55,18 @@ sacaste %d objetos del banco
 No hay nada que vender.
 Abre primero el banco.
 Nada que sacar: el banco no tiene nada de lo que llevas.
-Retirar
+Materiales
+Tus bolsas están llenas.
+No hay materiales en tus bolsas para guardar.
+No hay materiales en el banco para sacar.
+Todos los materiales (%d)
+Depositar materiales
+Retirar materiales
+Retirada rápida
 saca del banco lo que ya llevas en parte (materiales, pociones, comida), para rellenar tus bolsas
-Depositar
+Depósito rápido
 guarda en el banco lo que ya tiene en parte, y lo que marcaste para él
+materiales de profesión dentro o fuera del banco: todos a la vez o de un tipo cada vez (metal y piedra, tela, hierbas...)
 Abre primero un vendedor.
 Venta inteligente
 vende aquello por lo que un vendedor paga mejor: basura y lo que la casa de subastas no mejoraría (primero se lista y se confirma); lo que vale más en la casa de subastas o aún necesitan tus profesiones se queda
@@ -165,6 +173,18 @@ Vendedor
 Mejor
 Recetas
 Subasta
+Fabricar
+aún no hay precio para %s
+Ganancia
+Aún no hay precio de subasta para %s: visita la casa de subastas para comparar
+Fabricar %s no compensa: los materiales cuestan más de lo que se vende
+Fundir en %s: %s cada uno frente a %s tal cual
+Fabricar %s: %s cada uno frente a %s tal cual
+Fundir en %s no compensa: %s cada uno frente a %s tal cual
+Fabricar %s no compensa: %s cada uno frente a %s tal cual
+%s se vende por %s en la casa de subastas; los demás materiales cuestan %s
+%s se vende por %s en la casa de subastas
+estos precios tienen %d días
 Recomendación
 Equipar
 Misión
@@ -236,13 +256,19 @@ Mejor uso de un objeto
 la descripción de un objeto dice qué hacer con él: venderlo en la casa de subastas (y cuánto más se saca), vendérselo a un vendedor, conservarlo o conservarlo para una misión
 Consejo de objetos: en caso de duda
 Guardar: solo se aconseja vender los objetos grises y lo que marques como basura; todo lo demás se guarda, con sus precios. Vender: lo que nada dice que guardes va a la casa de subastas donde compensa, si no a un vendedor
+Coste de fabricación en las descripciones
+para algo que fabrican tus personajes: lo que cuestan sus materiales y lo que deja en la casa de subastas tras ellos y la comisión de la casa
 Ventas rápidas en la casa de subastas
 precio 5% por debajo del más bajo para vender ya; desactivado: precios pacientes, justo por debajo del más bajo, que se venden cuando llegan compradores
 lee todos los precios de la casa de subastas de una vez (ábrela antes; cada 15 minutos)
+%s lo necesita ya (vas por %d), para %s
+%s lo necesita ya (%s va por %d), para %s
+%s lo necesita desde %d (vas por %d), para %s
+%s lo necesita desde %d (%s va por %d), para %s
 %s cada uno
 Fabrica: %s
 Guardar lo que tus profesiones aún necesitan
-un objeto por el que una receta de alguno de tus personajes aún da un punto de habilidad (recetas naranjas y amarillas, como el juego las muestra en la ventana de la profesión), o con el que se fabrica algo que vale más en la casa de subastas que el propio objeto, se guarda en vez de venderse, y su descripción dice por qué. Las recetas se leen cuando la ventana de una profesión está abierta
+un objeto por el que una receta de uno de tus personajes aún da un punto de habilidad (recetas naranjas y amarillas, como el juego las muestra en la ventana de la profesión), que usan los próximos pasos de la profesión (las recetas de las guías de subida y las que conoce otro de tus personajes, hasta 75 puntos por delante), o que fabrica algo que vale más en la casa de subastas que el propio objeto, se guarda, no se vende, y su descripción dice por qué. Las recetas se leen cuando la ventana de una profesión está abierta
 Abre la ventana de una profesión y echaré un vistazo a tus recetas.
 Ese es el tope, %d. Un instructor tiene el siguiente rango para ti.
 Nada más que aprender en %d. Ve a ver a un instructor por el siguiente rango.
@@ -1109,7 +1135,6 @@ Ordenar banco
 Ordenar bolsas
 Ver bolsas
 Ver banco
-Depositar lo marcado
 Vender lo aconsejado
 Suelta para destruir
 Este objeto inicia una misión.

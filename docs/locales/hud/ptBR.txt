@@ -55,10 +55,18 @@ abaixo do que você usa
 Nada para vender.
 Abra o banco primeiro.
 Nada para tirar: o banco não tem nada do que você carrega.
-Retirar
+Materiais
+Suas bolsas estão cheias.
+Nenhum material nas bolsas para guardar.
+Nenhum material no banco para retirar.
+Todos os materiais (%d)
+Depositar materiais
+Retirar materiais
+Retirada rápida
 tira do banco aquilo de que você já carrega um pouco (materiais, poções, comida), para completar suas bolsas
-Depositar
+Depósito rápido
 guarda no banco o que ele já tem um pouco, e o que você marcou para ele
+materiais de criação para dentro ou fora do banco: todos de uma vez ou um tipo por vez (metal e pedra, tecido, ervas...)
 Abra um vendedor primeiro.
 Venda esperta
 vende o que um vendedor paga melhor: lixo, e o que a casa de leilões não faria melhor (listado e confirmado antes); o que vale mais na casa de leilões ou ainda serve às suas profissões fica
@@ -165,6 +173,18 @@ Vendedor
 Melhor
 Receitas
 Leilão
+Fabricar
+ainda sem preço para %s
+Lucro
+Ainda sem preço de leilão para %s: visite a casa de leilões para comparar
+Fabricar %s não compensa: os materiais custam mais do que a venda rende
+Fundir em %s: %s cada contra %s como está
+Fabricar %s: %s cada contra %s como está
+Fundir em %s não compensa: %s cada contra %s como está
+Fabricar %s não compensa: %s cada contra %s como está
+%s vende por %s na casa de leilões; os outros materiais custam %s
+%s vende por %s na casa de leilões
+estes preços têm %d dias
 Recomendação
 Equipar
 Missão
@@ -236,13 +256,19 @@ Melhor uso de um item
 a dica de um item diz o que fazer com ele: vender na casa de leilões (e quanto a mais isso rende), vender a um vendedor, guardar ou guardar para uma missão
 Conselho de itens: na dúvida
 Guardar: só itens cinza e o que você marcar como lixo são aconselhados para venda; todo o resto é mantido, com seus preços. Vender: o que nada diz para manter vai para a casa de leilões onde compensa, senão para um vendedor
+Custo de fabricação nas dicas
+para algo que seus personagens fabricam: quanto custam os materiais e quanto rende na casa de leilões depois deles e da taxa da casa
 Vendas rápidas na Casa de Leilões
 preço 5% abaixo do menor para vender agora; desligado: preços pacientes, logo abaixo do menor, que vendem quando os compradores chegam
 lê todos os preços da Casa de Leilões de uma vez (abra-a antes; a cada 15 minutos)
+%s precisa disso agora (você está em %d), para %s
+%s precisa disso agora (%s está em %d), para %s
+%s precisa disso a partir de %d (você está em %d), para %s
+%s precisa disso a partir de %d (%s está em %d), para %s
 %s cada
 Fabrica: %s
 Guardar o que suas profissões ainda precisam
-um item pelo qual uma receita de um dos seus personagens ainda dá um ponto de perícia (receitas laranjas e amarelas, como o jogo as mostra na janela da profissão), ou com o qual se fabrica algo que vale mais na casa de leilões do que o próprio item, é guardado em vez de vendido, e a dica dele diz por quê. As receitas são lidas quando a janela de uma profissão está aberta
+um item pelo qual uma receita de um dos seus personagens ainda dá um ponto de habilidade (receitas laranja e amarelas, como o jogo as mostra na janela da profissão), que os próximos passos da profissão usam (as receitas dos guias de evolução e as que outro dos seus personagens conhece, até 75 pontos à frente), ou que fabrica algo que vale mais na casa de leilões que o próprio item, é guardado, não vendido, e sua dica diz por quê. As receitas são lidas quando a janela de uma profissão está aberta
 Abra a janela de uma profissão e eu dou uma olhada nas suas receitas.
 Esse é o teto, %d. Um instrutor tem a próxima categoria para você.
 Nada mais a aprender em %d. Vá ver um instrutor sobre a próxima categoria.
@@ -1109,7 +1135,6 @@ Organizar banco
 Organizar bolsas
 Ver bolsas
 Ver banco
-Depositar os marcados
 Vender os recomendados
 Solte para destruir
 Este item inicia uma missão.

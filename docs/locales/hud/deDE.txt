@@ -55,10 +55,18 @@ schlechter als das, was du trägst
 Nichts zu verkaufen.
 Öffne zuerst die Bank.
 Nichts zu holen: Die Bank hat nichts von dem, was du trägst.
-Abheben
+Materialien
+Eure Taschen sind voll.
+Keine Materialien in Euren Taschen zum Einlagern.
+Keine Materialien in der Bank zum Herausnehmen.
+Alle Materialien (%d)
+Materialien einlagern
+Materialien entnehmen
+Schnell entnehmen
 nimmt aus der Bank, wovon du schon etwas trägst (Materialien, Tränke, Essen), um deine Taschen aufzufüllen
-Einlagern
+Schnell einlagern
 legt in die Bank, wovon sie schon etwas hat, und was du für sie markiert hast
+Handwerksmaterialien in die Bank oder heraus: alle auf einmal oder eine Art nach der anderen (Metall und Stein, Stoff, Kräuter...)
 Öffne zuerst einen Händler.
 Schlau verkaufen
 verkauft, wofür ein Händler am meisten zahlt: Plunder und was im Auktionshaus nicht mehr bringt (erst aufgelistet und bestätigt); was im Auktionshaus mehr wert ist oder deine Berufe noch brauchen, bleibt
@@ -165,6 +173,18 @@ Händler
 Am besten
 Rezepte
 Auktion
+Herstellen
+noch kein Preis für %s
+Gewinn
+Noch kein Auktionspreis für %s: Besuche das Auktionshaus, um zu vergleichen
+Zu %s verarbeiten lohnt sich nicht: Die Materialien kosten mehr, als es einbringt
+Zu %s schmelzen: %s pro Stück, so wie es ist %s
+Zu %s verarbeiten: %s pro Stück, so wie es ist %s
+Zu %s schmelzen lohnt sich nicht: %s pro Stück, so wie es ist %s
+Zu %s verarbeiten lohnt sich nicht: %s pro Stück, so wie es ist %s
+%s bringt im Auktionshaus %s; die übrigen Materialien kosten %s
+%s bringt im Auktionshaus %s
+diese Preise sind %d Tage alt
 Empfehlung
 Anlegen
 Quest
@@ -236,13 +256,19 @@ Beste Verwendung eines Gegenstands
 der Tooltip eines Gegenstands sagt, was du damit tun sollst: im Auktionshaus verkaufen (und wie viel mehr das bringt), an einen Händler verkaufen, behalten oder für eine Quest behalten
 Gegenstandsrat: im Zweifel
 Behalten: nur graue Gegenstände und was du als Plunder markierst, wird zum Verkauf geraten; alles andere wird behalten, mit seinen Preisen. Verkaufen: was nichts zum Behalten gibt, geht ins Auktionshaus, wo es sich lohnt, sonst zu einem Händler
+Herstellungskosten in Tooltips
+für etwas, das deine Charaktere herstellen: was die Materialien kosten und was es im Auktionshaus nach ihnen und dem Anteil des Hauses einbringt
 Schnellverkäufe im Auktionshaus
 Preis 5% unter dem niedrigsten für einen Verkauf jetzt; aus: geduldige Preise, knapp unter dem niedrigsten, die sich verkaufen, wenn Käufer kommen
 liest alle Preise im Auktionshaus auf einmal (vorher öffnen; alle 15 Minuten)
+%s braucht es jetzt (du bist bei %d), für %s
+%s braucht es jetzt (%s ist bei %d), für %s
+%s braucht es ab %d (du bist bei %d), für %s
+%s braucht es ab %d (%s ist bei %d), für %s
 %s pro Stück
 Stellt her: %s
 Behalten, was deine Berufe noch brauchen
-ein Gegenstand, für den ein Rezept eines deiner Charaktere noch einen Fertigkeitspunkt gibt (orange und gelbe Rezepte, wie das Spiel sie im Fenster des Berufs zeigt), oder aus dem sich etwas herstellen lässt, das im Auktionshaus mehr wert ist als er selbst, wird behalten statt verkauft, und sein Tooltip sagt, warum. Die Rezepte werden gelesen, wenn das Fenster eines Berufs offen ist
+ein Gegenstand, für den ein Rezept eines deiner Charaktere noch einen Fertigkeitspunkt gibt (orange und gelbe Rezepte, wie das Spiel sie im Berufsfenster zeigt), den die nächsten Schritte des Berufs brauchen (die Rezepte der Levelguides und die, die ein anderer deiner Charaktere kennt, bis zu 75 Punkte voraus), oder der etwas herstellt, das im Auktionshaus mehr wert ist als er selbst, wird behalten, nicht verkauft, und sein Tooltip sagt, warum. Rezepte werden gelesen, wenn ein Berufsfenster offen ist
 Öffne das Fenster eines Berufs, und ich sehe mir deine Rezepte an.
 Das ist die Grenze, %d. Ein Lehrer hat den nächsten Rang für dich.
 Bei %d gibt es nichts mehr zu lernen. Sprich mit einem Lehrer über den nächsten Rang.
@@ -1109,7 +1135,6 @@ Bank sortieren
 Taschen sortieren
 Taschen zeigen
 Bank zeigen
-Markiertes einlagern
 Empfohlenes verkaufen
 Loslassen zum Zerstören
 Dieser Gegenstand startet eine Quest.

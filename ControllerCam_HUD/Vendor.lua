@@ -1266,7 +1266,167 @@ function V:Withdraw()
 end
 
 ---------------------------------------------------------------------------
--- Deposit and Withdraw, as two buttons beside the bank's search box (shown with the bank)
+-- Crafting materials (the game's Trade Goods), in and out of the bank: all at once, or one kind at a time (the
+-- game's own kinds and names: Metal & Stone, Cloth, Herb, Leather...). Never grey items or what you marked as
+-- junk. Out of the bank: no more stacks than your bags have room for.
+---------------------------------------------------------------------------
+V.MATERIALS = 7                                        -- the game's Trade Goods item class
+
+function V.KindName(sub)
+    local get = (C_Item and C_Item.GetItemSubClassInfo) or rawget(_G, "GetItemSubClassInfo")
+    local ok, name = false, nil
+    if get then ok, name = pcall(get, V.MATERIALS, sub) end
+    if ok and type(name) == "string" and name ~= "" and not ns.IsSecret(name) then return name end
+    return L["Materials"] .. " " .. tostring(sub)
+end
+
+local function BagList(where)
+    if where == "bank" then
+        local I = ns.Inventory
+        return I and I.BankBags and I.BankBags() or {}
+    end
+    local list = {}
+    for bag = 0, NUM_TOTAL_EQUIPPED_BAG_SLOTS or NUM_BAG_SLOTS or 4 do list[#list + 1] = bag end
+    return list
+end
+
+-- The materials in your bags or the bank ({ bag, slot, id, sub }), of one kind (sub) or all
+function V.Materials(where, sub)
+    local list, sell = {}, ns.db.sell
+    for _, bag in ipairs(BagList(where)) do
+        local ok, slots = pcall(C_Container.GetContainerNumSlots, bag)
+        for slot = 1, (ok and slots) or 0 do
+            local info = C_Container.GetContainerItemInfo(bag, slot)
+            local id = info and info.itemID
+            if id and not ns.IsSecret(id) and not info.isLocked and (info.quality or 1) > 0 and not sell.junk[id] then
+                local classID, subclassID = ItemKind(id)
+                if classID == V.MATERIALS and (sub == nil or subclassID == sub) then
+                    list[#list + 1] = { bag = bag, slot = slot, id = id, sub = subclassID or 0, worth = 0 }
+                end
+            end
+        end
+    end
+    return list
+end
+
+-- The kinds there, most stacks first: { { sub, name, count } }
+function V.MaterialKinds(where)
+    local by, kinds = {}, {}
+    for _, m in ipairs(V.Materials(where)) do
+        local k = by[m.sub]
+        if not k then
+            k = { sub = m.sub, name = V.KindName(m.sub), count = 0 }
+            by[m.sub] = k
+            kinds[#kinds + 1] = k
+        end
+        k.count = k.count + 1
+    end
+    table.sort(kinds, function(a, b)
+        if a.count ~= b.count then return a.count > b.count end
+        return a.name < b.name
+    end)
+    return kinds
+end
+
+local function FreeBagSlots()
+    local free = 0
+    for _, bag in ipairs(BagList("bags")) do
+        local ok, slots = pcall(C_Container.GetContainerNumSlots, bag)
+        for slot = 1, (ok and slots) or 0 do
+            if not C_Container.GetContainerItemID(bag, slot) then free = free + 1 end
+        end
+    end
+    return free
+end
+
+-- Move materials: "bank" puts yours in, "bags" takes the bank's out; sub: one kind, or nil for all
+function V:MoveMaterials(to, sub)
+    if not (self.bankOpen or (ns.Inventory and ns.Inventory.bankOpen)) then say(L["Open the bank first."]); return false end
+    if self.queue then return false end
+    local list = V.Materials(to == "bank" and "bags" or "bank", sub)
+    if to == "bags" then
+        local room = FreeBagSlots()
+        if room == 0 and #list > 0 then say(L["Your bags are full."]); return false end
+        while #list > room do table.remove(list) end
+    end
+    if #list == 0 then
+        say(to == "bank" and L["No materials in your bags to put away."] or L["No materials in the bank to take out."])
+        return false
+    end
+    self.queue, self.sold, self.gold, self.kind = list, 0, 0, to == "bank" and "bank" or "withdraw"
+    Step()
+    return true
+end
+
+-- The choices, for the bag window's Y menu and the bank window's Materials button: { { text, fn } }
+function V.MaterialChoices(to)
+    local from = to == "bank" and "bags" or "bank"
+    local kinds = V.MaterialKinds(from)
+    local out = {}
+    if #kinds == 0 then return out end
+    local all = 0
+    for _, k in ipairs(kinds) do all = all + k.count end
+    out[1] = { text = L["All materials (%d)"]:format(all), fn = function() V:MoveMaterials(to, nil) end }
+    for _, k in ipairs(kinds) do
+        out[#out + 1] = { text = ("%s (%d)"):format(k.name, k.count), fn = function() V:MoveMaterials(to, k.sub) end }
+    end
+    return out
+end
+
+-- The bank window's Materials list (with a mouse): deposit and withdraw, each kind a row
+local function MaterialsList(anchor)
+    local list = V.materialsList
+    if not list then
+        list = CreateFrame("Frame", nil, UIParent)
+        list:SetFrameStrata("DIALOG")
+        list:SetSize(230, 40)
+        list:EnableMouse(true)
+        list.back = list:CreateTexture(nil, "BACKGROUND")
+        list.back:SetColorTexture(0.03, 0.04, 0.07, 0.94)
+        list.back:SetAllPoints(list)
+        list.rows = {}
+        list:Hide()                                        -- (made hidden: the first click opens it)
+        V.materialsList = list
+    end
+    if list:IsShown() then list:Hide(); return end
+    local rows = {}
+    for _, to in ipairs({ "bank", "bags" }) do
+        local choices = V.MaterialChoices(to)
+        rows[#rows + 1] = { head = to == "bank" and L["Deposit materials"] or L["Withdraw materials"] }
+        if #choices == 0 then
+            rows[#rows + 1] = { text = to == "bank" and L["No materials in your bags to put away."]
+                or L["No materials in the bank to take out."], muted = true }
+        end
+        for _, c in ipairs(choices) do rows[#rows + 1] = c end
+    end
+    for i, r in ipairs(rows) do
+        local b = list.rows[i]
+        if not b then
+            b = CreateFrame("Button", nil, list)
+            b:SetSize(218, 20)
+            b:SetPoint("TOPLEFT", list, "TOPLEFT", 6, -6 - (i - 1) * 21)
+            b.text = ns.FontString(b, 11, "LEFT")
+            b.text:SetPoint("LEFT", b, "LEFT", 4, 0)
+            b.hl = b:CreateTexture(nil, "HIGHLIGHT")
+            b.hl:SetColorTexture(1, 1, 1, 0.12)
+            b.hl:SetAllPoints(b)
+            list.rows[i] = b
+        end
+        b.text:SetText(r.head and ("|cffffd100" .. r.head .. "|r") or (r.muted and ("|cff999999" .. r.text .. "|r") or r.text))
+        b:SetScript("OnClick", r.fn and ns.Protect(function() list:Hide(); r.fn() end) or nil)
+        b:EnableMouse(r.fn ~= nil)
+        b:Show()
+    end
+    for i = #rows + 1, #list.rows do list.rows[i]:Hide() end
+    list:SetHeight(#rows * 21 + 10)
+    list:ClearAllPoints()
+    list:SetPoint("TOPLEFT", anchor, "BOTTOMLEFT", 0, -4)
+    list:Show()
+end
+V.MaterialsList = MaterialsList
+
+---------------------------------------------------------------------------
+-- Quick Deposit, Quick Withdraw and Materials, as buttons beside the bank's search box (shown with the bank)
 ---------------------------------------------------------------------------
 local function BankButton(parent, text, tip, fn)
     local b = CreateFrame("Button", nil, parent, "UIPanelButtonTemplate")
@@ -1291,24 +1451,35 @@ function V:BankButtons(show)
     local bank = _G.BankFrame
     if not show then
         if self.bankButtons then for _, b in pairs(self.bankButtons) do b:Hide() end end
+        if V.materialsList then V.materialsList:Hide() end
         return
     end
     if type(bank) ~= "table" or not bank.CreateTexture then return end
     if not self.bankButtons then
-        local withdraw = BankButton(bank, L["Withdraw"],
+        local withdraw = BankButton(bank, L["Quick Withdraw"],
             L["take out of the bank what you already carry some of (materials, potions, food), to top your bags up"],
             function() V:Withdraw() end)
-        local deposit = BankButton(bank, L["Deposit"],
+        local deposit = BankButton(bank, L["Quick Deposit"],
             L["put in the bank what it already holds some of, and what you marked for it"],
             function() V:Deposit() end)
+        local materials
+        materials = BankButton(bank, L["Materials"],
+            L["crafting materials in or out of the bank: all of them, or one kind at a time (metal and stone, cloth, herbs...)"],
+            function() MaterialsList(materials) end)
+        for _, b in ipairs({ withdraw, deposit, materials }) do
+            local fs = b:GetFontString()
+            local w = fs and tonumber(fs:GetStringWidth()) or 0
+            b:SetWidth(math.max(76, w + 20))
+        end
         local box = _G.BankItemSearchBox or rawget(bank, "SearchBox")
         if type(box) == "table" and box.GetObjectType then
-            withdraw:SetPoint("RIGHT", box, "LEFT", -10, 0)
+            materials:SetPoint("RIGHT", box, "LEFT", -10, 0)
         else
-            withdraw:SetPoint("TOPRIGHT", bank, "TOPRIGHT", -60, -32)
+            materials:SetPoint("TOPRIGHT", bank, "TOPRIGHT", -60, -32)
         end
+        withdraw:SetPoint("RIGHT", materials, "LEFT", -4, 0)
         deposit:SetPoint("RIGHT", withdraw, "LEFT", -4, 0)
-        self.bankButtons = { deposit = deposit, withdraw = withdraw }
+        self.bankButtons = { deposit = deposit, withdraw = withdraw, materials = materials }
     end
     for _, b in pairs(self.bankButtons) do b:Show() end
 end

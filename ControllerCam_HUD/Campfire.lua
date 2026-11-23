@@ -799,6 +799,7 @@ function CF.Start(asked)
     }
     s.speed = (360 * CF.TURN / (CF.LENGTH - 3)) / YawSpeed()
     CF.scene = s
+    if ns.Veil then ns.Veil("camp", true) end                      -- (names out of the picture)
     local okS, scale = pcall(UIParent.GetEffectiveScale, UIParent)
     cine:SetScale((okS and type(scale) == "number" and scale > 0) and scale or 1)
     Hold(true)
@@ -837,6 +838,7 @@ function CF.Finish(why)
     end
     SetUIAlpha(s.alpha)
     CF.Minimap(s, false)
+    if ns.Veil then ns.Veil("camp", false) end
     if cine then cine:Hide() end
     Hold(false)
     CF.playedAt, CF.last, CF.stillSince = GetTime(), why, GetTime()

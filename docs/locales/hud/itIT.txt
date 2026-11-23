@@ -55,10 +55,18 @@ presi %d oggetti dalla banca
 Niente da vendere.
 Apri prima la banca.
 Niente da prendere: la banca non ha nulla di ciò che porti.
-Preleva
+Materiali
+Le tue borse sono piene.
+Nessun materiale nelle borse da depositare.
+Nessun materiale in banca da prelevare.
+Tutti i materiali (%d)
+Deposita materiali
+Preleva materiali
+Prelievo rapido
 prende dalla banca ciò di cui porti già qualcosa (materiali, pozioni, cibo), per riempire le borse
-Deposita
+Deposito rapido
 mette in banca ciò di cui ha già qualcosa, e ciò che hai segnato per essa
+materiali di artigianato dentro o fuori dalla banca: tutti insieme o un tipo alla volta (metallo e pietra, stoffa, erbe...)
 Apri prima un venditore.
 Vendita furba
 vende ciò che un venditore paga meglio: robaccia, e ciò che la casa d'aste non farebbe meglio (prima elencato e confermato); ciò che vale di più alla casa d'aste o serve ancora alle tue professioni resta
@@ -165,6 +173,18 @@ Venditore
 Meglio
 Ricette
 Asta
+Creazione
+ancora nessun prezzo per %s
+Profitto
+Ancora nessun prezzo d'asta per %s: visita la casa d'aste per confrontare
+Trasformarlo in %s non vale la pena: i materiali costano più di quanto si vende
+Fondere in %s: %s l'uno contro %s così com'è
+Trasformare in %s: %s l'uno contro %s così com'è
+Fondere in %s non vale la pena: %s l'uno contro %s così com'è
+Trasformarlo in %s non vale la pena: %s l'uno contro %s così com'è
+%s si vende a %s alla casa d'aste; gli altri materiali costano %s
+%s si vende a %s alla casa d'aste
+questi prezzi hanno %d giorni
 Consiglio
 Equipaggia
 Missione
@@ -236,13 +256,19 @@ Uso migliore di un oggetto
 il tooltip di un oggetto dice cosa farne: venderlo alla casa d'aste (e quanto di più rende), venderlo a un mercante, tenerlo o tenerlo per una missione
 Consiglio sugli oggetti: nel dubbio
 Tieni: si consiglia di vendere solo gli oggetti grigi e ciò che segni come robaccia; tutto il resto è tenuto, con i suoi prezzi. Vendi: ciò che nulla dice di tenere va alla casa d'aste dove conviene, altrimenti a un mercante
+Costo di creazione nei tooltip
+per qualcosa che i tuoi personaggi creano: quanto costano i materiali e quanto rende alla casa d'aste dopo di essi e la commissione
 Vendite rapide alla casa d'aste
 prezzo 5% in meno del più basso per vendere subito; disattivato: prezzi pazienti, appena sotto il più basso, che si vendono quando arrivano i compratori
 legge tutti i prezzi della casa d'aste insieme (aprila prima; ogni 15 minuti)
+%s ne ha bisogno ora (sei a %d), per %s
+%s ne ha bisogno ora (%s è a %d), per %s
+%s ne ha bisogno da %d (sei a %d), per %s
+%s ne ha bisogno da %d (%s è a %d), per %s
 %s l'uno
 Crea: %s
 Tieni ciò che serve ancora alle tue professioni
-un oggetto per cui una ricetta di uno dei tuoi personaggi dà ancora un punto di abilità (ricette arancioni e gialle, come il gioco le mostra nella finestra della professione), o con cui si crea qualcosa che vale di più alla casa d'aste dell'oggetto stesso, viene tenuto invece di essere venduto, e il suo suggerimento dice perché. Le ricette vengono lette quando la finestra di una professione è aperta
+un oggetto per cui una ricetta di uno dei tuoi personaggi dà ancora un punto abilità (ricette arancioni e gialle, come il gioco le mostra nella finestra della professione), che i prossimi passi della professione usano (le ricette delle guide di livellamento e quelle che un altro tuo personaggio conosce, fino a 75 punti più avanti), o che crea qualcosa che vale di più alla casa d'aste dell'oggetto stesso, viene tenuto, non venduto, e il suo tooltip dice perché. Le ricette vengono lette quando la finestra di una professione è aperta
 Apri la finestra di una professione e darò un'occhiata alle tue ricette.
 È il tetto, %d. Un istruttore ha il grado successivo per te.
 Niente più da imparare a %d. Va' da un istruttore per il grado successivo.
@@ -1109,7 +1135,6 @@ Riordina banca
 Riordina borse
 Mostra borse
 Mostra banca
-Deposita i segnati
 Vendi i consigliati
 Rilascia per distruggere
 Questo oggetto avvia una missione.

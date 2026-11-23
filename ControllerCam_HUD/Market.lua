@@ -37,6 +37,11 @@ ns.RegisterSetting({
     tip = "Keep: only grey items and what you mark as junk are advised for sale; everything else is kept, its prices shown. Sell: what nothing says to keep goes to the auction house where it pays, else to a vendor",
 })
 M.UNSURE_NAMES = { L["Keep"], L["Sell"] }
+ns.RegisterSetting({
+    key = "craftCost", kind = "boolean", default = true, command = "craftcost", section = "Bags, bank and vendor",
+    label = "Crafting cost in tooltips",
+    tip = "for something your characters make: what its materials cost, and what it makes at the auction house after them and the house's cut",
+})
 ns.RegisterSaved("auctionScanAt", function(old) return tonumber(old) or 0 end)
 
 -- [itemID] = { p = lowest buyout each (copper), t = when (time()) }
@@ -55,6 +60,24 @@ ns.RegisterSaved("auction", function(old)
 end)
 
 local function Plain(v) if ns.IsSecret(v) then return nil end return v end
+
+-- What merchants sell things for, as seen at their windows: [itemID] = copper each. Only what a merchant has
+-- plenty of, for money (thread, flux, vials): what a crafting material costs to get, when no auction has it.
+local MAX_MERCHANT = 2000
+ns.RegisterSaved("merchantPrice", function(old)
+    local out, n = {}, 0
+    if type(old) ~= "table" then return out end
+    for id, each in pairs(old) do
+        if n >= MAX_MERCHANT then break end
+        if type(id) == "number" and tonumber(each) and tonumber(each) > 0 then out[id] = tonumber(each); n = n + 1 end
+    end
+    return out
+end)
+
+function M.MerchantPrice(id)
+    local list = ns.db and ns.db.merchantPrice
+    return list and list[id] or nil
+end
 
 -- The lowest price of each day, for the last 30 days: [itemID] = { { d = day number, p = copper }, ... }
 local DAYS, MAX_HISTORY = 30, 5000
@@ -208,7 +231,33 @@ function M.Lines(id)
             lines[#lines + 1] = { L["Auction"], Price(each, stack) .. "  " .. GREY .. Ago(t) .. "|r" }
         end
     end
+    if ns.db.auctionVerdict then
+        local head, detail = M.CraftWords(M.CraftValue(id), true)
+        if head then lines[#lines + 1] = { L["Crafting"], head } end
+        if detail then lines[#lines + 1] = { "", GREY .. detail .. "|r" } end
+    end
+    for _, l in ipairs(M.CostLines(id)) do lines[#lines + 1] = l end
     return lines
+end
+
+-- What making one costs, by a recipe of yours, against what it sells for: { { label, value } } (TSM's crafting
+-- cost): "Materials: 20s", "Profit: +94s" (after the house's cut), or which material has no price yet
+function M.CostLines(id)
+    local out = {}
+    local P = ns.Professions
+    if not (ns.db.craftCost and P and P.MakeCost) then return out end
+    local c = P.MakeCost(id)
+    if not c then return out end
+    if c.missing then
+        out[1] = { L["Materials"], GREY .. L["no price for %s yet"]:format(P.ItemName(c.missing)) .. "|r" }
+        return out
+    end
+    out[1] = { L["Materials"], ns.MoneyColored(math.floor(c.cost + 0.5)) }
+    if c.profit then
+        local p = math.floor(c.profit + 0.5)
+        out[2] = { L["Profit"], p >= 0 and ("|cff6fe06a+|r" .. ns.MoneyColored(p)) or ("|cffff6060-|r" .. ns.MoneyColored(-p)) }
+    end
+    return out
 end
 
 -- The panel under an item's tooltip: narrow, one line each, read top to bottom; the prices first (what a merchant
@@ -258,8 +307,66 @@ function M.MerchantCost(tooltip)
     return price, (type(count) == "number" and count > 1) and count or 1
 end
 
--- The advice, in lines of its own: { { text }, ... }
+-- One of a material as it is, against crafted (Professions.CraftValue), in words: the comparison and what it
+-- comes from, or why there is none:
+--   "Craft into Golden Rod: 94s each vs 43s as it is"
+--   "Golden Rod sells for 1g 20s at auction; the other materials cost 20s"
+-- or "Crafting into Copper Chain Belt isn't worth the effort: ...", or "No auction price for Golden Rod yet: ..."
+function M.CraftWords(c, colored)
+    if type(c) ~= "table" then return nil end
+    local P = ns.Professions
+    local money = colored and ns.MoneyColored or ns.Money
+    local function Round(v) return math.max(0, math.floor(v + 0.5)) end
+    if c.missing then
+        return L["No auction price for %s yet: visit the auction house to compare"]:format(P.ItemName(c.missing))
+    end
+    local name = P.ItemName(c.product)
+    local smelt = c.kind == "mining"
+    local head
+    if c.each <= 0 then
+        head = L["Crafting into %s isn't worth the effort: the materials cost more than it sells for"]:format(name)
+    else
+        local made, own = money(Round(c.each)), money(Round(c.own or 0))
+        if c.worth then
+            head = (smelt and L["Smelt into %s: %s each vs %s as it is"] or L["Craft into %s: %s each vs %s as it is"])
+                :format(name, made, own)
+        else
+            head = (smelt and L["Smelting into %s isn't worth the effort: %s each vs %s as it is"]
+                or L["Crafting into %s isn't worth the effort: %s each vs %s as it is"]):format(name, made, own)
+        end
+    end
+    local detail
+    if (c.others or 0) > 0 then
+        detail = L["%s sells for %s at auction; the other materials cost %s"]:format(name, money(Round(c.price)),
+            money(Round(c.others)))
+    else
+        detail = L["%s sells for %s at auction"]:format(name, money(Round(c.price)))
+    end
+    return head, detail, c.stale and L["these prices are %d days old"]:format(c.stale) or nil
+end
+
+-- The comparison for an item, when one of your recipes makes something of it (nil otherwise)
+function M.CraftValue(id, bound)
+    local P = ns.Professions
+    if not (P and P.CraftValue and type(id) == "number") then return nil end
+    local own = math.max((not bound and M.Auction(id) or 0) * 0.95, M.Vendor(id) or 0)   -- (after the house's cut)
+    return P.CraftValue(id, own)
+end
+
+-- The advice, in lines of its own: { { text }, ... }; under it, for a material, what it is worth crafted
 function M.Advice(verdict, more, want, id)
+    local lines = M.AdviceOnly(verdict, more, want, id)
+    if verdict ~= "quest" and verdict ~= "equip" and verdict ~= "disenchant" then
+        local c = (type(want) == "table" and want.value) or M.CraftValue(id)
+        local head, detail, stale = M.CraftWords(c, true)
+        if head then lines[#lines + 1] = { head } end
+        if detail then lines[#lines + 1] = { GREY .. detail .. "|r" } end
+        if stale then lines[#lines + 1] = { GREY .. stale .. "|r" } end
+    end
+    return lines
+end
+
+function M.AdviceOnly(verdict, more, want, id)
     local lines = { { GREY .. L["Recommendation"] .. ":|r" } }
     local function add(text) lines[#lines + 1] = { text } end
     local word = GOLD .. ((verdict == "auction" and L["Auction"]) or (verdict == "vendor" and L["Vendor"])
@@ -301,8 +408,7 @@ function M.Advice(verdict, more, want, id)
         if want.via then add(GREY .. L["made into %s"]:format(ns.Professions.ItemName(want.via)) .. "|r") end
         for _, r in ipairs(ns.Professions.Recipes(want, id)) do add("   " .. ns.Professions.RecipeText(r)) end
     elseif verdict == "craft" then
-        add(word)
-        add(ns.Professions.Words(want))
+        add(word)                                                      -- (the comparison follows: M.Advice)
     else
         if more and more > 0 then add(L["%s for %s"]:format(word, GAIN .. "+" .. ns.Money(more) .. "|r")) else add(word) end
         local chance = verdict == "auction" and type(want) == "table" and want.chance
@@ -328,6 +434,7 @@ function M.TipLines(id, tooltip)
         local each, t = M.Auction(id)
         if each then prices[#prices + 1] = Labelled(L["Auction"], ns.MoneyColored(each) .. GREY .. " (" .. Ago(t) .. ")|r") end
     end
+    for _, l in ipairs(M.CostLines(id)) do prices[#prices + 1] = Labelled(l[1], l[2]) end
     if ns.db.auctionVerdict then
         local verdict, more, want = M.Verdict(id)
         if verdict then advice = M.Advice(verdict, more, want, id) end
@@ -695,6 +802,9 @@ function M.Verdict(id, bound)
     end
     local want = ns.Professions and ns.Professions.Wants(id)
     if want then return "skill", nil, want end                             -- one of yours still learns from it
+    -- what one of your professions will use soon (the levelling guides' next steps, the recipes ahead)
+    local ahead = ns.Professions and ns.Professions.Ahead and ns.Professions.Ahead(id)
+    if ahead then return Kept(ns.Professions.AheadWords(ahead), { ahead = ahead }) end
     local vendor = M.Vendor(id)
     local auction = not bound and M.Auction(id)
     local own = math.max((auction or 0) * CUT, vendor or 0)
@@ -934,9 +1044,41 @@ local function FromItem(key)
     if ok and type(r) == "table" then M.Note(key.itemID, r.buyoutAmount) end
 end
 
+-- What the open merchant sells for money and without running out: noted (M.MerchantPrice). How many were noted.
+function M.ReadMerchant()
+    if not (GetMerchantNumItems and GetMerchantItemLink) then return 0 end
+    local okN, n = pcall(GetMerchantNumItems)
+    n = okN and Plain(n)
+    local db, noted = ns.db, 0
+    db.merchantPrice = db.merchantPrice or {}
+    for i = 1, (type(n) == "number" and n) or 0 do
+        local okL, link = pcall(GetMerchantItemLink, i)
+        link = okL and Plain(link)
+        local id = type(link) == "string" and tonumber(link:match("item:(%d+)")) or nil
+        local price, count, available, extended
+        if C_MerchantFrame and C_MerchantFrame.GetItemInfo then
+            local okM, info = pcall(C_MerchantFrame.GetItemInfo, i)
+            if okM and type(info) == "table" then
+                price, count, available, extended = info.price, info.stackCount, info.numAvailable, info.hasExtendedCost
+            end
+        end
+        if price == nil and GetMerchantItemInfo then
+            local okM, _, _, p, q, a, _, _, x = pcall(GetMerchantItemInfo, i)
+            if okM then price, count, available, extended = p, q, a, x end
+        end
+        price, count, available, extended = Plain(price), Plain(count), Plain(available), Plain(extended)
+        if id and type(price) == "number" and price > 0 and available == -1 and not extended then
+            db.merchantPrice[id] = price / ((type(count) == "number" and count > 0) and count or 1)
+            noted = noted + 1
+        end
+    end
+    return noted
+end
+
 local events = CreateFrame("Frame")
 events:SetScript("OnEvent", ns.Protect(function(_, event, arg)
-    if event == "AUCTION_HOUSE_SHOW" then
+    if event == "MERCHANT_SHOW" or event == "MERCHANT_UPDATE" then M.ReadMerchant()
+    elseif event == "AUCTION_HOUSE_SHOW" then
         if M.active and ns.db.auctionScan then C_Timer.After(1, function() M:Scan(true) end) end
     elseif event == "REPLICATE_ITEM_LIST_UPDATE" then
         if M.scanning == "replicate" and C_AuctionHouse.GetNumReplicateItems then
@@ -958,7 +1100,7 @@ function M:Apply(run)
         for _, e in ipairs({ "AUCTION_HOUSE_SHOW", "AUCTION_HOUSE_CLOSED", "REPLICATE_ITEM_LIST_UPDATE",
                              "AUCTION_ITEM_LIST_UPDATE", "AUCTION_HOUSE_BROWSE_RESULTS_UPDATED",
                              "AUCTION_HOUSE_BROWSE_RESULTS_ADDED", "COMMODITY_SEARCH_RESULTS_UPDATED",
-                             "ITEM_SEARCH_RESULTS_UPDATED" }) do
+                             "ITEM_SEARCH_RESULTS_UPDATED", "MERCHANT_SHOW", "MERCHANT_UPDATE" }) do
             pcall(events.RegisterEvent, events, e)
         end
     end
