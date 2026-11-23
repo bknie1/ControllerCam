@@ -156,7 +156,9 @@ Equipar
 Misión
 Guardar
 mejor que lo que llevas
+Desencantar
 %s por %s
+lo que da aún sube habilidad
 convertido en %s
 %d%% de probabilidad de venta
 Coste
@@ -184,10 +186,13 @@ Mejora: %s
 Sube habilidad: %s
 Misión: %s
 %d%% de probabilidad de venta
+vale %s en la casa de subastas
+más de lo que vale llevarlo puesto
 elegiste conservarlo
 tu única herramienta de este tipo
 una mejora para otra de tus especializaciones
-podría ser una mejora para ti
+lo llevas puesto
+Mejora para %s
 lo mejor de su tipo que llevas
 5% por debajo del más bajo, para una venta rápida
 el mercado está hoy inusualmente bajo: precio cercano al habitual, para esperar compradores
@@ -211,6 +216,7 @@ la descripción de un objeto dice qué hacer con él: venderlo en la casa de sub
 Ventas rápidas en la casa de subastas
 precio 5% por debajo del más bajo para vender ya; desactivado: precios pacientes, justo por debajo del más bajo, que se venden cuando llegan compradores
 lee todos los precios de la casa de subastas de una vez (ábrela antes; cada 15 minutos)
+%s cada uno
 Fabrica: %s
 Guardar lo que tus profesiones aún necesitan
 un objeto por el que una receta de alguno de tus personajes aún da un punto de habilidad (recetas naranjas y amarillas, como el juego las muestra en la ventana de la profesión), o con el que se fabrica algo que vale más en la casa de subastas que el propio objeto, se guarda en vez de venderse, y su descripción dice por qué. Las recetas se leen cuando la ventana de una profesión está abierta
@@ -348,8 +354,14 @@ abrir o cerrar el Mercado (una pestaña de la casa de subastas)
 qué casa de subastas tiene este cliente (para solucionar problemas)
 Desconectado
 Muerto
+Desactivado
+Con especialización de sanación
+Siempre
+Demasiado lejos
 Marcos de grupo y banda
 dibuja nuestro aspecto sobre los marcos de grupo y banda del juego (su selección de objetivo y sus opciones siguen funcionando)
+Grupo y banda del sanador
+en un grupo: tu grupo junto a tu personaje, cada uno con el botón que lo selecciona; en una banda: marcos más finos. Cada uno muestra solo cuánta sanación necesita, un perjuicio que puedes curar y si está a tu alcance
 Animaciones de la barra de lanzamiento
 una barra de lanzamiento muestra lo que se lanza: picos la golpean al minar, rayos la recorren con naturaleza, una enredadera florece con una sanación, runas toman forma con arcano, llamas, hielo y sombras con fuego, escarcha y sombras
 mostrar cada animación de la barra de lanzamiento una vez, en tu barra
@@ -398,6 +410,21 @@ Marcador de misión
 una marca dorada en las unidades que tus misiones aún necesitan
 Animaciones de placas de nombre
 las placas aparecen con fundido, la salud baja respira, el control de masas brilla
+Pequeño
+Normal
+Grande
+Nombre completo
+Nombre corto
+Sin nombre
+Completo
+Mínimo
+Mínimo mini
+Tamaño de las placas
+lo grandes que son las barras de las placas de nombre: pequeñas y finas, normales o grandes (más anchas y altas)
+Nombres en las placas
+el nombre en una placa con barra de salud: completo, recortado u omitido (el marco del objetivo lo da completo; el nivel y el icono de clase se quedan). Una placa sin barra, la de un PNJ amistoso, siempre conserva su nombre
+Aspecto de las placas
+los interruptores de las placas de una vez. Completo: todo. Mínimo: sin barra de poder, hermandad ni título, nombres cortos. Mínimo mini: barras pequeñas con salud, tus perjuicios y los beneficios que importan, nivel y clase, sin nombre (lo tiene el marco del objetivo). La amenaza, el control y los lanzamientos llamativos siempre se quedan
 Placas de nombre
 nuestro aspecto en las placas de nombre del juego (sus opciones de placas se siguen aplicando)
 Títulos de jugador
@@ -564,6 +591,7 @@ Terminando [%s].
 inicia una misión
 una de tus misiones
 lista para entregar
+[%d] %s en %s
 por encima de tu nivel
 pide un grupo
 nivel bajo
@@ -593,6 +621,23 @@ cada paso de tus misiones va al chat de grupo (Collares de hueso sangriento: 4/2
 Conservar lo que necesitan tus misiones
 un objeto que una misión de tu registro aún pide, o uno que inicia una misión que todavía puedes hacer, se marca como Misión: nunca se vende ni se subasta por ti
 decir un orden recomendado para tus misiones: entrega lo que está listo, luego lo más cercano que puedes hacer solo, luego el resto
+Arriba
+Abajo
+N
+NO
+O
+SO
+S
+SE
+E
+NE
+La brújula de misiones está desactivada: /cchud compass on
+La brújula necesita saber dónde estás, y el juego no lo dice aquí.
+Brújula de misiones
+una brújula en la parte superior de la pantalla: hacia dónde miras y dónde están tus misiones, cada una con su distancia. Destaca la misión a la que te dirige el juego
+Brújula de misiones: lugar
+arriba de la pantalla, o abajo en el lugar de la barra de experiencia (la barra pasa entonces arriba)
+unas marcas en la brújula de misiones, a tu alrededor, durante veinte segundos
 A la izquierda de las misiones
 A la derecha de las misiones
 Bajo las misiones
@@ -858,6 +903,8 @@ Juego de vuelo: jugar / gran altitud
 Vuelos: un juego por el camino
 en un vuelo se ofrece un pequeño juego bajo la barra de vuelo, y un botón lo inicia (solo ese botón se ocupa hasta que lo pulses): haz que tu montura aletee sobre las copas de los árboles y entre los zepelines, y atrapa con la red a los jinetes que vienen de frente, bajándolos a tierra a cambio de oro de vuelo. El mismo botón otra vez es gran altitud: el juego se guarda y los botones vuelven a ser del juego. Nunca en combate, desaparece al aterrizar
 en un vuelo: iniciar el juego de vuelo, o llevarlo a gran altitud y de vuelta
+Vuelos cinematográficos
+en un vuelo del maestro de vuelo la pantalla se convierte en película: franjas negras, el HUD se desvanece, la cámara se aleja y gira despacio a tu alrededor y de tu montura, con la barra de vuelo en la franja superior. El juego de vuelo, una ventana o un botón la interrumpen, y termina suavemente al aproximarte a aterrizar
 Un vuelo es un buen momento para ello.
 Llevas jugando %s.
 Hora de un sorbo de agua
@@ -895,6 +942,48 @@ Los momentos más lentos del HUD:
 Informes de depuración
 reunir los informes de diagnóstico por sí solos: al iniciar sesión y de nuevo al recargar o salir (se guardan en los ajustes guardados)
 los momentos en que el juego se detuvo desde que entraste, y cuánto de cada uno fue trabajo del propio HUD
+Todo
+Equipo
+Consumibles
+Objetos comerciables
+Nuevo
+Llavero
+Mochila
+%d de %d huecos ocupados
+Dejar
+Usar
+A las bolsas
+Al banco
+Adjuntar
+Comerciar
+Coger
+Los botones del mando vuelven tras el combate.
+%s o %s: volver a las bolsas
+Todas las bolsas
+Solo esta bolsa
+Meter
+Coger bolsa
+Más
+Bolsas
+%s o %s: otra ventana
+Nada aquí.
+%d libres
+%d huecos libres
+para el banco
+sin marca
+No hay hueco libre.
+Dejar aquí
+Dividir montón
+Marca: %s
+Detalles del objeto
+Ordenar banco
+Ordenar bolsas
+Ver bolsas
+Ver banco
+Depositar lo marcado
+Vender lo aconsejado
+Una ventana de bolsas con filtros rápidos
+tus bolsas en una ventana propia del HUD en lugar de la del juego: todos los objetos juntos, los huecos vacíos reunidos al final, tus bolsas en una fila aparte y filtros rápidos arriba (LB y RB). También el banco, mientras está abierto. Desactivado: las bolsas del juego
 Ajuste del HUD: %s, a juego con la cámara
 preajuste: %s
 Se ha añadido un diseño llamado '%s' al modo edición del juego. Elígelo allí para usarlo (Menú del juego > Modo edición > Diseño).
@@ -908,7 +997,6 @@ Acción
 una vista en tercera persona: barras verticales finas junto a tu personaje, todos los efectos activados; fuera de combate todo se desvanece
 Clásico
 nuestros marcos donde WoW siempre los ha tenido, efectos más discretos, las barras de mando del juego tal cual
-Mínimo
 solo lo que necesitas: los PNJ amistosos muestran su placa (con lo que hacen) solo mientras los señalas, apuntas o los tienes como objetivo; nombres sin títulos; fuera de combate tus barras quedan como un leve indicio (la salud baja siempre se muestra)
 Mundo abierto
 una pantalla limpia para explorar: barras finas a tu lado que descansan atenuadas, placas sin barras de poder, chat que se desvanece

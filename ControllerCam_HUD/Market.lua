@@ -267,12 +267,25 @@ function M.Advice(verdict, more, want, id)
         add(GREY .. L["better than what you wear"] .. "|r")
         local specs = M.SpecWords(want)
         if specs then add(GREY .. specs .. "|r") end
+        local worth = M.WorthWords(want, true)                         -- binds when equipped: or sell it
+        if worth then add(GREY .. worth .. "|r") end
         return lines
     end
     if verdict == "keep" then                                          -- and why: always
         add(word)
         local why = M.SpecWords(want) or (type(want) == "table" and want.why)
         if why then add(GREY .. why .. "|r") end
+        local worth = M.WorthWords(want, true)
+        if worth then add(GREY .. worth .. "|r") end
+        return lines
+    end
+    if verdict == "disenchant" then
+        -- Disenchant for +12s, who and their skill, and what it gives
+        local de = GOLD .. L["Disenchant"] .. "|r"
+        if more and more > 0 then add(L["%s for %s"]:format(de, GAIN .. "+" .. ns.Money(more) .. "|r")) else add(de) end
+        add(GREY .. ns.Professions.Words(want) .. "|r")
+        if want.skill then add(GREY .. L["what it gives still gives a skill-up"] .. "|r") end
+        for _, m in ipairs(want.mats or {}) do add("   " .. ns.Professions.MatText(m)) end
         return lines
     end
     if verdict == "skill" then
@@ -395,8 +408,10 @@ M.ICON = {
     keep = "|TInterface\\Icons\\INV_Misc_Bag_08:14:14:0:0:64:64:5:59:5:59|t",
     quest = "|TInterface\\GossipFrame\\ActiveQuestIcon:14:14|t",
     starts = "|TInterface\\GossipFrame\\AvailableQuestIcon:14:14|t",
+    disenchant = "|TInterface\\Icons\\Trade_Engraving:14:14:0:0:64:64:5:59:5:59|t",
 }
-M.WORDS = { auction = L["Auction house"], vendor = L["Vendor"], keep = L["Keep"], equip = L["Equip"], quest = L["Quest"] }
+M.WORDS = { auction = L["Auction house"], vendor = L["Vendor"], keep = L["Keep"], equip = L["Equip"], quest = L["Quest"],
+            disenchant = L["Disenchant"] }
 
 -- Which of your specs an upgrade is for, in words (want.specs: Vendor.Specs' entries), or nil when there is no
 -- name to give: "Upgrade: Holy, Retribution (other spec)". A spec the game gives no name for is said plainly
@@ -429,6 +444,8 @@ function M.BestText(verdict, more, want)
         right = M.ICON.keep .. " " .. L["Skill-up: %s"]:format(ns.Professions.Words(want))
     elseif verdict == "craft" then
         return M.ICON.keep .. " " .. ns.Professions.Words(want)
+    elseif verdict == "disenchant" then
+        right = M.ICON.disenchant .. " " .. L["Disenchant"] .. GREY .. "  " .. ns.Professions.Words(want) .. "|r"
     elseif verdict == "quest" then
         local icon = (type(want) == "table" and want.starts) and M.ICON.starts or M.ICON.quest
         return icon .. " " .. L["Quest: %s"]:format(ns.Quests.WantText(want))
@@ -437,6 +454,8 @@ function M.BestText(verdict, more, want)
         local specs = (verdict == "equip" or verdict == "keep") and M.SpecWords(want)
         if not specs and verdict == "keep" and type(want) == "table" then specs = want.why end   -- (Keep says why)
         if specs then right = right .. GREY .. "  " .. specs .. "|r" end
+        local worth = (verdict == "equip" or verdict == "keep") and M.WorthWords(want, true)
+        if worth then right = right .. GREY .. "  ·  " .. worth .. "|r" end
     end
     if more and verdict ~= "skill" then right = right .. "  |cff6fe06a+|r" .. ns.MoneyColored(more) end
     local chance = verdict == "auction" and type(want) == "table" and want.chance
@@ -488,6 +507,70 @@ local function Kept(why, want)
 end
 M.Kept = Kept
 
+-- Do you wear one of these now?
+function M.Wearing(id)
+    if not GetInventoryItemLink then return false end
+    for slot = 1, 19 do
+        local ok, link = pcall(GetInventoryItemLink, "player", slot)
+        link = ok and Plain(link)
+        if type(link) == "string" and tonumber(link:match("item:(%d+)")) == id then return true end
+    end
+    return false
+end
+
+-- Is every one of these in your bags bound to you? (nil when none is there to look at)
+function M.BoundInBags(id)
+    if not (C_Container and C_Container.GetContainerItemInfo) then return nil end
+    local seen, free = false, false
+    for bag = 0, (NUM_TOTAL_EQUIPPED_BAG_SLOTS or NUM_BAG_SLOTS or 4) do
+        local okN, slots = pcall(C_Container.GetContainerNumSlots, bag)
+        for slot = 1, (okN and tonumber(slots)) or 0 do
+            local ok, info = pcall(C_Container.GetContainerItemInfo, bag, slot)
+            if ok and type(info) == "table" and Plain(info.itemID) == id then
+                seen = true
+                if Plain(info.isBound) ~= true then free = true end
+            end
+        end
+    end
+    if not seen then return nil end
+    return not free
+end
+
+-- An upgrade that binds when equipped and is not bound yet could be sold instead: what it fetches at the
+-- auction house goes with the advice (want.worth, each), and want.rich when that is clearly more than an
+-- upgrade is worth to you: at least M.BOE_RICH for each level of yours (10g 50s at 42; an item for 21 gold at
+-- 42 is half a riding skill) and ten times a vendor's price.
+M.BOE_RICH = 2500
+function M.BoeWorth(id, bound, want)
+    if bound == nil then bound = M.BoundInBags(id) end
+    if bound then return want end
+    local get = (C_Item and C_Item.GetItemInfo) or GetItemInfo
+    if not get then return want end
+    local ok, bind = pcall(function() return select(14, get(id)) end)
+    if not ok or Plain(bind) ~= 2 then return want end                -- 2: binds when equipped
+    local price = M.Auction(id)
+    if not price then return want end
+    want = type(want) == "table" and want or {}
+    want.worth = price
+    local level = Plain(UnitLevel and UnitLevel("player"))
+    level = type(level) == "number" and level or 1
+    want.rich = price * CUT >= math.max(M.BOE_RICH * level, (M.Vendor(id) or 0) * 10)
+    return want
+end
+
+-- What a BoE upgrade fetches, in words: "worth 12g 40s at auction", and when that beats wearing it
+function M.WorthWords(want, colored)
+    if type(want) ~= "table" or not want.worth then return nil end
+    local money = colored and ns.MoneyColored(want.worth) or ns.Money(want.worth)
+    local text = L["worth %s at auction"]:format(money)
+    if want.rich then text = text .. ": " .. L["more than it is worth to wear"] end
+    return text
+end
+
+-- The default is to sell it: at the auction house where that pays, else to a vendor. Unless it is an upgrade
+-- for you or another character of yours, it gives one of yours a skill-up (or an enchanter of yours would
+-- rather disenchant it), a quest you can still do wants it, or you use it (what you wear, your one tool of its
+-- kind, the best potion of its kind you carry, what you chose to keep). Each of those says which and why.
 function M.Verdict(id, bound)
     local sell = ns.db.sell
     if sell and sell.keep[id] then return Kept(L["you chose to keep it"]) end
@@ -514,6 +597,7 @@ function M.Verdict(id, bound)
                 -- better than what you wear: put it on. Better only for another spec of yours: kept for it.
                 -- (which specs, when there is a name to give: M.SpecWords)
                 local want = M.SpecWords({ specs = specs }) and { specs = specs } or nil
+                want = M.BoeWorth(id, bound, want)                         -- (what it would fetch instead)
                 for _, spec in ipairs(specs) do
                     if spec.rel == "current" then
                         if want then return "equip", nil, want end
@@ -526,8 +610,28 @@ function M.Verdict(id, bound)
         if ok and V and V.KeepConsumable and classID == 0 and V.KeepConsumable(id, nil, classID) then
             soft = true                                                    -- the best of its kind you carry
         end
-        if ok and V and V.MaybeUpgrade and (classID == 2 or classID == 4) and V.MaybeUpgrade(id, equipLoc) then
-            return Kept(L["it could be an upgrade for you"])
+        if ok and (classID == 2 or classID == 4) and M.Wearing(id) then
+            return Kept(L["you wear it"])
+        end
+        -- an upgrade for another character of yours: "Upgrade for Sol" (mail it over)
+        if ok and V and V.AltUpgrades and (classID == 2 or classID == 4) then
+            local alts = V.AltUpgrades(id, equipLoc, bound)
+            if #alts > 0 then
+                local names = {}
+                for i, c in ipairs(alts) do
+                    if i <= 3 then names[#names + 1] = (c.who:match("^([^-]+)") or c.who) end
+                end
+                return Kept(L["Upgrade for %s"]:format(table.concat(names, ", ")), M.BoeWorth(id, bound, { alts = alts }))
+            end
+        end
+        -- gear one of your enchanters would rather disenchant than sell (Professions.lua)
+        if ok and (classID == 2 or classID == 4) and ns.Professions and ns.Professions.Disenchant then
+            local own = math.max((not bound and M.Auction(id) or 0) * CUT, M.Vendor(id) or 0)
+            local de = ns.Professions.Disenchant(id, own, bound)
+            if de then
+                local more = de.value and de.value > own and math.floor(de.value - own + 0.5) or nil
+                return "disenchant", more, de
+            end
         end
     end
     if soft and not M.Fetches(id, bound) then return Kept(L["your best of its kind"]) end

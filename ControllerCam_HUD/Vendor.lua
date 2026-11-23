@@ -630,6 +630,124 @@ function V.Upgrade(item, equipLoc, mode) return #For(item, equipLoc, mode, false
 -- it is never junk.
 function V.MaybeUpgrade(item, equipLoc, mode) return #For(item, equipLoc, mode, true) > 0 end
 
+---------------------------------------------------------------------------
+-- Upgrades for your other characters: the HUD notes what each one wears, its class and level (Inventory.lua).
+-- An item is an upgrade for one when that character can put it on now (its level, its class's weapons and the
+-- armor it wears) and it scores clearly above what that character wears there, by its class's weights (their
+-- talents are not known here). Only characters on this realm and of your faction (the mail goes no further),
+-- seen wearing something; never for an item bound to you.
+---------------------------------------------------------------------------
+-- The weapons (subclasses) each class can learn, and which armor of the off hand and relic slot it takes
+V.CLASS_WEAPONS = {
+    WARRIOR = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 10, 13, 15, 16, 18 }, PALADIN = { 0, 1, 4, 5, 6, 7, 8 },
+    HUNTER = { 0, 1, 2, 3, 6, 7, 8, 10, 13, 15, 16, 18 }, ROGUE = { 2, 3, 4, 7, 13, 15, 16, 18 },
+    PRIEST = { 4, 10, 15, 19 }, SHAMAN = { 0, 1, 4, 5, 10, 13, 15 }, MAGE = { 7, 10, 15, 19 },
+    WARLOCK = { 7, 10, 15, 19 }, DRUID = { 4, 5, 10, 13, 15 },
+}
+local CAN_WEAPON = {}
+for class, list in pairs(V.CLASS_WEAPONS) do
+    CAN_WEAPON[class] = {}
+    for _, sub in ipairs(list) do CAN_WEAPON[class][sub] = true end
+end
+local SHIELD_CLASS = { WARRIOR = true, PALADIN = true, SHAMAN = true }
+local RELIC_CLASS = { [7] = "PALADIN", [8] = "DRUID", [9] = "SHAMAN" }        -- librams, idols, totems
+local DUAL_CLASS = { WARRIOR = true, ROGUE = true, HUNTER = true }
+
+-- Can a character of this class and level put it on now?
+function V.Wearable(item, class, level)
+    local id, classID, subclassID, equipLoc = Instant(item)
+    if not id or not SLOTS[equipLoc or ""] or not V.WEIGHTS[class or ""] then return false end
+    local get = (C_Item and C_Item.GetItemInfo) or GetItemInfo
+    local ok, _, _, _, _, req = pcall(get, item)
+    req = ok and ns.Plain(req)
+    if type(req) == "number" and req > (level or 0) then return false end
+    if classID == 2 then
+        return CAN_WEAPON[class] and CAN_WEAPON[class][subclassID or -1] or false
+    elseif classID == 4 then
+        if equipLoc == "INVTYPE_CLOAK" or (subclassID or 0) == 0 then return true end
+        if subclassID >= 1 and subclassID <= 4 then
+            local at = ARMOR_AT[class]
+            return at and subclassID == ((level or 0) >= 40 and at[2] or at[1]) or false
+        end
+        if subclassID == 6 then return SHIELD_CLASS[class] or false end
+        if RELIC_CLASS[subclassID] then return RELIC_CLASS[subclassID] == class end
+        return false
+    end
+    return false
+end
+
+-- Your other characters this item could go to: { { who, rec }, ... } (by name)
+local function Others()
+    local all = ns.db and ns.db.inventory
+    local I = ns.Inventory
+    local me = I and I.Me and I.Me()
+    if type(all) ~= "table" or not me then return {} end
+    local realm = me:match("%-(.*)$")
+    local mine = all[me] and all[me].faction
+    local list = {}
+    for who, rec in pairs(all) do
+        if who ~= me and type(rec) == "table" and who:match("%-(.*)$") == realm and type(rec.worn) == "table"
+            and next(rec.worn) and rec.class and rec.level
+            and not (mine and rec.faction and rec.faction ~= mine) then
+            list[#list + 1] = { who = who, rec = rec }
+        end
+    end
+    table.sort(list, function(a, b) return a.who < b.who end)
+    return list
+end
+
+-- Is it clearly better than what this character wears where it would go?
+local function BetterFor(item, equipLoc, rec)
+    local w = V.WEIGHTS[rec.class]
+    local mine = V.Score(item, equipLoc, w)
+    if not mine or mine <= 0 then return false end
+    local slots = SLOTS[equipLoc]
+    if equipLoc == "INVTYPE_WEAPON" and not DUAL_CLASS[rec.class] then slots = { 16 } end
+    local id = Instant(item)
+    local function score(slot)
+        local worn = rec.worn[slot]
+        if not worn then return nil end
+        local wid, _, _, loc = Instant(worn)
+        if wid and wid == id then return math.huge end             -- they wear one already
+        return V.Score(worn, loc, w) or false                      -- false: the game says nothing of it
+    end
+    local base
+    if equipLoc == "INVTYPE_2HWEAPON" then
+        local main, off = score(16), score(17)
+        if main == false or off == false then return false end
+        if main == nil and off == nil then return true end
+        base = (main or 0) + (off or 0)
+    else
+        for _, slot in ipairs(slots) do
+            local s = score(slot)
+            if s == false then return false end
+            if s == nil then
+                local main = rec.worn[16]
+                local _, _, _, mainLoc = Instant(main)
+                if not (slot == 17 and mainLoc == "INVTYPE_2HWEAPON") then return true end   -- an empty slot
+            elseif base == nil or s < base then
+                base = s                                           -- the weakest of its slots
+            end
+        end
+        if base == nil then return false end
+    end
+    return mine > base * V.BETTER + 0.5
+end
+
+-- The other characters of yours it is an upgrade for: { { who, rec }, ... }. bound: it is yours alone.
+function V.AltUpgrades(item, equipLoc, bound)
+    local out = {}
+    if bound or not item then return out end
+    if not equipLoc then equipLoc = select(4, Instant(item)) end
+    if not SLOTS[equipLoc or ""] then return out end
+    for _, c in ipairs(Others()) do
+        if V.Wearable(item, c.rec.class, c.rec.level) and BetterFor(item, equipLoc, c.rec) then
+            out[#out + 1] = c
+        end
+    end
+    return out
+end
+
 -- For the debug report: what the game says of your specs
 function V.DescribeSpecs()
     local n, active = V.SpecGroups()
@@ -756,6 +874,11 @@ function V:Decide(id, quality, classID, mode, upTo, subclassID, equipLoc, link)
     if quality == 0 then return true end
     if not GEAR[classID or -1] then return false end
     if V.MaybeUpgrade(link or id, equipLoc) then return false end
+    if #V.AltUpgrades(link or id, equipLoc) > 0 then return false end                -- for another of yours
+    if quality >= 2 and ns.Professions and ns.Professions.Disenchant
+        and ns.Professions.Disenchant(id, (SellPrice(link, id))) then
+        return false                                                                  -- for your enchanter
+    end
     if mode == "quality" then return quality <= upTo end
     return sell.gear and quality == 1
 end
@@ -827,7 +950,7 @@ function V:Recommend()
                     elseif verdict == "quest" then
                         item.want = want                             -- (a quest of yours needs it)
                         out.quest[#out.quest + 1] = item
-                    elseif verdict == "skill" or verdict == "craft" then
+                    elseif verdict == "skill" or verdict == "craft" or verdict == "disenchant" then
                         item.want = want                             -- (your professions still need it)
                         out.skill[#out.skill + 1] = item
                     elseif verdict == "auction" then

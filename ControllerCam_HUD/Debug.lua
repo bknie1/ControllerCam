@@ -365,7 +365,7 @@ D.SECTIONS = {
     { "quests", function() return ns.Quests and ns.Quests.Describe and { ns.Quests.Describe() } or {} end },
     { "travel", function()
         local out = {}
-        for _, part in ipairs({ ns.Flights, ns.FlightGame, ns.Hydrate }) do
+        for _, part in ipairs({ ns.Flights, ns.FlightGame, ns.Ride, ns.Hydrate }) do
             if part and part.Describe then out[#out + 1] = part.Describe() end
         end
         return out

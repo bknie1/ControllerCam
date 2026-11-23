@@ -126,7 +126,7 @@ for _, label in ipairs({
     "Reduce animations", "Catches and camp buffs across the screen",
     "Quest progress in chat", "Flights: time and countdown", "Flights: a game on the way", "Reminder to drink water", "Water reminder every (minutes)",
     "Hide repeated guild recruitment",
-    "Keep what your quests need",
+    "Keep what your quests need", "Quest compass", "Quest compass: place",
     "Quest progress to your party",
     "Fades: gamepad bars", "Fades: minimap", "Fades: quest list", "Fades: damage meter", "Fades: experience bar",
     "Fades: buffs", "Fades: cooldown rows",

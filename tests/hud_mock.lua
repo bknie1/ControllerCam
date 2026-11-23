@@ -424,7 +424,7 @@ C_Container = {
         local it = mock.bags[bag] and mock.bags[bag][slot]
         if not it then return nil end
         return { itemID = it.id, quality = it.quality, stackCount = it.count or 1, isLocked = it.locked or false,
-                 hasNoValue = it.noValue or false, hyperlink = "|Hitem:" .. it.id .. "|h[" .. it.name .. "]|h" }
+                 hasNoValue = it.noValue or false, isBound = it.bound or false, hyperlink = "|Hitem:" .. it.id .. "|h[" .. it.name .. "]|h" }
     end,
     GetContainerItemID = function(bag, slot)
         local it = mock.bags[bag] and mock.bags[bag][slot]
@@ -458,7 +458,8 @@ C_Item = {
         local id = tonumber(item) or tonumber(tostring(item):match("item:(%d+)"))
         local it = mock.items[id]
         if not it then return nil end
-        return it.name, nil, it.quality, it.ilvl, it.req, it.kind, it.subkind, it.stack, nil, it.icon, it.price
+        return it.name, nil, it.quality, it.ilvl, it.req, it.kind, it.subkind, it.stack, nil, it.icon, it.price,
+            nil, nil, it.bind
     end,
     GetItemInfoInstant = function(id)
         if type(id) == "string" then id = tonumber(id:match("item:(%d+)")) or id end    -- (a link, as the game takes)

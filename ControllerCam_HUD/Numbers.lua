@@ -674,7 +674,9 @@ local function Scale(f)
     return (s and s > 0) and s or 1
 end
 
-function RC.Place()
+-- Where the stack starts (its top row's left end), from the centre of the screen: x, y, and where it would be
+-- had it not been dragged. Also for others that sit beside it (the healer's party, Group.lua).
+function RC.Spot()
     local UF = ns.UnitFrames
     local bars = UF and UF.frames and UF.frames.vertical
     local x, y = RC.SIDE[1], RC.SIDE[2]
@@ -688,11 +690,17 @@ function RC.Place()
             x, y = -(bx * k - ux) * RC.MIRROR, by * k - uy - h / 4      -- across from the bars, their lower half
         end
     end
-    RC.baseX, RC.baseY = x, y
+    local baseX, baseY = x, y
     local moved = ns.db and ns.db.pos and ns.db.pos.soon                  -- where you dragged them: by that much
     if type(moved) == "table" and tonumber(moved.x) and tonumber(moved.y) then
         x, y = x + moved.x, y + moved.y
     end
+    return x, y, baseX, baseY
+end
+
+function RC.Place()
+    local x, y, baseX, baseY = RC.Spot()
+    RC.baseX, RC.baseY = baseX, baseY
     place:ClearAllPoints()
     place:SetPoint("CENTER", UIParent, "CENTER", x, y)
     RC.x, RC.y = x, y

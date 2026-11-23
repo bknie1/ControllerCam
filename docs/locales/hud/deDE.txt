@@ -156,7 +156,9 @@ Anlegen
 Quest
 Behalten
 besser als das, was du trägst
+Entzaubern
 %s für %s
+was es ergibt, bringt noch einen Fertigkeitspunkt
 verarbeitet zu %s
 %d%% Verkaufschance
 Kosten
@@ -184,10 +186,13 @@ Verbesserung: %s
 Fertigkeitspunkt: %s
 Quest: %s
 verkauft sich zu %d%%
+im Auktionshaus %s wert
+mehr, als es Euch zum Tragen wert ist
 Ihr habt es zum Behalten markiert
 Euer einziges Werkzeug dieser Art
 eine Verbesserung für eine andere Spezialisierung von Euch
-es könnte eine Verbesserung für Euch sein
+Ihr tragt es
+Verbesserung für %s
 das Beste seiner Art, das Ihr habt
 5% unter dem niedrigsten Preis, für einen schnellen Verkauf
 der Markt ist heute ungewöhnlich niedrig: nahe am üblichen Preis angesetzt, um auf Käufer zu warten
@@ -211,6 +216,7 @@ der Tooltip eines Gegenstands sagt, was du damit tun sollst: im Auktionshaus ver
 Schnellverkäufe im Auktionshaus
 Preis 5% unter dem niedrigsten für einen Verkauf jetzt; aus: geduldige Preise, knapp unter dem niedrigsten, die sich verkaufen, wenn Käufer kommen
 liest alle Preise im Auktionshaus auf einmal (vorher öffnen; alle 15 Minuten)
+%s pro Stück
 Stellt her: %s
 Behalten, was deine Berufe noch brauchen
 ein Gegenstand, für den ein Rezept eines deiner Charaktere noch einen Fertigkeitspunkt gibt (orange und gelbe Rezepte, wie das Spiel sie im Fenster des Berufs zeigt), oder aus dem sich etwas herstellen lässt, das im Auktionshaus mehr wert ist als er selbst, wird behalten statt verkauft, und sein Tooltip sagt, warum. Die Rezepte werden gelesen, wenn das Fenster eines Berufs offen ist
@@ -348,8 +354,14 @@ den Markt öffnen oder schließen (ein Reiter des Auktionshauses)
 welches Auktionshaus dieser Client hat (zur Fehlersuche)
 Offline
 Tot
+Aus
+In einer Heiler-Spezialisierung
+Immer
+Zu weit
 Gruppen- und Schlachtzugsrahmen
 zeichne unser Aussehen über die Gruppen- und Schlachtzugsrahmen des Spiels (deren Zielauswahl und Optionen funktionieren weiter)
+Heiler-Gruppe und -Schlachtzug
+in einer Gruppe: deine Gruppe neben deinem Charakter, jedes Mitglied mit der Taste, die es anvisiert; im Schlachtzug: schlankere Rahmen. Jeder zeigt nur, wie viel Heilung nötig ist, einen Schwächungszauber, den du entfernen kannst, und ob er in Reichweite ist
 Zauberleisten-Animationen
 eine Zauberleiste zeigt, was gewirkt wird: Spitzhacken schlagen beim Bergbau darauf ein, Blitze laufen bei Natur daran entlang, eine Ranke blüht bei einer Heilung, Runen nehmen bei Arkan Gestalt an, Flammen, Eis und Schatten bei Feuer, Frost und Schatten
 jede Zauberleisten-Animation einmal auf deiner Zauberleiste zeigen
@@ -398,6 +410,21 @@ Questmarkierung
 eine goldene Markierung an Einheiten, die deine Quests noch brauchen
 Namensplaketten-Animationen
 Plaketten blenden ein, niedrige Gesundheit atmet, Massenkontrolle schimmert
+Klein
+Normal
+Groß
+Voller Name
+Kurzer Name
+Kein Name
+Voll
+Minimal
+Minimal mini
+Namensplakettengröße
+wie groß die Leisten auf Namensplaketten sind: klein und schmal, normal oder groß (breiter und höher)
+Namen auf Namensplaketten
+der Name auf einer Plakette mit Gesundheitsleiste: voll, gekürzt oder weggelassen (der Zielrahmen nennt ihn voll; Stufe und Klassensymbol bleiben). Eine Plakette ohne Leiste, die eines freundlichen NPCs, behält immer ihren Namen
+Aussehen der Namensplaketten
+die Schalter der Namensplaketten auf einen Druck. Voll: alles. Minimal: keine Ressourcenleiste, Gilde oder Titel, kurze Namen. Minimal mini: kleine Leisten mit Gesundheit, Euren Schwächungen und den wichtigen Stärkungen, Stufe und Klasse, kein Name (der Zielrahmen hat ihn). Bedrohung, Kontrolleffekte und laute Zauber bleiben immer
 Namensplaketten
 unser Aussehen auf den Namensplaketten des Spiels (deren Optionen gelten weiter)
 Spielertitel
@@ -564,6 +591,7 @@ Schließe noch [%s] ab.
 startet eine Quest
 eine deiner Quests
 bereit zur Abgabe
+[%d] %s in %s
 über deiner Stufe
 braucht eine Gruppe
 niedrige Stufe
@@ -593,6 +621,23 @@ jeder Schritt deiner Quests geht in den Gruppenchat (Blutige Knochenketten: 4/25
 Behalten, was deine Quests brauchen
 ein Gegenstand, den eine Quest in deinem Log noch verlangt, oder einer, der eine Quest startet, die du noch machen kannst, wird als Quest markiert: nie für dich verkauft oder versteigert
 eine empfohlene Reihenfolge für deine Quests nennen: abgeben, was fertig ist, dann das Nächste, das du allein schaffst, dann der Rest
+Oben
+Unten
+N
+NW
+W
+SW
+S
+SO
+O
+NO
+Der Questkompass ist aus: /cchud compass on
+Der Kompass muss wissen, wo du bist, und das Spiel sagt es hier nicht.
+Questkompass
+ein Kompass oben am Bildschirm: wohin du blickst und wo deine Quests liegen, jede mit ihrer Entfernung. Die Quest, auf die das Spiel dich hinweist, hebt sich ab
+Questkompass: Platz
+oben am Bildschirm, oder unten am Platz der Erfahrungsleiste (die Leiste kommt dann nach oben)
+ein paar Markierungen auf dem Questkompass, um dich herum, für zwanzig Sekunden
 Links der Quests
 Rechts der Quests
 Unter den Quests
@@ -858,6 +903,8 @@ Flugspiel: spielen / große Höhe
 Flüge: ein Spiel für unterwegs
 auf einem Flug wird unter der Flugleiste ein kleines Spiel angeboten, und eine Taste startet es (nur diese Taste wird belegt, bis du sie drückst): Lass dein Reittier über die Baumkronen und an den Zeppelinen vorbei flattern und fang die entgegenkommenden Reiter mit dem Netz, damit sie für Fluggold zu Boden gehen. Dieselbe Taste noch einmal ist große Höhe: Das Spiel wird weggelegt und die Tasten gehören wieder dem Spiel. Nie im Kampf, weg bei der Landung
 auf einem Flug: das Flugspiel starten, oder es in große Höhe bringen und zurück
+Filmische Flüge
+auf einem Flug mit dem Flugmeister wird der Bildschirm zum Film: schwarze Balken, das HUD tritt zurück, die Kamera zieht weit auf und schwenkt langsam um dich und dein Reittier, die Flugleiste im oberen Balken. Das Flugspiel, ein Fenster oder eine Taste unterbrechen ihn, und er endet sanft, wenn du zur Landung ansetzt
 Ein Flug ist ein guter Moment dafür.
 Du spielst seit %s.
 Zeit für einen Schluck Wasser
@@ -895,6 +942,48 @@ Die langsamsten Momente des HUD:
 Debug-Berichte
 die Berichte zur Fehlersuche von selbst sammeln: beim Einloggen und erneut beim Neuladen oder Ausloggen (sie bleiben in den gespeicherten Einstellungen)
 die Momente, in denen das Spiel seit dem Einloggen stand, und wie viel davon die eigene Arbeit des HUD war
+Alle
+Ausrüstung
+Verbrauchbares
+Handwerkswaren
+Neu
+Schlüsselbund
+Rucksack
+%d von %d Plätzen belegt
+Ablegen
+Benutzen
+In die Taschen
+In die Bank
+Anhängen
+Handeln
+Aufnehmen
+Controller-Tasten kommen nach dem Kampf zurück.
+%s oder %s: zurück zu den Taschen
+Alle Taschen
+Nur diese Tasche
+Hineinlegen
+Tasche aufnehmen
+Mehr
+Taschen
+%s oder %s: anderes Fenster
+Nichts hier.
+%d frei
+%d freie Plätze
+für die Bank
+keine Markierung
+Kein freier Platz.
+Hier ablegen
+Stapel teilen
+Markierung: %s
+Gegenstandsdetails
+Bank sortieren
+Taschen sortieren
+Taschen zeigen
+Bank zeigen
+Markiertes einlagern
+Empfohlenes verkaufen
+Ein Taschenfenster mit Schnellfiltern
+deine Taschen in einem eigenen Fenster des HUD statt dem des Spiels: alle Gegenstände beisammen, die freien Plätze am Ende gesammelt, deine Taschen in einer eigenen Reihe und Schnellfilter oben (LB und RB). Auch die Bank, solange sie offen ist. Aus: die Taschen des Spiels
 HUD-Voreinstellung: %s, passend zur Kamera
 Preset: %s
 Ein Layout namens '%s' wurde dem Bearbeitungsmodus des Spiels hinzugefügt. Wähle es dort aus, um es zu benutzen (Spielmenü > Bearbeitungsmodus > Layout).
@@ -908,7 +997,6 @@ Aktion
 eine Ansicht aus der dritten Person: schmale vertikale Leisten neben deinem Charakter, alle Effekte an; außerhalb des Kampfes blendet alles aus
 Klassisch
 unsere Rahmen dort, wo WoW sie immer hatte, ruhigere Effekte, die Gamepad-Leisten des Spiels unverändert
-Minimal
 nur das Nötige: freundliche NPCs zeigen ihre Plakette (mit ihrer Tätigkeit) nur, solange du auf sie zeigst, sie anvisierst oder als Ziel hast; Namen ohne Titel; außerhalb des Kampfes ruhen deine Leisten als leiser Hinweis (wenig Gesundheit zeigt sich immer)
 Offene Welt
 ein klarer Bildschirm zum Erkunden: schmale Leisten neben dir, die verblasst ruhen, Plaketten ohne Kraftleisten, Chat, der ausblendet

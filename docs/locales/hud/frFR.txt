@@ -156,7 +156,9 @@ Recommandation
 Quête
 Garder
 mieux que ce que vous portez
+Désenchanter
 %s pour %s
+ce qu'il donne fait encore monter une compétence
 transformé en %s
 %d%% de chances de vente
 Coût
@@ -184,10 +186,13 @@ Amélioration : %s
 Monte une compétence: %s
 Quête : %s
 %d%% de chances de se vendre
+vaut %s à l'hôtel des ventes
+plus que ce qu'il vaut à porter
 vous avez choisi de le garder
 votre seul outil de ce type
 une amélioration pour une autre de vos spécialisations
-cela pourrait être une amélioration pour vous
+vous le portez
+Amélioration pour %s
 le meilleur de son type que vous portez
 5% en dessous du plus bas, pour une vente rapide
 le marché est exceptionnellement bas aujourd'hui : prix proche de l'habituel, pour attendre les acheteurs
@@ -211,6 +216,7 @@ l'infobulle d'un objet dit quoi en faire : le vendre à l'hôtel des ventes (et 
 Ventes rapides à l'hôtel des ventes
 prix 5% en dessous du plus bas pour vendre tout de suite ; désactivé : prix patients, juste en dessous du plus bas, qui se vendent quand les acheteurs viennent
 lit tous les prix de l'hôtel des ventes d'un coup (ouvrez-le d'abord ; toutes les 15 minutes)
+%s pièce
 Fabrique: %s
 Garder ce dont vos métiers ont encore besoin
 un objet pour lequel une recette de l'un de vos personnages donne encore un point de compétence (recettes orange et jaunes, comme le jeu les montre dans la fenêtre du métier), ou qui sert à fabriquer quelque chose qui vaut plus à l'hôtel des ventes que l'objet lui-même, est gardé, pas vendu, et sa bulle d'aide dit pourquoi. Les recettes sont lues quand la fenêtre d'un métier est ouverte
@@ -348,8 +354,14 @@ ouvrir ou fermer le Marché (un onglet de l'hôtel des ventes)
 quel hôtel des ventes a ce client (pour le dépannage)
 Hors ligne
 Mort
+Désactivé
+En spécialisation soins
+Toujours
+Trop loin
 Cadres de groupe et de raid
 dessiner notre style sur les cadres de groupe et de raid du jeu (leur ciblage et leurs options continuent de fonctionner)
+Groupe et raid du soigneur
+en groupe: votre groupe à côté de votre personnage, chacun avec le bouton qui le cible; en raid: des cadres plus fins. Chacun ne montre que les soins dont il a besoin, un effet néfaste que vous pouvez dissiper et s'il est à portée
 Animations de la barre d'incantation
 une barre d'incantation montre ce qui est lancé : des pioches la frappent pendant le minage, des éclairs la parcourent pour la nature, une liane fleurit pour un soin, des runes prennent forme pour les arcanes, flammes, glace et ombres pour le feu, le givre et l'ombre
 montrer chaque animation de barre d'incantation une fois, sur votre barre
@@ -398,6 +410,21 @@ Marqueur de quête
 un repère doré sur les unités dont vos quêtes ont encore besoin
 Animations des barres de nom
 les barres apparaissent en fondu, la santé basse respire, le contrôle des foules scintille
+Petite
+Normale
+Grande
+Nom complet
+Nom court
+Sans nom
+Complet
+Minimal
+Minimal mini
+Taille des barres d'info
+la taille des barres sur les barres d'info : petites et fines, normales ou grandes (plus larges et plus hautes)
+Noms sur les barres d'info
+le nom sur une barre d'info avec barre de vie : en entier, raccourci ou omis (le cadre de la cible le donne en entier ; le niveau et l'icône de classe restent). Une barre d'info sans barre, celle d'un PNJ amical, garde toujours son nom
+Style des barres d'info
+les interrupteurs des barres d'info en une fois. Complet : tout. Minimal : pas de barre de ressource, de guilde ni de titre, noms courts. Minimal mini : petites barres avec la vie, vos affaiblissements et les améliorations qui comptent, niveau et classe, sans nom (le cadre de la cible l'a). La menace, les contrôles et les incantations voyantes restent toujours
 Barres de noms
 notre style sur les barres de noms du jeu (ses options de barres de noms continuent de s'appliquer)
 Titres des joueurs
@@ -564,6 +591,7 @@ Je termine [%s].
 lance une quête
 une de vos quêtes
 prête à être rendue
+[%d] %s à %s
 au-dessus de votre niveau
 demande un groupe
 bas niveau
@@ -593,6 +621,23 @@ chaque étape de vos quêtes va dans le canal de groupe (Colliers d'os sanglants
 Garder ce dont vos quêtes ont besoin
 un objet qu'une quête de votre journal demande encore, ou qui lance une quête que vous pouvez encore faire, est marqué Quête : jamais vendu ni mis aux enchères pour vous
 dire un ordre recommandé pour vos quêtes: rendre ce qui est prêt, puis la plus proche faisable seul, puis le reste
+En haut
+En bas
+N
+NO
+O
+SO
+S
+SE
+E
+NE
+La boussole de quêtes est désactivée : /cchud compass on
+La boussole doit savoir où vous êtes, et le jeu ne le dit pas ici.
+Boussole de quêtes
+une boussole en haut de l'écran : la direction où vous regardez, et vos quêtes là où elles se trouvent, chacune avec sa distance. La quête que le jeu vous indique ressort
+Boussole de quêtes : place
+en haut de l'écran, ou en bas à la place de la barre d'expérience (la barre passe alors en haut)
+quelques repères sur la boussole de quêtes, autour de vous, pendant vingt secondes
 À gauche des quêtes
 À droite des quêtes
 Sous les quêtes
@@ -858,6 +903,8 @@ Jeu de vol : jouer / haute altitude
 Vols : un jeu en chemin
 pendant un vol, un petit jeu est proposé sous la barre de vol, et un bouton le lance (seul ce bouton est pris tant que vous ne l'avez pas pressé) : faites battre des ailes votre monture au-dessus des cimes et entre les zeppelins, et prenez au filet les cavaliers qui arrivent en face, pour les faire atterrir contre de l'or de vol. Le même bouton à nouveau, c'est la haute altitude : le jeu est rangé et les boutons sont de nouveau ceux du jeu. Jamais en combat, disparaît à l'atterrissage
 pendant un vol : lancer le jeu de vol, ou le mettre en haute altitude et l'en ramener
+Vols cinématiques
+pendant un vol de maître de vol, l'écran devient un film : bandes noires, l'ATH s'efface, la caméra s'éloigne et tourne lentement autour de vous et de votre monture, la barre de vol dans la bande du haut. Le jeu de vol, une fenêtre ou un bouton l'interrompent, et il s'achève en douceur à l'approche de l'atterrissage
 Un vol est un bon moment pour ça.
 Vous jouez depuis %s.
 C'est l'heure d'une gorgée d'eau
@@ -895,6 +942,48 @@ Les moments les plus lents du HUD :
 Rapports de débogage
 rassembler les rapports de dépannage tout seuls : à la connexion, et de nouveau au rechargement ou à la déconnexion (ils sont gardés dans les réglages enregistrés)
 les moments où le jeu s’est figé depuis votre connexion, et la part de chacun due au travail du HUD
+Tout
+Équipement
+Consommables
+Artisanat
+Nouveau
+Trousseau
+Sac à dos
+%d sur %d emplacements occupés
+Poser
+Utiliser
+Vers les sacs
+Vers la banque
+Joindre
+Échanger
+Prendre
+Les boutons de la manette reviennent après le combat.
+%s ou %s: retour aux sacs
+Tous les sacs
+Ce sac seulement
+Mettre dedans
+Prendre le sac
+Plus
+Sacs
+%s ou %s: autre fenêtre
+Rien ici.
+%d libres
+%d emplacements libres
+pour la banque
+sans marque
+Aucun emplacement libre.
+Poser ici
+Diviser la pile
+Marque: %s
+Détails de l'objet
+Trier la banque
+Trier les sacs
+Voir les sacs
+Voir la banque
+Déposer les objets marqués
+Vendre les objets conseillés
+Une fenêtre de sacs avec filtres rapides
+vos sacs dans une fenêtre propre au HUD au lieu de celle du jeu: tous les objets ensemble, les emplacements vides regroupés à la fin, vos sacs sur une rangée à part et des filtres rapides en haut (LB et RB). La banque aussi, tant qu'elle est ouverte. Désactivé: les sacs du jeu
 Préréglage du HUD : %s, assorti à la caméra
 préréglage : %s
 Une disposition nommée '%s' a été ajoutée au mode Édition du jeu. Choisissez-la là pour l'utiliser (Menu du jeu > Mode Édition > Disposition).
@@ -908,7 +997,6 @@ Action
 une vue à la troisième personne : fines barres verticales à côté de votre personnage, tous les effets activés ; hors combat, tout s'estompe
 Classique
 nos cadres là où WoW les a toujours placés, effets plus discrets, les barres de manette du jeu telles quelles
-Minimal
 seulement l'essentiel : les PNJ amicaux n'affichent leur barre (avec leur fonction) que lorsque vous les pointez, les visez ou les ciblez ; noms sans titres ; hors combat, vos barres restent en retrait (une santé basse s'affiche toujours)
 Monde ouvert
 un écran épuré pour explorer : des barres fines à côté de vous qui s'estompent au repos, des barres de nom sans barre de ressource, une discussion qui s'efface

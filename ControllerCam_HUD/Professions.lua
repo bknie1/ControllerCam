@@ -386,6 +386,118 @@ function P.Crafts(id, own)
     return best
 end
 
+---------------------------------------------------------------------------
+-- Disenchanting. What green, blue and purple weapons and armor give (as in Classic), by item level, and the
+-- Enchanting skill it takes. Each row: up to this item level, the dust { id, fewest, most }, the essence, the
+-- shard. Green armor gives dust three times in four, an essence one time in five, a shard one in twenty; green
+-- weapons the other way round for dust and essence. Blue gives the shard; purple a few shards, or a Nexus
+-- Crystal at the top.
+---------------------------------------------------------------------------
+P.DE_SKILL = { { 20, 1 }, { 25, 25 }, { 30, 50 }, { 35, 75 }, { 40, 100 }, { 45, 125 }, { 50, 150 },
+               { 55, 175 }, { 60, 200 }, { 999, 225 } }
+P.DE = {
+    { 15, { 10940, 1, 2 }, { 10938, 1, 2 } },                    -- Strange Dust, Lesser Magic Essence
+    { 20, { 10940, 2, 3 }, { 10939, 1, 2 }, 10978 },             -- Greater Magic Essence, Small Glimmering Shard
+    { 25, { 10940, 4, 6 }, { 10998, 1, 2 }, 10978 },             -- Lesser Astral Essence
+    { 30, { 11083, 1, 2 }, { 11082, 1, 2 }, 11084 },             -- Soul Dust, Greater Astral, Large Glimmering
+    { 35, { 11083, 2, 5 }, { 11134, 1, 2 }, 11138 },             -- Lesser Mystic Essence, Small Glowing Shard
+    { 40, { 11137, 1, 2 }, { 11135, 1, 2 }, 11139 },             -- Vision Dust, Greater Mystic, Large Glowing
+    { 45, { 11137, 2, 5 }, { 11174, 1, 2 }, 11177 },             -- Lesser Nether Essence, Small Radiant Shard
+    { 50, { 11176, 1, 2 }, { 11175, 1, 2 }, 11178 },             -- Dream Dust, Greater Nether, Large Radiant
+    { 55, { 11176, 2, 5 }, { 16202, 1, 2 }, 14343 },             -- Lesser Eternal Essence, Small Brilliant Shard
+    { 999, { 16204, 1, 2 }, { 16203, 1, 2 }, 14344 },            -- Illusion Dust, Greater Eternal, Large Brilliant
+}
+P.NEXUS = 20725
+P.DE_BETTER, P.DE_MIN = 1.1, 50       -- worth it when its materials bring a tenth more than selling it, and 50c more
+
+local function Bracket(list, ilvl)
+    for _, row in ipairs(list) do if ilvl <= row[1] then return row end end
+end
+
+-- What disenchanting it gives: { { id, n = how many on average, chance }, ... } and the skill it takes; or nil
+-- for anything that cannot be disenchanted (white or grey, not weapons or armor)
+function P.DisenchantMats(id)
+    local get = (C_Item and C_Item.GetItemInfo) or GetItemInfo
+    if not get then return nil end
+    local ok, _, _, quality, ilvl = pcall(get, id)
+    quality, ilvl = ok and Plain(quality), ok and Plain(ilvl)
+    local classID = ItemKind(id)
+    if type(quality) ~= "number" or type(ilvl) ~= "number" or quality < 2 or quality > 4 or ilvl < 5
+        or (classID ~= 2 and classID ~= 4) then
+        return nil
+    end
+    local row = Bracket(P.DE, ilvl)
+    local skill = Bracket(P.DE_SKILL, ilvl)[2]
+    local function avg(m) return (m[2] + m[3]) / 2 end
+    local mats = {}
+    if quality == 2 then
+        local dust, essence = classID == 4 and 0.75 or 0.20, classID == 4 and 0.20 or 0.75
+        if not row[4] then dust, essence = dust + 0.025, essence + 0.025 end
+        mats[1] = { id = row[2][1], n = avg(row[2]), chance = dust }
+        mats[2] = { id = row[3][1], n = avg(row[3]), chance = essence }
+        if row[4] then mats[3] = { id = row[4], n = 1, chance = 0.05 } end
+        table.sort(mats, function(a, b) return a.chance > b.chance end)
+    elseif quality == 3 then
+        mats[1] = { id = row[4] or 10978, n = 1, chance = 1 }
+    elseif ilvl > 55 then
+        mats[1] = { id = P.NEXUS, n = 1, chance = 1 }
+    else
+        mats[1] = { id = row[4] or 10978, n = 3, chance = 1 }
+    end
+    return mats, skill
+end
+
+-- What an enchanter of yours makes of it, against what it sells for (own: the auction house after its cut, or a
+-- vendor): { who, mine, kind, name, rank, cap, mats, skill, value, priced } when one of yours with the skill for
+-- it would rather disenchant it: its materials bring clearly more than selling it (value: what they bring, by
+-- the auction house's prices), or one of them still gives that enchanter a skill-up (skill: true). Only
+-- characters of yours on this realm and of your faction; for an item bound to you, only you. Nil otherwise.
+function P.Disenchant(id, own, bound)
+    if type(id) ~= "number" then return nil end
+    local mats, need = P.DisenchantMats(id)
+    if not mats then return nil end
+    local M = ns.Market
+    local value, priced = 0, true
+    for _, m in ipairs(mats) do
+        local price = M and M.Auction and M.Auction(m.id)
+        m.price = price
+        if price then value = value + price * 0.95 * m.n * m.chance
+        elseif m.chance >= 0.2 then priced = false end           -- (a shard that seldom comes matters little)
+    end
+    local all = ns.db and ns.db.inventory or {}
+    local me = Mine()
+    local faction = me and all[me] and all[me].faction
+    local best
+    for c in Characters() do
+        local p = c.rec.prof.enchanting
+        local sameSide = not (faction and c.rec.faction and c.rec.faction ~= faction)
+        if p and type(p.rank) == "number" and p.rank >= need and (c.mine or (not bound and sameSide)) then
+            local skill = false
+            local room = not (p.rank and p.cap) or p.rank < p.cap
+            if room and p.at and type(p.uses) == "table" then
+                for _, m in ipairs(mats) do
+                    if m.chance >= 0.2 and (p.uses[m.id] or 0) >= P.LEVEL then skill = true end
+                end
+            end
+            local worth = priced and value >= (own or 0) * P.DE_BETTER and value - (own or 0) >= P.DE_MIN
+            if (skill or worth) and not best then
+                best = { who = c.who, mine = c.mine, kind = "enchanting", name = p.name, rank = p.rank, cap = p.cap,
+                         mats = mats, skill = skill, value = priced and value or nil, disenchant = true }
+            end
+        end
+    end
+    return best
+end
+
+-- One material in a few words: "Soul Dust x1.5 (12s each)", its chance when it seldom comes ("5%")
+function P.MatText(m)
+    local text = P.ItemName(m.id)
+    if m.n ~= 1 then text = text .. (" x%s"):format((("%.1f"):format(m.n)):gsub("%.0$", "")) end
+    if m.chance < 1 then text = text .. (" %d%%"):format(math.floor(m.chance * 100 + 0.5)) end
+    if m.price then text = text .. "  " .. L["%s each"]:format(ns.Money(m.price)) end
+    return text
+end
+
 -- Your professions whose window has not been opened yet (their recipes are unknown, so nothing is kept for
 -- them): their names, in the game's words
 function P.Unread()

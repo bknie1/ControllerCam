@@ -492,6 +492,8 @@ local function WindowOpen()
     return false
 end
 
+CF.WindowOpen, CF.AnyPadButton = WindowOpen, AnyPadButton   -- (the ride's film asks the same)
+
 -- What keeps you busy right now (a word), or nil
 function CF.Busy()
     if Yes(UnitAffectingCombat("player")) or Yes(InCombatLockdown()) then return "combat" end

@@ -156,7 +156,9 @@ Equipaggia
 Missione
 Tieni
 migliore di ciò che indossi
+Disincanta
 %s per %s
+ciò che dà fa ancora salire di abilità
 trasformato in %s
 %d%% di probabilità di vendita
 Costo
@@ -184,10 +186,13 @@ Miglioramento: %s
 Sale di abilità: %s
 Missione: %s
 %d%% di probabilità di vendita
+vale %s all'asta
+più di quanto valga indossarlo
 hai scelto di tenerlo
 il tuo unico attrezzo di questo tipo
 un miglioramento per un'altra tua specializzazione
-potrebbe essere un miglioramento per te
+lo indossi
+Miglioramento per %s
 il migliore del suo tipo che porti
 5% in meno del più basso, per una vendita rapida
 il mercato oggi è insolitamente basso: prezzo vicino al solito, per aspettare i compratori
@@ -211,6 +216,7 @@ il tooltip di un oggetto dice cosa farne: venderlo alla casa d'aste (e quanto di
 Vendite rapide alla casa d'aste
 prezzo 5% in meno del più basso per vendere subito; disattivato: prezzi pazienti, appena sotto il più basso, che si vendono quando arrivano i compratori
 legge tutti i prezzi della casa d'aste insieme (aprila prima; ogni 15 minuti)
+%s l'uno
 Crea: %s
 Tieni ciò che serve ancora alle tue professioni
 un oggetto per cui una ricetta di uno dei tuoi personaggi dà ancora un punto di abilità (ricette arancioni e gialle, come il gioco le mostra nella finestra della professione), o con cui si crea qualcosa che vale di più alla casa d'aste dell'oggetto stesso, viene tenuto invece di essere venduto, e il suo suggerimento dice perché. Le ricette vengono lette quando la finestra di una professione è aperta
@@ -348,8 +354,14 @@ apri o chiudi il Mercato (una scheda della casa d'aste)
 quale casa d'aste ha questo client (per la risoluzione dei problemi)
 Offline
 Morto
+Disattivato
+In una specializzazione da guaritore
+Sempre
+Troppo lontano
 Riquadri di gruppo e incursione
 disegna il nostro aspetto sopra i riquadri di gruppo e incursione del gioco (selezione del bersaglio e opzioni continuano a funzionare)
+Gruppo e incursione del guaritore
+in gruppo: il tuo gruppo accanto al tuo personaggio, ognuno con il tasto che lo seleziona; in incursione: riquadri più sottili. Ognuno mostra solo quante cure gli servono, una penalità che puoi curare e se è a portata
 Animazioni della barra di lancio
 una barra di lancio mostra cosa viene lanciato: picconi la colpiscono durante l'estrazione, fulmini la percorrono per la natura, un rampicante fiorisce per una cura, rune prendono forma per l'arcano, fiamme, ghiaccio e ombre per fuoco, gelo e ombra
 mostra ogni animazione della barra di lancio una volta, sulla tua barra
@@ -398,6 +410,21 @@ Indicatore missione
 un indicatore dorato sulle unità di cui le tue missioni hanno ancora bisogno
 Animazioni delle targhette
 le targhette appaiono in dissolvenza, la salute bassa respira, il controllo delle masse brilla
+Piccola
+Normale
+Grande
+Nome intero
+Nome breve
+Nessun nome
+Completo
+Minimale
+Minimale mini
+Dimensione delle targhette
+quanto sono grandi le barre delle targhette: piccole e sottili, normali o grandi (più larghe e più alte)
+Nomi sulle targhette
+il nome su una targhetta con barra della salute: intero, accorciato o tolto (il riquadro del bersaglio lo mostra intero; livello e icona di classe restano). Una targhetta senza barra, quella di un PNG amichevole, tiene sempre il suo nome
+Aspetto delle targhette
+gli interruttori delle targhette in un colpo. Completo: tutto. Minimale: niente barra della risorsa, gilda o titolo, nomi brevi. Minimale mini: barre piccole con la salute, i tuoi indebolimenti e i potenziamenti che contano, livello e classe, nessun nome (lo ha il riquadro del bersaglio). Minaccia, controllo e lanci vistosi restano sempre
 Targhette
 il nostro aspetto sulle targhette del gioco (le sue opzioni delle targhette restano valide)
 Titoli dei giocatori
@@ -564,6 +591,7 @@ Sto finendo [%s].
 avvia una missione
 una tua missione
 pronta da consegnare
+[%d] %s in %s
 sopra il tuo livello
 richiede un gruppo
 livello basso
@@ -593,6 +621,23 @@ ogni passo delle tue missioni va nella chat di gruppo (Collane d'osso insanguina
 Tieni ciò che serve alle tue missioni
 un oggetto che una missione del tuo registro chiede ancora, o uno che avvia una missione che puoi ancora fare, è segnato come Missione: mai venduto né messo all'asta per te
 indica un ordine consigliato per le tue missioni: consegna ciò che è pronto, poi la più vicina che puoi fare da solo, poi il resto
+In alto
+In basso
+N
+NO
+O
+SO
+S
+SE
+E
+NE
+La bussola delle missioni è disattivata: /cchud compass on
+La bussola deve sapere dove sei, e qui il gioco non lo dice.
+Bussola delle missioni
+una bussola in cima allo schermo: dove guardi e dove si trovano le tue missioni, ognuna con la sua distanza. La missione che il gioco ti indica risalta
+Bussola delle missioni: posizione
+in cima allo schermo, oppure in basso al posto della barra dell'esperienza (la barra passa allora in alto)
+alcuni segni sulla bussola delle missioni, intorno a te, per venti secondi
 A sinistra delle missioni
 A destra delle missioni
 Sotto le missioni
@@ -858,6 +903,8 @@ Gioco di volo: gioca / alta quota
 Voli: un gioco durante il viaggio
 in volo viene proposto un piccolo gioco sotto la barra di volo, e un pulsante lo avvia (solo quel pulsante è occupato finché non lo premi): fai battere le ali alla tua cavalcatura sopra le cime degli alberi e tra gli zeppelin, e cattura con la rete i cavalieri che arrivano di fronte, facendoli atterrare in cambio di oro di volo. Lo stesso pulsante di nuovo è alta quota: il gioco viene messo via e i pulsanti tornano al gioco. Mai in combattimento, sparisce all'atterraggio
 in volo: avvia il gioco di volo, o portalo in alta quota e ritorno
+Voli cinematografici
+durante un volo del maestro di volo lo schermo diventa un film: bande nere, l'HUD si dissolve, la telecamera si allarga e ruota lentamente intorno a te e alla tua cavalcatura, con la barra del volo nella banda in alto. Il gioco di volo, una finestra o un tasto lo interrompono, e si chiude dolcemente quando ti avvicini all'atterraggio
 Un volo è un buon momento per farlo.
 Stai giocando da %s.
 È ora di un sorso d'acqua
@@ -895,6 +942,48 @@ I momenti più lenti dell’HUD:
 Rapporti di debug
 raccogli da soli i rapporti di diagnosi: quando accedi e di nuovo quando ricarichi o esci (restano nelle impostazioni salvate)
 i momenti in cui il gioco si è bloccato dall’accesso, e quanto di ciascuno è stato lavoro dell’HUD
+Tutto
+Equipaggiamento
+Consumabili
+Beni commerciali
+Nuovi
+Portachiavi
+Zaino
+%d di %d posti occupati
+Posa
+Usa
+Nelle borse
+In banca
+Allega
+Scambia
+Prendi
+I tasti del controller tornano dopo il combattimento.
+%s o %s: torna alle borse
+Tutte le borse
+Solo questa borsa
+Metti dentro
+Prendi borsa
+Altro
+Borse
+%s o %s: altra finestra
+Niente qui.
+%d liberi
+%d posti liberi
+per la banca
+nessun segno
+Nessun posto libero.
+Posa qui
+Dividi pila
+Segno: %s
+Dettagli dell'oggetto
+Riordina banca
+Riordina borse
+Mostra borse
+Mostra banca
+Deposita i segnati
+Vendi i consigliati
+Una finestra delle borse con filtri rapidi
+le tue borse in una finestra dell'HUD invece di quella del gioco: tutti gli oggetti insieme, i posti vuoti raccolti alla fine, le tue borse in una fila a parte e filtri rapidi in alto (LB e RB). Anche la banca, mentre è aperta. Disattivato: le borse del gioco
 Preset dell'HUD: %s, abbinato alla telecamera
 preset: %s
 Un layout chiamato '%s' è stato aggiunto alla Modalità modifica del gioco. Sceglilo lì per usarlo (Menu di gioco > Modalità modifica > Layout).
@@ -908,7 +997,6 @@ Azione
 una visuale in terza persona: barre verticali sottili accanto al tuo personaggio, tutti gli effetti attivi; fuori combattimento tutto si dissolve
 Classico
 i nostri riquadri dove WoW li ha sempre messi, effetti più discreti, le barre del gamepad del gioco così come sono
-Minimale
 solo l'essenziale: i PNG amichevoli mostrano la targhetta (con cosa fanno) solo mentre li indichi, li miri o li hai come bersaglio; nomi senza titoli; fuori combattimento le tue barre restano un leggero accenno (la salute bassa si vede sempre)
 Mondo aperto
 uno schermo pulito per esplorare: barre sottili accanto a te che riposano sbiadite, targhette senza barre di risorsa, chat che svanisce

@@ -50,6 +50,7 @@ W.Formatter = Formatter
 ---------------------------------------------------------------------------
 local ENRAGE = { Enrage = true }
 local DISPEL = (AuraUtil and AuraUtil.AuraFilters and AuraUtil.AuraFilters.RaidPlayerDispellable) or "RAID"
+W.DISPEL = DISPEL                  -- (on a harmful effect: one you can dispel)
 
 -- An enemy's buffs that matter: the ones the game marks as important, enrages, and the ones you can dispel
 -- or steal. Never the ones that are just always there.
@@ -75,7 +76,7 @@ W.FRIEND_DEBUFFS = {
 -- Our look on one of the game's icons. The game sizes these frames itself (at first to nothing), so every
 -- piece has its own size around the frame's centre instead of filling the frame. typed: an edge in the colour
 -- of the effect's kind (magic, curse, poison, disease, enrage), drawn by the game, where it has one.
-local function Styler(size, textSize, edge, below, typed)
+local function Styler(size, textSize, edge, below, typed, bare)
     local half = size / 2
     return function(f)
         if f.SetFlattensRenderLayers then f:SetFlattensRenderLayers(true) end
@@ -110,6 +111,7 @@ local function Styler(size, textSize, edge, below, typed)
         if cd.SetDrawEdge then cd:SetDrawEdge(false) end
         if cd.SetHideCountdownNumbers then cd:SetHideCountdownNumbers(true) end
         f:SetDurationCooldown(cd)
+        if bare then return end                          -- (the icon alone: no time, no stacks)
         local time = ns.FontString(f, textSize, "CENTER")
         if time.SetDrawLayer then time:SetDrawLayer("OVERLAY", 6) end
         if below then time:SetPoint("TOP", f, "CENTER", 0, -half - 1) else time:SetPoint("CENTER", f, "CENTER", 0, half) end
@@ -246,14 +248,14 @@ end
 -- A row of the game's icons: { filter = "HARMFUL|PLAYER" or groups (above), max = 4, size = 18, text = 9,
 -- edge = {r,g,b,a}, grow = "RIGHT" | "LEFT", down = true (a row under something: it starts at its top and any
 -- second line goes below; otherwise it starts at its bottom and goes up), spacing = 5, below = true (the time
--- under each icon), typed = true (an edge in the colour of the effect's kind) }. Returns the row, or nil when
+-- under each icon), typed = true (an edge in the colour of the effect's kind), bare = true (no time, no stacks) }. Returns the row, or nil when
 -- this client cannot. Place it with row.point (the corner it starts from): row:SetPoint(row.point, ...).
 function W.Row(parent, opts)
     if not W.Available() then return nil end
     local ok, row = pcall(CreateFrame, "AuraContainer", nil, parent, "CustomAuraContainerTemplate")
     if not ok or not row then return nil end
     local gap = opts.spacing or 5                       -- room for each icon's time beside the next one
-    row.styler = Styler(opts.size, opts.text, opts.edge, opts.below, opts.typed)
+    row.styler = Styler(opts.size, opts.text, opts.edge, opts.below, opts.typed, opts.bare)
     row.layout = { elementSpacing = gap, lineSpacing = 3, groupSpacing = gap, groupLineSpacing = 3,
                    forceNewLine = false, elementWidth = opts.size, elementHeight = opts.size }
     row.count, row.max, row.filters = 0, opts.max, {}

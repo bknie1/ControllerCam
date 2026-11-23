@@ -156,7 +156,9 @@ Equipar
 Missão
 Guardar
 melhor do que o que você usa
+Desencantar
 %s por %s
+o que dá ainda sobe perícia
 transformado em %s
 %d%% de chance de venda
 Custo
@@ -184,10 +186,13 @@ Melhoria: %s
 Sobe perícia: %s
 Missão: %s
 %d%% de chance de vender
+vale %s no leilão
+mais do que vale usá-lo
 você escolheu guardar
 sua única ferramenta deste tipo
 uma melhoria para outra especialização sua
-pode ser uma melhoria para você
+você o está usando
+Melhoria para %s
 o melhor do tipo que você carrega
 5% abaixo do menor, para uma venda rápida
 o mercado está incomumente baixo hoje: preço perto do usual, para esperar compradores
@@ -211,6 +216,7 @@ a dica de um item diz o que fazer com ele: vender na casa de leilões (e quanto 
 Vendas rápidas na Casa de Leilões
 preço 5% abaixo do menor para vender agora; desligado: preços pacientes, logo abaixo do menor, que vendem quando os compradores chegam
 lê todos os preços da Casa de Leilões de uma vez (abra-a antes; a cada 15 minutos)
+%s cada
 Fabrica: %s
 Guardar o que suas profissões ainda precisam
 um item pelo qual uma receita de um dos seus personagens ainda dá um ponto de perícia (receitas laranjas e amarelas, como o jogo as mostra na janela da profissão), ou com o qual se fabrica algo que vale mais na casa de leilões do que o próprio item, é guardado em vez de vendido, e a dica dele diz por quê. As receitas são lidas quando a janela de uma profissão está aberta
@@ -348,8 +354,14 @@ abrir ou fechar o Mercado (uma aba da casa de leilões)
 qual Casa de Leilões este cliente tem (para solução de problemas)
 Offline
 Morto
+Desligado
+Em especialização de cura
+Sempre
+Longe demais
 Quadros de grupo e raide
 desenha nosso visual sobre os quadros de grupo e raide do jogo (a seleção de alvo e as opções deles continuam funcionando)
+Grupo e raide do curador
+em grupo: seu grupo ao lado do seu personagem, cada um com o botão que o seleciona; em raide: quadros mais finos. Cada um mostra só quanta cura precisa, uma penalidade que você pode curar e se está ao alcance
 Animações da barra de lançamento
 uma barra de lançamento mostra o que está sendo lançado: picaretas batem nela ao minerar, raios correm por ela com natureza, uma trepadeira floresce com uma cura, runas tomam forma com arcano, chamas, gelo e sombras com fogo, gelo e sombra
 mostrar cada animação da barra de lançamento uma vez, na sua barra
@@ -398,6 +410,21 @@ Marcador de missão
 uma marca dourada nas unidades de que suas missões ainda precisam
 Animações das placas de identificação
 as placas surgem aos poucos, vida baixa respira, controle de grupo cintila
+Pequena
+Normal
+Grande
+Nome completo
+Nome curto
+Sem nome
+Completo
+Mínimo
+Mínimo mini
+Tamanho das placas
+o tamanho das barras nas placas de nome: pequenas e finas, normais ou grandes (mais largas e mais altas)
+Nomes nas placas
+o nome numa placa com barra de vida: completo, encurtado ou omitido (o quadro do alvo mostra completo; o nível e o ícone de classe ficam). Uma placa sem barra, a de um PNJ amigável, sempre mantém o nome
+Visual das placas
+os interruptores das placas de uma vez. Completo: tudo. Mínimo: sem barra de poder, guilda ou título, nomes curtos. Mínimo mini: barras pequenas com vida, seus efeitos negativos e os positivos que importam, nível e classe, sem nome (o quadro do alvo mostra). Ameaça, controle e lançamentos chamativos sempre ficam
 Placas de identificação
 nosso visual nas placas de identificação do jogo (as opções de placas dele continuam valendo)
 Títulos de jogadores
@@ -564,6 +591,7 @@ Terminando [%s].
 inicia uma missão
 uma missão sua
 pronta para entregar
+[%d] %s em %s
 acima do seu nível
 pede um grupo
 nível baixo
@@ -593,6 +621,23 @@ cada passo das suas missões vai para o chat do grupo (Colares de Osso Sangrento
 Guardar o que suas missões precisam
 um item que uma missão do seu registro ainda pede, ou um que inicia uma missão que você ainda pode fazer, é marcado como Missão: nunca vendido nem leiloado por você
 dizer uma ordem recomendada para suas missões: entregue o que está pronto, depois a mais próxima que dá para fazer sozinho, depois o resto
+Em cima
+Embaixo
+N
+NO
+O
+SO
+S
+SE
+L
+NE
+A bússola de missões está desligada: /cchud compass on
+A bússola precisa saber onde você está, e o jogo não diz isso aqui.
+Bússola de missões
+uma bússola no topo da tela: para onde você olha e onde estão suas missões, cada uma com a distância. A missão para a qual o jogo aponta se destaca
+Bússola de missões: lugar
+no topo da tela, ou embaixo no lugar da barra de experiência (a barra vai então para o topo)
+algumas marcas na bússola de missões, ao seu redor, por vinte segundos
 À esquerda das missões
 À direita das missões
 Abaixo das missões
@@ -858,6 +903,8 @@ Jogo de voo: jogar / grande altitude
 Voos: um jogo no caminho
 num voo, um pequeno jogo é oferecido sob a barra de voo, e um botão o inicia (só esse botão é ocupado até você apertá-lo): faça sua montaria bater as asas sobre as copas das árvores e entre os zepelins, e pegue com a rede os cavaleiros que vêm no sentido contrário, levando-os ao chão em troca de ouro de voo. O mesmo botão de novo é grande altitude: o jogo é guardado e os botões voltam a ser do jogo. Nunca em combate, some ao pousar
 num voo: iniciar o jogo de voo, ou levá-lo à grande altitude e de volta
+Voos cinematográficos
+num voo do mestre de voo a tela vira um filme: faixas pretas, o HUD some ao fundo, a câmera se afasta e gira devagar ao redor de você e da sua montaria, com a barra de voo na faixa de cima. O jogo de voo, uma janela ou um botão o interrompem, e ele termina suavemente quando você se aproxima do pouso
 Um voo é um bom momento para isso.
 Você está jogando há %s.
 Hora de um gole de água
@@ -895,6 +942,48 @@ Os momentos mais lentos do HUD:
 Relatórios de depuração
 reunir os relatórios de diagnóstico sozinhos: ao entrar e de novo ao recarregar ou sair (ficam nas configurações salvas)
 os momentos em que o jogo travou desde que você entrou, e quanto de cada um foi trabalho do próprio HUD
+Tudo
+Equipamento
+Consumíveis
+Mercadorias
+Novo
+Chaveiro
+Mochila
+%d de %d espaços usados
+Soltar
+Usar
+Para as bolsas
+Para o banco
+Anexar
+Negociar
+Pegar
+Os botões do controle voltam após o combate.
+%s ou %s: de volta às bolsas
+Todas as bolsas
+Só esta bolsa
+Colocar
+Pegar bolsa
+Mais
+Bolsas
+%s ou %s: outra janela
+Nada aqui.
+%d livres
+%d espaços livres
+para o banco
+sem marca
+Nenhum espaço livre.
+Soltar aqui
+Dividir pilha
+Marca: %s
+Detalhes do item
+Organizar banco
+Organizar bolsas
+Ver bolsas
+Ver banco
+Depositar os marcados
+Vender os recomendados
+Uma janela de bolsas com filtros rápidos
+suas bolsas numa janela própria do HUD em vez da do jogo: todos os itens juntos, os espaços vazios reunidos no fim, suas bolsas numa fileira à parte e filtros rápidos no topo (LB e RB). O banco também, enquanto estiver aberto. Desligado: as bolsas do jogo
 Predefinição do HUD: %s, combinando com a câmera
 predefinição: %s
 Um layout chamado '%s' foi adicionado ao Modo de Edição do jogo. Escolha-o lá para usá-lo (Menu do Jogo > Modo de Edição > Layout).
@@ -908,7 +997,6 @@ Ação
 uma visão em terceira pessoa: barras verticais finas ao lado do seu personagem, todos os efeitos ativos; fora de combate tudo esmaece
 Clássico
 nossos quadros onde o WoW sempre os teve, efeitos mais discretos, as barras de controle do jogo do jeito que são
-Mínimo
 só o que você precisa: PNJs amigáveis mostram a placa (com o que fazem) só enquanto você aponta, mira ou os tem como alvo; nomes sem títulos; fora de combate suas barras ficam como um leve sinal (vida baixa sempre aparece)
 Mundo aberto
 uma tela limpa para explorar: barras finas ao seu lado que descansam esmaecidas, placas sem barras de recurso, bate-papo que esmaece

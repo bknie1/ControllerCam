@@ -156,7 +156,9 @@ Equip
 Quest
 Keep
 better than what you wear
+Disenchant
 %s for %s
+what it gives still gives a skill-up
 made into %s
 %d%% chance of sale
 Cost
@@ -184,10 +186,13 @@ Upgrade: %s
 Skill-up: %s
 Quest: %s
 %d%% likely to sell
+worth %s at auction
+more than it is worth to wear
 you chose to keep it
 your only tool of its kind
 an upgrade for another spec of yours
-it could be an upgrade for you
+you wear it
+Upgrade for %s
 your best of its kind
 5% under the lowest, for a quick sale
 the market is unusually low today: priced near its usual, to wait for buyers
@@ -211,6 +216,7 @@ an item's tooltip says what to do with it: sell it at the auction house (and how
 Quick sales at the auction house
 price 5% under the lowest for a sale now; off: patient prices, just under the lowest, that sell when buyers come
 read every price at the auction house at once (open it first; every 15 minutes)
+%s each
 Crafts: %s
 Keep what your professions still need
 an item that one of your characters' recipes still gives a skill point for (orange and yellow recipes, as the game shows them in the profession's window), or that crafts something worth more at the auction house than the item itself, is kept, not sold, and its tooltip says why. Recipes are read when a profession's window is open
@@ -348,8 +354,14 @@ open or close the Market (a tab of the auction house)
 which auction house this client has (for troubleshooting)
 Offline
 Dead
+Off
+In a healing spec
+Always
+Too far
 Party and raid frames
 draw our look over the game's party and raid frames (their targeting and options keep working)
+Healer's party and raid
+in a party: your party beside your character, each with the button that targets them; in a raid: slimmer frames. Each shows only how much healing they need, a debuff you can cure, and whether they are in range
 Cast bar animations
 a cast bar shows what is being cast: picks chip at it while mining, lightning runs along it for nature, a vine flowers for a heal, runes take shape for arcane, flames, ice and shades for fire, frost and shadow
 show every cast bar animation once, on your cast bar
@@ -398,6 +410,21 @@ Quest marker
 a gold marker on units your quests still need
 Nameplate animations
 plates fade in, low health breathes, crowd control shimmers
+Small
+Normal
+Large
+Full name
+Short name
+No name
+Full
+Minimal
+Minimal mini
+Nameplate size
+how big the bars on nameplates are: small and slim, normal, or large (wider and taller)
+Names on nameplates
+the name on a plate with a health bar: in full, cut short, or left out (the target frame gives it in full; the level and class icon stay). A plate with no bar, a friendly NPC's, always keeps its name
+Nameplate look
+the nameplate switches in one press. Full: everything. Minimal: no power bar, guild or title, short names. Minimal mini: small bars with health, your debuffs and the buffs that matter, level and class, no name (the target frame has it). Threat, crowd control and loud casts always stay
 Nameplates
 our look on the game's nameplates (its nameplate options still apply)
 Player titles
@@ -564,6 +591,7 @@ Finishing up [%s].
 starts a quest
 a quest of yours
 ready to hand in
+[%d] %s in %s
 above your level
 wants a group
 low level
@@ -593,6 +621,23 @@ every step of your quests goes to party chat (Bloody Bone Necklaces: 4/25), not 
 Keep what your quests need
 an item a quest in your log still asks for, or one that starts a quest you can still do, is marked Quest: never sold or put up for auction for you
 say a recommended order for your quests: hand in what is ready, then the nearest you can do alone, then the rest
+Top
+Bottom
+N
+NW
+W
+SW
+S
+SE
+E
+NE
+The quest compass is off: /cchud compass on
+The compass needs to know where you are, and the game does not say it here.
+Quest compass
+a compass along the top of the screen: the way you face, and your quests where they lie, each with how far it is. The quest the game points you to stands out
+Quest compass: place
+at the top of the screen, or at the bottom in the experience bar's place (the bar then goes to the top)
+a few marks on the quest compass, around you, for twenty seconds
 Left of the quests
 Right of the quests
 Under the quests
@@ -858,6 +903,8 @@ Flight game: play / high altitude
 Flights: a game on the way
 on a flight a small game is offered under the flight bar, and one button starts it (only that button is taken until you do): flap your mount over the treetops and past the zeppelins, and net the riders coming the other way, grounding them for flight gold. The same button again is high altitude: the game is put away and the buttons are the game's again. Never in a fight, gone on landing
 on a flight: start the flight game, or take it to high altitude and back
+Cinematic flights
+on a flight master's flight the screen turns to film: black bars, the HUD faded back, the camera drawn out wide and swinging slowly round you and your mount, with the flight bar in the top bar. The flight game, a window or a button steps out of it, and it bows out as you come in to land
 A flight is a good moment for it.
 You have played for %s.
 Time for a sip of water
@@ -895,6 +942,48 @@ The HUD's slowest moments:
 Debug reports
 gather the troubleshooting reports by themselves: when you log in, and again when you reload or log out (they are kept in the saved settings)
 the moments the game stood still since you logged in, and how much of each was the HUD's own work
+All
+Equipment
+Consumables
+Trade goods
+New
+Keyring
+Backpack
+%d of %d slots used
+Put down
+Use
+To bags
+To bank
+Attach
+Trade
+Pick up
+Controller buttons return after the fight.
+%s or %s: back to bags
+All bags
+Only this bag
+Put in
+Pick up bag
+More
+Bags
+%s or %s: other window
+Nothing here.
+%d free
+%d free slots
+for the bank
+no mark
+No empty slot.
+Put down here
+Split stack
+Mark: %s
+Item details
+Sort bank
+Sort bags
+Show bags
+Show bank
+Deposit marked items
+Sell advised items
+One bag window with quick filters
+your bags in one window of the HUD's own, in place of the game's: every item together, the empty slots gathered at the end, your bags in a row of their own, and quick filters along the top (LB and RB). The bank too, while it is open. Off: the game's own bags
 HUD preset: %s, to match the camera
 preset: %s
 A layout named '%s' was added to the game's Edit Mode. Choose it there to use it (Game Menu > Edit Mode > Layout).
@@ -908,7 +997,6 @@ Action
 a third-person view: slim vertical bars beside your character, every effect on; out of combat things fade
 Classic
 our frames where WoW has always had them, calmer effects, the game's gamepad bars as they are
-Minimal
 only what you need: friendly NPCs show their plate (with what they do) only while you point at them, aim at them or target them; names without titles; out of combat your bars rest as a faint hint (low health always shows)
 Open world
 a clean screen for exploring: slim bars beside you that rest faded, plates without power bars, chat that fades

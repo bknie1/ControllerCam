@@ -85,7 +85,7 @@ local view, pane
 -- rest. The order goes by each one, never by how many you carry, so posting some of an item leaves it in its
 -- place. What you keep is left out unless you asked for it: the second result is how many were left out.
 ---------------------------------------------------------------------------
-local KEPT = { keep = true, equip = true, skill = true, craft = true, quest = true }
+local KEPT = { keep = true, equip = true, skill = true, craft = true, quest = true, disenchant = true }
 
 function AP.Sellable(showKept)
     if showKept == nil then showKept = ns.db.ahShowKept end
@@ -232,11 +232,16 @@ function AP.Reason(e)
     if e.verdict == "keep" or e.verdict == "equip" then              -- (and which of your specs it is for)
         local specs = ns.Market.SpecWords(e.want)
         if not specs and e.verdict == "keep" and type(e.want) == "table" then specs = e.want.why end   -- (why kept)
-        return GREY .. ns.Market.WORDS[e.verdict] .. (specs and ("  " .. specs) or "") .. "|r"
+        local worth = ns.Market.WorthWords(e.want)                     -- (a BoE: or sell it)
+        return GREY .. ns.Market.WORDS[e.verdict] .. (specs and ("  " .. specs) or "")
+            .. (worth and ("  ·  " .. worth) or "") .. "|r"
     end
     if e.verdict == "quest" then return GREY .. L["Quest: %s"]:format(ns.Quests.WantText(e.want)) .. "|r" end
     if e.verdict == "skill" then return GREY .. L["Skill-up: %s"]:format(ns.Professions.Words(e.want)) .. "|r" end
     if e.verdict == "craft" then return GREY .. ns.Professions.Words(e.want) .. "|r" end
+    if e.verdict == "disenchant" then
+        return GREY .. L["Disenchant"] .. "  " .. ns.Professions.Words(e.want) .. "|r"
+    end
     return GREY .. L["a vendor pays as much"] .. "|r"
 end
 
@@ -903,6 +908,10 @@ local function ShowPane(e)
         if e.want and e.want.via then                                -- the point is in what it is made into
             why = L["made into %s"]:format(ns.Professions.ItemName(e.want.via)) .. "\n" .. why
         end
+    elseif e.verdict == "disenchant" and e.want then                 -- what it gives
+        local list = {}
+        for i, m in ipairs(e.want.mats or {}) do list[i] = ns.Professions.MatText(m) end
+        why = L["Disenchant"] .. ":\n" .. table.concat(list, "\n")
     end
     pane.why:SetText(why)
     pane:SetHeight(math.floor(head + 8 + pane.chart:GetHeight() + 3 + LineH(pane.caption) + 6 + TextH(pane.facts, #facts) + 8

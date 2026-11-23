@@ -34,13 +34,70 @@ Setting("plateClassIcons", "Class icons on nameplates", "a player's class icon i
 Setting("plateServiceIcons", "What NPCs do, as icons", "an icon over friendly NPCs that offer something: a bag over vendors, an anvil over smiths who repair, a book over trainers... (the game's own icons; they show even while the plate itself waits to be pointed at)", true)
 Setting("plateHoverNPC", "Friendly NPCs only when pointed at", "the plates of friendly NPCs (vendors, quest givers, townsfolk) show only while you point at them, like their tooltip", false)
 Setting("plateObjects", "Names on things you can interact with", "a name over ore, chests, plaques and the like while you face them (off: they stay bare, as the game's own prompt already says what they are)", false)
+-- How big the bars are, and how much of a name: your call. And a whole look in one press (Full, Minimal, Minimal
+-- mini), which sets the switches above and below at once; each can still be changed afterwards.
+NP.SIZE_W, NP.SIZE_H = { 0.6, 1, 1.25 }, { 0.7, 1, 1.45 }
+ns.RegisterSetting({
+    key = "plateSize", kind = "number", default = 2, min = 1, max = 3, section = "Nameplates",
+    choices = { "Small", "Normal", "Large" }, command = "platesize", label = "Nameplate size",
+    tip = "how big the bars on nameplates are: small and slim, normal, or large (wider and taller)",
+})
+ns.RegisterSetting({
+    key = "plateName", kind = "number", default = 1, min = 1, max = 3, section = "Nameplates",
+    choices = { "Full name", "Short name", "No name" }, command = "platename", label = "Names on nameplates",
+    tip = "the name on a plate with a health bar: in full, cut short, or left out (the target frame gives it in full; the level and class icon stay). A plate with no bar, a friendly NPC's, always keeps its name",
+})
+NP.LOOKS = {
+    { plateSize = 2, plateName = 1, platePower = true, platePercent = true, plateValue = false, plateLevels = true,
+      plateClassIcons = true, plateTitles = true, plateSubtitles = true, plateDebuffs = true, plateBuffs = true,
+      plateAllDebuffs = false, plateCastTarget = true },
+    { plateSize = 2, plateName = 2, platePower = false, platePercent = true, plateValue = false, plateLevels = true,
+      plateClassIcons = true, plateTitles = false, plateSubtitles = false, plateDebuffs = true, plateBuffs = true,
+      plateAllDebuffs = false, plateCastTarget = false },
+    { plateSize = 1, plateName = 3, platePower = false, platePercent = true, plateValue = false, plateLevels = true,
+      plateClassIcons = true, plateTitles = false, plateSubtitles = false, plateDebuffs = true, plateBuffs = true,
+      plateAllDebuffs = false, plateCastTarget = false },
+}
+ns.RegisterSetting({
+    key = "plateLook", kind = "number", default = 1, min = 1, max = 3, section = "Nameplates",
+    choices = { "Full", "Minimal", "Minimal mini" }, command = "platelook", label = "Nameplate look",
+    tip = "the nameplate switches in one press. Full: everything. Minimal: no power bar, guild or title, short names. Minimal mini: small bars with health, your debuffs and the buffs that matter, level and class, no name (the target frame has it). Threat, crowd control and loud casts always stay",
+    set = function(v)
+        ns.db.plateLook = v
+        for key, value in pairs(NP.LOOKS[v] or {}) do ns.db[key] = value end
+    end,
+})
+
+-- (in your language: the options show the choices as L[choice])
+NP.NAMES = { L["Small"], L["Normal"], L["Large"], L["Full name"], L["Short name"], L["No name"], L["Full"],
+             L["Minimal"], L["Minimal mini"] }
+
+-- Small: the size chosen, or the compact bar style (Options' style switch)
+function NP.Size()
+    local size = tonumber(ns.db.plateSize) or 2
+    if size == 2 and ns.db.plateCompact then size = 1 end
+    return size
+end
+
+-- The name as the plate shows it: in full, cut short (14 letters), or none where the plate has a bar to say who
+-- it is by; a name the game keeps to itself is shown as it is
+NP.SHORT = 14
+function NP.ShownName(o, name)
+    local mode = tonumber(ns.db.plateName) or 1
+    if mode == 1 or not o.bars or type(name) ~= "string" or ns.IsSecret(name) then return name end
+    if mode == 3 then return "" end
+    local letters = {}
+    for ch in name:gmatch("[%z\1-\127\194-\244][\128-\191]*") do letters[#letters + 1] = ch end
+    if #letters <= NP.SHORT then return name end
+    return table.concat(letters, "", 1, NP.SHORT - 1):gsub("%s+$", "") .. "…"
+end
+
 Setting("plateMini", "Mini plates", "minions, critters and grey enemies that give no experience get a small plate: a slim bar with your debuffs on it and no name (a critter, with no bar, keeps its name; the game's own option decides whether they have plates at all)", true)
 
 -- Minor units: the game's "minus" classification (minions, small adds) and critters, by creature type in each
 -- game language
 local CRITTER = { Critter = true, Kleintier = true, ["Alimaña"] = true, Bestiole = true, Animale = true,
                   ["동물"] = true, Bicho = true, ["Существо"] = true, ["小动物"] = true, ["小動物"] = true }
-local COMPACT = 0.6             -- compact nameplates: this share of the full width
 local MINI_SCALE = 0.8          -- minor units: the whole plate a little smaller ...
 local MINI_BAR = 0.625          -- ... and the bar shorter: half the width of a normal plate's
 
@@ -177,7 +234,7 @@ local function SetName(fs, name, level, mark)
         end
         return
     end
-    fs:SetText(front .. (name or ""))
+    fs:SetText(((front .. (name or "")):gsub("%s+$", "")))
 end
 NP.SetName = SetName
 
@@ -393,11 +450,16 @@ local function UpdateInfo(o)
     local name = FullName(unit)
     SetName(o.name, name)
     o.mini = ns.db.plateMini and not isPlayer and NP.IsMinor(unit, kind) and true or false
-    local width = W * (ns.db.plateCompact and COMPACT or 1) * (o.mini and MINI_BAR or 1)
+    local size = NP.Size()
+    local width = W * NP.SIZE_W[size] * (o.mini and MINI_BAR or 1)
     o.health:SetBarWidth(width)
+    -- (the compact style narrows a plate, its height stays: only the size chosen sets that)
+    local height = math.max(3, math.floor(H * NP.SIZE_H[tonumber(ns.db.plateSize) or 2] + 0.5))
+    if o.health.barHeight ~= height then o.health.barHeight = height; o.health:SetHeight(height) end
     o.power:SetBarWidth(width - 12)
     o.cast:SetBarWidth(math.max(40, width - 10))
     o.bars = WantsBars(o)
+    name = NP.ShownName(o, name)                                        -- (in full, short, or none: your setting)
     local r, g, b = ns.UnitFrames.TargetColor(unit)
     local mark = NP.ClassMark(unit, isPlayer)                          -- a player's class, in the line itself
     local fcolor                                                        -- the other faction, plainly: its badge big

@@ -100,7 +100,7 @@ function PS:HealthText(o, frac)
     local fs = o.percent
     if not o.bars or o.mini then fs:Hide(); return end
     if type(frac) == "number" and not ns.IsSecret(frac) and frac >= 0.999 then fs:Hide(); return end
-    ns.HealthLine(fs, o.unit, frac, db.plateValue and not db.plateCompact, db.platePercent)
+    ns.HealthLine(fs, o.unit, frac, db.plateValue and ns.Nameplates.Size() > 1, db.platePercent)
 end
 
 ---------------------------------------------------------------------------

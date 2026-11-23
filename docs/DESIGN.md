@@ -67,6 +67,7 @@ of the game's own Gamepad UI and can be added or removed without leaving a trace
 | One-button fishing | built, seen in the game |
 | Fish journal, fishing interface, bait on a double press, a game while the float is out | built, mock-tested only |
 | Quest list: no group quests while alone, only the nearest, nearest first, recommended order | built, mock-tested only |
+| Quest compass along the top, or the bottom with the experience bar moved to the top (`Compass.lua`, `/cchud compassdemo`) | built, mock-tested only: the game's quest atlases, `GetPlayerFacing` and the bottom fit under the gamepad bars not seen in the game |
 | Button icons: the game's own style for the controller in use, found or chosen | built, mock-tested only |
 | Shields as a ward round the health bar | built, mock-tested only |
 | Market: a tab of the auction house with its own controller keys, and a pane that only shows | built, mock-tested only |

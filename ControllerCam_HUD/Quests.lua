@@ -902,24 +902,58 @@ local function LookAtItems()
 end
 LookAtItems = ns.Protect(LookAtItems)
 
--- What a quest of yours wants this item for, or nil
+-- Quests not in your log yet: the HUD comes with a list of quests that ask for items you can trade or sell
+-- (QuestItemData.lua: item -> { quest id, name, level, zone, side, how many }), as the game tells an addon only
+-- of the quests in your log. One counts when it is for your faction, not grey for you (at your level or
+-- above it: worth doing still) and not done yet. The lowest of those is the one said.
+local function Faction()
+    local f = UnitFactionGroup and ns.Plain((UnitFactionGroup("player")))
+    return (type(f) == "string" and f ~= "") and f or nil
+end
+local SIDE = { A = "Alliance", H = "Horde" }
+
+function Q.DataWant(id)
+    local list = ns.QuestItemData and ns.QuestItemData[id]
+    if type(list) ~= "table" then return nil end
+    local faction = Faction()
+    local best
+    for _, q in ipairs(list) do
+        local side = SIDE[q[5] or ""]
+        if (not side or not faction or side == faction) and type(q[3]) == "number" and not Q.Grey(q[3])
+            and not (q[1] and Done(q[1])) and (not best or q[3] < best[3]) then
+            best = q
+        end
+    end
+    if not best then return nil end
+    local have
+    if GetItemCount then
+        local ok, n = pcall(GetItemCount, id, true)
+        have = ok and tonumber(ns.Plain(n)) or nil
+    end
+    return { title = best[2], level = best[3], zone = best[4], need = best[6], have = have, questID = best[1],
+             data = true }
+end
+
+-- What a quest of yours wants this item for, or nil: one in your log, else one you have still to pick up
 function Q.ItemWant(id)
     if not (Q.itemsOn and ns.db and ns.db.questItems) or type(id) ~= "number" or ns.IsSecret(id) then return nil end
     local now = GetTime and GetTime() or 0
     if Q.items.dirty or now - Q.items.at > Q.ITEMS_EVERY then LookAtItems() end
     local items = Q.items
     if items.byId[id] then return items.byId[id] end
-    if not next(items.byName) then return nil end
-    local name = items.names and items.names[id]
-    if name == nil then
-        name = ItemName(id)
-        name = name and name:lower() or false
-        if items.names then items.names[id] = name end
+    if next(items.byName) then
+        local name = items.names and items.names[id]
+        if name == nil then
+            name = ItemName(id)
+            name = name and name:lower() or false
+            if items.names then items.names[id] = name end
+        end
+        if name and items.byName[name] then return items.byName[name] end
     end
-    return name and items.byName[name] or nil
+    return Q.DataWant(id)
 end
 
--- The want in a few words: "Bloody Bones 3/25 (Duskwood)", "starts a quest"
+-- The want in a few words: "[25] Bloody Bones 3/25 in Duskwood", "starts a quest"
 function Q.WantText(w)
     if type(w) ~= "table" then return "" end
     if w.starts then return L["starts a quest"] end
@@ -927,8 +961,11 @@ function Q.WantText(w)
     if w.done then
         text = text .. ", " .. L["ready to hand in"]
     elseif w.have and w.need and w.need > 1 then
-        text = text .. (" %d/%d"):format(w.have, w.need)
+        text = text .. (" %d/%d"):format(math.min(w.have, w.need), w.need)
     end
+    local level = type(w.level) == "number" and w.level > 0 and w.level or nil
+    if level and w.zone then return L["[%d] %s in %s"]:format(level, text, w.zone) end
+    if level then return ("[%d] %s"):format(level, text) end
     if w.zone then text = text .. " (" .. w.zone .. ")" end
     return text
 end

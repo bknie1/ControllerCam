@@ -27,7 +27,18 @@ ns.RegisterSaved("inventory", function(old)
     for who, rec in pairs(old) do
         if type(who) == "string" and type(rec) == "table" then
             local clean = { class = type(rec.class) == "string" and rec.class or nil,
-                            money = tonumber(rec.money) or 0, bags = {}, bank = {}, seen = tonumber(rec.seen) or 0 }
+                            money = tonumber(rec.money) or 0, bags = {}, bank = {}, seen = tonumber(rec.seen) or 0,
+                            level = tonumber(rec.level),
+                            faction = type(rec.faction) == "string" and rec.faction or nil }
+            -- what they wear: [slot] = the item's string ("item:1234:0:..."), for upgrades for them (Vendor.lua)
+            if type(rec.worn) == "table" then
+                clean.worn = {}
+                for slot, item in pairs(rec.worn) do
+                    if type(slot) == "number" and type(item) == "string" and item:find("^item:%d+") then
+                        clean.worn[slot] = item
+                    end
+                end
+            end
             for _, place in ipairs({ "bags", "bank" }) do
                 if type(rec[place]) == "table" then
                     for id, n in pairs(rec[place]) do
@@ -104,9 +115,27 @@ local function Record()
         ns.db.inventory[me] = rec
     end
     local _, class = UnitClass("player")
-    rec.class = class
+    rec.class = ns.Plain(class) or rec.class
+    local level = ns.Plain(UnitLevel and UnitLevel("player"))
+    if type(level) == "number" and level > 0 then rec.level = level end
+    local faction = UnitFactionGroup and ns.Plain((UnitFactionGroup("player")))
+    if type(faction) == "string" and faction ~= "" then rec.faction = faction end
     return rec
 end
+
+-- What you wear, slot by slot: the item's string out of its link (enchant and suffix kept: an "of the Bear"
+-- is only known by them)
+local function Worn()
+    local out = {}
+    for slot = 1, 19 do
+        local ok, link = pcall(GetInventoryItemLink, "player", slot)
+        link = ok and ns.Plain(link)
+        local item = type(link) == "string" and link:match("(item:[%-%d:]+)")
+        if item then out[slot] = item end
+    end
+    return out
+end
+I.Worn = Worn
 
 ---------------------------------------------------------------------------
 -- Which bags are which
@@ -147,6 +176,7 @@ function I:ScanBags()
     local rec = Record()
     if not rec then return end
     rec.bags = Count(CarriedBags())
+    if GetInventoryItemLink then rec.worn = Worn() end
     local money = GetMoney and GetMoney()
     if type(money) == "number" and not ns.IsSecret(money) then rec.money = money end
     rec.seen = time and time() or 0
@@ -408,7 +438,8 @@ function I:Apply(run)
     if not self.watching then
         self.watching = true
         for _, e in ipairs({ "BAG_UPDATE_DELAYED", "PLAYER_MONEY", "BANKFRAME_OPENED", "BANKFRAME_CLOSED",
-                             "PLAYERBANKSLOTS_CHANGED", "PLAYERREAGENTBANKSLOTS_CHANGED", "PLAYER_ENTERING_WORLD" }) do
+                             "PLAYERBANKSLOTS_CHANGED", "PLAYERREAGENTBANKSLOTS_CHANGED", "PLAYER_ENTERING_WORLD",
+                             "PLAYER_EQUIPMENT_CHANGED", "PLAYER_LEVEL_UP" }) do
             pcall(events.RegisterEvent, events, e)
         end
         Soon()
