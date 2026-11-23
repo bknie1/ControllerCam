@@ -248,6 +248,7 @@ function W:Refresh()
     end
     frame.hint:SetText(("%s %s    %s %s    %s %s"):format(KeyName("PADDUP"), L["Choose"], KeyName("PADRSHOULDER"),
         self.page == "fish" and L["Waters"] or L["Fish"], KeyName("PAD2"), L["Close"]))
+    if ns.Narrative then ns.Narrative.Journal() end               -- (you, leafing through it)
 end
 
 function W:Choose(at)

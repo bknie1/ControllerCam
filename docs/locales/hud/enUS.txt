@@ -118,6 +118,11 @@ Empty box, friend. Even the moths have moved out.
 Letters wanting coin on delivery: %d. Those you open yourself; I don't pay other folks' bills.
 Your bags are bursting. The rest waits in the letters till you make room.
 %d I couldn't pass you: one of a kind, or the box wouldn't let go. Still in their letters.
+Taken from the mail: %s.
+No mail.
+Letters asking for payment on delivery: %d, left for you to open.
+Your bags are full: the rest stays in the letters.
+Left in their letters: %d (one of a kind, or refused).
 Postmaster
 1 item
 %d items
@@ -249,19 +254,66 @@ Your recipes run dry %d short of %d. A trainer will have something new.
 What you know won't carry you the last %d. Time to see a trainer.
 %s won't teach you much now, but it's the best you have. %d more to %d.
 Slow going from here: %s gives a point now and then. %d to go.
+First you'll want %s, %s. The guides start this stretch with it.
+Learn %s, %s, and we'll begin: %d more to %d.
+%d more to %d. The guides send you out for %s until %d.
+Gathering teaches you here: %s until %d.
+%d more to %d. Start with %s, or %s if you'd rather: %s.
+%s first, as the guides have it. %s does the job too: %s.
 %d more to %d. Start with %s.
 %s is your best teacher now. %d points to %d.
 Steady hands. %s first, and %d to go.
+at a trainer
+from a vendor
+found as loot
+from a quest
+cheaper materials
+materials from a vendor
+materials you gather yourself
+it sells well
+something you'll use
+fewer crafts
+a recipe you find or buy
+other materials
+the guides' first choice
+Open a profession's window for a levelling plan.
+At the cap, %d. A trainer has the next rank.
+%d more to %d; your recipes stop short. A trainer has %s at %d.
+%d more to %d; your recipes stop short. A trainer has %s.
+Your recipes stop %d short of %d. A trainer has more.
+%d more to %d. Best now: %s, green (a point now and then).
+%d more to %d. First learn %s, %s.
+%d more to %d. Gather %s until %d.
+%d more to %d. First: %s, or %s (%s).
+%d more to %d. First: %s.
 To gather or buy
 %d crafts: %s
+Learn it %s, at %d.
+Learn it %s.
+%s: %d in your bags, %d in the bank, %d each
+The guides level this stretch by gathering %s.
 %s: you have %d, the plan uses %d
 for %s
+The Mentor: what your bank can make
+What your bank can make
+Nothing more to make with what's in your bank.
+%d you can make counting your bank, %d of them only with it.
 The Mentor: %s %d > %d
 The Mentor
+Levelling plan
+or
+Gather %s
+to learn
+Try on
+Hide
+The plan
+Back
 Farm this
 Farm all
-Back
+With the bank
 Use the plan
+twice to hide
+Nothing here to try on.
 %d added to the farm list.
 Nothing missing: you have what it takes.
 Open a profession's window to make a plan.
@@ -292,6 +344,7 @@ bank
 Your mark
 Item details: everything about the item you point at
 show everything about the item you point at (or the one given): prices, who holds it, your mark
+%d%% to sell
 Sure to go (%d%%)
 That one sells itself (%d%%)
 I think it'll sell (%d%%)
@@ -325,12 +378,19 @@ Up: %d auctions, %d items
 %s each, %s for all %d
 You posted %d here, %d auctions sold
 No price known: read the auction house first.
+Nothing in your bags to sell here.
+Nothing sells better here than at a vendor today; %d might, with patience.
+Best first: %d sell better here than at a vendor, %d more with patience.
 Empty bags, friend. Bring me something to sell.
 Nothing here beats a vendor today. %d might, with a little patience.
 No sure profits in these bags, friend. %d could pay if you wait.
 Best on top: %d here beat any vendor, %d more for the patient.
 %d pay better here than at a vendor, best first. %d more if you wait.
 Top of the pile pays best: %d sure sales, %d more if you can wait.
+No prices yet: %s reads the auction house.
+Prices read just now: %d.
+%d prices, read %s.
+%d prices, read %s. %s reads them again.
 Haven't read the board yet. %s and I'll fetch every price.
 No prices yet, friend. %s reads the whole board.
 Prices fresh off the board, friend: %d of them.
@@ -339,6 +399,8 @@ Just read the board: %d prices, still warm.
 Last look at the board was %s: %d prices.
 Prices from %s, stale as old bread. %s reads the board again.
 %d prices, but I read them %s. %s and I'll look again.
+Showing what you keep too. %s hides it.
+Kept back: %d, for your professions, your gear and your marks. %s shows them.
 Your keepers are on the list too. %s tucks them away.
 Showing what you keep as well. %s hides it again.
 %d kept back: trade goods, gear to wear, things you marked. %s shows them.
@@ -370,6 +432,28 @@ Market: price chart as candles
 the Market's price chart is a candle a day for the last 7 days (where the price opened, went highest and lowest, and closed: green when it closed higher, red lower); off: a line of the day's lowest price over 30 days
 open or close the Market (a tab of the auction house)
 which auction house this client has (for troubleshooting)
+collected
+collected from another item
+not collected yet
+Appearance
+Pick a set to put its pieces on your outfit. %s keeps it; nothing is paid before that.
+Looking through your collection...
+Your outfit is back as it was.
+%s: %d of %d pieces put on.
+%d would not go on this outfit.
+One set you have pieces of
+%d sets you have pieces of
+you can't wear this
+missing
+All %d pieces
+%d of %d pieces
+Missing: %s
+No sets yet. Items that share a name, like Green Iron Helm and Green Iron Gauntlets, show here once you have one of them.
+Undo
+Sets tab at the transmogrifier
+a Sets tab in the Transmogrify window: gear from your collection that shares a name (Green Iron Helm, Green Iron Gauntlets...) and the game's own sets, put on your outfit in one press, with Undo; nothing is kept or paid until you press Apply
+Appearance collected, in item tooltips
+under the tooltip of gear and cosmetics: whether its look is in your collection yet, or only through another item that looks the same, so you can tell what is new to you
 Offline
 Dead
 Off
@@ -1037,6 +1121,69 @@ One bag window with quick filters
 your bags in one window of the HUD's own, in place of the game's: every item together, the empty slots gathered at the end, your bags in a row of their own, and quick filters along the top (LB and RB). The bank too, while it is open. Off: the game's own bags
 Bag window: order
 Smart: what you use first (consumables, items with a use), then the rest by kind, junk last and faded. By type: in sections under their own headings. As in your bags: the game's own order
+Right, then.
+Och, what a heap.
+Now, let's see, let's see...
+Elune grant me patience.
+By the Naaru, such a jumble.
+Blasted pack.
+A tidy pack is a light pack.
+Bah. Too much clutter.
+Dead weight, the lot of it.
+Patience. The Earth Mother provides.
+Ey, what we got here, mon?
+Such clutter. Unbecoming.
+Time is money. Let's count it.
+Aye, that'll do.
+Elune be thanked.
+The Light provides.
+Hrm. Good enough.
+Hm. Enough to fight with.
+Travelling light. Good.
+Acceptable. Barely.
+Not a slot to spare. The junk would fetch %s: selling it makes room.
+Not a slot to spare. Anything I won't need on the road can wait in the bank.
+Junk: %d, worth %s here. X sells the one I've picked; Smart sell takes it all.
+%d of these belong in the bank: it holds more of the same, or I marked them. Deposit puts them away.
+Only %d slots left. The junk would fetch %s at any vendor.
+Only %d slots left. Time to sell or bank a few things.
+New since I last looked: %d. The gold dot marks each one.
+Worth selling: %d. The Sell filter gathers them, and each tooltip says where it fetches most.
+Junk: %d, worth %s. The next vendor can have it.
+Just the essentials. Nothing worth selling.
+All in order, and %d slots free.
+Your gear's mended: %s.
+I can mend your gear for %s; a broken piece gives you none of its armour or stats.
+Your bags are full. I'll take %d things for %s: Smart sell, and you have room again.
+I'll give you %s for %d things: the junk, and what the auction house wouldn't pay more for. Smart sell, and it's done.
+Keep the %d the auction house wants: it pays %s more than I would.
+Your bags are full. Sell me something before you buy.
+Nothing in your bags I'd pay well for. Have a look at my wares.
+%d of what you carry belong in here: I hold more of the same, or you marked them. Deposit puts them away.
+I hold more of %d things you carry. Withdraw tops your bags up before you head out.
+Your bags are nearly full. Leave what you won't need on the road with me.
+All safe with me, and your bags have %d slots free.
+Nothing for you today. I checked twice.
+Letters for you: %d, nothing attached. Read them when you like.
+Letters for you: %d. In them: %s.
+Take everything empties them in one go.
+Coin on delivery: %d. Those you open and pay for yourself.
+Your bags are full: the items wait in their letters.
+Where to? Point at a place and I'll tell you how long the ride takes.
+%s: about %s by the map. You haven't flown that one yet.
+%s: about %s, going by your last flight there.
+%s: I can't say how long yet. Fly it once and I'll know.
+%d got away. This water wants more skill than I have: bait helps, and so does a better pole.
+No bait on the hook. It adds to my skill, so fewer get away.
+Bait's nearly spent. Another on the hook keeps my skill up.
+Fish here I haven't landed yet: %d. Keep casting.
+I've landed every fish this water has. Somewhere new, then.
+Nothing landed yet. The first fish of every water goes in here.
+Kinds landed: %d. Every water hides a few more: the fishing panel shows a ? for each I haven't caught there.
+Rested by the fire: the next %d experience from kills comes double.
+No rest saved up. A night at an inn or in a city, and kills give double experience for a while.
+Narrative: characters in the windows
+every window the HUD improves has someone who helps you, with their portrait and a short line on what is in front of you and why: you over your bags and at the water, the vendor, the banker, the Postmaster, the flight master, the Broker at the auction house and The Mentor at your profession; off: the windows are plain and quiet
 HUD preset: %s, to match the camera
 preset: %s
 A layout named '%s' was added to the game's Edit Mode. Choose it there to use it (Game Menu > Edit Mode > Layout).
@@ -1187,15 +1334,57 @@ the game's option: a buff's tooltip pops up for a moment when it is applied (Gam
 Class colours for names in chat
 the game's chat setting for every kind of chat at once: a player's name in their class colour
 open the options panel (Options > AddOns > ControllerCam HUD)
-Frames
-Screen fade
+Your frames
+Target, party and raid
 Effects
-Look
-Quests, chat and map
+Vibration
+Camera and aiming
+Screen fade
+Restyled game frames
+Chat and messages
+Quests and map
+Flights
 Bags, bank and vendor
-Fishing
+Items and auction house
+Fishing and professions
 Accessibility
-Native Options
+Narrative
+Water reminder
+Your bars
+In a fight
+Health bars
+Size and text
+Target and focus
+Names and classes
+Effects on the target
+Party and raid
+Which nameplates
+Look
+Names
+Health and power
+Hits
+Numbers and callouts
+Out of a fight
+Controller
+What rumbles
+Camera
+Cooldowns
+What fades
+Which frames
+Chat window
+Names in chat
+Filters
+Error messages
+Quest list
+Quest progress
+Farm list
+Map
+Flight bar
+Mail
+Item advice
+Appearances
+Fishing
+Professions
 %s  |  Gamepad UI: %s  |  running: %s
 player %s, target %s, pet %s, focus %s  |  game frames put aside: %s  |  chat moved: %s
 native options: target of target %s, Cooldown Manager %s, personal resource %s

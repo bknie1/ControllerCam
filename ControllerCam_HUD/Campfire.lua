@@ -604,6 +604,15 @@ local function Build()
     cine.lineIcon = cine:CreateTexture(nil, "ARTWORK")
     cine.lineIcon:SetSize(26, 26)
     cine.lineIcon:SetPoint("RIGHT", cine.line, "LEFT", -10, 0)
+    -- you, by the fire, at the end (Narrative.lua): your portrait and a line on the rest you have saved up
+    cine.voice = ns.FontString(cine, 15, "CENTER")
+    cine.voice:SetPoint("CENTER", cine.bottom, "CENTER", 26, 0)
+    cine.voice:SetTextColor(0.91, 0.86, 0.72, 1)
+    if ns.Narrative then
+        cine.face = ns.Narrative.Portrait(cine, 40)
+        cine.face:SetPoint("RIGHT", cine.voice, "LEFT", -12, 0)
+        cine.face:Hide()
+    end
     -- the camp's gifts, above the lower bar
     local p = CreateFrame("Frame", nil, cine)
     p:SetSize(640, 60)
@@ -800,6 +809,13 @@ function CF.Start(asked)
     LayTitle()
     cine.line:SetText("")
     cine.lineIcon:Hide()
+    local N = ns.Narrative
+    s.voice = N and N.On() and N.CampWords() or nil                 -- (said as the camp's gifts come up)
+    cine.voice:SetText(s.voice or "")
+    cine.voice:SetAlpha(0)
+    if cine.face then
+        if s.voice then N.Draw(cine.face, N.Me()); cine.face:Show(); cine.face:SetAlpha(0) else cine.face:Hide() end
+    end
     cine.panel:Hide()
     cine:Show()
     CF.shown = CF.shown + 1
@@ -870,6 +886,13 @@ function CF.Step()
     local a = m and Window(t, CF.TELL_AT + (i - 1) * CF.EACH, CF.TELL_AT + i * CF.EACH - 0.3, 0.6) or 0
     cine.line:SetAlpha(a)
     cine.lineIcon:SetAlpha(a)
+    -- your word on it, as the camp's gifts come up
+    if s.voice then
+        local v = t >= CF.BUFFS_AT and Window(t, CF.BUFFS_AT, CF.LENGTH - 1.8, 0.8) or 0
+        cine.voice:SetAlpha(v)
+        if cine.face then cine.face:SetAlpha(v) end
+        if v > 0 and not s.talked and cine.face then s.talked = true; ns.Narrative.Talk(cine.face) end
+    end
     -- the camp's gifts
     if t >= CF.BUFFS_AT then
         if not s.buffsLaid or t - (s.laidAt or 0) >= 1 then        -- again each second: the camp's benefits

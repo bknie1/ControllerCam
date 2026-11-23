@@ -373,6 +373,8 @@ D.SECTIONS = {
     { "breath", function() return ns.Breath and { ns.Breath.Describe() } or {} end },
     { "padicons", function() return ns.PadIcons and { ns.PadIcons.Describe() } or {} end },
     { "auction", function() return ns.AuctionPanel and ns.AuctionPanel.Describe() or {} end },
+    { "narrative", function() return ns.Narrative and { ns.Narrative.Describe() } or {} end },
+    { "transmog", function() return ns.TransmogSets and ns.TransmogSets.Describe() or {} end },
     { "cast", Casting },
     { "plates", function() return ns.Nameplates and ns.Nameplates.Report and ns.Nameplates.Report() or {} end },
     { "auras", function()

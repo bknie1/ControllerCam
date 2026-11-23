@@ -118,6 +118,11 @@ Cassetta vuota, amico. Persino le tarme se ne sono andate.
 Lettere da pagare alla consegna: %d. Quelle le apri tu; io non pago i conti degli altri.
 Le tue borse scoppiano. Il resto aspetta nelle lettere finché non fai spazio.
 %d non sono riuscito a dartele: oggetti unici, o la cassetta non voleva mollarli. Sono ancora nelle lettere.
+Preso dalla posta: %s.
+Nessuna posta.
+Lettere in contrassegno: %d, lasciate da aprire a te.
+Le tue borse sono piene: il resto resta nelle lettere.
+Lasciati nelle loro lettere: %d (unici, o rifiutati).
 Mastro postale
 1 oggetto
 %d oggetti
@@ -249,19 +254,66 @@ Le tue ricette si esauriscono a %d da %d. Un istruttore avrà qualcosa di nuovo.
 Ciò che sai non ti porterà per gli ultimi %d. È ora di vedere un istruttore.
 %s non ti insegnerà più molto, ma è il meglio che hai. Mancano %d a %d.
 Da qui si va piano: %s dà un punto ogni tanto. Ne mancano %d.
+Prima ti servirà %s, %s. Le guide iniziano questo tratto con questa.
+Impara %s, %s, e cominciamo: mancano %d a %d.
+Mancano %d a %d. Le guide ti mandano a cercare %s fino a %d.
+Qui impari raccogliendo: %s fino a %d.
+Mancano %d a %d. Comincia con %s, o con %s se preferisci: %s.
+Prima %s, come dicono le guide. Va bene anche %s: %s.
 Mancano %d a %d. Comincia con %s.
 %s è ora il tuo miglior maestro. %d punti a %d.
 Mani ferme. Prima %s, e ne mancano %d.
+da un istruttore
+da un mercante
+come bottino
+da una missione
+materiali più economici
+materiali da un mercante
+materiali che raccogli tu
+si vende bene
+qualcosa che userai
+meno creazioni
+una ricetta da trovare o comprare
+altri materiali
+la prima scelta delle guide
+Apri la finestra di una professione per un piano di avanzamento.
+Al limite, %d. Un istruttore ha il grado successivo.
+Ancora %d fino a %d; le tue ricette non bastano. Un istruttore ha %s a %d.
+Ancora %d fino a %d; le tue ricette non bastano. Un istruttore ha %s.
+Le tue ricette si fermano a %d da %d. Un istruttore ne ha altre.
+Ancora %d fino a %d. Il migliore ora: %s, verde (un punto ogni tanto).
+Ancora %d fino a %d. Prima impara %s, %s.
+Ancora %d fino a %d. Raccogli %s fino a %d.
+Ancora %d fino a %d. Prima: %s, oppure %s (%s).
+Ancora %d fino a %d. Prima: %s.
 Da raccogliere o comprare
 %d volte: %s
+Imparala %s, da %d.
+Imparala %s.
+%s: %d nelle borse, %d in banca, %d per creazione
+Le guide salgono questo tratto raccogliendo %s.
 %s: ne hai %d, il piano ne usa %d
 per %s
+Il Mentore: cosa ti fa creare la tua banca
+Cosa puoi creare con la banca
+Con ciò che hai in banca non si crea nient'altro.
+%d che puoi creare contando la banca, %d solo grazie a lei.
 Il Mentore: %s %d > %d
 Il Mentore
+Piano di avanzamento
+o
+Raccogli %s
+da imparare
+Prova
+Nascondi
+Il piano
+Indietro
 Farma questo
 Farma tutto
-Indietro
+Con la banca
 Usa il piano
+due volte per nascondere
+Niente da provare qui.
 %d aggiunti alla lista da farmare.
 Non manca niente: hai quello che serve.
 Apri la finestra di una professione per fare un piano.
@@ -292,6 +344,7 @@ banca
 Il tuo segno
 Dettagli oggetto: tutto sull'oggetto che stai puntando
 mostra tutto sull'oggetto che stai puntando (o su quello indicato): prezzi, chi lo possiede, il tuo segno
+%d%% di vendita
 Va via di sicuro (%d%%)
 Si vende da solo (%d%%)
 Penso che si venderà (%d%%)
@@ -325,12 +378,19 @@ In vendita: %d aste, %d oggetti
 %s l'uno, %s per tutti i %d
 Hai messo in vendita %d qui, %d aste vendute
 Nessun prezzo noto: leggi prima la casa d'aste.
+Niente nelle tue borse da vendere qui.
+Oggi niente rende più qui che da un mercante; %d forse, con pazienza.
+Prima i migliori: %d rendono più qui che da un mercante, altri %d con pazienza.
 Borse vuote, amico. Portami qualcosa da vendere.
 Oggi niente batte un mercante. %d forse, con un po' di pazienza.
 Nessun guadagno sicuro in queste borse, amico. %d potrebbero rendere se aspetti.
 Il meglio in cima: %d qui battono ogni mercante, %d in più per i pazienti.
 %d rendono più qui che da un mercante, prima il meglio. %d in più se aspetti.
 In cima alla pila si guadagna di più: %d vendite sicure, %d in più se sai aspettare.
+Ancora nessun prezzo: %s legge la casa d'aste.
+Prezzi letti or ora: %d.
+%d prezzi, letti %s.
+%d prezzi, letti %s. %s li rilegge.
 Non ho ancora letto la bacheca. %s e ti porto ogni prezzo.
 Ancora nessun prezzo, amico. %s legge tutta la bacheca.
 Prezzi freschi dalla bacheca, amico: %d.
@@ -339,6 +399,8 @@ Ho appena letto la bacheca: %d prezzi, ancora caldi.
 Ultima occhiata alla bacheca: %s, %d prezzi.
 Prezzi di %s, raffermi come pane vecchio. %s rilegge la bacheca.
 %d prezzi, ma letti %s. %s e ci do un'altra occhiata.
+Viene mostrato anche ciò che tieni. %s lo nasconde.
+Messi da parte: %d, per le tue professioni, il tuo equipaggiamento e i tuoi segni. %s li mostra.
 Anche ciò che tieni è in lista. %s lo mette via.
 Mostro anche ciò che tieni. %s lo nasconde di nuovo.
 %d messi da parte: roba per le professioni, da indossare, segnata da te. %s li mostra.
@@ -370,6 +432,28 @@ Mercato: grafico dei prezzi a candele
 il grafico dei prezzi del Mercato è una candela al giorno per gli ultimi 7 giorni (dove il prezzo ha aperto, il più alto e il più basso, e dove ha chiuso: verde se ha chiuso più in alto, rossa se più in basso); spento: una linea del prezzo più basso di ogni giorno su 30 giorni
 apri o chiudi il Mercato (una scheda della casa d'aste)
 quale casa d'aste ha questo client (per la risoluzione dei problemi)
+ottenuto
+ottenuto da un altro oggetto
+non ancora ottenuto
+Aspetto
+Scegli un set per mettere i suoi pezzi sul tuo completo. %s lo conserva; prima non si paga nulla.
+Sto guardando la tua collezione...
+Il tuo completo è tornato com'era.
+%s: %d pezzi su %d indossati.
+%d non si potevano mettere su questo completo.
+Un set di cui hai dei pezzi
+%d set di cui hai dei pezzi
+non puoi indossarlo
+mancante
+Tutti i %d pezzi
+%d pezzi su %d
+Manca: %s
+Ancora nessun set. Gli oggetti che condividono un nome, come Elmo di Ferro Verde e Guanti d'Arme di Ferro Verde, compaiono qui appena ne hai uno.
+Annulla
+Scheda Set dal trasmogrificatore
+una scheda Set nella finestra di trasmogrificazione: l'equipaggiamento della tua collezione che condivide un nome (Elmo di Ferro Verde, Guanti d'Arme di Ferro Verde...) e i set del gioco, messi sul tuo completo con una pressione, con Annulla; nulla viene conservato o pagato finché non premi Applica
+Aspetto ottenuto, nei tooltip degli oggetti
+sotto il tooltip di equipaggiamento e oggetti estetici: se il suo aspetto è già nella tua collezione, o solo tramite un altro oggetto identico, così sai cosa è nuovo per te
 Offline
 Morto
 Disattivato
@@ -1037,6 +1121,69 @@ Una finestra delle borse con filtri rapidi
 le tue borse in una finestra dell'HUD invece di quella del gioco: tutti gli oggetti insieme, i posti vuoti raccolti alla fine, le tue borse in una fila a parte e filtri rapidi in alto (LB e RB). Anche la banca, mentre è aperta. Disattivato: le borse del gioco
 Finestra delle borse: ordine
 Intelligente: prima ciò che usi (consumabili, oggetti con un uso), poi il resto per tipo, la robaccia in fondo e sbiadita. Per tipo: in sezioni con il proprio titolo. Come nelle borse: l'ordine del gioco
+Bene, allora.
+Ah, che mucchio.
+Vediamo, vediamo...
+Elune, dammi pazienza.
+Per i naaru, che confusione.
+Maledetto zaino.
+Zaino in ordine, zaino leggero.
+Bah. Troppa roba.
+Peso morto, tutto quanto.
+Pazienza. La Madre Terra provvede.
+Ehi, cosa abbiamo qui, amico?
+Che disordine. Sconveniente.
+Il tempo è denaro. Contiamo.
+Sì, può andare.
+Sia ringraziata Elune.
+La Luce provvede.
+Hrm. Abbastanza.
+Hm. Basta per combattere.
+Viaggio leggero. Bene.
+Accettabile. A malapena.
+Non c'è un posto libero. La robaccia frutterebbe %s: venderla fa spazio.
+Non c'è un posto libero. Quello che non mi serve in viaggio può aspettare in banca.
+Robaccia: %d, vale %s qui. X vende quella che ho scelto; Vendita furba prende tutto.
+%d di questi vanno in banca: ne contiene già altri uguali, o li ho segnati. Deposita li mette via.
+Solo %d posti liberi. La robaccia frutterebbe %s da qualsiasi mercante.
+Solo %d posti liberi. È ora di vendere o depositare qualcosa.
+Nuovi dall'ultima occhiata: %d. Il punto dorato segna ciascuno.
+Da vendere: %d. Il filtro Vendi li raccoglie, e ogni descrizione dice dove rende di più.
+Robaccia: %d, vale %s. Al prossimo mercante.
+Solo l'essenziale. Niente che valga la pena vendere.
+Tutto in ordine, e %d posti liberi.
+Il tuo equipaggiamento è riparato: %s.
+Posso riparare il tuo equipaggiamento per %s; un pezzo rotto non ti dà né armatura né statistiche.
+Le tue borse sono piene. Prendo %d cose per %s: Vendita furba, e hai di nuovo spazio.
+Ti do %s per %d cose: la robaccia e ciò che la casa d'aste non pagherebbe di più. Vendita furba, ed è fatta.
+Tieni i %d che vuole la casa d'aste: paga %s più di me.
+Le tue borse sono piene. Vendimi qualcosa prima di comprare.
+Niente nelle tue borse per cui pagherei bene. Dai un'occhiata alla mia merce.
+%d delle cose che porti vanno qui: ne custodisco altre uguali, o le hai segnate. Deposita le mette via.
+Custodisco altre scorte di %d cose che porti. Preleva riempie le borse prima di partire.
+Le tue borse sono quasi piene. Lascia a me ciò che non ti serve in viaggio.
+Tutto al sicuro con me, e le tue borse hanno %d posti liberi.
+Oggi niente per te. Ho controllato due volte.
+Lettere per te: %d, niente allegato. Leggile quando vuoi.
+Lettere per te: %d. Dentro: %s.
+Prendi tutto le svuota in un colpo.
+Contrassegno: %d. Quelle le apri e paghi tu.
+Le tue borse sono piene: gli oggetti aspettano nelle loro lettere.
+Dove si va? Indica un luogo e ti dirò quanto dura il volo.
+%s: circa %s secondo la mappa. Quella rotta non l'hai ancora volata.
+%s: circa %s, secondo il tuo ultimo volo lì.
+%s: non so ancora dirti quanto. Volalo una volta e lo saprò.
+Ne sono scappati %d. Quest'acqua chiede più abilità di quanta ne ho: l'esca aiuta, e anche una canna migliore.
+Niente esca sull'amo. Aumenta la mia abilità, così ne scappano meno.
+L'esca è quasi finita. Un'altra sull'amo tiene alta la mia abilità.
+Pesci di qui che non ho ancora preso: %d. Continuo a lanciare.
+Ho preso ogni pesce di quest'acqua. Altrove, allora.
+Ancora niente preso. Il primo pesce di ogni acqua va qui.
+Specie prese: %d. Ogni acqua ne nasconde altre: il pannello di pesca mostra un ? per ciascuna che non ho preso lì.
+Riposato accanto al fuoco: i prossimi %d punti esperienza dalle uccisioni valgono doppio.
+Nessun riposo accumulato. Una notte in una locanda o in città, e le uccisioni danno esperienza doppia per un po'.
+Narrazione: personaggi nelle finestre
+ogni finestra che l'HUD migliora ha qualcuno che ti aiuta, con il suo ritratto e una breve frase su ciò che hai davanti e perché: tu stesso davanti alle borse e in riva all'acqua, il mercante, il banchiere, il mastro postale, il maestro di volo, il Mediatore alla casa d'aste e il Mentore alla tua professione; disattivato: le finestre restano semplici e silenziose
 Preset dell'HUD: %s, abbinato alla telecamera
 preset: %s
 Un layout chiamato '%s' è stato aggiunto alla Modalità modifica del gioco. Sceglilo lì per usarlo (Menu di gioco > Modalità modifica > Layout).
@@ -1187,15 +1334,57 @@ l'opzione del gioco: il tooltip di un buff compare per un momento quando viene a
 Colori di classe per i nomi nella chat
 l'impostazione della chat del gioco per ogni tipo di chat insieme: il nome di un giocatore nel colore della sua classe
 apri il pannello delle opzioni (Opzioni > AddOns > ControllerCam HUD)
-Riquadri
-Dissolvenza dello schermo
+I tuoi riquadri
+Bersaglio, gruppo e incursione
 Effetti
-Aspetto
-Missioni, chat e mappa
+Vibrazione
+Visuale e mira
+Dissolvenza dello schermo
+Riquadri del gioco ridisegnati
+Chat e messaggi
+Missioni e mappa
+Voli
 Borse, banca e venditore
-Pesca
+Oggetti e casa d'aste
+Pesca e professioni
 Accessibilità
-Opzioni native
+Narrazione
+Promemoria per bere acqua
+Le tue barre
+In combattimento
+Barre della salute
+Dimensione e testo
+Bersaglio e focus
+Nomi e classi
+Effetti sul bersaglio
+Gruppo e incursione
+Quali targhette
+Aspetto
+Nomi
+Salute e potere
+Colpi
+Numeri e avvisi
+Fuori dal combattimento
+Controller
+Cosa vibra
+Visuale
+Tempi di recupero
+Cosa sfuma
+Quali riquadri
+Finestra della chat
+Nomi in chat
+Filtri
+Messaggi di errore
+Elenco missioni
+Progressi delle missioni
+Lista da farmare
+Mappa
+Barra di volo
+Posta
+Consiglio sugli oggetti
+Aspetti
+Pesca
+Professioni
 %s  |  Interfaccia gamepad: %s  |  in esecuzione: %s
 giocatore %s, bersaglio %s, animale %s, focus %s  |  riquadri del gioco messi da parte: %s  |  chat spostata: %s
 opzioni native: bersaglio del bersaglio %s, Gestore dei tempi di recupero %s, risorse personali %s

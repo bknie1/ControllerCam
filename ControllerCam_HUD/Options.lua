@@ -129,28 +129,146 @@ for _, label in ipairs({
     "Keep what your quests need", "Quest compass", "Quest compass: place",
     "Quest progress to your party",
     "Fades: gamepad bars", "Fades: minimap", "Fades: quest list", "Fades: damage meter", "Fades: experience bar",
-    "Fades: buffs", "Fades: cooldown rows",
+    "Fades: buffs", "Fades: cooldown rows", "Aiming dot", "Narrative: characters in the windows",
 }) do BASIC[label] = true end
 ns.BASIC_OPTIONS = BASIC
 
--- Which page a setting goes on (the section names settings were registered with)
-local PAGE_OF = {
-    ["General"] = "General", ["Frames"] = "Frames", ["Effects"] = "Effects", ["Nameplates"] = "Nameplates",
-    ["Quests"] = "Quests, chat and map", ["Quests, chat and map"] = "Quests, chat and map",
-    ["Gamepad bars"] = "Gamepad bars", ["Bags, bank and vendor"] = "Bags, bank and vendor",
-    ["Native Options"] = "Native Options", ["Look"] = "Look", ["Fishing"] = "Fishing",
-    ["Accessibility"] = "Accessibility", ["Screen fade"] = "Screen fade",
+-- Where each setting goes: its page, and the heading it sits under there, in the order shown. One page per
+-- thing you might want to change, so it is found where you would look for it. (A setting is named by its key, or
+-- by its label where it has none.)
+local LAYOUT = {
+    { page = "General", groups = {
+        { "enabled", "always", "hideBlizzard", "debug" },
+        { head = "Narrative", "narrative" },
+        { head = "Water reminder", "hydrate", "hydrateEvery", "hydrateFlight" },
+    } },
+    { page = "Your frames", groups = {
+        { head = "Your bars", "Player frame", "Vertical bars", "verticalIdle", "followZoom", "idle", "Pet bar", "petMood",
+          "Personal Resource Display", "breathBar", "sleepy" },
+        { head = "In a fight", "combatAlpha", "alertHealth", "alertPower", "playerShake" },
+        { head = "Health bars", "classColors", "combatColors", "shieldBars", "wards", "healColors", "hotVines" },
+        { head = "Cast bar", "castbar", "castScale", "castUpright", "castArt", "castWindup" },
+        { head = "Size and text", "scale", "textScale", "textShade", "compactAll" },
+    } },
+    { page = "Target, party and raid", groups = {
+        { head = "Target and focus", "Target frame", "Focus frame", "Target of target", "targetCompact",
+          "targetHealthText", "targetThreat", "threatPercent", "executeGlow" },
+        { head = "Names and classes", "classIcons", "classNames", "lastNames", "repColors", "factionMarks", "factionStyle" },
+        { head = "Effects on the target", "auras", "targetBuffs", "smartAuras", "friendDebuffs", "combo" },
+        { head = "Party and raid", "group", "healerFrames" },
+    } },
+    { page = "Nameplates", groups = {
+        { head = "Which nameplates", "nameplates", "plateFriendsGame", "plateHoverNPC", "plateObjects", "plateMini",
+          "plateFriendsInside", "plateFriendsHide" },
+        { head = "Look", "plateLook", "plateSize", "plateCompact", "plateName", "plateMotion" },
+        { head = "Names", "plateLevels", "plateClassIcons", "plateTitles", "plateSubtitles", "plateServiceIcons",
+          "plateTargetName", "plateQuest" },
+        { head = "Health and power", "plateValue", "platePercent", "platePower", "plateFriendBars" },
+        { head = "In a fight", "plateThreat", "plateCastAlert", "plateCastTarget", "plateDebuffs", "plateAllDebuffs",
+          "plateBuffs", "plateCC" },
+    } },
+    { page = "Effects", groups = {
+        { head = "Hits", "impacts", "impactFx", "woundFx" },
+        { head = "Numbers and callouts", "numbers", "readyAlerts", "soonCallouts", "soonBuffs", "Tooltip when a buff starts" },
+        { head = "Big moments", "bigMoments", "momentPlace" },
+        { head = "Out of a fight", "readouts", "campScene" },
+    } },
+    { page = "Vibration", groups = {
+        { head = "Controller", "rumble", "rumbleStrength", "lightBar" },
+        { head = "What rumbles", "abilityRumble", "rumbleHits", "rumbleCrits", "rumbleInterrupts", "rumbleLowHealth",
+          "rumbleAggro", "rumbleAlerts", "rumbleSeals", "rumbleCasts", "rumbleLevel" },
+    } },
+    { page = "Camera and aiming", groups = {
+        { head = "Aiming dot", "reticleStyle", "reticleColor", "reticleSize", "reticleAlpha" },
+        { head = "Camera", "presetZoom", "followCamera" },
+    } },
+    { page = "Gamepad bars", groups = {
+        { head = "Gamepad bars", "bars", "barScale", "padRaise" },
+        { head = "Cooldowns", "rowsAside", "Cooldown Manager" },
+    } },
+    { page = "Screen fade", groups = {
+        { "hudFade", "hudIdle" },
+        { head = "What fades", "restBars", "restMinimap", "restTracker", "restMeter", "restXP", "restBuffs", "restRows" },
+    } },
+    { page = "Restyled game frames", groups = {
+        { "skin" },
+        { head = "Which frames", "skintooltips", "skingamepad", "skinbuffs", "skintracker", "skinminimap", "skinxpbar",
+          "xpScale", "skinchat", "skindamagemeter" },
+    } },
+    { page = "Chat and messages", groups = {
+        { head = "Chat window", "chat", "chatScale", "chatFade", "chatTime" },
+        { head = "Names in chat", "Class colours for names in chat", "chatInfo", "chatShort", "chatFirstName" },
+        { head = "Filters", "chatSpam", "chatRecruit" },
+        { head = "Error messages", "quietErrors", "quietNotReady" },
+    } },
+    { page = "Quests and map", groups = {
+        { head = "Quest list", "questzone", "questSolo", "questNear", "questNearest", "questPlan", "questFocusNear",
+          "questShort" },
+        { head = "Quest compass", "compass", "compassPlace" },
+        { head = "Quest progress", "questProgress", "questParty", "questPartyAll" },
+        { head = "Farm list", "farmList", "farmSide" },
+        { head = "Map", "mapCoords" },
+    } },
+    { page = "Flights", groups = {
+        { head = "Flight bar", "flights", "flightRider", "flightWeather", "flightGame" },
+        { head = "Cinematic flights", "flightScene", "flightOrbit" },
+    } },
+    { page = "Bags, bank and vendor", groups = {
+        { head = "Bags", "bagWindow", "bagOrder", "padSort", "padMove" },
+        { head = "Vendor", "vendor", "Sell junk when a vendor opens", "White weapons and armor are junk", "autoRepair",
+          "repairGuild" },
+        { head = "Bank", "Deposit when the bank opens", "depositMatching", "Bank takes reagents by itself" },
+        { head = "Mail", "mailTakeAll", "mailSubject" },
+    } },
+    { page = "Items and auction house", groups = {
+        { head = "Item advice", "auctionVerdict", "adviceUnsure", "upgradeSpecs", "statValues", "questItems", "skillKeep" },
+        { head = "Tooltips", "invTotals", "vendorPrice", "auctionPrice" },
+        { head = "Auction house", "ahPanel", "auctionScan", "ahStrategy", "ahVoice", "ahShowKept", "ahCandles" },
+        { head = "Appearances", "transmogSets", "tipAppearance" },
+    } },
+    { page = "Fishing and professions", groups = {
+        { head = "Fishing", "fishMode", "fishing", "fishBig", "fishRecast", "fishBait", "fishHideBars", "fishJournal",
+          "fishPanel", "fishGame" },
+        { head = "Professions", "skillPlan", "skillBank" },
+    } },
+    { page = "Accessibility", groups = {
+        { "reduceMotion" },
+    } },
 }
-local EFFECTS = { impacts = true, impactFx = true, castWindup = true, combatColors = true, castArt = true }
-local FISHING = { fishing = true, fishBig = true }      -- registered with the cast bar; they belong with fishing
-local CHAT_MAP = { chatFade = true, chatTime = true, mapCoords = true, chat = true }
-local PAGES = { "Frames", "Screen fade", "Effects", "Look", "Nameplates", "Quests, chat and map",
-                "Bags, bank and vendor", "Gamepad bars", "Fishing", "Accessibility", "Native Options" }
+-- The pages under the main one, in this order (the same as above)
+local PAGES = { "Your frames", "Target, party and raid", "Nameplates", "Effects", "Vibration", "Camera and aiming",
+                "Gamepad bars", "Screen fade", "Restyled game frames", "Chat and messages", "Quests and map", "Flights",
+                "Bags, bank and vendor", "Items and auction house", "Fishing and professions", "Accessibility" }
+
+local PLACE = {}                                  -- name -> { page, group, rank }
+local rank = 0
+for _, p in ipairs(LAYOUT) do
+    for gi, g in ipairs(p.groups) do
+        for _, name in ipairs(g) do
+            rank = rank + 1
+            PLACE[name] = { page = p.page, group = g, rank = rank }
+        end
+    end
+end
+Options.LAYOUT, Options.PAGES = LAYOUT, PAGES
+
+-- A setting not in the list above (none should be): the page its section names
+local PAGE_OF = {
+    ["General"] = "General", ["Frames"] = "Your frames", ["Effects"] = "Effects", ["Nameplates"] = "Nameplates",
+    ["Quests"] = "Quests and map", ["Quests, chat and map"] = "Quests and map", ["Gamepad bars"] = "Gamepad bars",
+    ["Bags, bank and vendor"] = "Bags, bank and vendor", ["Native Options"] = "Your frames",
+    ["Look"] = "Restyled game frames", ["Fishing"] = "Fishing and professions", ["Accessibility"] = "Accessibility",
+    ["Screen fade"] = "Screen fade",
+}
+
+local function PlaceOf(def)
+    return (def.key and PLACE[def.key]) or (def.id and PLACE[def.id]) or (def.label and PLACE[def.label])
+end
+Options.PlaceOf = PlaceOf
 
 local function PageOf(def)
-    if def.key and EFFECTS[def.key] then return "Effects" end
-    if def.key and FISHING[def.key] then return "Fishing" end
-    if def.key and CHAT_MAP[def.key] then return "Quests, chat and map" end
+    local place = PlaceOf(def)
+    if place then return place.page end
     return PAGE_OF[def.section or ""] or "General"
 end
 ns.OptionPageOf = PageOf
@@ -206,9 +324,12 @@ end
 -- Quick switches, right under the modules: the bar style (compact or full, everywhere or one by one)
 ns.STYLE = { "compactAll", "targetCompact", "plateCompact" }
 
--- The HUD's modules, switched on and off at the top of its main page
-ns.MODULES = { "nameplates", "group", "castbar", "impacts", "numbers", "rumble", "skin", "vendor", "invTotals",
-               "chatInfo", "chatSpam", "questzone", "bars" }
+-- The HUD's modules, switched on and off at the top of its main page: every part you might want or not, one
+-- switch each (what's on the screen, then the windows, then the extras), so you take only the parts you want
+ns.MODULES = { "nameplates", "group", "castbar", "impacts", "numbers", "bigMoments", "rumble", "skin", "hudFade",
+               "bars", "compass", "questzone",
+               "bagWindow", "vendor", "invTotals", "ahPanel", "skillPlan", "fishMode", "transmogSets", "narrative",
+               "flights", "campScene", "chatSpam", "chatInfo" }
 
 local function NewPage(name, parentName)
     local frame = CreateFrame("Frame", nil)
@@ -321,6 +442,13 @@ function ns.LayoutOptions()
         local y = -4
         for _, row in ipairs(page.rows) do
             local show = advanced or row.basic
+            if row.members then                           -- a heading: shown with what is under it
+                show = false
+                for _, m in ipairs(row.members) do
+                    if advanced or m.basic then show = true; break end
+                end
+                if show and y < -4 then y = y - 8 end     -- (a little room above it)
+            end
             row.widget:ClearAllPoints()
             if row.label then row.label:ClearAllPoints() end
             if show then
@@ -468,6 +596,30 @@ function ns.BuildOptions()
             end
         end
     end
+    -- each page in the order above, under its headings (anything not listed goes last)
+    for _, page in pairs(pages) do
+        local placed, rest = {}, {}
+        for _, row in ipairs(page.rows) do
+            local place = PlaceOf(row.def)
+            if place then placed[#placed + 1] = { row = row, place = place } else rest[#rest + 1] = row end
+        end
+        table.sort(placed, function(a, b) return a.place.rank < b.place.rank end)
+        local rows, group, head = {}, nil, nil
+        for _, p in ipairs(placed) do
+            if p.place.group ~= group then
+                group, head = p.place.group, nil
+                if group.head then
+                    head = { widget = Text(page.content, "GameFontNormal", L[group.head]), height = 24, members = {} }
+                    rows[#rows + 1] = head
+                end
+            end
+            if head then head.members[#head.members + 1] = p.row end
+            rows[#rows + 1] = p.row
+        end
+        for _, row in ipairs(rest) do rows[#rows + 1] = row end
+        page.rows = rows
+    end
+
     -- the modules: one switch each, at the top of the main page, so you take only the parts you want
     local list = {}
     local head = Text(main.content, "GameFontNormal", L["Modules"])

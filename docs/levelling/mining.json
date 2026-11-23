@@ -1,0 +1,32 @@
+{
+  "kind": "mining",
+  "sources": ["https://www.wowhead.com/classic/guide/mining-leveling-1-300-wow-classic"],
+  "steps": [
+    { "from": 1, "to": 65, "gather": 2770, "object": 1731, "name": "Copper Vein", "crafts": null,
+      "alts": [
+        { "item": 2840, "spell": 2657, "name": "Smelt Copper", "crafts": null, "made": 1, "learn": "trainer", "learnAt": 1, "reagents": [[2770, 1]], "why": ["gathered"] }
+      ] },
+    { "from": 65, "to": 125, "gather": 2771, "object": 1732, "name": "Tin Vein", "crafts": null,
+      "alts": [
+        { "gather": 2775, "object": 1733, "name": "Silver Vein", "why": ["other"] },
+        { "item": 3576, "spell": 3304, "name": "Smelt Tin", "crafts": null, "made": 1, "learn": "trainer", "learnAt": 65, "reagents": [[2771, 1]], "why": ["gathered"] },
+        { "item": 2841, "spell": 2659, "name": "Smelt Bronze", "crafts": null, "made": 2, "learn": "trainer", "learnAt": 65, "reagents": [[2840, 1], [3576, 1]], "why": ["gathered"] },
+        { "item": 2842, "spell": 2658, "name": "Smelt Silver", "crafts": null, "made": 1, "learn": "trainer", "learnAt": 75, "reagents": [[2775, 1]], "why": ["gathered"] }
+      ] },
+    { "from": 125, "to": 175, "gather": 2772, "object": 1735, "name": "Iron Deposit", "crafts": null,
+      "alts": [
+        { "gather": 2776, "object": 1734, "name": "Gold Vein", "why": ["other"] },
+        { "item": 3575, "spell": 3307, "name": "Smelt Iron", "crafts": null, "made": 1, "learn": "trainer", "learnAt": 125, "reagents": [[2772, 1]], "why": ["gathered"] },
+        { "item": 3577, "spell": 3308, "name": "Smelt Gold", "crafts": null, "made": 1, "learn": "trainer", "learnAt": 155, "reagents": [[2776, 1]], "why": ["gathered"] }
+      ] },
+    { "from": 175, "to": 245, "gather": 3858, "object": 2040, "name": "Mithril Deposit", "crafts": null,
+      "alts": [
+        { "gather": 7911, "object": 2047, "name": "Truesilver Deposit", "why": ["other"] }
+      ] },
+    { "from": 245, "to": 300, "gather": 10620, "object": 324, "name": "Small Thorium Vein", "crafts": null,
+      "alts": [
+        { "gather": 10620, "object": 175404, "name": "Rich Thorium Vein", "why": ["other"] }
+      ] }
+  ],
+  "notes": "Icy Veins could not be read: icy-veins.com/wow-classic/classic-mining-profession-and-leveling-guide returns HTTP 403 to WebFetch and a Cloudflare bot check in the browser. A search snippet says Icy Veins recommends mixing gathering and smelting, but its ranges could not be read, so there are no Icy Veins alts. Wowhead levels Mining by mining veins: each step's 'gather' is the ore item, and 'object' is the Wowhead object ID of the vein from the guide. Wowhead names two veins per range, so the second is an alt. Rich Thorium Vein (275+) gives the same ore. Wowhead gives no node counts (crafts null). The smelting alts come from Wowhead's smelting table: the guide calls smelting 'another route', effective with rare ores like Silver and 'no longer effective after skill level 185'. So only the smelts whose difficulty is not already grey when learned are listed, with no craft counts. Smelting difficulty from the table (orange yellow green grey): Copper 1/25/47/70, Tin -/-/65/75, Bronze -/65/90/115, Silver 75/100/112/125, Iron 125/130/135/140, Gold 155/170/177/185, Steel -/-/-/165, Mithril -/-/-/175, Truesilver -/-/-/230, Thorium -/-/-/250. learnAt is the first number given. Steel 3859 (spell 3569: Iron Bar + Coal 3857), Mithril 3860 (10097), Truesilver 6037 (10098), Dark Iron 11371 (14891: 8 Dark Iron Ore, Black Forge in BRD) and Thorium 12359 (16153) are grey when learned, so they give no skill. made comes from the table (Bronze x2, the rest x1). Vein skill (orange/yellow/green/grey): Copper 1/25/50/100, Tin 65/90/115/165, Silver 75/100/125/175, Iron 125/150/175/225, Gold 155/180/205/255, Mithril 175/200/225/275, Truesilver 230/255/280/330, Small Thorium 245/270/295/345, Rich Thorium 275/300/325/375. Ranks: Journeyman at 50-75, Expert at 125-150, Artisan at 200-225, from any Mining trainer. A Mining Pick 2901 is required."
+}

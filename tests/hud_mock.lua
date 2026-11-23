@@ -906,6 +906,190 @@ function mock.landFlight(subzone)
     mock.fire("PLAYER_CONTROL_GAINED")
 end
 
+---------------------------------------------------------------------------
+-- The transmogrifier (Blizzard_Transmog, loaded the first time you talk to one): the window's outfit slots, the
+-- collection of appearances, the game's own sets, the window's tabs (its Sets tab hidden while the game knows no
+-- set you could wear) and the game's gamepad cursor (SmartNavigation)
+---------------------------------------------------------------------------
+Enum.TransmogOutfitDisplayType = { Unassigned = 0, Assigned = 1, Equipped = 2, Hidden = 3, Disabled = 4 }
+HEADSLOT, SHOULDERSLOT, BACKSLOT, CHESTSLOT = "Head", "Shoulder", "Back", "Chest"
+SHIRTSLOT, TABARDSLOT, WRISTSLOT, HANDSSLOT = "Shirt", "Tabard", "Wrist", "Hands"
+WAISTSLOT, LEGSSLOT, FEETSLOT = "Waist", "Legs", "Feet"
+TRANSMOG_SAVE_OUTFIT = "Apply"
+mock.tm = {
+    appearances = {},     -- collection type -> { { visualID =, isCollected =, isUsable = } }
+    sources = {},         -- visualID -> { { sourceID =, name =, isCollected =, itemID =, quality = } }
+    slots = {},           -- outfit slot -> { saved = id kept, pending = id not yet kept, shown = its display type }
+    setLog = {},          -- every SetPendingTransmog: { slot, type, option, id, displayType }
+    reverted = {},        -- every RevertPendingTransmog: slot
+    refuse = {},          -- outfit slot -> true: the game takes no change there
+    locked = {},          -- outfit slot -> true: CanPlayerTransmogSlot says no
+    options = {},         -- outfit slot -> the option the window shows for it
+    outfit = 1,
+    validSets = false,    -- C_TransmogSets.HasAnyValidSets
+    gameSets = {},        -- C_TransmogSets.GetAllSets
+    setSources = {},      -- setID -> its sourceIDs
+    sourceInfo = {},      -- sourceID -> C_TransmogCollection.GetSourceInfo
+    nav = {},             -- every SmartNavigation:SetTargetButtonForFrame: { frame =, button = }
+    ignored = {},         -- frames SmartNavigation was told to leave alone
+}
+local TM = mock.tm
+-- One piece of gear in the collection: its look (visual) in a kind of gear (cat), and the item with that look
+function mock.tmItem(cat, visual, source, name, collected, opts)
+    opts = opts or {}
+    TM.appearances[cat] = TM.appearances[cat] or {}
+    local found
+    for _, a in ipairs(TM.appearances[cat]) do if a.visualID == visual then found = a end end
+    if not found then
+        found = { visualID = visual, isCollected = false, isUsable = opts.usable ~= false, isHideVisual = false }
+        table.insert(TM.appearances[cat], found)
+    end
+    if collected then found.isCollected = true end
+    TM.sources[visual] = TM.sources[visual] or {}
+    local s = { sourceID = source, name = name, isCollected = collected and true or false, itemID = source + 50000,
+                quality = opts.quality or 2, categoryID = cat, visualID = visual }
+    table.insert(TM.sources[visual], s)
+    TM.sourceInfo[source] = s
+    return s
+end
+local function SlotState(slot)
+    TM.slots[slot] = TM.slots[slot] or { saved = 0, shown = 0 }
+    return TM.slots[slot]
+end
+C_TransmogCollection = {
+    GetCategoryAppearances = function(cat) return TM.appearances[cat] or {} end,
+    GetAppearanceSources = function(visual) return TM.sources[visual] or {} end,
+    GetSourceInfo = function(id) return TM.sourceInfo[id] end,
+    GetSourceIcon = function(id) return 100000 + id end,
+    GetItemInfo = function(item)                               -- an item's look and its source, if it has one
+        for _, s in pairs(TM.sourceInfo) do
+            if s.itemID == item then return s.visualID, s.sourceID end
+        end
+    end,
+    GetAllAppearanceSources = function(visual)
+        local ids = {}
+        for _, s in ipairs(TM.sources[visual] or {}) do ids[#ids + 1] = s.sourceID end
+        return ids
+    end,
+    GetCollectedShown = function() return true end,
+    GetUncollectedShown = function() return true end,
+}
+local ARMOUR = { { 0, 1 }, { 1, 2 }, { 2, 2, true }, { 3, 3 }, { 4, 4 }, { 5, 6 }, { 6, 5 }, { 7, 7 }, { 8, 8 },
+                 { 9, 9 }, { 10, 10 }, { 11, 11 } }
+C_TransmogOutfitInfo = {
+    GetSlotGroupInfo = function()
+        local slots = {}
+        for _, s in ipairs(ARMOUR) do
+            slots[#slots + 1] = { slot = s[1], type = 0, collectionType = s[2], slotName = "slot" .. s[1], isSecondary = s[3] or false }
+        end
+        return { { position = 0, appearanceSlotInfo = slots, illusionSlotInfo = {} } }
+    end,
+    GetViewedOutfitSlotInfo = function(slot, kind, option)
+        local s = SlotState(slot)
+        return { transmogID = s.pending or s.saved, displayType = s.pending and s.pendingShown or s.shown,
+                 hasPending = s.pending ~= nil, canTransmogrify = true, isTransmogrified = s.saved ~= 0 }
+    end,
+    SetPendingTransmog = function(slot, kind, option, id, shown)
+        TM.setLog[#TM.setLog + 1] = { slot, kind, option, id, shown }
+        if TM.refuse[slot] then return end
+        local s = SlotState(slot)
+        s.pending, s.pendingShown = id, shown
+    end,
+    RevertPendingTransmog = function(slot)
+        TM.reverted[#TM.reverted + 1] = slot
+        SlotState(slot).pending = nil
+    end,
+    CanPlayerTransmogSlot = function(slot) return not TM.locked[slot] end,
+    GetCurrentlyViewedOutfitID = function() return TM.outfit end,
+    GetEquippedSlotOptionFromTransmogSlot = function() return 0 end,
+    CommitAndApplyAllPending = function()                       -- the game's Apply: the changes are kept, and paid
+        for _, s in pairs(TM.slots) do
+            if s.pending then s.saved, s.shown, s.pending = s.pending, s.pendingShown, nil end
+        end
+    end,
+    ClearAllPendingTransmogs = function() for _, s in pairs(TM.slots) do s.pending = nil end end,
+}
+C_TransmogSets = {
+    HasAnyValidSets = function() return TM.validSets end,
+    GetAllSets = function() return TM.gameSets end,
+    GetAllSourceIDs = function(id) return TM.setSources[id] or {} end,
+}
+SmartNavigation = { SetTargetButtonForFrame = function(self, frame, button)
+    TM.nav[#TM.nav + 1] = { frame = frame, button = button }
+end }
+function SmartNavigation_MarkFrameIgnored(f) TM.ignored[f] = true end
+function SmartNavigation_ClearIgnoreStatus(f) TM.ignored[f] = nil end
+
+-- A frame shown or hidden, and the frames in it told (OnShow / OnHide), as the game does
+local function Visible(frame, on)
+    if on then frame:Show() else frame:Hide() end
+    for _, f in ipairs(mock.frames) do
+        if f.parent == frame and f.shown then
+            local fn = f.scripts[on and "OnShow" or "OnHide"]
+            if fn then fn(f) end
+        end
+    end
+end
+mock.tmTabs = { "ItemsFrame", "SetsFrame", "CustomSetsFrame", "SituationsFrame" }
+-- The window made (Blizzard_Transmog loading): Items, Sets, Custom Sets and Situations
+function mock.loadTransmog()
+    local win = CreateFrame("Frame", "TransmogFrame", UIParent)
+    win:Hide()
+    local w = CreateFrame("Frame", nil, win)
+    win.WardrobeCollection = w
+    w.itemsTabID, w.setsTabID, w.customSetsTabID, w.situationsTabID = 1, 2, 3, 4
+    w.TabHeaders = CreateFrame("Frame", nil, w)
+    w.TabHeaders.tabs = {}
+    for i = 1, 4 do
+        local t = CreateFrame("Button", nil, w.TabHeaders)
+        t.tabID = i
+        w.TabHeaders.tabs[i] = t
+    end
+    w.TabContent = CreateFrame("Frame", nil, w)
+    for _, n in ipairs(mock.tmTabs) do
+        local page = CreateFrame("Frame", nil, w.TabContent)
+        page:Hide()
+        w.TabContent[n] = page
+    end
+    w.TabContent.SetsFrame.PagedContent = CreateFrame("Frame", nil, w.TabContent.SetsFrame)
+    function w:UpdateTabs()                     -- the game's: its Sets tab only when it knows sets you could wear
+        TM.updateTabs = (TM.updateTabs or 0) + 1
+        for i, t in ipairs(self.TabHeaders.tabs) do
+            if i == self.setsTabID and not C_TransmogSets.HasAnyValidSets() then t:Hide() else t:Show() end
+        end
+    end
+    function w:SetTab(id)                       -- a tab chosen (LB / RB, or a click): its page shows
+        for i, n in ipairs(mock.tmTabs) do
+            local page = self.TabContent[n]
+            if i ~= id and page.shown then Visible(page, false) end
+        end
+        Visible(self.TabContent[mock.tmTabs[id]], true)
+    end
+    w:UpdateTabs()                              -- (its OnLoad)
+    win.CharacterPreview = CreateFrame("Frame", nil, win)
+    win.CharacterPreview.GetSlotFrame = function(self, slot, kind)
+        return { slotData = { currentOptionInfo = { type = TM.options[slot] or 0, name = "" } } }
+    end
+    mock.fire("ADDON_LOADED", "Blizzard_Transmog")
+    return win
+end
+-- Talking to the transmogrifier: the window opens on its Items tab
+function mock.openTransmog()
+    local win = rawget(_G, "TransmogFrame") or mock.loadTransmog()
+    win:Show()
+    win.WardrobeCollection:UpdateTabs()         -- (its OnShow)
+    win.WardrobeCollection:SetTab(1)
+    return win
+end
+-- Walking away: the window closes, and what it had not kept is thrown away
+function mock.closeTransmog()
+    local win = rawget(_G, "TransmogFrame")
+    local w = win.WardrobeCollection
+    for _, n in ipairs(mock.tmTabs) do if w.TabContent[n].shown then Visible(w.TabContent[n], false) end end
+    Visible(win, false)
+    C_TransmogOutfitInfo.ClearAllPendingTransmogs()
+end
+
 function mock.loadHud(path, ns)
     local fn, err = loadfile(path)
     if not fn then error(err) end

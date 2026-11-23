@@ -9,14 +9,19 @@
 --     and grey).
 --   * the chance of a point between yellow and grey, by the rule players have long used:
 --     (grey - your rank) / (grey - yellow).
--- Each point is taken from the recipe that costs least per point (auction prices where they are known).
+-- Where the profession has a guide (LevelGuides.lua: the steps the well-known levelling guides take, with their
+-- alternatives), the plan follows it: each stretch's recipe, or an alternative you already know, and a recipe you
+-- do not know yet marked to learn. Without one, each point is taken from the recipe that costs least per point
+-- (auction prices where they are known).
 -- What it takes is broken down through what your characters can make: a Bronze Bar the plan needs, less the
 -- ones you hold, becomes Copper Bars and Tin Bars, and those Copper Ore and Tin Ore, less what you hold of each.
 -- What is still missing can be put on the farm list (Farm.lua) with one button.
 -- The Mentor says it in a few plain words at the top (a few ways of putting each, picked when the window opens),
 -- and names the recipe to learn next when one of your characters has been seen with it (or the window lists it).
 -- Only read: nothing in the profession's window is opened, expanded, changed or written to.
--- Also here: beside the game's count of a recipe you can make, a second one that counts your bank too.
+-- Also here: beside the game's count of a recipe you can make, a second one that counts your bank too; and in
+-- the panel, what you can make with your bank (the game's "Have Materials" only looks in your bags, and it is the
+-- game's own filter, so it is left as it is).
 
 local ADDON, ns = ...
 local L = ns.L
@@ -29,7 +34,8 @@ LV.BAND = 15              -- points between a recipe turning yellow, green and g
 LV.DEPTH = 4              -- how far down a chain of crafts the breakdown goes (Copper Ore > Copper Bar > Bronze Bar)
 LV.UNKNOWN = 100          -- what a reagent with no known price counts as (1 silver), to compare recipes
 LV.ROWS = 12
-LV.KEYS = { "PADDUP", "PADDDOWN", "PAD1", "PAD3", "PAD2", "ESCAPE", "PADLSTICK" }
+LV.KEYS = { "PADDUP", "PADDDOWN", "PAD1", "PAD3", "PAD4", "PADRSHOULDER", "PAD2", "ESCAPE", "PADLSTICK" }
+
 LV.KEY = "PADLSTICK"      -- while the window is open: L3 takes the plan's buttons, and gives them back
 LV.WINDOWS = { "TradeSkillFrame", "CraftFrame", "ProfessionsFrame" }
 LV.REACH = 120            -- how far past a window's edge its own tabs may stick out (the panel goes past them)
@@ -52,6 +58,11 @@ end
 local function Num(v)
     v = Plain(v)
     return type(v) == "number" and v or nil
+end
+
+local function SpellOf(link)
+    link = Plain(link)
+    return type(link) == "string" and tonumber(link:match("enchant:(%d+)") or link:match("spell:(%d+)")) or nil
 end
 
 -- Where recipes change colour, as learned: [kind][recipe] = { yl, yh, gl, gh, xl, xh } (each change between the
@@ -88,7 +99,9 @@ ns.RegisterSaved("skillKnown", function(old)
             for kind, list in pairs(kinds) do
                 if type(kind) == "string" and type(list) == "table" then
                     local names = {}
-                    for name, on in pairs(list) do if type(name) == "string" and on then names[name] = true end end
+                    for name, on in pairs(list) do
+                        if type(name) == "string" and on then names[name] = (type(on) == "number" and on) or true end
+                    end
                     keep[kind] = names
                 end
             end
@@ -97,6 +110,9 @@ ns.RegisterSaved("skillKnown", function(old)
     end
     return out
 end)
+
+-- The panel put away beside the profession window (L3 brings it back)
+ns.RegisterSaved("skillPlanHidden", function(old) return old == true end)
 
 ns.RegisterSaved("skillMakes", function(old)
     local out = {}
@@ -157,6 +173,11 @@ local function ReadClassic(craft)
             if product then
                 local okP, link = pcall(product, i)
                 r.p = okP and ItemOf(link) or nil
+                r.s = okP and SpellOf(link) or nil                           -- (an enchant makes no item)
+            end
+            if not craft and not r.s and GetTradeSkillRecipeLink then
+                local okS, link = pcall(GetTradeSkillRecipeLink, i)
+                r.s = okS and SpellOf(link) or nil
             end
             if made then
                 local okM, m = pcall(made, i)
@@ -206,7 +227,7 @@ local function ReadModern()
         local c = okI and type(info) == "table" and info.learned and MODERN[Plain(info.relativeDifficulty) or -1]
         local recipe = c and Plain(info.name)
         if c and type(recipe) == "string" then
-            local r = { n = recipe, c = c, u = math.max(1, Num(info.numSkillUps) or 1), r = {} }
+            local r = { n = recipe, c = c, u = math.max(1, Num(info.numSkillUps) or 1), r = {}, s = Num(id) }
             if T.GetRecipeSchematic then
                 local okS, s = pcall(T.GetRecipeSchematic, id, false)
                 if okS and type(s) == "table" then
@@ -262,7 +283,7 @@ function LV.Learn(read)
         local b = steps[rec.n] or {}
         steps[rec.n] = b
         Lower(b, "o", r)                                            -- (the lowest rank it was seen at, by anyone)
-        if known then known[rec.n] = true end
+        if known then known[rec.n] = rec.p or known[rec.n] or true end      -- (what it makes, where it makes one)
         if rec.c == 3 then Higher(b, "yl", r)                       -- orange: all of its changes are still ahead
         elseif rec.c == 2 then Lower(b, "yh", r); Higher(b, "gl", r)
         elseif rec.c == 1 then Lower(b, "gh", r); Higher(b, "xl", r)
@@ -449,6 +470,119 @@ local function CraftCost(rec)
 end
 
 ---------------------------------------------------------------------------
+-- Following the guides
+---------------------------------------------------------------------------
+-- A guide (LevelGuides.lua): [kind] = { { from, to, p = makes, s = spell, n = crafts, m = made each, at = skill
+-- it needs, learn = trainer|vendor|drop|quest, r = { reagent, n, ... }, name, alts = { same, why = { ... } } } },
+-- or { from, to, gather = ore } where the guides level by gathering.
+local function SpellName(id)
+    local get = (C_Spell and C_Spell.GetSpellName) or GetSpellInfo
+    if not get then return nil end
+    local ok, name = pcall(get, id)
+    name = ok and Plain(name)
+    return type(name) == "string" and name ~= "" and name or nil
+end
+
+local function ItemNameOrNil(id)
+    local get = (C_Item and C_Item.GetItemInfo) or GetItemInfo
+    if not get then return nil end
+    local ok, name = pcall(get, id)
+    name = ok and Plain(name)
+    return type(name) == "string" and name ~= "" and name or nil
+end
+
+-- The recipes the window shows, by what they make and by their spell
+local function Mine(read)
+    local mine = { p = {}, s = {} }
+    for _, rec in ipairs(read.list or {}) do
+        if rec.s then mine.s[rec.s] = rec end
+        if rec.p and not mine.p[rec.p] then mine.p[rec.p] = rec end
+    end
+    return mine
+end
+
+-- A guide's recipe as the plan's own: the window's when you know it (true), else from the guide
+function LV.GuideRecipe(g, mine)
+    local known = (g.s and mine.s[g.s]) or (g.p and mine.p[g.p])
+    if known then return known, true end
+    local r = {}
+    local list = type(g.r) == "table" and g.r or {}
+    for i = 1, #list - 1, 2 do r[#r + 1] = { id = list[i], n = list[i + 1] } end
+    local name = (g.s and SpellName(g.s)) or (g.p and ItemNameOrNil(g.p)) or g.name or "?"
+    return { n = name, p = g.p, s = g.s, r = r, u = 1, m = g.m or 1, c = 3 }, false
+end
+
+-- The crafts for lo..hi, from the guide's count for its whole stretch
+local function GuideCrafts(o, g, lo, hi)
+    local from, to = o.lo or g[1], o.hi or g[2]                 -- (an alternative may have its own stretch)
+    local span = math.max(1, to - from)
+    return math.max(1, math.ceil((o.n or (o == g and g.n) or span) * (hi - lo) / span - 1e-6))
+end
+
+-- An alternative as the step shows it: another thing to gather, or another recipe
+local function Alternative(o, g, lo, hi, mine)
+    if o.gather then return { gather = o.gather, why = {} } end
+    local rec, known = LV.GuideRecipe(o, mine)
+    return { rec = rec, known = known, crafts = GuideCrafts(o, g, lo, hi), why = (o == g) and { "guide" } or o.why or {},
+             learn = (not known) and { how = o.learn or "trainer", at = o.at } or nil }
+end
+
+-- The crafts a recipe you know takes for lo..hi by its colours (nil where it would turn grey on the way)
+local function KnownCrafts(rec, lo, hi, rank, learned)
+    local Y, _, X = LV.Thresholds(learned[rec.n], rec.c, rank)
+    if not Y then return nil end
+    local sum = 0
+    for at = lo, hi - 1 do
+        local chance = LV.Chance(at, Y, X)
+        if chance <= 0 then return nil end
+        sum = sum + 1 / (chance * (rec.u or 1))
+    end
+    return math.max(1, math.ceil(sum - 1e-6))
+end
+
+-- The plan's steps from the guide, or nil when the profession has none. And where the guide stops, if short of
+-- the target.
+function LV.GuideSteps(read, target)
+    local guide = ns.LevelGuides and ns.LevelGuides[read.kind]
+    if type(guide) ~= "table" or #guide == 0 then return nil end
+    local mine = Mine(read)
+    local learned = ns.db and ns.db.skillSteps and ns.db.skillSteps[read.kind] or {}
+    local steps, reach = {}, read.rank
+    for _, g in ipairs(guide) do
+        local lo, hi = math.max(g[1], read.rank), math.min(g[2], target)
+        if lo < hi then
+            reach = math.max(reach, hi)
+            local step = { from = lo, to = hi, guide = true, alts = {} }
+            if g.gather then
+                step.gather = g.gather
+                for _, a in ipairs(g.alts or {}) do step.alts[#step.alts + 1] = Alternative(a, g, lo, hi, mine) end
+            else
+                local options = { g }
+                for _, a in ipairs(g.alts or {}) do
+                    if not a.gather then options[#options + 1] = a end
+                end
+                local main
+                for _, o in ipairs(options) do                       -- the first you know that still teaches
+                    local rec, known = LV.GuideRecipe(o, mine)
+                    if known and (rec.c or 0) > 0 then main = o; break end
+                end
+                main = main or g
+                local rec, known = LV.GuideRecipe(main, mine)
+                step.rec, step.known = rec, known
+                step.colour = known and rec.c or 3
+                step.crafts = (known and KnownCrafts(rec, lo, hi, read.rank, learned)) or GuideCrafts(main, g, lo, hi)
+                if not known then step.learn = { how = main.learn or "trainer", at = main.at } end
+                for _, o in ipairs(options) do
+                    if o ~= main then step.alts[#step.alts + 1] = Alternative(o, g, lo, hi, mine) end
+                end
+            end
+            steps[#steps + 1] = step
+        end
+    end
+    return steps, reach
+end
+
+---------------------------------------------------------------------------
 -- The plan
 ---------------------------------------------------------------------------
 -- { kind, name, rank, target, steps = { { rec, from, to, crafts, colour } }, need = { [item] = n }, raw, total,
@@ -466,6 +600,19 @@ function LV.Plan(read, target)
             local Y, G, X = LV.Thresholds(learned[rec.n], rec.c, read.rank)
             if Y then options[#options + 1] = { rec = rec, Y = Y, G = G, X = X, cost = CraftCost(rec) } end
         end
+    end
+    local guided, reach = LV.GuideSteps(read, target)
+    if guided then
+        plan.steps, plan.guide = guided, true
+        if reach < target and not plan.capped then plan.short = target - reach end
+        for _, step in ipairs(plan.steps) do
+            for _, x in ipairs(step.rec and step.rec.r or {}) do
+                plan.need[x.id] = (plan.need[x.id] or 0) + step.crafts * x.n
+            end
+        end
+        plan.raw, plan.total, plan.made, plan.via = LV.Breakdown(plan.need)
+        plan.next, plan.nextAt = LV.NextRecipe(read)
+        return plan
     end
     local s, last = read.rank, nil
     while s < target do
@@ -505,6 +652,8 @@ end
 ---------------------------------------------------------------------------
 local frame
 local WIDTH, ROW = 320, 20
+LV.MODE_W = 96
+LV.mode = "plan"
 
 local function KeyName(key)
     if ns.KeyText then return ns.KeyText(key) end                  -- (your controller's own icons: PadIcons.lua)
@@ -576,6 +725,26 @@ LV.SAY = {
         function(p, s) return L["Slow going from here: %s gives a point now and then. %d to go."]:format(s.rec.n,
             p.target - p.rank) end,
     },
+    -- the guides' first step is a recipe you do not know yet
+    learn = {
+        function(p, s) return L["First you'll want %s, %s. The guides start this stretch with it."]:format(s.rec.n,
+            LV.Source(s.learn)) end,
+        function(p, s) return L["Learn %s, %s, and we'll begin: %d more to %d."]:format(s.rec.n, LV.Source(s.learn),
+            p.target - p.rank, p.target) end,
+    },
+    -- the guides level this stretch by gathering
+    gather = {
+        function(p, s) return L["%d more to %d. The guides send you out for %s until %d."]:format(p.target - p.rank,
+            p.target, ItemNameOrNil(s.gather) or "?", s.to) end,
+        function(p, s) return L["Gathering teaches you here: %s until %d."]:format(ItemNameOrNil(s.gather) or "?", s.to) end,
+    },
+    -- the guides' recipe, with another they offer
+    alt = {
+        function(p, s) return L["%d more to %d. Start with %s, or %s if you'd rather: %s."]:format(p.target - p.rank,
+            p.target, s.rec.n, s.alts[1].rec.n, LV.Why(s.alts[1].why)) end,
+        function(p, s) return L["%s first, as the guides have it. %s does the job too: %s."]:format(s.rec.n,
+            s.alts[1].rec.n, LV.Why(s.alts[1].why)) end,
+    },
     go = {
         function(p, s) return L["%d more to %d. Start with %s."]:format(p.target - p.rank, p.target, s.rec.n) end,
         function(p, s) return L["%s is your best teacher now. %d points to %d."]:format(s.rec.n, p.target - p.rank,
@@ -584,18 +753,67 @@ LV.SAY = {
     },
 }
 
+-- Where a recipe is learned, and why an alternative might suit you
+LV.SOURCES = { trainer = L["at a trainer"], vendor = L["from a vendor"], drop = L["found as loot"],
+               quest = L["from a quest"] }
+function LV.Source(learn)
+    return learn and LV.SOURCES[learn.how] or LV.SOURCES.trainer
+end
+LV.WHY = {
+    cheap = L["cheaper materials"], vendor = L["materials from a vendor"], gathered = L["materials you gather yourself"],
+    sells = L["it sells well"], useful = L["something you'll use"], fewer = L["fewer crafts"],
+    recipe = L["a recipe you find or buy"], other = L["other materials"], guide = L["the guides' first choice"],
+}
+function LV.Why(codes)
+    local parts = {}
+    for _, code in ipairs(type(codes) == "table" and codes or {}) do
+        if LV.WHY[code] then parts[#parts + 1] = LV.WHY[code] end
+    end
+    if #parts == 0 then parts[1] = LV.WHY.other end
+    return table.concat(parts, ", ")
+end
+
+-- With the narrative off (Narrative.lua) no Mentor: the same plan in plain words, one way each (a kind without
+-- plain words keeps The Mentor's)
+LV.PLAIN = {
+    none = function() return L["Open a profession's window for a levelling plan."] end,
+    capped = function(p) return L["At the cap, %d. A trainer has the next rank."]:format(p.rank) end,
+    nextAt = function(p) return L["%d more to %d; your recipes stop short. A trainer has %s at %d."]:format(
+        p.target - p.rank, p.target, p.next, p.nextAt) end,
+    next = function(p) return L["%d more to %d; your recipes stop short. A trainer has %s."]:format(p.target - p.rank,
+        p.target, p.next) end,
+    short = function(p) return L["Your recipes stop %d short of %d. A trainer has more."]:format(p.short, p.target) end,
+    green = function(p, s) return L["%d more to %d. Best now: %s, green (a point now and then)."]:format(
+        p.target - p.rank, p.target, s.rec.n) end,
+    learn = function(p, s) return L["%d more to %d. First learn %s, %s."]:format(p.target - p.rank, p.target, s.rec.n,
+        LV.Source(s.learn)) end,
+    gather = function(p, s) return L["%d more to %d. Gather %s until %d."]:format(p.target - p.rank, p.target,
+        ItemNameOrNil(s.gather) or "?", s.to) end,
+    alt = function(p, s) return L["%d more to %d. First: %s, or %s (%s)."]:format(p.target - p.rank, p.target, s.rec.n,
+        s.alts[1].rec.n, LV.Why(s.alts[1].why)) end,
+    go = function(p, s) return L["%d more to %d. First: %s."]:format(p.target - p.rank, p.target, s.rec.n) end,
+}
+function LV.Voiced() return not ns.Narrative or ns.Narrative.On() end
+local function Say(kind, plan, first)
+    if not LV.Voiced() and LV.PLAIN[kind] then return LV.PLAIN[kind](plan, first) end
+    return Pick(LV.SAY[kind])(plan, first)
+end
+
 function LV.Words(plan)
-    if not plan then return Pick(LV.SAY.none)() end
+    if not plan then return Say("none") end
     local first = plan.steps[1]
     local kind
     if plan.capped then kind = "capped"
+    elseif first and first.gather then kind = "gather"
+    elseif first and first.learn then kind = "learn"
     elseif plan.short and plan.next then kind = plan.nextAt and "nextAt" or "next"
     elseif plan.short then kind = "short"
     elseif not first then kind = "short"
     elseif first.colour == 1 then kind = "green"
+    elseif first.alts and first.alts[1] then kind = "alt"
     else kind = "go" end
-    if kind == "short" and not plan.short then return Pick(LV.SAY.capped)(plan) end
-    return Pick(LV.SAY[kind])(plan, first)
+    if kind == "short" and not plan.short then return Say("capped", plan) end
+    return Say(kind, plan, first)
 end
 
 local function Build()
@@ -615,14 +833,21 @@ local function Build()
     end
     frame.title = ns.FontString(frame, 12, "LEFT")
     frame.title:SetPoint("TOPLEFT", frame, "TOPLEFT", 10, -8)
-    frame.title:SetPoint("TOPRIGHT", frame, "TOPRIGHT", -10, -8)
-    if frame.title.SetWordWrap then frame.title:SetWordWrap(false) end
+    frame.title:SetPoint("TOPRIGHT", frame, "TOPRIGHT", -24, -8)
+    frame.title:SetWidth(WIDTH - 20)
+    if frame.title.SetWordWrap then frame.title:SetWordWrap(true) end      -- every word shows, at any text size
     frame.sub = ns.FontString(frame, 9, "LEFT")                -- The Mentor talking: warm parchment, wrapped
     frame.sub:SetPoint("TOPLEFT", frame.title, "BOTTOMLEFT", 0, -4)
     frame.sub:SetPoint("TOPRIGHT", frame.title, "BOTTOMRIGHT", 0, -4)
     frame.sub:SetWidth(WIDTH - 20)
     if frame.sub.SetWordWrap then frame.sub:SetWordWrap(true) end
     frame.sub:SetTextColor(0.91, 0.86, 0.72)
+    -- The Mentor's portrait: his profession's icon, beside his name (none with the narrative off)
+    if ns.Narrative then
+        frame.portrait = ns.Narrative.Portrait(frame, LV.PORTRAIT)
+        frame.portrait:SetPoint("TOPLEFT", frame, "TOPLEFT", 10, -8)
+        frame.portrait:Hide()
+    end
     for i = 1, LV.ROWS do
         local r = CreateFrame("Button", nil, frame)
         r:SetSize(WIDTH - 12, ROW - 1)
@@ -649,12 +874,48 @@ local function Build()
     frame.detail:SetWidth(WIDTH - 20)
     if frame.detail.SetWordWrap then frame.detail:SetWordWrap(true) end
     frame.detail:SetTextColor(0.78, 0.88, 1)
+    -- the bank's view and back: a button of ours (Y while the plan has the controller's buttons)
+    frame.mode = CreateFrame("Button", nil, frame)
+    frame.mode:SetSize(LV.MODE_W, 18)
+    frame.mode:SetPoint("BOTTOMRIGHT", frame, "BOTTOMRIGHT", -6, 5)
+    frame.mode.back = frame.mode:CreateTexture(nil, "BACKGROUND")
+    frame.mode.back:SetAllPoints(frame.mode)
+    frame.mode.back:SetColorTexture(0.56, 0.82, 1, 0.16)
+    frame.mode.text = ns.FontString(frame.mode, 8, "CENTER")
+    frame.mode.text:SetPoint("LEFT", frame.mode, "LEFT", 3, 0)
+    frame.mode.text:SetPoint("RIGHT", frame.mode, "RIGHT", -3, 0)
+    frame.mode:SetScript("OnClick", ns.Protect(function() LV:SetMode(LV.mode == "bank" and "plan" or "bank") end))
     frame.hint = ns.FontString(frame, 8, "LEFT")
     frame.hint:SetPoint("BOTTOMLEFT", frame, "BOTTOMLEFT", 10, 6)
-    frame.hint:SetPoint("BOTTOMRIGHT", frame, "BOTTOMRIGHT", -10, 6)
+    frame.hint:SetPoint("BOTTOMRIGHT", frame, "BOTTOMRIGHT", -10 - LV.MODE_W, 6)
+    frame.hint:SetWidth(WIDTH - 20 - LV.MODE_W)
+    if frame.hint.SetWordWrap then frame.hint:SetWordWrap(true) end
     frame.hint:SetTextColor(unpack(C.muted))
     -- L3 while the window is open takes the plan's buttons (ns.PadKeys); B, or L3 again, gives them back
-    LV.key = ns.PadKeys("PlanKey", { LV.KEY }, function() LV:Focus(true) end)
+    LV.key = ns.PadKeys("PlanKey", { LV.KEY }, function()
+        if ns.db.skillPlanHidden then LV:SetHidden(false) else LV:Focus(true) end
+    end)
+    -- put away: a small tab of ours where the panel was, with the button that brings it back
+    LV.tab = CreateFrame("Button", "ControllerCamHUD_SkillPlanTab", UIParent)
+    LV.tab:SetSize(132, 20)
+    LV.tab:SetFrameStrata("HIGH")
+    LV.tab.back = LV.tab:CreateTexture(nil, "BACKGROUND")
+    LV.tab.back:SetAllPoints(LV.tab)
+    LV.tab.back:SetColorTexture(0.03, 0.05, 0.09, 0.9)
+    LV.tab.text = ns.FontString(LV.tab, 9, "CENTER")
+    LV.tab.text:SetPoint("LEFT", LV.tab, "LEFT", 4, 0)
+    LV.tab.text:SetPoint("RIGHT", LV.tab, "RIGHT", -4, 0)
+    LV.tab.text:SetTextColor(0.98, 0.77, 0.31)
+    LV.tab:SetScript("OnClick", ns.Protect(function() LV:SetHidden(false) end))
+    LV.tab:Hide()
+    -- and a close button on the panel (with a mouse)
+    frame.close = CreateFrame("Button", nil, frame)
+    frame.close:SetSize(16, 16)
+    frame.close:SetPoint("TOPRIGHT", frame, "TOPRIGHT", -5, -5)
+    frame.close.text = ns.FontString(frame.close, 11, "CENTER")
+    frame.close.text:SetAllPoints(frame.close)
+    frame.close.text:SetText("x")
+    frame.close:SetScript("OnClick", ns.Protect(function() LV:SetHidden(true) end))
     LV.keys = ns.PadKeys("Plan", LV.KEYS, function(key) LV:Pad(key) end, function() LV:Focus(false) end)
     frame:SetScript("OnHide", ns.Protect(function()
         LV.focus = false
@@ -677,7 +938,10 @@ end
 local function Entries(plan)
     local out = {}
     if not plan then return out end
-    for _, step in ipairs(plan.steps) do out[#out + 1] = { step = step } end
+    for _, step in ipairs(plan.steps) do
+        out[#out + 1] = { step = step }
+        for _, alt in ipairs(step.alts or {}) do out[#out + 1] = { alt = alt, step = step } end    -- the guides' others
+    end
     local ids = SortedIds(plan.raw)
     table.sort(ids, function(a, b)
         if plan.raw[a] ~= plan.raw[b] then return plan.raw[a] > plan.raw[b] end
@@ -688,15 +952,79 @@ local function Entries(plan)
     return out
 end
 
+-- What you can make with your bank: the window's recipes (and ones this character was seen to know, for a list
+-- a filter cut short), with the bank's reagents counted. Those only the bank makes possible first.
+local function BankEntries(read)
+    local out, seen, BK = {}, {}, LV.Bank
+    if not BK then return out end
+    local function Add(name, reagents, colour, p)
+        if seen[name] or type(reagents) ~= "table" or #reagents == 0 then return end
+        seen[name] = true
+        local all, bags = BK.Makes(reagents)
+        if all and all > 0 then out[#out + 1] = { make = { n = name, r = reagents, c = colour, p = p }, bags = bags, all = all } end
+    end
+    for _, rec in ipairs(read and read.list or {}) do Add(rec.n, rec.r, rec.c, rec.p) end
+    local db = ns.db or {}
+    local me = ns.Inventory and ns.Inventory.Me and ns.Inventory.Me()
+    local known = read and me and db.skillKnown and db.skillKnown[me] and db.skillKnown[me][read.kind] or {}
+    for name, made in pairs(known) do
+        local m = type(made) == "number" and db.skillMakes and db.skillMakes[made]
+        if m then
+            local r = {}
+            for _, id in ipairs(SortedIds(m.r)) do r[#r + 1] = { id = id, n = m.r[id] } end
+            Add(name, r, nil, made)
+        end
+    end
+    table.sort(out, function(a, b)
+        local ga, gb = a.all > a.bags, b.all > b.bags
+        if ga ~= gb then return ga end
+        if a.all ~= b.all then return a.all > b.all end
+        return a.make.n < b.make.n
+    end)
+    return out
+end
+LV.BankEntries = BankEntries
+
+local function Reagents(rec, crafts)
+    local parts = {}
+    for _, x in ipairs(rec and rec.r or {}) do
+        local need = crafts * x.n
+        parts[#parts + 1] = ("%s %d/%d"):format(ItemName(x.id), math.min(LV.Have(x.id), need), need)
+    end
+    return L["%d crafts: %s"]:format(crafts, table.concat(parts, ", "))
+end
+
+local function Learn(learn)
+    if not learn then return nil end
+    if learn.at then return L["Learn it %s, at %d."]:format(LV.Source(learn), learn.at) end
+    return L["Learn it %s."]:format(LV.Source(learn))
+end
+
 local function Detail(plan, e)
     if not e then return "" end
-    if e.step then
+    if e.make then
         local parts = {}
-        for _, x in ipairs(e.step.rec.r) do
-            local need = e.step.crafts * x.n
-            parts[#parts + 1] = ("%s %d/%d"):format(ItemName(x.id), math.min(LV.Have(x.id), need), need)
+        for _, x in ipairs(e.make.r) do
+            local bags, bank = LV.Bank.Held(x.id)
+            parts[#parts + 1] = L["%s: %d in your bags, %d in the bank, %d each"]:format(ItemName(x.id), bags, bank, x.n)
         end
-        return L["%d crafts: %s"]:format(e.step.crafts, table.concat(parts, ", "))
+        return table.concat(parts, "\n")
+    end
+    if e.alt and e.alt.gather then
+        return L["The guides level this stretch by gathering %s."]:format(ItemName(e.alt.gather))
+    end
+    if e.alt then
+        local text = Reagents(e.alt.rec, e.alt.crafts) .. "\n" .. LV.Why(e.alt.why)
+        local learn = Learn(e.alt.learn)
+        return learn and (text .. "\n" .. learn) or text
+    end
+    if e.step and e.step.gather then
+        return L["The guides level this stretch by gathering %s."]:format(ItemName(e.step.gather))
+    end
+    if e.step then
+        local text = Reagents(e.step.rec, e.step.crafts)
+        local learn = Learn(e.step.learn)
+        return learn and (text .. "\n" .. learn) or text
     end
     if e.id then
         local have = LV.Have(e.id)
@@ -716,28 +1044,67 @@ local function TextHeight(fs, size)
     if h and h > 0 then return math.ceil(h) end
     local plainText = text:gsub("|c%x%x%x%x%x%x%x%x", ""):gsub("|r", ""):gsub("|A.-|a", "")
     local lines = 0
-    for line in (plainText .. "\n"):gmatch("(.-)\n") do lines = lines + math.max(1, math.ceil(#line / 58)) end
+    local per = math.max(10, math.floor((WIDTH - 20) / (size * 0.55 * (ns.db and tonumber(ns.db.textScale) or 1))))
+    for line in (plainText .. "\n"):gmatch("(.-)\n") do lines = lines + math.max(1, math.ceil(#line / per)) end
     return lines * (size + 3)
 end
 LV.TextHeight = TextHeight
 
+-- The Mentor's face beside his words (his profession's icon; a book before there is a plan), or none with the
+-- narrative off. The title and the words start past it; returns how far in.
+LV.PORTRAIT = 36
+LV.BOOK = "Interface\Icons\INV_Misc_Book_09"
+function LV.Face(voiced, kind)
+    local p = frame.portrait
+    local left = (voiced and p) and (LV.PORTRAIT + 10) or 0
+    if p then
+        if left > 0 then
+            ns.Narrative.Draw(p, { icon = (kind and ns.Narrative.ProfessionIcon(kind)) or LV.BOOK })
+            p:Show()
+        else
+            p:Hide()
+        end
+    end
+    frame.title:ClearAllPoints()
+    frame.title:SetPoint("TOPLEFT", frame, "TOPLEFT", 10 + left, -8)
+    frame.title:SetPoint("TOPRIGHT", frame, "TOPRIGHT", -24, -8)
+    frame.title:SetWidth(WIDTH - 34 - left)                      -- (clear of the close button)
+    frame.sub:SetWidth(WIDTH - 20 - left)
+    return left
+end
+
 function LV:Refresh()
     if not (frame and frame:IsShown()) then return end
     local plan = self.plan
-    self.entries = Entries(plan)
+    local bank = self.mode == "bank"
+    self.entries = bank and BankEntries(self.read) or Entries(plan)
     local n = #self.entries
     while self.entries[self.index] and self.entries[self.index].head do self.index = self.index + 1 end
     self.index = ns.Clamp(self.index, 1, math.max(1, n))
     if self.index < self.top then self.top = self.index end
     if self.index > self.top + LV.ROWS - 1 then self.top = self.index - LV.ROWS + 1 end
     self.top = ns.Clamp(self.top, 1, math.max(1, n - LV.ROWS + 1))
-    if plan then
-        frame.title:SetText(L["The Mentor: %s %d > %d"]:format(plan.name, plan.rank, plan.target))
+    local voiced = LV.Voiced()
+    local left = LV.Face(voiced, plan and plan.kind)                 -- (his portrait, or none)
+    if bank then
+        frame.title:SetText(voiced and L["The Mentor: what your bank can make"] or L["What your bank can make"])
+        local only = 0
+        for _, e in ipairs(self.entries) do if e.all > e.bags then only = only + 1 end end
+        frame.sub:SetText(n == 0 and L["Nothing more to make with what's in your bank."]
+            or L["%d you can make counting your bank, %d of them only with it."]:format(n, only))
     else
-        frame.title:SetText(L["The Mentor"])
+        if plan and voiced then
+            frame.title:SetText(L["The Mentor: %s %d > %d"]:format(plan.name, plan.rank, plan.target))
+        elseif plan then
+            frame.title:SetText(("%s %d > %d"):format(plan.name, plan.rank, plan.target))
+        else
+            frame.title:SetText(voiced and L["The Mentor"] or L["Levelling plan"])
+        end
+        frame.sub:SetText(LV.Words(plan))
     end
-    frame.sub:SetText(LV.Words(plan))
-    local top = 8 + 14 + 4 + TextHeight(frame.sub, 9) + 8          -- under the title and The Mentor's words
+    -- under the title and The Mentor's words, however many lines each takes
+    local top = 8 + math.max(14, TextHeight(frame.title, 12)) + 4 + TextHeight(frame.sub, 9) + 8
+    if left > 0 then top = math.max(top, 8 + LV.PORTRAIT + 8) end   -- (and under his portrait)
     local shown = 0
     for i, r in ipairs(self.rows) do
         local at = self.top + i - 1
@@ -747,14 +1114,40 @@ function LV:Refresh()
         if e then
             shown = i
             r.at = (not e.head) and at or nil
+            r.icon:ClearAllPoints()
+            r.icon:SetPoint("LEFT", r, "LEFT", e.alt and 18 or 2, 0)
             if e.head then
                 r.icon:Hide()
                 r.text:SetText("|cffffd24a" .. e.head .. "|r")
                 r.right:SetText("")
+            elseif e.make then
+                r.icon:Show()
+                r.icon:SetTexture(e.make.p and Icon(e.make.p) or 134400)
+                r.text:SetText(e.make.c and e.make.c > 0 and LV.RecipeText(e.make.n, e.make.c) or e.make.n)
+                r.right:SetText(e.all > e.bags and ("%d |cff8fd0ff[%d]|r"):format(e.bags, e.all) or tostring(e.all))
+            elseif e.alt and e.alt.gather then
+                r.icon:Show()
+                r.icon:SetTexture(Icon(e.alt.gather))
+                r.text:SetText("|cff9d9d9d" .. L["or"] .. "|r " .. L["Gather %s"]:format(ItemName(e.alt.gather)))
+                r.right:SetText("")
+            elseif e.alt then
+                r.icon:Show()
+                r.icon:SetTexture(e.alt.rec.p and Icon(e.alt.rec.p) or 134400)
+                r.text:SetText("|cff9d9d9d" .. L["or"] .. "|r " .. e.alt.rec.n .. "  |cff9d9d9d" .. LV.Why(e.alt.why) .. "|r")
+                r.right:SetText("|cff9d9d9dx" .. e.alt.crafts .. "|r")
+            elseif e.step and e.step.gather then
+                r.icon:Show()
+                r.icon:SetTexture(Icon(e.step.gather))
+                r.text:SetText(L["Gather %s"]:format(ItemName(e.step.gather)))
+                r.right:SetText(("%d-%d"):format(e.step.from, e.step.to))
             elseif e.step then
                 r.icon:Show()
                 r.icon:SetTexture(e.step.rec.p and Icon(e.step.rec.p) or 134400)
-                r.text:SetText(LV.RecipeText(e.step.rec.n, e.step.colour) .. "  x" .. e.step.crafts)
+                local name = e.step.learn and ("|cffd8d8d8" .. e.step.rec.n .. "|r")
+                    or LV.RecipeText(e.step.rec.n, e.step.colour)
+                local text = name .. "  x" .. e.step.crafts
+                if e.step.learn then text = text .. "  |cff8fd0ff" .. L["to learn"] .. "|r" end
+                r.text:SetText(text)
                 r.right:SetText(("%d-%d"):format(e.step.from, e.step.to))
             else
                 r.icon:Show()
@@ -776,14 +1169,21 @@ function LV:Refresh()
     frame.detail:SetText(self.focus and Detail(plan, self.entries[self.index]) or "")
     local detail = TextHeight(frame.detail, 9)
     if detail > 0 then y = y + detail + 6 end
-    if self.focus then
-        frame.hint:SetText(("%s %s   %s %s   %s %s"):format(KeyName("PAD1"), L["Farm this"], KeyName("PAD3"),
-            L["Farm all"], KeyName("PAD2"), L["Back"]))
+    local wear = self.focus and LV.Wearable() and ("   %s %s"):format(KeyName("PADRSHOULDER"), L["Try on"]) or ""
+    local away = ("   %s %s"):format(KeyName(LV.KEY), L["Hide"])
+    if self.focus and bank then
+        frame.hint:SetText(("%s %s%s   %s %s%s"):format(KeyName("PAD4"), L["The plan"], wear, KeyName("PAD2"), L["Back"],
+            away))
+    elseif self.focus then
+        frame.hint:SetText(("%s %s   %s %s   %s %s%s   %s %s%s"):format(KeyName("PAD1"), L["Farm this"], KeyName("PAD3"),
+            L["Farm all"], KeyName("PAD4"), L["With the bank"], wear, KeyName("PAD2"), L["Back"], away))
     else
-        frame.hint:SetText(("%s %s"):format(KeyName(LV.KEY), L["Use the plan"]))
+        frame.hint:SetText(("%s %s, %s"):format(KeyName(LV.KEY), L["Use the plan"], L["twice to hide"]))
     end
-    frame:SetHeight(math.floor(y + 6 + 18 + 0.5))                 -- then the buttons' line, at the bottom
-    self.layout = { top = top, rows = shown, detail = detail, height = y + 24 }
+    frame.mode.text:SetText(bank and L["The plan"] or L["With the bank"])
+    local foot = math.max(18, TextHeight(frame.hint, 8))           -- then the buttons' line, at the bottom
+    frame:SetHeight(math.floor(y + 6 + foot + 6 + 0.5))
+    self.layout = { top = top, rows = shown, detail = detail, foot = foot, height = y + 12 + foot }
 end
 
 -- How far the window's own parts (its tabs down the right edge) stick out past it: read, never changed
@@ -806,21 +1206,82 @@ end
 function LV:Place()
     if not frame then return end
     local w = LV.Window()
-    frame:ClearAllPoints()
-    if not w then frame:SetPoint("CENTER", UIParent, "CENTER", 0, 40); return end
+    local function At(...)
+        frame:ClearAllPoints()
+        frame:SetPoint(...)
+        if LV.tab then LV.tab:ClearAllPoints(); LV.tab:SetPoint(...) end    -- (the tab, put away, where it goes)
+    end
+    if not w then At("CENTER", UIParent, "CENTER", 0, 40); return end
     local gap = 6 + LV.Clearance(w)
     local right, left = Num(w.GetRight and w:GetRight()), Num(w.GetLeft and w:GetLeft())
     local screen = Num(UIParent.GetRight and UIParent:GetRight()) or Num(UIParent.GetWidth and UIParent:GetWidth())
     if right and screen and right + gap + WIDTH > screen then
-        if left and left >= WIDTH + 6 then frame:SetPoint("TOPRIGHT", w, "TOPLEFT", -6, 0)
-        else frame:SetPoint("TOPLEFT", w, "BOTTOMLEFT", 0, -6) end
+        if left and left >= WIDTH + 6 then At("TOPRIGHT", w, "TOPLEFT", -6, 0)
+        else At("TOPLEFT", w, "BOTTOMLEFT", 0, -6) end
         return
     end
-    frame:SetPoint("TOPLEFT", w, "TOPRIGHT", gap, 0)
+    At("TOPLEFT", w, "TOPRIGHT", gap, 0)
+end
+
+-- Something to try on: what the chosen row makes, else what the recipe chosen in the game's window makes, when it
+-- is something you could wear. { id, link } or nil
+function LV.Wearable()
+    local B = ns.Bags
+    if not (B and B.Dressable) then return nil end
+    local function Check(id, link)
+        if not id then return nil end
+        if not link then
+            local get = (C_Item and C_Item.GetItemInfo) or GetItemInfo
+            if get then
+                local ok, _, l = pcall(get, id)
+                link = ok and type(Plain(l)) == "string" and l or nil
+            end
+        end
+        link = link or ("item:" .. id)
+        if B.Dressable({ id = id, link = link }) then return { id = id, link = link } end
+    end
+    local e = LV.focus and LV.entries[LV.index]
+    local rec = e and ((e.alt and e.alt.rec) or (e.step and e.step.rec) or e.make)
+    local found = rec and Check(rec.p)
+    if found then return found end
+    local index, get
+    local trade, craft = _G.TradeSkillFrame, _G.CraftFrame
+    if type(craft) == "table" and craft.IsShown and craft:IsShown() and GetCraftSelectionIndex then
+        index, get = GetCraftSelectionIndex, GetCraftItemLink
+    elseif type(trade) == "table" and trade.IsShown and trade:IsShown() and GetTradeSkillSelectionIndex then
+        index, get = GetTradeSkillSelectionIndex, GetTradeSkillItemLink
+    end
+    if not (index and get) then return nil end
+    local ok, i = pcall(index)
+    i = ok and Num(i)
+    if not i or i < 1 then return nil end
+    local okL, link = pcall(get, i)
+    link = okL and Plain(link)
+    if type(link) ~= "string" then return nil end
+    return Check(ItemOf(link), link)
+end
+
+-- The game's dressing room shows it on you, as a click with Ctrl does
+function LV:TryOn()
+    local w = LV.Wearable()
+    if not w then ns.Say(L["Nothing here to try on."]); return false end
+    ns.Bags.TryOn(w.link)
+    return true
 end
 
 function LV:Show()
     if not frame then Build() end
+    if ns.db.skillPlanHidden and not self.away then               -- put away: only the tab, to bring it back
+        self:Place()
+        frame:Hide()
+        self.focus = false
+        self.keys:Set(false)
+        LV.tab.text:SetText(("%s %s"):format(KeyName(LV.KEY), L["The Mentor"]))
+        LV.tab:Show()
+        self.key:Set(true)
+        return
+    end
+    LV.tab:Hide()
     if not frame:IsShown() then LV.voice = math.random(0, 59) end   -- The Mentor's way of saying things, this visit
     self:Place()
     frame:Show()
@@ -830,9 +1291,17 @@ end
 
 function LV:Hide()
     if frame then frame:Hide() end
+    if LV.tab then LV.tab:Hide() end
     self.focus = false
     if self.keys then self.keys:Set(false) end
     if self.key then self.key:Set(false) end
+end
+
+-- Put the panel away (only its tab stays beside the window) or bring it back; remembered between sessions
+function LV:SetHidden(on)
+    ns.db.skillPlanHidden = on and true or false
+    if not frame then return end
+    if LV.Window() or not on then self:Show() else self:Hide() end
 end
 
 function LV:Focus(on)
@@ -845,6 +1314,13 @@ function LV:Focus(on)
         self.keys:Set(false)
         if frame:IsShown() then self.key:Set(true) end
     end
+    self:Refresh()
+end
+
+-- The plan, or what your bank can make
+function LV:SetMode(mode)
+    self.mode = (mode == "bank") and "bank" or "plan"
+    self.index, self.top = 1, 1
     self:Refresh()
 end
 
@@ -867,7 +1343,15 @@ function LV:Farm(all)
         end
     else
         local e = self.entries[self.index]
-        if e and e.id then
+        if e and (e.make or (e.alt and e.alt.gather) or (e.step and e.step.gather and not e.alt)) then return 0 end
+        if e and e.alt then
+            local need = {}
+            for _, x in ipairs(e.alt.rec.r) do need[x.id] = e.alt.crafts * x.n end
+            local raw, total = LV.Breakdown(need)
+            for _, id in ipairs(SortedIds(raw)) do
+                if F.Add(id, total[id], true) then added = added + 1 end
+            end
+        elseif e and e.id then
             if F.Add(e.id, e.total, true) then added = 1 end
         elseif e and e.step then
             local need = {}
@@ -887,9 +1371,13 @@ function LV:Pad(key)
     if not (frame and frame:IsShown()) then return false end
     if key == "PADDUP" then self:Choose(self.index - 1)
     elseif key == "PADDDOWN" then self:Choose(self.index + 1)
+    elseif key == "PAD4" then self:SetMode(self.mode == "bank" and "plan" or "bank")
+    elseif key == "PADRSHOULDER" then self:TryOn()
+    elseif self.mode == "bank" and (key == "PAD1" or key == "PAD3") then return true      -- (the plan's buttons)
     elseif key == "PAD1" then self:Farm(false)
     elseif key == "PAD3" then self:Farm(true)
-    elseif key == "PAD2" or key == "ESCAPE" or key == "PADLSTICK" then self:Focus(false)
+    elseif key == "PADLSTICK" then self:SetHidden(true)                    -- L3 again: put it away
+    elseif key == "PAD2" or key == "ESCAPE" then self:Focus(false)
     else return false end
     return true
 end
@@ -947,10 +1435,10 @@ events:SetScript("OnEvent", ns.Protect(function(_, event)
     elseif event == "BAG_UPDATE_DELAYED" then Soon("bags")
     else Soon("window") end
 end))
--- (a window closed without saying so: looked at now and then while the panel is up)
+-- (a window closed without saying so: looked at now and then while the panel, or its tab, is up)
 local since = 0
 events:SetScript("OnUpdate", ns.Protect(function(_, dt)
-    if not (frame and frame:IsShown()) or LV.away then return end
+    if not ((frame and frame:IsShown()) or (LV.tab and LV.tab:IsShown())) or LV.away then return end
     since = since + dt
     if since < 0.5 then return end
     since = 0
@@ -975,7 +1463,11 @@ end
 
 -- /cchud levelplan: the plan of the window last read (beside it while it is open, else in the middle)
 function LV:Toggle()
-    if frame and frame:IsShown() then self.away = false; self:Hide(); return false end
+    if frame and frame:IsShown() then
+        if LV.Window() and not self.away then self:SetHidden(true) else self.away = false; self:Hide() end
+        return false
+    end
+    if ns.db.skillPlanHidden and LV.Window() then ns.db.skillPlanHidden = false end
     if not self.plan then ns.Say(L["Open a profession's window to make a plan."]); return false end
     self.away = LV.Window() == nil
     self:Show()

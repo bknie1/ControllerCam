@@ -244,6 +244,9 @@ local function OnItem(tooltip, data)
         if ns.db.invTotals then
             for _, l in ipairs(I.Lines(id)) do lines[#lines + 1] = l end           -- how many you have, and where
         end
+        if ns.TransmogSets then                                                    -- its look: in your collection yet?
+            for _, l in ipairs(ns.TransmogSets.TipLines(data)) do lines[#lines + 1] = l end
+        end
         local stats = ns.Stats and ns.Stats.Lines(tooltip) or {}                   -- what its stats are worth to you
         if #stats > 0 then
             if #lines > 0 then lines[#lines + 1] = { "" } end

@@ -1,0 +1,59 @@
+{
+  "kind": "tailoring",
+  "sources": [
+    "https://www.wowhead.com/classic/guide/tailoring-leveling-1-300-wow-classic",
+    "https://www.wowhead.com/classic/guide/tailoring-profession-1-300-budget-leveling"
+  ],
+  "steps": [
+    { "from": 1, "to": 45, "item": 2996, "spell": 2963, "name": "Bolt of Linen Cloth", "crafts": 95, "made": 1, "learn": "trainer", "learnAt": 1, "reagents": [[2589, 2]], "alts": [] },
+    { "from": 45, "to": 70, "item": 7026, "spell": 8776, "name": "Linen Belt", "crafts": 25, "made": 1, "learn": "trainer", "learnAt": 10, "reagents": [[2996, 1], [2320, 1]],
+      "alts": [
+        { "item": 6238, "spell": 7623, "name": "Brown Linen Robe", "crafts": null, "made": 1, "learn": "trainer", "learnAt": 30, "reagents": [[2996, 3], [2320, 1]], "why": ["other"] },
+        { "range": [50, 75], "item": 4238, "spell": 3755, "name": "Linen Bag", "crafts": 25, "made": 1, "learn": "trainer", "learnAt": 45, "reagents": [[2996, 3], [2320, 3]], "why": ["sells", "cheap"] }
+      ] },
+    { "from": 70, "to": 75, "item": 2580, "spell": 2397, "name": "Reinforced Linen Cape", "crafts": 5, "made": 1, "learn": "trainer", "learnAt": 60, "reagents": [[2996, 2], [2320, 3]], "alts": [] },
+    { "from": 75, "to": 100, "item": 2997, "spell": 2964, "name": "Bolt of Woolen Cloth", "crafts": 45, "made": 1, "learn": "trainer", "learnAt": 75, "reagents": [[2592, 3]], "alts": [] },
+    { "from": 100, "to": 110, "item": 10047, "spell": 12046, "name": "Simple Kilt", "crafts": 15, "made": 1, "learn": "trainer", "learnAt": 75, "reagents": [[2996, 4], [2321, 1]],
+      "alts": [
+        { "range": [107, 115], "item": 4240, "spell": 3757, "name": "Woolen Bag", "crafts": 12, "made": 1, "learn": "trainer", "learnAt": 80, "reagents": [[2997, 3], [2321, 1]], "why": ["sells"] }
+      ] },
+    { "from": 110, "to": 125, "item": 4314, "spell": 3848, "name": "Double-stitched Woolen Shoulders", "crafts": 15, "made": 1, "learn": "trainer", "learnAt": 110, "reagents": [[2997, 3], [2321, 2]],
+      "alts": [
+        { "range": [115, 125], "item": 5763, "spell": 6688, "name": "Red Woolen Bag", "crafts": 10, "made": 1, "learn": "vendor", "learnAt": 115, "reagents": [[2997, 4], [2604, 1], [2321, 1]], "why": ["recipe", "sells"] }
+      ] },
+    { "from": 125, "to": 145, "item": 4305, "spell": 3839, "name": "Bolt of Silk Cloth", "crafts": 205, "made": 1, "learn": "trainer", "learnAt": 125, "reagents": [[4306, 4]], "alts": [] },
+    { "from": 145, "to": 160, "item": 7048, "spell": 8760, "name": "Azure Silk Hood", "crafts": 20, "made": 1, "learn": "trainer", "learnAt": 145, "reagents": [[4305, 2], [2321, 1], [6260, 2]],
+      "alts": [
+        { "range": [145, 150], "item": 5763, "spell": 6688, "name": "Red Woolen Bag", "crafts": 8, "made": 1, "learn": "vendor", "learnAt": 115, "reagents": [[2997, 4], [2604, 1], [2321, 1]], "why": ["recipe", "sells"] },
+        { "range": [150, 175], "item": 4245, "spell": 3813, "name": "Small Silk Pack", "crafts": 25, "made": 1, "learn": "trainer", "learnAt": 150, "reagents": [[4305, 3], [2321, 3], [4234, 2]], "why": ["sells"] },
+        { "range": [150, 175], "item": 4324, "spell": 3859, "name": "Azure Silk Vest", "crafts": 25, "made": 1, "learn": "trainer", "learnAt": 150, "reagents": [[4305, 5], [6260, 4]], "why": ["other"] }
+      ] },
+    { "from": 160, "to": 170, "item": 7050, "spell": 8762, "name": "Silk Headband", "crafts": 10, "made": 1, "learn": "trainer", "learnAt": 160, "reagents": [[4305, 3], [2321, 2]], "alts": [] },
+    { "from": 170, "to": 175, "item": 4334, "spell": 3871, "name": "Formal White Shirt", "crafts": 5, "made": 1, "learn": "trainer", "learnAt": 170, "reagents": [[4305, 3], [2321, 1], [2324, 2]], "alts": [] },
+    { "from": 175, "to": 185, "item": 4339, "spell": 3865, "name": "Bolt of Mageweave", "crafts": 100, "made": 1, "learn": "trainer", "learnAt": 175, "reagents": [[4338, 5]], "alts": [] },
+    { "from": 185, "to": 205, "item": 7058, "spell": 8791, "name": "Crimson Silk Vest", "crafts": 20, "made": 1, "learn": "trainer", "learnAt": 185, "reagents": [[4305, 4], [2321, 2], [2604, 2]],
+      "alts": [
+        { "item": 7053, "spell": 8786, "name": "Azure Silk Cloak", "crafts": 25, "made": 1, "learn": "vendor", "learnAt": 175, "reagents": [[4305, 3], [2321, 2], [6260, 2]], "why": ["recipe", "sells"] }
+      ] },
+    { "from": 205, "to": 215, "item": 7062, "spell": 8799, "name": "Crimson Silk Pantaloons", "crafts": 10, "made": 1, "learn": "trainer", "learnAt": 195, "reagents": [[4305, 4], [4291, 2], [2604, 2]],
+      "alts": [
+        { "range": [205, 225], "item": 9999, "spell": 12049, "name": "Black Mageweave Leggings", "crafts": 20, "made": 1, "learn": "trainer", "learnAt": 205, "reagents": [[4339, 2], [4291, 3]], "why": ["sells", "cheap"] }
+      ] },
+    { "from": 215, "to": 220, "item": 10056, "spell": 12061, "name": "Orange Mageweave Shirt", "crafts": 5, "made": 1, "learn": "trainer", "learnAt": 215, "reagents": [[4339, 1], [8343, 1], [6261, 1]], "alts": [] },
+    { "from": 220, "to": 230, "item": 10003, "spell": 12053, "name": "Black Mageweave Gloves", "crafts": 10, "made": 1, "learn": "trainer", "learnAt": 215, "reagents": [[4339, 2], [8343, 2]],
+      "alts": [
+        { "range": [225, 250], "item": 10050, "spell": 12065, "name": "Mageweave Bag", "crafts": 30, "made": 1, "learn": "trainer", "learnAt": 225, "reagents": [[4339, 4], [4291, 2]], "why": ["sells"] }
+      ] },
+    { "from": 230, "to": 250, "item": 10024, "spell": 12072, "name": "Black Mageweave Headband", "crafts": 25, "made": 1, "learn": "trainer", "learnAt": 230, "reagents": [[4339, 3], [8343, 2]], "alts": [] },
+    { "from": 250, "to": 260, "item": 14048, "spell": 18401, "name": "Bolt of Runecloth", "crafts": 155, "made": 1, "learn": "trainer", "learnAt": 250, "reagents": [[14047, 5]], "alts": [] },
+    { "from": 260, "to": 280, "item": 13856, "spell": 18402, "name": "Runecloth Belt", "crafts": 25, "made": 1, "learn": "trainer", "learnAt": 255, "reagents": [[14048, 3], [14341, 1]],
+      "alts": [
+        { "range": [260, 290], "item": 14046, "spell": 18405, "name": "Runecloth Bag", "crafts": 35, "made": 1, "learn": "vendor", "learnAt": 260, "reagents": [[14048, 5], [8170, 2], [14341, 1]], "why": ["recipe", "sells"] }
+      ] },
+    { "from": 280, "to": 300, "item": 13863, "spell": 18417, "name": "Runecloth Gloves", "crafts": 20, "made": 1, "learn": "vendor", "learnAt": 275, "reagents": [[14048, 4], [8170, 4], [14341, 1]],
+      "alts": [
+        { "item": 13856, "spell": 18402, "name": "Runecloth Belt", "crafts": null, "made": 1, "learn": "trainer", "learnAt": 255, "reagents": [[14048, 3], [14341, 1]], "why": ["other"] }
+      ] }
+  ],
+  "notes": "Icy Veins (https://www.icy-veins.com/wow-classic/classic-tailoring-profession-and-leveling-guide) returned HTTP 403 / a Cloudflare bot check, so no Icy Veins alternatives were recorded. Main path is the 'Fast Method' table on Wowhead's main tailoring guide. Most alts come from Wowhead's separate 'Bolts & Bags' budget guide, which the main guide links as the alternative path; its ranges don't line up with the main path, so those alts carry an extra 'range' [from, to] field and sit on the main step whose range contains their start. Budget-guide steps that repeat the main path's bolt recipes (linen 1-50, wool 75-107, silk 125-145, mageweave 175-185, runecloth 250-260) and its no-leather Runecloth Belt 260-290 are not duplicated as alts. Per-craft reagents for main steps are the guide's material totals divided by crafts; alt reagents are from the budget guide text and Wowhead spell pages. learnAt for recipes comes from the main guide's pattern tables, except the five cloth bolts (2963, 2964, 3839, 3865, 18401): no page gave their skill requirement, so learnAt is the guide's step start for them (1/75/125/175/250). Not confirmed. Bolt crafts (95 linen, 45 wool, 205 silk, 100 mageweave, 155 runecloth) are what the guide says to make; most are stockpiled for later steps, not for skill. Alt notes: Brown Linen Robe (45-70) comes from the main guide's line suggesting enchanters substitute it for Linen Belt (wording is ambiguous; no craft count given). Runecloth Belt on 280-300 is the main guide's fallback if you can't get Pattern: Runecloth Gloves (item 14481, limited stock from Qia in Winterspring); no count in the main guide, the budget guide says up to 45 belts for 290-300. Azure Silk Vest is the budget guide's no-leather alternative to Small Silk Pack. The budget guide links Black Mageweave Leggings as spell 439088 (which Wowhead shows creating item 217247); the main guide's table links spell 12049 / item 9999, which are recorded. Vendor patterns: Red Woolen Bag item 5772, Azure Silk Cloak item 7089, Runecloth Bag item 14468 (Qia, limited), Runecloth Gloves item 14481 (Qia, limited). The budget guide also mentions Wizardweave Leggings, Cindercloth Pants and Frostweave Pants for 285-300 (rare drop recipes) but links only their items, not spells or reagent counts, so they're not recorded."
+}

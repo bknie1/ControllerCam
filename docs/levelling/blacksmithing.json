@@ -1,0 +1,44 @@
+{
+  "kind": "blacksmithing",
+  "sources": ["https://www.wowhead.com/classic/guide/blacksmithing-leveling-1-300-wow-classic"],
+  "steps": [
+    { "from": 1, "to": 30, "item": 2862, "spell": 2660, "name": "Rough Sharpening Stone", "crafts": 40, "made": null, "learn": "trainer", "learnAt": 1, "reagents": [[2835, 1]], "alts": [] },
+    { "from": 30, "to": 65, "item": 3470, "spell": 3320, "name": "Rough Grinding Stone", "crafts": 60, "made": null, "learn": "trainer", "learnAt": null, "reagents": [[2835, 2]], "alts": [] },
+    { "from": 65, "to": 75, "item": 2863, "spell": 2665, "name": "Coarse Sharpening Stone", "crafts": 25, "made": null, "learn": "trainer", "learnAt": null, "reagents": [[2836, 1]], "alts": [] },
+    { "from": 75, "to": 90, "item": 3478, "spell": 3326, "name": "Coarse Grinding Stone", "crafts": 35, "made": null, "learn": "trainer", "learnAt": null, "reagents": [[2836, 2]], "alts": [] },
+    { "from": 90, "to": 100, "item": 2857, "spell": 2666, "name": "Runed Copper Belt", "crafts": 10, "made": null, "learn": "trainer", "learnAt": null, "reagents": [[2840, 10]], "alts": [] },
+    { "from": 100, "to": 105, "item": 6338, "spell": 7818, "name": "Silver Rod", "crafts": 5, "made": null, "learn": "trainer", "learnAt": null, "reagents": [[2842, 1], [3470, 2]], "alts": [] },
+    { "from": 105, "to": 110, "item": 2857, "spell": 2666, "name": "Runed Copper Belt", "crafts": 5, "made": null, "learn": "trainer", "learnAt": null, "reagents": [[2840, 10]], "alts": [] },
+    { "from": 110, "to": 125, "item": 2865, "spell": 2668, "name": "Rough Bronze Leggings", "crafts": 15, "made": null, "learn": "trainer", "learnAt": null, "reagents": [[2841, 6]], "alts": [] },
+    { "from": 125, "to": 140, "item": 3486, "spell": 3337, "name": "Heavy Grinding Stone", "crafts": 35, "made": null, "learn": "trainer", "learnAt": null, "reagents": [[2838, 3]], "alts": [] },
+    { "from": 140, "to": 150, "item": 2868, "spell": 2672, "name": "Patterned Bronze Bracers", "crafts": 10, "made": null, "learn": "trainer", "learnAt": null, "reagents": [[2841, 5], [3478, 2]], "alts": [] },
+    { "from": 150, "to": 155, "item": 11128, "spell": 14379, "name": "Golden Rod", "crafts": 5, "made": null, "learn": "trainer", "learnAt": null, "reagents": [[3577, 1], [3478, 2]], "alts": [] },
+    { "from": 155, "to": 165, "item": 3842, "spell": 3506, "name": "Green Iron Leggings", "crafts": 10, "made": null, "learn": "trainer", "learnAt": null, "reagents": [[3575, 8], [3486, 1], [2605, 1]], "alts": [] },
+    { "from": 165, "to": 190, "item": 3835, "spell": 3501, "name": "Green Iron Bracers", "crafts": 25, "made": null, "learn": "trainer", "learnAt": null, "reagents": [[3575, 6], [2605, 1]], "alts": [] },
+    { "from": 190, "to": 200, "item": 6040, "spell": 7223, "name": "Golden Scale Bracers", "crafts": 10, "made": null, "learn": "trainer", "learnAt": null, "reagents": [[3859, 5], [3486, 2]], "alts": [] },
+    { "from": 200, "to": 210, "item": 7966, "spell": 9920, "name": "Solid Grinding Stone", "crafts": 30, "made": null, "learn": "trainer", "learnAt": null, "reagents": [[7912, 4]], "alts": [] },
+    { "from": 210, "to": 225, "item": 7919, "spell": 9928, "name": "Heavy Mithril Gauntlet", "crafts": 15, "made": null, "learn": "trainer", "learnAt": null, "reagents": [[3860, 6], [4338, 4]], "alts": [] },
+    { "from": 225, "to": 235, "item": 7922, "spell": 9935, "name": "Steel Plate Helm", "crafts": 10, "made": null, "learn": "trainer", "learnAt": null, "reagents": [[3859, 14], [7966, 1]], "alts": [] },
+    { "from": 235, "to": 250, "item": 7931, "spell": 9961, "name": "Mithril Coif", "crafts": 15, "made": null, "learn": "trainer", "learnAt": null, "reagents": [[3860, 10], [4338, 6]],
+      "alts": [
+        { "item": 7969, "spell": 9964, "name": "Mithril Spurs", "crafts": null, "made": null, "learn": "drop", "learnAt": null, "reagents": [[3860, 4]], "why": ["recipe"] }
+      ] },
+    { "from": 250, "to": 260, "item": 12404, "spell": 16641, "name": "Dense Sharpening Stone", "crafts": 20, "made": null, "learn": "trainer", "learnAt": null, "reagents": [[12365, 1]], "alts": [] },
+    { "from": 260, "to": 270, "item": 12406, "spell": 16643, "name": "Thorium Belt", "crafts": 10, "made": null, "learn": "drop", "learnAt": null, "reagents": [[12359, 12], [11186, 4]],
+      "alts": [
+        { "from": 260, "to": 265, "item": 7933, "spell": 9968, "name": "Heavy Mithril Boots", "crafts": 7, "made": null, "learn": "trainer", "learnAt": null, "reagents": [[3860, 14], [4304, 4]], "why": ["other"] },
+        { "from": 265, "to": 270, "item": 12424, "spell": 16647, "name": "Imperial Plate Belt", "crafts": 5, "made": null, "learn": "quest", "learnAt": null, "reagents": [[12359, 22], [8170, 6], [7909, 1]], "why": ["recipe"] }
+      ] },
+    { "from": 270, "to": 275, "item": 12408, "spell": 16644, "name": "Thorium Bracers", "crafts": 5, "made": null, "learn": "drop", "learnAt": null, "reagents": [[12359, 12], [11184, 4]],
+      "alts": [
+        { "from": 270, "to": 295, "item": 12425, "spell": 16649, "name": "Imperial Plate Bracers", "crafts": 27, "made": null, "learn": "quest", "learnAt": null, "reagents": [[12359, 20], [7910, 1]], "why": ["recipe"] }
+      ] },
+    { "from": 275, "to": 290, "item": 12425, "spell": 16649, "name": "Imperial Plate Bracers", "crafts": 15, "made": null, "learn": "quest", "learnAt": null, "reagents": [[12359, 20], [7910, 1]], "alts": [] },
+    { "from": 290, "to": 300, "item": 12409, "spell": 16652, "name": "Thorium Boots", "crafts": 10, "made": null, "learn": "drop", "learnAt": null, "reagents": [[12359, 20], [8170, 8], [11185, 4]],
+      "alts": [
+        { "from": 295, "to": 300, "item": 12426, "spell": 16657, "name": "Imperial Plate Boots", "crafts": 5, "made": null, "learn": "quest", "learnAt": null, "reagents": [[12359, 34], [7910, 1], [7909, 1]], "why": ["recipe"] },
+        { "from": 290, "to": 300, "item": 12419, "spell": 16656, "name": "Radiant Boots", "crafts": 10, "made": null, "learn": "drop", "learnAt": null, "reagents": [[12359, 14], [7077, 4]], "why": ["recipe"] }
+      ] }
+  ],
+  "notes": "Icy Veins could not be read: icy-veins.com/wow-classic/classic-blacksmithing-profession-guide returns HTTP 403 to WebFetch and a Cloudflare bot check in the browser. Search snippets say that page has no 1-300 route of its own and points to wow-professions.com, so there are no Icy Veins alts. The Wowhead guide is patch 1.15.8, updated 2025/09/30. Item and spell IDs come from the guide's links, and product item IDs come from each Wowhead spell page's Create Item link. Reagent counts per craft are the guide's totals divided by its craft count, and the spell pages agree. Mithril Spurs reagents ([[3860,4]]) come from the spell page tooltip alone; the guide lists none, and there may be more (e.g. grinding stones), so check it. made: null everywhere because WebFetch never shows the number made; armour is presumably 1, but read GetTradeSkillNumMade in game. learnAt: null everywhere except Rough Sharpening Stone (1, from its spell page's 'Requires Blacksmithing (1)'), because the guide gives ranges, not recipe skill requirements, and the spell pages' Quick Facts would not render. The browser later hit Wowhead's human-verification page. learn for Imperial Plate Bracers/Belt/Boots is 'quest' because the guide says 'Plans ... is a reward from ...'; that wording looks garbled, and the guide links Imperial Plate Belt to the bracers plans (12690), so confirm. Plans item IDs from the guide: Thorium Belt 12683, Thorium Bracers 12684, Imperial Plate Bracers 12690, Thorium Boots 12693, Imperial Plate Boots 12700, Radiant Boots 12697 (all drops per guide except the Imperial ones). Alts carry their own from/to where the guide's alternative 260-300 route ranges don't line up with the main steps: 260-265 Heavy Mithril Boots, 265-270 Imperial Plate Belt, 270-295 Imperial Plate Bracers, 295-300 Imperial Plate Boots, or 290-300 Radiant Boots. The guide's main route needs dropped plans from 260 up. Ranks: Apprentice 1-75, Journeyman from 50 (char lvl 10), Expert from 125 (lvl 20), Artisan from 200-225 (lvl 35) only from Brikk Keencraft, Booty Bay. Specialisations, not in steps: Armorsmith (spell 9788) and Weaponsmith (spell 9787) at skill 200 and char level 40, via quest lines; Weaponsmith sub-specs Axesmith 17041, Swordsmith 17039, Hammersmith 17040."
+}

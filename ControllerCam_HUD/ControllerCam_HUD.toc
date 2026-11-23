@@ -2,7 +2,7 @@
 ## Title: ControllerCam: HUD for Gamepad
 ## Notes: The controller interface for the Gamepad UI: slim unit frames, party, raid and nameplate looks, cast bar, vendor and bank help.
 ## Author: bknie1
-## Version: 1.4.16
+## Version: 1.4.17
 ## X-License: MIT
 ## IconTexture: Interface\AddOns\ControllerCam\Media\icon
 ## OptionalDeps: ControllerCam
@@ -21,10 +21,12 @@ Mail.lua
 Inventory.lua
 Market.lua
 Professions.lua
+LevelGuides.lua
 Levelling.lua
 Stats.lua
 ItemInfo.lua
 AuctionPanel.lua
+Transmog.lua
 Group.lua
 CastLook.lua
 CastArt.lua
@@ -71,6 +73,7 @@ Probe.lua
 Check.lua
 Debug.lua
 Bags.lua
+Narrative.lua
 Presets.lua
 Share.lua
 Welcome.lua

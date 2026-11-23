@@ -4774,9 +4774,9 @@ class PresetsAndLayouts(unittest.TestCase):
         e = Env()
         e.ns.BuildOptions()
         rows = {r["def"].label: r for r in e.ns.optionRows.values()}
-        self.assertEqual(rows["Player frame"].page, "Frames")
+        self.assertEqual(rows["Player frame"].page, "Your frames")
         self.assertEqual(rows["Hit particles"].page, "Effects")
-        self.assertEqual(rows["Chat fades when quiet"].page, "Quests, chat and map")
+        self.assertEqual(rows["Chat fades when quiet"].page, "Chat and messages")
         self.assertTrue(rows["Nameplates"].widget.shown)
         self.assertFalse(rows["Player titles"].widget.shown)         # fine tuning: hidden
         self.assertFalse(rows["Frame size"].widget.shown)
@@ -7835,7 +7835,7 @@ class Family(unittest.TestCase):
         subs = {s.name: s for s in e.mock.subcategories.values()}
         self.assertEqual(subs["HUD"].parent.name, "ControllerCam")      # ControllerCam > HUD
         self.assertTrue(e.same(subs["Nameplates"].parent, subs["HUD"]))  # ... > HUD > Nameplates
-        self.assertTrue(e.same(subs["Frames"].parent, subs["HUD"]))
+        self.assertTrue(e.same(subs["Your frames"].parent, subs["HUD"]))
         self.assertTrue(e.ns.nested)
 
     def test_on_its_own_without_the_camera_addon(self):
@@ -11772,6 +11772,227 @@ class Mentor(unittest.TestCase):
         self.assertEqual(e.errors(), [])
 
 
+class MentorGuides(unittest.TestCase):
+    """The Mentor follows the levelling guides, offers their alternatives, and shows what the bank can make."""
+
+    GUIDE = """
+        ns.LevelGuides = { alchemy = {
+            { 1, 55, p = 118, n = 60, r = { 2447, 1 }, name = "Minor Healing Potion",
+              alts = { { p = 3382, n = 30, r = { 765, 2 }, why = { "cheap" } } } },
+            { 55, 60, p = 2455, n = 10, at = 25, r = { 785, 1, 2447, 1 }, name = "Minor Mana Potion",
+              alts = { { p = 2454, n = 8, r = { 2449, 1, 765, 1 }, why = { "useful" } } } },
+        } }
+    """
+
+    def env(self, guide=None, **kw):
+        e = Levelling().env(open=False, **kw)
+        e.lua.eval("function(ns, code) setfenv(loadstring(code), setmetatable({ ns = ns }, { __index = _G }))() end")(
+            e.ns, guide or self.GUIDE)
+        Levelling().open(e)
+        return e
+
+    def test_the_plan_follows_the_guide_and_offers_its_alternatives(self):
+        e = self.env()
+        LV = e.ns.Levelling
+        plan = LV.plan
+        self.assertTrue(plan.guide)
+        self.assertEqual(len(plan.steps), 2)
+        one, two = plan.steps[1], plan.steps[2]
+        self.assertEqual((one.rec.n, one["from"], one.to, one.crafts), ("Minor Healing Potion", 50, 55, 5))
+        self.assertEqual(one.alts[1].rec.n, "Weak Troll Blood")      # the guide's other, which you know too
+        self.assertTrue(one.alts[1].known)
+        self.assertEqual((two.rec.n, two["from"], two.to), ("Elixir of Strength", 55, 60))   # the one you know
+        self.assertGreater(two.crafts, 5)                            # (yellow: not a point every time)
+        self.assertIsNone(two.learn)
+        first = two.alts[1]                                          # the guide's own first choice, still to learn
+        self.assertEqual((first.rec.n, first.known, first.learn.at), ("Minor Mana Potion", False, 25))
+        self.assertEqual(LV.Why(first.why), "the guides' first choice")
+        self.assertEqual(plan.need[2447], 5)                         # only the chosen recipes count
+        LV.voice = 0
+        self.assertEqual(LV.Words(plan), "10 more to 60. Start with Minor Healing Potion, or Weak Troll Blood if "
+                                         "you'd rather: cheaper materials.")
+        LV.Refresh(LV)
+        texts = [plain(LV.rows[i].text.text) for i in range(1, 6)]
+        self.assertIn("Minor Healing Potion  x5", texts[0])
+        self.assertIn("or Weak Troll Blood  cheaper materials", texts[1])
+        self.assertEqual(plain(LV.rows[2].right.text), "x3")             # its 30 over 54 points, 5 of them
+        self.assertIn("Elixir of Strength", texts[2])
+        self.assertIn("or Minor Mana Potion  the guides' first choice", texts[3])
+        self.assertEqual(texts[4], "To gather or buy")
+        LV.Focus(LV, True)
+        LV.Choose(LV, 4)
+        self.assertIn("Learn it at a trainer, at 25.", plain(e.g.ControllerCamHUD_SkillPlanPanel.detail.text))
+        self.assertEqual(e.errors(), [])
+
+    def test_a_recipe_still_to_learn_and_a_stretch_of_gathering(self):
+        e = self.env("""
+            ns.LevelGuides = { alchemy = {
+                { 1, 55, p = 2455, n = 60, learn = "vendor", at = 40, r = { 785, 1 }, name = "Minor Mana Potion" },
+                { 55, 300, gather = 2447 },
+            } }
+        """)
+        LV = e.ns.Levelling
+        plan = LV.plan
+        one, two = plan.steps[1], plan.steps[2]
+        self.assertEqual((one.rec.n, one.crafts, one.learn.how), ("Minor Mana Potion", 6, "vendor"))   # 60 over 54 points, 5 of them
+        self.assertEqual((two.gather, two["from"], two.to), (2447, 55, 60))
+        LV.voice = 0
+        self.assertEqual(LV.Words(plan), "First you'll want Minor Mana Potion, from a vendor. "
+                                         "The guides start this stretch with it.")
+        LV.Refresh(LV)
+        self.assertIn("to learn", plain(LV.rows[1].text.text))
+        self.assertEqual(plain(LV.rows[2].text.text), "Gather Peacebloom")
+        plan.steps = e.lua.table_from([two])
+        self.assertEqual(LV.Words(plan), "10 more to 60. The guides send you out for Peacebloom until 60.")
+        self.assertEqual(e.errors(), [])
+
+    def test_no_guide_keeps_the_cheapest_point_by_point(self):
+        e = self.env("ns.LevelGuides = {}")
+        plan = e.ns.Levelling.plan
+        self.assertFalse(plan.guide)
+        self.assertEqual(plan.steps[1].rec.n, "Minor Healing Potion")
+        self.assertEqual(e.errors(), [])
+
+    def test_what_the_bank_can_make(self):
+        e = self.env()
+        LV, T = e.ns.Levelling, e.lua.table
+        e.mock.put(0, 1, T(id=2447, name="Peacebloom", count=3))
+        e.db.inventory["Ghostlight-Forever"].bank = e.lua.table_from({2447: 10, 765: 4})
+        e.db.skillKnown["Ghostlight-Forever"].alchemy["Rage Potion"] = 5631        # known, hidden by a filter now
+        e.db.skillMakes[5631] = T(m=1, r=e.lua.table_from({765: 1}))
+        e.mock.fire("BAG_UPDATE_DELAYED")
+        e.update(0.5)
+        LV.Focus(LV, True)
+        e.g.ControllerCamHUD_Key_Plan_PAD4.scripts.OnClick()        # Y: what the bank can make
+        self.assertEqual(LV.mode, "bank")
+        panel = e.g.ControllerCamHUD_SkillPlanPanel
+        self.assertEqual(plain(panel.title.text), "The Mentor: what your bank can make")
+        names = [e_.make.n for e_ in LV.entries.values()]
+        self.assertEqual(names, ["Minor Healing Potion", "Old Remedy", "Rage Potion", "Weak Troll Blood"])
+        self.assertEqual(plain(panel.sub.text), "4 you can make counting your bank, 4 of them only with it.")
+        self.assertEqual(plain(LV.rows[1].right.text), "3 [13]")
+        self.assertIn("Peacebloom: 3 in your bags, 10 in the bank, 1 each", plain(panel.detail.text))
+        self.assertIn("The plan", plain(panel.hint.text))
+        e.g.ControllerCamHUD_Key_Plan_PAD1.scripts.OnClick()        # (A does nothing here)
+        self.assertEqual(len(e.db.farm), 0)
+        panel.mode.scripts.OnClick(panel.mode)                       # the button back to the plan
+        self.assertEqual(LV.mode, "plan")
+        self.assertIn("The Mentor: Alchemy", plain(panel.title.text))
+        self.assertEqual(e.errors(), [])
+
+    def test_trying_a_recipe_on(self):
+        e = self.env()
+        LV = e.ns.Levelling
+        panel = e.g.ControllerCamHUD_SkillPlanPanel
+        e.lua.execute("""
+            DRESSED = nil
+            C_Item = C_Item or {}
+            C_Item.IsDressableItemByID = function(id) return id == 2454 or id == 3382 end
+            DressUpItemLink = function(link) DRESSED = link end
+            SELECTED = 3
+            GetTradeSkillSelectionIndex = function() return SELECTED end
+        """)
+        LV.Focus(LV, True)
+        self.assertIn("Try on", plain(panel.hint.text))              # the window's chosen recipe (index 3) is wearable
+        e.g.ControllerCamHUD_Key_Plan_PADRSHOULDER.scripts.OnClick()
+        self.assertEqual(e.g.DRESSED, "|Hitem:2454|h[x]|h")          # in the game's dressing room
+        e.lua.execute("SELECTED = 2")                                # a potion: nothing to wear
+        LV.Choose(LV, 1)
+        self.assertNotIn("Try on", plain(panel.hint.text))
+        before = len(e.mock.printed)
+        e.g.ControllerCamHUD_Key_Plan_PADRSHOULDER.scripts.OnClick()
+        self.assertIn("Nothing here to try on.", "\n".join(said(e, before)))
+        LV.Choose(LV, 2)                                             # the row of Weak Troll Blood (made wearable here)
+        e.g.ControllerCamHUD_Key_Plan_PADRSHOULDER.scripts.OnClick()
+        self.assertIn("3382", e.g.DRESSED)
+        self.assertEqual(e.errors(), [])
+
+    def test_l3_puts_the_panel_away_and_brings_it_back(self):
+        e = self.env()
+        LV = e.ns.Levelling
+        panel, tab = e.g.ControllerCamHUD_SkillPlanPanel, e.g.ControllerCamHUD_SkillPlanTab
+        self.assertIn("twice to hide", plain(panel.hint.text))
+        e.g.ControllerCamHUD_Key_PlanKey_PADLSTICK.scripts.OnClick()      # L3: the plan's buttons
+        self.assertTrue(LV.focus)
+        self.assertIn("Hide", plain(panel.hint.text))
+        e.g.ControllerCamHUD_Key_Plan_PADLSTICK.scripts.OnClick()         # L3 again: put away
+        self.assertFalse(panel.shown)
+        self.assertTrue(tab.shown)                                    # its tab says how to bring it back
+        self.assertIn("The Mentor", plain(tab.text.text))
+        self.assertTrue(e.same(tab.points[1][2], e.window))
+        self.assertTrue(e.db.skillPlanHidden)
+        e.g.TradeSkillFrame.shown = False                             # the window closes, and opens again later
+        e.mock.fire("TRADE_SKILL_CLOSE")
+        e.update(1)
+        self.assertFalse(tab.shown)
+        again = Env(db=e.mock.serialize(e.g.ControllerCamHUDDB))     # remembered across a reload
+        self.assertTrue(again.db.skillPlanHidden)
+        e.g.TradeSkillFrame.shown = True
+        e.mock.fire("TRADE_SKILL_SHOW")
+        e.update(0.5)
+        self.assertFalse(panel.shown)
+        self.assertTrue(tab.shown)
+        e.g.ControllerCamHUD_Key_PlanKey_PADLSTICK.scripts.OnClick()      # L3: back
+        self.assertTrue(panel.shown)
+        self.assertFalse(tab.shown)
+        self.assertFalse(e.db.skillPlanHidden)
+        panel.close.scripts.OnClick(panel.close)                      # (or with a mouse: its x)
+        self.assertFalse(panel.shown)
+        tab.scripts.OnClick(tab)
+        self.assertTrue(panel.shown)
+        self.assertEqual(e.errors(), [])
+
+    def test_the_guides_cover_every_profession_to_300(self):
+        import subprocess
+        import sys
+        maker = os.path.join(ROOT, "docs", "levelling", "make_guides.py")
+        run = subprocess.run([sys.executable, maker, "--check"], capture_output=True, text=True)
+        self.assertEqual(run.returncode, 0, run.stdout)              # no gaps, no recipe without an ID
+        e = Env()
+        guides = e.ns.LevelGuides
+        for kind in ("alchemy", "blacksmithing", "enchanting", "engineering", "leatherworking", "tailoring",
+                     "cooking", "firstaid", "mining"):
+            steps = list(guides[kind].values())
+            self.assertEqual(steps[0][1], 1, kind)
+            self.assertEqual(steps[-1][2], 300, kind)
+            for a, b in zip(steps, steps[1:]):
+                self.assertEqual(a[2], b[1], kind)                    # each stretch starts where the last ends
+            for st in steps:
+                self.assertTrue(st.gather or st.p or st.s, kind)
+                for alt in (st.alts.values() if st.alts else []):
+                    self.assertTrue(alt.gather or alt.p or alt.s, kind)
+        self.assertTrue(guides.enchanting[1].s)                       # (an enchant is matched by its spell)
+
+    def test_mining_goes_by_the_veins(self):
+        e = self.env("ns.LevelGuides = { alchemy = { { 1, 300, gather = 2447, alts = { { gather = 765 },"
+                     " { p = 118, n = 300, r = { 2447, 1 }, why = { 'gathered' } } } } } }")
+        LV = e.ns.Levelling
+        step = LV.plan.steps[1]
+        self.assertEqual((step.gather, step.alts[1].gather, step.alts[2].rec.n), (2447, 765, "Minor Healing Potion"))
+        self.assertEqual(step.alts[2].crafts, 11)                     # 300 over 299 points, 10 of them
+        LV.Refresh(LV)
+        self.assertEqual(plain(LV.rows[1].text.text), "Gather Peacebloom")
+        self.assertEqual(plain(LV.rows[2].text.text), "or Gather Silverleaf")
+        self.assertIn("or Minor Healing Potion  materials you gather yourself", plain(LV.rows[3].text.text))
+        self.assertEqual(e.errors(), [])
+
+    def test_the_title_takes_the_lines_it_needs(self):
+        e = self.env()
+        LV = e.ns.Levelling
+        panel = e.g.ControllerCamHUD_SkillPlanPanel
+        small = LV.layout.top
+        e.db.textScale = 2.4                                         # big text: the title wraps
+        LV.read.name = "Alchemy of the Long Name"
+        LV.plan.name = LV.read.name
+        LV.Refresh(LV)
+        title = LV.TextHeight(panel.title, 12)
+        self.assertGreater(title, 14)
+        self.assertGreaterEqual(LV.layout.top, 8 + title + 4 + LV.TextHeight(panel.sub, 9) + 8)
+        self.assertGreater(LV.layout.top, small)
+        self.assertEqual(LV.rows[1].points[1][5], -LV.layout.top)
+        self.assertEqual(e.errors(), [])
+
+
 class FarmList(unittest.TestCase):
     """Things to farm, beside the quest list."""
 
@@ -11860,7 +12081,7 @@ class FarmList(unittest.TestCase):
         e.ns.BuildOptions()
         row = [r for r in e.ns.optionRows.values() if r["def"].key == "farmSide"][0]
         self.assertEqual(len(row.buttons), 3)
-        self.assertEqual(row.page, "Quests, chat and map")
+        self.assertEqual(row.page, "Quests and map")
         row.buttons[2].scripts.OnClick()
         self.assertEqual(e.db.farmSide, 2)
         self.assertTrue(row.buttons[2].chosen)                       # the chosen one stands out,
@@ -14255,6 +14476,35 @@ class BagWindow(unittest.TestCase):
         self.fight(e, False)
         self.assertEqual(e.errors(), [])
 
+    def test_at_a_vendor_the_vendors_tooltip_stays_while_the_bags_redraw(self):
+        e = self.env()
+        e.lua.execute("""
+            MerchantFrame = CreateFrame("Frame", "MerchantFrame", UIParent)
+            MerchantItem1ItemButton = CreateFrame("Button", "MerchantItem1ItemButton", MerchantFrame)
+            GamepadMode = { FrameControlsManager = { focusedFrame = MerchantFrame, isUIFocused = true,
+                                                     shownFrames = { MerchantFrame, ContainerFrameCombinedBags } } }
+        """)
+        e.mock.fire("MERCHANT_SHOW")
+        e.g.OpenAllBags()
+        B, tip = e.ns.Bags, e.g.GameTooltip
+        e.update(0.05)
+        self.assertFalse(B.hasPad)                                   # the controller on the vendor's window
+        tip.SetOwner(tip, e.g.MerchantItem1ItemButton, "ANCHOR_RIGHT")   # the game: the vendor item's tooltip
+        tip.SetText(tip, "Coarse Thread")
+        tip.Show(tip)
+        for _ in range(3):
+            e.mock.fire("BAG_UPDATE_DELAYED")                        # a sale: the bags redraw
+            e.mock.advance(0.2)
+        self.assertTrue(tip.shown)
+        self.assertTrue(e.same(tip.owner, e.g.MerchantItem1ItemButton))   # still the vendor's
+        e.mock.keysDown.PADRTRIGGER = True                           # RT: the bags again, and their tooltip
+        e.g.GamepadMode.FrameControlsManager.focusedFrame = e.g.ContainerFrameCombinedBags
+        e.update(0.25)
+        e.mock.keysDown.PADRTRIGGER = False
+        self.assertTrue(B.hasPad)
+        self.assertTrue(e.same(tip.owner, B.frame))
+        self.assertEqual(e.errors(), [])
+
     def test_lt_or_rt_hands_the_controller_over_where_the_game_has_no_window_that_way(self):
         # (no Gamepad UI manager to follow, as on a client without one: the press itself hands it over)
         e = self.env()
@@ -14371,6 +14621,47 @@ class BagWindow(unittest.TestCase):
         self.assertEqual((B.view, B.index), ("bank", 2))             # where you were there
         self.assertEqual(e.errors(), [])
 
+    def test_at_the_bank_the_controller_follows_the_games_focus_to_its_bank_window(self):
+        e = self.env()
+        e.lua.execute("""
+            MOCK_BANK = {}; BankFrame = CreateFrame('Frame', 'BankFrame', UIParent)
+            GamepadMode = { FrameControlsManager = { focusedFrame = ContainerFrameCombinedBags, isUIFocused = true,
+                                                     shownFrames = { BankFrame, ContainerFrameCombinedBags } } }
+        """)
+        e.mock.bags[-1] = e.g.MOCK_BANK
+        T = e.lua.table
+        e.mock.put(-1, 1, T(id=301, name="Silk Cloth", quality=1, price=40, count=20, **{"class": 7}))
+        e.mock.openBank(True)
+        e.g.OpenAllBags()
+        B, o, m = e.ns.Bags, e.mock.overrides, e.g.GamepadMode.FrameControlsManager
+        e.update(0.05)
+        self.assertTrue(B.hasPad)                                    # the game's focus on its bags: ours
+        self.assertEqual(B.view, "bags")
+        self.assertIn("PADLTRIGGER or PADRTRIGGER: to the bank", plain(B.frame.legend.text))
+        self.press(e, "PADBACK")                                     # the back button: the bank in this window
+        self.assertEqual(B.view, "bank")
+        self.assertTrue(B.hasPad)
+        e.mock.keysDown.PADLTRIGGER = True                           # LT: the game moves its focus to its bank
+        m.focusedFrame = e.g.BankFrame
+        e.update(0.25)
+        self.assertFalse(B.hasPad)                                   # its window's own buttons now
+        self.assertEqual(B.view, "bags")                             # (the bank is there, beside: ours is your bags)
+        for key in ("PAD1", "PAD2", "PAD3", "PADDUP", "PADDRIGHT"):
+            self.assertIsNone(o[key], key)
+        self.assertIn("back to bags", plain(B.frame.legend.text))
+        e.mock.keysDown.PADLTRIGGER = False
+        e.update(0.05)
+        self.assertFalse(B.hasPad)                                   # (never toggled out of step)
+        e.mock.keysDown.PADRTRIGGER = True                           # RT: back to its bags, so ours
+        m.focusedFrame = e.g.ContainerFrameCombinedBags
+        e.update(0.25)
+        self.assertTrue(B.hasPad)
+        self.assertEqual(o.PADDUP, "CLICK ControllerCamHUD_BagNav_PADDUP:LeftButton")
+        e.mock.keysDown.PADRTRIGGER = False
+        e.update(0.05)
+        self.assertEqual(B.view, "bags")
+        self.assertEqual(e.errors(), [])
+
     def test_the_bank_in_the_same_window(self):
         e = self.env()
         e.lua.execute("MOCK_BANK = {}")
@@ -14392,6 +14683,35 @@ class BagWindow(unittest.TestCase):
         e.mock.advance(0.1)
         self.assertEqual(B.view, "bags")
         self.assertIsNone(e.mock.overrides.PADBACK)
+        self.assertEqual(e.errors(), [])
+
+    def test_y_tries_gear_on_in_the_dressing_room(self):
+        e = self.env()
+        tried = e.lua.table()
+        e.g.IsDressableItem = e.lua.eval("function(link) return link:find('Helm', 1, true) ~= nil end")
+        e.g.DressUpItemLink = e.lua.eval("function(t) return function(link) t[#t + 1] = link end end")(tried)
+        e.g.ToggleAllBags()
+        B = e.ns.Bags
+        helm = [i for i, x in enumerate(B.list.values()) if x.link and "Helm" in x.link]
+        cloth = [i for i, x in enumerate(B.list.values()) if x.link and "Helm" not in x.link]
+        if not helm:                                                   # (gear of our own in the first slot)
+            x = B.list[1]
+            x.link = "|cff1eff00|Hitem:3836::|h[Green Iron Helm]|h|r"
+            helm = [0]
+        B.index = helm[0] + 1
+        self.press(e, "PAD4")
+        texts = [c.text for c in B.menu.values()]
+        self.assertIn("Try on", texts)
+        pick = [i for i, c in B.menu.items() if c.text == "Try on"][0]
+        B.menu[pick].fn()
+        self.assertEqual(len(tried), 1)
+        self.assertIn("Helm", tried[1])
+        self.press(e, "PAD2")
+        other = [i for i in cloth if i != helm[0]]
+        if other:
+            B.index = other[0] + 1
+            self.press(e, "PAD4")
+            self.assertNotIn("Try on", [c.text for c in B.menu.values()])   # not for cloth or ore
         self.assertEqual(e.errors(), [])
 
     def test_y_splits_a_stack_marks_an_item_and_sorts(self):
@@ -16216,6 +16536,596 @@ class TestFileShape(unittest.TestCase):
         text = open(os.path.abspath(__file__), encoding="utf-8").read().rstrip()
         self.assertTrue(text.endswith('if __name__ == "__main__":' + chr(10) + '    unittest.main()'))
         self.assertEqual(len(re.findall(r"(?m)^\s*unittest\.main\(", text)), 1)   # (the one call: at the end)
+
+
+class OptionsLayout(unittest.TestCase):
+    """Every setting on the page you would look for it on, under a heading that says what it is."""
+
+    def defs(self, e):
+        out = []
+        for i in range(1, 5000):
+            d = e.ns.settings[i]
+            if d is None:
+                break
+            if d.label and d.key != "advancedOptions":
+                out.append(d)
+        return out
+
+    def test_every_setting_has_its_place(self):
+        e = Env()
+        place = e.ns.OptionsLook.PlaceOf
+        missing = [d.key or d.id or d.label for d in self.defs(e) if not place(d)]
+        self.assertEqual(missing, [])                                # none falls to the end of a page
+
+    def test_every_name_in_the_layout_is_a_setting(self):
+        e = Env()
+        names = set()
+        for d in self.defs(e):
+            names.update(n for n in (d.key, d.id, d.label) if n)
+        pages = list(e.ns.OptionsLook.PAGES.values())
+        for p in e.ns.OptionsLook.LAYOUT.values():
+            self.assertTrue(p.page == "General" or p.page in pages, p.page)
+            for g in p.groups.values():
+                for k, name in g.items():
+                    if k != "head":
+                        self.assertIn(name, names)                      # (no typo leaves a setting unplaced)
+
+    def test_the_aiming_dot_has_its_own_place(self):
+        e = Env()
+        e.ns.BuildOptions()
+        rows = {r["def"].label: r for r in e.ns.optionRows.values()}
+        for label in ("Aiming dot", "Aiming dot: colour", "Aiming dot: size", "Aiming dot: opacity"):
+            self.assertEqual(rows[label].page, "Camera and aiming", label)
+        self.assertTrue(rows["Aiming dot"].widget.shown)             # found without the advanced options
+        self.assertEqual(rows["Controller vibration"].page, "Vibration")
+        self.assertEqual(rows["Flights: a game on the way"].page, "Flights")
+        self.assertEqual(rows["Market tab at the auction house"].page, "Items and auction house")
+        self.assertEqual(rows["Target of target"].page, "Target, party and raid")
+        self.assertEqual(e.errors(), [])
+
+    def test_headings_show_with_what_is_under_them(self):
+        e = Env()
+        e.ns.BuildOptions()
+        rows = {r["def"].label: r for r in e.ns.optionRows.values()}
+        # the camera page: "Aiming dot" heading shown (its first row is basic), "Camera" hidden until advanced
+        content = rows["Aiming dot"].widget.parent
+        texts = {fs.text: fs for fs in e.lua.eval("function(f) return {f:GetRegions()} end")(content).values()
+                 if fs.kind == "FontString"}
+        self.assertTrue(texts["Aiming dot"].shown)
+        self.assertFalse(texts["Camera"].shown)
+        cb = rows["Show advanced options"].widget
+        cb.checked = True
+        cb.scripts.OnClick(cb)
+        self.assertTrue(texts["Camera"].shown)
+        self.assertTrue(rows["Presets set the camera distance"].widget.shown)
+        self.assertEqual(e.errors(), [])
+
+
+class TransmogSets(unittest.TestCase):
+    """The Transmogrify window's own Sets tab (hidden in this client), filled with the sets of your collection."""
+
+    GREEN = [(1, "Helm"), (2, "Shoulders"), (7, "Bracers"), (8, "Gauntlets"), (9, "Belt"), (10, "Leggings"), (11, "Boots")]
+
+    def env(self, have=4, **kw):
+        e = Env(**kw)
+        for i, (cat, piece) in enumerate(self.GREEN):                # the first `have` of them collected
+            e.mock.tmItem(cat, 100 + i, 200 + i, "Green Iron " + piece, i < have)
+        return e
+
+    def bear(self, e):
+        for i, (cat, piece) in enumerate([(1, "Helm"), (8, "Gloves"), (11, "Boots")]):
+            e.mock.tmItem(cat, 300 + i, 400 + i, piece + " of the Bear", True)
+
+    def open_sets(self, e):
+        win = e.mock.openTransmog()
+        w = win.WardrobeCollection
+        w.SetTab(w, 2)                                               # (RB from Items)
+        e.update(1)
+        return e.ns.TransmogSets
+
+    def slot(self, e, n):
+        return e.mock.tm.slots[n]
+
+    def press_x(self, e):
+        e.g.ControllerCamHUD_Key_TransmogSets_PAD3.scripts.OnClick()
+
+    def test_the_games_hidden_sets_tab_shows_where_it_belongs_and_its_page_is_ours(self):
+        e = self.env()
+        win = e.mock.openTransmog()
+        w = win.WardrobeCollection
+        self.assertEqual([t.shown for t in w.TabHeaders.tabs.values()], [True, True, True, True])
+        self.assertTrue(e.mock.tm.updateTabs >= 2)                   # (the game's own UpdateTabs ran: we only add on)
+        page = w.TabContent.SetsFrame
+        TS = e.ns.TransmogSets
+        self.assertTrue(e.same(TS.panel.parent, page))               # our list lives in the tab's own page
+        self.assertEqual(page.PagedContent.alpha, 0)                 # the game's empty one out of sight
+        self.assertTrue(e.mock.tm.ignored[page.PagedContent])        # and out of the cursor's reach
+        self.assertIsNone(e.mock.overrides["PAD3"])                  # X is ours only while the Sets page shows
+        w.SetTab(w, 2)
+        self.assertEqual(e.mock.overrides["PAD3"], "CLICK ControllerCamHUD_Key_TransmogSets_PAD3:LeftButton")
+        w.SetTab(w, 3)                                               # RB on to Custom Sets: X is the game's again
+        self.assertIsNone(e.mock.overrides["PAD3"])
+        self.assertEqual(e.errors(), [])
+
+    def test_sets_come_from_the_item_names_and_say_what_is_missing(self):
+        e = self.env()
+        self.bear(e)
+        e.mock.tmItem(1, 500, 600, "Boots of Speed", True)           # a name nothing else shares: no set
+        TS = self.open_sets(e)
+        sets = [(s.name, s.have, s.total) for s in TS.sets.values()]
+        self.assertEqual(sets, [("... of the Bear", 3, 3), ("Green Iron", 4, 7)])   # whole sets first
+        green = TS.rows[2]
+        self.assertEqual(green.name.text, "Green Iron")
+        self.assertEqual(green.count.text, "4 of 7 pieces")
+        self.assertEqual(green.missing.text, "Missing: Waist, Legs, Feet")
+        self.assertEqual(TS.rows[1].count.text, "All 3 pieces")
+        self.assertEqual(TS.rows[1].missing.text, "")
+        self.assertEqual(plain(TS.panel.status.text), "2 sets you have pieces of")
+        green.scripts.OnEnter(green)                                 # the cursor on it: its pieces, below
+        lines = [fs.text for fs in TS.panel.pane.lines.values() if fs.shown]
+        self.assertEqual(lines[0], "Head:  Green Iron Helm")
+        self.assertEqual(lines[4], "Waist:  Green Iron Belt  (missing)")
+        self.assertEqual(len(lines), 7)
+        self.assertEqual(TS.panel.pane.title.text, "Green Iron")
+        self.assertEqual(e.errors(), [])
+
+    def test_the_cursor_goes_to_the_first_set_with_the_games_own_call(self):
+        e = self.env()
+        TS = self.open_sets(e)
+        nav = e.mock.tm.nav
+        self.assertGreaterEqual(len(nav), 1)
+        last = nav[len(nav)]
+        self.assertTrue(e.same(last.frame, e.g.TransmogFrame))
+        self.assertTrue(e.same(last.button, TS.rows[1]))
+
+    def test_picking_a_set_puts_on_only_what_you_have_and_keeps_nothing(self):
+        e = self.env()
+        TS = self.open_sets(e)
+        row = TS.rows[1]
+        row.scripts.OnClick(row)                                     # A on it
+        log = [tuple(x.values()) for x in e.mock.tm.setLog.values()]
+        self.assertEqual(log, [(0, 0, 0, 200, 1), (1, 0, 0, 201, 1), (7, 0, 0, 202, 1), (8, 0, 0, 203, 1)])
+        for n in (0, 1, 7, 8):
+            self.assertEqual(self.slot(e, n).saved, 0)               # nothing kept, nothing paid: that is Apply
+        self.assertIsNone(e.mock.tm.slots[9])                        # a missing piece leaves its slot alone
+        self.assertEqual(plain(TS.panel.status.text), "Green Iron: 4 of 7 pieces put on.")
+        self.assertIn("Apply keeps it", TS.panel.hint.text)
+        self.assertTrue(TS.panel.undo.enabled)
+        self.assertTrue(row.worn.shown)
+        e.update(0.5)                                                # every piece took: the line stays
+        self.assertEqual(plain(TS.panel.status.text), "Green Iron: 4 of 7 pieces put on.")
+        self.assertEqual(e.errors(), [])
+
+    def test_the_slots_option_is_the_one_the_window_shows(self):
+        e = self.env()
+        e.mock.tm.options[7] = 12                                    # (the wrist slot on another option)
+        TS = self.open_sets(e)
+        TS.rows[1].scripts.OnClick(TS.rows[1])
+        wrist = [x for x in e.mock.tm.setLog.values() if x[1] == 7][0]
+        self.assertEqual(wrist[3], 12)
+
+    def test_x_puts_back_what_the_slots_had_before(self):
+        e = self.env()
+        O = e.g.C_TransmogOutfitInfo
+        O.SetPendingTransmog(0, 0, 0, 999, 1)                        # a change of yours on the head, not yet kept
+        e.mock.tm.slots[7] = e.lua.table(saved=555, shown=1)         # the wrist as it was kept
+        TS = self.open_sets(e)
+        TS.rows[1].scripts.OnClick(TS.rows[1])
+        self.assertEqual(self.slot(e, 0).pending, 200)
+        self.press_x(e)
+        self.assertEqual(self.slot(e, 0).pending, 999)               # your own change, back
+        self.assertIsNone(self.slot(e, 7).pending)                   # the wrist as it was kept
+        self.assertEqual(self.slot(e, 7).saved, 555)
+        self.assertIsNone(self.slot(e, 1).pending)
+        self.assertEqual(plain(TS.panel.status.text), "Your outfit is back as it was.")
+        self.assertFalse(TS.panel.undo.enabled)
+        n = len(e.mock.tm.setLog)
+        self.press_x(e)                                              # nothing more to undo: nothing happens
+        self.assertEqual(len(e.mock.tm.setLog), n)
+        self.assertEqual(e.errors(), [])
+
+    def test_two_sets_then_undo_goes_back_to_before_the_first(self):
+        e = self.env()
+        self.bear(e)
+        TS = self.open_sets(e)
+        green = [r for r in TS.rows.values() if r.name.text == "Green Iron"][0]
+        bear = [r for r in TS.rows.values() if r.name.text == "... of the Bear"][0]
+        green.scripts.OnClick(green)
+        bear.scripts.OnClick(bear)                                   # the head and hands again, and the feet
+        self.assertEqual(self.slot(e, 0).pending, 400)
+        TS.panel.undo.scripts.OnClick(TS.panel.undo)                 # the button does what X does
+        for n in (0, 1, 7, 8, 11):
+            self.assertIsNone(self.slot(e, n).pending, n)
+        self.assertEqual(e.errors(), [])
+
+    def test_after_apply_there_is_nothing_to_undo(self):
+        e = self.env()
+        TS = self.open_sets(e)
+        TS.rows[1].scripts.OnClick(TS.rows[1])
+        e.g.C_TransmogOutfitInfo.CommitAndApplyAllPending()          # the game's own Apply: kept and paid
+        TS.Refresh(TS)
+        self.assertFalse(TS.panel.undo.enabled)
+        self.press_x(e)
+        self.assertEqual(len(e.mock.tm.reverted), 0)                 # taking it back would cost again
+        self.assertEqual(self.slot(e, 0).saved, 200)
+
+    def test_another_outfit_has_nothing_to_undo(self):
+        e = self.env()
+        TS = self.open_sets(e)
+        TS.rows[1].scripts.OnClick(TS.rows[1])
+        e.mock.tm.outfit = 2                                         # Outfit 2 chosen on the left
+        self.assertFalse(TS.CanUndo(TS))
+        self.press_x(e)
+        self.assertEqual(len(e.mock.tm.reverted), 0)
+
+    def test_a_slot_the_game_will_not_take_is_counted(self):
+        e = self.env()
+        e.mock.tm.refuse[8] = True                                   # the hands keep what they show
+        e.mock.tm.locked[7] = True                                   # the wrist cannot be changed at all
+        TS = self.open_sets(e)
+        TS.rows[1].scripts.OnClick(TS.rows[1])
+        e.update(0.5)
+        self.assertEqual(plain(TS.panel.status.text), "Green Iron: 2 of 7 pieces put on. 2 would not go on this outfit.")
+        self.assertEqual(e.errors(), [])
+
+    def test_closing_the_window_forgets_the_undo(self):
+        e = self.env()
+        TS = self.open_sets(e)
+        TS.rows[1].scripts.OnClick(TS.rows[1])
+        e.mock.closeTransmog()                                       # the game throws the changes away
+        self.assertIsNone(TS.before)
+        self.assertIsNone(e.mock.overrides["PAD3"])
+        TS = self.open_sets(e)
+        self.assertFalse(TS.panel.undo.enabled)
+        self.assertEqual(plain(TS.panel.status.text), "One set you have pieces of")
+        self.assertEqual(e.errors(), [])
+
+    def test_the_games_own_sets_are_listed_too(self):
+        e = self.env(have=0)
+        tm = e.mock.tm
+        for i, (cat, name) in enumerate(((1, "Shadowy Mask"), (4, "Black Tunic"), (10, "Dark Pants"))):
+            e.mock.tmItem(cat, 700 + i, 800 + i, name, i < 2)        # names that share nothing: the game's set only
+        T = e.lua.table
+        tm.gameSets = T(T(setID=7, name="Defias Leather", description="Normal", validForCharacter=True),
+                        T(setID=8, name="Not For You", validForCharacter=False))
+        tm.setSources[7] = T(800, 801, 802)
+        tm.setSources[8] = T(800)
+        TS = self.open_sets(e)
+        names = [(s.name, s.have, s.total) for s in TS.sets.values()]
+        self.assertEqual(names, [("Defias Leather (Normal)", 2, 3)])  # (Green Iron: none of it is yours)
+        TS.rows[1].scripts.OnClick(TS.rows[1])
+        self.assertEqual(self.slot(e, 0).pending, 800)
+        self.assertEqual(self.slot(e, 4).pending, 801)
+        self.assertEqual(e.errors(), [])
+
+    def test_when_the_game_has_sets_of_its_own_it_keeps_its_tab(self):
+        e = self.env()
+        e.mock.tm.validSets = True
+        win = e.mock.openTransmog()
+        w = win.WardrobeCollection
+        self.assertTrue(w.TabHeaders.tabs[2].shown)                  # shown by the game itself
+        self.assertIsNone(e.ns.TransmogSets.panel)                   # and its page is its own
+        self.assertEqual(w.TabContent.SetsFrame.PagedContent.alpha, 1)
+        self.assertEqual(e.errors(), [])
+
+    def test_switched_off_the_tab_and_its_page_are_the_games_again(self):
+        e = self.env()
+        TS = self.open_sets(e)
+        w = e.g.TransmogFrame.WardrobeCollection
+        e.cmd("transmogsets off")
+        self.assertFalse(w.TabHeaders.tabs[2].shown)
+        self.assertEqual(w.TabContent.SetsFrame.PagedContent.alpha, 1)
+        self.assertIsNone(e.mock.tm.ignored[w.TabContent.SetsFrame.PagedContent])
+        self.assertFalse(TS.panel.shown)
+        self.assertIsNone(e.mock.overrides["PAD3"])
+        e.mock.closeTransmog()
+        e.mock.openTransmog()
+        self.assertFalse(w.TabHeaders.tabs[2].shown)                 # as the game keeps it
+        e.cmd("transmogsets on")
+        e.mock.closeTransmog()
+        e.mock.openTransmog()
+        self.assertTrue(w.TabHeaders.tabs[2].shown)
+        self.assertTrue(TS.panel.shown)
+        self.assertEqual(e.errors(), [])
+
+    def test_outside_the_gamepad_ui_the_window_is_the_games(self):
+        e = self.env(style="0")
+        win = e.mock.openTransmog()
+        self.assertFalse(win.WardrobeCollection.TabHeaders.tabs[2].shown)
+        self.assertEqual(e.errors(), [])
+
+    def test_a_new_appearance_reads_the_collection_again(self):
+        e = self.env()
+        TS = self.open_sets(e)
+        self.assertEqual(TS.sets[1].have, 4)
+        e.mock.tm.appearances[9][1].isCollected = True              # the belt learned
+        e.mock.tm.sources[104][1].isCollected = True
+        e.mock.fire("TRANSMOG_COLLECTION_UPDATED")
+        e.update(1)
+        self.assertEqual(TS.sets[1].have, 5)
+        self.assertEqual(TS.rows[1].count.text, "5 of 7 pieces")
+
+    def test_a_look_you_have_through_another_item_counts(self):
+        e = self.env(have=0)
+        e.mock.tmItem(1, 100, 900, "Plain Helm", True)               # the Green Iron Helm's look, from another helm
+        TS = self.open_sets(e)
+        self.assertEqual([(s.name, s.have) for s in TS.sets.values()], [("Green Iron", 1)])
+        TS.rows[1].scripts.OnClick(TS.rows[1])
+        self.assertEqual(self.slot(e, 0).pending, 900)               # put on through the item you have
+
+    def test_names_in_other_languages(self):
+        e = Env()
+        TS = e.ns.TransmogSets
+        keys = [k.show for k in TS.Keys("Heaume en fer vert").values()]
+        self.assertEqual(keys, ["Heaume en fer", "... en fer vert"])
+        keys = [k.show for k in TS.Keys("绿铁头盔").values()]
+        self.assertEqual(keys, ["绿铁头", "绿铁"])
+        items = e.lua.table_from([e.lua.table(name=n, slot=s, have=True) for n, s in
+                                  (("Heaume en fer vert", 0), ("Gantelets en fer vert", 8), ("Bottes en fer vert", 11),
+                                   ("绿铁头盔", 0), ("绿铁护手", 8), ("绿铁战靴", 11))])
+        names = sorted(s.name for s in TS.GroupByName(items).values())
+        self.assertEqual(names, ["... en fer vert", "绿铁"])
+
+    def appearance(self, e, item):
+        lines = [[plain(x) for x in l.values()] for l in e.mock.itemTooltip(item).values()]
+        return [l for l in lines if l[0] == "Appearance"]
+
+    def test_item_tooltips_say_whether_the_look_is_collected(self):
+        e = self.env(have=1)                                         # the Green Iron Helm's look is yours
+        e.mock.tmItem(2, 101, 950, "Plain Shoulders", True)          # the shoulders' look, through another item
+        self.assertEqual(self.appearance(e, 200 + 50000), [["Appearance", "collected"]])
+        self.assertEqual(self.appearance(e, 201 + 50000), [["Appearance", "collected from another item"]])
+        self.assertEqual(self.appearance(e, 202 + 50000), [["Appearance", "not collected yet"]])
+        self.assertEqual(self.appearance(e, 2589), [])               # (linen cloth: no look to collect)
+        e.cmd("tipappearance off")
+        self.assertEqual(self.appearance(e, 200 + 50000), [])
+        self.assertEqual(e.errors(), [])
+
+    def test_a_tooltip_look_the_game_keeps_secret_says_nothing(self):
+        e = self.env(have=1)
+        e.lua.execute("""
+            local real = C_TransmogCollection.GetItemInfo
+            C_TransmogCollection.GetItemInfo = function(item) local a, s = real(item); return a and { secret = true }, s end
+        """)
+        self.assertEqual(self.appearance(e, 200 + 50000), [])
+        self.assertEqual(e.errors(), [])
+
+    def test_the_debug_report_says_what_it_found(self):
+        e = self.env()
+        self.open_sets(e)
+        rows = list(e.ns.TransmogSets.Describe().values())
+        self.assertIn("its Sets tab found true, shown true (by us true)", rows[1])
+        self.assertIn("1 sets", rows[2])
+
+
+class Narrative(unittest.TestCase):
+    """Every window the HUD improves has someone in it who helps: you over your bags, the vendor, the banker, the
+    Postmaster, the flight master, the Broker, The Mentor. One switch makes them all plain and quiet."""
+
+    def test_one_switch_on_by_default_under_its_own_heading(self):
+        e = Env()
+        self.assertTrue(e.db.narrative)
+        place = e.ns.OptionsLook.PlaceOf(next(d for d in e.ns.settings.values() if d.key == "narrative"))
+        self.assertEqual((place.page, place.group.head), ("General", "Narrative"))
+        self.assertTrue(e.ns.BASIC_OPTIONS["Narrative: characters in the windows"])   # (no advanced options needed)
+        e.cmd("narrative off")
+        self.assertFalse(e.db.narrative)
+        self.assertFalse(e.ns.Narrative.On())
+        e.cmd("narrative on")
+        self.assertTrue(e.ns.Narrative.On())
+        self.assertEqual(e.errors(), [])
+
+    def test_your_bags_you_mutter_over_in_your_races_way(self):
+        e = BagWindow().env(extra="function UnitRace() return 'Dwarf', 'Dwarf' end")
+        N = e.ns.Narrative
+        e.g.ToggleAllBags()
+        s = N.bagState
+        self.assertEqual((s.free, s.junk, s.junkWorth), (75, 1, 50))           # five of 80 slots used, a Broken Fang
+        said = N.Said("bags")
+        self.assertTrue(said.startswith("Och, what a heap. "), said)            # a dwarf's grumble: there is junk
+        self.assertEqual(said, "Och, what a heap. " + N.BagWords(s)[0])
+        card = e.g.ControllerCamHUD_Speaker_bags
+        self.assertTrue(e.same(card.parent, e.g.ControllerCamHUD_Bags))         # it goes with the window
+        self.assertEqual(card.name.text, "Ghostlight")                          # you
+        self.assertEqual(card.portrait["from"], "model")                       # the game's model of you
+        e.g.UnitRace = e.lua.eval("function() return 'Ork', 'MagharOrc' end")    # kin speak alike
+        self.assertTrue(N.Mutter("x", True).startswith("Bah. Too much clutter."))
+        self.assertTrue(N.Mutter("x").startswith("Hm. Enough to fight with."))   # nothing to sell: no grumbling
+        e.g.UnitRace = e.lua.eval("function() return 'Fox', 'Vulpera' end")      # a race without a voice: plain
+        self.assertEqual(N.Mutter("x", True), "x")
+        e.cmd("narrative off")
+        self.assertFalse(card.shown)
+        self.assertIsNone(N.Said("bags"))
+        e.cmd("narrative on")
+        self.assertTrue(card.shown)
+        e.g.ToggleAllBags()
+        self.assertIsNone(N.Said("bags"))                                       # closed with the window
+        self.assertEqual(e.errors(), [])
+
+    def test_what_you_mutter_is_the_thing_most_worth_saying(self):
+        e = Env()
+        N, T = e.ns.Narrative, e.lua.table
+
+        def words(**kw):                                                     # (the line, and whether you grumble)
+            r = N.BagWords(T(**kw))
+            return r if isinstance(r, tuple) else (r, None)
+        self.assertEqual(words(free=0, total=80, junk=3, junkWorth=250),
+                         ("Not a slot to spare. The junk would fetch 2s 50c: selling it makes room.", True))
+        self.assertEqual(words(free=0, total=80, junk=0, junkWorth=0),        # full, but nothing is junk: no grumble
+                         ("Not a slot to spare. Anything I won't need on the road can wait in the bank.", None))
+        self.assertEqual(words(free=30, total=80, junk=2, junkWorth=90, vendor=True),
+                         ("Junk: 2, worth 90c here. X sells the one I've picked; Smart sell takes it all.", True))
+        self.assertIn("belong in the bank", words(free=30, total=80, bank=4)[0])
+        self.assertIsNone(words(free=30, total=80, bank=4)[1])
+        self.assertEqual(words(free=3, total=80, junk=0), ("Only 3 slots left. Time to sell or bank a few things.", None))
+        self.assertEqual(words(free=30, total=80, new=2, sell=5),
+                         ("New since I last looked: 2. The gold dot marks each one.", None))
+        self.assertEqual(words(free=30, total=80, sell=5)[1], True)
+        self.assertIn("The Sell filter", words(free=30, total=80, sell=5)[0])
+        self.assertEqual(words(free=30, total=80), ("All in order, and 30 slots free.", None))
+        # a few things and none of them to sell: what you need on the road, never dead weight
+        self.assertEqual(words(free=75, total=80), ("Just the essentials. Nothing worth selling.", None))
+        e.lua.execute("function UnitRace() return 'Undead', 'Scourge' end")
+        self.assertEqual(N.Mutter(*words(free=75, total=80)),
+                         "Travelling light. Good. Just the essentials. Nothing worth selling.")
+        self.assertTrue(N.Mutter(*words(free=30, total=80, junk=2, junkWorth=90)).startswith("Dead weight, the lot of it."))
+        for race in ("Human", "Dwarf", "Gnome", "NightElf", "Draenei", "Worgen", "Pandaren", "Orc", "Scourge", "Tauren",
+                     "Troll", "BloodElf", "Goblin"):
+            self.assertTrue(N.CALM[race] and N.RACE[race], race)
+        self.assertEqual(e.errors(), [])
+
+    def test_the_vendor_says_what_he_would_buy_and_why(self):
+        e = Vendor().stock(Env())
+        N = e.ns.Narrative
+        e.lua.execute("MerchantFrame = CreateFrame('Frame', 'MerchantFrame', UIParent); MerchantFrame:Show()")
+        e.mock.units.npc = e.lua.table(name="Harlan Bagley", health=1, healthMax=1)
+        e.mock.openMerchant(True)
+        e.update(0.5)
+        card = e.g.ControllerCamHUD_Speaker_vendor
+        self.assertTrue(card.shown)
+        self.assertTrue(e.same(card.parent, e.g.MerchantFrame))
+        self.assertEqual(card.name.text, "Harlan Bagley")                       # the vendor you talk to
+        self.assertEqual(card.portrait["from"], "model")
+        self.assertIn("Smart sell, and it's done.", N.Said("vendor"))           # the junk, and why to sell it here
+        e.mock.openMerchant(False)
+        self.assertIsNone(N.Said("vendor"))
+        T = e.lua.table
+        self.assertEqual(N.VendorWords(T(repaired=1500, vendor=0, auction=2, gain=4000)),
+                         "Your gear's mended: 15s. Keep the 2 the auction house wants: it pays 40s more than I would.")
+        self.assertIn("a broken piece gives you none of its armour or stats",
+                      N.VendorWords(T(repair=300, vendor=0, auction=0)))
+        self.assertEqual(N.VendorWords(T(vendor=0, auction=0)),
+                         "Nothing in your bags I'd pay well for. Have a look at my wares.")
+        self.assertEqual(e.errors(), [])
+
+    def test_the_banker_the_postmaster_and_the_flight_master(self):
+        e = MailTakeAll().env()
+        N, T = e.ns.Narrative, e.lua.table
+        e.g.InboxFrame.Show(e.g.InboxFrame)
+        e.mock.fire("MAIL_SHOW")
+        e.update(0.5)
+        said = N.Said("mail")
+        for part in ("Letters for you: 4.", "2 items", "Take everything empties them in one go.",
+                     "Coin on delivery: 1."):
+            self.assertIn(part, said)
+        card = e.g.ControllerCamHUD_Speaker_mail
+        self.assertEqual(card.name.text, "Postmaster")
+        self.assertEqual(card.portrait["from"], "icon")                         # no one to draw: a letter
+        self.assertEqual(N.MailWords(T(letters=0)), "Nothing for you today. I checked twice.")
+        self.assertIn("Deposit puts them away.", N.BankWords(T(deposit=3, withdraw=2, free=20)))
+        self.assertIn("Withdraw tops your bags up", N.BankWords(T(deposit=0, withdraw=2, free=20)))
+        self.assertEqual(N.BankWords(T(free=2)), "Your bags are nearly full. Leave what you won't need on the road with me.")
+        self.assertEqual(N.FlightWords(T()), "Where to? Point at a place and I'll tell you how long the ride takes.")
+        self.assertEqual(N.FlightWords(T(place="Booty Bay", eta=130)),
+                         "Booty Bay: about 2:10, going by your last flight there.")
+        self.assertEqual(N.FlightWords(T(place="Booty Bay", eta=130, guess=True)),
+                         "Booty Bay: about 2:10 by the map. You haven't flown that one yet.")
+        self.assertIn("Fly it once", N.FlightWords(T(place="Booty Bay")))
+        self.assertEqual(e.errors(), [])
+
+    def test_the_flight_master_answers_for_the_place_you_point_at(self):
+        e = Env()
+        N, F = e.ns.Narrative, e.ns.Flights
+        e.lua.execute("TaxiFrame = CreateFrame('Frame', 'TaxiFrame', UIParent); TaxiFrame:Show()")
+        e.mock.units.npc = e.lua.table(name="Thor", health=1, healthMax=1)
+        e.mock.fire("TAXIMAP_OPENED")
+        e.update(0.5)
+        self.assertEqual(N.Said("flight"), "Where to? Point at a place and I'll tell you how long the ride takes.")
+        F.here = "Ironforge"
+        e.db.flightTimes["Ironforge > Menethil Harbor"] = e.lua.table(t=125)
+        F.hover = e.lua.table(name="Menethil Harbor")
+        e.update(0.5)
+        self.assertEqual(N.Said("flight"), "Menethil Harbor: about 2:05, going by your last flight there.")
+        e.mock.fire("TAXIMAP_CLOSED")
+        self.assertIsNone(N.Said("flight"))
+        self.assertEqual(e.errors(), [])
+
+    def test_at_the_water_and_by_the_fire(self):
+        e = Env()
+        N, T = e.ns.Narrative, e.lua.table
+        self.assertIn("This water wants more skill", N.FishWords(T(caught=1, away=3, unknown=2)))
+        self.assertEqual(N.FishWords(T(caught=4, away=1)), "No bait on the hook. It adds to my skill, so fewer get away.")
+        self.assertIsNone(N.FishWords(T(caught=4, away=1, capped=True)))           # bait adds nothing at the cap
+        self.assertEqual(N.FishWords(T(caught=4, away=0, bait=30)), "Bait's nearly spent. Another on the hook keeps my skill up.")
+        self.assertEqual(N.FishWords(T(caught=4, away=0, bait=300, unknown=2, known=1)),
+                         "Fish here I haven't landed yet: 2. Keep casting.")
+        self.assertIn("Kinds landed: 7.", N.JournalWords(7))
+        e.lua.execute("function GetXPExhaustion() return 4200 end; function GetMaxPlayerLevel() return 60 end")
+        self.assertEqual(N.CampWords(), "Rested by the fire: the next 4200 experience from kills comes double.")
+        e.lua.execute("function GetXPExhaustion() return nil end")
+        self.assertIn("A night at an inn", N.CampWords())
+        e.mock.units.player.level = 60
+        self.assertIsNone(N.CampWords())                                           # nothing to say at the top
+        self.assertEqual(e.errors(), [])
+
+    def test_the_campfire_scene_gives_you_a_line_only_with_the_narrative_on(self):
+        c = Campfire()
+        for on in (True, False):
+            e = c.env()
+            e.lua.execute("function GetXPExhaustion() return 900 end")
+            if not on:
+                e.cmd("narrative off")
+            c.fire(e)
+            e.update(14, 0.25)
+            CF = e.ns.Campfire
+            self.assertEqual(CF.shown, 1)
+            if on:
+                self.assertIn("900 experience", CF.scene.voice)
+                e.update(50 - (e.g.GetTime() - CF.scene.at), 0.25)             # past the moments: your word on it
+                self.assertGreater(CF.frame.voice.alpha, 0.5)
+                self.assertTrue(CF.frame.face.shown)
+            else:
+                self.assertIsNone(CF.scene.voice)
+            self.assertEqual(e.errors(), [])
+
+    def test_a_card_sits_over_its_window_or_under_it_near_the_top(self):
+        e = Env()
+        N = e.ns.Narrative
+        e.lua.execute("""
+            HOST = CreateFrame("Frame", "HOST", UIParent); HOST:Show(); HOST:SetSize(300, 200)
+            HOST.GetTop = function() return 500 end
+            UIParent.GetTop = function() return 768 end""")
+        card = N.Speak("test", e.g.HOST, e.lua.table(name="Someone"), "A word.")
+        self.assertEqual(card.at, "over")
+        self.assertEqual((card.points[1][1], card.points[1][3]), ("BOTTOMLEFT", "TOPLEFT"))
+        self.assertTrue(e.same(card.points[1][2], e.g.HOST))
+        self.assertEqual(card.width, 300)
+        e.lua.execute("HOST.GetTop = function() return 750 end")
+        N.Speak("test", e.g.HOST, e.lua.table(name="Someone"), "Another word.")
+        self.assertEqual((card.at, card.points[1][1], card.points[1][3]), ("under", "TOPLEFT", "BOTTOMLEFT"))
+        self.assertEqual(card.portrait["from"], "icon")                         # nobody to draw: an icon
+        e.g.HOST.Hide(e.g.HOST)
+        self.assertIsNone(N.Speak("test", e.g.HOST, e.lua.table(name="Someone"), "Gone."))   # a closed window: quiet
+        self.assertFalse(card.shown)
+        self.assertEqual(e.errors(), [])
+
+    def test_with_it_off_the_broker_the_mentor_and_the_postmaster_are_plain(self):
+        m = MarketPanel()
+        e = m.env()
+        P = m.house(e)
+        e.g.ControllerCamHUD_Market()
+        self.assertEqual(plain(P.view.title.text), "The Broker")
+        e.cmd("narrative off")
+        self.assertEqual(plain(P.view.title.text), "Market")                    # no Broker
+        self.assertFalse(P.view.portrait.shown)
+        self.assertFalse(P.view.motto.shown)
+        self.assertNotIn("friend", plain(P.view.status.text) + plain(P.view.order.text))
+        self.assertEqual(P.Odds(0.55, 1), "55% to sell")
+        self.assertIsNone(P.Greet(P))                                             # and no greeting
+        lv = Levelling().env()
+        LV = lv.ns.Levelling
+        panel = lv.g.ControllerCamHUD_SkillPlanPanel
+        self.assertEqual(plain(panel.title.text), "The Mentor: Alchemy 50 > 60")
+        self.assertTrue(panel.portrait.shown)                                     # his face: his profession's icon
+        self.assertGreaterEqual(LV.layout.top, 8 + LV.PORTRAIT + 8)
+        lv.cmd("narrative off")
+        self.assertEqual(plain(panel.title.text), "Alchemy 50 > 60")
+        self.assertFalse(panel.portrait.shown)
+        self.assertTrue(plain(panel.sub.text).startswith("10 more to 60. "), plain(panel.sub.text))
+        self.assertNotIn("Steady hands", plain(panel.sub.text))
+        self.assertEqual(lv.ns.Mail.Words("nothing"), "No mail.")
+        self.assertEqual(e.errors(), [])
+        self.assertEqual(lv.errors(), [])
 
 
 if __name__ == "__main__":

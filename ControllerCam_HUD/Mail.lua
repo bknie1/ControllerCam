@@ -100,13 +100,23 @@ MB.SAY = {
     full = { L["Your bags are bursting. The rest waits in the letters till you make room."] },
     refused = { L["%d I couldn't pass you: one of a kind, or the box wouldn't let go. Still in their letters."] },
 }
+-- With the narrative off (Narrative.lua): no Postmaster, the same news in plain words
+MB.PLAIN = {
+    took = L["Taken from the mail: %s."],
+    nothing = L["No mail."],
+    cod = L["Letters asking for payment on delivery: %d, left for you to open."],
+    full = L["Your bags are full: the rest stays in the letters."],
+    refused = L["Left in their letters: %d (one of a kind, or refused)."],
+}
+local function Voiced() return not ns.Narrative or ns.Narrative.On() end
 function MB.Words(kind)
+    if not Voiced() then return MB.PLAIN[kind] end
     local list = MB.SAY[kind]
     return list[math.random(#list)]
 end
 local function Post(text)
     local chat = ns.Chat
-    if chat and chat.Line and type(chat.TAGS) == "table" then
+    if Voiced() and chat and chat.Line and type(chat.TAGS) == "table" then
         chat.TAGS.mail = chat.TAGS.mail or { L["Postmaster"], "e6b86a" }
         if chat.Line("mail", text) then return end
     end

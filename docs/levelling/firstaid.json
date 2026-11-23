@@ -1,0 +1,44 @@
+{
+  "kind": "firstaid",
+  "sources": [
+    "https://www.wowhead.com/classic/guide/first-aid-leveling-1-300-wow-classic",
+    "https://www.wowhead.com/classic/skill=129/first-aid"
+  ],
+  "steps": [
+    { "from": 1, "to": 40, "item": 1251, "spell": null, "name": "Linen Bandage", "crafts": null,
+      "made": 1, "learn": "trainer", "learnAt": 1, "reagents": [[2589, 1]], "alts": [] },
+    { "from": 41, "to": 50, "item": 2581, "spell": null, "name": "Heavy Linen Bandage", "crafts": null,
+      "made": 1, "learn": "trainer", "learnAt": 40, "reagents": [[2589, 2]], "alts": [] },
+    { "from": 51, "to": 80, "item": 2581, "spell": null, "name": "Heavy Linen Bandage", "crafts": null,
+      "made": 1, "learn": "trainer", "learnAt": 40, "reagents": [[2589, 2]], "alts": [] },
+    { "from": 81, "to": 115, "item": 3530, "spell": null, "name": "Wool Bandage", "crafts": null,
+      "made": 1, "learn": "trainer", "learnAt": 80, "reagents": [[2592, 1]], "alts": [] },
+    { "from": 116, "to": 125, "item": 3531, "spell": null, "name": "Heavy Wool Bandage", "crafts": null,
+      "made": 1, "learn": "trainer", "learnAt": 115, "reagents": [[2592, 2]], "alts": [] },
+    { "from": 126, "to": 150, "item": 3531, "spell": null, "name": "Heavy Wool Bandage", "crafts": null,
+      "made": 1, "learn": "trainer", "learnAt": 115, "reagents": [[2592, 2]], "alts": [] },
+    { "from": 151, "to": 180, "item": 6450, "spell": null, "name": "Silk Bandage", "crafts": null,
+      "made": 1, "learn": "trainer", "learnAt": 150, "reagents": [[4306, 1]], "alts": [] },
+    { "from": 181, "to": 210, "item": 6451, "spell": null, "name": "Heavy Silk Bandage", "crafts": null,
+      "made": 1, "learn": "vendor", "learnAt": 180, "reagents": [[4306, 2]], "alts": [] },
+    { "from": 211, "to": 225, "item": 8544, "spell": null, "name": "Mageweave Bandage", "crafts": null,
+      "made": 1, "learn": "vendor", "learnAt": 210, "reagents": [[4338, 1]], "alts": [] },
+    { "from": 226, "to": 240, "item": 8544, "spell": null, "name": "Mageweave Bandage", "crafts": null,
+      "made": 1, "learn": "vendor", "learnAt": 210, "reagents": [[4338, 1]], "alts": [] },
+    { "from": 241, "to": 260, "item": 8545, "spell": null, "name": "Heavy Mageweave Bandage", "crafts": null,
+      "made": 1, "learn": "trainer", "learnAt": 240, "reagents": [[4338, 2]], "alts": [] },
+    { "from": 261, "to": 290, "item": 14529, "spell": null, "name": "Runecloth Bandage", "crafts": null,
+      "made": 1, "learn": "trainer", "learnAt": 260, "reagents": [[14047, 1]],
+      "alts": [
+        { "item": 8545, "spell": null, "name": "Heavy Mageweave Bandage", "crafts": null, "made": 1,
+          "learn": "trainer", "learnAt": 240, "reagents": [[4338, 2]], "why": ["other"] }
+      ] },
+    { "from": 291, "to": 300, "item": 14530, "spell": null, "name": "Heavy Runecloth Bandage", "crafts": null,
+      "made": 1, "learn": "trainer", "learnAt": 290, "reagents": [[14047, 2]],
+      "alts": [
+        { "item": 8545, "spell": null, "name": "Heavy Mageweave Bandage", "crafts": null, "made": 1,
+          "learn": "trainer", "learnAt": 240, "reagents": [[4338, 2]], "why": ["other"] }
+      ] }
+  ],
+  "notes": "Icy Veins (https://www.icy-veins.com/wow-classic/classic-first-aid-profession-and-leveling-guide) returned HTTP 403 to automated fetches, so no Icy Veins comparison was made. Wowhead's First Aid route gives skill ranges only, no per-step craft counts, so every crafts value is null; its total shopping list is 180 Linen, 240 Wool, 160 Silk, 120 Mageweave, 100 Runecloth. Reagent counts, created items and learnAt come from the recipe list on Wowhead's First Aid skill page (orange/yellow/green/grey: Linen 1/30/45/60, Heavy Linen 40/50/75/100, Wool 80/80/115/150, Heavy Wool 115/115/150/185, Silk 150/150/180/210, Heavy Silk 180/180/210/240, Mageweave 210/210/240/270, Heavy Mageweave 240/240/270/300, Runecloth 260/260/290/320, Heavy Runecloth 290/290/320/350). Wowhead writes the last two ranges as 261-290 and 290-300; the last step is recorded as 291-300 to avoid overlap. Rank-ups that are not crafts: Journeyman First Aid from a trainer at skill 50; Expert First Aid from the book Expert First Aid - Under Wraps (item 16084, vendor: Deneb Walker, Arathi Highlands / Balai Lok'Wein, Dustwallow Marsh) at 125; Artisan First Aid from the quest Triage (Alliance quest 6624 / Horde quest 6622, needs level 35 and skill 225). Heavy Silk Bandage is learned from Manual: Heavy Silk Bandage (item 16112) and Mageweave Bandage from Manual: Mageweave Bandage (item 16113), both sold by those vendors. Heavy Mageweave, Runecloth and Heavy Runecloth Bandage are trained from Doctor Gustaf VanHowzen (npc 12939, Theramore) or Doctor Gregory Victor (npc 12920, Hammerfall). Wowhead says abundant Mageweave can take you to 300 with Heavy Mageweave Bandage, recorded as an alt on 261-300 (it greys at 300). Anti-Venom (spell 7934, item 6452, makes 3, 1 Small Venom Sac 1475) is trained at 80 per the guide but is not a levelling step."
+}

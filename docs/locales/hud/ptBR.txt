@@ -118,6 +118,11 @@ Caixa vazia, amigo. Até as traças se mudaram.
 Cartas com pagamento na entrega: %d. Essas você abre; eu não pago a conta dos outros.
 Suas bolsas estão estourando. O resto espera nas cartas até você abrir espaço.
 %d eu não consegui entregar: únicos, ou a caixa não quis soltar. Ainda estão nas cartas.
+Retirado do correio: %s.
+Sem correspondência.
+Cartas com pagamento na entrega: %d, deixadas para você abrir.
+Suas bolsas estão cheias: o resto fica nas cartas.
+Deixados nas cartas: %d (únicos, ou recusados).
 Chefe dos correios
 1 item
 %d itens
@@ -249,19 +254,66 @@ Suas receitas se esgotam a %d de %d. Um instrutor terá algo novo.
 O que você sabe não vai levá-lo pelos últimos %d. Hora de ver um instrutor.
 %s já não vai ensinar muito, mas é o melhor que você tem. Faltam %d para %d.
 Daqui em diante é devagar: %s dá um ponto de vez em quando. Faltam %d.
+Primeiro você vai querer %s, %s. Os guias começam este trecho com ela.
+Aprenda %s, %s, e começamos: faltam %d para %d.
+Faltam %d para %d. Os guias mandam você atrás de %s até %d.
+Aqui a coleta ensina: %s até %d.
+Faltam %d para %d. Comece com %s, ou com %s se preferir: %s.
+Primeiro %s, como dizem os guias. %s também serve: %s.
 Faltam %d para %d. Comece com %s.
 %s é agora o seu melhor mestre. %d pontos até %d.
 Mãos firmes. Primeiro %s, e faltam %d.
+com um instrutor
+de um vendedor
+como saque
+de uma missão
+materiais mais baratos
+materiais de um vendedor
+materiais que você mesmo coleta
+vende bem
+algo que você vai usar
+menos criações
+uma receita que você acha ou compra
+outros materiais
+a primeira escolha dos guias
+Abra a janela de uma profissão para um plano de evolução.
+No limite, %d. Um instrutor tem o próximo nível.
+Faltam %d até %d; suas receitas não chegam. Um instrutor tem %s em %d.
+Faltam %d até %d; suas receitas não chegam. Um instrutor tem %s.
+Suas receitas param a %d de %d. Um instrutor tem mais.
+Faltam %d até %d. Melhor agora: %s, verde (um ponto de vez em quando).
+Faltam %d até %d. Primeiro aprenda %s, %s.
+Faltam %d até %d. Colete %s até %d.
+Faltam %d até %d. Primeiro: %s, ou %s (%s).
+Faltam %d até %d. Primeiro: %s.
 Para coletar ou comprar
 %d vezes: %s
+Aprenda %s, a partir de %d.
+Aprenda %s.
+%s: %d nas bolsas, %d no banco, %d por criação
+Os guias sobem este trecho coletando %s.
 %s: você tem %d, o plano usa %d
 para %s
+O Mentor: o que o seu banco deixa fazer
+O que seu banco pode fabricar
+Nada mais a fazer com o que está no seu banco.
+%d que você pode fazer contando o banco, %d delas só com ele.
 O Mentor: %s %d > %d
 O Mentor
+Plano de evolução
+ou
+Colete %s
+a aprender
+Provar
+Ocultar
+O plano
+Voltar
 Farmar isto
 Farmar tudo
-Voltar
+Com o banco
 Usar o plano
+duas vezes para ocultar
+Nada aqui para experimentar.
 %d adicionado(s) à lista de farm.
 Nada faltando: você tem o necessário.
 Abra a janela de uma profissão para fazer um plano.
@@ -292,6 +344,7 @@ banco
 Sua marca
 Detalhes do item: tudo sobre o item para o qual você aponta
 mostra tudo sobre o item para o qual você aponta (ou o indicado): preços, quem o tem, sua marca
+%d%% de vender
 Vende com certeza (%d%%)
 Isso se vende sozinho (%d%%)
 Acho que vende (%d%%)
@@ -325,12 +378,19 @@ Usual
 %s cada, %s por todos os %d
 Você anunciou %d aqui, %d leilões vendidos
 Nenhum preço conhecido: leia a Casa de Leilões primeiro.
+Nada nas suas bolsas para vender aqui.
+Hoje nada vende melhor aqui que num vendedor; %d talvez, com paciência.
+O melhor primeiro: %d vendem melhor aqui que num vendedor, mais %d com paciência.
 Bolsas vazias, amigo. Traga algo pra vender.
 Hoje nada aqui bate um vendedor. %d talvez, com um pouco de paciência.
 Nenhum lucro certo nessas bolsas, amigo. %d podem pagar se você esperar.
 O melhor em cima: %d aqui batem qualquer vendedor, %d a mais pros pacientes.
 %d pagam melhor aqui que num vendedor, o melhor primeiro. %d a mais se esperar.
 O topo da pilha paga mais: %d vendas certas, %d a mais se puder esperar.
+Ainda sem preços: %s lê a casa de leilões.
+Preços lidos agora mesmo: %d.
+%d preços, lidos %s.
+%d preços, lidos %s. %s lê de novo.
 Ainda não li o quadro. %s e eu busco todos os preços.
 Nenhum preço ainda, amigo. %s lê o quadro inteiro.
 Preços fresquinhos do quadro, amigo: %d.
@@ -339,6 +399,8 @@ Acabei de ler o quadro: %d preços, ainda quentes.
 Última olhada no quadro: %s, %d preços.
 Preços lidos %s, duros como pão velho. %s lê o quadro de novo.
 %d preços, mas lidos %s. %s e eu olho de novo.
+Mostrando também o que você guarda. %s esconde.
+Separados: %d, para suas profissões, seu equipamento e suas marcas. %s mostra.
 O que você guarda também está na lista. %s tira de vista.
 Mostrando o que você guarda também. %s esconde de novo.
 %d guardados: material de profissão, equipamento pra usar, o que você marcou. %s mostra.
@@ -370,6 +432,28 @@ Mercado: gráfico de preços em velas
 o gráfico de preços do Mercado é uma vela por dia nos últimos 7 dias (onde o preço abriu, sua máxima e mínima, e onde fechou: verde quando fechou mais alto, vermelho mais baixo); desligado: uma linha do menor preço de cada dia em 30 dias
 abrir ou fechar o Mercado (uma aba da casa de leilões)
 qual Casa de Leilões este cliente tem (para solução de problemas)
+coletada
+coletada por outro item
+ainda não coletada
+Aparência
+Escolha um conjunto para colocar as peças no seu traje. %s mantém; nada é pago antes disso.
+Examinando sua coleção...
+Seu traje voltou a ser como era.
+%s: %d de %d peças colocadas.
+%d não puderam ir para este traje.
+Um conjunto do qual você tem peças
+%d conjuntos dos quais você tem peças
+você não pode usar isto
+faltando
+Todas as %d peças
+%d de %d peças
+Faltando: %s
+Nenhum conjunto ainda. Itens que compartilham um nome, como Elmo de Ferro Verde e Manoplas de Ferro Verde, aparecem aqui assim que você tiver um deles.
+Desfazer
+Aba Conjuntos no transmogrificador
+uma aba Conjuntos na janela de transmogrificação: equipamento da sua coleção que compartilha um nome (Elmo de Ferro Verde, Manoplas de Ferro Verde...) e os conjuntos do próprio jogo, colocados no seu traje com um toque, com Desfazer; nada é mantido nem pago até você apertar Aplicar
+Aparência coletada, nas dicas de itens
+sob a dica de equipamentos e cosméticos: se a aparência já está na sua coleção, ou só por outro item com a mesma aparência, para você saber o que é novo
 Offline
 Morto
 Desligado
@@ -1037,6 +1121,69 @@ Uma janela de bolsas com filtros rápidos
 suas bolsas numa janela própria do HUD em vez da do jogo: todos os itens juntos, os espaços vazios reunidos no fim, suas bolsas numa fileira à parte e filtros rápidos no topo (LB e RB). O banco também, enquanto estiver aberto. Desligado: as bolsas do jogo
 Janela de bolsas: ordem
 Inteligente: o que você usa primeiro (consumíveis, itens com uso), depois o resto por tipo, o lixo por último e esmaecido. Por tipo: em seções com títulos próprios. Como nas bolsas: a ordem do jogo
+Muito bem, então.
+Ora, que monte.
+Vejamos, vejamos...
+Elune, me dê paciência.
+Pelos naaru, que bagunça.
+Mochila maldita.
+Mochila arrumada é mochila leve.
+Bah. Tralha demais.
+Peso morto, tudo isso.
+Paciência. A Mãe Terra provê.
+Ei, o que temos aqui, mano?
+Que bagunça. Indigno.
+Tempo é dinheiro. Vamos contar.
+É, isso serve.
+Graças a Elune.
+A Luz provê.
+Hrm. Bom o bastante.
+Hm. Dá para lutar.
+Viajando leve. Bom.
+Aceitável. Por pouco.
+Nem um espaço sobrando. O lixo renderia %s: vender abre espaço.
+Nem um espaço sobrando. O que não vou usar na estrada pode esperar no banco.
+Lixo: %d, vale %s aqui. X vende o que escolhi; Venda esperta leva tudo.
+%d destes são do banco: lá já tem mais iguais, ou eu os marquei. Depositar guarda tudo.
+Só restam %d espaços. O lixo renderia %s em qualquer vendedor.
+Só restam %d espaços. Hora de vender ou guardar algumas coisas.
+Novos desde a última olhada: %d. O ponto dourado marca cada um.
+Vale vender: %d. O filtro Vender junta todos, e cada dica diz onde rende mais.
+Lixo: %d, vale %s. O próximo vendedor pode ficar com ele.
+Só o essencial. Nada que valha a pena vender.
+Tudo em ordem, e %d espaços livres.
+Seu equipamento está consertado: %s.
+Posso consertar seu equipamento por %s; uma peça quebrada não dá armadura nem atributos.
+Suas bolsas estão cheias. Fico com %d coisas por %s: Venda esperta, e você tem espaço de novo.
+Dou %s por %d coisas: o lixo e o que a casa de leilões não pagaria mais. Venda esperta, e pronto.
+Fique com os %d que a casa de leilões quer: ela paga %s a mais que eu.
+Suas bolsas estão cheias. Venda algo antes de comprar.
+Nada nas suas bolsas pelo que eu pagaria bem. Dê uma olhada nas minhas mercadorias.
+%d do que você carrega são daqui: guardo mais iguais, ou você os marcou. Depositar guarda tudo.
+Guardo mais de %d coisas que você carrega. Retirar completa suas bolsas antes de partir.
+Suas bolsas estão quase cheias. Deixe comigo o que não vai precisar na estrada.
+Tudo seguro comigo, e suas bolsas têm %d espaços livres.
+Nada para você hoje. Conferi duas vezes.
+Cartas para você: %d, nada anexado. Leia quando quiser.
+Cartas para você: %d. Dentro: %s.
+Pegar tudo esvazia todas de uma vez.
+Pagamento na entrega: %d. Essas você abre e paga por conta própria.
+Suas bolsas estão cheias: os itens esperam nas cartas.
+Para onde? Aponte um lugar e eu digo quanto tempo leva a viagem.
+%s: cerca de %s pelo mapa. Você ainda não voou essa rota.
+%s: cerca de %s, pelo seu último voo até lá.
+%s: ainda não sei dizer quanto tempo. Voe uma vez e eu saberei.
+%d escaparam. Esta água pede mais perícia do que tenho: isca ajuda, e uma vara melhor também.
+Sem isca no anzol. Ela soma à minha perícia, e menos escapam.
+A isca está quase no fim. Outra no anzol mantém minha perícia.
+Peixes daqui que ainda não pesquei: %d. Continue lançando.
+Já pesquei todo peixe desta água. Para outro lugar, então.
+Nada pescado ainda. O primeiro peixe de cada água vai aqui.
+Espécies pescadas: %d. Cada água esconde mais algumas: o painel de pesca mostra um ? para cada uma que não peguei lá.
+Descansado junto ao fogo: os próximos %d de experiência de abates valem o dobro.
+Nenhum descanso acumulado. Uma noite numa estalagem ou numa cidade, e os abates dão o dobro de experiência por um tempo.
+Narrativa: personagens nas janelas
+cada janela que o HUD melhora tem alguém que ajuda você, com o retrato e uma frase curta sobre o que está à sua frente e por quê: você mesmo diante das bolsas e à beira d'água, o vendedor, o banqueiro, o chefe dos correios, o mestre de voo, o Corretor na casa de leilões e o Mentor na sua profissão; desligado: as janelas ficam simples e quietas
 Predefinição do HUD: %s, combinando com a câmera
 predefinição: %s
 Um layout chamado '%s' foi adicionado ao Modo de Edição do jogo. Escolha-o lá para usá-lo (Menu do Jogo > Modo de Edição > Layout).
@@ -1187,15 +1334,57 @@ a opção do jogo: a dica de um buff aparece por um instante quando ele é aplic
 Cores de classe para nomes no chat
 a configuração de chat do jogo para todos os tipos de chat de uma vez: o nome de um jogador na cor da classe dele
 abre o painel de opções (Opções > AddOns > ControllerCam HUD)
-Quadros
-Esmaecer a tela
+Seus quadros
+Alvo, grupo e raide
 Efeitos
-Visual
-Missões, bate-papo e mapa
+Vibração
+Câmera e mira
+Esmaecer a tela
+Quadros do jogo redesenhados
+Bate-papo e mensagens
+Missões e mapa
+Voos
 Bolsas, banco e vendedor
-Pesca
+Itens e casa de leilões
+Pesca e profissões
 Acessibilidade
-Opções nativas
+Narrativa
+Lembrete de beber água
+Suas barras
+Em combate
+Barras de vida
+Tamanho e texto
+Alvo e foco
+Nomes e classes
+Efeitos no alvo
+Grupo e raide
+Quais placas de identificação
+Visual
+Nomes
+Vida e poder
+Golpes
+Números e avisos
+Fora de combate
+Controle
+O que vibra
+Câmera
+Tempos de recarga
+O que esmaece
+Quais quadros
+Janela de bate-papo
+Nomes no bate-papo
+Filtros
+Mensagens de erro
+Lista de missões
+Progresso das missões
+Lista de farm
+Mapa
+Barra de voo
+Correio
+Conselho de itens
+Aparências
+Pesca
+Profissões
 %s  |  Interface de controle: %s  |  em execução: %s
 jogador %s, alvo %s, ajudante %s, foco %s  |  quadros do jogo postos de lado: %s  |  bate-papo movido: %s
 opções nativas: alvo do alvo %s, Gerenciador de Tempo de Recarga %s, recursos pessoais %s

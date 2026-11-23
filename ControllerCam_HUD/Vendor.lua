@@ -1704,6 +1704,7 @@ function V:Repair()
         local limit = GetGuildBankWithdrawMoney and GetGuildBankWithdrawMoney()
         if type(limit) == "number" and (limit < 0 or limit >= cost) then
             RepairAllItems(true)
+            V.repaired = { cost = cost, at = GetTime() }             -- (the vendor mentions it: Narrative.lua)
             say(L["Repaired for %s from the guild bank"]:format(ns.Money(cost)))
             return true
         end
@@ -1713,6 +1714,7 @@ function V:Repair()
         return false
     end
     RepairAllItems(false)
+    V.repaired = { cost = cost, at = GetTime() }
     say(L["Repaired for %s"]:format(ns.Money(cost)))
     return true
 end

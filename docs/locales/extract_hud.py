@@ -47,6 +47,9 @@ def keys():
             m = re.search(r"local PAGES = \{(.*?)\}", t, re.S)
             for q in re.finditer(STR, m.group(1)):
                 add(q.group(1))
+            m = re.search(r"local LAYOUT = \{(.*?)\n\}", t, re.S)
+            for q in re.finditer(r"\b(?:page|head) = " + STR, m.group(1)):          # pages and their headings
+                add(q.group(1))
         if name == "UnitFrames.lua":
             m = re.search(r"local LABEL = \{(.*?)\}", t, re.S)
             for q in re.finditer(r"= " + STR, m.group(1)):

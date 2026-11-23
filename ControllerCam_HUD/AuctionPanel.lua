@@ -213,8 +213,12 @@ AP.TrendText = TrendText
 -- One line on why (or why not) to sell it here
 -- The Broker's word on the chance to sell, by how likely it is, the share after it: "Even odds (55%)". Two ways
 -- of saying each, so the rows do not all say the same.
+-- (the narrative off, Narrative.lua: no Broker, the Market says it plainly)
+local function Voiced() return not ns.Narrative or ns.Narrative.On() end
+AP.Voiced = Voiced
 function AP.Odds(p, id)
     if not p then return nil end
+    if not Voiced() then return L["%d%% to sell"]:format(math.floor(p * 100 + 0.5)) end
     local list
     if p >= 0.9 then list = { L["Sure to go (%d%%)"], L["That one sells itself (%d%%)"] }
     elseif p >= 0.7 then list = { L["I think it'll sell (%d%%)"], L["Should find a buyer (%d%%)"] }
@@ -429,6 +433,19 @@ end
 function AP.Portrait()
     local p = view and view.portrait
     if not p then return nil end
+    -- the Broker, or a plain Market with the narrative off
+    view.title:ClearAllPoints()
+    if Voiced() then
+        p:Show(); p.ring:Show(); view.motto:Show()
+        view.title:SetPoint("TOPLEFT", view, "TOPLEFT", 64, -10)
+        view.title:SetText(L["The Broker"])
+    else
+        p:Hide(); p.ring:Hide(); view.motto:Hide()
+        view.title:SetPoint("TOPLEFT", view, "TOPLEFT", 12, -10)
+        view.title:SetText(L["Market"])
+        p.from = "none"
+        return p.from
+    end
     if SetPortraitTexture and UnitExists and UnitExists("npc") and pcall(SetPortraitTexture, p, "npc") then
         p:SetTexCoord(0, 1, 0, 1)
         p.from = "npc"
@@ -929,6 +946,11 @@ end
 local function Pick(list) return list[(AP.voice or 0) % #list + 1] end
 
 function AP.Sales(worth, more, total)
+    if not Voiced() then
+        if total == 0 then return L["Nothing in your bags to sell here."] end
+        if worth == 0 then return L["Nothing sells better here than at a vendor today; %d might, with patience."]:format(more) end
+        return L["Best first: %d sell better here than at a vendor, %d more with patience."]:format(worth, more)
+    end
     if total == 0 then return L["Empty bags, friend. Bring me something to sell."] end
     if worth == 0 then
         return Pick({ L["Nothing here beats a vendor today. %d might, with a little patience."],
@@ -945,6 +967,12 @@ function AP.Board(seen, read)
     local M, scan = ns.Market, KeyText("PADLSHOULDER")
     local age = (read or 0) > 0 and math.max(0, (time and time() or 0) - read) or nil
     local second = (AP.voice or 0) % 2 == 1
+    if not Voiced() then
+        if not age then return L["No prices yet: %s reads the auction house."]:format(scan) end
+        if age < 3600 then return L["Prices read just now: %d."]:format(seen) end
+        if age < 6 * 3600 then return L["%d prices, read %s."]:format(seen, M.Ago(read)) end
+        return L["%d prices, read %s. %s reads them again."]:format(seen, M.Ago(read), scan)
+    end
     if not age then
         return Pick({ L["Haven't read the board yet. %s and I'll fetch every price."],
                       L["No prices yet, friend. %s reads the whole board."] }):format(scan)
@@ -961,6 +989,11 @@ end
 
 function AP.Kept(hidden)
     local key = KeyText("PADRSHOULDER")
+    if not Voiced() then
+        if ns.db.ahShowKept then return L["Showing what you keep too. %s hides it."]:format(key) end
+        if (hidden or 0) == 0 then return "" end
+        return L["Kept back: %d, for your professions, your gear and your marks. %s shows them."]:format(hidden, key)
+    end
     if ns.db.ahShowKept then
         return Pick({ L["Your keepers are on the list too. %s tucks them away."],
                       L["Showing what you keep as well. %s hides it again."] }):format(key)
@@ -1198,7 +1231,7 @@ end
 -- within a minute). Nothing is shipped: the sound kits are the game's.
 ---------------------------------------------------------------------------
 function AP:Greet()
-    if not ns.db.ahVoice or not PlaySound then return nil end
+    if not ns.db.ahVoice or not Voiced() or not PlaySound then return nil end      -- (quiet: the narrative is off)
     local now = (GetTime and GetTime()) or (time and time()) or 0
     if self.greetedAt and now - self.greetedAt < AP.GREET_AGAIN then return nil end
     for _, kit in ipairs(AP.VOICE) do

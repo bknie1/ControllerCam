@@ -118,6 +118,11 @@ Boîte vide, l'ami. Même les mites ont déménagé.
 Lettres à payer à la livraison : %d. Celles-là, vous les ouvrez vous-même ; je ne paie pas les factures des autres.
 Vos sacs débordent. Le reste attend dans les lettres que vous fassiez de la place.
 %d que je n'ai pas pu vous remettre : objets uniques, ou la boîte n'a pas voulu les lâcher. Toujours dans leurs lettres.
+Pris dans le courrier : %s.
+Pas de courrier.
+Lettres contre remboursement : %d, laissées pour que vous les ouvriez.
+Vos sacs sont pleins : le reste attend dans les lettres.
+Laissés dans leurs lettres : %d (uniques, ou refusés).
 Maître de poste
 1 objet
 %d objets
@@ -249,19 +254,66 @@ Vos recettes s'épuisent à %d de %d. Un maître aura quelque chose de nouveau.
 Ce que vous savez ne vous portera pas sur les %d derniers. Il est temps de voir un maître.
 %s ne vous apprendra plus grand-chose, mais c'est ce que vous avez de mieux. Encore %d jusqu'à %d.
 Ça avance lentement à partir d'ici : %s donne un point de temps en temps. Encore %d.
+Il vous faudra d'abord %s, %s. Les guides commencent cette étape avec.
+Apprenez %s, %s, et on commence : encore %d jusqu'à %d.
+Encore %d jusqu'à %d. Les guides vous envoient chercher %s jusqu'à %d.
+Ici, c'est la récolte qui vous apprend : %s jusqu'à %d.
+Encore %d jusqu'à %d. Commencez par %s, ou %s si vous préférez : %s.
+D'abord %s, comme le disent les guides. %s fait aussi l'affaire : %s.
 Encore %d jusqu'à %d. Commencez par %s.
 %s est votre meilleur maître à présent. %d points jusqu'à %d.
 Les mains sûres. D'abord %s, et encore %d.
+auprès d'un maître
+auprès d'un marchand
+en butin
+par une quête
+composants moins chers
+composants vendus par un marchand
+composants que vous récoltez vous-même
+se vend bien
+quelque chose que vous utiliserez
+moins de fabrications
+une recette à trouver ou acheter
+d'autres composants
+le premier choix des guides
+Ouvrez la fenêtre d'un métier pour un plan de progression.
+Au plafond, %d. Un maître a le rang suivant.
+Encore %d jusqu'à %d ; vos recettes s'arrêtent avant. Un maître a %s à %d.
+Encore %d jusqu'à %d ; vos recettes s'arrêtent avant. Un maître a %s.
+Vos recettes s'arrêtent à %d de %d. Un maître en a d'autres.
+Encore %d jusqu'à %d. Le mieux maintenant : %s, vert (un point de temps en temps).
+Encore %d jusqu'à %d. Apprenez d'abord %s, %s.
+Encore %d jusqu'à %d. Récoltez %s jusqu'à %d.
+Encore %d jusqu'à %d. D'abord : %s, ou %s (%s).
+Encore %d jusqu'à %d. D'abord : %s.
 À récolter ou acheter
 %d fabrications : %s
+Apprenez-la %s, à partir de %d.
+Apprenez-la %s.
+%s : %d dans vos sacs, %d à la banque, %d par fabrication
+Les guides montent cette étape en récoltant %s.
 %s : vous en avez %d, le plan en utilise %d
 pour %s
+Le Mentor : ce que votre banque permet de fabriquer
+Ce que votre banque permet de fabriquer
+Rien de plus à fabriquer avec ce qu'il y a dans votre banque.
+%d à fabriquer en comptant votre banque, dont %d seulement grâce à elle.
 Le Mentor : %s %d > %d
 Le Mentor
+Plan de progression
+ou
+Récolter %s
+à apprendre
+Essayer
+Masquer
+Le plan
+Retour
 Farmer ceci
 Tout farmer
-Retour
+Avec la banque
 Utiliser le plan
+deux fois pour masquer
+Rien à essayer ici.
 %d ajouté(s) à la liste à farmer.
 Rien ne manque : vous avez ce qu'il faut.
 Ouvrez la fenêtre d'un métier pour faire un plan.
@@ -292,6 +344,7 @@ banque
 Votre marque
 Détails de l'objet: tout sur l'objet que vous visez
 affiche tout sur l'objet que vous visez (ou celui indiqué): prix, qui le possède, votre marque
+%d%% de chances de vendre
 Ça part à coup sûr (%d%%)
 Ça se vend tout seul (%d%%)
 Je pense que ça se vendra (%d%%)
@@ -325,12 +378,19 @@ En vente : %d enchères, %d objets
 %s pièce, %s pour les %d
 Vous avez mis %d en vente ici, %d enchères vendues
 Aucun prix connu : lisez d'abord l'hôtel des ventes.
+Rien dans vos sacs à vendre ici.
+Rien ne se vend mieux ici que chez un marchand aujourd'hui ; %d peut-être, avec de la patience.
+Le meilleur d'abord : %d se vendent mieux ici que chez un marchand, %d de plus avec de la patience.
 Sacs vides, l'ami. Apporte-moi de quoi vendre.
 Rien ici ne bat un marchand aujourd'hui. %d peut-être, avec un peu de patience.
 Pas de profit sûr dans ces sacs, l'ami. %d pourraient payer si tu attends.
 Le meilleur en haut : %d ici battent tout marchand, %d de plus pour les patients.
 %d rapportent plus ici qu'au marchand, le meilleur d'abord. %d de plus si tu attends.
 Le haut de la pile paie le mieux : %d ventes sûres, %d de plus si tu peux attendre.
+Pas encore de prix : %s lit l'hôtel des ventes.
+Prix lus à l'instant : %d.
+%d prix, lus %s.
+%d prix, lus %s. %s les relit.
 Pas encore lu le tableau. %s et je te ramène tous les prix.
 Pas encore de prix, l'ami. %s lit tout le tableau.
 Prix tout frais du tableau, l'ami : %d.
@@ -339,6 +399,8 @@ Je viens de lire le tableau : %d prix, encore chauds.
 Dernier coup d'œil au tableau : %s, %d prix.
 Prix relevés %s, rassis comme du vieux pain. %s relit le tableau.
 %d prix, mais lus %s. %s et je regarde à nouveau.
+Ce que vous gardez est aussi affiché. %s le masque.
+Mis de côté : %d, pour vos métiers, votre équipement et vos marques. %s les affiche.
 Ce que tu gardes est aussi sur la liste. %s le range.
 J'affiche aussi ce que tu gardes. %s le cache à nouveau.
 %d mis de côté : matériaux de métier, équipement à porter, ce que tu as marqué. %s les montre.
@@ -370,6 +432,28 @@ Marché : graphique des prix en bougies
 le graphique des prix du Marché est une bougie par jour sur les 7 derniers jours (où le prix a ouvert, son plus haut et son plus bas, et où il a clôturé : vert s'il a clôturé plus haut, rouge plus bas) ; désactivé : une ligne du prix le plus bas de chaque jour sur 30 jours
 ouvrir ou fermer le Marché (un onglet de l'hôtel des ventes)
 quel hôtel des ventes a ce client (pour le dépannage)
+collectée
+collectée via un autre objet
+pas encore collectée
+Apparence
+Choisissez un ensemble pour mettre ses pièces sur votre tenue. %s la garde ; rien n'est payé avant.
+Examen de votre collection...
+Votre tenue est revenue telle qu'elle était.
+%s : %d pièces sur %d mises en place.
+%d n'ont pas pu aller sur cette tenue.
+Un ensemble dont vous avez des pièces
+%d ensembles dont vous avez des pièces
+vous ne pouvez pas le porter
+manquant
+Les %d pièces
+%d pièces sur %d
+Manque : %s
+Pas encore d'ensemble. Les objets qui partagent un nom, comme Heaume en fer vert et Gantelets en fer vert, apparaissent ici dès que vous en avez un.
+Annuler
+Onglet Ensembles chez le transmogrificateur
+un onglet Ensembles dans la fenêtre de transmogrification : l'équipement de votre collection qui partage un nom (Heaume en fer vert, Gantelets en fer vert...) et les ensembles du jeu, mis sur votre tenue en une pression, avec Annuler ; rien n'est gardé ni payé avant d'appuyer sur Appliquer
+Apparence collectée, dans les infobulles d'objets
+sous l'infobulle de l'équipement et des cosmétiques : si son apparence est déjà dans votre collection, ou seulement via un autre objet identique, pour savoir ce qui est nouveau pour vous
 Hors ligne
 Mort
 Désactivé
@@ -1037,6 +1121,69 @@ Une fenêtre de sacs avec filtres rapides
 vos sacs dans une fenêtre propre au HUD au lieu de celle du jeu: tous les objets ensemble, les emplacements vides regroupés à la fin, vos sacs sur une rangée à part et des filtres rapides en haut (LB et RB). La banque aussi, tant qu'elle est ouverte. Désactivé: les sacs du jeu
 Fenêtre des sacs: ordre
 Malin: ce que vous utilisez d'abord (consommables, objets avec une utilisation), puis le reste par type, la camelote à la fin et estompée. Par type: en sections sous leurs propres titres. Comme dans vos sacs: l'ordre du jeu
+Bon, voyons.
+Och, quel fatras.
+Voyons, voyons...
+Elune, donne-moi de la patience.
+Par les naaru, quel fouillis.
+Fichu sac.
+Sac bien rangé, sac léger.
+Bah. Trop de bric-à-brac.
+Du poids mort, tout ça.
+Patience. La Terre-Mère pourvoit.
+Hé, qu'est-ce qu'on a là, mon ?
+Quel désordre. Indigne de moi.
+Le temps, c'est de l'argent. Comptons.
+Ouais, ça fera l'affaire.
+Elune soit remerciée.
+La Lumière pourvoit.
+Hrm. Ça ira.
+Hm. Assez pour se battre.
+Je voyage léger. Bien.
+Acceptable. De justesse.
+Plus une place de libre. La camelote rapporterait %s : la vendre fait de la place.
+Plus une place de libre. Ce dont je n'ai pas besoin en route peut attendre à la banque.
+Camelote : %d, %s ici. X vend celle que j'ai choisie ; Vente futée prend tout.
+%d d'entre eux vont à la banque : elle en garde déjà, ou je les ai marqués. Déposer les range.
+Plus que %d places. La camelote rapporterait %s chez n'importe quel marchand.
+Plus que %d places. Il est temps de vendre ou de déposer quelques affaires.
+Nouveau depuis mon dernier coup d'œil : %d. Le point doré marque chacun.
+Bon à vendre : %d. Le filtre Vendre les rassemble, et chaque info-bulle dit où ça rapporte le plus.
+Camelote : %d, %s. Le prochain marchand peut la prendre.
+Juste l'essentiel. Rien qui vaille la peine d'être vendu.
+Tout est en ordre, et %d places libres.
+Votre équipement est réparé : %s.
+Je peux réparer votre équipement pour %s ; une pièce cassée ne donne ni armure ni caractéristiques.
+Vos sacs sont pleins. Je prends %d objets pour %s : Vente futée, et vous avez de nouveau de la place.
+Je vous donne %s pour %d objets : la camelote, et ce que l'hôtel des ventes ne paierait pas mieux. Vente futée, et c'est fait.
+Gardez les %d que l'hôtel des ventes réclame : il paie %s de plus que moi.
+Vos sacs sont pleins. Vendez-moi quelque chose avant d'acheter.
+Rien dans vos sacs que je paierais bien. Jetez un œil à mes marchandises.
+%d de vos objets ont leur place ici : j'en garde déjà, ou vous les avez marqués. Déposer les range.
+Je garde davantage de %d objets que vous portez. Retirer remplit vos sacs avant le départ.
+Vos sacs sont presque pleins. Laissez-moi ce dont vous n'aurez pas besoin en route.
+Tout est en sécurité chez moi, et vos sacs ont %d places libres.
+Rien pour vous aujourd'hui. J'ai vérifié deux fois.
+Lettres pour vous : %d, rien de joint. Lisez-les quand vous voulez.
+Lettres pour vous : %d. Dedans : %s.
+Tout prendre les vide d'un coup.
+Contre remboursement : %d. Celles-là, vous les ouvrez et payez vous-même.
+Vos sacs sont pleins : les objets attendent dans leurs lettres.
+Où allons-nous ? Montrez un endroit et je vous dirai combien de temps dure le trajet.
+%s : environ %s d'après la carte. Vous n'avez pas encore fait ce trajet.
+%s : environ %s, d'après votre dernier vol là-bas.
+%s : je ne peux pas encore dire combien de temps. Faites-le une fois et je saurai.
+%d se sont échappés. Cette eau demande plus de compétence que la mienne : un appât aide, une meilleure canne aussi.
+Pas d'appât sur l'hameçon. Il ajoute à ma compétence, donc moins s'échappent.
+L'appât est presque épuisé. Un autre sur l'hameçon garde ma compétence.
+Poissons d'ici que je n'ai pas encore pris : %d. On continue de lancer.
+J'ai pris tous les poissons de cette eau. Ailleurs, alors.
+Rien de pris encore. Le premier poisson de chaque eau va ici.
+Espèces prises : %d. Chaque eau en cache quelques autres : le panneau de pêche montre un ? pour chacune que je n'y ai pas prise.
+Reposé près du feu : les %d prochains points d'expérience des victoires comptent double.
+Aucun repos en réserve. Une nuit à l'auberge ou en ville, et les victoires donnent double expérience pendant un moment.
+Récit : des personnages dans les fenêtres
+chaque fenêtre que le HUD améliore a quelqu'un pour vous aider, avec son portrait et une courte phrase sur ce que vous avez sous les yeux et pourquoi : vous-même devant vos sacs et au bord de l'eau, le marchand, le banquier, le maître de poste, le maître de vol, le Courtier à l'hôtel des ventes et le Mentor à votre métier ; désactivé : les fenêtres restent sobres et silencieuses
 Préréglage du HUD : %s, assorti à la caméra
 préréglage : %s
 Une disposition nommée '%s' a été ajoutée au mode Édition du jeu. Choisissez-la là pour l'utiliser (Menu du jeu > Mode Édition > Disposition).
@@ -1187,15 +1334,57 @@ l'option du jeu : l'infobulle d'un buff s'affiche un instant quand il est appliq
 Couleurs de classe pour les noms dans le chat
 le réglage du chat du jeu pour tous les types de chat à la fois : le nom d'un joueur dans la couleur de sa classe
 ouvrir le panneau d'options (Options > AddOns > ControllerCam HUD)
-Cadres
-Fondu de l'écran
+Vos cadres
+Cible, groupe et raid
 Effets
-Style
-Quêtes, discussion et carte
+Vibration
+Caméra et visée
+Fondu de l'écran
+Cadres du jeu restylés
+Discussion et messages
+Quêtes et carte
+Vols
 Sacs, banque et marchand
-Pêche
+Objets et hôtel des ventes
+Pêche et métiers
 Accessibilité
-Options natives
+Récit
+Rappel pour boire de l'eau
+Vos barres
+En combat
+Barres de vie
+Taille et texte
+Cible et focalisation
+Noms et classes
+Effets sur la cible
+Groupe et raid
+Quelles barres de noms
+Style
+Noms
+Vie et ressource
+Coups
+Chiffres et annonces
+Hors combat
+Manette
+Ce qui vibre
+Caméra
+Temps de recharge
+Ce qui s'estompe
+Quels cadres
+Fenêtre de discussion
+Noms dans la discussion
+Filtres
+Messages d'erreur
+Liste de quêtes
+Progression des quêtes
+Liste à farmer
+Carte
+Barre de vol
+Courrier
+Conseil d'objet
+Apparences
+Pêche
+Métiers
 %s  |  Interface manette: %s  |  en cours: %s
 joueur %s, cible %s, familier %s, focalisation %s  |  cadres du jeu mis de côté: %s  |  discussion déplacée: %s
 options natives: cible de la cible %s, Gestionnaire de temps de recharge %s, ressources personnelles %s

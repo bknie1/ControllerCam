@@ -500,16 +500,33 @@ function B:FollowFocus(now)
     local pressed = down and not self.triggerWas
     self.triggerWas = down
     local was = self.hasPad
-    if self.bankOpen and Shown(rawget(_G, "BankFrame")) then
-        -- at the bank its items are in this window: LT / RT go between your bags and the bank here, as the back
-        -- button does, and the controller stays with the window (never handed to the game's bank window, whose
-        -- focus can rest on the game's own unseen bags: no cursor anywhere then)
+    local focus, known = B.GameFocus()
+    local bankFrame = rawget(_G, "BankFrame")
+    if self.bankOpen and Shown(bankFrame) and known and not InCombatLockdown() then
+        -- at the bank, with the Gamepad UI's window manager there: LT / RT are the game's, moving its focus
+        -- between its bank window and its (unseen) bags, and a window with the game's focus takes the d-pad and
+        -- A for itself, so ours could not move there. Ours follows the game's focus: the bank window's own
+        -- buttons while it has it, ours (your bags) while its bags have it. The back button still shows the bank
+        -- in this window.
+        if focus ~= self.focusWas then
+            self.focusWas = focus
+            if focus == bankFrame then
+                self.hasPad = false
+                if self.view == "bank" then self:SwitchView("bags") end
+            elseif B.IsGameBag(focus) or focus == nil then
+                self.hasPad = true
+            end
+        end
+        self.pressAt = nil
+    elseif self.bankOpen and Shown(bankFrame) then
+        -- at the bank with no window manager to ask: LT / RT go between your bags and the bank in this window,
+        -- as the back button does, and the controller stays with the window
         self.hasPad, self.pressAt = true, nil
         if pressed and not InCombatLockdown() then self:SwitchView() end
     elseif not B.OtherWindow() then
         self.hasPad, self.pressAt = true, nil
     elseif not InCombatLockdown() then
-        local f, known = B.GameFocus()
+        local f = focus
         local before = self.focusWas                         -- (the focus before this frame: a press may move it now)
         if known and f ~= self.focusWas then                 -- the game moved its focus: ours goes with it
             self.focusWas = f
@@ -1281,7 +1298,8 @@ function B:Legend()
     if self.bankOpen then add("PADBACK", self.view == "bank" and L["Bags"] or L["Bank"]) end
     local text = table.concat(parts, "   ")
     if self.bankOpen and Shown(rawget(_G, "BankFrame")) then
-        local words = self.view == "bank" and L["%s or %s: back to bags"] or L["%s or %s: to the bank"]
+        local _, known = B.GameFocus()
+        local words = (self.view == "bank" and not known) and L["%s or %s: back to bags"] or L["%s or %s: to the bank"]
         text = text .. "\n" .. GREY .. words:format(Key("PADLTRIGGER"), Key("PADRTRIGGER")) .. "|r"
     elseif B.OtherWindow() then
         text = text .. "\n" .. GREY .. B.ToOther():format(Key("PADLTRIGGER"), Key("PADRTRIGGER")) .. "|r"
@@ -1435,8 +1453,14 @@ function B:Tip(mouse)
     end
     if not (self.open and self.padTip) then return end
     if not mouse and B.TipsOff() then return end
+    -- the controller on the other window (a vendor's, the mailbox, the bank's): the game's tooltip is that
+    -- window's, for what its own cursor is on; the bags redrawing (as they do with every sale) never takes it
+    if not mouse and not self.hasPad then return end
     local target = self.zone == "bags" and frame.bagButtons[self.bagIndex] or self:Selected()
-    if not target then GameTooltip:Hide(); return end
+    if not target then
+        if B.tipMine then GameTooltip:Hide(); B.tipMine = false end
+        return
+    end
     if self.zone == "bags" then return self:BagTip(target, self.bagIndex) end
     local e = self.list[self.index]
     B.TipBeside()
@@ -1469,6 +1493,7 @@ function B:Update(keepRead)
     self:Remember()
     self:Layout()
     self:Tip()
+    if ns.Narrative then ns.Narrative.Bags() end                  -- (you, muttering over them)
 end
 
 -- What a fight would open on, and what its snippets move through: the list as it is now
@@ -1554,6 +1579,7 @@ function B:Hide()
     if not self.open then return end
     self:CancelDestroy()
     self.open, self.menu = false, nil
+    if ns.Narrative then ns.Narrative.Hush("bags") end
     self:ClearNew()
     if frame then
         frame:Hide()
@@ -1814,6 +1840,20 @@ function B:Sort()
     end
 end
 
+-- Gear (or a cosmetic) you could see on yourself: the game's dressing room shows it on you, as a click with Ctrl
+-- does with a mouse
+function B.Dressable(e)
+    if not (e and e.id and e.link) then return false end
+    local byId = C_Item and C_Item.IsDressableItemByID
+    if byId then return Try(byId, e.id) == true end
+    return Try(rawget(_G, "IsDressableItem"), e.link) == true
+end
+
+function B.TryOn(link)
+    local dress = rawget(_G, "DressUpItemLink") or rawget(_G, "DressUpLink")
+    if link and dress then Try(dress, link) end
+end
+
 -- The choices for the chosen slot (or bag) and the place you are at: { { text, fn, stay = keep the menu up } }
 function B:Choices()
     local out = {}
@@ -1831,6 +1871,7 @@ function B:Choices()
             self.verdicts = {}
         end, true)
         if ns.ItemInfo and ns.ItemInfo.Show then add(L["Item details"], function() ns.ItemInfo:Show(e.id) end) end
+        if B.Dressable(e) then add(L["Try on"], function() B.TryOn(e.link) end) end
         if B.CanDestroy(e) and not InCombatLockdown() then                 -- (in red: it can't be undone)
             add("|cffeb5461" .. L["Destroy"] .. "|r", function() self:AskDestroy(e) end)
         end

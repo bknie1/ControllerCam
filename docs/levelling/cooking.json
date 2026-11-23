@@ -1,0 +1,66 @@
+{
+  "kind": "cooking",
+  "sources": [
+    "https://www.wowhead.com/classic/guide/cooking-leveling-1-300-wow-classic",
+    "https://www.wowhead.com/classic/skill=185/cooking"
+  ],
+  "steps": [
+    { "from": 1, "to": 50, "item": 6290, "spell": null, "name": "Brilliant Smallfish", "crafts": 50,
+      "made": 1, "learn": "vendor", "learnAt": 1, "reagents": [[6291, 1]],
+      "alts": [
+        { "item": 2679, "spell": null, "name": "Charred Wolf Meat", "crafts": null, "made": 1,
+          "learn": "trainer", "learnAt": 1, "reagents": [[2672, 1]], "why": ["other"] },
+        { "item": 2681, "spell": null, "name": "Roasted Boar Meat", "crafts": null, "made": 1,
+          "learn": "trainer", "learnAt": 1, "reagents": [[769, 1]], "why": ["other"] }
+      ] },
+    { "from": 51, "to": 100, "item": 4592, "spell": null, "name": "Longjaw Mud Snapper", "crafts": 50,
+      "made": 1, "learn": "vendor", "learnAt": 50, "reagents": [[6289, 1]],
+      "alts": [
+        { "item": 2684, "spell": null, "name": "Coyote Steak", "crafts": null, "made": 1,
+          "learn": "trainer", "learnAt": 50, "reagents": [[2673, 1]], "why": ["other"] },
+        { "item": 2687, "spell": null, "name": "Dry Pork Ribs", "crafts": null, "made": 1,
+          "learn": "trainer", "learnAt": 80, "reagents": [[2677, 1], [2678, 1]], "why": ["other"] },
+        { "item": 5477, "spell": null, "name": "Strider Stew", "crafts": null, "made": 2,
+          "learn": "vendor", "learnAt": 50, "reagents": [[5469, 1], [4536, 1]], "why": ["other"] },
+        { "item": 7676, "spell": null, "name": "Thistle Tea", "crafts": null, "made": 1,
+          "learn": "quest", "learnAt": 60, "reagents": [[2452, 1], [159, 1]], "why": ["useful", "recipe"] }
+      ] },
+    { "from": 101, "to": 150, "item": 4593, "spell": null, "name": "Bristle Whisker Catfish", "crafts": 50,
+      "made": 1, "learn": "vendor", "learnAt": 100, "reagents": [[6308, 1]],
+      "alts": [
+        { "item": 2684, "spell": null, "name": "Coyote Steak", "crafts": null, "made": 1,
+          "learn": "trainer", "learnAt": 50, "reagents": [[2673, 1]], "why": ["other"] },
+        { "item": 2687, "spell": null, "name": "Dry Pork Ribs", "crafts": null, "made": 1,
+          "learn": "trainer", "learnAt": 80, "reagents": [[2677, 1], [2678, 1]], "why": ["other"] },
+        { "item": 7676, "spell": null, "name": "Thistle Tea", "crafts": null, "made": 1,
+          "learn": "quest", "learnAt": 60, "reagents": [[2452, 1], [159, 1]], "why": ["useful", "recipe"] },
+        { "item": 3665, "spell": null, "name": "Curiously Tasty Omelet", "crafts": null, "made": 1,
+          "learn": "vendor", "learnAt": 130, "reagents": [[3685, 1], [2692, 1]], "why": ["other"] }
+      ] },
+    { "from": 151, "to": 175, "item": 4593, "spell": null, "name": "Bristle Whisker Catfish", "crafts": 70,
+      "made": 1, "learn": "vendor", "learnAt": 100, "reagents": [[6308, 1]],
+      "alts": [
+        { "item": 3665, "spell": null, "name": "Curiously Tasty Omelet", "crafts": null, "made": 1,
+          "learn": "vendor", "learnAt": 130, "reagents": [[3685, 1], [2692, 1]], "why": ["other"] }
+      ] },
+    { "from": 176, "to": 225, "item": 8364, "spell": null, "name": "Mithril Headed Trout", "crafts": 60,
+      "made": 1, "learn": "vendor", "learnAt": 175, "reagents": [[8365, 1]],
+      "alts": [
+        { "item": 12210, "spell": null, "name": "Roast Raptor", "crafts": null, "made": 1,
+          "learn": "vendor", "learnAt": 175, "reagents": [[12184, 1], [2692, 1]], "why": ["other"] },
+        { "item": 4594, "spell": null, "name": "Rockscale Cod", "crafts": null, "made": 1,
+          "learn": "vendor", "learnAt": 175, "reagents": [[6362, 1]], "why": ["other"] }
+      ] },
+    { "from": 226, "to": 275, "item": 6887, "spell": null, "name": "Spotted Yellowtail", "crafts": 70,
+      "made": 1, "learn": "vendor", "learnAt": 225, "reagents": [[4603, 1]], "alts": [] },
+    { "from": 276, "to": 300, "item": 13934, "spell": null, "name": "Mightfish Steak", "crafts": 25,
+      "made": 1, "learn": "vendor", "learnAt": 275, "reagents": [[13893, 1], [2692, 1], [3713, 1]],
+      "alts": [
+        { "item": 13933, "spell": null, "name": "Lobster Stew", "crafts": null, "made": 1,
+          "learn": "vendor", "learnAt": 275, "reagents": [[13888, 1], [159, 1]], "why": ["other"] },
+        { "item": 13935, "spell": null, "name": "Baked Salmon", "crafts": null, "made": 1,
+          "learn": "vendor", "learnAt": 275, "reagents": [[13889, 1], [3713, 1]], "why": ["other"] }
+      ] }
+  ],
+  "notes": "Icy Veins (https://www.icy-veins.com/wow-classic/classic-cooking-profession-guide) returned HTTP 403 to automated fetches, so no Icy Veins comparison was made. The main path is Wowhead's fishing route; Wowhead writes ranges with shared endpoints (1-50, 50-100 ...), recorded here as contiguous (each step starts one above the previous end). Wowhead's guide gives craft counts only for the fish route; every alt has crafts null. Alts come from Wowhead's 'Augmenting Fishing with Meat Recipes' and rogue sections, which give looser ranges than the steps: Charred Wolf Meat and Roasted Boar Meat are 'early' (starting recipes; Wowhead's skill data lists learnedat 0, recorded as learnAt 1); Coyote Steak and Dry Pork Ribs cover 50-130 and their meat drops almost only in Alliance zones; Strider Stew is Wowhead's Horde option for 50-100 (Horde-only recipe item 5486, quest/vendor); Thistle Tea is rogue-only (Recipe: Thistle Tea item 18160 from the level 20 rogue quest Klaven's Tower, quest 2359), usable 60-140; Curiously Tasty Omelet 130-175 (Recipe item 3682, vendor; Alliance: Kendor Kabonka in Stormwind, Horde: Keena in Arathi Highlands or Nerrist in Grom'gol); Roast Raptor 175-225 (Recipe item 12228, same vendors); Rockscale Cod is offered instead of Mithril Headed Trout but turns yellow at 190 vs 215 (Recipe item 6369); Lobster Stew and Baked Salmon (Recipe items 13947, 13949) are sold beside Mightfish Steak in Feralas and use fish from the same areas. The guide's wording for 275-300 says to use Large Raw Mightfish 'or a mix with' Darkclaw Lobster and Raw Whitescale Salmon. Recipe items for the main path: Brilliant Smallfish 6325, Longjaw Mud Snapper 6328, Bristle Whisker Catfish 6330, Mithril Head Trout 17062, Spotted Yellowtail 13939 (Steamwheedle Port, Tanaris), Mightfish Steak 13948 (Vivianna npc 7947, Feathermoon / Sheendra Tallgrass npc 8145, Camp Mojache). Created items, reagents and learnAt come from the recipe list on Wowhead's Cooking skill page. Rank-ups: Journeyman from a trainer before 75 (level 10, skill 50); Expert from Expert Cookbook (item 16072, vendor Shandrina npc 3955 Ashenvale / Wulan npc 12033 Desolace) before 150; Artisan from the quest Clamlette Surprise (quest 6610, breadcrumbs 6611 Horde / 6612 Alliance; needs level 35, skill 225, 12 Giant Egg, 10 Zesty Clam Meat, 20 Alterac Swiss). Wowhead puts the Expert note between 100-150 and 150-175 and splits Bristle Whisker Catfish into 50 + 70 crafts (120 fish total); kept as two steps. Wowhead's fish list: 50 Raw Brilliant Smallfish, 50 Raw Longjaw Mud Snapper, 120 Raw Bristle Whisker Catfish, 60 Raw Mithril Head Trout, 70 Raw Spotted Yellowtail, 25 Large Raw Mightfish."
+}

@@ -212,6 +212,7 @@ function P:Refresh()
         end
     end
     P.tallied = shown
+    if ns.Narrative then ns.Narrative.Fishing() end               -- (you, at the water)
     local shade = ns.db.textShade ~= false
     if shade then frame.shade:Show() else frame.shade:Hide() end
     if shade and shown > 0 then

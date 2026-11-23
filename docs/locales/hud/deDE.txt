@@ -118,6 +118,11 @@ Leerer Kasten, Freund. Sogar die Motten sind ausgezogen.
 Briefe, die bei Lieferung Münzen wollen: %d. Die öffnest du selbst; fremde Rechnungen zahle ich nicht.
 Deine Taschen platzen aus allen Nähten. Der Rest wartet in den Briefen, bis du Platz machst.
 %d konnte ich dir nicht geben: Einzelstücke, oder der Kasten wollte nicht loslassen. Sie liegen noch in ihren Briefen.
+Aus der Post genommen: %s.
+Keine Post.
+Briefe mit Nachnahme: %d, zum selbst Öffnen gelassen.
+Deine Taschen sind voll: der Rest bleibt in den Briefen.
+In ihren Briefen gelassen: %d (einzigartig oder abgelehnt).
 Postmeister
 1 Gegenstand
 %d Gegenstände
@@ -249,19 +254,66 @@ Deine Rezepte geben %d vor %d nichts mehr her. Ein Lehrer hat etwas Neues für d
 Was du kannst, trägt dich nicht über die letzten %d. Zeit für einen Lehrer.
 %s lehrt dich jetzt nicht mehr viel, aber es ist das Beste, was du hast. Noch %d bis %d.
 Ab hier geht es langsam: %s gibt ab und zu einen Punkt. Noch %d.
+Zuerst brauchst du %s, %s. Die Anleitungen beginnen diesen Abschnitt damit.
+Lerne %s, %s, dann fangen wir an: noch %d bis %d.
+Noch %d bis %d. Die Anleitungen schicken dich nach %s, bis %d.
+Hier lehrt dich das Sammeln: %s bis %d.
+Noch %d bis %d. Fang mit %s an, oder mit %s, wenn dir das lieber ist: %s.
+Zuerst %s, so sehen es die Anleitungen. %s tut es auch: %s.
 Noch %d bis %d. Fang mit %s an.
 %s ist jetzt dein bester Lehrer. Noch %d Punkte bis %d.
 Ruhige Hände. Zuerst %s, dann noch %d.
+bei einem Lehrer
+bei einem Händler
+als Beute
+aus einer Quest
+günstigere Materialien
+Materialien vom Händler
+Materialien, die du selbst sammelst
+verkauft sich gut
+etwas, das du selbst nutzt
+weniger Herstellungen
+ein Rezept, das du findest oder kaufst
+andere Materialien
+die erste Wahl der Anleitungen
+Öffne das Fenster eines Berufs für einen Levelplan.
+Am Limit, %d. Ein Lehrer hat den nächsten Rang.
+Noch %d bis %d; deine Rezepte reichen nicht. Ein Lehrer hat %s ab %d.
+Noch %d bis %d; deine Rezepte reichen nicht. Ein Lehrer hat %s.
+Deine Rezepte enden %d vor %d. Ein Lehrer hat mehr.
+Noch %d bis %d. Am besten jetzt: %s, grün (ab und zu ein Punkt).
+Noch %d bis %d. Lerne zuerst %s, %s.
+Noch %d bis %d. Sammle %s bis %d.
+Noch %d bis %d. Zuerst: %s, oder %s (%s).
+Noch %d bis %d. Zuerst: %s.
 Zu sammeln oder zu kaufen
 %d-mal herstellen: %s
+Lerne es %s, ab %d.
+Lerne es %s.
+%s: %d in deinen Taschen, %d in der Bank, %d pro Herstellung
+Die Anleitungen leveln diesen Abschnitt mit dem Sammeln von %s.
 %s: du hast %d, der Plan braucht %d
 für %s
+Der Mentor: was deine Bank herstellen lässt
+Was deine Bank herstellen kann
+Mit dem, was in deiner Bank liegt, lässt sich nichts mehr herstellen.
+%d kannst du mit deiner Bank herstellen, %d davon nur mit ihr.
 Der Mentor: %s %d > %d
 Der Mentor
+Levelplan
+oder
+Sammle %s
+zu lernen
+Anprobieren
+Ausblenden
+Der Plan
+Zurück
 Das farmen
 Alles farmen
-Zurück
+Mit der Bank
 Plan bedienen
+zweimal zum Ausblenden
+Hier gibt es nichts anzuprobieren.
 %d zur Farmliste hinzugefügt.
 Nichts fehlt: Du hast alles, was nötig ist.
 Öffne das Fenster eines Berufs, um einen Plan zu erstellen.
@@ -292,6 +344,7 @@ Bank
 Deine Markierung
 Gegenstandsdetails: alles über den Gegenstand, auf den du zeigst
 zeigt alles über den Gegenstand, auf den du zeigst (oder den angegebenen): Preise, wer ihn besitzt, deine Markierung
+%d%% Verkaufschance
 Geht sicher weg (%d%%)
 Das verkauft sich von selbst (%d%%)
 Ich denke, das geht weg (%d%%)
@@ -325,12 +378,19 @@ Eingestellt: %d Auktionen, %d Gegenstände
 %s pro Stück, %s für alle %d
 Du hast hier %d eingestellt, %d Auktionen verkauft
 Kein Preis bekannt: lies zuerst das Auktionshaus.
+Nichts in deinen Taschen, das sich hier verkaufen lässt.
+Heute bringt hier nichts mehr als beim Händler; %d vielleicht, mit Geduld.
+Das Beste zuerst: %d bringen hier mehr als beim Händler, %d weitere mit Geduld.
 Leere Taschen, Freund. Bring mir was zum Verkaufen.
 Hier schlägt heute nichts den Händler. %d vielleicht, mit etwas Geduld.
 Kein sicherer Gewinn in diesen Taschen, Freund. %d lohnen sich, wenn du wartest.
 Das Beste oben: %d hier schlagen jeden Händler, %d mehr für Geduldige.
 %d bringen hier mehr als beim Händler, Bestes zuerst. %d mehr, wenn du wartest.
 Oben liegt das Geld: %d sichere Verkäufe, %d mehr, wenn du warten kannst.
+Noch keine Preise: %s liest das Auktionshaus.
+Gerade gelesene Preise: %d.
+%d Preise, gelesen %s.
+%d Preise, gelesen %s. %s liest sie neu.
 Hab das Brett noch nicht gelesen. %s, und ich hol jeden Preis.
 Noch keine Preise, Freund. %s liest das ganze Brett.
 Preise frisch vom Brett, Freund: %d Stück.
@@ -339,6 +399,8 @@ Gerade das Brett gelesen: %d Preise, noch warm.
 Zuletzt aufs Brett geschaut: %s, %d Preise.
 Preise von %s, altbacken wie Brot von gestern. %s liest das Brett neu.
 %d Preise, aber gelesen %s. %s, und ich schau nochmal.
+Was du behältst, wird auch gezeigt. %s blendet es aus.
+Zurückbehalten: %d, für deine Berufe, deine Ausrüstung und deine Markierungen. %s zeigt sie.
 Was du behältst, steht auch auf der Liste. %s räumt es weg.
 Ich zeig auch, was du behältst. %s blendet es wieder aus.
 %d zurückgelegt: Material für Berufe, Ausrüstung, Markiertes. %s zeigt sie.
@@ -370,6 +432,28 @@ Markt: Preisverlauf als Kerzen
 der Preisverlauf im Markt ist eine Kerze pro Tag für die letzten 7 Tage (wo der Preis eröffnete, am höchsten und am niedrigsten war und schloss: grün, wenn er höher schloss, rot, wenn tiefer); aus: eine Linie des niedrigsten Tagespreises über 30 Tage
 den Markt öffnen oder schließen (ein Reiter des Auktionshauses)
 welches Auktionshaus dieser Client hat (zur Fehlersuche)
+gesammelt
+über einen anderen Gegenstand gesammelt
+noch nicht gesammelt
+Vorlage
+Wähle ein Set, um seine Teile auf dein Outfit zu legen. %s behält es; vorher wird nichts bezahlt.
+Deine Sammlung wird durchgesehen...
+Dein Outfit ist wieder wie vorher.
+%s: %d von %d Teilen angelegt.
+%d passten nicht auf dieses Outfit.
+Ein Set, von dem du Teile hast
+%d Sets, von denen du Teile hast
+kannst du nicht tragen
+fehlt
+Alle %d Teile
+%d von %d Teilen
+Fehlt: %s
+Noch keine Sets. Gegenstände mit gleichem Namen, wie Grüner Eisenhelm und Grüne Eisenstulpen, erscheinen hier, sobald du einen davon hast.
+Rückgängig
+Sets-Reiter beim Transmogrifizierer
+ein Sets-Reiter im Transmogrifikationsfenster: Ausrüstung aus deiner Sammlung mit gleichem Namen (Grüner Eisenhelm, Grüne Eisenstulpen...) und die Sets des Spiels, mit einem Druck auf dein Outfit gelegt, mit Rückgängig; nichts wird behalten oder bezahlt, bis du Anwenden drückst
+Vorlage gesammelt, in Gegenstands-Tooltips
+unter dem Tooltip von Ausrüstung und Kosmetik: ob ihr Aussehen schon in deiner Sammlung ist oder nur über einen anderen Gegenstand, der gleich aussieht, damit du erkennst, was neu für dich ist
 Offline
 Tot
 Aus
@@ -1037,6 +1121,69 @@ Ein Taschenfenster mit Schnellfiltern
 deine Taschen in einem eigenen Fenster des HUD statt dem des Spiels: alle Gegenstände beisammen, die freien Plätze am Ende gesammelt, deine Taschen in einer eigenen Reihe und Schnellfilter oben (LB und RB). Auch die Bank, solange sie offen ist. Aus: die Taschen des Spiels
 Taschenfenster: Reihenfolge
 Clever: was du benutzt zuerst (Verbrauchbares, Gegenstände mit Benutzen), dann der Rest nach Art, Plunder zuletzt und verblasst. Nach Art: in Abschnitten unter eigenen Überschriften. Wie in den Taschen: die Reihenfolge des Spiels
+Also gut.
+Och, was für ein Haufen.
+So, mal sehen, mal sehen...
+Elune, gib mir Geduld.
+Bei den Naaru, was für ein Durcheinander.
+Verflixter Rucksack.
+Ein ordentlicher Rucksack ist ein leichter Rucksack.
+Pah. Zu viel Kram.
+Totes Gewicht, das alles.
+Geduld. Die Erdenmutter sorgt für uns.
+Ey, was ham wir denn hier, Mann?
+Welch ein Durcheinander. Unschicklich.
+Zeit ist Geld. Zählen wir nach.
+Jo, das reicht.
+Elune sei Dank.
+Das Licht sorgt für uns.
+Hrm. Gut genug.
+Hm. Genug zum Kämpfen.
+Mit leichtem Gepäck. Gut.
+Annehmbar. Gerade so.
+Kein Platz mehr frei. Der Plunder brächte %s: verkaufen schafft Platz.
+Kein Platz mehr frei. Was ich unterwegs nicht brauche, kann in der Bank warten.
+Plunder: %d, hier %s wert. X verkauft das Gewählte; Schlau verkaufen nimmt alles.
+%d davon gehören in die Bank: dort liegt schon mehr davon, oder ich habe sie markiert. Einlagern räumt sie weg.
+Nur noch %d Plätze frei. Der Plunder brächte bei jedem Händler %s.
+Nur noch %d Plätze frei. Zeit, ein paar Sachen zu verkaufen oder einzulagern.
+Neu seit dem letzten Blick: %d. Der goldene Punkt markiert jedes.
+Lohnt den Verkauf: %d. Der Filter Verkaufen sammelt sie, und jeder Tooltip sagt, wo es am meisten bringt.
+Plunder: %d, %s wert. Der nächste Händler kann ihn haben.
+Nur das Nötigste. Nichts, was sich zu verkaufen lohnt.
+Alles in Ordnung, und %d Plätze frei.
+Deine Ausrüstung ist repariert: %s.
+Ich kann deine Ausrüstung für %s reparieren; ein kaputtes Teil gibt dir weder Rüstung noch Werte.
+Deine Taschen sind voll. Ich nehme %d Sachen für %s: Schlau verkaufen, und du hast wieder Platz.
+Ich gebe dir %s für %d Sachen: den Plunder und was das Auktionshaus nicht besser bezahlt. Schlau verkaufen, und fertig.
+Behalte die %d, die das Auktionshaus will: es zahlt %s mehr als ich.
+Deine Taschen sind voll. Verkauf mir erst etwas, bevor du kaufst.
+Nichts in deinen Taschen, wofür ich gut zahlen würde. Sieh dir meine Waren an.
+%d deiner Sachen gehören hierher: ich verwahre mehr davon, oder du hast sie markiert. Einlagern räumt sie weg.
+Ich verwahre mehr von %d Sachen, die du trägst. Abheben füllt deine Taschen auf, bevor du aufbrichst.
+Deine Taschen sind fast voll. Lass bei mir, was du unterwegs nicht brauchst.
+Alles sicher bei mir, und deine Taschen haben %d Plätze frei.
+Heute nichts für dich. Ich hab zweimal nachgesehen.
+Briefe für dich: %d, nichts angehängt. Lies sie, wann du magst.
+Briefe für dich: %d. Darin: %s.
+Alles nehmen leert sie in einem Rutsch.
+Nachnahme: %d. Die öffnest und bezahlst du selbst.
+Deine Taschen sind voll: die Gegenstände warten in ihren Briefen.
+Wohin? Zeig auf einen Ort, und ich sage dir, wie lange der Flug dauert.
+%s: etwa %s laut Karte. Diese Strecke bist du noch nicht geflogen.
+%s: etwa %s, nach deinem letzten Flug dorthin.
+%s: wie lange, kann ich noch nicht sagen. Flieg es einmal, dann weiß ich es.
+%d sind entwischt. Dieses Gewässer verlangt mehr Können, als ich habe: Köder hilft, eine bessere Angel auch.
+Kein Köder am Haken. Er erhöht mein Können, dann entwischen weniger.
+Der Köder ist fast aufgebraucht. Ein neuer am Haken hält mein Können oben.
+Fische hier, die ich noch nicht gefangen habe: %d. Weiter auswerfen.
+Ich habe jeden Fisch dieses Gewässers gefangen. Dann etwas Neues.
+Noch nichts gefangen. Der erste Fisch jedes Gewässers kommt hier hinein.
+Gefangene Arten: %d. Jedes Gewässer versteckt noch ein paar: die Angelanzeige zeigt ein ? für jede, die ich dort noch nicht gefangen habe.
+Am Feuer ausgeruht: die nächsten %d Erfahrung aus Kämpfen zählen doppelt.
+Keine Erholung angespart. Eine Nacht im Gasthaus oder in einer Stadt, und Kämpfe geben eine Weile doppelte Erfahrung.
+Erzählung: Figuren in den Fenstern
+jedes Fenster, das das HUD verbessert, hat jemanden, der dir hilft, mit Porträt und einem kurzen Satz dazu, was vor dir liegt und warum: du selbst über deinen Taschen und am Wasser, der Händler, der Bankier, der Postmeister, der Flugmeister, der Makler im Auktionshaus und der Mentor bei deinem Beruf; aus: die Fenster sind schlicht und still
 HUD-Voreinstellung: %s, passend zur Kamera
 Preset: %s
 Ein Layout namens '%s' wurde dem Bearbeitungsmodus des Spiels hinzugefügt. Wähle es dort aus, um es zu benutzen (Spielmenü > Bearbeitungsmodus > Layout).
@@ -1187,15 +1334,57 @@ die Option des Spiels: der Tooltip eines Buffs erscheint kurz, wenn er angewende
 Klassenfarben für Namen im Chat
 die Chat-Einstellung des Spiels für alle Chatarten gleichzeitig: der Name eines Spielers in seiner Klassenfarbe
 öffne das Optionsfenster (Optionen > AddOns > ControllerCam HUD)
-Rahmen
-Bildschirm ausblenden
+Eure Rahmen
+Ziel, Gruppe und Schlachtzug
 Effekte
-Aussehen
-Quests, Chat und Karte
+Vibration
+Kamera und Zielpunkt
+Bildschirm ausblenden
+Umgestaltete Spielrahmen
+Chat und Meldungen
+Quests und Karte
+Flüge
 Taschen, Bank und Händler
-Angeln
+Gegenstände und Auktionshaus
+Angeln und Berufe
 Barrierefreiheit
-Native Optionen
+Erzählung
+Trinkerinnerung
+Eure Leisten
+Im Kampf
+Gesundheitsleisten
+Größe und Text
+Ziel und Fokus
+Namen und Klassen
+Effekte auf dem Ziel
+Gruppe und Schlachtzug
+Welche Namensplaketten
+Aussehen
+Namen
+Gesundheit und Ressource
+Treffer
+Zahlen und Hinweise
+Außerhalb des Kampfes
+Controller
+Was vibriert
+Kamera
+Abklingzeiten
+Was ausgeblendet wird
+Welche Rahmen
+Chatfenster
+Namen im Chat
+Filter
+Fehlermeldungen
+Questliste
+Questfortschritt
+Farmliste
+Karte
+Flugleiste
+Post
+Gegenstandsrat
+Vorlagen
+Angeln
+Berufe
 %s  |  Gamepad-Oberfläche: %s  |  läuft: %s
 Spieler %s, Ziel %s, Haustier %s, Fokus %s  |  Spielrahmen beiseitegelegt: %s  |  Chat verschoben: %s
 native Optionen: Ziel des Ziels %s, Abklingzeitmanager %s, persönliche Ressourcen %s
