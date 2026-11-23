@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.4.20
+
+ControllerCam
+- Your movement settings are yours. The camera profiles also set the game's controller movement options: whether your character faces the way you move and at what angle, turning with the camera, facing on a mount, swimming or flying, and the stick's turn and look speeds. Now they leave those alone until you say they may. At the first login, ControllerCam asks once (A: let the profiles set them, B: keep mine). **Keep mine** puts back any values a profile had already changed, as you had them. Change it any time with the new option **Profiles also set how you move and the stick's speeds**, or `/ccam movement`. The camera itself (distance, shoulder offset, head tracking) is set as before.
+
 ## 1.4.19
 
 ControllerCam: HUD

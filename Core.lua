@@ -476,6 +476,15 @@ function ns.ShoulderScale()
     return (db and db.formOffset[id]) or FORM_SCALE[id] or 1
 end
 
+-- How you move and the stick's speeds (the game's own Controller settings: facing, turning with the camera, the
+-- stick's turn and look speeds, the camera following the stick) are yours: the profiles only set them once you
+-- said they may (asked once, at the first login: ns.AskMovement), and not at all before you answered.
+ns.MOVEMENT_GROUPS = { Facing = true, Controller = true }
+local function MayManage(s)
+    return not ns.MOVEMENT_GROUPS[s.group] or (db and db.movement == true)
+end
+ns.MayManage = MayManage
+
 -- Compute what a profile wants: { cvar = "value" }, zoom, curve, whether it uses ActionCam features.
 local function Resolve(profile, withZoom)
     local values = profile.values
@@ -488,6 +497,8 @@ local function Resolve(profile, withZoom)
     for _, s in ipairs(ns.SETTINGS) do
         if s.api then
             -- applied separately
+        elseif not MayManage(s) then
+            -- (yours: left as you have it)
         elseif s.kind == "curve" then
             if theCurve then
                 local z = (withZoom and zoom) or tonumber(G("GetCameraZoom")) or zoom or 0
@@ -827,6 +838,75 @@ function ns.SetFlipShoulder(v)
     ns.Evaluate(true)
 end
 
+-- Profiles may set how you move and the stick's speeds (true), or they're yours (false): yours are put back as
+-- you had them before a profile changed them
+function ns.SetMovement(v)
+    db.movement = v and true or false
+    if not db.movement then
+        for _, s in ipairs(ns.SETTINGS) do
+            if ns.MOVEMENT_GROUPS[s.group] and s.cvars then
+                for _, cvar in ipairs(s.cvars) do
+                    local was = db.originals[cvar]
+                    if was ~= nil then
+                        pcall(SetCVar, cvar, was)
+                        db.originals[cvar] = nil
+                    end
+                end
+            end
+        end
+    end
+    ns.Evaluate(true)
+end
+
+-- Asked once: a small window of our own (A: let them, B: keep mine; or the mouse), never in a fight
+local ask, askOwner, askLater
+function ns.AskMovement()
+    if not db or db.movement ~= nil then return end
+    if InCombatLockdown() then askLater = true; return end
+    askLater = nil
+    if not ask then
+        ask = CreateFrame("Frame", "ControllerCamMovementAsk", UIParent)
+        ask:SetSize(420, 150)
+        ask:SetPoint("CENTER", UIParent, "CENTER", 0, 120)
+        ask:SetFrameStrata("DIALOG")
+        ask:EnableMouse(true)
+        ask.back = ask:CreateTexture(nil, "BACKGROUND")
+        ask.back:SetColorTexture(0.03, 0.04, 0.07, 0.94)
+        ask.back:SetAllPoints(ask)
+        ask.title = ask:CreateFontString(nil, "ARTWORK", "GameFontNormalLarge")
+        ask.title:SetPoint("TOP", ask, "TOP", 0, -14)
+        ask.title:SetText(L["ControllerCam: how you move"])
+        ask.text = ask:CreateFontString(nil, "ARTWORK", "GameFontHighlight")
+        ask.text:SetPoint("TOPLEFT", ask, "TOPLEFT", 18, -42)
+        ask.text:SetPoint("TOPRIGHT", ask, "TOPRIGHT", -18, -42)
+        ask.text:SetJustifyH("LEFT")
+        ask.text:SetText(L["The camera profiles can also set how your character faces and turns as you move, and how fast the stick turns the camera. Let them, or keep your own settings?"])
+        local function Answer(v)
+            if askOwner then ClearOverrideBindings(askOwner) end
+            ask:Hide()
+            ns.SetMovement(v)
+            ns.Say(v and L["The profiles now set how you move and the stick's speeds (/ccam movement to change it)."]
+                or L["Your own movement and stick settings are kept (/ccam movement to change it)."])
+        end
+        ask.yes = CreateFrame("Button", "ControllerCamMovementYes", ask, "UIPanelButtonTemplate")
+        ask.yes:SetSize(180, 26)
+        ask.yes:SetPoint("BOTTOMLEFT", ask, "BOTTOMLEFT", 18, 14)
+        ask.yes:SetText(L["Let the profiles set them"])
+        ask.yes:SetScript("OnClick", function() Answer(true) end)
+        ask.no = CreateFrame("Button", "ControllerCamMovementNo", ask, "UIPanelButtonTemplate")
+        ask.no:SetSize(180, 26)
+        ask.no:SetPoint("BOTTOMRIGHT", ask, "BOTTOMRIGHT", -18, 14)
+        ask.no:SetText(L["Keep mine"])
+        ask.no:SetScript("OnClick", function() Answer(false) end)
+        askOwner = CreateFrame("Frame")
+    end
+    ask:Show()
+    -- the controller's A and B answer it (the game's own buttons again as soon as it is answered)
+    SetOverrideBindingClick(askOwner, true, "PAD1", "ControllerCamMovementYes", "LeftButton")
+    SetOverrideBindingClick(askOwner, true, "PAD2", "ControllerCamMovementNo", "LeftButton")
+end
+function ns.AskLater() return askLater end
+
 -- Put back the camera settings you had before ControllerCam changed them.
 function ns.Restore()
     for cvar, value in pairs(db.originals) do pcall(SetCVar, cvar, value) end
@@ -872,6 +952,7 @@ local function InitDB()
         advanced = old.advanced == true,
         profiles = {}, overrides = {}, assign = {}, originals = {}, motion = {}, formOffset = {},
     }
+    if type(old.movement) == "boolean" then d.movement = old.movement end   -- (your answer; nil: not asked yet)
     if type(old.formOffset) == "table" then                      -- your own share per shapeshift form
         for id, share in pairs(old.formOffset) do
             if type(id) == "number" and type(share) == "number" and share >= 0 and share <= 2 then
@@ -1086,6 +1167,7 @@ local function Welcome(fresh)
         db.welcomed = true
         ns.Say(L["Installed. The Action camera is on. Try /ccam use hybrid or /ccam use classic, /ccam help lists everything."])
     end
+    ns.AskMovement()
 end
 
 f:SetScript("OnEvent", function(_, event, arg1, arg2)
@@ -1118,6 +1200,7 @@ f:SetScript("OnEvent", function(_, event, arg1, arg2)
         C_Timer.After(1, function() ns.Evaluate(true) end)
     elseif event == "PLAYER_REGEN_ENABLED" then
         ns.Evaluate(retryAfterCombat)
+        if askLater then ns.AskMovement() end
     elseif event == "UNIT_ENTERED_VEHICLE" or event == "UNIT_EXITED_VEHICLE" then
         if arg1 == "player" then ns.Evaluate() end
     elseif event == "PLAYER_TARGET_CHANGED" then

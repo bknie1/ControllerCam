@@ -109,6 +109,13 @@ function mock.fire(event, ...)
     end
 end
 
+-- Override bindings (key -> what), as the game keeps them per owner
+mock.overrides = {}
+function SetOverrideBindingClick(owner, priority, key, button, mouse)
+    mock.overrides[key] = "CLICK " .. tostring(button) .. ":" .. tostring(mouse or "LeftButton")
+end
+function ClearOverrideBindings(owner) mock.overrides = {} end
+
 UIParent = newFrame("UIParent")
 GameTooltip = newFrame("GameTooltip")
 

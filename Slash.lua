@@ -250,6 +250,10 @@ local function Command(msg)
     elseif cmd == "import" then
         local id, err = ns.ImportString(rest)
         if id then say((L["Imported '%s'. /ccam use \"%s\" to try it."]):format(ns.ProfileName(id), ns.ProfileName(id))) else say(err) end
+    elseif cmd == "movement" then
+        ns.SetMovement(not (db.movement == true))
+        say(db.movement and L["The profiles now set how you move and the stick's speeds (/ccam movement to change it)."]
+            or L["Your own movement and stick settings are kept (/ccam movement to change it)."])
     elseif cmd == "flip" then
         ns.SetFlipShoulder(not db.flipShoulder); say(db.flipShoulder and L["Shoulder offset mirrored."] or L["Shoulder offset back to normal."])
     elseif cmd == "formoffset" then

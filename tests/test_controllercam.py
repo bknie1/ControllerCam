@@ -35,7 +35,9 @@ def lua_path(p):
 class Env:
     """One fresh game session: new Lua state, addon loaded in TOC order, login events fired."""
 
-    def __init__(self, db=None, cvars=None, locale="enUS", addons=(), state=None, login=True):
+    # movement: what the player answered when asked whether the profiles may set movement and the stick (True:
+    # they may, as every test before the question assumes; None: not answered yet, the question still to come)
+    def __init__(self, db=None, cvars=None, locale="enUS", addons=(), state=None, login=True, movement=True):
         self.lua = LuaRuntime(unpack_returned_tuples=True)
         lua = self.lua
         self.mock = lua.execute("return dofile('%s')" % lua_path(os.path.join(HERE, "wow_mock.lua")))
@@ -54,6 +56,9 @@ class Env:
             self.mock.loadFile(lua_path(os.path.join(ROOT, f)), self.ns)
         if login:
             self.mock.fire("ADDON_LOADED", "ControllerCam")
+            d = self.ns.GetDB()
+            if movement is not None and d is not None and d.movement is None:
+                d.movement = movement
             self.mock.fire("PLAYER_LOGIN")
             self.mock.fire("PLAYER_ENTERING_WORLD")
             self.advance(1.2)           # the delayed first apply
@@ -521,6 +526,56 @@ class SavedData(unittest.TestCase):
         self.assertEqual(env2.cv("test_cameraOverShoulder"), "0")
 
 
+class Movement(unittest.TestCase):
+    """How you move and the stick's speeds are yours: the profiles set them only once you said they may."""
+
+    MINE = {"GamePadFaceMovementMaxAngle": "90", "GamePadTurnWithCamera": "2", "GamePadCameraYawSpeed": "1.5"}
+
+    def test_asked_once_and_nothing_of_yours_changed_before_you_answer(self):
+        env = Env(cvars=dict(self.MINE), movement=None)
+        env.advance(4)                                               # (asked a few seconds in)
+        ask = env.lua.globals().ControllerCamMovementAsk
+        self.assertTrue(ask.shown)
+        self.assertEqual(env.mock.overrides.PAD1, "CLICK ControllerCamMovementYes:LeftButton")   # A: let them
+        self.assertEqual(env.mock.overrides.PAD2, "CLICK ControllerCamMovementNo:LeftButton")    # B: keep mine
+        for cvar, v in self.MINE.items():
+            self.assertEqual(env.cv(cvar), v, cvar)                  # yours, untouched while asked
+        self.assertEqual(env.cv("test_cameraDynamicPitch"), "1")     # (the camera itself is the profile's)
+        no = env.lua.globals().ControllerCamMovementNo
+        no.scripts.OnClick(no)
+        self.assertFalse(ask.shown)
+        self.assertIsNone(env.mock.overrides.PAD1)                   # the game's buttons again
+        self.assertIs(env.db().movement, False)
+        for cvar, v in self.MINE.items():
+            self.assertEqual(env.cv(cvar), v, cvar)
+        env2 = reload_env(env, movement=None)                        # not asked again
+        env2.advance(4)
+        ask2 = env2.lua.globals().ControllerCamMovementAsk
+        self.assertTrue(ask2 is None or not ask2.shown)
+
+    def test_keep_mine_puts_back_what_a_profile_had_changed(self):
+        env = Env(cvars=dict(self.MINE))                             # (an old install: the profiles set them)
+        self.assertEqual(env.cv("GamePadFaceMovementMaxAngle"), "0")
+        self.assertEqual(env.cv("GamePadCameraYawSpeed"), "1.25")
+        env.cmd("movement")                                          # /ccam movement: yours again
+        self.assertIs(env.db().movement, False)
+        for cvar, v in self.MINE.items():
+            self.assertEqual(env.cv(cvar), v, cvar)                  # as you had them
+        env.ns.Evaluate(True)
+        self.assertEqual(env.cv("GamePadFaceMovementMaxAngle"), "90")   # and left alone after
+        env.cmd("movement")                                          # and back to the profiles'
+        self.assertEqual(env.cv("GamePadFaceMovementMaxAngle"), "0")
+
+    def test_let_them_sets_them_as_before(self):
+        env = Env(cvars=dict(self.MINE), movement=None)
+        env.advance(4)
+        yes = env.lua.globals().ControllerCamMovementYes
+        yes.scripts.OnClick(yes)
+        self.assertIs(env.db().movement, True)
+        self.assertEqual(env.cv("GamePadFaceMovementMaxAngle"), "0")
+        self.assertEqual(env.cv("GamePadCameraYawSpeed"), "1.25")
+
+
 class Applying(unittest.TestCase):
     def test_action_is_applied_out_of_the_box(self):
         env = Env()
@@ -685,6 +740,7 @@ class Applying(unittest.TestCase):
         env = Env(login=False)
         env.run("MOCK.cvars.GamePadCameraYawSpeed = nil; MOCK.knownCVars.GamePadCameraYawSpeed = nil")
         env.mock.fire("ADDON_LOADED", "ControllerCam")
+        env.ns.GetDB().movement = True                               # (the profiles may set the stick's speeds)
         env.mock.fire("PLAYER_ENTERING_WORLD")
         env.advance(1.2)
         self.assertEqual(env.cv("GamePadCameraPitchSpeed"), "1.15")           # the rest still applied

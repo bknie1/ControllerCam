@@ -221,6 +221,14 @@ local ENGLISH = {
     "Closer on an enemy target: %.1f yards",  -- 211
     "Closer on an enemy target: off",  -- 212
     "Target an enemy and the camera comes in to this distance; let it go and it goes back to where you had it (not while mounted). Roam far out, fight up close.",  -- 213
+    "ControllerCam: how you move",  -- 214
+    "The camera profiles can also set how your character faces and turns as you move, and how fast the stick turns the camera. Let them, or keep your own settings?",  -- 215
+    "The profiles now set how you move and the stick's speeds (/ccam movement to change it).",  -- 216
+    "Your own movement and stick settings are kept (/ccam movement to change it).",  -- 217
+    "Let the profiles set them",  -- 218
+    "Keep mine",  -- 219
+    "Profiles also set how you move and the stick's speeds",  -- 220
+    "Facing and turning as you move, and the stick's camera speeds, set by each profile. Off: your own settings, as you had them.",  -- 221
 }
 
 local TRANSLATIONS = {
@@ -438,6 +446,14 @@ local TRANSLATIONS = {
         "Näher bei feindlichem Ziel: %.1f Meter",  -- 211
         "Näher bei feindlichem Ziel: aus",  -- 212
         "Ziele auf einen Feind und die Kamera kommt auf diesen Abstand heran; lässt du ihn los, geht sie zurück, wo du sie hattest (nicht auf dem Reittier). Weit draußen unterwegs, nah dran im Kampf.",  -- 213
+        "ControllerCam: wie Ihr Euch bewegt",  -- 214
+        "Die Kameraprofile können auch festlegen, wie sich Eure Figur beim Laufen ausrichtet und dreht und wie schnell der Stick die Kamera dreht. Sollen sie das, oder behaltet Ihr Eure eigenen Einstellungen?",  -- 215
+        "Die Profile legen jetzt fest, wie Ihr Euch bewegt und wie schnell der Stick ist (/ccam movement zum Ändern).",  -- 216
+        "Eure eigenen Bewegungs- und Stick-Einstellungen bleiben erhalten (/ccam movement zum Ändern).",  -- 217
+        "Die Profile machen lassen",  -- 218
+        "Meine behalten",  -- 219
+        "Profile legen auch Bewegung und Stick-Geschwindigkeit fest",  -- 220
+        "Ausrichtung und Drehen beim Laufen sowie die Kamerageschwindigkeit des Sticks, von jedem Profil festgelegt. Aus: Eure eigenen Einstellungen, wie Ihr sie hattet.",  -- 221
     },
     esES = {
         "En un vehículo",  -- 1
@@ -653,6 +669,14 @@ local TRANSLATIONS = {
         "Más cerca con un enemigo como objetivo: %.1f yardas",  -- 211
         "Más cerca con un enemigo como objetivo: desactivado",  -- 212
         "Al fijar un enemigo, la cámara se acerca a esta distancia; al soltarlo vuelve a donde la tenías (no montado). Explora de lejos, lucha de cerca.",  -- 213
+        "ControllerCam: cómo te mueves",  -- 214
+        "Los perfiles de cámara también pueden ajustar cómo se orienta y gira tu personaje al moverse, y lo rápido que el stick gira la cámara. ¿Dejar que lo hagan, o mantener tus propios ajustes?",  -- 215
+        "Los perfiles ahora ajustan cómo te mueves y la velocidad del stick (/ccam movement para cambiarlo).",  -- 216
+        "Se mantienen tus propios ajustes de movimiento y del stick (/ccam movement para cambiarlo).",  -- 217
+        "Que los perfiles los ajusten",  -- 218
+        "Mantener los míos",  -- 219
+        "Los perfiles también ajustan el movimiento y la velocidad del stick",  -- 220
+        "La orientación y el giro al moverte, y las velocidades de cámara del stick, los ajusta cada perfil. Desactivado: tus propios ajustes, tal como los tenías.",  -- 221
     },
     frFR = {
         "Dans un véhicule",  -- 1
@@ -868,6 +892,14 @@ local TRANSLATIONS = {
         "Plus près sur une cible ennemie : %.1f mètres",  -- 211
         "Plus près sur une cible ennemie : désactivé",  -- 212
         "Ciblez un ennemi et la caméra se rapproche à cette distance ; relâchez-le et elle revient où vous l'aviez (pas sur une monture). Explorez de loin, combattez de près.",  -- 213
+        "ControllerCam : vos déplacements",  -- 214
+        "Les profils de caméra peuvent aussi régler l'orientation et la rotation de votre personnage quand il se déplace, et la vitesse à laquelle le stick tourne la caméra. Les laisser faire, ou garder vos propres réglages ?",  -- 215
+        "Les profils règlent désormais vos déplacements et la vitesse du stick (/ccam movement pour changer).",  -- 216
+        "Vos propres réglages de déplacement et de stick sont conservés (/ccam movement pour changer).",  -- 217
+        "Laisser les profils régler",  -- 218
+        "Garder les miens",  -- 219
+        "Les profils règlent aussi les déplacements et la vitesse du stick",  -- 220
+        "L'orientation et la rotation en déplacement, et les vitesses de caméra du stick, réglées par chaque profil. Désactivé : vos propres réglages, tels que vous les aviez.",  -- 221
     },
     itIT = {
         "In un veicolo",  -- 1
@@ -1083,6 +1115,14 @@ local TRANSLATIONS = {
         "Più vicino con un nemico come bersaglio: %.1f iarde",  -- 211
         "Più vicino con un nemico come bersaglio: disattivo",  -- 212
         "Prendi di mira un nemico e la telecamera si avvicina a questa distanza; lascialo e torna dov'era (non in sella). Esplora da lontano, combatti da vicino.",  -- 213
+        "ControllerCam: come ti muovi",  -- 214
+        "I profili della visuale possono anche impostare come il personaggio si orienta e si gira mentre si muove, e quanto velocemente lo stick gira la visuale. Lasciarli fare o tenere le tue impostazioni?",  -- 215
+        "Ora i profili impostano come ti muovi e la velocità dello stick (/ccam movement per cambiarlo).",  -- 216
+        "Le tue impostazioni di movimento e dello stick restano invariate (/ccam movement per cambiarlo).",  -- 217
+        "Lascia fare ai profili",  -- 218
+        "Tieni i miei",  -- 219
+        "I profili impostano anche movimento e velocità dello stick",  -- 220
+        "Orientamento e rotazione mentre ti muovi, e le velocità della visuale dello stick, impostati da ogni profilo. Disattivato: le tue impostazioni, come le avevi.",  -- 221
     },
     koKR = {
         "탈것 이용 중",  -- 1
@@ -1298,6 +1338,14 @@ local TRANSLATIONS = {
         "적 대상 시 가까이: %.1f야드",  -- 211
         "적 대상 시 가까이: 끔",  -- 212
         "적을 대상으로 잡으면 카메라가 이 거리까지 다가오고, 놓으면 원래 위치로 돌아갑니다 (탈것 탑승 중 제외). 멀리서 둘러보고, 가까이서 싸우세요.",  -- 213
+        "ControllerCam: 이동 방식",  -- 214
+        "카메라 프로필은 이동할 때 캐릭터가 바라보고 회전하는 방식과 스틱이 카메라를 돌리는 속도도 설정할 수 있습니다. 프로필에 맡길까요, 아니면 지금 설정을 유지할까요?",  -- 215
+        "이제 프로필이 이동 방식과 스틱 속도를 설정합니다 (/ccam movement로 변경).",  -- 216
+        "이동 및 스틱 설정은 지금 그대로 유지됩니다 (/ccam movement로 변경).",  -- 217
+        "프로필에 맡기기",  -- 218
+        "내 설정 유지",  -- 219
+        "프로필이 이동 방식과 스틱 속도도 설정",  -- 220
+        "이동할 때의 방향과 회전, 스틱의 카메라 속도를 각 프로필이 설정합니다. 끄면: 원래 쓰던 내 설정 그대로.",  -- 221
     },
     ptBR = {
         "Em um veículo",  -- 1
@@ -1513,6 +1561,14 @@ local TRANSLATIONS = {
         "Mais perto com um inimigo como alvo: %.1f jardas",  -- 211
         "Mais perto com um inimigo como alvo: desligado",  -- 212
         "Mire um inimigo e a câmera se aproxima a esta distância; solte-o e ela volta para onde estava (não montado). Explore de longe, lute de perto.",  -- 213
+        "ControllerCam: como você se move",  -- 214
+        "Os perfis de câmera também podem definir como seu personagem se vira e gira ao se mover, e a velocidade com que o analógico gira a câmera. Deixar que façam isso, ou manter suas próprias configurações?",  -- 215
+        "Agora os perfis definem como você se move e a velocidade do analógico (/ccam movement para mudar).",  -- 216
+        "Suas próprias configurações de movimento e do analógico são mantidas (/ccam movement para mudar).",  -- 217
+        "Deixar os perfis definirem",  -- 218
+        "Manter os meus",  -- 219
+        "Os perfis também definem o movimento e a velocidade do analógico",  -- 220
+        "A orientação e o giro ao se mover, e as velocidades de câmera do analógico, definidos por cada perfil. Desligado: suas próprias configurações, como você as tinha.",  -- 221
     },
     ruRU = {
         "В транспорте",  -- 1
@@ -1728,6 +1784,14 @@ local TRANSLATIONS = {
         "Ближе при враждебной цели: %.1f ярда",  -- 211
         "Ближе при враждебной цели: выкл.",  -- 212
         "Возьмите врага в цель — камера приблизится на это расстояние; отпустите — вернётся туда, где была (не верхом). Исследуйте издалека, сражайтесь вблизи.",  -- 213
+        "ControllerCam: как вы двигаетесь",  -- 214
+        "Профили камеры также могут задавать, как персонаж поворачивается и разворачивается при движении и как быстро стик вращает камеру. Доверить это им или оставить ваши настройки?",  -- 215
+        "Теперь профили задают, как вы двигаетесь, и скорость стика (/ccam movement, чтобы изменить).",  -- 216
+        "Ваши настройки движения и стика сохранены (/ccam movement, чтобы изменить).",  -- 217
+        "Пусть задают профили",  -- 218
+        "Оставить мои",  -- 219
+        "Профили задают также движение и скорость стика",  -- 220
+        "Направление и повороты при движении, а также скорость камеры на стике задаются каждым профилем. Выкл.: ваши собственные настройки, как были.",  -- 221
     },
     zhCN = {
         "载具中",  -- 1
@@ -1943,6 +2007,14 @@ local TRANSLATIONS = {
         "选中敌人时拉近：%.1f 码",  -- 211
         "选中敌人时拉近：关闭",  -- 212
         "选中敌人时镜头拉近到这个距离；放开后回到原来的位置（骑乘时除外）。远处漫游，近身战斗。",  -- 213
+        "ControllerCam：移动方式",  -- 214
+        "镜头配置也可以设置移动时角色的朝向和转身方式，以及摇杆转动镜头的速度。交给配置，还是保留你自己的设置？",  -- 215
+        "现在由配置设置移动方式和摇杆速度（/ccam movement 可更改）。",  -- 216
+        "保留你自己的移动和摇杆设置（/ccam movement 可更改）。",  -- 217
+        "交给配置",  -- 218
+        "保留我的",  -- 219
+        "配置也设置移动方式和摇杆速度",  -- 220
+        "移动时的朝向和转身，以及摇杆的镜头速度，由每个配置设置。关闭：使用你原来的设置。",  -- 221
     },
     zhTW = {
         "載具中",  -- 1
@@ -2158,6 +2230,14 @@ local TRANSLATIONS = {
         "選中敵人時拉近：%.1f 碼",  -- 211
         "選中敵人時拉近：關閉",  -- 212
         "選中敵人時鏡頭拉近到這個距離；放開後回到原來的位置（騎乘時除外）。遠處漫遊，近身戰鬥。",  -- 213
+        "ControllerCam：移動方式",  -- 214
+        "鏡頭設定檔也可以設定移動時角色的朝向和轉身方式，以及搖桿轉動鏡頭的速度。交給設定檔，還是保留你自己的設定？",  -- 215
+        "現在由設定檔設定移動方式和搖桿速度（/ccam movement 可更改）。",  -- 216
+        "保留你自己的移動和搖桿設定（/ccam movement 可更改）。",  -- 217
+        "交給設定檔",  -- 218
+        "保留我的",  -- 219
+        "設定檔也設定移動方式和搖桿速度",  -- 220
+        "移動時的朝向和轉身，以及搖桿的鏡頭速度，由每個設定檔設定。關閉：使用你原來的設定。",  -- 221
     },
 }
 TRANSLATIONS.esMX = TRANSLATIONS.esES      -- Latin American Spanish uses the same text

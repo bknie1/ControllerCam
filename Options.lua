@@ -254,8 +254,13 @@ local flip = MakeCheckbox(panel, "ControllerCamOptFlip", L["Mirror the shoulder 
     function() return ns.db.flipShoulder end, function(v) ns.SetFlipShoulder(v) end)
 flip:SetPoint("TOPLEFT", near, "BOTTOMLEFT", -8, -16)
 
+local moving = MakeCheckbox(panel, "ControllerCamOptMovement", L["Profiles also set how you move and the stick's speeds"],
+    L["Facing and turning as you move, and the stick's camera speeds, set by each profile. Off: your own settings, as you had them."],
+    function() return ns.db.movement == true end, function(v) ns.SetMovement(v) end)
+moving:SetPoint("TOPLEFT", flip, "BOTTOMLEFT", 0, -4)
+
 local nowDesc = panel:CreateFontString(nil, "ARTWORK", "GameFontHighlightSmall")
-nowDesc:SetPoint("TOPLEFT", flip, "BOTTOMLEFT", 2, -10)
+nowDesc:SetPoint("TOPLEFT", moving, "BOTTOMLEFT", 2, -10)
 nowDesc:SetWidth(560)
 nowDesc:SetJustifyH("LEFT")
 
