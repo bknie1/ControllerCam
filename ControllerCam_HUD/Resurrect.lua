@@ -39,8 +39,10 @@ end
 
 -- What to say now (or nil: nothing to show)
 function RS.Words()
-    if not RS.inRange or not Yes(UnitIsGhost, "player") then return nil end
-    if Yes(rawget(_G, "StaticPopup_Visible"), "AREA_SPIRIT_HEAL") then return nil end   -- (the game's window says it)
+    if not (Yes(UnitIsGhost, "player") and ns.InPvP()) then return nil end
+    -- the game's own window says it while it is up: the "in range" signals come with it (talking to the spirit
+    -- healer), so ours is for the rest of the time
+    if RS.talking or Yes(rawget(_G, "StaticPopup_Visible"), "AREA_SPIRIT_HEAL") then return nil end
     local left = Plain(select(2, pcall(rawget(_G, "GetAreaSpiritHealerTime") or function() return nil end)))
     if left and left > 0 then return L["Resurrection in %d s"]:format(math.ceil(left)) end
     return L["Talk to the spirit healer to be resurrected with the next wave"]
@@ -60,7 +62,6 @@ end
 local acc = 0
 local watcher = CreateFrame("Frame")
 watcher:SetScript("OnUpdate", ns.Protect(function(_, dt)
-    if not RS.inRange then return end
     acc = acc + (dt or 0)
     if acc < RS.TICK then return end
     acc = 0
@@ -68,10 +69,10 @@ watcher:SetScript("OnUpdate", ns.Protect(function(_, dt)
 end))
 watcher:SetScript("OnEvent", ns.Protect(function(_, event)
     if event == "AREA_SPIRIT_HEALER_IN_RANGE" then
-        RS.inRange = true
+        RS.talking = true                                   -- (the game's window is up)
     elseif event == "AREA_SPIRIT_HEALER_OUT_OF_RANGE" or event == "PLAYER_ALIVE" or event == "PLAYER_UNGHOST"
         or event == "PLAYER_ENTERING_WORLD" then
-        RS.inRange = false
+        RS.talking = false
     end
     RS.Update()
 end))

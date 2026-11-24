@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.5.4
+
+ControllerCam: HUD
+- Fixed: the spirit healer's countdown showed only while you were talking to the spirit healer, the one time the game's own window already says it, and not the rest of the time. It now shows whenever you're a ghost in a battleground, and steps aside while you talk to the healer.
+
 ## 1.5.3
 
 ControllerCam: HUD

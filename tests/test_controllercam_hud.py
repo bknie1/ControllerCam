@@ -17092,29 +17092,27 @@ class PvPPlates(unittest.TestCase):
 
     def test_the_spirit_healers_countdown_stays_in_sight(self):
         e = Env()
+        e.mock.state.instance = "pvp"
         e.lua.execute("""
             GHOST, LEFT = true, 14.2
             UnitIsGhost = function() return GHOST end
             GetAreaSpiritHealerTime = function() return LEFT end
         """)
-        RS = e.ns.Resurrect
-        e.lua.execute("GAME_WINDOW = true; StaticPopup_Visible = function(w) return GAME_WINDOW and w == 'AREA_SPIRIT_HEAL' end")
-        e.mock.fire("AREA_SPIRIT_HEALER_IN_RANGE")
-        self.assertIsNone(e.g.ControllerCamHUD_Resurrect)             # the game's window up: ours not needed
-        e.g.GAME_WINDOW = False                                       # closed (A or B on a controller):
         e.update(0.5)
-        f = e.g.ControllerCamHUD_Resurrect
+        f = e.g.ControllerCamHUD_Resurrect                            # a ghost in a battleground: always there
         self.assertTrue(f.shown)
         self.assertEqual(plain(f.text.text), "Resurrection in 15 s")
-        e.g.LEFT = 0                                                   # cancelled (the game's window, A)
+        e.mock.fire("AREA_SPIRIT_HEALER_IN_RANGE")                    # talking to the healer: its window says it
+        self.assertFalse(f.shown)
+        e.mock.fire("AREA_SPIRIT_HEALER_OUT_OF_RANGE")                # its window closed: ours again
+        self.assertTrue(f.shown)
+        e.g.LEFT = 0                                                   # (cancelled)
         e.update(0.5)
         self.assertIn("Talk to the spirit healer", plain(f.text.text))
-        self.assertTrue(f.shown)                                      # still there: nothing closes it
         e.mock.fire("PLAYER_ALIVE")
-        self.assertFalse(f.shown)                                     # alive: gone
         e.g.GHOST = False
-        e.mock.fire("AREA_SPIRIT_HEALER_IN_RANGE")
-        self.assertFalse(f.shown)                                     # (only for a ghost)
+        e.update(0.5)
+        self.assertFalse(f.shown)                                     # alive: gone
         self.assertEqual(e.errors(), [])
 
     def test_your_side_is_a_slim_green_bar_and_theirs_the_need_to_know(self):
