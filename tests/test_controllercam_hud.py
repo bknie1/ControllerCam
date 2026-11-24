@@ -17098,7 +17098,11 @@ class PvPPlates(unittest.TestCase):
             GetAreaSpiritHealerTime = function() return LEFT end
         """)
         RS = e.ns.Resurrect
+        e.lua.execute("GAME_WINDOW = true; StaticPopup_Visible = function(w) return GAME_WINDOW and w == 'AREA_SPIRIT_HEAL' end")
         e.mock.fire("AREA_SPIRIT_HEALER_IN_RANGE")
+        self.assertIsNone(e.g.ControllerCamHUD_Resurrect)             # the game's window up: ours not needed
+        e.g.GAME_WINDOW = False                                       # closed (A or B on a controller):
+        e.update(0.5)
         f = e.g.ControllerCamHUD_Resurrect
         self.assertTrue(f.shown)
         self.assertEqual(plain(f.text.text), "Resurrection in 15 s")

@@ -40,6 +40,7 @@ end
 -- What to say now (or nil: nothing to show)
 function RS.Words()
     if not RS.inRange or not Yes(UnitIsGhost, "player") then return nil end
+    if Yes(rawget(_G, "StaticPopup_Visible"), "AREA_SPIRIT_HEAL") then return nil end   -- (the game's window says it)
     local left = Plain(select(2, pcall(rawget(_G, "GetAreaSpiritHealerTime") or function() return nil end)))
     if left and left > 0 then return L["Resurrection in %d s"]:format(math.ceil(left)) end
     return L["Talk to the spirit healer to be resurrected with the next wave"]
