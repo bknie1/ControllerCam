@@ -628,7 +628,7 @@ local function UpdateInfo(f)
     local _, _, isPlayer = U.Standing(f.unit)
     if not (ns.db.classNames and isPlayer and ns.ClassNameColor(f.name, f.unit)) then f.name:SetTextColor(unpack(C.text)) end
     local secretIcon = ns.SecretClassIcon(f.visual or f, f.name, f.unit,
-        ns.db.classIcons and isPlayer and (f.key == "tot" or f.key == "target"))
+        ns.db.classIcons and isPlayer and (f.key == "tot" or f.key == "target"), f.health)
     f.classMark = mark ~= "" or secretIcon
     UF.Mark(f)
     if f.key == "tot" then return end

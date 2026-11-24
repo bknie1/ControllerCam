@@ -627,7 +627,7 @@ end
 
 -- The icon of a class kept secret, as a texture of its own just before a line of text (the line can't carry it:
 -- a secret can't be written into text). holder keeps it (holder.classTex); hidden when there is none to show.
-function ns.SecretClassIcon(holder, fs, unit, show)
+function ns.SecretClassIcon(holder, fs, unit, show, bar)
     local t = rawget(holder, "classTex")
     local okC, _, class = pcall(UnitClass, unit)
     if not (show and okC and ns.IsSecret(class)) then
@@ -642,13 +642,21 @@ function ns.SecretClassIcon(holder, fs, unit, show)
     size = (okF and tonumber(size)) or 12
     t:SetSize(size + 2, size + 2)
     local okW, w = pcall(fs.GetStringWidth, fs)
-    w = (okW and type(w) == "number" and not ns.IsSecret(w)) and w or 0
+    local known = okW and type(w) == "number" and not ns.IsSecret(w) and w > 0
     local okJ, justify = pcall(fs.GetJustifyH, fs)
     t:ClearAllPoints()
+    t.onBar = false
     if okJ and justify == "LEFT" then
         t:SetPoint("RIGHT", fs, "LEFT", -2, 0)
-    else
+    elseif known then
         t:SetPoint("RIGHT", fs, "CENTER", -w / 2 - 2, 0)
+    elseif bar then
+        -- the name's width kept secret too (a battleground's other side): measuring it is refused, and guessing put
+        -- the icon over the middle of the name. At the bar's left end instead, clear of the name
+        t:SetPoint("RIGHT", bar, "LEFT", -4, 0)
+        t.onBar = true
+    else
+        t:SetPoint("BOTTOM", fs, "TOP", 0, 1)              -- (no bar: above the line)
     end
     if ns.ClassIconTexture(t, unit) then t:Show(); return true end
     t:Hide()

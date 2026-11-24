@@ -101,6 +101,16 @@ local CRITTER = { Critter = true, Kleintier = true, ["Alimaña"] = true, Bestiol
 local MINI_SCALE = 0.8          -- minor units: the whole plate a little smaller ...
 local MINI_BAR = 0.625          -- ... and the bar shorter: half the width of a normal plate's
 
+-- In a battleground or arena: crowded, so the plates say only what you need. The other side: health, power,
+-- level, class and name (no titles, guilds or jobs). Your side: a slim green bar, smaller, no name.
+NP.PVP_KINDS = { pvp = true, arena = true }
+function NP.InPvP()
+    if not IsInInstance then return false end
+    local ok, inside, kind = pcall(IsInInstance)
+    return ok and ns.Yes(inside) and NP.PVP_KINDS[kind] or false
+end
+NP.ALLY_GREEN = { 0.30, 0.82, 0.34 }
+
 -- A minor unit: a minion, a critter, or an enemy so far below you it gives nothing (grey, "trivial")
 function NP.IsMinor(unit, kind)
     if kind == "minus" or kind == "trivial" then return true end
@@ -185,9 +195,9 @@ end
 -- Reading the unit
 ---------------------------------------------------------------------------
 -- The name as players know it: with the title when wanted, and the realm of someone from another realm
-local function FullName(unit)
+local function FullName(unit, noTitle)
     local db = ns.db
-    if db.plateTitles and ns.Yes(UnitIsPlayer(unit)) and UnitPVPName then
+    if db.plateTitles and not noTitle and ns.Yes(UnitIsPlayer(unit)) and UnitPVPName then
         local titled = Text(UnitPVPName(unit))
         if titled then
             local bare, realm = titled:match("^(.-)%-([^%-%s]+)$")      -- a title may come with "-Realm" on
@@ -396,7 +406,7 @@ end
 local UpdateTarget          -- (defined below)
 
 local function WantsBars(o)
-    if o.hostile then return true end
+    if o.hostile or o.pvpAlly then return true end
     return ns.db.plateFriendBars and ns.Yes(UnitAffectingCombat(o.unit))
 end
 
@@ -406,7 +416,7 @@ local function UpdatePower(o, instant)
     -- there is some in the bar (monsters that never build it show an empty track otherwise)
     local has = not ns.IsSecret(max) and not ns.IsSecret(cur) and type(max) == "number" and max > 0
         and (token == "MANA" or (type(cur) == "number" and cur > 0))
-    local show = o.bars and not o.mini and ns.db.platePower and has
+    local show = o.bars and not o.mini and (ns.db.platePower or o.pvpEnemy) and has   -- (PvP: always, need to know)
     if show then
         o.power:SetColor(unpack(C.power[token or ""] or C.power.MANA))
         o.power:SetValues(cur, max, instant)
@@ -427,7 +437,11 @@ local function UpdateHealth(o, instant)
         and ns.Impact.JustYou and ns.Impact.JustYou() then
         ns.Impact:Hit({ frame = o, anchor = o.plate, bar = o.health }, "physical", false, NP.SHAKE)
     end
-    o.health:SetColor(ns.UnitFrames.TargetHealthColor(o.unit, frac))
+    if o.pvpAlly then
+        o.health:SetColor(unpack(NP.ALLY_GREEN))                            -- (your side in PvP: simply green)
+    else
+        o.health:SetColor(ns.UnitFrames.TargetHealthColor(o.unit, frac))
+    end
     o.health:SetAbsorb(ns.UnitFrames.Absorb(o.unit))
     o.health:SetExecute(o.bars and not o.mini and ns.UnitFrames.Execute(o.unit, frac) or nil)   -- open to an execute
     if ns.Impact and ns.Impact.Bleed then ns.Impact:Bleed(o.health, o.bars and o.unit or nil, frac) end
@@ -445,11 +459,12 @@ function NP.Mark(o)
     local t = rawget(o, "raidMark")
     if not t then return end
     t:ClearAllPoints()
+    local icon = rawget(o, "classTex")
     if o.bars then
-        t:SetPoint("RIGHT", o.health, "LEFT", -5, 0)
+        if icon and icon:IsShown() and icon.onBar then t:SetPoint("RIGHT", icon, "LEFT", -3, 0)   -- (beside the class)
+        else t:SetPoint("RIGHT", o.health, "LEFT", -5, 0) end
         return
     end
-    local icon = rawget(o, "classTex")
     if icon and icon:IsShown() then
         t:SetPoint("RIGHT", icon, "LEFT", -3, 0)
         return
@@ -464,10 +479,13 @@ local function UpdateInfo(o)
     local _, level, kind = U.Info(unit)
     local _, _, isPlayer, attackable = U.Standing(unit)
     o.hostile = attackable and true or false
+    local pvp = NP.InPvP() and ns.Yes(isPlayer)
+    o.pvpAlly = pvp and not o.hostile or false                          -- (PvP: your side, a slim green bar)
+    o.pvpEnemy = pvp and o.hostile or false                             -- (and the other, the need-to-know)
     -- the name first: if anything below fails, the plate still says who it is (never an empty or stale name)
-    local name = FullName(unit)
+    local name = FullName(unit, pvp)
     SetName(o.name, name)
-    o.mini = ns.db.plateMini and not isPlayer and NP.IsMinor(unit, kind) and true or false
+    o.mini = (ns.db.plateMini and not isPlayer and NP.IsMinor(unit, kind) and true) or o.pvpAlly or false
     local size = NP.Size()
     local width = W * NP.SIZE_W[size] * (o.mini and MINI_BAR or 1)
     o.health:SetBarWidth(width)
@@ -504,9 +522,10 @@ local function UpdateInfo(o)
     -- a player: the name in their class's colour, and where the game keeps the class secret (a battleground's
     -- other side) its icon beside the line all the same, the game drawing both
     if ns.db.classNames and ns.Yes(isPlayer) then ns.ClassNameColor(o.name, unit) end
-    ns.SecretClassIcon(o, o.name, unit, ns.db.plateClassIcons and ns.Yes(isPlayer) and not o.mini)
+    ns.SecretClassIcon(o, o.name, unit, ns.db.plateClassIcons and ns.Yes(isPlayer) and not o.mini,
+        o.bars and o.health or nil)
     ns.FactionEdge(o.health, fcolor)                                    -- (the name keeps its colours)
-    local sub = ns.db.plateSubtitles and not o.mini and Subtitle(unit) or nil
+    local sub = ns.db.plateSubtitles and not o.mini and not pvp and Subtitle(unit) or nil   -- (PvP: no guilds)
     if sub then
         o.sub:SetText(isPlayer and ("<" .. sub .. ">") or sub)
         o.sub:Show()
