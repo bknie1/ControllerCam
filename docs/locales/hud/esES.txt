@@ -444,6 +444,8 @@ los peces que sacas y los beneficios que te da un campamento o un santuario se a
 Reducir animaciones
 nada en la pantalla tiembla, se desliza, vuela ni estalla: las animaciones de la barra de lanzamiento, los efectos de golpe, el movimiento de las placas de nombre, los grandes momentos y los anuncios de capturas y beneficios quedan tranquilos o quietos. También cuentan los ajustes del propio juego de temblor de pantalla y movimiento inesperado de la cámara
 muestra cómo se ven los anuncios de una captura y de beneficios
+Resurrección en %d s
+Habla con el ángel de resurrección para resucitar con la siguiente oleada
 hecho
 %s: lista para entregar
 Terminando [%s].

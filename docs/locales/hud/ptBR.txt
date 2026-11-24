@@ -444,6 +444,8 @@ os peixes que você tira da água e os bônus que um acampamento ou um santuári
 Reduzir animações
 nada na tela treme, desliza, voa ou estoura: as animações da barra de lançamento, os efeitos de golpe, o movimento das placas de nome, os grandes momentos e os anúncios de pescas e bônus ficam calmos ou parados. Também contam as configurações do próprio jogo para tremor de tela e movimento inesperado da câmera
 mostra como ficam os anúncios de uma pesca e de bônus
+Ressurreição em %d s
+Fale com o curandeiro espiritual para ressuscitar na próxima onda
 feito
 %s: pronta para entregar
 Terminando [%s].

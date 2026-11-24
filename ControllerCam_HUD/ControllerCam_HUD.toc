@@ -35,6 +35,7 @@ Ward.lua
 Reticle.lua
 Rumble.lua
 Readout.lua
+Resurrect.lua
 QuestItemData.lua
 Quests.lua
 Bars.lua

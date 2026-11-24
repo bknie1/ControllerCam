@@ -444,6 +444,8 @@ die Fische, die du an Land ziehst, und die Stärkungen, die dir ein Lager oder e
 Animationen reduzieren
 nichts auf dem Bildschirm wackelt, gleitet, fliegt oder platzt: Zauberleisten-Animationen, Treffereffekte, Bewegung der Namensplaketten, große Momente und die Anzeigen von Fängen und Stärkungen sind ruhig oder still. Die eigenen Einstellungen des Spiels für Bildschirmwackeln und unerwartete Kamerabewegung zählen ebenfalls
 zeigen, wie die Anzeigen eines Fangs und von Stärkungen aussehen
+Wiederbelebung in %d s
+Sprecht mit dem Geistheiler, um mit der nächsten Welle wiederbelebt zu werden
 erledigt
 %s: bereit zur Abgabe
 Schließe noch [%s] ab.

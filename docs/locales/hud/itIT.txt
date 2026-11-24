@@ -444,6 +444,8 @@ i pesci che tiri su e i benefici che ti dà un campo o un santuario vengono annu
 Riduci le animazioni
 niente sullo schermo trema, scivola, vola o esplode: le animazioni della barra di lancio, gli effetti dei colpi, il movimento delle targhette, i grandi momenti e gli annunci di catture e benefici sono calmi o fermi. Contano anche le impostazioni del gioco stesso per il tremolio dello schermo e i movimenti imprevisti della telecamera
 mostra come appaiono gli annunci di una cattura e dei benefici
+Resurrezione tra %d s
+Parla con il guaritore spirituale per risorgere con la prossima ondata
 fatto
 %s: pronta da consegnare
 Sto finendo [%s].

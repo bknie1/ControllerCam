@@ -444,6 +444,8 @@ the fish you land, and the buffs a camp or a shrine gives you, are announced acr
 Reduce animations
 nothing on the screen shakes, sweeps, flies or bursts: cast bar animations, hit effects, nameplate motion, big moments and the readouts of catches and buffs are calm or still. The game's own settings for screen shake and unexpected camera movement count too
 show what the readouts of a catch and of buffs look like
+Resurrection in %d s
+Talk to the spirit healer to be resurrected with the next wave
 done
 %s: ready to hand in
 Finishing up [%s].

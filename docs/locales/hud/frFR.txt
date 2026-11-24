@@ -444,6 +444,8 @@ les poissons que vous sortez de l'eau et les améliorations que vous donne un ca
 Réduire les animations
 rien à l'écran ne tremble, ne glisse, ne vole ni n'éclate: les animations de la barre d'incantation, les effets de coups, le mouvement des barres de nom, les grands moments et les annonces de prises et d'améliorations sont calmes ou immobiles. Les réglages du jeu lui-même pour le tremblement de l'écran et les mouvements de caméra inattendus comptent aussi
 montrer à quoi ressemblent les annonces d'une prise et d'améliorations
+Résurrection dans %d s
+Parlez au gardien spirituel pour être ressuscité avec la prochaine vague
 fait
 %s : prête à être rendue
 Je termine [%s].

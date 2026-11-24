@@ -5,6 +5,7 @@
 ControllerCam: HUD
 - In a battleground, the other side's health bars try their class colour again: a Priest's white, a Mage's blue. The game keeps their class to itself there and refuses that colour on the bar, but it may take it on the bar's texture, the way it does for names. It's tried once. If the game refuses, it isn't tried again, and the bar keeps its usual colour.
 - The game's own countdowns (a battleground's or arena's start timer) move down below the target frame and its buffs, instead of sitting over them.
+- The spirit healer's countdown stays in sight. In a battleground, the game's "resurrected in X seconds" window was easily lost on a controller: its first button is Cancel (A cancelled your resurrection) and B closed it. Now, while you're a ghost by the spirit healer, the HUD shows its own line at the top of the screen that no button closes: "Resurrection in 12 s". If the countdown has stopped, it tells you to talk to the spirit healer to be resurrected with the next wave.
 
 ## 1.5.1
 

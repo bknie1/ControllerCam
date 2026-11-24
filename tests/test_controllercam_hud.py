@@ -17077,6 +17077,29 @@ class PvPPlates(unittest.TestCase):
         self.assertTrue(e.same(t.points[1][2], e.frames.target))      # below the target frame, clear of it
         self.assertEqual(e.errors(), [])
 
+    def test_the_spirit_healers_countdown_stays_in_sight(self):
+        e = Env()
+        e.lua.execute("""
+            GHOST, LEFT = true, 14.2
+            UnitIsGhost = function() return GHOST end
+            GetAreaSpiritHealerTime = function() return LEFT end
+        """)
+        RS = e.ns.Resurrect
+        e.mock.fire("AREA_SPIRIT_HEALER_IN_RANGE")
+        f = e.g.ControllerCamHUD_Resurrect
+        self.assertTrue(f.shown)
+        self.assertEqual(plain(f.text.text), "Resurrection in 15 s")
+        e.g.LEFT = 0                                                   # cancelled (the game's window, A)
+        e.update(0.5)
+        self.assertIn("Talk to the spirit healer", plain(f.text.text))
+        self.assertTrue(f.shown)                                      # still there: nothing closes it
+        e.mock.fire("PLAYER_ALIVE")
+        self.assertFalse(f.shown)                                     # alive: gone
+        e.g.GHOST = False
+        e.mock.fire("AREA_SPIRIT_HEALER_IN_RANGE")
+        self.assertFalse(f.shown)                                     # (only for a ghost)
+        self.assertEqual(e.errors(), [])
+
     def test_your_side_is_a_slim_green_bar_and_theirs_the_need_to_know(self):
         e = Env()
         e.mock.state.instance = "pvp"
