@@ -52,6 +52,15 @@ ns.DEFAULTS = DEFAULTS
 local PREFIX = "|cff66ccffControllerCam HUD:|r "
 function ns.Say(msg) print(PREFIX .. msg) end
 
+-- A key held down right now. A binding of ours never changes on a key that is held: the game's own action for it
+-- (R3's ping: down starts it, up places it) got the press and never the release, and stayed on, the cursor a
+-- blue diamond that clicks nothing until the key is pressed again. Changed once it is let go instead.
+function ns.KeyHeld(key)
+    if type(IsKeyDown) ~= "function" then return false end
+    local ok, down = pcall(IsKeyDown, key)
+    return ok and down == true
+end
+
 -- Lua errors are hidden by default, so ours are caught and shown once each.
 local seen = {}
 ns.errors = {}

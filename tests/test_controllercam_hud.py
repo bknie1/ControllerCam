@@ -15189,6 +15189,19 @@ class BagWindow(unittest.TestCase):
         self.assertEqual(s1.points[1][3], "BOTTOMLEFT" if side == "right" else "BOTTOMRIGHT")   # stacked under it
         self.assertEqual(e.errors(), [])
 
+    def test_r3s_binding_never_changes_while_r3_is_held(self):
+        e = self.env()
+        o = e.mock.overrides
+        e.mock.keysDown.PADRSTICK = True                             # holding R3 (the game's ping) as the bags open
+        e.g.ToggleAllBags()
+        e.update(0.1)
+        self.assertIsNone(o.PADRSTICK)                               # left as it was: the release reaches the game
+        self.assertTrue(e.ns.Bags.bindLater)
+        e.mock.keysDown.PADRSTICK = False                            # let go:
+        e.update(0.1)
+        self.assertEqual(o.PADRSTICK, "CLICK ControllerCamHUD_BagKey_PADRSTICK:LeftButton")   # now the window's
+        self.assertEqual(e.errors(), [])
+
     def test_y_opens_its_menu_on_the_side_with_room(self):
         e = self.env()
         e.g.ToggleAllBags()

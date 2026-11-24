@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.5.3
+
+ControllerCam: HUD
+- Fixed: the cursor could get stuck as a blue diamond that clicked nothing. That's the game's ping, on R3: it starts when R3 goes down and places the ping when R3 comes up. Some HUD windows take R3 over while they're open (sort in your bags, quick move at a vendor or the bank). When one of them took R3 over, or gave it back, while R3 was held, the release went to the HUD and the game stayed in ping mode. Now R3's binding never changes while R3 is held; it changes once you let go. (If it happens on an older version, press R3 once more.)
+
 ## 1.5.2
 
 ControllerCam: HUD

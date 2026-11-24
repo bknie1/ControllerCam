@@ -1981,6 +1981,11 @@ function B:Bind()
     if self.open and B.Secure:GetAttribute("i") ~= self.index then B.Secure:SetAttribute("i", self.index) end
     local want = self:Wanted()
     if Same(want, self.bound) then return end
+    if (want.PADRSTICK ~= (self.bound or {}).PADRSTICK) and ns.KeyHeld("PADRSTICK") then
+        B.bindLater = true                                   -- (R3 held: its binding changes once it is let go)
+        return
+    end
+    B.bindLater = nil
     ClearOverrideBindings(owner)
     for key, what in pairs(want) do
         local button, mouse = what:match("^CLICK ([^:]+):(.+)$")
@@ -1988,6 +1993,13 @@ function B:Bind()
         else SetOverrideBinding(owner, true, key, what) end
     end
     self.bound = want
+end
+
+do  -- a change held back while R3 was held: made as soon as it is let go
+    local later = CreateFrame("Frame")
+    later:SetScript("OnUpdate", ns.Protect(function()
+        if B.bindLater and not ns.KeyHeld("PADRSTICK") and not InCombatLockdown() then B:Bind() end
+    end))
 end
 
 -- The fight's set, bound as the fight starts (the window open, the controller its)

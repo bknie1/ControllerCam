@@ -393,6 +393,7 @@ function I:Keys()
     local move = self.active and ns.db.padMove and V and V:MoveOpen() and not theirs or false
     if sort == self.sortKey and move == self.moveKey then return end
     if InCombatLockdown() then return end             -- bindings change only out of a fight: next look
+    if ns.KeyHeld(I.KEY) then return end              -- (R3 held: once it is let go, the next look)
     self.sortKey, self.moveKey = sort, move
     ClearOverrideBindings(owner)
     if move then SetOverrideBindingClick(owner, true, I.KEY, "ControllerCamHUD_StickKey", "LeftButton")

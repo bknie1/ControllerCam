@@ -2,7 +2,7 @@
 ## Title: ControllerCam HUD: Flights
 ## Notes: Flights: where to and how long, a countdown bar, a game on the way and the flight on film. Loaded only while it is switched on in the HUD's options.
 ## Author: bknie1
-## Version: 1.5.2
+## Version: 1.5.3
 ## X-License: MIT
 ## IconTexture: Interface\AddOns\ControllerCam\Media\icon
 ## Dependencies: ControllerCam_HUD, ControllerCam_HUD_Campfire
