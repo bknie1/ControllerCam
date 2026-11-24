@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.5.1
+
+ControllerCam: HUD
+- Fixed: in a battleground, the other side's class icon on the target frame and on nameplates was hidden under their faction's badge at the end of the health bar. It now sits just left of the badge.
+- Fixed: enemy nameplates in battlegrounds looked pink. The game keeps their class to itself there, so their bars stay hostile red, and the other faction's light tint (Alliance blue) on top turned them pink. In battlegrounds and arenas the bars no longer get the faction's tint or outline. The badge still says the faction.
+
 ## 1.5.0
 
 ControllerCam: HUD

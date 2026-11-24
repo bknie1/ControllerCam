@@ -17041,6 +17041,9 @@ class PvPPlates(unittest.TestCase):
         e.mock.fire("PLAYER_TARGET_CHANGED")
         ft = f.visual.classTex
         self.assertTrue(e.same(ft.points[1][2], f.health))            # the target frame the same
+        badge = e.lua.eval("function(bar) local t = bar:CreateTexture(); bar.factionBadge = t; t:Show(); return t end")(f.health)
+        e.ns.SecretClassIcon(f.visual, f.name, "target", True, f.health)   # the other faction's badge there too:
+        self.assertTrue(e.same(ft.points[1][2], badge))               # the icon beside it, not under it
         self.assertEqual(e.errors(), [])
 
     def test_your_side_is_a_slim_green_bar_and_theirs_the_need_to_know(self):
@@ -17060,6 +17063,7 @@ class PvPPlates(unittest.TestCase):
         self.assertFalse(o.sub.shown)                                 # no guild line
         self.assertIn("39", plain(o.name.text))                       # the level, and the name
         self.assertIn("Foxidin", plain(o.name.text))
+        self.assertFalse(o.health.factionShown)                       # no faction tint over red: it read as pink
         e.mock.state.instance = None                                  # out of the battleground: as ever
         e.mock.fire("PLAYER_ENTERING_WORLD")
         e.update(0.6)

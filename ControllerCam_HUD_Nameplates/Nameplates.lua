@@ -104,11 +104,7 @@ local MINI_BAR = 0.625          -- ... and the bar shorter: half the width of a 
 -- In a battleground or arena: crowded, so the plates say only what you need. The other side: health, power,
 -- level, class and name (no titles, guilds or jobs). Your side: a slim green bar, smaller, no name.
 NP.PVP_KINDS = { pvp = true, arena = true }
-function NP.InPvP()
-    if not IsInInstance then return false end
-    local ok, inside, kind = pcall(IsInInstance)
-    return ok and ns.Yes(inside) and NP.PVP_KINDS[kind] or false
-end
+function NP.InPvP() return ns.InPvP() end                              -- (Theme.lua's)
 NP.ALLY_GREEN = { 0.30, 0.82, 0.34 }
 
 -- A minor unit: a minion, a critter, or an enemy so far below you it gives nothing (grey, "trivial")

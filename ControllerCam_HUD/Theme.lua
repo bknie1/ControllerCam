@@ -494,6 +494,14 @@ function ns.OtherFaction(unit)
     local theirs, mine = Faction(unit), Faction("player")
     if theirs and mine and theirs ~= mine and FACTION_ICON[theirs] then return theirs end
 end
+-- In a battleground or arena (crowded, and everyone across is the other faction)
+ns.PVP_KINDS = { pvp = true, arena = true }
+function ns.InPvP()
+    if not IsInInstance then return false end
+    local ok, inside, kind = pcall(IsInInstance)
+    return ok and ns.Yes(inside) and ns.PVP_KINDS[kind] or false
+end
+
 -- The colour a player of the other faction is marked in: the faction's own (Alliance blue, Horde red), or, with
 -- "Ally or enemy" chosen, the red of an enemy whichever faction it is (setting: factionStyle, UnitFrames.lua)
 ns.ENEMY_COLOR = { 0.95, 0.28, 0.24 }
@@ -532,6 +540,9 @@ ns.FACTION_EDGE = 2
 ns.FACTION_TINT = 0.22
 function ns.FactionEdge(bar, color)
     if type(bar) ~= "table" or not bar.CreateTexture then return end
+    -- PvP: no tint. A bar the game won't let us colour by class there stays hostile red, and the faction's tint
+    -- over it (Alliance blue) turned it pink; and everyone across is the other faction anyway (its badge says so)
+    if color and ns.InPvP() then color = nil end
     local e = rawget(bar, "factionEdge")
     if not color then
         if e then for _, t in ipairs(e) do t:Hide() end end
@@ -652,8 +663,16 @@ function ns.SecretClassIcon(holder, fs, unit, show, bar)
         t:SetPoint("RIGHT", fs, "CENTER", -w / 2 - 2, 0)
     elseif bar then
         -- the name's width kept secret too (a battleground's other side): measuring it is refused, and guessing put
-        -- the icon over the middle of the name. At the bar's left end instead, clear of the name
-        t:SetPoint("RIGHT", bar, "LEFT", -4, 0)
+        -- the icon over the middle of the name. At the bar's left end instead, clear of the name; and left of the
+        -- other faction's badge where that is there (it sits at the bar's end too, and hid the icon)
+        local badge = rawget(bar, "factionBadge")
+        local okB, badgeShown = false, false
+        if badge then okB, badgeShown = pcall(badge.IsShown, badge) end
+        if okB and badgeShown == true then
+            t:SetPoint("RIGHT", badge, "LEFT", -3, 0)
+        else
+            t:SetPoint("RIGHT", bar, "LEFT", -4, 0)
+        end
         t.onBar = true
     else
         t:SetPoint("BOTTOM", fs, "TOP", 0, 1)              -- (no bar: above the line)
