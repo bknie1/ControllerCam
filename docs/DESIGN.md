@@ -181,9 +181,9 @@ loaded while any one of its switches is on. Its `## Dependencies` are loaded fir
    in Debug's refusal and taint report and in Impact's refusal guard. The report's profiler section lists every
    module that is loaded, so the game's profiler reports each one. A `modules` section shows each module's
    state.
-8. **Unticked in the game's AddOns list.** If you switch a module on but it is unticked there, the core ticks
-   it again for this character (`EnableAddOn`) and loads it, so the switch in Options decides. A module whose
-   folder is missing shows its switch greyed out, and says "not installed".
+8. **Unticked in the game's AddOns list.** That is the player's choice and it is left so: the module is not
+   loaded, its switch is greyed out, and its commands say it is turned off in the game's AddOns list and which
+   addon to tick there. A module whose folder is missing is greyed out the same way and says "not installed".
 9. **Translations.** One `Locales.lua` in core, built as before. `extract_hud.py` reads the module tocs too.
    `ns.localeData` (every language) is kept only under the test harness (`HUD_TEST_DIR`), which frees about
    1.5 MB in the game.
@@ -217,7 +217,7 @@ loaded while any one of its switches is on. Its `## Dependencies` are loaded fir
   - modules load by their switches, and none load while the HUD is off;
   - a module that is off keeps its settings and answers its commands, then loads when switched on in play,
     but never in a fight;
-  - a module's dependency comes with it, and a module unticked in the AddOns list is ticked again;
+  - a module's dependency comes with it, and a module unticked in the AddOns list stays off;
   - the core runs alone, and so does each module with only what it needs;
   - the memory line in the switches' tips;
   - the Options pages take in a module switched on in play;

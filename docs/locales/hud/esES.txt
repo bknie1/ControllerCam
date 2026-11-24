@@ -4,6 +4,7 @@ desactivado
 uso:
 Los cambios se aplican al terminar el combate.
 %s no está instalado: la carpeta %s no está en tu carpeta AddOns.
+%s está desactivado en la lista de AddOns del juego: marca %s allí para usarlo.
 No se pudo cargar %s: el juego lo rechazó (%s).
 %s está desactivado: /cchud %s on
 Al desactivarlo, su memoria se libera en tu próximo /reload.

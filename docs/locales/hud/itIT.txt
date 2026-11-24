@@ -4,6 +4,7 @@ disattivo
 uso:
 Le modifiche vengono applicate al termine del combattimento.
 %s non è installato: la cartella %s non è nella tua cartella AddOns.
+%s è disattivato nell'elenco AddOns del gioco: spunta %s lì per usarlo.
 Impossibile caricare %s: il gioco l'ha rifiutato (%s).
 %s è disattivato: /cchud %s on
 Disattivarlo libera la sua memoria al prossimo /reload.

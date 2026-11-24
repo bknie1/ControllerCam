@@ -4,6 +4,7 @@ aus
 Verwendung:
 Änderungen werden nach dem Kampf übernommen.
 %s ist nicht installiert: Der Ordner %s fehlt in deinem AddOns-Ordner.
+%s ist in der AddOns-Liste des Spiels ausgeschaltet: Hake dort %s an, um es zu nutzen.
 %s konnte nicht geladen werden: Das Spiel hat es abgelehnt (%s).
 %s ist aus: /cchud %s on
 Ausschalten gibt seinen Speicher bei deinem nächsten /reload frei.

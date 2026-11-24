@@ -63,7 +63,7 @@ local MODULES = {
 local MO = { list = MODULES, byAddon = {}, bySwitch = {}, byCommand = {} }
 ns.ModuleList = MO
 for _, m in ipairs(MODULES) do
-    m.state = "off"                                     -- off, loaded, missing (no folder) or refused
+    m.state = "off"           -- off, loaded, missing (no folder), disabled (unticked in the AddOns list) or refused
     MO.byAddon[m.addon] = m
     for _, key in ipairs(m.switches) do MO.bySwitch[key] = m end
     for _, cmd in ipairs(m.commands or {}) do MO.byCommand[cmd] = m end
@@ -221,12 +221,13 @@ ns.RegisterSetting({
     tip = "on a flight a small game is offered under the flight bar, and one button starts it (only that button is taken until you do): flap your mount over the treetops and past the zeppelins, and net the riders coming the other way, grounding them for flight gold. The same button again is high altitude: the game is put away and the buttons are the game's again. Never in a fight, gone on landing",
 })
 
--- Each switch knows its module (Options gives it the line on memory, and greys it while the module's folder is missing)
+-- Each switch knows its module (Options gives it the line on memory, and greys it while the module's folder is
+-- missing or the module is unticked in the game's AddOns list)
 for _, def in ipairs(ns.settings) do
     local m = def.key and MO.bySwitch[def.key]
     if m then
         def.module = m
-        def.available = function() return m.state ~= "missing" end
+        def.available = function() return m.state ~= "missing" and m.state ~= "disabled" end
     end
 end
 
@@ -262,14 +263,7 @@ end
 local function Load(m)
     local ok, loaded, why = GameCall("LoadAddOn", m.addon)
     if not ok then return false, "error" end
-    if not loaded and why == "DISABLED" then
-        -- unticked in the game's AddOns list: the switch in our options decides, so it is ticked again (for this
-        -- character) and loaded
-        local who = UnitName and UnitName("player")
-        GameCall("EnableAddOn", m.addon, who)
-        ok, loaded, why = GameCall("LoadAddOn", m.addon)
-        if not ok then return false, "error" end
-    end
+    -- (unticked in the game's AddOns list, it is refused with DISABLED: that is your choice, and it is left so)
     return loaded and true or false, why
 end
 
@@ -281,13 +275,13 @@ function ns.LoadWanted()
     for _, m in ipairs(MODULES) do
         if MO.IsLoaded(m) then
             m.state = "loaded"
-        elseif m.state ~= "missing" and MO.Wanted(m) then
+        elseif m.state ~= "missing" and m.state ~= "disabled" and MO.Wanted(m) then
             local loaded, why = Load(m)
             if loaded then
                 m.state, fresh = "loaded", true
                 ns.Note("module %s loaded", m.addon)
             else
-                m.state = (why == "MISSING") and "missing" or "refused"
+                m.state = (why == "MISSING") and "missing" or (why == "DISABLED") and "disabled" or "refused"
                 ns.Note("module %s not loaded: %s", m.addon, tostring(why))
             end
         end
@@ -313,6 +307,7 @@ function MO.Why(m)
     local def = SwitchOf(m)
     local label = def and L[def.label] or m.addon
     if m.state == "missing" then return L["%s is not installed: the folder %s is not in your AddOns folder."]:format(label, m.addon) end
+    if m.state == "disabled" then return L["%s is turned off in the game's AddOns list: tick %s there to use it."]:format(label, m.addon) end
     if m.state == "refused" then return L["%s could not be loaded: the game refused it (%s)."]:format(label, m.addon) end
     if InCombatLockdown and InCombatLockdown() and MO.Wanted(m) then return L["Changes are applied when combat ends."] end
     return L["%s is off: /cchud %s on"]:format(label, def and def.command or "")

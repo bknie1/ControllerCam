@@ -402,10 +402,22 @@ class LoadOnDemand(unittest.TestCase):
         self.assertFalse(e.ns.Campfire.active)                        # loaded for the flight's film, its own switch off
         self.assertEqual(e.errors(), [])
 
-    def test_a_module_unticked_in_the_addon_list_is_ticked_again(self):
+    def test_a_module_unticked_in_the_addon_list_stays_off(self):
+        # unticked in the game's AddOns list is the player's choice: never ticked again, and its switch says why
         e = Env(db=self.ON, modules="game", disabled=["ControllerCam_HUD_Bags"])
-        self.assertIn("ControllerCam_HUD_Bags", e.loaded_modules)
-        self.assertEqual(e.mock.enabledFor["ControllerCam_HUD_Bags"], e.g.UnitName("player")[0])
+        self.assertNotIn("ControllerCam_HUD_Bags", e.loaded_modules)
+        self.assertIsNone(e.mock.enabledFor["ControllerCam_HUD_Bags"])            # EnableAddOn never called
+        m = self.manifest(e)["ControllerCam_HUD_Bags"]
+        self.assertEqual(m.state, "disabled")
+        self.assertIn("turned off in the game's AddOns list", e.cmd("bagorder"))
+        self.assertIn("ControllerCam_HUD_Bags", e.cmd("bagorder"))
+        switch = [d for d in e.ns.settings.values() if d.key == "bagWindow"][0]
+        self.assertFalse(switch.available())                                      # greyed out in the options
+        e.cmd("bagwindow off")
+        e.cmd("bagwindow on")                                                     # and asked again, still not
+        self.assertNotIn("ControllerCam_HUD_Bags", e.loaded_modules)
+        self.assertEqual(sorted(e.loaded_modules), [n for n in MODULES if n != "ControllerCam_HUD_Bags"])
+        self.assertEqual(e.errors(), [])
 
     def test_the_core_alone_runs_without_a_module(self):
         e = Env(db=self.ON, modules="game", installed=False)

@@ -4,6 +4,7 @@ off
 usage:
 Changes are applied when combat ends.
 %s is not installed: the folder %s is not in your AddOns folder.
+%s is turned off in the game's AddOns list: tick %s there to use it.
 %s could not be loaded: the game refused it (%s).
 %s is off: /cchud %s on
 Turning it off frees its memory at your next /reload.
