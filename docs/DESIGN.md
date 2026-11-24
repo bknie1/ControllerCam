@@ -200,8 +200,9 @@ loaded while any one of its switches is on. Its `## Dependencies` are loaded fir
   version against ControllerCam's, copies each module folder (toc, Lua files, LICENSE) into `dist/` and zips
   them beside `ControllerCam`, `ControllerCam_HUD` and `InputSwap`, so one download still holds everything.
   `curseforge.yml` uploads that same zip and needs no change.
-- **Every toc** shares the version, `## Interface`, `## Group: ControllerCam` (one heading in the game's
-  AddOns list), the author and the license, and has a `## Notes` line.
+- **Every toc** shares the version, `## Interface`, the author and the license, and has a `## Notes` line. In the
+  game's AddOns list the modules sit under the HUD (`## Group: ControllerCam_HUD`), and the HUD under ControllerCam
+  (`## Group: ControllerCam`).
 
 ### Tests
 

@@ -1,14 +1,17 @@
 # Changelog
 
+## 1.5.0
+
+ControllerCam: HUD
+- Parts you switch off cost nothing now. Twelve parts of the HUD are addons of their own, loaded only while you have them switched on: nameplates, party and raid frames, combat numbers and callouts, the bag window, the Market tab, The Mentor, the transmog Sets tab, the quest compass, fishing, the characters in the windows, the campfire scene and flights. Switched off in the options' Modules list (or by its command), a part stops at once, as before, and its memory is freed at your next /reload; switched on, it loads at once, no /reload needed. Its settings are kept while it's off, and /cchud export carries them. A command of a part that's off says how to switch it on. They all come in the same download, under ControllerCam in the game's AddOns list.
+- The HUD takes about 1.5 MB less memory: it no longer keeps the texts of every language, only yours.
+- In the game's AddOns list the modules sit under the HUD, and the HUD under ControllerCam.
+
 ## 1.4.21
 
 ControllerCam: HUD
 - PvP nameplates, condensed for a crowded battleground or arena. The other side shows only what you need to know: health, power, level, class and name, with no titles or guilds. Your own side gets a slim green bar, smaller and without a name, so the enemies stand out.
 - Fixed: in a battleground, the class icon of a player from the other side sat over the middle of their name, on the target frame and on nameplates. The game keeps their name's width to itself there, so the icon can't be placed against the text. It now sits at the left end of the health bar instead, clear of the name, with a raid mark beside it.
-
-ControllerCam: HUD (load-on-demand modules)
-- Parts you switch off cost nothing now. Twelve parts of the HUD are addons of their own, loaded only while you have them switched on: nameplates, party and raid frames, combat numbers and callouts, the bag window, the Market tab, The Mentor, the transmog Sets tab, the quest compass, fishing, the characters in the windows, the campfire scene and flights. Switched off in the options' Modules list (or by its command), a part stops at once, as before, and its memory is freed at your next /reload; switched on, it loads at once, no /reload needed. Its settings are kept while it's off, and /cchud export carries them. A command of a part that's off says how to switch it on. They all come in the same download, under ControllerCam in the game's AddOns list.
-- The HUD takes about 1.5 MB less memory: it no longer keeps the texts of every language, only yours.
 
 ## 1.4.20
 

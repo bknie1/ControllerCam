@@ -292,8 +292,9 @@ class LoadOnDemand(unittest.TestCase):
             meta = module_toc(name)[1]
             self.assertEqual(meta.get("LoadOnDemand"), "1", name)
             self.assertEqual(meta["Dependencies"].split(",")[0].strip(), "ControllerCam_HUD", name)
-            for field in ("Version", "Interface", "Group", "Author", "X-License"):
+            for field in ("Version", "Interface", "Author", "X-License"):
                 self.assertEqual(meta.get(field), core.get(field), (name, field))
+            self.assertEqual(meta.get("Group"), "ControllerCam_HUD", name)   # (under the HUD in the AddOns list)
             self.assertTrue(meta.get("Title", "").startswith("ControllerCam HUD: "), name)
             self.assertTrue(meta.get("Notes"), name)
             for dep in module_deps(name):
