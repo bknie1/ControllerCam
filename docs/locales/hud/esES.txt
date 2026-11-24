@@ -3,6 +3,60 @@ activado
 desactivado
 uso:
 Los cambios se aplican al terminar el combate.
+%s no está instalado: la carpeta %s no está en tu carpeta AddOns.
+%s está desactivado en la lista de AddOns del juego: marca %s allí para usarlo.
+No se pudo cargar %s: el juego lo rechazó (%s).
+%s está desactivado: /cchud %s on
+Al desactivarlo, su memoria se libera en tu próximo /reload.
+Al desactivarlo, su memoria se libera en tu próximo /reload, cuando estos también estén desactivados: %s.
+Placas de nombre
+nuestro aspecto en las placas de nombre del juego (sus opciones de placas se siguen aplicando)
+Marcos de grupo y banda
+dibuja nuestro aspecto sobre los marcos de grupo y banda del juego (su selección de objetivo y sus opciones siguen funcionando)
+Números estilizados sobre ti
+el daño y la sanación que recibes aparecen como tus propios golpes, en lugar del texto desplazable del juego (sigue la opción del juego de texto de combate sobre ti)
+Habilidades listas
+cuando una habilidad que solo permite un momento se puede usar (Mordedura de mangosta, Abrumar, Revancha, Estocada, Contraataque) o el juego ilumina una en tu barra: su nombre en rojo intenso un momento en el centro de la pantalla
+Reutilizaciones que vuelven
+tus habilidades clave suben y crecen junto a tu personaje en los dos últimos segundos de su reutilización, y estallan en dorado en cuanto están listas (en lugar de una barra de reutilizaciones)
+Beneficios que se acaban
+un beneficio que te lanzas a ti mismo (un Sello, Escudo sagrado, un grito o escudo) avisa junto a tus reutilizaciones cuando se está acabando, y en rojo en cuanto desaparece, también si se gasta antes
+Grandes momentos
+una ráfaga se fija grande y dorada en el centro de la pantalla: críticos que caen seguidos, cada uno a menos de un segundo del anterior (un doble golpe, Sentencia y Golpe sagrado juntos), con lo que hicieron juntos (como mucho dos veces por combate)
+Vibración: tus habilidades clave
+las habilidades clave de cada clase se sienten distintas en el mando (una Sentencia salpica, un Golpe sagrado chasquea, Viento furioso golpea tres veces)
+Una ventana de bolsas con filtros rápidos
+tus bolsas en una ventana propia del HUD en lugar de la del juego: todos los objetos juntos, los huecos vacíos reunidos al final, tus bolsas en una fila aparte y filtros rápidos arriba (LB y RB). También el banco, mientras está abierto. Desactivado: las bolsas del juego
+Pestaña Mercado en la casa de subastas
+una pestaña Mercado en la casa de subastas: qué de tus bolsas merece venderse allí y por qué, un gráfico de precios al lado, y publicar con una pulsación
+El Mentor: un plan de subida junto a la ventana de la profesión
+mientras la ventana de una profesión está abierta, un panel a su lado dice qué recetas hacer y cuántas para llegar al máximo, y lo que hace falta, hasta el mineral y las hierbas; una estimación según los colores de las recetas
+Ventana de la profesión: cuántos podrías fabricar con tu banco
+junto al número del juego de cuántas veces puedes fabricar una receta con tus bolsas, un segundo número en azul incluye los componentes de tu banco. Solo aparece cuando eso da más
+Lista de farmeo junto a la lista de misiones
+lo que piensas recolectar, con cuántos tienes y cuántos quieres: tus bolsas y banco y los de tus otros personajes en este reino. Añade los componentes de un plan de subida con un botón, o cualquier objeto
+Pestaña Conjuntos en el transfigurador
+una pestaña Conjuntos en la ventana de transfiguración: equipo de tu colección que comparte nombre (Yelmo de hierro verde, Guanteletes de hierro verde...) y los conjuntos del propio juego, puestos en tu atuendo con una pulsación, con Deshacer; no se guarda ni se paga nada hasta que pulsas Aplicar
+Apariencia conseguida, en las descripciones de objetos
+bajo la descripción del equipo y los cosméticos: si su aspecto ya está en tu colección, o solo gracias a otro objeto que se ve igual, para que sepas qué es nuevo para ti
+Brújula de misiones
+una brújula en la parte superior de la pantalla: hacia dónde miras y dónde están tus misiones, cada una con su distancia. Destaca la misión a la que te dirige el juego
+Pesca con un botón
+con una caña en las manos: tu botón de interactuar para lanzar el sedal siempre que no haya nada con lo que interactuar, y otra vez para enganchar el pez cuando el corcho se mueva; la captura se recoge por ti. B para guardar la caña y recuperar tus armas
+Diario de pesca
+cada captura se anota en tu diario de pesca: cuántas de cada tipo, dónde la sacaste por primera vez, y un peso inventado por diversión con tu mejor marca de cada una (/cchud journal lo abre)
+Interfaz de pesca
+con una caña de pescar en las manos: los peces del agua en la que estás (los que aún no has sacado aquí permanecen ocultos), tu habilidad de pesca y lo que añade tu cebo, cuántos has capturado y cuántos se escaparon, cuánto dura tu cebo, y tus últimas capturas
+Narrativa: personajes en las ventanas
+cada ventana que mejora el HUD tiene a alguien que te ayuda, con su retrato y una frase corta sobre lo que tienes delante y por qué: tú con tus bolsas y junto al agua, el vendedor, el banquero, el jefe de correos, el maestro de vuelo, el Corredor en la casa de subastas y el Mentor en tu profesión; desactivado: las ventanas quedan sencillas y en silencio
+Escena de la hoguera
+quédate quieto unos segundos en un campamento y la pantalla se vuelve película durante un minuto: la cámara gira a tu alrededor, se cuentan tus grandes momentos desde el último campamento (jefes, niveles, profesiones, monturas nuevas) y cierran los beneficios del campamento, por clase. Cualquier movimiento o botón la termina
+Vuelos: tiempo y cuenta atrás
+en un vuelo se dice en el chat adónde y cuánto dura, y una barra en lo alto de la pantalla cuenta hasta el aterrizaje; el tiempo de cada ruta se aprende de tus vuelos
+Vuelos cinematográficos
+en un vuelo del maestro de vuelo la pantalla se convierte en película: franjas negras, el HUD se desvanece, la cámara se aleja y gira despacio a tu alrededor y de tu montura, con la barra de vuelo en la franja superior. El juego de vuelo, una ventana o un botón la interrumpen, y termina suavemente al aproximarte a aterrizar
+Vuelos: un juego por el camino
+en un vuelo se ofrece un pequeño juego bajo la barra de vuelo, y un botón lo inicia (solo ese botón se ocupa hasta que lo pulses): haz que tu montura aletee sobre las copas de los árboles y entre los zepelines, y atrapa con la red a los jinetes que vienen de frente, bajándolos a tierra a cambio de oro de vuelo. El mismo botón otra vez es gran altitud: el juego se guarda y los botones vuelven a ser del juego. Nunca en combate, desaparece al aterrizar
 La del juego
 Las fuentes solo se pueden elegir donde el idioma del juego se escribe con letras latinas.
 Fuente: %s
@@ -269,86 +323,6 @@ lee todos los precios de la casa de subastas de una vez (ábrela antes; cada 15 
 Fabrica: %s
 Guardar lo que tus profesiones aún necesitan
 un objeto por el que una receta de uno de tus personajes aún da un punto de habilidad (recetas naranjas y amarillas, como el juego las muestra en la ventana de la profesión), que usan los próximos pasos de la profesión (las recetas de las guías de subida y las que conoce otro de tus personajes, hasta 75 puntos por delante), o que fabrica algo que vale más en la casa de subastas que el propio objeto, se guarda, no se vende, y su descripción dice por qué. Las recetas se leen cuando la ventana de una profesión está abierta
-Abre la ventana de una profesión y echaré un vistazo a tus recetas.
-Ese es el tope, %d. Un instructor tiene el siguiente rango para ti.
-Nada más que aprender en %d. Ve a ver a un instructor por el siguiente rango.
-Tus recetas se te han quedado pequeñas. Ve a un instructor: %s te espera en %d.
-Faltan %d para %d, y lo que sabes no te llevará hasta allí. Un instructor tiene %s para ti en %d.
-Tus recetas se te han quedado pequeñas. Ve a un instructor: %s te espera.
-Tus recetas dejan de enseñarte a %d de %d. Pide a un instructor %s.
-Tus recetas se agotan a %d de %d. Un instructor tendrá algo nuevo.
-Lo que sabes no te llevará los últimos %d. Es hora de ver a un instructor.
-%s ya no te enseñará mucho, pero es lo mejor que tienes. Faltan %d para %d.
-A partir de aquí va despacio: %s da un punto de vez en cuando. Faltan %d.
-Primero te hará falta %s, %s. Las guías empiezan este tramo con ella.
-Aprende %s, %s, y empezamos: faltan %d para %d.
-Faltan %d para %d. Las guías te mandan a por %s hasta %d.
-Aquí aprendes recolectando: %s hasta %d.
-Faltan %d para %d. Empieza con %s, o con %s si lo prefieres: %s.
-Primero %s, como dicen las guías. %s también sirve: %s.
-Faltan %d para %d. Empieza con %s.
-%s es ahora tu mejor maestro. %d puntos hasta %d.
-Pulso firme. Primero %s, y faltan %d.
-con un instructor
-de un vendedor
-como botín
-de una misión
-materiales más baratos
-materiales de un vendedor
-materiales que recolectas tú
-se vende bien
-algo que usarás
-menos fabricaciones
-una receta que encuentras o compras
-otros materiales
-la primera opción de las guías
-Abre la ventana de una profesión para ver un plan de subida.
-En el tope, %d. Un instructor tiene el siguiente rango.
-Faltan %d hasta %d; tus recetas se quedan cortas. Un instructor tiene %s a %d.
-Faltan %d hasta %d; tus recetas se quedan cortas. Un instructor tiene %s.
-Tus recetas se quedan a %d de %d. Un instructor tiene más.
-Faltan %d hasta %d. Lo mejor ahora: %s, verde (un punto de vez en cuando).
-Faltan %d hasta %d. Aprende primero %s, %s.
-Faltan %d hasta %d. Recolecta %s hasta %d.
-Faltan %d hasta %d. Primero: %s, o %s (%s).
-Faltan %d hasta %d. Primero: %s.
-Para recolectar o comprar
-%d veces: %s
-Apréndela %s, a partir de %d.
-Apréndela %s.
-%s: %d en tus bolsas, %d en el banco, %d por fabricación
-Las guías suben este tramo recolectando %s.
-%s: tienes %d, el plan usa %d
-para %s
-El Mentor: lo que tu banco te deja fabricar
-Lo que tu banco puede fabricar
-Con lo que hay en tu banco no se puede fabricar nada más.
-%d que puedes fabricar contando tu banco, %d de ellas solo con él.
-El Mentor: %s %d > %d
-El Mentor
-Plan de subida
-o
-Recolecta %s
-por aprender
-Probar
-Ocultar
-El plan
-Atrás
-Farmear esto
-Farmear todo
-Con el banco
-Usar el plan
-dos veces para ocultar
-Aquí no hay nada que probarse.
-%d añadido(s) a la lista de farmeo.
-No falta nada: tienes lo necesario.
-Abre la ventana de una profesión para hacer un plan.
-El Mentor (plan de subida): mostrar / ocultar
-El Mentor: un plan de subida junto a la ventana de la profesión
-mientras la ventana de una profesión está abierta, un panel a su lado dice qué recetas hacer y cuántas para llegar al máximo, y lo que hace falta, hasta el mineral y las hierbas; una estimación según los colores de las recetas
-Ventana de la profesión: cuántos podrías fabricar con tu banco
-junto al número del juego de cuántas veces puedes fabricar una receta con tus bolsas, un segundo número en azul incluye los componentes de tu banco. Solo aparece cuando eso da más
-muestra el plan de subida de la última ventana de profesión abierta, con los botones del mando en él
 PA
 PA a dist.
 crít.
@@ -370,126 +344,6 @@ banco
 Tu marca
 Detalles del objeto: todo sobre el objeto al que apuntas
 muestra todo sobre el objeto al que apuntas (o el indicado): precios, quién lo tiene, tu marca
-%d%% de venderse
-Se va seguro (%d%%)
-Eso se vende solo (%d%%)
-Creo que se venderá (%d%%)
-Debería encontrar comprador (%d%%)
-Mitad y mitad (%d%%)
-Puede salir de cualquier manera (%d%%)
-Es un poco de apuesta (%d%%)
-Puede que tarde un rato (%d%%)
-Yo no contaría con ello (%d%%)
-Lo veo difícil, amigo (%d%%)
-+%s más que un vendedor
-aún no se conoce el precio
-un vendedor paga lo mismo
-El Corredor
-Mercado
-cada moneda contada, amigo
-No hay nada en tus bolsas que se pueda vender aquí.
-Sin precios en los últimos 7 días.
-Un día de precios hasta ahora: cada día que visites la casa de subastas se añade una vela.
-7 días, una vela por día: verde cerró más alto, rojo más bajo
-30 días, el más bajo del día: verde sube, rojo baja
-Aún no hay historial de precios: lee la casa de subastas durante unos días.
-Solo un día de precios: la línea crece cada día que visitas la casa de subastas.
-Pido %s cada uno, %s por los %d que sueltas; %d se quedan contigo
-Pide %s cada uno, %s por los %d
-Más bajo
-leído %s
-Habitual
-7 días: de %s a %s
-En venta: %d subastas, %d objetos
-%s cada uno, %s por los %d
-Pusiste %d aquí, %d subastas vendidas
-No se conoce ningún precio: lee primero la casa de subastas.
-Nada en tus bolsas que vender aquí.
-Hoy nada se vende mejor aquí que en un vendedor; %d quizá, con paciencia.
-Lo mejor primero: %d se venden mejor aquí que en un vendedor, %d más con paciencia.
-Bolsas vacías, amigo. Tráeme algo que vender.
-Hoy nada supera al vendedor. %d quizá, con un poco de paciencia.
-Nada de ganancia segura en estas bolsas, amigo. %d pagarían si esperas.
-Lo mejor arriba: %d aquí superan a cualquier vendedor, %d más para los pacientes.
-%d pagan más aquí que en un vendedor, lo mejor primero. %d más si esperas.
-Lo de arriba paga más: %d ventas seguras, %d más si puedes esperar.
-Aún no hay precios: %s lee la casa de subastas.
-Precios leídos ahora mismo: %d.
-%d precios, leídos %s.
-%d precios, leídos %s. %s los vuelve a leer.
-Aún no he leído el tablón. %s y te traigo todos los precios.
-Sin precios todavía, amigo. %s lee el tablón entero.
-Precios recién sacados del tablón, amigo: %d.
-Acabo de leer el tablón: %d precios, aún calientes.
-%d precios, leídos %s. Suficiente, amigo.
-Última mirada al tablón: %s, %d precios.
-Precios de %s, más duros que pan viejo. %s vuelve a leer el tablón.
-%d precios, pero los leí %s. %s y vuelvo a mirar.
-También se muestra lo que guardas. %s lo oculta.
-Apartados: %d, para tus profesiones, tu equipo y tus marcas. %s los muestra.
-Lo que guardas también está en la lista. %s lo aparta.
-También muestro lo que guardas. %s lo vuelve a ocultar.
-%d apartados: material de oficio, equipo para llevar, lo que marcaste. %s los muestra.
-Aparté %d: para tus oficios, para vestir y los que marcaste. %s si los quieres.
-cada uno
-sin datos
-Venta rápida
-Paciente
-Leer todos los precios
-Ocultar lo guardado
-Mostrar lo guardado
-Línea
-Velas
-Publicar
-%d de %d
-Publicar %d de %d a %s cada uno
-Publicar %d por %s
-Poner los %d por %s
-Este cliente no permite publicar en la casa de subastas desde aquí.
-Publicado %d por %s.
-Mercado en la casa de subastas: abrir / cerrar
-Pestaña Mercado en la casa de subastas
-una pestaña Mercado en la casa de subastas: qué de tus bolsas merece venderse allí y por qué, un gráfico de precios al lado, y publicar con una pulsación
-Saludo del subastador en el Mercado
-un subastador goblin dice una frase corta, de los sonidos del propio juego, cuando abre el Mercado; desactivado: se abre en silencio
-Mercado: mostrar lo que guardas
-el Mercado también lista lo que guardas: de lo que tus profesiones aún aprenden o convierten en algo que vale más, y lo que marcaste para guardar; desactivado: solo lo que venderías
-Mercado: gráfico de precios en velas
-el gráfico de precios del Mercado es una vela por día durante los últimos 7 días (dónde abrió el precio, su máximo y su mínimo, y dónde cerró: verde si cerró más alto, rojo si más bajo); desactivado: una línea del precio más bajo de cada día durante 30 días
-abrir o cerrar el Mercado (una pestaña de la casa de subastas)
-qué casa de subastas tiene este cliente (para solucionar problemas)
-conseguida
-conseguida con otro objeto
-aún no conseguida
-Apariencia
-Elige un conjunto para poner sus piezas en tu atuendo. %s lo guarda; no se paga nada antes.
-Revisando tu colección...
-Tu atuendo vuelve a estar como antes.
-%s: %d de %d piezas puestas.
-%d no se pudieron poner en este atuendo.
-Un conjunto del que tienes piezas
-%d conjuntos de los que tienes piezas
-no puedes llevarlo
-falta
-Las %d piezas
-%d de %d piezas
-Falta: %s
-Aún no hay conjuntos. Los objetos que comparten nombre, como Yelmo de hierro verde y Guanteletes de hierro verde, aparecen aquí en cuanto tienes uno.
-Deshacer
-Pestaña Conjuntos en el transfigurador
-una pestaña Conjuntos en la ventana de transfiguración: equipo de tu colección que comparte nombre (Yelmo de hierro verde, Guanteletes de hierro verde...) y los conjuntos del propio juego, puestos en tu atuendo con una pulsación, con Deshacer; no se guarda ni se paga nada hasta que pulsas Aplicar
-Apariencia conseguida, en las descripciones de objetos
-bajo la descripción del equipo y los cosméticos: si su aspecto ya está en tu colección, o solo gracias a otro objeto que se ve igual, para que sepas qué es nuevo para ti
-Desconectado
-Muerto
-Desactivado
-Con especialización de sanación
-Siempre
-Demasiado lejos
-Marcos de grupo y banda
-dibuja nuestro aspecto sobre los marcos de grupo y banda del juego (su selección de objetivo y sus opciones siguen funcionando)
-Grupo y banda del sanador
-en un grupo: tu grupo junto a tu personaje, cada uno con el botón que lo selecciona; en una banda: marcos más finos. Cada uno muestra solo cuánta sanación necesita, un perjuicio que puedes curar y si está a tu alcance
 Animaciones de la barra de lanzamiento
 una barra de lanzamiento muestra lo que se lanza: picos la golpean al minar, rayos la recorren con naturaleza, una enredadera florece con una sanación, runas toman forma con arcano, llamas, hielo y sombras con fuego, escarcha y sombras
 mostrar cada animación de la barra de lanzamiento una vez, en tu barra
@@ -520,79 +374,6 @@ a la derecha bajo la barra de un aliado: los perjuicios que puedes disipar (con 
 Puntos de combo
 puntos de combo como indicadores sobre el nombre del objetivo
 muestra lo que el juego dice de los efectos de tu objetivo (para resolver problemas)
-Porcentaje de amenaza
-tu parte de la amenaza como número junto al icono de amenaza, en el marco del objetivo y en las placas de nombre
-Número de salud
-la salud restante, abreviada (12.3k), en la barra (no en las placas compactas: allí basta el porcentaje)
-Tus perjuicios
-tus perjuicios sobre la unidad, sobre su nombre, con su tiempo
-Perjuicios de todos
-los perjuicios que el juego marca para las placas de nombre de todos, no solo los tuyos
-Beneficios del enemigo
-los beneficios de un enemigo junto a sus perjuicios: los que importan (importantes, enfurecido o que puedes disipar o robar), o todos si Solo los efectos que importan está desactivado
-Icono de control de masas
-un icono grande con su tiempo cuando la unidad está aturdida, inmovilizada, aterrorizada...
-Resplandor de amenaza
-un icono de escudo y un brillo tras el nombre: rojo mientras te ataca, rojo y amarillo cuando estás a punto de atraerlo, amarillo y azul cuando lo estás perdiendo, azul cuando no está sobre ti
-Marcador de misión
-una marca dorada en las unidades que tus misiones aún necesitan
-Animaciones de placas de nombre
-las placas aparecen con fundido, la salud baja respira, el control de masas brilla
-Pequeño
-Normal
-Grande
-Nombre completo
-Nombre corto
-Sin nombre
-Completo
-Mínimo
-Mínimo mini
-Tamaño de las placas
-lo grandes que son las barras de las placas de nombre: pequeñas y finas, normales o grandes (más anchas y altas)
-Nombres en las placas
-el nombre en una placa con barra de salud: completo, recortado u omitido (el marco del objetivo lo da completo; el nivel y el icono de clase se quedan). Una placa sin barra, la de un PNJ amistoso, siempre conserva su nombre
-Aspecto de las placas
-los interruptores de las placas de una vez. Completo: todo. Mínimo: sin barra de poder, hermandad ni título, nombres cortos. Mínimo mini: barras pequeñas con salud, tus perjuicios y los beneficios que importan, nivel y clase, sin nombre (lo tiene el marco del objetivo). La amenaza, el control y los lanzamientos llamativos siempre se quedan
-Placas de nombre
-nuestro aspecto en las placas de nombre del juego (sus opciones de placas se siguen aplicando)
-Títulos de jugador
-muestra el título de un jugador junto a su nombre
-Hermandades y oficios de PNJ
-una línea bajo el nombre: la hermandad del jugador o a qué se dedica el PNJ
-Barras de amigos en combate
-las placas de nombre amistosas muestran salud, poder y lanzamientos mientras esa unidad está en combate
-Placas de nombre amistosas del propio juego
-deja las placas amistosas (tu grupo, otros jugadores, PNJ amistosos) con el aspecto del juego; las nuestras solo en enemigos
-Barras de poder
-una barra fina de maná, ira o energía bajo la barra de salud
-Objetivo del lanzamiento
-a quién va dirigido un lanzamiento, junto al nombre del hechizo
-Porcentaje de salud
-el porcentaje de salud en la barra
-Nombre en la placa de tu objetivo
-desactivado: la placa de tu objetivo no muestra su nombre ni su nivel (los muestra el marco del objetivo)
-Niveles en las placas de nombre
-el nivel delante del nombre de un enemigo, coloreado según la dificultad
-Placas de nombre compactas
-placas de nombre de aproximadamente la mitad de ancho
-Lanzamientos enemigos llamativos
-el lanzamiento de un enemigo parpadea, se hincha y pulsa cada vez más rápido hasta completarse, para que puedas interrumpirlo a tiempo
-Iconos de clase en las placas
-el icono de clase de un jugador delante de su nombre, amigo o enemigo
-Lo que hacen los PNJ, como iconos
-un icono sobre los PNJ amistosos que ofrecen algo: una bolsa sobre los vendedores, un yunque sobre los herreros que reparan, un libro sobre los instructores... (los iconos del propio juego; se ven aunque la placa espere a que la señales)
-PNJ amistosos solo al apuntarlos
-las placas de los PNJ amistosos (vendedores, dadores de misiones, habitantes) solo se muestran mientras los apuntas, como su descripción
-Nombres sobre las cosas con las que puedes interactuar
-un nombre sobre minerales, cofres, placas y similares mientras los miras (desactivado: quedan sin nombre, el aviso del propio juego ya dice qué son)
-Minipanel de nombre
-esbirros, alimañas y enemigos grises que no dan experiencia tienen una placa pequeña: una barra fina con tus perjuicios encima y sin nombre (una alimaña, sin barra, conserva su nombre; la opción del juego decide si tienen placa)
-Placas de nombre del grupo en mazmorras: solo nombres
-dentro de una mazmorra o banda el juego dibuja él mismo las placas de nombre de los jugadores amistosos y los addons no pueden cambiarlas: allí se ajustan las opciones propias del juego para mostrarlas como nombres con el color de clase y sin barras, como las nuestras, y las barras del juego vuelven mientras luchas (si las barras de amigos en combate están activadas); todo se restaura al salir
-Placas de nombre del grupo en mazmorras: ocultas
-dentro de una mazmorra o banda, apagar del todo las placas de nombre del juego para los jugadores amistosos (y dejarlas como las tenías al salir)
-muestra lo que da el juego para el nombre de tu objetivo (para solucionar problemas)
-lista las placas de nombre en pantalla y si llevan nuestro aspecto (para solucionar problemas)
 Mostrando cada escuela de daño una vez (la última como crítico).
 Partículas de impacto
 destellos sagrados, el fuego asciende, los cristales de escarcha perduran, la sombra humea, las runas arcanas centellean en la barra que golpeas
@@ -609,15 +390,6 @@ Las sanaciones en el tiempo crecen en la barra
 raíces y ramas (Naturaleza) o hilos dorados (Sagrado) crecen sobre la barra de tu objetivo, foco o la tuya mientras dura una sanación en el tiempo, y se marchitan al terminar
 Los escudos se muestran como una protección
 un escudo sobre tu objetivo, tu foco o tú (Palabra de poder: escudo, Escudo divino, Barrera de hielo...) destella alrededor de la barra de salud con el color de su escuela, brilla mientras el escudo aguanta y se desvanece cuando se rompe
-%d absorbido
-Reutilizaciones que vuelven
-Números estilizados sobre ti
-el daño y la sanación que recibes aparecen como tus propios golpes, en lugar del texto desplazable del juego (sigue la opción del juego de texto de combate sobre ti)
-Habilidades listas
-cuando una habilidad que solo permite un momento se puede usar (Mordedura de mangosta, Abrumar, Revancha, Estocada, Contraataque) o el juego ilumina una en tu barra: su nombre en rojo intenso un momento en el centro de la pantalla
-tus habilidades clave suben y crecen junto a tu personaje en los dos últimos segundos de su reutilización, y estallan en dorado en cuanto están listas (en lugar de una barra de reutilizaciones)
-Beneficios que se acaban
-un beneficio que te lanzas a ti mismo (un Sello, Escudo sagrado, un grito o escudo) avisa junto a tus reutilizaciones cuando se está acabando, y en rojo en cuanto desaparece, también si se gasta antes
 El del juego
 Punto
 Anillo
@@ -662,18 +434,6 @@ una oleada al subir de nivel, un retumbar largo y grave al morir
 La barra de luz muestra tu salud
 un mando con barra de luz (DualSense) muestra en ella tu salud: de verde a rojo, con pulsos si es baja en un combate
 reproduce cada patrón de vibración una vez
-Lista a la derecha
-Uno en el centro
-%d sanaciones críticas
-%d críticos
-Sentencia
-Grandes momentos: dónde
-un bloque justo encima de los avisos de reutilización a la derecha de tu personaje, el más reciente junto a ellos y los anteriores subiendo por encima mientras se desvanecen, o uno a la vez en el centro
-Vibración: tus habilidades clave
-las habilidades clave de cada clase se sienten distintas en el mando (una Sentencia salpica, un Golpe sagrado chasquea, Viento furioso golpea tres veces)
-Grandes momentos
-una ráfaga se fija grande y dorada en el centro de la pantalla: críticos que caen seguidos, cada uno a menos de un segundo del anterior (un doble golpe, Sentencia y Golpe sagrado juntos), con lo que hicieron juntos (como mucho dos veces por combate)
-muestra cómo se ve y se siente un gran momento
 ¡nuevo!
 ¡récord!
 %d h
@@ -684,39 +444,6 @@ los peces que sacas y los beneficios que te da un campamento o un santuario se a
 Reducir animaciones
 nada en la pantalla tiembla, se desliza, vuela ni estalla: las animaciones de la barra de lanzamiento, los efectos de golpe, el movimiento de las placas de nombre, los grandes momentos y los anuncios de capturas y beneficios quedan tranquilos o quietos. También cuentan los ajustes del propio juego de temblor de pantalla y movimiento inesperado de la cámara
 muestra cómo se ven los anuncios de una captura y de beneficios
-Gran maestro
-Maestro
-Artesano
-Experto
-Oficial
-Aprendiz
-Has alcanzado el nivel %d (desde el %d)
-Has alcanzado el nivel %d
-Derrotaste a %s y %d más en %s
-Derrotaste a %s
-%s: ahora %s, hasta %d
-%s ha llegado a %d
-%d rutas de vuelo nuevas, la última %s
-Nueva ruta de vuelo: %s
-Nueva montura: %s
-Nueva mascota: %s
-Nuevo juguete: %s
-Logro: %s
-El campamento
-En reposo
-Junto al fuego
-Amanecer
-Mañana
-Tarde
-Atardecer
-Noche
-%s en %s
-Con %s
-La escena de la hoguera está desactivada.
-La escena de la hoguera espera a que salgas de combate.
-Escena de la hoguera
-quédate quieto unos segundos en un campamento y la pantalla se vuelve película durante un minuto: la cámara gira a tu alrededor, se cuentan tus grandes momentos desde el último campamento (jefes, niveles, profesiones, monturas nuevas) y cierran los beneficios del campamento, por clase. Cualquier movimiento o botón la termina
-reproducir ahora la escena de la hoguera
 hecho
 %s: lista para entregar
 Terminando [%s].
@@ -753,45 +480,6 @@ cada paso de tus misiones va al chat de grupo (Collares de hueso sangriento: 4/2
 Conservar lo que necesitan tus misiones
 un objeto que una misión de tu registro aún pide, o uno que inicia una misión que todavía puedes hacer, se marca como Misión: nunca se vende ni se subasta por ti
 decir un orden recomendado para tus misiones: entrega lo que está listo, luego lo más cercano que puedes hacer solo, luego el resto
-Arriba
-Abajo
-N
-NO
-O
-SO
-S
-SE
-E
-NE
-La brújula de misiones está desactivada: /cchud compass on
-La brújula necesita saber dónde estás, y el juego no lo dice aquí.
-Brújula de misiones
-una brújula en la parte superior de la pantalla: hacia dónde miras y dónde están tus misiones, cada una con su distancia. Destaca la misión a la que te dirige el juego
-Brújula de misiones: lugar
-arriba de la pantalla, o abajo en el lugar de la barra de experiencia (la barra pasa entonces arriba)
-unas marcas en la brújula de misiones, a tu alrededor, durante veinte segundos
-A la izquierda de las misiones
-A la derecha de las misiones
-Bajo las misiones
-La lista de farmeo está llena.
-Lista de farmeo: %s, %d deseados.
-Farmeo
-%d más
-Nada que farmear aún.
-Una pila más
-Quitar
-Vaciar
-Hecho
-¿Quitar todo de la lista de farmeo?
-Lista de farmeo: elegir / hecho
-Lista de farmeo: añadir el objeto al que apuntas
-Eso no está en la lista de farmeo.
-La lista de farmeo está vacía.
-Lista de farmeo: dónde se sitúa
-Lista de farmeo junto a la lista de misiones
-lo que piensas recolectar, con cuántos tienes y cuántos quieres: tus bolsas y banco y los de tus otros personajes en este reino. Añade los componentes de un plan de subida con un botón, o cualquier objeto
-la lista de farmeo a la izquierda de la lista de misiones, a su derecha o bajo sus misiones
-la lista de farmeo junto a la lista de misiones: elige con el mando; add <objeto> [cuántos], remove <objeto>, clear, o left / right / bottom para su sitio
 No estás en combate.
 Este cliente no tiene barras de mando.
 Este cliente no permite que los addons lo cambien; usa el Modo de edición.
@@ -831,129 +519,6 @@ El mando no dice qué es: los iconos se quedan como los tiene el juego.
 los iconos que el juego muestra para los botones de tu mando: auto (según el mando en uso), xbox, playstation, switch, steam, generic (números), o game para dejarlos como los tiene el juego
 Filas de reutilización apartadas de las barras del mando
 las filas de reutilización del juego se colocan bajo el objetivo en lugar de encima de los botones del mando, algo más pequeñas (solo con los diseños integrados del juego: con un diseño propio se quedan donde las pusiste)
-Modo de pesca: desactivado.
-Pesca: %s para lanzar
-Sin cebo: %s dos veces para usar %s
-%s para guardar la caña
-Modo pesca: %s para lanzar el sedal, y otra vez para enganchar el pez cuando el corcho se mueva.
-%s para enganchar, %s para lanzar de nuevo
-El modo de pesca necesita una caña de pescar en tus manos.
-No conoces Pesca.
-Modo de pesca: un botón lanza y engancha
-Botón de pesca: %s
-Pesca con un botón
-con una caña en las manos: tu botón de interactuar para lanzar el sedal siempre que no haya nada con lo que interactuar, y otra vez para enganchar el pez cuando el corcho se mueva; la captura se recoge por ti. B para guardar la caña y recuperar tus armas
-Volver a lanzar con una pulsación
-mientras el corcho está en el agua, tu botón de pesca engancha el pez y A lanza de nuevo con una pulsación; desactivado: A es tuyo
-Cebo con doble pulsación
-pulsa tu botón de pesca dos veces rápido: la segunda pulsación pone el mejor cebo de tus bolsas en la caña, cuando la caña no tiene ninguno
-Barras del mando ocultas al pescar
-con una caña en las manos las barras del mando se ocultan para ver bien el agua; el aviso de pesca muestra el botón para lanzar. Vuelven en cuanto empieza un combate o guardas la caña
-pesca con un botón desactivada por ahora, o activada de nuevo (con una caña en las manos se activa sola)
-el botón que pesca: al principio tu botón de interactuar (Cuadrado o X), o cualquier otro, por ejemplo un gatillo (rt)
-La costa de Durotar es roca roja y aguas cálidas y poco profundas. Los trols de las Islas del Eco dicen que la caballa pasa más apretada cuando la marea arrastra el olor de los fuegos de cocina de las islas.
-Los lagos de Mulgore son pequeños, claros y pacientes. Los tauren pescan en ellos como lo hacen todo: despacio y dando las gracias.
-Cada oasis de Los Baldíos es un lugar de encuentro. Beba allí lo que beba de día, algo nada por debajo de noche.
-Las pozas de Teldrassil están a la sombra de un único árbol. Los pescadores elfos de la noche juran que los peces de allí no han visto nunca el sol y que no lo echan de menos.
-El agua de Costa Oscura es gris, fría y llena de pecios. La mitad de lo que pica frente a Auberdine se ha instalado en el cargamento perdido de alguien.
-Los ríos de Vallefresno corren bajo hojas más viejas que la mayoría de los reinos. Los peces son rápidos, y las centinelas lo son más para preguntarte qué haces allí.
-Allá abajo, entre Las Mil Agujas, el agua escasea y se guarda con celo. Un pez de aquí se ha ganado su sitio.
-Los lagos de Sierra Espolón están altos y fríos entre los picos. Los goblins ya los habrían desecado si no se pescara tan bien.
-La costa de Desolace es huesos y oleaje gris. Algo ahí abajo le ha cogido el gusto a las dos cosas.
-Feralas es verde hasta la misma orilla. Sus ríos son profundos, cálidos y están muy, pero que muy vivos.
-Nadie sabe bien dónde acaba la tierra y empieza el agua en el Marjal Revolcafango. Pesca desde la orilla y cuéntate los dedos de los pies después.
-Puerto Bonvapor tiene la única agua digna de ese nombre en Tanaris. Los goblins te venderán el derecho a pescar en ella, dos veces si te dejas.
-Bajo la luminosa bahía de Azshara yace una ciudad sumergida. Los viejos pescadores dicen que los grandes viven en lo que fueron sus jardines.
-Las pozas de Frondavil brillan, y no en el buen sentido. Lo que aún nada en ellas es terco más allá de toda razón.
-Las aguas termales y los lagos bordeados de brea de Un'Goro han conservado cosas que el resto del mundo olvidó. Algunas muerden.
-El Lago Elune'ara, en Claro de la Luna, está tan quieto como un aliento contenido. Los druidas solo piden que no te lleves más de lo que vayas a comer.
-Silithus es arena, viento y rumor de alas. Si has encontrado agua donde pescar aquí, no se lo digas a nadie.
-Los lagos de Cuna del Invierno se hielan por los bordes y humean por el centro. Los peces de allí están gordos por el frío y bien valen la caminata.
-En los estanques de Orgrimmar pescan peones que no tienen nada mejor que hacer y viejos brutos que dicen lo mismo. Unos y otros te cuentan que el grande se les escapó.
-Un pez de los estanques de Cima del Trueno ha pasado toda su vida muy por encima de las llanuras. Parece llevarlo con calma.
-Darnassus cuida sus aguas con tanto esmero como sus templos. Los peces se han acostumbrado a que los admiren.
-Los lagos de las Montañas de Alterac son agua de deshielo, y los ogros y la Hermandad pescan en ellos cuando nadie mira.
-Las costas de Arathi han visto más ejércitos que pescadores. A los peces hace mucho que les da igual qué estandarte ondea sobre el agua.
-Las Tierras Inhóspitas son polvo de punta a punta. Aquí una picada es un pequeño milagro, así que trátala como tal.
-La costa de Las Tierras Devastadas es roja, arrasada y silenciosa. Lo que viva en ese oleaje ha aprendido a convivir con muchas cosas.
-Los lagos de Tirisfal yacen inmóviles bajo un cielo enfermizo. Los Renegados pescan en ellos por costumbre. Los muertos no comen gran cosa, pero recuerdan que les gustaba.
-La larga costa del Bosque de Argénteos es todo niebla y sombra de pinos. Se pesca bien, y es lo único alegre que alguien dice del lugar.
-Los ríos de las Tierras de la Peste del Oeste aún corren, aunque no limpios. Lo que saques de ellos, míralo dos veces.
-Poca gente pesca en las Tierras de la Peste del Este, y menos aún lo reconoce. El agua conserva lo que la peste dejó de ella.
-El río de Trabalomas y su larga costa sur han dado de comer a los dos bandos de cada disputa librada por ellos.
-Las Tierras del Interior guardan sus lagos en lo alto, entre los árboles, donde los enanos Martillo Salvaje pescan a lomos de grifo cuando creen que nadie los ve.
-Los lagos de Dun Morogh pasan casi todo el año cercados de hielo. Un enano abre un agujero, se sienta con una pinta y lo llama un buen día, pique lo que pique.
-La Garganta de Fuego tiene lava donde otras tierras tienen ríos. Mejor tráete algo de beber.
-Las Estepas Ardientes son ceniza y rescoldos. Si el agua de aquí te da algo, estará caliente.
-Todos los niños de Elwynn aprenden a pescar en el Lago de Cristal o en el Lago del Hito. Los pececillos de allí llevan generaciones siendo más listos que ellos.
-El Paso de la Muerte tiene poca agua y menos hospitalidad. Lo que haya en las pozas bajo Karazhan, mejor que se quede allí.
-El río que bordea el Bosque del Ocaso es negro a cualquier hora. A los peces no parece importarles la oscuridad, a los pescadores sí.
-El Loch es el orgullo de Loch Modan, contenido por la gran Presa de las Tres Cabezas. Los enanos miden contra él cualquier historia de pesca, y casi siempre gana el Loch.
-El Lago Sempiterno, en Crestagrana, es bonito como un cuadro y se pesca desde todos los muelles de Villa del Lago. Los vecinos conocen cada buen sitio y no te dirán ni uno.
-De sus ríos selváticos al salvaje cabo del sur, Tuercespina tiene las aguas más ricas del continente. Los pescadores de Bahía del Botín celebran un torneo en ellas, y casi todos hacen trampa.
-El Pantano de las Penas es agua verde bajo árboles verdes. Los peces saben a barro, y a los lugareños les gustan así.
-Los campos de los Páramos de Poniente se malograron, pero su costa no. Los que se quedaron viven de esa larga orilla gris.
-Los Humedales hacen honor a su nombre. Los muelles del Puerto de Menethil son el sitio más seco para pescar en ellos, y los crocoliscos lo saben.
-En los canales de Ventormenta pescan niños, jubilados y al menos un miembro de la nobleza disfrazado. Nadie pregunta qué más hay en los canales.
-La Caverna Abandonada guarda la única poza tranquila de Forjaz. Los enanos viejos pescan en ella durante horas sin decir palabra.
-Los canales de Entrañas corren de un verde que nada tiene que ver con las algas. Los Renegados que pescan en ellos no lo hacen por la cena.
-El primer pez que casi todo pescador saca del agua, y tan brillante que no se le olvida.
-Piel resbaladiza, mucha prisa y presencia en todas las costas cálidas. A la parrilla sabe mejor de lo que su nombre da a entender.
-Todo boca, y nunca tan a gusto como en un agua que tú no beberías.
-Poco tamaño, muchos dientes y ningún miedo. Dicen que un banco entero echó una vez a un oso del Loch.
-Un destello de color bajo las olas. Si pica en el sedal, los marineros lo toman por buena suerte para la travesía.
-Un paciente habitante del fondo, con unos bigotes dignos de un anciano enano.
-Nadie repite. Los alquimistas compran cuantos ejemplares encuentran.
-Sus aletas brillan como brasas bajo la ceniza, y el aceite que se le extrae arde casi igual de bien.
-Una coraza como un escudo pequeño. La carne de dentro merece el esfuerzo.
-Algo en el agua cerca de las Cuevas de los Lamentos lo cambió. Comerte uno puede cambiarte a ti también, durante un rato.
-La gente del río dice que comerlo despeja la mente. Lo que lo hace sabio es nadar río arriba.
-Más viejo, más grande y más sabio que su primo, lo cual no lo libró de tu anzuelo.
-Un duro rival de los cálidos mares del sur, y un clásico en la pizarra de toda taberna, de Bahía del Botín a Gadgetzan.
-Su frente brilla como el mithril auténtico. Más de un minero ha intentado llevarse un ejemplar a la fundición.
-Sus escamas, hervidas, dan un aceite que vuelve la piel dura como la roca. Prefiere la noche.
-Un pulido de coraza de desfile, y casi el mismo peso.
-Solo se acerca a la costa en los meses fríos, y los cocineros que lo conocen lo esperan todo el año.
-Llega cuando los días son largos. La gente de la costa cuenta las estaciones por su paso.
-Se agarra por el centro, y solo una vez.
-Un pez de río de tierras salvajes, con las agallas tan rojas como la pintura de guerra de un trol.
-Se alimenta cuando oscurece. Una sopa hecha con él templa los nervios de cualquier hechicero.
-Se alimenta de día, lo contrario del pargo nocturno en casi todo, y aun así comparten las mismas aguas.
-No es exactamente un pez. No está de acuerdo con acabar en tu anzuelo, y te lo hará saber.
-Pálido como el hielo de río, de los lagos fríos y claros del norte.
-Vas a necesitar las dos manos, y quizá un amigo.
-%.1f lb
-Nuevo en tu diario de pesca: %s, %s.
-Nuevo en tu diario de pesca: %s.
-Tu %s más pesado hasta ahora: %s (antes %s).
-Diario de pesca
-cada captura se anota en tu diario de pesca: cuántas de cada tipo, dónde la sacaste por primera vez, y un peso inventado por diversión con tu mejor marca de cada una (/cchud journal lo abre)
-Cebo %s
-Sin cebo
-Capturados %d
-Escapados %d
-Interfaz de pesca
-con una caña de pescar en las manos: los peces del agua en la que estás (los que aún no has sacado aquí permanecen ocultos), tu habilidad de pesca y lo que añade tu cebo, cuántos has capturado y cuántos se escaparon, cuánto dura tu cebo, y tus últimas capturas
-Uno curioso: +%d%%
-Mantén tu señuelo junto al pez
-Próxima captura +%d%%
-Mantén %s: el señuelo corre por el sedal
-%d seguidos
-Un juego mientras el flotador está fuera
-se juega en la barra de lanzamiento mientras el sedal está fuera: mantén un gatillo y tu señuelo corre por el sedal, suéltalo y vuelve a la deriva; mantenlo junto a la sombra del pez. Cuanto mejor lo hagas, más pesará el peso inventado de tu próxima captura. No ocupa ningún botón y nunca toca tu lanzamiento ni tu captura
-%d capturados, %d tipos, %d escapados
-El más pesado: %s, %s
-Peces
-Aguas
-Aún no has sacado nada. Lleva una caña al agua.
-Capturados: %d
-El más pesado: %s, en %s
-Primera captura: %s
-Capturados aquí: %d
-Tipos encontrados aquí: %d
-Elegir
-Cerrar
-abrir o cerrar tu diario de pesca: cada tipo que has sacado, el más pesado de cada uno, y las aguas en las que has pescado
 El chat se desvanece en calma
 el texto del chat se desvanece tras unos segundos sin mensajes nuevos
 Segundos antes de que el chat se desvanezca
@@ -979,66 +544,6 @@ se ocultan los mensajes que venden oro o servicios con una dirección web, y el 
 Ocultar reclutamiento de hermandad repetido
 en los canales públicos el mensaje de reclutamiento de una hermandad se muestra una vez; el mismo del mismo jugador, o uno casi igual, en 15 minutos se oculta (nunca de tu grupo, hermandad o amigos)
 lista los mensajes de chat ocultados como spam recientemente
-Vuelo
-aterrizaje anticipado
-aterrizaje en el siguiente punto de vuelo
-destino desconocido
-calculado por la distancia
-primer vuelo en esta ruta: aprendiendo su duración
-aterrizando
-%s: unos %s, calculado por la distancia
-%s: unos %s
-%s: primer vuelo en esta ruta, tiempo desconocido
-En vuelo, destino desconocido
-%s: tiempo de vuelo aprendido, %s
-Aterrizaje anticipado: %s, unos %s
-Aterrizaje anticipado en el siguiente punto de vuelo
-fresco y frío, nieve bajo los pies y el aliento suspendido en el aire
-un frío cortante, con un viento de las cumbres que encuentra cada hueco de tu armadura
-caluroso y húmedo, un aire tan denso que se podría beber
-calor pegajoso bajo la espesura, y los insectos ruidosos
-caluroso y seco, con polvo en el viento
-sol abrasador y tierra agrietada; bebe cuando puedas
-humo y ceniza en un viento cálido
-aire abrasado, con pavesas a la deriva
-gris y frío, una neblina húmeda que se pega
-un frío en el aire y apenas luz
-templado y agradable, con una brisa suave
-buen tiempo, ideal para viajar
-fresco y verde, las hojas susurrando
-luz suave entre los árboles, y el aire fresco
-bochornoso y húmedo, el suelo blando bajo los pies
-aire cálido y húmedo, y el olor de la ciénaga
-%s en %s: %s
-%d rutas de vuelo conocidas.
-Vuelos: tiempo y cuenta atrás
-en un vuelo se dice en el chat adónde y cuánto dura, y una barra en lo alto de la pantalla cuenta hasta el aterrizaje; el tiempo de cada ruta se aprende de tus vuelos
-Vuelos: tu montura sobre la barra
-un grifo, un jinete del viento o un murciélago (el que te dio el maestro de vuelo) planea por la barra de vuelo hacia donde aterrizas
-Vuelos: el tiempo donde aterrizas
-al aterrizar, el chat dice cómo es el aire donde llegas, como suele ser el lugar (caluroso y húmedo en Tuercespina, nieve bajo los pies en Dun Morogh), y la hora del día
-listar las rutas de vuelo cuyo tiempo se conoce
-¡A tierra! +%d
-Choque: se acaba la racha
-%s aletear  ·  esquiva las copas de los árboles y los zepelines
-%s atrapa a los jinetes con la red por oro de vuelo  ·  %s gran altitud
-%d de oro de vuelo
-%s aletear
-%s red
-%s gran altitud
-%s: volver al juego (%d de oro de vuelo)
-%s: un juego por el camino
-El juego de vuelo está desactivado: /cchud flightgame on
-El juego de vuelo se juega durante un vuelo.
-No en combate.
-Juego de vuelo: jugar / gran altitud
-Vuelos: un juego por el camino
-en un vuelo se ofrece un pequeño juego bajo la barra de vuelo, y un botón lo inicia (solo ese botón se ocupa hasta que lo pulses): haz que tu montura aletee sobre las copas de los árboles y entre los zepelines, y atrapa con la red a los jinetes que vienen de frente, bajándolos a tierra a cambio de oro de vuelo. El mismo botón otra vez es gran altitud: el juego se guarda y los botones vuelven a ser del juego. Nunca en combate, desaparece al aterrizar
-en un vuelo: iniciar el juego de vuelo, o llevarlo a gran altitud y de vuelta
-Vuelos cinematográficos
-en un vuelo del maestro de vuelo la pantalla se convierte en película: franjas negras, el HUD se desvanece, la cámara se aleja y gira despacio a tu alrededor y de tu montura, con la barra de vuelo en la franja superior. El juego de vuelo, una ventana o un botón la interrumpen, y termina suavemente al aproximarte a aterrizar
-Vuelos cinematográficos: la cámara gira a tu alrededor
-en la película, la cámara gira despacio a tu alrededor y de tu montura, una vuelta completa en un minuto y medio más o menos, y vuelve a quedar detrás de ti antes de aterrizar. Desactivado: un plano fijo
 Un vuelo es un buen momento para ello.
 Llevas jugando %s.
 Hora de un sorbo de agua
@@ -1077,138 +582,6 @@ Informes de depuración
 reunir los informes de diagnóstico por sí solos: al iniciar sesión y de nuevo al recargar o salir (se guardan en los ajustes guardados)
 los momentos en que el juego se detuvo desde que entraste, y cuánto de cada uno fue trabajo del propio HUD
 qué oculta el juego de la clase de tu objetivo y qué formas pueden mostrarla igualmente (ejecútalo una vez, sobre un jugador enemigo en un campo de batalla)
-Todo
-Equipo
-Consumibles
-Objetos comerciables
-Nuevo
-Inteligente
-Por tipo
-Como en tus bolsas
-Componentes
-Otros
-Nada aquí.
-Huecos libres
-%s vendido: el vendedor puede volver a vendértelo.
-La armadura no se puede cambiar en combate.
-Llavero
-Mochila
-%d de %d huecos ocupados
-Dejar
-Coger
-Usar
-A las bolsas
-Al banco
-Adjuntar
-Comerciar
-%s o %s: al correo
-%s o %s: al vendedor
-%s o %s: al banco
-%s o %s: al comercio
-%s o %s: a la casa de subastas
-%s o %s: al banco de hermandad
-%s o %s: a tu personaje
-%s o %s: al botín
-%s o %s: otra ventana
-Los botones del mando vuelven tras el combate.
-%s o %s: volver a las bolsas
-Mantén para destruir
-Todas las bolsas
-Solo esta bolsa
-Meter
-Coger bolsa
-Más
-Ordenar
-Bolsas
-%d libres
-Hueco libre
-En combate, cierra tus bolsas con B.
-para el banco
-sin marca
-No hay hueco libre.
-Dejar aquí
-Dividir montón
-Marca: %s
-Detalles del objeto
-Destruir
-Ordenar banco
-Ordenar bolsas
-Ver bolsas
-Ver banco
-Vender lo aconsejado
-Suelta para destruir
-Este objeto inicia una misión.
-Es un objeto de misión.
-¿Destruir %s?
-El juego conservó %s: destrúyelo desde sus propias bolsas.
-%s destruido.
-Una ventana de bolsas con filtros rápidos
-tus bolsas en una ventana propia del HUD en lugar de la del juego: todos los objetos juntos, los huecos vacíos reunidos al final, tus bolsas en una fila aparte y filtros rápidos arriba (LB y RB). También el banco, mientras está abierto. Desactivado: las bolsas del juego
-Ventana de bolsas: orden
-Inteligente: lo que usas primero (consumibles, objetos con un uso), luego el resto por tipo, la basura al final y atenuada. Por tipo: en secciones con su propio título. Como en tus bolsas: el orden del juego
-Bueno, veamos.
-Ay, menudo montón.
-A ver, a ver...
-Elune, dame paciencia.
-Por los naaru, qué revoltijo.
-Maldita mochila.
-Mochila ordenada, mochila ligera.
-Bah. Demasiados trastos.
-Peso muerto, todo esto.
-Paciencia. La Madre Tierra provee.
-Eh, ¿qué tenemos aquí, man?
-Qué desorden. Impropio.
-El tiempo es oro. Contemos.
-Sí, con esto basta.
-Gracias a Elune.
-La Luz provee.
-Hrm. Suficiente.
-Hm. Basta para pelear.
-Viajo ligero. Bien.
-Aceptable. Apenas.
-No queda ni un hueco. La basura daría %s: venderla hace sitio.
-No queda ni un hueco. Lo que no necesite en el camino puede esperar en el banco.
-Basura: %d, vale %s aquí. X vende lo que he elegido; Venta inteligente se lo lleva todo.
-%d de estos van al banco: allí hay más iguales, o los marqué. Depositar los guarda.
-Solo quedan %d huecos. La basura daría %s en cualquier vendedor.
-Solo quedan %d huecos. Hora de vender o guardar en el banco unas cuantas cosas.
-Nuevo desde la última vez: %d. El punto dorado marca cada uno.
-Vale la pena vender: %d. El filtro Vender los reúne, y cada descripción dice dónde se paga más.
-Basura: %d, vale %s. Para el próximo vendedor.
-Solo lo esencial. Nada que valga la pena vender.
-Todo en orden, y %d huecos libres.
-Tu equipo está reparado: %s.
-Puedo reparar tu equipo por %s; una pieza rota no te da ni armadura ni atributos.
-Tus bolsas están llenas. Me quedo %d cosas por %s: Venta inteligente, y vuelves a tener sitio.
-Te doy %s por %d cosas: la basura y lo que la casa de subastas no pagaría mejor. Venta inteligente, y listo.
-Quédate los %d que quiere la casa de subastas: paga %s más que yo.
-Tus bolsas están llenas. Véndeme algo antes de comprar.
-Nada en tus bolsas por lo que pagaría bien. Echa un vistazo a mi mercancía.
-%d de lo que llevas va aquí: guardo más iguales, o los marcaste. Depositar los guarda.
-Guardo más de %d cosas que llevas. Retirar rellena tus bolsas antes de partir.
-Tus bolsas están casi llenas. Déjame lo que no necesites en el camino.
-Todo a salvo conmigo, y tus bolsas tienen %d huecos libres.
-Hoy no hay nada para ti. Lo he mirado dos veces.
-Cartas para ti: %d, sin nada adjunto. Léelas cuando quieras.
-Cartas para ti: %d. Dentro: %s.
-Recogerlo todo las vacía de una vez.
-Contra reembolso: %d. Esas las abres y pagas tú.
-Tus bolsas están llenas: los objetos esperan en sus cartas.
-¿Adónde? Señala un lugar y te diré cuánto dura el viaje.
-%s: unos %s según el mapa. Esa ruta aún no la has volado.
-%s: unos %s, según tu último vuelo allí.
-%s: aún no sé decirte cuánto. Vuélalo una vez y lo sabré.
-Se han escapado %d. Esta agua pide más habilidad de la que tengo: el cebo ayuda, y una caña mejor también.
-No hay cebo en el anzuelo. Suma a mi habilidad, y así se escapan menos.
-El cebo casi se ha acabado. Otro en el anzuelo mantiene mi habilidad.
-Peces de aquí que aún no he pescado: %d. A seguir lanzando.
-He pescado todos los peces de esta agua. A otro sitio, entonces.
-Aún no he pescado nada. El primer pez de cada agua va aquí.
-Especies pescadas: %d. Cada agua esconde algunas más: el panel de pesca muestra un ? por cada una que no he pescado allí.
-Descansado junto al fuego: los próximos %d de experiencia por muertes valen el doble.
-Sin descanso acumulado. Una noche en una posada o en una ciudad, y las muertes dan el doble de experiencia un rato.
-Narrativa: personajes en las ventanas
-cada ventana que mejora el HUD tiene a alguien que te ayuda, con su retrato y una frase corta sobre lo que tienes delante y por qué: tú con tus bolsas y junto al agua, el vendedor, el banquero, el jefe de correos, el maestro de vuelo, el Corredor en la casa de subastas y el Mentor en tu profesión; desactivado: las ventanas quedan sencillas y en silencio
 Ajuste del HUD: %s, a juego con la cámara
 preajuste: %s
 Se ha añadido un diseño llamado '%s' al modo edición del juego. Elígelo allí para usarlo (Menú del juego > Modo edición > Diseño).
@@ -1222,6 +595,7 @@ Acción
 una vista en tercera persona: barras verticales finas junto a tu personaje, todos los efectos activados; fuera de combate todo se desvanece
 Clásico
 nuestros marcos donde WoW siempre los ha tenido, efectos más discretos, las barras de mando del juego tal cual
+Mínimo
 solo lo que necesitas: los PNJ amistosos muestran su placa (con lo que hacen) solo mientras los señalas, apuntas o los tienes como objetivo; nombres sin títulos; fuera de combate tus barras quedan como un leve indicio (la salud baja siempre se muestra)
 Mundo abierto
 una pantalla limpia para explorar: barras finas a tu lado que descansan atenuadas, placas sin barras de poder, chat que se desvanece
@@ -1290,6 +664,7 @@ Marca «Mostrar opciones avanzadas» en la página principal para ver todos los 
 Módulos
 Interruptores rápidos
 General
+Sus ajustes aparecen aquí cuando está activado.
 HUD
 El panel de opciones no está disponible en este cliente.
 Activado
@@ -1405,6 +780,7 @@ Progreso de misiones
 Lista de farmeo
 Mapa
 Barra de vuelo
+Bolsas
 Correo
 Consejo de objetos
 Apariencias
@@ -1481,3 +857,634 @@ compara lo que hay en pantalla con los ajustes (check all enumera cada fila)
 guarda una descripción de la interfaz de mando de este cliente (para solucionar problemas)
 mostrar esta lista
 los últimos errores del HUD, también tras recargar (para informar de ellos)
+Todo
+Equipo
+Consumibles
+Objetos comerciables
+Nuevo
+Inteligente
+Por tipo
+Como en tus bolsas
+Componentes
+Otros
+Nada aquí.
+Huecos libres
+%s vendido: el vendedor puede volver a vendértelo.
+La armadura no se puede cambiar en combate.
+Llavero
+Mochila
+%d de %d huecos ocupados
+Dejar
+Coger
+Usar
+A las bolsas
+Al banco
+Adjuntar
+Comerciar
+%s o %s: al correo
+%s o %s: al vendedor
+%s o %s: al banco
+%s o %s: al comercio
+%s o %s: a la casa de subastas
+%s o %s: al banco de hermandad
+%s o %s: a tu personaje
+%s o %s: al botín
+%s o %s: otra ventana
+Los botones del mando vuelven tras el combate.
+Cerrar
+%s o %s: volver a las bolsas
+Mantén para destruir
+Elegir
+Atrás
+Todas las bolsas
+Solo esta bolsa
+Meter
+Coger bolsa
+Más
+Ordenar
+%d libres
+Hueco libre
+En combate, cierra tus bolsas con B.
+para el banco
+sin marca
+No hay hueco libre.
+Dejar aquí
+Dividir montón
+Marca: %s
+Detalles del objeto
+Probar
+Destruir
+Ordenar banco
+Ordenar bolsas
+Ver bolsas
+Ver banco
+Vender lo aconsejado
+Suelta para destruir
+Este objeto inicia una misión.
+Es un objeto de misión.
+¿Destruir %s?
+El juego conservó %s: destrúyelo desde sus propias bolsas.
+%s destruido.
+Ventana de bolsas: orden
+Inteligente: lo que usas primero (consumibles, objetos con un uso), luego el resto por tipo, la basura al final y atenuada. Por tipo: en secciones con su propio título. Como en tus bolsas: el orden del juego
+Gran maestro
+Maestro
+Artesano
+Experto
+Oficial
+Aprendiz
+Has alcanzado el nivel %d (desde el %d)
+Has alcanzado el nivel %d
+Derrotaste a %s y %d más en %s
+Derrotaste a %s
+%s: ahora %s, hasta %d
+%s ha llegado a %d
+%d rutas de vuelo nuevas, la última %s
+Nueva ruta de vuelo: %s
+Nueva montura: %s
+Nueva mascota: %s
+Nuevo juguete: %s
+Logro: %s
+El campamento
+En reposo
+Junto al fuego
+Amanecer
+Mañana
+Tarde
+Atardecer
+Noche
+%s en %s
+Con %s
+La escena de la hoguera está desactivada.
+La escena de la hoguera espera a que salgas de combate.
+reproducir ahora la escena de la hoguera
+Arriba
+Abajo
+N
+NO
+O
+SO
+S
+SE
+E
+NE
+La brújula de misiones está desactivada: /cchud compass on
+La brújula necesita saber dónde estás, y el juego no lo dice aquí.
+Brújula de misiones: lugar
+arriba de la pantalla, o abajo en el lugar de la barra de experiencia (la barra pasa entonces arriba)
+unas marcas en la brújula de misiones, a tu alrededor, durante veinte segundos
+Modo de pesca: desactivado.
+Pesca: %s para lanzar
+Sin cebo: %s dos veces para usar %s
+%s para guardar la caña
+Modo pesca: %s para lanzar el sedal, y otra vez para enganchar el pez cuando el corcho se mueva.
+%s para enganchar, %s para lanzar de nuevo
+El modo de pesca necesita una caña de pescar en tus manos.
+No conoces Pesca.
+Modo de pesca: un botón lanza y engancha
+Botón de pesca: %s
+Volver a lanzar con una pulsación
+mientras el corcho está en el agua, tu botón de pesca engancha el pez y A lanza de nuevo con una pulsación; desactivado: A es tuyo
+Cebo con doble pulsación
+pulsa tu botón de pesca dos veces rápido: la segunda pulsación pone el mejor cebo de tus bolsas en la caña, cuando la caña no tiene ninguno
+Barras del mando ocultas al pescar
+con una caña en las manos las barras del mando se ocultan para ver bien el agua; el aviso de pesca muestra el botón para lanzar. Vuelven en cuanto empieza un combate o guardas la caña
+pesca con un botón desactivada por ahora, o activada de nuevo (con una caña en las manos se activa sola)
+el botón que pesca: al principio tu botón de interactuar (Cuadrado o X), o cualquier otro, por ejemplo un gatillo (rt)
+La costa de Durotar es roca roja y aguas cálidas y poco profundas. Los trols de las Islas del Eco dicen que la caballa pasa más apretada cuando la marea arrastra el olor de los fuegos de cocina de las islas.
+Los lagos de Mulgore son pequeños, claros y pacientes. Los tauren pescan en ellos como lo hacen todo: despacio y dando las gracias.
+Cada oasis de Los Baldíos es un lugar de encuentro. Beba allí lo que beba de día, algo nada por debajo de noche.
+Las pozas de Teldrassil están a la sombra de un único árbol. Los pescadores elfos de la noche juran que los peces de allí no han visto nunca el sol y que no lo echan de menos.
+El agua de Costa Oscura es gris, fría y llena de pecios. La mitad de lo que pica frente a Auberdine se ha instalado en el cargamento perdido de alguien.
+Los ríos de Vallefresno corren bajo hojas más viejas que la mayoría de los reinos. Los peces son rápidos, y las centinelas lo son más para preguntarte qué haces allí.
+Allá abajo, entre Las Mil Agujas, el agua escasea y se guarda con celo. Un pez de aquí se ha ganado su sitio.
+Los lagos de Sierra Espolón están altos y fríos entre los picos. Los goblins ya los habrían desecado si no se pescara tan bien.
+La costa de Desolace es huesos y oleaje gris. Algo ahí abajo le ha cogido el gusto a las dos cosas.
+Feralas es verde hasta la misma orilla. Sus ríos son profundos, cálidos y están muy, pero que muy vivos.
+Nadie sabe bien dónde acaba la tierra y empieza el agua en el Marjal Revolcafango. Pesca desde la orilla y cuéntate los dedos de los pies después.
+Puerto Bonvapor tiene la única agua digna de ese nombre en Tanaris. Los goblins te venderán el derecho a pescar en ella, dos veces si te dejas.
+Bajo la luminosa bahía de Azshara yace una ciudad sumergida. Los viejos pescadores dicen que los grandes viven en lo que fueron sus jardines.
+Las pozas de Frondavil brillan, y no en el buen sentido. Lo que aún nada en ellas es terco más allá de toda razón.
+Las aguas termales y los lagos bordeados de brea de Un'Goro han conservado cosas que el resto del mundo olvidó. Algunas muerden.
+El Lago Elune'ara, en Claro de la Luna, está tan quieto como un aliento contenido. Los druidas solo piden que no te lleves más de lo que vayas a comer.
+Silithus es arena, viento y rumor de alas. Si has encontrado agua donde pescar aquí, no se lo digas a nadie.
+Los lagos de Cuna del Invierno se hielan por los bordes y humean por el centro. Los peces de allí están gordos por el frío y bien valen la caminata.
+En los estanques de Orgrimmar pescan peones que no tienen nada mejor que hacer y viejos brutos que dicen lo mismo. Unos y otros te cuentan que el grande se les escapó.
+Un pez de los estanques de Cima del Trueno ha pasado toda su vida muy por encima de las llanuras. Parece llevarlo con calma.
+Darnassus cuida sus aguas con tanto esmero como sus templos. Los peces se han acostumbrado a que los admiren.
+Los lagos de las Montañas de Alterac son agua de deshielo, y los ogros y la Hermandad pescan en ellos cuando nadie mira.
+Las costas de Arathi han visto más ejércitos que pescadores. A los peces hace mucho que les da igual qué estandarte ondea sobre el agua.
+Las Tierras Inhóspitas son polvo de punta a punta. Aquí una picada es un pequeño milagro, así que trátala como tal.
+La costa de Las Tierras Devastadas es roja, arrasada y silenciosa. Lo que viva en ese oleaje ha aprendido a convivir con muchas cosas.
+Los lagos de Tirisfal yacen inmóviles bajo un cielo enfermizo. Los Renegados pescan en ellos por costumbre. Los muertos no comen gran cosa, pero recuerdan que les gustaba.
+La larga costa del Bosque de Argénteos es todo niebla y sombra de pinos. Se pesca bien, y es lo único alegre que alguien dice del lugar.
+Los ríos de las Tierras de la Peste del Oeste aún corren, aunque no limpios. Lo que saques de ellos, míralo dos veces.
+Poca gente pesca en las Tierras de la Peste del Este, y menos aún lo reconoce. El agua conserva lo que la peste dejó de ella.
+El río de Trabalomas y su larga costa sur han dado de comer a los dos bandos de cada disputa librada por ellos.
+Las Tierras del Interior guardan sus lagos en lo alto, entre los árboles, donde los enanos Martillo Salvaje pescan a lomos de grifo cuando creen que nadie los ve.
+Los lagos de Dun Morogh pasan casi todo el año cercados de hielo. Un enano abre un agujero, se sienta con una pinta y lo llama un buen día, pique lo que pique.
+La Garganta de Fuego tiene lava donde otras tierras tienen ríos. Mejor tráete algo de beber.
+Las Estepas Ardientes son ceniza y rescoldos. Si el agua de aquí te da algo, estará caliente.
+Todos los niños de Elwynn aprenden a pescar en el Lago de Cristal o en el Lago del Hito. Los pececillos de allí llevan generaciones siendo más listos que ellos.
+El Paso de la Muerte tiene poca agua y menos hospitalidad. Lo que haya en las pozas bajo Karazhan, mejor que se quede allí.
+El río que bordea el Bosque del Ocaso es negro a cualquier hora. A los peces no parece importarles la oscuridad, a los pescadores sí.
+El Loch es el orgullo de Loch Modan, contenido por la gran Presa de las Tres Cabezas. Los enanos miden contra él cualquier historia de pesca, y casi siempre gana el Loch.
+El Lago Sempiterno, en Crestagrana, es bonito como un cuadro y se pesca desde todos los muelles de Villa del Lago. Los vecinos conocen cada buen sitio y no te dirán ni uno.
+De sus ríos selváticos al salvaje cabo del sur, Tuercespina tiene las aguas más ricas del continente. Los pescadores de Bahía del Botín celebran un torneo en ellas, y casi todos hacen trampa.
+El Pantano de las Penas es agua verde bajo árboles verdes. Los peces saben a barro, y a los lugareños les gustan así.
+Los campos de los Páramos de Poniente se malograron, pero su costa no. Los que se quedaron viven de esa larga orilla gris.
+Los Humedales hacen honor a su nombre. Los muelles del Puerto de Menethil son el sitio más seco para pescar en ellos, y los crocoliscos lo saben.
+En los canales de Ventormenta pescan niños, jubilados y al menos un miembro de la nobleza disfrazado. Nadie pregunta qué más hay en los canales.
+La Caverna Abandonada guarda la única poza tranquila de Forjaz. Los enanos viejos pescan en ella durante horas sin decir palabra.
+Los canales de Entrañas corren de un verde que nada tiene que ver con las algas. Los Renegados que pescan en ellos no lo hacen por la cena.
+El primer pez que casi todo pescador saca del agua, y tan brillante que no se le olvida.
+Piel resbaladiza, mucha prisa y presencia en todas las costas cálidas. A la parrilla sabe mejor de lo que su nombre da a entender.
+Todo boca, y nunca tan a gusto como en un agua que tú no beberías.
+Poco tamaño, muchos dientes y ningún miedo. Dicen que un banco entero echó una vez a un oso del Loch.
+Un destello de color bajo las olas. Si pica en el sedal, los marineros lo toman por buena suerte para la travesía.
+Un paciente habitante del fondo, con unos bigotes dignos de un anciano enano.
+Nadie repite. Los alquimistas compran cuantos ejemplares encuentran.
+Sus aletas brillan como brasas bajo la ceniza, y el aceite que se le extrae arde casi igual de bien.
+Una coraza como un escudo pequeño. La carne de dentro merece el esfuerzo.
+Algo en el agua cerca de las Cuevas de los Lamentos lo cambió. Comerte uno puede cambiarte a ti también, durante un rato.
+La gente del río dice que comerlo despeja la mente. Lo que lo hace sabio es nadar río arriba.
+Más viejo, más grande y más sabio que su primo, lo cual no lo libró de tu anzuelo.
+Un duro rival de los cálidos mares del sur, y un clásico en la pizarra de toda taberna, de Bahía del Botín a Gadgetzan.
+Su frente brilla como el mithril auténtico. Más de un minero ha intentado llevarse un ejemplar a la fundición.
+Sus escamas, hervidas, dan un aceite que vuelve la piel dura como la roca. Prefiere la noche.
+Un pulido de coraza de desfile, y casi el mismo peso.
+Solo se acerca a la costa en los meses fríos, y los cocineros que lo conocen lo esperan todo el año.
+Llega cuando los días son largos. La gente de la costa cuenta las estaciones por su paso.
+Se agarra por el centro, y solo una vez.
+Un pez de río de tierras salvajes, con las agallas tan rojas como la pintura de guerra de un trol.
+Se alimenta cuando oscurece. Una sopa hecha con él templa los nervios de cualquier hechicero.
+Se alimenta de día, lo contrario del pargo nocturno en casi todo, y aun así comparten las mismas aguas.
+No es exactamente un pez. No está de acuerdo con acabar en tu anzuelo, y te lo hará saber.
+Pálido como el hielo de río, de los lagos fríos y claros del norte.
+Vas a necesitar las dos manos, y quizá un amigo.
+%.1f lb
+Nuevo en tu diario de pesca: %s, %s.
+Nuevo en tu diario de pesca: %s.
+Tu %s más pesado hasta ahora: %s (antes %s).
+Cebo %s
+Sin cebo
+Capturados %d
+Escapados %d
+Uno curioso: +%d%%
+Mantén tu señuelo junto al pez
+Próxima captura +%d%%
+Mantén %s: el señuelo corre por el sedal
+%d seguidos
+Un juego mientras el flotador está fuera
+se juega en la barra de lanzamiento mientras el sedal está fuera: mantén un gatillo y tu señuelo corre por el sedal, suéltalo y vuelve a la deriva; mantenlo junto a la sombra del pez. Cuanto mejor lo hagas, más pesará el peso inventado de tu próxima captura. No ocupa ningún botón y nunca toca tu lanzamiento ni tu captura
+%d capturados, %d tipos, %d escapados
+El más pesado: %s, %s
+Peces
+Aguas
+Aún no has sacado nada. Lleva una caña al agua.
+Capturados: %d
+El más pesado: %s, en %s
+Primera captura: %s
+Capturados aquí: %d
+Tipos encontrados aquí: %d
+abrir o cerrar tu diario de pesca: cada tipo que has sacado, el más pesado de cada uno, y las aguas en las que has pescado
+Vuelo
+aterrizaje anticipado
+aterrizaje en el siguiente punto de vuelo
+destino desconocido
+calculado por la distancia
+primer vuelo en esta ruta: aprendiendo su duración
+aterrizando
+%s: unos %s, calculado por la distancia
+%s: unos %s
+%s: primer vuelo en esta ruta, tiempo desconocido
+En vuelo, destino desconocido
+%s: tiempo de vuelo aprendido, %s
+Aterrizaje anticipado: %s, unos %s
+Aterrizaje anticipado en el siguiente punto de vuelo
+fresco y frío, nieve bajo los pies y el aliento suspendido en el aire
+un frío cortante, con un viento de las cumbres que encuentra cada hueco de tu armadura
+caluroso y húmedo, un aire tan denso que se podría beber
+calor pegajoso bajo la espesura, y los insectos ruidosos
+caluroso y seco, con polvo en el viento
+sol abrasador y tierra agrietada; bebe cuando puedas
+humo y ceniza en un viento cálido
+aire abrasado, con pavesas a la deriva
+gris y frío, una neblina húmeda que se pega
+un frío en el aire y apenas luz
+templado y agradable, con una brisa suave
+buen tiempo, ideal para viajar
+fresco y verde, las hojas susurrando
+luz suave entre los árboles, y el aire fresco
+bochornoso y húmedo, el suelo blando bajo los pies
+aire cálido y húmedo, y el olor de la ciénaga
+%s en %s: %s
+%d rutas de vuelo conocidas.
+Vuelos: tu montura sobre la barra
+un grifo, un jinete del viento o un murciélago (el que te dio el maestro de vuelo) planea por la barra de vuelo hacia donde aterrizas
+Vuelos: el tiempo donde aterrizas
+al aterrizar, el chat dice cómo es el aire donde llegas, como suele ser el lugar (caluroso y húmedo en Tuercespina, nieve bajo los pies en Dun Morogh), y la hora del día
+listar las rutas de vuelo cuyo tiempo se conoce
+¡A tierra! +%d
+Choque: se acaba la racha
+%s aletear  ·  esquiva las copas de los árboles y los zepelines
+%s atrapa a los jinetes con la red por oro de vuelo  ·  %s gran altitud
+%d de oro de vuelo
+%s aletear
+%s red
+%s gran altitud
+%s: volver al juego (%d de oro de vuelo)
+%s: un juego por el camino
+El juego de vuelo está desactivado: /cchud flightgame on
+El juego de vuelo se juega durante un vuelo.
+No en combate.
+Juego de vuelo: jugar / gran altitud
+en un vuelo: iniciar el juego de vuelo, o llevarlo a gran altitud y de vuelta
+Vuelos cinematográficos: la cámara gira a tu alrededor
+en la película, la cámara gira despacio a tu alrededor y de tu montura, una vuelta completa en un minuto y medio más o menos, y vuelve a quedar detrás de ti antes de aterrizar. Desactivado: un plano fijo
+Desconectado
+Muerto
+Desactivado
+Con especialización de sanación
+Siempre
+Demasiado lejos
+Grupo y banda del sanador
+en un grupo: tu grupo junto a tu personaje, cada uno con el botón que lo selecciona; en una banda: marcos más finos. Cada uno muestra solo cuánta sanación necesita, un perjuicio que puedes curar y si está a tu alcance
+%d%% de venderse
+Se va seguro (%d%%)
+Eso se vende solo (%d%%)
+Creo que se venderá (%d%%)
+Debería encontrar comprador (%d%%)
+Mitad y mitad (%d%%)
+Puede salir de cualquier manera (%d%%)
+Es un poco de apuesta (%d%%)
+Puede que tarde un rato (%d%%)
+Yo no contaría con ello (%d%%)
+Lo veo difícil, amigo (%d%%)
++%s más que un vendedor
+aún no se conoce el precio
+un vendedor paga lo mismo
+El Corredor
+Mercado
+cada moneda contada, amigo
+No hay nada en tus bolsas que se pueda vender aquí.
+Sin precios en los últimos 7 días.
+Un día de precios hasta ahora: cada día que visites la casa de subastas se añade una vela.
+7 días, una vela por día: verde cerró más alto, rojo más bajo
+30 días, el más bajo del día: verde sube, rojo baja
+Aún no hay historial de precios: lee la casa de subastas durante unos días.
+Solo un día de precios: la línea crece cada día que visitas la casa de subastas.
+Pido %s cada uno, %s por los %d que sueltas; %d se quedan contigo
+Pide %s cada uno, %s por los %d
+Más bajo
+leído %s
+Habitual
+7 días: de %s a %s
+En venta: %d subastas, %d objetos
+%s cada uno, %s por los %d
+Pusiste %d aquí, %d subastas vendidas
+No se conoce ningún precio: lee primero la casa de subastas.
+Nada en tus bolsas que vender aquí.
+Hoy nada se vende mejor aquí que en un vendedor; %d quizá, con paciencia.
+Lo mejor primero: %d se venden mejor aquí que en un vendedor, %d más con paciencia.
+Bolsas vacías, amigo. Tráeme algo que vender.
+Hoy nada supera al vendedor. %d quizá, con un poco de paciencia.
+Nada de ganancia segura en estas bolsas, amigo. %d pagarían si esperas.
+Lo mejor arriba: %d aquí superan a cualquier vendedor, %d más para los pacientes.
+%d pagan más aquí que en un vendedor, lo mejor primero. %d más si esperas.
+Lo de arriba paga más: %d ventas seguras, %d más si puedes esperar.
+Aún no hay precios: %s lee la casa de subastas.
+Precios leídos ahora mismo: %d.
+%d precios, leídos %s.
+%d precios, leídos %s. %s los vuelve a leer.
+Aún no he leído el tablón. %s y te traigo todos los precios.
+Sin precios todavía, amigo. %s lee el tablón entero.
+Precios recién sacados del tablón, amigo: %d.
+Acabo de leer el tablón: %d precios, aún calientes.
+%d precios, leídos %s. Suficiente, amigo.
+Última mirada al tablón: %s, %d precios.
+Precios de %s, más duros que pan viejo. %s vuelve a leer el tablón.
+%d precios, pero los leí %s. %s y vuelvo a mirar.
+También se muestra lo que guardas. %s lo oculta.
+Apartados: %d, para tus profesiones, tu equipo y tus marcas. %s los muestra.
+Lo que guardas también está en la lista. %s lo aparta.
+También muestro lo que guardas. %s lo vuelve a ocultar.
+%d apartados: material de oficio, equipo para llevar, lo que marcaste. %s los muestra.
+Aparté %d: para tus oficios, para vestir y los que marcaste. %s si los quieres.
+cada uno
+sin datos
+Venta rápida
+Paciente
+Leer todos los precios
+Ocultar lo guardado
+Mostrar lo guardado
+Línea
+Velas
+Publicar
+%d de %d
+Publicar %d de %d a %s cada uno
+Publicar %d por %s
+Poner los %d por %s
+Este cliente no permite publicar en la casa de subastas desde aquí.
+Publicado %d por %s.
+Mercado en la casa de subastas: abrir / cerrar
+Saludo del subastador en el Mercado
+un subastador goblin dice una frase corta, de los sonidos del propio juego, cuando abre el Mercado; desactivado: se abre en silencio
+Mercado: mostrar lo que guardas
+el Mercado también lista lo que guardas: de lo que tus profesiones aún aprenden o convierten en algo que vale más, y lo que marcaste para guardar; desactivado: solo lo que venderías
+Mercado: gráfico de precios en velas
+el gráfico de precios del Mercado es una vela por día durante los últimos 7 días (dónde abrió el precio, su máximo y su mínimo, y dónde cerró: verde si cerró más alto, rojo si más bajo); desactivado: una línea del precio más bajo de cada día durante 30 días
+abrir o cerrar el Mercado (una pestaña de la casa de subastas)
+qué casa de subastas tiene este cliente (para solucionar problemas)
+Abre la ventana de una profesión y echaré un vistazo a tus recetas.
+Ese es el tope, %d. Un instructor tiene el siguiente rango para ti.
+Nada más que aprender en %d. Ve a ver a un instructor por el siguiente rango.
+Tus recetas se te han quedado pequeñas. Ve a un instructor: %s te espera en %d.
+Faltan %d para %d, y lo que sabes no te llevará hasta allí. Un instructor tiene %s para ti en %d.
+Tus recetas se te han quedado pequeñas. Ve a un instructor: %s te espera.
+Tus recetas dejan de enseñarte a %d de %d. Pide a un instructor %s.
+Tus recetas se agotan a %d de %d. Un instructor tendrá algo nuevo.
+Lo que sabes no te llevará los últimos %d. Es hora de ver a un instructor.
+%s ya no te enseñará mucho, pero es lo mejor que tienes. Faltan %d para %d.
+A partir de aquí va despacio: %s da un punto de vez en cuando. Faltan %d.
+Primero te hará falta %s, %s. Las guías empiezan este tramo con ella.
+Aprende %s, %s, y empezamos: faltan %d para %d.
+Faltan %d para %d. Las guías te mandan a por %s hasta %d.
+Aquí aprendes recolectando: %s hasta %d.
+Faltan %d para %d. Empieza con %s, o con %s si lo prefieres: %s.
+Primero %s, como dicen las guías. %s también sirve: %s.
+Faltan %d para %d. Empieza con %s.
+%s es ahora tu mejor maestro. %d puntos hasta %d.
+Pulso firme. Primero %s, y faltan %d.
+con un instructor
+de un vendedor
+como botín
+de una misión
+materiales más baratos
+materiales de un vendedor
+materiales que recolectas tú
+se vende bien
+algo que usarás
+menos fabricaciones
+una receta que encuentras o compras
+otros materiales
+la primera opción de las guías
+Abre la ventana de una profesión para ver un plan de subida.
+En el tope, %d. Un instructor tiene el siguiente rango.
+Faltan %d hasta %d; tus recetas se quedan cortas. Un instructor tiene %s a %d.
+Faltan %d hasta %d; tus recetas se quedan cortas. Un instructor tiene %s.
+Tus recetas se quedan a %d de %d. Un instructor tiene más.
+Faltan %d hasta %d. Lo mejor ahora: %s, verde (un punto de vez en cuando).
+Faltan %d hasta %d. Aprende primero %s, %s.
+Faltan %d hasta %d. Recolecta %s hasta %d.
+Faltan %d hasta %d. Primero: %s, o %s (%s).
+Faltan %d hasta %d. Primero: %s.
+Para recolectar o comprar
+%d veces: %s
+Apréndela %s, a partir de %d.
+Apréndela %s.
+%s: %d en tus bolsas, %d en el banco, %d por fabricación
+Las guías suben este tramo recolectando %s.
+%s: tienes %d, el plan usa %d
+para %s
+El Mentor: lo que tu banco te deja fabricar
+Lo que tu banco puede fabricar
+Con lo que hay en tu banco no se puede fabricar nada más.
+%d que puedes fabricar contando tu banco, %d de ellas solo con él.
+El Mentor: %s %d > %d
+El Mentor
+Plan de subida
+o
+Recolecta %s
+por aprender
+Ocultar
+El plan
+Farmear esto
+Farmear todo
+Con el banco
+Usar el plan
+dos veces para ocultar
+Aquí no hay nada que probarse.
+%d añadido(s) a la lista de farmeo.
+No falta nada: tienes lo necesario.
+Abre la ventana de una profesión para hacer un plan.
+El Mentor (plan de subida): mostrar / ocultar
+muestra el plan de subida de la última ventana de profesión abierta, con los botones del mando en él
+A la izquierda de las misiones
+A la derecha de las misiones
+Bajo las misiones
+La lista de farmeo está llena.
+Lista de farmeo: %s, %d deseados.
+Farmeo
+%d más
+Nada que farmear aún.
+Una pila más
+Quitar
+Vaciar
+Hecho
+¿Quitar todo de la lista de farmeo?
+Lista de farmeo: elegir / hecho
+Lista de farmeo: añadir el objeto al que apuntas
+Eso no está en la lista de farmeo.
+La lista de farmeo está vacía.
+Lista de farmeo: dónde se sitúa
+la lista de farmeo a la izquierda de la lista de misiones, a su derecha o bajo sus misiones
+la lista de farmeo junto a la lista de misiones: elige con el mando; add <objeto> [cuántos], remove <objeto>, clear, o left / right / bottom para su sitio
+Porcentaje de amenaza
+tu parte de la amenaza como número junto al icono de amenaza, en el marco del objetivo y en las placas de nombre
+Número de salud
+la salud restante, abreviada (12.3k), en la barra (no en las placas compactas: allí basta el porcentaje)
+Tus perjuicios
+tus perjuicios sobre la unidad, sobre su nombre, con su tiempo
+Perjuicios de todos
+los perjuicios que el juego marca para las placas de nombre de todos, no solo los tuyos
+Beneficios del enemigo
+los beneficios de un enemigo junto a sus perjuicios: los que importan (importantes, enfurecido o que puedes disipar o robar), o todos si Solo los efectos que importan está desactivado
+Icono de control de masas
+un icono grande con su tiempo cuando la unidad está aturdida, inmovilizada, aterrorizada...
+Resplandor de amenaza
+un icono de escudo y un brillo tras el nombre: rojo mientras te ataca, rojo y amarillo cuando estás a punto de atraerlo, amarillo y azul cuando lo estás perdiendo, azul cuando no está sobre ti
+Marcador de misión
+una marca dorada en las unidades que tus misiones aún necesitan
+Animaciones de placas de nombre
+las placas aparecen con fundido, la salud baja respira, el control de masas brilla
+Pequeño
+Normal
+Grande
+Nombre completo
+Nombre corto
+Sin nombre
+Completo
+Mínimo mini
+Tamaño de las placas
+lo grandes que son las barras de las placas de nombre: pequeñas y finas, normales o grandes (más anchas y altas)
+Nombres en las placas
+el nombre en una placa con barra de salud: completo, recortado u omitido (el marco del objetivo lo da completo; el nivel y el icono de clase se quedan). Una placa sin barra, la de un PNJ amistoso, siempre conserva su nombre
+Aspecto de las placas
+los interruptores de las placas de una vez. Completo: todo. Mínimo: sin barra de poder, hermandad ni título, nombres cortos. Mínimo mini: barras pequeñas con salud, tus perjuicios y los beneficios que importan, nivel y clase, sin nombre (lo tiene el marco del objetivo). La amenaza, el control y los lanzamientos llamativos siempre se quedan
+Títulos de jugador
+muestra el título de un jugador junto a su nombre
+Hermandades y oficios de PNJ
+una línea bajo el nombre: la hermandad del jugador o a qué se dedica el PNJ
+Barras de amigos en combate
+las placas de nombre amistosas muestran salud, poder y lanzamientos mientras esa unidad está en combate
+Placas de nombre amistosas del propio juego
+deja las placas amistosas (tu grupo, otros jugadores, PNJ amistosos) con el aspecto del juego; las nuestras solo en enemigos
+Barras de poder
+una barra fina de maná, ira o energía bajo la barra de salud
+Objetivo del lanzamiento
+a quién va dirigido un lanzamiento, junto al nombre del hechizo
+Porcentaje de salud
+el porcentaje de salud en la barra
+Nombre en la placa de tu objetivo
+desactivado: la placa de tu objetivo no muestra su nombre ni su nivel (los muestra el marco del objetivo)
+Niveles en las placas de nombre
+el nivel delante del nombre de un enemigo, coloreado según la dificultad
+Placas de nombre compactas
+placas de nombre de aproximadamente la mitad de ancho
+Lanzamientos enemigos llamativos
+el lanzamiento de un enemigo parpadea, se hincha y pulsa cada vez más rápido hasta completarse, para que puedas interrumpirlo a tiempo
+Iconos de clase en las placas
+el icono de clase de un jugador delante de su nombre, amigo o enemigo
+Lo que hacen los PNJ, como iconos
+un icono sobre los PNJ amistosos que ofrecen algo: una bolsa sobre los vendedores, un yunque sobre los herreros que reparan, un libro sobre los instructores... (los iconos del propio juego; se ven aunque la placa espere a que la señales)
+PNJ amistosos solo al apuntarlos
+las placas de los PNJ amistosos (vendedores, dadores de misiones, habitantes) solo se muestran mientras los apuntas, como su descripción
+Nombres sobre las cosas con las que puedes interactuar
+un nombre sobre minerales, cofres, placas y similares mientras los miras (desactivado: quedan sin nombre, el aviso del propio juego ya dice qué son)
+Minipanel de nombre
+esbirros, alimañas y enemigos grises que no dan experiencia tienen una placa pequeña: una barra fina con tus perjuicios encima y sin nombre (una alimaña, sin barra, conserva su nombre; la opción del juego decide si tienen placa)
+Placas de nombre del grupo en mazmorras: solo nombres
+dentro de una mazmorra o banda el juego dibuja él mismo las placas de nombre de los jugadores amistosos y los addons no pueden cambiarlas: allí se ajustan las opciones propias del juego para mostrarlas como nombres con el color de clase y sin barras, como las nuestras, y las barras del juego vuelven mientras luchas (si las barras de amigos en combate están activadas); todo se restaura al salir
+Placas de nombre del grupo en mazmorras: ocultas
+dentro de una mazmorra o banda, apagar del todo las placas de nombre del juego para los jugadores amistosos (y dejarlas como las tenías al salir)
+muestra lo que da el juego para el nombre de tu objetivo (para solucionar problemas)
+lista las placas de nombre en pantalla y si llevan nuestro aspecto (para solucionar problemas)
+Bueno, veamos.
+Ay, menudo montón.
+A ver, a ver...
+Elune, dame paciencia.
+Por los naaru, qué revoltijo.
+Maldita mochila.
+Mochila ordenada, mochila ligera.
+Bah. Demasiados trastos.
+Peso muerto, todo esto.
+Paciencia. La Madre Tierra provee.
+Eh, ¿qué tenemos aquí, man?
+Qué desorden. Impropio.
+El tiempo es oro. Contemos.
+Sí, con esto basta.
+Gracias a Elune.
+La Luz provee.
+Hrm. Suficiente.
+Hm. Basta para pelear.
+Viajo ligero. Bien.
+Aceptable. Apenas.
+No queda ni un hueco. La basura daría %s: venderla hace sitio.
+No queda ni un hueco. Lo que no necesite en el camino puede esperar en el banco.
+Basura: %d, vale %s aquí. X vende lo que he elegido; Venta inteligente se lo lleva todo.
+%d de estos van al banco: allí hay más iguales, o los marqué. Depositar los guarda.
+Solo quedan %d huecos. La basura daría %s en cualquier vendedor.
+Solo quedan %d huecos. Hora de vender o guardar en el banco unas cuantas cosas.
+Nuevo desde la última vez: %d. El punto dorado marca cada uno.
+Vale la pena vender: %d. El filtro Vender los reúne, y cada descripción dice dónde se paga más.
+Basura: %d, vale %s. Para el próximo vendedor.
+Solo lo esencial. Nada que valga la pena vender.
+Todo en orden, y %d huecos libres.
+Tu equipo está reparado: %s.
+Puedo reparar tu equipo por %s; una pieza rota no te da ni armadura ni atributos.
+Tus bolsas están llenas. Me quedo %d cosas por %s: Venta inteligente, y vuelves a tener sitio.
+Te doy %s por %d cosas: la basura y lo que la casa de subastas no pagaría mejor. Venta inteligente, y listo.
+Quédate los %d que quiere la casa de subastas: paga %s más que yo.
+Tus bolsas están llenas. Véndeme algo antes de comprar.
+Nada en tus bolsas por lo que pagaría bien. Echa un vistazo a mi mercancía.
+%d de lo que llevas va aquí: guardo más iguales, o los marcaste. Depositar los guarda.
+Guardo más de %d cosas que llevas. Retirar rellena tus bolsas antes de partir.
+Tus bolsas están casi llenas. Déjame lo que no necesites en el camino.
+Todo a salvo conmigo, y tus bolsas tienen %d huecos libres.
+Hoy no hay nada para ti. Lo he mirado dos veces.
+Cartas para ti: %d, sin nada adjunto. Léelas cuando quieras.
+Cartas para ti: %d. Dentro: %s.
+Recogerlo todo las vacía de una vez.
+Contra reembolso: %d. Esas las abres y pagas tú.
+Tus bolsas están llenas: los objetos esperan en sus cartas.
+¿Adónde? Señala un lugar y te diré cuánto dura el viaje.
+%s: unos %s según el mapa. Esa ruta aún no la has volado.
+%s: unos %s, según tu último vuelo allí.
+%s: aún no sé decirte cuánto. Vuélalo una vez y lo sabré.
+Se han escapado %d. Esta agua pide más habilidad de la que tengo: el cebo ayuda, y una caña mejor también.
+No hay cebo en el anzuelo. Suma a mi habilidad, y así se escapan menos.
+El cebo casi se ha acabado. Otro en el anzuelo mantiene mi habilidad.
+Peces de aquí que aún no he pescado: %d. A seguir lanzando.
+He pescado todos los peces de esta agua. A otro sitio, entonces.
+Aún no he pescado nada. El primer pez de cada agua va aquí.
+Especies pescadas: %d. Cada agua esconde algunas más: el panel de pesca muestra un ? por cada una que no he pescado allí.
+Descansado junto al fuego: los próximos %d de experiencia por muertes valen el doble.
+Sin descanso acumulado. Una noche en una posada o en una ciudad, y las muertes dan el doble de experiencia un rato.
+%d absorbido
+Lista a la derecha
+Uno en el centro
+%d sanaciones críticas
+%d críticos
+Sentencia
+Grandes momentos: dónde
+un bloque justo encima de los avisos de reutilización a la derecha de tu personaje, el más reciente junto a ellos y los anteriores subiendo por encima mientras se desvanecen, o uno a la vez en el centro
+muestra cómo se ve y se siente un gran momento
+conseguida
+conseguida con otro objeto
+aún no conseguida
+Apariencia
+Elige un conjunto para poner sus piezas en tu atuendo. %s lo guarda; no se paga nada antes.
+Revisando tu colección...
+Tu atuendo vuelve a estar como antes.
+%s: %d de %d piezas puestas.
+%d no se pudieron poner en este atuendo.
+Un conjunto del que tienes piezas
+%d conjuntos de los que tienes piezas
+no puedes llevarlo
+falta
+Las %d piezas
+%d de %d piezas
+Falta: %s
+Aún no hay conjuntos. Los objetos que comparten nombre, como Yelmo de hierro verde y Guanteletes de hierro verde, aparecen aquí en cuanto tienes uno.
+Deshacer

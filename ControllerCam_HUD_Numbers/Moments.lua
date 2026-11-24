@@ -1,0 +1,630 @@
+-- ControllerCam HUD: signature moments.
+--   * Every class's key abilities have a feel of their own on the controller, so they never blur into one:
+--     a Judgement splashes (hits hard, then ripples out), a Holy Strike snaps (abrupt, from the trigger, then
+--     stops dead), a Windfury Attack knocks three times fast. Crits are felt stronger.
+--   * The burst (optional): crits landing back to back, each within a second of the last (a
+--     double swing, Windfury, Judgement and Holy Strike pressed together), are pinned big in the middle of the
+--     screen, golden, in the game's own damage font: what they did together, big, with each crit's ability in a
+--     small column at its left ("+ Judgement", "+ Holy Strike"), the total about four times their size. It
+--     comes half a second after the burst's last crit, so the numbers fly
+--     first and the total lands once the burst is over: it slams in, holds with a soft glow (a second and a bit,
+--     and a second more for each crit; a crit that joins while it shows holds it longer again), then rises and
+--     fades. Any crit of yours counts (your key
+--     abilities, any other spell the combat log names, your weapon's swings); a hit that does not crit leaves
+--     the burst alone, only the half second ends it. A crit on its own is never pinned. Kept rare: at most
+--     twice a fight, and never within a few seconds of the last one.
+--     Your heals the same way: crit heals landing together (any heal of yours, on anyone) are pinned with what
+--     they healed together, "+2450", in the green of a heal.
+-- What landed is read from the combat log where addons may read it, or else from the hit your target takes
+-- right after one of these abilities goes off.
+
+local ADDON = ...
+local ns = ControllerCamHUD.ns            -- the HUD's own namespace: this file is one of its modules (Modules.lua)
+local L, C = ns.L, ns.colors
+
+local M = { active = false, live = nil }
+ns.Moments = M
+
+local function Setting(key, label, tip, default)
+    ns.RegisterSetting({ key = key, kind = "boolean", default = default, command = key:lower(), section = "Effects",
+                         label = label, tip = tip })
+end
+
+-- Key abilities, by one rank each (every rank shares the name): their feel. Names in English as well, for
+-- abilities this client may not have under these numbers.
+M.KEY = {
+    PALADIN = { { 20271, "Judgement", "splash" }, { 679, "Holy Strike", "strike" }, { 35395, "Crusader Strike", "strike" },
+                { 24275, "Hammer of Wrath", "splash" }, { 879, "Exorcism", "splash" }, { 20473, "Holy Shock", "splash" },
+                { 20424, "Seal of Command", "strike" } },
+    WARRIOR = { { 12294, "Mortal Strike", "strike" }, { 23881, "Bloodthirst", "strike" }, { 5308, "Execute", "splash" },
+                { 7384, "Overpower", "strike" } },
+    ROGUE = { { 2098, "Eviscerate", "splash" }, { 8676, "Ambush", "strike" }, { 53, "Backstab", "strike" } },
+    MAGE = { { 11366, "Pyroblast", "splash" }, { 133, "Fireball", "splash" }, { 116, "Frostbolt", "strike" } },
+    HUNTER = { { 19434, "Aimed Shot", "strike" }, { 2643, "Multi-Shot", "splash" } },
+    WARLOCK = { { 686, "Shadow Bolt", "splash" }, { 6353, "Soul Fire", "splash" } },
+    PRIEST = { { 8092, "Mind Blast", "splash" }, { 585, "Smite", "strike" } },
+    SHAMAN = { { 17364, "Stormstrike", "strike" }, { 403, "Lightning Bolt", "splash" }, { 8042, "Earth Shock", "strike" } },
+    DRUID = { { 22568, "Ferocious Bite", "splash" }, { 2912, "Starfire", "splash" }, { 5221, "Shred", "strike" } },
+}
+-- Weapon procs anyone may have
+M.PROCS = { { 25504, "Windfury Attack", "windfury" }, { 33750, "Windfury Attack", "windfury" } }
+
+local known                     -- [spell name] = { feel, key = true }
+local function Known()
+    if known then return known end
+    known = {}
+    local get = (C_Spell and C_Spell.GetSpellName) or GetSpellInfo
+    local _, class = UnitClass("player")
+    local list = {}
+    for _, a in ipairs(M.KEY[class or ""] or {}) do list[#list + 1] = a end
+    for _, a in ipairs(M.PROCS) do list[#list + 1] = a end
+    for _, a in ipairs(list) do
+        local entry = { feel = a[3], proc = a[3] == "windfury" }
+        local ok, n = pcall(get, a[1])
+        if ok and type(n) == "string" and not ns.IsSecret(n) then known[n] = entry end
+        known[a[2]] = known[a[2]] or entry
+    end
+    return known
+end
+
+local function SpellName(id)
+    if ns.IsSecret(id) or type(id) ~= "number" then return nil end
+    local get = (C_Spell and C_Spell.GetSpellName) or GetSpellInfo
+    local ok, n = pcall(get, id)
+    if ok and type(n) == "string" and not ns.IsSecret(n) then return n end
+end
+
+-- What a spell is to us: { feel, proc } and its name, or nil
+function M.Ability(spellID, name)
+    name = name or SpellName(spellID)
+    local k = name and Known()[name]
+    if k then return k, name end
+end
+
+---------------------------------------------------------------------------
+-- The rare big moment
+---------------------------------------------------------------------------
+local fight = { moments = 0, lastMoment = -100 }
+M.fight = fight
+local GAP, PER_FIGHT = 8, 2
+M.BURST = 1.0                   -- crits this close to the one before are one burst
+M.seen = { plain = 0, secret = 0, none = 0 }   -- the amounts crits came with (for the debug report)
+M.DELAY = 0.5                   -- the total comes this long after the burst's last crit (the numbers fly first)
+
+-- What a burst shows: its total, or (when the game keeps some amounts to itself: those cannot be added up)
+-- each of its hits side by side, "450 + 512", the game writing out the ones it keeps secret
+-- What the big figure says: the total when every amount can be added up; where the game keeps the amounts to
+-- itself they cannot be added (nor compared), so it says how many crits it was, and each one's own amount goes
+-- in the column beside its name
+-- (secret amounts: up to M.SIDE of them, the last ones, written out by the game itself, "431 + 86")
+M.SIDE = 4
+function M.Number(run, amount)
+    if run.hasTotal then return run.total end
+    local all, side = run.amounts or {}, {}
+    for i = math.max(1, #all - M.SIDE + 1), #all do side[#side + 1] = all[i] end
+    if #side == 0 then return { count = run.n } end
+    return { side = side, more = #all > #side }
+end
+
+-- The run of crits: how many, what they did together (nil when the game keeps an amount to itself: those
+-- cannot be added up), and whose they were
+-- (key: "chain" for hits, "healChain" for heals)
+local function Join(amount, name, now, key)
+    key = key or "chain"
+    local c = fight[key]
+    if not c or now - c.at > M.BURST then
+        c = { n = 0, total = 0, names = {}, order = {} }
+        fight[key] = c
+    end
+    c.n, c.at = c.n + 1, now
+    local plain = (not ns.IsSecret(amount)) and type(amount) == "number" and amount or nil
+    -- the total: added up even where the game keeps the amounts to itself (the sum is then its own as well, and
+    -- the game writes it out for us); only where it will not add them is there no total (M.secretSum says which)
+    -- (whether there is one is kept apart: a total the game keeps to itself cannot even be asked if it is nil)
+    if c.hasTotal == nil then c.hasTotal = true end
+    if c.hasTotal and amount ~= nil and (ns.IsSecret(amount) or ns.IsSecret(c.total)) then
+        -- the game will not add amounts it keeps to itself, and every refused attempt counts as an addon error:
+        -- not tried at all (the amounts are shown side by side instead)
+        M.secretSum = false
+        c.total, c.hasTotal = nil, false
+    elseif c.hasTotal and amount ~= nil then
+        local total = c.total
+        local ok, sum = pcall(function() return total + amount end)
+        c.total, c.hasTotal = ok and sum or nil, ok and true or false
+    else
+        c.total, c.hasTotal = nil, false
+    end
+    c.amounts = c.amounts or {}
+    if amount ~= nil then c.amounts[#c.amounts + 1] = amount end     -- (each one, kept even when secret)
+    local seen = M.seen
+    if ns.IsSecret(amount) then seen.secret = seen.secret + 1
+    elseif plain then seen.plain = seen.plain + 1
+    else seen.none = seen.none + 1 end
+    M.lastRun = c
+    c.seq = c.seq or {}
+    c.seqAmount = c.seqAmount or {}
+    c.seqAmount[#c.seq + 1] = amount ~= nil and amount or false      -- (each crit's own, kept even when secret)
+    if type(name) == "string" and not ns.IsSecret(name) and name ~= "" then
+        if not c.names[name] then c.order[#c.order + 1] = name end
+        c.names[name] = (c.names[name] or 0) + 1
+        c.seq[#c.seq + 1] = name
+    else
+        c.seq[#c.seq + 1] = type(MELEE) == "string" and MELEE or "?"   -- (a swing: the game's own word)
+    end
+    return c
+end
+
+-- "Judgement + Holy Strike", "Judgement x2 + Holy Strike"
+local function RunLabel(c)
+    local parts = {}
+    for _, name in ipairs(c.order) do
+        parts[#parts + 1] = c.names[name] > 1 and ("%s x%d"):format(name, c.names[name]) or name
+    end
+    return table.concat(parts, " + ")
+end
+M.RunLabel = RunLabel
+
+-- The column at the total's left: one line for each crit, in the order they landed (the last few)
+M.LINES = 5
+local function RunLines(c, withAmounts)
+    local seq, out = c.seq or {}, {}
+    local from = math.max(1, #seq - M.LINES + 1)
+    if from > 1 then out[1] = "..." end
+    if not withAmounts then
+        for i = from, #seq do out[#out + 1] = "+ " .. seq[i] end
+        return table.concat(out, "\n")
+    end
+    -- with each crit's amount after its name (drawn by the game even when it keeps the number to itself)
+    local args = {}
+    for i = from, #seq do
+        local amount = c.seqAmount and c.seqAmount[i]
+        args[#args + 1] = seq[i]
+        if amount then
+            out[#out + 1] = "+ %s  %d"
+            args[#args + 1] = amount
+        else
+            out[#out + 1] = "+ %s"
+        end
+    end
+    return { fmt = table.concat(out, "\n"), args = args }
+end
+M.RunLines = RunLines
+
+-- The names one to a line, in the order they landed, and how many hits after the last: "+ Judgement /
+-- + Seal of Command / + Holy Strike  x3" (the last few, when it ran long)
+function M.Names(c)
+    local seq, names = c.seq or {}, {}
+    local from = math.max(1, #seq - M.LINES + 1)
+    if from > 1 then names[1] = "..." end
+    for i = from, #seq do names[#names + 1] = "+ " .. seq[i] end
+    -- one to a line (narrow: in one line a long combo ran under the quest tracker), the count after the last
+    return table.concat(names, "\n") .. ("  |cffffd24d×%d|r"):format(c.n or #seq)
+end
+
+-- Where they show (setting: momentPlace): a feed (the default), a block just above the cooldown callouts on the
+-- right of your character, each moment its own entry, the newest nearest the cooldowns and the older ones moving
+-- up over it, each fading on its own time, at most M.FEED at once; or one at a time in the middle. M.frame and M.live are the newest entry and its timing.
+ns.RegisterSetting({
+    key = "momentPlace", kind = "number", default = 1, min = 1, max = 2, section = "Effects",
+    choices = { "Feed on the right", "One in the middle" }, command = "momentplace", label = "Big moments: where",
+    tip = "a block just above the cooldown callouts on the right of your character, the newest nearest them and the older ones moving up over it as they fade, or one at a time in the middle",
+})
+M.PLACE_NAMES = { L["Feed on the right"], L["One in the middle"] }   -- (in your language: the options show them so)
+local function Feed() return (ns.db and ns.db.momentPlace or 1) ~= 2 end
+
+local frame                                       -- (the newest entry)
+M.LINE_SIZE = 17               -- the abilities' line over the damage
+M.SHADE = 0.55                 -- how dark the shade behind it
+M.FEED_X, M.FEED_Y = 260, 120  -- where the feed starts: right of the middle, a little above it
+M.MIDDLE_Y = 150               -- one in the middle: this far above the middle
+M.FEED, M.FEED_GAP = 4, 8      -- how many at once; the space between two
+M.entries = {}                 -- newest first: { f = frame, m = timing, y = where it is drawn }
+local pool = {}
+
+-- The shade as tall as what it is behind: the damage, and the names' line over it
+local function FitShade(f, size)
+    local h = size or 0
+    local ok, lines = pcall(f.label.GetStringHeight, f.label)
+    -- (a text holding a number the game keeps to itself has a height it keeps to itself too: not added)
+    if ok and type(lines) == "number" and not ns.IsSecret(lines) then h = h + lines end
+    f.shade:SetHeight(h + 26)
+    f.tall = h + 12
+end
+
+-- An entry's lines, aligned for where it shows: from the left in the feed, centred in the middle
+local function Align(f, feed)
+    if f.feed == feed then return end
+    f.feed = feed
+    f.number:ClearAllPoints()
+    f.label:ClearAllPoints()
+    if feed then
+        f.number:SetPoint("TOPLEFT", f, "TOPLEFT", 0, -(M.LINE_SIZE + 6))
+        f.label:SetPoint("BOTTOMLEFT", f.number, "TOPLEFT", 0, 2)
+    else
+        f.number:SetPoint("TOP", f, "TOP", 0, -(M.LINE_SIZE + 6))
+        f.label:SetPoint("BOTTOM", f.number, "TOP", 0, 2)
+    end
+    if f.number.SetJustifyH then f.number:SetJustifyH(feed and "LEFT" or "CENTER") end
+    if f.label.SetJustifyH then f.label:SetJustifyH(feed and "LEFT" or "CENTER") end
+end
+
+local function Build()
+    local f = table.remove(pool)
+    if f then return f end
+    f = CreateFrame("Frame", nil, UIParent)
+    f:SetSize(10, 10)
+    f:SetFrameStrata("HIGH")
+    f.glow = f:CreateTexture(nil, "BACKGROUND")
+    f.glow:SetTexture(ns.media.disc)
+    f.glow:SetBlendMode("ADD")
+    f.glow:SetSize(220, 110)
+    f.number = f:CreateFontString(nil, "OVERLAY")
+    f.number:SetShadowColor(0, 0, 0, 0.9)
+    f.number:SetShadowOffset(3, -3)
+    f.glow:SetPoint("CENTER", f.number, "CENTER", 0, 0)
+    f.label = ns.FontString(f, M.LINE_SIZE, "LEFT")                       -- the abilities, one to a line, above it
+    if f.label.SetSpacing then f.label:SetSpacing(2) end
+    f.label:SetTextColor(1, 0.9, 0.62)
+    -- a soft dark shade behind all of it, like the one under the target's health text: easier to read
+    f.shade = f:CreateTexture(nil, "BACKGROUND", nil, -8)
+    f.shade:SetTexture(ns.media.soft)
+    f.shade:SetVertexColor(0, 0, 0, M.SHADE)
+    f.shade:SetPoint("LEFT", f.number, "LEFT", -30, 8)
+    f.shade:SetPoint("RIGHT", f.number, "RIGHT", 30, 8)
+    f.shade:SetHeight(80)
+    f:Hide()
+    return f
+end
+
+-- Brief, like a crit's flash: long enough to see what happened, gone before it is in the way
+local SLAM, HOLD, FADE, SIZE = 0.14, 0.9, 0.4, 46
+M.PER_CRIT = 0.25              -- a little longer for each further crit of the burst ...
+M.HOLD_MAX = 1.6               -- ... never longer than this
+M.SLIDE = 12                   -- how quickly an entry slides to its place in the feed
+local function Font() return DAMAGE_TEXT_FONT or STANDARD_TEXT_FONT or "Fonts\\FRIZQT__.TTF" end
+
+local function Drop(i)
+    local old = table.remove(M.entries, i)
+    old.f:Hide()
+    pool[#pool + 1] = old.f
+end
+
+-- The feed's place: a block just above the cooldown callouts (Numbers.lua's stack, on the right of your
+-- character), its left edge on theirs, growing upwards from there; where those are not to be had, right of the
+-- middle, growing down. Returns x, y, and whether it grows up.
+M.ABOVE = 40                   -- the space between the cooldowns' block and the moments'
+function M.FeedBase()
+    local RC = ns.Numbers and ns.Numbers.Soon
+    if RC and RC.Spot then
+        local ok, x, y = pcall(RC.Spot)
+        if ok and type(x) == "number" and type(y) == "number" then
+            local G = RC.GRIP or { h = 80, y = -16 }
+            return x, y + G.y + G.h + M.ABOVE, true
+        end
+    end
+    return M.FEED_X, M.FEED_Y, false
+end
+
+local driver = CreateFrame("Frame")
+local function Animate(_, dt)
+    for i = #M.entries, 1, -1 do                                     -- (gone ones out first)
+        local m = M.entries[i].m
+        m.t = m.t + dt
+        if m.t - SLAM - m.hold >= FADE then Drop(i) end
+    end
+    local feed = Feed()
+    local baseX, at, up = M.FEED_X, M.MIDDLE_Y, false
+    if feed then baseX, at, up = M.FeedBase() end
+    for _, e in ipairs(M.entries) do
+        local f, m = e.f, e.m
+        local t = m.t
+        local scale
+        if m.calm then scale = 1.2                                                     -- (Reduce animations: still)
+        elseif t < SLAM then scale = 2.6 - 1.4 * (t / SLAM)                              -- slams in from big
+        elseif t < SLAM + m.hold then scale = 1.2 + 0.05 * math.sin((t - SLAM) * 6)    -- holds, breathing
+        else scale = 1.2 end
+        local size = math.floor((m.base or SIZE) * scale + 0.5)
+        if size ~= m.drawn then
+            m.drawn = size
+            f.number:SetFont(Font(), size, "THICKOUTLINE")
+            FitShade(f, math.floor((m.base or SIZE) * 1.2 + 0.5))           -- (its place: as tall as it settles)
+        end
+        local tall = (f.tall or 60) + 6
+        local top = up and (at + tall) or at                           -- (its top edge: up, over the newer ones)
+        e.y = e.y and (m.calm and top or e.y + (top - e.y) * math.min(1, dt * M.SLIDE)) or top
+        local out = math.max(0, t - SLAM - m.hold)
+        f:ClearAllPoints()
+        if feed then                                                   -- drifts on to the right as it fades
+            f:SetPoint("TOPLEFT", UIParent, "CENTER", baseX + (m.calm and 0 or 24 * out), e.y)
+        else                                                           -- rises a little as it fades
+            f:SetPoint("TOP", UIParent, "CENTER", 0, e.y + (m.calm and 0 or 40 * out))
+        end
+        local a = 1 - out / FADE
+        f:SetAlpha(math.max(0, a))
+        f.glow:SetAlpha(math.max(0, a) * (0.3 + 0.12 * math.sin(t * 5)))
+        if up then at = at + tall + M.FEED_GAP else at = at - tall - M.FEED_GAP end
+    end
+    local newest = M.entries[1]
+    if newest then frame = newest.f end
+    M.frame = frame
+    M.live = newest and newest.m or nil
+    if #M.entries == 0 then driver:SetScript("OnUpdate", nil) end
+end
+Animate = ns.Protect(Animate)
+
+-- Pin it: amount (may be secret), the ability's name; heal: it is what your heals did ("+2450", green)
+M.HEAL_COLOR = { 0.42, 1, 0.66 }
+function M:Show(amount, name, school, heal, count)
+    local p = ns.Impact and ns.Impact.PROFILES[school or ""]
+    local c = (p and school ~= "physical") and p.color or { 1, 0.82, 0.3 }
+    if heal then c = M.HEAL_COLOR end
+    local calm = ns.Calm() and true or false
+    local one = heal and "+%d" or "%d"
+    local fmt, args, base = one, { amount }, SIZE
+    if type(amount) == "table" and not ns.IsSecret(amount) and amount.side then   -- amounts that cannot be added:
+        local parts = {}                                                           -- side by side, "431 · 86"
+        for i = 1, #amount.side do parts[i] = one end
+        fmt, args = (amount.more and "... · " or "") .. table.concat(parts, "  ·  "), amount.side
+        base = math.floor(SIZE * math.max(0.5, 0.95 - 0.12 * #amount.side))
+    elseif type(amount) == "table" and not ns.IsSecret(amount) and amount.count then
+        fmt, args = heal and L["%d crit heals"] or L["%d crits"], { amount.count }
+        base = math.floor(SIZE * 0.8)
+    end
+    -- a burst that grows while its entry is still held is that entry, held longer from now (not slammed in again);
+    -- anything else is a new entry at the top (in the middle: in place of the one there)
+    local feed = Feed()
+    local newest = M.entries[1]
+    local again = newest and newest.m.t < SLAM + newest.m.hold
+    local e = again and newest or nil
+    if not e then
+        e = { f = Build() }
+        table.insert(M.entries, 1, e)
+        while #M.entries > (feed and M.FEED or 1) do Drop(#M.entries) end      -- (the oldest makes room)
+    end
+    local f = e.f
+    Align(f, feed)
+    frame = f
+    M.frame = f
+    f.number:SetFont(Font(), base * (calm and 1.2 or 2.6), "THICKOUTLINE")
+    if heal then f.number:SetTextColor(c[1], c[2], c[3]) else f.number:SetTextColor(1, 0.86, 0.35) end
+    local ok = pcall(f.number.SetFormattedText, f.number, fmt, unpack(args))
+    if not ok then f.number:SetText("!") end
+    if type(name) == "table" then
+        if not pcall(f.label.SetFormattedText, f.label, name.fmt, unpack(name.args)) then f.label:SetText("") end
+    else
+        f.label:SetText(name or "")
+    end
+    f.glow:SetVertexColor(c[1], c[2], c[3], 1)
+    f:SetAlpha(1)
+    f:Show()
+    e.m = { t = again and SLAM or 0, calm = calm, base = base,
+            hold = math.min(M.HOLD_MAX, HOLD + M.PER_CRIT * math.max(0, (count or 1) - 1)) }
+    self.live = e.m
+    self.shown = (self.shown or 0) + 1
+    driver:SetScript("OnUpdate", Animate)
+    Animate(nil, 0)
+    if ns.Impact and ns.db.impactFx then                       -- a little light thrown off it
+        local tf = ns.UnitFrames and ns.UnitFrames.frames.target
+        if tf and tf.on then ns.Impact:Burst(tf.health, ns.Impact.PROFILES.holy, 1.4) end
+    end
+end
+
+-- Is this one of the rare ones? Returns true when it is shown.
+-- Pins the burst's total once it is over: half a second after its last crit, each further crit putting it off
+-- again with the new total (heal: in the green of a heal)
+function M:Pin(number, label, school, heal, count)
+    local p = { number = number, label = label, school = school, heal = heal, count = count }
+    self.pending = p
+    C_Timer.After(M.DELAY, ns.Protect(function()
+        if self.pending ~= p then return end                       -- a later crit took its place
+        self.pending = nil
+        self:Show(p.number, p.label, p.school, p.heal, p.count)
+        if ns.Rumble then ns.Rumble.busyUntil = nil; ns.Rumble:Play("moment") end
+    end))
+end
+
+-- Small crits are no moment: a crit for well under what your crits usually do (a seal's proc beside a Holy
+-- Strike, a dot ticking) neither starts a burst nor joins one. "Usually" is a running average of your crits
+-- (hits and heals each their own), taken once a few have been seen; an amount the game keeps to itself counts.
+M.SMALL = 0.4                   -- a crit under this share of your usual crit is small
+M.SMALL_AFTER = 5               -- the average is trusted after this many crits
+M.usual = { chain = { avg = nil, n = 0 }, healChain = { avg = nil, n = 0 } }
+function M.Small(amount, key)
+    local plain = (not ns.IsSecret(amount)) and type(amount) == "number" and amount or nil
+    if not plain then return false end
+    local u = M.usual[key or "chain"]
+    local small = u.n >= M.SMALL_AFTER and u.avg and plain < u.avg * M.SMALL or false
+    u.n = u.n + 1
+    u.avg = u.avg and (u.avg + (plain - u.avg) / math.min(u.n, 20)) or plain
+    if small then M.smallSkipped = (M.smallSkipped or 0) + 1 end
+    return small
+end
+
+function M:Consider(amount, crit, ability, name, school)
+    if not crit then return false end                              -- (a plain hit leaves the burst alone)
+    if M.Small(amount, "chain") then return false end              -- (a small crit too)
+    local now = GetTime()
+    local run = Join(amount, name, now)
+    if run.n < 2 or not ns.db.bigMoments then return false end     -- a crit on its own: no burst yet
+    local number, label = M.Number(run, amount), M.Names(run)
+    if not run.shown then                                          -- a new moment: kept rare
+        if fight.moments >= PER_FIGHT or now - fight.lastMoment < GAP then return false end
+        fight.moments = fight.moments + 1
+        run.shown = true
+    end
+    fight.lastMoment = now                                         -- (a run that goes on is the same moment, grown)
+    self:Pin(number, label, school, nil, run.n)
+    return true
+end
+
+-- A heal of yours landed: crit heals back to back are a moment, with what they healed together. amount is
+-- what it healed (overheal taken off where the log says it); a heal that does not crit ends the run.
+function M:Healed(spellID, name, amount, crit, school)
+    if not ns.db.bigMoments then return false end
+    name = name or SpellName(spellID)
+    if not crit then return false end
+    if M.Small(amount, "healChain") then return false end
+    local now = GetTime()
+    local run = Join(amount, name, now, "healChain")
+    if run.n < 2 then return false end
+    if not run.shown then
+        if fight.moments >= PER_FIGHT or now - fight.lastMoment < GAP then return false end
+        fight.moments = fight.moments + 1
+        run.shown = true
+    end
+    fight.lastMoment = now
+    self:Pin(M.Number(run, amount), M.Names(run), school or "holy", true, run.n)
+    return true
+end
+
+-- From the combat log (Impact.lua hands us your direct heals when it reads the log)
+function M.HealFromLog(spellID, name, amount, overheal, crit, schoolMask)
+    if not M.active then return end
+    M.usesLog = true
+    local plain = (not ns.IsSecret(amount)) and type(amount) == "number" and amount or nil
+    local over = (not ns.IsSecret(overheal)) and type(overheal) == "number" and overheal or 0
+    if plain then amount = math.max(0, plain - over) end
+    if ns.IsSecret(crit) then crit = false end
+    M:Healed(spellID, name, amount, crit and true or false, ns.Impact and ns.Impact.School(schoolMask))
+end
+
+---------------------------------------------------------------------------
+-- A key ability landed
+---------------------------------------------------------------------------
+local ANY = {}                   -- a spell that is not one of your key abilities: its crit still joins a burst
+function M:Landed(spellID, name, amount, crit, school)
+    local ability, key = M.Ability(spellID, name)
+    if not ability then
+        if crit then self:Consider(amount, true, ANY, name or SpellName(spellID), school) end
+        return false
+    end
+    name = key
+    if self:Consider(amount, crit, ability, name, school) then return true end
+    if ns.db.abilityRumble and ns.Rumble then ns.Rumble:Play(ability.feel, crit and 1.3 or 1) end
+    return true
+end
+
+-- Without the combat log: the ability you just used, matched to the next hit your target takes; a heal you
+-- just cast, to the next heal that lands (on you, your target or your group: the game says which unit)
+local pending, pendingHeal
+local SWING_ANY = { swing = true }
+local events = CreateFrame("Frame")
+events:SetScript("OnEvent", ns.Protect(function(_, event, unit, a2, a3, a4, a5)
+    if event == "PLAYER_REGEN_DISABLED" then
+        fight.moments, fight.chain, fight.healChain = 0, nil, nil
+    elseif event == "UNIT_SPELLCAST_SUCCEEDED" then
+        if unit == "player" then M.lastCast = { id = a3, at = GetTime() } end        -- (any spell: its name)
+        if unit == "player" and M.Ability(a3) then pending = { id = a3, at = GetTime() } end
+        if unit == "player" and ns.CastLook and ns.CastLook.IsHeal(nil, a3) then pendingHeal = { id = a3, at = GetTime() } end
+    elseif event == "UNIT_COMBAT" then
+        if M.usesLog or ns.IsSecret(a2) then return end
+        if a2 == "HEAL" then
+            if pendingHeal and GetTime() - pendingHeal.at < 1.0 then
+                local crit = not ns.IsSecret(a3) and a3 == "CRITICAL"
+                local id = pendingHeal.id
+                pendingHeal = nil                                    -- (the same heal on two of the unit's names)
+                M:Healed(id, nil, a4, crit, ns.Impact and ns.Impact.School(a5))
+            end
+            return
+        end
+        if unit ~= "target" then return end
+        if a2 ~= "WOUND" then return end
+        local crit = not ns.IsSecret(a3) and a3 == "CRITICAL"
+        if pending and GetTime() - pending.at < 0.8 then
+            local id = pending.id
+            pending = nil
+            if M.lastCast and M.lastCast.id == id then M.lastCast.used = true end   -- (one cast, one hit)
+            M:Landed(id, nil, a4, crit, ns.Impact and ns.Impact.School(a5))
+            return
+        end
+        -- any other crit of yours on your target joins a burst too: a white swing, a spell that is not one of
+        -- your key abilities (where the combat log is closed to addons, the game's hit event is all there is;
+        -- whose hit it is, Impact.lua judges as it does for the hit effects)
+        if crit then
+            local school = ns.Impact and ns.Impact.School(a5) or "physical"
+            if ns.Impact and ns.Impact.Mine and not ns.Impact.Mine("target", school) then return end
+            local last = M.lastCast
+            -- named after what you just cast only if no hit was that cast yet: a swing right behind a Holy
+            -- Strike is a swing, not a second Holy Strike
+            local name = last and not last.used and GetTime() - last.at < 0.8 and SpellName(last.id)
+            if name then last.used = true end
+            if not name then name = school == "physical" and (_G.MELEE or "Melee") or nil end
+            M:Consider(a4, true, SWING_ANY, name, school)
+        end
+    end
+end))
+
+-- The combat log (Impact.lua hands us your spell hits when it reads the log)
+function M.FromLog(spellID, name, amount, crit, schoolMask)
+    if not M.active then return end
+    M.usesLog = true
+    M:Landed(spellID, name, amount, crit, ns.Impact and ns.Impact.School(schoolMask))
+end
+
+-- Windfury and the like: the log says an extra attack is coming; the swing that follows carries it
+local extra
+function M.ExtraAttack(spellID, name)
+    if not M.active then return end
+    local ability = M.Ability(spellID, name)
+    if ability then extra = { id = spellID, name = name, at = GetTime(), left = 1 } end
+end
+local SWING = { swing = true }
+function M.Swing(amount, crit)
+    if not M.active then return end
+    if extra and GetTime() - extra.at > 0.5 then extra = nil end
+    if not extra then
+        -- your weapon's own swing: a crit joins the run of crits (a plain swing does not end one)
+        if crit then
+            M.usesLog = true
+            M:Consider(amount, true, SWING, _G.MELEE or _G.ACTION_SWING or "Melee", "physical")
+        end
+        return
+    end
+    M.usesLog = true
+    M:Landed(extra.id, extra.name, amount, crit, "physical")
+    extra.left = extra.left - 1
+    if extra.left <= 0 then extra = nil end
+end
+
+function M:Apply(run)
+    local want = run and (ns.db.abilityRumble or ns.db.bigMoments) and true or false
+    if want == self.active then return end
+    self.active = want
+    if want then
+        for _, e in ipairs({ "PLAYER_REGEN_DISABLED", "UNIT_SPELLCAST_SUCCEEDED", "UNIT_COMBAT" }) do
+            pcall(events.RegisterEvent, events, e)
+        end
+    else
+        events:UnregisterAllEvents()
+        self.live = nil
+        for i = #M.entries, 1, -1 do M.entries[i].f:Hide(); table.remove(M.entries, i) end   -- (the whole feed)
+        if frame then frame:Hide() end
+    end
+end
+
+ns.RegisterCommand("momenttest", function()
+    -- a burst as one looks: two crits, their names in the column, the total big (the spells by the game's names)
+    local first, second = SpellName(20271) or L["Judgement"], SpellName(679) or MELEE or "Melee"
+    M:Show({ side = { 476, 350 } }, M.Names({ seq = { first, second }, n = 2 }), "holy", nil, 2)
+    if ns.Rumble then ns.Rumble.busyUntil = nil; ns.Rumble:Play("moment") end
+end, "/cchud momenttest", "show what a big moment looks and feels like")
+
+-- For the debug report: how the amounts came, and the last burst
+function M.Describe()
+    local s = M.seen
+    local out = { ("crit amounts: %d plain, %d secret, %d none; combat log read: %s; hidden amounts added up: %s"):format(
+                  s.plain, s.secret, s.none, tostring(M.usesLog or false),
+                  M.secretSum == nil and "not tried yet" or (M.secretSum and "yes" or "refused by the game")) }
+    local c = M.lastRun
+    if c then
+        local kinds = {}
+        for _, a in ipairs(c.amounts or {}) do
+            kinds[#kinds + 1] = ns.IsSecret(a) and "secret" or tostring(a)
+        end
+        out[#out + 1] = ("last burst: %d crits (%s), total %s: %s"):format(c.n, table.concat(kinds, ", "),
+            ns.IsSecret(c.total) and "secret" or tostring(c.total), RunLabel(c))
+    end
+    return out
+end
+
+ns.RegisterModule("moments", M)

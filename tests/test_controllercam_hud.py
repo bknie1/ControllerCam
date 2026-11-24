@@ -31,8 +31,44 @@ HUD = os.path.join(ROOT, "ControllerCam_HUD")
 TOC = os.path.join(HUD, "ControllerCam_HUD.toc")
 
 
+def read_toc(path):
+    """A toc's files, and its ## fields."""
+    files, meta = [], {}
+    for line in open(path, encoding="utf-8").read().splitlines():
+        line = line.strip()
+        if line.startswith("## ") and ":" in line:
+            k, v = line[3:].split(":", 1)
+            meta[k.strip()] = v.strip()
+        elif line and not line.startswith("#"):
+            files.append(line)
+    return files, meta
+
+
 def toc_files():
-    return [l.strip() for l in open(TOC, encoding="utf-8").read().splitlines() if l.strip() and not l.startswith("#")]
+    return read_toc(TOC)[0]
+
+
+# The HUD's modules: an addon each, in a folder of its own beside ControllerCam_HUD (Modules.lua loads them)
+MODULES = sorted(d for d in os.listdir(ROOT)
+                 if d.startswith("ControllerCam_HUD_") and os.path.isfile(os.path.join(ROOT, d, d + ".toc")))
+
+
+def module_toc(name):
+    return read_toc(os.path.join(ROOT, name, name + ".toc"))
+
+
+def module_deps(name):
+    deps = module_toc(name)[1].get("Dependencies", "")
+    return [d.strip() for d in deps.split(",") if d.strip() and d.strip() != "ControllerCam_HUD"]
+
+
+def hud_file(name):
+    """Where one of the HUD's files is: the core's folder or a module's."""
+    for folder in ["ControllerCam_HUD"] + MODULES:
+        path = os.path.join(ROOT, folder, name)
+        if os.path.isfile(path):
+            return path
+    raise FileNotFoundError(name)
 
 
 def lua_path(p):
@@ -54,7 +90,12 @@ class Env:
 
     ADVICE = None             # "Item advice: when unsure" for every session made (SellWhenUnsure), else as saved
 
-    def __init__(self, db=None, style="1", combat=False, login=True, addons=(), setup=None, locale="enUS"):
+    def __init__(self, db=None, style="1", combat=False, login=True, addons=(), setup=None, locale="enUS",
+                 modules="all", installed=True, disabled=()):
+        """modules: "all" loads every module with the core (as before the split, whatever its switches say);
+        "game" loads them as the game does (Modules.lua, by their switches); or a list of the ones loaded with
+        the core. installed=False: the modules' folders are not there at all (or a list of the ones that are).
+        disabled: modules unticked in the game's AddOns list."""
         self.lua = LuaRuntime(unpack_returned_tuples=True)
         lua = self.lua
         lua.execute("HUD_TEST_DIR = '%s'" % lua_path(HERE))
@@ -72,6 +113,14 @@ class Env:
         for f in toc_files():
             self.mock.loadHud(lua_path(os.path.join(HUD, f)), self.ns)
         self.g = lua.globals()
+        self.loaded_modules = []
+        for name in (MODULES if installed is True else (installed or [])):
+            self.mock.modules[name] = self._module_loader(name)
+        for name in disabled:
+            self.mock.disabled[name] = True
+        preload = MODULES if modules == "all" else ([] if modules == "game" else list(modules))
+        for name in preload:
+            self.g.LoadAddOn(name)
         self.mock.annexLines = self.ns.Tooltip.AnnexLines          # (what the HUD hangs under an item's tooltip)
         # the HUD's own questions (never the game's dialog box): every one asked, and answering the last
         self.gamePopups = self.mock.popups
@@ -91,6 +140,15 @@ class Env:
                 self.ns.db.adviceUnsure = Env.ADVICE
             self.mock.fire("PLAYER_LOGIN")
             self.mock.fire("PLAYER_ENTERING_WORLD")
+
+    def _module_loader(self, name):
+        def load():
+            for dep in module_deps(name):
+                self.g.LoadAddOn(dep)
+            for f in module_toc(name)[0]:
+                self.mock.loadHud(lua_path(os.path.join(ROOT, name, f)), self.ns)
+            self.loaded_modules.append(name)
+        return load
 
     @property
     def db(self):
@@ -173,7 +231,7 @@ class Files(unittest.TestCase):
 class Packaging(unittest.TestCase):
     def test_every_lua_file_is_loaded(self):
         on_disk = sorted(f for f in os.listdir(HUD) if f.endswith(".lua"))
-        self.assertEqual(on_disk, sorted(toc_files()))
+        self.assertEqual(on_disk, sorted(toc_files()))                 # (the modules' own: LoadOnDemand)
         self.assertEqual(toc_files()[0], "Locales.lua")              # texts first: every other file uses them
 
     def test_one_version_for_both_addons(self):
@@ -184,7 +242,7 @@ class Packaging(unittest.TestCase):
         wf = open(os.path.join(ROOT, ".github", "workflows", "release.yml"), encoding="utf-8").read()
         for piece in ("ControllerCam_HUD/ControllerCam_HUD.toc", "ControllerCam_HUD/*.lua", "ControllerCam_HUD/Bindings.xml",
                       "cp -r ControllerCam_HUD/Media dist/ControllerCam_HUD/Media", "python tests/test_controllercam_hud.py",
-                      "ControllerCam ControllerCam_HUD InputSwap)", "submodules: true",
+                      "ControllerCam ControllerCam_HUD ControllerCam_HUD_* InputSwap)", "submodules: true",
                       "cp -r InputSwap/Media dist/InputSwap/Media"):    # (InputSwap: the third of the stack)
             self.assertIn(piece, wf)
         self.assertIn("ControllerCam/InputSwap: InputSwap", open(os.path.join(ROOT, ".pkgmeta"), encoding="utf-8").read())
@@ -204,6 +262,250 @@ class Packaging(unittest.TestCase):
             self.assertIsNotNone(e.g["BINDING_NAME_" + name], name)
         for fn in re.findall(r"(\w+)\(\)", xml):
             self.assertIsNotNone(e.g[fn], fn)
+
+
+class LoadOnDemand(unittest.TestCase):
+    """The HUD's modules: each an addon of its own, loaded only while one of its switches is on (Modules.lua)."""
+
+    ON = "{ enabled = true, asked = true, screenAsked = true }"
+
+    def manifest(self, e):
+        return {m.addon: m for m in e.ns.ModuleList.list.values()}
+
+    def values(self, t):
+        return list(t.values()) if t else []
+
+    def test_every_lua_file_is_in_exactly_one_toc(self):
+        seen = {}
+        for folder in ["ControllerCam_HUD"] + MODULES:
+            files = toc_files() if folder == "ControllerCam_HUD" else module_toc(folder)[0]
+            on_disk = sorted(f for f in os.listdir(os.path.join(ROOT, folder)) if f.endswith(".lua"))
+            self.assertEqual(on_disk, sorted(files), folder)
+            for f in files:
+                self.assertNotIn(f, seen, "%s is in %s and %s" % (f, seen.get(f), folder))
+                seen[f] = folder
+
+    def test_each_module_is_load_on_demand_and_one_of_the_family(self):
+        self.assertEqual(len(MODULES), 12)
+        core = read_toc(TOC)[1]
+        for name in MODULES:
+            meta = module_toc(name)[1]
+            self.assertEqual(meta.get("LoadOnDemand"), "1", name)
+            self.assertEqual(meta["Dependencies"].split(",")[0].strip(), "ControllerCam_HUD", name)
+            for field in ("Version", "Interface", "Group", "Author", "X-License"):
+                self.assertEqual(meta.get(field), core.get(field), (name, field))
+            self.assertTrue(meta.get("Title", "").startswith("ControllerCam HUD: "), name)
+            self.assertTrue(meta.get("Notes"), name)
+            for dep in module_deps(name):
+                self.assertIn(dep, MODULES, (name, dep))
+
+    def test_one_download_carries_every_module(self):
+        wf = open(os.path.join(ROOT, ".github", "workflows", "release.yml"), encoding="utf-8").read()
+        for piece in ('for d in ControllerCam_HUD_*/; do', 'cp "$d/$d.toc" "$d"/*.lua LICENSE "dist/$d/"',
+                      "ControllerCam ControllerCam_HUD ControllerCam_HUD_* InputSwap)",
+                      '"$d is version ${module_version}, ControllerCam is ${toc_version}"'):
+            self.assertIn(piece, wf)
+        pkg = open(os.path.join(ROOT, ".pkgmeta"), encoding="utf-8").read()
+        for name in MODULES:
+            self.assertIn("  ControllerCam/%s: %s\n" % (name, name), pkg)
+        for name in MODULES:                       # nothing a module needs lives outside what is copied
+            extra = [f for f in os.listdir(os.path.join(ROOT, name)) if not (f.endswith(".lua") or f.endswith(".toc"))]
+            self.assertEqual(extra, [], name)
+        self.assertTrue(os.path.isfile(os.path.join(ROOT, "docs", "link_modules.ps1")))
+
+    def test_the_list_in_modules_lua_matches_the_folders(self):
+        m = self.manifest(Env())
+        self.assertEqual(sorted(m), MODULES)
+        for name in MODULES:
+            self.assertEqual(sorted(self.values(m[name].needs)), sorted(module_deps(name)), name)
+
+    def test_the_list_knows_each_modules_commands_settings_and_bindings(self):
+        # what Modules.lua says of a module (to answer for it while it is not loaded) is what it registers
+        core = Env(modules=[], installed=False)
+        core_cmds = set(core.ns.commands.keys())
+        core_keys = {d.key for d in core.ns.settings.values() if d.key}
+        xml = open(os.path.join(HUD, "Bindings.xml"), encoding="utf-8").read()
+        bindings = set(re.findall(r"(\w+)\(\)", xml))
+        for name in MODULES:
+            e = Env(modules=[name], installed=[name] + module_deps(name))
+            m = self.manifest(e)[name]
+            others = set()
+            for dep in module_deps(name):
+                d = Env(modules=[dep], installed=[dep])
+                others |= set(d.ns.commands.keys()) | {x.key for x in d.ns.settings.values() if x.key}
+            own_cmds = set(e.ns.commands.keys()) - core_cmds - others
+            self.assertEqual(sorted(own_cmds), sorted(self.values(m.commands)), name)
+            own = {d.key: d.default for d in e.ns.settings.values()
+                   if d.key and d.key not in core_keys and d.key not in others and d.share is not False
+                   and d.default is not None}
+            self.assertEqual(own, dict(m["keys"].items()) if m["keys"] else {}, name)
+            for switch in m.switches.values():
+                self.assertIn(switch, core_keys, name)
+            for fn in self.values(m.bindings):
+                self.assertIn(fn, bindings, name)
+        self.assertEqual(core.errors(), [])
+
+    def test_modules_load_by_their_switches_as_the_game_does(self):
+        e = Env(db=self.ON, modules="game")
+        self.assertEqual(sorted(e.loaded_modules), MODULES)           # every switch starts on
+        self.assertEqual(e.errors(), [])
+        for m in e.ns.ModuleList.list.values():
+            self.assertEqual(m.state, "loaded", m.addon)
+
+    def test_nothing_is_loaded_while_the_hud_is_off(self):
+        e = Env(db="{ enabled = false, asked = true, screenAsked = true }", modules="game")
+        self.assertEqual(e.loaded_modules, [])
+        e.cmd("on")
+        self.assertEqual(sorted(e.loaded_modules), MODULES)
+        self.assertEqual(e.errors(), [])
+
+    def test_a_module_switched_off_is_not_loaded_and_keeps_its_settings(self):
+        db = ("{ enabled = true, asked = true, screenAsked = true, fishMode = false, fishJournal = false, "
+              "fishPanel = false, fishRecast = false, fishBait = false }")
+        e = Env(db=db, modules="game")
+        self.assertNotIn("ControllerCam_HUD_Fishing", e.loaded_modules)
+        self.assertIsNone(e.ns.Fishing)
+        self.assertIs(e.db.fishRecast, False)                         # kept, though nothing reads it now
+        self.assertIs(e.db.fishBait, False)
+        self.assertIn('["fishRecast"]=false', e.mock.serialize(e.g.ControllerCamHUDDB))
+        said = e.cmd("journal")                                       # its command says how to switch it on
+        self.assertIn("off", said)
+        self.assertIn("/cchud fishmode on", said)
+        self.assertIn("/cchud fishmode on", e.cmd("fishrecast"))
+        e.cmd("fishmode on")                                          # on again: loaded now, no /reload
+        self.assertIn("ControllerCam_HUD_Fishing", e.loaded_modules)
+        self.assertIsNotNone(e.ns.Fishing)
+        self.assertIs(e.db.fishRecast, False)                         # and what you chose is still yours
+        self.assertIs(e.db.fishMode, True)
+        self.assertTrue(e.ns.Fishing.active)
+        e.cmd("fishrecast on")
+        self.assertIs(e.db.fishRecast, True)
+        self.assertEqual(e.errors(), [])
+
+    def test_a_module_is_never_loaded_in_a_fight(self):
+        e = Env(db="{ enabled = true, asked = true, screenAsked = true, compass = false }", modules="game")
+        e.mock.state.combat = True
+        e.cmd("compass on")
+        self.assertNotIn("ControllerCam_HUD_Compass", e.loaded_modules)
+        e.mock.state.combat = False
+        e.mock.fire("PLAYER_REGEN_ENABLED")
+        self.assertIn("ControllerCam_HUD_Compass", e.loaded_modules)
+        self.assertEqual(e.errors(), [])
+
+    def test_what_a_module_needs_comes_with_it(self):
+        e = Env(db="{ enabled = true, asked = true, screenAsked = true, campScene = false, flights = false, "
+                   "flightScene = false, flightGame = false }", modules="game")
+        self.assertNotIn("ControllerCam_HUD_Campfire", e.loaded_modules)
+        e.cmd("flights on")
+        self.assertEqual([n for n in e.loaded_modules if n in ("ControllerCam_HUD_Campfire", "ControllerCam_HUD_Flights")],
+                         ["ControllerCam_HUD_Campfire", "ControllerCam_HUD_Flights"])
+        self.assertFalse(e.ns.Campfire.active)                        # loaded for the flight's film, its own switch off
+        self.assertEqual(e.errors(), [])
+
+    def test_a_module_unticked_in_the_addon_list_stays_off(self):
+        # unticked in the game's AddOns list is the player's choice: never ticked again, and its switch says why
+        e = Env(db=self.ON, modules="game", disabled=["ControllerCam_HUD_Bags"])
+        self.assertNotIn("ControllerCam_HUD_Bags", e.loaded_modules)
+        self.assertIsNone(e.mock.enabledFor["ControllerCam_HUD_Bags"])            # EnableAddOn never called
+        m = self.manifest(e)["ControllerCam_HUD_Bags"]
+        self.assertEqual(m.state, "disabled")
+        self.assertIn("turned off in the game's AddOns list", e.cmd("bagorder"))
+        self.assertIn("ControllerCam_HUD_Bags", e.cmd("bagorder"))
+        switch = [d for d in e.ns.settings.values() if d.key == "bagWindow"][0]
+        self.assertFalse(switch.available())                                      # greyed out in the options
+        e.cmd("bagwindow off")
+        e.cmd("bagwindow on")                                                     # and asked again, still not
+        self.assertNotIn("ControllerCam_HUD_Bags", e.loaded_modules)
+        self.assertEqual(sorted(e.loaded_modules), [n for n in MODULES if n != "ControllerCam_HUD_Bags"])
+        self.assertEqual(e.errors(), [])
+
+    def test_the_core_alone_runs_without_a_module(self):
+        e = Env(db=self.ON, modules="game", installed=False)
+        self.assertEqual(e.loaded_modules, [])
+        e.target()
+        e.mock.state.combat = True
+        e.update(2)
+        e.mock.state.combat = False
+        e.mock.fire("PLAYER_REGEN_ENABLED")
+        e.update(2)
+        for cmd in ("", "help", "check", "demo", "demo", "export", "slow"):
+            e.cmd(cmd)
+        e.ns.BuildOptions()
+        e.ns.Debug.Collect("test")
+        self.assertEqual(e.errors(), [])
+        xml = open(os.path.join(HUD, "Bindings.xml"), encoding="utf-8").read()
+        for fn in re.findall(r"(\w+)\(\)", xml):                      # every key binding answers
+            self.assertIsNotNone(e.g[fn], fn)
+            e.g[fn]()
+        self.assertEqual(e.errors(), [])
+        m = self.manifest(e)["ControllerCam_HUD_Fishing"]
+        self.assertEqual(m.state, "missing")
+        self.assertIn("not installed", e.cmd("journal"))
+        fish = [d for d in e.ns.settings.values() if d.key == "fishMode"][0]
+        self.assertFalse(fish.available())                           # its switch greyed out in the options
+
+    def test_each_module_runs_with_only_what_it_needs(self):
+        for name in MODULES:
+            e = Env(db=self.ON, modules="game", installed=[name] + module_deps(name))
+            self.assertIn(name, e.loaded_modules)
+            e.target()
+            e.mock.state.combat = True
+            e.update(1)
+            e.mock.state.combat = False
+            e.mock.fire("PLAYER_REGEN_ENABLED")
+            e.update(1)
+            e.cmd("help")
+            e.ns.BuildOptions()
+            e.ns.Debug.Collect("test")
+            self.assertEqual(e.errors(), [], name)
+
+    def test_a_switch_says_when_its_memory_is_freed(self):
+        e = Env()
+        MO = e.ns.ModuleList
+        by = {d.key: d for d in e.ns.settings.values() if d.key}
+        self.assertEqual(MO.FreeNote(by["compass"]), "Turning it off frees its memory at your next /reload.")
+        note = MO.FreeNote(by["campScene"])                            # the flights' film keeps the camp fire's
+        self.assertIn("once these are off too", note)
+        self.assertIn("Flights: time and countdown", note)
+        self.assertIsNone(MO.FreeNote(by["castbar"]))                  # a part of the core
+        e.ns.BuildOptions()
+        self.assertEqual(e.errors(), [])
+
+    def test_the_options_take_in_a_module_switched_on_in_play(self):
+        e = Env(db="{ enabled = true, asked = true, screenAsked = true, compass = false }", modules="game")
+        e.ns.BuildOptions()
+        keys = lambda: [r["def"].key for r in e.ns.optionRows.values() if r["def"] and r["def"].key]
+        self.assertNotIn("compassPlace", keys())
+        self.assertIn("compass", keys())
+        e.cmd("compass on")
+        self.assertIn("compassPlace", keys())
+        self.assertEqual(e.errors(), [])
+
+    def test_export_and_presets_carry_the_settings_of_a_module_that_is_off(self):
+        e = Env(db="{ enabled = true, asked = true, screenAsked = true, nameplates = false, plateSize = 3 }",
+                modules="game")
+        self.assertNotIn("ControllerCam_HUD_Nameplates", e.loaded_modules)
+        line = e.ns.Share.Export()
+        self.assertIn("plateSize=n3", line)
+        other = Env(db="{ enabled = true, asked = true, screenAsked = true, nameplates = false }", modules="game")
+        other.ns.Share.Import(line)
+        self.assertEqual(other.db.plateSize, 3)
+        other.ns.Presets.ResetAll(other.ns.Presets)
+        self.assertEqual(other.db.plateSize, 2)                       # back to its default, loaded or not
+        self.assertEqual(other.errors(), [])
+
+    def test_the_debug_report_names_the_modules_and_our_addons(self):
+        e = Env(db=self.ON, modules="game")
+        self.assertTrue(e.ns.IsOurAddon("ControllerCam_HUD"))
+        self.assertTrue(e.ns.IsOurAddon("ControllerCam_HUD_Bags"))
+        self.assertFalse(e.ns.IsOurAddon("ControllerCam"))
+        self.assertFalse(e.ns.IsOurAddon("ControllerCam_HUDX"))
+        self.assertIn("ControllerCam_HUD_Fishing: loaded", self.values(e.ns.ModuleList.Describe()))
+
+    def test_the_translations_of_every_language_are_kept_only_for_the_tests(self):
+        locales = open(os.path.join(HUD, "Locales.lua"), encoding="utf-8").read()
+        self.assertIn("if HUD_TEST_DIR then ns.localeData =", locales)
+        self.assertEqual(locales.count("ns.localeData ="), 1)
 
 
 class Locales(unittest.TestCase):
@@ -15087,7 +15389,7 @@ class BagWindow(unittest.TestCase):
 
     def test_nothing_of_the_windows_uses_an_item_itself(self):
         # using an item is protected: never from the HUD's own code, only by the game's secure button
-        code = open(os.path.join(HUD, "Bags.lua"), encoding="utf-8").read()
+        code = open(hud_file("Bags.lua"), encoding="utf-8").read()
         self.assertNotIn("UseContainerItem", "\n".join(l.split("--")[0] for l in code.splitlines()))
         e = self.env()
         e.lua.execute("""

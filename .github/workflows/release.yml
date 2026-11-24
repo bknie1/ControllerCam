@@ -1,8 +1,9 @@
 name: Release
 
 # Push a tag like v1.0.0 to build ControllerCam-v1.0.0.zip and attach it to a GitHub release.
-# WoWUp's GitHub source installs from that zip (top-level folders: ControllerCam/, ControllerCam_HUD/ and InputSwap/,
-# the CCHUD stack; InputSwap is a repository of its own, here as a submodule).
+# WoWUp's GitHub source installs from that zip (top-level folders: ControllerCam/, ControllerCam_HUD/, the HUD's
+# load-on-demand modules ControllerCam_HUD_*/ and InputSwap/, the CCHUD stack; InputSwap is a repository of its own,
+# here as a submodule).
 on:
   push:
     tags:
@@ -31,6 +32,14 @@ jobs:
             echo "ControllerCam_HUD is version ${hud_version}, ControllerCam is ${toc_version}" >&2
             exit 1
           fi
+          for d in ControllerCam_HUD_*/; do
+            d=${d%/}
+            module_version=$(grep -m1 '^## Version:' "$d/$d.toc" | sed 's/^## Version: *//' | tr -d '\r')
+            if [ "${module_version}" != "${toc_version}" ]; then
+              echo "$d is version ${module_version}, ControllerCam is ${toc_version}" >&2
+              exit 1
+            fi
+          done
 
       - uses: actions/setup-python@v5
         with:
@@ -50,10 +59,16 @@ jobs:
           mkdir -p dist/ControllerCam_HUD
           cp ControllerCam_HUD/ControllerCam_HUD.toc ControllerCam_HUD/*.lua ControllerCam_HUD/Bindings.xml LICENSE dist/ControllerCam_HUD/
           cp -r ControllerCam_HUD/Media dist/ControllerCam_HUD/Media
+          # the HUD's modules: an addon each, loaded only while switched on (ControllerCam_HUD/Modules.lua)
+          for d in ControllerCam_HUD_*/; do
+            d=${d%/}
+            mkdir -p "dist/$d"
+            cp "$d/$d.toc" "$d"/*.lua LICENSE "dist/$d/"
+          done
           mkdir -p dist/InputSwap
           cp InputSwap/InputSwap.toc InputSwap/*.lua InputSwap/LICENSE InputSwap/README.md InputSwap/CHANGELOG.md dist/InputSwap/
           cp -r InputSwap/Media dist/InputSwap/Media
-          (cd dist && zip -r "ControllerCam-${GITHUB_REF_NAME}.zip" ControllerCam ControllerCam_HUD InputSwap)
+          (cd dist && zip -r "ControllerCam-${GITHUB_REF_NAME}.zip" ControllerCam ControllerCam_HUD ControllerCam_HUD_* InputSwap)
 
       - name: Create GitHub release
         env:

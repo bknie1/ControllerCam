@@ -3,6 +3,60 @@ activé
 désactivé
 utilisation:
 Les changements s'appliquent à la fin du combat.
+%s n'est pas installé : le dossier %s n'est pas dans votre dossier AddOns.
+%s est désactivé dans la liste des AddOns du jeu : cochez %s pour l'utiliser.
+%s n'a pas pu être chargé : le jeu l'a refusé (%s).
+%s est désactivé : /cchud %s on
+Le désactiver libère sa mémoire à votre prochain /reload.
+Le désactiver libère sa mémoire à votre prochain /reload, une fois ceux-ci désactivés aussi : %s.
+Barres de noms
+notre style sur les barres de noms du jeu (ses options de barres de noms continuent de s'appliquer)
+Cadres de groupe et de raid
+dessiner notre style sur les cadres de groupe et de raid du jeu (leur ciblage et leurs options continuent de fonctionner)
+Chiffres stylisés sur vous
+les dégâts et les soins que vous recevez surgissent comme vos propres coups, au lieu du texte défilant du jeu (suit l'option du jeu de texte de combat sur vous)
+Techniques prêtes
+quand une technique qu'un seul moment permet devient utilisable (Morsure de la mangouste, Fulgurance, Vengeance, Riposte, Contre-attaque) ou que le jeu en illumine une sur votre barre: son nom en rouge gras un instant au milieu de l'écran
+Temps de recharge qui reviennent
+vos techniques clés montent et grandissent à côté de votre personnage pendant les deux dernières secondes de leur temps de recharge, puis éclatent en or dès qu’elles sont prêtes (au lieu d’une barre de temps de recharge)
+Améliorations qui s’estompent
+une amélioration que vous lancez sur vous-même (un Sceau, Bouclier sacré, un cri ou bouclier) s’annonce avec vos temps de recharge quand elle s’achève, et en rouge dès qu’elle a disparu, même consommée plus tôt
+Grands moments
+une rafale s’affiche en grand et en or au centre de l’écran : des critiques coup sur coup, chacun moins d’une seconde après le précédent (un double coup, Jugement et Frappe sacrée ensemble), avec ce qu’ils ont fait ensemble (au plus deux fois par combat)
+Vibration : vos techniques clés
+les techniques clés de chaque classe ont leur propre sensation à la manette (un Jugement éclabousse, une Frappe sacrée claque, Furie-des-vents frappe trois fois)
+Une fenêtre de sacs avec filtres rapides
+vos sacs dans une fenêtre propre au HUD au lieu de celle du jeu: tous les objets ensemble, les emplacements vides regroupés à la fin, vos sacs sur une rangée à part et des filtres rapides en haut (LB et RB). La banque aussi, tant qu'elle est ouverte. Désactivé: les sacs du jeu
+Onglet Marché à l'hôtel des ventes
+un onglet Marché à l'hôtel des ventes : ce qui, dans vos sacs, vaut d'y être vendu et pourquoi, une courbe des prix à côté, et la mise en vente d'une pression
+Le Mentor : un plan de progression à côté de la fenêtre du métier
+tant que la fenêtre d'un métier est ouverte, un panneau à côté indique quelles recettes faire et combien pour atteindre le maximum, et ce qu'il faut, jusqu'au minerai et aux herbes ; une estimation d'après les couleurs des recettes
+Fenêtre du métier : combien vous pourriez en fabriquer avec votre banque
+à côté du nombre du jeu de fois où vous pouvez fabriquer une recette avec vos sacs, un second nombre en bleu compte aussi les composants de votre banque. Il n'apparaît que s'il est plus grand
+Liste à farmer à côté de la liste de quêtes
+ce que vous comptez récolter, avec combien vous en avez et combien vous en voulez : vos sacs et votre banque et ceux de vos autres personnages sur ce royaume. Ajoutez les composants d'un plan de progression d'un bouton, ou n'importe quel objet
+Onglet Ensembles chez le transmogrificateur
+un onglet Ensembles dans la fenêtre de transmogrification : l'équipement de votre collection qui partage un nom (Heaume en fer vert, Gantelets en fer vert...) et les ensembles du jeu, mis sur votre tenue en une pression, avec Annuler ; rien n'est gardé ni payé avant d'appuyer sur Appliquer
+Apparence collectée, dans les infobulles d'objets
+sous l'infobulle de l'équipement et des cosmétiques : si son apparence est déjà dans votre collection, ou seulement via un autre objet identique, pour savoir ce qui est nouveau pour vous
+Boussole de quêtes
+une boussole en haut de l'écran : la direction où vous regardez, et vos quêtes là où elles se trouvent, chacune avec sa distance. La quête que le jeu vous indique ressort
+Pêche à un bouton
+avec une canne à pêche en main: votre bouton d'interaction pour lancer la ligne quand il n'y a rien avec quoi interagir, et encore pour ferrer le poisson quand le bouchon bouge; la prise est ramassée pour vous. B pour ranger la canne et reprendre vos armes
+Journal de pêche
+chaque prise est notée dans votre journal de pêche: combien de chaque espèce, où vous l'avez sortie la première fois, et un poids inventé pour le plaisir avec votre record pour chacune (/cchud journal l'ouvre)
+Interface de pêche
+avec une canne à pêche en main: les poissons de l'eau où vous vous tenez (ceux que vous n'avez pas encore sortis ici restent cachés), votre compétence de pêche et ce qu'ajoute votre appât, combien vous en avez pris et combien se sont échappés, combien de temps dure votre appât, et vos dernières prises
+Récit : des personnages dans les fenêtres
+chaque fenêtre que le HUD améliore a quelqu'un pour vous aider, avec son portrait et une courte phrase sur ce que vous avez sous les yeux et pourquoi : vous-même devant vos sacs et au bord de l'eau, le marchand, le banquier, le maître de poste, le maître de vol, le Courtier à l'hôtel des ventes et le Mentor à votre métier ; désactivé : les fenêtres restent sobres et silencieuses
+Scène du feu de camp
+reste immobile quelques secondes dans un campement et l'écran devient un film pendant une minute : la caméra tourne autour de toi, tes grands moments depuis le dernier campement sont racontés (boss, niveaux, métiers, nouvelles montures), et les améliorations du campement concluent, par classe. Un mouvement ou un bouton l'arrête
+Vols : durée et compte à rebours
+en vol, la destination et la durée sont indiquées dans le chat, et une barre en haut de l'écran compte à rebours jusqu'à l'atterrissage ; la durée de chaque trajet est apprise de vos vols
+Vols cinématiques
+pendant un vol de maître de vol, l'écran devient un film : bandes noires, l'ATH s'efface, la caméra s'éloigne et tourne lentement autour de vous et de votre monture, la barre de vol dans la bande du haut. Le jeu de vol, une fenêtre ou un bouton l'interrompent, et il s'achève en douceur à l'approche de l'atterrissage
+Vols : un jeu en chemin
+pendant un vol, un petit jeu est proposé sous la barre de vol, et un bouton le lance (seul ce bouton est pris tant que vous ne l'avez pas pressé) : faites battre des ailes votre monture au-dessus des cimes et entre les zeppelins, et prenez au filet les cavaliers qui arrivent en face, pour les faire atterrir contre de l'or de vol. Le même bouton à nouveau, c'est la haute altitude : le jeu est rangé et les boutons sont de nouveau ceux du jeu. Jamais en combat, disparaît à l'atterrissage
 Celle du jeu
 Les polices ne peuvent être choisies que là où la langue du jeu s'écrit en lettres latines.
 Police: %s
@@ -269,86 +323,6 @@ lit tous les prix de l'hôtel des ventes d'un coup (ouvrez-le d'abord ; toutes l
 Fabrique: %s
 Garder ce dont vos métiers ont encore besoin
 un objet pour lequel une recette d'un de vos personnages donne encore un point de compétence (recettes orange et jaunes, comme le jeu les montre dans la fenêtre du métier), que les prochaines étapes du métier utilisent (les recettes des guides de progression, et celles qu'un autre de vos personnages connaît, jusqu'à 75 points plus loin), ou qui fabrique quelque chose valant plus à l'hôtel des ventes que l'objet lui-même, est gardé, pas vendu, et son infobulle dit pourquoi. Les recettes sont lues quand la fenêtre d'un métier est ouverte
-Ouvrez la fenêtre d'un métier et je jetterai un œil à vos recettes.
-C'est le plafond, %d. Un maître a le rang suivant pour vous.
-Plus rien à apprendre à %d. Allez voir un maître pour le rang suivant.
-Vos recettes ne vous suffisent plus. Allez voir un maître : %s vous attend à %d.
-Encore %d jusqu'à %d, et ce que vous savez ne vous y mènera pas. Un maître a %s pour vous à %d.
-Vos recettes ne vous suffisent plus. Allez voir un maître : %s vous attend.
-Vos recettes cessent de vous apprendre quoi que ce soit à %d de %d. Demandez %s à un maître.
-Vos recettes s'épuisent à %d de %d. Un maître aura quelque chose de nouveau.
-Ce que vous savez ne vous portera pas sur les %d derniers. Il est temps de voir un maître.
-%s ne vous apprendra plus grand-chose, mais c'est ce que vous avez de mieux. Encore %d jusqu'à %d.
-Ça avance lentement à partir d'ici : %s donne un point de temps en temps. Encore %d.
-Il vous faudra d'abord %s, %s. Les guides commencent cette étape avec.
-Apprenez %s, %s, et on commence : encore %d jusqu'à %d.
-Encore %d jusqu'à %d. Les guides vous envoient chercher %s jusqu'à %d.
-Ici, c'est la récolte qui vous apprend : %s jusqu'à %d.
-Encore %d jusqu'à %d. Commencez par %s, ou %s si vous préférez : %s.
-D'abord %s, comme le disent les guides. %s fait aussi l'affaire : %s.
-Encore %d jusqu'à %d. Commencez par %s.
-%s est votre meilleur maître à présent. %d points jusqu'à %d.
-Les mains sûres. D'abord %s, et encore %d.
-auprès d'un maître
-auprès d'un marchand
-en butin
-par une quête
-composants moins chers
-composants vendus par un marchand
-composants que vous récoltez vous-même
-se vend bien
-quelque chose que vous utiliserez
-moins de fabrications
-une recette à trouver ou acheter
-d'autres composants
-le premier choix des guides
-Ouvrez la fenêtre d'un métier pour un plan de progression.
-Au plafond, %d. Un maître a le rang suivant.
-Encore %d jusqu'à %d ; vos recettes s'arrêtent avant. Un maître a %s à %d.
-Encore %d jusqu'à %d ; vos recettes s'arrêtent avant. Un maître a %s.
-Vos recettes s'arrêtent à %d de %d. Un maître en a d'autres.
-Encore %d jusqu'à %d. Le mieux maintenant : %s, vert (un point de temps en temps).
-Encore %d jusqu'à %d. Apprenez d'abord %s, %s.
-Encore %d jusqu'à %d. Récoltez %s jusqu'à %d.
-Encore %d jusqu'à %d. D'abord : %s, ou %s (%s).
-Encore %d jusqu'à %d. D'abord : %s.
-À récolter ou acheter
-%d fabrications : %s
-Apprenez-la %s, à partir de %d.
-Apprenez-la %s.
-%s : %d dans vos sacs, %d à la banque, %d par fabrication
-Les guides montent cette étape en récoltant %s.
-%s : vous en avez %d, le plan en utilise %d
-pour %s
-Le Mentor : ce que votre banque permet de fabriquer
-Ce que votre banque permet de fabriquer
-Rien de plus à fabriquer avec ce qu'il y a dans votre banque.
-%d à fabriquer en comptant votre banque, dont %d seulement grâce à elle.
-Le Mentor : %s %d > %d
-Le Mentor
-Plan de progression
-ou
-Récolter %s
-à apprendre
-Essayer
-Masquer
-Le plan
-Retour
-Farmer ceci
-Tout farmer
-Avec la banque
-Utiliser le plan
-deux fois pour masquer
-Rien à essayer ici.
-%d ajouté(s) à la liste à farmer.
-Rien ne manque : vous avez ce qu'il faut.
-Ouvrez la fenêtre d'un métier pour faire un plan.
-Le Mentor (plan de progression) : afficher / masquer
-Le Mentor : un plan de progression à côté de la fenêtre du métier
-tant que la fenêtre d'un métier est ouverte, un panneau à côté indique quelles recettes faire et combien pour atteindre le maximum, et ce qu'il faut, jusqu'au minerai et aux herbes ; une estimation d'après les couleurs des recettes
-Fenêtre du métier : combien vous pourriez en fabriquer avec votre banque
-à côté du nombre du jeu de fois où vous pouvez fabriquer une recette avec vos sacs, un second nombre en bleu compte aussi les composants de votre banque. Il n'apparaît que s'il est plus grand
-affiche le plan de progression de la dernière fenêtre de métier ouverte, avec les boutons de la manette dessus
 PA
 PA dist.
 crit.
@@ -370,126 +344,6 @@ banque
 Votre marque
 Détails de l'objet: tout sur l'objet que vous visez
 affiche tout sur l'objet que vous visez (ou celui indiqué): prix, qui le possède, votre marque
-%d%% de chances de vendre
-Ça part à coup sûr (%d%%)
-Ça se vend tout seul (%d%%)
-Je pense que ça se vendra (%d%%)
-Devrait trouver preneur (%d%%)
-Une chance sur deux (%d%%)
-Ça peut aller dans les deux sens (%d%%)
-Un peu un pari (%d%%)
-Pourrait traîner un moment (%d%%)
-Je ne compterais pas dessus (%d%%)
-Mal parti, l'ami (%d%%)
-+%s de plus qu'un marchand
-pas encore de prix connu
-un marchand paie autant
-Le Courtier
-Marché
-chaque pièce comptée, l'ami
-Rien dans vos sacs ne peut être vendu ici.
-Aucun prix ces 7 derniers jours.
-Un jour de prix pour l'instant : une bougie s'ajoute chaque jour où vous passez à l'hôtel des ventes.
-7 jours, une bougie par jour : vert clôturé plus haut, rouge plus bas
-30 jours, le plus bas du jour : vert en hausse, rouge en baisse
-Pas encore d'historique des prix : lisez l'hôtel des ventes quelques jours.
-Un seul jour de prix pour l'instant: la ligne s'allonge chaque jour où vous passez à l'hôtel des ventes.
-Je demande %s l'unité, %s pour les %d que tu lâches ; %d restent avec toi
-Demande %s pièce, %s pour les %d
-Plus bas
-lu %s
-Habituel
-7 jours : de %s à %s
-En vente : %d enchères, %d objets
-%s pièce, %s pour les %d
-Vous avez mis %d en vente ici, %d enchères vendues
-Aucun prix connu : lisez d'abord l'hôtel des ventes.
-Rien dans vos sacs à vendre ici.
-Rien ne se vend mieux ici que chez un marchand aujourd'hui ; %d peut-être, avec de la patience.
-Le meilleur d'abord : %d se vendent mieux ici que chez un marchand, %d de plus avec de la patience.
-Sacs vides, l'ami. Apporte-moi de quoi vendre.
-Rien ici ne bat un marchand aujourd'hui. %d peut-être, avec un peu de patience.
-Pas de profit sûr dans ces sacs, l'ami. %d pourraient payer si tu attends.
-Le meilleur en haut : %d ici battent tout marchand, %d de plus pour les patients.
-%d rapportent plus ici qu'au marchand, le meilleur d'abord. %d de plus si tu attends.
-Le haut de la pile paie le mieux : %d ventes sûres, %d de plus si tu peux attendre.
-Pas encore de prix : %s lit l'hôtel des ventes.
-Prix lus à l'instant : %d.
-%d prix, lus %s.
-%d prix, lus %s. %s les relit.
-Pas encore lu le tableau. %s et je te ramène tous les prix.
-Pas encore de prix, l'ami. %s lit tout le tableau.
-Prix tout frais du tableau, l'ami : %d.
-Je viens de lire le tableau : %d prix, encore chauds.
-%d prix, lus %s. Ça ira, l'ami.
-Dernier coup d'œil au tableau : %s, %d prix.
-Prix relevés %s, rassis comme du vieux pain. %s relit le tableau.
-%d prix, mais lus %s. %s et je regarde à nouveau.
-Ce que vous gardez est aussi affiché. %s le masque.
-Mis de côté : %d, pour vos métiers, votre équipement et vos marques. %s les affiche.
-Ce que tu gardes est aussi sur la liste. %s le range.
-J'affiche aussi ce que tu gardes. %s le cache à nouveau.
-%d mis de côté : matériaux de métier, équipement à porter, ce que tu as marqué. %s les montre.
-%d gardés pour tes métiers, à porter ou marqués par toi. %s si tu les veux.
-pièce
-aucune donnée
-Vente rapide
-Patient
-Lire tous les prix
-Masquer le gardé
-Montrer le gardé
-Ligne
-Bougies
-Poster
-%d sur %d
-Poster %d sur %d à %s l'unité
-Poster %d pour %s
-Mettre les %d en vente pour %s
-Ce client ne permet pas de poster à l'hôtel des ventes depuis ici.
-%d posté pour %s.
-Marché à l'hôtel des ventes : ouvrir / fermer
-Onglet Marché à l'hôtel des ventes
-un onglet Marché à l'hôtel des ventes : ce qui, dans vos sacs, vaut d'y être vendu et pourquoi, une courbe des prix à côté, et la mise en vente d'une pression
-Salut du commissaire-priseur au Marché
-un commissaire-priseur gobelin dit une courte phrase, tirée des sons du jeu, à l'ouverture du Marché ; désactivé : il s'ouvre en silence
-Marché : montrer ce que vous gardez
-le Marché liste aussi ce que vous gardez : ce dont vos métiers apprennent encore ou qu'ils transforment en quelque chose de plus cher, et ce que vous avez marqué à garder ; désactivé : seulement ce que vous vendriez
-Marché : graphique des prix en bougies
-le graphique des prix du Marché est une bougie par jour sur les 7 derniers jours (où le prix a ouvert, son plus haut et son plus bas, et où il a clôturé : vert s'il a clôturé plus haut, rouge plus bas) ; désactivé : une ligne du prix le plus bas de chaque jour sur 30 jours
-ouvrir ou fermer le Marché (un onglet de l'hôtel des ventes)
-quel hôtel des ventes a ce client (pour le dépannage)
-collectée
-collectée via un autre objet
-pas encore collectée
-Apparence
-Choisissez un ensemble pour mettre ses pièces sur votre tenue. %s la garde ; rien n'est payé avant.
-Examen de votre collection...
-Votre tenue est revenue telle qu'elle était.
-%s : %d pièces sur %d mises en place.
-%d n'ont pas pu aller sur cette tenue.
-Un ensemble dont vous avez des pièces
-%d ensembles dont vous avez des pièces
-vous ne pouvez pas le porter
-manquant
-Les %d pièces
-%d pièces sur %d
-Manque : %s
-Pas encore d'ensemble. Les objets qui partagent un nom, comme Heaume en fer vert et Gantelets en fer vert, apparaissent ici dès que vous en avez un.
-Annuler
-Onglet Ensembles chez le transmogrificateur
-un onglet Ensembles dans la fenêtre de transmogrification : l'équipement de votre collection qui partage un nom (Heaume en fer vert, Gantelets en fer vert...) et les ensembles du jeu, mis sur votre tenue en une pression, avec Annuler ; rien n'est gardé ni payé avant d'appuyer sur Appliquer
-Apparence collectée, dans les infobulles d'objets
-sous l'infobulle de l'équipement et des cosmétiques : si son apparence est déjà dans votre collection, ou seulement via un autre objet identique, pour savoir ce qui est nouveau pour vous
-Hors ligne
-Mort
-Désactivé
-En spécialisation soins
-Toujours
-Trop loin
-Cadres de groupe et de raid
-dessiner notre style sur les cadres de groupe et de raid du jeu (leur ciblage et leurs options continuent de fonctionner)
-Groupe et raid du soigneur
-en groupe: votre groupe à côté de votre personnage, chacun avec le bouton qui le cible; en raid: des cadres plus fins. Chacun ne montre que les soins dont il a besoin, un effet néfaste que vous pouvez dissiper et s'il est à portée
 Animations de la barre d'incantation
 une barre d'incantation montre ce qui est lancé : des pioches la frappent pendant le minage, des éclairs la parcourent pour la nature, une liane fleurit pour un soin, des runes prennent forme pour les arcanes, flammes, glace et ombres pour le feu, le givre et l'ombre
 montrer chaque animation de barre d'incantation une fois, sur votre barre
@@ -520,79 +374,6 @@ Affaiblissements sur une cible amicale
 Points de combo
 points de combo sous forme de pastilles au-dessus du nom de la cible
 liste ce que le jeu dit des effets de votre cible (pour le dépannage)
-Pourcentage de menace
-votre part de la menace en chiffre à côté de l'icône de menace, sur le cadre de la cible et les barres de nom
-Nombre de santé
-la santé restante, abrégée (12.3k), sur la barre (pas sur les barres de nom compactes : le pourcentage y suffit)
-Vos affaiblissements
-vos affaiblissements sur l'unité, au-dessus de son nom, avec leur durée
-Affaiblissements de tous
-les affaiblissements que le jeu signale pour les barres de nom de tous, pas seulement les vôtres
-Bonus de l'ennemi
-les améliorations d'un ennemi à côté de ses affaiblissements : celles qui comptent (importantes, enragé, ou que vous pouvez dissiper ou voler), ou toutes si Seulement les effets qui comptent est désactivé
-Icône de contrôle des foules
-une grande icône avec sa durée quand l'unité est étourdie, immobilisée, effrayée...
-Lueur d'aggro
-une icône de bouclier et une lueur derrière le nom : rouge tant qu'il vous attaque, rouge et jaune quand vous êtes sur le point de l'attirer, jaune et bleu quand vous le perdez, bleu quand il n'est pas sur vous
-Marqueur de quête
-un repère doré sur les unités dont vos quêtes ont encore besoin
-Animations des barres de nom
-les barres apparaissent en fondu, la santé basse respire, le contrôle des foules scintille
-Petite
-Normale
-Grande
-Nom complet
-Nom court
-Sans nom
-Complet
-Minimal
-Minimal mini
-Taille des barres d'info
-la taille des barres sur les barres d'info : petites et fines, normales ou grandes (plus larges et plus hautes)
-Noms sur les barres d'info
-le nom sur une barre d'info avec barre de vie : en entier, raccourci ou omis (le cadre de la cible le donne en entier ; le niveau et l'icône de classe restent). Une barre d'info sans barre, celle d'un PNJ amical, garde toujours son nom
-Style des barres d'info
-les interrupteurs des barres d'info en une fois. Complet : tout. Minimal : pas de barre de ressource, de guilde ni de titre, noms courts. Minimal mini : petites barres avec la vie, vos affaiblissements et les améliorations qui comptent, niveau et classe, sans nom (le cadre de la cible l'a). La menace, les contrôles et les incantations voyantes restent toujours
-Barres de noms
-notre style sur les barres de noms du jeu (ses options de barres de noms continuent de s'appliquer)
-Titres des joueurs
-affiche le titre d'un joueur avec son nom
-Guildes et métiers des PNJ
-une ligne sous le nom : la guilde du joueur, ou ce que fait le PNJ
-Barres des amis en combat
-les plaques de nom amicales affichent santé, ressource et incantations tant que l'unité est en combat
-Barres d'info amicales du jeu
-laisser les barres amicales (votre groupe, les autres joueurs, les PNJ amicaux) à l'apparence du jeu ; les nôtres seulement sur les ennemis
-Barres de ressource
-une fine barre de mana, de rage ou d'énergie sous la barre de santé
-Cible de l'incantation
-qui est visé par une incantation, à côté du nom du sort
-Pourcentage de santé
-le pourcentage de santé sur la barre
-Nom sur la barre de votre cible
-désactivé : la barre de votre cible n'affiche ni nom ni niveau (le cadre de la cible les montre)
-Niveaux sur les barres d'info
-le niveau devant le nom d'un ennemi, coloré selon la difficulté
-Barres de nom compactes
-barres de nom environ moitié moins larges
-Incantations ennemies marquées
-l'incantation d'un ennemi clignote, gonfle et pulse de plus en plus vite jusqu'à son terme, pour pouvoir être interrompue à temps
-Icônes de classe sur les barres de nom
-l'icône de classe d'un joueur devant son nom, ami ou ennemi
-Ce que font les PNJ, en icônes
-une icône au-dessus des PNJ amicaux qui proposent quelque chose : un sac pour les marchands, une enclume pour les forgerons qui réparent, un livre pour les maîtres... (les icônes du jeu ; elles restent visibles même quand la barre attend d'être pointée)
-PNJ amicaux seulement quand pointés
-les barres des PNJ amicaux (marchands, donneurs de quêtes, habitants) ne s'affichent que lorsque vous les pointez, comme leur infobulle
-Noms sur les objets avec lesquels vous pouvez interagir
-un nom au-dessus des minerais, coffres, plaques et autres tant que vous leur faites face (désactivé : ils restent sans nom, l'invite du jeu dit déjà ce qu'ils sont)
-Mini-plaques
-les serviteurs, bestioles et ennemis gris qui ne donnent pas d'expérience ont une petite barre: une barre fine avec vos affaiblissements dessus et sans nom (une bestiole, sans barre, garde son nom; l'option du jeu décide s'ils ont une barre)
-Barres de nom du groupe en donjon: noms seuls
-dans un donjon ou un raid, le jeu dessine lui-même les barres de nom des joueurs alliés et les addons ne peuvent pas les modifier: les options propres au jeu y sont réglées pour les afficher comme des noms à la couleur de la classe, sans barres, comme les nôtres, et les barres du jeu reviennent pendant un combat (si les barres des alliés en combat sont activées); tout est remis en place à la sortie
-Barres de nom du groupe en donjon: masquées
-dans un donjon ou un raid, désactiver complètement les barres de nom du jeu pour les joueurs alliés (et les remettre comme vous les aviez à la sortie)
-affiche ce que le jeu donne pour le nom de votre cible (pour le dépannage)
-lister les barres d'info à l'écran et si elles portent notre apparence (pour le dépannage)
 Affichage de chaque école de dégâts une fois (la dernière en coup critique).
 Particules d'impact
 des éclairs sacrés, le feu s'élève, des cristaux de givre persistent, l'ombre fume, des runes des arcanes scintillent sur la barre touchée
@@ -609,15 +390,6 @@ Les soins sur la durée poussent sur la barre
 des racines et des branches (Nature) ou des fils dorés (Sacré) poussent sur la barre de votre cible, focalisation ou la vôtre tant qu'un soin sur la durée agit, et se fanent à la fin
 Les boucliers s'affichent comme une protection
 un bouclier sur votre cible, votre focalisation ou vous (Mot de pouvoir : Bouclier, Bouclier divin, Barrière de glace...) jaillit autour de la barre de vie dans la couleur de son école, luit tant que le bouclier tient et s'estompe quand il se brise
-%d absorbés
-Temps de recharge qui reviennent
-Chiffres stylisés sur vous
-les dégâts et les soins que vous recevez surgissent comme vos propres coups, au lieu du texte défilant du jeu (suit l'option du jeu de texte de combat sur vous)
-Techniques prêtes
-quand une technique qu'un seul moment permet devient utilisable (Morsure de la mangouste, Fulgurance, Vengeance, Riposte, Contre-attaque) ou que le jeu en illumine une sur votre barre: son nom en rouge gras un instant au milieu de l'écran
-vos techniques clés montent et grandissent à côté de votre personnage pendant les deux dernières secondes de leur temps de recharge, puis éclatent en or dès qu’elles sont prêtes (au lieu d’une barre de temps de recharge)
-Améliorations qui s’estompent
-une amélioration que vous lancez sur vous-même (un Sceau, Bouclier sacré, un cri ou bouclier) s’annonce avec vos temps de recharge quand elle s’achève, et en rouge dès qu’elle a disparu, même consommée plus tôt
 Celui du jeu
 Point
 Anneau
@@ -662,18 +434,6 @@ une onde quand vous gagnez un niveau, une longue vibration grave quand vous mour
 La barre lumineuse affiche votre santé
 une manette à barre lumineuse (DualSense) y affiche votre santé : du vert au rouge, pulsant quand elle est faible en combat
 jouer chaque motif de vibration une fois
-Liste à droite
-Un au centre
-%d soins critiques
-%d critiques
-Jugement
-Grands moments : où
-un bloc juste au-dessus des annonces de temps de recharge à droite de votre personnage, le plus récent au plus près et les précédents montant au-dessus en s'effaçant, ou un seul à la fois au centre
-Vibration : vos techniques clés
-les techniques clés de chaque classe ont leur propre sensation à la manette (un Jugement éclabousse, une Frappe sacrée claque, Furie-des-vents frappe trois fois)
-Grands moments
-une rafale s’affiche en grand et en or au centre de l’écran : des critiques coup sur coup, chacun moins d’une seconde après le précédent (un double coup, Jugement et Frappe sacrée ensemble), avec ce qu’ils ont fait ensemble (au plus deux fois par combat)
-montre l'aspect et la sensation d'un grand moment
 nouveau !
 record !
 %d h
@@ -684,39 +444,6 @@ les poissons que vous sortez de l'eau et les améliorations que vous donne un ca
 Réduire les animations
 rien à l'écran ne tremble, ne glisse, ne vole ni n'éclate: les animations de la barre d'incantation, les effets de coups, le mouvement des barres de nom, les grands moments et les annonces de prises et d'améliorations sont calmes ou immobiles. Les réglages du jeu lui-même pour le tremblement de l'écran et les mouvements de caméra inattendus comptent aussi
 montrer à quoi ressemblent les annonces d'une prise et d'améliorations
-Grand maître
-Maître
-Artisan
-Expert
-Compagnon
-Apprenti
-Niveau %d atteint (depuis le %d)
-Niveau %d atteint
-%s et %d autres vaincus dans : %s
-%s vaincu
-%s : désormais %s, jusqu'à %d
-%s a atteint %d
-%d nouveaux trajets aériens, le dernier : %s
-Nouveau trajet aérien : %s
-Nouvelle monture : %s
-Nouvelle mascotte : %s
-Nouveau jouet : %s
-Haut fait : %s
-Le campement
-Au repos
-Au coin du feu
-Aube
-Matin
-Après-midi
-Soir
-Nuit
-%s, %s
-Avec %s
-La scène du feu de camp est désactivée.
-La scène du feu de camp attend la fin du combat.
-Scène du feu de camp
-reste immobile quelques secondes dans un campement et l'écran devient un film pendant une minute : la caméra tourne autour de toi, tes grands moments depuis le dernier campement sont racontés (boss, niveaux, métiers, nouvelles montures), et les améliorations du campement concluent, par classe. Un mouvement ou un bouton l'arrête
-jouer la scène du feu de camp maintenant
 fait
 %s : prête à être rendue
 Je termine [%s].
@@ -753,45 +480,6 @@ chaque étape de vos quêtes va dans le canal de groupe (Colliers d'os sanglants
 Garder ce dont vos quêtes ont besoin
 un objet qu'une quête de votre journal demande encore, ou qui lance une quête que vous pouvez encore faire, est marqué Quête : jamais vendu ni mis aux enchères pour vous
 dire un ordre recommandé pour vos quêtes: rendre ce qui est prêt, puis la plus proche faisable seul, puis le reste
-En haut
-En bas
-N
-NO
-O
-SO
-S
-SE
-E
-NE
-La boussole de quêtes est désactivée : /cchud compass on
-La boussole doit savoir où vous êtes, et le jeu ne le dit pas ici.
-Boussole de quêtes
-une boussole en haut de l'écran : la direction où vous regardez, et vos quêtes là où elles se trouvent, chacune avec sa distance. La quête que le jeu vous indique ressort
-Boussole de quêtes : place
-en haut de l'écran, ou en bas à la place de la barre d'expérience (la barre passe alors en haut)
-quelques repères sur la boussole de quêtes, autour de vous, pendant vingt secondes
-À gauche des quêtes
-À droite des quêtes
-Sous les quêtes
-La liste à farmer est pleine.
-Liste à farmer : %s, %d voulu(s).
-À farmer
-%d de plus
-Rien à farmer pour l'instant.
-Une pile de plus
-Retirer
-Vider
-Terminé
-Tout retirer de la liste à farmer ?
-Liste à farmer : choisir / terminé
-Liste à farmer : ajouter l'objet pointé
-Ce n'est pas sur la liste à farmer.
-La liste à farmer est vide.
-Liste à farmer : où elle se place
-Liste à farmer à côté de la liste de quêtes
-ce que vous comptez récolter, avec combien vous en avez et combien vous en voulez : vos sacs et votre banque et ceux de vos autres personnages sur ce royaume. Ajoutez les composants d'un plan de progression d'un bouton, ou n'importe quel objet
-la liste à farmer à gauche de la liste de quêtes, à sa droite ou sous ses quêtes
-la liste à farmer à côté de la liste de quêtes : choisir avec la manette ; add <objet> [combien], remove <objet>, clear, ou left / right / bottom pour sa place
 Pas en combat.
 Ce client n'a pas de barres de manette.
 Ce client ne permet pas aux addons de le modifier ; utilisez le mode Édition.
@@ -831,129 +519,6 @@ La manette ne dit pas ce qu'elle est: les icônes restent comme le jeu les a.
 les icônes que le jeu affiche pour les boutons de votre manette: auto (selon la manette utilisée), xbox, playstation, switch, steam, generic (chiffres), ou game pour les laisser comme le jeu les a
 Rangées de temps de recharge à l'écart des barres de manette
 les rangées de temps de recharge du jeu se placent sous la cible au lieu d'être sur les boutons de la manette, un peu plus petites (seulement avec les dispositions intégrées du jeu : avec une disposition à vous, elles restent où vous les avez mises)
-Mode pêche : désactivé.
-Pêche: %s pour lancer
-Pas d'appât: %s deux fois pour utiliser %s
-%s pour ranger la canne
-Mode pêche: %s pour lancer la ligne, et encore pour ferrer le poisson quand le bouchon bouge.
-%s pour ferrer, %s pour relancer
-Le mode pêche demande une canne à pêche dans vos mains.
-Vous ne connaissez pas la Pêche.
-Mode pêche : un bouton lance et ferre
-Bouton de pêche : %s
-Pêche à un bouton
-avec une canne à pêche en main: votre bouton d'interaction pour lancer la ligne quand il n'y a rien avec quoi interagir, et encore pour ferrer le poisson quand le bouchon bouge; la prise est ramassée pour vous. B pour ranger la canne et reprendre vos armes
-Relancer d’une seule pression
-tant que le bouchon est à l'eau, votre bouton de pêche ferre le poisson et A relance d'une pression ; désactivé : A est à vous
-Appât sur double appui
-appuyez deux fois rapidement sur votre bouton de pêche: le second appui met le meilleur appât de vos sacs sur votre canne, quand elle n'en a pas
-Barres de manette masquées pendant la pêche
-avec une canne à pêche en main, les barres de la manette sont masquées pour bien voir l'eau; l'invite de pêche montre le bouton pour lancer. Elles reviennent dès qu'un combat commence ou que la canne est rangée
-pêche à un bouton désactivée pour l'instant, ou réactivée (avec une canne en main elle s'active toute seule)
-le bouton qui pêche : votre bouton d'interaction au départ (Carré ou X), ou n'importe quel autre, une gâchette par exemple (rt)
-La côte de Durotar, c'est de la roche rouge et des hauts-fonds tièdes. Les trolls des îles de l'Écho disent que les maquereaux passent en bancs plus serrés quand la marée porte l'odeur des feux de cuisine des îles.
-Les lacs de Mulgore sont petits, clairs et patients. Les taurens y pêchent comme ils font tout le reste, lentement et en disant merci.
-Chaque oasis des Tarides est un lieu de rendez-vous. Peu importe ce qui s'y abreuve le jour, quelque chose nage dessous la nuit.
-Les bassins de Teldrassil reposent à l'ombre d'un seul arbre. Les pêcheurs elfes de la nuit jurent que les poissons n'y ont jamais vu le soleil et qu'il ne leur manque pas.
-L'eau de Sombrivage est grise, froide et pleine d'épaves. La moitié de ce qui mord au large d'Auberdine a élu domicile dans la cargaison perdue de quelqu'un.
-Les rivières d'Orneval coulent sous des feuillages plus vieux que la plupart des royaumes. Les poissons sont vifs, et les sentinelles plus vives encore à vous demander ce que vous faites là.
-Au fond des Mille pointes, l'eau est rare et jalousement gardée. Un poisson d'ici a mérité sa place.
-Les lacs des Serres-Rocheuses dorment haut et froid entre les pics. Les gobelins les auraient déjà asséchés si la pêche n'y était pas si bonne.
-La côte de Désolace n'est qu'ossements et ressac gris. Quelque chose, là-dessous, a pris goût aux deux.
-À Féralas, tout est vert jusqu'au ras de l'eau. Les rivières y sont profondes, chaudes et bien vivantes.
-Nul ne sait au juste où finit la terre et où commence l'eau dans le marécage d'Âprefange. Pêchez depuis la rive, et recomptez vos orteils ensuite.
-Port Gentepression possède la seule eau digne de ce nom de tout Tanaris. Les gobelins vous vendront le droit d'y pêcher, deux fois si vous les laissez faire.
-Sous la baie lumineuse d'Azshara repose une cité engloutie. Les vieux pêcheurs disent que les plus gros vivent dans ce qui fut ses jardins.
-Les mares de Gangrebois luisent, et pas dans le bon sens. Ce qui y nage encore est têtu au-delà du raisonnable.
-Les sources chaudes et les lacs bordés de goudron d'Un'Goro ont gardé des choses que le reste du monde a oubliées. Certaines mordent.
-Le lac Elune'ara, à Reflet-de-Lune, est calme comme un souffle retenu. Les druides demandent seulement que vous ne preniez pas plus que vous ne mangerez.
-Silithus, c'est du sable, du vent et un bruit d'ailes. Si vous y avez trouvé de l'eau où pêcher, ne le dites à personne.
-Les lacs de Berceau-de-l'Hiver gèlent sur les bords et fument au milieu. Les poissons y sont gras contre le froid, et valent bien la marche.
-Dans les bassins d'Orgrimmar pêchent des péons qui n'ont rien de mieux à faire et de vieux grunts qui disent la même chose. Les uns comme les autres vous raconteront que le gros leur a échappé.
-Un poisson des étangs des Pitons-du-Tonnerre a passé toute sa vie très haut au-dessus des plaines. Il a l'air de bien le prendre.
-Darnassus veille sur ses eaux avec autant de soin que sur ses temples. Les poissons ont pris l'habitude d'être admirés.
-Les lacs des montagnes d'Alterac sont de la neige fondue, et les ogres comme le Syndicat y pêchent quand personne ne regarde.
-Les rivages d'Arathi ont vu passer plus d'armées que de pêcheurs. Les poissons ont depuis longtemps cessé de se soucier de la bannière qui flotte au-dessus de l'eau.
-Les Terres ingrates ne sont que poussière d'un bout à l'autre. Ici, une touche est un petit miracle, alors traitez-la comme tel.
-La côte des Terres foudroyées est rouge, décapée et silencieuse. Ce qui vit dans ce ressac a appris à s'accommoder de bien des choses.
-Les lacs de Tirisfal reposent, immobiles, sous un ciel maladif. Les Réprouvés y pêchent par habitude. Les morts ne mangent pas beaucoup, mais ils se souviennent d'avoir aimé ça.
-La longue côte de la forêt des Pins-Argentés n'est que brume et ombre de pins. La pêche y est bonne, et c'est bien la seule chose gaie qu'on dise de l'endroit.
-Les rivières des Maleterres de l'Ouest coulent encore, mais pas propres. Ce que vous en tirez, regardez-le à deux fois.
-Peu de gens pêchent dans les Maleterres de l'Est, et moins encore l'avouent. L'eau garde ce que la peste a laissé d'elle.
-La rivière de Hautebrande et son long rivage sud ont nourri les deux camps de chaque querelle livrée pour eux.
-Les Hinterlands gardent leurs lacs en hauteur, parmi les arbres, là où les nains Marteaux-hardis pêchent à dos de griffon quand ils pensent que personne ne les voit.
-Les lacs de Dun Morogh sont cerclés de glace presque toute l'année. Un nain y perce un trou, s'assied avec une pinte et appelle ça une bonne journée, peu importe ce qui mord.
-La gorge des Vents brûlants a de la lave là où d'autres terres ont des rivières. Apportez plutôt de quoi boire.
-Les Steppes ardentes ne sont que cendres et braises. Si l'eau d'ici vous donne quoi que ce soit, ce sera chaud.
-Tous les enfants d'Elwynn apprennent à pêcher au lac de Cristal ou au lac du Cairn. Le menu fretin s'y joue d'eux depuis des générations.
-Le défilé de Deuillevent a peu d'eau et encore moins d'hospitalité. Ce qui se trouve dans les mares sous Karazhan, mieux vaut l'y laisser.
-La rivière qui borde le bois de la Pénombre est noire à toute heure. L'obscurité ne semble pas gêner les poissons. Les pêcheurs, si.
-Le Loch est la fierté du Loch Modan, retenu par le grand barrage de Formepierre. Les nains mesurent toute histoire de pêche à son aune, et c'est en général le Loch qui gagne.
-Le lac Placide, dans les Carmines, est joli comme un tableau, et l'on y pêche depuis chaque ponton de Comté-du-Lac. Les habitants connaissent tous les bons coins et ne vous en indiqueront aucun.
-De ses rivières de jungle à son cap sauvage au sud, Strangleronce possède les eaux les plus riches du continent. Les pêcheurs de Baie-du-Butin en font un tournoi, et presque tous trichent.
-Le marais des Chagrins, c'est de l'eau verte sous des arbres verts. Les poissons ont un goût de vase, et les gens du coin les aiment ainsi.
-Les champs de la marche de l'Ouest ont dépéri, mais pas sa côte. Ceux qui sont restés vivent de ce long rivage gris.
-Les Paluns portent bien leur nom. Les quais de Port-Menethil sont l'endroit le plus sec pour y pêcher, et les crocilisques le savent.
-Dans les canaux de Hurlevent pêchent des enfants, des retraités et au moins un membre de la noblesse déguisé. Personne ne demande ce qu'il y a d'autre dans les canaux.
-La Caverne lugubre abrite le seul bassin tranquille de Forgefer. De vieux nains y pêchent des heures durant sans jamais dire un mot.
-Les canaux de Fossoyeuse charrient un vert qui ne doit rien aux algues. Les Réprouvés qui y pêchent ne le font pas pour le dîner.
-Le premier poisson que la plupart des pêcheurs remontent, et assez éclatant pour qu'ils s'en souviennent.
-Luisant, vif et commun le long de toutes les côtes chaudes. Grillé, il vaut mieux que son nom ne le laisse croire.
-Tout en gueule, et jamais plus heureux que dans une eau que vous ne boiriez pas.
-Petit, plein de dents et sans peur. On raconte qu'un banc entier a un jour chassé un ours hors du Loch.
-Un éclair de couleur sous le ressac. Quand il mord à la ligne, les marins y voient un gage de chance pour la traversée.
-Un patient fouilleur de fond, aux moustaches dignes d'un ancien chez les nains.
-Personne n'en mange deux fois. Les alchimistes achètent tout ce qu'ils peuvent en trouver.
-Ses nageoires rougeoient comme des braises sous la cendre, et l'huile qu'on en tire brûle presque aussi bien.
-Une armure digne d'un petit bouclier. La chair qu'elle protège vaut la peine qu'on se donne.
-Quelque chose dans l'eau, près des cavernes des Lamentations, l'a changé. En manger pourrait bien vous changer aussi, pour un temps.
-Les gens du fleuve disent qu'en faire un repas éclaircit l'esprit. C'est de remonter le courant que lui vient sa sagesse.
-Plus d'âge, de taille et de sagesse que dans le reste de la famille, ce qui ne lui a pas évité votre hameçon.
-Un rude adversaire venu des mers chaudes du sud, et un classique de toutes les ardoises de taverne, de Baie-du-Butin à Gadgetzan.
-Son front brille comme du vrai mithril. Plus d'un mineur a voulu passer la bête à la fonderie.
-Ses écailles, bouillies, donnent une huile qui rend la peau dure comme le roc. Sa préférence va à la nuit.
-Un poli de cuirasse de parade, et presque le même poids.
-Il ne s'approche des côtes qu'aux mois froids, et les cuisiniers qui le connaissent l'attendent toute l'année.
-Sa saison, ce sont les jours longs. Sur la côte, on règle le calendrier sur son passage.
-À tenir par le milieu, et une seule fois.
-Un poisson de rivière des contrées sauvages, aux ouïes aussi rouges que les peintures de guerre d'un troll.
-Il se nourrit une fois la nuit tombée. En soupe, il calme les nerfs des lanceurs de sorts.
-Il se nourrit de jour, tout le contraire du lutjan nocturne ou presque, et partage pourtant les mêmes eaux.
-Pas un poisson à proprement parler. Il n'est pas d'accord pour se faire prendre et vous le fera savoir.
-Pâle comme la glace des rivières, venu des lacs froids et limpides du nord.
-Il vous faudra les deux mains, et peut-être un ami.
-%.1f lb
-Nouveau dans votre journal de pêche : %s, %s.
-Nouveau dans votre journal de pêche : %s.
-Votre plus gros %s à ce jour : %s (avant : %s).
-Journal de pêche
-chaque prise est notée dans votre journal de pêche: combien de chaque espèce, où vous l'avez sortie la première fois, et un poids inventé pour le plaisir avec votre record pour chacune (/cchud journal l'ouvre)
-Appât %s
-Pas d'appât
-Pris %d
-Échappés %d
-Interface de pêche
-avec une canne à pêche en main: les poissons de l'eau où vous vous tenez (ceux que vous n'avez pas encore sortis ici restent cachés), votre compétence de pêche et ce qu'ajoute votre appât, combien vous en avez pris et combien se sont échappés, combien de temps dure votre appât, et vos dernières prises
-Un curieux : +%d%%
-Gardez votre leurre près du poisson
-Prochaine prise +%d%%
-Maintenez %s : le leurre court le long de la ligne
-%d d'affilée
-Un jeu pendant que le bouchon est à l'eau
-se joue sur la barre d’incantation tant que votre ligne est à l’eau : maintenez une gâchette et votre leurre court le long de la ligne, relâchez et il dérive en arrière ; gardez-le près de l’ombre du poisson. Mieux vous jouez, plus le poids inventé de votre prochaine prise est lourd. Aucun bouton n’est pris, ni votre lancer ni votre prise ne sont touchés
-%d pris, %d espèces, %d échappés
-Le plus lourd : %s, %s
-Poissons
-Eaux
-Rien de pris pour l'instant. Emportez une canne au bord de l'eau.
-Pris : %d
-Le plus lourd : %s, à %s
-Première prise : %s
-Pris ici : %d
-Espèces trouvées ici : %d
-Choisir
-Fermer
-ouvrir ou fermer votre journal de pêche: chaque espèce que vous avez prise, la plus lourde de chacune, et les eaux où vous avez pêché
 Le chat s'estompe au calme
 le texte du chat s'estompe après quelques secondes sans nouveau message
 Secondes avant que le chat s'estompe
@@ -979,66 +544,6 @@ les messages qui vendent de l'or ou des services avec une adresse web, et le mê
 Masquer le recrutement de guilde répété
 dans les canaux publics, le message de recrutement d'une guilde est montré une fois ; le même du même joueur, ou un presque identique, dans les 15 minutes est masqué (jamais ceux de votre groupe, guilde ou amis)
 liste les messages du chat récemment masqués comme spam
-Vol
-atterrissage anticipé
-atterrissage au prochain point de vol
-destination inconnue
-estimé d'après la distance
-premier vol sur cette route : apprentissage de sa durée
-atterrissage
-%s : environ %s, estimé d'après la distance
-%s : environ %s
-%s : premier vol sur ce trajet, durée inconnue
-En vol, destination inconnue
-%s : durée du vol apprise, %s
-Atterrissage anticipé : %s, environ %s
-Atterrissage anticipé au prochain point de vol
-vif et froid, la neige sous les pieds et le souffle suspendu dans l'air
-un froid mordant, avec un vent des sommets qui trouve chaque faille de votre armure
-chaud et humide, un air si épais qu'on pourrait le boire
-une chaleur moite sous la canopée, et les insectes bruyants
-chaud et sec, avec de la poussière dans le vent
-un soleil brûlant et une terre craquelée ; buvez quand vous le pouvez
-fumée et cendres sur un vent chaud
-un air brûlé, et des escarbilles qui dérivent
-gris et froid, une brume humide qui colle
-un froid dans l'air et presque pas de lumière
-doux et beau, avec une brise légère
-un temps agréable, idéal pour voyager
-frais et vert, les feuilles qui murmurent
-une lumière douce entre les arbres, et l'air frais
-lourd et humide, le sol mou sous les pieds
-un air chaud et mouillé, et l'odeur du marais
-%s à %s : %s
-%d trajets aériens connus.
-Vols : durée et compte à rebours
-en vol, la destination et la durée sont indiquées dans le chat, et une barre en haut de l'écran compte à rebours jusqu'à l'atterrissage ; la durée de chaque trajet est apprise de vos vols
-Vols : votre monture le long de la barre
-un griffon, un coursier du vent ou une chauve-souris (celui que le maître de vol vous a donné) plane le long de la barre de vol vers votre point d’arrivée
-Vols : le temps à l'arrivée
-à l'atterrissage, la discussion dit comment est l'air là où vous arrivez, tel que l'endroit est d'habitude (chaud et humide à Strangleronce, neige sous les pieds à Dun Morogh), et le moment de la journée
-lister les trajets aériens dont la durée est connue
-À terre ! +%d
-Heurté : la série s'arrête
-%s battre des ailes  ·  évitez les cimes des arbres et les zeppelins
-%s prenez les cavaliers au filet pour de l'or de vol  ·  %s haute altitude
-%d d'or de vol
-%s battre des ailes
-%s filet
-%s haute altitude
-%s : retour au jeu (%d d'or de vol)
-%s : un jeu en chemin
-Le jeu de vol est désactivé : /cchud flightgame on
-Le jeu de vol se joue pendant un vol.
-Pas en combat.
-Jeu de vol : jouer / haute altitude
-Vols : un jeu en chemin
-pendant un vol, un petit jeu est proposé sous la barre de vol, et un bouton le lance (seul ce bouton est pris tant que vous ne l'avez pas pressé) : faites battre des ailes votre monture au-dessus des cimes et entre les zeppelins, et prenez au filet les cavaliers qui arrivent en face, pour les faire atterrir contre de l'or de vol. Le même bouton à nouveau, c'est la haute altitude : le jeu est rangé et les boutons sont de nouveau ceux du jeu. Jamais en combat, disparaît à l'atterrissage
-pendant un vol : lancer le jeu de vol, ou le mettre en haute altitude et l'en ramener
-Vols cinématiques
-pendant un vol de maître de vol, l'écran devient un film : bandes noires, l'ATH s'efface, la caméra s'éloigne et tourne lentement autour de vous et de votre monture, la barre de vol dans la bande du haut. Le jeu de vol, une fenêtre ou un bouton l'interrompent, et il s'achève en douceur à l'approche de l'atterrissage
-Vols cinématiques : la caméra tourne autour de vous
-pendant le film, la caméra tourne lentement autour de vous et de votre monture, un tour complet en une minute et demie environ, et revient derrière vous avant l'atterrissage. Désactivé : un plan fixe
 Un vol est un bon moment pour ça.
 Vous jouez depuis %s.
 C'est l'heure d'une gorgée d'eau
@@ -1077,138 +582,6 @@ Rapports de débogage
 rassembler les rapports de dépannage tout seuls : à la connexion, et de nouveau au rechargement ou à la déconnexion (ils sont gardés dans les réglages enregistrés)
 les moments où le jeu s’est figé depuis votre connexion, et la part de chacun due au travail du HUD
 ce que le jeu cache de la classe de votre cible, et quels moyens peuvent encore la montrer (à lancer une fois, sur un joueur ennemi en champ de bataille)
-Tout
-Équipement
-Consommables
-Artisanat
-Nouveau
-Malin
-Par type
-Comme dans vos sacs
-Composants
-Autres
-Rien ici.
-Emplacements libres
-%s vendu: le marchand peut vous le revendre.
-L'armure ne peut pas être changée en combat.
-Trousseau
-Sac à dos
-%d sur %d emplacements occupés
-Poser
-Prendre
-Utiliser
-Vers les sacs
-Vers la banque
-Joindre
-Échanger
-%s ou %s: vers le courrier
-%s ou %s: vers le marchand
-%s ou %s: vers la banque
-%s ou %s: vers l'échange
-%s ou %s: vers l'hôtel des ventes
-%s ou %s: vers la banque de guilde
-%s ou %s: vers votre personnage
-%s ou %s: vers le butin
-%s ou %s: autre fenêtre
-Les boutons de la manette reviennent après le combat.
-%s ou %s: retour aux sacs
-Maintenir pour détruire
-Tous les sacs
-Ce sac seulement
-Mettre dedans
-Prendre le sac
-Plus
-Trier
-Sacs
-%d libres
-Emplacement libre
-En combat, fermez vos sacs avec B.
-pour la banque
-sans marque
-Aucun emplacement libre.
-Poser ici
-Diviser la pile
-Marque: %s
-Détails de l'objet
-Détruire
-Trier la banque
-Trier les sacs
-Voir les sacs
-Voir la banque
-Vendre les objets conseillés
-Relâchez pour détruire
-Cet objet permet de commencer une quête.
-C'est un objet de quête.
-Détruire %s ?
-Le jeu a gardé %s: détruisez-le depuis ses propres sacs.
-%s détruit.
-Une fenêtre de sacs avec filtres rapides
-vos sacs dans une fenêtre propre au HUD au lieu de celle du jeu: tous les objets ensemble, les emplacements vides regroupés à la fin, vos sacs sur une rangée à part et des filtres rapides en haut (LB et RB). La banque aussi, tant qu'elle est ouverte. Désactivé: les sacs du jeu
-Fenêtre des sacs: ordre
-Malin: ce que vous utilisez d'abord (consommables, objets avec une utilisation), puis le reste par type, la camelote à la fin et estompée. Par type: en sections sous leurs propres titres. Comme dans vos sacs: l'ordre du jeu
-Bon, voyons.
-Och, quel fatras.
-Voyons, voyons...
-Elune, donne-moi de la patience.
-Par les naaru, quel fouillis.
-Fichu sac.
-Sac bien rangé, sac léger.
-Bah. Trop de bric-à-brac.
-Du poids mort, tout ça.
-Patience. La Terre-Mère pourvoit.
-Hé, qu'est-ce qu'on a là, mon ?
-Quel désordre. Indigne de moi.
-Le temps, c'est de l'argent. Comptons.
-Ouais, ça fera l'affaire.
-Elune soit remerciée.
-La Lumière pourvoit.
-Hrm. Ça ira.
-Hm. Assez pour se battre.
-Je voyage léger. Bien.
-Acceptable. De justesse.
-Plus une place de libre. La camelote rapporterait %s : la vendre fait de la place.
-Plus une place de libre. Ce dont je n'ai pas besoin en route peut attendre à la banque.
-Camelote : %d, %s ici. X vend celle que j'ai choisie ; Vente futée prend tout.
-%d d'entre eux vont à la banque : elle en garde déjà, ou je les ai marqués. Déposer les range.
-Plus que %d places. La camelote rapporterait %s chez n'importe quel marchand.
-Plus que %d places. Il est temps de vendre ou de déposer quelques affaires.
-Nouveau depuis mon dernier coup d'œil : %d. Le point doré marque chacun.
-Bon à vendre : %d. Le filtre Vendre les rassemble, et chaque info-bulle dit où ça rapporte le plus.
-Camelote : %d, %s. Le prochain marchand peut la prendre.
-Juste l'essentiel. Rien qui vaille la peine d'être vendu.
-Tout est en ordre, et %d places libres.
-Votre équipement est réparé : %s.
-Je peux réparer votre équipement pour %s ; une pièce cassée ne donne ni armure ni caractéristiques.
-Vos sacs sont pleins. Je prends %d objets pour %s : Vente futée, et vous avez de nouveau de la place.
-Je vous donne %s pour %d objets : la camelote, et ce que l'hôtel des ventes ne paierait pas mieux. Vente futée, et c'est fait.
-Gardez les %d que l'hôtel des ventes réclame : il paie %s de plus que moi.
-Vos sacs sont pleins. Vendez-moi quelque chose avant d'acheter.
-Rien dans vos sacs que je paierais bien. Jetez un œil à mes marchandises.
-%d de vos objets ont leur place ici : j'en garde déjà, ou vous les avez marqués. Déposer les range.
-Je garde davantage de %d objets que vous portez. Retirer remplit vos sacs avant le départ.
-Vos sacs sont presque pleins. Laissez-moi ce dont vous n'aurez pas besoin en route.
-Tout est en sécurité chez moi, et vos sacs ont %d places libres.
-Rien pour vous aujourd'hui. J'ai vérifié deux fois.
-Lettres pour vous : %d, rien de joint. Lisez-les quand vous voulez.
-Lettres pour vous : %d. Dedans : %s.
-Tout prendre les vide d'un coup.
-Contre remboursement : %d. Celles-là, vous les ouvrez et payez vous-même.
-Vos sacs sont pleins : les objets attendent dans leurs lettres.
-Où allons-nous ? Montrez un endroit et je vous dirai combien de temps dure le trajet.
-%s : environ %s d'après la carte. Vous n'avez pas encore fait ce trajet.
-%s : environ %s, d'après votre dernier vol là-bas.
-%s : je ne peux pas encore dire combien de temps. Faites-le une fois et je saurai.
-%d se sont échappés. Cette eau demande plus de compétence que la mienne : un appât aide, une meilleure canne aussi.
-Pas d'appât sur l'hameçon. Il ajoute à ma compétence, donc moins s'échappent.
-L'appât est presque épuisé. Un autre sur l'hameçon garde ma compétence.
-Poissons d'ici que je n'ai pas encore pris : %d. On continue de lancer.
-J'ai pris tous les poissons de cette eau. Ailleurs, alors.
-Rien de pris encore. Le premier poisson de chaque eau va ici.
-Espèces prises : %d. Chaque eau en cache quelques autres : le panneau de pêche montre un ? pour chacune que je n'y ai pas prise.
-Reposé près du feu : les %d prochains points d'expérience des victoires comptent double.
-Aucun repos en réserve. Une nuit à l'auberge ou en ville, et les victoires donnent double expérience pendant un moment.
-Récit : des personnages dans les fenêtres
-chaque fenêtre que le HUD améliore a quelqu'un pour vous aider, avec son portrait et une courte phrase sur ce que vous avez sous les yeux et pourquoi : vous-même devant vos sacs et au bord de l'eau, le marchand, le banquier, le maître de poste, le maître de vol, le Courtier à l'hôtel des ventes et le Mentor à votre métier ; désactivé : les fenêtres restent sobres et silencieuses
 Préréglage du HUD : %s, assorti à la caméra
 préréglage : %s
 Une disposition nommée '%s' a été ajoutée au mode Édition du jeu. Choisissez-la là pour l'utiliser (Menu du jeu > Mode Édition > Disposition).
@@ -1222,6 +595,7 @@ Action
 une vue à la troisième personne : fines barres verticales à côté de votre personnage, tous les effets activés ; hors combat, tout s'estompe
 Classique
 nos cadres là où WoW les a toujours placés, effets plus discrets, les barres de manette du jeu telles quelles
+Minimal
 seulement l'essentiel : les PNJ amicaux n'affichent leur barre (avec leur fonction) que lorsque vous les pointez, les visez ou les ciblez ; noms sans titres ; hors combat, vos barres restent en retrait (une santé basse s'affiche toujours)
 Monde ouvert
 un écran épuré pour explorer : des barres fines à côté de vous qui s'estompent au repos, des barres de nom sans barre de ressource, une discussion qui s'efface
@@ -1290,6 +664,7 @@ Cochez « Afficher les options avancées » sur la page principale pour accéder
 Modules
 Bascules rapides
 Général
+Ses réglages apparaissent ici quand il est activé.
 HUD
 Le panneau d'options n'est pas disponible dans ce client.
 Activé
@@ -1405,6 +780,7 @@ Progression des quêtes
 Liste à farmer
 Carte
 Barre de vol
+Sacs
 Courrier
 Conseil d'objet
 Apparences
@@ -1481,3 +857,634 @@ comparer ce qui est à l'écran avec les réglages (check liste chaque ligne)
 enregistrer une description de l'interface manette de ce client (pour le dépannage)
 afficher cette liste
 les dernières erreurs du HUD, même après un rechargement (pour les signaler)
+Tout
+Équipement
+Consommables
+Artisanat
+Nouveau
+Malin
+Par type
+Comme dans vos sacs
+Composants
+Autres
+Rien ici.
+Emplacements libres
+%s vendu: le marchand peut vous le revendre.
+L'armure ne peut pas être changée en combat.
+Trousseau
+Sac à dos
+%d sur %d emplacements occupés
+Poser
+Prendre
+Utiliser
+Vers les sacs
+Vers la banque
+Joindre
+Échanger
+%s ou %s: vers le courrier
+%s ou %s: vers le marchand
+%s ou %s: vers la banque
+%s ou %s: vers l'échange
+%s ou %s: vers l'hôtel des ventes
+%s ou %s: vers la banque de guilde
+%s ou %s: vers votre personnage
+%s ou %s: vers le butin
+%s ou %s: autre fenêtre
+Les boutons de la manette reviennent après le combat.
+Fermer
+%s ou %s: retour aux sacs
+Maintenir pour détruire
+Choisir
+Retour
+Tous les sacs
+Ce sac seulement
+Mettre dedans
+Prendre le sac
+Plus
+Trier
+%d libres
+Emplacement libre
+En combat, fermez vos sacs avec B.
+pour la banque
+sans marque
+Aucun emplacement libre.
+Poser ici
+Diviser la pile
+Marque: %s
+Détails de l'objet
+Essayer
+Détruire
+Trier la banque
+Trier les sacs
+Voir les sacs
+Voir la banque
+Vendre les objets conseillés
+Relâchez pour détruire
+Cet objet permet de commencer une quête.
+C'est un objet de quête.
+Détruire %s ?
+Le jeu a gardé %s: détruisez-le depuis ses propres sacs.
+%s détruit.
+Fenêtre des sacs: ordre
+Malin: ce que vous utilisez d'abord (consommables, objets avec une utilisation), puis le reste par type, la camelote à la fin et estompée. Par type: en sections sous leurs propres titres. Comme dans vos sacs: l'ordre du jeu
+Grand maître
+Maître
+Artisan
+Expert
+Compagnon
+Apprenti
+Niveau %d atteint (depuis le %d)
+Niveau %d atteint
+%s et %d autres vaincus dans : %s
+%s vaincu
+%s : désormais %s, jusqu'à %d
+%s a atteint %d
+%d nouveaux trajets aériens, le dernier : %s
+Nouveau trajet aérien : %s
+Nouvelle monture : %s
+Nouvelle mascotte : %s
+Nouveau jouet : %s
+Haut fait : %s
+Le campement
+Au repos
+Au coin du feu
+Aube
+Matin
+Après-midi
+Soir
+Nuit
+%s, %s
+Avec %s
+La scène du feu de camp est désactivée.
+La scène du feu de camp attend la fin du combat.
+jouer la scène du feu de camp maintenant
+En haut
+En bas
+N
+NO
+O
+SO
+S
+SE
+E
+NE
+La boussole de quêtes est désactivée : /cchud compass on
+La boussole doit savoir où vous êtes, et le jeu ne le dit pas ici.
+Boussole de quêtes : place
+en haut de l'écran, ou en bas à la place de la barre d'expérience (la barre passe alors en haut)
+quelques repères sur la boussole de quêtes, autour de vous, pendant vingt secondes
+Mode pêche : désactivé.
+Pêche: %s pour lancer
+Pas d'appât: %s deux fois pour utiliser %s
+%s pour ranger la canne
+Mode pêche: %s pour lancer la ligne, et encore pour ferrer le poisson quand le bouchon bouge.
+%s pour ferrer, %s pour relancer
+Le mode pêche demande une canne à pêche dans vos mains.
+Vous ne connaissez pas la Pêche.
+Mode pêche : un bouton lance et ferre
+Bouton de pêche : %s
+Relancer d’une seule pression
+tant que le bouchon est à l'eau, votre bouton de pêche ferre le poisson et A relance d'une pression ; désactivé : A est à vous
+Appât sur double appui
+appuyez deux fois rapidement sur votre bouton de pêche: le second appui met le meilleur appât de vos sacs sur votre canne, quand elle n'en a pas
+Barres de manette masquées pendant la pêche
+avec une canne à pêche en main, les barres de la manette sont masquées pour bien voir l'eau; l'invite de pêche montre le bouton pour lancer. Elles reviennent dès qu'un combat commence ou que la canne est rangée
+pêche à un bouton désactivée pour l'instant, ou réactivée (avec une canne en main elle s'active toute seule)
+le bouton qui pêche : votre bouton d'interaction au départ (Carré ou X), ou n'importe quel autre, une gâchette par exemple (rt)
+La côte de Durotar, c'est de la roche rouge et des hauts-fonds tièdes. Les trolls des îles de l'Écho disent que les maquereaux passent en bancs plus serrés quand la marée porte l'odeur des feux de cuisine des îles.
+Les lacs de Mulgore sont petits, clairs et patients. Les taurens y pêchent comme ils font tout le reste, lentement et en disant merci.
+Chaque oasis des Tarides est un lieu de rendez-vous. Peu importe ce qui s'y abreuve le jour, quelque chose nage dessous la nuit.
+Les bassins de Teldrassil reposent à l'ombre d'un seul arbre. Les pêcheurs elfes de la nuit jurent que les poissons n'y ont jamais vu le soleil et qu'il ne leur manque pas.
+L'eau de Sombrivage est grise, froide et pleine d'épaves. La moitié de ce qui mord au large d'Auberdine a élu domicile dans la cargaison perdue de quelqu'un.
+Les rivières d'Orneval coulent sous des feuillages plus vieux que la plupart des royaumes. Les poissons sont vifs, et les sentinelles plus vives encore à vous demander ce que vous faites là.
+Au fond des Mille pointes, l'eau est rare et jalousement gardée. Un poisson d'ici a mérité sa place.
+Les lacs des Serres-Rocheuses dorment haut et froid entre les pics. Les gobelins les auraient déjà asséchés si la pêche n'y était pas si bonne.
+La côte de Désolace n'est qu'ossements et ressac gris. Quelque chose, là-dessous, a pris goût aux deux.
+À Féralas, tout est vert jusqu'au ras de l'eau. Les rivières y sont profondes, chaudes et bien vivantes.
+Nul ne sait au juste où finit la terre et où commence l'eau dans le marécage d'Âprefange. Pêchez depuis la rive, et recomptez vos orteils ensuite.
+Port Gentepression possède la seule eau digne de ce nom de tout Tanaris. Les gobelins vous vendront le droit d'y pêcher, deux fois si vous les laissez faire.
+Sous la baie lumineuse d'Azshara repose une cité engloutie. Les vieux pêcheurs disent que les plus gros vivent dans ce qui fut ses jardins.
+Les mares de Gangrebois luisent, et pas dans le bon sens. Ce qui y nage encore est têtu au-delà du raisonnable.
+Les sources chaudes et les lacs bordés de goudron d'Un'Goro ont gardé des choses que le reste du monde a oubliées. Certaines mordent.
+Le lac Elune'ara, à Reflet-de-Lune, est calme comme un souffle retenu. Les druides demandent seulement que vous ne preniez pas plus que vous ne mangerez.
+Silithus, c'est du sable, du vent et un bruit d'ailes. Si vous y avez trouvé de l'eau où pêcher, ne le dites à personne.
+Les lacs de Berceau-de-l'Hiver gèlent sur les bords et fument au milieu. Les poissons y sont gras contre le froid, et valent bien la marche.
+Dans les bassins d'Orgrimmar pêchent des péons qui n'ont rien de mieux à faire et de vieux grunts qui disent la même chose. Les uns comme les autres vous raconteront que le gros leur a échappé.
+Un poisson des étangs des Pitons-du-Tonnerre a passé toute sa vie très haut au-dessus des plaines. Il a l'air de bien le prendre.
+Darnassus veille sur ses eaux avec autant de soin que sur ses temples. Les poissons ont pris l'habitude d'être admirés.
+Les lacs des montagnes d'Alterac sont de la neige fondue, et les ogres comme le Syndicat y pêchent quand personne ne regarde.
+Les rivages d'Arathi ont vu passer plus d'armées que de pêcheurs. Les poissons ont depuis longtemps cessé de se soucier de la bannière qui flotte au-dessus de l'eau.
+Les Terres ingrates ne sont que poussière d'un bout à l'autre. Ici, une touche est un petit miracle, alors traitez-la comme tel.
+La côte des Terres foudroyées est rouge, décapée et silencieuse. Ce qui vit dans ce ressac a appris à s'accommoder de bien des choses.
+Les lacs de Tirisfal reposent, immobiles, sous un ciel maladif. Les Réprouvés y pêchent par habitude. Les morts ne mangent pas beaucoup, mais ils se souviennent d'avoir aimé ça.
+La longue côte de la forêt des Pins-Argentés n'est que brume et ombre de pins. La pêche y est bonne, et c'est bien la seule chose gaie qu'on dise de l'endroit.
+Les rivières des Maleterres de l'Ouest coulent encore, mais pas propres. Ce que vous en tirez, regardez-le à deux fois.
+Peu de gens pêchent dans les Maleterres de l'Est, et moins encore l'avouent. L'eau garde ce que la peste a laissé d'elle.
+La rivière de Hautebrande et son long rivage sud ont nourri les deux camps de chaque querelle livrée pour eux.
+Les Hinterlands gardent leurs lacs en hauteur, parmi les arbres, là où les nains Marteaux-hardis pêchent à dos de griffon quand ils pensent que personne ne les voit.
+Les lacs de Dun Morogh sont cerclés de glace presque toute l'année. Un nain y perce un trou, s'assied avec une pinte et appelle ça une bonne journée, peu importe ce qui mord.
+La gorge des Vents brûlants a de la lave là où d'autres terres ont des rivières. Apportez plutôt de quoi boire.
+Les Steppes ardentes ne sont que cendres et braises. Si l'eau d'ici vous donne quoi que ce soit, ce sera chaud.
+Tous les enfants d'Elwynn apprennent à pêcher au lac de Cristal ou au lac du Cairn. Le menu fretin s'y joue d'eux depuis des générations.
+Le défilé de Deuillevent a peu d'eau et encore moins d'hospitalité. Ce qui se trouve dans les mares sous Karazhan, mieux vaut l'y laisser.
+La rivière qui borde le bois de la Pénombre est noire à toute heure. L'obscurité ne semble pas gêner les poissons. Les pêcheurs, si.
+Le Loch est la fierté du Loch Modan, retenu par le grand barrage de Formepierre. Les nains mesurent toute histoire de pêche à son aune, et c'est en général le Loch qui gagne.
+Le lac Placide, dans les Carmines, est joli comme un tableau, et l'on y pêche depuis chaque ponton de Comté-du-Lac. Les habitants connaissent tous les bons coins et ne vous en indiqueront aucun.
+De ses rivières de jungle à son cap sauvage au sud, Strangleronce possède les eaux les plus riches du continent. Les pêcheurs de Baie-du-Butin en font un tournoi, et presque tous trichent.
+Le marais des Chagrins, c'est de l'eau verte sous des arbres verts. Les poissons ont un goût de vase, et les gens du coin les aiment ainsi.
+Les champs de la marche de l'Ouest ont dépéri, mais pas sa côte. Ceux qui sont restés vivent de ce long rivage gris.
+Les Paluns portent bien leur nom. Les quais de Port-Menethil sont l'endroit le plus sec pour y pêcher, et les crocilisques le savent.
+Dans les canaux de Hurlevent pêchent des enfants, des retraités et au moins un membre de la noblesse déguisé. Personne ne demande ce qu'il y a d'autre dans les canaux.
+La Caverne lugubre abrite le seul bassin tranquille de Forgefer. De vieux nains y pêchent des heures durant sans jamais dire un mot.
+Les canaux de Fossoyeuse charrient un vert qui ne doit rien aux algues. Les Réprouvés qui y pêchent ne le font pas pour le dîner.
+Le premier poisson que la plupart des pêcheurs remontent, et assez éclatant pour qu'ils s'en souviennent.
+Luisant, vif et commun le long de toutes les côtes chaudes. Grillé, il vaut mieux que son nom ne le laisse croire.
+Tout en gueule, et jamais plus heureux que dans une eau que vous ne boiriez pas.
+Petit, plein de dents et sans peur. On raconte qu'un banc entier a un jour chassé un ours hors du Loch.
+Un éclair de couleur sous le ressac. Quand il mord à la ligne, les marins y voient un gage de chance pour la traversée.
+Un patient fouilleur de fond, aux moustaches dignes d'un ancien chez les nains.
+Personne n'en mange deux fois. Les alchimistes achètent tout ce qu'ils peuvent en trouver.
+Ses nageoires rougeoient comme des braises sous la cendre, et l'huile qu'on en tire brûle presque aussi bien.
+Une armure digne d'un petit bouclier. La chair qu'elle protège vaut la peine qu'on se donne.
+Quelque chose dans l'eau, près des cavernes des Lamentations, l'a changé. En manger pourrait bien vous changer aussi, pour un temps.
+Les gens du fleuve disent qu'en faire un repas éclaircit l'esprit. C'est de remonter le courant que lui vient sa sagesse.
+Plus d'âge, de taille et de sagesse que dans le reste de la famille, ce qui ne lui a pas évité votre hameçon.
+Un rude adversaire venu des mers chaudes du sud, et un classique de toutes les ardoises de taverne, de Baie-du-Butin à Gadgetzan.
+Son front brille comme du vrai mithril. Plus d'un mineur a voulu passer la bête à la fonderie.
+Ses écailles, bouillies, donnent une huile qui rend la peau dure comme le roc. Sa préférence va à la nuit.
+Un poli de cuirasse de parade, et presque le même poids.
+Il ne s'approche des côtes qu'aux mois froids, et les cuisiniers qui le connaissent l'attendent toute l'année.
+Sa saison, ce sont les jours longs. Sur la côte, on règle le calendrier sur son passage.
+À tenir par le milieu, et une seule fois.
+Un poisson de rivière des contrées sauvages, aux ouïes aussi rouges que les peintures de guerre d'un troll.
+Il se nourrit une fois la nuit tombée. En soupe, il calme les nerfs des lanceurs de sorts.
+Il se nourrit de jour, tout le contraire du lutjan nocturne ou presque, et partage pourtant les mêmes eaux.
+Pas un poisson à proprement parler. Il n'est pas d'accord pour se faire prendre et vous le fera savoir.
+Pâle comme la glace des rivières, venu des lacs froids et limpides du nord.
+Il vous faudra les deux mains, et peut-être un ami.
+%.1f lb
+Nouveau dans votre journal de pêche : %s, %s.
+Nouveau dans votre journal de pêche : %s.
+Votre plus gros %s à ce jour : %s (avant : %s).
+Appât %s
+Pas d'appât
+Pris %d
+Échappés %d
+Un curieux : +%d%%
+Gardez votre leurre près du poisson
+Prochaine prise +%d%%
+Maintenez %s : le leurre court le long de la ligne
+%d d'affilée
+Un jeu pendant que le bouchon est à l'eau
+se joue sur la barre d’incantation tant que votre ligne est à l’eau : maintenez une gâchette et votre leurre court le long de la ligne, relâchez et il dérive en arrière ; gardez-le près de l’ombre du poisson. Mieux vous jouez, plus le poids inventé de votre prochaine prise est lourd. Aucun bouton n’est pris, ni votre lancer ni votre prise ne sont touchés
+%d pris, %d espèces, %d échappés
+Le plus lourd : %s, %s
+Poissons
+Eaux
+Rien de pris pour l'instant. Emportez une canne au bord de l'eau.
+Pris : %d
+Le plus lourd : %s, à %s
+Première prise : %s
+Pris ici : %d
+Espèces trouvées ici : %d
+ouvrir ou fermer votre journal de pêche: chaque espèce que vous avez prise, la plus lourde de chacune, et les eaux où vous avez pêché
+Vol
+atterrissage anticipé
+atterrissage au prochain point de vol
+destination inconnue
+estimé d'après la distance
+premier vol sur cette route : apprentissage de sa durée
+atterrissage
+%s : environ %s, estimé d'après la distance
+%s : environ %s
+%s : premier vol sur ce trajet, durée inconnue
+En vol, destination inconnue
+%s : durée du vol apprise, %s
+Atterrissage anticipé : %s, environ %s
+Atterrissage anticipé au prochain point de vol
+vif et froid, la neige sous les pieds et le souffle suspendu dans l'air
+un froid mordant, avec un vent des sommets qui trouve chaque faille de votre armure
+chaud et humide, un air si épais qu'on pourrait le boire
+une chaleur moite sous la canopée, et les insectes bruyants
+chaud et sec, avec de la poussière dans le vent
+un soleil brûlant et une terre craquelée ; buvez quand vous le pouvez
+fumée et cendres sur un vent chaud
+un air brûlé, et des escarbilles qui dérivent
+gris et froid, une brume humide qui colle
+un froid dans l'air et presque pas de lumière
+doux et beau, avec une brise légère
+un temps agréable, idéal pour voyager
+frais et vert, les feuilles qui murmurent
+une lumière douce entre les arbres, et l'air frais
+lourd et humide, le sol mou sous les pieds
+un air chaud et mouillé, et l'odeur du marais
+%s à %s : %s
+%d trajets aériens connus.
+Vols : votre monture le long de la barre
+un griffon, un coursier du vent ou une chauve-souris (celui que le maître de vol vous a donné) plane le long de la barre de vol vers votre point d’arrivée
+Vols : le temps à l'arrivée
+à l'atterrissage, la discussion dit comment est l'air là où vous arrivez, tel que l'endroit est d'habitude (chaud et humide à Strangleronce, neige sous les pieds à Dun Morogh), et le moment de la journée
+lister les trajets aériens dont la durée est connue
+À terre ! +%d
+Heurté : la série s'arrête
+%s battre des ailes  ·  évitez les cimes des arbres et les zeppelins
+%s prenez les cavaliers au filet pour de l'or de vol  ·  %s haute altitude
+%d d'or de vol
+%s battre des ailes
+%s filet
+%s haute altitude
+%s : retour au jeu (%d d'or de vol)
+%s : un jeu en chemin
+Le jeu de vol est désactivé : /cchud flightgame on
+Le jeu de vol se joue pendant un vol.
+Pas en combat.
+Jeu de vol : jouer / haute altitude
+pendant un vol : lancer le jeu de vol, ou le mettre en haute altitude et l'en ramener
+Vols cinématiques : la caméra tourne autour de vous
+pendant le film, la caméra tourne lentement autour de vous et de votre monture, un tour complet en une minute et demie environ, et revient derrière vous avant l'atterrissage. Désactivé : un plan fixe
+Hors ligne
+Mort
+Désactivé
+En spécialisation soins
+Toujours
+Trop loin
+Groupe et raid du soigneur
+en groupe: votre groupe à côté de votre personnage, chacun avec le bouton qui le cible; en raid: des cadres plus fins. Chacun ne montre que les soins dont il a besoin, un effet néfaste que vous pouvez dissiper et s'il est à portée
+%d%% de chances de vendre
+Ça part à coup sûr (%d%%)
+Ça se vend tout seul (%d%%)
+Je pense que ça se vendra (%d%%)
+Devrait trouver preneur (%d%%)
+Une chance sur deux (%d%%)
+Ça peut aller dans les deux sens (%d%%)
+Un peu un pari (%d%%)
+Pourrait traîner un moment (%d%%)
+Je ne compterais pas dessus (%d%%)
+Mal parti, l'ami (%d%%)
++%s de plus qu'un marchand
+pas encore de prix connu
+un marchand paie autant
+Le Courtier
+Marché
+chaque pièce comptée, l'ami
+Rien dans vos sacs ne peut être vendu ici.
+Aucun prix ces 7 derniers jours.
+Un jour de prix pour l'instant : une bougie s'ajoute chaque jour où vous passez à l'hôtel des ventes.
+7 jours, une bougie par jour : vert clôturé plus haut, rouge plus bas
+30 jours, le plus bas du jour : vert en hausse, rouge en baisse
+Pas encore d'historique des prix : lisez l'hôtel des ventes quelques jours.
+Un seul jour de prix pour l'instant: la ligne s'allonge chaque jour où vous passez à l'hôtel des ventes.
+Je demande %s l'unité, %s pour les %d que tu lâches ; %d restent avec toi
+Demande %s pièce, %s pour les %d
+Plus bas
+lu %s
+Habituel
+7 jours : de %s à %s
+En vente : %d enchères, %d objets
+%s pièce, %s pour les %d
+Vous avez mis %d en vente ici, %d enchères vendues
+Aucun prix connu : lisez d'abord l'hôtel des ventes.
+Rien dans vos sacs à vendre ici.
+Rien ne se vend mieux ici que chez un marchand aujourd'hui ; %d peut-être, avec de la patience.
+Le meilleur d'abord : %d se vendent mieux ici que chez un marchand, %d de plus avec de la patience.
+Sacs vides, l'ami. Apporte-moi de quoi vendre.
+Rien ici ne bat un marchand aujourd'hui. %d peut-être, avec un peu de patience.
+Pas de profit sûr dans ces sacs, l'ami. %d pourraient payer si tu attends.
+Le meilleur en haut : %d ici battent tout marchand, %d de plus pour les patients.
+%d rapportent plus ici qu'au marchand, le meilleur d'abord. %d de plus si tu attends.
+Le haut de la pile paie le mieux : %d ventes sûres, %d de plus si tu peux attendre.
+Pas encore de prix : %s lit l'hôtel des ventes.
+Prix lus à l'instant : %d.
+%d prix, lus %s.
+%d prix, lus %s. %s les relit.
+Pas encore lu le tableau. %s et je te ramène tous les prix.
+Pas encore de prix, l'ami. %s lit tout le tableau.
+Prix tout frais du tableau, l'ami : %d.
+Je viens de lire le tableau : %d prix, encore chauds.
+%d prix, lus %s. Ça ira, l'ami.
+Dernier coup d'œil au tableau : %s, %d prix.
+Prix relevés %s, rassis comme du vieux pain. %s relit le tableau.
+%d prix, mais lus %s. %s et je regarde à nouveau.
+Ce que vous gardez est aussi affiché. %s le masque.
+Mis de côté : %d, pour vos métiers, votre équipement et vos marques. %s les affiche.
+Ce que tu gardes est aussi sur la liste. %s le range.
+J'affiche aussi ce que tu gardes. %s le cache à nouveau.
+%d mis de côté : matériaux de métier, équipement à porter, ce que tu as marqué. %s les montre.
+%d gardés pour tes métiers, à porter ou marqués par toi. %s si tu les veux.
+pièce
+aucune donnée
+Vente rapide
+Patient
+Lire tous les prix
+Masquer le gardé
+Montrer le gardé
+Ligne
+Bougies
+Poster
+%d sur %d
+Poster %d sur %d à %s l'unité
+Poster %d pour %s
+Mettre les %d en vente pour %s
+Ce client ne permet pas de poster à l'hôtel des ventes depuis ici.
+%d posté pour %s.
+Marché à l'hôtel des ventes : ouvrir / fermer
+Salut du commissaire-priseur au Marché
+un commissaire-priseur gobelin dit une courte phrase, tirée des sons du jeu, à l'ouverture du Marché ; désactivé : il s'ouvre en silence
+Marché : montrer ce que vous gardez
+le Marché liste aussi ce que vous gardez : ce dont vos métiers apprennent encore ou qu'ils transforment en quelque chose de plus cher, et ce que vous avez marqué à garder ; désactivé : seulement ce que vous vendriez
+Marché : graphique des prix en bougies
+le graphique des prix du Marché est une bougie par jour sur les 7 derniers jours (où le prix a ouvert, son plus haut et son plus bas, et où il a clôturé : vert s'il a clôturé plus haut, rouge plus bas) ; désactivé : une ligne du prix le plus bas de chaque jour sur 30 jours
+ouvrir ou fermer le Marché (un onglet de l'hôtel des ventes)
+quel hôtel des ventes a ce client (pour le dépannage)
+Ouvrez la fenêtre d'un métier et je jetterai un œil à vos recettes.
+C'est le plafond, %d. Un maître a le rang suivant pour vous.
+Plus rien à apprendre à %d. Allez voir un maître pour le rang suivant.
+Vos recettes ne vous suffisent plus. Allez voir un maître : %s vous attend à %d.
+Encore %d jusqu'à %d, et ce que vous savez ne vous y mènera pas. Un maître a %s pour vous à %d.
+Vos recettes ne vous suffisent plus. Allez voir un maître : %s vous attend.
+Vos recettes cessent de vous apprendre quoi que ce soit à %d de %d. Demandez %s à un maître.
+Vos recettes s'épuisent à %d de %d. Un maître aura quelque chose de nouveau.
+Ce que vous savez ne vous portera pas sur les %d derniers. Il est temps de voir un maître.
+%s ne vous apprendra plus grand-chose, mais c'est ce que vous avez de mieux. Encore %d jusqu'à %d.
+Ça avance lentement à partir d'ici : %s donne un point de temps en temps. Encore %d.
+Il vous faudra d'abord %s, %s. Les guides commencent cette étape avec.
+Apprenez %s, %s, et on commence : encore %d jusqu'à %d.
+Encore %d jusqu'à %d. Les guides vous envoient chercher %s jusqu'à %d.
+Ici, c'est la récolte qui vous apprend : %s jusqu'à %d.
+Encore %d jusqu'à %d. Commencez par %s, ou %s si vous préférez : %s.
+D'abord %s, comme le disent les guides. %s fait aussi l'affaire : %s.
+Encore %d jusqu'à %d. Commencez par %s.
+%s est votre meilleur maître à présent. %d points jusqu'à %d.
+Les mains sûres. D'abord %s, et encore %d.
+auprès d'un maître
+auprès d'un marchand
+en butin
+par une quête
+composants moins chers
+composants vendus par un marchand
+composants que vous récoltez vous-même
+se vend bien
+quelque chose que vous utiliserez
+moins de fabrications
+une recette à trouver ou acheter
+d'autres composants
+le premier choix des guides
+Ouvrez la fenêtre d'un métier pour un plan de progression.
+Au plafond, %d. Un maître a le rang suivant.
+Encore %d jusqu'à %d ; vos recettes s'arrêtent avant. Un maître a %s à %d.
+Encore %d jusqu'à %d ; vos recettes s'arrêtent avant. Un maître a %s.
+Vos recettes s'arrêtent à %d de %d. Un maître en a d'autres.
+Encore %d jusqu'à %d. Le mieux maintenant : %s, vert (un point de temps en temps).
+Encore %d jusqu'à %d. Apprenez d'abord %s, %s.
+Encore %d jusqu'à %d. Récoltez %s jusqu'à %d.
+Encore %d jusqu'à %d. D'abord : %s, ou %s (%s).
+Encore %d jusqu'à %d. D'abord : %s.
+À récolter ou acheter
+%d fabrications : %s
+Apprenez-la %s, à partir de %d.
+Apprenez-la %s.
+%s : %d dans vos sacs, %d à la banque, %d par fabrication
+Les guides montent cette étape en récoltant %s.
+%s : vous en avez %d, le plan en utilise %d
+pour %s
+Le Mentor : ce que votre banque permet de fabriquer
+Ce que votre banque permet de fabriquer
+Rien de plus à fabriquer avec ce qu'il y a dans votre banque.
+%d à fabriquer en comptant votre banque, dont %d seulement grâce à elle.
+Le Mentor : %s %d > %d
+Le Mentor
+Plan de progression
+ou
+Récolter %s
+à apprendre
+Masquer
+Le plan
+Farmer ceci
+Tout farmer
+Avec la banque
+Utiliser le plan
+deux fois pour masquer
+Rien à essayer ici.
+%d ajouté(s) à la liste à farmer.
+Rien ne manque : vous avez ce qu'il faut.
+Ouvrez la fenêtre d'un métier pour faire un plan.
+Le Mentor (plan de progression) : afficher / masquer
+affiche le plan de progression de la dernière fenêtre de métier ouverte, avec les boutons de la manette dessus
+À gauche des quêtes
+À droite des quêtes
+Sous les quêtes
+La liste à farmer est pleine.
+Liste à farmer : %s, %d voulu(s).
+À farmer
+%d de plus
+Rien à farmer pour l'instant.
+Une pile de plus
+Retirer
+Vider
+Terminé
+Tout retirer de la liste à farmer ?
+Liste à farmer : choisir / terminé
+Liste à farmer : ajouter l'objet pointé
+Ce n'est pas sur la liste à farmer.
+La liste à farmer est vide.
+Liste à farmer : où elle se place
+la liste à farmer à gauche de la liste de quêtes, à sa droite ou sous ses quêtes
+la liste à farmer à côté de la liste de quêtes : choisir avec la manette ; add <objet> [combien], remove <objet>, clear, ou left / right / bottom pour sa place
+Pourcentage de menace
+votre part de la menace en chiffre à côté de l'icône de menace, sur le cadre de la cible et les barres de nom
+Nombre de santé
+la santé restante, abrégée (12.3k), sur la barre (pas sur les barres de nom compactes : le pourcentage y suffit)
+Vos affaiblissements
+vos affaiblissements sur l'unité, au-dessus de son nom, avec leur durée
+Affaiblissements de tous
+les affaiblissements que le jeu signale pour les barres de nom de tous, pas seulement les vôtres
+Bonus de l'ennemi
+les améliorations d'un ennemi à côté de ses affaiblissements : celles qui comptent (importantes, enragé, ou que vous pouvez dissiper ou voler), ou toutes si Seulement les effets qui comptent est désactivé
+Icône de contrôle des foules
+une grande icône avec sa durée quand l'unité est étourdie, immobilisée, effrayée...
+Lueur d'aggro
+une icône de bouclier et une lueur derrière le nom : rouge tant qu'il vous attaque, rouge et jaune quand vous êtes sur le point de l'attirer, jaune et bleu quand vous le perdez, bleu quand il n'est pas sur vous
+Marqueur de quête
+un repère doré sur les unités dont vos quêtes ont encore besoin
+Animations des barres de nom
+les barres apparaissent en fondu, la santé basse respire, le contrôle des foules scintille
+Petite
+Normale
+Grande
+Nom complet
+Nom court
+Sans nom
+Complet
+Minimal mini
+Taille des barres d'info
+la taille des barres sur les barres d'info : petites et fines, normales ou grandes (plus larges et plus hautes)
+Noms sur les barres d'info
+le nom sur une barre d'info avec barre de vie : en entier, raccourci ou omis (le cadre de la cible le donne en entier ; le niveau et l'icône de classe restent). Une barre d'info sans barre, celle d'un PNJ amical, garde toujours son nom
+Style des barres d'info
+les interrupteurs des barres d'info en une fois. Complet : tout. Minimal : pas de barre de ressource, de guilde ni de titre, noms courts. Minimal mini : petites barres avec la vie, vos affaiblissements et les améliorations qui comptent, niveau et classe, sans nom (le cadre de la cible l'a). La menace, les contrôles et les incantations voyantes restent toujours
+Titres des joueurs
+affiche le titre d'un joueur avec son nom
+Guildes et métiers des PNJ
+une ligne sous le nom : la guilde du joueur, ou ce que fait le PNJ
+Barres des amis en combat
+les plaques de nom amicales affichent santé, ressource et incantations tant que l'unité est en combat
+Barres d'info amicales du jeu
+laisser les barres amicales (votre groupe, les autres joueurs, les PNJ amicaux) à l'apparence du jeu ; les nôtres seulement sur les ennemis
+Barres de ressource
+une fine barre de mana, de rage ou d'énergie sous la barre de santé
+Cible de l'incantation
+qui est visé par une incantation, à côté du nom du sort
+Pourcentage de santé
+le pourcentage de santé sur la barre
+Nom sur la barre de votre cible
+désactivé : la barre de votre cible n'affiche ni nom ni niveau (le cadre de la cible les montre)
+Niveaux sur les barres d'info
+le niveau devant le nom d'un ennemi, coloré selon la difficulté
+Barres de nom compactes
+barres de nom environ moitié moins larges
+Incantations ennemies marquées
+l'incantation d'un ennemi clignote, gonfle et pulse de plus en plus vite jusqu'à son terme, pour pouvoir être interrompue à temps
+Icônes de classe sur les barres de nom
+l'icône de classe d'un joueur devant son nom, ami ou ennemi
+Ce que font les PNJ, en icônes
+une icône au-dessus des PNJ amicaux qui proposent quelque chose : un sac pour les marchands, une enclume pour les forgerons qui réparent, un livre pour les maîtres... (les icônes du jeu ; elles restent visibles même quand la barre attend d'être pointée)
+PNJ amicaux seulement quand pointés
+les barres des PNJ amicaux (marchands, donneurs de quêtes, habitants) ne s'affichent que lorsque vous les pointez, comme leur infobulle
+Noms sur les objets avec lesquels vous pouvez interagir
+un nom au-dessus des minerais, coffres, plaques et autres tant que vous leur faites face (désactivé : ils restent sans nom, l'invite du jeu dit déjà ce qu'ils sont)
+Mini-plaques
+les serviteurs, bestioles et ennemis gris qui ne donnent pas d'expérience ont une petite barre: une barre fine avec vos affaiblissements dessus et sans nom (une bestiole, sans barre, garde son nom; l'option du jeu décide s'ils ont une barre)
+Barres de nom du groupe en donjon: noms seuls
+dans un donjon ou un raid, le jeu dessine lui-même les barres de nom des joueurs alliés et les addons ne peuvent pas les modifier: les options propres au jeu y sont réglées pour les afficher comme des noms à la couleur de la classe, sans barres, comme les nôtres, et les barres du jeu reviennent pendant un combat (si les barres des alliés en combat sont activées); tout est remis en place à la sortie
+Barres de nom du groupe en donjon: masquées
+dans un donjon ou un raid, désactiver complètement les barres de nom du jeu pour les joueurs alliés (et les remettre comme vous les aviez à la sortie)
+affiche ce que le jeu donne pour le nom de votre cible (pour le dépannage)
+lister les barres d'info à l'écran et si elles portent notre apparence (pour le dépannage)
+Bon, voyons.
+Och, quel fatras.
+Voyons, voyons...
+Elune, donne-moi de la patience.
+Par les naaru, quel fouillis.
+Fichu sac.
+Sac bien rangé, sac léger.
+Bah. Trop de bric-à-brac.
+Du poids mort, tout ça.
+Patience. La Terre-Mère pourvoit.
+Hé, qu'est-ce qu'on a là, mon ?
+Quel désordre. Indigne de moi.
+Le temps, c'est de l'argent. Comptons.
+Ouais, ça fera l'affaire.
+Elune soit remerciée.
+La Lumière pourvoit.
+Hrm. Ça ira.
+Hm. Assez pour se battre.
+Je voyage léger. Bien.
+Acceptable. De justesse.
+Plus une place de libre. La camelote rapporterait %s : la vendre fait de la place.
+Plus une place de libre. Ce dont je n'ai pas besoin en route peut attendre à la banque.
+Camelote : %d, %s ici. X vend celle que j'ai choisie ; Vente futée prend tout.
+%d d'entre eux vont à la banque : elle en garde déjà, ou je les ai marqués. Déposer les range.
+Plus que %d places. La camelote rapporterait %s chez n'importe quel marchand.
+Plus que %d places. Il est temps de vendre ou de déposer quelques affaires.
+Nouveau depuis mon dernier coup d'œil : %d. Le point doré marque chacun.
+Bon à vendre : %d. Le filtre Vendre les rassemble, et chaque info-bulle dit où ça rapporte le plus.
+Camelote : %d, %s. Le prochain marchand peut la prendre.
+Juste l'essentiel. Rien qui vaille la peine d'être vendu.
+Tout est en ordre, et %d places libres.
+Votre équipement est réparé : %s.
+Je peux réparer votre équipement pour %s ; une pièce cassée ne donne ni armure ni caractéristiques.
+Vos sacs sont pleins. Je prends %d objets pour %s : Vente futée, et vous avez de nouveau de la place.
+Je vous donne %s pour %d objets : la camelote, et ce que l'hôtel des ventes ne paierait pas mieux. Vente futée, et c'est fait.
+Gardez les %d que l'hôtel des ventes réclame : il paie %s de plus que moi.
+Vos sacs sont pleins. Vendez-moi quelque chose avant d'acheter.
+Rien dans vos sacs que je paierais bien. Jetez un œil à mes marchandises.
+%d de vos objets ont leur place ici : j'en garde déjà, ou vous les avez marqués. Déposer les range.
+Je garde davantage de %d objets que vous portez. Retirer remplit vos sacs avant le départ.
+Vos sacs sont presque pleins. Laissez-moi ce dont vous n'aurez pas besoin en route.
+Tout est en sécurité chez moi, et vos sacs ont %d places libres.
+Rien pour vous aujourd'hui. J'ai vérifié deux fois.
+Lettres pour vous : %d, rien de joint. Lisez-les quand vous voulez.
+Lettres pour vous : %d. Dedans : %s.
+Tout prendre les vide d'un coup.
+Contre remboursement : %d. Celles-là, vous les ouvrez et payez vous-même.
+Vos sacs sont pleins : les objets attendent dans leurs lettres.
+Où allons-nous ? Montrez un endroit et je vous dirai combien de temps dure le trajet.
+%s : environ %s d'après la carte. Vous n'avez pas encore fait ce trajet.
+%s : environ %s, d'après votre dernier vol là-bas.
+%s : je ne peux pas encore dire combien de temps. Faites-le une fois et je saurai.
+%d se sont échappés. Cette eau demande plus de compétence que la mienne : un appât aide, une meilleure canne aussi.
+Pas d'appât sur l'hameçon. Il ajoute à ma compétence, donc moins s'échappent.
+L'appât est presque épuisé. Un autre sur l'hameçon garde ma compétence.
+Poissons d'ici que je n'ai pas encore pris : %d. On continue de lancer.
+J'ai pris tous les poissons de cette eau. Ailleurs, alors.
+Rien de pris encore. Le premier poisson de chaque eau va ici.
+Espèces prises : %d. Chaque eau en cache quelques autres : le panneau de pêche montre un ? pour chacune que je n'y ai pas prise.
+Reposé près du feu : les %d prochains points d'expérience des victoires comptent double.
+Aucun repos en réserve. Une nuit à l'auberge ou en ville, et les victoires donnent double expérience pendant un moment.
+%d absorbés
+Liste à droite
+Un au centre
+%d soins critiques
+%d critiques
+Jugement
+Grands moments : où
+un bloc juste au-dessus des annonces de temps de recharge à droite de votre personnage, le plus récent au plus près et les précédents montant au-dessus en s'effaçant, ou un seul à la fois au centre
+montre l'aspect et la sensation d'un grand moment
+collectée
+collectée via un autre objet
+pas encore collectée
+Apparence
+Choisissez un ensemble pour mettre ses pièces sur votre tenue. %s la garde ; rien n'est payé avant.
+Examen de votre collection...
+Votre tenue est revenue telle qu'elle était.
+%s : %d pièces sur %d mises en place.
+%d n'ont pas pu aller sur cette tenue.
+Un ensemble dont vous avez des pièces
+%d ensembles dont vous avez des pièces
+vous ne pouvez pas le porter
+manquant
+Les %d pièces
+%d pièces sur %d
+Manque : %s
+Pas encore d'ensemble. Les objets qui partagent un nom, comme Heaume en fer vert et Gantelets en fer vert, apparaissent ici dès que vous en avez un.
+Annuler

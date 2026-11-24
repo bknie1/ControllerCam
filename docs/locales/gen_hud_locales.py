@@ -94,7 +94,9 @@ if translated then
 end
 
 ns.L = L
-ns.localeData = { english = ENGLISH, translations = TRANSLATIONS }   -- used by the automated tests''')
+-- Every language's texts, for the automated tests only (HUD_TEST_DIR is theirs): kept in the game, the nine
+-- languages not in use would hold on to about 1.5 MB for nothing
+if HUD_TEST_DIR then ns.localeData = { english = ENGLISH, translations = TRANSLATIONS } end''')
     open(OUT, "w", encoding="utf-8", newline="\n").write("\n".join(out) + "\n")
     print("english %d, locales %d, problems 0: wrote Locales.lua" % (len(english), len(tables)))
     return 0

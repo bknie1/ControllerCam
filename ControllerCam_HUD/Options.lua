@@ -419,7 +419,10 @@ local function Row(content, def)
             show(v)
         end
     end
-    if def.tip then Tooltip(row.widget, L[def.tip]) end
+    local tip = def.tip and L[def.tip]
+    local free = ns.ModuleList and ns.ModuleList.FreeNote(def)         -- a module's switch: when its memory is freed
+    if free then tip = (tip and (tip .. "\n\n") or "") .. free end
+    if tip then Tooltip(row.widget, tip) end
     ns.optionRows[#ns.optionRows + 1] = row
     return row
 end
@@ -431,7 +434,7 @@ local function Scroll(page, below)
     local content = CreateFrame("Frame", nil, scroll)
     content:SetSize(560, 100)
     scroll:SetScrollChild(content)
-    page.content, page.rows = content, {}
+    page.content, page.rows, page.all = content, {}, {}
     return content
 end
 
@@ -442,6 +445,7 @@ function ns.LayoutOptions()
         local y = -4
         for _, row in ipairs(page.rows) do
             local show = advanced or row.basic
+            if row.when and not row.when() then show = false end
             if row.members then                           -- a heading: shown with what is under it
                 show = false
                 for _, m in ipairs(row.members) do
@@ -581,45 +585,6 @@ function ns.BuildOptions()
         pages[name] = page
     end
 
-    -- every setting, in registration order, on its page
-    local advancedRow
-    for _, def in ipairs(ns.settings) do
-        if def.label then
-            local page = pages[PageOf(def)] or main
-            if def.key == "advancedOptions" then page = main end
-            local row = Row(page.content, def)
-            if def.key == "advancedOptions" then
-                row.basic = true
-                advancedRow = row
-            else
-                page.rows[#page.rows + 1] = row
-            end
-        end
-    end
-    -- each page in the order above, under its headings (anything not listed goes last)
-    for _, page in pairs(pages) do
-        local placed, rest = {}, {}
-        for _, row in ipairs(page.rows) do
-            local place = PlaceOf(row.def)
-            if place then placed[#placed + 1] = { row = row, place = place } else rest[#rest + 1] = row end
-        end
-        table.sort(placed, function(a, b) return a.place.rank < b.place.rank end)
-        local rows, group, head = {}, nil, nil
-        for _, p in ipairs(placed) do
-            if p.place.group ~= group then
-                group, head = p.place.group, nil
-                if group.head then
-                    head = { widget = Text(page.content, "GameFontNormal", L[group.head]), height = 24, members = {} }
-                    rows[#rows + 1] = head
-                end
-            end
-            if head then head.members[#head.members + 1] = p.row end
-            rows[#rows + 1] = p.row
-        end
-        for _, row in ipairs(rest) do rows[#rows + 1] = row end
-        page.rows = rows
-    end
-
     -- the modules: one switch each, at the top of the main page, so you take only the parts you want
     local list = {}
     local head = Text(main.content, "GameFontNormal", L["Modules"])
@@ -645,10 +610,78 @@ function ns.BuildOptions()
             end
         end
     end
-    local rest = Text(main.content, "GameFontNormal", L["General"])
-    list[#list + 1] = { widget = rest, height = 26, basic = true }
-    for i = #list, 1, -1 do table.insert(main.rows, 1, list[i]) end
-    if advancedRow then table.insert(main.rows, 1, advancedRow) end
+    list[#list + 1] = { widget = Text(main.content, "GameFontNormal", L["General"]), height = 26, basic = true }
+    main.top = list
+    ns.OptionsAddNew()
+end
+
+-- Every setting that has no row yet gets one on its page (all of them the first time; a module's when it is
+-- loaded during play), then each page is put in the order of LAYOUT again, under its headings
+function ns.OptionsAddNew()
+    if not built then return end
+    for _, def in ipairs(ns.settings) do
+        if def.label and not def.placedRow then
+            def.placedRow = true
+            local page = pages[PageOf(def)] or main
+            if def.key == "advancedOptions" then page = main end
+            local row = Row(page.content, def)
+            if def.key == "advancedOptions" then
+                row.basic = true
+                main.advancedRow = row
+            else
+                page.all[#page.all + 1] = row
+            end
+        end
+    end
+    -- a module that is not loaded: a line under its switch on its page says where its settings are
+    for _, page in pairs(pages) do
+        for _, row in ipairs(page.all) do
+            local m = row.def.module
+            if m and not row.moduleNote and m.switches[1] == row.def.key then
+                local fs = Text(page.content, "GameFontDisableSmall", L["Its settings show here when it is on."])
+                row.moduleNote = { widget = fs, height = 18, basic = true,
+                                   when = function() return m.state ~= "loaded" end }
+            end
+        end
+    end
+    -- each page in the order above, under its headings (anything not listed goes last)
+    for _, page in pairs(pages) do
+        page.heads = page.heads or {}
+        local placed, rest = {}, {}
+        for _, row in ipairs(page.all) do
+            local place = PlaceOf(row.def)
+            if place then placed[#placed + 1] = { row = row, place = place } else rest[#rest + 1] = row end
+        end
+        table.sort(placed, function(a, b) return a.place.rank < b.place.rank end)
+        local rows, group, head = {}, nil, nil
+        local function put(row)
+            rows[#rows + 1] = row
+            if row.moduleNote then rows[#rows + 1] = row.moduleNote end
+        end
+        for _, p in ipairs(placed) do
+            if p.place.group ~= group then
+                group, head = p.place.group, nil
+                if group.head then
+                    head = page.heads[group]
+                    if not head then
+                        head = { widget = Text(page.content, "GameFontNormal", L[group.head]), height = 24 }
+                        page.heads[group] = head
+                    end
+                    head.members = {}
+                    rows[#rows + 1] = head
+                end
+            end
+            if head then head.members[#head.members + 1] = p.row end
+            put(p.row)
+        end
+        for _, row in ipairs(rest) do put(row) end
+        page.rows = rows
+    end
+    -- the main page: Advanced, the modules and quick switches, then its own settings
+    local top = {}
+    if main.advancedRow then top[1] = main.advancedRow end
+    for _, row in ipairs(main.top or {}) do top[#top + 1] = row end
+    for i = #top, 1, -1 do table.insert(main.rows, 1, top[i]) end
     ns.LayoutOptions()
     RefreshAll()
 end

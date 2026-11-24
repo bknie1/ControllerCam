@@ -77,7 +77,7 @@ of the game's own Gamepad UI and can be added or removed without leaving a trace
 | Setup: after the first-run choice the screen is offered too, a layout named ControllerCam added to the game's Edit Mode (`/cchud setup`) | built, mock-tested only: adding a layout has not been seen in the game |
 | The whole setup as one line: HUD settings, camera setup and the game's Edit Mode layout (`/cchud export`, `/cchud import`) | built, mock-tested only: adding a layout to the game's own has not been seen in the game |
 
-## Load-on-demand modules (plan, waiting for the go-ahead)
+## Load-on-demand modules (built on the hud-modules branch, not yet seen in the game)
 
 The goal: a part you switch off costs nothing. Today a switch in the Modules list only stops a part from
 acting. Its code is still loaded and kept in memory, and some of it still runs every frame.
@@ -106,135 +106,135 @@ acting. Its code is still loaded and kept in memory, and some of it still runs e
 - **Events.** Parts register their events when switched on and drop them when off (for example
   `Fishing.lua:551`, `Bags.lua:2270`), so a part that is off costs no events now. This won't change.
 
-### The split
+### The split (as built, branch `hud-modules`)
 
-One core addon that is always loaded, plus thirteen load-on-demand addons (`## LoadOnDemand: 1`). Each one is
-named after the switch, or switches, that load it. A module's `## Dependencies` are loaded first, by the game
-itself, when the module is loaded.
+One core addon that is always loaded, plus twelve load-on-demand addons (`## LoadOnDemand: 1`). A module is
+loaded while any one of its switches is on. Its `## Dependencies` are loaded first, by the game itself.
 
-| Addon | Files | Memory | Loaded when on | `## Dependencies` |
+| Addon | Files | Memory | Loaded while on | `## Dependencies` |
 | --- | --- | --- | --- | --- |
 | `ControllerCam_HUD_Nameplates` | PlateStates, Nameplates | 211 KB | `nameplates` | ControllerCam_HUD |
 | `ControllerCam_HUD_Group` (healer, party and raid frames) | Group | 82 KB | `group` | ControllerCam_HUD |
-| `ControllerCam_HUD_Numbers` | Numbers, Moments | 237 KB | `numbers`, `bigMoments` | ControllerCam_HUD |
-| `ControllerCam_HUD_Items` (prices, advice, recipes, vendor, mail, item details) | Vendor, Market, Professions, Inventory, ItemInfo, Mail | 470 KB | `vendor`, `invTotals`, `mailTakeAll`, or any module that needs it | ControllerCam_HUD |
-| `ControllerCam_HUD_Bags` | Bags | 309 KB | `bagWindow` | ControllerCam_HUD, ControllerCam_HUD_Items |
-| `ControllerCam_HUD_Market` (auction house) | AuctionPanel | 122 KB | `ahPanel` | ControllerCam_HUD, ControllerCam_HUD_Items |
-| `ControllerCam_HUD_Mentor` (levelling plan, guides, farm list) | LevelGuides, Levelling, Farm | 327 KB | `skillPlan`, `farmList` | ControllerCam_HUD, ControllerCam_HUD_Items |
-| `ControllerCam_HUD_Transmog` | Transmog | 85 KB | `transmogSets` | ControllerCam_HUD |
+| `ControllerCam_HUD_Numbers` | Numbers, Moments | 237 KB | `numbers`, `readyAlerts`, `soonCallouts`, `soonBuffs`, `bigMoments`, `abilityRumble` | ControllerCam_HUD |
+| `ControllerCam_HUD_Bags` | Bags | 309 KB | `bagWindow` | ControllerCam_HUD |
+| `ControllerCam_HUD_Market` (auction house) | AuctionPanel | 122 KB | `ahPanel` | ControllerCam_HUD |
+| `ControllerCam_HUD_Mentor` (levelling plan, guides, bank counts, farm list) | LevelGuides, Levelling, Farm | 327 KB | `skillPlan`, `skillBank`, `farmList` | ControllerCam_HUD |
+| `ControllerCam_HUD_Transmog` | Transmog | 85 KB | `transmogSets`, `tipAppearance` | ControllerCam_HUD |
 | `ControllerCam_HUD_Compass` | Compass | 84 KB | `compass` | ControllerCam_HUD |
-| `ControllerCam_HUD_Fishing` | Fishing, FishLore, FishLog, FishPanel, FishGame, FishJournal | 193 KB | `fishMode` | ControllerCam_HUD |
+| `ControllerCam_HUD_Fishing` | Fishing, FishLore, FishLog, FishPanel, FishGame, FishJournal | 193 KB | `fishMode`, `fishJournal`, `fishPanel` | ControllerCam_HUD |
 | `ControllerCam_HUD_Narrative` | Narrative | 63 KB | `narrative` | ControllerCam_HUD |
 | `ControllerCam_HUD_Campfire` | Campfire | 105 KB | `campScene` | ControllerCam_HUD |
-| `ControllerCam_HUD_Flights` (flight bar, flight game, flight film) | Flights, FlightGame, Ride | 224 KB | `flights` | ControllerCam_HUD, ControllerCam_HUD_Campfire (the flight film uses the camp fire's) |
+| `ControllerCam_HUD_Flights` (flight bar, flight game, flight film) | Flights, FlightGame, Ride | 224 KB | `flights`, `flightScene`, `flightGame` | ControllerCam_HUD, ControllerCam_HUD_Campfire (the flight film uses the camp fire's) |
+
+**Changes from the plan:**
+- **No Items module.** Vendor, Market, Professions, Inventory, ItemInfo and Mail stay in core. Their tooltip
+  lines (prices, advice, counts, stat values) are on by default and come through Inventory's tooltip hook, and
+  Bags, Market, Mentor, Campfire, Fishing and Narrative all call into them. As a module it would be loaded for
+  nearly everyone, so the extra layer would cost more than it saved.
+- **Some modules have several switches.** Numbers, Mentor, Transmog, Fishing and Flights each hold parts with
+  switches of their own (the cooldown callouts are in Numbers.lua, the fish journal records catches without
+  one-button fishing, and so on). Each of those switches loads the module, so nothing that worked before
+  stops working. On these switches the tip names the other switches that keep the module loaded.
 
 **What stays in core (`ControllerCam_HUD`), and why:**
 - **The base everything else uses:** Locales, Core (settings, saved data, `ns.Protect`, the secret-value
-  helpers, `ns.Dialog`, `ns.PadKeys`) and Theme.
+  helpers, `ns.Dialog`, `ns.PadKeys`, `ns.Money`), Modules and Theme.
 - **The frames on screen, which are woven together:** UnitFrames, Impact, CastLook, CastArt, CastBar, Auras,
-  AuraWidgets, Bloom, Ward and Readout. For example, UnitFrames calls Impact directly and Impact calls
-  UnitFrames; Nameplates and Group are built on top of them.
-- **Quests and QuestItemData.** Vendor, Market and Bags ask Quests which items a quest still needs, so the
-  "Quest" verdict that stops a quest item being sold must not depend on a module being loaded.
+  AuraWidgets, Bloom, Ward and Readout.
+- **Items:** Vendor, Market, Professions, Inventory, ItemInfo, Mail, Stats (see above).
+- **Quests and QuestItemData.** The "Quest" verdict that stops a quest item being sold must not depend on a
+  module being loaded.
 - **Small parts and the screen's look:** Chat, Hydrate, Rest, Bars, Skin, SkinAreas, Tooltip, PadButtons,
-  PadIcons, Sizes, Stats, World, Rumble, Reticle, Breath, Layout, Cooldowns.
+  PadIcons, Sizes, World, Rumble, Reticle, Breath, Layout, Cooldowns.
 - **Settings and setup:** Presets, Share, Welcome, Options, Slash, plus Debug, Probe, Check and Notices.
 - **Media and Bindings.xml.**
 
-If every module is switched off, the core loads about 2.3 MB, down from 6.3 MB today (both figures assume
-the translations fix).
-
 ### How it works
 
-1. **One namespace.** Each addon gets its own private table from the game. The core makes its table public as
-   `ControllerCamHUD.ns`, on the global that the camera addon already calls. Each module file starts with
-   `local ADDON = ...; local ns = ControllerCamHUD.ns`, so no other code in the file changes. Media paths
-   stay on `ControllerCam_HUD\Media`.
-2. **Modules load before the settings are built.** In its own `ADDON_LOADED`, the core reads the saved
-   switches (`ControllerCamHUDDB` as saved), calls `C_AddOns.LoadAddOn` for each module that is on, and only
-   then builds `ns.db` (`InitDB`). Each module registers its settings while it loads, so for a loaded module
-   nothing changes from today.
-3. **Settings of a module that is off are kept.** Today `InitDB` drops every key that no registered setting
-   claims, so the first login with a module off would wipe its settings. Instead, keys that nobody claims are
-   carried over as they are. If a module loads later in the session, `RegisterSetting` and `RegisterSaved`
-   clean its keys as they register. `/cchud export` and `import` carry those keys too.
-4. **The switches live in core.** A new core file, `Modules.lua`, holds a list of each module's addon name,
-   switches, slash commands and key bindings. The switch settings themselves move there from the module files,
-   so every switch is always in Options' Modules list and in `/cchud`, whether or not its module is loaded.
+1. **One namespace.** The core makes its table public as `ControllerCamHUD.ns`, on the global that the camera
+   addon already calls. Each module file starts with `local ADDON = ...` and `local ns = ControllerCamHUD.ns`;
+   nothing else in the files changed. Media paths stay on `ControllerCam_HUD\Media`.
+2. **When modules load.** Once the settings are read (the core's `ADDON_LOADED`), and again from every
+   `ns.Apply()` (which waits for combat to end), `ns.LoadWanted()` (Modules.lua) loads each module that is
+   wanted: the HUD is on and one of its switches is, or a module that needs it is wanted. A first run, where
+   the HUD rests until asked, loads none.
+3. **Settings of a module that is not loaded are kept.** `InitDB` now keeps what no setting claims (except a
+   short list of retired keys, `DROPPED`). When a module loads later, `RegisterSetting` and `RegisterSaved`
+   clean its values as they register. Modules.lua also lists each module's other settings with their
+   defaults (`keys`), so `/cchud export` and `import`, the presets and `ResetAll` handle them while the module
+   is not loaded. A test checks that this list matches what the module registers.
+4. **The switches live in core.** Their definitions (same words, so the translations are kept) moved from the
+   module files into Modules.lua. Every switch is always in Options and in `/cchud`.
 5. **Switching on loads now; switching off frees memory at the next /reload.**
-   - Turned on: `LoadAddOn` runs at once (after combat, if you're in one), its settings appear on its
-     Options page, and `ns.Apply()` starts it.
-   - Turned off: the part stops at once, as it does today; its memory is freed at the next /reload.
-   - Each switch's tip ends: "Turning it off frees its memory at your next /reload."
-   - On its Options page, a module that is off shows only its switch, plus a line saying its settings appear
-     when it is on.
-6. **Slash commands and key bindings always answer.** A command or key binding that belongs to a module
-   that is off says, for example, "Fishing is off: /cchud fishmode on". The binding functions named in
-   `Bindings.xml` (`ControllerCamHUD_FishJournal` and others) are defined in core and pass the call on to
-   the module when it is loaded.
-7. **Calls across modules are guarded.** A call into another module is written `ns.X and ns.X.F(...)`,
-   unless the module declares that other one as a dependency. The scan found these to fix:
-   - Levelling and Campfire call `Narrative.Portrait` directly.
-   - Readout calls `FishLog.Pounds`.
-   - Inventory calls `TransmogSets.TipLines`.
-   - Market and AuctionPanel call `Quests.WantText` (Quests stays in core, so these are fine).
-   - Slash calls `Vendor:Deposit` directly.
-   - `ns.Money` and `ns.MoneyColored` move from Vendor to Core, because Narrative, Bags and Market use them.
-8. **The addon's own name is checked in a few places.**
-   - Debug's refusal and taint report counts any addon whose name starts with `ControllerCam_HUD` as ours.
-   - The report's profiler section lists every module that is loaded, so the game's profiler gives each
-     module's own time.
-   - `Bags.lua:2218` (a refused `DeleteCursorItem`) gets the Bags addon's name from `...`, which is still
-     right after the move.
-9. **Disabled in the game's AddOns list.** If you switch a module on but have disabled it there,
-   `LoadAddOn` refuses with `DISABLED`. The core then enables it for this character
-   (`C_AddOns.EnableAddOn`) and loads it, so the switch in Options decides. If a module's folder is missing
-   (a partial update), the switch shows "not installed" and everything else carries on.
-10. **Translations.** `Locales.lua` stays as one file in core, built by the same script, so other sessions'
-   translation merges are unaffected. The only change: `ns.localeData` is kept only under the test harness
-   (`HUD_TEST_DIR`). Splitting the strings by module would save perhaps another 100 KB; it can wait.
+   - Turned on: the module loads at once (after combat), its settings join its Options page
+     (`ns.OptionsAddNew`), and it starts.
+   - Turned off: the part stops at once, as before; its memory is freed at the next /reload.
+   - The switch's tip ends "Turning it off frees its memory at your next /reload.", or names the other
+     switches that keep the module loaded.
+   - On its Options page, a module that is not loaded shows its switches and "Its settings show here when it
+     is on."
+6. **Slash commands and key bindings always answer.** A command of a module that is not loaded says, for
+   example, "One-button fishing is off: /cchud fishmode on" (or that it is not installed). The key binding
+   functions named in Bindings.xml are defined in core as stand-ins that say the same; the module's own
+   functions replace them as it loads.
+7. **Our addon names.** `ns.IsOurAddon` counts `ControllerCam_HUD` and every `ControllerCam_HUD_*` as ours,
+   in Debug's refusal and taint report and in Impact's refusal guard. The report's profiler section lists every
+   module that is loaded, so the game's profiler reports each one. A `modules` section shows each module's
+   state.
+8. **Unticked in the game's AddOns list.** That is the player's choice and it is left so: the module is not
+   loaded, its switch is greyed out, and its commands say it is turned off in the game's AddOns list and which
+   addon to tick there. A module whose folder is missing is greyed out the same way and says "not installed".
+9. **Translations.** One `Locales.lua` in core, built as before. `extract_hud.py` reads the module tocs too.
+   `ns.localeData` (every language) is kept only under the test harness (`HUD_TEST_DIR`), which frees about
+   1.5 MB in the game.
 
 ### Folders, the game install and packaging
 
-- **In the repository**, each module is a folder at the top level, beside `ControllerCam_HUD`, for example
+- **In the repository**, each module is a folder at the top level, beside `ControllerCam_HUD`: for example
   `ControllerCam_HUD_Bags/ControllerCam_HUD_Bags.toc` and its files. The game reads addons only one folder
   deep, so a module can't sit inside the HUD's folder.
-- **In the game install**, `Interface\AddOns` already holds junctions to this checkout. Each module needs
-  one more. `docs/link_modules.ps1` makes the missing ones and touches nothing else.
-- **In the download.** `.pkgmeta` gets one `move-folders` line per module. `release.yml` copies each module's
-  folder into `dist/` and zips them beside `ControllerCam`, `ControllerCam_HUD` and `InputSwap`, so one
-  download still holds everything. `curseforge.yml` uploads that same zip and needs no change.
-- **Every toc** shares the version and `## Group: ControllerCam` (the game's AddOns list shows them under one
-  heading), and gets a `## Notes` line.
+- **In the game install**, each module needs a junction of its own in `Interface\AddOns`, beside the
+  ControllerCam and ControllerCam_HUD ones. `docs/link_modules.ps1 -AddOns <the game's AddOns folder>` makes
+  the missing ones and touches nothing else (`-WhatIf` only says what it would make).
+- **In the download.** `.pkgmeta` has one `move-folders` line per module. `release.yml` checks each module's
+  version against ControllerCam's, copies each module folder (toc, Lua files, LICENSE) into `dist/` and zips
+  them beside `ControllerCam`, `ControllerCam_HUD` and `InputSwap`, so one download still holds everything.
+  `curseforge.yml` uploads that same zip and needs no change.
+- **Every toc** shares the version, `## Interface`, `## Group: ControllerCam` (one heading in the game's
+  AddOns list), the author and the license, and has a `## Notes` line.
 
 ### Tests
 
-- The harness (`Env`) reads the core toc and then each module's toc, in dependency order, into the same `ns`.
-  It loads every module by default, so all existing tests keep their meaning. `Env(modules=[...])` loads a
-  chosen few.
-- The mock's `C_AddOns.LoadAddOn` loads a module's files on the spot, the way the game does.
-- New tests:
-  - A module that is off is not loaded, and its settings survive a reload.
-  - Switching a module on loads it and shows its settings.
-  - A command or key binding of a module that is off answers instead of failing.
-  - Every Lua file is in exactly one toc.
-  - The release workflow and `.pkgmeta` name every module.
-  - Each module's `## Dependencies` covers the modules it calls without a guard.
-  - With all modules off, the core loads and runs without errors.
+- The harness (`Env`) reads the core toc, then each module's toc. `Env(modules="all")`, the default, loads
+  every module with the core as before, so the earlier tests keep their meaning. `modules="game"` loads them as
+  the game does, by their switches, and `modules=[...]` loads a chosen few. `installed=` says which module
+  folders exist, and `disabled=` which are unticked.
+- The mock's `LoadAddOn` loads a module's files (after its dependencies) and fires its `ADDON_LOADED`.
+- The `LoadOnDemand` tests cover:
+  - each file is in exactly one toc, and each module's toc fields are right;
+  - Modules.lua matches the folders, and its lists of commands, settings and bindings match what each module
+    registers;
+  - modules load by their switches, and none load while the HUD is off;
+  - a module that is off keeps its settings and answers its commands, then loads when switched on in play,
+    but never in a fight;
+  - a module's dependency comes with it, and a module unticked in the AddOns list stays off;
+  - the core runs alone, and so does each module with only what it needs;
+  - the memory line in the switches' tips;
+  - the Options pages take in a module switched on in play;
+  - export, import and the presets carry an unloaded module's settings;
+  - the debug report's names;
+  - the translations kept only for the tests;
+  - one download carries every module.
 
-### Order of work
+### Still to see in the game
 
-1. **The translations fix.** Biggest win, smallest change; it can ship on its own.
-2. **The core side:** `Modules.lua`, keeping unclaimed keys, late registration, the binding pass-throughs,
-   `ns.Money` moved to core.
-3. **One module at a time**, tests passing after each: Fishing, then Transmog, Narrative, Compass,
-   Campfire, Flights, Nameplates, Group, Numbers, Items, Bags, Market, Mentor.
-4. **Packaging, the junction script and the CHANGELOG.** Probably 1.5.0: a `.0` tag goes to CurseForge by
-   itself.
-
-**Before building:** the files must not be moved while another session is editing them. Step 3 needs every
-other session idle, with their work in the checkout, because moving a file under a session that is editing it
-loses that session's work.
+- That `LoadAddOn` from the core's `ADDON_LOADED` loads the modules before `PLAYER_LOGIN`, as it does for
+  Blizzard's own load-on-demand addons, and that a module switched on in play starts without a /reload. Parts
+  that read something only at login or on entering the world (Professions reads skills on
+  `PLAYER_ENTERING_WORLD`, and Nameplates and Flights read it too) get it from their own `Apply` or the next
+  event when loaded later. Watch for anything that only appears after a /reload.
+- The AddOns list: the twelve modules under ControllerCam's heading, ticked, and shown as load-on-demand.
+- `GetAddOnMemoryUsage` per module, and the game's profiler per module (the debug report's `slow` section).
 
 ## Before publishing
 
@@ -242,7 +242,7 @@ loses that session's work.
   troubleshooting reports. Whoever has it switched on (`/cchud debug on`) keeps it on: with it on, the HUD gathers
   its reports by itself at login and at every reload or logout, in `ControllerCamHUDDB.debugReport` (`login`,
   `logout`, `notes`).
-- The download holds `ControllerCam` and `ControllerCam_HUD` (as `.github/workflows/release.yml` builds it).
+- The download holds `ControllerCam`, `ControllerCam_HUD`, the HUD's modules (`ControllerCam_HUD_*`) and `InputSwap` (as `.github/workflows/release.yml` builds it).
 - CurseForge: a big release (a tag ending in `.0`, such as `v1.4.0`) is uploaded there by the release workflow;
   a major hotfix by hand, with the "CurseForge upload" workflow (Actions tab, the tag to send). Both need the
   `CF_API_TOKEN` repository secret (a CurseForge API token) and take the game version from the `CF_GAME_VERSION`

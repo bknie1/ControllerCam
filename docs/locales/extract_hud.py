@@ -6,16 +6,23 @@ import os
 import re
 import sys
 
-ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "ControllerCam_HUD")
+REPO = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..")
+ROOT = os.path.join(REPO, "ControllerCam_HUD")
 STR = r'"((?:[^"\\]|\\.)*)"'
+
+# The HUD's modules (load-on-demand addons beside it, Modules.lua): their texts are the HUD's, in one Locales.lua
+MODULES = sorted(d for d in os.listdir(REPO)
+                 if d.startswith("ControllerCam_HUD_") and os.path.isfile(os.path.join(REPO, d, d + ".toc")))
 
 
 def toc_files():
+    """Every file of the HUD with texts, the core's first and then each module's (paths from the HUD's folder)."""
     out = []
-    for line in open(os.path.join(ROOT, "ControllerCam_HUD.toc"), encoding="utf-8").read().splitlines():
-        line = line.strip()
-        if line.endswith(".lua") and line != "Locales.lua":
-            out.append(line)
+    for folder in ["ControllerCam_HUD"] + MODULES:
+        for line in open(os.path.join(REPO, folder, folder + ".toc"), encoding="utf-8").read().splitlines():
+            line = line.strip()
+            if line.endswith(".lua") and line != "Locales.lua":
+                out.append(line if folder == "ControllerCam_HUD" else os.path.join("..", folder, line))
     return out
 
 
@@ -28,6 +35,7 @@ def keys():
 
     for name in toc_files():
         t = open(os.path.join(ROOT, name), encoding="utf-8").read()
+        name = os.path.basename(name)
         for m in re.finditer(r"\bL\[" + STR + r"\]", t):
             add(m.group(1))
         for m in re.finditer(r"\b(?:label|tip) = " + STR, t):                       # registered settings

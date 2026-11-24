@@ -3,6 +3,60 @@ an
 aus
 Verwendung:
 Änderungen werden nach dem Kampf übernommen.
+%s ist nicht installiert: Der Ordner %s fehlt in deinem AddOns-Ordner.
+%s ist in der AddOns-Liste des Spiels ausgeschaltet: Hake dort %s an, um es zu nutzen.
+%s konnte nicht geladen werden: Das Spiel hat es abgelehnt (%s).
+%s ist aus: /cchud %s on
+Ausschalten gibt seinen Speicher bei deinem nächsten /reload frei.
+Ausschalten gibt seinen Speicher bei deinem nächsten /reload frei, sobald auch diese aus sind: %s.
+Namensplaketten
+unser Aussehen auf den Namensplaketten des Spiels (deren Optionen gelten weiter)
+Gruppen- und Schlachtzugsrahmen
+zeichne unser Aussehen über die Gruppen- und Schlachtzugsrahmen des Spiels (deren Zielauswahl und Optionen funktionieren weiter)
+Stilisierte Zahlen auf dir
+erlittener Schaden und erhaltene Heilung springen auf wie deine eigenen Treffer, statt des scrollenden Texts des Spiels (folgt der Spieloption für Kampftext auf dir)
+Fähigkeiten bereit
+wenn eine Fähigkeit, die nur ein Moment erlaubt, einsetzbar wird (Mungobiss, Überwältigen, Rache, Riposte, Gegenangriff) oder das Spiel eine auf deiner Leiste aufleuchten lässt: ihr Name in fettem Rot kurz in der Bildschirmmitte
+Abklingzeiten kommen zurück
+deine Schlüsselfähigkeiten steigen in den letzten zwei Sekunden ihrer Abklingzeit neben deinem Charakter auf und wachsen, dann leuchten sie golden auf, sobald sie bereit sind (statt einer Abklingzeitleiste)
+Stärkungszauber laufen aus
+ein Stärkungszauber, den du auf dich selbst wirkst (ein Siegel, Heiliger Schild, ein Ruf oder Schild), meldet sich mit deinen Abklingzeiten, wenn er ausläuft, und in Rot, sobald er weg ist, auch wenn er vorher verbraucht wird
+Große Momente
+ein Ausbruch wird groß und golden in der Bildschirmmitte angeheftet: kritische Treffer direkt nacheinander, jeder innerhalb einer Sekunde nach dem letzten (ein Doppelschlag, Richturteil und Heiliger Stoß zusammen), mit dem, was sie zusammen bewirkt haben (höchstens zweimal pro Kampf)
+Vibration: deine Schlüsselfähigkeiten
+die Schlüsselfähigkeiten jeder Klasse fühlen sich am Controller eigen an (ein Richturteil spritzt, ein Heiliger Stoß schnappt zu, Windzorn klopft dreimal)
+Ein Taschenfenster mit Schnellfiltern
+deine Taschen in einem eigenen Fenster des HUD statt dem des Spiels: alle Gegenstände beisammen, die freien Plätze am Ende gesammelt, deine Taschen in einer eigenen Reihe und Schnellfilter oben (LB und RB). Auch die Bank, solange sie offen ist. Aus: die Taschen des Spiels
+Markt-Reiter im Auktionshaus
+ein Markt-Reiter im Auktionshaus: was sich aus deinen Taschen dort zu verkaufen lohnt und warum, daneben ein Preisverlauf, und Einstellen mit einem Druck
+Der Mentor: ein Levelplan neben dem Berufsfenster
+solange das Fenster eines Berufs offen ist, sagt eine Tafel daneben, welche Rezepte du wie oft herstellen solltest, um das Maximum zu erreichen, und was das braucht, bis hinunter zu Erz und Kräutern; eine Schätzung nach den Farben der Rezepte
+Berufsfenster: wie viele du mit deiner Bank herstellen könntest
+neben der Zahl des Spiels, wie oft du ein Rezept aus deinen Taschen herstellen kannst, zählt eine zweite Zahl in Blau auch die Reagenzien in deiner Bank mit. Sie erscheint nur, wenn das mehr ergibt
+Farmliste neben der Questliste
+Dinge, die du sammeln willst, mit wie vielen du hast und wie viele du willst: deine Taschen und Bank und die deiner anderen Charaktere auf diesem Realm. Füge die Reagenzien eines Levelplans mit einer Taste hinzu, oder jeden Gegenstand
+Sets-Reiter beim Transmogrifizierer
+ein Sets-Reiter im Transmogrifikationsfenster: Ausrüstung aus deiner Sammlung mit gleichem Namen (Grüner Eisenhelm, Grüne Eisenstulpen...) und die Sets des Spiels, mit einem Druck auf dein Outfit gelegt, mit Rückgängig; nichts wird behalten oder bezahlt, bis du Anwenden drückst
+Vorlage gesammelt, in Gegenstands-Tooltips
+unter dem Tooltip von Ausrüstung und Kosmetik: ob ihr Aussehen schon in deiner Sammlung ist oder nur über einen anderen Gegenstand, der gleich aussieht, damit du erkennst, was neu für dich ist
+Questkompass
+ein Kompass oben am Bildschirm: wohin du blickst und wo deine Quests liegen, jede mit ihrer Entfernung. Die Quest, auf die das Spiel dich hinweist, hebt sich ab
+Angeln mit einer Taste
+mit einer Angel in der Hand: deine Interaktionstaste zum Auswerfen, wann immer es nichts zum Interagieren gibt, und noch einmal zum Anschlagen, wenn der Schwimmer zuckt; der Fang wird für dich genommen. B steckt die Angel weg und gibt dir deine Waffen zurück
+Angeltagebuch
+jeder Fang wird in dein Angeltagebuch geschrieben: wie viele von jeder Art, wo du sie zuerst gefangen hast, und ein zum Spaß erfundenes Gewicht mit deinem besten von jeder Art (/cchud journal öffnet es)
+Angelanzeige
+mit einer Angelrute in den Händen: die Fische des Gewässers, an dem du stehst (die hier noch nicht gefangenen bleiben verborgen), deine Angelfertigkeit und was dein Köder dazugibt, wie viele du gefangen hast und wie viele entkommen sind, wie lange dein Köder hält, und deine letzten Fänge
+Erzählung: Figuren in den Fenstern
+jedes Fenster, das das HUD verbessert, hat jemanden, der dir hilft, mit Porträt und einem kurzen Satz dazu, was vor dir liegt und warum: du selbst über deinen Taschen und am Wasser, der Händler, der Bankier, der Postmeister, der Flugmeister, der Makler im Auktionshaus und der Mentor bei deinem Beruf; aus: die Fenster sind schlicht und still
+Lagerfeuerszene
+sitz ein paar Sekunden still in einem Lager, und der Bildschirm wird für eine Minute zum Film: Die Kamera umkreist dich, deine großen Momente seit dem letzten Lager werden erzählt (Bosse, Stufen, Berufe, neue Reittiere), und zum Schluss die Stärkungen des Lagers, nach Klasse. Jede Bewegung oder Taste beendet ihn
+Flüge: Zeit und Countdown
+auf einem Flug werden Ziel und Dauer im Chat genannt, und ein Balken oben am Bildschirm zählt bis zur Landung herunter; die Zeit jeder Strecke wird aus deinen Flügen gelernt
+Filmische Flüge
+auf einem Flug mit dem Flugmeister wird der Bildschirm zum Film: schwarze Balken, das HUD tritt zurück, die Kamera zieht weit auf und schwenkt langsam um dich und dein Reittier, die Flugleiste im oberen Balken. Das Flugspiel, ein Fenster oder eine Taste unterbrechen ihn, und er endet sanft, wenn du zur Landung ansetzt
+Flüge: ein Spiel für unterwegs
+auf einem Flug wird unter der Flugleiste ein kleines Spiel angeboten, und eine Taste startet es (nur diese Taste wird belegt, bis du sie drückst): Lass dein Reittier über die Baumkronen und an den Zeppelinen vorbei flattern und fang die entgegenkommenden Reiter mit dem Netz, damit sie für Fluggold zu Boden gehen. Dieselbe Taste noch einmal ist große Höhe: Das Spiel wird weggelegt und die Tasten gehören wieder dem Spiel. Nie im Kampf, weg bei der Landung
 Die des Spiels
 Schriftarten lassen sich nur wählen, wo die Sprache des Spiels in lateinischen Buchstaben geschrieben wird.
 Schriftart: %s
@@ -269,86 +323,6 @@ liest alle Preise im Auktionshaus auf einmal (vorher öffnen; alle 15 Minuten)
 Stellt her: %s
 Behalten, was deine Berufe noch brauchen
 ein Gegenstand, für den ein Rezept eines deiner Charaktere noch einen Fertigkeitspunkt gibt (orange und gelbe Rezepte, wie das Spiel sie im Berufsfenster zeigt), den die nächsten Schritte des Berufs brauchen (die Rezepte der Levelguides und die, die ein anderer deiner Charaktere kennt, bis zu 75 Punkte voraus), oder der etwas herstellt, das im Auktionshaus mehr wert ist als er selbst, wird behalten, nicht verkauft, und sein Tooltip sagt, warum. Rezepte werden gelesen, wenn ein Berufsfenster offen ist
-Öffne das Fenster eines Berufs, und ich sehe mir deine Rezepte an.
-Das ist die Grenze, %d. Ein Lehrer hat den nächsten Rang für dich.
-Bei %d gibt es nichts mehr zu lernen. Sprich mit einem Lehrer über den nächsten Rang.
-Du bist deinen Rezepten entwachsen. Geh zum Lehrer: %s wartet bei %d auf dich.
-Noch %d bis %d, und was du kannst, bringt dich nicht dorthin. Ein Lehrer hat %s für dich, ab %d.
-Du bist deinen Rezepten entwachsen. Geh zum Lehrer: %s wartet auf dich.
-Deine Rezepte lehren dich nichts mehr, %d vor %d. Frag einen Lehrer nach %s.
-Deine Rezepte geben %d vor %d nichts mehr her. Ein Lehrer hat etwas Neues für dich.
-Was du kannst, trägt dich nicht über die letzten %d. Zeit für einen Lehrer.
-%s lehrt dich jetzt nicht mehr viel, aber es ist das Beste, was du hast. Noch %d bis %d.
-Ab hier geht es langsam: %s gibt ab und zu einen Punkt. Noch %d.
-Zuerst brauchst du %s, %s. Die Anleitungen beginnen diesen Abschnitt damit.
-Lerne %s, %s, dann fangen wir an: noch %d bis %d.
-Noch %d bis %d. Die Anleitungen schicken dich nach %s, bis %d.
-Hier lehrt dich das Sammeln: %s bis %d.
-Noch %d bis %d. Fang mit %s an, oder mit %s, wenn dir das lieber ist: %s.
-Zuerst %s, so sehen es die Anleitungen. %s tut es auch: %s.
-Noch %d bis %d. Fang mit %s an.
-%s ist jetzt dein bester Lehrer. Noch %d Punkte bis %d.
-Ruhige Hände. Zuerst %s, dann noch %d.
-bei einem Lehrer
-bei einem Händler
-als Beute
-aus einer Quest
-günstigere Materialien
-Materialien vom Händler
-Materialien, die du selbst sammelst
-verkauft sich gut
-etwas, das du selbst nutzt
-weniger Herstellungen
-ein Rezept, das du findest oder kaufst
-andere Materialien
-die erste Wahl der Anleitungen
-Öffne das Fenster eines Berufs für einen Levelplan.
-Am Limit, %d. Ein Lehrer hat den nächsten Rang.
-Noch %d bis %d; deine Rezepte reichen nicht. Ein Lehrer hat %s ab %d.
-Noch %d bis %d; deine Rezepte reichen nicht. Ein Lehrer hat %s.
-Deine Rezepte enden %d vor %d. Ein Lehrer hat mehr.
-Noch %d bis %d. Am besten jetzt: %s, grün (ab und zu ein Punkt).
-Noch %d bis %d. Lerne zuerst %s, %s.
-Noch %d bis %d. Sammle %s bis %d.
-Noch %d bis %d. Zuerst: %s, oder %s (%s).
-Noch %d bis %d. Zuerst: %s.
-Zu sammeln oder zu kaufen
-%d-mal herstellen: %s
-Lerne es %s, ab %d.
-Lerne es %s.
-%s: %d in deinen Taschen, %d in der Bank, %d pro Herstellung
-Die Anleitungen leveln diesen Abschnitt mit dem Sammeln von %s.
-%s: du hast %d, der Plan braucht %d
-für %s
-Der Mentor: was deine Bank herstellen lässt
-Was deine Bank herstellen kann
-Mit dem, was in deiner Bank liegt, lässt sich nichts mehr herstellen.
-%d kannst du mit deiner Bank herstellen, %d davon nur mit ihr.
-Der Mentor: %s %d > %d
-Der Mentor
-Levelplan
-oder
-Sammle %s
-zu lernen
-Anprobieren
-Ausblenden
-Der Plan
-Zurück
-Das farmen
-Alles farmen
-Mit der Bank
-Plan bedienen
-zweimal zum Ausblenden
-Hier gibt es nichts anzuprobieren.
-%d zur Farmliste hinzugefügt.
-Nichts fehlt: Du hast alles, was nötig ist.
-Öffne das Fenster eines Berufs, um einen Plan zu erstellen.
-Der Mentor (Levelplan): zeigen / verbergen
-Der Mentor: ein Levelplan neben dem Berufsfenster
-solange das Fenster eines Berufs offen ist, sagt eine Tafel daneben, welche Rezepte du wie oft herstellen solltest, um das Maximum zu erreichen, und was das braucht, bis hinunter zu Erz und Kräutern; eine Schätzung nach den Farben der Rezepte
-Berufsfenster: wie viele du mit deiner Bank herstellen könntest
-neben der Zahl des Spiels, wie oft du ein Rezept aus deinen Taschen herstellen kannst, zählt eine zweite Zahl in Blau auch die Reagenzien in deiner Bank mit. Sie erscheint nur, wenn das mehr ergibt
-zeigt den Levelplan des zuletzt geöffneten Berufsfensters, mit den Tasten des Controllers darauf
 AK
 Distanz-AK
 krit.
@@ -370,126 +344,6 @@ Bank
 Deine Markierung
 Gegenstandsdetails: alles über den Gegenstand, auf den du zeigst
 zeigt alles über den Gegenstand, auf den du zeigst (oder den angegebenen): Preise, wer ihn besitzt, deine Markierung
-%d%% Verkaufschance
-Geht sicher weg (%d%%)
-Das verkauft sich von selbst (%d%%)
-Ich denke, das geht weg (%d%%)
-Sollte einen Käufer finden (%d%%)
-Halbe-halbe (%d%%)
-Kann so oder so ausgehen (%d%%)
-Ein kleines Glücksspiel (%d%%)
-Könnte eine Weile liegen (%d%%)
-Darauf würde ich nicht wetten (%d%%)
-Schlechte Karten, Freund (%d%%)
-+%s gegenüber einem Händler
-noch kein Preis bekannt
-ein Händler zahlt genauso viel
-Der Makler
-Markt
-jede Münze gezählt, Freund
-In deinen Taschen lässt sich hier nichts verkaufen.
-Keine Preise in den letzten 7 Tagen.
-Erst ein Tag mit Preisen: Jeden Tag, an dem du das Auktionshaus besuchst, kommt eine Kerze hinzu.
-7 Tage, eine Kerze pro Tag: grün höher geschlossen, rot tiefer
-30 Tage, der niedrigste des Tages: grün hoch, rot runter
-Noch keine Preisgeschichte: lies das Auktionshaus an ein paar Tagen.
-Erst ein Tag Preise: Die Linie wächst mit jedem Tag, an dem du das Auktionshaus besuchst.
-Verlange %s pro Stück, %s für die %d, die du abgibst; %d bleiben bei dir
-Verlangt %s pro Stück, %s für alle %d
-Niedrigster
-gelesen %s
-Üblich
-7 Tage: %s bis %s
-Eingestellt: %d Auktionen, %d Gegenstände
-%s pro Stück, %s für alle %d
-Du hast hier %d eingestellt, %d Auktionen verkauft
-Kein Preis bekannt: lies zuerst das Auktionshaus.
-Nichts in deinen Taschen, das sich hier verkaufen lässt.
-Heute bringt hier nichts mehr als beim Händler; %d vielleicht, mit Geduld.
-Das Beste zuerst: %d bringen hier mehr als beim Händler, %d weitere mit Geduld.
-Leere Taschen, Freund. Bring mir was zum Verkaufen.
-Hier schlägt heute nichts den Händler. %d vielleicht, mit etwas Geduld.
-Kein sicherer Gewinn in diesen Taschen, Freund. %d lohnen sich, wenn du wartest.
-Das Beste oben: %d hier schlagen jeden Händler, %d mehr für Geduldige.
-%d bringen hier mehr als beim Händler, Bestes zuerst. %d mehr, wenn du wartest.
-Oben liegt das Geld: %d sichere Verkäufe, %d mehr, wenn du warten kannst.
-Noch keine Preise: %s liest das Auktionshaus.
-Gerade gelesene Preise: %d.
-%d Preise, gelesen %s.
-%d Preise, gelesen %s. %s liest sie neu.
-Hab das Brett noch nicht gelesen. %s, und ich hol jeden Preis.
-Noch keine Preise, Freund. %s liest das ganze Brett.
-Preise frisch vom Brett, Freund: %d Stück.
-Gerade das Brett gelesen: %d Preise, noch warm.
-%d Preise, gelesen %s. Gut genug, Freund.
-Zuletzt aufs Brett geschaut: %s, %d Preise.
-Preise von %s, altbacken wie Brot von gestern. %s liest das Brett neu.
-%d Preise, aber gelesen %s. %s, und ich schau nochmal.
-Was du behältst, wird auch gezeigt. %s blendet es aus.
-Zurückbehalten: %d, für deine Berufe, deine Ausrüstung und deine Markierungen. %s zeigt sie.
-Was du behältst, steht auch auf der Liste. %s räumt es weg.
-Ich zeig auch, was du behältst. %s blendet es wieder aus.
-%d zurückgelegt: Material für Berufe, Ausrüstung, Markiertes. %s zeigt sie.
-%d beiseitegelegt: fürs Handwerk, zum Anziehen, von dir markiert. %s, wenn du sie willst.
-pro Stück
-keine Daten
-Schnellverkauf
-Geduldig
-Alle Preise lesen
-Behaltenes verbergen
-Behaltenes zeigen
-Linie
-Kerzen
-Einstellen
-%d von %d
-%d von %d einstellen, je %s
-%d für %s einstellen
-Alle %d für %s einstellen
-In das Auktionshaus dieses Clients kann von hier aus nicht eingestellt werden.
-%d für %s eingestellt.
-Markt im Auktionshaus: öffnen / schließen
-Markt-Reiter im Auktionshaus
-ein Markt-Reiter im Auktionshaus: was sich aus deinen Taschen dort zu verkaufen lohnt und warum, daneben ein Preisverlauf, und Einstellen mit einem Druck
-Gruß des Auktionators im Markt
-ein Goblin-Auktionator sagt einen kurzen Satz aus den Klängen des Spiels, wenn der Markt öffnet; aus: er öffnet still
-Markt: zeigen, was du behältst
-der Markt listet auch, was du behältst: woraus deine Berufe noch lernen oder etwas Wertvolleres herstellen, und was du zum Behalten markiert hast; aus: nur, was du verkaufen würdest
-Markt: Preisverlauf als Kerzen
-der Preisverlauf im Markt ist eine Kerze pro Tag für die letzten 7 Tage (wo der Preis eröffnete, am höchsten und am niedrigsten war und schloss: grün, wenn er höher schloss, rot, wenn tiefer); aus: eine Linie des niedrigsten Tagespreises über 30 Tage
-den Markt öffnen oder schließen (ein Reiter des Auktionshauses)
-welches Auktionshaus dieser Client hat (zur Fehlersuche)
-gesammelt
-über einen anderen Gegenstand gesammelt
-noch nicht gesammelt
-Vorlage
-Wähle ein Set, um seine Teile auf dein Outfit zu legen. %s behält es; vorher wird nichts bezahlt.
-Deine Sammlung wird durchgesehen...
-Dein Outfit ist wieder wie vorher.
-%s: %d von %d Teilen angelegt.
-%d passten nicht auf dieses Outfit.
-Ein Set, von dem du Teile hast
-%d Sets, von denen du Teile hast
-kannst du nicht tragen
-fehlt
-Alle %d Teile
-%d von %d Teilen
-Fehlt: %s
-Noch keine Sets. Gegenstände mit gleichem Namen, wie Grüner Eisenhelm und Grüne Eisenstulpen, erscheinen hier, sobald du einen davon hast.
-Rückgängig
-Sets-Reiter beim Transmogrifizierer
-ein Sets-Reiter im Transmogrifikationsfenster: Ausrüstung aus deiner Sammlung mit gleichem Namen (Grüner Eisenhelm, Grüne Eisenstulpen...) und die Sets des Spiels, mit einem Druck auf dein Outfit gelegt, mit Rückgängig; nichts wird behalten oder bezahlt, bis du Anwenden drückst
-Vorlage gesammelt, in Gegenstands-Tooltips
-unter dem Tooltip von Ausrüstung und Kosmetik: ob ihr Aussehen schon in deiner Sammlung ist oder nur über einen anderen Gegenstand, der gleich aussieht, damit du erkennst, was neu für dich ist
-Offline
-Tot
-Aus
-In einer Heiler-Spezialisierung
-Immer
-Zu weit
-Gruppen- und Schlachtzugsrahmen
-zeichne unser Aussehen über die Gruppen- und Schlachtzugsrahmen des Spiels (deren Zielauswahl und Optionen funktionieren weiter)
-Heiler-Gruppe und -Schlachtzug
-in einer Gruppe: deine Gruppe neben deinem Charakter, jedes Mitglied mit der Taste, die es anvisiert; im Schlachtzug: schlankere Rahmen. Jeder zeigt nur, wie viel Heilung nötig ist, einen Schwächungszauber, den du entfernen kannst, und ob er in Reichweite ist
 Zauberleisten-Animationen
 eine Zauberleiste zeigt, was gewirkt wird: Spitzhacken schlagen beim Bergbau darauf ein, Blitze laufen bei Natur daran entlang, eine Ranke blüht bei einer Heilung, Runen nehmen bei Arkan Gestalt an, Flammen, Eis und Schatten bei Feuer, Frost und Schatten
 jede Zauberleisten-Animation einmal auf deiner Zauberleiste zeigen
@@ -520,79 +374,6 @@ rechts unter der Leiste eines Freundes: die Schwächungen, die du bannen kannst 
 Combopunkte
 Combopunkte als Punkte über dem Namen des Ziels
 listet, was das Spiel über die Effekte deines Ziels sagt (zur Fehlersuche)
-Bedrohung in Prozent
-dein Anteil an der Bedrohung als Zahl neben dem Bedrohungssymbol, am Zielrahmen und an Namensplaketten
-Gesundheitszahl
-die verbleibende Gesundheit, gekürzt (12.3k), auf der Leiste (nicht auf kompakten Plaketten: dort reicht der Prozentwert)
-Deine Debuffs
-deine Debuffs auf der Einheit, über ihrem Namen, mit ihrer Zeit
-Debuffs von allen
-die Debuffs, die das Spiel für Namensplaketten von allen markiert, nicht nur von dir
-Gegnerische Buffs
-die Stärkungen eines Feindes neben seinen Schwächungen: die wichtigen (wichtig, wütend oder von dir bannbar oder stehlbar), oder alle, wenn Nur die Effekte, die zählen aus ist
-Massenkontroll-Symbol
-ein großes Symbol mit Restzeit, wenn die Einheit betäubt, bewegungsunfähig, in Furcht versetzt ist...
-Aggro-Leuchten
-ein Schildsymbol und ein Leuchten hinter dem Namen: rot, solange es dich angreift, rot und gelb, wenn du es gleich ziehst, gelb und blau, wenn du es verlierst, blau, wenn es nicht auf dir ist
-Questmarkierung
-eine goldene Markierung an Einheiten, die deine Quests noch brauchen
-Namensplaketten-Animationen
-Plaketten blenden ein, niedrige Gesundheit atmet, Massenkontrolle schimmert
-Klein
-Normal
-Groß
-Voller Name
-Kurzer Name
-Kein Name
-Voll
-Minimal
-Minimal mini
-Namensplakettengröße
-wie groß die Leisten auf Namensplaketten sind: klein und schmal, normal oder groß (breiter und höher)
-Namen auf Namensplaketten
-der Name auf einer Plakette mit Gesundheitsleiste: voll, gekürzt oder weggelassen (der Zielrahmen nennt ihn voll; Stufe und Klassensymbol bleiben). Eine Plakette ohne Leiste, die eines freundlichen NPCs, behält immer ihren Namen
-Aussehen der Namensplaketten
-die Schalter der Namensplaketten auf einen Druck. Voll: alles. Minimal: keine Ressourcenleiste, Gilde oder Titel, kurze Namen. Minimal mini: kleine Leisten mit Gesundheit, Euren Schwächungen und den wichtigen Stärkungen, Stufe und Klasse, kein Name (der Zielrahmen hat ihn). Bedrohung, Kontrolleffekte und laute Zauber bleiben immer
-Namensplaketten
-unser Aussehen auf den Namensplaketten des Spiels (deren Optionen gelten weiter)
-Spielertitel
-zeigt den Titel eines Spielers neben seinem Namen an
-Gilden und NSC-Berufe
-eine Zeile unter dem Namen: die Gilde des Spielers oder die Tätigkeit des NSC
-Leisten für Freunde im Kampf
-freundliche Namensplaketten zeigen Gesundheit, Ressource und Zauber, solange sich die Einheit im Kampf befindet
-Die eigenen freundlichen Namensplaketten des Spiels
-freundliche Plaketten (deine Gruppe, andere Spieler, freundliche NPCs) im Aussehen des Spiels lassen; unsere nur bei Feinden
-Ressourcenleisten
-eine schmale Mana-, Wut- oder Energieleiste unter der Gesundheitsleiste
-Zauberziel
-wer das Ziel eines Zaubers ist, neben dem Namen des Zaubers
-Gesundheit in Prozent
-der Gesundheitswert in Prozent auf der Leiste
-Name auf der Plakette deines Ziels
-aus: die Plakette deines Ziels zeigt weder Namen noch Stufe (der Zielrahmen zeigt sie)
-Stufen auf Namensplaketten
-die Stufe vor dem Namen eines Gegners, nach Schwierigkeit gefärbt
-Kompakte Namensplaketten
-Namensplaketten etwa halb so breit
-Auffällige Gegnerzauber
-der Zauber eines Gegners blinkt, schwillt an und pulsiert immer schneller, bis er gewirkt wird, damit er rechtzeitig unterbrochen werden kann
-Klassensymbole auf Namensplaketten
-das Klassensymbol eines Spielers vor seinem Namen, ob Freund oder Feind
-Was NPCs tun, als Symbole
-ein Symbol über freundlichen NPCs, die etwas anbieten: eine Tasche über Händlern, ein Amboss über Schmieden, die reparieren, ein Buch über Lehrern... (die eigenen Symbole des Spiels; sie erscheinen auch, solange die Plakette darauf wartet, dass du auf sie zeigst)
-Freundliche NPCs nur beim Zeigen
-die Plaketten freundlicher NPCs (Händler, Questgeber, Stadtbewohner) erscheinen nur, solange du auf sie zeigst, wie ihr Tooltip
-Namen über Dingen, mit denen du interagieren kannst
-ein Name über Erz, Truhen, Tafeln und dergleichen, solange du ihnen zugewandt bist (aus: sie bleiben ohne Namen, die Anzeige des Spiels sagt bereits, was sie sind)
-Mini-Namensplaketten
-Diener, Kleintiere und graue Gegner ohne Erfahrung bekommen eine kleine Plakette: eine schmale Leiste mit deinen Schwächungen darauf und ohne Namen (ein Kleintier ohne Leiste behält seinen Namen; ob sie überhaupt Plaketten haben, entscheidet die Option des Spiels)
-Gruppen-Namensplaketten in Dungeons: nur Namen
-in einem Dungeon oder Schlachtzug zeichnet das Spiel die Namensplaketten freundlicher Spieler selbst, und Addons dürfen sie nicht ändern: dort werden die eigenen Optionen des Spiels so gesetzt, dass sie als klassenfarbige Namen ohne Leisten erscheinen, wie unsere, und im Kampf kommen die Leisten des Spiels zurück (wenn Leisten für Freunde im Kampf an sind); beim Verlassen wird alles zurückgestellt
-Gruppen-Namensplaketten in Dungeons: ausgeblendet
-in einem Dungeon oder Schlachtzug die Namensplaketten des Spiels für freundliche Spieler ganz ausschalten (und beim Verlassen wieder so, wie du sie hattest)
-zeigt, was das Spiel für den Namen deines Ziels liefert (zur Fehlersuche)
-die Namensplaketten auf dem Bildschirm auflisten und ob sie unser Aussehen tragen (zur Fehlersuche)
 Zeige jede Schadensart einmal (die letzte als kritischer Treffer).
 Trefferpartikel
 Heiliges blitzt auf, Feuer steigt empor, Frostkristalle verweilen, Schatten qualmt, arkane Runen funkeln auf dem getroffenen Balken
@@ -609,15 +390,6 @@ Heilung über Zeit wächst auf der Leiste
 Wurzeln und Zweige (Natur) oder goldene Fäden (Heilig) wachsen über die Leiste deines Ziels, Fokus oder dir, solange eine Heilung über Zeit wirkt, und welken, wenn sie endet
 Schilde als Schutzzeichen zeigen
 ein Schild auf deinem Ziel, deinem Fokus oder dir (Machtwort: Schild, Gottesschild, Eisbarriere...) flammt in der Farbe seiner Schule um die Gesundheitsleiste auf, leuchtet, solange der Schild hält, und verblasst, wenn er bricht
-%d absorbiert
-Abklingzeiten kommen zurück
-Stilisierte Zahlen auf dir
-erlittener Schaden und erhaltene Heilung springen auf wie deine eigenen Treffer, statt des scrollenden Texts des Spiels (folgt der Spieloption für Kampftext auf dir)
-Fähigkeiten bereit
-wenn eine Fähigkeit, die nur ein Moment erlaubt, einsetzbar wird (Mungobiss, Überwältigen, Rache, Riposte, Gegenangriff) oder das Spiel eine auf deiner Leiste aufleuchten lässt: ihr Name in fettem Rot kurz in der Bildschirmmitte
-deine Schlüsselfähigkeiten steigen in den letzten zwei Sekunden ihrer Abklingzeit neben deinem Charakter auf und wachsen, dann leuchten sie golden auf, sobald sie bereit sind (statt einer Abklingzeitleiste)
-Stärkungszauber laufen aus
-ein Stärkungszauber, den du auf dich selbst wirkst (ein Siegel, Heiliger Schild, ein Ruf oder Schild), meldet sich mit deinen Abklingzeiten, wenn er ausläuft, und in Rot, sobald er weg ist, auch wenn er vorher verbraucht wird
 Das des Spiels
 Punkt
 Ring
@@ -662,18 +434,6 @@ ein Anschwellen beim Stufenaufstieg, ein langes tiefes Grollen, wenn du stirbst
 Lichtleiste zeigt deine Gesundheit
 ein Controller mit Lichtleiste (DualSense) zeigt darin deine Gesundheit: von Grün zu Rot, pulsierend bei wenig Gesundheit im Kampf
 jedes Vibrationsmuster einmal abspielen
-Liste rechts
-Einzeln in der Mitte
-%d kritische Heilungen
-%d Krits
-Richturteil
-Große Momente: wo
-ein Block direkt über den Abklingzeit-Meldungen rechts von Eurer Figur, der neueste am nächsten daran und die älteren darüber aufsteigend, während sie verblassen, oder einzeln in der Mitte
-Vibration: deine Schlüsselfähigkeiten
-die Schlüsselfähigkeiten jeder Klasse fühlen sich am Controller eigen an (ein Richturteil spritzt, ein Heiliger Stoß schnappt zu, Windzorn klopft dreimal)
-Große Momente
-ein Ausbruch wird groß und golden in der Bildschirmmitte angeheftet: kritische Treffer direkt nacheinander, jeder innerhalb einer Sekunde nach dem letzten (ein Doppelschlag, Richturteil und Heiliger Stoß zusammen), mit dem, was sie zusammen bewirkt haben (höchstens zweimal pro Kampf)
-zeigt, wie ein großer Moment aussieht und sich anfühlt
 neu!
 Rekord!
 %d Std.
@@ -684,39 +444,6 @@ die Fische, die du an Land ziehst, und die Stärkungen, die dir ein Lager oder e
 Animationen reduzieren
 nichts auf dem Bildschirm wackelt, gleitet, fliegt oder platzt: Zauberleisten-Animationen, Treffereffekte, Bewegung der Namensplaketten, große Momente und die Anzeigen von Fängen und Stärkungen sind ruhig oder still. Die eigenen Einstellungen des Spiels für Bildschirmwackeln und unerwartete Kamerabewegung zählen ebenfalls
 zeigen, wie die Anzeigen eines Fangs und von Stärkungen aussehen
-Großmeister
-Meister
-Fachmann
-Experte
-Geselle
-Lehrling
-Stufe %d erreicht (von %d)
-Stufe %d erreicht
-%s und %d weitere besiegt in: %s
-%s besiegt
-%s: jetzt %s, bis %d
-%s hat %d erreicht
-%d neue Flugrouten, zuletzt %s
-Neue Flugroute: %s
-Neues Reittier: %s
-Neuer Begleiter: %s
-Neues Spielzeug: %s
-Erfolg: %s
-Das Lager
-In Ruhe
-Am Feuer
-Morgengrauen
-Morgen
-Nachmittag
-Abend
-Nacht
-%s in %s
-Mit %s
-Die Lagerfeuerszene ist aus.
-Die Lagerfeuerszene wartet, bis du nicht mehr im Kampf bist.
-Lagerfeuerszene
-sitz ein paar Sekunden still in einem Lager, und der Bildschirm wird für eine Minute zum Film: Die Kamera umkreist dich, deine großen Momente seit dem letzten Lager werden erzählt (Bosse, Stufen, Berufe, neue Reittiere), und zum Schluss die Stärkungen des Lagers, nach Klasse. Jede Bewegung oder Taste beendet ihn
-die Lagerfeuerszene jetzt abspielen
 erledigt
 %s: bereit zur Abgabe
 Schließe noch [%s] ab.
@@ -753,45 +480,6 @@ jeder Schritt deiner Quests geht in den Gruppenchat (Blutige Knochenketten: 4/25
 Behalten, was deine Quests brauchen
 ein Gegenstand, den eine Quest in deinem Log noch verlangt, oder einer, der eine Quest startet, die du noch machen kannst, wird als Quest markiert: nie für dich verkauft oder versteigert
 eine empfohlene Reihenfolge für deine Quests nennen: abgeben, was fertig ist, dann das Nächste, das du allein schaffst, dann der Rest
-Oben
-Unten
-N
-NW
-W
-SW
-S
-SO
-O
-NO
-Der Questkompass ist aus: /cchud compass on
-Der Kompass muss wissen, wo du bist, und das Spiel sagt es hier nicht.
-Questkompass
-ein Kompass oben am Bildschirm: wohin du blickst und wo deine Quests liegen, jede mit ihrer Entfernung. Die Quest, auf die das Spiel dich hinweist, hebt sich ab
-Questkompass: Platz
-oben am Bildschirm, oder unten am Platz der Erfahrungsleiste (die Leiste kommt dann nach oben)
-ein paar Markierungen auf dem Questkompass, um dich herum, für zwanzig Sekunden
-Links der Quests
-Rechts der Quests
-Unter den Quests
-Die Farmliste ist voll.
-Farmliste: %s, %d gewünscht.
-Farmen
-%d weitere
-Noch nichts zu farmen.
-Einen Stapel mehr
-Entfernen
-Leeren
-Fertig
-Alles von der Farmliste nehmen?
-Farmliste: wählen / fertig
-Farmliste: den Gegenstand hinzufügen, auf den du zeigst
-Das steht nicht auf der Farmliste.
-Die Farmliste ist leer.
-Farmliste: wo sie sitzt
-Farmliste neben der Questliste
-Dinge, die du sammeln willst, mit wie vielen du hast und wie viele du willst: deine Taschen und Bank und die deiner anderen Charaktere auf diesem Realm. Füge die Reagenzien eines Levelplans mit einer Taste hinzu, oder jeden Gegenstand
-die Farmliste links der Questliste, rechts davon oder unter ihren Quests
-die Farmliste neben der Questliste: mit dem Controller wählen; add <Gegenstand> [wie viele], remove <Gegenstand>, clear, oder left / right / bottom für ihren Platz
 Nicht im Kampf.
 Dieser Client hat keine Gamepad-Leisten.
 Dieser Client erlaubt Addons keine Änderung; benutze den Bearbeitungsmodus.
@@ -831,129 +519,6 @@ Der Controller sagt nicht, was er ist: die Symbole bleiben, wie das Spiel sie ha
 die Symbole, die das Spiel für die Tasten deines Controllers zeigt: auto (nach dem Controller in Gebrauch), xbox, playstation, switch, steam, generic (Zahlen) oder game, um sie zu lassen, wie das Spiel sie hat
 Abklingzeit-Reihen neben den Gamepad-Leisten
 die Abklingzeit-Reihen des Spiels sitzen unter dem Ziel statt auf den Gamepad-Tasten und sind etwas kleiner (nur bei den eingebauten Layouts des Spiels: bei einem eigenen Layout bleiben sie, wo du sie hingesetzt hast)
-Angelmodus: aus.
-Angeln: %s zum Auswerfen
-Kein Köder: %s zweimal für %s
-%s, um die Angel wegzustecken
-Angelmodus: %s zum Auswerfen, und noch einmal zum Anschlagen, wenn der Schwimmer zuckt.
-%s zum Anhauen, %s zum erneuten Auswerfen
-Der Angelmodus braucht eine Angelrute in deinen Händen.
-Du beherrschst Angeln nicht.
-Angelmodus: eine Taste wirft aus und hakt
-Angeltaste: %s
-Angeln mit einer Taste
-mit einer Angel in der Hand: deine Interaktionstaste zum Auswerfen, wann immer es nichts zum Interagieren gibt, und noch einmal zum Anschlagen, wenn der Schwimmer zuckt; der Fang wird für dich genommen. B steckt die Angel weg und gibt dir deine Waffen zurück
-Mit einem Druck neu auswerfen
-solange der Schwimmer draußen ist, holt deine Angeltaste den Fisch ein und A wirft mit einem Druck neu aus; aus: A gehört dir
-Köder mit Doppeldruck
-drücke deine Angeltaste zweimal schnell: der zweite Druck bringt den besten Köder aus deinen Taschen an die Angel, wenn sie keinen hat
-Gamepad-Leisten beim Angeln ausblenden
-mit einer Angel in der Hand sind die Gamepad-Leisten ausgeblendet, damit das Wasser frei zu sehen ist; die Angelanzeige zeigt die Taste zum Auswerfen. Sie sind zurück, sobald ein Kampf beginnt oder die Angel weggesteckt wird
-Ein-Tasten-Angeln vorerst aus oder wieder an (mit einer Angel in der Hand ist es von selbst an)
-die Taste, die angelt: anfangs deine Interaktionstaste (Quadrat oder X) oder jede andere, zum Beispiel ein Trigger (rt)
-Durotars Küste ist roter Fels und warmes Flachwasser. Die Trolle der Echoinseln sagen, die Makrelen ziehen am dichtesten, wenn die Flut den Duft der Kochfeuer von den Inseln herüberträgt.
-Die Seen von Mulgore sind klein, klar und geduldig. Die Tauren angeln dort so, wie sie alles andere tun: langsam und mit Dank.
-Jede Oase im Brachland ist ein Treffpunkt. Was auch immer dort bei Tag trinkt, bei Nacht schwimmt etwas darunter.
-Die Teiche von Teldrassil liegen im Schatten eines einzigen Baumes. Nachtelfische Angler schwören, die Fische dort hätten nie die Sonne gesehen und vermissten sie auch nicht.
-Das Wasser der Dunkelküste ist grau, kalt und voller Wracks. Die Hälfte dessen, was vor Auberdine anbeißt, hat sich in irgendjemandes verlorener Fracht häuslich eingerichtet.
-Die Flüsse des Eschentals fließen unter Blättern, die älter sind als die meisten Königreiche. Die Fische sind flink, und die Schildwachen fragen noch flinker, was du dort zu suchen hast.
-Unten zwischen den Tausend Nadeln ist Wasser knapp und wird eifersüchtig gehütet. Ein Fisch von hier hat sich seinen Platz verdient.
-Die Seen des Steinkrallengebirges liegen hoch und kalt zwischen den Gipfeln. Die Goblins hätten sie längst trockengelegt, wäre das Angeln nicht so gut.
-Die Küste von Desolace besteht aus Knochen und grauer Brandung. Irgendetwas dort unten hat an beidem Geschmack gefunden.
-Feralas ist grün bis hinunter an die Wasserlinie. Seine Flüsse sind tief, warm und überaus lebendig.
-Niemand weiß genau, wo in den Düstermarschen das Land aufhört und das Wasser anfängt. Angle vom Ufer aus und zähl danach deine Zehen.
-Der Dampfdruckpier hat das einzige Wasser in Tanaris, das den Namen verdient. Die Goblins verkaufen dir das Recht, dort zu angeln, und zwar zweimal, wenn du sie lässt.
-Unter Azsharas heller Bucht liegt eine versunkene Stadt. Alte Angler sagen, die ganz Großen leben dort, wo einst ihre Gärten waren.
-Die Tümpel des Teufelswalds leuchten, und zwar nicht auf die gute Art. Was noch darin schwimmt, ist stur über jede Vernunft hinaus.
-Die heißen Quellen und teergesäumten Seen von Un'Goro haben Dinge bewahrt, die der Rest der Welt vergessen hat. Manche davon beißen.
-Der See Elune'ara auf der Mondlichtung ist so still wie ein angehaltener Atem. Die Druiden bitten nur darum, dass du nicht mehr nimmst, als du essen wirst.
-Silithus ist Sand, Wind und das Geräusch von Flügeln. Wenn du hier Wasser zum Angeln gefunden hast, sag es niemandem.
-Die Seen von Winterquell frieren an den Rändern zu und dampfen in der Mitte. Die Fische dort sind fett gegen die Kälte und den Fußmarsch wert.
-In den Teichen von Orgrimmar angeln Peons, die nichts Besseres zu tun haben, und alte Grunzer, die dasselbe behaupten. Beide erzählen dir, der Große sei ihnen entwischt.
-Ein Fisch aus den Teichen von Donnerfels hat sein ganzes Leben hoch über den Ebenen verbracht. Er scheint das gelassen zu nehmen.
-Darnassus hütet seine Gewässer so sorgsam wie seine Tempel. Die Fische haben sich daran gewöhnt, bewundert zu werden.
-Die Seen des Alteracgebirges sind Schmelzwasser, und die Oger und das Syndikat angeln dort, wenn niemand hinsieht.
-Arathis Ufer haben mehr Armeen gesehen als Angler. Den Fischen ist längst gleich, wessen Banner über dem Wasser weht.
-Das Ödland ist Staub von einem Ende zum anderen. Ein Biss ist hier ein kleines Wunder, also behandle ihn auch so.
-Die Küste der Verwüsteten Lande ist rot, kahl gescheuert und still. Was in dieser Brandung lebt, hat gelernt, mit einer ganzen Menge zu leben.
-Die Seen von Tirisfal liegen reglos unter einem kränklichen Himmel. Die Verlassenen angeln dort aus Gewohnheit. Die Toten essen nicht viel, aber sie erinnern sich, dass es ihnen einmal geschmeckt hat.
-Die lange Küste des Silberwalds besteht ganz aus Nebel und Kiefernschatten. Das Angeln ist gut, und das ist das einzig Fröhliche, was je einer über die Gegend sagt.
-Die Flüsse der Westlichen Pestländer fließen noch, wenn auch nicht sauber. Was du herausziehst, sieh dir zweimal an.
-Nur wenige angeln in den Östlichen Pestländern, und noch weniger geben es zu. Das Wasser behält, was die Seuche von ihm übrig gelassen hat.
-Der Fluss im Vorgebirge des Hügellands und sein langes Südufer haben in jedem Streit, der um sie geführt wurde, beide Seiten ernährt.
-Das Hinterland hält seine Seen hoch oben zwischen den Bäumen, wo die Wildhammerzwerge vom Greifenrücken aus angeln, wenn sie glauben, dass niemand zusieht.
-Die Seen von Dun Morogh sind die meiste Zeit des Jahres von Eis umringt. Ein Zwerg schlägt ein Loch, setzt sich mit einem Humpen hin und nennt es einen guten Tag, ganz gleich, was anbeißt.
-Die Sengende Schlucht hat Lava, wo andere Länder Flüsse haben. Bring statt der Angel lieber etwas zu trinken mit.
-Die Brennende Steppe ist Asche und Glut. Wenn dir das Wasser hier überhaupt etwas gibt, dann ist es heiß.
-Jedes Kind in Elwynn lernt am Kristallsee oder am Steinhügelsee das Angeln. Die kleinen Fische dort tricksen sie seit Generationen aus.
-Der Gebirgspass der Totenwinde hat wenig Wasser und noch weniger Gastfreundschaft. Was in den Tümpeln unterhalb von Karazhan ist, bleibt am besten dort.
-Der Fluss am Rand des Dämmerwalds ist zu jeder Stunde schwarz. Die Fische scheint die Dunkelheit nicht zu stören, die Angler schon.
-Der Loch ist der Stolz von Loch Modan, aufgestaut vom großen Steinwerkdamm. Zwerge messen jedes Anglerlatein an ihm, und meistens gewinnt der Loch.
-Der Immerruhsee im Rotkammgebirge ist schön wie ein Gemälde, und geangelt wird dort von jedem Steg in Seenhain. Die Leute im Ort kennen jede gute Stelle und verraten dir keine einzige.
-Von seinen Dschungelflüssen bis zum wilden Südkap hat das Schlingendorntal die reichsten Gewässer des Kontinents. Die Angler von Beutebucht tragen darum ein Turnier aus, und fast alle schummeln.
-Die Sümpfe des Elends sind grünes Wasser unter grünen Bäumen. Die Fische schmecken nach Schlamm, und die Einheimischen mögen sie genau so.
-Westfalls Felder haben versagt, seine Küste nicht. Wer geblieben ist, lebt vom langen grauen Strand.
-Das Sumpfland trägt seinen Namen zu Recht. Die Docks im Hafen von Menethil sind der trockenste Platz, um dort zu angeln, und die Krokilisken wissen das.
-In den Kanälen von Sturmwind angeln Kinder, Rentner und mindestens ein verkleidetes Mitglied des Adels. Niemand fragt, was sonst noch in den Kanälen ist.
-Die Düstere Höhle birgt den einzigen stillen Teich von Eisenschmiede. Alte Zwerge angeln dort stundenlang und sagen kein Wort.
-Die Kanäle von Unterstadt führen ein Grün, das nichts mit Algen zu tun hat. Die Verlassenen, die dort angeln, tun es nicht fürs Abendessen.
-Der erste Fisch, den die meisten Angler je an Land ziehen, und so leuchtend, dass sie ihn nicht vergessen.
-Glatt, flink und an jeder warmen Küste zu Hause. Gegrillt schmeckt das besser, als der Name vermuten lässt.
-Ganz Maul, und am glücklichsten in Wasser, das du nicht trinken würdest.
-Klein, bissig und furchtlos. Ein Schwarm davon soll einmal einen Bären aus dem Loch gejagt haben.
-Ein Farbblitz unter der Brandung. Hängt so ein Fisch an der Leine, gilt das unter Seeleuten als Glück für die Reise.
-Ein geduldiger Grundfisch mit Barthaaren wie ein Zwergenältester.
-Zweimal isst das niemand. Alchemisten kaufen jedes Exemplar, das sie kriegen können.
-Die Flossen glimmen wie Glut unter der Asche, und das ausgepresste Öl brennt fast genauso gut.
-Gepanzert wie ein kleiner Schild. Das Fleisch darin ist die Mühe wert.
-Irgendetwas im Wasser nahe den Höhlen des Wehklagens hat ihn verändert. Wer einen isst, den verändert es womöglich auch, für eine Weile.
-Das Flussvolk sagt, eine Mahlzeit davon kläre den Geist. Weise macht ihn das Schwimmen gegen den Strom.
-Älter, größer und weiser als sein Vetter, was ihn nicht von deinem Haken ferngehalten hat.
-Ein zäher Kämpfer aus warmen südlichen Meeren und ein Liebling auf jeder Tavernentafel von Beutebucht bis Gadgetzan.
-Die Stirn glänzt wie echtes Mithril. Mehr als ein Bergmann hat schon versucht, ein Exemplar einzuschmelzen.
-Die Schuppen lassen sich zu einem Öl einkochen, das die Haut hart wie Fels macht. Am liebsten ist ihm die Nacht.
-Poliert wie ein Paradeharnisch und beinahe genauso schwer.
-Er kommt nur in den kalten Monaten in Küstennähe, und die Köche, die ihn kennen, warten das ganze Jahr darauf.
-Er zieht, wenn die Tage lang sind. Die Küstenbewohner lesen an ihm die Jahreszeit ab.
-Fass ihn in der Mitte an, und nur ein einziges Mal.
-Ein Flussfisch aus wildem Land, an den Kiemen so rot wie die Kriegsbemalung eines Trolls.
-Er frisst nach Einbruch der Dunkelheit. Eine Suppe aus ihm beruhigt die Nerven eines Zauberwirkers.
-Er frisst am Tag, in fast allem das Gegenteil des Nachtflossenschnappers, und teilt sich trotzdem das Wasser mit ihm.
-Streng genommen kein Fisch. Er hält nichts davon, gefangen zu werden, und lässt dich das spüren.
-Bleich wie Flusseis, aus den kalten, klaren Seen des Nordens.
-Du wirst beide Hände brauchen, und vielleicht einen Freund.
-%.1f Pfd.
-Neu in deinem Angeltagebuch: %s, %s.
-Neu in deinem Angeltagebuch: %s.
-Dein bisher schwerster Fang – %s: %s (vorher %s).
-Angeltagebuch
-jeder Fang wird in dein Angeltagebuch geschrieben: wie viele von jeder Art, wo du sie zuerst gefangen hast, und ein zum Spaß erfundenes Gewicht mit deinem besten von jeder Art (/cchud journal öffnet es)
-Köder %s
-Kein Köder
-Gefangen %d
-Entkommen %d
-Angelanzeige
-mit einer Angelrute in den Händen: die Fische des Gewässers, an dem du stehst (die hier noch nicht gefangenen bleiben verborgen), deine Angelfertigkeit und was dein Köder dazugibt, wie viele du gefangen hast und wie viele entkommen sind, wie lange dein Köder hält, und deine letzten Fänge
-Ein Neugieriger: +%d%%
-Halte deinen Köder neben dem Fisch
-Nächster Fang +%d%%
-%s halten: der Köder läuft die Schnur entlang
-%d in Folge
-Ein Spiel, während der Schwimmer draußen ist
-auf der Zauberleiste gespielt, solange deine Schnur draußen ist: halte einen Abzug und dein Köder läuft die Schnur entlang, lass los und er treibt zurück; halte ihn beim Schatten des Fisches. Je besser du spielst, desto schwerer das erfundene Gewicht deines nächsten Fangs. Es belegt keine Taste und berührt weder Auswurf noch Fang
-%d gefangen, %d Arten, %d entkommen
-Schwerster: %s, %s
-Fische
-Gewässer
-Noch nichts gefangen. Nimm eine Angel mit ans Wasser.
-Gefangen: %d
-Schwerster: %s, in %s
-Zuerst gefangen: %s
-Hier gefangen: %d
-Hier gefundene Arten: %d
-Wählen
-Schließen
-dein Angeltagebuch öffnen oder schließen: jede Art, die du gefangen hast, dein schwerster Fang von jeder, und die Gewässer, in denen du geangelt hast
 Chat blendet aus, wenn es ruhig ist
 Chattext blendet nach einigen Sekunden ohne neue Nachrichten aus
 Sekunden bis der Chat ausblendet
@@ -979,66 +544,6 @@ Nachrichten, die Gold oder Dienste mit einer Webadresse anbieten, und dieselbe N
 Wiederholte Gildenwerbung ausblenden
 in öffentlichen Kanälen wird die Werbung einer Gilde einmal gezeigt; dieselbe vom selben Spieler oder eine fast gleiche innerhalb von 15 Minuten wird ausgeblendet (nie von deiner Gruppe, Gilde oder deinen Freunden)
 listet die zuletzt als Spam ausgeblendeten Chatnachrichten auf
-Flug
-Landung vorzeitig
-Landung am nächsten Flugpunkt
-Ziel unbekannt
-geschätzt nach der Entfernung
-erster Flug auf dieser Route: die Flugzeit wird gelernt
-Landung
-%s: etwa %s, geschätzt nach der Entfernung
-%s: etwa %s
-%s: erster Flug auf dieser Strecke, Zeit unbekannt
-Im Flug, Ziel unbekannt
-%s: Flugzeit gelernt, %s
-Vorzeitige Landung: %s, etwa %s
-Vorzeitige Landung am nächsten Flugpunkt
-frisch und kalt, Schnee unter den Füßen und der Atem hängt in der Luft
-bitterkalt, mit einem Wind von den Gipfeln, der jede Lücke in der Rüstung findet
-heiß und schwül, die Luft so dick, dass man sie trinken könnte
-drückende Hitze unter dem Blätterdach, und die Insekten sind laut
-heiß und trocken, mit Staub im Wind
-glühende Sonne und rissige Erde; trinkt, wann immer Ihr könnt
-Rauch und Asche auf einem heißen Wind
-versengte Luft, und Funken treiben umher
-grau und kalt, ein feuchter Nebel, der sich festsetzt
-eine Kühle in der Luft und kaum Licht
-mild und freundlich, mit einer sanften Brise
-angenehmes Wetter, gut zum Reisen
-kühl und grün, die Blätter flüstern
-sanftes Licht zwischen den Bäumen, und die Luft ist frisch
-schwül und feucht, der Boden weich unter den Füßen
-warme, nasse Luft und der Geruch des Moors
-%s in %s: %s
-%d Flugstrecken bekannt.
-Flüge: Zeit und Countdown
-auf einem Flug werden Ziel und Dauer im Chat genannt, und ein Balken oben am Bildschirm zählt bis zur Landung herunter; die Zeit jeder Strecke wird aus deinen Flügen gelernt
-Flüge: dein Reittier entlang der Leiste
-ein Greif, ein Windreiter oder eine Fledermaus (was der Flugmeister dir gab) gleitet die Flugleiste entlang zu deinem Landeplatz
-Flüge: das Wetter am Ziel
-bei der Landung sagt der Chat, wie die Luft dort ist, wo Ihr ankommt, so wie der Ort gewöhnlich ist (heiß und schwül im Schlingendorntal, Schnee unter den Füßen in Dun Morogh), und die Tageszeit
-die Flugstrecken mit bekannter Zeit auflisten
-Gelandet! +%d
-Angestoßen: die Serie endet
-%s flattern  ·  weiche den Baumkronen und Zeppelinen aus
-%s fang die Reiter mit dem Netz für Fluggold  ·  %s große Höhe
-%d Fluggold
-%s flattern
-%s Netz
-%s große Höhe
-%s: zurück zum Spiel (%d Fluggold)
-%s: ein Spiel für unterwegs
-Das Flugspiel ist aus: /cchud flightgame on
-Das Flugspiel wird auf einem Flug gespielt.
-Nicht im Kampf.
-Flugspiel: spielen / große Höhe
-Flüge: ein Spiel für unterwegs
-auf einem Flug wird unter der Flugleiste ein kleines Spiel angeboten, und eine Taste startet es (nur diese Taste wird belegt, bis du sie drückst): Lass dein Reittier über die Baumkronen und an den Zeppelinen vorbei flattern und fang die entgegenkommenden Reiter mit dem Netz, damit sie für Fluggold zu Boden gehen. Dieselbe Taste noch einmal ist große Höhe: Das Spiel wird weggelegt und die Tasten gehören wieder dem Spiel. Nie im Kampf, weg bei der Landung
-auf einem Flug: das Flugspiel starten, oder es in große Höhe bringen und zurück
-Filmische Flüge
-auf einem Flug mit dem Flugmeister wird der Bildschirm zum Film: schwarze Balken, das HUD tritt zurück, die Kamera zieht weit auf und schwenkt langsam um dich und dein Reittier, die Flugleiste im oberen Balken. Das Flugspiel, ein Fenster oder eine Taste unterbrechen ihn, und er endet sanft, wenn du zur Landung ansetzt
-Filmische Flüge: die Kamera kreist um dich
-im Film kreist die Kamera langsam um dich und dein Reittier, eine ganze Runde in etwa anderthalb Minuten, und kommt vor der Landung wieder hinter dich. Aus: eine ruhige Einstellung
 Ein Flug ist ein guter Moment dafür.
 Du spielst seit %s.
 Zeit für einen Schluck Wasser
@@ -1077,138 +582,6 @@ Debug-Berichte
 die Berichte zur Fehlersuche von selbst sammeln: beim Einloggen und erneut beim Neuladen oder Ausloggen (sie bleiben in den gespeicherten Einstellungen)
 die Momente, in denen das Spiel seit dem Einloggen stand, und wie viel davon die eigene Arbeit des HUD war
 was das Spiel über die Klasse Eures Ziels geheim hält und wie sie sich trotzdem zeigen lässt (einmal ausführen, bei einem feindlichen Spieler auf einem Schlachtfeld)
-Alle
-Ausrüstung
-Verbrauchbares
-Handwerkswaren
-Neu
-Clever
-Nach Art
-Wie in den Taschen
-Reagenzien
-Sonstiges
-Nichts hier.
-Freie Plätze
-%s verkauft: der Händler kann es dir zurückverkaufen.
-Rüstung lässt sich im Kampf nicht wechseln.
-Schlüsselbund
-Rucksack
-%d von %d Plätzen belegt
-Ablegen
-Aufnehmen
-Benutzen
-In die Taschen
-In die Bank
-Anhängen
-Handeln
-%s oder %s: zur Post
-%s oder %s: zum Händler
-%s oder %s: zur Bank
-%s oder %s: zum Handel
-%s oder %s: zum Auktionshaus
-%s oder %s: zur Gildenbank
-%s oder %s: zu deinem Charakter
-%s oder %s: zur Beute
-%s oder %s: anderes Fenster
-Controller-Tasten kommen nach dem Kampf zurück.
-%s oder %s: zurück zu den Taschen
-Halten zum Zerstören
-Alle Taschen
-Nur diese Tasche
-Hineinlegen
-Tasche aufnehmen
-Mehr
-Sortieren
-Taschen
-%d frei
-Freier Platz
-Im Kampf schließt B deine Taschen.
-für die Bank
-keine Markierung
-Kein freier Platz.
-Hier ablegen
-Stapel teilen
-Markierung: %s
-Gegenstandsdetails
-Zerstören
-Bank sortieren
-Taschen sortieren
-Taschen zeigen
-Bank zeigen
-Empfohlenes verkaufen
-Loslassen zum Zerstören
-Dieser Gegenstand startet eine Quest.
-Das ist ein Questgegenstand.
-%s zerstören?
-Das Spiel hat %s behalten: zerstöre es in seinen eigenen Taschen.
-%s zerstört.
-Ein Taschenfenster mit Schnellfiltern
-deine Taschen in einem eigenen Fenster des HUD statt dem des Spiels: alle Gegenstände beisammen, die freien Plätze am Ende gesammelt, deine Taschen in einer eigenen Reihe und Schnellfilter oben (LB und RB). Auch die Bank, solange sie offen ist. Aus: die Taschen des Spiels
-Taschenfenster: Reihenfolge
-Clever: was du benutzt zuerst (Verbrauchbares, Gegenstände mit Benutzen), dann der Rest nach Art, Plunder zuletzt und verblasst. Nach Art: in Abschnitten unter eigenen Überschriften. Wie in den Taschen: die Reihenfolge des Spiels
-Also gut.
-Och, was für ein Haufen.
-So, mal sehen, mal sehen...
-Elune, gib mir Geduld.
-Bei den Naaru, was für ein Durcheinander.
-Verflixter Rucksack.
-Ein ordentlicher Rucksack ist ein leichter Rucksack.
-Pah. Zu viel Kram.
-Totes Gewicht, das alles.
-Geduld. Die Erdenmutter sorgt für uns.
-Ey, was ham wir denn hier, Mann?
-Welch ein Durcheinander. Unschicklich.
-Zeit ist Geld. Zählen wir nach.
-Jo, das reicht.
-Elune sei Dank.
-Das Licht sorgt für uns.
-Hrm. Gut genug.
-Hm. Genug zum Kämpfen.
-Mit leichtem Gepäck. Gut.
-Annehmbar. Gerade so.
-Kein Platz mehr frei. Der Plunder brächte %s: verkaufen schafft Platz.
-Kein Platz mehr frei. Was ich unterwegs nicht brauche, kann in der Bank warten.
-Plunder: %d, hier %s wert. X verkauft das Gewählte; Schlau verkaufen nimmt alles.
-%d davon gehören in die Bank: dort liegt schon mehr davon, oder ich habe sie markiert. Einlagern räumt sie weg.
-Nur noch %d Plätze frei. Der Plunder brächte bei jedem Händler %s.
-Nur noch %d Plätze frei. Zeit, ein paar Sachen zu verkaufen oder einzulagern.
-Neu seit dem letzten Blick: %d. Der goldene Punkt markiert jedes.
-Lohnt den Verkauf: %d. Der Filter Verkaufen sammelt sie, und jeder Tooltip sagt, wo es am meisten bringt.
-Plunder: %d, %s wert. Der nächste Händler kann ihn haben.
-Nur das Nötigste. Nichts, was sich zu verkaufen lohnt.
-Alles in Ordnung, und %d Plätze frei.
-Deine Ausrüstung ist repariert: %s.
-Ich kann deine Ausrüstung für %s reparieren; ein kaputtes Teil gibt dir weder Rüstung noch Werte.
-Deine Taschen sind voll. Ich nehme %d Sachen für %s: Schlau verkaufen, und du hast wieder Platz.
-Ich gebe dir %s für %d Sachen: den Plunder und was das Auktionshaus nicht besser bezahlt. Schlau verkaufen, und fertig.
-Behalte die %d, die das Auktionshaus will: es zahlt %s mehr als ich.
-Deine Taschen sind voll. Verkauf mir erst etwas, bevor du kaufst.
-Nichts in deinen Taschen, wofür ich gut zahlen würde. Sieh dir meine Waren an.
-%d deiner Sachen gehören hierher: ich verwahre mehr davon, oder du hast sie markiert. Einlagern räumt sie weg.
-Ich verwahre mehr von %d Sachen, die du trägst. Abheben füllt deine Taschen auf, bevor du aufbrichst.
-Deine Taschen sind fast voll. Lass bei mir, was du unterwegs nicht brauchst.
-Alles sicher bei mir, und deine Taschen haben %d Plätze frei.
-Heute nichts für dich. Ich hab zweimal nachgesehen.
-Briefe für dich: %d, nichts angehängt. Lies sie, wann du magst.
-Briefe für dich: %d. Darin: %s.
-Alles nehmen leert sie in einem Rutsch.
-Nachnahme: %d. Die öffnest und bezahlst du selbst.
-Deine Taschen sind voll: die Gegenstände warten in ihren Briefen.
-Wohin? Zeig auf einen Ort, und ich sage dir, wie lange der Flug dauert.
-%s: etwa %s laut Karte. Diese Strecke bist du noch nicht geflogen.
-%s: etwa %s, nach deinem letzten Flug dorthin.
-%s: wie lange, kann ich noch nicht sagen. Flieg es einmal, dann weiß ich es.
-%d sind entwischt. Dieses Gewässer verlangt mehr Können, als ich habe: Köder hilft, eine bessere Angel auch.
-Kein Köder am Haken. Er erhöht mein Können, dann entwischen weniger.
-Der Köder ist fast aufgebraucht. Ein neuer am Haken hält mein Können oben.
-Fische hier, die ich noch nicht gefangen habe: %d. Weiter auswerfen.
-Ich habe jeden Fisch dieses Gewässers gefangen. Dann etwas Neues.
-Noch nichts gefangen. Der erste Fisch jedes Gewässers kommt hier hinein.
-Gefangene Arten: %d. Jedes Gewässer versteckt noch ein paar: die Angelanzeige zeigt ein ? für jede, die ich dort noch nicht gefangen habe.
-Am Feuer ausgeruht: die nächsten %d Erfahrung aus Kämpfen zählen doppelt.
-Keine Erholung angespart. Eine Nacht im Gasthaus oder in einer Stadt, und Kämpfe geben eine Weile doppelte Erfahrung.
-Erzählung: Figuren in den Fenstern
-jedes Fenster, das das HUD verbessert, hat jemanden, der dir hilft, mit Porträt und einem kurzen Satz dazu, was vor dir liegt und warum: du selbst über deinen Taschen und am Wasser, der Händler, der Bankier, der Postmeister, der Flugmeister, der Makler im Auktionshaus und der Mentor bei deinem Beruf; aus: die Fenster sind schlicht und still
 HUD-Voreinstellung: %s, passend zur Kamera
 Preset: %s
 Ein Layout namens '%s' wurde dem Bearbeitungsmodus des Spiels hinzugefügt. Wähle es dort aus, um es zu benutzen (Spielmenü > Bearbeitungsmodus > Layout).
@@ -1222,6 +595,7 @@ Aktion
 eine Ansicht aus der dritten Person: schmale vertikale Leisten neben deinem Charakter, alle Effekte an; außerhalb des Kampfes blendet alles aus
 Klassisch
 unsere Rahmen dort, wo WoW sie immer hatte, ruhigere Effekte, die Gamepad-Leisten des Spiels unverändert
+Minimal
 nur das Nötige: freundliche NPCs zeigen ihre Plakette (mit ihrer Tätigkeit) nur, solange du auf sie zeigst, sie anvisierst oder als Ziel hast; Namen ohne Titel; außerhalb des Kampfes ruhen deine Leisten als leiser Hinweis (wenig Gesundheit zeigt sich immer)
 Offene Welt
 ein klarer Bildschirm zum Erkunden: schmale Leisten neben dir, die verblasst ruhen, Plaketten ohne Kraftleisten, Chat, der ausblendet
@@ -1290,6 +664,7 @@ Hake „Erweiterte Optionen anzeigen“ auf der Hauptseite an, um alle Einstellu
 Module
 Schnellschalter
 Allgemein
+Seine Einstellungen erscheinen hier, wenn es an ist.
 HUD
 Das Optionsfenster ist in diesem Client nicht verfügbar.
 Aktiviert
@@ -1405,6 +780,7 @@ Questfortschritt
 Farmliste
 Karte
 Flugleiste
+Taschen
 Post
 Gegenstandsrat
 Vorlagen
@@ -1481,3 +857,634 @@ gleiche das Angezeigte mit den Einstellungen ab (check listet jede Zeile auf)
 eine Beschreibung der Gamepad-Oberfläche dieses Clients speichern (zur Fehlersuche)
 diese Liste anzeigen
 die letzten Fehler des HUD, auch nach einem Neuladen (um sie zu melden)
+Alle
+Ausrüstung
+Verbrauchbares
+Handwerkswaren
+Neu
+Clever
+Nach Art
+Wie in den Taschen
+Reagenzien
+Sonstiges
+Nichts hier.
+Freie Plätze
+%s verkauft: der Händler kann es dir zurückverkaufen.
+Rüstung lässt sich im Kampf nicht wechseln.
+Schlüsselbund
+Rucksack
+%d von %d Plätzen belegt
+Ablegen
+Aufnehmen
+Benutzen
+In die Taschen
+In die Bank
+Anhängen
+Handeln
+%s oder %s: zur Post
+%s oder %s: zum Händler
+%s oder %s: zur Bank
+%s oder %s: zum Handel
+%s oder %s: zum Auktionshaus
+%s oder %s: zur Gildenbank
+%s oder %s: zu deinem Charakter
+%s oder %s: zur Beute
+%s oder %s: anderes Fenster
+Controller-Tasten kommen nach dem Kampf zurück.
+Schließen
+%s oder %s: zurück zu den Taschen
+Halten zum Zerstören
+Wählen
+Zurück
+Alle Taschen
+Nur diese Tasche
+Hineinlegen
+Tasche aufnehmen
+Mehr
+Sortieren
+%d frei
+Freier Platz
+Im Kampf schließt B deine Taschen.
+für die Bank
+keine Markierung
+Kein freier Platz.
+Hier ablegen
+Stapel teilen
+Markierung: %s
+Gegenstandsdetails
+Anprobieren
+Zerstören
+Bank sortieren
+Taschen sortieren
+Taschen zeigen
+Bank zeigen
+Empfohlenes verkaufen
+Loslassen zum Zerstören
+Dieser Gegenstand startet eine Quest.
+Das ist ein Questgegenstand.
+%s zerstören?
+Das Spiel hat %s behalten: zerstöre es in seinen eigenen Taschen.
+%s zerstört.
+Taschenfenster: Reihenfolge
+Clever: was du benutzt zuerst (Verbrauchbares, Gegenstände mit Benutzen), dann der Rest nach Art, Plunder zuletzt und verblasst. Nach Art: in Abschnitten unter eigenen Überschriften. Wie in den Taschen: die Reihenfolge des Spiels
+Großmeister
+Meister
+Fachmann
+Experte
+Geselle
+Lehrling
+Stufe %d erreicht (von %d)
+Stufe %d erreicht
+%s und %d weitere besiegt in: %s
+%s besiegt
+%s: jetzt %s, bis %d
+%s hat %d erreicht
+%d neue Flugrouten, zuletzt %s
+Neue Flugroute: %s
+Neues Reittier: %s
+Neuer Begleiter: %s
+Neues Spielzeug: %s
+Erfolg: %s
+Das Lager
+In Ruhe
+Am Feuer
+Morgengrauen
+Morgen
+Nachmittag
+Abend
+Nacht
+%s in %s
+Mit %s
+Die Lagerfeuerszene ist aus.
+Die Lagerfeuerszene wartet, bis du nicht mehr im Kampf bist.
+die Lagerfeuerszene jetzt abspielen
+Oben
+Unten
+N
+NW
+W
+SW
+S
+SO
+O
+NO
+Der Questkompass ist aus: /cchud compass on
+Der Kompass muss wissen, wo du bist, und das Spiel sagt es hier nicht.
+Questkompass: Platz
+oben am Bildschirm, oder unten am Platz der Erfahrungsleiste (die Leiste kommt dann nach oben)
+ein paar Markierungen auf dem Questkompass, um dich herum, für zwanzig Sekunden
+Angelmodus: aus.
+Angeln: %s zum Auswerfen
+Kein Köder: %s zweimal für %s
+%s, um die Angel wegzustecken
+Angelmodus: %s zum Auswerfen, und noch einmal zum Anschlagen, wenn der Schwimmer zuckt.
+%s zum Anhauen, %s zum erneuten Auswerfen
+Der Angelmodus braucht eine Angelrute in deinen Händen.
+Du beherrschst Angeln nicht.
+Angelmodus: eine Taste wirft aus und hakt
+Angeltaste: %s
+Mit einem Druck neu auswerfen
+solange der Schwimmer draußen ist, holt deine Angeltaste den Fisch ein und A wirft mit einem Druck neu aus; aus: A gehört dir
+Köder mit Doppeldruck
+drücke deine Angeltaste zweimal schnell: der zweite Druck bringt den besten Köder aus deinen Taschen an die Angel, wenn sie keinen hat
+Gamepad-Leisten beim Angeln ausblenden
+mit einer Angel in der Hand sind die Gamepad-Leisten ausgeblendet, damit das Wasser frei zu sehen ist; die Angelanzeige zeigt die Taste zum Auswerfen. Sie sind zurück, sobald ein Kampf beginnt oder die Angel weggesteckt wird
+Ein-Tasten-Angeln vorerst aus oder wieder an (mit einer Angel in der Hand ist es von selbst an)
+die Taste, die angelt: anfangs deine Interaktionstaste (Quadrat oder X) oder jede andere, zum Beispiel ein Trigger (rt)
+Durotars Küste ist roter Fels und warmes Flachwasser. Die Trolle der Echoinseln sagen, die Makrelen ziehen am dichtesten, wenn die Flut den Duft der Kochfeuer von den Inseln herüberträgt.
+Die Seen von Mulgore sind klein, klar und geduldig. Die Tauren angeln dort so, wie sie alles andere tun: langsam und mit Dank.
+Jede Oase im Brachland ist ein Treffpunkt. Was auch immer dort bei Tag trinkt, bei Nacht schwimmt etwas darunter.
+Die Teiche von Teldrassil liegen im Schatten eines einzigen Baumes. Nachtelfische Angler schwören, die Fische dort hätten nie die Sonne gesehen und vermissten sie auch nicht.
+Das Wasser der Dunkelküste ist grau, kalt und voller Wracks. Die Hälfte dessen, was vor Auberdine anbeißt, hat sich in irgendjemandes verlorener Fracht häuslich eingerichtet.
+Die Flüsse des Eschentals fließen unter Blättern, die älter sind als die meisten Königreiche. Die Fische sind flink, und die Schildwachen fragen noch flinker, was du dort zu suchen hast.
+Unten zwischen den Tausend Nadeln ist Wasser knapp und wird eifersüchtig gehütet. Ein Fisch von hier hat sich seinen Platz verdient.
+Die Seen des Steinkrallengebirges liegen hoch und kalt zwischen den Gipfeln. Die Goblins hätten sie längst trockengelegt, wäre das Angeln nicht so gut.
+Die Küste von Desolace besteht aus Knochen und grauer Brandung. Irgendetwas dort unten hat an beidem Geschmack gefunden.
+Feralas ist grün bis hinunter an die Wasserlinie. Seine Flüsse sind tief, warm und überaus lebendig.
+Niemand weiß genau, wo in den Düstermarschen das Land aufhört und das Wasser anfängt. Angle vom Ufer aus und zähl danach deine Zehen.
+Der Dampfdruckpier hat das einzige Wasser in Tanaris, das den Namen verdient. Die Goblins verkaufen dir das Recht, dort zu angeln, und zwar zweimal, wenn du sie lässt.
+Unter Azsharas heller Bucht liegt eine versunkene Stadt. Alte Angler sagen, die ganz Großen leben dort, wo einst ihre Gärten waren.
+Die Tümpel des Teufelswalds leuchten, und zwar nicht auf die gute Art. Was noch darin schwimmt, ist stur über jede Vernunft hinaus.
+Die heißen Quellen und teergesäumten Seen von Un'Goro haben Dinge bewahrt, die der Rest der Welt vergessen hat. Manche davon beißen.
+Der See Elune'ara auf der Mondlichtung ist so still wie ein angehaltener Atem. Die Druiden bitten nur darum, dass du nicht mehr nimmst, als du essen wirst.
+Silithus ist Sand, Wind und das Geräusch von Flügeln. Wenn du hier Wasser zum Angeln gefunden hast, sag es niemandem.
+Die Seen von Winterquell frieren an den Rändern zu und dampfen in der Mitte. Die Fische dort sind fett gegen die Kälte und den Fußmarsch wert.
+In den Teichen von Orgrimmar angeln Peons, die nichts Besseres zu tun haben, und alte Grunzer, die dasselbe behaupten. Beide erzählen dir, der Große sei ihnen entwischt.
+Ein Fisch aus den Teichen von Donnerfels hat sein ganzes Leben hoch über den Ebenen verbracht. Er scheint das gelassen zu nehmen.
+Darnassus hütet seine Gewässer so sorgsam wie seine Tempel. Die Fische haben sich daran gewöhnt, bewundert zu werden.
+Die Seen des Alteracgebirges sind Schmelzwasser, und die Oger und das Syndikat angeln dort, wenn niemand hinsieht.
+Arathis Ufer haben mehr Armeen gesehen als Angler. Den Fischen ist längst gleich, wessen Banner über dem Wasser weht.
+Das Ödland ist Staub von einem Ende zum anderen. Ein Biss ist hier ein kleines Wunder, also behandle ihn auch so.
+Die Küste der Verwüsteten Lande ist rot, kahl gescheuert und still. Was in dieser Brandung lebt, hat gelernt, mit einer ganzen Menge zu leben.
+Die Seen von Tirisfal liegen reglos unter einem kränklichen Himmel. Die Verlassenen angeln dort aus Gewohnheit. Die Toten essen nicht viel, aber sie erinnern sich, dass es ihnen einmal geschmeckt hat.
+Die lange Küste des Silberwalds besteht ganz aus Nebel und Kiefernschatten. Das Angeln ist gut, und das ist das einzig Fröhliche, was je einer über die Gegend sagt.
+Die Flüsse der Westlichen Pestländer fließen noch, wenn auch nicht sauber. Was du herausziehst, sieh dir zweimal an.
+Nur wenige angeln in den Östlichen Pestländern, und noch weniger geben es zu. Das Wasser behält, was die Seuche von ihm übrig gelassen hat.
+Der Fluss im Vorgebirge des Hügellands und sein langes Südufer haben in jedem Streit, der um sie geführt wurde, beide Seiten ernährt.
+Das Hinterland hält seine Seen hoch oben zwischen den Bäumen, wo die Wildhammerzwerge vom Greifenrücken aus angeln, wenn sie glauben, dass niemand zusieht.
+Die Seen von Dun Morogh sind die meiste Zeit des Jahres von Eis umringt. Ein Zwerg schlägt ein Loch, setzt sich mit einem Humpen hin und nennt es einen guten Tag, ganz gleich, was anbeißt.
+Die Sengende Schlucht hat Lava, wo andere Länder Flüsse haben. Bring statt der Angel lieber etwas zu trinken mit.
+Die Brennende Steppe ist Asche und Glut. Wenn dir das Wasser hier überhaupt etwas gibt, dann ist es heiß.
+Jedes Kind in Elwynn lernt am Kristallsee oder am Steinhügelsee das Angeln. Die kleinen Fische dort tricksen sie seit Generationen aus.
+Der Gebirgspass der Totenwinde hat wenig Wasser und noch weniger Gastfreundschaft. Was in den Tümpeln unterhalb von Karazhan ist, bleibt am besten dort.
+Der Fluss am Rand des Dämmerwalds ist zu jeder Stunde schwarz. Die Fische scheint die Dunkelheit nicht zu stören, die Angler schon.
+Der Loch ist der Stolz von Loch Modan, aufgestaut vom großen Steinwerkdamm. Zwerge messen jedes Anglerlatein an ihm, und meistens gewinnt der Loch.
+Der Immerruhsee im Rotkammgebirge ist schön wie ein Gemälde, und geangelt wird dort von jedem Steg in Seenhain. Die Leute im Ort kennen jede gute Stelle und verraten dir keine einzige.
+Von seinen Dschungelflüssen bis zum wilden Südkap hat das Schlingendorntal die reichsten Gewässer des Kontinents. Die Angler von Beutebucht tragen darum ein Turnier aus, und fast alle schummeln.
+Die Sümpfe des Elends sind grünes Wasser unter grünen Bäumen. Die Fische schmecken nach Schlamm, und die Einheimischen mögen sie genau so.
+Westfalls Felder haben versagt, seine Küste nicht. Wer geblieben ist, lebt vom langen grauen Strand.
+Das Sumpfland trägt seinen Namen zu Recht. Die Docks im Hafen von Menethil sind der trockenste Platz, um dort zu angeln, und die Krokilisken wissen das.
+In den Kanälen von Sturmwind angeln Kinder, Rentner und mindestens ein verkleidetes Mitglied des Adels. Niemand fragt, was sonst noch in den Kanälen ist.
+Die Düstere Höhle birgt den einzigen stillen Teich von Eisenschmiede. Alte Zwerge angeln dort stundenlang und sagen kein Wort.
+Die Kanäle von Unterstadt führen ein Grün, das nichts mit Algen zu tun hat. Die Verlassenen, die dort angeln, tun es nicht fürs Abendessen.
+Der erste Fisch, den die meisten Angler je an Land ziehen, und so leuchtend, dass sie ihn nicht vergessen.
+Glatt, flink und an jeder warmen Küste zu Hause. Gegrillt schmeckt das besser, als der Name vermuten lässt.
+Ganz Maul, und am glücklichsten in Wasser, das du nicht trinken würdest.
+Klein, bissig und furchtlos. Ein Schwarm davon soll einmal einen Bären aus dem Loch gejagt haben.
+Ein Farbblitz unter der Brandung. Hängt so ein Fisch an der Leine, gilt das unter Seeleuten als Glück für die Reise.
+Ein geduldiger Grundfisch mit Barthaaren wie ein Zwergenältester.
+Zweimal isst das niemand. Alchemisten kaufen jedes Exemplar, das sie kriegen können.
+Die Flossen glimmen wie Glut unter der Asche, und das ausgepresste Öl brennt fast genauso gut.
+Gepanzert wie ein kleiner Schild. Das Fleisch darin ist die Mühe wert.
+Irgendetwas im Wasser nahe den Höhlen des Wehklagens hat ihn verändert. Wer einen isst, den verändert es womöglich auch, für eine Weile.
+Das Flussvolk sagt, eine Mahlzeit davon kläre den Geist. Weise macht ihn das Schwimmen gegen den Strom.
+Älter, größer und weiser als sein Vetter, was ihn nicht von deinem Haken ferngehalten hat.
+Ein zäher Kämpfer aus warmen südlichen Meeren und ein Liebling auf jeder Tavernentafel von Beutebucht bis Gadgetzan.
+Die Stirn glänzt wie echtes Mithril. Mehr als ein Bergmann hat schon versucht, ein Exemplar einzuschmelzen.
+Die Schuppen lassen sich zu einem Öl einkochen, das die Haut hart wie Fels macht. Am liebsten ist ihm die Nacht.
+Poliert wie ein Paradeharnisch und beinahe genauso schwer.
+Er kommt nur in den kalten Monaten in Küstennähe, und die Köche, die ihn kennen, warten das ganze Jahr darauf.
+Er zieht, wenn die Tage lang sind. Die Küstenbewohner lesen an ihm die Jahreszeit ab.
+Fass ihn in der Mitte an, und nur ein einziges Mal.
+Ein Flussfisch aus wildem Land, an den Kiemen so rot wie die Kriegsbemalung eines Trolls.
+Er frisst nach Einbruch der Dunkelheit. Eine Suppe aus ihm beruhigt die Nerven eines Zauberwirkers.
+Er frisst am Tag, in fast allem das Gegenteil des Nachtflossenschnappers, und teilt sich trotzdem das Wasser mit ihm.
+Streng genommen kein Fisch. Er hält nichts davon, gefangen zu werden, und lässt dich das spüren.
+Bleich wie Flusseis, aus den kalten, klaren Seen des Nordens.
+Du wirst beide Hände brauchen, und vielleicht einen Freund.
+%.1f Pfd.
+Neu in deinem Angeltagebuch: %s, %s.
+Neu in deinem Angeltagebuch: %s.
+Dein bisher schwerster Fang – %s: %s (vorher %s).
+Köder %s
+Kein Köder
+Gefangen %d
+Entkommen %d
+Ein Neugieriger: +%d%%
+Halte deinen Köder neben dem Fisch
+Nächster Fang +%d%%
+%s halten: der Köder läuft die Schnur entlang
+%d in Folge
+Ein Spiel, während der Schwimmer draußen ist
+auf der Zauberleiste gespielt, solange deine Schnur draußen ist: halte einen Abzug und dein Köder läuft die Schnur entlang, lass los und er treibt zurück; halte ihn beim Schatten des Fisches. Je besser du spielst, desto schwerer das erfundene Gewicht deines nächsten Fangs. Es belegt keine Taste und berührt weder Auswurf noch Fang
+%d gefangen, %d Arten, %d entkommen
+Schwerster: %s, %s
+Fische
+Gewässer
+Noch nichts gefangen. Nimm eine Angel mit ans Wasser.
+Gefangen: %d
+Schwerster: %s, in %s
+Zuerst gefangen: %s
+Hier gefangen: %d
+Hier gefundene Arten: %d
+dein Angeltagebuch öffnen oder schließen: jede Art, die du gefangen hast, dein schwerster Fang von jeder, und die Gewässer, in denen du geangelt hast
+Flug
+Landung vorzeitig
+Landung am nächsten Flugpunkt
+Ziel unbekannt
+geschätzt nach der Entfernung
+erster Flug auf dieser Route: die Flugzeit wird gelernt
+Landung
+%s: etwa %s, geschätzt nach der Entfernung
+%s: etwa %s
+%s: erster Flug auf dieser Strecke, Zeit unbekannt
+Im Flug, Ziel unbekannt
+%s: Flugzeit gelernt, %s
+Vorzeitige Landung: %s, etwa %s
+Vorzeitige Landung am nächsten Flugpunkt
+frisch und kalt, Schnee unter den Füßen und der Atem hängt in der Luft
+bitterkalt, mit einem Wind von den Gipfeln, der jede Lücke in der Rüstung findet
+heiß und schwül, die Luft so dick, dass man sie trinken könnte
+drückende Hitze unter dem Blätterdach, und die Insekten sind laut
+heiß und trocken, mit Staub im Wind
+glühende Sonne und rissige Erde; trinkt, wann immer Ihr könnt
+Rauch und Asche auf einem heißen Wind
+versengte Luft, und Funken treiben umher
+grau und kalt, ein feuchter Nebel, der sich festsetzt
+eine Kühle in der Luft und kaum Licht
+mild und freundlich, mit einer sanften Brise
+angenehmes Wetter, gut zum Reisen
+kühl und grün, die Blätter flüstern
+sanftes Licht zwischen den Bäumen, und die Luft ist frisch
+schwül und feucht, der Boden weich unter den Füßen
+warme, nasse Luft und der Geruch des Moors
+%s in %s: %s
+%d Flugstrecken bekannt.
+Flüge: dein Reittier entlang der Leiste
+ein Greif, ein Windreiter oder eine Fledermaus (was der Flugmeister dir gab) gleitet die Flugleiste entlang zu deinem Landeplatz
+Flüge: das Wetter am Ziel
+bei der Landung sagt der Chat, wie die Luft dort ist, wo Ihr ankommt, so wie der Ort gewöhnlich ist (heiß und schwül im Schlingendorntal, Schnee unter den Füßen in Dun Morogh), und die Tageszeit
+die Flugstrecken mit bekannter Zeit auflisten
+Gelandet! +%d
+Angestoßen: die Serie endet
+%s flattern  ·  weiche den Baumkronen und Zeppelinen aus
+%s fang die Reiter mit dem Netz für Fluggold  ·  %s große Höhe
+%d Fluggold
+%s flattern
+%s Netz
+%s große Höhe
+%s: zurück zum Spiel (%d Fluggold)
+%s: ein Spiel für unterwegs
+Das Flugspiel ist aus: /cchud flightgame on
+Das Flugspiel wird auf einem Flug gespielt.
+Nicht im Kampf.
+Flugspiel: spielen / große Höhe
+auf einem Flug: das Flugspiel starten, oder es in große Höhe bringen und zurück
+Filmische Flüge: die Kamera kreist um dich
+im Film kreist die Kamera langsam um dich und dein Reittier, eine ganze Runde in etwa anderthalb Minuten, und kommt vor der Landung wieder hinter dich. Aus: eine ruhige Einstellung
+Offline
+Tot
+Aus
+In einer Heiler-Spezialisierung
+Immer
+Zu weit
+Heiler-Gruppe und -Schlachtzug
+in einer Gruppe: deine Gruppe neben deinem Charakter, jedes Mitglied mit der Taste, die es anvisiert; im Schlachtzug: schlankere Rahmen. Jeder zeigt nur, wie viel Heilung nötig ist, einen Schwächungszauber, den du entfernen kannst, und ob er in Reichweite ist
+%d%% Verkaufschance
+Geht sicher weg (%d%%)
+Das verkauft sich von selbst (%d%%)
+Ich denke, das geht weg (%d%%)
+Sollte einen Käufer finden (%d%%)
+Halbe-halbe (%d%%)
+Kann so oder so ausgehen (%d%%)
+Ein kleines Glücksspiel (%d%%)
+Könnte eine Weile liegen (%d%%)
+Darauf würde ich nicht wetten (%d%%)
+Schlechte Karten, Freund (%d%%)
++%s gegenüber einem Händler
+noch kein Preis bekannt
+ein Händler zahlt genauso viel
+Der Makler
+Markt
+jede Münze gezählt, Freund
+In deinen Taschen lässt sich hier nichts verkaufen.
+Keine Preise in den letzten 7 Tagen.
+Erst ein Tag mit Preisen: Jeden Tag, an dem du das Auktionshaus besuchst, kommt eine Kerze hinzu.
+7 Tage, eine Kerze pro Tag: grün höher geschlossen, rot tiefer
+30 Tage, der niedrigste des Tages: grün hoch, rot runter
+Noch keine Preisgeschichte: lies das Auktionshaus an ein paar Tagen.
+Erst ein Tag Preise: Die Linie wächst mit jedem Tag, an dem du das Auktionshaus besuchst.
+Verlange %s pro Stück, %s für die %d, die du abgibst; %d bleiben bei dir
+Verlangt %s pro Stück, %s für alle %d
+Niedrigster
+gelesen %s
+Üblich
+7 Tage: %s bis %s
+Eingestellt: %d Auktionen, %d Gegenstände
+%s pro Stück, %s für alle %d
+Du hast hier %d eingestellt, %d Auktionen verkauft
+Kein Preis bekannt: lies zuerst das Auktionshaus.
+Nichts in deinen Taschen, das sich hier verkaufen lässt.
+Heute bringt hier nichts mehr als beim Händler; %d vielleicht, mit Geduld.
+Das Beste zuerst: %d bringen hier mehr als beim Händler, %d weitere mit Geduld.
+Leere Taschen, Freund. Bring mir was zum Verkaufen.
+Hier schlägt heute nichts den Händler. %d vielleicht, mit etwas Geduld.
+Kein sicherer Gewinn in diesen Taschen, Freund. %d lohnen sich, wenn du wartest.
+Das Beste oben: %d hier schlagen jeden Händler, %d mehr für Geduldige.
+%d bringen hier mehr als beim Händler, Bestes zuerst. %d mehr, wenn du wartest.
+Oben liegt das Geld: %d sichere Verkäufe, %d mehr, wenn du warten kannst.
+Noch keine Preise: %s liest das Auktionshaus.
+Gerade gelesene Preise: %d.
+%d Preise, gelesen %s.
+%d Preise, gelesen %s. %s liest sie neu.
+Hab das Brett noch nicht gelesen. %s, und ich hol jeden Preis.
+Noch keine Preise, Freund. %s liest das ganze Brett.
+Preise frisch vom Brett, Freund: %d Stück.
+Gerade das Brett gelesen: %d Preise, noch warm.
+%d Preise, gelesen %s. Gut genug, Freund.
+Zuletzt aufs Brett geschaut: %s, %d Preise.
+Preise von %s, altbacken wie Brot von gestern. %s liest das Brett neu.
+%d Preise, aber gelesen %s. %s, und ich schau nochmal.
+Was du behältst, wird auch gezeigt. %s blendet es aus.
+Zurückbehalten: %d, für deine Berufe, deine Ausrüstung und deine Markierungen. %s zeigt sie.
+Was du behältst, steht auch auf der Liste. %s räumt es weg.
+Ich zeig auch, was du behältst. %s blendet es wieder aus.
+%d zurückgelegt: Material für Berufe, Ausrüstung, Markiertes. %s zeigt sie.
+%d beiseitegelegt: fürs Handwerk, zum Anziehen, von dir markiert. %s, wenn du sie willst.
+pro Stück
+keine Daten
+Schnellverkauf
+Geduldig
+Alle Preise lesen
+Behaltenes verbergen
+Behaltenes zeigen
+Linie
+Kerzen
+Einstellen
+%d von %d
+%d von %d einstellen, je %s
+%d für %s einstellen
+Alle %d für %s einstellen
+In das Auktionshaus dieses Clients kann von hier aus nicht eingestellt werden.
+%d für %s eingestellt.
+Markt im Auktionshaus: öffnen / schließen
+Gruß des Auktionators im Markt
+ein Goblin-Auktionator sagt einen kurzen Satz aus den Klängen des Spiels, wenn der Markt öffnet; aus: er öffnet still
+Markt: zeigen, was du behältst
+der Markt listet auch, was du behältst: woraus deine Berufe noch lernen oder etwas Wertvolleres herstellen, und was du zum Behalten markiert hast; aus: nur, was du verkaufen würdest
+Markt: Preisverlauf als Kerzen
+der Preisverlauf im Markt ist eine Kerze pro Tag für die letzten 7 Tage (wo der Preis eröffnete, am höchsten und am niedrigsten war und schloss: grün, wenn er höher schloss, rot, wenn tiefer); aus: eine Linie des niedrigsten Tagespreises über 30 Tage
+den Markt öffnen oder schließen (ein Reiter des Auktionshauses)
+welches Auktionshaus dieser Client hat (zur Fehlersuche)
+Öffne das Fenster eines Berufs, und ich sehe mir deine Rezepte an.
+Das ist die Grenze, %d. Ein Lehrer hat den nächsten Rang für dich.
+Bei %d gibt es nichts mehr zu lernen. Sprich mit einem Lehrer über den nächsten Rang.
+Du bist deinen Rezepten entwachsen. Geh zum Lehrer: %s wartet bei %d auf dich.
+Noch %d bis %d, und was du kannst, bringt dich nicht dorthin. Ein Lehrer hat %s für dich, ab %d.
+Du bist deinen Rezepten entwachsen. Geh zum Lehrer: %s wartet auf dich.
+Deine Rezepte lehren dich nichts mehr, %d vor %d. Frag einen Lehrer nach %s.
+Deine Rezepte geben %d vor %d nichts mehr her. Ein Lehrer hat etwas Neues für dich.
+Was du kannst, trägt dich nicht über die letzten %d. Zeit für einen Lehrer.
+%s lehrt dich jetzt nicht mehr viel, aber es ist das Beste, was du hast. Noch %d bis %d.
+Ab hier geht es langsam: %s gibt ab und zu einen Punkt. Noch %d.
+Zuerst brauchst du %s, %s. Die Anleitungen beginnen diesen Abschnitt damit.
+Lerne %s, %s, dann fangen wir an: noch %d bis %d.
+Noch %d bis %d. Die Anleitungen schicken dich nach %s, bis %d.
+Hier lehrt dich das Sammeln: %s bis %d.
+Noch %d bis %d. Fang mit %s an, oder mit %s, wenn dir das lieber ist: %s.
+Zuerst %s, so sehen es die Anleitungen. %s tut es auch: %s.
+Noch %d bis %d. Fang mit %s an.
+%s ist jetzt dein bester Lehrer. Noch %d Punkte bis %d.
+Ruhige Hände. Zuerst %s, dann noch %d.
+bei einem Lehrer
+bei einem Händler
+als Beute
+aus einer Quest
+günstigere Materialien
+Materialien vom Händler
+Materialien, die du selbst sammelst
+verkauft sich gut
+etwas, das du selbst nutzt
+weniger Herstellungen
+ein Rezept, das du findest oder kaufst
+andere Materialien
+die erste Wahl der Anleitungen
+Öffne das Fenster eines Berufs für einen Levelplan.
+Am Limit, %d. Ein Lehrer hat den nächsten Rang.
+Noch %d bis %d; deine Rezepte reichen nicht. Ein Lehrer hat %s ab %d.
+Noch %d bis %d; deine Rezepte reichen nicht. Ein Lehrer hat %s.
+Deine Rezepte enden %d vor %d. Ein Lehrer hat mehr.
+Noch %d bis %d. Am besten jetzt: %s, grün (ab und zu ein Punkt).
+Noch %d bis %d. Lerne zuerst %s, %s.
+Noch %d bis %d. Sammle %s bis %d.
+Noch %d bis %d. Zuerst: %s, oder %s (%s).
+Noch %d bis %d. Zuerst: %s.
+Zu sammeln oder zu kaufen
+%d-mal herstellen: %s
+Lerne es %s, ab %d.
+Lerne es %s.
+%s: %d in deinen Taschen, %d in der Bank, %d pro Herstellung
+Die Anleitungen leveln diesen Abschnitt mit dem Sammeln von %s.
+%s: du hast %d, der Plan braucht %d
+für %s
+Der Mentor: was deine Bank herstellen lässt
+Was deine Bank herstellen kann
+Mit dem, was in deiner Bank liegt, lässt sich nichts mehr herstellen.
+%d kannst du mit deiner Bank herstellen, %d davon nur mit ihr.
+Der Mentor: %s %d > %d
+Der Mentor
+Levelplan
+oder
+Sammle %s
+zu lernen
+Ausblenden
+Der Plan
+Das farmen
+Alles farmen
+Mit der Bank
+Plan bedienen
+zweimal zum Ausblenden
+Hier gibt es nichts anzuprobieren.
+%d zur Farmliste hinzugefügt.
+Nichts fehlt: Du hast alles, was nötig ist.
+Öffne das Fenster eines Berufs, um einen Plan zu erstellen.
+Der Mentor (Levelplan): zeigen / verbergen
+zeigt den Levelplan des zuletzt geöffneten Berufsfensters, mit den Tasten des Controllers darauf
+Links der Quests
+Rechts der Quests
+Unter den Quests
+Die Farmliste ist voll.
+Farmliste: %s, %d gewünscht.
+Farmen
+%d weitere
+Noch nichts zu farmen.
+Einen Stapel mehr
+Entfernen
+Leeren
+Fertig
+Alles von der Farmliste nehmen?
+Farmliste: wählen / fertig
+Farmliste: den Gegenstand hinzufügen, auf den du zeigst
+Das steht nicht auf der Farmliste.
+Die Farmliste ist leer.
+Farmliste: wo sie sitzt
+die Farmliste links der Questliste, rechts davon oder unter ihren Quests
+die Farmliste neben der Questliste: mit dem Controller wählen; add <Gegenstand> [wie viele], remove <Gegenstand>, clear, oder left / right / bottom für ihren Platz
+Bedrohung in Prozent
+dein Anteil an der Bedrohung als Zahl neben dem Bedrohungssymbol, am Zielrahmen und an Namensplaketten
+Gesundheitszahl
+die verbleibende Gesundheit, gekürzt (12.3k), auf der Leiste (nicht auf kompakten Plaketten: dort reicht der Prozentwert)
+Deine Debuffs
+deine Debuffs auf der Einheit, über ihrem Namen, mit ihrer Zeit
+Debuffs von allen
+die Debuffs, die das Spiel für Namensplaketten von allen markiert, nicht nur von dir
+Gegnerische Buffs
+die Stärkungen eines Feindes neben seinen Schwächungen: die wichtigen (wichtig, wütend oder von dir bannbar oder stehlbar), oder alle, wenn Nur die Effekte, die zählen aus ist
+Massenkontroll-Symbol
+ein großes Symbol mit Restzeit, wenn die Einheit betäubt, bewegungsunfähig, in Furcht versetzt ist...
+Aggro-Leuchten
+ein Schildsymbol und ein Leuchten hinter dem Namen: rot, solange es dich angreift, rot und gelb, wenn du es gleich ziehst, gelb und blau, wenn du es verlierst, blau, wenn es nicht auf dir ist
+Questmarkierung
+eine goldene Markierung an Einheiten, die deine Quests noch brauchen
+Namensplaketten-Animationen
+Plaketten blenden ein, niedrige Gesundheit atmet, Massenkontrolle schimmert
+Klein
+Normal
+Groß
+Voller Name
+Kurzer Name
+Kein Name
+Voll
+Minimal mini
+Namensplakettengröße
+wie groß die Leisten auf Namensplaketten sind: klein und schmal, normal oder groß (breiter und höher)
+Namen auf Namensplaketten
+der Name auf einer Plakette mit Gesundheitsleiste: voll, gekürzt oder weggelassen (der Zielrahmen nennt ihn voll; Stufe und Klassensymbol bleiben). Eine Plakette ohne Leiste, die eines freundlichen NPCs, behält immer ihren Namen
+Aussehen der Namensplaketten
+die Schalter der Namensplaketten auf einen Druck. Voll: alles. Minimal: keine Ressourcenleiste, Gilde oder Titel, kurze Namen. Minimal mini: kleine Leisten mit Gesundheit, Euren Schwächungen und den wichtigen Stärkungen, Stufe und Klasse, kein Name (der Zielrahmen hat ihn). Bedrohung, Kontrolleffekte und laute Zauber bleiben immer
+Spielertitel
+zeigt den Titel eines Spielers neben seinem Namen an
+Gilden und NSC-Berufe
+eine Zeile unter dem Namen: die Gilde des Spielers oder die Tätigkeit des NSC
+Leisten für Freunde im Kampf
+freundliche Namensplaketten zeigen Gesundheit, Ressource und Zauber, solange sich die Einheit im Kampf befindet
+Die eigenen freundlichen Namensplaketten des Spiels
+freundliche Plaketten (deine Gruppe, andere Spieler, freundliche NPCs) im Aussehen des Spiels lassen; unsere nur bei Feinden
+Ressourcenleisten
+eine schmale Mana-, Wut- oder Energieleiste unter der Gesundheitsleiste
+Zauberziel
+wer das Ziel eines Zaubers ist, neben dem Namen des Zaubers
+Gesundheit in Prozent
+der Gesundheitswert in Prozent auf der Leiste
+Name auf der Plakette deines Ziels
+aus: die Plakette deines Ziels zeigt weder Namen noch Stufe (der Zielrahmen zeigt sie)
+Stufen auf Namensplaketten
+die Stufe vor dem Namen eines Gegners, nach Schwierigkeit gefärbt
+Kompakte Namensplaketten
+Namensplaketten etwa halb so breit
+Auffällige Gegnerzauber
+der Zauber eines Gegners blinkt, schwillt an und pulsiert immer schneller, bis er gewirkt wird, damit er rechtzeitig unterbrochen werden kann
+Klassensymbole auf Namensplaketten
+das Klassensymbol eines Spielers vor seinem Namen, ob Freund oder Feind
+Was NPCs tun, als Symbole
+ein Symbol über freundlichen NPCs, die etwas anbieten: eine Tasche über Händlern, ein Amboss über Schmieden, die reparieren, ein Buch über Lehrern... (die eigenen Symbole des Spiels; sie erscheinen auch, solange die Plakette darauf wartet, dass du auf sie zeigst)
+Freundliche NPCs nur beim Zeigen
+die Plaketten freundlicher NPCs (Händler, Questgeber, Stadtbewohner) erscheinen nur, solange du auf sie zeigst, wie ihr Tooltip
+Namen über Dingen, mit denen du interagieren kannst
+ein Name über Erz, Truhen, Tafeln und dergleichen, solange du ihnen zugewandt bist (aus: sie bleiben ohne Namen, die Anzeige des Spiels sagt bereits, was sie sind)
+Mini-Namensplaketten
+Diener, Kleintiere und graue Gegner ohne Erfahrung bekommen eine kleine Plakette: eine schmale Leiste mit deinen Schwächungen darauf und ohne Namen (ein Kleintier ohne Leiste behält seinen Namen; ob sie überhaupt Plaketten haben, entscheidet die Option des Spiels)
+Gruppen-Namensplaketten in Dungeons: nur Namen
+in einem Dungeon oder Schlachtzug zeichnet das Spiel die Namensplaketten freundlicher Spieler selbst, und Addons dürfen sie nicht ändern: dort werden die eigenen Optionen des Spiels so gesetzt, dass sie als klassenfarbige Namen ohne Leisten erscheinen, wie unsere, und im Kampf kommen die Leisten des Spiels zurück (wenn Leisten für Freunde im Kampf an sind); beim Verlassen wird alles zurückgestellt
+Gruppen-Namensplaketten in Dungeons: ausgeblendet
+in einem Dungeon oder Schlachtzug die Namensplaketten des Spiels für freundliche Spieler ganz ausschalten (und beim Verlassen wieder so, wie du sie hattest)
+zeigt, was das Spiel für den Namen deines Ziels liefert (zur Fehlersuche)
+die Namensplaketten auf dem Bildschirm auflisten und ob sie unser Aussehen tragen (zur Fehlersuche)
+Also gut.
+Och, was für ein Haufen.
+So, mal sehen, mal sehen...
+Elune, gib mir Geduld.
+Bei den Naaru, was für ein Durcheinander.
+Verflixter Rucksack.
+Ein ordentlicher Rucksack ist ein leichter Rucksack.
+Pah. Zu viel Kram.
+Totes Gewicht, das alles.
+Geduld. Die Erdenmutter sorgt für uns.
+Ey, was ham wir denn hier, Mann?
+Welch ein Durcheinander. Unschicklich.
+Zeit ist Geld. Zählen wir nach.
+Jo, das reicht.
+Elune sei Dank.
+Das Licht sorgt für uns.
+Hrm. Gut genug.
+Hm. Genug zum Kämpfen.
+Mit leichtem Gepäck. Gut.
+Annehmbar. Gerade so.
+Kein Platz mehr frei. Der Plunder brächte %s: verkaufen schafft Platz.
+Kein Platz mehr frei. Was ich unterwegs nicht brauche, kann in der Bank warten.
+Plunder: %d, hier %s wert. X verkauft das Gewählte; Schlau verkaufen nimmt alles.
+%d davon gehören in die Bank: dort liegt schon mehr davon, oder ich habe sie markiert. Einlagern räumt sie weg.
+Nur noch %d Plätze frei. Der Plunder brächte bei jedem Händler %s.
+Nur noch %d Plätze frei. Zeit, ein paar Sachen zu verkaufen oder einzulagern.
+Neu seit dem letzten Blick: %d. Der goldene Punkt markiert jedes.
+Lohnt den Verkauf: %d. Der Filter Verkaufen sammelt sie, und jeder Tooltip sagt, wo es am meisten bringt.
+Plunder: %d, %s wert. Der nächste Händler kann ihn haben.
+Nur das Nötigste. Nichts, was sich zu verkaufen lohnt.
+Alles in Ordnung, und %d Plätze frei.
+Deine Ausrüstung ist repariert: %s.
+Ich kann deine Ausrüstung für %s reparieren; ein kaputtes Teil gibt dir weder Rüstung noch Werte.
+Deine Taschen sind voll. Ich nehme %d Sachen für %s: Schlau verkaufen, und du hast wieder Platz.
+Ich gebe dir %s für %d Sachen: den Plunder und was das Auktionshaus nicht besser bezahlt. Schlau verkaufen, und fertig.
+Behalte die %d, die das Auktionshaus will: es zahlt %s mehr als ich.
+Deine Taschen sind voll. Verkauf mir erst etwas, bevor du kaufst.
+Nichts in deinen Taschen, wofür ich gut zahlen würde. Sieh dir meine Waren an.
+%d deiner Sachen gehören hierher: ich verwahre mehr davon, oder du hast sie markiert. Einlagern räumt sie weg.
+Ich verwahre mehr von %d Sachen, die du trägst. Abheben füllt deine Taschen auf, bevor du aufbrichst.
+Deine Taschen sind fast voll. Lass bei mir, was du unterwegs nicht brauchst.
+Alles sicher bei mir, und deine Taschen haben %d Plätze frei.
+Heute nichts für dich. Ich hab zweimal nachgesehen.
+Briefe für dich: %d, nichts angehängt. Lies sie, wann du magst.
+Briefe für dich: %d. Darin: %s.
+Alles nehmen leert sie in einem Rutsch.
+Nachnahme: %d. Die öffnest und bezahlst du selbst.
+Deine Taschen sind voll: die Gegenstände warten in ihren Briefen.
+Wohin? Zeig auf einen Ort, und ich sage dir, wie lange der Flug dauert.
+%s: etwa %s laut Karte. Diese Strecke bist du noch nicht geflogen.
+%s: etwa %s, nach deinem letzten Flug dorthin.
+%s: wie lange, kann ich noch nicht sagen. Flieg es einmal, dann weiß ich es.
+%d sind entwischt. Dieses Gewässer verlangt mehr Können, als ich habe: Köder hilft, eine bessere Angel auch.
+Kein Köder am Haken. Er erhöht mein Können, dann entwischen weniger.
+Der Köder ist fast aufgebraucht. Ein neuer am Haken hält mein Können oben.
+Fische hier, die ich noch nicht gefangen habe: %d. Weiter auswerfen.
+Ich habe jeden Fisch dieses Gewässers gefangen. Dann etwas Neues.
+Noch nichts gefangen. Der erste Fisch jedes Gewässers kommt hier hinein.
+Gefangene Arten: %d. Jedes Gewässer versteckt noch ein paar: die Angelanzeige zeigt ein ? für jede, die ich dort noch nicht gefangen habe.
+Am Feuer ausgeruht: die nächsten %d Erfahrung aus Kämpfen zählen doppelt.
+Keine Erholung angespart. Eine Nacht im Gasthaus oder in einer Stadt, und Kämpfe geben eine Weile doppelte Erfahrung.
+%d absorbiert
+Liste rechts
+Einzeln in der Mitte
+%d kritische Heilungen
+%d Krits
+Richturteil
+Große Momente: wo
+ein Block direkt über den Abklingzeit-Meldungen rechts von Eurer Figur, der neueste am nächsten daran und die älteren darüber aufsteigend, während sie verblassen, oder einzeln in der Mitte
+zeigt, wie ein großer Moment aussieht und sich anfühlt
+gesammelt
+über einen anderen Gegenstand gesammelt
+noch nicht gesammelt
+Vorlage
+Wähle ein Set, um seine Teile auf dein Outfit zu legen. %s behält es; vorher wird nichts bezahlt.
+Deine Sammlung wird durchgesehen...
+Dein Outfit ist wieder wie vorher.
+%s: %d von %d Teilen angelegt.
+%d passten nicht auf dieses Outfit.
+Ein Set, von dem du Teile hast
+%d Sets, von denen du Teile hast
+kannst du nicht tragen
+fehlt
+Alle %d Teile
+%d von %d Teilen
+Fehlt: %s
+Noch keine Sets. Gegenstände mit gleichem Namen, wie Grüner Eisenhelm und Grüne Eisenstulpen, erscheinen hier, sobald du einen davon hast.
+Rückgängig

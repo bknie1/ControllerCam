@@ -1091,6 +1091,24 @@ function mock.closeTransmog()
     C_TransmogOutfitInfo.ClearAllPendingTransmogs()
 end
 
+-- The HUD's modules, load-on-demand addons: name -> what loads its files (the tests set them, from its toc).
+-- LoadAddOn as the game's: true once loaded; false and why (MISSING, DISABLED) otherwise.
+mock.modules, mock.disabled, mock.enabledFor = {}, {}, {}
+function LoadAddOn(name)
+    if mock.addons[name] then return true end
+    local load = mock.modules[name]
+    if not load then return false, "MISSING" end
+    if mock.disabled[name] then return false, "DISABLED" end
+    mock.addons[name] = true
+    load()
+    mock.fire("ADDON_LOADED", name)
+    return true
+end
+function EnableAddOn(name, character)
+    mock.disabled[name] = nil
+    mock.enabledFor[name] = character or true
+end
+
 function mock.loadHud(path, ns)
     local fn, err = loadfile(path)
     if not fn then error(err) end
