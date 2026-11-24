@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.4.21
+
+ControllerCam: HUD
+- PvP nameplates, condensed for a crowded battleground or arena. The other side shows only what you need to know: health, power, level, class and name, with no titles or guilds. Your own side gets a slim green bar, smaller and without a name, so the enemies stand out.
+- Fixed: in a battleground, the class icon of a player from the other side sat over the middle of their name, on the target frame and on nameplates. The game keeps their name's width to itself there, so the icon can't be placed against the text. It now sits at the left end of the health bar instead, clear of the name, with a raid mark beside it.
+
 ## 1.4.20
 
 ControllerCam

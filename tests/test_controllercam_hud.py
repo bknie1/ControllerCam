@@ -16996,6 +16996,63 @@ class ClassShown(unittest.TestCase):
         self.assertEqual(e.errors(), [])
 
 
+class PvPPlates(unittest.TestCase):
+    """A battleground is crowded: the class icon never over a name; your side a slim green bar, the other side
+    the need-to-know (health, power, level, class, name)."""
+
+    def secret(self, e):
+        e.lua.execute("""
+            SECRET_CLASS = { secret = true }
+            UnitClass = function(u) if u == "target" or u:match("^nameplate") then return SECRET_CLASS, SECRET_CLASS end end
+            local col = { secret = true }
+            C_ClassColor = { GetClassColor = function(c) return { GetRGB = function() return col, col, col end } end }
+            GetClassAtlas = function(c) return { secret = true, atlas = true } end
+            SECRET_W = { secret = true }
+        """)
+
+    def test_the_class_icon_goes_to_the_bar_when_the_names_width_is_secret(self):
+        e = Env()
+        self.secret(e)
+        e.target(name="Foxidin", isPlayer=True, attackable=True, reaction=2)
+        e.update(0.3)
+        p = e.mock.addPlate("nameplate1", e.mock.units.target)
+        o = e.ns.Nameplates.byPlate[p]
+        o.name.GetStringWidth = e.lua.eval("function() return SECRET_W end")   # (refused: kept secret)
+        e.ns.SecretClassIcon(o, o.name, "nameplate1", True, o.health)
+        t = o.classTex
+        self.assertTrue(t.shown)
+        self.assertEqual((t.points[1][1], t.points[1][3]), ("RIGHT", "LEFT"))
+        self.assertTrue(e.same(t.points[1][2], o.health))            # at the bar's end, never over the name
+        f = e.frames.target
+        f.name.GetStringWidth = e.lua.eval("function() return SECRET_W end")
+        e.mock.fire("PLAYER_TARGET_CHANGED")
+        ft = f.visual.classTex
+        self.assertTrue(e.same(ft.points[1][2], f.health))            # the target frame the same
+        self.assertEqual(e.errors(), [])
+
+    def test_your_side_is_a_slim_green_bar_and_theirs_the_need_to_know(self):
+        e = Env()
+        e.mock.state.instance = "pvp"
+        ally = e.mock.addPlate("nameplate2", e.lua.table(name="Reyla", isPlayer=True, attackable=False, reaction=5,
+                                                          health=800, healthMax=1000, level=39))
+        a = e.ns.Nameplates.byPlate[ally]
+        self.assertTrue(a.pvpAlly and a.mini and a.bars)              # small, with its bar, at a glance
+        c = a.health.fill.color
+        self.assertEqual((round(c[1], 2), round(c[2], 2), round(c[3], 2)), (0.30, 0.82, 0.34))
+        self.assertEqual(e.ns.Nameplates.NameAlpha(a), 0)             # (no name on it)
+        enemy = e.mock.addPlate("nameplate3", e.lua.table(name="Foxidin", isPlayer=True, attackable=True, reaction=2,
+                                                           health=800, healthMax=1000, level=39, guild="Colombia forever"))
+        o = e.ns.Nameplates.byPlate[enemy]
+        self.assertTrue(o.pvpEnemy and not o.mini)
+        self.assertFalse(o.sub.shown)                                 # no guild line
+        self.assertIn("39", plain(o.name.text))                       # the level, and the name
+        self.assertIn("Foxidin", plain(o.name.text))
+        e.mock.state.instance = None                                  # out of the battleground: as ever
+        e.mock.fire("PLAYER_ENTERING_WORLD")
+        e.update(0.6)
+        self.assertEqual(e.errors(), [])
+
+
 class NoSecretArithmetic(unittest.TestCase):
     """A blocked operation on a value the game keeps secret counts as an addon error even inside a pcall; in a
     battleground they reached the game's "large number of errors" warning. None is ever tried."""
