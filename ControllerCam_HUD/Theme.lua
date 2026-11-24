@@ -618,6 +618,30 @@ function ns.ClassNameColor(fs, unit)
     return (Way("classNameColor", fs.SetTextColor, fs, r, g, b))
 end
 
+-- A player's health bar in their class's colour where the game keeps the class secret (a battleground's other
+-- side): the game refuses that colour on the bar itself (StatusBar:SetStatusBarColor), so it goes on the bar's
+-- own texture (Texture:SetVertexColor), the way a name takes it (FontString:SetTextColor). Tried once: a way the
+-- game refuses is never tried again (each refusal counts as an addon error), and the bar keeps its usual colour.
+-- True when the bar took it. (A class the game shows: TargetHealthColor colours the bar as ever.)
+function ns.ClassBarColor(bar, unit)
+    if not (type(bar) == "table" and bar.fill and unit and ns.db and ns.db.classColors) then return false end
+    local okP, isPlayer = pcall(UnitIsPlayer, unit)
+    if not (okP and ns.Yes(isPlayer)) then return false end
+    local okD, dead = pcall(UnitIsDeadOrGhost, unit)
+    if okD and ns.Yes(dead) then return false end
+    local okC, _, class = pcall(UnitClass, unit)
+    if not (okC and ns.IsSecret(class)) then return false end
+    local okG, color = Way("classColor", C_ClassColor and C_ClassColor.GetClassColor, class)
+    if not okG or type(color) ~= "table" or not color.GetRGB then return false end
+    local okR, r, g, b = Way("classRGB", color.GetRGB, color)
+    if not okR then return false end
+    local okT, tex = pcall(bar.fill.GetStatusBarTexture, bar.fill)
+    if not (okT and type(tex) == "table" and tex.SetVertexColor) then return false end
+    if ns.secretWays.classBarColor == false then return false end
+    pcall(bar.fill.SetStatusBarColor, bar.fill, 1, 1, 1, 1)          -- (white under it: the texture's colour shows)
+    return (Way("classBarColor", tex.SetVertexColor, tex, r, g, b, 1))
+end
+
 -- A player's class icon on a texture, the class kept secret or not; false where it cannot be had
 function ns.ClassIconTexture(tex, unit)
     if not (tex and unit) then return false end

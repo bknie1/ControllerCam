@@ -437,6 +437,7 @@ local function UpdateHealth(o, instant)
         o.health:SetColor(unpack(NP.ALLY_GREEN))                            -- (your side in PvP: simply green)
     else
         o.health:SetColor(ns.UnitFrames.TargetHealthColor(o.unit, frac))
+        if o.hostile then ns.ClassBarColor(o.health, o.unit) end        -- (a class kept secret: its colour all the same)
     end
     o.health:SetAbsorb(ns.UnitFrames.Absorb(o.unit))
     o.health:SetExecute(o.bars and not o.mini and ns.UnitFrames.Execute(o.unit, frac) or nil)   -- open to an execute

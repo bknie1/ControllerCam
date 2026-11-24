@@ -2,7 +2,7 @@
 ## Title: ControllerCam HUD: Nameplates
 ## Notes: Nameplates: our look on the game's nameplates, with casts, threat, debuffs and quest marks. Loaded only while it is switched on in the HUD's options.
 ## Author: bknie1
-## Version: 1.5.1
+## Version: 1.5.2
 ## X-License: MIT
 ## IconTexture: Interface\AddOns\ControllerCam\Media\icon
 ## Dependencies: ControllerCam_HUD

@@ -17046,6 +17046,37 @@ class PvPPlates(unittest.TestCase):
         self.assertTrue(e.same(ft.points[1][2], badge))               # the icon beside it, not under it
         self.assertEqual(e.errors(), [])
 
+    def test_a_secret_class_colours_the_bar_through_its_texture_tried_once(self):
+        e = Env()
+        self.secret(e)
+        e.lua.execute("""
+            TINTS = 0
+            local col = { secret = true }
+            C_ClassColor = { GetClassColor = function(c) return { GetRGB = function() return col, col, col end } end }
+        """)
+        e.target(name="Gnomesayin Slime", isPlayer=True, attackable=True, reaction=2)
+        e.update(0.3)
+        f = e.frames.target
+        self.assertTrue(e.ns.secretWays.classBarColor)               # the bar's texture took the class's colour
+        # refused: never tried again (each refusal would count as an addon error)
+        e.ns.secretWays.classBarColor = False
+        tries = e.lua.eval("function(bar) local n = 0; local t = bar.fill:GetStatusBarTexture(); local v = t.SetVertexColor; t.SetVertexColor = function(...) n = n + 1; return v(...) end; return function() return n end end")(f.health)
+        for _ in range(3):
+            e.mock.fire("PLAYER_TARGET_CHANGED")
+            e.update(0.2)
+        self.assertEqual(tries(), 0)
+        self.assertEqual(e.errors(), [])
+
+    def test_the_games_countdown_moves_below_the_target_frame(self):
+        e = Env()
+        e.lua.execute("TimerTrackerTimer1 = CreateFrame('StatusBar', 'TimerTrackerTimer1', UIParent); TimerTrackerTimer1:SetPoint('TOP', UIParent, 'TOP', 0, -155)")
+        e.mock.fire("START_TIMER")
+        e.mock.advance(0.6)
+        t = e.g.TimerTrackerTimer1
+        self.assertEqual((t.points[1][1], t.points[1][3]), ("TOP", "BOTTOM"))
+        self.assertTrue(e.same(t.points[1][2], e.frames.target))      # below the target frame, clear of it
+        self.assertEqual(e.errors(), [])
+
     def test_your_side_is_a_slim_green_bar_and_theirs_the_need_to_know(self):
         e = Env()
         e.mock.state.instance = "pvp"

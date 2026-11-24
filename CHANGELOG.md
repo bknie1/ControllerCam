@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.5.2
+
+ControllerCam: HUD
+- In a battleground, the other side's health bars try their class colour again: a Priest's white, a Mage's blue. The game keeps their class to itself there and refuses that colour on the bar, but it may take it on the bar's texture, the way it does for names. It's tried once. If the game refuses, it isn't tried again, and the bar keeps its usual colour.
+- The game's own countdowns (a battleground's or arena's start timer) move down below the target frame and its buffs, instead of sitting over them.
+
 ## 1.5.1
 
 ControllerCam: HUD

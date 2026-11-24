@@ -397,6 +397,32 @@ end
 
 UF.ClassColor, UF.TargetColor, UF.TargetHealthColor = ClassColor, TargetColor, TargetHealthColor
 
+-- The game's own countdowns (a battleground's start, an arena's: its timer bars at the top of the screen) sat
+-- under the target frame, over its buffs: moved down below them. Out of a fight only (they come before one).
+UF.TIMER_GAP, UF.TIMER_STEP = 56, 30
+function UF.PlaceTimers()
+    if InCombatLockdown() then return end
+    local target = UF.frames and UF.frames.target
+    if type(target) ~= "table" then return end
+    local n = 0
+    for i = 1, 8 do
+        local t = rawget(_G, "TimerTrackerTimer" .. i)
+        if type(t) == "table" and t.IsShown and ns.ShownPlain(t) then
+            pcall(t.ClearAllPoints, t)
+            pcall(t.SetPoint, t, "TOP", target, "BOTTOM", 0, -UF.TIMER_GAP - n * UF.TIMER_STEP)
+            n = n + 1
+        end
+    end
+end
+do
+    local timers = CreateFrame("Frame")
+    for _, e in ipairs({ "START_TIMER", "PLAYER_ENTERING_WORLD" }) do pcall(timers.RegisterEvent, timers, e) end
+    timers:SetScript("OnEvent", ns.Protect(function()
+        C_Timer.After(0, ns.Protect(UF.PlaceTimers))                -- (after the game has placed its own)
+        C_Timer.After(0.5, ns.Protect(UF.PlaceTimers))
+    end))
+end
+
 ---------------------------------------------------------------------------
 -- Updating
 ---------------------------------------------------------------------------
@@ -538,6 +564,7 @@ local function UpdateHealth(f, instant)
     end
     if TARGETLIKE[f.key] then
         f.health:SetColor(TargetHealthColor(unit, frac))
+        ns.ClassBarColor(f.health, unit)                            -- (a class kept secret: its colour all the same)
         if f.key == "tot" then
             PercentText(f.text, frac, true, unit)
         elseif f.text then
