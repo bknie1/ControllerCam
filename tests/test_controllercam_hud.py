@@ -17220,6 +17220,23 @@ class PvPPlates(unittest.TestCase):
         self.assertEqual(e.errors(), [])
 
 
+class CompassCamera(unittest.TestCase):
+    """The compass shows the way the camera looks, which the analog stick can leave apart from the character."""
+
+    def test_the_compass_follows_the_camera_where_the_game_says_and_the_character_otherwise(self):
+        e = Env()
+        C = e.ns.Compass
+        e.lua.execute("GetPlayerFacing = function() return 0.2 end")
+        self.assertAlmostEqual(C.Facing(), 0.2)                      # no camera API: the character's
+        e.lua.execute("GetCameraYaw = function() return 1.0 end")
+        C.cam = None                                                  # (looked for again)
+        self.assertAlmostEqual(C.Facing(), 1.0)                      # the camera's
+        e.cmd("compasscamera off")
+        self.assertAlmostEqual(C.Facing(), 0.2)                      # off: the character's again
+        self.assertIn("camera: GetCameraYaw", C.Describe())
+        self.assertEqual(e.errors(), [])
+
+
 class NoSecretArithmetic(unittest.TestCase):
     """A blocked operation on a value the game keeps secret counts as an addon error even inside a pcall; in a
     battleground they reached the game's "large number of errors" warning. None is ever tried."""

@@ -2,7 +2,7 @@
 ## Title: ControllerCam HUD: Market
 ## Notes: The Market tab at the auction house: what to sell there and why, and posting in one press. Loaded only while it is switched on in the HUD's options.
 ## Author: bknie1
-## Version: 1.5.6
+## Version: 1.5.7
 ## X-License: MIT
 ## IconTexture: Interface\AddOns\ControllerCam\Media\icon
 ## Dependencies: ControllerCam_HUD

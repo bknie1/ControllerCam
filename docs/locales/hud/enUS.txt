@@ -977,6 +977,8 @@ The quest compass is off: /cchud compass on
 The compass needs to know where you are, and the game does not say it here.
 Quest compass: place
 at the top of the screen, or at the bottom in the experience bar's place (the bar then goes to the top)
+Quest compass: follows the camera
+the compass shows the way the camera looks, not the way your character faces (they differ when the stick turns your character without the camera); off: the way your character faces
 a few marks on the quest compass, around you, for twenty seconds
 Fishing mode: off.
 Fishing: %s to cast

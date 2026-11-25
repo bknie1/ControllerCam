@@ -977,6 +977,8 @@ La brújula de misiones está desactivada: /cchud compass on
 La brújula necesita saber dónde estás, y el juego no lo dice aquí.
 Brújula de misiones: lugar
 arriba de la pantalla, o abajo en el lugar de la barra de experiencia (la barra pasa entonces arriba)
+Brújula de misiones: sigue la cámara
+la brújula muestra hacia dónde mira la cámara, no hacia dónde mira tu personaje (difieren cuando el stick gira al personaje sin la cámara); desactivado: hacia donde mira tu personaje
 unas marcas en la brújula de misiones, a tu alrededor, durante veinte segundos
 Modo de pesca: desactivado.
 Pesca: %s para lanzar

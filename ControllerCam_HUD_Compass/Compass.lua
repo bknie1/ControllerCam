@@ -37,6 +37,12 @@ ns.RegisterSetting({
 })
 C.PLACES = { L["Top"], L["Bottom"] }
 
+ns.RegisterSetting({
+    key = "compassCamera", kind = "boolean", default = true, command = "compasscamera", section = "Quests",
+    label = "Quest compass: follows the camera",
+    tip = "the compass shows the way the camera looks, not the way your character faces (they differ when the stick turns your character without the camera); off: the way your character faces",
+})
+
 C.W, C.MIN_W = 360, 220         -- the strip's width; narrower only to stay clear of your buffs
 C.SPAN = math.pi                -- the strip covers half the horizon: what is straight beside you is at its end
 C.EDGE = 0.25                   -- marks and ticks fade out over this share of each half
@@ -75,7 +81,48 @@ local function Calm() return ns.Calm and ns.Calm() or false end
 ---------------------------------------------------------------------------
 -- What the game says: where you are, which way you face, where a place on a map is in the world
 ---------------------------------------------------------------------------
+-- The way the camera looks, where the game says (radians anticlockwise from north, as the character's facing
+-- is): the first of these names the game has, as a function of its own or of C_Camera. Looked for once.
+C.CAMERA_NAMES = { "GetCameraYaw", "GetCameraFacing", "GetCameraHeading", "GetCameraAngle" }
+function C.Camera()
+    if C.cam ~= nil then return C.cam or nil end
+    C.cam = false
+    local lib = rawget(_G, "C_Camera")
+    for _, name in ipairs(C.CAMERA_NAMES) do
+        local fn = rawget(_G, name)
+        if type(fn) ~= "function" and type(lib) == "table" then fn = rawget(lib, name) end
+        if type(fn) == "function" then C.cam = { name = name, fn = fn }; break end
+    end
+    return C.cam or nil
+end
+
+-- What the game has with "Camera" in its name (for the debug report: to find the right one where none matched)
+function C.CameraNames()
+    local found = {}
+    local function Scan(t, prefix)
+        if type(t) ~= "table" then return end
+        for k, v in pairs(t) do
+            if type(k) == "string" and type(v) == "function" and k:find("Camera") and not k:find("^Camera[A-Z]") then
+                found[#found + 1] = prefix .. k
+            end
+        end
+    end
+    Scan(_G, "")
+    Scan(rawget(_G, "C_Camera"), "C_Camera.")
+    table.sort(found)
+    while #found > 24 do table.remove(found) end
+    return found
+end
+
 function C.Facing()
+    if ns.db and ns.db.compassCamera ~= false then
+        local cam = C.Camera()
+        if cam then
+            local okC, v = pcall(cam.fn)
+            v = okC and Num(v) or nil
+            if v then return v end
+        end
+    end
     if type(GetPlayerFacing) ~= "function" then return nil end
     local ok, f = pcall(GetPlayerFacing)
     return ok and Num(f) or nil
@@ -749,7 +796,13 @@ function C.Describe()
         end
     end
     local focus = ns.Quests and ns.Quests.Focused and ns.Quests.Focused()
-    return ("compass on %s, at the %s, shown %s%s, width %d, marks: %d quests, %d to hand in, %d pins, focus %s, facing %s, drawn %d, experience bar moved %s"):format(
+    local cam = C.Camera()
+    local okP, player = pcall(GetPlayerFacing or function() end)
+    local names = table.concat(C.CameraNames(), " ")
+    return ("camera: %s (%s), the character %s; names with Camera: %s\n"):format(
+        cam and cam.name or "none found, so the character's facing", (ns.db and ns.db.compassCamera ~= false) and "followed" or "not followed",
+        tostring(okP and Num(player) and ("%.2f"):format(Num(player)) or "-"), names ~= "" and names or "-")
+        .. ("compass on %s, at the %s, shown %s%s, width %d, marks: %d quests, %d to hand in, %d pins, focus %s, facing %s, drawn %d, experience bar moved %s"):format(
         tostring(C.running), (ns.db and ns.db.compassPlace == 2) and "bottom" or "top", tostring(C.want),
         C.why and (" (away: " .. C.why .. ")") or "", math.floor(C.width or 0), q, done, pins, tostring(focus),
         tostring(C.Facing() and ("%.2f"):format(C.Facing()) or "-"), C.drawn or 0, tostring(C.xp.moved))

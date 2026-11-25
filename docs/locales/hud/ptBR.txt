@@ -977,6 +977,8 @@ A bússola de missões está desligada: /cchud compass on
 A bússola precisa saber onde você está, e o jogo não diz isso aqui.
 Bússola de missões: lugar
 no topo da tela, ou embaixo no lugar da barra de experiência (a barra vai então para o topo)
+Bússola de missões: segue a câmera
+a bússola mostra para onde a câmera olha, não para onde seu personagem olha (eles diferem quando o analógico gira o personagem sem a câmera); desligado: para onde seu personagem olha
 algumas marcas na bússola de missões, ao seu redor, por vinte segundos
 Modo de pesca: desligado.
 Pesca: %s para lançar

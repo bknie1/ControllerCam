@@ -977,6 +977,8 @@ La boussole de quêtes est désactivée : /cchud compass on
 La boussole doit savoir où vous êtes, et le jeu ne le dit pas ici.
 Boussole de quêtes : place
 en haut de l'écran, ou en bas à la place de la barre d'expérience (la barre passe alors en haut)
+Boussole de quêtes : suit la caméra
+la boussole montre où regarde la caméra, pas où regarde votre personnage (ce n'est pas pareil quand le stick tourne le personnage sans la caméra) ; désactivé : où regarde votre personnage
 quelques repères sur la boussole de quêtes, autour de vous, pendant vingt secondes
 Mode pêche : désactivé.
 Pêche: %s pour lancer

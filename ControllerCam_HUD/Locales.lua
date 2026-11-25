@@ -986,529 +986,531 @@ local ENGLISH = {
     "The compass needs to know where you are, and the game does not say it here.",  -- 977
     "Quest compass: place",  -- 978
     "at the top of the screen, or at the bottom in the experience bar's place (the bar then goes to the top)",  -- 979
-    "a few marks on the quest compass, around you, for twenty seconds",  -- 980
-    "Fishing mode: off.",  -- 981
-    "Fishing: %s to cast",  -- 982
-    "No bait: %s twice to use %s",  -- 983
-    "%s to put the pole away",  -- 984
-    "Fishing mode: %s to cast your line, and again to hook the fish when the float bobs.",  -- 985
-    "%s to hook, %s to cast again",  -- 986
-    "Fishing mode needs a fishing pole in your hands.",  -- 987
-    "You do not know Fishing.",  -- 988
-    "Fishing mode: one button casts and hooks",  -- 989
-    "Fishing button: %s",  -- 990
-    "One press to cast again",  -- 991
-    "while the float is out, your fishing button hooks the fish and A casts a fresh line in one press; off: A is yours",  -- 992
-    "Bait on a double press",  -- 993
-    "press your fishing button twice quickly: the second press puts the best bait in your bags on your pole, when the pole has none",  -- 994
-    "Gamepad bars put away while fishing",  -- 995
-    "with a fishing pole in your hands the gamepad bars are hidden, so the water is clear to look at; the fishing prompt shows the button to cast. They are back the moment a fight starts or the pole is put away",  -- 996
-    "one-button fishing off for now, or on again (with a pole in your hands it is on by itself)",  -- 997
-    "the button that fishes: your interact button to begin with (Square or X), or any other, a trigger for one (rt)",  -- 998
-    "Durotar's coast is red rock and warm shallows. Trolls of the Echo Isles say the mackerel run thickest when the tide carries the smell of the islands' cooking fires.",  -- 999
-    "The lakes of Mulgore are small, clear and patient. The tauren fish them the way they do everything else: slowly, and with thanks.",  -- 1000
-    "Every oasis in the Barrens is a meeting place. Whatever drinks there by day, something swims under it by night.",  -- 1001
-    "The pools of Teldrassil lie in the shade of one tree. Night elf anglers swear the fish there have never seen the sun and do not miss it.",  -- 1002
-    "Darkshore's water is grey, cold and full of wrecks. Half of what bites off Auberdine has made a home in somebody's lost cargo.",  -- 1003
-    "The rivers of Ashenvale run under leaves older than most kingdoms. The fish are quick, and the sentinels are quicker to ask what you are doing there.",  -- 1004
-    "Down among the Thousand Needles the water is scarce and jealously kept. A fish from here has earned its place.",  -- 1005
-    "Stonetalon's lakes sit high and cold between the peaks. The goblins would have drained them by now if the fishing were not so good.",  -- 1006
-    "The coast of Desolace is bones and grey surf. Something down there has a taste for both.",  -- 1007
-    "Feralas is green all the way down to the waterline. Its rivers are deep, warm and very much alive.",  -- 1008
-    "Nobody is sure where Dustwallow's land stops and its water begins. Fish from the shore, and count your toes afterwards.",  -- 1009
-    "Steamwheedle Port has the only water worth the name in Tanaris. The goblins will sell you the right to fish it, twice if you let them.",  -- 1010
-    "Under Azshara's bright bay lies a drowned city. Old anglers say the big ones live in what used to be its gardens.",  -- 1011
-    "The pools of Felwood glow, and not in a good way. What still swims in them is stubborn beyond reason.",  -- 1012
-    "The hot springs and tar-rimmed lakes of Un'Goro have kept things the rest of the world forgot. Some of them bite.",  -- 1013
-    "Lake Elune'ara in Moonglade is as calm as a held breath. The druids ask only that you take no more than you will eat.",  -- 1014
-    "Silithus is sand, wind and the sound of wings. If you have found water to fish here, tell no one.",  -- 1015
-    "The lakes of Winterspring freeze at the edges and steam in the middle. The fish there are fat for the cold and worth the walk.",  -- 1016
-    "The pools of Orgrimmar are fished by peons with nothing better to do and by old grunts who say the same. Both tell you the big one got away.",  -- 1017
-    "A fish from the ponds of Thunder Bluff has lived its whole life a long way above the plains. It seems calm about it.",  -- 1018
-    "Darnassus keeps its waters as carefully as its temples. The fish have grown used to being admired.",  -- 1019
-    "The lakes of the Alterac Mountains are snowmelt, and the ogres and the Syndicate fish them when no one is looking.",  -- 1020
-    "Arathi's shores have seen more armies than anglers. The fish have long since stopped caring whose banner flies above the water.",  -- 1021
-    "The Badlands are dust from one end to the other. A bite here is a small miracle; treat it as one.",  -- 1022
-    "The coast of the Blasted Lands is red, scoured and quiet. Whatever lives in that surf has learned to live with a great deal.",  -- 1023
-    "The lakes of Tirisfal lie still under a sickly sky. The Forsaken fish them out of habit; the dead do not eat much, but they remember liking it.",  -- 1024
-    "Silverpine's long coast is all mist and pine shadow. The fishing is good, which is the one cheerful thing anyone says about the place.",  -- 1025
-    "The rivers of the Western Plaguelands still run, though not clean. What you pull from them, look at twice.",  -- 1026
-    "Few people fish the Eastern Plaguelands, and fewer say so. The water keeps what the plague left of it.",  -- 1027
-    "Hillsbrad's river and its long southern shore have fed both sides of every quarrel fought over them.",  -- 1028
-    "The Hinterlands keep their lakes high among the trees, where the Wildhammer dwarves fish from gryphon-back when they think no one can see.",  -- 1029
-    "The lakes of Dun Morogh are ringed with ice most of the year. A dwarf will cut a hole, sit down with a pint and call it a good day whatever bites.",  -- 1030
-    "The Searing Gorge has lava where other lands have rivers. Bring something to drink instead.",  -- 1031
-    "The Burning Steppes are ash and embers. If the water here gives you anything at all, it will be hot.",  -- 1032
-    "Every child in Elwynn learns to fish at Crystal Lake or Stone Cairn. The smallfish there have been outwitting them for generations.",  -- 1033
-    "Deadwind Pass has little water and less welcome. What is in the pools below Karazhan is best left there.",  -- 1034
-    "The river along Duskwood's edge is black at any hour. The fish do not seem to mind the dark; the anglers do.",  -- 1035
-    "The Loch is the pride of Loch Modan, held back by the great Stonewrought Dam. Dwarves measure a fishing story against it, and the Loch usually wins.",  -- 1036
-    "Lake Everstill in Redridge is as pretty as a painting and fished from every dock in Lakeshire. The townsfolk know each good spot and will not tell you one.",  -- 1037
-    "From its jungle rivers to the wild southern cape, Stranglethorn has the richest water on the continent. Booty Bay's anglers hold a tournament over it, and nearly all of them cheat.",  -- 1038
-    "The Swamp of Sorrows is green water under green trees. The fish taste of mud, and the locals like them that way.",  -- 1039
-    "Westfall's fields failed, but its coast did not. The folk who stayed live off the long grey shore.",  -- 1040
-    "The Wetlands are well named. Menethil Harbor's docks are the driest place to fish them, and the crocolisks know it.",  -- 1041
-    "The canals of Stormwind are fished by children, pensioners and at least one member of the nobility in disguise. Nobody asks what else is in the canals.",  -- 1042
-    "The Forlorn Cavern holds Ironforge's one quiet pool. Old dwarves fish it for hours and never say a word.",  -- 1043
-    "The canals of the Undercity run a green that has nothing to do with algae. The Forsaken who fish them are not doing it for supper.",  -- 1044
-    "The first fish most anglers ever land, and bright enough that they remember it.",  -- 1045
-    "Slick, quick and common along every warm coast. It is better grilled than its name suggests.",  -- 1046
-    "All mouth, and happiest in water you would not drink.",  -- 1047
-    "Small, toothy and fearless. A shoal of them is said to have chased a bear out of the Loch.",  -- 1048
-    "A flash of colour under the surf. Sailors count one on the line as luck for the voyage.",  -- 1049
-    "A patient bottom-feeder with whiskers like a dwarven elder.",  -- 1050
-    "No one eats it twice. Alchemists buy every one they can get.",  -- 1051
-    "Its fins glow like banked coals, and the oil pressed from it burns nearly as well.",  -- 1052
-    "Armoured like a small shield. The meat inside is worth the trouble.",  -- 1053
-    "Something in the water near the Wailing Caverns changed it. Eating one may change you as well, for a while.",  -- 1054
-    "River folk say a meal of it clears the mind. It is the swimming upstream that makes it wise.",  -- 1055
-    "Older, larger and wiser than its cousin, which did not keep it off your hook.",  -- 1056
-    "A hard fighter from warm southern seas, and a favourite on every tavern board from Booty Bay to Gadgetzan.",  -- 1057
-    "Its brow shines like true mithril. More than one miner has tried to smelt one.",  -- 1058
-    "Its scales boil down into an oil that makes the skin as hard as rock. It prefers the night.",  -- 1059
-    "Polished like a parade breastplate, and nearly as heavy.",  -- 1060
-    "It comes inshore only in the cold months, and the cooks who know it wait all year.",  -- 1061
-    "It runs when the days are long. Coastal folk mark the season by it.",  -- 1062
-    "Hold it by the middle, and only once.",  -- 1063
-    "A river fish from wild country, as red at the gills as a troll's warpaint.",  -- 1064
-    "It feeds after dark. A soup of it steadies a spellcaster's nerves.",  -- 1065
-    "It feeds by day, the nightfin's opposite in nearly everything, and shares its water all the same.",  -- 1066
-    "Not strictly a fish. It disagrees with being caught and will make that known.",  -- 1067
-    "Pale as river ice, from the cold clear lakes of the north.",  -- 1068
-    "You will want both hands, and perhaps a friend.",  -- 1069
-    "%.1f lb",  -- 1070
-    "New in your fish journal: %s, %s.",  -- 1071
-    "New in your fish journal: %s.",  -- 1072
-    "Your heaviest %s yet: %s (it was %s).",  -- 1073
-    "Bait %s",  -- 1074
-    "No bait",  -- 1075
-    "Caught %d",  -- 1076
-    "Got away %d",  -- 1077
-    "A curious one: +%d%%",  -- 1078
-    "Keep your lure beside the fish",  -- 1079
-    "Next catch +%d%%",  -- 1080
-    "Hold %s: the lure runs along the line",  -- 1081
-    "%d in a row",  -- 1082
-    "A game while the float is out",  -- 1083
-    "played on the cast bar while your line is out: hold a trigger and your lure runs along the line, let go and it drifts back; keep it beside the shadow of the fish. The better you do, the heavier the made-up weight of your next catch. It takes no button and never touches your cast or your catch",  -- 1084
-    "%d landed, %d kinds, %d got away",  -- 1085
-    "Heaviest: %s, %s",  -- 1086
-    "Fish",  -- 1087
-    "Waters",  -- 1088
-    "Nothing landed yet. Take a pole to the water.",  -- 1089
-    "Landed: %d",  -- 1090
-    "Heaviest: %s, at %s",  -- 1091
-    "First landed: %s",  -- 1092
-    "Landed here: %d",  -- 1093
-    "Kinds found here: %d",  -- 1094
-    "open or close your fish journal: every kind you have landed, your heaviest of each, and the waters you have fished",  -- 1095
-    "Flight",  -- 1096
-    "landing early",  -- 1097
-    "landing at the next flight point",  -- 1098
-    "destination unknown",  -- 1099
-    "a guess from the distance",  -- 1100
-    "first flight on this route: learning its time",  -- 1101
-    "landing",  -- 1102
-    "%s: about %s, a guess from the distance",  -- 1103
-    "%s: about %s",  -- 1104
-    "%s: first flight on this route, time unknown",  -- 1105
-    "On a flight, destination unknown",  -- 1106
-    "%s: flight time learned, %s",  -- 1107
-    "Landing early: %s, about %s",  -- 1108
-    "Landing early at the next flight point",  -- 1109
-    "crisp and cold, snow underfoot and your breath hanging in the air",  -- 1110
-    "bitterly cold, with a wind off the peaks that finds every gap in your armour",  -- 1111
-    "hot and humid, the air thick enough to drink",  -- 1112
-    "sticky heat under the canopy, and the insects loud",  -- 1113
-    "hot and dry, with dust on the wind",  -- 1114
-    "baking sun and cracked earth; drink when you can",  -- 1115
-    "smoke and ash on a hot wind",  -- 1116
-    "scorched air, with cinders drifting",  -- 1117
-    "grey and cold, a damp mist that clings",  -- 1118
-    "a chill in the air and little light to speak of",  -- 1119
-    "mild and fair, with a gentle breeze",  -- 1120
-    "pleasant weather, good for travelling",  -- 1121
-    "cool and green, the leaves whispering",  -- 1122
-    "soft light through the trees, and the air fresh",  -- 1123
-    "muggy and damp, the ground soft underfoot",  -- 1124
-    "warm, wet air and the smell of the bog",  -- 1125
-    "%s at %s: %s",  -- 1126
-    "%d flight routes known.",  -- 1127
-    "Flights: your mount along the bar",  -- 1128
-    "a gryphon, a wind rider or a bat (whichever the flight master gave you) glides along the flight bar towards where you land",  -- 1129
-    "Flights: the weather where you land",  -- 1130
-    "on landing, chat says what the air is like where you came down, as the place usually is (hot and humid in Stranglethorn, snow underfoot in Dun Morogh), and the time of day",  -- 1131
-    "list the flight routes whose times are known",  -- 1132
-    "Grounded! +%d",  -- 1133
-    "Bumped: the run ends",  -- 1134
-    "%s flap  ·  dodge the treetops and zeppelins",  -- 1135
-    "%s net the riders for flight gold  ·  %s high altitude",  -- 1136
-    "%d flight gold",  -- 1137
-    "%s flap",  -- 1138
-    "%s net",  -- 1139
-    "%s high altitude",  -- 1140
-    "%s: back to the game (%d flight gold)",  -- 1141
-    "%s: a game on the way",  -- 1142
-    "The flight game is off: /cchud flightgame on",  -- 1143
-    "The flight game is played on a flight.",  -- 1144
-    "Not in a fight.",  -- 1145
-    "Flight game: play / high altitude",  -- 1146
-    "on a flight: start the flight game, or take it to high altitude and back",  -- 1147
-    "Cinematic flights: the camera circles you",  -- 1148
-    "on film, the camera circles slowly round you and your mount, a whole turn in about a minute and a half, and comes round behind you again before you land. Off: a still shot",  -- 1149
-    "Offline",  -- 1150
-    "Dead",  -- 1151
-    "Off",  -- 1152
-    "In a healing spec",  -- 1153
-    "Always",  -- 1154
-    "Too far",  -- 1155
-    "Healer's party and raid",  -- 1156
-    "in a party: your party beside your character, each with the button that targets them; in a raid: slimmer frames. Each shows only how much healing they need, a debuff you can cure, and whether they are in range",  -- 1157
-    "%d%% to sell",  -- 1158
-    "Sure to go (%d%%)",  -- 1159
-    "That one sells itself (%d%%)",  -- 1160
-    "I think it'll sell (%d%%)",  -- 1161
-    "Should find a buyer (%d%%)",  -- 1162
-    "Even odds (%d%%)",  -- 1163
-    "Could go either way (%d%%)",  -- 1164
-    "A bit of a gamble (%d%%)",  -- 1165
-    "Might sit a while (%d%%)",  -- 1166
-    "I wouldn't hold my breath (%d%%)",  -- 1167
-    "Long odds, friend (%d%%)",  -- 1168
-    "+%s over a vendor",  -- 1169
-    "no price known yet",  -- 1170
-    "a vendor pays as much",  -- 1171
-    "The Broker",  -- 1172
-    "Market",  -- 1173
-    "every coin counted, friend",  -- 1174
-    "Nothing in your bags can be sold here.",  -- 1175
-    "No prices in the last 7 days.",  -- 1176
-    "One day of prices so far: a candle comes each day you visit the auction house.",  -- 1177
-    "7 days, a candle a day: green closed higher, red lower",  -- 1178
-    "30 days, the day's lowest: green up, red down",  -- 1179
-    "No price history yet: read the auction house on a few days.",  -- 1180
-    "One day of prices so far: the line grows each day you visit the auction house.",  -- 1181
-    "Asking %s each, %s for the %d you let go; %d stay with you",  -- 1182
-    "Asking %s each, %s for all %d",  -- 1183
-    "Lowest",  -- 1184
-    "read %s",  -- 1185
-    "Usual",  -- 1186
-    "7 days: %s to %s",  -- 1187
-    "Up: %d auctions, %d items",  -- 1188
-    "%s each, %s for all %d",  -- 1189
-    "You posted %d here, %d auctions sold",  -- 1190
-    "No price known: read the auction house first.",  -- 1191
-    "Nothing in your bags to sell here.",  -- 1192
-    "Nothing sells better here than at a vendor today; %d might, with patience.",  -- 1193
-    "Best first: %d sell better here than at a vendor, %d more with patience.",  -- 1194
-    "Empty bags, friend. Bring me something to sell.",  -- 1195
-    "Nothing here beats a vendor today. %d might, with a little patience.",  -- 1196
-    "No sure profits in these bags, friend. %d could pay if you wait.",  -- 1197
-    "Best on top: %d here beat any vendor, %d more for the patient.",  -- 1198
-    "%d pay better here than at a vendor, best first. %d more if you wait.",  -- 1199
-    "Top of the pile pays best: %d sure sales, %d more if you can wait.",  -- 1200
-    "No prices yet: %s reads the auction house.",  -- 1201
-    "Prices read just now: %d.",  -- 1202
-    "%d prices, read %s.",  -- 1203
-    "%d prices, read %s. %s reads them again.",  -- 1204
-    "Haven't read the board yet. %s and I'll fetch every price.",  -- 1205
-    "No prices yet, friend. %s reads the whole board.",  -- 1206
-    "Prices fresh off the board, friend: %d of them.",  -- 1207
-    "Just read the board: %d prices, still warm.",  -- 1208
-    "%d prices, read %s. Near enough, friend.",  -- 1209
-    "Last look at the board was %s: %d prices.",  -- 1210
-    "Prices from %s, stale as old bread. %s reads the board again.",  -- 1211
-    "%d prices, but I read them %s. %s and I'll look again.",  -- 1212
-    "Showing what you keep too. %s hides it.",  -- 1213
-    "Kept back: %d, for your professions, your gear and your marks. %s shows them.",  -- 1214
-    "Your keepers are on the list too. %s tucks them away.",  -- 1215
-    "Showing what you keep as well. %s hides it again.",  -- 1216
-    "%d kept back: trade goods, gear to wear, things you marked. %s shows them.",  -- 1217
-    "Set %d aside for your crafts, your back and your marks. %s if you want them.",  -- 1218
-    "each",  -- 1219
-    "no data",  -- 1220
-    "Quick sale",  -- 1221
-    "Patient",  -- 1222
-    "Read all prices",  -- 1223
-    "Hide kept",  -- 1224
-    "Show kept",  -- 1225
-    "Line",  -- 1226
-    "Candles",  -- 1227
-    "Post",  -- 1228
-    "%d of %d",  -- 1229
-    "Post %d of %d for %s each",  -- 1230
-    "Post %d for %s",  -- 1231
-    "Post all %d for %s",  -- 1232
-    "This client's auction house cannot be posted to from here.",  -- 1233
-    "Posted %d for %s.",  -- 1234
-    "Market at the auction house: open / close",  -- 1235
-    "Auctioneer's greeting on the Market",  -- 1236
-    "a goblin auctioneer says one short line, from the game's own sounds, when the Market opens; off: it opens in silence",  -- 1237
-    "Market: show what you keep",  -- 1238
-    "the Market lists what you keep too: what your professions still learn from or make into something worth more, and what you marked to keep; off: only what you would sell",  -- 1239
-    "Market: price chart as candles",  -- 1240
-    "the Market's price chart is a candle a day for the last 7 days (where the price opened, went highest and lowest, and closed: green when it closed higher, red lower); off: a line of the day's lowest price over 30 days",  -- 1241
-    "open or close the Market (a tab of the auction house)",  -- 1242
-    "which auction house this client has (for troubleshooting)",  -- 1243
-    "Open a profession's window and I'll look over your recipes.",  -- 1244
-    "That's the cap, %d. A trainer has the next rank for you.",  -- 1245
-    "Nothing more to learn at %d. Go and see a trainer about the next rank.",  -- 1246
-    "You've outgrown your recipes. See a trainer: %s is waiting at %d.",  -- 1247
-    "%d more to %d, and what you know won't take you there. A trainer has %s for you at %d.",  -- 1248
-    "You've outgrown your recipes. See a trainer: %s is waiting.",  -- 1249
-    "Your recipes stop teaching you %d short of %d. Ask a trainer for %s.",  -- 1250
-    "Your recipes run dry %d short of %d. A trainer will have something new.",  -- 1251
-    "What you know won't carry you the last %d. Time to see a trainer.",  -- 1252
-    "%s won't teach you much now, but it's the best you have. %d more to %d.",  -- 1253
-    "Slow going from here: %s gives a point now and then. %d to go.",  -- 1254
-    "First you'll want %s, %s. The guides start this stretch with it.",  -- 1255
-    "Learn %s, %s, and we'll begin: %d more to %d.",  -- 1256
-    "%d more to %d. The guides send you out for %s until %d.",  -- 1257
-    "Gathering teaches you here: %s until %d.",  -- 1258
-    "%d more to %d. Start with %s, or %s if you'd rather: %s.",  -- 1259
-    "%s first, as the guides have it. %s does the job too: %s.",  -- 1260
-    "%d more to %d. Start with %s.",  -- 1261
-    "%s is your best teacher now. %d points to %d.",  -- 1262
-    "Steady hands. %s first, and %d to go.",  -- 1263
-    "at a trainer",  -- 1264
-    "from a vendor",  -- 1265
-    "found as loot",  -- 1266
-    "from a quest",  -- 1267
-    "cheaper materials",  -- 1268
-    "materials from a vendor",  -- 1269
-    "materials you gather yourself",  -- 1270
-    "it sells well",  -- 1271
-    "something you'll use",  -- 1272
-    "fewer crafts",  -- 1273
-    "a recipe you find or buy",  -- 1274
-    "other materials",  -- 1275
-    "the guides' first choice",  -- 1276
-    "Open a profession's window for a levelling plan.",  -- 1277
-    "At the cap, %d. A trainer has the next rank.",  -- 1278
-    "%d more to %d; your recipes stop short. A trainer has %s at %d.",  -- 1279
-    "%d more to %d; your recipes stop short. A trainer has %s.",  -- 1280
-    "Your recipes stop %d short of %d. A trainer has more.",  -- 1281
-    "%d more to %d. Best now: %s, green (a point now and then).",  -- 1282
-    "%d more to %d. First learn %s, %s.",  -- 1283
-    "%d more to %d. Gather %s until %d.",  -- 1284
-    "%d more to %d. First: %s, or %s (%s).",  -- 1285
-    "%d more to %d. First: %s.",  -- 1286
-    "To gather or buy",  -- 1287
-    "%d crafts: %s",  -- 1288
-    "Learn it %s, at %d.",  -- 1289
-    "Learn it %s.",  -- 1290
-    "%s: %d in your bags, %d in the bank, %d each",  -- 1291
-    "The guides level this stretch by gathering %s.",  -- 1292
-    "%s: you have %d, the plan uses %d",  -- 1293
-    "for %s",  -- 1294
-    "Cheaper to buy it than to make it from %s",  -- 1295
-    "Made from %s",  -- 1296
-    "The Mentor: what your bank can make",  -- 1297
-    "What your bank can make",  -- 1298
-    "Nothing more to make with what's in your bank.",  -- 1299
-    "%d you can make counting your bank, %d of them only with it.",  -- 1300
-    "The Mentor: %s %d > %d",  -- 1301
-    "The Mentor",  -- 1302
-    "Levelling plan",  -- 1303
-    "or",  -- 1304
-    "Gather %s",  -- 1305
-    "to learn",  -- 1306
-    "cheaper to buy",  -- 1307
-    "Hide",  -- 1308
-    "The plan",  -- 1309
-    "Farm this",  -- 1310
-    "Farm all",  -- 1311
-    "With the bank",  -- 1312
-    "Use the plan",  -- 1313
-    "twice to hide",  -- 1314
-    "Nothing here to try on.",  -- 1315
-    "%d added to the farm list.",  -- 1316
-    "Nothing missing: you have what it takes.",  -- 1317
-    "Open a profession's window to make a plan.",  -- 1318
-    "The Mentor (levelling plan): show / hide",  -- 1319
-    "show the levelling plan of the profession window you opened last, with the controller's buttons on it",  -- 1320
-    "Left of the quests",  -- 1321
-    "Right of the quests",  -- 1322
-    "Under the quests",  -- 1323
-    "The farm list is full.",  -- 1324
-    "Farm list: %s, %d wanted.",  -- 1325
-    "Farm",  -- 1326
-    "%d more",  -- 1327
-    "Nothing to farm yet.",  -- 1328
-    "A stack more",  -- 1329
-    "Take off",  -- 1330
-    "Clear",  -- 1331
-    "Done",  -- 1332
-    "Take everything off the farm list?",  -- 1333
-    "Farm list: choose / done",  -- 1334
-    "Farm list: add the item you point at",  -- 1335
-    "That is not on the farm list.",  -- 1336
-    "The farm list is empty.",  -- 1337
-    "Farm list: where it sits",  -- 1338
-    "the farm list to the left of the quest list, to its right, or under its quests",  -- 1339
-    "the farm list beside the quest list: choose with the controller; add <item> [how many], remove <item>, clear, or left / right / bottom for where it sits",  -- 1340
-    "Threat percent",  -- 1341
-    "your share of the threat as a number beside the threat icon, on the target frame and nameplates",  -- 1342
-    "Health number",  -- 1343
-    "the health left, shortened (12.3k), on the bar (not on compact plates: the percent says enough there)",  -- 1344
-    "Your debuffs",  -- 1345
-    "your debuffs on the unit, above its name, with their time",  -- 1346
-    "Everyone's debuffs",  -- 1347
-    "the debuffs the game marks for nameplates from everyone, not only yours",  -- 1348
-    "Enemy buffs",  -- 1349
-    "an enemy's buffs beside its debuffs: the ones that matter (important, enraged, or ones you can dispel or steal), or all of them when Only the effects that matter is off",  -- 1350
-    "Crowd control icon",  -- 1351
-    "a large icon with its time when the unit is stunned, rooted, feared...",  -- 1352
-    "Aggro glow",  -- 1353
-    "a shield icon and a glow behind the name: red while it attacks you, red and yellow when you are about to pull it, yellow and blue when you are losing it, blue when it is not on you",  -- 1354
-    "Quest marker",  -- 1355
-    "a gold marker on units your quests still need",  -- 1356
-    "Nameplate animations",  -- 1357
-    "plates fade in, low health breathes, crowd control shimmers",  -- 1358
-    "Small",  -- 1359
-    "Normal",  -- 1360
-    "Large",  -- 1361
-    "Full name",  -- 1362
-    "Short name",  -- 1363
-    "No name",  -- 1364
-    "Full",  -- 1365
-    "Minimal mini",  -- 1366
-    "Nameplate size",  -- 1367
-    "how big the bars on nameplates are: small and slim, normal, or large (wider and taller)",  -- 1368
-    "Names on nameplates",  -- 1369
-    "the name on a plate with a health bar: in full, cut short, or left out (the target frame gives it in full; the level and class icon stay). A plate with no bar, a friendly NPC's, always keeps its name",  -- 1370
-    "Nameplate look",  -- 1371
-    "the nameplate switches in one press. Full: everything. Minimal: no power bar, guild or title, short names. Minimal mini: small bars with health, your debuffs and the buffs that matter, level and class, no name (the target frame has it). Threat, crowd control and loud casts always stay",  -- 1372
-    "Player titles",  -- 1373
-    "show a player's title with their name",  -- 1374
-    "Guilds and NPC jobs",  -- 1375
-    "a line under the name: the player's guild, or what the NPC does",  -- 1376
-    "Bars for friends in a fight",  -- 1377
-    "friendly plates show health, power and casts while that unit is in combat",  -- 1378
-    "The game's own friendly nameplates",  -- 1379
-    "leave friendly plates (your party, other players, friendly NPCs) to the game's own look; ours only on enemies",  -- 1380
-    "Power bars",  -- 1381
-    "a thin mana, rage or energy bar under the health bar",  -- 1382
-    "Cast target",  -- 1383
-    "who a cast is aimed at, next to the spell's name",  -- 1384
-    "Health percent",  -- 1385
-    "the health percent on the bar",  -- 1386
-    "Name on your target's plate",  -- 1387
-    "off: your target's plate drops its name and level (the target frame shows them)",  -- 1388
-    "Levels on nameplates",  -- 1389
-    "the level in front of an enemy's name, coloured by difficulty",  -- 1390
-    "Compact nameplates",  -- 1391
-    "nameplates about half as wide",  -- 1392
-    "Loud enemy casts",  -- 1393
-    "an enemy's cast flashes, swells and pulses ever faster until it lands, so it can be interrupted in time",  -- 1394
-    "Class icons on nameplates",  -- 1395
-    "a player's class icon in front of their name, friend or enemy",  -- 1396
-    "What NPCs do, as icons",  -- 1397
-    "an icon over friendly NPCs that offer something: a bag over vendors, an anvil over smiths who repair, a book over trainers... (the game's own icons; they show even while the plate itself waits to be pointed at)",  -- 1398
-    "Friendly NPCs only when pointed at",  -- 1399
-    "the plates of friendly NPCs (vendors, quest givers, townsfolk) show only while you point at them, like their tooltip",  -- 1400
-    "Names on things you can interact with",  -- 1401
-    "a name over ore, chests, plaques and the like while you face them (off: they stay bare, as the game's own prompt already says what they are)",  -- 1402
-    "Mini plates",  -- 1403
-    "minions, critters and grey enemies that give no experience get a small plate: a slim bar with your debuffs on it and no name (a critter, with no bar, keeps its name; the game's own option decides whether they have plates at all)",  -- 1404
-    "Party nameplates in dungeons: names only",  -- 1405
-    "inside a dungeon or raid the game draws friendly players' nameplates itself and addons may not change them: in there the game's own options are set to show them as class-coloured names without bars, like ours, with the game's bars back while you fight (when bars for friends in a fight are on); all put back when you leave",  -- 1406
-    "Party nameplates in dungeons: hidden",  -- 1407
-    "inside a dungeon or raid, switch the game's nameplates for friendly players off altogether (and back the way you had them when you leave)",  -- 1408
-    "show what the game gives for your target's name (for troubleshooting)",  -- 1409
-    "list the nameplates on screen and whether they wear our look (for troubleshooting)",  -- 1410
-    "Right, then.",  -- 1411
-    "Och, what a heap.",  -- 1412
-    "Now, let's see, let's see...",  -- 1413
-    "Elune grant me patience.",  -- 1414
-    "By the Naaru, such a jumble.",  -- 1415
-    "Blasted pack.",  -- 1416
-    "A tidy pack is a light pack.",  -- 1417
-    "Bah. Too much clutter.",  -- 1418
-    "Dead weight, the lot of it.",  -- 1419
-    "Patience. The Earth Mother provides.",  -- 1420
-    "Ey, what we got here, mon?",  -- 1421
-    "Such clutter. Unbecoming.",  -- 1422
-    "Time is money. Let's count it.",  -- 1423
-    "Aye, that'll do.",  -- 1424
-    "Elune be thanked.",  -- 1425
-    "The Light provides.",  -- 1426
-    "Hrm. Good enough.",  -- 1427
-    "Hm. Enough to fight with.",  -- 1428
-    "Travelling light. Good.",  -- 1429
-    "Acceptable. Barely.",  -- 1430
-    "Not a slot to spare. The junk would fetch %s: selling it makes room.",  -- 1431
-    "Not a slot to spare. Anything I won't need on the road can wait in the bank.",  -- 1432
-    "Junk: %d, worth %s here. X sells the one I've picked; Smart sell takes it all.",  -- 1433
-    "%d of these belong in the bank: it holds more of the same, or I marked them. Deposit puts them away.",  -- 1434
-    "Only %d slots left. The junk would fetch %s at any vendor.",  -- 1435
-    "Only %d slots left. Time to sell or bank a few things.",  -- 1436
-    "New since I last looked: %d. The gold dot marks each one.",  -- 1437
-    "Worth selling: %d. The Sell filter gathers them, and each tooltip says where it fetches most.",  -- 1438
-    "Junk: %d, worth %s. The next vendor can have it.",  -- 1439
-    "Just the essentials. Nothing worth selling.",  -- 1440
-    "All in order, and %d slots free.",  -- 1441
-    "Your gear's mended: %s.",  -- 1442
-    "I can mend your gear for %s; a broken piece gives you none of its armour or stats.",  -- 1443
-    "Your bags are full. I'll take %d things for %s: Smart sell, and you have room again.",  -- 1444
-    "I'll give you %s for %d things: the junk, and what the auction house wouldn't pay more for. Smart sell, and it's done.",  -- 1445
-    "Keep the %d the auction house wants: it pays %s more than I would.",  -- 1446
-    "Your bags are full. Sell me something before you buy.",  -- 1447
-    "Nothing in your bags I'd pay well for. Have a look at my wares.",  -- 1448
-    "%d of what you carry belong in here: I hold more of the same, or you marked them. Deposit puts them away.",  -- 1449
-    "I hold more of %d things you carry. Withdraw tops your bags up before you head out.",  -- 1450
-    "Your bags are nearly full. Leave what you won't need on the road with me.",  -- 1451
-    "All safe with me, and your bags have %d slots free.",  -- 1452
-    "Nothing for you today. I checked twice.",  -- 1453
-    "Letters for you: %d, nothing attached. Read them when you like.",  -- 1454
-    "Letters for you: %d. In them: %s.",  -- 1455
-    "Take everything empties them in one go.",  -- 1456
-    "Coin on delivery: %d. Those you open and pay for yourself.",  -- 1457
-    "Your bags are full: the items wait in their letters.",  -- 1458
-    "Where to? Point at a place and I'll tell you how long the ride takes.",  -- 1459
-    "%s: about %s by the map. You haven't flown that one yet.",  -- 1460
-    "%s: about %s, going by your last flight there.",  -- 1461
-    "%s: I can't say how long yet. Fly it once and I'll know.",  -- 1462
-    "%d got away. This water wants more skill than I have: bait helps, and so does a better pole.",  -- 1463
-    "No bait on the hook. It adds to my skill, so fewer get away.",  -- 1464
-    "Bait's nearly spent. Another on the hook keeps my skill up.",  -- 1465
-    "Fish here I haven't landed yet: %d. Keep casting.",  -- 1466
-    "I've landed every fish this water has. Somewhere new, then.",  -- 1467
-    "Nothing landed yet. The first fish of every water goes in here.",  -- 1468
-    "Kinds landed: %d. Every water hides a few more: the fishing panel shows a ? for each I haven't caught there.",  -- 1469
-    "Rested by the fire: the next %d experience from kills comes double.",  -- 1470
-    "No rest saved up. A night at an inn or in a city, and kills give double experience for a while.",  -- 1471
-    "%d absorbed",  -- 1472
-    "Feed on the right",  -- 1473
-    "One in the middle",  -- 1474
-    "%d crit heals",  -- 1475
-    "%d crits",  -- 1476
-    "Judgement",  -- 1477
-    "Big moments: where",  -- 1478
-    "a block just above the cooldown callouts on the right of your character, the newest nearest them and the older ones moving up over it as they fade, or one at a time in the middle",  -- 1479
-    "show what a big moment looks and feels like",  -- 1480
-    "collected",  -- 1481
-    "collected from another item",  -- 1482
-    "not collected yet",  -- 1483
-    "Appearance",  -- 1484
-    "Pick a set to put its pieces on your outfit. %s keeps it; nothing is paid before that.",  -- 1485
-    "Looking through your collection...",  -- 1486
-    "Your outfit is back as it was.",  -- 1487
-    "%s: %d of %d pieces put on.",  -- 1488
-    "%d would not go on this outfit.",  -- 1489
-    "One set you have pieces of",  -- 1490
-    "%d sets you have pieces of",  -- 1491
-    "you can't wear this",  -- 1492
-    "missing",  -- 1493
-    "All %d pieces",  -- 1494
-    "%d of %d pieces",  -- 1495
-    "Missing: %s",  -- 1496
-    "No sets yet. Items that share a name, like Green Iron Helm and Green Iron Gauntlets, show here once you have one of them.",  -- 1497
-    "Undo",  -- 1498
-    "Delete the custom set %s? It can't be brought back.",  -- 1499
-    "Delete",  -- 1500
-    "Point at a custom set first.",  -- 1501
-    "%s  Delete custom set",  -- 1502
+    "Quest compass: follows the camera",  -- 980
+    "the compass shows the way the camera looks, not the way your character faces (they differ when the stick turns your character without the camera); off: the way your character faces",  -- 981
+    "a few marks on the quest compass, around you, for twenty seconds",  -- 982
+    "Fishing mode: off.",  -- 983
+    "Fishing: %s to cast",  -- 984
+    "No bait: %s twice to use %s",  -- 985
+    "%s to put the pole away",  -- 986
+    "Fishing mode: %s to cast your line, and again to hook the fish when the float bobs.",  -- 987
+    "%s to hook, %s to cast again",  -- 988
+    "Fishing mode needs a fishing pole in your hands.",  -- 989
+    "You do not know Fishing.",  -- 990
+    "Fishing mode: one button casts and hooks",  -- 991
+    "Fishing button: %s",  -- 992
+    "One press to cast again",  -- 993
+    "while the float is out, your fishing button hooks the fish and A casts a fresh line in one press; off: A is yours",  -- 994
+    "Bait on a double press",  -- 995
+    "press your fishing button twice quickly: the second press puts the best bait in your bags on your pole, when the pole has none",  -- 996
+    "Gamepad bars put away while fishing",  -- 997
+    "with a fishing pole in your hands the gamepad bars are hidden, so the water is clear to look at; the fishing prompt shows the button to cast. They are back the moment a fight starts or the pole is put away",  -- 998
+    "one-button fishing off for now, or on again (with a pole in your hands it is on by itself)",  -- 999
+    "the button that fishes: your interact button to begin with (Square or X), or any other, a trigger for one (rt)",  -- 1000
+    "Durotar's coast is red rock and warm shallows. Trolls of the Echo Isles say the mackerel run thickest when the tide carries the smell of the islands' cooking fires.",  -- 1001
+    "The lakes of Mulgore are small, clear and patient. The tauren fish them the way they do everything else: slowly, and with thanks.",  -- 1002
+    "Every oasis in the Barrens is a meeting place. Whatever drinks there by day, something swims under it by night.",  -- 1003
+    "The pools of Teldrassil lie in the shade of one tree. Night elf anglers swear the fish there have never seen the sun and do not miss it.",  -- 1004
+    "Darkshore's water is grey, cold and full of wrecks. Half of what bites off Auberdine has made a home in somebody's lost cargo.",  -- 1005
+    "The rivers of Ashenvale run under leaves older than most kingdoms. The fish are quick, and the sentinels are quicker to ask what you are doing there.",  -- 1006
+    "Down among the Thousand Needles the water is scarce and jealously kept. A fish from here has earned its place.",  -- 1007
+    "Stonetalon's lakes sit high and cold between the peaks. The goblins would have drained them by now if the fishing were not so good.",  -- 1008
+    "The coast of Desolace is bones and grey surf. Something down there has a taste for both.",  -- 1009
+    "Feralas is green all the way down to the waterline. Its rivers are deep, warm and very much alive.",  -- 1010
+    "Nobody is sure where Dustwallow's land stops and its water begins. Fish from the shore, and count your toes afterwards.",  -- 1011
+    "Steamwheedle Port has the only water worth the name in Tanaris. The goblins will sell you the right to fish it, twice if you let them.",  -- 1012
+    "Under Azshara's bright bay lies a drowned city. Old anglers say the big ones live in what used to be its gardens.",  -- 1013
+    "The pools of Felwood glow, and not in a good way. What still swims in them is stubborn beyond reason.",  -- 1014
+    "The hot springs and tar-rimmed lakes of Un'Goro have kept things the rest of the world forgot. Some of them bite.",  -- 1015
+    "Lake Elune'ara in Moonglade is as calm as a held breath. The druids ask only that you take no more than you will eat.",  -- 1016
+    "Silithus is sand, wind and the sound of wings. If you have found water to fish here, tell no one.",  -- 1017
+    "The lakes of Winterspring freeze at the edges and steam in the middle. The fish there are fat for the cold and worth the walk.",  -- 1018
+    "The pools of Orgrimmar are fished by peons with nothing better to do and by old grunts who say the same. Both tell you the big one got away.",  -- 1019
+    "A fish from the ponds of Thunder Bluff has lived its whole life a long way above the plains. It seems calm about it.",  -- 1020
+    "Darnassus keeps its waters as carefully as its temples. The fish have grown used to being admired.",  -- 1021
+    "The lakes of the Alterac Mountains are snowmelt, and the ogres and the Syndicate fish them when no one is looking.",  -- 1022
+    "Arathi's shores have seen more armies than anglers. The fish have long since stopped caring whose banner flies above the water.",  -- 1023
+    "The Badlands are dust from one end to the other. A bite here is a small miracle; treat it as one.",  -- 1024
+    "The coast of the Blasted Lands is red, scoured and quiet. Whatever lives in that surf has learned to live with a great deal.",  -- 1025
+    "The lakes of Tirisfal lie still under a sickly sky. The Forsaken fish them out of habit; the dead do not eat much, but they remember liking it.",  -- 1026
+    "Silverpine's long coast is all mist and pine shadow. The fishing is good, which is the one cheerful thing anyone says about the place.",  -- 1027
+    "The rivers of the Western Plaguelands still run, though not clean. What you pull from them, look at twice.",  -- 1028
+    "Few people fish the Eastern Plaguelands, and fewer say so. The water keeps what the plague left of it.",  -- 1029
+    "Hillsbrad's river and its long southern shore have fed both sides of every quarrel fought over them.",  -- 1030
+    "The Hinterlands keep their lakes high among the trees, where the Wildhammer dwarves fish from gryphon-back when they think no one can see.",  -- 1031
+    "The lakes of Dun Morogh are ringed with ice most of the year. A dwarf will cut a hole, sit down with a pint and call it a good day whatever bites.",  -- 1032
+    "The Searing Gorge has lava where other lands have rivers. Bring something to drink instead.",  -- 1033
+    "The Burning Steppes are ash and embers. If the water here gives you anything at all, it will be hot.",  -- 1034
+    "Every child in Elwynn learns to fish at Crystal Lake or Stone Cairn. The smallfish there have been outwitting them for generations.",  -- 1035
+    "Deadwind Pass has little water and less welcome. What is in the pools below Karazhan is best left there.",  -- 1036
+    "The river along Duskwood's edge is black at any hour. The fish do not seem to mind the dark; the anglers do.",  -- 1037
+    "The Loch is the pride of Loch Modan, held back by the great Stonewrought Dam. Dwarves measure a fishing story against it, and the Loch usually wins.",  -- 1038
+    "Lake Everstill in Redridge is as pretty as a painting and fished from every dock in Lakeshire. The townsfolk know each good spot and will not tell you one.",  -- 1039
+    "From its jungle rivers to the wild southern cape, Stranglethorn has the richest water on the continent. Booty Bay's anglers hold a tournament over it, and nearly all of them cheat.",  -- 1040
+    "The Swamp of Sorrows is green water under green trees. The fish taste of mud, and the locals like them that way.",  -- 1041
+    "Westfall's fields failed, but its coast did not. The folk who stayed live off the long grey shore.",  -- 1042
+    "The Wetlands are well named. Menethil Harbor's docks are the driest place to fish them, and the crocolisks know it.",  -- 1043
+    "The canals of Stormwind are fished by children, pensioners and at least one member of the nobility in disguise. Nobody asks what else is in the canals.",  -- 1044
+    "The Forlorn Cavern holds Ironforge's one quiet pool. Old dwarves fish it for hours and never say a word.",  -- 1045
+    "The canals of the Undercity run a green that has nothing to do with algae. The Forsaken who fish them are not doing it for supper.",  -- 1046
+    "The first fish most anglers ever land, and bright enough that they remember it.",  -- 1047
+    "Slick, quick and common along every warm coast. It is better grilled than its name suggests.",  -- 1048
+    "All mouth, and happiest in water you would not drink.",  -- 1049
+    "Small, toothy and fearless. A shoal of them is said to have chased a bear out of the Loch.",  -- 1050
+    "A flash of colour under the surf. Sailors count one on the line as luck for the voyage.",  -- 1051
+    "A patient bottom-feeder with whiskers like a dwarven elder.",  -- 1052
+    "No one eats it twice. Alchemists buy every one they can get.",  -- 1053
+    "Its fins glow like banked coals, and the oil pressed from it burns nearly as well.",  -- 1054
+    "Armoured like a small shield. The meat inside is worth the trouble.",  -- 1055
+    "Something in the water near the Wailing Caverns changed it. Eating one may change you as well, for a while.",  -- 1056
+    "River folk say a meal of it clears the mind. It is the swimming upstream that makes it wise.",  -- 1057
+    "Older, larger and wiser than its cousin, which did not keep it off your hook.",  -- 1058
+    "A hard fighter from warm southern seas, and a favourite on every tavern board from Booty Bay to Gadgetzan.",  -- 1059
+    "Its brow shines like true mithril. More than one miner has tried to smelt one.",  -- 1060
+    "Its scales boil down into an oil that makes the skin as hard as rock. It prefers the night.",  -- 1061
+    "Polished like a parade breastplate, and nearly as heavy.",  -- 1062
+    "It comes inshore only in the cold months, and the cooks who know it wait all year.",  -- 1063
+    "It runs when the days are long. Coastal folk mark the season by it.",  -- 1064
+    "Hold it by the middle, and only once.",  -- 1065
+    "A river fish from wild country, as red at the gills as a troll's warpaint.",  -- 1066
+    "It feeds after dark. A soup of it steadies a spellcaster's nerves.",  -- 1067
+    "It feeds by day, the nightfin's opposite in nearly everything, and shares its water all the same.",  -- 1068
+    "Not strictly a fish. It disagrees with being caught and will make that known.",  -- 1069
+    "Pale as river ice, from the cold clear lakes of the north.",  -- 1070
+    "You will want both hands, and perhaps a friend.",  -- 1071
+    "%.1f lb",  -- 1072
+    "New in your fish journal: %s, %s.",  -- 1073
+    "New in your fish journal: %s.",  -- 1074
+    "Your heaviest %s yet: %s (it was %s).",  -- 1075
+    "Bait %s",  -- 1076
+    "No bait",  -- 1077
+    "Caught %d",  -- 1078
+    "Got away %d",  -- 1079
+    "A curious one: +%d%%",  -- 1080
+    "Keep your lure beside the fish",  -- 1081
+    "Next catch +%d%%",  -- 1082
+    "Hold %s: the lure runs along the line",  -- 1083
+    "%d in a row",  -- 1084
+    "A game while the float is out",  -- 1085
+    "played on the cast bar while your line is out: hold a trigger and your lure runs along the line, let go and it drifts back; keep it beside the shadow of the fish. The better you do, the heavier the made-up weight of your next catch. It takes no button and never touches your cast or your catch",  -- 1086
+    "%d landed, %d kinds, %d got away",  -- 1087
+    "Heaviest: %s, %s",  -- 1088
+    "Fish",  -- 1089
+    "Waters",  -- 1090
+    "Nothing landed yet. Take a pole to the water.",  -- 1091
+    "Landed: %d",  -- 1092
+    "Heaviest: %s, at %s",  -- 1093
+    "First landed: %s",  -- 1094
+    "Landed here: %d",  -- 1095
+    "Kinds found here: %d",  -- 1096
+    "open or close your fish journal: every kind you have landed, your heaviest of each, and the waters you have fished",  -- 1097
+    "Flight",  -- 1098
+    "landing early",  -- 1099
+    "landing at the next flight point",  -- 1100
+    "destination unknown",  -- 1101
+    "a guess from the distance",  -- 1102
+    "first flight on this route: learning its time",  -- 1103
+    "landing",  -- 1104
+    "%s: about %s, a guess from the distance",  -- 1105
+    "%s: about %s",  -- 1106
+    "%s: first flight on this route, time unknown",  -- 1107
+    "On a flight, destination unknown",  -- 1108
+    "%s: flight time learned, %s",  -- 1109
+    "Landing early: %s, about %s",  -- 1110
+    "Landing early at the next flight point",  -- 1111
+    "crisp and cold, snow underfoot and your breath hanging in the air",  -- 1112
+    "bitterly cold, with a wind off the peaks that finds every gap in your armour",  -- 1113
+    "hot and humid, the air thick enough to drink",  -- 1114
+    "sticky heat under the canopy, and the insects loud",  -- 1115
+    "hot and dry, with dust on the wind",  -- 1116
+    "baking sun and cracked earth; drink when you can",  -- 1117
+    "smoke and ash on a hot wind",  -- 1118
+    "scorched air, with cinders drifting",  -- 1119
+    "grey and cold, a damp mist that clings",  -- 1120
+    "a chill in the air and little light to speak of",  -- 1121
+    "mild and fair, with a gentle breeze",  -- 1122
+    "pleasant weather, good for travelling",  -- 1123
+    "cool and green, the leaves whispering",  -- 1124
+    "soft light through the trees, and the air fresh",  -- 1125
+    "muggy and damp, the ground soft underfoot",  -- 1126
+    "warm, wet air and the smell of the bog",  -- 1127
+    "%s at %s: %s",  -- 1128
+    "%d flight routes known.",  -- 1129
+    "Flights: your mount along the bar",  -- 1130
+    "a gryphon, a wind rider or a bat (whichever the flight master gave you) glides along the flight bar towards where you land",  -- 1131
+    "Flights: the weather where you land",  -- 1132
+    "on landing, chat says what the air is like where you came down, as the place usually is (hot and humid in Stranglethorn, snow underfoot in Dun Morogh), and the time of day",  -- 1133
+    "list the flight routes whose times are known",  -- 1134
+    "Grounded! +%d",  -- 1135
+    "Bumped: the run ends",  -- 1136
+    "%s flap  ·  dodge the treetops and zeppelins",  -- 1137
+    "%s net the riders for flight gold  ·  %s high altitude",  -- 1138
+    "%d flight gold",  -- 1139
+    "%s flap",  -- 1140
+    "%s net",  -- 1141
+    "%s high altitude",  -- 1142
+    "%s: back to the game (%d flight gold)",  -- 1143
+    "%s: a game on the way",  -- 1144
+    "The flight game is off: /cchud flightgame on",  -- 1145
+    "The flight game is played on a flight.",  -- 1146
+    "Not in a fight.",  -- 1147
+    "Flight game: play / high altitude",  -- 1148
+    "on a flight: start the flight game, or take it to high altitude and back",  -- 1149
+    "Cinematic flights: the camera circles you",  -- 1150
+    "on film, the camera circles slowly round you and your mount, a whole turn in about a minute and a half, and comes round behind you again before you land. Off: a still shot",  -- 1151
+    "Offline",  -- 1152
+    "Dead",  -- 1153
+    "Off",  -- 1154
+    "In a healing spec",  -- 1155
+    "Always",  -- 1156
+    "Too far",  -- 1157
+    "Healer's party and raid",  -- 1158
+    "in a party: your party beside your character, each with the button that targets them; in a raid: slimmer frames. Each shows only how much healing they need, a debuff you can cure, and whether they are in range",  -- 1159
+    "%d%% to sell",  -- 1160
+    "Sure to go (%d%%)",  -- 1161
+    "That one sells itself (%d%%)",  -- 1162
+    "I think it'll sell (%d%%)",  -- 1163
+    "Should find a buyer (%d%%)",  -- 1164
+    "Even odds (%d%%)",  -- 1165
+    "Could go either way (%d%%)",  -- 1166
+    "A bit of a gamble (%d%%)",  -- 1167
+    "Might sit a while (%d%%)",  -- 1168
+    "I wouldn't hold my breath (%d%%)",  -- 1169
+    "Long odds, friend (%d%%)",  -- 1170
+    "+%s over a vendor",  -- 1171
+    "no price known yet",  -- 1172
+    "a vendor pays as much",  -- 1173
+    "The Broker",  -- 1174
+    "Market",  -- 1175
+    "every coin counted, friend",  -- 1176
+    "Nothing in your bags can be sold here.",  -- 1177
+    "No prices in the last 7 days.",  -- 1178
+    "One day of prices so far: a candle comes each day you visit the auction house.",  -- 1179
+    "7 days, a candle a day: green closed higher, red lower",  -- 1180
+    "30 days, the day's lowest: green up, red down",  -- 1181
+    "No price history yet: read the auction house on a few days.",  -- 1182
+    "One day of prices so far: the line grows each day you visit the auction house.",  -- 1183
+    "Asking %s each, %s for the %d you let go; %d stay with you",  -- 1184
+    "Asking %s each, %s for all %d",  -- 1185
+    "Lowest",  -- 1186
+    "read %s",  -- 1187
+    "Usual",  -- 1188
+    "7 days: %s to %s",  -- 1189
+    "Up: %d auctions, %d items",  -- 1190
+    "%s each, %s for all %d",  -- 1191
+    "You posted %d here, %d auctions sold",  -- 1192
+    "No price known: read the auction house first.",  -- 1193
+    "Nothing in your bags to sell here.",  -- 1194
+    "Nothing sells better here than at a vendor today; %d might, with patience.",  -- 1195
+    "Best first: %d sell better here than at a vendor, %d more with patience.",  -- 1196
+    "Empty bags, friend. Bring me something to sell.",  -- 1197
+    "Nothing here beats a vendor today. %d might, with a little patience.",  -- 1198
+    "No sure profits in these bags, friend. %d could pay if you wait.",  -- 1199
+    "Best on top: %d here beat any vendor, %d more for the patient.",  -- 1200
+    "%d pay better here than at a vendor, best first. %d more if you wait.",  -- 1201
+    "Top of the pile pays best: %d sure sales, %d more if you can wait.",  -- 1202
+    "No prices yet: %s reads the auction house.",  -- 1203
+    "Prices read just now: %d.",  -- 1204
+    "%d prices, read %s.",  -- 1205
+    "%d prices, read %s. %s reads them again.",  -- 1206
+    "Haven't read the board yet. %s and I'll fetch every price.",  -- 1207
+    "No prices yet, friend. %s reads the whole board.",  -- 1208
+    "Prices fresh off the board, friend: %d of them.",  -- 1209
+    "Just read the board: %d prices, still warm.",  -- 1210
+    "%d prices, read %s. Near enough, friend.",  -- 1211
+    "Last look at the board was %s: %d prices.",  -- 1212
+    "Prices from %s, stale as old bread. %s reads the board again.",  -- 1213
+    "%d prices, but I read them %s. %s and I'll look again.",  -- 1214
+    "Showing what you keep too. %s hides it.",  -- 1215
+    "Kept back: %d, for your professions, your gear and your marks. %s shows them.",  -- 1216
+    "Your keepers are on the list too. %s tucks them away.",  -- 1217
+    "Showing what you keep as well. %s hides it again.",  -- 1218
+    "%d kept back: trade goods, gear to wear, things you marked. %s shows them.",  -- 1219
+    "Set %d aside for your crafts, your back and your marks. %s if you want them.",  -- 1220
+    "each",  -- 1221
+    "no data",  -- 1222
+    "Quick sale",  -- 1223
+    "Patient",  -- 1224
+    "Read all prices",  -- 1225
+    "Hide kept",  -- 1226
+    "Show kept",  -- 1227
+    "Line",  -- 1228
+    "Candles",  -- 1229
+    "Post",  -- 1230
+    "%d of %d",  -- 1231
+    "Post %d of %d for %s each",  -- 1232
+    "Post %d for %s",  -- 1233
+    "Post all %d for %s",  -- 1234
+    "This client's auction house cannot be posted to from here.",  -- 1235
+    "Posted %d for %s.",  -- 1236
+    "Market at the auction house: open / close",  -- 1237
+    "Auctioneer's greeting on the Market",  -- 1238
+    "a goblin auctioneer says one short line, from the game's own sounds, when the Market opens; off: it opens in silence",  -- 1239
+    "Market: show what you keep",  -- 1240
+    "the Market lists what you keep too: what your professions still learn from or make into something worth more, and what you marked to keep; off: only what you would sell",  -- 1241
+    "Market: price chart as candles",  -- 1242
+    "the Market's price chart is a candle a day for the last 7 days (where the price opened, went highest and lowest, and closed: green when it closed higher, red lower); off: a line of the day's lowest price over 30 days",  -- 1243
+    "open or close the Market (a tab of the auction house)",  -- 1244
+    "which auction house this client has (for troubleshooting)",  -- 1245
+    "Open a profession's window and I'll look over your recipes.",  -- 1246
+    "That's the cap, %d. A trainer has the next rank for you.",  -- 1247
+    "Nothing more to learn at %d. Go and see a trainer about the next rank.",  -- 1248
+    "You've outgrown your recipes. See a trainer: %s is waiting at %d.",  -- 1249
+    "%d more to %d, and what you know won't take you there. A trainer has %s for you at %d.",  -- 1250
+    "You've outgrown your recipes. See a trainer: %s is waiting.",  -- 1251
+    "Your recipes stop teaching you %d short of %d. Ask a trainer for %s.",  -- 1252
+    "Your recipes run dry %d short of %d. A trainer will have something new.",  -- 1253
+    "What you know won't carry you the last %d. Time to see a trainer.",  -- 1254
+    "%s won't teach you much now, but it's the best you have. %d more to %d.",  -- 1255
+    "Slow going from here: %s gives a point now and then. %d to go.",  -- 1256
+    "First you'll want %s, %s. The guides start this stretch with it.",  -- 1257
+    "Learn %s, %s, and we'll begin: %d more to %d.",  -- 1258
+    "%d more to %d. The guides send you out for %s until %d.",  -- 1259
+    "Gathering teaches you here: %s until %d.",  -- 1260
+    "%d more to %d. Start with %s, or %s if you'd rather: %s.",  -- 1261
+    "%s first, as the guides have it. %s does the job too: %s.",  -- 1262
+    "%d more to %d. Start with %s.",  -- 1263
+    "%s is your best teacher now. %d points to %d.",  -- 1264
+    "Steady hands. %s first, and %d to go.",  -- 1265
+    "at a trainer",  -- 1266
+    "from a vendor",  -- 1267
+    "found as loot",  -- 1268
+    "from a quest",  -- 1269
+    "cheaper materials",  -- 1270
+    "materials from a vendor",  -- 1271
+    "materials you gather yourself",  -- 1272
+    "it sells well",  -- 1273
+    "something you'll use",  -- 1274
+    "fewer crafts",  -- 1275
+    "a recipe you find or buy",  -- 1276
+    "other materials",  -- 1277
+    "the guides' first choice",  -- 1278
+    "Open a profession's window for a levelling plan.",  -- 1279
+    "At the cap, %d. A trainer has the next rank.",  -- 1280
+    "%d more to %d; your recipes stop short. A trainer has %s at %d.",  -- 1281
+    "%d more to %d; your recipes stop short. A trainer has %s.",  -- 1282
+    "Your recipes stop %d short of %d. A trainer has more.",  -- 1283
+    "%d more to %d. Best now: %s, green (a point now and then).",  -- 1284
+    "%d more to %d. First learn %s, %s.",  -- 1285
+    "%d more to %d. Gather %s until %d.",  -- 1286
+    "%d more to %d. First: %s, or %s (%s).",  -- 1287
+    "%d more to %d. First: %s.",  -- 1288
+    "To gather or buy",  -- 1289
+    "%d crafts: %s",  -- 1290
+    "Learn it %s, at %d.",  -- 1291
+    "Learn it %s.",  -- 1292
+    "%s: %d in your bags, %d in the bank, %d each",  -- 1293
+    "The guides level this stretch by gathering %s.",  -- 1294
+    "%s: you have %d, the plan uses %d",  -- 1295
+    "for %s",  -- 1296
+    "Cheaper to buy it than to make it from %s",  -- 1297
+    "Made from %s",  -- 1298
+    "The Mentor: what your bank can make",  -- 1299
+    "What your bank can make",  -- 1300
+    "Nothing more to make with what's in your bank.",  -- 1301
+    "%d you can make counting your bank, %d of them only with it.",  -- 1302
+    "The Mentor: %s %d > %d",  -- 1303
+    "The Mentor",  -- 1304
+    "Levelling plan",  -- 1305
+    "or",  -- 1306
+    "Gather %s",  -- 1307
+    "to learn",  -- 1308
+    "cheaper to buy",  -- 1309
+    "Hide",  -- 1310
+    "The plan",  -- 1311
+    "Farm this",  -- 1312
+    "Farm all",  -- 1313
+    "With the bank",  -- 1314
+    "Use the plan",  -- 1315
+    "twice to hide",  -- 1316
+    "Nothing here to try on.",  -- 1317
+    "%d added to the farm list.",  -- 1318
+    "Nothing missing: you have what it takes.",  -- 1319
+    "Open a profession's window to make a plan.",  -- 1320
+    "The Mentor (levelling plan): show / hide",  -- 1321
+    "show the levelling plan of the profession window you opened last, with the controller's buttons on it",  -- 1322
+    "Left of the quests",  -- 1323
+    "Right of the quests",  -- 1324
+    "Under the quests",  -- 1325
+    "The farm list is full.",  -- 1326
+    "Farm list: %s, %d wanted.",  -- 1327
+    "Farm",  -- 1328
+    "%d more",  -- 1329
+    "Nothing to farm yet.",  -- 1330
+    "A stack more",  -- 1331
+    "Take off",  -- 1332
+    "Clear",  -- 1333
+    "Done",  -- 1334
+    "Take everything off the farm list?",  -- 1335
+    "Farm list: choose / done",  -- 1336
+    "Farm list: add the item you point at",  -- 1337
+    "That is not on the farm list.",  -- 1338
+    "The farm list is empty.",  -- 1339
+    "Farm list: where it sits",  -- 1340
+    "the farm list to the left of the quest list, to its right, or under its quests",  -- 1341
+    "the farm list beside the quest list: choose with the controller; add <item> [how many], remove <item>, clear, or left / right / bottom for where it sits",  -- 1342
+    "Threat percent",  -- 1343
+    "your share of the threat as a number beside the threat icon, on the target frame and nameplates",  -- 1344
+    "Health number",  -- 1345
+    "the health left, shortened (12.3k), on the bar (not on compact plates: the percent says enough there)",  -- 1346
+    "Your debuffs",  -- 1347
+    "your debuffs on the unit, above its name, with their time",  -- 1348
+    "Everyone's debuffs",  -- 1349
+    "the debuffs the game marks for nameplates from everyone, not only yours",  -- 1350
+    "Enemy buffs",  -- 1351
+    "an enemy's buffs beside its debuffs: the ones that matter (important, enraged, or ones you can dispel or steal), or all of them when Only the effects that matter is off",  -- 1352
+    "Crowd control icon",  -- 1353
+    "a large icon with its time when the unit is stunned, rooted, feared...",  -- 1354
+    "Aggro glow",  -- 1355
+    "a shield icon and a glow behind the name: red while it attacks you, red and yellow when you are about to pull it, yellow and blue when you are losing it, blue when it is not on you",  -- 1356
+    "Quest marker",  -- 1357
+    "a gold marker on units your quests still need",  -- 1358
+    "Nameplate animations",  -- 1359
+    "plates fade in, low health breathes, crowd control shimmers",  -- 1360
+    "Small",  -- 1361
+    "Normal",  -- 1362
+    "Large",  -- 1363
+    "Full name",  -- 1364
+    "Short name",  -- 1365
+    "No name",  -- 1366
+    "Full",  -- 1367
+    "Minimal mini",  -- 1368
+    "Nameplate size",  -- 1369
+    "how big the bars on nameplates are: small and slim, normal, or large (wider and taller)",  -- 1370
+    "Names on nameplates",  -- 1371
+    "the name on a plate with a health bar: in full, cut short, or left out (the target frame gives it in full; the level and class icon stay). A plate with no bar, a friendly NPC's, always keeps its name",  -- 1372
+    "Nameplate look",  -- 1373
+    "the nameplate switches in one press. Full: everything. Minimal: no power bar, guild or title, short names. Minimal mini: small bars with health, your debuffs and the buffs that matter, level and class, no name (the target frame has it). Threat, crowd control and loud casts always stay",  -- 1374
+    "Player titles",  -- 1375
+    "show a player's title with their name",  -- 1376
+    "Guilds and NPC jobs",  -- 1377
+    "a line under the name: the player's guild, or what the NPC does",  -- 1378
+    "Bars for friends in a fight",  -- 1379
+    "friendly plates show health, power and casts while that unit is in combat",  -- 1380
+    "The game's own friendly nameplates",  -- 1381
+    "leave friendly plates (your party, other players, friendly NPCs) to the game's own look; ours only on enemies",  -- 1382
+    "Power bars",  -- 1383
+    "a thin mana, rage or energy bar under the health bar",  -- 1384
+    "Cast target",  -- 1385
+    "who a cast is aimed at, next to the spell's name",  -- 1386
+    "Health percent",  -- 1387
+    "the health percent on the bar",  -- 1388
+    "Name on your target's plate",  -- 1389
+    "off: your target's plate drops its name and level (the target frame shows them)",  -- 1390
+    "Levels on nameplates",  -- 1391
+    "the level in front of an enemy's name, coloured by difficulty",  -- 1392
+    "Compact nameplates",  -- 1393
+    "nameplates about half as wide",  -- 1394
+    "Loud enemy casts",  -- 1395
+    "an enemy's cast flashes, swells and pulses ever faster until it lands, so it can be interrupted in time",  -- 1396
+    "Class icons on nameplates",  -- 1397
+    "a player's class icon in front of their name, friend or enemy",  -- 1398
+    "What NPCs do, as icons",  -- 1399
+    "an icon over friendly NPCs that offer something: a bag over vendors, an anvil over smiths who repair, a book over trainers... (the game's own icons; they show even while the plate itself waits to be pointed at)",  -- 1400
+    "Friendly NPCs only when pointed at",  -- 1401
+    "the plates of friendly NPCs (vendors, quest givers, townsfolk) show only while you point at them, like their tooltip",  -- 1402
+    "Names on things you can interact with",  -- 1403
+    "a name over ore, chests, plaques and the like while you face them (off: they stay bare, as the game's own prompt already says what they are)",  -- 1404
+    "Mini plates",  -- 1405
+    "minions, critters and grey enemies that give no experience get a small plate: a slim bar with your debuffs on it and no name (a critter, with no bar, keeps its name; the game's own option decides whether they have plates at all)",  -- 1406
+    "Party nameplates in dungeons: names only",  -- 1407
+    "inside a dungeon or raid the game draws friendly players' nameplates itself and addons may not change them: in there the game's own options are set to show them as class-coloured names without bars, like ours, with the game's bars back while you fight (when bars for friends in a fight are on); all put back when you leave",  -- 1408
+    "Party nameplates in dungeons: hidden",  -- 1409
+    "inside a dungeon or raid, switch the game's nameplates for friendly players off altogether (and back the way you had them when you leave)",  -- 1410
+    "show what the game gives for your target's name (for troubleshooting)",  -- 1411
+    "list the nameplates on screen and whether they wear our look (for troubleshooting)",  -- 1412
+    "Right, then.",  -- 1413
+    "Och, what a heap.",  -- 1414
+    "Now, let's see, let's see...",  -- 1415
+    "Elune grant me patience.",  -- 1416
+    "By the Naaru, such a jumble.",  -- 1417
+    "Blasted pack.",  -- 1418
+    "A tidy pack is a light pack.",  -- 1419
+    "Bah. Too much clutter.",  -- 1420
+    "Dead weight, the lot of it.",  -- 1421
+    "Patience. The Earth Mother provides.",  -- 1422
+    "Ey, what we got here, mon?",  -- 1423
+    "Such clutter. Unbecoming.",  -- 1424
+    "Time is money. Let's count it.",  -- 1425
+    "Aye, that'll do.",  -- 1426
+    "Elune be thanked.",  -- 1427
+    "The Light provides.",  -- 1428
+    "Hrm. Good enough.",  -- 1429
+    "Hm. Enough to fight with.",  -- 1430
+    "Travelling light. Good.",  -- 1431
+    "Acceptable. Barely.",  -- 1432
+    "Not a slot to spare. The junk would fetch %s: selling it makes room.",  -- 1433
+    "Not a slot to spare. Anything I won't need on the road can wait in the bank.",  -- 1434
+    "Junk: %d, worth %s here. X sells the one I've picked; Smart sell takes it all.",  -- 1435
+    "%d of these belong in the bank: it holds more of the same, or I marked them. Deposit puts them away.",  -- 1436
+    "Only %d slots left. The junk would fetch %s at any vendor.",  -- 1437
+    "Only %d slots left. Time to sell or bank a few things.",  -- 1438
+    "New since I last looked: %d. The gold dot marks each one.",  -- 1439
+    "Worth selling: %d. The Sell filter gathers them, and each tooltip says where it fetches most.",  -- 1440
+    "Junk: %d, worth %s. The next vendor can have it.",  -- 1441
+    "Just the essentials. Nothing worth selling.",  -- 1442
+    "All in order, and %d slots free.",  -- 1443
+    "Your gear's mended: %s.",  -- 1444
+    "I can mend your gear for %s; a broken piece gives you none of its armour or stats.",  -- 1445
+    "Your bags are full. I'll take %d things for %s: Smart sell, and you have room again.",  -- 1446
+    "I'll give you %s for %d things: the junk, and what the auction house wouldn't pay more for. Smart sell, and it's done.",  -- 1447
+    "Keep the %d the auction house wants: it pays %s more than I would.",  -- 1448
+    "Your bags are full. Sell me something before you buy.",  -- 1449
+    "Nothing in your bags I'd pay well for. Have a look at my wares.",  -- 1450
+    "%d of what you carry belong in here: I hold more of the same, or you marked them. Deposit puts them away.",  -- 1451
+    "I hold more of %d things you carry. Withdraw tops your bags up before you head out.",  -- 1452
+    "Your bags are nearly full. Leave what you won't need on the road with me.",  -- 1453
+    "All safe with me, and your bags have %d slots free.",  -- 1454
+    "Nothing for you today. I checked twice.",  -- 1455
+    "Letters for you: %d, nothing attached. Read them when you like.",  -- 1456
+    "Letters for you: %d. In them: %s.",  -- 1457
+    "Take everything empties them in one go.",  -- 1458
+    "Coin on delivery: %d. Those you open and pay for yourself.",  -- 1459
+    "Your bags are full: the items wait in their letters.",  -- 1460
+    "Where to? Point at a place and I'll tell you how long the ride takes.",  -- 1461
+    "%s: about %s by the map. You haven't flown that one yet.",  -- 1462
+    "%s: about %s, going by your last flight there.",  -- 1463
+    "%s: I can't say how long yet. Fly it once and I'll know.",  -- 1464
+    "%d got away. This water wants more skill than I have: bait helps, and so does a better pole.",  -- 1465
+    "No bait on the hook. It adds to my skill, so fewer get away.",  -- 1466
+    "Bait's nearly spent. Another on the hook keeps my skill up.",  -- 1467
+    "Fish here I haven't landed yet: %d. Keep casting.",  -- 1468
+    "I've landed every fish this water has. Somewhere new, then.",  -- 1469
+    "Nothing landed yet. The first fish of every water goes in here.",  -- 1470
+    "Kinds landed: %d. Every water hides a few more: the fishing panel shows a ? for each I haven't caught there.",  -- 1471
+    "Rested by the fire: the next %d experience from kills comes double.",  -- 1472
+    "No rest saved up. A night at an inn or in a city, and kills give double experience for a while.",  -- 1473
+    "%d absorbed",  -- 1474
+    "Feed on the right",  -- 1475
+    "One in the middle",  -- 1476
+    "%d crit heals",  -- 1477
+    "%d crits",  -- 1478
+    "Judgement",  -- 1479
+    "Big moments: where",  -- 1480
+    "a block just above the cooldown callouts on the right of your character, the newest nearest them and the older ones moving up over it as they fade, or one at a time in the middle",  -- 1481
+    "show what a big moment looks and feels like",  -- 1482
+    "collected",  -- 1483
+    "collected from another item",  -- 1484
+    "not collected yet",  -- 1485
+    "Appearance",  -- 1486
+    "Pick a set to put its pieces on your outfit. %s keeps it; nothing is paid before that.",  -- 1487
+    "Looking through your collection...",  -- 1488
+    "Your outfit is back as it was.",  -- 1489
+    "%s: %d of %d pieces put on.",  -- 1490
+    "%d would not go on this outfit.",  -- 1491
+    "One set you have pieces of",  -- 1492
+    "%d sets you have pieces of",  -- 1493
+    "you can't wear this",  -- 1494
+    "missing",  -- 1495
+    "All %d pieces",  -- 1496
+    "%d of %d pieces",  -- 1497
+    "Missing: %s",  -- 1498
+    "No sets yet. Items that share a name, like Green Iron Helm and Green Iron Gauntlets, show here once you have one of them.",  -- 1499
+    "Undo",  -- 1500
+    "Delete the custom set %s? It can't be brought back.",  -- 1501
+    "Delete",  -- 1502
+    "Point at a custom set first.",  -- 1503
+    "%s  Delete custom set",  -- 1504
 }
 
 local TRANSLATIONS = {
@@ -2492,529 +2494,531 @@ local TRANSLATIONS = {
         "Der Kompass muss wissen, wo du bist, und das Spiel sagt es hier nicht.",  -- 977
         "Questkompass: Platz",  -- 978
         "oben am Bildschirm, oder unten am Platz der Erfahrungsleiste (die Leiste kommt dann nach oben)",  -- 979
-        "ein paar Markierungen auf dem Questkompass, um dich herum, für zwanzig Sekunden",  -- 980
-        "Angelmodus: aus.",  -- 981
-        "Angeln: %s zum Auswerfen",  -- 982
-        "Kein Köder: %s zweimal für %s",  -- 983
-        "%s, um die Angel wegzustecken",  -- 984
-        "Angelmodus: %s zum Auswerfen, und noch einmal zum Anschlagen, wenn der Schwimmer zuckt.",  -- 985
-        "%s zum Anhauen, %s zum erneuten Auswerfen",  -- 986
-        "Der Angelmodus braucht eine Angelrute in deinen Händen.",  -- 987
-        "Du beherrschst Angeln nicht.",  -- 988
-        "Angelmodus: eine Taste wirft aus und hakt",  -- 989
-        "Angeltaste: %s",  -- 990
-        "Mit einem Druck neu auswerfen",  -- 991
-        "solange der Schwimmer draußen ist, holt deine Angeltaste den Fisch ein und A wirft mit einem Druck neu aus; aus: A gehört dir",  -- 992
-        "Köder mit Doppeldruck",  -- 993
-        "drücke deine Angeltaste zweimal schnell: der zweite Druck bringt den besten Köder aus deinen Taschen an die Angel, wenn sie keinen hat",  -- 994
-        "Gamepad-Leisten beim Angeln ausblenden",  -- 995
-        "mit einer Angel in der Hand sind die Gamepad-Leisten ausgeblendet, damit das Wasser frei zu sehen ist; die Angelanzeige zeigt die Taste zum Auswerfen. Sie sind zurück, sobald ein Kampf beginnt oder die Angel weggesteckt wird",  -- 996
-        "Ein-Tasten-Angeln vorerst aus oder wieder an (mit einer Angel in der Hand ist es von selbst an)",  -- 997
-        "die Taste, die angelt: anfangs deine Interaktionstaste (Quadrat oder X) oder jede andere, zum Beispiel ein Trigger (rt)",  -- 998
-        "Durotars Küste ist roter Fels und warmes Flachwasser. Die Trolle der Echoinseln sagen, die Makrelen ziehen am dichtesten, wenn die Flut den Duft der Kochfeuer von den Inseln herüberträgt.",  -- 999
-        "Die Seen von Mulgore sind klein, klar und geduldig. Die Tauren angeln dort so, wie sie alles andere tun: langsam und mit Dank.",  -- 1000
-        "Jede Oase im Brachland ist ein Treffpunkt. Was auch immer dort bei Tag trinkt, bei Nacht schwimmt etwas darunter.",  -- 1001
-        "Die Teiche von Teldrassil liegen im Schatten eines einzigen Baumes. Nachtelfische Angler schwören, die Fische dort hätten nie die Sonne gesehen und vermissten sie auch nicht.",  -- 1002
-        "Das Wasser der Dunkelküste ist grau, kalt und voller Wracks. Die Hälfte dessen, was vor Auberdine anbeißt, hat sich in irgendjemandes verlorener Fracht häuslich eingerichtet.",  -- 1003
-        "Die Flüsse des Eschentals fließen unter Blättern, die älter sind als die meisten Königreiche. Die Fische sind flink, und die Schildwachen fragen noch flinker, was du dort zu suchen hast.",  -- 1004
-        "Unten zwischen den Tausend Nadeln ist Wasser knapp und wird eifersüchtig gehütet. Ein Fisch von hier hat sich seinen Platz verdient.",  -- 1005
-        "Die Seen des Steinkrallengebirges liegen hoch und kalt zwischen den Gipfeln. Die Goblins hätten sie längst trockengelegt, wäre das Angeln nicht so gut.",  -- 1006
-        "Die Küste von Desolace besteht aus Knochen und grauer Brandung. Irgendetwas dort unten hat an beidem Geschmack gefunden.",  -- 1007
-        "Feralas ist grün bis hinunter an die Wasserlinie. Seine Flüsse sind tief, warm und überaus lebendig.",  -- 1008
-        "Niemand weiß genau, wo in den Düstermarschen das Land aufhört und das Wasser anfängt. Angle vom Ufer aus und zähl danach deine Zehen.",  -- 1009
-        "Der Dampfdruckpier hat das einzige Wasser in Tanaris, das den Namen verdient. Die Goblins verkaufen dir das Recht, dort zu angeln, und zwar zweimal, wenn du sie lässt.",  -- 1010
-        "Unter Azsharas heller Bucht liegt eine versunkene Stadt. Alte Angler sagen, die ganz Großen leben dort, wo einst ihre Gärten waren.",  -- 1011
-        "Die Tümpel des Teufelswalds leuchten, und zwar nicht auf die gute Art. Was noch darin schwimmt, ist stur über jede Vernunft hinaus.",  -- 1012
-        "Die heißen Quellen und teergesäumten Seen von Un'Goro haben Dinge bewahrt, die der Rest der Welt vergessen hat. Manche davon beißen.",  -- 1013
-        "Der See Elune'ara auf der Mondlichtung ist so still wie ein angehaltener Atem. Die Druiden bitten nur darum, dass du nicht mehr nimmst, als du essen wirst.",  -- 1014
-        "Silithus ist Sand, Wind und das Geräusch von Flügeln. Wenn du hier Wasser zum Angeln gefunden hast, sag es niemandem.",  -- 1015
-        "Die Seen von Winterquell frieren an den Rändern zu und dampfen in der Mitte. Die Fische dort sind fett gegen die Kälte und den Fußmarsch wert.",  -- 1016
-        "In den Teichen von Orgrimmar angeln Peons, die nichts Besseres zu tun haben, und alte Grunzer, die dasselbe behaupten. Beide erzählen dir, der Große sei ihnen entwischt.",  -- 1017
-        "Ein Fisch aus den Teichen von Donnerfels hat sein ganzes Leben hoch über den Ebenen verbracht. Er scheint das gelassen zu nehmen.",  -- 1018
-        "Darnassus hütet seine Gewässer so sorgsam wie seine Tempel. Die Fische haben sich daran gewöhnt, bewundert zu werden.",  -- 1019
-        "Die Seen des Alteracgebirges sind Schmelzwasser, und die Oger und das Syndikat angeln dort, wenn niemand hinsieht.",  -- 1020
-        "Arathis Ufer haben mehr Armeen gesehen als Angler. Den Fischen ist längst gleich, wessen Banner über dem Wasser weht.",  -- 1021
-        "Das Ödland ist Staub von einem Ende zum anderen. Ein Biss ist hier ein kleines Wunder, also behandle ihn auch so.",  -- 1022
-        "Die Küste der Verwüsteten Lande ist rot, kahl gescheuert und still. Was in dieser Brandung lebt, hat gelernt, mit einer ganzen Menge zu leben.",  -- 1023
-        "Die Seen von Tirisfal liegen reglos unter einem kränklichen Himmel. Die Verlassenen angeln dort aus Gewohnheit. Die Toten essen nicht viel, aber sie erinnern sich, dass es ihnen einmal geschmeckt hat.",  -- 1024
-        "Die lange Küste des Silberwalds besteht ganz aus Nebel und Kiefernschatten. Das Angeln ist gut, und das ist das einzig Fröhliche, was je einer über die Gegend sagt.",  -- 1025
-        "Die Flüsse der Westlichen Pestländer fließen noch, wenn auch nicht sauber. Was du herausziehst, sieh dir zweimal an.",  -- 1026
-        "Nur wenige angeln in den Östlichen Pestländern, und noch weniger geben es zu. Das Wasser behält, was die Seuche von ihm übrig gelassen hat.",  -- 1027
-        "Der Fluss im Vorgebirge des Hügellands und sein langes Südufer haben in jedem Streit, der um sie geführt wurde, beide Seiten ernährt.",  -- 1028
-        "Das Hinterland hält seine Seen hoch oben zwischen den Bäumen, wo die Wildhammerzwerge vom Greifenrücken aus angeln, wenn sie glauben, dass niemand zusieht.",  -- 1029
-        "Die Seen von Dun Morogh sind die meiste Zeit des Jahres von Eis umringt. Ein Zwerg schlägt ein Loch, setzt sich mit einem Humpen hin und nennt es einen guten Tag, ganz gleich, was anbeißt.",  -- 1030
-        "Die Sengende Schlucht hat Lava, wo andere Länder Flüsse haben. Bring statt der Angel lieber etwas zu trinken mit.",  -- 1031
-        "Die Brennende Steppe ist Asche und Glut. Wenn dir das Wasser hier überhaupt etwas gibt, dann ist es heiß.",  -- 1032
-        "Jedes Kind in Elwynn lernt am Kristallsee oder am Steinhügelsee das Angeln. Die kleinen Fische dort tricksen sie seit Generationen aus.",  -- 1033
-        "Der Gebirgspass der Totenwinde hat wenig Wasser und noch weniger Gastfreundschaft. Was in den Tümpeln unterhalb von Karazhan ist, bleibt am besten dort.",  -- 1034
-        "Der Fluss am Rand des Dämmerwalds ist zu jeder Stunde schwarz. Die Fische scheint die Dunkelheit nicht zu stören, die Angler schon.",  -- 1035
-        "Der Loch ist der Stolz von Loch Modan, aufgestaut vom großen Steinwerkdamm. Zwerge messen jedes Anglerlatein an ihm, und meistens gewinnt der Loch.",  -- 1036
-        "Der Immerruhsee im Rotkammgebirge ist schön wie ein Gemälde, und geangelt wird dort von jedem Steg in Seenhain. Die Leute im Ort kennen jede gute Stelle und verraten dir keine einzige.",  -- 1037
-        "Von seinen Dschungelflüssen bis zum wilden Südkap hat das Schlingendorntal die reichsten Gewässer des Kontinents. Die Angler von Beutebucht tragen darum ein Turnier aus, und fast alle schummeln.",  -- 1038
-        "Die Sümpfe des Elends sind grünes Wasser unter grünen Bäumen. Die Fische schmecken nach Schlamm, und die Einheimischen mögen sie genau so.",  -- 1039
-        "Westfalls Felder haben versagt, seine Küste nicht. Wer geblieben ist, lebt vom langen grauen Strand.",  -- 1040
-        "Das Sumpfland trägt seinen Namen zu Recht. Die Docks im Hafen von Menethil sind der trockenste Platz, um dort zu angeln, und die Krokilisken wissen das.",  -- 1041
-        "In den Kanälen von Sturmwind angeln Kinder, Rentner und mindestens ein verkleidetes Mitglied des Adels. Niemand fragt, was sonst noch in den Kanälen ist.",  -- 1042
-        "Die Düstere Höhle birgt den einzigen stillen Teich von Eisenschmiede. Alte Zwerge angeln dort stundenlang und sagen kein Wort.",  -- 1043
-        "Die Kanäle von Unterstadt führen ein Grün, das nichts mit Algen zu tun hat. Die Verlassenen, die dort angeln, tun es nicht fürs Abendessen.",  -- 1044
-        "Der erste Fisch, den die meisten Angler je an Land ziehen, und so leuchtend, dass sie ihn nicht vergessen.",  -- 1045
-        "Glatt, flink und an jeder warmen Küste zu Hause. Gegrillt schmeckt das besser, als der Name vermuten lässt.",  -- 1046
-        "Ganz Maul, und am glücklichsten in Wasser, das du nicht trinken würdest.",  -- 1047
-        "Klein, bissig und furchtlos. Ein Schwarm davon soll einmal einen Bären aus dem Loch gejagt haben.",  -- 1048
-        "Ein Farbblitz unter der Brandung. Hängt so ein Fisch an der Leine, gilt das unter Seeleuten als Glück für die Reise.",  -- 1049
-        "Ein geduldiger Grundfisch mit Barthaaren wie ein Zwergenältester.",  -- 1050
-        "Zweimal isst das niemand. Alchemisten kaufen jedes Exemplar, das sie kriegen können.",  -- 1051
-        "Die Flossen glimmen wie Glut unter der Asche, und das ausgepresste Öl brennt fast genauso gut.",  -- 1052
-        "Gepanzert wie ein kleiner Schild. Das Fleisch darin ist die Mühe wert.",  -- 1053
-        "Irgendetwas im Wasser nahe den Höhlen des Wehklagens hat ihn verändert. Wer einen isst, den verändert es womöglich auch, für eine Weile.",  -- 1054
-        "Das Flussvolk sagt, eine Mahlzeit davon kläre den Geist. Weise macht ihn das Schwimmen gegen den Strom.",  -- 1055
-        "Älter, größer und weiser als sein Vetter, was ihn nicht von deinem Haken ferngehalten hat.",  -- 1056
-        "Ein zäher Kämpfer aus warmen südlichen Meeren und ein Liebling auf jeder Tavernentafel von Beutebucht bis Gadgetzan.",  -- 1057
-        "Die Stirn glänzt wie echtes Mithril. Mehr als ein Bergmann hat schon versucht, ein Exemplar einzuschmelzen.",  -- 1058
-        "Die Schuppen lassen sich zu einem Öl einkochen, das die Haut hart wie Fels macht. Am liebsten ist ihm die Nacht.",  -- 1059
-        "Poliert wie ein Paradeharnisch und beinahe genauso schwer.",  -- 1060
-        "Er kommt nur in den kalten Monaten in Küstennähe, und die Köche, die ihn kennen, warten das ganze Jahr darauf.",  -- 1061
-        "Er zieht, wenn die Tage lang sind. Die Küstenbewohner lesen an ihm die Jahreszeit ab.",  -- 1062
-        "Fass ihn in der Mitte an, und nur ein einziges Mal.",  -- 1063
-        "Ein Flussfisch aus wildem Land, an den Kiemen so rot wie die Kriegsbemalung eines Trolls.",  -- 1064
-        "Er frisst nach Einbruch der Dunkelheit. Eine Suppe aus ihm beruhigt die Nerven eines Zauberwirkers.",  -- 1065
-        "Er frisst am Tag, in fast allem das Gegenteil des Nachtflossenschnappers, und teilt sich trotzdem das Wasser mit ihm.",  -- 1066
-        "Streng genommen kein Fisch. Er hält nichts davon, gefangen zu werden, und lässt dich das spüren.",  -- 1067
-        "Bleich wie Flusseis, aus den kalten, klaren Seen des Nordens.",  -- 1068
-        "Du wirst beide Hände brauchen, und vielleicht einen Freund.",  -- 1069
-        "%.1f Pfd.",  -- 1070
-        "Neu in deinem Angeltagebuch: %s, %s.",  -- 1071
-        "Neu in deinem Angeltagebuch: %s.",  -- 1072
-        "Dein bisher schwerster Fang – %s: %s (vorher %s).",  -- 1073
-        "Köder %s",  -- 1074
-        "Kein Köder",  -- 1075
-        "Gefangen %d",  -- 1076
-        "Entkommen %d",  -- 1077
-        "Ein Neugieriger: +%d%%",  -- 1078
-        "Halte deinen Köder neben dem Fisch",  -- 1079
-        "Nächster Fang +%d%%",  -- 1080
-        "%s halten: der Köder läuft die Schnur entlang",  -- 1081
-        "%d in Folge",  -- 1082
-        "Ein Spiel, während der Schwimmer draußen ist",  -- 1083
-        "auf der Zauberleiste gespielt, solange deine Schnur draußen ist: halte einen Abzug und dein Köder läuft die Schnur entlang, lass los und er treibt zurück; halte ihn beim Schatten des Fisches. Je besser du spielst, desto schwerer das erfundene Gewicht deines nächsten Fangs. Es belegt keine Taste und berührt weder Auswurf noch Fang",  -- 1084
-        "%d gefangen, %d Arten, %d entkommen",  -- 1085
-        "Schwerster: %s, %s",  -- 1086
-        "Fische",  -- 1087
-        "Gewässer",  -- 1088
-        "Noch nichts gefangen. Nimm eine Angel mit ans Wasser.",  -- 1089
-        "Gefangen: %d",  -- 1090
-        "Schwerster: %s, in %s",  -- 1091
-        "Zuerst gefangen: %s",  -- 1092
-        "Hier gefangen: %d",  -- 1093
-        "Hier gefundene Arten: %d",  -- 1094
-        "dein Angeltagebuch öffnen oder schließen: jede Art, die du gefangen hast, dein schwerster Fang von jeder, und die Gewässer, in denen du geangelt hast",  -- 1095
-        "Flug",  -- 1096
-        "Landung vorzeitig",  -- 1097
-        "Landung am nächsten Flugpunkt",  -- 1098
-        "Ziel unbekannt",  -- 1099
-        "geschätzt nach der Entfernung",  -- 1100
-        "erster Flug auf dieser Route: die Flugzeit wird gelernt",  -- 1101
-        "Landung",  -- 1102
-        "%s: etwa %s, geschätzt nach der Entfernung",  -- 1103
-        "%s: etwa %s",  -- 1104
-        "%s: erster Flug auf dieser Strecke, Zeit unbekannt",  -- 1105
-        "Im Flug, Ziel unbekannt",  -- 1106
-        "%s: Flugzeit gelernt, %s",  -- 1107
-        "Vorzeitige Landung: %s, etwa %s",  -- 1108
-        "Vorzeitige Landung am nächsten Flugpunkt",  -- 1109
-        "frisch und kalt, Schnee unter den Füßen und der Atem hängt in der Luft",  -- 1110
-        "bitterkalt, mit einem Wind von den Gipfeln, der jede Lücke in der Rüstung findet",  -- 1111
-        "heiß und schwül, die Luft so dick, dass man sie trinken könnte",  -- 1112
-        "drückende Hitze unter dem Blätterdach, und die Insekten sind laut",  -- 1113
-        "heiß und trocken, mit Staub im Wind",  -- 1114
-        "glühende Sonne und rissige Erde; trinkt, wann immer Ihr könnt",  -- 1115
-        "Rauch und Asche auf einem heißen Wind",  -- 1116
-        "versengte Luft, und Funken treiben umher",  -- 1117
-        "grau und kalt, ein feuchter Nebel, der sich festsetzt",  -- 1118
-        "eine Kühle in der Luft und kaum Licht",  -- 1119
-        "mild und freundlich, mit einer sanften Brise",  -- 1120
-        "angenehmes Wetter, gut zum Reisen",  -- 1121
-        "kühl und grün, die Blätter flüstern",  -- 1122
-        "sanftes Licht zwischen den Bäumen, und die Luft ist frisch",  -- 1123
-        "schwül und feucht, der Boden weich unter den Füßen",  -- 1124
-        "warme, nasse Luft und der Geruch des Moors",  -- 1125
-        "%s in %s: %s",  -- 1126
-        "%d Flugstrecken bekannt.",  -- 1127
-        "Flüge: dein Reittier entlang der Leiste",  -- 1128
-        "ein Greif, ein Windreiter oder eine Fledermaus (was der Flugmeister dir gab) gleitet die Flugleiste entlang zu deinem Landeplatz",  -- 1129
-        "Flüge: das Wetter am Ziel",  -- 1130
-        "bei der Landung sagt der Chat, wie die Luft dort ist, wo Ihr ankommt, so wie der Ort gewöhnlich ist (heiß und schwül im Schlingendorntal, Schnee unter den Füßen in Dun Morogh), und die Tageszeit",  -- 1131
-        "die Flugstrecken mit bekannter Zeit auflisten",  -- 1132
-        "Gelandet! +%d",  -- 1133
-        "Angestoßen: die Serie endet",  -- 1134
-        "%s flattern  ·  weiche den Baumkronen und Zeppelinen aus",  -- 1135
-        "%s fang die Reiter mit dem Netz für Fluggold  ·  %s große Höhe",  -- 1136
-        "%d Fluggold",  -- 1137
-        "%s flattern",  -- 1138
-        "%s Netz",  -- 1139
-        "%s große Höhe",  -- 1140
-        "%s: zurück zum Spiel (%d Fluggold)",  -- 1141
-        "%s: ein Spiel für unterwegs",  -- 1142
-        "Das Flugspiel ist aus: /cchud flightgame on",  -- 1143
-        "Das Flugspiel wird auf einem Flug gespielt.",  -- 1144
-        "Nicht im Kampf.",  -- 1145
-        "Flugspiel: spielen / große Höhe",  -- 1146
-        "auf einem Flug: das Flugspiel starten, oder es in große Höhe bringen und zurück",  -- 1147
-        "Filmische Flüge: die Kamera kreist um dich",  -- 1148
-        "im Film kreist die Kamera langsam um dich und dein Reittier, eine ganze Runde in etwa anderthalb Minuten, und kommt vor der Landung wieder hinter dich. Aus: eine ruhige Einstellung",  -- 1149
-        "Offline",  -- 1150
-        "Tot",  -- 1151
-        "Aus",  -- 1152
-        "In einer Heiler-Spezialisierung",  -- 1153
-        "Immer",  -- 1154
-        "Zu weit",  -- 1155
-        "Heiler-Gruppe und -Schlachtzug",  -- 1156
-        "in einer Gruppe: deine Gruppe neben deinem Charakter, jedes Mitglied mit der Taste, die es anvisiert; im Schlachtzug: schlankere Rahmen. Jeder zeigt nur, wie viel Heilung nötig ist, einen Schwächungszauber, den du entfernen kannst, und ob er in Reichweite ist",  -- 1157
-        "%d%% Verkaufschance",  -- 1158
-        "Geht sicher weg (%d%%)",  -- 1159
-        "Das verkauft sich von selbst (%d%%)",  -- 1160
-        "Ich denke, das geht weg (%d%%)",  -- 1161
-        "Sollte einen Käufer finden (%d%%)",  -- 1162
-        "Halbe-halbe (%d%%)",  -- 1163
-        "Kann so oder so ausgehen (%d%%)",  -- 1164
-        "Ein kleines Glücksspiel (%d%%)",  -- 1165
-        "Könnte eine Weile liegen (%d%%)",  -- 1166
-        "Darauf würde ich nicht wetten (%d%%)",  -- 1167
-        "Schlechte Karten, Freund (%d%%)",  -- 1168
-        "+%s gegenüber einem Händler",  -- 1169
-        "noch kein Preis bekannt",  -- 1170
-        "ein Händler zahlt genauso viel",  -- 1171
-        "Der Makler",  -- 1172
-        "Markt",  -- 1173
-        "jede Münze gezählt, Freund",  -- 1174
-        "In deinen Taschen lässt sich hier nichts verkaufen.",  -- 1175
-        "Keine Preise in den letzten 7 Tagen.",  -- 1176
-        "Erst ein Tag mit Preisen: Jeden Tag, an dem du das Auktionshaus besuchst, kommt eine Kerze hinzu.",  -- 1177
-        "7 Tage, eine Kerze pro Tag: grün höher geschlossen, rot tiefer",  -- 1178
-        "30 Tage, der niedrigste des Tages: grün hoch, rot runter",  -- 1179
-        "Noch keine Preisgeschichte: lies das Auktionshaus an ein paar Tagen.",  -- 1180
-        "Erst ein Tag Preise: Die Linie wächst mit jedem Tag, an dem du das Auktionshaus besuchst.",  -- 1181
-        "Verlange %s pro Stück, %s für die %d, die du abgibst; %d bleiben bei dir",  -- 1182
-        "Verlangt %s pro Stück, %s für alle %d",  -- 1183
-        "Niedrigster",  -- 1184
-        "gelesen %s",  -- 1185
-        "Üblich",  -- 1186
-        "7 Tage: %s bis %s",  -- 1187
-        "Eingestellt: %d Auktionen, %d Gegenstände",  -- 1188
-        "%s pro Stück, %s für alle %d",  -- 1189
-        "Du hast hier %d eingestellt, %d Auktionen verkauft",  -- 1190
-        "Kein Preis bekannt: lies zuerst das Auktionshaus.",  -- 1191
-        "Nichts in deinen Taschen, das sich hier verkaufen lässt.",  -- 1192
-        "Heute bringt hier nichts mehr als beim Händler; %d vielleicht, mit Geduld.",  -- 1193
-        "Das Beste zuerst: %d bringen hier mehr als beim Händler, %d weitere mit Geduld.",  -- 1194
-        "Leere Taschen, Freund. Bring mir was zum Verkaufen.",  -- 1195
-        "Hier schlägt heute nichts den Händler. %d vielleicht, mit etwas Geduld.",  -- 1196
-        "Kein sicherer Gewinn in diesen Taschen, Freund. %d lohnen sich, wenn du wartest.",  -- 1197
-        "Das Beste oben: %d hier schlagen jeden Händler, %d mehr für Geduldige.",  -- 1198
-        "%d bringen hier mehr als beim Händler, Bestes zuerst. %d mehr, wenn du wartest.",  -- 1199
-        "Oben liegt das Geld: %d sichere Verkäufe, %d mehr, wenn du warten kannst.",  -- 1200
-        "Noch keine Preise: %s liest das Auktionshaus.",  -- 1201
-        "Gerade gelesene Preise: %d.",  -- 1202
-        "%d Preise, gelesen %s.",  -- 1203
-        "%d Preise, gelesen %s. %s liest sie neu.",  -- 1204
-        "Hab das Brett noch nicht gelesen. %s, und ich hol jeden Preis.",  -- 1205
-        "Noch keine Preise, Freund. %s liest das ganze Brett.",  -- 1206
-        "Preise frisch vom Brett, Freund: %d Stück.",  -- 1207
-        "Gerade das Brett gelesen: %d Preise, noch warm.",  -- 1208
-        "%d Preise, gelesen %s. Gut genug, Freund.",  -- 1209
-        "Zuletzt aufs Brett geschaut: %s, %d Preise.",  -- 1210
-        "Preise von %s, altbacken wie Brot von gestern. %s liest das Brett neu.",  -- 1211
-        "%d Preise, aber gelesen %s. %s, und ich schau nochmal.",  -- 1212
-        "Was du behältst, wird auch gezeigt. %s blendet es aus.",  -- 1213
-        "Zurückbehalten: %d, für deine Berufe, deine Ausrüstung und deine Markierungen. %s zeigt sie.",  -- 1214
-        "Was du behältst, steht auch auf der Liste. %s räumt es weg.",  -- 1215
-        "Ich zeig auch, was du behältst. %s blendet es wieder aus.",  -- 1216
-        "%d zurückgelegt: Material für Berufe, Ausrüstung, Markiertes. %s zeigt sie.",  -- 1217
-        "%d beiseitegelegt: fürs Handwerk, zum Anziehen, von dir markiert. %s, wenn du sie willst.",  -- 1218
-        "pro Stück",  -- 1219
-        "keine Daten",  -- 1220
-        "Schnellverkauf",  -- 1221
-        "Geduldig",  -- 1222
-        "Alle Preise lesen",  -- 1223
-        "Behaltenes verbergen",  -- 1224
-        "Behaltenes zeigen",  -- 1225
-        "Linie",  -- 1226
-        "Kerzen",  -- 1227
-        "Einstellen",  -- 1228
-        "%d von %d",  -- 1229
-        "%d von %d einstellen, je %s",  -- 1230
-        "%d für %s einstellen",  -- 1231
-        "Alle %d für %s einstellen",  -- 1232
-        "In das Auktionshaus dieses Clients kann von hier aus nicht eingestellt werden.",  -- 1233
-        "%d für %s eingestellt.",  -- 1234
-        "Markt im Auktionshaus: öffnen / schließen",  -- 1235
-        "Gruß des Auktionators im Markt",  -- 1236
-        "ein Goblin-Auktionator sagt einen kurzen Satz aus den Klängen des Spiels, wenn der Markt öffnet; aus: er öffnet still",  -- 1237
-        "Markt: zeigen, was du behältst",  -- 1238
-        "der Markt listet auch, was du behältst: woraus deine Berufe noch lernen oder etwas Wertvolleres herstellen, und was du zum Behalten markiert hast; aus: nur, was du verkaufen würdest",  -- 1239
-        "Markt: Preisverlauf als Kerzen",  -- 1240
-        "der Preisverlauf im Markt ist eine Kerze pro Tag für die letzten 7 Tage (wo der Preis eröffnete, am höchsten und am niedrigsten war und schloss: grün, wenn er höher schloss, rot, wenn tiefer); aus: eine Linie des niedrigsten Tagespreises über 30 Tage",  -- 1241
-        "den Markt öffnen oder schließen (ein Reiter des Auktionshauses)",  -- 1242
-        "welches Auktionshaus dieser Client hat (zur Fehlersuche)",  -- 1243
-        "Öffne das Fenster eines Berufs, und ich sehe mir deine Rezepte an.",  -- 1244
-        "Das ist die Grenze, %d. Ein Lehrer hat den nächsten Rang für dich.",  -- 1245
-        "Bei %d gibt es nichts mehr zu lernen. Sprich mit einem Lehrer über den nächsten Rang.",  -- 1246
-        "Du bist deinen Rezepten entwachsen. Geh zum Lehrer: %s wartet bei %d auf dich.",  -- 1247
-        "Noch %d bis %d, und was du kannst, bringt dich nicht dorthin. Ein Lehrer hat %s für dich, ab %d.",  -- 1248
-        "Du bist deinen Rezepten entwachsen. Geh zum Lehrer: %s wartet auf dich.",  -- 1249
-        "Deine Rezepte lehren dich nichts mehr, %d vor %d. Frag einen Lehrer nach %s.",  -- 1250
-        "Deine Rezepte geben %d vor %d nichts mehr her. Ein Lehrer hat etwas Neues für dich.",  -- 1251
-        "Was du kannst, trägt dich nicht über die letzten %d. Zeit für einen Lehrer.",  -- 1252
-        "%s lehrt dich jetzt nicht mehr viel, aber es ist das Beste, was du hast. Noch %d bis %d.",  -- 1253
-        "Ab hier geht es langsam: %s gibt ab und zu einen Punkt. Noch %d.",  -- 1254
-        "Zuerst brauchst du %s, %s. Die Anleitungen beginnen diesen Abschnitt damit.",  -- 1255
-        "Lerne %s, %s, dann fangen wir an: noch %d bis %d.",  -- 1256
-        "Noch %d bis %d. Die Anleitungen schicken dich nach %s, bis %d.",  -- 1257
-        "Hier lehrt dich das Sammeln: %s bis %d.",  -- 1258
-        "Noch %d bis %d. Fang mit %s an, oder mit %s, wenn dir das lieber ist: %s.",  -- 1259
-        "Zuerst %s, so sehen es die Anleitungen. %s tut es auch: %s.",  -- 1260
-        "Noch %d bis %d. Fang mit %s an.",  -- 1261
-        "%s ist jetzt dein bester Lehrer. Noch %d Punkte bis %d.",  -- 1262
-        "Ruhige Hände. Zuerst %s, dann noch %d.",  -- 1263
-        "bei einem Lehrer",  -- 1264
-        "bei einem Händler",  -- 1265
-        "als Beute",  -- 1266
-        "aus einer Quest",  -- 1267
-        "günstigere Materialien",  -- 1268
-        "Materialien vom Händler",  -- 1269
-        "Materialien, die du selbst sammelst",  -- 1270
-        "verkauft sich gut",  -- 1271
-        "etwas, das du selbst nutzt",  -- 1272
-        "weniger Herstellungen",  -- 1273
-        "ein Rezept, das du findest oder kaufst",  -- 1274
-        "andere Materialien",  -- 1275
-        "die erste Wahl der Anleitungen",  -- 1276
-        "Öffne das Fenster eines Berufs für einen Levelplan.",  -- 1277
-        "Am Limit, %d. Ein Lehrer hat den nächsten Rang.",  -- 1278
-        "Noch %d bis %d; deine Rezepte reichen nicht. Ein Lehrer hat %s ab %d.",  -- 1279
-        "Noch %d bis %d; deine Rezepte reichen nicht. Ein Lehrer hat %s.",  -- 1280
-        "Deine Rezepte enden %d vor %d. Ein Lehrer hat mehr.",  -- 1281
-        "Noch %d bis %d. Am besten jetzt: %s, grün (ab und zu ein Punkt).",  -- 1282
-        "Noch %d bis %d. Lerne zuerst %s, %s.",  -- 1283
-        "Noch %d bis %d. Sammle %s bis %d.",  -- 1284
-        "Noch %d bis %d. Zuerst: %s, oder %s (%s).",  -- 1285
-        "Noch %d bis %d. Zuerst: %s.",  -- 1286
-        "Zu sammeln oder zu kaufen",  -- 1287
-        "%d-mal herstellen: %s",  -- 1288
-        "Lerne es %s, ab %d.",  -- 1289
-        "Lerne es %s.",  -- 1290
-        "%s: %d in deinen Taschen, %d in der Bank, %d pro Herstellung",  -- 1291
-        "Die Anleitungen leveln diesen Abschnitt mit dem Sammeln von %s.",  -- 1292
-        "%s: du hast %d, der Plan braucht %d",  -- 1293
-        "für %s",  -- 1294
-        "Kaufen ist billiger, als es aus %s herzustellen",  -- 1295
-        "Hergestellt aus %s",  -- 1296
-        "Der Mentor: was deine Bank herstellen lässt",  -- 1297
-        "Was deine Bank herstellen kann",  -- 1298
-        "Mit dem, was in deiner Bank liegt, lässt sich nichts mehr herstellen.",  -- 1299
-        "%d kannst du mit deiner Bank herstellen, %d davon nur mit ihr.",  -- 1300
-        "Der Mentor: %s %d > %d",  -- 1301
-        "Der Mentor",  -- 1302
-        "Levelplan",  -- 1303
-        "oder",  -- 1304
-        "Sammle %s",  -- 1305
-        "zu lernen",  -- 1306
-        "billiger zu kaufen",  -- 1307
-        "Ausblenden",  -- 1308
-        "Der Plan",  -- 1309
-        "Das farmen",  -- 1310
-        "Alles farmen",  -- 1311
-        "Mit der Bank",  -- 1312
-        "Plan bedienen",  -- 1313
-        "zweimal zum Ausblenden",  -- 1314
-        "Hier gibt es nichts anzuprobieren.",  -- 1315
-        "%d zur Farmliste hinzugefügt.",  -- 1316
-        "Nichts fehlt: Du hast alles, was nötig ist.",  -- 1317
-        "Öffne das Fenster eines Berufs, um einen Plan zu erstellen.",  -- 1318
-        "Der Mentor (Levelplan): zeigen / verbergen",  -- 1319
-        "zeigt den Levelplan des zuletzt geöffneten Berufsfensters, mit den Tasten des Controllers darauf",  -- 1320
-        "Links der Quests",  -- 1321
-        "Rechts der Quests",  -- 1322
-        "Unter den Quests",  -- 1323
-        "Die Farmliste ist voll.",  -- 1324
-        "Farmliste: %s, %d gewünscht.",  -- 1325
-        "Farmen",  -- 1326
-        "%d weitere",  -- 1327
-        "Noch nichts zu farmen.",  -- 1328
-        "Einen Stapel mehr",  -- 1329
-        "Entfernen",  -- 1330
-        "Leeren",  -- 1331
-        "Fertig",  -- 1332
-        "Alles von der Farmliste nehmen?",  -- 1333
-        "Farmliste: wählen / fertig",  -- 1334
-        "Farmliste: den Gegenstand hinzufügen, auf den du zeigst",  -- 1335
-        "Das steht nicht auf der Farmliste.",  -- 1336
-        "Die Farmliste ist leer.",  -- 1337
-        "Farmliste: wo sie sitzt",  -- 1338
-        "die Farmliste links der Questliste, rechts davon oder unter ihren Quests",  -- 1339
-        "die Farmliste neben der Questliste: mit dem Controller wählen; add <Gegenstand> [wie viele], remove <Gegenstand>, clear, oder left / right / bottom für ihren Platz",  -- 1340
-        "Bedrohung in Prozent",  -- 1341
-        "dein Anteil an der Bedrohung als Zahl neben dem Bedrohungssymbol, am Zielrahmen und an Namensplaketten",  -- 1342
-        "Gesundheitszahl",  -- 1343
-        "die verbleibende Gesundheit, gekürzt (12.3k), auf der Leiste (nicht auf kompakten Plaketten: dort reicht der Prozentwert)",  -- 1344
-        "Deine Debuffs",  -- 1345
-        "deine Debuffs auf der Einheit, über ihrem Namen, mit ihrer Zeit",  -- 1346
-        "Debuffs von allen",  -- 1347
-        "die Debuffs, die das Spiel für Namensplaketten von allen markiert, nicht nur von dir",  -- 1348
-        "Gegnerische Buffs",  -- 1349
-        "die Stärkungen eines Feindes neben seinen Schwächungen: die wichtigen (wichtig, wütend oder von dir bannbar oder stehlbar), oder alle, wenn Nur die Effekte, die zählen aus ist",  -- 1350
-        "Massenkontroll-Symbol",  -- 1351
-        "ein großes Symbol mit Restzeit, wenn die Einheit betäubt, bewegungsunfähig, in Furcht versetzt ist...",  -- 1352
-        "Aggro-Leuchten",  -- 1353
-        "ein Schildsymbol und ein Leuchten hinter dem Namen: rot, solange es dich angreift, rot und gelb, wenn du es gleich ziehst, gelb und blau, wenn du es verlierst, blau, wenn es nicht auf dir ist",  -- 1354
-        "Questmarkierung",  -- 1355
-        "eine goldene Markierung an Einheiten, die deine Quests noch brauchen",  -- 1356
-        "Namensplaketten-Animationen",  -- 1357
-        "Plaketten blenden ein, niedrige Gesundheit atmet, Massenkontrolle schimmert",  -- 1358
-        "Klein",  -- 1359
-        "Normal",  -- 1360
-        "Groß",  -- 1361
-        "Voller Name",  -- 1362
-        "Kurzer Name",  -- 1363
-        "Kein Name",  -- 1364
-        "Voll",  -- 1365
-        "Minimal mini",  -- 1366
-        "Namensplakettengröße",  -- 1367
-        "wie groß die Leisten auf Namensplaketten sind: klein und schmal, normal oder groß (breiter und höher)",  -- 1368
-        "Namen auf Namensplaketten",  -- 1369
-        "der Name auf einer Plakette mit Gesundheitsleiste: voll, gekürzt oder weggelassen (der Zielrahmen nennt ihn voll; Stufe und Klassensymbol bleiben). Eine Plakette ohne Leiste, die eines freundlichen NPCs, behält immer ihren Namen",  -- 1370
-        "Aussehen der Namensplaketten",  -- 1371
-        "die Schalter der Namensplaketten auf einen Druck. Voll: alles. Minimal: keine Ressourcenleiste, Gilde oder Titel, kurze Namen. Minimal mini: kleine Leisten mit Gesundheit, Euren Schwächungen und den wichtigen Stärkungen, Stufe und Klasse, kein Name (der Zielrahmen hat ihn). Bedrohung, Kontrolleffekte und laute Zauber bleiben immer",  -- 1372
-        "Spielertitel",  -- 1373
-        "zeigt den Titel eines Spielers neben seinem Namen an",  -- 1374
-        "Gilden und NSC-Berufe",  -- 1375
-        "eine Zeile unter dem Namen: die Gilde des Spielers oder die Tätigkeit des NSC",  -- 1376
-        "Leisten für Freunde im Kampf",  -- 1377
-        "freundliche Namensplaketten zeigen Gesundheit, Ressource und Zauber, solange sich die Einheit im Kampf befindet",  -- 1378
-        "Die eigenen freundlichen Namensplaketten des Spiels",  -- 1379
-        "freundliche Plaketten (deine Gruppe, andere Spieler, freundliche NPCs) im Aussehen des Spiels lassen; unsere nur bei Feinden",  -- 1380
-        "Ressourcenleisten",  -- 1381
-        "eine schmale Mana-, Wut- oder Energieleiste unter der Gesundheitsleiste",  -- 1382
-        "Zauberziel",  -- 1383
-        "wer das Ziel eines Zaubers ist, neben dem Namen des Zaubers",  -- 1384
-        "Gesundheit in Prozent",  -- 1385
-        "der Gesundheitswert in Prozent auf der Leiste",  -- 1386
-        "Name auf der Plakette deines Ziels",  -- 1387
-        "aus: die Plakette deines Ziels zeigt weder Namen noch Stufe (der Zielrahmen zeigt sie)",  -- 1388
-        "Stufen auf Namensplaketten",  -- 1389
-        "die Stufe vor dem Namen eines Gegners, nach Schwierigkeit gefärbt",  -- 1390
-        "Kompakte Namensplaketten",  -- 1391
-        "Namensplaketten etwa halb so breit",  -- 1392
-        "Auffällige Gegnerzauber",  -- 1393
-        "der Zauber eines Gegners blinkt, schwillt an und pulsiert immer schneller, bis er gewirkt wird, damit er rechtzeitig unterbrochen werden kann",  -- 1394
-        "Klassensymbole auf Namensplaketten",  -- 1395
-        "das Klassensymbol eines Spielers vor seinem Namen, ob Freund oder Feind",  -- 1396
-        "Was NPCs tun, als Symbole",  -- 1397
-        "ein Symbol über freundlichen NPCs, die etwas anbieten: eine Tasche über Händlern, ein Amboss über Schmieden, die reparieren, ein Buch über Lehrern... (die eigenen Symbole des Spiels; sie erscheinen auch, solange die Plakette darauf wartet, dass du auf sie zeigst)",  -- 1398
-        "Freundliche NPCs nur beim Zeigen",  -- 1399
-        "die Plaketten freundlicher NPCs (Händler, Questgeber, Stadtbewohner) erscheinen nur, solange du auf sie zeigst, wie ihr Tooltip",  -- 1400
-        "Namen über Dingen, mit denen du interagieren kannst",  -- 1401
-        "ein Name über Erz, Truhen, Tafeln und dergleichen, solange du ihnen zugewandt bist (aus: sie bleiben ohne Namen, die Anzeige des Spiels sagt bereits, was sie sind)",  -- 1402
-        "Mini-Namensplaketten",  -- 1403
-        "Diener, Kleintiere und graue Gegner ohne Erfahrung bekommen eine kleine Plakette: eine schmale Leiste mit deinen Schwächungen darauf und ohne Namen (ein Kleintier ohne Leiste behält seinen Namen; ob sie überhaupt Plaketten haben, entscheidet die Option des Spiels)",  -- 1404
-        "Gruppen-Namensplaketten in Dungeons: nur Namen",  -- 1405
-        "in einem Dungeon oder Schlachtzug zeichnet das Spiel die Namensplaketten freundlicher Spieler selbst, und Addons dürfen sie nicht ändern: dort werden die eigenen Optionen des Spiels so gesetzt, dass sie als klassenfarbige Namen ohne Leisten erscheinen, wie unsere, und im Kampf kommen die Leisten des Spiels zurück (wenn Leisten für Freunde im Kampf an sind); beim Verlassen wird alles zurückgestellt",  -- 1406
-        "Gruppen-Namensplaketten in Dungeons: ausgeblendet",  -- 1407
-        "in einem Dungeon oder Schlachtzug die Namensplaketten des Spiels für freundliche Spieler ganz ausschalten (und beim Verlassen wieder so, wie du sie hattest)",  -- 1408
-        "zeigt, was das Spiel für den Namen deines Ziels liefert (zur Fehlersuche)",  -- 1409
-        "die Namensplaketten auf dem Bildschirm auflisten und ob sie unser Aussehen tragen (zur Fehlersuche)",  -- 1410
-        "Also gut.",  -- 1411
-        "Och, was für ein Haufen.",  -- 1412
-        "So, mal sehen, mal sehen...",  -- 1413
-        "Elune, gib mir Geduld.",  -- 1414
-        "Bei den Naaru, was für ein Durcheinander.",  -- 1415
-        "Verflixter Rucksack.",  -- 1416
-        "Ein ordentlicher Rucksack ist ein leichter Rucksack.",  -- 1417
-        "Pah. Zu viel Kram.",  -- 1418
-        "Totes Gewicht, das alles.",  -- 1419
-        "Geduld. Die Erdenmutter sorgt für uns.",  -- 1420
-        "Ey, was ham wir denn hier, Mann?",  -- 1421
-        "Welch ein Durcheinander. Unschicklich.",  -- 1422
-        "Zeit ist Geld. Zählen wir nach.",  -- 1423
-        "Jo, das reicht.",  -- 1424
-        "Elune sei Dank.",  -- 1425
-        "Das Licht sorgt für uns.",  -- 1426
-        "Hrm. Gut genug.",  -- 1427
-        "Hm. Genug zum Kämpfen.",  -- 1428
-        "Mit leichtem Gepäck. Gut.",  -- 1429
-        "Annehmbar. Gerade so.",  -- 1430
-        "Kein Platz mehr frei. Der Plunder brächte %s: verkaufen schafft Platz.",  -- 1431
-        "Kein Platz mehr frei. Was ich unterwegs nicht brauche, kann in der Bank warten.",  -- 1432
-        "Plunder: %d, hier %s wert. X verkauft das Gewählte; Schlau verkaufen nimmt alles.",  -- 1433
-        "%d davon gehören in die Bank: dort liegt schon mehr davon, oder ich habe sie markiert. Einlagern räumt sie weg.",  -- 1434
-        "Nur noch %d Plätze frei. Der Plunder brächte bei jedem Händler %s.",  -- 1435
-        "Nur noch %d Plätze frei. Zeit, ein paar Sachen zu verkaufen oder einzulagern.",  -- 1436
-        "Neu seit dem letzten Blick: %d. Der goldene Punkt markiert jedes.",  -- 1437
-        "Lohnt den Verkauf: %d. Der Filter Verkaufen sammelt sie, und jeder Tooltip sagt, wo es am meisten bringt.",  -- 1438
-        "Plunder: %d, %s wert. Der nächste Händler kann ihn haben.",  -- 1439
-        "Nur das Nötigste. Nichts, was sich zu verkaufen lohnt.",  -- 1440
-        "Alles in Ordnung, und %d Plätze frei.",  -- 1441
-        "Deine Ausrüstung ist repariert: %s.",  -- 1442
-        "Ich kann deine Ausrüstung für %s reparieren; ein kaputtes Teil gibt dir weder Rüstung noch Werte.",  -- 1443
-        "Deine Taschen sind voll. Ich nehme %d Sachen für %s: Schlau verkaufen, und du hast wieder Platz.",  -- 1444
-        "Ich gebe dir %s für %d Sachen: den Plunder und was das Auktionshaus nicht besser bezahlt. Schlau verkaufen, und fertig.",  -- 1445
-        "Behalte die %d, die das Auktionshaus will: es zahlt %s mehr als ich.",  -- 1446
-        "Deine Taschen sind voll. Verkauf mir erst etwas, bevor du kaufst.",  -- 1447
-        "Nichts in deinen Taschen, wofür ich gut zahlen würde. Sieh dir meine Waren an.",  -- 1448
-        "%d deiner Sachen gehören hierher: ich verwahre mehr davon, oder du hast sie markiert. Einlagern räumt sie weg.",  -- 1449
-        "Ich verwahre mehr von %d Sachen, die du trägst. Abheben füllt deine Taschen auf, bevor du aufbrichst.",  -- 1450
-        "Deine Taschen sind fast voll. Lass bei mir, was du unterwegs nicht brauchst.",  -- 1451
-        "Alles sicher bei mir, und deine Taschen haben %d Plätze frei.",  -- 1452
-        "Heute nichts für dich. Ich hab zweimal nachgesehen.",  -- 1453
-        "Briefe für dich: %d, nichts angehängt. Lies sie, wann du magst.",  -- 1454
-        "Briefe für dich: %d. Darin: %s.",  -- 1455
-        "Alles nehmen leert sie in einem Rutsch.",  -- 1456
-        "Nachnahme: %d. Die öffnest und bezahlst du selbst.",  -- 1457
-        "Deine Taschen sind voll: die Gegenstände warten in ihren Briefen.",  -- 1458
-        "Wohin? Zeig auf einen Ort, und ich sage dir, wie lange der Flug dauert.",  -- 1459
-        "%s: etwa %s laut Karte. Diese Strecke bist du noch nicht geflogen.",  -- 1460
-        "%s: etwa %s, nach deinem letzten Flug dorthin.",  -- 1461
-        "%s: wie lange, kann ich noch nicht sagen. Flieg es einmal, dann weiß ich es.",  -- 1462
-        "%d sind entwischt. Dieses Gewässer verlangt mehr Können, als ich habe: Köder hilft, eine bessere Angel auch.",  -- 1463
-        "Kein Köder am Haken. Er erhöht mein Können, dann entwischen weniger.",  -- 1464
-        "Der Köder ist fast aufgebraucht. Ein neuer am Haken hält mein Können oben.",  -- 1465
-        "Fische hier, die ich noch nicht gefangen habe: %d. Weiter auswerfen.",  -- 1466
-        "Ich habe jeden Fisch dieses Gewässers gefangen. Dann etwas Neues.",  -- 1467
-        "Noch nichts gefangen. Der erste Fisch jedes Gewässers kommt hier hinein.",  -- 1468
-        "Gefangene Arten: %d. Jedes Gewässer versteckt noch ein paar: die Angelanzeige zeigt ein ? für jede, die ich dort noch nicht gefangen habe.",  -- 1469
-        "Am Feuer ausgeruht: die nächsten %d Erfahrung aus Kämpfen zählen doppelt.",  -- 1470
-        "Keine Erholung angespart. Eine Nacht im Gasthaus oder in einer Stadt, und Kämpfe geben eine Weile doppelte Erfahrung.",  -- 1471
-        "%d absorbiert",  -- 1472
-        "Liste rechts",  -- 1473
-        "Einzeln in der Mitte",  -- 1474
-        "%d kritische Heilungen",  -- 1475
-        "%d Krits",  -- 1476
-        "Richturteil",  -- 1477
-        "Große Momente: wo",  -- 1478
-        "ein Block direkt über den Abklingzeit-Meldungen rechts von Eurer Figur, der neueste am nächsten daran und die älteren darüber aufsteigend, während sie verblassen, oder einzeln in der Mitte",  -- 1479
-        "zeigt, wie ein großer Moment aussieht und sich anfühlt",  -- 1480
-        "gesammelt",  -- 1481
-        "über einen anderen Gegenstand gesammelt",  -- 1482
-        "noch nicht gesammelt",  -- 1483
-        "Vorlage",  -- 1484
-        "Wähle ein Set, um seine Teile auf dein Outfit zu legen. %s behält es; vorher wird nichts bezahlt.",  -- 1485
-        "Deine Sammlung wird durchgesehen...",  -- 1486
-        "Dein Outfit ist wieder wie vorher.",  -- 1487
-        "%s: %d von %d Teilen angelegt.",  -- 1488
-        "%d passten nicht auf dieses Outfit.",  -- 1489
-        "Ein Set, von dem du Teile hast",  -- 1490
-        "%d Sets, von denen du Teile hast",  -- 1491
-        "kannst du nicht tragen",  -- 1492
-        "fehlt",  -- 1493
-        "Alle %d Teile",  -- 1494
-        "%d von %d Teilen",  -- 1495
-        "Fehlt: %s",  -- 1496
-        "Noch keine Sets. Gegenstände mit gleichem Namen, wie Grüner Eisenhelm und Grüne Eisenstulpen, erscheinen hier, sobald du einen davon hast.",  -- 1497
-        "Rückgängig",  -- 1498
-        "Das eigene Set %s löschen? Es lässt sich nicht wiederherstellen.",  -- 1499
-        "Löschen",  -- 1500
-        "Zeigt zuerst auf ein eigenes Set.",  -- 1501
-        "%s  Eigenes Set löschen",  -- 1502
+        "Questkompass: folgt der Kamera",  -- 980
+        "der Kompass zeigt, wohin die Kamera blickt, nicht, wohin Eure Figur schaut (das ist verschieden, wenn der Stick die Figur ohne die Kamera dreht); aus: die Blickrichtung Eurer Figur",  -- 981
+        "ein paar Markierungen auf dem Questkompass, um dich herum, für zwanzig Sekunden",  -- 982
+        "Angelmodus: aus.",  -- 983
+        "Angeln: %s zum Auswerfen",  -- 984
+        "Kein Köder: %s zweimal für %s",  -- 985
+        "%s, um die Angel wegzustecken",  -- 986
+        "Angelmodus: %s zum Auswerfen, und noch einmal zum Anschlagen, wenn der Schwimmer zuckt.",  -- 987
+        "%s zum Anhauen, %s zum erneuten Auswerfen",  -- 988
+        "Der Angelmodus braucht eine Angelrute in deinen Händen.",  -- 989
+        "Du beherrschst Angeln nicht.",  -- 990
+        "Angelmodus: eine Taste wirft aus und hakt",  -- 991
+        "Angeltaste: %s",  -- 992
+        "Mit einem Druck neu auswerfen",  -- 993
+        "solange der Schwimmer draußen ist, holt deine Angeltaste den Fisch ein und A wirft mit einem Druck neu aus; aus: A gehört dir",  -- 994
+        "Köder mit Doppeldruck",  -- 995
+        "drücke deine Angeltaste zweimal schnell: der zweite Druck bringt den besten Köder aus deinen Taschen an die Angel, wenn sie keinen hat",  -- 996
+        "Gamepad-Leisten beim Angeln ausblenden",  -- 997
+        "mit einer Angel in der Hand sind die Gamepad-Leisten ausgeblendet, damit das Wasser frei zu sehen ist; die Angelanzeige zeigt die Taste zum Auswerfen. Sie sind zurück, sobald ein Kampf beginnt oder die Angel weggesteckt wird",  -- 998
+        "Ein-Tasten-Angeln vorerst aus oder wieder an (mit einer Angel in der Hand ist es von selbst an)",  -- 999
+        "die Taste, die angelt: anfangs deine Interaktionstaste (Quadrat oder X) oder jede andere, zum Beispiel ein Trigger (rt)",  -- 1000
+        "Durotars Küste ist roter Fels und warmes Flachwasser. Die Trolle der Echoinseln sagen, die Makrelen ziehen am dichtesten, wenn die Flut den Duft der Kochfeuer von den Inseln herüberträgt.",  -- 1001
+        "Die Seen von Mulgore sind klein, klar und geduldig. Die Tauren angeln dort so, wie sie alles andere tun: langsam und mit Dank.",  -- 1002
+        "Jede Oase im Brachland ist ein Treffpunkt. Was auch immer dort bei Tag trinkt, bei Nacht schwimmt etwas darunter.",  -- 1003
+        "Die Teiche von Teldrassil liegen im Schatten eines einzigen Baumes. Nachtelfische Angler schwören, die Fische dort hätten nie die Sonne gesehen und vermissten sie auch nicht.",  -- 1004
+        "Das Wasser der Dunkelküste ist grau, kalt und voller Wracks. Die Hälfte dessen, was vor Auberdine anbeißt, hat sich in irgendjemandes verlorener Fracht häuslich eingerichtet.",  -- 1005
+        "Die Flüsse des Eschentals fließen unter Blättern, die älter sind als die meisten Königreiche. Die Fische sind flink, und die Schildwachen fragen noch flinker, was du dort zu suchen hast.",  -- 1006
+        "Unten zwischen den Tausend Nadeln ist Wasser knapp und wird eifersüchtig gehütet. Ein Fisch von hier hat sich seinen Platz verdient.",  -- 1007
+        "Die Seen des Steinkrallengebirges liegen hoch und kalt zwischen den Gipfeln. Die Goblins hätten sie längst trockengelegt, wäre das Angeln nicht so gut.",  -- 1008
+        "Die Küste von Desolace besteht aus Knochen und grauer Brandung. Irgendetwas dort unten hat an beidem Geschmack gefunden.",  -- 1009
+        "Feralas ist grün bis hinunter an die Wasserlinie. Seine Flüsse sind tief, warm und überaus lebendig.",  -- 1010
+        "Niemand weiß genau, wo in den Düstermarschen das Land aufhört und das Wasser anfängt. Angle vom Ufer aus und zähl danach deine Zehen.",  -- 1011
+        "Der Dampfdruckpier hat das einzige Wasser in Tanaris, das den Namen verdient. Die Goblins verkaufen dir das Recht, dort zu angeln, und zwar zweimal, wenn du sie lässt.",  -- 1012
+        "Unter Azsharas heller Bucht liegt eine versunkene Stadt. Alte Angler sagen, die ganz Großen leben dort, wo einst ihre Gärten waren.",  -- 1013
+        "Die Tümpel des Teufelswalds leuchten, und zwar nicht auf die gute Art. Was noch darin schwimmt, ist stur über jede Vernunft hinaus.",  -- 1014
+        "Die heißen Quellen und teergesäumten Seen von Un'Goro haben Dinge bewahrt, die der Rest der Welt vergessen hat. Manche davon beißen.",  -- 1015
+        "Der See Elune'ara auf der Mondlichtung ist so still wie ein angehaltener Atem. Die Druiden bitten nur darum, dass du nicht mehr nimmst, als du essen wirst.",  -- 1016
+        "Silithus ist Sand, Wind und das Geräusch von Flügeln. Wenn du hier Wasser zum Angeln gefunden hast, sag es niemandem.",  -- 1017
+        "Die Seen von Winterquell frieren an den Rändern zu und dampfen in der Mitte. Die Fische dort sind fett gegen die Kälte und den Fußmarsch wert.",  -- 1018
+        "In den Teichen von Orgrimmar angeln Peons, die nichts Besseres zu tun haben, und alte Grunzer, die dasselbe behaupten. Beide erzählen dir, der Große sei ihnen entwischt.",  -- 1019
+        "Ein Fisch aus den Teichen von Donnerfels hat sein ganzes Leben hoch über den Ebenen verbracht. Er scheint das gelassen zu nehmen.",  -- 1020
+        "Darnassus hütet seine Gewässer so sorgsam wie seine Tempel. Die Fische haben sich daran gewöhnt, bewundert zu werden.",  -- 1021
+        "Die Seen des Alteracgebirges sind Schmelzwasser, und die Oger und das Syndikat angeln dort, wenn niemand hinsieht.",  -- 1022
+        "Arathis Ufer haben mehr Armeen gesehen als Angler. Den Fischen ist längst gleich, wessen Banner über dem Wasser weht.",  -- 1023
+        "Das Ödland ist Staub von einem Ende zum anderen. Ein Biss ist hier ein kleines Wunder, also behandle ihn auch so.",  -- 1024
+        "Die Küste der Verwüsteten Lande ist rot, kahl gescheuert und still. Was in dieser Brandung lebt, hat gelernt, mit einer ganzen Menge zu leben.",  -- 1025
+        "Die Seen von Tirisfal liegen reglos unter einem kränklichen Himmel. Die Verlassenen angeln dort aus Gewohnheit. Die Toten essen nicht viel, aber sie erinnern sich, dass es ihnen einmal geschmeckt hat.",  -- 1026
+        "Die lange Küste des Silberwalds besteht ganz aus Nebel und Kiefernschatten. Das Angeln ist gut, und das ist das einzig Fröhliche, was je einer über die Gegend sagt.",  -- 1027
+        "Die Flüsse der Westlichen Pestländer fließen noch, wenn auch nicht sauber. Was du herausziehst, sieh dir zweimal an.",  -- 1028
+        "Nur wenige angeln in den Östlichen Pestländern, und noch weniger geben es zu. Das Wasser behält, was die Seuche von ihm übrig gelassen hat.",  -- 1029
+        "Der Fluss im Vorgebirge des Hügellands und sein langes Südufer haben in jedem Streit, der um sie geführt wurde, beide Seiten ernährt.",  -- 1030
+        "Das Hinterland hält seine Seen hoch oben zwischen den Bäumen, wo die Wildhammerzwerge vom Greifenrücken aus angeln, wenn sie glauben, dass niemand zusieht.",  -- 1031
+        "Die Seen von Dun Morogh sind die meiste Zeit des Jahres von Eis umringt. Ein Zwerg schlägt ein Loch, setzt sich mit einem Humpen hin und nennt es einen guten Tag, ganz gleich, was anbeißt.",  -- 1032
+        "Die Sengende Schlucht hat Lava, wo andere Länder Flüsse haben. Bring statt der Angel lieber etwas zu trinken mit.",  -- 1033
+        "Die Brennende Steppe ist Asche und Glut. Wenn dir das Wasser hier überhaupt etwas gibt, dann ist es heiß.",  -- 1034
+        "Jedes Kind in Elwynn lernt am Kristallsee oder am Steinhügelsee das Angeln. Die kleinen Fische dort tricksen sie seit Generationen aus.",  -- 1035
+        "Der Gebirgspass der Totenwinde hat wenig Wasser und noch weniger Gastfreundschaft. Was in den Tümpeln unterhalb von Karazhan ist, bleibt am besten dort.",  -- 1036
+        "Der Fluss am Rand des Dämmerwalds ist zu jeder Stunde schwarz. Die Fische scheint die Dunkelheit nicht zu stören, die Angler schon.",  -- 1037
+        "Der Loch ist der Stolz von Loch Modan, aufgestaut vom großen Steinwerkdamm. Zwerge messen jedes Anglerlatein an ihm, und meistens gewinnt der Loch.",  -- 1038
+        "Der Immerruhsee im Rotkammgebirge ist schön wie ein Gemälde, und geangelt wird dort von jedem Steg in Seenhain. Die Leute im Ort kennen jede gute Stelle und verraten dir keine einzige.",  -- 1039
+        "Von seinen Dschungelflüssen bis zum wilden Südkap hat das Schlingendorntal die reichsten Gewässer des Kontinents. Die Angler von Beutebucht tragen darum ein Turnier aus, und fast alle schummeln.",  -- 1040
+        "Die Sümpfe des Elends sind grünes Wasser unter grünen Bäumen. Die Fische schmecken nach Schlamm, und die Einheimischen mögen sie genau so.",  -- 1041
+        "Westfalls Felder haben versagt, seine Küste nicht. Wer geblieben ist, lebt vom langen grauen Strand.",  -- 1042
+        "Das Sumpfland trägt seinen Namen zu Recht. Die Docks im Hafen von Menethil sind der trockenste Platz, um dort zu angeln, und die Krokilisken wissen das.",  -- 1043
+        "In den Kanälen von Sturmwind angeln Kinder, Rentner und mindestens ein verkleidetes Mitglied des Adels. Niemand fragt, was sonst noch in den Kanälen ist.",  -- 1044
+        "Die Düstere Höhle birgt den einzigen stillen Teich von Eisenschmiede. Alte Zwerge angeln dort stundenlang und sagen kein Wort.",  -- 1045
+        "Die Kanäle von Unterstadt führen ein Grün, das nichts mit Algen zu tun hat. Die Verlassenen, die dort angeln, tun es nicht fürs Abendessen.",  -- 1046
+        "Der erste Fisch, den die meisten Angler je an Land ziehen, und so leuchtend, dass sie ihn nicht vergessen.",  -- 1047
+        "Glatt, flink und an jeder warmen Küste zu Hause. Gegrillt schmeckt das besser, als der Name vermuten lässt.",  -- 1048
+        "Ganz Maul, und am glücklichsten in Wasser, das du nicht trinken würdest.",  -- 1049
+        "Klein, bissig und furchtlos. Ein Schwarm davon soll einmal einen Bären aus dem Loch gejagt haben.",  -- 1050
+        "Ein Farbblitz unter der Brandung. Hängt so ein Fisch an der Leine, gilt das unter Seeleuten als Glück für die Reise.",  -- 1051
+        "Ein geduldiger Grundfisch mit Barthaaren wie ein Zwergenältester.",  -- 1052
+        "Zweimal isst das niemand. Alchemisten kaufen jedes Exemplar, das sie kriegen können.",  -- 1053
+        "Die Flossen glimmen wie Glut unter der Asche, und das ausgepresste Öl brennt fast genauso gut.",  -- 1054
+        "Gepanzert wie ein kleiner Schild. Das Fleisch darin ist die Mühe wert.",  -- 1055
+        "Irgendetwas im Wasser nahe den Höhlen des Wehklagens hat ihn verändert. Wer einen isst, den verändert es womöglich auch, für eine Weile.",  -- 1056
+        "Das Flussvolk sagt, eine Mahlzeit davon kläre den Geist. Weise macht ihn das Schwimmen gegen den Strom.",  -- 1057
+        "Älter, größer und weiser als sein Vetter, was ihn nicht von deinem Haken ferngehalten hat.",  -- 1058
+        "Ein zäher Kämpfer aus warmen südlichen Meeren und ein Liebling auf jeder Tavernentafel von Beutebucht bis Gadgetzan.",  -- 1059
+        "Die Stirn glänzt wie echtes Mithril. Mehr als ein Bergmann hat schon versucht, ein Exemplar einzuschmelzen.",  -- 1060
+        "Die Schuppen lassen sich zu einem Öl einkochen, das die Haut hart wie Fels macht. Am liebsten ist ihm die Nacht.",  -- 1061
+        "Poliert wie ein Paradeharnisch und beinahe genauso schwer.",  -- 1062
+        "Er kommt nur in den kalten Monaten in Küstennähe, und die Köche, die ihn kennen, warten das ganze Jahr darauf.",  -- 1063
+        "Er zieht, wenn die Tage lang sind. Die Küstenbewohner lesen an ihm die Jahreszeit ab.",  -- 1064
+        "Fass ihn in der Mitte an, und nur ein einziges Mal.",  -- 1065
+        "Ein Flussfisch aus wildem Land, an den Kiemen so rot wie die Kriegsbemalung eines Trolls.",  -- 1066
+        "Er frisst nach Einbruch der Dunkelheit. Eine Suppe aus ihm beruhigt die Nerven eines Zauberwirkers.",  -- 1067
+        "Er frisst am Tag, in fast allem das Gegenteil des Nachtflossenschnappers, und teilt sich trotzdem das Wasser mit ihm.",  -- 1068
+        "Streng genommen kein Fisch. Er hält nichts davon, gefangen zu werden, und lässt dich das spüren.",  -- 1069
+        "Bleich wie Flusseis, aus den kalten, klaren Seen des Nordens.",  -- 1070
+        "Du wirst beide Hände brauchen, und vielleicht einen Freund.",  -- 1071
+        "%.1f Pfd.",  -- 1072
+        "Neu in deinem Angeltagebuch: %s, %s.",  -- 1073
+        "Neu in deinem Angeltagebuch: %s.",  -- 1074
+        "Dein bisher schwerster Fang – %s: %s (vorher %s).",  -- 1075
+        "Köder %s",  -- 1076
+        "Kein Köder",  -- 1077
+        "Gefangen %d",  -- 1078
+        "Entkommen %d",  -- 1079
+        "Ein Neugieriger: +%d%%",  -- 1080
+        "Halte deinen Köder neben dem Fisch",  -- 1081
+        "Nächster Fang +%d%%",  -- 1082
+        "%s halten: der Köder läuft die Schnur entlang",  -- 1083
+        "%d in Folge",  -- 1084
+        "Ein Spiel, während der Schwimmer draußen ist",  -- 1085
+        "auf der Zauberleiste gespielt, solange deine Schnur draußen ist: halte einen Abzug und dein Köder läuft die Schnur entlang, lass los und er treibt zurück; halte ihn beim Schatten des Fisches. Je besser du spielst, desto schwerer das erfundene Gewicht deines nächsten Fangs. Es belegt keine Taste und berührt weder Auswurf noch Fang",  -- 1086
+        "%d gefangen, %d Arten, %d entkommen",  -- 1087
+        "Schwerster: %s, %s",  -- 1088
+        "Fische",  -- 1089
+        "Gewässer",  -- 1090
+        "Noch nichts gefangen. Nimm eine Angel mit ans Wasser.",  -- 1091
+        "Gefangen: %d",  -- 1092
+        "Schwerster: %s, in %s",  -- 1093
+        "Zuerst gefangen: %s",  -- 1094
+        "Hier gefangen: %d",  -- 1095
+        "Hier gefundene Arten: %d",  -- 1096
+        "dein Angeltagebuch öffnen oder schließen: jede Art, die du gefangen hast, dein schwerster Fang von jeder, und die Gewässer, in denen du geangelt hast",  -- 1097
+        "Flug",  -- 1098
+        "Landung vorzeitig",  -- 1099
+        "Landung am nächsten Flugpunkt",  -- 1100
+        "Ziel unbekannt",  -- 1101
+        "geschätzt nach der Entfernung",  -- 1102
+        "erster Flug auf dieser Route: die Flugzeit wird gelernt",  -- 1103
+        "Landung",  -- 1104
+        "%s: etwa %s, geschätzt nach der Entfernung",  -- 1105
+        "%s: etwa %s",  -- 1106
+        "%s: erster Flug auf dieser Strecke, Zeit unbekannt",  -- 1107
+        "Im Flug, Ziel unbekannt",  -- 1108
+        "%s: Flugzeit gelernt, %s",  -- 1109
+        "Vorzeitige Landung: %s, etwa %s",  -- 1110
+        "Vorzeitige Landung am nächsten Flugpunkt",  -- 1111
+        "frisch und kalt, Schnee unter den Füßen und der Atem hängt in der Luft",  -- 1112
+        "bitterkalt, mit einem Wind von den Gipfeln, der jede Lücke in der Rüstung findet",  -- 1113
+        "heiß und schwül, die Luft so dick, dass man sie trinken könnte",  -- 1114
+        "drückende Hitze unter dem Blätterdach, und die Insekten sind laut",  -- 1115
+        "heiß und trocken, mit Staub im Wind",  -- 1116
+        "glühende Sonne und rissige Erde; trinkt, wann immer Ihr könnt",  -- 1117
+        "Rauch und Asche auf einem heißen Wind",  -- 1118
+        "versengte Luft, und Funken treiben umher",  -- 1119
+        "grau und kalt, ein feuchter Nebel, der sich festsetzt",  -- 1120
+        "eine Kühle in der Luft und kaum Licht",  -- 1121
+        "mild und freundlich, mit einer sanften Brise",  -- 1122
+        "angenehmes Wetter, gut zum Reisen",  -- 1123
+        "kühl und grün, die Blätter flüstern",  -- 1124
+        "sanftes Licht zwischen den Bäumen, und die Luft ist frisch",  -- 1125
+        "schwül und feucht, der Boden weich unter den Füßen",  -- 1126
+        "warme, nasse Luft und der Geruch des Moors",  -- 1127
+        "%s in %s: %s",  -- 1128
+        "%d Flugstrecken bekannt.",  -- 1129
+        "Flüge: dein Reittier entlang der Leiste",  -- 1130
+        "ein Greif, ein Windreiter oder eine Fledermaus (was der Flugmeister dir gab) gleitet die Flugleiste entlang zu deinem Landeplatz",  -- 1131
+        "Flüge: das Wetter am Ziel",  -- 1132
+        "bei der Landung sagt der Chat, wie die Luft dort ist, wo Ihr ankommt, so wie der Ort gewöhnlich ist (heiß und schwül im Schlingendorntal, Schnee unter den Füßen in Dun Morogh), und die Tageszeit",  -- 1133
+        "die Flugstrecken mit bekannter Zeit auflisten",  -- 1134
+        "Gelandet! +%d",  -- 1135
+        "Angestoßen: die Serie endet",  -- 1136
+        "%s flattern  ·  weiche den Baumkronen und Zeppelinen aus",  -- 1137
+        "%s fang die Reiter mit dem Netz für Fluggold  ·  %s große Höhe",  -- 1138
+        "%d Fluggold",  -- 1139
+        "%s flattern",  -- 1140
+        "%s Netz",  -- 1141
+        "%s große Höhe",  -- 1142
+        "%s: zurück zum Spiel (%d Fluggold)",  -- 1143
+        "%s: ein Spiel für unterwegs",  -- 1144
+        "Das Flugspiel ist aus: /cchud flightgame on",  -- 1145
+        "Das Flugspiel wird auf einem Flug gespielt.",  -- 1146
+        "Nicht im Kampf.",  -- 1147
+        "Flugspiel: spielen / große Höhe",  -- 1148
+        "auf einem Flug: das Flugspiel starten, oder es in große Höhe bringen und zurück",  -- 1149
+        "Filmische Flüge: die Kamera kreist um dich",  -- 1150
+        "im Film kreist die Kamera langsam um dich und dein Reittier, eine ganze Runde in etwa anderthalb Minuten, und kommt vor der Landung wieder hinter dich. Aus: eine ruhige Einstellung",  -- 1151
+        "Offline",  -- 1152
+        "Tot",  -- 1153
+        "Aus",  -- 1154
+        "In einer Heiler-Spezialisierung",  -- 1155
+        "Immer",  -- 1156
+        "Zu weit",  -- 1157
+        "Heiler-Gruppe und -Schlachtzug",  -- 1158
+        "in einer Gruppe: deine Gruppe neben deinem Charakter, jedes Mitglied mit der Taste, die es anvisiert; im Schlachtzug: schlankere Rahmen. Jeder zeigt nur, wie viel Heilung nötig ist, einen Schwächungszauber, den du entfernen kannst, und ob er in Reichweite ist",  -- 1159
+        "%d%% Verkaufschance",  -- 1160
+        "Geht sicher weg (%d%%)",  -- 1161
+        "Das verkauft sich von selbst (%d%%)",  -- 1162
+        "Ich denke, das geht weg (%d%%)",  -- 1163
+        "Sollte einen Käufer finden (%d%%)",  -- 1164
+        "Halbe-halbe (%d%%)",  -- 1165
+        "Kann so oder so ausgehen (%d%%)",  -- 1166
+        "Ein kleines Glücksspiel (%d%%)",  -- 1167
+        "Könnte eine Weile liegen (%d%%)",  -- 1168
+        "Darauf würde ich nicht wetten (%d%%)",  -- 1169
+        "Schlechte Karten, Freund (%d%%)",  -- 1170
+        "+%s gegenüber einem Händler",  -- 1171
+        "noch kein Preis bekannt",  -- 1172
+        "ein Händler zahlt genauso viel",  -- 1173
+        "Der Makler",  -- 1174
+        "Markt",  -- 1175
+        "jede Münze gezählt, Freund",  -- 1176
+        "In deinen Taschen lässt sich hier nichts verkaufen.",  -- 1177
+        "Keine Preise in den letzten 7 Tagen.",  -- 1178
+        "Erst ein Tag mit Preisen: Jeden Tag, an dem du das Auktionshaus besuchst, kommt eine Kerze hinzu.",  -- 1179
+        "7 Tage, eine Kerze pro Tag: grün höher geschlossen, rot tiefer",  -- 1180
+        "30 Tage, der niedrigste des Tages: grün hoch, rot runter",  -- 1181
+        "Noch keine Preisgeschichte: lies das Auktionshaus an ein paar Tagen.",  -- 1182
+        "Erst ein Tag Preise: Die Linie wächst mit jedem Tag, an dem du das Auktionshaus besuchst.",  -- 1183
+        "Verlange %s pro Stück, %s für die %d, die du abgibst; %d bleiben bei dir",  -- 1184
+        "Verlangt %s pro Stück, %s für alle %d",  -- 1185
+        "Niedrigster",  -- 1186
+        "gelesen %s",  -- 1187
+        "Üblich",  -- 1188
+        "7 Tage: %s bis %s",  -- 1189
+        "Eingestellt: %d Auktionen, %d Gegenstände",  -- 1190
+        "%s pro Stück, %s für alle %d",  -- 1191
+        "Du hast hier %d eingestellt, %d Auktionen verkauft",  -- 1192
+        "Kein Preis bekannt: lies zuerst das Auktionshaus.",  -- 1193
+        "Nichts in deinen Taschen, das sich hier verkaufen lässt.",  -- 1194
+        "Heute bringt hier nichts mehr als beim Händler; %d vielleicht, mit Geduld.",  -- 1195
+        "Das Beste zuerst: %d bringen hier mehr als beim Händler, %d weitere mit Geduld.",  -- 1196
+        "Leere Taschen, Freund. Bring mir was zum Verkaufen.",  -- 1197
+        "Hier schlägt heute nichts den Händler. %d vielleicht, mit etwas Geduld.",  -- 1198
+        "Kein sicherer Gewinn in diesen Taschen, Freund. %d lohnen sich, wenn du wartest.",  -- 1199
+        "Das Beste oben: %d hier schlagen jeden Händler, %d mehr für Geduldige.",  -- 1200
+        "%d bringen hier mehr als beim Händler, Bestes zuerst. %d mehr, wenn du wartest.",  -- 1201
+        "Oben liegt das Geld: %d sichere Verkäufe, %d mehr, wenn du warten kannst.",  -- 1202
+        "Noch keine Preise: %s liest das Auktionshaus.",  -- 1203
+        "Gerade gelesene Preise: %d.",  -- 1204
+        "%d Preise, gelesen %s.",  -- 1205
+        "%d Preise, gelesen %s. %s liest sie neu.",  -- 1206
+        "Hab das Brett noch nicht gelesen. %s, und ich hol jeden Preis.",  -- 1207
+        "Noch keine Preise, Freund. %s liest das ganze Brett.",  -- 1208
+        "Preise frisch vom Brett, Freund: %d Stück.",  -- 1209
+        "Gerade das Brett gelesen: %d Preise, noch warm.",  -- 1210
+        "%d Preise, gelesen %s. Gut genug, Freund.",  -- 1211
+        "Zuletzt aufs Brett geschaut: %s, %d Preise.",  -- 1212
+        "Preise von %s, altbacken wie Brot von gestern. %s liest das Brett neu.",  -- 1213
+        "%d Preise, aber gelesen %s. %s, und ich schau nochmal.",  -- 1214
+        "Was du behältst, wird auch gezeigt. %s blendet es aus.",  -- 1215
+        "Zurückbehalten: %d, für deine Berufe, deine Ausrüstung und deine Markierungen. %s zeigt sie.",  -- 1216
+        "Was du behältst, steht auch auf der Liste. %s räumt es weg.",  -- 1217
+        "Ich zeig auch, was du behältst. %s blendet es wieder aus.",  -- 1218
+        "%d zurückgelegt: Material für Berufe, Ausrüstung, Markiertes. %s zeigt sie.",  -- 1219
+        "%d beiseitegelegt: fürs Handwerk, zum Anziehen, von dir markiert. %s, wenn du sie willst.",  -- 1220
+        "pro Stück",  -- 1221
+        "keine Daten",  -- 1222
+        "Schnellverkauf",  -- 1223
+        "Geduldig",  -- 1224
+        "Alle Preise lesen",  -- 1225
+        "Behaltenes verbergen",  -- 1226
+        "Behaltenes zeigen",  -- 1227
+        "Linie",  -- 1228
+        "Kerzen",  -- 1229
+        "Einstellen",  -- 1230
+        "%d von %d",  -- 1231
+        "%d von %d einstellen, je %s",  -- 1232
+        "%d für %s einstellen",  -- 1233
+        "Alle %d für %s einstellen",  -- 1234
+        "In das Auktionshaus dieses Clients kann von hier aus nicht eingestellt werden.",  -- 1235
+        "%d für %s eingestellt.",  -- 1236
+        "Markt im Auktionshaus: öffnen / schließen",  -- 1237
+        "Gruß des Auktionators im Markt",  -- 1238
+        "ein Goblin-Auktionator sagt einen kurzen Satz aus den Klängen des Spiels, wenn der Markt öffnet; aus: er öffnet still",  -- 1239
+        "Markt: zeigen, was du behältst",  -- 1240
+        "der Markt listet auch, was du behältst: woraus deine Berufe noch lernen oder etwas Wertvolleres herstellen, und was du zum Behalten markiert hast; aus: nur, was du verkaufen würdest",  -- 1241
+        "Markt: Preisverlauf als Kerzen",  -- 1242
+        "der Preisverlauf im Markt ist eine Kerze pro Tag für die letzten 7 Tage (wo der Preis eröffnete, am höchsten und am niedrigsten war und schloss: grün, wenn er höher schloss, rot, wenn tiefer); aus: eine Linie des niedrigsten Tagespreises über 30 Tage",  -- 1243
+        "den Markt öffnen oder schließen (ein Reiter des Auktionshauses)",  -- 1244
+        "welches Auktionshaus dieser Client hat (zur Fehlersuche)",  -- 1245
+        "Öffne das Fenster eines Berufs, und ich sehe mir deine Rezepte an.",  -- 1246
+        "Das ist die Grenze, %d. Ein Lehrer hat den nächsten Rang für dich.",  -- 1247
+        "Bei %d gibt es nichts mehr zu lernen. Sprich mit einem Lehrer über den nächsten Rang.",  -- 1248
+        "Du bist deinen Rezepten entwachsen. Geh zum Lehrer: %s wartet bei %d auf dich.",  -- 1249
+        "Noch %d bis %d, und was du kannst, bringt dich nicht dorthin. Ein Lehrer hat %s für dich, ab %d.",  -- 1250
+        "Du bist deinen Rezepten entwachsen. Geh zum Lehrer: %s wartet auf dich.",  -- 1251
+        "Deine Rezepte lehren dich nichts mehr, %d vor %d. Frag einen Lehrer nach %s.",  -- 1252
+        "Deine Rezepte geben %d vor %d nichts mehr her. Ein Lehrer hat etwas Neues für dich.",  -- 1253
+        "Was du kannst, trägt dich nicht über die letzten %d. Zeit für einen Lehrer.",  -- 1254
+        "%s lehrt dich jetzt nicht mehr viel, aber es ist das Beste, was du hast. Noch %d bis %d.",  -- 1255
+        "Ab hier geht es langsam: %s gibt ab und zu einen Punkt. Noch %d.",  -- 1256
+        "Zuerst brauchst du %s, %s. Die Anleitungen beginnen diesen Abschnitt damit.",  -- 1257
+        "Lerne %s, %s, dann fangen wir an: noch %d bis %d.",  -- 1258
+        "Noch %d bis %d. Die Anleitungen schicken dich nach %s, bis %d.",  -- 1259
+        "Hier lehrt dich das Sammeln: %s bis %d.",  -- 1260
+        "Noch %d bis %d. Fang mit %s an, oder mit %s, wenn dir das lieber ist: %s.",  -- 1261
+        "Zuerst %s, so sehen es die Anleitungen. %s tut es auch: %s.",  -- 1262
+        "Noch %d bis %d. Fang mit %s an.",  -- 1263
+        "%s ist jetzt dein bester Lehrer. Noch %d Punkte bis %d.",  -- 1264
+        "Ruhige Hände. Zuerst %s, dann noch %d.",  -- 1265
+        "bei einem Lehrer",  -- 1266
+        "bei einem Händler",  -- 1267
+        "als Beute",  -- 1268
+        "aus einer Quest",  -- 1269
+        "günstigere Materialien",  -- 1270
+        "Materialien vom Händler",  -- 1271
+        "Materialien, die du selbst sammelst",  -- 1272
+        "verkauft sich gut",  -- 1273
+        "etwas, das du selbst nutzt",  -- 1274
+        "weniger Herstellungen",  -- 1275
+        "ein Rezept, das du findest oder kaufst",  -- 1276
+        "andere Materialien",  -- 1277
+        "die erste Wahl der Anleitungen",  -- 1278
+        "Öffne das Fenster eines Berufs für einen Levelplan.",  -- 1279
+        "Am Limit, %d. Ein Lehrer hat den nächsten Rang.",  -- 1280
+        "Noch %d bis %d; deine Rezepte reichen nicht. Ein Lehrer hat %s ab %d.",  -- 1281
+        "Noch %d bis %d; deine Rezepte reichen nicht. Ein Lehrer hat %s.",  -- 1282
+        "Deine Rezepte enden %d vor %d. Ein Lehrer hat mehr.",  -- 1283
+        "Noch %d bis %d. Am besten jetzt: %s, grün (ab und zu ein Punkt).",  -- 1284
+        "Noch %d bis %d. Lerne zuerst %s, %s.",  -- 1285
+        "Noch %d bis %d. Sammle %s bis %d.",  -- 1286
+        "Noch %d bis %d. Zuerst: %s, oder %s (%s).",  -- 1287
+        "Noch %d bis %d. Zuerst: %s.",  -- 1288
+        "Zu sammeln oder zu kaufen",  -- 1289
+        "%d-mal herstellen: %s",  -- 1290
+        "Lerne es %s, ab %d.",  -- 1291
+        "Lerne es %s.",  -- 1292
+        "%s: %d in deinen Taschen, %d in der Bank, %d pro Herstellung",  -- 1293
+        "Die Anleitungen leveln diesen Abschnitt mit dem Sammeln von %s.",  -- 1294
+        "%s: du hast %d, der Plan braucht %d",  -- 1295
+        "für %s",  -- 1296
+        "Kaufen ist billiger, als es aus %s herzustellen",  -- 1297
+        "Hergestellt aus %s",  -- 1298
+        "Der Mentor: was deine Bank herstellen lässt",  -- 1299
+        "Was deine Bank herstellen kann",  -- 1300
+        "Mit dem, was in deiner Bank liegt, lässt sich nichts mehr herstellen.",  -- 1301
+        "%d kannst du mit deiner Bank herstellen, %d davon nur mit ihr.",  -- 1302
+        "Der Mentor: %s %d > %d",  -- 1303
+        "Der Mentor",  -- 1304
+        "Levelplan",  -- 1305
+        "oder",  -- 1306
+        "Sammle %s",  -- 1307
+        "zu lernen",  -- 1308
+        "billiger zu kaufen",  -- 1309
+        "Ausblenden",  -- 1310
+        "Der Plan",  -- 1311
+        "Das farmen",  -- 1312
+        "Alles farmen",  -- 1313
+        "Mit der Bank",  -- 1314
+        "Plan bedienen",  -- 1315
+        "zweimal zum Ausblenden",  -- 1316
+        "Hier gibt es nichts anzuprobieren.",  -- 1317
+        "%d zur Farmliste hinzugefügt.",  -- 1318
+        "Nichts fehlt: Du hast alles, was nötig ist.",  -- 1319
+        "Öffne das Fenster eines Berufs, um einen Plan zu erstellen.",  -- 1320
+        "Der Mentor (Levelplan): zeigen / verbergen",  -- 1321
+        "zeigt den Levelplan des zuletzt geöffneten Berufsfensters, mit den Tasten des Controllers darauf",  -- 1322
+        "Links der Quests",  -- 1323
+        "Rechts der Quests",  -- 1324
+        "Unter den Quests",  -- 1325
+        "Die Farmliste ist voll.",  -- 1326
+        "Farmliste: %s, %d gewünscht.",  -- 1327
+        "Farmen",  -- 1328
+        "%d weitere",  -- 1329
+        "Noch nichts zu farmen.",  -- 1330
+        "Einen Stapel mehr",  -- 1331
+        "Entfernen",  -- 1332
+        "Leeren",  -- 1333
+        "Fertig",  -- 1334
+        "Alles von der Farmliste nehmen?",  -- 1335
+        "Farmliste: wählen / fertig",  -- 1336
+        "Farmliste: den Gegenstand hinzufügen, auf den du zeigst",  -- 1337
+        "Das steht nicht auf der Farmliste.",  -- 1338
+        "Die Farmliste ist leer.",  -- 1339
+        "Farmliste: wo sie sitzt",  -- 1340
+        "die Farmliste links der Questliste, rechts davon oder unter ihren Quests",  -- 1341
+        "die Farmliste neben der Questliste: mit dem Controller wählen; add <Gegenstand> [wie viele], remove <Gegenstand>, clear, oder left / right / bottom für ihren Platz",  -- 1342
+        "Bedrohung in Prozent",  -- 1343
+        "dein Anteil an der Bedrohung als Zahl neben dem Bedrohungssymbol, am Zielrahmen und an Namensplaketten",  -- 1344
+        "Gesundheitszahl",  -- 1345
+        "die verbleibende Gesundheit, gekürzt (12.3k), auf der Leiste (nicht auf kompakten Plaketten: dort reicht der Prozentwert)",  -- 1346
+        "Deine Debuffs",  -- 1347
+        "deine Debuffs auf der Einheit, über ihrem Namen, mit ihrer Zeit",  -- 1348
+        "Debuffs von allen",  -- 1349
+        "die Debuffs, die das Spiel für Namensplaketten von allen markiert, nicht nur von dir",  -- 1350
+        "Gegnerische Buffs",  -- 1351
+        "die Stärkungen eines Feindes neben seinen Schwächungen: die wichtigen (wichtig, wütend oder von dir bannbar oder stehlbar), oder alle, wenn Nur die Effekte, die zählen aus ist",  -- 1352
+        "Massenkontroll-Symbol",  -- 1353
+        "ein großes Symbol mit Restzeit, wenn die Einheit betäubt, bewegungsunfähig, in Furcht versetzt ist...",  -- 1354
+        "Aggro-Leuchten",  -- 1355
+        "ein Schildsymbol und ein Leuchten hinter dem Namen: rot, solange es dich angreift, rot und gelb, wenn du es gleich ziehst, gelb und blau, wenn du es verlierst, blau, wenn es nicht auf dir ist",  -- 1356
+        "Questmarkierung",  -- 1357
+        "eine goldene Markierung an Einheiten, die deine Quests noch brauchen",  -- 1358
+        "Namensplaketten-Animationen",  -- 1359
+        "Plaketten blenden ein, niedrige Gesundheit atmet, Massenkontrolle schimmert",  -- 1360
+        "Klein",  -- 1361
+        "Normal",  -- 1362
+        "Groß",  -- 1363
+        "Voller Name",  -- 1364
+        "Kurzer Name",  -- 1365
+        "Kein Name",  -- 1366
+        "Voll",  -- 1367
+        "Minimal mini",  -- 1368
+        "Namensplakettengröße",  -- 1369
+        "wie groß die Leisten auf Namensplaketten sind: klein und schmal, normal oder groß (breiter und höher)",  -- 1370
+        "Namen auf Namensplaketten",  -- 1371
+        "der Name auf einer Plakette mit Gesundheitsleiste: voll, gekürzt oder weggelassen (der Zielrahmen nennt ihn voll; Stufe und Klassensymbol bleiben). Eine Plakette ohne Leiste, die eines freundlichen NPCs, behält immer ihren Namen",  -- 1372
+        "Aussehen der Namensplaketten",  -- 1373
+        "die Schalter der Namensplaketten auf einen Druck. Voll: alles. Minimal: keine Ressourcenleiste, Gilde oder Titel, kurze Namen. Minimal mini: kleine Leisten mit Gesundheit, Euren Schwächungen und den wichtigen Stärkungen, Stufe und Klasse, kein Name (der Zielrahmen hat ihn). Bedrohung, Kontrolleffekte und laute Zauber bleiben immer",  -- 1374
+        "Spielertitel",  -- 1375
+        "zeigt den Titel eines Spielers neben seinem Namen an",  -- 1376
+        "Gilden und NSC-Berufe",  -- 1377
+        "eine Zeile unter dem Namen: die Gilde des Spielers oder die Tätigkeit des NSC",  -- 1378
+        "Leisten für Freunde im Kampf",  -- 1379
+        "freundliche Namensplaketten zeigen Gesundheit, Ressource und Zauber, solange sich die Einheit im Kampf befindet",  -- 1380
+        "Die eigenen freundlichen Namensplaketten des Spiels",  -- 1381
+        "freundliche Plaketten (deine Gruppe, andere Spieler, freundliche NPCs) im Aussehen des Spiels lassen; unsere nur bei Feinden",  -- 1382
+        "Ressourcenleisten",  -- 1383
+        "eine schmale Mana-, Wut- oder Energieleiste unter der Gesundheitsleiste",  -- 1384
+        "Zauberziel",  -- 1385
+        "wer das Ziel eines Zaubers ist, neben dem Namen des Zaubers",  -- 1386
+        "Gesundheit in Prozent",  -- 1387
+        "der Gesundheitswert in Prozent auf der Leiste",  -- 1388
+        "Name auf der Plakette deines Ziels",  -- 1389
+        "aus: die Plakette deines Ziels zeigt weder Namen noch Stufe (der Zielrahmen zeigt sie)",  -- 1390
+        "Stufen auf Namensplaketten",  -- 1391
+        "die Stufe vor dem Namen eines Gegners, nach Schwierigkeit gefärbt",  -- 1392
+        "Kompakte Namensplaketten",  -- 1393
+        "Namensplaketten etwa halb so breit",  -- 1394
+        "Auffällige Gegnerzauber",  -- 1395
+        "der Zauber eines Gegners blinkt, schwillt an und pulsiert immer schneller, bis er gewirkt wird, damit er rechtzeitig unterbrochen werden kann",  -- 1396
+        "Klassensymbole auf Namensplaketten",  -- 1397
+        "das Klassensymbol eines Spielers vor seinem Namen, ob Freund oder Feind",  -- 1398
+        "Was NPCs tun, als Symbole",  -- 1399
+        "ein Symbol über freundlichen NPCs, die etwas anbieten: eine Tasche über Händlern, ein Amboss über Schmieden, die reparieren, ein Buch über Lehrern... (die eigenen Symbole des Spiels; sie erscheinen auch, solange die Plakette darauf wartet, dass du auf sie zeigst)",  -- 1400
+        "Freundliche NPCs nur beim Zeigen",  -- 1401
+        "die Plaketten freundlicher NPCs (Händler, Questgeber, Stadtbewohner) erscheinen nur, solange du auf sie zeigst, wie ihr Tooltip",  -- 1402
+        "Namen über Dingen, mit denen du interagieren kannst",  -- 1403
+        "ein Name über Erz, Truhen, Tafeln und dergleichen, solange du ihnen zugewandt bist (aus: sie bleiben ohne Namen, die Anzeige des Spiels sagt bereits, was sie sind)",  -- 1404
+        "Mini-Namensplaketten",  -- 1405
+        "Diener, Kleintiere und graue Gegner ohne Erfahrung bekommen eine kleine Plakette: eine schmale Leiste mit deinen Schwächungen darauf und ohne Namen (ein Kleintier ohne Leiste behält seinen Namen; ob sie überhaupt Plaketten haben, entscheidet die Option des Spiels)",  -- 1406
+        "Gruppen-Namensplaketten in Dungeons: nur Namen",  -- 1407
+        "in einem Dungeon oder Schlachtzug zeichnet das Spiel die Namensplaketten freundlicher Spieler selbst, und Addons dürfen sie nicht ändern: dort werden die eigenen Optionen des Spiels so gesetzt, dass sie als klassenfarbige Namen ohne Leisten erscheinen, wie unsere, und im Kampf kommen die Leisten des Spiels zurück (wenn Leisten für Freunde im Kampf an sind); beim Verlassen wird alles zurückgestellt",  -- 1408
+        "Gruppen-Namensplaketten in Dungeons: ausgeblendet",  -- 1409
+        "in einem Dungeon oder Schlachtzug die Namensplaketten des Spiels für freundliche Spieler ganz ausschalten (und beim Verlassen wieder so, wie du sie hattest)",  -- 1410
+        "zeigt, was das Spiel für den Namen deines Ziels liefert (zur Fehlersuche)",  -- 1411
+        "die Namensplaketten auf dem Bildschirm auflisten und ob sie unser Aussehen tragen (zur Fehlersuche)",  -- 1412
+        "Also gut.",  -- 1413
+        "Och, was für ein Haufen.",  -- 1414
+        "So, mal sehen, mal sehen...",  -- 1415
+        "Elune, gib mir Geduld.",  -- 1416
+        "Bei den Naaru, was für ein Durcheinander.",  -- 1417
+        "Verflixter Rucksack.",  -- 1418
+        "Ein ordentlicher Rucksack ist ein leichter Rucksack.",  -- 1419
+        "Pah. Zu viel Kram.",  -- 1420
+        "Totes Gewicht, das alles.",  -- 1421
+        "Geduld. Die Erdenmutter sorgt für uns.",  -- 1422
+        "Ey, was ham wir denn hier, Mann?",  -- 1423
+        "Welch ein Durcheinander. Unschicklich.",  -- 1424
+        "Zeit ist Geld. Zählen wir nach.",  -- 1425
+        "Jo, das reicht.",  -- 1426
+        "Elune sei Dank.",  -- 1427
+        "Das Licht sorgt für uns.",  -- 1428
+        "Hrm. Gut genug.",  -- 1429
+        "Hm. Genug zum Kämpfen.",  -- 1430
+        "Mit leichtem Gepäck. Gut.",  -- 1431
+        "Annehmbar. Gerade so.",  -- 1432
+        "Kein Platz mehr frei. Der Plunder brächte %s: verkaufen schafft Platz.",  -- 1433
+        "Kein Platz mehr frei. Was ich unterwegs nicht brauche, kann in der Bank warten.",  -- 1434
+        "Plunder: %d, hier %s wert. X verkauft das Gewählte; Schlau verkaufen nimmt alles.",  -- 1435
+        "%d davon gehören in die Bank: dort liegt schon mehr davon, oder ich habe sie markiert. Einlagern räumt sie weg.",  -- 1436
+        "Nur noch %d Plätze frei. Der Plunder brächte bei jedem Händler %s.",  -- 1437
+        "Nur noch %d Plätze frei. Zeit, ein paar Sachen zu verkaufen oder einzulagern.",  -- 1438
+        "Neu seit dem letzten Blick: %d. Der goldene Punkt markiert jedes.",  -- 1439
+        "Lohnt den Verkauf: %d. Der Filter Verkaufen sammelt sie, und jeder Tooltip sagt, wo es am meisten bringt.",  -- 1440
+        "Plunder: %d, %s wert. Der nächste Händler kann ihn haben.",  -- 1441
+        "Nur das Nötigste. Nichts, was sich zu verkaufen lohnt.",  -- 1442
+        "Alles in Ordnung, und %d Plätze frei.",  -- 1443
+        "Deine Ausrüstung ist repariert: %s.",  -- 1444
+        "Ich kann deine Ausrüstung für %s reparieren; ein kaputtes Teil gibt dir weder Rüstung noch Werte.",  -- 1445
+        "Deine Taschen sind voll. Ich nehme %d Sachen für %s: Schlau verkaufen, und du hast wieder Platz.",  -- 1446
+        "Ich gebe dir %s für %d Sachen: den Plunder und was das Auktionshaus nicht besser bezahlt. Schlau verkaufen, und fertig.",  -- 1447
+        "Behalte die %d, die das Auktionshaus will: es zahlt %s mehr als ich.",  -- 1448
+        "Deine Taschen sind voll. Verkauf mir erst etwas, bevor du kaufst.",  -- 1449
+        "Nichts in deinen Taschen, wofür ich gut zahlen würde. Sieh dir meine Waren an.",  -- 1450
+        "%d deiner Sachen gehören hierher: ich verwahre mehr davon, oder du hast sie markiert. Einlagern räumt sie weg.",  -- 1451
+        "Ich verwahre mehr von %d Sachen, die du trägst. Abheben füllt deine Taschen auf, bevor du aufbrichst.",  -- 1452
+        "Deine Taschen sind fast voll. Lass bei mir, was du unterwegs nicht brauchst.",  -- 1453
+        "Alles sicher bei mir, und deine Taschen haben %d Plätze frei.",  -- 1454
+        "Heute nichts für dich. Ich hab zweimal nachgesehen.",  -- 1455
+        "Briefe für dich: %d, nichts angehängt. Lies sie, wann du magst.",  -- 1456
+        "Briefe für dich: %d. Darin: %s.",  -- 1457
+        "Alles nehmen leert sie in einem Rutsch.",  -- 1458
+        "Nachnahme: %d. Die öffnest und bezahlst du selbst.",  -- 1459
+        "Deine Taschen sind voll: die Gegenstände warten in ihren Briefen.",  -- 1460
+        "Wohin? Zeig auf einen Ort, und ich sage dir, wie lange der Flug dauert.",  -- 1461
+        "%s: etwa %s laut Karte. Diese Strecke bist du noch nicht geflogen.",  -- 1462
+        "%s: etwa %s, nach deinem letzten Flug dorthin.",  -- 1463
+        "%s: wie lange, kann ich noch nicht sagen. Flieg es einmal, dann weiß ich es.",  -- 1464
+        "%d sind entwischt. Dieses Gewässer verlangt mehr Können, als ich habe: Köder hilft, eine bessere Angel auch.",  -- 1465
+        "Kein Köder am Haken. Er erhöht mein Können, dann entwischen weniger.",  -- 1466
+        "Der Köder ist fast aufgebraucht. Ein neuer am Haken hält mein Können oben.",  -- 1467
+        "Fische hier, die ich noch nicht gefangen habe: %d. Weiter auswerfen.",  -- 1468
+        "Ich habe jeden Fisch dieses Gewässers gefangen. Dann etwas Neues.",  -- 1469
+        "Noch nichts gefangen. Der erste Fisch jedes Gewässers kommt hier hinein.",  -- 1470
+        "Gefangene Arten: %d. Jedes Gewässer versteckt noch ein paar: die Angelanzeige zeigt ein ? für jede, die ich dort noch nicht gefangen habe.",  -- 1471
+        "Am Feuer ausgeruht: die nächsten %d Erfahrung aus Kämpfen zählen doppelt.",  -- 1472
+        "Keine Erholung angespart. Eine Nacht im Gasthaus oder in einer Stadt, und Kämpfe geben eine Weile doppelte Erfahrung.",  -- 1473
+        "%d absorbiert",  -- 1474
+        "Liste rechts",  -- 1475
+        "Einzeln in der Mitte",  -- 1476
+        "%d kritische Heilungen",  -- 1477
+        "%d Krits",  -- 1478
+        "Richturteil",  -- 1479
+        "Große Momente: wo",  -- 1480
+        "ein Block direkt über den Abklingzeit-Meldungen rechts von Eurer Figur, der neueste am nächsten daran und die älteren darüber aufsteigend, während sie verblassen, oder einzeln in der Mitte",  -- 1481
+        "zeigt, wie ein großer Moment aussieht und sich anfühlt",  -- 1482
+        "gesammelt",  -- 1483
+        "über einen anderen Gegenstand gesammelt",  -- 1484
+        "noch nicht gesammelt",  -- 1485
+        "Vorlage",  -- 1486
+        "Wähle ein Set, um seine Teile auf dein Outfit zu legen. %s behält es; vorher wird nichts bezahlt.",  -- 1487
+        "Deine Sammlung wird durchgesehen...",  -- 1488
+        "Dein Outfit ist wieder wie vorher.",  -- 1489
+        "%s: %d von %d Teilen angelegt.",  -- 1490
+        "%d passten nicht auf dieses Outfit.",  -- 1491
+        "Ein Set, von dem du Teile hast",  -- 1492
+        "%d Sets, von denen du Teile hast",  -- 1493
+        "kannst du nicht tragen",  -- 1494
+        "fehlt",  -- 1495
+        "Alle %d Teile",  -- 1496
+        "%d von %d Teilen",  -- 1497
+        "Fehlt: %s",  -- 1498
+        "Noch keine Sets. Gegenstände mit gleichem Namen, wie Grüner Eisenhelm und Grüne Eisenstulpen, erscheinen hier, sobald du einen davon hast.",  -- 1499
+        "Rückgängig",  -- 1500
+        "Das eigene Set %s löschen? Es lässt sich nicht wiederherstellen.",  -- 1501
+        "Löschen",  -- 1502
+        "Zeigt zuerst auf ein eigenes Set.",  -- 1503
+        "%s  Eigenes Set löschen",  -- 1504
     },
     esES = {
         "error:",  -- 1
@@ -3996,529 +4000,531 @@ local TRANSLATIONS = {
         "La brújula necesita saber dónde estás, y el juego no lo dice aquí.",  -- 977
         "Brújula de misiones: lugar",  -- 978
         "arriba de la pantalla, o abajo en el lugar de la barra de experiencia (la barra pasa entonces arriba)",  -- 979
-        "unas marcas en la brújula de misiones, a tu alrededor, durante veinte segundos",  -- 980
-        "Modo de pesca: desactivado.",  -- 981
-        "Pesca: %s para lanzar",  -- 982
-        "Sin cebo: %s dos veces para usar %s",  -- 983
-        "%s para guardar la caña",  -- 984
-        "Modo pesca: %s para lanzar el sedal, y otra vez para enganchar el pez cuando el corcho se mueva.",  -- 985
-        "%s para enganchar, %s para lanzar de nuevo",  -- 986
-        "El modo de pesca necesita una caña de pescar en tus manos.",  -- 987
-        "No conoces Pesca.",  -- 988
-        "Modo de pesca: un botón lanza y engancha",  -- 989
-        "Botón de pesca: %s",  -- 990
-        "Volver a lanzar con una pulsación",  -- 991
-        "mientras el corcho está en el agua, tu botón de pesca engancha el pez y A lanza de nuevo con una pulsación; desactivado: A es tuyo",  -- 992
-        "Cebo con doble pulsación",  -- 993
-        "pulsa tu botón de pesca dos veces rápido: la segunda pulsación pone el mejor cebo de tus bolsas en la caña, cuando la caña no tiene ninguno",  -- 994
-        "Barras del mando ocultas al pescar",  -- 995
-        "con una caña en las manos las barras del mando se ocultan para ver bien el agua; el aviso de pesca muestra el botón para lanzar. Vuelven en cuanto empieza un combate o guardas la caña",  -- 996
-        "pesca con un botón desactivada por ahora, o activada de nuevo (con una caña en las manos se activa sola)",  -- 997
-        "el botón que pesca: al principio tu botón de interactuar (Cuadrado o X), o cualquier otro, por ejemplo un gatillo (rt)",  -- 998
-        "La costa de Durotar es roca roja y aguas cálidas y poco profundas. Los trols de las Islas del Eco dicen que la caballa pasa más apretada cuando la marea arrastra el olor de los fuegos de cocina de las islas.",  -- 999
-        "Los lagos de Mulgore son pequeños, claros y pacientes. Los tauren pescan en ellos como lo hacen todo: despacio y dando las gracias.",  -- 1000
-        "Cada oasis de Los Baldíos es un lugar de encuentro. Beba allí lo que beba de día, algo nada por debajo de noche.",  -- 1001
-        "Las pozas de Teldrassil están a la sombra de un único árbol. Los pescadores elfos de la noche juran que los peces de allí no han visto nunca el sol y que no lo echan de menos.",  -- 1002
-        "El agua de Costa Oscura es gris, fría y llena de pecios. La mitad de lo que pica frente a Auberdine se ha instalado en el cargamento perdido de alguien.",  -- 1003
-        "Los ríos de Vallefresno corren bajo hojas más viejas que la mayoría de los reinos. Los peces son rápidos, y las centinelas lo son más para preguntarte qué haces allí.",  -- 1004
-        "Allá abajo, entre Las Mil Agujas, el agua escasea y se guarda con celo. Un pez de aquí se ha ganado su sitio.",  -- 1005
-        "Los lagos de Sierra Espolón están altos y fríos entre los picos. Los goblins ya los habrían desecado si no se pescara tan bien.",  -- 1006
-        "La costa de Desolace es huesos y oleaje gris. Algo ahí abajo le ha cogido el gusto a las dos cosas.",  -- 1007
-        "Feralas es verde hasta la misma orilla. Sus ríos son profundos, cálidos y están muy, pero que muy vivos.",  -- 1008
-        "Nadie sabe bien dónde acaba la tierra y empieza el agua en el Marjal Revolcafango. Pesca desde la orilla y cuéntate los dedos de los pies después.",  -- 1009
-        "Puerto Bonvapor tiene la única agua digna de ese nombre en Tanaris. Los goblins te venderán el derecho a pescar en ella, dos veces si te dejas.",  -- 1010
-        "Bajo la luminosa bahía de Azshara yace una ciudad sumergida. Los viejos pescadores dicen que los grandes viven en lo que fueron sus jardines.",  -- 1011
-        "Las pozas de Frondavil brillan, y no en el buen sentido. Lo que aún nada en ellas es terco más allá de toda razón.",  -- 1012
-        "Las aguas termales y los lagos bordeados de brea de Un'Goro han conservado cosas que el resto del mundo olvidó. Algunas muerden.",  -- 1013
-        "El Lago Elune'ara, en Claro de la Luna, está tan quieto como un aliento contenido. Los druidas solo piden que no te lleves más de lo que vayas a comer.",  -- 1014
-        "Silithus es arena, viento y rumor de alas. Si has encontrado agua donde pescar aquí, no se lo digas a nadie.",  -- 1015
-        "Los lagos de Cuna del Invierno se hielan por los bordes y humean por el centro. Los peces de allí están gordos por el frío y bien valen la caminata.",  -- 1016
-        "En los estanques de Orgrimmar pescan peones que no tienen nada mejor que hacer y viejos brutos que dicen lo mismo. Unos y otros te cuentan que el grande se les escapó.",  -- 1017
-        "Un pez de los estanques de Cima del Trueno ha pasado toda su vida muy por encima de las llanuras. Parece llevarlo con calma.",  -- 1018
-        "Darnassus cuida sus aguas con tanto esmero como sus templos. Los peces se han acostumbrado a que los admiren.",  -- 1019
-        "Los lagos de las Montañas de Alterac son agua de deshielo, y los ogros y la Hermandad pescan en ellos cuando nadie mira.",  -- 1020
-        "Las costas de Arathi han visto más ejércitos que pescadores. A los peces hace mucho que les da igual qué estandarte ondea sobre el agua.",  -- 1021
-        "Las Tierras Inhóspitas son polvo de punta a punta. Aquí una picada es un pequeño milagro, así que trátala como tal.",  -- 1022
-        "La costa de Las Tierras Devastadas es roja, arrasada y silenciosa. Lo que viva en ese oleaje ha aprendido a convivir con muchas cosas.",  -- 1023
-        "Los lagos de Tirisfal yacen inmóviles bajo un cielo enfermizo. Los Renegados pescan en ellos por costumbre. Los muertos no comen gran cosa, pero recuerdan que les gustaba.",  -- 1024
-        "La larga costa del Bosque de Argénteos es todo niebla y sombra de pinos. Se pesca bien, y es lo único alegre que alguien dice del lugar.",  -- 1025
-        "Los ríos de las Tierras de la Peste del Oeste aún corren, aunque no limpios. Lo que saques de ellos, míralo dos veces.",  -- 1026
-        "Poca gente pesca en las Tierras de la Peste del Este, y menos aún lo reconoce. El agua conserva lo que la peste dejó de ella.",  -- 1027
-        "El río de Trabalomas y su larga costa sur han dado de comer a los dos bandos de cada disputa librada por ellos.",  -- 1028
-        "Las Tierras del Interior guardan sus lagos en lo alto, entre los árboles, donde los enanos Martillo Salvaje pescan a lomos de grifo cuando creen que nadie los ve.",  -- 1029
-        "Los lagos de Dun Morogh pasan casi todo el año cercados de hielo. Un enano abre un agujero, se sienta con una pinta y lo llama un buen día, pique lo que pique.",  -- 1030
-        "La Garganta de Fuego tiene lava donde otras tierras tienen ríos. Mejor tráete algo de beber.",  -- 1031
-        "Las Estepas Ardientes son ceniza y rescoldos. Si el agua de aquí te da algo, estará caliente.",  -- 1032
-        "Todos los niños de Elwynn aprenden a pescar en el Lago de Cristal o en el Lago del Hito. Los pececillos de allí llevan generaciones siendo más listos que ellos.",  -- 1033
-        "El Paso de la Muerte tiene poca agua y menos hospitalidad. Lo que haya en las pozas bajo Karazhan, mejor que se quede allí.",  -- 1034
-        "El río que bordea el Bosque del Ocaso es negro a cualquier hora. A los peces no parece importarles la oscuridad, a los pescadores sí.",  -- 1035
-        "El Loch es el orgullo de Loch Modan, contenido por la gran Presa de las Tres Cabezas. Los enanos miden contra él cualquier historia de pesca, y casi siempre gana el Loch.",  -- 1036
-        "El Lago Sempiterno, en Crestagrana, es bonito como un cuadro y se pesca desde todos los muelles de Villa del Lago. Los vecinos conocen cada buen sitio y no te dirán ni uno.",  -- 1037
-        "De sus ríos selváticos al salvaje cabo del sur, Tuercespina tiene las aguas más ricas del continente. Los pescadores de Bahía del Botín celebran un torneo en ellas, y casi todos hacen trampa.",  -- 1038
-        "El Pantano de las Penas es agua verde bajo árboles verdes. Los peces saben a barro, y a los lugareños les gustan así.",  -- 1039
-        "Los campos de los Páramos de Poniente se malograron, pero su costa no. Los que se quedaron viven de esa larga orilla gris.",  -- 1040
-        "Los Humedales hacen honor a su nombre. Los muelles del Puerto de Menethil son el sitio más seco para pescar en ellos, y los crocoliscos lo saben.",  -- 1041
-        "En los canales de Ventormenta pescan niños, jubilados y al menos un miembro de la nobleza disfrazado. Nadie pregunta qué más hay en los canales.",  -- 1042
-        "La Caverna Abandonada guarda la única poza tranquila de Forjaz. Los enanos viejos pescan en ella durante horas sin decir palabra.",  -- 1043
-        "Los canales de Entrañas corren de un verde que nada tiene que ver con las algas. Los Renegados que pescan en ellos no lo hacen por la cena.",  -- 1044
-        "El primer pez que casi todo pescador saca del agua, y tan brillante que no se le olvida.",  -- 1045
-        "Piel resbaladiza, mucha prisa y presencia en todas las costas cálidas. A la parrilla sabe mejor de lo que su nombre da a entender.",  -- 1046
-        "Todo boca, y nunca tan a gusto como en un agua que tú no beberías.",  -- 1047
-        "Poco tamaño, muchos dientes y ningún miedo. Dicen que un banco entero echó una vez a un oso del Loch.",  -- 1048
-        "Un destello de color bajo las olas. Si pica en el sedal, los marineros lo toman por buena suerte para la travesía.",  -- 1049
-        "Un paciente habitante del fondo, con unos bigotes dignos de un anciano enano.",  -- 1050
-        "Nadie repite. Los alquimistas compran cuantos ejemplares encuentran.",  -- 1051
-        "Sus aletas brillan como brasas bajo la ceniza, y el aceite que se le extrae arde casi igual de bien.",  -- 1052
-        "Una coraza como un escudo pequeño. La carne de dentro merece el esfuerzo.",  -- 1053
-        "Algo en el agua cerca de las Cuevas de los Lamentos lo cambió. Comerte uno puede cambiarte a ti también, durante un rato.",  -- 1054
-        "La gente del río dice que comerlo despeja la mente. Lo que lo hace sabio es nadar río arriba.",  -- 1055
-        "Más viejo, más grande y más sabio que su primo, lo cual no lo libró de tu anzuelo.",  -- 1056
-        "Un duro rival de los cálidos mares del sur, y un clásico en la pizarra de toda taberna, de Bahía del Botín a Gadgetzan.",  -- 1057
-        "Su frente brilla como el mithril auténtico. Más de un minero ha intentado llevarse un ejemplar a la fundición.",  -- 1058
-        "Sus escamas, hervidas, dan un aceite que vuelve la piel dura como la roca. Prefiere la noche.",  -- 1059
-        "Un pulido de coraza de desfile, y casi el mismo peso.",  -- 1060
-        "Solo se acerca a la costa en los meses fríos, y los cocineros que lo conocen lo esperan todo el año.",  -- 1061
-        "Llega cuando los días son largos. La gente de la costa cuenta las estaciones por su paso.",  -- 1062
-        "Se agarra por el centro, y solo una vez.",  -- 1063
-        "Un pez de río de tierras salvajes, con las agallas tan rojas como la pintura de guerra de un trol.",  -- 1064
-        "Se alimenta cuando oscurece. Una sopa hecha con él templa los nervios de cualquier hechicero.",  -- 1065
-        "Se alimenta de día, lo contrario del pargo nocturno en casi todo, y aun así comparten las mismas aguas.",  -- 1066
-        "No es exactamente un pez. No está de acuerdo con acabar en tu anzuelo, y te lo hará saber.",  -- 1067
-        "Pálido como el hielo de río, de los lagos fríos y claros del norte.",  -- 1068
-        "Vas a necesitar las dos manos, y quizá un amigo.",  -- 1069
-        "%.1f lb",  -- 1070
-        "Nuevo en tu diario de pesca: %s, %s.",  -- 1071
-        "Nuevo en tu diario de pesca: %s.",  -- 1072
-        "Tu %s más pesado hasta ahora: %s (antes %s).",  -- 1073
-        "Cebo %s",  -- 1074
-        "Sin cebo",  -- 1075
-        "Capturados %d",  -- 1076
-        "Escapados %d",  -- 1077
-        "Uno curioso: +%d%%",  -- 1078
-        "Mantén tu señuelo junto al pez",  -- 1079
-        "Próxima captura +%d%%",  -- 1080
-        "Mantén %s: el señuelo corre por el sedal",  -- 1081
-        "%d seguidos",  -- 1082
-        "Un juego mientras el flotador está fuera",  -- 1083
-        "se juega en la barra de lanzamiento mientras el sedal está fuera: mantén un gatillo y tu señuelo corre por el sedal, suéltalo y vuelve a la deriva; mantenlo junto a la sombra del pez. Cuanto mejor lo hagas, más pesará el peso inventado de tu próxima captura. No ocupa ningún botón y nunca toca tu lanzamiento ni tu captura",  -- 1084
-        "%d capturados, %d tipos, %d escapados",  -- 1085
-        "El más pesado: %s, %s",  -- 1086
-        "Peces",  -- 1087
-        "Aguas",  -- 1088
-        "Aún no has sacado nada. Lleva una caña al agua.",  -- 1089
-        "Capturados: %d",  -- 1090
-        "El más pesado: %s, en %s",  -- 1091
-        "Primera captura: %s",  -- 1092
-        "Capturados aquí: %d",  -- 1093
-        "Tipos encontrados aquí: %d",  -- 1094
-        "abrir o cerrar tu diario de pesca: cada tipo que has sacado, el más pesado de cada uno, y las aguas en las que has pescado",  -- 1095
-        "Vuelo",  -- 1096
-        "aterrizaje anticipado",  -- 1097
-        "aterrizaje en el siguiente punto de vuelo",  -- 1098
-        "destino desconocido",  -- 1099
-        "calculado por la distancia",  -- 1100
-        "primer vuelo en esta ruta: aprendiendo su duración",  -- 1101
-        "aterrizando",  -- 1102
-        "%s: unos %s, calculado por la distancia",  -- 1103
-        "%s: unos %s",  -- 1104
-        "%s: primer vuelo en esta ruta, tiempo desconocido",  -- 1105
-        "En vuelo, destino desconocido",  -- 1106
-        "%s: tiempo de vuelo aprendido, %s",  -- 1107
-        "Aterrizaje anticipado: %s, unos %s",  -- 1108
-        "Aterrizaje anticipado en el siguiente punto de vuelo",  -- 1109
-        "fresco y frío, nieve bajo los pies y el aliento suspendido en el aire",  -- 1110
-        "un frío cortante, con un viento de las cumbres que encuentra cada hueco de tu armadura",  -- 1111
-        "caluroso y húmedo, un aire tan denso que se podría beber",  -- 1112
-        "calor pegajoso bajo la espesura, y los insectos ruidosos",  -- 1113
-        "caluroso y seco, con polvo en el viento",  -- 1114
-        "sol abrasador y tierra agrietada; bebe cuando puedas",  -- 1115
-        "humo y ceniza en un viento cálido",  -- 1116
-        "aire abrasado, con pavesas a la deriva",  -- 1117
-        "gris y frío, una neblina húmeda que se pega",  -- 1118
-        "un frío en el aire y apenas luz",  -- 1119
-        "templado y agradable, con una brisa suave",  -- 1120
-        "buen tiempo, ideal para viajar",  -- 1121
-        "fresco y verde, las hojas susurrando",  -- 1122
-        "luz suave entre los árboles, y el aire fresco",  -- 1123
-        "bochornoso y húmedo, el suelo blando bajo los pies",  -- 1124
-        "aire cálido y húmedo, y el olor de la ciénaga",  -- 1125
-        "%s en %s: %s",  -- 1126
-        "%d rutas de vuelo conocidas.",  -- 1127
-        "Vuelos: tu montura sobre la barra",  -- 1128
-        "un grifo, un jinete del viento o un murciélago (el que te dio el maestro de vuelo) planea por la barra de vuelo hacia donde aterrizas",  -- 1129
-        "Vuelos: el tiempo donde aterrizas",  -- 1130
-        "al aterrizar, el chat dice cómo es el aire donde llegas, como suele ser el lugar (caluroso y húmedo en Tuercespina, nieve bajo los pies en Dun Morogh), y la hora del día",  -- 1131
-        "listar las rutas de vuelo cuyo tiempo se conoce",  -- 1132
-        "¡A tierra! +%d",  -- 1133
-        "Choque: se acaba la racha",  -- 1134
-        "%s aletear  ·  esquiva las copas de los árboles y los zepelines",  -- 1135
-        "%s atrapa a los jinetes con la red por oro de vuelo  ·  %s gran altitud",  -- 1136
-        "%d de oro de vuelo",  -- 1137
-        "%s aletear",  -- 1138
-        "%s red",  -- 1139
-        "%s gran altitud",  -- 1140
-        "%s: volver al juego (%d de oro de vuelo)",  -- 1141
-        "%s: un juego por el camino",  -- 1142
-        "El juego de vuelo está desactivado: /cchud flightgame on",  -- 1143
-        "El juego de vuelo se juega durante un vuelo.",  -- 1144
-        "No en combate.",  -- 1145
-        "Juego de vuelo: jugar / gran altitud",  -- 1146
-        "en un vuelo: iniciar el juego de vuelo, o llevarlo a gran altitud y de vuelta",  -- 1147
-        "Vuelos cinematográficos: la cámara gira a tu alrededor",  -- 1148
-        "en la película, la cámara gira despacio a tu alrededor y de tu montura, una vuelta completa en un minuto y medio más o menos, y vuelve a quedar detrás de ti antes de aterrizar. Desactivado: un plano fijo",  -- 1149
-        "Desconectado",  -- 1150
-        "Muerto",  -- 1151
-        "Desactivado",  -- 1152
-        "Con especialización de sanación",  -- 1153
-        "Siempre",  -- 1154
-        "Demasiado lejos",  -- 1155
-        "Grupo y banda del sanador",  -- 1156
-        "en un grupo: tu grupo junto a tu personaje, cada uno con el botón que lo selecciona; en una banda: marcos más finos. Cada uno muestra solo cuánta sanación necesita, un perjuicio que puedes curar y si está a tu alcance",  -- 1157
-        "%d%% de venderse",  -- 1158
-        "Se va seguro (%d%%)",  -- 1159
-        "Eso se vende solo (%d%%)",  -- 1160
-        "Creo que se venderá (%d%%)",  -- 1161
-        "Debería encontrar comprador (%d%%)",  -- 1162
-        "Mitad y mitad (%d%%)",  -- 1163
-        "Puede salir de cualquier manera (%d%%)",  -- 1164
-        "Es un poco de apuesta (%d%%)",  -- 1165
-        "Puede que tarde un rato (%d%%)",  -- 1166
-        "Yo no contaría con ello (%d%%)",  -- 1167
-        "Lo veo difícil, amigo (%d%%)",  -- 1168
-        "+%s más que un vendedor",  -- 1169
-        "aún no se conoce el precio",  -- 1170
-        "un vendedor paga lo mismo",  -- 1171
-        "El Corredor",  -- 1172
-        "Mercado",  -- 1173
-        "cada moneda contada, amigo",  -- 1174
-        "No hay nada en tus bolsas que se pueda vender aquí.",  -- 1175
-        "Sin precios en los últimos 7 días.",  -- 1176
-        "Un día de precios hasta ahora: cada día que visites la casa de subastas se añade una vela.",  -- 1177
-        "7 días, una vela por día: verde cerró más alto, rojo más bajo",  -- 1178
-        "30 días, el más bajo del día: verde sube, rojo baja",  -- 1179
-        "Aún no hay historial de precios: lee la casa de subastas durante unos días.",  -- 1180
-        "Solo un día de precios: la línea crece cada día que visitas la casa de subastas.",  -- 1181
-        "Pido %s cada uno, %s por los %d que sueltas; %d se quedan contigo",  -- 1182
-        "Pide %s cada uno, %s por los %d",  -- 1183
-        "Más bajo",  -- 1184
-        "leído %s",  -- 1185
-        "Habitual",  -- 1186
-        "7 días: de %s a %s",  -- 1187
-        "En venta: %d subastas, %d objetos",  -- 1188
-        "%s cada uno, %s por los %d",  -- 1189
-        "Pusiste %d aquí, %d subastas vendidas",  -- 1190
-        "No se conoce ningún precio: lee primero la casa de subastas.",  -- 1191
-        "Nada en tus bolsas que vender aquí.",  -- 1192
-        "Hoy nada se vende mejor aquí que en un vendedor; %d quizá, con paciencia.",  -- 1193
-        "Lo mejor primero: %d se venden mejor aquí que en un vendedor, %d más con paciencia.",  -- 1194
-        "Bolsas vacías, amigo. Tráeme algo que vender.",  -- 1195
-        "Hoy nada supera al vendedor. %d quizá, con un poco de paciencia.",  -- 1196
-        "Nada de ganancia segura en estas bolsas, amigo. %d pagarían si esperas.",  -- 1197
-        "Lo mejor arriba: %d aquí superan a cualquier vendedor, %d más para los pacientes.",  -- 1198
-        "%d pagan más aquí que en un vendedor, lo mejor primero. %d más si esperas.",  -- 1199
-        "Lo de arriba paga más: %d ventas seguras, %d más si puedes esperar.",  -- 1200
-        "Aún no hay precios: %s lee la casa de subastas.",  -- 1201
-        "Precios leídos ahora mismo: %d.",  -- 1202
-        "%d precios, leídos %s.",  -- 1203
-        "%d precios, leídos %s. %s los vuelve a leer.",  -- 1204
-        "Aún no he leído el tablón. %s y te traigo todos los precios.",  -- 1205
-        "Sin precios todavía, amigo. %s lee el tablón entero.",  -- 1206
-        "Precios recién sacados del tablón, amigo: %d.",  -- 1207
-        "Acabo de leer el tablón: %d precios, aún calientes.",  -- 1208
-        "%d precios, leídos %s. Suficiente, amigo.",  -- 1209
-        "Última mirada al tablón: %s, %d precios.",  -- 1210
-        "Precios de %s, más duros que pan viejo. %s vuelve a leer el tablón.",  -- 1211
-        "%d precios, pero los leí %s. %s y vuelvo a mirar.",  -- 1212
-        "También se muestra lo que guardas. %s lo oculta.",  -- 1213
-        "Apartados: %d, para tus profesiones, tu equipo y tus marcas. %s los muestra.",  -- 1214
-        "Lo que guardas también está en la lista. %s lo aparta.",  -- 1215
-        "También muestro lo que guardas. %s lo vuelve a ocultar.",  -- 1216
-        "%d apartados: material de oficio, equipo para llevar, lo que marcaste. %s los muestra.",  -- 1217
-        "Aparté %d: para tus oficios, para vestir y los que marcaste. %s si los quieres.",  -- 1218
-        "cada uno",  -- 1219
-        "sin datos",  -- 1220
-        "Venta rápida",  -- 1221
-        "Paciente",  -- 1222
-        "Leer todos los precios",  -- 1223
-        "Ocultar lo guardado",  -- 1224
-        "Mostrar lo guardado",  -- 1225
-        "Línea",  -- 1226
-        "Velas",  -- 1227
-        "Publicar",  -- 1228
-        "%d de %d",  -- 1229
-        "Publicar %d de %d a %s cada uno",  -- 1230
-        "Publicar %d por %s",  -- 1231
-        "Poner los %d por %s",  -- 1232
-        "Este cliente no permite publicar en la casa de subastas desde aquí.",  -- 1233
-        "Publicado %d por %s.",  -- 1234
-        "Mercado en la casa de subastas: abrir / cerrar",  -- 1235
-        "Saludo del subastador en el Mercado",  -- 1236
-        "un subastador goblin dice una frase corta, de los sonidos del propio juego, cuando abre el Mercado; desactivado: se abre en silencio",  -- 1237
-        "Mercado: mostrar lo que guardas",  -- 1238
-        "el Mercado también lista lo que guardas: de lo que tus profesiones aún aprenden o convierten en algo que vale más, y lo que marcaste para guardar; desactivado: solo lo que venderías",  -- 1239
-        "Mercado: gráfico de precios en velas",  -- 1240
-        "el gráfico de precios del Mercado es una vela por día durante los últimos 7 días (dónde abrió el precio, su máximo y su mínimo, y dónde cerró: verde si cerró más alto, rojo si más bajo); desactivado: una línea del precio más bajo de cada día durante 30 días",  -- 1241
-        "abrir o cerrar el Mercado (una pestaña de la casa de subastas)",  -- 1242
-        "qué casa de subastas tiene este cliente (para solucionar problemas)",  -- 1243
-        "Abre la ventana de una profesión y echaré un vistazo a tus recetas.",  -- 1244
-        "Ese es el tope, %d. Un instructor tiene el siguiente rango para ti.",  -- 1245
-        "Nada más que aprender en %d. Ve a ver a un instructor por el siguiente rango.",  -- 1246
-        "Tus recetas se te han quedado pequeñas. Ve a un instructor: %s te espera en %d.",  -- 1247
-        "Faltan %d para %d, y lo que sabes no te llevará hasta allí. Un instructor tiene %s para ti en %d.",  -- 1248
-        "Tus recetas se te han quedado pequeñas. Ve a un instructor: %s te espera.",  -- 1249
-        "Tus recetas dejan de enseñarte a %d de %d. Pide a un instructor %s.",  -- 1250
-        "Tus recetas se agotan a %d de %d. Un instructor tendrá algo nuevo.",  -- 1251
-        "Lo que sabes no te llevará los últimos %d. Es hora de ver a un instructor.",  -- 1252
-        "%s ya no te enseñará mucho, pero es lo mejor que tienes. Faltan %d para %d.",  -- 1253
-        "A partir de aquí va despacio: %s da un punto de vez en cuando. Faltan %d.",  -- 1254
-        "Primero te hará falta %s, %s. Las guías empiezan este tramo con ella.",  -- 1255
-        "Aprende %s, %s, y empezamos: faltan %d para %d.",  -- 1256
-        "Faltan %d para %d. Las guías te mandan a por %s hasta %d.",  -- 1257
-        "Aquí aprendes recolectando: %s hasta %d.",  -- 1258
-        "Faltan %d para %d. Empieza con %s, o con %s si lo prefieres: %s.",  -- 1259
-        "Primero %s, como dicen las guías. %s también sirve: %s.",  -- 1260
-        "Faltan %d para %d. Empieza con %s.",  -- 1261
-        "%s es ahora tu mejor maestro. %d puntos hasta %d.",  -- 1262
-        "Pulso firme. Primero %s, y faltan %d.",  -- 1263
-        "con un instructor",  -- 1264
-        "de un vendedor",  -- 1265
-        "como botín",  -- 1266
-        "de una misión",  -- 1267
-        "materiales más baratos",  -- 1268
-        "materiales de un vendedor",  -- 1269
-        "materiales que recolectas tú",  -- 1270
-        "se vende bien",  -- 1271
-        "algo que usarás",  -- 1272
-        "menos fabricaciones",  -- 1273
-        "una receta que encuentras o compras",  -- 1274
-        "otros materiales",  -- 1275
-        "la primera opción de las guías",  -- 1276
-        "Abre la ventana de una profesión para ver un plan de subida.",  -- 1277
-        "En el tope, %d. Un instructor tiene el siguiente rango.",  -- 1278
-        "Faltan %d hasta %d; tus recetas se quedan cortas. Un instructor tiene %s a %d.",  -- 1279
-        "Faltan %d hasta %d; tus recetas se quedan cortas. Un instructor tiene %s.",  -- 1280
-        "Tus recetas se quedan a %d de %d. Un instructor tiene más.",  -- 1281
-        "Faltan %d hasta %d. Lo mejor ahora: %s, verde (un punto de vez en cuando).",  -- 1282
-        "Faltan %d hasta %d. Aprende primero %s, %s.",  -- 1283
-        "Faltan %d hasta %d. Recolecta %s hasta %d.",  -- 1284
-        "Faltan %d hasta %d. Primero: %s, o %s (%s).",  -- 1285
-        "Faltan %d hasta %d. Primero: %s.",  -- 1286
-        "Para recolectar o comprar",  -- 1287
-        "%d veces: %s",  -- 1288
-        "Apréndela %s, a partir de %d.",  -- 1289
-        "Apréndela %s.",  -- 1290
-        "%s: %d en tus bolsas, %d en el banco, %d por fabricación",  -- 1291
-        "Las guías suben este tramo recolectando %s.",  -- 1292
-        "%s: tienes %d, el plan usa %d",  -- 1293
-        "para %s",  -- 1294
-        "Es más barato comprarlo que fabricarlo con %s",  -- 1295
-        "Hecho con %s",  -- 1296
-        "El Mentor: lo que tu banco te deja fabricar",  -- 1297
-        "Lo que tu banco puede fabricar",  -- 1298
-        "Con lo que hay en tu banco no se puede fabricar nada más.",  -- 1299
-        "%d que puedes fabricar contando tu banco, %d de ellas solo con él.",  -- 1300
-        "El Mentor: %s %d > %d",  -- 1301
-        "El Mentor",  -- 1302
-        "Plan de subida",  -- 1303
-        "o",  -- 1304
-        "Recolecta %s",  -- 1305
-        "por aprender",  -- 1306
-        "más barato comprarlo",  -- 1307
-        "Ocultar",  -- 1308
-        "El plan",  -- 1309
-        "Farmear esto",  -- 1310
-        "Farmear todo",  -- 1311
-        "Con el banco",  -- 1312
-        "Usar el plan",  -- 1313
-        "dos veces para ocultar",  -- 1314
-        "Aquí no hay nada que probarse.",  -- 1315
-        "%d añadido(s) a la lista de farmeo.",  -- 1316
-        "No falta nada: tienes lo necesario.",  -- 1317
-        "Abre la ventana de una profesión para hacer un plan.",  -- 1318
-        "El Mentor (plan de subida): mostrar / ocultar",  -- 1319
-        "muestra el plan de subida de la última ventana de profesión abierta, con los botones del mando en él",  -- 1320
-        "A la izquierda de las misiones",  -- 1321
-        "A la derecha de las misiones",  -- 1322
-        "Bajo las misiones",  -- 1323
-        "La lista de farmeo está llena.",  -- 1324
-        "Lista de farmeo: %s, %d deseados.",  -- 1325
-        "Farmeo",  -- 1326
-        "%d más",  -- 1327
-        "Nada que farmear aún.",  -- 1328
-        "Una pila más",  -- 1329
-        "Quitar",  -- 1330
-        "Vaciar",  -- 1331
-        "Hecho",  -- 1332
-        "¿Quitar todo de la lista de farmeo?",  -- 1333
-        "Lista de farmeo: elegir / hecho",  -- 1334
-        "Lista de farmeo: añadir el objeto al que apuntas",  -- 1335
-        "Eso no está en la lista de farmeo.",  -- 1336
-        "La lista de farmeo está vacía.",  -- 1337
-        "Lista de farmeo: dónde se sitúa",  -- 1338
-        "la lista de farmeo a la izquierda de la lista de misiones, a su derecha o bajo sus misiones",  -- 1339
-        "la lista de farmeo junto a la lista de misiones: elige con el mando; add <objeto> [cuántos], remove <objeto>, clear, o left / right / bottom para su sitio",  -- 1340
-        "Porcentaje de amenaza",  -- 1341
-        "tu parte de la amenaza como número junto al icono de amenaza, en el marco del objetivo y en las placas de nombre",  -- 1342
-        "Número de salud",  -- 1343
-        "la salud restante, abreviada (12.3k), en la barra (no en las placas compactas: allí basta el porcentaje)",  -- 1344
-        "Tus perjuicios",  -- 1345
-        "tus perjuicios sobre la unidad, sobre su nombre, con su tiempo",  -- 1346
-        "Perjuicios de todos",  -- 1347
-        "los perjuicios que el juego marca para las placas de nombre de todos, no solo los tuyos",  -- 1348
-        "Beneficios del enemigo",  -- 1349
-        "los beneficios de un enemigo junto a sus perjuicios: los que importan (importantes, enfurecido o que puedes disipar o robar), o todos si Solo los efectos que importan está desactivado",  -- 1350
-        "Icono de control de masas",  -- 1351
-        "un icono grande con su tiempo cuando la unidad está aturdida, inmovilizada, aterrorizada...",  -- 1352
-        "Resplandor de amenaza",  -- 1353
-        "un icono de escudo y un brillo tras el nombre: rojo mientras te ataca, rojo y amarillo cuando estás a punto de atraerlo, amarillo y azul cuando lo estás perdiendo, azul cuando no está sobre ti",  -- 1354
-        "Marcador de misión",  -- 1355
-        "una marca dorada en las unidades que tus misiones aún necesitan",  -- 1356
-        "Animaciones de placas de nombre",  -- 1357
-        "las placas aparecen con fundido, la salud baja respira, el control de masas brilla",  -- 1358
-        "Pequeño",  -- 1359
-        "Normal",  -- 1360
-        "Grande",  -- 1361
-        "Nombre completo",  -- 1362
-        "Nombre corto",  -- 1363
-        "Sin nombre",  -- 1364
-        "Completo",  -- 1365
-        "Mínimo mini",  -- 1366
-        "Tamaño de las placas",  -- 1367
-        "lo grandes que son las barras de las placas de nombre: pequeñas y finas, normales o grandes (más anchas y altas)",  -- 1368
-        "Nombres en las placas",  -- 1369
-        "el nombre en una placa con barra de salud: completo, recortado u omitido (el marco del objetivo lo da completo; el nivel y el icono de clase se quedan). Una placa sin barra, la de un PNJ amistoso, siempre conserva su nombre",  -- 1370
-        "Aspecto de las placas",  -- 1371
-        "los interruptores de las placas de una vez. Completo: todo. Mínimo: sin barra de poder, hermandad ni título, nombres cortos. Mínimo mini: barras pequeñas con salud, tus perjuicios y los beneficios que importan, nivel y clase, sin nombre (lo tiene el marco del objetivo). La amenaza, el control y los lanzamientos llamativos siempre se quedan",  -- 1372
-        "Títulos de jugador",  -- 1373
-        "muestra el título de un jugador junto a su nombre",  -- 1374
-        "Hermandades y oficios de PNJ",  -- 1375
-        "una línea bajo el nombre: la hermandad del jugador o a qué se dedica el PNJ",  -- 1376
-        "Barras de amigos en combate",  -- 1377
-        "las placas de nombre amistosas muestran salud, poder y lanzamientos mientras esa unidad está en combate",  -- 1378
-        "Placas de nombre amistosas del propio juego",  -- 1379
-        "deja las placas amistosas (tu grupo, otros jugadores, PNJ amistosos) con el aspecto del juego; las nuestras solo en enemigos",  -- 1380
-        "Barras de poder",  -- 1381
-        "una barra fina de maná, ira o energía bajo la barra de salud",  -- 1382
-        "Objetivo del lanzamiento",  -- 1383
-        "a quién va dirigido un lanzamiento, junto al nombre del hechizo",  -- 1384
-        "Porcentaje de salud",  -- 1385
-        "el porcentaje de salud en la barra",  -- 1386
-        "Nombre en la placa de tu objetivo",  -- 1387
-        "desactivado: la placa de tu objetivo no muestra su nombre ni su nivel (los muestra el marco del objetivo)",  -- 1388
-        "Niveles en las placas de nombre",  -- 1389
-        "el nivel delante del nombre de un enemigo, coloreado según la dificultad",  -- 1390
-        "Placas de nombre compactas",  -- 1391
-        "placas de nombre de aproximadamente la mitad de ancho",  -- 1392
-        "Lanzamientos enemigos llamativos",  -- 1393
-        "el lanzamiento de un enemigo parpadea, se hincha y pulsa cada vez más rápido hasta completarse, para que puedas interrumpirlo a tiempo",  -- 1394
-        "Iconos de clase en las placas",  -- 1395
-        "el icono de clase de un jugador delante de su nombre, amigo o enemigo",  -- 1396
-        "Lo que hacen los PNJ, como iconos",  -- 1397
-        "un icono sobre los PNJ amistosos que ofrecen algo: una bolsa sobre los vendedores, un yunque sobre los herreros que reparan, un libro sobre los instructores... (los iconos del propio juego; se ven aunque la placa espere a que la señales)",  -- 1398
-        "PNJ amistosos solo al apuntarlos",  -- 1399
-        "las placas de los PNJ amistosos (vendedores, dadores de misiones, habitantes) solo se muestran mientras los apuntas, como su descripción",  -- 1400
-        "Nombres sobre las cosas con las que puedes interactuar",  -- 1401
-        "un nombre sobre minerales, cofres, placas y similares mientras los miras (desactivado: quedan sin nombre, el aviso del propio juego ya dice qué son)",  -- 1402
-        "Minipanel de nombre",  -- 1403
-        "esbirros, alimañas y enemigos grises que no dan experiencia tienen una placa pequeña: una barra fina con tus perjuicios encima y sin nombre (una alimaña, sin barra, conserva su nombre; la opción del juego decide si tienen placa)",  -- 1404
-        "Placas de nombre del grupo en mazmorras: solo nombres",  -- 1405
-        "dentro de una mazmorra o banda el juego dibuja él mismo las placas de nombre de los jugadores amistosos y los addons no pueden cambiarlas: allí se ajustan las opciones propias del juego para mostrarlas como nombres con el color de clase y sin barras, como las nuestras, y las barras del juego vuelven mientras luchas (si las barras de amigos en combate están activadas); todo se restaura al salir",  -- 1406
-        "Placas de nombre del grupo en mazmorras: ocultas",  -- 1407
-        "dentro de una mazmorra o banda, apagar del todo las placas de nombre del juego para los jugadores amistosos (y dejarlas como las tenías al salir)",  -- 1408
-        "muestra lo que da el juego para el nombre de tu objetivo (para solucionar problemas)",  -- 1409
-        "lista las placas de nombre en pantalla y si llevan nuestro aspecto (para solucionar problemas)",  -- 1410
-        "Bueno, veamos.",  -- 1411
-        "Ay, menudo montón.",  -- 1412
-        "A ver, a ver...",  -- 1413
-        "Elune, dame paciencia.",  -- 1414
-        "Por los naaru, qué revoltijo.",  -- 1415
-        "Maldita mochila.",  -- 1416
-        "Mochila ordenada, mochila ligera.",  -- 1417
-        "Bah. Demasiados trastos.",  -- 1418
-        "Peso muerto, todo esto.",  -- 1419
-        "Paciencia. La Madre Tierra provee.",  -- 1420
-        "Eh, ¿qué tenemos aquí, man?",  -- 1421
-        "Qué desorden. Impropio.",  -- 1422
-        "El tiempo es oro. Contemos.",  -- 1423
-        "Sí, con esto basta.",  -- 1424
-        "Gracias a Elune.",  -- 1425
-        "La Luz provee.",  -- 1426
-        "Hrm. Suficiente.",  -- 1427
-        "Hm. Basta para pelear.",  -- 1428
-        "Viajo ligero. Bien.",  -- 1429
-        "Aceptable. Apenas.",  -- 1430
-        "No queda ni un hueco. La basura daría %s: venderla hace sitio.",  -- 1431
-        "No queda ni un hueco. Lo que no necesite en el camino puede esperar en el banco.",  -- 1432
-        "Basura: %d, vale %s aquí. X vende lo que he elegido; Venta inteligente se lo lleva todo.",  -- 1433
-        "%d de estos van al banco: allí hay más iguales, o los marqué. Depositar los guarda.",  -- 1434
-        "Solo quedan %d huecos. La basura daría %s en cualquier vendedor.",  -- 1435
-        "Solo quedan %d huecos. Hora de vender o guardar en el banco unas cuantas cosas.",  -- 1436
-        "Nuevo desde la última vez: %d. El punto dorado marca cada uno.",  -- 1437
-        "Vale la pena vender: %d. El filtro Vender los reúne, y cada descripción dice dónde se paga más.",  -- 1438
-        "Basura: %d, vale %s. Para el próximo vendedor.",  -- 1439
-        "Solo lo esencial. Nada que valga la pena vender.",  -- 1440
-        "Todo en orden, y %d huecos libres.",  -- 1441
-        "Tu equipo está reparado: %s.",  -- 1442
-        "Puedo reparar tu equipo por %s; una pieza rota no te da ni armadura ni atributos.",  -- 1443
-        "Tus bolsas están llenas. Me quedo %d cosas por %s: Venta inteligente, y vuelves a tener sitio.",  -- 1444
-        "Te doy %s por %d cosas: la basura y lo que la casa de subastas no pagaría mejor. Venta inteligente, y listo.",  -- 1445
-        "Quédate los %d que quiere la casa de subastas: paga %s más que yo.",  -- 1446
-        "Tus bolsas están llenas. Véndeme algo antes de comprar.",  -- 1447
-        "Nada en tus bolsas por lo que pagaría bien. Echa un vistazo a mi mercancía.",  -- 1448
-        "%d de lo que llevas va aquí: guardo más iguales, o los marcaste. Depositar los guarda.",  -- 1449
-        "Guardo más de %d cosas que llevas. Retirar rellena tus bolsas antes de partir.",  -- 1450
-        "Tus bolsas están casi llenas. Déjame lo que no necesites en el camino.",  -- 1451
-        "Todo a salvo conmigo, y tus bolsas tienen %d huecos libres.",  -- 1452
-        "Hoy no hay nada para ti. Lo he mirado dos veces.",  -- 1453
-        "Cartas para ti: %d, sin nada adjunto. Léelas cuando quieras.",  -- 1454
-        "Cartas para ti: %d. Dentro: %s.",  -- 1455
-        "Recogerlo todo las vacía de una vez.",  -- 1456
-        "Contra reembolso: %d. Esas las abres y pagas tú.",  -- 1457
-        "Tus bolsas están llenas: los objetos esperan en sus cartas.",  -- 1458
-        "¿Adónde? Señala un lugar y te diré cuánto dura el viaje.",  -- 1459
-        "%s: unos %s según el mapa. Esa ruta aún no la has volado.",  -- 1460
-        "%s: unos %s, según tu último vuelo allí.",  -- 1461
-        "%s: aún no sé decirte cuánto. Vuélalo una vez y lo sabré.",  -- 1462
-        "Se han escapado %d. Esta agua pide más habilidad de la que tengo: el cebo ayuda, y una caña mejor también.",  -- 1463
-        "No hay cebo en el anzuelo. Suma a mi habilidad, y así se escapan menos.",  -- 1464
-        "El cebo casi se ha acabado. Otro en el anzuelo mantiene mi habilidad.",  -- 1465
-        "Peces de aquí que aún no he pescado: %d. A seguir lanzando.",  -- 1466
-        "He pescado todos los peces de esta agua. A otro sitio, entonces.",  -- 1467
-        "Aún no he pescado nada. El primer pez de cada agua va aquí.",  -- 1468
-        "Especies pescadas: %d. Cada agua esconde algunas más: el panel de pesca muestra un ? por cada una que no he pescado allí.",  -- 1469
-        "Descansado junto al fuego: los próximos %d de experiencia por muertes valen el doble.",  -- 1470
-        "Sin descanso acumulado. Una noche en una posada o en una ciudad, y las muertes dan el doble de experiencia un rato.",  -- 1471
-        "%d absorbido",  -- 1472
-        "Lista a la derecha",  -- 1473
-        "Uno en el centro",  -- 1474
-        "%d sanaciones críticas",  -- 1475
-        "%d críticos",  -- 1476
-        "Sentencia",  -- 1477
-        "Grandes momentos: dónde",  -- 1478
-        "un bloque justo encima de los avisos de reutilización a la derecha de tu personaje, el más reciente junto a ellos y los anteriores subiendo por encima mientras se desvanecen, o uno a la vez en el centro",  -- 1479
-        "muestra cómo se ve y se siente un gran momento",  -- 1480
-        "conseguida",  -- 1481
-        "conseguida con otro objeto",  -- 1482
-        "aún no conseguida",  -- 1483
-        "Apariencia",  -- 1484
-        "Elige un conjunto para poner sus piezas en tu atuendo. %s lo guarda; no se paga nada antes.",  -- 1485
-        "Revisando tu colección...",  -- 1486
-        "Tu atuendo vuelve a estar como antes.",  -- 1487
-        "%s: %d de %d piezas puestas.",  -- 1488
-        "%d no se pudieron poner en este atuendo.",  -- 1489
-        "Un conjunto del que tienes piezas",  -- 1490
-        "%d conjuntos de los que tienes piezas",  -- 1491
-        "no puedes llevarlo",  -- 1492
-        "falta",  -- 1493
-        "Las %d piezas",  -- 1494
-        "%d de %d piezas",  -- 1495
-        "Falta: %s",  -- 1496
-        "Aún no hay conjuntos. Los objetos que comparten nombre, como Yelmo de hierro verde y Guanteletes de hierro verde, aparecen aquí en cuanto tienes uno.",  -- 1497
-        "Deshacer",  -- 1498
-        "¿Borrar el conjunto personalizado %s? No se puede recuperar.",  -- 1499
-        "Borrar",  -- 1500
-        "Apunta primero a un conjunto personalizado.",  -- 1501
-        "%s  Borrar conjunto personalizado",  -- 1502
+        "Brújula de misiones: sigue la cámara",  -- 980
+        "la brújula muestra hacia dónde mira la cámara, no hacia dónde mira tu personaje (difieren cuando el stick gira al personaje sin la cámara); desactivado: hacia donde mira tu personaje",  -- 981
+        "unas marcas en la brújula de misiones, a tu alrededor, durante veinte segundos",  -- 982
+        "Modo de pesca: desactivado.",  -- 983
+        "Pesca: %s para lanzar",  -- 984
+        "Sin cebo: %s dos veces para usar %s",  -- 985
+        "%s para guardar la caña",  -- 986
+        "Modo pesca: %s para lanzar el sedal, y otra vez para enganchar el pez cuando el corcho se mueva.",  -- 987
+        "%s para enganchar, %s para lanzar de nuevo",  -- 988
+        "El modo de pesca necesita una caña de pescar en tus manos.",  -- 989
+        "No conoces Pesca.",  -- 990
+        "Modo de pesca: un botón lanza y engancha",  -- 991
+        "Botón de pesca: %s",  -- 992
+        "Volver a lanzar con una pulsación",  -- 993
+        "mientras el corcho está en el agua, tu botón de pesca engancha el pez y A lanza de nuevo con una pulsación; desactivado: A es tuyo",  -- 994
+        "Cebo con doble pulsación",  -- 995
+        "pulsa tu botón de pesca dos veces rápido: la segunda pulsación pone el mejor cebo de tus bolsas en la caña, cuando la caña no tiene ninguno",  -- 996
+        "Barras del mando ocultas al pescar",  -- 997
+        "con una caña en las manos las barras del mando se ocultan para ver bien el agua; el aviso de pesca muestra el botón para lanzar. Vuelven en cuanto empieza un combate o guardas la caña",  -- 998
+        "pesca con un botón desactivada por ahora, o activada de nuevo (con una caña en las manos se activa sola)",  -- 999
+        "el botón que pesca: al principio tu botón de interactuar (Cuadrado o X), o cualquier otro, por ejemplo un gatillo (rt)",  -- 1000
+        "La costa de Durotar es roca roja y aguas cálidas y poco profundas. Los trols de las Islas del Eco dicen que la caballa pasa más apretada cuando la marea arrastra el olor de los fuegos de cocina de las islas.",  -- 1001
+        "Los lagos de Mulgore son pequeños, claros y pacientes. Los tauren pescan en ellos como lo hacen todo: despacio y dando las gracias.",  -- 1002
+        "Cada oasis de Los Baldíos es un lugar de encuentro. Beba allí lo que beba de día, algo nada por debajo de noche.",  -- 1003
+        "Las pozas de Teldrassil están a la sombra de un único árbol. Los pescadores elfos de la noche juran que los peces de allí no han visto nunca el sol y que no lo echan de menos.",  -- 1004
+        "El agua de Costa Oscura es gris, fría y llena de pecios. La mitad de lo que pica frente a Auberdine se ha instalado en el cargamento perdido de alguien.",  -- 1005
+        "Los ríos de Vallefresno corren bajo hojas más viejas que la mayoría de los reinos. Los peces son rápidos, y las centinelas lo son más para preguntarte qué haces allí.",  -- 1006
+        "Allá abajo, entre Las Mil Agujas, el agua escasea y se guarda con celo. Un pez de aquí se ha ganado su sitio.",  -- 1007
+        "Los lagos de Sierra Espolón están altos y fríos entre los picos. Los goblins ya los habrían desecado si no se pescara tan bien.",  -- 1008
+        "La costa de Desolace es huesos y oleaje gris. Algo ahí abajo le ha cogido el gusto a las dos cosas.",  -- 1009
+        "Feralas es verde hasta la misma orilla. Sus ríos son profundos, cálidos y están muy, pero que muy vivos.",  -- 1010
+        "Nadie sabe bien dónde acaba la tierra y empieza el agua en el Marjal Revolcafango. Pesca desde la orilla y cuéntate los dedos de los pies después.",  -- 1011
+        "Puerto Bonvapor tiene la única agua digna de ese nombre en Tanaris. Los goblins te venderán el derecho a pescar en ella, dos veces si te dejas.",  -- 1012
+        "Bajo la luminosa bahía de Azshara yace una ciudad sumergida. Los viejos pescadores dicen que los grandes viven en lo que fueron sus jardines.",  -- 1013
+        "Las pozas de Frondavil brillan, y no en el buen sentido. Lo que aún nada en ellas es terco más allá de toda razón.",  -- 1014
+        "Las aguas termales y los lagos bordeados de brea de Un'Goro han conservado cosas que el resto del mundo olvidó. Algunas muerden.",  -- 1015
+        "El Lago Elune'ara, en Claro de la Luna, está tan quieto como un aliento contenido. Los druidas solo piden que no te lleves más de lo que vayas a comer.",  -- 1016
+        "Silithus es arena, viento y rumor de alas. Si has encontrado agua donde pescar aquí, no se lo digas a nadie.",  -- 1017
+        "Los lagos de Cuna del Invierno se hielan por los bordes y humean por el centro. Los peces de allí están gordos por el frío y bien valen la caminata.",  -- 1018
+        "En los estanques de Orgrimmar pescan peones que no tienen nada mejor que hacer y viejos brutos que dicen lo mismo. Unos y otros te cuentan que el grande se les escapó.",  -- 1019
+        "Un pez de los estanques de Cima del Trueno ha pasado toda su vida muy por encima de las llanuras. Parece llevarlo con calma.",  -- 1020
+        "Darnassus cuida sus aguas con tanto esmero como sus templos. Los peces se han acostumbrado a que los admiren.",  -- 1021
+        "Los lagos de las Montañas de Alterac son agua de deshielo, y los ogros y la Hermandad pescan en ellos cuando nadie mira.",  -- 1022
+        "Las costas de Arathi han visto más ejércitos que pescadores. A los peces hace mucho que les da igual qué estandarte ondea sobre el agua.",  -- 1023
+        "Las Tierras Inhóspitas son polvo de punta a punta. Aquí una picada es un pequeño milagro, así que trátala como tal.",  -- 1024
+        "La costa de Las Tierras Devastadas es roja, arrasada y silenciosa. Lo que viva en ese oleaje ha aprendido a convivir con muchas cosas.",  -- 1025
+        "Los lagos de Tirisfal yacen inmóviles bajo un cielo enfermizo. Los Renegados pescan en ellos por costumbre. Los muertos no comen gran cosa, pero recuerdan que les gustaba.",  -- 1026
+        "La larga costa del Bosque de Argénteos es todo niebla y sombra de pinos. Se pesca bien, y es lo único alegre que alguien dice del lugar.",  -- 1027
+        "Los ríos de las Tierras de la Peste del Oeste aún corren, aunque no limpios. Lo que saques de ellos, míralo dos veces.",  -- 1028
+        "Poca gente pesca en las Tierras de la Peste del Este, y menos aún lo reconoce. El agua conserva lo que la peste dejó de ella.",  -- 1029
+        "El río de Trabalomas y su larga costa sur han dado de comer a los dos bandos de cada disputa librada por ellos.",  -- 1030
+        "Las Tierras del Interior guardan sus lagos en lo alto, entre los árboles, donde los enanos Martillo Salvaje pescan a lomos de grifo cuando creen que nadie los ve.",  -- 1031
+        "Los lagos de Dun Morogh pasan casi todo el año cercados de hielo. Un enano abre un agujero, se sienta con una pinta y lo llama un buen día, pique lo que pique.",  -- 1032
+        "La Garganta de Fuego tiene lava donde otras tierras tienen ríos. Mejor tráete algo de beber.",  -- 1033
+        "Las Estepas Ardientes son ceniza y rescoldos. Si el agua de aquí te da algo, estará caliente.",  -- 1034
+        "Todos los niños de Elwynn aprenden a pescar en el Lago de Cristal o en el Lago del Hito. Los pececillos de allí llevan generaciones siendo más listos que ellos.",  -- 1035
+        "El Paso de la Muerte tiene poca agua y menos hospitalidad. Lo que haya en las pozas bajo Karazhan, mejor que se quede allí.",  -- 1036
+        "El río que bordea el Bosque del Ocaso es negro a cualquier hora. A los peces no parece importarles la oscuridad, a los pescadores sí.",  -- 1037
+        "El Loch es el orgullo de Loch Modan, contenido por la gran Presa de las Tres Cabezas. Los enanos miden contra él cualquier historia de pesca, y casi siempre gana el Loch.",  -- 1038
+        "El Lago Sempiterno, en Crestagrana, es bonito como un cuadro y se pesca desde todos los muelles de Villa del Lago. Los vecinos conocen cada buen sitio y no te dirán ni uno.",  -- 1039
+        "De sus ríos selváticos al salvaje cabo del sur, Tuercespina tiene las aguas más ricas del continente. Los pescadores de Bahía del Botín celebran un torneo en ellas, y casi todos hacen trampa.",  -- 1040
+        "El Pantano de las Penas es agua verde bajo árboles verdes. Los peces saben a barro, y a los lugareños les gustan así.",  -- 1041
+        "Los campos de los Páramos de Poniente se malograron, pero su costa no. Los que se quedaron viven de esa larga orilla gris.",  -- 1042
+        "Los Humedales hacen honor a su nombre. Los muelles del Puerto de Menethil son el sitio más seco para pescar en ellos, y los crocoliscos lo saben.",  -- 1043
+        "En los canales de Ventormenta pescan niños, jubilados y al menos un miembro de la nobleza disfrazado. Nadie pregunta qué más hay en los canales.",  -- 1044
+        "La Caverna Abandonada guarda la única poza tranquila de Forjaz. Los enanos viejos pescan en ella durante horas sin decir palabra.",  -- 1045
+        "Los canales de Entrañas corren de un verde que nada tiene que ver con las algas. Los Renegados que pescan en ellos no lo hacen por la cena.",  -- 1046
+        "El primer pez que casi todo pescador saca del agua, y tan brillante que no se le olvida.",  -- 1047
+        "Piel resbaladiza, mucha prisa y presencia en todas las costas cálidas. A la parrilla sabe mejor de lo que su nombre da a entender.",  -- 1048
+        "Todo boca, y nunca tan a gusto como en un agua que tú no beberías.",  -- 1049
+        "Poco tamaño, muchos dientes y ningún miedo. Dicen que un banco entero echó una vez a un oso del Loch.",  -- 1050
+        "Un destello de color bajo las olas. Si pica en el sedal, los marineros lo toman por buena suerte para la travesía.",  -- 1051
+        "Un paciente habitante del fondo, con unos bigotes dignos de un anciano enano.",  -- 1052
+        "Nadie repite. Los alquimistas compran cuantos ejemplares encuentran.",  -- 1053
+        "Sus aletas brillan como brasas bajo la ceniza, y el aceite que se le extrae arde casi igual de bien.",  -- 1054
+        "Una coraza como un escudo pequeño. La carne de dentro merece el esfuerzo.",  -- 1055
+        "Algo en el agua cerca de las Cuevas de los Lamentos lo cambió. Comerte uno puede cambiarte a ti también, durante un rato.",  -- 1056
+        "La gente del río dice que comerlo despeja la mente. Lo que lo hace sabio es nadar río arriba.",  -- 1057
+        "Más viejo, más grande y más sabio que su primo, lo cual no lo libró de tu anzuelo.",  -- 1058
+        "Un duro rival de los cálidos mares del sur, y un clásico en la pizarra de toda taberna, de Bahía del Botín a Gadgetzan.",  -- 1059
+        "Su frente brilla como el mithril auténtico. Más de un minero ha intentado llevarse un ejemplar a la fundición.",  -- 1060
+        "Sus escamas, hervidas, dan un aceite que vuelve la piel dura como la roca. Prefiere la noche.",  -- 1061
+        "Un pulido de coraza de desfile, y casi el mismo peso.",  -- 1062
+        "Solo se acerca a la costa en los meses fríos, y los cocineros que lo conocen lo esperan todo el año.",  -- 1063
+        "Llega cuando los días son largos. La gente de la costa cuenta las estaciones por su paso.",  -- 1064
+        "Se agarra por el centro, y solo una vez.",  -- 1065
+        "Un pez de río de tierras salvajes, con las agallas tan rojas como la pintura de guerra de un trol.",  -- 1066
+        "Se alimenta cuando oscurece. Una sopa hecha con él templa los nervios de cualquier hechicero.",  -- 1067
+        "Se alimenta de día, lo contrario del pargo nocturno en casi todo, y aun así comparten las mismas aguas.",  -- 1068
+        "No es exactamente un pez. No está de acuerdo con acabar en tu anzuelo, y te lo hará saber.",  -- 1069
+        "Pálido como el hielo de río, de los lagos fríos y claros del norte.",  -- 1070
+        "Vas a necesitar las dos manos, y quizá un amigo.",  -- 1071
+        "%.1f lb",  -- 1072
+        "Nuevo en tu diario de pesca: %s, %s.",  -- 1073
+        "Nuevo en tu diario de pesca: %s.",  -- 1074
+        "Tu %s más pesado hasta ahora: %s (antes %s).",  -- 1075
+        "Cebo %s",  -- 1076
+        "Sin cebo",  -- 1077
+        "Capturados %d",  -- 1078
+        "Escapados %d",  -- 1079
+        "Uno curioso: +%d%%",  -- 1080
+        "Mantén tu señuelo junto al pez",  -- 1081
+        "Próxima captura +%d%%",  -- 1082
+        "Mantén %s: el señuelo corre por el sedal",  -- 1083
+        "%d seguidos",  -- 1084
+        "Un juego mientras el flotador está fuera",  -- 1085
+        "se juega en la barra de lanzamiento mientras el sedal está fuera: mantén un gatillo y tu señuelo corre por el sedal, suéltalo y vuelve a la deriva; mantenlo junto a la sombra del pez. Cuanto mejor lo hagas, más pesará el peso inventado de tu próxima captura. No ocupa ningún botón y nunca toca tu lanzamiento ni tu captura",  -- 1086
+        "%d capturados, %d tipos, %d escapados",  -- 1087
+        "El más pesado: %s, %s",  -- 1088
+        "Peces",  -- 1089
+        "Aguas",  -- 1090
+        "Aún no has sacado nada. Lleva una caña al agua.",  -- 1091
+        "Capturados: %d",  -- 1092
+        "El más pesado: %s, en %s",  -- 1093
+        "Primera captura: %s",  -- 1094
+        "Capturados aquí: %d",  -- 1095
+        "Tipos encontrados aquí: %d",  -- 1096
+        "abrir o cerrar tu diario de pesca: cada tipo que has sacado, el más pesado de cada uno, y las aguas en las que has pescado",  -- 1097
+        "Vuelo",  -- 1098
+        "aterrizaje anticipado",  -- 1099
+        "aterrizaje en el siguiente punto de vuelo",  -- 1100
+        "destino desconocido",  -- 1101
+        "calculado por la distancia",  -- 1102
+        "primer vuelo en esta ruta: aprendiendo su duración",  -- 1103
+        "aterrizando",  -- 1104
+        "%s: unos %s, calculado por la distancia",  -- 1105
+        "%s: unos %s",  -- 1106
+        "%s: primer vuelo en esta ruta, tiempo desconocido",  -- 1107
+        "En vuelo, destino desconocido",  -- 1108
+        "%s: tiempo de vuelo aprendido, %s",  -- 1109
+        "Aterrizaje anticipado: %s, unos %s",  -- 1110
+        "Aterrizaje anticipado en el siguiente punto de vuelo",  -- 1111
+        "fresco y frío, nieve bajo los pies y el aliento suspendido en el aire",  -- 1112
+        "un frío cortante, con un viento de las cumbres que encuentra cada hueco de tu armadura",  -- 1113
+        "caluroso y húmedo, un aire tan denso que se podría beber",  -- 1114
+        "calor pegajoso bajo la espesura, y los insectos ruidosos",  -- 1115
+        "caluroso y seco, con polvo en el viento",  -- 1116
+        "sol abrasador y tierra agrietada; bebe cuando puedas",  -- 1117
+        "humo y ceniza en un viento cálido",  -- 1118
+        "aire abrasado, con pavesas a la deriva",  -- 1119
+        "gris y frío, una neblina húmeda que se pega",  -- 1120
+        "un frío en el aire y apenas luz",  -- 1121
+        "templado y agradable, con una brisa suave",  -- 1122
+        "buen tiempo, ideal para viajar",  -- 1123
+        "fresco y verde, las hojas susurrando",  -- 1124
+        "luz suave entre los árboles, y el aire fresco",  -- 1125
+        "bochornoso y húmedo, el suelo blando bajo los pies",  -- 1126
+        "aire cálido y húmedo, y el olor de la ciénaga",  -- 1127
+        "%s en %s: %s",  -- 1128
+        "%d rutas de vuelo conocidas.",  -- 1129
+        "Vuelos: tu montura sobre la barra",  -- 1130
+        "un grifo, un jinete del viento o un murciélago (el que te dio el maestro de vuelo) planea por la barra de vuelo hacia donde aterrizas",  -- 1131
+        "Vuelos: el tiempo donde aterrizas",  -- 1132
+        "al aterrizar, el chat dice cómo es el aire donde llegas, como suele ser el lugar (caluroso y húmedo en Tuercespina, nieve bajo los pies en Dun Morogh), y la hora del día",  -- 1133
+        "listar las rutas de vuelo cuyo tiempo se conoce",  -- 1134
+        "¡A tierra! +%d",  -- 1135
+        "Choque: se acaba la racha",  -- 1136
+        "%s aletear  ·  esquiva las copas de los árboles y los zepelines",  -- 1137
+        "%s atrapa a los jinetes con la red por oro de vuelo  ·  %s gran altitud",  -- 1138
+        "%d de oro de vuelo",  -- 1139
+        "%s aletear",  -- 1140
+        "%s red",  -- 1141
+        "%s gran altitud",  -- 1142
+        "%s: volver al juego (%d de oro de vuelo)",  -- 1143
+        "%s: un juego por el camino",  -- 1144
+        "El juego de vuelo está desactivado: /cchud flightgame on",  -- 1145
+        "El juego de vuelo se juega durante un vuelo.",  -- 1146
+        "No en combate.",  -- 1147
+        "Juego de vuelo: jugar / gran altitud",  -- 1148
+        "en un vuelo: iniciar el juego de vuelo, o llevarlo a gran altitud y de vuelta",  -- 1149
+        "Vuelos cinematográficos: la cámara gira a tu alrededor",  -- 1150
+        "en la película, la cámara gira despacio a tu alrededor y de tu montura, una vuelta completa en un minuto y medio más o menos, y vuelve a quedar detrás de ti antes de aterrizar. Desactivado: un plano fijo",  -- 1151
+        "Desconectado",  -- 1152
+        "Muerto",  -- 1153
+        "Desactivado",  -- 1154
+        "Con especialización de sanación",  -- 1155
+        "Siempre",  -- 1156
+        "Demasiado lejos",  -- 1157
+        "Grupo y banda del sanador",  -- 1158
+        "en un grupo: tu grupo junto a tu personaje, cada uno con el botón que lo selecciona; en una banda: marcos más finos. Cada uno muestra solo cuánta sanación necesita, un perjuicio que puedes curar y si está a tu alcance",  -- 1159
+        "%d%% de venderse",  -- 1160
+        "Se va seguro (%d%%)",  -- 1161
+        "Eso se vende solo (%d%%)",  -- 1162
+        "Creo que se venderá (%d%%)",  -- 1163
+        "Debería encontrar comprador (%d%%)",  -- 1164
+        "Mitad y mitad (%d%%)",  -- 1165
+        "Puede salir de cualquier manera (%d%%)",  -- 1166
+        "Es un poco de apuesta (%d%%)",  -- 1167
+        "Puede que tarde un rato (%d%%)",  -- 1168
+        "Yo no contaría con ello (%d%%)",  -- 1169
+        "Lo veo difícil, amigo (%d%%)",  -- 1170
+        "+%s más que un vendedor",  -- 1171
+        "aún no se conoce el precio",  -- 1172
+        "un vendedor paga lo mismo",  -- 1173
+        "El Corredor",  -- 1174
+        "Mercado",  -- 1175
+        "cada moneda contada, amigo",  -- 1176
+        "No hay nada en tus bolsas que se pueda vender aquí.",  -- 1177
+        "Sin precios en los últimos 7 días.",  -- 1178
+        "Un día de precios hasta ahora: cada día que visites la casa de subastas se añade una vela.",  -- 1179
+        "7 días, una vela por día: verde cerró más alto, rojo más bajo",  -- 1180
+        "30 días, el más bajo del día: verde sube, rojo baja",  -- 1181
+        "Aún no hay historial de precios: lee la casa de subastas durante unos días.",  -- 1182
+        "Solo un día de precios: la línea crece cada día que visitas la casa de subastas.",  -- 1183
+        "Pido %s cada uno, %s por los %d que sueltas; %d se quedan contigo",  -- 1184
+        "Pide %s cada uno, %s por los %d",  -- 1185
+        "Más bajo",  -- 1186
+        "leído %s",  -- 1187
+        "Habitual",  -- 1188
+        "7 días: de %s a %s",  -- 1189
+        "En venta: %d subastas, %d objetos",  -- 1190
+        "%s cada uno, %s por los %d",  -- 1191
+        "Pusiste %d aquí, %d subastas vendidas",  -- 1192
+        "No se conoce ningún precio: lee primero la casa de subastas.",  -- 1193
+        "Nada en tus bolsas que vender aquí.",  -- 1194
+        "Hoy nada se vende mejor aquí que en un vendedor; %d quizá, con paciencia.",  -- 1195
+        "Lo mejor primero: %d se venden mejor aquí que en un vendedor, %d más con paciencia.",  -- 1196
+        "Bolsas vacías, amigo. Tráeme algo que vender.",  -- 1197
+        "Hoy nada supera al vendedor. %d quizá, con un poco de paciencia.",  -- 1198
+        "Nada de ganancia segura en estas bolsas, amigo. %d pagarían si esperas.",  -- 1199
+        "Lo mejor arriba: %d aquí superan a cualquier vendedor, %d más para los pacientes.",  -- 1200
+        "%d pagan más aquí que en un vendedor, lo mejor primero. %d más si esperas.",  -- 1201
+        "Lo de arriba paga más: %d ventas seguras, %d más si puedes esperar.",  -- 1202
+        "Aún no hay precios: %s lee la casa de subastas.",  -- 1203
+        "Precios leídos ahora mismo: %d.",  -- 1204
+        "%d precios, leídos %s.",  -- 1205
+        "%d precios, leídos %s. %s los vuelve a leer.",  -- 1206
+        "Aún no he leído el tablón. %s y te traigo todos los precios.",  -- 1207
+        "Sin precios todavía, amigo. %s lee el tablón entero.",  -- 1208
+        "Precios recién sacados del tablón, amigo: %d.",  -- 1209
+        "Acabo de leer el tablón: %d precios, aún calientes.",  -- 1210
+        "%d precios, leídos %s. Suficiente, amigo.",  -- 1211
+        "Última mirada al tablón: %s, %d precios.",  -- 1212
+        "Precios de %s, más duros que pan viejo. %s vuelve a leer el tablón.",  -- 1213
+        "%d precios, pero los leí %s. %s y vuelvo a mirar.",  -- 1214
+        "También se muestra lo que guardas. %s lo oculta.",  -- 1215
+        "Apartados: %d, para tus profesiones, tu equipo y tus marcas. %s los muestra.",  -- 1216
+        "Lo que guardas también está en la lista. %s lo aparta.",  -- 1217
+        "También muestro lo que guardas. %s lo vuelve a ocultar.",  -- 1218
+        "%d apartados: material de oficio, equipo para llevar, lo que marcaste. %s los muestra.",  -- 1219
+        "Aparté %d: para tus oficios, para vestir y los que marcaste. %s si los quieres.",  -- 1220
+        "cada uno",  -- 1221
+        "sin datos",  -- 1222
+        "Venta rápida",  -- 1223
+        "Paciente",  -- 1224
+        "Leer todos los precios",  -- 1225
+        "Ocultar lo guardado",  -- 1226
+        "Mostrar lo guardado",  -- 1227
+        "Línea",  -- 1228
+        "Velas",  -- 1229
+        "Publicar",  -- 1230
+        "%d de %d",  -- 1231
+        "Publicar %d de %d a %s cada uno",  -- 1232
+        "Publicar %d por %s",  -- 1233
+        "Poner los %d por %s",  -- 1234
+        "Este cliente no permite publicar en la casa de subastas desde aquí.",  -- 1235
+        "Publicado %d por %s.",  -- 1236
+        "Mercado en la casa de subastas: abrir / cerrar",  -- 1237
+        "Saludo del subastador en el Mercado",  -- 1238
+        "un subastador goblin dice una frase corta, de los sonidos del propio juego, cuando abre el Mercado; desactivado: se abre en silencio",  -- 1239
+        "Mercado: mostrar lo que guardas",  -- 1240
+        "el Mercado también lista lo que guardas: de lo que tus profesiones aún aprenden o convierten en algo que vale más, y lo que marcaste para guardar; desactivado: solo lo que venderías",  -- 1241
+        "Mercado: gráfico de precios en velas",  -- 1242
+        "el gráfico de precios del Mercado es una vela por día durante los últimos 7 días (dónde abrió el precio, su máximo y su mínimo, y dónde cerró: verde si cerró más alto, rojo si más bajo); desactivado: una línea del precio más bajo de cada día durante 30 días",  -- 1243
+        "abrir o cerrar el Mercado (una pestaña de la casa de subastas)",  -- 1244
+        "qué casa de subastas tiene este cliente (para solucionar problemas)",  -- 1245
+        "Abre la ventana de una profesión y echaré un vistazo a tus recetas.",  -- 1246
+        "Ese es el tope, %d. Un instructor tiene el siguiente rango para ti.",  -- 1247
+        "Nada más que aprender en %d. Ve a ver a un instructor por el siguiente rango.",  -- 1248
+        "Tus recetas se te han quedado pequeñas. Ve a un instructor: %s te espera en %d.",  -- 1249
+        "Faltan %d para %d, y lo que sabes no te llevará hasta allí. Un instructor tiene %s para ti en %d.",  -- 1250
+        "Tus recetas se te han quedado pequeñas. Ve a un instructor: %s te espera.",  -- 1251
+        "Tus recetas dejan de enseñarte a %d de %d. Pide a un instructor %s.",  -- 1252
+        "Tus recetas se agotan a %d de %d. Un instructor tendrá algo nuevo.",  -- 1253
+        "Lo que sabes no te llevará los últimos %d. Es hora de ver a un instructor.",  -- 1254
+        "%s ya no te enseñará mucho, pero es lo mejor que tienes. Faltan %d para %d.",  -- 1255
+        "A partir de aquí va despacio: %s da un punto de vez en cuando. Faltan %d.",  -- 1256
+        "Primero te hará falta %s, %s. Las guías empiezan este tramo con ella.",  -- 1257
+        "Aprende %s, %s, y empezamos: faltan %d para %d.",  -- 1258
+        "Faltan %d para %d. Las guías te mandan a por %s hasta %d.",  -- 1259
+        "Aquí aprendes recolectando: %s hasta %d.",  -- 1260
+        "Faltan %d para %d. Empieza con %s, o con %s si lo prefieres: %s.",  -- 1261
+        "Primero %s, como dicen las guías. %s también sirve: %s.",  -- 1262
+        "Faltan %d para %d. Empieza con %s.",  -- 1263
+        "%s es ahora tu mejor maestro. %d puntos hasta %d.",  -- 1264
+        "Pulso firme. Primero %s, y faltan %d.",  -- 1265
+        "con un instructor",  -- 1266
+        "de un vendedor",  -- 1267
+        "como botín",  -- 1268
+        "de una misión",  -- 1269
+        "materiales más baratos",  -- 1270
+        "materiales de un vendedor",  -- 1271
+        "materiales que recolectas tú",  -- 1272
+        "se vende bien",  -- 1273
+        "algo que usarás",  -- 1274
+        "menos fabricaciones",  -- 1275
+        "una receta que encuentras o compras",  -- 1276
+        "otros materiales",  -- 1277
+        "la primera opción de las guías",  -- 1278
+        "Abre la ventana de una profesión para ver un plan de subida.",  -- 1279
+        "En el tope, %d. Un instructor tiene el siguiente rango.",  -- 1280
+        "Faltan %d hasta %d; tus recetas se quedan cortas. Un instructor tiene %s a %d.",  -- 1281
+        "Faltan %d hasta %d; tus recetas se quedan cortas. Un instructor tiene %s.",  -- 1282
+        "Tus recetas se quedan a %d de %d. Un instructor tiene más.",  -- 1283
+        "Faltan %d hasta %d. Lo mejor ahora: %s, verde (un punto de vez en cuando).",  -- 1284
+        "Faltan %d hasta %d. Aprende primero %s, %s.",  -- 1285
+        "Faltan %d hasta %d. Recolecta %s hasta %d.",  -- 1286
+        "Faltan %d hasta %d. Primero: %s, o %s (%s).",  -- 1287
+        "Faltan %d hasta %d. Primero: %s.",  -- 1288
+        "Para recolectar o comprar",  -- 1289
+        "%d veces: %s",  -- 1290
+        "Apréndela %s, a partir de %d.",  -- 1291
+        "Apréndela %s.",  -- 1292
+        "%s: %d en tus bolsas, %d en el banco, %d por fabricación",  -- 1293
+        "Las guías suben este tramo recolectando %s.",  -- 1294
+        "%s: tienes %d, el plan usa %d",  -- 1295
+        "para %s",  -- 1296
+        "Es más barato comprarlo que fabricarlo con %s",  -- 1297
+        "Hecho con %s",  -- 1298
+        "El Mentor: lo que tu banco te deja fabricar",  -- 1299
+        "Lo que tu banco puede fabricar",  -- 1300
+        "Con lo que hay en tu banco no se puede fabricar nada más.",  -- 1301
+        "%d que puedes fabricar contando tu banco, %d de ellas solo con él.",  -- 1302
+        "El Mentor: %s %d > %d",  -- 1303
+        "El Mentor",  -- 1304
+        "Plan de subida",  -- 1305
+        "o",  -- 1306
+        "Recolecta %s",  -- 1307
+        "por aprender",  -- 1308
+        "más barato comprarlo",  -- 1309
+        "Ocultar",  -- 1310
+        "El plan",  -- 1311
+        "Farmear esto",  -- 1312
+        "Farmear todo",  -- 1313
+        "Con el banco",  -- 1314
+        "Usar el plan",  -- 1315
+        "dos veces para ocultar",  -- 1316
+        "Aquí no hay nada que probarse.",  -- 1317
+        "%d añadido(s) a la lista de farmeo.",  -- 1318
+        "No falta nada: tienes lo necesario.",  -- 1319
+        "Abre la ventana de una profesión para hacer un plan.",  -- 1320
+        "El Mentor (plan de subida): mostrar / ocultar",  -- 1321
+        "muestra el plan de subida de la última ventana de profesión abierta, con los botones del mando en él",  -- 1322
+        "A la izquierda de las misiones",  -- 1323
+        "A la derecha de las misiones",  -- 1324
+        "Bajo las misiones",  -- 1325
+        "La lista de farmeo está llena.",  -- 1326
+        "Lista de farmeo: %s, %d deseados.",  -- 1327
+        "Farmeo",  -- 1328
+        "%d más",  -- 1329
+        "Nada que farmear aún.",  -- 1330
+        "Una pila más",  -- 1331
+        "Quitar",  -- 1332
+        "Vaciar",  -- 1333
+        "Hecho",  -- 1334
+        "¿Quitar todo de la lista de farmeo?",  -- 1335
+        "Lista de farmeo: elegir / hecho",  -- 1336
+        "Lista de farmeo: añadir el objeto al que apuntas",  -- 1337
+        "Eso no está en la lista de farmeo.",  -- 1338
+        "La lista de farmeo está vacía.",  -- 1339
+        "Lista de farmeo: dónde se sitúa",  -- 1340
+        "la lista de farmeo a la izquierda de la lista de misiones, a su derecha o bajo sus misiones",  -- 1341
+        "la lista de farmeo junto a la lista de misiones: elige con el mando; add <objeto> [cuántos], remove <objeto>, clear, o left / right / bottom para su sitio",  -- 1342
+        "Porcentaje de amenaza",  -- 1343
+        "tu parte de la amenaza como número junto al icono de amenaza, en el marco del objetivo y en las placas de nombre",  -- 1344
+        "Número de salud",  -- 1345
+        "la salud restante, abreviada (12.3k), en la barra (no en las placas compactas: allí basta el porcentaje)",  -- 1346
+        "Tus perjuicios",  -- 1347
+        "tus perjuicios sobre la unidad, sobre su nombre, con su tiempo",  -- 1348
+        "Perjuicios de todos",  -- 1349
+        "los perjuicios que el juego marca para las placas de nombre de todos, no solo los tuyos",  -- 1350
+        "Beneficios del enemigo",  -- 1351
+        "los beneficios de un enemigo junto a sus perjuicios: los que importan (importantes, enfurecido o que puedes disipar o robar), o todos si Solo los efectos que importan está desactivado",  -- 1352
+        "Icono de control de masas",  -- 1353
+        "un icono grande con su tiempo cuando la unidad está aturdida, inmovilizada, aterrorizada...",  -- 1354
+        "Resplandor de amenaza",  -- 1355
+        "un icono de escudo y un brillo tras el nombre: rojo mientras te ataca, rojo y amarillo cuando estás a punto de atraerlo, amarillo y azul cuando lo estás perdiendo, azul cuando no está sobre ti",  -- 1356
+        "Marcador de misión",  -- 1357
+        "una marca dorada en las unidades que tus misiones aún necesitan",  -- 1358
+        "Animaciones de placas de nombre",  -- 1359
+        "las placas aparecen con fundido, la salud baja respira, el control de masas brilla",  -- 1360
+        "Pequeño",  -- 1361
+        "Normal",  -- 1362
+        "Grande",  -- 1363
+        "Nombre completo",  -- 1364
+        "Nombre corto",  -- 1365
+        "Sin nombre",  -- 1366
+        "Completo",  -- 1367
+        "Mínimo mini",  -- 1368
+        "Tamaño de las placas",  -- 1369
+        "lo grandes que son las barras de las placas de nombre: pequeñas y finas, normales o grandes (más anchas y altas)",  -- 1370
+        "Nombres en las placas",  -- 1371
+        "el nombre en una placa con barra de salud: completo, recortado u omitido (el marco del objetivo lo da completo; el nivel y el icono de clase se quedan). Una placa sin barra, la de un PNJ amistoso, siempre conserva su nombre",  -- 1372
+        "Aspecto de las placas",  -- 1373
+        "los interruptores de las placas de una vez. Completo: todo. Mínimo: sin barra de poder, hermandad ni título, nombres cortos. Mínimo mini: barras pequeñas con salud, tus perjuicios y los beneficios que importan, nivel y clase, sin nombre (lo tiene el marco del objetivo). La amenaza, el control y los lanzamientos llamativos siempre se quedan",  -- 1374
+        "Títulos de jugador",  -- 1375
+        "muestra el título de un jugador junto a su nombre",  -- 1376
+        "Hermandades y oficios de PNJ",  -- 1377
+        "una línea bajo el nombre: la hermandad del jugador o a qué se dedica el PNJ",  -- 1378
+        "Barras de amigos en combate",  -- 1379
+        "las placas de nombre amistosas muestran salud, poder y lanzamientos mientras esa unidad está en combate",  -- 1380
+        "Placas de nombre amistosas del propio juego",  -- 1381
+        "deja las placas amistosas (tu grupo, otros jugadores, PNJ amistosos) con el aspecto del juego; las nuestras solo en enemigos",  -- 1382
+        "Barras de poder",  -- 1383
+        "una barra fina de maná, ira o energía bajo la barra de salud",  -- 1384
+        "Objetivo del lanzamiento",  -- 1385
+        "a quién va dirigido un lanzamiento, junto al nombre del hechizo",  -- 1386
+        "Porcentaje de salud",  -- 1387
+        "el porcentaje de salud en la barra",  -- 1388
+        "Nombre en la placa de tu objetivo",  -- 1389
+        "desactivado: la placa de tu objetivo no muestra su nombre ni su nivel (los muestra el marco del objetivo)",  -- 1390
+        "Niveles en las placas de nombre",  -- 1391
+        "el nivel delante del nombre de un enemigo, coloreado según la dificultad",  -- 1392
+        "Placas de nombre compactas",  -- 1393
+        "placas de nombre de aproximadamente la mitad de ancho",  -- 1394
+        "Lanzamientos enemigos llamativos",  -- 1395
+        "el lanzamiento de un enemigo parpadea, se hincha y pulsa cada vez más rápido hasta completarse, para que puedas interrumpirlo a tiempo",  -- 1396
+        "Iconos de clase en las placas",  -- 1397
+        "el icono de clase de un jugador delante de su nombre, amigo o enemigo",  -- 1398
+        "Lo que hacen los PNJ, como iconos",  -- 1399
+        "un icono sobre los PNJ amistosos que ofrecen algo: una bolsa sobre los vendedores, un yunque sobre los herreros que reparan, un libro sobre los instructores... (los iconos del propio juego; se ven aunque la placa espere a que la señales)",  -- 1400
+        "PNJ amistosos solo al apuntarlos",  -- 1401
+        "las placas de los PNJ amistosos (vendedores, dadores de misiones, habitantes) solo se muestran mientras los apuntas, como su descripción",  -- 1402
+        "Nombres sobre las cosas con las que puedes interactuar",  -- 1403
+        "un nombre sobre minerales, cofres, placas y similares mientras los miras (desactivado: quedan sin nombre, el aviso del propio juego ya dice qué son)",  -- 1404
+        "Minipanel de nombre",  -- 1405
+        "esbirros, alimañas y enemigos grises que no dan experiencia tienen una placa pequeña: una barra fina con tus perjuicios encima y sin nombre (una alimaña, sin barra, conserva su nombre; la opción del juego decide si tienen placa)",  -- 1406
+        "Placas de nombre del grupo en mazmorras: solo nombres",  -- 1407
+        "dentro de una mazmorra o banda el juego dibuja él mismo las placas de nombre de los jugadores amistosos y los addons no pueden cambiarlas: allí se ajustan las opciones propias del juego para mostrarlas como nombres con el color de clase y sin barras, como las nuestras, y las barras del juego vuelven mientras luchas (si las barras de amigos en combate están activadas); todo se restaura al salir",  -- 1408
+        "Placas de nombre del grupo en mazmorras: ocultas",  -- 1409
+        "dentro de una mazmorra o banda, apagar del todo las placas de nombre del juego para los jugadores amistosos (y dejarlas como las tenías al salir)",  -- 1410
+        "muestra lo que da el juego para el nombre de tu objetivo (para solucionar problemas)",  -- 1411
+        "lista las placas de nombre en pantalla y si llevan nuestro aspecto (para solucionar problemas)",  -- 1412
+        "Bueno, veamos.",  -- 1413
+        "Ay, menudo montón.",  -- 1414
+        "A ver, a ver...",  -- 1415
+        "Elune, dame paciencia.",  -- 1416
+        "Por los naaru, qué revoltijo.",  -- 1417
+        "Maldita mochila.",  -- 1418
+        "Mochila ordenada, mochila ligera.",  -- 1419
+        "Bah. Demasiados trastos.",  -- 1420
+        "Peso muerto, todo esto.",  -- 1421
+        "Paciencia. La Madre Tierra provee.",  -- 1422
+        "Eh, ¿qué tenemos aquí, man?",  -- 1423
+        "Qué desorden. Impropio.",  -- 1424
+        "El tiempo es oro. Contemos.",  -- 1425
+        "Sí, con esto basta.",  -- 1426
+        "Gracias a Elune.",  -- 1427
+        "La Luz provee.",  -- 1428
+        "Hrm. Suficiente.",  -- 1429
+        "Hm. Basta para pelear.",  -- 1430
+        "Viajo ligero. Bien.",  -- 1431
+        "Aceptable. Apenas.",  -- 1432
+        "No queda ni un hueco. La basura daría %s: venderla hace sitio.",  -- 1433
+        "No queda ni un hueco. Lo que no necesite en el camino puede esperar en el banco.",  -- 1434
+        "Basura: %d, vale %s aquí. X vende lo que he elegido; Venta inteligente se lo lleva todo.",  -- 1435
+        "%d de estos van al banco: allí hay más iguales, o los marqué. Depositar los guarda.",  -- 1436
+        "Solo quedan %d huecos. La basura daría %s en cualquier vendedor.",  -- 1437
+        "Solo quedan %d huecos. Hora de vender o guardar en el banco unas cuantas cosas.",  -- 1438
+        "Nuevo desde la última vez: %d. El punto dorado marca cada uno.",  -- 1439
+        "Vale la pena vender: %d. El filtro Vender los reúne, y cada descripción dice dónde se paga más.",  -- 1440
+        "Basura: %d, vale %s. Para el próximo vendedor.",  -- 1441
+        "Solo lo esencial. Nada que valga la pena vender.",  -- 1442
+        "Todo en orden, y %d huecos libres.",  -- 1443
+        "Tu equipo está reparado: %s.",  -- 1444
+        "Puedo reparar tu equipo por %s; una pieza rota no te da ni armadura ni atributos.",  -- 1445
+        "Tus bolsas están llenas. Me quedo %d cosas por %s: Venta inteligente, y vuelves a tener sitio.",  -- 1446
+        "Te doy %s por %d cosas: la basura y lo que la casa de subastas no pagaría mejor. Venta inteligente, y listo.",  -- 1447
+        "Quédate los %d que quiere la casa de subastas: paga %s más que yo.",  -- 1448
+        "Tus bolsas están llenas. Véndeme algo antes de comprar.",  -- 1449
+        "Nada en tus bolsas por lo que pagaría bien. Echa un vistazo a mi mercancía.",  -- 1450
+        "%d de lo que llevas va aquí: guardo más iguales, o los marcaste. Depositar los guarda.",  -- 1451
+        "Guardo más de %d cosas que llevas. Retirar rellena tus bolsas antes de partir.",  -- 1452
+        "Tus bolsas están casi llenas. Déjame lo que no necesites en el camino.",  -- 1453
+        "Todo a salvo conmigo, y tus bolsas tienen %d huecos libres.",  -- 1454
+        "Hoy no hay nada para ti. Lo he mirado dos veces.",  -- 1455
+        "Cartas para ti: %d, sin nada adjunto. Léelas cuando quieras.",  -- 1456
+        "Cartas para ti: %d. Dentro: %s.",  -- 1457
+        "Recogerlo todo las vacía de una vez.",  -- 1458
+        "Contra reembolso: %d. Esas las abres y pagas tú.",  -- 1459
+        "Tus bolsas están llenas: los objetos esperan en sus cartas.",  -- 1460
+        "¿Adónde? Señala un lugar y te diré cuánto dura el viaje.",  -- 1461
+        "%s: unos %s según el mapa. Esa ruta aún no la has volado.",  -- 1462
+        "%s: unos %s, según tu último vuelo allí.",  -- 1463
+        "%s: aún no sé decirte cuánto. Vuélalo una vez y lo sabré.",  -- 1464
+        "Se han escapado %d. Esta agua pide más habilidad de la que tengo: el cebo ayuda, y una caña mejor también.",  -- 1465
+        "No hay cebo en el anzuelo. Suma a mi habilidad, y así se escapan menos.",  -- 1466
+        "El cebo casi se ha acabado. Otro en el anzuelo mantiene mi habilidad.",  -- 1467
+        "Peces de aquí que aún no he pescado: %d. A seguir lanzando.",  -- 1468
+        "He pescado todos los peces de esta agua. A otro sitio, entonces.",  -- 1469
+        "Aún no he pescado nada. El primer pez de cada agua va aquí.",  -- 1470
+        "Especies pescadas: %d. Cada agua esconde algunas más: el panel de pesca muestra un ? por cada una que no he pescado allí.",  -- 1471
+        "Descansado junto al fuego: los próximos %d de experiencia por muertes valen el doble.",  -- 1472
+        "Sin descanso acumulado. Una noche en una posada o en una ciudad, y las muertes dan el doble de experiencia un rato.",  -- 1473
+        "%d absorbido",  -- 1474
+        "Lista a la derecha",  -- 1475
+        "Uno en el centro",  -- 1476
+        "%d sanaciones críticas",  -- 1477
+        "%d críticos",  -- 1478
+        "Sentencia",  -- 1479
+        "Grandes momentos: dónde",  -- 1480
+        "un bloque justo encima de los avisos de reutilización a la derecha de tu personaje, el más reciente junto a ellos y los anteriores subiendo por encima mientras se desvanecen, o uno a la vez en el centro",  -- 1481
+        "muestra cómo se ve y se siente un gran momento",  -- 1482
+        "conseguida",  -- 1483
+        "conseguida con otro objeto",  -- 1484
+        "aún no conseguida",  -- 1485
+        "Apariencia",  -- 1486
+        "Elige un conjunto para poner sus piezas en tu atuendo. %s lo guarda; no se paga nada antes.",  -- 1487
+        "Revisando tu colección...",  -- 1488
+        "Tu atuendo vuelve a estar como antes.",  -- 1489
+        "%s: %d de %d piezas puestas.",  -- 1490
+        "%d no se pudieron poner en este atuendo.",  -- 1491
+        "Un conjunto del que tienes piezas",  -- 1492
+        "%d conjuntos de los que tienes piezas",  -- 1493
+        "no puedes llevarlo",  -- 1494
+        "falta",  -- 1495
+        "Las %d piezas",  -- 1496
+        "%d de %d piezas",  -- 1497
+        "Falta: %s",  -- 1498
+        "Aún no hay conjuntos. Los objetos que comparten nombre, como Yelmo de hierro verde y Guanteletes de hierro verde, aparecen aquí en cuanto tienes uno.",  -- 1499
+        "Deshacer",  -- 1500
+        "¿Borrar el conjunto personalizado %s? No se puede recuperar.",  -- 1501
+        "Borrar",  -- 1502
+        "Apunta primero a un conjunto personalizado.",  -- 1503
+        "%s  Borrar conjunto personalizado",  -- 1504
     },
     frFR = {
         "erreur:",  -- 1
@@ -5500,529 +5506,531 @@ local TRANSLATIONS = {
         "La boussole doit savoir où vous êtes, et le jeu ne le dit pas ici.",  -- 977
         "Boussole de quêtes : place",  -- 978
         "en haut de l'écran, ou en bas à la place de la barre d'expérience (la barre passe alors en haut)",  -- 979
-        "quelques repères sur la boussole de quêtes, autour de vous, pendant vingt secondes",  -- 980
-        "Mode pêche : désactivé.",  -- 981
-        "Pêche: %s pour lancer",  -- 982
-        "Pas d'appât: %s deux fois pour utiliser %s",  -- 983
-        "%s pour ranger la canne",  -- 984
-        "Mode pêche: %s pour lancer la ligne, et encore pour ferrer le poisson quand le bouchon bouge.",  -- 985
-        "%s pour ferrer, %s pour relancer",  -- 986
-        "Le mode pêche demande une canne à pêche dans vos mains.",  -- 987
-        "Vous ne connaissez pas la Pêche.",  -- 988
-        "Mode pêche : un bouton lance et ferre",  -- 989
-        "Bouton de pêche : %s",  -- 990
-        "Relancer d’une seule pression",  -- 991
-        "tant que le bouchon est à l'eau, votre bouton de pêche ferre le poisson et A relance d'une pression ; désactivé : A est à vous",  -- 992
-        "Appât sur double appui",  -- 993
-        "appuyez deux fois rapidement sur votre bouton de pêche: le second appui met le meilleur appât de vos sacs sur votre canne, quand elle n'en a pas",  -- 994
-        "Barres de manette masquées pendant la pêche",  -- 995
-        "avec une canne à pêche en main, les barres de la manette sont masquées pour bien voir l'eau; l'invite de pêche montre le bouton pour lancer. Elles reviennent dès qu'un combat commence ou que la canne est rangée",  -- 996
-        "pêche à un bouton désactivée pour l'instant, ou réactivée (avec une canne en main elle s'active toute seule)",  -- 997
-        "le bouton qui pêche : votre bouton d'interaction au départ (Carré ou X), ou n'importe quel autre, une gâchette par exemple (rt)",  -- 998
-        "La côte de Durotar, c'est de la roche rouge et des hauts-fonds tièdes. Les trolls des îles de l'Écho disent que les maquereaux passent en bancs plus serrés quand la marée porte l'odeur des feux de cuisine des îles.",  -- 999
-        "Les lacs de Mulgore sont petits, clairs et patients. Les taurens y pêchent comme ils font tout le reste, lentement et en disant merci.",  -- 1000
-        "Chaque oasis des Tarides est un lieu de rendez-vous. Peu importe ce qui s'y abreuve le jour, quelque chose nage dessous la nuit.",  -- 1001
-        "Les bassins de Teldrassil reposent à l'ombre d'un seul arbre. Les pêcheurs elfes de la nuit jurent que les poissons n'y ont jamais vu le soleil et qu'il ne leur manque pas.",  -- 1002
-        "L'eau de Sombrivage est grise, froide et pleine d'épaves. La moitié de ce qui mord au large d'Auberdine a élu domicile dans la cargaison perdue de quelqu'un.",  -- 1003
-        "Les rivières d'Orneval coulent sous des feuillages plus vieux que la plupart des royaumes. Les poissons sont vifs, et les sentinelles plus vives encore à vous demander ce que vous faites là.",  -- 1004
-        "Au fond des Mille pointes, l'eau est rare et jalousement gardée. Un poisson d'ici a mérité sa place.",  -- 1005
-        "Les lacs des Serres-Rocheuses dorment haut et froid entre les pics. Les gobelins les auraient déjà asséchés si la pêche n'y était pas si bonne.",  -- 1006
-        "La côte de Désolace n'est qu'ossements et ressac gris. Quelque chose, là-dessous, a pris goût aux deux.",  -- 1007
-        "À Féralas, tout est vert jusqu'au ras de l'eau. Les rivières y sont profondes, chaudes et bien vivantes.",  -- 1008
-        "Nul ne sait au juste où finit la terre et où commence l'eau dans le marécage d'Âprefange. Pêchez depuis la rive, et recomptez vos orteils ensuite.",  -- 1009
-        "Port Gentepression possède la seule eau digne de ce nom de tout Tanaris. Les gobelins vous vendront le droit d'y pêcher, deux fois si vous les laissez faire.",  -- 1010
-        "Sous la baie lumineuse d'Azshara repose une cité engloutie. Les vieux pêcheurs disent que les plus gros vivent dans ce qui fut ses jardins.",  -- 1011
-        "Les mares de Gangrebois luisent, et pas dans le bon sens. Ce qui y nage encore est têtu au-delà du raisonnable.",  -- 1012
-        "Les sources chaudes et les lacs bordés de goudron d'Un'Goro ont gardé des choses que le reste du monde a oubliées. Certaines mordent.",  -- 1013
-        "Le lac Elune'ara, à Reflet-de-Lune, est calme comme un souffle retenu. Les druides demandent seulement que vous ne preniez pas plus que vous ne mangerez.",  -- 1014
-        "Silithus, c'est du sable, du vent et un bruit d'ailes. Si vous y avez trouvé de l'eau où pêcher, ne le dites à personne.",  -- 1015
-        "Les lacs de Berceau-de-l'Hiver gèlent sur les bords et fument au milieu. Les poissons y sont gras contre le froid, et valent bien la marche.",  -- 1016
-        "Dans les bassins d'Orgrimmar pêchent des péons qui n'ont rien de mieux à faire et de vieux grunts qui disent la même chose. Les uns comme les autres vous raconteront que le gros leur a échappé.",  -- 1017
-        "Un poisson des étangs des Pitons-du-Tonnerre a passé toute sa vie très haut au-dessus des plaines. Il a l'air de bien le prendre.",  -- 1018
-        "Darnassus veille sur ses eaux avec autant de soin que sur ses temples. Les poissons ont pris l'habitude d'être admirés.",  -- 1019
-        "Les lacs des montagnes d'Alterac sont de la neige fondue, et les ogres comme le Syndicat y pêchent quand personne ne regarde.",  -- 1020
-        "Les rivages d'Arathi ont vu passer plus d'armées que de pêcheurs. Les poissons ont depuis longtemps cessé de se soucier de la bannière qui flotte au-dessus de l'eau.",  -- 1021
-        "Les Terres ingrates ne sont que poussière d'un bout à l'autre. Ici, une touche est un petit miracle, alors traitez-la comme tel.",  -- 1022
-        "La côte des Terres foudroyées est rouge, décapée et silencieuse. Ce qui vit dans ce ressac a appris à s'accommoder de bien des choses.",  -- 1023
-        "Les lacs de Tirisfal reposent, immobiles, sous un ciel maladif. Les Réprouvés y pêchent par habitude. Les morts ne mangent pas beaucoup, mais ils se souviennent d'avoir aimé ça.",  -- 1024
-        "La longue côte de la forêt des Pins-Argentés n'est que brume et ombre de pins. La pêche y est bonne, et c'est bien la seule chose gaie qu'on dise de l'endroit.",  -- 1025
-        "Les rivières des Maleterres de l'Ouest coulent encore, mais pas propres. Ce que vous en tirez, regardez-le à deux fois.",  -- 1026
-        "Peu de gens pêchent dans les Maleterres de l'Est, et moins encore l'avouent. L'eau garde ce que la peste a laissé d'elle.",  -- 1027
-        "La rivière de Hautebrande et son long rivage sud ont nourri les deux camps de chaque querelle livrée pour eux.",  -- 1028
-        "Les Hinterlands gardent leurs lacs en hauteur, parmi les arbres, là où les nains Marteaux-hardis pêchent à dos de griffon quand ils pensent que personne ne les voit.",  -- 1029
-        "Les lacs de Dun Morogh sont cerclés de glace presque toute l'année. Un nain y perce un trou, s'assied avec une pinte et appelle ça une bonne journée, peu importe ce qui mord.",  -- 1030
-        "La gorge des Vents brûlants a de la lave là où d'autres terres ont des rivières. Apportez plutôt de quoi boire.",  -- 1031
-        "Les Steppes ardentes ne sont que cendres et braises. Si l'eau d'ici vous donne quoi que ce soit, ce sera chaud.",  -- 1032
-        "Tous les enfants d'Elwynn apprennent à pêcher au lac de Cristal ou au lac du Cairn. Le menu fretin s'y joue d'eux depuis des générations.",  -- 1033
-        "Le défilé de Deuillevent a peu d'eau et encore moins d'hospitalité. Ce qui se trouve dans les mares sous Karazhan, mieux vaut l'y laisser.",  -- 1034
-        "La rivière qui borde le bois de la Pénombre est noire à toute heure. L'obscurité ne semble pas gêner les poissons. Les pêcheurs, si.",  -- 1035
-        "Le Loch est la fierté du Loch Modan, retenu par le grand barrage de Formepierre. Les nains mesurent toute histoire de pêche à son aune, et c'est en général le Loch qui gagne.",  -- 1036
-        "Le lac Placide, dans les Carmines, est joli comme un tableau, et l'on y pêche depuis chaque ponton de Comté-du-Lac. Les habitants connaissent tous les bons coins et ne vous en indiqueront aucun.",  -- 1037
-        "De ses rivières de jungle à son cap sauvage au sud, Strangleronce possède les eaux les plus riches du continent. Les pêcheurs de Baie-du-Butin en font un tournoi, et presque tous trichent.",  -- 1038
-        "Le marais des Chagrins, c'est de l'eau verte sous des arbres verts. Les poissons ont un goût de vase, et les gens du coin les aiment ainsi.",  -- 1039
-        "Les champs de la marche de l'Ouest ont dépéri, mais pas sa côte. Ceux qui sont restés vivent de ce long rivage gris.",  -- 1040
-        "Les Paluns portent bien leur nom. Les quais de Port-Menethil sont l'endroit le plus sec pour y pêcher, et les crocilisques le savent.",  -- 1041
-        "Dans les canaux de Hurlevent pêchent des enfants, des retraités et au moins un membre de la noblesse déguisé. Personne ne demande ce qu'il y a d'autre dans les canaux.",  -- 1042
-        "La Caverne lugubre abrite le seul bassin tranquille de Forgefer. De vieux nains y pêchent des heures durant sans jamais dire un mot.",  -- 1043
-        "Les canaux de Fossoyeuse charrient un vert qui ne doit rien aux algues. Les Réprouvés qui y pêchent ne le font pas pour le dîner.",  -- 1044
-        "Le premier poisson que la plupart des pêcheurs remontent, et assez éclatant pour qu'ils s'en souviennent.",  -- 1045
-        "Luisant, vif et commun le long de toutes les côtes chaudes. Grillé, il vaut mieux que son nom ne le laisse croire.",  -- 1046
-        "Tout en gueule, et jamais plus heureux que dans une eau que vous ne boiriez pas.",  -- 1047
-        "Petit, plein de dents et sans peur. On raconte qu'un banc entier a un jour chassé un ours hors du Loch.",  -- 1048
-        "Un éclair de couleur sous le ressac. Quand il mord à la ligne, les marins y voient un gage de chance pour la traversée.",  -- 1049
-        "Un patient fouilleur de fond, aux moustaches dignes d'un ancien chez les nains.",  -- 1050
-        "Personne n'en mange deux fois. Les alchimistes achètent tout ce qu'ils peuvent en trouver.",  -- 1051
-        "Ses nageoires rougeoient comme des braises sous la cendre, et l'huile qu'on en tire brûle presque aussi bien.",  -- 1052
-        "Une armure digne d'un petit bouclier. La chair qu'elle protège vaut la peine qu'on se donne.",  -- 1053
-        "Quelque chose dans l'eau, près des cavernes des Lamentations, l'a changé. En manger pourrait bien vous changer aussi, pour un temps.",  -- 1054
-        "Les gens du fleuve disent qu'en faire un repas éclaircit l'esprit. C'est de remonter le courant que lui vient sa sagesse.",  -- 1055
-        "Plus d'âge, de taille et de sagesse que dans le reste de la famille, ce qui ne lui a pas évité votre hameçon.",  -- 1056
-        "Un rude adversaire venu des mers chaudes du sud, et un classique de toutes les ardoises de taverne, de Baie-du-Butin à Gadgetzan.",  -- 1057
-        "Son front brille comme du vrai mithril. Plus d'un mineur a voulu passer la bête à la fonderie.",  -- 1058
-        "Ses écailles, bouillies, donnent une huile qui rend la peau dure comme le roc. Sa préférence va à la nuit.",  -- 1059
-        "Un poli de cuirasse de parade, et presque le même poids.",  -- 1060
-        "Il ne s'approche des côtes qu'aux mois froids, et les cuisiniers qui le connaissent l'attendent toute l'année.",  -- 1061
-        "Sa saison, ce sont les jours longs. Sur la côte, on règle le calendrier sur son passage.",  -- 1062
-        "À tenir par le milieu, et une seule fois.",  -- 1063
-        "Un poisson de rivière des contrées sauvages, aux ouïes aussi rouges que les peintures de guerre d'un troll.",  -- 1064
-        "Il se nourrit une fois la nuit tombée. En soupe, il calme les nerfs des lanceurs de sorts.",  -- 1065
-        "Il se nourrit de jour, tout le contraire du lutjan nocturne ou presque, et partage pourtant les mêmes eaux.",  -- 1066
-        "Pas un poisson à proprement parler. Il n'est pas d'accord pour se faire prendre et vous le fera savoir.",  -- 1067
-        "Pâle comme la glace des rivières, venu des lacs froids et limpides du nord.",  -- 1068
-        "Il vous faudra les deux mains, et peut-être un ami.",  -- 1069
-        "%.1f lb",  -- 1070
-        "Nouveau dans votre journal de pêche : %s, %s.",  -- 1071
-        "Nouveau dans votre journal de pêche : %s.",  -- 1072
-        "Votre plus gros %s à ce jour : %s (avant : %s).",  -- 1073
-        "Appât %s",  -- 1074
-        "Pas d'appât",  -- 1075
-        "Pris %d",  -- 1076
-        "Échappés %d",  -- 1077
-        "Un curieux : +%d%%",  -- 1078
-        "Gardez votre leurre près du poisson",  -- 1079
-        "Prochaine prise +%d%%",  -- 1080
-        "Maintenez %s : le leurre court le long de la ligne",  -- 1081
-        "%d d'affilée",  -- 1082
-        "Un jeu pendant que le bouchon est à l'eau",  -- 1083
-        "se joue sur la barre d’incantation tant que votre ligne est à l’eau : maintenez une gâchette et votre leurre court le long de la ligne, relâchez et il dérive en arrière ; gardez-le près de l’ombre du poisson. Mieux vous jouez, plus le poids inventé de votre prochaine prise est lourd. Aucun bouton n’est pris, ni votre lancer ni votre prise ne sont touchés",  -- 1084
-        "%d pris, %d espèces, %d échappés",  -- 1085
-        "Le plus lourd : %s, %s",  -- 1086
-        "Poissons",  -- 1087
-        "Eaux",  -- 1088
-        "Rien de pris pour l'instant. Emportez une canne au bord de l'eau.",  -- 1089
-        "Pris : %d",  -- 1090
-        "Le plus lourd : %s, à %s",  -- 1091
-        "Première prise : %s",  -- 1092
-        "Pris ici : %d",  -- 1093
-        "Espèces trouvées ici : %d",  -- 1094
-        "ouvrir ou fermer votre journal de pêche: chaque espèce que vous avez prise, la plus lourde de chacune, et les eaux où vous avez pêché",  -- 1095
-        "Vol",  -- 1096
-        "atterrissage anticipé",  -- 1097
-        "atterrissage au prochain point de vol",  -- 1098
-        "destination inconnue",  -- 1099
-        "estimé d'après la distance",  -- 1100
-        "premier vol sur cette route : apprentissage de sa durée",  -- 1101
-        "atterrissage",  -- 1102
-        "%s : environ %s, estimé d'après la distance",  -- 1103
-        "%s : environ %s",  -- 1104
-        "%s : premier vol sur ce trajet, durée inconnue",  -- 1105
-        "En vol, destination inconnue",  -- 1106
-        "%s : durée du vol apprise, %s",  -- 1107
-        "Atterrissage anticipé : %s, environ %s",  -- 1108
-        "Atterrissage anticipé au prochain point de vol",  -- 1109
-        "vif et froid, la neige sous les pieds et le souffle suspendu dans l'air",  -- 1110
-        "un froid mordant, avec un vent des sommets qui trouve chaque faille de votre armure",  -- 1111
-        "chaud et humide, un air si épais qu'on pourrait le boire",  -- 1112
-        "une chaleur moite sous la canopée, et les insectes bruyants",  -- 1113
-        "chaud et sec, avec de la poussière dans le vent",  -- 1114
-        "un soleil brûlant et une terre craquelée ; buvez quand vous le pouvez",  -- 1115
-        "fumée et cendres sur un vent chaud",  -- 1116
-        "un air brûlé, et des escarbilles qui dérivent",  -- 1117
-        "gris et froid, une brume humide qui colle",  -- 1118
-        "un froid dans l'air et presque pas de lumière",  -- 1119
-        "doux et beau, avec une brise légère",  -- 1120
-        "un temps agréable, idéal pour voyager",  -- 1121
-        "frais et vert, les feuilles qui murmurent",  -- 1122
-        "une lumière douce entre les arbres, et l'air frais",  -- 1123
-        "lourd et humide, le sol mou sous les pieds",  -- 1124
-        "un air chaud et mouillé, et l'odeur du marais",  -- 1125
-        "%s à %s : %s",  -- 1126
-        "%d trajets aériens connus.",  -- 1127
-        "Vols : votre monture le long de la barre",  -- 1128
-        "un griffon, un coursier du vent ou une chauve-souris (celui que le maître de vol vous a donné) plane le long de la barre de vol vers votre point d’arrivée",  -- 1129
-        "Vols : le temps à l'arrivée",  -- 1130
-        "à l'atterrissage, la discussion dit comment est l'air là où vous arrivez, tel que l'endroit est d'habitude (chaud et humide à Strangleronce, neige sous les pieds à Dun Morogh), et le moment de la journée",  -- 1131
-        "lister les trajets aériens dont la durée est connue",  -- 1132
-        "À terre ! +%d",  -- 1133
-        "Heurté : la série s'arrête",  -- 1134
-        "%s battre des ailes  ·  évitez les cimes des arbres et les zeppelins",  -- 1135
-        "%s prenez les cavaliers au filet pour de l'or de vol  ·  %s haute altitude",  -- 1136
-        "%d d'or de vol",  -- 1137
-        "%s battre des ailes",  -- 1138
-        "%s filet",  -- 1139
-        "%s haute altitude",  -- 1140
-        "%s : retour au jeu (%d d'or de vol)",  -- 1141
-        "%s : un jeu en chemin",  -- 1142
-        "Le jeu de vol est désactivé : /cchud flightgame on",  -- 1143
-        "Le jeu de vol se joue pendant un vol.",  -- 1144
-        "Pas en combat.",  -- 1145
-        "Jeu de vol : jouer / haute altitude",  -- 1146
-        "pendant un vol : lancer le jeu de vol, ou le mettre en haute altitude et l'en ramener",  -- 1147
-        "Vols cinématiques : la caméra tourne autour de vous",  -- 1148
-        "pendant le film, la caméra tourne lentement autour de vous et de votre monture, un tour complet en une minute et demie environ, et revient derrière vous avant l'atterrissage. Désactivé : un plan fixe",  -- 1149
-        "Hors ligne",  -- 1150
-        "Mort",  -- 1151
-        "Désactivé",  -- 1152
-        "En spécialisation soins",  -- 1153
-        "Toujours",  -- 1154
-        "Trop loin",  -- 1155
-        "Groupe et raid du soigneur",  -- 1156
-        "en groupe: votre groupe à côté de votre personnage, chacun avec le bouton qui le cible; en raid: des cadres plus fins. Chacun ne montre que les soins dont il a besoin, un effet néfaste que vous pouvez dissiper et s'il est à portée",  -- 1157
-        "%d%% de chances de vendre",  -- 1158
-        "Ça part à coup sûr (%d%%)",  -- 1159
-        "Ça se vend tout seul (%d%%)",  -- 1160
-        "Je pense que ça se vendra (%d%%)",  -- 1161
-        "Devrait trouver preneur (%d%%)",  -- 1162
-        "Une chance sur deux (%d%%)",  -- 1163
-        "Ça peut aller dans les deux sens (%d%%)",  -- 1164
-        "Un peu un pari (%d%%)",  -- 1165
-        "Pourrait traîner un moment (%d%%)",  -- 1166
-        "Je ne compterais pas dessus (%d%%)",  -- 1167
-        "Mal parti, l'ami (%d%%)",  -- 1168
-        "+%s de plus qu'un marchand",  -- 1169
-        "pas encore de prix connu",  -- 1170
-        "un marchand paie autant",  -- 1171
-        "Le Courtier",  -- 1172
-        "Marché",  -- 1173
-        "chaque pièce comptée, l'ami",  -- 1174
-        "Rien dans vos sacs ne peut être vendu ici.",  -- 1175
-        "Aucun prix ces 7 derniers jours.",  -- 1176
-        "Un jour de prix pour l'instant : une bougie s'ajoute chaque jour où vous passez à l'hôtel des ventes.",  -- 1177
-        "7 jours, une bougie par jour : vert clôturé plus haut, rouge plus bas",  -- 1178
-        "30 jours, le plus bas du jour : vert en hausse, rouge en baisse",  -- 1179
-        "Pas encore d'historique des prix : lisez l'hôtel des ventes quelques jours.",  -- 1180
-        "Un seul jour de prix pour l'instant: la ligne s'allonge chaque jour où vous passez à l'hôtel des ventes.",  -- 1181
-        "Je demande %s l'unité, %s pour les %d que tu lâches ; %d restent avec toi",  -- 1182
-        "Demande %s pièce, %s pour les %d",  -- 1183
-        "Plus bas",  -- 1184
-        "lu %s",  -- 1185
-        "Habituel",  -- 1186
-        "7 jours : de %s à %s",  -- 1187
-        "En vente : %d enchères, %d objets",  -- 1188
-        "%s pièce, %s pour les %d",  -- 1189
-        "Vous avez mis %d en vente ici, %d enchères vendues",  -- 1190
-        "Aucun prix connu : lisez d'abord l'hôtel des ventes.",  -- 1191
-        "Rien dans vos sacs à vendre ici.",  -- 1192
-        "Rien ne se vend mieux ici que chez un marchand aujourd'hui ; %d peut-être, avec de la patience.",  -- 1193
-        "Le meilleur d'abord : %d se vendent mieux ici que chez un marchand, %d de plus avec de la patience.",  -- 1194
-        "Sacs vides, l'ami. Apporte-moi de quoi vendre.",  -- 1195
-        "Rien ici ne bat un marchand aujourd'hui. %d peut-être, avec un peu de patience.",  -- 1196
-        "Pas de profit sûr dans ces sacs, l'ami. %d pourraient payer si tu attends.",  -- 1197
-        "Le meilleur en haut : %d ici battent tout marchand, %d de plus pour les patients.",  -- 1198
-        "%d rapportent plus ici qu'au marchand, le meilleur d'abord. %d de plus si tu attends.",  -- 1199
-        "Le haut de la pile paie le mieux : %d ventes sûres, %d de plus si tu peux attendre.",  -- 1200
-        "Pas encore de prix : %s lit l'hôtel des ventes.",  -- 1201
-        "Prix lus à l'instant : %d.",  -- 1202
-        "%d prix, lus %s.",  -- 1203
-        "%d prix, lus %s. %s les relit.",  -- 1204
-        "Pas encore lu le tableau. %s et je te ramène tous les prix.",  -- 1205
-        "Pas encore de prix, l'ami. %s lit tout le tableau.",  -- 1206
-        "Prix tout frais du tableau, l'ami : %d.",  -- 1207
-        "Je viens de lire le tableau : %d prix, encore chauds.",  -- 1208
-        "%d prix, lus %s. Ça ira, l'ami.",  -- 1209
-        "Dernier coup d'œil au tableau : %s, %d prix.",  -- 1210
-        "Prix relevés %s, rassis comme du vieux pain. %s relit le tableau.",  -- 1211
-        "%d prix, mais lus %s. %s et je regarde à nouveau.",  -- 1212
-        "Ce que vous gardez est aussi affiché. %s le masque.",  -- 1213
-        "Mis de côté : %d, pour vos métiers, votre équipement et vos marques. %s les affiche.",  -- 1214
-        "Ce que tu gardes est aussi sur la liste. %s le range.",  -- 1215
-        "J'affiche aussi ce que tu gardes. %s le cache à nouveau.",  -- 1216
-        "%d mis de côté : matériaux de métier, équipement à porter, ce que tu as marqué. %s les montre.",  -- 1217
-        "%d gardés pour tes métiers, à porter ou marqués par toi. %s si tu les veux.",  -- 1218
-        "pièce",  -- 1219
-        "aucune donnée",  -- 1220
-        "Vente rapide",  -- 1221
-        "Patient",  -- 1222
-        "Lire tous les prix",  -- 1223
-        "Masquer le gardé",  -- 1224
-        "Montrer le gardé",  -- 1225
-        "Ligne",  -- 1226
-        "Bougies",  -- 1227
-        "Poster",  -- 1228
-        "%d sur %d",  -- 1229
-        "Poster %d sur %d à %s l'unité",  -- 1230
-        "Poster %d pour %s",  -- 1231
-        "Mettre les %d en vente pour %s",  -- 1232
-        "Ce client ne permet pas de poster à l'hôtel des ventes depuis ici.",  -- 1233
-        "%d posté pour %s.",  -- 1234
-        "Marché à l'hôtel des ventes : ouvrir / fermer",  -- 1235
-        "Salut du commissaire-priseur au Marché",  -- 1236
-        "un commissaire-priseur gobelin dit une courte phrase, tirée des sons du jeu, à l'ouverture du Marché ; désactivé : il s'ouvre en silence",  -- 1237
-        "Marché : montrer ce que vous gardez",  -- 1238
-        "le Marché liste aussi ce que vous gardez : ce dont vos métiers apprennent encore ou qu'ils transforment en quelque chose de plus cher, et ce que vous avez marqué à garder ; désactivé : seulement ce que vous vendriez",  -- 1239
-        "Marché : graphique des prix en bougies",  -- 1240
-        "le graphique des prix du Marché est une bougie par jour sur les 7 derniers jours (où le prix a ouvert, son plus haut et son plus bas, et où il a clôturé : vert s'il a clôturé plus haut, rouge plus bas) ; désactivé : une ligne du prix le plus bas de chaque jour sur 30 jours",  -- 1241
-        "ouvrir ou fermer le Marché (un onglet de l'hôtel des ventes)",  -- 1242
-        "quel hôtel des ventes a ce client (pour le dépannage)",  -- 1243
-        "Ouvrez la fenêtre d'un métier et je jetterai un œil à vos recettes.",  -- 1244
-        "C'est le plafond, %d. Un maître a le rang suivant pour vous.",  -- 1245
-        "Plus rien à apprendre à %d. Allez voir un maître pour le rang suivant.",  -- 1246
-        "Vos recettes ne vous suffisent plus. Allez voir un maître : %s vous attend à %d.",  -- 1247
-        "Encore %d jusqu'à %d, et ce que vous savez ne vous y mènera pas. Un maître a %s pour vous à %d.",  -- 1248
-        "Vos recettes ne vous suffisent plus. Allez voir un maître : %s vous attend.",  -- 1249
-        "Vos recettes cessent de vous apprendre quoi que ce soit à %d de %d. Demandez %s à un maître.",  -- 1250
-        "Vos recettes s'épuisent à %d de %d. Un maître aura quelque chose de nouveau.",  -- 1251
-        "Ce que vous savez ne vous portera pas sur les %d derniers. Il est temps de voir un maître.",  -- 1252
-        "%s ne vous apprendra plus grand-chose, mais c'est ce que vous avez de mieux. Encore %d jusqu'à %d.",  -- 1253
-        "Ça avance lentement à partir d'ici : %s donne un point de temps en temps. Encore %d.",  -- 1254
-        "Il vous faudra d'abord %s, %s. Les guides commencent cette étape avec.",  -- 1255
-        "Apprenez %s, %s, et on commence : encore %d jusqu'à %d.",  -- 1256
-        "Encore %d jusqu'à %d. Les guides vous envoient chercher %s jusqu'à %d.",  -- 1257
-        "Ici, c'est la récolte qui vous apprend : %s jusqu'à %d.",  -- 1258
-        "Encore %d jusqu'à %d. Commencez par %s, ou %s si vous préférez : %s.",  -- 1259
-        "D'abord %s, comme le disent les guides. %s fait aussi l'affaire : %s.",  -- 1260
-        "Encore %d jusqu'à %d. Commencez par %s.",  -- 1261
-        "%s est votre meilleur maître à présent. %d points jusqu'à %d.",  -- 1262
-        "Les mains sûres. D'abord %s, et encore %d.",  -- 1263
-        "auprès d'un maître",  -- 1264
-        "auprès d'un marchand",  -- 1265
-        "en butin",  -- 1266
-        "par une quête",  -- 1267
-        "composants moins chers",  -- 1268
-        "composants vendus par un marchand",  -- 1269
-        "composants que vous récoltez vous-même",  -- 1270
-        "se vend bien",  -- 1271
-        "quelque chose que vous utiliserez",  -- 1272
-        "moins de fabrications",  -- 1273
-        "une recette à trouver ou acheter",  -- 1274
-        "d'autres composants",  -- 1275
-        "le premier choix des guides",  -- 1276
-        "Ouvrez la fenêtre d'un métier pour un plan de progression.",  -- 1277
-        "Au plafond, %d. Un maître a le rang suivant.",  -- 1278
-        "Encore %d jusqu'à %d ; vos recettes s'arrêtent avant. Un maître a %s à %d.",  -- 1279
-        "Encore %d jusqu'à %d ; vos recettes s'arrêtent avant. Un maître a %s.",  -- 1280
-        "Vos recettes s'arrêtent à %d de %d. Un maître en a d'autres.",  -- 1281
-        "Encore %d jusqu'à %d. Le mieux maintenant : %s, vert (un point de temps en temps).",  -- 1282
-        "Encore %d jusqu'à %d. Apprenez d'abord %s, %s.",  -- 1283
-        "Encore %d jusqu'à %d. Récoltez %s jusqu'à %d.",  -- 1284
-        "Encore %d jusqu'à %d. D'abord : %s, ou %s (%s).",  -- 1285
-        "Encore %d jusqu'à %d. D'abord : %s.",  -- 1286
-        "À récolter ou acheter",  -- 1287
-        "%d fabrications : %s",  -- 1288
-        "Apprenez-la %s, à partir de %d.",  -- 1289
-        "Apprenez-la %s.",  -- 1290
-        "%s : %d dans vos sacs, %d à la banque, %d par fabrication",  -- 1291
-        "Les guides montent cette étape en récoltant %s.",  -- 1292
-        "%s : vous en avez %d, le plan en utilise %d",  -- 1293
-        "pour %s",  -- 1294
-        "Moins cher à acheter qu'à fabriquer avec %s",  -- 1295
-        "Fabriqué avec %s",  -- 1296
-        "Le Mentor : ce que votre banque permet de fabriquer",  -- 1297
-        "Ce que votre banque permet de fabriquer",  -- 1298
-        "Rien de plus à fabriquer avec ce qu'il y a dans votre banque.",  -- 1299
-        "%d à fabriquer en comptant votre banque, dont %d seulement grâce à elle.",  -- 1300
-        "Le Mentor : %s %d > %d",  -- 1301
-        "Le Mentor",  -- 1302
-        "Plan de progression",  -- 1303
-        "ou",  -- 1304
-        "Récolter %s",  -- 1305
-        "à apprendre",  -- 1306
-        "moins cher à acheter",  -- 1307
-        "Masquer",  -- 1308
-        "Le plan",  -- 1309
-        "Farmer ceci",  -- 1310
-        "Tout farmer",  -- 1311
-        "Avec la banque",  -- 1312
-        "Utiliser le plan",  -- 1313
-        "deux fois pour masquer",  -- 1314
-        "Rien à essayer ici.",  -- 1315
-        "%d ajouté(s) à la liste à farmer.",  -- 1316
-        "Rien ne manque : vous avez ce qu'il faut.",  -- 1317
-        "Ouvrez la fenêtre d'un métier pour faire un plan.",  -- 1318
-        "Le Mentor (plan de progression) : afficher / masquer",  -- 1319
-        "affiche le plan de progression de la dernière fenêtre de métier ouverte, avec les boutons de la manette dessus",  -- 1320
-        "À gauche des quêtes",  -- 1321
-        "À droite des quêtes",  -- 1322
-        "Sous les quêtes",  -- 1323
-        "La liste à farmer est pleine.",  -- 1324
-        "Liste à farmer : %s, %d voulu(s).",  -- 1325
-        "À farmer",  -- 1326
-        "%d de plus",  -- 1327
-        "Rien à farmer pour l'instant.",  -- 1328
-        "Une pile de plus",  -- 1329
-        "Retirer",  -- 1330
-        "Vider",  -- 1331
-        "Terminé",  -- 1332
-        "Tout retirer de la liste à farmer ?",  -- 1333
-        "Liste à farmer : choisir / terminé",  -- 1334
-        "Liste à farmer : ajouter l'objet pointé",  -- 1335
-        "Ce n'est pas sur la liste à farmer.",  -- 1336
-        "La liste à farmer est vide.",  -- 1337
-        "Liste à farmer : où elle se place",  -- 1338
-        "la liste à farmer à gauche de la liste de quêtes, à sa droite ou sous ses quêtes",  -- 1339
-        "la liste à farmer à côté de la liste de quêtes : choisir avec la manette ; add <objet> [combien], remove <objet>, clear, ou left / right / bottom pour sa place",  -- 1340
-        "Pourcentage de menace",  -- 1341
-        "votre part de la menace en chiffre à côté de l'icône de menace, sur le cadre de la cible et les barres de nom",  -- 1342
-        "Nombre de santé",  -- 1343
-        "la santé restante, abrégée (12.3k), sur la barre (pas sur les barres de nom compactes : le pourcentage y suffit)",  -- 1344
-        "Vos affaiblissements",  -- 1345
-        "vos affaiblissements sur l'unité, au-dessus de son nom, avec leur durée",  -- 1346
-        "Affaiblissements de tous",  -- 1347
-        "les affaiblissements que le jeu signale pour les barres de nom de tous, pas seulement les vôtres",  -- 1348
-        "Bonus de l'ennemi",  -- 1349
-        "les améliorations d'un ennemi à côté de ses affaiblissements : celles qui comptent (importantes, enragé, ou que vous pouvez dissiper ou voler), ou toutes si Seulement les effets qui comptent est désactivé",  -- 1350
-        "Icône de contrôle des foules",  -- 1351
-        "une grande icône avec sa durée quand l'unité est étourdie, immobilisée, effrayée...",  -- 1352
-        "Lueur d'aggro",  -- 1353
-        "une icône de bouclier et une lueur derrière le nom : rouge tant qu'il vous attaque, rouge et jaune quand vous êtes sur le point de l'attirer, jaune et bleu quand vous le perdez, bleu quand il n'est pas sur vous",  -- 1354
-        "Marqueur de quête",  -- 1355
-        "un repère doré sur les unités dont vos quêtes ont encore besoin",  -- 1356
-        "Animations des barres de nom",  -- 1357
-        "les barres apparaissent en fondu, la santé basse respire, le contrôle des foules scintille",  -- 1358
-        "Petite",  -- 1359
-        "Normale",  -- 1360
-        "Grande",  -- 1361
-        "Nom complet",  -- 1362
-        "Nom court",  -- 1363
-        "Sans nom",  -- 1364
-        "Complet",  -- 1365
-        "Minimal mini",  -- 1366
-        "Taille des barres d'info",  -- 1367
-        "la taille des barres sur les barres d'info : petites et fines, normales ou grandes (plus larges et plus hautes)",  -- 1368
-        "Noms sur les barres d'info",  -- 1369
-        "le nom sur une barre d'info avec barre de vie : en entier, raccourci ou omis (le cadre de la cible le donne en entier ; le niveau et l'icône de classe restent). Une barre d'info sans barre, celle d'un PNJ amical, garde toujours son nom",  -- 1370
-        "Style des barres d'info",  -- 1371
-        "les interrupteurs des barres d'info en une fois. Complet : tout. Minimal : pas de barre de ressource, de guilde ni de titre, noms courts. Minimal mini : petites barres avec la vie, vos affaiblissements et les améliorations qui comptent, niveau et classe, sans nom (le cadre de la cible l'a). La menace, les contrôles et les incantations voyantes restent toujours",  -- 1372
-        "Titres des joueurs",  -- 1373
-        "affiche le titre d'un joueur avec son nom",  -- 1374
-        "Guildes et métiers des PNJ",  -- 1375
-        "une ligne sous le nom : la guilde du joueur, ou ce que fait le PNJ",  -- 1376
-        "Barres des amis en combat",  -- 1377
-        "les plaques de nom amicales affichent santé, ressource et incantations tant que l'unité est en combat",  -- 1378
-        "Barres d'info amicales du jeu",  -- 1379
-        "laisser les barres amicales (votre groupe, les autres joueurs, les PNJ amicaux) à l'apparence du jeu ; les nôtres seulement sur les ennemis",  -- 1380
-        "Barres de ressource",  -- 1381
-        "une fine barre de mana, de rage ou d'énergie sous la barre de santé",  -- 1382
-        "Cible de l'incantation",  -- 1383
-        "qui est visé par une incantation, à côté du nom du sort",  -- 1384
-        "Pourcentage de santé",  -- 1385
-        "le pourcentage de santé sur la barre",  -- 1386
-        "Nom sur la barre de votre cible",  -- 1387
-        "désactivé : la barre de votre cible n'affiche ni nom ni niveau (le cadre de la cible les montre)",  -- 1388
-        "Niveaux sur les barres d'info",  -- 1389
-        "le niveau devant le nom d'un ennemi, coloré selon la difficulté",  -- 1390
-        "Barres de nom compactes",  -- 1391
-        "barres de nom environ moitié moins larges",  -- 1392
-        "Incantations ennemies marquées",  -- 1393
-        "l'incantation d'un ennemi clignote, gonfle et pulse de plus en plus vite jusqu'à son terme, pour pouvoir être interrompue à temps",  -- 1394
-        "Icônes de classe sur les barres de nom",  -- 1395
-        "l'icône de classe d'un joueur devant son nom, ami ou ennemi",  -- 1396
-        "Ce que font les PNJ, en icônes",  -- 1397
-        "une icône au-dessus des PNJ amicaux qui proposent quelque chose : un sac pour les marchands, une enclume pour les forgerons qui réparent, un livre pour les maîtres... (les icônes du jeu ; elles restent visibles même quand la barre attend d'être pointée)",  -- 1398
-        "PNJ amicaux seulement quand pointés",  -- 1399
-        "les barres des PNJ amicaux (marchands, donneurs de quêtes, habitants) ne s'affichent que lorsque vous les pointez, comme leur infobulle",  -- 1400
-        "Noms sur les objets avec lesquels vous pouvez interagir",  -- 1401
-        "un nom au-dessus des minerais, coffres, plaques et autres tant que vous leur faites face (désactivé : ils restent sans nom, l'invite du jeu dit déjà ce qu'ils sont)",  -- 1402
-        "Mini-plaques",  -- 1403
-        "les serviteurs, bestioles et ennemis gris qui ne donnent pas d'expérience ont une petite barre: une barre fine avec vos affaiblissements dessus et sans nom (une bestiole, sans barre, garde son nom; l'option du jeu décide s'ils ont une barre)",  -- 1404
-        "Barres de nom du groupe en donjon: noms seuls",  -- 1405
-        "dans un donjon ou un raid, le jeu dessine lui-même les barres de nom des joueurs alliés et les addons ne peuvent pas les modifier: les options propres au jeu y sont réglées pour les afficher comme des noms à la couleur de la classe, sans barres, comme les nôtres, et les barres du jeu reviennent pendant un combat (si les barres des alliés en combat sont activées); tout est remis en place à la sortie",  -- 1406
-        "Barres de nom du groupe en donjon: masquées",  -- 1407
-        "dans un donjon ou un raid, désactiver complètement les barres de nom du jeu pour les joueurs alliés (et les remettre comme vous les aviez à la sortie)",  -- 1408
-        "affiche ce que le jeu donne pour le nom de votre cible (pour le dépannage)",  -- 1409
-        "lister les barres d'info à l'écran et si elles portent notre apparence (pour le dépannage)",  -- 1410
-        "Bon, voyons.",  -- 1411
-        "Och, quel fatras.",  -- 1412
-        "Voyons, voyons...",  -- 1413
-        "Elune, donne-moi de la patience.",  -- 1414
-        "Par les naaru, quel fouillis.",  -- 1415
-        "Fichu sac.",  -- 1416
-        "Sac bien rangé, sac léger.",  -- 1417
-        "Bah. Trop de bric-à-brac.",  -- 1418
-        "Du poids mort, tout ça.",  -- 1419
-        "Patience. La Terre-Mère pourvoit.",  -- 1420
-        "Hé, qu'est-ce qu'on a là, mon ?",  -- 1421
-        "Quel désordre. Indigne de moi.",  -- 1422
-        "Le temps, c'est de l'argent. Comptons.",  -- 1423
-        "Ouais, ça fera l'affaire.",  -- 1424
-        "Elune soit remerciée.",  -- 1425
-        "La Lumière pourvoit.",  -- 1426
-        "Hrm. Ça ira.",  -- 1427
-        "Hm. Assez pour se battre.",  -- 1428
-        "Je voyage léger. Bien.",  -- 1429
-        "Acceptable. De justesse.",  -- 1430
-        "Plus une place de libre. La camelote rapporterait %s : la vendre fait de la place.",  -- 1431
-        "Plus une place de libre. Ce dont je n'ai pas besoin en route peut attendre à la banque.",  -- 1432
-        "Camelote : %d, %s ici. X vend celle que j'ai choisie ; Vente futée prend tout.",  -- 1433
-        "%d d'entre eux vont à la banque : elle en garde déjà, ou je les ai marqués. Déposer les range.",  -- 1434
-        "Plus que %d places. La camelote rapporterait %s chez n'importe quel marchand.",  -- 1435
-        "Plus que %d places. Il est temps de vendre ou de déposer quelques affaires.",  -- 1436
-        "Nouveau depuis mon dernier coup d'œil : %d. Le point doré marque chacun.",  -- 1437
-        "Bon à vendre : %d. Le filtre Vendre les rassemble, et chaque info-bulle dit où ça rapporte le plus.",  -- 1438
-        "Camelote : %d, %s. Le prochain marchand peut la prendre.",  -- 1439
-        "Juste l'essentiel. Rien qui vaille la peine d'être vendu.",  -- 1440
-        "Tout est en ordre, et %d places libres.",  -- 1441
-        "Votre équipement est réparé : %s.",  -- 1442
-        "Je peux réparer votre équipement pour %s ; une pièce cassée ne donne ni armure ni caractéristiques.",  -- 1443
-        "Vos sacs sont pleins. Je prends %d objets pour %s : Vente futée, et vous avez de nouveau de la place.",  -- 1444
-        "Je vous donne %s pour %d objets : la camelote, et ce que l'hôtel des ventes ne paierait pas mieux. Vente futée, et c'est fait.",  -- 1445
-        "Gardez les %d que l'hôtel des ventes réclame : il paie %s de plus que moi.",  -- 1446
-        "Vos sacs sont pleins. Vendez-moi quelque chose avant d'acheter.",  -- 1447
-        "Rien dans vos sacs que je paierais bien. Jetez un œil à mes marchandises.",  -- 1448
-        "%d de vos objets ont leur place ici : j'en garde déjà, ou vous les avez marqués. Déposer les range.",  -- 1449
-        "Je garde davantage de %d objets que vous portez. Retirer remplit vos sacs avant le départ.",  -- 1450
-        "Vos sacs sont presque pleins. Laissez-moi ce dont vous n'aurez pas besoin en route.",  -- 1451
-        "Tout est en sécurité chez moi, et vos sacs ont %d places libres.",  -- 1452
-        "Rien pour vous aujourd'hui. J'ai vérifié deux fois.",  -- 1453
-        "Lettres pour vous : %d, rien de joint. Lisez-les quand vous voulez.",  -- 1454
-        "Lettres pour vous : %d. Dedans : %s.",  -- 1455
-        "Tout prendre les vide d'un coup.",  -- 1456
-        "Contre remboursement : %d. Celles-là, vous les ouvrez et payez vous-même.",  -- 1457
-        "Vos sacs sont pleins : les objets attendent dans leurs lettres.",  -- 1458
-        "Où allons-nous ? Montrez un endroit et je vous dirai combien de temps dure le trajet.",  -- 1459
-        "%s : environ %s d'après la carte. Vous n'avez pas encore fait ce trajet.",  -- 1460
-        "%s : environ %s, d'après votre dernier vol là-bas.",  -- 1461
-        "%s : je ne peux pas encore dire combien de temps. Faites-le une fois et je saurai.",  -- 1462
-        "%d se sont échappés. Cette eau demande plus de compétence que la mienne : un appât aide, une meilleure canne aussi.",  -- 1463
-        "Pas d'appât sur l'hameçon. Il ajoute à ma compétence, donc moins s'échappent.",  -- 1464
-        "L'appât est presque épuisé. Un autre sur l'hameçon garde ma compétence.",  -- 1465
-        "Poissons d'ici que je n'ai pas encore pris : %d. On continue de lancer.",  -- 1466
-        "J'ai pris tous les poissons de cette eau. Ailleurs, alors.",  -- 1467
-        "Rien de pris encore. Le premier poisson de chaque eau va ici.",  -- 1468
-        "Espèces prises : %d. Chaque eau en cache quelques autres : le panneau de pêche montre un ? pour chacune que je n'y ai pas prise.",  -- 1469
-        "Reposé près du feu : les %d prochains points d'expérience des victoires comptent double.",  -- 1470
-        "Aucun repos en réserve. Une nuit à l'auberge ou en ville, et les victoires donnent double expérience pendant un moment.",  -- 1471
-        "%d absorbés",  -- 1472
-        "Liste à droite",  -- 1473
-        "Un au centre",  -- 1474
-        "%d soins critiques",  -- 1475
-        "%d critiques",  -- 1476
-        "Jugement",  -- 1477
-        "Grands moments : où",  -- 1478
-        "un bloc juste au-dessus des annonces de temps de recharge à droite de votre personnage, le plus récent au plus près et les précédents montant au-dessus en s'effaçant, ou un seul à la fois au centre",  -- 1479
-        "montre l'aspect et la sensation d'un grand moment",  -- 1480
-        "collectée",  -- 1481
-        "collectée via un autre objet",  -- 1482
-        "pas encore collectée",  -- 1483
-        "Apparence",  -- 1484
-        "Choisissez un ensemble pour mettre ses pièces sur votre tenue. %s la garde ; rien n'est payé avant.",  -- 1485
-        "Examen de votre collection...",  -- 1486
-        "Votre tenue est revenue telle qu'elle était.",  -- 1487
-        "%s : %d pièces sur %d mises en place.",  -- 1488
-        "%d n'ont pas pu aller sur cette tenue.",  -- 1489
-        "Un ensemble dont vous avez des pièces",  -- 1490
-        "%d ensembles dont vous avez des pièces",  -- 1491
-        "vous ne pouvez pas le porter",  -- 1492
-        "manquant",  -- 1493
-        "Les %d pièces",  -- 1494
-        "%d pièces sur %d",  -- 1495
-        "Manque : %s",  -- 1496
-        "Pas encore d'ensemble. Les objets qui partagent un nom, comme Heaume en fer vert et Gantelets en fer vert, apparaissent ici dès que vous en avez un.",  -- 1497
-        "Annuler",  -- 1498
-        "Supprimer l'ensemble personnalisé %s ? Il ne pourra pas être récupéré.",  -- 1499
-        "Supprimer",  -- 1500
-        "Visez d'abord un ensemble personnalisé.",  -- 1501
-        "%s  Supprimer l'ensemble personnalisé",  -- 1502
+        "Boussole de quêtes : suit la caméra",  -- 980
+        "la boussole montre où regarde la caméra, pas où regarde votre personnage (ce n'est pas pareil quand le stick tourne le personnage sans la caméra) ; désactivé : où regarde votre personnage",  -- 981
+        "quelques repères sur la boussole de quêtes, autour de vous, pendant vingt secondes",  -- 982
+        "Mode pêche : désactivé.",  -- 983
+        "Pêche: %s pour lancer",  -- 984
+        "Pas d'appât: %s deux fois pour utiliser %s",  -- 985
+        "%s pour ranger la canne",  -- 986
+        "Mode pêche: %s pour lancer la ligne, et encore pour ferrer le poisson quand le bouchon bouge.",  -- 987
+        "%s pour ferrer, %s pour relancer",  -- 988
+        "Le mode pêche demande une canne à pêche dans vos mains.",  -- 989
+        "Vous ne connaissez pas la Pêche.",  -- 990
+        "Mode pêche : un bouton lance et ferre",  -- 991
+        "Bouton de pêche : %s",  -- 992
+        "Relancer d’une seule pression",  -- 993
+        "tant que le bouchon est à l'eau, votre bouton de pêche ferre le poisson et A relance d'une pression ; désactivé : A est à vous",  -- 994
+        "Appât sur double appui",  -- 995
+        "appuyez deux fois rapidement sur votre bouton de pêche: le second appui met le meilleur appât de vos sacs sur votre canne, quand elle n'en a pas",  -- 996
+        "Barres de manette masquées pendant la pêche",  -- 997
+        "avec une canne à pêche en main, les barres de la manette sont masquées pour bien voir l'eau; l'invite de pêche montre le bouton pour lancer. Elles reviennent dès qu'un combat commence ou que la canne est rangée",  -- 998
+        "pêche à un bouton désactivée pour l'instant, ou réactivée (avec une canne en main elle s'active toute seule)",  -- 999
+        "le bouton qui pêche : votre bouton d'interaction au départ (Carré ou X), ou n'importe quel autre, une gâchette par exemple (rt)",  -- 1000
+        "La côte de Durotar, c'est de la roche rouge et des hauts-fonds tièdes. Les trolls des îles de l'Écho disent que les maquereaux passent en bancs plus serrés quand la marée porte l'odeur des feux de cuisine des îles.",  -- 1001
+        "Les lacs de Mulgore sont petits, clairs et patients. Les taurens y pêchent comme ils font tout le reste, lentement et en disant merci.",  -- 1002
+        "Chaque oasis des Tarides est un lieu de rendez-vous. Peu importe ce qui s'y abreuve le jour, quelque chose nage dessous la nuit.",  -- 1003
+        "Les bassins de Teldrassil reposent à l'ombre d'un seul arbre. Les pêcheurs elfes de la nuit jurent que les poissons n'y ont jamais vu le soleil et qu'il ne leur manque pas.",  -- 1004
+        "L'eau de Sombrivage est grise, froide et pleine d'épaves. La moitié de ce qui mord au large d'Auberdine a élu domicile dans la cargaison perdue de quelqu'un.",  -- 1005
+        "Les rivières d'Orneval coulent sous des feuillages plus vieux que la plupart des royaumes. Les poissons sont vifs, et les sentinelles plus vives encore à vous demander ce que vous faites là.",  -- 1006
+        "Au fond des Mille pointes, l'eau est rare et jalousement gardée. Un poisson d'ici a mérité sa place.",  -- 1007
+        "Les lacs des Serres-Rocheuses dorment haut et froid entre les pics. Les gobelins les auraient déjà asséchés si la pêche n'y était pas si bonne.",  -- 1008
+        "La côte de Désolace n'est qu'ossements et ressac gris. Quelque chose, là-dessous, a pris goût aux deux.",  -- 1009
+        "À Féralas, tout est vert jusqu'au ras de l'eau. Les rivières y sont profondes, chaudes et bien vivantes.",  -- 1010
+        "Nul ne sait au juste où finit la terre et où commence l'eau dans le marécage d'Âprefange. Pêchez depuis la rive, et recomptez vos orteils ensuite.",  -- 1011
+        "Port Gentepression possède la seule eau digne de ce nom de tout Tanaris. Les gobelins vous vendront le droit d'y pêcher, deux fois si vous les laissez faire.",  -- 1012
+        "Sous la baie lumineuse d'Azshara repose une cité engloutie. Les vieux pêcheurs disent que les plus gros vivent dans ce qui fut ses jardins.",  -- 1013
+        "Les mares de Gangrebois luisent, et pas dans le bon sens. Ce qui y nage encore est têtu au-delà du raisonnable.",  -- 1014
+        "Les sources chaudes et les lacs bordés de goudron d'Un'Goro ont gardé des choses que le reste du monde a oubliées. Certaines mordent.",  -- 1015
+        "Le lac Elune'ara, à Reflet-de-Lune, est calme comme un souffle retenu. Les druides demandent seulement que vous ne preniez pas plus que vous ne mangerez.",  -- 1016
+        "Silithus, c'est du sable, du vent et un bruit d'ailes. Si vous y avez trouvé de l'eau où pêcher, ne le dites à personne.",  -- 1017
+        "Les lacs de Berceau-de-l'Hiver gèlent sur les bords et fument au milieu. Les poissons y sont gras contre le froid, et valent bien la marche.",  -- 1018
+        "Dans les bassins d'Orgrimmar pêchent des péons qui n'ont rien de mieux à faire et de vieux grunts qui disent la même chose. Les uns comme les autres vous raconteront que le gros leur a échappé.",  -- 1019
+        "Un poisson des étangs des Pitons-du-Tonnerre a passé toute sa vie très haut au-dessus des plaines. Il a l'air de bien le prendre.",  -- 1020
+        "Darnassus veille sur ses eaux avec autant de soin que sur ses temples. Les poissons ont pris l'habitude d'être admirés.",  -- 1021
+        "Les lacs des montagnes d'Alterac sont de la neige fondue, et les ogres comme le Syndicat y pêchent quand personne ne regarde.",  -- 1022
+        "Les rivages d'Arathi ont vu passer plus d'armées que de pêcheurs. Les poissons ont depuis longtemps cessé de se soucier de la bannière qui flotte au-dessus de l'eau.",  -- 1023
+        "Les Terres ingrates ne sont que poussière d'un bout à l'autre. Ici, une touche est un petit miracle, alors traitez-la comme tel.",  -- 1024
+        "La côte des Terres foudroyées est rouge, décapée et silencieuse. Ce qui vit dans ce ressac a appris à s'accommoder de bien des choses.",  -- 1025
+        "Les lacs de Tirisfal reposent, immobiles, sous un ciel maladif. Les Réprouvés y pêchent par habitude. Les morts ne mangent pas beaucoup, mais ils se souviennent d'avoir aimé ça.",  -- 1026
+        "La longue côte de la forêt des Pins-Argentés n'est que brume et ombre de pins. La pêche y est bonne, et c'est bien la seule chose gaie qu'on dise de l'endroit.",  -- 1027
+        "Les rivières des Maleterres de l'Ouest coulent encore, mais pas propres. Ce que vous en tirez, regardez-le à deux fois.",  -- 1028
+        "Peu de gens pêchent dans les Maleterres de l'Est, et moins encore l'avouent. L'eau garde ce que la peste a laissé d'elle.",  -- 1029
+        "La rivière de Hautebrande et son long rivage sud ont nourri les deux camps de chaque querelle livrée pour eux.",  -- 1030
+        "Les Hinterlands gardent leurs lacs en hauteur, parmi les arbres, là où les nains Marteaux-hardis pêchent à dos de griffon quand ils pensent que personne ne les voit.",  -- 1031
+        "Les lacs de Dun Morogh sont cerclés de glace presque toute l'année. Un nain y perce un trou, s'assied avec une pinte et appelle ça une bonne journée, peu importe ce qui mord.",  -- 1032
+        "La gorge des Vents brûlants a de la lave là où d'autres terres ont des rivières. Apportez plutôt de quoi boire.",  -- 1033
+        "Les Steppes ardentes ne sont que cendres et braises. Si l'eau d'ici vous donne quoi que ce soit, ce sera chaud.",  -- 1034
+        "Tous les enfants d'Elwynn apprennent à pêcher au lac de Cristal ou au lac du Cairn. Le menu fretin s'y joue d'eux depuis des générations.",  -- 1035
+        "Le défilé de Deuillevent a peu d'eau et encore moins d'hospitalité. Ce qui se trouve dans les mares sous Karazhan, mieux vaut l'y laisser.",  -- 1036
+        "La rivière qui borde le bois de la Pénombre est noire à toute heure. L'obscurité ne semble pas gêner les poissons. Les pêcheurs, si.",  -- 1037
+        "Le Loch est la fierté du Loch Modan, retenu par le grand barrage de Formepierre. Les nains mesurent toute histoire de pêche à son aune, et c'est en général le Loch qui gagne.",  -- 1038
+        "Le lac Placide, dans les Carmines, est joli comme un tableau, et l'on y pêche depuis chaque ponton de Comté-du-Lac. Les habitants connaissent tous les bons coins et ne vous en indiqueront aucun.",  -- 1039
+        "De ses rivières de jungle à son cap sauvage au sud, Strangleronce possède les eaux les plus riches du continent. Les pêcheurs de Baie-du-Butin en font un tournoi, et presque tous trichent.",  -- 1040
+        "Le marais des Chagrins, c'est de l'eau verte sous des arbres verts. Les poissons ont un goût de vase, et les gens du coin les aiment ainsi.",  -- 1041
+        "Les champs de la marche de l'Ouest ont dépéri, mais pas sa côte. Ceux qui sont restés vivent de ce long rivage gris.",  -- 1042
+        "Les Paluns portent bien leur nom. Les quais de Port-Menethil sont l'endroit le plus sec pour y pêcher, et les crocilisques le savent.",  -- 1043
+        "Dans les canaux de Hurlevent pêchent des enfants, des retraités et au moins un membre de la noblesse déguisé. Personne ne demande ce qu'il y a d'autre dans les canaux.",  -- 1044
+        "La Caverne lugubre abrite le seul bassin tranquille de Forgefer. De vieux nains y pêchent des heures durant sans jamais dire un mot.",  -- 1045
+        "Les canaux de Fossoyeuse charrient un vert qui ne doit rien aux algues. Les Réprouvés qui y pêchent ne le font pas pour le dîner.",  -- 1046
+        "Le premier poisson que la plupart des pêcheurs remontent, et assez éclatant pour qu'ils s'en souviennent.",  -- 1047
+        "Luisant, vif et commun le long de toutes les côtes chaudes. Grillé, il vaut mieux que son nom ne le laisse croire.",  -- 1048
+        "Tout en gueule, et jamais plus heureux que dans une eau que vous ne boiriez pas.",  -- 1049
+        "Petit, plein de dents et sans peur. On raconte qu'un banc entier a un jour chassé un ours hors du Loch.",  -- 1050
+        "Un éclair de couleur sous le ressac. Quand il mord à la ligne, les marins y voient un gage de chance pour la traversée.",  -- 1051
+        "Un patient fouilleur de fond, aux moustaches dignes d'un ancien chez les nains.",  -- 1052
+        "Personne n'en mange deux fois. Les alchimistes achètent tout ce qu'ils peuvent en trouver.",  -- 1053
+        "Ses nageoires rougeoient comme des braises sous la cendre, et l'huile qu'on en tire brûle presque aussi bien.",  -- 1054
+        "Une armure digne d'un petit bouclier. La chair qu'elle protège vaut la peine qu'on se donne.",  -- 1055
+        "Quelque chose dans l'eau, près des cavernes des Lamentations, l'a changé. En manger pourrait bien vous changer aussi, pour un temps.",  -- 1056
+        "Les gens du fleuve disent qu'en faire un repas éclaircit l'esprit. C'est de remonter le courant que lui vient sa sagesse.",  -- 1057
+        "Plus d'âge, de taille et de sagesse que dans le reste de la famille, ce qui ne lui a pas évité votre hameçon.",  -- 1058
+        "Un rude adversaire venu des mers chaudes du sud, et un classique de toutes les ardoises de taverne, de Baie-du-Butin à Gadgetzan.",  -- 1059
+        "Son front brille comme du vrai mithril. Plus d'un mineur a voulu passer la bête à la fonderie.",  -- 1060
+        "Ses écailles, bouillies, donnent une huile qui rend la peau dure comme le roc. Sa préférence va à la nuit.",  -- 1061
+        "Un poli de cuirasse de parade, et presque le même poids.",  -- 1062
+        "Il ne s'approche des côtes qu'aux mois froids, et les cuisiniers qui le connaissent l'attendent toute l'année.",  -- 1063
+        "Sa saison, ce sont les jours longs. Sur la côte, on règle le calendrier sur son passage.",  -- 1064
+        "À tenir par le milieu, et une seule fois.",  -- 1065
+        "Un poisson de rivière des contrées sauvages, aux ouïes aussi rouges que les peintures de guerre d'un troll.",  -- 1066
+        "Il se nourrit une fois la nuit tombée. En soupe, il calme les nerfs des lanceurs de sorts.",  -- 1067
+        "Il se nourrit de jour, tout le contraire du lutjan nocturne ou presque, et partage pourtant les mêmes eaux.",  -- 1068
+        "Pas un poisson à proprement parler. Il n'est pas d'accord pour se faire prendre et vous le fera savoir.",  -- 1069
+        "Pâle comme la glace des rivières, venu des lacs froids et limpides du nord.",  -- 1070
+        "Il vous faudra les deux mains, et peut-être un ami.",  -- 1071
+        "%.1f lb",  -- 1072
+        "Nouveau dans votre journal de pêche : %s, %s.",  -- 1073
+        "Nouveau dans votre journal de pêche : %s.",  -- 1074
+        "Votre plus gros %s à ce jour : %s (avant : %s).",  -- 1075
+        "Appât %s",  -- 1076
+        "Pas d'appât",  -- 1077
+        "Pris %d",  -- 1078
+        "Échappés %d",  -- 1079
+        "Un curieux : +%d%%",  -- 1080
+        "Gardez votre leurre près du poisson",  -- 1081
+        "Prochaine prise +%d%%",  -- 1082
+        "Maintenez %s : le leurre court le long de la ligne",  -- 1083
+        "%d d'affilée",  -- 1084
+        "Un jeu pendant que le bouchon est à l'eau",  -- 1085
+        "se joue sur la barre d’incantation tant que votre ligne est à l’eau : maintenez une gâchette et votre leurre court le long de la ligne, relâchez et il dérive en arrière ; gardez-le près de l’ombre du poisson. Mieux vous jouez, plus le poids inventé de votre prochaine prise est lourd. Aucun bouton n’est pris, ni votre lancer ni votre prise ne sont touchés",  -- 1086
+        "%d pris, %d espèces, %d échappés",  -- 1087
+        "Le plus lourd : %s, %s",  -- 1088
+        "Poissons",  -- 1089
+        "Eaux",  -- 1090
+        "Rien de pris pour l'instant. Emportez une canne au bord de l'eau.",  -- 1091
+        "Pris : %d",  -- 1092
+        "Le plus lourd : %s, à %s",  -- 1093
+        "Première prise : %s",  -- 1094
+        "Pris ici : %d",  -- 1095
+        "Espèces trouvées ici : %d",  -- 1096
+        "ouvrir ou fermer votre journal de pêche: chaque espèce que vous avez prise, la plus lourde de chacune, et les eaux où vous avez pêché",  -- 1097
+        "Vol",  -- 1098
+        "atterrissage anticipé",  -- 1099
+        "atterrissage au prochain point de vol",  -- 1100
+        "destination inconnue",  -- 1101
+        "estimé d'après la distance",  -- 1102
+        "premier vol sur cette route : apprentissage de sa durée",  -- 1103
+        "atterrissage",  -- 1104
+        "%s : environ %s, estimé d'après la distance",  -- 1105
+        "%s : environ %s",  -- 1106
+        "%s : premier vol sur ce trajet, durée inconnue",  -- 1107
+        "En vol, destination inconnue",  -- 1108
+        "%s : durée du vol apprise, %s",  -- 1109
+        "Atterrissage anticipé : %s, environ %s",  -- 1110
+        "Atterrissage anticipé au prochain point de vol",  -- 1111
+        "vif et froid, la neige sous les pieds et le souffle suspendu dans l'air",  -- 1112
+        "un froid mordant, avec un vent des sommets qui trouve chaque faille de votre armure",  -- 1113
+        "chaud et humide, un air si épais qu'on pourrait le boire",  -- 1114
+        "une chaleur moite sous la canopée, et les insectes bruyants",  -- 1115
+        "chaud et sec, avec de la poussière dans le vent",  -- 1116
+        "un soleil brûlant et une terre craquelée ; buvez quand vous le pouvez",  -- 1117
+        "fumée et cendres sur un vent chaud",  -- 1118
+        "un air brûlé, et des escarbilles qui dérivent",  -- 1119
+        "gris et froid, une brume humide qui colle",  -- 1120
+        "un froid dans l'air et presque pas de lumière",  -- 1121
+        "doux et beau, avec une brise légère",  -- 1122
+        "un temps agréable, idéal pour voyager",  -- 1123
+        "frais et vert, les feuilles qui murmurent",  -- 1124
+        "une lumière douce entre les arbres, et l'air frais",  -- 1125
+        "lourd et humide, le sol mou sous les pieds",  -- 1126
+        "un air chaud et mouillé, et l'odeur du marais",  -- 1127
+        "%s à %s : %s",  -- 1128
+        "%d trajets aériens connus.",  -- 1129
+        "Vols : votre monture le long de la barre",  -- 1130
+        "un griffon, un coursier du vent ou une chauve-souris (celui que le maître de vol vous a donné) plane le long de la barre de vol vers votre point d’arrivée",  -- 1131
+        "Vols : le temps à l'arrivée",  -- 1132
+        "à l'atterrissage, la discussion dit comment est l'air là où vous arrivez, tel que l'endroit est d'habitude (chaud et humide à Strangleronce, neige sous les pieds à Dun Morogh), et le moment de la journée",  -- 1133
+        "lister les trajets aériens dont la durée est connue",  -- 1134
+        "À terre ! +%d",  -- 1135
+        "Heurté : la série s'arrête",  -- 1136
+        "%s battre des ailes  ·  évitez les cimes des arbres et les zeppelins",  -- 1137
+        "%s prenez les cavaliers au filet pour de l'or de vol  ·  %s haute altitude",  -- 1138
+        "%d d'or de vol",  -- 1139
+        "%s battre des ailes",  -- 1140
+        "%s filet",  -- 1141
+        "%s haute altitude",  -- 1142
+        "%s : retour au jeu (%d d'or de vol)",  -- 1143
+        "%s : un jeu en chemin",  -- 1144
+        "Le jeu de vol est désactivé : /cchud flightgame on",  -- 1145
+        "Le jeu de vol se joue pendant un vol.",  -- 1146
+        "Pas en combat.",  -- 1147
+        "Jeu de vol : jouer / haute altitude",  -- 1148
+        "pendant un vol : lancer le jeu de vol, ou le mettre en haute altitude et l'en ramener",  -- 1149
+        "Vols cinématiques : la caméra tourne autour de vous",  -- 1150
+        "pendant le film, la caméra tourne lentement autour de vous et de votre monture, un tour complet en une minute et demie environ, et revient derrière vous avant l'atterrissage. Désactivé : un plan fixe",  -- 1151
+        "Hors ligne",  -- 1152
+        "Mort",  -- 1153
+        "Désactivé",  -- 1154
+        "En spécialisation soins",  -- 1155
+        "Toujours",  -- 1156
+        "Trop loin",  -- 1157
+        "Groupe et raid du soigneur",  -- 1158
+        "en groupe: votre groupe à côté de votre personnage, chacun avec le bouton qui le cible; en raid: des cadres plus fins. Chacun ne montre que les soins dont il a besoin, un effet néfaste que vous pouvez dissiper et s'il est à portée",  -- 1159
+        "%d%% de chances de vendre",  -- 1160
+        "Ça part à coup sûr (%d%%)",  -- 1161
+        "Ça se vend tout seul (%d%%)",  -- 1162
+        "Je pense que ça se vendra (%d%%)",  -- 1163
+        "Devrait trouver preneur (%d%%)",  -- 1164
+        "Une chance sur deux (%d%%)",  -- 1165
+        "Ça peut aller dans les deux sens (%d%%)",  -- 1166
+        "Un peu un pari (%d%%)",  -- 1167
+        "Pourrait traîner un moment (%d%%)",  -- 1168
+        "Je ne compterais pas dessus (%d%%)",  -- 1169
+        "Mal parti, l'ami (%d%%)",  -- 1170
+        "+%s de plus qu'un marchand",  -- 1171
+        "pas encore de prix connu",  -- 1172
+        "un marchand paie autant",  -- 1173
+        "Le Courtier",  -- 1174
+        "Marché",  -- 1175
+        "chaque pièce comptée, l'ami",  -- 1176
+        "Rien dans vos sacs ne peut être vendu ici.",  -- 1177
+        "Aucun prix ces 7 derniers jours.",  -- 1178
+        "Un jour de prix pour l'instant : une bougie s'ajoute chaque jour où vous passez à l'hôtel des ventes.",  -- 1179
+        "7 jours, une bougie par jour : vert clôturé plus haut, rouge plus bas",  -- 1180
+        "30 jours, le plus bas du jour : vert en hausse, rouge en baisse",  -- 1181
+        "Pas encore d'historique des prix : lisez l'hôtel des ventes quelques jours.",  -- 1182
+        "Un seul jour de prix pour l'instant: la ligne s'allonge chaque jour où vous passez à l'hôtel des ventes.",  -- 1183
+        "Je demande %s l'unité, %s pour les %d que tu lâches ; %d restent avec toi",  -- 1184
+        "Demande %s pièce, %s pour les %d",  -- 1185
+        "Plus bas",  -- 1186
+        "lu %s",  -- 1187
+        "Habituel",  -- 1188
+        "7 jours : de %s à %s",  -- 1189
+        "En vente : %d enchères, %d objets",  -- 1190
+        "%s pièce, %s pour les %d",  -- 1191
+        "Vous avez mis %d en vente ici, %d enchères vendues",  -- 1192
+        "Aucun prix connu : lisez d'abord l'hôtel des ventes.",  -- 1193
+        "Rien dans vos sacs à vendre ici.",  -- 1194
+        "Rien ne se vend mieux ici que chez un marchand aujourd'hui ; %d peut-être, avec de la patience.",  -- 1195
+        "Le meilleur d'abord : %d se vendent mieux ici que chez un marchand, %d de plus avec de la patience.",  -- 1196
+        "Sacs vides, l'ami. Apporte-moi de quoi vendre.",  -- 1197
+        "Rien ici ne bat un marchand aujourd'hui. %d peut-être, avec un peu de patience.",  -- 1198
+        "Pas de profit sûr dans ces sacs, l'ami. %d pourraient payer si tu attends.",  -- 1199
+        "Le meilleur en haut : %d ici battent tout marchand, %d de plus pour les patients.",  -- 1200
+        "%d rapportent plus ici qu'au marchand, le meilleur d'abord. %d de plus si tu attends.",  -- 1201
+        "Le haut de la pile paie le mieux : %d ventes sûres, %d de plus si tu peux attendre.",  -- 1202
+        "Pas encore de prix : %s lit l'hôtel des ventes.",  -- 1203
+        "Prix lus à l'instant : %d.",  -- 1204
+        "%d prix, lus %s.",  -- 1205
+        "%d prix, lus %s. %s les relit.",  -- 1206
+        "Pas encore lu le tableau. %s et je te ramène tous les prix.",  -- 1207
+        "Pas encore de prix, l'ami. %s lit tout le tableau.",  -- 1208
+        "Prix tout frais du tableau, l'ami : %d.",  -- 1209
+        "Je viens de lire le tableau : %d prix, encore chauds.",  -- 1210
+        "%d prix, lus %s. Ça ira, l'ami.",  -- 1211
+        "Dernier coup d'œil au tableau : %s, %d prix.",  -- 1212
+        "Prix relevés %s, rassis comme du vieux pain. %s relit le tableau.",  -- 1213
+        "%d prix, mais lus %s. %s et je regarde à nouveau.",  -- 1214
+        "Ce que vous gardez est aussi affiché. %s le masque.",  -- 1215
+        "Mis de côté : %d, pour vos métiers, votre équipement et vos marques. %s les affiche.",  -- 1216
+        "Ce que tu gardes est aussi sur la liste. %s le range.",  -- 1217
+        "J'affiche aussi ce que tu gardes. %s le cache à nouveau.",  -- 1218
+        "%d mis de côté : matériaux de métier, équipement à porter, ce que tu as marqué. %s les montre.",  -- 1219
+        "%d gardés pour tes métiers, à porter ou marqués par toi. %s si tu les veux.",  -- 1220
+        "pièce",  -- 1221
+        "aucune donnée",  -- 1222
+        "Vente rapide",  -- 1223
+        "Patient",  -- 1224
+        "Lire tous les prix",  -- 1225
+        "Masquer le gardé",  -- 1226
+        "Montrer le gardé",  -- 1227
+        "Ligne",  -- 1228
+        "Bougies",  -- 1229
+        "Poster",  -- 1230
+        "%d sur %d",  -- 1231
+        "Poster %d sur %d à %s l'unité",  -- 1232
+        "Poster %d pour %s",  -- 1233
+        "Mettre les %d en vente pour %s",  -- 1234
+        "Ce client ne permet pas de poster à l'hôtel des ventes depuis ici.",  -- 1235
+        "%d posté pour %s.",  -- 1236
+        "Marché à l'hôtel des ventes : ouvrir / fermer",  -- 1237
+        "Salut du commissaire-priseur au Marché",  -- 1238
+        "un commissaire-priseur gobelin dit une courte phrase, tirée des sons du jeu, à l'ouverture du Marché ; désactivé : il s'ouvre en silence",  -- 1239
+        "Marché : montrer ce que vous gardez",  -- 1240
+        "le Marché liste aussi ce que vous gardez : ce dont vos métiers apprennent encore ou qu'ils transforment en quelque chose de plus cher, et ce que vous avez marqué à garder ; désactivé : seulement ce que vous vendriez",  -- 1241
+        "Marché : graphique des prix en bougies",  -- 1242
+        "le graphique des prix du Marché est une bougie par jour sur les 7 derniers jours (où le prix a ouvert, son plus haut et son plus bas, et où il a clôturé : vert s'il a clôturé plus haut, rouge plus bas) ; désactivé : une ligne du prix le plus bas de chaque jour sur 30 jours",  -- 1243
+        "ouvrir ou fermer le Marché (un onglet de l'hôtel des ventes)",  -- 1244
+        "quel hôtel des ventes a ce client (pour le dépannage)",  -- 1245
+        "Ouvrez la fenêtre d'un métier et je jetterai un œil à vos recettes.",  -- 1246
+        "C'est le plafond, %d. Un maître a le rang suivant pour vous.",  -- 1247
+        "Plus rien à apprendre à %d. Allez voir un maître pour le rang suivant.",  -- 1248
+        "Vos recettes ne vous suffisent plus. Allez voir un maître : %s vous attend à %d.",  -- 1249
+        "Encore %d jusqu'à %d, et ce que vous savez ne vous y mènera pas. Un maître a %s pour vous à %d.",  -- 1250
+        "Vos recettes ne vous suffisent plus. Allez voir un maître : %s vous attend.",  -- 1251
+        "Vos recettes cessent de vous apprendre quoi que ce soit à %d de %d. Demandez %s à un maître.",  -- 1252
+        "Vos recettes s'épuisent à %d de %d. Un maître aura quelque chose de nouveau.",  -- 1253
+        "Ce que vous savez ne vous portera pas sur les %d derniers. Il est temps de voir un maître.",  -- 1254
+        "%s ne vous apprendra plus grand-chose, mais c'est ce que vous avez de mieux. Encore %d jusqu'à %d.",  -- 1255
+        "Ça avance lentement à partir d'ici : %s donne un point de temps en temps. Encore %d.",  -- 1256
+        "Il vous faudra d'abord %s, %s. Les guides commencent cette étape avec.",  -- 1257
+        "Apprenez %s, %s, et on commence : encore %d jusqu'à %d.",  -- 1258
+        "Encore %d jusqu'à %d. Les guides vous envoient chercher %s jusqu'à %d.",  -- 1259
+        "Ici, c'est la récolte qui vous apprend : %s jusqu'à %d.",  -- 1260
+        "Encore %d jusqu'à %d. Commencez par %s, ou %s si vous préférez : %s.",  -- 1261
+        "D'abord %s, comme le disent les guides. %s fait aussi l'affaire : %s.",  -- 1262
+        "Encore %d jusqu'à %d. Commencez par %s.",  -- 1263
+        "%s est votre meilleur maître à présent. %d points jusqu'à %d.",  -- 1264
+        "Les mains sûres. D'abord %s, et encore %d.",  -- 1265
+        "auprès d'un maître",  -- 1266
+        "auprès d'un marchand",  -- 1267
+        "en butin",  -- 1268
+        "par une quête",  -- 1269
+        "composants moins chers",  -- 1270
+        "composants vendus par un marchand",  -- 1271
+        "composants que vous récoltez vous-même",  -- 1272
+        "se vend bien",  -- 1273
+        "quelque chose que vous utiliserez",  -- 1274
+        "moins de fabrications",  -- 1275
+        "une recette à trouver ou acheter",  -- 1276
+        "d'autres composants",  -- 1277
+        "le premier choix des guides",  -- 1278
+        "Ouvrez la fenêtre d'un métier pour un plan de progression.",  -- 1279
+        "Au plafond, %d. Un maître a le rang suivant.",  -- 1280
+        "Encore %d jusqu'à %d ; vos recettes s'arrêtent avant. Un maître a %s à %d.",  -- 1281
+        "Encore %d jusqu'à %d ; vos recettes s'arrêtent avant. Un maître a %s.",  -- 1282
+        "Vos recettes s'arrêtent à %d de %d. Un maître en a d'autres.",  -- 1283
+        "Encore %d jusqu'à %d. Le mieux maintenant : %s, vert (un point de temps en temps).",  -- 1284
+        "Encore %d jusqu'à %d. Apprenez d'abord %s, %s.",  -- 1285
+        "Encore %d jusqu'à %d. Récoltez %s jusqu'à %d.",  -- 1286
+        "Encore %d jusqu'à %d. D'abord : %s, ou %s (%s).",  -- 1287
+        "Encore %d jusqu'à %d. D'abord : %s.",  -- 1288
+        "À récolter ou acheter",  -- 1289
+        "%d fabrications : %s",  -- 1290
+        "Apprenez-la %s, à partir de %d.",  -- 1291
+        "Apprenez-la %s.",  -- 1292
+        "%s : %d dans vos sacs, %d à la banque, %d par fabrication",  -- 1293
+        "Les guides montent cette étape en récoltant %s.",  -- 1294
+        "%s : vous en avez %d, le plan en utilise %d",  -- 1295
+        "pour %s",  -- 1296
+        "Moins cher à acheter qu'à fabriquer avec %s",  -- 1297
+        "Fabriqué avec %s",  -- 1298
+        "Le Mentor : ce que votre banque permet de fabriquer",  -- 1299
+        "Ce que votre banque permet de fabriquer",  -- 1300
+        "Rien de plus à fabriquer avec ce qu'il y a dans votre banque.",  -- 1301
+        "%d à fabriquer en comptant votre banque, dont %d seulement grâce à elle.",  -- 1302
+        "Le Mentor : %s %d > %d",  -- 1303
+        "Le Mentor",  -- 1304
+        "Plan de progression",  -- 1305
+        "ou",  -- 1306
+        "Récolter %s",  -- 1307
+        "à apprendre",  -- 1308
+        "moins cher à acheter",  -- 1309
+        "Masquer",  -- 1310
+        "Le plan",  -- 1311
+        "Farmer ceci",  -- 1312
+        "Tout farmer",  -- 1313
+        "Avec la banque",  -- 1314
+        "Utiliser le plan",  -- 1315
+        "deux fois pour masquer",  -- 1316
+        "Rien à essayer ici.",  -- 1317
+        "%d ajouté(s) à la liste à farmer.",  -- 1318
+        "Rien ne manque : vous avez ce qu'il faut.",  -- 1319
+        "Ouvrez la fenêtre d'un métier pour faire un plan.",  -- 1320
+        "Le Mentor (plan de progression) : afficher / masquer",  -- 1321
+        "affiche le plan de progression de la dernière fenêtre de métier ouverte, avec les boutons de la manette dessus",  -- 1322
+        "À gauche des quêtes",  -- 1323
+        "À droite des quêtes",  -- 1324
+        "Sous les quêtes",  -- 1325
+        "La liste à farmer est pleine.",  -- 1326
+        "Liste à farmer : %s, %d voulu(s).",  -- 1327
+        "À farmer",  -- 1328
+        "%d de plus",  -- 1329
+        "Rien à farmer pour l'instant.",  -- 1330
+        "Une pile de plus",  -- 1331
+        "Retirer",  -- 1332
+        "Vider",  -- 1333
+        "Terminé",  -- 1334
+        "Tout retirer de la liste à farmer ?",  -- 1335
+        "Liste à farmer : choisir / terminé",  -- 1336
+        "Liste à farmer : ajouter l'objet pointé",  -- 1337
+        "Ce n'est pas sur la liste à farmer.",  -- 1338
+        "La liste à farmer est vide.",  -- 1339
+        "Liste à farmer : où elle se place",  -- 1340
+        "la liste à farmer à gauche de la liste de quêtes, à sa droite ou sous ses quêtes",  -- 1341
+        "la liste à farmer à côté de la liste de quêtes : choisir avec la manette ; add <objet> [combien], remove <objet>, clear, ou left / right / bottom pour sa place",  -- 1342
+        "Pourcentage de menace",  -- 1343
+        "votre part de la menace en chiffre à côté de l'icône de menace, sur le cadre de la cible et les barres de nom",  -- 1344
+        "Nombre de santé",  -- 1345
+        "la santé restante, abrégée (12.3k), sur la barre (pas sur les barres de nom compactes : le pourcentage y suffit)",  -- 1346
+        "Vos affaiblissements",  -- 1347
+        "vos affaiblissements sur l'unité, au-dessus de son nom, avec leur durée",  -- 1348
+        "Affaiblissements de tous",  -- 1349
+        "les affaiblissements que le jeu signale pour les barres de nom de tous, pas seulement les vôtres",  -- 1350
+        "Bonus de l'ennemi",  -- 1351
+        "les améliorations d'un ennemi à côté de ses affaiblissements : celles qui comptent (importantes, enragé, ou que vous pouvez dissiper ou voler), ou toutes si Seulement les effets qui comptent est désactivé",  -- 1352
+        "Icône de contrôle des foules",  -- 1353
+        "une grande icône avec sa durée quand l'unité est étourdie, immobilisée, effrayée...",  -- 1354
+        "Lueur d'aggro",  -- 1355
+        "une icône de bouclier et une lueur derrière le nom : rouge tant qu'il vous attaque, rouge et jaune quand vous êtes sur le point de l'attirer, jaune et bleu quand vous le perdez, bleu quand il n'est pas sur vous",  -- 1356
+        "Marqueur de quête",  -- 1357
+        "un repère doré sur les unités dont vos quêtes ont encore besoin",  -- 1358
+        "Animations des barres de nom",  -- 1359
+        "les barres apparaissent en fondu, la santé basse respire, le contrôle des foules scintille",  -- 1360
+        "Petite",  -- 1361
+        "Normale",  -- 1362
+        "Grande",  -- 1363
+        "Nom complet",  -- 1364
+        "Nom court",  -- 1365
+        "Sans nom",  -- 1366
+        "Complet",  -- 1367
+        "Minimal mini",  -- 1368
+        "Taille des barres d'info",  -- 1369
+        "la taille des barres sur les barres d'info : petites et fines, normales ou grandes (plus larges et plus hautes)",  -- 1370
+        "Noms sur les barres d'info",  -- 1371
+        "le nom sur une barre d'info avec barre de vie : en entier, raccourci ou omis (le cadre de la cible le donne en entier ; le niveau et l'icône de classe restent). Une barre d'info sans barre, celle d'un PNJ amical, garde toujours son nom",  -- 1372
+        "Style des barres d'info",  -- 1373
+        "les interrupteurs des barres d'info en une fois. Complet : tout. Minimal : pas de barre de ressource, de guilde ni de titre, noms courts. Minimal mini : petites barres avec la vie, vos affaiblissements et les améliorations qui comptent, niveau et classe, sans nom (le cadre de la cible l'a). La menace, les contrôles et les incantations voyantes restent toujours",  -- 1374
+        "Titres des joueurs",  -- 1375
+        "affiche le titre d'un joueur avec son nom",  -- 1376
+        "Guildes et métiers des PNJ",  -- 1377
+        "une ligne sous le nom : la guilde du joueur, ou ce que fait le PNJ",  -- 1378
+        "Barres des amis en combat",  -- 1379
+        "les plaques de nom amicales affichent santé, ressource et incantations tant que l'unité est en combat",  -- 1380
+        "Barres d'info amicales du jeu",  -- 1381
+        "laisser les barres amicales (votre groupe, les autres joueurs, les PNJ amicaux) à l'apparence du jeu ; les nôtres seulement sur les ennemis",  -- 1382
+        "Barres de ressource",  -- 1383
+        "une fine barre de mana, de rage ou d'énergie sous la barre de santé",  -- 1384
+        "Cible de l'incantation",  -- 1385
+        "qui est visé par une incantation, à côté du nom du sort",  -- 1386
+        "Pourcentage de santé",  -- 1387
+        "le pourcentage de santé sur la barre",  -- 1388
+        "Nom sur la barre de votre cible",  -- 1389
+        "désactivé : la barre de votre cible n'affiche ni nom ni niveau (le cadre de la cible les montre)",  -- 1390
+        "Niveaux sur les barres d'info",  -- 1391
+        "le niveau devant le nom d'un ennemi, coloré selon la difficulté",  -- 1392
+        "Barres de nom compactes",  -- 1393
+        "barres de nom environ moitié moins larges",  -- 1394
+        "Incantations ennemies marquées",  -- 1395
+        "l'incantation d'un ennemi clignote, gonfle et pulse de plus en plus vite jusqu'à son terme, pour pouvoir être interrompue à temps",  -- 1396
+        "Icônes de classe sur les barres de nom",  -- 1397
+        "l'icône de classe d'un joueur devant son nom, ami ou ennemi",  -- 1398
+        "Ce que font les PNJ, en icônes",  -- 1399
+        "une icône au-dessus des PNJ amicaux qui proposent quelque chose : un sac pour les marchands, une enclume pour les forgerons qui réparent, un livre pour les maîtres... (les icônes du jeu ; elles restent visibles même quand la barre attend d'être pointée)",  -- 1400
+        "PNJ amicaux seulement quand pointés",  -- 1401
+        "les barres des PNJ amicaux (marchands, donneurs de quêtes, habitants) ne s'affichent que lorsque vous les pointez, comme leur infobulle",  -- 1402
+        "Noms sur les objets avec lesquels vous pouvez interagir",  -- 1403
+        "un nom au-dessus des minerais, coffres, plaques et autres tant que vous leur faites face (désactivé : ils restent sans nom, l'invite du jeu dit déjà ce qu'ils sont)",  -- 1404
+        "Mini-plaques",  -- 1405
+        "les serviteurs, bestioles et ennemis gris qui ne donnent pas d'expérience ont une petite barre: une barre fine avec vos affaiblissements dessus et sans nom (une bestiole, sans barre, garde son nom; l'option du jeu décide s'ils ont une barre)",  -- 1406
+        "Barres de nom du groupe en donjon: noms seuls",  -- 1407
+        "dans un donjon ou un raid, le jeu dessine lui-même les barres de nom des joueurs alliés et les addons ne peuvent pas les modifier: les options propres au jeu y sont réglées pour les afficher comme des noms à la couleur de la classe, sans barres, comme les nôtres, et les barres du jeu reviennent pendant un combat (si les barres des alliés en combat sont activées); tout est remis en place à la sortie",  -- 1408
+        "Barres de nom du groupe en donjon: masquées",  -- 1409
+        "dans un donjon ou un raid, désactiver complètement les barres de nom du jeu pour les joueurs alliés (et les remettre comme vous les aviez à la sortie)",  -- 1410
+        "affiche ce que le jeu donne pour le nom de votre cible (pour le dépannage)",  -- 1411
+        "lister les barres d'info à l'écran et si elles portent notre apparence (pour le dépannage)",  -- 1412
+        "Bon, voyons.",  -- 1413
+        "Och, quel fatras.",  -- 1414
+        "Voyons, voyons...",  -- 1415
+        "Elune, donne-moi de la patience.",  -- 1416
+        "Par les naaru, quel fouillis.",  -- 1417
+        "Fichu sac.",  -- 1418
+        "Sac bien rangé, sac léger.",  -- 1419
+        "Bah. Trop de bric-à-brac.",  -- 1420
+        "Du poids mort, tout ça.",  -- 1421
+        "Patience. La Terre-Mère pourvoit.",  -- 1422
+        "Hé, qu'est-ce qu'on a là, mon ?",  -- 1423
+        "Quel désordre. Indigne de moi.",  -- 1424
+        "Le temps, c'est de l'argent. Comptons.",  -- 1425
+        "Ouais, ça fera l'affaire.",  -- 1426
+        "Elune soit remerciée.",  -- 1427
+        "La Lumière pourvoit.",  -- 1428
+        "Hrm. Ça ira.",  -- 1429
+        "Hm. Assez pour se battre.",  -- 1430
+        "Je voyage léger. Bien.",  -- 1431
+        "Acceptable. De justesse.",  -- 1432
+        "Plus une place de libre. La camelote rapporterait %s : la vendre fait de la place.",  -- 1433
+        "Plus une place de libre. Ce dont je n'ai pas besoin en route peut attendre à la banque.",  -- 1434
+        "Camelote : %d, %s ici. X vend celle que j'ai choisie ; Vente futée prend tout.",  -- 1435
+        "%d d'entre eux vont à la banque : elle en garde déjà, ou je les ai marqués. Déposer les range.",  -- 1436
+        "Plus que %d places. La camelote rapporterait %s chez n'importe quel marchand.",  -- 1437
+        "Plus que %d places. Il est temps de vendre ou de déposer quelques affaires.",  -- 1438
+        "Nouveau depuis mon dernier coup d'œil : %d. Le point doré marque chacun.",  -- 1439
+        "Bon à vendre : %d. Le filtre Vendre les rassemble, et chaque info-bulle dit où ça rapporte le plus.",  -- 1440
+        "Camelote : %d, %s. Le prochain marchand peut la prendre.",  -- 1441
+        "Juste l'essentiel. Rien qui vaille la peine d'être vendu.",  -- 1442
+        "Tout est en ordre, et %d places libres.",  -- 1443
+        "Votre équipement est réparé : %s.",  -- 1444
+        "Je peux réparer votre équipement pour %s ; une pièce cassée ne donne ni armure ni caractéristiques.",  -- 1445
+        "Vos sacs sont pleins. Je prends %d objets pour %s : Vente futée, et vous avez de nouveau de la place.",  -- 1446
+        "Je vous donne %s pour %d objets : la camelote, et ce que l'hôtel des ventes ne paierait pas mieux. Vente futée, et c'est fait.",  -- 1447
+        "Gardez les %d que l'hôtel des ventes réclame : il paie %s de plus que moi.",  -- 1448
+        "Vos sacs sont pleins. Vendez-moi quelque chose avant d'acheter.",  -- 1449
+        "Rien dans vos sacs que je paierais bien. Jetez un œil à mes marchandises.",  -- 1450
+        "%d de vos objets ont leur place ici : j'en garde déjà, ou vous les avez marqués. Déposer les range.",  -- 1451
+        "Je garde davantage de %d objets que vous portez. Retirer remplit vos sacs avant le départ.",  -- 1452
+        "Vos sacs sont presque pleins. Laissez-moi ce dont vous n'aurez pas besoin en route.",  -- 1453
+        "Tout est en sécurité chez moi, et vos sacs ont %d places libres.",  -- 1454
+        "Rien pour vous aujourd'hui. J'ai vérifié deux fois.",  -- 1455
+        "Lettres pour vous : %d, rien de joint. Lisez-les quand vous voulez.",  -- 1456
+        "Lettres pour vous : %d. Dedans : %s.",  -- 1457
+        "Tout prendre les vide d'un coup.",  -- 1458
+        "Contre remboursement : %d. Celles-là, vous les ouvrez et payez vous-même.",  -- 1459
+        "Vos sacs sont pleins : les objets attendent dans leurs lettres.",  -- 1460
+        "Où allons-nous ? Montrez un endroit et je vous dirai combien de temps dure le trajet.",  -- 1461
+        "%s : environ %s d'après la carte. Vous n'avez pas encore fait ce trajet.",  -- 1462
+        "%s : environ %s, d'après votre dernier vol là-bas.",  -- 1463
+        "%s : je ne peux pas encore dire combien de temps. Faites-le une fois et je saurai.",  -- 1464
+        "%d se sont échappés. Cette eau demande plus de compétence que la mienne : un appât aide, une meilleure canne aussi.",  -- 1465
+        "Pas d'appât sur l'hameçon. Il ajoute à ma compétence, donc moins s'échappent.",  -- 1466
+        "L'appât est presque épuisé. Un autre sur l'hameçon garde ma compétence.",  -- 1467
+        "Poissons d'ici que je n'ai pas encore pris : %d. On continue de lancer.",  -- 1468
+        "J'ai pris tous les poissons de cette eau. Ailleurs, alors.",  -- 1469
+        "Rien de pris encore. Le premier poisson de chaque eau va ici.",  -- 1470
+        "Espèces prises : %d. Chaque eau en cache quelques autres : le panneau de pêche montre un ? pour chacune que je n'y ai pas prise.",  -- 1471
+        "Reposé près du feu : les %d prochains points d'expérience des victoires comptent double.",  -- 1472
+        "Aucun repos en réserve. Une nuit à l'auberge ou en ville, et les victoires donnent double expérience pendant un moment.",  -- 1473
+        "%d absorbés",  -- 1474
+        "Liste à droite",  -- 1475
+        "Un au centre",  -- 1476
+        "%d soins critiques",  -- 1477
+        "%d critiques",  -- 1478
+        "Jugement",  -- 1479
+        "Grands moments : où",  -- 1480
+        "un bloc juste au-dessus des annonces de temps de recharge à droite de votre personnage, le plus récent au plus près et les précédents montant au-dessus en s'effaçant, ou un seul à la fois au centre",  -- 1481
+        "montre l'aspect et la sensation d'un grand moment",  -- 1482
+        "collectée",  -- 1483
+        "collectée via un autre objet",  -- 1484
+        "pas encore collectée",  -- 1485
+        "Apparence",  -- 1486
+        "Choisissez un ensemble pour mettre ses pièces sur votre tenue. %s la garde ; rien n'est payé avant.",  -- 1487
+        "Examen de votre collection...",  -- 1488
+        "Votre tenue est revenue telle qu'elle était.",  -- 1489
+        "%s : %d pièces sur %d mises en place.",  -- 1490
+        "%d n'ont pas pu aller sur cette tenue.",  -- 1491
+        "Un ensemble dont vous avez des pièces",  -- 1492
+        "%d ensembles dont vous avez des pièces",  -- 1493
+        "vous ne pouvez pas le porter",  -- 1494
+        "manquant",  -- 1495
+        "Les %d pièces",  -- 1496
+        "%d pièces sur %d",  -- 1497
+        "Manque : %s",  -- 1498
+        "Pas encore d'ensemble. Les objets qui partagent un nom, comme Heaume en fer vert et Gantelets en fer vert, apparaissent ici dès que vous en avez un.",  -- 1499
+        "Annuler",  -- 1500
+        "Supprimer l'ensemble personnalisé %s ? Il ne pourra pas être récupéré.",  -- 1501
+        "Supprimer",  -- 1502
+        "Visez d'abord un ensemble personnalisé.",  -- 1503
+        "%s  Supprimer l'ensemble personnalisé",  -- 1504
     },
     itIT = {
         "errore:",  -- 1
@@ -7004,529 +7012,531 @@ local TRANSLATIONS = {
         "La bussola deve sapere dove sei, e qui il gioco non lo dice.",  -- 977
         "Bussola delle missioni: posizione",  -- 978
         "in cima allo schermo, oppure in basso al posto della barra dell'esperienza (la barra passa allora in alto)",  -- 979
-        "alcuni segni sulla bussola delle missioni, intorno a te, per venti secondi",  -- 980
-        "Modalità pesca: disattivata.",  -- 981
-        "Pesca: %s per lanciare",  -- 982
-        "Niente esca: %s due volte per usare %s",  -- 983
-        "%s per riporre la canna",  -- 984
-        "Modalità pesca: %s per lanciare la lenza, e di nuovo per ferrare il pesce quando il galleggiante si muove.",  -- 985
-        "%s per ferrare, %s per rilanciare",  -- 986
-        "La modalità pesca richiede una canna da pesca tra le mani.",  -- 987
-        "Non conosci Pesca.",  -- 988
-        "Modalità pesca: un pulsante lancia e aggancia",  -- 989
-        "Pulsante di pesca: %s",  -- 990
-        "Rilancia con una pressione",  -- 991
-        "finché il galleggiante è in acqua, il tuo pulsante di pesca aggancia il pesce e A rilancia con una pressione; disattivato: A è tuo",  -- 992
-        "Esca con doppia pressione",  -- 993
-        "premi due volte rapidamente il pulsante di pesca: la seconda pressione mette la migliore esca delle tue borse sulla canna, quando la canna non ne ha",  -- 994
-        "Barre del controller nascoste durante la pesca",  -- 995
-        "con una canna da pesca in mano le barre del controller sono nascoste, per vedere bene l'acqua; l'avviso di pesca mostra il tasto per lanciare. Tornano appena inizia un combattimento o la canna viene riposta",  -- 996
-        "pesca con un pulsante disattivata per ora, o di nuovo attiva (con una canna in mano si attiva da sola)",  -- 997
-        "il pulsante che pesca: all'inizio il tuo pulsante di interazione (Quadrato o X), o qualsiasi altro, per esempio un grilletto (rt)",  -- 998
-        "La costa di Durotar è roccia rossa e bassi fondali tiepidi. I troll delle Isole dell'Eco dicono che gli sgombri passano più fitti quando la marea porta l'odore dei fuochi di cucina delle isole.",  -- 999
-        "I laghi di Mulgore sono piccoli, limpidi e pazienti. I tauren ci pescano come fanno tutto il resto: con calma, e ringraziando.",  -- 1000
-        "Ogni oasi delle Savane è un luogo d'incontro. Qualunque cosa ci beva di giorno, di notte lì sotto nuota qualcos'altro.",  -- 1001
-        "Le pozze di Teldrassil stanno all'ombra di un albero solo. I pescatori elfi della notte giurano che i pesci di lì non hanno mai visto il sole e non ne sentono la mancanza.",  -- 1002
-        "L'acqua di Rivafosca è grigia, fredda e piena di relitti. Metà di ciò che abbocca al largo di Auberdine ha messo su casa nel carico perduto di qualcuno.",  -- 1003
-        "I fiumi di Valtetra scorrono sotto foglie più vecchie di gran parte dei regni. I pesci sono svelti, e le Sentinelle ancora più svelte a chiederti che cosa ci fai lì.",  -- 1004
-        "Giù tra le Mille Guglie l'acqua è poca e custodita gelosamente. Un pesce di qui il suo posto se l'è guadagnato.",  -- 1005
-        "I laghi delle Vette degli Artigli stanno in alto, gelidi, tra le cime. I goblin li avrebbero già prosciugati se non ci si pescasse così bene.",  -- 1006
-        "La costa di Desolanda è ossa e risacca grigia. Laggiù qualcosa ha un debole per entrambe.",  -- 1007
-        "Feralas è verde fino al pelo dell'acqua. I suoi fiumi sono profondi, caldi e vivi, parecchio vivi.",  -- 1008
-        "Nessuno sa bene dove finisca la terra e cominci l'acqua ad Acquemorte. Pesca dalla riva, e poi contati le dita dei piedi.",  -- 1009
-        "Steamwheedle Port ha l'unica acqua degna di questo nome in tutta Tanaris. I goblin ti venderanno il diritto di pescarci, anche due volte se li lasci fare.",  -- 1010
-        "Sotto la baia luminosa di Azshara giace una città sommersa. I vecchi pescatori dicono che i pesci grossi vivono in quelli che un tempo erano i suoi giardini.",  -- 1011
-        "Le pozze di Vilbosco brillano, e non in senso buono. Quello che ci nuota ancora è testardo oltre ogni ragionevolezza.",  -- 1012
-        "Le sorgenti calde e i laghi orlati di catrame del Cratere di Un'Goro hanno conservato cose che il resto del mondo ha dimenticato. Alcune mordono.",  -- 1013
-        "Il Lago Elune'ara, a Radaluna, è calmo come un respiro trattenuto. I druidi chiedono solo che tu non prenda più di quanto mangerai.",  -- 1014
-        "Silitus è sabbia, vento e rumore d'ali. Se qui hai trovato dell'acqua in cui pescare, non dirlo a nessuno.",  -- 1015
-        "I laghi di Fontefredda gelano ai bordi e fumano al centro. I pesci lì sono grassi per il freddo e valgono la camminata.",  -- 1016
-        "Nelle pozze di Orgrimmar pescano i peoni che non hanno di meglio da fare e i vecchi soldati che dicono lo stesso. Gli uni e gli altri ti raccontano che quello grosso è scappato.",  -- 1017
-        "Un pesce degli stagni di Picco del Tuono ha passato tutta la vita molto al di sopra delle pianure. Sembra averla presa con calma.",  -- 1018
-        "Darnassus cura le sue acque con la stessa attenzione dei suoi templi. I pesci si sono abituati a essere ammirati.",  -- 1019
-        "I laghi dei monti di Alterac sono neve sciolta, e gli ogre e il Sindacato ci pescano quando nessuno guarda.",  -- 1020
-        "Le rive degli Altopiani d'Arathi hanno visto più eserciti che pescatori. I pesci hanno smesso da un pezzo di badare a quale stendardo sventoli sopra l'acqua.",  -- 1021
-        "Le Maleterre sono polvere da un capo all'altro. Qui un pesce che abbocca è un piccolo miracolo: trattalo come tale.",  -- 1022
-        "La costa delle Terre Devastate è rossa, spazzata e silenziosa. Qualunque cosa viva in quella risacca ha imparato a convivere con parecchio.",  -- 1023
-        "I laghi delle Radure di Tirisfal giacciono immobili sotto un cielo malaticcio. I Reietti ci pescano per abitudine: i morti non mangiano granché, ma ricordano che gli piaceva.",  -- 1024
-        "La lunga costa della Selva Pinargento è tutta nebbia e ombra di pini. Si pesca bene, ed è l'unica cosa allegra che si senta dire di quel posto.",  -- 1025
-        "I fiumi delle Terre Infette Occidentali scorrono ancora, anche se non puliti. Quello che ne tiri fuori, guardalo due volte.",  -- 1026
-        "Pochi pescano nelle Terre Infette Orientali, e ancora meno lo ammettono. L'acqua conserva quello che il morbo ne ha lasciato.",  -- 1027
-        "Il fiume di Colletorto e la sua lunga riva meridionale hanno sfamato entrambe le parti di ogni lite scoppiata per averli.",  -- 1028
-        "Le Entroterre tengono i loro laghi in alto tra gli alberi, dove i nani Granmartello pescano in groppa ai grifoni quando credono che nessuno li veda.",  -- 1029
-        "I laghi di Dun Morogh sono orlati di ghiaccio per gran parte dell'anno. Un nano taglia un buco, si siede con una pinta e la chiama una buona giornata, qualunque cosa abbocchi.",  -- 1030
-        "La Gola Rovente ha la lava dove le altre terre hanno i fiumi. Portati piuttosto qualcosa da bere.",  -- 1031
-        "Le Steppe Ardenti sono cenere e braci. Se qui l'acqua ti dà qualcosa, sarà bollente.",  -- 1032
-        "Ogni bambino di Elwynn impara a pescare a Crystal Lake o a Stone Cairn Lake. I pesciolini di lì li fregano da generazioni.",  -- 1033
-        "Il Valico Ventomorto ha poca acqua e ancora meno accoglienza. Quello che sta nelle pozze sotto Karazhan è meglio lasciarlo dov'è.",  -- 1034
-        "Il fiume al margine di Boscovespro è nero a qualsiasi ora. Ai pesci il buio non sembra dare fastidio; ai pescatori sì.",  -- 1035
-        "Il Loch è l'orgoglio di Loch Modan, trattenuto dalla grande diga Stonewrought. I nani ci misurano ogni storia di pesca, e di solito vince il Loch.",  -- 1036
-        "Il Lago Placido, tra le Montagne Crestarossa, è bello come un dipinto e ci si pesca da ogni molo di Borgolago. La gente del paese conosce ogni punto buono e non te ne dirà nemmeno uno.",  -- 1037
-        "Dai fiumi della giungla al selvaggio capo meridionale, Rovotorto ha le acque più ricche del continente. I pescatori di Baia del Bottino ci organizzano un torneo, e barano quasi tutti.",  -- 1038
-        "La Palude del Dolore è acqua verde sotto alberi verdi. I pesci sanno di fango, e alla gente del posto piacciono così.",  -- 1039
-        "I campi delle Marche Occidentali sono andati in malora, la costa no. Chi è rimasto vive della lunga riva grigia.",  -- 1040
-        "Le Paludi Grigie hanno il nome che si meritano. I moli di Porto di Menethil sono il posto più asciutto da cui pescarci, e i crocolischi lo sanno.",  -- 1041
-        "Nei canali di Roccavento pescano bambini, pensionati e almeno un nobile in incognito. Nessuno chiede che cos'altro ci sia, nei canali.",  -- 1042
-        "La Forlorn Cavern custodisce l'unica pozza tranquilla di Forgiardente. I vecchi nani ci pescano per ore senza dire una parola.",  -- 1043
-        "I canali di Sepulcra scorrono di un verde che con le alghe non c'entra nulla. I Reietti che ci pescano non lo fanno per la cena.",  -- 1044
-        "Il primo pesce che quasi ogni pescatore tira a riva, e così vistoso che non se lo scorda.",  -- 1045
-        "Sguscia via, fila veloce e si trova lungo ogni costa calda. Alla griglia è meglio di quanto il nome lasci pensare.",  -- 1046
-        "Tutto bocca, e mai così felice come nell'acqua che tu non berresti.",  -- 1047
-        "Taglia piccola, denti tanti, paura nessuna. Si dice che un banco intero abbia cacciato un orso dal Loch.",  -- 1048
-        "Un lampo di colore sotto la risacca. Per i marinai, averne uno all'amo porta fortuna al viaggio.",  -- 1049
-        "Un paziente abitante del fondale, con i baffi di un anziano dei nani.",  -- 1050
-        "Nessuno ne mangia due volte. Gli alchimisti comprano tutto il pescato che trovano.",  -- 1051
-        "Le pinne brillano come braci sotto la cenere, e l'olio che se ne spreme brucia quasi altrettanto bene.",  -- 1052
-        "Una corazza da piccolo scudo. La carne che c'è dentro vale la fatica.",  -- 1053
-        "Qualcosa nell'acqua vicino alle Caverne dei Lamenti ha cambiato questo pesce. Mangiarne uno potrebbe cambiare anche te, per un po'.",  -- 1054
-        "La gente di fiume dice che mangiarne schiarisce la mente. È il nuotare controcorrente a dare la saggezza.",  -- 1055
-        "Più anni, più stazza e più saggezza del cugino, e al tuo amo ha abboccato lo stesso.",  -- 1056
-        "Un duro combattente dei caldi mari del sud, e un classico sul menu di ogni taverna da Baia del Bottino a Meccania.",  -- 1057
-        "La fronte luccica come vero mithril. Più di un minatore ha provato a fonderla.",  -- 1058
-        "Dalle scaglie, bollite, si ricava un olio che rende la pelle dura come roccia. Preferisce la notte.",  -- 1059
-        "Luccica come una corazza da parata, e pesa quasi altrettanto.",  -- 1060
-        "Si avvicina a riva solo nei mesi freddi, e i cuochi che se ne intendono aspettano tutto l'anno.",  -- 1061
-        "Passa quando le giornate sono lunghe. La gente di costa ci regola la stagione.",  -- 1062
-        "Si afferra a metà, e una volta sola.",  -- 1063
-        "Un pesce di fiume delle terre selvagge, con le branchie rosse come le pitture di guerra di un troll.",  -- 1064
-        "Mangia quando fa buio. Una zuppa fatta con questo pesce calma i nervi di chi lancia incantesimi.",  -- 1065
-        "Mangia di giorno, in quasi tutto il contrario del cugino notturno, eppure ne condivide le acque.",  -- 1066
-        "Non è proprio un pesce. Non è d'accordo con l'idea di finire all'amo, e te lo farà sapere.",  -- 1067
-        "Ha il pallore del ghiaccio di fiume e viene dai laghi freddi e limpidi del nord.",  -- 1068
-        "Ti serviranno tutte e due le mani, e magari un amico.",  -- 1069
-        "%.1f lb",  -- 1070
-        "Nuovo nel tuo diario di pesca: %s, %s.",  -- 1071
-        "Nuovo nel tuo diario di pesca: %s.",  -- 1072
-        "Il tuo %s più pesante finora: %s (prima %s).",  -- 1073
-        "Esca %s",  -- 1074
-        "Nessuna esca",  -- 1075
-        "Presi %d",  -- 1076
-        "Scappati %d",  -- 1077
-        "Un curioso: +%d%%",  -- 1078
-        "Tieni l'esca accanto al pesce",  -- 1079
-        "Prossima cattura +%d%%",  -- 1080
-        "Tieni premuto %s: l’esca corre lungo la lenza",  -- 1081
-        "%d di fila",  -- 1082
-        "Un gioco mentre il galleggiante è in acqua",  -- 1083
-        "si gioca sulla barra di lancio mentre la lenza è in acqua: tieni premuto un grilletto e l’esca corre lungo la lenza, rilascialo e torna indietro alla deriva; tienila accanto all’ombra del pesce. Meglio giochi, più pesa il peso inventato della prossima cattura. Non occupa alcun pulsante e non tocca mai il lancio né la cattura",  -- 1084
-        "%d presi, %d tipi, %d scappati",  -- 1085
-        "Il più pesante: %s, %s",  -- 1086
-        "Pesci",  -- 1087
-        "Acque",  -- 1088
-        "Ancora niente. Porta una canna all'acqua.",  -- 1089
-        "Presi: %d",  -- 1090
-        "Il più pesante: %s, a %s",  -- 1091
-        "Prima cattura: %s",  -- 1092
-        "Presi qui: %d",  -- 1093
-        "Tipi trovati qui: %d",  -- 1094
-        "apri o chiudi il tuo diario di pesca: ogni tipo che hai preso, il più pesante di ciascuno, e le acque in cui hai pescato",  -- 1095
-        "Volo",  -- 1096
-        "atterraggio anticipato",  -- 1097
-        "atterraggio al prossimo punto di volo",  -- 1098
-        "destinazione sconosciuta",  -- 1099
-        "stimato dalla distanza",  -- 1100
-        "primo volo su questa rotta: sto imparando la sua durata",  -- 1101
-        "atterraggio",  -- 1102
-        "%s: circa %s, stimato dalla distanza",  -- 1103
-        "%s: circa %s",  -- 1104
-        "%s: primo volo su questa rotta, durata sconosciuta",  -- 1105
-        "In volo, destinazione sconosciuta",  -- 1106
-        "%s: durata del volo imparata, %s",  -- 1107
-        "Atterraggio anticipato: %s, circa %s",  -- 1108
-        "Atterraggio anticipato al prossimo punto di volo",  -- 1109
-        "fresco e freddo, neve sotto i piedi e il fiato sospeso nell'aria",  -- 1110
-        "un freddo pungente, con un vento dalle vette che trova ogni fessura dell'armatura",  -- 1111
-        "caldo e umido, un'aria così densa da poterla bere",  -- 1112
-        "caldo appiccicoso sotto la volta degli alberi, e gli insetti rumorosi",  -- 1113
-        "caldo e secco, con polvere nel vento",  -- 1114
-        "sole cocente e terra screpolata; bevi quando puoi",  -- 1115
-        "fumo e cenere su un vento caldo",  -- 1116
-        "aria bruciata, con faville alla deriva",  -- 1117
-        "grigio e freddo, una nebbia umida che si appiccica",  -- 1118
-        "un freddo nell'aria e quasi niente luce",  -- 1119
-        "mite e sereno, con una brezza leggera",  -- 1120
-        "bel tempo, ottimo per viaggiare",  -- 1121
-        "fresco e verde, le foglie che sussurrano",  -- 1122
-        "luce tenue tra gli alberi, e l'aria fresca",  -- 1123
-        "afoso e umido, il terreno molle sotto i piedi",  -- 1124
-        "aria calda e umida, e l'odore della palude",  -- 1125
-        "%s a %s: %s",  -- 1126
-        "%d rotte di volo conosciute.",  -- 1127
-        "Voli: la tua cavalcatura lungo la barra",  -- 1128
-        "un grifone, un cavaliere del vento o un pipistrello (quello che ti ha dato il maestro di volo) plana lungo la barra del volo verso dove atterri",  -- 1129
-        "Voli: il tempo all'arrivo",  -- 1130
-        "all'atterraggio, la chat dice com'è l'aria dove arrivi, com'è di solito il luogo (caldo e umido a Rovotorto, neve sotto i piedi a Dun Morogh), e l'ora del giorno",  -- 1131
-        "elenca le rotte di volo di cui si conosce la durata",  -- 1132
-        "A terra! +%d",  -- 1133
-        "Urto: la serie finisce",  -- 1134
-        "%s battere le ali  ·  schiva le cime degli alberi e gli zeppelin",  -- 1135
-        "%s cattura i cavalieri con la rete per oro di volo  ·  %s alta quota",  -- 1136
-        "%d oro di volo",  -- 1137
-        "%s battere le ali",  -- 1138
-        "%s rete",  -- 1139
-        "%s alta quota",  -- 1140
-        "%s: torna al gioco (%d oro di volo)",  -- 1141
-        "%s: un gioco durante il viaggio",  -- 1142
-        "Il gioco di volo è disattivato: /cchud flightgame on",  -- 1143
-        "Il gioco di volo si gioca durante un volo.",  -- 1144
-        "Non in combattimento.",  -- 1145
-        "Gioco di volo: gioca / alta quota",  -- 1146
-        "in volo: avvia il gioco di volo, o portalo in alta quota e ritorno",  -- 1147
-        "Voli cinematografici: la telecamera ti gira intorno",  -- 1148
-        "durante il film la telecamera gira lentamente intorno a te e alla tua cavalcatura, un giro completo in circa un minuto e mezzo, e torna alle tue spalle prima dell'atterraggio. Disattivato: un'inquadratura fissa",  -- 1149
-        "Offline",  -- 1150
-        "Morto",  -- 1151
-        "Disattivato",  -- 1152
-        "In una specializzazione da guaritore",  -- 1153
-        "Sempre",  -- 1154
-        "Troppo lontano",  -- 1155
-        "Gruppo e incursione del guaritore",  -- 1156
-        "in gruppo: il tuo gruppo accanto al tuo personaggio, ognuno con il tasto che lo seleziona; in incursione: riquadri più sottili. Ognuno mostra solo quante cure gli servono, una penalità che puoi curare e se è a portata",  -- 1157
-        "%d%% di vendita",  -- 1158
-        "Va via di sicuro (%d%%)",  -- 1159
-        "Si vende da solo (%d%%)",  -- 1160
-        "Penso che si venderà (%d%%)",  -- 1161
-        "Dovrebbe trovare un compratore (%d%%)",  -- 1162
-        "Metà e metà (%d%%)",  -- 1163
-        "Può andare in tutti e due i modi (%d%%)",  -- 1164
-        "Un po' un azzardo (%d%%)",  -- 1165
-        "Potrebbe restare lì un po' (%d%%)",  -- 1166
-        "Non ci conterei (%d%%)",  -- 1167
-        "Brutte probabilità, amico (%d%%)",  -- 1168
-        "+%s rispetto a un mercante",  -- 1169
-        "nessun prezzo ancora noto",  -- 1170
-        "un mercante paga altrettanto",  -- 1171
-        "Il Mediatore",  -- 1172
-        "Mercato",  -- 1173
-        "ogni moneta contata, amico",  -- 1174
-        "Nelle tue borse non c'è niente che si possa vendere qui.",  -- 1175
-        "Nessun prezzo negli ultimi 7 giorni.",  -- 1176
-        "Un giorno di prezzi finora: si aggiunge una candela ogni giorno che visiti la casa d'aste.",  -- 1177
-        "7 giorni, una candela al giorno: verde chiusa più in alto, rossa più in basso",  -- 1178
-        "30 giorni, il più basso del giorno: verde su, rosso giù",  -- 1179
-        "Ancora nessuna cronologia dei prezzi: leggi la casa d'aste per qualche giorno.",  -- 1180
-        "Un solo giorno di prezzi finora: la linea cresce ogni giorno in cui visiti la casa d'aste.",  -- 1181
-        "Chiedo %s l'uno, %s per i %d che lasci andare; %d restano a te",  -- 1182
-        "Chiede %s l'uno, %s per tutti i %d",  -- 1183
-        "Più basso",  -- 1184
-        "letto %s",  -- 1185
-        "Solito",  -- 1186
-        "7 giorni: da %s a %s",  -- 1187
-        "In vendita: %d aste, %d oggetti",  -- 1188
-        "%s l'uno, %s per tutti i %d",  -- 1189
-        "Hai messo in vendita %d qui, %d aste vendute",  -- 1190
-        "Nessun prezzo noto: leggi prima la casa d'aste.",  -- 1191
-        "Niente nelle tue borse da vendere qui.",  -- 1192
-        "Oggi niente rende più qui che da un mercante; %d forse, con pazienza.",  -- 1193
-        "Prima i migliori: %d rendono più qui che da un mercante, altri %d con pazienza.",  -- 1194
-        "Borse vuote, amico. Portami qualcosa da vendere.",  -- 1195
-        "Oggi niente batte un mercante. %d forse, con un po' di pazienza.",  -- 1196
-        "Nessun guadagno sicuro in queste borse, amico. %d potrebbero rendere se aspetti.",  -- 1197
-        "Il meglio in cima: %d qui battono ogni mercante, %d in più per i pazienti.",  -- 1198
-        "%d rendono più qui che da un mercante, prima il meglio. %d in più se aspetti.",  -- 1199
-        "In cima alla pila si guadagna di più: %d vendite sicure, %d in più se sai aspettare.",  -- 1200
-        "Ancora nessun prezzo: %s legge la casa d'aste.",  -- 1201
-        "Prezzi letti or ora: %d.",  -- 1202
-        "%d prezzi, letti %s.",  -- 1203
-        "%d prezzi, letti %s. %s li rilegge.",  -- 1204
-        "Non ho ancora letto la bacheca. %s e ti porto ogni prezzo.",  -- 1205
-        "Ancora nessun prezzo, amico. %s legge tutta la bacheca.",  -- 1206
-        "Prezzi freschi dalla bacheca, amico: %d.",  -- 1207
-        "Ho appena letto la bacheca: %d prezzi, ancora caldi.",  -- 1208
-        "%d prezzi, letti %s. Basta così, amico.",  -- 1209
-        "Ultima occhiata alla bacheca: %s, %d prezzi.",  -- 1210
-        "Prezzi di %s, raffermi come pane vecchio. %s rilegge la bacheca.",  -- 1211
-        "%d prezzi, ma letti %s. %s e ci do un'altra occhiata.",  -- 1212
-        "Viene mostrato anche ciò che tieni. %s lo nasconde.",  -- 1213
-        "Messi da parte: %d, per le tue professioni, il tuo equipaggiamento e i tuoi segni. %s li mostra.",  -- 1214
-        "Anche ciò che tieni è in lista. %s lo mette via.",  -- 1215
-        "Mostro anche ciò che tieni. %s lo nasconde di nuovo.",  -- 1216
-        "%d messi da parte: roba per le professioni, da indossare, segnata da te. %s li mostra.",  -- 1217
-        "Ne ho tenuti %d per i tuoi mestieri, da indossare o segnati. %s se li vuoi.",  -- 1218
-        "l'uno",  -- 1219
-        "nessun dato",  -- 1220
-        "Vendita rapida",  -- 1221
-        "Paziente",  -- 1222
-        "Leggi tutti i prezzi",  -- 1223
-        "Nascondi i tenuti",  -- 1224
-        "Mostra i tenuti",  -- 1225
-        "Linea",  -- 1226
-        "Candele",  -- 1227
-        "Metti",  -- 1228
-        "%d di %d",  -- 1229
-        "Metti %d di %d a %s l'uno",  -- 1230
-        "Metti %d a %s",  -- 1231
-        "Metti in vendita tutti i %d per %s",  -- 1232
-        "Da qui non si può mettere in vendita alla casa d'aste di questo client.",  -- 1233
-        "Messo %d a %s.",  -- 1234
-        "Mercato alla casa d'aste: apri / chiudi",  -- 1235
-        "Saluto del banditore al Mercato",  -- 1236
-        "un banditore goblin dice una breve battuta, dai suoni del gioco, quando si apre il Mercato; disattivato: si apre in silenzio",  -- 1237
-        "Mercato: mostra ciò che tieni",  -- 1238
-        "il Mercato elenca anche ciò che tieni: ciò da cui le tue professioni imparano ancora o che trasformano in qualcosa di più prezioso, e ciò che hai segnato da tenere; disattivato: solo ciò che venderesti",  -- 1239
-        "Mercato: grafico dei prezzi a candele",  -- 1240
-        "il grafico dei prezzi del Mercato è una candela al giorno per gli ultimi 7 giorni (dove il prezzo ha aperto, il più alto e il più basso, e dove ha chiuso: verde se ha chiuso più in alto, rossa se più in basso); spento: una linea del prezzo più basso di ogni giorno su 30 giorni",  -- 1241
-        "apri o chiudi il Mercato (una scheda della casa d'aste)",  -- 1242
-        "quale casa d'aste ha questo client (per la risoluzione dei problemi)",  -- 1243
-        "Apri la finestra di una professione e darò un'occhiata alle tue ricette.",  -- 1244
-        "È il tetto, %d. Un istruttore ha il grado successivo per te.",  -- 1245
-        "Niente più da imparare a %d. Va' da un istruttore per il grado successivo.",  -- 1246
-        "Le tue ricette ti stanno strette. Va' da un istruttore: %s ti aspetta a %d.",  -- 1247
-        "Mancano %d a %d, e ciò che sai non ti ci porterà. Un istruttore ha %s per te a %d.",  -- 1248
-        "Le tue ricette ti stanno strette. Va' da un istruttore: %s ti aspetta.",  -- 1249
-        "Le tue ricette smettono di insegnarti a %d da %d. Chiedi %s a un istruttore.",  -- 1250
-        "Le tue ricette si esauriscono a %d da %d. Un istruttore avrà qualcosa di nuovo.",  -- 1251
-        "Ciò che sai non ti porterà per gli ultimi %d. È ora di vedere un istruttore.",  -- 1252
-        "%s non ti insegnerà più molto, ma è il meglio che hai. Mancano %d a %d.",  -- 1253
-        "Da qui si va piano: %s dà un punto ogni tanto. Ne mancano %d.",  -- 1254
-        "Prima ti servirà %s, %s. Le guide iniziano questo tratto con questa.",  -- 1255
-        "Impara %s, %s, e cominciamo: mancano %d a %d.",  -- 1256
-        "Mancano %d a %d. Le guide ti mandano a cercare %s fino a %d.",  -- 1257
-        "Qui impari raccogliendo: %s fino a %d.",  -- 1258
-        "Mancano %d a %d. Comincia con %s, o con %s se preferisci: %s.",  -- 1259
-        "Prima %s, come dicono le guide. Va bene anche %s: %s.",  -- 1260
-        "Mancano %d a %d. Comincia con %s.",  -- 1261
-        "%s è ora il tuo miglior maestro. %d punti a %d.",  -- 1262
-        "Mani ferme. Prima %s, e ne mancano %d.",  -- 1263
-        "da un istruttore",  -- 1264
-        "da un mercante",  -- 1265
-        "come bottino",  -- 1266
-        "da una missione",  -- 1267
-        "materiali più economici",  -- 1268
-        "materiali da un mercante",  -- 1269
-        "materiali che raccogli tu",  -- 1270
-        "si vende bene",  -- 1271
-        "qualcosa che userai",  -- 1272
-        "meno creazioni",  -- 1273
-        "una ricetta da trovare o comprare",  -- 1274
-        "altri materiali",  -- 1275
-        "la prima scelta delle guide",  -- 1276
-        "Apri la finestra di una professione per un piano di avanzamento.",  -- 1277
-        "Al limite, %d. Un istruttore ha il grado successivo.",  -- 1278
-        "Ancora %d fino a %d; le tue ricette non bastano. Un istruttore ha %s a %d.",  -- 1279
-        "Ancora %d fino a %d; le tue ricette non bastano. Un istruttore ha %s.",  -- 1280
-        "Le tue ricette si fermano a %d da %d. Un istruttore ne ha altre.",  -- 1281
-        "Ancora %d fino a %d. Il migliore ora: %s, verde (un punto ogni tanto).",  -- 1282
-        "Ancora %d fino a %d. Prima impara %s, %s.",  -- 1283
-        "Ancora %d fino a %d. Raccogli %s fino a %d.",  -- 1284
-        "Ancora %d fino a %d. Prima: %s, oppure %s (%s).",  -- 1285
-        "Ancora %d fino a %d. Prima: %s.",  -- 1286
-        "Da raccogliere o comprare",  -- 1287
-        "%d volte: %s",  -- 1288
-        "Imparala %s, da %d.",  -- 1289
-        "Imparala %s.",  -- 1290
-        "%s: %d nelle borse, %d in banca, %d per creazione",  -- 1291
-        "Le guide salgono questo tratto raccogliendo %s.",  -- 1292
-        "%s: ne hai %d, il piano ne usa %d",  -- 1293
-        "per %s",  -- 1294
-        "Costa meno comprarlo che produrlo con %s",  -- 1295
-        "Prodotto con %s",  -- 1296
-        "Il Mentore: cosa ti fa creare la tua banca",  -- 1297
-        "Cosa puoi creare con la banca",  -- 1298
-        "Con ciò che hai in banca non si crea nient'altro.",  -- 1299
-        "%d che puoi creare contando la banca, %d solo grazie a lei.",  -- 1300
-        "Il Mentore: %s %d > %d",  -- 1301
-        "Il Mentore",  -- 1302
-        "Piano di avanzamento",  -- 1303
-        "o",  -- 1304
-        "Raccogli %s",  -- 1305
-        "da imparare",  -- 1306
-        "conviene comprarlo",  -- 1307
-        "Nascondi",  -- 1308
-        "Il piano",  -- 1309
-        "Farma questo",  -- 1310
-        "Farma tutto",  -- 1311
-        "Con la banca",  -- 1312
-        "Usa il piano",  -- 1313
-        "due volte per nascondere",  -- 1314
-        "Niente da provare qui.",  -- 1315
-        "%d aggiunti alla lista da farmare.",  -- 1316
-        "Non manca niente: hai quello che serve.",  -- 1317
-        "Apri la finestra di una professione per fare un piano.",  -- 1318
-        "Il Mentore (piano di avanzamento): mostra / nascondi",  -- 1319
-        "mostra il piano di avanzamento dell'ultima finestra di professione aperta, con i pulsanti del controller",  -- 1320
-        "A sinistra delle missioni",  -- 1321
-        "A destra delle missioni",  -- 1322
-        "Sotto le missioni",  -- 1323
-        "La lista da farmare è piena.",  -- 1324
-        "Lista da farmare: %s, %d voluti.",  -- 1325
-        "Da farmare",  -- 1326
-        "altri %d",  -- 1327
-        "Ancora niente da farmare.",  -- 1328
-        "Una pila in più",  -- 1329
-        "Togli",  -- 1330
-        "Svuota",  -- 1331
-        "Fatto",  -- 1332
-        "Togliere tutto dalla lista da farmare?",  -- 1333
-        "Lista da farmare: scegli / fatto",  -- 1334
-        "Lista da farmare: aggiungi l'oggetto indicato",  -- 1335
-        "Non è nella lista da farmare.",  -- 1336
-        "La lista da farmare è vuota.",  -- 1337
-        "Lista da farmare: dove si trova",  -- 1338
-        "la lista da farmare a sinistra dell'elenco delle missioni, alla sua destra o sotto le sue missioni",  -- 1339
-        "la lista da farmare accanto all'elenco delle missioni: scegli col controller; add <oggetto> [quanti], remove <oggetto>, clear, o left / right / bottom per la posizione",  -- 1340
-        "Percentuale di minaccia",  -- 1341
-        "la tua parte di minaccia come numero accanto all'icona della minaccia, sul riquadro del bersaglio e sulle barre del nome",  -- 1342
-        "Numero della salute",  -- 1343
-        "la salute rimasta, abbreviata (12.3k), sulla barra (non sulle targhette compatte: lì basta la percentuale)",  -- 1344
-        "I tuoi debuff",  -- 1345
-        "i tuoi debuff sull'unità, sopra il suo nome, con il loro tempo",  -- 1346
-        "Malus di tutti",  -- 1347
-        "i malus che il gioco segna per le barre dei nomi di tutti, non solo i tuoi",  -- 1348
-        "Bonus del nemico",  -- 1349
-        "i benefici di un nemico accanto alle sue penalità: quelli che contano (importanti, infuriato o che puoi dissolvere o rubare), o tutti se Solo gli effetti che contano è disattivato",  -- 1350
-        "Icona di controllo di massa",  -- 1351
-        "una grande icona con il tempo quando l'unità è stordita, immobilizzata, impaurita...",  -- 1352
-        "Bagliore di aggro",  -- 1353
-        "un'icona a scudo e un bagliore dietro il nome: rosso mentre ti attacca, rosso e giallo quando stai per attirarlo, giallo e blu quando lo stai perdendo, blu quando non è su di te",  -- 1354
-        "Indicatore missione",  -- 1355
-        "un indicatore dorato sulle unità di cui le tue missioni hanno ancora bisogno",  -- 1356
-        "Animazioni delle targhette",  -- 1357
-        "le targhette appaiono in dissolvenza, la salute bassa respira, il controllo delle masse brilla",  -- 1358
-        "Piccola",  -- 1359
-        "Normale",  -- 1360
-        "Grande",  -- 1361
-        "Nome intero",  -- 1362
-        "Nome breve",  -- 1363
-        "Nessun nome",  -- 1364
-        "Completo",  -- 1365
-        "Minimale mini",  -- 1366
-        "Dimensione delle targhette",  -- 1367
-        "quanto sono grandi le barre delle targhette: piccole e sottili, normali o grandi (più larghe e più alte)",  -- 1368
-        "Nomi sulle targhette",  -- 1369
-        "il nome su una targhetta con barra della salute: intero, accorciato o tolto (il riquadro del bersaglio lo mostra intero; livello e icona di classe restano). Una targhetta senza barra, quella di un PNG amichevole, tiene sempre il suo nome",  -- 1370
-        "Aspetto delle targhette",  -- 1371
-        "gli interruttori delle targhette in un colpo. Completo: tutto. Minimale: niente barra della risorsa, gilda o titolo, nomi brevi. Minimale mini: barre piccole con la salute, i tuoi indebolimenti e i potenziamenti che contano, livello e classe, nessun nome (lo ha il riquadro del bersaglio). Minaccia, controllo e lanci vistosi restano sempre",  -- 1372
-        "Titoli dei giocatori",  -- 1373
-        "mostra il titolo di un giocatore insieme al suo nome",  -- 1374
-        "Gilde e mestieri dei PNG",  -- 1375
-        "una riga sotto il nome: la gilda del giocatore, o cosa fa il PNG",  -- 1376
-        "Barre per gli amici in combattimento",  -- 1377
-        "le targhette amichevoli mostrano salute, risorsa e lanci finché quell'unità è in combattimento",  -- 1378
-        "Targhette amiche del gioco",  -- 1379
-        "lascia le targhette amiche (il tuo gruppo, altri giocatori, PNG amici) all'aspetto del gioco; le nostre solo sui nemici",  -- 1380
-        "Barre delle risorse",  -- 1381
-        "una sottile barra di mana, rabbia o energia sotto la barra della salute",  -- 1382
-        "Bersaglio del lancio",  -- 1383
-        "a chi è diretto un lancio, accanto al nome dell'incantesimo",  -- 1384
-        "Percentuale di salute",  -- 1385
-        "la percentuale di salute sulla barra",  -- 1386
-        "Nome sulla barra del bersaglio",  -- 1387
-        "disattivato: la barra del tuo bersaglio non mostra nome né livello (li mostra il riquadro del bersaglio)",  -- 1388
-        "Livelli sulle barre del nome",  -- 1389
-        "il livello davanti al nome di un nemico, colorato in base alla difficoltà",  -- 1390
-        "Targhette compatte",  -- 1391
-        "targhette larghe circa la metà",  -- 1392
-        "Lanci nemici vistosi",  -- 1393
-        "il lancio di un nemico lampeggia, si ingrandisce e pulsa sempre più veloce finché non va a segno, così da poterlo interrompere in tempo",  -- 1394
-        "Icone di classe sulle targhette",  -- 1395
-        "l'icona di classe di un giocatore davanti al nome, amico o nemico",  -- 1396
-        "Cosa fanno i PNG, come icone",  -- 1397
-        "un'icona sopra i PNG amichevoli che offrono qualcosa: una borsa sui mercanti, un'incudine sui fabbri che riparano, un libro sugli istruttori... (le icone del gioco; si vedono anche mentre la targhetta aspetta di essere indicata)",  -- 1398
-        "PNG amichevoli solo se puntati",  -- 1399
-        "le targhette dei PNG amichevoli (venditori, assegnatori di missioni, cittadini) compaiono solo mentre li punti, come il loro tooltip",  -- 1400
-        "Nomi sulle cose con cui puoi interagire",  -- 1401
-        "un nome sopra minerali, forzieri, targhe e simili mentre li hai di fronte (disattivato: restano senza nome, il messaggio del gioco dice già cosa sono)",  -- 1402
-        "Mini targhette",  -- 1403
-        "servitori, animaletti e nemici grigi che non danno esperienza hanno una piccola targhetta: una barra sottile con i tuoi effetti negativi sopra e senza nome (un animaletto, senza barra, mantiene il nome; l'opzione del gioco decide se hanno targhette)",  -- 1404
-        "Barre del nome del gruppo nelle spedizioni: solo nomi",  -- 1405
-        "dentro una spedizione o un'incursione il gioco disegna da sé le barre del nome dei giocatori amici e gli addon non possono cambiarle: lì le opzioni proprie del gioco vengono impostate per mostrarle come nomi nel colore della classe, senza barre, come le nostre, e le barre del gioco tornano mentre combatti (se le barre per gli amici in combattimento sono attive); tutto viene ripristinato quando esci",  -- 1406
-        "Barre del nome del gruppo nelle spedizioni: nascoste",  -- 1407
-        "dentro una spedizione o un'incursione, spegni del tutto le barre del nome del gioco per i giocatori amici (e rimettile come le avevi quando esci)",  -- 1408
-        "mostra cosa fornisce il gioco per il nome del tuo bersaglio (per la risoluzione dei problemi)",  -- 1409
-        "elenca le targhette sullo schermo e se hanno il nostro aspetto (per la risoluzione dei problemi)",  -- 1410
-        "Bene, allora.",  -- 1411
-        "Ah, che mucchio.",  -- 1412
-        "Vediamo, vediamo...",  -- 1413
-        "Elune, dammi pazienza.",  -- 1414
-        "Per i naaru, che confusione.",  -- 1415
-        "Maledetto zaino.",  -- 1416
-        "Zaino in ordine, zaino leggero.",  -- 1417
-        "Bah. Troppa roba.",  -- 1418
-        "Peso morto, tutto quanto.",  -- 1419
-        "Pazienza. La Madre Terra provvede.",  -- 1420
-        "Ehi, cosa abbiamo qui, amico?",  -- 1421
-        "Che disordine. Sconveniente.",  -- 1422
-        "Il tempo è denaro. Contiamo.",  -- 1423
-        "Sì, può andare.",  -- 1424
-        "Sia ringraziata Elune.",  -- 1425
-        "La Luce provvede.",  -- 1426
-        "Hrm. Abbastanza.",  -- 1427
-        "Hm. Basta per combattere.",  -- 1428
-        "Viaggio leggero. Bene.",  -- 1429
-        "Accettabile. A malapena.",  -- 1430
-        "Non c'è un posto libero. La robaccia frutterebbe %s: venderla fa spazio.",  -- 1431
-        "Non c'è un posto libero. Quello che non mi serve in viaggio può aspettare in banca.",  -- 1432
-        "Robaccia: %d, vale %s qui. X vende quella che ho scelto; Vendita furba prende tutto.",  -- 1433
-        "%d di questi vanno in banca: ne contiene già altri uguali, o li ho segnati. Deposita li mette via.",  -- 1434
-        "Solo %d posti liberi. La robaccia frutterebbe %s da qualsiasi mercante.",  -- 1435
-        "Solo %d posti liberi. È ora di vendere o depositare qualcosa.",  -- 1436
-        "Nuovi dall'ultima occhiata: %d. Il punto dorato segna ciascuno.",  -- 1437
-        "Da vendere: %d. Il filtro Vendi li raccoglie, e ogni descrizione dice dove rende di più.",  -- 1438
-        "Robaccia: %d, vale %s. Al prossimo mercante.",  -- 1439
-        "Solo l'essenziale. Niente che valga la pena vendere.",  -- 1440
-        "Tutto in ordine, e %d posti liberi.",  -- 1441
-        "Il tuo equipaggiamento è riparato: %s.",  -- 1442
-        "Posso riparare il tuo equipaggiamento per %s; un pezzo rotto non ti dà né armatura né statistiche.",  -- 1443
-        "Le tue borse sono piene. Prendo %d cose per %s: Vendita furba, e hai di nuovo spazio.",  -- 1444
-        "Ti do %s per %d cose: la robaccia e ciò che la casa d'aste non pagherebbe di più. Vendita furba, ed è fatta.",  -- 1445
-        "Tieni i %d che vuole la casa d'aste: paga %s più di me.",  -- 1446
-        "Le tue borse sono piene. Vendimi qualcosa prima di comprare.",  -- 1447
-        "Niente nelle tue borse per cui pagherei bene. Dai un'occhiata alla mia merce.",  -- 1448
-        "%d delle cose che porti vanno qui: ne custodisco altre uguali, o le hai segnate. Deposita le mette via.",  -- 1449
-        "Custodisco altre scorte di %d cose che porti. Preleva riempie le borse prima di partire.",  -- 1450
-        "Le tue borse sono quasi piene. Lascia a me ciò che non ti serve in viaggio.",  -- 1451
-        "Tutto al sicuro con me, e le tue borse hanno %d posti liberi.",  -- 1452
-        "Oggi niente per te. Ho controllato due volte.",  -- 1453
-        "Lettere per te: %d, niente allegato. Leggile quando vuoi.",  -- 1454
-        "Lettere per te: %d. Dentro: %s.",  -- 1455
-        "Prendi tutto le svuota in un colpo.",  -- 1456
-        "Contrassegno: %d. Quelle le apri e paghi tu.",  -- 1457
-        "Le tue borse sono piene: gli oggetti aspettano nelle loro lettere.",  -- 1458
-        "Dove si va? Indica un luogo e ti dirò quanto dura il volo.",  -- 1459
-        "%s: circa %s secondo la mappa. Quella rotta non l'hai ancora volata.",  -- 1460
-        "%s: circa %s, secondo il tuo ultimo volo lì.",  -- 1461
-        "%s: non so ancora dirti quanto. Volalo una volta e lo saprò.",  -- 1462
-        "Ne sono scappati %d. Quest'acqua chiede più abilità di quanta ne ho: l'esca aiuta, e anche una canna migliore.",  -- 1463
-        "Niente esca sull'amo. Aumenta la mia abilità, così ne scappano meno.",  -- 1464
-        "L'esca è quasi finita. Un'altra sull'amo tiene alta la mia abilità.",  -- 1465
-        "Pesci di qui che non ho ancora preso: %d. Continuo a lanciare.",  -- 1466
-        "Ho preso ogni pesce di quest'acqua. Altrove, allora.",  -- 1467
-        "Ancora niente preso. Il primo pesce di ogni acqua va qui.",  -- 1468
-        "Specie prese: %d. Ogni acqua ne nasconde altre: il pannello di pesca mostra un ? per ciascuna che non ho preso lì.",  -- 1469
-        "Riposato accanto al fuoco: i prossimi %d punti esperienza dalle uccisioni valgono doppio.",  -- 1470
-        "Nessun riposo accumulato. Una notte in una locanda o in città, e le uccisioni danno esperienza doppia per un po'.",  -- 1471
-        "%d assorbiti",  -- 1472
-        "Elenco a destra",  -- 1473
-        "Uno al centro",  -- 1474
-        "%d cure critiche",  -- 1475
-        "%d critici",  -- 1476
-        "Giudizio",  -- 1477
-        "Grandi momenti: dove",  -- 1478
-        "un blocco appena sopra gli avvisi di ricarica a destra del tuo personaggio, il più recente vicino a loro e i precedenti che salgono sopra mentre svaniscono, o uno alla volta al centro",  -- 1479
-        "mostra come appare e si sente un grande momento",  -- 1480
-        "ottenuto",  -- 1481
-        "ottenuto da un altro oggetto",  -- 1482
-        "non ancora ottenuto",  -- 1483
-        "Aspetto",  -- 1484
-        "Scegli un set per mettere i suoi pezzi sul tuo completo. %s lo conserva; prima non si paga nulla.",  -- 1485
-        "Sto guardando la tua collezione...",  -- 1486
-        "Il tuo completo è tornato com'era.",  -- 1487
-        "%s: %d pezzi su %d indossati.",  -- 1488
-        "%d non si potevano mettere su questo completo.",  -- 1489
-        "Un set di cui hai dei pezzi",  -- 1490
-        "%d set di cui hai dei pezzi",  -- 1491
-        "non puoi indossarlo",  -- 1492
-        "mancante",  -- 1493
-        "Tutti i %d pezzi",  -- 1494
-        "%d pezzi su %d",  -- 1495
-        "Manca: %s",  -- 1496
-        "Ancora nessun set. Gli oggetti che condividono un nome, come Elmo di Ferro Verde e Guanti d'Arme di Ferro Verde, compaiono qui appena ne hai uno.",  -- 1497
-        "Annulla",  -- 1498
-        "Eliminare il set personalizzato %s? Non può essere recuperato.",  -- 1499
-        "Elimina",  -- 1500
-        "Punta prima un set personalizzato.",  -- 1501
-        "%s  Elimina set personalizzato",  -- 1502
+        "Bussola delle missioni: segue la visuale",  -- 980
+        "la bussola mostra dove guarda la visuale, non dove guarda il tuo personaggio (sono diversi quando lo stick gira il personaggio senza la visuale); disattivato: dove guarda il tuo personaggio",  -- 981
+        "alcuni segni sulla bussola delle missioni, intorno a te, per venti secondi",  -- 982
+        "Modalità pesca: disattivata.",  -- 983
+        "Pesca: %s per lanciare",  -- 984
+        "Niente esca: %s due volte per usare %s",  -- 985
+        "%s per riporre la canna",  -- 986
+        "Modalità pesca: %s per lanciare la lenza, e di nuovo per ferrare il pesce quando il galleggiante si muove.",  -- 987
+        "%s per ferrare, %s per rilanciare",  -- 988
+        "La modalità pesca richiede una canna da pesca tra le mani.",  -- 989
+        "Non conosci Pesca.",  -- 990
+        "Modalità pesca: un pulsante lancia e aggancia",  -- 991
+        "Pulsante di pesca: %s",  -- 992
+        "Rilancia con una pressione",  -- 993
+        "finché il galleggiante è in acqua, il tuo pulsante di pesca aggancia il pesce e A rilancia con una pressione; disattivato: A è tuo",  -- 994
+        "Esca con doppia pressione",  -- 995
+        "premi due volte rapidamente il pulsante di pesca: la seconda pressione mette la migliore esca delle tue borse sulla canna, quando la canna non ne ha",  -- 996
+        "Barre del controller nascoste durante la pesca",  -- 997
+        "con una canna da pesca in mano le barre del controller sono nascoste, per vedere bene l'acqua; l'avviso di pesca mostra il tasto per lanciare. Tornano appena inizia un combattimento o la canna viene riposta",  -- 998
+        "pesca con un pulsante disattivata per ora, o di nuovo attiva (con una canna in mano si attiva da sola)",  -- 999
+        "il pulsante che pesca: all'inizio il tuo pulsante di interazione (Quadrato o X), o qualsiasi altro, per esempio un grilletto (rt)",  -- 1000
+        "La costa di Durotar è roccia rossa e bassi fondali tiepidi. I troll delle Isole dell'Eco dicono che gli sgombri passano più fitti quando la marea porta l'odore dei fuochi di cucina delle isole.",  -- 1001
+        "I laghi di Mulgore sono piccoli, limpidi e pazienti. I tauren ci pescano come fanno tutto il resto: con calma, e ringraziando.",  -- 1002
+        "Ogni oasi delle Savane è un luogo d'incontro. Qualunque cosa ci beva di giorno, di notte lì sotto nuota qualcos'altro.",  -- 1003
+        "Le pozze di Teldrassil stanno all'ombra di un albero solo. I pescatori elfi della notte giurano che i pesci di lì non hanno mai visto il sole e non ne sentono la mancanza.",  -- 1004
+        "L'acqua di Rivafosca è grigia, fredda e piena di relitti. Metà di ciò che abbocca al largo di Auberdine ha messo su casa nel carico perduto di qualcuno.",  -- 1005
+        "I fiumi di Valtetra scorrono sotto foglie più vecchie di gran parte dei regni. I pesci sono svelti, e le Sentinelle ancora più svelte a chiederti che cosa ci fai lì.",  -- 1006
+        "Giù tra le Mille Guglie l'acqua è poca e custodita gelosamente. Un pesce di qui il suo posto se l'è guadagnato.",  -- 1007
+        "I laghi delle Vette degli Artigli stanno in alto, gelidi, tra le cime. I goblin li avrebbero già prosciugati se non ci si pescasse così bene.",  -- 1008
+        "La costa di Desolanda è ossa e risacca grigia. Laggiù qualcosa ha un debole per entrambe.",  -- 1009
+        "Feralas è verde fino al pelo dell'acqua. I suoi fiumi sono profondi, caldi e vivi, parecchio vivi.",  -- 1010
+        "Nessuno sa bene dove finisca la terra e cominci l'acqua ad Acquemorte. Pesca dalla riva, e poi contati le dita dei piedi.",  -- 1011
+        "Steamwheedle Port ha l'unica acqua degna di questo nome in tutta Tanaris. I goblin ti venderanno il diritto di pescarci, anche due volte se li lasci fare.",  -- 1012
+        "Sotto la baia luminosa di Azshara giace una città sommersa. I vecchi pescatori dicono che i pesci grossi vivono in quelli che un tempo erano i suoi giardini.",  -- 1013
+        "Le pozze di Vilbosco brillano, e non in senso buono. Quello che ci nuota ancora è testardo oltre ogni ragionevolezza.",  -- 1014
+        "Le sorgenti calde e i laghi orlati di catrame del Cratere di Un'Goro hanno conservato cose che il resto del mondo ha dimenticato. Alcune mordono.",  -- 1015
+        "Il Lago Elune'ara, a Radaluna, è calmo come un respiro trattenuto. I druidi chiedono solo che tu non prenda più di quanto mangerai.",  -- 1016
+        "Silitus è sabbia, vento e rumore d'ali. Se qui hai trovato dell'acqua in cui pescare, non dirlo a nessuno.",  -- 1017
+        "I laghi di Fontefredda gelano ai bordi e fumano al centro. I pesci lì sono grassi per il freddo e valgono la camminata.",  -- 1018
+        "Nelle pozze di Orgrimmar pescano i peoni che non hanno di meglio da fare e i vecchi soldati che dicono lo stesso. Gli uni e gli altri ti raccontano che quello grosso è scappato.",  -- 1019
+        "Un pesce degli stagni di Picco del Tuono ha passato tutta la vita molto al di sopra delle pianure. Sembra averla presa con calma.",  -- 1020
+        "Darnassus cura le sue acque con la stessa attenzione dei suoi templi. I pesci si sono abituati a essere ammirati.",  -- 1021
+        "I laghi dei monti di Alterac sono neve sciolta, e gli ogre e il Sindacato ci pescano quando nessuno guarda.",  -- 1022
+        "Le rive degli Altopiani d'Arathi hanno visto più eserciti che pescatori. I pesci hanno smesso da un pezzo di badare a quale stendardo sventoli sopra l'acqua.",  -- 1023
+        "Le Maleterre sono polvere da un capo all'altro. Qui un pesce che abbocca è un piccolo miracolo: trattalo come tale.",  -- 1024
+        "La costa delle Terre Devastate è rossa, spazzata e silenziosa. Qualunque cosa viva in quella risacca ha imparato a convivere con parecchio.",  -- 1025
+        "I laghi delle Radure di Tirisfal giacciono immobili sotto un cielo malaticcio. I Reietti ci pescano per abitudine: i morti non mangiano granché, ma ricordano che gli piaceva.",  -- 1026
+        "La lunga costa della Selva Pinargento è tutta nebbia e ombra di pini. Si pesca bene, ed è l'unica cosa allegra che si senta dire di quel posto.",  -- 1027
+        "I fiumi delle Terre Infette Occidentali scorrono ancora, anche se non puliti. Quello che ne tiri fuori, guardalo due volte.",  -- 1028
+        "Pochi pescano nelle Terre Infette Orientali, e ancora meno lo ammettono. L'acqua conserva quello che il morbo ne ha lasciato.",  -- 1029
+        "Il fiume di Colletorto e la sua lunga riva meridionale hanno sfamato entrambe le parti di ogni lite scoppiata per averli.",  -- 1030
+        "Le Entroterre tengono i loro laghi in alto tra gli alberi, dove i nani Granmartello pescano in groppa ai grifoni quando credono che nessuno li veda.",  -- 1031
+        "I laghi di Dun Morogh sono orlati di ghiaccio per gran parte dell'anno. Un nano taglia un buco, si siede con una pinta e la chiama una buona giornata, qualunque cosa abbocchi.",  -- 1032
+        "La Gola Rovente ha la lava dove le altre terre hanno i fiumi. Portati piuttosto qualcosa da bere.",  -- 1033
+        "Le Steppe Ardenti sono cenere e braci. Se qui l'acqua ti dà qualcosa, sarà bollente.",  -- 1034
+        "Ogni bambino di Elwynn impara a pescare a Crystal Lake o a Stone Cairn Lake. I pesciolini di lì li fregano da generazioni.",  -- 1035
+        "Il Valico Ventomorto ha poca acqua e ancora meno accoglienza. Quello che sta nelle pozze sotto Karazhan è meglio lasciarlo dov'è.",  -- 1036
+        "Il fiume al margine di Boscovespro è nero a qualsiasi ora. Ai pesci il buio non sembra dare fastidio; ai pescatori sì.",  -- 1037
+        "Il Loch è l'orgoglio di Loch Modan, trattenuto dalla grande diga Stonewrought. I nani ci misurano ogni storia di pesca, e di solito vince il Loch.",  -- 1038
+        "Il Lago Placido, tra le Montagne Crestarossa, è bello come un dipinto e ci si pesca da ogni molo di Borgolago. La gente del paese conosce ogni punto buono e non te ne dirà nemmeno uno.",  -- 1039
+        "Dai fiumi della giungla al selvaggio capo meridionale, Rovotorto ha le acque più ricche del continente. I pescatori di Baia del Bottino ci organizzano un torneo, e barano quasi tutti.",  -- 1040
+        "La Palude del Dolore è acqua verde sotto alberi verdi. I pesci sanno di fango, e alla gente del posto piacciono così.",  -- 1041
+        "I campi delle Marche Occidentali sono andati in malora, la costa no. Chi è rimasto vive della lunga riva grigia.",  -- 1042
+        "Le Paludi Grigie hanno il nome che si meritano. I moli di Porto di Menethil sono il posto più asciutto da cui pescarci, e i crocolischi lo sanno.",  -- 1043
+        "Nei canali di Roccavento pescano bambini, pensionati e almeno un nobile in incognito. Nessuno chiede che cos'altro ci sia, nei canali.",  -- 1044
+        "La Forlorn Cavern custodisce l'unica pozza tranquilla di Forgiardente. I vecchi nani ci pescano per ore senza dire una parola.",  -- 1045
+        "I canali di Sepulcra scorrono di un verde che con le alghe non c'entra nulla. I Reietti che ci pescano non lo fanno per la cena.",  -- 1046
+        "Il primo pesce che quasi ogni pescatore tira a riva, e così vistoso che non se lo scorda.",  -- 1047
+        "Sguscia via, fila veloce e si trova lungo ogni costa calda. Alla griglia è meglio di quanto il nome lasci pensare.",  -- 1048
+        "Tutto bocca, e mai così felice come nell'acqua che tu non berresti.",  -- 1049
+        "Taglia piccola, denti tanti, paura nessuna. Si dice che un banco intero abbia cacciato un orso dal Loch.",  -- 1050
+        "Un lampo di colore sotto la risacca. Per i marinai, averne uno all'amo porta fortuna al viaggio.",  -- 1051
+        "Un paziente abitante del fondale, con i baffi di un anziano dei nani.",  -- 1052
+        "Nessuno ne mangia due volte. Gli alchimisti comprano tutto il pescato che trovano.",  -- 1053
+        "Le pinne brillano come braci sotto la cenere, e l'olio che se ne spreme brucia quasi altrettanto bene.",  -- 1054
+        "Una corazza da piccolo scudo. La carne che c'è dentro vale la fatica.",  -- 1055
+        "Qualcosa nell'acqua vicino alle Caverne dei Lamenti ha cambiato questo pesce. Mangiarne uno potrebbe cambiare anche te, per un po'.",  -- 1056
+        "La gente di fiume dice che mangiarne schiarisce la mente. È il nuotare controcorrente a dare la saggezza.",  -- 1057
+        "Più anni, più stazza e più saggezza del cugino, e al tuo amo ha abboccato lo stesso.",  -- 1058
+        "Un duro combattente dei caldi mari del sud, e un classico sul menu di ogni taverna da Baia del Bottino a Meccania.",  -- 1059
+        "La fronte luccica come vero mithril. Più di un minatore ha provato a fonderla.",  -- 1060
+        "Dalle scaglie, bollite, si ricava un olio che rende la pelle dura come roccia. Preferisce la notte.",  -- 1061
+        "Luccica come una corazza da parata, e pesa quasi altrettanto.",  -- 1062
+        "Si avvicina a riva solo nei mesi freddi, e i cuochi che se ne intendono aspettano tutto l'anno.",  -- 1063
+        "Passa quando le giornate sono lunghe. La gente di costa ci regola la stagione.",  -- 1064
+        "Si afferra a metà, e una volta sola.",  -- 1065
+        "Un pesce di fiume delle terre selvagge, con le branchie rosse come le pitture di guerra di un troll.",  -- 1066
+        "Mangia quando fa buio. Una zuppa fatta con questo pesce calma i nervi di chi lancia incantesimi.",  -- 1067
+        "Mangia di giorno, in quasi tutto il contrario del cugino notturno, eppure ne condivide le acque.",  -- 1068
+        "Non è proprio un pesce. Non è d'accordo con l'idea di finire all'amo, e te lo farà sapere.",  -- 1069
+        "Ha il pallore del ghiaccio di fiume e viene dai laghi freddi e limpidi del nord.",  -- 1070
+        "Ti serviranno tutte e due le mani, e magari un amico.",  -- 1071
+        "%.1f lb",  -- 1072
+        "Nuovo nel tuo diario di pesca: %s, %s.",  -- 1073
+        "Nuovo nel tuo diario di pesca: %s.",  -- 1074
+        "Il tuo %s più pesante finora: %s (prima %s).",  -- 1075
+        "Esca %s",  -- 1076
+        "Nessuna esca",  -- 1077
+        "Presi %d",  -- 1078
+        "Scappati %d",  -- 1079
+        "Un curioso: +%d%%",  -- 1080
+        "Tieni l'esca accanto al pesce",  -- 1081
+        "Prossima cattura +%d%%",  -- 1082
+        "Tieni premuto %s: l’esca corre lungo la lenza",  -- 1083
+        "%d di fila",  -- 1084
+        "Un gioco mentre il galleggiante è in acqua",  -- 1085
+        "si gioca sulla barra di lancio mentre la lenza è in acqua: tieni premuto un grilletto e l’esca corre lungo la lenza, rilascialo e torna indietro alla deriva; tienila accanto all’ombra del pesce. Meglio giochi, più pesa il peso inventato della prossima cattura. Non occupa alcun pulsante e non tocca mai il lancio né la cattura",  -- 1086
+        "%d presi, %d tipi, %d scappati",  -- 1087
+        "Il più pesante: %s, %s",  -- 1088
+        "Pesci",  -- 1089
+        "Acque",  -- 1090
+        "Ancora niente. Porta una canna all'acqua.",  -- 1091
+        "Presi: %d",  -- 1092
+        "Il più pesante: %s, a %s",  -- 1093
+        "Prima cattura: %s",  -- 1094
+        "Presi qui: %d",  -- 1095
+        "Tipi trovati qui: %d",  -- 1096
+        "apri o chiudi il tuo diario di pesca: ogni tipo che hai preso, il più pesante di ciascuno, e le acque in cui hai pescato",  -- 1097
+        "Volo",  -- 1098
+        "atterraggio anticipato",  -- 1099
+        "atterraggio al prossimo punto di volo",  -- 1100
+        "destinazione sconosciuta",  -- 1101
+        "stimato dalla distanza",  -- 1102
+        "primo volo su questa rotta: sto imparando la sua durata",  -- 1103
+        "atterraggio",  -- 1104
+        "%s: circa %s, stimato dalla distanza",  -- 1105
+        "%s: circa %s",  -- 1106
+        "%s: primo volo su questa rotta, durata sconosciuta",  -- 1107
+        "In volo, destinazione sconosciuta",  -- 1108
+        "%s: durata del volo imparata, %s",  -- 1109
+        "Atterraggio anticipato: %s, circa %s",  -- 1110
+        "Atterraggio anticipato al prossimo punto di volo",  -- 1111
+        "fresco e freddo, neve sotto i piedi e il fiato sospeso nell'aria",  -- 1112
+        "un freddo pungente, con un vento dalle vette che trova ogni fessura dell'armatura",  -- 1113
+        "caldo e umido, un'aria così densa da poterla bere",  -- 1114
+        "caldo appiccicoso sotto la volta degli alberi, e gli insetti rumorosi",  -- 1115
+        "caldo e secco, con polvere nel vento",  -- 1116
+        "sole cocente e terra screpolata; bevi quando puoi",  -- 1117
+        "fumo e cenere su un vento caldo",  -- 1118
+        "aria bruciata, con faville alla deriva",  -- 1119
+        "grigio e freddo, una nebbia umida che si appiccica",  -- 1120
+        "un freddo nell'aria e quasi niente luce",  -- 1121
+        "mite e sereno, con una brezza leggera",  -- 1122
+        "bel tempo, ottimo per viaggiare",  -- 1123
+        "fresco e verde, le foglie che sussurrano",  -- 1124
+        "luce tenue tra gli alberi, e l'aria fresca",  -- 1125
+        "afoso e umido, il terreno molle sotto i piedi",  -- 1126
+        "aria calda e umida, e l'odore della palude",  -- 1127
+        "%s a %s: %s",  -- 1128
+        "%d rotte di volo conosciute.",  -- 1129
+        "Voli: la tua cavalcatura lungo la barra",  -- 1130
+        "un grifone, un cavaliere del vento o un pipistrello (quello che ti ha dato il maestro di volo) plana lungo la barra del volo verso dove atterri",  -- 1131
+        "Voli: il tempo all'arrivo",  -- 1132
+        "all'atterraggio, la chat dice com'è l'aria dove arrivi, com'è di solito il luogo (caldo e umido a Rovotorto, neve sotto i piedi a Dun Morogh), e l'ora del giorno",  -- 1133
+        "elenca le rotte di volo di cui si conosce la durata",  -- 1134
+        "A terra! +%d",  -- 1135
+        "Urto: la serie finisce",  -- 1136
+        "%s battere le ali  ·  schiva le cime degli alberi e gli zeppelin",  -- 1137
+        "%s cattura i cavalieri con la rete per oro di volo  ·  %s alta quota",  -- 1138
+        "%d oro di volo",  -- 1139
+        "%s battere le ali",  -- 1140
+        "%s rete",  -- 1141
+        "%s alta quota",  -- 1142
+        "%s: torna al gioco (%d oro di volo)",  -- 1143
+        "%s: un gioco durante il viaggio",  -- 1144
+        "Il gioco di volo è disattivato: /cchud flightgame on",  -- 1145
+        "Il gioco di volo si gioca durante un volo.",  -- 1146
+        "Non in combattimento.",  -- 1147
+        "Gioco di volo: gioca / alta quota",  -- 1148
+        "in volo: avvia il gioco di volo, o portalo in alta quota e ritorno",  -- 1149
+        "Voli cinematografici: la telecamera ti gira intorno",  -- 1150
+        "durante il film la telecamera gira lentamente intorno a te e alla tua cavalcatura, un giro completo in circa un minuto e mezzo, e torna alle tue spalle prima dell'atterraggio. Disattivato: un'inquadratura fissa",  -- 1151
+        "Offline",  -- 1152
+        "Morto",  -- 1153
+        "Disattivato",  -- 1154
+        "In una specializzazione da guaritore",  -- 1155
+        "Sempre",  -- 1156
+        "Troppo lontano",  -- 1157
+        "Gruppo e incursione del guaritore",  -- 1158
+        "in gruppo: il tuo gruppo accanto al tuo personaggio, ognuno con il tasto che lo seleziona; in incursione: riquadri più sottili. Ognuno mostra solo quante cure gli servono, una penalità che puoi curare e se è a portata",  -- 1159
+        "%d%% di vendita",  -- 1160
+        "Va via di sicuro (%d%%)",  -- 1161
+        "Si vende da solo (%d%%)",  -- 1162
+        "Penso che si venderà (%d%%)",  -- 1163
+        "Dovrebbe trovare un compratore (%d%%)",  -- 1164
+        "Metà e metà (%d%%)",  -- 1165
+        "Può andare in tutti e due i modi (%d%%)",  -- 1166
+        "Un po' un azzardo (%d%%)",  -- 1167
+        "Potrebbe restare lì un po' (%d%%)",  -- 1168
+        "Non ci conterei (%d%%)",  -- 1169
+        "Brutte probabilità, amico (%d%%)",  -- 1170
+        "+%s rispetto a un mercante",  -- 1171
+        "nessun prezzo ancora noto",  -- 1172
+        "un mercante paga altrettanto",  -- 1173
+        "Il Mediatore",  -- 1174
+        "Mercato",  -- 1175
+        "ogni moneta contata, amico",  -- 1176
+        "Nelle tue borse non c'è niente che si possa vendere qui.",  -- 1177
+        "Nessun prezzo negli ultimi 7 giorni.",  -- 1178
+        "Un giorno di prezzi finora: si aggiunge una candela ogni giorno che visiti la casa d'aste.",  -- 1179
+        "7 giorni, una candela al giorno: verde chiusa più in alto, rossa più in basso",  -- 1180
+        "30 giorni, il più basso del giorno: verde su, rosso giù",  -- 1181
+        "Ancora nessuna cronologia dei prezzi: leggi la casa d'aste per qualche giorno.",  -- 1182
+        "Un solo giorno di prezzi finora: la linea cresce ogni giorno in cui visiti la casa d'aste.",  -- 1183
+        "Chiedo %s l'uno, %s per i %d che lasci andare; %d restano a te",  -- 1184
+        "Chiede %s l'uno, %s per tutti i %d",  -- 1185
+        "Più basso",  -- 1186
+        "letto %s",  -- 1187
+        "Solito",  -- 1188
+        "7 giorni: da %s a %s",  -- 1189
+        "In vendita: %d aste, %d oggetti",  -- 1190
+        "%s l'uno, %s per tutti i %d",  -- 1191
+        "Hai messo in vendita %d qui, %d aste vendute",  -- 1192
+        "Nessun prezzo noto: leggi prima la casa d'aste.",  -- 1193
+        "Niente nelle tue borse da vendere qui.",  -- 1194
+        "Oggi niente rende più qui che da un mercante; %d forse, con pazienza.",  -- 1195
+        "Prima i migliori: %d rendono più qui che da un mercante, altri %d con pazienza.",  -- 1196
+        "Borse vuote, amico. Portami qualcosa da vendere.",  -- 1197
+        "Oggi niente batte un mercante. %d forse, con un po' di pazienza.",  -- 1198
+        "Nessun guadagno sicuro in queste borse, amico. %d potrebbero rendere se aspetti.",  -- 1199
+        "Il meglio in cima: %d qui battono ogni mercante, %d in più per i pazienti.",  -- 1200
+        "%d rendono più qui che da un mercante, prima il meglio. %d in più se aspetti.",  -- 1201
+        "In cima alla pila si guadagna di più: %d vendite sicure, %d in più se sai aspettare.",  -- 1202
+        "Ancora nessun prezzo: %s legge la casa d'aste.",  -- 1203
+        "Prezzi letti or ora: %d.",  -- 1204
+        "%d prezzi, letti %s.",  -- 1205
+        "%d prezzi, letti %s. %s li rilegge.",  -- 1206
+        "Non ho ancora letto la bacheca. %s e ti porto ogni prezzo.",  -- 1207
+        "Ancora nessun prezzo, amico. %s legge tutta la bacheca.",  -- 1208
+        "Prezzi freschi dalla bacheca, amico: %d.",  -- 1209
+        "Ho appena letto la bacheca: %d prezzi, ancora caldi.",  -- 1210
+        "%d prezzi, letti %s. Basta così, amico.",  -- 1211
+        "Ultima occhiata alla bacheca: %s, %d prezzi.",  -- 1212
+        "Prezzi di %s, raffermi come pane vecchio. %s rilegge la bacheca.",  -- 1213
+        "%d prezzi, ma letti %s. %s e ci do un'altra occhiata.",  -- 1214
+        "Viene mostrato anche ciò che tieni. %s lo nasconde.",  -- 1215
+        "Messi da parte: %d, per le tue professioni, il tuo equipaggiamento e i tuoi segni. %s li mostra.",  -- 1216
+        "Anche ciò che tieni è in lista. %s lo mette via.",  -- 1217
+        "Mostro anche ciò che tieni. %s lo nasconde di nuovo.",  -- 1218
+        "%d messi da parte: roba per le professioni, da indossare, segnata da te. %s li mostra.",  -- 1219
+        "Ne ho tenuti %d per i tuoi mestieri, da indossare o segnati. %s se li vuoi.",  -- 1220
+        "l'uno",  -- 1221
+        "nessun dato",  -- 1222
+        "Vendita rapida",  -- 1223
+        "Paziente",  -- 1224
+        "Leggi tutti i prezzi",  -- 1225
+        "Nascondi i tenuti",  -- 1226
+        "Mostra i tenuti",  -- 1227
+        "Linea",  -- 1228
+        "Candele",  -- 1229
+        "Metti",  -- 1230
+        "%d di %d",  -- 1231
+        "Metti %d di %d a %s l'uno",  -- 1232
+        "Metti %d a %s",  -- 1233
+        "Metti in vendita tutti i %d per %s",  -- 1234
+        "Da qui non si può mettere in vendita alla casa d'aste di questo client.",  -- 1235
+        "Messo %d a %s.",  -- 1236
+        "Mercato alla casa d'aste: apri / chiudi",  -- 1237
+        "Saluto del banditore al Mercato",  -- 1238
+        "un banditore goblin dice una breve battuta, dai suoni del gioco, quando si apre il Mercato; disattivato: si apre in silenzio",  -- 1239
+        "Mercato: mostra ciò che tieni",  -- 1240
+        "il Mercato elenca anche ciò che tieni: ciò da cui le tue professioni imparano ancora o che trasformano in qualcosa di più prezioso, e ciò che hai segnato da tenere; disattivato: solo ciò che venderesti",  -- 1241
+        "Mercato: grafico dei prezzi a candele",  -- 1242
+        "il grafico dei prezzi del Mercato è una candela al giorno per gli ultimi 7 giorni (dove il prezzo ha aperto, il più alto e il più basso, e dove ha chiuso: verde se ha chiuso più in alto, rossa se più in basso); spento: una linea del prezzo più basso di ogni giorno su 30 giorni",  -- 1243
+        "apri o chiudi il Mercato (una scheda della casa d'aste)",  -- 1244
+        "quale casa d'aste ha questo client (per la risoluzione dei problemi)",  -- 1245
+        "Apri la finestra di una professione e darò un'occhiata alle tue ricette.",  -- 1246
+        "È il tetto, %d. Un istruttore ha il grado successivo per te.",  -- 1247
+        "Niente più da imparare a %d. Va' da un istruttore per il grado successivo.",  -- 1248
+        "Le tue ricette ti stanno strette. Va' da un istruttore: %s ti aspetta a %d.",  -- 1249
+        "Mancano %d a %d, e ciò che sai non ti ci porterà. Un istruttore ha %s per te a %d.",  -- 1250
+        "Le tue ricette ti stanno strette. Va' da un istruttore: %s ti aspetta.",  -- 1251
+        "Le tue ricette smettono di insegnarti a %d da %d. Chiedi %s a un istruttore.",  -- 1252
+        "Le tue ricette si esauriscono a %d da %d. Un istruttore avrà qualcosa di nuovo.",  -- 1253
+        "Ciò che sai non ti porterà per gli ultimi %d. È ora di vedere un istruttore.",  -- 1254
+        "%s non ti insegnerà più molto, ma è il meglio che hai. Mancano %d a %d.",  -- 1255
+        "Da qui si va piano: %s dà un punto ogni tanto. Ne mancano %d.",  -- 1256
+        "Prima ti servirà %s, %s. Le guide iniziano questo tratto con questa.",  -- 1257
+        "Impara %s, %s, e cominciamo: mancano %d a %d.",  -- 1258
+        "Mancano %d a %d. Le guide ti mandano a cercare %s fino a %d.",  -- 1259
+        "Qui impari raccogliendo: %s fino a %d.",  -- 1260
+        "Mancano %d a %d. Comincia con %s, o con %s se preferisci: %s.",  -- 1261
+        "Prima %s, come dicono le guide. Va bene anche %s: %s.",  -- 1262
+        "Mancano %d a %d. Comincia con %s.",  -- 1263
+        "%s è ora il tuo miglior maestro. %d punti a %d.",  -- 1264
+        "Mani ferme. Prima %s, e ne mancano %d.",  -- 1265
+        "da un istruttore",  -- 1266
+        "da un mercante",  -- 1267
+        "come bottino",  -- 1268
+        "da una missione",  -- 1269
+        "materiali più economici",  -- 1270
+        "materiali da un mercante",  -- 1271
+        "materiali che raccogli tu",  -- 1272
+        "si vende bene",  -- 1273
+        "qualcosa che userai",  -- 1274
+        "meno creazioni",  -- 1275
+        "una ricetta da trovare o comprare",  -- 1276
+        "altri materiali",  -- 1277
+        "la prima scelta delle guide",  -- 1278
+        "Apri la finestra di una professione per un piano di avanzamento.",  -- 1279
+        "Al limite, %d. Un istruttore ha il grado successivo.",  -- 1280
+        "Ancora %d fino a %d; le tue ricette non bastano. Un istruttore ha %s a %d.",  -- 1281
+        "Ancora %d fino a %d; le tue ricette non bastano. Un istruttore ha %s.",  -- 1282
+        "Le tue ricette si fermano a %d da %d. Un istruttore ne ha altre.",  -- 1283
+        "Ancora %d fino a %d. Il migliore ora: %s, verde (un punto ogni tanto).",  -- 1284
+        "Ancora %d fino a %d. Prima impara %s, %s.",  -- 1285
+        "Ancora %d fino a %d. Raccogli %s fino a %d.",  -- 1286
+        "Ancora %d fino a %d. Prima: %s, oppure %s (%s).",  -- 1287
+        "Ancora %d fino a %d. Prima: %s.",  -- 1288
+        "Da raccogliere o comprare",  -- 1289
+        "%d volte: %s",  -- 1290
+        "Imparala %s, da %d.",  -- 1291
+        "Imparala %s.",  -- 1292
+        "%s: %d nelle borse, %d in banca, %d per creazione",  -- 1293
+        "Le guide salgono questo tratto raccogliendo %s.",  -- 1294
+        "%s: ne hai %d, il piano ne usa %d",  -- 1295
+        "per %s",  -- 1296
+        "Costa meno comprarlo che produrlo con %s",  -- 1297
+        "Prodotto con %s",  -- 1298
+        "Il Mentore: cosa ti fa creare la tua banca",  -- 1299
+        "Cosa puoi creare con la banca",  -- 1300
+        "Con ciò che hai in banca non si crea nient'altro.",  -- 1301
+        "%d che puoi creare contando la banca, %d solo grazie a lei.",  -- 1302
+        "Il Mentore: %s %d > %d",  -- 1303
+        "Il Mentore",  -- 1304
+        "Piano di avanzamento",  -- 1305
+        "o",  -- 1306
+        "Raccogli %s",  -- 1307
+        "da imparare",  -- 1308
+        "conviene comprarlo",  -- 1309
+        "Nascondi",  -- 1310
+        "Il piano",  -- 1311
+        "Farma questo",  -- 1312
+        "Farma tutto",  -- 1313
+        "Con la banca",  -- 1314
+        "Usa il piano",  -- 1315
+        "due volte per nascondere",  -- 1316
+        "Niente da provare qui.",  -- 1317
+        "%d aggiunti alla lista da farmare.",  -- 1318
+        "Non manca niente: hai quello che serve.",  -- 1319
+        "Apri la finestra di una professione per fare un piano.",  -- 1320
+        "Il Mentore (piano di avanzamento): mostra / nascondi",  -- 1321
+        "mostra il piano di avanzamento dell'ultima finestra di professione aperta, con i pulsanti del controller",  -- 1322
+        "A sinistra delle missioni",  -- 1323
+        "A destra delle missioni",  -- 1324
+        "Sotto le missioni",  -- 1325
+        "La lista da farmare è piena.",  -- 1326
+        "Lista da farmare: %s, %d voluti.",  -- 1327
+        "Da farmare",  -- 1328
+        "altri %d",  -- 1329
+        "Ancora niente da farmare.",  -- 1330
+        "Una pila in più",  -- 1331
+        "Togli",  -- 1332
+        "Svuota",  -- 1333
+        "Fatto",  -- 1334
+        "Togliere tutto dalla lista da farmare?",  -- 1335
+        "Lista da farmare: scegli / fatto",  -- 1336
+        "Lista da farmare: aggiungi l'oggetto indicato",  -- 1337
+        "Non è nella lista da farmare.",  -- 1338
+        "La lista da farmare è vuota.",  -- 1339
+        "Lista da farmare: dove si trova",  -- 1340
+        "la lista da farmare a sinistra dell'elenco delle missioni, alla sua destra o sotto le sue missioni",  -- 1341
+        "la lista da farmare accanto all'elenco delle missioni: scegli col controller; add <oggetto> [quanti], remove <oggetto>, clear, o left / right / bottom per la posizione",  -- 1342
+        "Percentuale di minaccia",  -- 1343
+        "la tua parte di minaccia come numero accanto all'icona della minaccia, sul riquadro del bersaglio e sulle barre del nome",  -- 1344
+        "Numero della salute",  -- 1345
+        "la salute rimasta, abbreviata (12.3k), sulla barra (non sulle targhette compatte: lì basta la percentuale)",  -- 1346
+        "I tuoi debuff",  -- 1347
+        "i tuoi debuff sull'unità, sopra il suo nome, con il loro tempo",  -- 1348
+        "Malus di tutti",  -- 1349
+        "i malus che il gioco segna per le barre dei nomi di tutti, non solo i tuoi",  -- 1350
+        "Bonus del nemico",  -- 1351
+        "i benefici di un nemico accanto alle sue penalità: quelli che contano (importanti, infuriato o che puoi dissolvere o rubare), o tutti se Solo gli effetti che contano è disattivato",  -- 1352
+        "Icona di controllo di massa",  -- 1353
+        "una grande icona con il tempo quando l'unità è stordita, immobilizzata, impaurita...",  -- 1354
+        "Bagliore di aggro",  -- 1355
+        "un'icona a scudo e un bagliore dietro il nome: rosso mentre ti attacca, rosso e giallo quando stai per attirarlo, giallo e blu quando lo stai perdendo, blu quando non è su di te",  -- 1356
+        "Indicatore missione",  -- 1357
+        "un indicatore dorato sulle unità di cui le tue missioni hanno ancora bisogno",  -- 1358
+        "Animazioni delle targhette",  -- 1359
+        "le targhette appaiono in dissolvenza, la salute bassa respira, il controllo delle masse brilla",  -- 1360
+        "Piccola",  -- 1361
+        "Normale",  -- 1362
+        "Grande",  -- 1363
+        "Nome intero",  -- 1364
+        "Nome breve",  -- 1365
+        "Nessun nome",  -- 1366
+        "Completo",  -- 1367
+        "Minimale mini",  -- 1368
+        "Dimensione delle targhette",  -- 1369
+        "quanto sono grandi le barre delle targhette: piccole e sottili, normali o grandi (più larghe e più alte)",  -- 1370
+        "Nomi sulle targhette",  -- 1371
+        "il nome su una targhetta con barra della salute: intero, accorciato o tolto (il riquadro del bersaglio lo mostra intero; livello e icona di classe restano). Una targhetta senza barra, quella di un PNG amichevole, tiene sempre il suo nome",  -- 1372
+        "Aspetto delle targhette",  -- 1373
+        "gli interruttori delle targhette in un colpo. Completo: tutto. Minimale: niente barra della risorsa, gilda o titolo, nomi brevi. Minimale mini: barre piccole con la salute, i tuoi indebolimenti e i potenziamenti che contano, livello e classe, nessun nome (lo ha il riquadro del bersaglio). Minaccia, controllo e lanci vistosi restano sempre",  -- 1374
+        "Titoli dei giocatori",  -- 1375
+        "mostra il titolo di un giocatore insieme al suo nome",  -- 1376
+        "Gilde e mestieri dei PNG",  -- 1377
+        "una riga sotto il nome: la gilda del giocatore, o cosa fa il PNG",  -- 1378
+        "Barre per gli amici in combattimento",  -- 1379
+        "le targhette amichevoli mostrano salute, risorsa e lanci finché quell'unità è in combattimento",  -- 1380
+        "Targhette amiche del gioco",  -- 1381
+        "lascia le targhette amiche (il tuo gruppo, altri giocatori, PNG amici) all'aspetto del gioco; le nostre solo sui nemici",  -- 1382
+        "Barre delle risorse",  -- 1383
+        "una sottile barra di mana, rabbia o energia sotto la barra della salute",  -- 1384
+        "Bersaglio del lancio",  -- 1385
+        "a chi è diretto un lancio, accanto al nome dell'incantesimo",  -- 1386
+        "Percentuale di salute",  -- 1387
+        "la percentuale di salute sulla barra",  -- 1388
+        "Nome sulla barra del bersaglio",  -- 1389
+        "disattivato: la barra del tuo bersaglio non mostra nome né livello (li mostra il riquadro del bersaglio)",  -- 1390
+        "Livelli sulle barre del nome",  -- 1391
+        "il livello davanti al nome di un nemico, colorato in base alla difficoltà",  -- 1392
+        "Targhette compatte",  -- 1393
+        "targhette larghe circa la metà",  -- 1394
+        "Lanci nemici vistosi",  -- 1395
+        "il lancio di un nemico lampeggia, si ingrandisce e pulsa sempre più veloce finché non va a segno, così da poterlo interrompere in tempo",  -- 1396
+        "Icone di classe sulle targhette",  -- 1397
+        "l'icona di classe di un giocatore davanti al nome, amico o nemico",  -- 1398
+        "Cosa fanno i PNG, come icone",  -- 1399
+        "un'icona sopra i PNG amichevoli che offrono qualcosa: una borsa sui mercanti, un'incudine sui fabbri che riparano, un libro sugli istruttori... (le icone del gioco; si vedono anche mentre la targhetta aspetta di essere indicata)",  -- 1400
+        "PNG amichevoli solo se puntati",  -- 1401
+        "le targhette dei PNG amichevoli (venditori, assegnatori di missioni, cittadini) compaiono solo mentre li punti, come il loro tooltip",  -- 1402
+        "Nomi sulle cose con cui puoi interagire",  -- 1403
+        "un nome sopra minerali, forzieri, targhe e simili mentre li hai di fronte (disattivato: restano senza nome, il messaggio del gioco dice già cosa sono)",  -- 1404
+        "Mini targhette",  -- 1405
+        "servitori, animaletti e nemici grigi che non danno esperienza hanno una piccola targhetta: una barra sottile con i tuoi effetti negativi sopra e senza nome (un animaletto, senza barra, mantiene il nome; l'opzione del gioco decide se hanno targhette)",  -- 1406
+        "Barre del nome del gruppo nelle spedizioni: solo nomi",  -- 1407
+        "dentro una spedizione o un'incursione il gioco disegna da sé le barre del nome dei giocatori amici e gli addon non possono cambiarle: lì le opzioni proprie del gioco vengono impostate per mostrarle come nomi nel colore della classe, senza barre, come le nostre, e le barre del gioco tornano mentre combatti (se le barre per gli amici in combattimento sono attive); tutto viene ripristinato quando esci",  -- 1408
+        "Barre del nome del gruppo nelle spedizioni: nascoste",  -- 1409
+        "dentro una spedizione o un'incursione, spegni del tutto le barre del nome del gioco per i giocatori amici (e rimettile come le avevi quando esci)",  -- 1410
+        "mostra cosa fornisce il gioco per il nome del tuo bersaglio (per la risoluzione dei problemi)",  -- 1411
+        "elenca le targhette sullo schermo e se hanno il nostro aspetto (per la risoluzione dei problemi)",  -- 1412
+        "Bene, allora.",  -- 1413
+        "Ah, che mucchio.",  -- 1414
+        "Vediamo, vediamo...",  -- 1415
+        "Elune, dammi pazienza.",  -- 1416
+        "Per i naaru, che confusione.",  -- 1417
+        "Maledetto zaino.",  -- 1418
+        "Zaino in ordine, zaino leggero.",  -- 1419
+        "Bah. Troppa roba.",  -- 1420
+        "Peso morto, tutto quanto.",  -- 1421
+        "Pazienza. La Madre Terra provvede.",  -- 1422
+        "Ehi, cosa abbiamo qui, amico?",  -- 1423
+        "Che disordine. Sconveniente.",  -- 1424
+        "Il tempo è denaro. Contiamo.",  -- 1425
+        "Sì, può andare.",  -- 1426
+        "Sia ringraziata Elune.",  -- 1427
+        "La Luce provvede.",  -- 1428
+        "Hrm. Abbastanza.",  -- 1429
+        "Hm. Basta per combattere.",  -- 1430
+        "Viaggio leggero. Bene.",  -- 1431
+        "Accettabile. A malapena.",  -- 1432
+        "Non c'è un posto libero. La robaccia frutterebbe %s: venderla fa spazio.",  -- 1433
+        "Non c'è un posto libero. Quello che non mi serve in viaggio può aspettare in banca.",  -- 1434
+        "Robaccia: %d, vale %s qui. X vende quella che ho scelto; Vendita furba prende tutto.",  -- 1435
+        "%d di questi vanno in banca: ne contiene già altri uguali, o li ho segnati. Deposita li mette via.",  -- 1436
+        "Solo %d posti liberi. La robaccia frutterebbe %s da qualsiasi mercante.",  -- 1437
+        "Solo %d posti liberi. È ora di vendere o depositare qualcosa.",  -- 1438
+        "Nuovi dall'ultima occhiata: %d. Il punto dorato segna ciascuno.",  -- 1439
+        "Da vendere: %d. Il filtro Vendi li raccoglie, e ogni descrizione dice dove rende di più.",  -- 1440
+        "Robaccia: %d, vale %s. Al prossimo mercante.",  -- 1441
+        "Solo l'essenziale. Niente che valga la pena vendere.",  -- 1442
+        "Tutto in ordine, e %d posti liberi.",  -- 1443
+        "Il tuo equipaggiamento è riparato: %s.",  -- 1444
+        "Posso riparare il tuo equipaggiamento per %s; un pezzo rotto non ti dà né armatura né statistiche.",  -- 1445
+        "Le tue borse sono piene. Prendo %d cose per %s: Vendita furba, e hai di nuovo spazio.",  -- 1446
+        "Ti do %s per %d cose: la robaccia e ciò che la casa d'aste non pagherebbe di più. Vendita furba, ed è fatta.",  -- 1447
+        "Tieni i %d che vuole la casa d'aste: paga %s più di me.",  -- 1448
+        "Le tue borse sono piene. Vendimi qualcosa prima di comprare.",  -- 1449
+        "Niente nelle tue borse per cui pagherei bene. Dai un'occhiata alla mia merce.",  -- 1450
+        "%d delle cose che porti vanno qui: ne custodisco altre uguali, o le hai segnate. Deposita le mette via.",  -- 1451
+        "Custodisco altre scorte di %d cose che porti. Preleva riempie le borse prima di partire.",  -- 1452
+        "Le tue borse sono quasi piene. Lascia a me ciò che non ti serve in viaggio.",  -- 1453
+        "Tutto al sicuro con me, e le tue borse hanno %d posti liberi.",  -- 1454
+        "Oggi niente per te. Ho controllato due volte.",  -- 1455
+        "Lettere per te: %d, niente allegato. Leggile quando vuoi.",  -- 1456
+        "Lettere per te: %d. Dentro: %s.",  -- 1457
+        "Prendi tutto le svuota in un colpo.",  -- 1458
+        "Contrassegno: %d. Quelle le apri e paghi tu.",  -- 1459
+        "Le tue borse sono piene: gli oggetti aspettano nelle loro lettere.",  -- 1460
+        "Dove si va? Indica un luogo e ti dirò quanto dura il volo.",  -- 1461
+        "%s: circa %s secondo la mappa. Quella rotta non l'hai ancora volata.",  -- 1462
+        "%s: circa %s, secondo il tuo ultimo volo lì.",  -- 1463
+        "%s: non so ancora dirti quanto. Volalo una volta e lo saprò.",  -- 1464
+        "Ne sono scappati %d. Quest'acqua chiede più abilità di quanta ne ho: l'esca aiuta, e anche una canna migliore.",  -- 1465
+        "Niente esca sull'amo. Aumenta la mia abilità, così ne scappano meno.",  -- 1466
+        "L'esca è quasi finita. Un'altra sull'amo tiene alta la mia abilità.",  -- 1467
+        "Pesci di qui che non ho ancora preso: %d. Continuo a lanciare.",  -- 1468
+        "Ho preso ogni pesce di quest'acqua. Altrove, allora.",  -- 1469
+        "Ancora niente preso. Il primo pesce di ogni acqua va qui.",  -- 1470
+        "Specie prese: %d. Ogni acqua ne nasconde altre: il pannello di pesca mostra un ? per ciascuna che non ho preso lì.",  -- 1471
+        "Riposato accanto al fuoco: i prossimi %d punti esperienza dalle uccisioni valgono doppio.",  -- 1472
+        "Nessun riposo accumulato. Una notte in una locanda o in città, e le uccisioni danno esperienza doppia per un po'.",  -- 1473
+        "%d assorbiti",  -- 1474
+        "Elenco a destra",  -- 1475
+        "Uno al centro",  -- 1476
+        "%d cure critiche",  -- 1477
+        "%d critici",  -- 1478
+        "Giudizio",  -- 1479
+        "Grandi momenti: dove",  -- 1480
+        "un blocco appena sopra gli avvisi di ricarica a destra del tuo personaggio, il più recente vicino a loro e i precedenti che salgono sopra mentre svaniscono, o uno alla volta al centro",  -- 1481
+        "mostra come appare e si sente un grande momento",  -- 1482
+        "ottenuto",  -- 1483
+        "ottenuto da un altro oggetto",  -- 1484
+        "non ancora ottenuto",  -- 1485
+        "Aspetto",  -- 1486
+        "Scegli un set per mettere i suoi pezzi sul tuo completo. %s lo conserva; prima non si paga nulla.",  -- 1487
+        "Sto guardando la tua collezione...",  -- 1488
+        "Il tuo completo è tornato com'era.",  -- 1489
+        "%s: %d pezzi su %d indossati.",  -- 1490
+        "%d non si potevano mettere su questo completo.",  -- 1491
+        "Un set di cui hai dei pezzi",  -- 1492
+        "%d set di cui hai dei pezzi",  -- 1493
+        "non puoi indossarlo",  -- 1494
+        "mancante",  -- 1495
+        "Tutti i %d pezzi",  -- 1496
+        "%d pezzi su %d",  -- 1497
+        "Manca: %s",  -- 1498
+        "Ancora nessun set. Gli oggetti che condividono un nome, come Elmo di Ferro Verde e Guanti d'Arme di Ferro Verde, compaiono qui appena ne hai uno.",  -- 1499
+        "Annulla",  -- 1500
+        "Eliminare il set personalizzato %s? Non può essere recuperato.",  -- 1501
+        "Elimina",  -- 1502
+        "Punta prima un set personalizzato.",  -- 1503
+        "%s  Elimina set personalizzato",  -- 1504
     },
     koKR = {
         "오류:",  -- 1
@@ -8508,529 +8518,531 @@ local TRANSLATIONS = {
         "나침반은 현재 위치를 알아야 하는데, 여기서는 게임이 알려 주지 않습니다.",  -- 977
         "퀘스트 나침반: 위치",  -- 978
         "화면 위쪽, 또는 아래쪽 경험치 바 자리 (그러면 경험치 바는 위로 갑니다)",  -- 979
-        "20초 동안 주변에 퀘스트 나침반 표시 몇 개",  -- 980
-        "낚시 모드: 꺼짐.",  -- 981
-        "낚시: %s 눌러 던지기",  -- 982
-        "미끼 없음: %s 두 번 눌러 %s 사용",  -- 983
-        "%s 눌러 낚싯대 넣기",  -- 984
-        "낚시 모드: %s 눌러 낚싯줄을 던지고, 찌가 흔들리면 다시 눌러 물고기를 낚아챕니다.",  -- 985
-        "%s 낚아채기, %s 다시 던지기",  -- 986
-        "낚시 모드는 손에 낚싯대가 있어야 합니다.",  -- 987
-        "낚시를 배우지 않았습니다.",  -- 988
-        "낚시 모드: 버튼 하나로 던지고 낚아채기",  -- 989
-        "낚시 버튼: %s",  -- 990
-        "한 번 눌러 다시 던지기",  -- 991
-        "찌가 물에 있는 동안 낚시 버튼으로 물고기를 낚아채고, A를 한 번 눌러 다시 던집니다. 끄면 A는 원래대로",  -- 992
-        "두 번 눌러 미끼 달기",  -- 993
-        "낚시 버튼을 빠르게 두 번 누르면, 낚싯대에 미끼가 없을 때 두 번째 누름이 가방 속 가장 좋은 미끼를 낚싯대에 답니다",  -- 994
-        "낚시 중 게임패드 바 숨기기",  -- 995
-        "낚싯대를 들고 있으면 게임패드 바가 숨겨져 물이 잘 보입니다. 낚시 안내에 던지기 버튼이 표시됩니다. 전투가 시작되거나 낚싯대를 넣으면 바로 돌아옵니다",  -- 996
-        "한 버튼 낚시를 잠시 끄거나 다시 켜기 (낚싯대를 들면 저절로 켜집니다)",  -- 997
-        "낚시하는 버튼: 처음에는 상호작용 버튼(네모 또는 X), 또는 다른 아무 버튼, 예를 들어 트리거 (rt)",  -- 998
-        "듀로타의 해안은 붉은 바위와 따뜻한 얕은 바다입니다. 메아리 군도의 트롤들은 섬의 밥 짓는 불 냄새가 밀물에 실려 올 때 고등어 떼가 가장 많이 몰린다고 말합니다.",  -- 999
-        "멀고어의 호수는 작고 맑으며 느긋합니다. 타우렌은 다른 모든 일을 할 때처럼 낚시도 천천히, 감사하는 마음으로 합니다.",  -- 1000
-        "불모의 땅의 오아시스는 어디나 만남의 장소입니다. 낮에 무엇이 와서 물을 마시든, 밤이면 그 아래에서 무언가가 헤엄칩니다.",  -- 1001
-        "텔드랏실의 연못은 모두 한 그루 나무의 그늘 아래 있습니다. 나이트 엘프 낚시꾼들은 이곳 물고기가 해를 본 적도 없고 그리워하지도 않는다고 장담합니다.",  -- 1002
-        "어둠의 해안의 물은 잿빛이고 차가우며 난파선으로 가득합니다. 아우버다인 앞바다에서 입질하는 녀석의 절반은 누군가 잃어버린 화물 속에 살림을 차렸습니다.",  -- 1003
-        "잿빛 골짜기의 강은 웬만한 왕국보다 오래된 나뭇잎 아래로 흐릅니다. 물고기도 빠르지만, 여기서 뭘 하느냐고 물으러 오는 파수꾼들은 더 빠릅니다.",  -- 1004
-        "버섯구름 봉우리 아래에서는 물이 귀해서 다들 악착같이 지킵니다. 이곳 물고기는 제 자리를 당당히 얻어 낸 녀석입니다.",  -- 1005
-        "돌발톱 산맥의 호수는 봉우리 사이 높고 추운 곳에 있습니다. 낚시가 이렇게 잘되지만 않았어도 고블린들이 진작 물을 다 빼 버렸을 겁니다.",  -- 1006
-        "잊혀진 땅의 해안은 뼈와 잿빛 파도뿐입니다. 저 아래 무언가는 둘 다 즐겨 먹는 모양입니다.",  -- 1007
-        "페랄라스는 물가까지 온통 푸릅니다. 강은 깊고 따뜻하며, 그야말로 살아 숨 쉽니다.",  -- 1008
-        "먼지진흙 습지대는 어디까지가 땅이고 어디부터 물인지 아무도 모릅니다. 물가에서 낚시하고, 끝나면 발가락 수를 세어 보십시오.",  -- 1009
-        "타나리스에서 물이라 부를 만한 것은 스팀휘들 항구에만 있습니다. 고블린들은 낚시할 권리를 팔 텐데, 가만두면 두 번 팝니다.",  -- 1010
-        "아즈샤라의 눈부신 만 아래에는 물에 잠긴 도시가 있습니다. 노련한 낚시꾼들은 큰 놈들이 옛 정원 자리에 산다고 합니다.",  -- 1011
-        "악령의 숲의 웅덩이는 빛이 나는데, 좋은 뜻으로 그런 것은 아닙니다. 아직도 거기서 헤엄치는 녀석들은 고집이 상상을 초월합니다.",  -- 1012
-        "운고로의 온천과 타르가 둘러진 호수에는 세상이 잊어버린 것들이 남아 있습니다. 그중 몇몇은 뭅니다.",  -- 1013
-        "달의 숲의 엘룬아라 호수는 참은 숨처럼 고요합니다. 드루이드들이 바라는 것은 먹을 만큼만 잡아 가라는 것뿐입니다.",  -- 1014
-        "실리더스는 모래와 바람, 그리고 날갯짓 소리뿐입니다. 여기서 낚시할 물을 찾았다면 아무에게도 말하지 마십시오.",  -- 1015
-        "여명의 설원의 호수는 가장자리는 얼고 한가운데에서는 김이 오릅니다. 이곳 물고기는 추위에 대비해 살이 올라 있어, 먼 길을 걸어온 보람이 있습니다.",  -- 1016
-        "오그리마의 연못에서는 딱히 할 일이 없는 일꾼들과, 자기도 그렇다고 말하는 늙은 그런트들이 낚시를 합니다. 둘 다 큰 놈은 놓쳤다고 말합니다.",  -- 1017
-        "썬더 블러프의 연못에서 잡힌 물고기는 평생을 평원보다 한참 높은 곳에서 살았습니다. 그래도 태연해 보입니다.",  -- 1018
-        "다르나서스는 물도 신전만큼이나 정성껏 돌봅니다. 물고기들은 감탄받는 데 익숙해졌습니다.",  -- 1019
-        "알터랙 산맥의 호수는 눈 녹은 물이며, 오우거와 비밀결사대가 아무도 보지 않을 때 낚시를 합니다.",  -- 1020
-        "아라시의 물가는 낚시꾼보다 군대를 더 많이 보았습니다. 물고기들은 물 위에 누구의 깃발이 나부끼든 신경 쓰지 않은 지 오래입니다.",  -- 1021
-        "황야의 땅은 끝에서 끝까지 먼지뿐입니다. 여기서 입질이 온다면 작은 기적이니, 기적답게 대하십시오.",  -- 1022
-        "저주받은 땅의 해안은 붉고, 깎여 나갔고, 조용합니다. 그 파도 속에 사는 것은 참 많은 것을 견디며 사는 법을 배웠습니다.",  -- 1023
-        "티리스팔의 호수는 병든 빛깔의 하늘 아래 잔잔히 누워 있습니다. 포세이큰은 습관처럼 낚시를 합니다. 죽은 자는 많이 먹지 않지만, 좋아했다는 것만은 기억합니다.",  -- 1024
-        "은빛소나무 숲의 긴 해안은 온통 안개와 소나무 그림자입니다. 낚시는 잘되는데, 이곳에 대해 누가 하는 밝은 말은 그것 하나뿐입니다.",  -- 1025
-        "서부 역병지대의 강은 아직 흐르지만 깨끗하지는 않습니다. 건져 올린 것은 두 번 살펴보십시오.",  -- 1026
-        "동부 역병지대에서 낚시하는 사람은 드물고, 했다고 말하는 사람은 더 드뭅니다. 이곳의 물은 역병이 남겨 둔 것만을 간직하고 있습니다.",  -- 1027
-        "힐스브래드의 강과 긴 남쪽 해안은 이 땅을 두고 벌어진 모든 싸움에서 양쪽 모두를 먹여 살렸습니다.",  -- 1028
-        "동부 내륙지의 호수는 높은 숲 속에 숨어 있고, 와일드해머 드워프들은 아무도 못 본다 싶으면 그리핀 등에 탄 채로 낚시를 합니다.",  -- 1029
-        "던 모로의 호수는 한 해의 대부분 얼음에 둘러싸여 있습니다. 드워프는 구멍을 뚫고 맥주 한 잔과 함께 앉아서, 무엇이 물든 좋은 하루였다고 합니다.",  -- 1030
-        "이글거리는 협곡에는 다른 땅이라면 강이 있을 자리에 용암이 흐릅니다. 낚싯대 대신 마실 것을 챙겨 오십시오.",  -- 1031
-        "불타는 평원은 재와 불씨뿐입니다. 이곳의 물이 무언가를 내어 준다면, 분명 뜨거울 겁니다.",  -- 1032
-        "엘윈의 아이들은 누구나 수정 호수나 돌무덤 호수에서 낚시를 배웁니다. 그곳의 잔챙이들은 대대로 아이들을 골탕 먹여 왔습니다.",  -- 1033
-        "죽음의 고개에는 물도 적고 반기는 이는 더 적습니다. 카라잔 아래 웅덩이에 있는 것은 그대로 두는 편이 좋습니다.",  -- 1034
-        "그늘숲 가장자리를 따라 흐르는 강은 언제 보아도 검습니다. 물고기는 어둠을 개의치 않는 듯한데, 낚시꾼은 그렇지 않습니다.",  -- 1035
-        "모단 호수는 이 땅의 자랑이며, 거대한 스톤워트 댐이 그 물을 막고 있습니다. 드워프들은 낚시 무용담을 이 호수에 견주어 보는데, 대개는 호수가 이깁니다.",  -- 1036
-        "붉은마루의 영원의 호수는 그림처럼 아름답고, 레이크샤이어의 부두마다 낚싯대가 드리워져 있습니다. 마을 사람들은 좋은 자리를 전부 알지만 하나도 알려 주지 않습니다.",  -- 1037
-        "밀림의 강에서 거친 남쪽 곶까지, 가시덤불 골짜기는 대륙에서 가장 풍요로운 물을 품고 있습니다. 무법항의 낚시꾼들은 이를 두고 대회를 여는데, 거의 다 반칙을 합니다.",  -- 1038
-        "슬픔의 늪은 초록 나무 아래 초록 물입니다. 물고기에서 진흙 맛이 나는데, 이곳 주민들은 그 맛을 좋아합니다.",  -- 1039
-        "서부 몰락지대의 밭은 망했지만 바다는 그렇지 않았습니다. 남은 사람들은 길고 잿빛인 해안에 기대어 살아갑니다.",  -- 1040
-        "저습지는 이름값을 합니다. 메네실 항구의 부두가 그나마 가장 마른 낚시터인데, 악어들도 그 사실을 압니다.",  -- 1041
-        "스톰윈드의 운하에서는 아이들과 은퇴한 노인들, 그리고 변장한 귀족이 적어도 한 명 낚시를 합니다. 운하에 또 무엇이 있는지는 아무도 묻지 않습니다.",  -- 1042
-        "쓸쓸한 동굴에는 아이언포지에서 하나뿐인 조용한 연못이 있습니다. 늙은 드워프들은 몇 시간이고 낚시를 하면서 한마디도 하지 않습니다.",  -- 1043
-        "언더시티의 운하는 초록빛인데, 물이끼와는 아무 상관이 없습니다. 거기서 낚시하는 포세이큰은 저녁거리를 구하려는 것이 아닙니다.",  -- 1044
-        "낚시꾼 대부분이 생애 처음으로 낚는 물고기이며, 기억에 남을 만큼 빛깔이 곱습니다.",  -- 1045
-        "미끈하고 날쌔며 따뜻한 해안 어디에나 흔합니다. 이름에서 풍기는 느낌보다는 구웠을 때 맛이 좋습니다.",  -- 1046
-        "온몸이 입이나 다름없고, 마시고 싶지 않은 물에서 가장 행복해합니다.",  -- 1047
-        "작고, 이빨이 날카롭고, 겁이 없습니다. 한 떼가 모단 호수에서 곰을 쫓아냈다는 이야기가 있습니다.",  -- 1048
-        "파도 아래에서 번뜩이는 한 줄기 빛깔입니다. 뱃사람들은 낚싯줄에 한 마리 걸리면 항해에 운이 따른다고 여깁니다.",  -- 1049
-        "드워프 원로 같은 수염을 단, 참을성 많은 바닥 물고기입니다.",  -- 1050
-        "두 번 먹는 사람은 없습니다. 연금술사들은 구할 수 있는 대로 다 사 갑니다.",  -- 1051
-        "지느러미가 재 속에 묻어 둔 숯불처럼 빛나고, 짜낸 기름도 그에 못지않게 잘 탑니다.",  -- 1052
-        "작은 방패처럼 단단히 무장하고 있습니다. 속살은 그 수고를 들일 만합니다.",  -- 1053
-        "통곡의 동굴 근처 물속의 무언가가 이 물고기를 바꿔 놓았습니다. 먹으면 당신도 한동안 바뀔지 모릅니다.",  -- 1054
-        "강가 사람들은 이것을 먹으면 머리가 맑아진다고 합니다. 이 물고기가 지혜로워진 것은 물살을 거슬러 헤엄친 덕분입니다.",  -- 1055
-        "사촌보다 나이도 많고 몸집도 크고 더 지혜롭지만, 그래도 당신의 바늘은 피하지 못했습니다.",  -- 1056
-        "따뜻한 남쪽 바다에서 온 억센 싸움꾼으로, 무법항에서 가젯잔까지 선술집 차림표마다 빠지지 않는 인기 요리입니다.",  -- 1057
-        "이마가 진짜 미스릴처럼 빛납니다. 제련해 보려던 광부가 한둘이 아닙니다.",  -- 1058
-        "비늘을 졸이면 피부를 바위처럼 단단하게 해 주는 기름이 됩니다. 이 물고기는 밤을 더 좋아합니다.",  -- 1059
-        "열병식 흉갑처럼 반들반들하고, 무게도 거의 그만큼 나갑니다.",  -- 1060
-        "추운 계절에만 연안으로 들어오며, 그 맛을 아는 요리사들은 일 년 내내 기다립니다.",  -- 1061
-        "낮이 길어지면 떼 지어 몰려옵니다. 바닷가 사람들은 이것으로 계절을 가늠합니다.",  -- 1062
-        "몸통 한가운데를 잡으십시오. 기회는 딱 한 번뿐입니다.",  -- 1063
-        "거친 땅에서 온 강 물고기로, 아가미가 트롤의 전투 분장처럼 붉습니다.",  -- 1064
-        "해가 진 뒤에 먹이를 찾습니다. 이것으로 끓인 수프는 주문 시전자의 신경을 가라앉혀 줍니다.",  -- 1065
-        "낮에 먹이를 찾으며 거의 모든 면에서 밤지느러미퉁돔과 정반대이지만, 그래도 같은 물에서 삽니다.",  -- 1066
-        "엄밀히 말하면 물고기는 아닙니다. 잡히는 데 동의하지 않으며, 그 뜻을 분명히 알려 줍니다.",  -- 1067
-        "강의 얼음처럼 창백하며, 북쪽의 차고 맑은 호수에서 납니다.",  -- 1068
-        "두 손이 다 필요할 겁니다. 어쩌면 친구도 한 명 필요할지 모릅니다.",  -- 1069
-        "%.1f파운드",  -- 1070
-        "낚시 일지에 새로 기록: %s, %s.",  -- 1071
-        "낚시 일지에 새로 기록: %s.",  -- 1072
-        "지금까지 가장 무거운 %s: %s (이전 %s).",  -- 1073
-        "미끼 %s",  -- 1074
-        "미끼 없음",  -- 1075
-        "낚음 %d",  -- 1076
-        "놓침 %d",  -- 1077
-        "호기심 많은 녀석: +%d%%",  -- 1078
-        "미끼를 물고기 곁에 두세요",  -- 1079
-        "다음 낚는 것 +%d%%",  -- 1080
-        "%s 누르기: 미끼가 낚싯줄을 따라 움직입니다",  -- 1081
-        "%d연속",  -- 1082
-        "찌를 던져 둔 동안 즐기는 놀이",  -- 1083
-        "낚싯줄이 나가 있는 동안 시전 바 위에서 즐깁니다: 트리거를 누르면 미끼가 줄을 따라 움직이고, 떼면 되돌아갑니다. 물고기 그림자 곁에 두세요. 잘할수록 다음 어획물의 가상 무게가 무거워집니다. 버튼을 차지하지 않고 던지기나 어획에 영향을 주지 않습니다",  -- 1084
-        "%d마리 낚음, %d종, %d마리 놓침",  -- 1085
-        "가장 무거운 것: %s, %s",  -- 1086
-        "물고기",  -- 1087
-        "물가",  -- 1088
-        "아직 낚은 것이 없습니다. 낚싯대를 들고 물가로 가세요.",  -- 1089
-        "낚은 수: %d",  -- 1090
-        "가장 무거운 것: %s, %s에서",  -- 1091
-        "처음 낚은 곳: %s",  -- 1092
-        "여기서 낚은 수: %d",  -- 1093
-        "여기서 찾은 종류: %d",  -- 1094
-        "낚시 일지를 열거나 닫습니다: 낚은 모든 종류, 종류별 가장 무거운 것, 낚시한 물가",  -- 1095
-        "비행",  -- 1096
-        "조기 착륙",  -- 1097
-        "다음 비행 지점에 착륙",  -- 1098
-        "목적지 알 수 없음",  -- 1099
-        "거리로 추정",  -- 1100
-        "이 경로의 첫 비행: 비행 시간 학습 중",  -- 1101
-        "착륙 중",  -- 1102
-        "%s: 약 %s, 거리로 추정",  -- 1103
-        "%s: 약 %s",  -- 1104
-        "%s: 이 경로의 첫 비행, 시간 모름",  -- 1105
-        "비행 중, 목적지 모름",  -- 1106
-        "%s: 비행 시간 학습됨, %s",  -- 1107
-        "조기 착륙: %s, 약 %s",  -- 1108
-        "다음 비행 지점에 조기 착륙",  -- 1109
-        "상쾌하고 춥습니다. 발밑엔 눈, 입김이 허공에 머뭅니다",  -- 1110
-        "살을 에는 추위, 봉우리에서 내려온 바람이 갑옷 틈마다 파고듭니다",  -- 1111
-        "덥고 습합니다. 공기가 마실 수 있을 만큼 짙습니다",  -- 1112
-        "숲 지붕 아래 끈적한 더위, 벌레 소리가 요란합니다",  -- 1113
-        "덥고 건조합니다. 바람에 먼지가 날립니다",  -- 1114
-        "타는 듯한 햇볕과 갈라진 땅. 마실 수 있을 때 마셔 두세요",  -- 1115
-        "뜨거운 바람에 연기와 재가 실려 옵니다",  -- 1116
-        "그을린 공기, 불티가 흩날립니다",  -- 1117
-        "잿빛에 춥습니다. 축축한 안개가 들러붙습니다",  -- 1118
-        "공기는 서늘하고 빛은 거의 없습니다",  -- 1119
-        "온화하고 맑습니다. 산들바람이 붑니다",  -- 1120
-        "여행하기 좋은 쾌적한 날씨입니다",  -- 1121
-        "서늘하고 푸릅니다. 나뭇잎이 속삭입니다",  -- 1122
-        "나무 사이로 부드러운 빛, 공기가 상쾌합니다",  -- 1123
-        "후덥지근하고 축축합니다. 발밑 땅이 무릅니다",  -- 1124
-        "따뜻하고 눅눅한 공기, 늪 냄새가 납니다",  -- 1125
-        "%s, %s: %s",  -- 1126
-        "알려진 비행 경로 %d개.",  -- 1127
-        "비행: 막대를 따라가는 탈것",  -- 1128
-        "그리폰, 와이번 또는 박쥐(비행 조련사가 내준 것)가 비행 막대를 따라 착륙 지점으로 날아갑니다",  -- 1129
-        "비행: 도착지의 날씨",  -- 1130
-        "착륙하면 도착한 곳의 공기가 평소 어떤지 대화창에 알려 줍니다 (가시덤불 골짜기는 덥고 습함, 던 모로는 발밑에 눈). 하루 중 시간대도 함께 알려 줍니다",  -- 1131
-        "시간을 아는 비행 경로 목록",  -- 1132
-        "착륙! +%d",  -- 1133
-        "부딪힘: 연속 기록 끝",  -- 1134
-        "%s 날갯짓  ·  나무 꼭대기와 비행선을 피하세요",  -- 1135
-        "%s 기수를 그물로 잡아 비행 골드 획득  ·  %s 높은 고도",  -- 1136
-        "비행 골드 %d",  -- 1137
-        "%s 날갯짓",  -- 1138
-        "%s 그물",  -- 1139
-        "%s 높은 고도",  -- 1140
-        "%s: 게임으로 돌아가기 (비행 골드 %d)",  -- 1141
-        "%s: 가는 길의 게임",  -- 1142
-        "비행 게임이 꺼져 있습니다: /cchud flightgame on",  -- 1143
-        "비행 게임은 비행 중에 플레이합니다.",  -- 1144
-        "전투 중에는 안 됩니다.",  -- 1145
-        "비행 게임: 플레이 / 높은 고도",  -- 1146
-        "비행 중: 비행 게임을 시작하거나, 높은 고도로 올렸다가 되돌립니다",  -- 1147
-        "영화 같은 비행: 카메라가 주위를 돎",  -- 1148
-        "영화 중에 카메라가 당신과 탈것 주위를 천천히 돕니다. 한 바퀴에 약 1분 30초가 걸리며, 착륙하기 전에 다시 당신 뒤로 돌아옵니다. 끄기: 고정된 장면",  -- 1149
-        "오프라인",  -- 1150
-        "죽음",  -- 1151
-        "끄기",  -- 1152
-        "치유 전문화일 때",  -- 1153
-        "항상",  -- 1154
-        "너무 멂",  -- 1155
-        "치유사용 파티와 공격대",  -- 1156
-        "파티에서는: 캐릭터 옆에 파티원을, 각자 대상으로 지정하는 버튼과 함께; 공격대에서는: 더 얇은 창. 각 창은 필요한 치유량, 해제할 수 있는 약화 효과, 사거리 안에 있는지만 보여 줍니다",  -- 1157
-        "판매 확률 %d%%",  -- 1158
-        "확실히 팔려 (%d%%)",  -- 1159
-        "저건 알아서 팔려 (%d%%)",  -- 1160
-        "팔릴 것 같아 (%d%%)",  -- 1161
-        "살 사람이 있을 거야 (%d%%)",  -- 1162
-        "반반이야 (%d%%)",  -- 1163
-        "어느 쪽이든 될 수 있어 (%d%%)",  -- 1164
-        "좀 도박이야 (%d%%)",  -- 1165
-        "한동안 안 팔릴지도 (%d%%)",  -- 1166
-        "기대는 안 하는 게 좋아 (%d%%)",  -- 1167
-        "가망이 적어, 친구 (%d%%)",  -- 1168
-        "상인보다 +%s",  -- 1169
-        "아직 알려진 가격 없음",  -- 1170
-        "상인도 그만큼 줍니다",  -- 1171
-        "중개인",  -- 1172
-        "시장",  -- 1173
-        "동전 한 닢까지 셌다네, 친구",  -- 1174
-        "가방에 여기서 팔 수 있는 아이템이 없습니다.",  -- 1175
-        "최근 7일 동안 가격이 없습니다.",  -- 1176
-        "아직 하루치 가격뿐: 경매장에 들르는 날마다 캔들이 하나씩 늘어납니다.",  -- 1177
-        "7일, 하루에 캔들 하나: 초록은 더 높게 마감, 빨강은 더 낮게",  -- 1178
-        "30일, 그날의 최저가: 초록 상승, 빨강 하락",  -- 1179
-        "아직 가격 기록 없음: 며칠 동안 경매장을 읽으세요.",  -- 1180
-        "아직 하루치 가격뿐입니다: 경매장을 방문하는 날마다 선이 이어집니다.",  -- 1181
-        "개당 %s 요청, 모두 %s (%d개 내놓고 %d개는 네게 남아)",  -- 1182
-        "개당 %s 요구, 전부 %s (%d개)",  -- 1183
-        "최저",  -- 1184
-        "%s 읽음",  -- 1185
-        "평소",  -- 1186
-        "7일: %s ~ %s",  -- 1187
-        "등록: 경매 %d건, 물품 %d개",  -- 1188
-        "개당 %s, 전부 %s (%d개)",  -- 1189
-        "여기에 %d개 등록, 경매 %d건 판매",  -- 1190
-        "알려진 가격 없음: 먼저 경매장을 읽으세요.",  -- 1191
-        "여기서 팔 물건이 가방에 없음.",  -- 1192
-        "오늘은 상인보다 여기서 더 잘 팔리는 게 없음. 기다리면 %d개는 가능.",  -- 1193
-        "좋은 것부터: %d개는 상인보다 여기서 더 잘 팔림, 기다리면 %d개 더.",  -- 1194
-        "가방이 텅 비었군, 친구. 팔 물건 좀 가져와.",  -- 1195
-        "오늘은 상인보다 나은 게 없어. 조금만 참으면 %d개는 될지도.",  -- 1196
-        "이 가방엔 확실한 벌이가 없군, 친구. 기다리면 %d개는 돈이 될 거야.",  -- 1197
-        "좋은 건 위에: 여기서 %d개는 어느 상인보다 낫고, 참을성 있으면 %d개 더.",  -- 1198
-        "%d개는 상인보다 여기서 더 받아, 좋은 것부터. 기다리면 %d개 더.",  -- 1199
-        "맨 위가 제일 남아: 확실한 판매 %d개, 기다릴 수 있으면 %d개 더.",  -- 1200
-        "아직 가격 없음: %s로 경매장을 읽음.",  -- 1201
-        "방금 읽은 가격: %d개.",  -- 1202
-        "가격 %d개, %s 읽음.",  -- 1203
-        "가격 %d개, %s 읽음. %s로 다시 읽음.",  -- 1204
-        "아직 게시판을 안 읽었어. %s 누르면 가격을 전부 가져오지.",  -- 1205
-        "아직 가격이 없어, 친구. %s 누르면 게시판을 전부 읽어.",  -- 1206
-        "게시판에서 갓 읽은 가격이야, 친구: %d개.",  -- 1207
-        "방금 게시판을 읽었어: 가격 %d개, 아직 따끈해.",  -- 1208
-        "가격 %d개, %s 읽었지. 그 정도면 됐어, 친구.",  -- 1209
-        "마지막으로 게시판을 본 건 %s: 가격 %d개.",  -- 1210
-        "%s 가격이라 묵은 빵처럼 굳었어. %s 누르면 다시 읽어.",  -- 1211
-        "가격 %d개, 하지만 %s 읽은 거야. %s 누르면 다시 볼게.",  -- 1212
-        "보관하는 물건도 표시 중. %s로 숨김.",  -- 1213
-        "보류: %d개, 전문 기술, 장비, 표시용. %s로 표시.",  -- 1214
-        "보관하는 것도 목록에 있어. %s 누르면 치워 둘게.",  -- 1215
-        "보관하는 것도 보여 주는 중이야. %s 누르면 다시 숨겨.",  -- 1216
-        "%d개는 빼 뒀어: 제작 재료, 입을 장비, 표시한 것. %s 누르면 보여 줄게.",  -- 1217
-        "%d개는 따로 챙겨 뒀어: 전문 기술용, 착용용, 표시한 것. 원하면 %s.",  -- 1218
-        "개당",  -- 1219
-        "데이터 없음",  -- 1220
-        "빠른 판매",  -- 1221
-        "느긋하게",  -- 1222
-        "모든 가격 읽기",  -- 1223
-        "보관품 숨기기",  -- 1224
-        "보관품 표시",  -- 1225
-        "선",  -- 1226
-        "캔들",  -- 1227
-        "등록",  -- 1228
-        "%d / %d",  -- 1229
-        "%d / %d개 등록, 개당 %s",  -- 1230
-        "%d개를 %s에 등록",  -- 1231
-        "%d개 모두 %s에 등록",  -- 1232
-        "이 클라이언트의 경매장에는 여기서 등록할 수 없습니다.",  -- 1233
-        "%d개를 %s에 등록했습니다.",  -- 1234
-        "경매장의 시장: 열기 / 닫기",  -- 1235
-        "시장에서 경매인의 인사",  -- 1236
-        "시장을 열 때 고블린 경매인이 게임 자체 소리로 짧은 한마디를 합니다. 끄면 조용히 열립니다",  -- 1237
-        "시장: 보관하는 것 표시",  -- 1238
-        "시장에 보관하는 것도 표시합니다: 전문 기술이 아직 배울 수 있거나 더 비싼 것으로 만들 수 있는 것, 보관하도록 표시한 것. 끄면 팔 것만 표시합니다",  -- 1239
-        "시장: 가격 차트를 캔들로",  -- 1240
-        "시장의 가격 차트를 최근 7일 동안 하루에 캔들 하나로 표시 (가격이 시작한 곳, 최고와 최저, 마감한 곳: 더 높게 마감하면 초록, 더 낮게 마감하면 빨강); 끔: 30일 동안 그날 최저가의 선",  -- 1241
-        "시장 열기 또는 닫기 (경매장의 탭)",  -- 1242
-        "이 클라이언트의 경매장 종류 (문제 해결용)",  -- 1243
-        "전문 기술 창을 열면 제가 제조법을 살펴보겠습니다.",  -- 1244
-        "%d, 여기가 한계입니다. 다음 단계는 상급자에게 배우세요.",  -- 1245
-        "%d에서는 더 배울 것이 없습니다. 상급자를 찾아가 다음 단계를 배우세요.",  -- 1246
-        "지금 제조법으로는 부족합니다. 상급자를 찾아가세요: %s, %d에서 기다리고 있습니다.",  -- 1247
-        "%d 남았습니다(목표 %d). 아는 것만으로는 닿지 않습니다. 상급자가 %s 제조법을 %d에 가르쳐 줍니다.",  -- 1248
-        "지금 제조법으로는 부족합니다. 상급자를 찾아가세요: %s 제조법이 기다리고 있습니다.",  -- 1249
-        "제조법이 %d 남기고(목표 %d) 더는 가르쳐 주지 않습니다. 상급자에게 %s 제조법을 물어보세요.",  -- 1250
-        "제조법이 %d 남기고(목표 %d) 바닥났습니다. 상급자에게 새것이 있을 겁니다.",  -- 1251
-        "아는 것만으로는 마지막 %d을 채울 수 없습니다. 상급자를 만날 때입니다.",  -- 1252
-        "%s 제조법은 이제 별로 가르쳐 주지 않지만, 가진 것 중엔 최선입니다. %d 남았습니다(목표 %d).",  -- 1253
-        "여기서부터는 더딥니다: %s 제조법은 가끔 한 점을 줍니다. %d 남았습니다.",  -- 1254
-        "먼저 %s 제조법이 필요합니다(%s). 가이드는 이 구간을 그것으로 시작합니다.",  -- 1255
-        "%s 제조법을 배우세요(%s). 그러면 시작합니다: %d 남았습니다(목표 %d).",  -- 1256
-        "%d 남았습니다(목표 %d). 가이드는 %s 채집을 권합니다(%d까지).",  -- 1257
-        "여기서는 채집이 스승입니다: %s, %d까지.",  -- 1258
-        "%d 남았습니다(목표 %d). %s부터 시작하세요. 원하면 %s도 좋습니다: %s.",  -- 1259
-        "가이드대로 먼저 %s. %s도 됩니다: %s.",  -- 1260
-        "%d 남았습니다(목표 %d). %s부터 시작하세요.",  -- 1261
-        "지금은 %s 제조법이 가장 좋은 스승입니다. %d점 남았습니다(목표 %d).",  -- 1262
-        "손은 차분하게. 먼저 %s, 그리고 %d 남았습니다.",  -- 1263
-        "상급자에게서",  -- 1264
-        "상인에게서",  -- 1265
-        "전리품으로",  -- 1266
-        "퀘스트로",  -- 1267
-        "더 싼 재료",  -- 1268
-        "상인에게 파는 재료",  -- 1269
-        "직접 채집하는 재료",  -- 1270
-        "잘 팔림",  -- 1271
-        "직접 쓸 물건",  -- 1272
-        "더 적은 제작 횟수",  -- 1273
-        "찾거나 사야 하는 제조법",  -- 1274
-        "다른 재료",  -- 1275
-        "가이드의 첫 선택",  -- 1276
-        "숙련도 계획을 보려면 전문 기술 창을 여세요.",  -- 1277
-        "한계 %d 도달. 다음 단계는 상급자에게.",  -- 1278
-        "%d 남음, 목표 %d. 아는 제조법으론 부족함. 상급자에게 %s (%d).",  -- 1279
-        "%d 남음, 목표 %d. 아는 제조법으론 부족함. 상급자에게 %s.",  -- 1280
-        "아는 제조법은 %d 모자람 (목표 %d). 상급자에게 더 있음.",  -- 1281
-        "%d 남음, 목표 %d. 지금 최선: %s, 녹색 (가끔 1점).",  -- 1282
-        "%d 남음, 목표 %d. 먼저 %s 배우기, %s.",  -- 1283
-        "%d 남음, 목표 %d. %s 채집, %d까지.",  -- 1284
-        "%d 남음, 목표 %d. 먼저: %s, 또는 %s (%s).",  -- 1285
-        "%d 남음, 목표 %d. 먼저: %s.",  -- 1286
-        "채집하거나 살 것",  -- 1287
-        "%d회 제작: %s",  -- 1288
-        "%s 배울 수 있습니다(%d부터).",  -- 1289
-        "%s 배울 수 있습니다.",  -- 1290
-        "%s: 가방 %d, 은행 %d, 제작당 %d",  -- 1291
-        "가이드는 이 구간을 %s 채집으로 올립니다.",  -- 1292
-        "%s: %d개 보유, 계획에 %d개 사용",  -- 1293
-        "용도: %s",  -- 1294
-        "%s(으)로 만드는 것보다 사는 편이 쌉니다",  -- 1295
-        "%s(으)로 제작",  -- 1296
-        "멘토: 은행 재료로 만들 수 있는 것",  -- 1297
-        "은행 재료로 만들 수 있는 것",  -- 1298
-        "은행에 있는 것으로 더 만들 수 있는 것이 없습니다.",  -- 1299
-        "은행까지 세면 %d개를 만들 수 있고, 그중 %d개는 은행 덕분입니다.",  -- 1300
-        "멘토: %s %d > %d",  -- 1301
-        "멘토",  -- 1302
-        "숙련도 계획",  -- 1303
-        "또는",  -- 1304
-        "%s 채집",  -- 1305
-        "배울 것",  -- 1306
-        "사는 편이 저렴",  -- 1307
-        "숨기기",  -- 1308
-        "계획",  -- 1309
-        "이것 파밍",  -- 1310
-        "모두 파밍",  -- 1311
-        "은행 포함",  -- 1312
-        "계획 사용",  -- 1313
-        "두 번 누르면 숨김",  -- 1314
-        "입어 볼 것이 없습니다.",  -- 1315
-        "파밍 목록에 %d개 추가했습니다.",  -- 1316
-        "부족한 것이 없습니다: 필요한 것을 모두 가지고 있습니다.",  -- 1317
-        "전문 기술 창을 열면 계획을 세웁니다.",  -- 1318
-        "멘토 (숙련 계획): 표시 / 숨기기",  -- 1319
-        "마지막으로 연 전문 기술 창의 숙련 계획을 컨트롤러 버튼과 함께 표시합니다",  -- 1320
-        "퀘스트 왼쪽",  -- 1321
-        "퀘스트 오른쪽",  -- 1322
-        "퀘스트 아래",  -- 1323
-        "파밍 목록이 가득 찼습니다.",  -- 1324
-        "파밍 목록: %s, %d개 원함.",  -- 1325
-        "파밍",  -- 1326
-        "%d개 더",  -- 1327
-        "아직 파밍할 것이 없습니다.",  -- 1328
-        "한 묶음 더",  -- 1329
-        "빼기",  -- 1330
-        "비우기",  -- 1331
-        "완료",  -- 1332
-        "파밍 목록을 모두 비울까요?",  -- 1333
-        "파밍 목록: 선택 / 완료",  -- 1334
-        "파밍 목록: 가리킨 아이템 추가",  -- 1335
-        "파밍 목록에 없습니다.",  -- 1336
-        "파밍 목록이 비었습니다.",  -- 1337
-        "파밍 목록: 위치",  -- 1338
-        "파밍 목록을 퀘스트 목록의 왼쪽, 오른쪽 또는 퀘스트 아래에 둡니다",  -- 1339
-        "퀘스트 목록 옆의 파밍 목록: 컨트롤러로 선택; add <아이템> [수량], remove <아이템>, clear, 또는 위치는 left / right / bottom",  -- 1340
-        "위협 수준 백분율",  -- 1341
-        "대상 프레임과 이름표의 위협 아이콘 옆에 내 위협 비율을 숫자로 표시",  -- 1342
-        "체력 수치",  -- 1343
-        "남은 생명력을 줄여서(12.3k) 바에 표시 (소형 이름표에는 표시 안 함: 백분율로 충분)",  -- 1344
-        "내 약화 효과",  -- 1345
-        "대상 이름 위에 내 약화 효과와 남은 시간 표시",  -- 1346
-        "모두의 디버프",  -- 1347
-        "내 것만이 아니라 모두의 디버프 중 게임이 이름표용으로 표시하는 것",  -- 1348
-        "적 버프",  -- 1349
-        "적의 약화 효과 옆에 강화 효과: 중요한 것(중요, 격노, 또는 내가 해제하거나 훔칠 수 있는 것)만, 또는 중요한 효과만 표시가 꺼져 있으면 전부",  -- 1350
-        "군중 제어 아이콘",  -- 1351
-        "유닛이 기절, 이동 불가, 공포 상태일 때 남은 시간과 함께 표시되는 큰 아이콘...",  -- 1352
-        "어그로 광채",  -- 1353
-        "이름 뒤의 방패 아이콘과 빛: 나를 공격하는 동안 빨강, 곧 끌어올 때 빨강과 노랑, 잃고 있을 때 노랑과 파랑, 나를 노리지 않을 때 파랑",  -- 1354
-        "퀘스트 표시",  -- 1355
-        "진행 중인 퀘스트에 아직 필요한 대상에 금색 표시를 띄웁니다",  -- 1356
-        "이름표 애니메이션",  -- 1357
-        "이름표가 서서히 나타나고, 체력이 낮으면 숨쉬듯 깜박이고, 군중 제어는 반짝임",  -- 1358
-        "작게",  -- 1359
-        "보통",  -- 1360
-        "크게",  -- 1361
-        "전체 이름",  -- 1362
-        "짧은 이름",  -- 1363
-        "이름 없음",  -- 1364
-        "전체",  -- 1365
-        "최소 미니",  -- 1366
-        "이름표 크기",  -- 1367
-        "이름표 막대의 크기: 작고 가늘게, 보통, 또는 크게 (더 넓고 높게)",  -- 1368
-        "이름표의 이름",  -- 1369
-        "생명력 막대가 있는 이름표의 이름: 전체, 줄임, 또는 생략 (대상 프레임에 전체 이름이 표시되며 레벨과 직업 아이콘은 유지됩니다). 막대가 없는 이름표(우호적인 NPC)는 항상 이름을 유지합니다",  -- 1370
-        "이름표 모양",  -- 1371
-        "이름표 설정을 한 번에. 전체: 모두. 최소: 자원 막대, 길드, 칭호 없음, 짧은 이름. 최소 미니: 생명력이 있는 작은 막대, 내 약화 효과와 중요한 강화 효과, 레벨과 직업, 이름 없음 (대상 프레임에 표시). 위협, 군중 제어, 눈에 띄는 시전은 항상 유지됩니다",  -- 1372
-        "플레이어 칭호",  -- 1373
-        "플레이어의 칭호를 이름과 함께 표시",  -- 1374
-        "길드와 NPC 직업",  -- 1375
-        "이름 아래 한 줄: 플레이어의 길드 또는 NPC가 하는 일",  -- 1376
-        "전투 중인 아군 바",  -- 1377
-        "아군 이름표가 해당 대상이 전투 중인 동안 체력, 자원, 시전을 표시",  -- 1378
-        "게임 기본 우호 이름표",  -- 1379
-        "우호 이름표(파티, 다른 플레이어, 우호 NPC)는 게임 기본 모양으로 두고, 우리 이름표는 적에게만",  -- 1380
-        "자원 바",  -- 1381
-        "체력 바 아래의 얇은 마나, 분노 또는 기력 바",  -- 1382
-        "시전 대상",  -- 1383
-        "주문 이름 옆에 표시되는 시전의 대상",  -- 1384
-        "체력 퍼센트",  -- 1385
-        "바에 표시되는 체력 퍼센트",  -- 1386
-        "대상 이름표에 이름 표시",  -- 1387
-        "끄면: 대상의 이름표에 이름과 레벨이 표시되지 않음 (대상 창에 표시됨)",  -- 1388
-        "이름표에 레벨 표시",  -- 1389
-        "적 이름 앞의 레벨, 난이도에 따라 색상 표시",  -- 1390
-        "간략한 이름표",  -- 1391
-        "이름표 너비를 약 절반으로",  -- 1392
-        "강조된 적 시전",  -- 1393
-        "적의 시전이 깜박이고 커지며 완료될 때까지 점점 빠르게 맥동하므로 제때 차단할 수 있습니다",  -- 1394
-        "이름표 직업 아이콘",  -- 1395
-        "아군이든 적이든 플레이어 이름 앞에 직업 아이콘 표시",  -- 1396
-        "NPC 역할 아이콘",  -- 1397
-        "무언가를 제공하는 우호적인 NPC 위에 아이콘 표시: 상인은 가방, 수리하는 대장장이는 모루, 전문기술 상급자는 책... (게임 자체 아이콘이며, 이름표가 가리켜지기를 기다리는 동안에도 보임)",  -- 1398
-        "가리킬 때만 우호적 NPC 표시",  -- 1399
-        "우호적 NPC(상인, 퀘스트 제공자, 마을 주민)의 이름표를 툴팁처럼 가리키고 있을 때만 표시",  -- 1400
-        "상호작용할 수 있는 사물의 이름",  -- 1401
-        "광석, 상자, 명판 등을 마주보는 동안 그 위에 이름 표시 (끄면 이름 없이 둡니다. 게임 자체 안내가 이미 무엇인지 알려 줍니다)",  -- 1402
-        "미니 이름표",  -- 1403
-        "하수인, 동물, 경험치를 주지 않는 회색 적은 작은 이름표: 내 약화 효과가 표시된 가는 바, 이름 없음 (바가 없는 동물은 이름 유지; 이름표 표시 여부는 게임 설정이 결정)",  -- 1404
-        "던전의 파티 이름표: 이름만",  -- 1405
-        "던전이나 공격대 안에서는 게임이 아군 플레이어의 이름표를 직접 그리며 애드온이 바꿀 수 없습니다. 그 안에서는 게임 자체 옵션을 설정해 우리 이름표처럼 바 없이 직업 색상의 이름으로만 표시하고, 전투 중에는 게임의 바가 다시 나타납니다 (전투 중 아군 바가 켜져 있을 때). 나갈 때 모두 원래대로 되돌립니다",  -- 1406
-        "던전의 파티 이름표: 숨김",  -- 1407
-        "던전이나 공격대 안에서 게임의 아군 플레이어 이름표를 완전히 끕니다 (나갈 때 원래 설정대로 되돌립니다)",  -- 1408
-        "대상의 이름에 대해 게임이 제공하는 정보 표시 (문제 해결용)",  -- 1409
-        "화면의 이름표와 우리 모양을 쓰고 있는지 표시 (문제 해결용)",  -- 1410
-        "자, 그럼.",  -- 1411
-        "어이쿠, 이게 다 뭐야.",  -- 1412
-        "어디 보자, 어디 보자...",  -- 1413
-        "엘룬이시여, 인내심을 주소서.",  -- 1414
-        "나루의 이름으로, 이게 무슨 뒤죽박죽이람.",  -- 1415
-        "망할 배낭.",  -- 1416
-        "잘 정돈된 배낭이 가벼운 배낭이지.",  -- 1417
-        "흥. 잡동사니가 너무 많아.",  -- 1418
-        "전부 쓸모없는 짐이군.",  -- 1419
-        "인내하라. 대지모신께서 베푸시리라.",  -- 1420
-        "어이, 뭐가 있나 볼까, 친구?",  -- 1421
-        "이런 어수선함이라니. 품위 없군.",  -- 1422
-        "시간은 금이지. 세어 보자고.",  -- 1423
-        "그래, 이 정도면 됐어.",  -- 1424
-        "엘룬께 감사를.",  -- 1425
-        "빛이 베푸시리라.",  -- 1426
-        "흠. 이 정도면 충분해.",  -- 1427
-        "흠. 싸우기엔 충분해.",  -- 1428
-        "가볍게 다니니 좋군.",  -- 1429
-        "봐줄 만하군. 겨우.",  -- 1430
-        "빈칸이 하나도 없어. 잡동사니를 팔면 %s: 팔아야 자리가 생기지.",  -- 1431
-        "빈칸이 하나도 없어. 길에서 안 쓸 건 은행에 맡겨 두자.",  -- 1432
-        "잡동사니 %d개, 여기선 %s. X는 고른 것을 팔고, 똑똑한 판매는 전부 팔아.",  -- 1433
-        "이 중 %d개는 은행에 둘 것: 은행에 같은 게 더 있거나 내가 표시해 뒀지. 보관을 누르면 넣어 둬.",  -- 1434
-        "빈칸이 %d개뿐이야. 잡동사니는 어느 상인한테든 %s는 받겠어.",  -- 1435
-        "빈칸이 %d개뿐이야. 몇 개는 팔거나 은행에 맡길 때야.",  -- 1436
-        "지난번 이후 새로 생긴 것: %d개. 금색 점이 표시돼 있어.",  -- 1437
-        "팔 만한 것: %d개. 판매 필터에 모여 있고, 툴팁마다 어디서 제일 비싸게 팔리는지 나와.",  -- 1438
-        "잡동사니 %d개, %s 가치. 다음 상인한테 넘기자.",  -- 1439
-        "꼭 필요한 것만 있어. 팔 만한 건 없어.",  -- 1440
-        "다 정리됐고, 빈칸은 %d개.",  -- 1441
-        "장비 수리 끝났소: %s.",  -- 1442
-        "%s면 장비를 고쳐 주겠소. 부서진 장비는 방어도도 능력치도 주지 않소.",  -- 1443
-        "가방이 꽉 찼구려. 물건 %d개를 %s에 사겠소: 똑똑한 판매를 누르면 다시 자리가 생기오.",  -- 1444
-        "%s 주겠소, 물건 %d개에: 잡동사니와 경매장에서 더 받지 못할 것들이오. 똑똑한 판매면 끝이오.",  -- 1445
-        "경매장이 원하는 %d개는 가지고 있으시오: 나보다 %s 더 쳐 주니까.",  -- 1446
-        "가방이 꽉 찼구려. 사기 전에 뭐라도 파시오.",  -- 1447
-        "가방에 내가 후하게 쳐 줄 물건은 없구려. 내 물건이나 구경하시오.",  -- 1448
-        "가지고 계신 것 중 %d개는 여기 둘 물건입니다: 같은 게 더 보관돼 있거나 표시해 두셨지요. 보관을 누르시면 넣어 드립니다.",  -- 1449
-        "지니신 물건 %d종을 더 보관하고 있습니다. 꺼내기로 떠나기 전에 가방을 채우세요.",  -- 1450
-        "가방이 거의 찼습니다. 길에서 안 쓰실 건 제게 맡기세요.",  -- 1451
-        "모두 안전하게 맡아 두었습니다. 가방엔 빈칸이 %d개 있습니다.",  -- 1452
-        "오늘은 온 게 없네요. 두 번이나 확인했어요.",  -- 1453
-        "편지 %d통이 왔어요. 첨부물은 없으니 편할 때 읽으세요.",  -- 1454
-        "편지 %d통이 왔어요. 안에 든 것: %s.",  -- 1455
-        "모두 받기로 한 번에 비울 수 있어요.",  -- 1456
-        "착불 편지: %d통. 그건 직접 열고 값을 치르세요.",  -- 1457
-        "가방이 꽉 찼어요: 물건은 편지 안에서 기다립니다.",  -- 1458
-        "어디로 가시겠소? 장소를 가리키면 얼마나 걸리는지 알려 주겠소.",  -- 1459
-        "%s: 지도로 보면 약 %s. 아직 그 길은 날아 본 적이 없소.",  -- 1460
-        "%s: 지난번 비행으로 보면 약 %s.",  -- 1461
-        "%s: 아직은 얼마나 걸릴지 모르겠소. 한 번 날아 보면 알게 될 거요.",  -- 1462
-        "%d마리나 놓쳤군. 이 물엔 내 실력이 모자라: 미끼도 좋고, 더 좋은 낚싯대도 도움이 돼.",  -- 1463
-        "바늘에 미끼가 없네. 미끼는 기술을 올려 줘서 덜 놓치게 돼.",  -- 1464
-        "미끼가 거의 다 됐어. 새로 달면 기술이 유지되지.",  -- 1465
-        "여기서 아직 못 낚은 물고기: %d종. 계속 던지자.",  -- 1466
-        "이 물의 물고기는 다 낚았어. 그럼 새로운 곳으로.",  -- 1467
-        "아직 낚은 게 없어. 물마다 첫 물고기는 여기 적히지.",  -- 1468
-        "낚은 종류: %d. 물마다 몇 종이 더 숨어 있어: 낚시 패널에 거기서 못 낚은 건 ?로 나와.",  -- 1469
-        "불가에서 푹 쉬었어: 처치로 얻는 다음 경험치 %d은 두 배야.",  -- 1470
-        "쌓아 둔 휴식이 없어. 여관이나 도시에서 하룻밤 자면 한동안 처치 경험치가 두 배야.",  -- 1471
-        "%d 흡수",  -- 1472
-        "오른쪽 목록",  -- 1473
-        "가운데에 하나씩",  -- 1474
-        "치명타 치유 %d회",  -- 1475
-        "치명타 %d회",  -- 1476
-        "심판",  -- 1477
-        "큰 순간: 위치",  -- 1478
-        "캐릭터 오른쪽 재사용 대기시간 알림 바로 위의 블록(최신이 알림에 가장 가깝고, 이전 것은 흐려지며 위로 올라감) 또는 가운데에 하나씩",  -- 1479
-        "큰 순간이 어떻게 보이고 느껴지는지 보여줌",  -- 1480
-        "수집함",  -- 1481
-        "다른 아이템으로 수집함",  -- 1482
-        "아직 수집하지 않음",  -- 1483
-        "외형",  -- 1484
-        "세트를 고르면 그 조각들이 의상에 적용됩니다. %s 버튼을 눌러야 유지되며, 그 전에는 비용이 들지 않습니다.",  -- 1485
-        "수집품을 살펴보는 중...",  -- 1486
-        "의상이 원래대로 돌아왔습니다.",  -- 1487
-        "%s: %d/%d개 조각 적용.",  -- 1488
-        "%d개는 이 의상에 적용되지 않았습니다.",  -- 1489
-        "조각을 가진 세트 1개",  -- 1490
-        "조각을 가진 세트 %d개",  -- 1491
-        "착용할 수 없음",  -- 1492
-        "없음",  -- 1493
-        "조각 %d개 모두",  -- 1494
-        "%d/%d개 조각",  -- 1495
-        "없음: %s",  -- 1496
-        "아직 세트가 없습니다. 녹색 철 투구와 녹색 철 건틀릿처럼 이름이 같은 아이템은 하나라도 가지면 여기에 나타납니다.",  -- 1497
-        "되돌리기",  -- 1498
-        "사용자 세트 %s을(를) 삭제하시겠습니까? 되돌릴 수 없습니다.",  -- 1499
-        "삭제",  -- 1500
-        "먼저 사용자 세트에 커서를 올리세요.",  -- 1501
-        "%s  사용자 세트 삭제",  -- 1502
+        "퀘스트 나침반: 카메라 기준",  -- 980
+        "나침반이 캐릭터가 향한 방향이 아니라 카메라가 보는 방향을 보여줍니다 (스틱으로 카메라 없이 캐릭터만 돌리면 둘이 다릅니다). 끄면: 캐릭터가 향한 방향",  -- 981
+        "20초 동안 주변에 퀘스트 나침반 표시 몇 개",  -- 982
+        "낚시 모드: 꺼짐.",  -- 983
+        "낚시: %s 눌러 던지기",  -- 984
+        "미끼 없음: %s 두 번 눌러 %s 사용",  -- 985
+        "%s 눌러 낚싯대 넣기",  -- 986
+        "낚시 모드: %s 눌러 낚싯줄을 던지고, 찌가 흔들리면 다시 눌러 물고기를 낚아챕니다.",  -- 987
+        "%s 낚아채기, %s 다시 던지기",  -- 988
+        "낚시 모드는 손에 낚싯대가 있어야 합니다.",  -- 989
+        "낚시를 배우지 않았습니다.",  -- 990
+        "낚시 모드: 버튼 하나로 던지고 낚아채기",  -- 991
+        "낚시 버튼: %s",  -- 992
+        "한 번 눌러 다시 던지기",  -- 993
+        "찌가 물에 있는 동안 낚시 버튼으로 물고기를 낚아채고, A를 한 번 눌러 다시 던집니다. 끄면 A는 원래대로",  -- 994
+        "두 번 눌러 미끼 달기",  -- 995
+        "낚시 버튼을 빠르게 두 번 누르면, 낚싯대에 미끼가 없을 때 두 번째 누름이 가방 속 가장 좋은 미끼를 낚싯대에 답니다",  -- 996
+        "낚시 중 게임패드 바 숨기기",  -- 997
+        "낚싯대를 들고 있으면 게임패드 바가 숨겨져 물이 잘 보입니다. 낚시 안내에 던지기 버튼이 표시됩니다. 전투가 시작되거나 낚싯대를 넣으면 바로 돌아옵니다",  -- 998
+        "한 버튼 낚시를 잠시 끄거나 다시 켜기 (낚싯대를 들면 저절로 켜집니다)",  -- 999
+        "낚시하는 버튼: 처음에는 상호작용 버튼(네모 또는 X), 또는 다른 아무 버튼, 예를 들어 트리거 (rt)",  -- 1000
+        "듀로타의 해안은 붉은 바위와 따뜻한 얕은 바다입니다. 메아리 군도의 트롤들은 섬의 밥 짓는 불 냄새가 밀물에 실려 올 때 고등어 떼가 가장 많이 몰린다고 말합니다.",  -- 1001
+        "멀고어의 호수는 작고 맑으며 느긋합니다. 타우렌은 다른 모든 일을 할 때처럼 낚시도 천천히, 감사하는 마음으로 합니다.",  -- 1002
+        "불모의 땅의 오아시스는 어디나 만남의 장소입니다. 낮에 무엇이 와서 물을 마시든, 밤이면 그 아래에서 무언가가 헤엄칩니다.",  -- 1003
+        "텔드랏실의 연못은 모두 한 그루 나무의 그늘 아래 있습니다. 나이트 엘프 낚시꾼들은 이곳 물고기가 해를 본 적도 없고 그리워하지도 않는다고 장담합니다.",  -- 1004
+        "어둠의 해안의 물은 잿빛이고 차가우며 난파선으로 가득합니다. 아우버다인 앞바다에서 입질하는 녀석의 절반은 누군가 잃어버린 화물 속에 살림을 차렸습니다.",  -- 1005
+        "잿빛 골짜기의 강은 웬만한 왕국보다 오래된 나뭇잎 아래로 흐릅니다. 물고기도 빠르지만, 여기서 뭘 하느냐고 물으러 오는 파수꾼들은 더 빠릅니다.",  -- 1006
+        "버섯구름 봉우리 아래에서는 물이 귀해서 다들 악착같이 지킵니다. 이곳 물고기는 제 자리를 당당히 얻어 낸 녀석입니다.",  -- 1007
+        "돌발톱 산맥의 호수는 봉우리 사이 높고 추운 곳에 있습니다. 낚시가 이렇게 잘되지만 않았어도 고블린들이 진작 물을 다 빼 버렸을 겁니다.",  -- 1008
+        "잊혀진 땅의 해안은 뼈와 잿빛 파도뿐입니다. 저 아래 무언가는 둘 다 즐겨 먹는 모양입니다.",  -- 1009
+        "페랄라스는 물가까지 온통 푸릅니다. 강은 깊고 따뜻하며, 그야말로 살아 숨 쉽니다.",  -- 1010
+        "먼지진흙 습지대는 어디까지가 땅이고 어디부터 물인지 아무도 모릅니다. 물가에서 낚시하고, 끝나면 발가락 수를 세어 보십시오.",  -- 1011
+        "타나리스에서 물이라 부를 만한 것은 스팀휘들 항구에만 있습니다. 고블린들은 낚시할 권리를 팔 텐데, 가만두면 두 번 팝니다.",  -- 1012
+        "아즈샤라의 눈부신 만 아래에는 물에 잠긴 도시가 있습니다. 노련한 낚시꾼들은 큰 놈들이 옛 정원 자리에 산다고 합니다.",  -- 1013
+        "악령의 숲의 웅덩이는 빛이 나는데, 좋은 뜻으로 그런 것은 아닙니다. 아직도 거기서 헤엄치는 녀석들은 고집이 상상을 초월합니다.",  -- 1014
+        "운고로의 온천과 타르가 둘러진 호수에는 세상이 잊어버린 것들이 남아 있습니다. 그중 몇몇은 뭅니다.",  -- 1015
+        "달의 숲의 엘룬아라 호수는 참은 숨처럼 고요합니다. 드루이드들이 바라는 것은 먹을 만큼만 잡아 가라는 것뿐입니다.",  -- 1016
+        "실리더스는 모래와 바람, 그리고 날갯짓 소리뿐입니다. 여기서 낚시할 물을 찾았다면 아무에게도 말하지 마십시오.",  -- 1017
+        "여명의 설원의 호수는 가장자리는 얼고 한가운데에서는 김이 오릅니다. 이곳 물고기는 추위에 대비해 살이 올라 있어, 먼 길을 걸어온 보람이 있습니다.",  -- 1018
+        "오그리마의 연못에서는 딱히 할 일이 없는 일꾼들과, 자기도 그렇다고 말하는 늙은 그런트들이 낚시를 합니다. 둘 다 큰 놈은 놓쳤다고 말합니다.",  -- 1019
+        "썬더 블러프의 연못에서 잡힌 물고기는 평생을 평원보다 한참 높은 곳에서 살았습니다. 그래도 태연해 보입니다.",  -- 1020
+        "다르나서스는 물도 신전만큼이나 정성껏 돌봅니다. 물고기들은 감탄받는 데 익숙해졌습니다.",  -- 1021
+        "알터랙 산맥의 호수는 눈 녹은 물이며, 오우거와 비밀결사대가 아무도 보지 않을 때 낚시를 합니다.",  -- 1022
+        "아라시의 물가는 낚시꾼보다 군대를 더 많이 보았습니다. 물고기들은 물 위에 누구의 깃발이 나부끼든 신경 쓰지 않은 지 오래입니다.",  -- 1023
+        "황야의 땅은 끝에서 끝까지 먼지뿐입니다. 여기서 입질이 온다면 작은 기적이니, 기적답게 대하십시오.",  -- 1024
+        "저주받은 땅의 해안은 붉고, 깎여 나갔고, 조용합니다. 그 파도 속에 사는 것은 참 많은 것을 견디며 사는 법을 배웠습니다.",  -- 1025
+        "티리스팔의 호수는 병든 빛깔의 하늘 아래 잔잔히 누워 있습니다. 포세이큰은 습관처럼 낚시를 합니다. 죽은 자는 많이 먹지 않지만, 좋아했다는 것만은 기억합니다.",  -- 1026
+        "은빛소나무 숲의 긴 해안은 온통 안개와 소나무 그림자입니다. 낚시는 잘되는데, 이곳에 대해 누가 하는 밝은 말은 그것 하나뿐입니다.",  -- 1027
+        "서부 역병지대의 강은 아직 흐르지만 깨끗하지는 않습니다. 건져 올린 것은 두 번 살펴보십시오.",  -- 1028
+        "동부 역병지대에서 낚시하는 사람은 드물고, 했다고 말하는 사람은 더 드뭅니다. 이곳의 물은 역병이 남겨 둔 것만을 간직하고 있습니다.",  -- 1029
+        "힐스브래드의 강과 긴 남쪽 해안은 이 땅을 두고 벌어진 모든 싸움에서 양쪽 모두를 먹여 살렸습니다.",  -- 1030
+        "동부 내륙지의 호수는 높은 숲 속에 숨어 있고, 와일드해머 드워프들은 아무도 못 본다 싶으면 그리핀 등에 탄 채로 낚시를 합니다.",  -- 1031
+        "던 모로의 호수는 한 해의 대부분 얼음에 둘러싸여 있습니다. 드워프는 구멍을 뚫고 맥주 한 잔과 함께 앉아서, 무엇이 물든 좋은 하루였다고 합니다.",  -- 1032
+        "이글거리는 협곡에는 다른 땅이라면 강이 있을 자리에 용암이 흐릅니다. 낚싯대 대신 마실 것을 챙겨 오십시오.",  -- 1033
+        "불타는 평원은 재와 불씨뿐입니다. 이곳의 물이 무언가를 내어 준다면, 분명 뜨거울 겁니다.",  -- 1034
+        "엘윈의 아이들은 누구나 수정 호수나 돌무덤 호수에서 낚시를 배웁니다. 그곳의 잔챙이들은 대대로 아이들을 골탕 먹여 왔습니다.",  -- 1035
+        "죽음의 고개에는 물도 적고 반기는 이는 더 적습니다. 카라잔 아래 웅덩이에 있는 것은 그대로 두는 편이 좋습니다.",  -- 1036
+        "그늘숲 가장자리를 따라 흐르는 강은 언제 보아도 검습니다. 물고기는 어둠을 개의치 않는 듯한데, 낚시꾼은 그렇지 않습니다.",  -- 1037
+        "모단 호수는 이 땅의 자랑이며, 거대한 스톤워트 댐이 그 물을 막고 있습니다. 드워프들은 낚시 무용담을 이 호수에 견주어 보는데, 대개는 호수가 이깁니다.",  -- 1038
+        "붉은마루의 영원의 호수는 그림처럼 아름답고, 레이크샤이어의 부두마다 낚싯대가 드리워져 있습니다. 마을 사람들은 좋은 자리를 전부 알지만 하나도 알려 주지 않습니다.",  -- 1039
+        "밀림의 강에서 거친 남쪽 곶까지, 가시덤불 골짜기는 대륙에서 가장 풍요로운 물을 품고 있습니다. 무법항의 낚시꾼들은 이를 두고 대회를 여는데, 거의 다 반칙을 합니다.",  -- 1040
+        "슬픔의 늪은 초록 나무 아래 초록 물입니다. 물고기에서 진흙 맛이 나는데, 이곳 주민들은 그 맛을 좋아합니다.",  -- 1041
+        "서부 몰락지대의 밭은 망했지만 바다는 그렇지 않았습니다. 남은 사람들은 길고 잿빛인 해안에 기대어 살아갑니다.",  -- 1042
+        "저습지는 이름값을 합니다. 메네실 항구의 부두가 그나마 가장 마른 낚시터인데, 악어들도 그 사실을 압니다.",  -- 1043
+        "스톰윈드의 운하에서는 아이들과 은퇴한 노인들, 그리고 변장한 귀족이 적어도 한 명 낚시를 합니다. 운하에 또 무엇이 있는지는 아무도 묻지 않습니다.",  -- 1044
+        "쓸쓸한 동굴에는 아이언포지에서 하나뿐인 조용한 연못이 있습니다. 늙은 드워프들은 몇 시간이고 낚시를 하면서 한마디도 하지 않습니다.",  -- 1045
+        "언더시티의 운하는 초록빛인데, 물이끼와는 아무 상관이 없습니다. 거기서 낚시하는 포세이큰은 저녁거리를 구하려는 것이 아닙니다.",  -- 1046
+        "낚시꾼 대부분이 생애 처음으로 낚는 물고기이며, 기억에 남을 만큼 빛깔이 곱습니다.",  -- 1047
+        "미끈하고 날쌔며 따뜻한 해안 어디에나 흔합니다. 이름에서 풍기는 느낌보다는 구웠을 때 맛이 좋습니다.",  -- 1048
+        "온몸이 입이나 다름없고, 마시고 싶지 않은 물에서 가장 행복해합니다.",  -- 1049
+        "작고, 이빨이 날카롭고, 겁이 없습니다. 한 떼가 모단 호수에서 곰을 쫓아냈다는 이야기가 있습니다.",  -- 1050
+        "파도 아래에서 번뜩이는 한 줄기 빛깔입니다. 뱃사람들은 낚싯줄에 한 마리 걸리면 항해에 운이 따른다고 여깁니다.",  -- 1051
+        "드워프 원로 같은 수염을 단, 참을성 많은 바닥 물고기입니다.",  -- 1052
+        "두 번 먹는 사람은 없습니다. 연금술사들은 구할 수 있는 대로 다 사 갑니다.",  -- 1053
+        "지느러미가 재 속에 묻어 둔 숯불처럼 빛나고, 짜낸 기름도 그에 못지않게 잘 탑니다.",  -- 1054
+        "작은 방패처럼 단단히 무장하고 있습니다. 속살은 그 수고를 들일 만합니다.",  -- 1055
+        "통곡의 동굴 근처 물속의 무언가가 이 물고기를 바꿔 놓았습니다. 먹으면 당신도 한동안 바뀔지 모릅니다.",  -- 1056
+        "강가 사람들은 이것을 먹으면 머리가 맑아진다고 합니다. 이 물고기가 지혜로워진 것은 물살을 거슬러 헤엄친 덕분입니다.",  -- 1057
+        "사촌보다 나이도 많고 몸집도 크고 더 지혜롭지만, 그래도 당신의 바늘은 피하지 못했습니다.",  -- 1058
+        "따뜻한 남쪽 바다에서 온 억센 싸움꾼으로, 무법항에서 가젯잔까지 선술집 차림표마다 빠지지 않는 인기 요리입니다.",  -- 1059
+        "이마가 진짜 미스릴처럼 빛납니다. 제련해 보려던 광부가 한둘이 아닙니다.",  -- 1060
+        "비늘을 졸이면 피부를 바위처럼 단단하게 해 주는 기름이 됩니다. 이 물고기는 밤을 더 좋아합니다.",  -- 1061
+        "열병식 흉갑처럼 반들반들하고, 무게도 거의 그만큼 나갑니다.",  -- 1062
+        "추운 계절에만 연안으로 들어오며, 그 맛을 아는 요리사들은 일 년 내내 기다립니다.",  -- 1063
+        "낮이 길어지면 떼 지어 몰려옵니다. 바닷가 사람들은 이것으로 계절을 가늠합니다.",  -- 1064
+        "몸통 한가운데를 잡으십시오. 기회는 딱 한 번뿐입니다.",  -- 1065
+        "거친 땅에서 온 강 물고기로, 아가미가 트롤의 전투 분장처럼 붉습니다.",  -- 1066
+        "해가 진 뒤에 먹이를 찾습니다. 이것으로 끓인 수프는 주문 시전자의 신경을 가라앉혀 줍니다.",  -- 1067
+        "낮에 먹이를 찾으며 거의 모든 면에서 밤지느러미퉁돔과 정반대이지만, 그래도 같은 물에서 삽니다.",  -- 1068
+        "엄밀히 말하면 물고기는 아닙니다. 잡히는 데 동의하지 않으며, 그 뜻을 분명히 알려 줍니다.",  -- 1069
+        "강의 얼음처럼 창백하며, 북쪽의 차고 맑은 호수에서 납니다.",  -- 1070
+        "두 손이 다 필요할 겁니다. 어쩌면 친구도 한 명 필요할지 모릅니다.",  -- 1071
+        "%.1f파운드",  -- 1072
+        "낚시 일지에 새로 기록: %s, %s.",  -- 1073
+        "낚시 일지에 새로 기록: %s.",  -- 1074
+        "지금까지 가장 무거운 %s: %s (이전 %s).",  -- 1075
+        "미끼 %s",  -- 1076
+        "미끼 없음",  -- 1077
+        "낚음 %d",  -- 1078
+        "놓침 %d",  -- 1079
+        "호기심 많은 녀석: +%d%%",  -- 1080
+        "미끼를 물고기 곁에 두세요",  -- 1081
+        "다음 낚는 것 +%d%%",  -- 1082
+        "%s 누르기: 미끼가 낚싯줄을 따라 움직입니다",  -- 1083
+        "%d연속",  -- 1084
+        "찌를 던져 둔 동안 즐기는 놀이",  -- 1085
+        "낚싯줄이 나가 있는 동안 시전 바 위에서 즐깁니다: 트리거를 누르면 미끼가 줄을 따라 움직이고, 떼면 되돌아갑니다. 물고기 그림자 곁에 두세요. 잘할수록 다음 어획물의 가상 무게가 무거워집니다. 버튼을 차지하지 않고 던지기나 어획에 영향을 주지 않습니다",  -- 1086
+        "%d마리 낚음, %d종, %d마리 놓침",  -- 1087
+        "가장 무거운 것: %s, %s",  -- 1088
+        "물고기",  -- 1089
+        "물가",  -- 1090
+        "아직 낚은 것이 없습니다. 낚싯대를 들고 물가로 가세요.",  -- 1091
+        "낚은 수: %d",  -- 1092
+        "가장 무거운 것: %s, %s에서",  -- 1093
+        "처음 낚은 곳: %s",  -- 1094
+        "여기서 낚은 수: %d",  -- 1095
+        "여기서 찾은 종류: %d",  -- 1096
+        "낚시 일지를 열거나 닫습니다: 낚은 모든 종류, 종류별 가장 무거운 것, 낚시한 물가",  -- 1097
+        "비행",  -- 1098
+        "조기 착륙",  -- 1099
+        "다음 비행 지점에 착륙",  -- 1100
+        "목적지 알 수 없음",  -- 1101
+        "거리로 추정",  -- 1102
+        "이 경로의 첫 비행: 비행 시간 학습 중",  -- 1103
+        "착륙 중",  -- 1104
+        "%s: 약 %s, 거리로 추정",  -- 1105
+        "%s: 약 %s",  -- 1106
+        "%s: 이 경로의 첫 비행, 시간 모름",  -- 1107
+        "비행 중, 목적지 모름",  -- 1108
+        "%s: 비행 시간 학습됨, %s",  -- 1109
+        "조기 착륙: %s, 약 %s",  -- 1110
+        "다음 비행 지점에 조기 착륙",  -- 1111
+        "상쾌하고 춥습니다. 발밑엔 눈, 입김이 허공에 머뭅니다",  -- 1112
+        "살을 에는 추위, 봉우리에서 내려온 바람이 갑옷 틈마다 파고듭니다",  -- 1113
+        "덥고 습합니다. 공기가 마실 수 있을 만큼 짙습니다",  -- 1114
+        "숲 지붕 아래 끈적한 더위, 벌레 소리가 요란합니다",  -- 1115
+        "덥고 건조합니다. 바람에 먼지가 날립니다",  -- 1116
+        "타는 듯한 햇볕과 갈라진 땅. 마실 수 있을 때 마셔 두세요",  -- 1117
+        "뜨거운 바람에 연기와 재가 실려 옵니다",  -- 1118
+        "그을린 공기, 불티가 흩날립니다",  -- 1119
+        "잿빛에 춥습니다. 축축한 안개가 들러붙습니다",  -- 1120
+        "공기는 서늘하고 빛은 거의 없습니다",  -- 1121
+        "온화하고 맑습니다. 산들바람이 붑니다",  -- 1122
+        "여행하기 좋은 쾌적한 날씨입니다",  -- 1123
+        "서늘하고 푸릅니다. 나뭇잎이 속삭입니다",  -- 1124
+        "나무 사이로 부드러운 빛, 공기가 상쾌합니다",  -- 1125
+        "후덥지근하고 축축합니다. 발밑 땅이 무릅니다",  -- 1126
+        "따뜻하고 눅눅한 공기, 늪 냄새가 납니다",  -- 1127
+        "%s, %s: %s",  -- 1128
+        "알려진 비행 경로 %d개.",  -- 1129
+        "비행: 막대를 따라가는 탈것",  -- 1130
+        "그리폰, 와이번 또는 박쥐(비행 조련사가 내준 것)가 비행 막대를 따라 착륙 지점으로 날아갑니다",  -- 1131
+        "비행: 도착지의 날씨",  -- 1132
+        "착륙하면 도착한 곳의 공기가 평소 어떤지 대화창에 알려 줍니다 (가시덤불 골짜기는 덥고 습함, 던 모로는 발밑에 눈). 하루 중 시간대도 함께 알려 줍니다",  -- 1133
+        "시간을 아는 비행 경로 목록",  -- 1134
+        "착륙! +%d",  -- 1135
+        "부딪힘: 연속 기록 끝",  -- 1136
+        "%s 날갯짓  ·  나무 꼭대기와 비행선을 피하세요",  -- 1137
+        "%s 기수를 그물로 잡아 비행 골드 획득  ·  %s 높은 고도",  -- 1138
+        "비행 골드 %d",  -- 1139
+        "%s 날갯짓",  -- 1140
+        "%s 그물",  -- 1141
+        "%s 높은 고도",  -- 1142
+        "%s: 게임으로 돌아가기 (비행 골드 %d)",  -- 1143
+        "%s: 가는 길의 게임",  -- 1144
+        "비행 게임이 꺼져 있습니다: /cchud flightgame on",  -- 1145
+        "비행 게임은 비행 중에 플레이합니다.",  -- 1146
+        "전투 중에는 안 됩니다.",  -- 1147
+        "비행 게임: 플레이 / 높은 고도",  -- 1148
+        "비행 중: 비행 게임을 시작하거나, 높은 고도로 올렸다가 되돌립니다",  -- 1149
+        "영화 같은 비행: 카메라가 주위를 돎",  -- 1150
+        "영화 중에 카메라가 당신과 탈것 주위를 천천히 돕니다. 한 바퀴에 약 1분 30초가 걸리며, 착륙하기 전에 다시 당신 뒤로 돌아옵니다. 끄기: 고정된 장면",  -- 1151
+        "오프라인",  -- 1152
+        "죽음",  -- 1153
+        "끄기",  -- 1154
+        "치유 전문화일 때",  -- 1155
+        "항상",  -- 1156
+        "너무 멂",  -- 1157
+        "치유사용 파티와 공격대",  -- 1158
+        "파티에서는: 캐릭터 옆에 파티원을, 각자 대상으로 지정하는 버튼과 함께; 공격대에서는: 더 얇은 창. 각 창은 필요한 치유량, 해제할 수 있는 약화 효과, 사거리 안에 있는지만 보여 줍니다",  -- 1159
+        "판매 확률 %d%%",  -- 1160
+        "확실히 팔려 (%d%%)",  -- 1161
+        "저건 알아서 팔려 (%d%%)",  -- 1162
+        "팔릴 것 같아 (%d%%)",  -- 1163
+        "살 사람이 있을 거야 (%d%%)",  -- 1164
+        "반반이야 (%d%%)",  -- 1165
+        "어느 쪽이든 될 수 있어 (%d%%)",  -- 1166
+        "좀 도박이야 (%d%%)",  -- 1167
+        "한동안 안 팔릴지도 (%d%%)",  -- 1168
+        "기대는 안 하는 게 좋아 (%d%%)",  -- 1169
+        "가망이 적어, 친구 (%d%%)",  -- 1170
+        "상인보다 +%s",  -- 1171
+        "아직 알려진 가격 없음",  -- 1172
+        "상인도 그만큼 줍니다",  -- 1173
+        "중개인",  -- 1174
+        "시장",  -- 1175
+        "동전 한 닢까지 셌다네, 친구",  -- 1176
+        "가방에 여기서 팔 수 있는 아이템이 없습니다.",  -- 1177
+        "최근 7일 동안 가격이 없습니다.",  -- 1178
+        "아직 하루치 가격뿐: 경매장에 들르는 날마다 캔들이 하나씩 늘어납니다.",  -- 1179
+        "7일, 하루에 캔들 하나: 초록은 더 높게 마감, 빨강은 더 낮게",  -- 1180
+        "30일, 그날의 최저가: 초록 상승, 빨강 하락",  -- 1181
+        "아직 가격 기록 없음: 며칠 동안 경매장을 읽으세요.",  -- 1182
+        "아직 하루치 가격뿐입니다: 경매장을 방문하는 날마다 선이 이어집니다.",  -- 1183
+        "개당 %s 요청, 모두 %s (%d개 내놓고 %d개는 네게 남아)",  -- 1184
+        "개당 %s 요구, 전부 %s (%d개)",  -- 1185
+        "최저",  -- 1186
+        "%s 읽음",  -- 1187
+        "평소",  -- 1188
+        "7일: %s ~ %s",  -- 1189
+        "등록: 경매 %d건, 물품 %d개",  -- 1190
+        "개당 %s, 전부 %s (%d개)",  -- 1191
+        "여기에 %d개 등록, 경매 %d건 판매",  -- 1192
+        "알려진 가격 없음: 먼저 경매장을 읽으세요.",  -- 1193
+        "여기서 팔 물건이 가방에 없음.",  -- 1194
+        "오늘은 상인보다 여기서 더 잘 팔리는 게 없음. 기다리면 %d개는 가능.",  -- 1195
+        "좋은 것부터: %d개는 상인보다 여기서 더 잘 팔림, 기다리면 %d개 더.",  -- 1196
+        "가방이 텅 비었군, 친구. 팔 물건 좀 가져와.",  -- 1197
+        "오늘은 상인보다 나은 게 없어. 조금만 참으면 %d개는 될지도.",  -- 1198
+        "이 가방엔 확실한 벌이가 없군, 친구. 기다리면 %d개는 돈이 될 거야.",  -- 1199
+        "좋은 건 위에: 여기서 %d개는 어느 상인보다 낫고, 참을성 있으면 %d개 더.",  -- 1200
+        "%d개는 상인보다 여기서 더 받아, 좋은 것부터. 기다리면 %d개 더.",  -- 1201
+        "맨 위가 제일 남아: 확실한 판매 %d개, 기다릴 수 있으면 %d개 더.",  -- 1202
+        "아직 가격 없음: %s로 경매장을 읽음.",  -- 1203
+        "방금 읽은 가격: %d개.",  -- 1204
+        "가격 %d개, %s 읽음.",  -- 1205
+        "가격 %d개, %s 읽음. %s로 다시 읽음.",  -- 1206
+        "아직 게시판을 안 읽었어. %s 누르면 가격을 전부 가져오지.",  -- 1207
+        "아직 가격이 없어, 친구. %s 누르면 게시판을 전부 읽어.",  -- 1208
+        "게시판에서 갓 읽은 가격이야, 친구: %d개.",  -- 1209
+        "방금 게시판을 읽었어: 가격 %d개, 아직 따끈해.",  -- 1210
+        "가격 %d개, %s 읽었지. 그 정도면 됐어, 친구.",  -- 1211
+        "마지막으로 게시판을 본 건 %s: 가격 %d개.",  -- 1212
+        "%s 가격이라 묵은 빵처럼 굳었어. %s 누르면 다시 읽어.",  -- 1213
+        "가격 %d개, 하지만 %s 읽은 거야. %s 누르면 다시 볼게.",  -- 1214
+        "보관하는 물건도 표시 중. %s로 숨김.",  -- 1215
+        "보류: %d개, 전문 기술, 장비, 표시용. %s로 표시.",  -- 1216
+        "보관하는 것도 목록에 있어. %s 누르면 치워 둘게.",  -- 1217
+        "보관하는 것도 보여 주는 중이야. %s 누르면 다시 숨겨.",  -- 1218
+        "%d개는 빼 뒀어: 제작 재료, 입을 장비, 표시한 것. %s 누르면 보여 줄게.",  -- 1219
+        "%d개는 따로 챙겨 뒀어: 전문 기술용, 착용용, 표시한 것. 원하면 %s.",  -- 1220
+        "개당",  -- 1221
+        "데이터 없음",  -- 1222
+        "빠른 판매",  -- 1223
+        "느긋하게",  -- 1224
+        "모든 가격 읽기",  -- 1225
+        "보관품 숨기기",  -- 1226
+        "보관품 표시",  -- 1227
+        "선",  -- 1228
+        "캔들",  -- 1229
+        "등록",  -- 1230
+        "%d / %d",  -- 1231
+        "%d / %d개 등록, 개당 %s",  -- 1232
+        "%d개를 %s에 등록",  -- 1233
+        "%d개 모두 %s에 등록",  -- 1234
+        "이 클라이언트의 경매장에는 여기서 등록할 수 없습니다.",  -- 1235
+        "%d개를 %s에 등록했습니다.",  -- 1236
+        "경매장의 시장: 열기 / 닫기",  -- 1237
+        "시장에서 경매인의 인사",  -- 1238
+        "시장을 열 때 고블린 경매인이 게임 자체 소리로 짧은 한마디를 합니다. 끄면 조용히 열립니다",  -- 1239
+        "시장: 보관하는 것 표시",  -- 1240
+        "시장에 보관하는 것도 표시합니다: 전문 기술이 아직 배울 수 있거나 더 비싼 것으로 만들 수 있는 것, 보관하도록 표시한 것. 끄면 팔 것만 표시합니다",  -- 1241
+        "시장: 가격 차트를 캔들로",  -- 1242
+        "시장의 가격 차트를 최근 7일 동안 하루에 캔들 하나로 표시 (가격이 시작한 곳, 최고와 최저, 마감한 곳: 더 높게 마감하면 초록, 더 낮게 마감하면 빨강); 끔: 30일 동안 그날 최저가의 선",  -- 1243
+        "시장 열기 또는 닫기 (경매장의 탭)",  -- 1244
+        "이 클라이언트의 경매장 종류 (문제 해결용)",  -- 1245
+        "전문 기술 창을 열면 제가 제조법을 살펴보겠습니다.",  -- 1246
+        "%d, 여기가 한계입니다. 다음 단계는 상급자에게 배우세요.",  -- 1247
+        "%d에서는 더 배울 것이 없습니다. 상급자를 찾아가 다음 단계를 배우세요.",  -- 1248
+        "지금 제조법으로는 부족합니다. 상급자를 찾아가세요: %s, %d에서 기다리고 있습니다.",  -- 1249
+        "%d 남았습니다(목표 %d). 아는 것만으로는 닿지 않습니다. 상급자가 %s 제조법을 %d에 가르쳐 줍니다.",  -- 1250
+        "지금 제조법으로는 부족합니다. 상급자를 찾아가세요: %s 제조법이 기다리고 있습니다.",  -- 1251
+        "제조법이 %d 남기고(목표 %d) 더는 가르쳐 주지 않습니다. 상급자에게 %s 제조법을 물어보세요.",  -- 1252
+        "제조법이 %d 남기고(목표 %d) 바닥났습니다. 상급자에게 새것이 있을 겁니다.",  -- 1253
+        "아는 것만으로는 마지막 %d을 채울 수 없습니다. 상급자를 만날 때입니다.",  -- 1254
+        "%s 제조법은 이제 별로 가르쳐 주지 않지만, 가진 것 중엔 최선입니다. %d 남았습니다(목표 %d).",  -- 1255
+        "여기서부터는 더딥니다: %s 제조법은 가끔 한 점을 줍니다. %d 남았습니다.",  -- 1256
+        "먼저 %s 제조법이 필요합니다(%s). 가이드는 이 구간을 그것으로 시작합니다.",  -- 1257
+        "%s 제조법을 배우세요(%s). 그러면 시작합니다: %d 남았습니다(목표 %d).",  -- 1258
+        "%d 남았습니다(목표 %d). 가이드는 %s 채집을 권합니다(%d까지).",  -- 1259
+        "여기서는 채집이 스승입니다: %s, %d까지.",  -- 1260
+        "%d 남았습니다(목표 %d). %s부터 시작하세요. 원하면 %s도 좋습니다: %s.",  -- 1261
+        "가이드대로 먼저 %s. %s도 됩니다: %s.",  -- 1262
+        "%d 남았습니다(목표 %d). %s부터 시작하세요.",  -- 1263
+        "지금은 %s 제조법이 가장 좋은 스승입니다. %d점 남았습니다(목표 %d).",  -- 1264
+        "손은 차분하게. 먼저 %s, 그리고 %d 남았습니다.",  -- 1265
+        "상급자에게서",  -- 1266
+        "상인에게서",  -- 1267
+        "전리품으로",  -- 1268
+        "퀘스트로",  -- 1269
+        "더 싼 재료",  -- 1270
+        "상인에게 파는 재료",  -- 1271
+        "직접 채집하는 재료",  -- 1272
+        "잘 팔림",  -- 1273
+        "직접 쓸 물건",  -- 1274
+        "더 적은 제작 횟수",  -- 1275
+        "찾거나 사야 하는 제조법",  -- 1276
+        "다른 재료",  -- 1277
+        "가이드의 첫 선택",  -- 1278
+        "숙련도 계획을 보려면 전문 기술 창을 여세요.",  -- 1279
+        "한계 %d 도달. 다음 단계는 상급자에게.",  -- 1280
+        "%d 남음, 목표 %d. 아는 제조법으론 부족함. 상급자에게 %s (%d).",  -- 1281
+        "%d 남음, 목표 %d. 아는 제조법으론 부족함. 상급자에게 %s.",  -- 1282
+        "아는 제조법은 %d 모자람 (목표 %d). 상급자에게 더 있음.",  -- 1283
+        "%d 남음, 목표 %d. 지금 최선: %s, 녹색 (가끔 1점).",  -- 1284
+        "%d 남음, 목표 %d. 먼저 %s 배우기, %s.",  -- 1285
+        "%d 남음, 목표 %d. %s 채집, %d까지.",  -- 1286
+        "%d 남음, 목표 %d. 먼저: %s, 또는 %s (%s).",  -- 1287
+        "%d 남음, 목표 %d. 먼저: %s.",  -- 1288
+        "채집하거나 살 것",  -- 1289
+        "%d회 제작: %s",  -- 1290
+        "%s 배울 수 있습니다(%d부터).",  -- 1291
+        "%s 배울 수 있습니다.",  -- 1292
+        "%s: 가방 %d, 은행 %d, 제작당 %d",  -- 1293
+        "가이드는 이 구간을 %s 채집으로 올립니다.",  -- 1294
+        "%s: %d개 보유, 계획에 %d개 사용",  -- 1295
+        "용도: %s",  -- 1296
+        "%s(으)로 만드는 것보다 사는 편이 쌉니다",  -- 1297
+        "%s(으)로 제작",  -- 1298
+        "멘토: 은행 재료로 만들 수 있는 것",  -- 1299
+        "은행 재료로 만들 수 있는 것",  -- 1300
+        "은행에 있는 것으로 더 만들 수 있는 것이 없습니다.",  -- 1301
+        "은행까지 세면 %d개를 만들 수 있고, 그중 %d개는 은행 덕분입니다.",  -- 1302
+        "멘토: %s %d > %d",  -- 1303
+        "멘토",  -- 1304
+        "숙련도 계획",  -- 1305
+        "또는",  -- 1306
+        "%s 채집",  -- 1307
+        "배울 것",  -- 1308
+        "사는 편이 저렴",  -- 1309
+        "숨기기",  -- 1310
+        "계획",  -- 1311
+        "이것 파밍",  -- 1312
+        "모두 파밍",  -- 1313
+        "은행 포함",  -- 1314
+        "계획 사용",  -- 1315
+        "두 번 누르면 숨김",  -- 1316
+        "입어 볼 것이 없습니다.",  -- 1317
+        "파밍 목록에 %d개 추가했습니다.",  -- 1318
+        "부족한 것이 없습니다: 필요한 것을 모두 가지고 있습니다.",  -- 1319
+        "전문 기술 창을 열면 계획을 세웁니다.",  -- 1320
+        "멘토 (숙련 계획): 표시 / 숨기기",  -- 1321
+        "마지막으로 연 전문 기술 창의 숙련 계획을 컨트롤러 버튼과 함께 표시합니다",  -- 1322
+        "퀘스트 왼쪽",  -- 1323
+        "퀘스트 오른쪽",  -- 1324
+        "퀘스트 아래",  -- 1325
+        "파밍 목록이 가득 찼습니다.",  -- 1326
+        "파밍 목록: %s, %d개 원함.",  -- 1327
+        "파밍",  -- 1328
+        "%d개 더",  -- 1329
+        "아직 파밍할 것이 없습니다.",  -- 1330
+        "한 묶음 더",  -- 1331
+        "빼기",  -- 1332
+        "비우기",  -- 1333
+        "완료",  -- 1334
+        "파밍 목록을 모두 비울까요?",  -- 1335
+        "파밍 목록: 선택 / 완료",  -- 1336
+        "파밍 목록: 가리킨 아이템 추가",  -- 1337
+        "파밍 목록에 없습니다.",  -- 1338
+        "파밍 목록이 비었습니다.",  -- 1339
+        "파밍 목록: 위치",  -- 1340
+        "파밍 목록을 퀘스트 목록의 왼쪽, 오른쪽 또는 퀘스트 아래에 둡니다",  -- 1341
+        "퀘스트 목록 옆의 파밍 목록: 컨트롤러로 선택; add <아이템> [수량], remove <아이템>, clear, 또는 위치는 left / right / bottom",  -- 1342
+        "위협 수준 백분율",  -- 1343
+        "대상 프레임과 이름표의 위협 아이콘 옆에 내 위협 비율을 숫자로 표시",  -- 1344
+        "체력 수치",  -- 1345
+        "남은 생명력을 줄여서(12.3k) 바에 표시 (소형 이름표에는 표시 안 함: 백분율로 충분)",  -- 1346
+        "내 약화 효과",  -- 1347
+        "대상 이름 위에 내 약화 효과와 남은 시간 표시",  -- 1348
+        "모두의 디버프",  -- 1349
+        "내 것만이 아니라 모두의 디버프 중 게임이 이름표용으로 표시하는 것",  -- 1350
+        "적 버프",  -- 1351
+        "적의 약화 효과 옆에 강화 효과: 중요한 것(중요, 격노, 또는 내가 해제하거나 훔칠 수 있는 것)만, 또는 중요한 효과만 표시가 꺼져 있으면 전부",  -- 1352
+        "군중 제어 아이콘",  -- 1353
+        "유닛이 기절, 이동 불가, 공포 상태일 때 남은 시간과 함께 표시되는 큰 아이콘...",  -- 1354
+        "어그로 광채",  -- 1355
+        "이름 뒤의 방패 아이콘과 빛: 나를 공격하는 동안 빨강, 곧 끌어올 때 빨강과 노랑, 잃고 있을 때 노랑과 파랑, 나를 노리지 않을 때 파랑",  -- 1356
+        "퀘스트 표시",  -- 1357
+        "진행 중인 퀘스트에 아직 필요한 대상에 금색 표시를 띄웁니다",  -- 1358
+        "이름표 애니메이션",  -- 1359
+        "이름표가 서서히 나타나고, 체력이 낮으면 숨쉬듯 깜박이고, 군중 제어는 반짝임",  -- 1360
+        "작게",  -- 1361
+        "보통",  -- 1362
+        "크게",  -- 1363
+        "전체 이름",  -- 1364
+        "짧은 이름",  -- 1365
+        "이름 없음",  -- 1366
+        "전체",  -- 1367
+        "최소 미니",  -- 1368
+        "이름표 크기",  -- 1369
+        "이름표 막대의 크기: 작고 가늘게, 보통, 또는 크게 (더 넓고 높게)",  -- 1370
+        "이름표의 이름",  -- 1371
+        "생명력 막대가 있는 이름표의 이름: 전체, 줄임, 또는 생략 (대상 프레임에 전체 이름이 표시되며 레벨과 직업 아이콘은 유지됩니다). 막대가 없는 이름표(우호적인 NPC)는 항상 이름을 유지합니다",  -- 1372
+        "이름표 모양",  -- 1373
+        "이름표 설정을 한 번에. 전체: 모두. 최소: 자원 막대, 길드, 칭호 없음, 짧은 이름. 최소 미니: 생명력이 있는 작은 막대, 내 약화 효과와 중요한 강화 효과, 레벨과 직업, 이름 없음 (대상 프레임에 표시). 위협, 군중 제어, 눈에 띄는 시전은 항상 유지됩니다",  -- 1374
+        "플레이어 칭호",  -- 1375
+        "플레이어의 칭호를 이름과 함께 표시",  -- 1376
+        "길드와 NPC 직업",  -- 1377
+        "이름 아래 한 줄: 플레이어의 길드 또는 NPC가 하는 일",  -- 1378
+        "전투 중인 아군 바",  -- 1379
+        "아군 이름표가 해당 대상이 전투 중인 동안 체력, 자원, 시전을 표시",  -- 1380
+        "게임 기본 우호 이름표",  -- 1381
+        "우호 이름표(파티, 다른 플레이어, 우호 NPC)는 게임 기본 모양으로 두고, 우리 이름표는 적에게만",  -- 1382
+        "자원 바",  -- 1383
+        "체력 바 아래의 얇은 마나, 분노 또는 기력 바",  -- 1384
+        "시전 대상",  -- 1385
+        "주문 이름 옆에 표시되는 시전의 대상",  -- 1386
+        "체력 퍼센트",  -- 1387
+        "바에 표시되는 체력 퍼센트",  -- 1388
+        "대상 이름표에 이름 표시",  -- 1389
+        "끄면: 대상의 이름표에 이름과 레벨이 표시되지 않음 (대상 창에 표시됨)",  -- 1390
+        "이름표에 레벨 표시",  -- 1391
+        "적 이름 앞의 레벨, 난이도에 따라 색상 표시",  -- 1392
+        "간략한 이름표",  -- 1393
+        "이름표 너비를 약 절반으로",  -- 1394
+        "강조된 적 시전",  -- 1395
+        "적의 시전이 깜박이고 커지며 완료될 때까지 점점 빠르게 맥동하므로 제때 차단할 수 있습니다",  -- 1396
+        "이름표 직업 아이콘",  -- 1397
+        "아군이든 적이든 플레이어 이름 앞에 직업 아이콘 표시",  -- 1398
+        "NPC 역할 아이콘",  -- 1399
+        "무언가를 제공하는 우호적인 NPC 위에 아이콘 표시: 상인은 가방, 수리하는 대장장이는 모루, 전문기술 상급자는 책... (게임 자체 아이콘이며, 이름표가 가리켜지기를 기다리는 동안에도 보임)",  -- 1400
+        "가리킬 때만 우호적 NPC 표시",  -- 1401
+        "우호적 NPC(상인, 퀘스트 제공자, 마을 주민)의 이름표를 툴팁처럼 가리키고 있을 때만 표시",  -- 1402
+        "상호작용할 수 있는 사물의 이름",  -- 1403
+        "광석, 상자, 명판 등을 마주보는 동안 그 위에 이름 표시 (끄면 이름 없이 둡니다. 게임 자체 안내가 이미 무엇인지 알려 줍니다)",  -- 1404
+        "미니 이름표",  -- 1405
+        "하수인, 동물, 경험치를 주지 않는 회색 적은 작은 이름표: 내 약화 효과가 표시된 가는 바, 이름 없음 (바가 없는 동물은 이름 유지; 이름표 표시 여부는 게임 설정이 결정)",  -- 1406
+        "던전의 파티 이름표: 이름만",  -- 1407
+        "던전이나 공격대 안에서는 게임이 아군 플레이어의 이름표를 직접 그리며 애드온이 바꿀 수 없습니다. 그 안에서는 게임 자체 옵션을 설정해 우리 이름표처럼 바 없이 직업 색상의 이름으로만 표시하고, 전투 중에는 게임의 바가 다시 나타납니다 (전투 중 아군 바가 켜져 있을 때). 나갈 때 모두 원래대로 되돌립니다",  -- 1408
+        "던전의 파티 이름표: 숨김",  -- 1409
+        "던전이나 공격대 안에서 게임의 아군 플레이어 이름표를 완전히 끕니다 (나갈 때 원래 설정대로 되돌립니다)",  -- 1410
+        "대상의 이름에 대해 게임이 제공하는 정보 표시 (문제 해결용)",  -- 1411
+        "화면의 이름표와 우리 모양을 쓰고 있는지 표시 (문제 해결용)",  -- 1412
+        "자, 그럼.",  -- 1413
+        "어이쿠, 이게 다 뭐야.",  -- 1414
+        "어디 보자, 어디 보자...",  -- 1415
+        "엘룬이시여, 인내심을 주소서.",  -- 1416
+        "나루의 이름으로, 이게 무슨 뒤죽박죽이람.",  -- 1417
+        "망할 배낭.",  -- 1418
+        "잘 정돈된 배낭이 가벼운 배낭이지.",  -- 1419
+        "흥. 잡동사니가 너무 많아.",  -- 1420
+        "전부 쓸모없는 짐이군.",  -- 1421
+        "인내하라. 대지모신께서 베푸시리라.",  -- 1422
+        "어이, 뭐가 있나 볼까, 친구?",  -- 1423
+        "이런 어수선함이라니. 품위 없군.",  -- 1424
+        "시간은 금이지. 세어 보자고.",  -- 1425
+        "그래, 이 정도면 됐어.",  -- 1426
+        "엘룬께 감사를.",  -- 1427
+        "빛이 베푸시리라.",  -- 1428
+        "흠. 이 정도면 충분해.",  -- 1429
+        "흠. 싸우기엔 충분해.",  -- 1430
+        "가볍게 다니니 좋군.",  -- 1431
+        "봐줄 만하군. 겨우.",  -- 1432
+        "빈칸이 하나도 없어. 잡동사니를 팔면 %s: 팔아야 자리가 생기지.",  -- 1433
+        "빈칸이 하나도 없어. 길에서 안 쓸 건 은행에 맡겨 두자.",  -- 1434
+        "잡동사니 %d개, 여기선 %s. X는 고른 것을 팔고, 똑똑한 판매는 전부 팔아.",  -- 1435
+        "이 중 %d개는 은행에 둘 것: 은행에 같은 게 더 있거나 내가 표시해 뒀지. 보관을 누르면 넣어 둬.",  -- 1436
+        "빈칸이 %d개뿐이야. 잡동사니는 어느 상인한테든 %s는 받겠어.",  -- 1437
+        "빈칸이 %d개뿐이야. 몇 개는 팔거나 은행에 맡길 때야.",  -- 1438
+        "지난번 이후 새로 생긴 것: %d개. 금색 점이 표시돼 있어.",  -- 1439
+        "팔 만한 것: %d개. 판매 필터에 모여 있고, 툴팁마다 어디서 제일 비싸게 팔리는지 나와.",  -- 1440
+        "잡동사니 %d개, %s 가치. 다음 상인한테 넘기자.",  -- 1441
+        "꼭 필요한 것만 있어. 팔 만한 건 없어.",  -- 1442
+        "다 정리됐고, 빈칸은 %d개.",  -- 1443
+        "장비 수리 끝났소: %s.",  -- 1444
+        "%s면 장비를 고쳐 주겠소. 부서진 장비는 방어도도 능력치도 주지 않소.",  -- 1445
+        "가방이 꽉 찼구려. 물건 %d개를 %s에 사겠소: 똑똑한 판매를 누르면 다시 자리가 생기오.",  -- 1446
+        "%s 주겠소, 물건 %d개에: 잡동사니와 경매장에서 더 받지 못할 것들이오. 똑똑한 판매면 끝이오.",  -- 1447
+        "경매장이 원하는 %d개는 가지고 있으시오: 나보다 %s 더 쳐 주니까.",  -- 1448
+        "가방이 꽉 찼구려. 사기 전에 뭐라도 파시오.",  -- 1449
+        "가방에 내가 후하게 쳐 줄 물건은 없구려. 내 물건이나 구경하시오.",  -- 1450
+        "가지고 계신 것 중 %d개는 여기 둘 물건입니다: 같은 게 더 보관돼 있거나 표시해 두셨지요. 보관을 누르시면 넣어 드립니다.",  -- 1451
+        "지니신 물건 %d종을 더 보관하고 있습니다. 꺼내기로 떠나기 전에 가방을 채우세요.",  -- 1452
+        "가방이 거의 찼습니다. 길에서 안 쓰실 건 제게 맡기세요.",  -- 1453
+        "모두 안전하게 맡아 두었습니다. 가방엔 빈칸이 %d개 있습니다.",  -- 1454
+        "오늘은 온 게 없네요. 두 번이나 확인했어요.",  -- 1455
+        "편지 %d통이 왔어요. 첨부물은 없으니 편할 때 읽으세요.",  -- 1456
+        "편지 %d통이 왔어요. 안에 든 것: %s.",  -- 1457
+        "모두 받기로 한 번에 비울 수 있어요.",  -- 1458
+        "착불 편지: %d통. 그건 직접 열고 값을 치르세요.",  -- 1459
+        "가방이 꽉 찼어요: 물건은 편지 안에서 기다립니다.",  -- 1460
+        "어디로 가시겠소? 장소를 가리키면 얼마나 걸리는지 알려 주겠소.",  -- 1461
+        "%s: 지도로 보면 약 %s. 아직 그 길은 날아 본 적이 없소.",  -- 1462
+        "%s: 지난번 비행으로 보면 약 %s.",  -- 1463
+        "%s: 아직은 얼마나 걸릴지 모르겠소. 한 번 날아 보면 알게 될 거요.",  -- 1464
+        "%d마리나 놓쳤군. 이 물엔 내 실력이 모자라: 미끼도 좋고, 더 좋은 낚싯대도 도움이 돼.",  -- 1465
+        "바늘에 미끼가 없네. 미끼는 기술을 올려 줘서 덜 놓치게 돼.",  -- 1466
+        "미끼가 거의 다 됐어. 새로 달면 기술이 유지되지.",  -- 1467
+        "여기서 아직 못 낚은 물고기: %d종. 계속 던지자.",  -- 1468
+        "이 물의 물고기는 다 낚았어. 그럼 새로운 곳으로.",  -- 1469
+        "아직 낚은 게 없어. 물마다 첫 물고기는 여기 적히지.",  -- 1470
+        "낚은 종류: %d. 물마다 몇 종이 더 숨어 있어: 낚시 패널에 거기서 못 낚은 건 ?로 나와.",  -- 1471
+        "불가에서 푹 쉬었어: 처치로 얻는 다음 경험치 %d은 두 배야.",  -- 1472
+        "쌓아 둔 휴식이 없어. 여관이나 도시에서 하룻밤 자면 한동안 처치 경험치가 두 배야.",  -- 1473
+        "%d 흡수",  -- 1474
+        "오른쪽 목록",  -- 1475
+        "가운데에 하나씩",  -- 1476
+        "치명타 치유 %d회",  -- 1477
+        "치명타 %d회",  -- 1478
+        "심판",  -- 1479
+        "큰 순간: 위치",  -- 1480
+        "캐릭터 오른쪽 재사용 대기시간 알림 바로 위의 블록(최신이 알림에 가장 가깝고, 이전 것은 흐려지며 위로 올라감) 또는 가운데에 하나씩",  -- 1481
+        "큰 순간이 어떻게 보이고 느껴지는지 보여줌",  -- 1482
+        "수집함",  -- 1483
+        "다른 아이템으로 수집함",  -- 1484
+        "아직 수집하지 않음",  -- 1485
+        "외형",  -- 1486
+        "세트를 고르면 그 조각들이 의상에 적용됩니다. %s 버튼을 눌러야 유지되며, 그 전에는 비용이 들지 않습니다.",  -- 1487
+        "수집품을 살펴보는 중...",  -- 1488
+        "의상이 원래대로 돌아왔습니다.",  -- 1489
+        "%s: %d/%d개 조각 적용.",  -- 1490
+        "%d개는 이 의상에 적용되지 않았습니다.",  -- 1491
+        "조각을 가진 세트 1개",  -- 1492
+        "조각을 가진 세트 %d개",  -- 1493
+        "착용할 수 없음",  -- 1494
+        "없음",  -- 1495
+        "조각 %d개 모두",  -- 1496
+        "%d/%d개 조각",  -- 1497
+        "없음: %s",  -- 1498
+        "아직 세트가 없습니다. 녹색 철 투구와 녹색 철 건틀릿처럼 이름이 같은 아이템은 하나라도 가지면 여기에 나타납니다.",  -- 1499
+        "되돌리기",  -- 1500
+        "사용자 세트 %s을(를) 삭제하시겠습니까? 되돌릴 수 없습니다.",  -- 1501
+        "삭제",  -- 1502
+        "먼저 사용자 세트에 커서를 올리세요.",  -- 1503
+        "%s  사용자 세트 삭제",  -- 1504
     },
     ptBR = {
         "erro:",  -- 1
@@ -10012,529 +10024,531 @@ local TRANSLATIONS = {
         "A bússola precisa saber onde você está, e o jogo não diz isso aqui.",  -- 977
         "Bússola de missões: lugar",  -- 978
         "no topo da tela, ou embaixo no lugar da barra de experiência (a barra vai então para o topo)",  -- 979
-        "algumas marcas na bússola de missões, ao seu redor, por vinte segundos",  -- 980
-        "Modo de pesca: desligado.",  -- 981
-        "Pesca: %s para lançar",  -- 982
-        "Sem isca: %s duas vezes para usar %s",  -- 983
-        "%s para guardar a vara",  -- 984
-        "Modo pesca: %s para lançar a linha, e de novo para fisgar o peixe quando a boia mexer.",  -- 985
-        "%s para fisgar, %s para lançar de novo",  -- 986
-        "O modo de pesca precisa de uma vara de pescar nas suas mãos.",  -- 987
-        "Você não conhece Pesca.",  -- 988
-        "Modo de pesca: um botão lança e fisga",  -- 989
-        "Botão de pesca: %s",  -- 990
-        "Lançar de novo com um toque",  -- 991
-        "enquanto a boia está na água, seu botão de pesca fisga o peixe e A lança de novo com um toque; desligado: A é seu",  -- 992
-        "Isca com toque duplo",  -- 993
-        "aperte seu botão de pesca duas vezes rápido: o segundo toque coloca a melhor isca das suas bolsas na vara, quando a vara não tem nenhuma",  -- 994
-        "Barras do controle ocultas ao pescar",  -- 995
-        "com uma vara de pesca nas mãos as barras do controle ficam ocultas, para ver bem a água; o aviso de pesca mostra o botão para lançar. Elas voltam assim que um combate começa ou a vara é guardada",  -- 996
-        "pesca com um botão desligada por ora, ou ligada de novo (com uma vara nas mãos ela liga sozinha)",  -- 997
-        "o botão que pesca: no início seu botão de interagir (Quadrado ou X), ou qualquer outro, um gatilho por exemplo (rt)",  -- 998
-        "O litoral de Durotar é rocha vermelha e água rasa e morna. Os trolls das Ilhas do Eco dizem que a cavala passa em maior número quando a maré traz o cheiro das fogueiras de cozinha das ilhas.",  -- 999
-        "Os lagos de Mulgore são pequenos, límpidos e pacientes. Os tauren pescam neles como fazem todo o resto: devagar e com gratidão.",  -- 1000
-        "Todo oásis dos Sertões é um ponto de encontro. Seja lá o que beba ali de dia, alguma coisa nada por baixo à noite.",  -- 1001
-        "As lagoas de Teldrassil ficam à sombra de uma única árvore. Os pescadores elfos noturnos juram que os peixes de lá nunca viram o sol e não sentem a menor falta.",  -- 1002
-        "A água da Costa Negra é cinzenta, fria e cheia de naufrágios. Metade do que morde a isca perto de Auberdine fez morada na carga perdida de alguém.",  -- 1003
-        "Os rios do Vale Gris correm sob folhas mais velhas que a maioria dos reinos. Os peixes são rápidos, e as sentinelas são ainda mais rápidas em perguntar o que você está fazendo ali.",  -- 1004
-        "Lá embaixo, em Mil Agulhas, a água é pouca e guardada com ciúme. Um peixe daqui fez por merecer o seu lugar.",  -- 1005
-        "Os lagos da Cordilheira das Torres de Pedra ficam lá no alto, gelados, entre os picos. Os goblins já os teriam drenado se a pescaria não fosse tão boa.",  -- 1006
-        "A costa da Desolação é feita de ossos e ressaca cinzenta. Alguma coisa lá no fundo tem gosto pelos dois.",  -- 1007
-        "Feralas é verde até a beira da água. Seus rios são fundos, mornos e muito, muito vivos.",  -- 1008
-        "Ninguém sabe ao certo onde termina a terra e começa a água no Pântano Vadeoso. Pesque da margem e conte os dedos dos pés depois.",  -- 1009
-        "O Porto Bondebico tem a única água digna do nome em Tanaris. Os goblins vendem o direito de pescar nela, e até duas vezes, se você deixar.",  -- 1010
-        "Sob a baía luminosa de Azshara jaz uma cidade afogada. Os pescadores velhos dizem que os grandões vivem onde antes ficavam os jardins.",  -- 1011
-        "As lagoas de Selva Maleva brilham, e não no bom sentido. O que ainda nada nelas é teimoso além da conta.",  -- 1012
-        "As fontes termais e os lagos orlados de piche da Cratera Un'Goro guardaram coisas que o resto do mundo esqueceu. Algumas delas mordem.",  -- 1013
-        "O Lago Elune'ara, na Clareira da Lua, é calmo como um fôlego suspenso. Os druidas só pedem que você não leve mais do que vai comer.",  -- 1014
-        "Silithus é areia, vento e som de asas. Se você achou água para pescar aqui, não conte a ninguém.",  -- 1015
-        "Os lagos de Hibérnia congelam nas bordas e fumegam no meio. Os peixes de lá são gordos por causa do frio e valem a caminhada.",  -- 1016
-        "Nas lagoas de Orgrimmar pescam os peões que não têm nada melhor para fazer e os velhos brutamontes que dizem o mesmo. Uns e outros contam que o grandão escapou.",  -- 1017
-        "Um peixe dos laguinhos do Penhasco do Trovão passou a vida inteira bem acima das planícies. Parece lidar bem com isso.",  -- 1018
-        "Darnassus cuida de suas águas com o mesmo zelo com que cuida dos templos. Os peixes já se acostumaram a ser admirados.",  -- 1019
-        "Os lagos das Montanhas de Alterac são neve derretida, e os ogros e a Camarilha pescam neles quando ninguém está olhando.",  -- 1020
-        "As margens do Planalto Arathi viram mais exércitos do que pescadores. Faz tempo que os peixes deixaram de se importar com a bandeira que tremula sobre a água.",  -- 1021
-        "Os Ermos são poeira de uma ponta a outra. Uma fisgada aqui é um pequeno milagre; trate-a como tal.",  -- 1022
-        "A costa da Barreira do Inferno é vermelha, castigada e silenciosa. O que quer que viva naquela arrebentação aprendeu a conviver com muita coisa.",  -- 1023
-        "Os lagos das Clareiras de Tirisfal jazem imóveis sob um céu doentio. Os Renegados pescam neles por hábito; os mortos não comem muito, mas lembram que gostavam.",  -- 1024
-        "A longa costa da Floresta de Pinhaprata é só névoa e sombra de pinheiro. A pesca é boa, e essa é a única coisa alegre que alguém diz sobre o lugar.",  -- 1025
-        "Os rios das Terras Pestilentas Ocidentais ainda correm, embora não limpos. O que você tirar deles, olhe duas vezes.",  -- 1026
-        "Pouca gente pesca nas Terras Pestilentas Orientais, e menos gente ainda admite. A água guarda o que a peste deixou dela.",  -- 1027
-        "O rio de Eira dos Montes e sua longa costa sul alimentaram os dois lados de todas as brigas travadas por causa deles.",  -- 1028
-        "As Terras Agrestes guardam seus lagos no alto, entre as árvores, onde os anões Martelo Feroz pescam montados em grifos quando acham que ninguém está vendo.",  -- 1029
-        "Os lagos de Dun Morogh passam a maior parte do ano cercados de gelo. Um anão abre um buraco, senta com uma caneca de cerveja e diz que foi um bom dia, morda o que morder.",  -- 1030
-        "A Garganta Abrasadora tem lava onde outras terras têm rios. Melhor trazer alguma coisa para beber.",  -- 1031
-        "As Estepes Ardentes são cinzas e brasas. Se a água daqui lhe der alguma coisa, vai estar quente.",  -- 1032
-        "Toda criança de Elwynn aprende a pescar no Crystal Lake ou no Stone Cairn Lake. Os peixinhos de lá passam a perna nelas há gerações.",  -- 1033
-        "A Trilha do Vento Morto tem pouca água e menos acolhida ainda. O que há nas poças abaixo de Karazhan é melhor deixar por lá.",  -- 1034
-        "O rio na beira da Floresta do Crepúsculo é negro a qualquer hora. Os peixes não parecem se incomodar com o escuro; os pescadores, sim.",  -- 1035
-        "O Loch é o orgulho de Loch Modan, contido pela grande barragem Stonewrought. Os anões medem toda história de pescador pelo tamanho dele, e o Loch costuma ganhar.",  -- 1036
-        "O Lago Plácido, nas Montanhas Cristarrubra, é bonito como uma pintura, e pesca-se nele de todos os cais de Vila Plácida. Os moradores conhecem cada ponto bom e não vão lhe contar nenhum.",  -- 1037
-        "Dos rios da selva ao cabo selvagem do sul, a Selva do Espinhaço tem as águas mais ricas do continente. Os pescadores da Angra do Butim fazem um torneio por lá, e quase todos trapaceiam.",  -- 1038
-        "O Pântano das Mágoas é água verde sob árvores verdes. Os peixes têm gosto de lama, e é assim que o povo de lá gosta.",  -- 1039
-        "As lavouras de Cerro Oeste fracassaram, mas a costa não. Quem ficou vive da longa praia cinzenta.",  -- 1040
-        "O Pantanal faz jus ao nome. Os cais do Porto de Menethil são o lugar mais seco para pescar por lá, e os crocoliscos sabem disso.",  -- 1041
-        "Nos canais de Ventobravo pescam crianças, aposentados e pelo menos um membro da nobreza disfarçado. Ninguém pergunta o que mais existe nos canais.",  -- 1042
-        "A Forlorn Cavern abriga o único laguinho sossegado de Altaforja. Os anões velhos pescam ali por horas e não dizem uma palavra.",  -- 1043
-        "Os canais da Cidade Baixa correm num verde que não tem nada a ver com algas. Os Renegados que pescam ali não estão atrás do jantar.",  -- 1044
-        "O primeiro peixe que a maioria dos pescadores tira da água, e vistoso o bastante para ficar na memória.",  -- 1045
-        "Escorrega, corre e aparece em toda costa quente. Na grelha, fica melhor do que o nome sugere.",  -- 1046
-        "É só boca, e nunca está tão feliz quanto numa água que você não beberia.",  -- 1047
-        "Tamanho pequeno, dentes de sobra e medo nenhum. Dizem que um cardume inteiro já expulsou um urso do Loch.",  -- 1048
-        "Um lampejo de cor sob a arrebentação. Para os marinheiros, um desses no anzol é sorte para a viagem.",  -- 1049
-        "Um paciente comedor de fundo, com bigodes de ancião anão.",  -- 1050
-        "Ninguém come duas vezes. Os alquimistas compram tudo o que aparece.",  -- 1051
-        "As nadadeiras brilham como brasas dormidas, e o óleo extraído deste peixe queima quase tão bem.",  -- 1052
-        "Uma blindagem de pequeno escudo. A carne lá dentro compensa o trabalho.",  -- 1053
-        "Alguma coisa na água perto das Cavernas Ululantes transformou este peixe. Comer um talvez transforme você também, por um tempo.",  -- 1054
-        "O povo do rio diz que uma refeição dessas clareia a mente. É nadar contra a corrente que traz a sabedoria.",  -- 1055
-        "Mais idade, mais tamanho e mais sabedoria que o primo, e nada disso evitou o seu anzol.",  -- 1056
-        "Um lutador valente dos mares quentes do sul e o favorito em toda taberna, da Angra do Butim a Geringontzan.",  -- 1057
-        "A testa brilha como mithril de verdade. Mais de um minerador já tentou fundi-la.",  -- 1058
-        "As escamas, fervidas, viram um óleo que deixa a pele dura como pedra. Prefere a noite.",  -- 1059
-        "Brilha como uma couraça de desfile, e pesa quase o mesmo.",  -- 1060
-        "Só chega perto da costa nos meses frios, e os cozinheiros que conhecem o segredo esperam o ano inteiro.",  -- 1061
-        "Aparece quando os dias são longos. O povo do litoral marca a estação pela sua chegada.",  -- 1062
-        "Segure pelo meio, e só uma vez.",  -- 1063
-        "Um peixe de rio de terras selvagens, com as guelras vermelhas como a pintura de guerra de um troll.",  -- 1064
-        "Come depois que escurece. Uma sopa feita com este peixe acalma os nervos de quem lança feitiços.",  -- 1065
-        "Come de dia, o oposto do primo noturno em quase tudo, e mesmo assim divide a água com ele.",  -- 1066
-        "Não é bem um peixe. Discorda de ter ido parar no anzol e faz questão de deixar isso claro.",  -- 1067
-        "Tem a palidez do gelo de rio e vem dos lagos frios e límpidos do norte.",  -- 1068
-        "Você vai precisar das duas mãos, e talvez de um amigo.",  -- 1069
-        "%.1f lb",  -- 1070
-        "Novo no seu diário de pesca: %s, %s.",  -- 1071
-        "Novo no seu diário de pesca: %s.",  -- 1072
-        "Seu %s mais pesado até agora: %s (era %s).",  -- 1073
-        "Isca %s",  -- 1074
-        "Sem isca",  -- 1075
-        "Pegos %d",  -- 1076
-        "Escaparam %d",  -- 1077
-        "Um curioso: +%d%%",  -- 1078
-        "Mantenha sua isca ao lado do peixe",  -- 1079
-        "Próxima captura +%d%%",  -- 1080
-        "Segure %s: a isca corre pela linha",  -- 1081
-        "%d seguidos",  -- 1082
-        "Um jogo enquanto a boia está na água",  -- 1083
-        "jogado na barra de lançamento enquanto a linha está na água: segure um gatilho e sua isca corre pela linha, solte e ela volta à deriva; mantenha-a junto à sombra do peixe. Quanto melhor você jogar, mais pesado o peso inventado da próxima captura. Não ocupa nenhum botão e nunca mexe no seu lançamento nem na captura",  -- 1084
-        "%d pegos, %d tipos, %d escaparam",  -- 1085
-        "Mais pesado: %s, %s",  -- 1086
-        "Peixes",  -- 1087
-        "Águas",  -- 1088
-        "Nada pego ainda. Leve uma vara até a água.",  -- 1089
-        "Pegos: %d",  -- 1090
-        "Mais pesado: %s, em %s",  -- 1091
-        "Primeira captura: %s",  -- 1092
-        "Pegos aqui: %d",  -- 1093
-        "Tipos encontrados aqui: %d",  -- 1094
-        "abrir ou fechar seu diário de pesca: cada tipo que você pegou, o mais pesado de cada um, e as águas onde você pescou",  -- 1095
-        "Voo",  -- 1096
-        "pouso antecipado",  -- 1097
-        "pouso no próximo ponto de voo",  -- 1098
-        "destino desconhecido",  -- 1099
-        "estimado pela distância",  -- 1100
-        "primeiro voo nesta rota: aprendendo a duração",  -- 1101
-        "pousando",  -- 1102
-        "%s: cerca de %s, estimado pela distância",  -- 1103
-        "%s: cerca de %s",  -- 1104
-        "%s: primeiro voo nesta rota, tempo desconhecido",  -- 1105
-        "Em voo, destino desconhecido",  -- 1106
-        "%s: tempo de voo aprendido, %s",  -- 1107
-        "Pouso antecipado: %s, cerca de %s",  -- 1108
-        "Pouso antecipado no próximo ponto de voo",  -- 1109
-        "fresco e frio, neve sob os pés e o fôlego pairando no ar",  -- 1110
-        "um frio cortante, com um vento dos picos que encontra cada fresta da armadura",  -- 1111
-        "quente e úmido, um ar tão denso que dá para beber",  -- 1112
-        "calor pegajoso sob a copa das árvores, e os insetos barulhentos",  -- 1113
-        "quente e seco, com poeira no vento",  -- 1114
-        "sol escaldante e terra rachada; beba quando puder",  -- 1115
-        "fumaça e cinzas num vento quente",  -- 1116
-        "ar chamuscado, com fagulhas à deriva",  -- 1117
-        "cinzento e frio, uma névoa úmida que gruda",  -- 1118
-        "um frio no ar e quase nenhuma luz",  -- 1119
-        "ameno e agradável, com uma brisa suave",  -- 1120
-        "tempo agradável, bom para viajar",  -- 1121
-        "fresco e verde, as folhas sussurrando",  -- 1122
-        "luz suave entre as árvores, e o ar fresco",  -- 1123
-        "abafado e úmido, o chão mole sob os pés",  -- 1124
-        "ar quente e molhado, e o cheiro do pântano",  -- 1125
-        "%s em %s: %s",  -- 1126
-        "%d rotas de voo conhecidas.",  -- 1127
-        "Voos: sua montaria ao longo da barra",  -- 1128
-        "um grifo, uma mantícora ou um morcego (o que o mestre de voo lhe deu) plana pela barra do voo até onde você pousa",  -- 1129
-        "Voos: o tempo onde você pousa",  -- 1130
-        "ao pousar, o chat diz como é o ar onde você chegou, como o lugar costuma ser (quente e úmido em Selva do Espinhaço, neve sob os pés em Dun Morogh), e a hora do dia",  -- 1131
-        "listar as rotas de voo cujo tempo é conhecido",  -- 1132
-        "Ao chão! +%d",  -- 1133
-        "Batida: a sequência acaba",  -- 1134
-        "%s bater as asas  ·  desvie das copas das árvores e dos zepelins",  -- 1135
-        "%s pegue os cavaleiros com a rede por ouro de voo  ·  %s grande altitude",  -- 1136
-        "%d de ouro de voo",  -- 1137
-        "%s bater as asas",  -- 1138
-        "%s rede",  -- 1139
-        "%s grande altitude",  -- 1140
-        "%s: voltar ao jogo (%d de ouro de voo)",  -- 1141
-        "%s: um jogo no caminho",  -- 1142
-        "O jogo de voo está desligado: /cchud flightgame on",  -- 1143
-        "O jogo de voo é jogado durante um voo.",  -- 1144
-        "Não em combate.",  -- 1145
-        "Jogo de voo: jogar / grande altitude",  -- 1146
-        "num voo: iniciar o jogo de voo, ou levá-lo à grande altitude e de volta",  -- 1147
-        "Voos cinematográficos: a câmera gira ao seu redor",  -- 1148
-        "no filme, a câmera gira devagar ao redor de você e da sua montaria, uma volta inteira em cerca de um minuto e meio, e volta para trás de você antes do pouso. Desligado: uma cena parada",  -- 1149
-        "Offline",  -- 1150
-        "Morto",  -- 1151
-        "Desligado",  -- 1152
-        "Em especialização de cura",  -- 1153
-        "Sempre",  -- 1154
-        "Longe demais",  -- 1155
-        "Grupo e raide do curador",  -- 1156
-        "em grupo: seu grupo ao lado do seu personagem, cada um com o botão que o seleciona; em raide: quadros mais finos. Cada um mostra só quanta cura precisa, uma penalidade que você pode curar e se está ao alcance",  -- 1157
-        "%d%% de vender",  -- 1158
-        "Vende com certeza (%d%%)",  -- 1159
-        "Isso se vende sozinho (%d%%)",  -- 1160
-        "Acho que vende (%d%%)",  -- 1161
-        "Deve achar comprador (%d%%)",  -- 1162
-        "Meio a meio (%d%%)",  -- 1163
-        "Pode ir pra qualquer lado (%d%%)",  -- 1164
-        "Meio que uma aposta (%d%%)",  -- 1165
-        "Pode ficar parado um tempo (%d%%)",  -- 1166
-        "Eu não contaria com isso (%d%%)",  -- 1167
-        "Chance pequena, amigo (%d%%)",  -- 1168
-        "+%s a mais que um vendedor",  -- 1169
-        "nenhum preço conhecido ainda",  -- 1170
-        "um vendedor paga o mesmo",  -- 1171
-        "O Corretor",  -- 1172
-        "Mercado",  -- 1173
-        "cada moeda contada, amigo",  -- 1174
-        "Nada nas suas bolsas pode ser vendido aqui.",  -- 1175
-        "Sem preços nos últimos 7 dias.",  -- 1176
-        "Um dia de preços até agora: uma vela a mais a cada dia em que você visita a casa de leilões.",  -- 1177
-        "7 dias, uma vela por dia: verde fechou mais alto, vermelho mais baixo",  -- 1178
-        "30 dias, o menor do dia: verde sobe, vermelho desce",  -- 1179
-        "Ainda sem histórico de preços: leia a Casa de Leilões por alguns dias.",  -- 1180
-        "Só um dia de preços até agora: a linha cresce a cada dia que você visita a casa de leilões.",  -- 1181
-        "Peço %s cada, %s pelos %d que você solta; %d ficam com você",  -- 1182
-        "Pede %s cada, %s por todos os %d",  -- 1183
-        "Menor",  -- 1184
-        "lido %s",  -- 1185
-        "Usual",  -- 1186
-        "7 dias: de %s a %s",  -- 1187
-        "À venda: %d leilões, %d itens",  -- 1188
-        "%s cada, %s por todos os %d",  -- 1189
-        "Você anunciou %d aqui, %d leilões vendidos",  -- 1190
-        "Nenhum preço conhecido: leia a Casa de Leilões primeiro.",  -- 1191
-        "Nada nas suas bolsas para vender aqui.",  -- 1192
-        "Hoje nada vende melhor aqui que num vendedor; %d talvez, com paciência.",  -- 1193
-        "O melhor primeiro: %d vendem melhor aqui que num vendedor, mais %d com paciência.",  -- 1194
-        "Bolsas vazias, amigo. Traga algo pra vender.",  -- 1195
-        "Hoje nada aqui bate um vendedor. %d talvez, com um pouco de paciência.",  -- 1196
-        "Nenhum lucro certo nessas bolsas, amigo. %d podem pagar se você esperar.",  -- 1197
-        "O melhor em cima: %d aqui batem qualquer vendedor, %d a mais pros pacientes.",  -- 1198
-        "%d pagam melhor aqui que num vendedor, o melhor primeiro. %d a mais se esperar.",  -- 1199
-        "O topo da pilha paga mais: %d vendas certas, %d a mais se puder esperar.",  -- 1200
-        "Ainda sem preços: %s lê a casa de leilões.",  -- 1201
-        "Preços lidos agora mesmo: %d.",  -- 1202
-        "%d preços, lidos %s.",  -- 1203
-        "%d preços, lidos %s. %s lê de novo.",  -- 1204
-        "Ainda não li o quadro. %s e eu busco todos os preços.",  -- 1205
-        "Nenhum preço ainda, amigo. %s lê o quadro inteiro.",  -- 1206
-        "Preços fresquinhos do quadro, amigo: %d.",  -- 1207
-        "Acabei de ler o quadro: %d preços, ainda quentes.",  -- 1208
-        "%d preços, lidos %s. Tá bom, amigo.",  -- 1209
-        "Última olhada no quadro: %s, %d preços.",  -- 1210
-        "Preços lidos %s, duros como pão velho. %s lê o quadro de novo.",  -- 1211
-        "%d preços, mas lidos %s. %s e eu olho de novo.",  -- 1212
-        "Mostrando também o que você guarda. %s esconde.",  -- 1213
-        "Separados: %d, para suas profissões, seu equipamento e suas marcas. %s mostra.",  -- 1214
-        "O que você guarda também está na lista. %s tira de vista.",  -- 1215
-        "Mostrando o que você guarda também. %s esconde de novo.",  -- 1216
-        "%d guardados: material de profissão, equipamento pra usar, o que você marcou. %s mostra.",  -- 1217
-        "Separei %d pras suas profissões, pra vestir e os marcados. %s se quiser.",  -- 1218
-        "cada",  -- 1219
-        "sem dados",  -- 1220
-        "Venda rápida",  -- 1221
-        "Paciente",  -- 1222
-        "Ler todos os preços",  -- 1223
-        "Ocultar guardados",  -- 1224
-        "Mostrar guardados",  -- 1225
-        "Linha",  -- 1226
-        "Velas",  -- 1227
-        "Postar",  -- 1228
-        "%d de %d",  -- 1229
-        "Postar %d de %d a %s cada",  -- 1230
-        "Postar %d por %s",  -- 1231
-        "Anunciar todos os %d por %s",  -- 1232
-        "Não é possível postar na Casa de Leilões deste cliente a partir daqui.",  -- 1233
-        "Postado %d por %s.",  -- 1234
-        "Mercado na casa de leilões: abrir / fechar",  -- 1235
-        "Saudação do leiloeiro no Mercado",  -- 1236
-        "um leiloeiro goblin diz uma frase curta, dos sons do próprio jogo, quando o Mercado abre; desligado: abre em silêncio",  -- 1237
-        "Mercado: mostrar o que você guarda",  -- 1238
-        "o Mercado também lista o que você guarda: o que suas profissões ainda aprendem ou transformam em algo que vale mais, e o que você marcou para guardar; desligado: só o que você venderia",  -- 1239
-        "Mercado: gráfico de preços em velas",  -- 1240
-        "o gráfico de preços do Mercado é uma vela por dia nos últimos 7 dias (onde o preço abriu, sua máxima e mínima, e onde fechou: verde quando fechou mais alto, vermelho mais baixo); desligado: uma linha do menor preço de cada dia em 30 dias",  -- 1241
-        "abrir ou fechar o Mercado (uma aba da casa de leilões)",  -- 1242
-        "qual Casa de Leilões este cliente tem (para solução de problemas)",  -- 1243
-        "Abra a janela de uma profissão e eu dou uma olhada nas suas receitas.",  -- 1244
-        "Esse é o teto, %d. Um instrutor tem a próxima categoria para você.",  -- 1245
-        "Nada mais a aprender em %d. Vá ver um instrutor sobre a próxima categoria.",  -- 1246
-        "Suas receitas ficaram pequenas para você. Procure um instrutor: %s espera por você em %d.",  -- 1247
-        "Faltam %d para %d, e o que você sabe não vai levá-lo até lá. Um instrutor tem %s para você em %d.",  -- 1248
-        "Suas receitas ficaram pequenas para você. Procure um instrutor: %s espera por você.",  -- 1249
-        "Suas receitas param de ensinar a %d de %d. Peça %s a um instrutor.",  -- 1250
-        "Suas receitas se esgotam a %d de %d. Um instrutor terá algo novo.",  -- 1251
-        "O que você sabe não vai levá-lo pelos últimos %d. Hora de ver um instrutor.",  -- 1252
-        "%s já não vai ensinar muito, mas é o melhor que você tem. Faltam %d para %d.",  -- 1253
-        "Daqui em diante é devagar: %s dá um ponto de vez em quando. Faltam %d.",  -- 1254
-        "Primeiro você vai querer %s, %s. Os guias começam este trecho com ela.",  -- 1255
-        "Aprenda %s, %s, e começamos: faltam %d para %d.",  -- 1256
-        "Faltam %d para %d. Os guias mandam você atrás de %s até %d.",  -- 1257
-        "Aqui a coleta ensina: %s até %d.",  -- 1258
-        "Faltam %d para %d. Comece com %s, ou com %s se preferir: %s.",  -- 1259
-        "Primeiro %s, como dizem os guias. %s também serve: %s.",  -- 1260
-        "Faltam %d para %d. Comece com %s.",  -- 1261
-        "%s é agora o seu melhor mestre. %d pontos até %d.",  -- 1262
-        "Mãos firmes. Primeiro %s, e faltam %d.",  -- 1263
-        "com um instrutor",  -- 1264
-        "de um vendedor",  -- 1265
-        "como saque",  -- 1266
-        "de uma missão",  -- 1267
-        "materiais mais baratos",  -- 1268
-        "materiais de um vendedor",  -- 1269
-        "materiais que você mesmo coleta",  -- 1270
-        "vende bem",  -- 1271
-        "algo que você vai usar",  -- 1272
-        "menos criações",  -- 1273
-        "uma receita que você acha ou compra",  -- 1274
-        "outros materiais",  -- 1275
-        "a primeira escolha dos guias",  -- 1276
-        "Abra a janela de uma profissão para um plano de evolução.",  -- 1277
-        "No limite, %d. Um instrutor tem o próximo nível.",  -- 1278
-        "Faltam %d até %d; suas receitas não chegam. Um instrutor tem %s em %d.",  -- 1279
-        "Faltam %d até %d; suas receitas não chegam. Um instrutor tem %s.",  -- 1280
-        "Suas receitas param a %d de %d. Um instrutor tem mais.",  -- 1281
-        "Faltam %d até %d. Melhor agora: %s, verde (um ponto de vez em quando).",  -- 1282
-        "Faltam %d até %d. Primeiro aprenda %s, %s.",  -- 1283
-        "Faltam %d até %d. Colete %s até %d.",  -- 1284
-        "Faltam %d até %d. Primeiro: %s, ou %s (%s).",  -- 1285
-        "Faltam %d até %d. Primeiro: %s.",  -- 1286
-        "Para coletar ou comprar",  -- 1287
-        "%d vezes: %s",  -- 1288
-        "Aprenda %s, a partir de %d.",  -- 1289
-        "Aprenda %s.",  -- 1290
-        "%s: %d nas bolsas, %d no banco, %d por criação",  -- 1291
-        "Os guias sobem este trecho coletando %s.",  -- 1292
-        "%s: você tem %d, o plano usa %d",  -- 1293
-        "para %s",  -- 1294
-        "É mais barato comprar do que fabricar com %s",  -- 1295
-        "Feito com %s",  -- 1296
-        "O Mentor: o que o seu banco deixa fazer",  -- 1297
-        "O que seu banco pode fabricar",  -- 1298
-        "Nada mais a fazer com o que está no seu banco.",  -- 1299
-        "%d que você pode fazer contando o banco, %d delas só com ele.",  -- 1300
-        "O Mentor: %s %d > %d",  -- 1301
-        "O Mentor",  -- 1302
-        "Plano de evolução",  -- 1303
-        "ou",  -- 1304
-        "Colete %s",  -- 1305
-        "a aprender",  -- 1306
-        "mais barato comprar",  -- 1307
-        "Ocultar",  -- 1308
-        "O plano",  -- 1309
-        "Farmar isto",  -- 1310
-        "Farmar tudo",  -- 1311
-        "Com o banco",  -- 1312
-        "Usar o plano",  -- 1313
-        "duas vezes para ocultar",  -- 1314
-        "Nada aqui para experimentar.",  -- 1315
-        "%d adicionado(s) à lista de farm.",  -- 1316
-        "Nada faltando: você tem o necessário.",  -- 1317
-        "Abra a janela de uma profissão para fazer um plano.",  -- 1318
-        "O Mentor (plano de evolução): mostrar / ocultar",  -- 1319
-        "mostra o plano de evolução da última janela de profissão aberta, com os botões do controle nele",  -- 1320
-        "À esquerda das missões",  -- 1321
-        "À direita das missões",  -- 1322
-        "Abaixo das missões",  -- 1323
-        "A lista de farm está cheia.",  -- 1324
-        "Lista de farm: %s, %d desejados.",  -- 1325
-        "Farm",  -- 1326
-        "mais %d",  -- 1327
-        "Nada para farmar ainda.",  -- 1328
-        "Uma pilha a mais",  -- 1329
-        "Tirar",  -- 1330
-        "Limpar",  -- 1331
-        "Pronto",  -- 1332
-        "Tirar tudo da lista de farm?",  -- 1333
-        "Lista de farm: escolher / pronto",  -- 1334
-        "Lista de farm: adicionar o item que você aponta",  -- 1335
-        "Isso não está na lista de farm.",  -- 1336
-        "A lista de farm está vazia.",  -- 1337
-        "Lista de farm: onde fica",  -- 1338
-        "a lista de farm à esquerda da lista de missões, à direita dela ou abaixo das missões",  -- 1339
-        "a lista de farm ao lado da lista de missões: escolha com o controle; add <item> [quantos], remove <item>, clear, ou left / right / bottom para o lugar",  -- 1340
-        "Porcentagem de ameaça",  -- 1341
-        "sua parte da ameaça como número ao lado do ícone de ameaça, no quadro do alvo e nas placas de nome",  -- 1342
-        "Número de vida",  -- 1343
-        "a vida restante, abreviada (12.3k), na barra (não nas placas compactas: a porcentagem basta ali)",  -- 1344
-        "Seus debuffs",  -- 1345
-        "seus debuffs na unidade, acima do nome dela, com o tempo",  -- 1346
-        "Debuffs de todos",  -- 1347
-        "os debuffs que o jogo marca para as placas de nome de todos, não só os seus",  -- 1348
-        "Buffs do inimigo",  -- 1349
-        "os bônus de um inimigo ao lado das penalidades: os que importam (importantes, enfurecido ou que você pode dissipar ou roubar), ou todos quando Só os efeitos que importam está desligado",  -- 1350
-        "Ícone de controle de grupo",  -- 1351
-        "um ícone grande com o tempo quando a unidade está atordoada, imobilizada, amedrontada...",  -- 1352
-        "Brilho de aggro",  -- 1353
-        "um ícone de escudo e um brilho atrás do nome: vermelho enquanto ataca você, vermelho e amarelo quando você está prestes a puxá-lo, amarelo e azul quando você está perdendo, azul quando não está em você",  -- 1354
-        "Marcador de missão",  -- 1355
-        "uma marca dourada nas unidades de que suas missões ainda precisam",  -- 1356
-        "Animações das placas de identificação",  -- 1357
-        "as placas surgem aos poucos, vida baixa respira, controle de grupo cintila",  -- 1358
-        "Pequena",  -- 1359
-        "Normal",  -- 1360
-        "Grande",  -- 1361
-        "Nome completo",  -- 1362
-        "Nome curto",  -- 1363
-        "Sem nome",  -- 1364
-        "Completo",  -- 1365
-        "Mínimo mini",  -- 1366
-        "Tamanho das placas",  -- 1367
-        "o tamanho das barras nas placas de nome: pequenas e finas, normais ou grandes (mais largas e mais altas)",  -- 1368
-        "Nomes nas placas",  -- 1369
-        "o nome numa placa com barra de vida: completo, encurtado ou omitido (o quadro do alvo mostra completo; o nível e o ícone de classe ficam). Uma placa sem barra, a de um PNJ amigável, sempre mantém o nome",  -- 1370
-        "Visual das placas",  -- 1371
-        "os interruptores das placas de uma vez. Completo: tudo. Mínimo: sem barra de poder, guilda ou título, nomes curtos. Mínimo mini: barras pequenas com vida, seus efeitos negativos e os positivos que importam, nível e classe, sem nome (o quadro do alvo mostra). Ameaça, controle e lançamentos chamativos sempre ficam",  -- 1372
-        "Títulos de jogadores",  -- 1373
-        "mostra o título de um jogador junto ao nome dele",  -- 1374
-        "Guildas e funções de NPCs",  -- 1375
-        "uma linha abaixo do nome: a guilda do jogador ou o que o NPC faz",  -- 1376
-        "Barras de aliados em combate",  -- 1377
-        "as placas de identificação amigas mostram vida, recurso e lançamentos enquanto a unidade estiver em combate",  -- 1378
-        "Placas de nome amigáveis do próprio jogo",  -- 1379
-        "deixa as placas amigáveis (seu grupo, outros jogadores, PNJs amigáveis) com a aparência do jogo; as nossas só em inimigos",  -- 1380
-        "Barras de recurso",  -- 1381
-        "uma barra fina de mana, fúria ou energia abaixo da barra de vida",  -- 1382
-        "Alvo do lançamento",  -- 1383
-        "quem é o alvo de um lançamento, ao lado do nome da magia",  -- 1384
-        "Porcentagem de vida",  -- 1385
-        "a porcentagem de vida na barra",  -- 1386
-        "Nome na placa do seu alvo",  -- 1387
-        "desligado: a placa do seu alvo não mostra nome nem nível (o quadro do alvo mostra)",  -- 1388
-        "Níveis nas placas de nome",  -- 1389
-        "o nível antes do nome de um inimigo, colorido pela dificuldade",  -- 1390
-        "Placas de nome compactas",  -- 1391
-        "placas de nome com cerca de metade da largura",  -- 1392
-        "Lançamentos inimigos chamativos",  -- 1393
-        "o lançamento de um inimigo pisca, incha e pulsa cada vez mais rápido até concluir, para que possa ser interrompido a tempo",  -- 1394
-        "Ícones de classe nas placas",  -- 1395
-        "o ícone de classe de um jogador antes do nome, amigo ou inimigo",  -- 1396
-        "O que os PNJs fazem, como ícones",  -- 1397
-        "um ícone sobre PNJs amigáveis que oferecem algo: uma bolsa sobre vendedores, uma bigorna sobre ferreiros que consertam, um livro sobre instrutores... (os ícones do próprio jogo; aparecem mesmo enquanto a placa espera ser apontada)",  -- 1398
-        "NPCs amigos só ao apontar",  -- 1399
-        "as placas dos NPCs amigos (vendedores, doadores de missões, moradores) só aparecem enquanto você aponta para eles, como a dica deles",  -- 1400
-        "Nomes nas coisas com que você pode interagir",  -- 1401
-        "um nome sobre minérios, baús, placas e afins enquanto você está de frente para eles (desligado: ficam sem nome, o aviso do próprio jogo já diz o que são)",  -- 1402
-        "Mini placas",  -- 1403
-        "lacaios, bichos e inimigos cinzentos que não dão experiência ganham uma placa pequena: uma barra fina com seus efeitos negativos e sem nome (um bicho, sem barra, mantém o nome; a opção do jogo decide se eles têm placas)",  -- 1404
-        "Placas de nome do grupo em masmorras: só nomes",  -- 1405
-        "dentro de uma masmorra ou raide o próprio jogo desenha as placas de nome dos jogadores aliados e os addons não podem mudá-las: lá as opções do próprio jogo são ajustadas para mostrá-las como nomes na cor da classe, sem barras, como as nossas, e as barras do jogo voltam enquanto você luta (se as barras de aliados em combate estiverem ligadas); tudo volta ao que era quando você sai",  -- 1406
-        "Placas de nome do grupo em masmorras: ocultas",  -- 1407
-        "dentro de uma masmorra ou raide, desligar de vez as placas de nome do jogo para jogadores aliados (e deixá-las como estavam quando você sai)",  -- 1408
-        "mostra o que o jogo fornece para o nome do seu alvo (para solucionar problemas)",  -- 1409
-        "lista as placas de nome na tela e se usam nossa aparência (para solução de problemas)",  -- 1410
-        "Muito bem, então.",  -- 1411
-        "Ora, que monte.",  -- 1412
-        "Vejamos, vejamos...",  -- 1413
-        "Elune, me dê paciência.",  -- 1414
-        "Pelos naaru, que bagunça.",  -- 1415
-        "Mochila maldita.",  -- 1416
-        "Mochila arrumada é mochila leve.",  -- 1417
-        "Bah. Tralha demais.",  -- 1418
-        "Peso morto, tudo isso.",  -- 1419
-        "Paciência. A Mãe Terra provê.",  -- 1420
-        "Ei, o que temos aqui, mano?",  -- 1421
-        "Que bagunça. Indigno.",  -- 1422
-        "Tempo é dinheiro. Vamos contar.",  -- 1423
-        "É, isso serve.",  -- 1424
-        "Graças a Elune.",  -- 1425
-        "A Luz provê.",  -- 1426
-        "Hrm. Bom o bastante.",  -- 1427
-        "Hm. Dá para lutar.",  -- 1428
-        "Viajando leve. Bom.",  -- 1429
-        "Aceitável. Por pouco.",  -- 1430
-        "Nem um espaço sobrando. O lixo renderia %s: vender abre espaço.",  -- 1431
-        "Nem um espaço sobrando. O que não vou usar na estrada pode esperar no banco.",  -- 1432
-        "Lixo: %d, vale %s aqui. X vende o que escolhi; Venda esperta leva tudo.",  -- 1433
-        "%d destes são do banco: lá já tem mais iguais, ou eu os marquei. Depositar guarda tudo.",  -- 1434
-        "Só restam %d espaços. O lixo renderia %s em qualquer vendedor.",  -- 1435
-        "Só restam %d espaços. Hora de vender ou guardar algumas coisas.",  -- 1436
-        "Novos desde a última olhada: %d. O ponto dourado marca cada um.",  -- 1437
-        "Vale vender: %d. O filtro Vender junta todos, e cada dica diz onde rende mais.",  -- 1438
-        "Lixo: %d, vale %s. O próximo vendedor pode ficar com ele.",  -- 1439
-        "Só o essencial. Nada que valha a pena vender.",  -- 1440
-        "Tudo em ordem, e %d espaços livres.",  -- 1441
-        "Seu equipamento está consertado: %s.",  -- 1442
-        "Posso consertar seu equipamento por %s; uma peça quebrada não dá armadura nem atributos.",  -- 1443
-        "Suas bolsas estão cheias. Fico com %d coisas por %s: Venda esperta, e você tem espaço de novo.",  -- 1444
-        "Dou %s por %d coisas: o lixo e o que a casa de leilões não pagaria mais. Venda esperta, e pronto.",  -- 1445
-        "Fique com os %d que a casa de leilões quer: ela paga %s a mais que eu.",  -- 1446
-        "Suas bolsas estão cheias. Venda algo antes de comprar.",  -- 1447
-        "Nada nas suas bolsas pelo que eu pagaria bem. Dê uma olhada nas minhas mercadorias.",  -- 1448
-        "%d do que você carrega são daqui: guardo mais iguais, ou você os marcou. Depositar guarda tudo.",  -- 1449
-        "Guardo mais de %d coisas que você carrega. Retirar completa suas bolsas antes de partir.",  -- 1450
-        "Suas bolsas estão quase cheias. Deixe comigo o que não vai precisar na estrada.",  -- 1451
-        "Tudo seguro comigo, e suas bolsas têm %d espaços livres.",  -- 1452
-        "Nada para você hoje. Conferi duas vezes.",  -- 1453
-        "Cartas para você: %d, nada anexado. Leia quando quiser.",  -- 1454
-        "Cartas para você: %d. Dentro: %s.",  -- 1455
-        "Pegar tudo esvazia todas de uma vez.",  -- 1456
-        "Pagamento na entrega: %d. Essas você abre e paga por conta própria.",  -- 1457
-        "Suas bolsas estão cheias: os itens esperam nas cartas.",  -- 1458
-        "Para onde? Aponte um lugar e eu digo quanto tempo leva a viagem.",  -- 1459
-        "%s: cerca de %s pelo mapa. Você ainda não voou essa rota.",  -- 1460
-        "%s: cerca de %s, pelo seu último voo até lá.",  -- 1461
-        "%s: ainda não sei dizer quanto tempo. Voe uma vez e eu saberei.",  -- 1462
-        "%d escaparam. Esta água pede mais perícia do que tenho: isca ajuda, e uma vara melhor também.",  -- 1463
-        "Sem isca no anzol. Ela soma à minha perícia, e menos escapam.",  -- 1464
-        "A isca está quase no fim. Outra no anzol mantém minha perícia.",  -- 1465
-        "Peixes daqui que ainda não pesquei: %d. Continue lançando.",  -- 1466
-        "Já pesquei todo peixe desta água. Para outro lugar, então.",  -- 1467
-        "Nada pescado ainda. O primeiro peixe de cada água vai aqui.",  -- 1468
-        "Espécies pescadas: %d. Cada água esconde mais algumas: o painel de pesca mostra um ? para cada uma que não peguei lá.",  -- 1469
-        "Descansado junto ao fogo: os próximos %d de experiência de abates valem o dobro.",  -- 1470
-        "Nenhum descanso acumulado. Uma noite numa estalagem ou numa cidade, e os abates dão o dobro de experiência por um tempo.",  -- 1471
-        "%d absorvido",  -- 1472
-        "Lista à direita",  -- 1473
-        "Um no centro",  -- 1474
-        "%d curas críticas",  -- 1475
-        "%d críticos",  -- 1476
-        "Julgamento",  -- 1477
-        "Grandes momentos: onde",  -- 1478
-        "um bloco logo acima dos avisos de recarga à direita do seu personagem, o mais recente junto a eles e os anteriores subindo enquanto somem, ou um de cada vez no centro",  -- 1479
-        "mostra como é ver e sentir um grande momento",  -- 1480
-        "coletada",  -- 1481
-        "coletada por outro item",  -- 1482
-        "ainda não coletada",  -- 1483
-        "Aparência",  -- 1484
-        "Escolha um conjunto para colocar as peças no seu traje. %s mantém; nada é pago antes disso.",  -- 1485
-        "Examinando sua coleção...",  -- 1486
-        "Seu traje voltou a ser como era.",  -- 1487
-        "%s: %d de %d peças colocadas.",  -- 1488
-        "%d não puderam ir para este traje.",  -- 1489
-        "Um conjunto do qual você tem peças",  -- 1490
-        "%d conjuntos dos quais você tem peças",  -- 1491
-        "você não pode usar isto",  -- 1492
-        "faltando",  -- 1493
-        "Todas as %d peças",  -- 1494
-        "%d de %d peças",  -- 1495
-        "Faltando: %s",  -- 1496
-        "Nenhum conjunto ainda. Itens que compartilham um nome, como Elmo de Ferro Verde e Manoplas de Ferro Verde, aparecem aqui assim que você tiver um deles.",  -- 1497
-        "Desfazer",  -- 1498
-        "Excluir o conjunto personalizado %s? Não dá para recuperá-lo.",  -- 1499
-        "Excluir",  -- 1500
-        "Aponte primeiro para um conjunto personalizado.",  -- 1501
-        "%s  Excluir conjunto personalizado",  -- 1502
+        "Bússola de missões: segue a câmera",  -- 980
+        "a bússola mostra para onde a câmera olha, não para onde seu personagem olha (eles diferem quando o analógico gira o personagem sem a câmera); desligado: para onde seu personagem olha",  -- 981
+        "algumas marcas na bússola de missões, ao seu redor, por vinte segundos",  -- 982
+        "Modo de pesca: desligado.",  -- 983
+        "Pesca: %s para lançar",  -- 984
+        "Sem isca: %s duas vezes para usar %s",  -- 985
+        "%s para guardar a vara",  -- 986
+        "Modo pesca: %s para lançar a linha, e de novo para fisgar o peixe quando a boia mexer.",  -- 987
+        "%s para fisgar, %s para lançar de novo",  -- 988
+        "O modo de pesca precisa de uma vara de pescar nas suas mãos.",  -- 989
+        "Você não conhece Pesca.",  -- 990
+        "Modo de pesca: um botão lança e fisga",  -- 991
+        "Botão de pesca: %s",  -- 992
+        "Lançar de novo com um toque",  -- 993
+        "enquanto a boia está na água, seu botão de pesca fisga o peixe e A lança de novo com um toque; desligado: A é seu",  -- 994
+        "Isca com toque duplo",  -- 995
+        "aperte seu botão de pesca duas vezes rápido: o segundo toque coloca a melhor isca das suas bolsas na vara, quando a vara não tem nenhuma",  -- 996
+        "Barras do controle ocultas ao pescar",  -- 997
+        "com uma vara de pesca nas mãos as barras do controle ficam ocultas, para ver bem a água; o aviso de pesca mostra o botão para lançar. Elas voltam assim que um combate começa ou a vara é guardada",  -- 998
+        "pesca com um botão desligada por ora, ou ligada de novo (com uma vara nas mãos ela liga sozinha)",  -- 999
+        "o botão que pesca: no início seu botão de interagir (Quadrado ou X), ou qualquer outro, um gatilho por exemplo (rt)",  -- 1000
+        "O litoral de Durotar é rocha vermelha e água rasa e morna. Os trolls das Ilhas do Eco dizem que a cavala passa em maior número quando a maré traz o cheiro das fogueiras de cozinha das ilhas.",  -- 1001
+        "Os lagos de Mulgore são pequenos, límpidos e pacientes. Os tauren pescam neles como fazem todo o resto: devagar e com gratidão.",  -- 1002
+        "Todo oásis dos Sertões é um ponto de encontro. Seja lá o que beba ali de dia, alguma coisa nada por baixo à noite.",  -- 1003
+        "As lagoas de Teldrassil ficam à sombra de uma única árvore. Os pescadores elfos noturnos juram que os peixes de lá nunca viram o sol e não sentem a menor falta.",  -- 1004
+        "A água da Costa Negra é cinzenta, fria e cheia de naufrágios. Metade do que morde a isca perto de Auberdine fez morada na carga perdida de alguém.",  -- 1005
+        "Os rios do Vale Gris correm sob folhas mais velhas que a maioria dos reinos. Os peixes são rápidos, e as sentinelas são ainda mais rápidas em perguntar o que você está fazendo ali.",  -- 1006
+        "Lá embaixo, em Mil Agulhas, a água é pouca e guardada com ciúme. Um peixe daqui fez por merecer o seu lugar.",  -- 1007
+        "Os lagos da Cordilheira das Torres de Pedra ficam lá no alto, gelados, entre os picos. Os goblins já os teriam drenado se a pescaria não fosse tão boa.",  -- 1008
+        "A costa da Desolação é feita de ossos e ressaca cinzenta. Alguma coisa lá no fundo tem gosto pelos dois.",  -- 1009
+        "Feralas é verde até a beira da água. Seus rios são fundos, mornos e muito, muito vivos.",  -- 1010
+        "Ninguém sabe ao certo onde termina a terra e começa a água no Pântano Vadeoso. Pesque da margem e conte os dedos dos pés depois.",  -- 1011
+        "O Porto Bondebico tem a única água digna do nome em Tanaris. Os goblins vendem o direito de pescar nela, e até duas vezes, se você deixar.",  -- 1012
+        "Sob a baía luminosa de Azshara jaz uma cidade afogada. Os pescadores velhos dizem que os grandões vivem onde antes ficavam os jardins.",  -- 1013
+        "As lagoas de Selva Maleva brilham, e não no bom sentido. O que ainda nada nelas é teimoso além da conta.",  -- 1014
+        "As fontes termais e os lagos orlados de piche da Cratera Un'Goro guardaram coisas que o resto do mundo esqueceu. Algumas delas mordem.",  -- 1015
+        "O Lago Elune'ara, na Clareira da Lua, é calmo como um fôlego suspenso. Os druidas só pedem que você não leve mais do que vai comer.",  -- 1016
+        "Silithus é areia, vento e som de asas. Se você achou água para pescar aqui, não conte a ninguém.",  -- 1017
+        "Os lagos de Hibérnia congelam nas bordas e fumegam no meio. Os peixes de lá são gordos por causa do frio e valem a caminhada.",  -- 1018
+        "Nas lagoas de Orgrimmar pescam os peões que não têm nada melhor para fazer e os velhos brutamontes que dizem o mesmo. Uns e outros contam que o grandão escapou.",  -- 1019
+        "Um peixe dos laguinhos do Penhasco do Trovão passou a vida inteira bem acima das planícies. Parece lidar bem com isso.",  -- 1020
+        "Darnassus cuida de suas águas com o mesmo zelo com que cuida dos templos. Os peixes já se acostumaram a ser admirados.",  -- 1021
+        "Os lagos das Montanhas de Alterac são neve derretida, e os ogros e a Camarilha pescam neles quando ninguém está olhando.",  -- 1022
+        "As margens do Planalto Arathi viram mais exércitos do que pescadores. Faz tempo que os peixes deixaram de se importar com a bandeira que tremula sobre a água.",  -- 1023
+        "Os Ermos são poeira de uma ponta a outra. Uma fisgada aqui é um pequeno milagre; trate-a como tal.",  -- 1024
+        "A costa da Barreira do Inferno é vermelha, castigada e silenciosa. O que quer que viva naquela arrebentação aprendeu a conviver com muita coisa.",  -- 1025
+        "Os lagos das Clareiras de Tirisfal jazem imóveis sob um céu doentio. Os Renegados pescam neles por hábito; os mortos não comem muito, mas lembram que gostavam.",  -- 1026
+        "A longa costa da Floresta de Pinhaprata é só névoa e sombra de pinheiro. A pesca é boa, e essa é a única coisa alegre que alguém diz sobre o lugar.",  -- 1027
+        "Os rios das Terras Pestilentas Ocidentais ainda correm, embora não limpos. O que você tirar deles, olhe duas vezes.",  -- 1028
+        "Pouca gente pesca nas Terras Pestilentas Orientais, e menos gente ainda admite. A água guarda o que a peste deixou dela.",  -- 1029
+        "O rio de Eira dos Montes e sua longa costa sul alimentaram os dois lados de todas as brigas travadas por causa deles.",  -- 1030
+        "As Terras Agrestes guardam seus lagos no alto, entre as árvores, onde os anões Martelo Feroz pescam montados em grifos quando acham que ninguém está vendo.",  -- 1031
+        "Os lagos de Dun Morogh passam a maior parte do ano cercados de gelo. Um anão abre um buraco, senta com uma caneca de cerveja e diz que foi um bom dia, morda o que morder.",  -- 1032
+        "A Garganta Abrasadora tem lava onde outras terras têm rios. Melhor trazer alguma coisa para beber.",  -- 1033
+        "As Estepes Ardentes são cinzas e brasas. Se a água daqui lhe der alguma coisa, vai estar quente.",  -- 1034
+        "Toda criança de Elwynn aprende a pescar no Crystal Lake ou no Stone Cairn Lake. Os peixinhos de lá passam a perna nelas há gerações.",  -- 1035
+        "A Trilha do Vento Morto tem pouca água e menos acolhida ainda. O que há nas poças abaixo de Karazhan é melhor deixar por lá.",  -- 1036
+        "O rio na beira da Floresta do Crepúsculo é negro a qualquer hora. Os peixes não parecem se incomodar com o escuro; os pescadores, sim.",  -- 1037
+        "O Loch é o orgulho de Loch Modan, contido pela grande barragem Stonewrought. Os anões medem toda história de pescador pelo tamanho dele, e o Loch costuma ganhar.",  -- 1038
+        "O Lago Plácido, nas Montanhas Cristarrubra, é bonito como uma pintura, e pesca-se nele de todos os cais de Vila Plácida. Os moradores conhecem cada ponto bom e não vão lhe contar nenhum.",  -- 1039
+        "Dos rios da selva ao cabo selvagem do sul, a Selva do Espinhaço tem as águas mais ricas do continente. Os pescadores da Angra do Butim fazem um torneio por lá, e quase todos trapaceiam.",  -- 1040
+        "O Pântano das Mágoas é água verde sob árvores verdes. Os peixes têm gosto de lama, e é assim que o povo de lá gosta.",  -- 1041
+        "As lavouras de Cerro Oeste fracassaram, mas a costa não. Quem ficou vive da longa praia cinzenta.",  -- 1042
+        "O Pantanal faz jus ao nome. Os cais do Porto de Menethil são o lugar mais seco para pescar por lá, e os crocoliscos sabem disso.",  -- 1043
+        "Nos canais de Ventobravo pescam crianças, aposentados e pelo menos um membro da nobreza disfarçado. Ninguém pergunta o que mais existe nos canais.",  -- 1044
+        "A Forlorn Cavern abriga o único laguinho sossegado de Altaforja. Os anões velhos pescam ali por horas e não dizem uma palavra.",  -- 1045
+        "Os canais da Cidade Baixa correm num verde que não tem nada a ver com algas. Os Renegados que pescam ali não estão atrás do jantar.",  -- 1046
+        "O primeiro peixe que a maioria dos pescadores tira da água, e vistoso o bastante para ficar na memória.",  -- 1047
+        "Escorrega, corre e aparece em toda costa quente. Na grelha, fica melhor do que o nome sugere.",  -- 1048
+        "É só boca, e nunca está tão feliz quanto numa água que você não beberia.",  -- 1049
+        "Tamanho pequeno, dentes de sobra e medo nenhum. Dizem que um cardume inteiro já expulsou um urso do Loch.",  -- 1050
+        "Um lampejo de cor sob a arrebentação. Para os marinheiros, um desses no anzol é sorte para a viagem.",  -- 1051
+        "Um paciente comedor de fundo, com bigodes de ancião anão.",  -- 1052
+        "Ninguém come duas vezes. Os alquimistas compram tudo o que aparece.",  -- 1053
+        "As nadadeiras brilham como brasas dormidas, e o óleo extraído deste peixe queima quase tão bem.",  -- 1054
+        "Uma blindagem de pequeno escudo. A carne lá dentro compensa o trabalho.",  -- 1055
+        "Alguma coisa na água perto das Cavernas Ululantes transformou este peixe. Comer um talvez transforme você também, por um tempo.",  -- 1056
+        "O povo do rio diz que uma refeição dessas clareia a mente. É nadar contra a corrente que traz a sabedoria.",  -- 1057
+        "Mais idade, mais tamanho e mais sabedoria que o primo, e nada disso evitou o seu anzol.",  -- 1058
+        "Um lutador valente dos mares quentes do sul e o favorito em toda taberna, da Angra do Butim a Geringontzan.",  -- 1059
+        "A testa brilha como mithril de verdade. Mais de um minerador já tentou fundi-la.",  -- 1060
+        "As escamas, fervidas, viram um óleo que deixa a pele dura como pedra. Prefere a noite.",  -- 1061
+        "Brilha como uma couraça de desfile, e pesa quase o mesmo.",  -- 1062
+        "Só chega perto da costa nos meses frios, e os cozinheiros que conhecem o segredo esperam o ano inteiro.",  -- 1063
+        "Aparece quando os dias são longos. O povo do litoral marca a estação pela sua chegada.",  -- 1064
+        "Segure pelo meio, e só uma vez.",  -- 1065
+        "Um peixe de rio de terras selvagens, com as guelras vermelhas como a pintura de guerra de um troll.",  -- 1066
+        "Come depois que escurece. Uma sopa feita com este peixe acalma os nervos de quem lança feitiços.",  -- 1067
+        "Come de dia, o oposto do primo noturno em quase tudo, e mesmo assim divide a água com ele.",  -- 1068
+        "Não é bem um peixe. Discorda de ter ido parar no anzol e faz questão de deixar isso claro.",  -- 1069
+        "Tem a palidez do gelo de rio e vem dos lagos frios e límpidos do norte.",  -- 1070
+        "Você vai precisar das duas mãos, e talvez de um amigo.",  -- 1071
+        "%.1f lb",  -- 1072
+        "Novo no seu diário de pesca: %s, %s.",  -- 1073
+        "Novo no seu diário de pesca: %s.",  -- 1074
+        "Seu %s mais pesado até agora: %s (era %s).",  -- 1075
+        "Isca %s",  -- 1076
+        "Sem isca",  -- 1077
+        "Pegos %d",  -- 1078
+        "Escaparam %d",  -- 1079
+        "Um curioso: +%d%%",  -- 1080
+        "Mantenha sua isca ao lado do peixe",  -- 1081
+        "Próxima captura +%d%%",  -- 1082
+        "Segure %s: a isca corre pela linha",  -- 1083
+        "%d seguidos",  -- 1084
+        "Um jogo enquanto a boia está na água",  -- 1085
+        "jogado na barra de lançamento enquanto a linha está na água: segure um gatilho e sua isca corre pela linha, solte e ela volta à deriva; mantenha-a junto à sombra do peixe. Quanto melhor você jogar, mais pesado o peso inventado da próxima captura. Não ocupa nenhum botão e nunca mexe no seu lançamento nem na captura",  -- 1086
+        "%d pegos, %d tipos, %d escaparam",  -- 1087
+        "Mais pesado: %s, %s",  -- 1088
+        "Peixes",  -- 1089
+        "Águas",  -- 1090
+        "Nada pego ainda. Leve uma vara até a água.",  -- 1091
+        "Pegos: %d",  -- 1092
+        "Mais pesado: %s, em %s",  -- 1093
+        "Primeira captura: %s",  -- 1094
+        "Pegos aqui: %d",  -- 1095
+        "Tipos encontrados aqui: %d",  -- 1096
+        "abrir ou fechar seu diário de pesca: cada tipo que você pegou, o mais pesado de cada um, e as águas onde você pescou",  -- 1097
+        "Voo",  -- 1098
+        "pouso antecipado",  -- 1099
+        "pouso no próximo ponto de voo",  -- 1100
+        "destino desconhecido",  -- 1101
+        "estimado pela distância",  -- 1102
+        "primeiro voo nesta rota: aprendendo a duração",  -- 1103
+        "pousando",  -- 1104
+        "%s: cerca de %s, estimado pela distância",  -- 1105
+        "%s: cerca de %s",  -- 1106
+        "%s: primeiro voo nesta rota, tempo desconhecido",  -- 1107
+        "Em voo, destino desconhecido",  -- 1108
+        "%s: tempo de voo aprendido, %s",  -- 1109
+        "Pouso antecipado: %s, cerca de %s",  -- 1110
+        "Pouso antecipado no próximo ponto de voo",  -- 1111
+        "fresco e frio, neve sob os pés e o fôlego pairando no ar",  -- 1112
+        "um frio cortante, com um vento dos picos que encontra cada fresta da armadura",  -- 1113
+        "quente e úmido, um ar tão denso que dá para beber",  -- 1114
+        "calor pegajoso sob a copa das árvores, e os insetos barulhentos",  -- 1115
+        "quente e seco, com poeira no vento",  -- 1116
+        "sol escaldante e terra rachada; beba quando puder",  -- 1117
+        "fumaça e cinzas num vento quente",  -- 1118
+        "ar chamuscado, com fagulhas à deriva",  -- 1119
+        "cinzento e frio, uma névoa úmida que gruda",  -- 1120
+        "um frio no ar e quase nenhuma luz",  -- 1121
+        "ameno e agradável, com uma brisa suave",  -- 1122
+        "tempo agradável, bom para viajar",  -- 1123
+        "fresco e verde, as folhas sussurrando",  -- 1124
+        "luz suave entre as árvores, e o ar fresco",  -- 1125
+        "abafado e úmido, o chão mole sob os pés",  -- 1126
+        "ar quente e molhado, e o cheiro do pântano",  -- 1127
+        "%s em %s: %s",  -- 1128
+        "%d rotas de voo conhecidas.",  -- 1129
+        "Voos: sua montaria ao longo da barra",  -- 1130
+        "um grifo, uma mantícora ou um morcego (o que o mestre de voo lhe deu) plana pela barra do voo até onde você pousa",  -- 1131
+        "Voos: o tempo onde você pousa",  -- 1132
+        "ao pousar, o chat diz como é o ar onde você chegou, como o lugar costuma ser (quente e úmido em Selva do Espinhaço, neve sob os pés em Dun Morogh), e a hora do dia",  -- 1133
+        "listar as rotas de voo cujo tempo é conhecido",  -- 1134
+        "Ao chão! +%d",  -- 1135
+        "Batida: a sequência acaba",  -- 1136
+        "%s bater as asas  ·  desvie das copas das árvores e dos zepelins",  -- 1137
+        "%s pegue os cavaleiros com a rede por ouro de voo  ·  %s grande altitude",  -- 1138
+        "%d de ouro de voo",  -- 1139
+        "%s bater as asas",  -- 1140
+        "%s rede",  -- 1141
+        "%s grande altitude",  -- 1142
+        "%s: voltar ao jogo (%d de ouro de voo)",  -- 1143
+        "%s: um jogo no caminho",  -- 1144
+        "O jogo de voo está desligado: /cchud flightgame on",  -- 1145
+        "O jogo de voo é jogado durante um voo.",  -- 1146
+        "Não em combate.",  -- 1147
+        "Jogo de voo: jogar / grande altitude",  -- 1148
+        "num voo: iniciar o jogo de voo, ou levá-lo à grande altitude e de volta",  -- 1149
+        "Voos cinematográficos: a câmera gira ao seu redor",  -- 1150
+        "no filme, a câmera gira devagar ao redor de você e da sua montaria, uma volta inteira em cerca de um minuto e meio, e volta para trás de você antes do pouso. Desligado: uma cena parada",  -- 1151
+        "Offline",  -- 1152
+        "Morto",  -- 1153
+        "Desligado",  -- 1154
+        "Em especialização de cura",  -- 1155
+        "Sempre",  -- 1156
+        "Longe demais",  -- 1157
+        "Grupo e raide do curador",  -- 1158
+        "em grupo: seu grupo ao lado do seu personagem, cada um com o botão que o seleciona; em raide: quadros mais finos. Cada um mostra só quanta cura precisa, uma penalidade que você pode curar e se está ao alcance",  -- 1159
+        "%d%% de vender",  -- 1160
+        "Vende com certeza (%d%%)",  -- 1161
+        "Isso se vende sozinho (%d%%)",  -- 1162
+        "Acho que vende (%d%%)",  -- 1163
+        "Deve achar comprador (%d%%)",  -- 1164
+        "Meio a meio (%d%%)",  -- 1165
+        "Pode ir pra qualquer lado (%d%%)",  -- 1166
+        "Meio que uma aposta (%d%%)",  -- 1167
+        "Pode ficar parado um tempo (%d%%)",  -- 1168
+        "Eu não contaria com isso (%d%%)",  -- 1169
+        "Chance pequena, amigo (%d%%)",  -- 1170
+        "+%s a mais que um vendedor",  -- 1171
+        "nenhum preço conhecido ainda",  -- 1172
+        "um vendedor paga o mesmo",  -- 1173
+        "O Corretor",  -- 1174
+        "Mercado",  -- 1175
+        "cada moeda contada, amigo",  -- 1176
+        "Nada nas suas bolsas pode ser vendido aqui.",  -- 1177
+        "Sem preços nos últimos 7 dias.",  -- 1178
+        "Um dia de preços até agora: uma vela a mais a cada dia em que você visita a casa de leilões.",  -- 1179
+        "7 dias, uma vela por dia: verde fechou mais alto, vermelho mais baixo",  -- 1180
+        "30 dias, o menor do dia: verde sobe, vermelho desce",  -- 1181
+        "Ainda sem histórico de preços: leia a Casa de Leilões por alguns dias.",  -- 1182
+        "Só um dia de preços até agora: a linha cresce a cada dia que você visita a casa de leilões.",  -- 1183
+        "Peço %s cada, %s pelos %d que você solta; %d ficam com você",  -- 1184
+        "Pede %s cada, %s por todos os %d",  -- 1185
+        "Menor",  -- 1186
+        "lido %s",  -- 1187
+        "Usual",  -- 1188
+        "7 dias: de %s a %s",  -- 1189
+        "À venda: %d leilões, %d itens",  -- 1190
+        "%s cada, %s por todos os %d",  -- 1191
+        "Você anunciou %d aqui, %d leilões vendidos",  -- 1192
+        "Nenhum preço conhecido: leia a Casa de Leilões primeiro.",  -- 1193
+        "Nada nas suas bolsas para vender aqui.",  -- 1194
+        "Hoje nada vende melhor aqui que num vendedor; %d talvez, com paciência.",  -- 1195
+        "O melhor primeiro: %d vendem melhor aqui que num vendedor, mais %d com paciência.",  -- 1196
+        "Bolsas vazias, amigo. Traga algo pra vender.",  -- 1197
+        "Hoje nada aqui bate um vendedor. %d talvez, com um pouco de paciência.",  -- 1198
+        "Nenhum lucro certo nessas bolsas, amigo. %d podem pagar se você esperar.",  -- 1199
+        "O melhor em cima: %d aqui batem qualquer vendedor, %d a mais pros pacientes.",  -- 1200
+        "%d pagam melhor aqui que num vendedor, o melhor primeiro. %d a mais se esperar.",  -- 1201
+        "O topo da pilha paga mais: %d vendas certas, %d a mais se puder esperar.",  -- 1202
+        "Ainda sem preços: %s lê a casa de leilões.",  -- 1203
+        "Preços lidos agora mesmo: %d.",  -- 1204
+        "%d preços, lidos %s.",  -- 1205
+        "%d preços, lidos %s. %s lê de novo.",  -- 1206
+        "Ainda não li o quadro. %s e eu busco todos os preços.",  -- 1207
+        "Nenhum preço ainda, amigo. %s lê o quadro inteiro.",  -- 1208
+        "Preços fresquinhos do quadro, amigo: %d.",  -- 1209
+        "Acabei de ler o quadro: %d preços, ainda quentes.",  -- 1210
+        "%d preços, lidos %s. Tá bom, amigo.",  -- 1211
+        "Última olhada no quadro: %s, %d preços.",  -- 1212
+        "Preços lidos %s, duros como pão velho. %s lê o quadro de novo.",  -- 1213
+        "%d preços, mas lidos %s. %s e eu olho de novo.",  -- 1214
+        "Mostrando também o que você guarda. %s esconde.",  -- 1215
+        "Separados: %d, para suas profissões, seu equipamento e suas marcas. %s mostra.",  -- 1216
+        "O que você guarda também está na lista. %s tira de vista.",  -- 1217
+        "Mostrando o que você guarda também. %s esconde de novo.",  -- 1218
+        "%d guardados: material de profissão, equipamento pra usar, o que você marcou. %s mostra.",  -- 1219
+        "Separei %d pras suas profissões, pra vestir e os marcados. %s se quiser.",  -- 1220
+        "cada",  -- 1221
+        "sem dados",  -- 1222
+        "Venda rápida",  -- 1223
+        "Paciente",  -- 1224
+        "Ler todos os preços",  -- 1225
+        "Ocultar guardados",  -- 1226
+        "Mostrar guardados",  -- 1227
+        "Linha",  -- 1228
+        "Velas",  -- 1229
+        "Postar",  -- 1230
+        "%d de %d",  -- 1231
+        "Postar %d de %d a %s cada",  -- 1232
+        "Postar %d por %s",  -- 1233
+        "Anunciar todos os %d por %s",  -- 1234
+        "Não é possível postar na Casa de Leilões deste cliente a partir daqui.",  -- 1235
+        "Postado %d por %s.",  -- 1236
+        "Mercado na casa de leilões: abrir / fechar",  -- 1237
+        "Saudação do leiloeiro no Mercado",  -- 1238
+        "um leiloeiro goblin diz uma frase curta, dos sons do próprio jogo, quando o Mercado abre; desligado: abre em silêncio",  -- 1239
+        "Mercado: mostrar o que você guarda",  -- 1240
+        "o Mercado também lista o que você guarda: o que suas profissões ainda aprendem ou transformam em algo que vale mais, e o que você marcou para guardar; desligado: só o que você venderia",  -- 1241
+        "Mercado: gráfico de preços em velas",  -- 1242
+        "o gráfico de preços do Mercado é uma vela por dia nos últimos 7 dias (onde o preço abriu, sua máxima e mínima, e onde fechou: verde quando fechou mais alto, vermelho mais baixo); desligado: uma linha do menor preço de cada dia em 30 dias",  -- 1243
+        "abrir ou fechar o Mercado (uma aba da casa de leilões)",  -- 1244
+        "qual Casa de Leilões este cliente tem (para solução de problemas)",  -- 1245
+        "Abra a janela de uma profissão e eu dou uma olhada nas suas receitas.",  -- 1246
+        "Esse é o teto, %d. Um instrutor tem a próxima categoria para você.",  -- 1247
+        "Nada mais a aprender em %d. Vá ver um instrutor sobre a próxima categoria.",  -- 1248
+        "Suas receitas ficaram pequenas para você. Procure um instrutor: %s espera por você em %d.",  -- 1249
+        "Faltam %d para %d, e o que você sabe não vai levá-lo até lá. Um instrutor tem %s para você em %d.",  -- 1250
+        "Suas receitas ficaram pequenas para você. Procure um instrutor: %s espera por você.",  -- 1251
+        "Suas receitas param de ensinar a %d de %d. Peça %s a um instrutor.",  -- 1252
+        "Suas receitas se esgotam a %d de %d. Um instrutor terá algo novo.",  -- 1253
+        "O que você sabe não vai levá-lo pelos últimos %d. Hora de ver um instrutor.",  -- 1254
+        "%s já não vai ensinar muito, mas é o melhor que você tem. Faltam %d para %d.",  -- 1255
+        "Daqui em diante é devagar: %s dá um ponto de vez em quando. Faltam %d.",  -- 1256
+        "Primeiro você vai querer %s, %s. Os guias começam este trecho com ela.",  -- 1257
+        "Aprenda %s, %s, e começamos: faltam %d para %d.",  -- 1258
+        "Faltam %d para %d. Os guias mandam você atrás de %s até %d.",  -- 1259
+        "Aqui a coleta ensina: %s até %d.",  -- 1260
+        "Faltam %d para %d. Comece com %s, ou com %s se preferir: %s.",  -- 1261
+        "Primeiro %s, como dizem os guias. %s também serve: %s.",  -- 1262
+        "Faltam %d para %d. Comece com %s.",  -- 1263
+        "%s é agora o seu melhor mestre. %d pontos até %d.",  -- 1264
+        "Mãos firmes. Primeiro %s, e faltam %d.",  -- 1265
+        "com um instrutor",  -- 1266
+        "de um vendedor",  -- 1267
+        "como saque",  -- 1268
+        "de uma missão",  -- 1269
+        "materiais mais baratos",  -- 1270
+        "materiais de um vendedor",  -- 1271
+        "materiais que você mesmo coleta",  -- 1272
+        "vende bem",  -- 1273
+        "algo que você vai usar",  -- 1274
+        "menos criações",  -- 1275
+        "uma receita que você acha ou compra",  -- 1276
+        "outros materiais",  -- 1277
+        "a primeira escolha dos guias",  -- 1278
+        "Abra a janela de uma profissão para um plano de evolução.",  -- 1279
+        "No limite, %d. Um instrutor tem o próximo nível.",  -- 1280
+        "Faltam %d até %d; suas receitas não chegam. Um instrutor tem %s em %d.",  -- 1281
+        "Faltam %d até %d; suas receitas não chegam. Um instrutor tem %s.",  -- 1282
+        "Suas receitas param a %d de %d. Um instrutor tem mais.",  -- 1283
+        "Faltam %d até %d. Melhor agora: %s, verde (um ponto de vez em quando).",  -- 1284
+        "Faltam %d até %d. Primeiro aprenda %s, %s.",  -- 1285
+        "Faltam %d até %d. Colete %s até %d.",  -- 1286
+        "Faltam %d até %d. Primeiro: %s, ou %s (%s).",  -- 1287
+        "Faltam %d até %d. Primeiro: %s.",  -- 1288
+        "Para coletar ou comprar",  -- 1289
+        "%d vezes: %s",  -- 1290
+        "Aprenda %s, a partir de %d.",  -- 1291
+        "Aprenda %s.",  -- 1292
+        "%s: %d nas bolsas, %d no banco, %d por criação",  -- 1293
+        "Os guias sobem este trecho coletando %s.",  -- 1294
+        "%s: você tem %d, o plano usa %d",  -- 1295
+        "para %s",  -- 1296
+        "É mais barato comprar do que fabricar com %s",  -- 1297
+        "Feito com %s",  -- 1298
+        "O Mentor: o que o seu banco deixa fazer",  -- 1299
+        "O que seu banco pode fabricar",  -- 1300
+        "Nada mais a fazer com o que está no seu banco.",  -- 1301
+        "%d que você pode fazer contando o banco, %d delas só com ele.",  -- 1302
+        "O Mentor: %s %d > %d",  -- 1303
+        "O Mentor",  -- 1304
+        "Plano de evolução",  -- 1305
+        "ou",  -- 1306
+        "Colete %s",  -- 1307
+        "a aprender",  -- 1308
+        "mais barato comprar",  -- 1309
+        "Ocultar",  -- 1310
+        "O plano",  -- 1311
+        "Farmar isto",  -- 1312
+        "Farmar tudo",  -- 1313
+        "Com o banco",  -- 1314
+        "Usar o plano",  -- 1315
+        "duas vezes para ocultar",  -- 1316
+        "Nada aqui para experimentar.",  -- 1317
+        "%d adicionado(s) à lista de farm.",  -- 1318
+        "Nada faltando: você tem o necessário.",  -- 1319
+        "Abra a janela de uma profissão para fazer um plano.",  -- 1320
+        "O Mentor (plano de evolução): mostrar / ocultar",  -- 1321
+        "mostra o plano de evolução da última janela de profissão aberta, com os botões do controle nele",  -- 1322
+        "À esquerda das missões",  -- 1323
+        "À direita das missões",  -- 1324
+        "Abaixo das missões",  -- 1325
+        "A lista de farm está cheia.",  -- 1326
+        "Lista de farm: %s, %d desejados.",  -- 1327
+        "Farm",  -- 1328
+        "mais %d",  -- 1329
+        "Nada para farmar ainda.",  -- 1330
+        "Uma pilha a mais",  -- 1331
+        "Tirar",  -- 1332
+        "Limpar",  -- 1333
+        "Pronto",  -- 1334
+        "Tirar tudo da lista de farm?",  -- 1335
+        "Lista de farm: escolher / pronto",  -- 1336
+        "Lista de farm: adicionar o item que você aponta",  -- 1337
+        "Isso não está na lista de farm.",  -- 1338
+        "A lista de farm está vazia.",  -- 1339
+        "Lista de farm: onde fica",  -- 1340
+        "a lista de farm à esquerda da lista de missões, à direita dela ou abaixo das missões",  -- 1341
+        "a lista de farm ao lado da lista de missões: escolha com o controle; add <item> [quantos], remove <item>, clear, ou left / right / bottom para o lugar",  -- 1342
+        "Porcentagem de ameaça",  -- 1343
+        "sua parte da ameaça como número ao lado do ícone de ameaça, no quadro do alvo e nas placas de nome",  -- 1344
+        "Número de vida",  -- 1345
+        "a vida restante, abreviada (12.3k), na barra (não nas placas compactas: a porcentagem basta ali)",  -- 1346
+        "Seus debuffs",  -- 1347
+        "seus debuffs na unidade, acima do nome dela, com o tempo",  -- 1348
+        "Debuffs de todos",  -- 1349
+        "os debuffs que o jogo marca para as placas de nome de todos, não só os seus",  -- 1350
+        "Buffs do inimigo",  -- 1351
+        "os bônus de um inimigo ao lado das penalidades: os que importam (importantes, enfurecido ou que você pode dissipar ou roubar), ou todos quando Só os efeitos que importam está desligado",  -- 1352
+        "Ícone de controle de grupo",  -- 1353
+        "um ícone grande com o tempo quando a unidade está atordoada, imobilizada, amedrontada...",  -- 1354
+        "Brilho de aggro",  -- 1355
+        "um ícone de escudo e um brilho atrás do nome: vermelho enquanto ataca você, vermelho e amarelo quando você está prestes a puxá-lo, amarelo e azul quando você está perdendo, azul quando não está em você",  -- 1356
+        "Marcador de missão",  -- 1357
+        "uma marca dourada nas unidades de que suas missões ainda precisam",  -- 1358
+        "Animações das placas de identificação",  -- 1359
+        "as placas surgem aos poucos, vida baixa respira, controle de grupo cintila",  -- 1360
+        "Pequena",  -- 1361
+        "Normal",  -- 1362
+        "Grande",  -- 1363
+        "Nome completo",  -- 1364
+        "Nome curto",  -- 1365
+        "Sem nome",  -- 1366
+        "Completo",  -- 1367
+        "Mínimo mini",  -- 1368
+        "Tamanho das placas",  -- 1369
+        "o tamanho das barras nas placas de nome: pequenas e finas, normais ou grandes (mais largas e mais altas)",  -- 1370
+        "Nomes nas placas",  -- 1371
+        "o nome numa placa com barra de vida: completo, encurtado ou omitido (o quadro do alvo mostra completo; o nível e o ícone de classe ficam). Uma placa sem barra, a de um PNJ amigável, sempre mantém o nome",  -- 1372
+        "Visual das placas",  -- 1373
+        "os interruptores das placas de uma vez. Completo: tudo. Mínimo: sem barra de poder, guilda ou título, nomes curtos. Mínimo mini: barras pequenas com vida, seus efeitos negativos e os positivos que importam, nível e classe, sem nome (o quadro do alvo mostra). Ameaça, controle e lançamentos chamativos sempre ficam",  -- 1374
+        "Títulos de jogadores",  -- 1375
+        "mostra o título de um jogador junto ao nome dele",  -- 1376
+        "Guildas e funções de NPCs",  -- 1377
+        "uma linha abaixo do nome: a guilda do jogador ou o que o NPC faz",  -- 1378
+        "Barras de aliados em combate",  -- 1379
+        "as placas de identificação amigas mostram vida, recurso e lançamentos enquanto a unidade estiver em combate",  -- 1380
+        "Placas de nome amigáveis do próprio jogo",  -- 1381
+        "deixa as placas amigáveis (seu grupo, outros jogadores, PNJs amigáveis) com a aparência do jogo; as nossas só em inimigos",  -- 1382
+        "Barras de recurso",  -- 1383
+        "uma barra fina de mana, fúria ou energia abaixo da barra de vida",  -- 1384
+        "Alvo do lançamento",  -- 1385
+        "quem é o alvo de um lançamento, ao lado do nome da magia",  -- 1386
+        "Porcentagem de vida",  -- 1387
+        "a porcentagem de vida na barra",  -- 1388
+        "Nome na placa do seu alvo",  -- 1389
+        "desligado: a placa do seu alvo não mostra nome nem nível (o quadro do alvo mostra)",  -- 1390
+        "Níveis nas placas de nome",  -- 1391
+        "o nível antes do nome de um inimigo, colorido pela dificuldade",  -- 1392
+        "Placas de nome compactas",  -- 1393
+        "placas de nome com cerca de metade da largura",  -- 1394
+        "Lançamentos inimigos chamativos",  -- 1395
+        "o lançamento de um inimigo pisca, incha e pulsa cada vez mais rápido até concluir, para que possa ser interrompido a tempo",  -- 1396
+        "Ícones de classe nas placas",  -- 1397
+        "o ícone de classe de um jogador antes do nome, amigo ou inimigo",  -- 1398
+        "O que os PNJs fazem, como ícones",  -- 1399
+        "um ícone sobre PNJs amigáveis que oferecem algo: uma bolsa sobre vendedores, uma bigorna sobre ferreiros que consertam, um livro sobre instrutores... (os ícones do próprio jogo; aparecem mesmo enquanto a placa espera ser apontada)",  -- 1400
+        "NPCs amigos só ao apontar",  -- 1401
+        "as placas dos NPCs amigos (vendedores, doadores de missões, moradores) só aparecem enquanto você aponta para eles, como a dica deles",  -- 1402
+        "Nomes nas coisas com que você pode interagir",  -- 1403
+        "um nome sobre minérios, baús, placas e afins enquanto você está de frente para eles (desligado: ficam sem nome, o aviso do próprio jogo já diz o que são)",  -- 1404
+        "Mini placas",  -- 1405
+        "lacaios, bichos e inimigos cinzentos que não dão experiência ganham uma placa pequena: uma barra fina com seus efeitos negativos e sem nome (um bicho, sem barra, mantém o nome; a opção do jogo decide se eles têm placas)",  -- 1406
+        "Placas de nome do grupo em masmorras: só nomes",  -- 1407
+        "dentro de uma masmorra ou raide o próprio jogo desenha as placas de nome dos jogadores aliados e os addons não podem mudá-las: lá as opções do próprio jogo são ajustadas para mostrá-las como nomes na cor da classe, sem barras, como as nossas, e as barras do jogo voltam enquanto você luta (se as barras de aliados em combate estiverem ligadas); tudo volta ao que era quando você sai",  -- 1408
+        "Placas de nome do grupo em masmorras: ocultas",  -- 1409
+        "dentro de uma masmorra ou raide, desligar de vez as placas de nome do jogo para jogadores aliados (e deixá-las como estavam quando você sai)",  -- 1410
+        "mostra o que o jogo fornece para o nome do seu alvo (para solucionar problemas)",  -- 1411
+        "lista as placas de nome na tela e se usam nossa aparência (para solução de problemas)",  -- 1412
+        "Muito bem, então.",  -- 1413
+        "Ora, que monte.",  -- 1414
+        "Vejamos, vejamos...",  -- 1415
+        "Elune, me dê paciência.",  -- 1416
+        "Pelos naaru, que bagunça.",  -- 1417
+        "Mochila maldita.",  -- 1418
+        "Mochila arrumada é mochila leve.",  -- 1419
+        "Bah. Tralha demais.",  -- 1420
+        "Peso morto, tudo isso.",  -- 1421
+        "Paciência. A Mãe Terra provê.",  -- 1422
+        "Ei, o que temos aqui, mano?",  -- 1423
+        "Que bagunça. Indigno.",  -- 1424
+        "Tempo é dinheiro. Vamos contar.",  -- 1425
+        "É, isso serve.",  -- 1426
+        "Graças a Elune.",  -- 1427
+        "A Luz provê.",  -- 1428
+        "Hrm. Bom o bastante.",  -- 1429
+        "Hm. Dá para lutar.",  -- 1430
+        "Viajando leve. Bom.",  -- 1431
+        "Aceitável. Por pouco.",  -- 1432
+        "Nem um espaço sobrando. O lixo renderia %s: vender abre espaço.",  -- 1433
+        "Nem um espaço sobrando. O que não vou usar na estrada pode esperar no banco.",  -- 1434
+        "Lixo: %d, vale %s aqui. X vende o que escolhi; Venda esperta leva tudo.",  -- 1435
+        "%d destes são do banco: lá já tem mais iguais, ou eu os marquei. Depositar guarda tudo.",  -- 1436
+        "Só restam %d espaços. O lixo renderia %s em qualquer vendedor.",  -- 1437
+        "Só restam %d espaços. Hora de vender ou guardar algumas coisas.",  -- 1438
+        "Novos desde a última olhada: %d. O ponto dourado marca cada um.",  -- 1439
+        "Vale vender: %d. O filtro Vender junta todos, e cada dica diz onde rende mais.",  -- 1440
+        "Lixo: %d, vale %s. O próximo vendedor pode ficar com ele.",  -- 1441
+        "Só o essencial. Nada que valha a pena vender.",  -- 1442
+        "Tudo em ordem, e %d espaços livres.",  -- 1443
+        "Seu equipamento está consertado: %s.",  -- 1444
+        "Posso consertar seu equipamento por %s; uma peça quebrada não dá armadura nem atributos.",  -- 1445
+        "Suas bolsas estão cheias. Fico com %d coisas por %s: Venda esperta, e você tem espaço de novo.",  -- 1446
+        "Dou %s por %d coisas: o lixo e o que a casa de leilões não pagaria mais. Venda esperta, e pronto.",  -- 1447
+        "Fique com os %d que a casa de leilões quer: ela paga %s a mais que eu.",  -- 1448
+        "Suas bolsas estão cheias. Venda algo antes de comprar.",  -- 1449
+        "Nada nas suas bolsas pelo que eu pagaria bem. Dê uma olhada nas minhas mercadorias.",  -- 1450
+        "%d do que você carrega são daqui: guardo mais iguais, ou você os marcou. Depositar guarda tudo.",  -- 1451
+        "Guardo mais de %d coisas que você carrega. Retirar completa suas bolsas antes de partir.",  -- 1452
+        "Suas bolsas estão quase cheias. Deixe comigo o que não vai precisar na estrada.",  -- 1453
+        "Tudo seguro comigo, e suas bolsas têm %d espaços livres.",  -- 1454
+        "Nada para você hoje. Conferi duas vezes.",  -- 1455
+        "Cartas para você: %d, nada anexado. Leia quando quiser.",  -- 1456
+        "Cartas para você: %d. Dentro: %s.",  -- 1457
+        "Pegar tudo esvazia todas de uma vez.",  -- 1458
+        "Pagamento na entrega: %d. Essas você abre e paga por conta própria.",  -- 1459
+        "Suas bolsas estão cheias: os itens esperam nas cartas.",  -- 1460
+        "Para onde? Aponte um lugar e eu digo quanto tempo leva a viagem.",  -- 1461
+        "%s: cerca de %s pelo mapa. Você ainda não voou essa rota.",  -- 1462
+        "%s: cerca de %s, pelo seu último voo até lá.",  -- 1463
+        "%s: ainda não sei dizer quanto tempo. Voe uma vez e eu saberei.",  -- 1464
+        "%d escaparam. Esta água pede mais perícia do que tenho: isca ajuda, e uma vara melhor também.",  -- 1465
+        "Sem isca no anzol. Ela soma à minha perícia, e menos escapam.",  -- 1466
+        "A isca está quase no fim. Outra no anzol mantém minha perícia.",  -- 1467
+        "Peixes daqui que ainda não pesquei: %d. Continue lançando.",  -- 1468
+        "Já pesquei todo peixe desta água. Para outro lugar, então.",  -- 1469
+        "Nada pescado ainda. O primeiro peixe de cada água vai aqui.",  -- 1470
+        "Espécies pescadas: %d. Cada água esconde mais algumas: o painel de pesca mostra um ? para cada uma que não peguei lá.",  -- 1471
+        "Descansado junto ao fogo: os próximos %d de experiência de abates valem o dobro.",  -- 1472
+        "Nenhum descanso acumulado. Uma noite numa estalagem ou numa cidade, e os abates dão o dobro de experiência por um tempo.",  -- 1473
+        "%d absorvido",  -- 1474
+        "Lista à direita",  -- 1475
+        "Um no centro",  -- 1476
+        "%d curas críticas",  -- 1477
+        "%d críticos",  -- 1478
+        "Julgamento",  -- 1479
+        "Grandes momentos: onde",  -- 1480
+        "um bloco logo acima dos avisos de recarga à direita do seu personagem, o mais recente junto a eles e os anteriores subindo enquanto somem, ou um de cada vez no centro",  -- 1481
+        "mostra como é ver e sentir um grande momento",  -- 1482
+        "coletada",  -- 1483
+        "coletada por outro item",  -- 1484
+        "ainda não coletada",  -- 1485
+        "Aparência",  -- 1486
+        "Escolha um conjunto para colocar as peças no seu traje. %s mantém; nada é pago antes disso.",  -- 1487
+        "Examinando sua coleção...",  -- 1488
+        "Seu traje voltou a ser como era.",  -- 1489
+        "%s: %d de %d peças colocadas.",  -- 1490
+        "%d não puderam ir para este traje.",  -- 1491
+        "Um conjunto do qual você tem peças",  -- 1492
+        "%d conjuntos dos quais você tem peças",  -- 1493
+        "você não pode usar isto",  -- 1494
+        "faltando",  -- 1495
+        "Todas as %d peças",  -- 1496
+        "%d de %d peças",  -- 1497
+        "Faltando: %s",  -- 1498
+        "Nenhum conjunto ainda. Itens que compartilham um nome, como Elmo de Ferro Verde e Manoplas de Ferro Verde, aparecem aqui assim que você tiver um deles.",  -- 1499
+        "Desfazer",  -- 1500
+        "Excluir o conjunto personalizado %s? Não dá para recuperá-lo.",  -- 1501
+        "Excluir",  -- 1502
+        "Aponte primeiro para um conjunto personalizado.",  -- 1503
+        "%s  Excluir conjunto personalizado",  -- 1504
     },
     ruRU = {
         "ошибка:",  -- 1
@@ -11516,529 +11530,531 @@ local TRANSLATIONS = {
         "Компасу нужно знать, где вы, а игра здесь этого не сообщает.",  -- 977
         "Компас заданий: место",  -- 978
         "вверху экрана или внизу, на месте полосы опыта (полоса тогда переходит наверх)",  -- 979
-        "несколько отметок на компасе заданий вокруг вас на двадцать секунд",  -- 980
-        "Режим рыбалки: выключен.",  -- 981
-        "Рыбалка: %s — забросить",  -- 982
-        "Нет наживки: %s дважды — %s",  -- 983
-        "%s — убрать удочку",  -- 984
-        "Режим рыбалки: %s — забросить леску, и ещё раз — подсечь рыбу, когда поплавок дёрнется.",  -- 985
-        "%s — подсечь, %s — забросить снова",  -- 986
-        "Режиму рыбалки нужна удочка в руках.",  -- 987
-        "Вы не владеете рыбной ловлей.",  -- 988
-        "Режим рыбалки: одна кнопка забрасывает и подсекает",  -- 989
-        "Кнопка рыбалки: %s",  -- 990
-        "Перезаброс одним нажатием",  -- 991
-        "пока поплавок в воде, кнопка рыбалки подсекает рыбу, а A одним нажатием забрасывает заново; выкл.: A ваша",  -- 992
-        "Наживка двойным нажатием",  -- 993
-        "быстро нажмите кнопку рыбалки дважды: второе нажатие насадит лучшую наживку из ваших сумок на удочку, если на ней её нет",  -- 994
-        "Панели геймпада скрыты во время рыбалки",  -- 995
-        "с удочкой в руках панели геймпада скрыты, чтобы было видно воду; подсказка рыбалки показывает кнопку заброса. Они возвращаются, как только начинается бой или удочка убрана",  -- 996
-        "рыбалка одной кнопкой пока выключена или снова включена (с удочкой в руках она включается сама)",  -- 997
-        "кнопка, которая ловит рыбу: сначала ваша кнопка взаимодействия (Квадрат или X) или любая другая, например триггер (rt)",  -- 998
-        "Побережье Дуротара — красные скалы и теплое мелководье. Тролли с Островов Эха говорят, что макрель идет гуще всего, когда прилив несет запах островных очагов.",  -- 999
-        "Озера Мулгора невелики, чисты и терпеливы. Таурены рыбачат на них так же, как делают все остальное: не спеша и с благодарностью.",  -- 1000
-        "Каждый оазис в Степях — место встречи. Кто бы ни приходил туда на водопой днем, ночью под водой плавает кое-кто еще.",  -- 1001
-        "Заводи Тельдрассила лежат в тени одного-единственного дерева. Рыбаки ночных эльфов клянутся, что здешняя рыба никогда не видела солнца и ничуть по нему не скучает.",  -- 1002
-        "Вода у Темных берегов серая, холодная и полная затонувших кораблей. Половина того, что клюет близ Аубердина, обжилась в чьем-то потерянном грузе.",  -- 1003
-        "Реки Ясеневого леса текут под листвой, которая старше большинства королевств. Рыба здесь проворна, а часовые еще проворнее спросят, что вы тут делаете.",  -- 1004
-        "В Тысяче Игл воды мало, и берегут ее ревниво. Здешняя рыба свое место заслужила.",  -- 1005
-        "Озера Когтистых гор лежат высоко меж вершин, и вода в них ледяная. Гоблины давно бы их осушили, не будь там такой хорошей рыбалки.",  -- 1006
-        "Побережье Пустошей — кости да серый прибой. Кому-то там, в глубине, по вкусу и то, и другое.",  -- 1007
-        "Фералас зелен до самой кромки воды. Реки здесь глубокие, теплые и очень, очень живые.",  -- 1008
-        "Никто толком не знает, где в Пылевых топях кончается суша и начинается вода. Рыбачьте с берега, а потом пересчитайте пальцы на ногах.",  -- 1009
-        "В Порту Картеля — единственная в Танарисе вода, достойная этого слова. Гоблины продадут вам право в ней рыбачить, и даже дважды, если позволите.",  -- 1010
-        "Под сияющим заливом Азшары лежит затонувший город. Старые рыбаки говорят, что самая крупная рыба живет там, где когда-то были его сады.",  -- 1011
-        "Заводи Оскверненного леса светятся, и не по-хорошему. То, что в них до сих пор плавает, упрямо сверх всякой меры.",  -- 1012
-        "Горячие источники и озера со смоляными берегами в кратере Ун'Горо сберегли то, о чем остальной мир забыл. Кое-что из этого кусается.",  -- 1013
-        "Озеро Элуне'ара на Лунной поляне спокойно, как затаенное дыхание. Друиды просят лишь об одном: не берите больше, чем съедите.",  -- 1014
-        "Силитус — это песок, ветер и шум крыльев. Если вы нашли здесь воду, в которой можно рыбачить, никому не говорите.",  -- 1015
-        "Озера Зимних Ключей замерзают по краям и парят посередине. Рыба здесь жирная от холода и стоит долгой дороги.",  -- 1016
-        "В прудах Оргриммара рыбачат батраки, которым больше нечем заняться, и старые рубаки, которые говорят о себе то же самое. И те, и другие расскажут вам, что самая большая сорвалась.",  -- 1017
-        "Рыба из прудов Громового Утеса всю жизнь прожила высоко-высоко над равнинами. Похоже, ее это ничуть не тревожит.",  -- 1018
-        "Дарнас хранит свои воды так же бережно, как свои храмы. Рыба привыкла, что ею любуются.",  -- 1019
-        "Озера Альтеракских гор — талый снег, и огры с Синдикатом рыбачат в них, пока никто не видит.",  -- 1020
-        "Берега Нагорья Арати видели больше армий, чем рыбаков. Рыбе давно все равно, чье знамя реет над водой.",  -- 1021
-        "Бесплодные земли — пыль от края до края. Поклевка здесь — маленькое чудо; так к ней и относитесь.",  -- 1022
-        "Побережье Выжженных земель красное, выскобленное и тихое. То, что живет в этом прибое, научилось мириться с очень многим.",  -- 1023
-        "Озера Тирисфальских лесов неподвижны под болезненным небом. Отрекшиеся рыбачат в них по привычке: мертвые едят немного, но помнят, что им это нравилось.",  -- 1024
-        "Длинное побережье Серебряного бора — сплошь туман да тени сосен. Рыбалка здесь хорошая, и это единственное доброе слово, которое можно услышать об этих местах.",  -- 1025
-        "Реки Западных Чумных земель все еще текут, хоть и не чистые. На то, что вы из них вытащите, посмотрите дважды.",  -- 1026
-        "Мало кто рыбачит в Восточных Чумных землях, и еще меньше тех, кто в этом признается. Вода бережет то немногое, что оставила от нее чума.",  -- 1027
-        "Река и длинный южный берег Предгорий Хилсбрада кормили обе стороны каждой распри, которую из-за них затевали.",  -- 1028
-        "Внутренние земли прячут свои озера высоко среди деревьев, и дворфы клана Громового Молота рыбачат там прямо со спин грифонов, когда думают, что никто не видит.",  -- 1029
-        "Озера Дун Морога большую часть года окованы льдом по берегам. Дворф прорубит лунку, усядется с кружкой эля и назовет день удачным, что бы ни клюнуло.",  -- 1030
-        "В Тлеющем ущелье лава течет там, где в других краях реки. Возьмите лучше с собой что-нибудь попить.",  -- 1031
-        "Пылающие степи — пепел и угли. Если здешняя вода вам хоть что-нибудь даст, оно будет горячим.",  -- 1032
-        "Каждый ребенок в Элвиннском лесу учится рыбачить на Хрустальном озере или на озере Каменных Столбов. Тамошняя мелюзга водит детвору за нос уже не первое поколение.",  -- 1033
-        "На Перевале Мертвого Ветра мало воды и еще меньше гостеприимства. То, что водится в заводях под Каражаном, лучше там и оставить.",  -- 1034
-        "Река на краю Сумеречного леса черна в любой час. Рыбе темнота, похоже, не мешает, а вот рыбакам — еще как.",  -- 1035
-        "Лок — гордость Лок Модана, и удерживает его великая Каменная плотина. Дворфы сверяют с ним каждую рыбацкую байку, и обычно Лок побеждает.",  -- 1036
-        "Озеро Безмятежности в Красногорье красиво, как на картине, и рыбачат на нем с каждого причала Приозерья. Горожане знают все хорошие места и не выдадут вам ни одного.",  -- 1037
-        "От рек в джунглях до дикого южного мыса — в Тернистой долине самые богатые воды на континенте. Рыбаки Пиратской Бухты устраивают на них турнир, и почти все жульничают.",  -- 1038
-        "Болото Печали — зеленая вода под зелеными деревьями. Рыба отдает тиной, и местным она именно такой и нравится.",  -- 1039
-        "Поля Западного Края погибли, а побережье — нет. Те, кто остался, кормятся с длинного серого берега.",  -- 1040
-        "Болотина оправдывает свое название. Причалы Гавани Менетилов — самое сухое место для здешней рыбалки, и кроколиски об этом знают.",  -- 1041
-        "В каналах Штормграда рыбачат дети, пенсионеры и по меньшей мере один переодетый дворянин. Никто не спрашивает, что еще водится в этих каналах.",  -- 1042
-        "В Заброшенном гроте — единственная тихая заводь Стальгорна. Старые дворфы рыбачат там часами и не говорят ни слова.",  -- 1043
-        "Каналы Подгорода зеленые, и водоросли тут ни при чем. Отрекшиеся рыбачат в них вовсе не ради ужина.",  -- 1044
-        "Первая рыба, которую вылавливает почти каждый рыбак, и такая яркая, что ее запоминают.",  -- 1045
-        "Скользкая, проворная рыба, обычная у любого теплого берега. На углях она куда вкуснее, чем можно подумать по названию.",  -- 1046
-        "Один сплошной рот. Лучше всего чувствует себя в воде, которую вы бы пить не стали.",  -- 1047
-        "Мелкая, зубастая и бесстрашная рыбешка. Говорят, их стая однажды выгнала из Лока медведя.",  -- 1048
-        "Вспышка цвета под прибоем. Моряки верят: такая на крючке — к удачному плаванию.",  -- 1049
-        "Терпеливый донный житель с усами, как у дворфийского старейшины.",  -- 1050
-        "Дважды это никто не ест. Алхимики скупают все, что удается достать.",  -- 1051
-        "Плавники светятся, как тлеющие угли, а масло, которое выжимают из этой рыбы, горит почти так же хорошо.",  -- 1052
-        "Броня — что маленький щит. Мясо под ней стоит хлопот.",  -- 1053
-        "Что-то в воде близ Пещер Стенаний изменило эту рыбу. Съешьте такую — и, возможно, на время изменитесь сами.",  -- 1054
-        "Речной народ говорит, что такая трапеза проясняет ум. А мудрость приходит оттого, что плыть надо против течения.",  -- 1055
-        "Старше, крупнее и мудрее своей родни, но от вашего крючка это не спасло.",  -- 1056
-        "Упорный боец из теплых южных морей и любимое блюдо в каждой таверне от Пиратской Бухты до Прибамбасска.",  -- 1057
-        "Лоб блестит, как настоящий мифрил. Не один рудокоп пытался его переплавить.",  -- 1058
-        "Из чешуи вываривают масло, от которого кожа становится твердой, как камень. Предпочитает ночь.",  -- 1059
-        "Блестит, как парадная кираса, и весит почти столько же.",  -- 1060
-        "К берегу подходит только в холодные месяцы, и повара, которые знают в этом толк, ждут целый год.",  -- 1061
-        "Идет, когда дни длинны. Жители побережья сверяют по этому ходу время года.",  -- 1062
-        "Держите посередине, и только один раз.",  -- 1063
-        "Речная рыба из диких краев, с жабрами красными, как боевая раскраска тролля.",  -- 1064
-        "Кормится после заката. Суп из этой рыбы успокаивает нервы заклинателя.",  -- 1065
-        "Кормится днем, почти во всем наперекор своему ночному собрату, и все же делит с ним одну воду.",  -- 1066
-        "Строго говоря, не рыба. Против поимки возражает и непременно даст вам это понять.",  -- 1067
-        "Рыба бледная, как речной лед, из холодных прозрачных озер севера.",  -- 1068
-        "Вам понадобятся обе руки, а возможно, и друг.",  -- 1069
-        "%.1f фунт.",  -- 1070
-        "Новое в вашем рыболовном журнале: %s, %s.",  -- 1071
-        "Новое в вашем рыболовном журнале: %s.",  -- 1072
-        "Ваш самый тяжёлый улов — %s: %s (было %s).",  -- 1073
-        "Наживка %s",  -- 1074
-        "Нет наживки",  -- 1075
-        "Поймано %d",  -- 1076
-        "Сорвалось %d",  -- 1077
-        "Любопытная: +%d%%",  -- 1078
-        "Держите приманку рядом с рыбой",  -- 1079
-        "Следующий улов +%d%%",  -- 1080
-        "Удерживайте %s: приманка бежит вдоль лески",  -- 1081
-        "%d подряд",  -- 1082
-        "Игра, пока поплавок в воде",  -- 1083
-        "игра на полосе заклинания, пока леска в воде: удерживайте курок, и приманка бежит вдоль лески, отпустите — и она плывёт назад; держите её рядом с тенью рыбы. Чем лучше играете, тем тяжелее придуманный вес следующего улова. Не занимает ни одной кнопки и не касается ни заброса, ни улова",  -- 1084
-        "%d поймано, %d видов, %d сорвалось",  -- 1085
-        "Самый тяжёлый: %s, %s",  -- 1086
-        "Рыба",  -- 1087
-        "Водоёмы",  -- 1088
-        "Пока ничего не поймано. Возьмите удочку и идите к воде.",  -- 1089
-        "Поймано: %d",  -- 1090
-        "Самый тяжёлый: %s, место: %s",  -- 1091
-        "Впервые поймано: %s",  -- 1092
-        "Поймано здесь: %d",  -- 1093
-        "Видов найдено здесь: %d",  -- 1094
-        "открыть или закрыть ваш рыболовный журнал: каждый пойманный вид, самый тяжёлый улов каждого вида и водоёмы, где вы рыбачили",  -- 1095
-        "Полёт",  -- 1096
-        "досрочная посадка",  -- 1097
-        "посадка в следующей точке полёта",  -- 1098
-        "пункт назначения неизвестен",  -- 1099
-        "оценка по расстоянию",  -- 1100
-        "первый полёт по этому маршруту: время запоминается",  -- 1101
-        "посадка",  -- 1102
-        "%s: около %s, оценка по расстоянию",  -- 1103
-        "%s: около %s",  -- 1104
-        "%s: первый полёт по этому маршруту, время неизвестно",  -- 1105
-        "В полёте, место назначения неизвестно",  -- 1106
-        "%s: время полёта запомнено, %s",  -- 1107
-        "Досрочная посадка: %s, примерно %s",  -- 1108
-        "Досрочная посадка в следующей точке полёта",  -- 1109
-        "свежо и холодно, снег под ногами и дыхание застывает в воздухе",  -- 1110
-        "пронизывающий холод, ветер с вершин находит каждую щель в доспехах",  -- 1111
-        "жарко и влажно, воздух такой густой, что его можно пить",  -- 1112
-        "липкая жара под пологом леса, и громко гудят насекомые",  -- 1113
-        "жарко и сухо, ветер несёт пыль",  -- 1114
-        "палящее солнце и потрескавшаяся земля; пейте, пока можете",  -- 1115
-        "дым и пепел на горячем ветру",  -- 1116
-        "опалённый воздух, в нём кружатся искры",  -- 1117
-        "серо и холодно, липкий сырой туман",  -- 1118
-        "в воздухе прохлада, и света почти нет",  -- 1119
-        "тепло и ясно, лёгкий ветерок",  -- 1120
-        "приятная погода, хорошо для дороги",  -- 1121
-        "прохладно и зелено, листья шепчутся",  -- 1122
-        "мягкий свет сквозь деревья, и воздух свеж",  -- 1123
-        "душно и сыро, земля мягкая под ногами",  -- 1124
-        "тёплый влажный воздух и запах болота",  -- 1125
-        "%s, %s: %s",  -- 1126
-        "Известно маршрутов полёта: %d.",  -- 1127
-        "Полёты: ваш ездовой зверь на полосе",  -- 1128
-        "грифон, ветрокрыл или летучая мышь (кого дал распорядитель полётов) скользит по полосе полёта к месту посадки",  -- 1129
-        "Полёты: погода в месте посадки",  -- 1130
-        "при посадке в чате сказано, какой воздух там, где вы приземлились, каким место обычно бывает (жарко и влажно в Тернистой долине, снег под ногами в Дун Мороге), и время суток",  -- 1131
-        "показать маршруты полёта с известным временем",  -- 1132
-        "На землю! +%d",  -- 1133
-        "Столкновение: серия прервана",  -- 1134
-        "%s взмах  ·  облетайте верхушки деревьев и дирижабли",  -- 1135
-        "%s ловите всадников сетью за полётное золото  ·  %s большая высота",  -- 1136
-        "%d полётного золота",  -- 1137
-        "%s взмах",  -- 1138
-        "%s сеть",  -- 1139
-        "%s большая высота",  -- 1140
-        "%s: назад к игре (%d полётного золота)",  -- 1141
-        "%s: игра в пути",  -- 1142
-        "Игра в полёте выключена: /cchud flightgame on",  -- 1143
-        "В игру в полёте играют во время полёта.",  -- 1144
-        "Не в бою.",  -- 1145
-        "Игра в полёте: играть / большая высота",  -- 1146
-        "в полёте: запустить игру в полёте или поднять её на большую высоту и обратно",  -- 1147
-        "Кинематографичные полёты: камера кружит вокруг вас",  -- 1148
-        "в кино камера медленно кружит вокруг вас и вашего средства передвижения, полный круг примерно за полторы минуты, и перед посадкой снова оказывается позади вас. Выкл.: неподвижный кадр",  -- 1149
-        "Не в сети",  -- 1150
-        "Мёртв",  -- 1151
-        "Выкл.",  -- 1152
-        "В специализации лекаря",  -- 1153
-        "Всегда",  -- 1154
-        "Слишком далеко",  -- 1155
-        "Группа и рейд лекаря",  -- 1156
-        "в группе: ваша группа рядом с персонажем, у каждого кнопка, которая выбирает его целью; в рейде: тонкие рамки. Каждая показывает лишь, сколько лечения нужно, дебафф, который вы можете снять, и в пределах ли он досягаемости",  -- 1157
-        "шанс продажи %d%%",  -- 1158
-        "Уйдёт наверняка (%d%%)",  -- 1159
-        "Само продастся (%d%%)",  -- 1160
-        "Думаю, продастся (%d%%)",  -- 1161
-        "Покупатель найдётся (%d%%)",  -- 1162
-        "Пятьдесят на пятьдесят (%d%%)",  -- 1163
-        "Может пойти как угодно (%d%%)",  -- 1164
-        "Немного рискованно (%d%%)",  -- 1165
-        "Может полежать (%d%%)",  -- 1166
-        "Я бы не рассчитывал (%d%%)",  -- 1167
-        "Шансы так себе, друг (%d%%)",  -- 1168
-        "+%s сверх цены торговца",  -- 1169
-        "цена пока неизвестна",  -- 1170
-        "торговец платит столько же",  -- 1171
-        "Маклер",  -- 1172
-        "Рынок",  -- 1173
-        "каждая монета на счету, друг",  -- 1174
-        "Ничего из вашей сумки нельзя продать здесь.",  -- 1175
-        "Нет цен за последние 7 дней.",  -- 1176
-        "Пока цены лишь за один день: каждый день, когда вы заходите на аукцион, добавляется свеча.",  -- 1177
-        "7 дней, свеча на день: зелёная закрылась выше, красная ниже",  -- 1178
-        "30 дней, минимум дня: зелёный рост, красный спад",  -- 1179
-        "Истории цен пока нет: прочитайте аукцион в течение нескольких дней.",  -- 1180
-        "Пока цены лишь за один день: линия растёт с каждым днём, когда вы заходите на аукцион.",  -- 1181
-        "Прошу %s за штуку, %s за %d, что отпускаешь; %d остаются у тебя",  -- 1182
-        "Просит %s за шт., %s за все %d",  -- 1183
-        "Мин.",  -- 1184
-        "прочитано %s",  -- 1185
-        "Обычно",  -- 1186
-        "7 дней: от %s до %s",  -- 1187
-        "Выставлено: %d аукционов, %d предметов",  -- 1188
-        "%s за шт., %s за все %d",  -- 1189
-        "Вы выставили здесь %d, продано аукционов: %d",  -- 1190
-        "Цена неизвестна: сначала прочитайте аукцион.",  -- 1191
-        "В сумках нечего продать здесь.",  -- 1192
-        "Сегодня здесь ничего не продать дороже, чем торговцу; %d, может быть, если подождать.",  -- 1193
-        "Лучшее сверху: %d продать здесь выгоднее, чем торговцу, ещё %d - если подождать.",  -- 1194
-        "Сумки пусты, друг. Принеси что-нибудь на продажу.",  -- 1195
-        "Сегодня ничто не обгонит торговца. Разве что %d, если потерпеть.",  -- 1196
-        "Верной прибыли в этих сумках нет, друг. %d могут окупиться, если подождёшь.",  -- 1197
-        "Лучшее наверху: %d тут выгоднее любого торговца, ещё %d — для терпеливых.",  -- 1198
-        "%d здесь дадут больше, чем торговец, лучшее первым. Ещё %d, если подождёшь.",  -- 1199
-        "Верх кучи платит лучше всех: %d верных продаж, ещё %d, если подождёшь.",  -- 1200
-        "Цен пока нет: %s прочитает аукцион.",  -- 1201
-        "Цены только что прочитаны: %d.",  -- 1202
-        "Цен: %d, прочитаны %s.",  -- 1203
-        "Цен: %d, прочитаны %s. %s прочитает снова.",  -- 1204
-        "Доску я ещё не читал. %s — и принесу все цены.",  -- 1205
-        "Цен пока нет, друг. %s читает всю доску.",  -- 1206
-        "Цены свежие, прямо с доски, друг: %d.",  -- 1207
-        "Только что прочёл доску: %d цен, ещё тёплые.",  -- 1208
-        "%d цен, прочитано %s. Сойдёт, друг.",  -- 1209
-        "Последний взгляд на доску: %s, %d цен.",  -- 1210
-        "Цены прочитаны %s, чёрствые, как старый хлеб. %s перечитает доску.",  -- 1211
-        "%d цен, но прочитаны %s. %s — и я взгляну снова.",  -- 1212
-        "Показано и то, что вы храните. %s скроет.",  -- 1213
-        "Отложено: %d - для профессий, снаряжения и ваших меток. %s покажет.",  -- 1214
-        "То, что ты оставляешь, тоже в списке. %s уберёт.",  -- 1215
-        "Показываю и то, что ты оставляешь. %s снова скроет.",  -- 1216
-        "Отложено: %d — для ремёсел, чтобы надеть, отмеченное тобой. %s покажет.",  -- 1217
-        "%d отложил: на ремесло, на себя и по твоим отметкам. %s, если нужны.",  -- 1218
-        "за шт.",  -- 1219
-        "нет данных",  -- 1220
-        "Быстро",  -- 1221
-        "Терпеливо",  -- 1222
-        "Прочитать все цены",  -- 1223
-        "Скрыть хранимое",  -- 1224
-        "Показать хранимое",  -- 1225
-        "Линия",  -- 1226
-        "Свечи",  -- 1227
-        "Выставить",  -- 1228
-        "%d из %d",  -- 1229
-        "Выставить %d из %d по %s за штуку",  -- 1230
-        "Выставить %d за %s",  -- 1231
-        "Выставить все %d за %s",  -- 1232
-        "Отсюда нельзя выставлять лоты на аукцион этого клиента.",  -- 1233
-        "Выставлено %d за %s.",  -- 1234
-        "Рынок на аукционе: открыть / закрыть",  -- 1235
-        "Приветствие аукциониста на Рынке",  -- 1236
-        "гоблин-аукционист произносит короткую фразу из звуков самой игры, когда открывается Рынок; выкл.: открывается молча",  -- 1237
-        "Рынок: показывать хранимое",  -- 1238
-        "Рынок показывает и то, что вы храните: на чём ваши профессии ещё учатся или что превращают в более ценное, и то, что вы отметили для хранения; выкл.: только то, что вы бы продали",  -- 1239
-        "Рынок: график цен свечами",  -- 1240
-        "график цен на Рынке — свеча на каждый из последних 7 дней (где цена открылась, её максимум и минимум и где закрылась: зелёная, если закрылась выше, красная — если ниже); выкл.: линия дневного минимума за 30 дней",  -- 1241
-        "открыть или закрыть Рынок (вкладка аукциона)",  -- 1242
-        "какой аукцион у этого клиента (для поиска неисправностей)",  -- 1243
-        "Откройте окно профессии, и я посмотрю ваши рецепты.",  -- 1244
-        "Это предел, %d. Следующий уровень даст наставник профессии.",  -- 1245
-        "На %d учиться больше нечему. Сходите к наставнику за следующим уровнем.",  -- 1246
-        "Вы переросли свои рецепты. Сходите к наставнику: %s ждёт вас на %d.",  -- 1247
-        "Ещё %d до %d, а то, что вы знаете, туда не доведёт. У наставника есть %s для вас на %d.",  -- 1248
-        "Вы переросли свои рецепты. Сходите к наставнику: %s ждёт вас.",  -- 1249
-        "Рецепты перестают учить вас за %d до %d. Спросите у наставника %s.",  -- 1250
-        "Рецепты иссякают за %d до %d. У наставника найдётся что-то новое.",  -- 1251
-        "Того, что вы знаете, не хватит на последние %d. Пора к наставнику.",  -- 1252
-        "%s уже мало чему научит, но лучше у вас ничего нет. Ещё %d до %d.",  -- 1253
-        "Дальше медленно: %s изредка даёт очко. Осталось %d.",  -- 1254
-        "Сначала вам понадобится %s, %s. С этого гайды начинают этот отрезок.",  -- 1255
-        "Выучите %s, %s, и начнём: ещё %d до %d.",  -- 1256
-        "Ещё %d до %d. Гайды отправляют вас за %s до %d.",  -- 1257
-        "Здесь учит сбор: %s до %d.",  -- 1258
-        "Ещё %d до %d. Начните с %s или, если хотите, с %s: %s.",  -- 1259
-        "Сначала %s, как в гайдах. %s тоже подойдёт: %s.",  -- 1260
-        "Ещё %d до %d. Начните с %s.",  -- 1261
-        "%s — теперь ваш лучший учитель. %d очков до %d.",  -- 1262
-        "Твёрдая рука. Сначала %s, и осталось %d.",  -- 1263
-        "у наставника",  -- 1264
-        "у торговца",  -- 1265
-        "в добыче",  -- 1266
-        "за задание",  -- 1267
-        "материалы дешевле",  -- 1268
-        "материалы у торговца",  -- 1269
-        "материалы, которые вы собираете сами",  -- 1270
-        "хорошо продаётся",  -- 1271
-        "пригодится вам самим",  -- 1272
-        "меньше изготовлений",  -- 1273
-        "рецепт, который надо найти или купить",  -- 1274
-        "другие материалы",  -- 1275
-        "первый выбор гайдов",  -- 1276
-        "Откройте окно профессии, чтобы увидеть план прокачки.",  -- 1277
-        "Предел, %d. Следующий ранг у учителя.",  -- 1278
-        "Ещё %d до %d; рецептов не хватит. У учителя есть %s на %d.",  -- 1279
-        "Ещё %d до %d; рецептов не хватит. У учителя есть %s.",  -- 1280
-        "Рецепты заканчиваются за %d до %d. У учителя есть ещё.",  -- 1281
-        "Ещё %d до %d. Лучшее сейчас: %s, зелёный (очко время от времени).",  -- 1282
-        "Ещё %d до %d. Сначала выучите %s, %s.",  -- 1283
-        "Ещё %d до %d. Собирайте %s до %d.",  -- 1284
-        "Ещё %d до %d. Сначала: %s или %s (%s).",  -- 1285
-        "Ещё %d до %d. Сначала: %s.",  -- 1286
-        "Собрать или купить",  -- 1287
-        "%d раз: %s",  -- 1288
-        "Выучите %s, с %d.",  -- 1289
-        "Выучите %s.",  -- 1290
-        "%s: %d в сумках, %d в банке, %d за раз",  -- 1291
-        "Гайды проходят этот отрезок, собирая %s.",  -- 1292
-        "%s: у вас %d, план использует %d",  -- 1293
-        "для %s",  -- 1294
-        "Купить дешевле, чем делать из: %s",  -- 1295
-        "Делается из: %s",  -- 1296
-        "Наставник: что можно сделать с банком",  -- 1297
-        "Что можно сделать из банка",  -- 1298
-        "С тем, что лежит в банке, больше ничего не сделать.",  -- 1299
-        "%d можно сделать с учётом банка, %d из них только с ним.",  -- 1300
-        "Наставник: %s %d > %d",  -- 1301
-        "Наставник",  -- 1302
-        "План прокачки",  -- 1303
-        "или",  -- 1304
-        "Собирать %s",  -- 1305
-        "выучить",  -- 1306
-        "дешевле купить",  -- 1307
-        "Скрыть",  -- 1308
-        "План",  -- 1309
-        "Фармить это",  -- 1310
-        "Фармить всё",  -- 1311
-        "С банком",  -- 1312
-        "Управлять планом",  -- 1313
-        "дважды — скрыть",  -- 1314
-        "Здесь нечего примерить.",  -- 1315
-        "Добавлено в список фарма: %d.",  -- 1316
-        "Всего хватает: у вас есть всё нужное.",  -- 1317
-        "Откройте окно профессии, чтобы составить план.",  -- 1318
-        "Наставник (план прокачки): показать / скрыть",  -- 1319
-        "показывает план прокачки последнего открытого окна профессии, с кнопками контроллера на нём",  -- 1320
-        "Слева от заданий",  -- 1321
-        "Справа от заданий",  -- 1322
-        "Под заданиями",  -- 1323
-        "Список фарма полон.",  -- 1324
-        "Список фарма: %s, нужно %d.",  -- 1325
-        "Фарм",  -- 1326
-        "ещё %d",  -- 1327
-        "Пока нечего фармить.",  -- 1328
-        "На стопку больше",  -- 1329
-        "Убрать",  -- 1330
-        "Очистить",  -- 1331
-        "Готово",  -- 1332
-        "Убрать всё из списка фарма?",  -- 1333
-        "Список фарма: выбрать / готово",  -- 1334
-        "Список фарма: добавить предмет под указателем",  -- 1335
-        "Этого нет в списке фарма.",  -- 1336
-        "Список фарма пуст.",  -- 1337
-        "Список фарма: где он стоит",  -- 1338
-        "список фарма слева от списка заданий, справа от него или под его заданиями",  -- 1339
-        "список фарма рядом со списком заданий: выбор контроллером; add <предмет> [сколько], remove <предмет>, clear, или left / right / bottom для его места",  -- 1340
-        "Процент угрозы",  -- 1341
-        "ваша доля угрозы числом рядом со значком угрозы, на рамке цели и на индикаторах здоровья",  -- 1342
-        "Число здоровья",  -- 1343
-        "оставшееся здоровье, сокращённо (12.3k), на полосе (не на компактных индикаторах: там хватает процента)",  -- 1344
-        "Ваши ослабления",  -- 1345
-        "ваши ослабления на цели, над её именем, с оставшимся временем",  -- 1346
-        "Дебаффы от всех",  -- 1347
-        "дебаффы, которые игра отмечает для индикаторов здоровья от всех, а не только ваши",  -- 1348
-        "Баффы врага",  -- 1349
-        "усиления врага рядом с его ослаблениями: только важные (важные, исступление или те, что вы можете рассеять или украсть), или все, если «Только важные эффекты» выключено",  -- 1350
-        "Значок контроля",  -- 1351
-        "большой значок с временем, когда цель оглушена, обездвижена, испугана...",  -- 1352
-        "Свечение угрозы",  -- 1353
-        "значок щита и свечение за именем: красное, пока он атакует вас, красное и жёлтое, когда вы вот-вот перетянете его, жёлтое и синее, когда вы его теряете, синее, когда он не на вас",  -- 1354
-        "Метка задания",  -- 1355
-        "золотая отметка на целях, которые еще нужны для ваших заданий",  -- 1356
-        "Анимация индикаторов здоровья",  -- 1357
-        "индикаторы плавно появляются, низкое здоровье «дышит», контроль толпы мерцает",  -- 1358
-        "Маленькие",  -- 1359
-        "Обычные",  -- 1360
-        "Большие",  -- 1361
-        "Полное имя",  -- 1362
-        "Короткое имя",  -- 1363
-        "Без имени",  -- 1364
-        "Полный",  -- 1365
-        "Минимальный мини",  -- 1366
-        "Размер индикаторов",  -- 1367
-        "размер полос на индикаторах здоровья: маленькие и тонкие, обычные или большие (шире и выше)",  -- 1368
-        "Имена на индикаторах",  -- 1369
-        "имя на индикаторе с полосой здоровья: полностью, сокращённо или без него (рамка цели показывает его полностью; уровень и значок класса остаются). Индикатор без полосы, у дружественного НИП, всегда сохраняет имя",  -- 1370
-        "Вид индикаторов",  -- 1371
-        "переключатели индикаторов одним нажатием. Полный: всё. Минимальный: без полосы ресурса, гильдии и звания, короткие имена. Минимальный мини: маленькие полосы со здоровьем, ваши отрицательные эффекты и важные положительные, уровень и класс, без имени (оно в рамке цели). Угроза, контроль и заметные заклинания остаются всегда",  -- 1372
-        "Звания игроков",  -- 1373
-        "показывает звание игрока рядом с его именем",  -- 1374
-        "Гильдии и занятия NPC",  -- 1375
-        "строка под именем: гильдия игрока или чем занимается NPC",  -- 1376
-        "Полосы союзников в бою",  -- 1377
-        "индикаторы дружественных целей показывают здоровье, ресурс и заклинания, пока цель в бою",  -- 1378
-        "Собственные дружественные индикаторы игры",  -- 1379
-        "оставить дружественные индикаторы (ваша группа, другие игроки, дружественные NPC) в виде игры; наши — только на врагах",  -- 1380
-        "Полосы ресурса",  -- 1381
-        "тонкая полоса маны, ярости или энергии под полосой здоровья",  -- 1382
-        "Цель заклинания",  -- 1383
-        "на кого направлено заклинание, рядом с его названием",  -- 1384
-        "Здоровье в процентах",  -- 1385
-        "процент здоровья на полосе",  -- 1386
-        "Имя на табличке цели",  -- 1387
-        "выкл.: табличка вашей цели не показывает имя и уровень (их показывает рамка цели)",  -- 1388
-        "Уровни на табличках",  -- 1389
-        "уровень перед именем противника, цвет по сложности",  -- 1390
-        "Компактные индикаторы здоровья",  -- 1391
-        "индикаторы здоровья примерно вдвое уже",  -- 1392
-        "Заметные заклинания врагов",  -- 1393
-        "заклинание врага мигает, раздувается и пульсирует все быстрее, пока не завершится, чтобы его можно было прервать вовремя",  -- 1394
-        "Значки классов на индикаторах",  -- 1395
-        "значок класса игрока перед его именем, друг это или враг",  -- 1396
-        "Чем заняты НИП, значками",  -- 1397
-        "значок над дружественными НИП, которые что-то предлагают: сумка над торговцами, наковальня над кузнецами, которые чинят, книга над учителями... (значки самой игры; видны, даже пока индикатор ждёт, чтобы на него указали)",  -- 1398
-        "Дружественные NPC только при наведении",  -- 1399
-        "индикаторы дружественных NPC (торговцев, раздающих задания, горожан) показываются, только пока вы наводите на них курсор, как и их подсказка",  -- 1400
-        "Названия над предметами, с которыми можно взаимодействовать",  -- 1401
-        "название над рудой, сундуками, табличками и тому подобным, пока вы стоите к ним лицом (выкл.: они остаются без названия, подсказка самой игры уже говорит, что это)",  -- 1402
-        "Мини-индикаторы",  -- 1403
-        "прислужники, зверьки и серые противники без опыта получают маленькую табличку: тонкая полоса с вашими эффектами на ней и без имени (зверёк без полосы сохраняет имя; есть ли таблички вообще, решает настройка игры)",  -- 1404
-        "Индикаторы группы в подземельях: только имена",  -- 1405
-        "в подземелье или рейде игра сама рисует индикаторы здоровья дружественных игроков, и аддоны не могут их менять: там собственные настройки игры выставляются так, чтобы они показывались как имена цвета класса без полос, как наши, а на время боя полосы игры возвращаются (если включены полосы союзников в бою); при выходе всё возвращается обратно",  -- 1406
-        "Индикаторы группы в подземельях: скрыты",  -- 1407
-        "в подземелье или рейде полностью выключить индикаторы здоровья дружественных игроков (и вернуть как было, когда вы выходите)",  -- 1408
-        "показывает, что игра отдаёт для имени вашей цели (для поиска неполадок)",  -- 1409
-        "показать индикаторы на экране и в нашем ли они виде (для поиска проблем)",  -- 1410
-        "Так, ладно.",  -- 1411
-        "Ох, ну и куча.",  -- 1412
-        "Так, посмотрим, посмотрим...",  -- 1413
-        "Элуна, дай мне терпения.",  -- 1414
-        "Во имя наару, ну и мешанина.",  -- 1415
-        "Проклятый мешок.",  -- 1416
-        "Опрятный мешок - лёгкий мешок.",  -- 1417
-        "Ба. Слишком много барахла.",  -- 1418
-        "Мёртвый груз, всё до последнего.",  -- 1419
-        "Терпение. Мать-Земля даст.",  -- 1420
-        "Эй, что тут у нас, мон?",  -- 1421
-        "Какой беспорядок. Недостойно.",  -- 1422
-        "Время - деньги. Посчитаем.",  -- 1423
-        "Ага, сойдёт.",  -- 1424
-        "Хвала Элуне.",  -- 1425
-        "Свет даст.",  -- 1426
-        "Хрм. Сойдёт.",  -- 1427
-        "Хм. Хватит, чтобы сражаться.",  -- 1428
-        "Путешествую налегке. Хорошо.",  -- 1429
-        "Приемлемо. Едва.",  -- 1430
-        "Ни одного свободного места. Хлам принесёт %s: продав его, освобожу место.",  -- 1431
-        "Ни одного свободного места. Всё, что не нужно в пути, подождёт в банке.",  -- 1432
-        "Хлам: %d, здесь стоит %s. X продаёт выбранное; Умная продажа забирает всё.",  -- 1433
-        "%d из этого место в банке: там уже есть такое же, или я это пометил. «Положить» уберёт.",  -- 1434
-        "Осталось всего %d мест. Хлам у любого торговца принесёт %s.",  -- 1435
-        "Осталось всего %d мест. Пора что-то продать или сдать в банк.",  -- 1436
-        "Нового с прошлого раза: %d. Каждое отмечено золотой точкой.",  -- 1437
-        "Стоит продать: %d. Фильтр «Продать» собирает их, а подсказка говорит, где дадут больше.",  -- 1438
-        "Хлам: %d, стоит %s. Отдам ближайшему торговцу.",  -- 1439
-        "Только самое нужное. Продавать нечего.",  -- 1440
-        "Всё в порядке, свободно мест: %d.",  -- 1441
-        "Ваше снаряжение починено: %s.",  -- 1442
-        "Могу починить снаряжение за %s; сломанная вещь не даёт ни брони, ни характеристик.",  -- 1443
-        "Сумки полны. Возьму %d вещей за %s: «Умная продажа» - и снова есть место.",  -- 1444
-        "Дам %s за %d вещей: хлам и то, за что аукцион больше не даст. «Умная продажа» - и готово.",  -- 1445
-        "Оставьте %d вещей для аукциона: там дадут на %s больше, чем я.",  -- 1446
-        "Сумки полны. Продайте мне что-нибудь, прежде чем покупать.",  -- 1447
-        "В ваших сумках нет ничего, за что я хорошо заплачу. Взгляните на мой товар.",  -- 1448
-        "%d из того, что вы носите, место здесь: у меня есть такое же, или вы это пометили. «Положить» уберёт.",  -- 1449
-        "У меня есть ещё %d вещей из тех, что вы носите. «Забрать» пополнит сумки перед дорогой.",  -- 1450
-        "Сумки почти полны. Оставьте у меня то, что не понадобится в пути.",  -- 1451
-        "У меня всё в сохранности, а в сумках свободно мест: %d.",  -- 1452
-        "Сегодня для вас ничего. Я проверил дважды.",  -- 1453
-        "Писем для вас: %d, без вложений. Читайте, когда захотите.",  -- 1454
-        "Писем для вас: %d. Внутри: %s.",  -- 1455
-        "«Забрать всё» опустошит их за раз.",  -- 1456
-        "Наложенным платежом: %d. Их вы открываете и оплачиваете сами.",  -- 1457
-        "Сумки полны: предметы подождут в письмах.",  -- 1458
-        "Куда летим? Укажите место, и я скажу, сколько длится полёт.",  -- 1459
-        "%s: около %s по карте. Этот маршрут вы ещё не летали.",  -- 1460
-        "%s: около %s, судя по вашему прошлому полёту туда.",  -- 1461
-        "%s: пока не скажу, сколько. Слетайте разок, и я буду знать.",  -- 1462
-        "Сорвалось: %d. Этой воде нужно больше навыка, чем у меня: поможет наживка, и удочка получше тоже.",  -- 1463
-        "На крючке нет наживки. Она прибавляет к навыку, и срывается меньше.",  -- 1464
-        "Наживка почти кончилась. Новая на крючке сохранит навык.",  -- 1465
-        "Рыбы здесь, что я ещё не ловил: %d. Забрасываю дальше.",  -- 1466
-        "Я поймал всю рыбу этой воды. Значит, в новое место.",  -- 1467
-        "Ещё ничего не поймано. Первая рыба каждой воды записывается сюда.",  -- 1468
-        "Поймано видов: %d. В каждой воде прячется ещё несколько: панель рыбалки показывает ? для тех, что я там не ловил.",  -- 1469
-        "Отдохнул у огня: следующие %d опыта за убийства идут вдвойне.",  -- 1470
-        "Отдыха не накоплено. Ночь в таверне или в городе - и какое-то время убийства дают двойной опыт.",  -- 1471
-        "%d поглощено",  -- 1472
-        "Лента справа",  -- 1473
-        "По одному в центре",  -- 1474
-        "Крит. исцелений: %d",  -- 1475
-        "Критов: %d",  -- 1476
-        "Правосудие",  -- 1477
-        "Яркие моменты: где",  -- 1478
-        "блок прямо над оповещениями о восстановлении справа от вашего персонажа: новый ближе к ним, а прежние поднимаются выше, угасая, или по одному в центре",  -- 1479
-        "показывает, как выглядит и ощущается большой момент",  -- 1480
-        "собрана",  -- 1481
-        "собрана через другой предмет",  -- 1482
-        "еще не собрана",  -- 1483
-        "Модель",  -- 1484
-        "Выберите комплект, чтобы надеть его предметы на образ. %s сохраняет его; до этого ничего не оплачивается.",  -- 1485
-        "Просматриваем вашу коллекцию...",  -- 1486
-        "Образ снова такой, каким был.",  -- 1487
-        "%s: надето %d из %d предметов.",  -- 1488
-        "Не подошло к этому образу: %d.",  -- 1489
-        "Один комплект, от которого у вас есть предметы",  -- 1490
-        "Комплектов, от которых у вас есть предметы: %d",  -- 1491
-        "вы не можете это носить",  -- 1492
-        "нет",  -- 1493
-        "Все предметы: %d",  -- 1494
-        "%d из %d предметов",  -- 1495
-        "Нет: %s",  -- 1496
-        "Комплектов пока нет. Предметы с общим названием, например Зеленый железный шлем и Зеленые железные рукавицы, появятся здесь, как только у вас будет хотя бы один.",  -- 1497
-        "Отменить",  -- 1498
-        "Удалить собственный комплект %s? Вернуть его будет нельзя.",  -- 1499
-        "Удалить",  -- 1500
-        "Сначала наведите курсор на собственный комплект.",  -- 1501
-        "%s  Удалить собственный комплект",  -- 1502
+        "Компас заданий: по камере",  -- 980
+        "компас показывает, куда смотрит камера, а не куда повёрнут персонаж (они расходятся, когда стик поворачивает персонажа без камеры); выкл.: куда повёрнут персонаж",  -- 981
+        "несколько отметок на компасе заданий вокруг вас на двадцать секунд",  -- 982
+        "Режим рыбалки: выключен.",  -- 983
+        "Рыбалка: %s — забросить",  -- 984
+        "Нет наживки: %s дважды — %s",  -- 985
+        "%s — убрать удочку",  -- 986
+        "Режим рыбалки: %s — забросить леску, и ещё раз — подсечь рыбу, когда поплавок дёрнется.",  -- 987
+        "%s — подсечь, %s — забросить снова",  -- 988
+        "Режиму рыбалки нужна удочка в руках.",  -- 989
+        "Вы не владеете рыбной ловлей.",  -- 990
+        "Режим рыбалки: одна кнопка забрасывает и подсекает",  -- 991
+        "Кнопка рыбалки: %s",  -- 992
+        "Перезаброс одним нажатием",  -- 993
+        "пока поплавок в воде, кнопка рыбалки подсекает рыбу, а A одним нажатием забрасывает заново; выкл.: A ваша",  -- 994
+        "Наживка двойным нажатием",  -- 995
+        "быстро нажмите кнопку рыбалки дважды: второе нажатие насадит лучшую наживку из ваших сумок на удочку, если на ней её нет",  -- 996
+        "Панели геймпада скрыты во время рыбалки",  -- 997
+        "с удочкой в руках панели геймпада скрыты, чтобы было видно воду; подсказка рыбалки показывает кнопку заброса. Они возвращаются, как только начинается бой или удочка убрана",  -- 998
+        "рыбалка одной кнопкой пока выключена или снова включена (с удочкой в руках она включается сама)",  -- 999
+        "кнопка, которая ловит рыбу: сначала ваша кнопка взаимодействия (Квадрат или X) или любая другая, например триггер (rt)",  -- 1000
+        "Побережье Дуротара — красные скалы и теплое мелководье. Тролли с Островов Эха говорят, что макрель идет гуще всего, когда прилив несет запах островных очагов.",  -- 1001
+        "Озера Мулгора невелики, чисты и терпеливы. Таурены рыбачат на них так же, как делают все остальное: не спеша и с благодарностью.",  -- 1002
+        "Каждый оазис в Степях — место встречи. Кто бы ни приходил туда на водопой днем, ночью под водой плавает кое-кто еще.",  -- 1003
+        "Заводи Тельдрассила лежат в тени одного-единственного дерева. Рыбаки ночных эльфов клянутся, что здешняя рыба никогда не видела солнца и ничуть по нему не скучает.",  -- 1004
+        "Вода у Темных берегов серая, холодная и полная затонувших кораблей. Половина того, что клюет близ Аубердина, обжилась в чьем-то потерянном грузе.",  -- 1005
+        "Реки Ясеневого леса текут под листвой, которая старше большинства королевств. Рыба здесь проворна, а часовые еще проворнее спросят, что вы тут делаете.",  -- 1006
+        "В Тысяче Игл воды мало, и берегут ее ревниво. Здешняя рыба свое место заслужила.",  -- 1007
+        "Озера Когтистых гор лежат высоко меж вершин, и вода в них ледяная. Гоблины давно бы их осушили, не будь там такой хорошей рыбалки.",  -- 1008
+        "Побережье Пустошей — кости да серый прибой. Кому-то там, в глубине, по вкусу и то, и другое.",  -- 1009
+        "Фералас зелен до самой кромки воды. Реки здесь глубокие, теплые и очень, очень живые.",  -- 1010
+        "Никто толком не знает, где в Пылевых топях кончается суша и начинается вода. Рыбачьте с берега, а потом пересчитайте пальцы на ногах.",  -- 1011
+        "В Порту Картеля — единственная в Танарисе вода, достойная этого слова. Гоблины продадут вам право в ней рыбачить, и даже дважды, если позволите.",  -- 1012
+        "Под сияющим заливом Азшары лежит затонувший город. Старые рыбаки говорят, что самая крупная рыба живет там, где когда-то были его сады.",  -- 1013
+        "Заводи Оскверненного леса светятся, и не по-хорошему. То, что в них до сих пор плавает, упрямо сверх всякой меры.",  -- 1014
+        "Горячие источники и озера со смоляными берегами в кратере Ун'Горо сберегли то, о чем остальной мир забыл. Кое-что из этого кусается.",  -- 1015
+        "Озеро Элуне'ара на Лунной поляне спокойно, как затаенное дыхание. Друиды просят лишь об одном: не берите больше, чем съедите.",  -- 1016
+        "Силитус — это песок, ветер и шум крыльев. Если вы нашли здесь воду, в которой можно рыбачить, никому не говорите.",  -- 1017
+        "Озера Зимних Ключей замерзают по краям и парят посередине. Рыба здесь жирная от холода и стоит долгой дороги.",  -- 1018
+        "В прудах Оргриммара рыбачат батраки, которым больше нечем заняться, и старые рубаки, которые говорят о себе то же самое. И те, и другие расскажут вам, что самая большая сорвалась.",  -- 1019
+        "Рыба из прудов Громового Утеса всю жизнь прожила высоко-высоко над равнинами. Похоже, ее это ничуть не тревожит.",  -- 1020
+        "Дарнас хранит свои воды так же бережно, как свои храмы. Рыба привыкла, что ею любуются.",  -- 1021
+        "Озера Альтеракских гор — талый снег, и огры с Синдикатом рыбачат в них, пока никто не видит.",  -- 1022
+        "Берега Нагорья Арати видели больше армий, чем рыбаков. Рыбе давно все равно, чье знамя реет над водой.",  -- 1023
+        "Бесплодные земли — пыль от края до края. Поклевка здесь — маленькое чудо; так к ней и относитесь.",  -- 1024
+        "Побережье Выжженных земель красное, выскобленное и тихое. То, что живет в этом прибое, научилось мириться с очень многим.",  -- 1025
+        "Озера Тирисфальских лесов неподвижны под болезненным небом. Отрекшиеся рыбачат в них по привычке: мертвые едят немного, но помнят, что им это нравилось.",  -- 1026
+        "Длинное побережье Серебряного бора — сплошь туман да тени сосен. Рыбалка здесь хорошая, и это единственное доброе слово, которое можно услышать об этих местах.",  -- 1027
+        "Реки Западных Чумных земель все еще текут, хоть и не чистые. На то, что вы из них вытащите, посмотрите дважды.",  -- 1028
+        "Мало кто рыбачит в Восточных Чумных землях, и еще меньше тех, кто в этом признается. Вода бережет то немногое, что оставила от нее чума.",  -- 1029
+        "Река и длинный южный берег Предгорий Хилсбрада кормили обе стороны каждой распри, которую из-за них затевали.",  -- 1030
+        "Внутренние земли прячут свои озера высоко среди деревьев, и дворфы клана Громового Молота рыбачат там прямо со спин грифонов, когда думают, что никто не видит.",  -- 1031
+        "Озера Дун Морога большую часть года окованы льдом по берегам. Дворф прорубит лунку, усядется с кружкой эля и назовет день удачным, что бы ни клюнуло.",  -- 1032
+        "В Тлеющем ущелье лава течет там, где в других краях реки. Возьмите лучше с собой что-нибудь попить.",  -- 1033
+        "Пылающие степи — пепел и угли. Если здешняя вода вам хоть что-нибудь даст, оно будет горячим.",  -- 1034
+        "Каждый ребенок в Элвиннском лесу учится рыбачить на Хрустальном озере или на озере Каменных Столбов. Тамошняя мелюзга водит детвору за нос уже не первое поколение.",  -- 1035
+        "На Перевале Мертвого Ветра мало воды и еще меньше гостеприимства. То, что водится в заводях под Каражаном, лучше там и оставить.",  -- 1036
+        "Река на краю Сумеречного леса черна в любой час. Рыбе темнота, похоже, не мешает, а вот рыбакам — еще как.",  -- 1037
+        "Лок — гордость Лок Модана, и удерживает его великая Каменная плотина. Дворфы сверяют с ним каждую рыбацкую байку, и обычно Лок побеждает.",  -- 1038
+        "Озеро Безмятежности в Красногорье красиво, как на картине, и рыбачат на нем с каждого причала Приозерья. Горожане знают все хорошие места и не выдадут вам ни одного.",  -- 1039
+        "От рек в джунглях до дикого южного мыса — в Тернистой долине самые богатые воды на континенте. Рыбаки Пиратской Бухты устраивают на них турнир, и почти все жульничают.",  -- 1040
+        "Болото Печали — зеленая вода под зелеными деревьями. Рыба отдает тиной, и местным она именно такой и нравится.",  -- 1041
+        "Поля Западного Края погибли, а побережье — нет. Те, кто остался, кормятся с длинного серого берега.",  -- 1042
+        "Болотина оправдывает свое название. Причалы Гавани Менетилов — самое сухое место для здешней рыбалки, и кроколиски об этом знают.",  -- 1043
+        "В каналах Штормграда рыбачат дети, пенсионеры и по меньшей мере один переодетый дворянин. Никто не спрашивает, что еще водится в этих каналах.",  -- 1044
+        "В Заброшенном гроте — единственная тихая заводь Стальгорна. Старые дворфы рыбачат там часами и не говорят ни слова.",  -- 1045
+        "Каналы Подгорода зеленые, и водоросли тут ни при чем. Отрекшиеся рыбачат в них вовсе не ради ужина.",  -- 1046
+        "Первая рыба, которую вылавливает почти каждый рыбак, и такая яркая, что ее запоминают.",  -- 1047
+        "Скользкая, проворная рыба, обычная у любого теплого берега. На углях она куда вкуснее, чем можно подумать по названию.",  -- 1048
+        "Один сплошной рот. Лучше всего чувствует себя в воде, которую вы бы пить не стали.",  -- 1049
+        "Мелкая, зубастая и бесстрашная рыбешка. Говорят, их стая однажды выгнала из Лока медведя.",  -- 1050
+        "Вспышка цвета под прибоем. Моряки верят: такая на крючке — к удачному плаванию.",  -- 1051
+        "Терпеливый донный житель с усами, как у дворфийского старейшины.",  -- 1052
+        "Дважды это никто не ест. Алхимики скупают все, что удается достать.",  -- 1053
+        "Плавники светятся, как тлеющие угли, а масло, которое выжимают из этой рыбы, горит почти так же хорошо.",  -- 1054
+        "Броня — что маленький щит. Мясо под ней стоит хлопот.",  -- 1055
+        "Что-то в воде близ Пещер Стенаний изменило эту рыбу. Съешьте такую — и, возможно, на время изменитесь сами.",  -- 1056
+        "Речной народ говорит, что такая трапеза проясняет ум. А мудрость приходит оттого, что плыть надо против течения.",  -- 1057
+        "Старше, крупнее и мудрее своей родни, но от вашего крючка это не спасло.",  -- 1058
+        "Упорный боец из теплых южных морей и любимое блюдо в каждой таверне от Пиратской Бухты до Прибамбасска.",  -- 1059
+        "Лоб блестит, как настоящий мифрил. Не один рудокоп пытался его переплавить.",  -- 1060
+        "Из чешуи вываривают масло, от которого кожа становится твердой, как камень. Предпочитает ночь.",  -- 1061
+        "Блестит, как парадная кираса, и весит почти столько же.",  -- 1062
+        "К берегу подходит только в холодные месяцы, и повара, которые знают в этом толк, ждут целый год.",  -- 1063
+        "Идет, когда дни длинны. Жители побережья сверяют по этому ходу время года.",  -- 1064
+        "Держите посередине, и только один раз.",  -- 1065
+        "Речная рыба из диких краев, с жабрами красными, как боевая раскраска тролля.",  -- 1066
+        "Кормится после заката. Суп из этой рыбы успокаивает нервы заклинателя.",  -- 1067
+        "Кормится днем, почти во всем наперекор своему ночному собрату, и все же делит с ним одну воду.",  -- 1068
+        "Строго говоря, не рыба. Против поимки возражает и непременно даст вам это понять.",  -- 1069
+        "Рыба бледная, как речной лед, из холодных прозрачных озер севера.",  -- 1070
+        "Вам понадобятся обе руки, а возможно, и друг.",  -- 1071
+        "%.1f фунт.",  -- 1072
+        "Новое в вашем рыболовном журнале: %s, %s.",  -- 1073
+        "Новое в вашем рыболовном журнале: %s.",  -- 1074
+        "Ваш самый тяжёлый улов — %s: %s (было %s).",  -- 1075
+        "Наживка %s",  -- 1076
+        "Нет наживки",  -- 1077
+        "Поймано %d",  -- 1078
+        "Сорвалось %d",  -- 1079
+        "Любопытная: +%d%%",  -- 1080
+        "Держите приманку рядом с рыбой",  -- 1081
+        "Следующий улов +%d%%",  -- 1082
+        "Удерживайте %s: приманка бежит вдоль лески",  -- 1083
+        "%d подряд",  -- 1084
+        "Игра, пока поплавок в воде",  -- 1085
+        "игра на полосе заклинания, пока леска в воде: удерживайте курок, и приманка бежит вдоль лески, отпустите — и она плывёт назад; держите её рядом с тенью рыбы. Чем лучше играете, тем тяжелее придуманный вес следующего улова. Не занимает ни одной кнопки и не касается ни заброса, ни улова",  -- 1086
+        "%d поймано, %d видов, %d сорвалось",  -- 1087
+        "Самый тяжёлый: %s, %s",  -- 1088
+        "Рыба",  -- 1089
+        "Водоёмы",  -- 1090
+        "Пока ничего не поймано. Возьмите удочку и идите к воде.",  -- 1091
+        "Поймано: %d",  -- 1092
+        "Самый тяжёлый: %s, место: %s",  -- 1093
+        "Впервые поймано: %s",  -- 1094
+        "Поймано здесь: %d",  -- 1095
+        "Видов найдено здесь: %d",  -- 1096
+        "открыть или закрыть ваш рыболовный журнал: каждый пойманный вид, самый тяжёлый улов каждого вида и водоёмы, где вы рыбачили",  -- 1097
+        "Полёт",  -- 1098
+        "досрочная посадка",  -- 1099
+        "посадка в следующей точке полёта",  -- 1100
+        "пункт назначения неизвестен",  -- 1101
+        "оценка по расстоянию",  -- 1102
+        "первый полёт по этому маршруту: время запоминается",  -- 1103
+        "посадка",  -- 1104
+        "%s: около %s, оценка по расстоянию",  -- 1105
+        "%s: около %s",  -- 1106
+        "%s: первый полёт по этому маршруту, время неизвестно",  -- 1107
+        "В полёте, место назначения неизвестно",  -- 1108
+        "%s: время полёта запомнено, %s",  -- 1109
+        "Досрочная посадка: %s, примерно %s",  -- 1110
+        "Досрочная посадка в следующей точке полёта",  -- 1111
+        "свежо и холодно, снег под ногами и дыхание застывает в воздухе",  -- 1112
+        "пронизывающий холод, ветер с вершин находит каждую щель в доспехах",  -- 1113
+        "жарко и влажно, воздух такой густой, что его можно пить",  -- 1114
+        "липкая жара под пологом леса, и громко гудят насекомые",  -- 1115
+        "жарко и сухо, ветер несёт пыль",  -- 1116
+        "палящее солнце и потрескавшаяся земля; пейте, пока можете",  -- 1117
+        "дым и пепел на горячем ветру",  -- 1118
+        "опалённый воздух, в нём кружатся искры",  -- 1119
+        "серо и холодно, липкий сырой туман",  -- 1120
+        "в воздухе прохлада, и света почти нет",  -- 1121
+        "тепло и ясно, лёгкий ветерок",  -- 1122
+        "приятная погода, хорошо для дороги",  -- 1123
+        "прохладно и зелено, листья шепчутся",  -- 1124
+        "мягкий свет сквозь деревья, и воздух свеж",  -- 1125
+        "душно и сыро, земля мягкая под ногами",  -- 1126
+        "тёплый влажный воздух и запах болота",  -- 1127
+        "%s, %s: %s",  -- 1128
+        "Известно маршрутов полёта: %d.",  -- 1129
+        "Полёты: ваш ездовой зверь на полосе",  -- 1130
+        "грифон, ветрокрыл или летучая мышь (кого дал распорядитель полётов) скользит по полосе полёта к месту посадки",  -- 1131
+        "Полёты: погода в месте посадки",  -- 1132
+        "при посадке в чате сказано, какой воздух там, где вы приземлились, каким место обычно бывает (жарко и влажно в Тернистой долине, снег под ногами в Дун Мороге), и время суток",  -- 1133
+        "показать маршруты полёта с известным временем",  -- 1134
+        "На землю! +%d",  -- 1135
+        "Столкновение: серия прервана",  -- 1136
+        "%s взмах  ·  облетайте верхушки деревьев и дирижабли",  -- 1137
+        "%s ловите всадников сетью за полётное золото  ·  %s большая высота",  -- 1138
+        "%d полётного золота",  -- 1139
+        "%s взмах",  -- 1140
+        "%s сеть",  -- 1141
+        "%s большая высота",  -- 1142
+        "%s: назад к игре (%d полётного золота)",  -- 1143
+        "%s: игра в пути",  -- 1144
+        "Игра в полёте выключена: /cchud flightgame on",  -- 1145
+        "В игру в полёте играют во время полёта.",  -- 1146
+        "Не в бою.",  -- 1147
+        "Игра в полёте: играть / большая высота",  -- 1148
+        "в полёте: запустить игру в полёте или поднять её на большую высоту и обратно",  -- 1149
+        "Кинематографичные полёты: камера кружит вокруг вас",  -- 1150
+        "в кино камера медленно кружит вокруг вас и вашего средства передвижения, полный круг примерно за полторы минуты, и перед посадкой снова оказывается позади вас. Выкл.: неподвижный кадр",  -- 1151
+        "Не в сети",  -- 1152
+        "Мёртв",  -- 1153
+        "Выкл.",  -- 1154
+        "В специализации лекаря",  -- 1155
+        "Всегда",  -- 1156
+        "Слишком далеко",  -- 1157
+        "Группа и рейд лекаря",  -- 1158
+        "в группе: ваша группа рядом с персонажем, у каждого кнопка, которая выбирает его целью; в рейде: тонкие рамки. Каждая показывает лишь, сколько лечения нужно, дебафф, который вы можете снять, и в пределах ли он досягаемости",  -- 1159
+        "шанс продажи %d%%",  -- 1160
+        "Уйдёт наверняка (%d%%)",  -- 1161
+        "Само продастся (%d%%)",  -- 1162
+        "Думаю, продастся (%d%%)",  -- 1163
+        "Покупатель найдётся (%d%%)",  -- 1164
+        "Пятьдесят на пятьдесят (%d%%)",  -- 1165
+        "Может пойти как угодно (%d%%)",  -- 1166
+        "Немного рискованно (%d%%)",  -- 1167
+        "Может полежать (%d%%)",  -- 1168
+        "Я бы не рассчитывал (%d%%)",  -- 1169
+        "Шансы так себе, друг (%d%%)",  -- 1170
+        "+%s сверх цены торговца",  -- 1171
+        "цена пока неизвестна",  -- 1172
+        "торговец платит столько же",  -- 1173
+        "Маклер",  -- 1174
+        "Рынок",  -- 1175
+        "каждая монета на счету, друг",  -- 1176
+        "Ничего из вашей сумки нельзя продать здесь.",  -- 1177
+        "Нет цен за последние 7 дней.",  -- 1178
+        "Пока цены лишь за один день: каждый день, когда вы заходите на аукцион, добавляется свеча.",  -- 1179
+        "7 дней, свеча на день: зелёная закрылась выше, красная ниже",  -- 1180
+        "30 дней, минимум дня: зелёный рост, красный спад",  -- 1181
+        "Истории цен пока нет: прочитайте аукцион в течение нескольких дней.",  -- 1182
+        "Пока цены лишь за один день: линия растёт с каждым днём, когда вы заходите на аукцион.",  -- 1183
+        "Прошу %s за штуку, %s за %d, что отпускаешь; %d остаются у тебя",  -- 1184
+        "Просит %s за шт., %s за все %d",  -- 1185
+        "Мин.",  -- 1186
+        "прочитано %s",  -- 1187
+        "Обычно",  -- 1188
+        "7 дней: от %s до %s",  -- 1189
+        "Выставлено: %d аукционов, %d предметов",  -- 1190
+        "%s за шт., %s за все %d",  -- 1191
+        "Вы выставили здесь %d, продано аукционов: %d",  -- 1192
+        "Цена неизвестна: сначала прочитайте аукцион.",  -- 1193
+        "В сумках нечего продать здесь.",  -- 1194
+        "Сегодня здесь ничего не продать дороже, чем торговцу; %d, может быть, если подождать.",  -- 1195
+        "Лучшее сверху: %d продать здесь выгоднее, чем торговцу, ещё %d - если подождать.",  -- 1196
+        "Сумки пусты, друг. Принеси что-нибудь на продажу.",  -- 1197
+        "Сегодня ничто не обгонит торговца. Разве что %d, если потерпеть.",  -- 1198
+        "Верной прибыли в этих сумках нет, друг. %d могут окупиться, если подождёшь.",  -- 1199
+        "Лучшее наверху: %d тут выгоднее любого торговца, ещё %d — для терпеливых.",  -- 1200
+        "%d здесь дадут больше, чем торговец, лучшее первым. Ещё %d, если подождёшь.",  -- 1201
+        "Верх кучи платит лучше всех: %d верных продаж, ещё %d, если подождёшь.",  -- 1202
+        "Цен пока нет: %s прочитает аукцион.",  -- 1203
+        "Цены только что прочитаны: %d.",  -- 1204
+        "Цен: %d, прочитаны %s.",  -- 1205
+        "Цен: %d, прочитаны %s. %s прочитает снова.",  -- 1206
+        "Доску я ещё не читал. %s — и принесу все цены.",  -- 1207
+        "Цен пока нет, друг. %s читает всю доску.",  -- 1208
+        "Цены свежие, прямо с доски, друг: %d.",  -- 1209
+        "Только что прочёл доску: %d цен, ещё тёплые.",  -- 1210
+        "%d цен, прочитано %s. Сойдёт, друг.",  -- 1211
+        "Последний взгляд на доску: %s, %d цен.",  -- 1212
+        "Цены прочитаны %s, чёрствые, как старый хлеб. %s перечитает доску.",  -- 1213
+        "%d цен, но прочитаны %s. %s — и я взгляну снова.",  -- 1214
+        "Показано и то, что вы храните. %s скроет.",  -- 1215
+        "Отложено: %d - для профессий, снаряжения и ваших меток. %s покажет.",  -- 1216
+        "То, что ты оставляешь, тоже в списке. %s уберёт.",  -- 1217
+        "Показываю и то, что ты оставляешь. %s снова скроет.",  -- 1218
+        "Отложено: %d — для ремёсел, чтобы надеть, отмеченное тобой. %s покажет.",  -- 1219
+        "%d отложил: на ремесло, на себя и по твоим отметкам. %s, если нужны.",  -- 1220
+        "за шт.",  -- 1221
+        "нет данных",  -- 1222
+        "Быстро",  -- 1223
+        "Терпеливо",  -- 1224
+        "Прочитать все цены",  -- 1225
+        "Скрыть хранимое",  -- 1226
+        "Показать хранимое",  -- 1227
+        "Линия",  -- 1228
+        "Свечи",  -- 1229
+        "Выставить",  -- 1230
+        "%d из %d",  -- 1231
+        "Выставить %d из %d по %s за штуку",  -- 1232
+        "Выставить %d за %s",  -- 1233
+        "Выставить все %d за %s",  -- 1234
+        "Отсюда нельзя выставлять лоты на аукцион этого клиента.",  -- 1235
+        "Выставлено %d за %s.",  -- 1236
+        "Рынок на аукционе: открыть / закрыть",  -- 1237
+        "Приветствие аукциониста на Рынке",  -- 1238
+        "гоблин-аукционист произносит короткую фразу из звуков самой игры, когда открывается Рынок; выкл.: открывается молча",  -- 1239
+        "Рынок: показывать хранимое",  -- 1240
+        "Рынок показывает и то, что вы храните: на чём ваши профессии ещё учатся или что превращают в более ценное, и то, что вы отметили для хранения; выкл.: только то, что вы бы продали",  -- 1241
+        "Рынок: график цен свечами",  -- 1242
+        "график цен на Рынке — свеча на каждый из последних 7 дней (где цена открылась, её максимум и минимум и где закрылась: зелёная, если закрылась выше, красная — если ниже); выкл.: линия дневного минимума за 30 дней",  -- 1243
+        "открыть или закрыть Рынок (вкладка аукциона)",  -- 1244
+        "какой аукцион у этого клиента (для поиска неисправностей)",  -- 1245
+        "Откройте окно профессии, и я посмотрю ваши рецепты.",  -- 1246
+        "Это предел, %d. Следующий уровень даст наставник профессии.",  -- 1247
+        "На %d учиться больше нечему. Сходите к наставнику за следующим уровнем.",  -- 1248
+        "Вы переросли свои рецепты. Сходите к наставнику: %s ждёт вас на %d.",  -- 1249
+        "Ещё %d до %d, а то, что вы знаете, туда не доведёт. У наставника есть %s для вас на %d.",  -- 1250
+        "Вы переросли свои рецепты. Сходите к наставнику: %s ждёт вас.",  -- 1251
+        "Рецепты перестают учить вас за %d до %d. Спросите у наставника %s.",  -- 1252
+        "Рецепты иссякают за %d до %d. У наставника найдётся что-то новое.",  -- 1253
+        "Того, что вы знаете, не хватит на последние %d. Пора к наставнику.",  -- 1254
+        "%s уже мало чему научит, но лучше у вас ничего нет. Ещё %d до %d.",  -- 1255
+        "Дальше медленно: %s изредка даёт очко. Осталось %d.",  -- 1256
+        "Сначала вам понадобится %s, %s. С этого гайды начинают этот отрезок.",  -- 1257
+        "Выучите %s, %s, и начнём: ещё %d до %d.",  -- 1258
+        "Ещё %d до %d. Гайды отправляют вас за %s до %d.",  -- 1259
+        "Здесь учит сбор: %s до %d.",  -- 1260
+        "Ещё %d до %d. Начните с %s или, если хотите, с %s: %s.",  -- 1261
+        "Сначала %s, как в гайдах. %s тоже подойдёт: %s.",  -- 1262
+        "Ещё %d до %d. Начните с %s.",  -- 1263
+        "%s — теперь ваш лучший учитель. %d очков до %d.",  -- 1264
+        "Твёрдая рука. Сначала %s, и осталось %d.",  -- 1265
+        "у наставника",  -- 1266
+        "у торговца",  -- 1267
+        "в добыче",  -- 1268
+        "за задание",  -- 1269
+        "материалы дешевле",  -- 1270
+        "материалы у торговца",  -- 1271
+        "материалы, которые вы собираете сами",  -- 1272
+        "хорошо продаётся",  -- 1273
+        "пригодится вам самим",  -- 1274
+        "меньше изготовлений",  -- 1275
+        "рецепт, который надо найти или купить",  -- 1276
+        "другие материалы",  -- 1277
+        "первый выбор гайдов",  -- 1278
+        "Откройте окно профессии, чтобы увидеть план прокачки.",  -- 1279
+        "Предел, %d. Следующий ранг у учителя.",  -- 1280
+        "Ещё %d до %d; рецептов не хватит. У учителя есть %s на %d.",  -- 1281
+        "Ещё %d до %d; рецептов не хватит. У учителя есть %s.",  -- 1282
+        "Рецепты заканчиваются за %d до %d. У учителя есть ещё.",  -- 1283
+        "Ещё %d до %d. Лучшее сейчас: %s, зелёный (очко время от времени).",  -- 1284
+        "Ещё %d до %d. Сначала выучите %s, %s.",  -- 1285
+        "Ещё %d до %d. Собирайте %s до %d.",  -- 1286
+        "Ещё %d до %d. Сначала: %s или %s (%s).",  -- 1287
+        "Ещё %d до %d. Сначала: %s.",  -- 1288
+        "Собрать или купить",  -- 1289
+        "%d раз: %s",  -- 1290
+        "Выучите %s, с %d.",  -- 1291
+        "Выучите %s.",  -- 1292
+        "%s: %d в сумках, %d в банке, %d за раз",  -- 1293
+        "Гайды проходят этот отрезок, собирая %s.",  -- 1294
+        "%s: у вас %d, план использует %d",  -- 1295
+        "для %s",  -- 1296
+        "Купить дешевле, чем делать из: %s",  -- 1297
+        "Делается из: %s",  -- 1298
+        "Наставник: что можно сделать с банком",  -- 1299
+        "Что можно сделать из банка",  -- 1300
+        "С тем, что лежит в банке, больше ничего не сделать.",  -- 1301
+        "%d можно сделать с учётом банка, %d из них только с ним.",  -- 1302
+        "Наставник: %s %d > %d",  -- 1303
+        "Наставник",  -- 1304
+        "План прокачки",  -- 1305
+        "или",  -- 1306
+        "Собирать %s",  -- 1307
+        "выучить",  -- 1308
+        "дешевле купить",  -- 1309
+        "Скрыть",  -- 1310
+        "План",  -- 1311
+        "Фармить это",  -- 1312
+        "Фармить всё",  -- 1313
+        "С банком",  -- 1314
+        "Управлять планом",  -- 1315
+        "дважды — скрыть",  -- 1316
+        "Здесь нечего примерить.",  -- 1317
+        "Добавлено в список фарма: %d.",  -- 1318
+        "Всего хватает: у вас есть всё нужное.",  -- 1319
+        "Откройте окно профессии, чтобы составить план.",  -- 1320
+        "Наставник (план прокачки): показать / скрыть",  -- 1321
+        "показывает план прокачки последнего открытого окна профессии, с кнопками контроллера на нём",  -- 1322
+        "Слева от заданий",  -- 1323
+        "Справа от заданий",  -- 1324
+        "Под заданиями",  -- 1325
+        "Список фарма полон.",  -- 1326
+        "Список фарма: %s, нужно %d.",  -- 1327
+        "Фарм",  -- 1328
+        "ещё %d",  -- 1329
+        "Пока нечего фармить.",  -- 1330
+        "На стопку больше",  -- 1331
+        "Убрать",  -- 1332
+        "Очистить",  -- 1333
+        "Готово",  -- 1334
+        "Убрать всё из списка фарма?",  -- 1335
+        "Список фарма: выбрать / готово",  -- 1336
+        "Список фарма: добавить предмет под указателем",  -- 1337
+        "Этого нет в списке фарма.",  -- 1338
+        "Список фарма пуст.",  -- 1339
+        "Список фарма: где он стоит",  -- 1340
+        "список фарма слева от списка заданий, справа от него или под его заданиями",  -- 1341
+        "список фарма рядом со списком заданий: выбор контроллером; add <предмет> [сколько], remove <предмет>, clear, или left / right / bottom для его места",  -- 1342
+        "Процент угрозы",  -- 1343
+        "ваша доля угрозы числом рядом со значком угрозы, на рамке цели и на индикаторах здоровья",  -- 1344
+        "Число здоровья",  -- 1345
+        "оставшееся здоровье, сокращённо (12.3k), на полосе (не на компактных индикаторах: там хватает процента)",  -- 1346
+        "Ваши ослабления",  -- 1347
+        "ваши ослабления на цели, над её именем, с оставшимся временем",  -- 1348
+        "Дебаффы от всех",  -- 1349
+        "дебаффы, которые игра отмечает для индикаторов здоровья от всех, а не только ваши",  -- 1350
+        "Баффы врага",  -- 1351
+        "усиления врага рядом с его ослаблениями: только важные (важные, исступление или те, что вы можете рассеять или украсть), или все, если «Только важные эффекты» выключено",  -- 1352
+        "Значок контроля",  -- 1353
+        "большой значок с временем, когда цель оглушена, обездвижена, испугана...",  -- 1354
+        "Свечение угрозы",  -- 1355
+        "значок щита и свечение за именем: красное, пока он атакует вас, красное и жёлтое, когда вы вот-вот перетянете его, жёлтое и синее, когда вы его теряете, синее, когда он не на вас",  -- 1356
+        "Метка задания",  -- 1357
+        "золотая отметка на целях, которые еще нужны для ваших заданий",  -- 1358
+        "Анимация индикаторов здоровья",  -- 1359
+        "индикаторы плавно появляются, низкое здоровье «дышит», контроль толпы мерцает",  -- 1360
+        "Маленькие",  -- 1361
+        "Обычные",  -- 1362
+        "Большие",  -- 1363
+        "Полное имя",  -- 1364
+        "Короткое имя",  -- 1365
+        "Без имени",  -- 1366
+        "Полный",  -- 1367
+        "Минимальный мини",  -- 1368
+        "Размер индикаторов",  -- 1369
+        "размер полос на индикаторах здоровья: маленькие и тонкие, обычные или большие (шире и выше)",  -- 1370
+        "Имена на индикаторах",  -- 1371
+        "имя на индикаторе с полосой здоровья: полностью, сокращённо или без него (рамка цели показывает его полностью; уровень и значок класса остаются). Индикатор без полосы, у дружественного НИП, всегда сохраняет имя",  -- 1372
+        "Вид индикаторов",  -- 1373
+        "переключатели индикаторов одним нажатием. Полный: всё. Минимальный: без полосы ресурса, гильдии и звания, короткие имена. Минимальный мини: маленькие полосы со здоровьем, ваши отрицательные эффекты и важные положительные, уровень и класс, без имени (оно в рамке цели). Угроза, контроль и заметные заклинания остаются всегда",  -- 1374
+        "Звания игроков",  -- 1375
+        "показывает звание игрока рядом с его именем",  -- 1376
+        "Гильдии и занятия NPC",  -- 1377
+        "строка под именем: гильдия игрока или чем занимается NPC",  -- 1378
+        "Полосы союзников в бою",  -- 1379
+        "индикаторы дружественных целей показывают здоровье, ресурс и заклинания, пока цель в бою",  -- 1380
+        "Собственные дружественные индикаторы игры",  -- 1381
+        "оставить дружественные индикаторы (ваша группа, другие игроки, дружественные NPC) в виде игры; наши — только на врагах",  -- 1382
+        "Полосы ресурса",  -- 1383
+        "тонкая полоса маны, ярости или энергии под полосой здоровья",  -- 1384
+        "Цель заклинания",  -- 1385
+        "на кого направлено заклинание, рядом с его названием",  -- 1386
+        "Здоровье в процентах",  -- 1387
+        "процент здоровья на полосе",  -- 1388
+        "Имя на табличке цели",  -- 1389
+        "выкл.: табличка вашей цели не показывает имя и уровень (их показывает рамка цели)",  -- 1390
+        "Уровни на табличках",  -- 1391
+        "уровень перед именем противника, цвет по сложности",  -- 1392
+        "Компактные индикаторы здоровья",  -- 1393
+        "индикаторы здоровья примерно вдвое уже",  -- 1394
+        "Заметные заклинания врагов",  -- 1395
+        "заклинание врага мигает, раздувается и пульсирует все быстрее, пока не завершится, чтобы его можно было прервать вовремя",  -- 1396
+        "Значки классов на индикаторах",  -- 1397
+        "значок класса игрока перед его именем, друг это или враг",  -- 1398
+        "Чем заняты НИП, значками",  -- 1399
+        "значок над дружественными НИП, которые что-то предлагают: сумка над торговцами, наковальня над кузнецами, которые чинят, книга над учителями... (значки самой игры; видны, даже пока индикатор ждёт, чтобы на него указали)",  -- 1400
+        "Дружественные NPC только при наведении",  -- 1401
+        "индикаторы дружественных NPC (торговцев, раздающих задания, горожан) показываются, только пока вы наводите на них курсор, как и их подсказка",  -- 1402
+        "Названия над предметами, с которыми можно взаимодействовать",  -- 1403
+        "название над рудой, сундуками, табличками и тому подобным, пока вы стоите к ним лицом (выкл.: они остаются без названия, подсказка самой игры уже говорит, что это)",  -- 1404
+        "Мини-индикаторы",  -- 1405
+        "прислужники, зверьки и серые противники без опыта получают маленькую табличку: тонкая полоса с вашими эффектами на ней и без имени (зверёк без полосы сохраняет имя; есть ли таблички вообще, решает настройка игры)",  -- 1406
+        "Индикаторы группы в подземельях: только имена",  -- 1407
+        "в подземелье или рейде игра сама рисует индикаторы здоровья дружественных игроков, и аддоны не могут их менять: там собственные настройки игры выставляются так, чтобы они показывались как имена цвета класса без полос, как наши, а на время боя полосы игры возвращаются (если включены полосы союзников в бою); при выходе всё возвращается обратно",  -- 1408
+        "Индикаторы группы в подземельях: скрыты",  -- 1409
+        "в подземелье или рейде полностью выключить индикаторы здоровья дружественных игроков (и вернуть как было, когда вы выходите)",  -- 1410
+        "показывает, что игра отдаёт для имени вашей цели (для поиска неполадок)",  -- 1411
+        "показать индикаторы на экране и в нашем ли они виде (для поиска проблем)",  -- 1412
+        "Так, ладно.",  -- 1413
+        "Ох, ну и куча.",  -- 1414
+        "Так, посмотрим, посмотрим...",  -- 1415
+        "Элуна, дай мне терпения.",  -- 1416
+        "Во имя наару, ну и мешанина.",  -- 1417
+        "Проклятый мешок.",  -- 1418
+        "Опрятный мешок - лёгкий мешок.",  -- 1419
+        "Ба. Слишком много барахла.",  -- 1420
+        "Мёртвый груз, всё до последнего.",  -- 1421
+        "Терпение. Мать-Земля даст.",  -- 1422
+        "Эй, что тут у нас, мон?",  -- 1423
+        "Какой беспорядок. Недостойно.",  -- 1424
+        "Время - деньги. Посчитаем.",  -- 1425
+        "Ага, сойдёт.",  -- 1426
+        "Хвала Элуне.",  -- 1427
+        "Свет даст.",  -- 1428
+        "Хрм. Сойдёт.",  -- 1429
+        "Хм. Хватит, чтобы сражаться.",  -- 1430
+        "Путешествую налегке. Хорошо.",  -- 1431
+        "Приемлемо. Едва.",  -- 1432
+        "Ни одного свободного места. Хлам принесёт %s: продав его, освобожу место.",  -- 1433
+        "Ни одного свободного места. Всё, что не нужно в пути, подождёт в банке.",  -- 1434
+        "Хлам: %d, здесь стоит %s. X продаёт выбранное; Умная продажа забирает всё.",  -- 1435
+        "%d из этого место в банке: там уже есть такое же, или я это пометил. «Положить» уберёт.",  -- 1436
+        "Осталось всего %d мест. Хлам у любого торговца принесёт %s.",  -- 1437
+        "Осталось всего %d мест. Пора что-то продать или сдать в банк.",  -- 1438
+        "Нового с прошлого раза: %d. Каждое отмечено золотой точкой.",  -- 1439
+        "Стоит продать: %d. Фильтр «Продать» собирает их, а подсказка говорит, где дадут больше.",  -- 1440
+        "Хлам: %d, стоит %s. Отдам ближайшему торговцу.",  -- 1441
+        "Только самое нужное. Продавать нечего.",  -- 1442
+        "Всё в порядке, свободно мест: %d.",  -- 1443
+        "Ваше снаряжение починено: %s.",  -- 1444
+        "Могу починить снаряжение за %s; сломанная вещь не даёт ни брони, ни характеристик.",  -- 1445
+        "Сумки полны. Возьму %d вещей за %s: «Умная продажа» - и снова есть место.",  -- 1446
+        "Дам %s за %d вещей: хлам и то, за что аукцион больше не даст. «Умная продажа» - и готово.",  -- 1447
+        "Оставьте %d вещей для аукциона: там дадут на %s больше, чем я.",  -- 1448
+        "Сумки полны. Продайте мне что-нибудь, прежде чем покупать.",  -- 1449
+        "В ваших сумках нет ничего, за что я хорошо заплачу. Взгляните на мой товар.",  -- 1450
+        "%d из того, что вы носите, место здесь: у меня есть такое же, или вы это пометили. «Положить» уберёт.",  -- 1451
+        "У меня есть ещё %d вещей из тех, что вы носите. «Забрать» пополнит сумки перед дорогой.",  -- 1452
+        "Сумки почти полны. Оставьте у меня то, что не понадобится в пути.",  -- 1453
+        "У меня всё в сохранности, а в сумках свободно мест: %d.",  -- 1454
+        "Сегодня для вас ничего. Я проверил дважды.",  -- 1455
+        "Писем для вас: %d, без вложений. Читайте, когда захотите.",  -- 1456
+        "Писем для вас: %d. Внутри: %s.",  -- 1457
+        "«Забрать всё» опустошит их за раз.",  -- 1458
+        "Наложенным платежом: %d. Их вы открываете и оплачиваете сами.",  -- 1459
+        "Сумки полны: предметы подождут в письмах.",  -- 1460
+        "Куда летим? Укажите место, и я скажу, сколько длится полёт.",  -- 1461
+        "%s: около %s по карте. Этот маршрут вы ещё не летали.",  -- 1462
+        "%s: около %s, судя по вашему прошлому полёту туда.",  -- 1463
+        "%s: пока не скажу, сколько. Слетайте разок, и я буду знать.",  -- 1464
+        "Сорвалось: %d. Этой воде нужно больше навыка, чем у меня: поможет наживка, и удочка получше тоже.",  -- 1465
+        "На крючке нет наживки. Она прибавляет к навыку, и срывается меньше.",  -- 1466
+        "Наживка почти кончилась. Новая на крючке сохранит навык.",  -- 1467
+        "Рыбы здесь, что я ещё не ловил: %d. Забрасываю дальше.",  -- 1468
+        "Я поймал всю рыбу этой воды. Значит, в новое место.",  -- 1469
+        "Ещё ничего не поймано. Первая рыба каждой воды записывается сюда.",  -- 1470
+        "Поймано видов: %d. В каждой воде прячется ещё несколько: панель рыбалки показывает ? для тех, что я там не ловил.",  -- 1471
+        "Отдохнул у огня: следующие %d опыта за убийства идут вдвойне.",  -- 1472
+        "Отдыха не накоплено. Ночь в таверне или в городе - и какое-то время убийства дают двойной опыт.",  -- 1473
+        "%d поглощено",  -- 1474
+        "Лента справа",  -- 1475
+        "По одному в центре",  -- 1476
+        "Крит. исцелений: %d",  -- 1477
+        "Критов: %d",  -- 1478
+        "Правосудие",  -- 1479
+        "Яркие моменты: где",  -- 1480
+        "блок прямо над оповещениями о восстановлении справа от вашего персонажа: новый ближе к ним, а прежние поднимаются выше, угасая, или по одному в центре",  -- 1481
+        "показывает, как выглядит и ощущается большой момент",  -- 1482
+        "собрана",  -- 1483
+        "собрана через другой предмет",  -- 1484
+        "еще не собрана",  -- 1485
+        "Модель",  -- 1486
+        "Выберите комплект, чтобы надеть его предметы на образ. %s сохраняет его; до этого ничего не оплачивается.",  -- 1487
+        "Просматриваем вашу коллекцию...",  -- 1488
+        "Образ снова такой, каким был.",  -- 1489
+        "%s: надето %d из %d предметов.",  -- 1490
+        "Не подошло к этому образу: %d.",  -- 1491
+        "Один комплект, от которого у вас есть предметы",  -- 1492
+        "Комплектов, от которых у вас есть предметы: %d",  -- 1493
+        "вы не можете это носить",  -- 1494
+        "нет",  -- 1495
+        "Все предметы: %d",  -- 1496
+        "%d из %d предметов",  -- 1497
+        "Нет: %s",  -- 1498
+        "Комплектов пока нет. Предметы с общим названием, например Зеленый железный шлем и Зеленые железные рукавицы, появятся здесь, как только у вас будет хотя бы один.",  -- 1499
+        "Отменить",  -- 1500
+        "Удалить собственный комплект %s? Вернуть его будет нельзя.",  -- 1501
+        "Удалить",  -- 1502
+        "Сначала наведите курсор на собственный комплект.",  -- 1503
+        "%s  Удалить собственный комплект",  -- 1504
     },
     zhCN = {
         "错误：",  -- 1
@@ -13020,529 +13036,531 @@ local TRANSLATIONS = {
         "罗盘需要知道你在哪里，而游戏在这里不提供。",  -- 977
         "任务罗盘：位置",  -- 978
         "在屏幕顶部，或在底部经验条的位置（经验条随之移到顶部）",  -- 979
-        "在任务罗盘上你周围显示几个标记，持续二十秒",  -- 980
-        "钓鱼模式：关闭。",  -- 981
-        "钓鱼：按%s抛竿",  -- 982
-        "没有鱼饵：按两次%s使用%s",  -- 983
-        "按%s收起鱼竿",  -- 984
-        "钓鱼模式：按%s抛竿，鱼漂晃动时再按一次收竿。",  -- 985
-        "%s 收竿，%s 重新抛竿",  -- 986
-        "钓鱼模式需要手持鱼竿。",  -- 987
-        "你没有学会钓鱼。",  -- 988
-        "钓鱼模式：一个按钮抛竿和提竿",  -- 989
-        "钓鱼按键：%s",  -- 990
-        "一键重新抛竿",  -- 991
-        "浮标在水中时，钓鱼按钮用来收竿，按一下 A 重新抛竿；关闭：A 归你",  -- 992
-        "双击上饵",  -- 993
-        "快速按两下钓鱼按键：当鱼竿上没有鱼饵时，第二下会把背包里最好的鱼饵装到鱼竿上",  -- 994
-        "钓鱼时隐藏手柄动作条",  -- 995
-        "手持鱼竿时隐藏手柄动作条，水面一览无余；钓鱼提示显示抛竿的按钮。战斗开始或收起鱼竿时立即恢复",  -- 996
-        "暂时关闭一键钓鱼，或重新开启（手持鱼竿时会自动开启）",  -- 997
-        "用于钓鱼的按键：起初是你的互动键（方块或 X），也可以是任何其他按键，例如扳机键 (rt)",  -- 998
-        "杜隆塔尔的海岸尽是红岩与温暖的浅滩。回音群岛的巨魔说，潮水捎来岛上炊火味道的时候，鲭鱼群最旺。",  -- 999
-        "莫高雷的湖泊小巧、清澈，也很有耐心。牛头人钓鱼和做别的事一样：慢慢来，并且心怀感恩。",  -- 1000
-        "贫瘠之地的每一处绿洲都是聚会的地方。不管白天来喝水的是什么，夜里总有东西在水下游动。",  -- 1001
-        "泰达希尔的水潭全都躺在同一棵树的树荫里。暗夜精灵钓手们发誓说，那儿的鱼从没见过太阳，也并不想念。",  -- 1002
-        "黑海岸的海水灰暗、冰冷，满是沉船。在奥伯丁外海咬钩的鱼，有一半都把家安在了别人丢失的货物里。",  -- 1003
-        "灰谷的河流在比大多数王国还古老的树叶下流淌。鱼儿很快，哨兵赶来盘问你在干什么更快。",  -- 1004
-        "在千针石林的谷底，水很稀少，被人看得很紧。这里的鱼，位置都是自己挣来的。",  -- 1005
-        "石爪山脉的湖泊高踞群峰之间，寒冷刺骨。要不是这么好钓，地精早就把湖水抽干了。",  -- 1006
-        "凄凉之地的海岸只有白骨和灰色的浪。水底下有什么东西，对这两样都很有胃口。",  -- 1007
-        "菲拉斯一路绿到水边。那里的河又深又暖，生机勃勃得很。",  -- 1008
-        "没人说得清尘泥沼泽的陆地到哪儿为止、水从哪儿开始。站在岸上钓吧，钓完记得数数脚趾。",  -- 1009
-        "整个塔纳利斯只有热砂港的水还配叫水。地精会把钓鱼的权利卖给你，你要是不留神，他们会卖两次。",  -- 1010
-        "艾萨拉明亮的海湾之下躺着一座沉没的城市。老钓手说，大家伙都住在从前的花园里。",  -- 1011
-        "费伍德森林的水潭会发光，可不是什么好兆头的那种光。还在里面游的东西，顽固得不讲道理。",  -- 1012
-        "安戈洛的温泉和焦油环绕的湖泊，留住了被外面的世界遗忘的东西。其中有一些还会咬。",  -- 1013
-        "月光林地的月神湖平静得像屏住的一口气。德鲁伊只有一个请求：吃多少，钓多少。",  -- 1014
-        "希利苏斯只有沙子、风和振翅的声音。要是你在这儿找到了能钓鱼的水，谁也别告诉。",  -- 1015
-        "冬泉谷的湖泊边缘结冰，中间却冒着热气。那里的鱼为了御寒长得肥美，值得走这一趟。",  -- 1016
-        "在奥格瑞玛的水池边钓鱼的，是闲着没事的苦工，还有自称也闲着没事的老步兵。两种人都会告诉你，大的那条跑了。",  -- 1017
-        "雷霆崖池塘里的鱼，一辈子都住在远高于平原的地方。它看上去倒挺淡定。",  -- 1018
-        "达纳苏斯照看水域，就像照看神殿一样用心。鱼儿早已习惯了被人欣赏。",  -- 1019
-        "奥特兰克山脉的湖水是融化的雪水，食人魔和辛迪加趁没人看见的时候在那儿钓鱼。",  -- 1020
-        "阿拉希的岸边见过的军队比钓手还多。水面上飘的是谁家的旗帜，鱼儿早就不在乎了。",  -- 1021
-        "荒芜之地从这头到那头全是尘土。在这里有鱼咬钩算是个小小的奇迹，请拿它当奇迹对待。",  -- 1022
-        "诅咒之地的海岸赤红、荒秃而寂静。能活在那片浪里的东西，早就学会了忍受许多。",  -- 1023
-        "提瑞斯法的湖泊静卧在病恹恹的天空下。被遗忘者钓鱼是出于习惯；死人吃得不多，但他们记得自己曾经爱吃。",  -- 1024
-        "银松森林漫长的海岸上只有雾气和松影。这里鱼很好钓，这也是人们对这地方唯一说得出的好话。",  -- 1025
-        "西瘟疫之地的河还在流，只是不干净。从里面拉上来的东西，请多看一眼。",  -- 1026
-        "很少有人在东瘟疫之地钓鱼，肯承认的就更少了。瘟疫给这片水留下了多少，它就守着多少。",  -- 1027
-        "希尔斯布莱德的河流和漫长的南岸，在每一场为争夺它们而起的纷争中，都养活过交战的双方。",  -- 1028
-        "辛特兰把湖泊藏在高处的林间，蛮锤矮人以为没人看见的时候，会骑在狮鹫背上钓鱼。",  -- 1029
-        "丹莫罗的湖泊一年里大半时间都围着一圈冰。矮人会凿个洞，端着一杯酒坐下来，不管钓上什么都说今天过得不错。",  -- 1030
-        "别处有河的地方，灼热峡谷有的是熔岩。还是改带点喝的来吧。",  -- 1031
-        "燃烧平原只有灰烬和余火。这里的水要是真肯给你点什么，那也一定是烫的。",  -- 1032
-        "艾尔文的每个孩子都是在水晶湖或石碑湖学会钓鱼的。那里的小鱼已经把一代又一代的孩子耍得团团转。",  -- 1033
-        "逆风小径水少，欢迎你的人更少。卡拉赞下面水潭里的东西，最好就让它留在那儿。",  -- 1034
-        "沿着暮色森林边缘流淌的河，什么时候看都是黑的。鱼似乎不介意黑暗，钓鱼的人可介意。",  -- 1035
-        "洛克湖是洛克莫丹的骄傲，由宏伟的巨石水坝拦蓄而成。矮人讲钓鱼故事时总爱拿它来比，而赢的通常是湖。",  -- 1036
-        "赤脊山的止水湖美得像一幅画，湖畔镇的每座码头上都有人垂钓。镇民知道每一个好钓点，却一个也不会告诉你。",  -- 1037
-        "从丛林里的河流到荒凉的南海角，荆棘谷拥有这片大陆上最丰饶的水域。藏宝海湾的钓手为此举办钓鱼大赛，而且几乎个个作弊。",  -- 1038
-        "悲伤沼泽就是绿树下的一片绿水。鱼有股泥味，而本地人就好这一口。",  -- 1039
-        "西部荒野的田地荒了，海岸却没有。留下来的人靠着这条漫长的灰色海岸过活。",  -- 1040
-        "湿地名副其实。米奈希尔港的码头是这里最干的钓鱼处，鳄鱼们也清楚这一点。",  -- 1041
-        "在暴风城运河边钓鱼的有孩子、退休老人，还有至少一位乔装打扮的贵族。运河里还有些什么，没人过问。",  -- 1042
-        "荒弃的洞穴里有铁炉堡唯一一处安静的水潭。老矮人一钓就是几个钟头，一句话也不说。",  -- 1043
-        "幽暗城的运河泛着一种绿色，跟水藻毫无关系。在那儿钓鱼的被遗忘者，可不是为了晚饭。",  -- 1044
-        "大多数钓手钓上的第一条鱼，鲜亮得让人忘不了。",  -- 1045
-        "滑溜、敏捷，每一处温暖的海岸都很常见。烤着吃比它的名字听起来要好。",  -- 1046
-        "浑身上下就是一张嘴，在你不愿喝的水里过得最快活。",  -- 1047
-        "个头小，牙齿尖，天不怕地不怕。据说一群这种鱼曾把一头熊赶出了洛克湖。",  -- 1048
-        "浪花下的一抹亮色。水手们认为钓线上挂着一条，这趟航行就会走运。",  -- 1049
-        "一种很有耐心的底栖鱼，长着矮人长老一般的胡须。",  -- 1050
-        "没人会吃第二次。炼金师却是有多少收多少。",  -- 1051
-        "它的鳍像压着火的余炭一样发亮，榨出来的油烧起来也差不了多少。",  -- 1052
-        "像一面小盾牌一样披着甲。里面的肉值得你费这番功夫。",  -- 1053
-        "哀嚎洞穴附近的水里有什么东西改变了它。吃上一条，你也可能跟着变一阵子。",  -- 1054
-        "住在河边的人说，吃一顿它能让头脑清明。让它变聪明的，其实是逆流而上的那段路。",  -- 1055
-        "比它的表亲更老、更大，也更睿智，可这并没有让它躲开你的鱼钩。",  -- 1056
-        "来自温暖南海的狠角色，挣扎起来毫不含糊。从藏宝海湾到加基森，每家酒馆的菜牌上都少不了它。",  -- 1057
-        "它的额头像真正的秘银一样闪亮。想把它拿去熔炼的矿工不止一个。",  -- 1058
-        "它的鳞片能熬成一种油，让皮肤硬如岩石。它更喜欢夜晚。",  -- 1059
-        "亮得像阅兵用的胸甲，也差不多一样沉。",  -- 1060
-        "它只在寒冷的月份才游到近岸，懂行的厨师会等上一整年。",  -- 1061
-        "白昼变长的时候它就成群洄游。沿海的人靠它来辨认时节。",  -- 1062
-        "抓它要抓中间，而且只有一次机会。",  -- 1063
-        "来自荒野之地的河鱼，鳃红得像巨魔的战纹。",  -- 1064
-        "它在天黑后觅食。用它熬的汤能安抚施法者的神经。",  -- 1065
-        "它在白天觅食，几乎处处与夜鳞鲷鱼相反，却照样与它同住一片水。",  -- 1066
-        "严格说来不算鱼。它不同意被抓，而且会让你知道。",  -- 1067
-        "苍白如河冰，产自北方寒冷清澈的湖泊。",  -- 1068
-        "你得用上两只手，也许还得叫上一位朋友。",  -- 1069
-        "%.1f磅",  -- 1070
-        "钓鱼日志新增：%s，%s。",  -- 1071
-        "钓鱼日志新增：%s。",  -- 1072
-        "你迄今最重的%s：%s（之前是%s）。",  -- 1073
-        "鱼饵 %s",  -- 1074
-        "没有鱼饵",  -- 1075
-        "钓到 %d",  -- 1076
-        "跑掉 %d",  -- 1077
-        "好奇的一条：+%d%%",  -- 1078
-        "让鱼饵保持在鱼的旁边",  -- 1079
-        "下一条渔获 +%d%%",  -- 1080
-        "按住 %s：鱼饵沿着鱼线移动",  -- 1081
-        "连续 %d 条",  -- 1082
-        "浮标在水里时的小游戏",  -- 1083
-        "在鱼线入水时于施法条上进行：按住扳机，鱼饵沿着鱼线移动，松开则漂回；让它待在鱼影旁边。玩得越好，下一条渔获的虚构重量越重。不占用任何按钮，也从不影响抛竿或收获",  -- 1084
-        "钓到 %d，%d 种，跑掉 %d",  -- 1085
-        "最重：%s，%s",  -- 1086
-        "鱼",  -- 1087
-        "水域",  -- 1088
-        "还没有钓到任何东西。带上鱼竿去水边吧。",  -- 1089
-        "钓到：%d",  -- 1090
-        "最重：%s，于%s",  -- 1091
-        "首次钓到：%s",  -- 1092
-        "在这里钓到：%d",  -- 1093
-        "在这里发现的种类：%d",  -- 1094
-        "打开或关闭你的钓鱼日志：你钓到过的每个种类、每种最重的一条，以及你钓过鱼的水域",  -- 1095
-        "飞行",  -- 1096
-        "提前降落",  -- 1097
-        "在下一个飞行点降落",  -- 1098
-        "目的地未知",  -- 1099
-        "按距离估算",  -- 1100
-        "此航线首次飞行：正在记录飞行时间",  -- 1101
-        "即将降落",  -- 1102
-        "%s：约 %s，按距离估算",  -- 1103
-        "%s：约 %s",  -- 1104
-        "%s：此航线首次飞行，时间未知",  -- 1105
-        "飞行中，目的地未知",  -- 1106
-        "%s：已记住飞行时间，%s",  -- 1107
-        "提前降落：%s，约 %s",  -- 1108
-        "在下一个飞行点提前降落",  -- 1109
-        "清冷干爽，脚下是雪，呼出的气息悬在空中",  -- 1110
-        "刺骨的寒冷，山巅吹来的风钻进盔甲的每一道缝隙",  -- 1111
-        "又热又湿，空气浓得几乎能喝",  -- 1112
-        "林冠下闷热黏腻，虫鸣聒噪",  -- 1113
-        "炎热干燥，风里夹着沙尘",  -- 1114
-        "烈日炙烤，土地龟裂；能喝水时就喝吧",  -- 1115
-        "热风中裹着烟与灰",  -- 1116
-        "空气灼热，火星飘散",  -- 1117
-        "灰暗寒冷，潮湿的雾气挥之不去",  -- 1118
-        "空气发凉，几乎没有光亮",  -- 1119
-        "温和晴好，微风轻拂",  -- 1120
-        "天气宜人，适合赶路",  -- 1121
-        "清凉碧绿，树叶沙沙低语",  -- 1122
-        "柔光穿过林间，空气清新",  -- 1123
-        "闷热潮湿，脚下的地面松软",  -- 1124
-        "温暖湿润的空气，夹着沼泽的气味",  -- 1125
-        "%s，%s：%s",  -- 1126
-        "已知 %d 条飞行航线。",  -- 1127
-        "飞行：坐骑沿进度条飞行",  -- 1128
-        "狮鹫、双足飞龙或蝙蝠（飞行管理员给你的那只）沿飞行进度条飞向你的降落地点",  -- 1129
-        "飞行：落地处的天气",  -- 1130
-        "落地时，聊天框会说出你抵达之处的空气通常如何（荆棘谷又热又湿，丹莫罗脚下是雪），以及当时的时段",  -- 1131
-        "列出已知时间的飞行航线",  -- 1132
-        "落地！+%d",  -- 1133
-        "撞上了：连击中断",  -- 1134
-        "%s 振翅  ·  躲开树梢和飞艇",  -- 1135
-        "%s 用网捕获骑手赢得飞行金币  ·  %s 高空",  -- 1136
-        "%d 飞行金币",  -- 1137
-        "%s 振翅",  -- 1138
-        "%s 撒网",  -- 1139
-        "%s 高空",  -- 1140
-        "%s：回到游戏（%d 飞行金币）",  -- 1141
-        "%s：途中的小游戏",  -- 1142
-        "飞行小游戏已关闭：/cchud flightgame on",  -- 1143
-        "飞行小游戏在飞行途中进行。",  -- 1144
-        "战斗中不行。",  -- 1145
-        "飞行小游戏：开始 / 高空",  -- 1146
-        "飞行途中：开始飞行小游戏，或把它收到高空再拿回来",  -- 1147
-        "电影化飞行：镜头环绕你",  -- 1148
-        "电影中，镜头缓缓环绕你和坐骑，大约一分半钟转一整圈，并在降落前回到你身后。关闭：固定镜头",  -- 1149
-        "离线",  -- 1150
-        "死亡",  -- 1151
-        "关闭",  -- 1152
-        "治疗专精时",  -- 1153
-        "总是",  -- 1154
-        "太远",  -- 1155
-        "治疗者的小队和团队",  -- 1156
-        "小队中：你的队友在你的角色旁边，各带一个选中他们的按键；团队中：更细的框体。每个只显示需要多少治疗、你能驱散的减益效果，以及是否在范围内",  -- 1157
-        "%d%%可能售出",  -- 1158
-        "稳卖 (%d%%)",  -- 1159
-        "这个自己就能卖掉 (%d%%)",  -- 1160
-        "我看能卖 (%d%%)",  -- 1161
-        "应该有人买 (%d%%)",  -- 1162
-        "一半一半 (%d%%)",  -- 1163
-        "说不准 (%d%%)",  -- 1164
-        "有点赌运气 (%d%%)",  -- 1165
-        "可能要挂一阵 (%d%%)",  -- 1166
-        "别抱太大希望 (%d%%)",  -- 1167
-        "希望不大，朋友 (%d%%)",  -- 1168
-        "比商人多 +%s",  -- 1169
-        "尚无已知价格",  -- 1170
-        "商人给的一样多",  -- 1171
-        "经纪人",  -- 1172
-        "市场",  -- 1173
-        "每个铜板都算清了，朋友",  -- 1174
-        "你的背包里没有可以在这里出售的物品。",  -- 1175
-        "最近 7 天没有价格。",  -- 1176
-        "目前只有一天的价格：你每天访问拍卖行都会多一根蜡烛。",  -- 1177
-        "7 天，每天一根蜡烛：绿色收盘更高，红色更低",  -- 1178
-        "30 天，每天的最低价：绿色上涨，红色下跌",  -- 1179
-        "暂无价格记录：请在几天内读取拍卖行。",  -- 1180
-        "目前只有一天的价格：你每去一天拍卖行，这条线就会延长一点。",  -- 1181
-        "每件要价 %s，你放出的共 %s（%d 件），%d 件留给你",  -- 1182
-        "每个要价%s，全部%s（%d个）",  -- 1183
-        "最低",  -- 1184
-        "读取于%s",  -- 1185
-        "常价",  -- 1186
-        "7天：%s 至 %s",  -- 1187
-        "在售：%d个拍卖，%d件物品",  -- 1188
-        "每个%s，全部%s（%d个）",  -- 1189
-        "你在这里上架了%d件，售出%d个拍卖",  -- 1190
-        "未知价格：请先读取拍卖行。",  -- 1191
-        "包里没有可在这里卖的东西。",  -- 1192
-        "今天没有比卖给商人更划算的；耐心等等，%d件或许可以。",  -- 1193
-        "最好的在前：%d件在这里比卖给商人更值，耐心等还有%d件。",  -- 1194
-        "包里空空的，朋友。拿点能卖的来。",  -- 1195
-        "今天没什么比卖给商人强。耐心点的话，%d 件或许可以。",  -- 1196
-        "这些包里没有稳赚的，朋友。等一等，%d 件也许能赚。",  -- 1197
-        "好货在上头：这里 %d 件胜过任何商人，耐心点还有 %d 件。",  -- 1198
-        "%d 件在这里比卖商人赚得多，好的在前。等等还有 %d 件。",  -- 1199
-        "最上面的最赚钱：%d 件稳卖，能等的话还有 %d 件。",  -- 1200
-        "还没有价格：%s读取拍卖行。",  -- 1201
-        "刚读取的价格：%d个。",  -- 1202
-        "%d个价格，读取于%s。",  -- 1203
-        "%d个价格，读取于%s。%s重新读取。",  -- 1204
-        "还没看过行情板。按 %s，我把价格全拿来。",  -- 1205
-        "还没有价格，朋友。按 %s 读整块行情板。",  -- 1206
-        "刚从行情板上拿的新鲜价格，朋友：%d 个。",  -- 1207
-        "刚看过行情板：%d 个价格，还热乎着。",  -- 1208
-        "%d 个价格，%s读的。够用了，朋友。",  -- 1209
-        "上次看行情板是%s：%d 个价格。",  -- 1210
-        "%s的价格，跟隔夜面包一样硬了。按 %s 再读一遍。",  -- 1211
-        "%d 个价格，但那是%s读的。按 %s 我再看看。",  -- 1212
-        "也显示你保留的物品。%s隐藏。",  -- 1213
-        "保留：%d件，供你的专业、装备和标记之用。%s显示。",  -- 1214
-        "你保留的也在单子上。按 %s 收起来。",  -- 1215
-        "你保留的也显示着。按 %s 再藏起来。",  -- 1216
-        "留下了 %d 件：做专业用的、穿的、你标记的。按 %s 显示。",  -- 1217
-        "给你留了 %d 件：专业、装备和标记的。要的话按 %s。",  -- 1218
-        "每个",  -- 1219
-        "无数据",  -- 1220
-        "快速出售",  -- 1221
-        "耐心",  -- 1222
-        "读取所有价格",  -- 1223
-        "隐藏保留物品",  -- 1224
-        "显示保留物品",  -- 1225
-        "折线",  -- 1226
-        "蜡烛图",  -- 1227
-        "上架",  -- 1228
-        "%d / %d",  -- 1229
-        "上架 %d / %d 件，每件 %s",  -- 1230
-        "上架 %d 件，价格 %s",  -- 1231
-        "全部%d件上架，共%s",  -- 1232
-        "此客户端无法从这里在拍卖行上架。",  -- 1233
-        "已上架 %d 件，价格 %s。",  -- 1234
-        "拍卖行的市场：打开 / 关闭",  -- 1235
-        "市场的拍卖师问候",  -- 1236
-        "打开市场时，一位地精拍卖师会用游戏自带的声音说一句短语；关闭：静默打开",  -- 1237
-        "市场：显示保留的物品",  -- 1238
-        "市场也会列出你保留的物品：你的专业技能仍能借以升级、或能制成更值钱物品的东西，以及你标记为保留的物品；关闭：只显示你会出售的物品",  -- 1239
-        "市场：价格图显示为蜡烛图",  -- 1240
-        "市场的价格图为最近 7 天每天一根蜡烛（价格的开盘、最高、最低和收盘：收盘更高为绿色，更低为红色）；关闭：30 天内每天最低价的折线",  -- 1241
-        "打开或关闭市场（拍卖行的一个标签）",  -- 1242
-        "此客户端使用哪种拍卖行（用于排查问题）",  -- 1243
-        "打开一个专业技能窗口，我来看看你的配方。",  -- 1244
-        "这就是上限了，%d。训练师那里有下一个等级。",  -- 1245
-        "到了 %d 已经没什么可学了。去找训练师学下一个等级吧。",  -- 1246
-        "你的配方已经跟不上你了。去找训练师：%s 在 %d 等着你。",  -- 1247
-        "还差 %d 到 %d，你会的这些到不了那里。训练师有 %s 给你，%d 可学。",  -- 1248
-        "你的配方已经跟不上你了。去找训练师：%s 在等着你。",  -- 1249
-        "你的配方差 %d 到 %d 就不再教你了。向训练师要 %s。",  -- 1250
-        "你的配方差 %d 到 %d 就用尽了。训练师会有新东西。",  -- 1251
-        "你会的这些撑不过最后 %d 点。该去找训练师了。",  -- 1252
-        "%s 现在教不了你多少了，但这是你最好的。还差 %d 到 %d。",  -- 1253
-        "从这里开始会慢：%s 偶尔才给一点。还差 %d。",  -- 1254
-        "你先需要 %s，%s。指南从它开始这一段。",  -- 1255
-        "学会 %s，%s，我们就开始：还差 %d 到 %d。",  -- 1256
-        "还差 %d 到 %d。指南让你去采集 %s，直到 %d。",  -- 1257
-        "这里靠采集来提升：%s，直到 %d。",  -- 1258
-        "还差 %d 到 %d。先做 %s，或者你更想做 %s：%s。",  -- 1259
-        "指南说先做 %s。%s 也行：%s。",  -- 1260
-        "还差 %d 到 %d。先做 %s。",  -- 1261
-        "%s 现在是你最好的老师。还差 %d 点到 %d。",  -- 1262
-        "手要稳。先做 %s，还差 %d。",  -- 1263
-        "在训练师处",  -- 1264
-        "从商人处",  -- 1265
-        "从战利品中",  -- 1266
-        "通过任务",  -- 1267
-        "材料更便宜",  -- 1268
-        "商人出售的材料",  -- 1269
-        "自己采集的材料",  -- 1270
-        "好卖",  -- 1271
-        "你自己用得上",  -- 1272
-        "制作次数更少",  -- 1273
-        "需要找到或买到的配方",  -- 1274
-        "其他材料",  -- 1275
-        "指南的首选",  -- 1276
-        "打开专业技能窗口查看升级计划。",  -- 1277
-        "已到上限%d。下一等级找训练师。",  -- 1278
-        "还差%d到%d；现有配方不够。训练师有%s（%d）。",  -- 1279
-        "还差%d到%d；现有配方不够。训练师有%s。",  -- 1280
-        "现有配方还差%d点到%d。训练师有更多。",  -- 1281
-        "还差%d到%d。目前最佳：%s，绿色（偶尔加一点）。",  -- 1282
-        "还差%d到%d。先学%s，%s。",  -- 1283
-        "还差%d到%d。采集%s直到%d。",  -- 1284
-        "还差%d到%d。先做：%s，或%s（%s）。",  -- 1285
-        "还差%d到%d。先做：%s。",  -- 1286
-        "需采集或购买",  -- 1287
-        "制作%d次：%s",  -- 1288
-        "%s 学会它，%d 起。",  -- 1289
-        "%s 学会它。",  -- 1290
-        "%s：背包 %d，银行 %d，每次 %d",  -- 1291
-        "指南这一段靠采集 %s 来提升。",  -- 1292
-        "%s：你有%d个，计划需用%d个",  -- 1293
-        "用于%s",  -- 1294
-        "购买比用%s制作更便宜",  -- 1295
-        "用%s制作",  -- 1296
-        "导师：银行能让你做什么",  -- 1297
-        "用银行材料能做的",  -- 1298
-        "银行里的东西已经做不了更多了。",  -- 1299
-        "算上银行能做 %d 种，其中 %d 种只靠银行。",  -- 1300
-        "导师：%s %d > %d",  -- 1301
-        "导师",  -- 1302
-        "升级计划",  -- 1303
-        "或",  -- 1304
-        "采集 %s",  -- 1305
-        "待学",  -- 1306
-        "购买更划算",  -- 1307
-        "隐藏",  -- 1308
-        "计划",  -- 1309
-        "采集此项",  -- 1310
-        "全部采集",  -- 1311
-        "算上银行",  -- 1312
-        "使用计划",  -- 1313
-        "按两次隐藏",  -- 1314
-        "这里没有可以试穿的。",  -- 1315
-        "已将%d项加入采集清单。",  -- 1316
-        "什么都不缺：所需材料都已齐备。",  -- 1317
-        "打开专业技能窗口即可制定计划。",  -- 1318
-        "导师（升级计划）：显示 / 隐藏",  -- 1319
-        "显示你最后打开的专业技能窗口的升级计划，并启用手柄按键",  -- 1320
-        "任务左侧",  -- 1321
-        "任务右侧",  -- 1322
-        "任务下方",  -- 1323
-        "采集清单已满。",  -- 1324
-        "采集清单：%s，需要%d个。",  -- 1325
-        "采集",  -- 1326
-        "还有%d项",  -- 1327
-        "暂无需采集的物品。",  -- 1328
-        "再加一组",  -- 1329
-        "移除",  -- 1330
-        "清空",  -- 1331
-        "完成",  -- 1332
-        "清空整个采集清单？",  -- 1333
-        "采集清单：选择 / 完成",  -- 1334
-        "采集清单：添加你指向的物品",  -- 1335
-        "它不在采集清单上。",  -- 1336
-        "采集清单为空。",  -- 1337
-        "采集清单：位置",  -- 1338
-        "采集清单放在任务列表左侧、右侧或其任务下方",  -- 1339
-        "任务列表旁的采集清单：用手柄选择；add <物品> [数量]，remove <物品>，clear，或用 left / right / bottom 设置位置",  -- 1340
-        "仇恨百分比",  -- 1341
-        "在目标框体和姓名板的仇恨图标旁以数字显示你的仇恨占比",  -- 1342
-        "生命值数字",  -- 1343
-        "在条上显示缩写的剩余生命值（12.3k）（紧凑姓名板不显示：百分比就够了）",  -- 1344
-        "你的减益",  -- 1345
-        "目标姓名上方显示你的减益效果及其剩余时间",  -- 1346
-        "所有人的减益",  -- 1347
-        "游戏为姓名板标记的所有人的减益，而不只是你的",  -- 1348
-        "敌方增益",  -- 1349
-        "敌人减益效果旁的增益效果：只显示重要的（重要、激怒或你能驱散或偷取的），关闭“只显示重要效果”时显示全部",  -- 1350
-        "群体控制图标",  -- 1351
-        "单位被击晕、定身、恐惧时显示带剩余时间的大图标...",  -- 1352
-        "仇恨光晕",  -- 1353
-        "名字后的盾牌图标和光晕：攻击你时为红色，即将拉到仇恨时红黄交替，正在失去仇恨时黄蓝交替，不在你身上时为蓝色",  -- 1354
-        "任务标记",  -- 1355
-        "在你的任务仍然需要的单位上显示金色标记",  -- 1356
-        "姓名板动画",  -- 1357
-        "姓名板淡入，低生命值时呼吸闪动，群体控制时闪烁",  -- 1358
-        "小",  -- 1359
-        "普通",  -- 1360
-        "大",  -- 1361
-        "完整名字",  -- 1362
-        "简短名字",  -- 1363
-        "不显示名字",  -- 1364
-        "完整",  -- 1365
-        "极简迷你",  -- 1366
-        "姓名板大小",  -- 1367
-        "姓名板上条的大小：小而细、普通，或大（更宽更高）",  -- 1368
-        "姓名板上的名字",  -- 1369
-        "有生命条的姓名板上的名字：完整、缩短或不显示（目标框体会显示完整名字；等级和职业图标保留）。没有生命条的姓名板（友方NPC）始终保留名字",  -- 1370
-        "姓名板样式",  -- 1371
-        "一键设置姓名板开关。完整：全部。极简：无能量条、公会或头衔，名字缩短。极简迷你：带生命值的小条、你的减益和重要的增益、等级和职业，不显示名字（目标框体有）。仇恨、控制和醒目的施法始终保留",  -- 1372
-        "玩家头衔",  -- 1373
-        "在玩家姓名旁显示其头衔",  -- 1374
-        "公会与NPC职业",  -- 1375
-        "姓名下方的一行：玩家的公会，或NPC的职业",  -- 1376
-        "战斗中的友方血条",  -- 1377
-        "友方姓名板在该单位处于战斗状态时显示生命值、能量和施法",  -- 1378
-        "游戏自带的友方姓名板",  -- 1379
-        "友方姓名板（你的队伍、其他玩家、友方NPC）使用游戏自带外观；我们的只用于敌人",  -- 1380
-        "能量条",  -- 1381
-        "生命条下方的细长法力、怒气或能量条",  -- 1382
-        "施法目标",  -- 1383
-        "施法所指向的目标，显示在法术名称旁",  -- 1384
-        "生命值百分比",  -- 1385
-        "血条上的生命值百分比",  -- 1386
-        "目标姓名板上显示名字",  -- 1387
-        "关闭：目标的姓名板不显示名字和等级（目标框体会显示）",  -- 1388
-        "姓名板显示等级",  -- 1389
-        "敌人名字前的等级，按难度着色",  -- 1390
-        "紧凑姓名板",  -- 1391
-        "姓名板宽度约为一半",  -- 1392
-        "醒目的敌方施法",  -- 1393
-        "敌人的施法会闪烁、膨胀并越来越快地脉动直到完成，让你能及时打断",  -- 1394
-        "姓名板职业图标",  -- 1395
-        "在玩家名字前显示职业图标，无论敌友",  -- 1396
-        "NPC职能图标",  -- 1397
-        "在提供服务的友方NPC上方显示图标：商人显示背包，可修理的铁匠显示铁砧，训练师显示书本……（游戏自带图标；即使姓名板在等待你指向时也会显示）",  -- 1398
-        "友方NPC仅在指向时显示",  -- 1399
-        "友方NPC（商人、任务发布者、市民）的姓名板只在你指向时显示，与其鼠标提示一样",  -- 1400
-        "可互动物体上的名称",  -- 1401
-        "面对矿石、宝箱、铭牌等物体时在其上方显示名称（关闭：不显示名称，游戏自身的提示已说明它们是什么）",  -- 1402
-        "迷你姓名板",  -- 1403
-        "仆从、小动物和不给经验的灰色敌人显示小型姓名板：一条细条，上面显示你的减益效果，不显示名字（没有血条的小动物保留名字；是否显示姓名板由游戏自身选项决定）",  -- 1404
-        "地下城中的队友姓名板：仅名字",  -- 1405
-        "在地下城或团队副本中，友方玩家的姓名板由游戏自己绘制，插件不能修改：在那里会调整游戏自带的选项，让它们像我们的一样只显示职业颜色的名字而没有血条，战斗时游戏的血条会回来（开启了战斗中显示友方血条时）；离开时全部恢复原样",  -- 1406
-        "地下城中的队友姓名板：隐藏",  -- 1407
-        "在地下城或团队副本中，完全关闭游戏的友方玩家姓名板（离开时恢复成你原来的设置）",  -- 1408
-        "显示游戏为你的目标名字提供的内容（用于排查问题）",  -- 1409
-        "列出屏幕上的姓名板及其是否使用我们的外观（用于排查问题）",  -- 1410
-        "好吧，看看。",  -- 1411
-        "哎哟，这一大堆。",  -- 1412
-        "嗯，让我看看，看看……",  -- 1413
-        "艾露恩啊，赐我耐心。",  -- 1414
-        "以纳鲁之名，真是一团乱。",  -- 1415
-        "该死的背包。",  -- 1416
-        "包袱整齐，包袱就轻。",  -- 1417
-        "哼。破烂太多了。",  -- 1418
-        "全是累赘。",  -- 1419
-        "耐心。大地母亲自会赐予。",  -- 1420
-        "嘿，看看我们有啥，老兄？",  -- 1421
-        "如此杂乱，有失体面。",  -- 1422
-        "时间就是金钱。数一数。",  -- 1423
-        "嗯，这就行了。",  -- 1424
-        "感谢艾露恩。",  -- 1425
-        "圣光自会赐予。",  -- 1426
-        "哼。够用了。",  -- 1427
-        "嗯。够打一仗了。",  -- 1428
-        "轻装上路。不错。",  -- 1429
-        "还行。勉强。",  -- 1430
-        "一格都不剩了。垃圾能卖%s：卖掉就有地方了。",  -- 1431
-        "一格都不剩了。路上用不着的，可以先存银行。",  -- 1432
-        "垃圾：%d件，这里值%s。X 卖掉选中的那件；智能出售一次卖光。",  -- 1433
-        "其中%d件该放银行：银行里有同样的，或是我标记过。存入就会收好。",  -- 1434
-        "只剩%d格了。垃圾在任何商人那里都能卖%s。",  -- 1435
-        "只剩%d格了。该卖掉或存掉一些东西了。",  -- 1436
-        "上次看过之后新添了%d件。每件都有金色小点标着。",  -- 1437
-        "值得卖的：%d件。出售筛选会把它们集中起来，每件的提示都写着在哪卖最值。",  -- 1438
-        "垃圾：%d件，值%s。下个商人收走吧。",  -- 1439
-        "只有必需品。没什么值得卖的。",  -- 1440
-        "一切井井有条，还空着%d格。",  -- 1441
-        "装备修好了：%s。",  -- 1442
-        "我可以花%s帮你修装备；坏掉的装备既没护甲也没属性。",  -- 1443
-        "你的包满了。%d件东西我出%s收：点智能出售，就又有空位了。",  -- 1444
-        "我出%s收%d件东西：垃圾，还有拍卖行不会出更高价的。点智能出售就行。",  -- 1445
-        "拍卖行想要的那%d件留着：比我多给%s。",  -- 1446
-        "你的包满了。买东西之前先卖我点什么吧。",  -- 1447
-        "你包里没什么值得我出好价的。看看我的货吧。",  -- 1448
-        "你身上有%d件该放这里：我这儿存着同样的，或是你标记过。存入就会收好。",  -- 1449
-        "你身上有%d种东西我这儿还存着更多。取出能在出发前把包补满。",  -- 1450
-        "你的包快满了。路上用不着的就放我这儿吧。",  -- 1451
-        "东西在我这儿很安全，你的包还空着%d格。",  -- 1452
-        "今天没有你的信。我查了两遍。",  -- 1453
-        "你的信：%d封，没有附件。有空再看吧。",  -- 1454
-        "你的信：%d封。里面有：%s。",  -- 1455
-        "全部拿取能一次清空。",  -- 1456
-        "货到付款：%d封。这些你自己打开、自己付钱。",  -- 1457
-        "你的包满了：物品先留在信里。",  -- 1458
-        "去哪儿？指个地方，我告诉你要飞多久。",  -- 1459
-        "%s：按地图算大约%s。这条航线你还没飞过。",  -- 1460
-        "%s：按你上次飞那里算，大约%s。",  -- 1461
-        "%s：还说不准要多久。飞一次我就知道了。",  -- 1462
-        "跑了%d条。这片水域要的技能比我高：鱼饵有用，好一点的鱼竿也有用。",  -- 1463
-        "钩上没挂鱼饵。鱼饵能加技能，跑掉的就少了。",  -- 1464
-        "鱼饵快用完了。再挂一个，技能就不掉。",  -- 1465
-        "这里还没钓到的鱼：%d种。接着抛竿。",  -- 1466
-        "这片水里的鱼我都钓过了。那就换个地方。",  -- 1467
-        "还什么都没钓到。每片水域的第一条鱼都记在这里。",  -- 1468
-        "钓到的种类：%d。每片水域都还藏着几种：钓鱼面板上没钓到的会显示 ?。",  -- 1469
-        "在火边歇好了：接下来击杀获得的%d点经验翻倍。",  -- 1470
-        "没攒下休息。去旅店或城里过一夜，一段时间内击杀经验翻倍。",  -- 1471
-        "吸收 %d",  -- 1472
-        "右侧列表",  -- 1473
-        "中间逐个显示",  -- 1474
-        "%d 次治疗暴击",  -- 1475
-        "%d 次暴击",  -- 1476
-        "审判",  -- 1477
-        "高光时刻：位置",  -- 1478
-        "角色右侧冷却提示正上方的一块区域：最新的紧挨提示，旧的向上移动并淡出；或在中间一次显示一个",  -- 1479
-        "展示高光时刻的样子和手感",  -- 1480
-        "已收藏",  -- 1481
-        "已通过其他物品收藏",  -- 1482
-        "尚未收藏",  -- 1483
-        "外观",  -- 1484
-        "选择一个套装，把它的部件放到你的外观方案上。%s 才会保留；在那之前不花任何钱。",  -- 1485
-        "正在查看你的收藏...",  -- 1486
-        "你的外观方案已恢复原样。",  -- 1487
-        "%s：已穿上 %d/%d 件。",  -- 1488
-        "有 %d 件无法用于此外观方案。",  -- 1489
-        "你拥有部件的套装：1 个",  -- 1490
-        "你拥有部件的套装：%d 个",  -- 1491
-        "你无法穿戴",  -- 1492
-        "缺少",  -- 1493
-        "全部 %d 件",  -- 1494
-        "%d/%d 件",  -- 1495
-        "缺少：%s",  -- 1496
-        "还没有套装。名字相同的物品，比如绿铁头盔和绿铁护手，只要你拥有其中一件，就会出现在这里。",  -- 1497
-        "撤销",  -- 1498
-        "删除自定义套装%s？删除后无法恢复。",  -- 1499
-        "删除",  -- 1500
-        "请先指向一个自定义套装。",  -- 1501
-        "%s  删除自定义套装",  -- 1502
+        "任务罗盘：跟随镜头",  -- 980
+        "罗盘显示镜头朝向，而不是角色朝向（摇杆只转动角色而不转动镜头时两者不同）；关闭：显示角色朝向",  -- 981
+        "在任务罗盘上你周围显示几个标记，持续二十秒",  -- 982
+        "钓鱼模式：关闭。",  -- 983
+        "钓鱼：按%s抛竿",  -- 984
+        "没有鱼饵：按两次%s使用%s",  -- 985
+        "按%s收起鱼竿",  -- 986
+        "钓鱼模式：按%s抛竿，鱼漂晃动时再按一次收竿。",  -- 987
+        "%s 收竿，%s 重新抛竿",  -- 988
+        "钓鱼模式需要手持鱼竿。",  -- 989
+        "你没有学会钓鱼。",  -- 990
+        "钓鱼模式：一个按钮抛竿和提竿",  -- 991
+        "钓鱼按键：%s",  -- 992
+        "一键重新抛竿",  -- 993
+        "浮标在水中时，钓鱼按钮用来收竿，按一下 A 重新抛竿；关闭：A 归你",  -- 994
+        "双击上饵",  -- 995
+        "快速按两下钓鱼按键：当鱼竿上没有鱼饵时，第二下会把背包里最好的鱼饵装到鱼竿上",  -- 996
+        "钓鱼时隐藏手柄动作条",  -- 997
+        "手持鱼竿时隐藏手柄动作条，水面一览无余；钓鱼提示显示抛竿的按钮。战斗开始或收起鱼竿时立即恢复",  -- 998
+        "暂时关闭一键钓鱼，或重新开启（手持鱼竿时会自动开启）",  -- 999
+        "用于钓鱼的按键：起初是你的互动键（方块或 X），也可以是任何其他按键，例如扳机键 (rt)",  -- 1000
+        "杜隆塔尔的海岸尽是红岩与温暖的浅滩。回音群岛的巨魔说，潮水捎来岛上炊火味道的时候，鲭鱼群最旺。",  -- 1001
+        "莫高雷的湖泊小巧、清澈，也很有耐心。牛头人钓鱼和做别的事一样：慢慢来，并且心怀感恩。",  -- 1002
+        "贫瘠之地的每一处绿洲都是聚会的地方。不管白天来喝水的是什么，夜里总有东西在水下游动。",  -- 1003
+        "泰达希尔的水潭全都躺在同一棵树的树荫里。暗夜精灵钓手们发誓说，那儿的鱼从没见过太阳，也并不想念。",  -- 1004
+        "黑海岸的海水灰暗、冰冷，满是沉船。在奥伯丁外海咬钩的鱼，有一半都把家安在了别人丢失的货物里。",  -- 1005
+        "灰谷的河流在比大多数王国还古老的树叶下流淌。鱼儿很快，哨兵赶来盘问你在干什么更快。",  -- 1006
+        "在千针石林的谷底，水很稀少，被人看得很紧。这里的鱼，位置都是自己挣来的。",  -- 1007
+        "石爪山脉的湖泊高踞群峰之间，寒冷刺骨。要不是这么好钓，地精早就把湖水抽干了。",  -- 1008
+        "凄凉之地的海岸只有白骨和灰色的浪。水底下有什么东西，对这两样都很有胃口。",  -- 1009
+        "菲拉斯一路绿到水边。那里的河又深又暖，生机勃勃得很。",  -- 1010
+        "没人说得清尘泥沼泽的陆地到哪儿为止、水从哪儿开始。站在岸上钓吧，钓完记得数数脚趾。",  -- 1011
+        "整个塔纳利斯只有热砂港的水还配叫水。地精会把钓鱼的权利卖给你，你要是不留神，他们会卖两次。",  -- 1012
+        "艾萨拉明亮的海湾之下躺着一座沉没的城市。老钓手说，大家伙都住在从前的花园里。",  -- 1013
+        "费伍德森林的水潭会发光，可不是什么好兆头的那种光。还在里面游的东西，顽固得不讲道理。",  -- 1014
+        "安戈洛的温泉和焦油环绕的湖泊，留住了被外面的世界遗忘的东西。其中有一些还会咬。",  -- 1015
+        "月光林地的月神湖平静得像屏住的一口气。德鲁伊只有一个请求：吃多少，钓多少。",  -- 1016
+        "希利苏斯只有沙子、风和振翅的声音。要是你在这儿找到了能钓鱼的水，谁也别告诉。",  -- 1017
+        "冬泉谷的湖泊边缘结冰，中间却冒着热气。那里的鱼为了御寒长得肥美，值得走这一趟。",  -- 1018
+        "在奥格瑞玛的水池边钓鱼的，是闲着没事的苦工，还有自称也闲着没事的老步兵。两种人都会告诉你，大的那条跑了。",  -- 1019
+        "雷霆崖池塘里的鱼，一辈子都住在远高于平原的地方。它看上去倒挺淡定。",  -- 1020
+        "达纳苏斯照看水域，就像照看神殿一样用心。鱼儿早已习惯了被人欣赏。",  -- 1021
+        "奥特兰克山脉的湖水是融化的雪水，食人魔和辛迪加趁没人看见的时候在那儿钓鱼。",  -- 1022
+        "阿拉希的岸边见过的军队比钓手还多。水面上飘的是谁家的旗帜，鱼儿早就不在乎了。",  -- 1023
+        "荒芜之地从这头到那头全是尘土。在这里有鱼咬钩算是个小小的奇迹，请拿它当奇迹对待。",  -- 1024
+        "诅咒之地的海岸赤红、荒秃而寂静。能活在那片浪里的东西，早就学会了忍受许多。",  -- 1025
+        "提瑞斯法的湖泊静卧在病恹恹的天空下。被遗忘者钓鱼是出于习惯；死人吃得不多，但他们记得自己曾经爱吃。",  -- 1026
+        "银松森林漫长的海岸上只有雾气和松影。这里鱼很好钓，这也是人们对这地方唯一说得出的好话。",  -- 1027
+        "西瘟疫之地的河还在流，只是不干净。从里面拉上来的东西，请多看一眼。",  -- 1028
+        "很少有人在东瘟疫之地钓鱼，肯承认的就更少了。瘟疫给这片水留下了多少，它就守着多少。",  -- 1029
+        "希尔斯布莱德的河流和漫长的南岸，在每一场为争夺它们而起的纷争中，都养活过交战的双方。",  -- 1030
+        "辛特兰把湖泊藏在高处的林间，蛮锤矮人以为没人看见的时候，会骑在狮鹫背上钓鱼。",  -- 1031
+        "丹莫罗的湖泊一年里大半时间都围着一圈冰。矮人会凿个洞，端着一杯酒坐下来，不管钓上什么都说今天过得不错。",  -- 1032
+        "别处有河的地方，灼热峡谷有的是熔岩。还是改带点喝的来吧。",  -- 1033
+        "燃烧平原只有灰烬和余火。这里的水要是真肯给你点什么，那也一定是烫的。",  -- 1034
+        "艾尔文的每个孩子都是在水晶湖或石碑湖学会钓鱼的。那里的小鱼已经把一代又一代的孩子耍得团团转。",  -- 1035
+        "逆风小径水少，欢迎你的人更少。卡拉赞下面水潭里的东西，最好就让它留在那儿。",  -- 1036
+        "沿着暮色森林边缘流淌的河，什么时候看都是黑的。鱼似乎不介意黑暗，钓鱼的人可介意。",  -- 1037
+        "洛克湖是洛克莫丹的骄傲，由宏伟的巨石水坝拦蓄而成。矮人讲钓鱼故事时总爱拿它来比，而赢的通常是湖。",  -- 1038
+        "赤脊山的止水湖美得像一幅画，湖畔镇的每座码头上都有人垂钓。镇民知道每一个好钓点，却一个也不会告诉你。",  -- 1039
+        "从丛林里的河流到荒凉的南海角，荆棘谷拥有这片大陆上最丰饶的水域。藏宝海湾的钓手为此举办钓鱼大赛，而且几乎个个作弊。",  -- 1040
+        "悲伤沼泽就是绿树下的一片绿水。鱼有股泥味，而本地人就好这一口。",  -- 1041
+        "西部荒野的田地荒了，海岸却没有。留下来的人靠着这条漫长的灰色海岸过活。",  -- 1042
+        "湿地名副其实。米奈希尔港的码头是这里最干的钓鱼处，鳄鱼们也清楚这一点。",  -- 1043
+        "在暴风城运河边钓鱼的有孩子、退休老人，还有至少一位乔装打扮的贵族。运河里还有些什么，没人过问。",  -- 1044
+        "荒弃的洞穴里有铁炉堡唯一一处安静的水潭。老矮人一钓就是几个钟头，一句话也不说。",  -- 1045
+        "幽暗城的运河泛着一种绿色，跟水藻毫无关系。在那儿钓鱼的被遗忘者，可不是为了晚饭。",  -- 1046
+        "大多数钓手钓上的第一条鱼，鲜亮得让人忘不了。",  -- 1047
+        "滑溜、敏捷，每一处温暖的海岸都很常见。烤着吃比它的名字听起来要好。",  -- 1048
+        "浑身上下就是一张嘴，在你不愿喝的水里过得最快活。",  -- 1049
+        "个头小，牙齿尖，天不怕地不怕。据说一群这种鱼曾把一头熊赶出了洛克湖。",  -- 1050
+        "浪花下的一抹亮色。水手们认为钓线上挂着一条，这趟航行就会走运。",  -- 1051
+        "一种很有耐心的底栖鱼，长着矮人长老一般的胡须。",  -- 1052
+        "没人会吃第二次。炼金师却是有多少收多少。",  -- 1053
+        "它的鳍像压着火的余炭一样发亮，榨出来的油烧起来也差不了多少。",  -- 1054
+        "像一面小盾牌一样披着甲。里面的肉值得你费这番功夫。",  -- 1055
+        "哀嚎洞穴附近的水里有什么东西改变了它。吃上一条，你也可能跟着变一阵子。",  -- 1056
+        "住在河边的人说，吃一顿它能让头脑清明。让它变聪明的，其实是逆流而上的那段路。",  -- 1057
+        "比它的表亲更老、更大，也更睿智，可这并没有让它躲开你的鱼钩。",  -- 1058
+        "来自温暖南海的狠角色，挣扎起来毫不含糊。从藏宝海湾到加基森，每家酒馆的菜牌上都少不了它。",  -- 1059
+        "它的额头像真正的秘银一样闪亮。想把它拿去熔炼的矿工不止一个。",  -- 1060
+        "它的鳞片能熬成一种油，让皮肤硬如岩石。它更喜欢夜晚。",  -- 1061
+        "亮得像阅兵用的胸甲，也差不多一样沉。",  -- 1062
+        "它只在寒冷的月份才游到近岸，懂行的厨师会等上一整年。",  -- 1063
+        "白昼变长的时候它就成群洄游。沿海的人靠它来辨认时节。",  -- 1064
+        "抓它要抓中间，而且只有一次机会。",  -- 1065
+        "来自荒野之地的河鱼，鳃红得像巨魔的战纹。",  -- 1066
+        "它在天黑后觅食。用它熬的汤能安抚施法者的神经。",  -- 1067
+        "它在白天觅食，几乎处处与夜鳞鲷鱼相反，却照样与它同住一片水。",  -- 1068
+        "严格说来不算鱼。它不同意被抓，而且会让你知道。",  -- 1069
+        "苍白如河冰，产自北方寒冷清澈的湖泊。",  -- 1070
+        "你得用上两只手，也许还得叫上一位朋友。",  -- 1071
+        "%.1f磅",  -- 1072
+        "钓鱼日志新增：%s，%s。",  -- 1073
+        "钓鱼日志新增：%s。",  -- 1074
+        "你迄今最重的%s：%s（之前是%s）。",  -- 1075
+        "鱼饵 %s",  -- 1076
+        "没有鱼饵",  -- 1077
+        "钓到 %d",  -- 1078
+        "跑掉 %d",  -- 1079
+        "好奇的一条：+%d%%",  -- 1080
+        "让鱼饵保持在鱼的旁边",  -- 1081
+        "下一条渔获 +%d%%",  -- 1082
+        "按住 %s：鱼饵沿着鱼线移动",  -- 1083
+        "连续 %d 条",  -- 1084
+        "浮标在水里时的小游戏",  -- 1085
+        "在鱼线入水时于施法条上进行：按住扳机，鱼饵沿着鱼线移动，松开则漂回；让它待在鱼影旁边。玩得越好，下一条渔获的虚构重量越重。不占用任何按钮，也从不影响抛竿或收获",  -- 1086
+        "钓到 %d，%d 种，跑掉 %d",  -- 1087
+        "最重：%s，%s",  -- 1088
+        "鱼",  -- 1089
+        "水域",  -- 1090
+        "还没有钓到任何东西。带上鱼竿去水边吧。",  -- 1091
+        "钓到：%d",  -- 1092
+        "最重：%s，于%s",  -- 1093
+        "首次钓到：%s",  -- 1094
+        "在这里钓到：%d",  -- 1095
+        "在这里发现的种类：%d",  -- 1096
+        "打开或关闭你的钓鱼日志：你钓到过的每个种类、每种最重的一条，以及你钓过鱼的水域",  -- 1097
+        "飞行",  -- 1098
+        "提前降落",  -- 1099
+        "在下一个飞行点降落",  -- 1100
+        "目的地未知",  -- 1101
+        "按距离估算",  -- 1102
+        "此航线首次飞行：正在记录飞行时间",  -- 1103
+        "即将降落",  -- 1104
+        "%s：约 %s，按距离估算",  -- 1105
+        "%s：约 %s",  -- 1106
+        "%s：此航线首次飞行，时间未知",  -- 1107
+        "飞行中，目的地未知",  -- 1108
+        "%s：已记住飞行时间，%s",  -- 1109
+        "提前降落：%s，约 %s",  -- 1110
+        "在下一个飞行点提前降落",  -- 1111
+        "清冷干爽，脚下是雪，呼出的气息悬在空中",  -- 1112
+        "刺骨的寒冷，山巅吹来的风钻进盔甲的每一道缝隙",  -- 1113
+        "又热又湿，空气浓得几乎能喝",  -- 1114
+        "林冠下闷热黏腻，虫鸣聒噪",  -- 1115
+        "炎热干燥，风里夹着沙尘",  -- 1116
+        "烈日炙烤，土地龟裂；能喝水时就喝吧",  -- 1117
+        "热风中裹着烟与灰",  -- 1118
+        "空气灼热，火星飘散",  -- 1119
+        "灰暗寒冷，潮湿的雾气挥之不去",  -- 1120
+        "空气发凉，几乎没有光亮",  -- 1121
+        "温和晴好，微风轻拂",  -- 1122
+        "天气宜人，适合赶路",  -- 1123
+        "清凉碧绿，树叶沙沙低语",  -- 1124
+        "柔光穿过林间，空气清新",  -- 1125
+        "闷热潮湿，脚下的地面松软",  -- 1126
+        "温暖湿润的空气，夹着沼泽的气味",  -- 1127
+        "%s，%s：%s",  -- 1128
+        "已知 %d 条飞行航线。",  -- 1129
+        "飞行：坐骑沿进度条飞行",  -- 1130
+        "狮鹫、双足飞龙或蝙蝠（飞行管理员给你的那只）沿飞行进度条飞向你的降落地点",  -- 1131
+        "飞行：落地处的天气",  -- 1132
+        "落地时，聊天框会说出你抵达之处的空气通常如何（荆棘谷又热又湿，丹莫罗脚下是雪），以及当时的时段",  -- 1133
+        "列出已知时间的飞行航线",  -- 1134
+        "落地！+%d",  -- 1135
+        "撞上了：连击中断",  -- 1136
+        "%s 振翅  ·  躲开树梢和飞艇",  -- 1137
+        "%s 用网捕获骑手赢得飞行金币  ·  %s 高空",  -- 1138
+        "%d 飞行金币",  -- 1139
+        "%s 振翅",  -- 1140
+        "%s 撒网",  -- 1141
+        "%s 高空",  -- 1142
+        "%s：回到游戏（%d 飞行金币）",  -- 1143
+        "%s：途中的小游戏",  -- 1144
+        "飞行小游戏已关闭：/cchud flightgame on",  -- 1145
+        "飞行小游戏在飞行途中进行。",  -- 1146
+        "战斗中不行。",  -- 1147
+        "飞行小游戏：开始 / 高空",  -- 1148
+        "飞行途中：开始飞行小游戏，或把它收到高空再拿回来",  -- 1149
+        "电影化飞行：镜头环绕你",  -- 1150
+        "电影中，镜头缓缓环绕你和坐骑，大约一分半钟转一整圈，并在降落前回到你身后。关闭：固定镜头",  -- 1151
+        "离线",  -- 1152
+        "死亡",  -- 1153
+        "关闭",  -- 1154
+        "治疗专精时",  -- 1155
+        "总是",  -- 1156
+        "太远",  -- 1157
+        "治疗者的小队和团队",  -- 1158
+        "小队中：你的队友在你的角色旁边，各带一个选中他们的按键；团队中：更细的框体。每个只显示需要多少治疗、你能驱散的减益效果，以及是否在范围内",  -- 1159
+        "%d%%可能售出",  -- 1160
+        "稳卖 (%d%%)",  -- 1161
+        "这个自己就能卖掉 (%d%%)",  -- 1162
+        "我看能卖 (%d%%)",  -- 1163
+        "应该有人买 (%d%%)",  -- 1164
+        "一半一半 (%d%%)",  -- 1165
+        "说不准 (%d%%)",  -- 1166
+        "有点赌运气 (%d%%)",  -- 1167
+        "可能要挂一阵 (%d%%)",  -- 1168
+        "别抱太大希望 (%d%%)",  -- 1169
+        "希望不大，朋友 (%d%%)",  -- 1170
+        "比商人多 +%s",  -- 1171
+        "尚无已知价格",  -- 1172
+        "商人给的一样多",  -- 1173
+        "经纪人",  -- 1174
+        "市场",  -- 1175
+        "每个铜板都算清了，朋友",  -- 1176
+        "你的背包里没有可以在这里出售的物品。",  -- 1177
+        "最近 7 天没有价格。",  -- 1178
+        "目前只有一天的价格：你每天访问拍卖行都会多一根蜡烛。",  -- 1179
+        "7 天，每天一根蜡烛：绿色收盘更高，红色更低",  -- 1180
+        "30 天，每天的最低价：绿色上涨，红色下跌",  -- 1181
+        "暂无价格记录：请在几天内读取拍卖行。",  -- 1182
+        "目前只有一天的价格：你每去一天拍卖行，这条线就会延长一点。",  -- 1183
+        "每件要价 %s，你放出的共 %s（%d 件），%d 件留给你",  -- 1184
+        "每个要价%s，全部%s（%d个）",  -- 1185
+        "最低",  -- 1186
+        "读取于%s",  -- 1187
+        "常价",  -- 1188
+        "7天：%s 至 %s",  -- 1189
+        "在售：%d个拍卖，%d件物品",  -- 1190
+        "每个%s，全部%s（%d个）",  -- 1191
+        "你在这里上架了%d件，售出%d个拍卖",  -- 1192
+        "未知价格：请先读取拍卖行。",  -- 1193
+        "包里没有可在这里卖的东西。",  -- 1194
+        "今天没有比卖给商人更划算的；耐心等等，%d件或许可以。",  -- 1195
+        "最好的在前：%d件在这里比卖给商人更值，耐心等还有%d件。",  -- 1196
+        "包里空空的，朋友。拿点能卖的来。",  -- 1197
+        "今天没什么比卖给商人强。耐心点的话，%d 件或许可以。",  -- 1198
+        "这些包里没有稳赚的，朋友。等一等，%d 件也许能赚。",  -- 1199
+        "好货在上头：这里 %d 件胜过任何商人，耐心点还有 %d 件。",  -- 1200
+        "%d 件在这里比卖商人赚得多，好的在前。等等还有 %d 件。",  -- 1201
+        "最上面的最赚钱：%d 件稳卖，能等的话还有 %d 件。",  -- 1202
+        "还没有价格：%s读取拍卖行。",  -- 1203
+        "刚读取的价格：%d个。",  -- 1204
+        "%d个价格，读取于%s。",  -- 1205
+        "%d个价格，读取于%s。%s重新读取。",  -- 1206
+        "还没看过行情板。按 %s，我把价格全拿来。",  -- 1207
+        "还没有价格，朋友。按 %s 读整块行情板。",  -- 1208
+        "刚从行情板上拿的新鲜价格，朋友：%d 个。",  -- 1209
+        "刚看过行情板：%d 个价格，还热乎着。",  -- 1210
+        "%d 个价格，%s读的。够用了，朋友。",  -- 1211
+        "上次看行情板是%s：%d 个价格。",  -- 1212
+        "%s的价格，跟隔夜面包一样硬了。按 %s 再读一遍。",  -- 1213
+        "%d 个价格，但那是%s读的。按 %s 我再看看。",  -- 1214
+        "也显示你保留的物品。%s隐藏。",  -- 1215
+        "保留：%d件，供你的专业、装备和标记之用。%s显示。",  -- 1216
+        "你保留的也在单子上。按 %s 收起来。",  -- 1217
+        "你保留的也显示着。按 %s 再藏起来。",  -- 1218
+        "留下了 %d 件：做专业用的、穿的、你标记的。按 %s 显示。",  -- 1219
+        "给你留了 %d 件：专业、装备和标记的。要的话按 %s。",  -- 1220
+        "每个",  -- 1221
+        "无数据",  -- 1222
+        "快速出售",  -- 1223
+        "耐心",  -- 1224
+        "读取所有价格",  -- 1225
+        "隐藏保留物品",  -- 1226
+        "显示保留物品",  -- 1227
+        "折线",  -- 1228
+        "蜡烛图",  -- 1229
+        "上架",  -- 1230
+        "%d / %d",  -- 1231
+        "上架 %d / %d 件，每件 %s",  -- 1232
+        "上架 %d 件，价格 %s",  -- 1233
+        "全部%d件上架，共%s",  -- 1234
+        "此客户端无法从这里在拍卖行上架。",  -- 1235
+        "已上架 %d 件，价格 %s。",  -- 1236
+        "拍卖行的市场：打开 / 关闭",  -- 1237
+        "市场的拍卖师问候",  -- 1238
+        "打开市场时，一位地精拍卖师会用游戏自带的声音说一句短语；关闭：静默打开",  -- 1239
+        "市场：显示保留的物品",  -- 1240
+        "市场也会列出你保留的物品：你的专业技能仍能借以升级、或能制成更值钱物品的东西，以及你标记为保留的物品；关闭：只显示你会出售的物品",  -- 1241
+        "市场：价格图显示为蜡烛图",  -- 1242
+        "市场的价格图为最近 7 天每天一根蜡烛（价格的开盘、最高、最低和收盘：收盘更高为绿色，更低为红色）；关闭：30 天内每天最低价的折线",  -- 1243
+        "打开或关闭市场（拍卖行的一个标签）",  -- 1244
+        "此客户端使用哪种拍卖行（用于排查问题）",  -- 1245
+        "打开一个专业技能窗口，我来看看你的配方。",  -- 1246
+        "这就是上限了，%d。训练师那里有下一个等级。",  -- 1247
+        "到了 %d 已经没什么可学了。去找训练师学下一个等级吧。",  -- 1248
+        "你的配方已经跟不上你了。去找训练师：%s 在 %d 等着你。",  -- 1249
+        "还差 %d 到 %d，你会的这些到不了那里。训练师有 %s 给你，%d 可学。",  -- 1250
+        "你的配方已经跟不上你了。去找训练师：%s 在等着你。",  -- 1251
+        "你的配方差 %d 到 %d 就不再教你了。向训练师要 %s。",  -- 1252
+        "你的配方差 %d 到 %d 就用尽了。训练师会有新东西。",  -- 1253
+        "你会的这些撑不过最后 %d 点。该去找训练师了。",  -- 1254
+        "%s 现在教不了你多少了，但这是你最好的。还差 %d 到 %d。",  -- 1255
+        "从这里开始会慢：%s 偶尔才给一点。还差 %d。",  -- 1256
+        "你先需要 %s，%s。指南从它开始这一段。",  -- 1257
+        "学会 %s，%s，我们就开始：还差 %d 到 %d。",  -- 1258
+        "还差 %d 到 %d。指南让你去采集 %s，直到 %d。",  -- 1259
+        "这里靠采集来提升：%s，直到 %d。",  -- 1260
+        "还差 %d 到 %d。先做 %s，或者你更想做 %s：%s。",  -- 1261
+        "指南说先做 %s。%s 也行：%s。",  -- 1262
+        "还差 %d 到 %d。先做 %s。",  -- 1263
+        "%s 现在是你最好的老师。还差 %d 点到 %d。",  -- 1264
+        "手要稳。先做 %s，还差 %d。",  -- 1265
+        "在训练师处",  -- 1266
+        "从商人处",  -- 1267
+        "从战利品中",  -- 1268
+        "通过任务",  -- 1269
+        "材料更便宜",  -- 1270
+        "商人出售的材料",  -- 1271
+        "自己采集的材料",  -- 1272
+        "好卖",  -- 1273
+        "你自己用得上",  -- 1274
+        "制作次数更少",  -- 1275
+        "需要找到或买到的配方",  -- 1276
+        "其他材料",  -- 1277
+        "指南的首选",  -- 1278
+        "打开专业技能窗口查看升级计划。",  -- 1279
+        "已到上限%d。下一等级找训练师。",  -- 1280
+        "还差%d到%d；现有配方不够。训练师有%s（%d）。",  -- 1281
+        "还差%d到%d；现有配方不够。训练师有%s。",  -- 1282
+        "现有配方还差%d点到%d。训练师有更多。",  -- 1283
+        "还差%d到%d。目前最佳：%s，绿色（偶尔加一点）。",  -- 1284
+        "还差%d到%d。先学%s，%s。",  -- 1285
+        "还差%d到%d。采集%s直到%d。",  -- 1286
+        "还差%d到%d。先做：%s，或%s（%s）。",  -- 1287
+        "还差%d到%d。先做：%s。",  -- 1288
+        "需采集或购买",  -- 1289
+        "制作%d次：%s",  -- 1290
+        "%s 学会它，%d 起。",  -- 1291
+        "%s 学会它。",  -- 1292
+        "%s：背包 %d，银行 %d，每次 %d",  -- 1293
+        "指南这一段靠采集 %s 来提升。",  -- 1294
+        "%s：你有%d个，计划需用%d个",  -- 1295
+        "用于%s",  -- 1296
+        "购买比用%s制作更便宜",  -- 1297
+        "用%s制作",  -- 1298
+        "导师：银行能让你做什么",  -- 1299
+        "用银行材料能做的",  -- 1300
+        "银行里的东西已经做不了更多了。",  -- 1301
+        "算上银行能做 %d 种，其中 %d 种只靠银行。",  -- 1302
+        "导师：%s %d > %d",  -- 1303
+        "导师",  -- 1304
+        "升级计划",  -- 1305
+        "或",  -- 1306
+        "采集 %s",  -- 1307
+        "待学",  -- 1308
+        "购买更划算",  -- 1309
+        "隐藏",  -- 1310
+        "计划",  -- 1311
+        "采集此项",  -- 1312
+        "全部采集",  -- 1313
+        "算上银行",  -- 1314
+        "使用计划",  -- 1315
+        "按两次隐藏",  -- 1316
+        "这里没有可以试穿的。",  -- 1317
+        "已将%d项加入采集清单。",  -- 1318
+        "什么都不缺：所需材料都已齐备。",  -- 1319
+        "打开专业技能窗口即可制定计划。",  -- 1320
+        "导师（升级计划）：显示 / 隐藏",  -- 1321
+        "显示你最后打开的专业技能窗口的升级计划，并启用手柄按键",  -- 1322
+        "任务左侧",  -- 1323
+        "任务右侧",  -- 1324
+        "任务下方",  -- 1325
+        "采集清单已满。",  -- 1326
+        "采集清单：%s，需要%d个。",  -- 1327
+        "采集",  -- 1328
+        "还有%d项",  -- 1329
+        "暂无需采集的物品。",  -- 1330
+        "再加一组",  -- 1331
+        "移除",  -- 1332
+        "清空",  -- 1333
+        "完成",  -- 1334
+        "清空整个采集清单？",  -- 1335
+        "采集清单：选择 / 完成",  -- 1336
+        "采集清单：添加你指向的物品",  -- 1337
+        "它不在采集清单上。",  -- 1338
+        "采集清单为空。",  -- 1339
+        "采集清单：位置",  -- 1340
+        "采集清单放在任务列表左侧、右侧或其任务下方",  -- 1341
+        "任务列表旁的采集清单：用手柄选择；add <物品> [数量]，remove <物品>，clear，或用 left / right / bottom 设置位置",  -- 1342
+        "仇恨百分比",  -- 1343
+        "在目标框体和姓名板的仇恨图标旁以数字显示你的仇恨占比",  -- 1344
+        "生命值数字",  -- 1345
+        "在条上显示缩写的剩余生命值（12.3k）（紧凑姓名板不显示：百分比就够了）",  -- 1346
+        "你的减益",  -- 1347
+        "目标姓名上方显示你的减益效果及其剩余时间",  -- 1348
+        "所有人的减益",  -- 1349
+        "游戏为姓名板标记的所有人的减益，而不只是你的",  -- 1350
+        "敌方增益",  -- 1351
+        "敌人减益效果旁的增益效果：只显示重要的（重要、激怒或你能驱散或偷取的），关闭“只显示重要效果”时显示全部",  -- 1352
+        "群体控制图标",  -- 1353
+        "单位被击晕、定身、恐惧时显示带剩余时间的大图标...",  -- 1354
+        "仇恨光晕",  -- 1355
+        "名字后的盾牌图标和光晕：攻击你时为红色，即将拉到仇恨时红黄交替，正在失去仇恨时黄蓝交替，不在你身上时为蓝色",  -- 1356
+        "任务标记",  -- 1357
+        "在你的任务仍然需要的单位上显示金色标记",  -- 1358
+        "姓名板动画",  -- 1359
+        "姓名板淡入，低生命值时呼吸闪动，群体控制时闪烁",  -- 1360
+        "小",  -- 1361
+        "普通",  -- 1362
+        "大",  -- 1363
+        "完整名字",  -- 1364
+        "简短名字",  -- 1365
+        "不显示名字",  -- 1366
+        "完整",  -- 1367
+        "极简迷你",  -- 1368
+        "姓名板大小",  -- 1369
+        "姓名板上条的大小：小而细、普通，或大（更宽更高）",  -- 1370
+        "姓名板上的名字",  -- 1371
+        "有生命条的姓名板上的名字：完整、缩短或不显示（目标框体会显示完整名字；等级和职业图标保留）。没有生命条的姓名板（友方NPC）始终保留名字",  -- 1372
+        "姓名板样式",  -- 1373
+        "一键设置姓名板开关。完整：全部。极简：无能量条、公会或头衔，名字缩短。极简迷你：带生命值的小条、你的减益和重要的增益、等级和职业，不显示名字（目标框体有）。仇恨、控制和醒目的施法始终保留",  -- 1374
+        "玩家头衔",  -- 1375
+        "在玩家姓名旁显示其头衔",  -- 1376
+        "公会与NPC职业",  -- 1377
+        "姓名下方的一行：玩家的公会，或NPC的职业",  -- 1378
+        "战斗中的友方血条",  -- 1379
+        "友方姓名板在该单位处于战斗状态时显示生命值、能量和施法",  -- 1380
+        "游戏自带的友方姓名板",  -- 1381
+        "友方姓名板（你的队伍、其他玩家、友方NPC）使用游戏自带外观；我们的只用于敌人",  -- 1382
+        "能量条",  -- 1383
+        "生命条下方的细长法力、怒气或能量条",  -- 1384
+        "施法目标",  -- 1385
+        "施法所指向的目标，显示在法术名称旁",  -- 1386
+        "生命值百分比",  -- 1387
+        "血条上的生命值百分比",  -- 1388
+        "目标姓名板上显示名字",  -- 1389
+        "关闭：目标的姓名板不显示名字和等级（目标框体会显示）",  -- 1390
+        "姓名板显示等级",  -- 1391
+        "敌人名字前的等级，按难度着色",  -- 1392
+        "紧凑姓名板",  -- 1393
+        "姓名板宽度约为一半",  -- 1394
+        "醒目的敌方施法",  -- 1395
+        "敌人的施法会闪烁、膨胀并越来越快地脉动直到完成，让你能及时打断",  -- 1396
+        "姓名板职业图标",  -- 1397
+        "在玩家名字前显示职业图标，无论敌友",  -- 1398
+        "NPC职能图标",  -- 1399
+        "在提供服务的友方NPC上方显示图标：商人显示背包，可修理的铁匠显示铁砧，训练师显示书本……（游戏自带图标；即使姓名板在等待你指向时也会显示）",  -- 1400
+        "友方NPC仅在指向时显示",  -- 1401
+        "友方NPC（商人、任务发布者、市民）的姓名板只在你指向时显示，与其鼠标提示一样",  -- 1402
+        "可互动物体上的名称",  -- 1403
+        "面对矿石、宝箱、铭牌等物体时在其上方显示名称（关闭：不显示名称，游戏自身的提示已说明它们是什么）",  -- 1404
+        "迷你姓名板",  -- 1405
+        "仆从、小动物和不给经验的灰色敌人显示小型姓名板：一条细条，上面显示你的减益效果，不显示名字（没有血条的小动物保留名字；是否显示姓名板由游戏自身选项决定）",  -- 1406
+        "地下城中的队友姓名板：仅名字",  -- 1407
+        "在地下城或团队副本中，友方玩家的姓名板由游戏自己绘制，插件不能修改：在那里会调整游戏自带的选项，让它们像我们的一样只显示职业颜色的名字而没有血条，战斗时游戏的血条会回来（开启了战斗中显示友方血条时）；离开时全部恢复原样",  -- 1408
+        "地下城中的队友姓名板：隐藏",  -- 1409
+        "在地下城或团队副本中，完全关闭游戏的友方玩家姓名板（离开时恢复成你原来的设置）",  -- 1410
+        "显示游戏为你的目标名字提供的内容（用于排查问题）",  -- 1411
+        "列出屏幕上的姓名板及其是否使用我们的外观（用于排查问题）",  -- 1412
+        "好吧，看看。",  -- 1413
+        "哎哟，这一大堆。",  -- 1414
+        "嗯，让我看看，看看……",  -- 1415
+        "艾露恩啊，赐我耐心。",  -- 1416
+        "以纳鲁之名，真是一团乱。",  -- 1417
+        "该死的背包。",  -- 1418
+        "包袱整齐，包袱就轻。",  -- 1419
+        "哼。破烂太多了。",  -- 1420
+        "全是累赘。",  -- 1421
+        "耐心。大地母亲自会赐予。",  -- 1422
+        "嘿，看看我们有啥，老兄？",  -- 1423
+        "如此杂乱，有失体面。",  -- 1424
+        "时间就是金钱。数一数。",  -- 1425
+        "嗯，这就行了。",  -- 1426
+        "感谢艾露恩。",  -- 1427
+        "圣光自会赐予。",  -- 1428
+        "哼。够用了。",  -- 1429
+        "嗯。够打一仗了。",  -- 1430
+        "轻装上路。不错。",  -- 1431
+        "还行。勉强。",  -- 1432
+        "一格都不剩了。垃圾能卖%s：卖掉就有地方了。",  -- 1433
+        "一格都不剩了。路上用不着的，可以先存银行。",  -- 1434
+        "垃圾：%d件，这里值%s。X 卖掉选中的那件；智能出售一次卖光。",  -- 1435
+        "其中%d件该放银行：银行里有同样的，或是我标记过。存入就会收好。",  -- 1436
+        "只剩%d格了。垃圾在任何商人那里都能卖%s。",  -- 1437
+        "只剩%d格了。该卖掉或存掉一些东西了。",  -- 1438
+        "上次看过之后新添了%d件。每件都有金色小点标着。",  -- 1439
+        "值得卖的：%d件。出售筛选会把它们集中起来，每件的提示都写着在哪卖最值。",  -- 1440
+        "垃圾：%d件，值%s。下个商人收走吧。",  -- 1441
+        "只有必需品。没什么值得卖的。",  -- 1442
+        "一切井井有条，还空着%d格。",  -- 1443
+        "装备修好了：%s。",  -- 1444
+        "我可以花%s帮你修装备；坏掉的装备既没护甲也没属性。",  -- 1445
+        "你的包满了。%d件东西我出%s收：点智能出售，就又有空位了。",  -- 1446
+        "我出%s收%d件东西：垃圾，还有拍卖行不会出更高价的。点智能出售就行。",  -- 1447
+        "拍卖行想要的那%d件留着：比我多给%s。",  -- 1448
+        "你的包满了。买东西之前先卖我点什么吧。",  -- 1449
+        "你包里没什么值得我出好价的。看看我的货吧。",  -- 1450
+        "你身上有%d件该放这里：我这儿存着同样的，或是你标记过。存入就会收好。",  -- 1451
+        "你身上有%d种东西我这儿还存着更多。取出能在出发前把包补满。",  -- 1452
+        "你的包快满了。路上用不着的就放我这儿吧。",  -- 1453
+        "东西在我这儿很安全，你的包还空着%d格。",  -- 1454
+        "今天没有你的信。我查了两遍。",  -- 1455
+        "你的信：%d封，没有附件。有空再看吧。",  -- 1456
+        "你的信：%d封。里面有：%s。",  -- 1457
+        "全部拿取能一次清空。",  -- 1458
+        "货到付款：%d封。这些你自己打开、自己付钱。",  -- 1459
+        "你的包满了：物品先留在信里。",  -- 1460
+        "去哪儿？指个地方，我告诉你要飞多久。",  -- 1461
+        "%s：按地图算大约%s。这条航线你还没飞过。",  -- 1462
+        "%s：按你上次飞那里算，大约%s。",  -- 1463
+        "%s：还说不准要多久。飞一次我就知道了。",  -- 1464
+        "跑了%d条。这片水域要的技能比我高：鱼饵有用，好一点的鱼竿也有用。",  -- 1465
+        "钩上没挂鱼饵。鱼饵能加技能，跑掉的就少了。",  -- 1466
+        "鱼饵快用完了。再挂一个，技能就不掉。",  -- 1467
+        "这里还没钓到的鱼：%d种。接着抛竿。",  -- 1468
+        "这片水里的鱼我都钓过了。那就换个地方。",  -- 1469
+        "还什么都没钓到。每片水域的第一条鱼都记在这里。",  -- 1470
+        "钓到的种类：%d。每片水域都还藏着几种：钓鱼面板上没钓到的会显示 ?。",  -- 1471
+        "在火边歇好了：接下来击杀获得的%d点经验翻倍。",  -- 1472
+        "没攒下休息。去旅店或城里过一夜，一段时间内击杀经验翻倍。",  -- 1473
+        "吸收 %d",  -- 1474
+        "右侧列表",  -- 1475
+        "中间逐个显示",  -- 1476
+        "%d 次治疗暴击",  -- 1477
+        "%d 次暴击",  -- 1478
+        "审判",  -- 1479
+        "高光时刻：位置",  -- 1480
+        "角色右侧冷却提示正上方的一块区域：最新的紧挨提示，旧的向上移动并淡出；或在中间一次显示一个",  -- 1481
+        "展示高光时刻的样子和手感",  -- 1482
+        "已收藏",  -- 1483
+        "已通过其他物品收藏",  -- 1484
+        "尚未收藏",  -- 1485
+        "外观",  -- 1486
+        "选择一个套装，把它的部件放到你的外观方案上。%s 才会保留；在那之前不花任何钱。",  -- 1487
+        "正在查看你的收藏...",  -- 1488
+        "你的外观方案已恢复原样。",  -- 1489
+        "%s：已穿上 %d/%d 件。",  -- 1490
+        "有 %d 件无法用于此外观方案。",  -- 1491
+        "你拥有部件的套装：1 个",  -- 1492
+        "你拥有部件的套装：%d 个",  -- 1493
+        "你无法穿戴",  -- 1494
+        "缺少",  -- 1495
+        "全部 %d 件",  -- 1496
+        "%d/%d 件",  -- 1497
+        "缺少：%s",  -- 1498
+        "还没有套装。名字相同的物品，比如绿铁头盔和绿铁护手，只要你拥有其中一件，就会出现在这里。",  -- 1499
+        "撤销",  -- 1500
+        "删除自定义套装%s？删除后无法恢复。",  -- 1501
+        "删除",  -- 1502
+        "请先指向一个自定义套装。",  -- 1503
+        "%s  删除自定义套装",  -- 1504
     },
     zhTW = {
         "錯誤：",  -- 1
@@ -14524,529 +14542,531 @@ local TRANSLATIONS = {
         "羅盤需要知道你在哪裡，而遊戲在這裡不提供。",  -- 977
         "任務羅盤：位置",  -- 978
         "在螢幕頂部，或在底部經驗條的位置（經驗條隨之移到頂部）",  -- 979
-        "在任務羅盤上你周圍顯示幾個標記，持續二十秒",  -- 980
-        "釣魚模式：關閉。",  -- 981
-        "釣魚：按%s拋竿",  -- 982
-        "沒有魚餌：按兩次%s使用%s",  -- 983
-        "按%s收起魚竿",  -- 984
-        "釣魚模式：按%s拋竿，浮標晃動時再按一次收竿。",  -- 985
-        "%s 收竿，%s 重新拋竿",  -- 986
-        "釣魚模式需要手持魚竿。",  -- 987
-        "你沒有學會釣魚。",  -- 988
-        "釣魚模式：一個按鈕拋竿和提竿",  -- 989
-        "釣魚按鍵：%s",  -- 990
-        "一鍵重新拋竿",  -- 991
-        "浮標在水中時，釣魚按鈕用來收竿，按一下 A 重新拋竿；關閉：A 歸你",  -- 992
-        "連按兩下上餌",  -- 993
-        "快速按兩下釣魚按鍵：當魚竿上沒有魚餌時，第二下會把背包裡最好的魚餌裝到魚竿上",  -- 994
-        "釣魚時隱藏控制器動作條",  -- 995
-        "手持魚竿時隱藏手把快捷列，水面一覽無遺；釣魚提示顯示拋竿的按鈕。戰鬥開始或收起魚竿時立即恢復",  -- 996
-        "暫時關閉一鍵釣魚，或重新開啟（手持釣竿時會自動開啟）",  -- 997
-        "用於釣魚的按鍵：起初是你的互動鍵（方塊或 X），也可以是任何其他按鍵，例如扳機鍵 (rt)",  -- 998
-        "杜洛塔的海岸是一片紅岩與溫暖的淺灘。回音群島的食人妖說，當潮水捎來島上炊火的氣味時，鯖魚群最是密集。",  -- 999
-        "莫高雷的湖泊小巧、清澈，而且從容。牛頭人釣魚就跟做其他事情一樣：慢慢來，並且心懷感謝。",  -- 1000
-        "貧瘠之地的每座綠洲都是聚會場所。不論白天來喝水的是誰，到了夜裡，水面下總有東西在游。",  -- 1001
-        "泰達希爾的池水全都在同一棵樹的樹蔭底下。夜精靈釣客信誓旦旦地說，那裡的魚從沒見過太陽，也一點都不想念。",  -- 1002
-        "黑海岸的海水灰濛濛、冷冰冰，到處是沉船殘骸。在奧伯丁外海上鉤的魚，有一半都在某人遺失的貨物裡安了家。",  -- 1003
-        "梣谷的河流在比多數王國還古老的枝葉下流過。魚的動作很快，但哨兵跑來問你在做什麼的動作更快。",  -- 1004
-        "在千針石林底下，水源稀少，而且被看得死緊。這裡的魚，都是憑本事掙得一席之地的。",  -- 1005
-        "石爪山脈的湖泊高高座落在群峰之間，冷得很。要不是這裡這麼好釣，哥布林早就把湖水抽光了。",  -- 1006
-        "淒涼之地的海岸只有骨骸與灰色的浪花。水底下有個東西，兩樣都愛吃。",  -- 1007
-        "菲拉斯一路綠到水邊。這裡的河流又深又暖，而且活力十足。",  -- 1008
-        "沒有人確定塵泥沼澤的陸地在哪裡結束、水又從哪裡開始。請在岸上釣魚，釣完後數一數自己的腳趾。",  -- 1009
-        "塔納利斯唯一稱得上是水的地方就在熱砂港。哥布林會把釣魚權賣給你，你不注意的話還會賣你兩次。",  -- 1010
-        "艾薩拉明亮的海灣底下有一座沉沒的城市。老釣客說，大魚都住在昔日的花園裡。",  -- 1011
-        "費伍德森林的水池會發光，但不是好的那種。還在裡頭游的東西，頑強到毫無道理可言。",  -- 1012
-        "安戈洛的溫泉與焦油圍繞的湖泊，保存了世界其他地方早已遺忘的東西。其中有些還會咬。",  -- 1013
-        "月光林地的月神湖靜得像屏住的呼吸。德魯伊只要求一件事：吃多少就拿多少。",  -- 1014
-        "希利蘇斯只有沙、風，還有翅膀拍動的聲音。如果你在這裡找到了能釣魚的水，別告訴任何人。",  -- 1015
-        "冬泉谷的湖泊邊緣結冰，中央卻冒著蒸氣。那裡的魚為了禦寒養得肥滋滋的，值得你走這一趟。",  -- 1016
-        "在奧格瑪的水池釣魚的，有無事可做的苦工，也有嘴上說自己同樣無事可做的老步兵。兩邊都會告訴你，最大的那條跑掉了。",  -- 1017
-        "雷霆崖池塘裡的魚，一輩子都住在比平原高出一大截的地方。牠看起來倒是很平靜。",  -- 1018
-        "達納蘇斯對待水域就像對待神殿一樣細心。魚兒已經習慣受人讚賞了。",  -- 1019
-        "奧特蘭克山脈的湖泊是融雪匯成的，巨魔和辛迪加會趁沒人注意時來釣魚。",  -- 1020
-        "阿拉希的岸邊見過的軍隊比釣客還多。水面上飄揚的是誰的旗幟，魚兒早就不在意了。",  -- 1021
-        "荒蕪之地從頭到尾都是塵土。在這裡有魚上鉤是個小小的奇蹟，請把它當奇蹟看待。",  -- 1022
-        "詛咒之地的海岸赤紅、光禿又安靜。活在那片浪裡的東西，已經學會跟很多事情共存。",  -- 1023
-        "提里斯法的湖泊靜靜躺在病懨懨的天空下。被遺忘者釣魚是出於習慣；死者吃得不多，但他們還記得自己喜歡過。",  -- 1024
-        "銀松森林長長的海岸盡是霧氣與松影。這裡很好釣，這也是大家對這個地方唯一說得出口的好話。",  -- 1025
-        "西瘟疫之地的河流還在流，只是不乾淨。從裡頭拉上來的東西，請看兩遍。",  -- 1026
-        "很少人在東瘟疫之地釣魚，願意承認的更少。這裡的水只剩下瘟疫留給它的部分，而它還守著。",  -- 1027
-        "希爾斯布萊德的河流與長長的南岸，在每一場為了爭奪它們而打的仗裡，都餵飽過雙方的人。",  -- 1028
-        "辛特蘭的湖泊高高藏在樹林之間，蠻錘矮人以為沒人看得見的時候，會騎在獅鷲背上釣魚。",  -- 1029
-        "丹莫洛的湖泊一年中大半時間都被冰圍著。矮人會鑿個洞，帶著一杯啤酒坐下來，不管釣到什麼都說今天是好日子。",  -- 1030
-        "別的地方有河流，灼熱峽谷有的是熔岩。改帶點喝的來吧。",  -- 1031
-        "燃燒平原只有灰燼與餘火。這裡的水就算真的給了你什麼，也會是燙的。",  -- 1032
-        "艾爾文的每個孩子都在水晶湖或石碑湖學釣魚。那裡的小魚已經把他們耍了好幾代。",  -- 1033
-        "逆風小徑水很少，歡迎更少。卡拉贊底下水池裡的東西，最好就留在那裡。",  -- 1034
-        "暮色森林邊緣的那條河，不管幾點都是黑的。魚好像不介意黑暗，介意的是釣客。",  -- 1035
-        "洛克湖是洛克莫丹的驕傲，由雄偉的巨石水壩攔住。矮人會拿它來衡量釣魚故事，而贏的通常是湖。",  -- 1036
-        "赤脊山的止水湖美得像幅畫，湖畔鎮的每座碼頭都有人在釣。鎮民知道每一個好位置，卻一個也不會告訴你。",  -- 1037
-        "從叢林河流到荒野般的南方海岬，荊棘谷擁有整塊大陸最富饒的水域。藏寶海灣的釣客為此舉辦釣魚大賽，而且幾乎人人作弊。",  -- 1038
-        "悲傷沼澤是綠樹底下的綠水。魚吃起來有泥巴味，當地人偏偏就愛這一味。",  -- 1039
-        "西部荒野的田地毀了，海岸卻沒有。留下來的人靠著那條長長的灰色海岸維生。",  -- 1040
-        "濕地這名字取得好。米奈希爾港的碼頭是這裡最乾的釣點，而鱷魚也知道這件事。",  -- 1041
-        "在暴風城運河釣魚的有小孩、退休老人，以及至少一位喬裝過的貴族。沒有人會問運河裡還有什麼。",  -- 1042
-        "荒棄的洞穴裡有鐵爐堡唯一一座安靜的水池。老矮人會在那裡釣上好幾個小時，一句話也不說。",  -- 1043
-        "幽暗城運河的那種綠，跟藻類一點關係也沒有。在那裡釣魚的被遺忘者，並不是為了張羅晚餐。",  -- 1044
-        "多數釣客這輩子釣起的第一條魚，顏色鮮豔到讓人忘不了。",  -- 1045
-        "滑溜、敏捷，在每一處溫暖海岸都很常見。烤來吃比名字給人的印象好多了。",  -- 1046
-        "整條魚幾乎都是嘴，在你不會想喝的水裡最快樂。",  -- 1047
-        "嬌小、滿口利牙，而且什麼都不怕。據說曾有一群把熊趕出了洛克湖。",  -- 1048
-        "浪花底下的一道色彩。水手認為釣線上有一條，這趟航程就會順利。",  -- 1049
-        "很有耐心的底棲魚，鬍鬚長得像矮人長老。",  -- 1050
-        "沒有人會吃第二次。鍊金師倒是能買多少就買多少。",  -- 1051
-        "牠的鰭像悶燒的炭火一樣發亮，榨出來的油也幾乎一樣好燒。",  -- 1052
-        "像小盾牌一樣全身披甲。裡頭的肉值得你費這番工夫。",  -- 1053
-        "哀嚎洞穴附近的水裡有某種東西改變了牠。吃下一條，你可能也會跟著變上一陣子。",  -- 1054
-        "河邊的居民說吃一頓能讓頭腦清醒。真正讓牠有智慧的，是逆流而上這件事。",  -- 1055
-        "比牠的表親更老、更大、更有智慧，但還是沒能躲過你的魚鉤。",  -- 1056
-        "來自溫暖南方海域的頑強鬥士，從藏寶海灣到加基森，每間酒館的菜單上都少不了牠。",  -- 1057
-        "牠的額頭像真正的秘銀一樣閃亮。試過拿去熔煉的礦工不只一個。",  -- 1058
-        "牠的鱗片可以熬成一種油，讓皮膚硬得像石頭。牠偏好夜晚。",  -- 1059
-        "擦得像閱兵用的胸甲一樣亮，重量也差不多。",  -- 1060
-        "牠只在寒冷的月份靠岸，識貨的廚師會等上一整年。",  -- 1061
-        "白天變長時牠就會成群洄游。沿海居民用牠來標記季節。",  -- 1062
-        "要抓就抓中間，而且只有一次機會。",  -- 1063
-        "來自蠻荒地帶的河魚，鰓紅得像食人妖的戰紋。",  -- 1064
-        "牠在天黑後覓食。用牠煮的湯能穩定施法者的神經。",  -- 1065
-        "牠在白天覓食，幾乎每一點都跟夜鱗鯛魚相反，卻還是同住一片水域。",  -- 1066
-        "嚴格來說不算魚。牠不同意被抓，而且會讓你清楚知道。",  -- 1067
-        "蒼白如河冰，來自北方寒冷清澈的湖泊。",  -- 1068
-        "你會需要兩隻手，也許還要一個朋友。",  -- 1069
-        "%.1f磅",  -- 1070
-        "釣魚日誌新增：%s，%s。",  -- 1071
-        "釣魚日誌新增：%s。",  -- 1072
-        "你至今最重的%s：%s（之前是%s）。",  -- 1073
-        "魚餌 %s",  -- 1074
-        "沒有魚餌",  -- 1075
-        "釣到 %d",  -- 1076
-        "跑掉 %d",  -- 1077
-        "好奇的一條：+%d%%",  -- 1078
-        "讓魚餌保持在魚的旁邊",  -- 1079
-        "下一條漁獲 +%d%%",  -- 1080
-        "按住 %s：魚餌沿著魚線移動",  -- 1081
-        "連續 %d 條",  -- 1082
-        "浮標在水裡時的小遊戲",  -- 1083
-        "在魚線入水時於施法條上進行：按住扳機，魚餌沿著魚線移動，放開則漂回；讓它待在魚影旁邊。玩得越好，下一條漁獲的虛構重量越重。不占用任何按鈕，也從不影響拋竿或收獲",  -- 1084
-        "釣到 %d，%d 種，跑掉 %d",  -- 1085
-        "最重：%s，%s",  -- 1086
-        "魚",  -- 1087
-        "水域",  -- 1088
-        "還沒有釣到任何東西。帶上魚竿去水邊吧。",  -- 1089
-        "釣到：%d",  -- 1090
-        "最重：%s，於%s",  -- 1091
-        "首次釣到：%s",  -- 1092
-        "在這裡釣到：%d",  -- 1093
-        "在這裡發現的種類：%d",  -- 1094
-        "開啟或關閉你的釣魚日誌：你釣到過的每個種類、每種最重的一條，以及你釣過魚的水域",  -- 1095
-        "飛行",  -- 1096
-        "提前降落",  -- 1097
-        "在下一個飛行點降落",  -- 1098
-        "目的地未知",  -- 1099
-        "依距離估算",  -- 1100
-        "此航線首次飛行：正在記錄飛行時間",  -- 1101
-        "即將降落",  -- 1102
-        "%s：約 %s，依距離估算",  -- 1103
-        "%s：約 %s",  -- 1104
-        "%s：此航線首次飛行，時間未知",  -- 1105
-        "飛行中，目的地未知",  -- 1106
-        "%s：已記住飛行時間，%s",  -- 1107
-        "提前降落：%s，約 %s",  -- 1108
-        "在下一個飛行點提前降落",  -- 1109
-        "清冷乾爽，腳下是雪，呼出的氣息懸在空中",  -- 1110
-        "刺骨的寒冷，山巔吹來的風鑽進盔甲的每一道縫隙",  -- 1111
-        "又熱又濕，空氣濃得幾乎能喝",  -- 1112
-        "林冠下悶熱黏膩，蟲鳴聒噪",  -- 1113
-        "炎熱乾燥，風裡夾著沙塵",  -- 1114
-        "烈日炙烤，土地龜裂；能喝水時就喝吧",  -- 1115
-        "熱風中裹著煙與灰",  -- 1116
-        "空氣灼熱，火星飄散",  -- 1117
-        "灰暗寒冷，潮濕的霧氣揮之不去",  -- 1118
-        "空氣發涼，幾乎沒有光亮",  -- 1119
-        "溫和晴朗，微風輕拂",  -- 1120
-        "天氣宜人，適合趕路",  -- 1121
-        "清涼碧綠，樹葉沙沙低語",  -- 1122
-        "柔光穿過林間，空氣清新",  -- 1123
-        "悶熱潮濕，腳下的地面鬆軟",  -- 1124
-        "溫暖潮濕的空氣，夾著沼澤的氣味",  -- 1125
-        "%s，%s：%s",  -- 1126
-        "已知 %d 條飛行航線。",  -- 1127
-        "飛行：坐騎沿進度條飛行",  -- 1128
-        "獅鷲獸、雙足飛龍或蝙蝠（飛行管理員給你的那隻）沿飛行進度條飛向你的降落地點",  -- 1129
-        "飛行：落地處的天氣",  -- 1130
-        "落地時，聊天框會說出你抵達之處的空氣通常如何（荊棘谷又熱又濕，丹莫洛腳下是雪），以及當時的時段",  -- 1131
-        "列出已知時間的飛行航線",  -- 1132
-        "落地！+%d",  -- 1133
-        "撞上了：連擊中斷",  -- 1134
-        "%s 振翅  ·  躲開樹梢和飛艇",  -- 1135
-        "%s 用網捕獲騎手贏得飛行金幣  ·  %s 高空",  -- 1136
-        "%d 飛行金幣",  -- 1137
-        "%s 振翅",  -- 1138
-        "%s 撒網",  -- 1139
-        "%s 高空",  -- 1140
-        "%s：回到遊戲（%d 飛行金幣）",  -- 1141
-        "%s：途中的小遊戲",  -- 1142
-        "飛行小遊戲已關閉：/cchud flightgame on",  -- 1143
-        "飛行小遊戲在飛行途中進行。",  -- 1144
-        "戰鬥中不行。",  -- 1145
-        "飛行小遊戲：開始 / 高空",  -- 1146
-        "飛行途中：開始飛行小遊戲，或把它收到高空再拿回來",  -- 1147
-        "電影化飛行：鏡頭環繞你",  -- 1148
-        "電影中，鏡頭緩緩環繞你和坐騎，大約一分半鐘轉一整圈，並在降落前回到你身後。關閉：固定鏡頭",  -- 1149
-        "離線",  -- 1150
-        "死亡",  -- 1151
-        "關閉",  -- 1152
-        "治療專精時",  -- 1153
-        "總是",  -- 1154
-        "太遠",  -- 1155
-        "治療者的隊伍和團隊",  -- 1156
-        "隊伍中：你的隊友在你的角色旁邊，各帶一個選取他們的按鍵；團隊中：更細的框架。每個只顯示需要多少治療、你能驅散的減益效果，以及是否在範圍內",  -- 1157
-        "%d%%可能售出",  -- 1158
-        "穩賣 (%d%%)",  -- 1159
-        "這個自己就能賣掉 (%d%%)",  -- 1160
-        "我看能賣 (%d%%)",  -- 1161
-        "應該有人買 (%d%%)",  -- 1162
-        "一半一半 (%d%%)",  -- 1163
-        "說不準 (%d%%)",  -- 1164
-        "有點賭運氣 (%d%%)",  -- 1165
-        "可能要掛一陣 (%d%%)",  -- 1166
-        "別抱太大希望 (%d%%)",  -- 1167
-        "希望不大，朋友 (%d%%)",  -- 1168
-        "比商人多 +%s",  -- 1169
-        "尚無已知價格",  -- 1170
-        "商人給的一樣多",  -- 1171
-        "經紀人",  -- 1172
-        "市場",  -- 1173
-        "每個銅板都算清了，朋友",  -- 1174
-        "你的背包裡沒有可以在這裡出售的物品。",  -- 1175
-        "最近 7 天沒有價格。",  -- 1176
-        "目前只有一天的價格：你每天造訪拍賣場都會多一根蠟燭。",  -- 1177
-        "7 天，每天一根蠟燭：綠色收盤更高，紅色更低",  -- 1178
-        "30 天，每天的最低價：綠色上漲，紅色下跌",  -- 1179
-        "尚無價格記錄：請在幾天內讀取拍賣場。",  -- 1180
-        "目前只有一天的價格：你每去一天拍賣場，這條線就會延長一點。",  -- 1181
-        "每件要價 %s，你放出的共 %s（%d 件），%d 件留給你",  -- 1182
-        "每個要價%s，全部%s（%d個）",  -- 1183
-        "最低",  -- 1184
-        "讀取於%s",  -- 1185
-        "常價",  -- 1186
-        "7天：%s 至 %s",  -- 1187
-        "拍賣中：%d筆拍賣，%d件物品",  -- 1188
-        "每個%s，全部%s（%d個）",  -- 1189
-        "你在這裡上架了%d件，售出%d筆拍賣",  -- 1190
-        "未知價格：請先讀取拍賣場。",  -- 1191
-        "包裡沒有可在這裡賣的東西。",  -- 1192
-        "今天沒有比賣給商人更划算的；耐心等等，%d件或許可以。",  -- 1193
-        "最好的在前：%d件在這裡比賣給商人更值，耐心等還有%d件。",  -- 1194
-        "包裡空空的，朋友。拿點能賣的來。",  -- 1195
-        "今天沒什麼比賣給商人強。耐心點的話，%d 件或許可以。",  -- 1196
-        "這些包裡沒有穩賺的，朋友。等一等，%d 件也許能賺。",  -- 1197
-        "好貨在上頭：這裡 %d 件勝過任何商人，耐心點還有 %d 件。",  -- 1198
-        "%d 件在這裡比賣商人賺得多，好的在前。等等還有 %d 件。",  -- 1199
-        "最上面的最賺錢：%d 件穩賣，能等的話還有 %d 件。",  -- 1200
-        "還沒有價格：%s讀取拍賣場。",  -- 1201
-        "剛讀取的價格：%d個。",  -- 1202
-        "%d個價格，讀取於%s。",  -- 1203
-        "%d個價格，讀取於%s。%s重新讀取。",  -- 1204
-        "還沒看過行情板。按 %s，我把價格全拿來。",  -- 1205
-        "還沒有價格，朋友。按 %s 讀整塊行情板。",  -- 1206
-        "剛從行情板上拿的新鮮價格，朋友：%d 個。",  -- 1207
-        "剛看過行情板：%d 個價格，還熱呼著。",  -- 1208
-        "%d 個價格，%s讀的。夠用了，朋友。",  -- 1209
-        "上次看行情板是%s：%d 個價格。",  -- 1210
-        "%s的價格，跟隔夜麵包一樣硬了。按 %s 再讀一遍。",  -- 1211
-        "%d 個價格，但那是%s讀的。按 %s 我再看看。",  -- 1212
-        "也顯示你保留的物品。%s隱藏。",  -- 1213
-        "保留：%d件，供你的專業、裝備和標記之用。%s顯示。",  -- 1214
-        "你保留的也在單子上。按 %s 收起來。",  -- 1215
-        "你保留的也顯示著。按 %s 再藏起來。",  -- 1216
-        "留下了 %d 件：做專業用的、穿的、你標記的。按 %s 顯示。",  -- 1217
-        "給你留了 %d 件：專業、裝備和標記的。要的話按 %s。",  -- 1218
-        "每個",  -- 1219
-        "無資料",  -- 1220
-        "快速出售",  -- 1221
-        "耐心",  -- 1222
-        "讀取所有價格",  -- 1223
-        "隱藏保留物品",  -- 1224
-        "顯示保留物品",  -- 1225
-        "折線",  -- 1226
-        "蠟燭圖",  -- 1227
-        "上架",  -- 1228
-        "%d / %d",  -- 1229
-        "上架 %d / %d 件，每件 %s",  -- 1230
-        "上架 %d 件，價格 %s",  -- 1231
-        "全部%d件上架，共%s",  -- 1232
-        "此客戶端無法從這裡在拍賣場上架。",  -- 1233
-        "已上架 %d 件，價格 %s。",  -- 1234
-        "拍賣場的市場：開啟 / 關閉",  -- 1235
-        "市場的拍賣師問候",  -- 1236
-        "開啟市場時，一位哥布林拍賣師會用遊戲本身的聲音說一句短語；關閉：靜默開啟",  -- 1237
-        "市場：顯示保留的物品",  -- 1238
-        "市場也會列出你保留的物品：你的專業技能仍能藉以升級、或能製成更值錢物品的東西，以及你標記為保留的物品；關閉：只顯示你會出售的物品",  -- 1239
-        "市場：價格圖顯示為蠟燭圖",  -- 1240
-        "市場的價格圖為最近 7 天每天一根蠟燭（價格的開盤、最高、最低和收盤：收盤更高為綠色，更低為紅色）；關閉：30 天內每天最低價的折線",  -- 1241
-        "開啟或關閉市場（拍賣場的一個分頁）",  -- 1242
-        "此客戶端使用哪種拍賣場（用於排查問題）",  -- 1243
-        "打開一個專業技能視窗，我來看看你的配方。",  -- 1244
-        "這就是上限了，%d。訓練師那裡有下一個等級。",  -- 1245
-        "到了 %d 已經沒什麼可學了。去找訓練師學下一個等級吧。",  -- 1246
-        "你的配方已經跟不上你了。去找訓練師：%s 在 %d 等著你。",  -- 1247
-        "還差 %d 到 %d，你會的這些到不了那裡。訓練師有 %s 給你，%d 可學。",  -- 1248
-        "你的配方已經跟不上你了。去找訓練師：%s 在等著你。",  -- 1249
-        "你的配方差 %d 到 %d 就不再教你了。向訓練師要 %s。",  -- 1250
-        "你的配方差 %d 到 %d 就用盡了。訓練師會有新東西。",  -- 1251
-        "你會的這些撐不過最後 %d 點。該去找訓練師了。",  -- 1252
-        "%s 現在教不了你多少了，但這是你最好的。還差 %d 到 %d。",  -- 1253
-        "從這裡開始會慢：%s 偶爾才給一點。還差 %d。",  -- 1254
-        "你先需要 %s，%s。指南從它開始這一段。",  -- 1255
-        "學會 %s，%s，我們就開始：還差 %d 到 %d。",  -- 1256
-        "還差 %d 到 %d。指南讓你去採集 %s，直到 %d。",  -- 1257
-        "這裡靠採集來提升：%s，直到 %d。",  -- 1258
-        "還差 %d 到 %d。先做 %s，或者你更想做 %s：%s。",  -- 1259
-        "指南說先做 %s。%s 也行：%s。",  -- 1260
-        "還差 %d 到 %d。先做 %s。",  -- 1261
-        "%s 現在是你最好的老師。還差 %d 點到 %d。",  -- 1262
-        "手要穩。先做 %s，還差 %d。",  -- 1263
-        "在訓練師處",  -- 1264
-        "從商人處",  -- 1265
-        "從戰利品中",  -- 1266
-        "透過任務",  -- 1267
-        "材料更便宜",  -- 1268
-        "商人出售的材料",  -- 1269
-        "自己採集的材料",  -- 1270
-        "好賣",  -- 1271
-        "你自己用得上",  -- 1272
-        "製作次數更少",  -- 1273
-        "需要找到或買到的配方",  -- 1274
-        "其他材料",  -- 1275
-        "指南的首選",  -- 1276
-        "打開專業技能視窗查看升級計畫。",  -- 1277
-        "已到上限%d。下一等級找訓練師。",  -- 1278
-        "還差%d到%d；現有配方不夠。訓練師有%s（%d）。",  -- 1279
-        "還差%d到%d；現有配方不夠。訓練師有%s。",  -- 1280
-        "現有配方還差%d點到%d。訓練師有更多。",  -- 1281
-        "還差%d到%d。目前最佳：%s，綠色（偶爾加一點）。",  -- 1282
-        "還差%d到%d。先學%s，%s。",  -- 1283
-        "還差%d到%d。採集%s直到%d。",  -- 1284
-        "還差%d到%d。先做：%s，或%s（%s）。",  -- 1285
-        "還差%d到%d。先做：%s。",  -- 1286
-        "需採集或購買",  -- 1287
-        "製作%d次：%s",  -- 1288
-        "%s 學會它，%d 起。",  -- 1289
-        "%s 學會它。",  -- 1290
-        "%s：背包 %d，銀行 %d，每次 %d",  -- 1291
-        "指南這一段靠採集 %s 來提升。",  -- 1292
-        "%s：你有%d個，計畫需用%d個",  -- 1293
-        "用於%s",  -- 1294
-        "購買比用%s製作更便宜",  -- 1295
-        "用%s製作",  -- 1296
-        "導師：銀行能讓你做什麼",  -- 1297
-        "用銀行材料能做的",  -- 1298
-        "銀行裡的東西已經做不了更多了。",  -- 1299
-        "算上銀行能做 %d 種，其中 %d 種只靠銀行。",  -- 1300
-        "導師：%s %d > %d",  -- 1301
-        "導師",  -- 1302
-        "升級計畫",  -- 1303
-        "或",  -- 1304
-        "採集 %s",  -- 1305
-        "待學",  -- 1306
-        "購買更划算",  -- 1307
-        "隱藏",  -- 1308
-        "計畫",  -- 1309
-        "採集此項",  -- 1310
-        "全部採集",  -- 1311
-        "算上銀行",  -- 1312
-        "使用計畫",  -- 1313
-        "按兩次隱藏",  -- 1314
-        "這裡沒有可以試穿的。",  -- 1315
-        "已將%d項加入採集清單。",  -- 1316
-        "什麼都不缺：所需材料都已齊備。",  -- 1317
-        "開啟專業技能視窗即可擬定計畫。",  -- 1318
-        "導師（升級計畫）：顯示 / 隱藏",  -- 1319
-        "顯示你最後開啟的專業技能視窗的升級計畫，並啟用手把按鍵",  -- 1320
-        "任務左側",  -- 1321
-        "任務右側",  -- 1322
-        "任務下方",  -- 1323
-        "採集清單已滿。",  -- 1324
-        "採集清單：%s，需要%d個。",  -- 1325
-        "採集",  -- 1326
-        "還有%d項",  -- 1327
-        "暫無需採集的物品。",  -- 1328
-        "再加一組",  -- 1329
-        "移除",  -- 1330
-        "清空",  -- 1331
-        "完成",  -- 1332
-        "清空整個採集清單？",  -- 1333
-        "採集清單：選擇 / 完成",  -- 1334
-        "採集清單：加入你指向的物品",  -- 1335
-        "它不在採集清單上。",  -- 1336
-        "採集清單為空。",  -- 1337
-        "採集清單：位置",  -- 1338
-        "採集清單放在任務列表左側、右側或其任務下方",  -- 1339
-        "任務列表旁的採集清單：用手把選擇；add <物品> [數量]，remove <物品>，clear，或用 left / right / bottom 設定位置",  -- 1340
-        "仇恨百分比",  -- 1341
-        "在目標框架和名條的仇恨圖示旁以數字顯示你的仇恨佔比",  -- 1342
-        "生命值數字",  -- 1343
-        "在條上顯示縮寫的剩餘生命值（12.3k）（緊湊名條不顯示：百分比就夠了）",  -- 1344
-        "你的減益",  -- 1345
-        "目標名稱上方顯示你的減益效果及其剩餘時間",  -- 1346
-        "所有人的減益",  -- 1347
-        "遊戲為名條標記的所有人的減益，而不只是你的",  -- 1348
-        "敵方增益",  -- 1349
-        "敵人減益效果旁的增益效果：只顯示重要的（重要、狂怒或你能驅散或竊取的），關閉「只顯示重要效果」時顯示全部",  -- 1350
-        "群體控制圖示",  -- 1351
-        "單位被擊昏、定身、恐懼時顯示帶剩餘時間的大圖示...",  -- 1352
-        "仇恨光暈",  -- 1353
-        "名字後的盾牌圖示和光暈：攻擊你時為紅色，即將拉到仇恨時紅黃交替，正在失去仇恨時黃藍交替，不在你身上時為藍色",  -- 1354
-        "任務標記",  -- 1355
-        "在你的任務仍然需要的單位上顯示金色標記",  -- 1356
-        "名條動畫",  -- 1357
-        "名條淡入，低生命值時呼吸閃動，群體控制時閃爍",  -- 1358
-        "小",  -- 1359
-        "普通",  -- 1360
-        "大",  -- 1361
-        "完整名字",  -- 1362
-        "簡短名字",  -- 1363
-        "不顯示名字",  -- 1364
-        "完整",  -- 1365
-        "極簡迷你",  -- 1366
-        "名條大小",  -- 1367
-        "名條上條的大小：小而細、普通，或大（更寬更高）",  -- 1368
-        "名條上的名字",  -- 1369
-        "有生命條的名條上的名字：完整、縮短或不顯示（目標框架會顯示完整名字；等級和職業圖示保留）。沒有生命條的名條（友方NPC）始終保留名字",  -- 1370
-        "名條樣式",  -- 1371
-        "一鍵設定名條開關。完整：全部。極簡：無能量條、公會或頭銜，名字縮短。極簡迷你：帶生命值的小條、你的減益和重要的增益、等級和職業，不顯示名字（目標框架有）。仇恨、控制和醒目的施法始終保留",  -- 1372
-        "玩家頭銜",  -- 1373
-        "在玩家名稱旁顯示其頭銜",  -- 1374
-        "公會與NPC職業",  -- 1375
-        "名稱下方的一行：玩家的公會，或NPC的職業",  -- 1376
-        "戰鬥中的友方血條",  -- 1377
-        "友方名條在該單位處於戰鬥狀態時顯示生命力、能量與施法",  -- 1378
-        "遊戲內建的友方名條",  -- 1379
-        "友方名條（你的隊伍、其他玩家、友方NPC）使用遊戲內建外觀；我們的只用於敵人",  -- 1380
-        "能量條",  -- 1381
-        "生命力條下方的細長法力、怒氣或能量條",  -- 1382
-        "施法目標",  -- 1383
-        "施法所指向的目標，顯示在法術名稱旁",  -- 1384
-        "生命力百分比",  -- 1385
-        "血條上的生命力百分比",  -- 1386
-        "目標名條上顯示名字",  -- 1387
-        "關閉：目標的名條不顯示名字和等級（目標框架會顯示）",  -- 1388
-        "名條顯示等級",  -- 1389
-        "敵人名字前的等級，依難度著色",  -- 1390
-        "精簡名條",  -- 1391
-        "名條寬度約為一半",  -- 1392
-        "醒目的敵方施法",  -- 1393
-        "敵人的施法會閃爍、膨脹並越來越快地脈動直到完成，讓你能及時打斷",  -- 1394
-        "名條職業圖示",  -- 1395
-        "在玩家名字前顯示職業圖示，無論敵友",  -- 1396
-        "NPC職能圖示",  -- 1397
-        "在提供服務的友方NPC上方顯示圖示：商人顯示背包，可修理的鐵匠顯示鐵砧，訓練師顯示書本……（遊戲自帶圖示；即使名條在等待你指向時也會顯示）",  -- 1398
-        "友方NPC僅在指向時顯示",  -- 1399
-        "友方NPC（商人、任務發布者、市民）的名條只在你指向時顯示，與其滑鼠提示一樣",  -- 1400
-        "可互動物件上的名稱",  -- 1401
-        "面對礦石、寶箱、銘牌等物件時在其上方顯示名稱（關閉：不顯示名稱，遊戲本身的提示已說明它們是什麼）",  -- 1402
-        "迷你名條",  -- 1403
-        "僕從、小動物和不給經驗的灰色敵人顯示小型名條：一條細條，上面顯示你的減益效果，不顯示名字（沒有血條的小動物保留名字；是否顯示名條由遊戲自身選項決定）",  -- 1404
-        "地城中的隊友名條：僅名字",  -- 1405
-        "在地城或團隊副本中，友方玩家的名條由遊戲自己繪製，插件不能修改：在那裡會調整遊戲內建的選項，讓它們像我們的一樣只顯示職業顏色的名字而沒有血條，戰鬥時遊戲的血條會回來（開啟了戰鬥中顯示友方血條時）；離開時全部恢復原樣",  -- 1406
-        "地城中的隊友名條：隱藏",  -- 1407
-        "在地城或團隊副本中，完全關閉遊戲的友方玩家名條（離開時恢復成你原來的設定）",  -- 1408
-        "顯示遊戲為你的目標名字提供的內容（用於排查問題）",  -- 1409
-        "列出畫面上的名條及其是否使用我們的外觀（用於排查問題）",  -- 1410
-        "好吧，看看。",  -- 1411
-        "哎喲，這一大堆。",  -- 1412
-        "嗯，讓我看看，看看……",  -- 1413
-        "伊露恩啊，賜我耐心。",  -- 1414
-        "以那魯之名，真是一團亂。",  -- 1415
-        "該死的背包。",  -- 1416
-        "包袱整齊，包袱就輕。",  -- 1417
-        "哼。破爛太多了。",  -- 1418
-        "全是累贅。",  -- 1419
-        "耐心。大地之母自會賜予。",  -- 1420
-        "嘿，看看我們有啥，老兄？",  -- 1421
-        "如此雜亂，有失體面。",  -- 1422
-        "時間就是金錢。數一數。",  -- 1423
-        "嗯，這就行了。",  -- 1424
-        "感謝伊露恩。",  -- 1425
-        "聖光自會賜予。",  -- 1426
-        "哼。夠用了。",  -- 1427
-        "嗯。夠打一仗了。",  -- 1428
-        "輕裝上路。不錯。",  -- 1429
-        "還行。勉強。",  -- 1430
-        "一格都不剩了。垃圾能賣%s：賣掉就有地方了。",  -- 1431
-        "一格都不剩了。路上用不著的，可以先存銀行。",  -- 1432
-        "垃圾：%d件，這裡值%s。X 賣掉選中的那件；智慧出售一次賣光。",  -- 1433
-        "其中%d件該放銀行：銀行裡有同樣的，或是我標記過。存入就會收好。",  -- 1434
-        "只剩%d格了。垃圾在任何商人那裡都能賣%s。",  -- 1435
-        "只剩%d格了。該賣掉或存掉一些東西了。",  -- 1436
-        "上次看過之後新添了%d件。每件都有金色小點標著。",  -- 1437
-        "值得賣的：%d件。出售篩選會把它們集中起來，每件的提示都寫著在哪賣最值。",  -- 1438
-        "垃圾：%d件，值%s。下個商人收走吧。",  -- 1439
-        "只有必需品。沒什麼值得賣的。",  -- 1440
-        "一切井井有條，還空著%d格。",  -- 1441
-        "裝備修好了：%s。",  -- 1442
-        "我可以花%s幫你修裝備；壞掉的裝備既沒護甲也沒屬性。",  -- 1443
-        "你的包滿了。%d件東西我出%s收：點智慧出售，就又有空位了。",  -- 1444
-        "我出%s收%d件東西：垃圾，還有拍賣場不會出更高價的。點智慧出售就行。",  -- 1445
-        "拍賣場想要的那%d件留著：比我多給%s。",  -- 1446
-        "你的包滿了。買東西之前先賣我點什麼吧。",  -- 1447
-        "你包裡沒什麼值得我出好價的。看看我的貨吧。",  -- 1448
-        "你身上有%d件該放這裡：我這兒存著同樣的，或是你標記過。存入就會收好。",  -- 1449
-        "你身上有%d種東西我這兒還存著更多。取出能在出發前把包補滿。",  -- 1450
-        "你的包快滿了。路上用不著的就放我這兒吧。",  -- 1451
-        "東西在我這兒很安全，你的包還空著%d格。",  -- 1452
-        "今天沒有你的信。我查了兩遍。",  -- 1453
-        "你的信：%d封，沒有附件。有空再看吧。",  -- 1454
-        "你的信：%d封。裡面有：%s。",  -- 1455
-        "全部拿取能一次清空。",  -- 1456
-        "貨到付款：%d封。這些你自己打開、自己付錢。",  -- 1457
-        "你的包滿了：物品先留在信裡。",  -- 1458
-        "去哪兒？指個地方，我告訴你要飛多久。",  -- 1459
-        "%s：按地圖算大約%s。這條航線你還沒飛過。",  -- 1460
-        "%s：按你上次飛那裡算，大約%s。",  -- 1461
-        "%s：還說不準要多久。飛一次我就知道了。",  -- 1462
-        "跑了%d條。這片水域要的技能比我高：魚餌有用，好一點的釣竿也有用。",  -- 1463
-        "鉤上沒掛魚餌。魚餌能加技能，跑掉的就少了。",  -- 1464
-        "魚餌快用完了。再掛一個，技能就不掉。",  -- 1465
-        "這裡還沒釣到的魚：%d種。接著拋竿。",  -- 1466
-        "這片水裡的魚我都釣過了。那就換個地方。",  -- 1467
-        "還什麼都沒釣到。每片水域的第一條魚都記在這裡。",  -- 1468
-        "釣到的種類：%d。每片水域都還藏著幾種：釣魚面板上沒釣到的會顯示 ?。",  -- 1469
-        "在火邊歇好了：接下來擊殺獲得的%d點經驗翻倍。",  -- 1470
-        "沒攢下休息。去旅店或城裡過一夜，一段時間內擊殺經驗翻倍。",  -- 1471
-        "吸收 %d",  -- 1472
-        "右側列表",  -- 1473
-        "中間逐個顯示",  -- 1474
-        "%d 次治療致命一擊",  -- 1475
-        "%d 次致命一擊",  -- 1476
-        "審判",  -- 1477
-        "高光時刻：位置",  -- 1478
-        "角色右側冷卻提示正上方的一塊區域：最新的緊挨提示，舊的向上移動並淡出；或在中間一次顯示一個",  -- 1479
-        "展示高光時刻的樣子和手感",  -- 1480
-        "已收藏",  -- 1481
-        "已透過其他物品收藏",  -- 1482
-        "尚未收藏",  -- 1483
-        "外觀",  -- 1484
-        "選擇一個套裝，把它的部件放到你的外觀方案上。%s 才會保留；在那之前不花任何錢。",  -- 1485
-        "正在查看你的收藏...",  -- 1486
-        "你的外觀方案已恢復原樣。",  -- 1487
-        "%s：已穿上 %d/%d 件。",  -- 1488
-        "有 %d 件無法用於此外觀方案。",  -- 1489
-        "你擁有部件的套裝：1 個",  -- 1490
-        "你擁有部件的套裝：%d 個",  -- 1491
-        "你無法穿戴",  -- 1492
-        "缺少",  -- 1493
-        "全部 %d 件",  -- 1494
-        "%d/%d 件",  -- 1495
-        "缺少：%s",  -- 1496
-        "還沒有套裝。名字相同的物品，比如綠鐵頭盔和綠鐵護手，只要你擁有其中一件，就會出現在這裡。",  -- 1497
-        "復原",  -- 1498
-        "刪除自訂套裝%s？刪除後無法復原。",  -- 1499
-        "刪除",  -- 1500
-        "請先指向一個自訂套裝。",  -- 1501
-        "%s  刪除自訂套裝",  -- 1502
+        "任務羅盤：跟隨鏡頭",  -- 980
+        "羅盤顯示鏡頭朝向，而不是角色朝向（搖桿只轉動角色而不轉動鏡頭時兩者不同）；關閉：顯示角色朝向",  -- 981
+        "在任務羅盤上你周圍顯示幾個標記，持續二十秒",  -- 982
+        "釣魚模式：關閉。",  -- 983
+        "釣魚：按%s拋竿",  -- 984
+        "沒有魚餌：按兩次%s使用%s",  -- 985
+        "按%s收起魚竿",  -- 986
+        "釣魚模式：按%s拋竿，浮標晃動時再按一次收竿。",  -- 987
+        "%s 收竿，%s 重新拋竿",  -- 988
+        "釣魚模式需要手持魚竿。",  -- 989
+        "你沒有學會釣魚。",  -- 990
+        "釣魚模式：一個按鈕拋竿和提竿",  -- 991
+        "釣魚按鍵：%s",  -- 992
+        "一鍵重新拋竿",  -- 993
+        "浮標在水中時，釣魚按鈕用來收竿，按一下 A 重新拋竿；關閉：A 歸你",  -- 994
+        "連按兩下上餌",  -- 995
+        "快速按兩下釣魚按鍵：當魚竿上沒有魚餌時，第二下會把背包裡最好的魚餌裝到魚竿上",  -- 996
+        "釣魚時隱藏控制器動作條",  -- 997
+        "手持魚竿時隱藏手把快捷列，水面一覽無遺；釣魚提示顯示拋竿的按鈕。戰鬥開始或收起魚竿時立即恢復",  -- 998
+        "暫時關閉一鍵釣魚，或重新開啟（手持釣竿時會自動開啟）",  -- 999
+        "用於釣魚的按鍵：起初是你的互動鍵（方塊或 X），也可以是任何其他按鍵，例如扳機鍵 (rt)",  -- 1000
+        "杜洛塔的海岸是一片紅岩與溫暖的淺灘。回音群島的食人妖說，當潮水捎來島上炊火的氣味時，鯖魚群最是密集。",  -- 1001
+        "莫高雷的湖泊小巧、清澈，而且從容。牛頭人釣魚就跟做其他事情一樣：慢慢來，並且心懷感謝。",  -- 1002
+        "貧瘠之地的每座綠洲都是聚會場所。不論白天來喝水的是誰，到了夜裡，水面下總有東西在游。",  -- 1003
+        "泰達希爾的池水全都在同一棵樹的樹蔭底下。夜精靈釣客信誓旦旦地說，那裡的魚從沒見過太陽，也一點都不想念。",  -- 1004
+        "黑海岸的海水灰濛濛、冷冰冰，到處是沉船殘骸。在奧伯丁外海上鉤的魚，有一半都在某人遺失的貨物裡安了家。",  -- 1005
+        "梣谷的河流在比多數王國還古老的枝葉下流過。魚的動作很快，但哨兵跑來問你在做什麼的動作更快。",  -- 1006
+        "在千針石林底下，水源稀少，而且被看得死緊。這裡的魚，都是憑本事掙得一席之地的。",  -- 1007
+        "石爪山脈的湖泊高高座落在群峰之間，冷得很。要不是這裡這麼好釣，哥布林早就把湖水抽光了。",  -- 1008
+        "淒涼之地的海岸只有骨骸與灰色的浪花。水底下有個東西，兩樣都愛吃。",  -- 1009
+        "菲拉斯一路綠到水邊。這裡的河流又深又暖，而且活力十足。",  -- 1010
+        "沒有人確定塵泥沼澤的陸地在哪裡結束、水又從哪裡開始。請在岸上釣魚，釣完後數一數自己的腳趾。",  -- 1011
+        "塔納利斯唯一稱得上是水的地方就在熱砂港。哥布林會把釣魚權賣給你，你不注意的話還會賣你兩次。",  -- 1012
+        "艾薩拉明亮的海灣底下有一座沉沒的城市。老釣客說，大魚都住在昔日的花園裡。",  -- 1013
+        "費伍德森林的水池會發光，但不是好的那種。還在裡頭游的東西，頑強到毫無道理可言。",  -- 1014
+        "安戈洛的溫泉與焦油圍繞的湖泊，保存了世界其他地方早已遺忘的東西。其中有些還會咬。",  -- 1015
+        "月光林地的月神湖靜得像屏住的呼吸。德魯伊只要求一件事：吃多少就拿多少。",  -- 1016
+        "希利蘇斯只有沙、風，還有翅膀拍動的聲音。如果你在這裡找到了能釣魚的水，別告訴任何人。",  -- 1017
+        "冬泉谷的湖泊邊緣結冰，中央卻冒著蒸氣。那裡的魚為了禦寒養得肥滋滋的，值得你走這一趟。",  -- 1018
+        "在奧格瑪的水池釣魚的，有無事可做的苦工，也有嘴上說自己同樣無事可做的老步兵。兩邊都會告訴你，最大的那條跑掉了。",  -- 1019
+        "雷霆崖池塘裡的魚，一輩子都住在比平原高出一大截的地方。牠看起來倒是很平靜。",  -- 1020
+        "達納蘇斯對待水域就像對待神殿一樣細心。魚兒已經習慣受人讚賞了。",  -- 1021
+        "奧特蘭克山脈的湖泊是融雪匯成的，巨魔和辛迪加會趁沒人注意時來釣魚。",  -- 1022
+        "阿拉希的岸邊見過的軍隊比釣客還多。水面上飄揚的是誰的旗幟，魚兒早就不在意了。",  -- 1023
+        "荒蕪之地從頭到尾都是塵土。在這裡有魚上鉤是個小小的奇蹟，請把它當奇蹟看待。",  -- 1024
+        "詛咒之地的海岸赤紅、光禿又安靜。活在那片浪裡的東西，已經學會跟很多事情共存。",  -- 1025
+        "提里斯法的湖泊靜靜躺在病懨懨的天空下。被遺忘者釣魚是出於習慣；死者吃得不多，但他們還記得自己喜歡過。",  -- 1026
+        "銀松森林長長的海岸盡是霧氣與松影。這裡很好釣，這也是大家對這個地方唯一說得出口的好話。",  -- 1027
+        "西瘟疫之地的河流還在流，只是不乾淨。從裡頭拉上來的東西，請看兩遍。",  -- 1028
+        "很少人在東瘟疫之地釣魚，願意承認的更少。這裡的水只剩下瘟疫留給它的部分，而它還守著。",  -- 1029
+        "希爾斯布萊德的河流與長長的南岸，在每一場為了爭奪它們而打的仗裡，都餵飽過雙方的人。",  -- 1030
+        "辛特蘭的湖泊高高藏在樹林之間，蠻錘矮人以為沒人看得見的時候，會騎在獅鷲背上釣魚。",  -- 1031
+        "丹莫洛的湖泊一年中大半時間都被冰圍著。矮人會鑿個洞，帶著一杯啤酒坐下來，不管釣到什麼都說今天是好日子。",  -- 1032
+        "別的地方有河流，灼熱峽谷有的是熔岩。改帶點喝的來吧。",  -- 1033
+        "燃燒平原只有灰燼與餘火。這裡的水就算真的給了你什麼，也會是燙的。",  -- 1034
+        "艾爾文的每個孩子都在水晶湖或石碑湖學釣魚。那裡的小魚已經把他們耍了好幾代。",  -- 1035
+        "逆風小徑水很少，歡迎更少。卡拉贊底下水池裡的東西，最好就留在那裡。",  -- 1036
+        "暮色森林邊緣的那條河，不管幾點都是黑的。魚好像不介意黑暗，介意的是釣客。",  -- 1037
+        "洛克湖是洛克莫丹的驕傲，由雄偉的巨石水壩攔住。矮人會拿它來衡量釣魚故事，而贏的通常是湖。",  -- 1038
+        "赤脊山的止水湖美得像幅畫，湖畔鎮的每座碼頭都有人在釣。鎮民知道每一個好位置，卻一個也不會告訴你。",  -- 1039
+        "從叢林河流到荒野般的南方海岬，荊棘谷擁有整塊大陸最富饒的水域。藏寶海灣的釣客為此舉辦釣魚大賽，而且幾乎人人作弊。",  -- 1040
+        "悲傷沼澤是綠樹底下的綠水。魚吃起來有泥巴味，當地人偏偏就愛這一味。",  -- 1041
+        "西部荒野的田地毀了，海岸卻沒有。留下來的人靠著那條長長的灰色海岸維生。",  -- 1042
+        "濕地這名字取得好。米奈希爾港的碼頭是這裡最乾的釣點，而鱷魚也知道這件事。",  -- 1043
+        "在暴風城運河釣魚的有小孩、退休老人，以及至少一位喬裝過的貴族。沒有人會問運河裡還有什麼。",  -- 1044
+        "荒棄的洞穴裡有鐵爐堡唯一一座安靜的水池。老矮人會在那裡釣上好幾個小時，一句話也不說。",  -- 1045
+        "幽暗城運河的那種綠，跟藻類一點關係也沒有。在那裡釣魚的被遺忘者，並不是為了張羅晚餐。",  -- 1046
+        "多數釣客這輩子釣起的第一條魚，顏色鮮豔到讓人忘不了。",  -- 1047
+        "滑溜、敏捷，在每一處溫暖海岸都很常見。烤來吃比名字給人的印象好多了。",  -- 1048
+        "整條魚幾乎都是嘴，在你不會想喝的水裡最快樂。",  -- 1049
+        "嬌小、滿口利牙，而且什麼都不怕。據說曾有一群把熊趕出了洛克湖。",  -- 1050
+        "浪花底下的一道色彩。水手認為釣線上有一條，這趟航程就會順利。",  -- 1051
+        "很有耐心的底棲魚，鬍鬚長得像矮人長老。",  -- 1052
+        "沒有人會吃第二次。鍊金師倒是能買多少就買多少。",  -- 1053
+        "牠的鰭像悶燒的炭火一樣發亮，榨出來的油也幾乎一樣好燒。",  -- 1054
+        "像小盾牌一樣全身披甲。裡頭的肉值得你費這番工夫。",  -- 1055
+        "哀嚎洞穴附近的水裡有某種東西改變了牠。吃下一條，你可能也會跟著變上一陣子。",  -- 1056
+        "河邊的居民說吃一頓能讓頭腦清醒。真正讓牠有智慧的，是逆流而上這件事。",  -- 1057
+        "比牠的表親更老、更大、更有智慧，但還是沒能躲過你的魚鉤。",  -- 1058
+        "來自溫暖南方海域的頑強鬥士，從藏寶海灣到加基森，每間酒館的菜單上都少不了牠。",  -- 1059
+        "牠的額頭像真正的秘銀一樣閃亮。試過拿去熔煉的礦工不只一個。",  -- 1060
+        "牠的鱗片可以熬成一種油，讓皮膚硬得像石頭。牠偏好夜晚。",  -- 1061
+        "擦得像閱兵用的胸甲一樣亮，重量也差不多。",  -- 1062
+        "牠只在寒冷的月份靠岸，識貨的廚師會等上一整年。",  -- 1063
+        "白天變長時牠就會成群洄游。沿海居民用牠來標記季節。",  -- 1064
+        "要抓就抓中間，而且只有一次機會。",  -- 1065
+        "來自蠻荒地帶的河魚，鰓紅得像食人妖的戰紋。",  -- 1066
+        "牠在天黑後覓食。用牠煮的湯能穩定施法者的神經。",  -- 1067
+        "牠在白天覓食，幾乎每一點都跟夜鱗鯛魚相反，卻還是同住一片水域。",  -- 1068
+        "嚴格來說不算魚。牠不同意被抓，而且會讓你清楚知道。",  -- 1069
+        "蒼白如河冰，來自北方寒冷清澈的湖泊。",  -- 1070
+        "你會需要兩隻手，也許還要一個朋友。",  -- 1071
+        "%.1f磅",  -- 1072
+        "釣魚日誌新增：%s，%s。",  -- 1073
+        "釣魚日誌新增：%s。",  -- 1074
+        "你至今最重的%s：%s（之前是%s）。",  -- 1075
+        "魚餌 %s",  -- 1076
+        "沒有魚餌",  -- 1077
+        "釣到 %d",  -- 1078
+        "跑掉 %d",  -- 1079
+        "好奇的一條：+%d%%",  -- 1080
+        "讓魚餌保持在魚的旁邊",  -- 1081
+        "下一條漁獲 +%d%%",  -- 1082
+        "按住 %s：魚餌沿著魚線移動",  -- 1083
+        "連續 %d 條",  -- 1084
+        "浮標在水裡時的小遊戲",  -- 1085
+        "在魚線入水時於施法條上進行：按住扳機，魚餌沿著魚線移動，放開則漂回；讓它待在魚影旁邊。玩得越好，下一條漁獲的虛構重量越重。不占用任何按鈕，也從不影響拋竿或收獲",  -- 1086
+        "釣到 %d，%d 種，跑掉 %d",  -- 1087
+        "最重：%s，%s",  -- 1088
+        "魚",  -- 1089
+        "水域",  -- 1090
+        "還沒有釣到任何東西。帶上魚竿去水邊吧。",  -- 1091
+        "釣到：%d",  -- 1092
+        "最重：%s，於%s",  -- 1093
+        "首次釣到：%s",  -- 1094
+        "在這裡釣到：%d",  -- 1095
+        "在這裡發現的種類：%d",  -- 1096
+        "開啟或關閉你的釣魚日誌：你釣到過的每個種類、每種最重的一條，以及你釣過魚的水域",  -- 1097
+        "飛行",  -- 1098
+        "提前降落",  -- 1099
+        "在下一個飛行點降落",  -- 1100
+        "目的地未知",  -- 1101
+        "依距離估算",  -- 1102
+        "此航線首次飛行：正在記錄飛行時間",  -- 1103
+        "即將降落",  -- 1104
+        "%s：約 %s，依距離估算",  -- 1105
+        "%s：約 %s",  -- 1106
+        "%s：此航線首次飛行，時間未知",  -- 1107
+        "飛行中，目的地未知",  -- 1108
+        "%s：已記住飛行時間，%s",  -- 1109
+        "提前降落：%s，約 %s",  -- 1110
+        "在下一個飛行點提前降落",  -- 1111
+        "清冷乾爽，腳下是雪，呼出的氣息懸在空中",  -- 1112
+        "刺骨的寒冷，山巔吹來的風鑽進盔甲的每一道縫隙",  -- 1113
+        "又熱又濕，空氣濃得幾乎能喝",  -- 1114
+        "林冠下悶熱黏膩，蟲鳴聒噪",  -- 1115
+        "炎熱乾燥，風裡夾著沙塵",  -- 1116
+        "烈日炙烤，土地龜裂；能喝水時就喝吧",  -- 1117
+        "熱風中裹著煙與灰",  -- 1118
+        "空氣灼熱，火星飄散",  -- 1119
+        "灰暗寒冷，潮濕的霧氣揮之不去",  -- 1120
+        "空氣發涼，幾乎沒有光亮",  -- 1121
+        "溫和晴朗，微風輕拂",  -- 1122
+        "天氣宜人，適合趕路",  -- 1123
+        "清涼碧綠，樹葉沙沙低語",  -- 1124
+        "柔光穿過林間，空氣清新",  -- 1125
+        "悶熱潮濕，腳下的地面鬆軟",  -- 1126
+        "溫暖潮濕的空氣，夾著沼澤的氣味",  -- 1127
+        "%s，%s：%s",  -- 1128
+        "已知 %d 條飛行航線。",  -- 1129
+        "飛行：坐騎沿進度條飛行",  -- 1130
+        "獅鷲獸、雙足飛龍或蝙蝠（飛行管理員給你的那隻）沿飛行進度條飛向你的降落地點",  -- 1131
+        "飛行：落地處的天氣",  -- 1132
+        "落地時，聊天框會說出你抵達之處的空氣通常如何（荊棘谷又熱又濕，丹莫洛腳下是雪），以及當時的時段",  -- 1133
+        "列出已知時間的飛行航線",  -- 1134
+        "落地！+%d",  -- 1135
+        "撞上了：連擊中斷",  -- 1136
+        "%s 振翅  ·  躲開樹梢和飛艇",  -- 1137
+        "%s 用網捕獲騎手贏得飛行金幣  ·  %s 高空",  -- 1138
+        "%d 飛行金幣",  -- 1139
+        "%s 振翅",  -- 1140
+        "%s 撒網",  -- 1141
+        "%s 高空",  -- 1142
+        "%s：回到遊戲（%d 飛行金幣）",  -- 1143
+        "%s：途中的小遊戲",  -- 1144
+        "飛行小遊戲已關閉：/cchud flightgame on",  -- 1145
+        "飛行小遊戲在飛行途中進行。",  -- 1146
+        "戰鬥中不行。",  -- 1147
+        "飛行小遊戲：開始 / 高空",  -- 1148
+        "飛行途中：開始飛行小遊戲，或把它收到高空再拿回來",  -- 1149
+        "電影化飛行：鏡頭環繞你",  -- 1150
+        "電影中，鏡頭緩緩環繞你和坐騎，大約一分半鐘轉一整圈，並在降落前回到你身後。關閉：固定鏡頭",  -- 1151
+        "離線",  -- 1152
+        "死亡",  -- 1153
+        "關閉",  -- 1154
+        "治療專精時",  -- 1155
+        "總是",  -- 1156
+        "太遠",  -- 1157
+        "治療者的隊伍和團隊",  -- 1158
+        "隊伍中：你的隊友在你的角色旁邊，各帶一個選取他們的按鍵；團隊中：更細的框架。每個只顯示需要多少治療、你能驅散的減益效果，以及是否在範圍內",  -- 1159
+        "%d%%可能售出",  -- 1160
+        "穩賣 (%d%%)",  -- 1161
+        "這個自己就能賣掉 (%d%%)",  -- 1162
+        "我看能賣 (%d%%)",  -- 1163
+        "應該有人買 (%d%%)",  -- 1164
+        "一半一半 (%d%%)",  -- 1165
+        "說不準 (%d%%)",  -- 1166
+        "有點賭運氣 (%d%%)",  -- 1167
+        "可能要掛一陣 (%d%%)",  -- 1168
+        "別抱太大希望 (%d%%)",  -- 1169
+        "希望不大，朋友 (%d%%)",  -- 1170
+        "比商人多 +%s",  -- 1171
+        "尚無已知價格",  -- 1172
+        "商人給的一樣多",  -- 1173
+        "經紀人",  -- 1174
+        "市場",  -- 1175
+        "每個銅板都算清了，朋友",  -- 1176
+        "你的背包裡沒有可以在這裡出售的物品。",  -- 1177
+        "最近 7 天沒有價格。",  -- 1178
+        "目前只有一天的價格：你每天造訪拍賣場都會多一根蠟燭。",  -- 1179
+        "7 天，每天一根蠟燭：綠色收盤更高，紅色更低",  -- 1180
+        "30 天，每天的最低價：綠色上漲，紅色下跌",  -- 1181
+        "尚無價格記錄：請在幾天內讀取拍賣場。",  -- 1182
+        "目前只有一天的價格：你每去一天拍賣場，這條線就會延長一點。",  -- 1183
+        "每件要價 %s，你放出的共 %s（%d 件），%d 件留給你",  -- 1184
+        "每個要價%s，全部%s（%d個）",  -- 1185
+        "最低",  -- 1186
+        "讀取於%s",  -- 1187
+        "常價",  -- 1188
+        "7天：%s 至 %s",  -- 1189
+        "拍賣中：%d筆拍賣，%d件物品",  -- 1190
+        "每個%s，全部%s（%d個）",  -- 1191
+        "你在這裡上架了%d件，售出%d筆拍賣",  -- 1192
+        "未知價格：請先讀取拍賣場。",  -- 1193
+        "包裡沒有可在這裡賣的東西。",  -- 1194
+        "今天沒有比賣給商人更划算的；耐心等等，%d件或許可以。",  -- 1195
+        "最好的在前：%d件在這裡比賣給商人更值，耐心等還有%d件。",  -- 1196
+        "包裡空空的，朋友。拿點能賣的來。",  -- 1197
+        "今天沒什麼比賣給商人強。耐心點的話，%d 件或許可以。",  -- 1198
+        "這些包裡沒有穩賺的，朋友。等一等，%d 件也許能賺。",  -- 1199
+        "好貨在上頭：這裡 %d 件勝過任何商人，耐心點還有 %d 件。",  -- 1200
+        "%d 件在這裡比賣商人賺得多，好的在前。等等還有 %d 件。",  -- 1201
+        "最上面的最賺錢：%d 件穩賣，能等的話還有 %d 件。",  -- 1202
+        "還沒有價格：%s讀取拍賣場。",  -- 1203
+        "剛讀取的價格：%d個。",  -- 1204
+        "%d個價格，讀取於%s。",  -- 1205
+        "%d個價格，讀取於%s。%s重新讀取。",  -- 1206
+        "還沒看過行情板。按 %s，我把價格全拿來。",  -- 1207
+        "還沒有價格，朋友。按 %s 讀整塊行情板。",  -- 1208
+        "剛從行情板上拿的新鮮價格，朋友：%d 個。",  -- 1209
+        "剛看過行情板：%d 個價格，還熱呼著。",  -- 1210
+        "%d 個價格，%s讀的。夠用了，朋友。",  -- 1211
+        "上次看行情板是%s：%d 個價格。",  -- 1212
+        "%s的價格，跟隔夜麵包一樣硬了。按 %s 再讀一遍。",  -- 1213
+        "%d 個價格，但那是%s讀的。按 %s 我再看看。",  -- 1214
+        "也顯示你保留的物品。%s隱藏。",  -- 1215
+        "保留：%d件，供你的專業、裝備和標記之用。%s顯示。",  -- 1216
+        "你保留的也在單子上。按 %s 收起來。",  -- 1217
+        "你保留的也顯示著。按 %s 再藏起來。",  -- 1218
+        "留下了 %d 件：做專業用的、穿的、你標記的。按 %s 顯示。",  -- 1219
+        "給你留了 %d 件：專業、裝備和標記的。要的話按 %s。",  -- 1220
+        "每個",  -- 1221
+        "無資料",  -- 1222
+        "快速出售",  -- 1223
+        "耐心",  -- 1224
+        "讀取所有價格",  -- 1225
+        "隱藏保留物品",  -- 1226
+        "顯示保留物品",  -- 1227
+        "折線",  -- 1228
+        "蠟燭圖",  -- 1229
+        "上架",  -- 1230
+        "%d / %d",  -- 1231
+        "上架 %d / %d 件，每件 %s",  -- 1232
+        "上架 %d 件，價格 %s",  -- 1233
+        "全部%d件上架，共%s",  -- 1234
+        "此客戶端無法從這裡在拍賣場上架。",  -- 1235
+        "已上架 %d 件，價格 %s。",  -- 1236
+        "拍賣場的市場：開啟 / 關閉",  -- 1237
+        "市場的拍賣師問候",  -- 1238
+        "開啟市場時，一位哥布林拍賣師會用遊戲本身的聲音說一句短語；關閉：靜默開啟",  -- 1239
+        "市場：顯示保留的物品",  -- 1240
+        "市場也會列出你保留的物品：你的專業技能仍能藉以升級、或能製成更值錢物品的東西，以及你標記為保留的物品；關閉：只顯示你會出售的物品",  -- 1241
+        "市場：價格圖顯示為蠟燭圖",  -- 1242
+        "市場的價格圖為最近 7 天每天一根蠟燭（價格的開盤、最高、最低和收盤：收盤更高為綠色，更低為紅色）；關閉：30 天內每天最低價的折線",  -- 1243
+        "開啟或關閉市場（拍賣場的一個分頁）",  -- 1244
+        "此客戶端使用哪種拍賣場（用於排查問題）",  -- 1245
+        "打開一個專業技能視窗，我來看看你的配方。",  -- 1246
+        "這就是上限了，%d。訓練師那裡有下一個等級。",  -- 1247
+        "到了 %d 已經沒什麼可學了。去找訓練師學下一個等級吧。",  -- 1248
+        "你的配方已經跟不上你了。去找訓練師：%s 在 %d 等著你。",  -- 1249
+        "還差 %d 到 %d，你會的這些到不了那裡。訓練師有 %s 給你，%d 可學。",  -- 1250
+        "你的配方已經跟不上你了。去找訓練師：%s 在等著你。",  -- 1251
+        "你的配方差 %d 到 %d 就不再教你了。向訓練師要 %s。",  -- 1252
+        "你的配方差 %d 到 %d 就用盡了。訓練師會有新東西。",  -- 1253
+        "你會的這些撐不過最後 %d 點。該去找訓練師了。",  -- 1254
+        "%s 現在教不了你多少了，但這是你最好的。還差 %d 到 %d。",  -- 1255
+        "從這裡開始會慢：%s 偶爾才給一點。還差 %d。",  -- 1256
+        "你先需要 %s，%s。指南從它開始這一段。",  -- 1257
+        "學會 %s，%s，我們就開始：還差 %d 到 %d。",  -- 1258
+        "還差 %d 到 %d。指南讓你去採集 %s，直到 %d。",  -- 1259
+        "這裡靠採集來提升：%s，直到 %d。",  -- 1260
+        "還差 %d 到 %d。先做 %s，或者你更想做 %s：%s。",  -- 1261
+        "指南說先做 %s。%s 也行：%s。",  -- 1262
+        "還差 %d 到 %d。先做 %s。",  -- 1263
+        "%s 現在是你最好的老師。還差 %d 點到 %d。",  -- 1264
+        "手要穩。先做 %s，還差 %d。",  -- 1265
+        "在訓練師處",  -- 1266
+        "從商人處",  -- 1267
+        "從戰利品中",  -- 1268
+        "透過任務",  -- 1269
+        "材料更便宜",  -- 1270
+        "商人出售的材料",  -- 1271
+        "自己採集的材料",  -- 1272
+        "好賣",  -- 1273
+        "你自己用得上",  -- 1274
+        "製作次數更少",  -- 1275
+        "需要找到或買到的配方",  -- 1276
+        "其他材料",  -- 1277
+        "指南的首選",  -- 1278
+        "打開專業技能視窗查看升級計畫。",  -- 1279
+        "已到上限%d。下一等級找訓練師。",  -- 1280
+        "還差%d到%d；現有配方不夠。訓練師有%s（%d）。",  -- 1281
+        "還差%d到%d；現有配方不夠。訓練師有%s。",  -- 1282
+        "現有配方還差%d點到%d。訓練師有更多。",  -- 1283
+        "還差%d到%d。目前最佳：%s，綠色（偶爾加一點）。",  -- 1284
+        "還差%d到%d。先學%s，%s。",  -- 1285
+        "還差%d到%d。採集%s直到%d。",  -- 1286
+        "還差%d到%d。先做：%s，或%s（%s）。",  -- 1287
+        "還差%d到%d。先做：%s。",  -- 1288
+        "需採集或購買",  -- 1289
+        "製作%d次：%s",  -- 1290
+        "%s 學會它，%d 起。",  -- 1291
+        "%s 學會它。",  -- 1292
+        "%s：背包 %d，銀行 %d，每次 %d",  -- 1293
+        "指南這一段靠採集 %s 來提升。",  -- 1294
+        "%s：你有%d個，計畫需用%d個",  -- 1295
+        "用於%s",  -- 1296
+        "購買比用%s製作更便宜",  -- 1297
+        "用%s製作",  -- 1298
+        "導師：銀行能讓你做什麼",  -- 1299
+        "用銀行材料能做的",  -- 1300
+        "銀行裡的東西已經做不了更多了。",  -- 1301
+        "算上銀行能做 %d 種，其中 %d 種只靠銀行。",  -- 1302
+        "導師：%s %d > %d",  -- 1303
+        "導師",  -- 1304
+        "升級計畫",  -- 1305
+        "或",  -- 1306
+        "採集 %s",  -- 1307
+        "待學",  -- 1308
+        "購買更划算",  -- 1309
+        "隱藏",  -- 1310
+        "計畫",  -- 1311
+        "採集此項",  -- 1312
+        "全部採集",  -- 1313
+        "算上銀行",  -- 1314
+        "使用計畫",  -- 1315
+        "按兩次隱藏",  -- 1316
+        "這裡沒有可以試穿的。",  -- 1317
+        "已將%d項加入採集清單。",  -- 1318
+        "什麼都不缺：所需材料都已齊備。",  -- 1319
+        "開啟專業技能視窗即可擬定計畫。",  -- 1320
+        "導師（升級計畫）：顯示 / 隱藏",  -- 1321
+        "顯示你最後開啟的專業技能視窗的升級計畫，並啟用手把按鍵",  -- 1322
+        "任務左側",  -- 1323
+        "任務右側",  -- 1324
+        "任務下方",  -- 1325
+        "採集清單已滿。",  -- 1326
+        "採集清單：%s，需要%d個。",  -- 1327
+        "採集",  -- 1328
+        "還有%d項",  -- 1329
+        "暫無需採集的物品。",  -- 1330
+        "再加一組",  -- 1331
+        "移除",  -- 1332
+        "清空",  -- 1333
+        "完成",  -- 1334
+        "清空整個採集清單？",  -- 1335
+        "採集清單：選擇 / 完成",  -- 1336
+        "採集清單：加入你指向的物品",  -- 1337
+        "它不在採集清單上。",  -- 1338
+        "採集清單為空。",  -- 1339
+        "採集清單：位置",  -- 1340
+        "採集清單放在任務列表左側、右側或其任務下方",  -- 1341
+        "任務列表旁的採集清單：用手把選擇；add <物品> [數量]，remove <物品>，clear，或用 left / right / bottom 設定位置",  -- 1342
+        "仇恨百分比",  -- 1343
+        "在目標框架和名條的仇恨圖示旁以數字顯示你的仇恨佔比",  -- 1344
+        "生命值數字",  -- 1345
+        "在條上顯示縮寫的剩餘生命值（12.3k）（緊湊名條不顯示：百分比就夠了）",  -- 1346
+        "你的減益",  -- 1347
+        "目標名稱上方顯示你的減益效果及其剩餘時間",  -- 1348
+        "所有人的減益",  -- 1349
+        "遊戲為名條標記的所有人的減益，而不只是你的",  -- 1350
+        "敵方增益",  -- 1351
+        "敵人減益效果旁的增益效果：只顯示重要的（重要、狂怒或你能驅散或竊取的），關閉「只顯示重要效果」時顯示全部",  -- 1352
+        "群體控制圖示",  -- 1353
+        "單位被擊昏、定身、恐懼時顯示帶剩餘時間的大圖示...",  -- 1354
+        "仇恨光暈",  -- 1355
+        "名字後的盾牌圖示和光暈：攻擊你時為紅色，即將拉到仇恨時紅黃交替，正在失去仇恨時黃藍交替，不在你身上時為藍色",  -- 1356
+        "任務標記",  -- 1357
+        "在你的任務仍然需要的單位上顯示金色標記",  -- 1358
+        "名條動畫",  -- 1359
+        "名條淡入，低生命值時呼吸閃動，群體控制時閃爍",  -- 1360
+        "小",  -- 1361
+        "普通",  -- 1362
+        "大",  -- 1363
+        "完整名字",  -- 1364
+        "簡短名字",  -- 1365
+        "不顯示名字",  -- 1366
+        "完整",  -- 1367
+        "極簡迷你",  -- 1368
+        "名條大小",  -- 1369
+        "名條上條的大小：小而細、普通，或大（更寬更高）",  -- 1370
+        "名條上的名字",  -- 1371
+        "有生命條的名條上的名字：完整、縮短或不顯示（目標框架會顯示完整名字；等級和職業圖示保留）。沒有生命條的名條（友方NPC）始終保留名字",  -- 1372
+        "名條樣式",  -- 1373
+        "一鍵設定名條開關。完整：全部。極簡：無能量條、公會或頭銜，名字縮短。極簡迷你：帶生命值的小條、你的減益和重要的增益、等級和職業，不顯示名字（目標框架有）。仇恨、控制和醒目的施法始終保留",  -- 1374
+        "玩家頭銜",  -- 1375
+        "在玩家名稱旁顯示其頭銜",  -- 1376
+        "公會與NPC職業",  -- 1377
+        "名稱下方的一行：玩家的公會，或NPC的職業",  -- 1378
+        "戰鬥中的友方血條",  -- 1379
+        "友方名條在該單位處於戰鬥狀態時顯示生命力、能量與施法",  -- 1380
+        "遊戲內建的友方名條",  -- 1381
+        "友方名條（你的隊伍、其他玩家、友方NPC）使用遊戲內建外觀；我們的只用於敵人",  -- 1382
+        "能量條",  -- 1383
+        "生命力條下方的細長法力、怒氣或能量條",  -- 1384
+        "施法目標",  -- 1385
+        "施法所指向的目標，顯示在法術名稱旁",  -- 1386
+        "生命力百分比",  -- 1387
+        "血條上的生命力百分比",  -- 1388
+        "目標名條上顯示名字",  -- 1389
+        "關閉：目標的名條不顯示名字和等級（目標框架會顯示）",  -- 1390
+        "名條顯示等級",  -- 1391
+        "敵人名字前的等級，依難度著色",  -- 1392
+        "精簡名條",  -- 1393
+        "名條寬度約為一半",  -- 1394
+        "醒目的敵方施法",  -- 1395
+        "敵人的施法會閃爍、膨脹並越來越快地脈動直到完成，讓你能及時打斷",  -- 1396
+        "名條職業圖示",  -- 1397
+        "在玩家名字前顯示職業圖示，無論敵友",  -- 1398
+        "NPC職能圖示",  -- 1399
+        "在提供服務的友方NPC上方顯示圖示：商人顯示背包，可修理的鐵匠顯示鐵砧，訓練師顯示書本……（遊戲自帶圖示；即使名條在等待你指向時也會顯示）",  -- 1400
+        "友方NPC僅在指向時顯示",  -- 1401
+        "友方NPC（商人、任務發布者、市民）的名條只在你指向時顯示，與其滑鼠提示一樣",  -- 1402
+        "可互動物件上的名稱",  -- 1403
+        "面對礦石、寶箱、銘牌等物件時在其上方顯示名稱（關閉：不顯示名稱，遊戲本身的提示已說明它們是什麼）",  -- 1404
+        "迷你名條",  -- 1405
+        "僕從、小動物和不給經驗的灰色敵人顯示小型名條：一條細條，上面顯示你的減益效果，不顯示名字（沒有血條的小動物保留名字；是否顯示名條由遊戲自身選項決定）",  -- 1406
+        "地城中的隊友名條：僅名字",  -- 1407
+        "在地城或團隊副本中，友方玩家的名條由遊戲自己繪製，插件不能修改：在那裡會調整遊戲內建的選項，讓它們像我們的一樣只顯示職業顏色的名字而沒有血條，戰鬥時遊戲的血條會回來（開啟了戰鬥中顯示友方血條時）；離開時全部恢復原樣",  -- 1408
+        "地城中的隊友名條：隱藏",  -- 1409
+        "在地城或團隊副本中，完全關閉遊戲的友方玩家名條（離開時恢復成你原來的設定）",  -- 1410
+        "顯示遊戲為你的目標名字提供的內容（用於排查問題）",  -- 1411
+        "列出畫面上的名條及其是否使用我們的外觀（用於排查問題）",  -- 1412
+        "好吧，看看。",  -- 1413
+        "哎喲，這一大堆。",  -- 1414
+        "嗯，讓我看看，看看……",  -- 1415
+        "伊露恩啊，賜我耐心。",  -- 1416
+        "以那魯之名，真是一團亂。",  -- 1417
+        "該死的背包。",  -- 1418
+        "包袱整齊，包袱就輕。",  -- 1419
+        "哼。破爛太多了。",  -- 1420
+        "全是累贅。",  -- 1421
+        "耐心。大地之母自會賜予。",  -- 1422
+        "嘿，看看我們有啥，老兄？",  -- 1423
+        "如此雜亂，有失體面。",  -- 1424
+        "時間就是金錢。數一數。",  -- 1425
+        "嗯，這就行了。",  -- 1426
+        "感謝伊露恩。",  -- 1427
+        "聖光自會賜予。",  -- 1428
+        "哼。夠用了。",  -- 1429
+        "嗯。夠打一仗了。",  -- 1430
+        "輕裝上路。不錯。",  -- 1431
+        "還行。勉強。",  -- 1432
+        "一格都不剩了。垃圾能賣%s：賣掉就有地方了。",  -- 1433
+        "一格都不剩了。路上用不著的，可以先存銀行。",  -- 1434
+        "垃圾：%d件，這裡值%s。X 賣掉選中的那件；智慧出售一次賣光。",  -- 1435
+        "其中%d件該放銀行：銀行裡有同樣的，或是我標記過。存入就會收好。",  -- 1436
+        "只剩%d格了。垃圾在任何商人那裡都能賣%s。",  -- 1437
+        "只剩%d格了。該賣掉或存掉一些東西了。",  -- 1438
+        "上次看過之後新添了%d件。每件都有金色小點標著。",  -- 1439
+        "值得賣的：%d件。出售篩選會把它們集中起來，每件的提示都寫著在哪賣最值。",  -- 1440
+        "垃圾：%d件，值%s。下個商人收走吧。",  -- 1441
+        "只有必需品。沒什麼值得賣的。",  -- 1442
+        "一切井井有條，還空著%d格。",  -- 1443
+        "裝備修好了：%s。",  -- 1444
+        "我可以花%s幫你修裝備；壞掉的裝備既沒護甲也沒屬性。",  -- 1445
+        "你的包滿了。%d件東西我出%s收：點智慧出售，就又有空位了。",  -- 1446
+        "我出%s收%d件東西：垃圾，還有拍賣場不會出更高價的。點智慧出售就行。",  -- 1447
+        "拍賣場想要的那%d件留著：比我多給%s。",  -- 1448
+        "你的包滿了。買東西之前先賣我點什麼吧。",  -- 1449
+        "你包裡沒什麼值得我出好價的。看看我的貨吧。",  -- 1450
+        "你身上有%d件該放這裡：我這兒存著同樣的，或是你標記過。存入就會收好。",  -- 1451
+        "你身上有%d種東西我這兒還存著更多。取出能在出發前把包補滿。",  -- 1452
+        "你的包快滿了。路上用不著的就放我這兒吧。",  -- 1453
+        "東西在我這兒很安全，你的包還空著%d格。",  -- 1454
+        "今天沒有你的信。我查了兩遍。",  -- 1455
+        "你的信：%d封，沒有附件。有空再看吧。",  -- 1456
+        "你的信：%d封。裡面有：%s。",  -- 1457
+        "全部拿取能一次清空。",  -- 1458
+        "貨到付款：%d封。這些你自己打開、自己付錢。",  -- 1459
+        "你的包滿了：物品先留在信裡。",  -- 1460
+        "去哪兒？指個地方，我告訴你要飛多久。",  -- 1461
+        "%s：按地圖算大約%s。這條航線你還沒飛過。",  -- 1462
+        "%s：按你上次飛那裡算，大約%s。",  -- 1463
+        "%s：還說不準要多久。飛一次我就知道了。",  -- 1464
+        "跑了%d條。這片水域要的技能比我高：魚餌有用，好一點的釣竿也有用。",  -- 1465
+        "鉤上沒掛魚餌。魚餌能加技能，跑掉的就少了。",  -- 1466
+        "魚餌快用完了。再掛一個，技能就不掉。",  -- 1467
+        "這裡還沒釣到的魚：%d種。接著拋竿。",  -- 1468
+        "這片水裡的魚我都釣過了。那就換個地方。",  -- 1469
+        "還什麼都沒釣到。每片水域的第一條魚都記在這裡。",  -- 1470
+        "釣到的種類：%d。每片水域都還藏著幾種：釣魚面板上沒釣到的會顯示 ?。",  -- 1471
+        "在火邊歇好了：接下來擊殺獲得的%d點經驗翻倍。",  -- 1472
+        "沒攢下休息。去旅店或城裡過一夜，一段時間內擊殺經驗翻倍。",  -- 1473
+        "吸收 %d",  -- 1474
+        "右側列表",  -- 1475
+        "中間逐個顯示",  -- 1476
+        "%d 次治療致命一擊",  -- 1477
+        "%d 次致命一擊",  -- 1478
+        "審判",  -- 1479
+        "高光時刻：位置",  -- 1480
+        "角色右側冷卻提示正上方的一塊區域：最新的緊挨提示，舊的向上移動並淡出；或在中間一次顯示一個",  -- 1481
+        "展示高光時刻的樣子和手感",  -- 1482
+        "已收藏",  -- 1483
+        "已透過其他物品收藏",  -- 1484
+        "尚未收藏",  -- 1485
+        "外觀",  -- 1486
+        "選擇一個套裝，把它的部件放到你的外觀方案上。%s 才會保留；在那之前不花任何錢。",  -- 1487
+        "正在查看你的收藏...",  -- 1488
+        "你的外觀方案已恢復原樣。",  -- 1489
+        "%s：已穿上 %d/%d 件。",  -- 1490
+        "有 %d 件無法用於此外觀方案。",  -- 1491
+        "你擁有部件的套裝：1 個",  -- 1492
+        "你擁有部件的套裝：%d 個",  -- 1493
+        "你無法穿戴",  -- 1494
+        "缺少",  -- 1495
+        "全部 %d 件",  -- 1496
+        "%d/%d 件",  -- 1497
+        "缺少：%s",  -- 1498
+        "還沒有套裝。名字相同的物品，比如綠鐵頭盔和綠鐵護手，只要你擁有其中一件，就會出現在這裡。",  -- 1499
+        "復原",  -- 1500
+        "刪除自訂套裝%s？刪除後無法復原。",  -- 1501
+        "刪除",  -- 1502
+        "請先指向一個自訂套裝。",  -- 1503
+        "%s  刪除自訂套裝",  -- 1504
     },
 }
 TRANSLATIONS.esMX = TRANSLATIONS.esES      -- Latin American Spanish uses the same text

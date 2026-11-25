@@ -977,6 +977,8 @@ Der Questkompass ist aus: /cchud compass on
 Der Kompass muss wissen, wo du bist, und das Spiel sagt es hier nicht.
 Questkompass: Platz
 oben am Bildschirm, oder unten am Platz der Erfahrungsleiste (die Leiste kommt dann nach oben)
+Questkompass: folgt der Kamera
+der Kompass zeigt, wohin die Kamera blickt, nicht, wohin Eure Figur schaut (das ist verschieden, wenn der Stick die Figur ohne die Kamera dreht); aus: die Blickrichtung Eurer Figur
 ein paar Markierungen auf dem Questkompass, um dich herum, für zwanzig Sekunden
 Angelmodus: aus.
 Angeln: %s zum Auswerfen

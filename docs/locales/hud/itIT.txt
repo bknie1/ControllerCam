@@ -977,6 +977,8 @@ La bussola delle missioni è disattivata: /cchud compass on
 La bussola deve sapere dove sei, e qui il gioco non lo dice.
 Bussola delle missioni: posizione
 in cima allo schermo, oppure in basso al posto della barra dell'esperienza (la barra passa allora in alto)
+Bussola delle missioni: segue la visuale
+la bussola mostra dove guarda la visuale, non dove guarda il tuo personaggio (sono diversi quando lo stick gira il personaggio senza la visuale); disattivato: dove guarda il tuo personaggio
 alcuni segni sulla bussola delle missioni, intorno a te, per venti secondi
 Modalità pesca: disattivata.
 Pesca: %s per lanciare

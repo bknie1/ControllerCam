@@ -204,7 +204,7 @@ local LAYOUT = {
     { page = "Quests and map", groups = {
         { head = "Quest list", "questzone", "questSolo", "questNear", "questNearest", "questPlan", "questFocusNear",
           "questShort" },
-        { head = "Quest compass", "compass", "compassPlace" },
+        { head = "Quest compass", "compass", "compassPlace", "compassCamera" },
         { head = "Quest progress", "questProgress", "questParty", "questPartyAll" },
         { head = "Farm list", "farmList", "farmSide" },
         { head = "Map", "mapCoords" },

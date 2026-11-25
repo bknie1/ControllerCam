@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.5.7
+
+ControllerCam: HUD
+- The quest compass follows the camera, not your character. With the stick turning your character without the camera (or the camera swinging round it), the way the camera looks is the way you're looking. New option **Quest compass: follows the camera** (`/cchud compasscamera`, on by default); off, the compass shows the way your character faces, as before. The game's camera heading is found by name (GetCameraYaw and a few like it, also under C_Camera); where this client has none of them, the compass stays on your character's facing, and the debug report's compass line says which it used and lists what the game has with "Camera" in its name.
+
 ## 1.5.6
 
 ControllerCam: HUD
