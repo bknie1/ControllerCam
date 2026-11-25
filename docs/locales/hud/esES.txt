@@ -25,8 +25,8 @@ Grandes momentos
 una ráfaga se fija grande y dorada en el centro de la pantalla: críticos que caen seguidos, cada uno a menos de un segundo del anterior (un doble golpe, Sentencia y Golpe sagrado juntos), con lo que hicieron juntos (como mucho dos veces por combate)
 Vibración: tus habilidades clave
 las habilidades clave de cada clase se sienten distintas en el mando (una Sentencia salpica, un Golpe sagrado chasquea, Viento furioso golpea tres veces)
-Una ventana de bolsas con filtros rápidos
-tus bolsas en una ventana propia del HUD en lugar de la del juego: todos los objetos juntos, los huecos vacíos reunidos al final, tus bolsas en una fila aparte y filtros rápidos arriba (LB y RB). También el banco, mientras está abierto. Desactivado: las bolsas del juego
+Nuestra ventana de bolsas (experimental)
+tus bolsas en una ventana propia del HUD, en lugar de las del juego: todos los objetos juntos, las ranuras vacías al final, tus bolsas en una fila propia y filtros rápidos arriba (LB y RB). También el banco mientras está abierto. Desactivado, como empieza: las bolsas y el banco del juego, con nuestro ordenado rápido (R3), depósito y retirada rápidos y las líneas extra en los tooltips de objetos
 Pestaña Mercado en la casa de subastas
 una pestaña Mercado en la casa de subastas: qué de tus bolsas merece venderse allí y por qué, un gráfico de precios al lado, y publicar con una pulsación
 El Mentor: un plan de subida junto a la ventana de la profesión

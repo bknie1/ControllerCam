@@ -25,8 +25,8 @@ Grandes momentos
 uma rajada é fixada grande e dourada no meio da tela: críticos em sequência, cada um a menos de um segundo do anterior (um golpe duplo, Julgamento e Golpe Sagrado juntos), com o que fizeram juntos (no máximo duas vezes por luta)
 Vibração: suas habilidades-chave
 as habilidades-chave de cada classe têm uma sensação própria no controle (um Julgamento espalha, um Golpe Sagrado estala, Fúria dos Ventos bate três vezes)
-Uma janela de bolsas com filtros rápidos
-suas bolsas numa janela própria do HUD em vez da do jogo: todos os itens juntos, os espaços vazios reunidos no fim, suas bolsas numa fileira à parte e filtros rápidos no topo (LB e RB). O banco também, enquanto estiver aberto. Desligado: as bolsas do jogo
+Nossa janela de bolsas (experimental)
+suas bolsas em uma janela própria do HUD, no lugar das do jogo: todos os itens juntos, os espaços vazios no fim, suas bolsas em uma linha própria e filtros rápidos no topo (LB e RB). O banco também enquanto está aberto. Desligado, como começa: as bolsas e o banco do jogo, com nossa ordenação rápida (R3), depósito e retirada rápidos e as linhas extras nas dicas de itens
 Aba Mercado na casa de leilões
 uma aba Mercado na casa de leilões: o que nas suas bolsas vale vender lá e por quê, um gráfico de preços ao lado, e anunciar com um toque
 O Mentor: um plano de evolução ao lado da janela da profissão

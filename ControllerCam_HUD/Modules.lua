@@ -121,9 +121,9 @@ ns.RegisterSetting({
 })
 
 ns.RegisterSetting({
-    key = "bagWindow", kind = "boolean", default = true, command = "bagwindow", section = "Bags, bank and vendor",
-    label = "One bag window with quick filters",
-    tip = "your bags in one window of the HUD's own, in place of the game's: every item together, the empty slots gathered at the end, your bags in a row of their own, and quick filters along the top (LB and RB). The bank too, while it is open. Off: the game's own bags",
+    key = "bagWindow", kind = "boolean", default = false, command = "bagwindow", section = "Bags, bank and vendor",
+    label = "Our own bag window (experimental)",
+    tip = "your bags in a window of the HUD's own, in place of the game's: every item together, the empty slots gathered at the end, your bags in a row of their own, and quick filters along the top (LB and RB). The bank too, while it is open. Off, as it starts: the game's own bags and bank, with our quick sort (R3), quick deposit and withdraw, and the item tooltips' extra lines",
 })
 
 ns.RegisterSetting({

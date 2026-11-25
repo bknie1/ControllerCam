@@ -5,6 +5,25 @@ of the game's own Gamepad UI and can be added or removed without leaving a trace
 
 ## Rules
 
+**Native is law.** Whatever the game's own API and windows allow, we work with them and never against them.
+(Decided 2026-11-25, after the bag window, the bank and the Market tab each redrew a native window and each then
+fell out of step with the game: visual sync problems, tooltips lost, controls stolen.)
+
+- **Extend, don't replace.** The game's own inventory, bank, vendor, auction house, tooltips and menus stay on
+  screen and in charge. We add to them: a key binding (quick sort, quick deposit), a line under a tooltip, an entry
+  in a menu through the game's own menu API, a button beside the game's own. A window of ours is the last resort,
+  for something the game has no window for at all.
+- **Ask the API first.** Before anything is drawn again, look for what the game offers to do it: a setting, a
+  mixin, a hook (`hooksecurefunc`), a menu modifier, an Edit Mode option, a `SmartNavigation` call. Use it.
+- **Where we must change how something looks, change it in place** (an anchor, a layer, an alpha) and put it back
+  when the thing is off; never rebuild what the game builds.
+- **Self-managing.** Every part tests what it needs when it starts and as it runs, and handles a problem as it
+  arrives: a handler that fails steps aside for a while (`ns.BREAKER`, Core.lua) and is tried again; a part the
+  game will not let us touch (protected, in combat, secret) is left alone and noted in the debug report, never
+  forced. One part failing never stops another, and no error may escape to the game as a Lua error.
+- **Our own window is opt-in, and labelled experimental,** until it has run a week in the game without a problem
+  the native one does not have (the bag window now: Options > Bags).
+
 1. **Lightweight.** Small files, no libraries, nothing running when it has nothing to do.
 2. **Classic inspired, modern feel.** Things sit where WoW players expect them. Quality of life, animation and
    a little flash come on top.

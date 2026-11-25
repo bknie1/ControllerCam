@@ -34,8 +34,8 @@ local ENGLISH = {
     "a burst is pinned big and golden in the middle of the screen: crits landing back to back, each within a second of the last (a double swing, Judgement and Holy Strike together), with what they did together (at most twice a fight)",  -- 25
     "Rumble: your key abilities",  -- 26
     "each class's key abilities have a feel of their own on the controller (a Judgement splashes, a Holy Strike snaps, Windfury knocks three times)",  -- 27
-    "One bag window with quick filters",  -- 28
-    "your bags in one window of the HUD's own, in place of the game's: every item together, the empty slots gathered at the end, your bags in a row of their own, and quick filters along the top (LB and RB). The bank too, while it is open. Off: the game's own bags",  -- 29
+    "Our own bag window (experimental)",  -- 28
+    "your bags in a window of the HUD's own, in place of the game's: every item together, the empty slots gathered at the end, your bags in a row of their own, and quick filters along the top (LB and RB). The bank too, while it is open. Off, as it starts: the game's own bags and bank, with our quick sort (R3), quick deposit and withdraw, and the item tooltips' extra lines",  -- 29
     "Market tab at the auction house",  -- 30
     "a Market tab on the auction house: what in your bags is worth selling there and why, a price chart beside it, and posting in one press",  -- 31
     "The Mentor: a levelling plan beside the profession window",  -- 32
@@ -1550,8 +1550,8 @@ local TRANSLATIONS = {
         "ein Ausbruch wird groß und golden in der Bildschirmmitte angeheftet: kritische Treffer direkt nacheinander, jeder innerhalb einer Sekunde nach dem letzten (ein Doppelschlag, Richturteil und Heiliger Stoß zusammen), mit dem, was sie zusammen bewirkt haben (höchstens zweimal pro Kampf)",  -- 25
         "Vibration: deine Schlüsselfähigkeiten",  -- 26
         "die Schlüsselfähigkeiten jeder Klasse fühlen sich am Controller eigen an (ein Richturteil spritzt, ein Heiliger Stoß schnappt zu, Windzorn klopft dreimal)",  -- 27
-        "Ein Taschenfenster mit Schnellfiltern",  -- 28
-        "deine Taschen in einem eigenen Fenster des HUD statt dem des Spiels: alle Gegenstände beisammen, die freien Plätze am Ende gesammelt, deine Taschen in einer eigenen Reihe und Schnellfilter oben (LB und RB). Auch die Bank, solange sie offen ist. Aus: die Taschen des Spiels",  -- 29
+        "Eigenes Taschenfenster (experimentell)",  -- 28
+        "Eure Taschen in einem eigenen Fenster des HUD statt in denen des Spiels: alle Gegenstände zusammen, die leeren Plätze am Ende, Eure Taschen in einer eigenen Reihe und Schnellfilter oben (LB und RB). Auch die Bank, solange sie offen ist. Aus, so beginnt es: die Taschen und die Bank des Spiels, mit unserem Schnellsortieren (R3), schnellem Einlagern und Entnehmen und den Zusatzzeilen in Gegenstandstooltips",  -- 29
         "Markt-Reiter im Auktionshaus",  -- 30
         "ein Markt-Reiter im Auktionshaus: was sich aus deinen Taschen dort zu verkaufen lohnt und warum, daneben ein Preisverlauf, und Einstellen mit einem Druck",  -- 31
         "Der Mentor: ein Levelplan neben dem Berufsfenster",  -- 32
@@ -3064,8 +3064,8 @@ local TRANSLATIONS = {
         "una ráfaga se fija grande y dorada en el centro de la pantalla: críticos que caen seguidos, cada uno a menos de un segundo del anterior (un doble golpe, Sentencia y Golpe sagrado juntos), con lo que hicieron juntos (como mucho dos veces por combate)",  -- 25
         "Vibración: tus habilidades clave",  -- 26
         "las habilidades clave de cada clase se sienten distintas en el mando (una Sentencia salpica, un Golpe sagrado chasquea, Viento furioso golpea tres veces)",  -- 27
-        "Una ventana de bolsas con filtros rápidos",  -- 28
-        "tus bolsas en una ventana propia del HUD en lugar de la del juego: todos los objetos juntos, los huecos vacíos reunidos al final, tus bolsas en una fila aparte y filtros rápidos arriba (LB y RB). También el banco, mientras está abierto. Desactivado: las bolsas del juego",  -- 29
+        "Nuestra ventana de bolsas (experimental)",  -- 28
+        "tus bolsas en una ventana propia del HUD, en lugar de las del juego: todos los objetos juntos, las ranuras vacías al final, tus bolsas en una fila propia y filtros rápidos arriba (LB y RB). También el banco mientras está abierto. Desactivado, como empieza: las bolsas y el banco del juego, con nuestro ordenado rápido (R3), depósito y retirada rápidos y las líneas extra en los tooltips de objetos",  -- 29
         "Pestaña Mercado en la casa de subastas",  -- 30
         "una pestaña Mercado en la casa de subastas: qué de tus bolsas merece venderse allí y por qué, un gráfico de precios al lado, y publicar con una pulsación",  -- 31
         "El Mentor: un plan de subida junto a la ventana de la profesión",  -- 32
@@ -4578,8 +4578,8 @@ local TRANSLATIONS = {
         "une rafale s’affiche en grand et en or au centre de l’écran : des critiques coup sur coup, chacun moins d’une seconde après le précédent (un double coup, Jugement et Frappe sacrée ensemble), avec ce qu’ils ont fait ensemble (au plus deux fois par combat)",  -- 25
         "Vibration : vos techniques clés",  -- 26
         "les techniques clés de chaque classe ont leur propre sensation à la manette (un Jugement éclabousse, une Frappe sacrée claque, Furie-des-vents frappe trois fois)",  -- 27
-        "Une fenêtre de sacs avec filtres rapides",  -- 28
-        "vos sacs dans une fenêtre propre au HUD au lieu de celle du jeu: tous les objets ensemble, les emplacements vides regroupés à la fin, vos sacs sur une rangée à part et des filtres rapides en haut (LB et RB). La banque aussi, tant qu'elle est ouverte. Désactivé: les sacs du jeu",  -- 29
+        "Notre fenêtre de sacs (expérimentale)",  -- 28
+        "vos sacs dans une fenêtre propre au HUD, à la place de celles du jeu : tous les objets ensemble, les emplacements vides à la fin, vos sacs sur une ligne à part et des filtres rapides en haut (LB et RB). La banque aussi quand elle est ouverte. Désactivé, comme au départ : les sacs et la banque du jeu, avec notre tri rapide (R3), le dépôt et le retrait rapides et les lignes en plus des infobulles d'objets",  -- 29
         "Onglet Marché à l'hôtel des ventes",  -- 30
         "un onglet Marché à l'hôtel des ventes : ce qui, dans vos sacs, vaut d'y être vendu et pourquoi, une courbe des prix à côté, et la mise en vente d'une pression",  -- 31
         "Le Mentor : un plan de progression à côté de la fenêtre du métier",  -- 32
@@ -6092,8 +6092,8 @@ local TRANSLATIONS = {
         "una raffica viene fissata grande e dorata al centro dello schermo: critici uno dopo l’altro, ciascuno entro un secondo dal precedente (un doppio colpo, Giudizio e Colpo Sacro insieme), con ciò che hanno fatto insieme (al massimo due volte per combattimento)",  -- 25
         "Vibrazione: le tue abilità chiave",  -- 26
         "le abilità chiave di ogni classe hanno una sensazione propria sul controller (un Giudizio esplode, un Assalto sacro schiocca, Furia del vento colpisce tre volte)",  -- 27
-        "Una finestra delle borse con filtri rapidi",  -- 28
-        "le tue borse in una finestra dell'HUD invece di quella del gioco: tutti gli oggetti insieme, i posti vuoti raccolti alla fine, le tue borse in una fila a parte e filtri rapidi in alto (LB e RB). Anche la banca, mentre è aperta. Disattivato: le borse del gioco",  -- 29
+        "La nostra finestra borse (sperimentale)",  -- 28
+        "le tue borse in una finestra dell'HUD, al posto di quelle del gioco: tutti gli oggetti insieme, gli spazi vuoti in fondo, le tue borse in una riga a parte e filtri rapidi in alto (LB e RB). Anche la banca mentre è aperta. Disattivato, come all'inizio: le borse e la banca del gioco, con il nostro riordino rapido (R3), deposito e prelievo rapidi e le righe extra nei tooltip degli oggetti",  -- 29
         "Scheda Mercato alla casa d'aste",  -- 30
         "una scheda Mercato nella casa d'aste: cosa conviene vendere lì dalle tue borse e perché, un grafico dei prezzi accanto, e la messa in vendita con una pressione",  -- 31
         "Il Mentore: un piano di avanzamento accanto alla finestra della professione",  -- 32
@@ -7606,8 +7606,8 @@ local TRANSLATIONS = {
         "연타가 화면 가운데에 크고 금빛으로 표시됩니다: 앞선 것에서 1초 안에 연달아 들어간 치명타들(이중 타격, 심판과 신성한 일격을 함께)과 그것들이 함께 낸 피해 (전투당 최대 두 번)",  -- 25
         "진동: 핵심 기술",  -- 26
         "각 직업의 핵심 기술마다 컨트롤러에서 고유한 느낌 (심판은 퍼지듯, 신성한 일격은 끊기듯, 질풍은 세 번 두드림)",  -- 27
-        "빠른 필터가 있는 하나의 가방 창",  -- 28
-        "게임의 가방 대신 HUD의 가방 창 하나에: 모든 아이템을 함께, 빈 칸은 끝에 모아서, 가방은 따로 한 줄에, 위쪽에는 빠른 필터(LB와 RB). 은행이 열려 있는 동안에는 은행도. 끄면: 게임의 가방",  -- 29
+        "자체 가방 창 (실험적)",  -- 28
+        "게임의 가방 대신 HUD 자체 창에 가방을 표시합니다: 모든 아이템을 한곳에, 빈 칸은 끝에, 가방은 별도의 줄에, 위에는 빠른 필터(LB, RB). 은행이 열려 있으면 은행도 포함. 끄면(기본값): 게임의 가방과 은행을 그대로 쓰며, 빠른 정렬(R3), 빠른 맡기기/찾기, 아이템 툴팁 추가 줄은 유지됩니다",  -- 29
         "경매장의 시장 탭",  -- 30
         "경매장에 시장 탭 추가: 가방에서 무엇을 거기서 팔 만한지와 그 이유, 옆에 가격 그래프, 한 번 눌러 등록",  -- 31
         "멘토: 전문 기술 창 옆에 숙련 계획",  -- 32
@@ -9120,8 +9120,8 @@ local TRANSLATIONS = {
         "uma rajada é fixada grande e dourada no meio da tela: críticos em sequência, cada um a menos de um segundo do anterior (um golpe duplo, Julgamento e Golpe Sagrado juntos), com o que fizeram juntos (no máximo duas vezes por luta)",  -- 25
         "Vibração: suas habilidades-chave",  -- 26
         "as habilidades-chave de cada classe têm uma sensação própria no controle (um Julgamento espalha, um Golpe Sagrado estala, Fúria dos Ventos bate três vezes)",  -- 27
-        "Uma janela de bolsas com filtros rápidos",  -- 28
-        "suas bolsas numa janela própria do HUD em vez da do jogo: todos os itens juntos, os espaços vazios reunidos no fim, suas bolsas numa fileira à parte e filtros rápidos no topo (LB e RB). O banco também, enquanto estiver aberto. Desligado: as bolsas do jogo",  -- 29
+        "Nossa janela de bolsas (experimental)",  -- 28
+        "suas bolsas em uma janela própria do HUD, no lugar das do jogo: todos os itens juntos, os espaços vazios no fim, suas bolsas em uma linha própria e filtros rápidos no topo (LB e RB). O banco também enquanto está aberto. Desligado, como começa: as bolsas e o banco do jogo, com nossa ordenação rápida (R3), depósito e retirada rápidos e as linhas extras nas dicas de itens",  -- 29
         "Aba Mercado na casa de leilões",  -- 30
         "uma aba Mercado na casa de leilões: o que nas suas bolsas vale vender lá e por quê, um gráfico de preços ao lado, e anunciar com um toque",  -- 31
         "O Mentor: um plano de evolução ao lado da janela da profissão",  -- 32
@@ -10634,8 +10634,8 @@ local TRANSLATIONS = {
         "серия показывается крупно и золотом в середине экрана: критические удары подряд, каждый не позже секунды после предыдущего (двойной удар, Правосудие и Удар воина Света вместе), с тем, что они сделали вместе (не больше двух раз за бой)",  -- 25
         "Вибрация: ваши ключевые умения",  -- 26
         "ключевые умения каждого класса ощущаются на геймпаде по-своему (Правосудие расходится волной, Удар Света резко щёлкает, Неистовство ветра стучит трижды)",  -- 27
-        "Одно окно сумок с быстрыми фильтрами",  -- 28
-        "ваши сумки в одном окне HUD вместо окна игры: все предметы вместе, пустые ячейки собраны в конце, сумки в отдельном ряду, быстрые фильтры сверху (LB и RB). И банк, пока он открыт. Выкл.: сумки игры",  -- 29
+        "Наше окно сумок (экспериментально)",  -- 28
+        "ваши сумки в собственном окне HUD вместо игровых: все предметы вместе, пустые ячейки в конце, сумки отдельной строкой и быстрые фильтры сверху (LB и RB). Банк тоже, пока он открыт. Выключено (так по умолчанию): сумки и банк игры с нашей быстрой сортировкой (R3), быстрым складыванием и изъятием и доп. строками в подсказках предметов",  -- 29
         "Вкладка «Рынок» на аукционе",  -- 30
         "вкладка «Рынок» на аукционе: что из ваших сумок стоит продать там и почему, рядом график цен, и выставление одним нажатием",  -- 31
         "Наставник: план прокачки рядом с окном профессии",  -- 32
@@ -12148,8 +12148,8 @@ local TRANSLATIONS = {
         "爆发会以金色大字固定在屏幕中央：接连出现的暴击，每次与上一次相隔不到一秒（双重挥击、审判与神圣打击一起），显示它们合计造成的效果（每场战斗最多两次）",  -- 25
         "震动：你的核心技能",  -- 26
         "每个职业的核心技能在手柄上都有独特的手感（审判如水花四溅，神圣打击干脆一击，风怒连敲三下）",  -- 27
-        "带快速筛选的统一背包窗口",  -- 28
-        "用 HUD 自己的一个窗口代替游戏的背包：所有物品放在一起，空格集中在最后，背包单独一排，顶部有快速筛选（LB 和 RB）。银行打开时也包括银行。关闭：使用游戏自己的背包",  -- 29
+        "自带背包窗口（实验性）",  -- 28
+        "用HUD自己的窗口代替游戏背包：所有物品放在一起，空格子排在最后，背包单独一行，顶部有快速筛选（LB和RB）。银行打开时也包含银行。关闭（默认）：使用游戏自带的背包和银行，保留我们的快速整理（R3）、快速存取和物品提示中的附加信息",  -- 29
         "拍卖行的市场标签",  -- 30
         "拍卖行上的市场标签：你背包里哪些值得在那里卖以及原因，旁边有价格走势图，一键上架",  -- 31
         "导师：专业技能窗口旁的升级计划",  -- 32
@@ -13662,8 +13662,8 @@ local TRANSLATIONS = {
         "爆發會以金色大字固定在螢幕中央：接連出現的致命一擊，每次與上一次相隔不到一秒（雙重揮擊、審判與神聖打擊一起），顯示它們合計造成的效果（每場戰鬥最多兩次）",  -- 25
         "震動：你的核心技能",  -- 26
         "每個職業的核心技能在手把上都有獨特的手感（審判如水花四濺，神聖打擊乾脆一擊，風怒連敲三下）",  -- 27
-        "帶快速篩選的統一背包視窗",  -- 28
-        "用 HUD 自己的一個視窗代替遊戲的背包：所有物品放在一起，空格集中在最後，背包單獨一排，頂部有快速篩選（LB 和 RB）。銀行開啟時也包括銀行。關閉：使用遊戲自己的背包",  -- 29
+        "自訂背包視窗（實驗性）",  -- 28
+        "用HUD自己的視窗代替遊戲背包：所有物品放在一起，空格子排在最後，背包單獨一列，頂部有快速篩選（LB和RB）。銀行開啟時也包含銀行。關閉（預設）：使用遊戲內建的背包和銀行，保留我們的快速整理（R3）、快速存取和物品提示中的附加資訊",  -- 29
         "拍賣場的市場分頁",  -- 30
         "拍賣場上的市場分頁：你背包裡哪些值得在那裡賣以及原因，旁邊有價格走勢圖，一鍵上架",  -- 31
         "導師：專業技能視窗旁的升級計畫",  -- 32

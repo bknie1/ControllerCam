@@ -538,7 +538,10 @@ local function BuildView()
 
     -- the controller: its buttons are bound to the Market while it is up (ns.PadKeys); the rest stay the game's
     AP.keys = ns.PadKeys("Market", AP.KEYS, function(key) AP:Pad(key) end, function() AP:HideView() end)
-    view:SetScript("OnHide", ns.Protect(function() AP.keys:Set(false) end))
+    view:SetScript("OnHide", ns.Protect(function()
+        AP.keys:Set(false)
+        AP.Tip(nil)                                          -- (its tooltip goes with it)
+    end))
     view:Hide()
     AP.view = view
 end
@@ -1003,6 +1006,35 @@ function AP.Kept(hidden)
                   L["Set %d aside for your crafts, your back and your marks. %s if you want them."] }):format(hidden, key)
 end
 
+-- The chosen item's own tooltip, beside the Market: what the game says of it (stats, use, vendor price...), on a
+-- tooltip of our own (never the game's), so the Broker's numbers sit beside the item and do not replace it
+function AP.Tip(e)
+    local T = ns.Tooltip
+    local tip = T and T.Own and T.Own()
+    if not tip then return end
+    if not (e and view and view:IsShown()) then
+        pcall(tip.Hide, tip)
+        return
+    end
+    pcall(tip.SetOwner, tip, view, "ANCHOR_NONE")
+    pcall(tip.ClearAllPoints, tip)
+    local okL, left = pcall(view.GetLeft, view)
+    local okR, right = pcall(view.GetRight, view)
+    local w = UIParent.GetWidth and UIParent:GetWidth() or 0
+    if okR and type(right) == "number" and w > 0 and w - right > 330 then
+        pcall(tip.SetPoint, tip, "TOPLEFT", view, "TOPRIGHT", 8, 0)
+    elseif okL and type(left) == "number" and left > 330 then
+        pcall(tip.SetPoint, tip, "TOPRIGHT", view, "TOPLEFT", -8, 0)
+    else
+        pcall(tip.SetPoint, tip, "BOTTOMLEFT", view, "TOPLEFT", 0, 8)
+    end
+    local ok = false
+    if e.bag and e.slot and tip.SetBagItem then ok = pcall(tip.SetBagItem, tip, e.bag, e.slot) end
+    if not ok and e.link and tip.SetHyperlink then ok = pcall(tip.SetHyperlink, tip, e.link) end
+    if not ok and e.id and tip.SetItemByID then ok = pcall(tip.SetItemByID, tip, e.id) end
+    if ok then pcall(tip.Show, tip) else pcall(tip.Hide, tip) end
+end
+
 function AP:Refresh()
     if not view or not view:IsShown() then return end
     local M = ns.Market
@@ -1015,6 +1047,7 @@ function AP:Refresh()
     AP.index = math.max(1, math.min(AP.index, math.max(1, #list)))
     local chosen = list[AP.index]
     AP.chosen, AP.selected = chosen, chosen and chosen.id or nil
+    AP.Tip(chosen)
     local per = AP.perPage
     local pages = math.max(1, math.ceil(#list / per))
     AP.page = math.ceil(AP.index / per)

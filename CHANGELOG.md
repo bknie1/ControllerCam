@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.6.0
+
+ControllerCam: HUD
+- **Native is law.** The game's own bags and bank are back as the start. Our own bag window had visual sync problems the game's windows don't have, so it's now an experimental option (**Our own bag window**, off), switched off once for everyone. The game's bags keep our quick sort on R3 and the item tooltips' extra lines, and the game's bank keeps Quick Deposit, Quick Withdraw and Materials.
+- Self-managing: a part of the HUD that keeps failing (5 failures in 10 seconds) now steps aside for 30 seconds and is tried again, longer if it keeps failing, instead of failing on every frame; every other part carries on. The debug report lists anything that stepped aside.
+- The Market tab shows the chosen item's own tooltip beside it, so the item's information is there along with the Broker's numbers.
+
 ## 1.5.10
 
 ControllerCam: HUD

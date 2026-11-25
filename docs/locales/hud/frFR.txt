@@ -25,8 +25,8 @@ Grands moments
 une rafale s’affiche en grand et en or au centre de l’écran : des critiques coup sur coup, chacun moins d’une seconde après le précédent (un double coup, Jugement et Frappe sacrée ensemble), avec ce qu’ils ont fait ensemble (au plus deux fois par combat)
 Vibration : vos techniques clés
 les techniques clés de chaque classe ont leur propre sensation à la manette (un Jugement éclabousse, une Frappe sacrée claque, Furie-des-vents frappe trois fois)
-Une fenêtre de sacs avec filtres rapides
-vos sacs dans une fenêtre propre au HUD au lieu de celle du jeu: tous les objets ensemble, les emplacements vides regroupés à la fin, vos sacs sur une rangée à part et des filtres rapides en haut (LB et RB). La banque aussi, tant qu'elle est ouverte. Désactivé: les sacs du jeu
+Notre fenêtre de sacs (expérimentale)
+vos sacs dans une fenêtre propre au HUD, à la place de celles du jeu : tous les objets ensemble, les emplacements vides à la fin, vos sacs sur une ligne à part et des filtres rapides en haut (LB et RB). La banque aussi quand elle est ouverte. Désactivé, comme au départ : les sacs et la banque du jeu, avec notre tri rapide (R3), le dépôt et le retrait rapides et les lignes en plus des infobulles d'objets
 Onglet Marché à l'hôtel des ventes
 un onglet Marché à l'hôtel des ventes : ce qui, dans vos sacs, vaut d'y être vendu et pourquoi, une courbe des prix à côté, et la mise en vente d'une pression
 Le Mentor : un plan de progression à côté de la fenêtre du métier

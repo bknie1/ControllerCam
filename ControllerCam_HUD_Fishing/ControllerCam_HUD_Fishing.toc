@@ -2,7 +2,7 @@
 ## Title: ControllerCam HUD: Fishing
 ## Notes: One-button fishing, the fishing interface, the fish journal and a game while the float is out. Loaded only while it is switched on in the HUD's options.
 ## Author: bknie1
-## Version: 1.5.10
+## Version: 1.6.0
 ## X-License: MIT
 ## IconTexture: Interface\AddOns\ControllerCam\Media\icon
 ## Dependencies: ControllerCam_HUD

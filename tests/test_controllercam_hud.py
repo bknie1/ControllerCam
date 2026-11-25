@@ -267,7 +267,7 @@ class Packaging(unittest.TestCase):
 class LoadOnDemand(unittest.TestCase):
     """The HUD's modules: each an addon of its own, loaded only while one of its switches is on (Modules.lua)."""
 
-    ON = "{ enabled = true, asked = true, screenAsked = true }"
+    ON = "{ v = 14, bagWindow = true, enabled = true, asked = true, screenAsked = true }"
 
     def manifest(self, e):
         return {m.addon: m for m in e.ns.ModuleList.list.values()}
@@ -354,7 +354,7 @@ class LoadOnDemand(unittest.TestCase):
             self.assertEqual(m.state, "loaded", m.addon)
 
     def test_nothing_is_loaded_while_the_hud_is_off(self):
-        e = Env(db="{ enabled = false, asked = true, screenAsked = true }", modules="game")
+        e = Env(db="{ v = 14, bagWindow = true, enabled = false, asked = true, screenAsked = true }", modules="game")
         self.assertEqual(e.loaded_modules, [])
         e.cmd("on")
         self.assertEqual(sorted(e.loaded_modules), MODULES)
@@ -10080,6 +10080,25 @@ class MarketPanel(SellWhenUnsure, unittest.TestCase):
         e.mock.fire("AUCTION_HOUSE_SHOW")
         return e.ns.AuctionPanel
 
+    def test_the_chosen_items_own_tooltip_sits_beside_the_market(self):
+        e = self.env()
+        P = self.house(e)
+        tip = e.ns.Tooltip.Own()
+        self.assertIsNotNone(tip)
+        tip.SetBagItem = e.lua.eval("function() return true end")    # (the game's tooltip calls, as a tooltip has them)
+        tip.SetOwner = e.lua.eval("function(self, owner) self.owner = owner end")
+        e.g.ControllerCamHUD_Market()
+        self.assertTrue(tip.shown)                                   # the item's own tooltip, not only the Broker's numbers
+        self.assertTrue(e.same(tip.owner, P.view))
+        self.assertNotEqual(tip, e.g.GameTooltip)                    # (ours, never the game's)
+        down = e.g.ControllerCamHUD_Key_Market_PADDDOWN
+        down.scripts.OnClick(down)
+        self.assertTrue(tip.shown)                                   # and it follows the choice
+        P.view.Hide(P.view)
+        P.view.scripts.OnHide()
+        self.assertFalse(tip.shown)                                  # gone with the Market
+        self.assertEqual(e.errors(), [])
+
     def test_it_is_a_tab_of_the_auction_house(self):
         e = self.env()
         P = self.house(e)
@@ -14577,7 +14596,7 @@ class BagWindow(unittest.TestCase):
     """
 
     def env(self, extra="", order=3):
-        e = Env(setup=lambda env: env.lua.execute(self.GAME + extra))
+        e = Env(setup=lambda env: env.lua.execute(self.GAME + extra), db="{ v = 14, bagWindow = true }")
         e.db.bagOrder = order                                        # (3: as in your bags; 1 smart, 2 by type)
         put, T = e.mock.put, e.lua.table
         put(0, 1, T(id=101, name="Bronze Axe", quality=2, price=500, **{"class": 2}))
@@ -17320,6 +17339,33 @@ class CompassCamera(unittest.TestCase):
         self.assertAlmostEqual(C.Facing(), 0.2)                      # off: the character's again
         self.assertIn("camera: GetCameraYaw", C.Describe())
         self.assertEqual(e.errors(), [])
+
+
+class SelfManaging(unittest.TestCase):
+    """A handler that keeps failing steps aside instead of failing on every frame, then is tried again."""
+
+    def test_a_failing_handler_steps_aside_and_comes_back(self):
+        e = Env()
+        e.lua.execute("CALLS = 0; BAD = ns_protect(function() CALLS = CALLS + 1; error('always') end)") if False else None
+        bad = e.lua.eval("""function(Protect) CALLS = 0
+            return Protect(function() CALLS = CALLS + 1; error("always") end) end""")(e.ns.Protect)
+        for _ in range(12):
+            bad()
+        self.assertEqual(e.g.CALLS, 5)                               # five failures, then it steps aside
+        self.assertEqual(len(e.errors()) > 0, True)
+        e.mock.advance(31)
+        bad()
+        self.assertEqual(e.g.CALLS, 6)                               # and is tried again after its while
+        self.assertTrue(len(list(e.ns.BREAKER.trips.values())) >= 1)
+
+    def test_one_failing_handler_leaves_the_others_alone(self):
+        e = Env()
+        good, bad = e.lua.eval("""function(Protect) GOOD = 0
+            return Protect(function() GOOD = GOOD + 1 end), Protect(function() error("no") end) end""")(e.ns.Protect)
+        for _ in range(10):
+            bad()
+            good()
+        self.assertEqual(e.g.GOOD, 10)                               # the good one never stepped aside
 
 
 class NoSecretArithmetic(unittest.TestCase):

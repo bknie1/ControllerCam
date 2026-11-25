@@ -25,8 +25,8 @@ Große Momente
 ein Ausbruch wird groß und golden in der Bildschirmmitte angeheftet: kritische Treffer direkt nacheinander, jeder innerhalb einer Sekunde nach dem letzten (ein Doppelschlag, Richturteil und Heiliger Stoß zusammen), mit dem, was sie zusammen bewirkt haben (höchstens zweimal pro Kampf)
 Vibration: deine Schlüsselfähigkeiten
 die Schlüsselfähigkeiten jeder Klasse fühlen sich am Controller eigen an (ein Richturteil spritzt, ein Heiliger Stoß schnappt zu, Windzorn klopft dreimal)
-Ein Taschenfenster mit Schnellfiltern
-deine Taschen in einem eigenen Fenster des HUD statt dem des Spiels: alle Gegenstände beisammen, die freien Plätze am Ende gesammelt, deine Taschen in einer eigenen Reihe und Schnellfilter oben (LB und RB). Auch die Bank, solange sie offen ist. Aus: die Taschen des Spiels
+Eigenes Taschenfenster (experimentell)
+Eure Taschen in einem eigenen Fenster des HUD statt in denen des Spiels: alle Gegenstände zusammen, die leeren Plätze am Ende, Eure Taschen in einer eigenen Reihe und Schnellfilter oben (LB und RB). Auch die Bank, solange sie offen ist. Aus, so beginnt es: die Taschen und die Bank des Spiels, mit unserem Schnellsortieren (R3), schnellem Einlagern und Entnehmen und den Zusatzzeilen in Gegenstandstooltips
 Markt-Reiter im Auktionshaus
 ein Markt-Reiter im Auktionshaus: was sich aus deinen Taschen dort zu verkaufen lohnt und warum, daneben ein Preisverlauf, und Einstellen mit einem Druck
 Der Mentor: ein Levelplan neben dem Berufsfenster

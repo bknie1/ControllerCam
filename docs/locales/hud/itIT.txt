@@ -25,8 +25,8 @@ Grandi momenti
 una raffica viene fissata grande e dorata al centro dello schermo: critici uno dopo l’altro, ciascuno entro un secondo dal precedente (un doppio colpo, Giudizio e Colpo Sacro insieme), con ciò che hanno fatto insieme (al massimo due volte per combattimento)
 Vibrazione: le tue abilità chiave
 le abilità chiave di ogni classe hanno una sensazione propria sul controller (un Giudizio esplode, un Assalto sacro schiocca, Furia del vento colpisce tre volte)
-Una finestra delle borse con filtri rapidi
-le tue borse in una finestra dell'HUD invece di quella del gioco: tutti gli oggetti insieme, i posti vuoti raccolti alla fine, le tue borse in una fila a parte e filtri rapidi in alto (LB e RB). Anche la banca, mentre è aperta. Disattivato: le borse del gioco
+La nostra finestra borse (sperimentale)
+le tue borse in una finestra dell'HUD, al posto di quelle del gioco: tutti gli oggetti insieme, gli spazi vuoti in fondo, le tue borse in una riga a parte e filtri rapidi in alto (LB e RB). Anche la banca mentre è aperta. Disattivato, come all'inizio: le borse e la banca del gioco, con il nostro riordino rapido (R3), deposito e prelievo rapidi e le righe extra nei tooltip degli oggetti
 Scheda Mercato alla casa d'aste
 una scheda Mercato nella casa d'aste: cosa conviene vendere lì dalle tue borse e perché, un grafico dei prezzi accanto, e la messa in vendita con una pressione
 Il Mentore: un piano di avanzamento accanto alla finestra della professione

@@ -343,6 +343,12 @@ D.SECTIONS = {
     { "big moments", function() return ns.Moments and ns.Moments.Describe and ns.Moments.Describe() or {} end },
     { "cooldown callouts", function() return ns.Numbers and ns.Numbers.Soon and ns.Numbers.Soon.Describe() or {} end },
     { "campfire", function() return ns.Campfire and ns.Campfire.Describe() or {} end },
+    { "stepped aside", function()                -- handlers that kept failing and were set aside for a while (Core.lua)
+        local out = {}
+        for where, t in pairs(ns.BREAKER.trips) do out[#out + 1] = ("%s: %d times"):format(tostring(where), t.count) end
+        table.sort(out)
+        return out
+    end },
     { "reticle", function() return ns.Reticle and ns.Reticle.Describe() or {} end },
     { "professions", function() return ns.Professions and ns.Professions.Describe() or {} end },
     { "specs", function() return ns.Vendor and ns.Vendor.DescribeSpecs and ns.Vendor.DescribeSpecs() or {} end },

@@ -113,16 +113,45 @@ function ns.Slow(where, ms)
         ns.MapOpen() and " (the map open)" or "")
     if #calls > 30 then table.remove(calls, 1) end
 end
-function ns.Protect(fn)
-    local clock = debugprofilestop
-    if type(clock) ~= "function" then
-        return function(...)
-            local ok, err = pcall(fn, ...)
-            if not ok then ns.Error(err) end
+-- Self-managing: a handler that keeps failing steps aside for a while instead of failing on every frame (each
+-- failure is an addon error to the game, and enough of them bring its warning and stop all addons). BREAKER.FAILS
+-- failures within BREAKER.WINDOW seconds trip it: the handler is skipped for BREAKER.COOL seconds, then tried
+-- again (a second trip within a minute keeps it off for a longer while). Everything else carries on.
+ns.BREAKER = { FAILS = 5, WINDOW = 10, COOL = 30, trips = {} }
+local function Breaker(where)
+    local b = { fails = 0, first = 0, off = 0, trips = 0, last = 0 }
+    function b.Skip()
+        return b.off > 0 and GetTime and GetTime() < b.off
+    end
+    function b.Failed()
+        local now = GetTime and GetTime() or 0
+        if now - b.first > ns.BREAKER.WINDOW then b.fails, b.first = 0, now end
+        b.fails = b.fails + 1
+        if b.fails >= ns.BREAKER.FAILS then
+            b.trips = (now - b.last < 60) and b.trips + 1 or 1
+            b.last, b.fails = now, 0
+            b.off = now + ns.BREAKER.COOL * b.trips
+            ns.BREAKER.trips[where] = { count = (ns.BREAKER.trips[where] and ns.BREAKER.trips[where].count or 0) + 1, at = now, until_ = b.off }
+            ns.Note("breaker: %s failed %d times; stepping aside for %d s", tostring(where), ns.BREAKER.FAILS, ns.BREAKER.COOL * b.trips)
         end
     end
-    local where, S = Where(), ns.spent
+    return b
+end
+
+function ns.Protect(fn)
+    local clock = debugprofilestop
+    local where = Where()
+    local breaker = Breaker(where)
+    if type(clock) ~= "function" then
+        return function(...)
+            if breaker.Skip() then return end
+            local ok, err = pcall(fn, ...)
+            if not ok then ns.Error(err); breaker.Failed() end
+        end
+    end
+    local S = ns.spent
     return function(...)
+        if breaker.Skip() then return end
         S.depth = S.depth + 1
         local t0 = clock()
         local ok, err = pcall(fn, ...)
@@ -134,7 +163,7 @@ function ns.Protect(fn)
             if ms > S.top then S.top, S.topWhere = ms, where end
         end
         if ms >= ns.SLOW_MS then ns.Slow(where, ms) end
-        if not ok then ns.Error(err) end
+        if not ok then ns.Error(err); breaker.Failed() end
     end
 end
 
@@ -340,7 +369,11 @@ local function InitDB()
     -- default: they wrap the game's chat frames, which taints them, and in a battleground every line then counted
     -- addon errors against us until the game warned. Off once for everyone (yours to turn on again, warned)
     if (tonumber(old.v) or 0) < 13 then old.chatInfo, old.chatShort, old.chatFirstName = nil, nil, nil end
-    local db = { v = 13, units = {}, pos = {}, saved = {} }
+    -- before version 14 our own bag window replaced the game's bags and bank: it had visual sync problems the game's
+    -- own windows do not (and the game's own bags kept our quick sort and deposit). The game's windows are the
+    -- start now; our own window stays as an experimental option (yours to turn on again)
+    if (tonumber(old.v) or 0) < 14 then old.bagWindow = nil end
+    local db = { v = 14, units = {}, pos = {}, saved = {} }
     -- game settings we changed, with the value they had (put back when the HUD stops)
     if type(old.saved) == "table" then
         for name, value in pairs(old.saved) do
