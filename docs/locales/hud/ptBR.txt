@@ -446,6 +446,12 @@ nada na tela treme, desliza, voa ou estoura: as animações da barra de lançame
 mostra como ficam os anúncios de uma pesca e de bônus
 Ressurreição em %d s
 Fale com o curandeiro espiritual para ressuscitar na próxima onda
+Seu mascote está com fome
+Seu mascote está ficando com fome
+Seu mascote está ficando com fome.
+Seu mascote está com fome: alimente-o.
+Alerta de fome do mascote
+quando seu mascote está contente ou infeliz (com fome): um pedaço de comida perto do topo da tela, pequeno e pulsando enquanto você joga, mais suave com uma linha de texto enquanto a tela descansa; uma vez no chat e um som quando está infeliz. Nada para um mascote feliz
 feito
 %s: pronta para entregar
 Terminando [%s].

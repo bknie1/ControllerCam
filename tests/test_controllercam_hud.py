@@ -4318,6 +4318,35 @@ class VerticalBars(unittest.TestCase):
         self.assertFalse(p.on)
         self.assertEqual(e.errors(), [])
 
+    def test_a_hungry_pet_has_a_cue_of_its_own_in_the_world_and_at_rest(self):
+        e = Env()
+        e.mock.setUnit("pet", e.lua.table(name="Wolf", health=300, healthMax=600))
+        e.lua.execute("MOOD = 3; function GetPetHappiness() return MOOD, 0, 0 end")
+        PA = e.ns.PetAlert
+        e.update(0.5)
+        self.assertIsNone(e.g.ControllerCamHUD_PetAlert)             # a happy pet: nothing
+        e.g.MOOD = 2
+        e.update(0.5)
+        f = e.g.ControllerCamHUD_PetAlert
+        self.assertTrue(f.shown)                                      # content: food, in yellow
+        self.assertIn("Your pet is getting hungry.", "\n".join(list(e.mock.printed.values())))   # (a line in chat, once)
+        e.g.MOOD = 1
+        e.update(0.5)
+        self.assertEqual(PA.mood, 1)
+        self.assertTrue(f.shown)
+        said = "\n".join(list(e.mock.printed.values()))
+        self.assertIn("Your pet is hungry: feed it.", said)
+        self.assertEqual(said.count("getting hungry"), 1)
+        self.assertFalse(f.text.shown)                                # in the world: the food alone
+        e.ns.PetAlert.Resting = e.lua.eval("function() return true end")   # at rest: the line beside it
+        e.update(0.5)
+        self.assertTrue(f.text.shown)
+        self.assertIn("Your pet is hungry", plain(f.text.text))
+        e.cmd("petalert off")
+        e.update(0.5)
+        self.assertFalse(f.shown)
+        self.assertEqual(e.errors(), [])
+
     def test_your_pets_mood_by_colour(self):
         e = Env(db="{ v = 4, units = { vertical = true, pet = true } }")
         p, C = e.frames.vpet, e.ns.colors

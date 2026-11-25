@@ -446,6 +446,12 @@ nothing on the screen shakes, sweeps, flies or bursts: cast bar animations, hit 
 show what the readouts of a catch and of buffs look like
 Resurrection in %d s
 Talk to the spirit healer to be resurrected with the next wave
+Your pet is hungry
+Your pet is getting hungry
+Your pet is getting hungry.
+Your pet is hungry: feed it.
+Pet hunger alert
+when your pet is content or unhappy (hungry): a piece of food near the top of the screen, small and pulsing while you play, softer with a line of words while the screen rests; once in chat and a sound when it is unhappy. Nothing for a happy pet
 done
 %s: ready to hand in
 Finishing up [%s].

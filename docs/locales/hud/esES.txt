@@ -446,6 +446,12 @@ nada en la pantalla tiembla, se desliza, vuela ni estalla: las animaciones de la
 muestra cómo se ven los anuncios de una captura y de beneficios
 Resurrección en %d s
 Habla con el ángel de resurrección para resucitar con la siguiente oleada
+Tu mascota tiene hambre
+Tu mascota empieza a tener hambre
+Tu mascota empieza a tener hambre.
+Tu mascota tiene hambre: aliméntala.
+Aviso de hambre de la mascota
+cuando tu mascota está contenta o infeliz (hambrienta): un trozo de comida cerca de la parte superior de la pantalla, pequeño y pulsante mientras juegas, más suave y con una línea de texto mientras la pantalla descansa; una vez en el chat y un sonido cuando está infeliz. Nada para una mascota feliz
 hecho
 %s: lista para entregar
 Terminando [%s].

@@ -446,6 +446,12 @@ niente sullo schermo trema, scivola, vola o esplode: le animazioni della barra d
 mostra come appaiono gli annunci di una cattura e dei benefici
 Resurrezione tra %d s
 Parla con il guaritore spirituale per risorgere con la prossima ondata
+Il tuo animale ha fame
+Il tuo animale sta per avere fame
+Il tuo animale sta per avere fame.
+Il tuo animale ha fame: nutrilo.
+Avviso di fame dell'animale
+quando il tuo animale è soddisfatto o infelice (affamato): un pezzo di cibo in alto sullo schermo, piccolo e pulsante mentre giochi, più morbido con una riga di testo mentre lo schermo riposa; una volta in chat e un suono quando è infelice. Niente per un animale felice
 fatto
 %s: pronta da consegnare
 Sto finendo [%s].

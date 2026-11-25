@@ -446,6 +446,12 @@ rien à l'écran ne tremble, ne glisse, ne vole ni n'éclate: les animations de 
 montrer à quoi ressemblent les annonces d'une prise et d'améliorations
 Résurrection dans %d s
 Parlez au gardien spirituel pour être ressuscité avec la prochaine vague
+Votre familier a faim
+Votre familier commence à avoir faim
+Votre familier commence à avoir faim.
+Votre familier a faim : nourrissez-le.
+Alerte de faim du familier
+quand votre familier est content ou malheureux (affamé) : un morceau de nourriture en haut de l'écran, petit et pulsant pendant que vous jouez, plus doux avec une ligne de texte quand l'écran se repose ; une fois dans la discussion et un son quand il est malheureux. Rien pour un familier heureux
 fait
 %s : prête à être rendue
 Je termine [%s].

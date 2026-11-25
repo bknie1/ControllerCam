@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.5.9
+
+ControllerCam: HUD
+- A hungry pet is hard to miss now (new option **Pet hunger alert**, `/cchud petalert`, on by default). The pet bar's thin mood band was easy to overlook, and a pet left unfed leaves. When your pet is content or unhappy (hungry) there is a piece of food near the top of the screen: while you play it is small and plain but obvious, pulsing in the mood's colour (yellow content, red unhappy); while the screen rests it is softer and slower, with one line beside it ("Your pet is getting hungry", "Your pet is hungry"). A line in chat as it drops to content and again to unhappy, and a short sound at unhappy. Nothing for a happy pet or a pet without a mood.
+
 ## 1.5.8
 
 ControllerCam: HUD

@@ -143,7 +143,7 @@ local LAYOUT = {
         { head = "Water reminder", "hydrate", "hydrateEvery", "hydrateFlight" },
     } },
     { page = "Your frames", groups = {
-        { head = "Your bars", "Player frame", "Vertical bars", "verticalIdle", "followZoom", "idle", "Pet bar", "petMood",
+        { head = "Your bars", "Player frame", "Vertical bars", "verticalIdle", "followZoom", "idle", "Pet bar", "petMood", "petAlert",
           "Personal Resource Display", "breathBar", "sleepy" },
         { head = "In a fight", "combatAlpha", "alertHealth", "alertPower", "playerShake" },
         { head = "Health bars", "classColors", "combatColors", "shieldBars", "wards", "healColors", "hotVines" },

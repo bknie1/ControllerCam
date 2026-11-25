@@ -446,6 +446,12 @@ nichts auf dem Bildschirm wackelt, gleitet, fliegt oder platzt: Zauberleisten-An
 zeigen, wie die Anzeigen eines Fangs und von Stärkungen aussehen
 Wiederbelebung in %d s
 Sprecht mit dem Geistheiler, um mit der nächsten Welle wiederbelebt zu werden
+Euer Tier hat Hunger
+Euer Tier bekommt Hunger
+Euer Tier bekommt Hunger.
+Euer Tier hat Hunger: füttert es.
+Tier-Hungeralarm
+wenn Euer Tier zufrieden oder unglücklich (hungrig) ist: ein Stück Futter oben am Bildschirm, klein und pulsierend beim Spielen, ruhiger mit einer Zeile Text, während der Bildschirm ruht; einmal im Chat und ein Ton, wenn es unglücklich ist. Nichts bei einem glücklichen Tier
 erledigt
 %s: bereit zur Abgabe
 Schließe noch [%s] ab.
