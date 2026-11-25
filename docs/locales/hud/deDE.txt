@@ -1292,6 +1292,8 @@ Lerne es %s.
 Die Anleitungen leveln diesen Abschnitt mit dem Sammeln von %s.
 %s: du hast %d, der Plan braucht %d
 für %s
+Kaufen ist billiger, als es aus %s herzustellen
+Hergestellt aus %s
 Der Mentor: was deine Bank herstellen lässt
 Was deine Bank herstellen kann
 Mit dem, was in deiner Bank liegt, lässt sich nichts mehr herstellen.
@@ -1302,6 +1304,7 @@ Levelplan
 oder
 Sammle %s
 zu lernen
+billiger zu kaufen
 Ausblenden
 Der Plan
 Das farmen

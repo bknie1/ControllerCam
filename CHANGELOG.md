@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.5.6
+
+ControllerCam: HUD
+- The Mentor's "To gather or buy" list shows what the plan ultimately wants, with the way to get it in brackets, instead of the lowest thing in the chain. Medium Leather (+40) reads "(Ruined Leather Scraps x480)" rather than just the scraps. Where the auction house sells it for less than its materials cost, the brackets say "(cheaper to buy)". The detail line says what it's made from. Farming that row adds the raw things to the farm list as before.
+
 ## 1.5.5
 
 ControllerCam: HUD

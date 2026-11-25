@@ -1292,6 +1292,8 @@ Apprenez-la %s.
 Les guides montent cette étape en récoltant %s.
 %s : vous en avez %d, le plan en utilise %d
 pour %s
+Moins cher à acheter qu'à fabriquer avec %s
+Fabriqué avec %s
 Le Mentor : ce que votre banque permet de fabriquer
 Ce que votre banque permet de fabriquer
 Rien de plus à fabriquer avec ce qu'il y a dans votre banque.
@@ -1302,6 +1304,7 @@ Plan de progression
 ou
 Récolter %s
 à apprendre
+moins cher à acheter
 Masquer
 Le plan
 Farmer ceci

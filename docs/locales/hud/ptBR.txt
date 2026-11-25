@@ -1292,6 +1292,8 @@ Aprenda %s.
 Os guias sobem este trecho coletando %s.
 %s: você tem %d, o plano usa %d
 para %s
+É mais barato comprar do que fabricar com %s
+Feito com %s
 O Mentor: o que o seu banco deixa fazer
 O que seu banco pode fabricar
 Nada mais a fazer com o que está no seu banco.
@@ -1302,6 +1304,7 @@ Plano de evolução
 ou
 Colete %s
 a aprender
+mais barato comprar
 Ocultar
 O plano
 Farmar isto

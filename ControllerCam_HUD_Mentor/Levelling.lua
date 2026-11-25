@@ -446,6 +446,56 @@ function LV.Breakdown(need)
     return raw, total, made, via
 end
 
+-- What the plan ultimately wants, and the way to get it. The plan works down to the raw things (Ruined Leather
+-- Scraps), but a recipe asks for Medium Leather: that is what is listed, the raw things beside it in brackets (and
+-- "cheaper to buy" where the auction house sells it for less than its materials cost). Returns rows
+-- { id = the thing wanted, more, total, route = { { id, n, total } }, buy = true when buying it is cheaper }.
+function LV.Wanted(plan)
+    local groups, order = {}, {}
+    local function Top(id)
+        local x, guard = id, 0
+        while plan.via[x] and guard < 12 do x = plan.via[x]; guard = guard + 1 end
+        return x
+    end
+    local ids = SortedIds(plan.raw)
+    for _, id in ipairs(ids) do
+        local top = Top(id)
+        local g = groups[top]
+        if not g then
+            g = { id = top, route = {} }
+            groups[top] = g
+            order[#order + 1] = g
+        end
+        if top == id then
+            g.more, g.total = plan.raw[id], plan.total[id]
+        else
+            g.route[#g.route + 1] = { id = id, n = plan.raw[id], total = plan.total[id] }
+        end
+    end
+    local M = ns.Market
+    for _, g in ipairs(order) do
+        if #g.route == 0 then
+            g.route = nil
+        else
+            table.sort(g.route, function(a, b) if a.n ~= b.n then return a.n > b.n end return a.id < b.id end)
+            g.more = g.more or (plan.made and plan.made[g.id]) or 0
+            g.total = g.total or (plan.need and plan.need[g.id]) or g.more
+            local priceTop = M and M.Auction and M.Auction(g.id)
+            local make, known = 0, true
+            for _, r in ipairs(g.route) do
+                local p = M and M.Auction and M.Auction(r.id)
+                if p then make = make + p * r.n else known = false end
+            end
+            if priceTop and known and make > 0 and priceTop * g.more < make then g.buy = true end
+        end
+    end
+    table.sort(order, function(a, b)
+        if (a.more or 0) ~= (b.more or 0) then return (a.more or 0) > (b.more or 0) end
+        return a.id < b.id
+    end)
+    return order
+end
+
 -- What one of an item costs: the auction house's price, or what it is made of, or nil
 local function Price(id, depth)
     local M = ns.Market
@@ -938,13 +988,9 @@ local function Entries(plan)
         out[#out + 1] = { step = step }
         for _, alt in ipairs(step.alts or {}) do out[#out + 1] = { alt = alt, step = step } end    -- the guides' others
     end
-    local ids = SortedIds(plan.raw)
-    table.sort(ids, function(a, b)
-        if plan.raw[a] ~= plan.raw[b] then return plan.raw[a] > plan.raw[b] end
-        return a < b
-    end)
-    if #ids > 0 then out[#out + 1] = { head = L["To gather or buy"] } end
-    for _, id in ipairs(ids) do out[#out + 1] = { id = id, more = plan.raw[id], total = plan.total[id] } end
+    local wanted = LV.Wanted(plan)
+    if #wanted > 0 then out[#out + 1] = { head = L["To gather or buy"] } end
+    for _, g in ipairs(wanted) do out[#out + 1] = { id = g.id, more = g.more, total = g.total, route = g.route, buy = g.buy } end
     return out
 end
 
@@ -1027,6 +1073,11 @@ local function Detail(plan, e)
         local text = L["%s: you have %d, the plan uses %d"]:format(ItemName(e.id), have, e.total or 0)
         local chain = LV.Chain(plan, e.id)
         if chain ~= "" then text = text .. "\n" .. L["for %s"]:format(chain) end
+        if e.route then
+            local parts = {}
+            for _, r in ipairs(e.route) do parts[#parts + 1] = ("%s x%d"):format(ItemName(r.id), r.n) end
+            text = text .. "\n" .. (e.buy and L["Cheaper to buy it than to make it from %s"] or L["Made from %s"]):format(table.concat(parts, ", "))
+        end
         return text
     end
     return ""
@@ -1148,7 +1199,18 @@ function LV:Refresh()
             else
                 r.icon:Show()
                 r.icon:SetTexture(Icon(e.id))
-                r.text:SetText(ItemName(e.id))
+                local text = ItemName(e.id)
+                if e.route then
+                    local how
+                    if e.buy then
+                        how = L["cheaper to buy"]
+                    else
+                        how = ("%s x%d"):format(ItemName(e.route[1].id), e.route[1].n)
+                        if #e.route > 1 then how = how .. ", ..." end
+                    end
+                    text = text .. "  |cff9d9d9d(" .. how .. ")|r"
+                end
+                r.text:SetText(text)
                 r.right:SetText(("+%d"):format(e.more))
             end
             if self.focus and at == self.index then r.hl:Show() else r.hl:Hide() end
@@ -1346,6 +1408,10 @@ function LV:Farm(all)
             local raw, total = LV.Breakdown(need)
             for _, id in ipairs(SortedIds(raw)) do
                 if F.Add(id, total[id], true) then added = added + 1 end
+            end
+        elseif e and e.id and e.route then
+            for _, r in ipairs(e.route) do
+                if F.Add(r.id, r.total, true) then added = added + 1 end
             end
         elseif e and e.id then
             if F.Add(e.id, e.total, true) then added = 1 end

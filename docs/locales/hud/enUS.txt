@@ -1292,6 +1292,8 @@ Learn it %s.
 The guides level this stretch by gathering %s.
 %s: you have %d, the plan uses %d
 for %s
+Cheaper to buy it than to make it from %s
+Made from %s
 The Mentor: what your bank can make
 What your bank can make
 Nothing more to make with what's in your bank.
@@ -1302,6 +1304,7 @@ Levelling plan
 or
 Gather %s
 to learn
+cheaper to buy
 Hide
 The plan
 Farm this

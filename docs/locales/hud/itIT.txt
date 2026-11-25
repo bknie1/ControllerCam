@@ -1292,6 +1292,8 @@ Imparala %s.
 Le guide salgono questo tratto raccogliendo %s.
 %s: ne hai %d, il piano ne usa %d
 per %s
+Costa meno comprarlo che produrlo con %s
+Prodotto con %s
 Il Mentore: cosa ti fa creare la tua banca
 Cosa puoi creare con la banca
 Con ciò che hai in banca non si crea nient'altro.
@@ -1302,6 +1304,7 @@ Piano di avanzamento
 o
 Raccogli %s
 da imparare
+conviene comprarlo
 Nascondi
 Il piano
 Farma questo

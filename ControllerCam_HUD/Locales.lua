@@ -1301,211 +1301,214 @@ local ENGLISH = {
     "The guides level this stretch by gathering %s.",  -- 1292
     "%s: you have %d, the plan uses %d",  -- 1293
     "for %s",  -- 1294
-    "The Mentor: what your bank can make",  -- 1295
-    "What your bank can make",  -- 1296
-    "Nothing more to make with what's in your bank.",  -- 1297
-    "%d you can make counting your bank, %d of them only with it.",  -- 1298
-    "The Mentor: %s %d > %d",  -- 1299
-    "The Mentor",  -- 1300
-    "Levelling plan",  -- 1301
-    "or",  -- 1302
-    "Gather %s",  -- 1303
-    "to learn",  -- 1304
-    "Hide",  -- 1305
-    "The plan",  -- 1306
-    "Farm this",  -- 1307
-    "Farm all",  -- 1308
-    "With the bank",  -- 1309
-    "Use the plan",  -- 1310
-    "twice to hide",  -- 1311
-    "Nothing here to try on.",  -- 1312
-    "%d added to the farm list.",  -- 1313
-    "Nothing missing: you have what it takes.",  -- 1314
-    "Open a profession's window to make a plan.",  -- 1315
-    "The Mentor (levelling plan): show / hide",  -- 1316
-    "show the levelling plan of the profession window you opened last, with the controller's buttons on it",  -- 1317
-    "Left of the quests",  -- 1318
-    "Right of the quests",  -- 1319
-    "Under the quests",  -- 1320
-    "The farm list is full.",  -- 1321
-    "Farm list: %s, %d wanted.",  -- 1322
-    "Farm",  -- 1323
-    "%d more",  -- 1324
-    "Nothing to farm yet.",  -- 1325
-    "A stack more",  -- 1326
-    "Take off",  -- 1327
-    "Clear",  -- 1328
-    "Done",  -- 1329
-    "Take everything off the farm list?",  -- 1330
-    "Farm list: choose / done",  -- 1331
-    "Farm list: add the item you point at",  -- 1332
-    "That is not on the farm list.",  -- 1333
-    "The farm list is empty.",  -- 1334
-    "Farm list: where it sits",  -- 1335
-    "the farm list to the left of the quest list, to its right, or under its quests",  -- 1336
-    "the farm list beside the quest list: choose with the controller; add <item> [how many], remove <item>, clear, or left / right / bottom for where it sits",  -- 1337
-    "Threat percent",  -- 1338
-    "your share of the threat as a number beside the threat icon, on the target frame and nameplates",  -- 1339
-    "Health number",  -- 1340
-    "the health left, shortened (12.3k), on the bar (not on compact plates: the percent says enough there)",  -- 1341
-    "Your debuffs",  -- 1342
-    "your debuffs on the unit, above its name, with their time",  -- 1343
-    "Everyone's debuffs",  -- 1344
-    "the debuffs the game marks for nameplates from everyone, not only yours",  -- 1345
-    "Enemy buffs",  -- 1346
-    "an enemy's buffs beside its debuffs: the ones that matter (important, enraged, or ones you can dispel or steal), or all of them when Only the effects that matter is off",  -- 1347
-    "Crowd control icon",  -- 1348
-    "a large icon with its time when the unit is stunned, rooted, feared...",  -- 1349
-    "Aggro glow",  -- 1350
-    "a shield icon and a glow behind the name: red while it attacks you, red and yellow when you are about to pull it, yellow and blue when you are losing it, blue when it is not on you",  -- 1351
-    "Quest marker",  -- 1352
-    "a gold marker on units your quests still need",  -- 1353
-    "Nameplate animations",  -- 1354
-    "plates fade in, low health breathes, crowd control shimmers",  -- 1355
-    "Small",  -- 1356
-    "Normal",  -- 1357
-    "Large",  -- 1358
-    "Full name",  -- 1359
-    "Short name",  -- 1360
-    "No name",  -- 1361
-    "Full",  -- 1362
-    "Minimal mini",  -- 1363
-    "Nameplate size",  -- 1364
-    "how big the bars on nameplates are: small and slim, normal, or large (wider and taller)",  -- 1365
-    "Names on nameplates",  -- 1366
-    "the name on a plate with a health bar: in full, cut short, or left out (the target frame gives it in full; the level and class icon stay). A plate with no bar, a friendly NPC's, always keeps its name",  -- 1367
-    "Nameplate look",  -- 1368
-    "the nameplate switches in one press. Full: everything. Minimal: no power bar, guild or title, short names. Minimal mini: small bars with health, your debuffs and the buffs that matter, level and class, no name (the target frame has it). Threat, crowd control and loud casts always stay",  -- 1369
-    "Player titles",  -- 1370
-    "show a player's title with their name",  -- 1371
-    "Guilds and NPC jobs",  -- 1372
-    "a line under the name: the player's guild, or what the NPC does",  -- 1373
-    "Bars for friends in a fight",  -- 1374
-    "friendly plates show health, power and casts while that unit is in combat",  -- 1375
-    "The game's own friendly nameplates",  -- 1376
-    "leave friendly plates (your party, other players, friendly NPCs) to the game's own look; ours only on enemies",  -- 1377
-    "Power bars",  -- 1378
-    "a thin mana, rage or energy bar under the health bar",  -- 1379
-    "Cast target",  -- 1380
-    "who a cast is aimed at, next to the spell's name",  -- 1381
-    "Health percent",  -- 1382
-    "the health percent on the bar",  -- 1383
-    "Name on your target's plate",  -- 1384
-    "off: your target's plate drops its name and level (the target frame shows them)",  -- 1385
-    "Levels on nameplates",  -- 1386
-    "the level in front of an enemy's name, coloured by difficulty",  -- 1387
-    "Compact nameplates",  -- 1388
-    "nameplates about half as wide",  -- 1389
-    "Loud enemy casts",  -- 1390
-    "an enemy's cast flashes, swells and pulses ever faster until it lands, so it can be interrupted in time",  -- 1391
-    "Class icons on nameplates",  -- 1392
-    "a player's class icon in front of their name, friend or enemy",  -- 1393
-    "What NPCs do, as icons",  -- 1394
-    "an icon over friendly NPCs that offer something: a bag over vendors, an anvil over smiths who repair, a book over trainers... (the game's own icons; they show even while the plate itself waits to be pointed at)",  -- 1395
-    "Friendly NPCs only when pointed at",  -- 1396
-    "the plates of friendly NPCs (vendors, quest givers, townsfolk) show only while you point at them, like their tooltip",  -- 1397
-    "Names on things you can interact with",  -- 1398
-    "a name over ore, chests, plaques and the like while you face them (off: they stay bare, as the game's own prompt already says what they are)",  -- 1399
-    "Mini plates",  -- 1400
-    "minions, critters and grey enemies that give no experience get a small plate: a slim bar with your debuffs on it and no name (a critter, with no bar, keeps its name; the game's own option decides whether they have plates at all)",  -- 1401
-    "Party nameplates in dungeons: names only",  -- 1402
-    "inside a dungeon or raid the game draws friendly players' nameplates itself and addons may not change them: in there the game's own options are set to show them as class-coloured names without bars, like ours, with the game's bars back while you fight (when bars for friends in a fight are on); all put back when you leave",  -- 1403
-    "Party nameplates in dungeons: hidden",  -- 1404
-    "inside a dungeon or raid, switch the game's nameplates for friendly players off altogether (and back the way you had them when you leave)",  -- 1405
-    "show what the game gives for your target's name (for troubleshooting)",  -- 1406
-    "list the nameplates on screen and whether they wear our look (for troubleshooting)",  -- 1407
-    "Right, then.",  -- 1408
-    "Och, what a heap.",  -- 1409
-    "Now, let's see, let's see...",  -- 1410
-    "Elune grant me patience.",  -- 1411
-    "By the Naaru, such a jumble.",  -- 1412
-    "Blasted pack.",  -- 1413
-    "A tidy pack is a light pack.",  -- 1414
-    "Bah. Too much clutter.",  -- 1415
-    "Dead weight, the lot of it.",  -- 1416
-    "Patience. The Earth Mother provides.",  -- 1417
-    "Ey, what we got here, mon?",  -- 1418
-    "Such clutter. Unbecoming.",  -- 1419
-    "Time is money. Let's count it.",  -- 1420
-    "Aye, that'll do.",  -- 1421
-    "Elune be thanked.",  -- 1422
-    "The Light provides.",  -- 1423
-    "Hrm. Good enough.",  -- 1424
-    "Hm. Enough to fight with.",  -- 1425
-    "Travelling light. Good.",  -- 1426
-    "Acceptable. Barely.",  -- 1427
-    "Not a slot to spare. The junk would fetch %s: selling it makes room.",  -- 1428
-    "Not a slot to spare. Anything I won't need on the road can wait in the bank.",  -- 1429
-    "Junk: %d, worth %s here. X sells the one I've picked; Smart sell takes it all.",  -- 1430
-    "%d of these belong in the bank: it holds more of the same, or I marked them. Deposit puts them away.",  -- 1431
-    "Only %d slots left. The junk would fetch %s at any vendor.",  -- 1432
-    "Only %d slots left. Time to sell or bank a few things.",  -- 1433
-    "New since I last looked: %d. The gold dot marks each one.",  -- 1434
-    "Worth selling: %d. The Sell filter gathers them, and each tooltip says where it fetches most.",  -- 1435
-    "Junk: %d, worth %s. The next vendor can have it.",  -- 1436
-    "Just the essentials. Nothing worth selling.",  -- 1437
-    "All in order, and %d slots free.",  -- 1438
-    "Your gear's mended: %s.",  -- 1439
-    "I can mend your gear for %s; a broken piece gives you none of its armour or stats.",  -- 1440
-    "Your bags are full. I'll take %d things for %s: Smart sell, and you have room again.",  -- 1441
-    "I'll give you %s for %d things: the junk, and what the auction house wouldn't pay more for. Smart sell, and it's done.",  -- 1442
-    "Keep the %d the auction house wants: it pays %s more than I would.",  -- 1443
-    "Your bags are full. Sell me something before you buy.",  -- 1444
-    "Nothing in your bags I'd pay well for. Have a look at my wares.",  -- 1445
-    "%d of what you carry belong in here: I hold more of the same, or you marked them. Deposit puts them away.",  -- 1446
-    "I hold more of %d things you carry. Withdraw tops your bags up before you head out.",  -- 1447
-    "Your bags are nearly full. Leave what you won't need on the road with me.",  -- 1448
-    "All safe with me, and your bags have %d slots free.",  -- 1449
-    "Nothing for you today. I checked twice.",  -- 1450
-    "Letters for you: %d, nothing attached. Read them when you like.",  -- 1451
-    "Letters for you: %d. In them: %s.",  -- 1452
-    "Take everything empties them in one go.",  -- 1453
-    "Coin on delivery: %d. Those you open and pay for yourself.",  -- 1454
-    "Your bags are full: the items wait in their letters.",  -- 1455
-    "Where to? Point at a place and I'll tell you how long the ride takes.",  -- 1456
-    "%s: about %s by the map. You haven't flown that one yet.",  -- 1457
-    "%s: about %s, going by your last flight there.",  -- 1458
-    "%s: I can't say how long yet. Fly it once and I'll know.",  -- 1459
-    "%d got away. This water wants more skill than I have: bait helps, and so does a better pole.",  -- 1460
-    "No bait on the hook. It adds to my skill, so fewer get away.",  -- 1461
-    "Bait's nearly spent. Another on the hook keeps my skill up.",  -- 1462
-    "Fish here I haven't landed yet: %d. Keep casting.",  -- 1463
-    "I've landed every fish this water has. Somewhere new, then.",  -- 1464
-    "Nothing landed yet. The first fish of every water goes in here.",  -- 1465
-    "Kinds landed: %d. Every water hides a few more: the fishing panel shows a ? for each I haven't caught there.",  -- 1466
-    "Rested by the fire: the next %d experience from kills comes double.",  -- 1467
-    "No rest saved up. A night at an inn or in a city, and kills give double experience for a while.",  -- 1468
-    "%d absorbed",  -- 1469
-    "Feed on the right",  -- 1470
-    "One in the middle",  -- 1471
-    "%d crit heals",  -- 1472
-    "%d crits",  -- 1473
-    "Judgement",  -- 1474
-    "Big moments: where",  -- 1475
-    "a block just above the cooldown callouts on the right of your character, the newest nearest them and the older ones moving up over it as they fade, or one at a time in the middle",  -- 1476
-    "show what a big moment looks and feels like",  -- 1477
-    "collected",  -- 1478
-    "collected from another item",  -- 1479
-    "not collected yet",  -- 1480
-    "Appearance",  -- 1481
-    "Pick a set to put its pieces on your outfit. %s keeps it; nothing is paid before that.",  -- 1482
-    "Looking through your collection...",  -- 1483
-    "Your outfit is back as it was.",  -- 1484
-    "%s: %d of %d pieces put on.",  -- 1485
-    "%d would not go on this outfit.",  -- 1486
-    "One set you have pieces of",  -- 1487
-    "%d sets you have pieces of",  -- 1488
-    "you can't wear this",  -- 1489
-    "missing",  -- 1490
-    "All %d pieces",  -- 1491
-    "%d of %d pieces",  -- 1492
-    "Missing: %s",  -- 1493
-    "No sets yet. Items that share a name, like Green Iron Helm and Green Iron Gauntlets, show here once you have one of them.",  -- 1494
-    "Undo",  -- 1495
-    "Delete the custom set %s? It can't be brought back.",  -- 1496
-    "Delete",  -- 1497
-    "Point at a custom set first.",  -- 1498
-    "%s  Delete custom set",  -- 1499
+    "Cheaper to buy it than to make it from %s",  -- 1295
+    "Made from %s",  -- 1296
+    "The Mentor: what your bank can make",  -- 1297
+    "What your bank can make",  -- 1298
+    "Nothing more to make with what's in your bank.",  -- 1299
+    "%d you can make counting your bank, %d of them only with it.",  -- 1300
+    "The Mentor: %s %d > %d",  -- 1301
+    "The Mentor",  -- 1302
+    "Levelling plan",  -- 1303
+    "or",  -- 1304
+    "Gather %s",  -- 1305
+    "to learn",  -- 1306
+    "cheaper to buy",  -- 1307
+    "Hide",  -- 1308
+    "The plan",  -- 1309
+    "Farm this",  -- 1310
+    "Farm all",  -- 1311
+    "With the bank",  -- 1312
+    "Use the plan",  -- 1313
+    "twice to hide",  -- 1314
+    "Nothing here to try on.",  -- 1315
+    "%d added to the farm list.",  -- 1316
+    "Nothing missing: you have what it takes.",  -- 1317
+    "Open a profession's window to make a plan.",  -- 1318
+    "The Mentor (levelling plan): show / hide",  -- 1319
+    "show the levelling plan of the profession window you opened last, with the controller's buttons on it",  -- 1320
+    "Left of the quests",  -- 1321
+    "Right of the quests",  -- 1322
+    "Under the quests",  -- 1323
+    "The farm list is full.",  -- 1324
+    "Farm list: %s, %d wanted.",  -- 1325
+    "Farm",  -- 1326
+    "%d more",  -- 1327
+    "Nothing to farm yet.",  -- 1328
+    "A stack more",  -- 1329
+    "Take off",  -- 1330
+    "Clear",  -- 1331
+    "Done",  -- 1332
+    "Take everything off the farm list?",  -- 1333
+    "Farm list: choose / done",  -- 1334
+    "Farm list: add the item you point at",  -- 1335
+    "That is not on the farm list.",  -- 1336
+    "The farm list is empty.",  -- 1337
+    "Farm list: where it sits",  -- 1338
+    "the farm list to the left of the quest list, to its right, or under its quests",  -- 1339
+    "the farm list beside the quest list: choose with the controller; add <item> [how many], remove <item>, clear, or left / right / bottom for where it sits",  -- 1340
+    "Threat percent",  -- 1341
+    "your share of the threat as a number beside the threat icon, on the target frame and nameplates",  -- 1342
+    "Health number",  -- 1343
+    "the health left, shortened (12.3k), on the bar (not on compact plates: the percent says enough there)",  -- 1344
+    "Your debuffs",  -- 1345
+    "your debuffs on the unit, above its name, with their time",  -- 1346
+    "Everyone's debuffs",  -- 1347
+    "the debuffs the game marks for nameplates from everyone, not only yours",  -- 1348
+    "Enemy buffs",  -- 1349
+    "an enemy's buffs beside its debuffs: the ones that matter (important, enraged, or ones you can dispel or steal), or all of them when Only the effects that matter is off",  -- 1350
+    "Crowd control icon",  -- 1351
+    "a large icon with its time when the unit is stunned, rooted, feared...",  -- 1352
+    "Aggro glow",  -- 1353
+    "a shield icon and a glow behind the name: red while it attacks you, red and yellow when you are about to pull it, yellow and blue when you are losing it, blue when it is not on you",  -- 1354
+    "Quest marker",  -- 1355
+    "a gold marker on units your quests still need",  -- 1356
+    "Nameplate animations",  -- 1357
+    "plates fade in, low health breathes, crowd control shimmers",  -- 1358
+    "Small",  -- 1359
+    "Normal",  -- 1360
+    "Large",  -- 1361
+    "Full name",  -- 1362
+    "Short name",  -- 1363
+    "No name",  -- 1364
+    "Full",  -- 1365
+    "Minimal mini",  -- 1366
+    "Nameplate size",  -- 1367
+    "how big the bars on nameplates are: small and slim, normal, or large (wider and taller)",  -- 1368
+    "Names on nameplates",  -- 1369
+    "the name on a plate with a health bar: in full, cut short, or left out (the target frame gives it in full; the level and class icon stay). A plate with no bar, a friendly NPC's, always keeps its name",  -- 1370
+    "Nameplate look",  -- 1371
+    "the nameplate switches in one press. Full: everything. Minimal: no power bar, guild or title, short names. Minimal mini: small bars with health, your debuffs and the buffs that matter, level and class, no name (the target frame has it). Threat, crowd control and loud casts always stay",  -- 1372
+    "Player titles",  -- 1373
+    "show a player's title with their name",  -- 1374
+    "Guilds and NPC jobs",  -- 1375
+    "a line under the name: the player's guild, or what the NPC does",  -- 1376
+    "Bars for friends in a fight",  -- 1377
+    "friendly plates show health, power and casts while that unit is in combat",  -- 1378
+    "The game's own friendly nameplates",  -- 1379
+    "leave friendly plates (your party, other players, friendly NPCs) to the game's own look; ours only on enemies",  -- 1380
+    "Power bars",  -- 1381
+    "a thin mana, rage or energy bar under the health bar",  -- 1382
+    "Cast target",  -- 1383
+    "who a cast is aimed at, next to the spell's name",  -- 1384
+    "Health percent",  -- 1385
+    "the health percent on the bar",  -- 1386
+    "Name on your target's plate",  -- 1387
+    "off: your target's plate drops its name and level (the target frame shows them)",  -- 1388
+    "Levels on nameplates",  -- 1389
+    "the level in front of an enemy's name, coloured by difficulty",  -- 1390
+    "Compact nameplates",  -- 1391
+    "nameplates about half as wide",  -- 1392
+    "Loud enemy casts",  -- 1393
+    "an enemy's cast flashes, swells and pulses ever faster until it lands, so it can be interrupted in time",  -- 1394
+    "Class icons on nameplates",  -- 1395
+    "a player's class icon in front of their name, friend or enemy",  -- 1396
+    "What NPCs do, as icons",  -- 1397
+    "an icon over friendly NPCs that offer something: a bag over vendors, an anvil over smiths who repair, a book over trainers... (the game's own icons; they show even while the plate itself waits to be pointed at)",  -- 1398
+    "Friendly NPCs only when pointed at",  -- 1399
+    "the plates of friendly NPCs (vendors, quest givers, townsfolk) show only while you point at them, like their tooltip",  -- 1400
+    "Names on things you can interact with",  -- 1401
+    "a name over ore, chests, plaques and the like while you face them (off: they stay bare, as the game's own prompt already says what they are)",  -- 1402
+    "Mini plates",  -- 1403
+    "minions, critters and grey enemies that give no experience get a small plate: a slim bar with your debuffs on it and no name (a critter, with no bar, keeps its name; the game's own option decides whether they have plates at all)",  -- 1404
+    "Party nameplates in dungeons: names only",  -- 1405
+    "inside a dungeon or raid the game draws friendly players' nameplates itself and addons may not change them: in there the game's own options are set to show them as class-coloured names without bars, like ours, with the game's bars back while you fight (when bars for friends in a fight are on); all put back when you leave",  -- 1406
+    "Party nameplates in dungeons: hidden",  -- 1407
+    "inside a dungeon or raid, switch the game's nameplates for friendly players off altogether (and back the way you had them when you leave)",  -- 1408
+    "show what the game gives for your target's name (for troubleshooting)",  -- 1409
+    "list the nameplates on screen and whether they wear our look (for troubleshooting)",  -- 1410
+    "Right, then.",  -- 1411
+    "Och, what a heap.",  -- 1412
+    "Now, let's see, let's see...",  -- 1413
+    "Elune grant me patience.",  -- 1414
+    "By the Naaru, such a jumble.",  -- 1415
+    "Blasted pack.",  -- 1416
+    "A tidy pack is a light pack.",  -- 1417
+    "Bah. Too much clutter.",  -- 1418
+    "Dead weight, the lot of it.",  -- 1419
+    "Patience. The Earth Mother provides.",  -- 1420
+    "Ey, what we got here, mon?",  -- 1421
+    "Such clutter. Unbecoming.",  -- 1422
+    "Time is money. Let's count it.",  -- 1423
+    "Aye, that'll do.",  -- 1424
+    "Elune be thanked.",  -- 1425
+    "The Light provides.",  -- 1426
+    "Hrm. Good enough.",  -- 1427
+    "Hm. Enough to fight with.",  -- 1428
+    "Travelling light. Good.",  -- 1429
+    "Acceptable. Barely.",  -- 1430
+    "Not a slot to spare. The junk would fetch %s: selling it makes room.",  -- 1431
+    "Not a slot to spare. Anything I won't need on the road can wait in the bank.",  -- 1432
+    "Junk: %d, worth %s here. X sells the one I've picked; Smart sell takes it all.",  -- 1433
+    "%d of these belong in the bank: it holds more of the same, or I marked them. Deposit puts them away.",  -- 1434
+    "Only %d slots left. The junk would fetch %s at any vendor.",  -- 1435
+    "Only %d slots left. Time to sell or bank a few things.",  -- 1436
+    "New since I last looked: %d. The gold dot marks each one.",  -- 1437
+    "Worth selling: %d. The Sell filter gathers them, and each tooltip says where it fetches most.",  -- 1438
+    "Junk: %d, worth %s. The next vendor can have it.",  -- 1439
+    "Just the essentials. Nothing worth selling.",  -- 1440
+    "All in order, and %d slots free.",  -- 1441
+    "Your gear's mended: %s.",  -- 1442
+    "I can mend your gear for %s; a broken piece gives you none of its armour or stats.",  -- 1443
+    "Your bags are full. I'll take %d things for %s: Smart sell, and you have room again.",  -- 1444
+    "I'll give you %s for %d things: the junk, and what the auction house wouldn't pay more for. Smart sell, and it's done.",  -- 1445
+    "Keep the %d the auction house wants: it pays %s more than I would.",  -- 1446
+    "Your bags are full. Sell me something before you buy.",  -- 1447
+    "Nothing in your bags I'd pay well for. Have a look at my wares.",  -- 1448
+    "%d of what you carry belong in here: I hold more of the same, or you marked them. Deposit puts them away.",  -- 1449
+    "I hold more of %d things you carry. Withdraw tops your bags up before you head out.",  -- 1450
+    "Your bags are nearly full. Leave what you won't need on the road with me.",  -- 1451
+    "All safe with me, and your bags have %d slots free.",  -- 1452
+    "Nothing for you today. I checked twice.",  -- 1453
+    "Letters for you: %d, nothing attached. Read them when you like.",  -- 1454
+    "Letters for you: %d. In them: %s.",  -- 1455
+    "Take everything empties them in one go.",  -- 1456
+    "Coin on delivery: %d. Those you open and pay for yourself.",  -- 1457
+    "Your bags are full: the items wait in their letters.",  -- 1458
+    "Where to? Point at a place and I'll tell you how long the ride takes.",  -- 1459
+    "%s: about %s by the map. You haven't flown that one yet.",  -- 1460
+    "%s: about %s, going by your last flight there.",  -- 1461
+    "%s: I can't say how long yet. Fly it once and I'll know.",  -- 1462
+    "%d got away. This water wants more skill than I have: bait helps, and so does a better pole.",  -- 1463
+    "No bait on the hook. It adds to my skill, so fewer get away.",  -- 1464
+    "Bait's nearly spent. Another on the hook keeps my skill up.",  -- 1465
+    "Fish here I haven't landed yet: %d. Keep casting.",  -- 1466
+    "I've landed every fish this water has. Somewhere new, then.",  -- 1467
+    "Nothing landed yet. The first fish of every water goes in here.",  -- 1468
+    "Kinds landed: %d. Every water hides a few more: the fishing panel shows a ? for each I haven't caught there.",  -- 1469
+    "Rested by the fire: the next %d experience from kills comes double.",  -- 1470
+    "No rest saved up. A night at an inn or in a city, and kills give double experience for a while.",  -- 1471
+    "%d absorbed",  -- 1472
+    "Feed on the right",  -- 1473
+    "One in the middle",  -- 1474
+    "%d crit heals",  -- 1475
+    "%d crits",  -- 1476
+    "Judgement",  -- 1477
+    "Big moments: where",  -- 1478
+    "a block just above the cooldown callouts on the right of your character, the newest nearest them and the older ones moving up over it as they fade, or one at a time in the middle",  -- 1479
+    "show what a big moment looks and feels like",  -- 1480
+    "collected",  -- 1481
+    "collected from another item",  -- 1482
+    "not collected yet",  -- 1483
+    "Appearance",  -- 1484
+    "Pick a set to put its pieces on your outfit. %s keeps it; nothing is paid before that.",  -- 1485
+    "Looking through your collection...",  -- 1486
+    "Your outfit is back as it was.",  -- 1487
+    "%s: %d of %d pieces put on.",  -- 1488
+    "%d would not go on this outfit.",  -- 1489
+    "One set you have pieces of",  -- 1490
+    "%d sets you have pieces of",  -- 1491
+    "you can't wear this",  -- 1492
+    "missing",  -- 1493
+    "All %d pieces",  -- 1494
+    "%d of %d pieces",  -- 1495
+    "Missing: %s",  -- 1496
+    "No sets yet. Items that share a name, like Green Iron Helm and Green Iron Gauntlets, show here once you have one of them.",  -- 1497
+    "Undo",  -- 1498
+    "Delete the custom set %s? It can't be brought back.",  -- 1499
+    "Delete",  -- 1500
+    "Point at a custom set first.",  -- 1501
+    "%s  Delete custom set",  -- 1502
 }
 
 local TRANSLATIONS = {
@@ -2804,211 +2807,214 @@ local TRANSLATIONS = {
         "Die Anleitungen leveln diesen Abschnitt mit dem Sammeln von %s.",  -- 1292
         "%s: du hast %d, der Plan braucht %d",  -- 1293
         "für %s",  -- 1294
-        "Der Mentor: was deine Bank herstellen lässt",  -- 1295
-        "Was deine Bank herstellen kann",  -- 1296
-        "Mit dem, was in deiner Bank liegt, lässt sich nichts mehr herstellen.",  -- 1297
-        "%d kannst du mit deiner Bank herstellen, %d davon nur mit ihr.",  -- 1298
-        "Der Mentor: %s %d > %d",  -- 1299
-        "Der Mentor",  -- 1300
-        "Levelplan",  -- 1301
-        "oder",  -- 1302
-        "Sammle %s",  -- 1303
-        "zu lernen",  -- 1304
-        "Ausblenden",  -- 1305
-        "Der Plan",  -- 1306
-        "Das farmen",  -- 1307
-        "Alles farmen",  -- 1308
-        "Mit der Bank",  -- 1309
-        "Plan bedienen",  -- 1310
-        "zweimal zum Ausblenden",  -- 1311
-        "Hier gibt es nichts anzuprobieren.",  -- 1312
-        "%d zur Farmliste hinzugefügt.",  -- 1313
-        "Nichts fehlt: Du hast alles, was nötig ist.",  -- 1314
-        "Öffne das Fenster eines Berufs, um einen Plan zu erstellen.",  -- 1315
-        "Der Mentor (Levelplan): zeigen / verbergen",  -- 1316
-        "zeigt den Levelplan des zuletzt geöffneten Berufsfensters, mit den Tasten des Controllers darauf",  -- 1317
-        "Links der Quests",  -- 1318
-        "Rechts der Quests",  -- 1319
-        "Unter den Quests",  -- 1320
-        "Die Farmliste ist voll.",  -- 1321
-        "Farmliste: %s, %d gewünscht.",  -- 1322
-        "Farmen",  -- 1323
-        "%d weitere",  -- 1324
-        "Noch nichts zu farmen.",  -- 1325
-        "Einen Stapel mehr",  -- 1326
-        "Entfernen",  -- 1327
-        "Leeren",  -- 1328
-        "Fertig",  -- 1329
-        "Alles von der Farmliste nehmen?",  -- 1330
-        "Farmliste: wählen / fertig",  -- 1331
-        "Farmliste: den Gegenstand hinzufügen, auf den du zeigst",  -- 1332
-        "Das steht nicht auf der Farmliste.",  -- 1333
-        "Die Farmliste ist leer.",  -- 1334
-        "Farmliste: wo sie sitzt",  -- 1335
-        "die Farmliste links der Questliste, rechts davon oder unter ihren Quests",  -- 1336
-        "die Farmliste neben der Questliste: mit dem Controller wählen; add <Gegenstand> [wie viele], remove <Gegenstand>, clear, oder left / right / bottom für ihren Platz",  -- 1337
-        "Bedrohung in Prozent",  -- 1338
-        "dein Anteil an der Bedrohung als Zahl neben dem Bedrohungssymbol, am Zielrahmen und an Namensplaketten",  -- 1339
-        "Gesundheitszahl",  -- 1340
-        "die verbleibende Gesundheit, gekürzt (12.3k), auf der Leiste (nicht auf kompakten Plaketten: dort reicht der Prozentwert)",  -- 1341
-        "Deine Debuffs",  -- 1342
-        "deine Debuffs auf der Einheit, über ihrem Namen, mit ihrer Zeit",  -- 1343
-        "Debuffs von allen",  -- 1344
-        "die Debuffs, die das Spiel für Namensplaketten von allen markiert, nicht nur von dir",  -- 1345
-        "Gegnerische Buffs",  -- 1346
-        "die Stärkungen eines Feindes neben seinen Schwächungen: die wichtigen (wichtig, wütend oder von dir bannbar oder stehlbar), oder alle, wenn Nur die Effekte, die zählen aus ist",  -- 1347
-        "Massenkontroll-Symbol",  -- 1348
-        "ein großes Symbol mit Restzeit, wenn die Einheit betäubt, bewegungsunfähig, in Furcht versetzt ist...",  -- 1349
-        "Aggro-Leuchten",  -- 1350
-        "ein Schildsymbol und ein Leuchten hinter dem Namen: rot, solange es dich angreift, rot und gelb, wenn du es gleich ziehst, gelb und blau, wenn du es verlierst, blau, wenn es nicht auf dir ist",  -- 1351
-        "Questmarkierung",  -- 1352
-        "eine goldene Markierung an Einheiten, die deine Quests noch brauchen",  -- 1353
-        "Namensplaketten-Animationen",  -- 1354
-        "Plaketten blenden ein, niedrige Gesundheit atmet, Massenkontrolle schimmert",  -- 1355
-        "Klein",  -- 1356
-        "Normal",  -- 1357
-        "Groß",  -- 1358
-        "Voller Name",  -- 1359
-        "Kurzer Name",  -- 1360
-        "Kein Name",  -- 1361
-        "Voll",  -- 1362
-        "Minimal mini",  -- 1363
-        "Namensplakettengröße",  -- 1364
-        "wie groß die Leisten auf Namensplaketten sind: klein und schmal, normal oder groß (breiter und höher)",  -- 1365
-        "Namen auf Namensplaketten",  -- 1366
-        "der Name auf einer Plakette mit Gesundheitsleiste: voll, gekürzt oder weggelassen (der Zielrahmen nennt ihn voll; Stufe und Klassensymbol bleiben). Eine Plakette ohne Leiste, die eines freundlichen NPCs, behält immer ihren Namen",  -- 1367
-        "Aussehen der Namensplaketten",  -- 1368
-        "die Schalter der Namensplaketten auf einen Druck. Voll: alles. Minimal: keine Ressourcenleiste, Gilde oder Titel, kurze Namen. Minimal mini: kleine Leisten mit Gesundheit, Euren Schwächungen und den wichtigen Stärkungen, Stufe und Klasse, kein Name (der Zielrahmen hat ihn). Bedrohung, Kontrolleffekte und laute Zauber bleiben immer",  -- 1369
-        "Spielertitel",  -- 1370
-        "zeigt den Titel eines Spielers neben seinem Namen an",  -- 1371
-        "Gilden und NSC-Berufe",  -- 1372
-        "eine Zeile unter dem Namen: die Gilde des Spielers oder die Tätigkeit des NSC",  -- 1373
-        "Leisten für Freunde im Kampf",  -- 1374
-        "freundliche Namensplaketten zeigen Gesundheit, Ressource und Zauber, solange sich die Einheit im Kampf befindet",  -- 1375
-        "Die eigenen freundlichen Namensplaketten des Spiels",  -- 1376
-        "freundliche Plaketten (deine Gruppe, andere Spieler, freundliche NPCs) im Aussehen des Spiels lassen; unsere nur bei Feinden",  -- 1377
-        "Ressourcenleisten",  -- 1378
-        "eine schmale Mana-, Wut- oder Energieleiste unter der Gesundheitsleiste",  -- 1379
-        "Zauberziel",  -- 1380
-        "wer das Ziel eines Zaubers ist, neben dem Namen des Zaubers",  -- 1381
-        "Gesundheit in Prozent",  -- 1382
-        "der Gesundheitswert in Prozent auf der Leiste",  -- 1383
-        "Name auf der Plakette deines Ziels",  -- 1384
-        "aus: die Plakette deines Ziels zeigt weder Namen noch Stufe (der Zielrahmen zeigt sie)",  -- 1385
-        "Stufen auf Namensplaketten",  -- 1386
-        "die Stufe vor dem Namen eines Gegners, nach Schwierigkeit gefärbt",  -- 1387
-        "Kompakte Namensplaketten",  -- 1388
-        "Namensplaketten etwa halb so breit",  -- 1389
-        "Auffällige Gegnerzauber",  -- 1390
-        "der Zauber eines Gegners blinkt, schwillt an und pulsiert immer schneller, bis er gewirkt wird, damit er rechtzeitig unterbrochen werden kann",  -- 1391
-        "Klassensymbole auf Namensplaketten",  -- 1392
-        "das Klassensymbol eines Spielers vor seinem Namen, ob Freund oder Feind",  -- 1393
-        "Was NPCs tun, als Symbole",  -- 1394
-        "ein Symbol über freundlichen NPCs, die etwas anbieten: eine Tasche über Händlern, ein Amboss über Schmieden, die reparieren, ein Buch über Lehrern... (die eigenen Symbole des Spiels; sie erscheinen auch, solange die Plakette darauf wartet, dass du auf sie zeigst)",  -- 1395
-        "Freundliche NPCs nur beim Zeigen",  -- 1396
-        "die Plaketten freundlicher NPCs (Händler, Questgeber, Stadtbewohner) erscheinen nur, solange du auf sie zeigst, wie ihr Tooltip",  -- 1397
-        "Namen über Dingen, mit denen du interagieren kannst",  -- 1398
-        "ein Name über Erz, Truhen, Tafeln und dergleichen, solange du ihnen zugewandt bist (aus: sie bleiben ohne Namen, die Anzeige des Spiels sagt bereits, was sie sind)",  -- 1399
-        "Mini-Namensplaketten",  -- 1400
-        "Diener, Kleintiere und graue Gegner ohne Erfahrung bekommen eine kleine Plakette: eine schmale Leiste mit deinen Schwächungen darauf und ohne Namen (ein Kleintier ohne Leiste behält seinen Namen; ob sie überhaupt Plaketten haben, entscheidet die Option des Spiels)",  -- 1401
-        "Gruppen-Namensplaketten in Dungeons: nur Namen",  -- 1402
-        "in einem Dungeon oder Schlachtzug zeichnet das Spiel die Namensplaketten freundlicher Spieler selbst, und Addons dürfen sie nicht ändern: dort werden die eigenen Optionen des Spiels so gesetzt, dass sie als klassenfarbige Namen ohne Leisten erscheinen, wie unsere, und im Kampf kommen die Leisten des Spiels zurück (wenn Leisten für Freunde im Kampf an sind); beim Verlassen wird alles zurückgestellt",  -- 1403
-        "Gruppen-Namensplaketten in Dungeons: ausgeblendet",  -- 1404
-        "in einem Dungeon oder Schlachtzug die Namensplaketten des Spiels für freundliche Spieler ganz ausschalten (und beim Verlassen wieder so, wie du sie hattest)",  -- 1405
-        "zeigt, was das Spiel für den Namen deines Ziels liefert (zur Fehlersuche)",  -- 1406
-        "die Namensplaketten auf dem Bildschirm auflisten und ob sie unser Aussehen tragen (zur Fehlersuche)",  -- 1407
-        "Also gut.",  -- 1408
-        "Och, was für ein Haufen.",  -- 1409
-        "So, mal sehen, mal sehen...",  -- 1410
-        "Elune, gib mir Geduld.",  -- 1411
-        "Bei den Naaru, was für ein Durcheinander.",  -- 1412
-        "Verflixter Rucksack.",  -- 1413
-        "Ein ordentlicher Rucksack ist ein leichter Rucksack.",  -- 1414
-        "Pah. Zu viel Kram.",  -- 1415
-        "Totes Gewicht, das alles.",  -- 1416
-        "Geduld. Die Erdenmutter sorgt für uns.",  -- 1417
-        "Ey, was ham wir denn hier, Mann?",  -- 1418
-        "Welch ein Durcheinander. Unschicklich.",  -- 1419
-        "Zeit ist Geld. Zählen wir nach.",  -- 1420
-        "Jo, das reicht.",  -- 1421
-        "Elune sei Dank.",  -- 1422
-        "Das Licht sorgt für uns.",  -- 1423
-        "Hrm. Gut genug.",  -- 1424
-        "Hm. Genug zum Kämpfen.",  -- 1425
-        "Mit leichtem Gepäck. Gut.",  -- 1426
-        "Annehmbar. Gerade so.",  -- 1427
-        "Kein Platz mehr frei. Der Plunder brächte %s: verkaufen schafft Platz.",  -- 1428
-        "Kein Platz mehr frei. Was ich unterwegs nicht brauche, kann in der Bank warten.",  -- 1429
-        "Plunder: %d, hier %s wert. X verkauft das Gewählte; Schlau verkaufen nimmt alles.",  -- 1430
-        "%d davon gehören in die Bank: dort liegt schon mehr davon, oder ich habe sie markiert. Einlagern räumt sie weg.",  -- 1431
-        "Nur noch %d Plätze frei. Der Plunder brächte bei jedem Händler %s.",  -- 1432
-        "Nur noch %d Plätze frei. Zeit, ein paar Sachen zu verkaufen oder einzulagern.",  -- 1433
-        "Neu seit dem letzten Blick: %d. Der goldene Punkt markiert jedes.",  -- 1434
-        "Lohnt den Verkauf: %d. Der Filter Verkaufen sammelt sie, und jeder Tooltip sagt, wo es am meisten bringt.",  -- 1435
-        "Plunder: %d, %s wert. Der nächste Händler kann ihn haben.",  -- 1436
-        "Nur das Nötigste. Nichts, was sich zu verkaufen lohnt.",  -- 1437
-        "Alles in Ordnung, und %d Plätze frei.",  -- 1438
-        "Deine Ausrüstung ist repariert: %s.",  -- 1439
-        "Ich kann deine Ausrüstung für %s reparieren; ein kaputtes Teil gibt dir weder Rüstung noch Werte.",  -- 1440
-        "Deine Taschen sind voll. Ich nehme %d Sachen für %s: Schlau verkaufen, und du hast wieder Platz.",  -- 1441
-        "Ich gebe dir %s für %d Sachen: den Plunder und was das Auktionshaus nicht besser bezahlt. Schlau verkaufen, und fertig.",  -- 1442
-        "Behalte die %d, die das Auktionshaus will: es zahlt %s mehr als ich.",  -- 1443
-        "Deine Taschen sind voll. Verkauf mir erst etwas, bevor du kaufst.",  -- 1444
-        "Nichts in deinen Taschen, wofür ich gut zahlen würde. Sieh dir meine Waren an.",  -- 1445
-        "%d deiner Sachen gehören hierher: ich verwahre mehr davon, oder du hast sie markiert. Einlagern räumt sie weg.",  -- 1446
-        "Ich verwahre mehr von %d Sachen, die du trägst. Abheben füllt deine Taschen auf, bevor du aufbrichst.",  -- 1447
-        "Deine Taschen sind fast voll. Lass bei mir, was du unterwegs nicht brauchst.",  -- 1448
-        "Alles sicher bei mir, und deine Taschen haben %d Plätze frei.",  -- 1449
-        "Heute nichts für dich. Ich hab zweimal nachgesehen.",  -- 1450
-        "Briefe für dich: %d, nichts angehängt. Lies sie, wann du magst.",  -- 1451
-        "Briefe für dich: %d. Darin: %s.",  -- 1452
-        "Alles nehmen leert sie in einem Rutsch.",  -- 1453
-        "Nachnahme: %d. Die öffnest und bezahlst du selbst.",  -- 1454
-        "Deine Taschen sind voll: die Gegenstände warten in ihren Briefen.",  -- 1455
-        "Wohin? Zeig auf einen Ort, und ich sage dir, wie lange der Flug dauert.",  -- 1456
-        "%s: etwa %s laut Karte. Diese Strecke bist du noch nicht geflogen.",  -- 1457
-        "%s: etwa %s, nach deinem letzten Flug dorthin.",  -- 1458
-        "%s: wie lange, kann ich noch nicht sagen. Flieg es einmal, dann weiß ich es.",  -- 1459
-        "%d sind entwischt. Dieses Gewässer verlangt mehr Können, als ich habe: Köder hilft, eine bessere Angel auch.",  -- 1460
-        "Kein Köder am Haken. Er erhöht mein Können, dann entwischen weniger.",  -- 1461
-        "Der Köder ist fast aufgebraucht. Ein neuer am Haken hält mein Können oben.",  -- 1462
-        "Fische hier, die ich noch nicht gefangen habe: %d. Weiter auswerfen.",  -- 1463
-        "Ich habe jeden Fisch dieses Gewässers gefangen. Dann etwas Neues.",  -- 1464
-        "Noch nichts gefangen. Der erste Fisch jedes Gewässers kommt hier hinein.",  -- 1465
-        "Gefangene Arten: %d. Jedes Gewässer versteckt noch ein paar: die Angelanzeige zeigt ein ? für jede, die ich dort noch nicht gefangen habe.",  -- 1466
-        "Am Feuer ausgeruht: die nächsten %d Erfahrung aus Kämpfen zählen doppelt.",  -- 1467
-        "Keine Erholung angespart. Eine Nacht im Gasthaus oder in einer Stadt, und Kämpfe geben eine Weile doppelte Erfahrung.",  -- 1468
-        "%d absorbiert",  -- 1469
-        "Liste rechts",  -- 1470
-        "Einzeln in der Mitte",  -- 1471
-        "%d kritische Heilungen",  -- 1472
-        "%d Krits",  -- 1473
-        "Richturteil",  -- 1474
-        "Große Momente: wo",  -- 1475
-        "ein Block direkt über den Abklingzeit-Meldungen rechts von Eurer Figur, der neueste am nächsten daran und die älteren darüber aufsteigend, während sie verblassen, oder einzeln in der Mitte",  -- 1476
-        "zeigt, wie ein großer Moment aussieht und sich anfühlt",  -- 1477
-        "gesammelt",  -- 1478
-        "über einen anderen Gegenstand gesammelt",  -- 1479
-        "noch nicht gesammelt",  -- 1480
-        "Vorlage",  -- 1481
-        "Wähle ein Set, um seine Teile auf dein Outfit zu legen. %s behält es; vorher wird nichts bezahlt.",  -- 1482
-        "Deine Sammlung wird durchgesehen...",  -- 1483
-        "Dein Outfit ist wieder wie vorher.",  -- 1484
-        "%s: %d von %d Teilen angelegt.",  -- 1485
-        "%d passten nicht auf dieses Outfit.",  -- 1486
-        "Ein Set, von dem du Teile hast",  -- 1487
-        "%d Sets, von denen du Teile hast",  -- 1488
-        "kannst du nicht tragen",  -- 1489
-        "fehlt",  -- 1490
-        "Alle %d Teile",  -- 1491
-        "%d von %d Teilen",  -- 1492
-        "Fehlt: %s",  -- 1493
-        "Noch keine Sets. Gegenstände mit gleichem Namen, wie Grüner Eisenhelm und Grüne Eisenstulpen, erscheinen hier, sobald du einen davon hast.",  -- 1494
-        "Rückgängig",  -- 1495
-        "Das eigene Set %s löschen? Es lässt sich nicht wiederherstellen.",  -- 1496
-        "Löschen",  -- 1497
-        "Zeigt zuerst auf ein eigenes Set.",  -- 1498
-        "%s  Eigenes Set löschen",  -- 1499
+        "Kaufen ist billiger, als es aus %s herzustellen",  -- 1295
+        "Hergestellt aus %s",  -- 1296
+        "Der Mentor: was deine Bank herstellen lässt",  -- 1297
+        "Was deine Bank herstellen kann",  -- 1298
+        "Mit dem, was in deiner Bank liegt, lässt sich nichts mehr herstellen.",  -- 1299
+        "%d kannst du mit deiner Bank herstellen, %d davon nur mit ihr.",  -- 1300
+        "Der Mentor: %s %d > %d",  -- 1301
+        "Der Mentor",  -- 1302
+        "Levelplan",  -- 1303
+        "oder",  -- 1304
+        "Sammle %s",  -- 1305
+        "zu lernen",  -- 1306
+        "billiger zu kaufen",  -- 1307
+        "Ausblenden",  -- 1308
+        "Der Plan",  -- 1309
+        "Das farmen",  -- 1310
+        "Alles farmen",  -- 1311
+        "Mit der Bank",  -- 1312
+        "Plan bedienen",  -- 1313
+        "zweimal zum Ausblenden",  -- 1314
+        "Hier gibt es nichts anzuprobieren.",  -- 1315
+        "%d zur Farmliste hinzugefügt.",  -- 1316
+        "Nichts fehlt: Du hast alles, was nötig ist.",  -- 1317
+        "Öffne das Fenster eines Berufs, um einen Plan zu erstellen.",  -- 1318
+        "Der Mentor (Levelplan): zeigen / verbergen",  -- 1319
+        "zeigt den Levelplan des zuletzt geöffneten Berufsfensters, mit den Tasten des Controllers darauf",  -- 1320
+        "Links der Quests",  -- 1321
+        "Rechts der Quests",  -- 1322
+        "Unter den Quests",  -- 1323
+        "Die Farmliste ist voll.",  -- 1324
+        "Farmliste: %s, %d gewünscht.",  -- 1325
+        "Farmen",  -- 1326
+        "%d weitere",  -- 1327
+        "Noch nichts zu farmen.",  -- 1328
+        "Einen Stapel mehr",  -- 1329
+        "Entfernen",  -- 1330
+        "Leeren",  -- 1331
+        "Fertig",  -- 1332
+        "Alles von der Farmliste nehmen?",  -- 1333
+        "Farmliste: wählen / fertig",  -- 1334
+        "Farmliste: den Gegenstand hinzufügen, auf den du zeigst",  -- 1335
+        "Das steht nicht auf der Farmliste.",  -- 1336
+        "Die Farmliste ist leer.",  -- 1337
+        "Farmliste: wo sie sitzt",  -- 1338
+        "die Farmliste links der Questliste, rechts davon oder unter ihren Quests",  -- 1339
+        "die Farmliste neben der Questliste: mit dem Controller wählen; add <Gegenstand> [wie viele], remove <Gegenstand>, clear, oder left / right / bottom für ihren Platz",  -- 1340
+        "Bedrohung in Prozent",  -- 1341
+        "dein Anteil an der Bedrohung als Zahl neben dem Bedrohungssymbol, am Zielrahmen und an Namensplaketten",  -- 1342
+        "Gesundheitszahl",  -- 1343
+        "die verbleibende Gesundheit, gekürzt (12.3k), auf der Leiste (nicht auf kompakten Plaketten: dort reicht der Prozentwert)",  -- 1344
+        "Deine Debuffs",  -- 1345
+        "deine Debuffs auf der Einheit, über ihrem Namen, mit ihrer Zeit",  -- 1346
+        "Debuffs von allen",  -- 1347
+        "die Debuffs, die das Spiel für Namensplaketten von allen markiert, nicht nur von dir",  -- 1348
+        "Gegnerische Buffs",  -- 1349
+        "die Stärkungen eines Feindes neben seinen Schwächungen: die wichtigen (wichtig, wütend oder von dir bannbar oder stehlbar), oder alle, wenn Nur die Effekte, die zählen aus ist",  -- 1350
+        "Massenkontroll-Symbol",  -- 1351
+        "ein großes Symbol mit Restzeit, wenn die Einheit betäubt, bewegungsunfähig, in Furcht versetzt ist...",  -- 1352
+        "Aggro-Leuchten",  -- 1353
+        "ein Schildsymbol und ein Leuchten hinter dem Namen: rot, solange es dich angreift, rot und gelb, wenn du es gleich ziehst, gelb und blau, wenn du es verlierst, blau, wenn es nicht auf dir ist",  -- 1354
+        "Questmarkierung",  -- 1355
+        "eine goldene Markierung an Einheiten, die deine Quests noch brauchen",  -- 1356
+        "Namensplaketten-Animationen",  -- 1357
+        "Plaketten blenden ein, niedrige Gesundheit atmet, Massenkontrolle schimmert",  -- 1358
+        "Klein",  -- 1359
+        "Normal",  -- 1360
+        "Groß",  -- 1361
+        "Voller Name",  -- 1362
+        "Kurzer Name",  -- 1363
+        "Kein Name",  -- 1364
+        "Voll",  -- 1365
+        "Minimal mini",  -- 1366
+        "Namensplakettengröße",  -- 1367
+        "wie groß die Leisten auf Namensplaketten sind: klein und schmal, normal oder groß (breiter und höher)",  -- 1368
+        "Namen auf Namensplaketten",  -- 1369
+        "der Name auf einer Plakette mit Gesundheitsleiste: voll, gekürzt oder weggelassen (der Zielrahmen nennt ihn voll; Stufe und Klassensymbol bleiben). Eine Plakette ohne Leiste, die eines freundlichen NPCs, behält immer ihren Namen",  -- 1370
+        "Aussehen der Namensplaketten",  -- 1371
+        "die Schalter der Namensplaketten auf einen Druck. Voll: alles. Minimal: keine Ressourcenleiste, Gilde oder Titel, kurze Namen. Minimal mini: kleine Leisten mit Gesundheit, Euren Schwächungen und den wichtigen Stärkungen, Stufe und Klasse, kein Name (der Zielrahmen hat ihn). Bedrohung, Kontrolleffekte und laute Zauber bleiben immer",  -- 1372
+        "Spielertitel",  -- 1373
+        "zeigt den Titel eines Spielers neben seinem Namen an",  -- 1374
+        "Gilden und NSC-Berufe",  -- 1375
+        "eine Zeile unter dem Namen: die Gilde des Spielers oder die Tätigkeit des NSC",  -- 1376
+        "Leisten für Freunde im Kampf",  -- 1377
+        "freundliche Namensplaketten zeigen Gesundheit, Ressource und Zauber, solange sich die Einheit im Kampf befindet",  -- 1378
+        "Die eigenen freundlichen Namensplaketten des Spiels",  -- 1379
+        "freundliche Plaketten (deine Gruppe, andere Spieler, freundliche NPCs) im Aussehen des Spiels lassen; unsere nur bei Feinden",  -- 1380
+        "Ressourcenleisten",  -- 1381
+        "eine schmale Mana-, Wut- oder Energieleiste unter der Gesundheitsleiste",  -- 1382
+        "Zauberziel",  -- 1383
+        "wer das Ziel eines Zaubers ist, neben dem Namen des Zaubers",  -- 1384
+        "Gesundheit in Prozent",  -- 1385
+        "der Gesundheitswert in Prozent auf der Leiste",  -- 1386
+        "Name auf der Plakette deines Ziels",  -- 1387
+        "aus: die Plakette deines Ziels zeigt weder Namen noch Stufe (der Zielrahmen zeigt sie)",  -- 1388
+        "Stufen auf Namensplaketten",  -- 1389
+        "die Stufe vor dem Namen eines Gegners, nach Schwierigkeit gefärbt",  -- 1390
+        "Kompakte Namensplaketten",  -- 1391
+        "Namensplaketten etwa halb so breit",  -- 1392
+        "Auffällige Gegnerzauber",  -- 1393
+        "der Zauber eines Gegners blinkt, schwillt an und pulsiert immer schneller, bis er gewirkt wird, damit er rechtzeitig unterbrochen werden kann",  -- 1394
+        "Klassensymbole auf Namensplaketten",  -- 1395
+        "das Klassensymbol eines Spielers vor seinem Namen, ob Freund oder Feind",  -- 1396
+        "Was NPCs tun, als Symbole",  -- 1397
+        "ein Symbol über freundlichen NPCs, die etwas anbieten: eine Tasche über Händlern, ein Amboss über Schmieden, die reparieren, ein Buch über Lehrern... (die eigenen Symbole des Spiels; sie erscheinen auch, solange die Plakette darauf wartet, dass du auf sie zeigst)",  -- 1398
+        "Freundliche NPCs nur beim Zeigen",  -- 1399
+        "die Plaketten freundlicher NPCs (Händler, Questgeber, Stadtbewohner) erscheinen nur, solange du auf sie zeigst, wie ihr Tooltip",  -- 1400
+        "Namen über Dingen, mit denen du interagieren kannst",  -- 1401
+        "ein Name über Erz, Truhen, Tafeln und dergleichen, solange du ihnen zugewandt bist (aus: sie bleiben ohne Namen, die Anzeige des Spiels sagt bereits, was sie sind)",  -- 1402
+        "Mini-Namensplaketten",  -- 1403
+        "Diener, Kleintiere und graue Gegner ohne Erfahrung bekommen eine kleine Plakette: eine schmale Leiste mit deinen Schwächungen darauf und ohne Namen (ein Kleintier ohne Leiste behält seinen Namen; ob sie überhaupt Plaketten haben, entscheidet die Option des Spiels)",  -- 1404
+        "Gruppen-Namensplaketten in Dungeons: nur Namen",  -- 1405
+        "in einem Dungeon oder Schlachtzug zeichnet das Spiel die Namensplaketten freundlicher Spieler selbst, und Addons dürfen sie nicht ändern: dort werden die eigenen Optionen des Spiels so gesetzt, dass sie als klassenfarbige Namen ohne Leisten erscheinen, wie unsere, und im Kampf kommen die Leisten des Spiels zurück (wenn Leisten für Freunde im Kampf an sind); beim Verlassen wird alles zurückgestellt",  -- 1406
+        "Gruppen-Namensplaketten in Dungeons: ausgeblendet",  -- 1407
+        "in einem Dungeon oder Schlachtzug die Namensplaketten des Spiels für freundliche Spieler ganz ausschalten (und beim Verlassen wieder so, wie du sie hattest)",  -- 1408
+        "zeigt, was das Spiel für den Namen deines Ziels liefert (zur Fehlersuche)",  -- 1409
+        "die Namensplaketten auf dem Bildschirm auflisten und ob sie unser Aussehen tragen (zur Fehlersuche)",  -- 1410
+        "Also gut.",  -- 1411
+        "Och, was für ein Haufen.",  -- 1412
+        "So, mal sehen, mal sehen...",  -- 1413
+        "Elune, gib mir Geduld.",  -- 1414
+        "Bei den Naaru, was für ein Durcheinander.",  -- 1415
+        "Verflixter Rucksack.",  -- 1416
+        "Ein ordentlicher Rucksack ist ein leichter Rucksack.",  -- 1417
+        "Pah. Zu viel Kram.",  -- 1418
+        "Totes Gewicht, das alles.",  -- 1419
+        "Geduld. Die Erdenmutter sorgt für uns.",  -- 1420
+        "Ey, was ham wir denn hier, Mann?",  -- 1421
+        "Welch ein Durcheinander. Unschicklich.",  -- 1422
+        "Zeit ist Geld. Zählen wir nach.",  -- 1423
+        "Jo, das reicht.",  -- 1424
+        "Elune sei Dank.",  -- 1425
+        "Das Licht sorgt für uns.",  -- 1426
+        "Hrm. Gut genug.",  -- 1427
+        "Hm. Genug zum Kämpfen.",  -- 1428
+        "Mit leichtem Gepäck. Gut.",  -- 1429
+        "Annehmbar. Gerade so.",  -- 1430
+        "Kein Platz mehr frei. Der Plunder brächte %s: verkaufen schafft Platz.",  -- 1431
+        "Kein Platz mehr frei. Was ich unterwegs nicht brauche, kann in der Bank warten.",  -- 1432
+        "Plunder: %d, hier %s wert. X verkauft das Gewählte; Schlau verkaufen nimmt alles.",  -- 1433
+        "%d davon gehören in die Bank: dort liegt schon mehr davon, oder ich habe sie markiert. Einlagern räumt sie weg.",  -- 1434
+        "Nur noch %d Plätze frei. Der Plunder brächte bei jedem Händler %s.",  -- 1435
+        "Nur noch %d Plätze frei. Zeit, ein paar Sachen zu verkaufen oder einzulagern.",  -- 1436
+        "Neu seit dem letzten Blick: %d. Der goldene Punkt markiert jedes.",  -- 1437
+        "Lohnt den Verkauf: %d. Der Filter Verkaufen sammelt sie, und jeder Tooltip sagt, wo es am meisten bringt.",  -- 1438
+        "Plunder: %d, %s wert. Der nächste Händler kann ihn haben.",  -- 1439
+        "Nur das Nötigste. Nichts, was sich zu verkaufen lohnt.",  -- 1440
+        "Alles in Ordnung, und %d Plätze frei.",  -- 1441
+        "Deine Ausrüstung ist repariert: %s.",  -- 1442
+        "Ich kann deine Ausrüstung für %s reparieren; ein kaputtes Teil gibt dir weder Rüstung noch Werte.",  -- 1443
+        "Deine Taschen sind voll. Ich nehme %d Sachen für %s: Schlau verkaufen, und du hast wieder Platz.",  -- 1444
+        "Ich gebe dir %s für %d Sachen: den Plunder und was das Auktionshaus nicht besser bezahlt. Schlau verkaufen, und fertig.",  -- 1445
+        "Behalte die %d, die das Auktionshaus will: es zahlt %s mehr als ich.",  -- 1446
+        "Deine Taschen sind voll. Verkauf mir erst etwas, bevor du kaufst.",  -- 1447
+        "Nichts in deinen Taschen, wofür ich gut zahlen würde. Sieh dir meine Waren an.",  -- 1448
+        "%d deiner Sachen gehören hierher: ich verwahre mehr davon, oder du hast sie markiert. Einlagern räumt sie weg.",  -- 1449
+        "Ich verwahre mehr von %d Sachen, die du trägst. Abheben füllt deine Taschen auf, bevor du aufbrichst.",  -- 1450
+        "Deine Taschen sind fast voll. Lass bei mir, was du unterwegs nicht brauchst.",  -- 1451
+        "Alles sicher bei mir, und deine Taschen haben %d Plätze frei.",  -- 1452
+        "Heute nichts für dich. Ich hab zweimal nachgesehen.",  -- 1453
+        "Briefe für dich: %d, nichts angehängt. Lies sie, wann du magst.",  -- 1454
+        "Briefe für dich: %d. Darin: %s.",  -- 1455
+        "Alles nehmen leert sie in einem Rutsch.",  -- 1456
+        "Nachnahme: %d. Die öffnest und bezahlst du selbst.",  -- 1457
+        "Deine Taschen sind voll: die Gegenstände warten in ihren Briefen.",  -- 1458
+        "Wohin? Zeig auf einen Ort, und ich sage dir, wie lange der Flug dauert.",  -- 1459
+        "%s: etwa %s laut Karte. Diese Strecke bist du noch nicht geflogen.",  -- 1460
+        "%s: etwa %s, nach deinem letzten Flug dorthin.",  -- 1461
+        "%s: wie lange, kann ich noch nicht sagen. Flieg es einmal, dann weiß ich es.",  -- 1462
+        "%d sind entwischt. Dieses Gewässer verlangt mehr Können, als ich habe: Köder hilft, eine bessere Angel auch.",  -- 1463
+        "Kein Köder am Haken. Er erhöht mein Können, dann entwischen weniger.",  -- 1464
+        "Der Köder ist fast aufgebraucht. Ein neuer am Haken hält mein Können oben.",  -- 1465
+        "Fische hier, die ich noch nicht gefangen habe: %d. Weiter auswerfen.",  -- 1466
+        "Ich habe jeden Fisch dieses Gewässers gefangen. Dann etwas Neues.",  -- 1467
+        "Noch nichts gefangen. Der erste Fisch jedes Gewässers kommt hier hinein.",  -- 1468
+        "Gefangene Arten: %d. Jedes Gewässer versteckt noch ein paar: die Angelanzeige zeigt ein ? für jede, die ich dort noch nicht gefangen habe.",  -- 1469
+        "Am Feuer ausgeruht: die nächsten %d Erfahrung aus Kämpfen zählen doppelt.",  -- 1470
+        "Keine Erholung angespart. Eine Nacht im Gasthaus oder in einer Stadt, und Kämpfe geben eine Weile doppelte Erfahrung.",  -- 1471
+        "%d absorbiert",  -- 1472
+        "Liste rechts",  -- 1473
+        "Einzeln in der Mitte",  -- 1474
+        "%d kritische Heilungen",  -- 1475
+        "%d Krits",  -- 1476
+        "Richturteil",  -- 1477
+        "Große Momente: wo",  -- 1478
+        "ein Block direkt über den Abklingzeit-Meldungen rechts von Eurer Figur, der neueste am nächsten daran und die älteren darüber aufsteigend, während sie verblassen, oder einzeln in der Mitte",  -- 1479
+        "zeigt, wie ein großer Moment aussieht und sich anfühlt",  -- 1480
+        "gesammelt",  -- 1481
+        "über einen anderen Gegenstand gesammelt",  -- 1482
+        "noch nicht gesammelt",  -- 1483
+        "Vorlage",  -- 1484
+        "Wähle ein Set, um seine Teile auf dein Outfit zu legen. %s behält es; vorher wird nichts bezahlt.",  -- 1485
+        "Deine Sammlung wird durchgesehen...",  -- 1486
+        "Dein Outfit ist wieder wie vorher.",  -- 1487
+        "%s: %d von %d Teilen angelegt.",  -- 1488
+        "%d passten nicht auf dieses Outfit.",  -- 1489
+        "Ein Set, von dem du Teile hast",  -- 1490
+        "%d Sets, von denen du Teile hast",  -- 1491
+        "kannst du nicht tragen",  -- 1492
+        "fehlt",  -- 1493
+        "Alle %d Teile",  -- 1494
+        "%d von %d Teilen",  -- 1495
+        "Fehlt: %s",  -- 1496
+        "Noch keine Sets. Gegenstände mit gleichem Namen, wie Grüner Eisenhelm und Grüne Eisenstulpen, erscheinen hier, sobald du einen davon hast.",  -- 1497
+        "Rückgängig",  -- 1498
+        "Das eigene Set %s löschen? Es lässt sich nicht wiederherstellen.",  -- 1499
+        "Löschen",  -- 1500
+        "Zeigt zuerst auf ein eigenes Set.",  -- 1501
+        "%s  Eigenes Set löschen",  -- 1502
     },
     esES = {
         "error:",  -- 1
@@ -4305,211 +4311,214 @@ local TRANSLATIONS = {
         "Las guías suben este tramo recolectando %s.",  -- 1292
         "%s: tienes %d, el plan usa %d",  -- 1293
         "para %s",  -- 1294
-        "El Mentor: lo que tu banco te deja fabricar",  -- 1295
-        "Lo que tu banco puede fabricar",  -- 1296
-        "Con lo que hay en tu banco no se puede fabricar nada más.",  -- 1297
-        "%d que puedes fabricar contando tu banco, %d de ellas solo con él.",  -- 1298
-        "El Mentor: %s %d > %d",  -- 1299
-        "El Mentor",  -- 1300
-        "Plan de subida",  -- 1301
-        "o",  -- 1302
-        "Recolecta %s",  -- 1303
-        "por aprender",  -- 1304
-        "Ocultar",  -- 1305
-        "El plan",  -- 1306
-        "Farmear esto",  -- 1307
-        "Farmear todo",  -- 1308
-        "Con el banco",  -- 1309
-        "Usar el plan",  -- 1310
-        "dos veces para ocultar",  -- 1311
-        "Aquí no hay nada que probarse.",  -- 1312
-        "%d añadido(s) a la lista de farmeo.",  -- 1313
-        "No falta nada: tienes lo necesario.",  -- 1314
-        "Abre la ventana de una profesión para hacer un plan.",  -- 1315
-        "El Mentor (plan de subida): mostrar / ocultar",  -- 1316
-        "muestra el plan de subida de la última ventana de profesión abierta, con los botones del mando en él",  -- 1317
-        "A la izquierda de las misiones",  -- 1318
-        "A la derecha de las misiones",  -- 1319
-        "Bajo las misiones",  -- 1320
-        "La lista de farmeo está llena.",  -- 1321
-        "Lista de farmeo: %s, %d deseados.",  -- 1322
-        "Farmeo",  -- 1323
-        "%d más",  -- 1324
-        "Nada que farmear aún.",  -- 1325
-        "Una pila más",  -- 1326
-        "Quitar",  -- 1327
-        "Vaciar",  -- 1328
-        "Hecho",  -- 1329
-        "¿Quitar todo de la lista de farmeo?",  -- 1330
-        "Lista de farmeo: elegir / hecho",  -- 1331
-        "Lista de farmeo: añadir el objeto al que apuntas",  -- 1332
-        "Eso no está en la lista de farmeo.",  -- 1333
-        "La lista de farmeo está vacía.",  -- 1334
-        "Lista de farmeo: dónde se sitúa",  -- 1335
-        "la lista de farmeo a la izquierda de la lista de misiones, a su derecha o bajo sus misiones",  -- 1336
-        "la lista de farmeo junto a la lista de misiones: elige con el mando; add <objeto> [cuántos], remove <objeto>, clear, o left / right / bottom para su sitio",  -- 1337
-        "Porcentaje de amenaza",  -- 1338
-        "tu parte de la amenaza como número junto al icono de amenaza, en el marco del objetivo y en las placas de nombre",  -- 1339
-        "Número de salud",  -- 1340
-        "la salud restante, abreviada (12.3k), en la barra (no en las placas compactas: allí basta el porcentaje)",  -- 1341
-        "Tus perjuicios",  -- 1342
-        "tus perjuicios sobre la unidad, sobre su nombre, con su tiempo",  -- 1343
-        "Perjuicios de todos",  -- 1344
-        "los perjuicios que el juego marca para las placas de nombre de todos, no solo los tuyos",  -- 1345
-        "Beneficios del enemigo",  -- 1346
-        "los beneficios de un enemigo junto a sus perjuicios: los que importan (importantes, enfurecido o que puedes disipar o robar), o todos si Solo los efectos que importan está desactivado",  -- 1347
-        "Icono de control de masas",  -- 1348
-        "un icono grande con su tiempo cuando la unidad está aturdida, inmovilizada, aterrorizada...",  -- 1349
-        "Resplandor de amenaza",  -- 1350
-        "un icono de escudo y un brillo tras el nombre: rojo mientras te ataca, rojo y amarillo cuando estás a punto de atraerlo, amarillo y azul cuando lo estás perdiendo, azul cuando no está sobre ti",  -- 1351
-        "Marcador de misión",  -- 1352
-        "una marca dorada en las unidades que tus misiones aún necesitan",  -- 1353
-        "Animaciones de placas de nombre",  -- 1354
-        "las placas aparecen con fundido, la salud baja respira, el control de masas brilla",  -- 1355
-        "Pequeño",  -- 1356
-        "Normal",  -- 1357
-        "Grande",  -- 1358
-        "Nombre completo",  -- 1359
-        "Nombre corto",  -- 1360
-        "Sin nombre",  -- 1361
-        "Completo",  -- 1362
-        "Mínimo mini",  -- 1363
-        "Tamaño de las placas",  -- 1364
-        "lo grandes que son las barras de las placas de nombre: pequeñas y finas, normales o grandes (más anchas y altas)",  -- 1365
-        "Nombres en las placas",  -- 1366
-        "el nombre en una placa con barra de salud: completo, recortado u omitido (el marco del objetivo lo da completo; el nivel y el icono de clase se quedan). Una placa sin barra, la de un PNJ amistoso, siempre conserva su nombre",  -- 1367
-        "Aspecto de las placas",  -- 1368
-        "los interruptores de las placas de una vez. Completo: todo. Mínimo: sin barra de poder, hermandad ni título, nombres cortos. Mínimo mini: barras pequeñas con salud, tus perjuicios y los beneficios que importan, nivel y clase, sin nombre (lo tiene el marco del objetivo). La amenaza, el control y los lanzamientos llamativos siempre se quedan",  -- 1369
-        "Títulos de jugador",  -- 1370
-        "muestra el título de un jugador junto a su nombre",  -- 1371
-        "Hermandades y oficios de PNJ",  -- 1372
-        "una línea bajo el nombre: la hermandad del jugador o a qué se dedica el PNJ",  -- 1373
-        "Barras de amigos en combate",  -- 1374
-        "las placas de nombre amistosas muestran salud, poder y lanzamientos mientras esa unidad está en combate",  -- 1375
-        "Placas de nombre amistosas del propio juego",  -- 1376
-        "deja las placas amistosas (tu grupo, otros jugadores, PNJ amistosos) con el aspecto del juego; las nuestras solo en enemigos",  -- 1377
-        "Barras de poder",  -- 1378
-        "una barra fina de maná, ira o energía bajo la barra de salud",  -- 1379
-        "Objetivo del lanzamiento",  -- 1380
-        "a quién va dirigido un lanzamiento, junto al nombre del hechizo",  -- 1381
-        "Porcentaje de salud",  -- 1382
-        "el porcentaje de salud en la barra",  -- 1383
-        "Nombre en la placa de tu objetivo",  -- 1384
-        "desactivado: la placa de tu objetivo no muestra su nombre ni su nivel (los muestra el marco del objetivo)",  -- 1385
-        "Niveles en las placas de nombre",  -- 1386
-        "el nivel delante del nombre de un enemigo, coloreado según la dificultad",  -- 1387
-        "Placas de nombre compactas",  -- 1388
-        "placas de nombre de aproximadamente la mitad de ancho",  -- 1389
-        "Lanzamientos enemigos llamativos",  -- 1390
-        "el lanzamiento de un enemigo parpadea, se hincha y pulsa cada vez más rápido hasta completarse, para que puedas interrumpirlo a tiempo",  -- 1391
-        "Iconos de clase en las placas",  -- 1392
-        "el icono de clase de un jugador delante de su nombre, amigo o enemigo",  -- 1393
-        "Lo que hacen los PNJ, como iconos",  -- 1394
-        "un icono sobre los PNJ amistosos que ofrecen algo: una bolsa sobre los vendedores, un yunque sobre los herreros que reparan, un libro sobre los instructores... (los iconos del propio juego; se ven aunque la placa espere a que la señales)",  -- 1395
-        "PNJ amistosos solo al apuntarlos",  -- 1396
-        "las placas de los PNJ amistosos (vendedores, dadores de misiones, habitantes) solo se muestran mientras los apuntas, como su descripción",  -- 1397
-        "Nombres sobre las cosas con las que puedes interactuar",  -- 1398
-        "un nombre sobre minerales, cofres, placas y similares mientras los miras (desactivado: quedan sin nombre, el aviso del propio juego ya dice qué son)",  -- 1399
-        "Minipanel de nombre",  -- 1400
-        "esbirros, alimañas y enemigos grises que no dan experiencia tienen una placa pequeña: una barra fina con tus perjuicios encima y sin nombre (una alimaña, sin barra, conserva su nombre; la opción del juego decide si tienen placa)",  -- 1401
-        "Placas de nombre del grupo en mazmorras: solo nombres",  -- 1402
-        "dentro de una mazmorra o banda el juego dibuja él mismo las placas de nombre de los jugadores amistosos y los addons no pueden cambiarlas: allí se ajustan las opciones propias del juego para mostrarlas como nombres con el color de clase y sin barras, como las nuestras, y las barras del juego vuelven mientras luchas (si las barras de amigos en combate están activadas); todo se restaura al salir",  -- 1403
-        "Placas de nombre del grupo en mazmorras: ocultas",  -- 1404
-        "dentro de una mazmorra o banda, apagar del todo las placas de nombre del juego para los jugadores amistosos (y dejarlas como las tenías al salir)",  -- 1405
-        "muestra lo que da el juego para el nombre de tu objetivo (para solucionar problemas)",  -- 1406
-        "lista las placas de nombre en pantalla y si llevan nuestro aspecto (para solucionar problemas)",  -- 1407
-        "Bueno, veamos.",  -- 1408
-        "Ay, menudo montón.",  -- 1409
-        "A ver, a ver...",  -- 1410
-        "Elune, dame paciencia.",  -- 1411
-        "Por los naaru, qué revoltijo.",  -- 1412
-        "Maldita mochila.",  -- 1413
-        "Mochila ordenada, mochila ligera.",  -- 1414
-        "Bah. Demasiados trastos.",  -- 1415
-        "Peso muerto, todo esto.",  -- 1416
-        "Paciencia. La Madre Tierra provee.",  -- 1417
-        "Eh, ¿qué tenemos aquí, man?",  -- 1418
-        "Qué desorden. Impropio.",  -- 1419
-        "El tiempo es oro. Contemos.",  -- 1420
-        "Sí, con esto basta.",  -- 1421
-        "Gracias a Elune.",  -- 1422
-        "La Luz provee.",  -- 1423
-        "Hrm. Suficiente.",  -- 1424
-        "Hm. Basta para pelear.",  -- 1425
-        "Viajo ligero. Bien.",  -- 1426
-        "Aceptable. Apenas.",  -- 1427
-        "No queda ni un hueco. La basura daría %s: venderla hace sitio.",  -- 1428
-        "No queda ni un hueco. Lo que no necesite en el camino puede esperar en el banco.",  -- 1429
-        "Basura: %d, vale %s aquí. X vende lo que he elegido; Venta inteligente se lo lleva todo.",  -- 1430
-        "%d de estos van al banco: allí hay más iguales, o los marqué. Depositar los guarda.",  -- 1431
-        "Solo quedan %d huecos. La basura daría %s en cualquier vendedor.",  -- 1432
-        "Solo quedan %d huecos. Hora de vender o guardar en el banco unas cuantas cosas.",  -- 1433
-        "Nuevo desde la última vez: %d. El punto dorado marca cada uno.",  -- 1434
-        "Vale la pena vender: %d. El filtro Vender los reúne, y cada descripción dice dónde se paga más.",  -- 1435
-        "Basura: %d, vale %s. Para el próximo vendedor.",  -- 1436
-        "Solo lo esencial. Nada que valga la pena vender.",  -- 1437
-        "Todo en orden, y %d huecos libres.",  -- 1438
-        "Tu equipo está reparado: %s.",  -- 1439
-        "Puedo reparar tu equipo por %s; una pieza rota no te da ni armadura ni atributos.",  -- 1440
-        "Tus bolsas están llenas. Me quedo %d cosas por %s: Venta inteligente, y vuelves a tener sitio.",  -- 1441
-        "Te doy %s por %d cosas: la basura y lo que la casa de subastas no pagaría mejor. Venta inteligente, y listo.",  -- 1442
-        "Quédate los %d que quiere la casa de subastas: paga %s más que yo.",  -- 1443
-        "Tus bolsas están llenas. Véndeme algo antes de comprar.",  -- 1444
-        "Nada en tus bolsas por lo que pagaría bien. Echa un vistazo a mi mercancía.",  -- 1445
-        "%d de lo que llevas va aquí: guardo más iguales, o los marcaste. Depositar los guarda.",  -- 1446
-        "Guardo más de %d cosas que llevas. Retirar rellena tus bolsas antes de partir.",  -- 1447
-        "Tus bolsas están casi llenas. Déjame lo que no necesites en el camino.",  -- 1448
-        "Todo a salvo conmigo, y tus bolsas tienen %d huecos libres.",  -- 1449
-        "Hoy no hay nada para ti. Lo he mirado dos veces.",  -- 1450
-        "Cartas para ti: %d, sin nada adjunto. Léelas cuando quieras.",  -- 1451
-        "Cartas para ti: %d. Dentro: %s.",  -- 1452
-        "Recogerlo todo las vacía de una vez.",  -- 1453
-        "Contra reembolso: %d. Esas las abres y pagas tú.",  -- 1454
-        "Tus bolsas están llenas: los objetos esperan en sus cartas.",  -- 1455
-        "¿Adónde? Señala un lugar y te diré cuánto dura el viaje.",  -- 1456
-        "%s: unos %s según el mapa. Esa ruta aún no la has volado.",  -- 1457
-        "%s: unos %s, según tu último vuelo allí.",  -- 1458
-        "%s: aún no sé decirte cuánto. Vuélalo una vez y lo sabré.",  -- 1459
-        "Se han escapado %d. Esta agua pide más habilidad de la que tengo: el cebo ayuda, y una caña mejor también.",  -- 1460
-        "No hay cebo en el anzuelo. Suma a mi habilidad, y así se escapan menos.",  -- 1461
-        "El cebo casi se ha acabado. Otro en el anzuelo mantiene mi habilidad.",  -- 1462
-        "Peces de aquí que aún no he pescado: %d. A seguir lanzando.",  -- 1463
-        "He pescado todos los peces de esta agua. A otro sitio, entonces.",  -- 1464
-        "Aún no he pescado nada. El primer pez de cada agua va aquí.",  -- 1465
-        "Especies pescadas: %d. Cada agua esconde algunas más: el panel de pesca muestra un ? por cada una que no he pescado allí.",  -- 1466
-        "Descansado junto al fuego: los próximos %d de experiencia por muertes valen el doble.",  -- 1467
-        "Sin descanso acumulado. Una noche en una posada o en una ciudad, y las muertes dan el doble de experiencia un rato.",  -- 1468
-        "%d absorbido",  -- 1469
-        "Lista a la derecha",  -- 1470
-        "Uno en el centro",  -- 1471
-        "%d sanaciones críticas",  -- 1472
-        "%d críticos",  -- 1473
-        "Sentencia",  -- 1474
-        "Grandes momentos: dónde",  -- 1475
-        "un bloque justo encima de los avisos de reutilización a la derecha de tu personaje, el más reciente junto a ellos y los anteriores subiendo por encima mientras se desvanecen, o uno a la vez en el centro",  -- 1476
-        "muestra cómo se ve y se siente un gran momento",  -- 1477
-        "conseguida",  -- 1478
-        "conseguida con otro objeto",  -- 1479
-        "aún no conseguida",  -- 1480
-        "Apariencia",  -- 1481
-        "Elige un conjunto para poner sus piezas en tu atuendo. %s lo guarda; no se paga nada antes.",  -- 1482
-        "Revisando tu colección...",  -- 1483
-        "Tu atuendo vuelve a estar como antes.",  -- 1484
-        "%s: %d de %d piezas puestas.",  -- 1485
-        "%d no se pudieron poner en este atuendo.",  -- 1486
-        "Un conjunto del que tienes piezas",  -- 1487
-        "%d conjuntos de los que tienes piezas",  -- 1488
-        "no puedes llevarlo",  -- 1489
-        "falta",  -- 1490
-        "Las %d piezas",  -- 1491
-        "%d de %d piezas",  -- 1492
-        "Falta: %s",  -- 1493
-        "Aún no hay conjuntos. Los objetos que comparten nombre, como Yelmo de hierro verde y Guanteletes de hierro verde, aparecen aquí en cuanto tienes uno.",  -- 1494
-        "Deshacer",  -- 1495
-        "¿Borrar el conjunto personalizado %s? No se puede recuperar.",  -- 1496
-        "Borrar",  -- 1497
-        "Apunta primero a un conjunto personalizado.",  -- 1498
-        "%s  Borrar conjunto personalizado",  -- 1499
+        "Es más barato comprarlo que fabricarlo con %s",  -- 1295
+        "Hecho con %s",  -- 1296
+        "El Mentor: lo que tu banco te deja fabricar",  -- 1297
+        "Lo que tu banco puede fabricar",  -- 1298
+        "Con lo que hay en tu banco no se puede fabricar nada más.",  -- 1299
+        "%d que puedes fabricar contando tu banco, %d de ellas solo con él.",  -- 1300
+        "El Mentor: %s %d > %d",  -- 1301
+        "El Mentor",  -- 1302
+        "Plan de subida",  -- 1303
+        "o",  -- 1304
+        "Recolecta %s",  -- 1305
+        "por aprender",  -- 1306
+        "más barato comprarlo",  -- 1307
+        "Ocultar",  -- 1308
+        "El plan",  -- 1309
+        "Farmear esto",  -- 1310
+        "Farmear todo",  -- 1311
+        "Con el banco",  -- 1312
+        "Usar el plan",  -- 1313
+        "dos veces para ocultar",  -- 1314
+        "Aquí no hay nada que probarse.",  -- 1315
+        "%d añadido(s) a la lista de farmeo.",  -- 1316
+        "No falta nada: tienes lo necesario.",  -- 1317
+        "Abre la ventana de una profesión para hacer un plan.",  -- 1318
+        "El Mentor (plan de subida): mostrar / ocultar",  -- 1319
+        "muestra el plan de subida de la última ventana de profesión abierta, con los botones del mando en él",  -- 1320
+        "A la izquierda de las misiones",  -- 1321
+        "A la derecha de las misiones",  -- 1322
+        "Bajo las misiones",  -- 1323
+        "La lista de farmeo está llena.",  -- 1324
+        "Lista de farmeo: %s, %d deseados.",  -- 1325
+        "Farmeo",  -- 1326
+        "%d más",  -- 1327
+        "Nada que farmear aún.",  -- 1328
+        "Una pila más",  -- 1329
+        "Quitar",  -- 1330
+        "Vaciar",  -- 1331
+        "Hecho",  -- 1332
+        "¿Quitar todo de la lista de farmeo?",  -- 1333
+        "Lista de farmeo: elegir / hecho",  -- 1334
+        "Lista de farmeo: añadir el objeto al que apuntas",  -- 1335
+        "Eso no está en la lista de farmeo.",  -- 1336
+        "La lista de farmeo está vacía.",  -- 1337
+        "Lista de farmeo: dónde se sitúa",  -- 1338
+        "la lista de farmeo a la izquierda de la lista de misiones, a su derecha o bajo sus misiones",  -- 1339
+        "la lista de farmeo junto a la lista de misiones: elige con el mando; add <objeto> [cuántos], remove <objeto>, clear, o left / right / bottom para su sitio",  -- 1340
+        "Porcentaje de amenaza",  -- 1341
+        "tu parte de la amenaza como número junto al icono de amenaza, en el marco del objetivo y en las placas de nombre",  -- 1342
+        "Número de salud",  -- 1343
+        "la salud restante, abreviada (12.3k), en la barra (no en las placas compactas: allí basta el porcentaje)",  -- 1344
+        "Tus perjuicios",  -- 1345
+        "tus perjuicios sobre la unidad, sobre su nombre, con su tiempo",  -- 1346
+        "Perjuicios de todos",  -- 1347
+        "los perjuicios que el juego marca para las placas de nombre de todos, no solo los tuyos",  -- 1348
+        "Beneficios del enemigo",  -- 1349
+        "los beneficios de un enemigo junto a sus perjuicios: los que importan (importantes, enfurecido o que puedes disipar o robar), o todos si Solo los efectos que importan está desactivado",  -- 1350
+        "Icono de control de masas",  -- 1351
+        "un icono grande con su tiempo cuando la unidad está aturdida, inmovilizada, aterrorizada...",  -- 1352
+        "Resplandor de amenaza",  -- 1353
+        "un icono de escudo y un brillo tras el nombre: rojo mientras te ataca, rojo y amarillo cuando estás a punto de atraerlo, amarillo y azul cuando lo estás perdiendo, azul cuando no está sobre ti",  -- 1354
+        "Marcador de misión",  -- 1355
+        "una marca dorada en las unidades que tus misiones aún necesitan",  -- 1356
+        "Animaciones de placas de nombre",  -- 1357
+        "las placas aparecen con fundido, la salud baja respira, el control de masas brilla",  -- 1358
+        "Pequeño",  -- 1359
+        "Normal",  -- 1360
+        "Grande",  -- 1361
+        "Nombre completo",  -- 1362
+        "Nombre corto",  -- 1363
+        "Sin nombre",  -- 1364
+        "Completo",  -- 1365
+        "Mínimo mini",  -- 1366
+        "Tamaño de las placas",  -- 1367
+        "lo grandes que son las barras de las placas de nombre: pequeñas y finas, normales o grandes (más anchas y altas)",  -- 1368
+        "Nombres en las placas",  -- 1369
+        "el nombre en una placa con barra de salud: completo, recortado u omitido (el marco del objetivo lo da completo; el nivel y el icono de clase se quedan). Una placa sin barra, la de un PNJ amistoso, siempre conserva su nombre",  -- 1370
+        "Aspecto de las placas",  -- 1371
+        "los interruptores de las placas de una vez. Completo: todo. Mínimo: sin barra de poder, hermandad ni título, nombres cortos. Mínimo mini: barras pequeñas con salud, tus perjuicios y los beneficios que importan, nivel y clase, sin nombre (lo tiene el marco del objetivo). La amenaza, el control y los lanzamientos llamativos siempre se quedan",  -- 1372
+        "Títulos de jugador",  -- 1373
+        "muestra el título de un jugador junto a su nombre",  -- 1374
+        "Hermandades y oficios de PNJ",  -- 1375
+        "una línea bajo el nombre: la hermandad del jugador o a qué se dedica el PNJ",  -- 1376
+        "Barras de amigos en combate",  -- 1377
+        "las placas de nombre amistosas muestran salud, poder y lanzamientos mientras esa unidad está en combate",  -- 1378
+        "Placas de nombre amistosas del propio juego",  -- 1379
+        "deja las placas amistosas (tu grupo, otros jugadores, PNJ amistosos) con el aspecto del juego; las nuestras solo en enemigos",  -- 1380
+        "Barras de poder",  -- 1381
+        "una barra fina de maná, ira o energía bajo la barra de salud",  -- 1382
+        "Objetivo del lanzamiento",  -- 1383
+        "a quién va dirigido un lanzamiento, junto al nombre del hechizo",  -- 1384
+        "Porcentaje de salud",  -- 1385
+        "el porcentaje de salud en la barra",  -- 1386
+        "Nombre en la placa de tu objetivo",  -- 1387
+        "desactivado: la placa de tu objetivo no muestra su nombre ni su nivel (los muestra el marco del objetivo)",  -- 1388
+        "Niveles en las placas de nombre",  -- 1389
+        "el nivel delante del nombre de un enemigo, coloreado según la dificultad",  -- 1390
+        "Placas de nombre compactas",  -- 1391
+        "placas de nombre de aproximadamente la mitad de ancho",  -- 1392
+        "Lanzamientos enemigos llamativos",  -- 1393
+        "el lanzamiento de un enemigo parpadea, se hincha y pulsa cada vez más rápido hasta completarse, para que puedas interrumpirlo a tiempo",  -- 1394
+        "Iconos de clase en las placas",  -- 1395
+        "el icono de clase de un jugador delante de su nombre, amigo o enemigo",  -- 1396
+        "Lo que hacen los PNJ, como iconos",  -- 1397
+        "un icono sobre los PNJ amistosos que ofrecen algo: una bolsa sobre los vendedores, un yunque sobre los herreros que reparan, un libro sobre los instructores... (los iconos del propio juego; se ven aunque la placa espere a que la señales)",  -- 1398
+        "PNJ amistosos solo al apuntarlos",  -- 1399
+        "las placas de los PNJ amistosos (vendedores, dadores de misiones, habitantes) solo se muestran mientras los apuntas, como su descripción",  -- 1400
+        "Nombres sobre las cosas con las que puedes interactuar",  -- 1401
+        "un nombre sobre minerales, cofres, placas y similares mientras los miras (desactivado: quedan sin nombre, el aviso del propio juego ya dice qué son)",  -- 1402
+        "Minipanel de nombre",  -- 1403
+        "esbirros, alimañas y enemigos grises que no dan experiencia tienen una placa pequeña: una barra fina con tus perjuicios encima y sin nombre (una alimaña, sin barra, conserva su nombre; la opción del juego decide si tienen placa)",  -- 1404
+        "Placas de nombre del grupo en mazmorras: solo nombres",  -- 1405
+        "dentro de una mazmorra o banda el juego dibuja él mismo las placas de nombre de los jugadores amistosos y los addons no pueden cambiarlas: allí se ajustan las opciones propias del juego para mostrarlas como nombres con el color de clase y sin barras, como las nuestras, y las barras del juego vuelven mientras luchas (si las barras de amigos en combate están activadas); todo se restaura al salir",  -- 1406
+        "Placas de nombre del grupo en mazmorras: ocultas",  -- 1407
+        "dentro de una mazmorra o banda, apagar del todo las placas de nombre del juego para los jugadores amistosos (y dejarlas como las tenías al salir)",  -- 1408
+        "muestra lo que da el juego para el nombre de tu objetivo (para solucionar problemas)",  -- 1409
+        "lista las placas de nombre en pantalla y si llevan nuestro aspecto (para solucionar problemas)",  -- 1410
+        "Bueno, veamos.",  -- 1411
+        "Ay, menudo montón.",  -- 1412
+        "A ver, a ver...",  -- 1413
+        "Elune, dame paciencia.",  -- 1414
+        "Por los naaru, qué revoltijo.",  -- 1415
+        "Maldita mochila.",  -- 1416
+        "Mochila ordenada, mochila ligera.",  -- 1417
+        "Bah. Demasiados trastos.",  -- 1418
+        "Peso muerto, todo esto.",  -- 1419
+        "Paciencia. La Madre Tierra provee.",  -- 1420
+        "Eh, ¿qué tenemos aquí, man?",  -- 1421
+        "Qué desorden. Impropio.",  -- 1422
+        "El tiempo es oro. Contemos.",  -- 1423
+        "Sí, con esto basta.",  -- 1424
+        "Gracias a Elune.",  -- 1425
+        "La Luz provee.",  -- 1426
+        "Hrm. Suficiente.",  -- 1427
+        "Hm. Basta para pelear.",  -- 1428
+        "Viajo ligero. Bien.",  -- 1429
+        "Aceptable. Apenas.",  -- 1430
+        "No queda ni un hueco. La basura daría %s: venderla hace sitio.",  -- 1431
+        "No queda ni un hueco. Lo que no necesite en el camino puede esperar en el banco.",  -- 1432
+        "Basura: %d, vale %s aquí. X vende lo que he elegido; Venta inteligente se lo lleva todo.",  -- 1433
+        "%d de estos van al banco: allí hay más iguales, o los marqué. Depositar los guarda.",  -- 1434
+        "Solo quedan %d huecos. La basura daría %s en cualquier vendedor.",  -- 1435
+        "Solo quedan %d huecos. Hora de vender o guardar en el banco unas cuantas cosas.",  -- 1436
+        "Nuevo desde la última vez: %d. El punto dorado marca cada uno.",  -- 1437
+        "Vale la pena vender: %d. El filtro Vender los reúne, y cada descripción dice dónde se paga más.",  -- 1438
+        "Basura: %d, vale %s. Para el próximo vendedor.",  -- 1439
+        "Solo lo esencial. Nada que valga la pena vender.",  -- 1440
+        "Todo en orden, y %d huecos libres.",  -- 1441
+        "Tu equipo está reparado: %s.",  -- 1442
+        "Puedo reparar tu equipo por %s; una pieza rota no te da ni armadura ni atributos.",  -- 1443
+        "Tus bolsas están llenas. Me quedo %d cosas por %s: Venta inteligente, y vuelves a tener sitio.",  -- 1444
+        "Te doy %s por %d cosas: la basura y lo que la casa de subastas no pagaría mejor. Venta inteligente, y listo.",  -- 1445
+        "Quédate los %d que quiere la casa de subastas: paga %s más que yo.",  -- 1446
+        "Tus bolsas están llenas. Véndeme algo antes de comprar.",  -- 1447
+        "Nada en tus bolsas por lo que pagaría bien. Echa un vistazo a mi mercancía.",  -- 1448
+        "%d de lo que llevas va aquí: guardo más iguales, o los marcaste. Depositar los guarda.",  -- 1449
+        "Guardo más de %d cosas que llevas. Retirar rellena tus bolsas antes de partir.",  -- 1450
+        "Tus bolsas están casi llenas. Déjame lo que no necesites en el camino.",  -- 1451
+        "Todo a salvo conmigo, y tus bolsas tienen %d huecos libres.",  -- 1452
+        "Hoy no hay nada para ti. Lo he mirado dos veces.",  -- 1453
+        "Cartas para ti: %d, sin nada adjunto. Léelas cuando quieras.",  -- 1454
+        "Cartas para ti: %d. Dentro: %s.",  -- 1455
+        "Recogerlo todo las vacía de una vez.",  -- 1456
+        "Contra reembolso: %d. Esas las abres y pagas tú.",  -- 1457
+        "Tus bolsas están llenas: los objetos esperan en sus cartas.",  -- 1458
+        "¿Adónde? Señala un lugar y te diré cuánto dura el viaje.",  -- 1459
+        "%s: unos %s según el mapa. Esa ruta aún no la has volado.",  -- 1460
+        "%s: unos %s, según tu último vuelo allí.",  -- 1461
+        "%s: aún no sé decirte cuánto. Vuélalo una vez y lo sabré.",  -- 1462
+        "Se han escapado %d. Esta agua pide más habilidad de la que tengo: el cebo ayuda, y una caña mejor también.",  -- 1463
+        "No hay cebo en el anzuelo. Suma a mi habilidad, y así se escapan menos.",  -- 1464
+        "El cebo casi se ha acabado. Otro en el anzuelo mantiene mi habilidad.",  -- 1465
+        "Peces de aquí que aún no he pescado: %d. A seguir lanzando.",  -- 1466
+        "He pescado todos los peces de esta agua. A otro sitio, entonces.",  -- 1467
+        "Aún no he pescado nada. El primer pez de cada agua va aquí.",  -- 1468
+        "Especies pescadas: %d. Cada agua esconde algunas más: el panel de pesca muestra un ? por cada una que no he pescado allí.",  -- 1469
+        "Descansado junto al fuego: los próximos %d de experiencia por muertes valen el doble.",  -- 1470
+        "Sin descanso acumulado. Una noche en una posada o en una ciudad, y las muertes dan el doble de experiencia un rato.",  -- 1471
+        "%d absorbido",  -- 1472
+        "Lista a la derecha",  -- 1473
+        "Uno en el centro",  -- 1474
+        "%d sanaciones críticas",  -- 1475
+        "%d críticos",  -- 1476
+        "Sentencia",  -- 1477
+        "Grandes momentos: dónde",  -- 1478
+        "un bloque justo encima de los avisos de reutilización a la derecha de tu personaje, el más reciente junto a ellos y los anteriores subiendo por encima mientras se desvanecen, o uno a la vez en el centro",  -- 1479
+        "muestra cómo se ve y se siente un gran momento",  -- 1480
+        "conseguida",  -- 1481
+        "conseguida con otro objeto",  -- 1482
+        "aún no conseguida",  -- 1483
+        "Apariencia",  -- 1484
+        "Elige un conjunto para poner sus piezas en tu atuendo. %s lo guarda; no se paga nada antes.",  -- 1485
+        "Revisando tu colección...",  -- 1486
+        "Tu atuendo vuelve a estar como antes.",  -- 1487
+        "%s: %d de %d piezas puestas.",  -- 1488
+        "%d no se pudieron poner en este atuendo.",  -- 1489
+        "Un conjunto del que tienes piezas",  -- 1490
+        "%d conjuntos de los que tienes piezas",  -- 1491
+        "no puedes llevarlo",  -- 1492
+        "falta",  -- 1493
+        "Las %d piezas",  -- 1494
+        "%d de %d piezas",  -- 1495
+        "Falta: %s",  -- 1496
+        "Aún no hay conjuntos. Los objetos que comparten nombre, como Yelmo de hierro verde y Guanteletes de hierro verde, aparecen aquí en cuanto tienes uno.",  -- 1497
+        "Deshacer",  -- 1498
+        "¿Borrar el conjunto personalizado %s? No se puede recuperar.",  -- 1499
+        "Borrar",  -- 1500
+        "Apunta primero a un conjunto personalizado.",  -- 1501
+        "%s  Borrar conjunto personalizado",  -- 1502
     },
     frFR = {
         "erreur:",  -- 1
@@ -5806,211 +5815,214 @@ local TRANSLATIONS = {
         "Les guides montent cette étape en récoltant %s.",  -- 1292
         "%s : vous en avez %d, le plan en utilise %d",  -- 1293
         "pour %s",  -- 1294
-        "Le Mentor : ce que votre banque permet de fabriquer",  -- 1295
-        "Ce que votre banque permet de fabriquer",  -- 1296
-        "Rien de plus à fabriquer avec ce qu'il y a dans votre banque.",  -- 1297
-        "%d à fabriquer en comptant votre banque, dont %d seulement grâce à elle.",  -- 1298
-        "Le Mentor : %s %d > %d",  -- 1299
-        "Le Mentor",  -- 1300
-        "Plan de progression",  -- 1301
-        "ou",  -- 1302
-        "Récolter %s",  -- 1303
-        "à apprendre",  -- 1304
-        "Masquer",  -- 1305
-        "Le plan",  -- 1306
-        "Farmer ceci",  -- 1307
-        "Tout farmer",  -- 1308
-        "Avec la banque",  -- 1309
-        "Utiliser le plan",  -- 1310
-        "deux fois pour masquer",  -- 1311
-        "Rien à essayer ici.",  -- 1312
-        "%d ajouté(s) à la liste à farmer.",  -- 1313
-        "Rien ne manque : vous avez ce qu'il faut.",  -- 1314
-        "Ouvrez la fenêtre d'un métier pour faire un plan.",  -- 1315
-        "Le Mentor (plan de progression) : afficher / masquer",  -- 1316
-        "affiche le plan de progression de la dernière fenêtre de métier ouverte, avec les boutons de la manette dessus",  -- 1317
-        "À gauche des quêtes",  -- 1318
-        "À droite des quêtes",  -- 1319
-        "Sous les quêtes",  -- 1320
-        "La liste à farmer est pleine.",  -- 1321
-        "Liste à farmer : %s, %d voulu(s).",  -- 1322
-        "À farmer",  -- 1323
-        "%d de plus",  -- 1324
-        "Rien à farmer pour l'instant.",  -- 1325
-        "Une pile de plus",  -- 1326
-        "Retirer",  -- 1327
-        "Vider",  -- 1328
-        "Terminé",  -- 1329
-        "Tout retirer de la liste à farmer ?",  -- 1330
-        "Liste à farmer : choisir / terminé",  -- 1331
-        "Liste à farmer : ajouter l'objet pointé",  -- 1332
-        "Ce n'est pas sur la liste à farmer.",  -- 1333
-        "La liste à farmer est vide.",  -- 1334
-        "Liste à farmer : où elle se place",  -- 1335
-        "la liste à farmer à gauche de la liste de quêtes, à sa droite ou sous ses quêtes",  -- 1336
-        "la liste à farmer à côté de la liste de quêtes : choisir avec la manette ; add <objet> [combien], remove <objet>, clear, ou left / right / bottom pour sa place",  -- 1337
-        "Pourcentage de menace",  -- 1338
-        "votre part de la menace en chiffre à côté de l'icône de menace, sur le cadre de la cible et les barres de nom",  -- 1339
-        "Nombre de santé",  -- 1340
-        "la santé restante, abrégée (12.3k), sur la barre (pas sur les barres de nom compactes : le pourcentage y suffit)",  -- 1341
-        "Vos affaiblissements",  -- 1342
-        "vos affaiblissements sur l'unité, au-dessus de son nom, avec leur durée",  -- 1343
-        "Affaiblissements de tous",  -- 1344
-        "les affaiblissements que le jeu signale pour les barres de nom de tous, pas seulement les vôtres",  -- 1345
-        "Bonus de l'ennemi",  -- 1346
-        "les améliorations d'un ennemi à côté de ses affaiblissements : celles qui comptent (importantes, enragé, ou que vous pouvez dissiper ou voler), ou toutes si Seulement les effets qui comptent est désactivé",  -- 1347
-        "Icône de contrôle des foules",  -- 1348
-        "une grande icône avec sa durée quand l'unité est étourdie, immobilisée, effrayée...",  -- 1349
-        "Lueur d'aggro",  -- 1350
-        "une icône de bouclier et une lueur derrière le nom : rouge tant qu'il vous attaque, rouge et jaune quand vous êtes sur le point de l'attirer, jaune et bleu quand vous le perdez, bleu quand il n'est pas sur vous",  -- 1351
-        "Marqueur de quête",  -- 1352
-        "un repère doré sur les unités dont vos quêtes ont encore besoin",  -- 1353
-        "Animations des barres de nom",  -- 1354
-        "les barres apparaissent en fondu, la santé basse respire, le contrôle des foules scintille",  -- 1355
-        "Petite",  -- 1356
-        "Normale",  -- 1357
-        "Grande",  -- 1358
-        "Nom complet",  -- 1359
-        "Nom court",  -- 1360
-        "Sans nom",  -- 1361
-        "Complet",  -- 1362
-        "Minimal mini",  -- 1363
-        "Taille des barres d'info",  -- 1364
-        "la taille des barres sur les barres d'info : petites et fines, normales ou grandes (plus larges et plus hautes)",  -- 1365
-        "Noms sur les barres d'info",  -- 1366
-        "le nom sur une barre d'info avec barre de vie : en entier, raccourci ou omis (le cadre de la cible le donne en entier ; le niveau et l'icône de classe restent). Une barre d'info sans barre, celle d'un PNJ amical, garde toujours son nom",  -- 1367
-        "Style des barres d'info",  -- 1368
-        "les interrupteurs des barres d'info en une fois. Complet : tout. Minimal : pas de barre de ressource, de guilde ni de titre, noms courts. Minimal mini : petites barres avec la vie, vos affaiblissements et les améliorations qui comptent, niveau et classe, sans nom (le cadre de la cible l'a). La menace, les contrôles et les incantations voyantes restent toujours",  -- 1369
-        "Titres des joueurs",  -- 1370
-        "affiche le titre d'un joueur avec son nom",  -- 1371
-        "Guildes et métiers des PNJ",  -- 1372
-        "une ligne sous le nom : la guilde du joueur, ou ce que fait le PNJ",  -- 1373
-        "Barres des amis en combat",  -- 1374
-        "les plaques de nom amicales affichent santé, ressource et incantations tant que l'unité est en combat",  -- 1375
-        "Barres d'info amicales du jeu",  -- 1376
-        "laisser les barres amicales (votre groupe, les autres joueurs, les PNJ amicaux) à l'apparence du jeu ; les nôtres seulement sur les ennemis",  -- 1377
-        "Barres de ressource",  -- 1378
-        "une fine barre de mana, de rage ou d'énergie sous la barre de santé",  -- 1379
-        "Cible de l'incantation",  -- 1380
-        "qui est visé par une incantation, à côté du nom du sort",  -- 1381
-        "Pourcentage de santé",  -- 1382
-        "le pourcentage de santé sur la barre",  -- 1383
-        "Nom sur la barre de votre cible",  -- 1384
-        "désactivé : la barre de votre cible n'affiche ni nom ni niveau (le cadre de la cible les montre)",  -- 1385
-        "Niveaux sur les barres d'info",  -- 1386
-        "le niveau devant le nom d'un ennemi, coloré selon la difficulté",  -- 1387
-        "Barres de nom compactes",  -- 1388
-        "barres de nom environ moitié moins larges",  -- 1389
-        "Incantations ennemies marquées",  -- 1390
-        "l'incantation d'un ennemi clignote, gonfle et pulse de plus en plus vite jusqu'à son terme, pour pouvoir être interrompue à temps",  -- 1391
-        "Icônes de classe sur les barres de nom",  -- 1392
-        "l'icône de classe d'un joueur devant son nom, ami ou ennemi",  -- 1393
-        "Ce que font les PNJ, en icônes",  -- 1394
-        "une icône au-dessus des PNJ amicaux qui proposent quelque chose : un sac pour les marchands, une enclume pour les forgerons qui réparent, un livre pour les maîtres... (les icônes du jeu ; elles restent visibles même quand la barre attend d'être pointée)",  -- 1395
-        "PNJ amicaux seulement quand pointés",  -- 1396
-        "les barres des PNJ amicaux (marchands, donneurs de quêtes, habitants) ne s'affichent que lorsque vous les pointez, comme leur infobulle",  -- 1397
-        "Noms sur les objets avec lesquels vous pouvez interagir",  -- 1398
-        "un nom au-dessus des minerais, coffres, plaques et autres tant que vous leur faites face (désactivé : ils restent sans nom, l'invite du jeu dit déjà ce qu'ils sont)",  -- 1399
-        "Mini-plaques",  -- 1400
-        "les serviteurs, bestioles et ennemis gris qui ne donnent pas d'expérience ont une petite barre: une barre fine avec vos affaiblissements dessus et sans nom (une bestiole, sans barre, garde son nom; l'option du jeu décide s'ils ont une barre)",  -- 1401
-        "Barres de nom du groupe en donjon: noms seuls",  -- 1402
-        "dans un donjon ou un raid, le jeu dessine lui-même les barres de nom des joueurs alliés et les addons ne peuvent pas les modifier: les options propres au jeu y sont réglées pour les afficher comme des noms à la couleur de la classe, sans barres, comme les nôtres, et les barres du jeu reviennent pendant un combat (si les barres des alliés en combat sont activées); tout est remis en place à la sortie",  -- 1403
-        "Barres de nom du groupe en donjon: masquées",  -- 1404
-        "dans un donjon ou un raid, désactiver complètement les barres de nom du jeu pour les joueurs alliés (et les remettre comme vous les aviez à la sortie)",  -- 1405
-        "affiche ce que le jeu donne pour le nom de votre cible (pour le dépannage)",  -- 1406
-        "lister les barres d'info à l'écran et si elles portent notre apparence (pour le dépannage)",  -- 1407
-        "Bon, voyons.",  -- 1408
-        "Och, quel fatras.",  -- 1409
-        "Voyons, voyons...",  -- 1410
-        "Elune, donne-moi de la patience.",  -- 1411
-        "Par les naaru, quel fouillis.",  -- 1412
-        "Fichu sac.",  -- 1413
-        "Sac bien rangé, sac léger.",  -- 1414
-        "Bah. Trop de bric-à-brac.",  -- 1415
-        "Du poids mort, tout ça.",  -- 1416
-        "Patience. La Terre-Mère pourvoit.",  -- 1417
-        "Hé, qu'est-ce qu'on a là, mon ?",  -- 1418
-        "Quel désordre. Indigne de moi.",  -- 1419
-        "Le temps, c'est de l'argent. Comptons.",  -- 1420
-        "Ouais, ça fera l'affaire.",  -- 1421
-        "Elune soit remerciée.",  -- 1422
-        "La Lumière pourvoit.",  -- 1423
-        "Hrm. Ça ira.",  -- 1424
-        "Hm. Assez pour se battre.",  -- 1425
-        "Je voyage léger. Bien.",  -- 1426
-        "Acceptable. De justesse.",  -- 1427
-        "Plus une place de libre. La camelote rapporterait %s : la vendre fait de la place.",  -- 1428
-        "Plus une place de libre. Ce dont je n'ai pas besoin en route peut attendre à la banque.",  -- 1429
-        "Camelote : %d, %s ici. X vend celle que j'ai choisie ; Vente futée prend tout.",  -- 1430
-        "%d d'entre eux vont à la banque : elle en garde déjà, ou je les ai marqués. Déposer les range.",  -- 1431
-        "Plus que %d places. La camelote rapporterait %s chez n'importe quel marchand.",  -- 1432
-        "Plus que %d places. Il est temps de vendre ou de déposer quelques affaires.",  -- 1433
-        "Nouveau depuis mon dernier coup d'œil : %d. Le point doré marque chacun.",  -- 1434
-        "Bon à vendre : %d. Le filtre Vendre les rassemble, et chaque info-bulle dit où ça rapporte le plus.",  -- 1435
-        "Camelote : %d, %s. Le prochain marchand peut la prendre.",  -- 1436
-        "Juste l'essentiel. Rien qui vaille la peine d'être vendu.",  -- 1437
-        "Tout est en ordre, et %d places libres.",  -- 1438
-        "Votre équipement est réparé : %s.",  -- 1439
-        "Je peux réparer votre équipement pour %s ; une pièce cassée ne donne ni armure ni caractéristiques.",  -- 1440
-        "Vos sacs sont pleins. Je prends %d objets pour %s : Vente futée, et vous avez de nouveau de la place.",  -- 1441
-        "Je vous donne %s pour %d objets : la camelote, et ce que l'hôtel des ventes ne paierait pas mieux. Vente futée, et c'est fait.",  -- 1442
-        "Gardez les %d que l'hôtel des ventes réclame : il paie %s de plus que moi.",  -- 1443
-        "Vos sacs sont pleins. Vendez-moi quelque chose avant d'acheter.",  -- 1444
-        "Rien dans vos sacs que je paierais bien. Jetez un œil à mes marchandises.",  -- 1445
-        "%d de vos objets ont leur place ici : j'en garde déjà, ou vous les avez marqués. Déposer les range.",  -- 1446
-        "Je garde davantage de %d objets que vous portez. Retirer remplit vos sacs avant le départ.",  -- 1447
-        "Vos sacs sont presque pleins. Laissez-moi ce dont vous n'aurez pas besoin en route.",  -- 1448
-        "Tout est en sécurité chez moi, et vos sacs ont %d places libres.",  -- 1449
-        "Rien pour vous aujourd'hui. J'ai vérifié deux fois.",  -- 1450
-        "Lettres pour vous : %d, rien de joint. Lisez-les quand vous voulez.",  -- 1451
-        "Lettres pour vous : %d. Dedans : %s.",  -- 1452
-        "Tout prendre les vide d'un coup.",  -- 1453
-        "Contre remboursement : %d. Celles-là, vous les ouvrez et payez vous-même.",  -- 1454
-        "Vos sacs sont pleins : les objets attendent dans leurs lettres.",  -- 1455
-        "Où allons-nous ? Montrez un endroit et je vous dirai combien de temps dure le trajet.",  -- 1456
-        "%s : environ %s d'après la carte. Vous n'avez pas encore fait ce trajet.",  -- 1457
-        "%s : environ %s, d'après votre dernier vol là-bas.",  -- 1458
-        "%s : je ne peux pas encore dire combien de temps. Faites-le une fois et je saurai.",  -- 1459
-        "%d se sont échappés. Cette eau demande plus de compétence que la mienne : un appât aide, une meilleure canne aussi.",  -- 1460
-        "Pas d'appât sur l'hameçon. Il ajoute à ma compétence, donc moins s'échappent.",  -- 1461
-        "L'appât est presque épuisé. Un autre sur l'hameçon garde ma compétence.",  -- 1462
-        "Poissons d'ici que je n'ai pas encore pris : %d. On continue de lancer.",  -- 1463
-        "J'ai pris tous les poissons de cette eau. Ailleurs, alors.",  -- 1464
-        "Rien de pris encore. Le premier poisson de chaque eau va ici.",  -- 1465
-        "Espèces prises : %d. Chaque eau en cache quelques autres : le panneau de pêche montre un ? pour chacune que je n'y ai pas prise.",  -- 1466
-        "Reposé près du feu : les %d prochains points d'expérience des victoires comptent double.",  -- 1467
-        "Aucun repos en réserve. Une nuit à l'auberge ou en ville, et les victoires donnent double expérience pendant un moment.",  -- 1468
-        "%d absorbés",  -- 1469
-        "Liste à droite",  -- 1470
-        "Un au centre",  -- 1471
-        "%d soins critiques",  -- 1472
-        "%d critiques",  -- 1473
-        "Jugement",  -- 1474
-        "Grands moments : où",  -- 1475
-        "un bloc juste au-dessus des annonces de temps de recharge à droite de votre personnage, le plus récent au plus près et les précédents montant au-dessus en s'effaçant, ou un seul à la fois au centre",  -- 1476
-        "montre l'aspect et la sensation d'un grand moment",  -- 1477
-        "collectée",  -- 1478
-        "collectée via un autre objet",  -- 1479
-        "pas encore collectée",  -- 1480
-        "Apparence",  -- 1481
-        "Choisissez un ensemble pour mettre ses pièces sur votre tenue. %s la garde ; rien n'est payé avant.",  -- 1482
-        "Examen de votre collection...",  -- 1483
-        "Votre tenue est revenue telle qu'elle était.",  -- 1484
-        "%s : %d pièces sur %d mises en place.",  -- 1485
-        "%d n'ont pas pu aller sur cette tenue.",  -- 1486
-        "Un ensemble dont vous avez des pièces",  -- 1487
-        "%d ensembles dont vous avez des pièces",  -- 1488
-        "vous ne pouvez pas le porter",  -- 1489
-        "manquant",  -- 1490
-        "Les %d pièces",  -- 1491
-        "%d pièces sur %d",  -- 1492
-        "Manque : %s",  -- 1493
-        "Pas encore d'ensemble. Les objets qui partagent un nom, comme Heaume en fer vert et Gantelets en fer vert, apparaissent ici dès que vous en avez un.",  -- 1494
-        "Annuler",  -- 1495
-        "Supprimer l'ensemble personnalisé %s ? Il ne pourra pas être récupéré.",  -- 1496
-        "Supprimer",  -- 1497
-        "Visez d'abord un ensemble personnalisé.",  -- 1498
-        "%s  Supprimer l'ensemble personnalisé",  -- 1499
+        "Moins cher à acheter qu'à fabriquer avec %s",  -- 1295
+        "Fabriqué avec %s",  -- 1296
+        "Le Mentor : ce que votre banque permet de fabriquer",  -- 1297
+        "Ce que votre banque permet de fabriquer",  -- 1298
+        "Rien de plus à fabriquer avec ce qu'il y a dans votre banque.",  -- 1299
+        "%d à fabriquer en comptant votre banque, dont %d seulement grâce à elle.",  -- 1300
+        "Le Mentor : %s %d > %d",  -- 1301
+        "Le Mentor",  -- 1302
+        "Plan de progression",  -- 1303
+        "ou",  -- 1304
+        "Récolter %s",  -- 1305
+        "à apprendre",  -- 1306
+        "moins cher à acheter",  -- 1307
+        "Masquer",  -- 1308
+        "Le plan",  -- 1309
+        "Farmer ceci",  -- 1310
+        "Tout farmer",  -- 1311
+        "Avec la banque",  -- 1312
+        "Utiliser le plan",  -- 1313
+        "deux fois pour masquer",  -- 1314
+        "Rien à essayer ici.",  -- 1315
+        "%d ajouté(s) à la liste à farmer.",  -- 1316
+        "Rien ne manque : vous avez ce qu'il faut.",  -- 1317
+        "Ouvrez la fenêtre d'un métier pour faire un plan.",  -- 1318
+        "Le Mentor (plan de progression) : afficher / masquer",  -- 1319
+        "affiche le plan de progression de la dernière fenêtre de métier ouverte, avec les boutons de la manette dessus",  -- 1320
+        "À gauche des quêtes",  -- 1321
+        "À droite des quêtes",  -- 1322
+        "Sous les quêtes",  -- 1323
+        "La liste à farmer est pleine.",  -- 1324
+        "Liste à farmer : %s, %d voulu(s).",  -- 1325
+        "À farmer",  -- 1326
+        "%d de plus",  -- 1327
+        "Rien à farmer pour l'instant.",  -- 1328
+        "Une pile de plus",  -- 1329
+        "Retirer",  -- 1330
+        "Vider",  -- 1331
+        "Terminé",  -- 1332
+        "Tout retirer de la liste à farmer ?",  -- 1333
+        "Liste à farmer : choisir / terminé",  -- 1334
+        "Liste à farmer : ajouter l'objet pointé",  -- 1335
+        "Ce n'est pas sur la liste à farmer.",  -- 1336
+        "La liste à farmer est vide.",  -- 1337
+        "Liste à farmer : où elle se place",  -- 1338
+        "la liste à farmer à gauche de la liste de quêtes, à sa droite ou sous ses quêtes",  -- 1339
+        "la liste à farmer à côté de la liste de quêtes : choisir avec la manette ; add <objet> [combien], remove <objet>, clear, ou left / right / bottom pour sa place",  -- 1340
+        "Pourcentage de menace",  -- 1341
+        "votre part de la menace en chiffre à côté de l'icône de menace, sur le cadre de la cible et les barres de nom",  -- 1342
+        "Nombre de santé",  -- 1343
+        "la santé restante, abrégée (12.3k), sur la barre (pas sur les barres de nom compactes : le pourcentage y suffit)",  -- 1344
+        "Vos affaiblissements",  -- 1345
+        "vos affaiblissements sur l'unité, au-dessus de son nom, avec leur durée",  -- 1346
+        "Affaiblissements de tous",  -- 1347
+        "les affaiblissements que le jeu signale pour les barres de nom de tous, pas seulement les vôtres",  -- 1348
+        "Bonus de l'ennemi",  -- 1349
+        "les améliorations d'un ennemi à côté de ses affaiblissements : celles qui comptent (importantes, enragé, ou que vous pouvez dissiper ou voler), ou toutes si Seulement les effets qui comptent est désactivé",  -- 1350
+        "Icône de contrôle des foules",  -- 1351
+        "une grande icône avec sa durée quand l'unité est étourdie, immobilisée, effrayée...",  -- 1352
+        "Lueur d'aggro",  -- 1353
+        "une icône de bouclier et une lueur derrière le nom : rouge tant qu'il vous attaque, rouge et jaune quand vous êtes sur le point de l'attirer, jaune et bleu quand vous le perdez, bleu quand il n'est pas sur vous",  -- 1354
+        "Marqueur de quête",  -- 1355
+        "un repère doré sur les unités dont vos quêtes ont encore besoin",  -- 1356
+        "Animations des barres de nom",  -- 1357
+        "les barres apparaissent en fondu, la santé basse respire, le contrôle des foules scintille",  -- 1358
+        "Petite",  -- 1359
+        "Normale",  -- 1360
+        "Grande",  -- 1361
+        "Nom complet",  -- 1362
+        "Nom court",  -- 1363
+        "Sans nom",  -- 1364
+        "Complet",  -- 1365
+        "Minimal mini",  -- 1366
+        "Taille des barres d'info",  -- 1367
+        "la taille des barres sur les barres d'info : petites et fines, normales ou grandes (plus larges et plus hautes)",  -- 1368
+        "Noms sur les barres d'info",  -- 1369
+        "le nom sur une barre d'info avec barre de vie : en entier, raccourci ou omis (le cadre de la cible le donne en entier ; le niveau et l'icône de classe restent). Une barre d'info sans barre, celle d'un PNJ amical, garde toujours son nom",  -- 1370
+        "Style des barres d'info",  -- 1371
+        "les interrupteurs des barres d'info en une fois. Complet : tout. Minimal : pas de barre de ressource, de guilde ni de titre, noms courts. Minimal mini : petites barres avec la vie, vos affaiblissements et les améliorations qui comptent, niveau et classe, sans nom (le cadre de la cible l'a). La menace, les contrôles et les incantations voyantes restent toujours",  -- 1372
+        "Titres des joueurs",  -- 1373
+        "affiche le titre d'un joueur avec son nom",  -- 1374
+        "Guildes et métiers des PNJ",  -- 1375
+        "une ligne sous le nom : la guilde du joueur, ou ce que fait le PNJ",  -- 1376
+        "Barres des amis en combat",  -- 1377
+        "les plaques de nom amicales affichent santé, ressource et incantations tant que l'unité est en combat",  -- 1378
+        "Barres d'info amicales du jeu",  -- 1379
+        "laisser les barres amicales (votre groupe, les autres joueurs, les PNJ amicaux) à l'apparence du jeu ; les nôtres seulement sur les ennemis",  -- 1380
+        "Barres de ressource",  -- 1381
+        "une fine barre de mana, de rage ou d'énergie sous la barre de santé",  -- 1382
+        "Cible de l'incantation",  -- 1383
+        "qui est visé par une incantation, à côté du nom du sort",  -- 1384
+        "Pourcentage de santé",  -- 1385
+        "le pourcentage de santé sur la barre",  -- 1386
+        "Nom sur la barre de votre cible",  -- 1387
+        "désactivé : la barre de votre cible n'affiche ni nom ni niveau (le cadre de la cible les montre)",  -- 1388
+        "Niveaux sur les barres d'info",  -- 1389
+        "le niveau devant le nom d'un ennemi, coloré selon la difficulté",  -- 1390
+        "Barres de nom compactes",  -- 1391
+        "barres de nom environ moitié moins larges",  -- 1392
+        "Incantations ennemies marquées",  -- 1393
+        "l'incantation d'un ennemi clignote, gonfle et pulse de plus en plus vite jusqu'à son terme, pour pouvoir être interrompue à temps",  -- 1394
+        "Icônes de classe sur les barres de nom",  -- 1395
+        "l'icône de classe d'un joueur devant son nom, ami ou ennemi",  -- 1396
+        "Ce que font les PNJ, en icônes",  -- 1397
+        "une icône au-dessus des PNJ amicaux qui proposent quelque chose : un sac pour les marchands, une enclume pour les forgerons qui réparent, un livre pour les maîtres... (les icônes du jeu ; elles restent visibles même quand la barre attend d'être pointée)",  -- 1398
+        "PNJ amicaux seulement quand pointés",  -- 1399
+        "les barres des PNJ amicaux (marchands, donneurs de quêtes, habitants) ne s'affichent que lorsque vous les pointez, comme leur infobulle",  -- 1400
+        "Noms sur les objets avec lesquels vous pouvez interagir",  -- 1401
+        "un nom au-dessus des minerais, coffres, plaques et autres tant que vous leur faites face (désactivé : ils restent sans nom, l'invite du jeu dit déjà ce qu'ils sont)",  -- 1402
+        "Mini-plaques",  -- 1403
+        "les serviteurs, bestioles et ennemis gris qui ne donnent pas d'expérience ont une petite barre: une barre fine avec vos affaiblissements dessus et sans nom (une bestiole, sans barre, garde son nom; l'option du jeu décide s'ils ont une barre)",  -- 1404
+        "Barres de nom du groupe en donjon: noms seuls",  -- 1405
+        "dans un donjon ou un raid, le jeu dessine lui-même les barres de nom des joueurs alliés et les addons ne peuvent pas les modifier: les options propres au jeu y sont réglées pour les afficher comme des noms à la couleur de la classe, sans barres, comme les nôtres, et les barres du jeu reviennent pendant un combat (si les barres des alliés en combat sont activées); tout est remis en place à la sortie",  -- 1406
+        "Barres de nom du groupe en donjon: masquées",  -- 1407
+        "dans un donjon ou un raid, désactiver complètement les barres de nom du jeu pour les joueurs alliés (et les remettre comme vous les aviez à la sortie)",  -- 1408
+        "affiche ce que le jeu donne pour le nom de votre cible (pour le dépannage)",  -- 1409
+        "lister les barres d'info à l'écran et si elles portent notre apparence (pour le dépannage)",  -- 1410
+        "Bon, voyons.",  -- 1411
+        "Och, quel fatras.",  -- 1412
+        "Voyons, voyons...",  -- 1413
+        "Elune, donne-moi de la patience.",  -- 1414
+        "Par les naaru, quel fouillis.",  -- 1415
+        "Fichu sac.",  -- 1416
+        "Sac bien rangé, sac léger.",  -- 1417
+        "Bah. Trop de bric-à-brac.",  -- 1418
+        "Du poids mort, tout ça.",  -- 1419
+        "Patience. La Terre-Mère pourvoit.",  -- 1420
+        "Hé, qu'est-ce qu'on a là, mon ?",  -- 1421
+        "Quel désordre. Indigne de moi.",  -- 1422
+        "Le temps, c'est de l'argent. Comptons.",  -- 1423
+        "Ouais, ça fera l'affaire.",  -- 1424
+        "Elune soit remerciée.",  -- 1425
+        "La Lumière pourvoit.",  -- 1426
+        "Hrm. Ça ira.",  -- 1427
+        "Hm. Assez pour se battre.",  -- 1428
+        "Je voyage léger. Bien.",  -- 1429
+        "Acceptable. De justesse.",  -- 1430
+        "Plus une place de libre. La camelote rapporterait %s : la vendre fait de la place.",  -- 1431
+        "Plus une place de libre. Ce dont je n'ai pas besoin en route peut attendre à la banque.",  -- 1432
+        "Camelote : %d, %s ici. X vend celle que j'ai choisie ; Vente futée prend tout.",  -- 1433
+        "%d d'entre eux vont à la banque : elle en garde déjà, ou je les ai marqués. Déposer les range.",  -- 1434
+        "Plus que %d places. La camelote rapporterait %s chez n'importe quel marchand.",  -- 1435
+        "Plus que %d places. Il est temps de vendre ou de déposer quelques affaires.",  -- 1436
+        "Nouveau depuis mon dernier coup d'œil : %d. Le point doré marque chacun.",  -- 1437
+        "Bon à vendre : %d. Le filtre Vendre les rassemble, et chaque info-bulle dit où ça rapporte le plus.",  -- 1438
+        "Camelote : %d, %s. Le prochain marchand peut la prendre.",  -- 1439
+        "Juste l'essentiel. Rien qui vaille la peine d'être vendu.",  -- 1440
+        "Tout est en ordre, et %d places libres.",  -- 1441
+        "Votre équipement est réparé : %s.",  -- 1442
+        "Je peux réparer votre équipement pour %s ; une pièce cassée ne donne ni armure ni caractéristiques.",  -- 1443
+        "Vos sacs sont pleins. Je prends %d objets pour %s : Vente futée, et vous avez de nouveau de la place.",  -- 1444
+        "Je vous donne %s pour %d objets : la camelote, et ce que l'hôtel des ventes ne paierait pas mieux. Vente futée, et c'est fait.",  -- 1445
+        "Gardez les %d que l'hôtel des ventes réclame : il paie %s de plus que moi.",  -- 1446
+        "Vos sacs sont pleins. Vendez-moi quelque chose avant d'acheter.",  -- 1447
+        "Rien dans vos sacs que je paierais bien. Jetez un œil à mes marchandises.",  -- 1448
+        "%d de vos objets ont leur place ici : j'en garde déjà, ou vous les avez marqués. Déposer les range.",  -- 1449
+        "Je garde davantage de %d objets que vous portez. Retirer remplit vos sacs avant le départ.",  -- 1450
+        "Vos sacs sont presque pleins. Laissez-moi ce dont vous n'aurez pas besoin en route.",  -- 1451
+        "Tout est en sécurité chez moi, et vos sacs ont %d places libres.",  -- 1452
+        "Rien pour vous aujourd'hui. J'ai vérifié deux fois.",  -- 1453
+        "Lettres pour vous : %d, rien de joint. Lisez-les quand vous voulez.",  -- 1454
+        "Lettres pour vous : %d. Dedans : %s.",  -- 1455
+        "Tout prendre les vide d'un coup.",  -- 1456
+        "Contre remboursement : %d. Celles-là, vous les ouvrez et payez vous-même.",  -- 1457
+        "Vos sacs sont pleins : les objets attendent dans leurs lettres.",  -- 1458
+        "Où allons-nous ? Montrez un endroit et je vous dirai combien de temps dure le trajet.",  -- 1459
+        "%s : environ %s d'après la carte. Vous n'avez pas encore fait ce trajet.",  -- 1460
+        "%s : environ %s, d'après votre dernier vol là-bas.",  -- 1461
+        "%s : je ne peux pas encore dire combien de temps. Faites-le une fois et je saurai.",  -- 1462
+        "%d se sont échappés. Cette eau demande plus de compétence que la mienne : un appât aide, une meilleure canne aussi.",  -- 1463
+        "Pas d'appât sur l'hameçon. Il ajoute à ma compétence, donc moins s'échappent.",  -- 1464
+        "L'appât est presque épuisé. Un autre sur l'hameçon garde ma compétence.",  -- 1465
+        "Poissons d'ici que je n'ai pas encore pris : %d. On continue de lancer.",  -- 1466
+        "J'ai pris tous les poissons de cette eau. Ailleurs, alors.",  -- 1467
+        "Rien de pris encore. Le premier poisson de chaque eau va ici.",  -- 1468
+        "Espèces prises : %d. Chaque eau en cache quelques autres : le panneau de pêche montre un ? pour chacune que je n'y ai pas prise.",  -- 1469
+        "Reposé près du feu : les %d prochains points d'expérience des victoires comptent double.",  -- 1470
+        "Aucun repos en réserve. Une nuit à l'auberge ou en ville, et les victoires donnent double expérience pendant un moment.",  -- 1471
+        "%d absorbés",  -- 1472
+        "Liste à droite",  -- 1473
+        "Un au centre",  -- 1474
+        "%d soins critiques",  -- 1475
+        "%d critiques",  -- 1476
+        "Jugement",  -- 1477
+        "Grands moments : où",  -- 1478
+        "un bloc juste au-dessus des annonces de temps de recharge à droite de votre personnage, le plus récent au plus près et les précédents montant au-dessus en s'effaçant, ou un seul à la fois au centre",  -- 1479
+        "montre l'aspect et la sensation d'un grand moment",  -- 1480
+        "collectée",  -- 1481
+        "collectée via un autre objet",  -- 1482
+        "pas encore collectée",  -- 1483
+        "Apparence",  -- 1484
+        "Choisissez un ensemble pour mettre ses pièces sur votre tenue. %s la garde ; rien n'est payé avant.",  -- 1485
+        "Examen de votre collection...",  -- 1486
+        "Votre tenue est revenue telle qu'elle était.",  -- 1487
+        "%s : %d pièces sur %d mises en place.",  -- 1488
+        "%d n'ont pas pu aller sur cette tenue.",  -- 1489
+        "Un ensemble dont vous avez des pièces",  -- 1490
+        "%d ensembles dont vous avez des pièces",  -- 1491
+        "vous ne pouvez pas le porter",  -- 1492
+        "manquant",  -- 1493
+        "Les %d pièces",  -- 1494
+        "%d pièces sur %d",  -- 1495
+        "Manque : %s",  -- 1496
+        "Pas encore d'ensemble. Les objets qui partagent un nom, comme Heaume en fer vert et Gantelets en fer vert, apparaissent ici dès que vous en avez un.",  -- 1497
+        "Annuler",  -- 1498
+        "Supprimer l'ensemble personnalisé %s ? Il ne pourra pas être récupéré.",  -- 1499
+        "Supprimer",  -- 1500
+        "Visez d'abord un ensemble personnalisé.",  -- 1501
+        "%s  Supprimer l'ensemble personnalisé",  -- 1502
     },
     itIT = {
         "errore:",  -- 1
@@ -7307,211 +7319,214 @@ local TRANSLATIONS = {
         "Le guide salgono questo tratto raccogliendo %s.",  -- 1292
         "%s: ne hai %d, il piano ne usa %d",  -- 1293
         "per %s",  -- 1294
-        "Il Mentore: cosa ti fa creare la tua banca",  -- 1295
-        "Cosa puoi creare con la banca",  -- 1296
-        "Con ciò che hai in banca non si crea nient'altro.",  -- 1297
-        "%d che puoi creare contando la banca, %d solo grazie a lei.",  -- 1298
-        "Il Mentore: %s %d > %d",  -- 1299
-        "Il Mentore",  -- 1300
-        "Piano di avanzamento",  -- 1301
-        "o",  -- 1302
-        "Raccogli %s",  -- 1303
-        "da imparare",  -- 1304
-        "Nascondi",  -- 1305
-        "Il piano",  -- 1306
-        "Farma questo",  -- 1307
-        "Farma tutto",  -- 1308
-        "Con la banca",  -- 1309
-        "Usa il piano",  -- 1310
-        "due volte per nascondere",  -- 1311
-        "Niente da provare qui.",  -- 1312
-        "%d aggiunti alla lista da farmare.",  -- 1313
-        "Non manca niente: hai quello che serve.",  -- 1314
-        "Apri la finestra di una professione per fare un piano.",  -- 1315
-        "Il Mentore (piano di avanzamento): mostra / nascondi",  -- 1316
-        "mostra il piano di avanzamento dell'ultima finestra di professione aperta, con i pulsanti del controller",  -- 1317
-        "A sinistra delle missioni",  -- 1318
-        "A destra delle missioni",  -- 1319
-        "Sotto le missioni",  -- 1320
-        "La lista da farmare è piena.",  -- 1321
-        "Lista da farmare: %s, %d voluti.",  -- 1322
-        "Da farmare",  -- 1323
-        "altri %d",  -- 1324
-        "Ancora niente da farmare.",  -- 1325
-        "Una pila in più",  -- 1326
-        "Togli",  -- 1327
-        "Svuota",  -- 1328
-        "Fatto",  -- 1329
-        "Togliere tutto dalla lista da farmare?",  -- 1330
-        "Lista da farmare: scegli / fatto",  -- 1331
-        "Lista da farmare: aggiungi l'oggetto indicato",  -- 1332
-        "Non è nella lista da farmare.",  -- 1333
-        "La lista da farmare è vuota.",  -- 1334
-        "Lista da farmare: dove si trova",  -- 1335
-        "la lista da farmare a sinistra dell'elenco delle missioni, alla sua destra o sotto le sue missioni",  -- 1336
-        "la lista da farmare accanto all'elenco delle missioni: scegli col controller; add <oggetto> [quanti], remove <oggetto>, clear, o left / right / bottom per la posizione",  -- 1337
-        "Percentuale di minaccia",  -- 1338
-        "la tua parte di minaccia come numero accanto all'icona della minaccia, sul riquadro del bersaglio e sulle barre del nome",  -- 1339
-        "Numero della salute",  -- 1340
-        "la salute rimasta, abbreviata (12.3k), sulla barra (non sulle targhette compatte: lì basta la percentuale)",  -- 1341
-        "I tuoi debuff",  -- 1342
-        "i tuoi debuff sull'unità, sopra il suo nome, con il loro tempo",  -- 1343
-        "Malus di tutti",  -- 1344
-        "i malus che il gioco segna per le barre dei nomi di tutti, non solo i tuoi",  -- 1345
-        "Bonus del nemico",  -- 1346
-        "i benefici di un nemico accanto alle sue penalità: quelli che contano (importanti, infuriato o che puoi dissolvere o rubare), o tutti se Solo gli effetti che contano è disattivato",  -- 1347
-        "Icona di controllo di massa",  -- 1348
-        "una grande icona con il tempo quando l'unità è stordita, immobilizzata, impaurita...",  -- 1349
-        "Bagliore di aggro",  -- 1350
-        "un'icona a scudo e un bagliore dietro il nome: rosso mentre ti attacca, rosso e giallo quando stai per attirarlo, giallo e blu quando lo stai perdendo, blu quando non è su di te",  -- 1351
-        "Indicatore missione",  -- 1352
-        "un indicatore dorato sulle unità di cui le tue missioni hanno ancora bisogno",  -- 1353
-        "Animazioni delle targhette",  -- 1354
-        "le targhette appaiono in dissolvenza, la salute bassa respira, il controllo delle masse brilla",  -- 1355
-        "Piccola",  -- 1356
-        "Normale",  -- 1357
-        "Grande",  -- 1358
-        "Nome intero",  -- 1359
-        "Nome breve",  -- 1360
-        "Nessun nome",  -- 1361
-        "Completo",  -- 1362
-        "Minimale mini",  -- 1363
-        "Dimensione delle targhette",  -- 1364
-        "quanto sono grandi le barre delle targhette: piccole e sottili, normali o grandi (più larghe e più alte)",  -- 1365
-        "Nomi sulle targhette",  -- 1366
-        "il nome su una targhetta con barra della salute: intero, accorciato o tolto (il riquadro del bersaglio lo mostra intero; livello e icona di classe restano). Una targhetta senza barra, quella di un PNG amichevole, tiene sempre il suo nome",  -- 1367
-        "Aspetto delle targhette",  -- 1368
-        "gli interruttori delle targhette in un colpo. Completo: tutto. Minimale: niente barra della risorsa, gilda o titolo, nomi brevi. Minimale mini: barre piccole con la salute, i tuoi indebolimenti e i potenziamenti che contano, livello e classe, nessun nome (lo ha il riquadro del bersaglio). Minaccia, controllo e lanci vistosi restano sempre",  -- 1369
-        "Titoli dei giocatori",  -- 1370
-        "mostra il titolo di un giocatore insieme al suo nome",  -- 1371
-        "Gilde e mestieri dei PNG",  -- 1372
-        "una riga sotto il nome: la gilda del giocatore, o cosa fa il PNG",  -- 1373
-        "Barre per gli amici in combattimento",  -- 1374
-        "le targhette amichevoli mostrano salute, risorsa e lanci finché quell'unità è in combattimento",  -- 1375
-        "Targhette amiche del gioco",  -- 1376
-        "lascia le targhette amiche (il tuo gruppo, altri giocatori, PNG amici) all'aspetto del gioco; le nostre solo sui nemici",  -- 1377
-        "Barre delle risorse",  -- 1378
-        "una sottile barra di mana, rabbia o energia sotto la barra della salute",  -- 1379
-        "Bersaglio del lancio",  -- 1380
-        "a chi è diretto un lancio, accanto al nome dell'incantesimo",  -- 1381
-        "Percentuale di salute",  -- 1382
-        "la percentuale di salute sulla barra",  -- 1383
-        "Nome sulla barra del bersaglio",  -- 1384
-        "disattivato: la barra del tuo bersaglio non mostra nome né livello (li mostra il riquadro del bersaglio)",  -- 1385
-        "Livelli sulle barre del nome",  -- 1386
-        "il livello davanti al nome di un nemico, colorato in base alla difficoltà",  -- 1387
-        "Targhette compatte",  -- 1388
-        "targhette larghe circa la metà",  -- 1389
-        "Lanci nemici vistosi",  -- 1390
-        "il lancio di un nemico lampeggia, si ingrandisce e pulsa sempre più veloce finché non va a segno, così da poterlo interrompere in tempo",  -- 1391
-        "Icone di classe sulle targhette",  -- 1392
-        "l'icona di classe di un giocatore davanti al nome, amico o nemico",  -- 1393
-        "Cosa fanno i PNG, come icone",  -- 1394
-        "un'icona sopra i PNG amichevoli che offrono qualcosa: una borsa sui mercanti, un'incudine sui fabbri che riparano, un libro sugli istruttori... (le icone del gioco; si vedono anche mentre la targhetta aspetta di essere indicata)",  -- 1395
-        "PNG amichevoli solo se puntati",  -- 1396
-        "le targhette dei PNG amichevoli (venditori, assegnatori di missioni, cittadini) compaiono solo mentre li punti, come il loro tooltip",  -- 1397
-        "Nomi sulle cose con cui puoi interagire",  -- 1398
-        "un nome sopra minerali, forzieri, targhe e simili mentre li hai di fronte (disattivato: restano senza nome, il messaggio del gioco dice già cosa sono)",  -- 1399
-        "Mini targhette",  -- 1400
-        "servitori, animaletti e nemici grigi che non danno esperienza hanno una piccola targhetta: una barra sottile con i tuoi effetti negativi sopra e senza nome (un animaletto, senza barra, mantiene il nome; l'opzione del gioco decide se hanno targhette)",  -- 1401
-        "Barre del nome del gruppo nelle spedizioni: solo nomi",  -- 1402
-        "dentro una spedizione o un'incursione il gioco disegna da sé le barre del nome dei giocatori amici e gli addon non possono cambiarle: lì le opzioni proprie del gioco vengono impostate per mostrarle come nomi nel colore della classe, senza barre, come le nostre, e le barre del gioco tornano mentre combatti (se le barre per gli amici in combattimento sono attive); tutto viene ripristinato quando esci",  -- 1403
-        "Barre del nome del gruppo nelle spedizioni: nascoste",  -- 1404
-        "dentro una spedizione o un'incursione, spegni del tutto le barre del nome del gioco per i giocatori amici (e rimettile come le avevi quando esci)",  -- 1405
-        "mostra cosa fornisce il gioco per il nome del tuo bersaglio (per la risoluzione dei problemi)",  -- 1406
-        "elenca le targhette sullo schermo e se hanno il nostro aspetto (per la risoluzione dei problemi)",  -- 1407
-        "Bene, allora.",  -- 1408
-        "Ah, che mucchio.",  -- 1409
-        "Vediamo, vediamo...",  -- 1410
-        "Elune, dammi pazienza.",  -- 1411
-        "Per i naaru, che confusione.",  -- 1412
-        "Maledetto zaino.",  -- 1413
-        "Zaino in ordine, zaino leggero.",  -- 1414
-        "Bah. Troppa roba.",  -- 1415
-        "Peso morto, tutto quanto.",  -- 1416
-        "Pazienza. La Madre Terra provvede.",  -- 1417
-        "Ehi, cosa abbiamo qui, amico?",  -- 1418
-        "Che disordine. Sconveniente.",  -- 1419
-        "Il tempo è denaro. Contiamo.",  -- 1420
-        "Sì, può andare.",  -- 1421
-        "Sia ringraziata Elune.",  -- 1422
-        "La Luce provvede.",  -- 1423
-        "Hrm. Abbastanza.",  -- 1424
-        "Hm. Basta per combattere.",  -- 1425
-        "Viaggio leggero. Bene.",  -- 1426
-        "Accettabile. A malapena.",  -- 1427
-        "Non c'è un posto libero. La robaccia frutterebbe %s: venderla fa spazio.",  -- 1428
-        "Non c'è un posto libero. Quello che non mi serve in viaggio può aspettare in banca.",  -- 1429
-        "Robaccia: %d, vale %s qui. X vende quella che ho scelto; Vendita furba prende tutto.",  -- 1430
-        "%d di questi vanno in banca: ne contiene già altri uguali, o li ho segnati. Deposita li mette via.",  -- 1431
-        "Solo %d posti liberi. La robaccia frutterebbe %s da qualsiasi mercante.",  -- 1432
-        "Solo %d posti liberi. È ora di vendere o depositare qualcosa.",  -- 1433
-        "Nuovi dall'ultima occhiata: %d. Il punto dorato segna ciascuno.",  -- 1434
-        "Da vendere: %d. Il filtro Vendi li raccoglie, e ogni descrizione dice dove rende di più.",  -- 1435
-        "Robaccia: %d, vale %s. Al prossimo mercante.",  -- 1436
-        "Solo l'essenziale. Niente che valga la pena vendere.",  -- 1437
-        "Tutto in ordine, e %d posti liberi.",  -- 1438
-        "Il tuo equipaggiamento è riparato: %s.",  -- 1439
-        "Posso riparare il tuo equipaggiamento per %s; un pezzo rotto non ti dà né armatura né statistiche.",  -- 1440
-        "Le tue borse sono piene. Prendo %d cose per %s: Vendita furba, e hai di nuovo spazio.",  -- 1441
-        "Ti do %s per %d cose: la robaccia e ciò che la casa d'aste non pagherebbe di più. Vendita furba, ed è fatta.",  -- 1442
-        "Tieni i %d che vuole la casa d'aste: paga %s più di me.",  -- 1443
-        "Le tue borse sono piene. Vendimi qualcosa prima di comprare.",  -- 1444
-        "Niente nelle tue borse per cui pagherei bene. Dai un'occhiata alla mia merce.",  -- 1445
-        "%d delle cose che porti vanno qui: ne custodisco altre uguali, o le hai segnate. Deposita le mette via.",  -- 1446
-        "Custodisco altre scorte di %d cose che porti. Preleva riempie le borse prima di partire.",  -- 1447
-        "Le tue borse sono quasi piene. Lascia a me ciò che non ti serve in viaggio.",  -- 1448
-        "Tutto al sicuro con me, e le tue borse hanno %d posti liberi.",  -- 1449
-        "Oggi niente per te. Ho controllato due volte.",  -- 1450
-        "Lettere per te: %d, niente allegato. Leggile quando vuoi.",  -- 1451
-        "Lettere per te: %d. Dentro: %s.",  -- 1452
-        "Prendi tutto le svuota in un colpo.",  -- 1453
-        "Contrassegno: %d. Quelle le apri e paghi tu.",  -- 1454
-        "Le tue borse sono piene: gli oggetti aspettano nelle loro lettere.",  -- 1455
-        "Dove si va? Indica un luogo e ti dirò quanto dura il volo.",  -- 1456
-        "%s: circa %s secondo la mappa. Quella rotta non l'hai ancora volata.",  -- 1457
-        "%s: circa %s, secondo il tuo ultimo volo lì.",  -- 1458
-        "%s: non so ancora dirti quanto. Volalo una volta e lo saprò.",  -- 1459
-        "Ne sono scappati %d. Quest'acqua chiede più abilità di quanta ne ho: l'esca aiuta, e anche una canna migliore.",  -- 1460
-        "Niente esca sull'amo. Aumenta la mia abilità, così ne scappano meno.",  -- 1461
-        "L'esca è quasi finita. Un'altra sull'amo tiene alta la mia abilità.",  -- 1462
-        "Pesci di qui che non ho ancora preso: %d. Continuo a lanciare.",  -- 1463
-        "Ho preso ogni pesce di quest'acqua. Altrove, allora.",  -- 1464
-        "Ancora niente preso. Il primo pesce di ogni acqua va qui.",  -- 1465
-        "Specie prese: %d. Ogni acqua ne nasconde altre: il pannello di pesca mostra un ? per ciascuna che non ho preso lì.",  -- 1466
-        "Riposato accanto al fuoco: i prossimi %d punti esperienza dalle uccisioni valgono doppio.",  -- 1467
-        "Nessun riposo accumulato. Una notte in una locanda o in città, e le uccisioni danno esperienza doppia per un po'.",  -- 1468
-        "%d assorbiti",  -- 1469
-        "Elenco a destra",  -- 1470
-        "Uno al centro",  -- 1471
-        "%d cure critiche",  -- 1472
-        "%d critici",  -- 1473
-        "Giudizio",  -- 1474
-        "Grandi momenti: dove",  -- 1475
-        "un blocco appena sopra gli avvisi di ricarica a destra del tuo personaggio, il più recente vicino a loro e i precedenti che salgono sopra mentre svaniscono, o uno alla volta al centro",  -- 1476
-        "mostra come appare e si sente un grande momento",  -- 1477
-        "ottenuto",  -- 1478
-        "ottenuto da un altro oggetto",  -- 1479
-        "non ancora ottenuto",  -- 1480
-        "Aspetto",  -- 1481
-        "Scegli un set per mettere i suoi pezzi sul tuo completo. %s lo conserva; prima non si paga nulla.",  -- 1482
-        "Sto guardando la tua collezione...",  -- 1483
-        "Il tuo completo è tornato com'era.",  -- 1484
-        "%s: %d pezzi su %d indossati.",  -- 1485
-        "%d non si potevano mettere su questo completo.",  -- 1486
-        "Un set di cui hai dei pezzi",  -- 1487
-        "%d set di cui hai dei pezzi",  -- 1488
-        "non puoi indossarlo",  -- 1489
-        "mancante",  -- 1490
-        "Tutti i %d pezzi",  -- 1491
-        "%d pezzi su %d",  -- 1492
-        "Manca: %s",  -- 1493
-        "Ancora nessun set. Gli oggetti che condividono un nome, come Elmo di Ferro Verde e Guanti d'Arme di Ferro Verde, compaiono qui appena ne hai uno.",  -- 1494
-        "Annulla",  -- 1495
-        "Eliminare il set personalizzato %s? Non può essere recuperato.",  -- 1496
-        "Elimina",  -- 1497
-        "Punta prima un set personalizzato.",  -- 1498
-        "%s  Elimina set personalizzato",  -- 1499
+        "Costa meno comprarlo che produrlo con %s",  -- 1295
+        "Prodotto con %s",  -- 1296
+        "Il Mentore: cosa ti fa creare la tua banca",  -- 1297
+        "Cosa puoi creare con la banca",  -- 1298
+        "Con ciò che hai in banca non si crea nient'altro.",  -- 1299
+        "%d che puoi creare contando la banca, %d solo grazie a lei.",  -- 1300
+        "Il Mentore: %s %d > %d",  -- 1301
+        "Il Mentore",  -- 1302
+        "Piano di avanzamento",  -- 1303
+        "o",  -- 1304
+        "Raccogli %s",  -- 1305
+        "da imparare",  -- 1306
+        "conviene comprarlo",  -- 1307
+        "Nascondi",  -- 1308
+        "Il piano",  -- 1309
+        "Farma questo",  -- 1310
+        "Farma tutto",  -- 1311
+        "Con la banca",  -- 1312
+        "Usa il piano",  -- 1313
+        "due volte per nascondere",  -- 1314
+        "Niente da provare qui.",  -- 1315
+        "%d aggiunti alla lista da farmare.",  -- 1316
+        "Non manca niente: hai quello che serve.",  -- 1317
+        "Apri la finestra di una professione per fare un piano.",  -- 1318
+        "Il Mentore (piano di avanzamento): mostra / nascondi",  -- 1319
+        "mostra il piano di avanzamento dell'ultima finestra di professione aperta, con i pulsanti del controller",  -- 1320
+        "A sinistra delle missioni",  -- 1321
+        "A destra delle missioni",  -- 1322
+        "Sotto le missioni",  -- 1323
+        "La lista da farmare è piena.",  -- 1324
+        "Lista da farmare: %s, %d voluti.",  -- 1325
+        "Da farmare",  -- 1326
+        "altri %d",  -- 1327
+        "Ancora niente da farmare.",  -- 1328
+        "Una pila in più",  -- 1329
+        "Togli",  -- 1330
+        "Svuota",  -- 1331
+        "Fatto",  -- 1332
+        "Togliere tutto dalla lista da farmare?",  -- 1333
+        "Lista da farmare: scegli / fatto",  -- 1334
+        "Lista da farmare: aggiungi l'oggetto indicato",  -- 1335
+        "Non è nella lista da farmare.",  -- 1336
+        "La lista da farmare è vuota.",  -- 1337
+        "Lista da farmare: dove si trova",  -- 1338
+        "la lista da farmare a sinistra dell'elenco delle missioni, alla sua destra o sotto le sue missioni",  -- 1339
+        "la lista da farmare accanto all'elenco delle missioni: scegli col controller; add <oggetto> [quanti], remove <oggetto>, clear, o left / right / bottom per la posizione",  -- 1340
+        "Percentuale di minaccia",  -- 1341
+        "la tua parte di minaccia come numero accanto all'icona della minaccia, sul riquadro del bersaglio e sulle barre del nome",  -- 1342
+        "Numero della salute",  -- 1343
+        "la salute rimasta, abbreviata (12.3k), sulla barra (non sulle targhette compatte: lì basta la percentuale)",  -- 1344
+        "I tuoi debuff",  -- 1345
+        "i tuoi debuff sull'unità, sopra il suo nome, con il loro tempo",  -- 1346
+        "Malus di tutti",  -- 1347
+        "i malus che il gioco segna per le barre dei nomi di tutti, non solo i tuoi",  -- 1348
+        "Bonus del nemico",  -- 1349
+        "i benefici di un nemico accanto alle sue penalità: quelli che contano (importanti, infuriato o che puoi dissolvere o rubare), o tutti se Solo gli effetti che contano è disattivato",  -- 1350
+        "Icona di controllo di massa",  -- 1351
+        "una grande icona con il tempo quando l'unità è stordita, immobilizzata, impaurita...",  -- 1352
+        "Bagliore di aggro",  -- 1353
+        "un'icona a scudo e un bagliore dietro il nome: rosso mentre ti attacca, rosso e giallo quando stai per attirarlo, giallo e blu quando lo stai perdendo, blu quando non è su di te",  -- 1354
+        "Indicatore missione",  -- 1355
+        "un indicatore dorato sulle unità di cui le tue missioni hanno ancora bisogno",  -- 1356
+        "Animazioni delle targhette",  -- 1357
+        "le targhette appaiono in dissolvenza, la salute bassa respira, il controllo delle masse brilla",  -- 1358
+        "Piccola",  -- 1359
+        "Normale",  -- 1360
+        "Grande",  -- 1361
+        "Nome intero",  -- 1362
+        "Nome breve",  -- 1363
+        "Nessun nome",  -- 1364
+        "Completo",  -- 1365
+        "Minimale mini",  -- 1366
+        "Dimensione delle targhette",  -- 1367
+        "quanto sono grandi le barre delle targhette: piccole e sottili, normali o grandi (più larghe e più alte)",  -- 1368
+        "Nomi sulle targhette",  -- 1369
+        "il nome su una targhetta con barra della salute: intero, accorciato o tolto (il riquadro del bersaglio lo mostra intero; livello e icona di classe restano). Una targhetta senza barra, quella di un PNG amichevole, tiene sempre il suo nome",  -- 1370
+        "Aspetto delle targhette",  -- 1371
+        "gli interruttori delle targhette in un colpo. Completo: tutto. Minimale: niente barra della risorsa, gilda o titolo, nomi brevi. Minimale mini: barre piccole con la salute, i tuoi indebolimenti e i potenziamenti che contano, livello e classe, nessun nome (lo ha il riquadro del bersaglio). Minaccia, controllo e lanci vistosi restano sempre",  -- 1372
+        "Titoli dei giocatori",  -- 1373
+        "mostra il titolo di un giocatore insieme al suo nome",  -- 1374
+        "Gilde e mestieri dei PNG",  -- 1375
+        "una riga sotto il nome: la gilda del giocatore, o cosa fa il PNG",  -- 1376
+        "Barre per gli amici in combattimento",  -- 1377
+        "le targhette amichevoli mostrano salute, risorsa e lanci finché quell'unità è in combattimento",  -- 1378
+        "Targhette amiche del gioco",  -- 1379
+        "lascia le targhette amiche (il tuo gruppo, altri giocatori, PNG amici) all'aspetto del gioco; le nostre solo sui nemici",  -- 1380
+        "Barre delle risorse",  -- 1381
+        "una sottile barra di mana, rabbia o energia sotto la barra della salute",  -- 1382
+        "Bersaglio del lancio",  -- 1383
+        "a chi è diretto un lancio, accanto al nome dell'incantesimo",  -- 1384
+        "Percentuale di salute",  -- 1385
+        "la percentuale di salute sulla barra",  -- 1386
+        "Nome sulla barra del bersaglio",  -- 1387
+        "disattivato: la barra del tuo bersaglio non mostra nome né livello (li mostra il riquadro del bersaglio)",  -- 1388
+        "Livelli sulle barre del nome",  -- 1389
+        "il livello davanti al nome di un nemico, colorato in base alla difficoltà",  -- 1390
+        "Targhette compatte",  -- 1391
+        "targhette larghe circa la metà",  -- 1392
+        "Lanci nemici vistosi",  -- 1393
+        "il lancio di un nemico lampeggia, si ingrandisce e pulsa sempre più veloce finché non va a segno, così da poterlo interrompere in tempo",  -- 1394
+        "Icone di classe sulle targhette",  -- 1395
+        "l'icona di classe di un giocatore davanti al nome, amico o nemico",  -- 1396
+        "Cosa fanno i PNG, come icone",  -- 1397
+        "un'icona sopra i PNG amichevoli che offrono qualcosa: una borsa sui mercanti, un'incudine sui fabbri che riparano, un libro sugli istruttori... (le icone del gioco; si vedono anche mentre la targhetta aspetta di essere indicata)",  -- 1398
+        "PNG amichevoli solo se puntati",  -- 1399
+        "le targhette dei PNG amichevoli (venditori, assegnatori di missioni, cittadini) compaiono solo mentre li punti, come il loro tooltip",  -- 1400
+        "Nomi sulle cose con cui puoi interagire",  -- 1401
+        "un nome sopra minerali, forzieri, targhe e simili mentre li hai di fronte (disattivato: restano senza nome, il messaggio del gioco dice già cosa sono)",  -- 1402
+        "Mini targhette",  -- 1403
+        "servitori, animaletti e nemici grigi che non danno esperienza hanno una piccola targhetta: una barra sottile con i tuoi effetti negativi sopra e senza nome (un animaletto, senza barra, mantiene il nome; l'opzione del gioco decide se hanno targhette)",  -- 1404
+        "Barre del nome del gruppo nelle spedizioni: solo nomi",  -- 1405
+        "dentro una spedizione o un'incursione il gioco disegna da sé le barre del nome dei giocatori amici e gli addon non possono cambiarle: lì le opzioni proprie del gioco vengono impostate per mostrarle come nomi nel colore della classe, senza barre, come le nostre, e le barre del gioco tornano mentre combatti (se le barre per gli amici in combattimento sono attive); tutto viene ripristinato quando esci",  -- 1406
+        "Barre del nome del gruppo nelle spedizioni: nascoste",  -- 1407
+        "dentro una spedizione o un'incursione, spegni del tutto le barre del nome del gioco per i giocatori amici (e rimettile come le avevi quando esci)",  -- 1408
+        "mostra cosa fornisce il gioco per il nome del tuo bersaglio (per la risoluzione dei problemi)",  -- 1409
+        "elenca le targhette sullo schermo e se hanno il nostro aspetto (per la risoluzione dei problemi)",  -- 1410
+        "Bene, allora.",  -- 1411
+        "Ah, che mucchio.",  -- 1412
+        "Vediamo, vediamo...",  -- 1413
+        "Elune, dammi pazienza.",  -- 1414
+        "Per i naaru, che confusione.",  -- 1415
+        "Maledetto zaino.",  -- 1416
+        "Zaino in ordine, zaino leggero.",  -- 1417
+        "Bah. Troppa roba.",  -- 1418
+        "Peso morto, tutto quanto.",  -- 1419
+        "Pazienza. La Madre Terra provvede.",  -- 1420
+        "Ehi, cosa abbiamo qui, amico?",  -- 1421
+        "Che disordine. Sconveniente.",  -- 1422
+        "Il tempo è denaro. Contiamo.",  -- 1423
+        "Sì, può andare.",  -- 1424
+        "Sia ringraziata Elune.",  -- 1425
+        "La Luce provvede.",  -- 1426
+        "Hrm. Abbastanza.",  -- 1427
+        "Hm. Basta per combattere.",  -- 1428
+        "Viaggio leggero. Bene.",  -- 1429
+        "Accettabile. A malapena.",  -- 1430
+        "Non c'è un posto libero. La robaccia frutterebbe %s: venderla fa spazio.",  -- 1431
+        "Non c'è un posto libero. Quello che non mi serve in viaggio può aspettare in banca.",  -- 1432
+        "Robaccia: %d, vale %s qui. X vende quella che ho scelto; Vendita furba prende tutto.",  -- 1433
+        "%d di questi vanno in banca: ne contiene già altri uguali, o li ho segnati. Deposita li mette via.",  -- 1434
+        "Solo %d posti liberi. La robaccia frutterebbe %s da qualsiasi mercante.",  -- 1435
+        "Solo %d posti liberi. È ora di vendere o depositare qualcosa.",  -- 1436
+        "Nuovi dall'ultima occhiata: %d. Il punto dorato segna ciascuno.",  -- 1437
+        "Da vendere: %d. Il filtro Vendi li raccoglie, e ogni descrizione dice dove rende di più.",  -- 1438
+        "Robaccia: %d, vale %s. Al prossimo mercante.",  -- 1439
+        "Solo l'essenziale. Niente che valga la pena vendere.",  -- 1440
+        "Tutto in ordine, e %d posti liberi.",  -- 1441
+        "Il tuo equipaggiamento è riparato: %s.",  -- 1442
+        "Posso riparare il tuo equipaggiamento per %s; un pezzo rotto non ti dà né armatura né statistiche.",  -- 1443
+        "Le tue borse sono piene. Prendo %d cose per %s: Vendita furba, e hai di nuovo spazio.",  -- 1444
+        "Ti do %s per %d cose: la robaccia e ciò che la casa d'aste non pagherebbe di più. Vendita furba, ed è fatta.",  -- 1445
+        "Tieni i %d che vuole la casa d'aste: paga %s più di me.",  -- 1446
+        "Le tue borse sono piene. Vendimi qualcosa prima di comprare.",  -- 1447
+        "Niente nelle tue borse per cui pagherei bene. Dai un'occhiata alla mia merce.",  -- 1448
+        "%d delle cose che porti vanno qui: ne custodisco altre uguali, o le hai segnate. Deposita le mette via.",  -- 1449
+        "Custodisco altre scorte di %d cose che porti. Preleva riempie le borse prima di partire.",  -- 1450
+        "Le tue borse sono quasi piene. Lascia a me ciò che non ti serve in viaggio.",  -- 1451
+        "Tutto al sicuro con me, e le tue borse hanno %d posti liberi.",  -- 1452
+        "Oggi niente per te. Ho controllato due volte.",  -- 1453
+        "Lettere per te: %d, niente allegato. Leggile quando vuoi.",  -- 1454
+        "Lettere per te: %d. Dentro: %s.",  -- 1455
+        "Prendi tutto le svuota in un colpo.",  -- 1456
+        "Contrassegno: %d. Quelle le apri e paghi tu.",  -- 1457
+        "Le tue borse sono piene: gli oggetti aspettano nelle loro lettere.",  -- 1458
+        "Dove si va? Indica un luogo e ti dirò quanto dura il volo.",  -- 1459
+        "%s: circa %s secondo la mappa. Quella rotta non l'hai ancora volata.",  -- 1460
+        "%s: circa %s, secondo il tuo ultimo volo lì.",  -- 1461
+        "%s: non so ancora dirti quanto. Volalo una volta e lo saprò.",  -- 1462
+        "Ne sono scappati %d. Quest'acqua chiede più abilità di quanta ne ho: l'esca aiuta, e anche una canna migliore.",  -- 1463
+        "Niente esca sull'amo. Aumenta la mia abilità, così ne scappano meno.",  -- 1464
+        "L'esca è quasi finita. Un'altra sull'amo tiene alta la mia abilità.",  -- 1465
+        "Pesci di qui che non ho ancora preso: %d. Continuo a lanciare.",  -- 1466
+        "Ho preso ogni pesce di quest'acqua. Altrove, allora.",  -- 1467
+        "Ancora niente preso. Il primo pesce di ogni acqua va qui.",  -- 1468
+        "Specie prese: %d. Ogni acqua ne nasconde altre: il pannello di pesca mostra un ? per ciascuna che non ho preso lì.",  -- 1469
+        "Riposato accanto al fuoco: i prossimi %d punti esperienza dalle uccisioni valgono doppio.",  -- 1470
+        "Nessun riposo accumulato. Una notte in una locanda o in città, e le uccisioni danno esperienza doppia per un po'.",  -- 1471
+        "%d assorbiti",  -- 1472
+        "Elenco a destra",  -- 1473
+        "Uno al centro",  -- 1474
+        "%d cure critiche",  -- 1475
+        "%d critici",  -- 1476
+        "Giudizio",  -- 1477
+        "Grandi momenti: dove",  -- 1478
+        "un blocco appena sopra gli avvisi di ricarica a destra del tuo personaggio, il più recente vicino a loro e i precedenti che salgono sopra mentre svaniscono, o uno alla volta al centro",  -- 1479
+        "mostra come appare e si sente un grande momento",  -- 1480
+        "ottenuto",  -- 1481
+        "ottenuto da un altro oggetto",  -- 1482
+        "non ancora ottenuto",  -- 1483
+        "Aspetto",  -- 1484
+        "Scegli un set per mettere i suoi pezzi sul tuo completo. %s lo conserva; prima non si paga nulla.",  -- 1485
+        "Sto guardando la tua collezione...",  -- 1486
+        "Il tuo completo è tornato com'era.",  -- 1487
+        "%s: %d pezzi su %d indossati.",  -- 1488
+        "%d non si potevano mettere su questo completo.",  -- 1489
+        "Un set di cui hai dei pezzi",  -- 1490
+        "%d set di cui hai dei pezzi",  -- 1491
+        "non puoi indossarlo",  -- 1492
+        "mancante",  -- 1493
+        "Tutti i %d pezzi",  -- 1494
+        "%d pezzi su %d",  -- 1495
+        "Manca: %s",  -- 1496
+        "Ancora nessun set. Gli oggetti che condividono un nome, come Elmo di Ferro Verde e Guanti d'Arme di Ferro Verde, compaiono qui appena ne hai uno.",  -- 1497
+        "Annulla",  -- 1498
+        "Eliminare il set personalizzato %s? Non può essere recuperato.",  -- 1499
+        "Elimina",  -- 1500
+        "Punta prima un set personalizzato.",  -- 1501
+        "%s  Elimina set personalizzato",  -- 1502
     },
     koKR = {
         "오류:",  -- 1
@@ -8808,211 +8823,214 @@ local TRANSLATIONS = {
         "가이드는 이 구간을 %s 채집으로 올립니다.",  -- 1292
         "%s: %d개 보유, 계획에 %d개 사용",  -- 1293
         "용도: %s",  -- 1294
-        "멘토: 은행 재료로 만들 수 있는 것",  -- 1295
-        "은행 재료로 만들 수 있는 것",  -- 1296
-        "은행에 있는 것으로 더 만들 수 있는 것이 없습니다.",  -- 1297
-        "은행까지 세면 %d개를 만들 수 있고, 그중 %d개는 은행 덕분입니다.",  -- 1298
-        "멘토: %s %d > %d",  -- 1299
-        "멘토",  -- 1300
-        "숙련도 계획",  -- 1301
-        "또는",  -- 1302
-        "%s 채집",  -- 1303
-        "배울 것",  -- 1304
-        "숨기기",  -- 1305
-        "계획",  -- 1306
-        "이것 파밍",  -- 1307
-        "모두 파밍",  -- 1308
-        "은행 포함",  -- 1309
-        "계획 사용",  -- 1310
-        "두 번 누르면 숨김",  -- 1311
-        "입어 볼 것이 없습니다.",  -- 1312
-        "파밍 목록에 %d개 추가했습니다.",  -- 1313
-        "부족한 것이 없습니다: 필요한 것을 모두 가지고 있습니다.",  -- 1314
-        "전문 기술 창을 열면 계획을 세웁니다.",  -- 1315
-        "멘토 (숙련 계획): 표시 / 숨기기",  -- 1316
-        "마지막으로 연 전문 기술 창의 숙련 계획을 컨트롤러 버튼과 함께 표시합니다",  -- 1317
-        "퀘스트 왼쪽",  -- 1318
-        "퀘스트 오른쪽",  -- 1319
-        "퀘스트 아래",  -- 1320
-        "파밍 목록이 가득 찼습니다.",  -- 1321
-        "파밍 목록: %s, %d개 원함.",  -- 1322
-        "파밍",  -- 1323
-        "%d개 더",  -- 1324
-        "아직 파밍할 것이 없습니다.",  -- 1325
-        "한 묶음 더",  -- 1326
-        "빼기",  -- 1327
-        "비우기",  -- 1328
-        "완료",  -- 1329
-        "파밍 목록을 모두 비울까요?",  -- 1330
-        "파밍 목록: 선택 / 완료",  -- 1331
-        "파밍 목록: 가리킨 아이템 추가",  -- 1332
-        "파밍 목록에 없습니다.",  -- 1333
-        "파밍 목록이 비었습니다.",  -- 1334
-        "파밍 목록: 위치",  -- 1335
-        "파밍 목록을 퀘스트 목록의 왼쪽, 오른쪽 또는 퀘스트 아래에 둡니다",  -- 1336
-        "퀘스트 목록 옆의 파밍 목록: 컨트롤러로 선택; add <아이템> [수량], remove <아이템>, clear, 또는 위치는 left / right / bottom",  -- 1337
-        "위협 수준 백분율",  -- 1338
-        "대상 프레임과 이름표의 위협 아이콘 옆에 내 위협 비율을 숫자로 표시",  -- 1339
-        "체력 수치",  -- 1340
-        "남은 생명력을 줄여서(12.3k) 바에 표시 (소형 이름표에는 표시 안 함: 백분율로 충분)",  -- 1341
-        "내 약화 효과",  -- 1342
-        "대상 이름 위에 내 약화 효과와 남은 시간 표시",  -- 1343
-        "모두의 디버프",  -- 1344
-        "내 것만이 아니라 모두의 디버프 중 게임이 이름표용으로 표시하는 것",  -- 1345
-        "적 버프",  -- 1346
-        "적의 약화 효과 옆에 강화 효과: 중요한 것(중요, 격노, 또는 내가 해제하거나 훔칠 수 있는 것)만, 또는 중요한 효과만 표시가 꺼져 있으면 전부",  -- 1347
-        "군중 제어 아이콘",  -- 1348
-        "유닛이 기절, 이동 불가, 공포 상태일 때 남은 시간과 함께 표시되는 큰 아이콘...",  -- 1349
-        "어그로 광채",  -- 1350
-        "이름 뒤의 방패 아이콘과 빛: 나를 공격하는 동안 빨강, 곧 끌어올 때 빨강과 노랑, 잃고 있을 때 노랑과 파랑, 나를 노리지 않을 때 파랑",  -- 1351
-        "퀘스트 표시",  -- 1352
-        "진행 중인 퀘스트에 아직 필요한 대상에 금색 표시를 띄웁니다",  -- 1353
-        "이름표 애니메이션",  -- 1354
-        "이름표가 서서히 나타나고, 체력이 낮으면 숨쉬듯 깜박이고, 군중 제어는 반짝임",  -- 1355
-        "작게",  -- 1356
-        "보통",  -- 1357
-        "크게",  -- 1358
-        "전체 이름",  -- 1359
-        "짧은 이름",  -- 1360
-        "이름 없음",  -- 1361
-        "전체",  -- 1362
-        "최소 미니",  -- 1363
-        "이름표 크기",  -- 1364
-        "이름표 막대의 크기: 작고 가늘게, 보통, 또는 크게 (더 넓고 높게)",  -- 1365
-        "이름표의 이름",  -- 1366
-        "생명력 막대가 있는 이름표의 이름: 전체, 줄임, 또는 생략 (대상 프레임에 전체 이름이 표시되며 레벨과 직업 아이콘은 유지됩니다). 막대가 없는 이름표(우호적인 NPC)는 항상 이름을 유지합니다",  -- 1367
-        "이름표 모양",  -- 1368
-        "이름표 설정을 한 번에. 전체: 모두. 최소: 자원 막대, 길드, 칭호 없음, 짧은 이름. 최소 미니: 생명력이 있는 작은 막대, 내 약화 효과와 중요한 강화 효과, 레벨과 직업, 이름 없음 (대상 프레임에 표시). 위협, 군중 제어, 눈에 띄는 시전은 항상 유지됩니다",  -- 1369
-        "플레이어 칭호",  -- 1370
-        "플레이어의 칭호를 이름과 함께 표시",  -- 1371
-        "길드와 NPC 직업",  -- 1372
-        "이름 아래 한 줄: 플레이어의 길드 또는 NPC가 하는 일",  -- 1373
-        "전투 중인 아군 바",  -- 1374
-        "아군 이름표가 해당 대상이 전투 중인 동안 체력, 자원, 시전을 표시",  -- 1375
-        "게임 기본 우호 이름표",  -- 1376
-        "우호 이름표(파티, 다른 플레이어, 우호 NPC)는 게임 기본 모양으로 두고, 우리 이름표는 적에게만",  -- 1377
-        "자원 바",  -- 1378
-        "체력 바 아래의 얇은 마나, 분노 또는 기력 바",  -- 1379
-        "시전 대상",  -- 1380
-        "주문 이름 옆에 표시되는 시전의 대상",  -- 1381
-        "체력 퍼센트",  -- 1382
-        "바에 표시되는 체력 퍼센트",  -- 1383
-        "대상 이름표에 이름 표시",  -- 1384
-        "끄면: 대상의 이름표에 이름과 레벨이 표시되지 않음 (대상 창에 표시됨)",  -- 1385
-        "이름표에 레벨 표시",  -- 1386
-        "적 이름 앞의 레벨, 난이도에 따라 색상 표시",  -- 1387
-        "간략한 이름표",  -- 1388
-        "이름표 너비를 약 절반으로",  -- 1389
-        "강조된 적 시전",  -- 1390
-        "적의 시전이 깜박이고 커지며 완료될 때까지 점점 빠르게 맥동하므로 제때 차단할 수 있습니다",  -- 1391
-        "이름표 직업 아이콘",  -- 1392
-        "아군이든 적이든 플레이어 이름 앞에 직업 아이콘 표시",  -- 1393
-        "NPC 역할 아이콘",  -- 1394
-        "무언가를 제공하는 우호적인 NPC 위에 아이콘 표시: 상인은 가방, 수리하는 대장장이는 모루, 전문기술 상급자는 책... (게임 자체 아이콘이며, 이름표가 가리켜지기를 기다리는 동안에도 보임)",  -- 1395
-        "가리킬 때만 우호적 NPC 표시",  -- 1396
-        "우호적 NPC(상인, 퀘스트 제공자, 마을 주민)의 이름표를 툴팁처럼 가리키고 있을 때만 표시",  -- 1397
-        "상호작용할 수 있는 사물의 이름",  -- 1398
-        "광석, 상자, 명판 등을 마주보는 동안 그 위에 이름 표시 (끄면 이름 없이 둡니다. 게임 자체 안내가 이미 무엇인지 알려 줍니다)",  -- 1399
-        "미니 이름표",  -- 1400
-        "하수인, 동물, 경험치를 주지 않는 회색 적은 작은 이름표: 내 약화 효과가 표시된 가는 바, 이름 없음 (바가 없는 동물은 이름 유지; 이름표 표시 여부는 게임 설정이 결정)",  -- 1401
-        "던전의 파티 이름표: 이름만",  -- 1402
-        "던전이나 공격대 안에서는 게임이 아군 플레이어의 이름표를 직접 그리며 애드온이 바꿀 수 없습니다. 그 안에서는 게임 자체 옵션을 설정해 우리 이름표처럼 바 없이 직업 색상의 이름으로만 표시하고, 전투 중에는 게임의 바가 다시 나타납니다 (전투 중 아군 바가 켜져 있을 때). 나갈 때 모두 원래대로 되돌립니다",  -- 1403
-        "던전의 파티 이름표: 숨김",  -- 1404
-        "던전이나 공격대 안에서 게임의 아군 플레이어 이름표를 완전히 끕니다 (나갈 때 원래 설정대로 되돌립니다)",  -- 1405
-        "대상의 이름에 대해 게임이 제공하는 정보 표시 (문제 해결용)",  -- 1406
-        "화면의 이름표와 우리 모양을 쓰고 있는지 표시 (문제 해결용)",  -- 1407
-        "자, 그럼.",  -- 1408
-        "어이쿠, 이게 다 뭐야.",  -- 1409
-        "어디 보자, 어디 보자...",  -- 1410
-        "엘룬이시여, 인내심을 주소서.",  -- 1411
-        "나루의 이름으로, 이게 무슨 뒤죽박죽이람.",  -- 1412
-        "망할 배낭.",  -- 1413
-        "잘 정돈된 배낭이 가벼운 배낭이지.",  -- 1414
-        "흥. 잡동사니가 너무 많아.",  -- 1415
-        "전부 쓸모없는 짐이군.",  -- 1416
-        "인내하라. 대지모신께서 베푸시리라.",  -- 1417
-        "어이, 뭐가 있나 볼까, 친구?",  -- 1418
-        "이런 어수선함이라니. 품위 없군.",  -- 1419
-        "시간은 금이지. 세어 보자고.",  -- 1420
-        "그래, 이 정도면 됐어.",  -- 1421
-        "엘룬께 감사를.",  -- 1422
-        "빛이 베푸시리라.",  -- 1423
-        "흠. 이 정도면 충분해.",  -- 1424
-        "흠. 싸우기엔 충분해.",  -- 1425
-        "가볍게 다니니 좋군.",  -- 1426
-        "봐줄 만하군. 겨우.",  -- 1427
-        "빈칸이 하나도 없어. 잡동사니를 팔면 %s: 팔아야 자리가 생기지.",  -- 1428
-        "빈칸이 하나도 없어. 길에서 안 쓸 건 은행에 맡겨 두자.",  -- 1429
-        "잡동사니 %d개, 여기선 %s. X는 고른 것을 팔고, 똑똑한 판매는 전부 팔아.",  -- 1430
-        "이 중 %d개는 은행에 둘 것: 은행에 같은 게 더 있거나 내가 표시해 뒀지. 보관을 누르면 넣어 둬.",  -- 1431
-        "빈칸이 %d개뿐이야. 잡동사니는 어느 상인한테든 %s는 받겠어.",  -- 1432
-        "빈칸이 %d개뿐이야. 몇 개는 팔거나 은행에 맡길 때야.",  -- 1433
-        "지난번 이후 새로 생긴 것: %d개. 금색 점이 표시돼 있어.",  -- 1434
-        "팔 만한 것: %d개. 판매 필터에 모여 있고, 툴팁마다 어디서 제일 비싸게 팔리는지 나와.",  -- 1435
-        "잡동사니 %d개, %s 가치. 다음 상인한테 넘기자.",  -- 1436
-        "꼭 필요한 것만 있어. 팔 만한 건 없어.",  -- 1437
-        "다 정리됐고, 빈칸은 %d개.",  -- 1438
-        "장비 수리 끝났소: %s.",  -- 1439
-        "%s면 장비를 고쳐 주겠소. 부서진 장비는 방어도도 능력치도 주지 않소.",  -- 1440
-        "가방이 꽉 찼구려. 물건 %d개를 %s에 사겠소: 똑똑한 판매를 누르면 다시 자리가 생기오.",  -- 1441
-        "%s 주겠소, 물건 %d개에: 잡동사니와 경매장에서 더 받지 못할 것들이오. 똑똑한 판매면 끝이오.",  -- 1442
-        "경매장이 원하는 %d개는 가지고 있으시오: 나보다 %s 더 쳐 주니까.",  -- 1443
-        "가방이 꽉 찼구려. 사기 전에 뭐라도 파시오.",  -- 1444
-        "가방에 내가 후하게 쳐 줄 물건은 없구려. 내 물건이나 구경하시오.",  -- 1445
-        "가지고 계신 것 중 %d개는 여기 둘 물건입니다: 같은 게 더 보관돼 있거나 표시해 두셨지요. 보관을 누르시면 넣어 드립니다.",  -- 1446
-        "지니신 물건 %d종을 더 보관하고 있습니다. 꺼내기로 떠나기 전에 가방을 채우세요.",  -- 1447
-        "가방이 거의 찼습니다. 길에서 안 쓰실 건 제게 맡기세요.",  -- 1448
-        "모두 안전하게 맡아 두었습니다. 가방엔 빈칸이 %d개 있습니다.",  -- 1449
-        "오늘은 온 게 없네요. 두 번이나 확인했어요.",  -- 1450
-        "편지 %d통이 왔어요. 첨부물은 없으니 편할 때 읽으세요.",  -- 1451
-        "편지 %d통이 왔어요. 안에 든 것: %s.",  -- 1452
-        "모두 받기로 한 번에 비울 수 있어요.",  -- 1453
-        "착불 편지: %d통. 그건 직접 열고 값을 치르세요.",  -- 1454
-        "가방이 꽉 찼어요: 물건은 편지 안에서 기다립니다.",  -- 1455
-        "어디로 가시겠소? 장소를 가리키면 얼마나 걸리는지 알려 주겠소.",  -- 1456
-        "%s: 지도로 보면 약 %s. 아직 그 길은 날아 본 적이 없소.",  -- 1457
-        "%s: 지난번 비행으로 보면 약 %s.",  -- 1458
-        "%s: 아직은 얼마나 걸릴지 모르겠소. 한 번 날아 보면 알게 될 거요.",  -- 1459
-        "%d마리나 놓쳤군. 이 물엔 내 실력이 모자라: 미끼도 좋고, 더 좋은 낚싯대도 도움이 돼.",  -- 1460
-        "바늘에 미끼가 없네. 미끼는 기술을 올려 줘서 덜 놓치게 돼.",  -- 1461
-        "미끼가 거의 다 됐어. 새로 달면 기술이 유지되지.",  -- 1462
-        "여기서 아직 못 낚은 물고기: %d종. 계속 던지자.",  -- 1463
-        "이 물의 물고기는 다 낚았어. 그럼 새로운 곳으로.",  -- 1464
-        "아직 낚은 게 없어. 물마다 첫 물고기는 여기 적히지.",  -- 1465
-        "낚은 종류: %d. 물마다 몇 종이 더 숨어 있어: 낚시 패널에 거기서 못 낚은 건 ?로 나와.",  -- 1466
-        "불가에서 푹 쉬었어: 처치로 얻는 다음 경험치 %d은 두 배야.",  -- 1467
-        "쌓아 둔 휴식이 없어. 여관이나 도시에서 하룻밤 자면 한동안 처치 경험치가 두 배야.",  -- 1468
-        "%d 흡수",  -- 1469
-        "오른쪽 목록",  -- 1470
-        "가운데에 하나씩",  -- 1471
-        "치명타 치유 %d회",  -- 1472
-        "치명타 %d회",  -- 1473
-        "심판",  -- 1474
-        "큰 순간: 위치",  -- 1475
-        "캐릭터 오른쪽 재사용 대기시간 알림 바로 위의 블록(최신이 알림에 가장 가깝고, 이전 것은 흐려지며 위로 올라감) 또는 가운데에 하나씩",  -- 1476
-        "큰 순간이 어떻게 보이고 느껴지는지 보여줌",  -- 1477
-        "수집함",  -- 1478
-        "다른 아이템으로 수집함",  -- 1479
-        "아직 수집하지 않음",  -- 1480
-        "외형",  -- 1481
-        "세트를 고르면 그 조각들이 의상에 적용됩니다. %s 버튼을 눌러야 유지되며, 그 전에는 비용이 들지 않습니다.",  -- 1482
-        "수집품을 살펴보는 중...",  -- 1483
-        "의상이 원래대로 돌아왔습니다.",  -- 1484
-        "%s: %d/%d개 조각 적용.",  -- 1485
-        "%d개는 이 의상에 적용되지 않았습니다.",  -- 1486
-        "조각을 가진 세트 1개",  -- 1487
-        "조각을 가진 세트 %d개",  -- 1488
-        "착용할 수 없음",  -- 1489
-        "없음",  -- 1490
-        "조각 %d개 모두",  -- 1491
-        "%d/%d개 조각",  -- 1492
-        "없음: %s",  -- 1493
-        "아직 세트가 없습니다. 녹색 철 투구와 녹색 철 건틀릿처럼 이름이 같은 아이템은 하나라도 가지면 여기에 나타납니다.",  -- 1494
-        "되돌리기",  -- 1495
-        "사용자 세트 %s을(를) 삭제하시겠습니까? 되돌릴 수 없습니다.",  -- 1496
-        "삭제",  -- 1497
-        "먼저 사용자 세트에 커서를 올리세요.",  -- 1498
-        "%s  사용자 세트 삭제",  -- 1499
+        "%s(으)로 만드는 것보다 사는 편이 쌉니다",  -- 1295
+        "%s(으)로 제작",  -- 1296
+        "멘토: 은행 재료로 만들 수 있는 것",  -- 1297
+        "은행 재료로 만들 수 있는 것",  -- 1298
+        "은행에 있는 것으로 더 만들 수 있는 것이 없습니다.",  -- 1299
+        "은행까지 세면 %d개를 만들 수 있고, 그중 %d개는 은행 덕분입니다.",  -- 1300
+        "멘토: %s %d > %d",  -- 1301
+        "멘토",  -- 1302
+        "숙련도 계획",  -- 1303
+        "또는",  -- 1304
+        "%s 채집",  -- 1305
+        "배울 것",  -- 1306
+        "사는 편이 저렴",  -- 1307
+        "숨기기",  -- 1308
+        "계획",  -- 1309
+        "이것 파밍",  -- 1310
+        "모두 파밍",  -- 1311
+        "은행 포함",  -- 1312
+        "계획 사용",  -- 1313
+        "두 번 누르면 숨김",  -- 1314
+        "입어 볼 것이 없습니다.",  -- 1315
+        "파밍 목록에 %d개 추가했습니다.",  -- 1316
+        "부족한 것이 없습니다: 필요한 것을 모두 가지고 있습니다.",  -- 1317
+        "전문 기술 창을 열면 계획을 세웁니다.",  -- 1318
+        "멘토 (숙련 계획): 표시 / 숨기기",  -- 1319
+        "마지막으로 연 전문 기술 창의 숙련 계획을 컨트롤러 버튼과 함께 표시합니다",  -- 1320
+        "퀘스트 왼쪽",  -- 1321
+        "퀘스트 오른쪽",  -- 1322
+        "퀘스트 아래",  -- 1323
+        "파밍 목록이 가득 찼습니다.",  -- 1324
+        "파밍 목록: %s, %d개 원함.",  -- 1325
+        "파밍",  -- 1326
+        "%d개 더",  -- 1327
+        "아직 파밍할 것이 없습니다.",  -- 1328
+        "한 묶음 더",  -- 1329
+        "빼기",  -- 1330
+        "비우기",  -- 1331
+        "완료",  -- 1332
+        "파밍 목록을 모두 비울까요?",  -- 1333
+        "파밍 목록: 선택 / 완료",  -- 1334
+        "파밍 목록: 가리킨 아이템 추가",  -- 1335
+        "파밍 목록에 없습니다.",  -- 1336
+        "파밍 목록이 비었습니다.",  -- 1337
+        "파밍 목록: 위치",  -- 1338
+        "파밍 목록을 퀘스트 목록의 왼쪽, 오른쪽 또는 퀘스트 아래에 둡니다",  -- 1339
+        "퀘스트 목록 옆의 파밍 목록: 컨트롤러로 선택; add <아이템> [수량], remove <아이템>, clear, 또는 위치는 left / right / bottom",  -- 1340
+        "위협 수준 백분율",  -- 1341
+        "대상 프레임과 이름표의 위협 아이콘 옆에 내 위협 비율을 숫자로 표시",  -- 1342
+        "체력 수치",  -- 1343
+        "남은 생명력을 줄여서(12.3k) 바에 표시 (소형 이름표에는 표시 안 함: 백분율로 충분)",  -- 1344
+        "내 약화 효과",  -- 1345
+        "대상 이름 위에 내 약화 효과와 남은 시간 표시",  -- 1346
+        "모두의 디버프",  -- 1347
+        "내 것만이 아니라 모두의 디버프 중 게임이 이름표용으로 표시하는 것",  -- 1348
+        "적 버프",  -- 1349
+        "적의 약화 효과 옆에 강화 효과: 중요한 것(중요, 격노, 또는 내가 해제하거나 훔칠 수 있는 것)만, 또는 중요한 효과만 표시가 꺼져 있으면 전부",  -- 1350
+        "군중 제어 아이콘",  -- 1351
+        "유닛이 기절, 이동 불가, 공포 상태일 때 남은 시간과 함께 표시되는 큰 아이콘...",  -- 1352
+        "어그로 광채",  -- 1353
+        "이름 뒤의 방패 아이콘과 빛: 나를 공격하는 동안 빨강, 곧 끌어올 때 빨강과 노랑, 잃고 있을 때 노랑과 파랑, 나를 노리지 않을 때 파랑",  -- 1354
+        "퀘스트 표시",  -- 1355
+        "진행 중인 퀘스트에 아직 필요한 대상에 금색 표시를 띄웁니다",  -- 1356
+        "이름표 애니메이션",  -- 1357
+        "이름표가 서서히 나타나고, 체력이 낮으면 숨쉬듯 깜박이고, 군중 제어는 반짝임",  -- 1358
+        "작게",  -- 1359
+        "보통",  -- 1360
+        "크게",  -- 1361
+        "전체 이름",  -- 1362
+        "짧은 이름",  -- 1363
+        "이름 없음",  -- 1364
+        "전체",  -- 1365
+        "최소 미니",  -- 1366
+        "이름표 크기",  -- 1367
+        "이름표 막대의 크기: 작고 가늘게, 보통, 또는 크게 (더 넓고 높게)",  -- 1368
+        "이름표의 이름",  -- 1369
+        "생명력 막대가 있는 이름표의 이름: 전체, 줄임, 또는 생략 (대상 프레임에 전체 이름이 표시되며 레벨과 직업 아이콘은 유지됩니다). 막대가 없는 이름표(우호적인 NPC)는 항상 이름을 유지합니다",  -- 1370
+        "이름표 모양",  -- 1371
+        "이름표 설정을 한 번에. 전체: 모두. 최소: 자원 막대, 길드, 칭호 없음, 짧은 이름. 최소 미니: 생명력이 있는 작은 막대, 내 약화 효과와 중요한 강화 효과, 레벨과 직업, 이름 없음 (대상 프레임에 표시). 위협, 군중 제어, 눈에 띄는 시전은 항상 유지됩니다",  -- 1372
+        "플레이어 칭호",  -- 1373
+        "플레이어의 칭호를 이름과 함께 표시",  -- 1374
+        "길드와 NPC 직업",  -- 1375
+        "이름 아래 한 줄: 플레이어의 길드 또는 NPC가 하는 일",  -- 1376
+        "전투 중인 아군 바",  -- 1377
+        "아군 이름표가 해당 대상이 전투 중인 동안 체력, 자원, 시전을 표시",  -- 1378
+        "게임 기본 우호 이름표",  -- 1379
+        "우호 이름표(파티, 다른 플레이어, 우호 NPC)는 게임 기본 모양으로 두고, 우리 이름표는 적에게만",  -- 1380
+        "자원 바",  -- 1381
+        "체력 바 아래의 얇은 마나, 분노 또는 기력 바",  -- 1382
+        "시전 대상",  -- 1383
+        "주문 이름 옆에 표시되는 시전의 대상",  -- 1384
+        "체력 퍼센트",  -- 1385
+        "바에 표시되는 체력 퍼센트",  -- 1386
+        "대상 이름표에 이름 표시",  -- 1387
+        "끄면: 대상의 이름표에 이름과 레벨이 표시되지 않음 (대상 창에 표시됨)",  -- 1388
+        "이름표에 레벨 표시",  -- 1389
+        "적 이름 앞의 레벨, 난이도에 따라 색상 표시",  -- 1390
+        "간략한 이름표",  -- 1391
+        "이름표 너비를 약 절반으로",  -- 1392
+        "강조된 적 시전",  -- 1393
+        "적의 시전이 깜박이고 커지며 완료될 때까지 점점 빠르게 맥동하므로 제때 차단할 수 있습니다",  -- 1394
+        "이름표 직업 아이콘",  -- 1395
+        "아군이든 적이든 플레이어 이름 앞에 직업 아이콘 표시",  -- 1396
+        "NPC 역할 아이콘",  -- 1397
+        "무언가를 제공하는 우호적인 NPC 위에 아이콘 표시: 상인은 가방, 수리하는 대장장이는 모루, 전문기술 상급자는 책... (게임 자체 아이콘이며, 이름표가 가리켜지기를 기다리는 동안에도 보임)",  -- 1398
+        "가리킬 때만 우호적 NPC 표시",  -- 1399
+        "우호적 NPC(상인, 퀘스트 제공자, 마을 주민)의 이름표를 툴팁처럼 가리키고 있을 때만 표시",  -- 1400
+        "상호작용할 수 있는 사물의 이름",  -- 1401
+        "광석, 상자, 명판 등을 마주보는 동안 그 위에 이름 표시 (끄면 이름 없이 둡니다. 게임 자체 안내가 이미 무엇인지 알려 줍니다)",  -- 1402
+        "미니 이름표",  -- 1403
+        "하수인, 동물, 경험치를 주지 않는 회색 적은 작은 이름표: 내 약화 효과가 표시된 가는 바, 이름 없음 (바가 없는 동물은 이름 유지; 이름표 표시 여부는 게임 설정이 결정)",  -- 1404
+        "던전의 파티 이름표: 이름만",  -- 1405
+        "던전이나 공격대 안에서는 게임이 아군 플레이어의 이름표를 직접 그리며 애드온이 바꿀 수 없습니다. 그 안에서는 게임 자체 옵션을 설정해 우리 이름표처럼 바 없이 직업 색상의 이름으로만 표시하고, 전투 중에는 게임의 바가 다시 나타납니다 (전투 중 아군 바가 켜져 있을 때). 나갈 때 모두 원래대로 되돌립니다",  -- 1406
+        "던전의 파티 이름표: 숨김",  -- 1407
+        "던전이나 공격대 안에서 게임의 아군 플레이어 이름표를 완전히 끕니다 (나갈 때 원래 설정대로 되돌립니다)",  -- 1408
+        "대상의 이름에 대해 게임이 제공하는 정보 표시 (문제 해결용)",  -- 1409
+        "화면의 이름표와 우리 모양을 쓰고 있는지 표시 (문제 해결용)",  -- 1410
+        "자, 그럼.",  -- 1411
+        "어이쿠, 이게 다 뭐야.",  -- 1412
+        "어디 보자, 어디 보자...",  -- 1413
+        "엘룬이시여, 인내심을 주소서.",  -- 1414
+        "나루의 이름으로, 이게 무슨 뒤죽박죽이람.",  -- 1415
+        "망할 배낭.",  -- 1416
+        "잘 정돈된 배낭이 가벼운 배낭이지.",  -- 1417
+        "흥. 잡동사니가 너무 많아.",  -- 1418
+        "전부 쓸모없는 짐이군.",  -- 1419
+        "인내하라. 대지모신께서 베푸시리라.",  -- 1420
+        "어이, 뭐가 있나 볼까, 친구?",  -- 1421
+        "이런 어수선함이라니. 품위 없군.",  -- 1422
+        "시간은 금이지. 세어 보자고.",  -- 1423
+        "그래, 이 정도면 됐어.",  -- 1424
+        "엘룬께 감사를.",  -- 1425
+        "빛이 베푸시리라.",  -- 1426
+        "흠. 이 정도면 충분해.",  -- 1427
+        "흠. 싸우기엔 충분해.",  -- 1428
+        "가볍게 다니니 좋군.",  -- 1429
+        "봐줄 만하군. 겨우.",  -- 1430
+        "빈칸이 하나도 없어. 잡동사니를 팔면 %s: 팔아야 자리가 생기지.",  -- 1431
+        "빈칸이 하나도 없어. 길에서 안 쓸 건 은행에 맡겨 두자.",  -- 1432
+        "잡동사니 %d개, 여기선 %s. X는 고른 것을 팔고, 똑똑한 판매는 전부 팔아.",  -- 1433
+        "이 중 %d개는 은행에 둘 것: 은행에 같은 게 더 있거나 내가 표시해 뒀지. 보관을 누르면 넣어 둬.",  -- 1434
+        "빈칸이 %d개뿐이야. 잡동사니는 어느 상인한테든 %s는 받겠어.",  -- 1435
+        "빈칸이 %d개뿐이야. 몇 개는 팔거나 은행에 맡길 때야.",  -- 1436
+        "지난번 이후 새로 생긴 것: %d개. 금색 점이 표시돼 있어.",  -- 1437
+        "팔 만한 것: %d개. 판매 필터에 모여 있고, 툴팁마다 어디서 제일 비싸게 팔리는지 나와.",  -- 1438
+        "잡동사니 %d개, %s 가치. 다음 상인한테 넘기자.",  -- 1439
+        "꼭 필요한 것만 있어. 팔 만한 건 없어.",  -- 1440
+        "다 정리됐고, 빈칸은 %d개.",  -- 1441
+        "장비 수리 끝났소: %s.",  -- 1442
+        "%s면 장비를 고쳐 주겠소. 부서진 장비는 방어도도 능력치도 주지 않소.",  -- 1443
+        "가방이 꽉 찼구려. 물건 %d개를 %s에 사겠소: 똑똑한 판매를 누르면 다시 자리가 생기오.",  -- 1444
+        "%s 주겠소, 물건 %d개에: 잡동사니와 경매장에서 더 받지 못할 것들이오. 똑똑한 판매면 끝이오.",  -- 1445
+        "경매장이 원하는 %d개는 가지고 있으시오: 나보다 %s 더 쳐 주니까.",  -- 1446
+        "가방이 꽉 찼구려. 사기 전에 뭐라도 파시오.",  -- 1447
+        "가방에 내가 후하게 쳐 줄 물건은 없구려. 내 물건이나 구경하시오.",  -- 1448
+        "가지고 계신 것 중 %d개는 여기 둘 물건입니다: 같은 게 더 보관돼 있거나 표시해 두셨지요. 보관을 누르시면 넣어 드립니다.",  -- 1449
+        "지니신 물건 %d종을 더 보관하고 있습니다. 꺼내기로 떠나기 전에 가방을 채우세요.",  -- 1450
+        "가방이 거의 찼습니다. 길에서 안 쓰실 건 제게 맡기세요.",  -- 1451
+        "모두 안전하게 맡아 두었습니다. 가방엔 빈칸이 %d개 있습니다.",  -- 1452
+        "오늘은 온 게 없네요. 두 번이나 확인했어요.",  -- 1453
+        "편지 %d통이 왔어요. 첨부물은 없으니 편할 때 읽으세요.",  -- 1454
+        "편지 %d통이 왔어요. 안에 든 것: %s.",  -- 1455
+        "모두 받기로 한 번에 비울 수 있어요.",  -- 1456
+        "착불 편지: %d통. 그건 직접 열고 값을 치르세요.",  -- 1457
+        "가방이 꽉 찼어요: 물건은 편지 안에서 기다립니다.",  -- 1458
+        "어디로 가시겠소? 장소를 가리키면 얼마나 걸리는지 알려 주겠소.",  -- 1459
+        "%s: 지도로 보면 약 %s. 아직 그 길은 날아 본 적이 없소.",  -- 1460
+        "%s: 지난번 비행으로 보면 약 %s.",  -- 1461
+        "%s: 아직은 얼마나 걸릴지 모르겠소. 한 번 날아 보면 알게 될 거요.",  -- 1462
+        "%d마리나 놓쳤군. 이 물엔 내 실력이 모자라: 미끼도 좋고, 더 좋은 낚싯대도 도움이 돼.",  -- 1463
+        "바늘에 미끼가 없네. 미끼는 기술을 올려 줘서 덜 놓치게 돼.",  -- 1464
+        "미끼가 거의 다 됐어. 새로 달면 기술이 유지되지.",  -- 1465
+        "여기서 아직 못 낚은 물고기: %d종. 계속 던지자.",  -- 1466
+        "이 물의 물고기는 다 낚았어. 그럼 새로운 곳으로.",  -- 1467
+        "아직 낚은 게 없어. 물마다 첫 물고기는 여기 적히지.",  -- 1468
+        "낚은 종류: %d. 물마다 몇 종이 더 숨어 있어: 낚시 패널에 거기서 못 낚은 건 ?로 나와.",  -- 1469
+        "불가에서 푹 쉬었어: 처치로 얻는 다음 경험치 %d은 두 배야.",  -- 1470
+        "쌓아 둔 휴식이 없어. 여관이나 도시에서 하룻밤 자면 한동안 처치 경험치가 두 배야.",  -- 1471
+        "%d 흡수",  -- 1472
+        "오른쪽 목록",  -- 1473
+        "가운데에 하나씩",  -- 1474
+        "치명타 치유 %d회",  -- 1475
+        "치명타 %d회",  -- 1476
+        "심판",  -- 1477
+        "큰 순간: 위치",  -- 1478
+        "캐릭터 오른쪽 재사용 대기시간 알림 바로 위의 블록(최신이 알림에 가장 가깝고, 이전 것은 흐려지며 위로 올라감) 또는 가운데에 하나씩",  -- 1479
+        "큰 순간이 어떻게 보이고 느껴지는지 보여줌",  -- 1480
+        "수집함",  -- 1481
+        "다른 아이템으로 수집함",  -- 1482
+        "아직 수집하지 않음",  -- 1483
+        "외형",  -- 1484
+        "세트를 고르면 그 조각들이 의상에 적용됩니다. %s 버튼을 눌러야 유지되며, 그 전에는 비용이 들지 않습니다.",  -- 1485
+        "수집품을 살펴보는 중...",  -- 1486
+        "의상이 원래대로 돌아왔습니다.",  -- 1487
+        "%s: %d/%d개 조각 적용.",  -- 1488
+        "%d개는 이 의상에 적용되지 않았습니다.",  -- 1489
+        "조각을 가진 세트 1개",  -- 1490
+        "조각을 가진 세트 %d개",  -- 1491
+        "착용할 수 없음",  -- 1492
+        "없음",  -- 1493
+        "조각 %d개 모두",  -- 1494
+        "%d/%d개 조각",  -- 1495
+        "없음: %s",  -- 1496
+        "아직 세트가 없습니다. 녹색 철 투구와 녹색 철 건틀릿처럼 이름이 같은 아이템은 하나라도 가지면 여기에 나타납니다.",  -- 1497
+        "되돌리기",  -- 1498
+        "사용자 세트 %s을(를) 삭제하시겠습니까? 되돌릴 수 없습니다.",  -- 1499
+        "삭제",  -- 1500
+        "먼저 사용자 세트에 커서를 올리세요.",  -- 1501
+        "%s  사용자 세트 삭제",  -- 1502
     },
     ptBR = {
         "erro:",  -- 1
@@ -10309,211 +10327,214 @@ local TRANSLATIONS = {
         "Os guias sobem este trecho coletando %s.",  -- 1292
         "%s: você tem %d, o plano usa %d",  -- 1293
         "para %s",  -- 1294
-        "O Mentor: o que o seu banco deixa fazer",  -- 1295
-        "O que seu banco pode fabricar",  -- 1296
-        "Nada mais a fazer com o que está no seu banco.",  -- 1297
-        "%d que você pode fazer contando o banco, %d delas só com ele.",  -- 1298
-        "O Mentor: %s %d > %d",  -- 1299
-        "O Mentor",  -- 1300
-        "Plano de evolução",  -- 1301
-        "ou",  -- 1302
-        "Colete %s",  -- 1303
-        "a aprender",  -- 1304
-        "Ocultar",  -- 1305
-        "O plano",  -- 1306
-        "Farmar isto",  -- 1307
-        "Farmar tudo",  -- 1308
-        "Com o banco",  -- 1309
-        "Usar o plano",  -- 1310
-        "duas vezes para ocultar",  -- 1311
-        "Nada aqui para experimentar.",  -- 1312
-        "%d adicionado(s) à lista de farm.",  -- 1313
-        "Nada faltando: você tem o necessário.",  -- 1314
-        "Abra a janela de uma profissão para fazer um plano.",  -- 1315
-        "O Mentor (plano de evolução): mostrar / ocultar",  -- 1316
-        "mostra o plano de evolução da última janela de profissão aberta, com os botões do controle nele",  -- 1317
-        "À esquerda das missões",  -- 1318
-        "À direita das missões",  -- 1319
-        "Abaixo das missões",  -- 1320
-        "A lista de farm está cheia.",  -- 1321
-        "Lista de farm: %s, %d desejados.",  -- 1322
-        "Farm",  -- 1323
-        "mais %d",  -- 1324
-        "Nada para farmar ainda.",  -- 1325
-        "Uma pilha a mais",  -- 1326
-        "Tirar",  -- 1327
-        "Limpar",  -- 1328
-        "Pronto",  -- 1329
-        "Tirar tudo da lista de farm?",  -- 1330
-        "Lista de farm: escolher / pronto",  -- 1331
-        "Lista de farm: adicionar o item que você aponta",  -- 1332
-        "Isso não está na lista de farm.",  -- 1333
-        "A lista de farm está vazia.",  -- 1334
-        "Lista de farm: onde fica",  -- 1335
-        "a lista de farm à esquerda da lista de missões, à direita dela ou abaixo das missões",  -- 1336
-        "a lista de farm ao lado da lista de missões: escolha com o controle; add <item> [quantos], remove <item>, clear, ou left / right / bottom para o lugar",  -- 1337
-        "Porcentagem de ameaça",  -- 1338
-        "sua parte da ameaça como número ao lado do ícone de ameaça, no quadro do alvo e nas placas de nome",  -- 1339
-        "Número de vida",  -- 1340
-        "a vida restante, abreviada (12.3k), na barra (não nas placas compactas: a porcentagem basta ali)",  -- 1341
-        "Seus debuffs",  -- 1342
-        "seus debuffs na unidade, acima do nome dela, com o tempo",  -- 1343
-        "Debuffs de todos",  -- 1344
-        "os debuffs que o jogo marca para as placas de nome de todos, não só os seus",  -- 1345
-        "Buffs do inimigo",  -- 1346
-        "os bônus de um inimigo ao lado das penalidades: os que importam (importantes, enfurecido ou que você pode dissipar ou roubar), ou todos quando Só os efeitos que importam está desligado",  -- 1347
-        "Ícone de controle de grupo",  -- 1348
-        "um ícone grande com o tempo quando a unidade está atordoada, imobilizada, amedrontada...",  -- 1349
-        "Brilho de aggro",  -- 1350
-        "um ícone de escudo e um brilho atrás do nome: vermelho enquanto ataca você, vermelho e amarelo quando você está prestes a puxá-lo, amarelo e azul quando você está perdendo, azul quando não está em você",  -- 1351
-        "Marcador de missão",  -- 1352
-        "uma marca dourada nas unidades de que suas missões ainda precisam",  -- 1353
-        "Animações das placas de identificação",  -- 1354
-        "as placas surgem aos poucos, vida baixa respira, controle de grupo cintila",  -- 1355
-        "Pequena",  -- 1356
-        "Normal",  -- 1357
-        "Grande",  -- 1358
-        "Nome completo",  -- 1359
-        "Nome curto",  -- 1360
-        "Sem nome",  -- 1361
-        "Completo",  -- 1362
-        "Mínimo mini",  -- 1363
-        "Tamanho das placas",  -- 1364
-        "o tamanho das barras nas placas de nome: pequenas e finas, normais ou grandes (mais largas e mais altas)",  -- 1365
-        "Nomes nas placas",  -- 1366
-        "o nome numa placa com barra de vida: completo, encurtado ou omitido (o quadro do alvo mostra completo; o nível e o ícone de classe ficam). Uma placa sem barra, a de um PNJ amigável, sempre mantém o nome",  -- 1367
-        "Visual das placas",  -- 1368
-        "os interruptores das placas de uma vez. Completo: tudo. Mínimo: sem barra de poder, guilda ou título, nomes curtos. Mínimo mini: barras pequenas com vida, seus efeitos negativos e os positivos que importam, nível e classe, sem nome (o quadro do alvo mostra). Ameaça, controle e lançamentos chamativos sempre ficam",  -- 1369
-        "Títulos de jogadores",  -- 1370
-        "mostra o título de um jogador junto ao nome dele",  -- 1371
-        "Guildas e funções de NPCs",  -- 1372
-        "uma linha abaixo do nome: a guilda do jogador ou o que o NPC faz",  -- 1373
-        "Barras de aliados em combate",  -- 1374
-        "as placas de identificação amigas mostram vida, recurso e lançamentos enquanto a unidade estiver em combate",  -- 1375
-        "Placas de nome amigáveis do próprio jogo",  -- 1376
-        "deixa as placas amigáveis (seu grupo, outros jogadores, PNJs amigáveis) com a aparência do jogo; as nossas só em inimigos",  -- 1377
-        "Barras de recurso",  -- 1378
-        "uma barra fina de mana, fúria ou energia abaixo da barra de vida",  -- 1379
-        "Alvo do lançamento",  -- 1380
-        "quem é o alvo de um lançamento, ao lado do nome da magia",  -- 1381
-        "Porcentagem de vida",  -- 1382
-        "a porcentagem de vida na barra",  -- 1383
-        "Nome na placa do seu alvo",  -- 1384
-        "desligado: a placa do seu alvo não mostra nome nem nível (o quadro do alvo mostra)",  -- 1385
-        "Níveis nas placas de nome",  -- 1386
-        "o nível antes do nome de um inimigo, colorido pela dificuldade",  -- 1387
-        "Placas de nome compactas",  -- 1388
-        "placas de nome com cerca de metade da largura",  -- 1389
-        "Lançamentos inimigos chamativos",  -- 1390
-        "o lançamento de um inimigo pisca, incha e pulsa cada vez mais rápido até concluir, para que possa ser interrompido a tempo",  -- 1391
-        "Ícones de classe nas placas",  -- 1392
-        "o ícone de classe de um jogador antes do nome, amigo ou inimigo",  -- 1393
-        "O que os PNJs fazem, como ícones",  -- 1394
-        "um ícone sobre PNJs amigáveis que oferecem algo: uma bolsa sobre vendedores, uma bigorna sobre ferreiros que consertam, um livro sobre instrutores... (os ícones do próprio jogo; aparecem mesmo enquanto a placa espera ser apontada)",  -- 1395
-        "NPCs amigos só ao apontar",  -- 1396
-        "as placas dos NPCs amigos (vendedores, doadores de missões, moradores) só aparecem enquanto você aponta para eles, como a dica deles",  -- 1397
-        "Nomes nas coisas com que você pode interagir",  -- 1398
-        "um nome sobre minérios, baús, placas e afins enquanto você está de frente para eles (desligado: ficam sem nome, o aviso do próprio jogo já diz o que são)",  -- 1399
-        "Mini placas",  -- 1400
-        "lacaios, bichos e inimigos cinzentos que não dão experiência ganham uma placa pequena: uma barra fina com seus efeitos negativos e sem nome (um bicho, sem barra, mantém o nome; a opção do jogo decide se eles têm placas)",  -- 1401
-        "Placas de nome do grupo em masmorras: só nomes",  -- 1402
-        "dentro de uma masmorra ou raide o próprio jogo desenha as placas de nome dos jogadores aliados e os addons não podem mudá-las: lá as opções do próprio jogo são ajustadas para mostrá-las como nomes na cor da classe, sem barras, como as nossas, e as barras do jogo voltam enquanto você luta (se as barras de aliados em combate estiverem ligadas); tudo volta ao que era quando você sai",  -- 1403
-        "Placas de nome do grupo em masmorras: ocultas",  -- 1404
-        "dentro de uma masmorra ou raide, desligar de vez as placas de nome do jogo para jogadores aliados (e deixá-las como estavam quando você sai)",  -- 1405
-        "mostra o que o jogo fornece para o nome do seu alvo (para solucionar problemas)",  -- 1406
-        "lista as placas de nome na tela e se usam nossa aparência (para solução de problemas)",  -- 1407
-        "Muito bem, então.",  -- 1408
-        "Ora, que monte.",  -- 1409
-        "Vejamos, vejamos...",  -- 1410
-        "Elune, me dê paciência.",  -- 1411
-        "Pelos naaru, que bagunça.",  -- 1412
-        "Mochila maldita.",  -- 1413
-        "Mochila arrumada é mochila leve.",  -- 1414
-        "Bah. Tralha demais.",  -- 1415
-        "Peso morto, tudo isso.",  -- 1416
-        "Paciência. A Mãe Terra provê.",  -- 1417
-        "Ei, o que temos aqui, mano?",  -- 1418
-        "Que bagunça. Indigno.",  -- 1419
-        "Tempo é dinheiro. Vamos contar.",  -- 1420
-        "É, isso serve.",  -- 1421
-        "Graças a Elune.",  -- 1422
-        "A Luz provê.",  -- 1423
-        "Hrm. Bom o bastante.",  -- 1424
-        "Hm. Dá para lutar.",  -- 1425
-        "Viajando leve. Bom.",  -- 1426
-        "Aceitável. Por pouco.",  -- 1427
-        "Nem um espaço sobrando. O lixo renderia %s: vender abre espaço.",  -- 1428
-        "Nem um espaço sobrando. O que não vou usar na estrada pode esperar no banco.",  -- 1429
-        "Lixo: %d, vale %s aqui. X vende o que escolhi; Venda esperta leva tudo.",  -- 1430
-        "%d destes são do banco: lá já tem mais iguais, ou eu os marquei. Depositar guarda tudo.",  -- 1431
-        "Só restam %d espaços. O lixo renderia %s em qualquer vendedor.",  -- 1432
-        "Só restam %d espaços. Hora de vender ou guardar algumas coisas.",  -- 1433
-        "Novos desde a última olhada: %d. O ponto dourado marca cada um.",  -- 1434
-        "Vale vender: %d. O filtro Vender junta todos, e cada dica diz onde rende mais.",  -- 1435
-        "Lixo: %d, vale %s. O próximo vendedor pode ficar com ele.",  -- 1436
-        "Só o essencial. Nada que valha a pena vender.",  -- 1437
-        "Tudo em ordem, e %d espaços livres.",  -- 1438
-        "Seu equipamento está consertado: %s.",  -- 1439
-        "Posso consertar seu equipamento por %s; uma peça quebrada não dá armadura nem atributos.",  -- 1440
-        "Suas bolsas estão cheias. Fico com %d coisas por %s: Venda esperta, e você tem espaço de novo.",  -- 1441
-        "Dou %s por %d coisas: o lixo e o que a casa de leilões não pagaria mais. Venda esperta, e pronto.",  -- 1442
-        "Fique com os %d que a casa de leilões quer: ela paga %s a mais que eu.",  -- 1443
-        "Suas bolsas estão cheias. Venda algo antes de comprar.",  -- 1444
-        "Nada nas suas bolsas pelo que eu pagaria bem. Dê uma olhada nas minhas mercadorias.",  -- 1445
-        "%d do que você carrega são daqui: guardo mais iguais, ou você os marcou. Depositar guarda tudo.",  -- 1446
-        "Guardo mais de %d coisas que você carrega. Retirar completa suas bolsas antes de partir.",  -- 1447
-        "Suas bolsas estão quase cheias. Deixe comigo o que não vai precisar na estrada.",  -- 1448
-        "Tudo seguro comigo, e suas bolsas têm %d espaços livres.",  -- 1449
-        "Nada para você hoje. Conferi duas vezes.",  -- 1450
-        "Cartas para você: %d, nada anexado. Leia quando quiser.",  -- 1451
-        "Cartas para você: %d. Dentro: %s.",  -- 1452
-        "Pegar tudo esvazia todas de uma vez.",  -- 1453
-        "Pagamento na entrega: %d. Essas você abre e paga por conta própria.",  -- 1454
-        "Suas bolsas estão cheias: os itens esperam nas cartas.",  -- 1455
-        "Para onde? Aponte um lugar e eu digo quanto tempo leva a viagem.",  -- 1456
-        "%s: cerca de %s pelo mapa. Você ainda não voou essa rota.",  -- 1457
-        "%s: cerca de %s, pelo seu último voo até lá.",  -- 1458
-        "%s: ainda não sei dizer quanto tempo. Voe uma vez e eu saberei.",  -- 1459
-        "%d escaparam. Esta água pede mais perícia do que tenho: isca ajuda, e uma vara melhor também.",  -- 1460
-        "Sem isca no anzol. Ela soma à minha perícia, e menos escapam.",  -- 1461
-        "A isca está quase no fim. Outra no anzol mantém minha perícia.",  -- 1462
-        "Peixes daqui que ainda não pesquei: %d. Continue lançando.",  -- 1463
-        "Já pesquei todo peixe desta água. Para outro lugar, então.",  -- 1464
-        "Nada pescado ainda. O primeiro peixe de cada água vai aqui.",  -- 1465
-        "Espécies pescadas: %d. Cada água esconde mais algumas: o painel de pesca mostra um ? para cada uma que não peguei lá.",  -- 1466
-        "Descansado junto ao fogo: os próximos %d de experiência de abates valem o dobro.",  -- 1467
-        "Nenhum descanso acumulado. Uma noite numa estalagem ou numa cidade, e os abates dão o dobro de experiência por um tempo.",  -- 1468
-        "%d absorvido",  -- 1469
-        "Lista à direita",  -- 1470
-        "Um no centro",  -- 1471
-        "%d curas críticas",  -- 1472
-        "%d críticos",  -- 1473
-        "Julgamento",  -- 1474
-        "Grandes momentos: onde",  -- 1475
-        "um bloco logo acima dos avisos de recarga à direita do seu personagem, o mais recente junto a eles e os anteriores subindo enquanto somem, ou um de cada vez no centro",  -- 1476
-        "mostra como é ver e sentir um grande momento",  -- 1477
-        "coletada",  -- 1478
-        "coletada por outro item",  -- 1479
-        "ainda não coletada",  -- 1480
-        "Aparência",  -- 1481
-        "Escolha um conjunto para colocar as peças no seu traje. %s mantém; nada é pago antes disso.",  -- 1482
-        "Examinando sua coleção...",  -- 1483
-        "Seu traje voltou a ser como era.",  -- 1484
-        "%s: %d de %d peças colocadas.",  -- 1485
-        "%d não puderam ir para este traje.",  -- 1486
-        "Um conjunto do qual você tem peças",  -- 1487
-        "%d conjuntos dos quais você tem peças",  -- 1488
-        "você não pode usar isto",  -- 1489
-        "faltando",  -- 1490
-        "Todas as %d peças",  -- 1491
-        "%d de %d peças",  -- 1492
-        "Faltando: %s",  -- 1493
-        "Nenhum conjunto ainda. Itens que compartilham um nome, como Elmo de Ferro Verde e Manoplas de Ferro Verde, aparecem aqui assim que você tiver um deles.",  -- 1494
-        "Desfazer",  -- 1495
-        "Excluir o conjunto personalizado %s? Não dá para recuperá-lo.",  -- 1496
-        "Excluir",  -- 1497
-        "Aponte primeiro para um conjunto personalizado.",  -- 1498
-        "%s  Excluir conjunto personalizado",  -- 1499
+        "É mais barato comprar do que fabricar com %s",  -- 1295
+        "Feito com %s",  -- 1296
+        "O Mentor: o que o seu banco deixa fazer",  -- 1297
+        "O que seu banco pode fabricar",  -- 1298
+        "Nada mais a fazer com o que está no seu banco.",  -- 1299
+        "%d que você pode fazer contando o banco, %d delas só com ele.",  -- 1300
+        "O Mentor: %s %d > %d",  -- 1301
+        "O Mentor",  -- 1302
+        "Plano de evolução",  -- 1303
+        "ou",  -- 1304
+        "Colete %s",  -- 1305
+        "a aprender",  -- 1306
+        "mais barato comprar",  -- 1307
+        "Ocultar",  -- 1308
+        "O plano",  -- 1309
+        "Farmar isto",  -- 1310
+        "Farmar tudo",  -- 1311
+        "Com o banco",  -- 1312
+        "Usar o plano",  -- 1313
+        "duas vezes para ocultar",  -- 1314
+        "Nada aqui para experimentar.",  -- 1315
+        "%d adicionado(s) à lista de farm.",  -- 1316
+        "Nada faltando: você tem o necessário.",  -- 1317
+        "Abra a janela de uma profissão para fazer um plano.",  -- 1318
+        "O Mentor (plano de evolução): mostrar / ocultar",  -- 1319
+        "mostra o plano de evolução da última janela de profissão aberta, com os botões do controle nele",  -- 1320
+        "À esquerda das missões",  -- 1321
+        "À direita das missões",  -- 1322
+        "Abaixo das missões",  -- 1323
+        "A lista de farm está cheia.",  -- 1324
+        "Lista de farm: %s, %d desejados.",  -- 1325
+        "Farm",  -- 1326
+        "mais %d",  -- 1327
+        "Nada para farmar ainda.",  -- 1328
+        "Uma pilha a mais",  -- 1329
+        "Tirar",  -- 1330
+        "Limpar",  -- 1331
+        "Pronto",  -- 1332
+        "Tirar tudo da lista de farm?",  -- 1333
+        "Lista de farm: escolher / pronto",  -- 1334
+        "Lista de farm: adicionar o item que você aponta",  -- 1335
+        "Isso não está na lista de farm.",  -- 1336
+        "A lista de farm está vazia.",  -- 1337
+        "Lista de farm: onde fica",  -- 1338
+        "a lista de farm à esquerda da lista de missões, à direita dela ou abaixo das missões",  -- 1339
+        "a lista de farm ao lado da lista de missões: escolha com o controle; add <item> [quantos], remove <item>, clear, ou left / right / bottom para o lugar",  -- 1340
+        "Porcentagem de ameaça",  -- 1341
+        "sua parte da ameaça como número ao lado do ícone de ameaça, no quadro do alvo e nas placas de nome",  -- 1342
+        "Número de vida",  -- 1343
+        "a vida restante, abreviada (12.3k), na barra (não nas placas compactas: a porcentagem basta ali)",  -- 1344
+        "Seus debuffs",  -- 1345
+        "seus debuffs na unidade, acima do nome dela, com o tempo",  -- 1346
+        "Debuffs de todos",  -- 1347
+        "os debuffs que o jogo marca para as placas de nome de todos, não só os seus",  -- 1348
+        "Buffs do inimigo",  -- 1349
+        "os bônus de um inimigo ao lado das penalidades: os que importam (importantes, enfurecido ou que você pode dissipar ou roubar), ou todos quando Só os efeitos que importam está desligado",  -- 1350
+        "Ícone de controle de grupo",  -- 1351
+        "um ícone grande com o tempo quando a unidade está atordoada, imobilizada, amedrontada...",  -- 1352
+        "Brilho de aggro",  -- 1353
+        "um ícone de escudo e um brilho atrás do nome: vermelho enquanto ataca você, vermelho e amarelo quando você está prestes a puxá-lo, amarelo e azul quando você está perdendo, azul quando não está em você",  -- 1354
+        "Marcador de missão",  -- 1355
+        "uma marca dourada nas unidades de que suas missões ainda precisam",  -- 1356
+        "Animações das placas de identificação",  -- 1357
+        "as placas surgem aos poucos, vida baixa respira, controle de grupo cintila",  -- 1358
+        "Pequena",  -- 1359
+        "Normal",  -- 1360
+        "Grande",  -- 1361
+        "Nome completo",  -- 1362
+        "Nome curto",  -- 1363
+        "Sem nome",  -- 1364
+        "Completo",  -- 1365
+        "Mínimo mini",  -- 1366
+        "Tamanho das placas",  -- 1367
+        "o tamanho das barras nas placas de nome: pequenas e finas, normais ou grandes (mais largas e mais altas)",  -- 1368
+        "Nomes nas placas",  -- 1369
+        "o nome numa placa com barra de vida: completo, encurtado ou omitido (o quadro do alvo mostra completo; o nível e o ícone de classe ficam). Uma placa sem barra, a de um PNJ amigável, sempre mantém o nome",  -- 1370
+        "Visual das placas",  -- 1371
+        "os interruptores das placas de uma vez. Completo: tudo. Mínimo: sem barra de poder, guilda ou título, nomes curtos. Mínimo mini: barras pequenas com vida, seus efeitos negativos e os positivos que importam, nível e classe, sem nome (o quadro do alvo mostra). Ameaça, controle e lançamentos chamativos sempre ficam",  -- 1372
+        "Títulos de jogadores",  -- 1373
+        "mostra o título de um jogador junto ao nome dele",  -- 1374
+        "Guildas e funções de NPCs",  -- 1375
+        "uma linha abaixo do nome: a guilda do jogador ou o que o NPC faz",  -- 1376
+        "Barras de aliados em combate",  -- 1377
+        "as placas de identificação amigas mostram vida, recurso e lançamentos enquanto a unidade estiver em combate",  -- 1378
+        "Placas de nome amigáveis do próprio jogo",  -- 1379
+        "deixa as placas amigáveis (seu grupo, outros jogadores, PNJs amigáveis) com a aparência do jogo; as nossas só em inimigos",  -- 1380
+        "Barras de recurso",  -- 1381
+        "uma barra fina de mana, fúria ou energia abaixo da barra de vida",  -- 1382
+        "Alvo do lançamento",  -- 1383
+        "quem é o alvo de um lançamento, ao lado do nome da magia",  -- 1384
+        "Porcentagem de vida",  -- 1385
+        "a porcentagem de vida na barra",  -- 1386
+        "Nome na placa do seu alvo",  -- 1387
+        "desligado: a placa do seu alvo não mostra nome nem nível (o quadro do alvo mostra)",  -- 1388
+        "Níveis nas placas de nome",  -- 1389
+        "o nível antes do nome de um inimigo, colorido pela dificuldade",  -- 1390
+        "Placas de nome compactas",  -- 1391
+        "placas de nome com cerca de metade da largura",  -- 1392
+        "Lançamentos inimigos chamativos",  -- 1393
+        "o lançamento de um inimigo pisca, incha e pulsa cada vez mais rápido até concluir, para que possa ser interrompido a tempo",  -- 1394
+        "Ícones de classe nas placas",  -- 1395
+        "o ícone de classe de um jogador antes do nome, amigo ou inimigo",  -- 1396
+        "O que os PNJs fazem, como ícones",  -- 1397
+        "um ícone sobre PNJs amigáveis que oferecem algo: uma bolsa sobre vendedores, uma bigorna sobre ferreiros que consertam, um livro sobre instrutores... (os ícones do próprio jogo; aparecem mesmo enquanto a placa espera ser apontada)",  -- 1398
+        "NPCs amigos só ao apontar",  -- 1399
+        "as placas dos NPCs amigos (vendedores, doadores de missões, moradores) só aparecem enquanto você aponta para eles, como a dica deles",  -- 1400
+        "Nomes nas coisas com que você pode interagir",  -- 1401
+        "um nome sobre minérios, baús, placas e afins enquanto você está de frente para eles (desligado: ficam sem nome, o aviso do próprio jogo já diz o que são)",  -- 1402
+        "Mini placas",  -- 1403
+        "lacaios, bichos e inimigos cinzentos que não dão experiência ganham uma placa pequena: uma barra fina com seus efeitos negativos e sem nome (um bicho, sem barra, mantém o nome; a opção do jogo decide se eles têm placas)",  -- 1404
+        "Placas de nome do grupo em masmorras: só nomes",  -- 1405
+        "dentro de uma masmorra ou raide o próprio jogo desenha as placas de nome dos jogadores aliados e os addons não podem mudá-las: lá as opções do próprio jogo são ajustadas para mostrá-las como nomes na cor da classe, sem barras, como as nossas, e as barras do jogo voltam enquanto você luta (se as barras de aliados em combate estiverem ligadas); tudo volta ao que era quando você sai",  -- 1406
+        "Placas de nome do grupo em masmorras: ocultas",  -- 1407
+        "dentro de uma masmorra ou raide, desligar de vez as placas de nome do jogo para jogadores aliados (e deixá-las como estavam quando você sai)",  -- 1408
+        "mostra o que o jogo fornece para o nome do seu alvo (para solucionar problemas)",  -- 1409
+        "lista as placas de nome na tela e se usam nossa aparência (para solução de problemas)",  -- 1410
+        "Muito bem, então.",  -- 1411
+        "Ora, que monte.",  -- 1412
+        "Vejamos, vejamos...",  -- 1413
+        "Elune, me dê paciência.",  -- 1414
+        "Pelos naaru, que bagunça.",  -- 1415
+        "Mochila maldita.",  -- 1416
+        "Mochila arrumada é mochila leve.",  -- 1417
+        "Bah. Tralha demais.",  -- 1418
+        "Peso morto, tudo isso.",  -- 1419
+        "Paciência. A Mãe Terra provê.",  -- 1420
+        "Ei, o que temos aqui, mano?",  -- 1421
+        "Que bagunça. Indigno.",  -- 1422
+        "Tempo é dinheiro. Vamos contar.",  -- 1423
+        "É, isso serve.",  -- 1424
+        "Graças a Elune.",  -- 1425
+        "A Luz provê.",  -- 1426
+        "Hrm. Bom o bastante.",  -- 1427
+        "Hm. Dá para lutar.",  -- 1428
+        "Viajando leve. Bom.",  -- 1429
+        "Aceitável. Por pouco.",  -- 1430
+        "Nem um espaço sobrando. O lixo renderia %s: vender abre espaço.",  -- 1431
+        "Nem um espaço sobrando. O que não vou usar na estrada pode esperar no banco.",  -- 1432
+        "Lixo: %d, vale %s aqui. X vende o que escolhi; Venda esperta leva tudo.",  -- 1433
+        "%d destes são do banco: lá já tem mais iguais, ou eu os marquei. Depositar guarda tudo.",  -- 1434
+        "Só restam %d espaços. O lixo renderia %s em qualquer vendedor.",  -- 1435
+        "Só restam %d espaços. Hora de vender ou guardar algumas coisas.",  -- 1436
+        "Novos desde a última olhada: %d. O ponto dourado marca cada um.",  -- 1437
+        "Vale vender: %d. O filtro Vender junta todos, e cada dica diz onde rende mais.",  -- 1438
+        "Lixo: %d, vale %s. O próximo vendedor pode ficar com ele.",  -- 1439
+        "Só o essencial. Nada que valha a pena vender.",  -- 1440
+        "Tudo em ordem, e %d espaços livres.",  -- 1441
+        "Seu equipamento está consertado: %s.",  -- 1442
+        "Posso consertar seu equipamento por %s; uma peça quebrada não dá armadura nem atributos.",  -- 1443
+        "Suas bolsas estão cheias. Fico com %d coisas por %s: Venda esperta, e você tem espaço de novo.",  -- 1444
+        "Dou %s por %d coisas: o lixo e o que a casa de leilões não pagaria mais. Venda esperta, e pronto.",  -- 1445
+        "Fique com os %d que a casa de leilões quer: ela paga %s a mais que eu.",  -- 1446
+        "Suas bolsas estão cheias. Venda algo antes de comprar.",  -- 1447
+        "Nada nas suas bolsas pelo que eu pagaria bem. Dê uma olhada nas minhas mercadorias.",  -- 1448
+        "%d do que você carrega são daqui: guardo mais iguais, ou você os marcou. Depositar guarda tudo.",  -- 1449
+        "Guardo mais de %d coisas que você carrega. Retirar completa suas bolsas antes de partir.",  -- 1450
+        "Suas bolsas estão quase cheias. Deixe comigo o que não vai precisar na estrada.",  -- 1451
+        "Tudo seguro comigo, e suas bolsas têm %d espaços livres.",  -- 1452
+        "Nada para você hoje. Conferi duas vezes.",  -- 1453
+        "Cartas para você: %d, nada anexado. Leia quando quiser.",  -- 1454
+        "Cartas para você: %d. Dentro: %s.",  -- 1455
+        "Pegar tudo esvazia todas de uma vez.",  -- 1456
+        "Pagamento na entrega: %d. Essas você abre e paga por conta própria.",  -- 1457
+        "Suas bolsas estão cheias: os itens esperam nas cartas.",  -- 1458
+        "Para onde? Aponte um lugar e eu digo quanto tempo leva a viagem.",  -- 1459
+        "%s: cerca de %s pelo mapa. Você ainda não voou essa rota.",  -- 1460
+        "%s: cerca de %s, pelo seu último voo até lá.",  -- 1461
+        "%s: ainda não sei dizer quanto tempo. Voe uma vez e eu saberei.",  -- 1462
+        "%d escaparam. Esta água pede mais perícia do que tenho: isca ajuda, e uma vara melhor também.",  -- 1463
+        "Sem isca no anzol. Ela soma à minha perícia, e menos escapam.",  -- 1464
+        "A isca está quase no fim. Outra no anzol mantém minha perícia.",  -- 1465
+        "Peixes daqui que ainda não pesquei: %d. Continue lançando.",  -- 1466
+        "Já pesquei todo peixe desta água. Para outro lugar, então.",  -- 1467
+        "Nada pescado ainda. O primeiro peixe de cada água vai aqui.",  -- 1468
+        "Espécies pescadas: %d. Cada água esconde mais algumas: o painel de pesca mostra um ? para cada uma que não peguei lá.",  -- 1469
+        "Descansado junto ao fogo: os próximos %d de experiência de abates valem o dobro.",  -- 1470
+        "Nenhum descanso acumulado. Uma noite numa estalagem ou numa cidade, e os abates dão o dobro de experiência por um tempo.",  -- 1471
+        "%d absorvido",  -- 1472
+        "Lista à direita",  -- 1473
+        "Um no centro",  -- 1474
+        "%d curas críticas",  -- 1475
+        "%d críticos",  -- 1476
+        "Julgamento",  -- 1477
+        "Grandes momentos: onde",  -- 1478
+        "um bloco logo acima dos avisos de recarga à direita do seu personagem, o mais recente junto a eles e os anteriores subindo enquanto somem, ou um de cada vez no centro",  -- 1479
+        "mostra como é ver e sentir um grande momento",  -- 1480
+        "coletada",  -- 1481
+        "coletada por outro item",  -- 1482
+        "ainda não coletada",  -- 1483
+        "Aparência",  -- 1484
+        "Escolha um conjunto para colocar as peças no seu traje. %s mantém; nada é pago antes disso.",  -- 1485
+        "Examinando sua coleção...",  -- 1486
+        "Seu traje voltou a ser como era.",  -- 1487
+        "%s: %d de %d peças colocadas.",  -- 1488
+        "%d não puderam ir para este traje.",  -- 1489
+        "Um conjunto do qual você tem peças",  -- 1490
+        "%d conjuntos dos quais você tem peças",  -- 1491
+        "você não pode usar isto",  -- 1492
+        "faltando",  -- 1493
+        "Todas as %d peças",  -- 1494
+        "%d de %d peças",  -- 1495
+        "Faltando: %s",  -- 1496
+        "Nenhum conjunto ainda. Itens que compartilham um nome, como Elmo de Ferro Verde e Manoplas de Ferro Verde, aparecem aqui assim que você tiver um deles.",  -- 1497
+        "Desfazer",  -- 1498
+        "Excluir o conjunto personalizado %s? Não dá para recuperá-lo.",  -- 1499
+        "Excluir",  -- 1500
+        "Aponte primeiro para um conjunto personalizado.",  -- 1501
+        "%s  Excluir conjunto personalizado",  -- 1502
     },
     ruRU = {
         "ошибка:",  -- 1
@@ -11810,211 +11831,214 @@ local TRANSLATIONS = {
         "Гайды проходят этот отрезок, собирая %s.",  -- 1292
         "%s: у вас %d, план использует %d",  -- 1293
         "для %s",  -- 1294
-        "Наставник: что можно сделать с банком",  -- 1295
-        "Что можно сделать из банка",  -- 1296
-        "С тем, что лежит в банке, больше ничего не сделать.",  -- 1297
-        "%d можно сделать с учётом банка, %d из них только с ним.",  -- 1298
-        "Наставник: %s %d > %d",  -- 1299
-        "Наставник",  -- 1300
-        "План прокачки",  -- 1301
-        "или",  -- 1302
-        "Собирать %s",  -- 1303
-        "выучить",  -- 1304
-        "Скрыть",  -- 1305
-        "План",  -- 1306
-        "Фармить это",  -- 1307
-        "Фармить всё",  -- 1308
-        "С банком",  -- 1309
-        "Управлять планом",  -- 1310
-        "дважды — скрыть",  -- 1311
-        "Здесь нечего примерить.",  -- 1312
-        "Добавлено в список фарма: %d.",  -- 1313
-        "Всего хватает: у вас есть всё нужное.",  -- 1314
-        "Откройте окно профессии, чтобы составить план.",  -- 1315
-        "Наставник (план прокачки): показать / скрыть",  -- 1316
-        "показывает план прокачки последнего открытого окна профессии, с кнопками контроллера на нём",  -- 1317
-        "Слева от заданий",  -- 1318
-        "Справа от заданий",  -- 1319
-        "Под заданиями",  -- 1320
-        "Список фарма полон.",  -- 1321
-        "Список фарма: %s, нужно %d.",  -- 1322
-        "Фарм",  -- 1323
-        "ещё %d",  -- 1324
-        "Пока нечего фармить.",  -- 1325
-        "На стопку больше",  -- 1326
-        "Убрать",  -- 1327
-        "Очистить",  -- 1328
-        "Готово",  -- 1329
-        "Убрать всё из списка фарма?",  -- 1330
-        "Список фарма: выбрать / готово",  -- 1331
-        "Список фарма: добавить предмет под указателем",  -- 1332
-        "Этого нет в списке фарма.",  -- 1333
-        "Список фарма пуст.",  -- 1334
-        "Список фарма: где он стоит",  -- 1335
-        "список фарма слева от списка заданий, справа от него или под его заданиями",  -- 1336
-        "список фарма рядом со списком заданий: выбор контроллером; add <предмет> [сколько], remove <предмет>, clear, или left / right / bottom для его места",  -- 1337
-        "Процент угрозы",  -- 1338
-        "ваша доля угрозы числом рядом со значком угрозы, на рамке цели и на индикаторах здоровья",  -- 1339
-        "Число здоровья",  -- 1340
-        "оставшееся здоровье, сокращённо (12.3k), на полосе (не на компактных индикаторах: там хватает процента)",  -- 1341
-        "Ваши ослабления",  -- 1342
-        "ваши ослабления на цели, над её именем, с оставшимся временем",  -- 1343
-        "Дебаффы от всех",  -- 1344
-        "дебаффы, которые игра отмечает для индикаторов здоровья от всех, а не только ваши",  -- 1345
-        "Баффы врага",  -- 1346
-        "усиления врага рядом с его ослаблениями: только важные (важные, исступление или те, что вы можете рассеять или украсть), или все, если «Только важные эффекты» выключено",  -- 1347
-        "Значок контроля",  -- 1348
-        "большой значок с временем, когда цель оглушена, обездвижена, испугана...",  -- 1349
-        "Свечение угрозы",  -- 1350
-        "значок щита и свечение за именем: красное, пока он атакует вас, красное и жёлтое, когда вы вот-вот перетянете его, жёлтое и синее, когда вы его теряете, синее, когда он не на вас",  -- 1351
-        "Метка задания",  -- 1352
-        "золотая отметка на целях, которые еще нужны для ваших заданий",  -- 1353
-        "Анимация индикаторов здоровья",  -- 1354
-        "индикаторы плавно появляются, низкое здоровье «дышит», контроль толпы мерцает",  -- 1355
-        "Маленькие",  -- 1356
-        "Обычные",  -- 1357
-        "Большие",  -- 1358
-        "Полное имя",  -- 1359
-        "Короткое имя",  -- 1360
-        "Без имени",  -- 1361
-        "Полный",  -- 1362
-        "Минимальный мини",  -- 1363
-        "Размер индикаторов",  -- 1364
-        "размер полос на индикаторах здоровья: маленькие и тонкие, обычные или большие (шире и выше)",  -- 1365
-        "Имена на индикаторах",  -- 1366
-        "имя на индикаторе с полосой здоровья: полностью, сокращённо или без него (рамка цели показывает его полностью; уровень и значок класса остаются). Индикатор без полосы, у дружественного НИП, всегда сохраняет имя",  -- 1367
-        "Вид индикаторов",  -- 1368
-        "переключатели индикаторов одним нажатием. Полный: всё. Минимальный: без полосы ресурса, гильдии и звания, короткие имена. Минимальный мини: маленькие полосы со здоровьем, ваши отрицательные эффекты и важные положительные, уровень и класс, без имени (оно в рамке цели). Угроза, контроль и заметные заклинания остаются всегда",  -- 1369
-        "Звания игроков",  -- 1370
-        "показывает звание игрока рядом с его именем",  -- 1371
-        "Гильдии и занятия NPC",  -- 1372
-        "строка под именем: гильдия игрока или чем занимается NPC",  -- 1373
-        "Полосы союзников в бою",  -- 1374
-        "индикаторы дружественных целей показывают здоровье, ресурс и заклинания, пока цель в бою",  -- 1375
-        "Собственные дружественные индикаторы игры",  -- 1376
-        "оставить дружественные индикаторы (ваша группа, другие игроки, дружественные NPC) в виде игры; наши — только на врагах",  -- 1377
-        "Полосы ресурса",  -- 1378
-        "тонкая полоса маны, ярости или энергии под полосой здоровья",  -- 1379
-        "Цель заклинания",  -- 1380
-        "на кого направлено заклинание, рядом с его названием",  -- 1381
-        "Здоровье в процентах",  -- 1382
-        "процент здоровья на полосе",  -- 1383
-        "Имя на табличке цели",  -- 1384
-        "выкл.: табличка вашей цели не показывает имя и уровень (их показывает рамка цели)",  -- 1385
-        "Уровни на табличках",  -- 1386
-        "уровень перед именем противника, цвет по сложности",  -- 1387
-        "Компактные индикаторы здоровья",  -- 1388
-        "индикаторы здоровья примерно вдвое уже",  -- 1389
-        "Заметные заклинания врагов",  -- 1390
-        "заклинание врага мигает, раздувается и пульсирует все быстрее, пока не завершится, чтобы его можно было прервать вовремя",  -- 1391
-        "Значки классов на индикаторах",  -- 1392
-        "значок класса игрока перед его именем, друг это или враг",  -- 1393
-        "Чем заняты НИП, значками",  -- 1394
-        "значок над дружественными НИП, которые что-то предлагают: сумка над торговцами, наковальня над кузнецами, которые чинят, книга над учителями... (значки самой игры; видны, даже пока индикатор ждёт, чтобы на него указали)",  -- 1395
-        "Дружественные NPC только при наведении",  -- 1396
-        "индикаторы дружественных NPC (торговцев, раздающих задания, горожан) показываются, только пока вы наводите на них курсор, как и их подсказка",  -- 1397
-        "Названия над предметами, с которыми можно взаимодействовать",  -- 1398
-        "название над рудой, сундуками, табличками и тому подобным, пока вы стоите к ним лицом (выкл.: они остаются без названия, подсказка самой игры уже говорит, что это)",  -- 1399
-        "Мини-индикаторы",  -- 1400
-        "прислужники, зверьки и серые противники без опыта получают маленькую табличку: тонкая полоса с вашими эффектами на ней и без имени (зверёк без полосы сохраняет имя; есть ли таблички вообще, решает настройка игры)",  -- 1401
-        "Индикаторы группы в подземельях: только имена",  -- 1402
-        "в подземелье или рейде игра сама рисует индикаторы здоровья дружественных игроков, и аддоны не могут их менять: там собственные настройки игры выставляются так, чтобы они показывались как имена цвета класса без полос, как наши, а на время боя полосы игры возвращаются (если включены полосы союзников в бою); при выходе всё возвращается обратно",  -- 1403
-        "Индикаторы группы в подземельях: скрыты",  -- 1404
-        "в подземелье или рейде полностью выключить индикаторы здоровья дружественных игроков (и вернуть как было, когда вы выходите)",  -- 1405
-        "показывает, что игра отдаёт для имени вашей цели (для поиска неполадок)",  -- 1406
-        "показать индикаторы на экране и в нашем ли они виде (для поиска проблем)",  -- 1407
-        "Так, ладно.",  -- 1408
-        "Ох, ну и куча.",  -- 1409
-        "Так, посмотрим, посмотрим...",  -- 1410
-        "Элуна, дай мне терпения.",  -- 1411
-        "Во имя наару, ну и мешанина.",  -- 1412
-        "Проклятый мешок.",  -- 1413
-        "Опрятный мешок - лёгкий мешок.",  -- 1414
-        "Ба. Слишком много барахла.",  -- 1415
-        "Мёртвый груз, всё до последнего.",  -- 1416
-        "Терпение. Мать-Земля даст.",  -- 1417
-        "Эй, что тут у нас, мон?",  -- 1418
-        "Какой беспорядок. Недостойно.",  -- 1419
-        "Время - деньги. Посчитаем.",  -- 1420
-        "Ага, сойдёт.",  -- 1421
-        "Хвала Элуне.",  -- 1422
-        "Свет даст.",  -- 1423
-        "Хрм. Сойдёт.",  -- 1424
-        "Хм. Хватит, чтобы сражаться.",  -- 1425
-        "Путешествую налегке. Хорошо.",  -- 1426
-        "Приемлемо. Едва.",  -- 1427
-        "Ни одного свободного места. Хлам принесёт %s: продав его, освобожу место.",  -- 1428
-        "Ни одного свободного места. Всё, что не нужно в пути, подождёт в банке.",  -- 1429
-        "Хлам: %d, здесь стоит %s. X продаёт выбранное; Умная продажа забирает всё.",  -- 1430
-        "%d из этого место в банке: там уже есть такое же, или я это пометил. «Положить» уберёт.",  -- 1431
-        "Осталось всего %d мест. Хлам у любого торговца принесёт %s.",  -- 1432
-        "Осталось всего %d мест. Пора что-то продать или сдать в банк.",  -- 1433
-        "Нового с прошлого раза: %d. Каждое отмечено золотой точкой.",  -- 1434
-        "Стоит продать: %d. Фильтр «Продать» собирает их, а подсказка говорит, где дадут больше.",  -- 1435
-        "Хлам: %d, стоит %s. Отдам ближайшему торговцу.",  -- 1436
-        "Только самое нужное. Продавать нечего.",  -- 1437
-        "Всё в порядке, свободно мест: %d.",  -- 1438
-        "Ваше снаряжение починено: %s.",  -- 1439
-        "Могу починить снаряжение за %s; сломанная вещь не даёт ни брони, ни характеристик.",  -- 1440
-        "Сумки полны. Возьму %d вещей за %s: «Умная продажа» - и снова есть место.",  -- 1441
-        "Дам %s за %d вещей: хлам и то, за что аукцион больше не даст. «Умная продажа» - и готово.",  -- 1442
-        "Оставьте %d вещей для аукциона: там дадут на %s больше, чем я.",  -- 1443
-        "Сумки полны. Продайте мне что-нибудь, прежде чем покупать.",  -- 1444
-        "В ваших сумках нет ничего, за что я хорошо заплачу. Взгляните на мой товар.",  -- 1445
-        "%d из того, что вы носите, место здесь: у меня есть такое же, или вы это пометили. «Положить» уберёт.",  -- 1446
-        "У меня есть ещё %d вещей из тех, что вы носите. «Забрать» пополнит сумки перед дорогой.",  -- 1447
-        "Сумки почти полны. Оставьте у меня то, что не понадобится в пути.",  -- 1448
-        "У меня всё в сохранности, а в сумках свободно мест: %d.",  -- 1449
-        "Сегодня для вас ничего. Я проверил дважды.",  -- 1450
-        "Писем для вас: %d, без вложений. Читайте, когда захотите.",  -- 1451
-        "Писем для вас: %d. Внутри: %s.",  -- 1452
-        "«Забрать всё» опустошит их за раз.",  -- 1453
-        "Наложенным платежом: %d. Их вы открываете и оплачиваете сами.",  -- 1454
-        "Сумки полны: предметы подождут в письмах.",  -- 1455
-        "Куда летим? Укажите место, и я скажу, сколько длится полёт.",  -- 1456
-        "%s: около %s по карте. Этот маршрут вы ещё не летали.",  -- 1457
-        "%s: около %s, судя по вашему прошлому полёту туда.",  -- 1458
-        "%s: пока не скажу, сколько. Слетайте разок, и я буду знать.",  -- 1459
-        "Сорвалось: %d. Этой воде нужно больше навыка, чем у меня: поможет наживка, и удочка получше тоже.",  -- 1460
-        "На крючке нет наживки. Она прибавляет к навыку, и срывается меньше.",  -- 1461
-        "Наживка почти кончилась. Новая на крючке сохранит навык.",  -- 1462
-        "Рыбы здесь, что я ещё не ловил: %d. Забрасываю дальше.",  -- 1463
-        "Я поймал всю рыбу этой воды. Значит, в новое место.",  -- 1464
-        "Ещё ничего не поймано. Первая рыба каждой воды записывается сюда.",  -- 1465
-        "Поймано видов: %d. В каждой воде прячется ещё несколько: панель рыбалки показывает ? для тех, что я там не ловил.",  -- 1466
-        "Отдохнул у огня: следующие %d опыта за убийства идут вдвойне.",  -- 1467
-        "Отдыха не накоплено. Ночь в таверне или в городе - и какое-то время убийства дают двойной опыт.",  -- 1468
-        "%d поглощено",  -- 1469
-        "Лента справа",  -- 1470
-        "По одному в центре",  -- 1471
-        "Крит. исцелений: %d",  -- 1472
-        "Критов: %d",  -- 1473
-        "Правосудие",  -- 1474
-        "Яркие моменты: где",  -- 1475
-        "блок прямо над оповещениями о восстановлении справа от вашего персонажа: новый ближе к ним, а прежние поднимаются выше, угасая, или по одному в центре",  -- 1476
-        "показывает, как выглядит и ощущается большой момент",  -- 1477
-        "собрана",  -- 1478
-        "собрана через другой предмет",  -- 1479
-        "еще не собрана",  -- 1480
-        "Модель",  -- 1481
-        "Выберите комплект, чтобы надеть его предметы на образ. %s сохраняет его; до этого ничего не оплачивается.",  -- 1482
-        "Просматриваем вашу коллекцию...",  -- 1483
-        "Образ снова такой, каким был.",  -- 1484
-        "%s: надето %d из %d предметов.",  -- 1485
-        "Не подошло к этому образу: %d.",  -- 1486
-        "Один комплект, от которого у вас есть предметы",  -- 1487
-        "Комплектов, от которых у вас есть предметы: %d",  -- 1488
-        "вы не можете это носить",  -- 1489
-        "нет",  -- 1490
-        "Все предметы: %d",  -- 1491
-        "%d из %d предметов",  -- 1492
-        "Нет: %s",  -- 1493
-        "Комплектов пока нет. Предметы с общим названием, например Зеленый железный шлем и Зеленые железные рукавицы, появятся здесь, как только у вас будет хотя бы один.",  -- 1494
-        "Отменить",  -- 1495
-        "Удалить собственный комплект %s? Вернуть его будет нельзя.",  -- 1496
-        "Удалить",  -- 1497
-        "Сначала наведите курсор на собственный комплект.",  -- 1498
-        "%s  Удалить собственный комплект",  -- 1499
+        "Купить дешевле, чем делать из: %s",  -- 1295
+        "Делается из: %s",  -- 1296
+        "Наставник: что можно сделать с банком",  -- 1297
+        "Что можно сделать из банка",  -- 1298
+        "С тем, что лежит в банке, больше ничего не сделать.",  -- 1299
+        "%d можно сделать с учётом банка, %d из них только с ним.",  -- 1300
+        "Наставник: %s %d > %d",  -- 1301
+        "Наставник",  -- 1302
+        "План прокачки",  -- 1303
+        "или",  -- 1304
+        "Собирать %s",  -- 1305
+        "выучить",  -- 1306
+        "дешевле купить",  -- 1307
+        "Скрыть",  -- 1308
+        "План",  -- 1309
+        "Фармить это",  -- 1310
+        "Фармить всё",  -- 1311
+        "С банком",  -- 1312
+        "Управлять планом",  -- 1313
+        "дважды — скрыть",  -- 1314
+        "Здесь нечего примерить.",  -- 1315
+        "Добавлено в список фарма: %d.",  -- 1316
+        "Всего хватает: у вас есть всё нужное.",  -- 1317
+        "Откройте окно профессии, чтобы составить план.",  -- 1318
+        "Наставник (план прокачки): показать / скрыть",  -- 1319
+        "показывает план прокачки последнего открытого окна профессии, с кнопками контроллера на нём",  -- 1320
+        "Слева от заданий",  -- 1321
+        "Справа от заданий",  -- 1322
+        "Под заданиями",  -- 1323
+        "Список фарма полон.",  -- 1324
+        "Список фарма: %s, нужно %d.",  -- 1325
+        "Фарм",  -- 1326
+        "ещё %d",  -- 1327
+        "Пока нечего фармить.",  -- 1328
+        "На стопку больше",  -- 1329
+        "Убрать",  -- 1330
+        "Очистить",  -- 1331
+        "Готово",  -- 1332
+        "Убрать всё из списка фарма?",  -- 1333
+        "Список фарма: выбрать / готово",  -- 1334
+        "Список фарма: добавить предмет под указателем",  -- 1335
+        "Этого нет в списке фарма.",  -- 1336
+        "Список фарма пуст.",  -- 1337
+        "Список фарма: где он стоит",  -- 1338
+        "список фарма слева от списка заданий, справа от него или под его заданиями",  -- 1339
+        "список фарма рядом со списком заданий: выбор контроллером; add <предмет> [сколько], remove <предмет>, clear, или left / right / bottom для его места",  -- 1340
+        "Процент угрозы",  -- 1341
+        "ваша доля угрозы числом рядом со значком угрозы, на рамке цели и на индикаторах здоровья",  -- 1342
+        "Число здоровья",  -- 1343
+        "оставшееся здоровье, сокращённо (12.3k), на полосе (не на компактных индикаторах: там хватает процента)",  -- 1344
+        "Ваши ослабления",  -- 1345
+        "ваши ослабления на цели, над её именем, с оставшимся временем",  -- 1346
+        "Дебаффы от всех",  -- 1347
+        "дебаффы, которые игра отмечает для индикаторов здоровья от всех, а не только ваши",  -- 1348
+        "Баффы врага",  -- 1349
+        "усиления врага рядом с его ослаблениями: только важные (важные, исступление или те, что вы можете рассеять или украсть), или все, если «Только важные эффекты» выключено",  -- 1350
+        "Значок контроля",  -- 1351
+        "большой значок с временем, когда цель оглушена, обездвижена, испугана...",  -- 1352
+        "Свечение угрозы",  -- 1353
+        "значок щита и свечение за именем: красное, пока он атакует вас, красное и жёлтое, когда вы вот-вот перетянете его, жёлтое и синее, когда вы его теряете, синее, когда он не на вас",  -- 1354
+        "Метка задания",  -- 1355
+        "золотая отметка на целях, которые еще нужны для ваших заданий",  -- 1356
+        "Анимация индикаторов здоровья",  -- 1357
+        "индикаторы плавно появляются, низкое здоровье «дышит», контроль толпы мерцает",  -- 1358
+        "Маленькие",  -- 1359
+        "Обычные",  -- 1360
+        "Большие",  -- 1361
+        "Полное имя",  -- 1362
+        "Короткое имя",  -- 1363
+        "Без имени",  -- 1364
+        "Полный",  -- 1365
+        "Минимальный мини",  -- 1366
+        "Размер индикаторов",  -- 1367
+        "размер полос на индикаторах здоровья: маленькие и тонкие, обычные или большие (шире и выше)",  -- 1368
+        "Имена на индикаторах",  -- 1369
+        "имя на индикаторе с полосой здоровья: полностью, сокращённо или без него (рамка цели показывает его полностью; уровень и значок класса остаются). Индикатор без полосы, у дружественного НИП, всегда сохраняет имя",  -- 1370
+        "Вид индикаторов",  -- 1371
+        "переключатели индикаторов одним нажатием. Полный: всё. Минимальный: без полосы ресурса, гильдии и звания, короткие имена. Минимальный мини: маленькие полосы со здоровьем, ваши отрицательные эффекты и важные положительные, уровень и класс, без имени (оно в рамке цели). Угроза, контроль и заметные заклинания остаются всегда",  -- 1372
+        "Звания игроков",  -- 1373
+        "показывает звание игрока рядом с его именем",  -- 1374
+        "Гильдии и занятия NPC",  -- 1375
+        "строка под именем: гильдия игрока или чем занимается NPC",  -- 1376
+        "Полосы союзников в бою",  -- 1377
+        "индикаторы дружественных целей показывают здоровье, ресурс и заклинания, пока цель в бою",  -- 1378
+        "Собственные дружественные индикаторы игры",  -- 1379
+        "оставить дружественные индикаторы (ваша группа, другие игроки, дружественные NPC) в виде игры; наши — только на врагах",  -- 1380
+        "Полосы ресурса",  -- 1381
+        "тонкая полоса маны, ярости или энергии под полосой здоровья",  -- 1382
+        "Цель заклинания",  -- 1383
+        "на кого направлено заклинание, рядом с его названием",  -- 1384
+        "Здоровье в процентах",  -- 1385
+        "процент здоровья на полосе",  -- 1386
+        "Имя на табличке цели",  -- 1387
+        "выкл.: табличка вашей цели не показывает имя и уровень (их показывает рамка цели)",  -- 1388
+        "Уровни на табличках",  -- 1389
+        "уровень перед именем противника, цвет по сложности",  -- 1390
+        "Компактные индикаторы здоровья",  -- 1391
+        "индикаторы здоровья примерно вдвое уже",  -- 1392
+        "Заметные заклинания врагов",  -- 1393
+        "заклинание врага мигает, раздувается и пульсирует все быстрее, пока не завершится, чтобы его можно было прервать вовремя",  -- 1394
+        "Значки классов на индикаторах",  -- 1395
+        "значок класса игрока перед его именем, друг это или враг",  -- 1396
+        "Чем заняты НИП, значками",  -- 1397
+        "значок над дружественными НИП, которые что-то предлагают: сумка над торговцами, наковальня над кузнецами, которые чинят, книга над учителями... (значки самой игры; видны, даже пока индикатор ждёт, чтобы на него указали)",  -- 1398
+        "Дружественные NPC только при наведении",  -- 1399
+        "индикаторы дружественных NPC (торговцев, раздающих задания, горожан) показываются, только пока вы наводите на них курсор, как и их подсказка",  -- 1400
+        "Названия над предметами, с которыми можно взаимодействовать",  -- 1401
+        "название над рудой, сундуками, табличками и тому подобным, пока вы стоите к ним лицом (выкл.: они остаются без названия, подсказка самой игры уже говорит, что это)",  -- 1402
+        "Мини-индикаторы",  -- 1403
+        "прислужники, зверьки и серые противники без опыта получают маленькую табличку: тонкая полоса с вашими эффектами на ней и без имени (зверёк без полосы сохраняет имя; есть ли таблички вообще, решает настройка игры)",  -- 1404
+        "Индикаторы группы в подземельях: только имена",  -- 1405
+        "в подземелье или рейде игра сама рисует индикаторы здоровья дружественных игроков, и аддоны не могут их менять: там собственные настройки игры выставляются так, чтобы они показывались как имена цвета класса без полос, как наши, а на время боя полосы игры возвращаются (если включены полосы союзников в бою); при выходе всё возвращается обратно",  -- 1406
+        "Индикаторы группы в подземельях: скрыты",  -- 1407
+        "в подземелье или рейде полностью выключить индикаторы здоровья дружественных игроков (и вернуть как было, когда вы выходите)",  -- 1408
+        "показывает, что игра отдаёт для имени вашей цели (для поиска неполадок)",  -- 1409
+        "показать индикаторы на экране и в нашем ли они виде (для поиска проблем)",  -- 1410
+        "Так, ладно.",  -- 1411
+        "Ох, ну и куча.",  -- 1412
+        "Так, посмотрим, посмотрим...",  -- 1413
+        "Элуна, дай мне терпения.",  -- 1414
+        "Во имя наару, ну и мешанина.",  -- 1415
+        "Проклятый мешок.",  -- 1416
+        "Опрятный мешок - лёгкий мешок.",  -- 1417
+        "Ба. Слишком много барахла.",  -- 1418
+        "Мёртвый груз, всё до последнего.",  -- 1419
+        "Терпение. Мать-Земля даст.",  -- 1420
+        "Эй, что тут у нас, мон?",  -- 1421
+        "Какой беспорядок. Недостойно.",  -- 1422
+        "Время - деньги. Посчитаем.",  -- 1423
+        "Ага, сойдёт.",  -- 1424
+        "Хвала Элуне.",  -- 1425
+        "Свет даст.",  -- 1426
+        "Хрм. Сойдёт.",  -- 1427
+        "Хм. Хватит, чтобы сражаться.",  -- 1428
+        "Путешествую налегке. Хорошо.",  -- 1429
+        "Приемлемо. Едва.",  -- 1430
+        "Ни одного свободного места. Хлам принесёт %s: продав его, освобожу место.",  -- 1431
+        "Ни одного свободного места. Всё, что не нужно в пути, подождёт в банке.",  -- 1432
+        "Хлам: %d, здесь стоит %s. X продаёт выбранное; Умная продажа забирает всё.",  -- 1433
+        "%d из этого место в банке: там уже есть такое же, или я это пометил. «Положить» уберёт.",  -- 1434
+        "Осталось всего %d мест. Хлам у любого торговца принесёт %s.",  -- 1435
+        "Осталось всего %d мест. Пора что-то продать или сдать в банк.",  -- 1436
+        "Нового с прошлого раза: %d. Каждое отмечено золотой точкой.",  -- 1437
+        "Стоит продать: %d. Фильтр «Продать» собирает их, а подсказка говорит, где дадут больше.",  -- 1438
+        "Хлам: %d, стоит %s. Отдам ближайшему торговцу.",  -- 1439
+        "Только самое нужное. Продавать нечего.",  -- 1440
+        "Всё в порядке, свободно мест: %d.",  -- 1441
+        "Ваше снаряжение починено: %s.",  -- 1442
+        "Могу починить снаряжение за %s; сломанная вещь не даёт ни брони, ни характеристик.",  -- 1443
+        "Сумки полны. Возьму %d вещей за %s: «Умная продажа» - и снова есть место.",  -- 1444
+        "Дам %s за %d вещей: хлам и то, за что аукцион больше не даст. «Умная продажа» - и готово.",  -- 1445
+        "Оставьте %d вещей для аукциона: там дадут на %s больше, чем я.",  -- 1446
+        "Сумки полны. Продайте мне что-нибудь, прежде чем покупать.",  -- 1447
+        "В ваших сумках нет ничего, за что я хорошо заплачу. Взгляните на мой товар.",  -- 1448
+        "%d из того, что вы носите, место здесь: у меня есть такое же, или вы это пометили. «Положить» уберёт.",  -- 1449
+        "У меня есть ещё %d вещей из тех, что вы носите. «Забрать» пополнит сумки перед дорогой.",  -- 1450
+        "Сумки почти полны. Оставьте у меня то, что не понадобится в пути.",  -- 1451
+        "У меня всё в сохранности, а в сумках свободно мест: %d.",  -- 1452
+        "Сегодня для вас ничего. Я проверил дважды.",  -- 1453
+        "Писем для вас: %d, без вложений. Читайте, когда захотите.",  -- 1454
+        "Писем для вас: %d. Внутри: %s.",  -- 1455
+        "«Забрать всё» опустошит их за раз.",  -- 1456
+        "Наложенным платежом: %d. Их вы открываете и оплачиваете сами.",  -- 1457
+        "Сумки полны: предметы подождут в письмах.",  -- 1458
+        "Куда летим? Укажите место, и я скажу, сколько длится полёт.",  -- 1459
+        "%s: около %s по карте. Этот маршрут вы ещё не летали.",  -- 1460
+        "%s: около %s, судя по вашему прошлому полёту туда.",  -- 1461
+        "%s: пока не скажу, сколько. Слетайте разок, и я буду знать.",  -- 1462
+        "Сорвалось: %d. Этой воде нужно больше навыка, чем у меня: поможет наживка, и удочка получше тоже.",  -- 1463
+        "На крючке нет наживки. Она прибавляет к навыку, и срывается меньше.",  -- 1464
+        "Наживка почти кончилась. Новая на крючке сохранит навык.",  -- 1465
+        "Рыбы здесь, что я ещё не ловил: %d. Забрасываю дальше.",  -- 1466
+        "Я поймал всю рыбу этой воды. Значит, в новое место.",  -- 1467
+        "Ещё ничего не поймано. Первая рыба каждой воды записывается сюда.",  -- 1468
+        "Поймано видов: %d. В каждой воде прячется ещё несколько: панель рыбалки показывает ? для тех, что я там не ловил.",  -- 1469
+        "Отдохнул у огня: следующие %d опыта за убийства идут вдвойне.",  -- 1470
+        "Отдыха не накоплено. Ночь в таверне или в городе - и какое-то время убийства дают двойной опыт.",  -- 1471
+        "%d поглощено",  -- 1472
+        "Лента справа",  -- 1473
+        "По одному в центре",  -- 1474
+        "Крит. исцелений: %d",  -- 1475
+        "Критов: %d",  -- 1476
+        "Правосудие",  -- 1477
+        "Яркие моменты: где",  -- 1478
+        "блок прямо над оповещениями о восстановлении справа от вашего персонажа: новый ближе к ним, а прежние поднимаются выше, угасая, или по одному в центре",  -- 1479
+        "показывает, как выглядит и ощущается большой момент",  -- 1480
+        "собрана",  -- 1481
+        "собрана через другой предмет",  -- 1482
+        "еще не собрана",  -- 1483
+        "Модель",  -- 1484
+        "Выберите комплект, чтобы надеть его предметы на образ. %s сохраняет его; до этого ничего не оплачивается.",  -- 1485
+        "Просматриваем вашу коллекцию...",  -- 1486
+        "Образ снова такой, каким был.",  -- 1487
+        "%s: надето %d из %d предметов.",  -- 1488
+        "Не подошло к этому образу: %d.",  -- 1489
+        "Один комплект, от которого у вас есть предметы",  -- 1490
+        "Комплектов, от которых у вас есть предметы: %d",  -- 1491
+        "вы не можете это носить",  -- 1492
+        "нет",  -- 1493
+        "Все предметы: %d",  -- 1494
+        "%d из %d предметов",  -- 1495
+        "Нет: %s",  -- 1496
+        "Комплектов пока нет. Предметы с общим названием, например Зеленый железный шлем и Зеленые железные рукавицы, появятся здесь, как только у вас будет хотя бы один.",  -- 1497
+        "Отменить",  -- 1498
+        "Удалить собственный комплект %s? Вернуть его будет нельзя.",  -- 1499
+        "Удалить",  -- 1500
+        "Сначала наведите курсор на собственный комплект.",  -- 1501
+        "%s  Удалить собственный комплект",  -- 1502
     },
     zhCN = {
         "错误：",  -- 1
@@ -13311,211 +13335,214 @@ local TRANSLATIONS = {
         "指南这一段靠采集 %s 来提升。",  -- 1292
         "%s：你有%d个，计划需用%d个",  -- 1293
         "用于%s",  -- 1294
-        "导师：银行能让你做什么",  -- 1295
-        "用银行材料能做的",  -- 1296
-        "银行里的东西已经做不了更多了。",  -- 1297
-        "算上银行能做 %d 种，其中 %d 种只靠银行。",  -- 1298
-        "导师：%s %d > %d",  -- 1299
-        "导师",  -- 1300
-        "升级计划",  -- 1301
-        "或",  -- 1302
-        "采集 %s",  -- 1303
-        "待学",  -- 1304
-        "隐藏",  -- 1305
-        "计划",  -- 1306
-        "采集此项",  -- 1307
-        "全部采集",  -- 1308
-        "算上银行",  -- 1309
-        "使用计划",  -- 1310
-        "按两次隐藏",  -- 1311
-        "这里没有可以试穿的。",  -- 1312
-        "已将%d项加入采集清单。",  -- 1313
-        "什么都不缺：所需材料都已齐备。",  -- 1314
-        "打开专业技能窗口即可制定计划。",  -- 1315
-        "导师（升级计划）：显示 / 隐藏",  -- 1316
-        "显示你最后打开的专业技能窗口的升级计划，并启用手柄按键",  -- 1317
-        "任务左侧",  -- 1318
-        "任务右侧",  -- 1319
-        "任务下方",  -- 1320
-        "采集清单已满。",  -- 1321
-        "采集清单：%s，需要%d个。",  -- 1322
-        "采集",  -- 1323
-        "还有%d项",  -- 1324
-        "暂无需采集的物品。",  -- 1325
-        "再加一组",  -- 1326
-        "移除",  -- 1327
-        "清空",  -- 1328
-        "完成",  -- 1329
-        "清空整个采集清单？",  -- 1330
-        "采集清单：选择 / 完成",  -- 1331
-        "采集清单：添加你指向的物品",  -- 1332
-        "它不在采集清单上。",  -- 1333
-        "采集清单为空。",  -- 1334
-        "采集清单：位置",  -- 1335
-        "采集清单放在任务列表左侧、右侧或其任务下方",  -- 1336
-        "任务列表旁的采集清单：用手柄选择；add <物品> [数量]，remove <物品>，clear，或用 left / right / bottom 设置位置",  -- 1337
-        "仇恨百分比",  -- 1338
-        "在目标框体和姓名板的仇恨图标旁以数字显示你的仇恨占比",  -- 1339
-        "生命值数字",  -- 1340
-        "在条上显示缩写的剩余生命值（12.3k）（紧凑姓名板不显示：百分比就够了）",  -- 1341
-        "你的减益",  -- 1342
-        "目标姓名上方显示你的减益效果及其剩余时间",  -- 1343
-        "所有人的减益",  -- 1344
-        "游戏为姓名板标记的所有人的减益，而不只是你的",  -- 1345
-        "敌方增益",  -- 1346
-        "敌人减益效果旁的增益效果：只显示重要的（重要、激怒或你能驱散或偷取的），关闭“只显示重要效果”时显示全部",  -- 1347
-        "群体控制图标",  -- 1348
-        "单位被击晕、定身、恐惧时显示带剩余时间的大图标...",  -- 1349
-        "仇恨光晕",  -- 1350
-        "名字后的盾牌图标和光晕：攻击你时为红色，即将拉到仇恨时红黄交替，正在失去仇恨时黄蓝交替，不在你身上时为蓝色",  -- 1351
-        "任务标记",  -- 1352
-        "在你的任务仍然需要的单位上显示金色标记",  -- 1353
-        "姓名板动画",  -- 1354
-        "姓名板淡入，低生命值时呼吸闪动，群体控制时闪烁",  -- 1355
-        "小",  -- 1356
-        "普通",  -- 1357
-        "大",  -- 1358
-        "完整名字",  -- 1359
-        "简短名字",  -- 1360
-        "不显示名字",  -- 1361
-        "完整",  -- 1362
-        "极简迷你",  -- 1363
-        "姓名板大小",  -- 1364
-        "姓名板上条的大小：小而细、普通，或大（更宽更高）",  -- 1365
-        "姓名板上的名字",  -- 1366
-        "有生命条的姓名板上的名字：完整、缩短或不显示（目标框体会显示完整名字；等级和职业图标保留）。没有生命条的姓名板（友方NPC）始终保留名字",  -- 1367
-        "姓名板样式",  -- 1368
-        "一键设置姓名板开关。完整：全部。极简：无能量条、公会或头衔，名字缩短。极简迷你：带生命值的小条、你的减益和重要的增益、等级和职业，不显示名字（目标框体有）。仇恨、控制和醒目的施法始终保留",  -- 1369
-        "玩家头衔",  -- 1370
-        "在玩家姓名旁显示其头衔",  -- 1371
-        "公会与NPC职业",  -- 1372
-        "姓名下方的一行：玩家的公会，或NPC的职业",  -- 1373
-        "战斗中的友方血条",  -- 1374
-        "友方姓名板在该单位处于战斗状态时显示生命值、能量和施法",  -- 1375
-        "游戏自带的友方姓名板",  -- 1376
-        "友方姓名板（你的队伍、其他玩家、友方NPC）使用游戏自带外观；我们的只用于敌人",  -- 1377
-        "能量条",  -- 1378
-        "生命条下方的细长法力、怒气或能量条",  -- 1379
-        "施法目标",  -- 1380
-        "施法所指向的目标，显示在法术名称旁",  -- 1381
-        "生命值百分比",  -- 1382
-        "血条上的生命值百分比",  -- 1383
-        "目标姓名板上显示名字",  -- 1384
-        "关闭：目标的姓名板不显示名字和等级（目标框体会显示）",  -- 1385
-        "姓名板显示等级",  -- 1386
-        "敌人名字前的等级，按难度着色",  -- 1387
-        "紧凑姓名板",  -- 1388
-        "姓名板宽度约为一半",  -- 1389
-        "醒目的敌方施法",  -- 1390
-        "敌人的施法会闪烁、膨胀并越来越快地脉动直到完成，让你能及时打断",  -- 1391
-        "姓名板职业图标",  -- 1392
-        "在玩家名字前显示职业图标，无论敌友",  -- 1393
-        "NPC职能图标",  -- 1394
-        "在提供服务的友方NPC上方显示图标：商人显示背包，可修理的铁匠显示铁砧，训练师显示书本……（游戏自带图标；即使姓名板在等待你指向时也会显示）",  -- 1395
-        "友方NPC仅在指向时显示",  -- 1396
-        "友方NPC（商人、任务发布者、市民）的姓名板只在你指向时显示，与其鼠标提示一样",  -- 1397
-        "可互动物体上的名称",  -- 1398
-        "面对矿石、宝箱、铭牌等物体时在其上方显示名称（关闭：不显示名称，游戏自身的提示已说明它们是什么）",  -- 1399
-        "迷你姓名板",  -- 1400
-        "仆从、小动物和不给经验的灰色敌人显示小型姓名板：一条细条，上面显示你的减益效果，不显示名字（没有血条的小动物保留名字；是否显示姓名板由游戏自身选项决定）",  -- 1401
-        "地下城中的队友姓名板：仅名字",  -- 1402
-        "在地下城或团队副本中，友方玩家的姓名板由游戏自己绘制，插件不能修改：在那里会调整游戏自带的选项，让它们像我们的一样只显示职业颜色的名字而没有血条，战斗时游戏的血条会回来（开启了战斗中显示友方血条时）；离开时全部恢复原样",  -- 1403
-        "地下城中的队友姓名板：隐藏",  -- 1404
-        "在地下城或团队副本中，完全关闭游戏的友方玩家姓名板（离开时恢复成你原来的设置）",  -- 1405
-        "显示游戏为你的目标名字提供的内容（用于排查问题）",  -- 1406
-        "列出屏幕上的姓名板及其是否使用我们的外观（用于排查问题）",  -- 1407
-        "好吧，看看。",  -- 1408
-        "哎哟，这一大堆。",  -- 1409
-        "嗯，让我看看，看看……",  -- 1410
-        "艾露恩啊，赐我耐心。",  -- 1411
-        "以纳鲁之名，真是一团乱。",  -- 1412
-        "该死的背包。",  -- 1413
-        "包袱整齐，包袱就轻。",  -- 1414
-        "哼。破烂太多了。",  -- 1415
-        "全是累赘。",  -- 1416
-        "耐心。大地母亲自会赐予。",  -- 1417
-        "嘿，看看我们有啥，老兄？",  -- 1418
-        "如此杂乱，有失体面。",  -- 1419
-        "时间就是金钱。数一数。",  -- 1420
-        "嗯，这就行了。",  -- 1421
-        "感谢艾露恩。",  -- 1422
-        "圣光自会赐予。",  -- 1423
-        "哼。够用了。",  -- 1424
-        "嗯。够打一仗了。",  -- 1425
-        "轻装上路。不错。",  -- 1426
-        "还行。勉强。",  -- 1427
-        "一格都不剩了。垃圾能卖%s：卖掉就有地方了。",  -- 1428
-        "一格都不剩了。路上用不着的，可以先存银行。",  -- 1429
-        "垃圾：%d件，这里值%s。X 卖掉选中的那件；智能出售一次卖光。",  -- 1430
-        "其中%d件该放银行：银行里有同样的，或是我标记过。存入就会收好。",  -- 1431
-        "只剩%d格了。垃圾在任何商人那里都能卖%s。",  -- 1432
-        "只剩%d格了。该卖掉或存掉一些东西了。",  -- 1433
-        "上次看过之后新添了%d件。每件都有金色小点标着。",  -- 1434
-        "值得卖的：%d件。出售筛选会把它们集中起来，每件的提示都写着在哪卖最值。",  -- 1435
-        "垃圾：%d件，值%s。下个商人收走吧。",  -- 1436
-        "只有必需品。没什么值得卖的。",  -- 1437
-        "一切井井有条，还空着%d格。",  -- 1438
-        "装备修好了：%s。",  -- 1439
-        "我可以花%s帮你修装备；坏掉的装备既没护甲也没属性。",  -- 1440
-        "你的包满了。%d件东西我出%s收：点智能出售，就又有空位了。",  -- 1441
-        "我出%s收%d件东西：垃圾，还有拍卖行不会出更高价的。点智能出售就行。",  -- 1442
-        "拍卖行想要的那%d件留着：比我多给%s。",  -- 1443
-        "你的包满了。买东西之前先卖我点什么吧。",  -- 1444
-        "你包里没什么值得我出好价的。看看我的货吧。",  -- 1445
-        "你身上有%d件该放这里：我这儿存着同样的，或是你标记过。存入就会收好。",  -- 1446
-        "你身上有%d种东西我这儿还存着更多。取出能在出发前把包补满。",  -- 1447
-        "你的包快满了。路上用不着的就放我这儿吧。",  -- 1448
-        "东西在我这儿很安全，你的包还空着%d格。",  -- 1449
-        "今天没有你的信。我查了两遍。",  -- 1450
-        "你的信：%d封，没有附件。有空再看吧。",  -- 1451
-        "你的信：%d封。里面有：%s。",  -- 1452
-        "全部拿取能一次清空。",  -- 1453
-        "货到付款：%d封。这些你自己打开、自己付钱。",  -- 1454
-        "你的包满了：物品先留在信里。",  -- 1455
-        "去哪儿？指个地方，我告诉你要飞多久。",  -- 1456
-        "%s：按地图算大约%s。这条航线你还没飞过。",  -- 1457
-        "%s：按你上次飞那里算，大约%s。",  -- 1458
-        "%s：还说不准要多久。飞一次我就知道了。",  -- 1459
-        "跑了%d条。这片水域要的技能比我高：鱼饵有用，好一点的鱼竿也有用。",  -- 1460
-        "钩上没挂鱼饵。鱼饵能加技能，跑掉的就少了。",  -- 1461
-        "鱼饵快用完了。再挂一个，技能就不掉。",  -- 1462
-        "这里还没钓到的鱼：%d种。接着抛竿。",  -- 1463
-        "这片水里的鱼我都钓过了。那就换个地方。",  -- 1464
-        "还什么都没钓到。每片水域的第一条鱼都记在这里。",  -- 1465
-        "钓到的种类：%d。每片水域都还藏着几种：钓鱼面板上没钓到的会显示 ?。",  -- 1466
-        "在火边歇好了：接下来击杀获得的%d点经验翻倍。",  -- 1467
-        "没攒下休息。去旅店或城里过一夜，一段时间内击杀经验翻倍。",  -- 1468
-        "吸收 %d",  -- 1469
-        "右侧列表",  -- 1470
-        "中间逐个显示",  -- 1471
-        "%d 次治疗暴击",  -- 1472
-        "%d 次暴击",  -- 1473
-        "审判",  -- 1474
-        "高光时刻：位置",  -- 1475
-        "角色右侧冷却提示正上方的一块区域：最新的紧挨提示，旧的向上移动并淡出；或在中间一次显示一个",  -- 1476
-        "展示高光时刻的样子和手感",  -- 1477
-        "已收藏",  -- 1478
-        "已通过其他物品收藏",  -- 1479
-        "尚未收藏",  -- 1480
-        "外观",  -- 1481
-        "选择一个套装，把它的部件放到你的外观方案上。%s 才会保留；在那之前不花任何钱。",  -- 1482
-        "正在查看你的收藏...",  -- 1483
-        "你的外观方案已恢复原样。",  -- 1484
-        "%s：已穿上 %d/%d 件。",  -- 1485
-        "有 %d 件无法用于此外观方案。",  -- 1486
-        "你拥有部件的套装：1 个",  -- 1487
-        "你拥有部件的套装：%d 个",  -- 1488
-        "你无法穿戴",  -- 1489
-        "缺少",  -- 1490
-        "全部 %d 件",  -- 1491
-        "%d/%d 件",  -- 1492
-        "缺少：%s",  -- 1493
-        "还没有套装。名字相同的物品，比如绿铁头盔和绿铁护手，只要你拥有其中一件，就会出现在这里。",  -- 1494
-        "撤销",  -- 1495
-        "删除自定义套装%s？删除后无法恢复。",  -- 1496
-        "删除",  -- 1497
-        "请先指向一个自定义套装。",  -- 1498
-        "%s  删除自定义套装",  -- 1499
+        "购买比用%s制作更便宜",  -- 1295
+        "用%s制作",  -- 1296
+        "导师：银行能让你做什么",  -- 1297
+        "用银行材料能做的",  -- 1298
+        "银行里的东西已经做不了更多了。",  -- 1299
+        "算上银行能做 %d 种，其中 %d 种只靠银行。",  -- 1300
+        "导师：%s %d > %d",  -- 1301
+        "导师",  -- 1302
+        "升级计划",  -- 1303
+        "或",  -- 1304
+        "采集 %s",  -- 1305
+        "待学",  -- 1306
+        "购买更划算",  -- 1307
+        "隐藏",  -- 1308
+        "计划",  -- 1309
+        "采集此项",  -- 1310
+        "全部采集",  -- 1311
+        "算上银行",  -- 1312
+        "使用计划",  -- 1313
+        "按两次隐藏",  -- 1314
+        "这里没有可以试穿的。",  -- 1315
+        "已将%d项加入采集清单。",  -- 1316
+        "什么都不缺：所需材料都已齐备。",  -- 1317
+        "打开专业技能窗口即可制定计划。",  -- 1318
+        "导师（升级计划）：显示 / 隐藏",  -- 1319
+        "显示你最后打开的专业技能窗口的升级计划，并启用手柄按键",  -- 1320
+        "任务左侧",  -- 1321
+        "任务右侧",  -- 1322
+        "任务下方",  -- 1323
+        "采集清单已满。",  -- 1324
+        "采集清单：%s，需要%d个。",  -- 1325
+        "采集",  -- 1326
+        "还有%d项",  -- 1327
+        "暂无需采集的物品。",  -- 1328
+        "再加一组",  -- 1329
+        "移除",  -- 1330
+        "清空",  -- 1331
+        "完成",  -- 1332
+        "清空整个采集清单？",  -- 1333
+        "采集清单：选择 / 完成",  -- 1334
+        "采集清单：添加你指向的物品",  -- 1335
+        "它不在采集清单上。",  -- 1336
+        "采集清单为空。",  -- 1337
+        "采集清单：位置",  -- 1338
+        "采集清单放在任务列表左侧、右侧或其任务下方",  -- 1339
+        "任务列表旁的采集清单：用手柄选择；add <物品> [数量]，remove <物品>，clear，或用 left / right / bottom 设置位置",  -- 1340
+        "仇恨百分比",  -- 1341
+        "在目标框体和姓名板的仇恨图标旁以数字显示你的仇恨占比",  -- 1342
+        "生命值数字",  -- 1343
+        "在条上显示缩写的剩余生命值（12.3k）（紧凑姓名板不显示：百分比就够了）",  -- 1344
+        "你的减益",  -- 1345
+        "目标姓名上方显示你的减益效果及其剩余时间",  -- 1346
+        "所有人的减益",  -- 1347
+        "游戏为姓名板标记的所有人的减益，而不只是你的",  -- 1348
+        "敌方增益",  -- 1349
+        "敌人减益效果旁的增益效果：只显示重要的（重要、激怒或你能驱散或偷取的），关闭“只显示重要效果”时显示全部",  -- 1350
+        "群体控制图标",  -- 1351
+        "单位被击晕、定身、恐惧时显示带剩余时间的大图标...",  -- 1352
+        "仇恨光晕",  -- 1353
+        "名字后的盾牌图标和光晕：攻击你时为红色，即将拉到仇恨时红黄交替，正在失去仇恨时黄蓝交替，不在你身上时为蓝色",  -- 1354
+        "任务标记",  -- 1355
+        "在你的任务仍然需要的单位上显示金色标记",  -- 1356
+        "姓名板动画",  -- 1357
+        "姓名板淡入，低生命值时呼吸闪动，群体控制时闪烁",  -- 1358
+        "小",  -- 1359
+        "普通",  -- 1360
+        "大",  -- 1361
+        "完整名字",  -- 1362
+        "简短名字",  -- 1363
+        "不显示名字",  -- 1364
+        "完整",  -- 1365
+        "极简迷你",  -- 1366
+        "姓名板大小",  -- 1367
+        "姓名板上条的大小：小而细、普通，或大（更宽更高）",  -- 1368
+        "姓名板上的名字",  -- 1369
+        "有生命条的姓名板上的名字：完整、缩短或不显示（目标框体会显示完整名字；等级和职业图标保留）。没有生命条的姓名板（友方NPC）始终保留名字",  -- 1370
+        "姓名板样式",  -- 1371
+        "一键设置姓名板开关。完整：全部。极简：无能量条、公会或头衔，名字缩短。极简迷你：带生命值的小条、你的减益和重要的增益、等级和职业，不显示名字（目标框体有）。仇恨、控制和醒目的施法始终保留",  -- 1372
+        "玩家头衔",  -- 1373
+        "在玩家姓名旁显示其头衔",  -- 1374
+        "公会与NPC职业",  -- 1375
+        "姓名下方的一行：玩家的公会，或NPC的职业",  -- 1376
+        "战斗中的友方血条",  -- 1377
+        "友方姓名板在该单位处于战斗状态时显示生命值、能量和施法",  -- 1378
+        "游戏自带的友方姓名板",  -- 1379
+        "友方姓名板（你的队伍、其他玩家、友方NPC）使用游戏自带外观；我们的只用于敌人",  -- 1380
+        "能量条",  -- 1381
+        "生命条下方的细长法力、怒气或能量条",  -- 1382
+        "施法目标",  -- 1383
+        "施法所指向的目标，显示在法术名称旁",  -- 1384
+        "生命值百分比",  -- 1385
+        "血条上的生命值百分比",  -- 1386
+        "目标姓名板上显示名字",  -- 1387
+        "关闭：目标的姓名板不显示名字和等级（目标框体会显示）",  -- 1388
+        "姓名板显示等级",  -- 1389
+        "敌人名字前的等级，按难度着色",  -- 1390
+        "紧凑姓名板",  -- 1391
+        "姓名板宽度约为一半",  -- 1392
+        "醒目的敌方施法",  -- 1393
+        "敌人的施法会闪烁、膨胀并越来越快地脉动直到完成，让你能及时打断",  -- 1394
+        "姓名板职业图标",  -- 1395
+        "在玩家名字前显示职业图标，无论敌友",  -- 1396
+        "NPC职能图标",  -- 1397
+        "在提供服务的友方NPC上方显示图标：商人显示背包，可修理的铁匠显示铁砧，训练师显示书本……（游戏自带图标；即使姓名板在等待你指向时也会显示）",  -- 1398
+        "友方NPC仅在指向时显示",  -- 1399
+        "友方NPC（商人、任务发布者、市民）的姓名板只在你指向时显示，与其鼠标提示一样",  -- 1400
+        "可互动物体上的名称",  -- 1401
+        "面对矿石、宝箱、铭牌等物体时在其上方显示名称（关闭：不显示名称，游戏自身的提示已说明它们是什么）",  -- 1402
+        "迷你姓名板",  -- 1403
+        "仆从、小动物和不给经验的灰色敌人显示小型姓名板：一条细条，上面显示你的减益效果，不显示名字（没有血条的小动物保留名字；是否显示姓名板由游戏自身选项决定）",  -- 1404
+        "地下城中的队友姓名板：仅名字",  -- 1405
+        "在地下城或团队副本中，友方玩家的姓名板由游戏自己绘制，插件不能修改：在那里会调整游戏自带的选项，让它们像我们的一样只显示职业颜色的名字而没有血条，战斗时游戏的血条会回来（开启了战斗中显示友方血条时）；离开时全部恢复原样",  -- 1406
+        "地下城中的队友姓名板：隐藏",  -- 1407
+        "在地下城或团队副本中，完全关闭游戏的友方玩家姓名板（离开时恢复成你原来的设置）",  -- 1408
+        "显示游戏为你的目标名字提供的内容（用于排查问题）",  -- 1409
+        "列出屏幕上的姓名板及其是否使用我们的外观（用于排查问题）",  -- 1410
+        "好吧，看看。",  -- 1411
+        "哎哟，这一大堆。",  -- 1412
+        "嗯，让我看看，看看……",  -- 1413
+        "艾露恩啊，赐我耐心。",  -- 1414
+        "以纳鲁之名，真是一团乱。",  -- 1415
+        "该死的背包。",  -- 1416
+        "包袱整齐，包袱就轻。",  -- 1417
+        "哼。破烂太多了。",  -- 1418
+        "全是累赘。",  -- 1419
+        "耐心。大地母亲自会赐予。",  -- 1420
+        "嘿，看看我们有啥，老兄？",  -- 1421
+        "如此杂乱，有失体面。",  -- 1422
+        "时间就是金钱。数一数。",  -- 1423
+        "嗯，这就行了。",  -- 1424
+        "感谢艾露恩。",  -- 1425
+        "圣光自会赐予。",  -- 1426
+        "哼。够用了。",  -- 1427
+        "嗯。够打一仗了。",  -- 1428
+        "轻装上路。不错。",  -- 1429
+        "还行。勉强。",  -- 1430
+        "一格都不剩了。垃圾能卖%s：卖掉就有地方了。",  -- 1431
+        "一格都不剩了。路上用不着的，可以先存银行。",  -- 1432
+        "垃圾：%d件，这里值%s。X 卖掉选中的那件；智能出售一次卖光。",  -- 1433
+        "其中%d件该放银行：银行里有同样的，或是我标记过。存入就会收好。",  -- 1434
+        "只剩%d格了。垃圾在任何商人那里都能卖%s。",  -- 1435
+        "只剩%d格了。该卖掉或存掉一些东西了。",  -- 1436
+        "上次看过之后新添了%d件。每件都有金色小点标着。",  -- 1437
+        "值得卖的：%d件。出售筛选会把它们集中起来，每件的提示都写着在哪卖最值。",  -- 1438
+        "垃圾：%d件，值%s。下个商人收走吧。",  -- 1439
+        "只有必需品。没什么值得卖的。",  -- 1440
+        "一切井井有条，还空着%d格。",  -- 1441
+        "装备修好了：%s。",  -- 1442
+        "我可以花%s帮你修装备；坏掉的装备既没护甲也没属性。",  -- 1443
+        "你的包满了。%d件东西我出%s收：点智能出售，就又有空位了。",  -- 1444
+        "我出%s收%d件东西：垃圾，还有拍卖行不会出更高价的。点智能出售就行。",  -- 1445
+        "拍卖行想要的那%d件留着：比我多给%s。",  -- 1446
+        "你的包满了。买东西之前先卖我点什么吧。",  -- 1447
+        "你包里没什么值得我出好价的。看看我的货吧。",  -- 1448
+        "你身上有%d件该放这里：我这儿存着同样的，或是你标记过。存入就会收好。",  -- 1449
+        "你身上有%d种东西我这儿还存着更多。取出能在出发前把包补满。",  -- 1450
+        "你的包快满了。路上用不着的就放我这儿吧。",  -- 1451
+        "东西在我这儿很安全，你的包还空着%d格。",  -- 1452
+        "今天没有你的信。我查了两遍。",  -- 1453
+        "你的信：%d封，没有附件。有空再看吧。",  -- 1454
+        "你的信：%d封。里面有：%s。",  -- 1455
+        "全部拿取能一次清空。",  -- 1456
+        "货到付款：%d封。这些你自己打开、自己付钱。",  -- 1457
+        "你的包满了：物品先留在信里。",  -- 1458
+        "去哪儿？指个地方，我告诉你要飞多久。",  -- 1459
+        "%s：按地图算大约%s。这条航线你还没飞过。",  -- 1460
+        "%s：按你上次飞那里算，大约%s。",  -- 1461
+        "%s：还说不准要多久。飞一次我就知道了。",  -- 1462
+        "跑了%d条。这片水域要的技能比我高：鱼饵有用，好一点的鱼竿也有用。",  -- 1463
+        "钩上没挂鱼饵。鱼饵能加技能，跑掉的就少了。",  -- 1464
+        "鱼饵快用完了。再挂一个，技能就不掉。",  -- 1465
+        "这里还没钓到的鱼：%d种。接着抛竿。",  -- 1466
+        "这片水里的鱼我都钓过了。那就换个地方。",  -- 1467
+        "还什么都没钓到。每片水域的第一条鱼都记在这里。",  -- 1468
+        "钓到的种类：%d。每片水域都还藏着几种：钓鱼面板上没钓到的会显示 ?。",  -- 1469
+        "在火边歇好了：接下来击杀获得的%d点经验翻倍。",  -- 1470
+        "没攒下休息。去旅店或城里过一夜，一段时间内击杀经验翻倍。",  -- 1471
+        "吸收 %d",  -- 1472
+        "右侧列表",  -- 1473
+        "中间逐个显示",  -- 1474
+        "%d 次治疗暴击",  -- 1475
+        "%d 次暴击",  -- 1476
+        "审判",  -- 1477
+        "高光时刻：位置",  -- 1478
+        "角色右侧冷却提示正上方的一块区域：最新的紧挨提示，旧的向上移动并淡出；或在中间一次显示一个",  -- 1479
+        "展示高光时刻的样子和手感",  -- 1480
+        "已收藏",  -- 1481
+        "已通过其他物品收藏",  -- 1482
+        "尚未收藏",  -- 1483
+        "外观",  -- 1484
+        "选择一个套装，把它的部件放到你的外观方案上。%s 才会保留；在那之前不花任何钱。",  -- 1485
+        "正在查看你的收藏...",  -- 1486
+        "你的外观方案已恢复原样。",  -- 1487
+        "%s：已穿上 %d/%d 件。",  -- 1488
+        "有 %d 件无法用于此外观方案。",  -- 1489
+        "你拥有部件的套装：1 个",  -- 1490
+        "你拥有部件的套装：%d 个",  -- 1491
+        "你无法穿戴",  -- 1492
+        "缺少",  -- 1493
+        "全部 %d 件",  -- 1494
+        "%d/%d 件",  -- 1495
+        "缺少：%s",  -- 1496
+        "还没有套装。名字相同的物品，比如绿铁头盔和绿铁护手，只要你拥有其中一件，就会出现在这里。",  -- 1497
+        "撤销",  -- 1498
+        "删除自定义套装%s？删除后无法恢复。",  -- 1499
+        "删除",  -- 1500
+        "请先指向一个自定义套装。",  -- 1501
+        "%s  删除自定义套装",  -- 1502
     },
     zhTW = {
         "錯誤：",  -- 1
@@ -14812,211 +14839,214 @@ local TRANSLATIONS = {
         "指南這一段靠採集 %s 來提升。",  -- 1292
         "%s：你有%d個，計畫需用%d個",  -- 1293
         "用於%s",  -- 1294
-        "導師：銀行能讓你做什麼",  -- 1295
-        "用銀行材料能做的",  -- 1296
-        "銀行裡的東西已經做不了更多了。",  -- 1297
-        "算上銀行能做 %d 種，其中 %d 種只靠銀行。",  -- 1298
-        "導師：%s %d > %d",  -- 1299
-        "導師",  -- 1300
-        "升級計畫",  -- 1301
-        "或",  -- 1302
-        "採集 %s",  -- 1303
-        "待學",  -- 1304
-        "隱藏",  -- 1305
-        "計畫",  -- 1306
-        "採集此項",  -- 1307
-        "全部採集",  -- 1308
-        "算上銀行",  -- 1309
-        "使用計畫",  -- 1310
-        "按兩次隱藏",  -- 1311
-        "這裡沒有可以試穿的。",  -- 1312
-        "已將%d項加入採集清單。",  -- 1313
-        "什麼都不缺：所需材料都已齊備。",  -- 1314
-        "開啟專業技能視窗即可擬定計畫。",  -- 1315
-        "導師（升級計畫）：顯示 / 隱藏",  -- 1316
-        "顯示你最後開啟的專業技能視窗的升級計畫，並啟用手把按鍵",  -- 1317
-        "任務左側",  -- 1318
-        "任務右側",  -- 1319
-        "任務下方",  -- 1320
-        "採集清單已滿。",  -- 1321
-        "採集清單：%s，需要%d個。",  -- 1322
-        "採集",  -- 1323
-        "還有%d項",  -- 1324
-        "暫無需採集的物品。",  -- 1325
-        "再加一組",  -- 1326
-        "移除",  -- 1327
-        "清空",  -- 1328
-        "完成",  -- 1329
-        "清空整個採集清單？",  -- 1330
-        "採集清單：選擇 / 完成",  -- 1331
-        "採集清單：加入你指向的物品",  -- 1332
-        "它不在採集清單上。",  -- 1333
-        "採集清單為空。",  -- 1334
-        "採集清單：位置",  -- 1335
-        "採集清單放在任務列表左側、右側或其任務下方",  -- 1336
-        "任務列表旁的採集清單：用手把選擇；add <物品> [數量]，remove <物品>，clear，或用 left / right / bottom 設定位置",  -- 1337
-        "仇恨百分比",  -- 1338
-        "在目標框架和名條的仇恨圖示旁以數字顯示你的仇恨佔比",  -- 1339
-        "生命值數字",  -- 1340
-        "在條上顯示縮寫的剩餘生命值（12.3k）（緊湊名條不顯示：百分比就夠了）",  -- 1341
-        "你的減益",  -- 1342
-        "目標名稱上方顯示你的減益效果及其剩餘時間",  -- 1343
-        "所有人的減益",  -- 1344
-        "遊戲為名條標記的所有人的減益，而不只是你的",  -- 1345
-        "敵方增益",  -- 1346
-        "敵人減益效果旁的增益效果：只顯示重要的（重要、狂怒或你能驅散或竊取的），關閉「只顯示重要效果」時顯示全部",  -- 1347
-        "群體控制圖示",  -- 1348
-        "單位被擊昏、定身、恐懼時顯示帶剩餘時間的大圖示...",  -- 1349
-        "仇恨光暈",  -- 1350
-        "名字後的盾牌圖示和光暈：攻擊你時為紅色，即將拉到仇恨時紅黃交替，正在失去仇恨時黃藍交替，不在你身上時為藍色",  -- 1351
-        "任務標記",  -- 1352
-        "在你的任務仍然需要的單位上顯示金色標記",  -- 1353
-        "名條動畫",  -- 1354
-        "名條淡入，低生命值時呼吸閃動，群體控制時閃爍",  -- 1355
-        "小",  -- 1356
-        "普通",  -- 1357
-        "大",  -- 1358
-        "完整名字",  -- 1359
-        "簡短名字",  -- 1360
-        "不顯示名字",  -- 1361
-        "完整",  -- 1362
-        "極簡迷你",  -- 1363
-        "名條大小",  -- 1364
-        "名條上條的大小：小而細、普通，或大（更寬更高）",  -- 1365
-        "名條上的名字",  -- 1366
-        "有生命條的名條上的名字：完整、縮短或不顯示（目標框架會顯示完整名字；等級和職業圖示保留）。沒有生命條的名條（友方NPC）始終保留名字",  -- 1367
-        "名條樣式",  -- 1368
-        "一鍵設定名條開關。完整：全部。極簡：無能量條、公會或頭銜，名字縮短。極簡迷你：帶生命值的小條、你的減益和重要的增益、等級和職業，不顯示名字（目標框架有）。仇恨、控制和醒目的施法始終保留",  -- 1369
-        "玩家頭銜",  -- 1370
-        "在玩家名稱旁顯示其頭銜",  -- 1371
-        "公會與NPC職業",  -- 1372
-        "名稱下方的一行：玩家的公會，或NPC的職業",  -- 1373
-        "戰鬥中的友方血條",  -- 1374
-        "友方名條在該單位處於戰鬥狀態時顯示生命力、能量與施法",  -- 1375
-        "遊戲內建的友方名條",  -- 1376
-        "友方名條（你的隊伍、其他玩家、友方NPC）使用遊戲內建外觀；我們的只用於敵人",  -- 1377
-        "能量條",  -- 1378
-        "生命力條下方的細長法力、怒氣或能量條",  -- 1379
-        "施法目標",  -- 1380
-        "施法所指向的目標，顯示在法術名稱旁",  -- 1381
-        "生命力百分比",  -- 1382
-        "血條上的生命力百分比",  -- 1383
-        "目標名條上顯示名字",  -- 1384
-        "關閉：目標的名條不顯示名字和等級（目標框架會顯示）",  -- 1385
-        "名條顯示等級",  -- 1386
-        "敵人名字前的等級，依難度著色",  -- 1387
-        "精簡名條",  -- 1388
-        "名條寬度約為一半",  -- 1389
-        "醒目的敵方施法",  -- 1390
-        "敵人的施法會閃爍、膨脹並越來越快地脈動直到完成，讓你能及時打斷",  -- 1391
-        "名條職業圖示",  -- 1392
-        "在玩家名字前顯示職業圖示，無論敵友",  -- 1393
-        "NPC職能圖示",  -- 1394
-        "在提供服務的友方NPC上方顯示圖示：商人顯示背包，可修理的鐵匠顯示鐵砧，訓練師顯示書本……（遊戲自帶圖示；即使名條在等待你指向時也會顯示）",  -- 1395
-        "友方NPC僅在指向時顯示",  -- 1396
-        "友方NPC（商人、任務發布者、市民）的名條只在你指向時顯示，與其滑鼠提示一樣",  -- 1397
-        "可互動物件上的名稱",  -- 1398
-        "面對礦石、寶箱、銘牌等物件時在其上方顯示名稱（關閉：不顯示名稱，遊戲本身的提示已說明它們是什麼）",  -- 1399
-        "迷你名條",  -- 1400
-        "僕從、小動物和不給經驗的灰色敵人顯示小型名條：一條細條，上面顯示你的減益效果，不顯示名字（沒有血條的小動物保留名字；是否顯示名條由遊戲自身選項決定）",  -- 1401
-        "地城中的隊友名條：僅名字",  -- 1402
-        "在地城或團隊副本中，友方玩家的名條由遊戲自己繪製，插件不能修改：在那裡會調整遊戲內建的選項，讓它們像我們的一樣只顯示職業顏色的名字而沒有血條，戰鬥時遊戲的血條會回來（開啟了戰鬥中顯示友方血條時）；離開時全部恢復原樣",  -- 1403
-        "地城中的隊友名條：隱藏",  -- 1404
-        "在地城或團隊副本中，完全關閉遊戲的友方玩家名條（離開時恢復成你原來的設定）",  -- 1405
-        "顯示遊戲為你的目標名字提供的內容（用於排查問題）",  -- 1406
-        "列出畫面上的名條及其是否使用我們的外觀（用於排查問題）",  -- 1407
-        "好吧，看看。",  -- 1408
-        "哎喲，這一大堆。",  -- 1409
-        "嗯，讓我看看，看看……",  -- 1410
-        "伊露恩啊，賜我耐心。",  -- 1411
-        "以那魯之名，真是一團亂。",  -- 1412
-        "該死的背包。",  -- 1413
-        "包袱整齊，包袱就輕。",  -- 1414
-        "哼。破爛太多了。",  -- 1415
-        "全是累贅。",  -- 1416
-        "耐心。大地之母自會賜予。",  -- 1417
-        "嘿，看看我們有啥，老兄？",  -- 1418
-        "如此雜亂，有失體面。",  -- 1419
-        "時間就是金錢。數一數。",  -- 1420
-        "嗯，這就行了。",  -- 1421
-        "感謝伊露恩。",  -- 1422
-        "聖光自會賜予。",  -- 1423
-        "哼。夠用了。",  -- 1424
-        "嗯。夠打一仗了。",  -- 1425
-        "輕裝上路。不錯。",  -- 1426
-        "還行。勉強。",  -- 1427
-        "一格都不剩了。垃圾能賣%s：賣掉就有地方了。",  -- 1428
-        "一格都不剩了。路上用不著的，可以先存銀行。",  -- 1429
-        "垃圾：%d件，這裡值%s。X 賣掉選中的那件；智慧出售一次賣光。",  -- 1430
-        "其中%d件該放銀行：銀行裡有同樣的，或是我標記過。存入就會收好。",  -- 1431
-        "只剩%d格了。垃圾在任何商人那裡都能賣%s。",  -- 1432
-        "只剩%d格了。該賣掉或存掉一些東西了。",  -- 1433
-        "上次看過之後新添了%d件。每件都有金色小點標著。",  -- 1434
-        "值得賣的：%d件。出售篩選會把它們集中起來，每件的提示都寫著在哪賣最值。",  -- 1435
-        "垃圾：%d件，值%s。下個商人收走吧。",  -- 1436
-        "只有必需品。沒什麼值得賣的。",  -- 1437
-        "一切井井有條，還空著%d格。",  -- 1438
-        "裝備修好了：%s。",  -- 1439
-        "我可以花%s幫你修裝備；壞掉的裝備既沒護甲也沒屬性。",  -- 1440
-        "你的包滿了。%d件東西我出%s收：點智慧出售，就又有空位了。",  -- 1441
-        "我出%s收%d件東西：垃圾，還有拍賣場不會出更高價的。點智慧出售就行。",  -- 1442
-        "拍賣場想要的那%d件留著：比我多給%s。",  -- 1443
-        "你的包滿了。買東西之前先賣我點什麼吧。",  -- 1444
-        "你包裡沒什麼值得我出好價的。看看我的貨吧。",  -- 1445
-        "你身上有%d件該放這裡：我這兒存著同樣的，或是你標記過。存入就會收好。",  -- 1446
-        "你身上有%d種東西我這兒還存著更多。取出能在出發前把包補滿。",  -- 1447
-        "你的包快滿了。路上用不著的就放我這兒吧。",  -- 1448
-        "東西在我這兒很安全，你的包還空著%d格。",  -- 1449
-        "今天沒有你的信。我查了兩遍。",  -- 1450
-        "你的信：%d封，沒有附件。有空再看吧。",  -- 1451
-        "你的信：%d封。裡面有：%s。",  -- 1452
-        "全部拿取能一次清空。",  -- 1453
-        "貨到付款：%d封。這些你自己打開、自己付錢。",  -- 1454
-        "你的包滿了：物品先留在信裡。",  -- 1455
-        "去哪兒？指個地方，我告訴你要飛多久。",  -- 1456
-        "%s：按地圖算大約%s。這條航線你還沒飛過。",  -- 1457
-        "%s：按你上次飛那裡算，大約%s。",  -- 1458
-        "%s：還說不準要多久。飛一次我就知道了。",  -- 1459
-        "跑了%d條。這片水域要的技能比我高：魚餌有用，好一點的釣竿也有用。",  -- 1460
-        "鉤上沒掛魚餌。魚餌能加技能，跑掉的就少了。",  -- 1461
-        "魚餌快用完了。再掛一個，技能就不掉。",  -- 1462
-        "這裡還沒釣到的魚：%d種。接著拋竿。",  -- 1463
-        "這片水裡的魚我都釣過了。那就換個地方。",  -- 1464
-        "還什麼都沒釣到。每片水域的第一條魚都記在這裡。",  -- 1465
-        "釣到的種類：%d。每片水域都還藏著幾種：釣魚面板上沒釣到的會顯示 ?。",  -- 1466
-        "在火邊歇好了：接下來擊殺獲得的%d點經驗翻倍。",  -- 1467
-        "沒攢下休息。去旅店或城裡過一夜，一段時間內擊殺經驗翻倍。",  -- 1468
-        "吸收 %d",  -- 1469
-        "右側列表",  -- 1470
-        "中間逐個顯示",  -- 1471
-        "%d 次治療致命一擊",  -- 1472
-        "%d 次致命一擊",  -- 1473
-        "審判",  -- 1474
-        "高光時刻：位置",  -- 1475
-        "角色右側冷卻提示正上方的一塊區域：最新的緊挨提示，舊的向上移動並淡出；或在中間一次顯示一個",  -- 1476
-        "展示高光時刻的樣子和手感",  -- 1477
-        "已收藏",  -- 1478
-        "已透過其他物品收藏",  -- 1479
-        "尚未收藏",  -- 1480
-        "外觀",  -- 1481
-        "選擇一個套裝，把它的部件放到你的外觀方案上。%s 才會保留；在那之前不花任何錢。",  -- 1482
-        "正在查看你的收藏...",  -- 1483
-        "你的外觀方案已恢復原樣。",  -- 1484
-        "%s：已穿上 %d/%d 件。",  -- 1485
-        "有 %d 件無法用於此外觀方案。",  -- 1486
-        "你擁有部件的套裝：1 個",  -- 1487
-        "你擁有部件的套裝：%d 個",  -- 1488
-        "你無法穿戴",  -- 1489
-        "缺少",  -- 1490
-        "全部 %d 件",  -- 1491
-        "%d/%d 件",  -- 1492
-        "缺少：%s",  -- 1493
-        "還沒有套裝。名字相同的物品，比如綠鐵頭盔和綠鐵護手，只要你擁有其中一件，就會出現在這裡。",  -- 1494
-        "復原",  -- 1495
-        "刪除自訂套裝%s？刪除後無法復原。",  -- 1496
-        "刪除",  -- 1497
-        "請先指向一個自訂套裝。",  -- 1498
-        "%s  刪除自訂套裝",  -- 1499
+        "購買比用%s製作更便宜",  -- 1295
+        "用%s製作",  -- 1296
+        "導師：銀行能讓你做什麼",  -- 1297
+        "用銀行材料能做的",  -- 1298
+        "銀行裡的東西已經做不了更多了。",  -- 1299
+        "算上銀行能做 %d 種，其中 %d 種只靠銀行。",  -- 1300
+        "導師：%s %d > %d",  -- 1301
+        "導師",  -- 1302
+        "升級計畫",  -- 1303
+        "或",  -- 1304
+        "採集 %s",  -- 1305
+        "待學",  -- 1306
+        "購買更划算",  -- 1307
+        "隱藏",  -- 1308
+        "計畫",  -- 1309
+        "採集此項",  -- 1310
+        "全部採集",  -- 1311
+        "算上銀行",  -- 1312
+        "使用計畫",  -- 1313
+        "按兩次隱藏",  -- 1314
+        "這裡沒有可以試穿的。",  -- 1315
+        "已將%d項加入採集清單。",  -- 1316
+        "什麼都不缺：所需材料都已齊備。",  -- 1317
+        "開啟專業技能視窗即可擬定計畫。",  -- 1318
+        "導師（升級計畫）：顯示 / 隱藏",  -- 1319
+        "顯示你最後開啟的專業技能視窗的升級計畫，並啟用手把按鍵",  -- 1320
+        "任務左側",  -- 1321
+        "任務右側",  -- 1322
+        "任務下方",  -- 1323
+        "採集清單已滿。",  -- 1324
+        "採集清單：%s，需要%d個。",  -- 1325
+        "採集",  -- 1326
+        "還有%d項",  -- 1327
+        "暫無需採集的物品。",  -- 1328
+        "再加一組",  -- 1329
+        "移除",  -- 1330
+        "清空",  -- 1331
+        "完成",  -- 1332
+        "清空整個採集清單？",  -- 1333
+        "採集清單：選擇 / 完成",  -- 1334
+        "採集清單：加入你指向的物品",  -- 1335
+        "它不在採集清單上。",  -- 1336
+        "採集清單為空。",  -- 1337
+        "採集清單：位置",  -- 1338
+        "採集清單放在任務列表左側、右側或其任務下方",  -- 1339
+        "任務列表旁的採集清單：用手把選擇；add <物品> [數量]，remove <物品>，clear，或用 left / right / bottom 設定位置",  -- 1340
+        "仇恨百分比",  -- 1341
+        "在目標框架和名條的仇恨圖示旁以數字顯示你的仇恨佔比",  -- 1342
+        "生命值數字",  -- 1343
+        "在條上顯示縮寫的剩餘生命值（12.3k）（緊湊名條不顯示：百分比就夠了）",  -- 1344
+        "你的減益",  -- 1345
+        "目標名稱上方顯示你的減益效果及其剩餘時間",  -- 1346
+        "所有人的減益",  -- 1347
+        "遊戲為名條標記的所有人的減益，而不只是你的",  -- 1348
+        "敵方增益",  -- 1349
+        "敵人減益效果旁的增益效果：只顯示重要的（重要、狂怒或你能驅散或竊取的），關閉「只顯示重要效果」時顯示全部",  -- 1350
+        "群體控制圖示",  -- 1351
+        "單位被擊昏、定身、恐懼時顯示帶剩餘時間的大圖示...",  -- 1352
+        "仇恨光暈",  -- 1353
+        "名字後的盾牌圖示和光暈：攻擊你時為紅色，即將拉到仇恨時紅黃交替，正在失去仇恨時黃藍交替，不在你身上時為藍色",  -- 1354
+        "任務標記",  -- 1355
+        "在你的任務仍然需要的單位上顯示金色標記",  -- 1356
+        "名條動畫",  -- 1357
+        "名條淡入，低生命值時呼吸閃動，群體控制時閃爍",  -- 1358
+        "小",  -- 1359
+        "普通",  -- 1360
+        "大",  -- 1361
+        "完整名字",  -- 1362
+        "簡短名字",  -- 1363
+        "不顯示名字",  -- 1364
+        "完整",  -- 1365
+        "極簡迷你",  -- 1366
+        "名條大小",  -- 1367
+        "名條上條的大小：小而細、普通，或大（更寬更高）",  -- 1368
+        "名條上的名字",  -- 1369
+        "有生命條的名條上的名字：完整、縮短或不顯示（目標框架會顯示完整名字；等級和職業圖示保留）。沒有生命條的名條（友方NPC）始終保留名字",  -- 1370
+        "名條樣式",  -- 1371
+        "一鍵設定名條開關。完整：全部。極簡：無能量條、公會或頭銜，名字縮短。極簡迷你：帶生命值的小條、你的減益和重要的增益、等級和職業，不顯示名字（目標框架有）。仇恨、控制和醒目的施法始終保留",  -- 1372
+        "玩家頭銜",  -- 1373
+        "在玩家名稱旁顯示其頭銜",  -- 1374
+        "公會與NPC職業",  -- 1375
+        "名稱下方的一行：玩家的公會，或NPC的職業",  -- 1376
+        "戰鬥中的友方血條",  -- 1377
+        "友方名條在該單位處於戰鬥狀態時顯示生命力、能量與施法",  -- 1378
+        "遊戲內建的友方名條",  -- 1379
+        "友方名條（你的隊伍、其他玩家、友方NPC）使用遊戲內建外觀；我們的只用於敵人",  -- 1380
+        "能量條",  -- 1381
+        "生命力條下方的細長法力、怒氣或能量條",  -- 1382
+        "施法目標",  -- 1383
+        "施法所指向的目標，顯示在法術名稱旁",  -- 1384
+        "生命力百分比",  -- 1385
+        "血條上的生命力百分比",  -- 1386
+        "目標名條上顯示名字",  -- 1387
+        "關閉：目標的名條不顯示名字和等級（目標框架會顯示）",  -- 1388
+        "名條顯示等級",  -- 1389
+        "敵人名字前的等級，依難度著色",  -- 1390
+        "精簡名條",  -- 1391
+        "名條寬度約為一半",  -- 1392
+        "醒目的敵方施法",  -- 1393
+        "敵人的施法會閃爍、膨脹並越來越快地脈動直到完成，讓你能及時打斷",  -- 1394
+        "名條職業圖示",  -- 1395
+        "在玩家名字前顯示職業圖示，無論敵友",  -- 1396
+        "NPC職能圖示",  -- 1397
+        "在提供服務的友方NPC上方顯示圖示：商人顯示背包，可修理的鐵匠顯示鐵砧，訓練師顯示書本……（遊戲自帶圖示；即使名條在等待你指向時也會顯示）",  -- 1398
+        "友方NPC僅在指向時顯示",  -- 1399
+        "友方NPC（商人、任務發布者、市民）的名條只在你指向時顯示，與其滑鼠提示一樣",  -- 1400
+        "可互動物件上的名稱",  -- 1401
+        "面對礦石、寶箱、銘牌等物件時在其上方顯示名稱（關閉：不顯示名稱，遊戲本身的提示已說明它們是什麼）",  -- 1402
+        "迷你名條",  -- 1403
+        "僕從、小動物和不給經驗的灰色敵人顯示小型名條：一條細條，上面顯示你的減益效果，不顯示名字（沒有血條的小動物保留名字；是否顯示名條由遊戲自身選項決定）",  -- 1404
+        "地城中的隊友名條：僅名字",  -- 1405
+        "在地城或團隊副本中，友方玩家的名條由遊戲自己繪製，插件不能修改：在那裡會調整遊戲內建的選項，讓它們像我們的一樣只顯示職業顏色的名字而沒有血條，戰鬥時遊戲的血條會回來（開啟了戰鬥中顯示友方血條時）；離開時全部恢復原樣",  -- 1406
+        "地城中的隊友名條：隱藏",  -- 1407
+        "在地城或團隊副本中，完全關閉遊戲的友方玩家名條（離開時恢復成你原來的設定）",  -- 1408
+        "顯示遊戲為你的目標名字提供的內容（用於排查問題）",  -- 1409
+        "列出畫面上的名條及其是否使用我們的外觀（用於排查問題）",  -- 1410
+        "好吧，看看。",  -- 1411
+        "哎喲，這一大堆。",  -- 1412
+        "嗯，讓我看看，看看……",  -- 1413
+        "伊露恩啊，賜我耐心。",  -- 1414
+        "以那魯之名，真是一團亂。",  -- 1415
+        "該死的背包。",  -- 1416
+        "包袱整齊，包袱就輕。",  -- 1417
+        "哼。破爛太多了。",  -- 1418
+        "全是累贅。",  -- 1419
+        "耐心。大地之母自會賜予。",  -- 1420
+        "嘿，看看我們有啥，老兄？",  -- 1421
+        "如此雜亂，有失體面。",  -- 1422
+        "時間就是金錢。數一數。",  -- 1423
+        "嗯，這就行了。",  -- 1424
+        "感謝伊露恩。",  -- 1425
+        "聖光自會賜予。",  -- 1426
+        "哼。夠用了。",  -- 1427
+        "嗯。夠打一仗了。",  -- 1428
+        "輕裝上路。不錯。",  -- 1429
+        "還行。勉強。",  -- 1430
+        "一格都不剩了。垃圾能賣%s：賣掉就有地方了。",  -- 1431
+        "一格都不剩了。路上用不著的，可以先存銀行。",  -- 1432
+        "垃圾：%d件，這裡值%s。X 賣掉選中的那件；智慧出售一次賣光。",  -- 1433
+        "其中%d件該放銀行：銀行裡有同樣的，或是我標記過。存入就會收好。",  -- 1434
+        "只剩%d格了。垃圾在任何商人那裡都能賣%s。",  -- 1435
+        "只剩%d格了。該賣掉或存掉一些東西了。",  -- 1436
+        "上次看過之後新添了%d件。每件都有金色小點標著。",  -- 1437
+        "值得賣的：%d件。出售篩選會把它們集中起來，每件的提示都寫著在哪賣最值。",  -- 1438
+        "垃圾：%d件，值%s。下個商人收走吧。",  -- 1439
+        "只有必需品。沒什麼值得賣的。",  -- 1440
+        "一切井井有條，還空著%d格。",  -- 1441
+        "裝備修好了：%s。",  -- 1442
+        "我可以花%s幫你修裝備；壞掉的裝備既沒護甲也沒屬性。",  -- 1443
+        "你的包滿了。%d件東西我出%s收：點智慧出售，就又有空位了。",  -- 1444
+        "我出%s收%d件東西：垃圾，還有拍賣場不會出更高價的。點智慧出售就行。",  -- 1445
+        "拍賣場想要的那%d件留著：比我多給%s。",  -- 1446
+        "你的包滿了。買東西之前先賣我點什麼吧。",  -- 1447
+        "你包裡沒什麼值得我出好價的。看看我的貨吧。",  -- 1448
+        "你身上有%d件該放這裡：我這兒存著同樣的，或是你標記過。存入就會收好。",  -- 1449
+        "你身上有%d種東西我這兒還存著更多。取出能在出發前把包補滿。",  -- 1450
+        "你的包快滿了。路上用不著的就放我這兒吧。",  -- 1451
+        "東西在我這兒很安全，你的包還空著%d格。",  -- 1452
+        "今天沒有你的信。我查了兩遍。",  -- 1453
+        "你的信：%d封，沒有附件。有空再看吧。",  -- 1454
+        "你的信：%d封。裡面有：%s。",  -- 1455
+        "全部拿取能一次清空。",  -- 1456
+        "貨到付款：%d封。這些你自己打開、自己付錢。",  -- 1457
+        "你的包滿了：物品先留在信裡。",  -- 1458
+        "去哪兒？指個地方，我告訴你要飛多久。",  -- 1459
+        "%s：按地圖算大約%s。這條航線你還沒飛過。",  -- 1460
+        "%s：按你上次飛那裡算，大約%s。",  -- 1461
+        "%s：還說不準要多久。飛一次我就知道了。",  -- 1462
+        "跑了%d條。這片水域要的技能比我高：魚餌有用，好一點的釣竿也有用。",  -- 1463
+        "鉤上沒掛魚餌。魚餌能加技能，跑掉的就少了。",  -- 1464
+        "魚餌快用完了。再掛一個，技能就不掉。",  -- 1465
+        "這裡還沒釣到的魚：%d種。接著拋竿。",  -- 1466
+        "這片水裡的魚我都釣過了。那就換個地方。",  -- 1467
+        "還什麼都沒釣到。每片水域的第一條魚都記在這裡。",  -- 1468
+        "釣到的種類：%d。每片水域都還藏著幾種：釣魚面板上沒釣到的會顯示 ?。",  -- 1469
+        "在火邊歇好了：接下來擊殺獲得的%d點經驗翻倍。",  -- 1470
+        "沒攢下休息。去旅店或城裡過一夜，一段時間內擊殺經驗翻倍。",  -- 1471
+        "吸收 %d",  -- 1472
+        "右側列表",  -- 1473
+        "中間逐個顯示",  -- 1474
+        "%d 次治療致命一擊",  -- 1475
+        "%d 次致命一擊",  -- 1476
+        "審判",  -- 1477
+        "高光時刻：位置",  -- 1478
+        "角色右側冷卻提示正上方的一塊區域：最新的緊挨提示，舊的向上移動並淡出；或在中間一次顯示一個",  -- 1479
+        "展示高光時刻的樣子和手感",  -- 1480
+        "已收藏",  -- 1481
+        "已透過其他物品收藏",  -- 1482
+        "尚未收藏",  -- 1483
+        "外觀",  -- 1484
+        "選擇一個套裝，把它的部件放到你的外觀方案上。%s 才會保留；在那之前不花任何錢。",  -- 1485
+        "正在查看你的收藏...",  -- 1486
+        "你的外觀方案已恢復原樣。",  -- 1487
+        "%s：已穿上 %d/%d 件。",  -- 1488
+        "有 %d 件無法用於此外觀方案。",  -- 1489
+        "你擁有部件的套裝：1 個",  -- 1490
+        "你擁有部件的套裝：%d 個",  -- 1491
+        "你無法穿戴",  -- 1492
+        "缺少",  -- 1493
+        "全部 %d 件",  -- 1494
+        "%d/%d 件",  -- 1495
+        "缺少：%s",  -- 1496
+        "還沒有套裝。名字相同的物品，比如綠鐵頭盔和綠鐵護手，只要你擁有其中一件，就會出現在這裡。",  -- 1497
+        "復原",  -- 1498
+        "刪除自訂套裝%s？刪除後無法復原。",  -- 1499
+        "刪除",  -- 1500
+        "請先指向一個自訂套裝。",  -- 1501
+        "%s  刪除自訂套裝",  -- 1502
     },
 }
 TRANSLATIONS.esMX = TRANSLATIONS.esES      -- Latin American Spanish uses the same text

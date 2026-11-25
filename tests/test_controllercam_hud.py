@@ -11944,6 +11944,27 @@ class Levelling(unittest.TestCase):
         self.assertEqual(again.db.skillMakes[118].r[2447], 1)       # and what the potion is made of
         self.assertEqual(e.errors(), [])
 
+    def test_the_list_shows_what_the_plan_wants_with_the_way_to_get_it(self):
+        e = self.env(open=False)
+        LV, T = e.ns.Levelling, e.lua.table
+        e.db.skillMakes[2318] = T(m=1, k="leatherworking", r=e.lua.table_from({2934: 3}))     # Light Leather: 3 scraps
+        e.db.skillMakes[2319] = T(m=1, k="leatherworking", r=e.lua.table_from({2318: 4}))     # Medium Leather: 4 light
+        plan = e.lua.eval("function(raw, total, made, via, need) return { raw = raw, total = total, made = made, via = via, need = need } end")(
+            *LV.Breakdown(e.lua.table_from({2319: 10})), e.lua.table_from({2319: 10}))
+        wanted = LV.Wanted(plan)
+        self.assertEqual(len(wanted), 1)
+        g = wanted[1]
+        self.assertEqual(g.id, 2319)                                  # Medium Leather is what is wanted,
+        self.assertEqual(g.more, 10)
+        self.assertEqual(g.route[1].id, 2934)                         # the scraps the way to get it
+        self.assertEqual(g.route[1].n, 120)
+        self.assertFalse(g.buy)
+        e.lua.execute("ns_prices = { [2319] = 30, [2934] = 5 }")      # a scrap 5c, 120 of them 600c: Medium Leather 30c each
+        e.ns.Market.Auction = e.lua.eval("function(id) return ns_prices[id] end")
+        g = LV.Wanted(plan)[1]
+        self.assertTrue(g.buy)                                        # 300c to buy against 600c to make: buy it
+        self.assertEqual(e.errors(), [])
+
     def test_what_it_takes_goes_down_to_the_ore(self):
         e = self.env(open=False)
         LV, T = e.ns.Levelling, e.lua.table

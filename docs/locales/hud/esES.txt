@@ -1292,6 +1292,8 @@ Apréndela %s.
 Las guías suben este tramo recolectando %s.
 %s: tienes %d, el plan usa %d
 para %s
+Es más barato comprarlo que fabricarlo con %s
+Hecho con %s
 El Mentor: lo que tu banco te deja fabricar
 Lo que tu banco puede fabricar
 Con lo que hay en tu banco no se puede fabricar nada más.
@@ -1302,6 +1304,7 @@ Plan de subida
 o
 Recolecta %s
 por aprender
+más barato comprarlo
 Ocultar
 El plan
 Farmear esto
