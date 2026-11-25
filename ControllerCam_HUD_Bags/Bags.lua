@@ -1682,8 +1682,27 @@ function B.DrawBeside(on)
     if not on and beside then beside:Hide() end
 end
 
+-- In a fight: the slots are the game's own buttons (its secure item template): they can't be moved, shown or hidden
+-- by our code then (each try is blocked, and a layout that tried them all stopped before the ring and the tooltip).
+-- So the grid stays where it was drawn, each slot's contents drawn afresh, and only our own parts are updated: the
+-- ring on the chosen slot, its tooltip and the line of buttons. A choice beyond the rows drawn waits for the fight's
+-- end (the window is put in order again then).
+function B:FightLayout()
+    if not (frame and self.open) then return end
+    local list = self.list or {}
+    self.index = ns.Clamp(self.index, 1, math.max(1, #list))
+    for i, b in pairs(self.at or {}) do
+        local e = list[i]
+        if e then Paint(b, e) end
+    end
+    frame.legend:SetText(self:Legend())
+    self:Mark()
+    ns.Note("bags: in a fight, slot %d of %d%s", self.index, #list, (self.at and self.at[self.index]) and "" or " (not drawn)")
+end
+
 function B:Layout()
     if not (frame and self.open) then return end
+    if InCombatLockdown() then return self:FightLayout() end
     B.Uncover()                         -- (the slots may move: the mouse's next slot puts the cover back)
     local list, cols = self.list or {}, B.COLS
     local n = #list
@@ -1915,6 +1934,10 @@ end
 
 function B:Hide()
     if not self.open then return end
+    if InCombatLockdown() and type(debugstack) == "function" then
+        local ok, where = pcall(debugstack, 2, 3, 0)
+        ns.Note("bags: closed in a fight: %s", ok and tostring(where):gsub("%s+", " "):sub(1, 160) or "?")
+    end
     self:CancelDestroy()
     self.open, self.menu = false, nil
     if ns.Narrative then ns.Narrative.Hush("bags") end

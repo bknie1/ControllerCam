@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.5.10
+
+ControllerCam: HUD
+- Fixed: the bag window in a fight. Its slots are the game's own item buttons, which our code can't move, show or hide in combat; the window's layout tried them all each time you moved or used something, was blocked, and stopped before it drew the ring on the chosen slot and its tooltip. So in a fight the cursor and the tooltip didn't follow the d-pad, and after using food the choice stayed on the used slot until you left and came back. In a fight the window now leaves the grid where it was (each slot's contents drawn afresh) and only updates its own parts: the ring, the tooltip and the buttons' line. The debug report notes what the window does in a fight, and who closed it if it closes.
+
 ## 1.5.9
 
 ControllerCam: HUD

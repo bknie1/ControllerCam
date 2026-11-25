@@ -2,7 +2,7 @@
 ## Title: ControllerCam HUD: Group
 ## Notes: Party and raid frames, and the healer frames, in the HUD's look. Loaded only while it is switched on in the HUD's options.
 ## Author: bknie1
-## Version: 1.5.9
+## Version: 1.5.10
 ## X-License: MIT
 ## IconTexture: Interface\AddOns\ControllerCam\Media\icon
 ## Dependencies: ControllerCam_HUD

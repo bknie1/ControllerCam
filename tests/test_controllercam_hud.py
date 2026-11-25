@@ -14835,6 +14835,31 @@ class BagWindow(unittest.TestCase):
         m = e.g.ControllerCamHUD_BagUse.attrs.macrotext
         return m and m.replace("/use ", "")
 
+    def test_in_a_fight_the_slots_are_never_moved_but_the_ring_and_tooltip_follow(self):
+        e = self.fight_env()
+        B, S = e.ns.Bags, e.g.ControllerCamHUD_BagSecure
+        e.g.ToggleAllBags()
+        e.mock.advance(0.2)
+        e.lua.execute("MOVED = 0")
+        e.lua.eval("""function(at)
+            for _, b in pairs(at) do
+                for _, name in ipairs({ "ClearAllPoints", "SetPoint", "Show", "Hide" }) do
+                    local f = b[name]
+                    b[name] = function(...) if InCombatLockdown() then MOVED = MOVED + 1 end return f(...) end
+                end
+            end
+        end""")(B.at)
+        self.fight(e, True)
+        e.g.SECURE_SHOWN(S, True)
+        self.nav(e, "PADDRIGHT")
+        self.nav(e, "PADDRIGHT")
+        self.assertEqual(e.g.MOVED, 0)                               # the game's slot buttons left alone
+        self.assertEqual(B.index, S.attrs.i)                         # the choice went with the d-pad,
+        self.assertTrue(B.frame.sel.shown)                           # its ring on the slot,
+        self.assertTrue(e.g.GameTooltip.shown)                       # and its tooltip
+        self.fight(e, False)
+        self.assertEqual(e.errors(), [])
+
     def test_in_a_fight_the_open_window_moves_and_uses_through_secure_snippets(self):
         e = self.fight_env()
         e.g.ToggleAllBags()
