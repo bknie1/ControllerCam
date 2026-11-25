@@ -2,7 +2,7 @@
 ## Title: ControllerCam HUD: Campfire
 ## Notes: The campfire scene: sit at a camp and the screen turns to film. Loaded only while it is switched on in the HUD's options.
 ## Author: bknie1
-## Version: 1.5.7
+## Version: 1.5.8
 ## X-License: MIT
 ## IconTexture: Interface\AddOns\ControllerCam\Media\icon
 ## Dependencies: ControllerCam_HUD

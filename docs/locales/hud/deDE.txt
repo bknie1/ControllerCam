@@ -910,8 +910,10 @@ Im Kampf schließt B deine Taschen.
 für die Bank
 keine Markierung
 Kein freier Platz.
+%s hängt am Mauszeiger: legt es auf eine Taste Eurer Gamepad-Leiste.
 Einen Bankfach-Taschenplatz für %s kaufen?
 Kaufen
+Belegen
 Hier ablegen
 Stapel teilen
 Markierung: %s

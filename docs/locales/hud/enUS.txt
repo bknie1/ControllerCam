@@ -910,8 +910,10 @@ In a fight, close your bags with B.
 for the bank
 no mark
 No empty slot.
+%s is on your cursor: put it on a button of your gamepad bar.
 Buy a bank bag slot for %s?
 Buy
+Bind
 Put down here
 Split stack
 Mark: %s

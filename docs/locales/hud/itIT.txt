@@ -910,8 +910,10 @@ In combattimento, chiudi le borse con B.
 per la banca
 nessun segno
 Nessun posto libero.
+%s è sul cursore: mettilo su un pulsante della tua barra del gamepad.
 Comprare uno slot borsa della banca per %s?
 Compra
+Assegna
 Posa qui
 Dividi pila
 Segno: %s

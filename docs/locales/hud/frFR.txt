@@ -910,8 +910,10 @@ En combat, fermez vos sacs avec B.
 pour la banque
 sans marque
 Aucun emplacement libre.
+%s est sur le curseur : placez-le sur un bouton de votre barre manette.
 Acheter un emplacement de sac de banque pour %s ?
 Acheter
+Assigner
 Poser ici
 Diviser la pile
 Marque: %s

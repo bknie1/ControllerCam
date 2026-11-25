@@ -6728,6 +6728,19 @@ class StanceAndPetButtons(unittest.TestCase):
         self.assertEqual(e.ns.PadButtons.wheels, 1)
         self.assertEqual(e.errors(), [])
 
+    def test_the_wheels_are_drawn_over_the_bars_buttons_and_given_back(self):
+        e = self.env()
+        e.lua.execute("""
+            GamepadSpellFlyout = CreateFrame("Frame", "GamepadSpellFlyout", UIParent)
+            GamepadSpellFlyout:SetFrameStrata("MEDIUM")
+            GamepadSpellFlyout:Hide()""")
+        wheel = e.g.GamepadSpellFlyout
+        e.update(0.2)
+        self.assertEqual(wheel.strata, "DIALOG")                    # over the d-pad and the face buttons,
+        e.cmd("padraise off")
+        self.assertEqual(wheel.strata, "MEDIUM")                    # and as the game had it once that is off
+        self.assertEqual(e.errors(), [])
+
     def test_the_games_own_layout_is_answered_out_of_combat_only(self):
         e = self.env()
         page = e.g.GamepadMainActionBarFramePageUnit
@@ -15258,6 +15271,24 @@ class BagWindow(unittest.TestCase):
         e.mock.answer("accept")
         e.mock.advance(0.1)
         self.assertEqual(e.g.BOUGHT, 1)
+        self.assertEqual(e.errors(), [])
+
+    def test_the_menu_can_bind_a_usable_item_to_the_gamepad_bar(self):
+        e = self.env()
+        e.mock.put(3, 1, e.lua.table(id=330, name="Healing Potion", quality=1, price=50, count=5, use=True, **{"class": 0}))
+        e.g.ToggleAllBags()
+        B = e.ns.Bags
+        mine = [k for k, x in B.list.items() if x.id and x.use]       # (a potion)
+        self.assertTrue(mine)
+        B.index = mine[0]
+        B:Layout() if False else B.Layout(B)
+        self.press(e, "PAD4")
+        texts = [c.text for c in B.menu.values()]
+        self.assertIn("Bind", texts)
+        i = [k for k, c in B.menu.items() if c.text == "Bind"][0]
+        e.ns.Bags.MenuChoose(B, i)
+        self.assertEqual(list(e.g.PICKED.values())[-1:], ["%d:%d" % (B.list[B.index].bag, B.list[B.index].slot)])   # on the cursor
+        self.assertFalse(B.open)                                     # the window out of the way
         self.assertEqual(e.errors(), [])
 
     def test_ordinary_bags_first_then_the_specialised_ones_and_the_keyring_last(self):

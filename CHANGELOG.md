@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.5.8
+
+ControllerCam: HUD
+- The More menu (Y) has **Bind** for items you can use: the item goes on your cursor and the bag window steps aside, so you can put it on a button of the gamepad bar.
+- The stance and pet wheels (the menus that open from the shoulder-button and trigger buttons on the gamepad bar) are drawn over the bar's d-pad and face buttons, not under them, and are found from further off when the game opens them around the buttons' old spot. They go back to the game's layer when "Stance and pet buttons above the bars" is off. (In a fight the game's own layout stays: frames can't be moved then.)
+
 ## 1.5.7
 
 ControllerCam: HUD

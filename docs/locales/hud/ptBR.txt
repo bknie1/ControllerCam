@@ -910,8 +910,10 @@ Em combate, feche suas bolsas com B.
 para o banco
 sem marca
 Nenhum espaço livre.
+%s está no cursor: coloque-o em um botão da sua barra do controle.
 Comprar um espaço de bolsa do banco por %s?
 Comprar
+Atribuir
 Soltar aqui
 Dividir pilha
 Marca: %s

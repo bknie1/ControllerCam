@@ -30,7 +30,8 @@ P.SIDES = {
 }
 P.RAISE = 112                 -- how far up a button goes when the icon it replaces cannot be found
 P.FLYOUTS = { "GamepadSpellFlyout", "GamepadPetActionFlyout", "GamepadPetSpellFlyout" }
-P.NEAR = 40                   -- a wheel this close to a button's old spot is that button's
+P.NEAR = 90                   -- a wheel this close to a button's old spot is that button's (it opened a little off)
+P.STRATA = "DIALOG"           -- the wheels over the bar's d-pad and face buttons, never under them
 
 local function Field(frame, key)
     local v = type(frame) == "table" and rawget(frame, key) or nil
@@ -133,6 +134,8 @@ function P:PutBack()
         icon:SetAlpha(alpha)
     end
     self.hidden = {}
+    for f, strata in pairs(self.strataWas or {}) do pcall(f.SetFrameStrata, f, strata) end
+    self.strataWas = {}
 end
 
 function P:Arrange()
@@ -148,8 +151,17 @@ end
 
 -- A wheel that is open around a moved button's old spot: around the button itself instead
 function P:Wheels()
+    self.strataWas = self.strataWas or {}
     for _, name in ipairs(self.FLYOUTS) do
         local f = _G[name]
+        -- over the bar's buttons (it opened under the d-pad and the face buttons): the frame's layer, out of combat
+        if type(f) == "table" and f.GetFrameStrata and f.SetFrameStrata then
+            local okS, strata = pcall(f.GetFrameStrata, f)
+            if okS and strata ~= self.STRATA then
+                if self.strataWas[f] == nil then self.strataWas[f] = strata end
+                pcall(f.SetFrameStrata, f, self.STRATA)
+            end
+        end
         if ns.ShownPlain(f) and f.SetPoint and f.ClearAllPoints then
             local fx, fy = Middle(f)
             local best, bestD

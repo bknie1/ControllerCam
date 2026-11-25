@@ -910,8 +910,10 @@ En combate, cierra tus bolsas con B.
 para el banco
 sin marca
 No hay hueco libre.
+%s está en el cursor: ponlo en un botón de tu barra del mando.
 ¿Comprar una ranura de bolsa del banco por %s?
 Comprar
+Asignar
 Dejar aquí
 Dividir montón
 Marca: %s

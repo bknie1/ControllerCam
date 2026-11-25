@@ -2225,6 +2225,17 @@ function B.TryOn(link)
     if link and dress then Try(dress, link) end
 end
 
+-- Bind an item to a button of the gamepad bars: the item on the cursor, the window out of the way, the bar's
+-- button pressed to put it there
+function B.BindItem(e)
+    if InCombatLockdown() or not (e and e.id) then return end
+    Try(rawget(_G, "ClearCursor"))
+    Try(C_Container.PickupContainerItem, e.bag, e.slot)
+    ns.Say(L["%s is on your cursor: put it on a button of your gamepad bar."]:format(B.DestroyName(e)))
+    if B.menu then B:CloseMenu() end
+    B:Close()
+end
+
 -- A bank bag slot for sale: what the next costs (nil: none, or this client has no way to buy one)
 function B.BankSlotCost()
     local get, price = rawget(_G, "GetNumBankSlots"), rawget(_G, "GetBankSlotCost")
@@ -2265,6 +2276,8 @@ function B:Choices()
         if use then add((plain and gear) and L["Equip"] or use, function() end, nil, "/use " .. e.bag .. " " .. e.slot) end
         local name = e.link and e.link:match("%[(.-)%]")
         if gear and not plain and name then add(L["Equip"], function() end, nil, "/equip " .. name) end
+        -- Bind: onto a gamepad button (the item on the cursor, to be put on a bar's button): for what can be used
+        if e.use or e.kind == "consumable" then add(L["Bind"], function() B.BindItem(e) end) end
     end
     if e and (e.id or holding) and not InCombatLockdown() then
         add(holding and L["Put down here"] or L["Pick up"], function() Try(C_Container.PickupContainerItem, e.bag, e.slot) end)

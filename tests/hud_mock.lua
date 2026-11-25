@@ -30,6 +30,7 @@ function decorate(f)
     f.SetFrameLevel = function(self, n) self.level = n end
     f.GetFrameLevel = function(self) return self.level end
     f.SetFrameStrata = function(self, s) self.strata = s end
+    f.GetFrameStrata = function(self) return self.strata or "MEDIUM" end
     f.SetAttribute = function(self, k, v) self.attrs[k] = v end
     f.GetAttribute = function(self, k) return self.attrs[k] end
     f.SetParent = function(self, p) self.parent = p end
