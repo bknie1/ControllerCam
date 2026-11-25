@@ -183,6 +183,15 @@ function B.Read(view, only)
     local bags = B.Containers(view)
     local keyring = view ~= "bank" and B.Keyring()
     if keyring then bags[#bags + 1] = keyring end
+    do  -- ordinary bags first, then the specialised ones (ammo, herbs, a profession's), the keyring last
+        local ranked = {}
+        for i, bag in ipairs(bags) do
+            ranked[i] = { bag = bag, i = i, rank = (bag == keyring) and 3 or (Family(bag) ~= 0 and 2 or 1) }
+        end
+        table.sort(ranked, function(a, b) if a.rank ~= b.rank then return a.rank < b.rank end return a.i < b.i end)
+        bags = {}
+        for i, r in ipairs(ranked) do bags[i] = r.bag end
+    end
     for _, bag in ipairs(bags) do
         local size = Slots(bag)
         if size > 0 then
@@ -707,6 +716,16 @@ B.SecureUse:SetPoint("TOPLEFT", UIParent, "TOPLEFT", -10, 10)
 B.SecureUse:SetAlpha(0)
 B.SecureUse:EnableMouse(false)
 
+-- Aim X at a macro of our own (a menu row's: Equip by name where X would deposit): true when aimed
+function B.AimMacro(macro)
+    if InCombatLockdown() then return false end
+    if B.aimed ~= macro then
+        B.SecureUse:SetAttribute("macrotext", macro)
+        B.aimed = macro
+    end
+    return macro ~= nil
+end
+
 -- Aim X at a slot (out of combat only): true when it is aimed there
 function B.Aim(bag, slot)
     if InCombatLockdown() then return false end
@@ -803,6 +822,7 @@ function B.SaySold(e)
 end
 B.SecureUse:SetScript("PostClick", ns.Protect(function(_, _, down)
     if down then return end
+    if B.menu then C_Timer.After(0, function() if B.menu and B.open then B:CloseMenu() end end) end   -- (a row done)
     local e = B.list and B.list[B.index]
     if InCombatLockdown() then
         if e and e.id and B.NoFightEquip(e) then ns.Say(L["Armour can't be changed in a fight."]) end
@@ -1967,6 +1987,12 @@ function B:Wanted()
         if B.NAV[key] then want[key] = "CLICK ControllerCamHUD_BagNav_" .. key .. ":LeftButton"
         elseif key ~= "PADBACK" or self.bankOpen then want[key] = "CLICK ControllerCamHUD_BagKey_" .. key .. ":LeftButton" end
     end
+    local row = self.menu and self.menu[self.menuIndex or 1]
+    if row and row.macro and not self.confirm then
+        -- a row that uses, equips or moves the item: A clicks the secure button (never from our own code)
+        if B.AimMacro(row.macro) then want.PAD1 = "CLICK ControllerCamHUD_BagUse:LeftButton" end
+        return want
+    end
     local e = not (self.menu or self.confirm) and self.zone == "grid" and self:Selected() and self.list[self.index]
     if B.Aim(e and e.id and e.bag, e and e.id and e.slot) then
         want.PAD3 = "CLICK ControllerCamHUD_BagUse:LeftButton"
@@ -2199,12 +2225,47 @@ function B.TryOn(link)
     if link and dress then Try(dress, link) end
 end
 
+-- A bank bag slot for sale: what the next costs (nil: none, or this client has no way to buy one)
+function B.BankSlotCost()
+    local get, price = rawget(_G, "GetNumBankSlots"), rawget(_G, "GetBankSlotCost")
+    if not (type(get) == "function" and type(price) == "function" and type(rawget(_G, "PurchaseSlot")) == "function") then
+        return nil
+    end
+    local ok, n, full = pcall(get)
+    n = Num(n)
+    if not ok or n == nil or ns.Yes(full) then return nil end
+    return Num(Try(price, n))
+end
+
+function B.AskBuySlot(cost)
+    if InCombatLockdown() then return end
+    ns.Dialog.Show("CCHUD_BUY_BANK_SLOT", ns.Money(cost))
+end
+ns.Dialog.Define("CCHUD_BUY_BANK_SLOT", {
+    text = L["Buy a bank bag slot for %s?"], button1 = L["Buy"], button2 = CANCEL or "Cancel",
+    OnAccept = function()                                    -- (the dialog closes first: then the game's own purchase)
+        C_Timer.After(0, function()
+            local buy = rawget(_G, "PurchaseSlot")
+            if type(buy) == "function" and not InCombatLockdown() then pcall(buy) end
+        end)
+    end,
+})
+
 -- The choices for the chosen slot (or bag) and the place you are at: { { text, fn, stay = keep the menu up } }
 function B:Choices()
     local out = {}
-    local function add(text, fn, stay) out[#out + 1] = { text = text, fn = fn, stay = stay } end
+    local function add(text, fn, stay, macro) out[#out + 1] = { text = text, fn = fn, stay = stay, macro = macro } end
     local e = self.zone == "grid" and self.list[self.index] or nil
     local holding = Try(rawget(_G, "CursorHasItem")) == true
+    if e and e.id and not InCombatLockdown() then
+        -- what X does, and Equip by name where X would move it (at the bank, a vendor, the mailbox, a trade)
+        local use = self:Words()
+        local gear = e.classID == 2 or e.classID == 4
+        local plain = not (self.merchantOpen or self.bankOpen or self.mailOpen or self.tradeOpen)
+        if use then add((plain and gear) and L["Equip"] or use, function() end, nil, "/use " .. e.bag .. " " .. e.slot) end
+        local name = e.link and e.link:match("%[(.-)%]")
+        if gear and not plain and name then add(L["Equip"], function() end, nil, "/equip " .. name) end
+    end
     if e and (e.id or holding) and not InCombatLockdown() then
         add(holding and L["Put down here"] or L["Pick up"], function() Try(C_Container.PickupContainerItem, e.bag, e.slot) end)
     end
@@ -2225,6 +2286,8 @@ function B:Choices()
     if self.bankOpen then
         add(self.view == "bank" and L["Show bags"] or L["Show bank"], function() self:SwitchView() end)
         local V = ns.Vendor
+        local cost = B.BankSlotCost()
+        if cost then add(L["Buy a bank bag slot (%s)"]:format(ns.Money(cost)), function() B.AskBuySlot(cost) end) end
         if V and V.Deposit then add(L["Quick Deposit"], function() V:Deposit() end) end
         if V and V.Withdraw then add(L["Quick Withdraw"], function() V:Withdraw() end) end
         if V and V.MaterialChoices then
@@ -2515,6 +2578,7 @@ function B:DrawMenu()
     for i = #list + 1, #menu.rows do menu.rows[i]:Hide() end
     menu:SetHeight(#list * 24 + 10)
     menu:Show()
+    self:Bind()                                              -- (A does what the chosen row does)
 end
 
 -- Y's menu beside the window, on the side with room: its left, or its right where the window sits at the
@@ -2553,6 +2617,7 @@ end
 function B:MenuChoose(i)
     local c = self.menu and self.menu[i or self.menuIndex]
     if not c then return end
+    if c.macro then return end                               -- (done by A, through the secure button)
     if c.sub then                                            -- a list of its own (by kind): in the same menu
         self.menu, self.menuIndex = c.sub, 1
         self:DrawMenu()
@@ -2783,6 +2848,16 @@ function B.Describe()
         B.hasPad and "ours" or "the other window's")
     out[#out + 1] = ("slots: %s, the bag from the parent: %s"):format(tostring(B.template or "none made yet"),
         tostring(B.fromParent))
+    do  -- the bank's containers, as the bag row lists them (to check them against the game's own bank window)
+        local parts = {}
+        for _, bag in ipairs(B.Containers("bank")) do
+            parts[#parts + 1] = ("%s:%d"):format(tostring(bag), Slots(bag))
+        end
+        out[#out + 1] = ("bank containers (id:slots): %s; slots bought %s; constants: bags %s, equipped %s, bank bags %s"):format(
+            table.concat(parts, " "), tostring((rawget(_G, "GetNumBankSlots") and Try(rawget(_G, "GetNumBankSlots"))) or "?"),
+            tostring(rawget(_G, "NUM_BAG_SLOTS")), tostring(rawget(_G, "NUM_TOTAL_EQUIPPED_BAG_SLOTS")),
+            tostring(rawget(_G, "NUM_BANKBAGSLOTS")))
+    end
     local combined = rawget(_G, "ContainerFrameCombinedBags")
     out[#out + 1] = ("the game's combined bags: %s, %s"):format(combined and "here" or "none",
         combined and (Shown(combined) and "open" or "closed") or "-")

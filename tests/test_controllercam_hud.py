@@ -15202,6 +15202,63 @@ class BagWindow(unittest.TestCase):
         self.assertEqual(o.PADRSTICK, "CLICK ControllerCamHUD_BagKey_PADRSTICK:LeftButton")   # now the window's
         self.assertEqual(e.errors(), [])
 
+    def test_the_menu_has_every_action_use_equip_and_buying_a_bank_slot(self):
+        e = self.env()
+        e.lua.execute("""
+            MOCK_BANK = {}; BankFrame = CreateFrame('Frame', 'BankFrame', UIParent)
+            BOUGHT = 0
+            GetNumBankSlots = function() return 2, false end
+            GetBankSlotCost = function(n) return 10000 * (n + 1) end
+            PurchaseSlot = function() BOUGHT = BOUGHT + 1 end
+        """)
+        e.mock.bags[-1] = e.g.MOCK_BANK
+        T = e.lua.table
+        e.mock.put(-1, 1, T(id=310, name="Iron Helm", quality=2, price=300, count=1, **{"class": 4}))
+        e.mock.openBank(True)
+        e.g.OpenAllBags()
+        B, o = e.ns.Bags, e.mock.overrides
+        e.update(0.1)
+        self.assertEqual(B.view, "bank")
+        self.press(e, "PAD4")
+        texts = [c.text for c in B.menu.values()]
+        self.assertEqual(texts[:2], ["To bags", "Equip"])             # the move X does, and Equip by name
+        self.assertEqual(B.menu[2].macro, "/equip Iron Helm")
+        self.assertEqual(o.PAD1, "CLICK ControllerCamHUD_BagUse:LeftButton")     # A on a secure row
+        self.assertEqual(e.g.ControllerCamHUD_BagUse.attrs.macrotext, "/use -1 1")
+        self.press(e, "PADDDOWN")
+        self.assertEqual(e.g.ControllerCamHUD_BagUse.attrs.macrotext, "/equip Iron Helm")
+        i = [k for k, c in B.menu.items() if c.text.startswith("Buy a bank bag slot")][0]
+        self.assertIn("(", B.menu[i].text)
+        for _ in range(i - 2):
+            self.press(e, "PADDDOWN")
+        self.press(e, "PAD1")                                        # buy: asked first
+        self.assertEqual(e.g.BOUGHT, 0)
+        self.assertIn("Buy a bank bag slot for", plain(e.ns.Dialog.visible.text))
+        e.mock.answer("accept")
+        e.mock.advance(0.1)
+        self.assertEqual(e.g.BOUGHT, 1)
+        self.assertEqual(e.errors(), [])
+
+    def test_ordinary_bags_first_then_the_specialised_ones_and_the_keyring_last(self):
+        e = self.env()
+        e.lua.execute("KEYRING_CONTAINER = -2")
+        T = e.lua.table
+        e.mock.bags[-2] = e.lua.table()
+        e.mock.put(-2, 1, T(id=320, name="Skeleton Key", quality=1, price=0, count=1, **{"class": 13}))
+        e.g.ToggleAllBags()
+        read = e.ns.Bags.read
+        ids = [r.bag for r in read.bags.values()]
+        self.assertEqual(ids[-1], -2)                                # the keyring last
+        self.assertEqual(ids[0], 0)                                  # the backpack first
+        self.assertEqual(e.errors(), [])
+
+    def test_the_banks_bags_are_never_one_of_yours(self):
+        e = self.env()
+        e.lua.execute("NUM_BAG_SLOTS = 4; NUM_TOTAL_EQUIPPED_BAG_SLOTS = 5; NUM_BANKBAGSLOTS = 7; BANK_CONTAINER = -1")
+        ids = list(e.ns.Inventory.BankBags(e.ns.Inventory).values()) if False else [
+            e.lua.eval("function(I) local t = I.BankBags(); return table.concat(t, ',') end")(e.ns.Inventory)]
+        self.assertEqual(ids, ["-1,6,7,8,9,10,11,12"])               # (5 is your reagent bag, never the bank's)
+
     def test_y_opens_its_menu_on_the_side_with_room(self):
         e = self.env()
         e.g.ToggleAllBags()
@@ -15255,8 +15312,10 @@ class BagWindow(unittest.TestCase):
         self.press(e, "PADDRIGHT")                                   # the cloth, 20 of them
         self.press(e, "PAD4")
         texts = [c.text for c in B.menu.values()]
-        self.assertEqual(texts[:4], ["Pick up", "Split stack", "Mark: no mark", "Item details"])
+        self.assertEqual(texts[:5], ["Use", "Pick up", "Split stack", "Mark: no mark", "Item details"])
         self.assertIn("Sort bags", texts)
+        self.assertEqual(e.mock.overrides.PAD1, "CLICK ControllerCamHUD_BagUse:LeftButton")   # (Use: the secure button's A)
+        self.press(e, "PADDDOWN")
         self.assertEqual(e.mock.overrides.PAD1, "CLICK ControllerCamHUD_BagKey_PAD1:LeftButton")   # the menu's A
         self.press(e, "PADDDOWN")
         self.press(e, "PAD1")                                        # split: half into the first empty slot
@@ -15266,9 +15325,10 @@ class BagWindow(unittest.TestCase):
         self.press(e, "PAD4")
         self.press(e, "PADDDOWN")
         self.press(e, "PADDDOWN")
+        self.press(e, "PADDDOWN")
         self.press(e, "PAD1")                                        # the mark goes round, the menu stays
         self.assertTrue(e.db.sell.junk[103])
-        self.assertEqual(B.menu[3].text, "Mark: junk")
+        self.assertEqual(B.menu[4].text, "Mark: junk")
         self.press(e, "PAD2")                                        # B: back from the menu, the window stays
         self.assertIsNone(B.menu)
         self.assertTrue(B.open)
@@ -17279,6 +17339,38 @@ class TransmogSets(unittest.TestCase):
 
     def press_x(self, e):
         e.g.ControllerCamHUD_Key_TransmogSets_PAD3.scripts.OnClick()
+
+    def test_y_deletes_the_custom_set_the_cursor_is_on_after_asking(self):
+        e = self.env()
+        e.lua.execute("""
+            SETS = { [11] = "Raid night", [12] = "Town look" }
+            DELETED = {}
+            C_TransmogCollection.GetCustomSets = function() return { 11, 12 } end
+            C_TransmogCollection.GetCustomSetInfo = function(id) return SETS[id], 1 end
+            C_TransmogCollection.DeleteCustomSet = function(id) DELETED[#DELETED + 1] = id; SETS[id] = nil end
+        """)
+        win = e.mock.openTransmog()
+        e.update(0.5)
+        TS = e.ns.TransmogSets
+        self.assertTrue(TS.hint.shown)                               # the hint under the window
+        self.assertEqual(e.mock.overrides.PAD4, "CLICK ControllerCamHUD_Key_TransmogCustom_PAD4:LeftButton")
+        e.lua.execute("""
+            local row = CreateFrame("Button", nil, UIParent)
+            local fs = row:CreateFontString()
+            fs:SetText("Town look")
+            MOCK_ROW = row
+            GetMouseFoci = function() return { MOCK_ROW } end
+        """)
+        e.g.ControllerCamHUD_Key_TransmogCustom_PAD4.scripts.OnClick()
+        self.assertIn("Town look", plain(e.ns.Dialog.visible.text))    # asked first, by name
+        self.assertEqual(len(e.g.DELETED), 0)
+        e.mock.answer("accept")
+        e.mock.advance(0.1)
+        self.assertEqual(list(e.g.DELETED.values()), [12])
+        e.lua.execute("GetMouseFoci = function() return {} end")
+        e.g.ControllerCamHUD_Key_TransmogCustom_PAD4.scripts.OnClick()
+        self.assertIsNone(e.ns.Dialog.visible)                       # nothing under the cursor: nothing asked
+        self.assertEqual(e.errors(), [])
 
     def test_the_games_hidden_sets_tab_shows_where_it_belongs_and_its_page_is_ours(self):
         e = self.env()

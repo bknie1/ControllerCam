@@ -826,15 +826,142 @@ function TS:Hook()
     local w = Wardrobe()
     if self.hooked or not w or type(w.UpdateTabs) ~= "function" then return end
     self.hooked = true
-    hooksecurefunc(w, "UpdateTabs", ns.Protect(function() TS:AfterTabs() end))
+    hooksecurefunc(w, "UpdateTabs", ns.Protect(function()
+        TS:AfterTabs()
+        C_Timer.After(0.1, ns.Protect(function() TS:CustomHint() end))     -- (each time the window opens)
+    end))
     -- the window closing throws away what it had not kept: so does our Undo
     local watch = CreateFrame("Frame", nil, Window())
-    watch:SetScript("OnHide", ns.Protect(function() TS.before, TS.last = nil, nil end))
+    watch:SetScript("OnHide", ns.Protect(function()
+        TS.before, TS.last = nil, nil
+        if TS.custom then TS.custom:Set(false) end
+    end))
+    watch:SetScript("OnShow", ns.Protect(function() C_Timer.After(0.2, ns.Protect(function() TS:CustomHint() end)) end))
+    self.custom = ns.PadKeys("TransmogCustom", { "PAD4" }, function() TS:AskDelete() end)
     self.watch = watch
+end
+
+---------------------------------------------------------------------------
+-- Custom Sets: Y deletes the set the cursor is on. The game's own way (a menu on a right-click) is out of a
+-- controller's reach. The set is found by its name as the game lists it, on what the cursor is over (or a frame
+-- above it), and asked about in a window of ours first; nothing of the game's is called but its own delete.
+---------------------------------------------------------------------------
+local function CustomSetNames()
+    local C = C_TransmogCollection
+    if not (C and C.GetCustomSets and C.GetCustomSetInfo and C.DeleteCustomSet) then return nil end
+    local ok, ids = pcall(C.GetCustomSets)
+    if not (ok and type(ids) == "table") then return nil end
+    local names, count = {}, 0
+    for _, id in ipairs(ids) do
+        local okI, name = pcall(C.GetCustomSetInfo, id)
+        if okI and type(name) == "string" and not ns.IsSecret(name) and names[name] == nil then
+            names[name] = id
+            count = count + 1
+        end
+    end
+    return names, count
+end
+
+local function MouseFoci()
+    local many = rawget(_G, "GetMouseFoci")
+    if type(many) == "function" then
+        local ok, list = pcall(many)
+        if ok and type(list) == "table" then return list end
+    end
+    local one = rawget(_G, "GetMouseFocus")
+    if type(one) == "function" then
+        local ok, f = pcall(one)
+        if ok and f then return { f } end
+    end
+    return {}
+end
+
+-- The custom set a frame shows (or sits in): the name on it (or on a text it holds), up to five levels
+local function SetOf(frame, names)
+    local f = frame
+    for _ = 1, 5 do
+        if type(f) ~= "table" then return nil end
+        local okR, regions = pcall(function() return { f:GetRegions() } end)
+        for _, r in ipairs(okR and regions or {}) do
+            if type(r) == "table" and r.GetText then
+                local okT, text = pcall(r.GetText, r)
+                if okT and type(text) == "string" and not ns.IsSecret(text) and names[text] then return names[text], text end
+            end
+        end
+        for _, key in ipairs({ "Name", "name", "Text", "text", "Label", "label", "Title" }) do
+            local held = rawget(f, key)
+            if type(held) == "table" and held.GetText then
+                local okT, text = pcall(held.GetText, held)
+                if okT and type(text) == "string" and not ns.IsSecret(text) and names[text] then return names[text], text end
+            end
+        end
+        local okP, parent = pcall(f.GetParent, f)
+        f = okP and parent or nil
+    end
+end
+
+-- Is our Sets page the one in sight (its tab chosen)? Its own flag stays on while the tab is not chosen: its page's counts
+local function SetsPageUp()
+    local w = Wardrobe()
+    local page = w and SetsPage(w)
+    return (panel and ns.ShownPlain(panel) and page and ns.ShownPlain(page)) and true or false
+end
+
+function TS:CustomPoint()
+    local names = CustomSetNames()
+    if not names then return nil end
+    for _, f in ipairs(MouseFoci()) do
+        local id, name = SetOf(f, names)
+        if id then return id, name end
+    end
+end
+
+ns.Dialog.Define("CCHUD_DELETE_CUSTOM_SET", {
+    text = L["Delete the custom set %s? It can't be brought back."], button1 = L["Delete"], button2 = CANCEL or "Cancel",
+    OnAccept = function()
+        C_Timer.After(0, function()
+            local id = TS.deleting
+            TS.deleting = nil
+            local C = C_TransmogCollection
+            if id and C and C.DeleteCustomSet then pcall(C.DeleteCustomSet, id) end
+            TS:CustomHint()
+        end)
+    end,
+    OnCancel = function() TS.deleting = nil end,
+})
+
+function TS:AskDelete()
+    if SetsPageUp() then return end                                -- (our own Sets page: nothing of Y's)
+    local id, name = self:CustomPoint()
+    if not id then ns.Say(L["Point at a custom set first."]); return end
+    self.deleting = id
+    ns.Dialog.Show("CCHUD_DELETE_CUSTOM_SET", name)
+end
+
+-- Y while the window is up, with the hint under it (only when there are custom sets)
+function TS:CustomHint()
+    local win = Window()
+    if not (self.custom and win) then return end
+    local _, count = CustomSetNames()
+    local show = (count or 0) > 0 and not SetsPageUp()
+    if not self.hint then
+        local f = CreateFrame("Frame", nil, win)
+        f:SetSize(300, 22)
+        f.text = ns.FontString(f, 11, "LEFT")
+        f.text:SetPoint("LEFT", f, "LEFT", 0, 0)
+        self.hint = f
+    end
+    self.hint:ClearAllPoints()
+    self.hint:SetPoint("TOPLEFT", win, "BOTTOMLEFT", 4, -4)
+    self.hint.text:SetText(L["%s  Delete custom set"]:format(ns.KeyText("PAD4", 14)))
+    self.hint:SetShown(show)
+    self.custom:Set(show)
 end
 
 -- Switched off: the tab hidden again (as the game keeps it) and its page given back
 function TS:StepBack()
+    if self.custom then self.custom:Set(false) end
+    if self.hint then self.hint:Hide() end
     if panel then panel:Hide() end
     if self.keys then self.keys:Set(false) end
     local w = Wardrobe()

@@ -910,6 +910,8 @@ Em combate, feche suas bolsas com B.
 para o banco
 sem marca
 Nenhum espaço livre.
+Comprar um espaço de bolsa do banco por %s?
+Comprar
 Soltar aqui
 Dividir pilha
 Marca: %s
@@ -920,6 +922,7 @@ Organizar banco
 Organizar bolsas
 Ver bolsas
 Ver banco
+Comprar um espaço de bolsa do banco (%s)
 Vender os recomendados
 Solte para destruir
 Este item inicia uma missão.
@@ -1490,3 +1493,7 @@ Todas as %d peças
 Faltando: %s
 Nenhum conjunto ainda. Itens que compartilham um nome, como Elmo de Ferro Verde e Manoplas de Ferro Verde, aparecem aqui assim que você tiver um deles.
 Desfazer
+Excluir o conjunto personalizado %s? Não dá para recuperá-lo.
+Excluir
+Aponte primeiro para um conjunto personalizado.
+%s  Excluir conjunto personalizado

@@ -910,6 +910,8 @@ In a fight, close your bags with B.
 for the bank
 no mark
 No empty slot.
+Buy a bank bag slot for %s?
+Buy
 Put down here
 Split stack
 Mark: %s
@@ -920,6 +922,7 @@ Sort bank
 Sort bags
 Show bags
 Show bank
+Buy a bank bag slot (%s)
 Sell advised items
 Let go to destroy
 This item begins a quest.
@@ -1490,3 +1493,7 @@ All %d pieces
 Missing: %s
 No sets yet. Items that share a name, like Green Iron Helm and Green Iron Gauntlets, show here once you have one of them.
 Undo
+Delete the custom set %s? It can't be brought back.
+Delete
+Point at a custom set first.
+%s  Delete custom set

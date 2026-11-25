@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.5.5
+
+ControllerCam: HUD
+- The More menu (Y) shows every action for the item, in your bags and in the bank: **Use** or **Equip** first (A does it, through the game's own secure button), then Pick up, Split stack, Mark, Item details, **Try on** and Destroy. At the bank, X's move (To bank, To bags) is a row too, with **Equip** next to it for gear, since X would move it there. At a vendor, the mailbox or a trade, the same.
+- **Buy a bank bag slot** is in the More menu at the bank, with its price, and asks first.
+- Bank bags: the bank's bag list never includes one of your own bag slots now (the reagent bag counted as a bank bag showed up as an extra bag, and its slots were added to the bank's count). The debug report lists the bank's containers with their sizes, to check them against the game's own bank window.
+- Ammo, herb and crafting bags come after your ordinary bags in the bag row and in the grid, and the keyring is last.
+- **Custom Sets in the transmogrifier: Y deletes the set the cursor is on**, after asking. The game's own menu for it is out of a controller's reach. A hint under the window says so while you have custom sets.
+
 ## 1.5.4
 
 ControllerCam: HUD

@@ -910,6 +910,8 @@ En combat, fermez vos sacs avec B.
 pour la banque
 sans marque
 Aucun emplacement libre.
+Acheter un emplacement de sac de banque pour %s ?
+Acheter
 Poser ici
 Diviser la pile
 Marque: %s
@@ -920,6 +922,7 @@ Trier la banque
 Trier les sacs
 Voir les sacs
 Voir la banque
+Acheter un emplacement de sac de banque (%s)
 Vendre les objets conseillés
 Relâchez pour détruire
 Cet objet permet de commencer une quête.
@@ -1490,3 +1493,7 @@ Les %d pièces
 Manque : %s
 Pas encore d'ensemble. Les objets qui partagent un nom, comme Heaume en fer vert et Gantelets en fer vert, apparaissent ici dès que vous en avez un.
 Annuler
+Supprimer l'ensemble personnalisé %s ? Il ne pourra pas être récupéré.
+Supprimer
+Visez d'abord un ensemble personnalisé.
+%s  Supprimer l'ensemble personnalisé

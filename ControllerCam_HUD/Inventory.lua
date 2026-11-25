@@ -148,9 +148,15 @@ end
 
 local function BankBags()
     local list = { BANK_CONTAINER or -1 }
-    local first = (NUM_TOTAL_EQUIPPED_BAG_SLOTS or NUM_BAG_SLOTS or 4) + 1
-    for bag = first, first + (NUM_BANKBAGSLOTS or 7) - 1 do list[#list + 1] = bag end
-    if REAGENTBANK_CONTAINER then list[#list + 1] = REAGENTBANK_CONTAINER end
+    -- the bank's bags come after your own (the backpack, your bags and the reagent bag: they are never the bank's:
+    -- one counted as a bank bag showed up as an extra bag, with its slots in the bank's total), each id once
+    local mine = math.max(NUM_TOTAL_EQUIPPED_BAG_SLOTS or 0, NUM_BAG_SLOTS or 4)
+    local seen = { [list[1]] = true }
+    local first = mine + 1
+    for bag = first, first + (NUM_BANKBAGSLOTS or 7) - 1 do
+        if not seen[bag] then seen[bag] = true; list[#list + 1] = bag end
+    end
+    if REAGENTBANK_CONTAINER and not seen[REAGENTBANK_CONTAINER] then list[#list + 1] = REAGENTBANK_CONTAINER end
     return list
 end
 I.BankBags = BankBags

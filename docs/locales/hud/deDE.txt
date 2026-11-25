@@ -910,6 +910,8 @@ Im Kampf schließt B deine Taschen.
 für die Bank
 keine Markierung
 Kein freier Platz.
+Einen Bankfach-Taschenplatz für %s kaufen?
+Kaufen
 Hier ablegen
 Stapel teilen
 Markierung: %s
@@ -920,6 +922,7 @@ Bank sortieren
 Taschen sortieren
 Taschen zeigen
 Bank zeigen
+Bank-Taschenplatz kaufen (%s)
 Empfohlenes verkaufen
 Loslassen zum Zerstören
 Dieser Gegenstand startet eine Quest.
@@ -1490,3 +1493,7 @@ Alle %d Teile
 Fehlt: %s
 Noch keine Sets. Gegenstände mit gleichem Namen, wie Grüner Eisenhelm und Grüne Eisenstulpen, erscheinen hier, sobald du einen davon hast.
 Rückgängig
+Das eigene Set %s löschen? Es lässt sich nicht wiederherstellen.
+Löschen
+Zeigt zuerst auf ein eigenes Set.
+%s  Eigenes Set löschen

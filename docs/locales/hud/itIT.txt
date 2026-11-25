@@ -910,6 +910,8 @@ In combattimento, chiudi le borse con B.
 per la banca
 nessun segno
 Nessun posto libero.
+Comprare uno slot borsa della banca per %s?
+Compra
 Posa qui
 Dividi pila
 Segno: %s
@@ -920,6 +922,7 @@ Riordina banca
 Riordina borse
 Mostra borse
 Mostra banca
+Compra uno slot borsa della banca (%s)
 Vendi i consigliati
 Rilascia per distruggere
 Questo oggetto avvia una missione.
@@ -1490,3 +1493,7 @@ Tutti i %d pezzi
 Manca: %s
 Ancora nessun set. Gli oggetti che condividono un nome, come Elmo di Ferro Verde e Guanti d'Arme di Ferro Verde, compaiono qui appena ne hai uno.
 Annulla
+Eliminare il set personalizzato %s? Non può essere recuperato.
+Elimina
+Punta prima un set personalizzato.
+%s  Elimina set personalizzato

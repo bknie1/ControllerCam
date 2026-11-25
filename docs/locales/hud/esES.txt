@@ -910,6 +910,8 @@ En combate, cierra tus bolsas con B.
 para el banco
 sin marca
 No hay hueco libre.
+¿Comprar una ranura de bolsa del banco por %s?
+Comprar
 Dejar aquí
 Dividir montón
 Marca: %s
@@ -920,6 +922,7 @@ Ordenar banco
 Ordenar bolsas
 Ver bolsas
 Ver banco
+Comprar una ranura de bolsa del banco (%s)
 Vender lo aconsejado
 Suelta para destruir
 Este objeto inicia una misión.
@@ -1490,3 +1493,7 @@ Las %d piezas
 Falta: %s
 Aún no hay conjuntos. Los objetos que comparten nombre, como Yelmo de hierro verde y Guanteletes de hierro verde, aparecen aquí en cuanto tienes uno.
 Deshacer
+¿Borrar el conjunto personalizado %s? No se puede recuperar.
+Borrar
+Apunta primero a un conjunto personalizado.
+%s  Borrar conjunto personalizado
