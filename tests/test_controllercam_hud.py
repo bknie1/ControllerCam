@@ -9938,7 +9938,12 @@ class Inventory(unittest.TestCase):
         e.lua.execute("local slot = {}; GameTooltip.GetOwner = function() return slot end")   # (another slot)
         e.g.ShowItem(2589)
         self.assertEqual((a.frame.points[1][1], a.frame.points[1][3]), ("BOTTOMLEFT", "TOPLEFT"))   # over it
-        e.lua.execute("GameTooltip.GetBottom = nil")
+        e.lua.execute("UIParent.GetWidth = function() return 1920 end")
+        e.lua.execute("GameTooltip.GetRight = function() return 300 end")       # room to its right: there instead
+        e.lua.execute("local slot = {}; GameTooltip.GetOwner = function() return slot end")
+        e.g.ShowItem(2589)
+        self.assertEqual((a.frame.points[1][1], a.frame.points[1][3]), ("BOTTOMLEFT", "BOTTOMRIGHT"))
+        e.lua.execute("GameTooltip.GetBottom = nil; GameTooltip.GetRight = nil")
         e.g.ShowItem(2589)
         e.update(0.5)
         frame_points = [(p[1], p[3], p[4], p[5]) for p in a.frame.points.values()]
@@ -10233,6 +10238,40 @@ class MarketPanel(SellWhenUnsure, unittest.TestCase):
         P.view.Hide(P.view)
         P.view.scripts.OnHide()
         self.assertFalse(tip.shown)                                  # gone with the Market
+        self.assertEqual(e.errors(), [])
+
+    def test_the_items_tooltip_never_covers_the_chart(self):
+        e = self.env()
+        P = self.house(e)
+        tip = e.ns.Tooltip.Own()
+        tip.SetBagItem = e.lua.eval("function() return true end")
+        e.g.ControllerCamHUD_Market()
+        pane, view = P.panel, P.view
+
+        def gives(frame, what, n):
+            frame[what] = e.lua.eval("function() return %d end" % n)
+
+        def spot(screen, right, left, top):
+            gives(e.g.UIParent, "GetWidth", screen)
+            gives(view, "GetRight", right)
+            gives(view, "GetLeft", left)
+            gives(view, "GetTop", top)
+            gives(pane, "GetHeight", 360)
+            point, to, theirs, _, _ = P.TipPlace(260, 180)
+            return point, ("pane" if e.same(to, pane) else "view"), theirs
+
+        self.assertEqual(spot(1920, 820, 20, 700), ("TOPLEFT", "pane", "TOPRIGHT"))     # right of the chart
+        self.assertEqual(spot(1365, 820, 20, 700), ("TOPLEFT", "pane", "BOTTOMLEFT"))   # no room there: under it
+        self.assertEqual(spot(1365, 1020, 400, 500), ("TOPRIGHT", "view", "TOPLEFT"))   # neither: left of the Market
+        gives(tip, "GetWidth", 260)
+        gives(tip, "GetHeight", 180)
+        P.Refresh(P)
+        self.assertEqual(len(list(tip.points.values())), 1)            # shown, it holds on by one corner
+        self.assertTrue(e.same(tip.points[1][2], view))
+        spot(1920, 820, 20, 700)
+        P.Refresh(P)
+        self.assertTrue(e.same(tip.points[1][2], pane))                # off the chart's pane, to its right
+        self.assertEqual(tip.points[1][3], "TOPRIGHT")
         self.assertEqual(e.errors(), [])
 
     def test_it_is_a_tab_of_the_auction_house(self):

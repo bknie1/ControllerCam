@@ -1006,6 +1006,28 @@ function AP.Kept(hidden)
                   L["Set %d aside for your crafts, your back and your marks. %s if you want them."] }):format(hidden, key)
 end
 
+-- A size the game has laid out, or the one to count on while it has not
+local function Measure(frame, what, else_)
+    local ok, v = pcall(function() return frame[what](frame) end)
+    if ok and type(v) == "number" and not ns.IsSecret(v) and v > 0 then return v end
+    return else_
+end
+
+-- Where the item's tooltip goes, with the pane (its chart) beside the Market: right of the pane, or under it;
+-- with room for neither, left of the Market. Never over the pane. -> point, frame, its point, x, y
+AP.TIP_W, AP.TIP_H = 300, 200
+function AP.TipPlace(wide, tall)
+    local w = Measure(UIParent, "GetWidth", 0)
+    local right, left, top = Measure(view, "GetRight"), Measure(view, "GetLeft"), Measure(view, "GetTop")
+    local beside = (pane and pane:IsShown()) and pane or nil
+    local edge = right and (right + (beside and (6 + PANE_W) or 0))
+    local under = beside and top and (top - Measure(beside, "GetHeight", PANE_H))
+    if edge and w - edge >= wide + 8 then return "TOPLEFT", beside or view, "TOPRIGHT", 8, 0 end
+    if under and under >= tall + 6 then return "TOPLEFT", beside, "BOTTOMLEFT", 0, -6 end
+    if left and left >= wide + 8 then return "TOPRIGHT", view, "TOPLEFT", -8, 0 end
+    return "TOPLEFT", beside or view, "BOTTOMLEFT", 0, -6
+end
+
 -- The chosen item's own tooltip, beside the Market: what the game says of it (stats, use, vendor price...), on a
 -- tooltip of our own (never the game's), so the Broker's numbers sit beside the item and do not replace it
 function AP.Tip(e)
@@ -1017,22 +1039,21 @@ function AP.Tip(e)
         return
     end
     pcall(tip.SetOwner, tip, view, "ANCHOR_NONE")
-    pcall(tip.ClearAllPoints, tip)
-    local okL, left = pcall(view.GetLeft, view)
-    local okR, right = pcall(view.GetRight, view)
-    local w = UIParent.GetWidth and UIParent:GetWidth() or 0
-    if okR and type(right) == "number" and w > 0 and w - right > 330 then
-        pcall(tip.SetPoint, tip, "TOPLEFT", view, "TOPRIGHT", 8, 0)
-    elseif okL and type(left) == "number" and left > 330 then
-        pcall(tip.SetPoint, tip, "TOPRIGHT", view, "TOPLEFT", -8, 0)
-    else
-        pcall(tip.SetPoint, tip, "BOTTOMLEFT", view, "TOPLEFT", 0, 8)
-    end
     local ok = false
     if e.bag and e.slot and tip.SetBagItem then ok = pcall(tip.SetBagItem, tip, e.bag, e.slot) end
     if not ok and e.link and tip.SetHyperlink then ok = pcall(tip.SetHyperlink, tip, e.link) end
     if not ok and e.id and tip.SetItemByID then ok = pcall(tip.SetItemByID, tip, e.id) end
-    if ok then pcall(tip.Show, tip) else pcall(tip.Hide, tip) end
+    if not ok then pcall(tip.Hide, tip); return end
+    pcall(tip.Show, tip)
+    -- placed once it is filled, so its own size says where it fits (with our lines under it, if it has any)
+    local wide, tall = Measure(tip, "GetWidth", AP.TIP_W), Measure(tip, "GetHeight", AP.TIP_H)
+    local a = T.annex and T.annex[tip]
+    if a and a.frame and a.frame:IsShown() then
+        wide, tall = math.max(wide, a.wide or 0), tall + Measure(a.frame, "GetHeight", 0)
+    end
+    local point, to, theirs, x, y = AP.TipPlace(wide, tall)
+    pcall(tip.ClearAllPoints, tip)
+    pcall(tip.SetPoint, tip, point, to, theirs, x, y)
 end
 
 function AP:Refresh()
@@ -1047,7 +1068,6 @@ function AP:Refresh()
     AP.index = math.max(1, math.min(AP.index, math.max(1, #list)))
     local chosen = list[AP.index]
     AP.chosen, AP.selected = chosen, chosen and chosen.id or nil
-    AP.Tip(chosen)
     local per = AP.perPage
     local pages = math.max(1, math.ceil(#list / per))
     AP.page = math.ceil(AP.index / per)
@@ -1092,6 +1112,7 @@ function AP:Refresh()
         ChipSays(view.post, L["Post"], false)
         LayoutBar(view.bar, view.chips)
         ShowPane(nil)
+        AP.Tip(nil)
         return
     end
     view.empty:Hide()
@@ -1111,6 +1132,7 @@ function AP:Refresh()
     end
     LayoutBar(view.bar, view.chips)
     ShowPane(chosen)
+    AP.Tip(chosen)                                           -- after the pane: placed clear of its chart
 end
 
 ---------------------------------------------------------------------------

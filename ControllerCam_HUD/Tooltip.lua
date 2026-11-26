@@ -54,21 +54,35 @@ T.Away = Away
 -- had it flip between under and over, over and over.
 T.SETTLE = 0.3
 T.MOVED_ON = 0.3               -- the tooltip about something else for this long: the panel goes
+-- Under the tooltip. With no room under it (a tooltip in a corner): right of it, unless what it is about is on
+-- that side or the screen ends there; then over it.
+local function Spot(a, tooltip, side)
+    local function Number(what, frame)
+        local ok, v = pcall(function() return frame[what](frame) end)
+        if ok and type(v) == "number" and not ns.IsSecret(v) then return v end
+    end
+    local bottom = Number("GetBottom", tooltip)
+    if not bottom or bottom >= a.frame:GetHeight() + 6 then return "below" end
+    local right, w = Number("GetRight", tooltip), UIParent and Number("GetWidth", UIParent)
+    if side == "RIGHT" and right and w and w - right >= (a.wide or 0) + 4 then return "right" end
+    return "over"
+end
+
 local function PlaceAnnex(a, tooltip)
     local f = a.frame
     if a.settled then return end
-    if a.since and GetTime() - a.since > T.SETTLE and a.below ~= nil then a.settled = true; return end
-    local below = true
-    local ok, bottom = pcall(function() return tooltip.GetBottom and tooltip:GetBottom() end)
-    if ok and type(bottom) == "number" and not ns.IsSecret(bottom) and bottom < f:GetHeight() + 6 then below = false end
+    if a.since and GetTime() - a.since > T.SETTLE and a.spot ~= nil then a.settled = true; return end
     local side = Away(tooltip)
-    if below == a.below and side == a.side then return end
-    a.below, a.side = below, side
+    local spot = Spot(a, tooltip, side)
+    if spot == a.spot and side == a.side then return end
+    a.spot, a.side = spot, side
     -- the edge on the item's side stays with the tooltip's; the panel grows the other way
     local edge = side == "LEFT" and "RIGHT" or "LEFT"
     f:ClearAllPoints()
-    if below then                                            -- (no room under a tooltip in the corner: over it)
+    if spot == "below" then
         f:SetPoint("TOP" .. edge, tooltip, "BOTTOM" .. edge, 0, -2)
+    elseif spot == "right" then
+        f:SetPoint("BOTTOMLEFT", tooltip, "BOTTOMRIGHT", 2, 0)
     else
         f:SetPoint("BOTTOM" .. edge, tooltip, "TOP" .. edge, 0, 2)
     end
@@ -175,7 +189,7 @@ function T.Annex(tooltip, lines)
     a.wide = wide
     f:SetHeight(#lines * T.ROW + 10)
     if not same then
-        a.title, a.below, a.side, a.settled, a.since = title, nil, nil, false, GetTime()
+        a.title, a.spot, a.side, a.settled, a.since = title, nil, nil, false, GetTime()
         PlaceAnnex(a, tooltip)
     end
     f:Show()
