@@ -183,7 +183,7 @@ local LAYOUT = {
         { head = "Camera", "presetZoom", "followCamera" },
     } },
     { page = "Gamepad bars", groups = {
-        { head = "Gamepad bars", "bars", "barScale", "padRaise" },
+        { head = "Gamepad bars", "bars", "barScale", "padRaise", "padWheels" },
         { head = "Cooldowns", "rowsAside", "Cooldown Manager" },
     } },
     { page = "Screen fade", groups = {
@@ -214,7 +214,7 @@ local LAYOUT = {
         { head = "Cinematic flights", "flightScene", "flightOrbit" },
     } },
     { page = "Bags, bank and vendor", groups = {
-        { head = "Bags", "bagWindow", "bagOrder", "padSort", "padMove" },
+        { head = "Bags", "bagWindow", "bagOrder", "padSort", "padMove", "padActions" },
         { head = "Vendor", "vendor", "Sell junk when a vendor opens", "White weapons and armor are junk", "autoRepair",
           "repairGuild" },
         { head = "Bank", "Deposit when the bank opens", "depositMatching", "Bank takes reagents by itself" },

@@ -1,11 +1,17 @@
-"""Writes ControllerCam_HUD/LevelGuides.lua from the guide data in docs/levelling/<profession>.json.
+"""Writes ControllerCam_HUD_Mentor/LevelGuides.lua from the guide data in docs/levelling/<profession>.json, and
+ControllerCam_HUD/RecipeData.lua from docs/levelling/recipes.json.
 
 Each JSON file holds, for one profession, the steps the well-known levelling guides take (Wowhead's main path,
 with its alternatives and Icy Veins' differences as alternatives): facts only, recipe and item IDs, skill
 ranges, craft counts and reagents. The Lua file is what The Mentor (Levelling.lua) follows.
 
-    python docs/levelling/make_guides.py            write the Lua file
-    python docs/levelling/make_guides.py --check    only report problems
+recipes.json is every Cooking and First Aid recipe: what it makes, the skill it needs, the ranks it turns
+yellow, green and grey at, its reagents and where it is learned; with the vendors (zone, town, side), the skill
+books, which materials a vendor sells and which a gathering profession brings. It is in the core, as item advice
+needs it whether The Mentor is loaded or not.
+
+    python docs/levelling/make_guides.py            write the Lua files
+    python docs/levelling/make_guides.py --check    only report problems (and a Lua file that is out of date)
 """
 import glob
 import json
@@ -13,7 +19,10 @@ import os
 import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-OUT = os.path.join(HERE, "..", "..", "ControllerCam_HUD", "LevelGuides.lua")
+OUT = os.path.join(HERE, "..", "..", "ControllerCam_HUD_Mentor", "LevelGuides.lua")
+RECIPES = os.path.join(HERE, "recipes.json")
+RECIPES_OUT = os.path.join(HERE, "..", "..", "ControllerCam_HUD", "RecipeData.lua")
+SIDES = {"A", "H", "B"}
 KINDS = ["alchemy", "blacksmithing", "enchanting", "engineering", "leatherworking", "tailoring", "cooking",
          "firstaid", "mining"]
 WHY = {"cheap", "vendor", "gathered", "sells", "useful", "fewer", "recipe", "other"}
@@ -113,6 +122,125 @@ def profession(kind, data, problems):
     return lines
 
 
+def lua_list(values):
+    return "{ %s }" % ", ".join(values)
+
+
+def recipe_data(data, problems):
+    """RecipeData.lua's lines from recipes.json."""
+    zones = {int(k): v for k, v in data["zones"].items()}
+    names = sorted(data["vendors"])
+    index = {n: i + 1 for i, n in enumerate(names)}
+
+    def vendor_refs(where, wanted):
+        out = []
+        for n in wanted:
+            if n not in index:
+                problems.append("%s: unknown vendor %r" % (where, n))
+            else:
+                out.append(str(index[n]))
+        return out
+
+    lines = ["ns.RecipeData = {", "    -- [area ID] = the zone's name, for a client that cannot say it", "    zones = {"]
+    lines += ["        [%d] = %s," % (z, lua_str(zones[z])) for z in sorted(zones)]
+    lines += ["    },", "    -- { name, zone (area ID), town, side: A Alliance, H Horde, B both }", "    vendors = {"]
+    for n in names:
+        zone, town, side = data["vendors"][n]
+        if zone not in zones:
+            problems.append("vendor %s: unknown zone %r" % (n, zone))
+        if side not in SIDES:
+            problems.append("vendor %s: unknown side %r" % (n, side))
+        lines.append("        { %s, %d, %s, %s }," % (lua_str(n), zone, lua_str(town), lua_str(side)))
+    lines.append("    },")
+    for kind in ("cooking", "firstaid"):
+        lines.append("    %s = {" % kind)
+        seen = set()
+        for r in data[kind]:
+            where = "%s %s" % (kind, r.get("name"))
+            if r["item"] in seen:
+                problems.append("%s: listed twice" % where)
+            seen.add(r["item"])
+            colors = r["colors"]
+            if len(colors) != 4 or colors != sorted(colors):
+                problems.append("%s: bad colours %r" % (where, colors))
+            f = ["name = " + lua_str(r["name"]), "s = %d" % r["spell"], "p = %d" % r["item"],
+                 "at = %d" % r["skill"], "c = " + lua_list(str(x) for x in colors)]
+            reagents = []
+            for pair in r["reagents"]:
+                reagents += [str(pair[0]), str(pair[1])]
+            f.append("r = " + lua_list(reagents))
+            if r.get("made"):
+                f.append("m = %d" % r["made"])
+            if r.get("book"):
+                f.append("book = %d" % r["book"])
+            if r.get("trainer"):
+                f.append("trainer = true")
+            if r.get("vendors"):
+                f.append("v = " + lua_list(vendor_refs(where, r["vendors"])))
+            if r.get("quests"):
+                quests = []
+                for name, zone, side in r["quests"]:
+                    if zone not in zones or side not in SIDES:
+                        problems.append("%s: bad quest %r" % (where, name))
+                    quests.append("{ %s, %d, %s }" % (lua_str(name), zone, lua_str(side)))
+                f.append("q = " + lua_list(quests))
+            if r.get("drop"):
+                zone, who = r["drop"]
+                if zone and zone not in zones:
+                    problems.append("%s: unknown zone %r" % (where, zone))
+                f.append("drop = { %d, %s }" % (zone, lua_str(who)))
+            if r.get("season"):
+                f.append("season = " + lua_str(r["season"]))
+            if r.get("class"):
+                f.append("class = " + lua_str(r["class"]))
+            if r.get("raid"):
+                f.append("raid = true")
+            if not any(r.get(k) for k in ("trainer", "vendors", "quests", "drop", "season")):
+                problems.append("%s: nowhere to learn it" % where)
+            lines.append("        { %s }," % ", ".join(f))
+        lines.append("    },")
+    lines += ["    -- skill books: [item] = what it raises, to which cap, who sells it", "    books = {"]
+    for b in data["books"]:
+        lines.append("        [%d] = { kind = %s, cap = %d, name = %s, v = %s }," % (
+            b["item"], lua_str(b["kind"]), b["cap"], lua_str(b["name"]),
+            lua_list(vendor_refs(b["name"], b["vendors"]))))
+    lines += ["    },", "    -- materials a vendor sells without running out", "    vendorItems = {"]
+    for group, ids in data["vendorItems"].items():
+        lines.append("        -- " + group)
+        lines.append("        " + " ".join("[%d] = true," % i for i in ids))
+    lines += ["    },", "    seasonItems = { %s }," % " ".join("[%d] = true," % i for i in data["seasonItems"]),
+              "    -- what a gathering profession brings", "    gather = {"]
+    for kind, ids in data["gather"].items():
+        lines.append("        " + " ".join("[%d] = %s," % (i, lua_str(kind)) for i in ids))
+    lines += ["    },", "}", ""]
+    header = [
+        "-- ControllerCam HUD: every Cooking and First Aid recipe, and where it is learned (Recipes.lua reads it).",
+        "-- Made by docs/levelling/make_guides.py from docs/levelling/recipes.json; change that, not this file.",
+        "-- For each recipe: what it makes (p) and its spell (s), the skill it needs (at), the ranks it is orange,",
+        "-- yellow, green and grey from (c), its reagents (r: item, count, ...), how many a craft makes (m), the item",
+        "-- that teaches it (book), and where it is learned: a trainer, vendors (v: indexes into vendors), quests",
+        "-- (q: name, zone, side), a drop (zone, who), a season; class: only that class learns it.",
+        "",
+        "local ADDON, ns = ...",
+        "",
+    ]
+    return header + lines
+
+
+def write(path, lines):
+    with open(path, "w", encoding="utf-8", newline="\n") as f:
+        f.write("\n".join(lines))
+    print("wrote " + os.path.relpath(path))
+
+
+def current(path):
+    try:
+        with open(path, encoding="utf-8") as f:
+            return f.read().replace("\r\n", "\n")
+    except OSError:
+        return None
+
+
 def main():
     check = "--check" in sys.argv
     problems, body, sources = [], [], []
@@ -124,12 +252,8 @@ def main():
         data = json.load(open(path, encoding="utf-8"))
         sources += data.get("sources") or []
         body += profession(kind, data, problems)
-    for p in problems:
-        print("  " + p)
-    print("%d professions, %d problems" % (len([k for k in KINDS if os.path.isfile(os.path.join(HERE, k + ".json"))]),
-                                         len(problems)))
-    if check:
-        return 1 if problems else 0
+    with open(RECIPES, encoding="utf-8") as f:
+        recipes = recipe_data(json.load(f), problems)
     out = [
         "-- ControllerCam HUD: the steps the well-known profession levelling guides take, for The Mentor (Levelling.lua).",
         "-- Made by docs/levelling/make_guides.py from docs/levelling/<profession>.json; change those, not this file.",
@@ -138,13 +262,24 @@ def main():
         "-- reagents (r: item, count, ...), and the guides' alternatives, each with why you might pick it. Where the",
         "-- guides level by gathering: { from, to, gather = what to gather }.",
         "",
-        "local ADDON, ns = ...",
+        "local ADDON = ...",
+        "local ns = ControllerCamHUD.ns            -- the HUD's own namespace: this file is one of its modules (Modules.lua)",
         "",
         "ns.LevelGuides = {",
     ] + body + ["}", ""]
-    with open(OUT, "w", encoding="utf-8", newline="\n") as f:
-        f.write("\n".join(out))
-    print("wrote " + os.path.relpath(OUT))
+    files = ((OUT, out), (RECIPES_OUT, recipes))
+    if check:
+        for path, lines in files:
+            if current(path) != "\n".join(lines):
+                problems.append("%s is out of date: run make_guides.py" % os.path.basename(path))
+    for p in problems:
+        print("  " + p)
+    print("%d professions, %d problems" % (len([k for k in KINDS if os.path.isfile(os.path.join(HERE, k + ".json"))]),
+                                         len(problems)))
+    if check:
+        return 1 if problems else 0
+    for path, lines in files:
+        write(path, lines)
     return 0
 
 

@@ -18,7 +18,7 @@ ns.Professions = P
 ns.RegisterSetting({
     key = "skillKeep", kind = "boolean", default = true, command = "skillkeep", section = "Bags, bank and vendor",
     label = "Keep what your professions still need",
-    tip = "an item that one of your characters' recipes still gives a skill point for (orange and yellow recipes, as the game shows them in the profession's window), that the profession's next steps use (the levelling guides' recipes, and those another of your characters knows, up to 75 points ahead), or that crafts something worth more at the auction house than the item itself, is kept, not sold, and its tooltip says why. Recipes are read when a profession's window is open",
+    tip = "an item that one of your characters' recipes still gives a skill point for (orange and yellow recipes, as the game shows them in the profession's window), that the profession's next steps use (the levelling guides' recipes, and those another of your characters knows, up to 75 points ahead), or that crafts something worth more at the auction house than the item itself, is kept, not sold, and its tooltip says why. A Cooking or First Aid material is also kept for a recipe not learned yet, with where to learn it, as are that recipe and the skill books. Recipes are read when a profession's window is open",
 })
 
 -- The crafting professions: a key, the game's spell for it (its name in your language), its name in English
@@ -68,19 +68,63 @@ local function Record()
     return rec
 end
 
+-- The gathering professions that have no window of recipes: their names (in English, as your language has them,
+-- and the game's spell for the two that have one by that name)
+local gatherNames
+function P.GatherKind(name)
+    name = Plain(name)
+    if type(name) ~= "string" then return nil end
+    if not gatherNames then
+        gatherNames = { herbalism = "herbalism", skinning = "skinning", fishing = "fishing" }
+        for kind, text in pairs({ herbalism = L["Herbalism"], skinning = L["Skinning"], fishing = L["Fishing"] }) do
+            gatherNames[text:lower()] = kind
+        end
+        local get = (C_Spell and C_Spell.GetSpellName) or GetSpellInfo
+        for kind, spell in pairs({ skinning = 8613, fishing = 7620 }) do
+            local ok, n = pcall(get, spell)
+            if ok and type(n) == "string" and not ns.IsSecret(n) then gatherNames[n:lower()] = kind end
+        end
+    end
+    return gatherNames[name:lower()]
+end
+
+-- Which of them each character has: [name-realm] = { [kind] = { name, rank, cap } } (The Mentor says "farm" for
+-- what yours bring, Recipes.lua)
+ns.RegisterSaved("gatherSkills", function(old)
+    local out = {}
+    if type(old) ~= "table" then return out end
+    for who, kinds in pairs(old) do
+        if type(who) == "string" and type(kinds) == "table" then
+            local keep = {}
+            for kind, g in pairs(kinds) do
+                if type(kind) == "string" and type(g) == "table" then
+                    keep[kind] = { name = type(g.name) == "string" and g.name or nil, rank = tonumber(g.rank),
+                                   cap = tonumber(g.cap) }
+                end
+            end
+            out[who] = keep
+        end
+    end
+    return out
+end)
+
 ---------------------------------------------------------------------------
 -- Your professions and their ranks, from the game's list of skills
 ---------------------------------------------------------------------------
 function P:ReadSkills()
     local rec = Record()
     if not rec then return false end
-    local found = {}
+    local found, gather = {}, {}
     if GetNumSkillLines and GetSkillLineInfo then
         local ok, n = pcall(GetNumSkillLines)
         for i = 1, (ok and tonumber(n)) or 0 do
             local ok2, name, header, _, rank, _, _, cap = pcall(GetSkillLineInfo, i)
             local kind = ok2 and not Plain(header) and P.Kind(name)
             if kind and type(Plain(rank)) == "number" then found[kind] = { name = name, rank = rank, cap = Plain(cap) } end
+            local other = ok2 and not Plain(header) and P.GatherKind(name)
+            if other and type(Plain(rank)) == "number" then
+                gather[other] = { name = name, rank = rank, cap = Plain(cap) }
+            end
         end
     elseif GetProfessions and GetProfessionInfo then
         local ok, a, b, c, d, e = pcall(GetProfessions)
@@ -91,10 +135,17 @@ function P:ReadSkills()
                 local ok, name, _, rank, cap = pcall(GetProfessionInfo, index)
                 local kind = ok and P.Kind(name)
                 if kind then found[kind] = { name = name, rank = Plain(rank), cap = Plain(cap) } end
+                local other = ok and P.GatherKind(name)
+                if other then gather[other] = { name = name, rank = Plain(rank), cap = Plain(cap) } end
             end
         end
     else
         return false
+    end
+    local me = ns.Inventory and ns.Inventory.Me and ns.Inventory.Me()
+    if me then
+        ns.db.gatherSkills = ns.db.gatherSkills or {}
+        ns.db.gatherSkills[me] = next(gather) and gather or nil
     end
     for kind, f in pairs(found) do
         local p = rec.prof[kind] or {}
@@ -331,6 +382,7 @@ local function Characters()
     local i = 0
     return function() i = i + 1; return list[i] end
 end
+P.Characters = Characters
 
 local function Direct(id)
     for c in Characters() do

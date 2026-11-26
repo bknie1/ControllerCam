@@ -76,6 +76,8 @@ fell out of step with the game: visual sync problems, tooltips lost, controls st
 | Chat fades when quiet, coordinates on the world map | built, mock-tested only |
 | The game's own frames in the HUD's look (gamepad bars, tooltips, buffs, tracker, minimap, XP bar, chat) | built, mock-tested only |
 | Bags: sorting, item counts across characters, gold; repairs at vendors | built, mock-tested only |
+| Item actions on the game's own bags and bank (`ItemActions.lua`): hold R3 on an item for try on, mark, details, destroy, asked by `ns.Dialog` | built, mock-tested only: whether `ns.Dialog`'s A, X and Y reach it while the game's bags hold the controller has not been seen. Nothing goes into the game's item menu (which menu it is, and whether adding to it taints, is for `/cchud bagprobe` to show) |
+| Gamepad wheels in front and on screen (`PadButtons.lua`): layer fixed on DIALOG and clamped to the screen, set out of combat | built, mock-tested only |
 | Chat: class icon and level, spam filter | built, mock-tested only |
 | Items your quests need: a Quest verdict beside auction, vendor and keep (Quests.lua decides, Market.lua says it, Vendor.lua and the Market keep it) | built, mock-tested only |
 | Quest progress in chat; flights: destination, learned times and a countdown bar; a reminder to drink water; repeated guild recruitment hidden | built, mock-tested only: how the flight map says the chosen place under the Gamepad UI has not been seen in the game |
@@ -92,6 +94,7 @@ fell out of step with the game: visual sync problems, tooltips lost, controls st
 | Market: a tab of the auction house with its own controller keys, and a pane that only shows | built, mock-tested only |
 | Transmogrify: the game's hidden Sets tab shown and filled with the sets of your collection (by item name, and the game's own), put on in one press, X to undo (`Transmog.lua`) | built, mock-tested only: the tab's place in the game's layout, the cursor on the first set and Blizzard_Transmog of this client (read from its published UI source) not seen in the game |
 | Levelling plan beside a profession's window, broken down to raw materials; a farm list beside the quest list | built, mock-tested only |
+| Cooking and First Aid recipes (`RecipeData.lua`, made from `docs/levelling/recipes.json`; `Recipes.lua`): a drop is kept for a recipe you could still level with and says where to learn it; recipe items and skill books kept for who can use them; the plan's counts are a worst case and each material says farm, vendor or auction | built, mock-tested only: gathering skill names in other languages, `C_Map.GetAreaInfo` and the vendors' own stock not seen in the game |
 | First run: beside ControllerCam the HUD rests and asks "Camera + HUD" or "Camera only" (`/cchud welcome` asks again) | built, mock-tested only |
 | Setup: after the first-run choice the screen is offered too, a layout named ControllerCam added to the game's Edit Mode (`/cchud setup`) | built, mock-tested only: adding a layout has not been seen in the game |
 | The whole setup as one line: HUD settings, camera setup and the game's Edit Mode layout (`/cchud export`, `/cchud import`) | built, mock-tested only: adding a layout to the game's own has not been seen in the game |

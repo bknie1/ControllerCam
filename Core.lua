@@ -36,8 +36,7 @@ local db
 local active = {}             -- { sit = situation id, id = profile id } currently applied
 local lastMatch = {}          -- situation -> GetTime() it last matched (for the exit delay)
 local retryAfterCombat = false
-local curve                   -- the shoulder curve of the active profile, if any
-local curveFlip, lastCurveValue = false, nil
+local follow = {}             -- the active profile's "by zoom" values: { cvar, at = function(zoom), last }
 local held = false            -- a scene of the HUD's has the camera (ControllerCam.Hold)
 local debugOn = false
 local fresh = false           -- first run ever (no saved data)
@@ -234,6 +233,44 @@ function ns.SetAdvanced(v)
     db.advanced = v and true or false
 end
 
+---------------------------------------------------------------------------
+-- "By zoom" settings (shoulderCurve, focusCurve, fovCurve): the editor's switch and its table by zoom view
+---------------------------------------------------------------------------
+local putAway = {}            -- the points a switch took away this session, given back when it goes on again
+
+function ns.SetByZoom(id, key, on)
+    local p = ns.GetProfile(id)
+    if not (p and ns.VIEW_DEFAULTS[key]) then return false, "unknown" end
+    local cur = p.values[key]
+    if on then
+        if cur then return true end
+        local points = putAway[id .. key] or (ns.BUILTIN[id] and ns.BUILTIN[id].values[key])
+            or ns.CurveFromViews(ns.VIEW_DEFAULTS[key])
+        return ns.SetValue(id, key, copy(points))
+    end
+    if not cur then return true end
+    local kept, ok, why = copy(cur), nil, nil
+    if key == "shoulderCurve" then                  -- the offset you see now becomes the one offset
+        local z = tonumber(G("GetCameraZoom")) or tonumber(p.values.zoom) or 0
+        ok, why = ns.SetValue(id, "shoulder", ns.Round(ns.EvalCurve(cur, z), 1))
+    else
+        ok, why = ns.SetValue(id, key, nil)
+    end
+    if ok then putAway[id .. key] = kept end
+    return ok, why
+end
+
+-- One view's value. The curve is rebuilt from the six views, so points set by hand give way to them.
+function ns.SetViewValue(id, key, view, value)
+    local p = ns.GetProfile(id)
+    local cur = p and p.values[key]
+    if not (cur and ns.ZOOM_VIEWS[view]) then return false, "off" end
+    local values = ns.ViewValues(cur)
+    if math.abs(values[view] - value) < 0.001 then return true end
+    values[view] = value
+    return ns.SetValue(id, key, ns.CurveFromViews(values))
+end
+
 -- Back to the original of a built-in profile you edited.
 function ns.ResetBuiltin(id)
     if not (ns.BUILTIN[id] and db.overrides[id]) then return false end
@@ -259,7 +296,7 @@ end
 -- situation uses; an own profile whose name you already have is replaced, the others are added.
 function ns.ExportSetup()
     local setup = { assign = {}, exitDelay = db.exitDelay, flipShoulder = db.flipShoulder, advanced = db.advanced,
-                    formOffset = db.formOffset, profiles = {}, overrides = db.overrides }
+                    offsetScale = db.offsetScale, formOffset = db.formOffset, profiles = {}, overrides = db.overrides }
     local ids, index = {}, {}
     for id in pairs(db.profiles) do ids[#ids + 1] = id end
     table.sort(ids)
@@ -300,6 +337,7 @@ function ns.ImportSetup(str)
     if setup.exitDelay then db.exitDelay = setup.exitDelay end
     if setup.flipShoulder ~= nil then db.flipShoulder = setup.flipShoulder end
     if setup.advanced ~= nil then db.advanced = setup.advanced end
+    db.offsetScale = setup.offsetScale or 1
     db.formOffset = copy(setup.formOffset)
     db.overrides = copy(setup.overrides)
     ns.Evaluate(true)
@@ -425,6 +463,47 @@ local function SameValue(a, b)
     return tostring(a) == tostring(b)
 end
 
+---------------------------------------------------------------------------
+-- Field of view
+-- None of the camera CVars confirmed in the client is a field of view, so the game is asked: only if it answers
+-- to the name (with a value and a default, and does not mark it read-only) is anything done with it. A profile's
+-- values are shares of your own field of view, so no unit has to be guessed. Yours is what it was before a
+-- profile scaled it; change it in the game's settings meanwhile and that is yours from then on.
+---------------------------------------------------------------------------
+ns.FOV_CVARS = { "cameraFov" }
+local fovRefused = false      -- it took no change: left alone from then on
+local fovWrote                -- what it read right after we last changed it
+
+local function ReadOnly(name)
+    if not (C_CVar and C_CVar.GetCVarInfo) then return false end
+    local ok, _, _, _, _, locked, _, readOnly = pcall(C_CVar.GetCVarInfo, name)
+    return ok and (locked == true or readOnly == true)
+end
+
+local function FovName()      -- the game's name for it, if it has one (whether or not it takes changes)
+    for _, name in ipairs(ns.FOV_CVARS) do
+        local okV, v = pcall(GetCVar, name)
+        local okD, d = pcall(GetCVarDefault, name)
+        v, d = okV and tonumber(v), okD and tonumber(d)
+        if v and d and v > 0 and d > 0 then return name end
+    end
+end
+
+function ns.FovCVar()         -- the name to use, or nil when the game has no field of view for add-ons
+    if fovRefused then return nil end
+    local name = FovName()
+    if name and not ReadOnly(name) then return name end
+end
+
+local function OwnFov(cvar)
+    local cur = tonumber(GetCVar(cvar))
+    if db.originals[cvar] ~= nil and fovWrote and cur and math.abs(cur - fovWrote) > 0.001 then
+        db.originals[cvar] = tostring(cur)           -- you changed it since: that is your own now
+        fovWrote = cur
+    end
+    return tonumber(db.originals[cvar]) or cur
+end
+
 local lastSet = {}            -- cvar -> GetTime() we last set it (the trace tells ours from the game's)
 local function SetOne(cvar, value)
     local cur = GetCVar(cvar)
@@ -476,6 +555,11 @@ function ns.ShoulderScale()
     return (db and db.formOffset[id]) or FORM_SCALE[id] or 1
 end
 
+-- Everything the shoulder offset is multiplied by: your own overall strength, and the form you are in
+local function OffsetFactor()
+    return ns.ShoulderScale() * ((db and db.offsetScale) or 1)
+end
+
 -- How you move and the stick's speeds (the game's own Controller settings: facing, turning with the camera, the
 -- stick's turn and look speeds, the camera following the stick) are yours: the profiles only set them once you
 -- said they may (asked once, at the first login: ns.AskMovement), and not at all before you answered.
@@ -485,7 +569,8 @@ local function MayManage(s)
 end
 ns.MayManage = MayManage
 
--- Compute what a profile wants: { cvar = "value" }, zoom, curve, whether it uses ActionCam features.
+-- Compute what a profile wants: { cvar = "value" }, zoom, the values that follow the zoom, whether it uses
+-- ActionCam features.
 local function Resolve(profile, withZoom)
     local values = profile.values
     local flip = db.flipShoulder
@@ -493,19 +578,36 @@ local function Resolve(profile, withZoom)
     local zoom = tonumber(values.zoom)
     local theCurve = values.shoulderCurve
     local needsMotion = false
+    local follows = {}
+    local at = (withZoom and zoom) or tonumber(G("GetCameraZoom")) or zoom or 0
+    local function Follow(cvar, fn)
+        follows[#follows + 1] = { cvar = cvar, at = fn }
+        desired[cvar] = ns.FormatNumber(fn(at))
+    end
 
     for _, s in ipairs(ns.SETTINGS) do
         if s.api then
             -- applied separately
         elseif not MayManage(s) then
             -- (yours: left as you have it)
-        elseif s.kind == "curve" then
+        elseif s.key == "shoulderCurve" then
             if theCurve then
-                local z = (withZoom and zoom) or tonumber(G("GetCameraZoom")) or zoom or 0
-                local n = ns.EvalCurve(theCurve, z) * ns.ShoulderScale()
-                desired.test_cameraOverShoulder = ns.FormatNumber(flip and -n or n)
+                local sign = flip and -1 or 1
+                Follow("test_cameraOverShoulder", function(z) return sign * ns.EvalCurve(theCurve, z) * OffsetFactor() end)
                 for _, p in ipairs(theCurve) do if p[2] ~= 0 then needsMotion = true end end
             end
+        elseif s.key == "focusCurve" then
+            local share = values.focusCurve
+            if share and values.focusEnemy == 1 then
+                for _, cvar in ipairs(s.cvars) do
+                    local full = tonumber(desired[cvar])
+                    if full then Follow(cvar, function(z) return full * ns.EvalCurve(share, z) end) end
+                end
+            end
+        elseif s.key == "fovCurve" then
+            local share, cvar = values.fovCurve, ns.FovCVar()
+            local own = share and cvar and OwnFov(cvar)
+            if own then Follow(cvar, function(z) return own * ns.EvalCurve(share, z) end) end
         elseif not (s.key == "shoulder" and theCurve) then
             for _, cvar in ipairs(s.cvars) do
                 local v
@@ -514,7 +616,7 @@ local function Resolve(profile, withZoom)
                 else
                     v = ns.ResolveCVar(s, values[s.key], cvar, flip)
                     if cvar == "test_cameraOverShoulder" and tonumber(v) then
-                        v = ns.FormatNumber(tonumber(v) * ns.ShoulderScale())
+                        v = ns.FormatNumber(tonumber(v) * OffsetFactor())
                     end
                 end
                 if v ~= nil then
@@ -527,7 +629,37 @@ local function Resolve(profile, withZoom)
             end
         end
     end
-    return desired, zoom, theCurve, needsMotion
+    return desired, zoom, follows, needsMotion
+end
+
+local function Following(follows, cvar)
+    for _, one in ipairs(follows) do
+        if one.cvar == cvar then return true end
+    end
+    return false
+end
+
+-- Set a value that follows the zoom (or any other); the field of view remembers what it read afterwards
+local function SetFollowed(cvar, value)
+    local before = GetCVar(cvar)
+    local done = SetOne(cvar, value)
+    if cvar == FovName() then
+        fovWrote = tonumber(GetCVar(cvar))
+        if not G("InCombatLockdown") and not SameValue(before, value) and SameValue(before, GetCVar(cvar)) then
+            fovRefused = true                         -- the game keeps its own: not asked again
+            db.originals[cvar], fovWrote = nil, nil
+            dbg(cvar .. " takes no change in this game")
+        end
+    end
+    return done
+end
+
+-- A profile without a field of view by zoom: yours back, and forgotten (yours to change again)
+local function GiveBackFov()
+    local cvar = FovName()
+    if not (cvar and db.originals[cvar] ~= nil) then return end
+    local own = OwnFov(cvar)
+    if own and SetOne(cvar, tostring(db.originals[cvar])) then db.originals[cvar], fovWrote = nil, nil end
 end
 
 ---------------------------------------------------------------------------
@@ -632,7 +764,7 @@ function ns.Swimming() return swimming end
 local function Apply(id, withZoom)
     local profile = Profile(id)
     if not profile then return end
-    local desired, zoom, theCurve, needsMotion = Resolve(profile, withZoom)
+    local desired, zoom, follows, needsMotion = Resolve(profile, withZoom)
     if swimming then                          -- in the water: head tracking rests (see above)
         for cvar, value in pairs(ns.WATER) do
             if desired[cvar] ~= nil then desired[cvar] = value end
@@ -643,10 +775,13 @@ local function Apply(id, withZoom)
         for cvar in pairs(ns.HELD) do desired[cvar] = nil end
     end
     EnforceMotion(needsMotion)            -- first: the offset and friends are ignored while these are on
-    for cvar, value in pairs(desired) do SetOne(cvar, value) end
+    for cvar, value in pairs(desired) do SetFollowed(cvar, value) end
+    local fov = FovName()
+    if fov and not Following(follows, fov) then GiveBackFov() end
     if withZoom and zoom and not held then SetZoom(zoom, desired) end
 
-    curve, curveFlip, lastCurveValue = theCurve, db.flipShoulder, tonumber(desired.test_cameraOverShoulder)
+    follow = follows
+    for _, one in ipairs(follow) do one.last = tonumber(desired[one.cvar]) end
     dbg(("profile '%s' applied"):format(ns.ProfileName(id)))
 end
 
@@ -669,16 +804,23 @@ function ns.Evaluate(force)
     end
 end
 
--- Follows the zoom level to move the shoulder offset along the profile's curve.
+-- Follows the zoom level to move the "by zoom" values (shoulder offset, target focus, field of view) along the
+-- profile's curves. Within a view they hold still, so nothing is written.
 function ns.CurveTick()
-    if held or not (db and db.enabled and curve) then return end
+    if held or not (db and db.enabled and follow[1]) then return end
     local z = tonumber(G("GetCameraZoom"))
     if not z then return end
-    local v = ns.EvalCurve(curve, z) * ns.ShoulderScale()
-    if curveFlip then v = -v end
-    if lastCurveValue and math.abs(v - lastCurveValue) < 0.02 then return end
-    local ok, res = pcall(SetCVar, "test_cameraOverShoulder", ns.FormatNumber(v))
-    if ok and res ~= false then lastCurveValue = v end
+    local fov = FovName()
+    for _, one in ipairs(follow) do
+        local v = one.at(z)
+        if one.cvar == fov and fovWrote then         -- changed in the game's settings: start afresh from that
+            local cur = tonumber(GetCVar(fov))
+            if cur and math.abs(cur - fovWrote) > 0.001 then ns.Evaluate(true); return end
+        end
+        if not (one.last and math.abs(v - one.last) < 0.005) then
+            if SetFollowed(one.cvar, ns.FormatNumber(v)) then one.last = v end
+        end
+    end
 end
 
 -- A scene of the HUD's (the camp fire) has the camera for a while: the shoulder offset rests at the middle, so
@@ -706,7 +848,6 @@ function ControllerCam.Hold(on)
         local was = db.heldWas
         db.heldWas = nil
         for cvar, value in pairs(was or {}) do SetOne(cvar, value) end
-        lastCurveValue = nil
         ns.Evaluate(true)
         ns.CurveTick()
     end
@@ -728,9 +869,14 @@ function ns.SetFormOffset(share)
     local id = ns.CurrentForm()
     if not id then return nil end
     db.formOffset[id] = share
-    lastCurveValue = nil
     ns.Evaluate(true)
     return id
+end
+
+-- Your overall strength of the shoulder offset (1: as the profiles have it), for every profile and form
+function ns.SetOffsetScale(n)
+    db.offsetScale = math.min(math.max(tonumber(n) or 1, 0), 2)
+    ns.Evaluate(true)
 end
 
 function ns.Assign(sit, id)
@@ -912,7 +1058,7 @@ function ns.Restore()
     for cvar, value in pairs(db.originals) do pcall(SetCVar, cvar, value) end
     db.originals = {}
     EnforceMotion(false)
-    curve, active = nil, {}
+    follow, active, fovWrote = {}, {}, nil
 end
 
 function ns.Status()
@@ -933,6 +1079,8 @@ local function KnownCVars()
     for _, s in ipairs(ns.SETTINGS) do
         for _, c in ipairs(s.cvars or {}) do set[c] = true end
     end
+    local fov = FovName()
+    if fov then set[fov] = true end
     return set
 end
 
@@ -947,6 +1095,7 @@ local function InitDB()
         exitDelay = math.min(math.max(tonumber(old.exitDelay) or DEFAULT_EXIT_DELAY, 0), 10),
         targetZoom = math.min(math.max(tonumber(old.targetZoom) or 0, 0), 15),   -- closer on an enemy (0: off)
         flipShoulder = old.flipShoulder == true,
+        offsetScale = math.min(math.max(tonumber(old.offsetScale) or 1, 0), 2),  -- your share of the shoulder offset
         welcomed = old.welcomed == true,
         noticeAccepted = old.noticeAccepted == true,      -- the game's experimental camera notice, accepted once
         advanced = old.advanced == true,
@@ -1206,8 +1355,7 @@ f:SetScript("OnEvent", function(_, event, arg1, arg2)
     elseif event == "PLAYER_TARGET_CHANGED" then
         ns.TargetZoom()                          -- (closer on an enemy, out again when it is gone)
     elseif event == "UPDATE_SHAPESHIFT_FORM" then
-        lastCurveValue = nil                     -- the shoulder offset follows the new form at once
-        ns.Evaluate(true)
+        ns.Evaluate(true)                        -- the shoulder offset follows the new form at once
     else
         ns.Evaluate()
     end
@@ -1215,7 +1363,7 @@ end)
 
 local acc = 0
 f:SetScript("OnUpdate", function(_, elapsed)
-    if not curve then return end
+    if not follow[1] then return end
     acc = acc + elapsed
     if acc < 0.1 then return end
     acc = 0

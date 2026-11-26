@@ -211,6 +211,7 @@ Bank sorted. Press again to sort your bags.
 Bags sorted.
 Sort your bags (and the bank while it is open)
 Gold on this account: %s
+Hold R3 on an item to try it on, mark it, see its details or destroy it: the game's own bags have no button for these.
 Item counts in tooltips
 an item's tooltip says how many you have in your bags and bank, and how many your other characters hold
 R3 sorts while your bags are open
@@ -315,6 +316,9 @@ for something your characters make: what its materials cost, and what it makes a
 Quick sales at the auction house
 price 5% under the lowest for a sale now; off: patient prices, just under the lowest, that sell when buyers come
 read every price at the auction house at once (open it first; every 15 minutes)
+Herbalism
+Skinning
+Fishing
 %s needs it now (you're at %d), for %s
 %s needs it now (%s is at %d), for %s
 %s needs it from %d (you're at %d), for %s
@@ -322,7 +326,31 @@ read every price at the auction house at once (open it first; every 15 minutes)
 %s each
 Crafts: %s
 Keep what your professions still need
-an item that one of your characters' recipes still gives a skill point for (orange and yellow recipes, as the game shows them in the profession's window), that the profession's next steps use (the levelling guides' recipes, and those another of your characters knows, up to 75 points ahead), or that crafts something worth more at the auction house than the item itself, is kept, not sold, and its tooltip says why. Recipes are read when a profession's window is open
+an item that one of your characters' recipes still gives a skill point for (orange and yellow recipes, as the game shows them in the profession's window), that the profession's next steps use (the levelling guides' recipes, and those another of your characters knows, up to 75 points ahead), or that crafts something worth more at the auction house than the item itself, is kept, not sold, and its tooltip says why. A Cooking or First Aid material is also kept for a recipe not learned yet, with where to learn it, as are that recipe and the skill books. Recipes are read when a profession's window is open
+%s, who walks the road in %s
+%s in %s
+Any %s trainer teaches it
+The recipe is sold only during the Feast of Winter Veil
+The recipe is a quest reward: %s (%s)
+The recipe drops from %s in %s
+The recipe drops from creatures in %s
+The recipe is a rare drop from creatures around the world
+The recipe is sold by %s
+(more sellers: %d)
+%s: your %s still gives a skill-up
+%s's %s: their %s still gives a skill-up
+%s: makes %s (needs %d, you're at %d)
+%s's %s: makes %s (needs %d, now at %d)
+Also goes into %s
+Later, %s: makes %s at %d (you're at %d)
+Later, %s's %s: makes %s at %d
+teaches %s (%s %d, you're at %d)
+teaches %s (%s %d, for %s, now at %d)
+raises your %s to %d (your cap is %d)
+raises %s's %s to %d (their cap is %d)
+last seen sold by %s in %s
+sold only during the Feast of Winter Veil
+trade supply vendors sell it
 AP
 RAP
 crit
@@ -331,7 +359,7 @@ health
 mana
 spell crit
 What stats are worth to you
-under an item's tooltip, its stat lines with their value for your character: attack power, ranged attack power, crit, dodge, health, mana
+beside each stat line of an item's tooltip, what it is worth to your character: attack power, ranged attack power, crit, dodge, health, mana. What does not fit inside the tooltip is on the panel under it
 Item level
 Requires level
 Stacks to
@@ -344,6 +372,26 @@ bank
 Your mark
 Item details: everything about the item you point at
 show everything about the item you point at (or the one given): prices, who holds it, your mark
+no mark
+That item has changed: point at it again.
+The game kept %s: destroy it from its own bags.
+Destroyed %s.
+Destroy
+This item begins a quest.
+This is a quest item.
+Destroy %s?
+It can't be undone.
+Item details
+Back
+Try on
+Change mark
+More
+Close
+Not in a fight.
+Item actions: try on, mark, details or destroy the item you point at
+Hold R3 on an item for its actions
+while your bags or the bank are open, holding the right stick button on an item asks what to do with it: try it on, mark it, see its details or destroy it. A tap still sorts or moves, and the game's own bags and item menu stay as they are
+ask what to do with the item you point at: try on, mark, details, destroy
 Cast bar animations
 a cast bar shows what is being cast: picks chip at it while mining, lightning runs along it for nature, a vine flowers for a heal, runes take shape for arcane, flames, ice and shades for fire, frost and shadow
 show every cast bar animation once, on your cast bar
@@ -516,6 +564,8 @@ the screen's fade out of combat: what fades (minimap, quest list and the rest), 
 Saved: type /reload so the game writes it to disk.
 Stance and pet buttons above the bars
 the stance and pet command buttons sit where the green and red targeting icons were, so their wheel opens fully on screen; those icons are hidden
+Stance and pet wheels in front and on screen
+the wheels that open with the shoulder and trigger buttons are drawn in front of the bar's buttons and kept inside the screen, in a fight too, so every choice can be seen; they stay the game's own
 list where the gamepad bars' parts sit and what rests (for troubleshooting)
 Auto
 Generic
@@ -582,6 +632,9 @@ Chat
 chat tab names outlined and the box you type in as dark glass
 Damage meter
 the game's damage meter in the HUD's look: its bars, slanted on a dark back, and outlined text; it keeps all it does
+Looking at your bags and bank for %d seconds: open them, point at items, open the game's own item menu. Then type /reload.
+Done looking: %d windows, %d button lines, %d menus. Type /reload so the game writes it to disk.
+look at the game's own bags, bank and item menus for a while, for troubleshooting
 check: %d of %d passed
 The game has not stood still since you logged in.
 Moments the game stood still, and the HUD's part in each:
@@ -792,7 +845,6 @@ Bags
 Mail
 Item advice
 Appearances
-Fishing
 Professions
 %s  |  Gamepad UI: %s  |  running: %s
 player %s, target %s, pet %s, focus %s  |  game frames put aside: %s  |  chat moved: %s
@@ -899,22 +951,18 @@ Trade
 %s or %s: to the loot
 %s or %s: other window
 Controller buttons return after the fight.
-Close
 %s or %s: back to bags
 Hold to destroy
 Choose
-Back
 All bags
 Only this bag
 Put in
 Pick up bag
-More
 Sort
 %d free
 Empty slot
 In a fight, close your bags with B.
 for the bank
-no mark
 No empty slot.
 %s is on your cursor: put it on a button of your gamepad bar.
 Buy a bank bag slot for %s?
@@ -923,9 +971,6 @@ Bind
 Put down here
 Split stack
 Mark: %s
-Item details
-Try on
-Destroy
 Sort bank
 Sort bags
 Show bags
@@ -933,11 +978,6 @@ Show bank
 Buy a bank bag slot (%s)
 Sell advised items
 Let go to destroy
-This item begins a quest.
-This is a quest item.
-Destroy %s?
-The game kept %s: destroy it from its own bags.
-Destroyed %s.
 Bag window: order
 Smart: what you use first (consumables, items with a use), then the rest by kind, junk last and faded. By type: in sections under their own headings. As in your bags: the game's own order
 Grand Master
@@ -966,7 +1006,6 @@ Morning
 Afternoon
 Evening
 Night
-%s in %s
 With %s
 The campfire scene is off.
 The campfire scene waits until you are out of combat.
@@ -1152,7 +1191,6 @@ Bumped: the run ends
 %s: a game on the way
 The flight game is off: /cchud flightgame on
 The flight game is played on a flight.
-Not in a fight.
 Flight game: play / high altitude
 on a flight: start the flight game, or take it to high altitude and back
 Cinematic flights: the camera circles you
@@ -1251,6 +1289,16 @@ Market: price chart as candles
 the Market's price chart is a candle a day for the last 7 days (where the price opened, went highest and lowest, and closed: green when it closed higher, red lower); off: a line of the day's lowest price over 30 days
 open or close the Market (a tab of the auction house)
 which auction house this client has (for troubleshooting)
+farm
+vendor
+auction
+Sells well: about %s profit each (%s at auction after the cut, materials %s).
+[by auction]
+[slow farm]
+[costly]
+Needs %s, which you'd buy at the auction house: for levelling with money to spend.
+A slow farm: %s. Few skins give a hide.
+About %s of materials to buy.
 Open a profession's window and I'll look over your recipes.
 That's the cap, %d. A trainer has the next rank for you.
 Nothing more to learn at %d. Go and see a trainer about the next rank.
@@ -1284,6 +1332,8 @@ fewer crafts
 a recipe you find or buy
 other materials
 the guides' first choice
+no slow farm
+less to buy
 Open a profession's window for a levelling plan.
 At the cap, %d. A trainer has the next rank.
 %d more to %d; your recipes stop short. A trainer has %s at %d.
@@ -1294,13 +1344,21 @@ Your recipes stop %d short of %d. A trainer has more.
 %d more to %d. Gather %s until %d.
 %d more to %d. First: %s, or %s (%s).
 %d more to %d. First: %s.
-To gather or buy
-%d crafts: %s
+Still needed to reach %d, at most:
+Worth making to sell:
+At most %d crafts: %s
+Learn it at %d. %s.
 Learn it %s, at %d.
 Learn it %s.
+Farm it: your %s brings it in.
+Buy it from a vendor: %s.
+Buy it from a vendor.
+Buy it at the auction house (%s each when last seen).
+Buy it at the auction house.
 %s: %d in your bags, %d in the bank, %d each
+Grey for you now, so it gives no skill points. Make it for %s.
 The guides level this stretch by gathering %s.
-%s: you have %d, the plan uses %d
+%s: at most %d to reach %d. You have %d, so %d more at most.
 for %s
 Cheaper to buy it than to make it from %s
 Made from %s
@@ -1311,10 +1369,11 @@ Nothing more to make with what's in your bank.
 The Mentor: %s %d > %d
 The Mentor
 Levelling plan
+make for %s
 or
 Gather %s
-to learn
-cheaper to buy
+up to x%d
+up to %d
 Hide
 The plan
 Farm this

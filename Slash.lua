@@ -72,6 +72,8 @@ end
 
 local function List()
     local db = ns.GetDB()
+    -- first, the default experience: not a profile of its own but the setup (/ccam use recommended)
+    print(("  |cffffd100%s|r - %s"):format(L["Recommended setup"], L["Action camera with calmer profiles for cities, mounts, flying and raids."]))
     for _, id in ipairs(ns.ProfileIds()) do
         local tag = ""
         if not ns.IsBuiltin(id) then tag = " |cff999999(" .. L["custom"] .. ")|r"
@@ -90,7 +92,7 @@ local HELP = {
     { "/ccam",                              "show status" },
     { "/ccam list",                         "list the profiles" },
     { "/ccam describe <profile>",           "what a profile feels like and every setting it changes" },
-    { "/ccam use <profile>",                "use one profile everywhere (try: action, hybrid, classic)" },
+    { "/ccam use <profile>",                "use one profile everywhere (try: recommended, action, classic)" },
     { "/ccam starter",                      "the recommended setup: Action camera with calmer profiles for cities, mounts, flying, raids" },
     { "/ccam set <situation> <profile|none>", "choose the profile for one situation (/ccam shows the list)" },
     { "/ccam force <profile>",              "use a profile now, whatever the situation" },
@@ -105,6 +107,7 @@ local HELP = {
     { "/ccam export <profile>",             "show a string you can share" },
     { "/ccam import <string>",              "add a profile from a shared string" },
     { "/ccam flip",                         "switch the shoulder offset to the other shoulder" },
+    { "/ccam offset <percent>",             "the strength of the shoulder offset in every profile, in percent of normal" },
     { "/ccam formoffset <percent | reset>", "the shoulder offset in the form you are in (druid forms, ghost wolf), in percent of normal" },
     { "/ccam delay <seconds>",              "how long a situation is kept after it ends (default 1.5)" },
     { "/ccam targetzoom <yards>",           "on an enemy target the camera comes in this close, and goes back out after (0: off)" },
@@ -167,6 +170,8 @@ local function Command(msg)
         end
     elseif cmd == "on" then ns.SetEnabled(true); say(L["enabled"])
     elseif cmd == "off" then ns.SetEnabled(false); say(L["disabled. Your original camera settings were restored."])
+    elseif cmd == "use" and (rest:lower() == "recommended" or rest:lower() == L["Recommended setup"]:lower()) then
+        ns.ApplyStarter(); say(L["Recommended setup applied."])
     elseif cmd == "use" then
         local id = profileOrSay(rest)
         if id then ns.UseEverywhere(id); say((L["Using '%s' everywhere."]):format(ns.ProfileName(id))) end
@@ -256,6 +261,11 @@ local function Command(msg)
             or L["Your own movement and stick settings are kept (/ccam movement to change it)."])
     elseif cmd == "flip" then
         ns.SetFlipShoulder(not db.flipShoulder); say(db.flipShoulder and L["Shoulder offset mirrored."] or L["Shoulder offset back to normal."])
+    elseif cmd == "offset" then
+        local n = tonumber(args[1])
+        if n and n >= 0 and n <= 200 then ns.SetOffsetScale(n / 100) end
+        if args[1] and not (n and n >= 0 and n <= 200) then say(L["usage: /ccam offset <percent> (0 to 200)"])
+        else say((L["Shoulder offset strength: %d%%"]):format(db.offsetScale * 100 + 0.5)) end
     elseif cmd == "formoffset" then
         local arg = (args[1] or ""):lower()
         if not ns.CurrentForm() then say(L["You are not in a form."]); return end
@@ -296,6 +306,13 @@ local function Command(msg)
         say(("CameraKeepCharacterCentered = %s  |  CameraReduceUnexpectedMovement = %s  |  head tracking strength = %s"):format(
             tostring(GetCVar("CameraKeepCharacterCentered")), tostring(GetCVar("CameraReduceUnexpectedMovement")),
             tostring(GetCVar("test_cameraHeadMovementStrength"))))
+        local fov = ns.FovCVar()
+        say(("zoom view: %s  |  offset strength %d%%  |  target focus %s (yaw %s, pitch %s)  |  field of view: %s"):format(
+            zoom and ns.ZOOM_VIEWS[ns.ViewAt(zoom)].key or "?", db.offsetScale * 100 + 0.5,
+            tostring(GetCVar("test_cameraTargetFocusEnemyEnable")),
+            tostring(GetCVar("test_cameraTargetFocusEnemyStrengthYaw")),
+            tostring(GetCVar("test_cameraTargetFocusEnemyStrengthPitch")),
+            fov and (fov .. " = " .. tostring(GetCVar(fov))) or "this game has none an add-on can set"))
     elseif cmd == "notice" then
         ns.AskNoticeAgain()
         say(L["The game will ask about its experimental camera settings again at the next login."])

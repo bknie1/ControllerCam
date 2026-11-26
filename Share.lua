@@ -128,6 +128,7 @@ end
 --   a=<situation>><ref>,...   ref: a built-in profile's id, or #n for the n-th own profile further on
 --   c=<ref>                   the profile used everywhere regardless, if any
 --   d=<seconds>  f=0|1  v=0|1   exit delay, flipped shoulder, advanced editing
+--   k=<share>                   your overall strength of the shoulder offset (left out at 1)
 --   s=<form>><share>,...      your share of the shoulder offset per shapeshift form
 --   p=<profile string>        an own profile (a whole CC1 string as above), any number of them
 --   o=<id>><profile string>   a built-in profile you edited
@@ -152,6 +153,9 @@ function ns.FormatSetup(setup)
     parts[#parts + 1] = "d=" .. ns.FormatNumber(setup.exitDelay or 0)
     parts[#parts + 1] = "f=" .. (setup.flipShoulder and 1 or 0)
     parts[#parts + 1] = "v=" .. (setup.advanced and 1 or 0)
+    if setup.offsetScale and setup.offsetScale ~= 1 then
+        parts[#parts + 1] = "k=" .. ns.FormatNumber(setup.offsetScale)
+    end
     local forms = {}
     for id in pairs(setup.formOffset or {}) do forms[#forms + 1] = id end
     table.sort(forms)
@@ -206,6 +210,10 @@ function ns.ParseSetup(str)
             local n = tonumber(raw)
             if not n or n < 0 or n > 10 then return nil, NOT end
             setup.exitDelay = n
+        elseif key == "k" then
+            local n = tonumber(raw)
+            if not n or n < 0 or n > 2 then return nil, NOT end
+            setup.offsetScale = n
         elseif key == "f" or key == "v" then
             if raw ~= "0" and raw ~= "1" then return nil, NOT end
             setup[key == "f" and "flipShoulder" or "advanced"] = (raw == "1")

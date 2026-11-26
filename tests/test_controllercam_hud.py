@@ -257,7 +257,7 @@ class Packaging(unittest.TestCase):
         xml = open(os.path.join(HUD, "Bindings.xml"), encoding="utf-8").read()
         e = Env()
         names = re.findall(r'name="(\w+)"', xml)
-        self.assertEqual(len(names), 15)
+        self.assertEqual(len(names), 16)
         for name in names:
             self.assertIsNotNone(e.g["BINDING_NAME_" + name], name)
         for fn in re.findall(r"(\w+)\(\)", xml):
@@ -6670,9 +6670,11 @@ class DebugReports(unittest.TestCase):
         e.update(0.5)
         e.mock.fire("PLAYER_LOGOUT")
         rows = list(e.db.debugReport.logout.flyouts.values())
-        self.assertEqual(len(rows), 1)
+        self.assertEqual(len(rows), 2)
         self.assertIn("bottom -60", rows[0])
         self.assertIn("CUT OFF", rows[0])
+        self.assertIn("GamepadSpellFlyout: shown on DIALOG", rows[1])   # and its layer, as it opened
+        self.assertIn("the bars draw up to", rows[1])
 
     def test_off_gathers_nothing(self):
         e = Env(db="{ v = 8, debug = false }")
@@ -6757,18 +6759,98 @@ class StanceAndPetButtons(unittest.TestCase):
         self.assertEqual(e.ns.PadButtons.wheels, 1)
         self.assertEqual(e.errors(), [])
 
-    def test_the_wheels_are_drawn_over_the_bars_buttons_and_given_back(self):
-        e = self.env()
-        e.lua.execute("""
-            GamepadSpellFlyout = CreateFrame("Frame", "GamepadSpellFlyout", UIParent)
-            GamepadSpellFlyout:SetFrameStrata("MEDIUM")
-            GamepadSpellFlyout:Hide()""")
-        wheel = e.g.GamepadSpellFlyout
+    WHEEL = """
+        GamepadSpellFlyout = CreateFrame("Frame", "GamepadSpellFlyout", UIParent)
+        local w = GamepadSpellFlyout
+        w.strata = "MEDIUM"
+        w.fixed, w.clamped = false, false
+        w.SetFixedFrameStrata = function(self, v) self.fixed = v end
+        w.HasFixedFrameStrata = function(self) return self.fixed end
+        w.SetClampedToScreen = function(self, v) self.clamped = v end
+        w.IsClampedToScreen = function(self) return self.clamped end
+        w:Hide()"""
+
+    def wheel_env(self, extra="", **kw):
+        e = Env(setup=lambda env: env.lua.execute(self.SETUP + self.WHEEL + extra), **kw)
+        return e, e.g.GamepadSpellFlyout
+
+    def test_the_wheels_are_in_front_and_on_screen_and_given_back(self):
+        e, wheel = self.wheel_env()
         e.update(0.2)
         self.assertEqual(wheel.strata, "DIALOG")                    # over the d-pad and the face buttons,
-        e.cmd("padraise off")
-        self.assertEqual(wheel.strata, "MEDIUM")                    # and as the game had it once that is off
+        self.assertTrue(wheel.fixed)                                # whatever it is put on after
+        self.assertTrue(wheel.clamped)                              # and the engine keeps it on the screen
+        e.cmd("padraise off")                                       # (the buttons' place is a switch of its own)
+        e.update(0.2)
+        self.assertEqual(wheel.strata, "DIALOG")
+        self.assertTrue(wheel.clamped)
+        e.cmd("padwheels off")
+        e.update(0.2)
+        self.assertEqual(wheel.strata, "MEDIUM")                    # as the game had it
+        self.assertFalse(wheel.fixed)
+        self.assertFalse(wheel.clamped)
         self.assertEqual(e.errors(), [])
+
+    def test_a_wheel_pushed_up_from_the_screens_edge_is_still_its_buttons(self):
+        e, wheel = self.wheel_env()
+        e.update(0.2)
+        left = e.g.GamepadMainActionBarFramePageUnit.LeftClassAction
+        wheel.cx, wheel.cy = 362, 150                               # opened around (362, 8), then kept on screen
+        wheel.height = 300
+        wheel.GetRect = e.lua.eval("function() return 212, 0, 300, 300 end")
+        wheel.Show(wheel)
+        e.update(0.1)
+        self.assertTrue(e.same(wheel.points[1][2], left))
+        self.assertEqual(e.errors(), [])
+
+    def test_the_wheels_are_set_before_a_fight_and_left_alone_in_it(self):
+        e, wheel = self.wheel_env()
+        e.update(0.2)
+        e.mock.state.combat = True
+        wheel.strata, wheel.clamped = "LOW", False                  # (whatever happens in the fight)
+        wheel.Show(wheel)
+        e.update(1)
+        self.assertEqual((wheel.strata, wheel.clamped), ("LOW", False))    # nothing of the game's is touched
+        e.mock.state.combat = False
+        e.update(0.2)
+        self.assertEqual(wheel.strata, "DIALOG")                    # in order again once it is over
+        self.assertEqual(e.errors(), [])
+
+    def test_a_wheel_goes_above_bars_the_game_raised_and_its_low_parts_come_up(self):
+        e, wheel = self.wheel_env("""
+            GamepadMainActionBarFrame = GamepadMainActionBarFrame or CreateFrame("Frame", "GamepadMainActionBarFrame", UIParent)
+            RAISED = CreateFrame("Frame", nil, GamepadMainActionBarFrame)
+            RAISED.strata, RAISED.level = "DIALOG", 40
+            PART = CreateFrame("CheckButton", nil, GamepadSpellFlyout)
+            PART.strata = "LOW" """)
+        e.update(0.2)
+        wheel.Show(wheel)
+        e.update(0.2)
+        self.assertEqual(e.g.PART.strata, "DIALOG")
+        self.assertGreater(wheel.level, 40)
+        e.cmd("padwheels off")
+        e.update(0.2)
+        self.assertEqual((e.g.PART.strata, wheel.level, wheel.strata), ("LOW", 1, "MEDIUM"))
+        self.assertEqual(e.errors(), [])
+
+    def test_a_layer_the_game_will_not_take_is_not_asked_for_on_every_frame(self):
+        e, wheel = self.wheel_env("""
+            ASKED = 0
+            GamepadSpellFlyout.SetFrameStrata = function() ASKED = ASKED + 1 end""")
+        e.update(3)
+        self.assertEqual(e.g.ASKED, e.ns.PadButtons.TRIES)
+        self.assertEqual(e.errors(), [])
+
+    def test_a_wheel_the_game_will_not_let_us_set_is_left_alone(self):
+        e, wheel = self.wheel_env("""
+            GamepadSpellFlyout.SetClampedToScreen = function() error("blocked") end
+            GamepadPetActionFlyout = { }                              -- (not a frame at all)""")
+        e.update(1)
+        wheel.Show(wheel)
+        e.update(1)
+        self.assertEqual(wheel.strata, "DIALOG")                    # what the game takes is done,
+        self.assertEqual(e.errors(), [])                            # and nothing escapes as an error
+        self.assertTrue(any("GamepadSpellFlyout:" in line for line in e.ns.PadButtons.Report().values()))
 
     def test_the_games_own_layout_is_answered_out_of_combat_only(self):
         e = self.env()
@@ -6900,7 +6982,11 @@ class FishingMode(unittest.TestCase):
         self.assertEqual(list(e.g.EQUIPPED[1].values()), [25, 16])   # the sword you held before
         e.g.ContainerFrame1.Show(e.g.ContainerFrame1)                # a window open: B closes it, as always
         e.update(0.5)
+        self.assertIsNone(e.mock.overrides.PAD2)                     # (the game's own bags: B is the game's)
+        e.cmd("bagwindow on")                                        # (our own bag window, where it is chosen)
+        e.update(0.5)
         self.assertEqual(e.mock.overrides.PAD2, "CLICK ControllerCamHUD_BagKey_PAD2:LeftButton")   # (the bags')
+        e.cmd("bagwindow off")
         e.g.ContainerFrame1.Hide(e.g.ContainerFrame1)
         e.update(0.5)
         self.assertIsNotNone(e.mock.overrides.PAD2)
@@ -7057,7 +7143,7 @@ class FishingMode(unittest.TestCase):
         e.mock.fire("PLAYER_EQUIPMENT_CHANGED", 16)
         e.update(0.5)
         self.assertNotIn("Fishing", str(e.mock.overrides.PAD3))      # X and B are the bags'
-        self.assertEqual(e.mock.overrides.PAD2, "OPENALLBAGS")       # (the game's own: closes them)
+        self.assertIsNone(e.mock.overrides.PAD2)                     # (the game's own bags: B closes them, its way)
         e.g.ContainerFrameCombinedBags.shown = False                 # closed: fishing
         e.update(0.5)
         self.assertEqual(e.mock.overrides.PAD3, "SPELL Fishing")
@@ -9651,7 +9737,7 @@ class StatValues(unittest.TestCase):
     def test_what_stats_are_worth_by_class(self):
         e = self.env("HUNTER")
         A = e.ns.Stats.Annotate
-        self.assertEqual(plain(A("+10 Agility")), "+10 Agility (+10 AP, +20 RAP, +0.19% crit, +0.38% dodge)")
+        self.assertEqual(plain(A("+10 Agility")), "+10 Agility (+20 RAP, +10 AP, +0.19% crit, +0.38% dodge)")
         self.assertIn("|cffff9a4d+10 AP|r", A("+10 Agility"))           # each value in its own colour
         self.assertIn("|cff8fdc5a+20 RAP|r", A("+10 Agility"))
         self.assertEqual(plain(A("+10 Stamina")), "+10 Stamina (+100 health)")
@@ -9668,6 +9754,56 @@ class StatValues(unittest.TestCase):
     def test_lower_levels_need_fewer_points(self):
         e = self.env("PALADIN", level=30)
         self.assertIn("+1% crit", e.ns.Stats.Annotate("+10 Agility"))        # twice the share at level 30
+
+    def test_the_worth_stands_beside_the_line_as_far_as_it_fits(self):
+        e = self.env("HUNTER")
+        e.lua.execute("""
+            function Measured(fs)       -- five wide a letter, colour codes not counted
+                fs.GetStringWidth = function(self)
+                    return #((self.text or ""):gsub("|c%x%x%x%x%x%x%x%x", ""):gsub("|r", "")) * 5
+                end
+                return fs
+            end
+            local made = ControllerCamHUD.ns.FontString
+            ControllerCamHUD.ns.FontString = function(...) return Measured(made(...)) end
+            local tip = CreateFrame("GameTooltip", "InlineTip", UIParent)
+            tip.NumLines = function() return 3 end
+            for i = 1, 3 do _G["InlineTipTextLeft" .. i] = Measured(tip:CreateFontString()) end
+            InlineTipTextLeft1:SetText(string.rep("x", 60))          -- the tooltip is 300 wide
+            InlineTipTextLeft2:SetText("+10 Stamina")
+            InlineTipTextLeft3:SetText("+10 Agility")
+            INLINE_TIP = tip
+        """)
+        tip = e.g.INLINE_TIP
+
+        def show():
+            for fn in e.mock.tipCalls[e.g.Enum.TooltipDataType.Item].values():
+                fn(tip, e.lua.table(id=1))
+            marks = [plain(m.text) for m in e.ns.Stats.Marks(tip).values()]
+            panel = [plain(list(l.values())[0]) for l in e.ns.Tooltip.AnnexLines(tip).values()]
+            return marks, panel
+
+        marks, panel = show()
+        self.assertEqual(marks, ["(+100 health)", "(+20 RAP, +10 AP, +0.19% crit, +0.38% dodge)"])
+        self.assertEqual([l for l in panel if "Agility" in l or "Stamina" in l], [])    # nothing said twice
+        self.assertEqual(e.g.InlineTipTextLeft3.text, "+10 Agility")    # the game's line as the game wrote it
+        e.g.InlineTipTextLeft1.SetText(e.g.InlineTipTextLeft1, "x" * 33)   # narrower: 165
+        marks, panel = show()
+        self.assertEqual(marks, ["(+100 health)", "(+20 RAP, +10 AP)"])   # what matters most, as far as it fits
+        self.assertIn("+10 Agility ... (+0.19% crit, +0.38% dodge)", panel)
+        e.g.InlineTipTextLeft1.SetText(e.g.InlineTipTextLeft1, "x" * 5)    # no room: all of it under the tooltip
+        marks, panel = show()
+        self.assertEqual(marks, [])
+        self.assertIn("+10 Agility (+20 RAP, +10 AP, +0.19% crit, +0.38% dodge)", panel)
+        e.g.InlineTipTextLeft1.SetText(e.g.InlineTipTextLeft1, "x" * 60)
+        show()
+        e.g.InlineTipTextLeft2.SetText(e.g.InlineTipTextLeft2, "Level 12 Beast")   # the tooltip moved on
+        e.update(0.1)
+        self.assertEqual(len(list(e.ns.Stats.Marks(tip).values())), 1)
+        e.cmd("statvalues off")
+        e.update(0.1)
+        self.assertEqual(len(list(e.ns.Stats.Marks(tip).values())), 0)
+        self.assertEqual(e.errors(), [])
 
     def test_the_worth_hangs_under_the_tooltip_which_stays_the_games(self):
         e = self.env("PALADIN")
@@ -10940,9 +11076,13 @@ class MarketAndItems(unittest.TestCase):
         e.update(0.5)
         self.assertEqual(len(list(e.mock.overrides.keys())), 0)                  # R3 and L3 are yours
         e.g.ContainerFrame1.Show(e.g.ContainerFrame1)
+        e.cmd("padactions off")                        # (no hold: the sort binding itself, as it was)
         e.update(0.5)
         self.assertEqual(e.mock.overrides.PADRSTICK, "CCHUD_SORT")
         self.assertIsNone(e.mock.overrides.PADLSTICK)
+        e.cmd("padactions on")                         # (a tap or a hold: our button is told both)
+        e.update(0.5)
+        self.assertEqual(e.mock.overrides.PADRSTICK, "CLICK ControllerCamHUD_StickKey:LeftButton")
         e.mock.openBank(True)
         e.update(0.5)
         self.assertEqual(e.mock.overrides.PADRSTICK, "CLICK ControllerCamHUD_StickKey:LeftButton")
@@ -11975,7 +12115,7 @@ class Levelling(unittest.TestCase):
         self.assertTrue(e.same(p[2], e.window))                     # beside the game's window, never in it
         self.assertEqual(len(e.window.points), 0)                     # (nothing done to the game's window)
         self.assertIn("Alchemy 50 > 60", plain(panel.title.text))
-        self.assertIn("Minor Healing Potion  x11", plain(LV.rows[1].text.text))
+        self.assertIn("Minor Healing Potion  up to x11", plain(LV.rows[1].text.text))
         self.assertEqual(LV.rows[1].right.text, "50-60")
         self.assertIn("Levelling plan", "\n".join(LV.Describe().values()) + "Levelling plan")
         self.assertEqual(e.errors(), [])
@@ -12064,7 +12204,8 @@ class Levelling(unittest.TestCase):
         e.g.ControllerCamHUD_Key_Plan_PAD3.scripts.OnClick()         # X: everything missing to the farm list
         self.assertEqual([(x.id, x.need) for x in e.db.farm.values()], [(2447, 11)])
         e.g.ControllerCamHUD_Key_Plan_PADDDOWN.scripts.OnClick()     # (past the heading) to the peacebloom
-        self.assertIn("Peacebloom: you have 4, the plan uses 11", plain(e.g.ControllerCamHUD_SkillPlanPanel.detail.text))
+        self.assertIn("Peacebloom: at most 11 to reach 60. You have 4, so 7 more at most.",
+                      plain(e.g.ControllerCamHUD_SkillPlanPanel.detail.text))
         e.g.ControllerCamHUD_Key_Plan_PAD2.scripts.OnClick()         # B: the buttons back
         self.assertIsNone(ov.PADDUP)
         self.assertEqual(ov.PADLSTICK, "CLICK ControllerCamHUD_Key_PlanKey_PADLSTICK:LeftButton")
@@ -12255,12 +12396,14 @@ class MentorGuides(unittest.TestCase):
                                          "you'd rather: cheaper materials.")
         LV.Refresh(LV)
         texts = [plain(LV.rows[i].text.text) for i in range(1, 6)]
-        self.assertIn("Minor Healing Potion  x5", texts[0])
+        self.assertIn("Minor Healing Potion  up to x5", texts[0])
         self.assertIn("or Weak Troll Blood  cheaper materials", texts[1])
-        self.assertEqual(plain(LV.rows[2].right.text), "x3")             # its 30 over 54 points, 5 of them
+        self.assertEqual(plain(LV.rows[2].right.text), "x5")             # never fewer than a craft a point
         self.assertIn("Elixir of Strength", texts[2])
-        self.assertIn("or Minor Mana Potion  the guides' first choice", texts[3])
-        self.assertEqual(texts[4], "To gather or buy")
+        self.assertIn("Minor Mana Potion  the guides' first choice", texts[3])   # one you don't have: its mark
+        self.assertIn("ActiveQuestIcon", texts[3])                    # (learnable now: "?"), and where
+        self.assertIn("Learn it at a trainer, at 25.", texts[3])
+        self.assertEqual(texts[4], "Still needed to reach 60, at most:")
         LV.Focus(LV, True)
         LV.Choose(LV, 4)
         self.assertIn("Learn it at a trainer, at 25.", plain(e.g.ControllerCamHUD_SkillPlanPanel.detail.text))
@@ -12282,7 +12425,7 @@ class MentorGuides(unittest.TestCase):
         self.assertEqual(LV.Words(plan), "First you'll want Minor Mana Potion, from a vendor. "
                                          "The guides start this stretch with it.")
         LV.Refresh(LV)
-        self.assertIn("to learn", plain(LV.rows[1].text.text))
+        self.assertIn("Learn it from a vendor, at 40.", plain(LV.rows[1].text.text))
         self.assertEqual(plain(LV.rows[2].text.text), "Gather Peacebloom")
         plan.steps = e.lua.table_from([two])
         self.assertEqual(LV.Words(plan), "10 more to 60. The guides send you out for Peacebloom until 60.")
@@ -17341,6 +17484,266 @@ class CompassCamera(unittest.TestCase):
         self.assertEqual(e.errors(), [])
 
 
+class ItemActions(unittest.TestCase):
+    """Hold R3 on an item in the game's own bags or bank: try on, mark, details, destroy (in a window of ours)."""
+
+    GAME = """
+        mock.cursor, mock.deleted, mock.tried = nil, {}, {}
+        function ClearCursor() mock.cursor = nil end
+        function GetCursorInfo() if mock.cursor then return "item", mock.cursor.id end end
+        C_Container.PickupContainerItem = function(bag, slot)
+            local it = mock.bags[bag] and mock.bags[bag][slot]
+            if it then mock.cursor = { id = it.id, bag = bag, slot = slot } end
+        end
+        function DeleteCursorItem()
+            if mock.keep then return end
+            local c = mock.cursor
+            if c then mock.deleted[#mock.deleted + 1] = c.id; mock.bags[c.bag][c.slot] = nil; mock.cursor = nil end
+        end
+        C_Item.IsDressableItemByID = function(id) return id == 2000 end
+        function DressUpItemLink(link) mock.tried[#mock.tried + 1] = link end
+    """
+
+    def game(self, env):
+        env.lua.globals().mock = env.mock                            # (the mock, by name, for the lines above)
+        env.lua.execute(self.GAME)
+
+    def env(self, **kw):
+        e = Env(setup=self.game, **kw)
+        put, T = e.mock.put, e.lua.table
+        put(0, 1, T(id=2589, name="Linen Cloth", quality=1, price=13, count=20, stack=20, **{"class": 7}))
+        put(0, 2, T(id=2000, name="Bronze Axe", quality=2, price=500, **{"class": 2}))
+        put(0, 3, T(id=3000, name="Rare Ring", quality=3, price=900, **{"class": 4}))
+        e.g.ContainerFrame1.Show(e.g.ContainerFrame1)
+        e.update(0.5)
+        return e
+
+    def stick(self, e, held):
+        b = e.g.ControllerCamHUD_StickKey
+        b.scripts.OnClick(b, "LeftButton", True)
+        e.update(held)
+        b.scripts.OnClick(b, "LeftButton", False)
+
+    def asked(self, e):
+        v = e.ns.Dialog.visible
+        return v.which if v else None
+
+    def buttons(self, e):
+        spec = e.ns.Dialog.visible.dialog
+        return [spec.button1, spec.button2, spec.button3, spec.button4]
+
+    def key(self, e, key):
+        b = e.g["ControllerCamHUD_Key_Ask_" + key]
+        b.scripts.OnClick(b)
+
+    def test_a_tap_still_sorts_and_a_hold_on_an_item_asks_about_it(self):
+        e = self.env()
+        self.assertEqual(e.mock.overrides.PADRSTICK, "CLICK ControllerCamHUD_StickKey:LeftButton")
+        e.mock.pointAt(0, 1)
+        self.stick(e, 0.1)                                           # a tap: the bags are sorted, nothing asked
+        self.assertIn("sorted", list(e.mock.printed.values())[-1])
+        self.assertIsNone(self.asked(e))
+        self.stick(e, 0.8)                                           # a hold: asked about the item
+        self.assertEqual(self.asked(e), "CCHUD_ITEM")
+        self.assertIn("Linen Cloth", e.ns.Dialog.visible.text)
+        self.assertEqual(self.buttons(e), ["Item details", "Close", "Change mark", "More"])
+        self.assertEqual(e.errors(), [])
+
+    def test_a_hold_on_nothing_does_what_a_tap_does(self):
+        e = self.env()
+        e.mock.pointAt(None)
+        self.stick(e, 0.8)
+        self.assertIsNone(self.asked(e))
+        self.assertIn("sorted", list(e.mock.printed.values())[-1])
+        self.assertEqual(e.errors(), [])
+
+    def test_with_the_switch_off_the_hold_is_gone(self):
+        e = self.env()
+        e.cmd("padactions off")
+        e.update(0.5)
+        self.assertEqual(e.mock.overrides.PADRSTICK, "CCHUD_SORT")   # the sort binding itself, as before
+        e.cmd("padsort off")
+        e.update(0.5)
+        self.assertIsNone(e.mock.overrides.PADRSTICK)                # and R3 is never taken for the hold alone
+        self.assertEqual(e.errors(), [])
+
+    def test_with_the_hold_off_a_press_moves_once(self):
+        e = self.env()
+        e.cmd("padactions off")
+        e.mock.openBank(True)
+        e.update(0.5)
+        e.mock.pointAt(0, 1)
+        self.stick(e, 0.8)                                           # pressed and let go: one move, as let go
+        self.assertEqual(list(e.mock.moved.values()), [2589])
+        self.assertIsNone(self.asked(e))
+        self.assertEqual(e.errors(), [])
+
+    def test_the_hold_is_told_of_once(self):
+        e = self.env()
+        told = [m for m in e.mock.printed.values() if "Hold R3 on an item" in m]
+        self.assertEqual(len(told), 1)
+        e.g.ContainerFrame1.Hide(e.g.ContainerFrame1)
+        e.update(0.5)
+        e.g.ContainerFrame1.Show(e.g.ContainerFrame1)
+        e.update(0.5)
+        self.assertEqual(len([m for m in e.mock.printed.values() if "Hold R3 on an item" in m]), 1)
+        self.assertTrue(e.db.actionsTold)
+
+    def test_try_on_and_the_mark(self):
+        e = self.env()
+        e.mock.pointAt(0, 2)
+        e.g.ControllerCamHUD_ItemActions()                           # the key binding
+        self.assertEqual(self.buttons(e), ["Try on", "Close", "Change mark", "More"])
+        self.key(e, "PAD3")                                          # the mark: junk, and asked again
+        self.assertTrue(e.db.sell.junk[2000])
+        self.assertEqual(self.asked(e), "CCHUD_ITEM")
+        self.assertIn("Your mark: junk", e.ns.Dialog.visible.text)
+        self.key(e, "PAD1")
+        self.assertEqual(len(list(e.mock.tried.values())), 1)
+        self.assertIn("item:2000", e.mock.tried[1])
+        self.assertIsNone(self.asked(e))
+        self.assertEqual(e.errors(), [])
+
+    def test_destroy_takes_three_different_buttons(self):
+        e = self.env()
+        e.mock.pointAt(0, 1)
+        e.cmd("itemmenu")
+        self.key(e, "PAD4")                                          # More
+        self.assertEqual(self.asked(e), "CCHUD_ITEM_MORE")
+        self.key(e, "PAD3")                                          # Destroy
+        self.assertEqual(self.asked(e), "CCHUD_ITEM_DESTROY")
+        self.assertIn("Destroy", e.ns.Dialog.visible.text)
+        self.assertIn("x20", e.ns.Dialog.visible.text)
+        self.key(e, "PAD1")                                          # the first button again: only closes
+        self.assertIsNone(self.asked(e))
+        self.assertEqual(list(e.mock.deleted.values()), [])
+        e.cmd("itemmenu")
+        self.key(e, "PAD4")
+        self.key(e, "PAD3")
+        self.key(e, "PAD4")                                          # Destroy, on a button of its own
+        self.assertEqual(list(e.mock.deleted.values()), [2589])
+        self.assertIsNone(e.mock.cursor)
+        self.assertTrue(any("Destroyed" in m for m in e.mock.printed.values()))
+        self.assertEqual(e.errors(), [])
+
+    def test_what_is_never_destroyed(self):
+        e = self.env()
+        A = e.ns.ItemActions
+        self.assertTrue(A.CanDestroy(A.Entry(0, 1)))
+        self.assertFalse(A.CanDestroy(A.Entry(0, 3)))                # rare: the game's own way, with DELETE
+        e.db.sell.keep[2589] = True
+        self.assertFalse(A.CanDestroy(A.Entry(0, 1)))                # marked as kept
+        e.db.sell.keep[2589] = None
+        e.mock.state.combat = True
+        self.assertFalse(A.CanDestroy(A.Entry(0, 1)))
+        e.mock.state.combat = False
+        e.mock.bags[0][2].inSet, e.mock.bags[0][2].bound = True, True
+        self.assertFalse(A.CanDestroy(A.Entry(0, 2)))
+        e.mock.pointAt(0, 3)
+        e.cmd("itemmenu")
+        self.assertEqual(self.buttons(e), ["Item details", "Close", "Change mark", None])
+        self.assertEqual(e.errors(), [])
+
+    def test_a_slot_that_changed_or_a_game_that_refuses_destroys_nothing(self):
+        e = self.env()
+        A = e.ns.ItemActions
+        asked = A.Entry(0, 1)
+        e.mock.bags[0][1].count = 3                                  # the stack changed since it was asked about
+        self.assertFalse(A.Destroy(asked))
+        self.assertEqual(list(e.mock.deleted.values()), [])
+        e.mock.keep = True                                           # the game will not delete it
+        self.assertFalse(A.Destroy(A.Entry(0, 1)))
+        self.assertIsNone(e.mock.cursor)                             # and nothing is left on the cursor
+        self.assertTrue(any("The game kept" in m for m in e.mock.printed.values()))
+        self.assertEqual(e.errors(), [])
+
+    def test_the_games_cursor_names_the_item_where_the_pointer_does_not(self):
+        e = self.env()
+        e.mock.pointAt(None)
+        e.lua.execute("""
+            local b = CreateFrame("Button", nil, ContainerFrame1)
+            b.GetBagID = function() return 0 end
+            b.GetID = function() return 2 end
+            HIDDEN = false
+            SmartNavigation = { GetCurrentButton = function() return b end,
+                                IsCursorHidden = function() return HIDDEN end }""")
+        self.assertTrue(e.ns.ItemActions.Open(e.ns.ItemActions))
+        self.assertIn("Bronze Axe", e.ns.Dialog.visible.text)
+        e.ns.Dialog.Close("override")
+        e.g.HIDDEN = True                                            # (the cursor not in use: nothing pointed at)
+        self.assertFalse(e.ns.ItemActions.Open(e.ns.ItemActions))
+        self.assertEqual(e.errors(), [])
+
+    def test_the_newer_banks_buttons_are_known_by_their_own_methods(self):
+        e = self.env()
+        slot = e.lua.eval("""function(SlotOf)
+            local b = CreateFrame("Button")
+            b.GetBankTabID = function() return 6 end
+            b.GetContainerSlotID = function() return 4 end
+            return SlotOf(b) end""")(e.ns.ItemActions.SlotOf)
+        self.assertEqual(tuple(slot), (6, 4))
+
+    def test_nothing_in_a_fight_and_nothing_once_the_hud_is_off(self):
+        e = self.env()
+        e.mock.pointAt(0, 1)
+        e.mock.state.combat = True
+        self.assertFalse(e.ns.ItemActions.Open(e.ns.ItemActions))
+        e.mock.state.combat = False
+        e.cmd("itemmenu")
+        self.assertEqual(self.asked(e), "CCHUD_ITEM")
+        e.cmd("off")
+        self.assertIsNone(self.asked(e))
+        self.assertEqual(e.errors(), [])
+
+
+class BagProbe(unittest.TestCase):
+    """/cchud bagprobe: what the game's own bags, bank and menus are here (read only), kept for the next reload."""
+
+    def test_it_notes_the_menu_functions_the_cursor_and_an_open_menu_then_stops(self):
+        e = Env()
+        e.lua.execute("""
+            local menu = CreateFrame("Frame", nil, UIParent)
+            menu.GetMenuDescription = function() return { GetTag = function() return "MENU_TEST_ITEM" end } end
+            local words = menu:CreateFontString()
+            words.text = "Split Stack"
+            words.GetText = function(self) return self.text end
+            OPEN = false
+            Menu = { ModifyMenu = function() error("never called") end, GetManager = function()
+                return { IsAnyMenuOpen = function() return OPEN end, GetOpenMenu = function() return menu end } end }
+            local b = CreateFrame("Button", nil, ContainerFrame1)
+            b.GetBagID = function() return 0 end
+            b.GetID = function() return 1 end
+            SmartNavigation = { GetCurrentButton = function() return b end }
+            ContainerFrame1:Show()""")
+        e.cmd("bagprobe")
+        out = e.db.nativeProbe
+        self.assertEqual(out.exists["Menu.ModifyMenu"], "function")
+        self.assertEqual(out.exists["Menu.PrintOpenMenuTags"], "nil")
+        e.update(1)
+        self.assertEqual(len(list(out.menus.values())), 0)
+        e.g.OPEN = True
+        e.update(1)
+        menus = list(out.menus.values())
+        self.assertEqual(len(menus), 1)
+        self.assertEqual(menus[0].tag, "MENU_TEST_ITEM")
+        self.assertIn("Split Stack", menus[0].words)
+        self.assertIsNotNone(out.windows.ContainerFrame1)
+        cursor = list(out.cursor.values())[0]
+        self.assertEqual(cursor.slotFound, "0 1")
+        e.update(95)
+        self.assertTrue(any("Done looking" in m for m in e.mock.printed.values()))
+        self.assertIsNone(e.ns.BagProbe.out)
+        self.assertEqual(list(out.errors.values()), [])
+        self.assertEqual(e.errors(), [])
+
+    def test_a_client_with_none_of_it_is_only_noted(self):
+        e = Env()
+        e.cmd("bagprobe")
+        e.update(2)
+        self.assertEqual(e.db.nativeProbe.exists["Menu.ModifyMenu"], "nil")
+        self.assertEqual(e.errors(), [])
+
+
 class SelfManaging(unittest.TestCase):
     """A handler that keeps failing steps aside instead of failing on every frame, then is tried again."""
 
@@ -18229,6 +18632,564 @@ class CraftValue(unittest.TestCase):
         self.assertEqual(P.Cost(2880)[0], 60)
         again = Env(db=e.mock.serialize(e.g.ControllerCamHUDDB))        # kept with your settings
         self.assertEqual(again.db.merchantPrice[2880], 100)
+        self.assertEqual(e.errors(), [])
+
+
+class CookingRecipes(unittest.TestCase):
+    """A Cooking or First Aid drop is kept for a recipe you could still learn, and says where to get it."""
+
+    ITEMS = {12037: "Mystery Meat", 12232: "Recipe: Carrion Surprise", 12213: "Carrion Surprise",
+             12214: "Mystery Stew", 12217: "Dragonbreath Chili", 2673: "Coyote Meat", 2678: "Mild Spices",
+             16072: "Expert Cookbook", 6291: "Raw Brilliant Smallfish", 4306: "Silk Cloth"}
+
+    def env(self, rank=180, cap=225, faction="Horde", prof="Cooking"):
+        e = Env()
+        T = e.lua.table
+        for id, name in self.ITEMS.items():
+            e.mock["items"][id] = T(name=name, quality=1, price=40, stack=10, **{"class": 7})
+        self.skill(e, rank, cap, prof)
+        e.db.inventory["Ghostlight-Forever"].faction = faction
+        e.db.auction[12037] = T(p=900, t=e.g.time())
+        return e
+
+    def skill(self, e, rank, cap=225, prof="Cooking"):
+        e.mock.skills = e.lua.table_from([e.lua.table(name=prof, rank=rank, cap=cap)])
+        e.mock.fire("SKILL_LINES_CHANGED")
+        e.update(0.5)
+
+    def advice(self, e, id):
+        lines = [plain(list(l.values())[0]) for l in e.mock.itemTooltip(id).values()]
+        return lines[lines.index("Recommendation:") + 1:]
+
+    def test_every_recipe_of_the_cooking_and_first_aid_guides_is_known(self):
+        e = Env()
+        for kind in ("cooking", "firstaid"):
+            for step in e.ns.LevelGuides[kind].values():
+                for o in [step] + list((step.alts or {}).values()):
+                    if not o.p:
+                        continue
+                    rec = e.ns.Recipes.For(kind, o.p)
+                    self.assertTrue(rec, "%s: %s" % (kind, o.name))
+                    self.assertEqual(sorted(o.r.values()), sorted(rec.r.values()), o.name)
+        for kind in ("cooking", "firstaid"):
+            for rec in e.ns.RecipeData[kind].values():                 # every one can be learned somewhere
+                self.assertTrue(e.ns.Recipes.Source(rec, None) or rec.raid, rec.name)
+
+    def test_mystery_meat_is_kept_and_says_where_the_recipe_is_sold(self):
+        e = self.env()
+        advice = self.advice(e, 12037)
+        self.assertEqual(advice, [
+            "Keep", "Cooking: makes Carrion Surprise (needs 175, you're at 180)",
+            "The recipe is sold by Ogg'marr in Brackenwall Village, Dustwallow Marsh (more sellers: 2)",
+            "Also goes into Dragonbreath Chili (200), Mystery Stew (175)", "could fetch 9s at the auction house"])
+        self.assertKept(e.ns.Market, 12037)
+        lines = [[plain(x) for x in l.values()] for l in e.ns.Market.Lines(12037).values()]
+        self.assertIn(["", "The recipe is sold by Ogg'marr in Brackenwall Village, Dustwallow Marsh (more sellers: 2)"],
+                      lines)
+        e.db.inventory["Ghostlight-Forever"].faction = "Alliance"      # the other side's vendors
+        self.assertEqual(self.advice(e, 12037)[1:3], [
+            "Cooking: makes Mystery Stew (needs 175, you're at 180)",
+            "The recipe is sold by Helenia Olden in Theramore Isle, Dustwallow Marsh (more sellers: 2)"])
+        self.assertEqual(e.errors(), [])
+
+    def test_a_vendor_in_your_zone_is_named_first_and_walking_traders_last(self):
+        e = self.env()
+        e.mock.zone = "Desolace"
+        self.assertEqual(self.advice(e, 12037)[2],
+                         "The recipe is sold by Kireena in Ghost Walker Post, Desolace (more sellers: 2)")
+        R = e.ns.Recipes
+        stew = R.For("cooking", 12214)                                   # a Horde cook: only the walking trader
+        source = R.Source(stew, "H")
+        self.assertEqual((source.how, source.order), ("vendor", 4))
+        self.assertEqual(R.Where(source, "Cooking"),
+                         "The recipe is sold by Super-Seller 680, who walks the road in Desolace")
+        self.assertEqual(e.errors(), [])
+
+    def test_a_trainers_recipe_a_known_one_and_one_that_has_gone_green(self):
+        e = self.env(rank=60, cap=150)
+        self.assertEqual(self.advice(e, 2673)[:3], ["Keep", "Cooking: makes Coyote Steak (needs 50, you're at 60)",
+                                                    "Any Cooking trainer teaches it"])
+        self.skill(e, 115, 150)                                        # Coyote Steak is green: not kept for it
+        self.assertIsNone(e.ns.Recipes.Keep(2673))
+        self.skill(e, 180)
+        e.lua.eval("""function(db)
+            db.skillKnown = { ["Ghostlight-Forever"] = { cooking = { ["Carrion Surprise"] = 12213 } } }
+        end""")(e.db)
+        self.assertEqual(self.advice(e, 12037)[1], "Cooking: your Carrion Surprise still gives a skill-up")
+        self.assertIsNone(e.ns.Recipes.Book(12232))                    # you know it: its recipe is not kept
+        self.skill(e, 280, 300)                                        # past every Mystery Meat recipe
+        self.assertIsNone(e.ns.Recipes.Keep(12037))
+        self.assertEqual(e.errors(), [])
+
+    def test_a_recipe_far_off_is_a_note_under_the_usual_advice(self):
+        e = self.env(rank=40, cap=75)
+        self.assertIsNone(e.ns.Recipes.Keep(12037))
+        advice = self.advice(e, 12037)
+        self.assertIn("Later, Cooking: makes Carrion Surprise at 175 (you're at 40)", advice)
+        self.assertIn("The recipe is sold by Ogg'marr in Brackenwall Village, Dustwallow Marsh (more sellers: 2)",
+                      advice)
+        e.db.adviceUnsure = 2                                          # sold when nothing says keep: still noted
+        self.assertEqual(e.ns.Market.Verdict(12037)[0], "auction")
+        self.assertIn("Later, Cooking: makes Carrion Surprise at 175 (you're at 40)", self.advice(e, 12037))
+        self.assertEqual(e.errors(), [])
+
+    def test_another_character_of_yours_cooks_and_nobody_does(self):
+        e = self.env(rank=10, prof="Alchemy")                          # you do not cook
+        self.assertIsNone(e.ns.Recipes.Keep(12037))
+        T = e.lua.table
+        e.db.inventory["Sol-Forever"] = T(bags=T(), bank=T(), faction="Horde",
+                                          prof=T(cooking=T(name="Cooking", rank=190, cap=225)))
+        self.assertEqual(self.advice(e, 12037)[1], "Sol's Cooking: makes Carrion Surprise (needs 175, now at 190)")
+        self.assertEqual(self.advice(e, 12232)[1], "teaches Carrion Surprise (Cooking 175, for Sol, now at 190)")
+        e.cmd("skillkeep off")
+        self.assertIsNone(e.ns.Recipes.Keep(12037))
+        self.assertIsNone(e.ns.Recipes.Book(12232))
+        self.assertEqual(e.errors(), [])
+
+    def test_a_recipe_item_and_a_skill_book_are_kept_for_who_can_use_them(self):
+        e = self.env(rank=140, cap=150)
+        self.assertEqual(self.advice(e, 12232)[:2], ["Keep", "teaches Carrion Surprise (Cooking 175, you're at 140)"])
+        self.assertEqual(self.advice(e, 16072)[:2], ["Keep", "raises your Cooking to 225 (your cap is 150)"])
+        self.skill(e, 180, 225)                                        # you have it already
+        self.assertIsNone(e.ns.Recipes.Book(16072))
+        self.assertEqual(e.errors(), [])
+
+    def test_first_aid_too(self):
+        e = self.env(rank=160, prof="First Aid")
+        self.assertEqual(self.advice(e, 4306)[1:3], [
+            "First Aid: makes Silk Bandage (needs 150, you're at 160)", "Any First Aid trainer teaches it"])
+        self.skill(e, 180, prof="First Aid")                           # Silk Bandage green now: the manual's
+        self.assertEqual(self.advice(e, 4306)[1:3], [
+            "First Aid: makes Heavy Silk Bandage (needs 180, you're at 180)",
+            "The recipe is sold by Balai Lok'Wein in Brackenwall Village, Dustwallow Marsh"])
+        self.assertEqual(e.errors(), [])
+
+    def test_where_a_material_comes_from(self):
+        e = self.env()
+        R = e.ns.Recipes
+        self.assertEqual(R.How(6291), "auction")                       # fish, and you do not fish
+        self.assertEqual(tuple(R.How(2678)), ("vendor", "trade supply vendors sell it"))
+        self.assertEqual(R.How(12037), "auction")                      # meat: no profession brings it in
+        e.mock.skills = e.lua.table_from([e.lua.table(name="Cooking", rank=180, cap=225),
+                                          e.lua.table(name="Fishing", rank=90, cap=150)])
+        e.mock.fire("SKILL_LINES_CHANGED")
+        e.update(0.5)
+        self.assertEqual(tuple(R.How(6291)), ("farm", "Fishing"))
+        self.assertEqual(e.db.gatherSkills["Ghostlight-Forever"].fishing.rank, 90)
+        self.assertEqual(len(e.ns.Professions.Unread()), 1)            # (fishing has no window to open)
+        e.lua.execute("""
+            GetMerchantNumItems = function() return 1 end
+            GetMerchantItemLink = function() return "|Hitem:2678|h[x]|h" end
+            GetMerchantItemInfo = function() return "x", 1, 10, 1, -1, true, true, false end""")
+        e.mock.setUnit("npc", e.lua.table(name="Zargh"))
+        e.mock.zone = "The Barrens"
+        e.mock.openMerchant(True)
+        self.assertEqual(tuple(R.How(2678)), ("vendor", "last seen sold by Zargh in The Barrens"))
+        again = Env(db=e.mock.serialize(e.g.ControllerCamHUDDB))
+        self.assertEqual(again.db.merchantSeen[2678][1], "Zargh")
+        self.assertEqual(again.db.gatherSkills["Ghostlight-Forever"].fishing.rank, 90)
+        self.assertEqual(e.errors(), [])
+
+
+class CookingMentor(unittest.TestCase):
+    """The Mentor's materials: the most you could need, and farm, vendor or auction on every line."""
+
+    WINDOW = """
+        RECIPES = {
+            { name = "Cooking" },
+            { name = "Longjaw Mud Snapper", kind = "optimal", reagents = { 6289 }, need = { 1 }, product = 4592 },
+        }
+        TRADE = { "Cooking", 51, 75 }
+        GetTradeSkillLine = function() return TRADE[1], TRADE[2], TRADE[3] end
+        GetNumTradeSkills = function() return #RECIPES end
+        GetTradeSkillInfo = function(i) local r = RECIPES[i]; return r.name, r.kind or "header", 0, false, nil, r.ups end
+        GetTradeSkillNumReagents = function(i) return #(RECIPES[i].reagents or {}) end
+        GetTradeSkillReagentItemLink = function(i, k) return "|Hitem:" .. RECIPES[i].reagents[k] .. "|h[x]|h" end
+        GetTradeSkillReagentInfo = function(i, k) return "x", 1, RECIPES[i].need[k], 0 end
+        GetTradeSkillItemLink = function(i) return RECIPES[i].product and ("|Hitem:" .. RECIPES[i].product .. "|h[x]|h") end
+        GetTradeSkillNumMade = function(i) return 1, 1 end
+    """
+
+    def env(self, fishing=False, guide=None):
+        def setup(env):
+            env.lua.execute(self.WINDOW)
+        e = Env(setup=setup)
+        if guide:
+            e.lua.eval("function(ns) " + guide + " end")(e.ns)
+        T = e.lua.table
+        skills = [T(name="Cooking", rank=51, cap=75)]
+        if fishing:
+            skills.append(T(name="Fishing", rank=75, cap=150))
+        e.mock.skills = e.lua.table_from(skills)
+        for id, name in ((6289, "Raw Longjaw Mud Snapper"), (12037, "Mystery Meat"), (2678, "Mild Spices")):
+            e.mock["items"][id] = T(name=name, stack=20, **{"class": 7})
+        e.mock.fire("PLAYER_ENTERING_WORLD")
+        e.update(0.5)
+        e.window = e.g.CreateFrame("Frame", "TradeSkillFrame", e.g.UIParent)
+        e.window.shown = True
+        e.mock.fire("TRADE_SKILL_SHOW")
+        e.update(0.5)
+        return e
+
+    def rows(self, e):
+        LV = e.ns.Levelling
+        LV.Refresh(LV)
+        return [(plain(r.text.text), plain(r.right.text)) for r in LV.rows.values() if r.shown]
+
+    def test_the_worst_case_covers_the_points_that_may_not_come(self):
+        e = self.env()
+        LV = e.ns.Levelling
+        self.assertEqual(LV.Worst(10, 0), 10)                          # all orange: certain
+        self.assertEqual(LV.Worst(12.5, 4), 17)                        # 12.5 on average, two spreads more
+        step = LV.plan.steps[1]
+        # 51 to 75 with Longjaw Mud Snapper (yellow from 90): orange all the way, a point each
+        self.assertEqual((step.rec.n, step.crafts, LV.plan.need[6289]), ("Longjaw Mud Snapper", 24, 24))
+        guided = LV.Plan(LV.read)
+        guided.rank = 51
+        e.lua.execute("TRADE = { 'Cooking', 95, 150 }")
+        e.mock.fire("TRADE_SKILL_UPDATE")
+        e.update(0.5)
+        yellow = LV.plan.steps[1]
+        self.assertGreater(yellow.crafts, yellow.to - yellow["from"])   # past 90 it is not a point every time
+        self.assertEqual(e.errors(), [])
+
+    def test_every_material_says_farm_vendor_or_auction(self):
+        e = self.env()
+        rows = self.rows(e)
+        self.assertIn(("Raw Longjaw Mud Snapper  (auction)", "up to 24"), rows)
+        self.assertIn("Still needed to reach 75, at most:", [r[0] for r in rows])
+        e = self.env(fishing=True)
+        self.assertIn(("Raw Longjaw Mud Snapper  (farm)", "up to 24"), self.rows(e))
+        LV = e.ns.Levelling
+        LV.Focus(LV, True)
+        LV.Choose(LV, len(list(LV.entries.values())))
+        detail = plain(e.g.ControllerCamHUD_SkillPlanPanel.detail.text)
+        self.assertEqual(detail, "Raw Longjaw Mud Snapper: at most 24 to reach 75. You have 0, so 24 more at most."
+                                 "\nFarm it: your Fishing brings it in.")
+        self.assertEqual(LV.HowWords(e.lua.table(how="farm", route=e.lua.table_from(
+            [e.lua.table(id=6289, n=12), e.lua.table(id=12037, n=2)]))), "farm: Raw Longjaw Mud Snapper x12, ...")
+        self.assertEqual(LV.HowWords(e.lua.table(how="farm", buy=True)), "farm")   # never turned into "buy it"
+        self.assertEqual(LV.HowSentence(2678), "Buy it from a vendor: trade supply vendors sell it.")
+        e.db.auction[12037] = e.lua.table(p=900, t=e.g.time())
+        self.assertEqual(LV.HowSentence(12037), "Buy it at the auction house (9s each when last seen).")
+        self.assertEqual(e.errors(), [])
+
+    def test_a_recipe_to_learn_says_who_sells_it(self):
+        e = self.env(guide="""ns.LevelGuides = { cooking = {
+            { 1, 300, p = 12213, n = 400, learn = "vendor", at = 175, r = { 12037, 1, 2692, 1 }, name = "Carrion Surprise" },
+        } }""")
+        LV = e.ns.Levelling
+        rows = self.rows(e)
+        self.assertIn("up to x", rows[0][0])
+        self.assertIn("(auction)", [t for t, _ in rows if t.startswith("Mystery Meat")][0])
+        self.assertIn("(vendor)", [t for t, _ in rows if t.startswith("item 2692")][0])
+        LV.Focus(LV, True)
+        LV.Choose(LV, 1)
+        self.assertIn("Learn it at 175. The recipe is sold by Ogg'marr in Brackenwall Village, Dustwallow Marsh",
+                      plain(e.g.ControllerCamHUD_SkillPlanPanel.detail.text))
+        self.assertEqual(e.errors(), [])
+
+
+class MentorGrey(unittest.TestCase):
+    """The game's colour wins over the guide: a recipe it rates grey never teaches and never gets an arrow."""
+
+    # Leatherworking 106/150, as in the game: Cured Medium Hide is grey, the guide still has it for 100-115
+    WINDOW = """
+        RECIPES = {
+            { name = "Reagents" },
+            { name = "Cured Medium Hide", kind = "trivial", reagents = { 4232, 4289 }, need = { 1, 1 }, product = 4233 },
+            { name = "Medium Leather", kind = "trivial", reagents = { 2318 }, need = { 4 }, product = 2319 },
+            { name = "Fine Leather Belt", kind = "trivial", reagents = { 2318, 2320 }, need = { 6, 2 }, product = 4246 },
+            { name = "Fine Leather Tunic", kind = "easy", reagents = { 2318, 2321 }, need = { 3, 4 }, product = 4243 },
+            { name = "Gray Leather Boots", kind = "medium", reagents = { 2319, 2321 }, need = { 4, 2 }, product = 2315 },
+        }
+        TRADE = { "Leatherworking", 106, 150 }
+        GetTradeSkillLine = function() return TRADE[1], TRADE[2], TRADE[3] end
+        GetNumTradeSkills = function() return #RECIPES end
+        GetTradeSkillInfo = function(i) local r = RECIPES[i]; return r.name, r.kind or "header", 0, false, nil, r.ups end
+        GetTradeSkillNumReagents = function(i) return #(RECIPES[i].reagents or {}) end
+        GetTradeSkillReagentItemLink = function(i, k) return "|Hitem:" .. RECIPES[i].reagents[k] .. "|h[x]|h" end
+        GetTradeSkillReagentInfo = function(i, k) return "x", 1, RECIPES[i].need[k], 0 end
+        GetTradeSkillItemLink = function(i) return RECIPES[i].product and ("|Hitem:" .. RECIPES[i].product .. "|h[x]|h") end
+        GetTradeSkillNumMade = function(i) return 1, 1 end
+    """
+
+    NAMES = {4232: "Medium Hide", 4289: "Salt", 4233: "Cured Medium Hide", 2318: "Light Leather",
+             2319: "Medium Leather", 2320: "Coarse Thread", 2321: "Fine Thread", 4246: "Fine Leather Belt",
+             4249: "Dark Leather Belt", 4340: "Gray Dye", 2934: "Ruined Leather Scraps", 2315: "Dark Leather Boots"}
+
+    def env(self, change=""):
+        e = Env(setup=lambda env: env.lua.execute(self.WINDOW + change))
+        T = e.lua.table
+        e.mock.skills = e.lua.table_from([T(name="Leatherworking", rank=106, cap=150)])
+        for id, name in self.NAMES.items():
+            e.mock["items"][id] = T(name=name, stack=20, **{"class": 7})
+        e.mock.fire("PLAYER_ENTERING_WORLD")
+        e.update(0.5)
+        e.window = e.g.CreateFrame("Frame", "TradeSkillFrame", e.g.UIParent)
+        e.window.shown = True
+        e.mock.fire("TRADE_SKILL_SHOW")
+        e.update(0.5)
+        return e
+
+    def rows(self, e):
+        LV = e.ns.Levelling
+        LV.Refresh(LV)
+        return [(str(r.text.text), plain(r.right.text)) for r in LV.rows.values() if r.shown]
+
+    def test_a_grey_recipe_is_made_for_a_later_step_and_teaches_nothing(self):
+        e = self.env()
+        LV = e.ns.Levelling
+        plan = LV.plan
+        steps = list(plan.steps.values())
+        self.assertNotIn("Cured Medium Hide", [s.rec.n for s in steps])
+        for s in steps:
+            self.assertGreaterEqual(s.colour, 1, s.rec.n)
+        self.assertEqual(steps[0]["from"], 106)                        # its points go to a recipe that teaches
+        self.assertIn(steps[0].rec.n, ("Gray Leather Boots", "Fine Leather Tunic"))
+        for a, b in zip(steps, steps[1:]):
+            self.assertEqual(a.to, b["from"])
+        self.assertEqual(steps[-1].to, 150)
+        m = plan.makes[1]
+        self.assertEqual((m.rec.n, m.wants), ("Cured Medium Hide", "Dark Leather Belt"))
+        belt = steps[-1]
+        self.assertEqual((belt.rec.n, m.count, m.crafts), ("Dark Leather Belt", belt.crafts, belt.crafts))
+        rows = self.rows(e)
+        hide = [(t, n) for t, n in rows if t.startswith("Cured Medium Hide  x")]
+        self.assertEqual(len(hide), 1)
+        self.assertEqual(plain(hide[0][0]), "Cured Medium Hide  x%d  make for Dark Leather Belt" % belt.crafts)
+        self.assertEqual(hide[0][1], "")                               # no skill range
+        for text, right in rows:
+            if "Cured Medium Hide" in text:
+                self.assertNotIn("|A:", text)                          # and no skill-up arrow
+                self.assertNotIn("-", right)
+        self.assertNotIn("Cured Medium Hide", LV.Words(plan))
+        self.assertEqual(plan.raw[4232], belt.crafts)                  # its materials are still listed
+        self.assertEqual(plain(LV.RecipeText("Old", 0)), "Old")
+        LV.Focus(LV, True)
+        at = next(i for i, x in enumerate(LV.entries.values(), 1) if x.mat)
+        LV.Choose(LV, at)
+        self.assertIn("Grey for you now, so it gives no skill points. Make it for Dark Leather Belt.",
+                      plain(e.g.ControllerCamHUD_SkillPlanPanel.detail.text))
+        LV.Farm(LV, False)
+        self.assertEqual(sorted(x.id for x in e.db.farm.values()), [4232, 4289])
+        e.mock.put(0, 1, e.lua.table(id=4233, name="Cured Medium Hide", count=belt.crafts))
+        e.mock.fire("BAG_UPDATE_DELAYED")
+        e.update(0.5)
+        self.assertEqual(len(LV.Plan(LV.read).makes), 0)               # you hold them all: nothing to make
+        self.assertEqual(e.errors(), [])
+
+    # at 113 as in the game: the guide's boots have turned green, a rare belt of dropped scales is still orange
+    LATER = """
+        RECIPES[6].kind = "easy"
+        RECIPES[#RECIPES + 1] = { name = "Deviate Scale Belt", kind = "optimal", reagents = { 6470, 6471 },
+            need = { 10, 10 }, product = 6468 }
+        RECIPES[#RECIPES + 1] = { name = "Dark Leather Cloak", kind = "medium", reagents = { 2319, 2321, 4340 },
+            need = { 8, 1, 1 }, product = 2316 }
+        TRADE[2] = 113
+    """
+
+    def test_a_green_recipe_and_a_rare_one_give_way_to_a_yellow_one(self):
+        e = self.env(self.LATER)
+        LV = e.ns.Levelling
+        steps = list(LV.plan.steps.values())
+        self.assertEqual((steps[0].rec.n, steps[0]["from"]), ("Dark Leather Cloak", 113))
+        self.assertGreaterEqual(steps[0].to, 125)                      # the guide's green boots are passed over
+        self.assertNotIn("Deviate Scale Belt", [s.rec.n for s in steps])
+        self.assertNotIn("Gray Leather Boots", [s.rec.n for s in steps])
+        self.assertNotIn(6471, [i for i in LV.plan.need.keys()])
+        self.assertEqual(e.errors(), [])
+
+    def test_what_you_can_farm_counts_as_the_cheapest_and_is_never_to_buy(self):
+        e = self.env()
+        LV = e.ns.Levelling
+        e.lua.execute("""
+            local ns = ControllerCamHUD.ns
+            ns.db.auction = { [2319] = { p = 900, t = 0 }, [2318] = { p = 800, t = 0 }, [2321] = { p = 200, t = 0 } }
+        """)
+        self.assertEqual(LV.Effort(2319), 900)                         # bought: its price
+        e.lua.execute("""
+            local R = ControllerCamHUD.ns.Recipes
+            local how = R.How
+            R.How = function(id) if id == 2318 or id == 2319 then return "farm", "Skinning" end return how(id) end
+        """)
+        self.assertEqual((LV.Effort(2319), LV.Effort(2318)), (1, 1))   # farmed: next to nothing
+        self.assertEqual(LV.Effort(2321), 200)                         # thread is still bought
+        plan = e.lua.eval("""{ raw = { [2318] = 40 }, total = { [2318] = 40 }, made = { [2319] = 10 },
+            need = { [2319] = 10 }, via = { [2318] = 2319 } }""")
+        row = LV.Wanted(plan)[1]                                       # buying would be cheaper, but you farm it
+        self.assertFalse(row.buy)
+        self.assertEqual(row.how, "farm")
+        self.assertEqual(e.errors(), [])
+
+    def test_a_material_you_gather_is_not_broken_down_into_lesser_ones(self):
+        e = self.env()
+        LV = e.ns.Levelling
+        e.lua.execute("""
+            ControllerCamHUD.ns.db.skillMakes = { [2319] = { m = 1, k = "leatherworking", r = { [2318] = 4 } },
+                [2318] = { m = 1, k = "leatherworking", r = { [2934] = 3 } } }
+            local R = ControllerCamHUD.ns.Recipes
+            R.How = function(id) if id == 2318 or id == 2319 or id == 2934 then return "farm", "Skinning" end return "auction" end
+        """)
+        need = e.lua.eval("{ [2319] = 20 }")
+        raw, total, made, via = LV.Breakdown(need)
+        self.assertEqual(dict(raw.items()), {2319: 20})                # skinned as it is
+        self.assertEqual(total[2319], 20)
+        e.mock.put(0, 1, e.lua.table(id=2318, name="Light Leather", count=9))   # parts you hold are used first
+        e.mock.fire("BAG_UPDATE_DELAYED")
+        e.update(0.5)
+        raw, total, made, via = LV.Breakdown(need)
+        self.assertEqual(dict(raw.items()), {2319: 18})                # two are made from what you hold
+        self.assertEqual(total[2319], 20)
+        self.assertEqual(e.errors(), [])
+
+    def test_a_recipe_that_sells_well_wears_the_coin(self):
+        e = self.env()
+        LV = e.ns.Levelling
+        rec = next(r for r in LV.read.list.values() if r.n == "Fine Leather Belt")     # grey, 6 leather, 2 thread
+        self.assertIsNone(LV.Sells(rec))                               # no prices: no flag
+        e.lua.execute("""
+            ControllerCamHUD.ns.db.auction = { [4246] = { p = 10000, t = 0 }, [2318] = { p = 100, t = 0 },
+                [2320] = { p = 100, t = 0 } }
+        """)
+        worth = LV.Sells(rec)
+        self.assertEqual((worth.income, worth.cost, worth.profit), (9500, 800, 8700))
+        rows = self.rows(e)
+        self.assertIn("Worth making to sell:", [plain(t) for t, _ in rows])
+        belt = [(t, n) for t, n in rows if "UI-GoldIcon" in t and "Fine Leather Belt" in t]
+        self.assertEqual(len(belt), 1)
+        self.assertIn("87s", plain(belt[0][1]))
+        LV.Focus(LV, True)
+        LV.Choose(LV, next(i for i, x in enumerate(LV.entries.values(), 1) if x.sell))
+        self.assertIn("Sells well: about 87s profit each", plain(e.g.ControllerCamHUD_SkillPlanPanel.detail.text))
+        self.assertEqual(LV.Farm(LV, False), 0)
+        e.lua.execute("ControllerCamHUD.ns.db.auction[4246].p = 1000")  # barely above its materials
+        self.assertIsNone(LV.Sells(rec))
+        self.assertEqual(e.errors(), [])
+
+    def test_a_recipe_you_do_not_have_says_where_to_get_it(self):
+        e = self.env()                                                # Dark Leather Belt asks for 125; you're at 106
+        LV = e.ns.Levelling
+        belt = next(t for t, _ in self.rows(e) if "Dark Leather Belt  up to" in plain(t))
+        self.assertIn("|cffff2020^|r", belt)                          # beyond your skill: the red mark
+        self.assertNotIn("ActiveQuestIcon", belt)
+        self.assertIn("\n", belt)                                    # and where to get it, on its own line
+        self.assertIn("Learn it at a trainer, at 125.", plain(belt))
+        e.lua.execute("""
+            C_Texture = C_Texture or {}
+            C_Texture.GetAtlasInfo = function() return { file = 4200, leftTexCoord = 0, rightTexCoord = 0.5,
+                topTexCoord = 0.25, bottomTexCoord = 0.75 } end
+        """)
+        self.assertEqual(LV.RedArrow(), "|T4200:12:12:0:0:1024:1024:0:512:256:768:255:40:40|t")
+        plan = LV.plan
+        step = list(plan.steps.values())[-1]
+        plan.rank = 130                                               # now you could learn it: the game's "?"
+        self.assertIn("ActiveQuestIcon", LV.Unowned(plan, step.rec, step.learn))
+        self.assertEqual(e.errors(), [])
+
+    def test_a_hard_pick_has_an_easier_one_and_a_bought_one_beside_it(self):
+        e = self.env(self.LATER + """
+            RECIPES[#RECIPES + 1] = { name = "Hillman's Shoulders", kind = "optimal", reagents = { 2319, 4233 },
+                need = { 4, 1 }, product = 4251 }
+        """)
+        LV = e.ns.Levelling
+        e.lua.execute("""
+            local ns = ControllerCamHUD.ns
+            ns.db.skillMakes = ns.db.skillMakes or {}
+            ns.db.skillMakes[4233] = { m = 1, k = "leatherworking", r = { [4232] = 1, [4289] = 1 } }
+            local R = ns.Recipes
+            R.How = function(id) if id == 2319 or id == 4232 then return "farm", "Skinning" end
+                if id == 4289 or id == 2321 or id == 4340 then return "vendor" end return "auction" end
+        """)
+        usual = LV.Usual("leatherworking")
+        rec = {r.n: r for r in LV.read.list.values()}
+        hides = LV.Cost(rec["Hillman's Shoulders"], 20, usual)
+        self.assertEqual((LV.Hard(hides), hides.slow[4232]), ("slow", 20))
+        self.assertEqual(LV.Hard(LV.Cost(rec["Deviate Scale Belt"], 5, usual)), "auction")
+        self.assertIsNone(LV.Hard(LV.Cost(rec["Dark Leather Cloak"], 5, usual)))
+        plan = LV.Plan(LV.read)
+        first = plan.steps[1]
+        self.assertEqual(len(list(first.cost.auction.values())), 0)    # the plan itself: nothing to buy at auction
+        names = [a.rec.n for a in first.alts.values() if a.rec]
+        if LV.Hard(first.cost):
+            self.assertIn("Deviate Scale Belt", names)                  # beside it, for money to spend
+        self.assertNotIn("Deviate Scale Belt", [s.rec.n for s in plan.steps.values()])
+        LV.plan = plan
+        for text, right in self.rows(e):
+            if "Deviate Scale Belt" in text:
+                self.assertIn("[by auction]", text)
+        self.assertIn("you'd buy at the auction house",
+                      plain(LV.CostSentence(LV.Cost(rec["Deviate Scale Belt"], 5, usual))))
+        self.assertIn("A slow farm:", LV.CostSentence(hides))
+        self.assertEqual(e.errors(), [])
+
+    def test_a_green_or_rare_recipe_is_used_when_nothing_better_teaches(self):
+        e = self.env(self.LATER + "RECIPES[#RECIPES].kind = 'trivial'")       # no yellow cloak
+        LV = e.ns.Levelling
+        usual = LV.Usual("leatherworking")
+        fit = lambda name: LV.Fitness(next(r for r in LV.read.list.values() if r.n == name), usual)
+        self.assertEqual(fit("Gray Leather Boots"), 2)                 # green
+        self.assertEqual(fit("Deviate Scale Belt"), 3)                 # dropped scales, no guide uses them
+        steps = list(LV.plan.steps.values())
+        self.assertNotEqual(steps[0].rec.n, "Deviate Scale Belt")
+        self.assertEqual(e.errors(), [])
+
+    def test_no_recipe_of_yours_teaches_and_the_plan_says_so(self):
+        e = self.env("RECIPES[5].kind = 'trivial'; RECIPES[6].kind = 'trivial'")
+        plan = e.ns.Levelling.plan
+        steps = list(plan.steps.values())
+        for s in steps:
+            self.assertTrue(s.learn, s.rec.n)                          # only what is still to learn teaches
+            self.assertNotEqual(s.rec.n, "Cured Medium Hide")
+        covered = sum(s.to - s["from"] for s in steps)
+        self.assertEqual(plan.short or 0, 150 - 106 - covered)         # the rest is said to be short
+        self.assertGreater(plan.short, 0)
+        self.assertEqual(e.errors(), [])
+
+    def test_the_games_colour_wins_over_the_recipe_table(self):
+        e = Env()
+        LV = e.ns.Levelling
+        T = e.lua.table
+        rec = T(n="Longjaw Mud Snapper", p=4592, c=1, u=1)             # the table: orange at 60; the game: green
+        learned = T()
+        table = (90, 110, 130)
+        self.assertNotEqual(tuple(LV.Colours("cooking", rec, True, 60, learned)), table)
+        rec.c = 3
+        self.assertEqual(tuple(LV.Colours("cooking", rec, True, 60, learned)), table)
+        self.assertEqual(tuple(LV.Colours("cooking", rec, False, 60, learned)), table)
+        self.assertNotEqual(tuple(LV.Colours("cooking", rec, True, 135, learned)), table)   # grey there, not here
+        self.assertEqual(e.errors(), [])
+
+    def test_guessed_colours_never_run_the_counts_away(self):
+        e = self.env()
+        LV = e.ns.Levelling
+        for s in LV.plan.steps.values():
+            points = s.to - s["from"]
+            self.assertGreaterEqual(s.crafts, 1, s.rec.n)
+            self.assertLessEqual(s.crafts, max(points * 4, 15 * 4), s.rec.n)
+        self.assertEqual(LV.Bound(500, 10, 2), 20)
+        self.assertEqual(LV.Bound(12, 10, 2), 12)
+        self.assertEqual(LV.Bound(None, 10, 1), 40)
+        self.assertEqual(e.errors(), [])
+
+    def test_no_row_prints_over_the_next(self):
+        e = self.env()
+        LV = e.ns.Levelling
+        LV.Refresh(LV)
+        down, two = 0, 0
+        for r in LV.rows.values():
+            if not r.shown:
+                continue
+            self.assertEqual(r.points[1][5], -(LV.layout.top + down))
+            tall = r.height + 1
+            self.assertGreaterEqual(tall, LV.TextHeight(r.text, 9, r.text.width) + 6)
+            if "\n" in str(r.text.text):
+                two += 1
+                self.assertGreater(tall, 20)
+            down += tall
+        self.assertGreater(two, 0)                                     # a route takes its own line
+        self.assertEqual(LV.layout.tall, down)
+        self.assertGreaterEqual(e.g.ControllerCamHUD_SkillPlanPanel.height, LV.layout.top + down + 24)
         self.assertEqual(e.errors(), [])
 
 

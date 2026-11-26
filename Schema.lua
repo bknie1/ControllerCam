@@ -10,6 +10,7 @@
 --   any CVar setting    : "d" = the game's default value
 --   zoom                : a number of yards (not a CVar; applied with the camera zoom functions)
 --   curve               : a list of {zoom, value} points, the value is interpolated from the current camera zoom
+--                         (the shoulder offset itself; for target focus and field of view, a share of the value)
 -- A setting a profile does not mention is reset to the game default (zoom and curves: left alone / off;
 -- settings marked keepUser: left to you).
 
@@ -20,6 +21,9 @@ local SETTINGS = {
     -- key, label (English text = localization key), kind, cvars, min, max, step, group
     { key = "zoom",            label = "Camera distance (yards)",          kind = "range", api = "zoom", min = 1, max = 39, step = 0.5, group = "Zoom" },
     { key = "zoomMax",         label = "Maximum zoom-out factor",           kind = "range", cvars = { "cameraDistanceMaxZoomFactor" }, min = 1, max = 2.6, step = 0.1, group = "Zoom" },
+    -- No field of view CVar is among the names confirmed in the client, so this one lists none: Core.lua asks the
+    -- game for it at runtime (ns.FovCVar) and does nothing without an answer. Its values are shares of your own.
+    { key = "fovCurve",        label = "Field of view by zoom",             kind = "curve", probe = "fov", min = 0.5, max = 1.5, zoomMax = 39, group = "Zoom" },
 
     { key = "yawSpeed",        label = "Stick turn speed (left/right)",     kind = "mul",   cvars = { "GamePadCameraYawSpeed" },   min = 0.25, max = 4, step = 0.05, group = "Controller" },
     { key = "pitchSpeed",      label = "Stick look speed (up/down)",        kind = "mul",   cvars = { "GamePadCameraPitchSpeed" }, min = 0.25, max = 4, step = 0.05, group = "Controller" },
@@ -48,6 +52,8 @@ local SETTINGS = {
     { key = "focusEnemy",      label = "Look toward your target",           kind = "bool",  cvars = { "test_cameraTargetFocusEnemyEnable" }, group = "Targets", actionCam = true },
     { key = "focusEnemyYaw",   label = "Target focus strength (left/right)", kind = "range", cvars = { "test_cameraTargetFocusEnemyStrengthYaw" },   min = 0, max = 1, step = 0.05, group = "Targets" },
     { key = "focusEnemyPitch", label = "Target focus strength (up/down)",   kind = "range", cvars = { "test_cameraTargetFocusEnemyStrengthPitch" }, min = 0, max = 1, step = 0.05, group = "Targets" },
+    -- (after the two strengths: it takes a share of each as the zoom changes)
+    { key = "focusCurve",      label = "Target focus by zoom",              kind = "curve", cvars = { "test_cameraTargetFocusEnemyStrengthYaw", "test_cameraTargetFocusEnemyStrengthPitch" }, min = 0, max = 1, zoomMax = 39, group = "Targets" },
     { key = "focusInteract",   label = "Look toward NPCs you talk to",      kind = "bool",  cvars = { "test_cameraTargetFocusInteractEnable" }, group = "Targets", actionCam = true },
     { key = "focusInteractYaw",   label = "Interaction focus strength (left/right)", kind = "range", cvars = { "test_cameraTargetFocusInteractStrengthYaw" },   min = 0, max = 1, step = 0.05, group = "Targets" },
     { key = "focusInteractPitch", label = "Interaction focus strength (up/down)",   kind = "range", cvars = { "test_cameraTargetFocusInteractStrengthPitch" }, min = 0, max = 1, step = 0.05, group = "Targets" },
@@ -59,16 +65,103 @@ local SETTINGS = {
     { key = "followTerrain",   label = "Camera follows terrain",            kind = "bool",  cvars = { "cameraTerrainTilt" }, group = "Smoothing", keepUser = true },
 }
 
+-- One plain line about each setting, shown under it in the editor (English text = localization key)
+local HELP = {
+    zoom = { help = "How far away the camera sits when this profile takes over." },
+    zoomMax = { help = "How far out you can pull the camera. Higher is farther." },
+    fovCurve = { help = "Exact points behind the table above, as distance:share. 1 is your own." },
+    yawSpeed = { help = "How fast the right stick turns the camera." },
+    pitchSpeed = { help = "How fast the right stick looks up and down." },
+    followOnStick = { help = "The camera swings round behind you as you run." },
+    followYawSpeed = { help = "How quickly the camera swings round behind you." },
+    followPitchSpeed = { help = "How quickly the camera levels out again." },
+    followDelay = { help = "How long the camera waits after you move it yourself." },
+    faceAngle = { help = "0: your character faces wherever it runs. 180: it keeps facing forward and strafes." },
+    faceAngleCombat = { help = "The same choice, while you are in a fight." },
+    turnWithCamera = { help = "When your character turns as you turn the camera." },
+    faceMount = { help = "Your mount turns to face the way you push the stick." },
+    faceSwim = { help = "While swimming, your character turns to face the way you push the stick." },
+    faceFly = { help = "While flying, you turn to face the way you push the stick." },
+    shoulder = { help = "One offset at every distance. 0 keeps your character in the middle." },
+    shoulderCurve = { help = "Exact points behind the table above, as distance:offset." },
+    dynamicPitch = { help = "Tilts the view as you zoom, for a lower, cinematic angle." },
+    headStrength = { help = "How much the camera moves with your character's head. 0 is off." },
+    headStanding = { help = "How much of that movement while you stand still." },
+    headMoving = { help = "How much of that movement while you run." },
+    headRange = { help = "How far out the camera can be and still move with your character's head." },
+    focusEnemy = { help = "The camera turns toward the enemy you have targeted." },
+    focusEnemyYaw = { help = "How hard it turns left and right. 1 is the strongest." },
+    focusEnemyPitch = { help = "How hard it tilts up and down. 1 is the strongest." },
+    focusCurve = { help = "Exact points behind the table above, as distance:share. 1 is full strength." },
+    focusInteract = { help = "The camera turns toward the person you are talking to." },
+    focusInteractYaw = { help = "How hard it turns left and right toward them." },
+    focusInteractPitch = { help = "How hard it tilts up and down toward them." },
+    smoothStyle = { help = "With mouse and keyboard: when the camera swings back behind you." },
+    followTerrain = { help = "Tilts the camera with hills and slopes. Yours is kept unless set here." },
+}
+
+-- The editor's areas, in the order of its menu: the group's id (its English name) and what it is for
+ns.GROUPS = {
+    { id = "Zoom",          help = "How far away the camera sits, and how far out you can pull it." },
+    { id = "Shoulder",      help = "How far to the side the camera sits, so your character is not in the middle of the screen." },
+    { id = "Targets",       help = "How much the camera turns to look at your target, or at the person you talk to." },
+    { id = "Head tracking", help = "How much the camera moves along with your character's head." },
+    { id = "Smoothing",     help = "Small movements the camera makes on its own." },
+    { id = "Controller",    help = "How fast the stick moves the camera, and whether the camera follows where you run." },
+    { id = "Facing",        help = "Which way your character faces as you move." },
+}
+
 local BY_KEY = {}
 for i, s in ipairs(SETTINGS) do
     s.order = i
+    s.help = HELP[s.key] and HELP[s.key].help
     BY_KEY[s.key] = s
 end
 
 ns.SETTINGS = SETTINGS
 ns.SETTING_BY_KEY = BY_KEY
-ns.MAX_CURVE_POINTS = 8
+ns.MAX_CURVE_POINTS = 12      -- two for each zoom view
 ns.MAX_NAME_LENGTH = 32
+
+---------------------------------------------------------------------------
+-- Zoom views: the few distances the camera is really used at. A "by zoom" setting has one value for each; the
+-- value holds across the view and eases into the next one in the gap between them, so nothing snaps. It is
+-- stored as an ordinary curve (shared and edited like any other).
+---------------------------------------------------------------------------
+ns.ZOOM_VIEWS = {
+    { key = "first",    name = "First person",      from = 0,   to = 1 },
+    { key = "shoulder", name = "Over the shoulder", from = 2,   to = 3.5 },
+    { key = "torso",    name = "Upper body",        from = 4.5, to = 6 },
+    { key = "body",     name = "Whole body",        from = 7,   to = 10 },
+    { key = "mid",      name = "Mid range",         from = 13,  to = 20 },
+    { key = "far",      name = "Zoomed out",        from = 24,  to = 39 },
+}
+
+-- One value per view -> curve points (points a straight line already passes through are left out)
+function ns.CurveFromViews(values)
+    local all = {}
+    for i, view in ipairs(ns.ZOOM_VIEWS) do
+        all[#all + 1] = { view.from, values[i] }
+        all[#all + 1] = { view.to, values[i] }
+    end
+    local out = {}
+    for i, p in ipairs(all) do
+        local before, after = all[i - 1], all[i + 1]
+        if not (before and after and before[2] == p[2] and after[2] == p[2]) then out[#out + 1] = p end
+    end
+    while #out > 1 and out[#out][2] == out[#out - 1][2] do table.remove(out) end   -- flat past the last point
+    while #out > 1 and out[1][2] == out[2][2] do table.remove(out, 1) end          -- ... and before the first
+    return out
+end
+
+-- The view a camera distance belongs to (a gap between two is split down the middle)
+function ns.ViewAt(zoom)
+    local views = ns.ZOOM_VIEWS
+    for i = 1, #views - 1 do
+        if zoom <= (views[i].to + views[i + 1].from) / 2 then return i end
+    end
+    return #views
+end
 
 -- CVars the game switches off or overrides to avoid motion sickness; the ActionCam features need them at 0.
 ns.MOTION_CVARS = { "CameraKeepCharacterCentered", "CameraReduceUnexpectedMovement" }
@@ -196,6 +289,15 @@ function ns.ValidateProfile(p)
     return { name = name, values = values }
 end
 
+-- A curve's value in the middle of each zoom view: what the editor's table shows
+function ns.ViewValues(curve)
+    local out = {}
+    for i, view in ipairs(ns.ZOOM_VIEWS) do
+        out[i] = round(ns.EvalCurve(curve, (view.from + view.to) / 2), 2)
+    end
+    return out
+end
+
 -- A value as text for the options panel and /ccam describe.
 function ns.FormatSettingValue(s, v)
     local L = ns.L
@@ -225,6 +327,6 @@ function ns.ResolveCVar(s, v, cvar, flip)
         return ns.FormatNumber(d * tonumber(v:sub(2)))
     end
     local n = tonumber(v)
-    if flip and (s.key == "shoulder" or s.kind == "curve") then n = -n end
+    if flip and s.key == "shoulder" then n = -n end
     return ns.FormatNumber(n)
 end

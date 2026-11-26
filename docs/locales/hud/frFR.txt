@@ -211,6 +211,7 @@ Banque triée. Appuyez à nouveau pour trier vos sacs.
 Sacs triés.
 Trier vos sacs (et la banque tant qu'elle est ouverte)
 Or sur ce compte : %s
+Maintenez R3 sur un objet pour l'essayer, le marquer, voir ses détails ou le détruire : les sacs du jeu n'ont pas de bouton pour cela.
 Nombre d'objets dans les infobulles
 l'infobulle d'un objet indique combien vous en avez dans vos sacs et en banque, et combien en ont vos autres personnages
 R3 trie tant que vos sacs sont ouverts
@@ -315,6 +316,9 @@ pour ce que vos personnages fabriquent : ce que coûtent ses matériaux, et ce q
 Ventes rapides à l'hôtel des ventes
 prix 5% en dessous du plus bas pour vendre tout de suite ; désactivé : prix patients, juste en dessous du plus bas, qui se vendent quand les acheteurs viennent
 lit tous les prix de l'hôtel des ventes d'un coup (ouvrez-le d'abord ; toutes les 15 minutes)
+Herboristerie
+Dépeçage
+Pêche
 %s en a besoin maintenant (vous êtes à %d), pour %s
 %s en a besoin maintenant (%s est à %d), pour %s
 %s en a besoin à partir de %d (vous êtes à %d), pour %s
@@ -322,7 +326,31 @@ lit tous les prix de l'hôtel des ventes d'un coup (ouvrez-le d'abord ; toutes l
 %s pièce
 Fabrique: %s
 Garder ce dont vos métiers ont encore besoin
-un objet pour lequel une recette d'un de vos personnages donne encore un point de compétence (recettes orange et jaunes, comme le jeu les montre dans la fenêtre du métier), que les prochaines étapes du métier utilisent (les recettes des guides de progression, et celles qu'un autre de vos personnages connaît, jusqu'à 75 points plus loin), ou qui fabrique quelque chose valant plus à l'hôtel des ventes que l'objet lui-même, est gardé, pas vendu, et son infobulle dit pourquoi. Les recettes sont lues quand la fenêtre d'un métier est ouverte
+un objet avec lequel une recette d'un de vos personnages donne encore un point de compétence (recettes orange et jaunes, telles que le jeu les montre dans la fenêtre du métier), que les prochaines étapes du métier utilisent (les recettes des guides de montée et celles qu'un autre de vos personnages connaît, jusqu'à 75 points d'avance) ou qui sert à fabriquer quelque chose qui vaut plus à l'hôtel des ventes que l'objet lui-même, est gardé et non vendu, et son infobulle dit pourquoi. Un ingrédient de Cuisine ou de Secourisme est aussi gardé pour une recette pas encore apprise, avec l'endroit où l'apprendre, de même que cette recette et les livres de compétence. Les recettes sont lues quand la fenêtre d'un métier est ouverte
+%s, qui parcourt la route en %s
+%s, %s
+N'importe quel maître en %s l'enseigne
+La recette n'est vendue que pendant la fête du Voile d'hiver
+La recette est une récompense de quête : %s (%s)
+La recette tombe sur %s, à %s
+La recette tombe sur des créatures en %s
+La recette est un butin rare sur des créatures du monde entier
+La recette est vendue par %s
+(autres vendeurs : %d)
+%s : votre %s donne encore des points
+%s, %s : sa recette %s donne encore des points
+%s : sert à faire %s (requiert %d, vous avez %d)
+%s, %s : sert à faire %s (requiert %d, actuellement %d)
+Sert aussi à faire %s
+Plus tard, %s : sert à faire %s à %d (vous avez %d)
+Plus tard, %s, %s : sert à faire %s à %d
+enseigne %s (%s %d, vous avez %d)
+enseigne %s (%s %d, pour %s, actuellement %d)
+porte votre %s à %d (votre limite est %d)
+porte, pour %s, %s à %d (sa limite est %d)
+vu en vente pour la dernière fois chez %s (%s)
+vendu seulement pendant la fête du Voile d'hiver
+les marchands de fournitures le vendent
 PA
 PA dist.
 crit.
@@ -331,7 +359,7 @@ vie
 mana
 crit. sorts
 Ce que valent les caractéristiques
-sous l'infobulle d'un objet, ses lignes de caractéristiques avec leur valeur pour votre personnage: puissance d'attaque, puissance d'attaque à distance, critique, esquive, vie, mana
+à côté de chaque ligne de caractéristique dans l’infobulle d’un objet, ce qu’elle vaut pour votre personnage : puissance d’attaque, puissance d’attaque à distance, critique, esquive, vie, mana. Ce qui ne tient pas dans l’infobulle est sur le panneau en dessous
 Niveau d'objet
 Niveau requis
 Pile jusqu'à
@@ -344,6 +372,26 @@ banque
 Votre marque
 Détails de l'objet: tout sur l'objet que vous visez
 affiche tout sur l'objet que vous visez (ou celui indiqué): prix, qui le possède, votre marque
+sans marque
+Cet objet a changé : pointez-le à nouveau.
+Le jeu a gardé %s: détruisez-le depuis ses propres sacs.
+%s détruit.
+Détruire
+Cet objet permet de commencer une quête.
+C'est un objet de quête.
+Détruire %s ?
+C'est irréversible.
+Détails de l'objet
+Retour
+Essayer
+Changer la marque
+Plus
+Fermer
+Pas en combat.
+Actions d'objet : essayer, marquer, voir les détails ou détruire l'objet pointé
+Maintenir R3 sur un objet pour ses actions
+quand vos sacs ou la banque sont ouverts, maintenir le stick droit sur un objet demande quoi en faire : l'essayer, le marquer, voir ses détails ou le détruire. Une brève pression trie ou déplace toujours, et les sacs et le menu d'objet du jeu restent tels quels
+demande quoi faire de l'objet pointé : essayer, marquer, détails, détruire
 Animations de la barre d'incantation
 une barre d'incantation montre ce qui est lancé : des pioches la frappent pendant le minage, des éclairs la parcourent pour la nature, une liane fleurit pour un soin, des runes prennent forme pour les arcanes, flammes, glace et ombres pour le feu, le givre et l'ombre
 montrer chaque animation de barre d'incantation une fois, sur votre barre
@@ -516,6 +564,8 @@ le fondu de l'écran hors combat : ce qui s'estompe (minicarte, liste des quête
 Enregistré : tapez /reload pour que le jeu l'écrive sur le disque.
 Boutons de posture et de familier au-dessus des barres
 les boutons de postures et d'ordres du familier se placent là où étaient les icônes de ciblage verte et rouge, pour que leur roue s'ouvre entièrement à l'écran ; ces icônes sont masquées
+Roues de posture et de familier au premier plan et à l'écran
+les roues ouvertes avec les boutons de tranche et les gâchettes s'affichent devant les boutons de la barre et restent dans l'écran, même en combat, pour que chaque choix soit visible ; elles restent celles du jeu
 lister où se trouvent les parties des barres de manette et ce qui se repose (pour le dépannage)
 Auto
 Générique
@@ -582,6 +632,9 @@ Chat
 noms des onglets du chat cerclés et zone de saisie en verre sombre
 Compteur de dégâts
 le compteur de dégâts du jeu dans le style du HUD : ses barres, inclinées sur un fond sombre, et un texte détouré ; il garde tout ce qu'il fait
+Observation de vos sacs et de la banque pendant %d secondes : ouvrez-les, pointez des objets, ouvrez le menu d'objet du jeu. Tapez ensuite /reload.
+Observation terminée : %d fenêtres, %d lignes de boutons, %d menus. Tapez /reload pour que le jeu l'écrive sur le disque.
+observe un moment les sacs, la banque et les menus d'objet du jeu, pour le dépannage
 vérification: %d sur %d réussies
 Le jeu ne s’est pas figé depuis votre connexion.
 Moments où le jeu s’est figé, et la part du HUD dans chacun :
@@ -792,7 +845,6 @@ Sacs
 Courrier
 Conseil d'objet
 Apparences
-Pêche
 Métiers
 %s  |  Interface manette: %s  |  en cours: %s
 joueur %s, cible %s, familier %s, focalisation %s  |  cadres du jeu mis de côté: %s  |  discussion déplacée: %s
@@ -899,22 +951,18 @@ Joindre
 %s ou %s: vers le butin
 %s ou %s: autre fenêtre
 Les boutons de la manette reviennent après le combat.
-Fermer
 %s ou %s: retour aux sacs
 Maintenir pour détruire
 Choisir
-Retour
 Tous les sacs
 Ce sac seulement
 Mettre dedans
 Prendre le sac
-Plus
 Trier
 %d libres
 Emplacement libre
 En combat, fermez vos sacs avec B.
 pour la banque
-sans marque
 Aucun emplacement libre.
 %s est sur le curseur : placez-le sur un bouton de votre barre manette.
 Acheter un emplacement de sac de banque pour %s ?
@@ -923,9 +971,6 @@ Assigner
 Poser ici
 Diviser la pile
 Marque: %s
-Détails de l'objet
-Essayer
-Détruire
 Trier la banque
 Trier les sacs
 Voir les sacs
@@ -933,11 +978,6 @@ Voir la banque
 Acheter un emplacement de sac de banque (%s)
 Vendre les objets conseillés
 Relâchez pour détruire
-Cet objet permet de commencer une quête.
-C'est un objet de quête.
-Détruire %s ?
-Le jeu a gardé %s: détruisez-le depuis ses propres sacs.
-%s détruit.
 Fenêtre des sacs: ordre
 Malin: ce que vous utilisez d'abord (consommables, objets avec une utilisation), puis le reste par type, la camelote à la fin et estompée. Par type: en sections sous leurs propres titres. Comme dans vos sacs: l'ordre du jeu
 Grand maître
@@ -966,7 +1006,6 @@ Matin
 Après-midi
 Soir
 Nuit
-%s, %s
 Avec %s
 La scène du feu de camp est désactivée.
 La scène du feu de camp attend la fin du combat.
@@ -1152,7 +1191,6 @@ Heurté : la série s'arrête
 %s : un jeu en chemin
 Le jeu de vol est désactivé : /cchud flightgame on
 Le jeu de vol se joue pendant un vol.
-Pas en combat.
 Jeu de vol : jouer / haute altitude
 pendant un vol : lancer le jeu de vol, ou le mettre en haute altitude et l'en ramener
 Vols cinématiques : la caméra tourne autour de vous
@@ -1251,6 +1289,16 @@ Marché : graphique des prix en bougies
 le graphique des prix du Marché est une bougie par jour sur les 7 derniers jours (où le prix a ouvert, son plus haut et son plus bas, et où il a clôturé : vert s'il a clôturé plus haut, rouge plus bas) ; désactivé : une ligne du prix le plus bas de chaque jour sur 30 jours
 ouvrir ou fermer le Marché (un onglet de l'hôtel des ventes)
 quel hôtel des ventes a ce client (pour le dépannage)
+récolter
+marchand
+enchères
+Se vend bien : environ %s de bénéfice à l’unité (%s à l’hôtel des ventes après la commission, composants %s).
+[aux enchères]
+[long à farmer]
+[coûteux]
+Demande %s, à acheter à l’hôtel des ventes : pour monter avec de l’argent à dépenser.
+Long à farmer : %s. Peu de dépeçages donnent une peau.
+Environ %s de composants à acheter.
 Ouvrez la fenêtre d'un métier et je jetterai un œil à vos recettes.
 C'est le plafond, %d. Un maître a le rang suivant pour vous.
 Plus rien à apprendre à %d. Allez voir un maître pour le rang suivant.
@@ -1284,6 +1332,8 @@ moins de fabrications
 une recette à trouver ou acheter
 d'autres composants
 le premier choix des guides
+rien de long à farmer
+moins à acheter
 Ouvrez la fenêtre d'un métier pour un plan de progression.
 Au plafond, %d. Un maître a le rang suivant.
 Encore %d jusqu'à %d ; vos recettes s'arrêtent avant. Un maître a %s à %d.
@@ -1294,13 +1344,21 @@ Encore %d jusqu'à %d. Apprenez d'abord %s, %s.
 Encore %d jusqu'à %d. Récoltez %s jusqu'à %d.
 Encore %d jusqu'à %d. D'abord : %s, ou %s (%s).
 Encore %d jusqu'à %d. D'abord : %s.
-À récolter ou acheter
-%d fabrications : %s
+Encore nécessaire pour atteindre %d, au maximum :
+Rentable à fabriquer pour vendre :
+Au maximum %d fabrications : %s
+À apprendre à %d. %s.
 Apprenez-la %s, à partir de %d.
 Apprenez-la %s.
+À récolter : votre métier %s vous le procure.
+Achetez-le à un marchand : %s.
+Achetez-le à un marchand.
+Achetez-le à l'hôtel des ventes (%s pièce la dernière fois).
+Achetez-le à l'hôtel des ventes.
 %s : %d dans vos sacs, %d à la banque, %d par fabrication
+Gris pour vous désormais : aucun point de compétence. Fabriquez-le pour %s.
 Les guides montent cette étape en récoltant %s.
-%s : vous en avez %d, le plan en utilise %d
+%s : au maximum %d pour atteindre %d. Vous en avez %d, il en manque donc %d au maximum.
 pour %s
 Moins cher à acheter qu'à fabriquer avec %s
 Fabriqué avec %s
@@ -1311,10 +1369,11 @@ Rien de plus à fabriquer avec ce qu'il y a dans votre banque.
 Le Mentor : %s %d > %d
 Le Mentor
 Plan de progression
+à fabriquer pour %s
 ou
 Récolter %s
-à apprendre
-moins cher à acheter
+jusqu'à x%d
+jusqu'à %d
 Masquer
 Le plan
 Farmer ceci

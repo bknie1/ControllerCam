@@ -216,6 +216,8 @@ class Locales(unittest.TestCase):
             if f == "Schema.lua":
                 used.update(m.group(1) for m in re.finditer(r"label = " + STR, t))
                 used.update(m.group(1) for m in re.finditer(r"group = " + STR, t))
+                used.update(m.group(1) for m in re.finditer(r"help = " + STR, t))
+                used.update(m.group(1) for m in re.finditer(r"\bname = " + STR + r",\s+from", t))
                 for m in re.finditer(r"values = \{([^}]*)\}", t):
                     used.update(re.findall(STR, m.group(1)))
             if f == "Presets.lua":
@@ -266,7 +268,8 @@ class Schema(unittest.TestCase):
     def test_expected_builtin_profiles_exist(self):
         ns = self.env.ns
         ids = [ns.BUILTIN_LIST[i].id for i in range(1, len(ns.BUILTIN_LIST) + 1)]
-        self.assertEqual(ids[:3], ["action", "hybrid", "classic"])
+        self.assertEqual(ids[:2], ["action", "hybrid"])               # the recommended setup's camera first
+        self.assertEqual(ids[-1], "classic")                           # the game's own camera last
         self.assertIn("shooter", ids)
         self.assertEqual(ns.STARTER.default, "action")
 
@@ -361,7 +364,7 @@ class Sharing(unittest.TestCase):
         self.bad(self.make("n=Test;followOnStick=5"))
         self.bad(self.make("n=Test;shoulderCurve=0:1,5"))               # broken curve
         self.bad(self.make("n=Test;shoulderCurve=0:1,0:2"))             # same zoom twice
-        self.bad(self.make("n=Test;shoulderCurve=" + ",".join("%d:1" % i for i in range(12))))   # too many points
+        self.bad(self.make("n=Test;shoulderCurve=" + ",".join("%d:1" % i for i in range(13))))   # too many points
         self.bad(self.make("shoulder=1"), "name")                       # no name
         self.bad(self.make("n=%7C%7C;shoulder=1"), "name")              # name empty after cleaning
         self.bad(self.make("n=Test;zoom=d"))                            # zoom has no game default
@@ -592,16 +595,19 @@ class Applying(unittest.TestCase):
         self.assertEqual(cv("test_cameraHeadMovementStrength"), "1")
         self.assertEqual(cv("test_cameraDynamicPitch"), "1")
         self.assertEqual(cv("test_cameraTargetFocusInteractEnable"), "1")
-        self.assertEqual(cv("test_cameraTargetFocusEnemyEnable"), "0")        # not in the profile: game default
+        self.assertEqual(cv("test_cameraTargetFocusEnemyEnable"), "1")
+        self.assertEqual(cv("test_cameraTargetFocusEnemyStrengthYaw"), "0.6")   # whole body in view: 60% of 1
+        self.assertEqual(cv("test_cameraTargetFocusEnemyStrengthPitch"), "0.45")  # ... and of 0.75
         self.assertEqual(cv("cameraSmoothStyle"), "0")
         self.assertEqual(env.mock.state.zoom, 7)
-        self.assertEqual(cv("test_cameraOverShoulder"), "2.35")               # close up, on the zoom curve
+        self.assertEqual(cv("test_cameraOverShoulder"), "1")                  # whole body in view, on the zoom curve
         self.assertEqual(env.ns.Status().profile, "Action")
 
     def test_shoulder_offset_follows_the_zoom_curve(self):
         env = Env()
         frame = env.ns.frame
-        for zoom, expect in [(7, "2.35"), (8, "2.7"), (14, "1.35"), (20, "0"), (30, "0"), (3, "1"), (0, "0")]:
+        for zoom, expect in [(8, "1"), (3, "1.5"), (5, "1.5"), (6.5, "1.25"), (10, "1"), (11.5, "0.5"), (13, "0"),
+                             (30, "0"), (2, "1.5"), (1.5, "0.75"), (0, "0"), (7, "1")]:
             env.state(zoom=zoom)
             frame.scripts.OnUpdate(frame, 0.2)
             self.assertEqual(env.cv("test_cameraOverShoulder"), expect, zoom)
@@ -613,7 +619,7 @@ class Applying(unittest.TestCase):
         frame, cam = env.ns.frame, env.lua.globals().ControllerCam
         env.state(zoom=8)
         frame.scripts.OnUpdate(frame, 0.2)
-        self.assertEqual(env.cv("test_cameraOverShoulder"), "2.7")
+        self.assertEqual(env.cv("test_cameraOverShoulder"), "1")
         env.mock.cvars.cameraSmoothStyle = "4"                         # the game's auto-follow, on
         cam.Hold(True)
         self.assertTrue(cam.IsHeld())
@@ -640,15 +646,17 @@ class Applying(unittest.TestCase):
         self.assertIsNone(env.ns.db.heldWas)
 
     def test_close_zoom_keeps_the_character_on_screen(self):
-        """A sideways offset in yards covers more screen the closer the camera is: keep it a fraction of the view."""
+        """A sideways offset in yards covers more screen the closer the camera is: keep it a fraction of the view.
+        (Not Action: its offsets are the player's own choice per zoom view, tested by value in ZoomViews. Town
+        stroll has more at its closest steps by the same choice, so it is held to this from 4 yards out.)"""
         env = Env()
         ns = env.ns
         for i in range(1, len(ns.BUILTIN_LIST) + 1):
             prof = ns.BUILTIN_LIST[i]
             curve = prof["values"]["shoulderCurve"]
-            if curve is None:
+            if curve is None or prof.id == "action":
                 continue
-            for zoom in [x / 2 for x in range(1, 41)]:
+            for zoom in [x / 2 for x in range(8 if prof.id == "stroll" else 1, 41)]:
                 offset = env.run("return NS.EvalCurve(NS.BUILTIN['%s'].values.shoulderCurve, %s)" % (prof.id, zoom))
                 self.assertLessEqual(abs(offset) / (1.78 * zoom), 0.25, "%s at zoom %s: offset %s" % (prof.id, zoom, offset))
 
@@ -660,12 +668,25 @@ class Applying(unittest.TestCase):
         for i in range(1, len(ns.BUILTIN_LIST) + 1):
             prof = ns.BUILTIN_LIST[i]
             curve = prof["values"]["shoulderCurve"]
-            if curve is None or len(curve) < 4:
+            if curve is None or len(curve) < 4 or prof.id == "action":
                 continue
-            (ramp, near), (hold, mid) = (curve[2][1], curve[2][2]), (curve[3][1], curve[3][2])
+            n = len(curve)                                                           # ... ramp, hold, fade
+            (ramp, near), (hold, mid) = (curve[n - 2][1], curve[n - 2][2]), (curve[n - 1][1], curve[n - 1][2])
             self.assertGreater(mid, near, prof.id)                                   # further out in the middle,
             self.assertAlmostEqual(mid / hold, near / ramp, delta=0.01, msg=prof.id)  # by the same share of the view
             self.assertEqual(curve[1][2], 0, prof.id)                                # (the close end as it was)
+
+    def test_in_town_the_closest_steps_move_your_character_out_of_the_view(self):
+        env = Env()
+        env.state(resting=True)
+        env.tick()
+        self.assertEqual(env.ns.Status().profile, "Town stroll")
+        frame = env.ns.frame
+        # (the old curve was zoom / 4 up to 4 yards: half a yard more from 0.5 to 2, nothing new from 4 out)
+        for zoom, offset in [(0, 0), (1, 0.733), (1.5, 0.867), (2, 1), (3, 1), (4, 1), (6, 1.5), (9, 0.75), (12, 0)]:
+            env.state(zoom=zoom)
+            frame.scripts.OnUpdate(frame, 0.2)
+            self.assertAlmostEqual(float(env.cv("test_cameraOverShoulder")), offset, places=2, msg=zoom)
 
     def test_curve_only_writes_when_the_value_changes(self):
         env = Env()
@@ -680,13 +701,14 @@ class Applying(unittest.TestCase):
     def test_mirror_shoulder(self):
         env = Env()
         env.ns.SetFlipShoulder(True)
-        self.assertEqual(env.cv("test_cameraOverShoulder"), "-2.35")
-        env.state(zoom=14)
+        self.assertEqual(env.cv("test_cameraOverShoulder"), "-1")
+        env.state(zoom=3)
         frame = env.ns.frame
         frame.scripts.OnUpdate(frame, 0.2)
-        self.assertEqual(env.cv("test_cameraOverShoulder"), "-1.35")
+        self.assertEqual(env.cv("test_cameraOverShoulder"), "-1.5")
+        self.assertEqual(env.cv("test_cameraTargetFocusEnemyStrengthYaw"), "1")     # only the offset is mirrored
         env.ns.SetFlipShoulder(False)
-        self.assertEqual(env.cv("test_cameraOverShoulder"), "1.35")          # zoom 14 is kept: edits do not move the camera
+        self.assertEqual(env.cv("test_cameraOverShoulder"), "1.5")           # zoom 3 is kept: edits do not move the camera
 
     def test_classic_goes_back_to_game_defaults_and_keeps_zoom(self):
         env = Env()
@@ -1164,7 +1186,9 @@ class SlashCommands(unittest.TestCase):
     def test_info_command(self):
         text = self.said("info")
         self.assertIn("zoom 7", text)
-        self.assertIn("test_cameraOverShoulder = 2", text)
+        self.assertIn("test_cameraOverShoulder = 1", text)
+        self.assertIn("zoom view: body", text)
+        self.assertIn("this game has none", text)                              # no field of view in this mock
         self.assertIn("CameraKeepCharacterCentered = 0", text)
 
     def test_describe_command_and_descriptions(self):
@@ -1174,7 +1198,7 @@ class SlashCommands(unittest.TestCase):
         self.assertIn("out-of-the-box", text)                                 # the description
         self.assertIn("Camera distance (yards): 7", text)
         self.assertIn("Head tracking strength: 1", text)
-        self.assertIn("0:0 6:2 8:2.7 20:0", text)                              # the shoulder curve
+        self.assertIn("1:0 2:1.5 6:1.5 7:1 10:1 13:0", text)                   # the shoulder curve
         self.assertIn("game default", text)
         classic = plain(self.said("describe classic"))
         self.assertIn("game's own camera", classic)
@@ -1268,7 +1292,294 @@ class ExperimentalNotice(unittest.TestCase):
         self.assertFalse(e.db().noticeAccepted)
 
 
+class ZoomViews(unittest.TestCase):
+    """The recommended camera by zoom view: offset and target focus hold across a view and ease between them."""
+
+    def setUp(self):
+        self.env = Env()
+
+    def at(self, zoom, env=None):
+        env = env or self.env
+        env.state(zoom=zoom)
+        env.ns.frame.scripts.OnUpdate(env.ns.frame, 0.2)
+
+    def shoulder(self, env=None):
+        return float((env or self.env).cv("test_cameraOverShoulder"))
+
+    def focus(self):
+        return (float(self.env.cv("test_cameraTargetFocusEnemyStrengthYaw")),
+                float(self.env.cv("test_cameraTargetFocusEnemyStrengthPitch")))
+
+    def values(self, pid="action"):
+        return self.env.ns.GetProfile(pid)["values"]
+
+    def table(self, key, pid="action"):
+        self.env.lua.globals().NS = self.env.ns
+        got = self.env.run("return NS.ViewValues(NS.GetProfile('%s').values.%s)" % (pid, key))
+        return [got[i] for i in range(1, 7)]
+
+    def test_recommended_offset_and_focus_in_each_view(self):
+        self.assertEqual(self.table("shoulderCurve"), [0, 1.5, 1.5, 1, 0, 0])
+        self.assertEqual(self.table("focusCurve"), [0, 1, 1, 0.6, 0.3, 0])
+        views = [(0, 0, 0), (2.75, 1.5, 1), (5.25, 1.5, 1), (8.5, 1, 0.6), (16, 0, 0.3), (33, 0, 0)]
+        for zoom, offset, share in views:
+            self.at(zoom)
+            self.assertAlmostEqual(self.shoulder(), offset, places=3, msg=zoom)
+            yaw, pitch = self.focus()
+            self.assertAlmostEqual(yaw, share, places=3, msg=zoom)
+            self.assertAlmostEqual(pitch, 0.75 * share, places=3, msg=zoom)
+        self.assertEqual(self.env.cv("cameraDistanceMaxZoomFactor"), "2.2")     # as far out as before
+
+    def test_nothing_snaps_between_the_views(self):
+        last = None
+        for step in range(0, 331):
+            self.at(step / 10)
+            now = (self.shoulder(),) + self.focus()
+            if last:
+                for a, b in zip(last, now):
+                    self.assertLessEqual(abs(a - b), 0.16, step / 10)
+            last = now
+
+    def test_the_camera_rests_within_a_view(self):
+        self.at(8)
+        n = len(self.env.mock.setLog)
+        for zoom in (7, 7.5, 9, 10):
+            self.at(zoom)
+        self.assertEqual(len(self.env.mock.setLog), n)
+
+    def test_your_own_values_come_back_after_the_by_zoom_ones(self):
+        self.at(16)
+        self.env.ns.UseEverywhere("classic")
+        self.assertEqual(self.env.cv("test_cameraTargetFocusEnemyStrengthYaw"), "0.5")
+        self.assertEqual(self.env.cv("test_cameraTargetFocusEnemyEnable"), "0")
+        env = Env(cvars={"test_cameraTargetFocusEnemyStrengthYaw": "0.2"})
+        env.ns.SetEnabled(False)
+        self.assertEqual(env.cv("test_cameraTargetFocusEnemyStrengthYaw"), "0.2")
+        self.assertEqual(env.cv("test_cameraOverShoulder"), "0")
+
+    def test_target_focus_off_stays_off(self):
+        self.env.cmd("advanced on")
+        self.env.cmd("edit action focusEnemy off")
+        for zoom in (3, 16):
+            self.at(zoom)
+            self.assertEqual(self.env.cv("test_cameraTargetFocusEnemyEnable"), "0")
+            self.assertEqual(self.env.cv("test_cameraTargetFocusEnemyStrengthYaw"), "1")   # the plain strength
+
+    def test_the_switches_need_advanced_on_a_built_in_profile(self):
+        self.assertFalse(self.env.ns.SetByZoom("action", "focusCurve", False)[0])
+        self.assertIsNotNone(self.values()["focusCurve"])
+        self.assertIsNone(self.env.db()["overrides"]["action"])
+
+    def test_target_focus_by_zoom_switched_off_and_on(self):
+        self.env.ns.SetAdvanced(True)
+        self.env.ns.SetByZoom("action", "focusCurve", False)
+        self.assertIsNone(self.values()["focusCurve"])
+        for zoom in (3, 8, 30):
+            self.at(zoom)
+            self.assertEqual(self.focus(), (1, 0.75))                      # full strength at every distance
+        self.env.ns.SetByZoom("action", "focusCurve", True)
+        self.assertEqual(self.table("focusCurve"), [0, 1, 1, 0.6, 0.3, 0])
+
+    def test_offset_by_zoom_switched_off_keeps_what_you_see_and_on_gives_the_points_back(self):
+        self.env.ns.SetAdvanced(True)
+        self.env.cmd("curve action 0:0 3:2 20:0")
+        self.at(3)
+        self.env.ns.SetByZoom("action", "shoulderCurve", False)
+        self.assertEqual(self.values()["shoulder"], 2)
+        self.assertIsNone(self.values()["shoulderCurve"])
+        self.at(30)
+        self.assertEqual(self.shoulder(), 2)
+        self.env.ns.SetByZoom("action", "shoulderCurve", True)
+        self.assertIsNone(self.values()["shoulder"])
+        self.assertEqual(self.values()["shoulderCurve"][2][2], 2)          # the points you had, not the preset's
+
+    def test_one_view_can_be_set_without_moving_the_others(self):
+        self.env.ns.SetAdvanced(True)
+        self.env.ns.SetViewValue("action", "shoulderCurve", 4, 1.2)
+        self.assertEqual(self.table("shoulderCurve"), [0, 1.5, 1.5, 1.2, 0, 0])
+        self.at(8.5)
+        self.assertEqual(self.shoulder(), 1.2)
+        self.env.cmd("reset action")
+        self.assertEqual(self.table("shoulderCurve"), [0, 1.5, 1.5, 1, 0, 0])
+
+    def test_six_different_values_still_make_a_curve_that_can_be_shared(self):
+        r = self.env.run("""
+            local c = NS.CurveFromViews({ 0.1, 0.2, 0.3, 0.4, 0.5, 0.6 })
+            local clean = NS.ValidateValue(NS.SETTING_BY_KEY.shoulderCurve, c)
+            local v = NS.ViewValues(clean)
+            local values = {}
+            for k, x in pairs(NS.BUILTIN.action.values) do values[k] = x end
+            values.shoulderCurve, values.focusCurve, values.fovCurve = clean, clean, NS.CurveFromViews({1,0.9,0.95,1,1.05,1.1})
+            local text = NS.ExportProfile({ name = "Everything by zoom", values = values })
+            local p = NS.ParseProfile(text)
+            return { n = #clean, v = table.concat(v, " "), same = p and NS.ExportProfile(p) == text, len = #text,
+                     flat = #NS.CurveFromViews({ 1, 1, 1, 1, 1, 1 }) }""")
+        self.assertEqual(r["n"], 10)                                       # the flat ends need one point each
+        self.assertEqual(r["v"], "0.1 0.2 0.3 0.4 0.5 0.6")
+        self.assertTrue(r["same"])
+        self.assertLess(r["len"], 1500)
+        self.assertEqual(r["flat"], 1)
+
+    def test_every_view_has_a_place(self):
+        got = [self.env.run("return NS.ViewAt(%s)" % z) for z in (0, 1.4, 1.6, 3.9, 4.1, 6.4, 6.6, 11.4, 11.6, 22.1, 39)]
+        self.assertEqual(got, [1, 1, 2, 2, 3, 3, 4, 4, 5, 6, 6])
+
+    def test_offset_strength_scales_every_profile_and_is_kept(self):
+        self.assertIn("80%", " ".join(self.env.cmd("offset 80")))
+        self.at(3)
+        self.assertAlmostEqual(self.shoulder(), 1.2)
+        self.assertEqual(self.focus(), (1, 0.75))                          # only the offset
+        self.env.ns.UseEverywhere("shooter")
+        self.at(5)
+        self.assertAlmostEqual(self.shoulder(), 1.6)                       # shooter's 2, at 80%
+        env2 = reload_env(self.env)
+        self.assertEqual(env2.db().offsetScale, 0.8)
+        text = env2.ns.ExportSetup()
+        self.assertIn("&k=0.8", text)
+        other = Env()
+        self.assertTrue(other.lua.globals().ControllerCam.ImportSetup(text))
+        self.assertEqual(other.db().offsetScale, 0.8)
+        self.assertIn("usage", " ".join(self.env.cmd("offset 500")))
+        self.assertEqual(self.env.db().offsetScale, 0.8)
+        self.env.cmd("offset 100")
+        self.assertNotIn("&k=", self.env.ns.ExportSetup())                 # a setup without it reads as before
+
+    def test_recommended_comes_first(self):
+        out = self.env.cmd("list")
+        self.assertIn("Recommended setup", out[0])
+        self.assertIn("Action", out[1])
+        self.assertIn("Classic", out[-1])
+        self.env.cmd("use classic")
+        self.assertIn("Recommended setup applied", " ".join(self.env.cmd("use recommended")))
+        self.assertEqual(self.env.db().assign.default, "action")
+        self.assertEqual(self.env.db().assign.mounted, "cruise")
+
+
+class FieldOfView(unittest.TestCase):
+    """No field of view CVar is confirmed in the client: it is only used if the game turns out to have one."""
+
+    PROFILE = """{ v = 3, assign = { default = 'u_fov' }, profiles = { u_fov = { name = 'Wide', values = {
+        fovCurve = { {2,0.9}, {10,1}, {24,1.1} } } } } }"""
+
+    def env(self, own="80", takes=True, setup="", db=None):
+        e = Env(db=db or self.PROFILE, login=False)
+        e.mock.cvars.cameraFov = own
+        e.mock.defaults.cameraFov = "90"
+        if takes:
+            e.mock.knownCVars.cameraFov = True
+        if setup:
+            e.run(setup)
+        e.mock.fire("ADDON_LOADED", "ControllerCam")
+        e.ns.GetDB().movement = True
+        e.state(zoom=2)
+        e.mock.fire("PLAYER_LOGIN")
+        e.mock.fire("PLAYER_ENTERING_WORLD")
+        e.advance(1.2)
+        return e
+
+    def at(self, e, zoom):
+        e.state(zoom=zoom)
+        e.ns.frame.scripts.OnUpdate(e.ns.frame, 0.2)
+
+    def test_a_game_without_one_is_left_alone(self):
+        e = Env(db=self.PROFILE)
+        self.assertIsNone(e.ns.FovCVar())
+        self.assertIsNone(e.cv("cameraFov"))
+        self.assertNotIn("cameraFov", e.setlog_names())
+
+    def test_it_follows_the_zoom_as_a_share_of_your_own(self):
+        e = self.env()
+        self.assertEqual(e.ns.FovCVar(), "cameraFov")
+        self.assertEqual(float(e.cv("cameraFov")), 72)                  # 90% of your 80, not of the default
+        self.at(e, 10)
+        self.assertEqual(float(e.cv("cameraFov")), 80)
+        self.at(e, 30)
+        self.assertEqual(float(e.cv("cameraFov")), 88)
+
+    def test_yours_comes_back_with_another_profile_or_the_addon_off(self):
+        e = self.env()
+        e.ns.UseEverywhere("classic")
+        self.assertEqual(float(e.cv("cameraFov")), 80)
+        self.assertIsNone(e.db().originals.cameraFov)
+        e.mock.cvars.cameraFov = "70"                                   # changed by you meanwhile
+        e.ns.Evaluate(True)
+        self.assertEqual(e.cv("cameraFov"), "70")                       # and left alone
+        e2 = self.env()
+        e2.ns.SetEnabled(False)
+        self.assertEqual(float(e2.cv("cameraFov")), 80)
+
+    def test_changing_it_in_the_games_settings_makes_that_your_own(self):
+        e = self.env()
+        e.mock.cvars.cameraFov = "100"
+        self.at(e, 2)
+        self.assertEqual(float(e.cv("cameraFov")), 90)
+        e.ns.SetEnabled(False)
+        self.assertEqual(float(e.cv("cameraFov")), 100)
+
+    def test_it_survives_a_reload_without_compounding(self):
+        e = self.env()
+        e2 = self.env(own=e.cv("cameraFov"), db=e.saved())
+        self.assertEqual(float(e2.cv("cameraFov")), 72)
+        self.assertEqual(float(e2.db().originals.cameraFov), 80)
+
+    def test_a_game_that_takes_no_change_is_not_asked_again(self):
+        e = self.env(takes=False)
+        self.assertIsNone(e.ns.FovCVar())
+        self.assertEqual(e.cv("cameraFov"), "80")
+        self.assertIsNone(e.db().originals.cameraFov)
+
+    def test_a_read_only_one_is_never_written(self):
+        e = self.env(setup="C_CVar.GetCVarInfo = function() return '80', '90', false, false, false, false, true end")
+        self.assertIsNone(e.ns.FovCVar())
+        self.assertNotIn("cameraFov", e.setlog_names())
+
+    def test_no_built_in_profile_sets_it(self):
+        e = Env(login=False)
+        for i in range(1, len(e.ns.BUILTIN_LIST) + 1):
+            self.assertIsNone(e.ns.BUILTIN_LIST[i]["values"]["fovCurve"], e.ns.BUILTIN_LIST[i].id)
+
+
 class OptionsPanel(unittest.TestCase):
+    def areas(self, env):
+        return env.ns.editorAreas
+
+    def test_settings_are_grouped_in_areas_with_every_setting_explained(self):
+        env = Env()
+        env.ns.SetAdvanced(True)
+        env.ns.RefreshOptions()
+        areas = self.areas(env)
+        groups = {env.ns.GROUPS[i].id for i in range(1, len(env.ns.GROUPS) + 1)}
+        for i in range(1, len(env.ns.SETTINGS) + 1):
+            s = env.ns.SETTINGS[i]
+            self.assertIn(s.group, groups, s.key)
+            self.assertTrue(s.help, s.key)
+        self.assertEqual(len(list(areas.keys())), len(groups))
+        for gid in groups:
+            areas[gid].button.scripts.OnClick(areas[gid].button, "LeftButton")
+            shown = [g for g in groups if areas[g].frame.shown]
+            self.assertEqual(shown, [gid])
+
+    def test_a_locked_preset_shows_no_wall_of_settings(self):
+        env = Env()
+        scroll = env.lua.globals().ControllerCamEditorScroll
+        env.ns.SelectProfile("action"); env.ns.RefreshOptions()
+        self.assertFalse(scroll.shown)
+        env.ns.SetAdvanced(True); env.ns.RefreshOptions()
+        self.assertTrue(scroll.shown)
+        env.ns.SetAdvanced(False)
+        env.ns.SelectProfile(env.ns.DuplicateProfile("action", "Mine")); env.ns.RefreshOptions()
+        self.assertTrue(scroll.shown)                                  # your own profiles are always editable
+
+    def test_the_field_of_view_table_says_when_the_game_has_none(self):
+        env = Env()
+        env.ns.SetAdvanced(True); env.ns.RefreshOptions()
+        probe = self.areas(env)["Zoom"].probe
+        self.assertFalse(probe.box.shown)
+        self.assertTrue(probe.missing.shown)
+        env.mock.cvars.cameraFov = "90"; env.mock.defaults.cameraFov = "90"
+        env.ns.RefreshOptions()
+        self.assertTrue(probe.box.shown)
+
     def test_panel_is_registered_and_every_control_works(self):
         env = Env()
         self.assertEqual(env.mock.category.name, "ControllerCam")
@@ -1359,10 +1670,10 @@ class AdvancedEditing(unittest.TestCase):
 
     def test_curve_edit_on_a_built_in(self):
         self.said("advanced on")
-        self.said("curve action 0:0 5:1.5 20:0")
+        self.said("curve action 0:0 5:1.25 20:0")
         v = self.env.ns.GetProfile("action")["values"]
-        self.assertEqual(v["shoulderCurve"][2][2], 1.5)
-        self.assertEqual(self.env.ns.BUILTIN.action["values"]["shoulderCurve"][2][2], 2)
+        self.assertEqual(v["shoulderCurve"][2][2], 1.25)
+        self.assertEqual(self.env.ns.BUILTIN.action["values"]["shoulderCurve"][2][2], 1.5)
 
     def test_reset_brings_the_original_back(self):
         self.said("advanced on")

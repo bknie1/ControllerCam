@@ -211,6 +211,7 @@ Banco organizado. Pressione de novo para organizar suas bolsas.
 Bolsas organizadas.
 Organize suas bolsas (e o banco enquanto estiver aberto)
 Ouro nesta conta: %s
+Segure R3 sobre um item para experimentá-lo, marcá-lo, ver os detalhes ou destruí-lo: as bolsas do jogo não têm botão para isso.
 Quantidade de itens nas dicas
 a dica de um item mostra quantos você tem nas bolsas e no banco, e quantos seus outros personagens têm
 R3 organiza enquanto suas bolsas estão abertas
@@ -315,6 +316,9 @@ para algo que seus personagens fabricam: quanto custam os materiais e quanto ren
 Vendas rápidas na Casa de Leilões
 preço 5% abaixo do menor para vender agora; desligado: preços pacientes, logo abaixo do menor, que vendem quando os compradores chegam
 lê todos os preços da Casa de Leilões de uma vez (abra-a antes; a cada 15 minutos)
+Herborismo
+Esfolamento
+Pesca
 %s precisa disso agora (você está em %d), para %s
 %s precisa disso agora (%s está em %d), para %s
 %s precisa disso a partir de %d (você está em %d), para %s
@@ -322,7 +326,31 @@ lê todos os preços da Casa de Leilões de uma vez (abra-a antes; a cada 15 min
 %s cada
 Fabrica: %s
 Guardar o que suas profissões ainda precisam
-um item pelo qual uma receita de um dos seus personagens ainda dá um ponto de habilidade (receitas laranja e amarelas, como o jogo as mostra na janela da profissão), que os próximos passos da profissão usam (as receitas dos guias de evolução e as que outro dos seus personagens conhece, até 75 pontos à frente), ou que fabrica algo que vale mais na casa de leilões que o próprio item, é guardado, não vendido, e sua dica diz por quê. As receitas são lidas quando a janela de uma profissão está aberta
+um item com o qual uma receita de um dos seus personagens ainda dá um ponto de perícia (receitas laranja e amarelas, como o jogo mostra na janela da profissão), que os próximos passos da profissão usam (as receitas dos guias de evolução e as que outro personagem seu conhece, até 75 pontos à frente) ou que fabrica algo que vale mais na casa de leilões que o próprio item, é guardado, não vendido, e a dica dele diz por quê. Um material de Culinária ou Primeiros Socorros também é guardado para uma receita ainda não aprendida, dizendo onde aprendê-la, assim como essa receita e os livros de perícia. As receitas são lidas com a janela da profissão aberta
+%s, que anda pela estrada em %s
+%s em %s
+Qualquer instrutor de %s ensina
+A receita só é vendida durante o Festival do Véu de Inverno
+A receita é recompensa de missão: %s (%s)
+A receita cai de %s em %s
+A receita cai de criaturas em %s
+A receita é um saque raro de criaturas do mundo todo
+A receita é vendida por %s
+(outros vendedores: %d)
+%s: sua receita %s ainda dá perícia
+%s, %s: a receita %s ainda dá perícia
+%s: faz %s (requer %d, você tem %d)
+%s, %s: faz %s (requer %d, agora %d)
+Também entra em %s
+Mais tarde, %s: faz %s com %d (você tem %d)
+Mais tarde, %s, %s: faz %s com %d
+ensina %s (%s %d, você tem %d)
+ensina %s (%s %d, para %s, agora %d)
+eleva sua perícia %s até %d (seu limite é %d)
+eleva, para %s, a perícia %s até %d (limite atual %d)
+visto à venda pela última vez com %s em %s
+vendido só durante o Festival do Véu de Inverno
+vendedores de suprimentos vendem
 PA
 PA à dist.
 crít.
@@ -331,7 +359,7 @@ vida
 mana
 crít. de feitiço
 O que os atributos valem para você
-sob a dica de um item, suas linhas de atributos com o valor para seu personagem: poder de ataque, poder de ataque à distância, crítico, esquiva, vida, mana
+ao lado de cada linha de atributo na dica de um item, quanto ela vale para o seu personagem: poder de ataque, poder de ataque de longo alcance, crítico, esquiva, vida, mana. O que não couber na dica fica no painel abaixo
 Nível do item
 Requer nível
 Empilha até
@@ -344,6 +372,26 @@ banco
 Sua marca
 Detalhes do item: tudo sobre o item para o qual você aponta
 mostra tudo sobre o item para o qual você aponta (ou o indicado): preços, quem o tem, sua marca
+sem marca
+Esse item mudou: aponte para ele de novo.
+O jogo manteve %s: destrua pelas bolsas do próprio jogo.
+%s destruído.
+Destruir
+Este item inicia uma missão.
+É um item de missão.
+Destruir %s?
+Não dá para desfazer.
+Detalhes do item
+Voltar
+Provar
+Mudar marca
+Mais
+Fechar
+Não em combate.
+Ações do item: experimentar, marcar, ver detalhes ou destruir o item apontado
+Segure R3 sobre um item para ver as ações
+com as bolsas ou o banco abertos, segurar o botão do analógico direito sobre um item pergunta o que fazer com ele: experimentar, marcar, ver detalhes ou destruir. Um toque continua organizando ou movendo, e as bolsas e o menu de item do jogo ficam como estão
+pergunta o que fazer com o item apontado: experimentar, marcar, detalhes, destruir
 Animações da barra de lançamento
 uma barra de lançamento mostra o que está sendo lançado: picaretas batem nela ao minerar, raios correm por ela com natureza, uma trepadeira floresce com uma cura, runas tomam forma com arcano, chamas, gelo e sombras com fogo, gelo e sombra
 mostrar cada animação da barra de lançamento uma vez, na sua barra
@@ -516,6 +564,8 @@ o esmaecimento da tela fora de combate: o que esmaece (minimapa, lista de missõ
 Salvo: digite /reload para o jogo gravar no disco.
 Botões de postura e de mascote acima das barras
 os botões de posturas e de comandos do mascote ficam onde estavam os ícones verde e vermelho de alvo, para que a roda deles abra inteira na tela; esses ícones são escondidos
+Rodas de postura e ajudante na frente e dentro da tela
+as rodas abertas com os botões superiores e gatilhos são desenhadas na frente dos botões da barra e mantidas dentro da tela, também em combate, para que todas as opções apareçam; elas continuam sendo as do jogo
 listar onde ficam as partes das barras do controle e o que descansa (para diagnóstico)
 Auto
 Genérico
@@ -582,6 +632,9 @@ Chat
 nomes das abas do chat com contorno e a caixa onde você digita em vidro escuro
 Medidor de dano
 o medidor de dano do jogo no visual do HUD: suas barras, inclinadas sobre um fundo escuro, e texto contornado; ele mantém tudo o que faz
+Observando suas bolsas e o banco por %d segundos: abra-os, aponte para itens e abra o menu de item do jogo. Depois digite /reload.
+Observação concluída: %d janelas, %d linhas de botões, %d menus. Digite /reload para o jogo gravar em disco.
+observa por um tempo as bolsas, o banco e os menus de item do jogo, para solução de problemas
 verificação: %d de %d passaram
 O jogo não travou desde que você entrou.
 Momentos em que o jogo travou, e a parte do HUD em cada um:
@@ -792,7 +845,6 @@ Bolsas
 Correio
 Conselho de itens
 Aparências
-Pesca
 Profissões
 %s  |  Interface de controle: %s  |  em execução: %s
 jogador %s, alvo %s, ajudante %s, foco %s  |  quadros do jogo postos de lado: %s  |  bate-papo movido: %s
@@ -899,22 +951,18 @@ Negociar
 %s ou %s: para o saque
 %s ou %s: outra janela
 Os botões do controle voltam após o combate.
-Fechar
 %s ou %s: de volta às bolsas
 Segure para destruir
 Escolher
-Voltar
 Todas as bolsas
 Só esta bolsa
 Colocar
 Pegar bolsa
-Mais
 Organizar
 %d livres
 Espaço vazio
 Em combate, feche suas bolsas com B.
 para o banco
-sem marca
 Nenhum espaço livre.
 %s está no cursor: coloque-o em um botão da sua barra do controle.
 Comprar um espaço de bolsa do banco por %s?
@@ -923,9 +971,6 @@ Atribuir
 Soltar aqui
 Dividir pilha
 Marca: %s
-Detalhes do item
-Provar
-Destruir
 Organizar banco
 Organizar bolsas
 Ver bolsas
@@ -933,11 +978,6 @@ Ver banco
 Comprar um espaço de bolsa do banco (%s)
 Vender os recomendados
 Solte para destruir
-Este item inicia uma missão.
-É um item de missão.
-Destruir %s?
-O jogo manteve %s: destrua pelas bolsas do próprio jogo.
-%s destruído.
 Janela de bolsas: ordem
 Inteligente: o que você usa primeiro (consumíveis, itens com uso), depois o resto por tipo, o lixo por último e esmaecido. Por tipo: em seções com títulos próprios. Como nas bolsas: a ordem do jogo
 Grão-mestre
@@ -966,7 +1006,6 @@ Manhã
 Tarde
 Entardecer
 Noite
-%s em %s
 Com %s
 A cena da fogueira está desligada.
 A cena da fogueira espera você sair de combate.
@@ -1152,7 +1191,6 @@ Batida: a sequência acaba
 %s: um jogo no caminho
 O jogo de voo está desligado: /cchud flightgame on
 O jogo de voo é jogado durante um voo.
-Não em combate.
 Jogo de voo: jogar / grande altitude
 num voo: iniciar o jogo de voo, ou levá-lo à grande altitude e de volta
 Voos cinematográficos: a câmera gira ao seu redor
@@ -1251,6 +1289,16 @@ Mercado: gráfico de preços em velas
 o gráfico de preços do Mercado é uma vela por dia nos últimos 7 dias (onde o preço abriu, sua máxima e mínima, e onde fechou: verde quando fechou mais alto, vermelho mais baixo); desligado: uma linha do menor preço de cada dia em 30 dias
 abrir ou fechar o Mercado (uma aba da casa de leilões)
 qual Casa de Leilões este cliente tem (para solução de problemas)
+coletar
+vendedor
+leilão
+Vende bem: cerca de %s de lucro cada (%s no leilão já sem a taxa, materiais %s).
+[pelo leilão]
+[coleta lenta]
+[caro]
+Precisa de %s, que você teria de comprar no leilão: para evoluir com dinheiro sobrando.
+Coleta lenta: %s. Poucos esfolamentos dão uma pele crua.
+Cerca de %s em materiais para comprar.
 Abra a janela de uma profissão e eu dou uma olhada nas suas receitas.
 Esse é o teto, %d. Um instrutor tem a próxima categoria para você.
 Nada mais a aprender em %d. Vá ver um instrutor sobre a próxima categoria.
@@ -1284,6 +1332,8 @@ menos criações
 uma receita que você acha ou compra
 outros materiais
 a primeira escolha dos guias
+sem coleta lenta
+menos para comprar
 Abra a janela de uma profissão para um plano de evolução.
 No limite, %d. Um instrutor tem o próximo nível.
 Faltam %d até %d; suas receitas não chegam. Um instrutor tem %s em %d.
@@ -1294,13 +1344,21 @@ Faltam %d até %d. Primeiro aprenda %s, %s.
 Faltam %d até %d. Colete %s até %d.
 Faltam %d até %d. Primeiro: %s, ou %s (%s).
 Faltam %d até %d. Primeiro: %s.
-Para coletar ou comprar
-%d vezes: %s
+Ainda falta para chegar a %d, no máximo:
+Vale a pena fabricar para vender:
+No máximo %d fabricações: %s
+Aprenda com %d. %s.
 Aprenda %s, a partir de %d.
 Aprenda %s.
+Colete: sua profissão %s fornece.
+Compre de um vendedor: %s.
+Compre de um vendedor.
+Compre na casa de leilões (%s cada na última vez).
+Compre na casa de leilões.
 %s: %d nas bolsas, %d no banco, %d por criação
+Agora está cinza para você, então não dá perícia. Fabrique para %s.
 Os guias sobem este trecho coletando %s.
-%s: você tem %d, o plano usa %d
+%s: no máximo %d para chegar a %d. Você tem %d, faltam no máximo %d.
 para %s
 É mais barato comprar do que fabricar com %s
 Feito com %s
@@ -1311,10 +1369,11 @@ Nada mais a fazer com o que está no seu banco.
 O Mentor: %s %d > %d
 O Mentor
 Plano de evolução
+fabricar para %s
 ou
 Colete %s
-a aprender
-mais barato comprar
+até x%d
+até %d
 Ocultar
 O plano
 Farmar isto

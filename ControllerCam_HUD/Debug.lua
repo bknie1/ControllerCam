@@ -391,8 +391,13 @@ D.SECTIONS = {
         local out = {}
         for name, text in pairs(D.flyouts) do out[#out + 1] = name .. ": " .. text end
         table.sort(out)
+        local P = ns.PadButtons                           -- the gamepad wheels' layer, as each last opened
+        for _, name in ipairs(P and P.opened and P.FLYOUTS or {}) do
+            if P.opened[name] then out[#out + 1] = P.opened[name] end
+        end
         return out
     end },
+    { "item actions", function() return ns.ItemActions and ns.ItemActions.Describe() or {} end },
     { "slow", function() return D.Slow() end },
     { "modules", function() return ns.ModuleList and ns.ModuleList.Describe() or {} end },
     { "errors", Errors },
@@ -443,7 +448,10 @@ end
 local function Wheels()
     for _, name in ipairs(WheelNames()) do
         local f = _G[name]
-        local shown = ns.ShownPlain(f)
+        -- (frames only: a wheel's flashing art has "Flyout" in its name too, and its blinking filled the notes)
+        local okK, kind = false, nil
+        if type(f) == "table" and f.GetObjectType then okK, kind = pcall(f.GetObjectType, f) end
+        local shown = not (okK and (kind == "Texture" or kind == "FontString")) and ns.ShownPlain(f)
         if shown and not D.seen[name] then
             D.seen[name] = true
             local ok, left, bottom, w, h = pcall(f.GetRect, f)

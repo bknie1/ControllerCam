@@ -22,8 +22,11 @@ Mail.lua
 Inventory.lua
 Market.lua
 Professions.lua
+RecipeData.lua
+Recipes.lua
 Stats.lua
 ItemInfo.lua
+ItemActions.lua
 CastLook.lua
 CastArt.lua
 CastBar.lua

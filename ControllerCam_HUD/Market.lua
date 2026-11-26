@@ -79,6 +79,28 @@ function M.MerchantPrice(id)
     return list and list[id] or nil
 end
 
+-- Which merchant you last saw it at: [itemID] = { name, zone } (The Mentor says where a material is sold)
+ns.RegisterSaved("merchantSeen", function(old)
+    local out, n = {}, 0
+    if type(old) ~= "table" then return out end
+    for id, rec in pairs(old) do
+        if n >= MAX_MERCHANT then break end
+        if type(id) == "number" and type(rec) == "table" and type(rec[1]) == "string" and type(rec[2]) == "string" then
+            out[id] = { rec[1], rec[2] }; n = n + 1
+        end
+    end
+    return out
+end)
+
+-- The open merchant's name and the zone you are in, or nil
+local function Merchant()
+    local ok, name = pcall(UnitName or function() end, "npc")
+    local okZ, zone = pcall(GetRealZoneText or GetZoneText or function() end)
+    name, zone = ok and Plain(name), okZ and Plain(zone)
+    if type(name) ~= "string" or name == "" or type(zone) ~= "string" or zone == "" then return nil end
+    return name, zone
+end
+
 -- The lowest price of each day, for the last 30 days: [itemID] = { { d = day number, p = copper }, ... }
 local DAYS, MAX_HISTORY = 30, 5000
 ns.RegisterSaved("auctionHistory", function(old)
@@ -198,6 +220,13 @@ local function Ago(t)
 end
 M.Ago = Ago
 
+-- Under the advice, for a material of a recipe too far off to keep it for: which, and where to learn it
+function M.LaterLines(id, verdict, want)
+    if verdict == "quest" or (type(want) == "table" and want.recipe) then return {} end
+    local Rc = ns.Recipes
+    return Rc and Rc.Later(id) or {}
+end
+
 -- The price lines for an item: { { left, right }, ... }, short and in the coins' colours: "13c  2s 60c x20"
 local GREY = "|cff9aa3b5"
 local function Price(each, stack)
@@ -216,6 +245,13 @@ function M.Lines(id)
         local verdict, more, want = M.Verdict(id)
         if verdict then
             lines[#lines + 1] = { L["Best"], M.BestText(verdict, more, want) }
+            -- where the recipe it is kept for is learned (Recipes.lua)
+            for _, text in ipairs(verdict == "keep" and type(want) == "table" and want.lines or {}) do
+                lines[#lines + 1] = { "", GREY .. text .. "|r" }
+            end
+            for i, text in ipairs(M.LaterLines(id, verdict, want)) do
+                lines[#lines + 1] = { i == 1 and L["Recipes"] or "", GREY .. text .. "|r" }
+            end
             -- a skill-up: the recipes it is for, as the profession's window showed them (orange, yellow)
             if verdict == "skill" then
                 for i, r in ipairs(ns.Professions.Recipes(want, id)) do
@@ -356,6 +392,7 @@ end
 -- The advice, in lines of its own: { { text }, ... }; under it, for a material, what it is worth crafted
 function M.Advice(verdict, more, want, id)
     local lines = M.AdviceOnly(verdict, more, want, id)
+    for _, text in ipairs(M.LaterLines(id, verdict, want)) do lines[#lines + 1] = { GREY .. text .. "|r" } end
     if verdict ~= "quest" and verdict ~= "equip" and verdict ~= "disenchant" then
         local c = (type(want) == "table" and want.value) or M.CraftValue(id)
         local head, detail, stale = M.CraftWords(c, true)
@@ -389,6 +426,7 @@ function M.AdviceOnly(verdict, more, want, id)
         add(word)
         local why = M.SpecWords(want) or (type(want) == "table" and want.why)
         if why then add(GREY .. why .. "|r") end
+        for _, text in ipairs(type(want) == "table" and want.lines or {}) do add(GREY .. text .. "|r") end
         local worth = M.WorthWords(want, true) or M.FetchWords(want, true)
         if worth then add(GREY .. worth .. "|r") end
         return lines
@@ -701,6 +739,9 @@ function M.Verdict(id, bound)
     if sell and sell.junk[id] then return "vendor" end
     local quest = ns.Quests and ns.Quests.ItemWant and ns.Quests.ItemWant(id)
     if quest then return "quest", nil, quest end                         -- a quest of yours still needs it
+    -- a recipe or a skill book one of your characters can still use (Recipes.lua)
+    local book = ns.Recipes and ns.Recipes.Book(id)
+    if book then return Kept(book.why, M.WithFetch(id, bound, book)) end
     -- A quest item no quest of yours needs (Green Hills of Stranglethorn pages once the quest is done, Gorilla
     -- Fangs) is never kept: the auction house where there is any market for it, else a vendor, else nothing is
     -- said. The best consumable of its kind you carry (a potion, Rumsey Rum) is kept unless the auction house
@@ -794,6 +835,20 @@ function M.Verdict(id, bound)
             end
         end
     end
+    -- a Cooking or First Aid material one of your characters could still level with, also for a recipe not
+    -- learned yet: kept, with where the recipe is learned (Recipes.lua). A recipe the profession's window showed
+    -- as still giving a point says so as ever (a skill-up).
+    local cook = ns.Recipes and ns.Recipes.Keep(id)
+    if cook then
+        local P = ns.Professions
+        local learnt = P and P.Wants(id)
+        if learnt and (learnt.mine or not cook.recipe.mine) then return "skill", nil, learnt end
+        if not cook.recipe.mine then                                 -- (yours come before another character's)
+            local ahead = P and P.Ahead(id)
+            if ahead and ahead.mine then return Kept(P.AheadWords(ahead), { ahead = ahead }) end
+        end
+        return Kept(cook.why, M.WithFetch(id, bound, cook))
+    end
     if soft and not M.Fetches(id, bound) then return Kept(L["your best of its kind"]) end
     -- grey: to a vendor. It may be up at the auction house for more, but grey things there seldom sell
     if M.Quality(id) == 0 then
@@ -839,6 +894,12 @@ function M.Unsure(id, gain, how)
     want.unsure = true
     if gain then want.gain, want.fetch = gain, M.Auction(id) end
     return Kept(L["kept: nothing says it's junk"], want)
+end
+
+-- With a keep for a recipe: what the auction house would give for it instead (want.fetch), to choose by
+function M.WithFetch(id, bound, want)
+    if not bound then want.fetch = M.Auction(id) end
+    return want
 end
 
 -- The note: "could fetch 7s at the auction house"
@@ -1051,6 +1112,8 @@ function M.ReadMerchant()
     n = okN and Plain(n)
     local db, noted = ns.db, 0
     db.merchantPrice = db.merchantPrice or {}
+    db.merchantSeen = db.merchantSeen or {}
+    local who, zone = Merchant()
     for i = 1, (type(n) == "number" and n) or 0 do
         local okL, link = pcall(GetMerchantItemLink, i)
         link = okL and Plain(link)
@@ -1069,6 +1132,7 @@ function M.ReadMerchant()
         price, count, available, extended = Plain(price), Plain(count), Plain(available), Plain(extended)
         if id and type(price) == "number" and price > 0 and available == -1 and not extended then
             db.merchantPrice[id] = price / ((type(count) == "number" and count > 0) and count or 1)
+            if who then db.merchantSeen[id] = { who, zone } end
             noted = noted + 1
         end
     end

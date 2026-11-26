@@ -10,6 +10,8 @@ for f in ["Schema.lua", "Presets.lua", "Core.lua", "Share.lua", "Slash.lua", "Op
     if f == "Schema.lua":
         for m in re.finditer(r'label = ' + STR, t): add(m.group(1))
         for m in re.finditer(r'group = ' + STR, t): add(m.group(1))
+        for m in re.finditer(r'help = ' + STR, t): add(m.group(1))
+        for m in re.finditer(r'\bname = ' + STR + r',\s+from', t): add(m.group(1))
         for m in re.finditer(r'values = \{([^}]*)\}', t):
             for q in re.finditer(STR, m.group(1)): add(q.group(1))
     if f == "Presets.lua":

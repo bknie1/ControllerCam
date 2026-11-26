@@ -10,6 +10,13 @@
 -- and the wheel opens around that spot (seen in the game: 22 units below the screen's edge). So both are
 -- looked at every frame: the button goes up again at once, and a wheel found open around a button's old
 -- spot is put around the button where it is now.
+--
+-- The wheels in front and on screen (a switch of its own, padWheels): the game may open a wheel in a fight, when
+-- no frame of its may be touched, wherever its button is (half under the screen's edge, too), and a wheel put on
+-- one of the bar's buttons may take that button's layer, under the d-pad and the face buttons. So each of the
+-- three wheels is told, once, out of a fight, what the game's engine then keeps through any fight: its layer
+-- (DIALOG, fixed: a new parent no longer changes it) and to stay on the screen. Nothing of it is moved or hooked
+-- for that. Off, or with the HUD off, it is all put back.
 
 local ADDON, ns = ...
 local L = ns.L
@@ -22,6 +29,11 @@ ns.RegisterSetting({
     label = "Stance and pet buttons above the bars",
     tip = "the stance and pet command buttons sit where the green and red targeting icons were, so their wheel opens fully on screen; those icons are hidden",
 })
+ns.RegisterSetting({
+    key = "padWheels", kind = "boolean", default = true, command = "padwheels", section = "Gamepad bars",
+    label = "Stance and pet wheels in front and on screen",
+    tip = "the wheels that open with the shoulder and trigger buttons are drawn in front of the bar's buttons and kept inside the screen, in a fight too, so every choice can be seen; they stay the game's own",
+})
 
 local PAGE = "GamepadMainActionBarFramePageUnit"
 P.SIDES = {
@@ -32,6 +44,10 @@ P.RAISE = 112                 -- how far up a button goes when the icon it repla
 P.FLYOUTS = { "GamepadSpellFlyout", "GamepadPetActionFlyout", "GamepadPetSpellFlyout" }
 P.NEAR = 90                   -- a wheel this close to a button's old spot is that button's (it opened a little off)
 P.STRATA = "DIALOG"           -- the wheels over the bar's d-pad and face buttons, never under them
+P.RANK = { WORLD = 1, BACKGROUND = 2, LOW = 3, MEDIUM = 4, HIGH = 5, DIALOG = 6, FULLSCREEN = 7,
+           FULLSCREEN_DIALOG = 8, TOOLTIP = 9 }
+P.BARS = "GamepadMainActionBarFrame"      -- everything of the gamepad bars hangs from this
+P.TRIES = 5                   -- a layer the game refuses this many times running is no longer asked for
 
 local function Field(frame, key)
     local v = type(frame) == "table" and rawget(frame, key) or nil
@@ -134,8 +150,6 @@ function P:PutBack()
         icon:SetAlpha(alpha)
     end
     self.hidden = {}
-    for f, strata in pairs(self.strataWas or {}) do pcall(f.SetFrameStrata, f, strata) end
-    self.strataWas = {}
 end
 
 function P:Arrange()
@@ -149,25 +163,209 @@ function P:Arrange()
     return any
 end
 
--- A wheel that is open around a moved button's old spot: around the button itself instead
-function P:Wheels()
-    self.strataWas = self.strataWas or {}
+---------------------------------------------------------------------------
+-- The wheels in front and on screen
+---------------------------------------------------------------------------
+P.was = {}                    -- what we changed on a frame of the game's: { strata, fixed, level, clamped, set }
+P.opened = {}                 -- each wheel as it last opened (for /cchud padinfo and the debug report)
+
+-- A method of a frame's, asked quietly: nil when it has none, the call fails, or the answer is a secret
+local function Ask(f, method)
+    local fn = type(f) == "table" and f[method]
+    if type(fn) ~= "function" then return nil end
+    local ok, v = pcall(fn, f)
+    if ok then return ns.Plain(v) end
+end
+
+-- Told quietly: true when the game took it
+local function Tell(f, method, value)
+    local fn = type(f) == "table" and f[method]
+    if type(fn) ~= "function" then return false end
+    local ok, err = pcall(fn, f, value)
+    if not ok then ns.Note("pad: %s refused: %s", method, tostring(err)) end
+    return ok
+end
+
+local function Usable(f)
+    if type(f) ~= "table" or type(f.GetFrameStrata) ~= "function" or type(f.SetFrameStrata) ~= "function" then
+        return false
+    end
+    return Ask(f, "IsForbidden") ~= true
+end
+
+local function Children(f, fn, depth)
+    if type(f) ~= "table" or type(f.GetChildren) ~= "function" or depth > 5 then return end
+    local ok, kids = pcall(function() return { f:GetChildren() } end)
+    if not ok then return end
+    for _, child in ipairs(kids) do
+        if Usable(child) then
+            fn(child)
+            Children(child, fn, depth + 1)
+        end
+    end
+end
+
+-- How high the gamepad bars draw right now: the highest layer among their shown frames, the highest level in it,
+-- and that layer's rank (nil, 0, 0 without bars)
+function P.BarsTop()
+    local rank, level, layer = 0, 0, nil
+    Children(_G[P.BARS], function(f)
+        if not ns.ShownPlain(f) then return end
+        local s = Ask(f, "GetFrameStrata")
+        local r = s and P.RANK[s] or 0
+        local l = Ask(f, "GetFrameLevel")
+        l = type(l) == "number" and l or 0
+        if r > rank or (r == rank and l > level) then rank, level, layer = r, l, s end
+    end, 1)
+    return layer, level, rank
+end
+
+-- What a frame was like before we first touched it
+local function Remember(f)
+    local was = P.was[f]
+    if not was then
+        was = { strata = Ask(f, "GetFrameStrata"), fixed = Ask(f, "HasFixedFrameStrata"),
+                clamped = Ask(f, "IsClampedToScreen") }
+        P.was[f] = was
+    end
+    return was
+end
+
+-- Out of a fight only (the wheels are protected frames)
+function P:Front()
+    if InCombatLockdown() then return end
+    local want = self.RANK[self.STRATA]
     for _, name in ipairs(self.FLYOUTS) do
         local f = _G[name]
-        -- over the bar's buttons (it opened under the d-pad and the face buttons): the frame's layer, out of combat
-        if type(f) == "table" and f.GetFrameStrata and f.SetFrameStrata then
-            local okS, strata = pcall(f.GetFrameStrata, f)
-            if okS and strata ~= self.STRATA then
-                if self.strataWas[f] == nil then self.strataWas[f] = strata end
-                pcall(f.SetFrameStrata, f, self.STRATA)
+        if Usable(f) then
+            local strata = Ask(f, "GetFrameStrata")
+            local low = (strata and self.RANK[strata] or 0) < want
+            local known = self.was[f]
+            if low or not (known and known.set) then
+                local was = Remember(f)
+                if low and (was.refused or 0) < self.TRIES then
+                    if was.set then ns.Note("pad: the game put %s on %s again", name, tostring(strata)) end
+                    Tell(f, "SetFrameStrata", self.STRATA)
+                    -- (a layer the game will not take is not asked for on every frame: left alone after a few)
+                    local now = Ask(f, "GetFrameStrata")
+                    was.refused = (now and (self.RANK[now] or 0) >= want) and 0 or (was.refused or 0) + 1
+                    if was.refused == self.TRIES then ns.Note("pad: the game keeps %s on %s: left alone", name, tostring(now)) end
+                end
+                if not was.set then
+                    was.set = true
+                    Tell(f, "SetFixedFrameStrata", true)     -- (a new parent no longer changes its layer)
+                    Tell(f, "SetClampedToScreen", true)      -- (the engine keeps it on screen, in a fight too)
+                end
             end
         end
+    end
+end
+
+-- A wheel just opened, out of a fight: looked at as it stands. A part of it that sits lower than the wheels'
+-- layer is brought up to it; where the bars themselves draw as high as the wheel (the game raised them), the
+-- wheel goes above them
+function P:Stack(name, f)
+    if InCombatLockdown() or not Usable(f) then return end
+    local want = self.RANK[self.STRATA]
+    Children(f, function(child)
+        local s = Ask(child, "GetFrameStrata")
+        if s and (self.RANK[s] or 0) < want then
+            Remember(child)
+            Tell(child, "SetFrameStrata", self.STRATA)
+            ns.Note("pad: a part of %s was on %s: brought up", name, s)
+        end
+    end, 1)
+    local layer, level, rank = self.BarsTop()
+    local mine = self.RANK[Ask(f, "GetFrameStrata") or ""] or 0
+    local at = Ask(f, "GetFrameLevel")
+    if layer and rank >= mine and type(at) == "number" and (rank > mine or level >= at) then
+        local was = Remember(f)
+        if rank > mine then Tell(f, "SetFrameStrata", layer) end
+        if level >= at then
+            if was.level == nil then was.level = at end
+            Tell(f, "SetFrameLevel", level + 10)
+        end
+        ns.Note("pad: the bars draw on %s level %d: %s put above them", layer, level, name)
+    end
+end
+
+function P:PutBackWheels()
+    for f, was in pairs(self.was) do
+        if was.clamped ~= nil then Tell(f, "SetClampedToScreen", was.clamped)
+        elseif was.set then Tell(f, "SetClampedToScreen", false) end
+        if was.fixed ~= nil then Tell(f, "SetFixedFrameStrata", was.fixed)
+        elseif was.set then Tell(f, "SetFixedFrameStrata", false) end
+        if was.strata then Tell(f, "SetFrameStrata", was.strata) end
+        if was.level then Tell(f, "SetFrameLevel", was.level) end
+    end
+    self.was = {}
+end
+
+-- One wheel as it stands: its layer, level, parent and place, and how high the bars draw (read only)
+function P.WheelLine(name)
+    local f = _G[name]
+    if type(f) ~= "table" then return name .. ": this client has none" end
+    local parent = Ask(f, "GetParent")
+    local layer, level = P.BarsTop()
+    local rect = "?"
+    if type(f.GetRect) == "function" then
+        local ok, l, b, w, h = pcall(f.GetRect, f)
+        if ok and type(ns.Plain(l)) == "number" and type(ns.Plain(b)) == "number" then
+            rect = ("%.0f,%.0f %.0fx%.0f"):format(l, b, ns.Plain(w) or 0, ns.Plain(h) or 0)
+        end
+    end
+    local owner = "none"
+    if type(parent) == "table" then owner = tostring(Ask(parent, "GetName") or "(unnamed)") end
+    return ("%s: %s on %s level %s, fixed %s, kept on screen %s, parent %s, protected %s, at %s%s; the bars draw up to %s level %s")
+        :format(name, ns.ShownPlain(f) and "shown" or "hidden", tostring(Ask(f, "GetFrameStrata")),
+            tostring(Ask(f, "GetFrameLevel")), tostring(Ask(f, "HasFixedFrameStrata")),
+            tostring(Ask(f, "IsClampedToScreen")), owner, tostring(Ask(f, "IsProtected")), rect,
+            InCombatLockdown() and " (in a fight)" or "", tostring(layer), tostring(level))
+end
+
+-- Each wheel as it opens, in a fight too: looked at (kept for the reports), and out of a fight set in order
+function P:Watch()
+    self.seen = self.seen or {}
+    for _, name in ipairs(self.FLYOUTS) do
+        local shown = ns.ShownPlain(_G[name])
+        if shown and not self.seen[name] then
+            self.seen[name] = true
+            if self.front then self:Stack(name, _G[name]) end
+            if ns.db and ns.db.debug then
+                self.opened[name] = self.WheelLine(name)
+                ns.Note("pad: %s", self.opened[name])
+            end
+        elseif not shown then
+            self.seen[name] = nil
+        end
+    end
+end
+
+-- How far the engine may have pushed a wheel up to keep it on the screen: half its height, and only for one
+-- that now stands on the screen's bottom edge
+local function Lift(f)
+    if not (P.front and f.GetRect and f.GetHeight) then return 0 end
+    local ok, _, bottom = pcall(f.GetRect, f)
+    bottom = ok and ns.Plain(bottom) or nil
+    if type(bottom) ~= "number" or bottom > 1 then return 0 end
+    local okH, h = pcall(f.GetHeight, f)
+    h = okH and ns.Plain(h) or nil
+    return type(h) == "number" and h / 2 * Scale(f) or 0
+end
+
+-- A wheel that is open around a moved button's old spot: around the button itself instead
+function P:Wheels()
+    for _, name in ipairs(self.FLYOUTS) do
+        local f = _G[name]
         if ns.ShownPlain(f) and f.SetPoint and f.ClearAllPoints then
             local fx, fy = Middle(f)
+            local lift = fx and Lift(f) or 0
             local best, bestD
             for b, m in pairs(self.moved) do
                 if fx and m.ox then
-                    local d = math.abs(fx - m.ox) + math.abs(fy - m.oy)
+                    local dy = fy - m.oy
+                    if dy > 0 then dy = math.max(0, dy - lift) end
+                    local d = math.abs(fx - m.ox) + math.abs(dy)
                     if d < self.NEAR * Scale(b) and (not bestD or d < bestD) then best, bestD = b, d end
                 end
             end
@@ -191,8 +389,22 @@ driver:SetScript("OnUpdate", ns.Protect(function()
     P:Arrange()
     P:Wheels()
 end))
+-- (the wheels' layer has a handler of its own: if one of the two keeps failing, it steps aside alone, ns.BREAKER)
+local layers = CreateFrame("Frame")
+layers:SetScript("OnUpdate", ns.Protect(function()
+    if not (P.front or (ns.db and ns.db.debug)) then return end
+    if P.front then P:Front() end
+    P:Watch()
+end))
 
 function P:Apply(run)
+    if run and ns.db.padWheels and not ns.arranging then
+        self.front = true
+        self:Front()
+    elseif self.front then
+        self.front = false
+        self:PutBackWheels()
+    end
     local want = run and ns.db.padRaise and not ns.arranging and type(_G[PAGE]) == "table" and true or false
     if want then
         self.active = true
@@ -246,6 +458,12 @@ function P.Report()
     end
     for b, m in pairs(P.moved) do
         out[#out + 1] = ("moved %s (%s) to %.0f,%.0f%s"):format(m.side, m.how, m.x, m.y, m.prompt and ", with its hint" or "")
+    end
+    out[#out + 1] = ("wheels in front: %s"):format(tostring(P.front or false))
+    for _, name in ipairs(P.FLYOUTS) do
+        local ok, line = pcall(P.WheelLine, name)
+        out[#out + 1] = ok and line or (name .. ": ?")
+        if P.opened[name] then out[#out + 1] = "  as it last opened: " .. P.opened[name] end
     end
     return out
 end

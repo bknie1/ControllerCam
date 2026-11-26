@@ -23,6 +23,9 @@
 	<Binding name="CCHUD_ITEMINFO" category="ADDONS">
 		ControllerCamHUD_ItemInfo()
 	</Binding>
+	<Binding name="CCHUD_ITEMACTIONS" category="ADDONS">
+		ControllerCamHUD_ItemActions()
+	</Binding>
 	<Binding name="CCHUD_FISHING" category="ADDONS">
 		ControllerCamHUD_Fishing()
 	</Binding>

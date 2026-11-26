@@ -211,6 +211,7 @@ Bank sortiert. Erneut drücken, um deine Taschen zu sortieren.
 Taschen sortiert.
 Taschen sortieren (und die Bank, solange sie offen ist)
 Gold auf diesem Account: %s
+Halte R3 auf einem Gegenstand gedrückt, um ihn anzuprobieren, zu markieren, seine Details zu sehen oder ihn zu zerstören: Die Taschen des Spiels haben dafür keine Taste.
 Gegenstandsanzahl in Tooltips
 der Tooltip eines Gegenstands zeigt, wie viele du in Taschen und Bank hast und wie viele deine anderen Charaktere besitzen
 R3 sortiert, solange deine Taschen offen sind
@@ -315,6 +316,9 @@ für etwas, das deine Charaktere herstellen: was die Materialien kosten und was 
 Schnellverkäufe im Auktionshaus
 Preis 5% unter dem niedrigsten für einen Verkauf jetzt; aus: geduldige Preise, knapp unter dem niedrigsten, die sich verkaufen, wenn Käufer kommen
 liest alle Preise im Auktionshaus auf einmal (vorher öffnen; alle 15 Minuten)
+Kräuterkunde
+Kürschnerei
+Angeln
 %s braucht es jetzt (du bist bei %d), für %s
 %s braucht es jetzt (%s ist bei %d), für %s
 %s braucht es ab %d (du bist bei %d), für %s
@@ -322,7 +326,31 @@ liest alle Preise im Auktionshaus auf einmal (vorher öffnen; alle 15 Minuten)
 %s pro Stück
 Stellt her: %s
 Behalten, was deine Berufe noch brauchen
-ein Gegenstand, für den ein Rezept eines deiner Charaktere noch einen Fertigkeitspunkt gibt (orange und gelbe Rezepte, wie das Spiel sie im Berufsfenster zeigt), den die nächsten Schritte des Berufs brauchen (die Rezepte der Levelguides und die, die ein anderer deiner Charaktere kennt, bis zu 75 Punkte voraus), oder der etwas herstellt, das im Auktionshaus mehr wert ist als er selbst, wird behalten, nicht verkauft, und sein Tooltip sagt, warum. Rezepte werden gelesen, wenn ein Berufsfenster offen ist
+Ein Gegenstand, für den ein Rezept eines deiner Charaktere noch einen Fertigkeitspunkt gibt (orange und gelbe Rezepte, wie das Spiel sie im Berufsfenster zeigt), den die nächsten Schritte des Berufs brauchen (die Rezepte der Levelguides und die, die ein anderer Charakter von dir kennt, bis zu 75 Punkte voraus) oder aus dem sich etwas herstellen lässt, das im Auktionshaus mehr bringt als er selbst, wird behalten statt verkauft, und sein Tooltip sagt warum. Eine Zutat für Kochen oder Erste Hilfe wird auch für ein noch nicht gelerntes Rezept behalten, mit der Angabe, wo man es lernt, ebenso dieses Rezept und die Fertigkeitsbücher. Rezepte werden gelesen, während ein Berufsfenster offen ist
+%s, unterwegs auf der Straße in %s
+%s in %s
+Jeder Lehrer für %s bringt es bei
+Das Rezept gibt es nur während des Winterhauchfests
+Das Rezept ist eine Questbelohnung: %s (%s)
+Das Rezept lässt %s fallen, in %s
+Das Rezept lassen Kreaturen fallen in: %s
+Das Rezept ist eine seltene Beute von Kreaturen überall in der Welt
+Das Rezept verkauft %s
+(weitere Verkäufer: %d)
+%s: dein Rezept %s gibt noch Fertigkeitspunkte
+%s, %s: dort gibt %s noch Fertigkeitspunkte
+%s: ergibt %s (benötigt %d, du hast %d)
+%s, %s: ergibt %s (benötigt %d, derzeit %d)
+Wird auch gebraucht für %s
+Später, %s: ergibt %s ab %d (du hast %d)
+Später, %s, %s: ergibt %s ab %d
+lehrt %s (%s %d, du hast %d)
+lehrt %s (%s %d, für %s, derzeit %d)
+erhöht dein Maximum in %s auf %d (derzeit %d)
+erhöht bei %s das Maximum in %s auf %d (derzeit %d)
+zuletzt bei %s gesehen (%s)
+nur während des Winterhauchfests zu kaufen
+Händler für Handwerksbedarf verkaufen es
 AK
 Distanz-AK
 krit.
@@ -331,7 +359,7 @@ Gesundheit
 Mana
 Zauberkrit.
 Was Werte dir bringen
-unter dem Tooltip eines Gegenstands seine Werte-Zeilen mit ihrem Wert für deinen Charakter: Angriffskraft, Distanzangriffskraft, kritische Treffer, Ausweichen, Gesundheit, Mana
+neben jeder Wertezeile im Tooltip eines Gegenstands, was sie deinem Charakter bringt: Angriffskraft, Distanzangriffskraft, kritische Treffer, Ausweichen, Gesundheit, Mana. Was nicht in den Tooltip passt, steht auf der Tafel darunter
 Gegenstandsstufe
 Benötigte Stufe
 Stapelt bis
@@ -344,6 +372,26 @@ Bank
 Deine Markierung
 Gegenstandsdetails: alles über den Gegenstand, auf den du zeigst
 zeigt alles über den Gegenstand, auf den du zeigst (oder den angegebenen): Preise, wer ihn besitzt, deine Markierung
+keine Markierung
+Dieser Gegenstand hat sich geändert: Zeige erneut darauf.
+Das Spiel hat %s behalten: zerstöre es in seinen eigenen Taschen.
+%s zerstört.
+Zerstören
+Dieser Gegenstand startet eine Quest.
+Das ist ein Questgegenstand.
+%s zerstören?
+Das kann nicht rückgängig gemacht werden.
+Gegenstandsdetails
+Zurück
+Anprobieren
+Markierung ändern
+Mehr
+Schließen
+Nicht im Kampf.
+Gegenstandsaktionen: den Gegenstand unter dem Zeiger anprobieren, markieren, Details ansehen oder zerstören
+R3 auf einem Gegenstand halten für seine Aktionen
+Während deine Taschen oder die Bank offen sind, fragt das Halten der rechten Sticktaste auf einem Gegenstand, was damit geschehen soll: anprobieren, markieren, Details ansehen oder zerstören. Ein kurzer Druck sortiert oder verschiebt weiterhin, und die Taschen und das Gegenstandsmenü des Spiels bleiben, wie sie sind
+fragt, was mit dem Gegenstand unter dem Zeiger geschehen soll: anprobieren, markieren, Details, zerstören
 Zauberleisten-Animationen
 eine Zauberleiste zeigt, was gewirkt wird: Spitzhacken schlagen beim Bergbau darauf ein, Blitze laufen bei Natur daran entlang, eine Ranke blüht bei einer Heilung, Runen nehmen bei Arkan Gestalt an, Flammen, Eis und Schatten bei Feuer, Frost und Schatten
 jede Zauberleisten-Animation einmal auf deiner Zauberleiste zeigen
@@ -516,6 +564,8 @@ das Ausblenden des Bildschirms außerhalb des Kampfes: was ausblendet (Minikarte
 Gespeichert: gib /reload ein, damit das Spiel es auf die Festplatte schreibt.
 Haltungs- und Begleiterknöpfe über den Leisten
 die Knöpfe für Haltungen und Begleiterbefehle sitzen dort, wo die grünen und roten Zielsymbole waren, damit sich ihr Rad ganz im Bild öffnet; diese Symbole werden ausgeblendet
+Haltungs- und Begleiterräder vorne und im Bild
+Die Räder, die sich mit den Schultertasten und Triggern öffnen, werden vor den Tasten der Leiste gezeichnet und im Bild gehalten, auch im Kampf, damit jede Auswahl zu sehen ist; sie bleiben die des Spiels
 auflisten, wo die Teile der Gamepad-Leisten sitzen und was ruht (zur Fehlersuche)
 Auto
 Allgemein
@@ -582,6 +632,9 @@ Chat
 Chat-Reiter mit Kontur und das Eingabefeld als dunkles Glas
 Schadensmesser
 die Schadensanzeige des Spiels im Look des HUD: ihre Balken schräg auf dunklem Grund und umrandeter Text; sie behält alles, was sie tut
+Deine Taschen und die Bank werden %d Sekunden lang angesehen: Öffne sie, zeige auf Gegenstände, öffne das Gegenstandsmenü des Spiels. Gib dann /reload ein.
+Fertig angesehen: %d Fenster, %d Tastenzeilen, %d Menüs. Gib /reload ein, damit das Spiel es speichert.
+sieht sich eine Weile die Taschen, die Bank und die Gegenstandsmenüs des Spiels an, zur Fehlersuche
 Prüfung: %d von %d bestanden
 Das Spiel ist seit dem Einloggen nicht stehen geblieben.
 Momente, in denen das Spiel stand, und der Anteil des HUD daran:
@@ -792,7 +845,6 @@ Taschen
 Post
 Gegenstandsrat
 Vorlagen
-Angeln
 Berufe
 %s  |  Gamepad-Oberfläche: %s  |  läuft: %s
 Spieler %s, Ziel %s, Haustier %s, Fokus %s  |  Spielrahmen beiseitegelegt: %s  |  Chat verschoben: %s
@@ -899,22 +951,18 @@ Handeln
 %s oder %s: zur Beute
 %s oder %s: anderes Fenster
 Controller-Tasten kommen nach dem Kampf zurück.
-Schließen
 %s oder %s: zurück zu den Taschen
 Halten zum Zerstören
 Wählen
-Zurück
 Alle Taschen
 Nur diese Tasche
 Hineinlegen
 Tasche aufnehmen
-Mehr
 Sortieren
 %d frei
 Freier Platz
 Im Kampf schließt B deine Taschen.
 für die Bank
-keine Markierung
 Kein freier Platz.
 %s hängt am Mauszeiger: legt es auf eine Taste Eurer Gamepad-Leiste.
 Einen Bankfach-Taschenplatz für %s kaufen?
@@ -923,9 +971,6 @@ Belegen
 Hier ablegen
 Stapel teilen
 Markierung: %s
-Gegenstandsdetails
-Anprobieren
-Zerstören
 Bank sortieren
 Taschen sortieren
 Taschen zeigen
@@ -933,11 +978,6 @@ Bank zeigen
 Bank-Taschenplatz kaufen (%s)
 Empfohlenes verkaufen
 Loslassen zum Zerstören
-Dieser Gegenstand startet eine Quest.
-Das ist ein Questgegenstand.
-%s zerstören?
-Das Spiel hat %s behalten: zerstöre es in seinen eigenen Taschen.
-%s zerstört.
 Taschenfenster: Reihenfolge
 Clever: was du benutzt zuerst (Verbrauchbares, Gegenstände mit Benutzen), dann der Rest nach Art, Plunder zuletzt und verblasst. Nach Art: in Abschnitten unter eigenen Überschriften. Wie in den Taschen: die Reihenfolge des Spiels
 Großmeister
@@ -966,7 +1006,6 @@ Morgen
 Nachmittag
 Abend
 Nacht
-%s in %s
 Mit %s
 Die Lagerfeuerszene ist aus.
 Die Lagerfeuerszene wartet, bis du nicht mehr im Kampf bist.
@@ -1152,7 +1191,6 @@ Angestoßen: die Serie endet
 %s: ein Spiel für unterwegs
 Das Flugspiel ist aus: /cchud flightgame on
 Das Flugspiel wird auf einem Flug gespielt.
-Nicht im Kampf.
 Flugspiel: spielen / große Höhe
 auf einem Flug: das Flugspiel starten, oder es in große Höhe bringen und zurück
 Filmische Flüge: die Kamera kreist um dich
@@ -1251,6 +1289,16 @@ Markt: Preisverlauf als Kerzen
 der Preisverlauf im Markt ist eine Kerze pro Tag für die letzten 7 Tage (wo der Preis eröffnete, am höchsten und am niedrigsten war und schloss: grün, wenn er höher schloss, rot, wenn tiefer); aus: eine Linie des niedrigsten Tagespreises über 30 Tage
 den Markt öffnen oder schließen (ein Reiter des Auktionshauses)
 welches Auktionshaus dieser Client hat (zur Fehlersuche)
+sammeln
+Händler
+Auktionshaus
+Verkauft sich gut: etwa %s Gewinn pro Stück (%s im Auktionshaus nach Abzug der Gebühr, Materialien %s).
+[per Auktion]
+[mühsam zu farmen]
+[teuer]
+Braucht %s, das du im Auktionshaus kaufen müsstest: fürs Hochleveln mit Geld in der Tasche.
+Mühsam zu farmen: %s. Nur wenige Häute geben einen Balg.
+Etwa %s an Materialien zu kaufen.
 Öffne das Fenster eines Berufs, und ich sehe mir deine Rezepte an.
 Das ist die Grenze, %d. Ein Lehrer hat den nächsten Rang für dich.
 Bei %d gibt es nichts mehr zu lernen. Sprich mit einem Lehrer über den nächsten Rang.
@@ -1284,6 +1332,8 @@ weniger Herstellungen
 ein Rezept, das du findest oder kaufst
 andere Materialien
 die erste Wahl der Anleitungen
+kein mühsames Farmen
+weniger zu kaufen
 Öffne das Fenster eines Berufs für einen Levelplan.
 Am Limit, %d. Ein Lehrer hat den nächsten Rang.
 Noch %d bis %d; deine Rezepte reichen nicht. Ein Lehrer hat %s ab %d.
@@ -1294,13 +1344,21 @@ Noch %d bis %d. Lerne zuerst %s, %s.
 Noch %d bis %d. Sammle %s bis %d.
 Noch %d bis %d. Zuerst: %s, oder %s (%s).
 Noch %d bis %d. Zuerst: %s.
-Zu sammeln oder zu kaufen
-%d-mal herstellen: %s
+Bis %d noch höchstens nötig:
+Lohnt sich zum Verkaufen:
+Höchstens %d Herstellungen: %s
+Ab %d zu lernen. %s.
 Lerne es %s, ab %d.
 Lerne es %s.
+Selbst sammeln: dein Beruf %s liefert es.
+Beim Händler kaufen: %s.
+Beim Händler kaufen.
+Im Auktionshaus kaufen (zuletzt %s pro Stück).
+Im Auktionshaus kaufen.
 %s: %d in deinen Taschen, %d in der Bank, %d pro Herstellung
+Für dich jetzt grau, gibt also keine Fertigkeitspunkte. Stelle es für %s her.
 Die Anleitungen leveln diesen Abschnitt mit dem Sammeln von %s.
-%s: du hast %d, der Plan braucht %d
+%s: höchstens %d bis %d. Du hast %d, also noch höchstens %d.
 für %s
 Kaufen ist billiger, als es aus %s herzustellen
 Hergestellt aus %s
@@ -1311,10 +1369,11 @@ Mit dem, was in deiner Bank liegt, lässt sich nichts mehr herstellen.
 Der Mentor: %s %d > %d
 Der Mentor
 Levelplan
+herstellen für %s
 oder
 Sammle %s
-zu lernen
-billiger zu kaufen
+bis zu x%d
+bis zu %d
 Ausblenden
 Der Plan
 Das farmen

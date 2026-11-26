@@ -153,15 +153,18 @@ local enabled = MakeCheckbox(panel, "ControllerCamOptEnabled", L["Enable Control
     function() return ns.db.enabled end, function(v) ns.SetEnabled(v) end)
 enabled:SetPoint("TOPLEFT", status, "BOTTOMLEFT", -2, -8)
 
--- Quick picks
+-- Quick picks: the default experience first, the game's own camera last
 local quickLabel = panel:CreateFontString(nil, "ARTWORK", "GameFontNormal")
 quickLabel:SetPoint("TOPLEFT", enabled, "BOTTOMLEFT", 2, -10)
-quickLabel:SetText(L["Quick pick (use one profile everywhere):"])
+quickLabel:SetText(L["Quick pick:"])
 
+local qs = MakeButton(panel, L["Recommended setup"], L["Action camera with calmer profiles for cities, mounts, flying and raids."], 150,
+    function() ns.ApplyStarter(); RefreshAll() end)
+qs:SetPoint("TOPLEFT", quickLabel, "BOTTOMLEFT", 0, -6)
 local qa = MakeButton(panel, L["Action"], nil, 110,
     function() ns.UseEverywhere("action"); RefreshAll() end)
 ProfileTooltip(qa, function() return "action" end)
-qa:SetPoint("TOPLEFT", quickLabel, "BOTTOMLEFT", 0, -6)
+qa:SetPoint("LEFT", qs, "RIGHT", 6, 0)
 local qh = MakeButton(panel, L["Hybrid"], nil, 110,
     function() ns.UseEverywhere("hybrid"); RefreshAll() end)
 ProfileTooltip(qh, function() return "hybrid" end)
@@ -170,13 +173,10 @@ local qc = MakeButton(panel, L["Classic"], nil, 110,
     function() ns.UseEverywhere("classic"); RefreshAll() end)
 ProfileTooltip(qc, function() return "classic" end)
 qc:SetPoint("LEFT", qh, "RIGHT", 6, 0)
-local qs = MakeButton(panel, L["Recommended setup"], L["Action camera with calmer profiles for cities, mounts, flying and raids."], 150,
-    function() ns.ApplyStarter(); RefreshAll() end)
-qs:SetPoint("LEFT", qc, "RIGHT", 6, 0)
 
 -- One row per situation: a button that cycles through the profiles.
 local rowsHeader = panel:CreateFontString(nil, "ARTWORK", "GameFontNormal")
-rowsHeader:SetPoint("TOPLEFT", qa, "BOTTOMLEFT", 0, -14)
+rowsHeader:SetPoint("TOPLEFT", qs, "BOTTOMLEFT", 0, -14)
 rowsHeader:SetText(L["Profile for each situation (the first one that applies wins, from the top):"])
 
 local function Cycle(sit, step)
@@ -226,6 +226,26 @@ delay:SetScript("OnValueChanged", function(_, value)
 end)
 Tooltip(delay, L["Stops the camera from flickering between profiles when a situation switches on and off quickly."])
 refreshers[#refreshers + 1] = function() delay:SetValue(ns.db.exitDelay); DelayLabel(ns.db.exitDelay) end
+
+-- Your overall strength of the shoulder offset, beside the delay
+local strength = CreateFrame("Slider", "ControllerCamOptOffset", panel, "OptionsSliderTemplate")
+strength:SetPoint("LEFT", delay, "RIGHT", 60, 0)
+strength:SetWidth(220)
+strength:SetMinMaxValues(0, 200)
+strength:SetValueStep(5)
+if strength.SetObeyStepOnDrag then strength:SetObeyStepOnDrag(true) end
+local strengthText = _G["ControllerCamOptOffsetText"]
+local function StrengthLabel(v) if strengthText then strengthText:SetText((L["Shoulder offset strength: %d%%"]):format(v + 0.5)) end end
+if _G["ControllerCamOptOffsetLow"] then _G["ControllerCamOptOffsetLow"]:SetText("0") end
+if _G["ControllerCamOptOffsetHigh"] then _G["ControllerCamOptOffsetHigh"]:SetText("200") end
+strength:SetScript("OnValueChanged", function(_, value)
+    StrengthLabel(value)
+    if not refreshing then ns.SetOffsetScale(value / 100) end
+end)
+Tooltip(strength, L["Moves the over-the-shoulder camera further out or back toward the middle, in every profile. Handy if your character's size makes it sit differently."])
+refreshers[#refreshers + 1] = function()
+    strength:SetValue(ns.db.offsetScale * 100); StrengthLabel(ns.db.offsetScale * 100)
+end
 
 -- Closer on an enemy target (0: off)
 local near = CreateFrame("Slider", "ControllerCamOptTargetZoom", panel, "OptionsSliderTemplate")
@@ -344,8 +364,8 @@ local bReset = MakeButton(pp, L["Reset to original"], L["Puts this built-in prof
     Act(function() ns.ResetBuiltin(Selected()) end))
 bReset:SetPoint("LEFT", bDelete, "RIGHT", 6, 0)
 
-local advanced = MakeCheckbox(pp, "ControllerCamOptAdvanced", L["Advanced: edit built-in profiles"],
-    L["Lets you change the built-in profiles too. Your changes are kept, and Reset to original brings the original back."],
+local advanced = MakeCheckbox(pp, "ControllerCamOptAdvanced", L["Advanced: show and edit every setting"],
+    L["Shows every setting, in groups, and lets you change the built-in profiles too. Your changes are kept, and Reset to original brings the original back."],
     function() return ns.db.advanced end, function(v) ns.SetAdvanced(v) end)
 advanced:SetPoint("TOPLEFT", ptitle, "TOPRIGHT", 40, 8)
 
@@ -354,18 +374,30 @@ readonly:SetPoint("TOPLEFT", bExport, "BOTTOMLEFT", 0, -10)
 readonly:SetWidth(560)
 readonly:SetJustifyH("LEFT")
 
--- The editor: one row per setting, in a scrolling area.
+-- The editor: a menu of areas (one per group of settings) over a scrolling page for the chosen one. Only shown
+-- when the profile can be edited; otherwise the presets stay the whole story.
+local menu = CreateFrame("Frame", nil, pp)
+menu:SetPoint("TOPLEFT", readonly, "BOTTOMLEFT", 0, -8)
+
 local scroll = CreateFrame("ScrollFrame", "ControllerCamEditorScroll", pp, "UIPanelScrollFrameTemplate")
-scroll:SetPoint("TOPLEFT", readonly, "BOTTOMLEFT", 0, -8)
+scroll:SetPoint("TOPLEFT", menu, "BOTTOMLEFT", 0, -8)
 scroll:SetPoint("BOTTOMRIGHT", pp, "BOTTOMRIGHT", -30, 12)
 local content = CreateFrame("Frame", nil, scroll)
 content:SetSize(630, 10)
 scroll:SetScrollChild(content)
 
 local editors = {}
+local areas = {}                 -- group id -> { frame, button, help, height }
+local area = ns.GROUPS[1].id     -- the one on show
+ns.editorAreas = areas
+
 local function SetEditable(widget, on)
     widget:SetAlpha(on and 1 or 0.5)
     if widget.SetEnabled then widget:SetEnabled(on) end
+end
+
+local function SetShown(widget, on)
+    if on then widget:Show() else widget:Hide() end
 end
 
 local function DisplayValue(s, v)
@@ -376,36 +408,117 @@ local function CurveToText(c)
     return c and ns.FormatSettingValue(ns.SETTING_BY_KEY.shoulderCurve, c) or ""
 end
 
-local y, lastGroup = -4, nil
-for _, s in ipairs(ns.SETTINGS) do
-    if s.group ~= lastGroup then
-        lastGroup = s.group
-        local g = content:CreateFontString(nil, "ARTWORK", "GameFontNormal")
-        g:SetPoint("TOPLEFT", 0, y - 6)
-        g:SetText(L[s.group])
-        y = y - 28
+local function Line(parent, font, x, y, width, text)
+    local fs = parent:CreateFontString(nil, "ARTWORK", font)
+    fs:SetPoint("TOPLEFT", x, y)
+    fs:SetWidth(width)
+    fs:SetJustifyH("LEFT")
+    if text then fs:SetText(text) end
+    return fs
+end
+
+local function MakeSlider(parent, x, y, lo, hi, step, onChange)
+    local sl = CreateFrame("Slider", nil, parent, "OptionsSliderTemplate")
+    sl:SetPoint("TOPLEFT", x, y)
+    sl:SetWidth(170)
+    sl:SetMinMaxValues(lo, hi)
+    sl:SetValueStep(step)
+    if sl.SetObeyStepOnDrag then sl:SetObeyStepOnDrag(true) end
+    for _, part in ipairs({ "Text", "Low", "High" }) do         -- the template's own labels: the row has its own
+        local fs = sl[part]
+        if type(fs) == "table" and fs.SetText then fs:SetText("") end
+    end
+    sl:SetScript("OnValueChanged", function(_, v)
+        if refreshing then return end
+        onChange(v)
+        RefreshAll()
+    end)
+    return sl
+end
+
+-- The table by zoom view over a "by zoom" setting: its switch, then one slider for each view
+local VIEW_TABLES = {
+    shoulderCurve = { switch = L["Change the offset with zoom"],
+        help = L["How far to the side at each distance. The camera eases from one to the next."],
+        lo = 0, hi = 4, step = 0.1, per = 1, text = function(v) return ns.FormatNumber(v) end },
+    focusCurve = { switch = L["Change the target focus with zoom"],
+        help = L["How much of your target focus strength at each distance. Off: all of it everywhere."],
+        lo = 0, hi = 100, step = 5, per = 100, text = function(v) return ("%d%%"):format(v * 100 + 0.5) end },
+    fovCurve = { switch = L["Change the field of view with zoom"],
+        help = L["The field of view at each distance, as a share of your own. Off: yours is left alone."],
+        lo = 80, hi = 120, step = 1, per = 100, text = function(v) return ("%d%%"):format(v * 100 + 0.5) end },
+}
+local VIEW_TABLE_HEIGHT = 62 + 30 * #ns.ZOOM_VIEWS
+
+local function ViewTable(parent, s, y)
+    local spec = VIEW_TABLES[s.key]
+    local box = CreateFrame("Frame", nil, parent)
+    box:SetPoint("TOPLEFT", 0, y)
+    box:SetSize(630, VIEW_TABLE_HEIGHT)
+
+    local name = "ControllerCamOptByZoom_" .. s.key
+    local switch = CreateFrame("CheckButton", name, box, "UICheckButtonTemplate")
+    switch:SetPoint("TOPLEFT", 4, 0)
+    local switchText = switch.Text or _G[name .. "Text"]        -- (named by either of the template's ways)
+    if switchText then switchText:SetText(spec.switch) end
+    switch:SetScript("OnClick", function(self)
+        if refreshing then return end
+        ns.SetByZoom(Selected(), s.key, self:GetChecked() and true or false)
+        RefreshAll()
+    end)
+    Line(box, "GameFontDisableSmall", 8, -26, 600, spec.help)
+    local here = Line(box, "GameFontHighlightSmall", 8, -42, 600)
+
+    local rows = {}
+    for i, view in ipairs(ns.ZOOM_VIEWS) do
+        local ry = -62 - (i - 1) * 30
+        local label = Line(box, "GameFontHighlightSmall", 24, ry, 236,
+            (L["%s (%s to %s yards)"]):format(L[view.name], ns.FormatNumber(view.from), ns.FormatNumber(view.to)))
+        local value = Line(box, "GameFontNormalSmall", 262, ry, 110)
+        local slider = MakeSlider(box, 380, ry - 2, spec.lo, spec.hi, spec.step, function(v)
+            local x = math.min(math.max(v, spec.lo), spec.hi) / spec.per
+            ns.SetViewValue(Selected(), s.key, i, ns.Round(x, 2))
+        end)
+        rows[i] = { label = label, value = value, slider = slider }
     end
 
-    local row = { setting = s }
-    local label = content:CreateFontString(nil, "ARTWORK", "GameFontHighlightSmall")
-    label:SetPoint("TOPLEFT", 8, y)
-    label:SetWidth(250)
-    label:SetJustifyH("LEFT")
-    label:SetText(L[s.label])
+    local function Refresh(p, editable)
+        local curve = p.values[s.key]
+        local values = curve and ns.ViewValues(curve)
+        switch:SetChecked(curve ~= nil)
+        SetEditable(switch, editable)
+        local zoom = tonumber(GetCameraZoom and GetCameraZoom())
+        local at = zoom and ns.ViewAt(zoom)
+        here:SetText(at and (L["You are at %.1f yards now: %s."]):format(zoom, L[ns.ZOOM_VIEWS[at].name]) or "")
+        for i, row in ipairs(rows) do
+            local v = values and values[i]
+            row.slider:SetValue((v or ns.VIEW_DEFAULTS[s.key][i]) * spec.per)
+            row.value:SetText(v and spec.text(v) or "-")
+            SetEditable(row.slider, editable and curve ~= nil)
+            if row.label.SetTextColor then                    -- the view you are in, in gold
+                if i == at then row.label:SetTextColor(1, 0.82, 0) else row.label:SetTextColor(1, 1, 1) end
+            end
+        end
+    end
+    return box, Refresh
+end
 
-    local value = content:CreateFontString(nil, "ARTWORK", "GameFontNormalSmall")
-    value:SetPoint("TOPLEFT", 262, y)
-    value:SetWidth(110)
-    value:SetJustifyH("LEFT")
+local ROW_HEIGHT = 46
+
+local function SettingRow(parent, s, y)
+    local row = { setting = s }
+    Line(parent, "GameFontHighlightSmall", 8, y, 250, L[s.label])
+    if s.help then Line(parent, "GameFontDisableSmall", 8, y - 15, 360, L[s.help]) end
+    local value = Line(parent, "GameFontNormalSmall", 262, y, 110)
     row.value = value
 
     if s.kind == "curve" then
-        local eb = CreateFrame("EditBox", nil, content, "InputBoxTemplate")
-        eb:SetSize(170, 20)
+        local eb = CreateFrame("EditBox", nil, parent, "InputBoxTemplate")
+        eb:SetSize(220, 20)
         eb:SetPoint("TOPLEFT", 380, y + 3)
         eb:SetAutoFocus(false)
-        eb:SetMaxLetters(120)
-        Tooltip(eb, L["Zoom distance and offset pairs, for example 0:2 8:2 20:0. Empty = no curve. Press Enter to apply."])
+        eb:SetMaxLetters(200)
+        Tooltip(eb, L["Distance and value pairs, for example 0:2 8:2 20:0. Empty: not by zoom. Press Enter to apply."])
         eb:SetScript("OnEnterPressed", function(self)
             local id = Selected()
             local points = {}
@@ -421,7 +534,7 @@ for _, s in ipairs(ns.SETTINGS) do
             value:SetText(p.values[s.key] and "" or L["off"])
         end
     elseif s.kind == "bool" then
-        local cb = CreateFrame("CheckButton", nil, content, "UICheckButtonTemplate")
+        local cb = CreateFrame("CheckButton", nil, parent, "UICheckButtonTemplate")
         cb:SetPoint("TOPLEFT", 376, y + 6)
         cb:SetScript("OnClick", function(self)
             if refreshing then return end
@@ -436,34 +549,26 @@ for _, s in ipairs(ns.SETTINGS) do
             value:SetText(DisplayValue(s, v))
         end
     else
-        local sl = CreateFrame("Slider", nil, content, "OptionsSliderTemplate")
-        sl:SetPoint("TOPLEFT", 380, y - 2)
-        sl:SetWidth(170)
-        local step = s.step or 1
         local lo, hi = s.min, s.max
-        sl:SetMinMaxValues(lo, hi)
-        sl:SetValueStep(step)
-        if sl.SetObeyStepOnDrag then sl:SetObeyStepOnDrag(true) end
-        sl:SetScript("OnValueChanged", function(self, v)
-            if refreshing then return end
+        local sl = MakeSlider(parent, 380, y - 2, lo, hi, s.step or 1, function(v)
             if s.kind == "mul" then v = "x" .. ns.FormatNumber(v) end
             ns.SetValue(Selected(), s.key, v)
-            RefreshAll()
         end)
         row.widget = sl
         row.refresh = function(p, editable)
             local v = p.values[s.key]
+            local byZoom = s.key == "shoulder" and p.values.shoulderCurve ~= nil
             local shown = v
-            if v == "d" or v == nil then shown = (s.kind == "mul") and 1 or lo
+            if v == "d" or v == nil then shown = (s.kind == "mul") and 1 or (s.key == "shoulder" and 0 or lo)
             elseif s.kind == "mul" then shown = tonumber(v:sub(2)) end
             sl:SetValue(shown)
-            SetEditable(sl, editable)
-            value:SetText(DisplayValue(s, v))
+            SetEditable(sl, editable and not byZoom)
+            value:SetText(byZoom and L["by zoom"] or DisplayValue(s, v))
         end
     end
 
     if s.kind ~= "curve" then
-        local reset = CreateFrame("Button", nil, content, "UIPanelButtonTemplate")
+        local reset = CreateFrame("Button", nil, parent, "UIPanelButtonTemplate")
         reset:SetSize(64, 20)
         reset:SetPoint("TOPLEFT", 560, y + 2)
         reset:SetText(L["Default"])
@@ -475,14 +580,72 @@ for _, s in ipairs(ns.SETTINGS) do
         row.reset = reset
     end
     editors[#editors + 1] = row
-    y = y - 30
 end
-content:SetHeight(-y + 20)
+
+local function BuildArea(group)
+    local frame = CreateFrame("Frame", nil, content)
+    frame:SetPoint("TOPLEFT", 0, 0)
+    local a = { frame = frame, group = group }
+    a.help = Line(frame, "GameFontHighlight", 0, -4, 600, L[group.help])
+    local y = -48
+
+    local list = {}
+    for _, s in ipairs(ns.SETTINGS) do
+        if s.group == group.id then list[#list + 1] = s end
+    end
+
+    local function Table(s)
+        local box, refresh = ViewTable(frame, s, y)
+        if s.probe then                  -- a setting this game may not have: say so in its place instead
+            a.probe = { box = box, top = y }
+            a.probe.missing = Line(frame, "GameFontDisableSmall", 8, y, 600,
+                L["This game has no field of view setting that add-ons can change."])
+        end
+        editors[#editors + 1] = { setting = s, refresh = refresh }
+        y = y - VIEW_TABLE_HEIGHT - 8
+        return box
+    end
+
+    -- the offset's table is what most people come here for: first in its area
+    for _, s in ipairs(list) do
+        if s.key == "shoulderCurve" then Table(s) end
+    end
+    for _, s in ipairs(list) do
+        local box = s.kind == "curve" and s.key ~= "shoulderCurve" and Table(s)
+        if s.probe then
+            SettingRow(box, s, -VIEW_TABLE_HEIGHT - 8)       -- (its points: gone with the table)
+        else
+            SettingRow(frame, s, y)
+        end
+        y = y - ROW_HEIGHT
+    end
+    a.height = -y + 12
+    frame:SetSize(630, a.height)
+    return a
+end
+
+-- the menu: a button for each area, onto a second line when a language needs it
+local mx, my = 0, 0
+for _, group in ipairs(ns.GROUPS) do
+    local a = BuildArea(group)
+    local b = MakeButton(menu, L[group.id], L[group.help], 84, function()
+        area = group.id
+        if scroll.SetVerticalScroll then scroll:SetVerticalScroll(0) end
+        RefreshAll()
+    end)
+    local fs = b:GetFontString()
+    local w = math.max(84, (fs and fs:GetStringWidth() or 0) + 30)
+    if mx + w > 630 and mx > 0 then mx, my = 0, my - 26 end
+    b:SetPoint("TOPLEFT", mx, my)
+    mx = mx + w + 4
+    a.button = b
+    areas[group.id] = a
+end
+menu:SetSize(630, 24 - my)
 
 refreshers[#refreshers + 1] = function()
     local id = Selected()
     local p = ns.GetProfile(id)
-    selBtn:SetText(ns.ProfileName(id))
     descText:SetText(ns.ProfileDescription(id))
     local editable = ns.IsEditable(id)
     SetEditable(bDelete, not ns.IsBuiltin(id))
@@ -491,15 +654,35 @@ refreshers[#refreshers + 1] = function()
     if editable and ns.IsBuiltin(id) then
         readonly:SetText(L["Advanced editing is on. Changes to a built-in profile are kept; Reset to original brings it back."])
     elseif editable then
-        readonly:SetText(L["Settings not listed use the game default. Click a value to change it; the curve box takes zoom:offset pairs."])
+        readonly:SetText(L["Settings not listed use the game default. Pick a group below to see its settings."])
     else
-        readonly:SetText(L["Built-in profiles are locked. Make a copy, or tick Advanced to edit them."])
+        readonly:SetText(L["The presets are all most people need. To change one, make a copy, or tick Advanced to see every setting."])
     end
-    local shownValues = p.values
+    SetShown(menu, editable)
+    SetShown(scroll, editable)
+
+    local height = areas[area].height
+    for groupId, a in pairs(areas) do
+        SetShown(a.frame, groupId == area)
+        local mark = groupId == area and a.button.LockHighlight or a.button.UnlockHighlight
+        if mark then mark(a.button) end
+        local text = L[a.group.help]
+        if ns.MOVEMENT_GROUPS[groupId] and ns.db.movement ~= true then
+            text = text .. " |cffff9933" .. L["Only used once you let the profiles set how you move (ControllerCam's first page)."] .. "|r"
+        end
+        a.help:SetText(text)
+        if a.probe then
+            local has = ns.FovCVar() ~= nil
+            SetShown(a.probe.box, has)
+            SetShown(a.probe.missing, not has)
+            if groupId == area and not has then height = -a.probe.top + 40 end
+        end
+    end
     for _, row in ipairs(editors) do
-        row.refresh({ values = shownValues }, editable)
+        row.refresh(p, editable)
         if row.reset then SetEditable(row.reset, editable) end
     end
+    content:SetHeight(height)
 end
 
 pp:SetScript("OnShow", RefreshAll)

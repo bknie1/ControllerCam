@@ -20,16 +20,31 @@ local function ShoulderCurve(offset, ramp, hold, fade)
     return points
 end
 
+-- The camera of the recommended setup (the Action profile) by zoom view, one value for each of ns.ZOOM_VIEWS:
+--   first person | over the shoulder (2-3.5 yd) | upper body (4.5-6) | whole body (7-10) | mid (13-20) | far (24+)
+-- offset: yards to the side. Strong over the shoulder, half a yard less with the whole body in sight, and the
+-- game's own centred ("classic") camera from the mid range out.
+-- focus: the share of the target focus strength: hardest over the shoulder and at the upper body, letting go as
+-- the camera goes out.
+-- fov: the share of your own field of view. Only the editor uses it (switching "field of view by zoom" on);
+-- no built-in profile sets one, as the game is not known to have such a setting.
+ns.VIEW_DEFAULTS = {
+    shoulderCurve = { 0, 1.5, 1.5, 1,   0,   0    },
+    focusCurve    = { 0, 1,   1,   0.6, 0.3, 0    },
+    fovCurve      = { 1, 0.92, 0.95, 1,  1,  1.05 },
+}
+
 -- In the water you face the way you do on land: the game's "face movement direction when swimming" stays off.
 -- With it on, your character turned to the side of the stick as soon as it swam (the camera followed, and the
 -- shoulder offset swung with it). It can be turned on again in a profile of your own.
 --
--- id, English name, English description, values. Listed in the order shown in menus.
+-- id, English name, English description, values. Listed in the order shown in menus: the recommended setup's
+-- camera first, Classic last.
 local BUILTIN = {
     {
         id = "action",
         name = "Action",
-        desc = "The out-of-the-box feel: close third-person camera over your shoulder, head tracking, the camera follows where you run and you face where you move. Out of combat you run free, in combat you strafe.",
+        desc = "The out-of-the-box feel: over your shoulder up close, easing to the middle as you zoom out, turning toward your target most when you are near. Head tracking, and the camera follows where you run.",
         values = {
             followTerrain = 0,
             zoom = 7, zoomMax = 2.2,
@@ -37,9 +52,11 @@ local BUILTIN = {
             followOnStick = 1, followYawSpeed = "x1.2", followDelay = "x0.8",
             faceAngle = 0, faceAngleCombat = 180, turnWithCamera = 1,
             faceMount = 1, faceSwim = 0, faceFly = 1,
-            shoulderCurve = ShoulderCurve(2, 6, 8, 20),
+            shoulderCurve = ns.CurveFromViews(ns.VIEW_DEFAULTS.shoulderCurve),
             dynamicPitch = 1,
             headStrength = 1, headStanding = 0.3, headMoving = 0.5, headRange = 5,
+            focusEnemy = 1, focusEnemyYaw = 1, focusEnemyPitch = 0.75,
+            focusCurve = ns.CurveFromViews(ns.VIEW_DEFAULTS.focusCurve),
             focusInteract = 1, focusInteractYaw = 1, focusInteractPitch = 0.75,
         },
     },
@@ -58,12 +75,6 @@ local BUILTIN = {
             headStrength = 0.5, headStanding = 0.3, headMoving = 0.5,
             focusInteract = 1, focusInteractYaw = 1, focusInteractPitch = 0.75,
         },
-    },
-    {
-        id = "classic",
-        name = "Classic",
-        desc = "The game's own camera: every setting ControllerCam manages goes back to its default. Your camera distance and your terrain-following setting are left as they are.",
-        values = {},
     },
     {
         id = "shooter",
@@ -176,11 +187,20 @@ local BUILTIN = {
             followOnStick = 1,
             faceAngle = 0, faceAngleCombat = 115, turnWithCamera = 1,
             faceMount = 1, faceSwim = 0, faceFly = 1,
-            shoulderCurve = ShoulderCurve(1, 4, 6, 12),
+            -- ShoulderCurve(1, 4, 6, 12), with half a yard more on the closest steps: at the last one before
+            -- first person the character stood in the view. 1 from 2 yards in to 4; as before from 4 out.
+            shoulderCurve = { { 0, 0 }, { 0.5, 0.6 }, { 2, 1 }, { 4, 1 }, { 6, 1.5 }, { 12, 0 } },
             dynamicPitch = 1,
             headStrength = 0.7, headStanding = 0.4, headMoving = 0.5,
             focusInteract = 1, focusInteractYaw = 1, focusInteractPitch = 0.75,
         },
+    },
+    -- last on purpose: the game's own camera, for those who only want the HUD
+    {
+        id = "classic",
+        name = "Classic",
+        desc = "The game's own camera: every setting ControllerCam manages goes back to its default. Your camera distance and your terrain-following setting are left as they are.",
+        values = {},
     },
 }
 

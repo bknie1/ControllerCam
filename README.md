@@ -12,10 +12,10 @@ Copy the `ControllerCam` folder into `World of Warcraft\_forever_\Interface\AddO
 
 | Command | What it does |
 | --- | --- |
+| `/ccam use recommended` | The recommended mix (default for a new install): Action, with calmer profiles for cities, mounts, flying, raids (also `/ccam starter`) |
 | `/ccam use action` | Action camera everywhere |
 | `/ccam use hybrid` | Between Classic and Action |
 | `/ccam use classic` | The game's own camera |
-| `/ccam starter` | The recommended mix (default for a new install): Action, with calmer profiles for cities, mounts, flying, raids |
 | `/ccam help` | Everything else |
 
 Options: **Options > AddOns > ControllerCam** (a page with the situations, and a *Profiles* page to edit and share). Left-click a profile button to go to the next profile, right-click for the previous one.
@@ -24,9 +24,8 @@ Options: **Options > AddOns > ControllerCam** (a page with the situations, and a
 
 | Profile | Feel |
 | --- | --- |
-| **Action** | Close camera over the right shoulder (offset +2 at normal distances, smaller as you zoom in so your character stays on screen, fading to 0 as you zoom out), head tracking on, dynamic pitch, camera follows your movement. You run facing your movement out of combat and strafe in combat. |
+| **Action** | Over the right shoulder up close, easing to the middle as you zoom out, turning toward your target most when you are near (see [By zoom view](#by-zoom-view)). Head tracking on, dynamic pitch, camera follows your movement. You run facing your movement out of combat and strafe in combat. |
 | **Hybrid** | Medium distance, light shoulder offset, gentle head tracking. |
-| **Classic** | Every setting ControllerCam manages goes back to the game's default. |
 | **Shooter** | Tight camera, strong shoulder offset, fast stick aim, strafing in combat. |
 | **Tactical** | Even closer and steadier; the character always turns with the camera. |
 | **Cinematic** | Slow and wide with strong head tracking and dynamic pitch. |
@@ -35,8 +34,9 @@ Options: **Options > AddOns > ControllerCam** (a page with the situations, and a
 | **Mounted cruise** | Far camera that swings behind you while riding. |
 | **Flying** | Far camera that follows your climb and dive. |
 | **Town stroll** | Relaxed, slower camera for cities. |
+| **Classic** | Every setting ControllerCam manages goes back to the game's default: for those who only want the HUD. |
 
-Built-in profiles are locked by default. Make a copy (`/ccam copy action "My Action"` or the *Make a copy* button) and change that, or tick **Advanced: edit built-in profiles** on the Profiles page (`/ccam advanced on`) to change the built-in ones directly. An edited built-in profile is marked *(edited)*, and *Reset to original* (`/ccam reset <profile>`) brings the original back.
+Built-in profiles are locked by default. Make a copy (`/ccam copy action "My Action"` or the *Make a copy* button) and change that, or tick **Advanced: show and edit every setting** on the Profiles page (`/ccam advanced on`) to change the built-in ones directly. The settings come in groups (Zoom, Shoulder, Targets, Head tracking, Smoothing, Controller, Facing), each setting with a line saying what it does. An edited built-in profile is marked *(edited)*, and *Reset to original* (`/ccam reset <profile>`) brings the original back.
 
 The camera following the terrain (`cameraTerrainTilt`) is off in every built-in profile except Classic. A profile that does not mention it leaves **your own setting** alone and puts it back if another profile changed it; set it per profile in the Profiles page or with `/ccam edit <profile> followTerrain on|off|default` (for this setting, `default` means your own).
 
@@ -66,15 +66,28 @@ A situation is kept for a moment after it ends (1.5 seconds by default, `/ccam d
 
 `/ccam force <profile>` uses a profile no matter what, until `/ccam auto`.
 
-## Shoulder offset by zoom
+## By zoom view
 
-The over-the-shoulder offset can follow your camera distance, for example +2 when the camera is close and fading to 0 when you zoom out. Action uses `0:0 6:2 8:2 20:0` (zoom in yards : offset). The offset has to shrink as you zoom in: a sideways offset in yards takes up more of the screen the closer the camera is, and a fixed +2 would push the character out of view. Edit it for a custom profile in the Profiles page, or with
+The over-the-shoulder offset and the target focus can follow your camera distance. Action sets them for six views; each value holds across its view and eases into the next:
+
+| View | Yards | Offset | Target focus |
+| --- | --- | --- | --- |
+| First person | 0 to 1 | 0 | 0% |
+| Over the shoulder | 2 to 3.5 | 1.5 | 100% |
+| Upper body | 4.5 to 6 | 1.5 | 100% |
+| Whole body | 7 to 10 | 1 | 60% |
+| Mid range | 13 to 20 | 0 | 30% |
+| Zoomed out | 24 and more | 0 | 0% |
+
+With **Advanced** on, the Shoulder and Targets groups have a switch for each and a slider for each view. The exact points can be edited too (zoom in yards : value), in the same place or, for the offset, with
 
 ```
 /ccam curve "My Action" 0:2 8:2 20:0
 ```
 
-Up to 8 points; between points the offset changes in a straight line. `/ccam curve "My Action"` with no points removes the curve. `/ccam flip` mirrors every offset to the other shoulder. Positive offsets are meant as the right shoulder; if yours looks like the left, use `/ccam flip`.
+Up to 12 points; between points the value changes in a straight line. `/ccam curve "My Action"` with no points removes the curve. `/ccam offset <percent>` (or the slider on the first page) makes every profile's offset stronger or weaker, and `/ccam flip` mirrors every offset to the other shoulder. Positive offsets are meant as the right shoulder; if yours looks like the left, use `/ccam flip`.
+
+**Field of view** can follow the zoom in the same way, if the game has a field of view setting add-ons can change. None is confirmed in the Forever client, so the addon asks while it runs (`/ccam info` says what it found). The values are shares of your own field of view, and no built-in profile sets one.
 
 ## Head tracking
 
@@ -103,6 +116,7 @@ Head tracking (the camera moves a little with your character's head and body) is
 /ccam delete <profile>
 /ccam export <profile> | import <string>
 /ccam flip | delay <s>
+/ccam offset <percent>                 the shoulder offset's strength in every profile
 /ccam on | off                         off restores the camera settings you had before
 /ccam info                             zoom, shoulder offset and motion settings right now (troubleshooting)
 /ccam config | help
@@ -115,7 +129,7 @@ Profile names can be typed in part (`/ccam use cla`) or quoted (`/ccam use "Town
 - **UI reloads.** Switching the Gamepad UI on or off reloads the interface. Anything kept only in memory is lost, so ControllerCam saves what matters: your profiles, the profile of each situation, the camera settings you had before it touched them (restored by `/ccam off`), and the motion-sickness settings it had to switch off. Your camera distance is not reset by a reload.
 - **Combat.** The game refuses to change some CVars during combat. A refused setting is retried when combat ends; the rest are applied right away.
 - **Motion-sickness settings.** The shoulder offset, dynamic pitch, target focus and head tracking only work while the game's *Keep Character Centered* and *Reduce Unexpected Movement* settings are off. While a profile uses any of those features, ControllerCam switches them off and puts them back afterwards. In the Gamepad UI the game forces its own temporary values for them, so there the temporary value is overridden instead of your stored one.
-- **Camera settings used** (all names were found in the Forever client): `cameraDistanceMaxZoomFactor`, `GamePadCameraYawSpeed`, `GamePadCameraPitchSpeed`, `GamepadCameraFollowOnStick`, `CameraFollowOnStick`, `CameraFollowYawSpeed`, `CameraFollowPitchSpeed`, `CameraFollowGamepadAdjustDelay`, `GamePadFaceMovementMaxAngle`, `GamePadFaceMovementMaxAngleCombat`, `GamePadTurnWithCamera`, `GamePadFaceMovementMount`, `GamePadFaceMovementSwimming`, `GamePadFaceMovementFreeFlying`, `test_cameraOverShoulder`, `test_cameraDynamicPitch`, `test_cameraHeadMovement*`, `test_cameraTargetFocus*`, `cameraSmoothStyle`, `cameraTerrainTilt`, plus the two motion-sickness settings above. Speeds are stored as multiples of the game's own default (`x1.25`), so the profiles do not depend on a guessed default value.
+- **Camera settings used** (all names were found in the Forever client): `cameraDistanceMaxZoomFactor`, `GamePadCameraYawSpeed`, `GamePadCameraPitchSpeed`, `GamepadCameraFollowOnStick`, `CameraFollowOnStick`, `CameraFollowYawSpeed`, `CameraFollowPitchSpeed`, `CameraFollowGamepadAdjustDelay`, `GamePadFaceMovementMaxAngle`, `GamePadFaceMovementMaxAngleCombat`, `GamePadTurnWithCamera`, `GamePadFaceMovementMount`, `GamePadFaceMovementSwimming`, `GamePadFaceMovementFreeFlying`, `test_cameraOverShoulder`, `test_cameraDynamicPitch`, `test_cameraHeadMovement*`, `test_cameraTargetFocus*`, `cameraSmoothStyle`, `cameraTerrainTilt`, plus the two motion-sickness settings above. Speeds are stored as multiples of the game's own default (`x1.25`), so the profiles do not depend on a guessed default value. One name is not confirmed and is only asked for while the game runs: `cameraFov` (see [By zoom view](#by-zoom-view)).
 
 ## ControllerCam: HUD
 
@@ -134,7 +148,7 @@ The download has a second, optional addon: **ControllerCam: HUD**, a controller 
 | Target extras | Your effects on the target, and combo points. |
 | Vendor and bank | The vendor's Sell junk button asks what to sell: junk by your rules, or weapons and armor up to a quality (listed and confirmed first). Optional auto-sell. Repairs as soon as a repairing vendor opens (optionally from the guild bank). Items marked for the bank are deposited with `/cchud deposit`. |
 | Bags | Sort your bags (and the bank while it is open) with one action, using the game's own sorting. Item tooltips count what you hold in bags and bank and on your other characters; `/cchud gold` totals your gold. |
-| Controller actions | While a bank, vendor, trade or mailbox is open, R3 moves the item you point at and sorts when you point at nothing; L3 is never taken (it stays your auto-run). *Quick move* sells, deposits or withdraws the item you point at. *Mark item* tags it junk, kept or bank. *Sort* tidies your bags. Bind them under Keybindings > AddOns > ControllerCam. |
+| Controller actions | While a bank, vendor, trade or mailbox is open, R3 moves the item you point at and sorts when you point at nothing; holding R3 on an item asks what to do with it (try on, mark, details, destroy); L3 is never taken (it stays your auto-run). *Quick move* sells, deposits or withdraws the item you point at. *Mark item* tags it junk, kept or bank. *Sort* tidies your bags. Bind them under Keybindings > AddOns > ControllerCam. |
 | Quest list | Optional, each a switch: only the quests of the zone you are in; no group quests while alone; only the nearest few; nearest first; a recommended order. `/cchud questplan` says a recommended order in chat. Your own tracking comes back when they are off. |
 | Gamepad bars | Optional: hide the heavy art behind the gamepad action bars and draw them smaller. |
 | Chat and map | Chat text fades after a few quiet seconds; a player's class icon and level in front of what they say; gold sellers and repeated adverts hidden (`/cchud spam` shows what was); your coordinates under the world map. |

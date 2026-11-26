@@ -364,6 +364,8 @@ end, "/cchud gold", "list the gold on each of your characters, and the total")
 -- The right stick button, while a bag window is open: it moves the item you point at (at the bank, a vendor,
 -- in a trade, at the mailbox), and sorts when you point at nothing. Only while those windows are open, and
 -- never in a fight: the rest of the time R3 does what you have it do. L3 is never taken: it is your auto-run.
+-- While R3 is ours for either, holding it on an item asks what to do with it instead (ItemActions.lua): the
+-- press and the release are both told to our button, and what a tap does happens as it is let go.
 ---------------------------------------------------------------------------
 ns.RegisterSetting({
     key = "padSort", kind = "boolean", default = true, command = "padsort", section = "Bags, bank and vendor",
@@ -376,6 +378,7 @@ ns.RegisterSetting({
     tip = "while one of those is open, the right stick button moves the item you point at: into or out of the bank, sold, into the trade, or onto the letter. Pointing at nothing, it sorts",
 })
 I.KEY = "PADRSTICK"
+I.HOLD = 0.45                                   -- R3 held this long, then let go: the item's actions
 
 local owner = CreateFrame("Frame")
 local function BagsOpen()
@@ -397,13 +400,19 @@ function I:Keys()
     local theirs = B and B.active and B.open and B.hasPad and true or false
     local sort = self.active and ns.db.padSort and BagsOpen() and not theirs or false
     local move = self.active and ns.db.padMove and V and V:MoveOpen() and not theirs or false
-    if sort == self.sortKey and move == self.moveKey then return end
+    local hold = (sort or move) and ns.db.padActions and ns.ItemActions ~= nil or false
+    if sort == self.sortKey and move == self.moveKey and hold == self.holdKey then return end
     if InCombatLockdown() then return end             -- bindings change only out of a fight: next look
     if ns.KeyHeld(I.KEY) then return end              -- (R3 held: once it is let go, the next look)
-    self.sortKey, self.moveKey = sort, move
+    self.sortKey, self.moveKey, self.holdKey = sort, move, hold
+    self.stickDownAt = nil
     ClearOverrideBindings(owner)
-    if move then SetOverrideBindingClick(owner, true, I.KEY, "ControllerCamHUD_StickKey", "LeftButton")
+    if move or hold then SetOverrideBindingClick(owner, true, I.KEY, "ControllerCamHUD_StickKey", "LeftButton")
     elseif sort then SetOverrideBinding(owner, true, I.KEY, "CCHUD_SORT") end
+    if hold and not ns.db.actionsTold then            -- (said once: nothing on screen tells of a hold)
+        ns.db.actionsTold = true
+        ns.Say(L["Hold R3 on an item to try it on, mark it, see its details or destroy it: the game's own bags have no button for these."])
+    end
 end
 
 -- R3 where things can be moved: the item you point at moves; pointing at nothing, the bags are sorted
@@ -413,8 +422,23 @@ function I:Stick()
     if self.sortKey then return self:Sort() end
     if V then return V:QuickMove() end                -- (says to point at an item)
 end
+-- Pressed and let go: a tap sorts or moves, a hold on an item asks about it. Our button is told of both, so
+-- everything happens as it is let go, once (a click with no press told, as the mock's, is a tap)
+function I:StickClick(down)
+    if down == true then
+        self.stickDownAt = self.holdKey and GetTime() or nil
+        return
+    end
+    local at = self.stickDownAt
+    self.stickDownAt = nil
+    if at and GetTime() - at >= I.HOLD and ns.db.padActions and ns.ItemActions and ns.ItemActions:Open() then
+        return true
+    end
+    return self:Stick()
+end
 local stick = CreateFrame("Button", "ControllerCamHUD_StickKey", UIParent)
-stick:SetScript("OnClick", ns.Protect(function() I:Stick() end))
+stick:RegisterForClicks("AnyDown", "AnyUp")
+stick:SetScript("OnClick", ns.Protect(function(_, _, down) I:StickClick(down) end))
 
 local since = 0
 owner:SetScript("OnUpdate", ns.Protect(function(_, dt)

@@ -211,6 +211,7 @@ Banco ordenado. Pulsa de nuevo para ordenar tus bolsas.
 Bolsas ordenadas.
 Ordena tus bolsas (y el banco mientras esté abierto)
 Oro en esta cuenta: %s
+Mantén R3 sobre un objeto para probártelo, marcarlo, ver sus detalles o destruirlo: las bolsas del juego no tienen un botón para esto.
 Cantidad de objetos en las descripciones
 la descripción de un objeto indica cuántos tienes en las bolsas y el banco, y cuántos tienen tus otros personajes
 R3 ordena mientras tus bolsas están abiertas
@@ -315,6 +316,9 @@ para algo que fabrican tus personajes: lo que cuestan sus materiales y lo que de
 Ventas rápidas en la casa de subastas
 precio 5% por debajo del más bajo para vender ya; desactivado: precios pacientes, justo por debajo del más bajo, que se venden cuando llegan compradores
 lee todos los precios de la casa de subastas de una vez (ábrela antes; cada 15 minutos)
+Herboristería
+Desuello
+Pesca
 %s lo necesita ya (vas por %d), para %s
 %s lo necesita ya (%s va por %d), para %s
 %s lo necesita desde %d (vas por %d), para %s
@@ -322,7 +326,31 @@ lee todos los precios de la casa de subastas de una vez (ábrela antes; cada 15 
 %s cada uno
 Fabrica: %s
 Guardar lo que tus profesiones aún necesitan
-un objeto por el que una receta de uno de tus personajes aún da un punto de habilidad (recetas naranjas y amarillas, como el juego las muestra en la ventana de la profesión), que usan los próximos pasos de la profesión (las recetas de las guías de subida y las que conoce otro de tus personajes, hasta 75 puntos por delante), o que fabrica algo que vale más en la casa de subastas que el propio objeto, se guarda, no se vende, y su descripción dice por qué. Las recetas se leen cuando la ventana de una profesión está abierta
+un objeto con el que una receta de uno de tus personajes aún da un punto de habilidad (recetas naranjas y amarillas, tal como las muestra el juego en la ventana de la profesión), que usan los próximos pasos de la profesión (las recetas de las guías de subida y las que conoce otro de tus personajes, hasta 75 puntos por delante) o con el que se fabrica algo que vale más en la casa de subastas que el propio objeto, se guarda, no se vende, y su descripción dice por qué. Un material de Cocina o Primeros auxilios también se guarda para una receta aún no aprendida, indicando dónde aprenderla, igual que esa receta y los libros de habilidad. Las recetas se leen con la ventana de la profesión abierta
+%s, que recorre los caminos en %s
+%s en %s
+Lo enseña cualquier instructor de %s
+La receta solo se vende durante el Festín del Festival de Invierno
+La receta es recompensa de una misión: %s (%s)
+La receta la suelta %s en %s
+La receta la sueltan criaturas de %s
+La receta es un botín raro de criaturas de todo el mundo
+La receta la vende %s
+(más vendedores: %d)
+%s: tu %s aún sube habilidad
+%s, %s: su %s aún sube habilidad
+%s: sirve para %s (requiere %d, tienes %d)
+%s, %s: sirve para %s (requiere %d, ahora %d)
+También sirve para %s
+Más adelante, %s: sirve para %s a los %d (tienes %d)
+Más adelante, %s, %s: sirve para %s a los %d
+enseña %s (%s %d, tienes %d)
+enseña %s (%s %d, para %s, ahora %d)
+sube tu %s hasta %d (tu límite es %d)
+sube de %s la profesión %s hasta %d (su límite es %d)
+visto por última vez a la venta en %s (%s)
+solo se vende durante el Festival de Invierno
+lo venden los vendedores de suministros
 PA
 PA a dist.
 crít.
@@ -331,7 +359,7 @@ salud
 maná
 crít. de hechizo
 Lo que valen los atributos para ti
-bajo la descripción de un objeto, sus líneas de atributos con su valor para tu personaje: poder de ataque, poder de ataque a distancia, crítico, esquivar, salud, maná
+junto a cada línea de atributo en la descripción de un objeto, lo que vale para tu personaje: poder de ataque, poder de ataque a distancia, crítico, esquivar, salud, maná. Lo que no cabe en la descripción aparece en el panel de debajo
 Nivel de objeto
 Requiere nivel
 Se apila hasta
@@ -344,6 +372,26 @@ banco
 Tu marca
 Detalles del objeto: todo sobre el objeto al que apuntas
 muestra todo sobre el objeto al que apuntas (o el indicado): precios, quién lo tiene, tu marca
+sin marca
+Ese objeto ha cambiado: vuelve a señalarlo.
+El juego conservó %s: destrúyelo desde sus propias bolsas.
+%s destruido.
+Destruir
+Este objeto inicia una misión.
+Es un objeto de misión.
+¿Destruir %s?
+No se puede deshacer.
+Detalles del objeto
+Atrás
+Probar
+Cambiar marca
+Más
+Cerrar
+No en combate.
+Acciones de objeto: probar, marcar, ver detalles o destruir el objeto que señalas
+Mantén R3 sobre un objeto para ver sus acciones
+con las bolsas o el banco abiertos, mantener pulsado el stick derecho sobre un objeto pregunta qué hacer con él: probarlo, marcarlo, ver sus detalles o destruirlo. Una pulsación corta sigue ordenando o moviendo, y las bolsas y el menú de objetos del juego quedan como están
+pregunta qué hacer con el objeto que señalas: probar, marcar, detalles, destruir
 Animaciones de la barra de lanzamiento
 una barra de lanzamiento muestra lo que se lanza: picos la golpean al minar, rayos la recorren con naturaleza, una enredadera florece con una sanación, runas toman forma con arcano, llamas, hielo y sombras con fuego, escarcha y sombras
 mostrar cada animación de la barra de lanzamiento una vez, en tu barra
@@ -516,6 +564,8 @@ el desvanecimiento de la pantalla fuera de combate: qué se desvanece (minimapa,
 Guardado: escribe /reload para que el juego lo escriba en el disco.
 Botones de actitud y de mascota sobre las barras
 los botones de actitudes y de órdenes de mascota se colocan donde estaban los iconos verde y rojo de selección, para que su rueda se abra entera en pantalla; esos iconos se ocultan
+Ruedas de actitud y mascota por delante y en pantalla
+las ruedas que se abren con los botones superiores y los gatillos se dibujan por delante de los botones de la barra y se mantienen dentro de la pantalla, también en combate, para ver todas las opciones; siguen siendo las del juego
 listar dónde están las partes de las barras del mando y qué descansa (para diagnosticar)
 Auto
 Genérico
@@ -582,6 +632,9 @@ Chat
 nombres de las pestañas del chat con contorno y el cuadro donde escribes en cristal oscuro
 Medidor de daño
 el medidor de daño del juego con el estilo del HUD: sus barras, inclinadas sobre un fondo oscuro, y texto con contorno; conserva todo lo que hace
+Observando tus bolsas y el banco durante %d segundos: ábrelos, señala objetos y abre el menú de objetos del juego. Luego escribe /reload.
+Observación terminada: %d ventanas, %d líneas de botones, %d menús. Escribe /reload para que el juego lo guarde en disco.
+observa un rato las bolsas, el banco y los menús de objetos del juego, para resolver problemas
 comprobación: %d de %d superadas
 El juego no se ha detenido desde que entraste.
 Momentos en que el juego se detuvo y la parte del HUD en cada uno:
@@ -792,7 +845,6 @@ Bolsas
 Correo
 Consejo de objetos
 Apariencias
-Pesca
 Profesiones
 %s  |  Interfaz de mando: %s  |  en marcha: %s
 jugador %s, objetivo %s, mascota %s, foco %s  |  marcos del juego apartados: %s  |  chat movido: %s
@@ -899,22 +951,18 @@ Comerciar
 %s o %s: al botín
 %s o %s: otra ventana
 Los botones del mando vuelven tras el combate.
-Cerrar
 %s o %s: volver a las bolsas
 Mantén para destruir
 Elegir
-Atrás
 Todas las bolsas
 Solo esta bolsa
 Meter
 Coger bolsa
-Más
 Ordenar
 %d libres
 Hueco libre
 En combate, cierra tus bolsas con B.
 para el banco
-sin marca
 No hay hueco libre.
 %s está en el cursor: ponlo en un botón de tu barra del mando.
 ¿Comprar una ranura de bolsa del banco por %s?
@@ -923,9 +971,6 @@ Asignar
 Dejar aquí
 Dividir montón
 Marca: %s
-Detalles del objeto
-Probar
-Destruir
 Ordenar banco
 Ordenar bolsas
 Ver bolsas
@@ -933,11 +978,6 @@ Ver banco
 Comprar una ranura de bolsa del banco (%s)
 Vender lo aconsejado
 Suelta para destruir
-Este objeto inicia una misión.
-Es un objeto de misión.
-¿Destruir %s?
-El juego conservó %s: destrúyelo desde sus propias bolsas.
-%s destruido.
 Ventana de bolsas: orden
 Inteligente: lo que usas primero (consumibles, objetos con un uso), luego el resto por tipo, la basura al final y atenuada. Por tipo: en secciones con su propio título. Como en tus bolsas: el orden del juego
 Gran maestro
@@ -966,7 +1006,6 @@ Mañana
 Tarde
 Atardecer
 Noche
-%s en %s
 Con %s
 La escena de la hoguera está desactivada.
 La escena de la hoguera espera a que salgas de combate.
@@ -1152,7 +1191,6 @@ Choque: se acaba la racha
 %s: un juego por el camino
 El juego de vuelo está desactivado: /cchud flightgame on
 El juego de vuelo se juega durante un vuelo.
-No en combate.
 Juego de vuelo: jugar / gran altitud
 en un vuelo: iniciar el juego de vuelo, o llevarlo a gran altitud y de vuelta
 Vuelos cinematográficos: la cámara gira a tu alrededor
@@ -1251,6 +1289,16 @@ Mercado: gráfico de precios en velas
 el gráfico de precios del Mercado es una vela por día durante los últimos 7 días (dónde abrió el precio, su máximo y su mínimo, y dónde cerró: verde si cerró más alto, rojo si más bajo); desactivado: una línea del precio más bajo de cada día durante 30 días
 abrir o cerrar el Mercado (una pestaña de la casa de subastas)
 qué casa de subastas tiene este cliente (para solucionar problemas)
+recolectar
+vendedor
+subasta
+Se vende bien: unos %s de ganancia por unidad (%s en la subasta tras la comisión, materiales %s).
+[por subasta]
+[farmeo lento]
+[caro]
+Necesita %s, que tendrías que comprar en la subasta: para subir con dinero de sobra.
+Farmeo lento: %s. Pocos desuellos dan un pellejo.
+Unos %s en materiales que comprar.
 Abre la ventana de una profesión y echaré un vistazo a tus recetas.
 Ese es el tope, %d. Un instructor tiene el siguiente rango para ti.
 Nada más que aprender en %d. Ve a ver a un instructor por el siguiente rango.
@@ -1284,6 +1332,8 @@ menos fabricaciones
 una receta que encuentras o compras
 otros materiales
 la primera opción de las guías
+sin farmeo lento
+menos que comprar
 Abre la ventana de una profesión para ver un plan de subida.
 En el tope, %d. Un instructor tiene el siguiente rango.
 Faltan %d hasta %d; tus recetas se quedan cortas. Un instructor tiene %s a %d.
@@ -1294,13 +1344,21 @@ Faltan %d hasta %d. Aprende primero %s, %s.
 Faltan %d hasta %d. Recolecta %s hasta %d.
 Faltan %d hasta %d. Primero: %s, o %s (%s).
 Faltan %d hasta %d. Primero: %s.
-Para recolectar o comprar
-%d veces: %s
+Aún falta para llegar a %d, como máximo:
+Vale la pena fabricar para vender:
+Como máximo %d fabricaciones: %s
+Se aprende con %d. %s.
 Apréndela %s, a partir de %d.
 Apréndela %s.
+Recoléctalo: tu %s te lo consigue.
+Cómpralo a un vendedor: %s.
+Cómpralo a un vendedor.
+Cómpralo en la casa de subastas (%s cada uno la última vez).
+Cómpralo en la casa de subastas.
 %s: %d en tus bolsas, %d en el banco, %d por fabricación
+Ya te sale en gris, así que no sube habilidad. Fabrícalo para %s.
 Las guías suben este tramo recolectando %s.
-%s: tienes %d, el plan usa %d
+%s: como máximo %d para llegar a %d. Tienes %d, así que faltan %d como máximo.
 para %s
 Es más barato comprarlo que fabricarlo con %s
 Hecho con %s
@@ -1311,10 +1369,11 @@ Con lo que hay en tu banco no se puede fabricar nada más.
 El Mentor: %s %d > %d
 El Mentor
 Plan de subida
+fabricar para %s
 o
 Recolecta %s
-por aprender
-más barato comprarlo
+hasta x%d
+hasta %d
 Ocultar
 El plan
 Farmear esto

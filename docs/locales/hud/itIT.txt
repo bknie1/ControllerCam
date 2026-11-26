@@ -211,6 +211,7 @@ Banca riordinata. Premi di nuovo per riordinare le borse.
 Borse riordinate.
 Ordina le tue borse (e la banca finché è aperta)
 Oro su questo account: %s
+Tieni premuto R3 su un oggetto per provarlo, contrassegnarlo, vederne i dettagli o distruggerlo: le borse del gioco non hanno un pulsante per questo.
 Numero di oggetti nei tooltip
 il tooltip di un oggetto indica quanti ne hai nelle borse e in banca, e quanti ne hanno i tuoi altri personaggi
 R3 ordina mentre le tue borse sono aperte
@@ -315,6 +316,9 @@ per qualcosa che i tuoi personaggi creano: quanto costano i materiali e quanto r
 Vendite rapide alla casa d'aste
 prezzo 5% in meno del più basso per vendere subito; disattivato: prezzi pazienti, appena sotto il più basso, che si vendono quando arrivano i compratori
 legge tutti i prezzi della casa d'aste insieme (aprila prima; ogni 15 minuti)
+Erbalismo
+Scuoiatura
+Pesca
 %s ne ha bisogno ora (sei a %d), per %s
 %s ne ha bisogno ora (%s è a %d), per %s
 %s ne ha bisogno da %d (sei a %d), per %s
@@ -322,7 +326,31 @@ legge tutti i prezzi della casa d'aste insieme (aprila prima; ogni 15 minuti)
 %s l'uno
 Crea: %s
 Tieni ciò che serve ancora alle tue professioni
-un oggetto per cui una ricetta di uno dei tuoi personaggi dà ancora un punto abilità (ricette arancioni e gialle, come il gioco le mostra nella finestra della professione), che i prossimi passi della professione usano (le ricette delle guide di livellamento e quelle che un altro tuo personaggio conosce, fino a 75 punti più avanti), o che crea qualcosa che vale di più alla casa d'aste dell'oggetto stesso, viene tenuto, non venduto, e il suo tooltip dice perché. Le ricette vengono lette quando la finestra di una professione è aperta
+un oggetto con cui una ricetta di uno dei tuoi personaggi dà ancora un punto abilità (ricette arancioni e gialle, come le mostra il gioco nella finestra della professione), che serve ai prossimi passi della professione (le ricette delle guide di avanzamento e quelle note a un altro tuo personaggio, fino a 75 punti avanti) o con cui si crea qualcosa che alla casa d'aste vale più dell'oggetto stesso, viene tenuto e non venduto, e il suo suggerimento dice perché. Un materiale di Cucina o Primo Soccorso viene tenuto anche per una ricetta non ancora appresa, indicando dove impararla, come pure quella ricetta e i libri di abilità. Le ricette si leggono con la finestra della professione aperta
+%s, che percorre la strada in %s
+%s in %s
+Lo insegna qualsiasi istruttore di %s
+La ricetta è in vendita solo durante la Festa di Grande Inverno
+La ricetta è la ricompensa di una missione: %s (%s)
+La ricetta cade da %s a %s
+La ricetta cade dalle creature di %s
+La ricetta è un bottino raro delle creature di tutto il mondo
+La ricetta è venduta da %s
+(altri venditori: %d)
+%s: la tua ricetta %s dà ancora punti
+%s, %s: la sua ricetta %s dà ancora punti
+%s: serve per %s (richiede %d, hai %d)
+%s, %s: serve per %s (richiede %d, ora %d)
+Serve anche per %s
+Più avanti, %s: serve per %s a %d (hai %d)
+Più avanti, %s, %s: serve per %s a %d
+insegna %s (%s %d, hai %d)
+insegna %s (%s %d, per %s, ora %d)
+porta la tua abilità %s a %d (il tuo limite è %d)
+porta per %s l'abilità %s a %d (il suo limite è %d)
+visto in vendita l'ultima volta da %s (%s)
+in vendita solo durante la Festa di Grande Inverno
+lo vendono i mercanti di forniture
 PA
 PA dist.
 crit.
@@ -331,7 +359,7 @@ salute
 mana
 crit. magico
 Quanto valgono le statistiche per te
-sotto il tooltip di un oggetto, le sue righe di statistiche con il loro valore per il tuo personaggio: potenza d'attacco, potenza d'attacco a distanza, critico, schivata, salute, mana
+accanto a ogni riga di statistica nel tooltip di un oggetto, quanto vale per il tuo personaggio: potenza d'attacco, potenza d'attacco a distanza, critico, schivata, salute, mana. Ciò che non entra nel tooltip è nel pannello sotto
 Livello oggetto
 Richiede livello
 Si impila fino a
@@ -344,6 +372,26 @@ banca
 Il tuo segno
 Dettagli oggetto: tutto sull'oggetto che stai puntando
 mostra tutto sull'oggetto che stai puntando (o su quello indicato): prezzi, chi lo possiede, il tuo segno
+nessun segno
+L'oggetto è cambiato: puntalo di nuovo.
+Il gioco ha tenuto %s: distruggilo dalle sue borse.
+%s distrutto.
+Distruggi
+Questo oggetto avvia una missione.
+È un oggetto di una missione.
+Distruggere %s?
+Non si può annullare.
+Dettagli dell'oggetto
+Indietro
+Prova
+Cambia contrassegno
+Altro
+Chiudi
+Non in combattimento.
+Azioni oggetto: prova, contrassegna, vedi i dettagli o distruggi l'oggetto che punti
+Tieni premuto R3 su un oggetto per le sue azioni
+con le borse o la banca aperte, tenere premuto lo stick destro su un oggetto chiede cosa farne: provarlo, contrassegnarlo, vederne i dettagli o distruggerlo. Un tocco continua a ordinare o spostare, e le borse e il menu oggetto del gioco restano come sono
+chiede cosa fare dell'oggetto che punti: provare, contrassegnare, dettagli, distruggere
 Animazioni della barra di lancio
 una barra di lancio mostra cosa viene lanciato: picconi la colpiscono durante l'estrazione, fulmini la percorrono per la natura, un rampicante fiorisce per una cura, rune prendono forma per l'arcano, fiamme, ghiaccio e ombre per fuoco, gelo e ombra
 mostra ogni animazione della barra di lancio una volta, sulla tua barra
@@ -516,6 +564,8 @@ la dissolvenza dello schermo fuori dal combattimento: cosa sfuma (minimappa, ele
 Salvato: scrivi /reload perché il gioco lo scriva su disco.
 Pulsanti di postura e del famiglio sopra le barre
 i pulsanti delle posture e dei comandi del famiglio stanno dove c'erano le icone verde e rossa di bersaglio, così la loro ruota si apre tutta sullo schermo; quelle icone vengono nascoste
+Ruote di postura e famiglio in primo piano e sullo schermo
+le ruote che si aprono con i dorsali e i grilletti vengono disegnate davanti ai pulsanti della barra e tenute dentro lo schermo, anche in combattimento, così ogni scelta si vede; restano quelle del gioco
 elenca dove si trovano le parti delle barre del controller e cosa riposa (per la diagnosi)
 Auto
 Generico
@@ -582,6 +632,9 @@ Chat
 nomi delle schede della chat con contorno e la casella in cui scrivi in vetro scuro
 Misuratore dei danni
 il misuratore dei danni del gioco nello stile dell'HUD: le sue barre, inclinate su uno sfondo scuro, e testo contornato; conserva tutto ciò che fa
+Osservo borse e banca per %d secondi: aprile, punta gli oggetti, apri il menu oggetto del gioco. Poi scrivi /reload.
+Osservazione finita: %d finestre, %d righe di pulsanti, %d menu. Scrivi /reload perché il gioco lo salvi su disco.
+osserva per un po' borse, banca e menu oggetto del gioco, per la risoluzione dei problemi
 verifica: %d di %d superate
 Il gioco non si è bloccato da quando hai effettuato l’accesso.
 Momenti in cui il gioco si è bloccato, e la parte dell’HUD in ciascuno:
@@ -792,7 +845,6 @@ Borse
 Posta
 Consiglio sugli oggetti
 Aspetti
-Pesca
 Professioni
 %s  |  Interfaccia gamepad: %s  |  in esecuzione: %s
 giocatore %s, bersaglio %s, animale %s, focus %s  |  riquadri del gioco messi da parte: %s  |  chat spostata: %s
@@ -899,22 +951,18 @@ Scambia
 %s o %s: al bottino
 %s o %s: altra finestra
 I tasti del controller tornano dopo il combattimento.
-Chiudi
 %s o %s: torna alle borse
 Tieni premuto per distruggere
 Scegli
-Indietro
 Tutte le borse
 Solo questa borsa
 Metti dentro
 Prendi borsa
-Altro
 Ordina
 %d liberi
 Posto vuoto
 In combattimento, chiudi le borse con B.
 per la banca
-nessun segno
 Nessun posto libero.
 %s è sul cursore: mettilo su un pulsante della tua barra del gamepad.
 Comprare uno slot borsa della banca per %s?
@@ -923,9 +971,6 @@ Assegna
 Posa qui
 Dividi pila
 Segno: %s
-Dettagli dell'oggetto
-Prova
-Distruggi
 Riordina banca
 Riordina borse
 Mostra borse
@@ -933,11 +978,6 @@ Mostra banca
 Compra uno slot borsa della banca (%s)
 Vendi i consigliati
 Rilascia per distruggere
-Questo oggetto avvia una missione.
-È un oggetto di una missione.
-Distruggere %s?
-Il gioco ha tenuto %s: distruggilo dalle sue borse.
-%s distrutto.
 Finestra delle borse: ordine
 Intelligente: prima ciò che usi (consumabili, oggetti con un uso), poi il resto per tipo, la robaccia in fondo e sbiadita. Per tipo: in sezioni con il proprio titolo. Come nelle borse: l'ordine del gioco
 Gran maestro
@@ -966,7 +1006,6 @@ Mattina
 Pomeriggio
 Sera
 Notte
-%s in %s
 Con %s
 La scena del falò è disattivata.
 La scena del falò aspetta che tu sia fuori dal combattimento.
@@ -1152,7 +1191,6 @@ Urto: la serie finisce
 %s: un gioco durante il viaggio
 Il gioco di volo è disattivato: /cchud flightgame on
 Il gioco di volo si gioca durante un volo.
-Non in combattimento.
 Gioco di volo: gioca / alta quota
 in volo: avvia il gioco di volo, o portalo in alta quota e ritorno
 Voli cinematografici: la telecamera ti gira intorno
@@ -1251,6 +1289,16 @@ Mercato: grafico dei prezzi a candele
 il grafico dei prezzi del Mercato è una candela al giorno per gli ultimi 7 giorni (dove il prezzo ha aperto, il più alto e il più basso, e dove ha chiuso: verde se ha chiuso più in alto, rossa se più in basso); spento: una linea del prezzo più basso di ogni giorno su 30 giorni
 apri o chiudi il Mercato (una scheda della casa d'aste)
 quale casa d'aste ha questo client (per la risoluzione dei problemi)
+raccogli
+mercante
+asta
+Si vende bene: circa %s di guadagno l'uno (%s all'asta al netto della commissione, materiali %s).
+[dall'asta]
+[farm lento]
+[costoso]
+Richiede %s, da comprare all'asta: per salire con soldi da spendere.
+Farm lento: %s. Poche scuoiature danno una pelle.
+Circa %s di materiali da comprare.
 Apri la finestra di una professione e darò un'occhiata alle tue ricette.
 È il tetto, %d. Un istruttore ha il grado successivo per te.
 Niente più da imparare a %d. Va' da un istruttore per il grado successivo.
@@ -1284,6 +1332,8 @@ meno creazioni
 una ricetta da trovare o comprare
 altri materiali
 la prima scelta delle guide
+nessun farm lento
+meno da comprare
 Apri la finestra di una professione per un piano di avanzamento.
 Al limite, %d. Un istruttore ha il grado successivo.
 Ancora %d fino a %d; le tue ricette non bastano. Un istruttore ha %s a %d.
@@ -1294,13 +1344,21 @@ Ancora %d fino a %d. Prima impara %s, %s.
 Ancora %d fino a %d. Raccogli %s fino a %d.
 Ancora %d fino a %d. Prima: %s, oppure %s (%s).
 Ancora %d fino a %d. Prima: %s.
-Da raccogliere o comprare
-%d volte: %s
+Ancora da trovare per arrivare a %d, al massimo:
+Conviene crearli per venderli:
+Al massimo %d creazioni: %s
+Si impara a %d. %s.
 Imparala %s, da %d.
 Imparala %s.
+Raccoglilo: la tua professione %s te lo procura.
+Compralo da un mercante: %s.
+Compralo da un mercante.
+Compralo alla casa d'aste (%s l'uno l'ultima volta).
+Compralo alla casa d'aste.
 %s: %d nelle borse, %d in banca, %d per creazione
+Per te ormai è grigia, quindi non dà punti abilità. Creala per %s.
 Le guide salgono questo tratto raccogliendo %s.
-%s: ne hai %d, il piano ne usa %d
+%s: al massimo %d per arrivare a %d. Ne hai %d, quindi ne mancano al massimo %d.
 per %s
 Costa meno comprarlo che produrlo con %s
 Prodotto con %s
@@ -1311,10 +1369,11 @@ Con ciò che hai in banca non si crea nient'altro.
 Il Mentore: %s %d > %d
 Il Mentore
 Piano di avanzamento
+da creare per %s
 o
 Raccogli %s
-da imparare
-conviene comprarlo
+fino a x%d
+fino a %d
 Nascondi
 Il piano
 Farma questo

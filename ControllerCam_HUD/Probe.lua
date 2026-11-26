@@ -205,3 +205,242 @@ function ns.RunProbe(quiet)
     say(("probe saved: %d frames. Type /reload so the game writes it to disk."):format(count))
     return count
 end
+
+---------------------------------------------------------------------------
+-- /cchud bagprobe: the game's own bags, bank and item menus, looked at for a while as you use them: which menu
+-- and item functions exist here, what the windows are made of, what their button lines say, which button the
+-- game's cursor is on, and what opens (a menu of the game's: its tag and its words). Read only: nothing of the
+-- game's is hooked, opened, changed or pressed. Kept in ControllerCamHUDDB.nativeProbe (the game writes it to
+-- disk on /reload).
+---------------------------------------------------------------------------
+local L = ns.L
+local B = { SECONDS = 90, EVERY = 0.25 }
+ns.BagProbe = B
+
+B.WINDOWS = { "ContainerFrameCombinedBags", "ContainerFrame1", "ContainerFrame2", "ContainerFrame3",
+              "ContainerFrame4", "ContainerFrame5", "ContainerFrame6", "BankFrame", "BankPanel", "BankSlotsFrame",
+              "ReagentBankFrame", "AccountBankPanel" }
+B.TABLES = { "Menu", "MenuUtil", "MenuResponse", "C_Container", "C_Bank", "C_Item", "SmartNavigation" }
+B.FUNCS = { "DressUpItemLink", "DressUpLink", "IsDressableItem", "DeleteCursorItem", "ClearCursor",
+            "GetCursorInfo", "PurchaseSlot", "GetBankSlotCost", "GetNumBankSlots", "SortBags", "SortBankBags",
+            "GetMouseFoci", "GetMouseFocus", "UIDropDownMenu_Initialize", "ToggleDropDownMenu",
+            "SmartNavigation_AddJumpNavigationOverride" }
+
+local function Call(f, method, ...)
+    local fn = type(f) == "table" and f[method]
+    if type(fn) ~= "function" then return nil end
+    local ok, v = pcall(fn, f, ...)
+    if ok then return ns.Plain(v) end
+end
+
+local function Object(v)
+    return type(v) == "table" and type(v.GetObjectType) == "function"
+end
+
+local function Forbidden(f) return Call(f, "IsForbidden") == true end
+
+-- The names of a table's functions, and of the parts it holds, in order
+local function Members(t)
+    local funcs, parts = {}, {}
+    if type(t) ~= "table" then return "", "" end
+    for k, v in pairs(t) do
+        if type(k) == "string" then
+            if type(v) == "function" then funcs[#funcs + 1] = k
+            elseif Object(v) then parts[#parts + 1] = k .. "=" .. tostring(Call(v, "GetObjectType")) end
+        end
+    end
+    table.sort(funcs)
+    table.sort(parts)
+    return table.concat(funcs, " "), table.concat(parts, " ")
+end
+
+local function Name(f)
+    return tostring(Call(f, "GetName") or "(unnamed " .. tostring(Call(f, "GetObjectType")) .. ")")
+end
+
+-- Every word shown in a frame and its parts, and the pictures beside them (a button line's icons)
+local function Words(f, out, depth)
+    if #out >= 60 or depth > 5 or not Object(f) or Forbidden(f) then return out end
+    if type(f.GetRegions) == "function" then
+        local ok, regions = pcall(function() return { f:GetRegions() } end)
+        for _, r in ipairs(ok and regions or {}) do
+            if Call(r, "IsShown") == true then
+                local kind = Call(r, "GetObjectType")
+                if kind == "FontString" then
+                    local t = Call(r, "GetText")
+                    if type(t) == "string" and t ~= "" then out[#out + 1] = t end
+                elseif kind == "Texture" and depth > 0 then
+                    local a = Call(r, "GetAtlas")
+                    if type(a) == "string" and a:lower():find("gamepad") then out[#out + 1] = "<" .. a .. ">" end
+                end
+            end
+        end
+    end
+    if type(f.GetChildren) == "function" then
+        local ok, kids = pcall(function() return { f:GetChildren() } end)
+        for _, c in ipairs(ok and kids or {}) do
+            if Call(c, "IsShown") == true then Words(c, out, depth + 1) end
+        end
+    end
+    return out
+end
+
+-- A window's button line (the game's "input legend"), by the places it was found at
+local function Legends(window)
+    local found = {}
+    for _, key in ipairs({ "gamepadFooter", "footer", "Footer" }) do
+        local footer = rawget(window, key)
+        local legend = type(footer) == "table" and rawget(footer, "inputLegend") or nil
+        if Object(legend) then found[key .. ".inputLegend"] = legend end
+    end
+    for k, v in pairs(window) do
+        if type(k) == "string" and k:lower():find("inputlegend$") and Object(v) then found[k] = v end
+    end
+    local name = Call(window, "GetName")
+    local global = type(name) == "string" and rawget(_G, name .. "FooterinputLegend") or nil
+    if Object(global) then found[name .. "FooterinputLegend"] = global end
+    return found
+end
+
+local function Button(f)
+    local d = { name = Name(f) }
+    d.methods = (Members(f))
+    local chain, p = {}, Call(f, "GetParent")
+    for _ = 1, 6 do
+        if type(p) ~= "table" then break end
+        chain[#chain + 1] = Name(p)
+        p = Call(p, "GetParent")
+    end
+    d.parents = table.concat(chain, " < ")
+    for _, m in ipairs({ "GetID", "GetBagID", "GetBankTabID", "GetContainerSlotID" }) do
+        if type(f[m]) == "function" then d[m] = tostring(Call(f, m)) end
+    end
+    if ns.ItemActions then
+        local bag, slot = ns.ItemActions.SlotOf(f)
+        d.slotFound = bag and (tostring(bag) .. " " .. tostring(slot)) or "none"
+    end
+    return d
+end
+
+-- A menu of the game's that is open: whatever says what it is (its tag), and its words
+local function OpenMenu()
+    local menus = rawget(_G, "Menu")
+    local manager = type(menus) == "table" and type(menus.GetManager) == "function" and select(2, pcall(menus.GetManager)) or nil
+    if type(manager) ~= "table" or Call(manager, "IsAnyMenuOpen") ~= true then return nil end
+    local menu = Call(manager, "GetOpenMenu")
+    if type(menu) ~= "table" then return { tag = "(open, no way to reach it)" } end
+    local description = Call(menu, "GetMenuDescription") or rawget(menu, "menuDescription")
+    local tag = type(description) == "table" and (Call(description, "GetTag") or rawget(description, "tag")) or nil
+    local d = { tag = tostring(tag or "(no tag found)"), words = table.concat(Words(menu, {}, 0), " | ") }
+    local funcs, parts = Members(menu)
+    d.methods, d.parts = funcs, parts
+    if type(description) == "table" then d.description = (Members(description)) end
+    return d
+end
+
+function B:Start()
+    local out = { when = date and date("%Y-%m-%d %H:%M:%S") or tostring(time()), exists = {}, tables = {},
+                  windows = {}, legends = {}, cursor = {}, menus = {}, opened = {}, errors = {} }
+    ns.db.nativeProbe = out
+    self.out, self.left, self.since, self.had = out, self.SECONDS, 0, {}
+    local function section(name, fn)
+        local ok, err = pcall(fn)
+        if not ok then out.errors[#out.errors + 1] = name .. ": " .. tostring(err) end
+    end
+    section("functions", function()
+        for _, name in ipairs(self.FUNCS) do out.exists[name] = type(rawget(_G, name)) end
+        for _, name in ipairs(self.TABLES) do
+            local t = rawget(_G, name)
+            out.tables[name] = type(t) == "table" and (Members(t)) or ("(" .. type(t) .. ")")
+        end
+        local menus = rawget(_G, "Menu")
+        for _, name in ipairs({ "ModifyMenu", "OpenMenu", "GetManager", "PrintOpenMenuTags", "GetOpenMenuTags" }) do
+            out.exists["Menu." .. name] = type(menus) == "table" and type(menus[name]) or "nil"
+        end
+        local util = rawget(_G, "MenuUtil")
+        out.exists["MenuUtil.CreateContextMenu"] = type(util) == "table" and type(util.CreateContextMenu) or "nil"
+    end)
+    -- what is on screen already: what turns up after this is what your presses opened
+    section("screen", function()
+        for _, f in ipairs({ UIParent:GetChildren() }) do
+            if Call(f, "IsShown") == true then self.had[f] = true end
+        end
+    end)
+    self.frame:SetScript("OnUpdate", self.tick)
+    ns.Say(L["Looking at your bags and bank for %d seconds: open them, point at items, open the game's own item menu. Then type /reload."]:format(self.SECONDS))
+end
+
+local function Count(t)
+    local n = 0
+    for _ in pairs(t) do n = n + 1 end
+    return n
+end
+
+function B:Look()
+    local out = self.out
+    for _, name in ipairs(self.WINDOWS) do
+        local window = rawget(_G, name)
+        if Object(window) and not Forbidden(window) and Call(window, "IsShown") == true then
+            if not out.windows[name] then
+                local funcs, parts = Members(window)
+                out.windows[name] = { methods = funcs, parts = parts, strata = tostring(Call(window, "GetFrameStrata")),
+                                      words = table.concat(Words(window, {}, 0), " | ") }
+            end
+            for key, legend in pairs(Legends(window)) do
+                if Call(legend, "IsShown") == true then
+                    local line = table.concat(Words(legend, {}, 1), " | ")
+                    if line ~= "" and Count(out.legends) < 60 then out.legends[name .. " " .. key .. ": " .. line] = true end
+                end
+            end
+        end
+    end
+    local nav = rawget(_G, "SmartNavigation")
+    local button = type(nav) == "table" and Call(nav, "GetCurrentButton") or nil
+    if Object(button) and not Forbidden(button) then
+        local d = Button(button)
+        local key = d.name .. " in " .. d.parents
+        if not out.cursor[key] and Count(out.cursor) < 25 then out.cursor[key] = d end
+    end
+    local menu = OpenMenu()
+    if menu then
+        local key = menu.tag .. ": " .. tostring(menu.words)
+        if not out.menus[key] and Count(out.menus) < 20 then
+            out.menus[key] = menu
+            ns.Note("bagprobe: a menu opened: %s", key)
+        end
+    end
+    -- anything else that opened (a menu of the game's that is not of its Menu kind)
+    for _, f in ipairs({ UIParent:GetChildren() }) do
+        if Object(f) and not self.had[f] and not Forbidden(f) and Call(f, "IsShown") == true
+            and Count(out.opened) < 40 then
+            self.had[f] = true
+            local name = Name(f)
+            if not name:find("^ControllerCam") then
+                local funcs = Members(f)
+                out.opened[#out.opened + 1] = { name = name, methods = funcs, words = table.concat(Words(f, {}, 0), " | ") }
+            end
+        end
+    end
+end
+
+function B:Stop()
+    self.frame:SetScript("OnUpdate", nil)
+    if not self.out then return end
+    local out = self.out
+    self.out = nil
+    ns.Say(L["Done looking: %d windows, %d button lines, %d menus. Type /reload so the game writes it to disk."]:format(
+        Count(out.windows), Count(out.legends), Count(out.menus)))
+end
+
+B.frame = CreateFrame("Frame")
+B.tick = ns.Protect(function(_, elapsed)
+    B.left, B.since = B.left - elapsed, B.since + elapsed
+    if B.since >= B.EVERY then
+        B.since = 0
+        if B.out then B:Look() end
+    end
+    if B.left <= 0 then B:Stop() end
+end)
+
+ns.RegisterCommand("bagprobe", function() B:Start() end, "/cchud bagprobe",
+    "look at the game's own bags, bank and item menus for a while, for troubleshooting")

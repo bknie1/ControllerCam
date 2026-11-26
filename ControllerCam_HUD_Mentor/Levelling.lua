@@ -1,7 +1,8 @@
 -- ControllerCam HUD: The Mentor, a levelling plan beside a profession's window.
 -- While a profession's window is open, a panel of our own sits beside it: which recipes to make, how many of
--- each, and what that takes, to reach the profession's cap. It is an estimate, made again whenever the window
--- changes (each craft), from what the window shows:
+-- each, and what that takes, to reach the profession's cap. The counts are the most you could need (a worst
+-- case: LV.Worst), so what it lists is enough; they are made again whenever the window changes (each craft), from
+-- what the window shows:
 --   * a recipe's colour: orange always gives a point, yellow usually, green sometimes, grey never;
 --   * where each recipe changes colour. The game does not say, so it is learned: every time a window is read,
 --     each recipe's colour at that rank is noted (for every character of yours, so an alt learns from a main).
@@ -12,10 +13,14 @@
 -- Where the profession has a guide (LevelGuides.lua: the steps the well-known levelling guides take, with their
 -- alternatives), the plan follows it: each stretch's recipe, or an alternative you already know, and a recipe you
 -- do not know yet marked to learn. Without one, each point is taken from the recipe that costs least per point
--- (auction prices where they are known).
+-- (auction prices where they are known). The game's own colour for a recipe you know wins over the guide: one it
+-- rates grey never teaches in the plan. Its stretch goes to your recipes that still do, and where a later step
+-- needs what it makes, it is listed to make for that, without points.
 -- What it takes is broken down through what your characters can make: a Bronze Bar the plan needs, less the
 -- ones you hold, becomes Copper Bars and Tin Bars, and those Copper Ore and Tin Ore, less what you hold of each.
--- What is still missing can be put on the farm list (Farm.lua) with one button.
+-- What is still missing can be put on the farm list (Farm.lua) with one button. Each material says in a word how
+-- you get it: farm (a gathering profession of yours brings it), vendor, or auction (Recipes.lua). For Cooking and
+-- First Aid the ranks a recipe changes colour at are known (RecipeData.lua), as is where each recipe is learned.
 -- The Mentor says it in a few plain words at the top (a few ways of putting each, picked when the window opens),
 -- and names the recipe to learn next when one of your characters has been seen with it (or the window lists it).
 -- Only read: nothing in the profession's window is opened, expanded, changed or written to.
@@ -30,11 +35,30 @@ local C = ns.colors
 
 local LV = { reads = 0, index = 1, top = 1, rows = {}, entries = {} }
 ns.Levelling = LV
+local ItemNameFor          -- (an item's name, or "item 1234" while the game has not shown it)
 
 LV.BAND = 15              -- points between a recipe turning yellow, green and grey, until it is seen
 LV.DEPTH = 4              -- how far down a chain of crafts the breakdown goes (Copper Ore > Copper Bar > Bronze Bar)
 LV.UNKNOWN = 100          -- what a reagent with no known price counts as (1 silver), to compare recipes
+LV.SIGMAS = 2             -- how far past the average the worst case goes: about 19 times in 20 you need no more
+LV.PAD = 1.5              -- a recipe with no colours and no guide's count to go by: this many crafts a point
+-- Outside the recipe table, where a recipe turns grey is mostly a guess, and a worst case run into a guessed grey
+-- grows without end: the most crafts a point it may come to, by the colour the game shows (orange, yellow, green)
+LV.PER = { [3] = 1.5, [2] = 2, [1] = 4 }
 LV.ROWS = 12
+LV.RARE = 3               -- what makes something this good (rare, blue) is not a recipe to level with
+-- The plan is for levelling on your own: what you gather, and what vendors sell. A pick that is hard on such a
+-- player is marked, with an easier one (or one for money to spend, bought at auction) beside it
+LV.SLOW = { [783] = true, [4232] = true, [4235] = true, [8169] = true, [8171] = true }   -- hides: few skins give one
+LV.SLOW_MANY = 5          -- a slow farm: this many of those in all
+LV.COSTLY = 2000          -- costly: this much (20 silver) to buy for a stretch of the plan
+LV.EASIER = 0.75          -- another recipe is easier on your purse from this much of the cost down
+LV.FARMED = 1             -- what a material your own skills gather counts as, to compare recipes: next to nothing
+LV.CUT = 0.95             -- what the auction house leaves you of a sale
+LV.GOOD = 500             -- a recipe is flagged to sell from this much profit a craft (5 silver) ...
+LV.MARGIN = 1.2           -- ... and from this much more than its materials would fetch as they are
+LV.SELLS = 3              -- how many of your own are listed as worth making to sell
+LV.COIN = "|TInterface\\MoneyFrame\\UI-GoldIcon:0|t"          -- the game's own gold coin: it makes money
 LV.KEYS = { "PADDUP", "PADDDOWN", "PAD1", "PAD3", "PAD4", "PADRSHOULDER", "PAD2", "ESCAPE", "PADLSTICK" }
 
 LV.KEY = "PADLSTICK"      -- while the window is open: L3 takes the plan's buttons, and gives them back
@@ -387,6 +411,10 @@ function LV.Have(id)
     return mine + others, mine, others
 end
 
+function ItemNameFor(id)
+    return ns.Professions and ns.Professions.ItemName(id) or ("item " .. tostring(id))
+end
+
 -- What an item is made of, by a recipe one of your characters knows: { m, r = { [reagent] = n } } or nil.
 -- From the windows read here; for characters read before, from what each reagent was noted to make.
 function LV.MadeOf(id)
@@ -420,8 +448,17 @@ end
 --   total = { [item] = how many of it the whole plan uses } (for the things in raw)
 --   made  = { [item] = how many to make on the way }
 --   via   = { [item] = what it is for }  (Copper Ore -> Copper Bar -> Bronze Bar)
+-- A material a gathering skill of yours brings is gathered as it is: Medium Leather is skinned, not made up out
+-- of hundreds of scraps. It is only made, as far as the parts already in your bags and bank go
 function LV.Breakdown(need)
     local raw, total, made, via, used = {}, {}, {}, {}, {}
+    local function FromHeld(recipe, left)
+        local times = math.ceil(left / (recipe.m or 1))
+        for rid, n in pairs(recipe.r) do
+            times = math.min(times, math.floor(math.max(0, LV.Have(rid) - (used[rid] or 0)) / math.max(1, n)))
+        end
+        return math.min(left, times * (recipe.m or 1))
+    end
     local function Take(id, n, depth, seen, parent)
         if parent and not via[id] then via[id] = parent end
         local have = math.max(0, LV.Have(id) - (used[id] or 0))
@@ -429,6 +466,16 @@ function LV.Breakdown(need)
         used[id] = (used[id] or 0) + take
         local left = n - take
         local recipe = LV.MadeOf(id)
+        local gather = 0                                    -- (of what is missing: to gather as it is)
+        if left > 0 and recipe and LV.How(id) == "farm" then
+            local fromHeld = FromHeld(recipe, left)
+            gather, left = left - fromHeld, fromHeld
+            if gather > 0 then
+                total[id] = (total[id] or 0) + n            -- (all that is needed, held and made ones too)
+                raw[id] = (raw[id] or 0) + gather
+                if left == 0 then return end
+            end
+        end
         if left > 0 and recipe and depth < LV.DEPTH and not seen[id] then
             local times = math.ceil(left / (recipe.m or 1))
             made[id] = (made[id] or 0) + left
@@ -485,6 +532,7 @@ function LV.Wanted(plan)
             for _, r in ipairs(g.route) do
                 local p = M and M.Auction and M.Auction(r.id)
                 if p then make = make + p * r.n else known = false end
+                if LV.How(r.id) == "farm" then known = false end     -- (you would farm it, not buy it)
             end
             if priceTop and known and make > 0 and priceTop * g.more < make then g.buy = true end
         end
@@ -493,7 +541,31 @@ function LV.Wanted(plan)
         if (a.more or 0) ~= (b.more or 0) then return (a.more or 0) > (b.more or 0) end
         return a.id < b.id
     end)
+    -- how you get each: farm, vendor or auction (what you make: how you get what it is made from)
+    for _, g in ipairs(order) do
+        for _, r in ipairs(g.route or {}) do r.how = LV.How(r.id) end
+        if g.route then g.how = g.route[1].how
+        else g.how = LV.How(g.id) end
+    end
     return order
+end
+
+-- "farm", "vendor" or "auction", and what goes with it (Recipes.lua)
+function LV.How(id)
+    local Rc = ns.Recipes
+    if Rc then return Rc.How(id) end
+    return "auction"
+end
+LV.HOW = { farm = L["farm"], vendor = L["vendor"], auction = L["auction"] }
+
+-- What is in the brackets after a thing in the list: "farm", "vendor", "auction"; for something you make, how you
+-- get what it is made from: "farm: Ruined Leather Scraps x480"
+function LV.HowWords(g)
+    local word = LV.HOW[g.how] or LV.HOW.auction
+    if not g.route then return word end
+    local text = ("%s: %s x%d"):format(word, ItemNameFor(g.route[1].id), g.route[1].n)
+    if #g.route > 1 then text = text .. ", ..." end
+    return text
 end
 
 -- What one of an item costs: the auction house's price, or what it is made of, or nil
@@ -509,10 +581,93 @@ local function Price(id, depth)
 end
 LV.Price = Price
 
+-- What one of a material costs you, to compare recipes: next to nothing when a gathering skill of yours brings
+-- it (or what it is made from: farming is the cheapest way there is), else what it costs to buy or make
+local function Effort(id, depth)
+    if LV.How(id) == "farm" then return LV.FARMED end
+    local price = Price(id)
+    local recipe = (depth or 0) < LV.DEPTH and LV.MadeOf(id)
+    if recipe then
+        local sum = 0
+        for rid, n in pairs(recipe.r) do sum = sum + n * Effort(rid, (depth or 0) + 1) end
+        sum = sum / (recipe.m or 1)
+        return price and math.min(price, sum) or sum
+    end
+    local M = ns.Market
+    return price or (M and M.MerchantPrice and M.MerchantPrice(id)) or LV.UNKNOWN
+end
+LV.Effort = Effort
+
 local function CraftCost(rec)
     local sum = 0
-    for _, x in ipairs(rec.r) do sum = sum + x.n * (Price(x.id) or LV.UNKNOWN) end
+    for _, x in ipairs(rec.r) do sum = sum + x.n * Effort(x.id) end
     return math.max(1, sum)
+end
+
+---------------------------------------------------------------------------
+-- Recipes that make money
+---------------------------------------------------------------------------
+-- What one of a material would fetch or cost as it is (the auction house's price, a merchant's, or its own
+-- materials'), or nil when nothing says
+local function MarketValue(id, depth)
+    local M = ns.Market
+    local p = M and ((M.Auction and M.Auction(id)) or (M.MerchantPrice and M.MerchantPrice(id)))
+    if p then return p end
+    local recipe = (depth or 0) < LV.DEPTH and LV.MadeOf(id)
+    if not recipe then return nil end
+    local sum = 0
+    for rid, n in pairs(recipe.r) do
+        local each = MarketValue(rid, (depth or 0) + 1)
+        if not each then return nil end
+        sum = sum + n * each
+    end
+    return sum / (recipe.m or 1)
+end
+
+-- Does what a recipe makes sell well at the auction house? { profit, income, cost } a craft, in copper, or nil:
+-- what it sells for after the cut, well above what its materials are worth as they are (farmed ones too: you
+-- could sell those) and above a merchant's price. Only where every price is known
+function LV.Sells(rec)
+    local M = ns.Market
+    local price = rec and rec.p and M and M.Auction and M.Auction(rec.p)
+    if not price or #(rec.r or {}) == 0 then return nil end
+    local made = math.max(1, rec.m or 1)
+    local income, cost = price * made * LV.CUT, 0
+    for _, x in ipairs(rec.r) do
+        local each = MarketValue(x.id)
+        if not each then return nil end
+        cost = cost + each * x.n
+    end
+    local profit = income - cost
+    local vendor = (M.Vendor and M.Vendor(rec.p) or 0) * made
+    if profit < LV.GOOD or income < cost * LV.MARGIN or income < vendor + LV.GOOD then return nil end
+    return { profit = math.floor(profit + 0.5), income = math.floor(income + 0.5), cost = math.floor(cost + 0.5) }
+end
+
+local function Coin(rec) return LV.Sells(rec) and (" " .. LV.COIN) or "" end
+
+-- Your recipes that make the most money, grey ones too, but for those the plan already lists:
+-- { { rec, worth } }, the best first
+function LV.Sellers(read, plan)
+    local listed, out = {}, {}
+    for _, step in ipairs(plan and plan.steps or {}) do
+        if step.rec then listed[step.rec.n] = true end
+    end
+    for _, rec in ipairs(read and read.list or {}) do
+        local worth = not listed[rec.n] and LV.Sells(rec)
+        if worth then out[#out + 1] = { rec = rec, worth = worth } end
+    end
+    table.sort(out, function(a, b)
+        if a.worth.profit ~= b.worth.profit then return a.worth.profit > b.worth.profit end
+        return a.rec.n < b.rec.n
+    end)
+    while #out > LV.SELLS do table.remove(out) end
+    return out
+end
+
+function LV.SellSentence(worth)
+    return L["Sells well: about %s profit each (%s at auction after the cut, materials %s)."]:format(
+        ns.Money(worth.profit), ns.Money(worth.income), ns.Money(worth.cost))
 end
 
 ---------------------------------------------------------------------------
@@ -558,42 +713,347 @@ function LV.GuideRecipe(g, mine)
     return { n = name, p = g.p, s = g.s, r = r, u = 1, m = g.m or 1, c = 3 }, false
 end
 
--- The crafts for lo..hi, from the guide's count for its whole stretch
+-- The most crafts a run of points could take: sum = the crafts it takes on average, var = how much that
+-- varies. A point from an orange recipe is certain (so is the count); from a yellow or green one it is not.
+function LV.Worst(sum, var)
+    return math.max(1, math.ceil(sum + LV.SIGMAS * math.sqrt(var or 0) - 1e-6))
+end
+
+-- A count worked out from guessed colours, kept to LV.PER crafts a point
+function LV.Bound(crafts, points, colour)
+    local most = math.ceil(points * (LV.PER[colour] or LV.PER[1]) - 1e-6)
+    return crafts and math.min(crafts, most) or most
+end
+
+-- Does the recipe table say where this one changes colour (Cooking and First Aid)?
+local function Listed(kind, rec)
+    return ns.Recipes and ns.Recipes.For(kind, rec.p) ~= nil or false
+end
+
+-- One craft toward a point with this chance: its average number of crafts and variance, added to sum and var
+local function Point(sum, var, chance, ups)
+    return sum + 1 / (chance * ups), var + (1 - chance) / (chance * chance * ups)
+end
+
+-- The crafts for lo..hi from the guide's count for its whole stretch (and never fewer than a craft a point; with
+-- no count, LV.PAD crafts a point)
 local function GuideCrafts(o, g, lo, hi)
     local from, to = o.lo or g[1], o.hi or g[2]                 -- (an alternative may have its own stretch)
     local span = math.max(1, to - from)
-    return math.max(1, math.ceil((o.n or (o == g and g.n) or span) * (hi - lo) / span - 1e-6))
+    local count = o.n or (o == g and g.n)
+    if not count then return math.max(1, math.ceil((hi - lo) * LV.PAD - 1e-6)) end
+    return math.max(1, hi - lo, math.ceil(count * (hi - lo) / span - 1e-6))
 end
 
--- An alternative as the step shows it: another thing to gather, or another recipe
-local function Alternative(o, g, lo, hi, mine)
-    if o.gather then return { gather = o.gather, why = {} } end
-    local rec, known = LV.GuideRecipe(o, mine)
-    return { rec = rec, known = known, crafts = GuideCrafts(o, g, lo, hi), why = (o == g) and { "guide" } or o.why or {},
-             learn = (not known) and { how = o.learn or "trainer", at = o.at } or nil }
+-- The colour the recipe table gives at a rank: 3 orange, 2 yellow, 1 green, 0 grey
+local function Band(c, rank)
+    return (rank < c[2] and 3) or (rank < c[3] and 2) or (rank < c[4] and 1) or 0
 end
 
--- The crafts a recipe you know takes for lo..hi by its colours (nil where it would turn grey on the way)
-local function KnownCrafts(rec, lo, hi, rank, learned)
-    local Y, _, X = LV.Thresholds(learned[rec.n], rec.c, rank)
+-- The ranks a recipe turns yellow, green and grey at: from the recipe table (Cooking and First Aid), else, for
+-- one you know, as its colours were seen (LV.Thresholds). The game's colour for one you know wins: where it rates
+-- it worse than the table does, or still teaching where the table says grey, the table is not used.
+function LV.Colours(kind, rec, known, rank, learned)
+    local data = ns.Recipes and ns.Recipes.For(kind, rec.p)
+    if data then
+        local band = known and rec.c and Band(data.c, rank)
+        if not band or not (rec.c < band or (band == 0 and rec.c > 0)) then return data.c[2], data.c[3], data.c[4] end
+    end
+    if not known then return nil end
+    return LV.Thresholds(learned[rec.n], rec.c, rank)
+end
+
+-- The most crafts a recipe could take for lo..hi by its colours (nil when they are not known, or it would turn
+-- grey on the way)
+local function ColourCrafts(kind, rec, known, lo, hi, rank, learned)
+    local Y, _, X = LV.Colours(kind, rec, known, rank, learned)
     if not Y then return nil end
-    local sum = 0
+    local sum, var = 0, 0
     for at = lo, hi - 1 do
         local chance = LV.Chance(at, Y, X)
         if chance <= 0 then return nil end
-        sum = sum + 1 / (chance * (rec.u or 1))
+        sum, var = Point(sum, var, chance, rec.u or 1)
     end
-    return math.max(1, math.ceil(sum - 1e-6))
+    return LV.Worst(sum, var)
+end
+
+-- Can this recipe still give a point on the stretch's last craft? Never one you know that the game rates grey.
+-- Else not when the recipe table says it is grey by then (a guide's alternative that runs out partway is not
+-- offered), unless the game still rates it teaching where the table has it grey already
+local function Reaches(kind, o, hi, mine, rank)
+    local rec, known = LV.GuideRecipe(o, mine)
+    if known and (rec.c or 0) <= 0 then return false end
+    local data = ns.Recipes and ns.Recipes.For(kind, o.p)
+    if not data or (known and rank >= data.c[4]) then return true end
+    return data.c[4] > hi - 1
+end
+
+-- An alternative as the step shows it: another thing to gather, or another recipe
+local function Alternative(o, g, lo, hi, mine, kind, rank, learned)
+    if o.gather then return { gather = o.gather, why = {} } end
+    local rec, known = LV.GuideRecipe(o, mine)
+    return { rec = rec, known = known,
+             -- (outside the recipe table an alternative keeps the guide's count: its colours would be guesses)
+             crafts = ColourCrafts(kind, rec, false, lo, hi, rank, learned) or GuideCrafts(o, g, lo, hi),
+             why = (o == g) and { "guide" } or o.why or {},
+             learn = (not known) and { how = o.learn or "trainer", at = o.at } or nil }
+end
+
+-- The materials the guides level a profession with (what their recipes ask for and what they make on the way):
+-- the usual things, gathered or bought. nil where there is no guide to go by
+function LV.Usual(kind)
+    local guide = ns.LevelGuides and ns.LevelGuides[kind]
+    if type(guide) ~= "table" or #guide == 0 then return nil end
+    local usual = {}
+    local function Add(g)
+        if g.p then usual[g.p] = true end
+        local r = type(g.r) == "table" and g.r or {}
+        for i = 1, #r - 1, 2 do usual[r[i]] = true end
+    end
+    for _, g in ipairs(guide) do
+        Add(g)
+        for _, a in ipairs(g.alts or {}) do Add(a) end
+    end
+    return usual
+end
+
+local function Quality(id)
+    if not id then return nil end
+    if C_Item and C_Item.GetItemQualityByID then
+        local ok, q = pcall(C_Item.GetItemQualityByID, id)
+        q = ok and Num(q)
+        if q then return q end
+    end
+    local get = (C_Item and C_Item.GetItemInfo) or GetItemInfo
+    if not get then return nil end
+    local ok, _, _, q = pcall(get, id)
+    return ok and Num(q) or nil
+end
+
+-- How fit a recipe of yours is to level with: 1 orange or yellow, from usual materials; 2 green (a point is
+-- unlikely, and it may be grey a few points on); 3 one that makes something rare, or asks for a material that is
+-- none of the usual ones, that you do not gather and no vendor sells (a rare drop has no price to compare, and
+-- so would pass for cheap). The lower number is always taken first.
+function LV.Fitness(rec, usual)
+    if (Quality(rec.p) or 0) >= LV.RARE then return 3 end
+    if usual then
+        for _, x in ipairs(rec.r or {}) do
+            if not usual[x.id] and LV.How(x.id) == "auction" then return 3 end
+        end
+    end
+    return (rec.c or 0) >= 2 and 1 or 2
+end
+
+-- Your recipes that still teach (never a grey one), each with where it changes colour, what it costs and how
+-- fit it is
+local function Teachers(read, learned)
+    local options, usual = {}, LV.Usual(read.kind)
+    for _, rec in ipairs(read.list) do
+        if rec.c >= 1 then
+            local Y, G, X = LV.Colours(read.kind, rec, true, read.rank, learned)
+            if Y then
+                options[#options + 1] = { rec = rec, Y = Y, G = G, X = X, cost = CraftCost(rec),
+                                          fit = LV.Fitness(rec, usual) }
+            end
+        end
+    end
+    return options
+end
+
+-- from..to point by point, each from the fittest recipe (LV.Fitness; only up to most, when given), and among
+-- those the one that costs least per point: the steps, and the rank they get to
+local function Cheapest(kind, options, from, to, most)
+    local steps, s, last = {}, from, nil
+    while s < to do
+        local best, bestCost, bestChance
+        for _, o in ipairs(options) do
+            local chance = LV.Chance(s, o.Y, o.X)
+            if chance > 0 and not (most and o.fit > most) then
+                local per = o.cost / (chance * o.rec.u)
+                if not best or o.fit < best.fit or (o.fit == best.fit and (per < bestCost - 1e-9
+                        or (math.abs(per - bestCost) < 1e-9 and (chance > bestChance
+                        or (chance == bestChance and o.rec.n < best.rec.n))))) then
+                    best, bestCost, bestChance = o, per, chance
+                end
+            end
+        end
+        if not best then break end
+        if not (last and last.o == best) then
+            local colour = (s < best.Y and 3) or (s < best.G and 2) or 1
+            colour = math.min(colour, best.rec.c)          -- (never a better colour than the game gives it now)
+            last = { o = best, rec = best.rec, from = s, to = s, sum = 0, var = 0, colour = colour }
+            steps[#steps + 1] = last
+        end
+        last.sum, last.var = Point(last.sum, last.var, bestChance, best.rec.u)
+        s = s + 1
+        last.to = s
+    end
+    for _, step in ipairs(steps) do
+        step.crafts = LV.Worst(step.sum, step.var)
+        if not Listed(kind, step.rec) then
+            step.crafts = LV.Bound(step.crafts, step.to - step.from, step.colour)
+        end
+        step.o, step.sum, step.var = nil, nil, nil
+    end
+    return steps, s
+end
+
+-- What n of a material asks of you, added to what: the slow farms (hides) in it, what could only be bought at
+-- auction (no gathering skill of yours, no vendor, none of the usual materials), and the money to buy the rest,
+-- as far as their prices are known
+local function Asks(id, n, usual, what, depth)
+    if LV.SLOW[id] then what.slow[id] = (what.slow[id] or 0) + n end
+    if LV.How(id) == "farm" then return end
+    local recipe = depth < LV.DEPTH and LV.MadeOf(id)
+    if recipe then
+        for _, rid in ipairs(SortedIds(recipe.r)) do
+            Asks(rid, n * recipe.r[rid] / (recipe.m or 1), usual, what, depth + 1)
+        end
+        return
+    end
+    local how = LV.How(id)
+    if how == "auction" and usual and not usual[id] and not LV.SLOW[id] then what.auction[#what.auction + 1] = id end
+    if not LV.SLOW[id] then
+        local MK = ns.Market
+        local each = MK and ((MK.MerchantPrice and MK.MerchantPrice(id)) or (MK.Auction and MK.Auction(id)))
+        what.pocket = what.pocket + n * (each or 0)          -- (only prices that are known: no guesses)
+    end
+end
+
+-- { slow = { [hide] = how many }, auction = { ids }, pocket = copper } for crafts of a recipe
+function LV.Cost(rec, crafts, usual)
+    local what = { slow = {}, auction = {}, pocket = 0 }
+    for _, x in ipairs(rec and rec.r or {}) do Asks(x.id, x.n * crafts, usual, what, 0) end
+    return what
+end
+
+local function Slow(what)
+    local many = 0
+    for _, n in pairs(what and what.slow or {}) do many = many + n end
+    return many >= LV.SLOW_MANY
+end
+
+-- Is it hard on someone levelling alone? "auction" (needs buying there), "slow" (a slow farm), "costly", or nil
+function LV.Hard(what)
+    if not what then return nil end
+    if #what.auction > 0 then return "auction" end
+    if Slow(what) then return "slow" end
+    if what.pocket >= LV.COSTLY then return "costly" end
+end
+
+LV.TAGS = { auction = L["[by auction]"], slow = L["[slow farm]"], costly = L["[costly]"] }
+local function Tag(what)
+    local hard = LV.Hard(what)
+    return hard and ("  |cffffb347" .. LV.TAGS[hard] .. "|r") or ""
+end
+
+-- What the mark stands for, in a sentence (nil: nothing hard about it)
+function LV.CostSentence(what)
+    local hard = LV.Hard(what)
+    if hard == "auction" then
+        local names, seen = {}, {}
+        for _, id in ipairs(what.auction) do
+            if not seen[id] then seen[id] = true; names[#names + 1] = ItemNameFor(id) end
+        end
+        return L["Needs %s, which you'd buy at the auction house: for levelling with money to spend."]
+            :format(table.concat(names, ", "))
+    end
+    if hard == "slow" then
+        local parts = {}
+        for _, id in ipairs(SortedIds(what.slow)) do
+            parts[#parts + 1] = ("%s x%d"):format(ItemNameFor(id), math.ceil(what.slow[id] - 1e-6))
+        end
+        return L["A slow farm: %s. Few skins give a hide."]:format(table.concat(parts, ", "))
+    end
+    if hard == "costly" then return L["About %s of materials to buy."]:format(ns.Money(math.floor(what.pocket + 0.5))) end
+end
+
+-- The crafts one of your recipes would take for from..to, or nil when it would be grey before the end
+local function StretchCrafts(kind, o, from, to)
+    local sum, var = 0, 0
+    for at = from, to - 1 do
+        local chance = LV.Chance(at, o.Y, o.X)
+        if chance <= 0 then return nil end
+        sum, var = Point(sum, var, chance, o.rec.u or 1)
+    end
+    local crafts = LV.Worst(sum, var)
+    if not Listed(kind, o.rec) then crafts = LV.Bound(crafts, to - from, o.rec.c) end
+    return crafts
+end
+
+-- Beside each hard pick of the plan: an orange or yellow recipe of yours that is easier (no slow farm, or much
+-- less to buy), and one for money to spend, whose materials you would buy at auction. The plan itself keeps to
+-- what you gather and what vendors sell
+function LV.SideBySide(read, plan, learned)
+    local usual = LV.Usual(plan.kind)
+    local options
+    for _, step in ipairs(plan.steps) do
+        for _, alt in ipairs(step.alts or {}) do
+            if alt.rec then alt.cost = LV.Cost(alt.rec, alt.crafts, usual) end
+        end
+        if step.rec then
+            step.cost = LV.Cost(step.rec, step.crafts, usual)
+            if LV.Hard(step.cost) then
+                options = options or Teachers(read, learned)
+                local listed = { [step.rec.n] = true }
+                for _, alt in ipairs(step.alts or {}) do
+                    if alt.rec then listed[alt.rec.n] = true end
+                end
+                local easier, bought
+                for _, o in ipairs(options) do
+                    local crafts = not listed[o.rec.n] and (o.rec.c or 0) >= 2
+                        and StretchCrafts(plan.kind, o, step.from, step.to)
+                    if crafts then
+                        local what = LV.Cost(o.rec, crafts, usual)
+                        local found = { rec = o.rec, known = true, crafts = crafts, cost = what, side = true, why = {} }
+                        if #what.auction > 0 then
+                            if not bought or crafts < bought.crafts
+                                    or (crafts == bought.crafts and o.rec.n < bought.rec.n) then
+                                bought = found
+                            end
+                        elseif o.fit == 1 then
+                            local quicker = Slow(step.cost) and not Slow(what)
+                            local cheaper = what.pocket < step.cost.pocket * LV.EASIER and not Slow(what)
+                            if quicker or cheaper then
+                                found.why = { quicker and "nohide" or "less" }
+                                if not easier or what.pocket < easier.cost.pocket
+                                        or (what.pocket == easier.cost.pocket and o.rec.n < easier.rec.n) then
+                                    easier = found
+                                end
+                            end
+                        end
+                    end
+                end
+                step.alts = step.alts or {}
+                if easier then step.alts[#step.alts + 1] = easier end
+                if bought and LV.Hard(step.cost) ~= "auction" then step.alts[#step.alts + 1] = bought end
+            end
+        end
+    end
+end
+
+-- A step onto the plan; one that carries on the recipe before it, where either fills in for a grey one, joins it
+local function Append(steps, step)
+    local last = steps[#steps]
+    if last and (last.filled or step.filled) and last.rec and step.rec and last.rec.n == step.rec.n
+            and not step.learn and not last.learn and last.to == step.from then
+        last.to, last.crafts = step.to, last.crafts + step.crafts
+        last.filled = last.filled and step.filled
+        if step.alts[1] then last.alts = step.alts end
+        return
+    end
+    steps[#steps + 1] = step
 end
 
 -- The plan's steps from the guide, or nil when the profession has none. And where the guide stops, if short of
--- the target.
+-- the target; how many points on the way nothing gives; and the guide's recipes the game rates grey for you.
 function LV.GuideSteps(read, target)
     local guide = ns.LevelGuides and ns.LevelGuides[read.kind]
     if type(guide) ~= "table" or #guide == 0 then return nil end
     local mine = Mine(read)
     local learned = ns.db and ns.db.skillSteps and ns.db.skillSteps[read.kind] or {}
     local steps, reach = {}, read.rank
+    local greys, gap, teachers = {}, 0, nil
     for _, g in ipairs(guide) do
         local lo, hi = math.max(g[1], read.rank), math.min(g[2], target)
         if lo < hi then
@@ -601,31 +1061,104 @@ function LV.GuideSteps(read, target)
             local step = { from = lo, to = hi, guide = true, alts = {} }
             if g.gather then
                 step.gather = g.gather
-                for _, a in ipairs(g.alts or {}) do step.alts[#step.alts + 1] = Alternative(a, g, lo, hi, mine) end
+                for _, a in ipairs(g.alts or {}) do
+                    step.alts[#step.alts + 1] = Alternative(a, g, lo, hi, mine, read.kind, read.rank, learned)
+                end
+                steps[#steps + 1] = step
             else
                 local options = { g }
                 for _, a in ipairs(g.alts or {}) do
                     if not a.gather then options[#options + 1] = a end
                 end
                 local main
-                for _, o in ipairs(options) do                       -- the first you know that still teaches
+                for _, o in ipairs(options) do          -- the first you know that is still orange or yellow
                     local rec, known = LV.GuideRecipe(o, mine)
-                    if known and (rec.c or 0) > 0 then main = o; break end
+                    if known and (rec.c or 0) >= 2 and Reaches(read.kind, o, hi, mine, read.rank) then
+                        main = o
+                        break
+                    end
                 end
-                main = main or g
-                local rec, known = LV.GuideRecipe(main, mine)
-                step.rec, step.known = rec, known
-                step.colour = known and rec.c or 3
-                step.crafts = (known and KnownCrafts(rec, lo, hi, read.rank, learned)) or GuideCrafts(main, g, lo, hi)
-                if not known then step.learn = { how = main.learn or "trainer", at = main.at } end
-                for _, o in ipairs(options) do
-                    if o ~= main then step.alts[#step.alts + 1] = Alternative(o, g, lo, hi, mine) end
+                if not main then
+                    local rec, known = LV.GuideRecipe(g, mine)
+                    if not known then
+                        main = g
+                    else
+                        -- Green or grey for you: the guide's skill ranges are not trusted over the game's colour.
+                        -- First your orange and yellow recipes (usual materials); where they run out, another of
+                        -- the guide's to learn; then a green one of the guide's, then whatever of yours teaches
+                        if (rec.c or 0) <= 0 then greys[#greys + 1] = rec end
+                        teachers = teachers or Teachers(read, learned)
+                        local function Fill(from, most)
+                            local filled, at = Cheapest(read.kind, teachers, from, hi, most)
+                            for _, f in ipairs(filled) do
+                                f.guide, f.filled, f.known, f.alts = true, true, true, {}
+                                Append(steps, f)
+                            end
+                            return at
+                        end
+                        local at = Fill(lo, 1)
+                        if at < hi then
+                            for _, o in ipairs(options) do
+                                local _, known2 = LV.GuideRecipe(o, mine)
+                                if not known2 and Reaches(read.kind, o, hi, mine, read.rank) then main = o; break end
+                            end
+                            if not main then
+                                for _, o in ipairs(options) do
+                                    local _, known2 = LV.GuideRecipe(o, mine)
+                                    if known2 and Reaches(read.kind, o, hi, mine, read.rank) then main = o; break end
+                                end
+                            end
+                            if main then
+                                lo, step.from = at, at
+                            else
+                                gap = gap + (hi - Fill(at))
+                            end
+                        end
+                    end
+                end
+                if main then
+                    local rec, known = LV.GuideRecipe(main, mine)
+                    step.rec, step.known = rec, known
+                    step.colour = known and rec.c or 3
+                    local coloured = ColourCrafts(read.kind, rec, known, lo, hi, read.rank, learned)
+                    step.crafts = coloured or GuideCrafts(main, g, lo, hi)
+                    if known and coloured and not Listed(read.kind, rec) then              -- (guessed colours)
+                        step.crafts = LV.Bound(coloured, hi - lo, rec.c)
+                        if rec.c < 3 then step.crafts = math.max(step.crafts, GuideCrafts(main, g, lo, hi)) end
+                    end
+                    if not known then step.learn = { how = main.learn or "trainer", at = main.at } end
+                    for _, o in ipairs(options) do
+                        if o ~= main and Reaches(read.kind, o, hi, mine, read.rank) then
+                            step.alts[#step.alts + 1] = Alternative(o, g, lo, hi, mine, read.kind, read.rank, learned)
+                        end
+                    end
+                    Append(steps, step)
                 end
             end
-            steps[#steps + 1] = step
         end
     end
-    return steps, reach
+    return steps, reach, gap, greys
+end
+
+-- The grey recipes a later step needs something from: { rec, crafts, count, wants = what it is for, before = the
+-- step that needs it first (nil when it is for something made on the way) }
+function LV.Makes(plan, greys)
+    local out, seen = {}, {}
+    for _, rec in ipairs(greys or {}) do
+        local count = rec.p and plan.made[rec.p]
+        if count and count > 0 and not seen[rec.p] then
+            seen[rec.p] = true
+            local m = { rec = rec, count = count, crafts = math.ceil(count / math.max(1, rec.m or 1)) }
+            for _, step in ipairs(plan.steps) do
+                for _, x in ipairs(step.rec and step.rec.r or {}) do
+                    if x.id == rec.p and not m.before then m.before, m.wants = step, step.rec.n end
+                end
+            end
+            if not m.wants and plan.via[rec.p] then m.wants = ItemNameFor(plan.via[rec.p]) end
+            if m.wants then out[#out + 1] = m end
+        end
+    end
+    return out
 end
 
 ---------------------------------------------------------------------------
@@ -640,55 +1173,24 @@ function LV.Plan(read, target)
     plan.target = target
     if read.rank >= read.cap then plan.capped = true end
     local learned = ns.db and ns.db.skillSteps and ns.db.skillSteps[read.kind] or {}
-    local options = {}
-    for _, rec in ipairs(read.list) do
-        if rec.c >= 1 then
-            local Y, G, X = LV.Thresholds(learned[rec.n], rec.c, read.rank)
-            if Y then options[#options + 1] = { rec = rec, Y = Y, G = G, X = X, cost = CraftCost(rec) } end
-        end
-    end
-    local guided, reach = LV.GuideSteps(read, target)
+    local guided, reach, gap, greys = LV.GuideSteps(read, target)
     if guided then
         plan.steps, plan.guide = guided, true
-        if reach < target and not plan.capped then plan.short = target - reach end
-        for _, step in ipairs(plan.steps) do
-            for _, x in ipairs(step.rec and step.rec.r or {}) do
-                plan.need[x.id] = (plan.need[x.id] or 0) + step.crafts * x.n
-            end
-        end
-        plan.raw, plan.total, plan.made, plan.via = LV.Breakdown(plan.need)
-        plan.next, plan.nextAt = LV.NextRecipe(read)
-        return plan
+        local short = math.max(0, target - reach) + (gap or 0)
+        if short > 0 and not plan.capped then plan.short = short end
+    else
+        local at
+        plan.steps, at = Cheapest(read.kind, Teachers(read, learned), read.rank, target)
+        if at < target then plan.short = target - at end
     end
-    local s, last = read.rank, nil
-    while s < target do
-        local best, bestCost, bestChance
-        for _, o in ipairs(options) do
-            local chance = LV.Chance(s, o.Y, o.X)
-            if chance > 0 then
-                local per = o.cost / (chance * o.rec.u)
-                if not best or per < bestCost - 1e-9 or (math.abs(per - bestCost) < 1e-9 and (chance > bestChance
-                        or (chance == bestChance and o.rec.n < best.rec.n))) then
-                    best, bestCost, bestChance = o, per, chance
-                end
-            end
-        end
-        if not best then plan.short = target - s; break end
-        if not (last and last.o == best) then
-            local colour = (s < best.Y and 3) or (s < best.G and 2) or 1
-            last = { o = best, rec = best.rec, from = s, to = s, sum = 0, colour = colour }
-            plan.steps[#plan.steps + 1] = last
-        end
-        last.sum = last.sum + 1 / (bestChance * best.rec.u)
-        s = s + 1
-        last.to = s
-    end
+    LV.SideBySide(read, plan, learned)
     for _, step in ipairs(plan.steps) do
-        step.crafts = math.max(1, math.ceil(step.sum - 1e-6))
-        step.o, step.sum = nil, nil
-        for _, x in ipairs(step.rec.r) do plan.need[x.id] = (plan.need[x.id] or 0) + step.crafts * x.n end
+        for _, x in ipairs(step.rec and step.rec.r or {}) do
+            plan.need[x.id] = (plan.need[x.id] or 0) + step.crafts * x.n
+        end
     end
     plan.raw, plan.total, plan.made, plan.via = LV.Breakdown(plan.need)
+    plan.makes = LV.Makes(plan, greys)
     plan.next, plan.nextAt = LV.NextRecipe(read)
     return plan
 end
@@ -725,7 +1227,8 @@ local SKILL = {
     [1] = { "|cff40c040", "Professions-Icon-Skill-Low" },
 }
 function LV.RecipeText(name, colour)
-    local s = SKILL[math.min(3, math.max(1, colour or 1))]
+    if colour and colour < 1 then return "|cff9d9d9d" .. tostring(name) .. "|r" end       -- grey: no arrow
+    local s = SKILL[math.min(3, colour or 1)]
     return "|A:" .. s[2] .. ":12:12|a " .. s[1] .. tostring(name) .. "|r"
 end
 
@@ -809,6 +1312,7 @@ LV.WHY = {
     cheap = L["cheaper materials"], vendor = L["materials from a vendor"], gathered = L["materials you gather yourself"],
     sells = L["it sells well"], useful = L["something you'll use"], fewer = L["fewer crafts"],
     recipe = L["a recipe you find or buy"], other = L["other materials"], guide = L["the guides' first choice"],
+    nohide = L["no slow farm"], less = L["less to buy"],
 }
 function LV.Why(codes)
     local parts = {}
@@ -906,8 +1410,8 @@ local function Build()
         r.icon:SetPoint("LEFT", r, "LEFT", 2, 0)
         r.icon:SetTexCoord(0.08, 0.92, 0.08, 0.92)
         r.text = ns.FontString(r, 9, "LEFT")
-        r.text:SetPoint("LEFT", r.icon, "RIGHT", 5, 0)
-        r.text:SetPoint("RIGHT", r, "RIGHT", -70, 0)
+        r.text:SetPoint("LEFT", r.icon, "RIGHT", 5, 0)                   -- (its width is set row by row: Fit)
+        if r.text.SetWordWrap then r.text:SetWordWrap(true) end
         r.right = ns.FontString(r, 9, "RIGHT")
         r.right:SetPoint("RIGHT", r, "RIGHT", -4, 0)
         r:SetScript("OnEnter", ns.Protect(function(self) if self.at then LV:Choose(self.at) end end))
@@ -981,16 +1485,27 @@ function LV.Window()
 end
 
 -- The rows: the recipes to make, then what is missing to make them
-local function Entries(plan)
+local function Entries(plan, read)
     local out = {}
     if not plan then return out end
     for _, step in ipairs(plan.steps) do
+        for _, m in ipairs(plan.makes or {}) do                       -- (a grey recipe this step needs first)
+            if m.before == step then out[#out + 1] = { mat = m } end
+        end
         out[#out + 1] = { step = step }
         for _, alt in ipairs(step.alts or {}) do out[#out + 1] = { alt = alt, step = step } end    -- the guides' others
     end
+    for _, m in ipairs(plan.makes or {}) do
+        if not m.before then out[#out + 1] = { mat = m } end
+    end
     local wanted = LV.Wanted(plan)
-    if #wanted > 0 then out[#out + 1] = { head = L["To gather or buy"] } end
-    for _, g in ipairs(wanted) do out[#out + 1] = { id = g.id, more = g.more, total = g.total, route = g.route, buy = g.buy } end
+    if #wanted > 0 then out[#out + 1] = { head = L["Still needed to reach %d, at most:"]:format(plan.target) } end
+    for _, g in ipairs(wanted) do
+        out[#out + 1] = { id = g.id, more = g.more, total = g.total, route = g.route, buy = g.buy, how = g.how }
+    end
+    local sellers = LV.Sellers(read, plan)
+    if #sellers > 0 then out[#out + 1] = { head = L["Worth making to sell:"] } end
+    for _, s in ipairs(sellers) do out[#out + 1] = { sell = s } end
     return out
 end
 
@@ -1033,17 +1548,83 @@ local function Reagents(rec, crafts)
         local need = crafts * x.n
         parts[#parts + 1] = ("%s %d/%d"):format(ItemName(x.id), math.min(LV.Have(x.id), need), need)
     end
-    return L["%d crafts: %s"]:format(crafts, table.concat(parts, ", "))
+    return L["At most %d crafts: %s"]:format(crafts, table.concat(parts, ", "))
 end
 
-local function Learn(learn)
+-- Where to learn a step's recipe: for Cooking and First Aid by name (who sells it and where, the quest, the drop),
+-- else what the guide says
+local function Learn(plan, rec, learn)
     if not learn then return nil end
+    local Rc = ns.Recipes
+    local data = Rc and Rc.For(plan.kind, rec and rec.p)
+    local where = data and Rc.Where(Rc.Source(data, Rc.MySide()), plan.name)
+    if where then return L["Learn it at %d. %s."]:format(data.at, where) end
     if learn.at then return L["Learn it %s, at %d."]:format(LV.Source(learn), learn.at) end
     return L["Learn it %s."]:format(LV.Source(learn))
 end
 
+-- A recipe you do not have wears a mark where its skill-up arrow would be: the game's "?" when you can go and
+-- get it now, a red skill-up arrow when it asks for more skill than you have
+LV.QUESTION = "|TInterface\\GossipFrame\\ActiveQuestIcon:12:12|t"
+LV.ARROW = "Professions-Icon-Skill-High"
+function LV.RedArrow()
+    local get = C_Texture and C_Texture.GetAtlasInfo
+    if get then
+        local ok, a = pcall(get, LV.ARROW)
+        if ok and type(a) == "table" and a.file and a.leftTexCoord and a.rightTexCoord and a.topTexCoord
+                and a.bottomTexCoord then
+            -- the orange arrow's own piece of its sheet, tinted red
+            return ("|T%s:12:12:0:0:1024:1024:%d:%d:%d:%d:255:40:40|t"):format(tostring(a.file),
+                a.leftTexCoord * 1024, a.rightTexCoord * 1024, a.topTexCoord * 1024, a.bottomTexCoord * 1024)
+        end
+    end
+    return "|cffff2020^|r"
+end
+
+-- The skill a recipe still to learn asks for (nil: not known)
+local function NeedsSkill(plan, rec, learn)
+    local data = ns.Recipes and ns.Recipes.For(plan.kind, rec and rec.p)
+    return (data and data.at) or (learn and learn.at)
+end
+
+function LV.Unowned(plan, rec, learn)
+    local at = NeedsSkill(plan, rec, learn)
+    return (at and at > plan.rank) and LV.RedArrow() or LV.QUESTION
+end
+
+-- Under such a row: where to get it, and the skill it asks for
+local function WhereLine(plan, rec, learn)
+    return "\n|cff8fd0ff" .. Learn(plan, rec, learn) .. "|r"
+end
+
+-- How to get a material, in a sentence
+function LV.HowSentence(id, how)
+    local found, more = LV.How(id)
+    how = how or found
+    if how == "farm" then return L["Farm it: your %s brings it in."]:format(found == "farm" and more or "?") end
+    if how == "vendor" then
+        if more then return L["Buy it from a vendor: %s."]:format(more) end
+        return L["Buy it from a vendor."]
+    end
+    local M = ns.Market
+    local price = M and M.Auction and M.Auction(id)
+    if price then return L["Buy it at the auction house (%s each when last seen)."]:format(ns.Money(price)) end
+    return L["Buy it at the auction house."]
+end
+
 local function Detail(plan, e)
     if not e then return "" end
+    local function WithWorth(text, rec, what)
+        local hard = LV.CostSentence(what)
+        if hard then text = text .. "\n" .. hard end
+        local worth = LV.Sells(rec)
+        return worth and (text .. "\n" .. LV.SellSentence(worth)) or text
+    end
+    if e.sell then
+        local parts = {}
+        for _, x in ipairs(e.sell.rec.r) do parts[#parts + 1] = ("%s x%d"):format(ItemName(x.id), x.n) end
+        return table.concat(parts, ", ") .. "\n" .. LV.SellSentence(e.sell.worth)
+    end
     if e.make then
         local parts = {}
         for _, x in ipairs(e.make.r) do
@@ -1052,30 +1633,40 @@ local function Detail(plan, e)
         end
         return table.concat(parts, "\n")
     end
+    if e.mat then
+        return Reagents(e.mat.rec, e.mat.crafts) .. "\n"
+            .. L["Grey for you now, so it gives no skill points. Make it for %s."]:format(e.mat.wants)
+    end
     if e.alt and e.alt.gather then
         return L["The guides level this stretch by gathering %s."]:format(ItemName(e.alt.gather))
     end
     if e.alt then
-        local text = Reagents(e.alt.rec, e.alt.crafts) .. "\n" .. LV.Why(e.alt.why)
-        local learn = Learn(e.alt.learn)
+        local text = Reagents(e.alt.rec, e.alt.crafts)
+        if not (e.alt.side and #e.alt.why == 0) then text = text .. "\n" .. LV.Why(e.alt.why) end
+        text = WithWorth(text, e.alt.rec, e.alt.cost)
+        local learn = Learn(plan, e.alt.rec, e.alt.learn)
         return learn and (text .. "\n" .. learn) or text
     end
     if e.step and e.step.gather then
         return L["The guides level this stretch by gathering %s."]:format(ItemName(e.step.gather))
     end
     if e.step then
-        local text = Reagents(e.step.rec, e.step.crafts)
-        local learn = Learn(e.step.learn)
+        local text = WithWorth(Reagents(e.step.rec, e.step.crafts), e.step.rec, e.step.cost)
+        local learn = Learn(plan, e.step.rec, e.step.learn)
         return learn and (text .. "\n" .. learn) or text
     end
     if e.id then
         local have = LV.Have(e.id)
-        local text = L["%s: you have %d, the plan uses %d"]:format(ItemName(e.id), have, e.total or 0)
+        local text = L["%s: at most %d to reach %d. You have %d, so %d more at most."]:format(ItemName(e.id),
+            e.total or 0, plan.target, have, e.more or 0)
+        if not e.route then text = text .. "\n" .. LV.HowSentence(e.id, e.how) end
         local chain = LV.Chain(plan, e.id)
         if chain ~= "" then text = text .. "\n" .. L["for %s"]:format(chain) end
         if e.route then
             local parts = {}
-            for _, r in ipairs(e.route) do parts[#parts + 1] = ("%s x%d"):format(ItemName(r.id), r.n) end
+            for _, r in ipairs(e.route) do
+                parts[#parts + 1] = ("%s x%d (%s)"):format(ItemName(r.id), r.n, LV.HOW[r.how] or LV.HOW.auction)
+            end
             text = text .. "\n" .. (e.buy and L["Cheaper to buy it than to make it from %s"] or L["Made from %s"]):format(table.concat(parts, ", "))
         end
         return text
@@ -1084,14 +1675,14 @@ local function Detail(plan, e)
 end
 
 -- How tall a wrapped text is (the game measures it; an estimate where it cannot)
-local function TextHeight(fs, size)
+local function TextHeight(fs, size, width)
     local text = fs.GetText and Plain(fs:GetText())
     if type(text) ~= "string" or text == "" then return 0 end
     local h = fs.GetStringHeight and Num(fs:GetStringHeight())
     if h and h > 0 then return math.ceil(h) end
     local plainText = text:gsub("|c%x%x%x%x%x%x%x%x", ""):gsub("|r", ""):gsub("|A.-|a", "")
     local lines = 0
-    local per = math.max(10, math.floor((WIDTH - 20) / (size * 0.55 * (ns.db and tonumber(ns.db.textScale) or 1))))
+    local per = math.max(10, math.floor((width or WIDTH - 20) / (size * 0.55 * (ns.db and tonumber(ns.db.textScale) or 1))))
     for line in (plainText .. "\n"):gmatch("(.-)\n") do lines = lines + math.max(1, math.ceil(#line / per)) end
     return lines * (size + 3)
 end
@@ -1100,7 +1691,7 @@ LV.TextHeight = TextHeight
 -- The Mentor's face beside his words (his profession's icon; a book before there is a plan), or none with the
 -- narrative off. The title and the words start past it; returns how far in.
 LV.PORTRAIT = 36
-LV.BOOK = "Interface\Icons\INV_Misc_Book_09"
+LV.BOOK = "Interface\\Icons\\INV_Misc_Book_09"
 function LV.Face(voiced, kind)
     local p = frame.portrait
     local left = (voiced and p) and (LV.PORTRAIT + 10) or 0
@@ -1120,11 +1711,23 @@ function LV.Face(voiced, kind)
     return left
 end
 
+-- A row as tall as its words: the text as wide as the room left of the number, and the row grown for a second
+-- line, so rows never print over each other. Returns the room it takes.
+LV.NUMBER_W = 66          -- the room for a row's number, on the right
+function LV.Fit(r, inset)
+    local number = r.right.GetText and Plain(r.right:GetText())
+    local room = (WIDTH - 12) - inset - 16 - 5 - ((type(number) == "string" and number ~= "") and LV.NUMBER_W or 4)
+    r.text:SetWidth(room)
+    local tall = math.max(ROW, math.ceil(TextHeight(r.text, 9, room)) + 6)
+    r:SetHeight(tall - 1)
+    return tall, room
+end
+
 function LV:Refresh()
     if not (frame and frame:IsShown()) then return end
     local plan = self.plan
     local bank = self.mode == "bank"
-    self.entries = bank and BankEntries(self.read) or Entries(plan)
+    self.entries = bank and BankEntries(self.read) or Entries(plan, self.read)
     local n = #self.entries
     while self.entries[self.index] and self.entries[self.index].head do self.index = self.index + 1 end
     self.index = ns.Clamp(self.index, 1, math.max(1, n))
@@ -1152,12 +1755,12 @@ function LV:Refresh()
     -- under the title and The Mentor's words, however many lines each takes
     local top = 8 + math.max(14, TextHeight(frame.title, 12)) + 4 + TextHeight(frame.sub, 9) + 8
     if left > 0 then top = math.max(top, 8 + LV.PORTRAIT + 8) end   -- (and under his portrait)
-    local shown = 0
+    local shown, down = 0, 0                                         -- (down: how far the rows before reach)
     for i, r in ipairs(self.rows) do
         local at = self.top + i - 1
         local e = self.entries[at]
         r:ClearAllPoints()
-        r:SetPoint("TOPLEFT", frame, "TOPLEFT", 6, -top - (i - 1) * ROW)
+        r:SetPoint("TOPLEFT", frame, "TOPLEFT", 6, -top - down)
         if e then
             shown = i
             r.at = (not e.head) and at or nil
@@ -1172,6 +1775,17 @@ function LV:Refresh()
                 r.icon:SetTexture(e.make.p and Icon(e.make.p) or 134400)
                 r.text:SetText(e.make.c and e.make.c > 0 and LV.RecipeText(e.make.n, e.make.c) or e.make.n)
                 r.right:SetText(e.all > e.bags and ("%d |cff8fd0ff[%d]|r"):format(e.bags, e.all) or tostring(e.all))
+            elseif e.sell then                            -- it makes money, whatever its colour
+                r.icon:Show()
+                r.icon:SetTexture(e.sell.rec.p and Icon(e.sell.rec.p) or 134400)
+                r.text:SetText(LV.COIN .. " " .. e.sell.rec.n)
+                r.right:SetText("|cff6fe06a+" .. ns.Money(e.sell.worth.profit) .. "|r")
+            elseif e.mat then                             -- to make for a later step: no arrow, no points
+                r.icon:Show()
+                r.icon:SetTexture(e.mat.rec.p and Icon(e.mat.rec.p) or 134400)
+                r.text:SetText(("%s  x%d  |cff9d9d9d%s|r"):format(e.mat.rec.n, e.mat.crafts,
+                    L["make for %s"]:format(e.mat.wants)))
+                r.right:SetText("")
             elseif e.alt and e.alt.gather then
                 r.icon:Show()
                 r.icon:SetTexture(Icon(e.alt.gather))
@@ -1180,7 +1794,10 @@ function LV:Refresh()
             elseif e.alt then
                 r.icon:Show()
                 r.icon:SetTexture(e.alt.rec.p and Icon(e.alt.rec.p) or 134400)
-                r.text:SetText("|cff9d9d9d" .. L["or"] .. "|r " .. e.alt.rec.n .. "  |cff9d9d9d" .. LV.Why(e.alt.why) .. "|r")
+                local why = (not (e.alt.side and #e.alt.why == 0)) and ("  |cff9d9d9d" .. LV.Why(e.alt.why) .. "|r") or ""
+                local mark = e.alt.learn and (LV.Unowned(plan, e.alt.rec, e.alt.learn) .. " ") or ""
+                r.text:SetText("|cff9d9d9d" .. L["or"] .. "|r " .. mark .. e.alt.rec.n .. Coin(e.alt.rec) .. why
+                    .. Tag(e.alt.cost) .. (e.alt.learn and WhereLine(plan, e.alt.rec, e.alt.learn) or ""))
                 r.right:SetText("|cff9d9d9dx" .. e.alt.crafts .. "|r")
             elseif e.step and e.step.gather then
                 r.icon:Show()
@@ -1192,35 +1809,30 @@ function LV:Refresh()
                 r.icon:SetTexture(e.step.rec.p and Icon(e.step.rec.p) or 134400)
                 local name = e.step.learn and ("|cffd8d8d8" .. e.step.rec.n .. "|r")
                     or LV.RecipeText(e.step.rec.n, e.step.colour)
-                local text = name .. "  x" .. e.step.crafts
-                if e.step.learn then text = text .. "  |cff8fd0ff" .. L["to learn"] .. "|r" end
+                local text = name .. Coin(e.step.rec) .. "  " .. L["up to x%d"]:format(e.step.crafts)
+                text = text .. Tag(e.step.cost)
+                if e.step.learn then
+                    text = LV.Unowned(plan, e.step.rec, e.step.learn) .. " " .. text
+                        .. WhereLine(plan, e.step.rec, e.step.learn)
+                end
                 r.text:SetText(text)
                 r.right:SetText(("%d-%d"):format(e.step.from, e.step.to))
             else
                 r.icon:Show()
                 r.icon:SetTexture(Icon(e.id))
-                local text = ItemName(e.id)
-                if e.route then
-                    local how
-                    if e.buy then
-                        how = L["cheaper to buy"]
-                    else
-                        how = ("%s x%d"):format(ItemName(e.route[1].id), e.route[1].n)
-                        if #e.route > 1 then how = how .. ", ..." end
-                    end
-                    text = text .. "  |cff9d9d9d(" .. how .. ")|r"
-                end
-                r.text:SetText(text)
-                r.right:SetText(("+%d"):format(e.more))
+                -- (a route is long: on a line of its own under the name)
+                r.text:SetText(ItemName(e.id) .. (e.route and "\n" or "  ") .. "|cff9d9d9d(" .. LV.HowWords(e) .. ")|r")
+                r.right:SetText(L["up to %d"]:format(e.more))
             end
             if self.focus and at == self.index then r.hl:Show() else r.hl:Hide() end
             r:Show()
+            down = down + LV.Fit(r, e.alt and 18 or 2)
         else
             r.at = nil
             r:Hide()
         end
     end
-    local y = top + shown * ROW + 4
+    local y = top + down + 4
     frame.detail:ClearAllPoints()
     frame.detail:SetPoint("TOPLEFT", frame, "TOPLEFT", 10, -y)
     frame.detail:SetPoint("TOPRIGHT", frame, "TOPRIGHT", -10, -y)
@@ -1241,7 +1853,7 @@ function LV:Refresh()
     frame.mode.text:SetText(bank and L["The plan"] or L["With the bank"])
     local foot = math.max(18, TextHeight(frame.hint, 8))           -- then the buttons' line, at the bottom
     frame:SetHeight(math.floor(y + 6 + foot + 6 + 0.5))
-    self.layout = { top = top, rows = shown, detail = detail, foot = foot, height = y + 12 + foot }
+    self.layout = { top = top, rows = shown, tall = down, detail = detail, foot = foot, height = y + 12 + foot }
 end
 
 -- How far the window's own parts (its tabs down the right edge) stick out past it: read, never changed
@@ -1299,7 +1911,7 @@ function LV.Wearable()
         if B.Dressable({ id = id, link = link }) then return { id = id, link = link } end
     end
     local e = LV.focus and LV.entries[LV.index]
-    local rec = e and ((e.alt and e.alt.rec) or (e.step and e.step.rec) or e.make)
+    local rec = e and ((e.alt and e.alt.rec) or (e.step and e.step.rec) or (e.mat and e.mat.rec) or e.make)
     local found = rec and Check(rec.p)
     if found then return found end
     local index, get
@@ -1401,8 +2013,17 @@ function LV:Farm(all)
         end
     else
         local e = self.entries[self.index]
-        if e and (e.make or (e.alt and e.alt.gather) or (e.step and e.step.gather and not e.alt)) then return 0 end
-        if e and e.alt then
+        if e and (e.make or e.sell or (e.alt and e.alt.gather) or (e.step and e.step.gather and not e.alt)) then
+            return 0
+        end
+        if e and e.mat then
+            local need = {}
+            for _, x in ipairs(e.mat.rec.r) do need[x.id] = e.mat.crafts * x.n end
+            local raw, total = LV.Breakdown(need)
+            for _, id in ipairs(SortedIds(raw)) do
+                if F.Add(id, total[id], true) then added = added + 1 end
+            end
+        elseif e and e.alt then
             local need = {}
             for _, x in ipairs(e.alt.rec.r) do need[x.id] = e.alt.crafts * x.n end
             local raw, total = LV.Breakdown(need)
