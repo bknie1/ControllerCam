@@ -944,7 +944,13 @@ end
 LV.TAGS = { auction = L["[by auction]"], slow = L["[slow farm]"], costly = L["[costly]"] }
 local function Tag(what)
     local hard = LV.Hard(what)
-    return hard and ("  |cffffb347" .. LV.TAGS[hard] .. "|r") or ""
+    return hard and ("|cffffb347" .. LV.TAGS[hard] .. "|r") or ""
+end
+
+-- A row's name and what follows it: on one line, or with a mark, on two (the mark last, whole)
+local function WithTag(name, rest, tag)
+    if tag == "" then return rest == "" and name or (name .. "  " .. rest) end
+    return name .. "\n" .. (rest == "" and tag or (rest .. "  " .. tag))
 end
 
 -- What the mark stands for, in a sentence (nil: nothing hard about it)
@@ -1346,6 +1352,8 @@ LV.PLAIN = {
 function LV.Voiced() return not ns.Narrative or ns.Narrative.On() end
 local function Say(kind, plan, first)
     if not LV.Voiced() and LV.PLAIN[kind] then return LV.PLAIN[kind](plan, first) end
+    -- a pick of your own recipes (the guide's was green or grey), or another set beside it: not the guides' word
+    if kind == "alt" and (first.filled or first.alts[1].side) then return LV.SAY.alt[1](plan, first) end
     return Pick(LV.SAY[kind])(plan, first)
 end
 
@@ -1360,7 +1368,8 @@ function LV.Words(plan)
     elseif plan.short then kind = "short"
     elseif not first then kind = "short"
     elseif first.colour == 1 then kind = "green"
-    elseif first.alts and first.alts[1] then kind = "alt"
+    elseif first.alts and first.alts[1] and not (first.alts[1].side and #first.alts[1].why == 0) then
+        kind = "alt"                  -- (one that needs buying at auction is not put forward as a choice here)
     else kind = "go" end
     if kind == "short" and not plan.short then return Say("capped", plan) end
     return Say(kind, plan, first)
@@ -1794,10 +1803,10 @@ function LV:Refresh()
             elseif e.alt then
                 r.icon:Show()
                 r.icon:SetTexture(e.alt.rec.p and Icon(e.alt.rec.p) or 134400)
-                local why = (not (e.alt.side and #e.alt.why == 0)) and ("  |cff9d9d9d" .. LV.Why(e.alt.why) .. "|r") or ""
+                local why = (not (e.alt.side and #e.alt.why == 0)) and ("|cff9d9d9d" .. LV.Why(e.alt.why) .. "|r") or ""
                 local mark = e.alt.learn and (LV.Unowned(plan, e.alt.rec, e.alt.learn) .. " ") or ""
-                r.text:SetText("|cff9d9d9d" .. L["or"] .. "|r " .. mark .. e.alt.rec.n .. Coin(e.alt.rec) .. why
-                    .. Tag(e.alt.cost) .. (e.alt.learn and WhereLine(plan, e.alt.rec, e.alt.learn) or ""))
+                r.text:SetText(WithTag("|cff9d9d9d" .. L["or"] .. "|r " .. mark .. e.alt.rec.n .. Coin(e.alt.rec), why,
+                    Tag(e.alt.cost)) .. (e.alt.learn and WhereLine(plan, e.alt.rec, e.alt.learn) or ""))
                 r.right:SetText("|cff9d9d9dx" .. e.alt.crafts .. "|r")
             elseif e.step and e.step.gather then
                 r.icon:Show()
@@ -1809,8 +1818,7 @@ function LV:Refresh()
                 r.icon:SetTexture(e.step.rec.p and Icon(e.step.rec.p) or 134400)
                 local name = e.step.learn and ("|cffd8d8d8" .. e.step.rec.n .. "|r")
                     or LV.RecipeText(e.step.rec.n, e.step.colour)
-                local text = name .. Coin(e.step.rec) .. "  " .. L["up to x%d"]:format(e.step.crafts)
-                text = text .. Tag(e.step.cost)
+                local text = WithTag(name .. Coin(e.step.rec), L["up to x%d"]:format(e.step.crafts), Tag(e.step.cost))
                 if e.step.learn then
                     text = LV.Unowned(plan, e.step.rec, e.step.learn) .. " " .. text
                         .. WhereLine(plan, e.step.rec, e.step.learn)

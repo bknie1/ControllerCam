@@ -31,6 +31,7 @@ ControllerCam: HUD
 - Recipes that make money wear a gold coin in The Mentor's list: what they make sells for well above its materials at auction (at least 5 silver profit, after the house's cut). Choose the row to see the numbers. Under the list, **Worth making to sell** shows your three best, grey ones too. It needs auction prices (open the auction house and read them).
 - The plan is for levelling on your own, with what you gather and what vendors sell. A pick that's hard on a solo player is marked **[slow farm]** (many hides), **[costly]** (20 silver or more of materials to buy, by the prices it knows) or **[by auction]**, with another beside it: one that's easier on you, and one **[by auction]** for anyone with money to spend. Choose the row to see why. It no longer tells you to buy a material because that's cheaper than making it; that's a note when you choose the row.
 - A recipe you don't have is marked where its skill-up arrow would be: a **red arrow** when it asks for more skill than you have, the game's **?** when you can go and get it now. The line under it says where to learn it.
+- Fixed: The Mentor's headline no longer says your own recipe is "as the guides have it", or puts a by-auction one forward as a choice there. A marked row's tag sits on its own line under the name, so it isn't cut in two.
 - Fixed: The Mentor's book portrait had a broken texture path.
 
 ## 1.5.10

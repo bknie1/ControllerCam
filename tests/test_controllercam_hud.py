@@ -19067,10 +19067,39 @@ class MentorGrey(unittest.TestCase):
         self.assertIsNone(LV.Sells(rec))
         self.assertEqual(e.errors(), [])
 
+    def test_the_headline_credits_the_guides_only_with_what_is_theirs(self):
+        e = self.env(self.LATER)
+        LV = e.ns.Levelling
+        T = e.lua.table
+        first = LV.plan.steps[1]
+        self.assertTrue(first.filled)                                  # a pick of your own recipes
+        other = T(rec=T(n="Dark Leather Boots"), why=e.lua.table_from(["nohide"]), side=True, crafts=3)
+        first.alts = e.lua.table_from([other])
+        for voice in range(4):
+            LV.voice = voice
+            self.assertNotIn("guides", LV.Words(LV.plan))
+            self.assertIn("if you'd rather: no slow farm", LV.Words(LV.plan))
+        bought = T(rec=T(n="Deviate Scale Belt"), why=e.lua.table(), side=True, crafts=3)
+        first.alts = e.lua.table_from([bought])                       # for money to spend: not put forward
+        for voice in range(6):
+            LV.voice = voice
+            self.assertNotIn("Deviate", LV.Words(LV.plan))
+            self.assertNotIn("guides", LV.Words(LV.plan))
+        self.assertEqual(e.errors(), [])
+
+    def test_a_marked_row_keeps_its_mark_on_one_line(self):
+        e = self.env()
+        marked = [t for t, _ in self.rows(e) if "[slow farm]" in t or "[costly]" in t or "[by auction]" in t]
+        self.assertTrue(marked)
+        for text in marked:
+            name = plain(text).split("\n")[0]
+            self.assertNotIn("[", name, text)                         # the mark is on the line under the name
+        self.assertEqual(e.errors(), [])
+
     def test_a_recipe_you_do_not_have_says_where_to_get_it(self):
         e = self.env()                                                # Dark Leather Belt asks for 125; you're at 106
         LV = e.ns.Levelling
-        belt = next(t for t, _ in self.rows(e) if "Dark Leather Belt  up to" in plain(t))
+        belt = next(t for t, right in self.rows(e) if "Dark Leather Belt" in plain(t) and "up to x" in t)
         self.assertIn("|cffff2020^|r", belt)                          # beyond your skill: the red mark
         self.assertNotIn("ActiveQuestIcon", belt)
         self.assertIn("\n", belt)                                    # and where to get it, on its own line
