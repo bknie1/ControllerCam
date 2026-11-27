@@ -27,7 +27,7 @@ ns.RegisterSetting({
 ns.RegisterSetting({
     key = "castChain", kind = "boolean", default = true, command = "chain", section = "Frames",
     label = "Chain cast count",
-    tip = "when you cast one spell straight after another, a count of the chain shows under your cast bar; it ends when you stop, move or are interrupted",
+    tip = "when you cast one spell straight after another, a count of the chain shows under your cast bar, with the damage you dealt during it in small numbers below; it ends when you stop, move or are interrupted",
 })
 ns.RegisterSetting({
     key = "fishing", kind = "boolean", default = true, command = "fishing", section = "Frames",
@@ -133,6 +133,11 @@ local function Build()
     frame.combo = ns.FontString(frame.comboBox, 12, "LEFT")
     frame.combo:SetPoint("TOPLEFT", frame.comboBox, "TOPLEFT", 0, 0)
     frame.combo:Hide()
+    -- and under the count, smaller: the damage you dealt while the chain ran, cut short ("1.2k")
+    frame.comboSum = ns.FontString(frame.comboBox, 9, "LEFT")
+    frame.comboSum:SetPoint("TOPLEFT", frame.combo, "BOTTOMLEFT", 0, -1)
+    frame.comboSum:SetTextColor(unpack(C.muted))
+    frame.comboSum:Hide()
     frame:Hide()
     CB.frame, CB.bar = frame, bar
     CB.art = ns.CastArt.Attach(bar, 1)                 -- what works on the bar while it fills (CastArt.lua)
@@ -220,11 +225,20 @@ local function ComboScale(s)
     box:SetPoint("TOPLEFT", bar, "BOTTOMLEFT", 8 / s, -(CB.under or CB.ROOM) / s)
 end
 
--- "x3" from the second cast of a chain on, in the colour of the cast under way
+-- A chain's damage, cut short: 950, 1.2k, 15.3k, 120k, 1.2m
+function CB.Short(n)
+    if n < 1000 then return tostring(math.floor(n)) end
+    if n < 99950 then return ("%.1fk"):format(n / 1e3) end
+    if n < 999500 then return ("%dk"):format(math.floor(n / 1e3 + 0.5)) end
+    return ("%.1fm"):format(n / 1e6)
+end
+
+-- "x3" from the second cast of a chain on, in the colour of the cast under way; under it the chain's damage
 local function ComboDraw()
     local n = CB.combo or 0
     if n < 2 or not ns.db.castChain or CB.fishing then
         frame.combo:Hide()
+        frame.comboSum:Hide()
         CB.bump = nil
         return
     end
@@ -232,6 +246,26 @@ local function ComboDraw()
     frame.combo:SetText("x" .. n)
     frame.combo:SetTextColor(c[1], c[2], c[3])
     frame.combo:Show()
+    local sum = CB.comboDamage or 0
+    if sum > 0 and not CB.comboUnknown then
+        frame.comboSum:SetText(CB.Short(sum))
+        frame.comboSum:Show()
+    else
+        frame.comboSum:Hide()
+    end
+end
+
+-- Damage of yours while a chain runs (Impact.lua hears it: the combat log, or the game's hit event where the
+-- log says nothing). The first cast's counts too. An amount the game keeps to itself cannot be added, and a
+-- total that leaves it out would be wrong: that chain shows no total.
+function CB.Damage(amount)
+    if (CB.combo or 0) < 1 or not CB.frame then return end
+    if ns.IsSecret(amount) or type(amount) ~= "number" then
+        CB.comboUnknown = true
+    else
+        CB.comboDamage = (CB.comboDamage or 0) + amount
+    end
+    ComboDraw()
 end
 
 -- It jumps as the chain grows, and settles
@@ -500,6 +534,7 @@ function CB:Refresh(event)
             self.bump = (not ns.Calm() and ns.Effects() ~= "none") and now or nil
         else
             self.combo = counts and 1 or 0
+            self.comboDamage, self.comboUnknown = 0, nil     -- a new chain: its damage from nothing
         end
         self.comboAt = nil
     end

@@ -410,7 +410,7 @@ Provável:
 Preparo do lançamento
 sua barra de lançamento brilha mais conforme o lançamento se enche e explode quando acerta
 Contador de lançamentos em sequência
-quando você lança um feitiço logo após outro, um contador da sequência aparece sob sua barra de lançamento; ele termina quando você para, se move ou é interrompido
+quando você lança um feitiço logo após outro, um contador da sequência aparece sob sua barra de lançamento, com o dano que você causou durante ela em números pequenos logo abaixo; ele termina quando você para, se move ou é interrompido
 Boia de pesca
 ao pescar, uma boia balança na sua barra de lançamento e mostra o que provavelmente vai morder aqui
 Barra de lançamento

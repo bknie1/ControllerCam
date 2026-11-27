@@ -251,12 +251,36 @@ STYLES.mine = {
 -- Leaves sprouting along the top of the bar, each with the herb's own flower when the game names the herb
 -- (CastLook.Own: look.bloom). When the herb is yours they are plucked, one after another from the left: each
 -- is tugged (it stretches, held by its root), comes free with a jump and a spin, and drops a crumb of earth.
+-- A herb with a flower is a whole plant: a stem out of the bar, the flower on its tip, the leaf off its foot.
+local STEM, LEAF_AT, LEAF_OUT = 19, 0.15, 0.85      -- the stem's height; how far up it the leaf sits; its lean
+
+-- Plant j: its stem's middle at px, py, the whole of it turned by r (the leaf leaning a off the stem)
+local function Plant(art, st, j, px, py, tall, lw, lh, a, r, alpha, open)
+    local s = art.scale
+    local stem, leaf, f = st.stems[j], st.leaves[j], st.flowers[j]
+    Put(art, stem, px, py, 1.5 * s, max(0.01, tall))
+    Turn(stem, r)
+    stem:SetAlpha(alpha)
+    local up = tall * (0.5 - LEAF_AT)                   -- the leaf's foot, this far below the stem's middle
+    local bx, by = px + sin(r) * up, py - cos(r) * up
+    Put(art, leaf, bx - sin(a + r) * 0.42 * lh, by + cos(a + r) * 0.42 * lh, lw, lh)
+    Turn(leaf, a + r)
+    leaf:SetAlpha(alpha)
+    Put(art, f, px - sin(r) * tall / 2, py + cos(r) * tall / 2, max(0.01, 10 * s * open))
+    Turn(f, r)
+    f:SetAlpha(open > 0 and alpha or 0)
+end
+
 STYLES.leaves = {
     fade = 0.8, ownFade = true,
     start = function(art)
         local st, b = art.state, not art.light and art.look.bloom
         st.leaves, st.crumbs = {}, {}
         local n = max(2, floor(art.w / (30 * art.scale)))
+        if b then                                       -- (the stems first: they stand behind leaf and flower)
+            st.stems = {}
+            for j = 1, n do st.stems[j] = art:Piece("bar", nil, 0.33, 0.55, 0.2) end
+        end
         for j = 1, n do st.leaves[j] = art:Piece("leaf") end
         if b then
             st.flowers = {}
@@ -275,17 +299,19 @@ STYLES.leaves = {
             local f = st.flowers and st.flowers[j]
             if grow <= 0 then
                 t:SetAlpha(0)
-                if f then f:SetAlpha(0) end
+                if f then f:SetAlpha(0); st.stems[j]:SetAlpha(0) end
             else
                 local size = (14 + (j * 5) % 4) * s * grow
                 local sway = sin(now * 2.2 + j) * 0.22
-                Put(art, t, x, art.h / 2 + size * 0.42, size)
-                Turn(t, sway + ((j % 2 == 0) and 0.45 or -0.45))
-                t:SetAlpha(1)
-                if f then                                   -- the flower opens once the leaf has grown
+                if f then                                   -- the flower opens once the plant has grown
+                    local tall = STEM * s * grow
                     local open = Clamp01((edge - x - 12 * s) / (14 * s))
-                    Put(art, f, x + sway * 6 * s, art.h / 2 + size * 0.85, max(0.01, 10 * s * open))
-                    f:SetAlpha(open > 0 and 1 or 0)
+                    Plant(art, st, j, x, art.h / 2 + tall / 2, tall, size, size,
+                        sway + ((j % 2 == 0) and LEAF_OUT or -LEAF_OUT), 0, 1, open)
+                else
+                    Put(art, t, x, art.h / 2 + size * 0.42, size)
+                    Turn(t, sway + ((j % 2 == 0) and 0.45 or -0.45))
+                    t:SetAlpha(1)
                 end
             end
         end
@@ -313,14 +339,19 @@ STYLES.leaves = {
                 lean = lean + ((j % 2 == 0) and 1.4 or -1.4) * v
                 alpha = 1 - Clamp01((v - 0.55) / 0.45)
             end
-            Put(art, t, x, y, w, h)
-            Turn(t, lean)
-            t:SetAlpha(alpha)
-            local f = st.flowers and st.flowers[j]
-            if f then
-                Put(art, f, x, y + h * 0.43, 10 * s)
-                Turn(f, lean)
-                f:SetAlpha(alpha)
+            if st.flowers then                                      -- the whole plant: stem, leaf and flower
+                local out = (j % 2 == 0) and LEAF_OUT or -LEAF_OUT
+                if v > 0 then
+                    local tall = STEM * s
+                    Plant(art, st, j, x, y - size * 0.42 + tall / 2, tall, size, size, out, lean - out * 0.53, alpha, 1)
+                else
+                    local tall = STEM * s * h / size
+                    Plant(art, st, j, x0, art.h / 2 + tall / 2, tall, w, h, out, 0, 1, 1)
+                end
+            else
+                Put(art, t, x, y, w, h)
+                Turn(t, lean)
+                t:SetAlpha(alpha)
             end
             local crumb = st.crumbs[j]
             if crumb then                                           -- earth from where it stood

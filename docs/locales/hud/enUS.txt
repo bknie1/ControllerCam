@@ -410,7 +410,7 @@ Likely:
 Cast wind-up
 your cast bar glows brighter as the cast fills and bursts when it lands
 Chain cast count
-when you cast one spell straight after another, a count of the chain shows under your cast bar; it ends when you stop, move or are interrupted
+when you cast one spell straight after another, a count of the chain shows under your cast bar, with the damage you dealt during it in small numbers below; it ends when you stop, move or are interrupted
 Fishing float
 while fishing, a float bobs on your cast bar and it shows what is likely to bite here
 Cast bar

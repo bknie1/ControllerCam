@@ -410,7 +410,7 @@ Wahrscheinlich:
 Zauber-Aufladung
 deine Zauberleiste leuchtet heller, je voller der Zauber wird, und entlädt sich beim Wirken
 Zähler für Zauberketten
-wenn du einen Zauber direkt nach dem anderen wirkst, erscheint unter deiner Zauberleiste ein Zähler der Kette; sie endet, wenn du aufhörst, dich bewegst oder unterbrochen wirst
+wenn du einen Zauber direkt nach dem anderen wirkst, erscheint unter deiner Zauberleiste ein Zähler der Kette, darunter in kleinen Zahlen der Schaden, den du währenddessen verursacht hast; sie endet, wenn du aufhörst, dich bewegst oder unterbrochen wirst
 Angelschwimmer
 beim Angeln wippt ein Schwimmer auf deiner Zauberleiste und zeigt, was hier wahrscheinlich anbeißt
 Zauberleiste

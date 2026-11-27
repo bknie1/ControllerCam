@@ -419,7 +419,7 @@ local ENGLISH = {
     "Cast wind-up",  -- 410
     "your cast bar glows brighter as the cast fills and bursts when it lands",  -- 411
     "Chain cast count",  -- 412
-    "when you cast one spell straight after another, a count of the chain shows under your cast bar; it ends when you stop, move or are interrupted",  -- 413
+    "when you cast one spell straight after another, a count of the chain shows under your cast bar, with the damage you dealt during it in small numbers below; it ends when you stop, move or are interrupted",  -- 413
     "Fishing float",  -- 414
     "while fishing, a float bobs on your cast bar and it shows what is likely to bite here",  -- 415
     "Cast bar",  -- 416
@@ -2311,7 +2311,7 @@ local TRANSLATIONS = {
         "Zauber-Aufladung",  -- 410
         "deine Zauberleiste leuchtet heller, je voller der Zauber wird, und entlädt sich beim Wirken",  -- 411
         "Zähler für Zauberketten",  -- 412
-        "wenn du einen Zauber direkt nach dem anderen wirkst, erscheint unter deiner Zauberleiste ein Zähler der Kette; sie endet, wenn du aufhörst, dich bewegst oder unterbrochen wirst",  -- 413
+        "wenn du einen Zauber direkt nach dem anderen wirkst, erscheint unter deiner Zauberleiste ein Zähler der Kette, darunter in kleinen Zahlen der Schaden, den du währenddessen verursacht hast; sie endet, wenn du aufhörst, dich bewegst oder unterbrochen wirst",  -- 413
         "Angelschwimmer",  -- 414
         "beim Angeln wippt ein Schwimmer auf deiner Zauberleiste und zeigt, was hier wahrscheinlich anbeißt",  -- 415
         "Zauberleiste",  -- 416
@@ -4201,7 +4201,7 @@ local TRANSLATIONS = {
         "Carga de lanzamiento",  -- 410
         "tu barra de lanzamiento brilla más a medida que se llena el lanzamiento y estalla al completarse",  -- 411
         "Contador de lanzamientos en cadena",  -- 412
-        "cuando lanzas un hechizo justo después de otro, bajo tu barra de lanzamiento aparece un contador de la cadena; termina cuando paras, te mueves o te interrumpen",  -- 413
+        "cuando lanzas un hechizo justo después de otro, bajo tu barra de lanzamiento aparece un contador de la cadena y, debajo, en números pequeños, el daño que has hecho durante ella; termina cuando paras, te mueves o te interrumpen",  -- 413
         "Flotador de pesca",  -- 414
         "al pescar, un flotador se mece en tu barra de lanzamiento y muestra qué es probable que pique aquí",  -- 415
         "Barra de lanzamiento",  -- 416
@@ -6091,7 +6091,7 @@ local TRANSLATIONS = {
         "Montée du lancement",  -- 410
         "votre barre de lancement brille plus fort à mesure que le sort se charge et éclate à l'impact",  -- 411
         "Compteur de sorts enchaînés",  -- 412
-        "quand vous lancez un sort juste après un autre, un compteur de l'enchaînement s'affiche sous votre barre de lancement ; il s'arrête quand vous cessez, bougez ou êtes interrompu",  -- 413
+        "quand vous lancez un sort juste après un autre, un compteur de l'enchaînement s'affiche sous votre barre de lancement, avec en dessous, en petits chiffres, les dégâts que vous avez infligés pendant celui-ci ; il s'arrête quand vous cessez, bougez ou êtes interrompu",  -- 413
         "Flotteur de pêche",  -- 414
         "pendant la pêche, un flotteur ondule sur votre barre de lancement et indique ce qui risque de mordre ici",  -- 415
         "Barre d'incantation",  -- 416
@@ -7981,7 +7981,7 @@ local TRANSLATIONS = {
         "Carica dell'incantesimo",  -- 410
         "la tua barra di lancio brilla di più mentre l'incantesimo si carica ed esplode quando va a segno",  -- 411
         "Contatore di lanci a catena",  -- 412
-        "quando lanci un incantesimo subito dopo un altro, sotto la tua barra di lancio compare un contatore della catena; finisce quando ti fermi, ti muovi o vieni interrotto",  -- 413
+        "quando lanci un incantesimo subito dopo un altro, sotto la tua barra di lancio compare un contatore della catena e, sotto, in numeri piccoli, i danni che hai inflitto nel frattempo; finisce quando ti fermi, ti muovi o vieni interrotto",  -- 413
         "Galleggiante da pesca",  -- 414
         "mentre peschi, un galleggiante ondeggia sulla tua barra di lancio e mostra cosa è probabile che abbocchi qui",  -- 415
         "Barra di lancio",  -- 416
@@ -9871,7 +9871,7 @@ local TRANSLATIONS = {
         "시전 준비",  -- 410
         "시전이 차오를수록 시전 바가 더 밝게 빛나고 시전이 적중하면 터집니다",  -- 411
         "연속 시전 횟수",  -- 412
-        "주문을 연달아 시전하면 시전 바 아래에 연속 횟수가 표시됩니다. 시전을 멈추거나 움직이거나 차단당하면 끝납니다",  -- 413
+        "주문을 연달아 시전하면 시전 바 아래에 연속 횟수가 표시되고, 그 아래에 연속 시전 동안 입힌 피해가 작은 숫자로 표시됩니다. 시전을 멈추거나 움직이거나 차단당하면 끝납니다",  -- 413
         "낚시 찌",  -- 414
         "낚시하는 동안 시전 바 위에서 찌가 흔들리며 이곳에서 물 만한 것을 보여줍니다",  -- 415
         "시전 바",  -- 416
@@ -11761,7 +11761,7 @@ local TRANSLATIONS = {
         "Preparo do lançamento",  -- 410
         "sua barra de lançamento brilha mais conforme o lançamento se enche e explode quando acerta",  -- 411
         "Contador de lançamentos em sequência",  -- 412
-        "quando você lança um feitiço logo após outro, um contador da sequência aparece sob sua barra de lançamento; ele termina quando você para, se move ou é interrompido",  -- 413
+        "quando você lança um feitiço logo após outro, um contador da sequência aparece sob sua barra de lançamento, com o dano que você causou durante ela em números pequenos logo abaixo; ele termina quando você para, se move ou é interrompido",  -- 413
         "Boia de pesca",  -- 414
         "ao pescar, uma boia balança na sua barra de lançamento e mostra o que provavelmente vai morder aqui",  -- 415
         "Barra de lançamento",  -- 416
@@ -13651,7 +13651,7 @@ local TRANSLATIONS = {
         "Накопление заклинания",  -- 410
         "полоса заклинания светится ярче по мере заполнения и вспыхивает, когда заклинание достигает цели",  -- 411
         "Счётчик заклинаний подряд",  -- 412
-        "когда вы применяете заклинания одно за другим, под полосой заклинания показывается счётчик цепочки; она обрывается, когда вы останавливаетесь, двигаетесь или вас прерывают",  -- 413
+        "когда вы применяете заклинания одно за другим, под полосой заклинания показывается счётчик цепочки, а под ним мелкими цифрами урон, который вы нанесли за это время; она обрывается, когда вы останавливаетесь, двигаетесь или вас прерывают",  -- 413
         "Рыболовный поплавок",  -- 414
         "во время рыбалки на полосе заклинания качается поплавок и показывает, что здесь, вероятно, клюнет",  -- 415
         "Полоса заклинания",  -- 416
@@ -15541,7 +15541,7 @@ local TRANSLATIONS = {
         "施法蓄力",  -- 410
         "施法条随着施法进度填满而更明亮，并在施法命中时迸发",  -- 411
         "连续施法计数",  -- 412
-        "接连施放法术时，施法条下方会显示连续次数；停止施法、移动或被打断时结束",  -- 413
+        "接连施放法术时，施法条下方会显示连续次数，其下以小字显示这期间你造成的伤害；停止施法、移动或被打断时结束",  -- 413
         "钓鱼浮标",  -- 414
         "钓鱼时，施法条上会有浮标起伏，并显示这里可能上钩的鱼",  -- 415
         "施法条",  -- 416
@@ -17431,7 +17431,7 @@ local TRANSLATIONS = {
         "施法蓄力",  -- 410
         "施法條會隨著施法進度填滿而更明亮，並在施法命中時迸發",  -- 411
         "連續施法計數",  -- 412
-        "接連施放法術時，施法條下方會顯示連續次數；停止施法、移動或被打斷時結束",  -- 413
+        "接連施放法術時，施法條下方會顯示連續次數，其下以小字顯示這期間你造成的傷害；停止施法、移動或被打斷時結束",  -- 413
         "釣魚浮標",  -- 414
         "釣魚時，施法條上會有浮標起伏，並顯示這裡可能上鉤的魚",  -- 415
         "施法條",  -- 416

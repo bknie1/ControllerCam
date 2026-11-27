@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.6.2
+
+ControllerCam: HUD
+- **A chain of casts adds up its damage.** Under the chain's count (**x3**) a smaller number now shows the damage you dealt while the chain ran, the first cast's included, cut short: 950, 1.4k, 15.3k, 1.2m. It counts your own spells, shots, swings and ticks, not your pet's. It comes from the combat log, or from the game's hit event where the log says nothing. Where the game keeps an amount to itself, that chain shows no total, since one that leaves a hit out would be wrong. It needs **Hit effects by damage school** on, which is what listens for your hits. Part of **Chain cast count** (`/cchud chain`). Not yet seen in the game.
+- **A herb grows as a whole plant.** When the game names the herb you gather, each one on your cast bar is now a small plant: a stem out of the bar, a leaf off its foot and the herb's own flower on its tip (white for Peacebloom, red for Kingsblood, gold for Goldthorn). Before, the flower sat loose over a leaf. When the cast lands the whole plant is plucked, stem and all. A herb the game doesn't name grows as leaves, as before. Not yet seen in the game.
+
 ## 1.6.1
 
 ControllerCam: HUD

@@ -410,7 +410,7 @@ Probable:
 Carga de lanzamiento
 tu barra de lanzamiento brilla más a medida que se llena el lanzamiento y estalla al completarse
 Contador de lanzamientos en cadena
-cuando lanzas un hechizo justo después de otro, bajo tu barra de lanzamiento aparece un contador de la cadena; termina cuando paras, te mueves o te interrumpen
+cuando lanzas un hechizo justo después de otro, bajo tu barra de lanzamiento aparece un contador de la cadena y, debajo, en números pequeños, el daño que has hecho durante ella; termina cuando paras, te mueves o te interrumpen
 Flotador de pesca
 al pescar, un flotador se mece en tu barra de lanzamiento y muestra qué es probable que pique aquí
 Barra de lanzamiento

@@ -410,7 +410,7 @@ Probable :
 Montée du lancement
 votre barre de lancement brille plus fort à mesure que le sort se charge et éclate à l'impact
 Compteur de sorts enchaînés
-quand vous lancez un sort juste après un autre, un compteur de l'enchaînement s'affiche sous votre barre de lancement ; il s'arrête quand vous cessez, bougez ou êtes interrompu
+quand vous lancez un sort juste après un autre, un compteur de l'enchaînement s'affiche sous votre barre de lancement, avec en dessous, en petits chiffres, les dégâts que vous avez infligés pendant celui-ci ; il s'arrête quand vous cessez, bougez ou êtes interrompu
 Flotteur de pêche
 pendant la pêche, un flotteur ondule sur votre barre de lancement et indique ce qui risque de mordre ici
 Barre d'incantation

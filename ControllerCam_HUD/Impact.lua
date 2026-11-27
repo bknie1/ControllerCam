@@ -783,6 +783,8 @@ end
 
 local DAMAGE = { SWING_DAMAGE = 12, RANGE_DAMAGE = 15, SPELL_DAMAGE = 15, SPELL_PERIODIC_DAMAGE = 15,
                  DAMAGE_SHIELD = 15, DAMAGE_SPLIT = 15 }          -- where the amount sits; the school is always 14th
+local CHAINED = { SWING_DAMAGE = true, RANGE_DAMAGE = true, SPELL_DAMAGE = true, SPELL_PERIODIC_DAMAGE = true }
+IM.LOG_QUIET = 5                 -- the log has said nothing for this long: the game's hit event counts instead
 
 -- Every spell's school, as the log tells it (a cast starting, a hit, a heal; yours or anyone's): cast bars
 -- take their colour and their effects from it
@@ -806,6 +808,7 @@ local function FromLog()
     local info = LogInfo()
     local e = { info() }
     local sub, sourceGUID, destGUID = e[2], e[4], e[8]
+    if not ns.IsSecret(sourceGUID) and sourceGUID then IM.logAt = GetTime() end    -- the log names who did it
     Learn(sub, e[12], e[14])
     if sub == "SPELL_AURA_APPLIED" or sub == "SPELL_AURA_REFRESH" or sub == "SPELL_AURA_REMOVED" then
         if ns.Bloom then ns.Bloom.FromLog(sub, destGUID, e[12]) end      -- heals over time growing on a bar
@@ -834,6 +837,8 @@ local function FromLog()
     if sourceGUID ~= ns.GUID("player") and sourceGUID ~= ns.GUID("pet") then return end
     local crit = e[at + 6]
     if ns.IsSecret(crit) then crit = false end
+    -- your own damage (not your pet's, not Thorns) adds to a chain of casts' total
+    if sourceGUID == ns.GUID("player") and CHAINED[sub] and ns.CastBar then ns.CastBar.Damage(e[at]) end
     if ns.Moments and sourceGUID == ns.GUID("player") then                -- your key abilities, felt
         if sub == "SWING_DAMAGE" then ns.Moments.Swing(e[12], crit)
         elseif sub == "SPELL_DAMAGE" then ns.Moments.FromLog(e[12], e[13], e[15], crit, e[14]) end
@@ -964,6 +969,8 @@ local function FromUnit(unit, action, flag, amount, mask)
         return
     end
     if not IM.Mine(unit, school) then IM.others = IM.others + 1; return end    -- someone else's hit
+    -- (a chain's total takes it only while the log is silent: where the log speaks, it has told this hit already)
+    if ns.CastBar and not (IM.logAt and GetTime() - IM.logAt <= IM.LOG_QUIET) then ns.CastBar.Damage(amount) end
     Land(ns.GUID(unit), school, crit, unit, StrikeOfLastCast())   -- (a damage over time ticks here too, and shots: their school)
 end
 

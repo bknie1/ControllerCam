@@ -1451,6 +1451,12 @@ class CastLooks(unittest.TestCase):
         self.assertEqual(list(flowers[0].vcolor.values())[:3], red)
         e.update(1.4, 0.05)
         self.assertEqual(flowers[0].alpha, 1)                           # open once the leaf has grown
+        stem, leaf, flower = list(cb.art.state.stems.values())[0], list(cb.art.state.leaves.values())[0], flowers[0]
+        self.assertEqual(stem.alpha, 1)                                 # both off one stem: the flower on its tip,
+        self.assertAlmostEqual(flower.points[1][4], stem.points[1][4], 3)
+        self.assertAlmostEqual(flower.points[1][5], stem.points[1][5] + stem.height / 2, 3)
+        self.assertLess(leaf.points[1][5], stem.points[1][5])           # the leaf off its foot, out to one side
+        self.assertNotAlmostEqual(leaf.points[1][4], stem.points[1][4], 0)
         e.update(0.6, 0.05)
         self.assertLess(flowers[0].alpha, 1)                            # and plucked with it
         e.update(1, 0.05)
@@ -3596,6 +3602,56 @@ class CastBars(unittest.TestCase):
         self.land(e)
         self.cast(e)
         self.assertFalse(combo.shown)
+        self.assertEqual(e.errors(), [])
+
+    def hit(self, e, amount, kind="SPELL_DAMAGE", source="player", dest="target"):
+        e.mock.logHit(kind, source, dest, 4)                         # (the helper fires it once, as 100)
+        e.mock.logEntry[12 if kind == "SWING_DAMAGE" else 15] = amount
+        e.mock.fire("COMBAT_LOG_EVENT_UNFILTERED")
+        return amount + 100
+
+    def test_a_chain_totals_its_damage_under_the_count(self):
+        e = Env()
+        e.target()
+        cb = self.land(e)
+        combo, total = cb.frame.combo, cb.frame.comboSum
+        self.assertEqual(total.baseSize, 9)                          # smaller than the count (12),
+        self.assertEqual((total.points[1][1], total.points[1][3]), ("TOPLEFT", "BOTTOMLEFT"))   # and under it
+        dealt = self.hit(e, 400)                                     # the first cast's bolt lands:
+        self.assertFalse(total.shown)                                # one cast is no chain yet,
+        cb = self.cast(e)
+        self.assertEqual((combo.text, total.shown, total.text), ("x2", True, str(dealt)))   # but it counts
+        dealt += self.hit(e, 800)
+        self.assertEqual(total.text, "1.4k")                         # cut short from a thousand on
+        self.hit(e, 5000, source="target", dest="player")            # what hits you is not yours,
+        self.assertEqual(total.text, "1.4k")
+        dealt += self.hit(e, 150, kind="SWING_DAMAGE")               # a swing of yours in between is
+        self.assertEqual(total.text, "1.6k")
+        e.mock.fire("UNIT_COMBAT", "target", "WOUND", "", 150, 1)    # (the game's hit event tells the same swing
+        self.assertEqual(total.text, "1.6k")                         # again: the log has it already)
+        e.mock.units.player.cast = None
+        e.mock.fire("UNIT_SPELLCAST_INTERRUPTED", "player")          # the chain is over: so is its total
+        self.assertFalse(total.shown)
+        e.update(1)
+        self.land(e)
+        cb = self.cast(e)
+        self.assertEqual((combo.text, total.shown), ("x2", False))   # a new chain starts from nothing
+        self.assertEqual(e.errors(), [])
+        S = e.ns.CastBar.Short
+        self.assertEqual([S(n) for n in (0, 999.6, 1000, 15340, 99960, 123456, 999600, 2500000)],
+                         ["0", "999", "1.0k", "15.3k", "100k", "123k", "1.0m", "2.5m"])
+
+    def test_without_the_log_the_hit_event_totals_a_chain(self):
+        e = Env(setup=lambda env: env.lua.execute("CombatLogGetCurrentEventInfo = nil"))
+        e.target()
+        cb = self.land(e)
+        total = cb.frame.comboSum
+        e.mock.fire("UNIT_COMBAT", "target", "WOUND", "", 300, 4)
+        cb = self.cast(e)
+        e.mock.fire("UNIT_COMBAT", "target", "WOUND", "", 450, 4)
+        self.assertEqual((total.shown, total.text), (True, "750"))
+        e.mock.fire("UNIT_COMBAT", "target", "WOUND", "", e.mock.secret(), 4)       # an amount the game keeps:
+        self.assertFalse(total.shown)                                # no total is better than a wrong one
         self.assertEqual(e.errors(), [])
 
     def test_upright_beside_the_vertical_bars_when_you_choose_it(self):
