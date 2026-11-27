@@ -98,6 +98,11 @@ end
 ---------------------------------------------------------------------------
 local STYLES = {}
 A.STYLES = STYLES
+-- The shows of the main abilities (CastSig.lua fills this): the same three calls, their own state in art.o and
+-- what makes this ability's show its own in art.sig (an entry of CastLook.SIGS)
+A.SHOWS = {}
+A.BARE = { start = function() end, update = function() end }     -- nothing under a show that stands alone
+A.Put, A.Turn, A.Scatter, A.Clamp01 = Put, Turn, Scatter, Clamp01  -- (for CastSig.lua)
 
 -- A tool pecking at the end of the bar (and two more working behind it on your own bar)
 STYLES.tool = {
@@ -925,7 +930,13 @@ function Art:Start(look)
     local key = look and A.STYLE_OF[look.kind] or ""
     if look and look.kind == "heal" and look.school == "holy" then key = "sear" end      -- light, not leaves
     local style = STYLES[key]
-    if not style or not ns.db.castArt or ns.Calm() then return false end         -- (Reduce animations: none)
+    local level = ns.Effects()
+    -- one of the main abilities: its own show over its school's (Full and Subtle; CastSig.lua)
+    local sig = look and look.sig and level ~= "classic" and look.sig or nil
+    local over = sig and A.SHOWS[sig.show] or nil
+    if over and (sig.solo or not style) then style = A.BARE end
+    if not style or not ns.db.castArt or level == "none" or ns.Calm() then return false end   -- (Reduce animations: none)
+    self.over, self.sig, self.o, self.subtle = over, over and sig or nil, {}, level == "subtle"
     self.look, self.kind, self.style, self.color = look, look.kind, style, look.color or { 1, 1, 1 }
     self.bursts = style.bursts and not self.light or false
     self.w, self.h = self.bar:GetWidth() or 100, self.bar:GetHeight() or 8
@@ -934,6 +945,7 @@ function Art:Start(look)
     self.scale = self.base                              -- (how many pieces: by the size it has at heart)
     self.began = GetTime()                              -- (whoever knows when the cast really began says so after)
     style.start(self)
+    if over then over.start(self) end
     self.layer:SetAlpha(1)
     self.layer:Show()
     return true
@@ -948,6 +960,7 @@ function Art:Update(fill, progress, now)
         if k >= 1 then self:Stop(); return end
         if not style.ownFade then self.layer:SetAlpha(1 - k) end     -- (an ending of its own fades its own pieces)
         if style.finish then style.finish(self, k, now, self.landed) end
+        if self.over then self.over.finish(self, k, now, self.landed) end
         return
     end
     if not fill then return end
@@ -957,6 +970,8 @@ function Art:Update(fill, progress, now)
     local p = progress or 0
     self.scale = self.base * (A.GROW[1] + (A.GROW[2] - A.GROW[1]) * Clamp01(p))   -- bigger as it completes
     style.update(self, self.edge, p, now)
+    if self.over then self.over.update(self, self.edge, p, now) end
+    self.p = p
 end
 
 function Art:Finish(landed, now)
@@ -964,6 +979,13 @@ function Art:Finish(landed, now)
     self.finishing, self.landed = now or GetTime(), landed and true or false
     -- an ending of its own (a bar crumbling) takes its time; a cast cut short just fades
     self.fade = (self.landed and not self.light and self.style.fade) or A.FADE
+    if self.over and self.over.fade then self.fade = max(self.fade, self.over.fade) end   -- (a bolt takes its time to go)
+end
+
+-- Did one of the main abilities just fire here, and how hard does it shake the bar? (Full only; your own bar)
+function Art:Kick()
+    if not (self.over and self.landed) or self.subtle or self.light or ns.Calm() then return nil end
+    return (self.sig.big or 1) * (self.sig.show == "reticle" and 0.6 or 1)
 end
 
 -- How long the ending that is running takes (seconds; 0 when none is)
@@ -982,6 +1004,7 @@ function Art:Stop()
         if bar.spark then bar.spark:SetAlpha(1) end
     end
     self.style, self.kind, self.look, self.finishing, self.landed, self.bursts, self.edge, self.fade = nil
+    self.over, self.sig, self.o, self.p = nil
 end
 
 -- How many pieces are on screen (for the self-check and the tests)

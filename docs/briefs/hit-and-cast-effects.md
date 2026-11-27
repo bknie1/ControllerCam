@@ -24,13 +24,51 @@ before building.
 "Hot bar" and "task bar" here mean the bar the effect lands on: the target, focus and nameplate health bars, and
 the cast bar. If that reading changes the design, ask.
 
-## Scope: buckets, not every spell
+## Scope: buckets underneath, the main abilities on top
 
-- **Now:** looks are grouped by **damage type** and by **class type** (what kind of class or ability it comes
+Added after the messages above, and it widens "for now, group them into buckets":
+
+> For the Fable agent, we should at least make every "main' ability, feel good, you know? Wrath, Shadow Bolt,
+> Frost Bolt, Fireball, Pyroblast, Arcane Missiles, Arcane Blast, Smite, Mindflay, Immolate, Incinerate, etc.
+> All the "main" ones. Even better if we can do a melee pass. I think Aimed Shot has a good one. Would be cool
+> if it was like a targeting reticule locking in down someone's archery or gun sights, you know? Moves around
+> then locks in to the middle right on fire. Stuff like that.
+
+- **The base:** looks grouped by **damage type** and by **class type** (what kind of class or ability it comes
   from): a fire spell, a warrior's strike, a rogue's, a druid's roots. Say in the plan which buckets there are
   and how a spell lands in one, including what happens when the game keeps the spell or its school secret.
-- **Later, not now:** an animation, even a damage look, of its own for every spell, ability and effect. Keep
-  the way a look is chosen open to that (a spell could one day override its bucket), without building it.
+- **On top, now: every "main" ability gets a look that feels like that ability,** overriding its bucket. The
+  ones named: Wrath, Shadow Bolt, Frostbolt, Fireball, Pyroblast, Arcane Missiles, Arcane Blast, Smite,
+  Mind Flay, Immolate, Incinerate. "etc." and "all the main ones" mean the list is not finished: put a list
+  for **every class** in the plan, for a yes. Check which of these this game has.
+- **Bolt spells charge up,** and the goal behind all of this is in the last line:
+
+  > The bolt type spells would have that 0-100% charge up where, on cast, it looks like the right part of the
+  > bar is about to explode or something. It may even shake as it fires off, or other cool effects depending on
+  > type. I want the player to feel the action.
+
+  So the build follows the cast from 0 to 100%, gathering at the **right end** of the bar until it looks ready
+  to explode, and **fires** when the cast lands, with a shake or another payoff that suits its type. Tie it to
+  the bar's real progress, so a cast pushed back by a hit stays in step, and let an interrupted or cancelled
+  cast fizzle without firing. Reduce animations (`ns.Calm()`) still means no shake and no burst. (Wrath's
+  circular wind-up, above, is its own take on this.)
+- **A melee pass,** wanted too ("even better if"): after the casts.
+- **Aimed Shot:** a targeting reticle, as down a bow's or a gun's sights, that moves around while the shot is
+  aimed and **locks onto the centre at the very moment it fires**, timed to the end of the cast. (In the plan, say what
+  an interrupted shot does, and whether bow and gun can have sights of their own.)
+- **Later, not now:** a look of its own for every spell, ability and effect beyond the main ones. A new one
+  should be cheap to add.
+
+Things to work out for this:
+
+- **Choosing a spell's own look:** `K.KINDS` in `CastLook.lua` already does it for some (lightning, roots,
+  revive): one rank's spell ID, matched by the game's name for it, so every rank and language works. Most
+  spells go by school (`K.SCHOOLS`; Arcane Blast, Incinerate and Aimed Shot aren't listed). A physical cast
+  gets only a glint of steel. An enemy's cast with a secret name and ID falls back to the bucket or the plain bar.
+- **Channels** (Arcane Missiles, Mind Flay) empty the bar instead of filling it: design for that, and for
+  Arcane Missiles' separate bolts.
+- **Instant abilities** (most melee) have no cast bar, so their look has to play where the hit lands. Check
+  first what tells you which of your abilities made a hit, and what happens when that is secret.
 
 > See on this how it kind of sources from the middle? Actually, this makes sense for Wrath since it's a kind of
 > circular wind up ability, almost like a shoryuken type ball. Almost that circular, hearthstone like effect but
@@ -93,7 +131,8 @@ rather than moving everything to the edges.
   sweep"). Before changing anything, make a branch from it (`git switch -c effects-sweep`) **in this same
   folder**: the game loads this folder's working tree, so what is checked out is what plays. `main` stays as
   the way back. Check that no other session is working in the folder first: switching branches changes the files
-  under them.
+  under them. Work in this folder itself, **not in a git worktree**: the game would not see it. This brief was
+  added to after that commit; the uncommitted change comes along onto the branch.
 - The game loads this folder's working tree; code changes need `/reload`.
 - Option and tooltip texts are translated: add `docs/locales/hud/new_enUS.txt` plus the 9 languages in
   extraction order, run `python docs/locales/merge_hud.py`, then `python docs/locales/gen_hud_locales.py`; all 10

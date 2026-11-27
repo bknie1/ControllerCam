@@ -18,10 +18,30 @@
 -- language.
 
 local ADDON, ns = ...
-local C = ns.colors
+local C, L = ns.colors, ns.L
 
 local K = {}
 ns.CastLook = K
+
+---------------------------------------------------------------------------
+-- How much of all this you want: one choice over the hit effects and the cast bar animations.
+--   full     effects come in from a bar's ends and strike at its eight hit areas (slashes land where they fall),
+--            wounds open and keep bleeding, casts charge up and fire, and the main abilities have their own look
+--   subtle   the same, calmer: fixed places only, fewer pieces, nothing shakes
+--   classic  the look before all that, unchanged
+--   none     colour, status effects and icons only
+-- The switches under it (hit particles, wounds, cast bar animations, wind-up) still turn their own part off.
+---------------------------------------------------------------------------
+ns.FX_LEVELS = { "Full", "Subtle", "Classic", "None" }
+ns.FX_NAMES = { L["Full"], L["Subtle"], L["Classic"], L["None"] }      -- (in your language: the options show them so)
+local LEVEL = { "full", "subtle", "classic", "none" }
+ns.RegisterSetting({
+    key = "effects", kind = "number", default = 1, min = 1, max = #ns.FX_LEVELS, section = "Effects",
+    choices = ns.FX_LEVELS, command = "effects",
+    label = "Hit and cast effects",
+    tip = "Full: effects come in from a bar's edges and strike at its eight hit areas, wounds open below half and a quarter of a foe's health, bolts charge up and fire, and the main abilities each have their own look. Subtle: the same in fixed places, with fewer pieces and no shaking. Classic: the look from before. None: colour, status effects and icons only",
+})
+function ns.Effects() return LEVEL[ns.db and ns.db.effects or 1] or "full" end
 
 local function FX(kind, tex, count, size, life, speed)
     return { kind = kind, tex = tex, count = count, size = size, life = life, speed = speed }
@@ -57,9 +77,10 @@ K.SCHOOLS = {
     holy = { 635, 19750, 879, 2812, 24275, 26573, 20473, 20154, 20271, 21082, 20165, 20166, 20375, 19740, 19742,
              20217, 1038, 465, 7294, 642, 633, 7328, 1152, 4987, 853, 2878, 585, 2054, 2050, 2060, 2061, 139, 596,
              14914, 1243, 17, 2006, 20925, 19876 },
-    fire = { 133, 2136, 2120, 2948, 11366, 348, 6353, 5676, 5740, 1949, 8050, 1535, 3599, 8190, 11113, 543 },
+    fire = { 133, 2136, 2120, 2948, 11366, 348, 6353, 5676, 5740, 1949, 8050, 1535, 3599, 8190, 11113, 543, 29722,
+             51505 },
     frost = { 116, 122, 120, 10, 11426, 168, 7302, 8056, 6143, 12472 },
-    arcane = { 5143, 1449, 1459, 118, 1953, 8921, 2912, 3044, 604, 1008 },
+    arcane = { 5143, 1449, 1459, 118, 1953, 8921, 2912, 3044, 604, 1008, 30451 },
     shadow = { 686, 172, 980, 689, 1120, 6789, 5782, 589, 8092, 15407, 8122, 1454, 17877, 702, 1714, 5138, 2944 },
     nature = { 403, 421, 8042, 331, 8004, 1064, 5176, 339, 774, 8936, 5185, 740, 16914, 5570, 1978, 1126, 467,
                2484, 5394, 136 },                 -- (136: Mend Pet, a hunter's nature heal)
@@ -74,11 +95,98 @@ K.HEAL_COLOR = { nature = { 0.45, 0.9, 0.4 } }      -- the bar of a heal; other 
 local healByID = {}
 for _, id in ipairs(K.HEALS) do healByID[id] = true end
 
+---------------------------------------------------------------------------
+-- The main abilities: a look of their own on top of their school's (Full and Subtle; CastSig.lua plays them).
+-- One rank of each; every rank and every language is known by the game's name for it. A spell this game does
+-- not have is simply never named. Adding one is a line here.
+--   show     which of CastSig's shows it gets:
+--     charge    it gathers at the right end of the bar as the cast fills, and fires when it lands (how: fire =)
+--     orb       a ball of force wound up in the middle of the bar, thrown at the enemy when it lands
+--     reticle   sights that wander and lock onto the middle the moment the shot goes
+--     missiles  a channel: its bolts wait over the bar and leave one by one
+--     tether    a channel: something flows along the bar, to the foe or back to you
+--   school   its school where the game has not told us yet (and the plain bar's colour for physical)
+--   solo     its show stands alone, without the school's own running under it
+--   room     how much further than usual its show reaches above and below the bar
+---------------------------------------------------------------------------
+K.SIGS = {
+    -- mage
+    fireball    = { ids = { 133 },   school = "fire",   show = "charge", tex = "flame", fire = "burst" },
+    pyroblast   = { ids = { 11366 }, school = "fire",   show = "charge", tex = "flame", fire = "burst", big = 1.5, room = 10 },
+    scorch      = { ids = { 2948 },  school = "fire",   show = "charge", tex = "spark", fire = "burst", big = 0.7 },
+    frostbolt   = { ids = { 116 },   school = "frost",  show = "charge", tex = "crystal", fire = "shatter" },
+    frostfire   = { ids = { 44614 }, school = "fire",   show = "charge", tex = "crystal", fire = "burst" },
+    missiles    = { ids = { 5143 },  school = "arcane", show = "missiles", ticks = 5, solo = true },
+    blast       = { ids = { 30451 }, school = "arcane", show = "charge", tex = "mark", fire = "implode" },
+    -- warlock
+    shadowbolt  = { ids = { 686 },   school = "shadow", show = "charge", tex = "soft", fire = "lance" },
+    immolate    = { ids = { 348 },   school = "fire",   show = "charge", tex = "flame", fire = "engulf" },
+    incinerate  = { ids = { 29722 }, school = "fire",   show = "charge", tex = "flame", fire = "burst", big = 1.2 },
+    soulfire    = { ids = { 6353 },  school = "fire",   show = "charge", tex = "flame", fire = "lance", big = 1.5, room = 10 },
+    searing     = { ids = { 5676 },  school = "fire",   show = "charge", tex = "spark", fire = "burst", big = 0.7 },
+    chaosbolt   = { ids = { 50796 }, school = "fire",   show = "charge", tex = "soft", fire = "lance", big = 1.4, room = 8 },
+    drainlife   = { ids = { 689 },   school = "shadow", show = "tether", dir = -1, ticks = 5, color = { 0.5, 1, 0.35 } },
+    drainsoul   = { ids = { 1120 },  school = "shadow", show = "tether", dir = -1, ticks = 5 },
+    -- priest
+    smite       = { ids = { 585 },   school = "holy",   show = "charge", tex = "spark", fire = "beam" },
+    holyfire    = { ids = { 14914 }, school = "holy",   show = "charge", tex = "flame", fire = "beam", big = 1.3, room = 6 },
+    mindblast   = { ids = { 8092 },  school = "shadow", show = "charge", tex = "soft", fire = "implode" },
+    mindflay    = { ids = { 15407 }, school = "shadow", show = "tether", dir = 1, ticks = 3 },
+    -- druid
+    wrath       = { ids = { 5176 },  school = "nature", show = "orb", solo = true, room = 6 },
+    starfire    = { ids = { 2912 },  school = "arcane", show = "orb", solo = true, room = 6, slow = true, tex = "mark" },
+    -- shaman
+    lightningbolt = { ids = { 403 },  school = "nature", show = "charge", tex = "spark", fire = "arc" },
+    chain       = { ids = { 421 },   school = "nature", show = "charge", tex = "spark", fire = "arc", big = 1.2 },
+    lavaburst   = { ids = { 51505 }, school = "fire",   show = "charge", tex = "flame", fire = "burst", big = 1.4, room = 8 },
+    -- hunter
+    aimed       = { ids = { 19434 }, school = "physical", show = "reticle", room = 8 },
+    steady      = { ids = { 56641 }, school = "physical", show = "reticle", quick = true, room = 8 },
+    multishot   = { ids = { 2643 },  school = "physical", show = "reticle", sights = 3, room = 8 },
+    -- paladin
+    exorcism    = { ids = { 879 },   school = "holy",   show = "charge", tex = "spark", fire = "beam" },
+    holywrath   = { ids = { 2812 },  school = "holy",   show = "charge", tex = "spark", fire = "implode", big = 1.2 },
+    -- warrior
+    slam        = { ids = { 1464 },  school = "physical", show = "charge", tex = "spark", fire = "lance", big = 0.8 },
+}
+for key, sig in pairs(K.SIGS) do sig.key = key end
+
+---------------------------------------------------------------------------
+-- The melee pass: what an instant ability looks like where it lands (Impact.lua draws it at a hit area of the
+-- bar). One rank of each, known by name as above.
+--   slash  one cut            cross  two, crossing        claw   three, side by side
+--   stab   a thrust from the side                         bash   a blunt blow: a ring knocked out of the bar
+--   arrow  a shot flying in along the bar
+-- color: its own, else the colour of the hit's school. heavy: it shakes the bar that much harder.
+---------------------------------------------------------------------------
+local GOLD, STORM, ICE, FEL = { 1, 0.9, 0.55 }, { 0.6, 0.85, 1 }, { 0.65, 0.9, 1 }, { 0.6, 1, 0.4 }
+K.STRIKES = {
+    slash = { ids = { 78, 1464, 772, 1715, 6572, 20243, 1752, 16511, 2973, 1495, 2974, 45902, 55050 } },
+    cross = { ids = { 12294, 23881, 1680, 845, 1329, 53385, 49998 } },
+    heavy = { kind = "cross", heavy = 1.5, ids = { 5308, 2098, 22568 } },                 -- the finishers
+    stab  = { ids = { 53, 8676, 703, 5938, 1766, 7384 } },
+    bash  = { heavy = 1.3, ids = { 23922, 6343, 1776, 6807, 6552, 72 } },
+    claw  = { ids = { 1082, 5221, 33876, 33878, 1822, 1079, 779, 33745 } },
+    arrow = { ids = { 3044, 1978, 2643, 19434, 56641, 75, 53209, 34026 } },
+    light = { kind = "slash", color = GOLD, ids = { 35395, 20271, 24275 } },
+    hammer = { kind = "bash", color = GOLD, heavy = 1.3, ids = { 853 } },
+    storm = { kind = "cross", color = STORM, ids = { 17364, 60103 } },
+    shock = { kind = "bash", ids = { 8042, 8050, 8056 } },
+    rime  = { kind = "cross", color = ICE, ids = { 49020, 49143, 45477 } },
+    blight = { kind = "slash", color = FEL, ids = { 45462, 55090 } },
+}
+for key, def in pairs(K.STRIKES) do def.key, def.kind = key, def.kind or key end
+K.SWING = { key = "swing", kind = "slash" }             -- a plain swing of your weapon
+K.SHOT = { key = "shot", kind = "arrow" }               -- and a plain shot
+
 -- The game's names for all those spells (in your language), filled the first time they are needed
-local byName, schoolByName, healByName
+local byName, schoolByName, healByName, sigByName, strikeByName
+local sigByID, strikeByID = {}, {}
+for _, sig in pairs(K.SIGS) do for _, id in ipairs(sig.ids) do sigByID[id] = sig end end
+for _, def in pairs(K.STRIKES) do for _, id in ipairs(def.ids) do strikeByID[id] = def end end
 local function Names()
     if byName then return byName end
-    byName, schoolByName, healByName = {}, {}, {}
+    byName, schoolByName, healByName, sigByName, strikeByName = {}, {}, {}, {}, {}
     local get = (C_Spell and C_Spell.GetSpellName) or GetSpellInfo
     local function name(id)
         local ok, n = pcall(get, id)
@@ -98,7 +206,40 @@ local function Names()
         local n = name(id)
         if n then healByName[n] = true end
     end
+    for id, sig in pairs(sigByID) do
+        local n = name(id)
+        if n then sigByName[n] = sig end
+    end
+    for id, def in pairs(strikeByID) do
+        local n = name(id)
+        if n then strikeByName[n] = def end
+    end
     return byName
+end
+
+local function Known(byID, names, name, spellID)
+    if spellID and not ns.IsSecret(spellID) and byID[spellID] then return byID[spellID] end
+    if type(name) == "string" and not ns.IsSecret(name) then
+        Names()
+        return names()[name]
+    end
+    return nil
+end
+-- A main ability's own look (an entry of K.SIGS), or nil: by its ID, or by its name for the other ranks
+function K.Sig(name, spellID) return Known(sigByID, function() return sigByName end, name, spellID) end
+-- How an instant ability strikes (an entry of K.STRIKES), or nil
+function K.Strike(name, spellID) return Known(strikeByID, function() return strikeByName end, name, spellID) end
+-- Which of the main abilities this game can name (for the debug report): "23 of 30", and those it cannot
+function K.SigsKnown()
+    Names()
+    local known, missing = 0, {}
+    for key, sig in pairs(K.SIGS) do
+        local found = false
+        for _, s in pairs(sigByName) do if s == sig then found = true; break end end
+        if found then known = known + 1 else missing[#missing + 1] = key end
+    end
+    table.sort(missing)
+    return known, missing
 end
 
 -- Is this spell a heal? Learned, listed, or known by its name
@@ -153,12 +294,28 @@ end
 -- when it lands) }, or nil for the plain look
 function K.Look(name, spellID, tradeSkill)
     local kind = K.Kind(name, spellID, tradeSkill)
-    if not kind then return nil end
+    local sig = K.Sig(name, spellID)
+    if not kind then
+        -- a main ability whose school the game has not told us yet still has its look
+        local look = sig and K.LookOf(sig.school)
+        if look then look.sig = sig end
+        return look
+    end
     if kind == "school" then
         kind = K.SchoolOf(name, spellID)
         if K.IsHeal(name, spellID) then return K.HealLook(kind) end
     end
-    return K.LookOf(kind)
+    local look = K.LookOf(kind)
+    if look then look.sig = sig end
+    return look
+end
+
+-- The look of one of the main abilities by its key in K.SIGS (for /cchud casttest)
+function K.SigLook(key)
+    local sig = K.SIGS[key]
+    local look = sig and K.LookOf(sig.school)
+    if look then look.sig = sig end
+    return look
 end
 
 -- The look of a heal of this school: the school's own effects when it lands, in the colour of growing things

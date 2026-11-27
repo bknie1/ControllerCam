@@ -395,13 +395,22 @@ Item actions: try on, mark, details or destroy the item you point at
 Hold R3 on an item for its actions
 while your bags or the bank are open, holding the right stick button on an item asks what to do with it: try it on, mark it, see its details or destroy it. A tap still sorts or moves, and the game's own bags and item menu stay as they are
 ask what to do with the item you point at: try on, mark, details, destroy
+Full
+Subtle
+Classic
+None
+Hit and cast effects
+Full: effects come in from a bar's edges and strike at its eight hit areas, wounds open below half and a quarter of a foe's health, bolts charge up and fire, and the main abilities each have their own look. Subtle: the same in fixed places, with fewer pieces and no shaking. Classic: the look from before. None: colour, status effects and icons only
 Cast bar animations
 a cast bar shows what is being cast: picks chip at it while mining, lightning runs along it for nature, a vine flowers for a heal, runes take shape for arcane, flames, ice and shades for fire, frost and shadow
 show every cast bar animation once, on your cast bar
+show the main abilities' own cast animations once, on your cast bar
 Interrupted
 Likely:
 Cast wind-up
 your cast bar glows brighter as the cast fills and bursts when it lands
+Chain cast count
+when you cast one spell straight after another, a count of the chain shows under your cast bar; it ends when you stop, move or are interrupted
 Fishing float
 while fishing, a float bobs on your cast bar and it shows what is likely to bite here
 Cast bar
@@ -426,6 +435,8 @@ Combo points
 combo points as pips above the target's name
 list what the game says about your target's effects (for troubleshooting)
 Showing every damage school once (the last one as a crit).
+Blows are drawn at Full and Subtle effects only.
+Showing every kind of blow once (the last one as a crit).
 Hit particles
 holy flashes, fire rises, frost crystals linger, shadow smokes, arcane runes twinkle on the bar you hit
 Wounds by the kind of foe
@@ -435,6 +446,7 @@ your player frame and vertical bars give a small shake, in the hit's school, whe
 Hit effects by damage school
 your hits make the bar they land on flash and shake: fire, frost, shadow and the rest each look different
 show every damage school's hit effect once on your target and the nameplates
+show every kind of melee blow and shot once on your target and the nameplates
 Incoming heals in their school's colour
 the heal on its way to a unit shows the colour of the heal being cast at it: holy gold, nature green
 Heals over time grow on the bar
@@ -665,7 +677,6 @@ Presets set the camera distance
 a preset also brings the camera to the distance its layout was made for, once (zoom freely afterwards)
 Action
 a third-person view: slim vertical bars beside your character, every effect on; out of combat things fade
-Classic
 our frames where WoW has always had them, calmer effects, the game's gamepad bars as they are
 Minimal
 only what you need: friendly NPCs show their plate (with what they do) only while you point at them, aim at them or target them; names without titles; out of combat your bars rest as a faint hint (low health always shows)
@@ -1488,7 +1499,6 @@ Large
 Full name
 Short name
 No name
-Full
 Minimal mini
 Nameplate size
 how big the bars on nameplates are: small and slim, normal, or large (wider and taller)

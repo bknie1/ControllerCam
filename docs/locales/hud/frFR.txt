@@ -395,13 +395,22 @@ Actions d'objet : essayer, marquer, voir les détails ou détruire l'objet point
 Maintenir R3 sur un objet pour ses actions
 quand vos sacs ou la banque sont ouverts, maintenir le stick droit sur un objet demande quoi en faire : l'essayer, le marquer, voir ses détails ou le détruire. Une brève pression trie ou déplace toujours, et les sacs et le menu d'objet du jeu restent tels quels
 demande quoi faire de l'objet pointé : essayer, marquer, détails, détruire
+Complet
+Discret
+Classique
+Aucun
+Effets d'impact et d'incantation
+Complet : les effets arrivent par les bords de la barre et frappent sur ses huit zones d'impact, des blessures s'ouvrent sous la moitié puis sous le quart de la vie d'un ennemi, les projectiles se chargent et partent, et chaque technique principale a son propre aspect. Discret : la même chose à des endroits fixes, avec moins d'éléments et sans secousses. Classique : l'aspect d'avant. Aucun : seulement la couleur, les effets d'état et les icônes
 Animations de la barre d'incantation
 une barre d'incantation montre ce qui est lancé : des pioches la frappent pendant le minage, des éclairs la parcourent pour la nature, une liane fleurit pour un soin, des runes prennent forme pour les arcanes, flammes, glace et ombres pour le feu, le givre et l'ombre
 montrer chaque animation de barre d'incantation une fois, sur votre barre
+montre une fois les animations d'incantation propres aux techniques principales, sur votre barre
 Interrompu
 Probable :
 Montée du lancement
 votre barre de lancement brille plus fort à mesure que le sort se charge et éclate à l'impact
+Compteur de sorts enchaînés
+quand vous lancez un sort juste après un autre, un compteur de l'enchaînement s'affiche sous votre barre de lancement ; il s'arrête quand vous cessez, bougez ou êtes interrompu
 Flotteur de pêche
 pendant la pêche, un flotteur ondule sur votre barre de lancement et indique ce qui risque de mordre ici
 Barre d'incantation
@@ -426,6 +435,8 @@ Points de combo
 points de combo sous forme de pastilles au-dessus du nom de la cible
 liste ce que le jeu dit des effets de votre cible (pour le dépannage)
 Affichage de chaque école de dégâts une fois (la dernière en coup critique).
+Les coups ne sont dessinés qu'avec les effets Complet et Discret.
+Affichage de chaque type de coup une fois (le dernier en coup critique).
 Particules d'impact
 des éclairs sacrés, le feu s'élève, des cristaux de givre persistent, l'ombre fume, des runes des arcanes scintillent sur la barre touchée
 Blessures selon le type d’ennemi
@@ -435,6 +446,7 @@ votre cadre de joueur et vos barres verticales tremblent un peu, selon l'école 
 Effets de coup par école de dégâts
 vos coups font clignoter et trembler la barre touchée : feu, givre, ombre et les autres ont chacun un aspect différent
 affiche l'effet d'impact de chaque école de dégâts une fois sur votre cible et les barres de nom
+affiche chaque type de coup de mêlée et de tir une fois sur votre cible et les barres de nom
 Soins entrants aux couleurs de leur école
 le soin en route vers une unité prend la couleur du soin lancé sur elle : Sacré doré, Nature vert
 Les soins sur la durée poussent sur la barre
@@ -665,7 +677,6 @@ Les préréglages fixent la distance de la caméra
 un préréglage amène aussi la caméra à la distance pour laquelle sa disposition a été conçue, une seule fois (zoomez librement ensuite)
 Action
 une vue à la troisième personne : fines barres verticales à côté de votre personnage, tous les effets activés ; hors combat, tout s'estompe
-Classique
 nos cadres là où WoW les a toujours placés, effets plus discrets, les barres de manette du jeu telles quelles
 Minimal
 seulement l'essentiel : les PNJ amicaux n'affichent leur barre (avec leur fonction) que lorsque vous les pointez, les visez ou les ciblez ; noms sans titres ; hors combat, vos barres restent en retrait (une santé basse s'affiche toujours)
@@ -1488,7 +1499,6 @@ Grande
 Nom complet
 Nom court
 Sans nom
-Complet
 Minimal mini
 Taille des barres d'info
 la taille des barres sur les barres d'info : petites et fines, normales ou grandes (plus larges et plus hautes)

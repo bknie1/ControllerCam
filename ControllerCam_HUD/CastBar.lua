@@ -12,11 +12,22 @@ CB.TIME_ROOM = 44              -- what the time under the bar's right end takes
 -- they stay close (the fishing game's words are further down).
 CB.ROOM = 16
 CB.CLOSE_OVER, CB.CLOSE_UNDER = 4, 5
+-- The time grows as the cast nears its end (over its last second, or its last half if it is shorter), then
+-- bursts and fades as the cast lands: this much larger at the end, this much more in the burst, this long
+CB.GROW, CB.GROWTH, CB.BURST, CB.POP = 1, 0.7, 0.8, 0.3
+-- A chain of casts: the next one counts if it starts this soon after the last one landed. A cast landed if it
+-- ran to within CHAIN_SLACK of its end (a channel: at least half of it). The count jumps for BUMP seconds.
+CB.CHAIN_GAP, CB.CHAIN_SLACK, CB.BUMP = 0.75, 0.35, 0.25
 ns.CastBar = CB
 
 ns.RegisterSetting({
     key = "castWindup", kind = "boolean", default = true, command = "windup", section = "Frames",
     label = "Cast wind-up", tip = "your cast bar glows brighter as the cast fills and bursts when it lands",
+})
+ns.RegisterSetting({
+    key = "castChain", kind = "boolean", default = true, command = "chain", section = "Frames",
+    label = "Chain cast count",
+    tip = "when you cast one spell straight after another, a count of the chain shows under your cast bar; it ends when you stop, move or are interrupted",
 })
 ns.RegisterSetting({
     key = "fishing", kind = "boolean", default = true, command = "fishing", section = "Frames",
@@ -108,9 +119,20 @@ local function Build()
     frame.label:SetPoint("BOTTOMLEFT", bar, "TOPLEFT", 8, CB.ROOM)
     frame.label:SetPoint("BOTTOMRIGHT", bar, "TOPRIGHT", -8, CB.ROOM)
     if frame.label.SetWordWrap then frame.label:SetWordWrap(false) end
-    frame.time = ns.FontString(frame, 10, "RIGHT")
-    frame.time:SetPoint("TOPRIGHT", bar, "BOTTOMRIGHT", -8, -CB.ROOM)
+    -- (in a holder of its own, which is what grows: a frame scales smoothly, a font's size does not)
+    frame.timeBox = CreateFrame("Frame", nil, frame)
+    frame.timeBox:SetSize(1, 1)
+    frame.timeBox:SetPoint("TOPRIGHT", bar, "BOTTOMRIGHT", -8, -CB.ROOM)
+    frame.time = ns.FontString(frame.timeBox, 10, "RIGHT")
+    frame.time:SetPoint("TOPRIGHT", frame.timeBox, "TOPRIGHT", 0, 0)
     frame.time:SetTextColor(unpack(C.muted))
+    -- how many casts in a row, under the bar's left end, opposite the time (in a holder too: it jumps)
+    frame.comboBox = CreateFrame("Frame", nil, frame)
+    frame.comboBox:SetSize(1, 1)
+    frame.comboBox:SetPoint("TOPLEFT", bar, "BOTTOMLEFT", 8, -CB.ROOM)
+    frame.combo = ns.FontString(frame.comboBox, 12, "LEFT")
+    frame.combo:SetPoint("TOPLEFT", frame.comboBox, "TOPLEFT", 0, 0)
+    frame.combo:Hide()
     frame:Hide()
     CB.frame, CB.bar = frame, bar
     CB.art = ns.CastArt.Attach(bar, 1)                 -- what works on the bar while it fills (CastArt.lua)
@@ -137,14 +159,104 @@ local function HideLine()
     for _, dot in ipairs(bar.line) do dot:Hide() end
 end
 
--- The name's and the time's distance from the bar
-local function Clearance(fishing)
-    local over, under = fishing and CB.CLOSE_OVER or CB.ROOM, fishing and CB.CLOSE_UNDER or CB.ROOM
+-- The time at this size, its top right corner staying where it is (a scaled frame's offsets scale with it)
+local function TimeScale(s)
+    local box = frame.timeBox
+    CB.timeScale = s
+    box:SetScale(s)
+    box:ClearAllPoints()
+    box:SetPoint("TOPRIGHT", bar, "BOTTOMRIGHT", -8 / s, -(CB.under or CB.ROOM) / s)
+end
+
+-- The time as it usually is: small and quiet
+local function TimeRest()
+    CB.grown, CB.pop = nil, nil
+    TimeScale(1)
+    frame.time:SetAlpha(1)
+    frame.time:SetTextColor(unpack(C.muted))
+end
+
+-- It grows and takes the cast's colour as the end comes, trembling just before it (Full; half as much at
+-- Subtle). Part of the wind-up, so not with that off, with Reduce animations, or while fishing.
+local function TimeGrow(remain, now)
+    local level = ns.Effects()
+    local k = 0
+    if ns.db.castWindup and not CB.fishing and not ns.Calm() and (level == "full" or level == "subtle") then
+        k = ns.Clamp(1 - remain / math.min(CB.GROW, (CB.stop - CB.start) / 2), 0, 1)
+    end
+    if k <= 0 then
+        if CB.grown then TimeRest() end
+        return
+    end
+    local full = level == "full"
+    local s = 1 + (full and CB.GROWTH or CB.GROWTH / 2) * k * k
+    if full and k > 0.7 then s = s + 0.03 * math.sin(now * 40) end
+    CB.grown = true
+    TimeScale(s)
+    local m, c = C.muted, CB.color or C.cast
+    frame.time:SetTextColor(m[1] + (c[1] - m[1]) * k, m[2] + (c[2] - m[2]) * k, m[3] + (c[3] - m[3]) * k)
+end
+
+-- The cast landed: the time bursts outwards and fades (at Subtle it only fades)
+local function Pop(now)
+    local pop = CB.pop
+    if not pop then return end
+    local k = (now - pop.at) / CB.POP
+    if k >= 1 or k < 0 then
+        frame.time:SetText("")
+        TimeRest()
+        return
+    end
+    TimeScale(pop.from + (pop.burst and CB.BURST * (1 - (1 - k) * (1 - k)) or 0))
+    frame.time:SetAlpha(1 - k)
+end
+
+-- The chain's count at this size, its top left corner staying where it is
+local function ComboScale(s)
+    local box = frame.comboBox
+    CB.comboScale = s
+    box:SetScale(s)
+    box:ClearAllPoints()
+    box:SetPoint("TOPLEFT", bar, "BOTTOMLEFT", 8 / s, -(CB.under or CB.ROOM) / s)
+end
+
+-- "x3" from the second cast of a chain on, in the colour of the cast under way
+local function ComboDraw()
+    local n = CB.combo or 0
+    if n < 2 or not ns.db.castChain or CB.fishing then
+        frame.combo:Hide()
+        CB.bump = nil
+        return
+    end
+    local c = CB.color or C.cast
+    frame.combo:SetText("x" .. n)
+    frame.combo:SetTextColor(c[1], c[2], c[3])
+    frame.combo:Show()
+end
+
+-- It jumps as the chain grows, and settles
+local function ComboTick(now)
+    local at = CB.bump
+    if not at then return end
+    local k = (now - at) / CB.BUMP
+    if k >= 1 or k < 0 then
+        CB.bump = nil
+        ComboScale(1)
+    else
+        ComboScale(1 + 0.5 * (1 - k) * (1 - k))
+    end
+end
+
+-- The name's and the time's distance from the bar (more: what a main ability's show reaches beyond the usual)
+local function Clearance(fishing, more)
+    local room = CB.ROOM + (more or 0)
+    local over, under = fishing and CB.CLOSE_OVER or room, fishing and CB.CLOSE_UNDER or room
+    CB.room, CB.under = room, under
     frame.label:ClearAllPoints()
     frame.label:SetPoint("BOTTOMLEFT", bar, "TOPLEFT", 8, over)
     frame.label:SetPoint("BOTTOMRIGHT", bar, "TOPRIGHT", -8, over)
-    frame.time:ClearAllPoints()
-    frame.time:SetPoint("TOPRIGHT", bar, "BOTTOMRIGHT", -8, -under)
+    TimeScale(CB.timeScale or 1)
+    ComboScale(CB.comboScale or 1)
 end
 
 local function Place()
@@ -198,10 +310,33 @@ local function UpShow(color)
 end
 CB.UprightFrame = UprightFrame
 
+-- The bar jolts as one of the main abilities fires (Full only), in the way of its school's hits
+local KICK = 0.25
+local function Jolt(now)
+    local j = CB.kick
+    if not j then return end
+    local k = (now - j.at) / KICK
+    local dx, dy = 0, 0
+    if k >= 1 or k < 0 then
+        CB.kick = nil
+    else
+        local amp, t = j.amp * (1 - k), (now - j.at) * j.freq
+        dx = j.axis ~= "y" and math.sin(t) * amp or 0
+        dy = j.axis ~= "x" and math.cos(t * 1.3) * amp * 0.7 or 0
+    end
+    bar:ClearAllPoints()
+    bar:SetPoint("BOTTOM", frame, "BOTTOM", dx, dy)
+    CB.jolt = dx ~= 0 or dy ~= 0
+end
+
 local function Stop()
     frame:SetScript("OnUpdate", nil)
     frame:Hide()
     UpHide()
+    if CB.kick or CB.jolt then CB.kick = nil; Jolt(0) end
+    TimeRest()
+    CB.bump = nil
+    ComboScale(1)                                     -- (the count itself outlives the bar: a chain goes on)
     CB.casting, CB.until_, CB.fishing, CB.look, CB.nextFx = false, nil, false, nil, nil
     bar.charge:SetAlpha(0)
     bar.bobber:Hide()
@@ -223,8 +358,9 @@ end
 
 local function OnUpdate()
     local now = GetTime()
+    ComboTick(now)
     if CB.until_ then                         -- showing a result for a moment
-        if now >= CB.until_ then Stop() else CB.art:Update(nil, nil, now) end
+        if now >= CB.until_ then Stop() else CB.art:Update(nil, nil, now); Jolt(now); Pop(now) end
         return
     end
     if not CB.timed then return end
@@ -243,6 +379,7 @@ local function OnUpdate()
     CB.art:Update(fill, p, now)
     if not CB.channel and not CB.fishing and not CB.demo and ns.Rumble then ns.Rumble:Build(p) end   -- felt as it builds
     frame.time:SetText(("%.1f"):format(CB.stop - now))
+    TimeGrow(CB.stop - now, now)
     if CB.fishing then
         -- the float bobs on the water at the end of the line
         local fill = bar.fill:GetStatusBarTexture()
@@ -264,7 +401,7 @@ local function OnUpdate()
     if CB.fishing then
         return                                -- the float is the show
     end
-    if ns.db.castWindup and not CB.channel and not ns.Calm() then
+    if ns.db.castWindup and not CB.channel and not ns.Calm() and ns.Effects() ~= "none" then
         -- the wind-up: the glow builds, the spark grows, and it pulses when the cast is about to land
         local k = p * p
         local pulse = p > 0.85 and (0.15 * math.sin(now * 30)) or 0
@@ -280,6 +417,19 @@ CB.OnUpdate = OnUpdate
 -- A cast ended: flash it (done) or mark it (interrupted), then let it linger briefly.
 function CB:Result(failed)
     if not self.casting then return end
+    -- did it land? Then the next cast, started soon enough, goes on with the chain; otherwise the chain is over
+    local landed = not failed and not self.demo
+    if landed and self.timed then
+        local now = GetTime()
+        if self.channel then landed = (now - self.start) / (self.stop - self.start) >= 0.5
+        else landed = now >= self.stop - CB.CHAIN_SLACK end
+    end
+    if landed and (self.combo or 0) >= 1 then
+        self.comboAt = GetTime()
+    else
+        self.combo, self.comboAt = 0, nil
+    end
+    ComboDraw()
     self.casting, self.timed = false, false
     self.art:Finish(not failed, GetTime())
     if ns.Rumble and not self.demo then ns.Rumble:BuildEnd(not failed) end
@@ -298,16 +448,30 @@ function CB:Result(failed)
             local land = self.look and self.look.land
             ns.Impact:Burst(bar, (land and land.fx) and land or LANDED, 1)   -- the cast lands, in its own way
         end
+        local kick = self.art:Kick()                    -- a bolt going off jolts the bar
+        if kick then
+            local sig = self.art.sig
+            local p = ns.Impact and ns.Impact.PROFILES[sig.school] or { freq = 70, axis = "x" }
+            self.kick = { at = GetTime(), amp = 3 * kick, freq = p.freq, axis = p.axis }
+        end
     end
     bar.charge:SetAlpha(0)
     bar.bobber:Hide()
     HideLine()
-    frame.time:SetText("")
+    if not failed and self.grown then                   -- it reached its end: the count bursts and fades
+        frame.time:SetText(("%.1f"):format(0))
+        self.pop = { at = GetTime(), from = self.timeScale or 1, burst = ns.Effects() == "full" }
+    else
+        frame.time:SetText("")
+        TimeRest()
+    end
     self.until_ = GetTime() + math.max(LINGER, self.art:Ending())    -- (a bar that crumbles takes a moment longer)
     frame:SetScript("OnUpdate", OnUpdate)
 end
 
-function CB:Refresh()
+local NEW = { UNIT_SPELLCAST_START = true, UNIT_SPELLCAST_CHANNEL_START = true }
+
+function CB:Refresh(event)
     if not self.active then return end
     local name, startMS, endMS, channel, shielded = U.Cast("player")
     if not name then
@@ -316,14 +480,29 @@ function CB:Refresh()
     end
     self.demo = nil                                     -- a real cast ends the show of all of them
     self.casting, self.until_, self.channel = true, nil, channel and true or false
+    if self.pop then TimeRest() end                     -- (the last cast's count was still fading)
     local cname, spellID, trade = ns.CastLook.Casting("player")
     self.look = (not ns.UnitFrames.fake) and cname and ns.CastLook.Look(cname, spellID, trade) or nil
     pcall(frame.label.SetText, frame.label, ns.CastLook.Label(name, self.look))
     self.nextFx = nil
     local color = (not ns.IsSecret(shielded) and shielded) and C.shielded or (self.look and self.look.color) or C.cast
     bar:SetColor(unpack(color))
+    self.color = color
     bar.charge:SetVertexColor(color[1], color[2], color[3], 1)
     self:Fishing(channel)
+    if NEW[event] then                                  -- a cast begins: one more of a chain, or the first of one
+        local now = GetTime()
+        -- (not fishing, and not making things: twenty bandages are not a chain of spells)
+        local counts = ns.db.castChain and not self.fishing and not (not ns.IsSecret(trade) and trade)
+        if counts and self.comboAt and now - self.comboAt <= CB.CHAIN_GAP then
+            self.combo = (self.combo or 1) + 1
+            self.bump = (not ns.Calm() and ns.Effects() ~= "none") and now or nil
+        else
+            self.combo = counts and 1 or 0
+        end
+        self.comboAt = nil
+    end
+    ComboDraw()
     bar.fill:SetMinMaxValues(0, 1)
     bar.trail:SetValue(0)
     frame:Show()
@@ -430,7 +609,10 @@ end
 -- that rides the front of other casts is put away: it stood right on the float and the rings round it.
 function CB:FishingLook(on)
     Place()
-    Clearance(on)
+    -- one of the main abilities: its show may reach further than leaves and roots do (CastLook.SIGS: room)
+    local sig, level = self.look and self.look.sig, ns.Effects()
+    local shown = sig and not on and ns.db.castArt and level ~= "classic" and level ~= "none"
+    Clearance(on, shown and sig.room or 0)
     if on then
         bar:SetHeight(LINE)
         bar:SetColor(unpack(WATER.color))
@@ -459,12 +641,16 @@ function CB:DemoNext()
     if not kind then self.demo = nil; return end
     local fishing = kind == "fishing"
     local now = GetTime()
-    self.casting, self.until_, self.channel, self.fishing = true, nil, fishing, fishing
-    self.look = (not fishing) and ns.CastLook.LookOf(kind) or nil
+    local K = ns.CastLook
+    local sig = K.SIGS[kind]                            -- (/cchud sigtest: one of the main abilities)
+    local channel = sig and (sig.show == "missiles" or sig.show == "tether") or false
+    self.casting, self.until_, self.channel, self.fishing = true, nil, fishing or channel, fishing
+    self.look = (not fishing) and (sig and K.SigLook(kind) or K.LookOf(kind)) or nil
     self.timed, self.start, self.stop, self.nextFx = true, now, now + 2.4, nil
     frame.label:SetText(fishing and "" or kind)
     local color = self.look and self.look.color or C.cast
     bar:SetColor(unpack(color))
+    self.color = color
     bar.charge:SetVertexColor(color[1], color[2], color[3], 1)
     self:FishingLook(fishing)
     bar.fill:SetMinMaxValues(0, 1)
@@ -474,10 +660,10 @@ function CB:DemoNext()
     frame:SetScript("OnUpdate", self.OnUpdate)
 end
 
-function CB:Demo()
+function CB:Demo(kinds)
     if not self.active or self.casting or self.until_ then return false end
     self.demo = {}
-    for i, kind in ipairs(self.DEMO) do self.demo[i] = kind end
+    for i, kind in ipairs(kinds or self.DEMO) do self.demo[i] = kind end
     self:DemoNext()
     return true
 end
@@ -496,7 +682,7 @@ local OnEvent = ns.Protect(function(_, event, unit)
         if CB.casting and not U.Cast("player") then CB:Result(true) end
         return
     end
-    CB:Refresh()
+    CB:Refresh(event)
 end)
 
 function CB:Apply(run)

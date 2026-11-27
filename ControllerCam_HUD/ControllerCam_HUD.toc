@@ -29,6 +29,7 @@ ItemInfo.lua
 ItemActions.lua
 CastLook.lua
 CastArt.lua
+CastSig.lua
 CastBar.lua
 AuraWidgets.lua
 Auras.lua

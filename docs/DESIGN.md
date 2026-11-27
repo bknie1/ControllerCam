@@ -85,6 +85,7 @@ fell out of step with the game: visual sync problems, tooltips lost, controls st
 | The screen rests out of combat: bars, minimap, quest list, damage meter and XP bar fade together | built, mock-tested only |
 | Stance and pet buttons moved above the bars (in place of the targeting icons) | built, mock-tested only: the icons' names are a guess (`/cchud padinfo` shows what is there) |
 | Cast bar animations by kind of cast (your bar, and a lighter show on nameplates) | built, mock-tested only (`/cchud casttest`) |
+| Effects sweep: Full, Subtle, Classic, None; eight hit areas, blows by ability, wounds that stay open; bolts that charge and fire, Wrath's orb, Aimed Shot's sights, channels | built, mock-tested only (`/cchud effects`, `striketest`, `sigtest`); which spells this game has is unconfirmed (the self-check lists them) |
 | One-button fishing | built, seen in the game |
 | Fish journal, fishing interface, bait on a double press, a game while the float is out | built, mock-tested only |
 | Quest list: no group quests while alone, only the nearest, nearest first, recommended order | built, mock-tested only |

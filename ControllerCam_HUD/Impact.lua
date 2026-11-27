@@ -131,7 +131,7 @@ end
 OnUpdate = ns.Protect(OnUpdate)
 
 function IM:Shake(frame, anchor, profile, mult)
-    if ns.Calm() then return end                                 -- (Reduce animations: nothing shakes)
+    if ns.Calm() or ns.Effects() == "none" then return end       -- (Reduce animations: nothing shakes)
     local p = profile or IM.PROFILES.physical
     local s = self.shaking[frame]
     local amp = p.amp * (mult or 1)
@@ -208,15 +208,18 @@ local function FxTick(_, dt)
 end
 FxTick = ns.Protect(FxTick)
 
-function IM:Burst(bar, p, mult)
-    if ns.Calm() then return end                                 -- (nor bursts)
+-- from (Full and Subtle; see Origin below): where the particles start instead of the end of the health:
+-- { x =, y =, dir = (which way they travel: 1 right, -1 left; nil both), both = (from the far end too),
+--   color = (theirs, in place of the school's) }
+function IM:Burst(bar, p, mult, from)
+    if ns.Calm() or ns.Effects() == "none" then return end       -- (nor bursts)
     local fx = p.fx
     if not fx then return end
     local layer = Layer(bar)
     local w, h = bar:GetWidth() or 100, bar:GetHeight() or 8
     local fill = bar:GetFraction()
     local edge = fill and math.max(8, w * fill) or w * 0.5      -- where the hit landed: the end of the health
-    for _ = 1, math.floor(fx.count * (mult or 1) + 0.5) do
+    for i = 1, math.floor(fx.count * (mult or 1) + 0.5) do
         local t = table.remove(pool) or layer:CreateTexture(nil, "OVERLAY")
         if t:GetParent() ~= layer and t.SetParent then t:SetParent(layer) end
         t.layer, t.kind, t.age = layer, fx.kind, 0
@@ -225,7 +228,7 @@ function IM:Burst(bar, p, mult)
         t.size = fx.size * (0.7 + math.random() * 0.6)
         t:SetTexture(ns.media[fx.tex])
         t:SetBlendMode(DARK[fx.kind] and "BLEND" or "ADD")
-        local c = p.color
+        local c = from and from.color or p.color
         if DARK[fx.kind] then t:SetVertexColor(c[1] * 0.35, c[2] * 0.2, c[3] * 0.45, 1)
         else t:SetVertexColor(c[1], c[2], c[3], 1) end
         -- everything travels along the bar and rolls off its ends, staying level with it (never up into the
@@ -234,6 +237,13 @@ function IM:Burst(bar, p, mult)
         local jitter = math.random() * 2 - 1
         t.x = math.max(0, math.min(w, edge + jitter * 10))
         t.y = jitter * h * 0.35
+        if from then                                              -- in from an end of the bar, or off a hit area
+            local ox, way = from.x, from.dir
+            if from.both and i % 2 == 0 then ox, way = w - ox, way and -way end
+            dir = way or dir
+            t.x = math.max(0, math.min(w, ox + jitter * 6))
+            t.y = (from.y or 0) + jitter * h * 0.3
+        end
         local s = math.max(fx.speed, 30) * (0.8 + math.random() * 0.5)
         if fx.kind == "frost" then t.vx, t.vy = dir * 12, 0                       -- crystals barely drift
         elseif fx.kind == "rays" then t.vx, t.vy = dir * s * 2.2, 0              -- streaks of light
@@ -248,20 +258,164 @@ function IM:Burst(bar, p, mult)
 end
 
 ---------------------------------------------------------------------------
+-- Hit areas (Full and Subtle): eight places round a bar where blows land and wounds open. 1-4 along its top
+-- edge, 5-8 along the bottom, left to right. Returns x (from the bar's left end) and y (from its middle).
+---------------------------------------------------------------------------
+IM.AREAS = 8
+IM.SUBTLE_AREAS = { 2, 7 }       -- Subtle strikes at these two in turn; Full anywhere
+function IM.Area(bar, i)
+    local w, h = bar:GetWidth() or 100, bar:GetHeight() or 8
+    return w * (0.125 + 0.25 * ((i - 1) % 4)), (i <= 4 and 1 or -1) * h / 2
+end
+
+-- Marks: what a blow draws where it lands (a cut, a ring knocked out, a shot flying in), gone in a moment.
+-- Kept apart from the particles above; reused the same way.
+local marks, markPool = {}, {}
+IM.marks = marks
+local markDriver = CreateFrame("Frame")
+
+local function MarkDraw(t, k)
+    local w, h, a = t.len, t.thick, 1
+    local x = t.x
+    if t.mk == "cut" then                       -- drawn on quickly, then it fades
+        local grow = math.min(1, k / 0.35)
+        w, h = t.thick, t.len * grow
+        a = k < 0.35 and 1 or 1 - (k - 0.35) / 0.65
+    elseif t.mk == "ring" then                  -- knocked outward
+        w = t.len * (0.3 + 0.9 * k)
+        h, a = w, 1 - k
+    elseif t.mk == "fly" then                   -- in along the bar to where it lands
+        local f = math.min(1, k / 0.5)
+        x = t.x0 + (t.x - t.x0) * f
+        w, h = t.thick, t.len
+        a = k < 0.5 and 1 or 1 - (k - 0.5) / 0.5
+    else                                        -- a flash
+        w = t.len * (0.6 + 0.6 * k)
+        h, a = w, 0.8 * (1 - k)
+    end
+    t:SetSize(math.max(0.5, w), math.max(0.5, h))
+    t:ClearAllPoints()
+    t:SetPoint("CENTER", t.layer, "LEFT", x, t.y)
+    t:SetAlpha(a)
+end
+
+local function MarkTick(_, dt)
+    local any = false
+    for t in pairs(marks) do
+        t.age = t.age + dt
+        local k = t.age / t.life
+        if k >= 1 or not t.layer:IsVisible() then
+            marks[t] = nil
+            t:Hide()
+            markPool[#markPool + 1] = t
+        else
+            any = true
+            MarkDraw(t, k)
+        end
+    end
+    if not any then markDriver:SetScript("OnUpdate", nil) end
+end
+MarkTick = ns.Protect(MarkTick)
+
+local function Mark(layer, mk, tex, color, x, y, len, thick, turn, life, x0)
+    local t = table.remove(markPool) or layer:CreateTexture(nil, "OVERLAY")
+    if t:GetParent() ~= layer and t.SetParent then t:SetParent(layer) end
+    t.layer, t.mk, t.age, t.life = layer, mk, 0, life
+    t.x, t.y, t.len, t.thick, t.x0 = x, y, len, thick, x0 or x
+    t:SetTexture(ns.media[tex])
+    t:SetBlendMode("ADD")
+    t:SetTexCoord(0, 1, 0, 1)
+    t:SetVertexColor(color[1], color[2], color[3], 1)
+    if t.SetRotation then t:SetRotation(turn or 0) end
+    MarkDraw(t, 0)
+    t:Show()
+    marks[t] = true
+    markDriver:SetScript("OnUpdate", MarkTick)
+    return t
+end
+
+local LEAN = 0.7                 -- how far a cut leans from upright (radians)
+-- A blow lands at hit area `area` of a bar. def: an entry of CastLook.STRIKES (or its SWING, SHOT).
+function IM:Strike(bar, def, color, area, crit)
+    if ns.Calm() then return end
+    local layer = Layer(bar)
+    local w, h = bar:GetWidth() or 100, bar:GetHeight() or 8
+    local x, y = IM.Area(bar, area)
+    local len = math.max(18, h * 2.6) * (crit and 1.3 or 1)
+    local thick = math.max(4, h * 0.5)
+    local lean = (area % 2 == 0) and LEAN or -LEAN
+    local kind = def.kind
+    if kind == "cross" then
+        Mark(layer, "cut", "spark", color, x, y, len, thick, lean, 0.3)
+        Mark(layer, "cut", "spark", color, x, y, len, thick, -lean, 0.36)
+    elseif kind == "claw" then
+        for j = -1, 1 do Mark(layer, "cut", "spark", color, x + j * thick * 1.4, y, len * 0.85, thick * 0.8, lean, 0.3 + (j + 1) * 0.03) end
+    elseif kind == "stab" then                                    -- a thrust in from the nearer end
+        Mark(layer, "fly", "spark", color, x, y * 0.4, len, thick, math.pi / 2, 0.26, x < w / 2 and -10 or w + 10)
+        Mark(layer, "flash", "soft", color, x, y * 0.4, len * 0.7, 0, 0, 0.3)
+    elseif kind == "bash" then
+        Mark(layer, "ring", "ring", color, x, y * 0.4, len * 1.2, 0, 0, 0.32)
+        Mark(layer, "flash", "soft", color, x, y * 0.4, len, 0, 0, 0.3)
+    elseif kind == "arrow" then                                   -- a shot, from your side of the bar
+        Mark(layer, "fly", "spark", color, x, y * 0.3, len * 1.3, thick * 0.7, math.pi / 2, 0.24, -20)
+        Mark(layer, "flash", "soft", color, x, y * 0.3, len * 0.6, 0, 0, 0.3)
+    else                                                          -- a slash
+        Mark(layer, "cut", "spark", color, x, y, len, thick, lean, 0.3)
+    end
+    if crit and kind ~= "bash" then Mark(layer, "flash", "soft", color, x, y * 0.5, len, 0, 0, 0.35) end
+    self.struck = { key = def.key, kind = kind, area = area }
+    self.strikes = (self.strikes or 0) + 1
+end
+
+-- Where a hit's effects start on a bar (Full and Subtle), drawing the blow itself on the way. Returns what
+-- Burst takes as `from`, with area and edge (the hit area struck and its y on the bar's edge) for a blow.
+function IM:Origin(bar, school, crit, strike, level)
+    if strike == false then return nil end                       -- a tick: where the health ends, as ever
+    local w = bar:GetWidth() or 100
+    local full = level == "full"
+    bar.fxTurn = (bar.fxTurn or 0) + 1
+    if strike == nil and school == "physical" then strike = ns.CastLook.SWING end
+    if strike then
+        local area = full and math.random(IM.AREAS) or IM.SUBTLE_AREAS[bar.fxTurn % 2 + 1]
+        local x, y = IM.Area(bar, area)
+        local color = strike.color or (self.PROFILES[school] or self.PROFILES.physical).color
+        if ns.db.impactFx then self:Strike(bar, strike, color, area, crit) end
+        bar.lastArea = area
+        return { x = x, y = y * 0.6, area = area, edge = y, color = strike.color, heavy = strike.heavy }
+    end
+    -- a spell: in from an end of the bar (Full: either; Subtle: left, then right), a crit from both
+    local left
+    if full then left = math.random() < 0.5 else left = bar.fxTurn % 2 == 1 end
+    return { x = left and 0 or w, y = 0, dir = left and 1 or -1, both = crit }
+end
+
+---------------------------------------------------------------------------
 -- A hit on a bar: { frame = (what shakes), anchor = (what it is pinned to), bar = (what flashes) }
 ---------------------------------------------------------------------------
-function IM:Hit(target, school, crit, shake)
+-- strike (Full and Subtle): how the blow lands, an entry of CastLook.STRIKES; nil when nobody said (a physical
+-- hit is then a swing of your weapon, a spell comes in from an end of the bar); false for a tick, which stays
+-- where the health ends
+function IM:Hit(target, school, crit, shake, strike)
     local p = self.PROFILES[school] or self.PROFILES.physical
     local mult = crit and CRIT or 1
+    local level = ns.Effects()
     target.frame.lastImpact = GetTime()
     target.bar:Flash(crit and 0.5 or 0.15, p.color, p.fade)
-    if ns.db.impactFx then self:Burst(target.bar, p, mult) end
-    if ns.db.woundFx and target.unit then self:Wound(target.bar, target.unit, crit) end
+    self.last = { school = school, crit = crit and true or false }
+    if level == "none" then return end                           -- colour only
+    local from
+    if level ~= "classic" then from = self:Origin(target.bar, school, crit, strike, level) end
+    local less = level == "subtle" and 0.6 or 1                  -- (fewer pieces)
+    if ns.db.impactFx then self:Burst(target.bar, p, mult * less, from) end
+    if ns.db.woundFx and target.unit then
+        self:Wound(target.bar, target.unit, crit, nil, nil, from and from.area and from.x, from and from.edge)
+    end
     if p.twice then
         C_Timer.After(0.12, function() target.bar:Flash(0.2, p.color, p.fade) end)
     end
-    self:Shake(target.frame, target.anchor, p, mult * (shake or 1))
-    self.last = { school = school, crit = crit and true or false }
+    if level ~= "subtle" then                                    -- (and nothing shakes)
+        self:Shake(target.frame, target.anchor, p, mult * (shake or 1) * (from and from.heavy or 1))
+    end
 end
 
 ---------------------------------------------------------------------------
@@ -285,7 +439,15 @@ IM.WOUNDS = {
     sparks   = { color = { 1, 0.8, 0.35 },     kind = "shard", tex = "spark", count = 4, size = 6,  life = 0.5, add = true },
     splinter = { color = { 0.55, 0.38, 0.2 },  kind = "shard", tex = "mark",  count = 3, size = 6,  life = 0.6 },
     ash      = { color = { 0.62, 0.64, 0.6 },  kind = "ash",   tex = "soft",  count = 4, size = 7,  life = 1.1 },
+    -- undead at Full and Subtle: sludge pours out of them, and every other piece is gas lifting off
+    sludge   = { color = { 0.34, 0.4, 0.12 },  kind = "drip",  tex = "soft",  count = 4, size = 6,  life = 1.1,
+                 gas = { 0.55, 0.8, 0.35 } },
 }
+IM.WOUND_NEW = { [6] = "sludge" }       -- by creature type, in place of WOUND_OF's at Full and Subtle
+local function NewLook()
+    local level = ns.Effects()
+    return level == "full" or level == "subtle"
+end
 -- The game's creature types by number (the same in every language): 1 beast, 2 dragonkin, 3 demon, 4 elemental,
 -- 5 giant, 6 undead, 7 humanoid, 9 mechanical, 11 totem, 15 aberration
 IM.WOUND_OF = { [1] = "bleed", [2] = "dragon", [3] = "ichor", [4] = "shatter", [5] = "bleed", [6] = "ash",
@@ -315,11 +477,13 @@ function IM.WoundOf(unit)
     local ok, ctype = pcall(UnitCreatureType, unit)
     if not ok or ns.IsSecret(ctype) or type(ctype) ~= "string" then return nil end
     local id = TypeIDs()[ctype]
+    if id and IM.WOUND_NEW[id] and NewLook() then return IM.WOUND_NEW[id] end
     return id and IM.WOUND_OF[id] or nil
 end
 
-function IM:Wound(bar, unit, crit, count, layer)
-    if ns.Calm() then return end
+-- ax, ay (Full and Subtle): from a hit area (x along the bar, y on its edge) instead of the end of the health
+function IM:Wound(bar, unit, crit, count, layer, ax, ay)
+    if ns.Calm() or ns.Effects() == "none" then return end
     local name = IM.WoundOf(unit)
     local w = name and IM.WOUNDS[name]
     if not w then return end
@@ -330,23 +494,26 @@ function IM:Wound(bar, unit, crit, count, layer)
     -- more as its health runs low (when the game lets us know how low): up to three times at the end
     local low = fill and (1 - fill) or 0.3
     local n = count or math.floor(w.count * (1 + 2 * low) * (crit and 1.5 or 1) + 0.5)
-    for _ = 1, n do
+    for i = 1, n do
         local t = table.remove(pool) or layer:CreateTexture(nil, "OVERLAY")
         if t:GetParent() ~= layer and t.SetParent then t:SetParent(layer) end
-        t.layer, t.kind, t.age = layer, w.kind, 0
+        local kind, color = w.kind, w.color
+        if w.gas and i % 2 == 0 then kind, color = "ash", w.gas end   -- (sludge: every other piece is gas)
+        t.layer, t.kind, t.age = layer, kind, 0
         t.life = w.life * (0.8 + math.random() * 0.4)
         t.size = w.size * (0.7 + math.random() * 0.6)
         t:SetTexture(ns.media[w.tex])
         t:SetBlendMode(w.add and "ADD" or "BLEND")
         local shade = 0.85 + math.random() * 0.3
-        t:SetVertexColor(w.color[1] * shade, w.color[2] * shade, w.color[3] * shade, 1)
+        t:SetVertexColor(color[1] * shade, color[2] * shade, color[3] * shade, 1)
         local jitter = math.random() * 2 - 1
         t.x, t.y = math.max(0, math.min(width, edge + jitter * 4)), -h * 0.3
+        if ax then t.x, t.y = math.max(0, math.min(width, ax + jitter * 3)), ay or 0 end
         t.gravity, t.spin, t.yTop = nil, 0, h
-        if w.kind == "drip" then                                  -- falls from the bar
+        if kind == "drip" then                                    -- falls from the bar
             t.vx, t.vy, t.gravity = jitter * 8, -6, 70
             t.y0 = h * 3.5
-        elseif w.kind == "shard" then                             -- thrown off, up and out, then falling
+        elseif kind == "shard" then                               -- thrown off, up and out, then falling
             t.vx, t.vy, t.gravity = jitter * 55, 25 + math.random() * 25, 110
             t.spin = (math.random() < 0.5 and -1 or 1) * (6 + math.random() * 6)
             t.y0 = h * 3
@@ -375,17 +542,77 @@ local bleeding = {}
 IM.bleeding = bleeding
 local bleedDriver = CreateFrame("Frame")
 
+-- Open wounds (Full and Subtle): below half of its health a foe's bar has one gash at a hit area, at a quarter
+-- or less three, and what it bleeds comes out of them. The first opens where your last blow fell (Full) or at
+-- its fixed place; the others at theirs.
+IM.WOUND_FROM = 0.5
+IM.WOUND_AREAS = { 6, 3, 8 }
+local function CloseWounds(bar)
+    for _, g in ipairs(bar.gashes or {}) do g:Hide() end
+    bar.lastArea = nil
+end
+local function OpenWounds(bar, b, n, layer)
+    local w = IM.WOUNDS[IM.WoundOf(b.unit) or ""]
+    bar.gashes, b.areas = bar.gashes or {}, b.areas or {}
+    local h = bar:GetHeight() or 8
+    for i = 1, #IM.WOUND_AREAS do
+        local g = bar.gashes[i]
+        if i > n or not w then
+            b.areas[i] = nil
+            if g then g:Hide() end
+        else
+            if not b.areas[i] then
+                local area = (i == 1 and ns.Effects() == "full" and bar.lastArea) or IM.WOUND_AREAS[i]
+                local taken = true
+                while taken do                                        -- never two in one place
+                    taken = false
+                    for j = 1, #IM.WOUND_AREAS do
+                        if j ~= i and b.areas[j] == area then taken = true end
+                    end
+                    if taken then area = area % IM.AREAS + 1 end
+                end
+                b.areas[i] = area
+                IM.opened = (IM.opened or 0) + 1
+            end
+            if not g then
+                g = layer:CreateTexture(nil, "OVERLAY")
+                bar.gashes[i] = g
+            end
+            if g:GetParent() ~= layer and g.SetParent then g:SetParent(layer) end
+            g:SetTexture(ns.media.bolt)                               -- a jagged tear, in the dark of what leaks from it
+            g:SetBlendMode("BLEND")
+            g:SetVertexColor(w.color[1] * 0.6, w.color[2] * 0.6, w.color[3] * 0.6, 1)
+            local x, y = IM.Area(bar, b.areas[i])
+            g:SetSize(math.max(10, h * 1.4), math.max(5, h * 0.6))
+            g:ClearAllPoints()
+            g:SetPoint("CENTER", layer, "LEFT", x, y * 0.5)
+            g:SetAlpha(0.9)
+            g:Show()
+        end
+    end
+    b.open = n
+end
+
 local function BleedTick(_, dt)
     local any = false
     for bar, b in pairs(bleeding) do
         any = true
-        if not (ns.db.woundFx and ns.db.impacts) then bleeding[bar] = nil
+        if not (ns.db.woundFx and ns.db.impacts) then bleeding[bar] = nil; CloseWounds(bar)
         elseif bar:IsVisible() and not ns.Calm() then
             b.due = (b.due or 0) + dt * b.rate
             local n = math.floor(b.due)
             if n > 0 then
                 b.due = b.due - n
-                IM:Wound(bar, b.unit, false, n, b.layer)
+                local open = b.areas and b.open or 0
+                if open > 0 then                                      -- out of the open wounds, each in its turn
+                    for _ = 1, n do
+                        b.turn = (b.turn or 0) % open + 1
+                        local x, y = IM.Area(bar, b.areas[b.turn])
+                        IM:Wound(bar, b.unit, false, 1, b.layer, x, y * 0.5)
+                    end
+                else
+                    IM:Wound(bar, b.unit, false, n, b.layer)
+                end
                 IM.bled = (IM.bled or 0) + n
             end
         end
@@ -402,18 +629,32 @@ function IM:Bleed(bar, unit, frac)
         local okD, dead = pcall(UnitIsDead, unit)
         on = ok and ns.Yes(enemy) and not (okD and ns.Yes(dead))
     end
-    local rate, gate
+    local level = ns.Effects()
+    if level == "none" then on = false end
+    local new = level ~= "classic"
+    local rate, gate, open
     if on and type(frac) == "number" and not ns.IsSecret(frac) then
-        if frac > 0 and frac < IM.BLEED_FROM then
+        if new then                                                           -- wounds: one from half, three from a quarter
+            if frac > 0 and frac <= IM.WOUND_FROM then
+                local k = (IM.WOUND_FROM - frac) / (IM.WOUND_FROM - ns.EXECUTE)
+                rate = frac <= ns.EXECUTE and IM.BLEED_LOW or (0.5 + (IM.BLEED_RATE - 0.5) * math.min(1, k))
+                open = frac <= ns.EXECUTE and #IM.WOUND_AREAS or 1
+            end
+        elseif frac > 0 and frac < IM.BLEED_FROM then
             local k = (IM.BLEED_FROM - frac) / (IM.BLEED_FROM - ns.EXECUTE)
             rate = frac <= ns.EXECUTE and IM.BLEED_LOW or (0.5 + (IM.BLEED_RATE - 0.5) * math.min(1, k))
         end
     elseif on then
-        gate = ns.ExecuteState and ns.ExecuteState(unit, nil)                 -- the game's own answer, unread
-        if gate ~= nil then rate = IM.BLEED_LOW end
+        -- its health is kept from us: "below half?" cannot be known, so nothing opens there; "a quarter or
+        -- less?" is the game's own answer, unread, and shows all three wounds or none
+        gate = ns.ExecuteState and ns.ExecuteState(unit, nil)
+        if gate ~= nil then rate = IM.BLEED_LOW; open = new and #IM.WOUND_AREAS or nil end
     end
-    if not rate then bleeding[bar] = nil; return end
+    if not rate then bleeding[bar] = nil; CloseWounds(bar); return end
     local b = bleeding[bar] or {}
+    local guid = ns.GUID(unit)
+    if ns.IsSecret(guid) then guid = nil end
+    if guid ~= b.guid then b.areas, b.guid = nil, guid end                    -- another foe on this bar: its own wounds
     b.unit, b.rate = unit, rate
     if gate ~= nil then
         if not bar.bleedLayer then                                         -- a layer of its own, shown or not by it
@@ -427,6 +668,7 @@ function IM:Bleed(bar, unit, frac)
     else
         b.layer = nil
     end
+    if open then OpenWounds(bar, b, open, b.layer or Layer(bar)) else CloseWounds(bar); b.areas, b.open = nil, nil end
     bleeding[bar] = b
     bleedDriver:SetScript("OnUpdate", BleedTick)
 end
@@ -480,7 +722,7 @@ IM.TargetsOfUnit = TargetsOfUnit
 
 local lastLanded = {}
 IM.byUnit = {}                   -- hits heard from the game's unit event, by the kind of unit (for the reports)
-local function Land(guid, school, crit, unit)
+local function Land(guid, school, crit, unit, strike)
     local key = (guid and not ns.IsSecret(guid)) and guid or nil
     local list = key and Targets(key) or {}
     if #list == 0 and unit then list = TargetsOfUnit(unit); key = key or unit end   -- (its GUID kept from us)
@@ -489,7 +731,7 @@ local function Land(guid, school, crit, unit)
     if lastLanded[key] and now - lastLanded[key] < 0.05 then return end       -- heard twice (log and unit event)
     lastLanded[key] = now
     for _, t in ipairs(list) do
-        IM:Hit(t, school, crit)
+        IM:Hit(t, school, crit, nil, strike)
         IM.landed = IM.landed + 1
     end
     if crit and ns.Rumble then ns.Rumble:Crit() end              -- felt in the right trigger
@@ -596,7 +838,12 @@ local function FromLog()
         if sub == "SWING_DAMAGE" then ns.Moments.Swing(e[12], crit)
         elseif sub == "SPELL_DAMAGE" then ns.Moments.FromLog(e[12], e[13], e[15], crit, e[14]) end
     end
-    Land(destGUID, IM.School(e[14]), crit and true or false)
+    -- how the blow lands (Full and Subtle): a swing, a shot, one of your abilities by its name; a tick is none
+    local strike = false
+    if sub == "SWING_DAMAGE" then strike = ns.CastLook.SWING
+    elseif sub == "RANGE_DAMAGE" then strike = ns.CastLook.SHOT
+    elseif sub == "SPELL_DAMAGE" then strike = ns.CastLook.Strike(e[13], e[12]) end
+    Land(destGUID, IM.School(e[14]), crit and true or false, nil, strike)
 end
 
 -- Without the combat log: the game's hit event for a unit (any attacker). The amount may be secret: a hit
@@ -605,11 +852,22 @@ end
 -- whose combat log addons cannot read. That is a guess (somebody else's hit may land in that moment: a
 -- poison ticking on your target right after your Holy Light), so it is kept apart from what the log said, it
 -- is only asked when nothing else knows the spell, and the school seen most often after the spell is the one.
-local lastCast, lastOwn = nil, -10
+local lastCast, lastOwn, lastAbility = nil, -10, nil
 function IM.NoteCast(spellID)
     lastOwn = GetTime()                              -- (a cast of yours, whatever it was: see Mine below)
+    lastAbility = nil
     if ns.IsSecret(spellID) or type(spellID) ~= "number" then return end
     lastCast = { id = spellID, at = GetTime() }
+    lastAbility = { id = spellID, at = GetTime() }
+end
+
+-- The hit event does not say which of your abilities hit either. The one you used this moment is taken to be
+-- it, once (Full and Subtle draw its blow); with none, or its ID kept from us, a physical hit is a plain swing.
+local function StrikeOfLastCast()
+    local a = lastAbility
+    lastAbility = nil
+    if not a or GetTime() - a.at > IM.OWN_WINDOW then return nil end
+    return ns.CastLook.Strike(nil, a.id)
 end
 
 -- The game's hit event does not say who hit. Only your own hits shake and light the target frame and the
@@ -706,7 +964,7 @@ local function FromUnit(unit, action, flag, amount, mask)
         return
     end
     if not IM.Mine(unit, school) then IM.others = IM.others + 1; return end    -- someone else's hit
-    Land(ns.GUID(unit), school, crit, unit)       -- (a damage over time ticks here too, and shots: their school)
+    Land(ns.GUID(unit), school, crit, unit, StrikeOfLastCast())   -- (a damage over time ticks here too, and shots: their school)
 end
 
 local events = CreateFrame("Frame")
@@ -740,7 +998,7 @@ ns.RegisterCheck(function(row, run, db)
 end)
 
 -- /cchud hittest: every school once, on your target, focus and the nameplates on screen
-ns.RegisterCommand("hittest", function()
+local function DemoBars()
     local list = {}
     for _, unit in ipairs({ "target", "focus" }) do
         for _, t in ipairs(Targets(ns.GUID(unit))) do list[#list + 1] = t end
@@ -757,6 +1015,11 @@ ns.RegisterCommand("hittest", function()
             end
         end
     end
+    return list
+end
+
+ns.RegisterCommand("hittest", function()
+    local list = DemoBars()
     if #list == 0 then ns.Say(L["Target something first."]); return end
     for i, entry in ipairs(IM.ORDER) do
         C_Timer.After((i - 1) * 0.6, function()
@@ -765,5 +1028,20 @@ ns.RegisterCommand("hittest", function()
     end
     ns.Say(L["Showing every damage school once (the last one as a crit)."])
 end, "/cchud hittest", "show every damage school's hit effect once on your target and the nameplates")
+
+-- /cchud striketest: every kind of blow once (Full and Subtle), on the same bars
+IM.STRIKE_DEMO = { "slash", "cross", "claw", "stab", "bash", "arrow", "light", "storm", "rime" }
+ns.RegisterCommand("striketest", function()
+    local level = ns.Effects()
+    if level ~= "full" and level ~= "subtle" then ns.Say(L["Blows are drawn at Full and Subtle effects only."]); return end
+    local list = DemoBars()
+    if #list == 0 then ns.Say(L["Target something first."]); return end
+    for i, key in ipairs(IM.STRIKE_DEMO) do
+        C_Timer.After((i - 1) * 0.6, function()
+            for _, t in ipairs(list) do IM:Hit(t, "physical", i == #IM.STRIKE_DEMO, nil, ns.CastLook.STRIKES[key]) end
+        end)
+    end
+    ns.Say(L["Showing every kind of blow once (the last one as a crit)."])
+end, "/cchud striketest", "show every kind of melee blow and shot once on your target and the nameplates")
 
 ns.RegisterModule("impact", IM)

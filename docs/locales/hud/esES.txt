@@ -395,13 +395,22 @@ Acciones de objeto: probar, marcar, ver detalles o destruir el objeto que señal
 Mantén R3 sobre un objeto para ver sus acciones
 con las bolsas o el banco abiertos, mantener pulsado el stick derecho sobre un objeto pregunta qué hacer con él: probarlo, marcarlo, ver sus detalles o destruirlo. Una pulsación corta sigue ordenando o moviendo, y las bolsas y el menú de objetos del juego quedan como están
 pregunta qué hacer con el objeto que señalas: probar, marcar, detalles, destruir
+Completo
+Sutil
+Clásico
+Ninguno
+Efectos de impacto y de lanzamiento
+Completo: los efectos entran desde los bordes de la barra y golpean en sus ocho zonas de impacto, se abren heridas por debajo de la mitad y de un cuarto de la salud del enemigo, los proyectiles se cargan y se disparan, y cada habilidad principal tiene su propio aspecto. Sutil: lo mismo en lugares fijos, con menos piezas y sin sacudidas. Clásico: el aspecto de antes. Ninguno: solo color, efectos de estado e iconos
 Animaciones de la barra de lanzamiento
 una barra de lanzamiento muestra lo que se lanza: picos la golpean al minar, rayos la recorren con naturaleza, una enredadera florece con una sanación, runas toman forma con arcano, llamas, hielo y sombras con fuego, escarcha y sombras
 mostrar cada animación de la barra de lanzamiento una vez, en tu barra
+muestra las animaciones de lanzamiento propias de las habilidades principales una vez, en tu barra
 Interrumpido
 Probable:
 Carga de lanzamiento
 tu barra de lanzamiento brilla más a medida que se llena el lanzamiento y estalla al completarse
+Contador de lanzamientos en cadena
+cuando lanzas un hechizo justo después de otro, bajo tu barra de lanzamiento aparece un contador de la cadena; termina cuando paras, te mueves o te interrumpen
 Flotador de pesca
 al pescar, un flotador se mece en tu barra de lanzamiento y muestra qué es probable que pique aquí
 Barra de lanzamiento
@@ -426,6 +435,8 @@ Puntos de combo
 puntos de combo como indicadores sobre el nombre del objetivo
 muestra lo que el juego dice de los efectos de tu objetivo (para resolver problemas)
 Mostrando cada escuela de daño una vez (la última como crítico).
+Los golpes solo se dibujan con los efectos Completo y Sutil.
+Mostrando cada tipo de golpe una vez (el último como crítico).
 Partículas de impacto
 destellos sagrados, el fuego asciende, los cristales de escarcha perduran, la sombra humea, las runas arcanas centellean en la barra que golpeas
 Heridas según el tipo de enemigo
@@ -435,6 +446,7 @@ tu marco de jugador y tus barras verticales tiemblan un poco, según la escuela 
 Efectos de golpe por escuela de daño
 tus golpes hacen que la barra alcanzada destelle y tiemble: fuego, escarcha, sombra y el resto se ven distintos
 muestra el efecto de impacto de cada escuela de daño una vez en tu objetivo y en las placas de nombre
+muestra cada tipo de golpe cuerpo a cuerpo y de disparo una vez en tu objetivo y en las placas de nombre
 Sanación entrante con el color de su escuela
 la sanación en camino a una unidad muestra el color de la sanación que se le lanza: Sagrado dorado, Naturaleza verde
 Las sanaciones en el tiempo crecen en la barra
@@ -665,7 +677,6 @@ Los ajustes preestablecidos fijan la distancia de cámara
 un ajuste preestablecido también lleva la cámara a la distancia para la que se hizo su diseño, una sola vez (después haz zoom libremente)
 Acción
 una vista en tercera persona: barras verticales finas junto a tu personaje, todos los efectos activados; fuera de combate todo se desvanece
-Clásico
 nuestros marcos donde WoW siempre los ha tenido, efectos más discretos, las barras de mando del juego tal cual
 Mínimo
 solo lo que necesitas: los PNJ amistosos muestran su placa (con lo que hacen) solo mientras los señalas, apuntas o los tienes como objetivo; nombres sin títulos; fuera de combate tus barras quedan como un leve indicio (la salud baja siempre se muestra)
@@ -1488,7 +1499,6 @@ Grande
 Nombre completo
 Nombre corto
 Sin nombre
-Completo
 Mínimo mini
 Tamaño de las placas
 lo grandes que son las barras de las placas de nombre: pequeñas y finas, normales o grandes (más anchas y altas)

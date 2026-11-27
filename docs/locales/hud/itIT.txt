@@ -395,13 +395,22 @@ Azioni oggetto: prova, contrassegna, vedi i dettagli o distruggi l'oggetto che p
 Tieni premuto R3 su un oggetto per le sue azioni
 con le borse o la banca aperte, tenere premuto lo stick destro su un oggetto chiede cosa farne: provarlo, contrassegnarlo, vederne i dettagli o distruggerlo. Un tocco continua a ordinare o spostare, e le borse e il menu oggetto del gioco restano come sono
 chiede cosa fare dell'oggetto che punti: provare, contrassegnare, dettagli, distruggere
+Completo
+Discreto
+Classico
+Nessuno
+Effetti di colpo e di lancio
+Completo: gli effetti entrano dai bordi della barra e colpiscono nelle sue otto zone d'impatto, le ferite si aprono sotto la metà e sotto un quarto della salute del nemico, i dardi si caricano e partono, e ogni abilità principale ha il suo aspetto. Discreto: lo stesso in punti fissi, con meno elementi e senza scosse. Classico: l'aspetto di prima. Nessuno: solo colore, effetti di stato e icone
 Animazioni della barra di lancio
 una barra di lancio mostra cosa viene lanciato: picconi la colpiscono durante l'estrazione, fulmini la percorrono per la natura, un rampicante fiorisce per una cura, rune prendono forma per l'arcano, fiamme, ghiaccio e ombre per fuoco, gelo e ombra
 mostra ogni animazione della barra di lancio una volta, sulla tua barra
+mostra una volta le animazioni di lancio proprie delle abilità principali, sulla tua barra
 Interrotto
 Probabile:
 Carica dell'incantesimo
 la tua barra di lancio brilla di più mentre l'incantesimo si carica ed esplode quando va a segno
+Contatore di lanci a catena
+quando lanci un incantesimo subito dopo un altro, sotto la tua barra di lancio compare un contatore della catena; finisce quando ti fermi, ti muovi o vieni interrotto
 Galleggiante da pesca
 mentre peschi, un galleggiante ondeggia sulla tua barra di lancio e mostra cosa è probabile che abbocchi qui
 Barra di lancio
@@ -426,6 +435,8 @@ Punti combo
 punti combo come puntini sopra il nome del bersaglio
 elenca cosa dice il gioco sugli effetti del bersaglio (per la risoluzione dei problemi)
 Mostro ogni scuola di danno una volta (l'ultima come critico).
+I colpi vengono disegnati solo con gli effetti Completo e Discreto.
+Mostro ogni tipo di colpo una volta (l'ultimo come critico).
 Particelle d'impatto
 lampi sacri, il fuoco sale, cristalli di gelo persistono, l'ombra fuma, rune arcane scintillano sulla barra colpita
 Ferite secondo il tipo di nemico
@@ -435,6 +446,7 @@ il tuo riquadro e le barre verticali tremano un poco, secondo la scuola del colp
 Effetti dei colpi per scuola di danno
 i tuoi colpi fanno lampeggiare e tremare la barra colpita: fuoco, gelo, ombra e le altre hanno ciascuna un aspetto diverso
 mostra l'effetto di colpo di ogni scuola di danno una volta sul tuo bersaglio e sulle targhette
+mostra ogni tipo di colpo in mischia e di tiro una volta sul tuo bersaglio e sulle targhette
 Cure in arrivo nel colore della loro scuola
 la cura in arrivo su un'unità mostra il colore della cura lanciata su di essa: Sacro dorato, Natura verde
 Le cure nel tempo crescono sulla barra
@@ -665,7 +677,6 @@ I preset impostano la distanza della telecamera
 un preset porta anche la telecamera alla distanza per cui è stato pensato il suo layout, una sola volta (poi zooma liberamente)
 Azione
 una visuale in terza persona: barre verticali sottili accanto al tuo personaggio, tutti gli effetti attivi; fuori combattimento tutto si dissolve
-Classico
 i nostri riquadri dove WoW li ha sempre messi, effetti più discreti, le barre del gamepad del gioco così come sono
 Minimale
 solo l'essenziale: i PNG amichevoli mostrano la targhetta (con cosa fanno) solo mentre li indichi, li miri o li hai come bersaglio; nomi senza titoli; fuori combattimento le tue barre restano un leggero accenno (la salute bassa si vede sempre)
@@ -1488,7 +1499,6 @@ Grande
 Nome intero
 Nome breve
 Nessun nome
-Completo
 Minimale mini
 Dimensione delle targhette
 quanto sono grandi le barre delle targhette: piccole e sottili, normali o grandi (più larghe e più alte)

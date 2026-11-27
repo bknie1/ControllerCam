@@ -395,13 +395,22 @@ Ações do item: experimentar, marcar, ver detalhes ou destruir o item apontado
 Segure R3 sobre um item para ver as ações
 com as bolsas ou o banco abertos, segurar o botão do analógico direito sobre um item pergunta o que fazer com ele: experimentar, marcar, ver detalhes ou destruir. Um toque continua organizando ou movendo, e as bolsas e o menu de item do jogo ficam como estão
 pergunta o que fazer com o item apontado: experimentar, marcar, detalhes, destruir
+Completo
+Sutil
+Clássico
+Nenhum
+Efeitos de acerto e de lançamento
+Completo: os efeitos entram pelas bordas da barra e atingem suas oito áreas de acerto, feridas se abrem abaixo da metade e de um quarto da vida do inimigo, os projéteis carregam e disparam, e cada habilidade principal tem seu próprio visual. Sutil: o mesmo em lugares fixos, com menos peças e sem tremores. Clássico: o visual de antes. Nenhum: apenas cor, efeitos de estado e ícones
 Animações da barra de lançamento
 uma barra de lançamento mostra o que está sendo lançado: picaretas batem nela ao minerar, raios correm por ela com natureza, uma trepadeira floresce com uma cura, runas tomam forma com arcano, chamas, gelo e sombras com fogo, gelo e sombra
 mostrar cada animação da barra de lançamento uma vez, na sua barra
+mostra as animações de lançamento próprias das habilidades principais uma vez, na sua barra
 Interrompido
 Provável:
 Preparo do lançamento
 sua barra de lançamento brilha mais conforme o lançamento se enche e explode quando acerta
+Contador de lançamentos em sequência
+quando você lança um feitiço logo após outro, um contador da sequência aparece sob sua barra de lançamento; ele termina quando você para, se move ou é interrompido
 Boia de pesca
 ao pescar, uma boia balança na sua barra de lançamento e mostra o que provavelmente vai morder aqui
 Barra de lançamento
@@ -426,6 +435,8 @@ Pontos de combo
 pontos de combo como marcadores acima do nome do alvo
 lista o que o jogo diz sobre os efeitos do seu alvo (para solução de problemas)
 Mostrando cada escola de dano uma vez (a última como crítico).
+Os golpes só são desenhados com os efeitos Completo e Sutil.
+Mostrando cada tipo de golpe uma vez (o último como crítico).
 Partículas de impacto
 sagrado pisca, fogo sobe, cristais de gelo permanecem, sombra fumega, runas arcanas cintilam na barra atingida
 Ferimentos conforme o tipo de inimigo
@@ -435,6 +446,7 @@ seu quadro de jogador e suas barras verticais tremem um pouco, conforme a escola
 Efeitos de acerto por escola de dano
 seus acertos fazem a barra atingida piscar e tremer: fogo, gelo, sombra e as demais têm cada uma um visual diferente
 mostra o efeito de acerto de cada escola de dano uma vez no seu alvo e nas placas de identificação
+mostra cada tipo de golpe corpo a corpo e de tiro uma vez no seu alvo e nas placas de identificação
 Cura a caminho na cor da sua escola
 a cura a caminho de uma unidade mostra a cor da cura lançada nela: Sagrado dourado, Natureza verde
 Curas ao longo do tempo crescem na barra
@@ -665,7 +677,6 @@ As predefinições definem a distância da câmera
 uma predefinição também leva a câmera à distância para a qual seu layout foi feito, uma vez (depois faça zoom à vontade)
 Ação
 uma visão em terceira pessoa: barras verticais finas ao lado do seu personagem, todos os efeitos ativos; fora de combate tudo esmaece
-Clássico
 nossos quadros onde o WoW sempre os teve, efeitos mais discretos, as barras de controle do jogo do jeito que são
 Mínimo
 só o que você precisa: PNJs amigáveis mostram a placa (com o que fazem) só enquanto você aponta, mira ou os tem como alvo; nomes sem títulos; fora de combate suas barras ficam como um leve sinal (vida baixa sempre aparece)
@@ -1488,7 +1499,6 @@ Grande
 Nome completo
 Nome curto
 Sem nome
-Completo
 Mínimo mini
 Tamanho das placas
 o tamanho das barras nas placas de nome: pequenas e finas, normais ou grandes (mais largas e mais altas)

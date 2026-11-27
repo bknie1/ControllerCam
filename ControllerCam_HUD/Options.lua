@@ -131,6 +131,7 @@ for _, label in ipairs({
     "Fades: gamepad bars", "Fades: minimap", "Fades: quest list", "Fades: damage meter", "Fades: experience bar",
     "Fades: buffs", "Fades: cooldown rows", "Aiming dot", "Narrative: characters in the windows",
     "Character commentary", "Reload button by the game menu", "How names show in chat", "Names of incoming healers",
+    "Hit and cast effects",
 }) do BASIC[label] = true end
 ns.BASIC_OPTIONS = BASIC
 
@@ -149,7 +150,7 @@ local LAYOUT = {
         { head = "In a fight", "combatAlpha", "alertHealth", "alertPower", "playerShake" },
         { head = "Health bars", "classColors", "combatColors", "shieldBars", "wards", "healColors", "healerNames",
           "hotVines" },
-        { head = "Cast bar", "castbar", "castScale", "castUpright", "castArt", "castWindup" },
+        { head = "Cast bar", "castbar", "castScale", "castUpright", "castArt", "castWindup", "castChain" },
         { head = "Size and text", "scale", "textScale", "textShade", "compactAll" },
     } },
     { page = "Target, party and raid", groups = {
@@ -170,7 +171,7 @@ local LAYOUT = {
           "plateBuffs", "plateCC" },
     } },
     { page = "Effects", groups = {
-        { head = "Hits", "impacts", "impactFx", "woundFx" },
+        { head = "Hits", "effects", "impacts", "impactFx", "woundFx" },
         { head = "Numbers and callouts", "numbers", "readyAlerts", "soonCallouts", "soonBuffs", "Tooltip when a buff starts" },
         { head = "Big moments", "bigMoments", "momentPlace" },
         { head = "Out of a fight", "readouts", "campScene" },

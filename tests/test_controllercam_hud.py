@@ -3371,17 +3371,18 @@ class CastBars(unittest.TestCase):
         e.update(1)
         self.assertAlmostEqual(cb.bar.fill.value, 0.5, places=1)
         self.assertEqual(cb.frame.time.text, "1.0")
-        time, label = cb.frame.time.points[1], cb.frame.label.points
+        time, label = cb.frame.timeBox.points[1], cb.frame.label.points
         self.assertEqual((time[1], time[3]), ("TOPRIGHT", "BOTTOMRIGHT"))          # the time under the bar's right end,
         self.assertEqual([(p[1], p[3]) for p in label.values()],                    # the name over the whole bar
                          [("BOTTOMLEFT", "TOPLEFT"), ("BOTTOMRIGHT", "TOPRIGHT")])
         room = cb.ROOM                                               # clear of what grows on the bar as it fills:
         self.assertGreaterEqual(room, 16)                            # leaves and roots reach 16 beyond it
         self.assertEqual([p[5] for p in label.values()], [room, room])
-        self.assertEqual((time[5], len(list(cb.frame.time.points.values()))), (-room, 1))
+        self.assertAlmostEqual(time[5], -room, places=2)
+        self.assertEqual(len(list(cb.frame.timeBox.points.values())), 1)
         cb.FishingLook(cb, True)                                     # nothing grows on the fishing line:
         self.assertEqual([p[5] for p in cb.frame.label.points.values()], [4, 4])   # close, as it was
-        self.assertEqual(cb.frame.time.points[1][5], -5)
+        self.assertAlmostEqual(cb.frame.timeBox.points[1][5], -5, places=2)
         cb.FishingLook(cb, False)
         self.assertEqual([p[5] for p in cb.frame.label.points.values()], [room, room])
         self.assertEqual(len(list(cb.frame.label.points.values())), 2)
@@ -3391,6 +3392,126 @@ class CastBars(unittest.TestCase):
         self.assertGreater(cb.bar.flashA, 0)
         e.update(0.6)
         self.assertFalse(cb.frame.shown)
+        self.assertEqual(e.errors(), [])
+
+    def test_the_time_grows_as_the_end_comes_then_bursts_and_fades(self):
+        e = Env()
+        cb = self.cast(e, 3)
+        box, time = cb.frame.timeBox, cb.frame.time
+        muted = list(e.ns.colors.muted.values())[:3]
+        e.update(1.5)
+        self.assertEqual((box.scale, cb.grown), (1, None))           # nothing until the last second
+        self.assertEqual(list(time.tcolor.values())[:3], muted)
+        e.update(1)                                                  # half a second left: growing,
+        mid = box.scale
+        self.assertGreater(mid, 1.1)
+        self.assertAlmostEqual(box.points[1][5] * mid, -cb.ROOM, places=2)   # its corner where it was
+        self.assertNotEqual(list(time.tcolor.values())[:3], muted)
+        e.update(0.4)
+        late = box.scale
+        self.assertGreater(late, mid)                                # more so at the end
+        e.mock.units.player.cast = None
+        e.mock.fire("UNIT_SPELLCAST_STOP", "player")
+        self.assertEqual(time.text, "0.0")                           # it landed: the count stays to burst
+        e.update(0.15)
+        self.assertGreater(box.scale, late)
+        self.assertLess(time.alpha, 1)
+        e.update(0.2)
+        self.assertEqual((time.text, box.scale, time.alpha), ("", 1, 1))
+        e.update(0.5)
+        cb = self.cast(e, 3)                                         # an interrupt: no burst, the count just goes
+        e.update(2.7)
+        self.assertGreater(box.scale, 1)
+        e.mock.units.player.cast = None
+        e.mock.fire("UNIT_SPELLCAST_INTERRUPTED", "player")
+        self.assertEqual((time.text, box.scale), ("", 1))
+        e.update(1)
+        cb = self.cast(e, 3)                                         # ended early (you moved): nothing to burst
+        e.update(1)
+        e.mock.units.player.cast = None
+        e.mock.fire("UNIT_SPELLCAST_STOP", "player")
+        self.assertEqual((time.text, box.scale), ("", 1))
+        e.update(1)
+        e.cmd("effects 2")                                           # Subtle: it grows half as much and only fades
+        cb = self.cast(e, 3)
+        e.update(2.9)
+        subtle = box.scale
+        self.assertTrue(1 < subtle < late)
+        e.mock.units.player.cast = None
+        e.mock.fire("UNIT_SPELLCAST_STOP", "player")
+        e.update(0.15)
+        self.assertEqual(box.scale, subtle)
+        self.assertLess(time.alpha, 1)
+        e.update(1)
+        for off in ("effects 3", "windup off"):                      # Classic, or without the wind-up: as it was
+            e.cmd(off)
+            cb = self.cast(e, 3)
+            e.update(2.9)
+            self.assertEqual(box.scale, 1, off)
+            e.mock.units.player.cast = None
+            e.mock.fire("UNIT_SPELLCAST_STOP", "player")
+            self.assertEqual(time.text, "", off)
+            e.update(1)
+            e.cmd("effects 1")
+        self.assertEqual(e.errors(), [])
+
+    def land(self, e, seconds=2):
+        cb = self.cast(e, seconds)
+        e.update(seconds + 0.1)                                      # it runs to its end
+        e.mock.units.player.cast = None
+        e.mock.fire("UNIT_SPELLCAST_STOP", "player")
+        return cb
+
+    def test_casts_one_after_another_are_counted(self):
+        e = Env()
+        self.assertTrue(e.db.castChain)
+        cb = self.land(e)
+        combo, box = cb.frame.combo, cb.frame.comboBox
+        self.assertFalse(combo.shown)                                # one cast is no chain
+        cb = self.cast(e)                                            # the next, straight after: a chain of two
+        self.assertEqual((combo.shown, combo.text), (True, "x2"))
+        self.assertEqual((box.points[1][1], box.points[1][3]), ("TOPLEFT", "BOTTOMLEFT"))   # under the bar's left end
+        self.assertGreater(box.scale, 1)                             # it jumps,
+        e.update(0.4)
+        self.assertEqual(box.scale, 1)                               # and settles
+        e.update(1.7)
+        e.mock.units.player.cast = None
+        e.mock.fire("UNIT_SPELLCAST_STOP", "player")
+        e.mock.units.player.cast = e.lua.table(name="Aimed Shot", start=e.mock.time * 1000, stop=(e.mock.time + 2) * 1000)
+        e.mock.fire("UNIT_SPELLCAST_DELAYED", "player")              # (pushed back: the same cast, not one more)
+        e.mock.units.player.cast = None
+        cb = self.cast(e)
+        self.assertEqual(combo.text, "x3")
+        self.assertEqual(list(combo.tcolor.values())[:3], list(cb.color.values())[:3])   # in the cast's colour
+        e.mock.units.player.cast = None
+        e.mock.fire("UNIT_SPELLCAST_INTERRUPTED", "player")          # interrupted: the chain is over
+        self.assertFalse(combo.shown)
+        e.update(0.3)
+        cb = self.land(e)
+        self.assertFalse(combo.shown)
+        e.update(1)                                                  # a pause: the next one starts anew
+        cb = self.land(e)
+        self.assertFalse(combo.shown)
+        cb = self.cast(e)                                            # two again,
+        self.assertEqual(combo.text, "x2")
+        e.update(1)
+        e.mock.units.player.cast = None
+        e.mock.fire("UNIT_SPELLCAST_STOP", "player")                 # but you moved halfway through it:
+        cb = self.cast(e)
+        self.assertFalse(combo.shown)                                # that was no landed cast
+        e.update(2.1)
+        cb = self.cast(e, 4, channel=True)                           # a channel goes on with a chain
+        self.assertEqual(combo.text, "x2")
+        e.update(4.1)
+        e.mock.units.player.cast = None
+        e.mock.fire("UNIT_SPELLCAST_CHANNEL_STOP", "player")
+        cb = self.cast(e, 2, trade=True)                             # making things is not a chain
+        self.assertFalse(combo.shown)
+        e.update(2.1)
+        e.cmd("chain off")                                           # and it has its own switch
+        self.land(e)
+        self.cast(e)
+        self.assertFalse(combo.shown)
         self.assertEqual(e.errors(), [])
 
     def test_upright_beside_the_vertical_bars_when_you_choose_it(self):
@@ -4129,9 +4250,12 @@ class Wounds(unittest.TestCase):
         IM = e.ns.Impact
         for creature, wound in (("Humanoid", "bleed"), ("Beast", "bleed"), ("Dragonkin", "dragon"),
                                 ("Demon", "ichor"), ("Elemental", "shatter"), ("Mechanical", "sparks"),
-                                ("Undead", "ash"), ("Critter", None)):
+                                ("Undead", "sludge"), ("Critter", None)):
             e.target(creature=creature)
             self.assertEqual(IM.WoundOf("target"), wound, creature)
+        e.cmd("effects 3")                                           # Classic: the undead wither to ash, as before
+        e.target(creature="Undead")
+        self.assertEqual(IM.WoundOf("target"), "ash")
         self.assertEqual(e.errors(), [])
 
     def test_your_hit_wounds_the_bar_more_as_it_runs_low(self):
@@ -4183,6 +4307,468 @@ class BleedingOut(unittest.TestCase):
         self.assertEqual(IM.lastWound, "shatter")                    # its own kind: chips of stone
         e.cmd("wounds off")
         self.assertEqual(bled(90), 0)
+        self.assertEqual(e.errors(), [])
+
+
+class EffectLevels(unittest.TestCase):
+    """One choice over the hit effects and the cast bar animations: Full, Subtle, Classic, None."""
+
+    def test_full_is_the_start_and_the_command_changes_it(self):
+        e = Env()
+        self.assertEqual(e.ns.Effects(), "full")
+        for n, level in ((2, "subtle"), (3, "classic"), (4, "none"), (1, "full")):
+            e.cmd("effects %d" % n)
+            self.assertEqual(e.ns.Effects(), level)
+        self.assertEqual(e.errors(), [])
+
+    def test_none_keeps_the_colour_and_nothing_else(self):
+        e = Env()
+        e.target()
+        IM, f, cb = e.ns.Impact, e.frames.target, e.ns.CastBar
+        e.cmd("effects 4")
+        e.mock.logHit("SWING_DAMAGE", "player", "target", 1, True)
+        self.assertGreater(f.health.flashA, 0)                       # the bar still flashes in the hit's colour
+        self.assertEqual(len(list(IM.live.keys())), 0)               # no particles,
+        self.assertEqual(len(list(IM.marks.keys())), 0)              # no blow drawn,
+        self.assertFalse(IM.IsShaking(IM, f.visual))                 # nothing shakes
+        self.assertFalse(cb.art.Start(cb.art, e.ns.CastLook.LookOf("fire")))   # and the cast bar is a plain bar
+        self.assertEqual(e.errors(), [])
+
+    def test_classic_is_the_look_from_before(self):
+        e = Env()
+        e.target(health=400, healthMax=800)
+        IM, cb, K = e.ns.Impact, e.ns.CastBar, e.ns.CastLook
+        e.cmd("effects 3")
+        bar = e.frames.target.health
+        w = bar.GetWidth(bar)
+        e.mock.logHit("SPELL_DAMAGE", "player", "target", 4)
+        xs = [t.x for t in IM.live.keys()]
+        self.assertTrue(all(abs(x - w / 2) <= 10 for x in xs), xs)   # from where the health ends, as it was
+        self.assertEqual(len(list(IM.marks.keys())), 0)
+        self.assertIsNone(IM.struck)
+        self.assertTrue(cb.art.Start(cb.art, K.SigLook("fireball")))
+        self.assertIsNone(cb.art.over)                               # no show of its own: fire, as every fire spell
+        self.assertTrue(e.same(cb.art.style, e.ns.CastArt.STYLES.flames))
+        self.assertEqual(e.errors(), [])
+
+    def test_reduce_animations_still_means_still(self):
+        e = Env()
+        e.target()
+        IM, cb = e.ns.Impact, e.ns.CastBar
+        e.db.reduceMotion = True
+        e.mock.logHit("SWING_DAMAGE", "player", "target", 1, True)
+        self.assertEqual(len(list(IM.marks.keys())), 0)
+        self.assertEqual(len(list(IM.live.keys())), 0)
+        self.assertFalse(IM.IsShaking(IM, e.frames.target.visual))
+        self.assertFalse(cb.art.Start(cb.art, e.ns.CastLook.SigLook("fireball")))
+        self.assertEqual(e.errors(), [])
+
+
+class HitAreas(unittest.TestCase):
+    """Blows land at eight places round a bar; spells come in from its ends; wounds open and stay."""
+
+    def test_a_swing_cuts_at_one_of_eight_areas(self):
+        e = Env()
+        e.target()
+        IM = e.ns.Impact
+        areas = set()
+        for _ in range(40):
+            e.mock.logHit("SWING_DAMAGE", "player", "target", 1)
+            self.assertEqual(IM.struck.kind, "slash")
+            areas.add(IM.struck.area)
+            e.update(0.1)
+        self.assertTrue(areas <= set(range(1, 9)), areas)
+        self.assertGreater(len(areas), 3)                            # here and there, not one spot
+        e.update(1)
+        self.assertEqual(len(list(IM.marks.keys())), 0)              # every cut is gone again
+        made = len(e.mock.frames)
+        for _ in range(5):
+            e.mock.logHit("SWING_DAMAGE", "player", "target", 1)
+            e.update(1)
+        self.assertEqual(len(e.mock.frames), made)                   # and its texture is used again
+        self.assertEqual(e.errors(), [])
+
+    def test_the_area_is_on_the_bars_edge(self):
+        e = Env()
+        e.target()
+        IM, bar = e.ns.Impact, e.frames.target.health
+        w, h = bar.GetWidth(bar), bar.GetHeight(bar)
+        spots = [IM.Area(bar, i) for i in range(1, 9)]
+        self.assertEqual(len(set(spots)), 8)
+        for i, (x, y) in enumerate(spots, 1):
+            self.assertTrue(0 < x < w)
+            self.assertEqual(y, h / 2 if i <= 4 else -h / 2)
+
+    def test_your_abilities_strike_in_their_own_way(self):
+        e = Env()
+        e.target()
+        IM, K = e.ns.Impact, e.ns.CastLook
+        for spell, key, kind in ((12294, "cross", "cross"), (53, "stab", "stab"), (5221, "claw", "claw"),
+                                 (23922, "bash", "bash"), (3044, "arrow", "arrow"), (35395, "light", "slash"),
+                                 (5308, "heavy", "cross")):
+            e.mock.logHit("SPELL_DAMAGE", "player", "target", 1)
+            e.update(0.1)
+            e.mock.logEntry[12] = spell
+            e.mock.fire("COMBAT_LOG_EVENT_UNFILTERED")
+            self.assertEqual((IM.struck.key, IM.struck.kind), (key, kind), spell)
+            e.update(1)
+        e.mock.logHit("RANGE_DAMAGE", "player", "target", 1)         # a plain shot flies in
+        self.assertEqual(IM.struck.kind, "arrow")
+        self.assertEqual(K.Strike(None, 999999), None)
+        self.assertEqual(e.errors(), [])
+
+    def test_without_the_log_the_ability_you_just_used_is_the_blow(self):
+        e = Env(setup=lambda env: env.lua.execute("CombatLogGetCurrentEventInfo = nil"))
+        e.target()
+        IM = e.ns.Impact
+        IM.NoteCast(12294)                                           # Mortal Strike, then its hit
+        e.mock.fire("UNIT_COMBAT", "target", "WOUND", "", 90, 1)
+        self.assertEqual(IM.struck.key, "cross")
+        e.update(0.2)
+        e.mock.fire("UNIT_COMBAT", "target", "WOUND", "", 40, 1)     # the next hit is a plain swing: used once
+        self.assertEqual(IM.struck.key, "swing")
+        e.update(0.2)
+        IM.NoteCast(e.mock.secret())                                 # an ability whose ID is kept from us
+        e.mock.fire("UNIT_COMBAT", "target", "WOUND", "", 40, 1)
+        self.assertEqual(IM.struck.key, "swing")
+        self.assertEqual(e.errors(), [])
+
+    def test_a_spell_comes_in_from_an_end_and_a_tick_stays_where_the_health_ends(self):
+        e = Env()
+        e.target(health=400, healthMax=800)
+        IM, bar = e.ns.Impact, e.frames.target.health
+        w = bar.GetWidth(bar)
+        ends = set()
+        for _ in range(12):
+            e.mock.logHit("SPELL_DAMAGE", "player", "target", 4)
+            for t in IM.live.keys():
+                self.assertLessEqual(min(t.x, w - t.x), 6)           # at the left end or the right one,
+                self.assertEqual(t.vx > 0, t.x < w / 2)              # travelling in
+                ends.add(t.x < w / 2)
+            e.update(1.5)
+        self.assertEqual(ends, {True, False})
+        e.mock.logHit("SPELL_PERIODIC_DAMAGE", "player", "target", 4)
+        self.assertTrue(all(abs(t.x - w / 2) <= 10 for t in IM.live.keys()))
+        self.assertEqual(len(list(IM.marks.keys())), 0)
+        self.assertEqual(e.errors(), [])
+
+    def test_subtle_keeps_to_fixed_places_with_fewer_pieces_and_no_shake(self):
+        e = Env()
+        e.target()
+        IM, f = e.ns.Impact, e.frames.target
+        e.cmd("effects 2")
+        areas = set()
+        for _ in range(10):
+            e.mock.logHit("SWING_DAMAGE", "player", "target", 1, True)
+            areas.add(IM.struck.area)
+            self.assertFalse(IM.IsShaking(IM, f.visual))
+            e.update(1.2)
+        self.assertEqual(areas, {2, 7})
+        e.mock.logHit("SPELL_DAMAGE", "player", "target", 4)
+        self.assertLess(len(list(IM.live.keys())), IM.PROFILES.fire.fx.count)
+        self.assertEqual(e.errors(), [])
+
+    def test_wounds_open_below_half_and_a_quarter_and_bleed_from_there(self):
+        e = Env()
+        IM = e.ns.Impact
+        e.target(creature="Humanoid", health=800, healthMax=800)
+        bar = e.frames.target.health
+
+        def wounds(health):
+            e.mock.units.target.health = health
+            e.mock.fire("UNIT_HEALTH", "target")
+            b = IM.bleeding[bar]
+            shown = sum(1 for g in bar.gashes.values() if g.shown) if bar.gashes else 0
+            return ((b.open or 0) if b else 0), shown
+
+        self.assertEqual(wounds(700), (0, 0))
+        self.assertEqual(wounds(400), (1, 1))                        # half: the first wound
+        self.assertEqual(wounds(300), (1, 1))
+        self.assertEqual(wounds(180), (3, 3))                        # a quarter: two more
+        b = IM.bleeding[bar]
+        areas = list(b.areas.values())
+        self.assertEqual(len(set(areas)), 3)                         # never two in one place
+        e.update(1.5)                                                # what it bleeds comes out of them
+        xs = [IM.Area(bar, a)[0] for a in areas]
+        drops = [t for t in IM.live.keys() if t.kind == "drip"]
+        self.assertGreater(len(drops), 0)
+        for t in drops:
+            self.assertLessEqual(min(abs(t.x - x) for x in xs), 16)  # under a gash, not at the end of the health
+        self.assertGreater(IM.bled, 0)
+        self.assertEqual(wounds(700), (0, 0))                        # healed up: they close
+        e.cmd("effects 3")                                           # Classic has no gashes, and bleeds from 60%
+        self.assertEqual(wounds(180), (0, 0))
+        self.assertIsNotNone(IM.bleeding[bar])
+        self.assertEqual(e.errors(), [])
+
+    def test_the_first_wound_opens_where_your_last_blow_fell(self):
+        e = Env()
+        IM = e.ns.Impact
+        e.target(creature="Beast", health=800, healthMax=800)
+        bar = e.frames.target.health
+        e.mock.logHit("SWING_DAMAGE", "player", "target", 1)
+        fell = IM.struck.area
+        e.mock.units.target.health = 390
+        e.mock.fire("UNIT_HEALTH", "target")
+        self.assertEqual(IM.bleeding[bar].areas[1], fell)
+        self.assertEqual(e.errors(), [])
+
+    def test_hidden_health_opens_nothing_at_half_and_asks_the_game_about_a_quarter(self):
+        e = Env()
+        e.lua.execute("""
+            GATE = { secret = true }
+            C_CurveUtil = C_CurveUtil or { CreateCurve = function() return { AddPoint = function() end } end }
+            UnitHealthPercent = function() return GATE end
+        """)
+        IM = e.ns.Impact
+        e.target(creature="Humanoid", health=e.mock.secret(), healthMax=e.mock.secret())
+        bar = e.frames.target.health
+        e.mock.fire("UNIT_HEALTH", "target")
+        b = IM.bleeding[bar]
+        self.assertIsNotNone(b)
+        self.assertEqual(b.open, 3)                                  # all three, on a layer the game's answer shows
+        self.assertTrue(e.same(b.layer, bar.bleedLayer))             # or hides, unread
+        self.assertTrue(e.same(bar.bleedLayer.alpha, e.g.GATE))
+        for g in bar.gashes.values():
+            self.assertTrue(e.same(g.parent, bar.bleedLayer))
+        e.update(1)
+        self.assertEqual(e.errors(), [])
+
+    def test_striketest_shows_every_kind_of_blow(self):
+        e = Env()
+        e.target()
+        IM = e.ns.Impact
+        self.assertIn("every kind of blow", e.cmd("striketest"))
+        kinds = set()
+        for _ in range(12):
+            e.update(0.6)
+            if IM.struck:
+                kinds.add(IM.struck.kind)
+        self.assertEqual(kinds, {"slash", "cross", "claw", "stab", "bash", "arrow"})
+        e.cmd("effects 3")
+        self.assertIn("Full and Subtle", e.cmd("striketest"))
+        self.assertEqual(e.errors(), [])
+
+
+class MainAbilities(unittest.TestCase):
+    """The main abilities have a cast of their own: bolts charge and fire, Wrath winds up, Aimed Shot locks on."""
+
+    NAMES = {133: "Fireball", 116: "Frostbolt", 30451: "Arcane Blast", 19434: "Aimed Shot", 5176: "Wrath",
+             5143: "Arcane Missiles", 15407: "Mind Flay", 403: "Lightning Bolt", 29722: "Incinerate"}
+
+    def env(self):
+        e = Env()
+        e.mock.spellNames = e.lua.table_from(self.NAMES)
+        return e, e.ns.CastBar.art, e.ns.CastLook, e.ns.CastArt
+
+    def test_a_main_ability_is_known_by_id_or_by_name_and_keeps_its_school(self):
+        e, art, K, A = self.env()
+        self.assertEqual(K.Look("Fireball", 133).sig.key, "fireball")
+        self.assertEqual(K.Look("Fireball", 42833).sig.key, "fireball")         # a higher rank, by its name
+        self.assertEqual(K.Look("Fireball", 133).kind, "fire")
+        self.assertEqual(K.Look("Arcane Blast", 30451).kind, "arcane")
+        self.assertEqual(K.Look("Incinerate", 29722).kind, "fire")
+        self.assertEqual(K.Look("Lightning Bolt", 403).kind, "lightning")       # still the sky's own colour
+        self.assertEqual(K.Look("Lightning Bolt", 403).sig.key, "lightningbolt")
+        aimed = K.Look("Aimed Shot", 19434)                                     # its school not learned yet
+        self.assertEqual((aimed.kind, aimed.sig.show), ("physical", "reticle"))
+        self.assertIsNone(K.Look("Mystery", 99999))
+        self.assertIsNone(K.Look(e.mock.secret(), e.mock.secret()))             # an enemy's cast kept from us
+        self.assertIsNone(K.Look("Holy Light", 635).sig)
+        known, missing = K.SigsKnown()
+        self.assertEqual(known, len(self.NAMES))                                # (what this game can name)
+        self.assertIn("pyroblast", list(missing.values()))
+        for key, sig in K.SIGS.items():                                         # every one has a show to play
+            self.assertIsNotNone(A.SHOWS[sig.show], key)
+            self.assertIsNotNone(K.SigLook(key), key)
+        self.assertEqual(e.errors(), [])
+
+    def test_a_bolt_gathers_at_the_right_end_and_fires_when_it_lands(self):
+        e, art, K, A = self.env()
+        self.assertTrue(art.Start(art, K.Look("Fireball", 133)))
+        self.assertTrue(e.same(art.over, A.SHOWS.charge))
+        self.assertTrue(e.same(art.style, A.STYLES.flames))          # over its school's own flames
+        art.Update(art, 0.1, 0.1, 5.0)
+        small = art.o.charge
+        self.assertLess(abs(art.o.glow.points[1][4] - art.w), 2)     # at the right end of the bar
+        art.Update(art, 0.95, 0.95, 6.0)
+        self.assertGreater(art.o.charge, small * 3)                  # about to burst
+        art.Update(art, 0.5, 0.5, 6.1)                               # pushed back by a hit: it stays in step
+        self.assertLess(art.o.charge, small * 3)
+        art.Update(art, 1.0, 1.0, 7.0)
+        self.assertFalse(art.o.fired)
+        art.Finish(art, True, 7.0)
+        art.Update(art, None, None, 7.1)
+        self.assertTrue(art.o.fired)
+        self.assertEqual(art.o.fx[1].alpha, 1)
+        self.assertGreater(art.o.fx[1].points[1][4], art.w)          # thrown out past the end, at the enemy
+        self.assertEqual(art.Kick(art), 1)                           # and the bar jolts
+        art.Update(art, None, None, 8.0)
+        self.assertIsNone(art.kind)
+        self.assertEqual(art.Shown(art), 0)
+        self.assertEqual(e.errors(), [])
+
+    def test_a_cast_cut_short_fizzles_without_firing(self):
+        e, art, K, A = self.env()
+        art.Start(art, K.Look("Frostbolt", 116))
+        art.Update(art, 0.6, 0.6, 5.0)
+        art.Finish(art, False, 5.0)
+        art.Update(art, None, None, 5.2)
+        self.assertTrue(art.o.fizzled)
+        self.assertFalse(art.o.fired)
+        self.assertTrue(all(t.alpha == 0 for t in art.o.fx.values()))
+        self.assertIsNone(art.Kick(art))
+        self.assertEqual(e.errors(), [])
+
+    def test_every_bolt_fires_in_its_own_way(self):
+        e, art, K, A = self.env()
+        ways = set()
+        for key, sig in K.SIGS.items():
+            if sig.show != "charge":
+                continue
+            self.assertTrue(art.Start(art, K.SigLook(key)), key)
+            art.Update(art, 1.0, 1.0, 5.0)
+            art.Finish(art, True, 5.0)
+            for step in (0.05, 0.2, 0.4):
+                art.Update(art, None, None, 5.0 + step)
+            self.assertGreater(sum(1 for t in art.o.fx.values() if t.alpha > 0), 0, key)
+            ways.add(sig.fire)
+        self.assertEqual(ways, {"burst", "shatter", "lance", "implode", "beam", "engulf", "arc"})
+        self.assertEqual(e.errors(), [])
+
+    def test_wrath_winds_up_in_the_middle_and_is_thrown_at_the_enemy(self):
+        e, art, K, A = self.env()
+        art.Start(art, K.Look("Wrath", 5176))
+        self.assertTrue(e.same(art.over, A.SHOWS.orb))
+        self.assertTrue(e.same(art.style, A.BARE))                   # alone: no green lightning under it
+        art.Update(art, 0.5, 0.5, 10.0)
+        self.assertGreater(art.o.speed, 2 * (1.8 + 2.6 * 0.5))       # much faster than the Hearthstone's whirl
+        self.assertEqual(art.o.ball.points[1][4], art.w / 2)
+        before = [(w.points[1][4], w.points[1][5]) for w in art.o.wisps.values()]
+        art.Update(art, 0.52, 0.52, 10.1)
+        self.assertNotEqual(before, [(w.points[1][4], w.points[1][5]) for w in art.o.wisps.values()])
+        art.Finish(art, True, 11.0)
+        art.Update(art, None, None, 11.45)
+        self.assertTrue(art.o.thrown)
+        self.assertGreater(art.o.ball.points[1][4], art.w)           # off the right end
+        art.Start(art, K.Look("Wrath", 5176))
+        art.Update(art, 0.5, 0.5, 12.0)
+        art.Finish(art, False, 12.0)
+        art.Update(art, None, None, 12.3)
+        self.assertFalse(art.o.thrown)                               # cut short: it dwindles where it is
+        self.assertEqual(art.o.ball.points[1][4], art.w / 2)
+        self.assertEqual(e.errors(), [])
+
+    def test_aimed_shot_wanders_and_locks_on_the_middle_as_it_fires(self):
+        e, art, K, A = self.env()
+        art.Start(art, K.Look("Aimed Shot", 19434))
+        mid = art.w / 2
+
+        def wander(p, at):
+            off = []
+            for i in range(40):
+                art.Update(art, p, p, at + i * 0.1)
+                off.append(abs(art.o.x - mid))
+            return max(off)
+
+        early, late = wander(0.05, 20), wander(0.9, 30)
+        self.assertGreater(early, 20)
+        self.assertLess(late, early * 0.3)                           # less and less
+        ring = art.o.sights[1].ring
+        self.assertGreater(ring.vcolor[2], 0.8)                      # not red yet at 90%
+        art.Update(art, 1.0, 1.0, 40.0)
+        self.assertEqual((art.o.x, art.o.y), (mid, 0))               # dead on the middle
+        self.assertTrue(art.o.locked)
+        self.assertLess(ring.vcolor[2], 0.5)                         # red: it goes
+        art.Finish(art, True, 40.0)
+        art.Update(art, None, None, 40.1)
+        self.assertEqual(art.o.flash.alpha, 1)
+        art.Start(art, K.Look("Aimed Shot", 19434))                  # interrupted: the sights drop away
+        art.Update(art, 0.5, 0.5, 50.0)
+        y = art.o.sights[1].ring.points[1][5]
+        art.Finish(art, False, 50.0)
+        art.Update(art, None, None, 50.2)
+        self.assertFalse(art.o.locked)
+        self.assertLess(art.o.sights[1].ring.points[1][5], y)
+        self.assertLess(art.o.sights[1].ring.alpha, 0.9)
+        self.assertEqual(art.o.flash.alpha, 0)
+        self.assertEqual(e.errors(), [])
+
+    def test_a_gun_has_a_crosshair_and_a_bow_a_ring_and_a_pin(self):
+        e, art, K, A = self.env()
+        self.assertEqual(A.Sights(), "bow")                          # nothing known: a bow's
+        art.Start(art, K.SigLook("aimed"))
+        art.Update(art, 0.5, 0.5, 5.0)
+        g = art.o.sights[1]
+        self.assertGreater(g.pin.alpha, 0)
+        self.assertEqual(g.ticks[3].alpha, 0)
+        e.mock["items"][777] = e.lua.table_from({"class": 2, "sub": 3})
+        e.lua.execute("function GetInventoryItemID(unit, slot) if slot == 18 then return 777 end end")
+        self.assertEqual(A.Sights(), "gun")
+        art.Start(art, K.SigLook("aimed"))
+        art.Update(art, 0.5, 0.5, 6.0)
+        g = art.o.sights[1]
+        self.assertEqual(g.pin.alpha, 0)
+        self.assertGreater(g.ticks[3].alpha, 0)                      # the upright hairs of a crosshair
+        self.assertEqual(e.errors(), [])
+
+    def test_channels_empty_the_bar_and_missiles_leave_one_by_one(self):
+        e, art, K, A = self.env()
+        art.Start(art, K.Look("Arcane Missiles", 5143))
+        fired = []
+        for i, p in enumerate((0.05, 0.2, 0.4, 0.6, 0.8, 0.99)):
+            art.Update(art, 1 - p, p, 50 + i)
+            fired.append(art.o.fired)
+        self.assertEqual(fired, [0, 1, 2, 3, 4, 5])
+        art.Update(art, 0.01, 0.99, 55.1)
+        self.assertGreater(art.o.orbs[5].points[1][4], art.w * 0.5)  # the last one on its way off the bar
+        art.Start(art, K.Look("Mind Flay", 15407))
+        art.Update(art, 0.9, 0.1, 60.0)
+        self.assertEqual(art.o.beats, 0)
+        art.Update(art, 0.3, 0.7, 61.0)
+        self.assertEqual(art.o.beats, 2)                             # a throb at every tick
+        self.assertGreater(sum(1 for t in art.o.dots.values() if t.alpha > 0), 0)
+        self.assertEqual(e.errors(), [])
+
+    def test_subtle_and_nameplates_get_fewer_pieces_and_no_jolt(self):
+        e, art, K, A = self.env()
+        art.Start(art, K.SigLook("fireball"))
+        full = art.n
+        e.cmd("effects 2")
+        art.Start(art, K.SigLook("fireball"))
+        self.assertLess(art.n, full)
+        art.Update(art, 1.0, 1.0, 5.0)
+        art.Finish(art, True, 5.0)
+        self.assertIsNone(art.Kick(art))
+        e.cmd("effects 1")
+        light = A.Attach(e.ns.CastBar.bar, 0.65, True)
+        light.Start(light, K.SigLook("fireball"))
+        self.assertLess(light.n, full)
+        light.Update(light, 1.0, 1.0, 6.0)
+        light.Finish(light, True, 6.0)
+        self.assertIsNone(light.Kick(light))
+        self.assertEqual(e.errors(), [])
+
+    def test_your_cast_bar_jolts_as_a_bolt_fires_and_gives_its_show_room(self):
+        e, art, K, A = self.env()
+        cb = e.ns.CastBar
+        self.assertIn("sigtest", e.cmd("help").lower() + "sigtest")
+        e.cmd("sigtest")
+        seen, jolted, rooms = set(), False, set()
+        for _ in range(900):
+            e.update(0.05)
+            if cb.demo is None and not cb.frame.shown:
+                break
+            if cb.art.sig:
+                seen.add(cb.art.sig.key)
+                rooms.add(cb.room)
+            jolted = jolted or bool(cb.jolt)
+        self.assertEqual(seen, set(A.SIG_DEMO.values()))
+        self.assertTrue(jolted)
+        self.assertEqual(rooms, {cb.ROOM, cb.ROOM + 6, cb.ROOM + 8})  # Wrath's and the sights' reach further
+        p = cb.bar.points[1]
+        self.assertEqual((p[4], p[5]), (0, 0))                       # back where it was
+        self.assertFalse(cb.frame.shown)
         self.assertEqual(e.errors(), [])
 
 

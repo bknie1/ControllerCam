@@ -395,13 +395,22 @@ Gegenstandsaktionen: den Gegenstand unter dem Zeiger anprobieren, markieren, Det
 R3 auf einem Gegenstand halten für seine Aktionen
 Während deine Taschen oder die Bank offen sind, fragt das Halten der rechten Sticktaste auf einem Gegenstand, was damit geschehen soll: anprobieren, markieren, Details ansehen oder zerstören. Ein kurzer Druck sortiert oder verschiebt weiterhin, und die Taschen und das Gegenstandsmenü des Spiels bleiben, wie sie sind
 fragt, was mit dem Gegenstand unter dem Zeiger geschehen soll: anprobieren, markieren, Details, zerstören
+Voll
+Dezent
+Klassisch
+Keine
+Treffer- und Zaubereffekte
+Voll: Effekte kommen von den Rändern einer Leiste und treffen an ihren acht Trefferstellen, Wunden öffnen sich unter der Hälfte und unter einem Viertel der Gesundheit eines Gegners, Geschosse laden sich auf und feuern, und die wichtigsten Fähigkeiten haben jeweils ihr eigenes Aussehen. Dezent: dasselbe an festen Stellen, mit weniger Teilen und ohne Wackeln. Klassisch: das Aussehen von früher. Keine: nur Farbe, Statuseffekte und Symbole
 Zauberleisten-Animationen
 eine Zauberleiste zeigt, was gewirkt wird: Spitzhacken schlagen beim Bergbau darauf ein, Blitze laufen bei Natur daran entlang, eine Ranke blüht bei einer Heilung, Runen nehmen bei Arkan Gestalt an, Flammen, Eis und Schatten bei Feuer, Frost und Schatten
 jede Zauberleisten-Animation einmal auf deiner Zauberleiste zeigen
+zeigt die eigenen Zauberanimationen der wichtigsten Fähigkeiten einmal auf deiner Zauberleiste
 Unterbrochen
 Wahrscheinlich:
 Zauber-Aufladung
 deine Zauberleiste leuchtet heller, je voller der Zauber wird, und entlädt sich beim Wirken
+Zähler für Zauberketten
+wenn du einen Zauber direkt nach dem anderen wirkst, erscheint unter deiner Zauberleiste ein Zähler der Kette; sie endet, wenn du aufhörst, dich bewegst oder unterbrochen wirst
 Angelschwimmer
 beim Angeln wippt ein Schwimmer auf deiner Zauberleiste und zeigt, was hier wahrscheinlich anbeißt
 Zauberleiste
@@ -426,6 +435,8 @@ Combopunkte
 Combopunkte als Punkte über dem Namen des Ziels
 listet, was das Spiel über die Effekte deines Ziels sagt (zur Fehlersuche)
 Zeige jede Schadensart einmal (die letzte als kritischer Treffer).
+Hiebe werden nur bei den Effekten Voll und Dezent gezeichnet.
+Zeige jede Art von Hieb einmal (den letzten als kritischen Treffer).
 Trefferpartikel
 Heiliges blitzt auf, Feuer steigt empor, Frostkristalle verweilen, Schatten qualmt, arkane Runen funkeln auf dem getroffenen Balken
 Wunden je nach Art des Gegners
@@ -435,6 +446,7 @@ dein Spielerrahmen und deine senkrechten Leisten wackeln leicht, in der Schule d
 Treffereffekte nach Schadensart
 deine Treffer lassen die getroffene Leiste aufblitzen und wackeln: Feuer, Frost, Schatten und die übrigen sehen jeweils anders aus
 zeigt den Treffereffekt jeder Schadensart einmal auf deinem Ziel und den Namensplaketten
+zeigt jede Art von Nahkampfhieb und Schuss einmal auf deinem Ziel und den Namensplaketten
 Eingehende Heilung in den Farben ihrer Schule
 die Heilung auf dem Weg zu einer Einheit zeigt die Farbe der Heilung, die auf sie gewirkt wird: Heilig golden, Natur grün
 Heilung über Zeit wächst auf der Leiste
@@ -665,7 +677,6 @@ Voreinstellungen setzen den Kameraabstand
 eine Voreinstellung bringt die Kamera auch einmal auf den Abstand, für den ihr Layout gemacht wurde (danach frei zoomen)
 Aktion
 eine Ansicht aus der dritten Person: schmale vertikale Leisten neben deinem Charakter, alle Effekte an; außerhalb des Kampfes blendet alles aus
-Klassisch
 unsere Rahmen dort, wo WoW sie immer hatte, ruhigere Effekte, die Gamepad-Leisten des Spiels unverändert
 Minimal
 nur das Nötige: freundliche NPCs zeigen ihre Plakette (mit ihrer Tätigkeit) nur, solange du auf sie zeigst, sie anvisierst oder als Ziel hast; Namen ohne Titel; außerhalb des Kampfes ruhen deine Leisten als leiser Hinweis (wenig Gesundheit zeigt sich immer)
@@ -1488,7 +1499,6 @@ Groß
 Voller Name
 Kurzer Name
 Kein Name
-Voll
 Minimal mini
 Namensplakettengröße
 wie groß die Leisten auf Namensplaketten sind: klein und schmal, normal oder groß (breiter und höher)

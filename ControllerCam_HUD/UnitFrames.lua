@@ -505,7 +505,8 @@ local function Hit(f, share)
     if f.visual.lastImpact and GetTime() - f.visual.lastImpact < 0.3 then return end
     if TARGETLIKE[f.key] and f.key ~= "tot" and ns.Impact.active then
         -- the game told us nothing about this hit (no combat log here): it still lands, as a plain one
-        ns.Impact:Hit({ frame = f.visual, anchor = f.button, bar = f.health }, "physical", share >= SHAKE_FROM)
+        -- (nobody's blow in particular: no cut is drawn for it, it stays where the health ends)
+        ns.Impact:Hit({ frame = f.visual, anchor = f.button, bar = f.health }, "physical", share >= SHAKE_FROM, nil, false)
         return
     end
     f.flashA = math.min(1, 0.45 + share * 2)
