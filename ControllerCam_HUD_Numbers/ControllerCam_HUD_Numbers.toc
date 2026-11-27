@@ -2,7 +2,7 @@
 ## Title: ControllerCam HUD: Numbers
 ## Notes: Stylized numbers on you, abilities ready, cooldowns coming back, big moments and the feel of your key abilities. Loaded only while it is switched on in the HUD's options.
 ## Author: bknie1
-## Version: 1.6.3
+## Version: 1.6.4
 ## X-License: MIT
 ## IconTexture: Interface\AddOns\ControllerCam\Media\icon
 ## Dependencies: ControllerCam_HUD

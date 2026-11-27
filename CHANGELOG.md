@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.6.4
+
+ControllerCam: HUD
+- **The HUD folder carries its licence file.** The MIT licence now sits in the HUD's own folder as well. Nothing changes in the game.
+
 ## 1.6.3
 
 ControllerCam: HUD
