@@ -876,7 +876,8 @@ end
 local function OwnBuffs()
     local U = ns.Unit
     if not U then return {} end
-    local list = U.Filtered and U.Filtered("player", "HELPFUL", "HELPFUL|PLAYER", 40)
+    local list, missed
+    if U.Filtered then list, missed = U.Filtered("player", "HELPFUL", "HELPFUL|PLAYER", 40) end
     if not list then
         list = {}
         for i = 1, 40 do
@@ -885,16 +886,35 @@ local function OwnBuffs()
             list[#list + 1] = a
         end
     end
-    return list
+    return list, missed
+end
+
+RC.long = {}                       -- seen to last for ever or longer than is watched: never watched, even once the
+                                   -- game keeps its time to itself
+
+-- Is the effect we knew by this number still on you? The game may answer for it while it keeps its name
+local function StillOn(instance)
+    local get = C_UnitAuras and C_UnitAuras.GetAuraDataByAuraInstanceID
+    if not (instance and get) then return false end
+    local ok, a = pcall(get, "player", instance)
+    return ok and a ~= nil
 end
 
 local function ReadBuffs(now)
-    local here = {}
-    for _, a in ipairs(OwnBuffs()) do
+    local list, missed = OwnBuffs()
+    local here, on, unsure = {}, {}, missed and true or false
+    for _, a in ipairs(list) do
         local name, id = ns.Plain(a.name), Num(a.spellId)
         local dur, ends = Num(a.duration), Num(a.expirationTime)
-        if type(name) == "string" and name ~= "" and id and Castable(id, name)
-           and not (dur and (dur <= 0 or dur > RC.BUFF_MAX)) then
+        local instance = Num(a.auraInstanceID)
+        if instance then on[instance] = true end
+        local told = type(name) == "string" and name ~= "" and id
+        if not told then
+            if not instance then unsure = true end       -- one nobody can tell apart: nothing is surely gone
+        elseif dur and (dur <= 0 or dur > RC.BUFF_MAX) then
+            RC.long[name], RC.buffs[name] = true, nil
+        elseif Castable(id, name) and not RC.long[name] and (RC.buffs[name] or dur) then
+            -- (first watched once its time has been read: one never read could be an hour long)
             here[name] = true
             local b = RC.buffs[name]
             if not b then
@@ -902,6 +922,7 @@ local function ReadBuffs(now)
                 RC.buffs[name] = b
             end
             b.icon = Num(a.icon) or ns.Plain(a.icon) or b.icon
+            b.instance = instance or b.instance
             if not b.present then                                      -- cast (again): a new one
                 b.gen, b.present, b.readyAt, b.castAt = b.gen + 1, true, nil, now
             end
@@ -918,7 +939,10 @@ local function ReadBuffs(now)
     end
     local dead = ns.Yes(UnitIsDeadOrGhost and UnitIsDeadOrGhost("player"))
     for name, b in pairs(RC.buffs) do
-        if b.present and not here[name] then                           -- gone
+        -- gone: not read by its name, not on you by its number, and everything on you could be told apart. As a
+        -- fight starts the game may keep names to itself: that took every buff you had for gone
+        if b.present and not here[name] and not unsure
+           and not (b.instance and (on[b.instance] or StillOn(b.instance))) then
             b.present = false
             if dead then b.calledGen = b.gen                           -- (not news when you died)
             elseif not b.readyAt or b.readyAt > now then b.readyAt = now end

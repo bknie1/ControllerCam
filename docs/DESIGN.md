@@ -144,7 +144,7 @@ loaded while any one of its switches is on. Its `## Dependencies` are loaded fir
 | `ControllerCam_HUD_Transmog` | Transmog | 85 KB | `transmogSets`, `tipAppearance` | ControllerCam_HUD |
 | `ControllerCam_HUD_Compass` | Compass | 84 KB | `compass` | ControllerCam_HUD |
 | `ControllerCam_HUD_Fishing` | Fishing, FishLore, FishLog, FishPanel, FishGame, FishJournal | 193 KB | `fishMode`, `fishJournal`, `fishPanel` | ControllerCam_HUD |
-| `ControllerCam_HUD_Narrative` | Narrative | 63 KB | `narrative` | ControllerCam_HUD |
+| `ControllerCam_HUD_Narrative` | Narrative, Remarks, Commentary | 158 KB | `narrative` | ControllerCam_HUD |
 | `ControllerCam_HUD_Campfire` | Campfire | 105 KB | `campScene` | ControllerCam_HUD |
 | `ControllerCam_HUD_Flights` (flight bar, flight game, flight film) | Flights, FlightGame, Ride | 224 KB | `flights`, `flightScene`, `flightGame` | ControllerCam_HUD, ControllerCam_HUD_Campfire (the flight film uses the camp fire's) |
 
@@ -304,6 +304,18 @@ of a fight), and a frame the game holds still in a fight is no longer asked abou
 
 Each module is finished (tests, grid, self-check, demo, a look in the game) before the next one starts.
 Whatever the game's Gamepad UI already does well is kept and restyled; only what it does badly is replaced.
+
+## Road map
+
+Ideas for later. Nothing here is built.
+
+- **Fishing achievements:** small ones of our own, kept in the fish journal. For the fish that name their weight
+  (a "15 Pound ..." landed at 15.9 lb, the most it can be: an easy one, and fine as that), and others to be
+  chosen, such as every listed fish of a zone or a long run with none getting away.
+- **Fishing contests:** two players who both have the addon, both in fishing mode, compete (say the heaviest
+  fish, the most, or the most kinds in a set time). To settle first: whether this game lets addons send each
+  other messages, and what it keeps secret; that both say yes before anything is sent; and what counts as fair,
+  since each player's addon makes up its own weights.
 
 ## Credits and inspiration
 

@@ -57,7 +57,8 @@ ns.RegisterSaved("nativeDefaulted", function(old)
     end
     return t
 end)
-local ONCE = { auratooltip = false }       -- the buff tooltip pops up over the target frame: off to begin with
+-- the buff tooltip pops up over the target frame: off to begin with; names in chat in their class colour: on
+local ONCE = { auratooltip = false, chatclass = true }
 
 -- An earlier version switched the Cooldown Manager on by itself and remembered it: undo that once.
 local Native = {}

@@ -116,11 +116,13 @@ Aucun matériau à la banque à retirer.
 Tous les matériaux (%d)
 Déposer les matériaux
 Retirer les matériaux
+Choisir
+Fermer
 Retrait rapide
 retire de la banque ce dont vous portez déjà un peu (matériaux, potions, nourriture), pour remplir vos sacs
 Dépôt rapide
 dépose à la banque ce qu'elle contient déjà en partie, et ce que vous avez marqué pour elle
-les matériaux d'artisanat vers la banque ou hors de la banque : tous à la fois, ou un type à la fois (métal et pierre, tissu, herbes...)
+les matériaux d'artisanat vers la banque ou hors de la banque : tous à la fois, ou un type à la fois (métal et pierre, tissu, herbes...). À la manette : haut et bas choisissent, A valide, B ferme ; maintenir R3 hors d'un objet ouvre aussi ceci
 Ouvrez d'abord un marchand.
 Vente futée
 vend ce qu'un marchand paie le mieux: la camelote, et ce que l'hôtel des ventes ne vendrait pas mieux (listé et confirmé d'abord); ce qui vaut plus à l'hôtel des ventes ou sert encore à vos métiers reste
@@ -386,7 +388,6 @@ Retour
 Essayer
 Changer la marque
 Plus
-Fermer
 Pas en combat.
 Actions d'objet : essayer, marquer, voir les détails ou détruire l'objet pointé
 Maintenir R3 sur un objet pour ses actions
@@ -583,24 +584,32 @@ Secondes avant que le chat s'estompe
 durée d'affichage du texte du chat avant qu'il s'estompe
 Coordonnées sur la carte
 vos coordonnées sous la carte du monde
+Bouton de rechargement près du menu du jeu
+quand le menu du jeu (Échap) est ouvert, un bouton propre au HUD pour recharger l'interface se place dessous ; le menu lui-même reste tel quel
 Masquer les messages d'erreur rouges du jeu
 « Ce sort n'est pas encore prêt », « Pas assez de mana » et autres au milieu de l'écran sont masqués
 Masquer les erreurs « pas encore prêt »
 « Le sort n'est pas encore prêt », « La technique n'est pas encore prête » et « L'objet n'est pas encore prêt » restent hors du centre de l'écran ; les autres messages rouges du jeu s'affichent toujours
+Prénom Nom
+Prénom N.
+P.N.
+P. Nom
 %d messages masqués comme spam depuis votre connexion.
 %d d'entre eux étaient du recrutement de guilde répété.
 Icône de classe et niveau dans le chat
-l'icône de classe et le niveau d'un joueur entre crochets devant son nom, quand le jeu nous les fait connaître. Désactivé par défaut : cela réécrit les lignes de discussion du jeu, et dans les champs de bataille et les instances, cela déclenche l'avertissement du jeu sur les erreurs d'addons
+l'icône de classe et le niveau d'un joueur entre crochets devant son nom, quand le jeu nous les fait connaître. Cela réécrit les lignes de discussion du jeu : si le jeu signale des erreurs d'addons dans un champ de bataille ou une instance, désactivez-le
 Noms de canaux courts dans la discussion
-le canal devant une ligne, raccourci: [P] groupe, [PL] chef de groupe, [G] guilde, [O] officier, [R] raid, [RL] chef de raid, [I] instance, et un canal numéroté par son numéro, [1]. Désactivé par défaut : cela réécrit les lignes de discussion du jeu, et dans les champs de bataille et les instances, cela déclenche l'avertissement du jeu sur les erreurs d'addons
-Prénoms seuls dans la discussion
-un nom avec un nom de famille s’affiche avec le seul prénom (Jory Spleeneater parle en tant que Jory) ; un chuchotement ou un clic droit dessus atteint toujours le nom complet. Désactivé par défaut : cela réécrit les lignes de discussion du jeu, et dans les champs de bataille et les instances, cela déclenche l'avertissement du jeu sur les erreurs d'addons
+le canal devant une ligne, raccourci: [P] groupe, [PL] chef de groupe, [G] guilde, [O] officier, [R] raid, [RL] chef de raid, [I] instance, et un canal numéroté par son numéro et son initiale : [1.G] General, [2.T] Trade, [3.D] LocalDefense. Cela réécrit les lignes de discussion du jeu : si le jeu signale des erreurs d'addons dans un champ de bataille ou une instance, désactivez-le
+Affichage des noms dans la discussion
+un nom avec nom de famille sous la forme Prénom Nom, Prénom N. (Jory Spleeneater en Jory S.), P.N. (J.S.) ou P. Nom (J. Spleeneater) ; un nom sans nom de famille reste tel quel. Chuchoter ou faire un clic droit atteint toujours le nom complet. Les noms raccourcis réécrivent les lignes de discussion : si le jeu signale des erreurs d'addons dans un champ de bataille ou une instance, choisissez Prénom Nom
 Taille du texte du chat
-la taille du texte dans les fenêtres de discussion, en proportion de la taille propre au jeu (le réglage du jeu reste tel quel)
+la taille du texte des fenêtres de discussion, en points : 20 convient à une télé à l'autre bout de la pièce (22 aussi avec des noms raccourcis), 0 garde la taille du jeu (le réglage du jeu n'est pas modifié)
 Masquer les vendeurs d'or et les annonces répétées
 les messages qui vendent de l'or ou des services avec une adresse web, et le même message répété par un joueur, sont masqués (jamais ceux de votre groupe, guilde ou amis)
-Masquer le recrutement de guilde répété
-dans les canaux publics, le message de recrutement d'une guilde est montré une fois ; le même du même joueur, ou un presque identique, dans les 15 minutes est masqué (jamais ceux de votre groupe, guilde ou amis)
+N'afficher chaque annonce du chat qu'une fois
+dans les canaux publics, le recrutement de guilde et les annonces de vente, d'achat et de services s'affichent la première fois, puis plus avant une nouvelle connexion ou un rechargement. Une annonce presque identique mot pour mot compte comme la même ; une autre du même vendeur s'affiche (jamais masqué pour votre groupe, votre guilde ou vos amis)
+Masquer les annonces du chat dès la première fois
+le recrutement de guilde et les annonces de vente, d'achat et de services des canaux publics ne s'affichent jamais, pas même une fois. Chercher un groupe n'est pas une annonce (votre groupe, votre guilde et vos amis ne sont jamais masqués)
 liste les messages du chat récemment masqués comme spam
 Un vol est un bon moment pour ça.
 Vous jouez depuis %s.
@@ -953,7 +962,6 @@ Joindre
 Les boutons de la manette reviennent après le combat.
 %s ou %s: retour aux sacs
 Maintenir pour détruire
-Choisir
 Tous les sacs
 Ce sac seulement
 Mettre dedans
@@ -1031,6 +1039,7 @@ Mode pêche : désactivé.
 Pêche: %s pour lancer
 Pas d'appât: %s deux fois pour utiliser %s
 %s pour ranger la canne
+%s pour pêcher à nouveau
 Mode pêche: %s pour lancer la ligne, et encore pour ferrer le poisson quand le bouchon bouge.
 %s pour ferrer, %s pour relancer
 Le mode pêche demande une canne à pêche dans vos mains.
@@ -1120,17 +1129,23 @@ Il vous faudra les deux mains, et peut-être un ami.
 Nouveau dans votre journal de pêche : %s, %s.
 Nouveau dans votre journal de pêche : %s.
 Votre plus gros %s à ce jour : %s (avant : %s).
+Échappés
 Appât %s
 Pas d'appât
 Pris %d
-Échappés %d
 Un curieux : +%d%%
 Gardez votre leurre près du poisson
+%s : retour au jeu
+%s : un jeu pendant que le bouchon est à l'eau
 Prochaine prise +%d%%
 Maintenez %s : le leurre court le long de la ligne
 %d d'affilée
+%s : le ranger
+Le jeu de pêche est désactivé : /cchud fishgame on
+Le jeu de pêche se joue avec une canne à pêche en main.
 Un jeu pendant que le bouchon est à l'eau
-se joue sur la barre d’incantation tant que votre ligne est à l’eau : maintenez une gâchette et votre leurre court le long de la ligne, relâchez et il dérive en arrière ; gardez-le près de l’ombre du poisson. Mieux vous jouez, plus le poids inventé de votre prochaine prise est lourd. Aucun bouton n’est pris, ni votre lancer ni votre prise ne sont touchés
+avec une canne à pêche en main, un petit jeu est proposé sur la barre d’incantation, et un bouton le lance (seul ce bouton est pris, jamais un de ceux de votre pêche) : maintenez une gâchette et votre leurre court le long de la ligne, relâchez et il dérive en arrière ; gardez-le près de l’ombre du poisson. Mieux vous jouez, plus le poids inventé de votre prochaine prise est lourd. Le même bouton le range. Ni votre lancer ni votre prise ne sont touchés
+avec une canne à pêche en main : lancer le jeu de pêche, ou le ranger et le reprendre
 %d pris, %d espèces, %d échappés
 Le plus lourd : %s, %s
 Poissons
@@ -1179,20 +1194,60 @@ un griffon, un coursier du vent ou une chauve-souris (celui que le maître de vo
 Vols : le temps à l'arrivée
 à l'atterrissage, la discussion dit comment est l'air là où vous arrivez, tel que l'endroit est d'habitude (chaud et humide à Strangleronce, neige sous les pieds à Dun Morogh), et le moment de la journée
 lister les trajets aériens dont la durée est connue
+portée du filet de %d à %d
+de %d à %d filets à la fois
+de %d à %d vies
+Votre record sur cette route !
 À terre ! +%d
-Heurté : la série s'arrête
-%s battre des ailes  ·  évitez les cimes des arbres et les zeppelins
-%s prenez les cavaliers au filet pour de l'or de vol  ·  %s haute altitude
+Abattu ! %d d'or non mis à l'abri perdu
+Abattu !
+Heurté ! Vies restantes : %d
+Pris au filet ! Vies restantes : %d
+Roussi ! Vies restantes : %d
+Manche %d
+%s est amélioré au maximum
+Il vous manque %d d'or de vol pour cela
+%s %d : %s
+Un zeppelin de votre camp : tenez leurs filets à l'écart !
+Leur zeppelin : abattez-le au filet avant qu'il ne vous prenne !
+Un drake ! Évitez son feu et prenez-le au filet pour le chasser
+Manche %d réussie : %d d'or mis à l'abri
+Le drake s'envole au loin
+Escorté sain et sauf : +%d
+Il est passé, empêtré
+Leur zeppelin s'éloigne
+Un filet sur le zeppelin de votre camp
+Leur zeppelin est à terre ! +%d
+Le drake s'enfuit ! +%d
+%s battre des ailes  ·  évitez cimes des arbres, zeppelins, filets et feu
+%s prenez des cavaliers au filet pour de l'or de vol  ·  %s haute altitude
+Réussissez une manche pour mettre son or à l'abri : abattu, il est perdu  ·  %s %s améliorations
+%s %s %d : %s, %d d'or
+%s suivante
+%d d'or à dépenser
 %d d'or de vol
+Abattu à la manche %d avec %d d'or de vol
+%s revoler depuis la manche 1
 %s battre des ailes
 %s filet
 %s haute altitude
-%s : retour au jeu (%d d'or de vol)
 %s : un jeu en chemin
+record sur cette route : %d
+%d d'or de vol à dépenser en améliorations
+%s : retour au jeu (%d d'or de vol)
 Le jeu de vol est désactivé : /cchud flightgame on
 Le jeu de vol se joue pendant un vol.
 Jeu de vol : jouer / haute altitude
+Jeu de vol : gagné %d, dépensé %d, perdu %d, %d à dépenser.
+Aucune route jouée pour l'instant.
+Filet plus large
+attrape les cavaliers de plus loin
+Rechargement rapide
+tirez plus tôt, et un filet de plus en l'air
+Harnais épais
+une vie de plus à chaque partie
 pendant un vol : lancer le jeu de vol, ou le mettre en haute altitude et l'en ramener
+le jeu de vol : votre record sur chaque route, votre or de vol et vos améliorations
 Vols cinématiques : la caméra tourne autour de vous
 pendant le film, la caméra tourne lentement autour de vous et de votre monture, un tour complet en une minute et demie environ, et revient derrière vous avant l'atterrissage. Désactivé : un plan fixe
 Hors ligne
@@ -1490,6 +1545,8 @@ Patience. La Terre-Mère pourvoit.
 Hé, qu'est-ce qu'on a là, mon ?
 Quel désordre. Indigne de moi.
 Le temps, c'est de l'argent. Comptons.
+Quel désordre. Ça ne va pas du tout.
+Trop lourd. Le vent aime qu'on voyage léger.
 Ouais, ça fera l'affaire.
 Elune soit remerciée.
 La Lumière pourvoit.
@@ -1497,6 +1554,8 @@ Hrm. Ça ira.
 Hm. Assez pour se battre.
 Je voyage léger. Bien.
 Acceptable. De justesse.
+Tout est répertorié. Bien.
+Assez léger pour le vent. Bien.
 Plus une place de libre. La camelote rapporterait %s : la vendre fait de la place.
 Plus une place de libre. Ce dont je n'ai pas besoin en route peut attendre à la banque.
 Camelote : %d, %s ici. X vend celle que j'ai choisie ; Vente futée prend tout.
@@ -1536,8 +1595,244 @@ Poissons d'ici que je n'ai pas encore pris : %d. On continue de lancer.
 J'ai pris tous les poissons de cette eau. Ailleurs, alors.
 Rien de pris encore. Le premier poisson de chaque eau va ici.
 Espèces prises : %d. Chaque eau en cache quelques autres : le panneau de pêche montre un ? pour chacune que je n'y ai pas prise.
+Espèces prises : %d. Chaque eau a ses propres poissons.
 Reposé près du feu : les %d prochains points d'expérience des victoires comptent double.
 Aucun repos en réserve. Une nuit à l'auberge ou en ville, et les victoires donnent double expérience pendant un moment.
+Tiens, tiens, qu'avons-nous là ?
+Par la Lumière, en voilà un nouveau !
+Och, et toi, t'es quoi ?
+Pardi, une nouvelle trouvaille !
+Oh ! Un nouveau spécimen !
+Fascinant ! C'est livré avec un mode d'emploi ?
+Par la lumière d'Élune, qu'es-tu ?
+Les profondeurs ont encore des choses à me montrer.
+La Lumière me montre quelque chose de nouveau !
+Ah ! Nous ne nous connaissions pas, petite chose.
+Hrm. Celui-là, je ne le connais pas.
+Tiens donc. Un nouveau venu.
+Ah, un nouvel ami ! Bienvenue, bienvenue.
+Chaque étang cache une surprise.
+Ha ! Un nouvel ennemi. Un combat vite réglé.
+Esprits, qu'est-ce que c'est que ça ?
+Tiré des profondeurs. Je connais cette sensation.
+Un nouveau. Du calme, être mort, ce n'est pas si terrible.
+Un nouveau visage sorti de l'eau. Salut à toi, petite chose.
+La Terre-Mère a encore des choses à me montrer.
+Jamais vu ton pareil au bout d'mon hameçon, mon gars !
+Qu'est-ce que les loas m'envoient, là ?
+Oh ? Quelque chose que je n'avais jamais vu.
+Comme c'est exotique. Et mouillé.
+De la nouvelle marchandise ! Ça va rapporter combien ?
+Jamais vu ça. Personne n'a besoin de le savoir.
+Jamais consigné, jusqu'ici. Je vais y remédier.
+Un nouveau spécimen. Les archives le voudront.
+Quelque chose que je ne connais pas encore. Les vents enseignent toujours.
+Le vent m'a menée vers la bonne eau.
+De quoi nourrir tout le village !
+Voilà qui est digne de la table du roi !
+Och, regarde-moi un peu cette taille !
+Par la forge, en voilà un pour le musée !
+Remarquable ! Ma balance n'est pas faite pour ça !
+Nouveau record ! Il va me falloir un plus grand filet !
+La lumière d'Élune me sourit.
+Une créature magnifique. Évidemment, elle est venue à moi.
+Par les naaru, quelle splendeur !
+Un grand cadeau. Merci du fond du cœur.
+Bigre, quel monstre !
+Ça, c'est une vraie prise.
+Ho ho ! Un festin à lui tout seul !
+De la patience, et voyez ce qui vient !
+Un adversaire de valeur !
+Il s'est battu avec honneur. Il nous nourrira bien.
+Eh bien. J'ai failli ressentir quelque chose.
+Regardez ça. En bas, quelque chose se portait à merveille.
+La Terre-Mère est généreuse aujourd'hui.
+Ça mérite une pipe de pacifique, au calme.
+Ouah, mon gars ! L'est énorme, çui-là !
+Les loas sont généreux. Y vont vouloir quelque chose en retour.
+Voilà qui est digne de moi.
+Magnifique. Naturellement.
+Dzing ! Regardez-moi cette taille !
+Et quand je le raconterai, il sera deux fois plus gros !
+Exceptionnel. Et aucun esprit n'a eu à me le donner.
+Remarquable. Nos érudits en seraient jaloux.
+Un grand cadeau ! Pour celui-là, je dois quelque chose au vent.
+Voyez ça ! Une dette que je paierai de bon cœur.
+Et voilà qui est réglé !
+La Lumière est avec nous !
+Ha ! À terre, et restes-y !
+Ça vaut bien une tournée de bière !
+Hypothèse confirmée : on gagne !
+Essai terminé ! Presque pas d'explosions !
+La lumière d'Élune t'a jugé.
+C'est fait. Le doute n'a jamais été permis.
+La Lumière triomphe !
+C'est fini. Que cela ne tourmente plus personne.
+Cette fois, reste à terre.
+La chasse est finie.
+Beau combat ! Alors, qui a faim ?
+Soufflez. C'est terminé.
+Victoire ! Lok'tar !
+Tu t'es bien battu. Meurs avec honneur.
+Reste mort. Certains d'entre nous n'ont pas eu cette chance.
+Bienvenue de l'autre côté. On s'habitue à l'odeur.
+Marche à présent avec les ancêtres.
+C'est fait. Laissons la terre se reposer.
+Reste couché, mon gars, et emporte ton mauvais juju !
+Les loas ont tout vu. J'espère qu'ça leur a plu.
+Impeccable. Comme prévu.
+Quel ennui. Au suivant ?
+Ha ! Vous avez VU ça ?
+Petit format, grand final !
+Du talent et de l'étude. Il ne nous fallait rien d'autre.
+Une preuve de plus de ce que nous pouvons faire seuls.
+Les vents étaient avec nous. Nous le leur devons.
+C'est fait. Rendez au vent ce qui lui revient.
+Par la Lumière, regardez-moi ça !
+Voilà de quoi passer l'hiver !
+Och, en voilà un petit trésor !
+Pardi, ça valait la peine de creuser !
+Oh, y a quoi dedans ? Y a quoi dedans ?
+Une boîte mystère ! Mes préférées !
+Ce que d'autres perdent, Élune le révèle.
+Bien caché. Pas assez.
+Une bénédiction inattendue !
+La perte de quelqu'un. Qu'on en fasse bon usage.
+Hrm. Je l'avais flairé.
+Voyons ce qui valait la peine d'être caché.
+Oh, un cadeau ! Pour moi ?
+Chaque boîte renferme une histoire. Certaines, des friandises.
+Du butin ! Bien.
+Prends-le. Qui l'a laissé n'a pas su le garder.
+L'ancien propriétaire ne se plaint pas.
+Un cadeau de nos chers disparus. Ce n'est pas de refus.
+Ne prenons que ce qu'il nous faut.
+Que celui qui a laissé ceci repose en paix.
+Ouh, ça brille ! Pourvu qu'ce soit pas maudit, mon gars.
+Personne laisse un butin pour rien. Gare à ton dos.
+Enfin, quelque chose de bon goût.
+Poussiéreux. Je prends quand même.
+Le gros lot ! Enfin... une trouvaille très modeste.
+Commission pour la trouvaille : le tout !
+Perdu par d'autres. Retrouvé par qui sait regarder.
+Voyons ce que de moindres chercheurs ont manqué.
+Le vent guide, et voyez ce qui est là !
+Un cadeau sur le chemin. Pensez à donner quelque chose en retour.
+À retenir, l'endroit d'où il vient.
+Encore une page pour le journal.
+Lourd pour son espèce. Celui-là a bien mangé.
+Un gros. Il a défendu son point de vue.
+On n'en voit pas souvent de cette taille.
+Mes bras l'ont senti passer.
+À peine de quoi valoir l'appât. À ses amis, il pourra dire qu'il était plus gros.
+Un petit. Une saison de plus, et c'était une belle prise.
+Petit, mais il compte.
+Plus une promesse qu'un poisson.
+Les lutjans ont de sacrées mâchoires. Gare aux doigts près de l'hameçon.
+Les poissons-chats tâtent le fond avec leurs moustaches. L'eau trouble ne les gêne pas.
+Les anguilles, c'est du muscle et de la bave. En décrocher une est un combat à part.
+Le saumon nage à contre-courant. Est-ce de l'entêtement, ou connaît-il le chemin de chez lui ?
+La truite aime l'eau froide, claire et vive, et une ombre suffit à la faire fuir.
+La morue est une nourriture honnête : simple, bourrative, et elle se garde bien salée.
+Là où il y a un maquereau, il y a souvent tout un banc.
+Les thons sont taillés pour la vitesse. Celui-là n'a pas cessé de tirer.
+Du menu fretin. Une pleine poêlée fait tout de même un repas.
+Les homards ne mordent pas tant qu'ils s'accrochent et refusent de lâcher.
+Un calmar. Attention à l'encre.
+Les bars se défendent dur et sautent dès qu'ils le peuvent.
+Ceux-là s'en tiennent aux eaux calmes. Savent-ils quelque chose que les autres ignorent ?
+C'est au bout de la ligne qu'on mesure sa force.
+Tant que la ligne est à l'eau, rien d'autre n'est à décider.
+Depuis combien de temps suis-je là ?
+Une eau tranquille. Le temps de réfléchir.
+Qu'y a-t-il d'autre là-dessous ?
+Qui d'autre a lancé sa ligne depuis cet endroit ?
+Encore un lancer, ou retour sur la route ?
+Ce n'est pas un poisson. Quelqu'un le cherche peut-être.
+L'eau rend toutes sortes de choses.
+Ça traînait là-dessous depuis un moment.
+Ce n'est pas ce que je visais. Comment est-ce arrivé là-dessous ?
+Quelqu'un a laissé ça là. Comptait-on revenir ?
+Qui a rangé tout ça, et qu'est devenue cette personne ?
+Depuis combien de temps est-ce là ?
+Est-ce que ça appartient encore à quelqu'un ?
+Chaque couvercle fermé est une question.
+Ça valait le détour.
+Pourquoi laisser une chose pareille derrière soi ?
+Quelqu'un a dû le chercher.
+C'est remonté du fond. Qui l'a laissé tomber ?
+Une caisse au bout de la ligne. Que peut-il y avoir dedans ?
+Une caverne de feu juste sous Orgrimmar. Ceux d'en haut y pensent-ils parfois ?
+La Lame ardente a pris ses aises ici, avec toute une ville au-dessus de la tête.
+Les Défias ont fait d'une vieille mine un repaire, avec la place d'y loger un navire.
+Tant creuser, pour finir par abriter les Défias.
+Un druide est venu guérir la terre par le Rêve d'émeraude. Ces cavernes montrent ce qu'il en est advenu.
+Toute cette eau sous les Tarides si sèches. Pas étonnant qu'on ait cru que la guérison pouvait partir d'ici.
+Arugal a invoqué les worgens, et ils ont envahi ce donjon.
+Tout un château dans les Pins-Argentés, et les worgens y règnent.
+C'était jadis un temple d'Élune, avant que l'eau, et pire encore, ne le prennent.
+Le Marteau du crépuscule a choisi un temple englouti pour se réunir. Jamais un endroit gai.
+Une prison en plein Hurlevent, et les prisonniers s'en sont emparés.
+Étrange de penser que des rues bien ordinaires passent juste au-dessus.
+C'est ici que les gnomes ont perdu leur ville tout entière. Chaque machine brisée était l'ouvrage de quelqu'un.
+Les troggs sont montés des profondeurs, et ce qui devait les arrêter a empoisonné la ville.
+Ces ronces sont sacrées pour les hurans. De quoi avons-nous l'air, à entrer comme ça ?
+On raconte que ces ronces ont poussé là où est tombé le demi-dieu Agamaggan.
+Encore les ronces des hurans, et des morts qui remuent au milieu. Le Fléau est arrivé jusqu'ici.
+Quelqu'un relève les morts sur une terre sacrée pour les hurans.
+La Croisade écarlate s'est levée contre le Fléau. Quand s'est-elle mise à le voir en tout le monde ?
+Ces salles ont la grandeur d'une chapelle. Qu'y prêche-t-on à présent ?
+Les titans ont quitté ces lieux bien avant les royaumes d'aujourd'hui. Qui les a parcourus depuis ?
+Les nains fouillent ici pour apprendre d'où ils viennent.
+Les trolls Furie-des-sables ont tenu cette ville à travers plus de tempêtes de sable qu'on n'en a compté.
+Une cité troll en plein Tanaris, et le désert ne l'a toujours pas avalée.
+Ce lieu est sacré pour les centaures. Leur histoire a commencé là-dessous.
+Si le vieux récit dit vrai, tout centaure descend de Zaetar et de Theradras.
+Les Atal'ai ont élevé ce temple pour Hakkar. Ce n'est pas pour rien qu'il a sombré dans le marais.
+Le Vol vert a englouti ces lieux, et veille toujours dessus.
+Toute une cité sombrefer au cœur de la montagne. Combien de temps pour en apprendre tous les chemins ?
+Ici-bas, les Sombrefers répondent à Ragnaros, que ça leur plaise ou non.
+Des orcs et des dragons noirs, et tous veulent la même montagne.
+Là-haut, Rend Main-Noire se dit chef de guerre. Tous les orcs ne seraient pas d'accord.
+C'était jadis une cité des elfes de la nuit. Ogres et satyres squattent ce qu'il en reste.
+Tout ce savoir ancien, et voilà que les ogres ont un roi dans les ruines.
+Une école de nécromancie sous Caer Darrow. Qui s'inscrit à des leçons pareilles ?
+Ces terres appartenaient à la famille Barov. Qu'en dirait-elle aujourd'hui ?
+C'était une ville bien vivante. Arthas a fait en sorte qu'elle ne le soit plus jamais.
+Des quartiers brûlent encore. Certaines histoires ne finissent pas : elles couvent.
+Tout ce feu, et Ragnaros en son cœur.
+Un dragon noir ne cède pas son antre poliment.
+Une chose de moins tapie dans le noir.
+Que gardait-il donc, et pour qui ?
+Quelqu'un le regrettera-t-il ?
+Voilà la fin de son histoire. Comment a-t-elle commencé ?
+%s. Ça mérite qu'on regarde bien autour de soi.
+%s. Qui peut bien vivre ici, et s'y plaît-on ?
+%s. L'œil ouvert : chaque endroit a ses ennuis.
+%s. Quelles histoires raconte-t-on sur un endroit pareil ?
+« %s », c'est fait. Ce n'était pas une simple course.
+« %s », c'est terminé. Est-ce que ça valait ce que ça a coûté ?
+« %s », c'est fini. Quelqu'un passe une meilleure journée.
+« %s », c'est fait. Que vont devenir ces gens, maintenant ?
+« %s »
+Ça en fait %d comme celui-ci dans mon journal.
+Le premier de ce genre dans mon journal venait d'ici : %s.
+Mon plus lourd de ce genre reste celui de %s, pêché ici : %s.
+Ça fait %d comme celui-ci depuis mon arrivée au bord de cette eau.
+%d se sont échappés depuis que j'ai commencé ici. Pas celui-là.
+Prise numéro %d pour le journal.
+%s, %s.
+%s.
+Un nouveau pour mon journal.
+Mon meilleur jusqu'ici : %s.
+Ça fait %d trouvailles comme celle-ci depuis que je tiens le compte.
+%s est à terre.
+Encore %s. Ça fait %d fois.
+Ce combat, je le connais. Ça fait %d fois.
+%s. Mon journal compte %d prises d'ici.
+%s : %d tâches accomplies ici depuis que je tiens le compte.
+Commentaires de votre personnage
+de temps à autre, votre personnage a un mot sur une prise, un coffre, un boss de donjon, un lieu nouveau ou une quête terminée : à voix haute avec le parler de son peuple, ou une pensée discrète en mots simples. À l'écran uniquement, jamais dans la discussion ni en combat. La narration doit être activée
 %d absorbés
 Liste à droite
 Un au centre

@@ -10,19 +10,13 @@ local ns = ControllerCamHUD.ns            -- the HUD's own namespace: this file 
 
 ns.LevelGuides = {
     alchemy = {
-        { 1, 60, p = 118, s = 2330, n = 59, at = 1, r = { 2447, 1, 765, 1, 3371, 1 }, name = "Minor Healing Potion" },
-        { 60, 110, p = 858, s = 2337, n = 59, at = 55, r = { 118, 1, 2450, 1 }, name = "Lesser Healing Potion" },
-        { 110, 140, p = 929, s = 3447, n = 30, at = 110, r = { 2453, 1, 2450, 1, 3372, 1 }, name = "Healing Potion" },
         { 140, 155, p = 3385, s = 3173, n = 15, at = 120, r = { 785, 1, 3820, 1, 3371, 1 }, name = "Lesser Mana Potion" },
-        { 155, 185, p = 1710, s = 7181, n = 30, at = 155, r = { 3357, 1, 3356, 1, 3372, 1 }, name = "Greater Healing Potion" },
         { 185, 210, p = 8949, s = 11449, n = 25, at = 185, r = { 3820, 1, 3821, 1, 3372, 1 }, name = "Elixir of Agility" },
         { 210, 215, p = 8951, s = 11450, n = 10, at = 195, r = { 3355, 1, 3821, 1, 3372, 1 }, name = "Elixir of Greater Defense" },
-        { 215, 230, p = 3928, s = 11457, n = 15, at = 215, r = { 8838, 1, 3358, 1, 8925, 1 }, name = "Superior Healing Potion" },
         { 230, 231, p = 9149, s = 11459, n = 1, at = 225, r = { 3575, 4, 9262, 1, 8831, 4, 4625, 4 }, name = "Philosophers' Stone" },
         { 231, 250, p = 9154, s = 11460, n = 19, at = 230, r = { 8836, 1, 8925, 1 }, name = "Elixir of Detect Undead" },
         { 250, 265, p = 9187, s = 11467, n = 15, at = 240, r = { 8838, 1, 3821, 1, 8925, 1 }, name = "Elixir of Greater Agility" },
         { 265, 285, p = 13443, s = 17553, n = 20, at = 260, r = { 8838, 2, 8839, 2, 8925, 1 }, name = "Superior Mana Potion" },
-        { 285, 300, p = 13446, s = 17556, n = 18, at = 275, r = { 13464, 2, 13465, 1, 8925, 1 }, name = "Major Healing Potion" },
     },
     blacksmithing = {
         { 1, 30, p = 2862, s = 2660, n = 40, at = 1, r = { 2835, 1 }, name = "Rough Sharpening Stone" },

@@ -338,8 +338,116 @@ local function OpenMenu()
     return d
 end
 
+---------------------------------------------------------------------------
+-- The combined bags as they are laid out: every frame in the window and where it sits. For moving the icon that
+-- heads each bag's run of slots out of the grid: which frames those are is read here, not guessed. Read only.
+-- Taken while debug is on, a moment after the window opens (and by /cchud bagprobe), and kept in
+-- ControllerCamHUDDB.bagLayout, so it is still there after the window is closed and the game reloaded.
+---------------------------------------------------------------------------
+local Layout = { WINDOW = "ContainerFrameCombinedBags", MAX = 240, DEPTH = 4, SETTLE = 2 }
+ns.BagLayout = Layout
+
+-- Everything a method answers, each value only if the game lets us read it
+local function All(f, method, ...)
+    local fn = type(f) == "table" and f[method]
+    if type(fn) ~= "function" then return {} end
+    local got = { pcall(fn, f, ...) }
+    if not got[1] then return {} end
+    local out = {}
+    for i = 2, 8 do out[i - 1] = ns.Plain(got[i]) end
+    return out
+end
+
+local function Number(v) return type(v) == "number" and ("%.0f"):format(v) or "?" end
+
+-- What the parent calls a part: its own name, else the key it hangs from, else its place among its brothers
+local function PartName(parent, f, i)
+    local name = Call(f, "GetName")
+    if type(name) == "string" then return name end
+    for k, v in pairs(parent) do
+        if v == f and type(k) == "string" then return k end
+    end
+    return "#" .. i
+end
+
+local function Picture(f)
+    for _, key in ipairs({ "icon", "Icon", "IconTexture" }) do
+        local t = f[key]
+        if Object(t) then
+            local art = Call(t, "GetAtlas") or Call(t, "GetTexture")
+            if art then return tostring(art) end
+        end
+    end
+end
+
+local function Line(window, f, path)
+    local bits = { path, tostring(Call(f, "GetObjectType")) }
+    local left, top = Call(f, "GetLeft"), Call(f, "GetTop")
+    local wl, wt = Call(window, "GetLeft"), Call(window, "GetTop")
+    if type(left) == "number" and type(top) == "number" and type(wl) == "number" and type(wt) == "number" then
+        bits[#bits + 1] = "at " .. Number(left - wl) .. "," .. Number(wt - top)      -- right and down of its corner
+    end
+    bits[#bits + 1] = Number(Call(f, "GetWidth")) .. "x" .. Number(Call(f, "GetHeight"))
+    local p = All(f, "GetPoint", 1)
+    if p[1] then
+        local to = type(p[2]) == "table" and Name(p[2]) or tostring(p[2])
+        bits[#bits + 1] = ("%s>%s:%s %s,%s"):format(tostring(p[1]), to, tostring(p[3]), Number(p[4]), Number(p[5]))
+    end
+    if All(f, "IsProtected")[1] == true then bits[#bits + 1] = "protected" end
+    if Call(f, "IsShown") ~= true then bits[#bits + 1] = "hidden" end
+    for _, m in ipairs({ "GetBagID", "GetID" }) do
+        local v = Call(f, m)
+        if v ~= nil then bits[#bits + 1] = m .. "=" .. tostring(v) end
+    end
+    if type(f.BagSlotOnClick) == "function" then bits[#bits + 1] = "(a bag's button)" end
+    local art = Picture(f)
+    if art then bits[#bits + 1] = "art=" .. art end
+    return table.concat(bits, " ")
+end
+
+local function Walk(window, f, path, out, depth)
+    local kids = {}
+    if type(f.GetChildren) == "function" then
+        local ok, list = pcall(function() return { f:GetChildren() } end)
+        if ok then kids = list end
+    end
+    for i, c in ipairs(kids) do
+        if #out >= Layout.MAX then return end
+        if Object(c) and not Forbidden(c) then
+            local here = path .. PartName(f, c, i)
+            out[#out + 1] = Line(window, c, here)
+            -- (a button's own parts say nothing about where things sit)
+            local kind = Call(c, "GetObjectType")
+            if depth < Layout.DEPTH and kind ~= "Button" and kind ~= "ItemButton" and kind ~= "CheckButton" then
+                Walk(window, c, here .. ".", out, depth + 1)
+            end
+        end
+    end
+end
+
+function Layout.Read(window)
+    local out = { Line(window, window, "window") .. " parent=" .. Name(Call(window, "GetParent") or window) }
+    Walk(window, window, "", out, 1)
+    return out
+end
+
+-- One reading of each opening, once the game has had a moment to lay it out
+function Layout:Watch()
+    local window = rawget(_G, self.WINDOW)
+    if not Object(window) or Forbidden(window) or Call(window, "IsShown") ~= true then
+        self.looks = nil
+        return
+    end
+    self.looks = (self.looks or 0) + 1
+    if self.looks == self.SETTLE then self:Keep(window) end
+end
+
+function Layout:Keep(window)
+    ns.db.bagLayout = { when = date and date("%Y-%m-%d %H:%M:%S") or tostring(time()), lines = self.Read(window) }
+end
+
 function B:Start()
-    local out = { when = date and date("%Y-%m-%d %H:%M:%S") or tostring(time()), exists = {}, tables = {},
+    local out ={ when = date and date("%Y-%m-%d %H:%M:%S") or tostring(time()), exists = {}, tables = {},
                   windows = {}, legends = {}, cursor = {}, menus = {}, opened = {}, errors = {} }
     ns.db.nativeProbe = out
     self.out, self.left, self.since, self.had = out, self.SECONDS, 0, {}
@@ -378,6 +486,7 @@ end
 
 function B:Look()
     local out = self.out
+    Layout:Watch()
     for _, name in ipairs(self.WINDOWS) do
         local window = rawget(_G, name)
         if Object(window) and not Forbidden(window) and Call(window, "IsShown") == true then

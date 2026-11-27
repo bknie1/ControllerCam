@@ -125,11 +125,12 @@ for _, label in ipairs({
     "Seconds before chat fades", "Quest list: short objectives", "Gamepad bars put away while fishing",
     "Reduce animations", "Catches and camp buffs across the screen",
     "Quest progress in chat", "Flights: time and countdown", "Flights: a game on the way", "Reminder to drink water", "Water reminder every (minutes)",
-    "Hide repeated guild recruitment",
+    "Show each chat ad only once", "Hide chat ads from the first time", "Short channel names in chat",
     "Keep what your quests need", "Quest compass", "Quest compass: place",
     "Quest progress to your party",
     "Fades: gamepad bars", "Fades: minimap", "Fades: quest list", "Fades: damage meter", "Fades: experience bar",
     "Fades: buffs", "Fades: cooldown rows", "Aiming dot", "Narrative: characters in the windows",
+    "Character commentary", "Reload button by the game menu", "How names show in chat",
 }) do BASIC[label] = true end
 ns.BASIC_OPTIONS = BASIC
 
@@ -138,8 +139,8 @@ ns.BASIC_OPTIONS = BASIC
 -- by its label where it has none.)
 local LAYOUT = {
     { page = "General", groups = {
-        { "enabled", "always", "hideBlizzard", "debug" },
-        { head = "Narrative", "narrative" },
+        { "enabled", "always", "hideBlizzard", "menuReload", "debug" },
+        { head = "Narrative", "narrative", "commentary" },
         { head = "Water reminder", "hydrate", "hydrateEvery", "hydrateFlight" },
     } },
     { page = "Your frames", groups = {
@@ -196,15 +197,15 @@ local LAYOUT = {
           "xpScale", "skinchat", "skindamagemeter" },
     } },
     { page = "Chat and messages", groups = {
-        { head = "Chat window", "chat", "chatScale", "chatFade", "chatTime" },
-        { head = "Names in chat", "Class colours for names in chat", "chatInfo", "chatShort", "chatFirstName" },
-        { head = "Filters", "chatSpam", "chatRecruit" },
+        { head = "Chat window", "chat", "chatSize", "chatFade", "chatTime" },
+        { head = "Names in chat", "Class colours for names in chat", "chatInfo", "chatShort", "chatNames" },
+        { head = "Filters", "chatSpam", "chatRecruit", "chatAdsAll" },
         { head = "Error messages", "quietErrors", "quietNotReady" },
     } },
     { page = "Quests and map", groups = {
         { head = "Quest list", "questzone", "questSolo", "questNear", "questNearest", "questPlan", "questFocusNear",
           "questShort" },
-        { head = "Quest compass", "compass", "compassPlace", "compassCamera" },
+        { head = "Quest compass", "compass", "compassPlace" },
         { head = "Quest progress", "questProgress", "questParty", "questPartyAll" },
         { head = "Farm list", "farmList", "farmSide" },
         { head = "Map", "mapCoords" },

@@ -1318,6 +1318,18 @@ class ZoomViews(unittest.TestCase):
         got = self.env.run("return NS.ViewValues(NS.GetProfile('%s').values.%s)" % (pid, key))
         return [got[i] for i in range(1, 7)]
 
+    def test_a_little_offset_stays_until_you_are_really_in_first_person(self):
+        for zoom, offset in ((0, 0), (0.1, 0.125), (0.2, 0.25), (0.4, 0.5), (0.5, 0.5), (1, 0.5), (1.2, 0.5),
+                             (1.5, 0.75), (2, 1.5), (3, 1.5), (16, 0), (30, 0)):
+            self.at(zoom)
+            self.assertAlmostEqual(self.shoulder(), offset, 3, "at %s yards" % zoom)
+        ns = self.env.ns
+        lua = self.env.lua
+        curve = lambda *points: lua.table_from([lua.table_from(list(p)) for p in points])
+        self.assertAlmostEqual(ns.OffsetAt(curve((0, 0), (2, -1)), 0.5), -0.5)    # the other shoulder: that side
+        self.assertAlmostEqual(ns.OffsetAt(curve((0, 0), (2, 0.1)), 0.5), 0.1)    # never more than over the shoulder
+        self.assertEqual(ns.OffsetAt(curve((0, 0), (39, 0)), 0.5), 0)             # a centred camera stays centred
+
     def test_recommended_offset_and_focus_in_each_view(self):
         self.assertEqual(self.table("shoulderCurve"), [0, 1.5, 1.5, 1, 0, 0])
         self.assertEqual(self.table("focusCurve"), [0, 1, 1, 0.6, 0.3, 0])

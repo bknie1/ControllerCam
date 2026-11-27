@@ -555,6 +555,23 @@ function ns.ShoulderScale()
     return (db and db.formOffset[id]) or FORM_SCALE[id] or 1
 end
 
+-- Close in, the offset stays at least this far to the side until the camera is really in first person (the "first
+-- person" view reaches a yard out, and the offset used to be gone before you were there)
+ns.NEAR_OFFSET = 0.5
+ns.FIRST_PERSON = 0.4           -- yards: that least offset eases away over this last bit, so nothing snaps
+
+-- The offset a curve gives at a distance, with that least offset on the way in to first person: only where the
+-- curve has an offset over the shoulder to come down from, to that side, and never more than it has there
+function ns.OffsetAt(curve, zoom)
+    local value = ns.EvalCurve(curve, zoom)
+    local shoulder = ns.ZOOM_VIEWS[2].from
+    if zoom <= 0 or zoom >= shoulder then return value end
+    local there = ns.EvalCurve(curve, shoulder)
+    local least = math.min(ns.NEAR_OFFSET, math.abs(there)) * math.min(1, zoom / ns.FIRST_PERSON)
+    if math.abs(value) >= least then return value end
+    return there < 0 and -least or least
+end
+
 -- Everything the shoulder offset is multiplied by: your own overall strength, and the form you are in
 local function OffsetFactor()
     return ns.ShoulderScale() * ((db and db.offsetScale) or 1)
@@ -593,7 +610,7 @@ local function Resolve(profile, withZoom)
         elseif s.key == "shoulderCurve" then
             if theCurve then
                 local sign = flip and -1 or 1
-                Follow("test_cameraOverShoulder", function(z) return sign * ns.EvalCurve(theCurve, z) * OffsetFactor() end)
+                Follow("test_cameraOverShoulder", function(z) return sign * ns.OffsetAt(theCurve, z) * OffsetFactor() end)
                 for _, p in ipairs(theCurve) do if p[2] ~= 0 then needsMotion = true end end
             end
         elseif s.key == "focusCurve" then

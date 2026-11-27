@@ -116,11 +116,13 @@ Nenhum material no banco para retirar.
 Todos os materiais (%d)
 Depositar materiais
 Retirar materiais
+Escolher
+Fechar
 Retirada rápida
 tira do banco aquilo de que você já carrega um pouco (materiais, poções, comida), para completar suas bolsas
 Depósito rápido
 guarda no banco o que ele já tem um pouco, e o que você marcou para ele
-materiais de criação para dentro ou fora do banco: todos de uma vez ou um tipo por vez (metal e pedra, tecido, ervas...)
+materiais de criação para dentro ou fora do banco: todos de uma vez ou um tipo por vez (metal e pedra, tecido, ervas...). Com controle: cima e baixo escolhem, A confirma, B fecha; segurar R3 fora de um item também abre isto
 Abra um vendedor primeiro.
 Venda esperta
 vende o que um vendedor paga melhor: lixo, e o que a casa de leilões não faria melhor (listado e confirmado antes); o que vale mais na casa de leilões ou ainda serve às suas profissões fica
@@ -386,7 +388,6 @@ Voltar
 Provar
 Mudar marca
 Mais
-Fechar
 Não em combate.
 Ações do item: experimentar, marcar, ver detalhes ou destruir o item apontado
 Segure R3 sobre um item para ver as ações
@@ -583,24 +584,32 @@ Segundos até o chat esmaecer
 quanto tempo o texto do chat fica antes de esmaecer
 Coordenadas no mapa
 suas coordenadas abaixo do mapa-múndi
+Botão de recarregar junto ao menu do jogo
+enquanto o menu do jogo (Esc) está aberto, há abaixo dele um botão do próprio HUD para recarregar a interface; o menu fica como é
 Ocultar as mensagens de erro vermelhas do jogo
 "O feitiço ainda não está pronto", "Mana insuficiente" e afins no meio da tela ficam ocultos
 Ocultar os erros de “ainda não está pronto”
 “O feitiço ainda não está pronto”, “A habilidade ainda não está pronta” e “O item ainda não está pronto” ficam fora do centro da tela; as outras mensagens vermelhas do jogo continuam aparecendo
+Nome Sobrenome
+Nome S.
+N.S.
+N. Sobrenome
 %d mensagens ocultadas como spam desde que você entrou.
 %d delas eram recrutamento de guilda repetido.
 Ícone de classe e nível no chat
-o ícone de classe e o nível de um jogador entre colchetes na frente do nome, quando o jogo nos deixa conhecê-los. Desligado por padrão: reescreve as linhas do chat do jogo, e em campos de batalha e instâncias isso dispara o aviso do jogo sobre erros de addons
+o ícone de classe e o nível de um jogador entre colchetes na frente do nome, quando o jogo nos deixa conhecê-los. Reescreve as linhas do chat do jogo: se o jogo avisar de erros de addons em um campo de batalha ou instância, desligue
 Nomes de canal curtos no bate-papo
-o canal na frente de uma linha, abreviado: [P] grupo, [PL] líder do grupo, [G] guilda, [O] oficial, [R] raide, [RL] líder da raide, [I] instância, e um canal numerado pelo seu número, [1]. Desligado por padrão: reescreve as linhas do chat do jogo, e em campos de batalha e instâncias isso dispara o aviso do jogo sobre erros de addons
-Só o primeiro nome no chat
-um nome com sobrenome aparece só com o primeiro nome (Jory Spleeneater fala como Jory); um sussurro ou clique direito nele ainda chega ao nome completo. Desligado por padrão: reescreve as linhas do chat do jogo, e em campos de batalha e instâncias isso dispara o aviso do jogo sobre erros de addons
+o canal na frente de uma linha, abreviado: [P] grupo, [PL] líder do grupo, [G] guilda, [O] oficial, [R] raide, [RL] líder da raide, [I] instância, e um canal numerado pelo número e a inicial: [1.G] General, [2.T] Trade, [3.D] LocalDefense. Reescreve as linhas do chat do jogo: se o jogo avisar de erros de addons em um campo de batalha ou instância, desligue
+Como os nomes aparecem no chat
+um nome com sobrenome como Nome Sobrenome, Nome S. (Jory Spleeneater como Jory S.), N.S. (J.S.) ou N. Sobrenome (J. Spleeneater); um nome sem sobrenome aparece como é. Sussurrar ou clicar com o botão direito ainda alcança o nome inteiro. Nomes abreviados reescrevem as linhas do chat: se o jogo avisar de erros de addons em um campo de batalha ou instância, escolha Nome Sobrenome
 Tamanho do texto do chat
-o tamanho do texto nas janelas de chat, como proporção do tamanho próprio do jogo (a configuração do jogo fica como está)
+o tamanho do texto das janelas de chat, em pontos: 20 serve para uma TV do outro lado da sala (com nomes abreviados, 22 também), 0 mantém o tamanho do jogo (a configuração do jogo não é alterada)
 Ocultar vendedores de ouro e anúncios repetidos
 mensagens que vendem ouro ou serviços com um endereço web, e a mesma mensagem repetida por um jogador, são ocultadas (nunca do seu grupo, guilda ou amigos)
-Ocultar recrutamento de guilda repetido
-nos canais públicos a mensagem de recrutamento de uma guilda é mostrada uma vez; a mesma do mesmo jogador, ou uma quase igual, em 15 minutos é ocultada (nunca do seu grupo, guilda ou amigos)
+Mostrar cada anúncio do chat só uma vez
+nos canais públicos, o recrutamento de guilda e os anúncios de venda, compra e serviços aparecem na primeira vez e não voltam até você entrar de novo ou recarregar. Um anúncio quase igual palavra por palavra conta como o mesmo; outro do mesmo vendedor ainda aparece (nunca ocultos os do seu grupo, guilda ou amigos)
+Ocultar anúncios do chat desde a primeira vez
+o recrutamento de guilda e os anúncios de venda, compra e serviços dos canais públicos nunca aparecem, nem uma vez. Procurar grupo não é anúncio (seu grupo, sua guilda e seus amigos nunca são ocultados)
 lista as mensagens do chat ocultadas como spam recentemente
 Um voo é um bom momento para isso.
 Você está jogando há %s.
@@ -953,7 +962,6 @@ Negociar
 Os botões do controle voltam após o combate.
 %s ou %s: de volta às bolsas
 Segure para destruir
-Escolher
 Todas as bolsas
 Só esta bolsa
 Colocar
@@ -1031,6 +1039,7 @@ Modo de pesca: desligado.
 Pesca: %s para lançar
 Sem isca: %s duas vezes para usar %s
 %s para guardar a vara
+%s para voltar a pescar
 Modo pesca: %s para lançar a linha, e de novo para fisgar o peixe quando a boia mexer.
 %s para fisgar, %s para lançar de novo
 O modo de pesca precisa de uma vara de pescar nas suas mãos.
@@ -1120,17 +1129,23 @@ Você vai precisar das duas mãos, e talvez de um amigo.
 Novo no seu diário de pesca: %s, %s.
 Novo no seu diário de pesca: %s.
 Seu %s mais pesado até agora: %s (era %s).
+Escaparam
 Isca %s
 Sem isca
 Pegos %d
-Escaparam %d
 Um curioso: +%d%%
 Mantenha sua isca ao lado do peixe
+%s: voltar ao jogo
+%s: um jogo enquanto a boia está na água
 Próxima captura +%d%%
 Segure %s: a isca corre pela linha
 %d seguidos
+%s: guardar
+O jogo de pesca está desligado: /cchud fishgame on
+O jogo de pesca é jogado com uma vara de pesca nas mãos.
 Um jogo enquanto a boia está na água
-jogado na barra de lançamento enquanto a linha está na água: segure um gatilho e sua isca corre pela linha, solte e ela volta à deriva; mantenha-a junto à sombra do peixe. Quanto melhor você jogar, mais pesado o peso inventado da próxima captura. Não ocupa nenhum botão e nunca mexe no seu lançamento nem na captura
+com uma vara de pesca nas mãos, um pequeno jogo é oferecido na barra de lançamento, e um botão o inicia (só esse botão é ocupado, nunca um que a sua pesca use): segure um gatilho e sua isca corre pela linha, solte e ela volta à deriva; mantenha-a junto à sombra do peixe. Quanto melhor você jogar, mais pesado o peso inventado da próxima captura. O mesmo botão o guarda. Nunca mexe no seu lançamento nem na captura
+com uma vara de pesca nas mãos: iniciar o jogo de pesca, ou guardá-lo e trazê-lo de volta
 %d pegos, %d tipos, %d escaparam
 Mais pesado: %s, %s
 Peixes
@@ -1179,20 +1194,60 @@ um grifo, uma mantícora ou um morcego (o que o mestre de voo lhe deu) plana pel
 Voos: o tempo onde você pousa
 ao pousar, o chat diz como é o ar onde você chegou, como o lugar costuma ser (quente e úmido em Selva do Espinhaço, neve sob os pés em Dun Morogh), e a hora do dia
 listar as rotas de voo cujo tempo é conhecido
+alcance da rede de %d para %d
+de %d para %d redes de uma vez
+de %d para %d vidas
+Seu recorde nesta rota!
 Ao chão! +%d
-Batida: a sequência acaba
-%s bater as asas  ·  desvie das copas das árvores e dos zepelins
-%s pegue os cavaleiros com a rede por ouro de voo  ·  %s grande altitude
+Abatido! %d de ouro não guardado perdido
+Abatido!
+Bateu! Vidas restantes: %d
+Preso na rede! Vidas restantes: %d
+Chamuscado! Vidas restantes: %d
+Rodada %d
+%s está no máximo
+Faltam %d de ouro de voo para isso
+%s %d: %s
+Um zepelim do seu lado: mantenha as redes deles longe dele!
+O zepelim deles: derrube-o com a rede antes que ele pegue você!
+Um draco! Desvie do fogo dele e use a rede para espantá-lo
+Rodada %d concluída: %d de ouro guardado
+O draco vai embora voando
+Escoltado em segurança: +%d
+Conseguiu passar, enroscado
+O zepelim deles vai embora
+Uma rede no zepelim do seu lado
+O zepelim deles caiu! +%d
+O draco foge! +%d
+%s bater as asas  ·  desvie de copas das árvores, zepelins, redes e fogo
+%s pegue cavaleiros com a rede por ouro de voo  ·  %s grande altitude
+Conclua uma rodada para guardar o ouro dela: abatido, ele se perde  ·  %s %s melhorias
+%s %s %d: %s, %d de ouro
+%s próxima
+%d de ouro para gastar
 %d de ouro de voo
+Abatido na rodada %d com %d de ouro de voo
+%s voar de novo desde a rodada 1
 %s bater as asas
 %s rede
 %s grande altitude
-%s: voltar ao jogo (%d de ouro de voo)
 %s: um jogo no caminho
+recorde nesta rota: %d
+%d de ouro de voo para melhorias
+%s: voltar ao jogo (%d de ouro de voo)
 O jogo de voo está desligado: /cchud flightgame on
 O jogo de voo é jogado durante um voo.
 Jogo de voo: jogar / grande altitude
+Jogo de voo: ganho %d, gasto %d, perdido %d, %d para gastar.
+Nenhuma rota jogada ainda.
+Rede mais larga
+pega cavaleiros de mais longe
+Recarga rápida
+dispare de novo mais cedo, e uma rede a mais no ar
+Arreio grosso
+uma vida a mais em cada partida
 num voo: iniciar o jogo de voo, ou levá-lo à grande altitude e de volta
+o jogo de voo: seu recorde em cada rota, seu ouro de voo e suas melhorias
 Voos cinematográficos: a câmera gira ao seu redor
 no filme, a câmera gira devagar ao redor de você e da sua montaria, uma volta inteira em cerca de um minuto e meio, e volta para trás de você antes do pouso. Desligado: uma cena parada
 Offline
@@ -1490,6 +1545,8 @@ Paciência. A Mãe Terra provê.
 Ei, o que temos aqui, mano?
 Que bagunça. Indigno.
 Tempo é dinheiro. Vamos contar.
+Que desordem. Assim não dá.
+Pesado demais. O vento gosta de quem viaja leve.
 É, isso serve.
 Graças a Elune.
 A Luz provê.
@@ -1497,6 +1554,8 @@ Hrm. Bom o bastante.
 Hm. Dá para lutar.
 Viajando leve. Bom.
 Aceitável. Por pouco.
+Tudo catalogado. Bom.
+Leve o bastante para o vento. Bom.
 Nem um espaço sobrando. O lixo renderia %s: vender abre espaço.
 Nem um espaço sobrando. O que não vou usar na estrada pode esperar no banco.
 Lixo: %d, vale %s aqui. X vende o que escolhi; Venda esperta leva tudo.
@@ -1536,8 +1595,244 @@ Peixes daqui que ainda não pesquei: %d. Continue lançando.
 Já pesquei todo peixe desta água. Para outro lugar, então.
 Nada pescado ainda. O primeiro peixe de cada água vai aqui.
 Espécies pescadas: %d. Cada água esconde mais algumas: o painel de pesca mostra um ? para cada uma que não peguei lá.
+Espécies pescadas: %d. Cada água tem os seus próprios peixes.
 Descansado junto ao fogo: os próximos %d de experiência de abates valem o dobro.
 Nenhum descanso acumulado. Uma noite numa estalagem ou numa cidade, e os abates dão o dobro de experiência por um tempo.
+Ora, ora, o que temos aqui?
+Pela Luz, mais um novo!
+Och, e tu, o que és?
+Opa, um achado novo!
+Uuh! Um espécime novo!
+Fascinante! Vem com manual?
+Pela luz de Eluna, o que é você?
+As profundezas ainda têm o que me mostrar.
+A Luz me mostra algo novo!
+Ah! Ainda não nos conhecíamos, pequenino.
+Hrm. Esse eu não conheço.
+Ora, ora. Um recém-chegado.
+Ah, um novo amigo! Bem-vindo, bem-vindo.
+Todo lago guarda uma surpresa.
+Rá! Um inimigo novo. Uma luta curta.
+Espíritos, que bicho é esse?
+Arrancado das profundezas. Conheço a sensação.
+Mais um novo. Calma, estar morto não é tão ruim.
+Um rosto novo saído da água. Saudações, pequenino.
+A Mãe Terra ainda tem coisas para me mostrar.
+Nunca vi um igual a tu no meu anzol, mon!
+O que os loa tão me mandando agora?
+Oh? Algo que eu nunca tinha visto.
+Que exótico. E que molhado.
+Mercadoria nova! Quanto será que rende?
+Nunca vi um desses. Ninguém precisa saber.
+Sem registro, até agora. Vou corrigir isso.
+Um espécime novo. Os arquivos vão querer.
+Algo que ainda não conheço. Os ventos continuam ensinando.
+O vento me guiou até a água certa.
+Isso alimentava a aldeia inteira!
+Isso é digno da mesa do rei!
+Och, olha só o tamanho disso!
+Pela forja, essa é peça de museu!
+Notável! Minha balança não foi feita para isso!
+Novo recorde! Vou precisar de uma rede maior!
+A luz de Eluna me sorri.
+Uma criatura magnífica. Claro que veio até mim.
+Pelos naarus, é magnífico!
+Um grande presente. Dou graças.
+Caramba, que monstro!
+Isso sim é uma pescaria.
+Ho ho! Esse sozinho já é um banquete!
+Tenha paciência e veja o que vem!
+Um adversário à altura!
+Lutou com honra. Vai nos alimentar bem.
+Bem. Quase senti alguma coisa.
+Olha só. Alguma coisa estava prosperando lá embaixo.
+A Mãe Terra está generosa hoje.
+Isso merece um cachimbo sossegado de botão-da-paz.
+Uou, mon! É grandão demais!
+Os loa tão generosos. Vão querer algo de volta.
+Isso sim está à minha altura.
+Magnífico. Naturalmente.
+Tchi-tchim! Olha o tamanho disso!
+E quando eu contar, vai ser o dobro do tamanho!
+Excepcional. E nenhum espírito precisou me dar.
+Notável. Nossos eruditos teriam inveja.
+Um grande presente! Por este fico devendo ao vento.
+Vejam só! Uma dívida que pago com gosto.
+E assim se acaba!
+A Luz está conosco!
+Rá! Pro chão, e fica aí!
+Isso vale uma rodada de cerveja!
+Hipótese confirmada: nós vencemos!
+Teste concluído! Quase sem explosões!
+A luz de Eluna te julgou.
+Está feito. Nunca houve dúvida de verdade.
+A Luz prevalece!
+Acabou. Que não incomode mais ninguém.
+Desta vez, fica no chão.
+Fim da caçada.
+Boa luta! E então, quem está com fome?
+Solte o ar. Acabou.
+Vitória! Lok'tar!
+Você lutou bem. Morra com honra.
+Fique morto. Alguns de nós não puderam.
+Bem-vindo ao outro lado. Com o cheiro a gente se acostuma.
+Agora caminhe com os ancestrais.
+Está feito. Que a terra descanse.
+Fica aí, mon, e leva teu juju ruim contigo!
+Os loa viram tudo. Tomara que tenham gostado.
+Impecável. Como esperado.
+Que cansativo. O próximo?
+Rá! Vocês VIRAM isso?
+Pacote pequeno, final grandioso!
+Perícia e estudo. Não precisamos de mais nada.
+Mais uma prova do que podemos fazer por conta própria.
+Os ventos estavam conosco. Devemos isso a eles.
+Está feito. Deem ao vento o que lhe é devido.
+Pela Luz, olha só isso!
+Com isso a gente atravessa o inverno!
+Och, isso sim é um tesourinho!
+Opa, valeu a pena cavar!
+Uuh, o que tem dentro? O que tem dentro?
+Uma caixa surpresa! Minhas favoritas!
+O que outros perdem, Eluna revela.
+Bem escondido. Mas não o bastante.
+Uma bênção inesperada!
+A perda de alguém. Que tenha bom uso.
+Hrm. Esse eu farejei de longe.
+Vamos ver o que valia a pena esconder.
+Uh, um presente! Para mim?
+Toda caixa guarda uma história. Algumas guardam petiscos.
+Espólio! Bom.
+Pegue. Quem deixou não soube guardar.
+O antigo dono não está reclamando.
+Um presente dos queridos falecidos. Não vou recusar.
+Levemos só o que precisamos.
+Que quem deixou isto esteja em paz.
+Uuh, que brilho! Tomara que não teja amaldiçoado, mon.
+Ninguém larga tesouro de graça. Fica de olho nas costas.
+Enfim, algo de bom gosto.
+Empoeirado. Mesmo assim, fico com ele.
+Bolada! Quer dizer... um achado bem modesto.
+Taxa de quem achou: tudo!
+Perdido por outros. Recuperado por quem sabe olhar.
+Vejamos o que buscadores menores deixaram passar.
+O vento guia, e vejam o que há ali!
+Um presente do caminho. Lembre-se de dar algo em troca.
+Bom lembrar de onde veio.
+Mais uma página para o diário.
+Pesado para a espécie. Esse andou comendo bem.
+Um grandão. Discutiu como se deve.
+Não se vê muito desse tamanho.
+Meus braços sentiram esse.
+Mal valeu a isca. Para os amigos, pode dizer que era maior.
+Um pequeno. Mais uma temporada e seria uma bela pesca.
+Pequeno, mas conta.
+Mais promessa que peixe.
+Os pargos têm mandíbulas de respeito. Cuidado com os dedos no anzol.
+Os bagres tateiam o fundo com os bigodes. Água barrenta não atrapalha.
+Enguias são só músculo e gosma. Tirar uma do anzol é outra luta.
+O salmão nada contra a correnteza. É teimosia, ou ele sabe o caminho de casa?
+A truta gosta de água fria, limpa e corrente, e se assusta com uma sombra.
+Bacalhau é comida honesta: simples, sustenta e salgado dura muito.
+Onde há uma cavala, geralmente há um cardume.
+Os atuns são feitos para a velocidade. Esse não parou de puxar.
+Peixe miúdo. Uma frigideira cheia ainda dá uma refeição.
+Lagostas, mais do que morder a isca, se agarram e não soltam.
+Uma lula. Cuidado com a tinta.
+Os robalos brigam duro e saltam quando podem.
+Esses ficam em água calma. Será que sabem algo que os outros não sabem?
+A força dele se mede na ponta da linha.
+Enquanto a linha está na água, não há mais nada a decidir.
+Há quanto tempo estou aqui de pé?
+Água calma. Tempo para pensar.
+O que mais será que há lá embaixo?
+Quem mais já lançou a linha deste mesmo lugar?
+Mais um arremesso, ou de volta à estrada?
+Não é peixe. Alguém pode estar sentindo falta.
+A água devolve de tudo.
+Isso estava lá embaixo havia um tempo.
+Não era o que eu procurava. Como foi parar lá embaixo?
+Alguém deixou isto para trás. Pretendia voltar?
+Quem guardou isto, e o que foi feito dessa pessoa?
+Há quanto tempo isto está aqui?
+Será que ainda pertence a alguém?
+Toda tampa fechada é uma pergunta.
+Valeu a parada.
+Por que alguém largaria uma coisa dessas?
+Alguém deve ter sentido falta disto.
+Isso subiu lá do fundo. Quem terá deixado cair?
+Uma caixa na linha. O que será que tem dentro?
+Uma caverna de fogo bem debaixo de Orgrimmar. Será que quem vive em cima pensa nisso?
+A Lâmina Ardente se instalou aqui embaixo, com uma cidade inteira sobre a cabeça.
+Os Défias fizeram de uma mina velha um esconderijo, com espaço para um navio.
+Tanta escavação, para acabar abrigando os Défias.
+Um druida veio curar a terra por meio do Sonho Esmeralda. Estas cavernas mostram no que deu.
+Toda esta água sob os secos Sertões. Não admira que alguém achasse que a cura podia começar aqui.
+Arugal invocou os worgens, e eles tomaram esta fortaleza.
+Uma fortaleza inteira em Pinhaprata, e quem manda são os worgens.
+Isto já foi um templo de Eluna, antes que a água e coisas piores o tomassem.
+O Martelo do Crepúsculo escolheu um templo afundado para se reunir. Nunca é um lugar alegre.
+Uma prisão no meio de Ventobravo, e os presos tomaram conta dela.
+Estranho pensar que logo acima há ruas bem comuns.
+Aqui os gnomos perderam a cidade inteira. Cada máquina quebrada foi o trabalho de alguém.
+Os troggs subiram das profundezas, e o que devia detê-los envenenou a cidade.
+Para os javatuscos, estes espinhos são sagrados. O que devem pensar de nós, entrando assim?
+Contam que estes espinhos cresceram onde o semideus Agamaggan caiu.
+Outra vez espinhos dos javatuscos, e mortos se mexendo entre eles. O Flagelo chegou até aqui.
+Alguém andou erguendo os mortos em chão sagrado para os javatuscos.
+A Cruzada Escarlate surgiu para combater o Flagelo. Quando passou a vê-lo em todo mundo?
+Estes salões são grandiosos como qualquer capela. O que se prega neles agora?
+Os titãs deixaram este lugar muito antes dos reinos de hoje. Quem passou por aqui desde então?
+Os anões escavam aqui em busca de respostas sobre sua origem.
+Os trolls Fúria da Areia mantêm esta cidade há mais tempestades de areia do que se pode contar.
+Uma cidade troll em pleno Tanaris, e o deserto ainda não a engoliu.
+Para os centauros, este lugar é sagrado. A história deles começou aqui embaixo.
+Se a velha lenda for verdadeira, todo centauro descende de Zaetar e Theradras.
+Os Atal'ai ergueram este templo para Hakkar. Não foi à toa que afundou no pântano.
+A revoada verde afundou este lugar e ainda o vigia.
+Uma cidade Ferro Negro inteira dentro da montanha. Quanto tempo leva para aprender todos os caminhos?
+Aqui embaixo os Ferro Negro respondem a Ragnaros, gostem ou não.
+Orcs e dragões negros, todos querendo a mesma montanha.
+Aqui em cima, Rend Mão Negra se diz Chefe Guerreiro. Nem todo orc concordaria.
+Isto já foi uma cidade dos elfos noturnos. No que sobrou, se amontoam ogros e sátiros.
+Tanto saber antigo, e agora os ogros têm um rei nas ruínas.
+Uma escola de necromancia sob Caer Darrow. Quem se matricula em aulas assim?
+Estas terras foram da família Barov. O que ela diria delas agora?
+Isto já foi uma cidade viva. Arthas cuidou para que nunca mais fosse.
+Partes da cidade ainda ardem. Há histórias que não acabam: ficam em brasa.
+Todo este fogo, e Ragnaros no coração dele.
+Um dragão negro não entrega o covil por gentileza.
+Uma coisa a menos à espreita no escuro.
+O que será que guardava, e para quem?
+Alguém vai sentir falta?
+Aqui termina a história dele. Como será que começou?
+%s. Vale a pena olhar bem em volta.
+%s. Quem será que chama isto de lar, e o que acha daqui?
+%s. Olho vivo: cada lugar tem seus problemas.
+%s. Que histórias contam de um lugar assim?
+“%s”, feito. Esse não foi um simples recado.
+“%s” está concluída. Valeu o que custou?
+“%s”, terminada. O dia de alguém ficou melhor.
+“%s”, feito. O que será deles agora?
+“%s”
+Com este são %d iguais no meu diário.
+O primeiro destes no meu diário veio daqui: %s.
+O mais pesado destes que tenho ainda é o de %s, pescado aqui: %s.
+Já são %d destes desde que cheguei a estas águas.
+%d escaparam desde que comecei aqui. Este não.
+Captura número %d para o diário.
+%s, %s.
+%s.
+Um novo para o meu diário.
+Meu melhor até agora era %s.
+Já são %d achados assim desde que comecei a contar.
+%s caiu.
+%s outra vez. Com esta são %d vezes.
+Essa luta eu conheço. Com esta são %d vezes.
+%s. Meu diário tem %d capturas daqui.
+%s: %d tarefas feitas aqui desde que comecei a contar.
+Comentários do seu personagem
+de vez em quando seu personagem tem algo a dizer sobre uma captura, um baú, um chefe de masmorra, um lugar novo ou uma missão concluída: em voz alta no jeito de falar do seu povo, ou num pensamento quieto em palavras simples. Só na tela, nunca no bate-papo e nunca em combate. Precisa da narrativa ligada
 %d absorvido
 Lista à direita
 Um no centro

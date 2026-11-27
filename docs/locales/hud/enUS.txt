@@ -116,11 +116,13 @@ No materials in the bank to take out.
 All materials (%d)
 Deposit materials
 Withdraw materials
+Choose
+Close
 Quick Withdraw
 take out of the bank what you already carry some of (materials, potions, food), to top your bags up
 Quick Deposit
 put in the bank what it already holds some of, and what you marked for it
-crafting materials in or out of the bank: all of them, or one kind at a time (metal and stone, cloth, herbs...)
+crafting materials in or out of the bank: all of them, or one kind at a time (metal and stone, cloth, herbs...). With a controller: up and down choose, A takes it, B closes; holding R3 away from an item opens this too
 Open a vendor first.
 Smart sell
 sell what a vendor pays best for: junk, and what the auction house would not do better with (listed and confirmed first); what is worth more at the auction house or still needed by your professions stays
@@ -386,7 +388,6 @@ Back
 Try on
 Change mark
 More
-Close
 Not in a fight.
 Item actions: try on, mark, details or destroy the item you point at
 Hold R3 on an item for its actions
@@ -583,24 +584,32 @@ Seconds before chat fades
 how long chat text stays before it fades
 Coordinates on the map
 your coordinates under the world map
+Reload button by the game menu
+while the game's menu (Escape) is open, a Reload UI button of the HUD's own sits under it; the menu itself is left as it is
 Hide the game's red error messages
 Spell is not ready yet, Not enough mana and the like in the middle of the screen are kept out of sight
 Hide the not-ready-yet errors
 Spell is not ready yet, Ability is not ready yet and Item is not ready yet stay out of the middle of the screen; the game's other red messages still show
+First Last
+First L.
+F.L.
+F. Last
 %d messages hidden as spam since you logged in.
 %d of them were repeated guild recruitment.
 Class icon and level in chat
-a player's class icon and level in brackets in front of their name, when the game lets us know them. Off by default: it rewrites the game's chat lines, and in battlegrounds and instances that sets off the game's warning about addon errors
+a player's class icon and level in brackets in front of their name, when the game lets us know them. It rewrites the game's chat lines: if the game warns about addon errors in a battleground or instance, switch it off
 Short channel names in chat
-the channel in front of a line, shortened: [P] party, [PL] party leader, [G] guild, [O] officer, [R] raid, [RL] raid leader, [I] instance, and a numbered channel by its number, [1]. Off by default: it rewrites the game's chat lines, and in battlegrounds and instances that sets off the game's warning about addon errors
-First names only in chat
-a name with a surname shows as the first name alone (Jory Spleeneater says it as Jory); a whisper or a right-click on it still reaches the whole name. Off by default: it rewrites the game's chat lines, and in battlegrounds and instances that sets off the game's warning about addon errors
+the channel in front of a line, shortened: [P] party, [PL] party leader, [G] guild, [O] officer, [R] raid, [RL] raid leader, [I] instance, and a numbered channel by its number and first letter: [1.G] General, [2.T] Trade, [3.D] LocalDefense. It rewrites the game's chat lines: if the game warns about addon errors in a battleground or instance, switch it off
+How names show in chat
+a name with a surname as First Last, First L. (Jory Spleeneater as Jory S.), F.L. (J.S.) or F. Last (J. Spleeneater); one without a surname shows as it is. A whisper or a right-click still reaches the whole name. Shortened names rewrite the game's chat lines: if the game warns about addon errors in a battleground or instance, choose First Last
 Chat text size
-the size of the text in the chat windows, as a share of the game's own size (the game's own setting is left as it is)
+the size of the text in the chat windows, in points: 20 suits a TV across the room (22 works too with names shortened), 0 keeps the game's own size (the game's own setting is left as it is)
 Hide gold sellers and repeated adverts
 messages selling gold or services with a web address, and the same message repeated by one player, are hidden (never from your group, guild or friends)
-Hide repeated guild recruitment
-in public channels a guild's recruiting message is shown once; the same player's again, or one nearly the same, within 15 minutes is hidden (never from your group, guild or friends)
+Show each chat ad only once
+in public channels, guild recruitment and selling, buying and service ads show the first time and not again until you log in anew or reload. An ad nearly word for word counts as the same one; a different one from the same trader still shows (never hidden from your group, guild or friends)
+Hide chat ads from the first time
+guild recruitment and selling, buying and service ads in public channels are never shown, not even once. Looking for a group is not an ad (your group, guild and friends are never hidden)
 list the chat messages hidden as spam lately
 A flight is a good moment for it.
 You have played for %s.
@@ -953,7 +962,6 @@ Trade
 Controller buttons return after the fight.
 %s or %s: back to bags
 Hold to destroy
-Choose
 All bags
 Only this bag
 Put in
@@ -1031,6 +1039,7 @@ Fishing mode: off.
 Fishing: %s to cast
 No bait: %s twice to use %s
 %s to put the pole away
+%s to fish again
 Fishing mode: %s to cast your line, and again to hook the fish when the float bobs.
 %s to hook, %s to cast again
 Fishing mode needs a fishing pole in your hands.
@@ -1120,17 +1129,23 @@ You will want both hands, and perhaps a friend.
 New in your fish journal: %s, %s.
 New in your fish journal: %s.
 Your heaviest %s yet: %s (it was %s).
+Got away
 Bait %s
 No bait
 Caught %d
-Got away %d
 A curious one: +%d%%
 Keep your lure beside the fish
+%s: back to the game
+%s: a game while the float is out
 Next catch +%d%%
 Hold %s: the lure runs along the line
 %d in a row
+%s: put it away
+The fishing game is off: /cchud fishgame on
+The fishing game is played with a fishing pole in your hands.
 A game while the float is out
-played on the cast bar while your line is out: hold a trigger and your lure runs along the line, let go and it drifts back; keep it beside the shadow of the fish. The better you do, the heavier the made-up weight of your next catch. It takes no button and never touches your cast or your catch
+with a fishing pole in your hands a small game is offered on the cast bar, and one button starts it (only that button is taken, never one your fishing uses): hold a trigger and your lure runs along the line, let go and it drifts back; keep it beside the shadow of the fish. The better you do, the heavier the made-up weight of your next catch. The same button puts it away. It never touches your cast or your catch
+with a fishing pole in your hands: start the fishing game, or put it away and bring it back
 %d landed, %d kinds, %d got away
 Heaviest: %s, %s
 Fish
@@ -1179,20 +1194,60 @@ a gryphon, a wind rider or a bat (whichever the flight master gave you) glides a
 Flights: the weather where you land
 on landing, chat says what the air is like where you came down, as the place usually is (hot and humid in Stranglethorn, snow underfoot in Dun Morogh), and the time of day
 list the flight routes whose times are known
+net reach %d to %d
+%d to %d nets at once
+%d to %d lives
+Your best on this route!
 Grounded! +%d
-Bumped: the run ends
-%s flap  ·  dodge the treetops and zeppelins
-%s net the riders for flight gold  ·  %s high altitude
+Shot down! %d unbanked gold lost
+Shot down!
+Bumped! Lives left: %d
+Netted! Lives left: %d
+Scorched! Lives left: %d
+Round %d
+%s is fully upgraded
+%d more flight gold for that
+%s %d: %s
+Your side's zeppelin: keep their nets off it!
+Their zeppelin: net it down before it nets you!
+A drake! Dodge its fire, and net it to drive it off
+Round %d cleared: %d gold banked
+The drake flies off
+Seen safely across: +%d
+It made it across, tangled
+Their zeppelin sails off
+A net on your side's zeppelin
+Their zeppelin is down! +%d
+The drake flees! +%d
+%s flap  ·  dodge treetops, zeppelins, nets and fire
+%s net riders for flight gold  ·  %s high altitude
+Clear a round to bank its gold: shot down, it is lost  ·  %s %s upgrades
+%s %s %d: %s, %d gold
+%s next
+%d gold to spend
 %d flight gold
+Shot down in round %d with %d flight gold
+%s fly again from round 1
 %s flap
 %s net
 %s high altitude
-%s: back to the game (%d flight gold)
 %s: a game on the way
+best on this route: %d
+%d flight gold to spend on upgrades
+%s: back to the game (%d flight gold)
 The flight game is off: /cchud flightgame on
 The flight game is played on a flight.
 Flight game: play / high altitude
+Flight game: earned %d, spent %d, lost %d, %d to spend.
+No routes played yet.
+Wider net
+catches riders from further away
+Quick reload
+fire again sooner, and one more net in the air
+Thick harness
+one more life each run
 on a flight: start the flight game, or take it to high altitude and back
+the flight game: your best on each route, your flight gold and your upgrades
 Cinematic flights: the camera circles you
 on film, the camera circles slowly round you and your mount, a whole turn in about a minute and a half, and comes round behind you again before you land. Off: a still shot
 Offline
@@ -1490,6 +1545,8 @@ Patience. The Earth Mother provides.
 Ey, what we got here, mon?
 Such clutter. Unbecoming.
 Time is money. Let's count it.
+Disorder. This will not do.
+Too heavy. The wind likes a light traveller.
 Aye, that'll do.
 Elune be thanked.
 The Light provides.
@@ -1497,6 +1554,8 @@ Hrm. Good enough.
 Hm. Enough to fight with.
 Travelling light. Good.
 Acceptable. Barely.
+Everything catalogued. Good.
+Light enough for the wind. Good.
 Not a slot to spare. The junk would fetch %s: selling it makes room.
 Not a slot to spare. Anything I won't need on the road can wait in the bank.
 Junk: %d, worth %s here. X sells the one I've picked; Smart sell takes it all.
@@ -1536,8 +1595,244 @@ Fish here I haven't landed yet: %d. Keep casting.
 I've landed every fish this water has. Somewhere new, then.
 Nothing landed yet. The first fish of every water goes in here.
 Kinds landed: %d. Every water hides a few more: the fishing panel shows a ? for each I haven't caught there.
+Kinds landed: %d. Every water has fish of its own.
 Rested by the fire: the next %d experience from kills comes double.
 No rest saved up. A night at an inn or in a city, and kills give double experience for a while.
+Well now, what have we here?
+Light's grace, there's a new one!
+Och, now what're you, then?
+Aye, there's a new find!
+Ooh! A new specimen!
+Fascinating! Does it come with a manual?
+By Elune's light, what are you?
+The deep still has something to show me.
+The Light shows me something new!
+Ah! We have not met, little one.
+Hrm. Now that's one I don't know.
+Well, well. A newcomer.
+Ah, a new friend! Welcome, welcome.
+Every pond has a surprise.
+Hah! A new foe. A short fight.
+Spirits, what is this one?
+Dragged up from the deep. I know the feeling.
+A new one. Relax, being dead isn't so bad.
+A new face from the water. Greetings, little one.
+The Earth Mother still has things to show me.
+Ain't never seen ya kind on me hook, mon!
+What da loa be sendin' me now?
+Oh? Something I haven't seen.
+How exotic. And how damp.
+New merchandise! I wonder what it'll fetch.
+Never seen one. Nobody needs to know that.
+Unrecorded, until now. I shall correct that.
+A new specimen. The archives will want this.
+Something I don't know yet. The winds still teach.
+The wind led me to the right water.
+That'd feed the whole village!
+Now that's fit for the king's own table!
+Och, would ye look at the size o' that!
+By the forge, there's a find for the museum!
+Remarkable! My scales were not built for this!
+A new record! I'm going to need a bigger net!
+Elune's light falls kindly on me.
+A magnificent creature. Of course it came to me.
+By the Naaru, it is magnificent!
+A great gift. I am grateful.
+Blimey, that's a monster!
+Now that is a proper catch.
+Ho ho! That one is a feast all by itself!
+Be patient, and look what comes!
+A worthy opponent!
+It fought with honour. It will feed us well.
+Well. That almost made me feel something.
+Look at that. Something down there was thriving.
+The Earth Mother is generous today.
+That deserves a quiet pipe of peacebloom.
+Whoa, mon! Dat's a big one!
+Da loa be generous. Dey gonna want somethin' back.
+Now that is worthy of me.
+Magnificent. Naturally.
+Cha-ching! Look at the size of that!
+And when I tell it, it'll be twice as big!
+Exceptional. And no spirit had to hand it to me.
+Remarkable. Our scholars would envy this.
+A great gift! I owe the wind for this one.
+Look at that! A debt I'll gladly pay.
+And that's the end of that!
+The Light stands with us!
+Ha! Down ye go, and stay down!
+That's worth a round o' ale!
+Hypothesis confirmed: we win!
+Test complete! Hardly any explosions!
+Elune's light has judged you.
+It is done. It was never truly in doubt.
+The Light prevails!
+It is finished. May it trouble no one again.
+Stay down this time.
+Hunt's over.
+A fine fight! Now, who is hungry?
+Breathe out. It is over.
+Victory! Lok'tar!
+You fought well. Die with honour.
+Stay dead. Some of us didn't.
+Welcome to the other side. You get used to the smell.
+Walk with the ancestors now.
+It is done. Let the land rest.
+Stay down, mon, an' take ya bad juju wit' ya!
+Da loa seen dat. Hope dey liked it.
+Flawless. As expected.
+How tiresome. Next?
+Ha! Did you SEE that?
+Small package, big finish!
+Skill and study. We needed nothing else.
+More proof of what we can do on our own.
+The winds were with us. We owe them for it.
+It is done. Give the wind its due.
+Light's mercy, look at this!
+That'll help see us through the winter!
+Och, now there's a bit o' treasure!
+Aye, worth the diggin'!
+Ooh, what's inside? What's inside?
+A mystery box! My favourite kind!
+What others lose, Elune reveals.
+Well hidden. Not well enough.
+A blessing, unlooked for!
+Someone's loss. May it find good use.
+Hrm. Smelled that one coming.
+Let's see what was worth hiding.
+Ooh, a present! For me?
+Every box holds a story. Some hold snacks.
+Spoils! Good.
+Take it. Whoever left it could not keep it.
+The last owner isn't complaining.
+A gift from the dearly departed. Don't mind if I do.
+Let us take only what we need.
+May whoever left this be at peace.
+Ooh, shiny! Hope it ain't cursed, mon.
+Nobody leave loot for free. Watch ya back.
+At last, something with taste.
+Dusty. Still, I'll take it.
+Jackpot! I mean... a very modest find.
+Finder's fee: all of it!
+Lost to others. Recovered by those who look.
+Let's see what lesser seekers overlooked.
+The wind leads, and look what's there!
+A gift along the way. Remember to give something back.
+Worth remembering where it came from.
+Another page for the journal.
+Heavy for its kind. That one has been eating well.
+A big one. It put up a proper argument.
+You don't see many that size.
+My arms noticed that one.
+Barely worth the bait. It can tell its friends it was bigger.
+A little one. Given another season, it would have been a real catch.
+Small, but it counts.
+More promise than fish.
+Snappers have the jaws for the name. Mind your fingers on the hook.
+Catfish feel their way along the bottom with those whiskers. Muddy water is no trouble to them.
+Eels are all muscle and slime. Getting one off the hook is a fight of its own.
+Salmon swim against the current. Is that stubbornness, or knowing the way home?
+Trout like cold, clear, moving water, and they spook at a shadow.
+Cod is honest food: plain, filling, and it keeps well salted.
+Where there's one mackerel there's usually a shoal.
+Albacore are built for speed. That one never stopped pulling.
+Small fry. A pan full of them still makes a meal.
+Lobsters don't so much bite as hold on and refuse to let go.
+Squid. Mind the ink.
+Bass fight hard, and jump when they can.
+Sagefish keep to quiet water. Do they know something the others don't?
+Mightfish earns its name on the end of a line.
+While the line is out, nothing else needs deciding.
+How long have I been standing here?
+Quiet water. Time to think.
+I wonder what else is down there.
+Who else has stood on this spot with a line in the water?
+One more cast, or back to the road?
+Not a fish. Somebody may be missing that.
+The water gives back all sorts.
+That has been down there a while.
+Not what I was after. How did it get down there?
+Somebody left this behind. Did they mean to come back?
+Who packed this, and what happened to them?
+How long has this been sitting here?
+Does this still belong to anyone?
+Every closed lid is a question.
+That was worth stopping for.
+Why would anyone leave something like this behind?
+Somebody must have missed this.
+That came up from the bottom. Who dropped it?
+A box on a fishing line. What could be inside?
+A cavern of fire right under Orgrimmar. Do the people overhead ever think about it?
+The Searing Blade made themselves at home down here, with a whole city overhead.
+The Defias turned an old mine into a hideout, with room down here for a ship.
+All that digging, and it ends up sheltering the Defias.
+A druid came here to heal the land through the Emerald Dream. These caverns show how that went.
+All this water under the dry Barrens. No wonder someone thought healing could start here.
+Arugal summoned the worgen, and they overran this keep.
+A whole keep in Silverpine, and the worgen have the run of it.
+This was a temple to Elune once, before the water and worse things took it.
+The Twilight's Hammer picked a drowned temple to gather in. They never choose anywhere cheerful.
+A prison in the middle of Stormwind, and the prisoners took it over.
+Strange to think of ordinary city streets just above all that.
+The gnomes lost their whole city here. Every broken machine was somebody's work.
+Troggs came up from below, and what was meant to stop them poisoned the city.
+The quillboar hold these thorns sacred. How must we look to them, walking in like this?
+The story goes that these thorns grew where the demigod Agamaggan fell.
+Quillboar thorns again, with the dead stirring among them. The Scourge has found its way here.
+Someone has been raising the dead on ground the quillboar hold sacred.
+The Scarlet Crusade set out to fight the Scourge. When did they start seeing it in everyone?
+These halls are as grand as any chapel. What gets preached in them now?
+The titans left this place long before any of today's kingdoms. Who has been through it since?
+Dwarves have been digging here for answers about where they came from.
+The Sandfury trolls have held this city through more sandstorms than anyone has counted.
+A troll city out in Tanaris, and the desert still hasn't swallowed it.
+The centaur hold this place sacred. Their story began down here.
+If the old tale is true, every centaur descends from Zaetar and Theradras.
+The Atal'ai raised this temple for Hakkar. It went down into the swamp for good reason.
+The green dragonflight sank this place, and they're still keeping watch over it.
+A whole Dark Iron city inside the mountain. How long would it take to learn every road in it?
+The Dark Irons answer to Ragnaros down here, whether they like it or not.
+Orcs and black dragons, all wanting the same mountain.
+Rend Blackhand calls himself warchief up here. Not every orc would agree.
+This was a night elf city once. Ogres and satyrs squat in what's left.
+All that old learning, and now the ogres have a king in the ruins.
+A school for necromancy under Caer Darrow. Who signs up for lessons like these?
+This ground belonged to the Barov family once. What would they make of it now?
+This was a living city once. Arthas saw to it that it wouldn't be again.
+Parts of the city still burn. Some stories don't end, they smoulder.
+All this fire, and Ragnaros at the heart of it.
+A black dragon doesn't give up her lair politely.
+One less thing waiting in the dark.
+I wonder what it was guarding, and for whom.
+Will anyone miss it?
+That's the end of its story. How did it begin?
+%s. Worth a good look around.
+%s. I wonder who calls this home, and how they like it.
+%s. Eyes open: every place has its own trouble.
+%s. What stories do they tell about a place like this?
+“%s”, done. That one was no errand.
+“%s” is finished. Was it worth what it took?
+“%s”, finished. Someone's day just got better.
+“%s”, done. I wonder what happens to them now.
+“%s”
+That makes %d of these in my journal.
+My journal's first of these came from %s.
+My heaviest of these is still %s, landed at %s.
+That's %d of these since I got to this water.
+%d got away since I started here. This one didn't.
+Catch number %d for the journal.
+%s, %s.
+%s.
+A new one for my journal.
+My best before was %s.
+%d finds like this since I started keeping count.
+%s is down.
+%s again. That makes %d times.
+I know this fight. That makes %d times.
+%s. My journal has %d catches from here.
+%s: %d jobs done here since I started keeping count.
+Character commentary
+now and then your character has something to say about a catch, a chest, a dungeon boss, a new place or a quest done: out loud in your race's voice, or a quiet thought in plain words. On screen only, never in chat, and never in a fight. It needs the narrative switched on
 %d absorbed
 Feed on the right
 One in the middle

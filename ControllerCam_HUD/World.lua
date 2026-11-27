@@ -51,6 +51,55 @@ function W:ApplyChat(want)
     end
 end
 
+ns.RegisterSetting({
+    key = "menuReload", kind = "boolean", default = true, command = "menureload", section = "General",
+    label = "Reload button by the game menu",
+    tip = "while the game's menu (Escape) is open, a Reload UI button of the HUD's own sits under it; the menu itself is left as it is",
+})
+
+---------------------------------------------------------------------------
+-- Reload UI by the game's menu. Our own button, hung under the menu and shown while it is up: nothing is added to
+-- the menu itself (an entry of an addon's in one of this client's menus has left the game refusing its own
+-- actions), and nothing of the menu's is hooked: it is looked at.
+---------------------------------------------------------------------------
+local reload
+local function ReloadButton()
+    if reload then return reload end
+    local b = CreateFrame("Button", "ControllerCamHUD_ReloadButton", UIParent, "UIPanelButtonTemplate")
+    b:SetSize(160, 26)
+    b:SetFrameStrata("FULLSCREEN_DIALOG")
+    b:SetText(type(RELOADUI) == "string" and RELOADUI or "Reload UI")
+    b:SetScript("OnClick", function()
+        local go = (C_UI and C_UI.Reload) or ReloadUI
+        if go then go() end
+    end)
+    b:Hide()
+    reload, W.reload = b, b
+    return b
+end
+
+function W:MenuReload()
+    local menu = _G.GameMenuFrame
+    if self.menuReloadOn and menu and ns.ShownPlain(menu) then
+        local b = ReloadButton()
+        if not b:IsShown() then
+            b:ClearAllPoints()
+            b:SetPoint("TOP", menu, "BOTTOM", 0, -6)
+            b:Show()
+        end
+    elseif reload and reload:IsShown() then
+        reload:Hide()
+    end
+end
+
+local menuWatch, since = CreateFrame("Frame"), 0
+menuWatch:SetScript("OnUpdate", ns.Protect(function(_, dt)
+    since = since + dt
+    if since < 0.1 then return end
+    since = 0
+    W:MenuReload()
+end))
+
 ---------------------------------------------------------------------------
 -- Map coordinates: a child of the map, so it only works while the map is open
 ---------------------------------------------------------------------------
@@ -155,6 +204,8 @@ function W:WrapErrors()
 end
 
 function W:Apply(run)
+    self.menuReloadOn = run and ns.db.menuReload and true or false
+    self:MenuReload()
     self:ApplyChat(run and ns.db.chatFade and true or false)
     self:ApplyMap(run and ns.db.mapCoords and true or false)
     self:ApplyErrors(run and ns.db.quietErrors and true or false)

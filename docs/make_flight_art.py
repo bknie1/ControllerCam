@@ -1,4 +1,4 @@
-"""Draws the flight game's textures (FlightGame.lua): a treetop, a zeppelin and a cloud (32-bit TGA, power-of-two
+"""Draws the flight game's textures (FlightGame.lua): a treetop, zeppelins in three liveries, a drake and a cloud (32-bit TGA, power-of-two
 sizes) with Pillow, in the flat three-tone look of the HUD's other drawings.
 
     python docs/make_flight_art.py ControllerCam_HUD/Media
@@ -102,27 +102,76 @@ for b in ((14, 50, 26, 60), (36, 34, 48, 44), (26, 14, 36, 22), (40, 66, 52, 76)
 tree = over(tree, spots)
 save(tree.resize((W, H), Image.LANCZOS), "treetop")
 
-# zeppelin: a patched cloth envelope with a band round it, tail fins, a wooden gondola on ropes and a propeller.
-# Facing left: it drifts towards you. 128 x 64.
+# zeppelins: a cloth envelope with a band round it, tail fins, a wooden gondola on ropes and a propeller. Facing
+# left: they drift towards you. 128 x 64. Three liveries: the goblins' (neutral: olive with brass), the Horde's
+# (red with bone) and the Alliance's (blue with gold). The faction's own badge is the game's, put on in play.
+OLIVE = dict(base=(118, 132, 70), dark=(78, 90, 44), light=(166, 180, 108), line=(32, 36, 16))
+BRASS = dict(base=(196, 156, 74), dark=(142, 104, 42), light=(232, 204, 130), line=(52, 36, 14))
+RED = CLOTH
+BONE = dict(base=(226, 212, 180), dark=(170, 152, 120), light=(246, 238, 216), line=(52, 22, 18))
+BLUE = dict(base=(62, 104, 186), dark=(38, 66, 132), light=(122, 162, 228), line=(16, 24, 52))
+GOLD = dict(base=(232, 196, 92), dark=(176, 136, 48), light=(250, 228, 150), line=(16, 24, 52))
+
+
+def zeppelin(cloth, band, shine):
+    W, H = 128, 64
+    envelope = blob(sheet(W, H), (6, 4, 110, 42))
+    fins = poly(sheet(W, H), [(96, 12), (124, 2), (120, 22), (100, 20)])
+    poly(fins, [(96, 34), (124, 46), (120, 28), (100, 28)])
+    stripe = ImageChops.multiply(envelope, box(sheet(W, H), (54, 0, 66, 64)))
+    ropes = sheet(W, H)
+    d = ImageDraw.Draw(ropes)
+    for a, b in (((46, 40), (52, 50)), ((74, 40), (68, 50))):
+        d.line(pts([a, b]), fill=255, width=int(1.4 * S))
+    gondola = box(sheet(W, H), (42, 48, 78, 58), 3)
+    prop = blob(sheet(W, H), (82, 44, 88, 62))
+    hub = blob(sheet(W, H), (78, 51, 84, 55))
+    img = over(paint(fins, **cloth), paint(envelope, **cloth), paint(stripe, **band, edge=1.2, depth=2.0),
+               paint(ropes, **WOOD, edge=0.8, depth=0.5, rim=0.3), paint(gondola, **WOOD),
+               paint(prop, **STEEL, edge=1.2), paint(hub, **STEEL, edge=1.0))
+    gleam = layer(W, H)
+    ink(gleam, shine, blob(sheet(W, H), (22, 10, 46, 18)))                    # a shine on the cloth
+    return over(img, gleam).resize((W, H), Image.LANCZOS)
+
+
+save(zeppelin(OLIVE, BRASS, (220, 232, 180)), "zeppelin")
+save(zeppelin(RED, BONE, (255, 220, 190)), "zeppelin_horde")
+save(zeppelin(BLUE, GOLD, (200, 222, 255)), "zeppelin_alliance")
+
+# dragon: a drake in flight, facing left (it comes the other way): wings raised, a long neck to a horned head
+# with its jaw open (its fire is drawn in play), a curling tail. 128 x 64. Our own cartoon, not anyone's dragon.
+SCALE = dict(base=(176, 62, 46), dark=(118, 36, 30), light=(222, 112, 78), line=(44, 14, 12))
+WING = dict(base=(138, 48, 46), dark=(92, 28, 30), light=(186, 84, 70), line=(44, 14, 12))
+BELLY = dict(base=(236, 196, 128), dark=(190, 146, 86), light=(250, 226, 170), line=(44, 14, 12))
+HORN = dict(base=(232, 220, 190), dark=(176, 160, 126), light=(250, 246, 230), line=(44, 14, 12))
 W, H = 128, 64
-envelope = blob(sheet(W, H), (6, 4, 110, 42))
-fins = poly(sheet(W, H), [(96, 12), (124, 2), (120, 22), (100, 20)])
-poly(fins, [(96, 34), (124, 46), (120, 28), (100, 28)])
-band = ImageChops.multiply(envelope, box(sheet(W, H), (54, 0, 66, 64)))
-ropes = sheet(W, H)
-d = ImageDraw.Draw(ropes)
-for a, b in (((46, 40), (52, 50)), ((74, 40), (68, 50))):
-    d.line(pts([a, b]), fill=255, width=int(1.4 * S))
-gondola = box(sheet(W, H), (42, 48, 78, 58), 3)
-prop = blob(sheet(W, H), (82, 44, 88, 62))
-hub = blob(sheet(W, H), (78, 51, 84, 55))
-zep = over(paint(fins, **CLOTH), paint(envelope, **CLOTH), paint(band, **BAND, edge=1.2, depth=2.0),
-           paint(ropes, **WOOD, edge=0.8, depth=0.5, rim=0.3), paint(gondola, **WOOD), paint(prop, **STEEL, edge=1.2),
-           paint(hub, **STEEL, edge=1.0))
-shine = layer(W, H)
-ink(shine, (255, 220, 190), blob(sheet(W, H), (22, 10, 46, 18)))            # a shine on the cloth
-zep = over(zep, shine)
-save(zep.resize((W, H), Image.LANCZOS), "zeppelin")
+far = poly(sheet(W, H), [(62, 30), (78, 2), (88, 8), (96, 4), (100, 16), (108, 14), (84, 34)])   # the far wing
+body = blob(sheet(W, H), (40, 24, 92, 48))
+poly(body, [(46, 30), (30, 24), (20, 22), (24, 32), (40, 40)])                # the neck, up to the head
+poly(body, [(86, 32), (106, 40), (118, 34), (124, 38), (112, 46), (90, 46)])  # the tail, curling up
+poly(body, [(118, 34), (126, 28), (124, 40)])                                 # its spade
+head = blob(sheet(W, H), (8, 16, 30, 30))
+poly(head, [(10, 22), (2, 24), (4, 28), (12, 28)])                             # the snout
+jaw = poly(sheet(W, H), [(12, 28), (2, 32), (6, 34), (20, 30)])                # the jaw, open
+belly = ImageChops.multiply(body, blob(sheet(W, H), (36, 36, 90, 56)))
+legs = poly(sheet(W, H), [(52, 44), (50, 54), (56, 54), (58, 44)])
+poly(legs, [(74, 44), (76, 54), (82, 54), (80, 44)])
+near = poly(sheet(W, H), [(52, 32), (60, 2), (70, 10), (78, 4), (82, 16), (92, 14), (70, 38)])   # the near wing
+horns = poly(sheet(W, H), [(22, 18), (30, 6), (26, 20)])
+poly(horns, [(18, 18), (22, 8), (21, 19)])
+spines = sheet(W, H)
+for x in (44, 52, 60, 68, 76):
+    poly(spines, [(x, 27), (x + 3, 21), (x + 6, 27)])
+dragon = over(paint(far, **WING), paint(spines, **HORN, edge=1.0, depth=1.0, rim=0.5), paint(body, **SCALE),
+              paint(belly, **BELLY, edge=0.8, depth=1.5), paint(legs, **SCALE), paint(jaw, **SCALE),
+              paint(head, **SCALE), paint(horns, **HORN, edge=1.0, depth=1.0, rim=0.5), paint(near, **WING))
+eye = layer(W, H)
+ink(eye, (255, 226, 96), blob(sheet(W, H), (14, 19, 19, 23)))
+ink(eye, (30, 10, 8), blob(sheet(W, H), (15, 20, 17, 22)))
+for a, b in (((62, 30), (64, 6)), ((66, 32), (76, 8)), ((70, 34), (86, 16))):   # the near wing's bones
+    ImageDraw.Draw(eye).line(pts([a, b]), fill=WING["dark"] + (255,), width=int(1.2 * S))
+dragon = over(dragon, eye)
+save(dragon.resize((W, H), Image.LANCZOS), "dragon")
 
 # cloud: soft and white (tinted in the game), only scenery behind the game. 128 x 64.
 W, H = 128, 64

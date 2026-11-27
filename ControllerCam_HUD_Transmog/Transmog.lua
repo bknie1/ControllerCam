@@ -27,6 +27,8 @@ local L = ns.L
 local TS = { rows = {}, MIN_PIECES = 3, BATCH = 60, focus = 1 }
 ns.TransmogSets = TS
 
+local panel                       -- our list in the tab's page (Build); named here, as the reading uses it too
+
 
 
 local APPEARANCE = 0                                     -- Enum.TransmogType.Appearance
@@ -159,6 +161,28 @@ function TS.GroupByName(items)
 end
 
 ---------------------------------------------------------------------------
+-- Names the game has not loaded yet. A piece's name comes with its item's data, which the game may not have until
+-- you have looked at the item: a set made of such pieces was missed altogether. Each is asked for once, and the
+-- collection is read again as the names arrive.
+---------------------------------------------------------------------------
+TS.ASK_MOST = 600             -- items asked for in one read, at most
+TS.AGAIN = 1.5                -- seconds names are gathered before the collection is read again
+TS.waiting, TS.noName = {}, {}
+
+function TS.NameOf(itemID)
+    if not itemID then return nil end
+    local get = C_Item and C_Item.GetItemNameByID
+    if get then
+        local ok, name = pcall(get, itemID)
+        if ok and Text(name) then return name end
+    end
+    if GetItemInfo then
+        local ok, name = pcall(GetItemInfo, itemID)
+        if ok and Text(name) then return name end
+    end
+end
+
+---------------------------------------------------------------------------
 -- Reading the collection (a few appearances a frame, while the tab is open)
 ---------------------------------------------------------------------------
 local function SourceIcon(id, itemID)
@@ -189,7 +213,11 @@ function TS:Read(scan, cat, a)
     local look = ns.Yes(a.isCollected) or owned ~= nil
     local usable = a.isUsable == nil or ns.Yes(a.isUsable)
     for _, s in ipairs(sources) do
-        local name, id = type(s) == "table" and Text(s.name), type(s) == "table" and Num(s.sourceID)
+        local id, itemID = type(s) == "table" and Num(s.sourceID), type(s) == "table" and Num(s.itemID)
+        local name = type(s) == "table" and (Text(s.name) or TS.NameOf(itemID)) or nil
+        if id and not name and itemID and not TS.noName[itemID] then
+            scan.unnamed[itemID] = true                       -- (its name is still to come)
+        end
         if name and id then
             local use = ns.Yes(s.isCollected) and id or owned or (look and id) or nil
             local item = { name = name, slot = slot.slot, cat = cat, source = id, itemID = Num(s.itemID),
@@ -268,10 +296,18 @@ end
 -- Every set you have a piece of: whole sets first, then by how much of each you have, then by name
 function TS.Collect(items)
     local seen, out = {}, {}
+    TS.cantWear = {}                            -- sets you have pieces of, none of which this character can wear
     local function add(set)
         TS.Summary(set)
         local id = set.name:lower()
-        if set.have > 0 and not seen[id] then seen[id] = true; out[#out + 1] = set end
+        if set.have > 0 and not seen[id] then
+            seen[id] = true
+            out[#out + 1] = set
+        elseif set.have == 0 then
+            for _, p in ipairs(set.list) do
+                if p.cant then TS.cantWear[#TS.cantWear + 1] = set.name; break end
+            end
+        end
     end
     for _, set in ipairs(TS.GameSets()) do add(set) end
     for _, set in ipairs(TS.GroupByName(items)) do add(set) end
@@ -287,7 +323,7 @@ end
 
 function TS:StartScan()
     self.slotMap = nil
-    self.scan = { cat = 0, at = 0, list = nil, items = {}, byKey = {}, reads = 0,
+    self.scan = { cat = 0, at = 0, list = nil, items = {}, byKey = {}, unnamed = {}, reads = 0,
                   t0 = debugprofilestop and debugprofilestop() or 0 }
 end
 
@@ -321,12 +357,46 @@ function TS:Finish()
     self.scan = nil
     self.items = s.items
     self.sets = TS.Collect(s.items)
+    self:AskNames(s.unnamed)
     self.read = { appearances = s.reads, items = #s.items,
                   ms = debugprofilestop and (debugprofilestop() - s.t0) or 0 }
     ns.Note("transmog: %d appearances read, %d named pieces, %d sets", s.reads, #s.items, #self.sets)
     self:Refresh()
-    self:Aim()
+    if self.aimWhenRead then self.aimWhenRead = false; self:Aim() end      -- (not on a later read: your cursor stays)
     if self.stale and panel and ns.ShownPlain(panel) then self.stale = false; self:StartScan() end
+end
+
+-- Ask the game for the items whose names it has not got; it says as each one comes (ITEM_DATA_LOAD_RESULT)
+function TS:AskNames(unnamed)
+    local request = C_Item and C_Item.RequestLoadItemDataByID
+    local n, asked = 0, 0
+    for itemID in pairs(unnamed or {}) do
+        n = n + 1
+        if not self.waiting[itemID] and request and asked < TS.ASK_MOST then
+            asked = asked + 1
+            self.waiting[itemID] = true
+            pcall(request, itemID)
+        end
+    end
+    self.unnamedCount = n
+    if asked > 0 then
+        ns.Note("transmog: %d pieces had no name yet; asked the game for %d", n, asked)
+        if self.listen then self.listen(true) end
+    end
+end
+
+function TS:NameCame(itemID, success)
+    if not (itemID and self.waiting[itemID]) then return end
+    self.waiting[itemID] = nil
+    if success == false then self.noName[itemID] = true else self.fresh = true end
+    if self.fresh and not self.againSoon then
+        self.againSoon = true
+        C_Timer.After(TS.AGAIN, ns.Protect(function()
+            TS.againSoon, TS.fresh, TS.stale = false, false, true
+            if panel and ns.ShownPlain(panel) and not TS.scan then TS.stale = false; TS:StartScan() end
+        end))
+    end
+    if not next(self.waiting) and self.listen then self.listen(false) end
 end
 
 -- The whole collection at once (for /cchud check and the tests)
@@ -517,7 +587,6 @@ end
 ---------------------------------------------------------------------------
 -- The page
 ---------------------------------------------------------------------------
-local panel
 
 local function Shown(f, on) if on then f:Show() else f:Hide() end end
 
@@ -756,7 +825,13 @@ end
 function TS:Opened()
     if self.last and not self.last.undone and not self:CanUndo() then self.last = nil end
     if self.last and self.last.undone then self.last = nil end
-    if (not self.sets or self.stale) and not self.scan then self.stale = false; self:StartScan() end
+    self.aimWhenRead = true
+    if (not self.sets or self.stale or (self.unnamedCount or 0) > 0) and not self.scan then
+        self.stale = false
+        self:StartScan()
+    elseif not self.scan then
+        self.aimWhenRead = false
+    end
     if self.keys then self.keys:Set(true) end
     self:Refresh()
     C_Timer.After(0, ns.Protect(function() TS:Aim() end))
@@ -972,9 +1047,15 @@ function TS:StepBack()
 end
 
 local events = CreateFrame("Frame")
-events:SetScript("OnEvent", ns.Protect(function(_, event, name)
+function TS.listen(on)
+    if on then pcall(events.RegisterEvent, events, "ITEM_DATA_LOAD_RESULT")
+    else pcall(events.UnregisterEvent, events, "ITEM_DATA_LOAD_RESULT") end
+end
+events:SetScript("OnEvent", ns.Protect(function(_, event, name, success)
     if event == "ADDON_LOADED" then
         if name == "Blizzard_Transmog" then TS:Hook() end
+    elseif event == "ITEM_DATA_LOAD_RESULT" then
+        TS:NameCame(Num(name), success)
     elseif event == "TRANSMOG_COLLECTION_UPDATED" then
         -- read again (now if the page is open, else when it next opens); the sets from before stay until then
         TS.stale = true
@@ -1018,6 +1099,10 @@ function TS.Describe()
         rows[#rows + 1] = ("the window's filters: collected %s, not collected %s (missing pieces are read from what it lists)"):format(
             tostring(okA and a), tostring(okB and b))
     end
+    local waiting = 0
+    for _ in pairs(TS.waiting) do waiting = waiting + 1 end
+    rows[#rows + 1] = ("pieces with no name yet at the last read %d (still asked for %d); sets with only pieces this character can't wear: %s"):format(
+        TS.unnamedCount or 0, waiting, (TS.cantWear and #TS.cantWear > 0) and table.concat(TS.cantWear, ", ", 1, math.min(12, #TS.cantWear)) or "none")
     local last = TS.last
     rows[#rows + 1] = ("last: %s; undo held for %d slots, can undo %s; X bound %s"):format(
         last and (last.undone and "undone" or ("%s %d put, %d refused"):format(last.name, last.put, last.refused)) or "none",

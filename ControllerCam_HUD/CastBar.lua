@@ -7,6 +7,11 @@ local L, C, U = ns.L, ns.colors, ns.Unit
 
 local CB = { active = false }
 CB.TIME_ROOM = 44              -- what the time under the bar's right end takes
+-- The name over the bar and the time under it keep this far from it: what plays on the bar as it fills (leaves,
+-- roots; CastArt.lua) reaches 16 beyond it, and stood on the spell's name. While fishing nothing grows there, and
+-- they stay close (the fishing game's words are further down).
+CB.ROOM = 16
+CB.CLOSE_OVER, CB.CLOSE_UNDER = 4, 5
 ns.CastBar = CB
 
 ns.RegisterSetting({
@@ -100,11 +105,11 @@ local function Build()
     -- the name over the bar, the whole width of it (a longer one ends in "..." rather than run past the bar); the
     -- time under the bar at its right end, out of the name's way
     frame.label = ns.FontString(frame, 11, "LEFT")
-    frame.label:SetPoint("BOTTOMLEFT", bar, "TOPLEFT", 8, 4)
-    frame.label:SetPoint("BOTTOMRIGHT", bar, "TOPRIGHT", -8, 4)
+    frame.label:SetPoint("BOTTOMLEFT", bar, "TOPLEFT", 8, CB.ROOM)
+    frame.label:SetPoint("BOTTOMRIGHT", bar, "TOPRIGHT", -8, CB.ROOM)
     if frame.label.SetWordWrap then frame.label:SetWordWrap(false) end
     frame.time = ns.FontString(frame, 10, "RIGHT")
-    frame.time:SetPoint("TOPRIGHT", bar, "BOTTOMRIGHT", -8, -5)
+    frame.time:SetPoint("TOPRIGHT", bar, "BOTTOMRIGHT", -8, -CB.ROOM)
     frame.time:SetTextColor(unpack(C.muted))
     frame:Hide()
     CB.frame, CB.bar = frame, bar
@@ -130,6 +135,16 @@ end
 
 local function HideLine()
     for _, dot in ipairs(bar.line) do dot:Hide() end
+end
+
+-- The name's and the time's distance from the bar
+local function Clearance(fishing)
+    local over, under = fishing and CB.CLOSE_OVER or CB.ROOM, fishing and CB.CLOSE_UNDER or CB.ROOM
+    frame.label:ClearAllPoints()
+    frame.label:SetPoint("BOTTOMLEFT", bar, "TOPLEFT", 8, over)
+    frame.label:SetPoint("BOTTOMRIGHT", bar, "TOPRIGHT", -8, over)
+    frame.time:ClearAllPoints()
+    frame.time:SetPoint("TOPRIGHT", bar, "BOTTOMRIGHT", -8, -under)
 end
 
 local function Place()
@@ -415,6 +430,7 @@ end
 -- that rides the front of other casts is put away: it stood right on the float and the rings round it.
 function CB:FishingLook(on)
     Place()
+    Clearance(on)
     if on then
         bar:SetHeight(LINE)
         bar:SetColor(unpack(WATER.color))

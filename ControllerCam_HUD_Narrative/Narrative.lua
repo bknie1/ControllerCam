@@ -11,6 +11,7 @@
 --   * the camp fire's scene: you, by the fire (the rest you have saved up);
 --   * the auction house's Market: the Broker, and a profession's window: The Mentor (their own panels,
 --     AuctionPanel.lua and Levelling.lua, ask N.On() whether to be characters or plain).
+-- And you, now and then, on what just happened: Commentary.lua, with its lines in Remarks.lua.
 -- One switch: with it off every window is plain and quiet (no portraits, no names, no voices, plain words).
 -- Only shows: nothing of the game's windows is changed; each card is a child of its window, so it goes with it.
 
@@ -117,7 +118,7 @@ end
 
 ---------------------------------------------------------------------------
 -- The card: the portrait, the speaker's name and their line, over the top of their window (under it where the
--- screen has no room above)
+-- screen has no room above; beside it where there is room for neither, as with a tall window)
 ---------------------------------------------------------------------------
 local function Height(fs, size, width)
     local h = Num(Try(fs.GetStringHeight, fs))
@@ -133,6 +134,7 @@ function N.Card(id)
     local card = N.cards[id]
     if card then return card end
     card = CreateFrame("Frame", "ControllerCamHUD_Speaker_" .. id, UIParent)
+    if card.SetClampedToScreen then card:SetClampedToScreen(true) end         -- (never off the screen)
     card:SetSize(N.MIN_W, 60)
     card.back = card:CreateTexture(nil, "BACKGROUND")
     card.back:SetAllPoints(card)
@@ -175,17 +177,31 @@ function N.Place(card, host)
     card:ClearAllPoints()
     local top, hostK = Num(Try(host.GetTop, host)), Num(Try(host.GetEffectiveScale, host)) or 1
     local roof, uiK = Num(Try(UIParent.GetTop, UIParent)), Num(Try(UIParent.GetEffectiveScale, UIParent)) or 1
-    if top and roof and (top + h + N.GAP) * hostK > roof * uiK then
-        card:SetPoint("TOPLEFT", host, "BOTTOMLEFT", 0, -N.GAP)
-        card.at = "under"
-    else
+    local over = not (top and roof) or (top + h + N.GAP) * hostK <= roof * uiK
+    local bottom = Num(Try(host.GetBottom, host))
+    -- the bank's own buttons may be under the bank: the card goes under them
+    local gap = N.GAP + ((ns.Vendor and ns.Vendor.bankRow == "under" and host == rawget(_G, "BankFrame")) and 28 or 0)
+    if over then
         card:SetPoint("BOTTOMLEFT", host, "TOPLEFT", 0, N.GAP)
         card.at = "over"
+    elseif not bottom or (bottom - h - gap) >= 0 then
+        card:SetPoint("TOPLEFT", host, "BOTTOMLEFT", 0, -gap)
+        card.at = "under"
+    else
+        local right, wide = Num(Try(host.GetRight, host)), Num(Try(UIParent.GetRight, UIParent))
+        if right and wide and (right + N.GAP + w) * hostK > wide * uiK then
+            card:SetPoint("TOPRIGHT", host, "TOPLEFT", -N.GAP, 0)
+            card.at = "left"
+        else
+            card:SetPoint("TOPLEFT", host, "TOPRIGHT", N.GAP, 0)
+            card.at = "right"
+        end
     end
+    ns.Note("narrative: %s speaks %s its window", tostring(card.id), card.at)
     return card.at
 end
 
--- Speak in a window: speaker = { unit, name, icon }. Nothing (and the card put away) with the narrative off,
+-- Speak in a window: speaker = { unit, name, icon, still = a thought: lips do not move }. Nothing (and the card put away) with the narrative off,
 -- no words, or the window closed.
 function N.Speak(id, host, speaker, words)
     if not (N.On() and type(host) == "table" and words and words ~= "" and ns.ShownPlain(host)) then
@@ -207,7 +223,7 @@ function N.Speak(id, host, speaker, words)
     if words ~= card.said then
         card.words:SetText(words)
         card.said = words
-        N.Talk(card.portrait)
+        if not speaker.still then N.Talk(card.portrait) end
     end
     N.Place(card, host)
     card:Show()
@@ -268,6 +284,8 @@ N.RACE = {
     Troll = L["Ey, what we got here, mon?"],
     BloodElf = L["Such clutter. Unbecoming."],
     Goblin = L["Time is money. Let's count it."],
+    HighOrder = L["Disorder. This will not do."],
+    Windshaper = L["Too heavy. The wind likes a light traveller."],
 }
 N.CALM = {
     Human = L["Right, then."],
@@ -283,14 +301,22 @@ N.CALM = {
     Troll = L["Ey, what we got here, mon?"],
     BloodElf = L["Acceptable. Barely."],
     Goblin = L["Time is money. Let's count it."],
+    HighOrder = L["Everything catalogued. Good."],
+    Windshaper = L["Light enough for the wind. Good."],
 }
 -- the allied races speak as their kin
 N.KIN = { DarkIronDwarf = "Dwarf", EarthenDwarf = "Dwarf", LightforgedDraenei = "Draenei", KulTiran = "Human",
           Mechagnome = "Gnome", MagharOrc = "Orc", HighmountainTauren = "Tauren", ZandalariTroll = "Troll",
           VoidElf = "BloodElf", Nightborne = "BloodElf", Undead = "Scourge" }
+-- Forever's Skyborne share one name in the game; which people they are is told by the race's number, or else
+-- by their side: the High Order of the Alliance, the Windshapers of the Horde
+N.SKYBORNE = { [95] = "HighOrder", [96] = "Windshaper", Alliance = "HighOrder", Horde = "Windshaper" }
 function N.Race()
-    local _, race = Try(UnitRace, "player")
+    local _, race, number = Try(UnitRace, "player")
     race = Str(race)
+    if race and race:lower():find("skyborne", 1, true) then
+        return N.SKYBORNE[Num(number) or 0] or N.SKYBORNE[Str(Try(UnitFactionGroup, "player")) or ""]
+    end
     return race and (N.KIN[race] or race) or nil
 end
 function N.Mutter(words, grumble)
@@ -372,10 +398,43 @@ function N.BagWords(s)
     return L["All in order, and %d slots free."]:format(s.free or 0)
 end
 
+-- The game's own bag window, when one is open: the combined bags, or the backpack
+function N.GameBags()
+    return Shown("ContainerFrameCombinedBags") or Shown("ContainerFrame1")
+end
+
+-- What the game's bags hold, as your thoughts need it. Only what can be said of the game's own window: nothing of
+-- our window's gold dots or filters. Junk as the HUD marks it (yours, or grey and not kept)
+function N.ReadGameBags()
+    local free, total = FreeSlots()
+    local s = { free = free, total = total, junk = 0, junkWorth = 0, new = 0, sell = 0, vendor = false }
+    local CC = C_Container or {}
+    local sell = ns.db.sell or { junk = {}, keep = {} }
+    for bag = 0, (NUM_BAG_SLOTS or 4) do
+        for slot = 1, Num(Try(CC.GetContainerNumSlots, bag)) or 0 do
+            local info = Try(CC.GetContainerItemInfo, bag, slot)
+            local id = type(info) == "table" and Num(info.itemID) or nil
+            if id and not sell.keep[id] and (sell.junk[id] or Num(info.quality) == 0) then
+                s.junk = s.junk + 1
+                s.junkWorth = s.junkWorth + VendorPrice(id) * (Num(info.stackCount) or 1)
+            end
+        end
+    end
+    return s
+end
+
 function N.Bags()
     local B = ns.Bags
     local host = rawget(_G, "ControllerCamHUD_Bags")
-    if not (B and B.open and host and B.read) or B.view == "bank" then return N.Hush("bags") end
+    if not (B and B.open and host and B.read) then
+        -- the game's own bags (the start): quiet while the banker or a vendor is talking
+        local game, V = N.GameBags(), ns.Vendor
+        if not game or (V and (V.bankOpen or V.merchantOpen)) then return N.Hush("bags") end
+        local s = N.ReadGameBags()
+        N.bagState = s
+        return N.Speak("bags", game, N.Me(), N.Mutter(N.BagWords(s)))
+    end
+    if B.view == "bank" then return N.Hush("bags") end
     local read = B.read
     local s = { free = math.max(0, (read.total or 0) - (read.used or 0)), total = read.total or 0, junk = 0,
                 junkWorth = 0, new = 0, sell = (B.counts and B.counts.sell) or 0, vendor = B.merchantOpen }
@@ -554,7 +613,7 @@ end
 -- Fishing: you, at the water
 ---------------------------------------------------------------------------
 -- w = { caught, away, bait = seconds left or nil, unknown = fish here not landed yet, known = landed here,
--- capped = your skill is at its cap }
+-- whole = every fish of this water is known, capped = your skill is at its cap }
 N.BAIT_LOW = 60
 function N.FishWords(w)
     if (w.away or 0) >= 2 and w.away >= (w.caught or 0) then
@@ -569,7 +628,7 @@ function N.FishWords(w)
     if (w.unknown or 0) > 0 then
         return L["Fish here I haven't landed yet: %d. Keep casting."]:format(w.unknown)
     end
-    if (w.known or 0) > 0 then
+    if w.whole and (w.known or 0) > 0 then
         return L["I've landed every fish this water has. Somewhere new, then."]
     end
     return nil
@@ -579,9 +638,14 @@ function N.Fishing()
     local host = rawget(_G, "ControllerCamHUD_FishPanel")
     local J, F = ns.FishLog, ns.Fishing
     if not (host and J and F and ns.ShownPlain(host)) then return N.Hush("fish") end
+    local C = ns.Commentary                                 -- (a remark has your card for a moment)
+    local remark = C and C.Current()
+    if remark then return N.Speak("fish", host, C.Speaker(remark), C.Words(remark)) end
     local w = { caught = J.session and J.session.caught or 0, away = J.session and J.session.away or 0,
                 bait = F.BaitLeft and Num(Try(F.BaitLeft)) or nil, unknown = 0, known = 0 }
-    for _, s in ipairs(Try(J.Waters) or {}) do
+    local waters, whole = Try(J.Waters)
+    w.whole = whole and true or false
+    for _, s in ipairs(waters or {}) do
         if s.id then
             if s.known then w.known = w.known + 1 else w.unknown = w.unknown + 1 end
         end
@@ -593,10 +657,13 @@ function N.Fishing()
 end
 
 -- The fish journal: you, leafing through it
-function N.JournalWords(kinds)
+function N.JournalWords(kinds, whole)
     if (kinds or 0) == 0 then return L["Nothing landed yet. The first fish of every water goes in here."] end
-    return L["Kinds landed: %d. Every water hides a few more: the fishing panel shows a ? for each I haven't caught there."]
-        :format(kinds)
+    if whole then
+        return L["Kinds landed: %d. Every water hides a few more: the fishing panel shows a ? for each I haven't caught there."]
+            :format(kinds)
+    end
+    return L["Kinds landed: %d. Every water has fish of its own."]:format(kinds)
 end
 
 function N.Journal()
@@ -604,7 +671,8 @@ function N.Journal()
     local W = ns.FishJournal
     if not (host and W and W.Fish and ns.ShownPlain(host)) then return N.Hush("journal") end
     local list = Try(W.Fish)
-    return N.Speak("journal", host, N.Me(), N.JournalWords(type(list) == "table" and #list or 0))
+    local _, whole = Try(ns.FishLog and ns.FishLog.Waters)
+    return N.Speak("journal", host, N.Me(), N.JournalWords(type(list) == "table" and #list or 0, whole))
 end
 
 ---------------------------------------------------------------------------
@@ -668,6 +736,7 @@ watch:SetScript("OnEvent", ns.Protect(function(_, event)
         watch:SetScript("OnUpdate", nil)
         N.Hush("flight")
     elseif event == "BAG_UPDATE_DELAYED" or event == "MERCHANT_UPDATE" then
+        if N.cards.bags and N.cards.bags:IsShown() and N.GameBags() then Later("bags", N.Bags) end
         if N.cards.vendor and N.cards.vendor:IsShown() then Later("vendor", N.Vendor) end
         if N.cards.bank and N.cards.bank:IsShown() then Later("bank", N.Bank) end
         if N.cards.mail and N.cards.mail:IsShown() then Later("mail", N.Mail) end
@@ -685,6 +754,23 @@ N.FlightTick = ns.Protect(function(_, dt)
         N.Flight()
     end
 end)
+
+-- The game says nothing when its bags open or close: looked at a few times a second
+local bagWatch, bagSince, bagOpen = CreateFrame("Frame"), 0, nil
+bagWatch:SetScript("OnUpdate", ns.Protect(function(_, dt)
+    if not N.running then return end
+    bagSince = bagSince + (dt or 0)
+    if bagSince < 0.3 then return end
+    bagSince = 0
+    local B, V = ns.Bags, ns.Vendor
+    local game = (not (B and B.open)) and N.GameBags() or nil
+    local now = game and not (V and (V.bankOpen or V.merchantOpen)) and game or false
+    if now ~= bagOpen then
+        bagOpen = now
+        if now then Later("bags", N.Bags)
+        elseif not (B and B.open) then N.Hush("bags") end
+    end
+end))
 
 local EVENTS = { "MERCHANT_SHOW", "MERCHANT_CLOSED", "MERCHANT_UPDATE", "BANKFRAME_OPENED", "BANKFRAME_CLOSED",
                  "MAIL_SHOW", "MAIL_INBOX_UPDATE", "MAIL_CLOSED", "TAXIMAP_OPENED", "TAXIMAP_CLOSED",
@@ -714,8 +800,9 @@ function N.Describe()
         end
     end
     table.sort(out)
+    local more = ns.Commentary and ("; " .. ns.Commentary.Describe()) or ""
     return ("on %s, race %s; %s"):format(tostring(N.On()), tostring(N.Race()),
-        #out > 0 and table.concat(out, "; ") or "nobody speaking")
+        #out > 0 and table.concat(out, "; ") or "nobody speaking") .. more
 end
 
 ns.RegisterModule("narrative", N)

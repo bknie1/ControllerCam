@@ -10,3 +10,5 @@
 ## Group: ControllerCam_HUD
 
 Narrative.lua
+Remarks.lua
+Commentary.lua

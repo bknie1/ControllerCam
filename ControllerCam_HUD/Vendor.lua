@@ -1354,22 +1354,80 @@ function V.MaterialChoices(to)
     return out
 end
 
--- The bank window's Materials list (with a mouse): deposit and withdraw, each kind a row
+-- The bank window's Materials list: deposit and withdraw, each kind a row. With a mouse, click one; with the
+-- controller the list takes the d-pad, A and B while it is up (the game's own menus do not reach into a window of
+-- ours), and gives them back the moment it closes
+V.LIST_KEYS = { "PADDUP", "PADDDOWN", "PAD1", "PAD2", "ESCAPE" }
+
+local function Pick(list, at)
+    list.at = at
+    for i, b in ipairs(list.rows) do
+        if b.pick then
+            if i == at then b.pick:Show() else b.pick:Hide() end
+        end
+    end
+end
+
+local function Walk(list, way)                      -- to the next row that does something, round the ends
+    local n, i = list.count or 0, list.at or (way > 0 and 0 or 1)
+    for _ = 1, n do
+        i = (i - 1 + way) % n + 1
+        if list.rows[i].run then return Pick(list, i) end
+    end
+end
+
+function V.CloseMaterials()
+    if V.materialsList then V.materialsList:Hide() end
+    if V.listKeys then V.listKeys:Set(false) end
+end
+
+function V:MaterialsPad(key)
+    local list = self.materialsList
+    if not (list and list:IsShown()) then return V.CloseMaterials() end
+    if key == "PADDUP" then
+        Walk(list, -1)
+    elseif key == "PADDDOWN" then
+        Walk(list, 1)
+    elseif key == "PAD1" then
+        local run = list.at and list.rows[list.at] and list.rows[list.at].run
+        V.CloseMaterials()
+        if run then run() end
+    else
+        V.CloseMaterials()
+    end
+end
+
+-- (asked for with the controller, away from any item: Inventory.lua, R3 held at the bank)
+function V:OpenMaterials()
+    local anchor = self.bankButtons and self.bankButtons.materials
+    if not (anchor and anchor:IsShown()) or InCombatLockdown() then return false end
+    V.MaterialsList(anchor)
+    return true
+end
+
 local function MaterialsList(anchor)
     local list = V.materialsList
     if not list then
         list = CreateFrame("Frame", nil, UIParent)
         list:SetFrameStrata("DIALOG")
+        if list.SetClampedToScreen then list:SetClampedToScreen(true) end     -- (under a low window: still seen)
         list:SetSize(230, 40)
         list:EnableMouse(true)
         list.back = list:CreateTexture(nil, "BACKGROUND")
         list.back:SetColorTexture(0.03, 0.04, 0.07, 0.94)
         list.back:SetAllPoints(list)
         list.rows = {}
+        list.keysHint = ns.FontString(list, 10, "CENTER")
+        list.keysHint:SetPoint("BOTTOM", list, "BOTTOM", 0, 6)
+        list.keysHint:SetTextColor(unpack(ns.colors.muted))
+        list:SetScript("OnUpdate", ns.Protect(function()   -- the bank went away: so does its list, and its buttons
+            local bank = _G.BankFrame
+            if bank and bank.IsShown and not bank:IsShown() then V.CloseMaterials() end
+        end))
         list:Hide()                                        -- (made hidden: the first click opens it)
         V.materialsList = list
     end
-    if list:IsShown() then list:Hide(); return end
+    if list:IsShown() then V.CloseMaterials(); return end
     local rows = {}
     for _, to in ipairs({ "bank", "bags" }) do
         local choices = V.MaterialChoices(to)
@@ -1391,18 +1449,33 @@ local function MaterialsList(anchor)
             b.hl = b:CreateTexture(nil, "HIGHLIGHT")
             b.hl:SetColorTexture(1, 1, 1, 0.12)
             b.hl:SetAllPoints(b)
+            b.pick = b:CreateTexture(nil, "BACKGROUND")    -- the row the controller is on
+            b.pick:SetColorTexture(1, 0.82, 0.2, 0.28)
+            b.pick:SetAllPoints(b)
+            b.pick:Hide()
+            local at = i
+            b:SetScript("OnEnter", ns.Protect(function() if list.rows[at].run then Pick(list, at) end end))
             list.rows[i] = b
         end
+        b.run = r.fn
         b.text:SetText(r.head and ("|cffffd100" .. r.head .. "|r") or (r.muted and ("|cff999999" .. r.text .. "|r") or r.text))
-        b:SetScript("OnClick", r.fn and ns.Protect(function() list:Hide(); r.fn() end) or nil)
+        b:SetScript("OnClick", r.fn and ns.Protect(function() V.CloseMaterials(); r.fn() end) or nil)
         b:EnableMouse(r.fn ~= nil)
         b:Show()
     end
-    for i = #rows + 1, #list.rows do list.rows[i]:Hide() end
-    list:SetHeight(#rows * 21 + 10)
+    for i = #rows + 1, #list.rows do list.rows[i]:Hide(); list.rows[i].run = nil end
+    local function Key(key) return ns.KeyText and ns.KeyText(key) or key end
+    list.keysHint:SetText(("%s %s     %s %s"):format(Key("PAD1"), L["Choose"], Key("PAD2"), L["Close"]))
+    list.count = #rows
+    Pick(list, nil)
+    Walk(list, 1)                                          -- on the first that does something
+    list:SetHeight(#rows * 21 + 28)
     list:ClearAllPoints()
     list:SetPoint("TOPLEFT", anchor, "BOTTOMLEFT", 0, -4)
     list:Show()
+    V.listKeys = V.listKeys or ns.PadKeys("Materials", V.LIST_KEYS, function(key) V:MaterialsPad(key) end,
+        function() V.CloseMaterials() end)                 -- (a fight took the buttons: the list goes)
+    V.listKeys:Set(true)
 end
 V.MaterialsList = MaterialsList
 
@@ -1428,11 +1501,54 @@ local function BankButton(parent, text, tip, fn)
     return b
 end
 
+V.PORTRAIT = 62             -- the bank window's portrait reaches at least this far in from its left edge
+V.UNDER_ROOM = 30           -- room the row needs under the window
+
+local function Edge(frame, what)
+    if type(frame) ~= "table" or not frame[what] then return nil end
+    local ok, v = pcall(frame[what], frame)
+    if ok and type(v) == "number" and not ns.IsSecret(v) then return v end
+end
+
+-- Beside the search box; where the row would run under the window's portrait (the banker's face, top left), it
+-- goes just under the window instead (over it, with no room below)
+function V:PlaceBankButtons()
+    local bank, b = _G.BankFrame, self.bankButtons
+    if not (b and type(bank) == "table") then return end
+    local function Row(point, to, theirs, x, y)
+        b.materials:ClearAllPoints()
+        b.materials:SetPoint(point, to, theirs, x, y)
+    end
+    local box = _G.BankItemSearchBox or rawget(bank, "SearchBox")
+    if type(box) == "table" and box.GetObjectType then Row("RIGHT", box, "LEFT", -10, 0)
+    else Row("TOPRIGHT", bank, "TOPRIGHT", -60, -32) end
+    b.withdraw:ClearAllPoints()
+    b.withdraw:SetPoint("RIGHT", b.materials, "LEFT", -4, 0)
+    b.deposit:ClearAllPoints()
+    b.deposit:SetPoint("RIGHT", b.withdraw, "LEFT", -4, 0)
+    self.bankRow = "beside"
+    local left, first = Edge(bank, "GetLeft"), Edge(b.deposit, "GetLeft")
+    if not (left and first) then return end
+    local portrait = _G.BankFramePortrait or rawget(bank, "PortraitContainer")
+    local face = math.max(left + V.PORTRAIT, Edge(portrait, "GetRight") or 0)
+    if first >= face + 4 then return end
+    local bottom = Edge(bank, "GetBottom")
+    if not bottom or bottom >= V.UNDER_ROOM then
+        Row("TOPRIGHT", bank, "BOTTOMRIGHT", -8, -4)
+        self.bankRow = "under"
+    else
+        Row("BOTTOMRIGHT", bank, "TOPRIGHT", -8, 4)
+        self.bankRow = "over"
+    end
+    ns.Note("bank: buttons %s the window (the portrait was in their way: first at %d, portrait to %d)",
+        self.bankRow, math.floor(first), math.floor(face))
+end
+
 function V:BankButtons(show)
     local bank = _G.BankFrame
     if not show then
         if self.bankButtons then for _, b in pairs(self.bankButtons) do b:Hide() end end
-        if V.materialsList then V.materialsList:Hide() end
+        V.CloseMaterials()
         return
     end
     if type(bank) ~= "table" or not bank.CreateTexture then return end
@@ -1445,24 +1561,20 @@ function V:BankButtons(show)
             function() V:Deposit() end)
         local materials
         materials = BankButton(bank, L["Materials"],
-            L["crafting materials in or out of the bank: all of them, or one kind at a time (metal and stone, cloth, herbs...)"],
+            L["crafting materials in or out of the bank: all of them, or one kind at a time (metal and stone, cloth, herbs...). With a controller: up and down choose, A takes it, B closes; holding R3 away from an item opens this too"],
             function() MaterialsList(materials) end)
         for _, b in ipairs({ withdraw, deposit, materials }) do
             local fs = b:GetFontString()
             local w = fs and tonumber(fs:GetStringWidth()) or 0
             b:SetWidth(math.max(76, w + 20))
         end
-        local box = _G.BankItemSearchBox or rawget(bank, "SearchBox")
-        if type(box) == "table" and box.GetObjectType then
-            materials:SetPoint("RIGHT", box, "LEFT", -10, 0)
-        else
-            materials:SetPoint("TOPRIGHT", bank, "TOPRIGHT", -60, -32)
-        end
-        withdraw:SetPoint("RIGHT", materials, "LEFT", -4, 0)
-        deposit:SetPoint("RIGHT", withdraw, "LEFT", -4, 0)
         self.bankButtons = { deposit = deposit, withdraw = withdraw, materials = materials }
     end
     for _, b in pairs(self.bankButtons) do b:Show() end
+    self:PlaceBankButtons()
+    if C_Timer and C_Timer.After then           -- (once more, when the window is laid out)
+        C_Timer.After(0.3, ns.Protect(function() if V.bankOpen then V:PlaceBankButtons() end end))
+    end
 end
 
 -- Smart sell, on the vendor window beside the game's own "Sell all junk" (which stays the game's): the
@@ -1886,6 +1998,7 @@ events:SetScript("OnEvent", ns.Protect(function(_, event)
         if ns.db.sell.deposit then V:Deposit(true) end
     elseif event == "BANKFRAME_CLOSED" then
         V.bankOpen = false
+        V.CloseMaterials()                              -- (our list is not the bank's child: it goes with it)
     elseif event == "TRADE_SHOW" then V.tradeOpen = true
     elseif event == "TRADE_CLOSED" then V.tradeOpen = false
     elseif event == "MAIL_SHOW" then V.mailOpen = true

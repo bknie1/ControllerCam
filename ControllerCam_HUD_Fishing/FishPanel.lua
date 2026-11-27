@@ -1,11 +1,11 @@
 -- ControllerCam HUD: the fishing interface.
 -- With a fishing pole in your hands, at the bottom of the screen, where the gamepad bars are while you are
 -- not fishing (they are put away meanwhile; if you keep them, it sits where your target frame does and steps
--- aside for a target): the fish of the water you stand at (the ones you have not landed here are a "?"), your
--- Fishing skill as a small bar with what bait and pole add to it, how many you caught and how many got away
--- at this water, the bait on your pole and how long it lasts, your latest catch with its weight, and beside
--- it a tally of what you have landed here this session, kind by kind. The tally and the counts start again
--- when you move on to another zone.
+-- aside for a target). In the middle: your Fishing skill as a small bar with what bait and pole add to it, how
+-- many you caught, the bait on your pole and how long it lasts, and your latest catch with its weight. On the
+-- left, the water's page of the journal: its fish (one not landed here yet is a "?", where the whole water is
+-- known). On the right, this session's tally: what you have landed, kind by kind, and under it how many got
+-- away. The tally and the counts start again when you move on to another zone.
 -- It has no box: the text has its shadow and a soft shade lies under it. It is plain while your line is out
 -- and a touch fainter between casts; it is gone in a fight and when the pole is put away. It only shows:
 -- nothing in it takes a press.
@@ -23,6 +23,8 @@ P.IDLE = 0.9                  -- how visible it is between casts
 P.LATEST = 14                 -- seconds your latest catch is spelled out
 P.ROWS = 5                    -- kinds listed in the tally
 local SLOT, GAP = 30, 4
+P.PER = 6                     -- of the water's fish, this many in a row
+P.SIDE = 20                   -- between the water's fish and the middle
 P.BOTTOM = 40                 -- how far above the bottom of the screen it sits
 local BAR_W, BAR_H, WIDTH, ROW = 180, 4, 200, 20
 
@@ -69,6 +71,11 @@ local function Build()
     frame.tallyShade:SetVertexColor(0, 0, 0, 0.45)
     frame.tallyShade:SetPoint("TOPLEFT", frame, "TOPRIGHT", -20, 22)
     frame.tallyShade:Hide()
+    frame.fishShade = frame:CreateTexture(nil, "BACKGROUND", nil, -2)
+    frame.fishShade:SetTexture(ns.media.soft)
+    frame.fishShade:SetVertexColor(0, 0, 0, 0.45)
+    frame.fishShade:SetPoint("TOPRIGHT", frame, "TOPLEFT", 20, 22)
+    frame.fishShade:Hide()
     for i = 1, ns.FishLog.SLOTS do
         local s = { back = frame:CreateTexture(nil, "BACKGROUND"), icon = frame:CreateTexture(nil, "ARTWORK"),
                     q = ns.FontString(frame, 12, "CENTER") }
@@ -84,7 +91,7 @@ local function Build()
     end
     -- your skill: a small bar, its level and what is added to it
     frame.skill = ns.FontString(frame, 10, "CENTER")
-    frame.skill:SetPoint("TOP", frame, "TOP", 0, -(SLOT + 8))
+    frame.skill:SetPoint("TOP", frame, "TOP", 0, -8)
     frame.track = frame:CreateTexture(nil, "BACKGROUND")
     frame.track:SetSize(BAR_W, BAR_H)
     frame.track:SetPoint("TOP", frame.skill, "BOTTOM", 0, -3)
@@ -102,17 +109,30 @@ local function Build()
     frame.latest = ns.FontString(frame, 10, "CENTER")
     frame.latest:SetPoint("TOP", frame.bait, "BOTTOM", 0, -6)
     frame.latest:SetTextColor(unpack(C.cast))
-    for i = 1, P.ROWS do
+    local function Row()
         local r = { text = ns.FontString(frame, 10, "LEFT"), icon = frame:CreateTexture(nil, "ARTWORK"),
                     count = ns.FontString(frame, 10, "RIGHT") }
         r.icon:SetSize(16, 16)
-        r.icon:SetPoint("TOPLEFT", frame, "TOPRIGHT", 44, -((i - 1) * ROW + 4))
         r.icon:SetTexCoord(0.08, 0.92, 0.08, 0.92)
         r.text:SetPoint("LEFT", r.icon, "RIGHT", 6, 0)
         r.count:SetPoint("RIGHT", r.icon, "LEFT", -6, 0)
         r.count:SetTextColor(unpack(C.muted))
+        return r
+    end
+    for i = 1, P.ROWS do
+        local r = Row()
+        r.icon:SetPoint("TOPLEFT", frame, "TOPRIGHT", 44, -((i - 1) * ROW + 4))
         P.rows[i] = r
     end
+    local lost = Row()                                     -- the last line of the tally: the ones that got away
+    lost.icon:SetColorTexture(0.03, 0.05, 0.09, 0.6)       -- a "?" for its picture: nobody saw what it was
+    lost.q = ns.FontString(frame, 11, "CENTER")
+    lost.q:SetPoint("CENTER", lost.icon, "CENTER", 0, 0)
+    lost.q:SetText("?")
+    lost.q:SetTextColor(unpack(C.muted))
+    lost.text:SetText(L["Got away"])
+    lost.text:SetTextColor(unpack(C.muted))
+    P.lost = lost
     frame:Hide()
     P.frame = frame
 end
@@ -147,12 +167,15 @@ function P:Refresh()
     local J, F = ns.FishLog, ns.Fishing
     J:Water()                                              -- (moved on to another water: the tally starts again)
     local waters = J.Waters()
-    local n = #waters
+    local n = math.min(#waters, #P.slots)
+    local cols = math.min(n, P.PER)
     for i, s in ipairs(P.slots) do
         local w = waters[i]
         if w then
+            local row, col = math.floor((i - 1) / P.PER), (i - 1) % P.PER
             s.back:ClearAllPoints()
-            s.back:SetPoint("TOP", frame, "TOP", (i - (n + 1) / 2) * (SLOT + GAP), 0)
+            s.back:SetPoint("TOPLEFT", frame, "TOPLEFT", GAP - P.SIDE - (cols - col) * (SLOT + GAP),
+                -(4 + row * (SLOT + GAP)))
             s.back:Show()
             local icon = w.known and Icon(w.id, w.icon)
             if icon then
@@ -168,6 +191,12 @@ function P:Refresh()
         end
         s.known = w and w.known or false
     end
+    if n > 0 and ns.db.textShade ~= false then
+        frame.fishShade:SetSize(cols * (SLOT + GAP) + 60, math.ceil(n / P.PER) * (SLOT + GAP) + 40)
+        frame.fishShade:Show()
+    else
+        frame.fishShade:Hide()
+    end
     local rank, bonus, cap = F.Skill()
     if rank then
         local text = ("%s %d"):format(F.Spell() or "", rank)
@@ -181,7 +210,7 @@ function P:Refresh()
         frame.track:Hide(); frame.fill:Hide()
     end
     P.share = rank and ns.Clamp(rank / math.max(1, cap or rank), 0, 1) or nil
-    frame.stats:SetText(L["Caught %d"]:format(J.session.caught) .. "     " .. L["Got away %d"]:format(J.session.away))
+    frame.stats:SetText(L["Caught %d"]:format(J.session.caught))
     local c = J.feed[1]
     if c then
         local text = c.name or ("item:" .. c.id)
@@ -208,11 +237,21 @@ function P:Refresh()
         end
     end
     P.tallied = shown
+    local lost, away = P.lost, J.session.away
+    local lines = shown + (away > 0 and 1 or 0)
+    if away > 0 then
+        lost.icon:ClearAllPoints()
+        lost.icon:SetPoint("TOPLEFT", frame, "TOPRIGHT", 44, -(shown * ROW + 4))
+        lost.count:SetText(("x%d"):format(away))
+        lost.icon:Show(); lost.q:Show(); lost.text:Show(); lost.count:Show()
+    else
+        lost.icon:Hide(); lost.q:Hide(); lost.text:Hide(); lost.count:Hide()
+    end
     if ns.Narrative then ns.Narrative.Fishing() end               -- (you, at the water)
     local shade = ns.db.textShade ~= false
     if shade then frame.shade:Show() else frame.shade:Hide() end
-    if shade and shown > 0 then
-        frame.tallyShade:SetSize(250, shown * ROW + 48)
+    if shade and lines > 0 then
+        frame.tallyShade:SetSize(250, lines * ROW + 48)
         frame.tallyShade:Show()
     else
         frame.tallyShade:Hide()

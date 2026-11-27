@@ -242,8 +242,8 @@ end
 -- that are settings of their own (the HUD's text, the chat windows' text, the cast bar); each can be tuned
 -- afterwards.
 P.SIZES = {
-    tv = { textScale = 1.5, chatScale = 1.5, castScale = 1.35 },
-    monitor = { textScale = 1, chatScale = 1, castScale = 1 },
+    tv = { textScale = 1.5, chatSize = 20, castScale = 1.35 },
+    monitor = { textScale = 1, chatSize = 0, castScale = 1 },                -- (chat: the game's own size)
 }
 function P:SizeFor(key)
     local sizes = self.SIZES[key]

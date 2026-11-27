@@ -205,14 +205,15 @@ class Files(unittest.TestCase):
 
     def test_textures_are_valid_tga(self):
         names = sorted(os.listdir(os.path.join(HUD, "Media")))
-        self.assertEqual(names, ["bar.tga", "bobber.tga", "bolt.tga", "cloud.tga", "crystal.tga", "disc.tga", "fish.tga", "flame.tga",
+        self.assertEqual(names, ["bar.tga", "bobber.tga", "bolt.tga", "cloud.tga", "crystal.tga", "disc.tga", "dragon.tga", "fish.tga", "flame.tga",
                                  "flower.tga", "ghost.tga", "halo.tga", "hammer.tga", "leaf.tga", "mapring.tga",
                                  "mark.tga", "mask.tga", "pad_ps_circle.tga", "pad_ps_cross.tga",
                                  "pad_ps_square.tga", "pad_ps_triangle.tga", "pad_steam_a.tga", "pad_steam_b.tga",
                                  "pad_steam_x.tga", "pad_steam_y.tga", "pad_xbox_a.tga", "pad_xbox_b.tga",
                                  "pad_xbox_x.tga", "pad_xbox_y.tga", "pick.tga", "quest.tga", "ring.tga", "roots.tga",
                                  "runes.tga", "skull.tga", "soft.tga", "spark.tga", "threat.tga", "treetop.tga",
-                                 "vine.tga", "vines.tga", "wing.tga", "zeppelin.tga"])
+                                 "vine.tga", "vines.tga", "wing.tga", "zeppelin.tga", "zeppelin_alliance.tga",
+                                 "zeppelin_horde.tga"])
         for n in names:
             data = open(os.path.join(HUD, "Media", n), "rb").read()
             image_type = data[2]
@@ -3017,6 +3018,83 @@ class Vendor(SellWhenUnsure, unittest.TestCase):
         self.assertTrue(V.materialsList.shown)
         self.assertEqual(e.errors(), [])
 
+    def test_the_bank_buttons_keep_clear_of_the_bankers_face(self):
+        e = self.stock(Env(setup=lambda env: env.lua.execute("""
+            BankFrame = CreateFrame("Frame", "BankFrame", UIParent)
+            BankItemSearchBox = CreateFrame("EditBox", "BankItemSearchBox", BankFrame)""")))
+        V = e.ns.Vendor
+        e.mock.openBank(True)
+        e.mock.advance(1)
+        b = V.bankButtons
+
+        def at(left, first, bottom):
+            e.g.BankFrame.GetLeft = e.lua.eval("function() return %d end" % left)
+            e.g.BankFrame.GetBottom = e.lua.eval("function() return %d end" % bottom)
+            b.deposit.GetLeft = e.lua.eval("function() return %d end" % first)
+            V.PlaceBankButtons(V)
+            return V.bankRow, b.materials.points[1][1], b.materials.points[1][3]
+
+        self.assertEqual(at(16, 200, 100), ("beside", "RIGHT", "LEFT"))    # room beside the search box
+        self.assertEqual(at(16, 40, 100), ("under", "TOPRIGHT", "BOTTOMRIGHT"))   # under the portrait: below
+        self.assertEqual(at(16, 40, 5), ("over", "BOTTOMRIGHT", "TOPRIGHT"))      # no room below: above
+        self.assertTrue(e.same(b.withdraw.points[1][2], b.materials))      # the row stays together
+        self.assertEqual(len(list(b.materials.points.values())), 1)
+        self.assertEqual(e.errors(), [])
+
+    def test_the_materials_list_works_with_the_controller(self):
+        e = self.stock(Env(setup=lambda env: env.lua.execute("""
+            BankFrame = CreateFrame("Frame", "BankFrame", UIParent)
+            BankItemSearchBox = CreateFrame("EditBox", "BankItemSearchBox", BankFrame)
+            GetItemSubClassInfo = function(class, sub) return ({ [5] = "Cloth", [7] = "Metal & Stone" })[sub] end""")))
+        put, T = e.mock.put, e.lua.table
+        e.mock["items"][4].sub = 5
+        put(2, 2, T(id=20, name="Copper Bar", quality=1, price=10, count=10, sub=7, **{"class": 7}))
+        put(2, 3, T(id=21, name="Iron Ore", quality=1, price=10, count=10, sub=7, **{"class": 7}))
+        e.mock.bags[-1] = T()
+        V, I, ov = e.ns.Vendor, e.ns.Inventory, e.mock.overrides
+        e.mock.openBank(True)
+        e.mock.advance(1)
+
+        def press(key):
+            button = e.g["ControllerCamHUD_Key_Materials_" + key]
+            button.scripts.OnClick(button)
+
+        def chosen():
+            return plain(V.materialsList.rows[V.materialsList.at].text.text)
+
+        I.holdKey = True                                             # R3 held, the cursor on no item
+        I.StickClick(I, True)
+        e.mock.advance(I.HOLD + 0.1)
+        I.StickClick(I, False)
+        self.assertTrue(V.materialsList.shown)
+        for key in ("PADDUP", "PADDDOWN", "PAD1", "PAD2"):           # the list's, while it is up
+            self.assertEqual(ov[key], "CLICK ControllerCamHUD_Key_Materials_%s:LeftButton" % key)
+        self.assertEqual(chosen(), "All materials (3)")              # on the first it can do (not the heading)
+        press("PADDDOWN")
+        self.assertEqual(chosen(), "Metal & Stone (2)")
+        press("PADDDOWN")
+        press("PADDDOWN")                                            # (past the last, and the other heading: round)
+        self.assertEqual(chosen(), "All materials (3)")
+        press("PADDUP")
+        press("PADDUP")
+        self.assertEqual(chosen(), "Metal & Stone (2)")
+        press("PAD1")                                                # A: that one, and the buttons given back
+        self.assertFalse(V.materialsList.shown)
+        for key in ("PADDUP", "PADDDOWN", "PAD1", "PAD2"):
+            self.assertIsNone(ov[key], key)
+        e.mock.advance(1)
+        self.assertEqual(sorted(e.mock.moved.values()), [20, 21])
+        V.OpenMaterials(V)
+        press("PAD2")                                                # B: closed
+        self.assertFalse(V.materialsList.shown)
+        self.assertIsNone(ov.PADDDOWN)
+        V.OpenMaterials(V)
+        e.mock.openBank(False)                                       # the bank closes: nothing is left taken
+        e.mock.advance(1)
+        self.assertFalse(V.materialsList.shown)
+        self.assertIsNone(ov.PADDDOWN)
+        self.assertEqual(e.errors(), [])
+
     def test_auto_deposit_and_the_games_reagent_option(self):
         e = self.stock(Env())
         e.cmd("bank 4")
@@ -3297,6 +3375,16 @@ class CastBars(unittest.TestCase):
         self.assertEqual((time[1], time[3]), ("TOPRIGHT", "BOTTOMRIGHT"))          # the time under the bar's right end,
         self.assertEqual([(p[1], p[3]) for p in label.values()],                    # the name over the whole bar
                          [("BOTTOMLEFT", "TOPLEFT"), ("BOTTOMRIGHT", "TOPRIGHT")])
+        room = cb.ROOM                                               # clear of what grows on the bar as it fills:
+        self.assertGreaterEqual(room, 16)                            # leaves and roots reach 16 beyond it
+        self.assertEqual([p[5] for p in label.values()], [room, room])
+        self.assertEqual((time[5], len(list(cb.frame.time.points.values()))), (-room, 1))
+        cb.FishingLook(cb, True)                                     # nothing grows on the fishing line:
+        self.assertEqual([p[5] for p in cb.frame.label.points.values()], [4, 4])   # close, as it was
+        self.assertEqual(cb.frame.time.points[1][5], -5)
+        cb.FishingLook(cb, False)
+        self.assertEqual([p[5] for p in cb.frame.label.points.values()], [room, room])
+        self.assertEqual(len(list(cb.frame.label.points.values())), 2)
         e.mock.units.player.cast = None
         e.mock.fire("UNIT_SPELLCAST_STOP", "player")
         self.assertTrue(cb.frame.shown)                              # the result lingers a moment
@@ -6994,6 +7082,41 @@ class FishingMode(unittest.TestCase):
         self.assertIsNone(e.mock.overrides.PAD2)
         self.assertEqual(e.errors(), [])
 
+    def test_one_button_brings_fishing_mode_back_while_you_hold_the_pole(self):
+        e = self.env()
+        F, ov = e.ns.Fishing, e.mock.overrides
+        e.update(0.6)
+        F.Back(F)
+        e.update(0.6)
+        self.assertTrue(F.paused)
+        self.assertIsNone(ov.PAD3)
+        self.assertEqual(ov.PAD4, "CLICK ControllerCamHUD_Key_FishResume_PAD4:LeftButton")    # Y brings it back
+        self.assertTrue(F.hint.shown)
+        self.assertEqual(plain(F.hint.text.text), "PAD4 to fish again")
+        e.update(1)
+        self.assertEqual(ov.PAD4, "CLICK ControllerCamHUD_Key_FishResume_PAD4:LeftButton")    # and stays offered
+        e.mock.state.combat = True                                    # a fight takes it, and gives it back after
+        e.mock.fire("PLAYER_REGEN_DISABLED")
+        self.assertIsNone(ov.PAD4)
+        e.mock.state.combat = False
+        e.mock.fire("PLAYER_REGEN_ENABLED")
+        e.update(0.6)
+        self.assertEqual(ov.PAD4, "CLICK ControllerCamHUD_Key_FishResume_PAD4:LeftButton")
+        b = e.g.ControllerCamHUD_Key_FishResume_PAD4
+        b.scripts.OnClick(b)
+        self.assertFalse(F.paused)
+        self.assertEqual(ov.PAD3, "SPELL Fishing")                    # fishing again
+        self.assertNotEqual(ov.PAD4, "CLICK ControllerCamHUD_Key_FishResume_PAD4:LeftButton")
+        e.cmd("fish")                                                 # off by the command: the same way back
+        e.update(0.6)
+        self.assertEqual(ov.PAD4, "CLICK ControllerCamHUD_Key_FishResume_PAD4:LeftButton")
+        e.mock.state.mainHand = 25                                    # the pole put away: Y is the game's
+        e.mock.fire("PLAYER_EQUIPMENT_CHANGED", 16)
+        e.update(0.6)
+        self.assertIsNone(ov.PAD4)
+        self.assertFalse(F.hint.shown)
+        self.assertEqual(e.errors(), [])
+
     def test_the_button_stays_interact_when_there_is_something_to_interact_with(self):
         e = self.env()
         e.mock.units.softinteract = e.lua.table(name="Mailbox")
@@ -7237,7 +7360,7 @@ class FishJournal(unittest.TestCase):
         e = self.env()
         J = e.ns.FishLog
         self.land(e, 6309, 6297)                                     # two things on one line
-        self.assertEqual(e.db.fishLog.fish[6309].best, 17)           # "17 Pound Catfish" weighs that
+        self.assertTrue(17 <= e.db.fishLog.fish[6309].best <= 17.9)  # "17 Pound Catfish" weighs 17 and some tenths
         self.assertFalse(e.db.fishLog.fish[6297].fish)               # an old skull is not a fish
         self.assertIsNone(e.db.fishLog.fish[6297].best)
         self.assertEqual(e.db.fishLog.total, 2)
@@ -7306,18 +7429,85 @@ class FishJournal(unittest.TestCase):
         self.assertEqual(J.session.away, 2)
         self.assertEqual(e.errors(), [])
 
-    def test_this_waters_fish_are_found_by_landing_them(self):
+    def test_a_lost_fish_counts_however_the_game_says_it(self):
         e = self.env()
         J = e.ns.FishLog
-        waters = list(J.Waters().values())
-        self.assertEqual(len(waters), 4)                             # room for what has not been found
-        self.assertFalse(any(w.known for w in waters))
+
+        def lose(*words):
+            self.line(e, True)
+            e.update(6)
+            self.line(e, False)                                      # you pressed on the bobber: the line is in
+            e.update(0.3)
+            for w in words:
+                e.mock.fire(*w)
+            e.update(1.5)
+            e.update(5)
+
+        lose(("UI_INFO_MESSAGE", 50, "Your fish got away!"))          # a notice, not an error
+        self.assertEqual(J.session.away, 1)
+        lose(("CHAT_MSG_SYSTEM", "Your fish got away!"))              # a line of chat
+        self.assertEqual(J.session.away, 2)
+        lose(("UI_INFO_MESSAGE", 50, "No fish are hooked."))          # pulled in with nothing on it
+        self.assertEqual(J.session.away, 3)
+        lose(("UI_INFO_MESSAGE", 50, "Your fish got away!"),          # said twice over: one fish
+             ("CHAT_MSG_SYSTEM", "Your fish got away!"))
+        self.assertEqual((J.session.away, e.db.fishLog.away), (4, 4))
+        for _ in range(2):                                           # lines the HUD did not see: each its own fish
+            e.update(10)
+            e.mock.fire("UI_INFO_MESSAGE", 50, "Your fish got away!")
+        self.assertEqual(J.session.away, 6)
+        e.mock.fire("UI_INFO_MESSAGE", 50, "Quest accepted")
+        e.mock.fire("CHAT_MSG_SYSTEM", "You are now Away: Away")
+        self.assertEqual(J.session.away, 6)
+        self.assertEqual(e.errors(), [])
+
+    def test_this_waters_fish_are_found_by_landing_them(self):
+        e = self.env(zone="Badlands", area=1418)
+        J = e.ns.FishLog
+        listed, whole = J.Waters()
+        self.assertEqual(len(list(listed.values())), 0)              # nobody can say what swims here: no "?"
+        self.assertFalse(whole)
         self.land(e, 6291, 6297)
-        waters = list(J.Waters().values())
-        self.assertEqual([bool(w.known) for w in waters], [True, False, False, False])   # the skull is not listed
-        self.assertEqual(waters[0].id, 6291)
+        waters = list(J.Waters()[0].values())
+        self.assertEqual([(w.id, bool(w.known)) for w in waters], [(6291, True)])   # the skull is not listed
         e.mock.zone = "The Barrens"                                  # another water: nothing found there yet
-        self.assertFalse(any(w.known for w in J.Waters().values()))
+        self.assertEqual(len(list(J.Waters()[0].values())), 0)
+
+    def test_a_fish_that_names_its_weight_weighs_it_and_some_tenths(self):
+        e = self.env()
+        J = e.ns.FishLog
+        weights = set()
+        for r in [i / 10 for i in range(10)] + [1.0]:
+            J.random = (lambda v: lambda: v)(r)
+            weights.add(J.Weigh(6309, "15 Pound Mud Snapper"))
+        self.assertEqual(sorted(weights), [(150 + t) / 10 for t in range(10)])
+        J.random = lambda: 0.65
+        self.assertEqual(J.Weigh(6309, "15 lb Mud Snapper"), 15.6)
+        self.assertEqual(J.Weigh(6309, "15 lbs. Mud Snapper"), 15.6)
+        self.assertEqual(J.Weigh(6309, "15 Pound Mud Snapper", 1), 15.9)   # a curious one is the heavier for it
+        self.assertEqual(e.errors(), [])
+
+    def test_our_list_has_a_place_for_each_fish_sure_to_be_in_the_zone(self):
+        e = self.env(zone="Stranglethorn Vale", area=1434)
+        J = e.ns.FishLog
+        listed, whole = J.Waters()
+        self.assertEqual([w.id for w in listed.values()], [6308, 8365, 6362, 4603])
+        self.assertFalse(whole)                                      # (pools and corners are left out of it)
+        self.assertFalse(any(w.known for w in listed.values()))
+        for i in (6308, 8365, 6362, 4603, 6303):
+            e.mock["items"][i] = e.lua.table(name="Fish %d" % i, **{"class": 7})
+        self.land(e, 6308, 8365, 6362, 4603)                         # all of them: no "?" is left
+        self.assertEqual([bool(w.known) for w in J.Waters()[0].values()], [True] * 4)
+        self.land(e, 6303)                                           # one the list lacks joins what you landed
+        self.assertEqual([(w.id, bool(w.known)) for w in J.Waters()[0].values()][4:], [(6303, True)])
+        self.assertTrue(J.InSeason(13755, 1126) and J.InSeason(13755, 201) and not J.InSeason(13755, 601))
+        self.assertTrue(J.InSeason(13756, 601) and not J.InSeason(13756, 1126))
+        self.assertTrue(J.InSeason(6308, 601))
+        for fish in J.ZONES.values():                                # no fish twice in a zone, no zone too big
+            ids = list(fish.values())
+            self.assertEqual(len(ids), len(set(ids)))
+            self.assertLessEqual(len(ids), J.SLOTS)
+        self.assertEqual(e.errors(), [])
 
     def test_with_the_fishing_data_the_whole_water_is_listed_and_hidden_until_landed(self):
         e = self.env(setup=lambda env: env.lua.execute("""
@@ -7326,11 +7516,38 @@ class FishJournal(unittest.TestCase):
                           [6309] = "17 Pound Catfish|1|fish", [6307] = "Message in a Bottle|1|treasure" },
                 zones = { [14] = "Durotar|6303:60:0,6291:38:0,6309:2:0,6307:0.5:0" }, areas = {} } }"""))
         J = e.ns.FishLog
-        waters = list(J.Waters().values())
+        listed, whole = J.Waters()
+        waters = list(listed.values())
+        self.assertTrue(whole)
         self.assertEqual([w.id for w in waters], [6303, 6291, 6309])
         self.assertFalse(any(w.known for w in waters))
         self.land(e, 6291)
-        self.assertEqual([bool(w.known) for w in J.Waters().values()], [False, True, False])
+        self.assertEqual([bool(w.known) for w in J.Waters()[0].values()], [False, True, False])
+        self.land(e, 6303, 6309)                                     # every fish here: not one "?" left over
+        self.assertEqual([bool(w.known) for w in J.Waters()[0].values()], [True, True, True])
+        P = e.ns.FishPanel
+        e.update(0.6)
+        shown = [s for s in P.slots.values() if s.back.shown]
+        self.assertEqual(len(shown), 3)
+        self.assertFalse(any(s.q.shown for s in shown))
+        self.assertEqual(e.errors(), [])
+
+    def test_a_big_water_has_a_place_for_each_fish_to_the_left(self):
+        rows = ", ".join('[%d] = "Fish %d|1|fish"' % (i, i) for i in range(101, 109))
+        catches = ",".join("%d:10:0" % i for i in range(101, 109))
+        e = self.env(setup=lambda env: env.lua.execute(
+            'ImprovedForever = { FishingData = { items = { %s }, zones = { [14] = "Durotar|%s" }, areas = {} } }'
+            % (rows, catches)))
+        e.update(0.6)
+        P = e.ns.FishPanel
+        shown = [s for s in P.slots.values() if s.back.shown]
+        self.assertEqual(len(shown), 8)                              # one "?" for each, not cut at six
+        self.assertTrue(all(s.q.shown for s in shown))
+        at = [(s.back.points[1][1], s.back.points[1][3], s.back.points[1][4], s.back.points[1][5]) for s in shown]
+        self.assertTrue(all(a[:2] == ("TOPLEFT", "TOPLEFT") and a[2] < -30 for a in at), at)   # left of the middle
+        self.assertEqual(sorted({a[3] for a in at}), [-38, -4])      # six to a row, the rest under
+        self.assertTrue(P.frame.fishShade.shown)
+        self.assertEqual(e.errors(), [])
 
     def test_the_fishing_interface_shows_the_water_the_skill_and_the_catches(self):
         e = self.env()
@@ -7349,8 +7566,9 @@ class FishJournal(unittest.TestCase):
         self.assertTrue(f.shade.shown)
         self.assertTrue(e.same(e.ns.Fishing.hint.points[1][2], e.g.PlayerCastingBarFrame))
         self.assertEqual(e.ns.Fishing.hint.points[1][1], "BOTTOM")   # (the "casts" hint stays by the cast bar)
-        self.assertEqual(sum(1 for s in P.slots.values() if s.back.shown), 4)
-        self.assertTrue(all(s.q.shown for s in list(P.slots.values())[:4]))
+        self.assertEqual(sum(1 for s in P.slots.values() if s.back.shown), 3)   # our list's three for Durotar
+        self.assertTrue(all(s.q.shown for s in list(P.slots.values())[:3]))
+        self.assertTrue(f.fishShade.shown)
         self.assertIn("Fishing 150", f.skill.text)
         self.assertIn("(+50)", f.skill.text)
         self.assertIn("/ 225", f.skill.text)
@@ -7360,7 +7578,8 @@ class FishJournal(unittest.TestCase):
         self.assertFalse(any(r.text.shown for r in P.rows.values()))     # nothing landed yet: no tally beside it
         self.assertFalse(f.tallyShade.shown)
         self.assertIn("Caught 0", f.stats.text)
-        self.assertIn("Got away 0", f.stats.text)
+        self.assertNotIn("Got away", f.stats.text)                   # (the tally says that, once one has)
+        self.assertFalse(P.lost.text.shown)
         self.assertEqual(f.bait.text, "No bait")
         self.assertEqual(f.alpha, 0.9)                               # a touch fainter between casts
         J.random = lambda: 1.0
@@ -7452,12 +7671,17 @@ class FishJournal(unittest.TestCase):
         self.assertEqual((J.session.caught, J.session.away), (3, 1))
         e.update(2.5)
         self.assertEqual([P.rows[i].count.text for i in (1, 2)], ["x2", "x1"])
+        lost = P.lost                                                # under what you landed: "x1 [?] Got away"
+        self.assertEqual((lost.count.text, lost.q.text, lost.text.text), ("x1", "?", "Got away"))
+        self.assertTrue(lost.text.shown and lost.q.shown)
+        self.assertEqual(lost.icon.points[1][5], -44)                # on the third line, after the two kinds
         self.assertIn("Caught 3", P.frame.stats.text)
         e.mock.zone = "The Barrens"                                  # on to another water: a new session
         e.update(2.5)
         self.assertEqual(len(list(J.Tally().values())), 0)
         self.assertEqual((J.session.caught, J.session.away), (0, 0))
         self.assertFalse(any(r.text.shown for r in P.rows.values()))
+        self.assertFalse(lost.text.shown)
         self.assertIn("Caught 0", P.frame.stats.text)
         self.assertEqual(P.frame.height, 120)
         self.assertEqual(e.db.fishLog.total, 3)                      # the book keeps everything
@@ -7613,6 +7837,26 @@ class FishJournal(unittest.TestCase):
         self.assertEqual(W.rows[8].name.text, "Fish 09")
         self.assertIn("3 - 10 / 12", W.frame.count.text)
 
+    def test_a_herb_or_a_rum_on_the_line_is_no_fish(self):
+        e = self.env()
+        J = e.ns.FishLog
+        e.mock["items"][3820] = e.lua.table(name="Stranglekelp", **{"class": 7, "sub": 9})
+        e.mock["items"][21151] = e.lua.table(name="Rumsey Rum Black Label", **{"class": 0})
+        e.mock["items"][2450] = e.lua.table(name="Briarthorn", **{"class": 7, "sub": 9})   # any herb, listed or not
+        self.land(e, 3820, 21151, 2450)
+        for i in (3820, 21151, 2450):
+            self.assertFalse(e.db.fishLog.fish[i].fish, i)
+            self.assertIsNone(e.db.fishLog.fish[i].best, i)           # and no weight
+        self.assertNotIn(3820, [w.id for w in J.Waters()[0].values()])   # nor a box among the water's fish
+        self.assertEqual(sorted(t.id for t in J.Tally().values()), [2450, 3820, 21151])   # still in your catch
+        old = self.env(db="""{ v = 10, asked = true, enabled = true, fishLog = { total = 9, away = 0, zones = {},
+            fish = { [3820] = { n = 5, best = 2.3, bestAt = "Dalaran", name = "Stranglekelp", fish = true },
+                     [6308] = { n = 4, best = 3.1, bestAt = "Durotar", fish = true } } } }""")
+        kelp, catfish = old.db.fishLog.fish[3820], old.db.fishLog.fish[6308]
+        self.assertEqual((kelp.n, kelp.fish, kelp.best, kelp.bestAt), (5, False, None, None))   # counted, not weighed
+        self.assertEqual((catfish.fish, catfish.best), (True, 3.1))
+        self.assertEqual(e.errors() + old.errors(), [])
+
     def test_a_saved_journal_is_read_carefully(self):
         e = self.env(db="""{ v = 10, asked = true, enabled = true, fishLog = {
             total = 7, away = "2", fish = { [6291] = { n = 7, best = 2.5, name = "Raw Brilliant Smallfish", fish = true,
@@ -7625,7 +7869,7 @@ class FishJournal(unittest.TestCase):
         self.assertIsNone(log.fish[6291].icon)
         self.assertEqual(list(log.zones.keys()), ["Durotar"])
         self.assertEqual(dict(log.zones["Durotar"].fish), {6291: 7})
-        self.assertTrue(e.ns.FishLog.Waters()[1].known)
+        self.assertTrue(e.ns.FishLog.Waters()[0][1].known)
         junk = self.env(db="{ v = 10, asked = true, enabled = true, fishLog = 'fish' }")
         self.assertEqual(junk.db.fishLog.total, 0)
 
@@ -7723,20 +7967,26 @@ class WhoWroteIt(unittest.TestCase):
 
 
 class FishingGame(unittest.TestCase):
-    """Something to do while the float is out; it never touches the fishing itself."""
+    """Something to do while the float is out, offered like the flight game; it never touches the fishing itself."""
 
-    def env(self, on=True, db=None):
+    def env(self, on=True, db=None, play=True):
         e = Env(db=db)
         e.mock["items"][6256] = e.lua.table(name="Fishing Pole", **{"class": 2, "sub": 20})
         e.mock["items"][6291] = e.lua.table(name="Raw Brilliant Smallfish", **{"class": 7})
         e.mock.state.mainHand = 6256
         e.mock.spellNames = e.lua.table_from({7620: "Fishing"})
         e.mock.fire("PLAYER_EQUIPMENT_CHANGED", 16)
-        if on:
-            e.cmd("fishgame on")
+        if not on:
+            e.cmd("fishgame off")
         e.ns.FishGame.random = lambda: 0.5
         e.ns.FishLog.random = lambda: 0.5
+        if on and play:
+            e.update(0.3)                                            # offered with the pole in hand,
+            self.start(e)                                            # and started with its button
         return e
+
+    def start(self, e, key="PAD4"):
+        e.g["ControllerCamHUD_Key_FishStart_" + key].scripts.OnClick()
 
     def line(self, e, out, seconds=30):
         now = e.mock.time
@@ -7748,13 +7998,102 @@ class FishingGame(unittest.TestCase):
         e.mock.land(e.lua.table_from([e.lua.table(id=6291, name="Raw Brilliant Smallfish", quality=1)]))
         self.line(e, False)
 
-    def test_off_unless_you_want_it(self):
-        e = self.env(on=False)
-        self.assertFalse(e.db.fishGame)
+    def test_the_cast_hint_goes_under_the_games_words(self):
+        e = self.env(play=False)
+        G, F = e.ns.FishGame, e.ns.Fishing
+        e.update(0.3)
         self.line(e, True)
-        e.update(2)
-        self.assertIsNone(e.ns.FishGame.frame)
-        self.assertEqual(e.ns.FishGame.Take(e.ns.FishGame), 0)
+        e.update(1)
+        hint = F.hint
+        self.assertTrue(hint.shown and G.frame.shown)                 # "X to hook, A to cast again", and the offer
+        self.assertIn("to cast again", plain(hint.text.text))
+        hint.scripts.OnUpdate(hint)
+        self.assertEqual(len(list(hint.points.values())), 1)
+        self.assertEqual((hint.points[1][1], hint.points[1][3]), ("TOP", "BOTTOM"))
+        self.assertTrue(e.same(hint.points[1][2], G.frame.text))      # under the offer, not over it
+        self.start(e)                                                 # playing: still under the game's last line
+        e.update(0.5)
+        hint.scripts.OnUpdate(hint)
+        self.assertTrue(e.same(hint.points[1][2], G.frame.text))
+        e.cmd("fishgame off")
+        e.update(0.5)
+        hint.scripts.OnUpdate(hint)
+        self.assertEqual(hint.points[1][1], "BOTTOM")                 # no game: back where the cast bar sits
+        self.assertTrue(e.same(hint.points[1][2], e.g.PlayerCastingBarFrame))
+        self.assertEqual(e.errors(), [])
+
+    def test_offered_with_a_pole_and_one_button_starts_it_like_the_flight_game(self):
+        e = self.env(play=False)
+        G, ov = e.ns.FishGame, e.mock.overrides
+        self.assertTrue(e.db.fishGame)                               # offered by default
+        e.update(0.3)
+        self.assertEqual(G.state, "offered")
+        self.assertEqual(ov.PAD4, "CLICK ControllerCamHUD_Key_FishStart_PAD4:LeftButton")   # Y, the one button
+        self.line(e, True)
+        e.mock.keysDown.PADLTRIGGER = True
+        e.update(1)
+        f = G.frame
+        self.assertTrue(f.shown)                                     # the line is out: the offer shows,
+        self.assertIn("a game while the float is out", plain(f.text.text))
+        self.assertFalse(f.fish.shown)                               # not the game
+        self.assertEqual(G.m, 0)                                     # (nothing moves)
+        self.start(e)                                                # Y: play
+        self.assertEqual(G.state, "playing")
+        e.update(0.5)
+        self.assertTrue(f.fish.shown)
+        self.assertIn("put it away", plain(f.text.text))
+        self.assertGreater(G.y, 0)                                   # the trigger runs the lure along
+        self.start(e)                                                # Y again: put away
+        self.assertEqual(G.state, "away")
+        e.update(0.3)
+        self.assertFalse(f.fish.shown)
+        self.assertIn("back to the game", plain(f.text.text))
+        self.assertEqual(ov.PAD4, "CLICK ControllerCamHUD_Key_FishStart_PAD4:LeftButton")   # (to bring it back)
+        e.mock.state.combat = True                                   # a fight: the button is yours at once
+        e.mock.fire("PLAYER_REGEN_DISABLED")
+        self.assertIsNone(ov.PAD4)
+        e.update(0.5)
+        self.assertIsNone(ov.PAD4)
+        e.mock.state.combat = False
+        e.mock.fire("PLAYER_REGEN_ENABLED")
+        e.update(0.3)
+        self.assertEqual(ov.PAD4, "CLICK ControllerCamHUD_Key_FishStart_PAD4:LeftButton")
+        e.mock.state.mainHand = None                                 # the pole away: gone, and offered afresh later
+        e.mock.fire("PLAYER_EQUIPMENT_CHANGED", 16)
+        e.update(0.3)
+        self.assertEqual(G.state, "off")
+        self.assertIsNone(ov.PAD4)
+        e.mock.state.mainHand = 6256
+        e.mock.fire("PLAYER_EQUIPMENT_CHANGED", 16)
+        e.update(0.3)
+        self.assertEqual(G.state, "offered")
+        e.cmd("fishgame off")                                        # off: nothing at all
+        e.update(0.3)
+        self.assertIsNone(ov.PAD4)
+        self.assertIn("off", e.cmd("fishplay"))
+        self.assertEqual(G.Take(G), 0)
+        self.assertEqual(e.errors(), [])
+
+    def test_offered_once_to_everyone_and_off_stays_off(self):
+        e = self.env(db="{ fishGame = false }", play=False)          # off from before, when it was never offered
+        self.assertTrue(e.db.fishGame)
+        self.assertTrue(e.db.fishGameOffered)
+        e = self.env(db="{ fishGame = false, fishGameOffered = true }", play=False)   # off since: stays off
+        self.assertFalse(e.db.fishGame)
+        e.update(0.5)
+        self.assertIsNone(e.mock.overrides.PAD4)
+
+    def test_its_button_is_never_one_your_fishing_uses(self):
+        e = self.env(play=False)
+        e.cmd("fishkey y")                                           # Y fishes: the game takes RB
+        e.update(0.3)
+        G = e.ns.FishGame
+        self.assertEqual(G.StartKey(), "PADRSHOULDER")
+        self.assertEqual(e.mock.overrides.PADRSHOULDER, "CLICK ControllerCamHUD_Key_FishStart_PADRSHOULDER:LeftButton")
+        self.assertNotEqual(str(e.mock.overrides.PAD4), "CLICK ControllerCamHUD_Key_FishStart_PAD4:LeftButton")
+        self.start(e, "PADRSHOULDER")
+        self.assertEqual(G.state, "playing")
+        self.assertEqual(e.errors(), [])
 
     def test_played_on_the_cast_bar_hold_the_trigger_to_stay_beside_the_shadow(self):
         e = self.env()
@@ -8081,16 +8420,21 @@ class Chat(unittest.TestCase):
 
     LINE = "12:00 |Hchannel:SAY|h[S]|h |Hplayer:%s:%d:SAY|h[|cff3fc7eb%s|r]|h says: %s"
 
-    def test_the_games_chat_frames_are_left_alone_by_default(self):
-        # wrapping the game's chat frames taints them: in a battleground every line then counted addon errors
-        # against the HUD until the game warned. Off by default, and switched off once for older settings
+    def test_the_chat_options_are_on_to_begin_with(self):
         e = self.env()
-        self.assertFalse(e.db.chatInfo or e.db.chatShort or e.db.chatFirstName)
-        self.assertEqual(len(list(e.ns.Chat.hooked.keys())), 0)       # no chat window wrapped
-        old = Env(db="{ v = 12, chatInfo = true, chatShort = true, chatFirstName = true }")
-        self.assertFalse(old.db.chatInfo or old.db.chatShort or old.db.chatFirstName)
-        self.assertEqual(len(list(old.ns.Chat.hooked.keys())), 0)
-        self.assertEqual(e.errors(), [])
+        for key in ("chatInfo", "chatShort", "chatSpam", "chatRecruit"):
+            self.assertTrue(e.db[key], key)
+        self.assertFalse(e.db.chatAdsAll)
+        self.assertEqual((e.db.chatNames, e.db.chatSize), (2, 20))    # "Jory S.", and text for a TV
+        self.assertGreater(len(list(e.ns.Chat.hooked.keys())), 0)
+        self.assertTrue(e.ns.GetNative("chatclass"))                  # names in their class colour (the game's setting)
+        old = Env(db="{ v = 14, chatInfo = false, chatShort = false, chatSpam = false, chatRecruit = false }")
+        for key in ("chatInfo", "chatShort", "chatSpam", "chatRecruit"):
+            self.assertTrue(old.db[key], key)                         # switched on once for older settings
+        yours = Env(db="{ v = 15, chatInfo = false, chatShort = false, nativeDefaulted = { chatclass = true } }")
+        self.assertFalse(yours.db.chatInfo or yours.db.chatShort)     # switched off since: it stays off
+        self.assertFalse(yours.ns.GetNative("chatclass"))             # set once already: never again
+        self.assertEqual(e.errors() + old.errors() + yours.errors(), [])
 
     def test_class_icon_and_level_in_brackets_before_the_name(self):
         e = self.env()
@@ -8127,25 +8471,27 @@ class Chat(unittest.TestCase):
         self.assertNotEqual(e.g.GOT, line)
         self.assertEqual(e.errors(), [])
 
-    def test_first_names_only_when_you_want_them(self):
+    def test_names_show_in_your_style(self):
         e = self.env()
         C = e.ns.Chat
-        self.assertFalse(e.db.chatFirstName)                         # not the default
+        self.assertEqual(e.db.chatNames, 2)                          # First L. to begin with
         e.cmd("chatshort off")
         e.cmd("chatinfo off")
         line = "|Hplayer:Jory Spleeneater:7:CHANNEL|h[|cff3fc7ebJory Spleeneater|r]|h: crowd of alliance"
-        e.g.ChatFrame1.AddMessage(e.g.ChatFrame1, line)
-        self.assertEqual(e.g.GOT, line)
-        e.cmd("chatfirstname on")
-        e.g.ChatFrame1.AddMessage(e.g.ChatFrame1, line)              # the name shown is the first name, coloured,
-        self.assertEqual(e.g.GOT, "|Hplayer:Jory Spleeneater:7:CHANNEL|h[|cff3fc7ebJory|r]|h: crowd of alliance")
-        self.assertEqual(C.FirstName("Jory Spleeneater-Forever"), "Jory-Forever")   # (a realm kept)
-        self.assertEqual(C.FirstName("Uther"), "Uther")              # one name: as it is
-        self.assertEqual(C.FirstName("|cffffffffUther|r"), "|cffffffffUther|r")
-        e.cmd("chatfirstname off")
-        e.g.ChatFrame1.AddMessage(e.g.ChatFrame1, line)
-        self.assertEqual(e.g.GOT, line)
+        for style, shown in ((2, "Jory S."), (3, "J.S."), (4, "J. Spleeneater"), (1, "Jory Spleeneater")):
+            e.cmd("chatnames %d" % style)
+            e.g.ChatFrame1.AddMessage(e.g.ChatFrame1, line)          # coloured as it was, the link whole
+            self.assertEqual(e.g.GOT, line.replace("|cff3fc7ebJory Spleeneater|r", "|cff3fc7eb%s|r" % shown), style)
+        self.assertEqual(C.NameAs("Jory Spleeneater-Forever", 2), "Jory S.-Forever")   # (a realm kept)
+        self.assertEqual(C.NameAs("Jory Spleeneater-Forever", 3), "J.S.-Forever")
+        self.assertEqual(C.NameAs("Émile Éclair", 3), "É.É.")        # a letter whole in any language
+        for style in (2, 3, 4):
+            self.assertEqual(C.NameAs("Uther", style), "Uther")      # one name: as it is
+            self.assertEqual(C.NameAs("|cffffffffUther|r", style), "|cffffffffUther|r")
         self.assertEqual(e.errors(), [])
+        big = Env(db="{ v = 15, chatScale = 1.5 }")
+        small = Env(db="{ v = 15, chatScale = 1 }")
+        self.assertEqual((big.db.chatSize, small.db.chatSize), (20, 0))   # the game's own size stays the game's
 
     def test_channel_names_are_short(self):
         e = self.env()
@@ -8155,8 +8501,14 @@ class Chat(unittest.TestCase):
         for channel, name, short in (("PARTY", "Party", "P"), ("PARTY", "Party Leader", "PL"), ("GUILD", "Guild", "G"),
                                      ("OFFICER", "Officer", "O"), ("RAID", "Raid Leader", "RL"),
                                      ("INSTANCE_CHAT", "Instance", "I"),
-                                     ("channel:1", "1. General - Stranglethorn Vale", "1"),
-                                     ("channel:5", "5. LookingForGroup", "5")):
+                                     ("channel:1", "1. General - Stranglethorn Vale", "1.G"),
+                                     ("channel:2", "2. Trade - City", "2.T"),
+                                     ("channel:3", "3. LocalDefense - Durotar", "3.D"),
+                                     ("channel:4", "4. WorldDefense", "4.WD"),
+                                     ("channel:5", "5. LookingForGroup", "5.LFG"),
+                                     ("channel:6", "6. my-guild-friends", "6.M"),
+                                     ("channel:8", "8. éclair", "8.é"),
+                                     ("channel:7", "7. 综合 - 杜隆塔尔", "7.综")):
             e.g.ChatFrame1.AddMessage(e.g.ChatFrame1, line(channel, name))
             self.assertEqual(e.g.GOT, line(channel, short), name)    # the link stays: click it to talk there
         e.g.ChatFrame1.AddMessage(e.g.ChatFrame1, "|Hchannel:channel:9|h[MyChannel]|h hi")
@@ -8215,6 +8567,9 @@ class Chat(unittest.TestCase):
 
     def test_class_colours_are_the_games_own_setting(self):
         e = self.env()
+        self.assertTrue(e.ns.GetNative("chatclass"))                # set on once, to begin with
+        e.cmd("chatclass off")
+        self.assertFalse(e.g.ChatTypeInfo.SAY.colorNameByClass)
         self.assertFalse(e.ns.GetNative("chatclass"))
         e.cmd("chatclass on")
         self.assertTrue(e.g.ChatTypeInfo.SAY.colorNameByClass)
@@ -8704,6 +9059,36 @@ class TooltipsAreTheGames(unittest.TestCase):
         g.AnnexTipTextLeft1.text = "Wool Cloth"                      # moved on for good
         e.update(0.6)
         self.assertFalse(panel.shown)
+        self.assertEqual(e.errors(), [])
+
+
+class MenuReload(unittest.TestCase):
+    """A Reload UI button of our own under the game's menu, which is left as it is."""
+
+    def test_the_button_comes_and_goes_with_the_menu(self):
+        e = Env(setup=lambda env: env.lua.execute("""
+            GameMenuFrame = CreateFrame("Frame", "GameMenuFrame", UIParent)
+            GameMenuFrame:Hide()
+            RELOADED = 0
+            C_UI = { Reload = function() RELOADED = RELOADED + 1 end }"""))
+        W = e.ns.World
+        e.update(0.3)
+        self.assertIsNone(W.reload)                                   # nothing until the menu is up
+        e.g.GameMenuFrame.Show(e.g.GameMenuFrame)
+        e.update(0.3)
+        b = W.reload
+        self.assertTrue(b.shown)
+        self.assertTrue(e.same(b.parent, e.g.UIParent))               # ours, not a piece of the menu
+        self.assertTrue(e.same(b.points[1][2], e.g.GameMenuFrame))    # hung under it
+        b.scripts.OnClick(b)
+        self.assertEqual(e.g.RELOADED, 1)
+        e.g.GameMenuFrame.Hide(e.g.GameMenuFrame)
+        e.update(0.3)
+        self.assertFalse(b.shown)
+        e.g.GameMenuFrame.Show(e.g.GameMenuFrame)
+        e.cmd("menureload off")
+        e.update(0.3)
+        self.assertFalse(b.shown)
         self.assertEqual(e.errors(), [])
 
 
@@ -9506,6 +9891,48 @@ class CooldownCallouts(unittest.TestCase):
 
     def fades(self, e):
         return [c for c in e.ns.Numbers.Soon.live.values() if c.kind == "fade"]
+
+    def test_nothing_flashes_when_the_game_keeps_your_buffs_to_itself_in_a_fight(self):
+        for hidden in (("name", "spellId", "duration", "expirationTime"),                       # its number still told
+                       ("name", "spellId", "duration", "expirationTime", "auraInstanceID")):    # or nothing at all
+            e = self.env()
+            RC = e.ns.Numbers.Soon
+            a = self.seal(e, last=300, name="Thorns")
+            e.update(1)
+            for field in hidden:
+                a[field] = e.mock.secret()
+            e.update(3)
+            self.assertEqual(self.fades(e), [], hidden)
+            self.assertTrue(RC.buffs["Thorns"].present, hidden)
+            self.assertFalse(RC.shown, hidden)
+            self.assertEqual(e.errors(), [])
+
+    def test_a_buff_the_game_still_answers_for_by_its_number_is_not_gone(self):
+        e = self.env()
+        RC = e.ns.Numbers.Soon
+        self.seal(e, last=300, name="Thorns")
+        e.update(1)
+        e.lua.execute("C_UnitAuras.GetAuraDataByAuraInstanceID = function(u, id) if id == 50 then return {} end end")
+        e.mock.units.player.auras = e.lua.table_from([])              # the list left it out
+        e.update(1)
+        self.assertEqual(self.fades(e), [])
+        e.lua.execute("C_UnitAuras.GetAuraDataByAuraInstanceID = function() return nil end")
+        e.update(0.3)                                                # truly gone: said
+        self.assertEqual(len(self.fades(e)), 1)
+        self.assertEqual(e.errors(), [])
+
+    def test_a_long_buff_stays_unwatched_when_its_time_turns_secret(self):
+        e = self.env()
+        RC = e.ns.Numbers.Soon
+        a = self.seal(e, last=1800)
+        e.update(1)
+        a.duration, a.expirationTime = e.mock.secret(), e.mock.secret()
+        e.update(1)
+        self.assertIsNone(RC.buffs["Seal of Command"])
+        e.mock.units.player.auras = e.lua.table_from([])
+        e.update(1)
+        self.assertFalse(RC.shown)
+        self.assertEqual(e.errors(), [])
 
     def test_a_seal_running_out_calls_out_and_pops_red(self):
         e = self.env()
@@ -11575,12 +12002,12 @@ class SizedForTheScreen(unittest.TestCase):
     def test_chat_text_is_bigger_and_given_back(self):
         e = Env()
         frames = [e.g["ChatFrame%d" % i] for i in (1, 2, 3)]
-        self.assertTrue(all(f.fontSize == 18 for f in frames))      # 150% of the game's 12
-        self.assertIn("200", e.cmd("chatsize 200"))
+        self.assertTrue(all(f.fontSize == 20 for f in frames))      # 20, whatever the game's own (12) is
+        self.assertIn("24", e.cmd("chatsize 24"))
         self.assertEqual(frames[0].fontSize, 24)
         frames[0].SetFont(frames[0], "Fonts\\FRIZQT__.TTF", 14, "")  # you change the game's own setting
         e.mock.fire("UPDATE_CHAT_WINDOWS")
-        self.assertEqual(frames[0].fontSize, 28)                    # ours goes by the new one
+        self.assertEqual(frames[0].fontSize, 24)                    # ours stays, and the new one is remembered
         e.cmd("off")
         self.assertEqual((frames[0].fontSize, frames[1].fontSize), (14, 12))    # off: exactly what the game had
         e.cmd("on")
@@ -11599,17 +12026,17 @@ class SizedForTheScreen(unittest.TestCase):
 
     def test_sized_for_a_tv_or_a_monitor(self):
         e = Env()
-        self.assertEqual((e.db.textScale, e.db.chatScale, e.db.castScale), (1.5, 1.5, 1.35))   # a TV to begin with
+        self.assertEqual((e.db.textScale, e.db.chatSize, e.db.castScale), (1.5, 20, 1.35))   # a TV to begin with
         self.assertEqual(e.ns.CastBar.frame.scale, 1.35)                        # the cast bar, large enough to read
         self.assertIn("monitor", e.cmd("sizefor monitor"))
-        self.assertEqual((e.db.textScale, e.db.chatScale, e.db.castScale, e.db.sizedFor), (1, 1, 1, "monitor"))
+        self.assertEqual((e.db.textScale, e.db.chatSize, e.db.castScale, e.db.sizedFor), (1, 0, 1, "monitor"))
         self.assertEqual(e.ns.CastBar.frame.scale, 1)
         self.assertIn("150", e.cmd("castsize 150"))
         self.assertEqual(e.ns.CastBar.frame.scale, 1.5)
         self.assertEqual(e.g.ChatFrame1.fontSize, 12)
         self.assertIn("TV", e.cmd("sizefor tv"))
-        self.assertEqual((e.db.textScale, e.db.chatScale), (1.5, 1.5))
-        self.assertEqual(e.g.ChatFrame1.fontSize, 18)
+        self.assertEqual((e.db.textScale, e.db.chatSize), (1.5, 20))
+        self.assertEqual(e.g.ChatFrame1.fontSize, 20)
         self.assertIn("usage", e.cmd("sizefor cinema"))
         self.assertIn("sizefor", e.cmd("help"))
         self.assertEqual(e.errors(), [])
@@ -12154,7 +12581,9 @@ class Levelling(unittest.TestCase):
         self.assertTrue(e.same(p[2], e.window))                     # beside the game's window, never in it
         self.assertEqual(len(e.window.points), 0)                     # (nothing done to the game's window)
         self.assertIn("Alchemy 50 > 60", plain(panel.title.text))
-        self.assertIn("Minor Healing Potion  up to x11", plain(LV.rows[1].text.text))
+        row = plain(LV.rows[1].text.text)                             # (your own recipe: no guide covers 50 here)
+        self.assertIn("Minor Healing Potion", row)
+        self.assertIn("up to x11", row)
         self.assertEqual(LV.rows[1].right.text, "50-60")
         self.assertIn("Levelling plan", "\n".join(LV.Describe().values()) + "Levelling plan")
         self.assertEqual(e.errors(), [])
@@ -12413,6 +12842,35 @@ class MentorGuides(unittest.TestCase):
         Levelling().open(e)
         return e
 
+    def test_a_stretch_no_guide_covers_is_filled_with_your_own_recipes(self):
+        # (this game moved the healing potions to First Aid: Alchemy's guide starts at 140, and your 50 is not it)
+        e = self.env(guide="""ns.LevelGuides = { alchemy = {
+            { 140, 155, p = 3385, n = 15, at = 120, r = { 785, 1 }, name = "Lesser Mana Potion" } } }""")
+        LV = e.ns.Levelling
+        plan = LV.plan
+        steps = list(plan.steps.values())
+        self.assertTrue(steps)
+        self.assertEqual(steps[0]["from"], 50)                       # from where you are,
+        self.assertTrue(steps[0].filled and steps[0].known)          # with a recipe of yours,
+        self.assertNotEqual(steps[0].rec.p, 3385)                    # not the guide's far-off one
+        self.assertNotIn("Lesser Mana Potion", [s.rec.n for s in steps])
+        LV.voice = 0
+        self.assertNotIn("guides", LV.Words(plan))
+        self.assertEqual(e.errors(), [])
+
+    def test_alchemy_asks_for_no_healing_potions(self):
+        e = Env()
+        guide = e.ns.LevelGuides and e.ns.LevelGuides.alchemy
+        if guide is None:                                            # (The Mentor loaded)
+            e = Levelling().env()
+            guide = e.ns.LevelGuides.alchemy
+        healing = {118, 858, 929, 1710, 3928, 13446}                 # First Aid's, in this game
+        made = set()
+        for step in guide.values():
+            made.add(step.p)
+            made.update(a.p for a in (step.alts.values() if step.alts else []))
+        self.assertFalse(healing & made, healing & made)
+
     def test_the_plan_follows_the_guide_and_offers_its_alternatives(self):
         e = self.env()
         LV = e.ns.Levelling
@@ -12577,10 +13035,11 @@ class MentorGuides(unittest.TestCase):
         for kind in ("alchemy", "blacksmithing", "enchanting", "engineering", "leatherworking", "tailoring",
                      "cooking", "firstaid", "mining"):
             steps = list(guides[kind].values())
-            self.assertEqual(steps[0][1], 1, kind)
-            self.assertEqual(steps[-1][2], 300, kind)
-            for a, b in zip(steps, steps[1:]):
-                self.assertEqual(a[2], b[1], kind)                    # each stretch starts where the last ends
+            if kind != "alchemy":                                     # (its healing potions are First Aid's here:
+                self.assertEqual(steps[0][1], 1, kind)                #  those stretches are left out, on purpose,
+                self.assertEqual(steps[-1][2], 300, kind)             #  and make_guides.py knows which)
+                for a, b in zip(steps, steps[1:]):
+                    self.assertEqual(a[2], b[1], kind)                # each stretch starts where the last ends
             for st in steps:
                 self.assertTrue(st.gather or st.p or st.s, kind)
                 for alt in (st.alts.values() if st.alts else []):
@@ -13761,7 +14220,7 @@ class Hydrate(unittest.TestCase):
 
 
 class Recruitment(unittest.TestCase):
-    """A guild's recruiting message is shown once; its repeats are hidden for a while."""
+    """A chat ad is shown the first time and not again; or, if you say so, never."""
 
     AD = "<Night Watch> is recruiting all levels for raids and fun, /w me for an invite!"
     AD2 = "<Night Watch> is recruiting all levels for raids and fun!! /w me for invite"
@@ -13785,9 +14244,41 @@ class Recruitment(unittest.TestCase):
         self.assertEqual(C.recruitHidden, 3)
         self.assertIn("3 of them were repeated guild recruitment", e.cmd("spam"))
         self.assertIn("guild recruitment 3", C.Describe())
-        e.mock.advance(901)
-        self.assertIsNotNone(chat(self.AD, "Anna"))                           # a while later: once more
+        e.mock.advance(3600)
+        self.assertIsNone(chat(self.AD, "Anna"))                              # an hour on: still not again
         self.assertIsNotNone(e.mock.chat("CHAT_MSG_CHANNEL", e.mock.secret(), "Anna", "Player-1-Anna"))
+        self.assertEqual(e.errors(), [])
+
+    def test_a_trade_ad_shows_once_and_other_wares_still_show(self):
+        e = Env()
+        C = e.ns.Chat
+
+        def chat(msg, who):
+            return e.mock.chat("CHAT_MSG_CHANNEL", msg, who, "Player-1-" + who)
+        self.assertIsNotNone(chat("WTS Copper Bar x20, 5s each, whisper me", "Tia"))
+        e.mock.advance(1000)
+        self.assertIsNone(chat("WTS Copper Bar x20, 4s each, whisper me", "Tia"))       # a new price: the same ad
+        self.assertIsNotNone(chat("WTS Linen Cloth, a whole stack, cheap", "Tia"))      # other wares: shown
+        self.assertIsNone(chat("WTS Linen Cloth, a whole stack, cheap", "Uma"))         # the very words, anyone
+        self.assertIsNotNone(chat("WTB Silk", "Vic"))
+        for msg, kind in (("LFW enchanting, your mats", "trade"), ("Selling portals, tips welcome", "trade"),
+                          ("Verkaufe Kupferbarren", "trade"), ("出售铜锭", "trade"),
+                          ("LFM Deadmines need tank", None), ("LF1M healer then go", None),
+                          ("anyone know where the bank is?", None), ("newts everywhere", None)):
+            self.assertEqual(C.AdKind(msg), kind, msg)
+        self.assertEqual(e.errors(), [])
+
+    def test_ads_can_be_hidden_from_the_first_time(self):
+        e = Env()
+        self.assertIn("on", e.cmd("chatadsall on"))
+        for msg in (self.AD, "WTS Copper Bar x20"):
+            self.assertIsNone(e.mock.chat("CHAT_MSG_CHANNEL", msg, "Anna", "Player-1-1"), msg)
+        self.assertIsNotNone(e.mock.chat("CHAT_MSG_CHANNEL", "LFM Deadmines need tank", "Anna", "Player-1-1"))
+        self.assertIsNotNone(e.mock.chat("CHAT_MSG_PARTY", "WTS Copper Bar x20", "Anna", "Player-1-1"))   # your group
+        self.assertEqual(e.ns.Chat.recruitHidden, 0)                          # (none of them was a repeat)
+        e.cmd("chatadsall off")
+        e.cmd("chatrecruit off")
+        self.assertIsNotNone(e.mock.chat("CHAT_MSG_CHANNEL", "WTS Copper Bar x20", "Bo", "Player-1-2"))
         self.assertEqual(e.errors(), [])
 
     def test_wording_and_switches(self):
@@ -14161,7 +14652,8 @@ class FlightGame(unittest.TestCase):
         self.assertEqual(ov.PAD4, "CLICK ControllerCamHUD_Key_FlightGame_PAD4:LeftButton")    # Y high altitude
         self.assertIsNone(ov.PAD2)                                           # B stays the game's
         self.assertTrue(e.g.ControllerCamHUD_Flight.shown)                   # under the flight bar
-        self.assertIn("flap", plain(G.frame.help.text))
+        e.update(G.INTRO + 0.5)
+        self.assertIn("flap", plain(G.frame.lines[1].text))
         self.assertEqual(e.errors(), [])
 
     def test_played_mid_screen_over_the_rider_clear_of_the_zone_names(self):
@@ -14174,11 +14666,14 @@ class FlightGame(unittest.TestCase):
         point = G.frame.points[1]
         self.assertEqual((point[1], point[3], point[4]), ("CENTER", "CENTER", 0))
         self.assertTrue(e.same(point[2], e.g.UIParent))                      # the lane: the middle of the screen,
-        self.assertEqual(point[5], G.Y)
+        self.assertAlmostEqual(point[5], G.Y / G.SCALE)                      # (in its own, larger units)
         self.assertLessEqual(G.Y, 0)                                         # over you on your mount
+        self.assertEqual(G.frame.scale, G.SCALE)
+        self.assertGreaterEqual(G.SCALE, 1.25)                               # a quarter to a half larger
+        self.assertLessEqual(G.SCALE, 1.5)
         screen = e.g.UIParent.cy * 2
         zone_names_lowest = screen / 2 - 0.35 * screen                       # (the game's zone text: 0.2-0.35 down)
-        self.assertLess(G.Y + G.H / 2, zone_names_lowest)                    # its top stays under them
+        self.assertLess(G.Y + G.H / 2 * G.SCALE, zone_names_lowest)          # its top stays under them
         self.assertTrue(e.g.ControllerCamHUD_Flight.shown)                   # and the flight bar stays at the top
         self.press(e, "PAD4")
         self.assertTrue(e.same(G.hint.points[1][2], bar))                    # away: the line is under the bar again
@@ -14273,16 +14768,19 @@ class FlightGame(unittest.TestCase):
         for _ in range(3):
             G.Ground(G, e.lua.table(x=100, y=40))
         self.assertEqual(G.gold, 1 + 2 + 3)
+        lives = G.lives
         G.y = 30
         G.things = e.lua.table_from([e.lua.table(kind="tree", x=G.X, top=60, w=32)])   # flown into a treetop
         G.Step(G, 0.01)
         self.assertEqual(G.streak, 0)
+        self.assertEqual(G.lives, lives - 1)                                 # a life,
+        self.assertIn("Bumped! Lives left: %d" % (lives - 1), plain(G.word))
         self.assertGreater(G.dazed, 0)
         self.assertFalse(G.Fire(G))                                          # the net gun fogged a moment
         e.update(G.DAZED + 0.1)
         G.cool = 0
         self.assertTrue(G.Fire(G))
-        self.assertEqual(G.gold, 6)                                          # nothing taken away
+        self.assertEqual(G.gold, 6)                                          # and no gold taken
         self.assertEqual(e.errors(), [])
 
     def test_a_taller_sky_of_treetops_and_zeppelins_that_vary_with_always_a_way_past(self):
@@ -14317,10 +14815,11 @@ class FlightGame(unittest.TestCase):
         # and how far apart they come varies too
         e.lua.execute("flight_spawns = {}")
         e.lua.eval("function(G) local old = G.Spawn; G.Spawn = function(self) flight_spawns[#flight_spawns + 1] = self.clock; return old(self) end end")(G)
+        G.EVENT_FIRST = 9999                                                 # (no escort or raid in the way)
         self.fly(e)
         self.press(e, "PAD4", "FlightStart")
         for _ in range(600):
-            G.y, G.vy = G.H / 2, 0
+            G.y, G.vy, G.lives = G.H / 2, 0, 99                              # (never shot down here)
             e.update(0.1, step=0.1)
         times = list(e.g.flight_spawns.values())
         self.assertGreater(len(times), 15)
@@ -14329,7 +14828,7 @@ class FlightGame(unittest.TestCase):
         self.assertGreaterEqual(min(gaps), G.SPACING[1] - 0.15)
         self.assertGreater(G.bumps, 0)                                       # (flying straight on, it bumps)
         drawn = {t.texture for t in G.thingTex.values() if t.shown}
-        self.assertTrue(drawn <= {G.ART.tree, G.ART.zeppelin} and drawn, drawn)
+        self.assertTrue(drawn <= {G.ART.tree, G.ART.zeppelin, G.ART.Horde, G.ART.Alliance} and drawn, drawn)
         self.assertEqual(e.errors(), [])
 
     def test_how_to_play_shows_as_a_run_starts(self):
@@ -14338,20 +14837,27 @@ class FlightGame(unittest.TestCase):
         self.fly(e)
         self.press(e, "PAD4", "FlightStart")
         e.update(0.2)
-        self.assertTrue(G.frame.intro.shown)
-        text = plain(G.frame.intro.text)
-        for words in ("flap", "dodge the treetops and zeppelins", "net the riders for flight gold", "high altitude"):
+        lines = G.frame.lines
+        point = lines[1].points[1]
+        self.assertEqual((point[1], point[3]), ("TOP", "BOTTOM"))            # under the lane, not over the game
+        self.assertTrue(e.same(point[2], G.frame))
+        self.assertTrue(lines[3].shown)
+        text = " ".join(plain(lines[i].text) for i in (1, 2, 3))
+        for words in ("flap", "dodge treetops, zeppelins, nets and fire", "net riders for flight gold", "high altitude",
+                      "Clear a round to bank its gold", "upgrades"):
             self.assertIn(words, text)
         e.update(2)
         self.assertEqual(len(G.things), 0)                                   # time to read before the first one
         e.update(G.INTRO)
-        self.assertFalse(G.frame.intro.shown)
+        self.assertFalse(lines[3].shown)                                     # then the buttons and the upgrade
+        self.assertIn("flap", plain(lines[1].text))
+        self.assertIn("gold to spend", plain(lines[2].text))
         self.press(e, "PAD4")                                                # high altitude,
         self.press(e, "PAD4", "FlightStart")                                 # and back: a reminder
         e.update(0.2)
-        self.assertTrue(G.frame.intro.shown)
+        self.assertTrue(lines[3].shown)
         e.update(G.AGAIN)
-        self.assertFalse(G.frame.intro.shown)
+        self.assertFalse(lines[3].shown)
         self.assertEqual(e.errors(), [])
 
     def test_clouds_are_only_scenery_and_the_art_is_our_own(self):
@@ -14375,6 +14881,370 @@ class FlightGame(unittest.TestCase):
         x = G.clouds[1].x
         e.update(1)
         self.assertEqual(G.clouds[1].x, x)                                   # with fewer animations: still
+        self.assertEqual(e.errors(), [])
+
+    def play(self, e):
+        self.fly(e)
+        self.press(e, "PAD4", "FlightStart")
+        G = e.ns.FlightGame
+        G.things, G.riders, G.foes = e.lua.table(), e.lua.table(), e.lua.table()
+        G.nextThing = G.nextRider = G.nextEvent = 9999
+        return G
+
+    def test_upgrades_are_bought_with_lb_and_rb_and_say_what_they_do_in_numbers(self):
+        e = self.env(db="{ flightGold = 100 }")
+        G, ov = e.ns.FlightGame, e.mock.overrides
+        self.play(e)
+        self.assertEqual(ov.PADLSHOULDER, "CLICK ControllerCamHUD_Key_FlightGame_PADLSHOULDER:LeftButton")
+        self.assertEqual(ov.PADRSHOULDER, "CLICK ControllerCamHUD_Key_FlightGame_PADRSHOULDER:LeftButton")
+        e.update(G.INTRO + 0.2)
+        shop = plain(G.frame.lines[2].text)
+        self.assertIn("Wider net 1: net reach 13 to 16, 40 gold", shop)      # what is on offer, what it does, its
+        self.assertIn("100 gold to spend", shop)                             # price, and what you have
+        self.assertGreaterEqual(sum(u.cost[1] for u in G.UPGRADES.values()), 120)   # (not had for a few riders)
+        self.press(e, "PAD3")
+        e.update(0.05)
+        small = G.netTex[1].width
+        hit = G.Hit()
+        self.press(e, "PADRSHOULDER")                                        # RB: bought
+        self.assertEqual(e.db.flightGameUpgrades.net, 1)
+        self.assertEqual(G.Hit(), hit + 3)
+        self.assertIn("Wider net 1: net reach 13 to 16", plain(G.word))      # and what it did
+        self.assertEqual((e.db.flightGold, e.db.flightGoldSpent, G.Wallet()), (100, 40, 60))   # earned stays earned
+        G.cool = 0
+        self.press(e, "PAD3")
+        e.update(0.05)
+        self.assertGreater(G.netTex[1].width, small)                         # the net drawn is wider: you see it
+        self.press(e, "PADLSHOULDER")                                        # LB: the next one, and what it does
+        self.assertIn("Quick reload", plain(G.word))
+        self.assertIn("fire again sooner", plain(G.word))
+        self.assertIn("3 to 4 nets at once", plain(G.word))
+        self.press(e, "PADRSHOULDER")
+        self.assertEqual((G.Nets(), round(G.Reload(), 2)), (4, 0.42))
+        self.press(e, "PADRSHOULDER")
+        self.assertEqual(e.db.flightGameUpgrades.reload, 1)                  # not bought,
+        self.assertIn("60 more flight gold", plain(G.word))                  # and why
+        e.db.flightGameUpgrades.reload = 3
+        self.press(e, "PADRSHOULDER")
+        self.assertIn("fully upgraded", plain(G.word))
+        self.press(e, "PADLSHOULDER")                                        # Thick harness: a life, at once
+        self.assertIn("3 to 4 lives", plain(G.word))
+        e.db.flightGold = 160
+        lives = G.lives
+        self.press(e, "PADRSHOULDER")
+        self.assertEqual((G.Lives(), G.lives), (4, lives + 1))
+        self.assertIn("spent 140", G.Describe())
+        self.assertEqual(e.errors(), [])
+
+    def net_on_you(self, e, G):
+        G.foes = e.lua.table_from([e.lua.table(x=G.X + 4, y=G.y, vy=0, at="you", spin=0)])
+        G.Step(G, 0.01)
+
+    def test_a_hit_costs_a_life_and_out_of_lives_you_are_shot_down(self):
+        e = self.env(db="{ flightGold = 20 }")
+        G, ov = e.ns.FlightGame, e.mock.overrides
+        self.play(e)
+        self.assertEqual((G.lives, G.roundNo), (G.LIVES, 1))
+        e.update(0.05)
+        self.assertEqual(sum(1 for t in G.lifeTex.values() if t.shown), G.LIVES)   # your lives, top left,
+        self.assertIn("Round 1", plain(G.frame.roundText.text))              # and the round
+        G.Earn(G, 9)
+        self.assertEqual(G.Wallet(), 20)                                     # (this round's gold: not banked yet)
+        G.y, G.vy = 60, 0
+        self.net_on_you(e, G)
+        self.assertEqual(G.lives, G.LIVES - 1)                               # a net on you: a life
+        self.assertIn("Netted! Lives left: 2", plain(G.word))
+        self.assertEqual(G.gold, 9)                                          # (and no gold)
+        self.net_on_you(e, G)
+        self.assertEqual(G.lives, G.LIVES - 1)                               # a moment's grace after it
+        self.assertEqual(len(G.foes), 1)                                     # (it flies through)
+        G.grace = 0
+        self.net_on_you(e, G)
+        G.grace = 0
+        G.things = e.lua.table_from([e.lua.table(kind="tree", x=G.X, top=90, w=40)])
+        G.Step(G, 0.01)                                                      # the last life:
+        self.assertEqual((G.lives, G.phase), (0, "down"))                    # shot down,
+        self.assertEqual(e.db.flightGoldLost, 9)                             # the round's gold lost,
+        self.assertEqual(e.db.flightGold, 29)                                # (earned stays earned)
+        self.assertEqual(G.Wallet(), 20)                                     # what was banked stays yours
+        e.update(0.1)
+        self.assertIn("Shot down! 9 unbanked gold lost", plain(G.frame.banner.text))
+        self.assertIn("Shot down in round 1 with 9 flight gold", plain(G.frame.lines[1].text))
+        self.assertIn("fly again from round 1", plain(G.frame.lines[2].text))
+        self.assertEqual(ov.PAD1, "CLICK ControllerCamHUD_Key_FlightGame_PAD1:LeftButton")
+        self.assertEqual(G.routeBest, 0)
+        self.assertEqual(e.db.flightGameRoutes[G.route], 9)                  # the run's gold is its score
+        self.press(e, "PAD1")
+        self.assertEqual(G.phase, "down")                                    # (not at once: a moment first)
+        e.update(G.DOWN_WAIT + 0.1)
+        self.press(e, "PAD1")                                                # A: again, from round one
+        self.assertEqual((G.phase, G.lives, G.roundNo, G.gold), ("open", G.LIVES, 1, 0))
+        self.assertIn("Round 1", plain(G.banner))
+        self.assertEqual(G.state, "playing")
+        self.assertEqual(e.errors(), [])
+
+    def test_a_cleared_round_banks_its_gold_and_gives_a_life_back(self):
+        e = self.env()
+        G = e.ns.FlightGame
+        self.play(e)
+        G.lives = 1
+        G.Earn(G, 14)
+        self.assertEqual(G.Wallet(), 0)
+        G.BeginEvent(G, "boss")
+        G.boss.time = G.BOSS_TIME + 0.1                                      # it sails off,
+        for _ in range(100):
+            G.Step(G, 0.1)
+            if G.phase == "open":
+                break
+        self.assertEqual(G.phase, "open")
+        self.assertEqual((G.roundNo, G.lives, G.purse), (2, 2, 0))           # the round cleared: a life back,
+        self.assertEqual(G.Wallet(), 14)                                     # its gold banked
+        self.assertIn("Round 1 cleared: 14 gold banked", plain(G.banner))
+        G.lives = 0
+        G.ShotDown(G)
+        self.assertEqual(G.Wallet(), 14)                                     # (banked: kept when shot down)
+        G.roundNo = 1
+        hard = G.Hard(G)
+        G.roundNo = 4
+        self.assertGreater(G.Hard(G), hard)                                  # each round a little harder
+        G.roundNo = 50
+        self.assertEqual(G.Hard(G), G.HARDEST)
+        G.roundNo = 5                                                        # the second raid: tougher, and weaving
+        G.phase = "open"
+        G.BeginEvent(G)
+        self.assertEqual(G.phase, "boss")
+        self.assertGreater(G.boss.hp, G.BOSS_HP)
+        self.assertEqual(G.boss.patterns, len(G.PATTERNS))
+        G.Earn(G, 3)
+        e.mock.landFlight("Booty Bay")                                       # landed mid-round: not your doing,
+        self.assertEqual(G.Wallet(), 17)                                     # the round's gold is kept
+        self.assertEqual(e.errors(), [])
+
+    def test_their_zeppelin_throws_straight_curving_in_a_fan_and_weaving(self):
+        e = self.env(faction="Horde")
+        G = e.ns.FlightGame
+        self.play(e)
+        G.lives = 99
+        G.BeginEvent(G, "boss")
+        boss = G.boss
+        boss.x, boss.y, boss.patterns = G.W - 64, 70, 4
+        paths = {}
+        for i, kind in enumerate(G.PATTERNS.values()):
+            G.foes = e.lua.table()
+            G.y, G.vy = 70, 0
+            seq = [(i + 0.5) / 4, 0.9]                                       # (which, and which way it bends)
+            G.random = lambda seq=seq: seq.pop(0) if seq else 0.5
+            boss.shot = 0
+            G.Step(G, 0.001)
+            self.assertEqual(boss.last, kind)
+            paths[kind] = [[] for _ in range(len(G.foes))]
+            G.grace, boss.shot = 99, 99                                      # (nothing taken while we watch)
+            for _ in range(140):
+                G.y, G.vy = 70, 0
+                for j, f in enumerate(G.foes.values()):
+                    if j < len(paths[kind]):
+                        paths[kind][j].append((f.x, f.y))
+                G.Step(G, 0.01)
+            G.grace = 0
+        self.assertEqual(len(paths["fan"]), 3)                               # three in a fan,
+        ends = sorted(p[-1][1] for p in paths["fan"])
+        self.assertGreater(ends[2] - ends[0], 50)                            # spread above and below you
+        self.assertEqual(len(paths["aimed"]), 1)
+        straight = paths["aimed"][0]
+        self.assertTrue(all(abs(y - 70) < 1 for _, y in straight))           # straight at you
+        lob = paths["lob"][0]
+        self.assertGreater(max(abs(y - 70) for _, y in lob), 15)             # curving away,
+        near = min(lob, key=lambda p: abs(p[0] - G.X))
+        self.assertLess(abs(near[1] - 70), 6)                                # and back in on you
+        wave = [y for _, y in paths["wave"][0]]
+        swings = sum(1 for a, b, c in zip(wave, wave[1:], wave[2:]) if (b - a) * (c - b) < 0)
+        self.assertGreaterEqual(swings, 2)                                   # weaving up and down
+        self.assertEqual(e.errors(), [])
+
+    def test_a_drake_breathes_a_sweep_of_fire_and_curving_fireballs(self):
+        e = self.env()
+        G = e.ns.FlightGame
+        self.play(e)
+        G.roundNo = 3
+        G.BeginEvent(G)                                                      # the third round: a drake
+        d = G.drake
+        self.assertEqual(G.phase, "drake")
+        self.assertIn("A drake", plain(G.word))
+        d.x, d.wait = G.W - 56, 0
+        G.y, G.vy = 70, 0
+        G.Step(G, 0.01)
+        self.assertIsNotNone(d.inhale)                                       # it draws breath first,
+        e.update(0.05)
+        self.assertTrue(G.drakeTex.shown)
+        self.assertEqual(G.drakeTex.texture, G.ART.drake)
+        self.assertTrue(G.drakeGlow.shown)                                   # its mouth glowing: time to get clear
+        self.assertEqual(len(G.fires), 0)
+        G.grace = 99
+        for _ in range(int(G.DRAKE_INHALE / 0.02) + 2):
+            G.y, G.vy = 70, 0
+            G.Step(G, 0.02)
+        self.assertIsNotNone(d.breath)                                       # then a breath,
+        for _ in range(int(G.DRAKE_BREATH / 0.02) + 2):
+            G.y, G.vy = 70, 0
+            G.Step(G, 0.02)
+        heights = [f.vy for f in G.fires.values()]
+        self.assertGreater(len(heights), 8)
+        self.assertGreater(max(heights) - min(heights), 30)                  # sweeping across where you were
+        G.fires = e.lua.table()
+        d.wait = 0
+        G.Step(G, 0.01)
+        for _ in range(int(G.DRAKE_INHALE / 0.02) + 2):
+            G.Step(G, 0.02)
+        balls = list(G.fires.values())
+        self.assertEqual(len(balls), 2)                                      # two fireballs,
+        self.assertTrue(all(b.big for b in balls))
+        self.assertEqual(sorted(b.ay > 0 for b in balls), [False, True])     # bending in from above and below
+        G.grace = 0
+        lives = G.lives
+        G.fires = e.lua.table_from([e.lua.table(x=G.X + 2, y=G.y, vy=0, t=0)])
+        G.Step(G, 0.01)
+        self.assertEqual(G.lives, lives - 1)                                 # its fire costs a life
+        self.assertIn("Scorched", plain(G.word))
+        G.grace = 99
+        gold = G.gold
+        for _ in range(d.full):                                              # netted enough, it flees
+            G.nets = e.lua.table_from([e.lua.table(x=d.x - 2, y=d.y, spin=0)])
+            G.Step(G, 0.001)
+        self.assertTrue(d.fled)
+        self.assertEqual(G.gold, gold + G.DRAKE_BONUS)
+        for _ in range(100):
+            G.Step(G, 0.1)
+            if G.phase == "open":
+                break
+        self.assertEqual((G.phase, G.roundNo), ("open", 4))                  # and the round is cleared
+        self.assertEqual(e.errors(), [])
+
+    def test_your_sides_zeppelin_crosses_keep_their_nets_off_it(self):
+        e = self.env(faction="Horde")
+        G = e.ns.FlightGame
+        self.play(e)
+        G.BeginEvent(G)                                                      # round one: an escort
+        ship = G.ship
+        self.assertEqual((G.phase, ship.side), ("escort", "Horde"))          # your side's own
+        self.assertIn("keep their nets off it", plain(G.word))
+        ship.x = 150
+        r = e.lua.table(x=230, y=60, base=60, speed=0, race="Human", female=False, mount="gryphon", phase=0)
+        G.riders = e.lua.table_from([r])
+        G.nextRider = 9999
+        G.Step(G, 0.01)
+        self.assertTrue(r.threw)                                             # their rider nets at it
+        self.assertEqual(len(G.foes), 1)
+        self.assertEqual(G.foes[1].at, "ship")
+        G.riders = e.lua.table()
+        G.nets = e.lua.table_from([e.lua.table(x=G.foes[1].x - 1, y=G.foes[1].y, spin=0)])
+        G.Step(G, 0.01)
+        self.assertEqual(len(G.foes), 0)                                     # a net of yours stops a net of theirs
+        G.foes = e.lua.table_from([e.lua.table(x=ship.x + 4, y=ship.y, vy=0, at="ship", spin=0)])
+        G.Step(G, 0.01)
+        self.assertEqual(ship.hits, 1)                                       # one got through
+        e.update(1)
+        self.assertTrue(G.shipTex.shown)
+        self.assertTrue(G.shipTex.texture.endswith("zeppelin_horde"))        # in the Horde's colours,
+        self.assertEqual(G.shipBadge.texture, G.BADGE.Horde)                 # with the game's own badge
+        gold = G.gold
+        ship.x = -ship.w / 2 + 0.1
+        G.riders = e.lua.table()
+        G.Step(G, 0.1)
+        self.assertEqual(G.phase, "open")                                    # across:
+        self.assertEqual(G.gold, gold + G.ESCORT_BONUS - G.ESCORT_LOSS)      # paid, less the net that got through
+        self.assertIn("Seen safely across", plain(G.word))
+        self.assertEqual(G.roundNo, 2)                                       # the round cleared
+        self.assertEqual(e.errors(), [])
+
+    def test_their_zeppelin_nets_at_you_net_it_down_or_it_sails_off(self):
+        e = self.env(faction="Horde")
+        G = e.ns.FlightGame
+        self.play(e)
+        G.BeginEvent(G, "boss")
+        boss = G.boss
+        self.assertEqual((G.phase, boss.side, boss.hp), ("boss", "Alliance", G.BOSS_HP))
+        boss.x = G.W - 64
+        for _ in range(40):
+            G.y, G.vy, G.lives = G.H / 2, 0, 99
+            G.Step(G, 0.1)
+        self.assertGreater(G.netted + len(G.foes), 0)                        # it nets at you
+        gold = G.gold
+        for _ in range(G.BOSS_HP):
+            G.nets = e.lua.table_from([e.lua.table(x=boss.x - 2, y=boss.y, spin=0)])
+            G.Step(G, 0.01)
+        self.assertTrue(boss.down)                                           # brought down,
+        self.assertEqual(G.gold, gold + G.BOSS_BONUS)                        # and paid for
+        e.update(0.2)
+        self.assertTrue(G.bossChute[1].shown)                                # down under its parachutes
+        self.assertTrue(G.bossTex.texture.endswith("zeppelin_alliance"))
+        for _ in range(100):
+            G.Step(G, 0.1)
+        self.assertEqual(G.phase, "open")
+        G.BeginEvent(G, "boss")                                              # the next one is not brought down:
+        G.boss.time = G.BOSS_TIME + 0.1
+        gold = G.gold
+        for _ in range(100):
+            G.Step(G, 0.1)
+        self.assertEqual(G.phase, "open")                                    # it sails off,
+        self.assertEqual(G.gold, gold)                                       # and nothing is lost for it
+        self.assertEqual(e.errors(), [])
+
+    def test_your_best_on_each_route_is_kept(self):
+        e = self.env()
+        G = e.ns.FlightGame
+        route = "Stormwind, Elwynn > Booty Bay, Stranglethorn"
+        self.play(e)
+        self.assertEqual(G.route, route)
+        G.Earn(G, 5)
+        self.assertEqual(e.db.flightGameRoutes[route], 5)
+        e.mock.landFlight("Booty Bay")
+        self.fly(e)
+        self.assertIn("best on this route: 5", plain(G.hint.text.text))     # offered with your best here
+        self.press(e, "PAD4", "FlightStart")
+        G.Earn(G, 4)
+        self.assertEqual(e.db.flightGameRoutes[route], 5)
+        G.Earn(G, 2)
+        self.assertEqual(e.db.flightGameRoutes[route], 6)                    # a new best,
+        self.assertIn("Your best on this route", plain(G.word))              # said once
+        text = e.cmd("flightscores")
+        self.assertIn(route + "  6", plain(text))
+        self.assertIn("earned 11", plain(text))
+        self.assertEqual(e.errors(), [])
+
+    def test_zeppelins_of_the_goblins_the_horde_and_the_alliance(self):
+        e = self.env()
+        G = e.ns.FlightGame
+        self.play(e)
+        sides = []
+        for v in (0.1, 0.75, 0.95):                                          # a zeppelin alone, of each side
+            seq = [0.4, 0.5, 0.5, 0.5, v, 0.5]                               # (what, where, how big, drift, side)
+            G.random = lambda seq=seq: seq.pop(0) if seq else 0.5
+            G.things = e.lua.table()
+            G.Spawn(G)
+            zeps = [th for th in G.things.values() if th.kind == "zeppelin"]
+            sides += [z.side for z in zeps]
+            for z in zeps:
+                z.x = 150
+        self.assertEqual(set(sides), {"neutral", "Horde", "Alliance"})
+        import random
+        rnd = random.Random(3)
+        G.random = lambda: rnd.random()
+        sides = []
+        for _ in range(400):
+            G.things = e.lua.table()
+            G.Spawn(G)
+            sides += [th.side for th in G.things.values() if th.kind == "zeppelin"]
+        self.assertGreater(sides.count("neutral") / len(sides), 0.6)         # mostly the goblins'
+        self.assertGreater(sides.count("Horde"), 10)
+        self.assertGreater(sides.count("Alliance"), 10)
+        G.random = lambda: 0.5
+        G.things = e.lua.table_from([e.lua.table(kind="zeppelin", side=s, x=60 + 80 * i, y=100, base=100, w=50, h=25,
+                                                 drift=0, phase=0) for i, s in enumerate(("neutral", "Horde", "Alliance"))])
+        G.Draw(G, e.mock.time)
+        self.assertTrue(G.thingTex[1].texture.endswith("zeppelin"))
+        self.assertFalse(G.thingBadge[1].shown)                              # the goblins': no badge
+        self.assertEqual(G.thingBadge[2].texture, G.BADGE.Horde)
+        self.assertEqual(G.thingBadge[3].texture, G.BADGE.Alliance)
         self.assertEqual(e.errors(), [])
 
     def test_a_fight_and_the_landing_give_every_button_back(self):
@@ -14486,7 +15356,7 @@ class FlightGame(unittest.TestCase):
         self.assertEqual(e.db.flightGameBest, 5)
         self.fly(e)
         self.assertIn("offered", G.Describe())
-        self.assertIn("all 12", G.Describe())
+        self.assertIn("earned 12", G.Describe())
         self.assertEqual(e.errors(), [])
 
 
@@ -17509,10 +18379,22 @@ class PvPPlates(unittest.TestCase):
 class CompassCamera(unittest.TestCase):
     """The compass shows the way the camera looks, which the analog stick can leave apart from the character."""
 
-    def test_the_compass_follows_the_camera_where_the_game_says_and_the_character_otherwise(self):
+    def test_without_a_way_to_read_the_camera_there_is_no_switch_for_it(self):
         e = Env()
+        keys = [d.key for d in e.ns.settings.values()]
+        self.assertIn("compassPlace", keys)
+        self.assertNotIn("compassCamera", keys)                       # it could not do anything here
+        self.assertIn("none to read in this game", e.ns.Compass.Describe())
+        has = Env(setup=lambda env: env.lua.execute("GetCameraYaw = function() return 1.0 end"))
+        self.assertIn("compassCamera", [d.key for d in has.ns.settings.values()])
+        self.assertAlmostEqual(has.ns.Compass.Facing(), 1.0)
+        self.assertEqual(e.errors() + has.errors(), [])
+
+    def test_the_compass_follows_the_camera_where_the_game_says_and_the_character_otherwise(self):
+        e = Env(setup=lambda env: env.lua.execute("GetCameraYaw = function() return 1.0 end"))
         C = e.ns.Compass
-        e.lua.execute("GetPlayerFacing = function() return 0.2 end")
+        e.lua.execute("GetPlayerFacing = function() return 0.2 end; GetCameraYaw = nil")
+        C.cam = None
         self.assertAlmostEqual(C.Facing(), 0.2)                      # no camera API: the character's
         e.lua.execute("GetCameraYaw = function() return 1.0 end")
         C.cam = None                                                  # (looked for again)
@@ -17775,6 +18657,45 @@ class BagProbe(unittest.TestCase):
         self.assertEqual(list(out.errors.values()), [])
         self.assertEqual(e.errors(), [])
 
+    def test_the_combined_bags_layout_is_kept_as_they_open(self):
+        e = Env()
+        e.lua.execute("""
+            local bags = CreateFrame("Frame", "ContainerFrameCombinedBags", UIParent)
+            local function at(f, x, y) f.GetLeft = function() return x end; f.GetTop = function() return y end end
+            at(bags, 100, 500)
+            local bar = CreateFrame("Frame", nil, bags)
+            bags.GamepadBagBar = bar
+            local head = CreateFrame("Button", nil, bar)
+            bar.Bag0SlotButton = head
+            head.kind = "Button"
+            head.BagSlotOnClick = function() end
+            head:SetPoint("TOPLEFT", bags, "TOPLEFT", 8, -60)
+            at(head, 108, 440)
+            local inside = CreateFrame("Frame", nil, head)
+            local item = CreateFrame("Button", nil, bags)
+            item.kind = "Button"
+            item.GetBagID = function() return 1 end
+            item.GetID = function() return 3 end
+            item.IsProtected = function() return true, true end
+            bags:Hide()""")
+        e.db.debug = True
+        e.update(1)
+        self.assertIsNone(e.db.bagLayout)                            # (closed: nothing to read)
+        e.g.ContainerFrameCombinedBags.Show(e.g.ContainerFrameCombinedBags)
+        e.update(1)
+        lines = list(e.db.bagLayout.lines.values())
+        head = [line for line in lines if line.startswith("GamepadBagBar.Bag0SlotButton ")]
+        self.assertEqual(len(head), 1, lines)
+        self.assertIn("at 8,60", head[0])
+        self.assertIn("TOPLEFT>ContainerFrameCombinedBags:TOPLEFT 8,-60", head[0])
+        self.assertIn("(a bag's button)", head[0])
+        self.assertFalse(any(line.startswith("GamepadBagBar.Bag0SlotButton.") for line in lines))
+        self.assertTrue(any("protected" in line and "GetBagID=1 GetID=3" in line for line in lines), lines)
+        e.g.ContainerFrameCombinedBags.Hide(e.g.ContainerFrameCombinedBags)
+        e.update(1)
+        self.assertEqual(len(list(e.db.bagLayout.lines.values())), len(lines))    # (kept once they close)
+        self.assertEqual(e.errors(), [])
+
     def test_a_client_with_none_of_it_is_only_noted(self):
         e = Env()
         e.cmd("bagprobe")
@@ -17999,6 +18920,46 @@ class TransmogSets(unittest.TestCase):
         self.assertEqual(e.mock.overrides["PAD3"], "CLICK ControllerCamHUD_Key_TransmogSets_PAD3:LeftButton")
         w.SetTab(w, 3)                                               # RB on to Custom Sets: X is the game's again
         self.assertIsNone(e.mock.overrides["PAD3"])
+        self.assertEqual(e.errors(), [])
+
+    def test_a_set_whose_names_are_not_loaded_shows_once_they_come(self):
+        e = self.env()
+        e.lua.execute("""
+            NAMES, ASKED = {}, {}
+            C_Item.GetItemNameByID = function(id) return NAMES[id] end
+            GetItemInfo = function() return nil end
+            C_Item.RequestLoadItemDataByID = function(id) ASKED[#ASKED + 1] = id end""")
+        quiet = []
+        for i, (cat, piece) in enumerate([(1, "Helm"), (8, "Gloves"), (11, "Boots")]):
+            quiet.append((e.mock.tmItem(cat, 700 + i, 800 + i, None, True), "Veteran Adventurer " + piece))
+        TS = self.open_sets(e)
+        names = lambda: [s.name for s in TS.sets.values()]
+        self.assertNotIn("Veteran Adventurer", names())              # no names yet: not to be made out
+        self.assertEqual(sorted(e.g.ASKED.values()), [s.itemID for s, _ in quiet])   # each asked for, once
+        for s, name in quiet:                                        # they arrive
+            e.g.NAMES[s.itemID] = name
+            e.mock.fire("ITEM_DATA_LOAD_RESULT", s.itemID, True)
+        e.mock.advance(TS.AGAIN + 0.1)
+        e.update(1)
+        self.assertIn("Veteran Adventurer", names())
+        self.assertEqual(len(list(e.g.ASKED.values())), 3)           # (never asked again)
+        self.assertEqual(TS.unnamedCount, 0)
+        self.assertIn("no name yet at the last read 0", "\n".join(TS.Describe().values()))
+        self.assertEqual(e.errors(), [])
+
+    def test_a_name_that_never_comes_is_not_asked_for_again(self):
+        e = self.env()
+        e.lua.execute("""
+            ASKED = {}
+            C_Item.GetItemNameByID = function() return nil end
+            GetItemInfo = function() return nil end
+            C_Item.RequestLoadItemDataByID = function(id) ASKED[#ASKED + 1] = id end""")
+        s = e.mock.tmItem(1, 900, 901, None, True)
+        TS = self.open_sets(e)
+        e.mock.fire("ITEM_DATA_LOAD_RESULT", s.itemID, False)        # the game has no such item to give
+        e.mock.advance(TS.AGAIN + 0.1)
+        TS.ScanAll(TS)
+        self.assertEqual(list(e.g.ASKED.values()), [s.itemID])
         self.assertEqual(e.errors(), [])
 
     def test_sets_come_from_the_item_names_and_say_what_is_missing(self):
@@ -18401,6 +19362,8 @@ class Narrative(unittest.TestCase):
         self.assertEqual(N.FishWords(T(caught=4, away=1)), "No bait on the hook. It adds to my skill, so fewer get away.")
         self.assertIsNone(N.FishWords(T(caught=4, away=1, capped=True)))           # bait adds nothing at the cap
         self.assertEqual(N.FishWords(T(caught=4, away=0, bait=30)), "Bait's nearly spent. Another on the hook keeps my skill up.")
+        self.assertIsNone(N.FishWords(T(caught=4, away=0, bait=300, known=1)))     # can't say that was all of them
+        self.assertIn("every fish this water has", N.FishWords(T(caught=4, away=0, bait=300, known=1, whole=True)))
         self.assertEqual(N.FishWords(T(caught=4, away=0, bait=300, unknown=2, known=1)),
                          "Fish here I haven't landed yet: 2. Keep casting.")
         self.assertIn("Kinds landed: 7.", N.JournalWords(7))
@@ -18428,6 +19391,7 @@ class Narrative(unittest.TestCase):
                 e.update(50 - (e.g.GetTime() - CF.scene.at), 0.25)             # past the moments: your word on it
                 self.assertGreater(CF.frame.voice.alpha, 0.5)
                 self.assertTrue(CF.frame.face.shown)
+                self.assertLessEqual(CF.frame.voice.width, 0.62 * e.g.UIParent.GetWidth(e.g.UIParent) + 0.1)
             else:
                 self.assertIsNone(CF.scene.voice)
             self.assertEqual(e.errors(), [])
@@ -18451,6 +19415,48 @@ class Narrative(unittest.TestCase):
         e.g.HOST.Hide(e.g.HOST)
         self.assertIsNone(N.Speak("test", e.g.HOST, e.lua.table(name="Someone"), "Gone."))   # a closed window: quiet
         self.assertFalse(card.shown)
+        self.assertEqual(e.errors(), [])
+
+    def test_a_card_with_no_room_over_or_under_goes_beside_its_window(self):
+        e = Env()
+        N = e.ns.Narrative
+        e.lua.execute("""
+            TALL = CreateFrame("Frame", "TALL", UIParent); TALL:Show(); TALL:SetSize(300, 760)
+            TALL.GetTop = function() return 760 end
+            TALL.GetBottom = function() return 4 end
+            TALL.GetRight = function() return 320 end
+            UIParent.GetTop = function() return 768 end
+            UIParent.GetRight = function() return 1365 end""")
+        card = N.Speak("test", e.g.TALL, e.lua.table(name="Banker"), "All safe with me.")
+        self.assertEqual((card.at, card.points[1][1], card.points[1][3]), ("right", "TOPLEFT", "TOPRIGHT"))
+        e.lua.execute("TALL.GetRight = function() return 1360 end")
+        N.Speak("test", e.g.TALL, e.lua.table(name="Banker"), "Still here.")
+        self.assertEqual((card.at, card.points[1][1], card.points[1][3]), ("left", "TOPRIGHT", "TOPLEFT"))
+        self.assertEqual(e.errors(), [])
+
+    def test_your_bags_speak_with_the_games_own_bags(self):
+        e = Env(setup=lambda env: env.lua.execute("""
+            ContainerFrameCombinedBags = CreateFrame("Frame", "ContainerFrameCombinedBags", UIParent)
+            ContainerFrameCombinedBags:Hide()"""))
+        N = e.ns.Narrative
+        e.update(1)
+        e.mock.advance(1)
+        self.assertIsNone(N.Said("bags"))
+        e.g.ContainerFrameCombinedBags.Show(e.g.ContainerFrameCombinedBags)
+        e.update(0.6)
+        e.mock.advance(1)
+        self.assertTrue(N.Said("bags"))                              # you, over the game's own bags
+        card = N.cards.bags
+        self.assertTrue(e.same(card.parent, e.g.ContainerFrameCombinedBags))
+        self.assertNotIn("gold dot", N.Said("bags"))                 # nothing of our window's
+        e.g.ContainerFrameCombinedBags.Hide(e.g.ContainerFrameCombinedBags)
+        e.update(0.6)
+        self.assertIsNone(N.Said("bags"))
+        e.cmd("narrative off")
+        e.g.ContainerFrameCombinedBags.Show(e.g.ContainerFrameCombinedBags)
+        e.update(0.6)
+        e.mock.advance(1)
+        self.assertIsNone(N.Said("bags"))
         self.assertEqual(e.errors(), [])
 
     def test_with_it_off_the_broker_the_mentor_and_the_postmaster_are_plain(self):
@@ -19258,6 +20264,500 @@ class MentorGrey(unittest.TestCase):
         self.assertGreater(two, 0)                                     # a route takes its own line
         self.assertEqual(LV.layout.tall, down)
         self.assertGreaterEqual(e.g.ControllerCamHUD_SkillPlanPanel.height, LV.layout.top + down + 24)
+        self.assertEqual(e.errors(), [])
+
+
+class Commentary(unittest.TestCase):
+    """Your character has something to say now and then: out loud in your people's voice, or a plain thought."""
+
+    RACES = ("Human", "Dwarf", "Gnome", "NightElf", "Draenei", "Worgen", "Pandaren", "Orc", "Scourge", "Tauren",
+             "Troll", "BloodElf", "Goblin", "HighOrder", "Windshaper")
+
+    def env(self, race="Dwarf", pole=True, **kw):
+        e = FishJournal().env(pole=pole, **kw)
+        e.lua.execute("function UnitRace() return '%s', '%s' end" % (race, race))
+        e.update(2)                                                   # (logged in; the fishing interface up)
+        return e
+
+    def roll(self, e, value, weight=0.5):
+        e.ns.Commentary.random = lambda: value
+        e.ns.FishLog.random = lambda: weight
+
+    def words(self, e):
+        r = e.ns.Commentary.Current()
+        return plain(e.ns.Commentary.Words(r)) if r else None
+
+    def land(self, e, *ids):
+        FishJournal().land(e, *ids)
+
+    def test_a_switch_of_its_own_under_the_narrative(self):
+        e = self.env()
+        C = e.ns.Commentary
+        self.assertTrue(e.db.commentary)
+        place = e.ns.OptionsLook.PlaceOf(next(d for d in e.ns.settings.values() if d.key == "commentary"))
+        self.assertEqual((place.page, place.group.head), ("General", "Narrative"))
+        self.assertTrue(e.ns.BASIC_OPTIONS["Character commentary"])
+        self.assertTrue(C.On())
+        e.cmd("commentary off")
+        self.assertFalse(C.On())
+        self.roll(e, 0.0)
+        self.land(e, 6291)
+        self.assertIsNone(self.words(e))
+        self.assertTrue(e.ns.Narrative.On())                         # the windows keep their characters
+        e.cmd("commentary on")
+        e.cmd("narrative off")                                       # the narrative's switch turns it off too
+        self.assertFalse(C.On())
+        self.land(e, 6303)
+        self.assertIsNone(self.words(e))
+        self.assertEqual(e.errors(), [])
+
+    def test_a_new_fish_is_a_thought_and_sometimes_a_word_out_loud(self):
+        e = self.env()
+        C = e.ns.Commentary
+        self.roll(e, 0.0)                                             # (out loud this time)
+        self.land(e, 6291)
+        said = self.words(e).split("\n")
+        self.assertEqual(said[0], "\u201cOch, now what're you, then?\u201d")
+        self.assertIn("Raw Brilliant Smallfish, ", said[1])
+        self.assertIn(" lb. A new one for my journal. The first fish most anglers ever land", said[1])
+        self.assertTrue(e.db.remarkMemory.told["fish:6291"])          # lore is told once
+        card = e.g.ControllerCamHUD_Speaker_fish                      # on your card at the water
+        self.assertTrue(card.shown)
+        self.assertEqual(plain(card.words.text), self.words(e))
+        self.assertIn("|c" + C.THOUGHT, card.words.text)              # the thought is pale
+        self.assertIsNone(e.g.ControllerCamHUD_Speaker_remark)
+        self.roll(e, 0.9)
+        self.land(e, 6303)                                            # quiet this time: a thought, lips still
+        self.assertNotIn("\u201c", self.words(e))
+        self.assertIn("Raw Slitherskin Mackerel", self.words(e))
+        self.assertTrue(C.Speaker(C.Current()).still)
+        e.update(C.HOLD + 1)                                          # and your card goes back to what it said
+        self.assertIsNone(self.words(e))
+        self.assertNotIn("journal", str(e.ns.Narrative.Said("fish")))
+        self.assertEqual(e.errors(), [])
+
+    def test_a_record_worth_the_name_is_cheered_in_your_peoples_voice(self):
+        e = self.env(race="MagharOrc")                                # kin speak alike
+        C = e.ns.Commentary
+        self.roll(e, 0.9, weight=0.2)
+        self.land(e, 6291)
+        was = e.db.fishLog.fish[6291].best
+        e.update(C.HOLD + 1)
+        self.roll(e, 0.9, weight=1.0)
+        self.land(e, 6291)
+        words = self.words(e)
+        self.assertTrue(words.startswith("\u201cA worthy opponent!\u201d")
+                        or words.startswith("\u201cIt fought with honour."), words)
+        self.assertIn("My best before was %.1f lb." % was, words)
+        self.assertFalse(C.Speaker(C.Current()).still)                # lips move for what is said out loud
+        e.update(C.HOLD + 1)
+        e.db.fishLog.fish[6291].best = e.db.fishLog.fish[6291].best - 0.1   # barely past it: not worth a cheer
+        self.land(e, 6291)
+        self.assertIsNone(self.words(e))
+        self.assertEqual(e.errors(), [])
+
+    def test_most_ordinary_catches_pass_without_a_word(self):
+        e = self.env()
+        C = e.ns.Commentary
+        self.roll(e, 0.9)
+        self.land(e, 6291)                                            # new
+        e.update(C.QUIET)
+        self.land(e, 6291)                                            # ordinary, and the dice say no
+        self.assertIsNone(self.words(e))
+        self.roll(e, 0.0)
+        self.land(e, 6291)
+        first = self.words(e)
+        self.assertTrue(first.startswith("Raw Brilliant Smallfish, "), first)
+        self.assertNotIn("\u201c", first)                             # a thought
+        e.update(C.HOLD + 1)
+        self.land(e, 6291)                                            # too soon after the last
+        self.assertIsNone(self.words(e))
+        e.update(C.QUIET)
+        self.land(e, 6291)
+        self.assertNotEqual(self.words(e), first)                     # another sort of thought
+        e.update(C.QUIET)
+        self.land(e, 6297)                                            # an old skull is no fish
+        self.assertTrue(self.words(e).startswith("Old Skull. "), self.words(e))
+        self.assertNotIn(" lb", self.words(e))
+        self.assertEqual(e.errors(), [])
+
+    def test_the_thoughts_that_fit_a_catch(self):
+        e = self.env()
+        C, T = e.ns.Commentary, e.lua.table
+        e.lua.execute("function BASE(J) return (J.Base(6291, 'x')) end")
+        base = e.g.BASE(e.ns.FishLog)
+
+        def sorts(**kw):
+            entry = T(**kw.pop("entry", {}))
+            return {t.what: t.line for t in C.CatchThoughts(T(entry=entry, **kw)).values()}
+        got = sorts(id=6308, name="Catfish", weight=1.0, where="Durotar", map=1411, count=3, away=2, total=50,
+                    entry=dict(n=7, firstAt="Westfall", best=9.0, bestAt="Loch Modan"))
+        self.assertEqual(got["count"], "That makes 7 of these in my journal.")
+        self.assertEqual(got["first"], "My journal's first of these came from Westfall.")
+        self.assertEqual(got["heaviest"], "My heaviest of these is still 9.0 lb, landed at Loch Modan.")
+        self.assertEqual(got["session"], "That's 3 of these since I got to this water.")
+        self.assertEqual(got["away"], "2 got away since I started here. This one didn't.")
+        self.assertEqual(got["total"], "Catch number 50 for the journal.")
+        self.assertIn("whiskers", got["sort"])                        # what sort of fish it is
+        self.assertIn("whiskers like a dwarven elder", got["lore"])   # the journal's own lore
+        self.assertIn("Durotar", got["water"])                        # and the water's
+        self.assertIn("musing", got)
+        few = sorts(id=999, name="Odd Fish", weight=1.0, where="Durotar", count=1, away=0, total=3,
+                    entry=dict(n=1, firstAt="Durotar"))
+        self.assertEqual(set(few) - {"big", "small"}, {"musing"})
+        names = lambda w: set(sorts(id=6291, name="x", weight=w, where="Durotar", entry=dict(n=1)))
+        self.assertIn("big", names(base * 1.5))
+        self.assertIn("small", names(base * 0.6))
+        self.assertFalse({"big", "small"} & names(base))
+        self.assertNotIn("big", sorts(id=6311, name="22 Pound Catfish", weight=22, where="Durotar",
+                                      entry=dict(n=1)))              # a fish that names its weight
+        self.assertEqual(e.errors(), [])
+
+    def test_no_line_comes_round_again_until_the_others_have(self):
+        e = self.env()
+        C = e.ns.Commentary
+        pool = e.lua.table_from(["a", "b", "c", "d"])
+        said = [C.Pick("t", pool) for _ in range(40)]
+        self.assertEqual(set(said[:4]), {"a", "b", "c", "d"})
+        self.assertTrue(all(x != y for x, y in zip(said, said[1:])), said)     # never twice running
+        self.assertTrue(all(said.count(x) >= 8 for x in "abcd"), said)
+        two = [C.Pick("u", e.lua.table_from(["x", "y"])) for _ in range(10)]
+        self.assertTrue(all(x != y for x, y in zip(two, two[1:])), two)
+        self.assertEqual(C.Pick("v", e.lua.table_from(["only"])), "only")
+        self.assertEqual(C.Pick("v", e.lua.table_from(["only"])), "only")
+
+    def test_every_people_has_its_voice_for_every_occasion(self):
+        e = self.env()
+        said, N = e.ns.Remarks.said, e.ns.Narrative
+        for race in self.RACES:
+            self.assertTrue(N.CALM[race] and N.RACE[race], race)
+            for occasion in ("new", "record", "boss", "treasure"):
+                self.assertEqual(len(said[occasion][race]), 2, (race, occasion))
+        e.lua.execute("function UnitRace() return 'Fox', 'Vulpera' end")        # no voice: it only thinks
+        self.assertIsNone(e.ns.Commentary.Aloud("record"))
+
+    def test_the_two_skyborne_speak_apart(self):
+        e = self.env()
+        N = e.ns.Narrative
+        for number, people in ((95, "HighOrder"), (96, "Windshaper")):  # one name in the game, two peoples
+            e.lua.execute("function UnitRace() return 'Skyborne', 'Skyborne', %d end" % number)
+            self.assertEqual(N.Race(), people)
+        for side, people in (("Alliance", "HighOrder"), ("Horde", "Windshaper")):   # without a number: by side
+            e.lua.execute("""function UnitRace() return 'Skyborne', 'Skyborne' end
+                             function UnitFactionGroup() return '%s' end""" % side)
+            self.assertEqual(N.Race(), people)
+        e.ns.Commentary.random = lambda: 0.0
+        self.assertEqual(e.ns.Commentary.Aloud("boss"), "The winds were with us. We owe them for it.")
+        self.assertEqual(e.errors(), [])
+
+    def test_without_the_fishing_interface_it_has_a_card_of_its_own(self):
+        e = self.env(pole=False)
+        C = e.ns.Commentary
+        self.roll(e, 0.9)
+        self.assertTrue(C.Say(e.lua.table(thought="A thought.", rank=2)))
+        card = e.g.ControllerCamHUD_Speaker_remark
+        self.assertTrue(card.shown)
+        self.assertEqual(plain(card.words.text), "A thought.")
+        self.assertTrue(e.same(card.parent, e.g.ControllerCamHUD_RemarkSpot))
+        self.assertFalse(C.Say(e.lua.table(thought="Less.", rank=1)))  # something greater is on show
+        self.assertEqual(self.words(e), "A thought.")
+        e.update(C.HOLD - 0.7)
+        self.assertLess(card.alpha, 1)                                # fading
+        e.update(1)
+        self.assertFalse(card.shown)
+        self.assertIsNone(self.words(e))
+        self.assertEqual(e.errors(), [])
+
+    def test_never_in_a_fight_and_said_after_it(self):
+        e = self.env(pole=False)
+        C = e.ns.Commentary
+        e.mock.state.combat = True
+        e.mock.fire("PLAYER_REGEN_DISABLED")
+        C.Say(e.lua.table(thought="Later.", rank=4))
+        C.Say(e.lua.table(thought="Not as much.", rank=1))
+        self.assertIsNone(self.words(e))
+        e.mock.state.combat = False
+        e.mock.fire("PLAYER_REGEN_ENABLED")
+        e.update(2)
+        self.assertEqual(self.words(e), "Later.")
+        e.mock.state.combat = True                                    # a fight begins: the card gets out of the way
+        e.mock.fire("PLAYER_REGEN_DISABLED")
+        self.assertFalse(e.g.ControllerCamHUD_Speaker_remark.shown)
+        e.update(C.WAIT + 5)
+        e.mock.state.combat = False
+        e.mock.fire("PLAYER_REGEN_ENABLED")                           # old news by now
+        e.update(2)
+        self.assertIsNone(self.words(e))
+        self.assertEqual(e.errors(), [])
+
+    def test_lore_held_back_by_a_fight_is_not_counted_as_heard(self):
+        e = self.env(pole=False)
+        C = e.ns.Commentary
+        e.mock.state.combat = True
+        C.Say(e.lua.table(thought="A story.", rank=3, lore="water:1"))
+        self.assertIsNone(e.db.remarkMemory.told["water:1"])
+        e.update(C.WAIT + 5)
+        e.mock.state.combat = False
+        e.mock.fire("PLAYER_REGEN_ENABLED")                           # too late to be said: still to be told
+        e.update(2)
+        self.assertIsNone(e.db.remarkMemory.told["water:1"])
+        C.Say(e.lua.table(thought="A story.", rank=3, lore="water:1"))
+        self.assertTrue(e.db.remarkMemory.told["water:1"])
+        self.assertEqual(e.errors(), [])
+
+    def dungeon(self, e, number=36, name="The Deadmines"):
+        e.lua.execute("function GetInstanceInfo() return '%s', 'party', 1, 'Normal', 5, 0, false, %d end"
+                      % (name, number))
+
+    def test_a_boss_down_the_first_time_and_the_times_after(self):
+        e = self.env(pole=False)
+        C = e.ns.Commentary
+        self.dungeon(e)
+        self.roll(e, 0.0)
+        e.mock.fire("ENCOUNTER_END", 1144, "Edwin VanCleef", 1, 5, 1)
+        e.mock.fire("BOSS_KILL", 1144, "Edwin VanCleef")             # the game may tell it twice
+        words = self.words(e)
+        self.assertEqual(words.split("\n")[0], "\u201cHa! Down ye go, and stay down!\u201d")
+        self.assertIn("Edwin VanCleef is down. The Defias turned an old mine into a hideout", words)
+        self.assertEqual(C.Mine().bosses["Edwin VanCleef"], 1)
+        self.assertEqual((e.db.remarkMemory.events.ENCOUNTER_END, e.db.remarkMemory.events.BOSS_KILL), (1, 1))
+        self.assertIn("ENCOUNTER_END 1, BOSS_KILL 1", e.ns.Narrative.Describe())
+        e.update(60)
+        e.mock.fire("ENCOUNTER_END", 1145, "Cookie", 1, 5, 0)        # a wipe is not a kill
+        self.assertIsNone(self.words(e))
+        e.mock.fire("ENCOUNTER_END", 1145, "Cookie", 1, 5, 1)
+        self.assertIn("Cookie is down. All that digging", self.words(e))   # the place's other line
+        e.update(60)
+        e.mock.fire("BOSS_KILL", 1146, "Mr. Smite")                  # both told: a thought that fits any boss
+        self.assertIn("Mr. Smite is down. ", self.words(e))
+        self.assertNotIn("Defias", self.words(e))
+        e.update(60)
+        e.mock.fire("BOSS_KILL", 1144, "Edwin VanCleef")             # again: now and then
+        self.assertEqual(self.words(e), "Edwin VanCleef again. That makes 2 times.")
+        e.update(60)
+        self.roll(e, 0.9)
+        e.mock.fire("BOSS_KILL", 1144, "Edwin VanCleef")
+        self.assertIsNone(self.words(e))
+        self.assertEqual(C.Mine().bosses["Edwin VanCleef"], 3)       # counted all the same
+        self.assertEqual(e.errors(), [])
+
+    def test_a_boss_whose_name_the_game_keeps_secret(self):
+        e = self.env(pole=False)
+        self.dungeon(e, 999, "Somewhere New")
+        self.roll(e, 0.0)
+        e.lua.execute("SECRET = { secret = true }")
+        e.mock.state.combat = True                                    # it ends with the fight: said after
+        e.mock.fire("ENCOUNTER_END", e.g.SECRET, e.g.SECRET, 1, 5, 1)
+        e.mock.fire("BOSS_KILL", e.g.SECRET, e.g.SECRET)
+        e.mock.state.combat = False
+        e.mock.fire("PLAYER_REGEN_ENABLED")
+        e.update(2)
+        words = self.words(e)
+        self.assertNotIn("is down", words)                            # no name, and no "nil" in its place
+        self.assertNotIn("nil", words)
+        self.assertIn("\u201c", words)
+        self.assertEqual(len(list(e.ns.Commentary.Mine().bosses.keys())), 0)
+        self.assertEqual(e.errors(), [])
+
+    def test_a_new_place_gets_a_thought_but_not_too_often(self):
+        e = self.env(pole=False)
+        C = e.ns.Commentary
+        self.assertTrue(C.Mine().zones["Durotar"])                    # where you stood at login: no news
+        self.roll(e, 0.0)
+
+        def walk(zone):
+            e.mock.zone = zone
+            e.mock.fire("ZONE_CHANGED_NEW_AREA")
+            e.update(C.SETTLE + 1)
+        walk("Durotar")
+        self.assertIsNone(self.words(e))
+        walk("The Barrens")
+        self.assertEqual(self.words(e), "The Barrens. Worth a good look around.")
+        e.update(C.HOLD)
+        walk("Ashenvale")                                             # too soon: not noted, for another visit
+        self.assertIsNone(self.words(e))
+        self.assertIsNone(C.Mine().zones["Ashenvale"])
+        e.update(C.AMBIENT)
+        e.db.fishLog.zones["Ashenvale"] = e.lua.table(n=12, fish=e.lua.table())
+        walk("Ashenvale")
+        self.assertEqual(self.words(e), "Ashenvale. My journal has 12 catches from here.")
+        e.update(C.AMBIENT)
+        walk("The Barrens")                                           # been there
+        self.assertIsNone(self.words(e))
+        e.mock.taxi.onTaxi = True
+        walk("Winterspring")                                          # flying over is not arriving
+        self.assertIsNone(C.Mine().zones["Winterspring"])
+        e.mock.taxi.onTaxi = False
+        e.mock.zone = "Westfall"
+        e.mock.fire("PLAYER_ENTERING_WORLD", False, False)           # a boat or a hearthstone is arriving
+        e.update(C.SETTLE + 1)
+        self.assertIn("Westfall. ", self.words(e))
+        e.update(C.AMBIENT)
+        e.mock.zone = "Duskwood"
+        e.mock.fire("PLAYER_ENTERING_WORLD", False, True)            # a reload is not
+        e.update(C.SETTLE + 1)
+        self.assertIsNone(self.words(e))
+        self.assertEqual(e.errors(), [])
+
+    def test_only_some_jobs_done_get_a_word(self):
+        e = self.env(pole=False)
+        C = e.ns.Commentary
+        e.lua.execute("""
+            TITLES = { [1] = "Sting of the Scorpid", [2] = "Vile Familiars", [3] = "The Defias Brotherhood" }
+            C_QuestLog.GetTitleForQuestID = function(id) return TITLES[id] or ("Job " .. id) end
+            C_QuestLog.GetQuestTagInfo = function(id) if id == 3 then return { tagID = 81 } end end""")
+        self.roll(e, 0.0)
+
+        def hand_in(quest):
+            e.mock.fire("QUEST_TURNED_IN", quest, 100, 0)
+        hand_in(1)                                                    # the first here
+        self.assertEqual(self.words(e), "\u201cSting of the Scorpid\u201d, finished. Someone's day just got better.")
+        e.update(C.AMBIENT + 1)
+        hand_in(2)
+        self.assertIsNone(self.words(e))                              # an ordinary one: not a word
+        e.lua.execute("function GetQuestID() return 3 end function GetTitleText() return TITLES[3] end")
+        e.mock.fire("QUEST_COMPLETE")                                 # read while the log still has it
+        e.lua.execute("C_QuestLog.GetQuestTagInfo = function() return nil end")
+        hand_in(3)
+        self.assertEqual(self.words(e), "\u201cThe Defias Brotherhood\u201d, done. That one was no errand.")
+        for quest in range(4, 10):
+            e.update(C.AMBIENT + 1)
+            hand_in(quest)
+            self.assertIsNone(self.words(e), quest)
+        e.update(C.AMBIENT + 1)
+        hand_in(10)
+        self.assertEqual(self.words(e), "Durotar: 10 jobs done here since I started keeping count.")
+        self.assertEqual(C.Mine().quests["Durotar"], 10)
+        self.assertEqual(e.errors(), [])
+
+    def loot(self, e, source, *items, coin=False):
+        """A loot window: items are (id, name, quality, the game's sort); source is the GUID's first word."""
+        rows = []
+        for i, name, quality, sort in items:
+            e.mock["items"][i] = e.lua.table(name=name, **{"class": sort})
+            rows.append(e.lua.table(id=i, name=name, quality=quality))
+        if coin:
+            rows.append(e.lua.table(name="12 Copper", coin=True))
+        e.lua.execute("""
+            LOOT_FROM = nil
+            function GetLootSourceInfo() return LOOT_FROM end
+            local link = GetLootSlotLink_ or GetLootSlotLink
+            local info = GetLootSlotInfo_ or GetLootSlotInfo
+            GetLootSlotLink_, GetLootSlotInfo_ = link, info
+            function GetLootSlotInfo(i)                          -- (coin: a name, and no item behind it)
+                local it = require_mock.loot[i]
+                if it and it.coin then return 1, it.name, 0, nil, 0, false end
+                return info(i)
+            end
+            function GetLootSlotLink(i)
+                if require_mock.loot[i] and require_mock.loot[i].coin then return nil end
+                return link(i)
+            end""".replace("require_mock", "MOCK"))
+        e.g.MOCK = e.mock
+        e.g.LOOT_FROM = source and "%s-0-1-2-3-%d" % (source, self.looted()) or None
+        e.mock.loot = e.lua.table_from(rows)
+        e.mock.fire("LOOT_READY")
+        e.mock.fire("LOOT_OPENED")
+        e.mock.loot = e.lua.table()
+        e.mock.fire("LOOT_CLOSED")
+
+    count = 0
+
+    def looted(self):
+        Commentary.count += 1
+        return Commentary.count
+
+    def test_a_chest_you_loot_gets_a_word(self):
+        e = self.env(pole=False)
+        C = e.ns.Commentary
+        self.roll(e, 0.0)
+        self.loot(e, "GameObject", (2000, "Green Iron Boots", 2, 4), coin=True)
+        words = self.words(e)
+        self.assertEqual(words.split("\n")[0], "\u201cOch, now there's a bit o' treasure!\u201d")
+        self.assertIn("Green Iron Boots. Somebody left this behind. Did they mean to come back?", words)
+        self.assertEqual(C.Mine().finds, 1)
+        e.update(C.HOLD + 1)
+        self.loot(e, "GameObject", (2001, "Ice Cold Milk", 1, 0), (2002, "Linen Cloth", 1, 7))   # soon after
+        self.assertIsNone(self.words(e))
+        self.assertEqual(C.Mine().finds, 2)                           # counted all the same
+        self.loot(e, "GameObject", (2003, "Blade of the Deep", 3, 2))   # something rare is not kept waiting
+        self.assertIn("Blade of the Deep. Why would anyone leave something like this behind?", self.words(e))
+        self.assertIn("\u201c", self.words(e))
+        e.update(C.TREASURE + 1)
+        self.roll(e, 0.9)
+        self.loot(e, "Item", coin=True)                               # a lockbox from your bags, coin alone
+        self.assertNotIn("\u201c", self.words(e))                     # a quiet one
+        self.assertEqual(e.errors(), [])
+
+    def test_a_find_is_counted_once_and_every_tenth_is_told(self):
+        e = self.env(pole=False)
+        C = e.ns.Commentary
+        self.roll(e, 0.9)
+        C.Mine().finds = 9
+        self.loot(e, "GameObject", coin=True)
+        self.assertEqual(self.words(e), "10 finds like this since I started keeping count.")
+        same = e.g.LOOT_FROM
+        e.update(C.TREASURE + 1)
+        e.mock.loot = e.lua.table_from([e.lua.table(name="1 Copper", coin=True)])
+        e.g.LOOT_FROM = same
+        e.mock.fire("LOOT_READY")                                     # the chest left half full, opened again
+        e.mock.fire("LOOT_CLOSED")
+        self.assertIsNone(self.words(e))
+        self.assertEqual(C.Mine().finds, 10)
+        self.assertEqual(e.errors(), [])
+
+    def test_what_is_not_treasure_passes_without_a_word(self):
+        e = self.env(pole=False)
+        C = e.ns.Commentary
+        self.roll(e, 0.0)
+        rich = ((3001, "Malachite", 2, 7), (3002, "Rough Stone", 1, 7))
+        self.loot(e, "Creature", (3000, "Fine Boots", 2, 4), coin=True)           # a corpse
+        self.loot(e, None, (3000, "Fine Boots", 2, 4), coin=True)                 # the game does not say from what
+        self.loot(e, "GameObject", (3003, "Red Candle", 1, 12), coin=True)        # what a quest wants
+        self.loot(e, "GameObject", (3004, "Mushroom", 1, 0))                      # one plain thing
+        self.loot(e, "Item", (3005, "Clam Meat", 1, 7), (3006, "Shell", 1, 15))   # a clam
+        self.loot(e, "GameObject", *rich)                                         # ore: all trade goods
+        e.lua.execute("SECRET = { secret = true }")
+        e.g.GetNumLootItems_ = e.g.GetNumLootItems
+        for spell, name in ((2575, "Mining"), (2366, "Herb Gathering"), (13262, "Disenchant"), (99999, "Mining")):
+            e.mock.spellNames[spell] = name
+            e.mock.fire("UNIT_SPELLCAST_SENT", "player", "Vein", "cast", spell)
+            self.loot(e, "GameObject", (3001, "Malachite", 2, 7), (3007, "Silver Bar", 2, 4))
+        self.assertIsNone(self.words(e))
+        self.assertIsNone(C.Mine().finds)
+        e.mock.fire("UNIT_SPELLCAST_SENT", "player", "Battered Chest", "cast", 3365)   # opening a chest is not work
+        self.loot(e, "GameObject", (3000, "Fine Boots", 2, 4))
+        self.assertIn("Fine Boots. ", self.words(e))
+        e.update(C.TREASURE + 1)
+        e.mock.fishingLoot = True                                     # what is on the line is the catch's affair
+        self.loot(e, "GameObject", coin=True)
+        self.assertIsNone(self.words(e))
+        self.assertEqual(e.errors(), [])
+
+    def test_a_box_on_the_line_is_treasure_not_junk(self):
+        e = self.env()
+        C = e.ns.Commentary
+        self.roll(e, 0.9)
+        e.mock["items"][21150] = e.lua.table(name="Iron Bound Trunk", **{"class": 15})
+        self.land(e, 21150)
+        self.assertEqual(self.words(e), "Iron Bound Trunk. A box on a fishing line. What could be inside?")
+        self.assertEqual(C.Mine().finds, 1)
+        e.update(C.TREASURE + 1)
+        e.cmd("commentary off")
+        self.land(e, 21150)
+        self.assertIsNone(self.words(e))
+        self.assertEqual(e.errors(), [])
+
+    def test_what_is_remembered_survives_and_bad_data_is_cleaned(self):
+        e = Env(db="""{ remarkMemory = { told = { ["fish:6291"] = true, [4] = true }, chars = { ["A-B"] = {
+            zones = { Durotar = true }, bosses = "junk" } }, events = { BOSS_KILL = 2, x = "y" } } }""")
+        m = e.db.remarkMemory
+        self.assertTrue(m.told["fish:6291"])
+        self.assertIsNone(m.told[4])
+        self.assertTrue(m.chars["A-B"].zones.Durotar)
+        self.assertEqual(len(list(m.chars["A-B"].bosses.keys())), 0)
+        self.assertEqual(m.events.BOSS_KILL, 2)
+        self.assertIsNone(m.events.x)
         self.assertEqual(e.errors(), [])
 
 

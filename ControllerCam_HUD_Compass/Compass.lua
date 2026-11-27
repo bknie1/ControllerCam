@@ -8,8 +8,10 @@
 --
 -- Which quests: those in your quest list (the tracked ones) with a place on this map, the nearest C.MAX of them;
 -- when none of the quests here is tracked, every quest of yours on this map.
--- The way you face is the game's GetPlayerFacing: your character's facing (which follows the camera with the
--- camera addon's "Turn character with camera"). Where the game does not say where you are or which way you face
+-- The way you face is the game's GetPlayerFacing: your character's facing. This game gives addons no way to read
+-- where the camera looks, so the two differ when the camera is turned on its own (the camera addon's "Turn
+-- character with camera" keeps them together). Should a build have such a function, it is used (C.Camera), and
+-- only then is there a switch for it. Where the game does not say where you are or which way you face
 -- (inside a dungeon, or kept secret), on a flight, and while Edit Mode is open, the compass steps away.
 --
 -- Cost: the quests are looked up every C.LOOK seconds and soon after the game says they changed; in between only
@@ -36,12 +38,6 @@ ns.RegisterSetting({
     tip = "at the top of the screen, or at the bottom in the experience bar's place (the bar then goes to the top)",
 })
 C.PLACES = { L["Top"], L["Bottom"] }
-
-ns.RegisterSetting({
-    key = "compassCamera", kind = "boolean", default = true, command = "compasscamera", section = "Quests",
-    label = "Quest compass: follows the camera",
-    tip = "the compass shows the way the camera looks, not the way your character faces (they differ when the stick turns your character without the camera); off: the way your character faces",
-})
 
 C.W, C.MIN_W = 360, 220         -- the strip's width; narrower only to stay clear of your buffs
 C.SPAN = math.pi                -- the strip covers half the horizon: what is straight beside you is at its end
@@ -94,6 +90,14 @@ function C.Camera()
         if type(fn) == "function" then C.cam = { name = name, fn = fn }; break end
     end
     return C.cam or nil
+end
+
+if C.Camera() then              -- a switch only where it can do something
+    ns.RegisterSetting({
+        key = "compassCamera", kind = "boolean", default = true, command = "compasscamera", section = "Quests",
+        label = "Quest compass: follows the camera",
+        tip = "the compass shows the way the camera looks, not the way your character faces (they differ when the stick turns your character without the camera); off: the way your character faces",
+    })
 end
 
 -- What the game has with "Camera" in its name (for the debug report: to find the right one where none matched)
@@ -799,8 +803,10 @@ function C.Describe()
     local cam = C.Camera()
     local okP, player = pcall(GetPlayerFacing or function() end)
     local names = table.concat(C.CameraNames(), " ")
-    return ("camera: %s (%s), the character %s; names with Camera: %s\n"):format(
-        cam and cam.name or "none found, so the character's facing", (ns.db and ns.db.compassCamera ~= false) and "followed" or "not followed",
+    local source = "none to read in this game, so the character's facing"
+    if cam then source = cam.name .. ((ns.db and ns.db.compassCamera ~= false) and " (followed)" or " (not followed)") end
+    return ("camera: %s, the character %s; names with Camera: %s\n"):format(
+        source,
         tostring(okP and Num(player) and ("%.2f"):format(Num(player)) or "-"), names ~= "" and names or "-")
         .. ("compass on %s, at the %s, shown %s%s, width %d, marks: %d quests, %d to hand in, %d pins, focus %s, facing %s, drawn %d, experience bar moved %s"):format(
         tostring(C.running), (ns.db and ns.db.compassPlace == 2) and "bottom" or "top", tostring(C.want),

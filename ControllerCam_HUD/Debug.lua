@@ -636,6 +636,10 @@ events:SetScript("OnUpdate", function(_, dt)
     since = 0
     local ok, err = pcall(Wheels)
     if not ok then ns.Error(err) end
+    if ns.BagLayout then                                     -- the combined bags' layout, as they last opened
+        ok, err = pcall(ns.BagLayout.Watch, ns.BagLayout)
+        if not ok then ns.Error(err) end
+    end
 end)
 events:SetScript("OnEvent", function(_, event)
     if not (ns.db and ns.db.debug) then return end

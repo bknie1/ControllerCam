@@ -116,11 +116,13 @@ Keine Materialien in der Bank zum Herausnehmen.
 Alle Materialien (%d)
 Materialien einlagern
 Materialien entnehmen
+Wählen
+Schließen
 Schnell entnehmen
 nimmt aus der Bank, wovon du schon etwas trägst (Materialien, Tränke, Essen), um deine Taschen aufzufüllen
 Schnell einlagern
 legt in die Bank, wovon sie schon etwas hat, und was du für sie markiert hast
-Handwerksmaterialien in die Bank oder heraus: alle auf einmal oder eine Art nach der anderen (Metall und Stein, Stoff, Kräuter...)
+Handwerksmaterialien in die Bank oder heraus: alle auf einmal oder eine Art nach der anderen (Metall und Stein, Stoff, Kräuter...). Mit Controller: hoch und runter wählen, A nimmt es, B schließt; R3 abseits eines Gegenstands halten öffnet dies auch
 Öffne zuerst einen Händler.
 Schlau verkaufen
 verkauft, wofür ein Händler am meisten zahlt: Plunder und was im Auktionshaus nicht mehr bringt (erst aufgelistet und bestätigt); was im Auktionshaus mehr wert ist oder deine Berufe noch brauchen, bleibt
@@ -386,7 +388,6 @@ Zurück
 Anprobieren
 Markierung ändern
 Mehr
-Schließen
 Nicht im Kampf.
 Gegenstandsaktionen: den Gegenstand unter dem Zeiger anprobieren, markieren, Details ansehen oder zerstören
 R3 auf einem Gegenstand halten für seine Aktionen
@@ -583,24 +584,32 @@ Sekunden bis der Chat ausblendet
 wie lange Chattext bleibt, bevor er ausblendet
 Koordinaten auf der Karte
 deine Koordinaten unter der Weltkarte
+Neu-Laden-Knopf am Spielmenü
+solange das Spielmenü (Escape) offen ist, sitzt darunter ein eigener Knopf des HUD zum Neuladen der Oberfläche; das Menü selbst bleibt, wie es ist
 Die roten Fehlermeldungen des Spiels ausblenden
 „Zauber ist noch nicht bereit“, „Nicht genug Mana“ und dergleichen in der Bildschirmmitte werden ausgeblendet
 Meldungen „noch nicht bereit“ ausblenden
 „Der Zauber ist noch nicht bereit“, „Die Fähigkeit ist noch nicht bereit“ und „Der Gegenstand ist noch nicht bereit“ bleiben aus der Bildschirmmitte fern; die anderen roten Meldungen des Spiels erscheinen weiterhin
+Vorname Nachname
+Vorname N.
+V.N.
+V. Nachname
 %d Nachrichten seit deiner Anmeldung als Spam ausgeblendet.
 %d davon waren wiederholte Gildenwerbung.
 Klassensymbol und Stufe im Chat
-Klassensymbol und Stufe eines Spielers in Klammern vor seinem Namen, wenn das Spiel sie uns wissen lässt. Standardmäßig aus: es schreibt die Chatzeilen des Spiels um, und in Schlachtfeldern und Instanzen löst das die Warnung des Spiels vor Addon-Fehlern aus
+Klassensymbol und Stufe eines Spielers in Klammern vor seinem Namen, wenn das Spiel sie uns wissen lässt. Es schreibt die Chatzeilen des Spiels um: Warnt das Spiel in einem Schlachtfeld oder einer Instanz vor Addon-Fehlern, schalte es aus
 Kurze Kanalnamen im Chat
-der Kanal vor einer Zeile, gekürzt: [P] Gruppe, [PL] Gruppenleiter, [G] Gilde, [O] Offizier, [R] Schlachtzug, [RL] Schlachtzugsleiter, [I] Instanz, und ein nummerierter Kanal mit seiner Nummer, [1]. Standardmäßig aus: es schreibt die Chatzeilen des Spiels um, und in Schlachtfeldern und Instanzen löst das die Warnung des Spiels vor Addon-Fehlern aus
-Nur Vornamen im Chat
-ein Name mit Nachnamen erscheint nur mit dem Vornamen (Jory Spleeneater spricht als Jory); ein Flüstern oder Rechtsklick darauf erreicht weiterhin den ganzen Namen. Standardmäßig aus: es schreibt die Chatzeilen des Spiels um, und in Schlachtfeldern und Instanzen löst das die Warnung des Spiels vor Addon-Fehlern aus
+der Kanal vor einer Zeile, gekürzt: [P] Gruppe, [PL] Gruppenleiter, [G] Gilde, [O] Offizier, [R] Schlachtzug, [RL] Schlachtzugsleiter, [I] Instanz, und ein nummerierter Kanal mit Nummer und Anfangsbuchstabe: [1.G] General, [2.T] Trade, [3.D] LocalDefense. Es schreibt die Chatzeilen des Spiels um: Warnt das Spiel in einem Schlachtfeld oder einer Instanz vor Addon-Fehlern, schalte es aus
+Namen im Chat
+ein Name mit Nachnamen als Vorname Nachname, Vorname N. (Jory Spleeneater als Jory S.), V.N. (J.S.) oder V. Nachname (J. Spleeneater); ein Name ohne Nachnamen bleibt, wie er ist. Flüstern und Rechtsklick erreichen weiter den ganzen Namen. Gekürzte Namen schreiben die Chatzeilen des Spiels um: Warnt das Spiel in einem Schlachtfeld oder einer Instanz vor Addon-Fehlern, wähle Vorname Nachname
 Größe des Chattexts
-die Größe des Texts in den Chatfenstern als Anteil der spieleigenen Größe (die Einstellung des Spiels bleibt, wie sie ist)
+die Textgröße der Chatfenster in Punkt: 20 passt zu einem Fernseher am anderen Ende des Raums (mit gekürzten Namen geht auch 22), 0 behält die eigene Größe des Spiels (die Einstellung des Spiels bleibt unberührt)
 Goldverkäufer und wiederholte Werbung ausblenden
 Nachrichten, die Gold oder Dienste mit einer Webadresse anbieten, und dieselbe Nachricht, die ein Spieler wiederholt, werden ausgeblendet (nie von deiner Gruppe, Gilde oder deinen Freunden)
-Wiederholte Gildenwerbung ausblenden
-in öffentlichen Kanälen wird die Werbung einer Gilde einmal gezeigt; dieselbe vom selben Spieler oder eine fast gleiche innerhalb von 15 Minuten wird ausgeblendet (nie von deiner Gruppe, Gilde oder deinen Freunden)
+Jede Chat-Werbung nur einmal zeigen
+in öffentlichen Kanälen erscheinen Gildenwerbung sowie Verkaufs-, Kauf- und Dienstleistungsanzeigen beim ersten Mal und dann erst nach neuem Einloggen oder Neuladen wieder. Eine fast wortgleiche Anzeige gilt als dieselbe; eine andere desselben Händlers erscheint trotzdem (nie ausgeblendet bei Gruppe, Gilde oder Freunden)
+Chat-Werbung schon beim ersten Mal ausblenden
+Gildenwerbung sowie Verkaufs-, Kauf- und Dienstleistungsanzeigen in öffentlichen Kanälen werden nie gezeigt, auch nicht einmal. Eine Gruppensuche ist keine Werbung (Gruppe, Gilde und Freunde werden nie ausgeblendet)
 listet die zuletzt als Spam ausgeblendeten Chatnachrichten auf
 Ein Flug ist ein guter Moment dafür.
 Du spielst seit %s.
@@ -953,7 +962,6 @@ Handeln
 Controller-Tasten kommen nach dem Kampf zurück.
 %s oder %s: zurück zu den Taschen
 Halten zum Zerstören
-Wählen
 Alle Taschen
 Nur diese Tasche
 Hineinlegen
@@ -1031,6 +1039,7 @@ Angelmodus: aus.
 Angeln: %s zum Auswerfen
 Kein Köder: %s zweimal für %s
 %s, um die Angel wegzustecken
+%s: wieder angeln
 Angelmodus: %s zum Auswerfen, und noch einmal zum Anschlagen, wenn der Schwimmer zuckt.
 %s zum Anhauen, %s zum erneuten Auswerfen
 Der Angelmodus braucht eine Angelrute in deinen Händen.
@@ -1120,17 +1129,23 @@ Du wirst beide Hände brauchen, und vielleicht einen Freund.
 Neu in deinem Angeltagebuch: %s, %s.
 Neu in deinem Angeltagebuch: %s.
 Dein bisher schwerster Fang – %s: %s (vorher %s).
+Entkommen
 Köder %s
 Kein Köder
 Gefangen %d
-Entkommen %d
 Ein Neugieriger: +%d%%
 Halte deinen Köder neben dem Fisch
+%s: zurück zum Spiel
+%s: ein Spiel, während der Schwimmer draußen ist
 Nächster Fang +%d%%
 %s halten: der Köder läuft die Schnur entlang
 %d in Folge
+%s: weglegen
+Das Angelspiel ist aus: /cchud fishgame on
+Das Angelspiel spielst du mit einer Angelrute in der Hand.
 Ein Spiel, während der Schwimmer draußen ist
-auf der Zauberleiste gespielt, solange deine Schnur draußen ist: halte einen Abzug und dein Köder läuft die Schnur entlang, lass los und er treibt zurück; halte ihn beim Schatten des Fisches. Je besser du spielst, desto schwerer das erfundene Gewicht deines nächsten Fangs. Es belegt keine Taste und berührt weder Auswurf noch Fang
+mit einer Angelrute in der Hand wird auf der Zauberleiste ein kleines Spiel angeboten, und eine Taste startet es (nur diese Taste wird belegt, nie eine, die dein Angeln braucht): halte einen Abzug und dein Köder läuft die Schnur entlang, lass los und er treibt zurück; halte ihn beim Schatten des Fisches. Je besser du spielst, desto schwerer das erfundene Gewicht deines nächsten Fangs. Dieselbe Taste legt es weg. Es berührt weder Auswurf noch Fang
+mit einer Angelrute in der Hand: das Angelspiel starten, oder es weglegen und zurückholen
 %d gefangen, %d Arten, %d entkommen
 Schwerster: %s, %s
 Fische
@@ -1179,20 +1194,60 @@ ein Greif, ein Windreiter oder eine Fledermaus (was der Flugmeister dir gab) gle
 Flüge: das Wetter am Ziel
 bei der Landung sagt der Chat, wie die Luft dort ist, wo Ihr ankommt, so wie der Ort gewöhnlich ist (heiß und schwül im Schlingendorntal, Schnee unter den Füßen in Dun Morogh), und die Tageszeit
 die Flugstrecken mit bekannter Zeit auflisten
+Netzreichweite %d auf %d
+%d auf %d Netze gleichzeitig
+%d auf %d Leben
+Deine Bestleistung auf dieser Strecke!
 Gelandet! +%d
-Angestoßen: die Serie endet
-%s flattern  ·  weiche den Baumkronen und Zeppelinen aus
-%s fang die Reiter mit dem Netz für Fluggold  ·  %s große Höhe
+Abgeschossen! %d nicht gesichertes Gold verloren
+Abgeschossen!
+Angestoßen! Verbleibende Leben: %d
+Im Netz! Verbleibende Leben: %d
+Versengt! Verbleibende Leben: %d
+Runde %d
+%s ist voll aufgerüstet
+Dafür fehlen noch %d Fluggold
+%s %d: %s
+Ein Zeppelin deiner Seite: halte ihre Netze von ihm fern!
+Ihr Zeppelin: hol ihn mit dem Netz herunter, bevor er dich erwischt!
+Ein Drache! Weiche seinem Feuer aus und vertreibe ihn mit dem Netz
+Runde %d geschafft: %d Gold gesichert
+Der Drache fliegt davon
+Sicher hinübergeleitet: +%d
+Er hat es geschafft, verheddert
+Ihr Zeppelin segelt davon
+Ein Netz auf dem Zeppelin deiner Seite
+Ihr Zeppelin ist unten! +%d
+Der Drache flieht! +%d
+%s flattern  ·  weiche Baumkronen, Zeppelinen, Netzen und Feuer aus
+%s fang Reiter mit dem Netz für Fluggold  ·  %s große Höhe
+Schaffe eine Runde, um ihr Gold zu sichern: abgeschossen ist es verloren  ·  %s %s Verbesserungen
+%s %s %d: %s, %d Gold
+%s nächste
+%d Gold zum Ausgeben
 %d Fluggold
+In Runde %d mit %d Fluggold abgeschossen
+%s noch einmal ab Runde 1
 %s flattern
 %s Netz
 %s große Höhe
-%s: zurück zum Spiel (%d Fluggold)
 %s: ein Spiel für unterwegs
+Bestleistung auf dieser Strecke: %d
+%d Fluggold für Verbesserungen
+%s: zurück zum Spiel (%d Fluggold)
 Das Flugspiel ist aus: /cchud flightgame on
 Das Flugspiel wird auf einem Flug gespielt.
 Flugspiel: spielen / große Höhe
+Flugspiel: verdient %d, ausgegeben %d, verloren %d, %d zum Ausgeben.
+Noch auf keiner Strecke gespielt.
+Breiteres Netz
+fängt Reiter aus größerer Entfernung
+Schnelles Nachladen
+schneller wieder feuern, und ein Netz mehr in der Luft
+Dickes Geschirr
+ein Leben mehr pro Durchgang
 auf einem Flug: das Flugspiel starten, oder es in große Höhe bringen und zurück
+das Flugspiel: deine Bestleistung auf jeder Strecke, dein Fluggold und deine Verbesserungen
 Filmische Flüge: die Kamera kreist um dich
 im Film kreist die Kamera langsam um dich und dein Reittier, eine ganze Runde in etwa anderthalb Minuten, und kommt vor der Landung wieder hinter dich. Aus: eine ruhige Einstellung
 Offline
@@ -1490,6 +1545,8 @@ Geduld. Die Erdenmutter sorgt für uns.
 Ey, was ham wir denn hier, Mann?
 Welch ein Durcheinander. Unschicklich.
 Zeit ist Geld. Zählen wir nach.
+Unordnung. So geht das nicht.
+Zu schwer. Der Wind mag leichtes Gepäck.
 Jo, das reicht.
 Elune sei Dank.
 Das Licht sorgt für uns.
@@ -1497,6 +1554,8 @@ Hrm. Gut genug.
 Hm. Genug zum Kämpfen.
 Mit leichtem Gepäck. Gut.
 Annehmbar. Gerade so.
+Alles erfasst. Gut.
+Leicht genug für den Wind. Gut.
 Kein Platz mehr frei. Der Plunder brächte %s: verkaufen schafft Platz.
 Kein Platz mehr frei. Was ich unterwegs nicht brauche, kann in der Bank warten.
 Plunder: %d, hier %s wert. X verkauft das Gewählte; Schlau verkaufen nimmt alles.
@@ -1536,8 +1595,244 @@ Fische hier, die ich noch nicht gefangen habe: %d. Weiter auswerfen.
 Ich habe jeden Fisch dieses Gewässers gefangen. Dann etwas Neues.
 Noch nichts gefangen. Der erste Fisch jedes Gewässers kommt hier hinein.
 Gefangene Arten: %d. Jedes Gewässer versteckt noch ein paar: die Angelanzeige zeigt ein ? für jede, die ich dort noch nicht gefangen habe.
+Gefangene Arten: %d. Jedes Gewässer hat seine eigenen Fische.
 Am Feuer ausgeruht: die nächsten %d Erfahrung aus Kämpfen zählen doppelt.
 Keine Erholung angespart. Eine Nacht im Gasthaus oder in einer Stadt, und Kämpfe geben eine Weile doppelte Erfahrung.
+Na, was haben wir denn da?
+Beim Licht, da ist ja was Neues!
+Och, was bist du denn für einer?
+Aye, das ist 'n neuer Fund!
+Ooh! Ein neues Exemplar!
+Faszinierend! Liegt da eine Anleitung bei?
+Bei Elunes Licht, was bist du?
+Die Tiefe hat mir noch immer etwas zu zeigen.
+Das Licht zeigt mir etwas Neues!
+Ah! Wir kennen uns noch nicht, Kleines.
+Hrm. Den da kenne ich nicht.
+Na so was. Ein Neuling.
+Ah, ein neuer Freund! Willkommen, willkommen.
+Jeder Teich hat eine Überraschung.
+Hah! Ein neuer Gegner. Ein kurzer Kampf.
+Geister, was ist das für einer?
+Aus der Tiefe gezerrt. Das Gefühl kenne ich.
+Ein Neuer. Ganz ruhig, tot sein ist gar nicht so schlimm.
+Ein neues Gesicht aus dem Wasser. Sei gegrüßt, Kleines.
+Die Erdenmutter hat mir noch immer etwas zu zeigen.
+So einen hatt ich noch nie am Haken, Mann!
+Was schicken mir die Loa jetz'?
+Oh? Etwas, das ich noch nicht gesehen habe.
+Wie exotisch. Und wie nass.
+Neue Ware! Was die wohl einbringt?
+So was noch nie gesehen. Muss ja keiner wissen.
+Bisher nirgends verzeichnet. Das werde ich ändern.
+Ein neues Exemplar. Das gehört in die Archive.
+Etwas, das ich noch nicht kenne. Die Winde lehren noch immer.
+Der Wind hat mich ans richtige Wasser geführt.
+Davon würde das ganze Dorf satt!
+Also der gehört auf die Tafel des Königs!
+Och, nu guck dir diesen Brocken an!
+Bei der Esse, der gehört ins Museum!
+Bemerkenswert! Dafür ist meine Waage nicht gebaut!
+Ein neuer Rekord! Ich brauche ein größeres Netz!
+Elunes Licht meint es gut mit mir.
+Ein prachtvolles Geschöpf. Natürlich kam es zu mir.
+Bei den Naaru, wie prächtig!
+Ein großes Geschenk. Ich danke dafür.
+Donnerwetter, was für ein Ungetüm!
+Das nenne ich mal einen Fang.
+Ho ho! Der ist ja allein schon ein Festmahl!
+Hab Geduld, und sieh, was kommt!
+Ein würdiger Gegner!
+Er hat ehrenhaft gekämpft. Er wird uns gut nähren.
+Tja. Da hätte ich fast etwas gefühlt.
+Sieh an. Da unten ist etwas prächtig gediehen.
+Die Erdenmutter ist heute großzügig.
+Darauf eine ruhige Pfeife Friedensblume.
+Boah, Mann! Is' das 'n Riese!
+Die Loa sind großzügig. Die wolln dafür was zurück.
+Das ist meiner doch würdig.
+Prächtig. Natürlich.
+Ka-tsching! Seht euch diese Größe an!
+Und wenn ich's erzähle, ist er doppelt so groß!
+Außergewöhnlich. Und kein Geist musste ihn mir reichen.
+Bemerkenswert. Unsere Gelehrten wären neidisch.
+Ein großes Geschenk! Dafür stehe ich beim Wind in der Schuld.
+Seht nur! Diese Schuld begleiche ich gern.
+Und damit hat sich's!
+Das Licht steht uns bei!
+Ha! Runter mit dir, und bleib liegen!
+Darauf 'ne Runde Bier!
+Hypothese bestätigt: Wir gewinnen!
+Testlauf beendet! Kaum Explosionen!
+Elunes Licht hat dich gerichtet.
+Es ist vollbracht. Es stand nie wirklich in Zweifel.
+Das Licht siegt!
+Es ist zu Ende. Möge es niemanden mehr plagen.
+Diesmal bleibst du liegen.
+Die Jagd ist vorbei.
+Ein guter Kampf! Na, wer hat Hunger?
+Ausatmen. Es ist vorbei.
+Sieg! Lok'tar!
+Du hast gut gekämpft. Stirb in Ehren.
+Bleib tot. Manche von uns durften das nicht.
+Willkommen auf der anderen Seite. An den Geruch gewöhnt man sich.
+Wandle nun mit den Ahnen.
+Es ist getan. Lasst das Land ruhen.
+Bleib liegen, Mann, un' nimm dein' bösen Juju mit!
+Die Loa ham's gesehn. Hoffentlich hat's denen gefallen.
+Makellos. Wie erwartet.
+Wie ermüdend. Der Nächste?
+Ha! Habt ihr DAS gesehen?
+Kleines Paket, großes Finale!
+Können und Studium. Mehr haben wir nicht gebraucht.
+Ein weiterer Beweis, was wir aus eigener Kraft vermögen.
+Die Winde waren mit uns. Dafür schulden wir ihnen etwas.
+Es ist getan. Gebt dem Wind, was ihm zusteht.
+Beim Licht, seht euch das an!
+Das hilft uns über den Winter!
+Och, na das is' mal 'n Schatz!
+Aye, das Graben hat sich gelohnt!
+Ooh, was ist drin? Was ist drin?
+Eine Überraschungskiste! Die liebste Sorte!
+Was andere verlieren, enthüllt Elune.
+Gut versteckt. Nicht gut genug.
+Ein unverhoffter Segen!
+Der Verlust eines anderen. Möge er gut genutzt werden.
+Hrm. Das hab ich kommen riechen.
+Mal sehen, was das Verstecken wert war.
+Oh, ein Geschenk! Für mich?
+In jeder Kiste steckt eine Geschichte. In manchen auch Naschwerk.
+Beute! Gut.
+Nimm es. Wer es hierließ, konnte es nicht halten.
+Der Vorbesitzer beschwert sich nicht.
+Ein Geschenk von lieben Verblichenen. Da sage ich nicht nein.
+Nehmen wir nur, was wir brauchen.
+Möge Frieden finden, wer dies zurückließ.
+Ooh, glänzt ja! Hoffentlich is' da kein Fluch drauf, Mann.
+Keiner lässt Beute umsonst liegen. Pass auf dein' Rücken auf.
+Endlich etwas mit Geschmack.
+Staubig. Ich nehme es trotzdem.
+Hauptgewinn! Ich meine... ein sehr bescheidener Fund.
+Finderlohn: alles!
+Von anderen verloren. Von denen geborgen, die hinsehen.
+Mal sehen, was geringere Sucher übersehen haben.
+Der Wind führt, und seht, was da liegt!
+Eine Gabe am Wegesrand. Vergiss nicht, etwas zurückzugeben.
+Merk dir, wo der herkam.
+Noch eine Seite fürs Journal.
+Schwer für seine Art. Der hat gut gefressen.
+Ein großer. Der hat sich ordentlich gewehrt.
+So große sieht man nicht oft.
+Den haben meine Arme gespürt.
+Kaum den Köder wert. Seinen Freunden kann er erzählen, er sei größer gewesen.
+Ein kleiner. In einem Jahr wäre das ein richtiger Fang gewesen.
+Klein, aber er zählt.
+Mehr Versprechen als Fisch.
+Schnapper haben das Maul zum Namen. Vorsicht mit den Fingern am Haken.
+Welse tasten sich mit ihren Barteln über den Grund. Trübes Wasser macht ihnen nichts.
+Aale sind nur Muskeln und Schleim. Einen vom Haken zu bekommen ist ein Kampf für sich.
+Lachse schwimmen gegen den Strom. Ist das Sturheit, oder kennen sie den Heimweg?
+Forellen mögen kaltes, klares, fließendes Wasser, und ein Schatten verscheucht sie.
+Kabeljau ist ehrliches Essen: schlicht, sättigend und gesalzen lange haltbar.
+Wo eine Makrele ist, ist meist ein ganzer Schwarm.
+Thunfische sind für Tempo gebaut. Der hat nicht aufgehört zu ziehen.
+Kleinzeug. Eine volle Pfanne davon macht trotzdem satt.
+Hummer beißen weniger an, als dass sie sich festhalten und nicht mehr loslassen.
+Tintenfisch. Vorsicht mit der Tinte.
+Barsche kämpfen hart und springen, wann sie nur können.
+Die hier halten sich an stilles Wasser. Wissen sie etwas, was die anderen nicht wissen?
+Seine Kraft beweist so einer am Ende der Schnur.
+Solange die Schnur draußen ist, muss nichts anderes entschieden werden.
+Wie lange stehe ich schon hier?
+Stilles Wasser. Zeit zum Nachdenken.
+Was wohl sonst noch da unten ist?
+Wer wohl sonst schon an dieser Stelle die Angel ausgeworfen hat?
+Noch ein Wurf, oder zurück auf die Straße?
+Kein Fisch. Das vermisst vielleicht jemand.
+Das Wasser gibt allerlei zurück.
+Das lag schon eine Weile da unten.
+Nicht das, worauf ich aus war. Wie ist das da hinuntergekommen?
+Das hat jemand zurückgelassen. Wollte er noch einmal wiederkommen?
+Wer hat das wohl gepackt, und was ist aus ihm geworden?
+Wie lange liegt das schon hier?
+Gehört das noch jemandem?
+Jeder geschlossene Deckel ist eine Frage.
+Dafür hat sich der Halt gelohnt.
+Warum sollte jemand so etwas zurücklassen?
+Das hat bestimmt jemand vermisst.
+Das kam vom Grund herauf. Wer hat es fallen lassen?
+Eine Kiste an der Angel. Was wohl drin ist?
+Eine Höhle voller Feuer, genau unter Orgrimmar. Ob die Leute oben je daran denken?
+Die Sengende Klinge hat sich hier unten eingerichtet, mit einer ganzen Stadt über dem Kopf.
+Die Defias haben aus einer alten Mine ein Versteck gemacht, mit Platz für ein Schiff.
+So viel Graberei, und am Ende finden die Defias darin Unterschlupf.
+Ein Druide kam her, um das Land durch den Smaragdgrünen Traum zu heilen. Diese Höhlen zeigen, wie es ausging.
+So viel Wasser unter dem trockenen Brachland. Kein Wunder, dass jemand glaubte, hier könne die Heilung beginnen.
+Arugal hat die Worgen beschworen, und sie haben diese Burg überrannt.
+Eine ganze Burg im Silberwald, und die Worgen haben darin das Sagen.
+Dies war einst ein Tempel der Elune, bevor das Wasser und Schlimmeres ihn nahmen.
+Der Schattenhammer hat sich für seine Treffen einen versunkenen Tempel ausgesucht. Heitere Orte wählt er nie.
+Ein Gefängnis mitten in Sturmwind, und die Gefangenen haben es übernommen.
+Seltsam, dass gleich darüber ganz gewöhnliche Straßen liegen.
+Hier haben die Gnome ihre ganze Stadt verloren. Jede kaputte Maschine war jemandes Werk.
+Die Troggs kamen von unten, und was sie aufhalten sollte, hat die Stadt vergiftet.
+Den Stachelschweinmenschen sind diese Dornen heilig. Wie müssen wir auf sie wirken, wenn wir so hier eindringen?
+Es heißt, diese Dornen wuchsen dort, wo der Halbgott Agamaggan fiel.
+Wieder die Dornen der Stachelschweinmenschen, und dazwischen regen sich Tote. Die Geißel hat hergefunden.
+Jemand hat auf Boden, der den Stachelschweinmenschen heilig ist, die Toten erweckt.
+Der Scharlachrote Kreuzzug zog aus, die Geißel zu bekämpfen. Wann hat er angefangen, sie in jedem zu sehen?
+Diese Hallen sind so prächtig wie nur je eine Kapelle. Was wird jetzt darin gepredigt?
+Die Titanen haben diesen Ort lange vor allen heutigen Reichen verlassen. Wer ist seither hindurchgegangen?
+Zwerge graben hier nach Antworten darauf, woher sie kommen.
+Die Sandwüter haben diese Stadt durch mehr Sandstürme gehalten, als je einer gezählt hat.
+Eine Trollstadt mitten in Tanaris, und die Wüste hat sie noch immer nicht verschluckt.
+Den Zentauren ist dieser Ort heilig. Ihre Geschichte begann hier unten.
+Wenn die alte Sage stimmt, stammt jeder Zentaur von Zaetar und Theradras ab.
+Die Atal'ai haben diesen Tempel für Hakkar errichtet. Er versank nicht ohne Grund im Sumpf.
+Der grüne Drachenschwarm hat diesen Ort versenkt und wacht noch immer darüber.
+Eine ganze Stadt der Dunkeleisen im Berg. Wie lange es wohl dauert, jeden Weg darin zu kennen?
+Hier unten gehorchen die Dunkeleisen Ragnaros, ob es ihnen gefällt oder nicht.
+Orcs und schwarze Drachen, und alle wollen denselben Berg.
+Rend Schwarzfaust nennt sich hier oben Kriegshäuptling. Nicht jeder Orc sähe das so.
+Das war einst eine Stadt der Nachtelfen. In ihren Resten hausen Oger und Satyrn.
+All die alte Gelehrsamkeit, und nun haben die Oger in den Ruinen einen König.
+Eine Schule der Totenbeschwörung unter Caer Darrow. Wer meldet sich für solchen Unterricht?
+Dieser Grund gehörte einst der Familie Barov. Was würde sie jetzt dazu sagen?
+Das war einst eine lebendige Stadt. Arthas sorgte dafür, dass sie es nie wieder sein würde.
+Teile der Stadt brennen noch immer. Manche Geschichten enden nicht, sie schwelen.
+All das Feuer, und mittendrin Ragnaros.
+Ein schwarzer Drache gibt seinen Hort nicht höflich auf.
+Etwas weniger, das im Dunkeln lauert.
+Was es wohl bewacht hat, und für wen?
+Wird es jemand vermissen?
+Seine Geschichte ist zu Ende. Wie hat sie wohl begonnen?
+%s. Hier lohnt es, sich gut umzusehen.
+%s. Wer hier wohl zu Hause ist, und wie es denen gefällt?
+%s. Augen auf: Jeder Ort hat seine eigenen Sorgen.
+%s. Welche Geschichten man sich über so einen Ort wohl erzählt?
+„%s“ ist erledigt. Das war kein Botengang.
+„%s“ ist geschafft. War es den Preis wert?
+„%s“ ist erledigt. Jemand hat jetzt einen besseren Tag.
+„%s“ ist erledigt. Was jetzt wohl aus ihnen wird?
+„%s“
+Damit stehen %d davon in meinem Journal.
+Den ersten davon in meinem Journal gab es hier: %s.
+Mein schwerster davon ist noch immer %s, geangelt hier: %s.
+Das sind %d davon, seit ich an diesem Gewässer bin.
+%d sind entkommen, seit ich hier angefangen habe. Dieser nicht.
+Fang Nummer %d fürs Journal.
+%s, %s.
+%s.
+Ein Neuer für mein Journal.
+Mein bisher bester war %s.
+%d solche Funde, seit ich mitzähle.
+%s ist besiegt.
+Wieder %s. Das macht %d Mal.
+Diesen Kampf kenne ich. Das macht %d Mal.
+%s. In meinem Journal stehen %d Fänge von hier.
+%s: %d Aufgaben hier erledigt, seit ich mitzähle.
+Kommentare deines Charakters
+ab und zu hat dein Charakter etwas zu einem Fang, einer Truhe, einem Dungeonboss, einem neuen Ort oder einer erledigten Quest zu sagen: laut in der Mundart deines Volkes oder als leiser Gedanke in schlichten Worten. Nur auf dem Bildschirm, nie im Chat und nie im Kampf. Dafür muss die Erzählung eingeschaltet sein
 %d absorbiert
 Liste rechts
 Einzeln in der Mitte

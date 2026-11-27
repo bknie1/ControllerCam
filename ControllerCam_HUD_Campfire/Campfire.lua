@@ -25,6 +25,8 @@ CF.WAIT = 10                     -- seconds sitting still at a camp before it be
 CF.AGAIN = 1200                  -- and not again at the same camp for this long (or until you leave it)
 CF.LENGTH = 60
 CF.BAR = 0.11                    -- each black bar: this share of the screen's height
+CF.ROW = 60                      -- a row of the camp's buffs: room for two lines of a name
+CF.WIDE = 0.62                   -- a line in the bars takes at most this share of the screen's width, then wraps
 CF.TURN = 0.75                   -- how far round the camera goes over the scene (a whole turn is 1)
 CF.OUT = 3                       -- the camera eases this much further out
 CF.TITLE = { 2.5, 8 }            -- the place and the time of day
@@ -633,7 +635,7 @@ local function Row(i)
     local r = p.rows[i]
     if r then return r end
     r = CreateFrame("Frame", nil, p)
-    r:SetSize(10, 44)
+    r:SetSize(10, CF.ROW - 6)
     r.head = r:CreateTexture(nil, "ARTWORK")
     r.head:SetSize(24, 24)
     r.head:SetPoint("LEFT", r, "LEFT", 0, 6)
@@ -648,7 +650,8 @@ local function Row(i)
         local name = ns.FontString(r, 10, "CENTER")
         name:SetPoint("TOP", icon, "BOTTOM", 0, -2)
         name:SetWidth(70)
-        if name.SetWordWrap then name:SetWordWrap(false) end
+        if name.SetWordWrap then name:SetWordWrap(true) end        -- (a long buff's name on two lines, not cut)
+        if name.SetMaxLines then name:SetMaxLines(2) end
         r.icons[j], r.names[j] = icon, name
     end
     p.rows[i] = r
@@ -706,7 +709,7 @@ local function LayBuffs(s)
         r:SetWidth(r.width)
         r:Show()
     end
-    p:SetHeight(28 + #s.groups * 50)
+    p:SetHeight(28 + #s.groups * CF.ROW)
     s.buffsLaid = true
 end
 
@@ -720,6 +723,20 @@ local function TimeOfDay()
     if h >= 17 and h < 21 then return L["Evening"] end
     return L["Night"]
 end
+
+-- A line as wide as its words, and no wider than its share of the screen: a longer one wraps, never runs off
+local function Fit(fs, text)
+    fs:SetText(text)
+    local okW, screen = pcall(UIParent.GetWidth, UIParent)
+    screen = (okW and type(Plain(screen)) == "number" and screen > 0) and screen or 1365
+    local most = screen * CF.WIDE
+    fs:SetWidth(0)                                     -- (let go first, to measure the words themselves)
+    local okS, natural = pcall(function() return fs:GetStringWidth() end)
+    natural = (okS and type(Plain(natural)) == "number" and natural > 0) and natural or most
+    if fs.SetWordWrap then fs:SetWordWrap(true) end
+    fs:SetWidth(math.min(natural + 6, most))
+end
+CF.Fit = Fit
 
 local function LayTitle()
     local zone = GetZoneText and Plain(GetZoneText()) or nil
@@ -738,11 +755,11 @@ local function LayTitle()
             names[#names + 1] = m.name
         end
     end
-    cine.with:SetText(#names > 0 and L["With %s"]:format(table.concat(names, ", ")) or "")
+    Fit(cine.with, #names > 0 and L["With %s"]:format(table.concat(names, ", ")) or "")
 end
 
 local function LayLine(m)
-    cine.line:SetText(CF.Text(m))
+    Fit(cine.line, CF.Text(m))
     local icon = m.icon
     cine.lineIcon:SetTexCoord(0.08, 0.92, 0.08, 0.92)
     if m.kind == "boss" then
@@ -808,11 +825,9 @@ function CF.Start(asked)
     cine.lineIcon:Hide()
     local N = ns.Narrative
     s.voice = N and N.On() and N.CampWords() or nil                 -- (said as the camp's gifts come up)
-    cine.voice:SetText(s.voice or "")
+    Fit(cine.voice, s.voice or "")
     cine.voice:SetAlpha(0)
-    if cine.face then
-        if s.voice then N.Draw(cine.face, N.Me()); cine.face:Show(); cine.face:SetAlpha(0) else cine.face:Hide() end
-    end
+    if cine.face then cine.face:Hide() end                    -- (with your line, not before: see CF.Step)
     cine.panel:Hide()
     cine:Show()
     CF.shown = CF.shown + 1
@@ -888,8 +903,23 @@ function CF.Step()
     if s.voice then
         local v = t >= CF.BUFFS_AT and Window(t, CF.BUFFS_AT, CF.LENGTH - 1.8, 0.8) or 0
         cine.voice:SetAlpha(v)
-        if cine.face then cine.face:SetAlpha(v) end
-        if v > 0 and not s.talked and cine.face then s.talked = true; ns.Narrative.Talk(cine.face) end
+        local face = cine.face
+        if face then
+            -- your portrait is a 3D model, which does not fade with its frame: left up at no alpha, it stood
+            -- alone in the lower bar. It is there only while your line can be seen
+            if v > 0.05 then
+                if not face:IsShown() then
+                    face:Show()
+                    ns.Narrative.Draw(face, ns.Narrative.Me())
+                end
+                face:SetAlpha(v)
+                local model = face.model
+                if model and model.SetModelAlpha then pcall(model.SetModelAlpha, model, v) end
+                if not s.talked then s.talked = true; ns.Narrative.Talk(face) end
+            elseif face:IsShown() then
+                face:Hide()
+            end
+        end
     end
     -- the camp's gifts
     if t >= CF.BUFFS_AT then
@@ -905,7 +935,7 @@ function CF.Step()
                 local r = p.rows[j]
                 local k = s.calm and 1 or Ease((t - CF.BUFFS_AT - (j - 1) * 0.25) / 0.6)
                 r:ClearAllPoints()
-                r:SetPoint("TOP", p, "TOP", (s.calm and 0 or -30 * (1 - k)), -(28 + (j - 1) * 50))
+                r:SetPoint("TOP", p, "TOP", (s.calm and 0 or -30 * (1 - k)), -(28 + (j - 1) * CF.ROW))
                 r:SetAlpha(k)
             end
         end

@@ -2,7 +2,7 @@
 -- Every catch is written down: what it was, how many, where and when first, and a weight. The game has no
 -- weights for fish, so the weight is made up for fun: each kind has its own usual size, a catch falls
 -- somewhere around it, and a big one is rare. A fish that names its own weight ("22 Pound Catfish") weighs
--- that. Also counted: the fish that got away (the game said so, or the line ran out with nothing landed).
+-- from that to just under the next pound, to the tenth (22.0 to 22.9). Also counted: the fish that got away (the game said so, or the line ran out with nothing landed).
 -- Kept with the HUD's settings, for the account; nothing is read from or sent anywhere else.
 
 local ADDON = ...
@@ -13,10 +13,16 @@ local J = { active = false, session = { caught = 0, away = 0 }, feed = {}, tally
 ns.FishLog = J
 
 J.FEED = 4                    -- recent catches kept for the fishing interface
-J.SLOTS, J.MIN = 6, 4         -- a water shows at most this many fish, and at least this many places for them
+J.JUST = 3                    -- seconds after the line came in: what the game says then is about that line
+J.SLOTS = 18                  -- places for a water's fish: three rows of them
 
 
 local function Text(v) return (type(v) == "string" and not ns.IsSecret(v)) and v or nil end
+
+-- Things that come up on a line and are of a kind the game files with food or trade goods, but are no fish:
+-- Stranglekelp (a herb) and the Rumsey Rums (drinks)
+J.NOT_FISH = { [3820] = true, [20709] = true, [21114] = true, [21151] = true }
+local HERB = 9                -- the trade goods' sort for herbs: none of them is a fish
 
 ns.RegisterSaved("fishLog", function(old)
     local log = { fish = {}, zones = {}, total = 0, away = 0 }
@@ -29,6 +35,9 @@ ns.RegisterSaved("fishLog", function(old)
                              first = Text(e.first), firstAt = Text(e.firstAt), name = Text(e.name),
                              icon = (type(e.icon) == "number" or type(e.icon) == "string") and e.icon or nil,
                              fish = e.fish == true }
+            if J.NOT_FISH[id] then                  -- written down as a fish once: no weight to its name
+                log.fish[id].fish, log.fish[id].best, log.fish[id].bestAt = false, nil, nil
+            end
         end
     end
     for name, z in pairs(type(old.zones) == "table" and old.zones or {}) do
@@ -65,17 +74,21 @@ end
 
 -- Is it a fish (something to eat or to cook with), and not an old boot or a locked box?
 function J.IsFish(id, quality)
+    if J.NOT_FISH[id] then return false end
     local get = (C_Item and C_Item.GetItemInfoInstant) or GetItemInfoInstant
     if get then
-        local ok, _, _, _, _, _, classID = pcall(get, id)
-        if ok and type(classID) == "number" then return classID == 0 or classID == 7 end
+        local ok, _, _, _, _, _, classID, subID = pcall(get, id)
+        if ok and type(classID) == "number" then
+            return classID == 0 or (classID == 7 and subID ~= HERB)
+        end
     end
     return type(quality) == "number" and quality >= 1
 end
 
 -- The usual weight of a kind, in pounds; true when the fish says its own weight
 function J.Base(id, name)
-    local said = type(name) == "string" and tonumber(name:match("(%d+) [Pp]ound"))
+    local said = type(name) == "string"
+        and tonumber(name:match("(%d+)[ %-]?[Pp]ound") or name:match("(%d+) ?[Ll][Bb][Ss]?%f[%A]"))
     if said then return said, true end
     return 0.4 + ((id * 7919) % 97) / 97 * 5.2
 end
@@ -84,9 +97,13 @@ end
 -- curious in the game beside the fishing interface (FishGame.lua; 0-1) is the heavier for it.
 function J.Weigh(id, name, curious)
     local base, said = J.Base(id, name)
-    if said then return base end
     local r = (J.random or math.random)()
-    local more = 1 + (ns.FishGame and ns.FishGame.BONUS or 0) * ns.Clamp(tonumber(curious) or 0, 0, 1)
+    curious = ns.Clamp(tonumber(curious) or 0, 0, 1)
+    if said then                                         -- ten weights it can be: its own pounds and 0 to 9 tenths
+        local tenths = math.floor(ns.Clamp(r + 0.3 * curious, 0, 0.999) * 10)
+        return (base * 10 + tenths) / 10
+    end
+    local more = 1 + (ns.FishGame and ns.FishGame.BONUS or 0) * curious
     return math.max(0.1, math.floor(base * (0.55 + 1.25 * r ^ 2.4) * more * 10 + 0.5) / 10)
 end
 
@@ -165,6 +182,12 @@ function J:Catch(id, name, icon, quality, count, curious)
         ns.Say(L["Your heaviest %s yet: %s (it was %s)."]:format(shown, J.Pounds(weight), J.Pounds(was)))
     end
     if ns.Readout then ns.Readout.Catch(shown, e.icon or icon, quality, count, weight, new, best) end   -- across the screen
+    if ns.Commentary then                                  -- (you may have something to say about it)
+        local ok, err = pcall(ns.Commentary.Catch, { id = id, name = shown, weight = weight, fish = e.fish, new = new,
+            best = best, was = was, entry = e, where = where, map = map, count = self.tally[id],
+            away = self.session.away, total = log.total })
+        if not ok then ns.Error(err) end
+    end
     return e, weight, new, best
 end
 
@@ -220,15 +243,113 @@ function J:Read()
 end
 
 ---------------------------------------------------------------------------
+-- Which fish swim where (by the game's map number): our own short list
+---------------------------------------------------------------------------
+-- Put together zone by zone from what two public Classic fishing references agree on (2026-11). It leaves out
+-- on purpose whatever could leave a "?" nobody can fill: fish tied to pools, fish only one reference had (or
+-- barely had), and fish of one corner of a zone. So it is not the whole water: a zone can give more than this.
+-- Coast and inland are one zone here. Not checked against this game beyond the catches seen so far.
+local SMALL, SNAPPER, CATFISH, TROUT, FRENZY = 6291, 6289, 6308, 8365, 6317
+local MACKEREL, ALBACORE, COD, YELLOWTAIL = 6303, 6361, 6362, 4603
+local REDGILL, NIGHTFIN, SUNSCALE, WHITESCALE, MIGHTFISH = 13758, 13759, 13760, 13889, 13754
+local SQUID, BASS = 13755, 13756
+
+-- In season only: { from (month * 100 + day), to }; one that runs over the new year has from after to
+J.SEASON = { [SQUID] = { 923, 319 }, [BASS] = { 320, 922 } }
+
+local function Zone(...)
+    local out = {}
+    for _, part in ipairs({ ... }) do
+        if type(part) == "table" then
+            for _, id in ipairs(part) do out[#out + 1] = id end
+        else
+            out[#out + 1] = part
+        end
+    end
+    return out
+end
+local INLAND = { REDGILL, NIGHTFIN, SUNSCALE }
+local WARM_SEA = { COD, YELLOWTAIL }
+local DEEP_SEA = { COD, YELLOWTAIL, MIGHTFISH, SQUID, BASS }
+local HOME = { SMALL, SNAPPER, CATFISH }
+
+J.ZONES = {
+    -- Kalimdor
+    [1411] = Zone(SMALL, SNAPPER, MACKEREL),                         -- Durotar
+    [1412] = Zone(SMALL, SNAPPER),                                   -- Mulgore
+    [1413] = Zone(SMALL, SNAPPER, MACKEREL, ALBACORE),               -- The Barrens
+    [1438] = Zone(SMALL, SNAPPER, MACKEREL),                         -- Teldrassil
+    [1439] = Zone(HOME, MACKEREL, ALBACORE),                         -- Darkshore
+    [1440] = Zone(SNAPPER, CATFISH, ALBACORE),                       -- Ashenvale
+    [1441] = Zone(TROUT),                                            -- Thousand Needles
+    [1442] = Zone(SNAPPER),                                          -- Stonetalon Mountains
+    [1443] = Zone(CATFISH, TROUT, WARM_SEA),                         -- Desolace
+    [1444] = Zone(TROUT, INLAND, DEEP_SEA),                          -- Feralas
+    [1445] = Zone(CATFISH, TROUT, WARM_SEA),                         -- Dustwallow Marsh
+    [1446] = Zone(DEEP_SEA),                                         -- Tanaris
+    [1447] = Zone(TROUT, INLAND, DEEP_SEA),                          -- Azshara
+    [1448] = Zone(TROUT, INLAND),                                    -- Felwood
+    [1449] = Zone(TROUT, INLAND),                                    -- Un'Goro Crater
+    [1450] = Zone(TROUT, INLAND),                                    -- Moonglade
+    [1452] = Zone(INLAND, WHITESCALE),                               -- Winterspring
+    [1454] = Zone(HOME),                                             -- Orgrimmar
+    [1456] = Zone(SMALL, SNAPPER),                                   -- Thunder Bluff
+    [1457] = Zone(HOME),                                             -- Darnassus
+    -- Eastern Kingdoms
+    [1416] = Zone(CATFISH, TROUT),                                   -- Alterac Mountains
+    [1417] = Zone(CATFISH, TROUT, WARM_SEA),                         -- Arathi Highlands
+    [1420] = Zone(SMALL, SNAPPER, MACKEREL),                         -- Tirisfal Glades
+    [1421] = Zone(HOME, MACKEREL, ALBACORE),                         -- Silverpine Forest
+    [1422] = Zone(TROUT, INLAND),                                    -- Western Plaguelands
+    [1423] = Zone(INLAND, WHITESCALE),                               -- Eastern Plaguelands
+    [1424] = Zone(SNAPPER, CATFISH, ALBACORE),                       -- Hillsbrad Foothills
+    [1425] = Zone(TROUT, INLAND, DEEP_SEA),                          -- The Hinterlands
+    [1426] = Zone(SMALL, SNAPPER),                                   -- Dun Morogh
+    [1429] = Zone(SMALL, SNAPPER),                                   -- Elwynn Forest
+    [1430] = Zone(INLAND, WHITESCALE),                               -- Deadwind Pass
+    [1431] = Zone(HOME),                                             -- Duskwood
+    [1432] = Zone(SMALL, SNAPPER, FRENZY),                           -- Loch Modan
+    [1433] = Zone(SNAPPER, CATFISH),                                 -- Redridge Mountains
+    [1434] = Zone(CATFISH, TROUT, WARM_SEA),                         -- Stranglethorn Vale
+    [1435] = Zone(TROUT, WARM_SEA),                                  -- Swamp of Sorrows
+    [1436] = Zone(HOME, MACKEREL, ALBACORE),                         -- Westfall
+    [1437] = Zone(SNAPPER, CATFISH, ALBACORE),                       -- Wetlands
+    [1453] = Zone(HOME),                                             -- Stormwind City
+    [1458] = Zone(SMALL, SNAPPER),                                   -- Undercity
+}
+
+function J.InSeason(id, today)
+    local s = J.SEASON[id]
+    if not s then return true end
+    if not today then
+        if not date then return false end
+        today = (tonumber(date("%m")) or 0) * 100 + (tonumber(date("%d")) or 0)
+    end
+    if s[1] <= s[2] then return today >= s[1] and today <= s[2] end
+    return today >= s[1] or today <= s[2]
+end
+
+-- The fish our list has for a map, today
+function J.Listed(map)
+    local out = {}
+    for _, id in ipairs(map and J.ZONES[map] or {}) do
+        if J.InSeason(id) then out[#out + 1] = id end
+    end
+    return out
+end
+
+---------------------------------------------------------------------------
 -- This water's fish
 ---------------------------------------------------------------------------
--- What can be caught where you stand, as far as it is known: a list of { id, name, icon, known }. With
--- Improved Forever's fishing data loaded the whole list is known, and what you have not landed here stays
--- hidden; without it the list is what you have landed here, with places left for what you have not.
+-- What can be caught where you stand, as far as it is known: a list of { id, name, icon, known }, and whether
+-- that is the whole water. With Improved Forever's fishing data loaded it is. Without it our own list says
+-- which fish are sure to be in this zone, and what else you have landed here joins them. Either way each fish
+-- has one place, a "?" until you land it: no "?" stands for nothing.
 function J.Waters(max)
     max = max or J.SLOTS
     local log = J.Log()
-    local zone = log.zones[(J.Where())]
+    local where, map = J.Where()
+    local zone = log.zones[where]
     local caught = zone and zone.fish or {}
     local out, have = {}, {}
     local likely = ns.CastBar and ns.CastBar.LikelyCatch and ns.CastBar.LikelyCatch(max)
@@ -236,6 +357,14 @@ function J.Waters(max)
         if f.id and not have[f.id] then
             have[f.id] = true
             out[#out + 1] = { id = f.id, name = f.name, icon = f.icon, known = caught[f.id] ~= nil }
+        end
+    end
+    if not likely then
+        for _, id in ipairs(J.Listed(map)) do
+            if #out >= max then break end
+            local e = log.fish[id] or {}
+            have[id] = true
+            out[#out + 1] = { id = id, name = e.name, icon = e.icon, known = caught[id] ~= nil }
         end
     end
     local mine = {}
@@ -249,39 +378,69 @@ function J.Waters(max)
         local e = log.fish[m.id]
         out[#out + 1] = { id = m.id, name = e.name, icon = e.icon, known = true }
     end
-    if not likely then
-        while #out < J.MIN do out[#out + 1] = { known = false } end
+    return out, likely ~= nil
+end
+
+---------------------------------------------------------------------------
+-- What the game says as a line comes in with nothing
+---------------------------------------------------------------------------
+-- "Your fish got away!" and "No fish are hooked.", as an error, as a notice or as a line of chat: which of them
+-- a game uses differs. The words are the first or the second thing the event hands over.
+local function Lost(first, second)
+    for _, name in ipairs({ "ERR_FISH_ESCAPED", "ERR_FISH_NOT_HOOKED" }) do
+        local said = _G[name]
+        if type(said) == "string" and (first == said or second == said) then return true end
     end
-    return out
+    return false
+end
+
+function J:Said(event, a, b)
+    local first, second = Text(a), Text(b)
+    local now = GetTime()
+    local just = J.lineAt and now - J.lineAt < J.JUST
+    -- (in the debug report: what this game says at the water, should a lost fish go uncounted again)
+    if event ~= "CHAT_MSG_SYSTEM" and (J.cast or just) then
+        ns.Note("fishing: with the line, the game said (%s): %s", event, tostring(second or first))
+    end
+    if not Lost(first, second) then return end
+    local cast = J.cast or (just and J.last) or nil
+    if cast then
+        if cast.away then return end                     -- this line's fish is counted already
+        cast.away = true
+    elseif J.saidAt and now - J.saidAt < 1 then          -- a line we did not see: the same words twice
+        return
+    end
+    J.saidAt = now
+    J:Away()
 end
 
 ---------------------------------------------------------------------------
 -- Watching the line and the catch
 ---------------------------------------------------------------------------
 local events = CreateFrame("Frame")
-events:SetScript("OnEvent", ns.Protect(function(_, event, a, b)
+events:SetScript("OnEvent", ns.Protect(function(_, event, a, b, spell)
     if event == "LOOT_READY" or event == "LOOT_OPENED" then
         J:Read()
     elseif event == "LOOT_CLOSED" then
         seen = false
-    elseif event == "UI_ERROR_MESSAGE" then
-        -- "Your fish got away!"
-        local said = ERR_FISH_ESCAPED
-        if type(said) == "string" and (a == said or b == said) then
-            local cast = J.cast or J.last
-            if cast and cast.away then return end
-            if cast then cast.away = true end
-            J:Away()
-        end
+    elseif event == "UI_ERROR_MESSAGE" or event == "UI_INFO_MESSAGE" or event == "CHAT_MSG_SYSTEM" then
+        J:Said(event, a, b)
     elseif a == "player" then
         if event == "UNIT_SPELLCAST_CHANNEL_START" then
-            if not (ns.Fishing and ns.Fishing.LineOut()) then return end
+            if not (ns.Fishing and ns.Fishing.LineOut()) then
+                if ns.Fishing and ns.Fishing.HasPole() then
+                    ns.Note("fishing: a channel began that is not taken for your line (spell %s)", tostring(ns.IsSecret(spell) and "kept secret" or spell))
+                end
+                return
+            end
             local ok, _, _, _, _, stop = pcall(UnitChannelInfo, "player")
             J.cast = { ends = (ok and type(stop) == "number" and not ns.IsSecret(stop)) and stop / 1000 or nil }
             J.lineAt, seen = GetTime(), false
         elseif J.cast then                              -- the line came in
             local cast = J.cast
             J.cast, J.last, J.lineAt = nil, cast, GetTime()
+            ns.Note("fishing: the line came in %s", (not cast.ends and "(its length not said)")
+                or (GetTime() >= cast.ends - 0.5 and "at its full time") or "early")
             if cast.ends and GetTime() >= cast.ends - 0.5 then
                 -- it ran its whole time: if nothing is landed in the next moment, the fish is gone
                 C_Timer.After(1, ns.Protect(function()
@@ -294,8 +453,8 @@ events:SetScript("OnEvent", ns.Protect(function(_, event, a, b)
     end
 end))
 
-local EVENTS = { "LOOT_READY", "LOOT_OPENED", "LOOT_CLOSED", "UI_ERROR_MESSAGE", "UNIT_SPELLCAST_CHANNEL_START",
-                 "UNIT_SPELLCAST_CHANNEL_STOP" }
+local EVENTS = { "LOOT_READY", "LOOT_OPENED", "LOOT_CLOSED", "UI_ERROR_MESSAGE", "UI_INFO_MESSAGE",
+                 "CHAT_MSG_SYSTEM", "UNIT_SPELLCAST_CHANNEL_START", "UNIT_SPELLCAST_CHANNEL_STOP" }
 
 function J:Apply(run)
     local want = run and true or false

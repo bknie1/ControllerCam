@@ -8,19 +8,19 @@
 --     dressed on its way into the chat window: the brackets move from the name to the badge. Nothing else of
 --     the line is touched, and the name stays the link it was (right-click, whisper).
 --   * Short channel names: [P] party, [PL] party leader, [G] guild, [O] officer, [R] raid, [RL] raid leader,
---     [RW] raid warning, [I] instance, [IL] instance leader, and a numbered channel by its number alone
---     ("[1. General - Stranglethorn Vale]" is "[1]"). The channel stays the link it was (click it to talk there).
---   * First names only (an option, off to begin with): "Jory Spleeneater" says it as "Jory". Only the name shown
---     is shortened (and a realm after it kept); the link under it is the whole name, so a whisper or a right-click
+--     [RW] raid warning, [I] instance, [IL] instance leader, and a numbered channel by its number and a letter or
+--     two ("[1. General - Stranglethorn Vale]" is "[1.G]"). The channel stays the link it was.
+--   * Names in your style: First Last, First L. (to begin with), F.L. or F. Last. Only the name shown is
+--     shortened (and a realm after it kept); the link under it is the whole name, so a whisper or a right-click
 --     still finds them.
---   * Text you can read from the couch: the chat windows' text at a share of the game's own size (150% to
---     begin with). Only the windows' font is set, while the HUD runs; the game's own chat setting is left
---     as it is and is what you get back when this is off.
+--   * Text you can read from the couch: the chat windows' text in points (20 to begin with, 0 the game's own).
+--     Only the windows' font is set, while the HUD runs; the game's own chat setting is left as it is and is what
+--     you get back when this is off.
 --   * Spam: gold sellers and adverts with a web address are hidden, and so is the same message repeated by
 --     the same player within a couple of minutes. Your group, guild and friends are never filtered.
 --     /cchud spam lists what was hidden lately, so nothing disappears without a trace.
---   * Guild recruitment: in public channels a guild's recruiting message is shown once; the same player's
---     again, or one nearly the same from anyone, within 15 minutes is hidden. Counted in /cchud spam.
+--   * Chat ads (guild recruitment; selling, buying and services): each shown the first time and not again this
+--     login, or never if you say so. Counted in /cchud spam.
 --   * The HUD's own short lines (CH.Line): "[Q] Bloody Bone Necklaces: 4/25", "[F] Booty Bay: about 2:10", in
 --     the look of the short channel names. Printed like any addon's line.
 -- Uses the game's message filters for addons; the chat itself is the game's.
@@ -28,29 +28,32 @@
 local ADDON, ns = ...
 local L = ns.L
 
+local NAME_STYLE_WORDS = { L["First Last"], L["First L."], L["F.L."], L["F. Last"] }     -- the choices, translated
+
 local CH = { active = false, hidden = 0, recent = {}, levels = {}, byName = {}, lines = {}, authors = {}, said = {},
              dressed = 0 }
 ns.Chat = CH
 
 ns.RegisterSetting({
-    key = "chatInfo", kind = "boolean", default = false, command = "chatinfo", section = "Quests, chat and map",
+    key = "chatInfo", kind = "boolean", default = true, command = "chatinfo", section = "Quests, chat and map",
     label = "Class icon and level in chat",
-    tip = "a player's class icon and level in brackets in front of their name, when the game lets us know them. Off by default: it rewrites the game's chat lines, and in battlegrounds and instances that sets off the game's warning about addon errors",
+    tip = "a player's class icon and level in brackets in front of their name, when the game lets us know them. It rewrites the game's chat lines: if the game warns about addon errors in a battleground or instance, switch it off",
 })
 ns.RegisterSetting({
-    key = "chatShort", kind = "boolean", default = false, command = "chatshort", section = "Quests, chat and map",
+    key = "chatShort", kind = "boolean", default = true, command = "chatshort", section = "Quests, chat and map",
     label = "Short channel names in chat",
-    tip = "the channel in front of a line, shortened: [P] party, [PL] party leader, [G] guild, [O] officer, [R] raid, [RL] raid leader, [I] instance, and a numbered channel by its number, [1]. Off by default: it rewrites the game's chat lines, and in battlegrounds and instances that sets off the game's warning about addon errors",
+    tip = "the channel in front of a line, shortened: [P] party, [PL] party leader, [G] guild, [O] officer, [R] raid, [RL] raid leader, [I] instance, and a numbered channel by its number and first letter: [1.G] General, [2.T] Trade, [3.D] LocalDefense. It rewrites the game's chat lines: if the game warns about addon errors in a battleground or instance, switch it off",
 })
 ns.RegisterSetting({
-    key = "chatFirstName", kind = "boolean", default = false, command = "chatfirstname", section = "Quests, chat and map",
-    label = "First names only in chat",
-    tip = "a name with a surname shows as the first name alone (Jory Spleeneater says it as Jory); a whisper or a right-click on it still reaches the whole name. Off by default: it rewrites the game's chat lines, and in battlegrounds and instances that sets off the game's warning about addon errors",
+    key = "chatNames", kind = "number", default = 2, min = 1, max = 4, command = "chatnames",
+    section = "Quests, chat and map", choices = { "First Last", "First L.", "F.L.", "F. Last" },
+    label = "How names show in chat",
+    tip = "a name with a surname as First Last, First L. (Jory Spleeneater as Jory S.), F.L. (J.S.) or F. Last (J. Spleeneater); one without a surname shows as it is. A whisper or a right-click still reaches the whole name. Shortened names rewrite the game's chat lines: if the game warns about addon errors in a battleground or instance, choose First Last",
 })
 ns.RegisterSetting({
-    key = "chatScale", kind = "number", default = 1.5, min = 1, max = 2, percent = true, command = "chatsize",
+    key = "chatSize", kind = "number", default = 20, min = 0, max = 28, command = "chatsize",
     section = "Quests, chat and map", label = "Chat text size",
-    tip = "the size of the text in the chat windows, as a share of the game's own size (the game's own setting is left as it is)",
+    tip = "the size of the text in the chat windows, in points: 20 suits a TV across the room (22 works too with names shortened), 0 keeps the game's own size (the game's own setting is left as it is)",
 })
 ns.RegisterSetting({
     key = "chatSpam", kind = "boolean", default = true, command = "chatspam", section = "Quests, chat and map",
@@ -59,8 +62,13 @@ ns.RegisterSetting({
 })
 ns.RegisterSetting({
     key = "chatRecruit", kind = "boolean", default = true, command = "chatrecruit", section = "Quests, chat and map",
-    label = "Hide repeated guild recruitment",
-    tip = "in public channels a guild's recruiting message is shown once; the same player's again, or one nearly the same, within 15 minutes is hidden (never from your group, guild or friends)",
+    label = "Show each chat ad only once",
+    tip = "in public channels, guild recruitment and selling, buying and service ads show the first time and not again until you log in anew or reload. An ad nearly word for word counts as the same one; a different one from the same trader still shows (never hidden from your group, guild or friends)",
+})
+ns.RegisterSetting({
+    key = "chatAdsAll", kind = "boolean", default = false, command = "chatadsall", section = "Quests, chat and map",
+    label = "Hide chat ads from the first time",
+    tip = "guild recruitment and selling, buying and service ads in public channels are never shown, not even once. Looking for a group is not an ad (your group, guild and friends are never hidden)",
 })
 
 local REPEAT = 120              -- seconds within which the same message from the same player is a repeat
@@ -177,9 +185,9 @@ local function Hide(author, msg, why)
 end
 
 ---------------------------------------------------------------------------
--- Guild recruitment: shown once, its repeats hidden for a while
+-- Chat ads (guild recruitment; selling, buying and services): each shown once, or never
 ---------------------------------------------------------------------------
-CH.RECRUIT_WINDOW = 900         -- seconds within which a recruiting message again is a repeat
+CH.ADS_KEPT = 300               -- ads remembered this session, the oldest forgotten first
 CH.recruitHidden = 0
 local RECRUIT_EVENTS = { CHAT_MSG_CHANNEL = true, CHAT_MSG_SAY = true, CHAT_MSG_YELL = true }
 -- Words that say "recruiting" by themselves, a guild, and what a guild that recruits asks for (a few languages)
@@ -229,30 +237,41 @@ CH.Alike = function(x, y)
     return Alike(a, an, b, bn)
 end
 
-CH.recruiters, CH.recruitTexts = {}, {}
--- Was this recruiting message (or one nearly the same) said within the window? It counts as said now.
-local function RecruitAgain(author, msg)
-    local now, window = GetTime(), CH.RECRUIT_WINDOW
+-- Words that say "I am selling, buying or offering a service" (looking for a group is not an ad)
+local TRADING = { "%f[%a]wt[sbt]%f[%A]", "%f[%a]lfw%f[%A]", "%f[%a]selling%f[%A]", "%f[%a]buying%f[%A]",
+                  "%f[%a]boosting%f[%A]", "your mats", "%f[%a]verkaufe%f[%A]", "%f[%a]vendo%f[%A]",
+                  "%f[%a]compro%f[%A]", "%f[%a]vends%f[%A]", "продам", "куплю", "出售", "收购", "收購", "팝니다",
+                  "삽니다" }
+
+-- "recruit", "trade", or nil when the message is no ad
+function CH.AdKind(msg)
+    if CH.IsRecruit(msg) then return "recruit" end
+    return AnyOf(Words(msg), TRADING) and "trade" or nil
+end
+
+CH.recruiters, CH.ads = {}, {}
+-- Has this ad been said already this session? It counts as said now. A guild's recruiter is one ad however they
+-- word it; a trader's other wares are another ad. The same words from anyone are the same ad.
+local function SeenAd(author, msg, kind)
     local name = Short(author) or ""
-    local again = false
-    local last = CH.recruiters[name]
-    if last and now - last < window then again = true end
+    local recruit = kind == "recruit"
+    local again = (recruit and CH.recruiters[name]) or false
     local set, n = WordSet(msg)
-    for i = #CH.recruitTexts, 1, -1 do
-        local t = CH.recruitTexts[i]
-        if now - t.at >= window then
-            table.remove(CH.recruitTexts, i)
-        elseif not again and Alike(set, n, t.set, t.n) then
-            again = true
-            t.at = now
+    local text = Squash(msg)
+    local known = false
+    for i = #CH.ads, 1, -1 do
+        local ad = CH.ads[i]
+        if ad.kind == kind and (ad.text == text or ((recruit or ad.name == name) and Alike(set, n, ad.set, ad.n))) then
+            known = true
+            break
         end
     end
-    CH.recruiters[name] = now
-    if not again then
-        table.insert(CH.recruitTexts, { set = set, n = n, at = now })
-        if #CH.recruitTexts > 40 then table.remove(CH.recruitTexts, 1) end
+    if recruit then CH.recruiters[name] = true end
+    if not (again or known) then
+        table.insert(CH.ads, { set = set, n = n, text = text, name = name, kind = kind })
+        if #CH.ads > CH.ADS_KEPT then table.remove(CH.ads, 1) end
     end
-    return again
+    return again or known
 end
 
 -- A message is shown in every chat window that has its channel: decide once per message (by its line id)
@@ -264,11 +283,13 @@ local function Spam(event, msg, author, guid, lineID)
         if ns.db.chatSpam and CH.IsAdvert(msg) then
             verdict = true
             Hide(author, msg, "advert")
-        elseif ns.db.chatRecruit and RECRUIT_EVENTS[event] and CH.IsRecruit(msg) then
-            if RecruitAgain(author, msg) then
+        elseif (ns.db.chatRecruit or ns.db.chatAdsAll) and RECRUIT_EVENTS[event] and CH.AdKind(msg) then
+            local kind = CH.AdKind(msg)
+            local again = SeenAd(author, msg, kind)
+            if again or ns.db.chatAdsAll then
                 verdict = true
-                CH.recruitHidden = CH.recruitHidden + 1
-                Hide(author, msg, "recruit")
+                if again and kind == "recruit" then CH.recruitHidden = CH.recruitHidden + 1 end
+                Hide(author, msg, kind)
             end
         elseif ns.db.chatSpam then
             local key = (author or "") .. "\1" .. Squash(msg)
@@ -335,12 +356,29 @@ function CH.Dress(text)
 end
 
 -- The channel's name in front of a line, shortened. The game's own words for its channels (in your language) are
--- matched, the English ones too; a numbered channel goes by its number. Anything else stays as it was.
+-- matched, the English ones too; a numbered channel goes by its number and a letter or two ("[1.G]"). Anything
+-- else stays as it was.
 CH.SHORT = { { "CHAT_MSG_PARTY_LEADER", "Party Leader", "PL" }, { "CHAT_MSG_PARTY", "Party", "P" },
              { "CHAT_MSG_GUILD", "Guild", "G" }, { "CHAT_MSG_OFFICER", "Officer", "O" },
              { "CHAT_MSG_RAID_LEADER", "Raid Leader", "RL" }, { "CHAT_MSG_RAID_WARNING", "Raid Warning", "RW" },
              { "CHAT_MSG_RAID", "Raid", "R" }, { "CHAT_MSG_INSTANCE_CHAT_LEADER", "Instance Leader", "IL" },
              { "CHAT_MSG_INSTANCE_CHAT", "Instance", "I" } }
+-- The public channels whose letters are not simply their first
+CH.CHANNELS = { LocalDefense = "D", WorldDefense = "WD", LookingForGroup = "LFG", GuildRecruitment = "GR" }
+
+-- "1. General - Durotar" -> "1.G"; nil when it is not a numbered channel
+function CH.Numbered(name)
+    local number, rest = name:match("^(%d+)%.%s*(.*)$")
+    if not number then return nil end
+    local called = rest:match("^(.-)%s+%-%s") or rest             -- (without the zone or city after the dash)
+    local letters = CH.CHANNELS[called]
+    if not letters then                                           -- its first letter, whole in any language
+        letters = called:match("^[%z\1-\127\194-\244][\128-\191]*") or ""
+        if letters:find("^%l$") then letters = letters:upper() end   -- (only a plain letter: others stay as they are)
+    end
+    return letters == "" and number or (number .. "." .. letters)
+end
+
 local shortOf
 function CH.Shorten(text)
     if not (CH.running and ns.db.chatShort) or type(text) ~= "string" or ns.IsSecret(text) then return text end
@@ -353,28 +391,39 @@ function CH.Shorten(text)
         end
     end
     return (text:gsub("(|Hchannel:[^|]*|h)%[(.-)%](|h)", function(open, name, close)
-        local short = name:match("^(%d+)%.") or shortOf[name]
+        local short = CH.Numbered(name) or shortOf[name]
         if short then return open .. "[" .. short .. "]" .. close end
     end))
 end
 
--- A name as it is shown, cut to its first name: "Jory Spleeneater" is "Jory", "Jory Spleeneater-Forever" is
--- "Jory-Forever"; its class colour, if any, kept round it
-function CH.FirstName(name)
-    if type(name) ~= "string" or ns.IsSecret(name) then return name end
+-- A name's first letter, whole in any language
+local function Initial(word)
+    return word:match("^[%z\1-\127\194-\244][\128-\191]*") or ""
+end
+
+-- A name as it is shown, in the style chosen: 1 "Jory Spleeneater", 2 "Jory S.", 3 "J.S.", 4 "J. Spleeneater".
+-- A realm after it is kept, and its class colour; a name without a surname stays as it is.
+function CH.NameAs(name, style)
+    if style == 1 or type(name) ~= "string" or ns.IsSecret(name) then return name end
     local pre, core, post = name:match("^(|c%x%x%x%x%x%x%x%x)(.-)(|r)$")
     if not pre then pre, core, post = "", name, "" end
     local first, rest = core:match("^(%S+)%s+(.+)$")
     if not first then return name end
     local realm = rest:match("(%-[^%s%-]+)$") or ""
-    return pre .. first .. realm .. post
+    local last = rest:sub(1, #rest - #realm)
+    local short
+    if style == 3 then short = Initial(first) .. "." .. Initial(last) .. "."
+    elseif style == 4 then short = Initial(first) .. ". " .. last
+    else short = first .. " " .. Initial(last) .. "." end
+    return pre .. short .. realm .. post
 end
 
--- Every player's name shown in a line, cut to the first name (the link itself untouched)
-function CH.Firsts(text)
-    if not (CH.running and ns.db.chatFirstName) or type(text) ~= "string" or ns.IsSecret(text) then return text end
+-- Every player's name shown in a line, in your style (the link itself untouched)
+function CH.Names(text)
+    local style = ns.db.chatNames or 1
+    if not CH.running or style == 1 or type(text) ~= "string" or ns.IsSecret(text) then return text end
     return (text:gsub("(|Hplayer:[^|]*|h)%[(.-)%](|h)", function(open, name, close)
-        return open .. "[" .. CH.FirstName(name) .. "]" .. close
+        return open .. "[" .. CH.NameAs(name, style) .. "]" .. close
     end))
 end
 
@@ -390,7 +439,7 @@ local function Hook(on)
                 local mine = function(self, text, ...)
                     local okS, short = pcall(CH.Shorten, text)
                     if okS and short ~= nil then text = short end
-                    local okF, first = pcall(CH.Firsts, text)
+                    local okF, first = pcall(CH.Names, text)
                     if okF and first ~= nil then text = first end
                     local ok, dressed = pcall(CH.Dress, text)
                     return orig(self, (ok and dressed ~= nil) and dressed or text, ...)
@@ -410,7 +459,7 @@ CH.hooked = hooked
 -- it anew), so "off" gives back exactly that.
 local sized = {}
 local function Size(on)
-    local scale = on and (ns.db.chatScale or 1) or 1
+    local points = on and tonumber(ns.db.chatSize) or 0             -- 0: the game's own size
     for i = 1, (NUM_CHAT_WINDOWS or 10) do
         local frame = _G["ChatFrame" .. i]
         if type(frame) == "table" and type(frame.GetFont) == "function" and type(frame.SetFont) == "function" then
@@ -419,7 +468,7 @@ local function Size(on)
                 local rec = sized[frame]
                 local own = (rec and math.abs(size - rec.set) < 0.5) and rec.own or size   -- (else the game set it anew)
                 local ownFile = (rec and rec.file) or file                                 -- the window's own typeface
-                local want = math.floor(own * scale + 0.5)
+                local want = points > 0 and math.max(8, math.floor(points + 0.5)) or own
                 local useFile = (on and ns.ChosenFont()) or ownFile                        -- (your font, if you chose one)
                 if math.abs(want - size) >= 0.5 or useFile ~= file then pcall(frame.SetFont, frame, useFile, want, flags) end
                 sized[frame] = (want ~= own or useFile ~= ownFile) and { own = own, set = want, file = ownFile } or nil
@@ -445,9 +494,6 @@ local function Trim()
     for key, at in pairs(CH.said) do
         if now - at > REPEAT then CH.said[key] = nil else n = n + 1 end
     end
-    for name, at in pairs(CH.recruiters) do
-        if now - at > CH.RECRUIT_WINDOW then CH.recruiters[name] = nil end
-    end
 end
 
 -- The game's filter call: true hides the message; false, then the message's arguments, changes it. Every
@@ -457,7 +503,7 @@ local function Filter(_, event, msg, author, ...)
     local guid, lineID = select(10, ...), select(9, ...)
     if ns.IsSecret(guid) then guid = nil end
     if ns.IsSecret(lineID) then lineID = nil end
-    if ns.db.chatSpam or ns.db.chatRecruit then
+    if ns.db.chatSpam or ns.db.chatRecruit or ns.db.chatAdsAll then
         local ok, spam = pcall(Spam, event, msg, author, guid, lineID)
         if not ok then ns.Error(spam) elseif spam then return true end
     end
@@ -499,7 +545,7 @@ function CH:Apply(run)
     if run then
         for _, e in ipairs({ "UPDATE_CHAT_WINDOWS", "UPDATE_FLOATING_CHAT_WINDOWS" }) do pcall(seen.RegisterEvent, seen, e) end
     end
-    local want = run and (ns.db.chatInfo or ns.db.chatSpam or ns.db.chatRecruit) and true or false
+    local want = run and (ns.db.chatInfo or ns.db.chatSpam or ns.db.chatRecruit or ns.db.chatAdsAll) and true or false
     local add = ChatFrame_AddMessageEventFilter or (ChatFrameUtil and ChatFrameUtil.AddMessageEventFilter)
     if want and not filtering and add then
         filtering = true                     -- added once: they check whether we are on
@@ -522,7 +568,7 @@ function CH:Apply(run)
             end
         end
     end
-    Hook(run and (ns.db.chatInfo or ns.db.chatShort or ns.db.chatFirstName) and true or false)
+    Hook(run and (ns.db.chatInfo or ns.db.chatShort or (ns.db.chatNames or 1) ~= 1) and true or false)
 end
 
 function CH.Describe()

@@ -1060,9 +1060,29 @@ function LV.GuideSteps(read, target)
     local learned = ns.db and ns.db.skillSteps and ns.db.skillSteps[read.kind] or {}
     local steps, reach = {}, read.rank
     local greys, gap, teachers = {}, 0, nil
+    -- your own recipes from one rank to another (or as far as they teach): how far that got
+    local function Own(from, to, most)
+        teachers = teachers or Teachers(read, learned)
+        local filled, at = Cheapest(read.kind, teachers, from, to, most)
+        for _, f in ipairs(filled) do
+            f.guide, f.filled, f.known, f.alts = true, true, true, {}
+            Append(steps, f)
+        end
+        return at
+    end
+    -- a stretch no guide covers (this game moved the healing potions out of Alchemy): your own recipes
+    local covered = read.rank
+    local function Uncovered(to)
+        if covered < to then
+            gap = gap + (to - Own(covered, to))
+            covered, reach = to, math.max(reach, to)
+        end
+    end
     for _, g in ipairs(guide) do
         local lo, hi = math.max(g[1], read.rank), math.min(g[2], target)
         if lo < hi then
+            Uncovered(lo)
+            covered = math.max(covered, hi)
             reach = math.max(reach, hi)
             local step = { from = lo, to = hi, guide = true, alts = {} }
             if g.gather then
@@ -1093,15 +1113,7 @@ function LV.GuideSteps(read, target)
                         -- First your orange and yellow recipes (usual materials); where they run out, another of
                         -- the guide's to learn; then a green one of the guide's, then whatever of yours teaches
                         if (rec.c or 0) <= 0 then greys[#greys + 1] = rec end
-                        teachers = teachers or Teachers(read, learned)
-                        local function Fill(from, most)
-                            local filled, at = Cheapest(read.kind, teachers, from, hi, most)
-                            for _, f in ipairs(filled) do
-                                f.guide, f.filled, f.known, f.alts = true, true, true, {}
-                                Append(steps, f)
-                            end
-                            return at
-                        end
+                        local function Fill(from, most) return Own(from, hi, most) end
                         local at = Fill(lo, 1)
                         if at < hi then
                             for _, o in ipairs(options) do
@@ -1143,6 +1155,7 @@ function LV.GuideSteps(read, target)
             end
         end
     end
+    Uncovered(target)                                -- (past the guide's last stretch)
     return steps, reach, gap, greys
 end
 

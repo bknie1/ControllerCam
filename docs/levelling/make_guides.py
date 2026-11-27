@@ -77,6 +77,10 @@ def recipe(o, where, problems):
 def profession(kind, data, problems):
     lines = ["    %s = {" % kind]
     at = 1
+    holes = [tuple(h) for h in data.get("holes") or []]      # stretches left out on purpose (see the notes)
+
+    def meant(lo, hi):
+        return any(a <= lo and hi <= b for a, b in holes)
     for i, st in enumerate(data.get("steps") or []):
         where = "%s step %d" % (kind, i + 1)
         lo, hi = st.get("from"), st.get("to")
@@ -85,7 +89,7 @@ def profession(kind, data, problems):
             continue
         if lo == at + 1 and i > 0:
             lo = at                          # (a guide's "1-30, 31-45": the next stretch starts where one ends)
-        if lo > at:
+        if lo > at and not meant(at, lo):
             problems.append("%s: a gap from %d to %d" % (where, at, lo))
         at = max(at, hi)
         if num(st.get("gather")):
@@ -116,7 +120,7 @@ def profession(kind, data, problems):
         if alts:
             f.append("alts = {\n            " + ",\n            ".join(alts) + " }")
         lines.append("        { %d, %d, %s }," % (lo, hi, ", ".join(f)))
-    if at < CAP:
+    if at < CAP and not meant(at, CAP):
         problems.append("%s: the steps stop at %d, short of %d" % (kind, at, CAP))
     lines.append("    },")
     return lines

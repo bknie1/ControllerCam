@@ -837,6 +837,7 @@ function mock.land(items)
     mock.fire("LOOT_CLOSED")
 end
 ERR_FISH_ESCAPED = "Your fish got away!"
+ERR_FISH_NOT_HOOKED = "No fish are hooked."
 mock.enchant = nil
 function GetWeaponEnchantInfo()
     if mock.enchant then return true, mock.enchant * 1000, 0, 264 end

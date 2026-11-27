@@ -431,8 +431,10 @@ function I:StickClick(down)
     end
     local at = self.stickDownAt
     self.stickDownAt = nil
-    if at and GetTime() - at >= I.HOLD and ns.db.padActions and ns.ItemActions and ns.ItemActions:Open() then
-        return true
+    if at and GetTime() - at >= I.HOLD and ns.db.padActions then
+        if ns.ItemActions and ns.ItemActions:Open() then return true end
+        local V = ns.Vendor                             -- held away from any item, at the bank: its materials
+        if V and V.bankOpen and V:OpenMaterials() then return true end
     end
     return self:Stick()
 end

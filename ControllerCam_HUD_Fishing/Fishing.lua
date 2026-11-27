@@ -296,14 +296,27 @@ end
 ---------------------------------------------------------------------------
 F.FLOAT = 40
 local hint
+
+-- Where the hint goes: where the game's cast bar sits. While the game's words are up (FishGame.lua, which can
+-- land in the same place) it goes under them, so neither covers the other.
+function F.PlaceHint()
+    if not hint then return end
+    local game = ns.FishGame and ns.FishGame.frame
+    local under = (game and game:IsShown() and game.text) or false
+    if under == hint.under then return end
+    hint.under = under
+    hint:ClearAllPoints()
+    if under then hint:SetPoint("TOP", under, "BOTTOM", 0, -2)
+    elseif _G.PlayerCastingBarFrame then hint:SetPoint("BOTTOM", _G.PlayerCastingBarFrame, "BOTTOM", 0, 0)
+    else hint:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 294) end
+end
+
 local function Hint()
     if hint then return hint end
     hint = CreateFrame("Frame", "ControllerCamHUD_FishingHint", UIParent)
     hint:SetSize(260, 40)
     hint:SetFrameStrata("MEDIUM")
-    local native = _G.PlayerCastingBarFrame
-    if native then hint:SetPoint("BOTTOM", native, "BOTTOM", 0, 0)
-    else hint:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 294) end
+    F.PlaceHint()
     hint.icon = hint:CreateTexture(nil, "ARTWORK")
     hint.icon:SetTexture(ns.media.bobber)
     hint.icon:SetSize(F.FLOAT, F.FLOAT)                         -- large enough to be seen from the couch
@@ -320,6 +333,7 @@ local function Hint()
     hint.back:Hide()
     hint:Hide()
     hint:SetScript("OnUpdate", function(self)
+        F.PlaceHint()                                            -- (the game's words come and go)
         self.icon:ClearAllPoints()                              -- the float bobs while it waits
         self.icon:SetPoint("RIGHT", self.text, "LEFT", -6, math.sin(GetTime() * 3) * 3)
     end)
@@ -389,7 +403,60 @@ function F:Bars()
     end
 end
 
+-- Fishing mode off with the pole still in your hands (B with no weapons to take back, /cchud fish): one button
+-- brings it back, Y or, where your fishing uses that, a shoulder button, and a line by the cast bar says which
+F.RESUMES = { "PAD4", "PADRSHOULDER", "PADLSHOULDER" }
+local resumers = {}
+function F.ResumeKey()
+    local taken = {}
+    for _, key in ipairs(F.Keys()) do taken[key] = true end
+    for _, key in ipairs(F.RESUMES) do
+        if not taken[key] then return key end
+    end
+    return F.RESUMES[1]
+end
+
+function F:Resume()
+    if not self.paused then return end
+    self.paused = false
+    self:Bind()
+end
+
+function F:OfferResume()
+    local want = nil
+    if self.active and self.paused and F.HasPole() and F.Spell() and not InCombatLockdown() and not ns.arranging
+            and not F.WindowOpen() then
+        want = F.ResumeKey()
+    end
+    if want ~= self.resumeKey then
+        if self.resumeKey then resumers[self.resumeKey]:Set(false) end
+        if want then
+            if ns.FishGame then ns.FishGame:Follow(); ns.FishGame:Bind() end      -- (the game lets its button go first)
+            if not resumers[want] then
+                resumers[want] = ns.PadKeys("FishResume", { want }, function() F:Resume() end,
+                    function() F.resumeKey = nil end)                             -- (a fight took it: asked for anew)
+            end
+            resumers[want]:Set(true)
+        elseif self.state == nil and hint then
+            hint:Hide()
+        end
+        self.resumeKey = want
+    end
+    if want then
+        local h = Hint()
+        h.text:SetText(L["%s to fish again"]:format(KeyName(want)))
+        h.sub:Hide()
+        h.back:Hide()
+        h:Show()
+    end
+end
+
 function F:Bind()
+    self:BindState()
+    self:OfferResume()
+end
+
+function F:BindState()
     -- the pole looked at again each time: put away a moment after the game said the gear changed (B, a swap),
     -- an old answer kept the bars put away and the prompt up after you stopped fishing
     self.pole = self.active and F.HasPole() or false
@@ -407,7 +474,7 @@ function F:Bind()
             else
                 self:Prompt():Show()
             end
-        elseif state == nil and hint and hint:IsShown() then    -- (nothing to prompt: never left up)
+        elseif state == nil and not self.resumeKey and hint and hint:IsShown() then    -- (nothing to prompt)
             hint:Hide()
         end
         return

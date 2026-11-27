@@ -48,12 +48,12 @@ U.ModernAuras = Modern
 local function AllByID(unit, kind)
     local ok, all = pcall(C_UnitAuras.GetUnitAuras, unit, kind)
     if not ok or type(all) ~= "table" then return nil end
-    local byID = {}
+    local byID, hidden = {}, false
     for _, a in ipairs(all) do
         local id = a.auraInstanceID
-        if id ~= nil and not ns.IsSecret(id) then byID[id] = a end
+        if id ~= nil and not ns.IsSecret(id) then byID[id] = a else hidden = true end
     end
-    return byID
+    return byID, hidden
 end
 
 -- The effects the game puts under a filter (it may hold "PLAYER", "CROWD_CONTROL"...), in its order, at most max
@@ -68,18 +68,21 @@ function U.Filtered(unit, kind, filter, max)
         return list
     end
     if ns.UnitFrames.fake or not Modern() then return nil end
-    local byID = AllByID(unit, kind)
+    local byID, missed = AllByID(unit, kind)
     local ok, ids = pcall(C_UnitAuras.GetUnitAuraInstanceIDs, unit, filter)
     if not byID or not ok or type(ids) ~= "table" then return nil end
     local list = {}
     for _, id in ipairs(ids) do
-        local a = byID[id]
+        local a = nil
+        if not ns.IsSecret(id) then a = byID[id] end
         if a then
             list[#list + 1] = a
             if max and #list >= max then break end
+        else
+            missed = true
         end
     end
-    return list
+    return list, missed                -- missed: an effect there was no telling apart, so the list may be short
 end
 
 -- One effect by its place in the list: for clients without the calls above (never when they exist)

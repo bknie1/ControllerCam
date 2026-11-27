@@ -373,7 +373,12 @@ local function InitDB()
     -- own windows do not (and the game's own bags kept our quick sort and deposit). The game's windows are the
     -- start now; our own window stays as an experimental option (yours to turn on again)
     if (tonumber(old.v) or 0) < 14 then old.bagWindow = nil end
-    local db = { v = 14, units = {}, pos = {}, saved = {} }
+    -- before version 15 the chat options were off to begin with, or may have been switched off for it: they are
+    -- on now (1.4.15's reason, the warning in battlegrounds, is said in their help text; yours to switch off)
+    if (tonumber(old.v) or 0) < 15 then old.chatInfo, old.chatShort, old.chatSpam, old.chatRecruit = nil, nil, nil, nil end
+    -- the chat text's size was a share of the game's own: the game's own (100%) stays that; the rest start at 20
+    if old.chatSize == nil and tonumber(old.chatScale) == 1 then old.chatSize = 0 end
+    local db = { v = 15, units = {}, pos = {}, saved = {} }
     -- game settings we changed, with the value they had (put back when the HUD stops)
     if type(old.saved) == "table" then
         for name, value in pairs(old.saved) do
