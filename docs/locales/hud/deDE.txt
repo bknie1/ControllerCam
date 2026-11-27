@@ -516,8 +516,8 @@ Euer Tier hat Hunger: füttert es.
 Tier-Hungeralarm
 wenn Euer Tier zufrieden oder unglücklich (hungrig) ist: ein Stück Futter oben am Bildschirm, klein und pulsierend beim Spielen, ruhiger mit einer Zeile Text, während der Bildschirm ruht; einmal im Chat und ein Ton, wenn es unglücklich ist. Nichts bei einem glücklichen Tier
 erledigt
-%s: bereit zur Abgabe
-Schließe noch [%s] ab.
+%s abgeschlossen
+Schließe %s ab.
 startet eine Quest
 eine deiner Quests
 bereit zur Abgabe
@@ -582,6 +582,15 @@ die Knöpfe für Haltungen und Begleiterbefehle sitzen dort, wo die grünen und 
 Haltungs- und Begleiterräder vorne und im Bild
 Die Räder, die sich mit den Schultertasten und Triggern öffnen, werden vor den Tasten der Leiste gezeichnet und im Bild gehalten, auch im Kampf, damit jede Auswahl zu sehen ist; sie bleiben die des Spiels
 auflisten, wo die Teile der Gamepad-Leisten sitzen und was ruht (zur Fehlersuche)
+Aus
+Linker Trigger
+Rechter Trigger
+Beide Trigger
+%s hat jetzt %d ihrer Fähigkeiten auf der spieleigenen Haltungsleiste, die in dieser Gestalt eine deiner Trigger-Leisten ersetzt. Ordne sie nach Belieben um.
+Die eigenen Aktionen einer Gestalt ersetzen
+welche Gruppe deiner Gamepad-Leiste die eigenen Aktionen einer Gestalt oder Haltung ersetzen, solange du in ihr bist (Bär, Katze, Verteidigungshaltung...); das ist die spieleigene Einstellung der Haltungsleiste, also wechselt das Spiel selbst, auch im Kampf
+Die eigene Leiste einer Gestalt mit ihren Fähigkeiten füllen
+wenn du zum ersten Mal eine Gestalt oder Haltung annimmst, außerhalb des Kampfes, werden die leeren Tasten ihrer eigenen Leiste mit den Fähigkeiten dieser Gestalt aus deinem Zauberbuch gefüllt, damit die Gestalt kampfbereit ist; was schon darauf liegt, bleibt, und was du später entfernst, bleibt entfernt
 Auto
 Allgemein
 die des Spiels
@@ -851,6 +860,7 @@ Außerhalb des Kampfes
 Controller
 Was vibriert
 Kamera
+Gestalten und Haltungen
 Abklingzeiten
 Was ausgeblendet wird
 Welche Rahmen
@@ -1028,6 +1038,7 @@ Nachmittag
 Abend
 Nacht
 Mit %s
+Lagerboni in %d:%02d
 Die Lagerfeuerszene ist aus.
 Die Lagerfeuerszene wartet, bis du nicht mehr im Kampf bist.
 die Lagerfeuerszene jetzt abspielen
@@ -1265,7 +1276,6 @@ Filmische Flüge: die Kamera kreist um dich
 im Film kreist die Kamera langsam um dich und dein Reittier, eine ganze Runde in etwa anderthalb Minuten, und kommt vor der Landung wieder hinter dich. Aus: eine ruhige Einstellung
 Offline
 Tot
-Aus
 In einer Heiler-Spezialisierung
 Immer
 Zu weit

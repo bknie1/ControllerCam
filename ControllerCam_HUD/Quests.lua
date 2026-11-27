@@ -608,14 +608,35 @@ Q.PARTY_GAP, Q.PARTY_MAX = 1, 6
 function Q.InParty()
     return IsInGroup ~= nil and ns.Yes(IsInGroup()) and not (IsInRaid and ns.Yes(IsInRaid())) and true or false
 end
+-- (a quest's link kept whole: the game sends a link only with its own colour round it)
+local LINK = "|c%x%x%x%x%x%x%x%x|H.-|h.-|h|r"
 function Q.PartyText(line)
     if type(line) ~= "string" or ns.IsSecret(line) then return nil end
-    local text = line:gsub("|c%x%x%x%x%x%x%x%x", "")
+    local links = {}
+    local text = line:gsub(LINK, function(link)
+        links[#links + 1] = link
+        return "\1" .. #links .. "\1"
+    end)
+    text = text:gsub("|c%x%x%x%x%x%x%x%x", "")
     text = text:gsub("|r", "")
     text = text:gsub("|T.-|t", "")
     text = text:gsub("%s+", " ")
     text = text:gsub("^ ", ""):gsub(" $", "")
+    text = text:gsub("\1(%d+)\1", function(n) return links[tonumber(n)] end)
     return text ~= "" and text or nil
+end
+
+-- A quest as a link in chat ([Bloody Bones], clicked: the quest): the game's own, else made as the game makes them
+function Q.Link(id, title, level)
+    local get = (C_QuestLog and C_QuestLog.GetQuestLink) or GetQuestLink
+    if type(get) == "function" and type(id) == "number" then
+        local ok, link = pcall(get, id)
+        link = ok and ns.Plain(link)
+        if type(link) == "string" and link:find("|Hquest:", 1, true) then return link end
+    end
+    if type(title) ~= "string" then return nil end
+    if type(id) ~= "number" then return "[" .. title .. "]" end
+    return ("|cffffff00|Hquest:%d:%d|h[%s]|h|r"):format(id, tonumber(level) or -1, title)
 end
 local sending = false
 local function SendNext()
@@ -655,7 +676,7 @@ local function Progress()
                 objs[i] = { label = Label(text), have = have, need = need, finished = ns.Plain(o.finished) == true }
             end
         end
-        now[q.id] = { title = ns.Plain(q.title), objs = objs,
+        now[q.id] = { title = ns.Plain(q.title), level = q.level, objs = objs,
                       done = (Ask("ReadyForTurnIn", q.id) == true or Ask("IsComplete", q.id) == true) }
         order[#order + 1] = q.id
     end
@@ -682,7 +703,7 @@ function Q.Changes()
                 end
             end
             if cur.done and not old.done and cur.title then
-                lines[#lines + 1] = "|cffffd24a" .. L["%s: ready to hand in"]:format(cur.title) .. "|r"
+                lines[#lines + 1] = L["%s completed"]:format(Q.Link(id, cur.title, cur.level))
                 Q.doneLines[lines[#lines]] = id                   -- (what goes to the party by default)
             end
         end
@@ -694,10 +715,10 @@ end
 local progressEvents = CreateFrame("Frame")
 local progressDirty = false
 ---------------------------------------------------------------------------
--- To the party: by default only a quest finished ("CCHUD: Bloody Bone Necklaces: ready to hand in"), every
+-- To the party: by default only a quest finished ("[CCHUD] [Bloody Bone Necklaces] completed", the quest linked), every
 -- step only with Q's "every step" option; each line marked as ours. The steps stay in your own chat. And when
 -- someone in the party has finished a quest you are still on (their HUD tells yours, quietly, by an addon
--- message), you say so once: "CCHUD: Finishing up [Bloody Bone Necklaces]."
+-- message), you say so once: "[CCHUD] Finishing up [Bloody Bone Necklaces]."
 ---------------------------------------------------------------------------
 ns.RegisterSetting({
     key = "questPartyAll", kind = "boolean", default = false, command = "questpartyall", section = "Quests",
@@ -706,7 +727,7 @@ ns.RegisterSetting({
 })
 Q.PREFIX = "CCHUD"                       -- the addon's short name: before every party line, and its addon messages
 Q.doneLines, Q.finishing = {}, {}
-function Q.PartyLine(text) return Q.PREFIX .. ": " .. text end
+function Q.PartyLine(text) return "[" .. Q.PREFIX .. "] " .. text end
 
 -- A quest of yours is finished: the party's HUDs are told (nothing shows in chat for that)
 function Q.TellDone(id)
@@ -721,7 +742,7 @@ function Q.TheyFinished(id, sender)
     local mine = Q.progress[id]
     if not mine or mine.done or not mine.title then return false end
     Q.finishing[id] = true
-    Q.ToParty(Q.PartyLine(L["Finishing up [%s]."]:format(mine.title)))
+    Q.ToParty(Q.PartyLine(L["Finishing up %s."]:format(Q.Link(id, mine.title, mine.level))))
     ns.Note("quests: %s finished %d before you: finishing up", tostring(sender), id)
     return true
 end

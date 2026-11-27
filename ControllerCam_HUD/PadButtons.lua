@@ -63,14 +63,39 @@ end
 local function Middle(f)
     if not (f and f.GetCenter) then return nil end
     local ok, x, y = pcall(f.GetCenter, f)
-    if not ok or type(x) ~= "number" or type(y) ~= "number" then return nil end
+    if not ok then return nil end
+    x, y = ns.Plain(x), ns.Plain(y)
+    if type(x) ~= "number" or type(y) ~= "number" then return nil end
     local s = Scale(f)
     return x * s, y * s, s
 end
 
+-- A frame's anchor, read quietly: false when the game won't let it be read (a frame whose anchors are
+-- restricted, or kept secret, as the game does to some of its own frames at times); nil when it has none
+local function Anchor(f, i)
+    if type(f) ~= "table" or type(f.GetPoint) ~= "function" then return false end
+    if type(f.IsAnchoringRestricted) == "function" then
+        local ok, restricted = pcall(f.IsAnchoringRestricted, f)
+        if not ok or ns.IsSecret(restricted) or restricted == true then return false end
+    end
+    local ok, point, rel, relPoint, x, y = pcall(f.GetPoint, f, i or 1)
+    if not ok then return false end
+    for _, v in ipairs({ point, rel, relPoint, x, y }) do
+        if ns.IsSecret(v) then return false end
+    end
+    return point, rel, relPoint, x, y
+end
+
+-- Every anchor of a frame, or nil when any can't be read
 local function Points(f)
     local list = {}
-    for i = 1, (f.GetNumPoints and f:GetNumPoints() or 0) do list[i] = { f:GetPoint(i) } end
+    local ok, n = pcall(f.GetNumPoints, f)
+    n = ok and ns.Plain(n) or 0
+    for i = 1, (type(n) == "number" and n or 0) do
+        local point, rel, relPoint, x, y = Anchor(f, i)
+        if not point then return nil end
+        list[i] = { point, rel, relPoint, x, y }
+    end
     return list
 end
 
@@ -79,9 +104,11 @@ local function Restore(f, points)
     for _, p in ipairs(points) do f:SetPoint(unpack(p)) end
 end
 
--- Is the frame where we put it? (the game lays its bars out again now and then)
+-- Is the frame where we put it? (the game lays its bars out again now and then). nil: it can't be read just now,
+-- so it is taken to be where we left it (not placed again every frame)
 local function Ours(f, m)
-    local point, rel, relPoint, x, y = f:GetPoint(1)
+    local point, rel, relPoint, x, y = Anchor(f, 1)
+    if point == false then return nil end
     return point == "CENTER" and rel == m.page and relPoint == "CENTER"
         and math.abs((x or 0) - m.x) < 0.5 and math.abs((y or 0) - m.y) < 0.5
 end
@@ -90,13 +117,13 @@ function P:Place(page, side)
     local b = Field(page, side.button)
     if not (b and b.SetPoint and b.GetPoint) then return false end
     local m = self.moved[b]
-    if m and Ours(b, m) then return true end                -- still where we put it
+    if m and Ours(b, m) ~= false then return true end       -- still where we put it (or can't be told)
     local old = m
     -- the game's own place for it (now, if it laid the bars out again)
     local points = Points(b)
     local bx, by = Middle(b)
     local px, py, ps = Middle(page)
-    if not (bx and px) or #points == 0 then return false end
+    if not (bx and px and points) or #points == 0 then return false end
     local s = Scale(b)
     -- where it goes: onto the targeting icon above it, or straight up when there is none
     local icon = Field(page, side.icon)
@@ -111,12 +138,13 @@ function P:Place(page, side)
     -- its button hint ("LB + LT") comes along, as far from the button as it was
     local prompt = Field(page, side.prompt)
     local promptMove
-    if prompt and prompt.GetPoint and prompt.SetPoint and (prompt:GetNumPoints() or 0) > 0 then
-        local _, rel = prompt:GetPoint(1)
+    if prompt and prompt.SetPoint then
+        local first, rel = Anchor(prompt, 1)
         local qx, qy = Middle(prompt)
-        if rel ~= b and qx then
+        local promptPoints = first and Points(prompt)
+        if first and rel ~= b and qx and promptPoints then
             local qs = Scale(prompt)
-            promptMove = { frame = prompt, points = Points(prompt), x = (qx - bx) / qs, y = (qy - by) / qs }
+            promptMove = { frame = prompt, points = promptPoints, x = (qx - bx) / qs, y = (qy - by) / qs }
         end
     end
     m = { page = page, points = points, x = (tx - px) / s, y = (ty - py) / s, how = how, side = side.button,
@@ -141,7 +169,7 @@ end
 
 function P:PutBack()
     for b, m in pairs(self.moved) do
-        if Ours(b, m) then Restore(b, m.points) end          -- (if the game moved it since, it is already home)
+        if Ours(b, m) ~= false then Restore(b, m.points) end -- (if the game moved it since, it is already home)
         if m.prompt then Restore(m.prompt.frame, m.prompt.points) end
     end
     self.moved = {}
@@ -370,8 +398,8 @@ function P:Wheels()
                 end
             end
             local point, rel = nil, nil
-            if best and f.GetPoint then point, rel = f:GetPoint(1) end
-            if best and not (point == "CENTER" and rel == best) then      -- (not when it is around it already)
+            if best then point, rel = Anchor(f, 1) end
+            if best and point ~= false and not (point == "CENTER" and rel == best) then   -- (not around it already, nor unreadable)
                 f:ClearAllPoints()
                 f:SetPoint("CENTER", best, "CENTER", 0, 0)
                 self.wheels = (self.wheels or 0) + 1

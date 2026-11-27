@@ -516,8 +516,8 @@ Your pet is hungry: feed it.
 Pet hunger alert
 when your pet is content or unhappy (hungry): a piece of food near the top of the screen, small and pulsing while you play, softer with a line of words while the screen rests; once in chat and a sound when it is unhappy. Nothing for a happy pet
 done
-%s: ready to hand in
-Finishing up [%s].
+%s completed
+Finishing up %s.
 starts a quest
 a quest of yours
 ready to hand in
@@ -582,6 +582,15 @@ the stance and pet command buttons sit where the green and red targeting icons w
 Stance and pet wheels in front and on screen
 the wheels that open with the shoulder and trigger buttons are drawn in front of the bar's buttons and kept inside the screen, in a fight too, so every choice can be seen; they stay the game's own
 list where the gamepad bars' parts sit and what rests (for troubleshooting)
+Off
+Left trigger
+Right trigger
+Both triggers
+%s now has %d of its abilities on the game's own stance bar, which takes the place of one of your trigger bars while you are in that form. Rearrange them as you like.
+A form's own actions take the place of
+which cluster of your gamepad bar a form's or stance's own actions stand in for while you are in it (bear, cat, defensive stance...); this is the game's own Stance Bar setting, so the game does the switching, in a fight too
+Fill a form's own bar with its abilities
+the first time you shift into a form or stance, out of combat, the empty buttons of its own bar are filled with that form's abilities from your spellbook, so the form is ready to fight with; what is on it already stays, and what you take off afterwards stays off
 Auto
 Generic
 the game's own
@@ -851,6 +860,7 @@ Out of a fight
 Controller
 What rumbles
 Camera
+Forms and stances
 Cooldowns
 What fades
 Which frames
@@ -1028,6 +1038,7 @@ Afternoon
 Evening
 Night
 With %s
+Camp benefits in %d:%02d
 The campfire scene is off.
 The campfire scene waits until you are out of combat.
 play the campfire scene now
@@ -1265,7 +1276,6 @@ Cinematic flights: the camera circles you
 on film, the camera circles slowly round you and your mount, a whole turn in about a minute and a half, and comes round behind you again before you land. Off: a still shot
 Offline
 Dead
-Off
 In a healing spec
 Always
 Too far

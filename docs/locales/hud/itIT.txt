@@ -516,8 +516,8 @@ Il tuo animale ha fame: nutrilo.
 Avviso di fame dell'animale
 quando il tuo animale è soddisfatto o infelice (affamato): un pezzo di cibo in alto sullo schermo, piccolo e pulsante mentre giochi, più morbido con una riga di testo mentre lo schermo riposa; una volta in chat e un suono quando è infelice. Niente per un animale felice
 fatto
-%s: pronta da consegnare
-Sto finendo [%s].
+%s completata
+Sto finendo %s.
 avvia una missione
 una tua missione
 pronta da consegnare
@@ -582,6 +582,15 @@ i pulsanti delle posture e dei comandi del famiglio stanno dove c'erano le icone
 Ruote di postura e famiglio in primo piano e sullo schermo
 le ruote che si aprono con i dorsali e i grilletti vengono disegnate davanti ai pulsanti della barra e tenute dentro lo schermo, anche in combattimento, così ogni scelta si vede; restano quelle del gioco
 elenca dove si trovano le parti delle barre del controller e cosa riposa (per la diagnosi)
+Disattivato
+Grilletto sinistro
+Grilletto destro
+Entrambi i grilletti
+%s ora ha %d delle sue abilità sulla barra delle posizioni del gioco, che prende il posto di una delle tue barre dei grilletti mentre sei in quella forma. Riordinale come preferisci.
+Le azioni proprie di una forma prendono il posto di
+quale gruppo della barra del controller viene sostituito dalle azioni proprie di una forma o posizione mentre ci sei (orso, felino, posizione difensiva...); è l'impostazione della barra delle posizioni del gioco, quindi è il gioco a fare il cambio, anche in combattimento
+Riempire la barra propria di una forma con le sue abilità
+la prima volta che assumi una forma o posizione, fuori dal combattimento, i pulsanti vuoti della sua barra vengono riempiti con le abilità di quella forma dal libro degli incantesimi, così la forma è pronta a combattere; ciò che c'è già resta, e ciò che togli dopo resta tolto
 Auto
 Generico
 quelle del gioco
@@ -851,6 +860,7 @@ Fuori dal combattimento
 Controller
 Cosa vibra
 Visuale
+Forme e posizioni
 Tempi di recupero
 Cosa sfuma
 Quali riquadri
@@ -1028,6 +1038,7 @@ Pomeriggio
 Sera
 Notte
 Con %s
+Benefici dell'accampamento tra %d:%02d
 La scena del falò è disattivata.
 La scena del falò aspetta che tu sia fuori dal combattimento.
 riproduci ora la scena del falò
@@ -1265,7 +1276,6 @@ Voli cinematografici: la telecamera ti gira intorno
 durante il film la telecamera gira lentamente intorno a te e alla tua cavalcatura, un giro completo in circa un minuto e mezzo, e torna alle tue spalle prima dell'atterraggio. Disattivato: un'inquadratura fissa
 Offline
 Morto
-Disattivato
 In una specializzazione da guaritore
 Sempre
 Troppo lontano

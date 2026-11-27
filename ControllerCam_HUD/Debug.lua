@@ -360,6 +360,7 @@ D.SECTIONS = {
     { "screen", Screen },
     { "bindings", Bindings },
     { "pad", function() return ns.PadButtons and ns.PadButtons.Report() or {} end },
+    { "form sets", function() return ns.FormSets and ns.FormSets.Describe() or {} end },
     { "rest", Resting },
     { "fishing", function()
         local out = {}

@@ -481,8 +481,9 @@ function CB:Refresh(event)
     self.demo = nil                                     -- a real cast ends the show of all of them
     self.casting, self.until_, self.channel = true, nil, channel and true or false
     if self.pop then TimeRest() end                     -- (the last cast's count was still fading)
-    local cname, spellID, trade = ns.CastLook.Casting("player")
+    local cname, spellID, trade, icon = ns.CastLook.Casting("player")
     self.look = (not ns.UnitFrames.fake) and cname and ns.CastLook.Look(cname, spellID, trade) or nil
+    ns.CastLook.Own(self.look, icon)                    -- which herb or ore it is, what is being made
     pcall(frame.label.SetText, frame.label, ns.CastLook.Label(name, self.look))
     self.nextFx = nil
     local color = (not ns.IsSecret(shielded) and shielded) and C.shielded or (self.look and self.look.color) or C.cast
@@ -671,11 +672,15 @@ end
 local FAILED = { UNIT_SPELLCAST_INTERRUPTED = true, UNIT_SPELLCAST_FAILED = true }
 local EVENTS = { "UNIT_SPELLCAST_START", "UNIT_SPELLCAST_STOP", "UNIT_SPELLCAST_FAILED", "UNIT_SPELLCAST_INTERRUPTED",
                  "UNIT_SPELLCAST_DELAYED", "UNIT_SPELLCAST_CHANNEL_START", "UNIT_SPELLCAST_CHANNEL_STOP",
-                 "UNIT_SPELLCAST_CHANNEL_UPDATE", "PLAYER_ENTERING_WORLD" }
+                 "UNIT_SPELLCAST_CHANNEL_UPDATE", "UNIT_SPELLCAST_SENT", "PLAYER_ENTERING_WORLD" }
 
 local events = CreateFrame("Frame")
-local OnEvent = ns.Protect(function(_, event, unit)
+local OnEvent = ns.Protect(function(_, event, unit, target)
     if unit and unit ~= "player" then return end
+    if event == "UNIT_SPELLCAST_SENT" then              -- what the cast is aimed at: the herb, the vein
+        ns.CastLook.Sent(target)
+        return
+    end
     if ns.UnitFrames.fake then return end
     if FAILED[event] then
         -- a failed instant while a real cast keeps going is not ours to show

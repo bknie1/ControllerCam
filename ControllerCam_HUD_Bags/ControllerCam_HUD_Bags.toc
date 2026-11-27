@@ -2,11 +2,11 @@
 ## Title: ControllerCam HUD: Bags
 ## Notes: One bag window with quick filters, the bank beside it. Loaded only while it is switched on in the HUD's options.
 ## Author: bknie1
-## Version: 1.6.0
+## Version: 1.6.1
 ## X-License: MIT
 ## IconTexture: Interface\AddOns\ControllerCam\Media\icon
 ## Dependencies: ControllerCam_HUD
 ## LoadOnDemand: 1
-## Group: ControllerCam_HUD
+## Group: ControllerCam
 
 Bags.lua

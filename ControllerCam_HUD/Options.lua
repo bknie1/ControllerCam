@@ -187,6 +187,7 @@ local LAYOUT = {
     } },
     { page = "Gamepad bars", groups = {
         { head = "Gamepad bars", "bars", "barScale", "padRaise", "padWheels" },
+        { head = "Forms and stances", "stanceCluster", "formFill" },
         { head = "Cooldowns", "rowsAside", "Cooldown Manager" },
     } },
     { page = "Screen fade", groups = {
@@ -346,7 +347,7 @@ end
 
 -- One row per setting, inside a scrolling area of the page
 local function Row(content, def)
-    local row = { def = def, page = PageOf(def), basic = BASIC[def.label] or false }
+    local row = { def = def, page = PageOf(def), basic = BASIC[def.label] or def.basic or false }
     if def.kind == "boolean" then
         local cb = CreateFrame("CheckButton", nil, content, "UICheckButtonTemplate")
         if cb.Text then cb.Text:SetText(L[def.label]) end

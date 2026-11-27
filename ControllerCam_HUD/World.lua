@@ -63,6 +63,7 @@ ns.RegisterSetting({
 -- actions), and nothing of the menu's is hooked: it is looked at.
 ---------------------------------------------------------------------------
 local reload
+W.RELOAD_GAP = 64      -- below the menu: the game's own prompt for closing it sits just under the menu, and keeps that room
 local function ReloadButton()
     if reload then return reload end
     local b = CreateFrame("Button", "ControllerCamHUD_ReloadButton", UIParent, "UIPanelButtonTemplate")
@@ -84,7 +85,7 @@ function W:MenuReload()
         local b = ReloadButton()
         if not b:IsShown() then
             b:ClearAllPoints()
-            b:SetPoint("TOP", menu, "BOTTOM", 0, -6)
+            b:SetPoint("TOP", menu, "BOTTOM", 0, -W.RELOAD_GAP)
             b:Show()
         end
     elseif reload and reload:IsShown() then

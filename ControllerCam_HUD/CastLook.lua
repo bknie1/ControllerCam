@@ -337,6 +337,116 @@ function K.LookOf(kind)
     return { kind = kind, color = p.color, fx = p.fx, every = 0.4, land = p }
 end
 
+---------------------------------------------------------------------------
+-- What you are gathering or making, for your own cast bar. The game names the herb or the vein you work on
+-- (the target of the cast it sends, or what the controller's interact points at); that name is matched to the
+-- herb or ore it gives, by the item's own name in your language (the English one until the game has it).
+-- { item, English name, colour }: a herb's colour is its flower's, an ore's is the bar's and its chips'.
+---------------------------------------------------------------------------
+K.HERBS = {
+    { 2447, "Peacebloom", { 1, 1, 0.95 } },             { 765, "Silverleaf", { 0.8, 0.9, 0.85 } },
+    { 2449, "Earthroot", { 0.72, 0.5, 0.3 } },          { 785, "Mageroyal", { 0.85, 0.4, 0.9 } },
+    { 2450, "Briarthorn", { 0.6, 0.45, 0.3 } },         { 3820, "Stranglekelp", { 0.25, 0.75, 0.65 } },
+    { 2453, "Bruiseweed", { 0.55, 0.45, 0.95 } },       { 3355, "Wild Steelbloom", { 0.7, 0.78, 0.88 } },
+    { 3369, "Grave Moss", { 0.55, 0.65, 0.5 } },        { 3356, "Kingsblood", { 0.95, 0.2, 0.25 } },
+    { 3357, "Liferoot", { 0.75, 0.95, 0.35 } },         { 3818, "Fadeleaf", { 0.8, 0.72, 0.95 } },
+    { 3821, "Goldthorn", { 1, 0.82, 0.25 } },           { 3358, "Khadgar's Whisker", { 0.7, 0.85, 1 } },
+    { 3819, "Wintersbite", { 0.75, 0.95, 1 } },         { 4625, "Firebloom", { 1, 0.5, 0.15 } },
+    { 8831, "Purple Lotus", { 0.7, 0.3, 0.95 } },       { 8836, "Arthas' Tears", { 0.8, 0.75, 1 } },
+    { 8838, "Sungrass", { 1, 0.92, 0.35 } },            { 8839, "Blindweed", { 0.6, 0.7, 0.4 } },
+    { 8845, "Ghost Mushroom", { 0.75, 0.9, 1 } },       { 8846, "Gromsblood", { 0.75, 0.12, 0.15 } },
+    { 13464, "Golden Sansam", { 1, 0.85, 0.3 } },       { 13463, "Dreamfoil", { 0.55, 0.95, 0.8 } },
+    { 13465, "Mountain Silversage", { 0.85, 0.9, 0.95 } }, { 13466, "Plaguebloom", { 0.7, 0.55, 0.8 } },
+    { 13467, "Icecap", { 0.9, 0.97, 1 } },              { 13468, "Black Lotus", { 0.45, 0.25, 0.6 } },
+}
+K.ORES = {
+    { 2770, "Copper Ore", { 0.9, 0.52, 0.3 } },         { 2771, "Tin Ore", { 0.76, 0.8, 0.84 } },
+    { 2775, "Silver Ore", { 0.92, 0.94, 1 } },          { 2772, "Iron Ore", { 0.62, 0.58, 0.58 } },
+    { 2776, "Gold Ore", { 1, 0.82, 0.2 } },             { 3858, "Mithril Ore", { 0.6, 0.82, 0.98 } },
+    { 7911, "Truesilver Ore", { 0.72, 0.97, 0.95 } },   { 11370, "Dark Iron Ore", { 0.75, 0.3, 0.25 } },
+    { 10620, "Thorium Ore", { 0.45, 0.85, 0.55 } },
+}
+K.SENT_FOR = 3                     -- seconds the target of a cast you sent is taken for what you work on
+
+-- The game says what your cast is aimed at as it is sent (UNIT_SPELLCAST_SENT)
+function K.Sent(target)
+    if type(target) == "string" and not ns.IsSecret(target) and target ~= "" then
+        K.sent = { name = target, at = GetTime() }
+    end
+end
+
+-- The name of what you are working on, or nil
+function K.Node()
+    local sent = K.sent
+    if sent and GetTime() - sent.at <= K.SENT_FOR then return sent.name end
+    local ok, what = pcall(UnitName, "softinteract")
+    if ok and type(what) == "string" and not ns.IsSecret(what) and what ~= "" then return what end
+    return nil
+end
+
+local function ItemName(id)
+    local ok, name
+    if C_Item and C_Item.GetItemNameByID then ok, name = pcall(C_Item.GetItemNameByID, id) end
+    if not (ok and type(name) == "string") then
+        local info = (C_Item and C_Item.GetItemInfo) or GetItemInfo
+        if info then ok, name = pcall(info, id) end
+    end
+    return ok and type(name) == "string" and not ns.IsSecret(name) and name ~= "" and name or nil
+end
+
+-- How many letters in a row two names share (a vein is not named as its ore is: Copper Vein, Copper Ore)
+local function Shared(a, b)
+    local best = 0
+    for i = 1, #a do
+        for j = 1, #b do
+            local k = 0
+            while i + k <= #a and j + k <= #b and a:byte(i + k) == b:byte(j + k) do k = k + 1 end
+            if k > best then best = k end
+        end
+    end
+    return best
+end
+
+-- The herb or ore behind a node's name: { id =, name =, color = }, or nil. A herb's node is named as the herb
+-- is (three quarters of the name at least); a vein shares its metal's name with the ore, four letters or more.
+function K.Found(kind, node)
+    local list = kind == "herbs" and K.HERBS or kind == "mining" and K.ORES or nil
+    if not list or type(node) ~= "string" then return nil end
+    node = node:lower()
+    local best, most = nil, 0
+    for _, row in ipairs(list) do
+        for _, name in ipairs({ ItemName(row[1]) or false, row[2] }) do
+            if name then
+                local n = Shared(node, name:lower())
+                local enough = kind == "herbs" and n >= 0.75 * #name or kind == "mining" and n >= 4
+                if enough and n > most then best, most = row, n end
+            end
+        end
+    end
+    return best and { id = best[1], name = best[2], color = best[3] } or nil
+end
+
+-- Your own cast's look, made its own: a herb's flowers in its colour, an ore's bar and chips in its metal's,
+-- and what you are making (the cast's icon) on the bar
+function K.Own(look, icon)
+    if not look then return look end
+    if look.kind == "herbs" or look.kind == "mining" then
+        local what = K.Found(look.kind, K.Node())
+        if what then
+            look.what = what
+            if look.kind == "herbs" then
+                look.bloom = what.color
+            else
+                look.color = what.color
+                look.land = { color = what.color, fx = look.fx }
+            end
+        end
+    elseif look.kind == "crafting" then
+        if (type(icon) == "number" or type(icon) == "string") and not ns.IsSecret(icon) then look.icon = icon end
+    end
+    return look
+end
+
 -- The name to show for a cast. The game names some casts by how they work inside ("Opening - No Text"): those
 -- show their plain part. Gathering and opening say what you are working on when the game can name it
 -- ("Opening: Sweet Nectar Barrel", "Mining: Copper Vein").
@@ -347,10 +457,8 @@ function K.Label(name, look)
     local plain = name:match("^(.-)%s+%-%s+.+$")
     if plain and plain ~= "" and (working or name:find("%- [Nn]o [Tt]ext$")) then name = plain end
     if working then
-        local ok, what = pcall(UnitName, "softinteract")
-        if ok and type(what) == "string" and not ns.IsSecret(what) and what ~= "" then
-            return ("%s: %s"):format(name, what)
-        end
+        local what = K.Node()
+        if what then return ("%s: %s"):format(name, what) end
     end
     return name
 end

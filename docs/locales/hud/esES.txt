@@ -516,8 +516,8 @@ Tu mascota tiene hambre: aliméntala.
 Aviso de hambre de la mascota
 cuando tu mascota está contenta o infeliz (hambrienta): un trozo de comida cerca de la parte superior de la pantalla, pequeño y pulsante mientras juegas, más suave y con una línea de texto mientras la pantalla descansa; una vez en el chat y un sonido cuando está infeliz. Nada para una mascota feliz
 hecho
-%s: lista para entregar
-Terminando [%s].
+%s completada
+Terminando %s.
 inicia una misión
 una de tus misiones
 lista para entregar
@@ -582,6 +582,15 @@ los botones de actitudes y de órdenes de mascota se colocan donde estaban los i
 Ruedas de actitud y mascota por delante y en pantalla
 las ruedas que se abren con los botones superiores y los gatillos se dibujan por delante de los botones de la barra y se mantienen dentro de la pantalla, también en combate, para ver todas las opciones; siguen siendo las del juego
 listar dónde están las partes de las barras del mando y qué descansa (para diagnosticar)
+Desactivado
+Gatillo izquierdo
+Gatillo derecho
+Ambos gatillos
+%s ya tiene %d de sus habilidades en la barra de actitudes del propio juego, que sustituye a una de tus barras de gatillo mientras estás en esa forma. Ordénalas como quieras.
+Las acciones propias de una forma sustituyen a
+qué grupo de tu barra del mando sustituyen las acciones propias de una forma o actitud mientras estás en ella (oso, felino, actitud defensiva...); es el ajuste de la barra de actitudes del propio juego, así que el juego hace el cambio, también en combate
+Llenar la barra propia de una forma con sus habilidades
+la primera vez que adoptas una forma o actitud, fuera de combate, los botones vacíos de su propia barra se llenan con las habilidades de esa forma de tu libro de hechizos, para que la forma esté lista para luchar; lo que ya tiene se queda, y lo que quites después se queda quitado
 Auto
 Genérico
 los del juego
@@ -851,6 +860,7 @@ Fuera de combate
 Mando
 Qué vibra
 Cámara
+Formas y actitudes
 Reutilizaciones
 Qué se desvanece
 Qué marcos
@@ -1028,6 +1038,7 @@ Tarde
 Atardecer
 Noche
 Con %s
+Beneficios del campamento en %d:%02d
 La escena de la hoguera está desactivada.
 La escena de la hoguera espera a que salgas de combate.
 reproducir ahora la escena de la hoguera
@@ -1265,7 +1276,6 @@ Vuelos cinematográficos: la cámara gira a tu alrededor
 en la película, la cámara gira despacio a tu alrededor y de tu montura, una vuelta completa en un minuto y medio más o menos, y vuelve a quedar detrás de ti antes de aterrizar. Desactivado: un plano fijo
 Desconectado
 Muerto
-Desactivado
 Con especialización de sanación
 Siempre
 Demasiado lejos

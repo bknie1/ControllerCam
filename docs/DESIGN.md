@@ -224,8 +224,9 @@ loaded while any one of its switches is on. Its `## Dependencies` are loaded fir
   them beside `ControllerCam`, `ControllerCam_HUD` and `InputSwap`, so one download still holds everything.
   `curseforge.yml` uploads that same zip and needs no change.
 - **Every toc** shares the version, `## Interface`, the author and the license, and has a `## Notes` line. In the
-  game's AddOns list the modules sit under the HUD (`## Group: ControllerCam_HUD`), and the HUD under ControllerCam
-  (`## Group: ControllerCam`).
+  game's AddOns list the HUD and every one of its modules sit under ControllerCam (`## Group: ControllerCam`): the
+  list groups one level only, so a module grouped under the HUD showed as a group of its own. Collapsed, the list
+  reads **ControllerCam for Gamepad** and **ControllerCam: InputSwap for Gamepad** (InputSwap has no group).
 
 ### Tests
 

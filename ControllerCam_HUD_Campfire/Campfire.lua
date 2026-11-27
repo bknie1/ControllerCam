@@ -32,6 +32,7 @@ CF.OUT = 3                       -- the camera eases this much further out
 CF.TITLE = { 2.5, 8 }            -- the place and the time of day
 CF.TELL_AT, CF.EACH, CF.MAX_TOLD = 9, 6, 6    -- the big moments: from, each for, at most
 CF.BUFFS_AT = 48                 -- the camp's gifts
+CF.MINUTE = 90                   -- a fire's welcome this short is the wait for its benefits: counted down
 CF.LONG = 60                     -- a buff of yours or your group's counts from this long
 CF.ROWS, CF.PER_ROW = 4, 7
 CF.KEEP = 20                     -- big moments kept until told
@@ -357,6 +358,18 @@ function CF.AtRest()
     return rest
 end
 
+-- When the camp's benefits come (a game time): the end of the fire's welcome, its minute; nil with no wait on
+function CF.ReadyAt()
+    local now = GetTime()
+    for _, a in ipairs(Buffs()) do
+        local d, ex = Plain(a.duration), Plain(a.expirationTime)
+        if type(d) == "number" and d > 0 and d <= CF.MINUTE and type(ex) == "number" and ex > now and AtTheFire(a) then
+            return ex
+        end
+    end
+    return nil
+end
+
 -- Your group close by, for the scene ({ { name, class } }): in sight and near, alive, not you
 function CF.Company()
     local out = {}
@@ -596,6 +609,9 @@ local function Build()
     cine.with = ns.FontString(cine, 13, "CENTER")
     cine.with:SetPoint("TOP", cine.sub, "BOTTOM", 0, -3)
     cine.with:SetTextColor(0.85, 0.82, 0.74, 1)
+    cine.count = ns.FontString(cine, 17, "CENTER")      -- the wait for the camp's benefits, in the upper bar
+    cine.count:SetPoint("CENTER", cine.top, "CENTER", 0, 0)
+    cine.count:SetTextColor(CF.WARM[1], CF.WARM[2], CF.WARM[3], 1)
     cine.line = ns.FontString(cine, 17, "CENTER")
     cine.line:SetPoint("CENTER", cine.bottom, "CENTER", 14, 0)
     cine.line:SetTextColor(1, 0.93, 0.8, 1)
@@ -823,6 +839,7 @@ function CF.Start(asked)
     LayTitle()
     cine.line:SetText("")
     cine.lineIcon:Hide()
+    cine.count:SetText("")
     local N = ns.Narrative
     s.voice = N and N.On() and N.CampWords() or nil                 -- (said as the camp's gifts come up)
     Fit(cine.voice, s.voice or "")
@@ -888,6 +905,15 @@ function CF.Step()
     cine.title:SetAlpha(title)
     cine.sub:SetAlpha(title)
     cine.with:SetAlpha(title)
+    -- the minute until the camp's benefits are yours, counting all the while
+    if not s.readAt or t - s.readAt >= 1 then
+        s.readAt, s.ready = t, CF.ReadyAt()
+    end
+    local left = s.ready and math.ceil(s.ready - GetTime()) or 0
+    if left > 0 then
+        cine.count:SetText(L["Camp benefits in %d:%02d"]:format(math.floor(left / 60), left % 60))
+    end
+    cine.count:SetAlpha(left > 0 and Window(t, 1, CF.LENGTH - 1.8, 0.8) or 0)
     -- the big moments, one at a time
     local i = t >= CF.TELL_AT and math.floor((t - CF.TELL_AT) / CF.EACH) + 1 or 0
     if i ~= s.i then

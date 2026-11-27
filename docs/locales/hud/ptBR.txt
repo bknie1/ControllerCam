@@ -516,8 +516,8 @@ Seu mascote está com fome: alimente-o.
 Alerta de fome do mascote
 quando seu mascote está contente ou infeliz (com fome): um pedaço de comida perto do topo da tela, pequeno e pulsando enquanto você joga, mais suave com uma linha de texto enquanto a tela descansa; uma vez no chat e um som quando está infeliz. Nada para um mascote feliz
 feito
-%s: pronta para entregar
-Terminando [%s].
+%s concluída
+Terminando %s.
 inicia uma missão
 uma missão sua
 pronta para entregar
@@ -582,6 +582,15 @@ os botões de posturas e de comandos do mascote ficam onde estavam os ícones ve
 Rodas de postura e ajudante na frente e dentro da tela
 as rodas abertas com os botões superiores e gatilhos são desenhadas na frente dos botões da barra e mantidas dentro da tela, também em combate, para que todas as opções apareçam; elas continuam sendo as do jogo
 listar onde ficam as partes das barras do controle e o que descansa (para diagnóstico)
+Desligado
+Gatilho esquerdo
+Gatilho direito
+Ambos os gatilhos
+%s agora tem %d das habilidades dela na barra de posturas do próprio jogo, que toma o lugar de uma das suas barras de gatilho enquanto você está nessa forma. Reorganize como quiser.
+As ações próprias de uma forma tomam o lugar de
+qual grupo da sua barra do controle as ações próprias de uma forma ou postura substituem enquanto você está nela (urso, felino, postura defensiva...); é a configuração da barra de posturas do próprio jogo, então o jogo faz a troca, em combate também
+Preencher a barra própria de uma forma com as habilidades dela
+na primeira vez que você entra numa forma ou postura, fora de combate, os botões vazios da barra própria dela são preenchidos com as habilidades dessa forma do seu grimório, para que a forma esteja pronta para lutar; o que já está nela fica, e o que você tirar depois continua fora
 Auto
 Genérico
 os do jogo
@@ -851,6 +860,7 @@ Fora de combate
 Controle
 O que vibra
 Câmera
+Formas e posturas
 Tempos de recarga
 O que esmaece
 Quais quadros
@@ -1028,6 +1038,7 @@ Tarde
 Entardecer
 Noite
 Com %s
+Benefícios do acampamento em %d:%02d
 A cena da fogueira está desligada.
 A cena da fogueira espera você sair de combate.
 reproduzir a cena da fogueira agora
@@ -1265,7 +1276,6 @@ Voos cinematográficos: a câmera gira ao seu redor
 no filme, a câmera gira devagar ao redor de você e da sua montaria, uma volta inteira em cerca de um minuto e meio, e volta para trás de você antes do pouso. Desligado: uma cena parada
 Offline
 Morto
-Desligado
 Em especialização de cura
 Sempre
 Longe demais

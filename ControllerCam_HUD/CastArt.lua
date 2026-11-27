@@ -3,7 +3,8 @@
 --   mining      a pick is hauled back and brought down on the bar once a second, in time with your swings at
 --               the vein (chips fly, a crack stays); the last blow crumbles the bar and its pieces fall
 --   crafting    little hammers peck at the end of the bar
---   herbs       leaves sprout along the bar as it fills; when it lands the bar is plucked, leaves and all
+--   herbs       leaves sprout along the bar as it fills (with the herb's own flowers, when the game names it);
+--               when it lands they are plucked one after another: a tug, then out, with a crumb of earth
 --   skinning    the hide lifts off what is filled, rolled up at the cut; when it lands the bar peels away
 --   nature      green lightning runs along it, stroke after stroke
 --   lightning   the same in the pale blue of the sky
@@ -112,6 +113,13 @@ STYLES.tool = {
         st.tools, st.phase, st.strikes = {}, {}, 0
         local tex = art.kind == "crafting" and "hammer" or "pick"
         for i = 1, art.light and 1 or 2 do st.tools[i] = art:Piece(tex) end
+        -- what you are making stands at the end of the bar, taking shape as the cast fills (your own bar)
+        local icon = not art.light and art.kind == "crafting" and art.look.icon
+        if icon then
+            st.item = art:Piece("soft")
+            st.item:SetTexture(icon)
+            st.item:SetTexCoord(0.08, 0.92, 0.08, 0.92)
+        end
     end,
     update = function(art, edge, p, now)
         local s, st = art.scale, art.state
@@ -134,6 +142,19 @@ STYLES.tool = {
                 st.phase[i] = phase
             end
         end
+        if st.item then                                     -- grey and faint at first, itself at the end
+            local tone = 0.45 + 0.55 * p * p
+            Put(art, st.item, art.w + 15 * s, 0, 20 * s)
+            st.item:SetVertexColor(tone, tone, tone, 1)
+            st.item:SetAlpha(0.3 + 0.7 * p)
+        end
+    end,
+    finish = function(art, k, now, landed)
+        local st = art.state
+        if not (st.item and landed) then return end
+        st.item:SetVertexColor(1, 1, 1, 1)                  -- made: it jumps out at you once
+        st.item:SetAlpha(1)
+        Put(art, st.item, art.w + 15 * art.scale, 0, 20 * art.scale * (1 + 0.5 * sin(Clamp01(k / 0.6) * pi)))
     end,
 }
 
@@ -227,62 +248,91 @@ STYLES.mine = {
     end,
 }
 
--- Leaves sprouting along the top of the bar. When the herb is yours the bar is picked like one: a tug, then it
--- comes up and away, leaves and all.
+-- Leaves sprouting along the top of the bar, each with the herb's own flower when the game names the herb
+-- (CastLook.Own: look.bloom). When the herb is yours they are plucked, one after another from the left: each
+-- is tugged (it stretches, held by its root), comes free with a jump and a spin, and drops a crumb of earth.
 STYLES.leaves = {
-    fade = 0.7, ownFade = true,
+    fade = 0.8, ownFade = true,
     start = function(art)
-        local st, c = art.state, art.color
-        st.leaves = {}
+        local st, b = art.state, not art.light and art.look.bloom
+        st.leaves, st.crumbs = {}, {}
         local n = max(2, floor(art.w / (30 * art.scale)))
-        st.stem = art:Piece("bar", nil, c[1], c[2], c[3])
         for j = 1, n do st.leaves[j] = art:Piece("leaf") end
+        if b then
+            st.flowers = {}
+            for j = 1, n do st.flowers[j] = art:Piece("flower", nil, b[1], b[2], b[3]) end
+        end
+        if not art.light then
+            for j = 1, n do st.crumbs[j] = art:Piece("soft", nil, 0.42, 0.3, 0.18) end
+        end
     end,
     update = function(art, edge, p, now)
         local s, st = art.scale, art.state
         local n = #st.leaves
-        st.stem:SetAlpha(0)
         for j, t in ipairs(st.leaves) do
             local x = (j - 0.5) * art.w / n
             local grow = Clamp01((edge - x) / (12 * s))
+            local f = st.flowers and st.flowers[j]
             if grow <= 0 then
                 t:SetAlpha(0)
+                if f then f:SetAlpha(0) end
             else
                 local size = (14 + (j * 5) % 4) * s * grow
+                local sway = sin(now * 2.2 + j) * 0.22
                 Put(art, t, x, art.h / 2 + size * 0.42, size)
-                Turn(t, sin(now * 2.2 + j) * 0.22 + ((j % 2 == 0) and 0.45 or -0.45))
+                Turn(t, sway + ((j % 2 == 0) and 0.45 or -0.45))
                 t:SetAlpha(1)
+                if f then                                   -- the flower opens once the leaf has grown
+                    local open = Clamp01((edge - x - 12 * s) / (14 * s))
+                    Put(art, f, x + sway * 6 * s, art.h / 2 + size * 0.85, max(0.01, 10 * s * open))
+                    f:SetAlpha(open > 0 and 1 or 0)
+                end
             end
         end
     end,
     finish = function(art, k, now, landed)
         local s, st = art.scale, art.state
         if not landed or art.light then art.layer:SetAlpha(1 - k); return end
-        if not st.plucked then
-            st.plucked = true
-            A.HideBar(art)
-        end
-        local lift, tilt
-        if k < 0.2 then
-            lift, tilt = -3 * s * sin(k / 0.2 * pi), 0               -- the tug
-        else
-            local u = (k - 0.2) / 0.8
-            lift, tilt = u * u * 46 * s, 0.32 * u                    -- and out it comes
-        end
-        st.lift = lift
-        local alpha = 1 - Clamp01((k - 0.5) / 0.5)
-        local mid = art.w / 2
-        Put(art, st.stem, mid, lift, art.w, art.h)
-        Turn(st.stem, tilt)
-        st.stem:SetAlpha(alpha)
         local n = #st.leaves
+        local picked = 0
         for j, t in ipairs(st.leaves) do
+            local u = Clamp01((k - (j - 1) / n * 0.5) / 0.5)        -- one after another, from the left
             local size = (14 + (j * 5) % 4) * s
-            local dx, dy = (j - 0.5) * art.w / n - mid, art.h / 2 + size * 0.42
-            Put(art, t, mid + dx * cos(tilt) - dy * sin(tilt), lift + dx * sin(tilt) + dy * cos(tilt), size)
-            Turn(t, tilt + ((j % 2 == 0) and 0.45 or -0.45))
+            local x0 = (j - 0.5) * art.w / n
+            local x, y, w, h = x0, art.h / 2 + size * 0.42, size, size
+            local lean, alpha, v = (j % 2 == 0) and 0.45 or -0.45, 1, 0
+            if u < 0.3 then                                         -- the tug: it stretches, held by its root
+                local g = sin(u / 0.3 * pi / 2)
+                w, h, y = size * (1 - 0.15 * g), size * (1 + 0.35 * g), y + size * 0.17 * g
+                lean = lean * (1 - g)
+            else                                                    -- and it comes free: a jump and a spin
+                v = (u - 0.3) / 0.7
+                picked = picked + 1
+                y = y + (30 + 8 * Scatter(j, 3)) * s * (1 - (1 - v) * (1 - v))
+                x = x + (Scatter(j, 5) - 0.5) * 16 * s * v
+                lean = lean + ((j % 2 == 0) and 1.4 or -1.4) * v
+                alpha = 1 - Clamp01((v - 0.55) / 0.45)
+            end
+            Put(art, t, x, y, w, h)
+            Turn(t, lean)
             t:SetAlpha(alpha)
+            local f = st.flowers and st.flowers[j]
+            if f then
+                Put(art, f, x, y + h * 0.43, 10 * s)
+                Turn(f, lean)
+                f:SetAlpha(alpha)
+            end
+            local crumb = st.crumbs[j]
+            if crumb then                                           -- earth from where it stood
+                if v > 0 and v < 1 then
+                    Put(art, crumb, x0 + (Scatter(j, 7) - 0.5) * 14 * s * v, art.h / 2 + 10 * s * v - 34 * s * v * v, 4 * s)
+                    crumb:SetAlpha(1 - v)
+                else
+                    crumb:SetAlpha(0)
+                end
+            end
         end
+        st.plucked = picked > 0 and picked or nil
     end,
 }
 

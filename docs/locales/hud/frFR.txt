@@ -516,8 +516,8 @@ Votre familier a faim : nourrissez-le.
 Alerte de faim du familier
 quand votre familier est content ou malheureux (affamé) : un morceau de nourriture en haut de l'écran, petit et pulsant pendant que vous jouez, plus doux avec une ligne de texte quand l'écran se repose ; une fois dans la discussion et un son quand il est malheureux. Rien pour un familier heureux
 fait
-%s : prête à être rendue
-Je termine [%s].
+%s terminée
+Je termine %s.
 lance une quête
 une de vos quêtes
 prête à être rendue
@@ -582,6 +582,15 @@ les boutons de postures et d'ordres du familier se placent là où étaient les 
 Roues de posture et de familier au premier plan et à l'écran
 les roues ouvertes avec les boutons de tranche et les gâchettes s'affichent devant les boutons de la barre et restent dans l'écran, même en combat, pour que chaque choix soit visible ; elles restent celles du jeu
 lister où se trouvent les parties des barres de manette et ce qui se repose (pour le dépannage)
+Désactivé
+Gâchette gauche
+Gâchette droite
+Les deux gâchettes
+%s a maintenant %d de ses techniques sur la barre de postures du jeu, qui remplace l'une de vos barres de gâchette tant que vous êtes sous cette forme. Réorganisez-les à votre guise.
+Les actions propres à une forme remplacent
+quel groupe de votre barre de manette les actions propres à une forme ou posture remplacent tant que vous y êtes (ours, félin, posture défensive...) ; c'est le réglage de la barre de postures du jeu, donc le jeu fait le changement lui-même, en combat aussi
+Remplir la barre propre à une forme avec ses techniques
+la première fois que vous prenez une forme ou une posture, hors combat, les boutons vides de sa propre barre sont remplis avec les techniques de cette forme de votre grimoire, pour que la forme soit prête au combat ; ce qui s'y trouve déjà reste, et ce que vous retirez ensuite reste retiré
 Auto
 Générique
 ceux du jeu
@@ -851,6 +860,7 @@ Hors combat
 Manette
 Ce qui vibre
 Caméra
+Formes et postures
 Temps de recharge
 Ce qui s'estompe
 Quels cadres
@@ -1028,6 +1038,7 @@ Après-midi
 Soir
 Nuit
 Avec %s
+Bienfaits du camp dans %d:%02d
 La scène du feu de camp est désactivée.
 La scène du feu de camp attend la fin du combat.
 jouer la scène du feu de camp maintenant
@@ -1265,7 +1276,6 @@ Vols cinématiques : la caméra tourne autour de vous
 pendant le film, la caméra tourne lentement autour de vous et de votre monture, un tour complet en une minute et demie environ, et revient derrière vous avant l'atterrissage. Désactivé : un plan fixe
 Hors ligne
 Mort
-Désactivé
 En spécialisation soins
 Toujours
 Trop loin
