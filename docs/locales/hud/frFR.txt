@@ -82,6 +82,8 @@ Zone d’exécution sur les barres ennemies
 un ennemi à un quart de sa vie ou moins : sa barre de vie palpite en rouge, avec une lueur autour qui bat comme un pouls, sur les cadres de cible et de focalisation et sur les barres de nom
 Boucliers sur les barres de vie
 ce qu'un bouclier sur une unité absorbera encore, en bande bleu argenté depuis le bout de sa barre de vie: sur vos cadres, celui de votre cible, ceux de votre groupe et les barres de nom
+Noms des soigneurs en approche
+qui d'autre soigne une unité, par son nom sur sa barre de vie tant que le soin est en route : sur vos cadres, celui de votre cible, votre groupe et votre raid ; là où le jeu garde l'information pour lui, aucun nom n'est affiché
 Bonheur du familier
 à côté de la barre du familier, une fine bande de la couleur de son humeur: vert heureux, jaune satisfait, rouge mécontent, avec de la nourriture à côté quand il faut le nourrir. Rien pour un familier sans humeur
 Les barres verticales suivent la caméra

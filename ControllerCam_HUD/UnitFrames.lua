@@ -535,6 +535,12 @@ ns.RegisterSetting({
     tip = "how much a shield on a unit will soak, as a silver-blue band from the far end of its health bar: on your frames, your target's, your party's and nameplates",
 })
 
+ns.RegisterSetting({
+    key = "healerNames", kind = "boolean", default = true, command = "healernames", section = "Frames",
+    label = "Names of incoming healers",
+    tip = "who else is healing a unit, by name on its health bar while the heal is on its way: on your frames, your target's, your party and raid; where the game keeps that to itself, no name is shown",
+})
+
 -- How much shielding a unit has (the game's own total; may be a value it keeps to itself), or nil
 function UF.Absorb(unit)
     if UF.fake then
@@ -555,7 +561,8 @@ local function UpdateHealth(f, instant)
     f.lastFrac = frac
     if UnitGetIncomingHeals then
         if ns.Bloom then f.health:SetIncomingColor(ns.Bloom.IncomingColor(unit)) end
-        f.health:SetIncoming(ns.IncomingHeals(unit))               -- yours, then everyone else's
+        -- yours, then everyone else's, with their names (not on the pet's slivers, nor in the demo)
+        ns.ShowIncoming(f.health, unit, f.key ~= "pet" and f.key ~= "vpet" and not UF.fake)
     end
     f.health:SetAbsorb(UF.Absorb(unit))                            -- a shield on it, and how much it soaks
     if f.key == "target" or f.key == "focus" then

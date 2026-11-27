@@ -82,6 +82,8 @@ Faixa de execução nas barras inimigas
 um inimigo com um quarto da vida ou menos: sua barra de vida pulsa em vermelho, com um brilho ao redor batendo como um pulso, nos quadros de alvo e foco e nas placas de nome
 Escudos nas barras de vida
 quanto um escudo numa unidade ainda vai absorver, como uma faixa azul-prateada a partir do fim da barra de vida: nos seus quadros, no do alvo, nos do grupo e nas placas de nome
+Nomes dos curandeiros a caminho
+quem mais está curando uma unidade, com o nome na barra de vida enquanto a cura está a caminho: nos seus quadros, no do alvo, no grupo e na raide; onde o jogo guarda isso para si, nenhum nome aparece
 Felicidade do ajudante
 ao lado da barra do ajudante, uma faixa fina na cor do humor dele: verde feliz, amarelo contente, vermelho infeliz, com comida ao lado quando precisa ser alimentado. Nada para um ajudante sem humor
 As barras verticais seguem a câmera

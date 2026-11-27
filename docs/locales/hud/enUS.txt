@@ -82,6 +82,8 @@ Execute range on enemy bars
 an enemy at a quarter of its health or less: its health bar throbs red, with a glow round it beating like a pulse, on the target and focus frames and on nameplates
 Shields on health bars
 how much a shield on a unit will soak, as a silver-blue band from the far end of its health bar: on your frames, your target's, your party's and nameplates
+Names of incoming healers
+who else is healing a unit, by name on its health bar while the heal is on its way: on your frames, your target's, your party and raid; where the game keeps that to itself, no name is shown
 Pet happiness
 beside the pet bar, a thin band in the colour of your pet's mood: green happy, yellow content, red unhappy, with food beside it when it needs feeding. Nothing for a pet without a mood
 Vertical bars follow the camera

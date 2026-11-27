@@ -82,6 +82,8 @@ Hinrichtungsbereich auf feindlichen Leisten
 ein Feind bei einem Viertel seiner Gesundheit oder weniger: seine Gesundheitsleiste pocht rot, mit einem Leuchten darum, das wie ein Puls schlägt, auf Ziel- und Fokusrahmen und auf Namensplaketten
 Schilde auf Gesundheitsleisten
 wie viel ein Schild auf einer Einheit noch abfängt, als silberblaues Band vom fernen Ende ihrer Gesundheitsleiste: auf deinen Rahmen, dem deines Ziels, deiner Gruppe und auf Namensplaketten
+Namen eingehender Heiler
+wer eine Einheit sonst noch heilt, mit Namen auf ihrer Gesundheitsleiste, solange die Heilung unterwegs ist: auf deinen Rahmen, dem deines Ziels, in Gruppe und Schlachtzug; wo das Spiel das für sich behält, erscheint kein Name
 Zufriedenheit des Begleiters
 neben der Begleiterleiste ein schmales Band in der Farbe der Laune deines Begleiters: grün glücklich, gelb zufrieden, rot unglücklich, mit Futter daneben, wenn er gefüttert werden muss. Nichts bei einem Begleiter ohne Laune
 Vertikale Balken folgen der Kamera

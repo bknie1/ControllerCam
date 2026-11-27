@@ -202,7 +202,7 @@ local function Update(o, instant)
     o.health:SetAbsorb(ns.UnitFrames.Absorb(unit))
     if UnitGetIncomingHeals then                             -- heals on their way: yours, then everyone else's
         if ns.Bloom then o.health:SetIncomingColor(ns.Bloom.IncomingColor(unit)) end
-        o.health:SetIncoming(ns.IncomingHeals(unit))
+        ns.ShowIncoming(o.health, unit, true)
     end
     local pcur, pmax, token = U.Power(unit)
     o.power:SetValues(pcur, pmax, instant)
@@ -557,7 +557,7 @@ local function UpdateHeal(o, instant)
     o.health:SetColor(HealColor(unit, frac, dead or offline))
     if UnitGetIncomingHeals then                             -- heals on their way: none wasted on them
         if ns.Bloom then o.health:SetIncomingColor(ns.Bloom.IncomingColor(unit)) end
-        o.health:SetIncoming(ns.IncomingHeals(unit))
+        ns.ShowIncoming(o.health, unit, true)
     end
     pcall(o.name.SetText, o.name, G.ShownName(unit, (UnitName(unit))) or "")
     if offline ~= o.offline then

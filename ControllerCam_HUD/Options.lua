@@ -130,7 +130,7 @@ for _, label in ipairs({
     "Quest progress to your party",
     "Fades: gamepad bars", "Fades: minimap", "Fades: quest list", "Fades: damage meter", "Fades: experience bar",
     "Fades: buffs", "Fades: cooldown rows", "Aiming dot", "Narrative: characters in the windows",
-    "Character commentary", "Reload button by the game menu", "How names show in chat",
+    "Character commentary", "Reload button by the game menu", "How names show in chat", "Names of incoming healers",
 }) do BASIC[label] = true end
 ns.BASIC_OPTIONS = BASIC
 
@@ -147,7 +147,8 @@ local LAYOUT = {
         { head = "Your bars", "Player frame", "Vertical bars", "verticalIdle", "followZoom", "idle", "Pet bar", "petMood", "petAlert",
           "Personal Resource Display", "breathBar", "sleepy" },
         { head = "In a fight", "combatAlpha", "alertHealth", "alertPower", "playerShake" },
-        { head = "Health bars", "classColors", "combatColors", "shieldBars", "wards", "healColors", "hotVines" },
+        { head = "Health bars", "classColors", "combatColors", "shieldBars", "wards", "healColors", "healerNames",
+          "hotVines" },
         { head = "Cast bar", "castbar", "castScale", "castUpright", "castArt", "castWindup" },
         { head = "Size and text", "scale", "textScale", "textShade", "compactAll" },
     } },

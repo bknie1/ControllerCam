@@ -352,6 +352,118 @@ function ns.IncomingHeals(unit)
     return mine, math.max(0, all - mine)
 end
 
+---------------------------------------------------------------------------
+-- Who is healing: the heals on their way that aren't yours, by name. The game is asked about each healer in turn
+-- (how much of theirs is on its way to this unit) and only one it answers with a number we can read is named;
+-- where it keeps that to itself there is no name, and nothing is guessed from who happens to be casting.
+-- Asked: your group, then your target, focus and pointer for a healer from outside it.
+---------------------------------------------------------------------------
+ns.OTHER_HEALERS = { "target", "focus", "mouseover" }
+
+-- The first name ("Taric" for "Taric Lumenshield"): the room is a bar's. A secret name is passed on unread.
+local function FirstName(name)
+    if ns.IsSecret(name) then return name end
+    if type(name) ~= "string" then return nil end
+    return name:match("^[^%s%-]+")
+end
+
+-- The names of those healing `unit` (not you), in the group's order, or nil. heal and others are what
+-- ns.IncomingHeals said.
+function ns.IncomingHealers(unit, heal, others)
+    if not (UnitGetIncomingHeals and ns.db and ns.db.healerNames) then return nil end
+    if not (Some(heal) or Some(others)) then return nil end
+    -- others is a plain number only when the game lets the totals be read: then none of theirs means nobody to
+    -- ask about, and the asking stops once the named account for all of it
+    local total
+    if not ns.IsSecret(others) and type(others) == "number" then
+        if others <= 0 then return nil end
+        total = others
+    end
+    local names, named, seen = {}, 0, {}
+    local me = ns.GUID("player")
+    if me then seen[me] = true end
+    local function Ask(healer, outsider)
+        local okE, there = pcall(UnitExists, healer)
+        if not (okE and ns.Yes(there)) then return end
+        local okI, mine = pcall(UnitIsUnit, healer, "player")
+        if okI and ns.Yes(mine) then return end
+        local guid = ns.GUID(healer)
+        if guid then
+            if seen[guid] then return end
+            seen[guid] = true
+        elseif outsider then
+            return                              -- who it is can't be told: it may be one already named
+        end
+        local ok, amount = pcall(UnitGetIncomingHeals, unit, healer)
+        if not ok or ns.IsSecret(amount) or type(amount) ~= "number" or amount <= 0 then return end
+        local okN, name = pcall(UnitName, healer)
+        if not okN then return end
+        local short = FirstName(name)
+        if ns.IsSecret(short) or short then
+            names[#names + 1] = short
+            named = named + amount
+        end
+    end
+    local raid = IsInRaid and ns.Yes(IsInRaid())
+    local prefix, size = raid and "raid" or "party", raid and 40 or 4
+    for i = 1, size do
+        if total and named >= total then break end
+        Ask(prefix .. i)
+    end
+    for _, healer in ipairs(ns.OTHER_HEALERS) do
+        if total and named >= total then break end
+        Ask(healer, true)
+    end
+    return #names > 0 and names or nil
+end
+
+-- The healers' names, in the paler heal colour: along the bar at its right end, where their heal grows; above an
+-- upright bar, one under the other. A couple at most (one on a narrow bar), then how many more. nil hides them.
+ns.HEALERS_NARROW = 90          -- raid tiles are under this; a healer's party row (95) is not
+function BarMethods:SetHealers(names)
+    local fs = self.healerText
+    if not names then
+        if fs then fs:Hide() end
+        return
+    end
+    if not fs then
+        local layer = ns.FactionLayer(self)     -- over the bar: what is drawn on it is clipped to its edges
+        fs = ns.FontString(layer, self.vertical and 7 or 8, "RIGHT")
+        if self.vertical then
+            fs:SetPoint("BOTTOMRIGHT", self, "TOPRIGHT", 0, 4)
+        else
+            fs:SetPoint("RIGHT", self, "RIGHT", -3, 0)
+            fs:SetPoint("LEFT", self, "LEFT", 3, 0)
+            if fs.SetWordWrap then fs:SetWordWrap(false) end
+        end
+        local c = ns.OTHERS_HEAL
+        fs:SetTextColor(c[1], c[2], c[3], 1)
+        self.healerText = fs
+    end
+    local most = 3
+    if not self.vertical then
+        local ok, w = pcall(self.GetWidth, self)
+        most = (ok and type(w) == "number" and not ns.IsSecret(w) and w < ns.HEALERS_NARROW) and 1 or 2
+    end
+    local shown = math.min(#names, most)
+    local parts, values = {}, {}
+    for i = 1, shown do parts[i], values[i] = "%s", names[i] end
+    local format = table.concat(parts, self.vertical and "\n" or ", ")
+    if #names > shown then
+        format = format .. (self.vertical and "\n+%d" or " +%d")
+        values[shown + 1] = #names - shown
+    end
+    -- (the game puts the names in itself: one it keeps secret can be shown, never read or joined)
+    if pcall(fs.SetFormattedText, fs, format, unpack(values, 1, #values)) then fs:Show() else fs:Hide() end
+end
+
+-- A unit's heals on its bar, and (named true) who the others' are from
+function ns.ShowIncoming(bar, unit, named)
+    local heal, others = ns.IncomingHeals(unit)
+    bar:SetIncoming(heal, others)
+    bar:SetHealers(named and ns.IncomingHealers(unit, heal, others) or nil)
+end
+
 -- A shield on the unit: how much it will soak, as a silver-blue band laid over the bar from its far end (the top
 -- of an upright bar), with a bright edge where it begins. Drawn from the end rather than after the health, so it
 -- shows on a full bar too and works with amounts the game keeps to itself (the bar is given them unread).

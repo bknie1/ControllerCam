@@ -20761,5 +20761,156 @@ class Commentary(unittest.TestCase):
         self.assertEqual(e.errors(), [])
 
 
+class HealerNames(unittest.TestCase):
+    """Who is healing: the others' names on a bar while their heals are on their way, only as the game tells it."""
+
+    # the game's answer per healer: a unit's "healers" = { [healer unit] = amount }, its "incoming" the total
+    PER_HEALER = """function(mock)
+        function UnitGetIncomingHeals(unit, healer)
+            local u = mock.units[unit]
+            if not u then return nil end
+            if not healer then return u.incoming end
+            return (u.healers and u.healers[healer]) or 0
+        end
+    end"""
+
+    def env(self, **kw):
+        e = Env(**kw)
+        e.lua.eval(self.PER_HEALER)(e.mock)
+        return e
+
+    def unit(self, e, token, name, **kw):
+        data = e.lua.table(name=name, health=500, healthMax=1000, isPlayer=True, **{"class": "PRIEST"})
+        for k, v in kw.items():
+            data[k] = v
+        e.mock.setUnit(token, data)
+        return data
+
+    def heal(self, e, data, token, total, **healers):
+        data.incoming, data.healers = total, e.lua.table(**healers)
+        e.mock.fire("UNIT_HEAL_PREDICTION", token)
+
+    def overlay(self, e, i=1):
+        return e.ns.Group.overlays[e.g.PartyFrame["MemberFrame%d" % i]]
+
+    def party(self, e):
+        return [self.unit(e, "party%d" % i, name)
+                for i, name in enumerate(("Mira Dawnfield", "Tovin-Ashe", "Anselm", "Brannoc"), 1)]
+
+    def said(self, bar):
+        fs = bar.healerText
+        return fs.text if fs and fs.shown else None
+
+    def test_another_healer_is_named_yours_is_not_and_it_clears_as_the_heal_lands(self):
+        e = self.env()
+        mira = self.party(e)[0]
+        bar = self.overlay(e).health
+        self.heal(e, mira, "party1", 300, player=100, party2=200)
+        self.assertEqual(self.said(bar), "Tovin")                           # first name, and not yours
+        self.heal(e, mira, "party1", 100, player=100)                       # only yours left: nobody to name
+        self.assertIsNone(self.said(bar))
+        self.heal(e, mira, "party1", 200, party3=200)
+        self.assertEqual(self.said(bar), "Anselm")
+        self.heal(e, mira, "party1", 0)                                     # landed or cancelled
+        self.assertIsNone(self.said(bar))
+        self.assertEqual(e.errors(), [])
+
+    def test_several_healers_two_names_then_how_many_more(self):
+        e = self.env()
+        me = e.mock.units.player
+        self.party(e)
+        bar = e.frames.player.health
+        self.heal(e, me, "player", 600, party1=100, party2=200, party4=300)
+        self.assertEqual(self.said(bar), "Mira, Tovin +1")                  # in the group's order: they hold still
+        self.heal(e, me, "player", 500, party2=200, party4=300)
+        self.assertEqual(self.said(bar), "Tovin, Brannoc")
+        e.cmd("healernames off")
+        self.assertIsNone(self.said(bar))
+        self.assertTrue(bar.othersBar.shown)                                # the heal itself stays
+        e.cmd("healernames on")
+        self.assertEqual(self.said(bar), "Tovin, Brannoc")
+        self.assertEqual(e.errors(), [])
+
+    def test_the_vertical_bars_stack_them_and_pet_bars_have_none(self):
+        e = self.env(db="{ v = 4, units = { vertical = true, pet = true } }")
+        me = e.mock.units.player
+        self.party(e)
+        pet = self.unit(e, "pet", "Snarl", isPlayer=False)
+        self.heal(e, me, "player", 600, party1=100, party2=100, party3=200, party4=200)
+        self.assertEqual(self.said(e.frames.vertical.health), "Mira\nTovin\nAnselm\n+1")
+        self.heal(e, pet, "pet", 100, party1=100)
+        self.assertTrue(e.frames.vpet.health.healBar or e.frames.vpet.health.othersBar)
+        self.assertIsNone(self.said(e.frames.vpet.health))
+        self.assertEqual(e.errors(), [])
+
+    def test_a_healer_outside_the_group_is_named_once_by_your_target_or_focus(self):
+        e = self.env()
+        me = e.mock.units.player
+        self.unit(e, "party1", "Mira", guid="g-mira")
+        self.unit(e, "target", "Mira", guid="g-mira")                       # your target: the same person
+        self.unit(e, "focus", "Stranger Hale", guid="g-hale")
+        bar = e.frames.player.health
+        self.heal(e, me, "player", 900, party1=200, target=200, focus=300)
+        self.assertEqual(self.said(bar), "Mira, Stranger")
+        self.assertEqual(e.errors(), [])
+
+    def test_an_amount_the_game_keeps_to_itself_names_nobody(self):
+        e = self.env()
+        mira = self.party(e)[0]
+        bar = self.overlay(e).health
+        secret = e.mock.secret
+        mira.incoming, mira.healers = secret(), e.lua.table(player=secret(), party2=secret())
+        e.mock.fire("UNIT_HEAL_PREDICTION", "party1")
+        self.assertIsNone(self.said(bar))                                   # no guess at who
+        self.assertTrue(bar.healBar.shown)                                  # the heal itself still shows
+        # a healer's own amount told, the totals kept: that one is named
+        mira.healers = e.lua.table(player=secret(), party2=secret(), party3=150)
+        e.mock.fire("UNIT_HEAL_PREDICTION", "party1")
+        self.assertEqual(self.said(bar), "Anselm")
+        # a name kept secret is handed to the game to write, never read
+        e.mock.units.party3.name = secret()
+        e.mock.fire("UNIT_HEAL_PREDICTION", "party1")
+        self.assertTrue(bar.healerText.shown)
+        self.assertEqual(e.errors(), [])
+
+    def test_in_a_raid_the_raid_is_asked_and_never_you(self):
+        e = self.env()
+        me = e.mock.units.player
+        e.mock.units.raid1 = me                                             # you, as the raid counts you
+        self.unit(e, "raid7", "Oriel Vance")
+        self.heal(e, me, "player", 400, player=100, raid1=100, raid7=300)
+        self.assertEqual(self.said(e.frames.player.health), "Oriel")
+        self.assertEqual(e.errors(), [])
+
+    def test_the_healers_rows_name_them_too(self):
+        e = HealerFrames().env(mode=3)
+        e.lua.eval(self.PER_HEALER)(e.mock)
+        mira = HealerFrames().member(e, 1)
+        HealerFrames().member(e, 2)
+        row = e.ns.Group.party[1].h
+        self.heal(e, mira, "party1", 200, party2=200)
+        self.assertEqual(self.said(row.health), "Friend2")
+        self.heal(e, mira, "party1", 0)
+        self.assertIsNone(self.said(row.health))
+        HealerFrames().member(e, 3)                          # a healer's party row has room for two names
+        self.heal(e, mira, "party1", 600, party2=200, party3=400)
+        self.assertEqual(self.said(row.health), "Friend2, Friend3")
+        self.assertEqual(e.errors(), [])
+
+    def test_a_raid_tile_has_room_for_one_name_and_how_many_more(self):
+        e = HealerFrames().env(mode=3)
+        e.lua.eval(self.PER_HEALER)(e.mock)
+        native = e.mock.raidFrame(1, "raid1")
+        native.height = 36
+        data = self.unit(e, "raid1", "Raider")
+        self.unit(e, "raid2", "Mira")
+        self.unit(e, "raid3", "Tovin")
+        e.update(0.3)
+        tile = e.ns.Group.slim[native]
+        self.heal(e, data, "raid1", 400, raid2=200, raid3=200)
+        self.assertEqual(self.said(tile.health), "Mira +1")
+        self.assertEqual(e.errors(), [])
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -82,6 +82,8 @@ Soglia di esecuzione sulle barre nemiche
 un nemico a un quarto della salute o meno: la sua barra della salute pulsa di rosso, con un bagliore intorno che batte come un polso, sui riquadri di bersaglio e focus e sulle targhette
 Scudi sulle barre della salute
 quanto assorbirà ancora uno scudo su un'unità, come una fascia blu argento dal fondo della sua barra della salute: sui tuoi riquadri, su quello del bersaglio, del gruppo e sulle targhette
+Nomi dei guaritori in arrivo
+chi altro sta curando un'unità, con il nome sulla sua barra della salute finché la cura è in arrivo: sui tuoi riquadri, su quello del bersaglio, nel gruppo e nell'incursione; dove il gioco tiene l'informazione per sé, non compare alcun nome
 Felicità del famiglio
 accanto alla barra del famiglio, una sottile fascia del colore del suo umore: verde felice, giallo contento, rosso scontento, con del cibo accanto quando va nutrito. Niente per un famiglio senza umore
 Le barre verticali seguono la telecamera

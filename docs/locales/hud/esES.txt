@@ -82,6 +82,8 @@ Rango de ejecución en barras enemigas
 un enemigo con un cuarto de su salud o menos: su barra de salud late en rojo, con un brillo alrededor que palpita como un pulso, en los marcos de objetivo y foco y en las placas de nombre
 Escudos en las barras de salud
 cuánto absorberá un escudo en una unidad, como una franja azul plateada desde el extremo de su barra de salud: en tus marcos, el de tu objetivo, los de tu grupo y las placas de nombre
+Nombres de sanadores entrantes
+quién más está sanando a una unidad, con su nombre en la barra de salud mientras la sanación está en camino: en tus marcos, el de tu objetivo, tu grupo y tu banda; donde el juego se lo guarda, no se muestra ningún nombre
 Felicidad de la mascota
 junto a la barra de la mascota, una franja fina del color de su ánimo: verde feliz, amarillo contenta, rojo descontenta, con comida al lado cuando necesita comer. Nada para una mascota sin ánimo
 Las barras verticales siguen a la cámara
