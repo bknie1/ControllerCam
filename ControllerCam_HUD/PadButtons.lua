@@ -196,6 +196,7 @@ end
 ---------------------------------------------------------------------------
 P.was = {}                    -- what we changed on a frame of the game's: { strata, fixed, level, clamped, set }
 P.opened = {}                 -- each wheel as it last opened (for /cchud padinfo and the debug report)
+P.under = {}                  -- each wheel as it was first found under the bars in a fight, where it can't be helped
 
 -- A method of a frame's, asked quietly: nil when it has none, the call fails, or the answer is a secret
 local function Ask(f, method)
@@ -351,17 +352,43 @@ function P.WheelLine(name)
             InCombatLockdown() and " (in a fight)" or "", tostring(layer), tostring(level))
 end
 
--- Each wheel as it opens, in a fight too: looked at (kept for the reports), and out of a fight set in order
+-- Is a wheel under the bars as things stand? (The bars on a higher layer, or as high on the same one.)
+function P.Under(f)
+    local layer, level, rank = P.BarsTop()
+    local mine = P.RANK[Ask(f, "GetFrameStrata") or ""] or 0
+    local at = Ask(f, "GetFrameLevel")
+    if not layer or type(at) ~= "number" then return false end
+    return rank > mine or (rank == mine and level >= at)
+end
+
+-- Each wheel as it opens, in a fight too: looked at (kept for the reports), and out of a fight set in order.
+-- While it stays open it is looked at again every AGAIN seconds: the game may raise the bar's buttons, or put
+-- the wheel back on its own layer, after it opened (seen in the game: a wheel that was in front at times is not).
+-- Out of a fight it is put in front again; in a fight, when nothing of the game's may be touched, what was
+-- found is kept for the reports ("under the bars").
+P.AGAIN = 0.1
 function P:Watch()
     self.seen = self.seen or {}
+    local now = GetTime()
     for _, name in ipairs(self.FLYOUTS) do
-        local shown = ns.ShownPlain(_G[name])
+        local f = _G[name]
+        local shown = ns.ShownPlain(f)
         if shown and not self.seen[name] then
-            self.seen[name] = true
-            if self.front then self:Stack(name, _G[name]) end
+            self.seen[name] = now
+            if self.front then self:Stack(name, f) end
             if ns.db and ns.db.debug then
                 self.opened[name] = self.WheelLine(name)
                 ns.Note("pad: %s", self.opened[name])
+            end
+        elseif shown and now - self.seen[name] >= self.AGAIN then
+            self.seen[name] = now
+            if self.front and Usable(f) then
+                if not InCombatLockdown() then
+                    self:Stack(name, f)
+                elseif ns.db and ns.db.debug and self.Under(f) and not self.under[name] then
+                    self.under[name] = self.WheelLine(name)
+                    ns.Note("pad: under the bars: %s", self.under[name])
+                end
             end
         elseif not shown then
             self.seen[name] = nil
@@ -492,6 +519,7 @@ function P.Report()
         local ok, line = pcall(P.WheelLine, name)
         out[#out + 1] = ok and line or (name .. ": ?")
         if P.opened[name] then out[#out + 1] = "  as it last opened: " .. P.opened[name] end
+        if P.under[name] then out[#out + 1] = "  found under the bars in a fight: " .. P.under[name] end
     end
     return out
 end

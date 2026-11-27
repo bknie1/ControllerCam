@@ -150,7 +150,7 @@ local LAYOUT = {
         { head = "In a fight", "combatAlpha", "alertHealth", "alertPower", "playerShake" },
         { head = "Health bars", "classColors", "combatColors", "shieldBars", "wards", "healColors", "healerNames",
           "hotVines" },
-        { head = "Cast bar", "castbar", "castScale", "castUpright", "castArt", "castWindup", "castChain" },
+        { head = "Cast bar", "castbar", "castScale", "castUpright", "castArt", "castWindup", "castChain", "castBoost" },
         { head = "Size and text", "scale", "textScale", "textShade", "compactAll" },
     } },
     { page = "Target, party and raid", groups = {

@@ -2,7 +2,7 @@
 ## Title: ControllerCam HUD: Transmog
 ## Notes: The Sets tab at the transmogrifier, and appearances in item tooltips. Loaded only while it is switched on in the HUD's options.
 ## Author: bknie1
-## Version: 1.6.2
+## Version: 1.6.3
 ## X-License: MIT
 ## IconTexture: Interface\AddOns\ControllerCam\Media\icon
 ## Dependencies: ControllerCam_HUD

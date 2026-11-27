@@ -410,7 +410,9 @@ Probable :
 Montée du lancement
 votre barre de lancement brille plus fort à mesure que le sort se charge et éclate à l'impact
 Compteur de sorts enchaînés
-quand vous lancez un sort juste après un autre, un compteur de l'enchaînement s'affiche sous votre barre de lancement, avec en dessous, en petits chiffres, les dégâts que vous avez infligés pendant celui-ci ; il s'arrête quand vous cessez, bougez ou êtes interrompu
+quand vous lancez un sort juste après un autre, un compteur de l'enchaînement s'affiche sous votre barre de lancement, à droite du temps de lancement, avec à côté, en petits chiffres, les dégâts que vous avez infligés pendant celui-ci ; l'effet du sort se joue derrière le compteur, plus fort à mesure que l'enchaînement s'allonge ; il s'arrête quand vous cessez, bougez ou êtes interrompu
+Effets qui aident votre incantation
+pendant que vous incantez, jusqu'à trois icônes au-dessus de l'extrémité droite de votre barre d'incantation montrent les effets sur vous qui rendent ce sort plus rapide, gratuit ou plus puissant, avec le nombre restant (x3), pour voir qu'un proc est utilisé sans quitter l'action des yeux ; seulement ceux que le jeu laisse un addon distinguer : il fait briller le sort, l'effet nomme le sort, ou il fait partie des plus connus
 Flotteur de pêche
 pendant la pêche, un flotteur ondule sur votre barre de lancement et indique ce qui risque de mordre ici
 Barre d'incantation

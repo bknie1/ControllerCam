@@ -366,6 +366,41 @@ K.ORES = {
     { 7911, "Truesilver Ore", { 0.72, 0.97, 0.95 } },   { 11370, "Dark Iron Ore", { 0.75, 0.3, 0.25 } },
     { 10620, "Thorium Ore", { 0.45, 0.85, 0.55 } },
 }
+-- What kind of plant a herb is, which is how it grows on the cast bar (CastArt.lua): "flower" (a stem, a leaf
+-- and its flower; any listed herb not named here), "root" (leaves over the bar, its roots under it), "kelp"
+-- (strands swaying in the water, with bubbles) or "leaf" (leaves in the herb's colour, no flower).
+K.HERB_FORM = {
+    [2449] = "root", [3357] = "root",                                   -- Earthroot, Liferoot
+    [3820] = "kelp",                                                    -- Stranglekelp
+    [765] = "leaf", [2450] = "leaf", [3369] = "leaf", [3818] = "leaf",  -- Silverleaf, Briarthorn, Grave Moss, Fadeleaf
+    [3358] = "leaf", [8838] = "leaf", [8839] = "leaf", [8845] = "leaf", -- Khadgar's Whisker, Sungrass, Blindweed, Ghost Mushroom
+    [13465] = "leaf",                                                   -- Mountain Silversage
+}
+-- A herb that is not listed goes by the words in its node's name (English ones), the first that fits
+K.FORM_WORDS = {
+    { "kelp", "kelp" }, { "seaweed", "kelp" }, { "root", "root" },
+    { "bloom", "flower" }, { "lotus", "flower" }, { "blossom", "flower" }, { "rose", "flower" }, { "lily", "flower" },
+    { "flower", "flower" }, { "petal", "flower" },
+    { "leaf", "leaf" }, { "grass", "leaf" }, { "moss", "leaf" }, { "sage", "leaf" }, { "thorn", "leaf" },
+    { "weed", "leaf" },
+}
+K.BLOOM = { 1, 0.9, 0.95 }         -- the flower of a herb whose colour is not known
+
+function K.Form(node)
+    if type(node) ~= "string" or ns.IsSecret(node) then return nil end
+    node = node:lower()
+    for _, row in ipairs(K.FORM_WORDS) do
+        if node:find(row[1], 1, true) then return row[2] end
+    end
+    return nil
+end
+
+-- Are you under water? (Gathering there, bubbles rise off the bar.)
+function K.Underwater()
+    local ok, wet = pcall(IsSubmerged, "player")
+    return ok and not ns.IsSecret(wet) and wet == true or false
+end
+
 K.SENT_FOR = 3                     -- seconds the target of a cast you sent is taken for what you work on
 
 -- The game says what your cast is aimed at as it is sent (UNIT_SPELLCAST_SENT)
@@ -426,20 +461,24 @@ function K.Found(kind, node)
     return best and { id = best[1], name = best[2], color = best[3] } or nil
 end
 
--- Your own cast's look, made its own: a herb's flowers in its colour, an ore's bar and chips in its metal's,
--- and what you are making (the cast's icon) on the bar
+-- Your own cast's look, made its own: a herb as the kind of plant it is and in its colour, an ore's bar and
+-- chips in its metal's, and what you are making (the cast's icon) on the bar
 function K.Own(look, icon)
     if not look then return look end
-    if look.kind == "herbs" or look.kind == "mining" then
+    if look.kind == "herbs" then
+        local node = K.Node()
+        local what = K.Found("herbs", node)
+        local form = what and (K.HERB_FORM[what.id] or "flower") or K.Form(node)
+        look.what, look.form = what, form
+        if form == "flower" then look.bloom = what and what.color or K.BLOOM
+        elseif form then look.tint = what and what.color or nil end
+        look.wet = form == "kelp" or (form ~= nil and K.Underwater()) or nil
+    elseif look.kind == "mining" then
         local what = K.Found(look.kind, K.Node())
         if what then
             look.what = what
-            if look.kind == "herbs" then
-                look.bloom = what.color
-            else
-                look.color = what.color
-                look.land = { color = what.color, fx = look.fx }
-            end
+            look.color = what.color
+            look.land = { color = what.color, fx = look.fx }
         end
     elseif look.kind == "crafting" then
         if (type(icon) == "number" or type(icon) == "string") and not ns.IsSecret(icon) then look.icon = icon end

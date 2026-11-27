@@ -410,7 +410,9 @@ Likely:
 Cast wind-up
 your cast bar glows brighter as the cast fills and bursts when it lands
 Chain cast count
-when you cast one spell straight after another, a count of the chain shows under your cast bar, with the damage you dealt during it in small numbers below; it ends when you stop, move or are interrupted
+when you cast one spell straight after another, a count of the chain shows under your cast bar, to the right of the cast time, with the damage you dealt during it in small numbers beside it; the spell's own effect plays behind the count, stronger as the chain grows; it ends when you stop, move or are interrupted
+Effects that help your cast
+while you cast, up to three icons over the right end of your cast bar show the effects on you that make this cast faster, free or stronger, with how many are left (x3), so you see a proc being used without looking away to your buffs; only the ones the game lets an addon tell apart: it lights the spell up, the effect names the spell, or it is a well-known one
 Fishing float
 while fishing, a float bobs on your cast bar and it shows what is likely to bite here
 Cast bar

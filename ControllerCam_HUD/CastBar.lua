@@ -7,9 +7,10 @@ local L, C, U = ns.L, ns.colors, ns.Unit
 
 local CB = { active = false }
 CB.TIME_ROOM = 44              -- what the time under the bar's right end takes
--- The name over the bar and the time under it keep this far from it: what plays on the bar as it fills (leaves,
--- roots; CastArt.lua) reaches 16 beyond it, and stood on the spell's name. While fishing nothing grows there, and
--- they stay close (the fishing game's words are further down).
+-- The name, the time and the chain's count (right of the time), all under the bar, keep this far from it: what plays on the bar as
+-- it fills (leaves, roots; CastArt.lua) reaches 16 beyond it, and mostly upwards, which is why nothing of ours is
+-- written over the bar (that space is kept free, for what may one day show there). While fishing nothing grows
+-- there, and they stay close (the fishing game's words are further down).
 CB.ROOM = 16
 CB.CLOSE_OVER, CB.CLOSE_UNDER = 4, 5
 -- The time grows as the cast nears its end (over its last second, or its last half if it is shorter), then
@@ -18,6 +19,14 @@ CB.GROW, CB.GROWTH, CB.BURST, CB.POP = 1, 0.7, 0.8, 0.3
 -- A chain of casts: the next one counts if it starts this soon after the last one landed. A cast landed if it
 -- ran to within CHAIN_SLACK of its end (a channel: at least half of it). The count jumps for BUMP seconds.
 CB.CHAIN_GAP, CB.CHAIN_SLACK, CB.BUMP = 0.75, 0.35, 0.25
+-- A long chain's count grows, a little with every cast: this much each, up to this many casts (x50: half as large again)
+CB.CHAIN_GROW, CB.CHAIN_CAP = 0.01, 50
+-- Behind the count the spell's own effect plays: a glow that beats and drops of it raining through the count,
+-- more, larger and quicker with every cast of the chain, at their most from this many casts on
+CB.RAIN_CAP = 25
+CB.CHAIN_X = 4                 -- the count starts this far past the bar's right end: the eye runs along the bar to it
+CB.TIME_MID = 5                -- half the time's height: the count is centred on the time's line, whatever its own size
+CB.CHAIN_SIZE = 0.9            -- and starts out this much of its font's size, to grow from there
 ns.CastBar = CB
 
 ns.RegisterSetting({
@@ -27,7 +36,12 @@ ns.RegisterSetting({
 ns.RegisterSetting({
     key = "castChain", kind = "boolean", default = true, command = "chain", section = "Frames",
     label = "Chain cast count",
-    tip = "when you cast one spell straight after another, a count of the chain shows under your cast bar, with the damage you dealt during it in small numbers below; it ends when you stop, move or are interrupted",
+    tip = "when you cast one spell straight after another, a count of the chain shows under your cast bar, to the right of the cast time, with the damage you dealt during it in small numbers beside it; the spell's own effect plays behind the count, stronger as the chain grows; it ends when you stop, move or are interrupted",
+})
+ns.RegisterSetting({
+    key = "castBoost", kind = "boolean", default = true, command = "castboost", section = "Frames",
+    label = "Effects that help your cast",
+    tip = "while you cast, up to three icons over the right end of your cast bar show the effects on you that make this cast faster, free or stronger, with how many are left (x3), so you see a proc being used without looking away to your buffs; only the ones the game lets an addon tell apart: it lights the spell up, the effect names the spell, or it is a well-known one",
 })
 ns.RegisterSetting({
     key = "fishing", kind = "boolean", default = true, command = "fishing", section = "Frames",
@@ -113,11 +127,11 @@ local function Build()
     frame.catchIcon:SetTexCoord(0.08, 0.92, 0.08, 0.92)
     frame.catch:Hide()
     frame.catchIcon:Hide()
-    -- the name over the bar, the whole width of it (a longer one ends in "..." rather than run past the bar); the
-    -- time under the bar at its right end, out of the name's way
+    -- the name under the bar, from its left end to the time at its right end (a longer one ends in "..." rather
+    -- than run into the time)
     frame.label = ns.FontString(frame, 11, "LEFT")
-    frame.label:SetPoint("BOTTOMLEFT", bar, "TOPLEFT", 8, CB.ROOM)
-    frame.label:SetPoint("BOTTOMRIGHT", bar, "TOPRIGHT", -8, CB.ROOM)
+    frame.label:SetPoint("TOPLEFT", bar, "BOTTOMLEFT", 8, -CB.ROOM)
+    frame.label:SetPoint("TOPRIGHT", bar, "BOTTOMRIGHT", -CB.TIME_ROOM, -CB.ROOM)
     if frame.label.SetWordWrap then frame.label:SetWordWrap(false) end
     -- (in a holder of its own, which is what grows: a frame scales smoothly, a font's size does not)
     frame.timeBox = CreateFrame("Frame", nil, frame)
@@ -126,18 +140,29 @@ local function Build()
     frame.time = ns.FontString(frame.timeBox, 10, "RIGHT")
     frame.time:SetPoint("TOPRIGHT", frame.timeBox, "TOPRIGHT", 0, 0)
     frame.time:SetTextColor(unpack(C.muted))
-    -- how many casts in a row, under the bar's left end, opposite the time (in a holder too: it jumps)
+    -- how many casts in a row, to the right of the time: on its line, just past the bar's right end, where the
+    -- eye ends up as it follows the bar (in a holder too: it jumps)
     frame.comboBox = CreateFrame("Frame", nil, frame)
     frame.comboBox:SetSize(1, 1)
-    frame.comboBox:SetPoint("TOPLEFT", bar, "BOTTOMLEFT", 8, -CB.ROOM)
+    frame.comboBox:SetPoint("TOPLEFT", bar, "BOTTOMRIGHT", CB.CHAIN_X, -CB.ROOM - CB.TIME_MID)
     frame.combo = ns.FontString(frame.comboBox, 12, "LEFT")
-    frame.combo:SetPoint("TOPLEFT", frame.comboBox, "TOPLEFT", 0, 0)
+    frame.combo:SetPoint("LEFT", frame.comboBox, "TOPLEFT", 0, 0)      -- (its middle on the holder's corner)
     frame.combo:Hide()
-    -- and under the count, smaller: the damage you dealt while the chain ran, cut short ("1.2k")
+    -- behind it, the glow of the spell being chained (and its drops: Rain below)
+    frame.comboGlow = frame.comboBox:CreateTexture(nil, "BACKGROUND")
+    frame.comboGlow:SetTexture(ns.media.soft)
+    frame.comboGlow:SetBlendMode("ADD")
+    frame.comboGlow:SetPoint("CENTER", frame.combo, "CENTER", 0, 0)
+    frame.comboGlow:SetAlpha(0)
+    -- and beside the count, smaller: the damage you dealt while the chain ran, cut short ("1.2k")
     frame.comboSum = ns.FontString(frame.comboBox, 9, "LEFT")
-    frame.comboSum:SetPoint("TOPLEFT", frame.combo, "BOTTOMLEFT", 0, -1)
+    frame.comboSum:SetPoint("BOTTOMLEFT", frame.combo, "BOTTOMRIGHT", 5, 1)
     frame.comboSum:SetTextColor(unpack(C.muted))
     frame.comboSum:Hide()
+    -- over the bar's right end: the effects on you that make this cast better (Boosts below)
+    frame.boostRow = CreateFrame("Frame", nil, frame)
+    frame.boostRow:SetSize(CB.BOOST_MAX * (CB.BOOST_ICON + CB.BOOST_GAP), CB.BOOST_ICON)
+    frame.boostRow:SetPoint("BOTTOMRIGHT", bar, "TOPRIGHT", 0, CB.ROOM)
     frame:Hide()
     CB.frame, CB.bar = frame, bar
     CB.art = ns.CastArt.Attach(bar, 1)                 -- what works on the bar while it fills (CastArt.lua)
@@ -216,13 +241,20 @@ local function Pop(now)
     frame.time:SetAlpha(1 - k)
 end
 
--- The chain's count at this size, its top left corner staying where it is
+-- The chain's count at this size, its left end staying where it is and its middle level with the time's
 local function ComboScale(s)
     local box = frame.comboBox
     CB.comboScale = s
     box:SetScale(s)
     box:ClearAllPoints()
-    box:SetPoint("TOPLEFT", bar, "BOTTOMLEFT", 8 / s, -(CB.under or CB.ROOM) / s)
+    box:SetPoint("TOPLEFT", bar, "BOTTOMRIGHT", CB.CHAIN_X / s, -((CB.under or CB.ROOM) + CB.TIME_MID) / s)
+end
+
+-- The size a chain's count rests at: its own for a usual chain (x5 is 5% larger, which nobody sees), larger for a long one
+local function ComboBase()
+    local n = CB.combo or 0
+    if n < 2 then return CB.CHAIN_SIZE end
+    return CB.CHAIN_SIZE * (1 + CB.CHAIN_GROW * math.min(n, CB.CHAIN_CAP))
 end
 
 -- A chain's damage, cut short: 950, 1.2k, 15.3k, 120k, 1.2m
@@ -233,7 +265,7 @@ function CB.Short(n)
     return ("%.1fm"):format(n / 1e6)
 end
 
--- "x3" from the second cast of a chain on, in the colour of the cast under way; under it the chain's damage
+-- "x3" from the second cast of a chain on, in the colour of the cast under way; beside it the chain's damage
 local function ComboDraw()
     local n = CB.combo or 0
     if n < 2 or not ns.db.castChain or CB.fishing then
@@ -246,6 +278,7 @@ local function ComboDraw()
     frame.combo:SetText("x" .. n)
     frame.combo:SetTextColor(c[1], c[2], c[3])
     frame.combo:Show()
+    if not CB.bump then ComboScale(ComboBase()) end
     local sum = CB.comboDamage or 0
     if sum > 0 and not CB.comboUnknown then
         frame.comboSum:SetText(CB.Short(sum))
@@ -275,20 +308,422 @@ local function ComboTick(now)
     local k = (now - at) / CB.BUMP
     if k >= 1 or k < 0 then
         CB.bump = nil
-        ComboScale(1)
+        ComboScale(ComboBase())
     else
-        ComboScale(1 + 0.5 * (1 - k) * (1 - k))
+        ComboScale(ComboBase() * (1 + 0.5 * (1 - k) * (1 - k)))
     end
 end
 
--- The name's and the time's distance from the bar (more: what a main ability's show reaches beyond the usual)
+---------------------------------------------------------------------------
+-- Behind the count: the spell being chained. A glow in its colour beats there, and drops of its effect (sparks,
+-- motes, runes: its look's own particles) rain through the count; fire and smoke rise through it instead. All of
+-- it grows with the chain, to its most at x25 (CB.RAIN_CAP). Full: glow and rain; Subtle: the glow only; not at
+-- Classic or None, nor with Reduce animations. The pieces are the count's own, used again and again.
+---------------------------------------------------------------------------
+local RISES = { flames = true, smoke = true }
+local rain = { live = {}, pool = {}, owe = 0 }
+CB.rain = rain
+
+-- How far the chain has come, 0-1 (nil: nothing plays), and whether drops fall too
+function CB.Heat()
+    local n = CB.combo or 0
+    if n < 2 or not ns.db.castChain or CB.fishing or ns.Calm() then return nil end
+    local level = ns.Effects()
+    if level ~= "full" and level ~= "subtle" then return nil end
+    return (math.min(n, CB.RAIN_CAP) - 1) / (CB.RAIN_CAP - 1), level == "full"
+end
+
+local function RainDrop(heat, c, wide)
+    local t = table.remove(rain.pool)
+    if not t then
+        t = frame.comboBox:CreateTexture(nil, "BACKGROUND")           -- (behind the count's letters)
+        t:SetBlendMode("ADD")
+    end
+    local fx = CB.look and CB.look.fx
+    local up = fx and RISES[fx.kind] or false
+    t:SetTexture(ns.media[fx and fx.tex or "soft"])
+    t:SetVertexColor(c[1], c[2], c[3], 1)
+    local size = (4 + 5 * heat) * (0.7 + 0.6 * math.random())
+    t:SetSize(size, size)
+    t.x, t.drift = -4 + math.random() * (wide + 8), (math.random() - 0.5) * 6
+    local top, foot = 16 + 10 * heat, -1
+    t.y0, t.y1 = up and foot or top, up and top or foot
+    t.age, t.life, t.a = 0, 0.7 - 0.25 * heat, 0.5 + 0.4 * heat
+    t:SetAlpha(0)
+    t:Show()
+    rain.live[#rain.live + 1] = t
+end
+
+local function RainClear()
+    for i = #rain.live, 1, -1 do
+        local t = rain.live[i]
+        t:Hide()
+        rain.pool[#rain.pool + 1] = t
+        rain.live[i] = nil
+    end
+    rain.at, rain.owe = nil, 0
+    frame.comboGlow:SetAlpha(0)
+end
+
+local function RainTick(now)
+    local dt = math.max(0, math.min(0.1, now - (rain.at or now)))
+    rain.at = now
+    local heat, full = CB.Heat()
+    if not heat or not frame.combo:IsShown() then
+        frame.comboGlow:SetAlpha(0)
+    else
+        local c = CB.color or C.cast
+        local wide = frame.combo.GetStringWidth and frame.combo:GetStringWidth() or 0
+        if ns.IsSecret(wide) or type(wide) ~= "number" or wide < 12 then wide = 24 end
+        frame.comboGlow:SetVertexColor(c[1], c[2], c[3], 1)
+        frame.comboGlow:SetSize(wide + 26, 30)
+        frame.comboGlow:SetAlpha((0.12 + 0.3 * heat) * (0.75 + 0.25 * math.sin(now * (3 + 9 * heat))))
+        if full then
+            rain.owe = rain.owe + dt * (2 + 26 * heat)                -- two a second at x2, twenty-eight at x25
+            while rain.owe >= 1 do
+                rain.owe = rain.owe - 1
+                RainDrop(heat, c, wide)
+            end
+        end
+    end
+    for i = #rain.live, 1, -1 do
+        local t = rain.live[i]
+        t.age = t.age + dt
+        local k = t.age / t.life
+        if k >= 1 then
+            t:Hide()
+            table.remove(rain.live, i)
+            rain.pool[#rain.pool + 1] = t
+        else
+            t:ClearAllPoints()
+            t:SetPoint("CENTER", frame.combo, "BOTTOMLEFT", t.x + t.drift * k, t.y0 + (t.y1 - t.y0) * k)
+            t:SetAlpha(t.a * (k < 0.2 and k / 0.2 or 1 - (k - 0.2) / 0.8))
+        end
+    end
+end
+
+---------------------------------------------------------------------------
+-- Over the bar's right end: the effects on you that make this cast better (faster, free, stronger), as a small
+-- row of icons with how many are left ("x3"). The game does not tell addons which effect changes which spell,
+-- so an effect is only shown when one of these says so:
+--   lit    the game lights the spell being cast (its glow on the action bar), and the effect is the one the game
+--          showed its screen art for, or came on within BOOST_NEAR of the glow
+--   known  it is one of the well-known ones below, and this cast is one of the spells it is for
+--   says   the effect's own description names the spell being cast
+-- What the game keeps secret is never compared: an effect whose id and name are both secret can only be "lit"
+-- (by when it came on), and a cast whose id and name are secret shows nothing.
+---------------------------------------------------------------------------
+CB.BOOST_MAX, CB.BOOST_ICON, CB.BOOST_GAP = 3, 18, 4
+CB.BOOST_NEAR = 0.5            -- an effect and a glow this close together belong together
+CB.BOOST_IN = 0.2              -- an icon fades in this fast
+
+-- The well-known ones, by the effect's spell ids (other ranks go by name), and the spells each is for (by name
+-- too: every rank has an id of its own); any: whatever you cast
+CB.BOOSTS = {
+    { ids = { 12536, 16870, 16246, 263725 }, any = true },                              -- Clearcasting
+    { ids = { 14751 }, any = true },                                                    -- Inner Focus
+    { ids = { 16166 }, any = true },                                                    -- Elemental Mastery
+    { ids = { 59887, 59888, 59889, 59890, 59891 }, any = true },                        -- Borrowed Time
+    { ids = { 54274, 54276, 54277, 117828 }, any = true },                              -- Backdraft
+    { ids = { 20216 }, spells = { 635, 19750, 82326 } },                                -- Divine Favor
+    { ids = { 31834 }, spells = { 635 } },                                              -- Light's Grace
+    { ids = { 53672, 54149 }, spells = { 635, 19750, 82326 } },                         -- Infusion of Light
+    { ids = { 53489, 59578 }, spells = { 19750, 879 } },                                -- The Art of War
+    { ids = { 17941 }, spells = { 686 } },                                              -- Shadow Trance
+    { ids = { 34936 }, spells = { 686, 29722 } },                                       -- Backlash
+    { ids = { 63167 }, spells = { 6353 } },                                             -- Decimation
+    { ids = { 47383, 71162, 71165 }, spells = { 29722, 6353 } },                        -- Molten Core
+    { ids = { 53817, 344179 }, spells = { 403, 421, 331, 8004, 1064, 51514, 188196, 188443 } },   -- Maelstrom Weapon
+    { ids = { 53390 }, spells = { 331, 8004, 77472 } },                                 -- Tidal Waves
+    { ids = { 77762 }, spells = { 51505 } },                                            -- Lava Surge
+    { ids = { 33151, 114255 }, spells = { 585, 2061 } },                                -- Surge of Light
+    { ids = { 63731, 63734, 63735 }, spells = { 2060, 596 } },                          -- Serendipity
+    { ids = { 48108 }, spells = { 11366 } },                                            -- Hot Streak
+    { ids = { 57761, 190446 }, spells = { 133, 44614 } },                               -- Brain Freeze
+    { ids = { 44401 }, spells = { 5143 } },                                             -- Missile Barrage
+    { ids = { 48517 }, spells = { 5176 } },                                             -- Eclipse (Solar): Wrath
+    { ids = { 48518 }, spells = { 2912 } },                                             -- Eclipse (Lunar): Starfire
+}
+
+local boost = { icons = {}, seen = {}, lit = {}, litNames = {}, art = {}, desc = {} }
+CB.boost = boost
+
+local function BoostSpellName(id)
+    local ok, n
+    if C_Spell and C_Spell.GetSpellName then ok, n = pcall(C_Spell.GetSpellName, id) end
+    if not (ok and type(n) == "string" and not ns.IsSecret(n)) and GetSpellInfo then ok, n = pcall(GetSpellInfo, id) end
+    if ok and type(n) == "string" and not ns.IsSecret(n) and n ~= "" then return n end
+end
+
+-- The well-known ones as this client names them (asked once: a spell this client does not have has no name)
+local function Known()
+    if boost.known then return boost.known end
+    local k = { ids = {}, names = {} }
+    for _, entry in ipairs(CB.BOOSTS) do
+        local e = { any = entry.any, spells = {}, spellNames = {} }
+        for _, id in ipairs(entry.spells or {}) do
+            e.spells[id] = true
+            local n = BoostSpellName(id)
+            if n then e.spellNames[n] = true end
+        end
+        for _, id in ipairs(entry.ids) do
+            k.ids[id] = e
+            local n = BoostSpellName(id)
+            if n and not k.names[n] then k.names[n] = e end
+        end
+    end
+    boost.known = k
+    return k
+end
+
+-- Does this text name the spell? (the whole name: "Heal" is not named by "Healing")
+local function Names(text, name)
+    local from = 1
+    while true do
+        local a, b = text:find(name, from, true)
+        if not a then return false end
+        if not text:sub(a - 1, a - 1):find("^%a") and not text:sub(b + 1, b + 1):find("^%a") then return true end
+        from = b + 1
+    end
+end
+
+-- An effect's description, as the game words it (kept once it has one: it may not be loaded at first)
+local function Describe(id)
+    local d = boost.desc[id]
+    if d then return d end
+    local get = (C_Spell and C_Spell.GetSpellDescription) or GetSpellDescription
+    if not get then return nil end
+    local ok, text = pcall(get, id)
+    if ok and type(text) == "string" and not ns.IsSecret(text) and text ~= "" then
+        boost.desc[id] = text
+        return text
+    end
+end
+
+-- The effects on you (the game's list; one by one on a client without it)
+local function Buffs()
+    if ns.UnitFrames.fake then return {} end
+    local get = C_UnitAuras and C_UnitAuras.GetUnitAuras
+    if get then
+        local ok, all = pcall(get, "player", "HELPFUL")
+        if ok and type(all) == "table" then return all end
+    end
+    local list = {}
+    for i = 1, 40 do
+        local a = U.Aura("player", i, "HELPFUL")
+        if type(a) ~= "table" then break end
+        list[#list + 1] = a
+    end
+    return list
+end
+
+-- When each effect on you was first seen (first: they were there already, for who knows how long)
+local function BoostScan(first)
+    local now, here = GetTime(), {}
+    for _, a in ipairs(Buffs()) do
+        local inst
+        if type(a) == "table" then inst = a.auraInstanceID end
+        if not ns.IsSecret(inst) and inst ~= nil then
+            here[inst] = boost.seen[inst] or (first and -1e9 or now)
+        end
+    end
+    boost.seen = here
+end
+
+-- Does the game light this spell? And since when, where its glow was seen coming on
+local function Lit(id, name)
+    local at = (id and boost.lit[id]) or (name and boost.litNames[name])
+    if at then return true, at end
+    local ask = (C_SpellActivationOverlay and C_SpellActivationOverlay.IsSpellOverlayed) or IsSpellOverlayed
+    if id and ask then
+        local ok, on = pcall(ask, id)
+        if ok and ns.Yes(on) then return true, nil end
+    end
+    return false
+end
+
+-- The effects that make this cast better, the surest first: { aura, why } each, at most BOOST_MAX
+function CB.BoostPick(castName, castID)
+    castName = (type(castName) == "string" and not ns.IsSecret(castName) and castName ~= "") and castName or nil
+    castID = (type(castID) == "number" and not ns.IsSecret(castID)) and castID or nil
+    if not castName and not castID then return {} end
+    local lit, litAt = Lit(castID, castName)
+    local known = Known()
+    local found = { lit = {}, known = {}, says = {} }
+    for _, a in ipairs(Buffs()) do
+        if type(a) == "table" then
+            local id, name, inst = a.spellId, a.name, a.auraInstanceID
+            if ns.IsSecret(id) or type(id) ~= "number" then id = nil end
+            if ns.IsSecret(name) or type(name) ~= "string" then name = nil end
+            if ns.IsSecret(inst) then inst = nil end
+            local why
+            if lit then
+                local seen = inst ~= nil and boost.seen[inst] or nil
+                if id and boost.art[id] then why = "lit"
+                elseif seen and litAt and math.abs(seen - litAt) <= CB.BOOST_NEAR then why = "lit" end
+            end
+            if not why then
+                local e = (id and known.ids[id]) or (name and known.names[name])
+                if e and (e.any or (castID and e.spells[castID]) or (castName and e.spellNames[castName])) then
+                    why = "known"
+                end
+            end
+            if not why and id and castName and #castName >= 3 and name ~= castName then
+                local text = Describe(id)
+                if text and Names(text, castName) then why = "says" end
+            end
+            if why then found[why][#found[why] + 1] = { aura = a, why = why, name = name } end
+        end
+    end
+    local list = {}
+    for _, why in ipairs({ "lit", "known", "says" }) do
+        for _, hit in ipairs(found[why]) do
+            if #list < CB.BOOST_MAX then list[#list + 1] = hit end
+        end
+    end
+    return list
+end
+
+local function BoostButton(i)
+    local b = boost.icons[i]
+    if b then return b end
+    b = CreateFrame("Frame", nil, frame.boostRow)
+    b:SetSize(CB.BOOST_ICON, CB.BOOST_ICON)
+    b:SetPoint("BOTTOMRIGHT", frame.boostRow, "BOTTOMRIGHT", -(i - 1) * (CB.BOOST_ICON + CB.BOOST_GAP), 0)
+    b.back = b:CreateTexture(nil, "BACKGROUND")
+    b.back:SetPoint("TOPLEFT", b, "TOPLEFT", -1, 1)
+    b.back:SetPoint("BOTTOMRIGHT", b, "BOTTOMRIGHT", 1, -1)
+    b.back:SetColorTexture(0.02, 0.03, 0.06, 0.9)
+    b.icon = b:CreateTexture(nil, "ARTWORK")
+    b.icon:SetAllPoints(b)
+    b.icon:SetTexCoord(0.08, 0.92, 0.08, 0.92)
+    b.count = ns.FontString(b, 10, "RIGHT")
+    b.count:SetPoint("BOTTOMRIGHT", b, "BOTTOMRIGHT", 3, -3)
+    b:Hide()
+    boost.icons[i] = b
+    return b
+end
+
+local function BoostHide()
+    for _, b in ipairs(boost.icons) do b:Hide(); b.key, b.at = nil, nil end
+    boost.shown = 0
+end
+
+-- How many of an effect are left: "x3" from two on. A number the game keeps secret is written by the game
+-- itself, where this client has the call for it (then without the x: there is no telling whether it is one).
+local function BoostCount(b, a)
+    local n = a.applications
+    if not ns.IsSecret(n) then
+        b.count:SetText((type(n) == "number" and n > 1) and ("x" .. n) or "")
+        return
+    end
+    local get, inst = C_UnitAuras and C_UnitAuras.GetAuraApplicationDisplayCount, a.auraInstanceID
+    local ok = get and pcall(function() b.count:SetText(get("player", inst, 2, 99)) end)
+    if not ok then b.count:SetText("") end
+end
+
+-- Draw the row for the cast under way. Never while fishing, with the upright bar, for the show of all casts,
+-- or while making things.
+function CB:Boosts()
+    if not frame then return end
+    local trade = not ns.IsSecret(self.castTrade) and self.castTrade
+    if not (ns.db.castBoost and self.casting and not self.fishing and not self.up and not self.demo) or trade then
+        BoostHide()
+        return
+    end
+    local list = CB.BoostPick(self.castName, self.castID)
+    local level = ns.Effects()
+    local fade = (not ns.Calm() and (level == "full" or level == "subtle")) and GetTime() or nil
+    frame.boostRow:ClearAllPoints()
+    frame.boostRow:SetPoint("BOTTOMRIGHT", bar, "TOPRIGHT", 0, self.over or CB.ROOM)   -- clear of what plays on the bar
+    local said = {}
+    for i, hit in ipairs(list) do
+        local b, a = BoostButton(i), hit.aura
+        local key = ns.Plain(a.auraInstanceID) or ns.Plain(a.spellId) or i
+        pcall(b.icon.SetTexture, b.icon, a.icon)
+        BoostCount(b, a)
+        if b.key ~= key or not b:IsShown() then          -- a new one fades in; one that stays just stays
+            b.key, b.at = key, fade
+            b:SetAlpha(fade and 0 or 1)
+        end
+        b:Show()
+        said[i] = ("%s (%s)"):format(tostring(hit.name or "?"), hit.why)
+    end
+    for i = #list + 1, #boost.icons do
+        local b = boost.icons[i]
+        b:Hide(); b.key, b.at = nil, nil
+    end
+    boost.shown = #list
+    if ns.Debug and #said > 0 then
+        local text = table.concat(said, ", ")
+        if text ~= boost.said then boost.said = text; ns.Note("cast helped by: %s", text) end
+    end
+end
+
+local function BoostTick(now)
+    for i = 1, boost.shown or 0 do
+        local b = boost.icons[i]
+        if b.at then
+            local k = (now - b.at) / CB.BOOST_IN
+            if k >= 1 or k < 0 then b.at = nil; b:SetAlpha(1) else b:SetAlpha(k) end
+        end
+    end
+end
+
+-- What is listened for while the row is wanted: your effects coming and going, and what the game lights up
+local boostEvents = CreateFrame("Frame")
+local BoostEvent = ns.Protect(function(_, event, a1)
+    local now = GetTime()
+    if event == "UNIT_AURA" then
+        if a1 ~= "player" then return end
+        BoostScan()
+    elseif event == "SPELL_ACTIVATION_OVERLAY_GLOW_SHOW" or event == "SPELL_ACTIVATION_OVERLAY_GLOW_HIDE" then
+        if ns.IsSecret(a1) or type(a1) ~= "number" then return end
+        local at = event == "SPELL_ACTIVATION_OVERLAY_GLOW_SHOW" and now or nil
+        boost.lit[a1] = at
+        local name = BoostSpellName(a1)
+        if name then boost.litNames[name] = at end
+    elseif event == "SPELL_ACTIVATION_OVERLAY_SHOW" then
+        if ns.IsSecret(a1) or type(a1) ~= "number" then return end
+        boost.art[a1] = now
+    elseif event == "SPELL_ACTIVATION_OVERLAY_HIDE" then
+        if ns.IsSecret(a1) or type(a1) ~= "number" then boost.art = {} else boost.art[a1] = nil end
+    end
+    if CB.casting then CB:Boosts() end
+end)
+
+function CB.BoostApply(want)
+    want = want and true or false
+    if want == (boost.on or false) then return end
+    boost.on = want
+    if want then
+        if not pcall(boostEvents.RegisterUnitEvent, boostEvents, "UNIT_AURA", "player") then
+            pcall(boostEvents.RegisterEvent, boostEvents, "UNIT_AURA")
+        end
+        for _, e in ipairs({ "SPELL_ACTIVATION_OVERLAY_GLOW_SHOW", "SPELL_ACTIVATION_OVERLAY_GLOW_HIDE",
+                             "SPELL_ACTIVATION_OVERLAY_SHOW", "SPELL_ACTIVATION_OVERLAY_HIDE" }) do
+            pcall(boostEvents.RegisterEvent, boostEvents, e)
+        end
+        boostEvents:SetScript("OnEvent", BoostEvent)
+        boost.seen = {}
+        BoostScan(true)
+    else
+        boostEvents:UnregisterAllEvents()
+        boostEvents:SetScript("OnEvent", nil)
+        boost.seen, boost.lit, boost.litNames, boost.art = {}, {}, {}, {}
+        if frame then BoostHide() end
+    end
+end
+
+-- The name's, the time's and the count's distance under the bar (more: what a main ability's show reaches
+-- beyond the usual)
 local function Clearance(fishing, more)
     local room = CB.ROOM + (more or 0)
     local over, under = fishing and CB.CLOSE_OVER or room, fishing and CB.CLOSE_UNDER or room
-    CB.room, CB.under = room, under
+    CB.room, CB.under, CB.over = room, under, over
     frame.label:ClearAllPoints()
-    frame.label:SetPoint("BOTTOMLEFT", bar, "TOPLEFT", 8, over)
-    frame.label:SetPoint("BOTTOMRIGHT", bar, "TOPRIGHT", -8, over)
+    frame.label:SetPoint("TOPLEFT", bar, "BOTTOMLEFT", 8, -under)
+    frame.label:SetPoint("TOPRIGHT", bar, "BOTTOMRIGHT", -CB.TIME_ROOM, -under)
     TimeScale(CB.timeScale or 1)
     ComboScale(CB.comboScale or 1)
 end
@@ -370,7 +805,9 @@ local function Stop()
     if CB.kick or CB.jolt then CB.kick = nil; Jolt(0) end
     TimeRest()
     CB.bump = nil
-    ComboScale(1)                                     -- (the count itself outlives the bar: a chain goes on)
+    ComboScale(ComboBase())                           -- (the count itself outlives the bar: a chain goes on)
+    RainClear()
+    BoostHide()
     CB.casting, CB.until_, CB.fishing, CB.look, CB.nextFx = false, nil, false, nil, nil
     bar.charge:SetAlpha(0)
     bar.bobber:Hide()
@@ -393,6 +830,8 @@ end
 local function OnUpdate()
     local now = GetTime()
     ComboTick(now)
+    RainTick(now)
+    BoostTick(now)
     if CB.until_ then                         -- showing a result for a moment
         if now >= CB.until_ then Stop() else CB.art:Update(nil, nil, now); Jolt(now); Pop(now) end
         return
@@ -465,6 +904,7 @@ function CB:Result(failed)
     end
     ComboDraw()
     self.casting, self.timed = false, false
+    BoostHide()                                         -- (what helped the cast is spent, or the cast is off)
     self.art:Finish(not failed, GetTime())
     if ns.Rumble and not self.demo then ns.Rumble:BuildEnd(not failed) end
     if self.up then
@@ -518,6 +958,7 @@ function CB:Refresh(event)
     local cname, spellID, trade, icon = ns.CastLook.Casting("player")
     self.look = (not ns.UnitFrames.fake) and cname and ns.CastLook.Look(cname, spellID, trade) or nil
     ns.CastLook.Own(self.look, icon)                    -- which herb or ore it is, what is being made
+    self.castName, self.castID, self.castTrade = cname, spellID, trade
     pcall(frame.label.SetText, frame.label, ns.CastLook.Label(name, self.look))
     self.nextFx = nil
     local color = (not ns.IsSecret(shielded) and shielded) and C.shielded or (self.look and self.look.color) or C.cast
@@ -543,6 +984,7 @@ function CB:Refresh(event)
     bar.trail:SetValue(0)
     frame:Show()
     UpShow(color)
+    self:Boosts()
     if ns.IsSecret(startMS) or ns.IsSecret(endMS) or not startMS or not endMS or endMS <= startMS then
         self.timed = false
         bar.fill:SetValue(1)
@@ -730,7 +1172,11 @@ function CB:Apply(run)
     ns.SetBlizzardHidden(NATIVE, want)
     if want and not frame then Build() end
     if frame then Place() end
-    if want == self.active then return end
+    CB.BoostApply(want and ns.db.castBoost)
+    if want == self.active then
+        if frame and self.casting then self:Boosts() end
+        return
+    end
     self.active = want
     if want then
         for _, e in ipairs(EVENTS) do pcall(events.RegisterEvent, events, e) end

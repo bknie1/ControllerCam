@@ -2,7 +2,7 @@
 ## Title: ControllerCam HUD: Narrative
 ## Notes: Narrative: the characters in the windows, with their portraits and lines. Loaded only while it is switched on in the HUD's options.
 ## Author: bknie1
-## Version: 1.6.2
+## Version: 1.6.3
 ## X-License: MIT
 ## IconTexture: Interface\AddOns\ControllerCam\Media\icon
 ## Dependencies: ControllerCam_HUD

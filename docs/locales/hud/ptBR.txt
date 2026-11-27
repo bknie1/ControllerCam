@@ -410,7 +410,9 @@ Provável:
 Preparo do lançamento
 sua barra de lançamento brilha mais conforme o lançamento se enche e explode quando acerta
 Contador de lançamentos em sequência
-quando você lança um feitiço logo após outro, um contador da sequência aparece sob sua barra de lançamento, com o dano que você causou durante ela em números pequenos logo abaixo; ele termina quando você para, se move ou é interrompido
+quando você lança um feitiço logo após outro, um contador da sequência aparece sob sua barra de lançamento, à direita do tempo de lançamento, com o dano que você causou durante ela em números pequenos ao lado; o efeito do feitiço aparece atrás do contador, mais forte conforme a sequência cresce; ele termina quando você para, se move ou é interrompido
+Efeitos que ajudam sua conjuração
+enquanto você conjura, até três ícones sobre a ponta direita da sua barra de conjuração mostram os efeitos em você que tornam este feitiço mais rápido, gratuito ou mais forte, com quantos restam (x3), para você ver que um proc está sendo usado sem desviar o olhar para seus bônus; só os que o jogo deixa um addon distinguir: ele ilumina o feitiço, o efeito cita o feitiço ou é um dos mais conhecidos
 Boia de pesca
 ao pescar, uma boia balança na sua barra de lançamento e mostra o que provavelmente vai morder aqui
 Barra de lançamento

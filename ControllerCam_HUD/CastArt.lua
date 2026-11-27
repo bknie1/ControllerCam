@@ -3,9 +3,11 @@
 --   mining      a pick is hauled back and brought down on the bar once a second, in time with your swings at
 --               the vein (chips fly, a crack stays); the last blow crumbles the bar and its pieces fall
 --   crafting    little hammers peck at the end of the bar
---   herbs       leaves sprout along the bar as it fills (with the herb's own flowers, when the game names it);
+--   herbs       the herb grows along the bar as it fills, as the kind of plant it is when the game names it
+--               (a flower on its stem, roots under the bar, kelp swaying under water, leaves in its colour);
 --               when it lands they are plucked one after another: a tug, then out, with a crumb of earth
---   skinning    the hide lifts off what is filled, rolled up at the cut; when it lands the bar peels away
+--   skinning    a knife works along the bar and the hide lifts off what is filled, rolled up at the cut; when
+--               it lands the bar peels away
 --   nature      green lightning runs along it, stroke after stroke
 --   lightning   the same in the pale blue of the sky
 --   roots       (the spells that root a foe) roots creep along it, budding as they go
@@ -248,11 +250,18 @@ STYLES.mine = {
     end,
 }
 
--- Leaves sprouting along the top of the bar, each with the herb's own flower when the game names the herb
--- (CastLook.Own: look.bloom). When the herb is yours they are plucked, one after another from the left: each
--- is tugged (it stretches, held by its root), comes free with a jump and a spin, and drops a crumb of earth.
--- A herb with a flower is a whole plant: a stem out of the bar, the flower on its tip, the leaf off its foot.
+-- Herbs: what sprouts along the top of the bar goes by the kind of plant the herb is (CastLook.Own: look.form),
+-- when the game names it:
+--   flower   a whole plant: a stem out of the bar, the herb's own flower on its tip, the leaf off its foot
+--   root     leaves over the bar and the herb's roots creeping down under it; plucked, the roots come up too
+--   kelp     strands of it swaying in the water, bubbles rising; when it comes loose it drifts up and away
+--   leaf     leaves in the herb's own colour, no flower
+--   (none)   plain leaves: nobody said which herb it is
+-- Under water (look.wet) bubbles rise off the bar, whatever grows there. When the herb is yours it is plucked,
+-- one plant after another from the left: each is tugged (it stretches, held by its root), comes free with a jump
+-- and a spin, and drops a crumb of earth (none under water).
 local STEM, LEAF_AT, LEAF_OUT = 19, 0.15, 0.85      -- the stem's height; how far up it the leaf sits; its lean
+local ROOT = { 0.6, 0.42, 0.26 }                    -- a root whose herb's colour is not known
 
 -- Plant j: its stem's middle at px, py, the whole of it turned by r (the leaf leaning a off the stem)
 local function Plant(art, st, j, px, py, tall, lw, lh, a, r, alpha, open)
@@ -271,39 +280,118 @@ local function Plant(art, st, j, px, py, tall, lw, lh, a, r, alpha, open)
     f:SetAlpha(open > 0 and alpha or 0)
 end
 
+-- Plant j's roots, down from x, y: a longer one and a shorter that forks off it, the pair turned by r
+local function Roots(art, st, j, x, y, grow, r, alpha)
+    local s = art.scale
+    local long = (11 + 4 * Scatter(j, 4)) * s * grow
+    local lean = (Scatter(j, 2) - 0.5) * 0.5 + r
+    for k, t in ipairs(st.roots[j]) do
+        local len = max(0.01, k == 1 and long or long * 0.6)
+        local a = k == 1 and lean or lean + ((j % 2 == 0) and 0.7 or -0.7)
+        Put(art, t, x + sin(a) * len / 2, y - cos(a) * len / 2, (k == 1 and 1.8 or 1.3) * s, len)
+        Turn(t, a)
+        t:SetAlpha(alpha)
+    end
+end
+
+-- Strand j of kelp, up from x, y: three blades one over another, swaying, each a little further than the one
+-- under it (loose: how far it has come free, 0-1, which lets it sway wider)
+local function Kelp(art, st, j, x, y, grow, now, loose, alpha)
+    local s = art.scale
+    for k, seg in ipairs(st.kelp[j]) do
+        local g = Clamp01(grow * 3 - (k - 1))
+        if g <= 0 then
+            seg:SetAlpha(0)
+        else
+            local wave = sin(now * 1.7 + j * 1.3 + k * 0.9)
+            Put(art, seg, x + wave * (1.6 + 3 * loose) * s * k, y + (k - 0.45) * 6.5 * s, 9 * s * g)
+            Turn(seg, -wave * 0.45)
+            seg:SetAlpha(alpha)
+        end
+    end
+end
+
+-- Bubbles rising off what is filled (under water), each on its own beat
+local function Bubbles(art, st, edge, now, alpha)
+    if not st.bubbles then return end
+    local s = art.scale
+    for i, t in ipairs(st.bubbles) do
+        local x = Scatter(i, 1) * art.w
+        if x > edge or alpha <= 0 then
+            t:SetAlpha(0)
+        else
+            local k = (now * (0.4 + 0.3 * Scatter(i, 2)) + Scatter(i, 3)) % 1
+            Put(art, t, x + sin(now * 3 + i) * 1.5 * s, art.h / 2 + k * 24 * s, (2.5 + 2.5 * Scatter(i, 4)) * s)
+            t:SetAlpha(0.65 * (1 - k) * alpha)
+        end
+    end
+end
+
+-- Nothing of plant j shows (the cast has not reached it)
+local function NoPlant(st, j)
+    st.leaves[j]:SetAlpha(0)
+    if st.flowers then st.flowers[j]:SetAlpha(0); st.stems[j]:SetAlpha(0) end
+    if st.roots then for _, t in ipairs(st.roots[j]) do t:SetAlpha(0) end end
+    if st.kelp then for _, t in ipairs(st.kelp[j]) do t:SetAlpha(0) end end
+end
+
 STYLES.leaves = {
     fade = 0.8, ownFade = true,
     start = function(art)
-        local st, b = art.state, not art.light and art.look.bloom
-        st.leaves, st.crumbs = {}, {}
+        local st, look = art.state, art.look
+        local form = not art.light and look.form or nil
+        local b = form == "flower" and look.bloom or nil
+        st.form, st.leaves, st.crumbs = form, {}, {}
         local n = max(2, floor(art.w / (30 * art.scale)))
         if b then                                       -- (the stems first: they stand behind leaf and flower)
             st.stems = {}
             for j = 1, n do st.stems[j] = art:Piece("bar", nil, 0.33, 0.55, 0.2) end
         end
-        for j = 1, n do st.leaves[j] = art:Piece("leaf") end
+        if form == "root" then                          -- (and the roots, in the herb's colour)
+            local c = look.tint or ROOT
+            st.roots = {}
+            for j = 1, n do
+                st.roots[j] = { art:Piece("bar", nil, c[1], c[2], c[3]), art:Piece("bar", nil, c[1] * 0.8, c[2] * 0.8, c[3] * 0.8) }
+            end
+        end
+        local r, g, bl = 1, 1, 1                        -- the leaves: the herb's own colour for kelp and leafy herbs
+        local tint = (form == "leaf" or form == "kelp") and look.tint
+        if tint then
+            local keep = form == "kelp" and 0.3 or 0.5
+            r, g, bl = keep + (1 - keep) * tint[1], keep + (1 - keep) * tint[2], keep + (1 - keep) * tint[3]
+        end
+        for j = 1, n do st.leaves[j] = art:Piece("leaf", nil, r, g, bl) end
+        if form == "kelp" then
+            st.kelp = {}
+            for j = 1, n do st.kelp[j] = { st.leaves[j], art:Piece("leaf", nil, r, g, bl), art:Piece("leaf", nil, r, g, bl) } end
+        end
         if b then
             st.flowers = {}
             for j = 1, n do st.flowers[j] = art:Piece("flower", nil, b[1], b[2], b[3]) end
         end
-        if not art.light then
+        if art.light then return end
+        if look.wet then
+            st.bubbles = {}
+            for i = 1, n * 2 do st.bubbles[i] = art:Piece("soft", "ADD", 0.75, 0.92, 1) end
+        else
             for j = 1, n do st.crumbs[j] = art:Piece("soft", nil, 0.42, 0.3, 0.18) end
         end
     end,
     update = function(art, edge, p, now)
         local s, st = art.scale, art.state
         local n = #st.leaves
+        Bubbles(art, st, edge, now, 1)
         for j, t in ipairs(st.leaves) do
             local x = (j - 0.5) * art.w / n
             local grow = Clamp01((edge - x) / (12 * s))
-            local f = st.flowers and st.flowers[j]
             if grow <= 0 then
-                t:SetAlpha(0)
-                if f then f:SetAlpha(0); st.stems[j]:SetAlpha(0) end
+                NoPlant(st, j)
             else
                 local size = (14 + (j * 5) % 4) * s * grow
                 local sway = sin(now * 2.2 + j) * 0.22
-                if f then                                   -- the flower opens once the plant has grown
+                if st.kelp then
+                    Kelp(art, st, j, x, art.h / 2, grow, now, 0, 1)
+                elseif st.flowers then                      -- the flower opens once the plant has grown
                     local tall = STEM * s * grow
                     local open = Clamp01((edge - x - 12 * s) / (14 * s))
                     Plant(art, st, j, x, art.h / 2 + tall / 2, tall, size, size,
@@ -312,6 +400,7 @@ STYLES.leaves = {
                     Put(art, t, x, art.h / 2 + size * 0.42, size)
                     Turn(t, sway + ((j % 2 == 0) and 0.45 or -0.45))
                     t:SetAlpha(1)
+                    if st.roots then Roots(art, st, j, x, -art.h / 2, grow, 0, 1) end
                 end
             end
         end
@@ -321,12 +410,14 @@ STYLES.leaves = {
         if not landed or art.light then art.layer:SetAlpha(1 - k); return end
         local n = #st.leaves
         local picked = 0
+        Bubbles(art, st, art.w, now, 1 - k)
         for j, t in ipairs(st.leaves) do
             local u = Clamp01((k - (j - 1) / n * 0.5) / 0.5)        -- one after another, from the left
             local size = (14 + (j * 5) % 4) * s
             local x0 = (j - 0.5) * art.w / n
             local x, y, w, h = x0, art.h / 2 + size * 0.42, size, size
-            local lean, alpha, v = (j % 2 == 0) and 0.45 or -0.45, 1, 0
+            local rest = (j % 2 == 0) and 0.45 or -0.45
+            local lean, alpha, v = rest, 1, 0
             if u < 0.3 then                                         -- the tug: it stretches, held by its root
                 local g = sin(u / 0.3 * pi / 2)
                 w, h, y = size * (1 - 0.15 * g), size * (1 + 0.35 * g), y + size * 0.17 * g
@@ -339,11 +430,13 @@ STYLES.leaves = {
                 lean = lean + ((j % 2 == 0) and 1.4 or -1.4) * v
                 alpha = 1 - Clamp01((v - 0.55) / 0.45)
             end
-            if st.flowers then                                      -- the whole plant: stem, leaf and flower
+            if st.kelp then                                         -- kelp comes loose and drifts up, swaying
+                Kelp(art, st, j, x0 + (Scatter(j, 5) - 0.5) * 10 * s * v, art.h / 2 + 26 * s * v * (2 - v), 1, now, v, alpha)
+            elseif st.flowers then                                  -- the whole plant: stem, leaf and flower
                 local out = (j % 2 == 0) and LEAF_OUT or -LEAF_OUT
                 if v > 0 then
                     local tall = STEM * s
-                    Plant(art, st, j, x, y - size * 0.42 + tall / 2, tall, size, size, out, lean - out * 0.53, alpha, 1)
+                    Plant(art, st, j, x, y - size * 0.42 + tall / 2, tall, size, size, out, lean - rest, alpha, 1)
                 else
                     local tall = STEM * s * h / size
                     Plant(art, st, j, x0, art.h / 2 + tall / 2, tall, w, h, out, 0, 1, 1)
@@ -352,6 +445,13 @@ STYLES.leaves = {
                 Put(art, t, x, y, w, h)
                 Turn(t, lean)
                 t:SetAlpha(alpha)
+                if st.roots then
+                    if v > 0 then                                   -- out they come, hanging off the leaf's foot
+                        Roots(art, st, j, x + 0.42 * h * sin(lean), y - 0.42 * h * cos(lean), 1, lean - rest, alpha)
+                    else
+                        Roots(art, st, j, x0, -art.h / 2, 1, 0, 1)
+                    end
+                end
             end
             local crumb = st.crumbs[j]
             if crumb then                                           -- earth from where it stood
@@ -367,8 +467,10 @@ STYLES.leaves = {
     end,
 }
 
--- Skinning: the hide lifts off the top of what is filled, rolled up where the knife is. When the cast lands
--- the bar itself peels away, strip after strip from the left, each curling up as it goes.
+-- Skinning: the hide lifts off the top of what is filled, rolled up where the knife is: a skinning knife works
+-- at the cut, its point under the roll, sawing as it goes. When the cast lands the knife is put away and the bar
+-- itself peels away, strip after strip from the left, each curling up as it goes.
+local KNIFE = 0.95                 -- how the knife is held: its grip up and to the right of its point (radians)
 STYLES.peel = {
     fade = 0.75, ownFade = true,
     start = function(art)
@@ -378,6 +480,8 @@ STYLES.peel = {
         st.curl = art:Piece("disc", nil, pale[1], pale[2], pale[3])
         st.strips = {}
         if not art.light then
+            st.blade = art:Piece("bar", nil, 0.84, 0.87, 0.92)
+            st.grip = art:Piece("bar", nil, 0.42, 0.27, 0.15)
             for j = 1, max(5, floor(art.w / (22 * art.scale))) do st.strips[j] = art:Piece("bar", nil, c[1], c[2], c[3]) end
         end
     end,
@@ -387,7 +491,20 @@ STYLES.peel = {
         if edge < 4 then
             st.hide:SetAlpha(0)
             st.curl:SetAlpha(0)
+            if st.blade then st.blade:SetAlpha(0); st.grip:SetAlpha(0) end
             return
+        end
+        if st.blade then                                              -- the knife, its point at the cut
+            local dx, dy = cos(KNIFE), sin(KNIFE)
+            local saw = (1 + sin(now * 11)) * 1.6 * s                   -- in and out along its own length
+            local long, hold = 14 * s, 7 * s
+            local tx, ty = edge + 1 * s, art.h / 2 + 1 * s
+            Put(art, st.blade, tx + dx * (long / 2 + saw), ty + dy * (long / 2 + saw), long, 2.4 * s)
+            Put(art, st.grip, tx + dx * (long + hold / 2 + saw), ty + dy * (long + hold / 2 + saw), hold, 3.6 * s)
+            Turn(st.blade, KNIFE)
+            Turn(st.grip, KNIFE)
+            st.blade:SetAlpha(1)
+            st.grip:SetAlpha(1)
         end
         Put(art, st.hide, edge / 2, art.h / 2 + 2 * s, edge, 2.5 * s)
         st.hide:SetAlpha(0.85)
@@ -404,6 +521,8 @@ STYLES.peel = {
         end
         st.hide:SetAlpha(0)
         st.curl:SetAlpha(0)
+        st.blade:SetAlpha(0)
+        st.grip:SetAlpha(0)
         local n = #st.strips
         local wide = art.w / n
         for j, strip in ipairs(st.strips) do

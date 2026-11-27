@@ -410,7 +410,9 @@ Probabile:
 Carica dell'incantesimo
 la tua barra di lancio brilla di più mentre l'incantesimo si carica ed esplode quando va a segno
 Contatore di lanci a catena
-quando lanci un incantesimo subito dopo un altro, sotto la tua barra di lancio compare un contatore della catena e, sotto, in numeri piccoli, i danni che hai inflitto nel frattempo; finisce quando ti fermi, ti muovi o vieni interrotto
+quando lanci un incantesimo subito dopo un altro, sotto la tua barra di lancio, a destra del tempo di lancio, compare un contatore della catena e, accanto, in numeri piccoli, i danni che hai inflitto nel frattempo; dietro il contatore si vede l'effetto dell'incantesimo, più intenso man mano che la catena cresce; finisce quando ti fermi, ti muovi o vieni interrotto
+Effetti che aiutano il tuo lancio
+mentre lanci, fino a tre icone sopra l'estremità destra della tua barra di lancio mostrano gli effetti su di te che rendono questo incantesimo più rapido, gratuito o più forte, con quanti ne restano (x3), così vedi che un proc viene usato senza distogliere lo sguardo verso i tuoi benefici; solo quelli che il gioco lascia distinguere a un addon: illumina l'incantesimo, l'effetto nomina l'incantesimo, oppure è uno dei più noti
 Galleggiante da pesca
 mentre peschi, un galleggiante ondeggia sulla tua barra di lancio e mostra cosa è probabile che abbocchi qui
 Barra di lancio

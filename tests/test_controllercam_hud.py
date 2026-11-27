@@ -1482,6 +1482,66 @@ class CastLooks(unittest.TestCase):
         self.assertGreater(item.width, 20)                              # made: it jumps out once
         self.assertEqual(e.errors(), [])
 
+    def gather(self, e, node, seconds=1.5):
+        e.mock.spellNames = e.lua.table_from({2366: "Herb Gathering"})
+        e.mock.fire("UNIT_SPELLCAST_SENT", "player", node)
+        return self.player_cast(e, seconds=seconds, name="Herb Gathering", spellId=2366)
+
+    def test_a_herb_grows_as_the_kind_of_plant_it_is(self):
+        e = Env()
+        K = e.ns.CastLook
+        self.assertEqual([K.Form(n) for n in ("Felweed", "Frost Lotus", "Whiptail Root", "Azshara's Seaweed", "Dreaming Glory")],
+                         ["leaf", "flower", "root", "kelp", None])   # one not listed goes by the words in its name
+        cb = self.gather(e, "Earthroot")                             # a root: no flower on it,
+        st = cb.art.state
+        self.assertEqual((cb.look.form, cb.look.bloom, st.flowers, st.stems), ("root", None, None, None))
+        brown = list(K.Found("herbs", "Earthroot").color.values())
+        root = list(st.roots[1].values())[0]
+        self.assertEqual(list(root.vcolor.values())[:3], brown)      # its roots in its own colour,
+        e.update(1.4, 0.05)
+        leaf = list(st.leaves.values())[0]
+        self.assertEqual((leaf.alpha, root.alpha), (1, 1))
+        self.assertGreater(leaf.points[1][5], 0)                     # leaves over the bar,
+        self.assertLess(root.points[1][5], 0)                        # the roots under it
+        self.assertGreater(root.height, root.width * 3)
+        e.update(0.45, 0.05)                                         # plucked: out they come with the leaf
+        self.assertGreaterEqual(st.plucked, 1)
+        self.assertGreater(root.points[1][5], 0)
+        e.update(1.5, 0.05)
+        cb = self.gather(e, "Stranglekelp")                          # kelp: strands in the water, bubbles rising
+        st = cb.art.state
+        self.assertEqual((cb.look.form, cb.look.wet, st.flowers), ("kelp", True, None))
+        self.assertEqual(len(list(st.crumbs.values())), 0)           # (no earth falls under water)
+        e.update(1.4, 0.05)
+        strand = list(st.kelp[1].values())
+        self.assertEqual([t.alpha for t in strand], [1, 1, 1])       # three blades one over another,
+        self.assertLess(strand[0].points[1][5], strand[1].points[1][5])
+        self.assertLess(strand[1].points[1][5], strand[2].points[1][5])
+        teal = list(strand[0].vcolor.values())[:3]
+        self.assertGreater(teal[1], teal[0])                         # in the kelp's own colour
+        was = strand[2].points[1][4]
+        e.update(0.05, 0.05)
+        self.assertNotEqual(strand[2].points[1][4], was)             # swaying
+        self.assertGreater(max(t.alpha for t in st.bubbles.values()), 0)
+        top = strand[2].points[1][5]
+        e.update(0.45, 0.05)
+        self.assertGreater(strand[2].points[1][5], top + 5)          # it comes loose and drifts up
+        e.update(1.5, 0.05)
+        cb = self.gather(e, "Silverleaf")                            # a leafy herb: leaves in its colour, nothing else
+        st = cb.art.state
+        self.assertEqual((cb.look.form, st.flowers, st.roots, st.kelp, st.bubbles), ("leaf", None, None, None, None))
+        self.assertNotEqual(list(list(st.leaves.values())[0].vcolor.values())[:3], [1, 1, 1])
+        e.update(2.5, 0.05)
+        cb = self.gather(e, "Frost Lotus")                           # a flower nobody listed: a pale one
+        self.assertEqual(cb.look.form, "flower")
+        self.assertEqual(list(list(cb.art.state.flowers.values())[0].vcolor.values())[:3], list(K.BLOOM.values()))
+        e.update(2.5, 0.05)
+        e.g.IsSubmerged = lambda *a: True                            # a flower picked under water bubbles too
+        cb = self.gather(e, "Peacebloom")
+        self.assertEqual((cb.look.form, cb.look.wet), ("flower", True))
+        self.assertIsNotNone(cb.art.state.bubbles)
+        self.assertEqual(e.errors(), [])
+
     def test_a_herb_is_picked_and_a_hide_peels_away(self):
         e = Env()
         e.mock.spellNames = e.lua.table_from({2366: "Herb Gathering", 8613: "Skinning"})
@@ -1516,9 +1576,18 @@ class CastLooks(unittest.TestCase):
         e.update(1.0, 0.05)
         self.assertGreater(art.state.hide.alpha, 0)                     # the hide lifts off what is filled,
         self.assertGreater(art.state.curl.alpha, 0)                     # rolled up at the cut
+        blade, grip = art.state.blade, art.state.grip                   # where the knife works: its point at the
+        self.assertEqual((blade.alpha, grip.alpha), (1, 1))             # cut, its grip up and to the right
+        self.assertGreater(blade.points[1][4], art.edge)
+        self.assertGreater(grip.points[1][4], blade.points[1][4])
+        self.assertGreater(grip.points[1][5], blade.points[1][5])
+        at = blade.points[1][4] - art.edge
+        e.update(0.05, 0.05)
+        self.assertNotAlmostEqual(blade.points[1][4] - art.edge, at, 3)   # sawing
         self.assertAlmostEqual(art.state.hide.width, art.edge, 3)
         e.update(0.6, 0.05)                                             # it lands: the bar peels away
         self.assertTrue(art.state.peeled)
+        self.assertEqual((art.state.blade.alpha, art.state.grip.alpha), (0, 0))   # (the knife is put away)
         self.assertEqual(cb.bar.fill.alpha, 0)
         strips = list(art.state.strips.values())
         e.update(0.2, 0.05)
@@ -3447,9 +3516,132 @@ class GroupFrames(unittest.TestCase):
 class CastBars(unittest.TestCase):
     def cast(self, e, seconds=2, **kw):
         now = e.mock.time
-        e.mock.units.player.cast = e.lua.table(name="Aimed Shot", start=now * 1000, stop=(now + seconds) * 1000, **kw)
+        e.mock.units.player.cast = e.lua.table(**dict(dict(name="Aimed Shot", start=now * 1000, stop=(now + seconds) * 1000), **kw))
         e.mock.fire("UNIT_SPELLCAST_CHANNEL_START" if kw.get("channel") else "UNIT_SPELLCAST_START", "player")
         return e.ns.CastBar
+
+    def buffs(self, e, *auras):
+        e.mock.units.player.auras = e.lua.table(*[e.lua.table(**a) for a in auras])
+        e.mock.fire("UNIT_AURA", "player")
+
+    def boosts(self, cb):
+        return [(b.icon.texture, b.count.text) for b in cb.boost.icons.values() if b.shown]
+
+    def stop(self, e, event="UNIT_SPELLCAST_STOP"):
+        e.mock.units.player.cast = None
+        e.mock.fire(event, "player")
+        e.update(1)
+
+    def test_effects_that_help_the_cast_show_over_the_bars_right_end(self):
+        e = Env()
+        self.assertTrue(e.db.castBoost)
+        e.mock.spellNames = e.lua.table_from({16870: "Clearcasting", 54149: "Infusion of Light", 635: "Holy Light",
+                                              19750: "Flash of Light"})
+        fort = dict(spellId=1243, name="Fortitude", icon=11, applications=0, auraInstanceID=1)
+        infusion = dict(spellId=54149, name="Infusion of Light", icon=22, applications=3, auraInstanceID=2)
+        clear = dict(spellId=16870, name="Clearcasting", icon=33, applications=1, auraInstanceID=3)
+        self.buffs(e, fort, infusion, clear)
+        cb = self.cast(e)                                            # Aimed Shot: only what helps any cast
+        self.assertEqual(self.boosts(cb), [(33, "")])
+        row, b = cb.frame.boostRow, cb.boost.icons[1]
+        p = row.points[1]
+        self.assertEqual((p[1], p[3], p[4]), ("BOTTOMRIGHT", "TOPRIGHT", 0))      # over the bar's right end,
+        self.assertTrue(e.same(p[2], cb.bar))
+        self.assertGreaterEqual(p[5], cb.ROOM)                       # clear of what plays on the bar
+        self.assertEqual((b.points[1][1], b.points[1][4]), ("BOTTOMRIGHT", 0))    # the first one at the very end
+        self.assertLess(b.alpha, 1)                                  # it fades in
+        e.update(0.3)
+        self.assertEqual(b.alpha, 1)
+        e.mock.units.player.cast = None
+        e.mock.fire("UNIT_SPELLCAST_STOP", "player")
+        self.assertEqual(self.boosts(cb), [])                        # the cast is over: so is the row
+        e.update(1)
+        cb = self.cast(e, name="Holy Light", spellId=635)            # the heal the proc is for: it, with its count
+        self.assertEqual(self.boosts(cb), [(22, "x3"), (33, "")])
+        self.assertLess(cb.boost.icons[2].points[1][4], 0)           # the next one to its left
+        e.update(0.3)
+        infusion["applications"] = 2
+        self.buffs(e, fort, infusion)                                # one used, Clearcasting gone: as it happens
+        self.assertEqual(self.boosts(cb), [(22, "x2")])
+        self.assertEqual(cb.boost.icons[1].alpha, 1)                 # (the one that stays does not fade in again)
+        e.cmd("castboost off")
+        self.assertEqual(self.boosts(cb), [])
+        e.cmd("castboost on")
+        self.assertEqual(self.boosts(cb), [(22, "x2")])
+        self.stop(e)
+        cb = self.cast(e, name="Holy Light", spellId=635, trade=True)    # making things: never
+        self.assertEqual(self.boosts(cb), [])
+        self.stop(e)
+        e.db.reduceMotion = True
+        cb = self.cast(e, name="Holy Light", spellId=635)            # Reduce animations: there at once
+        self.assertEqual(cb.boost.icons[1].alpha, 1)
+        self.assertEqual(e.errors(), [])
+
+    def test_what_the_game_lights_up_or_names_helps_the_cast_too(self):
+        e = Env()
+        e.mock.spellNames = e.lua.table_from({700: "Mend"})
+        e.g.C_Spell.GetSpellDescription = e.lua.eval("""function(id)
+            if id == 801 then return "Your next Mend is cast in half the time." end
+            if id == 802 then return "Mending done to you is increased." end
+            return ""
+        end""")
+        old = dict(spellId=1243, name="Fortitude", icon=11, applications=0, auraInstanceID=1)
+        named = dict(spellId=801, name="Swift Hands", icon=44, applications=0, auraInstanceID=2)
+        near = dict(spellId=802, name="Mender", icon=55, applications=0, auraInstanceID=3)
+        self.buffs(e, old, named, near)
+        cb = self.cast(e, name="Mend", spellId=700)
+        self.assertEqual(self.boosts(cb), [(44, "")])                # its words name the spell ("Mending" does not)
+        self.stop(e)
+        e.update(2)
+        proc = dict(spellId=803, name="Surge", icon=66, applications=2, auraInstanceID=4)
+        self.buffs(e, old, named, near, proc)                        # an effect comes on and the game lights Mend:
+        e.mock.fire("SPELL_ACTIVATION_OVERLAY_GLOW_SHOW", 700)
+        e.update(1)
+        cb = self.cast(e, name="Mend", spellId=700)
+        self.assertEqual(self.boosts(cb), [(66, "x2"), (44, "")])    # the two belong together, and it comes first
+        e.mock.fire("SPELL_ACTIVATION_OVERLAY_GLOW_HIDE", 700)
+        self.assertEqual(self.boosts(cb), [(44, "")])
+        e.mock.fire("SPELL_ACTIVATION_OVERLAY_SHOW", 1243)           # the game's screen art for an effect, and its
+        e.mock.fire("SPELL_ACTIVATION_OVERLAY_GLOW_SHOW", 700)       # glow on the spell: that effect, however old
+        self.assertEqual(self.boosts(cb), [(11, ""), (44, "")])
+        self.assertEqual(e.errors(), [])
+
+    def test_the_row_never_reads_what_the_game_keeps_secret(self):
+        e = Env()
+        e.mock.spellNames = e.lua.table_from({16870: "Clearcasting"})
+        s = e.mock.secret
+        hidden = dict(spellId=s(), name=s(), icon=s(), applications=s(), auraInstanceID=s())
+        half = dict(spellId=16870, name=s(), icon=33, applications=s(), auraInstanceID=7)
+        self.buffs(e, hidden, half)
+        cb = self.cast(e, name="Holy Light", spellId=635)
+        self.assertEqual(self.boosts(cb), [(33, "")])                # known by its id; a secret count is not written
+        e.g.C_UnitAuras.GetAuraApplicationDisplayCount = e.lua.eval('function() return "4" end')
+        e.mock.fire("UNIT_AURA", "player")
+        self.assertEqual(self.boosts(cb), [(33, "4")])               # (or by the game itself, where it can)
+        self.stop(e)
+        e.mock.fire("SPELL_ACTIVATION_OVERLAY_GLOW_SHOW", s())
+        e.mock.fire("SPELL_ACTIVATION_OVERLAY_SHOW", s())
+        e.mock.fire("SPELL_ACTIVATION_OVERLAY_HIDE", s())
+        cb = self.cast(e, name=s(), spellId=s())                     # a cast the game says nothing about: nothing
+        self.assertEqual(self.boosts(cb), [])
+        self.assertEqual(e.errors(), [])
+
+    def test_no_row_while_fishing_or_with_the_upright_bar(self):
+        e = Env(db="{ v = 4, units = { vertical = true } }")
+        e.mock.spellNames = e.lua.table_from({16870: "Clearcasting"})
+        self.buffs(e, dict(spellId=16870, name="Clearcasting", icon=33, applications=1, auraInstanceID=3))
+        cb = self.cast(e, name="Fishing", spellId=7620, channel=True)
+        self.assertTrue(cb.fishing)
+        self.assertEqual(self.boosts(cb), [])
+        self.stop(e, "UNIT_SPELLCAST_CHANNEL_STOP")
+        cb = self.cast(e)
+        self.assertEqual(self.boosts(cb), [(33, "")])
+        self.stop(e)
+        e.cmd("castupright on")
+        cb = self.cast(e)
+        self.assertIsNotNone(cb.up)
+        self.assertEqual(self.boosts(cb), [])
+        self.assertEqual(e.errors(), [])
 
     def test_it_runs_where_the_games_bar_sits(self):
         e = Env()
@@ -3463,18 +3655,19 @@ class CastBars(unittest.TestCase):
         self.assertEqual(cb.frame.time.text, "1.0")
         time, label = cb.frame.timeBox.points[1], cb.frame.label.points
         self.assertEqual((time[1], time[3]), ("TOPRIGHT", "BOTTOMRIGHT"))          # the time under the bar's right end,
-        self.assertEqual([(p[1], p[3]) for p in label.values()],                    # the name over the whole bar
-                         [("BOTTOMLEFT", "TOPLEFT"), ("BOTTOMRIGHT", "TOPRIGHT")])
+        self.assertEqual([(p[1], p[3]) for p in label.values()],                    # the name under it too, left of
+                         [("TOPLEFT", "BOTTOMLEFT"), ("TOPRIGHT", "BOTTOMRIGHT")])  # the time: what plays on the
+        self.assertEqual(label[2][4], -cb.TIME_ROOM)                                # bar mostly goes upwards
         room = cb.ROOM                                               # clear of what grows on the bar as it fills:
         self.assertGreaterEqual(room, 16)                            # leaves and roots reach 16 beyond it
-        self.assertEqual([p[5] for p in label.values()], [room, room])
+        self.assertEqual([p[5] for p in label.values()], [-room, -room])
         self.assertAlmostEqual(time[5], -room, places=2)
         self.assertEqual(len(list(cb.frame.timeBox.points.values())), 1)
         cb.FishingLook(cb, True)                                     # nothing grows on the fishing line:
-        self.assertEqual([p[5] for p in cb.frame.label.points.values()], [4, 4])   # close, as it was
+        self.assertEqual([p[5] for p in cb.frame.label.points.values()], [-5, -5])   # close, as it was
         self.assertAlmostEqual(cb.frame.timeBox.points[1][5], -5, places=2)
         cb.FishingLook(cb, False)
-        self.assertEqual([p[5] for p in cb.frame.label.points.values()], [room, room])
+        self.assertEqual([p[5] for p in cb.frame.label.points.values()], [-room, -room])
         self.assertEqual(len(list(cb.frame.label.points.values())), 2)
         e.mock.units.player.cast = None
         e.mock.fire("UNIT_SPELLCAST_STOP", "player")
@@ -3560,10 +3753,15 @@ class CastBars(unittest.TestCase):
         self.assertFalse(combo.shown)                                # one cast is no chain
         cb = self.cast(e)                                            # the next, straight after: a chain of two
         self.assertEqual((combo.shown, combo.text), (True, "x2"))
-        self.assertEqual((box.points[1][1], box.points[1][3]), ("TOPLEFT", "BOTTOMLEFT"))   # under the bar's left end
-        self.assertGreater(box.scale, 1)                             # it jumps,
+        self.assertEqual((box.points[1][1], box.points[1][3]), ("TOPLEFT", "BOTTOMRIGHT"))  # right of the time: on its
+        self.assertAlmostEqual(box.points[1][5] * box.scale, cb.frame.timeBox.points[1][5] - cb.TIME_MID, places=2)
+        self.assertEqual(combo.points[1][1], "LEFT")                 # (its middle level with the time's) line, just
+        self.assertGreater(box.points[1][4], 0)                                             # past the bar's end
+        self.assertLess(cb.frame.timeBox.points[1][4], 0)
+        self.assertEqual(cb.CHAIN_SIZE, 0.9)                         # a tenth smaller than its font to start with
+        self.assertGreater(box.scale, 0.9 * 1.02 + 0.1)              # it jumps,
         e.update(0.4)
-        self.assertEqual(box.scale, 1)                               # and settles
+        self.assertAlmostEqual(box.scale, 0.9 * 1.02)                # and settles, 1% larger for each cast
         e.update(1.7)
         e.mock.units.player.cast = None
         e.mock.fire("UNIT_SPELLCAST_STOP", "player")
@@ -3572,6 +3770,12 @@ class CastBars(unittest.TestCase):
         e.mock.units.player.cast = None
         cb = self.cast(e)
         self.assertEqual(combo.text, "x3")
+        e.update(0.4)
+        self.assertAlmostEqual(box.scale, 0.9 * 1.03)
+        cb.combo = 80                                                # a very long chain: no more than half as large again
+        cb.bump = e.mock.time; e.update(0.4)
+        self.assertAlmostEqual(box.scale, 0.9 * 1.5)
+        cb.combo = 3
         self.assertEqual(list(combo.tcolor.values())[:3], list(cb.color.values())[:3])   # in the cast's colour
         e.mock.units.player.cast = None
         e.mock.fire("UNIT_SPELLCAST_INTERRUPTED", "player")          # interrupted: the chain is over
@@ -3604,6 +3808,64 @@ class CastBars(unittest.TestCase):
         self.assertFalse(combo.shown)
         self.assertEqual(e.errors(), [])
 
+    def chain(self, e, casts):
+        cb = self.land(e, 1)
+        for _ in range(casts - 2):
+            cb = self.land(e, 1)
+        return self.cast(e, 60)                                      # (a long one: time to watch it)
+
+    def test_the_spell_plays_behind_the_count_more_as_the_chain_grows(self):
+        e = Env()
+        cb = self.chain(e, 2)
+        glow, rain = cb.frame.comboGlow, cb.rain
+        self.assertEqual(cb.frame.combo.text, "x2")
+        self.assertAlmostEqual(cb.Heat()[0], 1 / 24)                 # a chain of two: the least of it
+        e.update(2, 0.05)
+        few = len(list(rain.live.values()))
+        self.assertGreater(few, 0)                                   # drops of the spell fall through the count,
+        self.assertGreater(glow.alpha, 0)                            # over a glow,
+        self.assertEqual(list(glow.vcolor.values())[:3], list(cb.color.values())[:3])   # in the spell's colour,
+        drop = list(rain.live.values())[0]
+        self.assertTrue(e.same(drop.parent, cb.frame.comboBox))      # the count's own pieces (drawn behind its letters)
+        self.assertTrue(e.same(glow.parent, cb.frame.comboBox))
+        faint = max(self.glows(e, glow))
+        e.mock.units.player.cast = None
+        e.mock.fire("UNIT_SPELLCAST_INTERRUPTED", "player")          # the chain is over: so is the show
+        e.update(0.1, 0.05)
+        self.assertEqual(glow.alpha, 0)
+        e.update(1, 0.05)
+        self.assertEqual(len(list(rain.live.values())), 0)
+        cb = self.chain(e, 25)                                       # a long chain: all of it
+        self.assertEqual(cb.Heat()[0], 1)
+        e.update(2, 0.05)
+        many = len(list(rain.live.values()))
+        self.assertGreater(many, few * 3)
+        self.assertGreater(max(self.glows(e, glow)), faint * 2)
+        made = len(list(rain.live.values())) + len(list(rain.pool.values()))
+        e.update(3, 0.05)                                            # the pieces are used again and again
+        self.assertLessEqual(len(list(rain.live.values())) + len(list(rain.pool.values())), made + 3)
+        e.mock.units.player.cast = None
+        e.mock.fire("UNIT_SPELLCAST_INTERRUPTED", "player")
+        e.update(1, 0.05)
+        cb = self.chain(e, 40)                                       # and no more beyond x25
+        self.assertEqual((cb.frame.combo.text, cb.Heat()[0]), ("x40", 1))
+        e.db.effects = 2                                             # Subtle: the glow, no drops
+        e.update(1.5, 0.05)
+        self.assertEqual(len(list(rain.live.values())), 0)
+        self.assertGreater(max(self.glows(e, glow)), 0)
+        e.db.effects = 4                                             # None: nothing
+        e.update(0.1, 0.05)
+        self.assertEqual(glow.alpha, 0)
+        self.assertIsNone(cb.Heat())
+        self.assertEqual(e.errors(), [])
+
+    def glows(self, e, glow):
+        out = []
+        for _ in range(20):
+            e.update(0.05, 0.05)
+            out.append(glow.alpha)
+        return out
+
     def hit(self, e, amount, kind="SPELL_DAMAGE", source="player", dest="target"):
         e.mock.logHit(kind, source, dest, 4)                         # (the helper fires it once, as 100)
         e.mock.logEntry[12 if kind == "SWING_DAMAGE" else 15] = amount
@@ -3616,7 +3878,7 @@ class CastBars(unittest.TestCase):
         cb = self.land(e)
         combo, total = cb.frame.combo, cb.frame.comboSum
         self.assertEqual(total.baseSize, 9)                          # smaller than the count (12),
-        self.assertEqual((total.points[1][1], total.points[1][3]), ("TOPLEFT", "BOTTOMLEFT"))   # and under it
+        self.assertEqual((total.points[1][1], total.points[1][3]), ("BOTTOMLEFT", "BOTTOMRIGHT"))   # and beside it
         dealt = self.hit(e, 400)                                     # the first cast's bolt lands:
         self.assertFalse(total.shown)                                # one cast is no chain yet,
         cb = self.cast(e)
@@ -7667,6 +7929,30 @@ class StanceAndPetButtons(unittest.TestCase):
         e.cmd("padwheels off")
         e.update(0.2)
         self.assertEqual((e.g.PART.strata, wheel.level, wheel.strata), ("LOW", 1, "MEDIUM"))
+        self.assertEqual(e.errors(), [])
+
+    def test_a_wheel_stays_in_front_while_it_is_open(self):
+        e, wheel = self.wheel_env("""
+            GamepadMainActionBarFrame = GamepadMainActionBarFrame or CreateFrame("Frame", "GamepadMainActionBarFrame", UIParent)
+            SLOT = CreateFrame("Frame", nil, GamepadMainActionBarFrame)
+            SLOT.strata, SLOT.level = "MEDIUM", 5 """, db="{ v = 10, debug = true }")
+        P = e.ns.PadButtons
+        e.update(0.2)
+        wheel.Show(wheel)
+        e.update(0.2)
+        self.assertFalse(P.Under(wheel))                            # in front as it opens,
+        e.g.SLOT.strata, e.g.SLOT.level = "DIALOG", 300             # then the game raises a button of the bar:
+        self.assertTrue(P.Under(wheel))
+        e.update(0.3)
+        self.assertFalse(P.Under(wheel))                            # in front again, while it is still open
+        self.assertGreater(wheel.level, 300)
+        e.mock.state.combat = True                                  # in a fight nothing of the game's is touched:
+        e.g.SLOT.level = 900
+        level = wheel.level
+        e.update(0.3)
+        self.assertEqual(wheel.level, level)
+        self.assertIn("DIALOG level 900", P.under.GamepadSpellFlyout)   # what was found is kept for the report
+        self.assertTrue(any("found under the bars in a fight" in line for line in P.Report().values()))
         self.assertEqual(e.errors(), [])
 
     def test_a_layer_the_game_will_not_take_is_not_asked_for_on_every_frame(self):
