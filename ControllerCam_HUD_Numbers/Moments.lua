@@ -149,7 +149,7 @@ local function Join(amount, name, now, key)
         c.names[name] = (c.names[name] or 0) + 1
         c.seq[#c.seq + 1] = name
     else
-        c.seq[#c.seq + 1] = type(MELEE) == "string" and MELEE or "?"   -- (a swing: the game's own word)
+        c.seq[#c.seq + 1] = type(UNKNOWN) == "string" and UNKNOWN or "?"   -- (nameless: not said to be a swing)
     end
     return c
 end
@@ -508,6 +508,28 @@ end
 -- just cast, to the next heal that lands (on you, your target or your group: the game says which unit)
 local pending, pendingHeal
 local SWING_ANY = { swing = true }
+M.SOON, M.FLIGHT = 0.8, 1.5    -- how long after a cast a hit may be its own; longer when the damage type is its
+
+-- Could this hit be that cast's? Yes or no, and whether the damage type says so. kind is the hit's type, nil when
+-- the game keeps it to itself. A hit of another type than the spell's is not it (an arcane Moonfire hit behind a
+-- Wrath), and a bolt of the hit's type is given the time it takes to fly there. Only a type known for sure
+-- counts (the listed spells, by name), never one guessed from the hits that followed a spell.
+local function CouldBe(cast, kind)
+    local name = SpellName(cast.id)
+    local own = name and ns.CastLook and ns.CastLook.SchoolOf(name, nil) or nil
+    if own and kind and own ~= kind then return false, false end
+    local same = own ~= nil and own == kind
+    return GetTime() - cast.at < (same and M.FLIGHT or M.SOON), same
+end
+
+-- What to call a crit no cast of yours can be matched to: physical damage is "Melee"; anything else goes by its
+-- damage type, in the game's own word ("Arcane"), and one whose type is hidden is "Unknown"
+local function Unnamed(kind)
+    if kind == "physical" then return _G.MELEE or "Melee" end
+    if not kind then return _G.UNKNOWN or "?" end
+    local word = _G["STRING_SCHOOL_" .. kind:upper()]
+    return type(word) == "string" and word or (kind:gsub("^%l", string.upper))
+end
 local events = CreateFrame("Frame")
 events:SetScript("OnEvent", ns.Protect(function(_, event, unit, a2, a3, a4, a5)
     if event == "PLAYER_REGEN_DISABLED" then
@@ -530,26 +552,30 @@ events:SetScript("OnEvent", ns.Protect(function(_, event, unit, a2, a3, a4, a5)
         if unit ~= "target" then return end
         if a2 ~= "WOUND" then return end
         local crit = not ns.IsSecret(a3) and a3 == "CRITICAL"
-        if pending and GetTime() - pending.at < 0.8 then
+        local school = ns.Impact and ns.Impact.School(a5) or "physical"
+        local kind = (not ns.IsSecret(a5) and type(a5) == "number") and school or nil
+        if pending and CouldBe(pending, kind) then
             local id = pending.id
             pending = nil
             if M.lastCast and M.lastCast.id == id then M.lastCast.used = true end   -- (one cast, one hit)
-            M:Landed(id, nil, a4, crit, ns.Impact and ns.Impact.School(a5))
+            M:Landed(id, nil, a4, crit, school)
             return
         end
         -- any other crit of yours on your target joins a burst too: a white swing, a spell that is not one of
         -- your key abilities (where the combat log is closed to addons, the game's hit event is all there is;
         -- whose hit it is, Impact.lua judges as it does for the hit effects)
+        local last = M.lastCast
+        local fits, same = false, false
+        if last and not last.used then fits, same = CouldBe(last, kind) end
         if crit then
-            local school = ns.Impact and ns.Impact.School(a5) or "physical"
             if ns.Impact and ns.Impact.Mine and not ns.Impact.Mine("target", school) then return end
-            local last = M.lastCast
             -- named after what you just cast only if no hit was that cast yet: a swing right behind a Holy
             -- Strike is a swing, not a second Holy Strike
-            local name = last and not last.used and GetTime() - last.at < 0.8 and SpellName(last.id)
+            local name = fits and SpellName(last.id)
             if name then last.used = true end
-            if not name then name = school == "physical" and (_G.MELEE or "Melee") or nil end
-            M:Consider(a4, true, SWING_ANY, name, school)
+            M:Consider(a4, true, SWING_ANY, name or Unnamed(kind), school)
+        elseif fits and same then
+            last.used = true      -- the cast's own hit, and no crit: a later one of that type is not it
         end
     end
 end))

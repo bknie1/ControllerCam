@@ -10103,6 +10103,53 @@ class Moments(unittest.TestCase):
         self.assertEqual(M.frame.label.text, "+ Holy Strike\n+ Melee  |cffffd24d×2|r")   # not Holy Strike twice
         self.assertEqual(e.errors(), [])
 
+    def druid(self):
+        e = self.env()
+        e.mock.spellNames = e.lua.table_from({5176: "Wrath", 8921: "Moonfire"})
+        return e
+
+    def hit(self, e, mask, crit=True):
+        e.mock.fire("UNIT_COMBAT", "target", "WOUND", "CRITICAL" if crit else "", 300, mask)
+
+    def cast(self, e, spell):
+        e.mock.fire("UNIT_SPELLCAST_SUCCEEDED", "player", "cast", spell)
+
+    def names(self, e):
+        seq = e.ns.Moments.fight.chain.seq
+        return [seq[i] for i in range(1, len(seq) + 1)]
+
+    def test_spell_damage_is_never_called_melee(self):
+        e = self.druid()
+        self.hit(e, 64)                                             # an arcane tick, nothing just cast
+        e.update(0.1)
+        e.g.STRING_SCHOOL_NATURE = "Natur"                          # (the game's own word for the type)
+        self.hit(e, 8)
+        e.update(0.1)
+        self.hit(e, e.mock.secret())                                # a type the game keeps to itself
+        e.update(0.1)
+        self.hit(e, 1)                                              # only physical damage is Melee
+        self.assertEqual(self.names(e), ["Arcane", "Natur", "?", "Melee"])
+        self.assertEqual(e.errors(), [])
+
+    def test_a_hit_is_named_after_a_cast_only_when_its_damage_type_fits(self):
+        e = self.druid()
+        self.cast(e, 5176)                                          # Wrath is on its way,
+        e.update(0.3)
+        self.hit(e, 64)                                             # an arcane hit crits first: not the Wrath,
+        e.update(0.9)
+        self.hit(e, 8)                                              # which lands over a second after its cast
+        self.assertEqual(self.names(e), ["Arcane", "Wrath"])
+        e.update(3)
+        self.cast(e, 5176)
+        e.update(0.2)
+        self.hit(e, 1)                                              # a swing behind a cast is no Wrath
+        e.update(0.8)
+        self.hit(e, 8, crit=False)                                  # the Wrath lands without a crit:
+        e.update(0.2)
+        self.hit(e, 8)                                              # the next nature crit is not it
+        self.assertEqual(self.names(e), ["Melee", "Nature"])
+        self.assertEqual(e.errors(), [])
+
     def test_hidden_amounts_are_never_added(self):
         # the game refuses arithmetic on amounts it keeps to itself, and every refused try counts as an addon
         # error (in a battleground they reached the game's warning): never tried, the hits shown side by side
@@ -10503,7 +10550,54 @@ class CooldownCallouts(unittest.TestCase):
         e.update(1)
         self.assertEqual(self.fades(e), [])
         e.lua.execute("C_UnitAuras.GetAuraDataByAuraInstanceID = function() return nil end")
-        e.update(0.3)                                                # truly gone: said
+        e.update(0.9)                                                # truly gone: said
+        self.assertEqual(len(self.fades(e)), 1)
+        self.assertEqual(e.errors(), [])
+
+    def test_a_buff_the_game_drops_from_yours_but_still_shows_is_not_gone(self):
+        e = self.env()
+        RC = e.ns.Numbers.Soon
+        a = self.seal(e, last=600, name="Thorns")
+        e.update(1)
+        e.mock.state.combat = True
+        a.sourceUnit = None                                          # no longer said to be yours, still on you
+        e.update(3)
+        self.assertEqual(self.fades(e), [])
+        self.assertTrue(RC.buffs["Thorns"].present)
+        self.assertEqual(e.errors(), [])
+
+    def test_a_blink_in_the_lists_is_not_gone(self):
+        e = self.env()
+        RC = e.ns.Numbers.Soon
+        a = self.seal(e, last=30)
+        e.update(1)
+        e.mock.units.player.auras = e.lua.table_from([])
+        e.update(0.3)
+        e.mock.units.player.auras = e.lua.table_from([a])
+        e.update(1)
+        self.assertEqual(self.fades(e), [])
+        self.assertFalse(RC.shown)
+        self.assertEqual(e.errors(), [])
+
+    def test_a_long_buff_missing_in_a_fight_is_only_said_after_it(self):
+        e = self.env()
+        RC = e.ns.Numbers.Soon
+        a = self.seal(e, last=600, name="Thorns")
+        e.update(1)
+        e.mock.state.combat = True
+        e.mock.units.player.auras = e.lua.table_from([])             # left out of both lists as the fight goes
+        e.update(5)
+        self.assertEqual(self.fades(e), [])
+        e.mock.units.player.auras = e.lua.table_from([a])            # and there again after it: never news
+        e.mock.state.combat = False
+        e.update(2)
+        self.assertFalse(RC.shown)
+        e.mock.state.combat = True
+        e.mock.units.player.auras = e.lua.table_from([])             # this time it really was taken
+        e.update(5)
+        self.assertEqual(self.fades(e), [])
+        e.mock.state.combat = False
+        e.update(0.9)
         self.assertEqual(len(self.fades(e)), 1)
         self.assertEqual(e.errors(), [])
 
@@ -10537,13 +10631,13 @@ class CooldownCallouts(unittest.TestCase):
         self.assertEqual(e.ns.Numbers.Soon.shown, 1)                 # said once
         self.assertEqual(e.errors(), [])
 
-    def test_used_up_early_it_pops_at_once_and_a_refresh_is_not_news(self):
+    def test_used_up_early_it_pops_soon_and_a_refresh_is_not_news(self):
         e = self.env()
         RC = e.ns.Numbers.Soon
         self.seal(e)
         e.update(5)
         e.mock.units.player.auras = e.lua.table_from([])             # Judgement used it up
-        e.update(0.2)
+        e.update(0.9)
         c = self.fades(e)[0]
         self.assertTrue(c.ready)
         self.assertEqual(RC.shown, 1)

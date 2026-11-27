@@ -851,10 +851,14 @@ end
 ---------------------------------------------------------------------------
 -- Buffs wearing off: a buff you cast on yourself (one of your spells, not a passive or a proc, lasting at most
 -- ten minutes) calls out in the same stack as it runs out, and pops red the moment it is gone; used up early
--- (a Seal by Judgement) or taken away, it pops at once. Refreshed while it counts down: the callout goes.
+-- (a Seal by Judgement) or taken away, it pops once it has surely gone (RC.GONE_AFTER). With more than
+-- RC.EARLY_IN_FIGHT left, that is not said while you fight, only after, if it is still gone.
+-- Refreshed while it counts down: the callout goes.
 -- Where the game keeps the time left secret, only the moment it is gone.
 ---------------------------------------------------------------------------
 RC.buffs = {}                      -- [name] = { name, icon, gen, readyAt (when it runs out), present }
+RC.GONE_AFTER = 0.6                -- missing this long before it is gone: as a fight starts the lists can blink
+RC.EARLY_IN_FIGHT = 60             -- seconds: a buff with more left than this was far more likely hidden than lost
 local castable, askedAt = {}, {}
 RC.ASK_AGAIN = 30                  -- a spell not yours yet is asked about again this often (spells load late)
 local function Passive(id)
@@ -938,14 +942,47 @@ local function ReadBuffs(now)
         end
     end
     local dead = ns.Yes(UnitIsDeadOrGhost and UnitIsDeadOrGhost("player"))
+    local fighting = ns.Yes(UnitAffectingCombat and UnitAffectingCombat("player"))
+    -- Every buff on you, whoever the game says cast it (read once, and only if one of yours is missing): the
+    -- game can leave a buff out of "yours" while it is still on you. true: it is there, or one there can't be
+    -- told from it
+    local all, allMissed, asked
+    local function AmongAll(b)
+        if not asked then
+            asked = true
+            local U = ns.Unit
+            if U and U.Filtered then all, allMissed = U.Filtered("player", "HELPFUL", "HELPFUL", 40) end
+        end
+        if allMissed then return true end
+        for _, a in ipairs(all or {}) do
+            local name = ns.Plain(a.name)
+            if b.instance and Num(a.auraInstanceID) == b.instance then return true end
+            if type(name) ~= "string" or name == "" or name == b.name then return true end
+        end
+        return false
+    end
     for name, b in pairs(RC.buffs) do
-        -- gone: not read by its name, not on you by its number, and everything on you could be told apart. As a
-        -- fight starts the game may keep names to itself: that took every buff you had for gone
-        if b.present and not here[name] and not unsure
-           and not (b.instance and (on[b.instance] or StillOn(b.instance))) then
-            b.present = false
-            if dead then b.calledGen = b.gen                           -- (not news when you died)
-            elseif not b.readyAt or b.readyAt > now then b.readyAt = now end
+        -- gone: not read by its name, not on you by its number, not among all your buffs, and everything on you
+        -- could be told apart. As a fight starts the game may keep names to itself, or drop one from a list
+        local missing = b.present and not here[name] and not unsure
+            and not (b.instance and (on[b.instance] or StillOn(b.instance))) and not AmongAll(b)
+        local left = b.readyAt and b.readyAt - now
+        if missing and fighting and left and left > RC.EARLY_IN_FIGHT then missing = false end
+        if not missing then
+            b.missingSince = nil
+        else
+            b.missingSince = b.missingSince or now
+            if now - b.missingSince >= RC.GONE_AFTER then
+                b.present, b.missingSince = false, nil
+                if dead then b.calledGen = b.gen                       -- (not news when you died)
+                elseif not b.readyAt or b.readyAt > now then
+                    -- for the debug report: a buff taken for gone before its time, and what was read then
+                    ns.Note("cooldown callouts: %s taken for gone with %s s left (fighting: %s; buffs listed: %d yours, %d in all)",
+                            name, left and ("%.0f"):format(left) or "?", tostring(fighting and true or false),
+                            #list, all and #all or -1)
+                    b.readyAt = now
+                end
+            end
         end
     end
 end
